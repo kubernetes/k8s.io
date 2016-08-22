@@ -1,0 +1,5 @@
+canary process
+README
+Makefile to sed-in the www/... and certs, and to capture updates and tests
+where to check it all in?
+ - SSL certs

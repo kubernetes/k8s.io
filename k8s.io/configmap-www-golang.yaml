@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: www-golang
+data:
+  # Adding new entries here will make them appear as files in the deployment.
+  contrib.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/contrib git https://github.com/kubernetes/contrib">
+      <meta name="go-source" content="k8s.io/contrib     https://github.com/kubernetes/contrib https://github.com/kubernetes/contrib/tree/master{/dir} https://github.com/kubernetes/contrib/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  examples.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/examples git https://github.com/kubernetes/examples">
+      <meta name="go-source" content="k8s.io/examples     https://github.com/kubernetes/examples https://github.com/kubernetes/examples/tree/master{/dir} https://github.com/kubernetes/examples/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  heapster.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/heapster git https://github.com/kubernetes/heapster">
+      <meta name="go-source" content="k8s.io/heapster     https://github.com/kubernetes/heapster https://github.com/kubernetes/heapster/tree/master{/dir} https://github.com/kubernetes/heapster/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  helm.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/helm git https://github.com/kubernetes/helm">
+      <meta name="go-source" content="k8s.io/helm     https://github.com/kubernetes/helm https://github.com/kubernetes/helm/tree/master{/dir} https://github.com/kubernetes/helm/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  kubedash.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/kubedash git https://github.com/kubernetes/kubedash">
+      <meta name="go-source" content="k8s.io/kubedash     https://github.com/kubernetes/kubedash https://github.com/kubernetes/kubedash/tree/master{/dir} https://github.com/kubernetes/kubedash/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  kube-deploy.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/kube-deploy git https://github.com/kubernetes/kube-deploy">
+      <meta name="go-source" content="k8s.io/kube-deploy     https://github.com/kubernetes/kube-deploy https://github.com/kubernetes/kube-deploy/tree/master{/dir} https://github.com/kubernetes/kube-deploy/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  kubernetes.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/kubernetes git https://github.com/kubernetes/kubernetes">
+      <meta name="go-source" content="k8s.io/kubernetes     https://github.com/kubernetes/kubernetes https://github.com/kubernetes/kubernetes/tree/master{/dir} https://github.com/kubernetes/kubernetes/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  kube-ui.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/kube-ui git https://github.com/kubernetes/kube-ui">
+      <meta name="go-source" content="k8s.io/kube-ui     https://github.com/kubernetes/kube-ui https://github.com/kubernetes/kube-ui/tree/master{/dir} https://github.com/kubernetes/kube-ui/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  minikube.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/minikube git https://github.com/kubernetes/minikube">
+      <meta name="go-source" content="k8s.io/minikube     https://github.com/kubernetes/minikube https://github.com/kubernetes/minikube/tree/master{/dir} https://github.com/kubernetes/minikube/blob/master{/dir}/{file}#L{line}">
+    </head></html>
