@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviewable
+  namespace: reviewable
+  labels:
+    app: reviewable
+spec:
+  selector:
+    app: reviewable
+  type: NodePort
+  ports:
+    - name: http
+      port: 80

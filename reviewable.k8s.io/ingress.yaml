@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: reviewable
+  labels:
+    app: reviewable
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: reviewable-k8s-io
+spec:
+  tls:
+    - secretName: ssl
+  backend:
+    # By default, all URLs end up here.
+    serviceName: reviewable
+    servicePort: http
+  rules:
+    - http:
+        paths:
+          - path: /_ah # special-case this prefix back to /
+            backend:
+              serviceName: reviewable
+              servicePort: http
