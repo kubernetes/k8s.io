@@ -1,0 +1,72 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: k8s-io
+  labels:
+    app: k8s-io
+    version: v1
+spec:
+  replicas: 2
+  # selector defaults to template's labels
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: k8s-io
+        version: v1
+    spec:
+      terminationGracePeriodSeconds: 5
+      volumes:
+      - name: nginx
+        configMap:
+          name: nginx
+          # Map all keys to files.
+      - name: www-get
+        configMap:
+          name: www-get
+          # Map all keys to files.
+      - name: www-golang
+        configMap:
+          name: www-golang
+          # Map all keys to files.
+      - name: ssl
+        secret:
+          secretName: ssl
+          # Map all keys to files.
+      containers:
+      - name: nginx
+        image: nginx:1.10 # = :stable as of 6/25/2016
+        resources:
+          limits:
+            cpu: .3
+            memory: 128Mi
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        livenessProbe:
+          httpGet:
+            path: /_healthz
+            port: 80
+          initialDelaySeconds: 3
+          timeoutSeconds: 2
+          failureThreshold: 2
+        volumeMounts:
+        - name: nginx
+          mountPath: /etc/nginx
+          readOnly: true
+          #TODO: use subPath when upgrading to kube-1.3
+        - name: www-get
+          mountPath: /www/get
+          readOnly: true
+        - name: www-golang
+          mountPath: /www/golang
+          readOnly: true
+        - name: ssl
+          mountPath: /certs
+          readOnly: true

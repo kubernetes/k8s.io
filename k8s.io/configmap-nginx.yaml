@@ -1,0 +1,181 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx
+data:
+  # Adding new entries here will make them appear as files in the deployment.
+  nginx.conf: |
+    worker_processes 5;
+
+    events {
+    }
+
+    http {
+      # Certs for all SSL server_names.
+      ssl_certificate     /certs/tls.crt;
+      ssl_certificate_key /certs/tls.key;
+      ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+      ssl_ciphers         HIGH:!aNULL:!MD5;
+
+      # This is the main site redirector.
+      server {
+        server_name k8s.io kubernetes.io kubernet.es;
+        listen 80;
+        listen 443 ssl;
+
+        if ($arg_go-get = "1") {
+          # This is a go-get operation.
+          # Send any file in any repo to static content.
+          rewrite ^/([^/]*)(/.*)?$  /_golang-go-get/$1.html;
+        }
+
+        location /_golang-go-get {
+          # Serve static content.
+          alias /www/golang;
+        }
+
+        location /_healthz {
+          add_header Content-Type text/plain;
+          return 200 'ok';
+        }
+
+        # Forward to the real site.
+        location / {
+          rewrite ^/(.*)$   http://kubernetes.io/$1 redirect;
+        }
+      }
+
+      #
+      # Vanity redirect rules.
+      #
+
+      server {
+        server_name changelog.kubernetes.io changelog.k8s.io;
+        listen 80;
+        listen 443 ssl;
+
+        rewrite ^/(.*)?$    https://github.com/kubernetes/kubernetes/releases/tag/$1 redirect;
+      }
+      server {
+        server_name ci-test.kubernetes.io ci-test.k8s.io;
+        listen 80;
+        listen 443 ssl;
+
+        # This is really not ideal, but there's no obvious way to browse GCS that handles directories and files.
+        rewrite ^/$             https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs redirect;
+        rewrite ^/(.*)/$        https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs/$1 redirect;
+        rewrite ^/(.*)$         https://storage.cloud.google.com/kubernetes-jenkins/logs/$1 redirect;
+      }
+      server {
+        server_name code.kubernetes.io code.k8s.io;
+        listen 80;
+        listen 443 ssl;
+
+        rewrite ^/(.*)?$    https://github.com/kubernetes/kubernetes/tree/master/$1 redirect;
+      }
+      server {
+        server_name docs.k8s.io docs.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/v[0-9]+\.[0-9]+(/.*)?$     http://kubernetes.io/docs$1   redirect; # legacy
+          rewrite ^/(.*)$                      http://kubernetes.io/docs/$1  redirect;
+        }
+      }
+      server {
+        server_name examples.k8s.io examples.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/v([0-9]+\.[0-9]+)(/.*)?$    https://github.com/kubernetes/kubernetes/tree/release-$1/examples$2  redirect;
+          rewrite ^/(.*)$                       https://github.com/kubernetes/kubernetes/tree/master/examples/$1     redirect;
+        }
+      }
+      server {
+        server_name get.k8s.io get.kubernetes.io;
+        listen 80;
+        # 443 is covered below.
+
+        location / {
+          root /www/get;
+          index get-kube-insecure.sh;
+        }
+      }
+      server {
+        server_name get.k8s.io get.kubernetes.io;
+        listen 443 ssl;
+        # 80 is covered above.
+
+        location / {
+          root /www/get;
+          index get-kube-secure.sh;
+        }
+      }
+      server {
+        server_name go.k8s.io go.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/bounty$          https://github.com/kubernetes/kubernetes.github.io/issues?q=is%3Aopen+is%3Aissue+label%3ABounty redirect;
+          rewrite ^/start$           http://kubernetes.io/docs/getting-started-guides/ redirect;
+          rewrite ^/help-wanted$     https://github.com/kubernetes/kubernetes/labels/help-wanted redirect;
+        }
+      }
+      server {
+        server_name issue.k8s.io issues.k8s.io issue.kubernetes.io issues.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/(.*)$              https://github.com/kubernetes/kubernetes/issues/$1 redirect;
+        }
+      }
+      server {
+        server_name pr.k8s.io prs.k8s.io pr.kubernetes.io prs.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/$                  https://github.com/kubernetes/kubernetes/pulls redirect;
+          rewrite ^/(.*)$              https://github.com/kubernetes/kubernetes/pull/$1 redirect;
+        }
+      }
+      server {
+        server_name pr-test.kubernetes.io pr-test.k8s.io;
+        listen 80;
+        listen 443 ssl;
+
+        # This is really not ideal, but there's no obvious way to browse GCS that handles directories and files.
+        rewrite ^/$             https://console.developers.google.com/storage/browser/kubernetes-jenkins/pr-logs/pull redirect;
+        rewrite ^/(.*)/$        https://console.developers.google.com/storage/browser/kubernetes-jenkins/pr-logs/pull/$1 redirect;
+        rewrite ^/(.*)$         https://storage.cloud.google.com/kubernetes-jenkins/pr-logs/pull/$1 redirect;
+      }
+      server {
+        server_name releases.k8s.io rel.k8s.io releases.kubernetes.io rel.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/$                  https://github.com/kubernetes/kubernetes/releases redirect;
+          rewrite ^/([^/]*)(/.*)?$     https://github.com/kubernetes/kubernetes/tree/$1$2 redirect;
+        }
+      }
+      server {
+        server_name reviewable.kubernetes.io reviewable.k8s.io;
+        listen 80;
+        listen 443 ssl;
+
+        rewrite ^/(.*)?$    https://reviewable.kubernetes.io/$1 redirect;
+      }
+
+      server {
+        server_name testgrid.kubernetes.io testgrid.k8s.io;
+        listen 80;
+        listen 443 ssl;
+
+        rewrite ^/(.*)?$    https://k8s-testgrid.appspot.com/$1 redirect;
+      }
+    }
