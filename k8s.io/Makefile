@@ -18,4 +18,4 @@ deploy:
 
 .PHONY: test
 test:
-	python test.py
+	python test.py -q

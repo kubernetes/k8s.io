@@ -50,6 +50,13 @@ data:
       #
 
       server {
+        server_name apt.kubernetes.io apt.k8s.io;
+        listen 80;
+
+        rewrite ^/(.*)?$    http://storage.googleapis.com/k8s-releases/apt/$1 redirect;
+      }
+
+      server {
         server_name changelog.kubernetes.io changelog.k8s.io;
         listen 80;
         listen 443 ssl;
@@ -148,10 +155,9 @@ data:
         listen 80;
         listen 443 ssl;
 
-        # This is really not ideal, but there's no obvious way to browse GCS that handles directories and files.
-        rewrite ^/$             https://console.developers.google.com/storage/browser/kubernetes-jenkins/pr-logs/pull redirect;
-        rewrite ^/(.*)/$        https://console.developers.google.com/storage/browser/kubernetes-jenkins/pr-logs/pull/$1 redirect;
-        rewrite ^/(.*)$         https://storage.cloud.google.com/kubernetes-jenkins/pr-logs/pull/$1 redirect;
+        rewrite ^/$       https://k8s-gubernator.appspot.com redirect;
+        rewrite ^/(.*)$   https://k8s-gubernator.appspot.com/pr/$1 redirect;
+
       }
       server {
         server_name releases.k8s.io rel.k8s.io releases.kubernetes.io rel.kubernetes.io;
