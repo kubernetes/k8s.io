@@ -66,6 +66,11 @@ class RedirTest(unittest.TestCase):
 
     # TODO: external go-get ???
 
+    def test_apt_test(self):
+        # FIXME: https://apt.kubernetes.io is not on the cert
+        base = 'http://apt.kubernetes.io'
+        self.assert_redirect(base, 'http://storage.googleapis.com/k8s-releases/apt/')
+
     def test_ci_test(self):
         # FIXME: https://ci-test.kubernetes.io is not on the cert
         base = 'http://ci-test.kubernetes.io'
@@ -144,18 +149,9 @@ class RedirTest(unittest.TestCase):
         # PR tests
         # FIXME: https://pr-test.kubernetes.io is not on the cert.
         base = 'http://pr-test.kubernetes.io'
-        self.assert_redirect(base, 'https://console.developers.google.com/storage/browser/kubernetes-jenkins/pr-logs/pull')
-        # trailing slash
-        self.assert_redirect(base + '/',
-            'https://console.developers.google.com/storage/browser/kubernetes-jenkins/pr-logs/pull')
-        # trailing slash
-        self.assert_redirect(base + '/$id/',
-            'https://console.developers.google.com/storage/browser/kubernetes-jenkins/pr-logs/pull/$id',
-            id=rand_num())
-        # no trailing slash
-        self.assert_redirect(base + '/$id/file',
-            'https://storage.cloud.google.com/kubernetes-jenkins/pr-logs/pull/$id/file',
-            id=rand_num())
+        self.assert_redirect(base, 'https://k8s-gubernator.appspot.com')
+        self.assert_redirect(base + '/$id',
+            'https://k8s-gubernator.appspot.com/pr/$id', id=rand_num())
 
     def test_release(self):
         # FIXME: https://releases.kubernetes.io is not on the cert
