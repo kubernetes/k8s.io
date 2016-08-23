@@ -13,7 +13,7 @@ deploy:
 	kubectl apply -f configmap-nginx.yaml
 	kubectl apply -f configmap-www-get.yaml
 	kubectl apply -f configmap-www-golang.yaml
-	kubectl apply -f service.yaml
+	kubectl apply -f service-dev.yaml
 	kubectl apply -f deployment.yaml
 
 .PHONY: test

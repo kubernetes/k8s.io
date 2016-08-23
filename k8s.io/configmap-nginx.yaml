@@ -70,6 +70,8 @@ data:
 
         # This is really not ideal, but there's no obvious way to browse GCS that handles directories and files.
         rewrite ^/$             https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs redirect;
+        # Things that look like builds should be viewed on Gubernator
+        rewrite ^/(.*/\d+)/?$   https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/$1 redirect;
         rewrite ^/(.*)/$        https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs/$1 redirect;
         rewrite ^/(.*)$         https://storage.cloud.google.com/kubernetes-jenkins/logs/$1 redirect;
       }
