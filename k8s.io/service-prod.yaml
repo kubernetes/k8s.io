@@ -6,8 +6,7 @@ spec:
   selector:
     app: k8s-io
   type: LoadBalancer
-  # FIXME: Enable this for the final changeover
-  # LoadBalancerIP: {LBIP}
+  loadBalancerIP: 23.236.58.218
   ports:
   - name: http
     port: 80
