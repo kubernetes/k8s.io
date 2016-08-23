@@ -39,7 +39,7 @@ spec:
           # Map all keys to files.
       containers:
       - name: nginx
-        image: nginx:1.10 # = :stable as of 6/25/2016
+        image: nginx:1.10-alpine  # = :stable-alpine as of 8/23/2016
         resources:
           limits:
             cpu: 1

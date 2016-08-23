@@ -87,9 +87,13 @@ class RedirTest(unittest.TestCase):
             'https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs/e2e')
 
         num = rand_num()
-        # trailing slash
+        # numeric with trailing slash
         self.assert_redirect(base + '/e2e/$num/',
-            'https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs/e2e/$num',
+            'https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/e2e/$num',
+            num=num)
+        # numeric without trailing slash
+        self.assert_redirect(base + '/e2e/$num',
+            'https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/e2e/$num',
             num=num)
 
         # no trailing slash
