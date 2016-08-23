@@ -67,7 +67,7 @@ class RedirTest(unittest.TestCase):
     # TODO: external go-get ???
 
     def test_ci_test(self):
-        # FIXME: https://ci-test.kubernetes.io is not on the
+        # FIXME: https://ci-test.kubernetes.io is not on the cert
         base = 'http://ci-test.kubernetes.io'
         self.assert_redirect(base, 'https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs')
 
