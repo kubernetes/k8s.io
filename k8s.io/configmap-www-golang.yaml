@@ -14,6 +14,11 @@ data:
       <meta name="go-import" content="k8s.io/examples git https://github.com/kubernetes/examples">
       <meta name="go-source" content="k8s.io/examples     https://github.com/kubernetes/examples https://github.com/kubernetes/examples/tree/master{/dir} https://github.com/kubernetes/examples/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  gengo.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/gengo git https://github.com/kubernetes/gengo">
+      <meta name="go-source" content="k8s.io/gengo     https://github.com/kubernetes/gengo https://github.com/kubernetes/gengo/tree/master{/dir} https://github.com/kubernetes/gengo/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   git-sync.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/git-sync git https://github.com/kubernetes/git-sync">
