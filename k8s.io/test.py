@@ -66,12 +66,19 @@ class RedirTest(unittest.TestCase):
 
     # TODO: external go-get ???
 
+    def test_yum_test(self):
+        # FIXME: https://yum.kubernetes.io is not on the cert
+        for base in ('http://yum.k8s.io', 'http://yum.kubernetes.io'):
+            self.assert_redirect(base, 'https://packages.cloud.google.com/yum/')
+            self.assert_redirect(base + '/$id',
+                'https://packages.cloud.google.com/yum/$id', id=rand_num())
+
     def test_apt_test(self):
         # FIXME: https://apt.kubernetes.io is not on the cert
-        base = 'http://apt.kubernetes.io'
-        self.assert_redirect(base, 'http://storage.googleapis.com/k8s-releases/apt/')
-        self.assert_redirect(base + '/$id',
-            'http://storage.googleapis.com/k8s-releases/apt/$id', id=rand_num())
+        for base in ('http://apt.k8s.io', 'http://apt.kubernetes.io'):
+            self.assert_redirect(base, 'https://packages.cloud.google.com/apt/')
+            self.assert_redirect(base + '/$id',
+                'https://packages.cloud.google.com/apt/$id', id=rand_num())
 
     def test_ci_test(self):
         # FIXME: https://ci-test.kubernetes.io is not on the cert
