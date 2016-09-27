@@ -53,7 +53,14 @@ data:
         server_name apt.kubernetes.io apt.k8s.io;
         listen 80;
 
-        rewrite ^/(.*)?$    http://storage.googleapis.com/k8s-releases/apt/$1 redirect;
+        rewrite ^/(.*)?$    https://packages.cloud.google.com/apt/$1 redirect;
+      }
+
+      server {
+        server_name yum.kubernetes.io yum.k8s.io;
+        listen 80;
+
+        rewrite ^/(.*)?$    https://packages.cloud.google.com/yum/$1 redirect;
       }
 
       server {
