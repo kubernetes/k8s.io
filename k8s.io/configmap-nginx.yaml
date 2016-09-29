@@ -90,6 +90,19 @@ data:
         rewrite ^/(.*)?$    https://github.com/kubernetes/kubernetes/tree/master/$1 redirect;
       }
       server {
+        server_name dl.k8s.io dl.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          # Don't require /release/ if you want to get at the Kubernetes release artifacts, the common case.
+          rewrite ^/(v[0-9]+\.[0-9]+.*)$   https://storage.googleapis.com/kubernetes-release/release/$1 redirect;
+          # Provide a convenient redirect for CI (continuous integration) artifacts as well.
+          rewrite ^/ci/?(.*)$              https://storage.googleapis.com/kubernetes-release-dev/ci/$1 redirect;
+          rewrite ^/(.*)$                  https://storage.googleapis.com/kubernetes-release/$1 redirect;
+        }
+      }
+      server {
         server_name docs.k8s.io docs.kubernetes.io;
         listen 80;
         listen 443 ssl;
