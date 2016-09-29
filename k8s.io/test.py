@@ -120,6 +120,38 @@ class RedirTest(unittest.TestCase):
                 'https://github.com/kubernetes/kubernetes/tree/master/$path',
                 path=path)
 
+    def test_dl(self):
+        # FIXME: https://dl.{k8s,kubernetes}.io is not on the cert
+        for base in ('http://dl.k8s.io', 'http://dl.kubernetes.io'):
+            # Valid release version numbers
+            for extra in ('', '-alpha.$rc_ver', '-beta.$rc_ver'):
+                self.assert_redirect(
+                    base + '/v$major_ver.$minor_ver.$patch_ver' + extra + '/$path',
+                    'https://storage.googleapis.com/kubernetes-release/release/v$major_ver.$minor_ver.$patch_ver' + extra + '/$path',
+                    major_ver=rand_num(), minor_ver=rand_num(), patch_ver=rand_num(), rc_ver=rand_num(), path=rand_num())
+            # Not a release version
+            self.assert_redirect(
+                base + '/v8/engine',
+                'https://storage.googleapis.com/kubernetes-release/v8/engine')
+            # Not a valid release version (gamma)
+            self.assert_redirect(
+                base + '/v1.2.3-gamma.4/kubernetes.tar.gz',
+                'https://storage.googleapis.com/kubernetes-release/v1.2.3-gamma.4/kubernetes.tar.gz')
+            # A few /ci/ tests
+            self.assert_redirect(
+                base + '/ci/v$ver/$path',
+                'https://storage.googleapis.com/kubernetes-release-dev/ci/v$ver/$path',
+                ver=rand_num(), path=rand_num())
+            self.assert_redirect(
+                base + '/ci/latest-$ver.txt',
+                'https://storage.googleapis.com/kubernetes-release-dev/ci/latest-$ver.txt',
+                ver=rand_num())
+            # Base case
+            self.assert_redirect(
+                base + '/$path',
+                'https://storage.googleapis.com/kubernetes-release/$path',
+                path=rand_num())
+
     def test_docs(self):
         # FIXME: https://docs.kubernetes.io is not on the cert
         for base in ('http://docs.k8s.io', 'https://docs.k8s.io', 'http://docs.kubernetes.io'):
