@@ -120,6 +120,19 @@ class RedirTest(unittest.TestCase):
                 'https://github.com/kubernetes/kubernetes/tree/master/$path',
                 path=path)
 
+    def test_dl(self):
+        # FIXME: https://dl.kubernetes.io is not on the cert
+        for base in ('http://dl.k8s.io', 'https://dl.k8s.io', 'http://dl.kubernetes.io'):
+            self.assert_redirect(base + '/v$major_ver.$minor_ver/$path',
+                'https://storage.googleapis.com/kubernetes-release/release/v$major_ver.$minor_ver/$path',
+                major_ver=rand_num(), minor_ver=rand_num(), path=rand_num())
+            self.assert_redirect(base + '/ci/v$ver/$path',
+                'https://storage.googleapis.com/kubernetes-release-dev/ci/v$ver/$path',
+                ver=rand_num(), path=rand_num())
+            self.assert_redirect(base + '/$path',
+                'https://storage.googleapis.com/kubernetes-release/$path',
+                path=rand_num())
+
     def test_docs(self):
         # FIXME: https://docs.kubernetes.io is not on the cert
         for base in ('http://docs.k8s.io', 'https://docs.k8s.io', 'http://docs.kubernetes.io'):
