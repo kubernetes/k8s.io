@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcsweb
+  labels:
+    app: gcsweb
+spec:
+  selector:
+    app: gcsweb
+  type: LoadBalancer
+  loadBalancerIP: 104.197.177.166
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
