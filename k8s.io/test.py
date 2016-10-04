@@ -10,6 +10,7 @@ except ImportError:
     import urllib.parse as urlparse
 import os
 import random
+import ssl
 import subprocess
 import unittest
 
@@ -27,7 +28,16 @@ def do_get(url):
     if parsed.scheme == 'http':
         conn = httplib.HTTPConnection(TARGET_IP)
     elif parsed.scheme == 'https':
-        conn = httplib.HTTPSConnection(TARGET_IP)
+        # We can't use plain old httplib.HTTPSConnection as are are connecting
+        # via IP address but need to verify the certificate chain based on the
+        # host name. HTTPSConnection isn't smart enough to pull out the host
+        # header. Instead we manually TLS wrap the socket for a HTTPConnection
+        # and override the hostname to verify.
+        conn = httplib.HTTPConnection(TARGET_IP, 443)
+        context = ssl.create_default_context()
+        conn.connect()
+        conn.sock = context.wrap_socket(
+            conn.sock, server_hostname=parsed.netloc)
     conn.request('GET', path, headers={'Host': parsed.netloc})
     resp = conn.getresponse()
     body = resp.read().decode('utf8')
@@ -260,6 +270,6 @@ if __name__ == '__main__':
     TARGET_IP = os.environ.get('TARGET_IP')
     if not TARGET_IP:
         print('Attempting to autodiscover service TARGET_IP, set env var to override...')
-        TARGET_IP = subprocess.check_output(['dig', '+short', 'k8s.io'])
+        TARGET_IP = subprocess.check_output(['dig', '+short', 'k8s.io']).strip()
         print('Testing against service at', TARGET_IP)
     unittest.main()
