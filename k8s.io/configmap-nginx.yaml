@@ -123,6 +123,15 @@ data:
         }
       }
       server {
+        server_name feature.k8s.io features.k8s.io feature.kubernetes.io features.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/(.*)$  https://github.com/kubernetes/features/issues/$1 redirect;
+        }
+      }
+      server {
         server_name get.k8s.io get.kubernetes.io;
         listen 80;
         # 443 is covered below.
