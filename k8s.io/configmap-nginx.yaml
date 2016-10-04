@@ -206,4 +206,14 @@ data:
 
         rewrite ^/(.*)?$    https://k8s-testgrid.appspot.com/$1 redirect;
       }
+      server {
+        server_name feature.k8s.io features.k8s.io feature.kubernetes.io features.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/$      https://github.com/kubernetes/features/issues redirect;
+          rewrite ^/(.*)$  https://github.com/kubernetes/features/issues/$1 redirect;
+        }
+      }
     }
