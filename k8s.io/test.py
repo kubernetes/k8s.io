@@ -179,8 +179,11 @@ class RedirTest(unittest.TestCase):
         # FIXME: Make certs cover https://feature{s,}.{k8s,kubernetes}.io
         for base in ('http://features.k8s.io', 'http://feature.k8s.io',
                      'http://features.kubernetes.io', 'https://feature.kubernetes.io'):
+            self.assert_redirect(base,
+                'https://github.com/kubernetes/features/issues/',
+                path=rand_num())
             self.assert_redirect(base + '/$path',
-                'https://github.com/kubernetes/kubernetes/features/$path',
+                'https://github.com/kubernetes/features/issues/$path',
                 path=rand_num())
 
     def test_issues(self):

@@ -15,6 +15,9 @@ kc apply \
     -f deployment.yaml \
     -f service-canary.yaml
 
+kc scale deployment k8s-io --replicas=0
+kc scale deployment k8s-io --replicas=1
+
 while true; do
   echo "waiting for all replicas to be up"
   sleep 3
