@@ -175,6 +175,14 @@ class RedirTest(unittest.TestCase):
                 'https://github.com/kubernetes/kubernetes/tree/release-$ver/examples/$path',
                 ver=ver, path=rand_num())
 
+    def test_features(self):
+        # FIXME: Make certs cover https://feature{s,}.{k8s,kubernetes}.io
+        for base in ('http://features.k8s.io', 'http://feature.k8s.io',
+                     'http://features.kubernetes.io', 'https://feature.kubernetes.io'):
+            self.assert_redirect(base + '/$path',
+                'https://github.com/kubernetes/kubernetes/features/$path',
+                path=rand_num())
+
     def test_issues(self):
         # FIXME: https://issue.kubernetes.io is not on the cert
         for base in ('http://issues.k8s.io', 'https://issues.k8s.io', 'http://issue.kubernetes.io'):
