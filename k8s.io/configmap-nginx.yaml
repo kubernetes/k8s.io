@@ -98,7 +98,7 @@ data:
           # Don't require /release/ if you want to get at the Kubernetes release artifacts, the common case.
           rewrite ^/(v[0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta)\.[0-9]+)?/.*)$   https://storage.googleapis.com/kubernetes-release/release/$1 redirect;
           # Provide a convenient redirect for CI (continuous integration) artifacts as well, which live in a different bucket.
-          rewrite ^/ci/?(.*)$              https://storage.googleapis.com/kubernetes-release-dev/ci/$1 redirect;
+          rewrite ^/ci(-cross)?/?(.*)$              https://storage.googleapis.com/kubernetes-release-dev/ci$1/$2 redirect;
           rewrite ^/(.*)$                  https://storage.googleapis.com/kubernetes-release/$1 redirect;
         }
       }
