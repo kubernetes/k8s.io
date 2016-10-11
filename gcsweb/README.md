@@ -12,9 +12,9 @@ or with `gsutil` people
 
 #### Solution
 
-Run a public web app that uses authenticated requests on backend to extract
+Run a web app that uses pubic API to access public buckets, extract
 information about directory structure and present it to the users with direct
-links to specific files via traditional access method.
+links to specific files.
 
 #### More info
 
