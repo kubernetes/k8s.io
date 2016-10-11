@@ -24,3 +24,11 @@ links to specific files.
 2. `gcsweb` is not designed for initial browsing (yet?) - it doesn't list
 which GCS buckets are available, and because bucket is a part of URL, you
 need a documented link to browse.
+
+#### Installation and deployment
+
+`gcsweb` is built from source code at
+http://github.com/kubernetes/test-infra/gcsweb into Docker container, which
+is then uploaded to private container storage at
+https://gcr.io/google_containers/gcsweb-amd64 and fetched during processing
+of `deployment.yaml`
