@@ -28,7 +28,7 @@ need a documented link to browse.
 #### Installation and deployment
 
 `gcsweb` is built from source code at
-http://github.com/kubernetes/test-infra/gcsweb into Docker container, which
-is then uploaded to private container storage at
+https://github.com/kubernetes/test-infra/tree/master/gcsweb into Docker
+container, which is then uploaded to private container storage at
 https://gcr.io/google_containers/gcsweb-amd64 and fetched during processing
 of `deployment.yaml`
