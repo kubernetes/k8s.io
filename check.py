@@ -21,11 +21,10 @@ inv = yaml.load(open('inventory.yaml'))
 colwidth = max([len(item) for item in inv['domains']])+1
 
 
-errors = 0
-
-for site in inv['domains']:
+def sitecheck(site):
     status = None
     message = ''
+    check = True
     try:
         resp = requests.head('http://' + site)
         status = str(resp.status_code)
@@ -47,14 +46,20 @@ for site in inv['domains']:
             raise
 
     if status == None:
-        errors += 1
-    
+        check = False
     if not message:
         message = statusmap.get(status, '???')
         if status in ('404',):
-            errors += 1
+            check = False
 
     print("{:{width}} {:5} {}".format(site, status, message, width=colwidth))
+    return check
+
+
+errors = 0
+for site in inv['domains']:
+    if not sitecheck(site):
+        errors += 1
 
 print('\n{} domains, {} errors'.format(len(inv['domains']), errors))
 sys.exit(errors)
