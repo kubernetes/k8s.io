@@ -9,14 +9,26 @@ import sys
 import yaml
 import requests
 
+statusmap = {
+    '200': 'OK',
+    '404': 'Not Found',
+    '302': 'Redirect',
+}
+
+
 inv = yaml.load(open('inventory.yaml'))
+# calc names width for pretty printing
+colwidth = max([len(item) for item in inv['domains']])+1
 
 
 errors = 0
 
 for site in inv['domains']:
+    status = None
+    message = ''
     try:
-        status = requests.head('http://' + site)
+        resp = requests.head('http://' + site)
+        status = str(resp.status_code)
     except requests.ConnectionError as exc:
         # filtering DNS lookup error from other connection errors
         # (until https://github.com/shazow/urllib3/issues/1003 is resolved)
@@ -29,18 +41,21 @@ for site in inv['domains']:
             raise
         if ("[Errno 11001] getaddrinfo failed" in reason.message or     # Windows
             "[Errno -2] Name or service not known" in reason.message):  # Linux
-            status = 'DNSLookupError'
+            message = 'DNSLookupError'
         else:
             raise
 
-    if status == 'DNSLookupError':
+    if status == None:
         errors += 1
-    elif status.status_code in (404,):
-        errors += 1
-    print(site, status)
+    
+    if not message:
+        message = statusmap.get(status, '???')
+        if status in ('404',):
+            errors += 1
 
-if errors:
-    print('Total errors: %s' % errors)
+    print("{:{width}} {:5} {}".format(site, status, message, width=colwidth))
+
+print('\n{} domains, {} errors'.format(len(inv['domains']), errors))
 sys.exit(errors)
 
 """
