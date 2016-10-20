@@ -40,7 +40,8 @@ for site in inv['domains']:
         if type(reason.message) != str:
             raise
         if ("[Errno 11001] getaddrinfo failed" in reason.message or     # Windows
-            "[Errno -2] Name or service not known" in reason.message):  # Linux
+            "[Errno -2] Name or service not known" in reason.message or # Linux
+            "[Errno 8] nodename nor servname " in reason.message):      # OS X
             message = 'DNSLookupError'
         else:
             raise
