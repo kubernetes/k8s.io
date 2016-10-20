@@ -12,6 +12,7 @@ import os
 import random
 import subprocess
 import unittest
+import urllib
 
 import yaml
 
@@ -244,7 +245,7 @@ class RedirTest(unittest.TestCase):
 
 
 class ContentTest(unittest.TestCase):
-    def assert_body(self, url, filename):
+    def assert_body_configmap(self, url, filename):
         print('GET', url)
         resp, body = do_get(url)
         self.assertEqual(resp.status, 200)
@@ -253,22 +254,31 @@ class ContentTest(unittest.TestCase):
             expected_body = yaml.load(f)['data'][os.path.basename(filename)]
         self.assertMultiLineEqual(body, expected_body)
 
+    def assert_body_url(self, url, expected_content_url):
+        print('GET', url)
+        resp, body = do_get(url)
+        self.assertEqual(resp.status, 200)
+        expected_body = urllib.urlopen(expected_content_url).read()
+        self.assertMultiLineEqual(body, expected_body)
+
     def test_go_get(self):
         for base in ('http://k8s.io', 'https://k8s.io'):
             suff = '%d?go-get=1' % rand_num()
             for pkg in ('kubernetes', 'heapster', 'kube-ui'):
-                self.assert_body('%s/%s/%s' % (base, pkg, suff),
+                self.assert_body_configmap('%s/%s/%s' % (base, pkg, suff),
                     'golang/%s.html' % pkg)
             resp, body = do_get(base + '/foobar/123?go-get=1')
             self.assertEqual(resp.status, 404)
 
     def test_get(self):
         for base in ('http://get.k8s.io', 'http://get.kubernetes.io'):
-            self.assert_body(base, 'get/get-kube-insecure.sh')
+            self.assert_body_configmap(base, 'get/get-kube-insecure.sh')
 
         # FIXME: https://get.kubernetes.io is not on the cert
         for base in ('https://get.k8s.io',):
-            self.assert_body(base, 'get/get-kube-secure.sh')
+          self.assert_body_url(
+              base,
+              'https://raw.githubusercontent.com/kubernetes/kubernetes/master/cluster/get-kube.sh')
 
 
 if __name__ == '__main__':
