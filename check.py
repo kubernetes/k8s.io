@@ -56,13 +56,14 @@ def sitecheck(site):
     return check
 
 
-errors = 0
-for site in inv['domains']:
-    if not sitecheck(site):
-        errors += 1
+if __name__ == '__main__':
+    errors = 0
+    for site in inv['domains']:
+        if not sitecheck(site):
+            errors += 1
 
-print('\n{} domains, {} errors'.format(len(inv['domains']), errors))
-sys.exit(errors)
+    print('\n{} domains, {} errors'.format(len(inv['domains']), errors))
+    sys.exit(errors)
 
 """
 
