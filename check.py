@@ -4,11 +4,15 @@ Check status of domains from inventory.yaml
 """
 
 from __future__ import print_function
+import sys
 
 import yaml
 import requests
 
 inv = yaml.load(open('inventory.yaml'))
+
+
+errors = 0
 
 for site in inv['domains']:
     try:
@@ -29,7 +33,15 @@ for site in inv['domains']:
         else:
             raise
 
+    if status == 'DNSLookupError':
+        errors += 1
+    elif status.status_code in (404,):
+        errors += 1
     print(site, status)
+
+if errors:
+    print('Total errors: %s' % errors)
+sys.exit(errors)
 
 """
 
@@ -40,6 +52,6 @@ for site in inv['domains']:
   * [ ] configure redirects from inventory.yaml
 * [ ] check https availability
   * [ ] check http and https content matches (or redirects)
-* [ ] return error code
+* [x] return error code
 
 """
