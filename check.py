@@ -24,6 +24,7 @@ colwidth = max([len(item) for item in inv['domains']])+1
 def sitecheck(site):
     status = None
     message = ''
+    comment = ''
     check = True
     try:
         resp = requests.head('http://' + site)
@@ -51,8 +52,10 @@ def sitecheck(site):
         message = statusmap.get(status, '???')
         if status in ('404',):
             check = False
+    if status == '302':
+        comment = resp.headers['Location']
 
-    print("{:{width}} {:5} {}".format(site, status, message, width=colwidth))
+    print("{:{width}} {:5} {:10} {}".format(site, status, message, comment, width=colwidth))
     return check
 
 
