@@ -62,6 +62,9 @@ class RedirTest(unittest.TestCase):
                 'issues?q=is%3Aopen+is%3Aissue+label%3ABounty')
             self.assert_redirect(base + 'help-wanted',
                 'https://github.com/kubernetes/kubernetes/labels/help-wanted')
+            self.assert_redirect(
+                base + 'partner-request',
+                'https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform')
             self.assert_redirect(base + 'start',
                 'http://kubernetes.io/docs/getting-started-guides/')
 
