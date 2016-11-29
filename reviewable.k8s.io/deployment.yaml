@@ -24,7 +24,7 @@ spec:
         - name: docker-pull
       containers:
         - name: reviewable
-          image: reviewable/enterprise:1340.2023
+          image: reviewable/enterprise:1360.2047
           resources:
             limits:
               cpu: 1
