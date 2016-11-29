@@ -16,6 +16,7 @@ Github account for reviewable API access:
 Firebase:
   - account is linked to thockin@google.com and krousey@google.com
   - passed to reviewable binary
+  - https://reviewable-k8s.firebaseio.com
 
 Sentry:
   - passed to reviewable binary
