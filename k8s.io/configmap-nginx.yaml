@@ -52,6 +52,7 @@ data:
       server {
         server_name apt.kubernetes.io apt.k8s.io;
         listen 80;
+        listen 443 ssl;
 
         rewrite ^/(.*)?$    https://packages.cloud.google.com/apt/$1 redirect;
       }
@@ -59,6 +60,7 @@ data:
       server {
         server_name yum.kubernetes.io yum.k8s.io;
         listen 80;
+        listen 443 ssl;
 
         rewrite ^/(.*)?$    https://packages.cloud.google.com/yum/$1 redirect;
       }
