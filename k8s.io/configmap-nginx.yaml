@@ -39,9 +39,13 @@ data:
           return 200 'ok';
         }
 
-        # Forward to the real site.
+        # Proxy to the real site.
         location / {
-          rewrite ^/(.*)$   http://kubernetes.io/$1 redirect;
+          proxy_set_header Host kubernetes.io;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
+          proxy_pass https://kubernetes.github.io;
         }
       }
 
@@ -148,6 +152,7 @@ data:
         listen 443 ssl;
         # 80 is covered above.
 
+        # Note that 'location =' is an exact match, no sub-URI's match.
         location = / {
           proxy_set_header Host raw.githubusercontent.com;
           proxy_set_header X-Real-IP $remote_addr;
