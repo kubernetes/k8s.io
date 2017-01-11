@@ -40,8 +40,12 @@ data:
         }
 
         # Proxy to the real site.
+        # We set the host to the vanity domain `kubernetes.io` but proxy to
+        # `kubernetes.github.io` so that any relative redirects it generates on
+        # the github side are to the vanity domain.  DNS points the vanity
+        # domain at this nginx.
         location / {
-          proxy_set_header Host kubernetes.github.io;
+          proxy_set_header Host kubernetes.io;
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
