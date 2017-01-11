@@ -17,10 +17,17 @@ data:
       ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
       ssl_ciphers         HIGH:!aNULL:!MD5;
 
-      # This is the main site redirector.
+      # This is the main site.
+      #
+      # Upgrade HTTP to HTTPS.
       server {
-        server_name k8s.io kubernetes.io kubernet.es;
+        server_name kubernetes.io;
         listen 80;
+        return 301 https://$server_name$request_uri;
+      }
+      # Handle HTTPS.
+      server {
+        server_name kubernetes.io;
         listen 443 ssl;
 
         if ($arg_go-get = "1") {
@@ -51,6 +58,13 @@ data:
           proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
           proxy_pass https://kubernetes.github.io;
         }
+      }
+      # Vanity names.
+      server {
+        server_name k8s.io kubernet.es;
+        listen 80;
+        listen 443 ssl;
+        return 301 https://kubernetes.io$request_uri;
       }
 
       #
