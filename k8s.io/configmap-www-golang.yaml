@@ -34,6 +34,12 @@ data:
       <meta name="go-import" content="k8s.io/helm git https://github.com/kubernetes/helm">
       <meta name="go-source" content="k8s.io/helm     https://github.com/kubernetes/helm https://github.com/kubernetes/helm/tree/master{/dir} https://github.com/kubernetes/helm/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  ingress.html: |
+    <!DOCTYPE html>
+    <html><head>
+      <meta name="go-import" content="k8s.io/ingress git https://github.com/kubernetes/ingress">
+      <meta name="go-source" content="k8s.io/ingress     https://github.com/kubernetes/ingress https://github.com/kubernetes/ingress/tree/master{/dir} https://github.com/kubernetes/ingress/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   kops.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/kops git https://github.com/kubernetes/kops">
