@@ -1,0 +1,30 @@
+domains:
+- k8s.io
+- changelog.k8s.io
+- code.k8s.io
+- docs.k8s.io
+- examples.k8s.io
+- get.k8s.io
+- issue.k8s.io
+- issues.k8s.io
+- jenkins.k8s.io
+- pr.k8s.io
+- prs.k8s.io
+- rel.k8s.io
+- releases.k8s.io
+- slack.k8s.io
+- submit-queue.k8s.io
+- www.k8s.io
+
+- yum.k8s.io
+- apt.k8s.io
+- dl.k8s.io
+- features.k8s.io
+- feature.k8s.io
+- reviewable.k8s.io
+- testgrid.k8s.io
+
+- ci-test.k8s.io
+- gcsweb.k8s.io
+- go.k8s.io
+- pr-test.k8s.io
