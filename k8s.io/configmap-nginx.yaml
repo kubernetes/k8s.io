@@ -190,6 +190,8 @@ data:
           rewrite ^/oncall$          https://storage.googleapis.com/kubernetes-jenkins/oncall.html;
           rewrite ^/partner-request$ https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform redirect;
           rewrite ^/start$           http://kubernetes.io/docs/getting-started-guides/ redirect;
+          rewrite ^/test-history$    https://storage.googleapis.com/kubernetes-test-history/static/index.html
+          rewrite ^/triage$          https://storage.googleapis.com/k8s-gubernator/triage/index.html
         }
       }
       server {
