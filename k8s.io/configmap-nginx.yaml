@@ -187,9 +187,11 @@ data:
         location / {
           rewrite ^/bounty$          https://github.com/kubernetes/kubernetes.github.io/issues?q=is%3Aopen+is%3Aissue+label%3ABounty redirect;
           rewrite ^/help-wanted$     https://github.com/kubernetes/kubernetes/labels/help-wanted redirect;
-          rewrite ^/oncall$          https://storage.googleapis.com/kubernetes-jenkins/oncall.html;
+          rewrite ^/oncall$          https://storage.googleapis.com/kubernetes-jenkins/oncall.html redirect;
           rewrite ^/partner-request$ https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform redirect;
           rewrite ^/start$           http://kubernetes.io/docs/getting-started-guides/ redirect;
+          rewrite ^/test-history$    https://storage.googleapis.com/kubernetes-test-history/static/index.html redirect;
+          rewrite ^/triage$          https://storage.googleapis.com/k8s-gubernator/triage/index.html redirect;
         }
       }
       server {
