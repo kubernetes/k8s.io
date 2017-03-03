@@ -100,6 +100,12 @@ class RedirTest(unittest.TestCase):
                 'https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform')
             self.assert_temp_redirect(base + 'start',
                 'http://kubernetes.io/docs/getting-started-guides/')
+            self.assert_temp_redirect(
+                base + 'test-history',
+                'https://storage.googleapis.com/kubernetes-test-history/static/index.html')
+            self.assert_temp_redirect(
+                base + 'triage',
+                'https://storage.googleapis.com/k8s-gubernator/triage/index.html')
 
     def test_yum_test(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
