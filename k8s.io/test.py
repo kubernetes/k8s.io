@@ -160,7 +160,7 @@ class RedirTest(unittest.TestCase):
     def test_dl(self):
         for base in ('dl.k8s.io', 'dl.kubernetes.io'):
             # Valid release version numbers
-            for extra in ('', '-alpha.$rc_ver', '-beta.$rc_ver'):
+            for extra in ('', '-alpha.$rc_ver', '-beta.$rc_ver', '-rc.$rc_ver'):
                 self.assert_temp_redirect(
                     base + '/v$major_ver.$minor_ver.$patch_ver' + extra + '/$path',
                     'https://storage.googleapis.com/kubernetes-release/release/v$major_ver.$minor_ver.$patch_ver' + extra + '/$path',
