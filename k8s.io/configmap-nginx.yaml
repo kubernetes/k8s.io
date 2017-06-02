@@ -180,6 +180,17 @@ data:
         }
       }
       server {
+        server_name git.k8s.io git.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/$               https://github.com/kubernetes/ redirect;
+          rewrite ^/([^/]*)/?$      https://github.com/kubernetes/$1/ redirect;
+          rewrite ^/([^/]*)/(.*)$   https://github.com/kubernetes/$1/blob/master/$2 redirect;
+        }
+      }
+      server {
         server_name go.k8s.io go.kubernetes.io;
         listen 80;
         listen 443 ssl;

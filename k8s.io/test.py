@@ -223,6 +223,20 @@ class RedirTest(unittest.TestCase):
                 'https://github.com/kubernetes/features/issues/$path',
                 path=rand_num())
 
+    def test_git(self):
+        for base in ('git.k8s.io', 'git.kubernetes.io'):
+            self.assert_temp_redirect(base,
+                'https://github.com/kubernetes/')
+            self.assert_temp_redirect(base + '/$repo',
+                'https://github.com/kubernetes/$repo/',
+                 repo=rand_num())
+            self.assert_temp_redirect(base + '/$repo/',
+                'https://github.com/kubernetes/$repo/',
+                 repo=rand_num())
+            self.assert_temp_redirect(base + '/$repo/$path',
+                'https://github.com/kubernetes/$repo/blob/master/$path',
+                repo=rand_num(), path=rand_num())
+
     def test_issues(self):
         for base in ('issues.k8s.io', 'issue.k8s.io',
                      'issues.kubernetes.io', 'issue.kubernetes.io'):
