@@ -106,6 +106,9 @@ class RedirTest(unittest.TestCase):
             self.assert_temp_redirect(
                 base + 'triage',
                 'https://storage.googleapis.com/k8s-gubernator/triage/index.html')
+            self.assert_temp_redirect(
+                base + 'test-health',
+                'http://velodrome.k8s.io/dashboard/db/bigquery-metrics')
 
     def test_yum_test(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
