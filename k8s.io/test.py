@@ -110,6 +110,10 @@ class RedirTest(unittest.TestCase):
                 base + 'test-health',
                 'http://velodrome.k8s.io/dashboard/db/bigquery-metrics')
 
+            self.assert_temp_redirect(
+                base + 'stuck-prs',
+                'https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess')
+
     def test_yum_test(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
             self.assert_temp_redirect(base, 'https://packages.cloud.google.com/yum/')
