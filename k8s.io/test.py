@@ -99,7 +99,7 @@ class RedirTest(unittest.TestCase):
                 base + 'partner-request',
                 'https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform')
             self.assert_temp_redirect(base + 'start',
-                'http://kubernetes.io/docs/getting-started-guides/')
+                'https://kubernetes.io/docs/getting-started-guides/')
             self.assert_temp_redirect(
                 base + 'test-history',
                 'https://storage.googleapis.com/kubernetes-test-history/static/index.html')
@@ -108,7 +108,11 @@ class RedirTest(unittest.TestCase):
                 'https://storage.googleapis.com/k8s-gubernator/triage/index.html')
             self.assert_temp_redirect(
                 base + 'test-health',
-                'http://velodrome.k8s.io/dashboard/db/bigquery-metrics')
+                'https://velodrome.k8s.io/dashboard/db/bigquery-metrics')
+
+            self.assert_temp_redirect(
+                base + 'stuck-prs',
+                'https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess')
 
     def test_yum_test(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
