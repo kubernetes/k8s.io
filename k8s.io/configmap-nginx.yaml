@@ -204,6 +204,7 @@ data:
           rewrite ^/test-history$    https://storage.googleapis.com/kubernetes-test-history/static/index.html redirect;
           rewrite ^/triage$          https://storage.googleapis.com/k8s-gubernator/triage/index.html redirect;
           rewrite ^/test-health$     http://velodrome.k8s.io/dashboard/db/bigquery-metrics redirect;
+          rewrite ^/pr-dashboard$    https://k8s-gubernator.appspot.com/pr redirect;
         }
       }
       server {
