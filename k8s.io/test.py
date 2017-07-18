@@ -109,6 +109,9 @@ class RedirTest(unittest.TestCase):
             self.assert_temp_redirect(
                 base + 'test-health',
                 'http://velodrome.k8s.io/dashboard/db/bigquery-metrics')
+            self.assert_temp_redirect(
+                base + 'pr-dashboard',
+                'https://k8s-gubernator.appspot.com/pr')
 
             self.assert_temp_redirect(
                 base + 'stuck-prs',
