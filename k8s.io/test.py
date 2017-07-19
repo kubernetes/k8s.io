@@ -99,7 +99,7 @@ class RedirTest(unittest.TestCase):
                 base + 'partner-request',
                 'https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform')
             self.assert_temp_redirect(base + 'start',
-                'http://kubernetes.io/docs/getting-started-guides/')
+                'https://kubernetes.io/docs/setup/pick-right-solution/')
             self.assert_temp_redirect(
                 base + 'test-history',
                 'https://storage.googleapis.com/kubernetes-test-history/static/index.html')
@@ -204,12 +204,12 @@ class RedirTest(unittest.TestCase):
 
     def test_docs(self):
         for base in ('docs.k8s.io', 'docs.kubernetes.io'):
-            self.assert_temp_redirect(base, 'http://kubernetes.io/docs/')
+            self.assert_temp_redirect(base, 'https://kubernetes.io/docs/')
             ver = '%d.%d' % (rand_num(), rand_num())
-            self.assert_temp_redirect(base + '/v$ver', 'http://kubernetes.io/docs', ver=ver)
+            self.assert_temp_redirect(base + '/v$ver', 'https://kubernetes.io/docs', ver=ver)
             path = rand_num()
-            self.assert_temp_redirect(base + '/v$ver/$path', 'http://kubernetes.io/docs/$path', ver=ver, path=path)
-            self.assert_temp_redirect(base + '/$path', 'http://kubernetes.io/docs/$path', path=path)
+            self.assert_temp_redirect(base + '/v$ver/$path', 'https://kubernetes.io/docs/$path', ver=ver, path=path)
+            self.assert_temp_redirect(base + '/$path', 'https://kubernetes.io/docs/$path', path=path)
 
     def test_examples(self):
         for base in ('examples.k8s.io', 'examples.kubernetes.io'):
