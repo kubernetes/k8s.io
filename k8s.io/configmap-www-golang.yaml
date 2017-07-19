@@ -123,5 +123,5 @@ data:
   utils.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/utils git https://github.com/kubernetes/utils">
-      <meta name="go-source" content="k8s.io/utils     https://github.com/kubernetes/utils https://github.com/kubernetes/autoscaler/tree/master{/dir} https://github.com/kubernetes/utils/blob/master{/dir}/{file}#L{line}">
+      <meta name="go-source" content="k8s.io/utils     https://github.com/kubernetes/utils https://github.com/kubernetes/utils/tree/master{/dir} https://github.com/kubernetes/utils/blob/master{/dir}/{file}#L{line}">
     </head></html>
