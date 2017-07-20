@@ -95,6 +95,11 @@ data:
       <meta name="go-import" content="k8s.io/apiextensions-apiserver git https://github.com/kubernetes/apiextensions-apiserver">
       <meta name="go-source" content="k8s.io/apiextensions-apiserver     https://github.com/kubernetes/apiextensions-apiserver https://github.com/kubernetes/apiextensions-apiserver/tree/master{/dir} https://github.com/kubernetes/apiextensions-apiserver/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  kube-openapi.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/kube-openapi git https://github.com/kubernetes/kube-openapi">
+      <meta name="go-source" content="k8s.io/kube-openapi     https://github.com/kubernetes/kube-openapi https://github.com/kubernetes/kube-openapi/tree/master{/dir} https://github.com/kubernetes/kube-openapi/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   kube-aggregator.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/kube-aggregator git https://github.com/kubernetes/kube-aggregator">
