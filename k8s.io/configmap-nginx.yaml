@@ -21,13 +21,21 @@ data:
       #
       # Upgrade HTTP to HTTPS.
       server {
-        server_name kubernetes.io;
-        listen 80;
-        return 301 https://$server_name$request_uri;
+        server_name k8s.io;
+        listen 80 default_server;
+
+        location /_healthz {
+          add_header Content-Type text/plain;
+          return 200 'ok';
+        }
+
+        location / {
+          return 301 https://$host$request_uri;
+        }
       }
       # Handle HTTPS.
       server {
-        server_name kubernetes.io;
+        server_name k8s.io;
         listen 443 ssl;
 
         if ($arg_go-get = "1") {
@@ -46,6 +54,21 @@ data:
           return 200 'ok';
         }
 
+        location / {
+          # Default to redirecting to the "real" site.
+          return 301 https://kubernetes.io$request_uri;
+        }
+      }
+      # Keep the legacy github-hosted path, in case we need it again.
+      server {
+        server_name kubernetes.io;
+        listen 80;
+        return 301 https://$host$request_uri;
+      }
+      server {
+        server_name kubernetes.io;
+        listen 443 ssl;
+
         # Proxy to the real site.
         # We set the host to the vanity domain `kubernetes.io` but proxy to
         # `kubernetes.github.io` so that any relative redirects it generates on
@@ -59,9 +82,9 @@ data:
           proxy_pass https://kubernetes.github.io;
         }
       }
-      # Vanity names.
+      # Silly vanity domain we don't really do anything with.
       server {
-        server_name k8s.io kubernet.es;
+        server_name kubernet.es;
         listen 80;
         listen 443 ssl;
         return 301 https://kubernetes.io$request_uri;

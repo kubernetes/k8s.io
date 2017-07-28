@@ -55,35 +55,66 @@ class RedirTest(unittest.TestCase):
         self.assertEqual(resp.status, expected_code)
         self.assertEqual(resp.getheader('location'), expected_loc)
 
-    def assert_redirect(self, partial_url, expected_loc, expected_code, **kwargs):
+    def assert_multischeme_redirect(self, partial_url, expected_loc, expected_code, **kwargs):
         for scheme in ('http', 'https'):
             self.assert_scheme_redirect(
                     scheme + '://' + partial_url, expected_loc, expected_code, **kwargs)
 
     def assert_temp_redirect(self, partial_url, expected_loc, **kwargs):
-        self.assert_redirect(partial_url, expected_loc, 302, **kwargs)
+        self.assert_multischeme_redirect(partial_url, expected_loc, 302, **kwargs)
 
-    def assert_perm_redirect(self, partial_url, expected_loc, **kwargs):
-        self.assert_redirect(partial_url, expected_loc, 301, **kwargs)
-
-    def test_main(self):
+    def test_main_urls(self):
         # Main URL.
         self.assert_code('https://kubernetes.io', 200)
-        # Protocol upgrade.
-        self.assert_scheme_redirect(
-                'http://kubernetes.io', 'https://kubernetes.io/', 301)
+
+        # Main redirects, HTTPS to avoid protocol upgrade redirect.
         path = '/%s' % rand_num()
-        # Protocol upgrade and path.
         self.assert_scheme_redirect(
-                'http://kubernetes.io' + path, 'https://kubernetes.io' + path, 301)
+                'https://k8s.io',
+                'https://kubernetes.io/', 301)
+        self.assert_scheme_redirect(
+                'https://k8s.io/',
+                'https://kubernetes.io/', 301)
+        self.assert_scheme_redirect(
+                'https://k8s.io/' + path,
+                'https://kubernetes.io/' + path, 301)
+
         # Vanity domains.
-        for url in ('k8s.io', 'kubernet.es'):
-            self.assert_perm_redirect(url + path, 'https://kubernetes.io' + path)
+        path = '/%s' % rand_num()
+        self.assert_multischeme_redirect(
+                'kubernet.es',
+                'https://kubernetes.io/', 301)
+        self.assert_multischeme_redirect(
+            'kubernet.es/',
+            'https://kubernetes.io/', 301)
+        self.assert_multischeme_redirect(
+            'kubernet.es' + path,
+            'https://kubernetes.io' + path, 301)
+
+    def test_protocol_upgrade(self):
+        for url in ('kubernetes.io', 'k8s.io'):
+            self.assert_scheme_redirect(
+                    'http://' + url,
+                    'https://' + url + '/', 301)
+            self.assert_scheme_redirect(
+                    'http://' + url + '/',
+                    'https://' + url + '/', 301)
+
+        path = '/%s' % rand_num()
+        for url in ('kubernetes.io', 'k8s.io'):
+            self.assert_scheme_redirect(
+                    'http://' + url + path,
+                    'https://' + url + path, 301)
 
     def test_go_get(self):
-        self.assert_perm_redirect('k8s.io/kubernetes?go-get=1',
-                'https://kubernetes.io/kubernetes?go-get=1')
-        self.assert_code('https://kubernetes.io/kubernetes?go-get=1', 200)
+        self.assert_scheme_redirect(
+                'http://k8s.io/kubernetes?go-get=1',
+                'https://k8s.io/kubernetes?go-get=1', 301)
+        self.assert_code('https://k8s.io/kubernetes?go-get=1', 200)
+
+    def test_healthz(self):
+        self.assert_code('http://k8s.io/_healthz', 200)
+        self.assert_code('https://k8s.io/_healthz', 200)
 
     def test_go(self):
         for base in ('go.k8s.io/', 'go.kubernetes.io/'):
@@ -117,13 +148,13 @@ class RedirTest(unittest.TestCase):
                 base + 'stuck-prs',
                 'https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess')
 
-    def test_yum_test(self):
+    def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
             self.assert_temp_redirect(base, 'https://packages.cloud.google.com/yum/')
             self.assert_temp_redirect(base + '/$id',
                 'https://packages.cloud.google.com/yum/$id', id=rand_num())
 
-    def test_apt_test(self):
+    def test_apt(self):
         for base in ('apt.k8s.io', 'apt.kubernetes.io'):
             self.assert_temp_redirect(base, 'https://packages.cloud.google.com/apt/')
             self.assert_temp_redirect(base + '/$id',
@@ -307,7 +338,7 @@ class ContentTest(unittest.TestCase):
         self.assertMultiLineEqual(body, expected_body)
 
     def test_go_get(self):
-        base = 'https://kubernetes.io' # because everything ends up there
+        base = 'https://k8s.io'
         suff = '%d?go-get=1' % rand_num()
         for pkg in ('kubernetes', 'heapster', 'kube-ui'):
             self.assert_body_configmap('%s/%s/%s' % (base, pkg, suff),
