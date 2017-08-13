@@ -214,7 +214,7 @@ spec:
 This uses an annotation that may not work on all cloud providers:
 `kubernetes.io/ingress.global-static-ip-name`.  This tells Ingress to use a
 specific managed IP address for incoming traffic.  This makes DNS management
-simpler, but isnt required.  Without this Ingress will get an IP allocated to
+simpler, but isn't required.  Without this Ingress will get an IP allocated to
 it.  In either case, you can point DNS for your Reviewable site at the IP that
 this Ingress object uses (`kubectl get ingresses`).
 
