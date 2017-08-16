@@ -80,6 +80,11 @@ data:
       <meta name="go-import" content="k8s.io/api git https://github.com/kubernetes/api">
       <meta name="go-source" content="k8s.io/api     https://github.com/kubernetes/api https://github.com/kubernetes/api/tree/master{/dir} https://github.com/kubernetes/api/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  code-generator.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/code-generator git https://github.com/kubernetes/code-generator">
+      <meta name="go-source" content="k8s.io/code-generator     https://github.com/kubernetes/code-generator https://github.com/kubernetes/code-generator/tree/master{/dir} https://github.com/kubernetes/code-generator/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   apimachinery.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/apimachinery git https://github.com/kubernetes/apimachinery">
