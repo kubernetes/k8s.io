@@ -150,7 +150,7 @@ class RedirTest(unittest.TestCase):
 
             self.assert_temp_redirect(
                 base + 'needs-ok-to-test',
-                'https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=label%3Aneeds-ok-to-test%20-label%3Aneeds-rebase')
+                'https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3Akubernetes+label%3Aneeds-ok-to-test+-label%3Aneeds-rebase')
 
     def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):

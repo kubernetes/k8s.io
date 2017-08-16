@@ -229,7 +229,7 @@ data:
           rewrite ^/triage$          https://storage.googleapis.com/k8s-gubernator/triage/index.html redirect;
           rewrite ^/test-health$     http://velodrome.k8s.io/dashboard/db/bigquery-metrics redirect;
           rewrite ^/pr-dashboard$    https://k8s-gubernator.appspot.com/pr redirect;
-          rewrite ^/needs-ok-to-test https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=label%3Aneeds-ok-to-test%20-label%3Aneeds-rebase redirect;
+          rewrite ^/needs-ok-to-test https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3Akubernetes+label%3Aneeds-ok-to-test+-label%3Aneeds-rebase redirect;
         }
       }
       server {
