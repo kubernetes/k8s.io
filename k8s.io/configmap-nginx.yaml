@@ -221,15 +221,15 @@ data:
         location / {
           rewrite ^/bounty$          https://github.com/kubernetes/kubernetes.github.io/issues?q=is%3Aopen+is%3Aissue+label%3ABounty redirect;
           rewrite ^/help-wanted$     https://github.com/kubernetes/kubernetes/labels/help-wanted redirect;
+          rewrite ^/needs-ok-to-test https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3Akubernetes+label%3Aneeds-ok-to-test+-label%3Aneeds-rebase redirect;
           rewrite ^/oncall$          https://storage.googleapis.com/kubernetes-jenkins/oncall.html redirect;
           rewrite ^/partner-request$ https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform redirect;
           rewrite ^/start$           https://kubernetes.io/docs/setup/pick-right-solution/ redirect;
           rewrite ^/stuck-prs$       https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess redirect;
+          rewrite ^/test-health$     http://velodrome.k8s.io/dashboard/db/bigquery-metrics redirect;
           rewrite ^/test-history$    https://storage.googleapis.com/kubernetes-test-history/static/index.html redirect;
           rewrite ^/triage$          https://storage.googleapis.com/k8s-gubernator/triage/index.html redirect;
-          rewrite ^/test-health$     http://velodrome.k8s.io/dashboard/db/bigquery-metrics redirect;
           rewrite ^/pr-dashboard$    https://k8s-gubernator.appspot.com/pr redirect;
-          rewrite ^/needs-ok-to-test https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3Akubernetes+label%3Aneeds-ok-to-test+-label%3Aneeds-rebase redirect;
         }
       }
       server {
