@@ -110,6 +110,11 @@ data:
       <meta name="go-import" content="k8s.io/kube-state-metrics git https://github.com/kubernetes/kube-state-metrics">
       <meta name="go-source" content="k8s.io/kube-state-metrics     https://github.com/kubernetes/kube-state-metrics https://github.com/kubernetes/kube-state-metrics/tree/master{/dir} https://github.com/kubernetes/kube-state-metrics/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  code-generator.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/code-generator git https://github.com/kubernetes/code-generator">
+      <meta name="go-source" content="k8s.io/code-generator     https://github.com/kubernetes/code-generator https://github.com/kubernetes/code-generator/tree/master{/dir} https://github.com/kubernetes/code-generator/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   sample-apiserver.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/sample-apiserver git https://github.com/kubernetes/sample-apiserver">
