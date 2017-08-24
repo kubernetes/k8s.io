@@ -59,29 +59,6 @@ data:
           return 301 https://kubernetes.io$request_uri;
         }
       }
-      # Keep the legacy github-hosted path, in case we need it again.
-      server {
-        server_name kubernetes.io;
-        listen 80;
-        return 301 https://$host$request_uri;
-      }
-      server {
-        server_name kubernetes.io;
-        listen 443 ssl;
-
-        # Proxy to the real site.
-        # We set the host to the vanity domain `kubernetes.io` but proxy to
-        # `kubernetes.github.io` so that any relative redirects it generates on
-        # the github side are to the vanity domain.  DNS points the vanity
-        # domain at this nginx.
-        location / {
-          proxy_set_header Host kubernetes.io;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
-          proxy_pass https://kubernetes.github.io;
-        }
-      }
       # Silly vanity domain we don't really do anything with.
       server {
         server_name kubernet.es;
