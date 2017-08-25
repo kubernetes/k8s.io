@@ -64,9 +64,6 @@ class RedirTest(unittest.TestCase):
         self.assert_multischeme_redirect(partial_url, expected_loc, 302, **kwargs)
 
     def test_main_urls(self):
-        # Main URL.
-        self.assert_code('https://kubernetes.io', 200)
-
         # Main redirects, HTTPS to avoid protocol upgrade redirect.
         path = '/%s' % rand_num()
         self.assert_scheme_redirect(
