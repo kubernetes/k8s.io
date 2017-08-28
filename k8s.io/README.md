@@ -3,6 +3,22 @@ Overview
 This contains the Nginx configuration for k8s.io and the associated subdomain
 redirectors.
 
+Redirections
+====
+- https://go.k8s.io/bounty
+- https://go.k8s.io/help-wanted
+- https://go.k8s.io/needs-ok-to-test
+- https://go.k8s.io/oncall
+- https://go.k8s.io/partner-request
+- https://go.k8s.io/pr-dashboard
+- https://go.k8s.io/start
+- https://go.k8s.io/stuck-prs
+- https://go.k8s.io/test-health
+- https://go.k8s.io/test-history
+- https://go.k8s.io/triage
+
+NOTE: please see configmap-nginx.yaml for rewrite rules.
+
 Testing
 ====
 Configure kubectl to target a test cluster on GKE.

@@ -195,6 +195,7 @@ data:
         listen 80;
         listen 443 ssl;
 
+        # Please update README.md when you update the list below.
         location / {
           rewrite ^/bounty$          https://github.com/kubernetes/kubernetes.github.io/issues?q=is%3Aopen+is%3Aissue+label%3ABounty redirect;
           rewrite ^/help-wanted$     https://github.com/kubernetes/kubernetes/labels/help-wanted redirect;
