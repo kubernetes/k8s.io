@@ -40,6 +40,18 @@ data:
       <meta name="go-import" content="k8s.io/ingress git https://github.com/kubernetes/ingress">
       <meta name="go-source" content="k8s.io/ingress     https://github.com/kubernetes/ingress https://github.com/kubernetes/ingress/tree/master{/dir} https://github.com/kubernetes/ingress/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  ingress-gce.html: |
+    <!DOCTYPE html>
+    <html><head>
+      <meta name="go-import" content="k8s.io/ingress-gce git https://github.com/kubernetes/ingress-gce">
+      <meta name="go-source" content="k8s.io/ingress-gce     https://github.com/kubernetes/ingress-gce https://github.com/kubernetes/ingress-gce/tree/master{/dir} https://github.com/kubernetes/ingress-gce/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  ingress-nginx.html: |
+    <!DOCTYPE html>
+    <html><head>
+      <meta name="go-import" content="k8s.io/ingress-nginx git https://github.com/kubernetes/ingress-nginx">
+      <meta name="go-source" content="k8s.io/ingress-nginx     https://github.com/kubernetes/ingress-nginx https://github.com/kubernetes/ingress-nginx/tree/master{/dir} https://github.com/kubernetes/ingress-nginx/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   kops.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/kops git https://github.com/kubernetes/kops">
