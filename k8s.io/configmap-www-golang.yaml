@@ -157,3 +157,8 @@ data:
       <meta name="go-import" content="k8s.io/cluster-registry git https://github.com/kubernetes/cluster-registry">
       <meta name="go-source" content="k8s.io/cluster-registry     https://github.com/kubernetes/cluster-registry https://github.com/kubernetes/cluster-registry/tree/master{/dir} https://github.com/kubernetes/cluster-registry/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  node-problem-detector.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/node-problem-detector git https://github.com/kubernetes/node-problem-detector">
+      <meta name="go-source" content="k8s.io/node-problem-detector     https://github.com/kubernetes/node-problem-detector https://github.com/kubernetes/node-problem-detector/tree/master{/dir} https://github.com/kubernetes/node-problem-detector/blob/master{/dir}/{file}#L{line}">
+    </head></html>
