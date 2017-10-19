@@ -132,6 +132,11 @@ data:
       <meta name="go-import" content="k8s.io/sample-apiserver git https://github.com/kubernetes/sample-apiserver">
       <meta name="go-source" content="k8s.io/sample-apiserver     https://github.com/kubernetes/sample-apiserver https://github.com/kubernetes/sample-apiserver/tree/master{/dir} https://github.com/kubernetes/sample-apiserver/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  sample-controller.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/sample-controller git https://github.com/kubernetes/sample-controller">
+      <meta name="go-source" content="k8s.io/sample-controller     https://github.com/kubernetes/sample-controller https://github.com/kubernetes/sample-controller/tree/master{/dir} https://github.com/kubernetes/sample-controller/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   test-infra.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/test-infra git https://github.com/kubernetes/test-infra">
