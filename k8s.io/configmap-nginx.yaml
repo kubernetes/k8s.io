@@ -199,6 +199,7 @@ data:
         # Please update README.md when you update the list below.
         location / {
           rewrite ^/bounty$          https://github.com/kubernetes/kubernetes.github.io/issues?q=is%3Aopen+is%3Aissue+label%3ABounty redirect;
+          rewrite ^/bot-commands$    https://github.com/kubernetes/test-infra/blob/master/commands.md redirect;
           rewrite ^/help-wanted$     https://github.com/kubernetes/kubernetes/labels/help-wanted redirect;
           rewrite ^/needs-ok-to-test$ https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3Akubernetes+label%3Aneeds-ok-to-test+-label%3Aneeds-rebase redirect;
           rewrite ^/oncall$          https://storage.googleapis.com/kubernetes-jenkins/oncall.html redirect;
