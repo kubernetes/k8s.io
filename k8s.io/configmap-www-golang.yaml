@@ -167,3 +167,8 @@ data:
       <meta name="go-import" content="k8s.io/node-problem-detector git https://github.com/kubernetes/node-problem-detector">
       <meta name="go-source" content="k8s.io/node-problem-detector     https://github.com/kubernetes/node-problem-detector https://github.com/kubernetes/node-problem-detector/tree/master{/dir} https://github.com/kubernetes/node-problem-detector/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  kubectl.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/kubectl git https://github.com/kubernetes/kubectl">
+      <meta name="go-source" content="k8s.io/kubectl     https://github.com/kubernetes/kubectl https://github.com/kubernetes/kubectl/tree/master{/dir} https://github.com/kubernetes/kubectl/blob/master{/dir}/{file}#L{line}">
+    </head></html>
