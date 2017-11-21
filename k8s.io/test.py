@@ -161,6 +161,11 @@ class RedirTest(unittest.TestCase):
             self.assert_temp_redirect(base + '/$id',
                 'https://packages.cloud.google.com/apt/$id', id=rand_num())
 
+    def test_blog(self):
+        self.assert_temp_redirect('blog.k8s.io', 'http://blog.kubernetes.io/')
+        self.assert_temp_redirect('blog.k8s.io/$path',
+                'http://blog.kubernetes.io/$path', path=rand_num())
+
     def test_ci_test(self):
         base = 'ci-test.kubernetes.io'
         self.assert_temp_redirect(base, 'https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs')

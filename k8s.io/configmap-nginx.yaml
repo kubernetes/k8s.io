@@ -89,6 +89,14 @@ data:
       }
 
       server {
+        server_name blog.k8s.io;
+        listen 80;
+        listen 443 ssl;
+
+        rewrite ^/(.*)?$    http://blog.kubernetes.io/$1 redirect;
+      }
+
+      server {
         server_name changelog.kubernetes.io changelog.k8s.io;
         listen 80;
         listen 443 ssl;
