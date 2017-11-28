@@ -37,6 +37,8 @@ NOTE: please see k8s.io/k8s.io/configmap-nginx.yaml and mungegithub/submit-queue
 Redirections
 ====
 - https://go.k8s.io/bounty
+- https://go.k8s.io/bot-commands
+- https://go.k8s.io/cluster-api
 - https://go.k8s.io/help-wanted
 - https://go.k8s.io/needs-ok-to-test
 - https://go.k8s.io/oncall
