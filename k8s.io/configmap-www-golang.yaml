@@ -172,3 +172,8 @@ data:
       <meta name="go-import" content="k8s.io/kubectl git https://github.com/kubernetes/kubectl">
       <meta name="go-source" content="k8s.io/kubectl     https://github.com/kubernetes/kubectl https://github.com/kubernetes/kubectl/tree/master{/dir} https://github.com/kubernetes/kubectl/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  publishing-bot.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/publishing-bot git https://github.com/kubernetes/publishing-bot">
+      <meta name="go-source" content="k8s.io/publishing-bot     https://github.com/kubernetes/publishing-bot https://github.com/kubernetes/publishing-bot/tree/master{/dir} https://github.com/kubernetes/publishing-bot/blob/master{/dir}/{file}#L{line}">
+    </head></html>
