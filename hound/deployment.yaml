@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hound
+  labels:
+    app: hound
+spec:
+  replicas: 2
+  # selector defaults from template labels
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: hound
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: hound
+          image: gcr.io/google_containers/hound:v0.1.0
+          ports:
+            - containerPort: 6080
+              protocol: TCP
