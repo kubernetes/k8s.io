@@ -1,0 +1,190 @@
+{
+	"max-concurrent-indexers": 2,
+	"dbpath": "data",
+	"repos": {
+		"kubernetes": {
+			"url": "https://github.com/kubernetes/kubernetes.git",
+			"ms-between-poll": 360000
+		},
+		"test-infra": {
+			"url": "https://github.com/kubernetes/test-infra.git",
+			"ms-between-poll": 360000
+		},
+		"community": {
+			"url": "https://github.com/kubernetes/community.git",
+			"ms-between-poll": 360000
+		},
+		"kubernetes.github.io": {
+			"url": "https://github.com/kubernetes/kubernetes.github.io.git",
+			"ms-between-poll": 360000
+		},
+		"kops": {
+			"url": "https://github.com/kubernetes/kops.git",
+			"ms-between-poll": 360000
+		},
+		"helm": {
+			"url": "https://github.com/kubernetes/helm.git",
+			"ms-between-poll": 360000
+		},
+		"repo-infra": {
+			"url": "https://github.com/kubernetes/repo-infra.git",
+			"ms-between-poll": 360000
+		},
+		"charts": {
+			"url": "https://github.com/kubernetes/charts.git",
+			"ms-between-poll": 360000
+		},
+		"kubeadm": {
+			"url": "https://github.com/kubernetes/kubeadm.git",
+			"ms-between-poll": 360000
+		},
+		"features": {
+			"url": "https://github.com/kubernetes/features.git",
+			"ms-between-poll": 360000
+		},
+		"kube-state-metrics": {
+			"url": "https://github.com/kubernetes/kube-state-metrics.git",
+			"ms-between-poll": 360000
+		},
+		"minikube": {
+			"url": "https://github.com/kubernetes/minikube.git",
+			"ms-between-poll": 360000
+		},
+		"contrib": {
+			"url": "https://github.com/kubernetes/contrib.git",
+			"ms-between-poll": 360000
+		},
+		"dashboard": {
+			"url": "https://github.com/kubernetes/dashboard.git",
+			"ms-between-poll": 360000
+		},
+		"autoscaler": {
+			"url": "https://github.com/kubernetes/autoscaler.git",
+			"ms-between-poll": 360000
+		},
+		"heapster": {
+			"url": "https://github.com/kubernetes/heapster.git",
+			"ms-between-poll": 360000
+		},
+		"frakti": {
+			"url": "https://github.com/kubernetes/frakti.git",
+			"ms-between-poll": 360000
+		},
+		"kompose": {
+			"url": "https://github.com/kubernetes/kompose.git",
+			"ms-between-poll": 360000
+		},
+		"kubernetes-anywhere": {
+			"url": "https://github.com/kubernetes/kubernetes-anywhere.git",
+			"ms-between-poll": 360000
+		},
+		"release": {
+			"url": "https://github.com/kubernetes/release.git",
+			"ms-between-poll": 360000
+		},
+		"node-problem-detector": {
+			"url": "https://github.com/kubernetes/node-problem-detector.git",
+			"ms-between-poll": 360000
+		},
+		"kube-openapi": {
+			"url": "https://github.com/kubernetes/kube-openapi.git",
+			"ms-between-poll": 360000
+		},
+		"cluster-registry": {
+			"url": "https://github.com/kubernetes/cluster-registry.git",
+			"ms-between-poll": 360000
+		},
+		"k8s.io": {
+			"url": "https://github.com/kubernetes/k8s.io.git",
+			"ms-between-poll": 360000
+		},
+		"apiserver": {
+			"url": "https://github.com/kubernetes/apiserver.git",
+			"ms-between-poll": 360000
+		},
+		"steering": {
+			"url": "https://github.com/kubernetes/steering.git",
+			"ms-between-poll": 360000
+		},
+		"examples": {
+			"url": "https://github.com/kubernetes/examples.git",
+			"ms-between-poll": 360000
+		},
+		"kubernetes-bootcamp": {
+			"url": "https://github.com/kubernetes/kubernetes-bootcamp.git",
+			"ms-between-poll": 360000
+		},
+		"dns": {
+			"url": "https://github.com/kubernetes/dns.git",
+			"ms-between-poll": 360000
+		},
+		"apiextensions-apiserver": {
+			"url": "https://github.com/kubernetes/apiextensions-apiserver.git",
+			"ms-between-poll": 360000
+		},
+		"metrics": {
+			"url": "https://github.com/kubernetes/metrics.git",
+			"ms-between-poll": 360000
+		},
+		"apimachinery": {
+			"url": "https://github.com/kubernetes/apimachinery.git",
+			"ms-between-poll": 360000
+		},
+		"api": {
+			"url": "https://github.com/kubernetes/api.git",
+			"ms-between-poll": 360000
+		},
+		"client-go": {
+			"url": "https://github.com/kubernetes/client-go.git",
+			"ms-between-poll": 360000
+		},
+		"kube-aggregator": {
+			"url": "https://github.com/kubernetes/kube-aggregator.git",
+			"ms-between-poll": 360000
+		},
+		"sample-apiserver": {
+			"url": "https://github.com/kubernetes/sample-apiserver.git",
+			"ms-between-poll": 360000
+		},
+		"utils": {
+			"url": "https://github.com/kubernetes/utils.git",
+			"ms-between-poll": 360000
+		},
+		"kubernetes-template-project": {
+			"url": "https://github.com/kubernetes/kubernetes-template-project.git",
+			"ms-between-poll": 360000
+		},
+		"gengo": {
+			"url": "https://github.com/kubernetes/gengo.git",
+			"ms-between-poll": 360000
+		},
+		"kube-ui": {
+			"url": "https://github.com/kubernetes/kube-ui.git",
+			"ms-between-poll": 360000
+		},
+		"md-check": {
+			"url": "https://github.com/kubernetes/md-check.git",
+			"ms-between-poll": 360000
+		},
+		"sig-release": {
+			"url": "https://github.com/kubernetes/sig-release.git",
+			"ms-between-poll": 360000
+		},
+		"kube-deploy": {
+			"url": "https://github.com/kubernetes/kube-deploy.git",
+			"ms-between-poll": 360000
+		},
+		"git-sync": {
+			"url": "https://github.com/kubernetes/git-sync.git",
+			"ms-between-poll": 360000
+		},
+		"perf-tests": {
+			"url": "https://github.com/kubernetes/perf-tests.git",
+			"ms-between-poll": 360000
+		},
+		"kubectl": {
+			"url": "https://github.com/kubernetes/kubectl.git",
+			"ms-between-poll": 360000
+		}
+	}
+}
