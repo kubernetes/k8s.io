@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hound
+  labels:
+    app: hound
+spec:
+  selector:
+    app: hound
+  type: LoadBalancer
+  # FIXME(dims) - we need a fixed IP address for the load balancer
+  #loadBalancerIP: 104.197.177.166
+  ports:
+    - name: http
+      port: 80
+      targetPort: 6080
