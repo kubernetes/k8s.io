@@ -22,6 +22,7 @@ spec:
         - name: gcsweb
           image: gcr.io/google_containers/gcsweb-amd64:v1.0.4
           args:
+            - -b=crreleases
             - -b=istio-prow
             - -b=kubernetes-jenkins
             - -b=kubernetes-release
