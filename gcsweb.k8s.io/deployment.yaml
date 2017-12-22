@@ -20,7 +20,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: gcsweb
-          image: gcr.io/google_containers/gcsweb-amd64:v1.0.4
+          image: k8s.gcr.io/gcsweb-amd64:v1.0.4
           args:
             - -b=crreleases
             - -b=istio-prow
