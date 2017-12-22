@@ -119,7 +119,7 @@ class RedirTest(unittest.TestCase):
                 'https://github.com/kubernetes/kubernetes.github.io/'
                 'issues?q=is%3Aopen+is%3Aissue+label%3ABounty')
             self.assert_temp_redirect(base + 'help-wanted',
-                'https://github.com/kubernetes/kubernetes/labels/help-wanted')
+                'https://github.com/kubernetes/kubernetes/labels/help%20wanted')
             self.assert_temp_redirect(
                 base + 'oncall',
                 'https://storage.googleapis.com/kubernetes-jenkins/oncall.html')
