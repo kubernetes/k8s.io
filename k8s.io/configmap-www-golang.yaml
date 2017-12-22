@@ -84,8 +84,8 @@ data:
     </head></html>
   client-go.html: |
     <html><head>
-      <meta name="go-import" content="k8s.io/client-go git https://github.com/kubernetes/client-go">
-      <meta name="go-source" content="k8s.io/client-go     https://github.com/kubernetes/client-go https://github.com/kubernetes/client-go/tree/master{/dir} https://github.com/kubernetes/client-go/blob/master{/dir}/{file}#L{line}">
+      <meta name="go-import" content="k8s.io/client-go git https://gopkg.in/kubernetes/client-go.v1">
+      <meta name="go-source" content="k8s.io/client-go     https://github.com/kubernetes/client-go https://github.com/kubernetes/client-go/tree/release-1.5{/dir} https://github.com/kubernetes/client-go/blob/release-1.5{/dir}/{file}#L{line}">
     </head></html>
   api.html: |
     <html><head>
