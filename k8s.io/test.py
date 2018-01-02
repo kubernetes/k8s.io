@@ -402,14 +402,9 @@ class ContentTest(unittest.TestCase):
                          % (url, got_go_source, expected_go_source))
 
     def test_go_get(self):
-        host = 'k8s.io'
-        suff = '%d' % rand_num()
-        for repo in ('kubernetes', 'heapster', 'kube-ui'):
-            self.assert_body_go_get(host, 'kubernetes', repo, suff)
-        resp, body = do_get('https://' + host + '/foobar/123?go-get=1')
-        self.assertEqual(resp.status, 404)
-
         # automatically configured repos
+        for host, org in [('k8s.io', 'kubernetes'),]:
+            self.assert_body_go_get(host, org, "example-repo", "pkg/subpath")
         for host, org in [('sigs.k8s.io', 'kubernetes-sigs'),]:
             self.assert_body_go_get(host, org, "example-repo", "pkg/subpath")
 

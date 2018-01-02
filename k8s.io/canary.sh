@@ -11,7 +11,6 @@ function kc() {
 kc apply \
     -f configmap-nginx.yaml \
     -f configmap-www-get.yaml \
-    -f configmap-www-golang.yaml \
     -f deployment.yaml \
     -f service-canary.yaml
 

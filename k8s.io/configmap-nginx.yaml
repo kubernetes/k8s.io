@@ -25,7 +25,7 @@ data:
         server_name k8s.io;
         listen 80 default_server;
 
-        location /_healthz {
+        location = /_healthz {
           add_header Content-Type text/plain;
           return 200 'ok';
         }
@@ -39,23 +39,28 @@ data:
         server_name k8s.io;
         listen 443 ssl;
 
-        if ($arg_go-get = "1") {
-          # This is a go-get operation.
-          # Send any file in any repo to static content.
-          rewrite ^/([^/]*)(/.*)?$  /_golang-go-get/$1.html;
-        }
-
-        location /_golang-go-get {
-          # Serve static content.
-          alias /www/golang;
-        }
-
-        location /_healthz {
+        location = /_healthz {
           add_header Content-Type text/plain;
           return 200 'ok';
         }
 
-        location / {
+        location ~ ^/(?<repo>[^/]*)(?<subpath>/.*)?$ {
+          if ($arg_go-get = "1") {
+            # This is a go-get operation.
+            return 200 '
+                <html><head>
+                      <meta name="go-import"
+                            content="k8s.io/$repo
+                                     git https://github.com/kubernetes/$repo">
+                      <meta name="go-source"
+                            content="k8s.io/$repo
+                                     https://github.com/kubernetes/$repo
+                                     https://github.com/kubernetes/$repo/tree/master{/dir}
+                                     https://github.com/kubernetes/$repo/blob/master{/dir}/{file}#L{line}">
+                </head></html>
+            ';
+          }
+
           # Default to redirecting to the "real" site.
           return 301 https://kubernetes.io$request_uri;
         }
@@ -81,16 +86,16 @@ data:
           if ($arg_go-get = "1") {
             # This is a go-get operation.
             return 200 '
-                  <html><head>
-                        <meta name="go-import"
-                              content="sigs.k8s.io/$sig_repo
-                                       git https://github.com/kubernetes-sigs/$sig_repo">
-                        <meta name="go-source"
-                              content="sigs.k8s.io/$sig_repo
-                                       https://github.com/kubernetes-sigs/$sig_repo
-                                       https://github.com/kubernetes-sigs/$sig_repo/tree/master{/dir}
-                                       https://github.com/kubernetes-sigs/$sig_repo/blob/master{/dir}/{file}#L{line}">
-                  </head></html>
+                <html><head>
+                      <meta name="go-import"
+                            content="sigs.k8s.io/$sig_repo
+                                     git https://github.com/kubernetes-sigs/$sig_repo">
+                      <meta name="go-source"
+                            content="sigs.k8s.io/$sig_repo
+                                     https://github.com/kubernetes-sigs/$sig_repo
+                                     https://github.com/kubernetes-sigs/$sig_repo/tree/master{/dir}
+                                     https://github.com/kubernetes-sigs/$sig_repo/blob/master{/dir}/{file}#L{line}">
+                </head></html>
             ';
           }
 
