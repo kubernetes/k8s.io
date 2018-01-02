@@ -344,6 +344,7 @@ class ContentTest(unittest.TestCase):
         self.assertMultiLineEqual(body, expected_body)
 
     def test_go_get(self):
+        # FIXME: need to fix this if we keep this idea.
         base = 'https://k8s.io'
         suff = '%d?go-get=1' % rand_num()
         for pkg in ('kubernetes', 'heapster', 'kube-ui'):
