@@ -29,10 +29,6 @@ spec:
         configMap:
           name: www-get
           # Map all keys to files.
-      - name: www-golang
-        configMap:
-          name: www-golang
-          # Map all keys to files.
       - name: ssl
         secret:
           secretName: ssl
@@ -62,9 +58,6 @@ spec:
           readOnly: true
         - name: www-get
           mountPath: /www/get
-          readOnly: true
-        - name: www-golang
-          mountPath: /www/golang
           readOnly: true
         - name: ssl
           mountPath: /certs
