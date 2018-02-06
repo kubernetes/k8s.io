@@ -30,7 +30,7 @@ def do_get(url):
     if parsed.scheme == 'http':
         conn = httplib.HTTPConnection(TARGET_IP)
     elif parsed.scheme == 'https':
-        # We can't use plain old httplib.HTTPSConnection as are are connecting
+        # We can't use plain old httplib.HTTPSConnection as we are connecting
         # via IP address but need to verify the certificate chain based on the
         # host name. HTTPSConnection isn't smart enough to pull out the host
         # header. Instead we manually TLS wrap the socket for a HTTPConnection
