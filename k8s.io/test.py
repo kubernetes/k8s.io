@@ -11,6 +11,7 @@ except ImportError:
 import os
 import random
 import socket
+import ssl
 import subprocess
 import unittest
 import urllib
@@ -29,7 +30,16 @@ def do_get(url):
     if parsed.scheme == 'http':
         conn = httplib.HTTPConnection(TARGET_IP)
     elif parsed.scheme == 'https':
-        conn = httplib.HTTPSConnection(TARGET_IP)
+        # We can't use plain old httplib.HTTPSConnection as we are connecting
+        # via IP address but need to verify the certificate chain based on the
+        # host name. HTTPSConnection isn't smart enough to pull out the host
+        # header. Instead we manually TLS wrap the socket for a HTTPConnection
+        # and override the hostname to verify.
+        conn = httplib.HTTPConnection(TARGET_IP, 443)
+        context = ssl.create_default_context()
+        conn.connect()
+        conn.sock = context.wrap_socket(
+            conn.sock, server_hostname=parsed.netloc)
     conn.request('GET', path, headers={'Host': parsed.netloc})
     resp = conn.getresponse()
     body = resp.read().decode('utf8')
