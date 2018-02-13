@@ -172,6 +172,11 @@ data:
       <meta name="go-import" content="k8s.io/kubectl git https://github.com/kubernetes/kubectl">
       <meta name="go-source" content="k8s.io/kubectl     https://github.com/kubernetes/kubectl https://github.com/kubernetes/kubectl/tree/master{/dir} https://github.com/kubernetes/kubectl/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  federation.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/federation git https://github.com/kubernetes/federation">
+      <meta name="go-source" content="k8s.io/federation     https://github.com/kubernetes/federation https://github.com/kubernetes/federation/tree/master{/dir} https://github.com/kubernetes/federation/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   publishing-bot.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/publishing-bot git https://github.com/kubernetes/publishing-bot">
