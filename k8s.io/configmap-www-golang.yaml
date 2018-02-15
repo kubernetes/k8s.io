@@ -182,3 +182,8 @@ data:
       <meta name="go-import" content="k8s.io/publishing-bot git https://github.com/kubernetes/publishing-bot">
       <meta name="go-source" content="k8s.io/publishing-bot     https://github.com/kubernetes/publishing-bot https://github.com/kubernetes/publishing-bot/tree/master{/dir} https://github.com/kubernetes/publishing-bot/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  community.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/community git https://github.com/kubernetes/community">
+      <meta name="go-source" content="k8s.io/community     https://github.com/kubernetes/community https://github.com/kubernetes/community/tree/master{/dir} https://github.com/kubernetes/community/blob/master{/dir}/{file}#L{line}">
+    </head></html>
