@@ -4,6 +4,26 @@ metadata:
   name: www-golang
 data:
   # Adding new entries here will make them appear as files in the deployment.
+  cloud-provider-aws.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/cloud-provider-aws git https://github.com/kubernetes/cloud-provider-aws">
+      <meta name="go-source" content="k8s.io/cloud-provider-aws     https://github.com/kubernetes/cloud-provider-aws https://github.com/kubernetes/cloud-provider-aws/tree/master{/dir} https://github.com/kubernetes/cloud-provider-aws/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  cloud-provider-azure.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/cloud-provider-azure git https://github.com/kubernetes/cloud-provider-azure">
+      <meta name="go-source" content="k8s.io/cloud-provider-azure     https://github.com/kubernetes/cloud-provider-azure https://github.com/kubernetes/cloud-provider-azure/tree/master{/dir} https://github.com/kubernetes/cloud-provider-azure/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  cloud-provider-gcp.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/cloud-provider-gcp git https://github.com/kubernetes/cloud-provider-gcp">
+      <meta name="go-source" content="k8s.io/cloud-provider-gcp     https://github.com/kubernetes/cloud-provider-gcp https://github.com/kubernetes/cloud-provider-gcp/tree/master{/dir} https://github.com/kubernetes/cloud-provider-gcp/blob/master{/dir}/{file}#L{line}">
+    </head></html>
+  cloud-provider-openstack.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/cloud-provider-openstack git https://github.com/kubernetes/cloud-provider-openstack">
+      <meta name="go-source" content="k8s.io/cloud-provider-openstack     https://github.com/kubernetes/cloud-provider-openstack https://github.com/kubernetes/cloud-provider-openstack/tree/master{/dir} https://github.com/kubernetes/cloud-provider-openstack/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   contrib.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/contrib git https://github.com/kubernetes/contrib">
