@@ -36,7 +36,7 @@ def do_get(url):
         # header. Instead we manually TLS wrap the socket for a HTTPConnection
         # and override the hostname to verify.
         conn = httplib.HTTPConnection(TARGET_IP, 443)
-        context = ssl.create_default_context()
+        context = ssl._create_unverified_context()
         conn.connect()
         conn.sock = context.wrap_socket(
             conn.sock, server_hostname=parsed.netloc)
