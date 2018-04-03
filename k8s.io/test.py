@@ -3,9 +3,11 @@
 from __future__ import print_function
 
 try:
+    import HTMLParser
     import httplib
     import urlparse
 except ImportError:
+    import html.parser as HTMLParser
     import http.client as httplib
     import urllib.parse as urlparse
 import os
@@ -99,7 +101,7 @@ class RedirTest(unittest.TestCase):
             'https://kubernetes.io' + path, 301)
 
     def test_protocol_upgrade(self):
-        for url in ('kubernetes.io', 'k8s.io'):
+        for url in ('kubernetes.io', 'k8s.io', 'sigs.k8s.io'):
             self.assert_scheme_redirect(
                     'http://' + url,
                     'https://' + url + '/', 301)
@@ -108,7 +110,7 @@ class RedirTest(unittest.TestCase):
                     'https://' + url + '/', 301)
 
         path = '/%s' % rand_num()
-        for url in ('kubernetes.io', 'k8s.io'):
+        for url in ('kubernetes.io', 'k8s.io', 'sigs.k8s.io'):
             self.assert_scheme_redirect(
                     'http://' + url + path,
                     'https://' + url + path, 301)
@@ -118,6 +120,13 @@ class RedirTest(unittest.TestCase):
                 'http://k8s.io/kubernetes?go-get=1',
                 'https://k8s.io/kubernetes?go-get=1', 301)
         self.assert_code('https://k8s.io/kubernetes?go-get=1', 200)
+
+        # automatic redirects that aren't hard-coded
+        for url in ('sigs.k8s.io',):
+            self.assert_scheme_redirect(
+                'http://' + url + '/example-test-repo?go-get=1',
+                'https://' + url + '/example-test-repo?go-get=1', 301)
+            self.assert_code('https://' + url + '/example-test-repo?go-get=1', 200)
 
     def test_healthz(self):
         self.assert_code('http://k8s.io/_healthz', 200)
@@ -353,14 +362,45 @@ class ContentTest(unittest.TestCase):
         expected_body = urllib.urlopen(expected_content_url).read()
         self.assertMultiLineEqual(body, expected_body)
 
+    def assert_body_go_get(self, host, org, repo, path):
+        url = 'https://%s/%s/%s?go-get=1' % (host, repo, path)
+        print('GET', url)
+        expected_go_import = ("%(host)s/%(repo)s git https://github.com/%(org)s/%(repo)s"
+                              % {'repo': repo, 'host': host, 'org': org})
+
+        expected_go_source = ("%(host)s/%(repo)s https://github.com/%(org)s/%(repo)s "
+                              "https://github.com/%(org)s/%(repo)s/tree/master{/dir} "
+                              "https://github.com/%(org)s/%(repo)s/blob/master{/dir}/{file}#L{line}"
+                              % {'repo': repo, 'host': host, 'org': org})
+
+        resp, body = do_get(url)
+        self.assertEqual(resp.status, 200)
+        p = GoMetaParser()
+        p.feed(body)
+
+        got_go_import = p.go_meta_tag('go-import')
+        self.assertIsNotNone(got_go_import, '%s did not contain a go-import meta tag' % url)
+        self.assertEqual(got_go_import, expected_go_import,
+                         'go-import for %s did not match expected value.\ngot:  %s\nwant: %s'
+                         % (url, got_go_import, expected_go_import))
+
+        got_go_source = p.go_meta_tag('go-source')
+        self.assertIsNotNone(got_go_source, '%s did not contain a go-source meta tag' % url)
+        self.assertEqual(got_go_source, expected_go_source,
+                         'go-source for %s did not match expected value.\ngot:  %s\nwant: %s'
+                         % (url, got_go_source, expected_go_source))
+
     def test_go_get(self):
-        base = 'https://k8s.io'
-        suff = '%d?go-get=1' % rand_num()
-        for pkg in ('kubernetes', 'heapster', 'kube-ui'):
-            self.assert_body_configmap('%s/%s/%s' % (base, pkg, suff),
-                'golang/%s.html' % pkg)
-        resp, body = do_get(base + '/foobar/123?go-get=1')
+        host = 'k8s.io'
+        suff = '%d' % rand_num()
+        for repo in ('kubernetes', 'heapster', 'kube-ui'):
+            self.assert_body_go_get(host, 'kubernetes', repo, suff)
+        resp, body = do_get('https://' + host + '/foobar/123?go-get=1')
         self.assertEqual(resp.status, 404)
+
+        # automatically configured repos
+        for host, org in [('sigs.k8s.io', 'kubernetes-sigs'),]:
+            self.assert_body_go_get(host, org, "example-repo", "pkg/subpath")
 
     def test_get(self):
         for base in ('http://get.k8s.io', 'http://get.kubernetes.io'):
@@ -370,6 +410,30 @@ class ContentTest(unittest.TestCase):
           self.assert_body_url(
               base,
               'https://raw.githubusercontent.com/kubernetes/kubernetes/master/cluster/get-kube.sh')
+
+class GoMetaParser(HTMLParser.HTMLParser, object):
+    def __init__(self):
+        super(GoMetaParser, self).__init__()
+        self.__go_meta_tags = dict()
+
+    def handle_starttag(self, tag, attrs):
+        if tag != "meta":
+            return
+
+        attrs = dict(attrs)
+        if attrs['name'] not in ('go-import', 'go-source'):
+            return
+
+        if 'content' not in attrs:
+            return
+
+        # remove extraneous whitespace from content value
+        content = ' '.join(attrs['content'].split())
+
+        self.__go_meta_tags[attrs['name']] = content
+
+    def go_meta_tag(self, name):
+        return self.__go_meta_tags.get(name)
 
 
 if __name__ == '__main__':
