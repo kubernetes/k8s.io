@@ -60,6 +60,51 @@ data:
           return 301 https://kubernetes.io$request_uri;
         }
       }
+
+      # Vanity redirects for the new kubernetes-sigs repos
+      #
+      # Upgrade HTTP to HTTPS.
+      server {
+        server_name sigs.k8s.io;
+        listen 80;
+
+        location / {
+          return 301 https://$host$request_uri;
+        }
+      }
+      # Handle HTTPS
+      server {
+        server_name sigs.k8s.io;
+        listen 443 ssl;
+
+        location ~ ^/(?<sig_repo>[^/]*)(?<repo_subpath>/.*)?$ {
+          if ($arg_go-get = "1") {
+            # This is a go-get operation.
+            return 200 '
+                  <html><head>
+                        <meta name="go-import"
+                              content="sigs.k8s.io/$sig_repo
+                                       git https://github.com/kubernetes-sigs/$sig_repo">
+                        <meta name="go-source"
+                              content="sigs.k8s.io/$sig_repo
+                                       https://github.com/kubernetes-sigs/$sig_repo
+                                       https://github.com/kubernetes-sigs/$sig_repo/tree/master{/dir}
+                                       https://github.com/kubernetes-sigs/$sig_repo/blob/master{/dir}/{file}#L{line}">
+                  </head></html>
+            ';
+          }
+
+          if ($repo_subpath = "") {
+            # This is a regular request for https://sigs.k8s.io/<repo>
+            # Redirect to repo landing page.
+            return 301 https://github.com/kubernetes-sigs/$sig_repo;
+          }
+
+          # Default to redirecting to files in the tree.
+          return 301 https://github.com/kubernetes-sigs/$sig_repo/blob/master$repo_subpath;
+        }
+      }
+
       # Silly vanity domain we don't really do anything with.
       server {
         server_name kubernet.es;
