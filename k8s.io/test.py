@@ -20,6 +20,8 @@ import urllib
 
 import yaml
 
+SSL_VERIFY_DISABLE = False
+
 def rand_num():
     return random.randint(1000, 10000)
 
@@ -39,6 +41,8 @@ def do_get(url):
         # and override the hostname to verify.
         conn = httplib.HTTPConnection(TARGET_IP, 443)
         context = ssl.create_default_context()
+        if SSL_VERIFY_DISABLE:
+            context = ssl._create_unverified_context()
         conn.connect()
         conn.sock = context.wrap_socket(
             conn.sock, server_hostname=parsed.netloc)
@@ -442,4 +446,7 @@ if __name__ == '__main__':
         print('Attempting to autodiscover service TARGET_IP, set env var to override...')
         TARGET_IP = socket.gethostbyname('k8s.io')
         print('Testing against service at', TARGET_IP)
+    else:
+        print('TARGET_IP present in environment. Disabling SSL verification')
+        SSL_VERIFY_DISABLE = True
     unittest.main()
