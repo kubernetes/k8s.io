@@ -162,6 +162,11 @@ data:
       <meta name="go-import" content="k8s.io/test-infra git https://github.com/kubernetes/test-infra">
       <meta name="go-source" content="k8s.io/test-infra     https://github.com/kubernetes/test-infra https://github.com/kubernetes/test-infra/tree/master{/dir} https://github.com/kubernetes/test-infra/blob/master{/dir}/{file}#L{line}">
     </head></html>
+  testing_frameworks.html: |
+    <html><head>
+      <meta name="go-import" content="k8s.io/testing_frameworks git https://github.com/kubernetes-sigs/testing_frameworks">
+      <meta name="go-source" content="k8s.io/testing_frameworks     https://github.com/kubernetes-sigs/testing_frameworks https://github.com/kubernetes-sigs/testing_frameworks/tree/master{/dir} https://github.com/kubernetes-sigs/testing_frameworks/blob/master{/dir}/{file}#L{line}">
+    </head></html>
   metrics.html: |
     <html><head>
       <meta name="go-import" content="k8s.io/metrics git https://github.com/kubernetes/metrics">
