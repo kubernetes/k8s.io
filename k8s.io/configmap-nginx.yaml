@@ -123,6 +123,13 @@ data:
         rewrite ^/(.*)?$    https://github.com/kubernetes/kubernetes/tree/master/$1 redirect;
       }
       server {
+        server_name cs.kubernetes.io cs.k8s.io;
+        listen 80;
+        listen 443 ssl;
+
+        rewrite ^/(.*)?$    https://k8s-code.appspot.com/?q=$1 redirect;
+      }
+      server {
         server_name dl.k8s.io dl.kubernetes.io;
         listen 80;
         listen 443 ssl;
