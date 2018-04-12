@@ -12,6 +12,7 @@ Vanity URL(s)
 | Changelog | https://changelog.k8s.io | https://changelog.kubernetes.io |
 | CI logs | https://ci-test.k8s.io | https://ci-test.kubernetes.io |
 | Git repo | https://code.k8s.io | https://code.kubernetes.io |
+| Search Git repo | https://cs.k8s.io | https://cs.kubernetes.io |
 | Community submit queue | https://community.submit-queue.k8s.io |
 | Contrib submit queue | https://contrib.submit-queue.k8s.io |
 | Downloads | https://dl.k8s.io | https://dl.kubernetes.io |
