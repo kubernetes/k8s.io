@@ -204,7 +204,7 @@ data:
 
         location / {
           rewrite ^/v([0-9]+\.[0-9]+)(/.*)?$    https://github.com/kubernetes/kubernetes/tree/release-$1/examples$2  redirect;
-          rewrite ^/(.*)$                       https://github.com/kubernetes/kubernetes/tree/master/examples/$1     redirect;
+          rewrite ^/(.*)$                       https://github.com/kubernetes/examples/tree/master/$1                redirect;
         }
       }
       server {

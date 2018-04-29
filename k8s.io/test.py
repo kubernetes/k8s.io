@@ -273,7 +273,8 @@ class RedirTest(unittest.TestCase):
 
     def test_examples(self):
         for base in ('examples.k8s.io', 'examples.kubernetes.io'):
-            self.assert_temp_redirect(base, 'https://github.com/kubernetes/kubernetes/tree/master/examples/')
+            self.assert_temp_redirect(base, 'https://github.com/kubernetes/examples/tree/master/')
+            self.assert_temp_redirect(base + '/', 'https://github.com/kubernetes/examples/tree/master/')
 
             ver = '%d.%d' % (rand_num(), rand_num())
             self.assert_temp_redirect(base + '/v$ver',
