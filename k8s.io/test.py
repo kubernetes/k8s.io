@@ -329,12 +329,6 @@ class RedirTest(unittest.TestCase):
         self.assert_temp_redirect(base + '/$id',
             'https://k8s-gubernator.appspot.com/pr/$id', id=rand_num())
 
-    def test_code_search(self):
-        base = 'cs.kubernetes.io'
-        self.assert_temp_redirect(base, 'https://k8s-code.appspot.com/?q=')
-        self.assert_temp_redirect(base + '/$id',
-                                  'https://k8s-code.appspot.com/?q=$id', id=rand_num())
-
     def test_release(self):
         for base in ('releases.k8s.io', 'rel.k8s.io',
                      'releases.kubernetes.io', 'rel.kubernetes.io'):
