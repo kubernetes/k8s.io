@@ -12,7 +12,7 @@ or with `gsutil` people
 
 #### Solution
 
-Run a web app that uses pubic API to access public buckets, extract
+Run a web app that uses public API to access public buckets, extract
 information about directory structure and present it to the users with direct
 links to specific files.
 
