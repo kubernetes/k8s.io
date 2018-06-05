@@ -25,7 +25,6 @@ Vanity URL(s)
 | PR Dashboard | https://pr-test.k8s.io | https://pr-test.kubernetes.io |
 | Pull requests | https://pr.k8s.io <br> https://prs.k8s.io | https://pr.kubernetes.io <br> https://prs.kubernetes.io |
 | Downloads | https://releases.k8s.io <br> https://rel.k8s.io | https://releases.kubernetes.io <br> https://rel.kubernetes.io |
-| Reviewable | https://reviewable.k8s.io | https://reviewable.kubernetes.io |
 | Submit queue status | https://submit-queue.k8s.io | https://kubernetes.submit-queue.k8s.io |
 | Test grid | https://testgrid.k8s.io | https://testgrid.kubernetes.io |
 | YUM downloads | https://yum.k8s.io | https://yum.kubernetes.io |

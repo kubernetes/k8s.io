@@ -337,12 +337,6 @@ class RedirTest(unittest.TestCase):
                 'https://github.com/kubernetes/kubernetes/tree/$ver/$path',
                 ver=rand_num(), path=rand_num())
 
-    def test_reviewable(self):
-        base = 'reviewable.k8s.io'
-        self.assert_temp_redirect(base, 'https://reviewable.kubernetes.io/')
-        self.assert_temp_redirect(base + '/$path', 'https://reviewable.kubernetes.io/$path',
-            path=rand_num())
-
     def test_testgrid(self):
         for base in ('testgrid.k8s.io', 'testgrid.kubernetes.io'):
             self.assert_temp_redirect(base, 'https://k8s-testgrid.appspot.com/')

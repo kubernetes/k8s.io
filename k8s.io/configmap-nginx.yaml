@@ -310,13 +310,6 @@ data:
           rewrite ^/([^/]*)(/.*)?$     https://github.com/kubernetes/kubernetes/tree/$1$2 redirect;
         }
       }
-      server {
-        server_name reviewable.kubernetes.io reviewable.k8s.io;
-        listen 80;
-        listen 443 ssl;
-
-        rewrite ^/(.*)?$    https://reviewable.kubernetes.io/$1 redirect;
-      }
 
       server {
         server_name testgrid.kubernetes.io testgrid.k8s.io;
