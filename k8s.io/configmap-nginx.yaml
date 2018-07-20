@@ -82,7 +82,8 @@ data:
         server_name sigs.k8s.io;
         listen 443 ssl;
 
-        location ~ ^/(?<sig_repo>[^/]*)(?<repo_subpath>/.*)?$ {
+        # The ?! block is negative-lookahead to prevent `/repo/` from grouping into (`repo`, `/`) while `/repo/path` will still group as (`repo`, `/path`).
+        location ~ ^/(?<sig_repo>.*?)(?!/+$)(?<repo_subpath>/.*)?$ {
           if ($arg_go-get = "1") {
             # This is a go-get operation.
             return 200 '
