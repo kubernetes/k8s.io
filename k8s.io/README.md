@@ -40,6 +40,7 @@ Redirections
 - https://go.k8s.io/help-wanted
 - https://go.k8s.io/needs-ok-to-test
 - https://go.k8s.io/oncall
+- https://go.k8s.io/owners
 - https://go.k8s.io/partner-request
 - https://go.k8s.io/pr-dashboard
 - https://go.k8s.io/start
