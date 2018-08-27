@@ -104,6 +104,28 @@ class RedirTest(unittest.TestCase):
             'kubernet.es' + path,
             'https://kubernetes.io' + path, 301)
 
+    def test_sig_urls(self):
+        base = 'https://sigs.k8s.io'
+        self.assert_scheme_redirect(
+                base,
+                'https://github.com/kubernetes-sigs/',
+                301)
+        self.assert_scheme_redirect(
+                base + '/$sig_repo',
+                'https://github.com/kubernetes-sigs/$sig_repo',
+                301,
+                sig_repo=rand_num())
+        self.assert_scheme_redirect(
+                base + '/$sig_repo/',
+                'https://github.com/kubernetes-sigs/$sig_repo/',
+                301,
+                sig_repo=rand_num())
+        self.assert_scheme_redirect(
+                base + '/$sig_repo/$repo_subpath',
+                'https://github.com/kubernetes-sigs/$sig_repo/blob/master/$repo_subpath',
+                301,
+                sig_repo=rand_num(), repo_subpath=rand_num())
+
     def test_protocol_upgrade(self):
         for url in ('kubernetes.io', 'k8s.io', 'sigs.k8s.io'):
             self.assert_scheme_redirect(
