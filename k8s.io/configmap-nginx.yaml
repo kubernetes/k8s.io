@@ -313,6 +313,16 @@ data:
       }
 
       server {
+        server_name submit-queue.k8s.io submit-queue.kubernetes.io;
+        listen 80;
+        listen 443 ssl;
+
+        location / {
+          rewrite ^/.*$  https://prow.k8s.io/tide redirect;
+        }
+      }
+
+      server {
         server_name testgrid.kubernetes.io testgrid.k8s.io;
         listen 80;
         listen 443 ssl;
