@@ -111,14 +111,6 @@ data:
         }
       }
 
-      # Silly vanity domain we don't really do anything with.
-      server {
-        server_name kubernet.es;
-        listen 80;
-        listen 443 ssl;
-        return 301 https://kubernetes.io$request_uri;
-      }
-
       #
       # Vanity redirect rules.
       #

@@ -92,18 +92,6 @@ class RedirTest(unittest.TestCase):
                 'https://k8s.io/' + path,
                 'https://kubernetes.io/' + path, 301)
 
-        # Vanity domains.
-        path = '/%s' % rand_num()
-        self.assert_multischeme_redirect(
-                'kubernet.es',
-                'https://kubernetes.io/', 301)
-        self.assert_multischeme_redirect(
-            'kubernet.es/',
-            'https://kubernetes.io/', 301)
-        self.assert_multischeme_redirect(
-            'kubernet.es' + path,
-            'https://kubernetes.io' + path, 301)
-
     def test_sig_urls(self):
         base = 'https://sigs.k8s.io'
         self.assert_scheme_redirect(
