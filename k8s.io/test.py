@@ -359,6 +359,12 @@ class RedirTest(unittest.TestCase):
                 'https://github.com/kubernetes/kubernetes/tree/$ver/$path',
                 ver=rand_num(), path=rand_num())
 
+    def test_submit_queue(self):
+        for base in ('submit-queue.k8s.io', 'submit-queue.kubernetes.io'):
+            self.assert_temp_redirect(base, 'https://prow.k8s.io/tide')
+            self.assert_temp_redirect(base + '/$path', 'https://prow.k8s.io/tide',
+                path=rand_num())
+
     def test_testgrid(self):
         for base in ('testgrid.k8s.io', 'testgrid.kubernetes.io'):
             self.assert_temp_redirect(base, 'https://k8s-testgrid.appspot.com/')
