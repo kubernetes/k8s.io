@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if ! which docker 2>&1 > /dev/null; then
+   echo 'Can not find docker executable, please install!'
+   exit 1
+fi
+
+docker_user=$(docker info 2> /dev/null | grep Username | awk '{print $2}')
+
+export DNS_SYNC_REPO=${docker_user}
+export DNS_SYNC_IMAGE=octodns
+export DNS_SYNC_VERSION=v1
