@@ -22,12 +22,12 @@ spec:
         - name: gcsweb
           image: k8s.gcr.io/gcsweb-amd64:v1.0.6
           args:
+            - -b=android-ci
             - -b=crreleases
             - -b=istio-prow
             - -b=kubernetes-jenkins
             - -b=kubernetes-release
             - -b=kubernetes-release-dev
-            - -b=android-ci
             - -p=8080
           ports:
             - containerPort: 8080
