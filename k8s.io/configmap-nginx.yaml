@@ -252,6 +252,7 @@ data:
           rewrite ^/bounty$          https://github.com/kubernetes/kubernetes.github.io/issues?q=is%3Aopen+is%3Aissue+label%3ABounty redirect;
           rewrite ^/bot-commands$    https://prow.k8s.io/command-help redirect;
           rewrite ^/github-labels$   https://github.com/kubernetes/test-infra/blob/master/label_sync/labels.md redirect;
+          rewrite ^/good-first-issue$ https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22&type=Issues redirect;
           rewrite ^/help-wanted$     https://github.com/kubernetes/kubernetes/labels/help%20wanted redirect;
           rewrite ^/needs-ok-to-test$ https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3Akubernetes+label%3Aneeds-ok-to-test+-label%3Aneeds-rebase redirect;
           rewrite ^/oncall$          https://storage.googleapis.com/kubernetes-jenkins/oncall.html redirect;

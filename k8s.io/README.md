@@ -36,6 +36,7 @@ Redirections
 - https://go.k8s.io/bounty
 - https://go.k8s.io/bot-commands
 - https://go.k8s.io/github-labels
+- https://go.k8s.io/good-first-issue
 - https://go.k8s.io/help-wanted
 - https://go.k8s.io/needs-ok-to-test
 - https://go.k8s.io/oncall
