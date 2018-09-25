@@ -148,14 +148,19 @@ class RedirTest(unittest.TestCase):
 
     def test_go(self):
         for base in ('go.k8s.io/', 'go.kubernetes.io/'):
-            self.assert_temp_redirect(base + 'bounty',
-                'https://github.com/kubernetes/kubernetes.github.io/'
-                'issues?q=is%3Aopen+is%3Aissue+label%3ABounty')
+            self.assert_temp_redirect(base + 'bot-commands',
+                'https://prow.k8s.io/command-help')
+            self.assert_temp_redirect(base + 'github-labels',
+                'https://github.com/kubernetes/test-infra/blob/master/label_sync/labels.md')
+            self.assert_temp_redirect(base + 'good-first-issue',
+                'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22&type=Issues')
             self.assert_temp_redirect(base + 'help-wanted',
-                'https://github.com/kubernetes/kubernetes/labels/help%20wanted')
+                'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22&type=Issues')
             self.assert_temp_redirect(
                 base + 'oncall',
                 'https://storage.googleapis.com/kubernetes-jenkins/oncall.html')
+            self.assert_temp_redirect(base + 'owners',
+                'https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md')
             self.assert_temp_redirect(
                 base + 'partner-request',
                 'https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform')
@@ -180,7 +185,7 @@ class RedirTest(unittest.TestCase):
 
             self.assert_temp_redirect(
                 base + 'needs-ok-to-test',
-                'https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3Akubernetes+label%3Aneeds-ok-to-test+-label%3Aneeds-rebase')
+                'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase&type=Issues')
 
     def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
