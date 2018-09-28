@@ -1,0 +1,171 @@
+---
+# The top-level kubernetes.io zone
+#
+# In general, every name here has an eqyuivalent in k8s.io.  For many of these
+# we redirect from foo.kubernetes.io to foo.k8s.io, which is where the
+# documentation for each name is attached.
+'':
+  - type: A
+    # FIXME: was 45.54.44.100, document this
+    value: 104.198.14.52 # Netlify (@chenopis, @thockin)
+  - type: MX
+    values:
+    - exchange: aspmx.l.google.com.
+      preference: 1
+    - exchange: alt1.aspmx.l.google.com.
+      preference: 5
+    - exchange: alt2.aspmx.l.google.com.
+      preference: 5
+    - exchange: alt3.aspmx.l.google.com.
+      preference: 10
+    - exchange: alt4.aspmx.l.google.com.
+      preference: 10
+  - type: TXT
+    values:
+    - google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8
+    - v=spf1 include:_spf.google.com ~all
+www:
+  type: CNAME
+  value: kubernetes.io.
+
+# Main docs site is a redirect (@chenopis)
+docs:
+  type: CNAME
+  value: docs.k8s.io.
+# All docs subdomains get sent to netlify (@chenopis)
+'*.docs':
+  type: CNAME
+  value: netlifyglobalcdn.com.
+
+# Prove that we own these github orgs. sig-contributor-experience
+_github-challenge-kubernetes:
+  type: TXT
+  value: 96af7368f8
+_github-challenge-kubernetes-client:
+  type: TXT
+  value: 1b788a0e7d
+_github-challenge-kubernetes-csi:
+  type: TXT
+  value: f2ad88f040
+_github-challenge-kubernetes-incubator:
+  type: TXT
+  value: c450708897
+_github-challenge-kubernetes-retired:
+  type: TXT
+  value: 3eb0291308
+_github-challenge-kubernetes-sigs:
+  type: TXT
+  value: 745fa33033
+
+#TODO: what is this?
+rnl6zogsrrhp:
+  type: CNAME
+  value: gv-4u7qekjwhnb7zi.dv.googlehosted.com.
+
+# Download sites
+apt:
+  type: CNAME
+  value: apt.k8s.io.
+yum:
+  type: CNAME
+  value: yum.k8s.io.
+dl:
+  type: CNAME
+  value: dl.k8s.io.
+rel:
+  type: CNAME
+  value: rel.k8s.io.
+releases:
+  type: CNAME
+  value: releases.k8s.io.
+
+# Vanity CNAMEs.
+# TODO: this is different from blog.k8s.io config?
+blog:
+  type: CNAME
+  value: blog.kubernetes.io.ghs.googlehosted.com.
+changelog:
+  type: CNAME
+  value: changelog.k8s.io.
+ci-test:
+  type: CNAME
+  value: ci-test.k8s.io.
+code:
+  type: CNAME
+  value: code.k8s.io.
+contributor:
+  type: CNAME
+  value: contributor.k8s.io.
+cs:
+  type: CNAME
+  value: cs.k8s.io.
+devstats:
+  type: CNAME
+  value: devstats.k8s.io.
+discuss:
+  type: CNAME
+  value: kubernetes.hosted-by-discourse.com.
+examples:
+  type: CNAME
+  value: examples.k8s.io.
+feature:
+  type: CNAME
+  value: feature.k8s.io.
+features:
+  type: CNAME
+  value: features.k8s.io.
+gcsweb:
+  type: CNAME
+  value: gcsweb.k8s.io.
+get:
+  type: CNAME
+  value: get.k8s.io.
+git:
+  type: CNAME
+  value: git.k8s.io.
+go:
+  type: CNAME
+  value: go.k8s.io.
+gubernator:
+  type: CNAME
+  value: gubernator.k8s.io.
+issue:
+  type: CNAME
+  value: issue.k8s.io.
+issues:
+  type: CNAME
+  value: issues.k8s.io.
+node-perf-dash:
+  type: CNAME
+  value: node-perf-dash.k8s.io.
+pr:
+  type: CNAME
+  value: pr.k8s.io.
+pr-test:
+  type: CNAME
+  value: pr-test.k8s.io.
+prow:
+  type: CNAME
+  value: prow.k8s.io.
+prs:
+  type: CNAME
+  value: prs.k8s.io.
+sigs:
+  type: CNAME
+  value: sigs.k8s.io.
+slack:
+  type: A
+  value: 104.197.79.9
+spartakus:
+  type: CNAME
+  value: spartakus.k8s.io.
+# Prow (@ixdy).
+submit-queue:
+  type: CNAME
+  value: submit-queue.k8s.io.
+testgrid:
+  type: CNAME
+  value: testgrid.k8s.io.
+velodrome:
+  type: CNAME
+  value: velodrome.k8s.io.

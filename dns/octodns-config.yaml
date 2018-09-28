@@ -1,0 +1,23 @@
+---
+providers:
+  config:
+    class: octodns.provider.yaml.YamlProvider
+    directory: /octodns/config
+    enforce_order: false
+    default_ttl: 300
+  gcp:
+    class: octodns.provider.googlecloud.GoogleCloudProvider
+    project: kubernetes-public
+    #credentials_file: '/octodns/creds/gcp.json'
+
+zones:
+  kubernetes.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  k8s.io.:
+    sources:
+      - config
+    targets:
+      - gcp
