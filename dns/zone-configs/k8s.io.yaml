@@ -22,9 +22,6 @@
 www:
   type: CNAME
   value: k8s.io.
-_acme-challenge:
-  type: TXT
-  value: 7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4
 
 # Our vanity redirector.  This is not just 'k8s.io', on the off chance this
 # becomes different from the main record. (@thockin)
@@ -41,7 +38,7 @@ docs:
   type: CNAME
   value: netlifyglobalcdn.com.
 
-# Not sure what these control, no prior notes.
+# Prove that we own these github orgs. sig-contributor-experience
 _github-challenge-kubernetes:
   type: TXT
   value: 8d02d39186
@@ -85,10 +82,6 @@ blog:
 changelog:
   type: CNAME
   value: redirect.k8s.io.
-# TODO: Where does this live and who owns it?
-cherrypick:
-  type: A
-  value: 35.184.147.212
 ci-test:
   type: CNAME
   value: redirect.k8s.io.
@@ -98,13 +91,16 @@ code:
 contributor:
   type: CNAME
   value: kubernetes-contributor.netlify.com.
+# Code search (@dims)
+# TODO: Where does this run?
 cs:
   type: A
   value: 147.75.97.58
+# sig-contributor-experience
 devstats:
   type: CNAME
   value: k8s.devstats.cncf.io.
-# TODO: jorge and paris and which sig?
+# sig-contributor-experience
 discuss:
   type: CNAME
   value: kubernetes.hosted-by-discourse.com.
@@ -127,6 +123,7 @@ get:
 git:
   type: CNAME
   value: redirect.k8s.io.
+# URL shortener service.
 go:
   type: CNAME
   value: redirect.k8s.io.
@@ -143,7 +140,7 @@ issues:
 node-perf-dash:
   type: A
   value: 130.211.155.47
-# Who owns this and where is it running?
+# sig-scalability
 perf-dash:
   type: A
   value: 35.188.102.189
@@ -153,7 +150,7 @@ pr:
 pr-test:
   type: CNAME
   value: redirect.k8s.io.
-# Who owns this and where is it running?
+# Running in a GKE cluster somewhere (@ixdy).
 prow:
   type: A
   value: 35.186.196.185
@@ -163,7 +160,7 @@ prs:
 sigs:
   type: CNAME
   value: redirect.k8s.io.
-# Who owns this and where did we get that IP?
+# Running on a GCE VM (@grodrigues3, @roberthbailey).
 slack:
   type: A
   value: 104.197.79.9
@@ -175,7 +172,7 @@ spartakus:
 submit-queue:
   type: CNAME
   value: redirect.k8s.io.
-# Who owns this and do we need it?
+# TODO: Who owns this and do we need it?
 test-aws:
   type: NS
   values:
@@ -183,7 +180,7 @@ test-aws:
   - ns-1710.awsdns-21.co.uk.
   - ns-491.awsdns-61.com.
   - ns-969.awsdns-57.net.
-# Who owns this and do we need it?
+# TODO: Who owns this and do we need it?
 test-cncf-aws:
   type: NS
   values:
@@ -191,7 +188,7 @@ test-cncf-aws:
   - ns-1825.awsdns-36.co.uk.
   - ns-265.awsdns-33.com.
   - ns-687.awsdns-21.net.
-# Who owns this and do we need it?
+# TODO: Who owns this and do we need it?
 test-e2e:
   type: NS
   values:
@@ -199,7 +196,7 @@ test-e2e:
   - ns-cloud-a2.googledomains.com.
   - ns-cloud-a3.googledomains.com.
   - ns-cloud-a4.googledomains.com.
-# Who owns this and do we need it?
+# TODO: Who owns this and do we need it?
 test-gcp:
   type: NS
   values:
@@ -210,7 +207,7 @@ test-gcp:
 testgrid:
   type: CNAME
   value: redirect.k8s.io.
-# Project metrics.  Running in GKE (@apelisse, @jgrafton)
+# Project metrics.  Running in GKE (@spiffxp, @cjwagner)
 velodrome:
   type: A
   value: 104.197.200.129

@@ -1,5 +1,9 @@
 ---
 # The top-level kubernetes.io zone
+#
+# In general, every name here has an eqyuivalent in k8s.io.  For many of these
+# we redirect from foo.kubernetes.io to foo.k8s.io, which is where the
+# documentation for each name is attached.
 '':
   - type: A
     # FIXME: was 45.54.44.100, document this
@@ -33,7 +37,7 @@ docs:
   type: CNAME
   value: netlifyglobalcdn.com.
 
-# Not sure what these control, no prior notes.
+# Prove that we own these github orgs. sig-contributor-experience
 _github-challenge-kubernetes:
   type: TXT
   value: 96af7368f8
@@ -52,6 +56,8 @@ _github-challenge-kubernetes-retired:
 _github-challenge-kubernetes-sigs:
   type: TXT
   value: 745fa33033
+
+#TODO: what is this?
 rnl6zogsrrhp:
   type: CNAME
   value: gv-4u7qekjwhnb7zi.dv.googlehosted.com.
@@ -74,6 +80,7 @@ releases:
   value: releases.k8s.io.
 
 # Vanity CNAMEs.
+# TODO: this is different from blog.k8s.io config?
 blog:
   type: CNAME
   value: blog.kubernetes.io.ghs.googlehosted.com.
