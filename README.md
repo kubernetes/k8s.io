@@ -1,2 +1,2 @@
 # k8s.io
-Kubernetes files for various *.k8s.io sites
+Kubernetes files for various sites and infrastructure.
