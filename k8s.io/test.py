@@ -234,6 +234,7 @@ class RedirTest(unittest.TestCase):
     def test_code(self):
         path = rand_num()
         for base in ('changelog.kubernetes.io', 'changelog.k8s.io'):
+            self.assert_temp_redirect(base, 'https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md')
             self.assert_temp_redirect(base + '/$path',
                 'https://github.com/kubernetes/kubernetes/releases/tag/$path',
                 path=path)
