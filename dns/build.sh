@@ -8,4 +8,4 @@ VERSION=${DNS_SYNC_VERSION:-$(git describe --always --dirty)}
 
 echo "Building ${REPO}/${IMAGE}:${VERSION}"
 
-docker build -t ${REPO}/${IMAGE}:${VERSION} .
+docker build -t ${REPO}/${IMAGE}:${VERSION} ./octodns-docker

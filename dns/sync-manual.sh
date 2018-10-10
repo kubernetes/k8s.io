@@ -1,6 +1,6 @@
 #!/bin/bash
 
-script_root=$(dirname ${BASH_SOURCE})
+script_root=$(dirname $(readlink -f {BASH_SOURCE}))
 
 . ${script_root}/env
 
