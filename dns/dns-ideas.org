@@ -1,0 +1,2054 @@
+# -*- org-use-property-inheritance: t; -*-
+#+TITLE: Todo / Process Documentation
+#+AUTHOR: Hippie Hacker
+#+EMAIL: hh@ii.coop
+#+CREATOR: k8s-infra-team
+#+DATE: October 10th, 2018
+#+PROPERTY: header-args:tmux :socket "/tmp/hh-tmate.socket"
+#+PROPERTY: header-args:tmux :session "k8s:apisnoop"
+#+PROPERTY: header-args:tmux :results "silent"
+#+PROPERTY: header-args:shell :exports both :results raw code :wrap "SRC text" :eval never-export
+#+PROPERTY: header-args:text :exports both
+
+* Setup gcloud config
+** TODO Consider using 'gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+** kubernetes-public
+
+#+NAME: configure gcloud
+#+BEGIN_SRC shell :results silent
+gcloud config configurations create k8s-io
+gcloud config configurations activate k8s-io
+gcloud config set account hh@ii.coop
+gcloud config set project kubernetes-public
+gcloud config set disable_usage_reporting true
+#+END_SRC
+
+#+NAME: gcloud config list
+#+BEGIN_SRC shell
+gcloud config list
+#+END_SRC
+
+#+RESULTS: gcloud config list
+#+BEGIN_SRC text
+[core]
+account = hh@ii.coop
+disable_usage_reporting = true
+project = kubernetes-public
+#+END_SRC
+
+** cncf-ci
+
+#+NAME: configure gcloud
+#+BEGIN_SRC shell :results silent :
+gcloud config configurations create cncf-ci
+gcloud config configurations activate cncf-ci
+gcloud config set account hh@ii.coop
+gcloud config set project cncf-ci
+gcloud config set disable_usage_reporting true
+#+END_SRC
+
+#+NAME: gcloud configuration list
+#+BEGIN_SRC shell 
+gcloud config configurations list
+#+END_SRC
+
+#+RESULTS: gcloud configuration list
+#+BEGIN_SRC text
+NAME     IS_ACTIVE  ACCOUNT                 PROJECT            DEFAULT_ZONE   DEFAULT_REGION
+cncf-ci  True       hh@ii.coop              cncf-ci
+default  False      chris@hippiehacker.org  test-163823        us-central1-a  us-central1
+ii-coop  False      hh@ii.coop              ii-coop
+k8s-io   False      hh@ii.coop              kubernetes-public
+#+END_SRC
+
+* TODO Setting up canary zones
+** DONE Setting up k8s.cncf.ci
+   CLOSED: [2018-10-10 Wed 04:53]
+
+ This is a test walkthrough for delegating a 'canary' or subdomain.
+ - [X] Create k8s-cncf-ci zone within cncf-ci project
+ - [X] Figure out what the four DNS servers are for that zone
+ - [X] Add those for DNS servers as NS records for k8s.cncf.ci
+ - [X] Verify the NS Records are pointing correctly
+
+*** DONE Creates canary zone in gcloud
+    CLOSED: [2018-10-10 Wed 04:51]
+**** DONE create k8s-cncf-ci zone in gcloud
+     CLOSED: [2018-10-10 Wed 04:50]
+
+  #+NAME: create zone k8s-cncf-ci
+  #+BEGIN_SRC shell :noeval
+  gcloud dns --project=cncf-ci managed-zones create k8s-cncf-ci --description= --dns-name=k8s.cncf.ci
+  #+END_SRC
+
+*** DONE Retrieve dns servers for canary zone
+    CLOSED: [2018-10-10 Wed 04:51]
+**** DONE describe k8s-cncf-ci zone in gcloud
+     CLOSED: [2018-10-10 Wed 04:51]
+    
+ #+NAME: describe zone k8s-cncf-ci
+ #+BEGIN_SRC shell
+ gcloud dns managed-zones describe k8s-cncf-ci
+ #+END_SRC
+
+ #+RESULTS: describe zone k8s-cncf-ci
+ #+BEGIN_SRC text
+ creationTime: '2018-10-09T13:16:22.258Z'
+ description: k8s.cncf.ci
+ dnsName: k8s.cncf.ci.
+ dnssecConfig:
+   defaultKeySpecs:
+   - algorithm: rsasha256
+     keyLength: 2048
+     keyType: keySigning
+     kind: dns#dnsKeySpec
+   - algorithm: rsasha256
+     keyLength: 1024
+     keyType: zoneSigning
+     kind: dns#dnsKeySpec
+   kind: dns#managedZoneDnsSecConfig
+   nonExistence: nsec3
+   state: 'off'
+ id: '3330419535183872675'
+ kind: dns#managedZone
+ name: k8s-cncf-ci
+ nameServers:
+ - ns-cloud-e1.googledomains.com.
+ - ns-cloud-e2.googledomains.com.
+ - ns-cloud-e3.googledomains.com.
+ - ns-cloud-e4.googledomains.com.
+ #+END_SRC
+
+*** DONE Create / Verify NS Records for canary zone
+    CLOSED: [2018-10-10 Wed 04:53]
+**** DONE NS records for k8s.cncf.ci
+     CLOSED: [2018-10-10 Wed 04:53]
+
+ This was done via the console in dnsimple, as the top level is not hosted with gcp.
+
+ #+NAME: dig k8s.cncf.ci NS
+ #+BEGIN_SRC shell
+ dig k8s.cncf.ci NS | grep "IN.*NS"
+ #+END_SRC
+
+ #+RESULTS: dig k8s.cncf.ci NS
+ #+BEGIN_SRC text
+ ;k8s.cncf.ci.			IN	NS
+ k8s.cncf.ci.		16920	IN	NS	ns-cloud-e1.googledomains.com.
+ k8s.cncf.ci.		16920	IN	NS	ns-cloud-e2.googledomains.com.
+ k8s.cncf.ci.		16920	IN	NS	ns-cloud-e3.googledomains.com.
+ k8s.cncf.ci.		16920	IN	NS	ns-cloud-e4.googledomains.com.
+ #+END_SRC
+
+** TODO Setting up canary.{k8s,kubernetes}.io
+
+*** DONE Create canary zones in gcloud
+    CLOSED: [2018-10-10 Wed 05:19]
+**** DONE create canary-k8s-io zone in gcloud
+     CLOSED: [2018-10-10 Wed 05:19]
+
+ #+NAME: create canary-k8s-io zone
+ #+BEGIN_SRC shell :results silent
+ gcloud dns --project=kubernetes-public managed-zones create canary-k8s-io --description= --dns-name=canary.k8s.io.
+ #+END_SRC
+
+
+**** DONE create canary-kubernetes-io zone in gcloud
+     CLOSED: [2018-10-10 Wed 05:19]
+
+ #+NAME: Setup gcloud subdomain
+ #+BEGIN_SRC shell :noeval
+ gcloud dns --project=kubernetes-public managed-zones create canary-kubernetes-io --description= --dns-name=canary.kubernetes.io.
+ #+END_SRC
+
+*** DONE Retrieve dns servers for canary zones
+    CLOSED: [2018-10-10 Wed 05:20]
+**** DONE describe canary-k8s-io zone in gcloud
+     CLOSED: [2018-10-10 Wed 05:20]
+    
+ #+NAME: gcloud describe canary-k8s-io
+ #+BEGIN_SRC shell
+ gcloud dns managed-zones describe canary-k8s-io
+ #+END_SRC
+
+ #+RESULTS: gcloud describe canary-k8s-io
+ #+BEGIN_SRC text
+ creationTime: '2018-10-09T16:18:27.446Z'
+ description: ''
+ dnsName: canary.k8s.io.
+ id: '7690509341659612964'
+ kind: dns#managedZone
+ name: canary-k8s-io
+ nameServers:
+ - ns-cloud-c1.googledomains.com.
+ - ns-cloud-c2.googledomains.com.
+ - ns-cloud-c3.googledomains.com.
+ - ns-cloud-c4.googledomains.com.
+ #+END_SRC
+
+**** DONE describe canary-kubernetes-io zone in gcloud
+     CLOSED: [2018-10-10 Wed 05:20]
+
+ #+NAME: gcloud describe canary-kubernetes-io
+ #+BEGIN_SRC shell
+ gcloud dns managed-zones describe canary-kubernetes-io
+ #+END_SRC
+
+ #+RESULTS: gcloud describe canary-kubernetes-io
+ #+BEGIN_SRC text
+ creationTime: '2018-10-09T16:19:40.004Z'
+ description: ''
+ dnsName: canary.kubernetes.io.
+ id: '4193576254815248920'
+ kind: dns#managedZone
+ name: canary-kubernetes-io
+ nameServers:
+ - ns-cloud-b1.googledomains.com.
+ - ns-cloud-b2.googledomains.com.
+ - ns-cloud-b3.googledomains.com.
+ - ns-cloud-b4.googledomains.com.
+ #+END_SRC
+
+*** TODO Create NS Records for canary zones
+
+ We should do this in both the current+live / google managed DNS zones, and the
+ kubernetes-public zones.
+
+ I'm going to leave this undone for review.
+
+**** TODO NS records for canary.k8s.io
+ #+NAME: NS records for current k8s.io zone
+ #+BEGIN_SRC shell :noeval
+ gcloud dns --project=kubernetes-public record-sets transaction start --zone=k8s-io
+ gcloud dns --project=kubernetes-public record-sets transaction add ns-cloud-X1.googledomains.com. --name=canary.k8s.io. --ttl=86400 --type=NS --zone=k8s-io
+ gcloud dns --project=kubernetes-public record-sets transaction add ns-cloud-X2.googledomains.com. --name=canary.k8s.io. --ttl=86400 --type=NS --zone=k8s-io
+ gcloud dns --project=kubernetes-public record-sets transaction add ns-cloud-X3.googledomains.com. --name=canary.k8s.io. --ttl=86400 --type=NS --zone=k8s-io
+ gcloud dns --project=kubernetes-public record-sets transaction add ns-cloud-X4.googledomains.com. --name=canary.k8s.io. --ttl=86400 --type=NS --zone=k8s-io
+ gcloud dns --project=kubernetes-public record-sets transaction execute --zone=k8s-io
+ #+END_SRC
+
+**** TODO NS records for canary.kubernetes.io
+
+ #+NAME: NS records for current kubernetes.io zone
+ #+BEGIN_SRC shell :noeval
+ gcloud dns --project=kubernetes-public record-sets transaction start --zone=kubernetes-io
+ gcloud dns --project=kubernetes-public record-sets transaction add ns-cloud-X1.googledomains.com. --name=canary.kubernetes.io. --ttl=86400 --type=NS --zone=kubernetes-io
+ gcloud dns --project=kubernetes-public record-sets transaction add ns-cloud-X2.googledomains.com. --name=canary.kubernetes.io. --ttl=86400 --type=NS --zone=kubernetes-io
+ gcloud dns --project=kubernetes-public record-sets transaction add ns-cloud-X3.googledomains.com. --name=canary.kubernetes.io. --ttl=86400 --type=NS --zone=kubernetes-io
+ gcloud dns --project=kubernetes-public record-sets transaction add ns-cloud-X4.googledomains.com. --name=canary.kubernetes.io. --ttl=86400 --type=NS --zone=kubernetes-io
+ gcloud dns --project=kubernetes-public record-sets transaction execute --zone=kubernetes-io
+ #+END_SRC
+
+* DONE Canary dry/doit/verify testing
+  CLOSED: [2018-10-10 Wed 05:55]
+** DONE Canary test using k8s.cncf.ci
+   CLOSED: [2018-10-10 Wed 05:54]
+
+ - [X] Symlinked [[file:config/k8s.io.yaml][config/k8s.io.yaml]] to [[file:config/k8s.cncf.ci.yaml][config/k8s.cncf.ci.yaml]]
+ - [X] Created [[file:cncf-config.yaml][cncf-config.yaml]] using only cncf-ci project
+ - [X] Dry Run
+ - [X] Doit Run
+ - [X] Verify Zone
+
+*** dry run
+ #+NAME: canary dry run
+ #+BEGIN_SRC shell
+ docker run \
+     -u `id -u` \
+     -v ~/.config/gcloud:/.config/gcloud:ro \
+     -v `pwd`/config:/octodns/config:ro \
+     -v `pwd`/cncf-config.yaml:/octodns/config.yaml:ro \
+     myname/octodns \
+     octodns-sync \
+         --config-file=/octodns/config.yaml \
+         --log-stream-stdout \
+         --debug
+ #+END_SRC
+
+ #+RESULTS: canary dry run
+ #+BEGIN_SRC text
+ 2018-10-09T15:43:44  [140586431114120] INFO  Manager __init__: config_file=/octodns/config.yaml
+ 2018-10-09T15:43:44  [140586431114120] INFO  Manager __init__:   max_workers=1
+ 2018-10-09T15:43:44  [140586431114120] INFO  Manager __init__:   max_workers=False
+ 2018-10-09T15:43:44  [140586431114120] DEBUG Manager __init__:   configuring providers
+ 2018-10-09T15:43:45  [140586431114120] WARNING google.auth._default No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+ 2018-10-09T15:43:45  [140586431114120] DEBUG GoogleCloudProvider[cncf] __init__: id=cncf, apply_disabled=False, update_pcent_threshold=0.30, delete_pcent_threshold=0.30
+ 2018-10-09T15:43:45  [140586431114120] DEBUG YamlProvider[config] __init__: id=config, directory=/octodns/config, default_ttl=300, enforce_order=0
+ 2018-10-09T15:43:45  [140586431114120] DEBUG YamlProvider[config] __init__: id=config, apply_disabled=False, update_pcent_threshold=0.30, delete_pcent_threshold=0.30
+ 2018-10-09T15:43:45  [140586431114120] INFO  Manager sync: eligible_zones=[], eligible_targets=[], dry_run=True, force=False
+ 2018-10-09T15:43:45  [140586431114120] INFO  Manager sync:   zone=k8s.cncf.ci.
+ 2018-10-09T15:43:45  [140586431114120] INFO  Manager sync:   sources=['config'] -> targets=['cncf']
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Manager sync:   populating, zone=k8s.cncf.ci.
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Manager configured_sub_zones: subs=[]
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Zone __init__: zone=Zone<k8s.cncf.ci.>, sub_zones=set([])
+ 2018-10-09T15:43:45  [140586431114120] DEBUG YamlProvider[config] populate: name=k8s.cncf.ci., target=False, lenient=False
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   MxRecord, name=
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=www
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=code
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=features
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=cherrypick
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-csi
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=apt
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=go
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_acme-challenge
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-retired
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=examples
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=prs
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=cs
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=issues
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=test-e2e
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=redirect
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=git
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=releases
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=prow
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=feature
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=blog
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=testgrid
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=gubernator
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=rel
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=node-perf-dash
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=issue
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=spartakus
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=gcsweb
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=pr
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=dl
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=pr-test
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=devstats
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=get
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=docs
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-sigs
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=contributor
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=test-gcp
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-incubator
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=velodrome
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=perf-dash
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=test-cncf-aws
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=discuss
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=test-aws
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=slack
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=ci-test
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=changelog
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=sigs
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-client
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=yum
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=*.docs
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=submit-queue
+ 2018-10-09T15:43:45  [140586431114120] INFO  YamlProvider[config] populate:   found 54 records, exists=False
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Manager sync:   planning, zone=k8s.cncf.ci.
+ 2018-10-09T15:43:45  [140586431114120] INFO  GoogleCloudProvider[cncf] plan: desired=k8s.cncf.ci.
+ 2018-10-09T15:43:45  [140586431114120] DEBUG Zone __init__: zone=Zone<k8s.cncf.ci.>, sub_zones=set([])
+ 2018-10-09T15:43:45  [140586431114120] DEBUG GoogleCloudProvider[cncf] populate: name=k8s.cncf.ci., target=True, lenient=True
+ 2018-10-09T15:43:45  [140586431114120] DEBUG urllib3.util.retry Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+ 2018-10-09T15:43:45  [140586431114120] DEBUG google.auth.transport.requests Making request: POST https://oauth2.googleapis.com/token
+ 2018-10-09T15:43:45  [140586431114120] DEBUG urllib3.connectionpool Starting new HTTPS connection (1): oauth2.googleapis.com:443
+ 2018-10-09T15:43:46  [140586431114120] DEBUG urllib3.connectionpool https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+ 2018-10-09T15:43:46  [140586431114120] DEBUG urllib3.connectionpool Starting new HTTPS connection (1): www.googleapis.com:443
+ 2018-10-09T15:43:47  [140586431114120] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/cncf-ci/managedZones HTTP/1.1" 200 None
+ 2018-10-09T15:43:47  [140586431114120] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/cncf-ci/managedZones/k8s-cncf-ci/rrsets HTTP/1.1" 200 None
+ 2018-10-09T15:43:47  [140586431114120] DEBUG GoogleCloudProvider[cncf] populate: adding record  records: {u'type': u'NS', u'values': [u'ns-cloud-e1.googledomains.com.', u'ns-cloud-e2.googledomains.com.', u'ns-cloud-e3.googledomains.com.', u'ns-cloud-e4.googledomains.com.'], u'ttl': 21600}
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=
+ 2018-10-09T15:43:47  [140586431114120] INFO  GoogleCloudProvider[cncf] populate: found 1 records, exists=True
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, target=GoogleCloudProvider
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<NsRecord NS 300, test-cncf-aws.k8s.cncf.ci., ['ns-1458.awsdns-54.org.', 'ns-1825.awsdns-36.co.uk.', 'ns-265.awsdns-33.com.', 'ns-687.awsdns-21.net.']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-sigs.k8s.cncf.ci., ['c576f646fc']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, examples.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, dl.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, devstats.k8s.cncf.ci., k8s.devstats.cncf.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, pr.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, feature.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, redirect.k8s.cncf.ci., ['23.236.58.218']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<NsRecord NS 300, test-aws.k8s.cncf.ci., ['ns-1345.awsdns-40.org.', 'ns-1710.awsdns-21.co.uk.', 'ns-491.awsdns-61.com.', 'ns-969.awsdns-57.net.']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, features.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, apt.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-csi.k8s.cncf.ci., ['5aa2511ab7']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, cs.k8s.cncf.ci., ['147.75.97.58']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, go.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, submit-queue.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes.k8s.cncf.ci., ['8d02d39186']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, pr-test.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, git.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, discuss.k8s.cncf.ci., kubernetes.hosted-by-discourse.com.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, perf-dash.k8s.cncf.ci., ['35.188.102.189']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<NsRecord NS 300, test-gcp.k8s.cncf.ci., ['ns-cloud-e1.googledomains.com.', 'ns-cloud-e2.googledomains.com.', 'ns-cloud-e3.googledomains.com.', 'ns-cloud-e4.googledomains.com.']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-client.k8s.cncf.ci., ['8135eb1976']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, releases.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<MxRecord MX 300, k8s.cncf.ci., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-retired.k8s.cncf.ci., ['b36f0d3bca']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, spartakus.k8s.cncf.ci., ['107.178.240.20']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, slack.k8s.cncf.ci., ['104.197.79.9']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, rel.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, ci-test.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, velodrome.k8s.cncf.ci., ['104.197.200.129']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, *.docs.k8s.cncf.ci., netlifyglobalcdn.com.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, blog.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, testgrid.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-incubator.k8s.cncf.ci., ['cc457b8e52']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, code.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<NsRecord NS 300, test-e2e.k8s.cncf.ci., ['ns-cloud-a1.googledomains.com.', 'ns-cloud-a2.googledomains.com.', 'ns-cloud-a3.googledomains.com.', 'ns-cloud-a4.googledomains.com.']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, sigs.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, contributor.k8s.cncf.ci., kubernetes-contributor.netlify.com.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, docs.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, issue.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, prs.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, www.k8s.cncf.ci., k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, yum.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, cherrypick.k8s.cncf.ci., ['35.184.147.212']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _acme-challenge.k8s.cncf.ci., ['7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, get.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, changelog.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, k8s.cncf.ci., ['23.236.58.218']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, k8s.cncf.ci., ['google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs', 'v=spf1 include:_spf.google.com ~all']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, gubernator.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, node-perf-dash.k8s.cncf.ci., ['130.211.155.47']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, issues.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, gcsweb.k8s.cncf.ci., ['104.197.177.166']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, prow.k8s.cncf.ci., ['35.186.196.185']>
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Plan __init__: Creates=54, Updates=0, Deletes=0Existing=1
+ 2018-10-09T15:43:47  [140586431114120] INFO  GoogleCloudProvider[cncf] plan:   Creates=54, Updates=0, Deletes=0, Existing Records=1
+ 2018-10-09T15:43:47  [140586431114120] INFO  Manager 
+ ,********************************************************************************
+ ,* k8s.cncf.ci.
+ ,********************************************************************************
+ ,* cncf (GoogleCloudProvider)
+ ,*   Create <NsRecord NS 300, test-cncf-aws.k8s.cncf.ci., ['ns-1458.awsdns-54.org.', 'ns-1825.awsdns-36.co.uk.', 'ns-265.awsdns-33.com.', 'ns-687.awsdns-21.net.']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-sigs.k8s.cncf.ci., ['c576f646fc']> (config)
+ ,*   Create <CnameRecord CNAME 300, examples.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, dl.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, devstats.k8s.cncf.ci., k8s.devstats.cncf.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, pr.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, feature.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, redirect.k8s.cncf.ci., ['23.236.58.218']> (config)
+ ,*   Create <NsRecord NS 300, test-aws.k8s.cncf.ci., ['ns-1345.awsdns-40.org.', 'ns-1710.awsdns-21.co.uk.', 'ns-491.awsdns-61.com.', 'ns-969.awsdns-57.net.']> (config)
+ ,*   Create <CnameRecord CNAME 300, features.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, apt.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-csi.k8s.cncf.ci., ['5aa2511ab7']> (config)
+ ,*   Create <ARecord A 300, cs.k8s.cncf.ci., ['147.75.97.58']> (config)
+ ,*   Create <CnameRecord CNAME 300, go.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, submit-queue.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes.k8s.cncf.ci., ['8d02d39186']> (config)
+ ,*   Create <CnameRecord CNAME 300, pr-test.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, git.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, discuss.k8s.cncf.ci., kubernetes.hosted-by-discourse.com.> (config)
+ ,*   Create <ARecord A 300, perf-dash.k8s.cncf.ci., ['35.188.102.189']> (config)
+ ,*   Create <NsRecord NS 300, test-gcp.k8s.cncf.ci., ['ns-cloud-e1.googledomains.com.', 'ns-cloud-e2.googledomains.com.', 'ns-cloud-e3.googledomains.com.', 'ns-cloud-e4.googledomains.com.']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-client.k8s.cncf.ci., ['8135eb1976']> (config)
+ ,*   Create <CnameRecord CNAME 300, releases.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <MxRecord MX 300, k8s.cncf.ci., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-retired.k8s.cncf.ci., ['b36f0d3bca']> (config)
+ ,*   Create <ARecord A 300, spartakus.k8s.cncf.ci., ['107.178.240.20']> (config)
+ ,*   Create <ARecord A 300, slack.k8s.cncf.ci., ['104.197.79.9']> (config)
+ ,*   Create <CnameRecord CNAME 300, rel.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, ci-test.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, velodrome.k8s.cncf.ci., ['104.197.200.129']> (config)
+ ,*   Create <CnameRecord CNAME 300, *.docs.k8s.cncf.ci., netlifyglobalcdn.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, blog.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, testgrid.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-incubator.k8s.cncf.ci., ['cc457b8e52']> (config)
+ ,*   Create <CnameRecord CNAME 300, code.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <NsRecord NS 300, test-e2e.k8s.cncf.ci., ['ns-cloud-a1.googledomains.com.', 'ns-cloud-a2.googledomains.com.', 'ns-cloud-a3.googledomains.com.', 'ns-cloud-a4.googledomains.com.']> (config)
+ ,*   Create <CnameRecord CNAME 300, sigs.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, contributor.k8s.cncf.ci., kubernetes-contributor.netlify.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, docs.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, issue.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, prs.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, www.k8s.cncf.ci., k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, yum.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, cherrypick.k8s.cncf.ci., ['35.184.147.212']> (config)
+ ,*   Create <TxtRecord TXT 300, _acme-challenge.k8s.cncf.ci., ['7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4']> (config)
+ ,*   Create <CnameRecord CNAME 300, get.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, changelog.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, k8s.cncf.ci., ['23.236.58.218']> (config)
+ ,*   Create <TxtRecord TXT 300, k8s.cncf.ci., ['google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs', 'v=spf1 include:_spf.google.com ~all']> (config)
+ ,*   Create <CnameRecord CNAME 300, gubernator.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, node-perf-dash.k8s.cncf.ci., ['130.211.155.47']> (config)
+ ,*   Create <CnameRecord CNAME 300, issues.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, gcsweb.k8s.cncf.ci., ['104.197.177.166']> (config)
+ ,*   Create <ARecord A 300, prow.k8s.cncf.ci., ['35.186.196.185']> (config)
+ ,*   Summary: Creates=54, Updates=0, Deletes=0, Existing Records=1
+ ,********************************************************************************
+
+
+ 2018-10-09T15:43:47  [140586431114120] DEBUG Manager sync:   checking safety
+ #+END_SRC
+
+*** doit run
+ #+NAME: canary doit run
+ #+BEGIN_SRC shell
+ docker run \
+     -u `id -u` \
+     -v ~/.config/gcloud:/.config/gcloud:ro \
+     -v `pwd`/config:/octodns/config:ro \
+     -v `pwd`/cncf-config.yaml:/octodns/config.yaml:ro \
+     myname/octodns \
+     octodns-sync \
+         --config-file=/octodns/config.yaml \
+         --log-stream-stdout \
+         --debug \
+         --doit
+ #+END_SRC
+
+ #+RESULTS: canary doit run
+ #+BEGIN_SRC text
+ 2018-10-09T15:46:16  [140498667821960] INFO  Manager __init__: config_file=/octodns/config.yaml
+ 2018-10-09T15:46:16  [140498667821960] INFO  Manager __init__:   max_workers=1
+ 2018-10-09T15:46:16  [140498667821960] INFO  Manager __init__:   max_workers=False
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Manager __init__:   configuring providers
+ 2018-10-09T15:46:16  [140498667821960] WARNING google.auth._default No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+ 2018-10-09T15:46:16  [140498667821960] DEBUG GoogleCloudProvider[cncf] __init__: id=cncf, apply_disabled=False, update_pcent_threshold=0.30, delete_pcent_threshold=0.30
+ 2018-10-09T15:46:16  [140498667821960] DEBUG YamlProvider[config] __init__: id=config, directory=/octodns/config, default_ttl=300, enforce_order=0
+ 2018-10-09T15:46:16  [140498667821960] DEBUG YamlProvider[config] __init__: id=config, apply_disabled=False, update_pcent_threshold=0.30, delete_pcent_threshold=0.30
+ 2018-10-09T15:46:16  [140498667821960] INFO  Manager sync: eligible_zones=[], eligible_targets=[], dry_run=False, force=False
+ 2018-10-09T15:46:16  [140498667821960] INFO  Manager sync:   zone=k8s.cncf.ci.
+ 2018-10-09T15:46:16  [140498667821960] INFO  Manager sync:   sources=['config'] -> targets=['cncf']
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Manager sync:   populating, zone=k8s.cncf.ci.
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Manager configured_sub_zones: subs=[]
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Zone __init__: zone=Zone<k8s.cncf.ci.>, sub_zones=set([])
+ 2018-10-09T15:46:16  [140498667821960] DEBUG YamlProvider[config] populate: name=k8s.cncf.ci., target=False, lenient=False
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   MxRecord, name=
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=www
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=code
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=features
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=cherrypick
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-csi
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=apt
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=go
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_acme-challenge
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-retired
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=examples
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=prs
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=cs
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=issues
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=test-e2e
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=redirect
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=git
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=releases
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=prow
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=feature
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=blog
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=testgrid
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=gubernator
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=rel
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=node-perf-dash
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=issue
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=spartakus
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=gcsweb
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=pr
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=dl
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=pr-test
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=devstats
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=get
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=docs
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-sigs
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=contributor
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=test-gcp
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-incubator
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=velodrome
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=perf-dash
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=test-cncf-aws
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=discuss
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=test-aws
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=    ARecord, name=slack
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=ci-test
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=changelog
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=sigs
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=  TxtRecord, name=_github-challenge-kubernetes-client
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=yum
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=*.docs
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=CnameRecord, name=submit-queue
+ 2018-10-09T15:46:16  [140498667821960] INFO  YamlProvider[config] populate:   found 54 records, exists=False
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Manager sync:   planning, zone=k8s.cncf.ci.
+ 2018-10-09T15:46:16  [140498667821960] INFO  GoogleCloudProvider[cncf] plan: desired=k8s.cncf.ci.
+ 2018-10-09T15:46:16  [140498667821960] DEBUG Zone __init__: zone=Zone<k8s.cncf.ci.>, sub_zones=set([])
+ 2018-10-09T15:46:16  [140498667821960] DEBUG GoogleCloudProvider[cncf] populate: name=k8s.cncf.ci., target=True, lenient=True
+ 2018-10-09T15:46:16  [140498667821960] DEBUG urllib3.util.retry Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+ 2018-10-09T15:46:16  [140498667821960] DEBUG google.auth.transport.requests Making request: POST https://oauth2.googleapis.com/token
+ 2018-10-09T15:46:16  [140498667821960] DEBUG urllib3.connectionpool Starting new HTTPS connection (1): oauth2.googleapis.com:443
+ 2018-10-09T15:46:17  [140498667821960] DEBUG urllib3.connectionpool https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+ 2018-10-09T15:46:17  [140498667821960] DEBUG urllib3.connectionpool Starting new HTTPS connection (1): www.googleapis.com:443
+ 2018-10-09T15:46:19  [140498667821960] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/cncf-ci/managedZones HTTP/1.1" 200 None
+ 2018-10-09T15:46:19  [140498667821960] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/cncf-ci/managedZones/k8s-cncf-ci/rrsets HTTP/1.1" 200 None
+ 2018-10-09T15:46:19  [140498667821960] DEBUG GoogleCloudProvider[cncf] populate: adding record  records: {u'type': u'NS', u'values': [u'ns-cloud-e1.googledomains.com.', u'ns-cloud-e2.googledomains.com.', u'ns-cloud-e3.googledomains.com.', u'ns-cloud-e4.googledomains.com.'], u'ttl': 21600}
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Record __init__: zone.name=k8s.cncf.ci., type=   NsRecord, name=
+ 2018-10-09T15:46:19  [140498667821960] INFO  GoogleCloudProvider[cncf] populate: found 1 records, exists=True
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, target=GoogleCloudProvider
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<NsRecord NS 300, test-cncf-aws.k8s.cncf.ci., ['ns-1458.awsdns-54.org.', 'ns-1825.awsdns-36.co.uk.', 'ns-265.awsdns-33.com.', 'ns-687.awsdns-21.net.']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-sigs.k8s.cncf.ci., ['c576f646fc']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, examples.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, dl.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, devstats.k8s.cncf.ci., k8s.devstats.cncf.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, pr.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, feature.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, redirect.k8s.cncf.ci., ['23.236.58.218']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<NsRecord NS 300, test-aws.k8s.cncf.ci., ['ns-1345.awsdns-40.org.', 'ns-1710.awsdns-21.co.uk.', 'ns-491.awsdns-61.com.', 'ns-969.awsdns-57.net.']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, features.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, apt.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-csi.k8s.cncf.ci., ['5aa2511ab7']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, cs.k8s.cncf.ci., ['147.75.97.58']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, go.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, submit-queue.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes.k8s.cncf.ci., ['8d02d39186']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, pr-test.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, git.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, discuss.k8s.cncf.ci., kubernetes.hosted-by-discourse.com.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, perf-dash.k8s.cncf.ci., ['35.188.102.189']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<NsRecord NS 300, test-gcp.k8s.cncf.ci., ['ns-cloud-e1.googledomains.com.', 'ns-cloud-e2.googledomains.com.', 'ns-cloud-e3.googledomains.com.', 'ns-cloud-e4.googledomains.com.']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-client.k8s.cncf.ci., ['8135eb1976']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, releases.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<MxRecord MX 300, k8s.cncf.ci., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-retired.k8s.cncf.ci., ['b36f0d3bca']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, spartakus.k8s.cncf.ci., ['107.178.240.20']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, slack.k8s.cncf.ci., ['104.197.79.9']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, rel.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, ci-test.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, velodrome.k8s.cncf.ci., ['104.197.200.129']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, *.docs.k8s.cncf.ci., netlifyglobalcdn.com.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, blog.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, testgrid.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-incubator.k8s.cncf.ci., ['cc457b8e52']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, code.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<NsRecord NS 300, test-e2e.k8s.cncf.ci., ['ns-cloud-a1.googledomains.com.', 'ns-cloud-a2.googledomains.com.', 'ns-cloud-a3.googledomains.com.', 'ns-cloud-a4.googledomains.com.']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, sigs.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, contributor.k8s.cncf.ci., kubernetes-contributor.netlify.com.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, docs.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, issue.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, prs.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, www.k8s.cncf.ci., k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, yum.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, cherrypick.k8s.cncf.ci., ['35.184.147.212']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, _acme-challenge.k8s.cncf.ci., ['7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, get.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, changelog.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, k8s.cncf.ci., ['23.236.58.218']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<TxtRecord TXT 300, k8s.cncf.ci., ['google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs', 'v=spf1 include:_spf.google.com ~all']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, gubernator.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, node-perf-dash.k8s.cncf.ci., ['130.211.155.47']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<CnameRecord CNAME 300, issues.k8s.cncf.ci., redirect.k8s.io.>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, gcsweb.k8s.cncf.ci., ['104.197.177.166']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Zone changes: zone=Zone<k8s.cncf.ci.>, create record=<ARecord A 300, prow.k8s.cncf.ci., ['35.186.196.185']>
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Plan __init__: Creates=54, Updates=0, Deletes=0Existing=1
+ 2018-10-09T15:46:19  [140498667821960] INFO  GoogleCloudProvider[cncf] plan:   Creates=54, Updates=0, Deletes=0, Existing Records=1
+ 2018-10-09T15:46:19  [140498667821960] INFO  Manager 
+ ,********************************************************************************
+ ,* k8s.cncf.ci.
+ ,********************************************************************************
+ ,* cncf (GoogleCloudProvider)
+ ,*   Create <NsRecord NS 300, test-cncf-aws.k8s.cncf.ci., ['ns-1458.awsdns-54.org.', 'ns-1825.awsdns-36.co.uk.', 'ns-265.awsdns-33.com.', 'ns-687.awsdns-21.net.']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-sigs.k8s.cncf.ci., ['c576f646fc']> (config)
+ ,*   Create <CnameRecord CNAME 300, examples.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, dl.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, devstats.k8s.cncf.ci., k8s.devstats.cncf.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, pr.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, feature.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, redirect.k8s.cncf.ci., ['23.236.58.218']> (config)
+ ,*   Create <NsRecord NS 300, test-aws.k8s.cncf.ci., ['ns-1345.awsdns-40.org.', 'ns-1710.awsdns-21.co.uk.', 'ns-491.awsdns-61.com.', 'ns-969.awsdns-57.net.']> (config)
+ ,*   Create <CnameRecord CNAME 300, features.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, apt.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-csi.k8s.cncf.ci., ['5aa2511ab7']> (config)
+ ,*   Create <ARecord A 300, cs.k8s.cncf.ci., ['147.75.97.58']> (config)
+ ,*   Create <CnameRecord CNAME 300, go.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, submit-queue.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes.k8s.cncf.ci., ['8d02d39186']> (config)
+ ,*   Create <CnameRecord CNAME 300, pr-test.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, git.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, discuss.k8s.cncf.ci., kubernetes.hosted-by-discourse.com.> (config)
+ ,*   Create <ARecord A 300, perf-dash.k8s.cncf.ci., ['35.188.102.189']> (config)
+ ,*   Create <NsRecord NS 300, test-gcp.k8s.cncf.ci., ['ns-cloud-e1.googledomains.com.', 'ns-cloud-e2.googledomains.com.', 'ns-cloud-e3.googledomains.com.', 'ns-cloud-e4.googledomains.com.']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-client.k8s.cncf.ci., ['8135eb1976']> (config)
+ ,*   Create <CnameRecord CNAME 300, releases.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <MxRecord MX 300, k8s.cncf.ci., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-retired.k8s.cncf.ci., ['b36f0d3bca']> (config)
+ ,*   Create <ARecord A 300, spartakus.k8s.cncf.ci., ['107.178.240.20']> (config)
+ ,*   Create <ARecord A 300, slack.k8s.cncf.ci., ['104.197.79.9']> (config)
+ ,*   Create <CnameRecord CNAME 300, rel.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, ci-test.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, velodrome.k8s.cncf.ci., ['104.197.200.129']> (config)
+ ,*   Create <CnameRecord CNAME 300, *.docs.k8s.cncf.ci., netlifyglobalcdn.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, blog.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, testgrid.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-incubator.k8s.cncf.ci., ['cc457b8e52']> (config)
+ ,*   Create <CnameRecord CNAME 300, code.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <NsRecord NS 300, test-e2e.k8s.cncf.ci., ['ns-cloud-a1.googledomains.com.', 'ns-cloud-a2.googledomains.com.', 'ns-cloud-a3.googledomains.com.', 'ns-cloud-a4.googledomains.com.']> (config)
+ ,*   Create <CnameRecord CNAME 300, sigs.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, contributor.k8s.cncf.ci., kubernetes-contributor.netlify.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, docs.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, issue.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, prs.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, www.k8s.cncf.ci., k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, yum.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, cherrypick.k8s.cncf.ci., ['35.184.147.212']> (config)
+ ,*   Create <TxtRecord TXT 300, _acme-challenge.k8s.cncf.ci., ['7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4']> (config)
+ ,*   Create <CnameRecord CNAME 300, get.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, changelog.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, k8s.cncf.ci., ['23.236.58.218']> (config)
+ ,*   Create <TxtRecord TXT 300, k8s.cncf.ci., ['google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs', 'v=spf1 include:_spf.google.com ~all']> (config)
+ ,*   Create <CnameRecord CNAME 300, gubernator.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, node-perf-dash.k8s.cncf.ci., ['130.211.155.47']> (config)
+ ,*   Create <CnameRecord CNAME 300, issues.k8s.cncf.ci., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, gcsweb.k8s.cncf.ci., ['104.197.177.166']> (config)
+ ,*   Create <ARecord A 300, prow.k8s.cncf.ci., ['35.186.196.185']> (config)
+ ,*   Summary: Creates=54, Updates=0, Deletes=0, Existing Records=1
+ ,********************************************************************************
+
+
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Manager sync:   checking safety
+ 2018-10-09T15:46:19  [140498667821960] DEBUG Manager sync:   applying
+ 2018-10-09T15:46:19  [140498667821960] INFO  GoogleCloudProvider[cncf] apply: making changes
+ 2018-10-09T15:46:19  [140498667821960] DEBUG GoogleCloudProvider[cncf] _apply: zone=k8s.cncf.ci., len(changes)=54
+ 2018-10-09T15:46:19  [140498667821960] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "POST /dns/v1/projects/cncf-ci/managedZones/k8s-cncf-ci/changes HTTP/1.1" 200 None
+ 2018-10-09T15:46:20  [140498667821960] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/cncf-ci/managedZones/k8s-cncf-ci/changes/1 HTTP/1.1" 200 None
+ 2018-10-09T15:46:20  [140498667821960] INFO  Manager sync:   54 total changes
+ #+END_SRC
+
+*** verify run
+
+ Just looking up the A record for now.
+
+ #+NAME: dig k8s.cncf.ci A
+ #+BEGIN_SRC shell
+ dig k8s.cncf.ci A | grep "IN.*A"
+ #+END_SRC
+
+ #+RESULTS: dig k8s.cncf.ci A
+ #+BEGIN_SRC text
+ ;k8s.cncf.ci.			IN	A
+ k8s.cncf.ci.		300	IN	A	23.236.58.218
+ #+END_SRC
+
+** DONE Canary test using canary.{k8s,kubernetes}.io
+   CLOSED: [2018-10-10 Wed 05:33]
+ - [X] Symlinked [[file:config/k8s.io.yaml][config/k8s.io.yaml]] to [[file:config/canary.k8s.io.yaml][config/canary.k8s.io.yaml]]
+ - [X] Symlinked [[file:config/k8s.io.yaml][config/kubernetes.io.yaml]] to [[file:config/canary.k8s.io.yaml][config/canary.kubernetes.io.yaml]]
+ - [X] Created [[file:canary-config.yaml][canary-config.yaml]] to only canary domains w/ symlinked configs
+ - [X] Dry Run
+ - [X] Doit Run
+ - [X] Verify Zones
+ 
+*** DONE dry run
+    CLOSED: [2018-10-10 Wed 05:25]
+ #+NAME: canary.{k8s,kubernetes}.io dry run
+ #+BEGIN_SRC shell
+ docker run \
+     -u `id -u` \
+     -v ~/.config/gcloud:/.config/gcloud:ro \
+     -v `pwd`/config:/octodns/config:ro \
+     -v `pwd`/canary-config.yaml:/octodns/config.yaml:ro \
+     myname/octodns \
+     octodns-sync \
+         --config-file=/octodns/config.yaml \
+         --log-stream-stdout \
+         --debug
+ #+END_SRC
+
+ #+RESULTS: canary.{k8s,kubernetes}.io dry run
+ #+BEGIN_SRC text
+ 2018-10-09T16:24:37  [139847195523976] INFO  Manager __init__: config_file=/octodns/config.yaml
+ 2018-10-09T16:24:37  [139847195523976] INFO  Manager __init__:   max_workers=1
+ 2018-10-09T16:24:37  [139847195523976] INFO  Manager __init__:   max_workers=False
+ 2018-10-09T16:24:37  [139847195523976] DEBUG Manager __init__:   configuring providers
+ 2018-10-09T16:24:38  [139847195523976] WARNING google.auth._default No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+ 2018-10-09T16:24:38  [139847195523976] DEBUG GoogleCloudProvider[gcp] __init__: id=gcp, apply_disabled=False, update_pcent_threshold=0.30, delete_pcent_threshold=0.30
+ 2018-10-09T16:24:38  [139847195523976] DEBUG YamlProvider[config] __init__: id=config, directory=/octodns/config, default_ttl=300, enforce_order=0
+ 2018-10-09T16:24:38  [139847195523976] DEBUG YamlProvider[config] __init__: id=config, apply_disabled=False, update_pcent_threshold=0.30, delete_pcent_threshold=0.30
+ 2018-10-09T16:24:38  [139847195523976] INFO  Manager sync: eligible_zones=[], eligible_targets=[], dry_run=True, force=False
+ 2018-10-09T16:24:38  [139847195523976] INFO  Manager sync:   zone=canary.kubernetes.io.
+ 2018-10-09T16:24:38  [139847195523976] INFO  Manager sync:   sources=['config'] -> targets=['gcp']
+ 2018-10-09T16:24:38  [139847195523976] INFO  Manager sync:   zone=canary.k8s.io.
+ 2018-10-09T16:24:38  [139847195523976] INFO  Manager sync:   sources=['config'] -> targets=['gcp']
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Manager sync:   populating, zone=canary.kubernetes.io.
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Manager configured_sub_zones: subs=[]
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Zone __init__: zone=Zone<canary.kubernetes.io.>, sub_zones=set([])
+ 2018-10-09T16:24:38  [139847195523976] DEBUG YamlProvider[config] populate: name=canary.kubernetes.io., target=False, lenient=False
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=    ARecord, name=
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=   MxRecord, name=
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=www
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=code
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=features
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-csi
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=apt
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=go
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=sigs
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-retired
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=examples
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=prs
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=contributor
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=issues
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=pr
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=git
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=releases
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=prow
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=feature
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=blog
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=testgrid
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=gubernator
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=rel
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=node-perf-dash
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=issue
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=spartakus
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=cs
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=gcsweb
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=dl
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=pr-test
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=rnl6zogsrrhp
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=devstats
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=get
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=docs
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-sigs
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-incubator
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=velodrome
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=discuss
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=    ARecord, name=slack
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=ci-test
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=changelog
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-client
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=yum
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=*.docs
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=submit-queue
+ 2018-10-09T16:24:38  [139847195523976] INFO  YamlProvider[config] populate:   found 47 records, exists=False
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Manager sync:   planning, zone=canary.kubernetes.io.
+ 2018-10-09T16:24:38  [139847195523976] INFO  GoogleCloudProvider[gcp] plan: desired=canary.kubernetes.io.
+ 2018-10-09T16:24:38  [139847195523976] DEBUG Zone __init__: zone=Zone<canary.kubernetes.io.>, sub_zones=set([])
+ 2018-10-09T16:24:38  [139847195523976] DEBUG GoogleCloudProvider[gcp] populate: name=canary.kubernetes.io., target=True, lenient=True
+ 2018-10-09T16:24:38  [139847195523976] DEBUG urllib3.util.retry Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+ 2018-10-09T16:24:38  [139847195523976] DEBUG google.auth.transport.requests Making request: POST https://oauth2.googleapis.com/token
+ 2018-10-09T16:24:38  [139847195523976] DEBUG urllib3.connectionpool Starting new HTTPS connection (1): oauth2.googleapis.com:443
+ 2018-10-09T16:24:39  [139847195523976] DEBUG urllib3.connectionpool https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+ 2018-10-09T16:24:39  [139847195523976] DEBUG urllib3.connectionpool Starting new HTTPS connection (1): www.googleapis.com:443
+ 2018-10-09T16:24:40  [139847195523976] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/kubernetes-public/managedZones HTTP/1.1" 200 None
+ 2018-10-09T16:24:40  [139847195523976] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/kubernetes-public/managedZones/canary-kubernetes-io/rrsets HTTP/1.1" 200 None
+ 2018-10-09T16:24:40  [139847195523976] DEBUG GoogleCloudProvider[gcp] populate: adding record  records: {u'type': u'NS', u'values': [u'ns-cloud-b1.googledomains.com.', u'ns-cloud-b2.googledomains.com.', u'ns-cloud-b3.googledomains.com.', u'ns-cloud-b4.googledomains.com.'], u'ttl': 21600}
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=   NsRecord, name=
+ 2018-10-09T16:24:40  [139847195523976] INFO  GoogleCloudProvider[gcp] populate: found 1 records, exists=True
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, target=GoogleCloudProvider
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-sigs.canary.kubernetes.io., ['745fa33033']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, examples.canary.kubernetes.io., examples.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, dl.canary.kubernetes.io., dl.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, devstats.canary.kubernetes.io., devstats.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, pr.canary.kubernetes.io., pr.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, feature.canary.kubernetes.io., feature.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes.canary.kubernetes.io., ['96af7368f8']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, features.canary.kubernetes.io., features.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, apt.canary.kubernetes.io., apt.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-csi.canary.kubernetes.io., ['f2ad88f040']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, ci-test.canary.kubernetes.io., ci-test.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, go.canary.kubernetes.io., go.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, prow.canary.kubernetes.io., prow.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, submit-queue.canary.kubernetes.io., submit-queue.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, node-perf-dash.canary.kubernetes.io., node-perf-dash.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, pr-test.canary.kubernetes.io., pr-test.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, git.canary.kubernetes.io., git.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, discuss.canary.kubernetes.io., kubernetes.hosted-by-discourse.com.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-client.canary.kubernetes.io., ['1b788a0e7d']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, releases.canary.kubernetes.io., releases.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<MxRecord MX 300, canary.kubernetes.io., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-retired.canary.kubernetes.io., ['3eb0291308']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<ARecord A 300, slack.canary.kubernetes.io., ['104.197.79.9']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, rel.canary.kubernetes.io., rel.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, *.docs.canary.kubernetes.io., netlifyglobalcdn.com.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, velodrome.canary.kubernetes.io., velodrome.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, blog.canary.kubernetes.io., blog.kubernetes.io.ghs.googlehosted.com.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, testgrid.canary.kubernetes.io., testgrid.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-incubator.canary.kubernetes.io., ['c450708897']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, get.canary.kubernetes.io., get.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, rnl6zogsrrhp.canary.kubernetes.io., gv-4u7qekjwhnb7zi.dv.googlehosted.com.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, sigs.canary.kubernetes.io., sigs.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, contributor.canary.kubernetes.io., contributor.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, docs.canary.kubernetes.io., docs.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, issue.canary.kubernetes.io., issue.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, prs.canary.kubernetes.io., prs.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, gcsweb.canary.kubernetes.io., gcsweb.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, www.canary.kubernetes.io., kubernetes.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, yum.canary.kubernetes.io., yum.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, code.canary.kubernetes.io., code.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, cs.canary.kubernetes.io., cs.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, spartakus.canary.kubernetes.io., spartakus.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<ARecord A 300, canary.kubernetes.io., ['104.198.14.52']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, canary.kubernetes.io., ['google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8', 'v=spf1 include:_spf.google.com ~all']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, gubernator.canary.kubernetes.io., gubernator.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, changelog.canary.kubernetes.io., changelog.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, issues.canary.kubernetes.io., issues.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Plan __init__: Creates=47, Updates=0, Deletes=0Existing=1
+ 2018-10-09T16:24:40  [139847195523976] INFO  GoogleCloudProvider[gcp] plan:   Creates=47, Updates=0, Deletes=0, Existing Records=1
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Manager sync:   populating, zone=canary.k8s.io.
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Manager configured_sub_zones: subs=[]
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone __init__: zone=Zone<canary.k8s.io.>, sub_zones=set([])
+ 2018-10-09T16:24:40  [139847195523976] DEBUG YamlProvider[config] populate: name=canary.k8s.io., target=False, lenient=False
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=   MxRecord, name=
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=www
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=code
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=features
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=cherrypick
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-csi
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=apt
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=go
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_acme-challenge
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-retired
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=examples
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=prs
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=cs
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=issues
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=test-e2e
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=redirect
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=git
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=releases
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=prow
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=feature
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=blog
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=testgrid
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=gubernator
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=rel
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=node-perf-dash
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=issue
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=spartakus
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=gcsweb
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=pr
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=dl
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=pr-test
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=devstats
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=get
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=docs
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-sigs
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=contributor
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=test-gcp
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-incubator
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=velodrome
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=perf-dash
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=test-cncf-aws
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=discuss
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=test-aws
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=slack
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=ci-test
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=changelog
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=sigs
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-client
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=yum
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=*.docs
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=submit-queue
+ 2018-10-09T16:24:40  [139847195523976] INFO  YamlProvider[config] populate:   found 54 records, exists=False
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Manager sync:   planning, zone=canary.k8s.io.
+ 2018-10-09T16:24:40  [139847195523976] INFO  GoogleCloudProvider[gcp] plan: desired=canary.k8s.io.
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone __init__: zone=Zone<canary.k8s.io.>, sub_zones=set([])
+ 2018-10-09T16:24:40  [139847195523976] DEBUG GoogleCloudProvider[gcp] populate: name=canary.k8s.io., target=True, lenient=True
+ 2018-10-09T16:24:40  [139847195523976] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/kubernetes-public/managedZones/canary-k8s-io/rrsets HTTP/1.1" 200 None
+ 2018-10-09T16:24:40  [139847195523976] DEBUG GoogleCloudProvider[gcp] populate: adding record  records: {u'type': u'NS', u'values': [u'ns-cloud-c1.googledomains.com.', u'ns-cloud-c2.googledomains.com.', u'ns-cloud-c3.googledomains.com.', u'ns-cloud-c4.googledomains.com.'], u'ttl': 21600}
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=
+ 2018-10-09T16:24:40  [139847195523976] INFO  GoogleCloudProvider[gcp] populate: found 1 records, exists=True
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, target=GoogleCloudProvider
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<NsRecord NS 300, test-cncf-aws.canary.k8s.io., ['ns-1458.awsdns-54.org.', 'ns-1825.awsdns-36.co.uk.', 'ns-265.awsdns-33.com.', 'ns-687.awsdns-21.net.']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-sigs.canary.k8s.io., ['c576f646fc']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, examples.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, dl.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, devstats.canary.k8s.io., k8s.devstats.cncf.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, pr.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, feature.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, redirect.canary.k8s.io., ['23.236.58.218']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<NsRecord NS 300, test-aws.canary.k8s.io., ['ns-1345.awsdns-40.org.', 'ns-1710.awsdns-21.co.uk.', 'ns-491.awsdns-61.com.', 'ns-969.awsdns-57.net.']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, features.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, apt.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-csi.canary.k8s.io., ['5aa2511ab7']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, cs.canary.k8s.io., ['147.75.97.58']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, go.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, submit-queue.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes.canary.k8s.io., ['8d02d39186']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, pr-test.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, git.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, discuss.canary.k8s.io., kubernetes.hosted-by-discourse.com.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, perf-dash.canary.k8s.io., ['35.188.102.189']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<NsRecord NS 300, test-gcp.canary.k8s.io., ['ns-cloud-e1.googledomains.com.', 'ns-cloud-e2.googledomains.com.', 'ns-cloud-e3.googledomains.com.', 'ns-cloud-e4.googledomains.com.']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-client.canary.k8s.io., ['8135eb1976']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, releases.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<MxRecord MX 300, canary.k8s.io., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-retired.canary.k8s.io., ['b36f0d3bca']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, spartakus.canary.k8s.io., ['107.178.240.20']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, slack.canary.k8s.io., ['104.197.79.9']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, rel.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, ci-test.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, velodrome.canary.k8s.io., ['104.197.200.129']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, *.docs.canary.k8s.io., netlifyglobalcdn.com.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, blog.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, testgrid.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-incubator.canary.k8s.io., ['cc457b8e52']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, code.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<NsRecord NS 300, test-e2e.canary.k8s.io., ['ns-cloud-a1.googledomains.com.', 'ns-cloud-a2.googledomains.com.', 'ns-cloud-a3.googledomains.com.', 'ns-cloud-a4.googledomains.com.']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, sigs.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, contributor.canary.k8s.io., kubernetes-contributor.netlify.com.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, docs.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, issue.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, prs.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, www.canary.k8s.io., k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, yum.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, cherrypick.canary.k8s.io., ['35.184.147.212']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _acme-challenge.canary.k8s.io., ['7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, get.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, changelog.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, canary.k8s.io., ['23.236.58.218']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, canary.k8s.io., ['google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs', 'v=spf1 include:_spf.google.com ~all']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, gubernator.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, node-perf-dash.canary.k8s.io., ['130.211.155.47']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, issues.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, gcsweb.canary.k8s.io., ['104.197.177.166']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, prow.canary.k8s.io., ['35.186.196.185']>
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Plan __init__: Creates=54, Updates=0, Deletes=0Existing=1
+ 2018-10-09T16:24:40  [139847195523976] INFO  GoogleCloudProvider[gcp] plan:   Creates=54, Updates=0, Deletes=0, Existing Records=1
+ 2018-10-09T16:24:40  [139847195523976] INFO  Manager 
+ ,********************************************************************************
+ ,* canary.kubernetes.io.
+ ,********************************************************************************
+ ,* gcp (GoogleCloudProvider)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-sigs.canary.kubernetes.io., ['745fa33033']> (config)
+ ,*   Create <CnameRecord CNAME 300, examples.canary.kubernetes.io., examples.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, dl.canary.kubernetes.io., dl.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, devstats.canary.kubernetes.io., devstats.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, pr.canary.kubernetes.io., pr.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, feature.canary.kubernetes.io., feature.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes.canary.kubernetes.io., ['96af7368f8']> (config)
+ ,*   Create <CnameRecord CNAME 300, features.canary.kubernetes.io., features.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, apt.canary.kubernetes.io., apt.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-csi.canary.kubernetes.io., ['f2ad88f040']> (config)
+ ,*   Create <CnameRecord CNAME 300, ci-test.canary.kubernetes.io., ci-test.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, go.canary.kubernetes.io., go.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, prow.canary.kubernetes.io., prow.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, submit-queue.canary.kubernetes.io., submit-queue.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, node-perf-dash.canary.kubernetes.io., node-perf-dash.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, pr-test.canary.kubernetes.io., pr-test.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, git.canary.kubernetes.io., git.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, discuss.canary.kubernetes.io., kubernetes.hosted-by-discourse.com.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-client.canary.kubernetes.io., ['1b788a0e7d']> (config)
+ ,*   Create <CnameRecord CNAME 300, releases.canary.kubernetes.io., releases.k8s.io.> (config)
+ ,*   Create <MxRecord MX 300, canary.kubernetes.io., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-retired.canary.kubernetes.io., ['3eb0291308']> (config)
+ ,*   Create <ARecord A 300, slack.canary.kubernetes.io., ['104.197.79.9']> (config)
+ ,*   Create <CnameRecord CNAME 300, rel.canary.kubernetes.io., rel.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, *.docs.canary.kubernetes.io., netlifyglobalcdn.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, velodrome.canary.kubernetes.io., velodrome.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, blog.canary.kubernetes.io., blog.kubernetes.io.ghs.googlehosted.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, testgrid.canary.kubernetes.io., testgrid.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-incubator.canary.kubernetes.io., ['c450708897']> (config)
+ ,*   Create <CnameRecord CNAME 300, get.canary.kubernetes.io., get.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, rnl6zogsrrhp.canary.kubernetes.io., gv-4u7qekjwhnb7zi.dv.googlehosted.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, sigs.canary.kubernetes.io., sigs.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, contributor.canary.kubernetes.io., contributor.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, docs.canary.kubernetes.io., docs.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, issue.canary.kubernetes.io., issue.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, prs.canary.kubernetes.io., prs.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, gcsweb.canary.kubernetes.io., gcsweb.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, www.canary.kubernetes.io., kubernetes.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, yum.canary.kubernetes.io., yum.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, code.canary.kubernetes.io., code.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, cs.canary.kubernetes.io., cs.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, spartakus.canary.kubernetes.io., spartakus.k8s.io.> (config)
+ ,*   Create <ARecord A 300, canary.kubernetes.io., ['104.198.14.52']> (config)
+ ,*   Create <TxtRecord TXT 300, canary.kubernetes.io., ['google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8', 'v=spf1 include:_spf.google.com ~all']> (config)
+ ,*   Create <CnameRecord CNAME 300, gubernator.canary.kubernetes.io., gubernator.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, changelog.canary.kubernetes.io., changelog.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, issues.canary.kubernetes.io., issues.k8s.io.> (config)
+ ,*   Summary: Creates=47, Updates=0, Deletes=0, Existing Records=1
+ ,********************************************************************************
+ ,* canary.k8s.io.
+ ,********************************************************************************
+ ,* gcp (GoogleCloudProvider)
+ ,*   Create <NsRecord NS 300, test-cncf-aws.canary.k8s.io., ['ns-1458.awsdns-54.org.', 'ns-1825.awsdns-36.co.uk.', 'ns-265.awsdns-33.com.', 'ns-687.awsdns-21.net.']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-sigs.canary.k8s.io., ['c576f646fc']> (config)
+ ,*   Create <CnameRecord CNAME 300, examples.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, dl.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, devstats.canary.k8s.io., k8s.devstats.cncf.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, pr.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, feature.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, redirect.canary.k8s.io., ['23.236.58.218']> (config)
+ ,*   Create <NsRecord NS 300, test-aws.canary.k8s.io., ['ns-1345.awsdns-40.org.', 'ns-1710.awsdns-21.co.uk.', 'ns-491.awsdns-61.com.', 'ns-969.awsdns-57.net.']> (config)
+ ,*   Create <CnameRecord CNAME 300, features.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, apt.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-csi.canary.k8s.io., ['5aa2511ab7']> (config)
+ ,*   Create <ARecord A 300, cs.canary.k8s.io., ['147.75.97.58']> (config)
+ ,*   Create <CnameRecord CNAME 300, go.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, submit-queue.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes.canary.k8s.io., ['8d02d39186']> (config)
+ ,*   Create <CnameRecord CNAME 300, pr-test.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, git.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, discuss.canary.k8s.io., kubernetes.hosted-by-discourse.com.> (config)
+ ,*   Create <ARecord A 300, perf-dash.canary.k8s.io., ['35.188.102.189']> (config)
+ ,*   Create <NsRecord NS 300, test-gcp.canary.k8s.io., ['ns-cloud-e1.googledomains.com.', 'ns-cloud-e2.googledomains.com.', 'ns-cloud-e3.googledomains.com.', 'ns-cloud-e4.googledomains.com.']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-client.canary.k8s.io., ['8135eb1976']> (config)
+ ,*   Create <CnameRecord CNAME 300, releases.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <MxRecord MX 300, canary.k8s.io., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-retired.canary.k8s.io., ['b36f0d3bca']> (config)
+ ,*   Create <ARecord A 300, spartakus.canary.k8s.io., ['107.178.240.20']> (config)
+ ,*   Create <ARecord A 300, slack.canary.k8s.io., ['104.197.79.9']> (config)
+ ,*   Create <CnameRecord CNAME 300, rel.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, ci-test.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, velodrome.canary.k8s.io., ['104.197.200.129']> (config)
+ ,*   Create <CnameRecord CNAME 300, *.docs.canary.k8s.io., netlifyglobalcdn.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, blog.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, testgrid.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-incubator.canary.k8s.io., ['cc457b8e52']> (config)
+ ,*   Create <CnameRecord CNAME 300, code.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <NsRecord NS 300, test-e2e.canary.k8s.io., ['ns-cloud-a1.googledomains.com.', 'ns-cloud-a2.googledomains.com.', 'ns-cloud-a3.googledomains.com.', 'ns-cloud-a4.googledomains.com.']> (config)
+ ,*   Create <CnameRecord CNAME 300, sigs.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, contributor.canary.k8s.io., kubernetes-contributor.netlify.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, docs.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, issue.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, prs.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, www.canary.k8s.io., k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, yum.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, cherrypick.canary.k8s.io., ['35.184.147.212']> (config)
+ ,*   Create <TxtRecord TXT 300, _acme-challenge.canary.k8s.io., ['7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4']> (config)
+ ,*   Create <CnameRecord CNAME 300, get.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, changelog.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, canary.k8s.io., ['23.236.58.218']> (config)
+ ,*   Create <TxtRecord TXT 300, canary.k8s.io., ['google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs', 'v=spf1 include:_spf.google.com ~all']> (config)
+ ,*   Create <CnameRecord CNAME 300, gubernator.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, node-perf-dash.canary.k8s.io., ['130.211.155.47']> (config)
+ ,*   Create <CnameRecord CNAME 300, issues.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, gcsweb.canary.k8s.io., ['104.197.177.166']> (config)
+ ,*   Create <ARecord A 300, prow.canary.k8s.io., ['35.186.196.185']> (config)
+ ,*   Summary: Creates=54, Updates=0, Deletes=0, Existing Records=1
+ ,********************************************************************************
+
+
+ 2018-10-09T16:24:40  [139847195523976] DEBUG Manager sync:   checking safety
+ #+END_SRC
+
+*** DONE doit run
+    CLOSED: [2018-10-10 Wed 05:26]
+ #+NAME: canary.{k8s,kubernetes}.io doit run
+ #+BEGIN_SRC shell
+ docker run \
+     -u `id -u` \
+     -v ~/.config/gcloud:/.config/gcloud:ro \
+     -v `pwd`/config:/octodns/config:ro \
+     -v `pwd`/canary-config.yaml:/octodns/config.yaml:ro \
+     myname/octodns \
+     octodns-sync \
+         --config-file=/octodns/config.yaml \
+         --log-stream-stdout \
+         --debug \
+         --doit
+ #+END_SRC
+
+ #+RESULTS: canary.{k8s,kubernetes}.io doit run
+ #+BEGIN_SRC text
+ 2018-10-09T16:26:04  [140244711996296] INFO  Manager __init__: config_file=/octodns/config.yaml
+ 2018-10-09T16:26:04  [140244711996296] INFO  Manager __init__:   max_workers=1
+ 2018-10-09T16:26:04  [140244711996296] INFO  Manager __init__:   max_workers=False
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Manager __init__:   configuring providers
+ 2018-10-09T16:26:04  [140244711996296] WARNING google.auth._default No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+ 2018-10-09T16:26:04  [140244711996296] DEBUG GoogleCloudProvider[gcp] __init__: id=gcp, apply_disabled=False, update_pcent_threshold=0.30, delete_pcent_threshold=0.30
+ 2018-10-09T16:26:04  [140244711996296] DEBUG YamlProvider[config] __init__: id=config, directory=/octodns/config, default_ttl=300, enforce_order=0
+ 2018-10-09T16:26:04  [140244711996296] DEBUG YamlProvider[config] __init__: id=config, apply_disabled=False, update_pcent_threshold=0.30, delete_pcent_threshold=0.30
+ 2018-10-09T16:26:04  [140244711996296] INFO  Manager sync: eligible_zones=[], eligible_targets=[], dry_run=False, force=False
+ 2018-10-09T16:26:04  [140244711996296] INFO  Manager sync:   zone=canary.kubernetes.io.
+ 2018-10-09T16:26:04  [140244711996296] INFO  Manager sync:   sources=['config'] -> targets=['gcp']
+ 2018-10-09T16:26:04  [140244711996296] INFO  Manager sync:   zone=canary.k8s.io.
+ 2018-10-09T16:26:04  [140244711996296] INFO  Manager sync:   sources=['config'] -> targets=['gcp']
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Manager sync:   populating, zone=canary.kubernetes.io.
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Manager configured_sub_zones: subs=[]
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Zone __init__: zone=Zone<canary.kubernetes.io.>, sub_zones=set([])
+ 2018-10-09T16:26:04  [140244711996296] DEBUG YamlProvider[config] populate: name=canary.kubernetes.io., target=False, lenient=False
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=    ARecord, name=
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=   MxRecord, name=
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=www
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=code
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=features
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-csi
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=apt
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=go
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=sigs
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-retired
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=examples
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=prs
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=contributor
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=issues
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=pr
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=git
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=releases
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=prow
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=feature
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=blog
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=testgrid
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=gubernator
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=rel
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=node-perf-dash
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=issue
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=spartakus
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=cs
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=gcsweb
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=dl
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=pr-test
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=rnl6zogsrrhp
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=devstats
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=get
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=docs
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-sigs
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-incubator
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=velodrome
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=discuss
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=    ARecord, name=slack
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=ci-test
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=changelog
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=  TxtRecord, name=_github-challenge-kubernetes-client
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=yum
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=*.docs
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=CnameRecord, name=submit-queue
+ 2018-10-09T16:26:04  [140244711996296] INFO  YamlProvider[config] populate:   found 47 records, exists=False
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Manager sync:   planning, zone=canary.kubernetes.io.
+ 2018-10-09T16:26:04  [140244711996296] INFO  GoogleCloudProvider[gcp] plan: desired=canary.kubernetes.io.
+ 2018-10-09T16:26:04  [140244711996296] DEBUG Zone __init__: zone=Zone<canary.kubernetes.io.>, sub_zones=set([])
+ 2018-10-09T16:26:04  [140244711996296] DEBUG GoogleCloudProvider[gcp] populate: name=canary.kubernetes.io., target=True, lenient=True
+ 2018-10-09T16:26:04  [140244711996296] DEBUG urllib3.util.retry Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+ 2018-10-09T16:26:04  [140244711996296] DEBUG google.auth.transport.requests Making request: POST https://oauth2.googleapis.com/token
+ 2018-10-09T16:26:04  [140244711996296] DEBUG urllib3.connectionpool Starting new HTTPS connection (1): oauth2.googleapis.com:443
+ 2018-10-09T16:26:05  [140244711996296] DEBUG urllib3.connectionpool https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+ 2018-10-09T16:26:05  [140244711996296] DEBUG urllib3.connectionpool Starting new HTTPS connection (1): www.googleapis.com:443
+ 2018-10-09T16:26:06  [140244711996296] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/kubernetes-public/managedZones HTTP/1.1" 200 None
+ 2018-10-09T16:26:06  [140244711996296] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/kubernetes-public/managedZones/canary-kubernetes-io/rrsets HTTP/1.1" 200 None
+ 2018-10-09T16:26:06  [140244711996296] DEBUG GoogleCloudProvider[gcp] populate: adding record  records: {u'type': u'NS', u'values': [u'ns-cloud-b1.googledomains.com.', u'ns-cloud-b2.googledomains.com.', u'ns-cloud-b3.googledomains.com.', u'ns-cloud-b4.googledomains.com.'], u'ttl': 21600}
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Record __init__: zone.name=canary.kubernetes.io., type=   NsRecord, name=
+ 2018-10-09T16:26:06  [140244711996296] INFO  GoogleCloudProvider[gcp] populate: found 1 records, exists=True
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, target=GoogleCloudProvider
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-sigs.canary.kubernetes.io., ['745fa33033']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, examples.canary.kubernetes.io., examples.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, dl.canary.kubernetes.io., dl.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, devstats.canary.kubernetes.io., devstats.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, pr.canary.kubernetes.io., pr.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, feature.canary.kubernetes.io., feature.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes.canary.kubernetes.io., ['96af7368f8']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, features.canary.kubernetes.io., features.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, apt.canary.kubernetes.io., apt.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-csi.canary.kubernetes.io., ['f2ad88f040']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, ci-test.canary.kubernetes.io., ci-test.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, go.canary.kubernetes.io., go.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, prow.canary.kubernetes.io., prow.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, submit-queue.canary.kubernetes.io., submit-queue.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, node-perf-dash.canary.kubernetes.io., node-perf-dash.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, pr-test.canary.kubernetes.io., pr-test.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, git.canary.kubernetes.io., git.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, discuss.canary.kubernetes.io., kubernetes.hosted-by-discourse.com.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-client.canary.kubernetes.io., ['1b788a0e7d']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, releases.canary.kubernetes.io., releases.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<MxRecord MX 300, canary.kubernetes.io., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-retired.canary.kubernetes.io., ['3eb0291308']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<ARecord A 300, slack.canary.kubernetes.io., ['104.197.79.9']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, rel.canary.kubernetes.io., rel.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, *.docs.canary.kubernetes.io., netlifyglobalcdn.com.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, velodrome.canary.kubernetes.io., velodrome.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, blog.canary.kubernetes.io., blog.kubernetes.io.ghs.googlehosted.com.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, testgrid.canary.kubernetes.io., testgrid.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-incubator.canary.kubernetes.io., ['c450708897']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, get.canary.kubernetes.io., get.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, rnl6zogsrrhp.canary.kubernetes.io., gv-4u7qekjwhnb7zi.dv.googlehosted.com.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, sigs.canary.kubernetes.io., sigs.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, contributor.canary.kubernetes.io., contributor.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, docs.canary.kubernetes.io., docs.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, issue.canary.kubernetes.io., issue.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, prs.canary.kubernetes.io., prs.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, gcsweb.canary.kubernetes.io., gcsweb.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, www.canary.kubernetes.io., kubernetes.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, yum.canary.kubernetes.io., yum.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, code.canary.kubernetes.io., code.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, cs.canary.kubernetes.io., cs.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, spartakus.canary.kubernetes.io., spartakus.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<ARecord A 300, canary.kubernetes.io., ['104.198.14.52']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<TxtRecord TXT 300, canary.kubernetes.io., ['google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8', 'v=spf1 include:_spf.google.com ~all']>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, gubernator.canary.kubernetes.io., gubernator.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, changelog.canary.kubernetes.io., changelog.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone changes: zone=Zone<canary.kubernetes.io.>, create record=<CnameRecord CNAME 300, issues.canary.kubernetes.io., issues.k8s.io.>
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Plan __init__: Creates=47, Updates=0, Deletes=0Existing=1
+ 2018-10-09T16:26:06  [140244711996296] INFO  GoogleCloudProvider[gcp] plan:   Creates=47, Updates=0, Deletes=0, Existing Records=1
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Manager sync:   populating, zone=canary.k8s.io.
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Manager configured_sub_zones: subs=[]
+ 2018-10-09T16:26:06  [140244711996296] DEBUG Zone __init__: zone=Zone<canary.k8s.io.>, sub_zones=set([])
+ 2018-10-09T16:26:06  [140244711996296] DEBUG YamlProvider[config] populate: name=canary.k8s.io., target=False, lenient=False
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=   MxRecord, name=
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=www
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=code
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=features
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=cherrypick
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-csi
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=apt
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=go
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_acme-challenge
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-retired
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=examples
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=prs
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=cs
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=issues
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=test-e2e
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=redirect
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=git
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=releases
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=prow
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=feature
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=blog
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=testgrid
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=gubernator
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=rel
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=node-perf-dash
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=issue
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=spartakus
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=gcsweb
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=pr
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=dl
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=pr-test
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=devstats
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=get
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=docs
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-sigs
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=contributor
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=test-gcp
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-incubator
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=velodrome
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=perf-dash
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=test-cncf-aws
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=discuss
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=test-aws
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=    ARecord, name=slack
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=ci-test
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=changelog
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=sigs
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=  TxtRecord, name=_github-challenge-kubernetes-client
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=yum
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=*.docs
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=CnameRecord, name=submit-queue
+ 2018-10-09T16:26:07  [140244711996296] INFO  YamlProvider[config] populate:   found 54 records, exists=False
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Manager sync:   planning, zone=canary.k8s.io.
+ 2018-10-09T16:26:07  [140244711996296] INFO  GoogleCloudProvider[gcp] plan: desired=canary.k8s.io.
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone __init__: zone=Zone<canary.k8s.io.>, sub_zones=set([])
+ 2018-10-09T16:26:07  [140244711996296] DEBUG GoogleCloudProvider[gcp] populate: name=canary.k8s.io., target=True, lenient=True
+ 2018-10-09T16:26:07  [140244711996296] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/kubernetes-public/managedZones/canary-k8s-io/rrsets HTTP/1.1" 200 None
+ 2018-10-09T16:26:07  [140244711996296] DEBUG GoogleCloudProvider[gcp] populate: adding record  records: {u'type': u'NS', u'values': [u'ns-cloud-c1.googledomains.com.', u'ns-cloud-c2.googledomains.com.', u'ns-cloud-c3.googledomains.com.', u'ns-cloud-c4.googledomains.com.'], u'ttl': 21600}
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Record __init__: zone.name=canary.k8s.io., type=   NsRecord, name=
+ 2018-10-09T16:26:07  [140244711996296] INFO  GoogleCloudProvider[gcp] populate: found 1 records, exists=True
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, target=GoogleCloudProvider
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<NsRecord NS 300, test-cncf-aws.canary.k8s.io., ['ns-1458.awsdns-54.org.', 'ns-1825.awsdns-36.co.uk.', 'ns-265.awsdns-33.com.', 'ns-687.awsdns-21.net.']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-sigs.canary.k8s.io., ['c576f646fc']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, examples.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, dl.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, devstats.canary.k8s.io., k8s.devstats.cncf.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, pr.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, feature.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, redirect.canary.k8s.io., ['23.236.58.218']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<NsRecord NS 300, test-aws.canary.k8s.io., ['ns-1345.awsdns-40.org.', 'ns-1710.awsdns-21.co.uk.', 'ns-491.awsdns-61.com.', 'ns-969.awsdns-57.net.']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, features.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, apt.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-csi.canary.k8s.io., ['5aa2511ab7']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, cs.canary.k8s.io., ['147.75.97.58']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, go.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, submit-queue.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes.canary.k8s.io., ['8d02d39186']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, pr-test.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, git.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, discuss.canary.k8s.io., kubernetes.hosted-by-discourse.com.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, perf-dash.canary.k8s.io., ['35.188.102.189']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<NsRecord NS 300, test-gcp.canary.k8s.io., ['ns-cloud-e1.googledomains.com.', 'ns-cloud-e2.googledomains.com.', 'ns-cloud-e3.googledomains.com.', 'ns-cloud-e4.googledomains.com.']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-client.canary.k8s.io., ['8135eb1976']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, releases.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<MxRecord MX 300, canary.k8s.io., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-retired.canary.k8s.io., ['b36f0d3bca']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, spartakus.canary.k8s.io., ['107.178.240.20']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, slack.canary.k8s.io., ['104.197.79.9']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, rel.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, ci-test.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, velodrome.canary.k8s.io., ['104.197.200.129']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, *.docs.canary.k8s.io., netlifyglobalcdn.com.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, blog.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, testgrid.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _github-challenge-kubernetes-incubator.canary.k8s.io., ['cc457b8e52']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, code.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<NsRecord NS 300, test-e2e.canary.k8s.io., ['ns-cloud-a1.googledomains.com.', 'ns-cloud-a2.googledomains.com.', 'ns-cloud-a3.googledomains.com.', 'ns-cloud-a4.googledomains.com.']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, sigs.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, contributor.canary.k8s.io., kubernetes-contributor.netlify.com.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, docs.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, issue.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, prs.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, www.canary.k8s.io., k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, yum.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, cherrypick.canary.k8s.io., ['35.184.147.212']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, _acme-challenge.canary.k8s.io., ['7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, get.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, changelog.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, canary.k8s.io., ['23.236.58.218']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<TxtRecord TXT 300, canary.k8s.io., ['google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs', 'v=spf1 include:_spf.google.com ~all']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, gubernator.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, node-perf-dash.canary.k8s.io., ['130.211.155.47']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<CnameRecord CNAME 300, issues.canary.k8s.io., redirect.k8s.io.>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, gcsweb.canary.k8s.io., ['104.197.177.166']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Zone changes: zone=Zone<canary.k8s.io.>, create record=<ARecord A 300, prow.canary.k8s.io., ['35.186.196.185']>
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Plan __init__: Creates=54, Updates=0, Deletes=0Existing=1
+ 2018-10-09T16:26:07  [140244711996296] INFO  GoogleCloudProvider[gcp] plan:   Creates=54, Updates=0, Deletes=0, Existing Records=1
+ 2018-10-09T16:26:07  [140244711996296] INFO  Manager 
+ ,********************************************************************************
+ ,* canary.kubernetes.io.
+ ,********************************************************************************
+ ,* gcp (GoogleCloudProvider)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-sigs.canary.kubernetes.io., ['745fa33033']> (config)
+ ,*   Create <CnameRecord CNAME 300, examples.canary.kubernetes.io., examples.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, dl.canary.kubernetes.io., dl.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, devstats.canary.kubernetes.io., devstats.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, pr.canary.kubernetes.io., pr.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, feature.canary.kubernetes.io., feature.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes.canary.kubernetes.io., ['96af7368f8']> (config)
+ ,*   Create <CnameRecord CNAME 300, features.canary.kubernetes.io., features.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, apt.canary.kubernetes.io., apt.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-csi.canary.kubernetes.io., ['f2ad88f040']> (config)
+ ,*   Create <CnameRecord CNAME 300, ci-test.canary.kubernetes.io., ci-test.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, go.canary.kubernetes.io., go.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, prow.canary.kubernetes.io., prow.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, submit-queue.canary.kubernetes.io., submit-queue.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, node-perf-dash.canary.kubernetes.io., node-perf-dash.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, pr-test.canary.kubernetes.io., pr-test.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, git.canary.kubernetes.io., git.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, discuss.canary.kubernetes.io., kubernetes.hosted-by-discourse.com.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-client.canary.kubernetes.io., ['1b788a0e7d']> (config)
+ ,*   Create <CnameRecord CNAME 300, releases.canary.kubernetes.io., releases.k8s.io.> (config)
+ ,*   Create <MxRecord MX 300, canary.kubernetes.io., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-retired.canary.kubernetes.io., ['3eb0291308']> (config)
+ ,*   Create <ARecord A 300, slack.canary.kubernetes.io., ['104.197.79.9']> (config)
+ ,*   Create <CnameRecord CNAME 300, rel.canary.kubernetes.io., rel.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, *.docs.canary.kubernetes.io., netlifyglobalcdn.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, velodrome.canary.kubernetes.io., velodrome.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, blog.canary.kubernetes.io., blog.kubernetes.io.ghs.googlehosted.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, testgrid.canary.kubernetes.io., testgrid.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-incubator.canary.kubernetes.io., ['c450708897']> (config)
+ ,*   Create <CnameRecord CNAME 300, get.canary.kubernetes.io., get.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, rnl6zogsrrhp.canary.kubernetes.io., gv-4u7qekjwhnb7zi.dv.googlehosted.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, sigs.canary.kubernetes.io., sigs.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, contributor.canary.kubernetes.io., contributor.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, docs.canary.kubernetes.io., docs.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, issue.canary.kubernetes.io., issue.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, prs.canary.kubernetes.io., prs.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, gcsweb.canary.kubernetes.io., gcsweb.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, www.canary.kubernetes.io., kubernetes.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, yum.canary.kubernetes.io., yum.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, code.canary.kubernetes.io., code.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, cs.canary.kubernetes.io., cs.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, spartakus.canary.kubernetes.io., spartakus.k8s.io.> (config)
+ ,*   Create <ARecord A 300, canary.kubernetes.io., ['104.198.14.52']> (config)
+ ,*   Create <TxtRecord TXT 300, canary.kubernetes.io., ['google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8', 'v=spf1 include:_spf.google.com ~all']> (config)
+ ,*   Create <CnameRecord CNAME 300, gubernator.canary.kubernetes.io., gubernator.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, changelog.canary.kubernetes.io., changelog.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, issues.canary.kubernetes.io., issues.k8s.io.> (config)
+ ,*   Summary: Creates=47, Updates=0, Deletes=0, Existing Records=1
+ ,********************************************************************************
+ ,* canary.k8s.io.
+ ,********************************************************************************
+ ,* gcp (GoogleCloudProvider)
+ ,*   Create <NsRecord NS 300, test-cncf-aws.canary.k8s.io., ['ns-1458.awsdns-54.org.', 'ns-1825.awsdns-36.co.uk.', 'ns-265.awsdns-33.com.', 'ns-687.awsdns-21.net.']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-sigs.canary.k8s.io., ['c576f646fc']> (config)
+ ,*   Create <CnameRecord CNAME 300, examples.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, dl.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, devstats.canary.k8s.io., k8s.devstats.cncf.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, pr.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, feature.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, redirect.canary.k8s.io., ['23.236.58.218']> (config)
+ ,*   Create <NsRecord NS 300, test-aws.canary.k8s.io., ['ns-1345.awsdns-40.org.', 'ns-1710.awsdns-21.co.uk.', 'ns-491.awsdns-61.com.', 'ns-969.awsdns-57.net.']> (config)
+ ,*   Create <CnameRecord CNAME 300, features.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, apt.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-csi.canary.k8s.io., ['5aa2511ab7']> (config)
+ ,*   Create <ARecord A 300, cs.canary.k8s.io., ['147.75.97.58']> (config)
+ ,*   Create <CnameRecord CNAME 300, go.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, submit-queue.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes.canary.k8s.io., ['8d02d39186']> (config)
+ ,*   Create <CnameRecord CNAME 300, pr-test.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, git.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, discuss.canary.k8s.io., kubernetes.hosted-by-discourse.com.> (config)
+ ,*   Create <ARecord A 300, perf-dash.canary.k8s.io., ['35.188.102.189']> (config)
+ ,*   Create <NsRecord NS 300, test-gcp.canary.k8s.io., ['ns-cloud-e1.googledomains.com.', 'ns-cloud-e2.googledomains.com.', 'ns-cloud-e3.googledomains.com.', 'ns-cloud-e4.googledomains.com.']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-client.canary.k8s.io., ['8135eb1976']> (config)
+ ,*   Create <CnameRecord CNAME 300, releases.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <MxRecord MX 300, canary.k8s.io., [''1 aspmx.l.google.com.'', ''5 alt1.aspmx.l.google.com.'', ''5 alt2.aspmx.l.google.com.'', ''10 alt3.aspmx.l.google.com.'', ''10 alt4.aspmx.l.google.com.'']> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-retired.canary.k8s.io., ['b36f0d3bca']> (config)
+ ,*   Create <ARecord A 300, spartakus.canary.k8s.io., ['107.178.240.20']> (config)
+ ,*   Create <ARecord A 300, slack.canary.k8s.io., ['104.197.79.9']> (config)
+ ,*   Create <CnameRecord CNAME 300, rel.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, ci-test.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, velodrome.canary.k8s.io., ['104.197.200.129']> (config)
+ ,*   Create <CnameRecord CNAME 300, *.docs.canary.k8s.io., netlifyglobalcdn.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, blog.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, testgrid.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <TxtRecord TXT 300, _github-challenge-kubernetes-incubator.canary.k8s.io., ['cc457b8e52']> (config)
+ ,*   Create <CnameRecord CNAME 300, code.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <NsRecord NS 300, test-e2e.canary.k8s.io., ['ns-cloud-a1.googledomains.com.', 'ns-cloud-a2.googledomains.com.', 'ns-cloud-a3.googledomains.com.', 'ns-cloud-a4.googledomains.com.']> (config)
+ ,*   Create <CnameRecord CNAME 300, sigs.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, contributor.canary.k8s.io., kubernetes-contributor.netlify.com.> (config)
+ ,*   Create <CnameRecord CNAME 300, docs.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, issue.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, prs.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, www.canary.k8s.io., k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, yum.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, cherrypick.canary.k8s.io., ['35.184.147.212']> (config)
+ ,*   Create <TxtRecord TXT 300, _acme-challenge.canary.k8s.io., ['7h7C4eZsMVvJ08aJmb9gIRvu1lHFCHH6_qDDUtX3Li4']> (config)
+ ,*   Create <CnameRecord CNAME 300, get.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <CnameRecord CNAME 300, changelog.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, canary.k8s.io., ['23.236.58.218']> (config)
+ ,*   Create <TxtRecord TXT 300, canary.k8s.io., ['google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs', 'v=spf1 include:_spf.google.com ~all']> (config)
+ ,*   Create <CnameRecord CNAME 300, gubernator.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, node-perf-dash.canary.k8s.io., ['130.211.155.47']> (config)
+ ,*   Create <CnameRecord CNAME 300, issues.canary.k8s.io., redirect.k8s.io.> (config)
+ ,*   Create <ARecord A 300, gcsweb.canary.k8s.io., ['104.197.177.166']> (config)
+ ,*   Create <ARecord A 300, prow.canary.k8s.io., ['35.186.196.185']> (config)
+ ,*   Summary: Creates=54, Updates=0, Deletes=0, Existing Records=1
+ ,********************************************************************************
+
+
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Manager sync:   checking safety
+ 2018-10-09T16:26:07  [140244711996296] DEBUG Manager sync:   applying
+ 2018-10-09T16:26:07  [140244711996296] INFO  GoogleCloudProvider[gcp] apply: making changes
+ 2018-10-09T16:26:07  [140244711996296] DEBUG GoogleCloudProvider[gcp] _apply: zone=canary.kubernetes.io., len(changes)=47
+ 2018-10-09T16:26:07  [140244711996296] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "POST /dns/v1/projects/kubernetes-public/managedZones/canary-kubernetes-io/changes HTTP/1.1" 200 None
+ 2018-10-09T16:26:08  [140244711996296] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/kubernetes-public/managedZones/canary-kubernetes-io/changes/1 HTTP/1.1" 200 None
+ 2018-10-09T16:26:08  [140244711996296] INFO  GoogleCloudProvider[gcp] apply: making changes
+ 2018-10-09T16:26:08  [140244711996296] DEBUG GoogleCloudProvider[gcp] _apply: zone=canary.k8s.io., len(changes)=54
+ 2018-10-09T16:26:08  [140244711996296] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "POST /dns/v1/projects/kubernetes-public/managedZones/canary-k8s-io/changes HTTP/1.1" 200 None
+ 2018-10-09T16:26:09  [140244711996296] DEBUG urllib3.connectionpool https://www.googleapis.com:443 "GET /dns/v1/projects/kubernetes-public/managedZones/canary-k8s-io/changes/1 HTTP/1.1" 200 None
+ 2018-10-09T16:26:09  [140244711996296] INFO  Manager sync:   101 total changes
+ #+END_SRC
+
+*** DONE verify run
+    CLOSED: [2018-10-10 Wed 05:33]
+
+ Just looking up the A record for now, but it might be nice have AXFR access or
+ possibly iterate through all the entries via DNS rather than the API.
+
+ _Note that since we don't have canary.{k8s,kubernetes}.io NS entries upstream, we have to dig @zone_specific_dns_
+
+**** canary.k8s.io
+  #+NAME: dig canary.k8s.io A
+  #+BEGIN_SRC shell
+  dig @ns-cloud-c1.googledomains.com. canary.k8s.io A | grep "IN.*A"
+  #+END_SRC
+
+  #+RESULTS: dig canary.k8s.io A
+  #+BEGIN_SRC text
+  ;canary.k8s.io.			IN	A
+  canary.k8s.io.		300	IN	A	23.236.58.218
+  #+END_SRC
+
+**** canary.kubernetes.io
+  #+NAME: dig canary.kubernetes.io A
+  #+BEGIN_SRC shell
+  dig @ns-cloud-b1.googledomains.com. canary.kubernetes.io A | grep "IN.*A"
+  #+END_SRC
+
+  #+RESULTS: dig canary.kubernetes.io A
+  #+BEGIN_SRC text
+  ;canary.kubernetes.io.		IN	A
+  canary.kubernetes.io.	300	IN	A	104.198.14.52
+  #+END_SRC
+
+* Polled / Current Configuration
+** k8s.io
+
+- Production uses ns-cloud-b*
+- Dev uses ns-cloud-d*
+
+*** whois
+
+This are the authoritative name servers.
+The internet will ask them for info about k8s.io
+
+#+NAME: whois k8s.io
+#+BEGIN_SRC shell
+whois k8s.io | grep Name\ Server:
+#+END_SRC
+
+#+RESULTS: whois k8s.io
+#+BEGIN_SRC text
+Name Server: NS-CLOUD-B1.GOOGLEDOMAINS.COM
+Name Server: NS-CLOUD-B2.GOOGLEDOMAINS.COM
+Name Server: NS-CLOUD-B3.GOOGLEDOMAINS.COM
+Name Server: NS-CLOUD-B4.GOOGLEDOMAINS.COM
+#+END_SRC
+
+*** dig
+
+By default dig should return the same as whois, if everything is configured properly.
+
+#+NAME: dig k8s.io
+#+BEGIN_SRC shell
+dig k8s.io NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig k8s.io
+#+BEGIN_SRC text
+;k8s.io.				IN	NS
+k8s.io.			10794	IN	NS	ns-cloud-b1.googledomains.com.
+k8s.io.			10794	IN	NS	ns-cloud-b3.googledomains.com.
+k8s.io.			10794	IN	NS	ns-cloud-b2.googledomains.com.
+k8s.io.			10794	IN	NS	ns-cloud-b4.googledomains.com.
+#+END_SRC
+
+*** gcloud describe
+
+gcloud is configured to use the kubernetes-public project.
+The nameserver here are what we will need to update/switch the registar (namecheap).
+
+#+NAME: gcloude describe k8s-io
+#+BEGIN_SRC shell
+gcloud dns managed-zones describe k8s-io
+#+END_SRC
+
+#+RESULTS: gcloude describe k8s-io
+#+BEGIN_SRC text
+creationTime: '2018-09-07T15:08:37.689Z'
+description: ''
+dnsName: k8s.io.
+dnssecConfig:
+  defaultKeySpecs:
+  - algorithm: rsasha256
+    keyLength: 2048
+    keyType: keySigning
+    kind: dns#dnsKeySpec
+  - algorithm: rsasha256
+    keyLength: 1024
+    keyType: zoneSigning
+    kind: dns#dnsKeySpec
+  kind: dns#managedZoneDnsSecConfig
+  nonExistence: nsec3
+  state: 'off'
+id: '8257163024921094127'
+kind: dns#managedZone
+name: k8s-io
+nameServers:
+- ns-cloud-d1.googledomains.com.
+- ns-cloud-d2.googledomains.com.
+- ns-cloud-d3.googledomains.com.
+- ns-cloud-d4.googledomains.com.
+#+END_SRC
+
+*** dig @ns-cloud-d*.googledomains.com
+
+If we query the DNS servers provided by the kubernetes-public account, we should see the new set of NS servers.
+
+#+NAME: dig @ns-cloud-a1.googledomains.com k8s.io
+#+BEGIN_SRC shell
+dig @ns-cloud-d1.googledomains.com k8s.io NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig @ns-cloud-a1.googledomains.com k8s.io
+#+BEGIN_SRC text
+;k8s.io.				IN	NS
+k8s.io.			21600	IN	NS	ns-cloud-d1.googledomains.com.
+k8s.io.			21600	IN	NS	ns-cloud-d2.googledomains.com.
+k8s.io.			21600	IN	NS	ns-cloud-d3.googledomains.com.
+k8s.io.			21600	IN	NS	ns-cloud-d4.googledomains.com.
+#+END_SRC
+
+** kubernetes.io
+
+- Production uses ns-cloud-a*
+- Dev uses ns-cloud-c*
+
+*** whois
+
+#+NAME: whois kubernetes.io
+#+BEGIN_SRC shell
+whois kubernetes.io | grep Name\ Server:
+#+END_SRC
+
+#+RESULTS: whois kubernetes.io
+#+BEGIN_SRC text
+Name Server: NS-CLOUD-C1.GOOGLEDOMAINS.COM
+Name Server: NS-CLOUD-C2.GOOGLEDOMAINS.COM
+Name Server: NS-CLOUD-C3.GOOGLEDOMAINS.COM
+Name Server: NS-CLOUD-C4.GOOGLEDOMAINS.COM
+#+END_SRC
+
+*** dig
+
+#+NAME: dig kubernetes.io
+#+BEGIN_SRC shell
+dig kubernetes.io NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig kubernetes.io
+#+BEGIN_SRC text
+;kubernetes.io.			IN	NS
+kubernetes.io.		21600	IN	NS	ns-cloud-c1.googledomains.com.
+kubernetes.io.		21600	IN	NS	ns-cloud-c2.googledomains.com.
+kubernetes.io.		21600	IN	NS	ns-cloud-c3.googledomains.com.
+kubernetes.io.		21600	IN	NS	ns-cloud-c4.googledomains.com.
+#+END_SRC
+
+*** gcloud describe
+
+#+NAME: gcloude describe kubernetes-io
+#+BEGIN_SRC shell
+gcloud dns managed-zones describe kubernetes-io
+#+END_SRC
+
+#+RESULTS: gcloude describe kubernetes-io
+#+BEGIN_SRC text
+creationTime: '2018-09-06T16:58:36.444Z'
+description: ''
+dnsName: kubernetes.io.
+dnssecConfig:
+  defaultKeySpecs:
+  - algorithm: rsasha256
+    keyLength: 2048
+    keyType: keySigning
+    kind: dns#dnsKeySpec
+  - algorithm: rsasha256
+    keyLength: 1024
+    keyType: zoneSigning
+    kind: dns#dnsKeySpec
+  kind: dns#managedZoneDnsSecConfig
+  nonExistence: nsec3
+  state: 'off'
+id: '8283179273191389843'
+kind: dns#managedZone
+name: kubernetes-io
+nameServers:
+- ns-cloud-a1.googledomains.com.
+- ns-cloud-a2.googledomains.com.
+- ns-cloud-a3.googledomains.com.
+- ns-cloud-a4.googledomains.com.
+#+END_SRC
+
+*** dig @ns-cloud-a*.googledomains.com
+
+#+NAME: dig @ns-cloud-a1.googledomains.com kubernetes.io
+#+BEGIN_SRC shell
+dig @ns-cloud-a1.googledomains.com kubernetes.io NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig @ns-cloud-a1.googledomains.com kubernetes.io
+#+BEGIN_SRC text
+;kubernetes.io.			IN	NS
+kubernetes.io.		21600	IN	NS	ns-cloud-a1.googledomains.com.
+kubernetes.io.		21600	IN	NS	ns-cloud-a2.googledomains.com.
+kubernetes.io.		21600	IN	NS	ns-cloud-a3.googledomains.com.
+kubernetes.io.		21600	IN	NS	ns-cloud-a4.googledomains.com.
+#+END_SRC
+
+** canary.k8s.io
+*** dig (no public NS records yet)
+
+#+NAME: dig canary.k8s.io
+#+BEGIN_SRC shell
+dig canary.k8s.io NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig canary.k8s.io
+#+BEGIN_SRC text
+;canary.k8s.io.			IN	NS
+#+END_SRC
+
+*** gcloud describe (use these to create NS records in k8s.io)
+
+#+NAME: gcloude describe canary-k8s-io
+#+BEGIN_SRC shell
+gcloud dns managed-zones describe canary-k8s-io
+#+END_SRC
+
+#+RESULTS: gcloude describe canary-k8s-io
+#+BEGIN_SRC text
+creationTime: '2018-10-09T16:18:27.446Z'
+description: ''
+dnsName: canary.k8s.io.
+id: '7690509341659612964'
+kind: dns#managedZone
+name: canary-k8s-io
+nameServers:
+- ns-cloud-c1.googledomains.com.
+- ns-cloud-c2.googledomains.com.
+- ns-cloud-c3.googledomains.com.
+- ns-cloud-c4.googledomains.com.
+#+END_SRC
+
+*** dig @ns-cloud-d*.googledomains.com (NS Records should fix this)
+
+#+NAME: dig @ns-cloud-a1.googledomains.com k8s.io
+#+BEGIN_SRC shell
+dig @ns-cloud-c1.googledomains.com k8s.io NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig @ns-cloud-a1.googledomains.com k8s.io
+#+BEGIN_SRC text
+;k8s.io.				IN	NS
+k8s.io.			21600	IN	NS	ns-cloud-d1.googledomains.com.
+k8s.io.			21600	IN	NS	ns-cloud-d2.googledomains.com.
+k8s.io.			21600	IN	NS	ns-cloud-d3.googledomains.com.
+k8s.io.			21600	IN	NS	ns-cloud-d4.googledomains.com.
+#+END_SRC
+
+** canary.kubernetes.io
+*** dig (no public NS records yet)
+
+#+NAME: dig canary.kubernetes.io
+#+BEGIN_SRC shell
+dig canary.kubernetes.io NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig canary.kubernetes.io
+#+BEGIN_SRC text
+;canary.kubernetes.io.		IN	NS
+#+END_SRC
+
+*** gcloud describe (use these to create NS records in k8s.io)
+
+#+NAME: gcloude describe canary.kubernetes-io
+#+BEGIN_SRC shell
+gcloud dns managed-zones describe canary-kubernetes-io
+#+END_SRC
+
+#+RESULTS: gcloude describe canary.kubernetes-io
+#+BEGIN_SRC text
+creationTime: '2018-10-09T16:19:40.004Z'
+description: ''
+dnsName: canary.kubernetes.io.
+id: '4193576254815248920'
+kind: dns#managedZone
+name: canary-kubernetes-io
+nameServers:
+- ns-cloud-b1.googledomains.com.
+- ns-cloud-b2.googledomains.com.
+- ns-cloud-b3.googledomains.com.
+- ns-cloud-b4.googledomains.com.
+#+END_SRC
+
+*** dig @ns-cloud-b*.googledomains.com (NS happens to be the same as kubernetes.io!)
+
+#+NAME: dig @ns-cloud-b1.googledomains.com canary.kubernetes.io
+#+BEGIN_SRC shell
+dig @ns-cloud-b1.googledomains.com canary.kubernetes.io NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig @ns-cloud-b1.googledomains.com canary.kubernetes.io
+#+BEGIN_SRC text
+;canary.kubernetes.io.		IN	NS
+canary.kubernetes.io.	21600	IN	NS	ns-cloud-b1.googledomains.com.
+canary.kubernetes.io.	21600	IN	NS	ns-cloud-b2.googledomains.com.
+canary.kubernetes.io.	21600	IN	NS	ns-cloud-b3.googledomains.com.
+canary.kubernetes.io.	21600	IN	NS	ns-cloud-b4.googledomains.com.
+#+END_SRC
+
+** k8s.cncf.ci
+*** dig
+
+#+NAME: dig k8s.cncf.ci
+#+BEGIN_SRC shell
+dig k8s.cncf.ci NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig k8s.cncf.ci
+#+BEGIN_SRC text
+;k8s.cncf.ci.			IN	NS
+k8s.cncf.ci.		21600	IN	NS	ns-cloud-e1.googledomains.com.
+k8s.cncf.ci.		21600	IN	NS	ns-cloud-e2.googledomains.com.
+k8s.cncf.ci.		21600	IN	NS	ns-cloud-e3.googledomains.com.
+k8s.cncf.ci.		21600	IN	NS	ns-cloud-e4.googledomains.com.
+#+END_SRC
+
+*** gcloud describe
+
+#+NAME: gcloude describe k8s-cncf-ci
+#+BEGIN_SRC shell
+gcloud dns managed-zones describe k8s-cncf-ci
+#+END_SRC
+
+#+RESULTS: gcloude describe k8s-cncf-ci
+#+BEGIN_SRC text
+creationTime: '2018-10-09T13:16:22.258Z'
+description: k8s.cncf.ci
+dnsName: k8s.cncf.ci.
+dnssecConfig:
+  defaultKeySpecs:
+  - algorithm: rsasha256
+    keyLength: 2048
+    keyType: keySigning
+    kind: dns#dnsKeySpec
+  - algorithm: rsasha256
+    keyLength: 1024
+    keyType: zoneSigning
+    kind: dns#dnsKeySpec
+  kind: dns#managedZoneDnsSecConfig
+  nonExistence: nsec3
+  state: 'off'
+id: '3330419535183872675'
+kind: dns#managedZone
+name: k8s-cncf-ci
+nameServers:
+- ns-cloud-e1.googledomains.com.
+- ns-cloud-e2.googledomains.com.
+- ns-cloud-e3.googledomains.com.
+- ns-cloud-e4.googledomains.com.
+#+END_SRC
+
+*** dig @ns-cloud-d*.googledomains.com
+
+#+NAME: dig @ns-cloud-e1.googledomains.com k8s.cncf.ci
+#+BEGIN_SRC shell
+dig @ns-cloud-e1.googledomains.com k8s.cncf.ci NS | grep "IN.*NS"
+#+END_SRC
+
+#+RESULTS: dig @ns-cloud-e1.googledomains.com k8s.cncf.ci
+#+BEGIN_SRC text
+;k8s.cncf.ci.			IN	NS
+k8s.cncf.ci.		21600	IN	NS	ns-cloud-e1.googledomains.com.
+k8s.cncf.ci.		21600	IN	NS	ns-cloud-e2.googledomains.com.
+k8s.cncf.ci.		21600	IN	NS	ns-cloud-e3.googledomains.com.
+k8s.cncf.ci.		21600	IN	NS	ns-cloud-e4.googledomains.com.
+#+END_SRC
+
+
+* Setting up for development
+
+** [[https://github.com/thockin/work-in-progress/tree/master/k8s-infra-dns#docker-image][Build Docker Image]] 
+
+#+NAME: build docker image
+#+BEGIN_SRC shell
+docker build -t myname/octodns ./octodns
+#+END_SRC
+
+#+RESULTS: build docker image
+#+BEGIN_SRC text
+Sending build context to Docker daemon  3.584kB
+Step 1/5 : ARG BASE_IMAGE=python@sha256:222800bfb2b447212dcc1518b2dff8042de1207090b566893f63c1fa165c8f3e
+Step 2/5 : FROM ${BASE_IMAGE}
+sha256:222800bfb2b447212dcc1518b2dff8042de1207090b566893f63c1fa165c8f3e: Pulling from library/python
+4fe2ade4980c: Pulling fs layer
+1b23fa3ccba5: Pulling fs layer
+b714494d7662: Pulling fs layer
+bbcb3ecc1c68: Pulling fs layer
+bbcb3ecc1c68: Waiting
+4fe2ade4980c: Verifying Checksum
+4fe2ade4980c: Download complete
+4fe2ade4980c: Pull complete
+bbcb3ecc1c68: Verifying Checksum
+bbcb3ecc1c68: Download complete
+1b23fa3ccba5: Verifying Checksum
+1b23fa3ccba5: Download complete
+1b23fa3ccba5: Pull complete
+b714494d7662: Verifying Checksum
+b714494d7662: Download complete
+b714494d7662: Pull complete
+bbcb3ecc1c68: Pull complete
+Digest: sha256:222800bfb2b447212dcc1518b2dff8042de1207090b566893f63c1fa165c8f3e
+Status: Downloaded newer image for python@sha256:222800bfb2b447212dcc1518b2dff8042de1207090b566893f63c1fa165c8f3e
+ ---> b2bc7255b42c
+Step 3/5 : COPY requirements.txt /requirements.txt
+ ---> 9a71baafe967
+Step 4/5 : RUN pip install -r /requirements.txt &&     echo "freezing deps, please make sure requirements.txt matches" &&     pip freeze | tee /newrequirements.txt &&     diff /requirements.txt /newrequirements.txt
+ ---> Running in bbc8857223c0
+Collecting cachetools==2.1.0 (from -r /requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/0a/58/cbee863250b31d80f47401d04f34038db6766f95dea1cc909ea099c7e571/cachetools-2.1.0-py2.py3-none-any.whl
+Collecting certifi==2018.8.24 (from -r /requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/df/f7/04fee6ac349e915b82171f8e23cee63644d83663b34c539f7a09aed18f9e/certifi-2018.8.24-py2.py3-none-any.whl (147kB)
+Collecting chardet==3.0.4 (from -r /requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133kB)
+Collecting dnspython==1.15.0 (from -r /requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/a6/72/209e18bdfedfd78c6994e9ec96981624a5ad7738524dd474237268422cb8/dnspython-1.15.0-py2.py3-none-any.whl (177kB)
+Collecting futures==3.2.0 (from -r /requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/2d/99/b2c4e9d5a30f6471e410a146232b4118e697fa3ffc06d6a65efde84debd0/futures-3.2.0-py2-none-any.whl
+Collecting google-api-core==1.4.0 (from -r /requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/29/de/2b86f01a00eb72a5cbb80a720cd247e67eba8972cbb0914f45623693476d/google_api_core-1.4.0-py2.py3-none-any.whl (51kB)
+Collecting google-auth==1.5.1 (from -r /requirements.txt (line 7))
+  Downloading https://files.pythonhosted.org/packages/58/cb/96dbb4e50e7a9d856e89cc9c8e36ab1055f9774f7d85f37e2156c1d79d9f/google_auth-1.5.1-py2.py3-none-any.whl (65kB)
+Collecting google-cloud-core==0.28.1 (from -r /requirements.txt (line 8))
+  Downloading https://files.pythonhosted.org/packages/0f/41/ae2418b4003a14cf21c1c46d61d1b044bf02cf0f8f91598af572b9216515/google_cloud_core-0.28.1-py2.py3-none-any.whl
+Collecting google-cloud-dns==0.29.0 (from -r /requirements.txt (line 9))
+  Downloading https://files.pythonhosted.org/packages/90/ad/2627aaed4d666a66258e70327d38632cfcedb0ed809b331cb4e906b91038/google_cloud_dns-0.29.0-py2.py3-none-any.whl
+Collecting googleapis-common-protos==1.5.3 (from -r /requirements.txt (line 10))
+  Downloading https://files.pythonhosted.org/packages/00/03/d25bed04ec8d930bcfa488ba81a2ecbf7eb36ae3ffd7e8f5be0d036a89c9/googleapis-common-protos-1.5.3.tar.gz
+Collecting idna==2.7 (from -r /requirements.txt (line 11))
+  Downloading https://files.pythonhosted.org/packages/4b/2a/0276479a4b3caeb8a8c1af2f8e4355746a97fab05a372e4a2c6a6b876165/idna-2.7-py2.py3-none-any.whl (58kB)
+Collecting incf.countryutils==1.0 (from -r /requirements.txt (line 12))
+  Downloading https://files.pythonhosted.org/packages/a8/88/2b08c961935a9fe00b00a4e1b53b81758771da142a5900cc8c9d28d79f9d/incf.countryutils-1.0.tar.gz
+Collecting ipaddress==1.0.22 (from -r /requirements.txt (line 13))
+  Downloading https://files.pythonhosted.org/packages/fc/d0/7fc3a811e011d4b388be48a0e381db8d990042df54aa4ef4599a31d39853/ipaddress-1.0.22-py2.py3-none-any.whl
+Collecting natsort==5.4.1 (from -r /requirements.txt (line 14))
+  Downloading https://files.pythonhosted.org/packages/e3/31/b937f858addee2e1a62f15842f0f3f07e9277aa87fb67fe9b9e28ac90d50/natsort-5.4.1-py2.py3-none-any.whl
+Collecting octodns==0.9.2 (from -r /requirements.txt (line 15))
+  Downloading https://files.pythonhosted.org/packages/3e/0c/8bfa08642562f6df854ce6f7101a6de899a256226627f63df1e0dbf239e2/octodns-0.9.2.tar.gz (211kB)
+Collecting protobuf==3.6.1 (from -r /requirements.txt (line 16))
+  Downloading https://files.pythonhosted.org/packages/77/78/a7f1ce761e2c738e209857175cd4f90a8562d1bde32868a8cd5290d58926/protobuf-3.6.1-py2.py3-none-any.whl (390kB)
+Collecting pyasn1==0.4.4 (from -r /requirements.txt (line 17))
+  Downloading https://files.pythonhosted.org/packages/d1/a1/7790cc85db38daa874f6a2e6308131b9953feb1367f2ae2d1123bb93a9f5/pyasn1-0.4.4-py2.py3-none-any.whl (72kB)
+Collecting pyasn1-modules==0.2.2 (from -r /requirements.txt (line 18))
+  Downloading https://files.pythonhosted.org/packages/19/02/fa63f7ba30a0d7b925ca29d034510fc1ffde53264b71b4155022ddf3ab5d/pyasn1_modules-0.2.2-py2.py3-none-any.whl (62kB)
+Collecting python-dateutil==2.6.1 (from -r /requirements.txt (line 19))
+  Downloading https://files.pythonhosted.org/packages/4b/0d/7ed381ab4fe80b8ebf34411d14f253e1cf3e56e2820ffa1d8844b23859a2/python_dateutil-2.6.1-py2.py3-none-any.whl (194kB)
+Collecting pytz==2018.5 (from -r /requirements.txt (line 20))
+  Downloading https://files.pythonhosted.org/packages/30/4e/27c34b62430286c6d59177a0842ed90dc789ce5d1ed740887653b898779a/pytz-2018.5-py2.py3-none-any.whl (510kB)
+Collecting PyYAML==3.13 (from -r /requirements.txt (line 21))
+  Downloading https://files.pythonhosted.org/packages/9e/a3/1d13970c3f36777c583f136c136f804d70f500168edc1edea6daa7200769/PyYAML-3.13.tar.gz (270kB)
+Collecting requests==2.19.1 (from -r /requirements.txt (line 22))
+  Downloading https://files.pythonhosted.org/packages/65/47/7e02164a2a3db50ed6d8a6ab1d6d60b69c4c3fdf57a284257925dfc12bda/requests-2.19.1-py2.py3-none-any.whl (91kB)
+Collecting rsa==3.4.2 (from -r /requirements.txt (line 23))
+  Downloading https://files.pythonhosted.org/packages/e1/ae/baedc9cb175552e95f3395c43055a6a5e125ae4d48a1d7a924baca83e92e/rsa-3.4.2-py2.py3-none-any.whl (46kB)
+Collecting six==1.11.0 (from -r /requirements.txt (line 24))
+  Downloading https://files.pythonhosted.org/packages/67/4b/141a581104b1f6397bfa78ac9d43d8ad29a7ca43ea90a2d863fe3056e86a/six-1.11.0-py2.py3-none-any.whl
+Collecting urllib3==1.23 (from -r /requirements.txt (line 25))
+  Downloading https://files.pythonhosted.org/packages/bd/c9/6fdd990019071a4a32a5e7cb78a1d92c53851ef4f56f62a3486e6a7d8ffb/urllib3-1.23-py2.py3-none-any.whl (133kB)
+Requirement already satisfied: setuptools>=34.0.0 in /usr/local/lib/python2.7/site-packages (from google-api-core==1.4.0->-r /requirements.txt (line 6)) (40.2.0)
+Building wheels for collected packages: googleapis-common-protos, incf.countryutils, octodns, PyYAML
+  Running setup.py bdist_wheel for googleapis-common-protos: started
+  Running setup.py bdist_wheel for googleapis-common-protos: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/62/45/af/649bbf07b6595fda010be1bda667cd56d0444d07afc6f8b687
+  Running setup.py bdist_wheel for incf.countryutils: started
+  Running setup.py bdist_wheel for incf.countryutils: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/e8/f7/e4/ff31a3f3586a90a9f314ca1f3128395bfd732ac483fa1b5038
+  Running setup.py bdist_wheel for octodns: started
+  Running setup.py bdist_wheel for octodns: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/26/ae/3f/f7fa8a565e6b0a98a7d56db098c436b733e7e392d9f20f61e3
+  Running setup.py bdist_wheel for PyYAML: started
+  Running setup.py bdist_wheel for PyYAML: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/ad/da/0c/74eb680767247273e2cf2723482cb9c924fe70af57c334513f
+Successfully built googleapis-common-protos incf.countryutils octodns PyYAML
+Installing collected packages: cachetools, certifi, chardet, dnspython, futures, idna, urllib3, requests, pyasn1, pyasn1-modules, six, rsa, google-auth, protobuf, googleapis-common-protos, pytz, google-api-core, google-cloud-core, google-cloud-dns, incf.countryutils, ipaddress, natsort, PyYAML, python-dateutil, octodns
+Successfully installed PyYAML-3.13 cachetools-2.1.0 certifi-2018.8.24 chardet-3.0.4 dnspython-1.15.0 futures-3.2.0 google-api-core-1.4.0 google-auth-1.5.1 google-cloud-core-0.28.1 google-cloud-dns-0.29.0 googleapis-common-protos-1.5.3 idna-2.7 incf.countryutils-1.0 ipaddress-1.0.22 natsort-5.4.1 octodns-0.9.2 protobuf-3.6.1 pyasn1-0.4.4 pyasn1-modules-0.2.2 python-dateutil-2.6.1 pytz-2018.5 requests-2.19.1 rsa-3.4.2 six-1.11.0 urllib3-1.23
+[91mYou are using pip version 18.0, however version 18.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+[0mfreezing deps, please make sure requirements.txt matches
+cachetools==2.1.0
+[91mYou are using pip version 18.0, however version 18.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+[0mcertifi==2018.8.24
+chardet==3.0.4
+dnspython==1.15.0
+futures==3.2.0
+google-api-core==1.4.0
+google-auth==1.5.1
+google-cloud-core==0.28.1
+google-cloud-dns==0.29.0
+googleapis-common-protos==1.5.3
+idna==2.7
+incf.countryutils==1.0
+ipaddress==1.0.22
+natsort==5.4.1
+octodns==0.9.2
+protobuf==3.6.1
+pyasn1==0.4.4
+pyasn1-modules==0.2.2
+python-dateutil==2.6.1
+pytz==2018.5
+PyYAML==3.13
+requests==2.19.1
+rsa==3.4.2
+six==1.11.0
+urllib3==1.23
+Removing intermediate container bbc8857223c0
+ ---> 9a675b06d9f9
+Step 5/5 : CMD /bin/sh
+ ---> Running in 54bb90bbdba0
+Removing intermediate container 54bb90bbdba0
+ ---> 9c76cc885770
+Successfully built 9c76cc885770
+Successfully tagged myname/octodns:latest
+#+END_SRC
+
