@@ -48,6 +48,8 @@ docker build -t ${USER}/octodns ./octodns-docker
 If you want to run it as yourself, using yor own Google Cloud credentials:
 
 ```
+# Assumes to be running in a checked-out git repo directory, and in the same
+# subdirectory as this file.
 docker run -ti \
     -u `id -u` \
     -v ~/.config/gcloud:/.config/gcloud:ro \
@@ -68,6 +70,8 @@ service account, edit octodns-config.yaml and un-comment the `credentials_file`.
 
 
 ```
+# Assumes to be running in a checked-out git repo directory, and in the same
+# subdirectory as this file.
 docker run -ti \
     -v `pwd`/zone-configs:/octodns/config \
     -v `pwd`/octodns-dns-admin-creds.json:/octodns/creds/gcp.json \
@@ -83,13 +87,8 @@ docker run -ti \
 ## TODO
 
   * Get owner names and comments on all records
-  * Rationalize and document all deltas between zones
   * Push an official image to GCR
     * When to rebuild?
-  * Document how to update from github
-    * YAML via URL (raw.github.com)?  Need support in octodns.
-    * wget from raw.github before sync
-    * git fetch
   * Create a canary zone
   * Script updates
     * dry run to canary, abort on error
