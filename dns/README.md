@@ -40,7 +40,7 @@ manual runs are OK.
 From this repo:
 
 ```
-docker build -t myname/octodns ./octodns-docker
+docker build -t ${USER}/octodns ./octodns-docker
 ```
 
 ### Running as yourself
@@ -53,7 +53,7 @@ docker run -ti \
     -v ~/.config/gcloud:/.config/gcloud:ro \
     -v `pwd`/zone-configs:/octodns/config:ro \
     -v `pwd`/octodns-config.yaml:/octodns/config.yaml:ro \
-    myname/octodns \
+    ${USER}/octodns \
     octodns-sync \
         --config-file=/octodns/config.yaml \
         --log-stream-stdout \
@@ -72,7 +72,7 @@ docker run -ti \
     -v `pwd`/zone-configs:/octodns/config \
     -v `pwd`/octodns-dns-admin-creds.json:/octodns/creds/gcp.json \
     -v `pwd`/octodns-config.yaml:/octodns/config.yaml \
-    myname/octodns \
+    ${USER}/octodns \
     octodns-sync \
         --config-file=/octodns/config.yaml \
         --log-stream-stdout \

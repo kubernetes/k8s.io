@@ -127,6 +127,7 @@ git:
 go:
   type: CNAME
   value: redirect.k8s.io.
+#TODO: seems to send to main site, @ixdy to followup
 gubernator:
   type: CNAME
   value: redirect.k8s.io.
@@ -172,15 +173,7 @@ spartakus:
 submit-queue:
   type: CNAME
   value: redirect.k8s.io.
-# TODO: Who owns this and do we need it?
-test-aws:
-  type: NS
-  values:
-  - ns-1345.awsdns-40.org.
-  - ns-1710.awsdns-21.co.uk.
-  - ns-491.awsdns-61.com.
-  - ns-969.awsdns-57.net.
-# TODO: Who owns this and do we need it?
+# Kops testing e2e (@justinsb).
 test-cncf-aws:
   type: NS
   values:
@@ -188,22 +181,7 @@ test-cncf-aws:
   - ns-1825.awsdns-36.co.uk.
   - ns-265.awsdns-33.com.
   - ns-687.awsdns-21.net.
-# TODO: Who owns this and do we need it?
-test-e2e:
-  type: NS
-  values:
-  - ns-cloud-a1.googledomains.com.
-  - ns-cloud-a2.googledomains.com.
-  - ns-cloud-a3.googledomains.com.
-  - ns-cloud-a4.googledomains.com.
-# TODO: Who owns this and do we need it?
-test-gcp:
-  type: NS
-  values:
-  - ns-cloud-e1.googledomains.com.
-  - ns-cloud-e2.googledomains.com.
-  - ns-cloud-e3.googledomains.com.
-  - ns-cloud-e4.googledomains.com.
+# @michelle192837
 testgrid:
   type: CNAME
   value: redirect.k8s.io.

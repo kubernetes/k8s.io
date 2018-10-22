@@ -1,13 +1,12 @@
 ---
 # The top-level kubernetes.io zone
 #
-# In general, every name here has an eqyuivalent in k8s.io.  For many of these
+# In general, every name here has an equivalent in k8s.io.  For many of these
 # we redirect from foo.kubernetes.io to foo.k8s.io, which is where the
 # documentation for each name is attached.
 '':
   - type: A
-    # FIXME: was 45.54.44.100, document this
-    value: 104.198.14.52 # Netlify (@chenopis, @thockin)
+    value: 45.54.44.102 # Netlify anycast CDN (@chenopis, @thockin)
   - type: MX
     values:
     - exchange: aspmx.l.google.com.
@@ -80,10 +79,9 @@ releases:
   value: releases.k8s.io.
 
 # Vanity CNAMEs.
-# TODO: this is different from blog.k8s.io config?
 blog:
   type: CNAME
-  value: blog.kubernetes.io.ghs.googlehosted.com.
+  value: blog.k8s.io.
 changelog:
   type: CNAME
   value: changelog.k8s.io.
