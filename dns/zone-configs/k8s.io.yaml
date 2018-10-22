@@ -23,6 +23,15 @@ www:
   type: CNAME
   value: k8s.io.
 
+# Canary zone for testing DNS pushes.
+canary:
+  type: NS
+  values:
+  - ns-cloud-c1.googledomains.com.
+  - ns-cloud-c2.googledomains.com.
+  - ns-cloud-c3.googledomains.com.
+  - ns-cloud-c4.googledomains.com.
+
 # Our vanity redirector.  This is not just 'k8s.io', on the off chance this
 # becomes different from the main record. (@thockin)
 redirect:

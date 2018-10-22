@@ -11,6 +11,19 @@ providers:
     #credentials_file: '/octodns/creds/gcp.json'
 
 zones:
+  # Canary targets.
+  canary.kubernetes.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  canary.k8s.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+
+  # Production targets.
   kubernetes.io.:
     sources:
       - config

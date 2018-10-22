@@ -27,6 +27,15 @@ www:
   type: CNAME
   value: kubernetes.io.
 
+# Canary zone for testing DNS pushes.
+canary:
+  type: NS
+  values:
+  - ns-cloud-b1.googledomains.com.
+  - ns-cloud-b2.googledomains.com.
+  - ns-cloud-b3.googledomains.com.
+  - ns-cloud-b4.googledomains.com.
+
 # Main docs site is a redirect (@chenopis)
 docs:
   type: CNAME
