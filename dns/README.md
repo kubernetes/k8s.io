@@ -39,11 +39,40 @@ Open a new issue on this repository with the title "DNS Update Request"
 
 In the issue, please list the following details:
    * If this update is a create, delete or update.
+   * The base domain that is being modified (e.g. "k8s.io")
    * The complete data for the existing DNS record if applicable (Updates, Deletes).
    * The complete data for the new DNS record if applicable (Creates, Updates).
    * The reason for the update.
 
 Once this issue is created, it should be acknowledged by a DNS administrator.
+
+### Example update issue content:
+
+*Type of update:* Update
+
+*Domain being modified:* `k8s.io`
+
+*Existing DNS Record:*
+
+```yaml
+# this is the sub-domain, '' for the top-level domain
+www:
+# this is the record type, e.g A, CNAME, MX, TXT, etc.
+- type: A
+  # This depends on the record type, see existing YAML files for more examples.
+  value: 23.236.58.218
+```
+
+*New DNS Record:*
+```yaml
+www:
+- type: CNAME
+  value: some.other.host.com
+```
+
+*Reason for update:*
+
+Example of an update.
 
 ### Performing an update
 
