@@ -46,6 +46,8 @@ In the issue, please list the following details:
 
 Once this issue is created, it should be acknowledged by a DNS administrator.
 
+To open an issue for a DNS update please use the [template here](https://github.com/kubernetes/k8s.io/issues/new?template=dns-request.md)
+
 ### Example update issue content:
 
 *Type of update:* Update
