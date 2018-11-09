@@ -89,14 +89,7 @@ docker run -ti \
   * Get owner names and comments on all records
   * Push an official image to GCR
     * When to rebuild?
-  * Create a canary zone
-  * Script updates
-    * dry run to canary, abort on error
-    * --doit to canary
-    * run a test, abort on error
-    * dry run to prod, abort on error
-    * --doit to prod
-    * run a test, abort on error
+  * Implement the test part of the push script
   * Document how to handle "too many" updates (--force)
     * Always --force?
   * Billing report

@@ -1,4 +1,52 @@
----
+#!/bin/sh
+#
+# Test for Kubernetes DNS.
+#
+# $1: "canary" or "prod"
+
+if [ "$1" != "canary" -a "$1" != "prod" ]; then
+    echo "usage: $0 <canary|prod>"
+    exit 1
+fi
+
+SERVER_CANARY_K8S=ns-cloud-c1.googledomains.com.
+SERVER_CANARY_KUBERNETES=ns-cloud-b1.googledomains.com.
+SERVER_PROD_K8S=ns-cloud-d1.googledomains.com.
+SERVER_PROD_KUBERNETES=ns-cloud-a1.googledomains.com.
+
+if [ "$1" == "canary" ]; then
+    SERVER_K8S="${SERVER_CANARY_K8S}"
+    SERVER_KUBERNETES="${SERVER_CANARY_KUBERNETES}"
+    ZONE_PFX="canary."
+else # "prod"
+    SERVER_K8S="${SERVER_PROD_K8S}"
+    SERVER_KUBERNETES="${SERVER_PROD_KUBERNETES}"
+    ZONE_PFX=""
+fi
+
+echo "Testing $1 via ${SERVER_K8S} and ${SERVER_KUBERNETES}"
+
+R=$(dig +short -t A "@${SERVER_K8S}" "${ZONE_PFX}k8s.io")
+if [ "$R" != 23.236.58.218 ]; then
+    echo "FAIL: A ${ZONE_PFX}k8s.io:"
+    echo "  got:"
+    echo "$R"
+    echo "--------------------"
+    exit 2
+fi
+R=$(dig +short -t MX "@${SERVER_K8S}" "${ZONE_PFX}k8s.io")
+if [ "$R" != 23.236.58.218 ]; then
+    echo "FAIL: MX ${ZONE_PFX}k8s.io:"
+    echo "  got:"
+    echo "$R"
+    echo "--------------------"
+    exit 2
+fi
+
+echo "PASS"
+
+exit 0
+### Input data for k8s.io below...
 # The top-level k8s.io zone
 '':
   - type: A
@@ -136,24 +184,10 @@ git:
 go:
   type: CNAME
   value: redirect.k8s.io.
-# Running on Google App Engine
+#TODO: seems to send to main site, @ixdy to followup
 gubernator:
-  - type: A
-    values:
-    - 216.239.32.21
-    - 216.239.34.21
-    - 216.239.36.21
-    - 216.239.38.21
-  - type: AAAA
-    values:
-    - 2001:4860:4802:32::15
-    - 2001:4860:4802:34::15
-    - 2001:4860:4802:36::15
-    - 2001:4860:4802:38::15
-# Verify that @ixdy owns gubernator.k8s.io, necessary to set up custom domain in GAE
-aupoulkmindh.gubernator:
   type: CNAME
-  value: gv-afluggfkiwfho7.dv.googlehosted.com.
+  value: redirect.k8s.io.
 issue:
   type: CNAME
   value: redirect.k8s.io.
@@ -204,24 +238,10 @@ test-cncf-aws:
   - ns-1825.awsdns-36.co.uk.
   - ns-265.awsdns-33.com.
   - ns-687.awsdns-21.net.
-# Running on Google App Engine (@michelle192837)
+# @michelle192837
 testgrid:
-  - type: A
-    values:
-    - 216.239.32.21
-    - 216.239.34.21
-    - 216.239.36.21
-    - 216.239.38.21
-  - type: AAAA
-    values:
-    - 2001:4860:4802:32::15
-    - 2001:4860:4802:34::15
-    - 2001:4860:4802:36::15
-    - 2001:4860:4802:38::15
-# Verify that @ixdy owns testgrid.k8s.io, necessary to set up custom domain in GAE
-7ujw4gp3z2cq.testgrid:
   type: CNAME
-  value: gv-t2drtmd73nsutd.dv.googlehosted.com.
+  value: redirect.k8s.io.
 # Project metrics.  Running in GKE (@spiffxp, @cjwagner)
 velodrome:
   type: A
