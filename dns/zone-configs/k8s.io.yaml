@@ -97,9 +97,6 @@ ci-test:
 code:
   type: CNAME
   value: redirect.k8s.io.
-contributor:
-  type: CNAME
-  value: kubernetes-contributor.netlify.com.
 # Code search (@dims)
 # TODO: Where does this run?
 cs:
