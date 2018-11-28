@@ -100,9 +100,6 @@ ci-test:
 code:
   type: CNAME
   value: code.k8s.io.
-contributor:
-  type: CNAME
-  value: contributor.k8s.io.
 cs:
   type: CNAME
   value: cs.k8s.io.
