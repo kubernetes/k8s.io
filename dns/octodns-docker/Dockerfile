@@ -11,4 +11,5 @@ RUN pip install -r /requirements.txt && \
     pip freeze | tee /newrequirements.txt && \
     diff /requirements.txt /newrequirements.txt
 
+COPY check-zone.py /usr/local/bin/check-zone
 CMD /bin/sh
