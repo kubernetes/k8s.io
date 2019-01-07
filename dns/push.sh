@@ -17,32 +17,6 @@ function push() {
             --debug \
             "$@"
 }
-function domain_to_zone() {
-    gcloud dns managed-zones list --format=flattened --format='value(name)' --filter="dnsName=$1"
-}
-
-function get_zone_dns() {
-    gcloud dns managed-zones describe $1 --format='value(nameServers[0])'
-}
-
-function check_zone() {
-    DOMAIN=$1
-    GCLOUD_ZONE=$(domain_to_zone $DOMAIN)
-    DNS_SERVER=$(get_zone_dns $GCLOUD_ZONE)
-    echo "Testing ${DOMAIN} via ${GCLOUD_ZONE} @${DNS_SERVER}"
-    docker run -ti \
-           -u `id -u` \
-           -v ~/.config/gcloud:/.config/gcloud:ro \
-           -v `pwd`/octodns-config.yaml:/octodns/config.yaml:ro \
-           -v `pwd`/zone-configs:/octodns/config:ro \
-           ${USER}/octodns \
-           check-zone \
-           --config-file=/octodns/config.yaml \
-           --zone $1 \
-           --source config \
-           $DNS_SERVER \
-        || (RESULT=$? && (echo FAIL ;exit $RESULT))
-}
 
 # Assumes to be running in a checked-out git repo directory, and in the same
 # subdirectory as this file.
@@ -70,8 +44,21 @@ if [ $? != 0 ]; then
 fi
 echo "Canary push SUCCEEDED"
 
-check_zone "canary.k8s.io." || exit $?
-check_zone "canary.kubernetes.io." || exit $?
+echo "Testing canary zones"
+./check-zone.sh "canary.k8s.io." > log.canary 2>&1
+if [ $? != 0 ]; then
+    echo "Canary test FAILED, halting; log follows:"
+    echo "========================================="
+    cat log.canary
+    exit 2
+fi
+./check-zone.sh "canary.kubernetes.io." > log.canary 2>&1
+if [ $? != 0 ]; then
+    echo "Canary test FAILED, halting; log follows:"
+    echo "========================================="
+    cat log.canary
+    exit 2
+fi
 echo "Canary test SUCCEEDED"
 
 # Exit for now until we are ready to push to prod
@@ -85,6 +72,7 @@ if [ $? != 0 ]; then
     cat log.prod
     exit 3
 fi
+
 echo "Pushing to prod zones"
 push --doit k8s.io. kubernetes.io. > log.prod 2>&1
 if [ $? != 0 ]; then
@@ -95,4 +83,21 @@ if [ $? != 0 ]; then
 fi
 echo "Prod push SUCCEEDED"
 
-# TODO: run test against prod
+echo "Testing prod zones"
+./check-zone.sh "k8s.io." > log.prod 2>&1
+if [ $? != 0 ]; then
+    echo "Canary test FAILED, halting; log follows:"
+    echo "========================================="
+    cat log.canary
+    exit 2
+fi
+./check-zone.sh "kubernetes.io." > log.prod 2>&1
+if [ $? != 0 ]; then
+    echo "Canary test FAILED, halting; log follows:"
+    echo "========================================="
+    cat log.canary
+    exit 2
+fi
+echo "Canary test SUCCEEDED"
+
+echo "Prod test SUCCEEDED"
