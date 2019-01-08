@@ -2,7 +2,7 @@
 #
 # check-zone.sh
 #
-# $1: "canary" or "prod"
+# $1: fqdn including final dot... ex "canary.k8s.io."
 
 DOMAIN=$1
 echo "Checking that the GCP dns servers for $DOMAIN serve up everything in our octodns config"
