@@ -90,7 +90,6 @@ def record_response_values(record, response):
         # FIXME: unsure why NS records come back: *** NoAnswer:
         # The DNS response does not contain an answer to the question: X. IN NS
         # However all other records we can compare
-        # import ipdb ; ipdb.set_trace()
         if record._type == 'NS':
             log.info('*** NS Record with NoAnswer for: %s', record.fqdn)
             return []

@@ -10,7 +10,5 @@ RUN pip install -r /requirements.txt && \
     echo "freezing deps, please make sure requirements.txt matches" && \
     pip freeze | tee /newrequirements.txt && \
     diff /requirements.txt /newrequirements.txt
-# RUN pip install ipython ipdb
-# RUN apk add bash
 COPY check-zone.py /usr/local/bin/check-zone
 CMD /bin/sh
