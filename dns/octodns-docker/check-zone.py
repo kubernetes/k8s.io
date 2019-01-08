@@ -39,13 +39,12 @@ def configure_resolvers(dns_servers):
     Return a list of a AsyncResolvers
     """
     resolvers = []
-    ip_addr_re = re.compile(r'^[\d\.]+$')
     for server in dns_servers:
+        # We need to resolve this if it's not an IP
+        if not validip(server):
+            server = unicode(query(server, 'A')[0])
         resolver = AsyncResolver(configure=False,
                                  num_workers=4)
-        # We need to resolve this if it's not an IP
-        if not ip_addr_re.match(server):
-            server = unicode(query(server, 'A')[0])
         log.info('server=%s', server)
         resolver.nameservers = [server]
         resolver.lifetime = 8
@@ -58,6 +57,8 @@ def quote_cleanup(values):
     """
     return [unicode(r).replace("'", "").replace('"', '') for r in values]
 
+def validip(ip):
+    return ip.count('.') == 3 and  all(0<=int(num)<256 for num in ip.rstrip().split('.'))
 
 def record_value_list(record):
     """
