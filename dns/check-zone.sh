@@ -14,6 +14,12 @@ docker run -ti \
        ${USER}/octodns \
        check-zone \
        --config-file=/octodns/config.yaml \
-       --zone $1 \
-    || (RESULT=$? && (echo '***FAIL***' ;exit $RESULT))
-echo '***PASS***'
+       --zone $1
+RESULT=$?
+if [ $RESULT != "0" ] ; then
+    echo '***FAIL***'
+    echo $RESULT
+    exit $RESULT
+else
+    echo '***PASS***'
+fi
