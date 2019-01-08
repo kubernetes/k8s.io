@@ -41,7 +41,7 @@ def configure_resolvers(dns_servers):
     resolvers = []
     for server in dns_servers:
         # We need to resolve this if it's not an IP
-        if not validip(server):
+        if not is_ip(server):
             server = unicode(query(server, 'A')[0])
         resolver = AsyncResolver(configure=False,
                                  num_workers=4)
@@ -57,8 +57,12 @@ def quote_cleanup(values):
     """
     return [unicode(r).replace("'", "").replace('"', '') for r in values]
 
-def validip(ip):
-    return ip.count('.') == 3 and  all(0<=int(num)<256 for num in ip.rstrip().split('.'))
+def is_ip(dns_server):
+    ip_addr_re = re.compile(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
+    if ip_addr_re.match(dns_server):
+        return True
+    else:
+        return False
 
 def record_value_list(record):
     """

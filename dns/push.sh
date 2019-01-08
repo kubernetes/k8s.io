@@ -35,7 +35,7 @@ if [ $? != 0 ]; then
     exit 2
 fi
 echo "Pushing to canary zones"
-push --doit canary.k8s.io. canary.kubernetes.io. > log.canary 2>&1
+push --doit canary.k8s.io. canary.kubernetes.io. >> log.canary 2>&1
 if [ $? != 0 ]; then
     echo "Canary push FAILED, halting; log follows:"
     echo "========================================="
@@ -45,14 +45,14 @@ fi
 echo "Canary push SUCCEEDED"
 
 echo "Testing canary zones"
-./check-zone.sh "canary.k8s.io." > log.canary 2>&1
+./check-zone.sh "canary.k8s.io." >> log.canary 2>&1
 if [ $? != 0 ]; then
     echo "Canary test FAILED, halting; log follows:"
     echo "========================================="
     cat log.canary
     exit 2
 fi
-./check-zone.sh "canary.kubernetes.io." > log.canary 2>&1
+./check-zone.sh "canary.kubernetes.io." >> log.canary 2>&1
 if [ $? != 0 ]; then
     echo "Canary test FAILED, halting; log follows:"
     echo "========================================="
@@ -72,7 +72,7 @@ if [ $? != 0 ]; then
 fi
 
 echo "Pushing to prod zones"
-push --doit k8s.io. kubernetes.io. > log.prod 2>&1
+push --doit k8s.io. kubernetes.io. >> log.prod 2>&1
 if [ $? != 0 ]; then
     echo "Prod push FAILED, halting; log follows:"
     echo "========================================="
@@ -82,18 +82,18 @@ fi
 echo "Prod push SUCCEEDED"
 
 echo "Testing prod zones"
-./check-zone.sh "k8s.io." > log.prod 2>&1
+./check-zone.sh "k8s.io." >> log.prod 2>&1
 if [ $? != 0 ]; then
-    echo "Canary test FAILED, halting; log follows:"
+    echo "Prod test FAILED, halting; log follows:"
     echo "========================================="
-    cat log.canary
+    cat log.prod
     exit 2
 fi
-./check-zone.sh "kubernetes.io." > log.prod 2>&1
+./check-zone.sh "kubernetes.io." >> log.prod 2>&1
 if [ $? != 0 ]; then
-    echo "Canary test FAILED, halting; log follows:"
+    echo "Production test FAILED, halting; log follows:"
     echo "========================================="
-    cat log.canary
+    cat log.prod
     exit 2
 fi
 echo "Canary test SUCCEEDED"
