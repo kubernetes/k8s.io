@@ -61,8 +61,6 @@ if [ $? != 0 ]; then
 fi
 echo "Canary test SUCCEEDED"
 
-# Exit for now until we are ready to push to prod
-exit 0
 # Push to prod.
 echo "Dry-run to prod zones"
 push k8s.io. kubernetes.io. > log.prod 2>&1
