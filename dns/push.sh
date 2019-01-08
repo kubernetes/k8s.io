@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 # This runs as you.  It assumes you have built an image named ${USER}/octodns.
 
 # Pushes config to zones.
 #   args: args to pass to octodns (e.g. --doit, --force, a list of zones)
-function push() {
+push () {
     docker run -ti \
         -u `id -u` \
         -v ~/.config/gcloud:/.config/gcloud:ro \
@@ -96,6 +96,4 @@ if [ $? != 0 ]; then
     cat log.prod
     exit 2
 fi
-echo "Canary test SUCCEEDED"
-
 echo "Prod test SUCCEEDED"
