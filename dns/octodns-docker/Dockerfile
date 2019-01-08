@@ -10,5 +10,9 @@ RUN pip install -r /requirements.txt && \
     echo "freezing deps, please make sure requirements.txt matches" && \
     pip freeze | tee /newrequirements.txt && \
     diff /requirements.txt /newrequirements.txt
+# To enable debugging:
+# RUN pip install ipython ipdb
+# pair with the following at breakpoints in python code:
+# import ipdb ; ipdb.set_trace()
 COPY check-zone.py /usr/local/bin/check-zone
 CMD /bin/sh

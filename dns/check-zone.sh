@@ -1,9 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 #
-# check-zone.sh
+# This runs as you.  It assumes you have built an image named ${USER}/octodns.
+# It also requires working gcloud credentials
 #
 # $1: fqdn including final dot... ex "canary.k8s.io."
+USAGE="Usage: $0 zone.in.gcloud."
 
+if [ "$#" != "1" ]; then
+	  echo "$USAGE"
+	  exit 1
+fi
 DOMAIN=$1
 echo "Checking that the GCP dns servers for $DOMAIN serve up everything in our octodns config"
 docker run -ti \

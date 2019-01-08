@@ -13,6 +13,7 @@ import sys
 import re
 from dns.exception import Timeout
 from dns.resolver import NXDOMAIN, NoAnswer, NoNameservers, Resolver, query
+import socket
 
 from octodns.cmds.args import ArgumentParser
 from octodns.manager import Manager
@@ -43,9 +44,9 @@ def configure_resolvers(dns_servers):
         # We need to resolve this if it's not an IP
         if not is_ip(server):
             server = unicode(query(server, 'A')[0])
+        log.info('server=%s', server)
         resolver = AsyncResolver(configure=False,
                                  num_workers=4)
-        log.info('server=%s', server)
         resolver.nameservers = [server]
         resolver.lifetime = 8
         resolvers.append(resolver)
@@ -58,11 +59,11 @@ def quote_cleanup(values):
     return [unicode(r).replace("'", "").replace('"', '') for r in values]
 
 def is_ip(dns_server):
-    ip_addr_re = re.compile(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
-    if ip_addr_re.match(dns_server):
-        return True
-    else:
+    try:
+        socket.inet_pton(socket.AF_INET, address)
+    except socket.error:  # not a valid address
         return False
+    return True
 
 def record_value_list(record):
     """

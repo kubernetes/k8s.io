@@ -91,7 +91,7 @@ if [ $? != 0 ]; then
 fi
 ./check-zone.sh "kubernetes.io." >> log.prod 2>&1
 if [ $? != 0 ]; then
-    echo "Production test FAILED, halting; log follows:"
+    echo "Prod test FAILED, halting; log follows:"
     echo "========================================="
     cat log.prod
     exit 2
