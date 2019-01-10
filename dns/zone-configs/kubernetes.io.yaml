@@ -44,6 +44,11 @@ docs:
 '*.docs':
   type: CNAME
   value: netlifyglobalcdn.com.
+# Create a dummy A record so that the Let's Encrypt TXT records are not caught
+# by the wildcard CNAME record. (@ixdy)
+_acme_challenge.docs:
+  type: A
+  value: 0.0.0.0
 
 # Prove that we own these github orgs. sig-contributor-experience
 _github-challenge-kubernetes:
