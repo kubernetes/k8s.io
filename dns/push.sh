@@ -4,7 +4,7 @@
 
 # Pushes config to zones.
 #   args: args to pass to octodns (e.g. --doit, --force, a list of zones)
-function push() {
+push () {
     docker run -ti \
         -u `id -u` \
         -v ~/.config/gcloud:/.config/gcloud:ro \
@@ -35,7 +35,7 @@ if [ $? != 0 ]; then
     exit 2
 fi
 echo "Pushing to canary zones"
-push --doit canary.k8s.io. canary.kubernetes.io. > log.canary 2>&1
+push --doit canary.k8s.io. canary.kubernetes.io. >> log.canary 2>&1
 if [ $? != 0 ]; then
     echo "Canary push FAILED, halting; log follows:"
     echo "========================================="
@@ -44,7 +44,22 @@ if [ $? != 0 ]; then
 fi
 echo "Canary push SUCCEEDED"
 
-# TODO: run test against canary
+echo "Testing canary zones"
+./check-zone.sh "canary.k8s.io." >> log.canary 2>&1
+if [ $? != 0 ]; then
+    echo "Canary test FAILED, halting; log follows:"
+    echo "========================================="
+    cat log.canary
+    exit 2
+fi
+./check-zone.sh "canary.kubernetes.io." >> log.canary 2>&1
+if [ $? != 0 ]; then
+    echo "Canary test FAILED, halting; log follows:"
+    echo "========================================="
+    cat log.canary
+    exit 2
+fi
+echo "Canary test SUCCEEDED"
 
 # Push to prod.
 echo "Dry-run to prod zones"
@@ -55,8 +70,9 @@ if [ $? != 0 ]; then
     cat log.prod
     exit 3
 fi
+
 echo "Pushing to prod zones"
-push --doit k8s.io. kubernetes.io. > log.prod 2>&1
+push --doit k8s.io. kubernetes.io. >> log.prod 2>&1
 if [ $? != 0 ]; then
     echo "Prod push FAILED, halting; log follows:"
     echo "========================================="
@@ -65,4 +81,19 @@ if [ $? != 0 ]; then
 fi
 echo "Prod push SUCCEEDED"
 
-# TODO: run test against prod
+echo "Testing prod zones"
+./check-zone.sh "k8s.io." >> log.prod 2>&1
+if [ $? != 0 ]; then
+    echo "Prod test FAILED, halting; log follows:"
+    echo "========================================="
+    cat log.prod
+    exit 2
+fi
+./check-zone.sh "kubernetes.io." >> log.prod 2>&1
+if [ $? != 0 ]; then
+    echo "Prod test FAILED, halting; log follows:"
+    echo "========================================="
+    cat log.prod
+    exit 2
+fi
+echo "Prod test SUCCEEDED"
