@@ -46,7 +46,7 @@ docs:
   value: netlifyglobalcdn.com.
 # Create a dummy A record so that the Let's Encrypt TXT records are not caught
 # by the wildcard CNAME record. (@ixdy)
-_acme_challenge.docs:
+_acme-challenge.docs:
   type: A
   value: 0.0.0.0
 
