@@ -86,16 +86,13 @@ docker run -ti \
 
 ## TODO
 
-  * Get owner names and comments on all records
-  * Push an official image to GCR
-    * When to rebuild?
-  * Implement the test part of the push script
-  * Document how to handle "too many" updates (--force)
-    * Always --force?
+Activate this and kill off old DNS:
   * Billing report
   * Usage report
   * Monitoring / alerts / on-call
   * Figure out who to contact to flip top-level NS records.
+  * Document how to handle "too many" updates (--force)
+    * Always --force?
 
 How to automate:
   * Need a k8s cluster to run it
@@ -105,8 +102,11 @@ How to automate:
   * How to handle "too many updates"?
     * manual intervention?
     * always --force?
+  * Push an official image to GCR
+    * When to rebuild?
 
 DNS content fixes:
+  * Get owner names and comments on all records
   * Can we just have a * -> redirect.k8s.io as a catchall?
     * PRO: less rules overall, less churn
     * CON: any rando URL will now land somewhere (we could make them 404, maybe?)
