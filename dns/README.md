@@ -156,6 +156,9 @@ Activate this and kill off old DNS:
   * Document how to handle "too many" updates (--force)
     * Always --force?
 
+RFE:
+  * Add retry+timeout for testing when adding records and getting no answer.
+
 How to automate:
   * Need a k8s cluster to run it
   * PR to github, cronjob in a cluster syncs
