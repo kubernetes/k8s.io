@@ -255,7 +255,7 @@ data:
           rewrite ^/good-first-issue$ https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22&type=Issues redirect;
           rewrite ^/help-wanted$     https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22&type=Issues redirect;
           rewrite ^/needs-ok-to-test$ https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase&type=Issues redirect;
-          rewrite ^/oncall$          https://storage.googleapis.com/kubernetes-jenkins/oncall.html redirect;
+          rewrite ^/oncall$          https://storage.googleapis.com/test-infra-oncall/oncall.html redirect;
           rewrite ^/owners$          https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md redirect;
           rewrite ^/partner-request$ https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform redirect;
           rewrite ^/pr-dashboard$    https://k8s-gubernator.appspot.com/pr redirect;
