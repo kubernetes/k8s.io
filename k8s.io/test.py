@@ -158,7 +158,7 @@ class RedirTest(unittest.TestCase):
                 'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22&type=Issues')
             self.assert_temp_redirect(
                 base + 'oncall',
-                'https://storage.googleapis.com/kubernetes-jenkins/oncall.html')
+                'https://storage.googleapis.com/test-infra-oncall/oncall.html')
             self.assert_temp_redirect(base + 'owners',
                 'https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md')
             self.assert_temp_redirect(
