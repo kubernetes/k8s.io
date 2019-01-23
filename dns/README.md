@@ -148,13 +148,12 @@ docker run -ti \
 
 ## TODO
 
-Activate this and kill off old DNS:
-  * Billing report
-  * Usage report
-  * Monitoring / alerts / on-call
-  * Figure out who to contact to flip top-level NS records.
+Administrative:
   * Document how to handle "too many" updates (--force)
     * Always --force?
+  * Billing report
+  * Usage report
+  * Monitoring / alerts / on-call for DNS?
 
 How to automate:
   * Need a k8s cluster to run it
