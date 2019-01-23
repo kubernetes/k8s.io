@@ -1,12 +1,19 @@
+---
 name: DNS Update Request
 about: Request a create, delete or update of a kubernetes.io or k8s.io DNS record
- ---
- 
- *Type of update:* Update
+title: 'DNS REQUEST: <your-dns-record>'
+labels: wg/k8s-infra
+assignees: ''
 
-*Domain being modified:* `k8s.io`
+---
 
-*Existing DNS Record:*
+### Type of DNS update:
+one of: Create, Delete, Update
+
+### Domain being modified:
+e.g. `k8s.io`
+
+### Existing DNS Record:
 
 ```yaml
 # this is the sub-domain, '' for the top-level domain
@@ -17,13 +24,14 @@ www:
   value: 23.236.58.218
 ```
 
-*New DNS Record:*
+### New DNS Record:
+
 ```yaml
 www:
 - type: CNAME
   value: some.other.host.com
 ```
 
-*Reason for update:*
+### Reason for update:
 
 Example of an update.
