@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- ixdy
+- thockin
+
+# limiting factor from being an approver is inability to deploy changes once PRs merge
+reviewers:
+- nikhita
