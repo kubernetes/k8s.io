@@ -29,6 +29,68 @@ We host it in Google Cloud DNS.
   * GCP project = kubernetes-public
   * https://console.cloud.google.com/net-services/dns/zones?project=kubernetes-public&organizationId=758905017065
 
+## Requesting a DNS update
+
+The process for requesting an update uses Github Issues and PRs.
+
+### Update Request Issue
+
+Open a new issue on this repository with the title "DNS Update Request"
+
+In the issue, please list the following details:
+   * If this update is a create, delete or update.
+   * The base domain that is being modified (e.g. "k8s.io")
+   * The complete data for the existing DNS record if applicable (Updates, Deletes).
+   * The complete data for the new DNS record if applicable (Creates, Updates).
+   * The reason for the update.
+
+Once this issue is created, it should be acknowledged by a DNS administrator.
+
+To open an issue for a DNS update please use the [template here](https://github.com/kubernetes/k8s.io/issues/new?template=dns-request.md)
+
+### Example update issue content:
+
+*Type of update:* Update
+
+*Domain being modified:* `k8s.io`
+
+*Existing DNS Record:*
+
+```yaml
+# this is the sub-domain, '' for the top-level domain
+www:
+# this is the record type, e.g A, CNAME, MX, TXT, etc.
+- type: A
+  # This depends on the record type, see existing YAML files for more examples.
+  value: 23.236.58.218
+```
+
+*New DNS Record:*
+```yaml
+www:
+- type: CNAME
+  value: some.other.host.com
+```
+
+*Reason for update:*
+
+Example of an update.
+
+### Performing an update
+
+#### Update Pull Request
+First, the DNS adminstrator opens a PR with the requested update applied to the appropriate YAML file.
+Next, the requestor validates that the PR looks correct for their request and responds `/lgtm`
+
+The DNS adminstrator merges the PR once it has been LGTM'd
+
+#### Applying the update
+The DNS adminstrator applies the update using the instructions below. Once the update has been
+applied, the DNS adminstrator closes the issue.
+
+Note that in the future, we hope to automate this update so that it happens in response to the
+merge of the update PR.
+
 ## How to update
 
 We use [OctoDNS](https://github.com/github/octodns) to manage the live config.
