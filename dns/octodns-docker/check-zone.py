@@ -58,7 +58,7 @@ def quote_cleanup(values):
     """
     return [unicode(r).replace("'", "").replace('"', '') for r in values]
 
-def is_ip(dns_server):
+def is_ip(address):
     try:
         socket.inet_pton(socket.AF_INET, address)
     except socket.error:  # not a valid address
@@ -94,7 +94,7 @@ def record_response_values(record, response):
         if record._type == 'NS':
             log.info('*** NS Record with NoAnswer for: %s', record.fqdn)
             return []
-        log.error('*** NoAnswer / NoNameservers for: %s', record.fqdn)
+        log.error('*** NoAnswer / NoNameservers for: %s %s', record._type, record.fqdn)
         return None
 
 def verify_dns(queries):
