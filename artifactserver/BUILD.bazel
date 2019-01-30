@@ -1,0 +1,17 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix k8s.io/k8s.io/artifactserver
+gazelle(name = "gazelle")
+
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+
+k8s_object(
+    name = "deploy",
+    template = ":manifest.yaml",
+    cluster = "{STABLE_K8S_CLUSTER}",
+    images = {
+        "k8s.gcr.io/infra/artifactserver:latest": "//cmd/artifactserver:image",
+    },
+    image_chroot = "{STABLE_DOCKER_REGISTRY}/{STABLE_DOCKER_IMAGE_PREFIX}",
+)
+
