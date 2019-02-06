@@ -43,3 +43,10 @@ spec:
             initialDelaySeconds: 3
             timeoutSeconds: 2
             failureThreshold: 2
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 3
+            timeoutSeconds: 2
+            failureThreshold: 2
