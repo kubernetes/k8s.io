@@ -7,8 +7,7 @@ metadata:
 spec:
   selector:
     app: gcsweb
-  type: LoadBalancer
-  loadBalancerIP: 104.197.177.166
+  type: NodePort
   ports:
     - name: http
       port: 80

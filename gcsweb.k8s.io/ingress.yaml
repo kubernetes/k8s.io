@@ -4,9 +4,8 @@ metadata:
   name: gcsweb
   labels:
     app: gcsweb
-  # Uncomment this when service is turned down and the ingress IP is named
-  #annotations:
-  # kubernetes.io/ingress.global-static-ip-name: gcsweb-k8s-io
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: gcsweb-k8s-io
 spec:
   backend:
     serviceName: gcsweb
