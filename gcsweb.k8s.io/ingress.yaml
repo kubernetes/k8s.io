@@ -7,6 +7,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: gcsweb-k8s-io
 spec:
+  tls:
+  - secretName: gcsweb-k8s-io-tls
   backend:
     serviceName: gcsweb
     servicePort: http
