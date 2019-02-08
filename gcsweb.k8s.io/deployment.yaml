@@ -20,8 +20,9 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: gcsweb
-          image: k8s.gcr.io/gcsweb-amd64:v1.0.6
+          image: k8s.gcr.io/gcsweb:v1.1.0
           args:
+            - -upgrade-proxied-http-to-https
             - -b=android-ci
             - -b=crreleases
             - -b=istio-prow
