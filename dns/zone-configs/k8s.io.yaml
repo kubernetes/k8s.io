@@ -228,3 +228,7 @@ testgrid:
 velodrome:
   type: A
   value: 104.197.200.129
+# https://github.com/kubernetes-sigs/kind docs (@bentheelder, @munnerz)
+kind.sigs:
+  type: CNAME
+  value: kindocs.netlify.com
