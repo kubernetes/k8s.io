@@ -84,11 +84,12 @@ gcloud --project "${PROJECT}" \
 
 # Push an image to trigger the bucket to be created
 color 6 "Activating the registry bucket"
+PHONY="ceci-nest-pas-une-image"
 docker pull k8s.gcr.io/pause
-docker tag k8s.gcr.io/pause "gcr.io/${PROJECT}/pause"
-docker push "gcr.io/${PROJECT}/pause"
+docker tag k8s.gcr.io/pause "gcr.io/${PROJECT}/${PHONY}"
+docker push "gcr.io/${PROJECT}/${PHONY}"
 gcloud --project "${PROJECT}" \
-    container images delete --quiet "gcr.io/${PROJECT}/pause:latest"
+    container images delete --quiet "gcr.io/${PROJECT}/${PHONY}:latest"
 
 # Grant cross-repo admins access to admin.
 color 6 "Granting bucket objectAdmin to ${ADMINS}"
@@ -105,3 +106,31 @@ color 6 "Granting bucket objectAdmin to ${WRITERS}"
 gsutil iam ch "group:${WRITERS}:objectAdmin" "gs://${BUCKET}"
 color 6 "Granting bucket legacyBucketReader to ${WRITERS}"
 gsutil iam ch "group:${WRITERS}:legacyBucketReader" "gs://${BUCKET}"
+
+# Set lifecycle policies.
+color 6 "Setting lifecycle to age-out old data"
+echo '
+    {
+      "rule": [
+        {
+          "condition": {
+            "age": 30
+          },
+          "action": {
+            "storageClass": "NEARLINE",
+            "type": "SetStorageClass"
+          }
+        },
+        {
+          "condition": {
+            "age": 90
+          },
+          "action": {
+            "type": "Delete"
+          }
+        }
+      ]
+    }
+    ' | gsutil lifecycle set /dev/stdin "gs://${BUCKET}"
+
+color 6 "Done"
