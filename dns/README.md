@@ -155,9 +155,6 @@ Administrative:
   * Usage report
   * Monitoring / alerts / on-call for DNS?
 
-RFE:
-  * Add retry+timeout for testing when adding records and getting no answer.
-
 How to automate:
   * Need a k8s cluster to run it
   * PR to github, cronjob in a cluster syncs

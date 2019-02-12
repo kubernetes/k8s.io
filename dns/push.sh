@@ -44,22 +44,26 @@ if [ $? != 0 ]; then
 fi
 echo "Canary push SUCCEEDED"
 
-echo "Testing canary zones"
-./check-zone.sh "canary.k8s.io." >> log.canary 2>&1
-if [ $? != 0 ]; then
-    echo "Canary test FAILED, halting; log follows:"
-    echo "========================================="
-    cat log.canary
-    exit 2
-fi
-./check-zone.sh "canary.kubernetes.io." >> log.canary 2>&1
-if [ $? != 0 ]; then
-    echo "Canary test FAILED, halting; log follows:"
-    echo "========================================="
-    cat log.canary
-    exit 2
-fi
-echo "Canary test SUCCEEDED"
+for zone in canary.k8s.io. canary.kubernetes.io.; do
+    TRIES=12
+    echo "Testing canary zone: $zone"
+    for i in $(seq 1 "$TRIES"); do
+        ./check-zone.sh "$zone" >> log.canary 2>&1
+        if [ $? == 0 ]; then
+            break
+        fi
+        if [ $i != "$TRIES" ]; then
+            echo "  test failed, might be propagation delay, will retry..."
+            sleep 10
+        else
+            echo "Canary test FAILED, halting; log follows:"
+            echo "========================================="
+            cat log.canary
+            exit 2
+        fi
+    done
+    echo "Canary $zone SUCCEEDED"
+done
 
 # Push to prod.
 echo "Dry-run to prod zones"
@@ -81,19 +85,23 @@ if [ $? != 0 ]; then
 fi
 echo "Prod push SUCCEEDED"
 
-echo "Testing prod zones"
-./check-zone.sh "k8s.io." >> log.prod 2>&1
-if [ $? != 0 ]; then
-    echo "Prod test FAILED, halting; log follows:"
-    echo "========================================="
-    cat log.prod
-    exit 2
-fi
-./check-zone.sh "kubernetes.io." >> log.prod 2>&1
-if [ $? != 0 ]; then
-    echo "Prod test FAILED, halting; log follows:"
-    echo "========================================="
-    cat log.prod
-    exit 2
-fi
-echo "Prod test SUCCEEDED"
+for zone in k8s.io. kubernetes.io.; do
+    TRIES=12
+    echo "Testing prod zone: $zone"
+    for i in $(seq 1 "$TRIES"); do
+        ./check-zone.sh "$zone" >> log.prod 2>&1
+        if [ $? == 0 ]; then
+            break
+        fi
+        if [ $i != "$TRIES" ]; then
+            echo "  test failed, might be propagation delay, will retry..."
+            sleep 10
+        else
+            echo "Prod test FAILED, halting; log follows:"
+            echo "========================================="
+            cat log.prod
+            exit 2
+        fi
+    done
+    echo "Prod $zone SUCCEEDED"
+done
