@@ -231,4 +231,4 @@ velodrome:
 # https://github.com/kubernetes-sigs/kind docs (@bentheelder, @munnerz)
 kind.sigs:
   type: CNAME
-  value: kindocs.netlify.com
+  value: kindocs.netlify.com.

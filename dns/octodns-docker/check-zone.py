@@ -123,7 +123,8 @@ def verify_dns(queries):
 
             # the responses need a quick test / cleanup
             response_values=record_response_values(record, response)
-            stdout.write(' '.join(response_values))
+            if response_values:
+                stdout.write(' '.join(response_values))
 
             # NS Records will need to be handled differently
             if record._type == "NS":
