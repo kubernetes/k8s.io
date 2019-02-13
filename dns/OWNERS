@@ -1,7 +1,8 @@
 approvers:
-  - cblecker
   - bburns
+  - bentheelder
+  - cblecker
   - dims
   - hh
-  - thockin
   - idvoretskyi
+  - thockin
