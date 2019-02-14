@@ -60,12 +60,25 @@ WRITERS="k8s-infra-gcr-staging-${REPO}@googlegroups.com"
 ORG="758905017065" # kubernetes.io
 BILLING="018801-93540E-22A20E"
 
+
 # Make the project, if needed
 if ! gcloud projects describe "${PROJECT}" >/dev/null 2>&1; then
     color 6 "Creating project ${PROJECT}"
     gcloud projects create "${PROJECT}" \
         --organization "${ORG}"
+else
+    o=$(gcloud projects \
+            describe k8s-staging-coredns \
+            --flatten='parent[]' \
+            --format='csv[no-heading](type, id)' \
+            | grep ^organization \
+            | cut -f2 -d,)
+    if [ "$o" != "${ORG}" ]; then
+        echo "project ${PROJECT} exists, but not in our org: got ${o}"
+        exit 2
+    fi
 fi
+
 color 6 "Configuring billing for ${PROJECT}"
 gcloud beta billing projects link "${PROJECT}" \
     --billing-account "${BILLING}"
