@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: slackin-controller
+  labels:
+    app: slackin
+spec:
+  type: LoadBalancer
+  selector:
+    app: slackin
+  ports:
+  - port: 80
