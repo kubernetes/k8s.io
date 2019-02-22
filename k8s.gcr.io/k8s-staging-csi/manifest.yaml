@@ -1,0 +1,6 @@
+# google group for gcr.io/k8s-staging-csi is k8s-infra-gcr-staging-csi@googlegroups.com
+registries:
+  src: gcr.io/k8s-staging-csi
+  dest: gcr.io/k8s-staging
+service-account: service-account@kubernetes-public.iam.gserviceaccount.com
+images: []
