@@ -38,6 +38,9 @@ fi
 PROD_PROJECT="k8s-gcr-prod"
 TRASH_PROJECT="k8s-gcr-graveyard"
 
+# Regions for prod.
+PROD_REGIONS=(us eu asia)
+
 # Make the projects, if needed
 color 6 "Ensuring prod project exists"
 ensure_project "${PROD_PROJECT}"
@@ -50,32 +53,48 @@ color 6 "Configuring billing for ${TRASH_PROJECT}"
 ensure_billing "${TRASH_PROJECT}"
 
 # Enable container registry APIs
-color 6 "Enabling the container registry API"
+color 6 "Enabling the container registry API for prod"
 enable_api "${PROD_PROJECT}" containerregistry.googleapis.com
+color 6 "Enabling the container registry API for graveyard"
 enable_api "${TRASH_PROJECT}" containerregistry.googleapis.com
 
-color 6 "Enabling the container analysis API"
+color 6 "Enabling the container analysis API for prod"
 enable_api "${PROD_PROJECT}" containeranalysis.googleapis.com
 
 # Push an image to trigger the bucket to be created
-color 6 "Ensuring the registry exists and is readable"
-ensure_repo "${PROD_PROJECT}"
+color 6 "Ensuring the prod registry exists and is readable"
+for r in "${PROD_REGIONS[@]}"; do
+    color 3 "region $r"
+    ensure_repo "${PROD_PROJECT}" "${r}"
+done
+color 6 "Ensuring the graveyard registry exists and is readable"
 ensure_repo "${TRASH_PROJECT}"
 
 # Enable GCR admins
-color 6 "Empowering GCR admins"
-empower_gcr_admins "${PROD_PROJECT}"
+color 6 "Empowering GCR admins in prod"
+for r in "${PROD_REGIONS[@]}"; do
+    color 3 "region $r"
+    empower_gcr_admins "${PROD_PROJECT}" "${r}"
+done
+color 6 "Empowering GCR admins in graveyard"
 empower_gcr_admins "${TRASH_PROJECT}"
 
 # Enable the promoter bot
-color 6 "Empowering image promoter"
-empower_promoter "${PROD_PROJECT}"
+color 6 "Empowering image promoter in prod"
+for r in "${PROD_REGIONS[@]}"; do
+    color 3 "region $r"
+    empower_promoter "${PROD_PROJECT}" "${r}"
+done
+color 6 "Empowering image promoter in graveyard"
 empower_promoter "${TRASH_PROJECT}"
 
 # Set lifecycle policies.
-color 6 "Setting lifecycle policy on ${PROD_PROJECT}"
-ensure_prod_lifecycle "${PROD_PROJECT}"
-color 6 "Setting lifecycle policy on ${TRASH_PROJECT}"
+color 6 "Setting lifecycle policy in prod"
+for r in "${PROD_REGIONS[@]}"; do
+    color 3 "region $r"
+    ensure_prod_lifecycle "${PROD_PROJECT}" "${r}"
+done
+color 6 "Setting lifecycle policy in graveyard"
 ensure_staging_lifecycle "${TRASH_PROJECT}"
 
 color 6 "Done"

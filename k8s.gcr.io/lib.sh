@@ -34,6 +34,9 @@ function color() {
 # The group that admins all GCR repos.
 GCR_ADMINS="k8s-infra-gcr-admins@googlegroups.com"
 
+# The service account name for the image promoter.
+PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
+
 # The GCP org stuff needed to turn it all on.
 GCP_ORG="758905017065" # kubernetes.io
 GCP_BILLING="018801-93540E-22A20E"
@@ -41,13 +44,34 @@ GCP_BILLING="018801-93540E-22A20E"
 # Get the GCS bucket name that backs a GCR repo.
 # $1: The GCR repo (same as the GCP project name)
 function gcs_bucket_for() {
-    if [ $# != 1 -o -z "$1" ]; then
-        echo "gcs_bucket_for(repo_name) requires 1 argument" > /dev/stderr
+    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+        echo "gcs_bucket_for(repo, [region]) requires 1 or 2 arguments" > /dev/stderr
         return 1
     fi
     repo="$1"
+    region="${2:-}"
 
-    echo "gs://artifacts.${repo}.appspot.com"
+    if [ -z "${region}" ]; then
+        echo "gs://artifacts.${repo}.appspot.com"
+    else
+        echo "gs://${region}.artifacts.${repo}.appspot.com"
+    fi
+}
+
+# Get the GCR host name for a region
+# $1: The GCR region
+function gcr_host_for() {
+    if [ $# != 1 ]; then
+        echo "gcr_host_for(region) requires 1 argument" > /dev/stderr
+        return 1
+    fi
+    region="$1"
+
+    if [ -z "${region}" ]; then
+        echo "gcr.io"
+    else
+        echo "${region}.gcr.io"
+    fi
 }
 
 # Get the service account email for a given short name
@@ -68,7 +92,7 @@ function svc_acct_for() {
 # $1: The GCP project
 function ensure_project() {
     if [ $# != 1 -o -z "$1" ]; then
-        echo "ensure_project(proj_name) requires 1 argument" > /dev/stderr
+        echo "ensure_project(project) requires 1 argument" > /dev/stderr
         return 1
     fi
     project="$1"
@@ -94,7 +118,7 @@ function ensure_project() {
 # $1: The GCP project
 function ensure_billing() {
     if [ $# != 1 -o -z "$1" ]; then
-        echo "ensure_billing(proj_name) requires 1 argument" > /dev/stderr
+        echo "ensure_billing(project) requires 1 argument" > /dev/stderr
         return 1
     fi
     project="$1"
@@ -108,7 +132,7 @@ function ensure_billing() {
 # $2: The API (e.g. containerregistry.googleapis.com)
 function enable_api() {
     if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
-        echo "enable_api(proj_name, api) requires 2 arguments" > /dev/stderr
+        echo "enable_api(project, api) requires 2 arguments" > /dev/stderr
         return 1
     fi
     project="$1"
@@ -120,32 +144,36 @@ function enable_api() {
 # Ensure the bucket backing the repo exists and is world-readable
 # $1: The GCP project
 function ensure_repo() {
-    if [ $# != 1 -o -z "$1" ]; then
-        echo "ensure_repo(proj_name) requires 1 argument" > /dev/stderr
+    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+        echo "ensure_repo(project, [region]) requires 1 or 2 arguments" > /dev/stderr
         return 1
     fi
     project="$1"
+    region="${2:-}"
 
-    if ! gsutil ls $(gcs_bucket_for ${project}) >/dev/null 2>&1; then
-        phony="ceci-nest-pas-une-image"
+    if ! gsutil ls $(gcs_bucket_for "${project}" "${region}") >/dev/null 2>&1; then
+        host=$(gcr_host_for "${region}")
+        image="ceci-nest-pas-une-image"
+        dest="${host}/${project}/${image}"
         docker pull k8s.gcr.io/pause
-        docker tag k8s.gcr.io/pause "gcr.io/${project}/${phony}"
-        docker push "gcr.io/${project}/${phony}"
+        docker tag k8s.gcr.io/pause "${dest}"
+        docker push "${dest}"
         gcloud --project "${project}" \
-            container images delete --quiet "gcr.io/${project}/${phony}:latest"
+            container images delete --quiet "${dest}:latest"
     fi
 
-    gsutil iam ch allUsers:objectViewer $(gcs_bucket_for ${project})
+    gsutil iam ch allUsers:objectViewer $(gcs_bucket_for "${project}" "${region}")
 }
 
 # Grant full privileges to GCR admins
 # $1: The GCP project
 function empower_gcr_admins() {
-    if [ $# != 1 -o -z "$1" ]; then
-        echo "empower_gcr_admins(proj_name) requires 1 argument" > /dev/stderr
+    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+        echo "empower_gcr_admins(project, [region]) requires 1 or 2 arguments" > /dev/stderr
         return 1
     fi
     project="$1"
+    region="${2:-}"
 
     # Grant project viewer so the UI will work.
     gcloud \
@@ -154,38 +182,47 @@ function empower_gcr_admins() {
         --role roles/viewer
 
     # Grant admins access to do admin stuff.
-    gsutil iam ch "group:${GCR_ADMINS}:objectAdmin" $(gcs_bucket_for ${project})
-    gsutil iam ch "group:${GCR_ADMINS}:legacyBucketOwner" $(gcs_bucket_for ${project})
+    gsutil iam ch \
+        "group:${GCR_ADMINS}:objectAdmin" \
+        $(gcs_bucket_for "${project}" "${region}")
+    gsutil iam ch \
+        "group:${GCR_ADMINS}:legacyBucketOwner" \
+        $(gcs_bucket_for "${project}" "${region}")
 }
 
 # Grant write privileges to a group
 # $1: The GCP project
 # $2: The googlegroups group
 function empower_group() {
-    if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group(proj_name, group_name) requires 2 arguments" > /dev/stderr
+    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group(project, group_name, [region]) requires 2 or 3 arguments" > /dev/stderr
         return 1
     fi
     project="$1"
     group="$2"
+    region="${3:-}"
 
-    gsutil iam ch "group:${group}:objectAdmin" $(gcs_bucket_for ${project})
-    gsutil iam ch "group:${group}:legacyBucketReader" $(gcs_bucket_for ${project})
+    gsutil iam ch \
+        "group:${group}:objectAdmin" \
+        $(gcs_bucket_for "${project}" "${region}")
+    gsutil iam ch \
+        "group:${group}:legacyBucketReader" \
+        $(gcs_bucket_for "${project}" "${region}")
 }
 
 # Grant full privileges to the GCR promoter bot
 # $1: The GCP project
 function empower_promoter() {
-    if [ $# != 1 -o -z "$1" ]; then
-        echo "empower_promoter(proj_name) requires 1 argument" > /dev/stderr
+    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+        echo "empower_promoter(project, [region]) requires 1 or 2 arguments" > /dev/stderr
         return 1
     fi
     project="$1"
+    region="${2:-}"
 
-    name="k8s-infra-gcr-promoter"
-    acct=$(svc_acct_for "${project}" "${name}")
+    acct=$(svc_acct_for "${project}" "${PROMOTER_SVCACCT}")
 
-    if !  gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
+    if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
             iam service-accounts create \
             "${name}" \
@@ -193,20 +230,43 @@ function empower_promoter() {
     fi
 
     # Grant admins access to do admin stuff.
-    gsutil iam ch "serviceAccount:${acct}:objectAdmin" $(gcs_bucket_for ${project})
-    gsutil iam ch "serviceAccount:${acct}:legacyBucketOwner" $(gcs_bucket_for ${project})
+    gsutil iam ch \
+        "serviceAccount:${acct}:objectAdmin" \
+        $(gcs_bucket_for "${project}" "${region}")
+    gsutil iam ch \
+        "serviceAccount:${acct}:legacyBucketOwner" \
+        $(gcs_bucket_for "${project}" "${region}")
+}
+
+# Configure bucket lifecycle for a prod repo
+# $1: The GCP project
+function ensure_prod_lifecycle() {
+    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+        echo "ensure_prod_lifecycle(project, [region]) requires 1 or 2 arguments" > /dev/stderr
+        return 1
+    fi
+    project="$1"
+    region="${2:-}"
+
+    # Set lifecycle policies.
+    # TODO: do we want this?  It will inhibit promoter's GC, but will protect
+    # against mistakenly nuking images we wanted to keep.
+    #TODO: if we keep this, maybe we want to lock this (can't be overridden)?
+    gsutil retention set 5y $(gcs_bucket_for "${project}" "${region}")
 }
 
 # Configure bucket lifecycle for a staging repo
 # $1: The GCP project
 function ensure_staging_lifecycle() {
-    if [ $# != 1 -o -z "$1" ]; then
-        echo "ensure_staging_lifecycle(proj_name) requires 1 arguments" > /dev/stderr
+    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+        echo "ensure_staging_lifecycle(project, [region]) requires 1 or 2 arguments" > /dev/stderr
         return 1
     fi
     project="$1"
+    region="${2:-}"
 
     # Set lifecycle policies.
+    gsutil retention set 30d $(gcs_bucket_for "${project}" "${region}")
     echo '
         {
           "rule": [
@@ -229,20 +289,5 @@ function ensure_staging_lifecycle() {
             }
           ]
         }
-        ' | gsutil lifecycle set /dev/stdin $(gcs_bucket_for ${project})
-}
-
-# Configure bucket lifecycle for a prod repo
-# $1: The GCP project
-function ensure_prod_lifecycle() {
-    if [ $# != 1 -o -z "$1" ]; then
-        echo "ensure_prod_lifecycle(proj_name) requires 1 arguments" > /dev/stderr
-        return 1
-    fi
-    project="$1"
-
-    # Set lifecycle policies.
-    gsutil retention set 5y $(gcs_bucket_for ${project})
-
-    #TODO: maybe we want to lock this?
+        ' | gsutil lifecycle set /dev/stdin $(gcs_bucket_for "${project}" "${region}")
 }
