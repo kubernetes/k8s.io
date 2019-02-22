@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: slackin-kubernetes
-        image: kantrn/k8s-slackin-tmp:v2
+        image: kantrn/k8s-slackin-tmp:v3
         env:
         - name: PORT
           value: "80"
