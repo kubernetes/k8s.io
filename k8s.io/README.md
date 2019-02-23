@@ -9,7 +9,7 @@ Vanity URL(s)
 |  | k8s.io | kubernetes.io |
 | --- | --- | --- |
 | APT downloads| https://apt.k8s.io | https://apt.kubernetes.io |
-| Blog | https://blog.k8s.io | |
+| Blog | https://k8s.io/blog | https://kubernetes.io/blog |
 | Changelog | https://changelog.k8s.io | https://changelog.kubernetes.io |
 | CI logs | https://ci-test.k8s.io | https://ci-test.kubernetes.io |
 | Git repo | https://code.k8s.io | https://code.kubernetes.io |
@@ -22,12 +22,12 @@ Vanity URL(s)
 | Github organization| https://git.k8s.io | https://git.kubernetes.io |
 | Redirections | https://go.k8s.io | https://go.kubernetes.io |
 | Issues | https://issue.k8s.io <br> https://issues.k8s.io | https://issue.kubernetes.io <br> https://issues.kubernetes.io |
-| Main site | https://k8s.io |
+| Main site | https://k8s.io | https://kubernetes.io |
 | PR Dashboard | https://pr-test.k8s.io | https://pr-test.kubernetes.io |
 | Pull requests | https://pr.k8s.io <br> https://prs.k8s.io | https://pr.kubernetes.io <br> https://prs.kubernetes.io |
 | Downloads | https://releases.k8s.io <br> https://rel.k8s.io | https://releases.kubernetes.io <br> https://rel.kubernetes.io |
 | Kubernetes SIGs | https://sigs.k8s.io | |
-| Tide status (formerly submit queue) | https://submit-queue.k8s.io | https://kubernetes.submit-queue.k8s.io |
+| Tide status (formerly submit queue) | https://prow.k8s.io/tide | https://prow.kubernetes.io/tide |
 | Test grid | https://testgrid.k8s.io | https://testgrid.kubernetes.io |
 | YUM downloads | https://yum.k8s.io | https://yum.kubernetes.io |
 
