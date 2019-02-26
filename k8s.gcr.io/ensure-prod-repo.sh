@@ -88,13 +88,4 @@ done
 color 6 "Empowering image promoter in graveyard"
 empower_promoter "${TRASH_PROJECT}"
 
-# Set lifecycle policies.
-color 6 "Setting lifecycle policy in prod"
-for r in "${PROD_REGIONS[@]}"; do
-    color 3 "region $r"
-    ensure_prod_lifecycle "${PROD_PROJECT}" "${r}"
-done
-color 6 "Setting lifecycle policy in graveyard"
-ensure_staging_lifecycle "${TRASH_PROJECT}"
-
 color 6 "Done"

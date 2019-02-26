@@ -79,8 +79,4 @@ empower_gcr_admins "${PROJECT}"
 color 6 "Empowering ${WRITERS}"
 empower_group "${PROJECT}" "${WRITERS}"
 
-# Set lifecycle policies.
-color 6 "Setting lifecycle policy"
-ensure_staging_lifecycle "${PROJECT}"
-
 color 6 "Done"
