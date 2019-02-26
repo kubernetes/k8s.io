@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: artifactserver
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: artifactserver
+  name: artifactserver
+  labels:
+    app: artifactserver
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: artifactserver
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: artifactserver
+          #image: k8s.gcr.io/infra/artifactserver:latest
+          image: justinsb/artifactserver:latest
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 256Mi
+            limits:
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /_/healthz
+              port: 8080
+            initialDelaySeconds: 3
+            timeoutSeconds: 2
+            failureThreshold: 2
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: artifactserver
+  name: artifactserver
+  labels:
+    app: artifactserver
+spec:
+  selector:
+    app: artifactserver
+  type: LoadBalancer
+  #loadBalancerIP: 1.2.3.4
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
