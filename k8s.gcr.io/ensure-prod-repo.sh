@@ -22,7 +22,7 @@ set -o pipefail
 
 SCRIPT_PATH=$(readlink -f "$0")
 SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
-source "${SCRIPT_DIR}/lib.sh"
+. "${SCRIPT_DIR}/lib.sh"
 
 function usage() {
     echo "usage: $0" > /dev/stderr
