@@ -42,14 +42,14 @@ TRASH_PROJECT="k8s-gcr-graveyard"
 PROD_REGIONS=(us eu asia)
 
 # Make the projects, if needed
-color 6 "Ensuring prod project exists"
+color 6 "Ensuring prod project exists: ${PROD_PROJECT}"
 ensure_project "${PROD_PROJECT}"
-color 6 "Ensuring graveyard project exists"
+color 6 "Ensuring graveyard project exists: ${TRASH_PROJECT}"
 ensure_project "${TRASH_PROJECT}"
 
-color 6 "Configuring billing for ${PROD_PROJECT}"
+color 6 "Configuring billing for prod"
 ensure_billing "${PROD_PROJECT}"
-color 6 "Configuring billing for ${TRASH_PROJECT}"
+color 6 "Configuring billing for graveyard"
 ensure_billing "${TRASH_PROJECT}"
 
 # Enable container registry APIs
