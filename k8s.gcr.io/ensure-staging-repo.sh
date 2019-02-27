@@ -53,11 +53,8 @@ PROJECT="k8s-staging-${REPO}"
 # The group that can write to this staging repo.
 WRITERS="k8s-infra-gcr-staging-${REPO}@googlegroups.com"
 
-# The GCP project name.
-PROJECT="k8s-gcr-prod"
-
 # Make the project, if needed
-color 6 "Ensuring project exists"
+color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
 color 6 "Configuring billing for ${PROJECT}"
