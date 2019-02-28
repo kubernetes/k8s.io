@@ -1,0 +1,21 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: gcsweb-k8s-io
+  namespace: gcsweb
+spec:
+  secretName: gcsweb-k8s-io-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  commonName: gcsweb.k8s.io
+  dnsNames:
+  - gcsweb.k8s.io
+  - gcsweb.kubernetes.io
+  acme:
+    config:
+    - http01:
+        ingress: gcsweb
+      domains:
+      - gcsweb.k8s.io
+      - gcsweb.kubernetes.io
