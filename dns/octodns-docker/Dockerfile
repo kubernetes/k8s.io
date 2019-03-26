@@ -1,5 +1,5 @@
-# python:2-alpine as of October 29th, 2018
-ARG BASE_IMAGE=python@sha256:6f7386fb948e2c209bbf1a2b18fd6af060d1f453006cbcb0b43d6bca6ba2a364
+# python:2-alpine as of March 26th, 2019
+ARG BASE_IMAGE=python@sha256:46d6e67d464a2811efe60440248623b14cb6db273fac59631dd8bd9e13a77491
 FROM ${BASE_IMAGE}
 
 # install from requirements.txt and ensure that all requirements match
