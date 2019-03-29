@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-urls
+spec:
+  selector:
+    matchLabels:
+      app: short-urls
+  template:
+    metadata:
+      labels:
+        app: short-urls
+    spec:
+      containers:
+      - name: shlink
+        image: shlinkio/shlink:1.16.2
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          # Start shlink server in the background.
+          /bin/sh /etc/shlink/docker-entrypoint.sh &
+          PID=$!
+          # Wait for service to become available.
+          while ! shlink short-url:list; do
+            sleep 10s
+          done
+          # Load URLs from the config map.
+          while read slug url; do
+            shlink short-url:generate "--customSlug=${slug}" "${url}"
+          done < /etc/config/short-urls
+          # Create healthcheck URL for our readiness probe.
+          shlink short-url:generate -c shlink-healthcheck https://k8s.io
+          # Block until the config map changes, then exit. This will restart
+          # the container and load the new config.
+          # TODO: live reload without downtime
+          inotifyd - /etc/config/short-urls:e
+        env:
+          - name: SHORT_DOMAIN_HOST
+            value: "go.k8s.io"
+          - name: NOT_FOUND_REDIRECT_TO
+            value: "https://k8s.io"
+          - name: SHORT_DOMAIN_SCHEMA
+            value: "https"
+          - name: DB_DRIVER
+            value: "sqlite"
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          exec:
+            command: ["shlink", "short-url:parse", "shlink-healthcheck"]
+        volumeMounts:
+        - name: short-urls-config
+          mountPath: /etc/config
+        # TODO: set resource requests
+      volumes:
+      - name: short-urls-config
+        configMap:
+          name: short-urls
