@@ -229,7 +229,7 @@ function empower_promoter() {
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
             iam service-accounts create \
-            "${name}" \
+            "${PROMOTER_SVCACCT}" \
             --display-name="k8s-infra container image promoter"
     fi
 
