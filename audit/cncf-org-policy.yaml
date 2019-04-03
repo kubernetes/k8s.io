@@ -1,0 +1,31 @@
+bindings:
+- members:
+  - user:ihor@cncf.io
+  - user:thockin@google.com
+  - user:twaggoner@linuxfoundation.org
+  role: roles/billing.admin
+- members:
+  - domain:kubernetes.io
+  - user:ihor@cncf.io
+  - user:thockin@google.com
+  role: roles/billing.creator
+- members:
+  - user:thockin@google.com
+  role: roles/iam.organizationRoleAdmin
+- members:
+  - group:k8s-infra-gcp-auditors@googlegroups.com
+  role: roles/iam.securityReviewer
+- members:
+  - user:domain-admin-lf@kubernetes.io
+  - user:ihor@cncf.io
+  - user:thockin@google.com
+  - user:twaggoner@linuxfoundation.org
+  role: roles/resourcemanager.organizationAdmin
+- members:
+  - domain:kubernetes.io
+  - user:thockin@google.com
+  role: roles/resourcemanager.projectCreator
+- members:
+  - user:thockin@google.com
+  role: roles/resourcemanager.projectDeleter
+etag: BwWDmKQ6zmg=
