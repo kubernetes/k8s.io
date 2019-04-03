@@ -35,57 +35,53 @@ if [ $# != 0 ]; then
 fi
 
 # The GCP project names.
+TEST_PROJECT="k8s-cip-test-prod"
 PROD_PROJECT="k8s-gcr-prod"
 TRASH_PROJECT="k8s-gcr-graveyard"
+
+ALL_PROJECTS="${TEST_PROJECT} ${PROD_PROJECT} ${TRASH_PROJECT}"
 
 # Regions for prod.
 PROD_REGIONS=(us eu asia)
 
 # Make the projects, if needed
-color 6 "Ensuring prod project exists: ${PROD_PROJECT}"
-ensure_project "${PROD_PROJECT}"
-color 6 "Ensuring graveyard project exists: ${TRASH_PROJECT}"
-ensure_project "${TRASH_PROJECT}"
+for prj in ${ALL_PROJECTS}; do
+    color 6 "Ensuring project exists: ${prj}"
+    ensure_project "${prj}"
 
-color 6 "Configuring billing for prod"
-ensure_billing "${PROD_PROJECT}"
-color 6 "Configuring billing for graveyard"
-ensure_billing "${TRASH_PROJECT}"
+    color 6 "Configuring billing: ${prj}"
+    ensure_billing "${prj}"
 
-# Enable container registry APIs
-color 6 "Enabling the container registry API for prod"
-enable_api "${PROD_PROJECT}" containerregistry.googleapis.com
-color 6 "Enabling the container registry API for graveyard"
-enable_api "${TRASH_PROJECT}" containerregistry.googleapis.com
+    color 6 "Enabling the container registry API: ${prj}"
+    enable_api "${prj}" containerregistry.googleapis.com
 
-color 6 "Enabling the container analysis API for prod"
-enable_api "${PROD_PROJECT}" containeranalysis.googleapis.com
+    color 6 "Enabling the container analysis API for: ${prj}"
+    enable_api "${prj}" containeranalysis.googleapis.com
 
-# Push an image to trigger the bucket to be created
-color 6 "Ensuring the prod registry exists and is readable"
+    color 6 "Ensuring the registry exists and is readable: ${prj}"
+    for r in "${PROD_REGIONS[@]}"; do
+        color 3 "region $r"
+        ensure_repo "${prj}" "${r}"
+    done
+
+    color 6 "Empowering GCR admins: ${prj}"
+    for r in "${PROD_REGIONS[@]}"; do
+        color 3 "region $r"
+        empower_gcr_admins "${prj}" "${r}"
+    done
+
+    color 6 "Empowering image promoter: ${prj}"
+    for r in "${PROD_REGIONS[@]}"; do
+        color 3 "region $r"
+        empower_promoter "${prj}" "${r}"
+    done
+done
+
+# Special cases
+color 6 "Empowering cip-test group in cip-test"
 for r in "${PROD_REGIONS[@]}"; do
     color 3 "region $r"
-    ensure_repo "${PROD_PROJECT}" "${r}"
+    empower_group "${TEST_PROJECT}" "k8s-infra-gcr-staging-cip-test@googlegroups.com" "${r}"
 done
-color 6 "Ensuring the graveyard registry exists and is readable"
-ensure_repo "${TRASH_PROJECT}"
-
-# Enable GCR admins
-color 6 "Empowering GCR admins in prod"
-for r in "${PROD_REGIONS[@]}"; do
-    color 3 "region $r"
-    empower_gcr_admins "${PROD_PROJECT}" "${r}"
-done
-color 6 "Empowering GCR admins in graveyard"
-empower_gcr_admins "${TRASH_PROJECT}"
-
-# Enable the promoter bot
-color 6 "Empowering image promoter in prod"
-for r in "${PROD_REGIONS[@]}"; do
-    color 3 "region $r"
-    empower_promoter "${PROD_PROJECT}" "${r}"
-done
-color 6 "Empowering image promoter in graveyard"
-empower_promoter "${TRASH_PROJECT}"
 
 color 6 "Done"
