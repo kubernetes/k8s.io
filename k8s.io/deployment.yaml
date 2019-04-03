@@ -52,6 +52,13 @@ spec:
           initialDelaySeconds: 3
           timeoutSeconds: 2
           failureThreshold: 2
+        readinessProbe:
+          httpGet:
+            path: /_healthz
+            port: 80
+          initialDelaySeconds: 3
+          timeoutSeconds: 2
+          failureThreshold: 2
         volumeMounts:
         - name: nginx
           mountPath: /etc/nginx
