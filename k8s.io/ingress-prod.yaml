@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: k8s-io
+  labels:
+    app: k8s-io
+  namespace: k8s-io-prod
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: k8s-io-ingress-prod
+spec:
+  tls:
+  - secretName: ssl
+  backend:
+    serviceName: k8s-io
+    servicePort: http
