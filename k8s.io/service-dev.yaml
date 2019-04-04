@@ -5,9 +5,7 @@ metadata:
 spec:
   selector:
     app: k8s-io
-  type: LoadBalancer
+  type: NodePort
   ports:
   - name: http
     port: 80
-  - name: https
-    port: 443
