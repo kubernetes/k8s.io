@@ -6,7 +6,7 @@ metadata:
     app: k8s-io
 spec:
   tls:
-  - secretName: ssl
+  - secretName: k8s-io-tls
   backend:
     serviceName: k8s-io
     servicePort: http
