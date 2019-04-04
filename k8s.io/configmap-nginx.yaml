@@ -12,18 +12,10 @@ data:
     }
 
     http {
-      # TODO: remove SSL serving from nginx
-      # Certs for all SSL server_names.
-      ssl_certificate     /certs/tls.crt;
-      ssl_certificate_key /certs/tls.key;
-      ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-      ssl_ciphers         HIGH:!aNULL:!MD5;
-
       # This is the main site.
       server {
         server_name k8s.io;
         listen 80 default_server;
-        listen 443 ssl;
 
         location = /_healthz {
           add_header Content-Type text/plain;
@@ -66,7 +58,6 @@ data:
       server {
         server_name sigs.k8s.io sigs.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         # The ?! block is negative-lookahead to prevent `/repo/` from grouping into (`repo`, `/`) while `/repo/path` will still group as (`repo`, `/path`).
         location ~ ^/(?<sig_repo>.*?)(?!/+$)(?<repo_subpath>/.*)?$ {
@@ -114,7 +105,6 @@ data:
       server {
         server_name apt.kubernetes.io apt.k8s.io;
         listen 80;
-        listen 443 ssl;
 
         rewrite ^/(.*)?$    https://packages.cloud.google.com/apt/$1 redirect;
       }
@@ -122,7 +112,6 @@ data:
       server {
         server_name yum.kubernetes.io yum.k8s.io;
         listen 80;
-        listen 443 ssl;
 
         rewrite ^/(.*)?$    https://packages.cloud.google.com/yum/$1 redirect;
       }
@@ -130,7 +119,6 @@ data:
       server {
         server_name blog.kubernetes.io blog.k8s.io;
         listen 80;
-        listen 443 ssl;
 
         rewrite ^/(.*)?$    https://kubernetes.io/blog/$1 redirect;
       }
@@ -138,7 +126,6 @@ data:
       server {
         server_name changelog.kubernetes.io changelog.k8s.io;
         listen 80;
-        listen 443 ssl;
 
         rewrite ^/$         https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md redirect;
         rewrite ^/(.*)?$    https://github.com/kubernetes/kubernetes/releases/tag/$1 redirect;
@@ -146,7 +133,6 @@ data:
       server {
         server_name ci-test.kubernetes.io ci-test.k8s.io;
         listen 80;
-        listen 443 ssl;
 
         # This is really not ideal, but there's no obvious way to browse GCS that handles directories and files.
         rewrite ^/$             https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs redirect;
@@ -158,14 +144,12 @@ data:
       server {
         server_name code.kubernetes.io code.k8s.io;
         listen 80;
-        listen 443 ssl;
 
         rewrite ^/(.*)?$    https://github.com/kubernetes/kubernetes/tree/master/$1 redirect;
       }
       server {
         server_name dl.k8s.io dl.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           # Don't require /release/ if you want to get at the Kubernetes release artifacts, the common case.
@@ -178,7 +162,6 @@ data:
       server {
         server_name docs.k8s.io docs.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           rewrite ^/v[0-9]+\.[0-9]+(/.*)?$     https://kubernetes.io/docs$1   redirect; # legacy
@@ -188,7 +171,6 @@ data:
       server {
         server_name examples.k8s.io examples.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           rewrite ^/v([0-9]+\.[0-9]+)(/.*)?$    https://github.com/kubernetes/kubernetes/tree/release-$1/examples$2  redirect;
@@ -198,7 +180,6 @@ data:
       server {
         server_name feature.k8s.io features.k8s.io feature.kubernetes.io features.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           rewrite ^/(.*)$  https://github.com/kubernetes/features/issues/$1 redirect;
@@ -207,7 +188,6 @@ data:
       server {
         server_name get.k8s.io get.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location = / {
           # $https is set to 'on' when connecting to nginx via HTTPS directly.
@@ -234,7 +214,6 @@ data:
       server {
         server_name git.k8s.io git.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           rewrite ^/$               https://github.com/kubernetes/ redirect;
@@ -245,7 +224,6 @@ data:
       server {
         server_name go.k8s.io go.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         # Please update README.md when you update the list below.
         location / {
@@ -269,7 +247,6 @@ data:
       server {
         server_name issue.k8s.io issues.k8s.io issue.kubernetes.io issues.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           rewrite ^/(.*)$              https://github.com/kubernetes/kubernetes/issues/$1 redirect;
@@ -278,7 +255,6 @@ data:
       server {
         server_name pr.k8s.io prs.k8s.io pr.kubernetes.io prs.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           rewrite ^/$                  https://github.com/kubernetes/kubernetes/pulls redirect;
@@ -288,7 +264,6 @@ data:
       server {
         server_name pr-test.kubernetes.io pr-test.k8s.io;
         listen 80;
-        listen 443 ssl;
 
         rewrite ^/$       https://k8s-gubernator.appspot.com redirect;
         rewrite ^/(.*)$   https://k8s-gubernator.appspot.com/pr/$1 redirect;
@@ -297,7 +272,6 @@ data:
       server {
         server_name releases.k8s.io rel.k8s.io releases.kubernetes.io rel.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           rewrite ^/$                  https://github.com/kubernetes/kubernetes/releases redirect;
@@ -308,7 +282,6 @@ data:
       server {
         server_name submit-queue.k8s.io submit-queue.kubernetes.io;
         listen 80;
-        listen 443 ssl;
 
         location / {
           rewrite ^/.*$  https://prow.k8s.io/tide redirect;

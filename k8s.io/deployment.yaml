@@ -29,10 +29,6 @@ spec:
         configMap:
           name: www-get
           # Map all keys to files.
-      - name: ssl
-        secret:
-          secretName: ssl
-          # Map all keys to files.
       containers:
       - name: nginx
         image: nginx:1.10-alpine  # = :stable-alpine as of 8/23/2016
@@ -65,7 +61,4 @@ spec:
           readOnly: true
         - name: www-get
           mountPath: /www/get
-          readOnly: true
-        - name: ssl
-          mountPath: /certs
           readOnly: true
