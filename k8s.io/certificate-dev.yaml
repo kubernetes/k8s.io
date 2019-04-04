@@ -1,0 +1,60 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: k8s-io-selfsigned
+spec:
+  secretname: k8s-io-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: selfsigning-issuer
+  commonName: k8s.io
+  dnsNames:
+  - k8s.io
+  - apt.k8s.io
+  - apt.kubernetes.io
+  - blog.k8s.io
+  - blog.kubernetes.io
+  - changelog.k8s.io
+  - changelog.kubernetes.io
+  - ci-test.k8s.io
+  - ci-test.kubernetes.io
+  - code.k8s.io
+  - code.kubernetes.io
+  - dl.k8s.io
+  - dl.kubernetes.io
+  - docs.k8s.io
+  - docs.kubernetes.io
+  - examples.k8s.io
+  - examples.kubernetes.io
+  - feature.k8s.io
+  - feature.kubernetes.io
+  - features.k8s.io
+  - features.kubernetes.io
+  - get.k8s.io
+  - get.kubernetes.io
+  - git.k8s.io
+  - git.kubernetes.io
+  - go.k8s.io
+  - go.kubernetes.io
+  - issue.k8s.io
+  - issue.kubernetes.io
+  - issues.k8s.io
+  - issues.kubernetes.io
+  - pr-test.k8s.io
+  - pr-test.kubernetes.io
+  - pr.k8s.io
+  - pr.kubernetes.io
+  - prs.k8s.io
+  - prs.kubernetes.io
+  - rel.k8s.io
+  - rel.kubernetes.io
+  - releases.k8s.io
+  - releases.kubernetes.io
+  - sigs.k8s.io
+  - sigs.kubernetes.io
+  - submit-queue.k8s.io
+  - submit-queue.kubernetes.io
+  - www.k8s.io
+  - www.kubernetes.io
+  - yum.k8s.io
+  - yum.kubernetes.io
