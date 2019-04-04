@@ -14,6 +14,7 @@ deploy:
 	kubectl apply -f configmap-www-get.yaml
 	kubectl apply -f service-dev.yaml
 	kubectl apply -f deployment.yaml
+	kubectl apply -f ingress-dev.yaml
 
 .PHONY: test
 test:

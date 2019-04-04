@@ -12,6 +12,7 @@ data:
     }
 
     http {
+      # TODO: remove SSL serving from nginx
       # Certs for all SSL server_names.
       ssl_certificate     /certs/tls.crt;
       ssl_certificate_key /certs/tls.key;
@@ -19,24 +20,9 @@ data:
       ssl_ciphers         HIGH:!aNULL:!MD5;
 
       # This is the main site.
-      #
-      # Upgrade HTTP to HTTPS.
       server {
         server_name k8s.io;
         listen 80 default_server;
-
-        location = /_healthz {
-          add_header Content-Type text/plain;
-          return 200 'ok';
-        }
-
-        location / {
-          return 301 https://$host$request_uri;
-        }
-      }
-      # Handle HTTPS.
-      server {
-        server_name k8s.io;
         listen 443 ssl;
 
         location = /_healthz {
@@ -45,6 +31,16 @@ data:
         }
 
         location ~ ^/(?<repo>[^/]*)(?<subpath>/.*)?$ {
+          # $https is set to 'on' when connecting to nginx via HTTPS directly.
+          set $https_status $https;
+          if ($http_x_forwarded_proto = 'https') {
+            set $https_status 'on';
+          }
+          # Upgrade HTTP to HTTPS.
+          if ($https_status != 'on') {
+            return 301 https://$host$request_uri;
+          }
+
           if ($arg_go-get = "1") {
             # This is a go-get operation.
             return 200 '
@@ -67,23 +63,23 @@ data:
       }
 
       # Vanity redirects for the new kubernetes-sigs repos
-      #
-      # Upgrade HTTP to HTTPS.
       server {
         server_name sigs.k8s.io;
         listen 80;
-
-        location / {
-          return 301 https://$host$request_uri;
-        }
-      }
-      # Handle HTTPS
-      server {
-        server_name sigs.k8s.io;
         listen 443 ssl;
 
         # The ?! block is negative-lookahead to prevent `/repo/` from grouping into (`repo`, `/`) while `/repo/path` will still group as (`repo`, `/path`).
         location ~ ^/(?<sig_repo>.*?)(?!/+$)(?<repo_subpath>/.*)?$ {
+          # $https is set to 'on' when connecting to nginx via HTTPS directly.
+          set $https_status $https;
+          if ($http_x_forwarded_proto = 'https') {
+            set $https_status 'on';
+          }
+          # Upgrade HTTP to HTTPS.
+          if ($https_status != 'on') {
+            return 301 https://$host$request_uri;
+          }
+
           if ($arg_go-get = "1") {
             # This is a go-get operation.
             return 200 '
@@ -211,25 +207,28 @@ data:
       server {
         server_name get.k8s.io get.kubernetes.io;
         listen 80;
-        # 443 is covered below.
-
-        location / {
-          root /www/get;
-          index get-kube-insecure.sh;
-        }
-      }
-      server {
-        server_name get.k8s.io get.kubernetes.io;
         listen 443 ssl;
-        # 80 is covered above.
 
-        # Note that 'location =' is an exact match, no sub-URI's match.
         location = / {
+          # $https is set to 'on' when connecting to nginx via HTTPS directly.
+          set $https_status $https;
+          if ($http_x_forwarded_proto = 'https') {
+            set $https_status 'on';
+          }
+          # If not connecting securely, explicitly return the insecure script.
+          if ($https_status != 'on') {
+            rewrite ^/$ /get-kube-insecure.sh;
+          }
+          # Otherwise, proxy through to the real script.
           proxy_set_header Host raw.githubusercontent.com;
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_next_upstream error timeout http_500 http_502 http_503 http_504;
           proxy_pass https://raw.githubusercontent.com/kubernetes/kubernetes/master/cluster/get-kube.sh;
+        }
+        location / {
+          root /www/get;
+          index get-kube-insecure.sh;
         }
       }
       server {

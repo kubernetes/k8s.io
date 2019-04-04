@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: k8s-io
+  labels:
+    app: k8s-io
+spec:
+  tls:
+  - secretName: ssl
+  backend:
+    serviceName: k8s-io
+    servicePort: http
