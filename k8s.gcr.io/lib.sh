@@ -43,6 +43,7 @@ GCP_BILLING="018801-93540E-22A20E"
 
 # Get the GCS bucket name that backs a GCR repo.
 # $1: The GCR repo (same as the GCP project name)
+# $2: The GCR region (optional)
 function gcs_bucket_for() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
         echo "gcs_bucket_for(repo, [region]) requires 1 or 2 arguments" >&2
@@ -143,6 +144,7 @@ function enable_api() {
 
 # Ensure the bucket backing the repo exists and is world-readable
 # $1: The GCP project
+# $2: The GCR region (optional)
 function ensure_repo() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
         echo "ensure_repo(project, [region]) requires 1 or 2 arguments" >&2
@@ -168,6 +170,7 @@ function ensure_repo() {
 
 # Grant full privileges to GCR admins
 # $1: The GCP project
+# $2: The GCR region (optional)
 function empower_gcr_admins() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
         echo "empower_gcr_admins(project, [region]) requires 1 or 2 arguments" >&2
@@ -195,6 +198,7 @@ function empower_gcr_admins() {
 # Grant write privileges to a group
 # $1: The GCP project
 # $2: The googlegroups group
+# $3: The GCR region (optional)
 function empower_group() {
     if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
         echo "empower_group(project, group_name, [region]) requires 2 or 3 arguments" >&2
@@ -215,6 +219,7 @@ function empower_group() {
 
 # Grant full privileges to the GCR promoter bot
 # $1: The GCP project
+# $2: The GCR region (optional)
 function empower_promoter() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
         echo "empower_promoter(project, [region]) requires 1 or 2 arguments" >&2
@@ -229,7 +234,7 @@ function empower_promoter() {
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
             iam service-accounts create \
-            "${name}" \
+            "${PROMOTER_SVCACCT}" \
             --display-name="k8s-infra container image promoter"
     fi
 
