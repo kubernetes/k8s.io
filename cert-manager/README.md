@@ -6,6 +6,7 @@ kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-ad
 kubectl apply -f cert-manager.yaml --validate=false  # --validate=false no longer needed with k8s 1.13+
 kubectl apply -f letsencrypt-staging.yaml
 kubectl apply -f letsencrypt-prod.yaml
+kubectl apply -f selfsigning-clusterissuer.yaml
 ```
 
 This will set up cluster-wide webhooks and issuers, you can subsequently create
