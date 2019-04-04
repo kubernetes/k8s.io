@@ -64,7 +64,7 @@ data:
 
       # Vanity redirects for the new kubernetes-sigs repos
       server {
-        server_name sigs.k8s.io;
+        server_name sigs.k8s.io sigs.kubernetes.io;
         listen 80;
         listen 443 ssl;
 
@@ -128,11 +128,11 @@ data:
       }
 
       server {
-        server_name blog.k8s.io;
+        server_name blog.kubernetes.io blog.k8s.io;
         listen 80;
         listen 443 ssl;
 
-        rewrite ^/(.*)?$    http://blog.kubernetes.io/$1 redirect;
+        rewrite ^/(.*)?$    https://kubernetes.io/blog/$1 redirect;
       }
 
       server {
@@ -313,13 +313,5 @@ data:
         location / {
           rewrite ^/.*$  https://prow.k8s.io/tide redirect;
         }
-      }
-
-      server {
-        server_name testgrid.kubernetes.io testgrid.k8s.io;
-        listen 80;
-        listen 443 ssl;
-
-        rewrite ^/(.*)?$    https://k8s-testgrid.appspot.com/$1 redirect;
       }
     }
