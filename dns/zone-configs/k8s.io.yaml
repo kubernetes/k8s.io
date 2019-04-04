@@ -2,7 +2,7 @@
 # The top-level k8s.io zone
 '':
   - type: A
-    value: 23.236.58.218 # Our vanity redirector, hosted in GKE
+    value: 35.201.71.162 # Our vanity redirector, hosted in GKE
   - type: MX
     values:
     - exchange: aspmx.l.google.com.
@@ -36,7 +36,7 @@ canary:
 # becomes different from the main record. (@thockin)
 redirect:
   type: A
-  value: 23.236.58.218
+  value: 35.201.71.162
 
 # Main docs site is a redirect (@chenopis)
 docs:

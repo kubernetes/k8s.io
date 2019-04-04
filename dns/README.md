@@ -62,7 +62,7 @@ www:
 # this is the record type, e.g A, CNAME, MX, TXT, etc.
 - type: A
   # This depends on the record type, see existing YAML files for more examples.
-  value: 23.236.58.218
+  value: 35.201.71.162
 ```
 
 *New DNS Record:*
