@@ -189,7 +189,7 @@ sigs:
 # Running on a GCE VM (@grodrigues3, @roberthbailey).
 slack:
   type: A
-  value: 104.197.79.9
+  value: 130.211.42.98
 # Voluntary cluster data collector. Runs in GKE (@thockin).
 spartakus:
   type: A
