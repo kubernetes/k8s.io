@@ -1,8 +1,10 @@
 # google group for gcr.io/k8s-staging-coredns is k8s-infra-gcr-staging-coredns@googlegroups.com
+src-registry: gcr.io/k8s-staging-csi
 registries:
-  src: gcr.io/k8s-staging-coredns
-  dest: gcr.io/k8s-staging
-service-account: service-account@kubernetes-public.iam.gserviceaccount.com
+- name: gcr.io/k8s-staging-csi
+  service-account: service-account@kubernetes-public.iam.gserviceaccount.com
+- name: gcr.io/k8s-gcr-prod
+  service-account: service-account@kubernetes-public.iam.gserviceaccount.com
 images:
 - name: coredns
   dmap:
