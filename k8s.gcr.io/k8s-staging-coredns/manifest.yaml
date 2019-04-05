@@ -8,7 +8,4 @@ registries:
   service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
 - name: asia.gcr.io/k8s-gcr-prod
   service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
-images:
-- name: coredns
-  dmap:
-    "sha256:02382353821b12c21b062c59184e227e001079bb13ebd01f9d3270ba0fcbf1e4": ["1.3.1"] # Manifest list.
+images: []
