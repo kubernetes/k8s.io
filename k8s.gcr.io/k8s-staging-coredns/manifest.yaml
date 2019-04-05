@@ -1,7 +1,7 @@
 # google group for gcr.io/k8s-staging-coredns is k8s-infra-gcr-staging-coredns@googlegroups.com
-src-registry: gcr.io/k8s-staging-csi
+src-registry: gcr.io/k8s-staging-coredns
 registries:
-- name: gcr.io/k8s-staging-csi
+- name: gcr.io/k8s-staging-coredns
 - name: gcr.io/k8s-gcr-prod
   service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
 images:
