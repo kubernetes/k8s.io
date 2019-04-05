@@ -2,7 +2,6 @@
 src-registry: gcr.io/k8s-staging-csi
 registries:
 - name: gcr.io/k8s-staging-csi
-  service-account: service-account@kubernetes-public.iam.gserviceaccount.com
 - name: gcr.io/k8s-gcr-prod
-  service-account: service-account@kubernetes-public.iam.gserviceaccount.com
+  service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
 images: []
