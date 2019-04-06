@@ -17,7 +17,7 @@
 # This is a library of functions used to create GCR stuff.
 
 function _color() {
-    tput setf $1 || true
+    tput setf "$1" || true
 }
 
 function _nocolor() {
@@ -25,7 +25,7 @@ function _nocolor() {
 }
 
 function color() {
-    _color $1
+    _color "$1"
     shift
     echo "$@"
     _nocolor
@@ -33,6 +33,10 @@ function color() {
 
 # The group that admins all GCR repos.
 GCR_ADMINS="k8s-infra-gcr-admins@googlegroups.com"
+
+# The group that admins all GCS buckets.
+# We use the same group as GCR
+GCS_ADMINS=$GCR_ADMINS
 
 # The service account name for the image promoter.
 PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
@@ -169,6 +173,23 @@ function ensure_repo() {
     gsutil bucketpolicyonly set on "${bucket}"
 }
 
+# Ensure the bucket exists and is world-readable
+# $1: The GCP project
+# $2: The bucket
+function ensure_gcs_bucket() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_gcs_bucket(project, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    bucket="$2"
+
+    if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
+      gsutil mb -p "${project}" "${bucket}"
+    fi
+    gsutil iam ch allUsers:objectViewer "${bucket}"
+}
+
 # Grant full privileges to GCR admins
 # $1: The GCP project
 # $2: The GCR region (optional)
@@ -196,19 +217,66 @@ function empower_gcr_admins() {
         "${bucket}"
 }
 
-# Grant write privileges to a group
+# Grant full privileges to GCS admins
+# $1: The GCP project
+# $2: The bucket
+function empower_gcs_admins() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_gcs_admins(project, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    project="${1}"
+    bucket="${2}"
+
+    # Grant project viewer so the UI will work.
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "group:${GCS_ADMINS}" \
+        --role roles/viewer
+
+    # Grant admins access to do admin stuff.
+    gsutil iam ch \
+        "group:${GCS_ADMINS}:objectAdmin" \
+        "${bucket}"
+    gsutil iam ch \
+        "group:${GCS_ADMINS}:legacyBucketOwner" \
+        "${bucket}"
+}
+
+# Grant GCR write privileges to a group
 # $1: The GCP project
 # $2: The googlegroups group
 # $3: The GCR region (optional)
-function empower_group() {
+function empower_group_to_repo() {
     if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group(project, group_name, [region]) requires 2 or 3 arguments" >&2
+        echo "empower_group_to_repo(project, group_name, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
     project="$1"
     group="$2"
     region="${3:-}"
     bucket=$(gcs_bucket_for "${project}" "${region}")
+
+    gsutil iam ch \
+        "group:${group}:objectAdmin" \
+        "${bucket}"
+    gsutil iam ch \
+        "group:${group}:legacyBucketReader" \
+        "${bucket}"
+}
+
+# Grant write privileges on a bucket to a group
+# $1: The GCP project
+# $2: The googlegroups group
+# $3: The bucket
+function empower_group_to_bucket() {
+    if [ $# -lt 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "empower_group_to_bucket(project, group_name, bucket) requires 3 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    group="$2"
+    bucket="$3"
 
     gsutil iam ch \
         "group:${group}:objectAdmin" \
@@ -246,4 +314,46 @@ function empower_promoter() {
     gsutil iam ch \
         "serviceAccount:${acct}:legacyBucketOwner" \
         "${bucket}"
+}
+
+
+# Ensure the bucket retention policy is set
+# $1: The GCS bucket
+# $2: The retention
+function ensure_gcs_bucket_retention() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_gcs_bucket_retention(bucket, retention) requires 2 arguments" >&2
+        return 1
+    fi
+    bucket="$1"
+    retention="$2"
+
+    gsutil retention set "${retention}" "${bucket}"
+}
+
+# Ensure the bucket auto-deletion policy is set
+# $1: The GCS bucket
+# $2: The auto-deletion policy
+function ensure_gcs_bucket_auto_deletion() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_gcs_bucket_auto_deletion(bucket, auto_delettion_days) requires 2 arguments" >&2
+        return 1
+    fi
+    bucket="$1"
+    auto_deletion_days="$2"
+
+    echo "
+        {
+          \"rule\": [
+            {
+              \"condition\": {
+                \"age\": ${auto_deletion_days}
+              },
+              \"action\": {
+                \"type\": \"Delete\"
+              }
+            }
+          ]
+        }
+    " | gsutil lifecycle set /dev/stdin "${bucket}"
 }
