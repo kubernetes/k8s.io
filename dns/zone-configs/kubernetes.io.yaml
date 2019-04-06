@@ -168,7 +168,7 @@ sigs:
   value: sigs.k8s.io.
 slack:
   type: A
-  value: 104.197.79.9
+  value: 130.211.42.98
 spartakus:
   type: CNAME
   value: spartakus.k8s.io.
