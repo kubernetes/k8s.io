@@ -9,7 +9,7 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: k8s-io-ingress-canary
 spec:
   tls:
-  - secretName: ssl
+  - secretName: k8s-io-tls
   backend:
     serviceName: k8s-io
     servicePort: http

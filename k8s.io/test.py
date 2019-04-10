@@ -93,29 +93,29 @@ class RedirTest(unittest.TestCase):
                 'https://kubernetes.io/' + path, 301)
 
     def test_sig_urls(self):
-        base = 'https://sigs.k8s.io'
-        self.assert_scheme_redirect(
-                base,
-                'https://github.com/kubernetes-sigs/',
-                301)
-        self.assert_scheme_redirect(
-                base + '/$sig_repo',
-                'https://github.com/kubernetes-sigs/$sig_repo',
-                301,
-                sig_repo=rand_num())
-        self.assert_scheme_redirect(
-                base + '/$sig_repo/',
-                'https://github.com/kubernetes-sigs/$sig_repo/',
-                301,
-                sig_repo=rand_num())
-        self.assert_scheme_redirect(
-                base + '/$sig_repo/$repo_subpath',
-                'https://github.com/kubernetes-sigs/$sig_repo/blob/master/$repo_subpath',
-                301,
-                sig_repo=rand_num(), repo_subpath=rand_num())
+        for base in ('https://sigs.k8s.io', 'https://sigs.kubernetes.io'):
+            self.assert_scheme_redirect(
+                    base,
+                    'https://github.com/kubernetes-sigs/',
+                    301)
+            self.assert_scheme_redirect(
+                    base + '/$sig_repo',
+                    'https://github.com/kubernetes-sigs/$sig_repo',
+                    301,
+                    sig_repo=rand_num())
+            self.assert_scheme_redirect(
+                    base + '/$sig_repo/',
+                    'https://github.com/kubernetes-sigs/$sig_repo/',
+                    301,
+                    sig_repo=rand_num())
+            self.assert_scheme_redirect(
+                    base + '/$sig_repo/$repo_subpath',
+                    'https://github.com/kubernetes-sigs/$sig_repo/blob/master/$repo_subpath',
+                    301,
+                    sig_repo=rand_num(), repo_subpath=rand_num())
 
     def test_protocol_upgrade(self):
-        for url in ('kubernetes.io', 'k8s.io', 'sigs.k8s.io'):
+        for url in ('kubernetes.io', 'k8s.io', 'sigs.k8s.io', 'sigs.kubernetes.io'):
             self.assert_scheme_redirect(
                     'http://' + url,
                     'https://' + url + '/', 301)
@@ -124,7 +124,7 @@ class RedirTest(unittest.TestCase):
                     'https://' + url + '/', 301)
 
         path = '/%s' % rand_num()
-        for url in ('kubernetes.io', 'k8s.io', 'sigs.k8s.io'):
+        for url in ('kubernetes.io', 'k8s.io', 'sigs.k8s.io', 'sigs.kubernetes.io'):
             self.assert_scheme_redirect(
                     'http://' + url + path,
                     'https://' + url + path, 301)
@@ -200,9 +200,10 @@ class RedirTest(unittest.TestCase):
                 'https://packages.cloud.google.com/apt/$id', id=rand_num())
 
     def test_blog(self):
-        self.assert_temp_redirect('blog.k8s.io', 'http://blog.kubernetes.io/')
-        self.assert_temp_redirect('blog.k8s.io/$path',
-                'http://blog.kubernetes.io/$path', path=rand_num())
+        for base in ('blog.k8s.io', 'blog.kubernetes.io'):
+            self.assert_temp_redirect(base, 'https://kubernetes.io/blog/')
+            self.assert_temp_redirect(base + '/$path',
+                'https://kubernetes.io/blog/$path', path=rand_num())
 
     def test_ci_test(self):
         base = 'ci-test.kubernetes.io'
@@ -357,12 +358,6 @@ class RedirTest(unittest.TestCase):
         for base in ('submit-queue.k8s.io', 'submit-queue.kubernetes.io'):
             self.assert_temp_redirect(base, 'https://prow.k8s.io/tide')
             self.assert_temp_redirect(base + '/$path', 'https://prow.k8s.io/tide',
-                path=rand_num())
-
-    def test_testgrid(self):
-        for base in ('testgrid.k8s.io', 'testgrid.kubernetes.io'):
-            self.assert_temp_redirect(base, 'https://k8s-testgrid.appspot.com/')
-            self.assert_temp_redirect(base + '/$path', 'https://k8s-testgrid.appspot.com/$path',
                 path=rand_num())
 
 
