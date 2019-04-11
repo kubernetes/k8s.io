@@ -56,6 +56,5 @@ spec:
   - submit-queue.k8s.io
   - submit-queue.kubernetes.io
   - www.k8s.io
-  - www.kubernetes.io
   - yum.k8s.io
   - yum.kubernetes.io
