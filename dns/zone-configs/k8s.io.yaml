@@ -32,6 +32,14 @@ canary:
   - ns-cloud-c3.googledomains.com.
   - ns-cloud-c4.googledomains.com.
 
+go.canary:
+  type: NS
+  values:
+  - ns-cloud-c1.googledomains.com.
+  - ns-cloud-c2.googledomains.com.
+  - ns-cloud-c3.googledomains.com.
+  - ns-cloud-c4.googledomains.com.
+
 # Our vanity redirector.  This is not just 'k8s.io', on the off chance this
 # becomes different from the main record. (@thockin)
 redirect:
@@ -132,10 +140,6 @@ get:
   type: CNAME
   value: redirect.k8s.io.
 git:
-  type: CNAME
-  value: redirect.k8s.io.
-# URL shortener service.
-go:
   type: CNAME
   value: redirect.k8s.io.
 # Running on Google App Engine
