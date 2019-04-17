@@ -1,8 +1,12 @@
 # google group for gcr.io/k8s-staging-cluster-api is k8s-infra-gcr-staging-cluster-api@googlegroups.com
-src-registry: gcr.io/k8s-staging-cluster-api
 registries:
 - name: gcr.io/k8s-staging-cluster-api
-  service-account: service-account@kubernetes-public.iam.gserviceaccount.com
-- name: gcr.io/k8s-gcr-prod
-  service-account: service-account@kubernetes-public.iam.gserviceaccount.com
+  src: true
+- name: us.gcr.io/k8s-gcr-prod
+  service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-gcr-prod
+  service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-gcr-prod
+  service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
 images: []
+renames: []

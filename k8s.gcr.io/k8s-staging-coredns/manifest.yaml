@@ -1,11 +1,12 @@
 # google group for gcr.io/k8s-staging-coredns is k8s-infra-gcr-staging-coredns@googlegroups.com
-src-registry: gcr.io/k8s-staging-csi
 registries:
-- name: gcr.io/k8s-staging-csi
-  service-account: service-account@kubernetes-public.iam.gserviceaccount.com
-- name: gcr.io/k8s-gcr-prod
-  service-account: service-account@kubernetes-public.iam.gserviceaccount.com
-images:
-- name: coredns
-  dmap:
-    "sha256:02382353821b12c21b062c59184e227e001079bb13ebd01f9d3270ba0fcbf1e4": ["1.3.1"] # Manifest list.
+- name: gcr.io/k8s-staging-coredns
+  src: true
+- name: us.gcr.io/k8s-gcr-prod
+  service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-gcr-prod
+  service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-gcr-prod
+  service-account: k8s-infra-gcr-promoter@k8s-gcr-prod.iam.gserviceaccount.com
+images: []
+renames: []
