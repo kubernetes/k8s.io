@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: redirector-k8s-io
+  labels:
+    app: redirector-k8s-io
+  namespace: redirector-k8s-io-prod
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: redirector-k8s-io-ingress-prod
+spec:
+  tls:
+  - secretName: redirector-k8s-io-tls
+  backend:
+    serviceName: redirector-k8s-io
+    servicePort: http

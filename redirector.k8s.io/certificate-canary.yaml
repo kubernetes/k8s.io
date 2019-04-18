@@ -1,0 +1,14 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: k8s-io-selfsigned
+  namespace: redirector-k8s-io-canary
+spec:
+  secretName: redirector-k8s-io-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: selfsigning-issuer
+  commonName: redirector.k8s.io
+  dnsNames:
+  - go.k8s.io
+  - go.kubernetes.io

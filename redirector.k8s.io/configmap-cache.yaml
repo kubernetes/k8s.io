@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: txtdirect-cache
+data:
+  corefile: |
+    .:8053 {
+      forward . 8.8.8.8
+      health :8153
+      prometheus 127.0.0.1:9254
+      cache 300
+      errors stdout
+    }

@@ -1,0 +1,107 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redirector-k8s-io
+  labels:
+    app: redirector-k8s-io
+    version: dirty
+spec:
+  revisionHistoryLimit: 2
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 4
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: redirector-k8s-io
+      component: txtdirect
+  template:
+    metadata:
+      labels:
+        app: redirector-k8s-io
+        component: txtdirect
+    spec:
+      securityContext:
+        fsGroup: 1337
+        runAsNonRoot: true
+      containers:
+      - name: txtdirect
+        image: gcr.io/txtdirect-223710/txtdirect:dev-7c870d0
+        securityContext:
+          runAsUser: 1337
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["all"]
+        command: [ "/txtdirect", "--log=stdout", "--conf=/config/caddyfile" ]
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "25m"
+          limits:
+            memory: "32Mi"
+            cpu: "50m"
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            httpHeaders:
+              - name: X-Probez
+                value: liveness.k8s
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            httpHeaders:
+              - name: X-Probez
+                value: liveness.k8s
+          initialDelaySeconds: 90
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: data
+          mountPath: /.caddy
+        ports:
+          - name: http
+            containerPort: 8080
+      - name: coredns
+        image: coredns/coredns:1.3.1
+        securityContext:
+          runAsUser: 1337
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["all"]
+        args: [ "--conf=/config-cache/corefile" ]
+        resources:
+          requests:
+            memory: "16Mi"
+            cpu: "25m"
+          limits:
+            memory: "32Mi"
+            cpu: "50m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8153
+            httpHeaders:
+              - name: X-Probez
+                value: liveness.k8s
+          initialDelaySeconds: 90
+        volumeMounts:
+        - name: config-cache
+          mountPath: /config-cache
+        ports:
+          - name: dns
+            containerPort: 8053
+      volumes:
+      - name: config-cache
+        configMap:
+          name: txtdirect-cache
+      - name: config
+        configMap:
+          name: txtdirect
+      - name: data
+        persistentVolumeClaim:
+          claimName: txtdirect

@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: txtdirect
+data:
+  caddyfile: |
+    :8080 {
+      tls off
+      txtdirect {
+        enable host path
+        redirect https://kubernetes.io
+        resolver 127.0.0.1:8053
+        prometheus
+      }
+      errors stdout
+    }
+    :8080/healthz {
+      tls off
+      status 200 /
+    }
+    :8080/probez {
+      tls off
+      status 200 /
+    }

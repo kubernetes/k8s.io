@@ -1,0 +1,14 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: redirector-k8s-io-letsencrypt-prod
+  namespace: k8s-io-prod
+spec:
+  secretName: redirector-k8s-io-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  commonName: redirector.k8s.io
+  dnsNames:
+  - go.k8s.io
+  - go.kubernetes.io
