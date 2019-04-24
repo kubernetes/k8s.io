@@ -20,8 +20,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-SCRIPT_PATH=$(readlink -f "$0")
-SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
 function usage() {
