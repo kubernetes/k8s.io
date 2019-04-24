@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # This runs as you.  It assumes you have built an image named ${USER}/octodns.
 
