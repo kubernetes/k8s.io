@@ -17,11 +17,11 @@
 # This is a library of functions used to create GCR stuff.
 
 function _color() {
-    tput setf $1
+    tput setf $1 || true
 }
 
 function _nocolor() {
-    tput sgr0
+    tput sgr0 || true
 }
 
 function color() {
