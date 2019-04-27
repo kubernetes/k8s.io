@@ -1,7 +1,7 @@
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: k8s-io-selfsigned
+  name: redirector-k8s-io-selfsigned
   namespace: redirector-k8s-io-canary
 spec:
   secretName: redirector-k8s-io-tls

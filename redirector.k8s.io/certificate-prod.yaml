@@ -2,7 +2,7 @@ apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
   name: redirector-k8s-io-letsencrypt-prod
-  namespace: k8s-io-prod
+  namespace: redirector-k8s-io-prod
 spec:
   secretName: redirector-k8s-io-tls
   issuerRef:

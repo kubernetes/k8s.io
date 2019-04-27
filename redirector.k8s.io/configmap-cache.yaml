@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: txtdirect-cache
+  name: redirector-cache-k8s-io
+  namespace: redirector-k8s-io-prod
 data:
   corefile: |
     .:8053 {
       forward . 8.8.8.8
-      health :8153
+      health :8282
+      ready :8181
       prometheus 127.0.0.1:9254
       cache 300
       errors stdout

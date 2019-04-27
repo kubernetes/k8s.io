@@ -1,8 +1,10 @@
 Overview
 ====
-This contains the TXTDirect configuration for redirector.k8s.io service.
+This contains the TXTDirect configuration for redirector.k8s.io backend service.
 
-Used by go.k8s.io.
+Currently used by:
+- go.k8s.io
+- go.kubernetes.io
 
 Vanity URL(s)
 ====
