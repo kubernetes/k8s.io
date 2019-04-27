@@ -58,6 +58,7 @@ spec:
           - name: http
             containerPort: 8080
       - name: coredns
+        #TODO: switch to k8s.gcr.io/coredns:1.5.0, when available
         image: coredns/coredns:1.5.0
         securityContext:
           # Run as any non-root user UID
