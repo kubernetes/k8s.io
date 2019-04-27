@@ -39,7 +39,7 @@ spec:
             memory: "32Mi"
             cpu: "50m"
           limits:
-            memory: "16Mi"
+            memory: "32Mi"
         readinessProbe:
           httpGet:
             path: /healthz
@@ -72,7 +72,7 @@ spec:
             memory: "32Mi"
             cpu: "50m"
           limits:
-            memory: "16Mi"
+            memory: "32Mi"
         readinessProbe:
           httpGet:
             path: /ready
