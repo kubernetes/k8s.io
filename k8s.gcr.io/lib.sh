@@ -166,6 +166,7 @@ function ensure_repo() {
     fi
 
     gsutil iam ch allUsers:objectViewer "${bucket}"
+    gsutil bucketpolicyonly set on "${bucket}"
 }
 
 # Grant full privileges to GCR admins
