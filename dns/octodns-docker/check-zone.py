@@ -1,4 +1,18 @@
 #!/usr/bin/env python
+
+# Copyright 2019 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 '''
 Octo-DNS Reporter / exit non-zero on failure
 '''
@@ -163,38 +177,41 @@ def main():
 
     parser.add_argument('--config-file', required=True,
                         help='The OctoDNS configuration file to use')
-    parser.add_argument('--zone', required=True, help='zone to check')
+    parser.add_argument('--zone', action='append', required=True, help='zone to check')
 
     args = parser.parse_args()
 
     manager = Manager(args.config_file)
-    zone = Zone(args.zone, manager.configured_sub_zones(args.zone))
-    gcp = manager.providers['gcp']
-    project = gcp.gcloud_client.project
-    gcp.populate(zone)
 
-    # Retrieve the DNS Servers directly from the GCP configuration
-    dns_servers = gcp.gcloud_zones[args.zone].name_servers
-    print('Using GCP project {}'.format(project))
-    print('name,type,ttl,{},consistent'.format(','.join(dns_servers)))
+    for zone_name in args.zone:
+        print('Checking records for {}'.format(zone_name))
+        zone = Zone(zone_name, manager.configured_sub_zones(zone_name))
+        gcp = manager.providers['gcp']
+        project = gcp.gcloud_client.project
+        gcp.populate(zone)
 
-    # Configure Resolvers (one per DNS server)
-    resolvers = configure_resolvers(dns_servers)
+        # Retrieve the DNS Servers directly from the GCP configuration
+        dns_servers = gcp.gcloud_zones[zone_name].name_servers
+        print('Using GCP project {}'.format(project))
+        print('name,type,ttl,{},consistent'.format(','.join(dns_servers)))
 
-    # Populate the queries to make based on zone record configuration
-    queries = {}
-    for record in sorted(zone.records):
-        queries[record] = [r.query(record.fqdn, record._type)
-                           for r in resolvers]
-    # No dns_error unless we find one
-    dns_error = False
+        # Configure Resolvers (one per DNS server)
+        resolvers = configure_resolvers(dns_servers)
 
-    dns_error = verify_dns(queries)
+        # Populate the queries to make based on zone record configuration
+        queries = {}
+        for record in sorted(zone.records):
+            queries[record] = [r.query(record.fqdn, record._type)
+                               for r in resolvers]
+        # No dns_error unless we find one
+        dns_error = False
 
-    if dns_error:
-        sys.exit(1)
-    else:
-        sys.exit(0)
+        dns_error = verify_dns(queries)
+
+        if dns_error:
+            sys.exit(1)
+
+    sys.exit(0)
 
 if __name__ == '__main__':
     main()

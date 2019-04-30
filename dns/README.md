@@ -102,27 +102,18 @@ manual runs are OK.
 From this repo:
 
 ```
-docker build -t ${USER}/octodns ./octodns-docker
+make build
 ```
 
 ### Running as yourself
 
-If you want to run it as yourself, using yor own Google Cloud credentials:
+If you want to run it as yourself, using your own Google Cloud credentials:
 
 ```
-# Assumes to be running in a checked-out git repo directory, and in the same
-# subdirectory as this file.
-docker run -ti \
-    -u `id -u` \
-    -v ~/.config/gcloud:/.config/gcloud:ro \
-    -v `pwd`/zone-configs:/octodns/config:ro \
-    -v `pwd`/octodns-config.yaml:/octodns/config.yaml:ro \
-    ${USER}/octodns \
-    octodns-sync \
-        --config-file=/octodns/config.yaml \
-        --log-stream-stdout \
-        --debug \
-        --doit # leave this off if you want to do a dry-run
+# Check all zones to ensure they are up to date:
+make check
+# Push all zones:
+make push
 ```
 
 ### Running automated
