@@ -183,9 +183,10 @@ function ensure_gcs_bucket() {
     fi
     project="$1"
     bucket="$2"
+    location="us"
 
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
-      gsutil mb -p "${project}" "${bucket}"
+      gsutil mb -p "${project}" -l "${location}" "${bucket}"
     fi
     gsutil iam ch allUsers:objectViewer "${bucket}"
 }
