@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-gcp-accounting@googlegroups.com"
+      ],
+      "role": "roles/bigquery.jobUser"
+    },
+    {
+      "members": [
         "serviceAccount:service-127754664067@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"
@@ -77,6 +83,6 @@
       "role": "roles/owner"
     }
   ],
-  "etag": "BwWBY6sq2cc=",
+  "etag": "BwWGvOrrBsU=",
   "version": 1
 }

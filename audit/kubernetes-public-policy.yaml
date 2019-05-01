@@ -6,6 +6,9 @@ bindings:
   - group:k8s-infra-bigquery-admins@googlegroups.com
   role: roles/bigquery.admin
 - members:
+  - group:k8s-infra-gcp-accounting@googlegroups.com
+  role: roles/bigquery.jobUser
+- members:
   - serviceAccount:service-127754664067@compute-system.iam.gserviceaccount.com
   role: roles/compute.serviceAgent
 - members:
@@ -39,5 +42,5 @@ bindings:
   - user:ihor@cncf.io
   - user:thockin@google.com
   role: roles/owner
-etag: BwWBY6sq2cc=
+etag: BwWGvOrrBsU=
 version: 1
