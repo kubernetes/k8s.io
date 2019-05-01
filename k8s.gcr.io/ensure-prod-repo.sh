@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script creates & configures the "real" serving repo in GCR.
+# This script creates & configures the "real" serving repo in GCR,
+# along with the prod GCS bucket.
 
 set -o errexit
 set -o nounset
@@ -39,6 +40,9 @@ PROD_PROJECT="k8s-gcr-prod"
 TRASH_PROJECT="k8s-gcr-graveyard"
 
 ALL_PROJECTS="${TEST_PROJECT} ${PROD_PROJECT} ${TRASH_PROJECT}"
+
+# GCS bucket for prod
+PROD_BUCKET=gs://k8s-prod-artifacts
 
 # Regions for prod.
 PROD_REGIONS=(us eu asia)
@@ -69,7 +73,7 @@ for prj in ${ALL_PROJECTS}; do
         empower_gcr_admins "${prj}" "${r}"
     done
 
-    color 6 "Empowering image promoter: ${prj}"
+    color 6 "Empowering image promoter to GCR: ${prj}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_promoter "${prj}" "${r}"
@@ -77,10 +81,25 @@ for prj in ${ALL_PROJECTS}; do
 done
 
 # Special cases
-color 6 "Empowering cip-test group in cip-test"
+color 6 "Empowering cip-test group in cip-test for GCR"
 for r in "${PROD_REGIONS[@]}"; do
     color 3 "region $r"
     empower_group "${TEST_PROJECT}" "k8s-infra-gcr-staging-cip-test@googlegroups.com" "${r}"
 done
+
+# Create bucket
+color 6 "Creating GCS bucket ${PROD_BUCKET} in ${PROD_PROJECT}"
+
+# Enable GCS APIs
+color 6 "Enabling the GCS API"
+enable_api "${PROD_PROJECT}" storage-component.googleapis.com
+
+# Create the GCS bucket (in the US multi-regional location)
+color 6 "Ensuring the bucket exists and is world readable"
+ensure_gcs_bucket "${PROD_PROJECT}" "${PROD_BUCKET}"
+
+# Enable admins on the bucket
+color 6 "Empowering GCS admins"
+empower_gcs_admins "${PROD_PROJECT}" "${PROD_BUCKET}"
 
 color 6 "Done"
