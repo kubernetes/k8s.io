@@ -36,19 +36,19 @@ fi
 
 # The GCP project names.
 TEST_PROJECT="k8s-cip-test-prod"
-PROD_PROJECT="k8s-gcr-prod"
-TRASH_PROJECT="k8s-gcr-graveyard"
+PROD_PROJECT="k8s-artifacts-prod"
+TRASH_PROJECT="k8s-artifacts-graveyard"
 
-ALL_PROJECTS="${TEST_PROJECT} ${PROD_PROJECT} ${TRASH_PROJECT}"
+ALL_PROJECTS=("${TEST_PROJECT}" "${PROD_PROJECT}" "${TRASH_PROJECT}")
 
 # GCS bucket for prod
-PROD_BUCKET=gs://k8s-prod-artifacts
+PROD_BUCKET=gs://k8s-artifacts-prod
 
 # Regions for prod.
 PROD_REGIONS=(us eu asia)
 
 # Make the projects, if needed
-for prj in ${ALL_PROJECTS}; do
+for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Ensuring project exists: ${prj}"
     ensure_project "${prj}"
 

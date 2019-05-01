@@ -34,14 +34,14 @@ if [ $# != 0 ]; then
 fi
 
 # The GCP project name.
-PROD_PROJECT="k8s-gcr-prod"
+PROD_PROJECT="k8s-artifacts-prod"
 
 # Name for cloud objects (url-map, gclb, etc)
-NAME=k8s-prod-artifacts
+NAME=k8s-artifacts-prod
 
 # Name for the prod bucket
 # This must match the prod GCS bucket name
-BUCKET_NAME=k8s-prod-artifacts
+BUCKET_NAME=k8s-artifacts-prod
 
 # Domain name on which we serve artifacts
 DOMAIN=artifacts.k8s.io
