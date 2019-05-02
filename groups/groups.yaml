@@ -1,0 +1,90 @@
+# This file has the list of groups in kubernetes.io gsuite org that we use for
+# granting permissions to various community resources. Please ensure that the
+# group is prefixed with "k8s-infra" to avoid polluting the other existing gsuite
+# mailing lists.
+groups:
+  - email-id: k8s-infra-alerts@kubernetes.io
+    members:
+      - amwat@google.com
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - jgrafton@google.com
+      - mkumatag@in.ibm.com
+      - spiffxp@google.com
+      - thockin@google.com
+  - email-id: k8s-infra-cluster-admins@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - thockin@google.com
+      - justinsb@google.com
+      - stefan.schimanski@gmail.com
+      - nikitaraghunath@gmail.com
+  - email-id: k8s-infra-dns-admins@kubernetes.io
+    members:
+      - bentheelder@google.com
+      - brendan.d.burns@gmail.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - hh@ii.coop
+      - ihor@cncf.io
+      - jgrafton@google.com
+      - spiffxp@google.com
+      - thockin@google.com
+  - email-id: k8s-infra-gcp-accounting@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - justinsb@google.com
+      - ihor@cncf.io
+  - email-id: k8s-infra-gcp-auditors@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - ihor@cncf.io
+      - hh@ii.coop
+  - email-id: k8s-infra-artifact-admins@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - justinsb@google.com
+      - michelle.noorali@gmail.com
+  - email-id: k8s-infra-artifact-promoter-test@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - linusa@google.com
+      - spiffxp@google.com
+      - thockin@google.com
+  - email-id: k8s-infra-sig-release-prototype@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - ihor@cncf.io
+      - hh@ii.coop
+      - tpepper@gmail.com
+      - bartek@smykla.com
+  - email-id: k8s-infra-staging-csi@kubernetes.io
+    members:
+      - davanum@gmail.com
+  - email-id: k8s-infra-staging-coredns@kubernetes.io
+    members:
+      - davanum@gmail.com
+  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - ha.chuck@gmail.com
+      - detiber@gmail.com
+      - vince@vincepri.com
+  - email-id: k8s-infra-staging-kops@kubernetes.io
+    members:
+      - ihor@cncf.io
+      - davanum@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - justinsb@google.com

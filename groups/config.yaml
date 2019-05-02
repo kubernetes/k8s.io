@@ -1,0 +1,10 @@
+# Configuration for the kubernetes.io Google Groups setup
+
+# file path of the google groups service account token
+token-file: k8s-infra-test-project-1896690daeb3.json
+
+# Email id of the bot service account
+bot-id: wg-k8s-infra-api-test@kubernetes.io
+
+# Configuration file for the groups/members information
+groups-file: groups.yaml
