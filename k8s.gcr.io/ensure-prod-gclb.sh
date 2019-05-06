@@ -34,81 +34,79 @@ if [ $# != 0 ]; then
 fi
 
 # The GCP project name.
-PROJECT="k8s-gcr-prod"
+PROD_PROJECT="k8s-artifacts-prod"
 
 # Name for cloud objects (url-map, gclb, etc)
-NAME=k8s-prod-artifacts
+NAME=k8s-artifacts-prod
 
 # Name for the prod bucket
 # This must match the prod GCS bucket name
-BUCKET_NAME=k8s-prod-artifacts
+BUCKET_NAME=k8s-artifacts-prod
 
 # Domain name on which we serve artifacts
 DOMAIN=artifacts.k8s.io
 
+color 6 "Ensuring project exists: ${PROD_PROJECT}"
+ensure_project "${PROD_PROJECT}"
 
+color 6 "Configuring billing: ${PROD_PROJECT}"
+ensure_billing "${PROD_PROJECT}"
 
-color 6 "Ensuring project exists: ${PROJECT}"
-ensure_project "${PROJECT}"
-
-color 6 "Configuring billing: ${PROJECT}"
-ensure_billing "${PROJECT}"
-
-color 6 "Enabling the compute API: ${PROJECT}"
-enable_api "${PROJECT}" compute.googleapis.com
+color 6 "Enabling the compute API: ${PROD_PROJECT}"
+enable_api "${PROD_PROJECT}" compute.googleapis.com
 
 color 6 "Reconciling Global Address"
-if ! gcloud compute addresses describe --global "${NAME}" >/dev/null 2>&1; then
-  gcloud compute addresses create "${NAME}" --description="IP Address for GCLB for binary artifacts" --global
+if ! gcloud --project "${PROD_PROJECT}" compute addresses describe "${NAME}" --global >/dev/null 2>&1; then
+  gcloud --project "${PROD_PROJECT}" compute addresses create "${NAME}" --global --description="IP Address for GCLB for binary artifacts"
 fi
-ip_addr=$(gcloud compute addresses describe "${NAME}" --global --format='value(address)')
+ip_addr=$(gcloud --project "${PROD_PROJECT}" compute addresses describe "${NAME}" --global --format='value(address)')
 echo "Address: ${ip_addr}"
 
 color 6 "Reconciling GCLB Backend Bucket"
-if ! gcloud compute backend-buckets describe "${NAME}" >/dev/null 2>&1; then
-  gcloud compute backend-buckets create "${NAME}" --gcs-bucket-name="${BUCKET_NAME}"
+if ! gcloud --project "${PROD_PROJECT}" compute backend-buckets describe "${NAME}" >/dev/null 2>&1; then
+  gcloud --project "${PROD_PROJECT}" compute backend-buckets create "${NAME}" --gcs-bucket-name="${BUCKET_NAME}"
 else
-  gcloud compute backend-buckets update "${NAME}" --gcs-bucket-name="${BUCKET_NAME}"
+  gcloud --project "${PROD_PROJECT}" compute backend-buckets update "${NAME}" --gcs-bucket-name="${BUCKET_NAME}"
 fi
 
 color 6 "Reconciling GCLB URL Map"
-if ! gcloud compute url-maps describe "${NAME}" >/dev/null 2>&1; then
-  gcloud compute url-maps create "${NAME}" --default-backend-bucket="${NAME}"
+if ! gcloud --project "${PROD_PROJECT}" compute url-maps describe "${NAME}" >/dev/null 2>&1; then
+  gcloud --project "${PROD_PROJECT}" compute url-maps create "${NAME}" --default-backend-bucket="${NAME}"
 else
-  gcloud compute url-maps set-default-service "${NAME}" --default-backend-bucket="${NAME}"
+  gcloud --project "${PROD_PROJECT}" compute url-maps set-default-service "${NAME}" --default-backend-bucket="${NAME}"
 fi
 
 color 6 "Reconciling GCLB Target HTTP Proxy"
-if ! gcloud compute target-http-proxies describe "${NAME}" >/dev/null 2>&1; then
-  gcloud compute target-http-proxies create "${NAME}" --url-map="${NAME}"
+if ! gcloud --project "${PROD_PROJECT}" compute target-http-proxies describe "${NAME}" >/dev/null 2>&1; then
+  gcloud --project "${PROD_PROJECT}" compute target-http-proxies create "${NAME}" --url-map="${NAME}"
 else
-  gcloud compute target-http-proxies update "${NAME}" --url-map="${NAME}"
+  gcloud --project "${PROD_PROJECT}" compute target-http-proxies update "${NAME}" --url-map="${NAME}"
 fi
 
 color 6 "Reconciling GCLB Forwarding Rule for HTTP"
-if ! gcloud compute forwarding-rules describe "${NAME}-http" --global >/dev/null 2>&1; then
-  gcloud compute forwarding-rules create "${NAME}-http" --target-http-proxy="${NAME}" --ports=80 --address="${ip_addr}" --global
+if ! gcloud --project "${PROD_PROJECT}" compute forwarding-rules describe "${NAME}-http" --global >/dev/null 2>&1; then
+  gcloud --project "${PROD_PROJECT}" compute forwarding-rules create "${NAME}-http" --global --target-http-proxy="${NAME}" --ports=80 --address="${ip_addr}"
 else
-  gcloud compute forwarding-rules set-target "${NAME}-http" --target-http-proxy="${NAME}" --global
+  gcloud --project "${PROD_PROJECT}" compute forwarding-rules set-target "${NAME}-http" --global --target-http-proxy="${NAME}"
 fi
 
 color 6 "Reconciling GCLB SSL Certificate"
-if ! gcloud compute ssl-certificates describe "${NAME}" >/dev/null 2>&1; then
-  gcloud beta compute ssl-certificates create "${NAME}" --domains "${DOMAIN}"
+if ! gcloud --project "${PROD_PROJECT}" compute ssl-certificates describe "${NAME}" >/dev/null 2>&1; then
+  gcloud --project "${PROD_PROJECT}" beta compute ssl-certificates create "${NAME}" --domains "${DOMAIN}"
 fi
 
 color 6 "Reconciling GCLB Target HTTPS Proxy"
-if ! gcloud compute target-https-proxies describe "${NAME}" >/dev/null 2>&1; then
-  gcloud compute target-https-proxies create "${NAME}" --url-map="${NAME}" --ssl-certificates="${NAME}"
+if ! gcloud --project "${PROD_PROJECT}" compute target-https-proxies describe "${NAME}" >/dev/null 2>&1; then
+  gcloud --project "${PROD_PROJECT}" compute target-https-proxies create "${NAME}" --url-map="${NAME}" --ssl-certificates="${NAME}"
 else
-  gcloud compute target-https-proxies update "${NAME}" --url-map="${NAME}" --ssl-certificates="${NAME}"
+  gcloud --project "${PROD_PROJECT}" compute target-https-proxies update "${NAME}" --url-map="${NAME}" --ssl-certificates="${NAME}"
 fi
 
 color 6 "Reconciling GCLB Forwarding Rule for HTTPS"
-if ! gcloud compute forwarding-rules describe "${NAME}-https" --global >/dev/null 2>&1; then
-  gcloud compute forwarding-rules create "${NAME}-https" --target-https-proxy="${NAME}" --ports=443 --address="${ip_addr}" --global
+if ! gcloud --project "${PROD_PROJECT}" compute forwarding-rules describe "${NAME}-https" --global >/dev/null 2>&1; then
+  gcloud --project "${PROD_PROJECT}" compute forwarding-rules create "${NAME}-https" --global --target-https-proxy="${NAME}" --ports=443 --address="${ip_addr}"
 else
-  gcloud compute forwarding-rules set-target "${NAME}-https" --target-https-proxy="${NAME}" --global
+  gcloud --project "${PROD_PROJECT}" compute forwarding-rules set-target "${NAME}-https" --global --target-https-proxy="${NAME}"
 fi
 
 color 6 "Done"

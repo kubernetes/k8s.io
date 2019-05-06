@@ -36,19 +36,19 @@ fi
 
 # The GCP project names.
 TEST_PROJECT="k8s-cip-test-prod"
-PROD_PROJECT="k8s-gcr-prod"
-TRASH_PROJECT="k8s-gcr-graveyard"
+PROD_PROJECT="k8s-artifacts-prod"
+TRASH_PROJECT="k8s-artifacts-graveyard"
 
-ALL_PROJECTS="${TEST_PROJECT} ${PROD_PROJECT} ${TRASH_PROJECT}"
+ALL_PROJECTS=("${TEST_PROJECT}" "${PROD_PROJECT}" "${TRASH_PROJECT}")
 
 # GCS bucket for prod
-PROD_BUCKET=gs://k8s-prod-artifacts
+PROD_BUCKET=gs://k8s-artifacts-prod
 
 # Regions for prod.
 PROD_REGIONS=(us eu asia)
 
 # Make the projects, if needed
-for prj in ${ALL_PROJECTS}; do
+for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Ensuring project exists: ${prj}"
     ensure_project "${prj}"
 
@@ -84,7 +84,7 @@ done
 color 6 "Empowering cip-test group in cip-test for GCR"
 for r in "${PROD_REGIONS[@]}"; do
     color 3 "region $r"
-    empower_group "${TEST_PROJECT}" "k8s-infra-gcr-staging-cip-test@googlegroups.com" "${r}"
+    empower_group_to_repo "${TEST_PROJECT}" "k8s-infra-gcr-staging-cip-test@googlegroups.com" "${r}"
 done
 
 # Create bucket
