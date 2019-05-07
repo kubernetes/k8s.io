@@ -89,6 +89,14 @@ releases:
   type: CNAME
   value: redirect.k8s.io.
 
+# artifacts.k8s.io is for the (under development) binary artifact serving.
+# The IP points to a GCLB in front of a GCS bucket,
+# in the k8s-artifacts-prod project.
+artifacts:
+  type: A
+  values:
+  - 35.244.192.77
+
 # Vanity CNAMEs.
 blog:
   type: CNAME
