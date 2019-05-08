@@ -267,17 +267,15 @@ function empower_group_to_repo() {
 }
 
 # Grant write privileges on a bucket to a group
-# $1: The GCP project
-# $2: The googlegroups group
-# $3: The bucket
+# $1: The googlegroups group
+# $2: The bucket
 function empower_group_to_bucket() {
-    if [ $# -lt 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
-        echo "empower_group_to_bucket(project, group_name, bucket) requires 3 arguments" >&2
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group_to_bucket(group_name, bucket) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    group="$2"
-    bucket="$3"
+    group="$1"
+    bucket="$2"
 
     gsutil iam ch \
         "group:${group}:objectAdmin" \

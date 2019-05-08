@@ -113,6 +113,6 @@ empower_gcs_admins "${PROJECT}" "${BUCKET}"
 
 # Enable writers on the bucket
 color 6 "Empowering ${WRITERS} to GCS"
-empower_group_to_bucket "${PROJECT}" "${WRITERS}" "${BUCKET}"
+empower_group_to_bucket "${WRITERS}" "${BUCKET}"
 
 color 6 "Done"
