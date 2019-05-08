@@ -203,6 +203,20 @@ function ensure_gcs_web_policy() {
     gsutil web set -m index.html "${bucket}"
 }
 
+# Copies any static content into the bucket
+# $1: The bucket
+# $2: The source directory
+function upload_gcs_static_content() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "upload_gcs_static_content(bucket, dir) requires 2 arguments" >&2
+        return 1
+    fi
+    bucket="$1"
+    srcdir="$2"
+
+    gsutil rsync "${srcdir}" "${bucket}"
+}
+
 # Grant full privileges to GCR admins
 # $1: The GCP project
 # $2: The GCR region (optional)
