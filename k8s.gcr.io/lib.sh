@@ -191,6 +191,18 @@ function ensure_gcs_bucket() {
     gsutil iam ch allUsers:objectViewer "${bucket}"
 }
 
+# Sets the web policy on the bucket, including a default index.html page
+# $1: The bucket
+function ensure_gcs_web_policy() {
+    if [ $# -lt 1 -o -z "$1" ]; then
+        echo "ensure_gcs_web_policy(bucket) requires 1 argument" >&2
+        return 1
+    fi
+    bucket="$1"
+
+    gsutil web set -m index.html "${bucket}"
+}
+
 # Grant full privileges to GCR admins
 # $1: The GCP project
 # $2: The GCR region (optional)

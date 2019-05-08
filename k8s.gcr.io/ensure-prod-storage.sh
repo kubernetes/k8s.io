@@ -102,4 +102,8 @@ ensure_gcs_bucket "${PROD_PROJECT}" "${PROD_BUCKET}"
 color 6 "Empowering GCS admins"
 empower_gcs_admins "${PROD_PROJECT}" "${PROD_BUCKET}"
 
+# Set the web policy on the bucket
+color 6 "Configuring the web policy on the bucket"
+ensure_gcs_web_policy "${PROD_BUCKET}"
+
 color 6 "Done"
