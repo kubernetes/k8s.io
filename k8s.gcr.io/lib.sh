@@ -191,6 +191,32 @@ function ensure_gcs_bucket() {
     gsutil iam ch allUsers:objectViewer "${bucket}"
 }
 
+# Sets the web policy on the bucket, including a default index.html page
+# $1: The bucket
+function ensure_gcs_web_policy() {
+    if [ $# -lt 1 -o -z "$1" ]; then
+        echo "ensure_gcs_web_policy(bucket) requires 1 argument" >&2
+        return 1
+    fi
+    bucket="$1"
+
+    gsutil web set -m index.html "${bucket}"
+}
+
+# Copies any static content into the bucket
+# $1: The bucket
+# $2: The source directory
+function upload_gcs_static_content() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "upload_gcs_static_content(bucket, dir) requires 2 arguments" >&2
+        return 1
+    fi
+    bucket="$1"
+    srcdir="$2"
+
+    gsutil rsync "${srcdir}" "${bucket}"
+}
+
 # Grant full privileges to GCR admins
 # $1: The GCP project
 # $2: The GCR region (optional)

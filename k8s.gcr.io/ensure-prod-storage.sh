@@ -102,4 +102,12 @@ ensure_gcs_bucket "${PROD_PROJECT}" "${PROD_BUCKET}"
 color 6 "Empowering GCS admins"
 empower_gcs_admins "${PROD_PROJECT}" "${PROD_BUCKET}"
 
+# Set the web policy on the bucket
+color 6 "Configuring the web policy on the bucket"
+ensure_gcs_web_policy "${PROD_BUCKET}"
+
+# rsync in any static content
+color 6 "Copying static content into bucket"
+upload_gcs_static_content "${PROD_BUCKET}" "${SCRIPT_DIR}/static/prod"
+
 color 6 "Done"
