@@ -88,3 +88,14 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
       - justinsb@google.com
+  - email-id: k8s-infra-team-private@kubernetes.io
+    members:
+      - jgrafton@google.com
+      - davanum@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - justinsb@google.com
+      - cblecker@gmail.com
+      - ihor@cncf.io
+      - bentheelder@google.com
+      - brendan.d.burns@gmail.com
