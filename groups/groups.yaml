@@ -14,6 +14,12 @@ groups:
       - mkumatag@in.ibm.com
       - spiffxp@google.com
       - thockin@google.com
+  - email-id: k8s-infra-bigquery-admins@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - thockin@google.com
+      - ihor@cncf.io
+      - spiffxp@google.com
   - email-id: k8s-infra-cluster-admins@kubernetes.io
     members:
       - davanum@gmail.com
