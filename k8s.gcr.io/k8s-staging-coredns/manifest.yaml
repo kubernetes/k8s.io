@@ -1,4 +1,4 @@
-# google group for gcr.io/k8s-staging-coredns is k8s-infra-gcr-staging-coredns@googlegroups.com
+# google group for gcr.io/k8s-staging-coredns is k8s-infra-staging-coredns@kubernetes.io
 registries:
 - name: gcr.io/k8s-staging-coredns
   src: true

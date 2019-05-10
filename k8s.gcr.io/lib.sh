@@ -32,7 +32,7 @@ function color() {
 }
 
 # The group that admins all GCR repos.
-GCR_ADMINS="k8s-infra-gcr-admins@googlegroups.com"
+GCR_ADMINS="k8s-infra-artifact-admins@kubernetes.io"
 
 # The group that admins all GCS buckets.
 # We use the same group as GCR
