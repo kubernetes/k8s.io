@@ -1,4 +1,4 @@
-# google group for gcr.io/k8s-staging-cluster-api is k8s-infra-gcr-staging-cluster-api@googlegroups.com
+# google group for gcr.io/k8s-staging-cluster-api is k8s-infra-staging-cluster-api@kubernetes.io
 registries:
 - name: gcr.io/k8s-staging-cluster-api
   src: true

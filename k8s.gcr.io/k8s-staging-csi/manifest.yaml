@@ -1,4 +1,4 @@
-# google group for gcr.io/k8s-staging-csi is k8s-infra-gcr-staging-csi@googlegroups.com
+# google group for gcr.io/k8s-staging-csi is k8s-infra-staging-csi@kubernetes.io
 registries:
 - name: gcr.io/k8s-staging-csi
   src: true

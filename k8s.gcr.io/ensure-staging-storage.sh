@@ -52,7 +52,7 @@ REPO="$1"
 PROJECT="k8s-staging-${REPO}"
 
 # The group that can write to this staging repo.
-WRITERS="k8s-infra-gcr-staging-${REPO}@googlegroups.com"
+WRITERS="k8s-infra-staging-${REPO}@kubernetes.io"
 
 # The name of the bucket
 BUCKET="gs://${PROJECT}"

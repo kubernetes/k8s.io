@@ -84,7 +84,7 @@ done
 color 6 "Empowering cip-test group in cip-test for GCR"
 for r in "${PROD_REGIONS[@]}"; do
     color 3 "region $r"
-    empower_group_to_repo "${TEST_PROJECT}" "k8s-infra-gcr-staging-cip-test@googlegroups.com" "${r}"
+    empower_group_to_repo "${TEST_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io" "${r}"
 done
 
 # Create bucket
