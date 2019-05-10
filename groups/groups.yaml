@@ -53,13 +53,6 @@ groups:
       - thockin@google.com
       - justinsb@google.com
       - michelle.noorali@gmail.com
-  - email-id: k8s-infra-artifact-promoter-test@kubernetes.io
-    members:
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - linusa@google.com
-      - spiffxp@google.com
-      - thockin@google.com
   - email-id: k8s-infra-sig-release-prototype@kubernetes.io
     members:
       - davanum@gmail.com
@@ -69,6 +62,13 @@ groups:
       - hh@ii.coop
       - tpepper@gmail.com
       - bartek@smykla.com
+  - email-id: k8s-infra-staging-cip-test@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - linusa@google.com
+      - spiffxp@google.com
+      - thockin@google.com
   - email-id: k8s-infra-staging-csi@kubernetes.io
     members:
       - davanum@gmail.com
