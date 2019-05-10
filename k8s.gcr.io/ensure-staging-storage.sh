@@ -30,89 +30,94 @@ SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
 function usage() {
-    echo "usage: $0 <repo>" > /dev/stderr
+    echo "usage: $0 [repo...]" > /dev/stderr
     echo "example:" > /dev/stderr
-    echo "  $0 coredns" > /dev/stderr
+    echo "  $0 # do all staging repos" > /dev/stderr
+    echo "  $0 coredns # just do one" > /dev/stderr
     echo > /dev/stderr
 }
 
-if [ $# != 1 ]; then
-    usage
-    exit 1
+STAGING_PROJECTS=(
+    coredns
+    cip-test
+    cluster-api
+    csi
+    kops
+)
+if [ $# = 0 ]; then
+    # default to all staging projects
+    set -- "${STAGING_PROJECTS[@]}"
 fi
-if [ -z "$1" ]; then
-    usage
-    exit 2
-fi
 
-# The name of the sub-project being created, e.g. "coredns".
-REPO="$1"
+for REPO; do
+    color 3 "${REPO}"
 
-# The GCP project name.
-PROJECT="k8s-staging-${REPO}"
+    # The GCP project name.
+    PROJECT="k8s-staging-${REPO}"
 
-# The group that can write to this staging repo.
-WRITERS="k8s-infra-staging-${REPO}@kubernetes.io"
+    # The group that can write to this staging repo.
+    WRITERS="k8s-infra-staging-${REPO}@kubernetes.io"
 
-# The name of the bucket
-BUCKET="gs://${PROJECT}"
+    # The name of the bucket
+    BUCKET="gs://${PROJECT}"
 
-# A short retention - it can always be raised, but it is hard to lower
-# We expect promotion within 30d, or for testing to "move on"
-# 30d is also short enough that people should notice occasionally,
-# and not accidentally think of the staging buckets as permanent.
-RETENTION=30d
-AUTO_DELETION_DAYS=30
+    # A short retention - it can always be raised, but it is hard to lower
+    # We expect promotion within 30d, or for testing to "move on"
+    # 30d is also short enough that people should notice occasionally,
+    # and not accidentally think of the staging buckets as permanent.
+    RETENTION=30d
+    AUTO_DELETION_DAYS=30
 
-# Make the project, if needed
-color 6 "Ensuring project exists: ${PROJECT}"
-ensure_project "${PROJECT}"
+    # Make the project, if needed
+    color 6 "Ensuring project exists: ${PROJECT}"
+    ensure_project "${PROJECT}"
 
-color 6 "Configuring billing for ${PROJECT}"
-ensure_billing "${PROJECT}"
+    color 6 "Configuring billing for ${PROJECT}"
+    ensure_billing "${PROJECT}"
 
-# Every project gets a GCR repo
+    # Every project gets a GCR repo
 
-# Enable container registry APIs
-color 6 "Enabling the container registry API"
-enable_api "${PROJECT}" containerregistry.googleapis.com
+    # Enable container registry APIs
+    color 6 "Enabling the container registry API"
+    enable_api "${PROJECT}" containerregistry.googleapis.com
 
-# Push an image to trigger the bucket to be created
-color 6 "Ensuring the registry exists and is readable"
-ensure_repo "${PROJECT}"
+    # Push an image to trigger the bucket to be created
+    color 6 "Ensuring the registry exists and is readable"
+    ensure_repo "${PROJECT}"
 
-# Enable GCR admins
-color 6 "Empowering GCR admins"
-empower_gcr_admins "${PROJECT}"
+    # Enable GCR admins
+    color 6 "Empowering GCR admins"
+    empower_gcr_admins "${PROJECT}"
 
-# Enable repo writers
-color 6 "Empowering ${WRITERS} to GCR"
-empower_group_to_repo "${PROJECT}" "${WRITERS}"
+    # Enable repo writers
+    color 6 "Empowering ${WRITERS} to GCR"
+    empower_group_to_repo "${PROJECT}" "${WRITERS}"
 
-# Every project gets a GCS bucket
+    # Every project gets a GCS bucket
 
-# Enable GCS APIs
-color 6 "Enabling the GCS API"
-enable_api "${PROJECT}" storage-component.googleapis.com
+    # Enable GCS APIs
+    color 6 "Enabling the GCS API"
+    enable_api "${PROJECT}" storage-component.googleapis.com
 
-# Create the bucket
-color 6 "Ensuring the bucket exists and is world readable"
-ensure_gcs_bucket "${PROJECT}" "${BUCKET}"
+    # Create the bucket
+    color 6 "Ensuring the bucket exists and is world readable"
+    ensure_gcs_bucket "${PROJECT}" "${BUCKET}"
 
-# Set bucket retention
-color 6 "Ensuring the bucket has retention of ${RETENTION}"
-ensure_gcs_bucket_retention "${BUCKET}" "${RETENTION}"
+    # Set bucket retention
+    color 6 "Ensuring the bucket has retention of ${RETENTION}"
+    ensure_gcs_bucket_retention "${BUCKET}" "${RETENTION}"
 
-# Set bucket auto-deletion
-color 6 "Ensuring the bucket has auto-deletion of ${AUTO_DELETION_DAYS} days"
-ensure_gcs_bucket_auto_deletion "${BUCKET}" "${AUTO_DELETION_DAYS}"
+    # Set bucket auto-deletion
+    color 6 "Ensuring the bucket has auto-deletion of ${AUTO_DELETION_DAYS} days"
+    ensure_gcs_bucket_auto_deletion "${BUCKET}" "${AUTO_DELETION_DAYS}"
 
-# Enable admins on the bucket
-color 6 "Empowering GCS admins"
-empower_gcs_admins "${PROJECT}" "${BUCKET}"
+    # Enable admins on the bucket
+    color 6 "Empowering GCS admins"
+    empower_gcs_admins "${PROJECT}" "${BUCKET}"
 
-# Enable writers on the bucket
-color 6 "Empowering ${WRITERS} to GCS"
-empower_group_to_bucket "${WRITERS}" "${BUCKET}"
+    # Enable writers on the bucket
+    color 6 "Empowering ${WRITERS} to GCS"
+    empower_group_to_bucket "${WRITERS}" "${BUCKET}"
 
-color 6 "Done"
+    color 6 "Done"
+done
