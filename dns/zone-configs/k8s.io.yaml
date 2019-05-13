@@ -240,3 +240,7 @@ velodrome:
 kind.sigs:
   type: CNAME
   value: k8s-kind.netlify.com.
+# https://github.com/kubernetes-sigs/cluster-api docs (@dwat, @jdetiber, @justinsb)
+cluster-api.sigs:
+  type: CNAME
+  value: kubernetes-sigs-cluster-api.netlify.com.
