@@ -26,7 +26,6 @@ bindings:
 - members:
   - serviceAccount:127754664067-compute@developer.gserviceaccount.com
   - serviceAccount:127754664067@cloudservices.gserviceaccount.com
-  - serviceAccount:service-127754664067@containerregistry.iam.gserviceaccount.com
   role: roles/editor
 - members:
   - serviceAccount:k8s-nodes@kubernetes-public.iam.gserviceaccount.com
@@ -42,5 +41,5 @@ bindings:
   - user:ihor@cncf.io
   - user:thockin@google.com
   role: roles/owner
-etag: BwWGvOrrBsU=
+etag: BwWIeZ1EG7o=
 version: 1

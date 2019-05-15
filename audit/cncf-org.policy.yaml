@@ -13,7 +13,7 @@ bindings:
   - user:thockin@google.com
   role: roles/iam.organizationRoleAdmin
 - members:
-  - group:k8s-infra-gcp-auditors@googlegroups.com
+  - group:k8s-infra-gcp-auditors@kubernetes.io
   role: roles/iam.securityReviewer
 - members:
   - user:domain-admin-lf@kubernetes.io
@@ -28,4 +28,5 @@ bindings:
 - members:
   - user:thockin@google.com
   role: roles/resourcemanager.projectDeleter
-etag: BwWDmKQ6zmg=
+etag: BwWIgEd9TPI=
+version: 1

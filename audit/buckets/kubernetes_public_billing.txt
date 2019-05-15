@@ -109,3 +109,17 @@ gs://kubernetes_public_billing/billing--2019-04-27.csv
 gs://kubernetes_public_billing/billing--2019-04-28.csv
 gs://kubernetes_public_billing/billing--2019-04-29.csv
 gs://kubernetes_public_billing/billing--2019-04-30.csv
+gs://kubernetes_public_billing/billing--2019-05-01.csv
+gs://kubernetes_public_billing/billing--2019-05-02.csv
+gs://kubernetes_public_billing/billing--2019-05-03.csv
+gs://kubernetes_public_billing/billing--2019-05-04.csv
+gs://kubernetes_public_billing/billing--2019-05-05.csv
+gs://kubernetes_public_billing/billing--2019-05-06.csv
+gs://kubernetes_public_billing/billing--2019-05-07.csv
+gs://kubernetes_public_billing/billing--2019-05-08.csv
+gs://kubernetes_public_billing/billing--2019-05-09.csv
+gs://kubernetes_public_billing/billing--2019-05-10.csv
+gs://kubernetes_public_billing/billing--2019-05-11.csv
+gs://kubernetes_public_billing/billing--2019-05-12.csv
+gs://kubernetes_public_billing/billing--2019-05-13.csv
+gs://kubernetes_public_billing/billing--2019-05-14.csv

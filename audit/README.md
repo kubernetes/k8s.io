@@ -15,12 +15,6 @@ Console.
 To volunteer for this effort, contact the main
 [k8s-infra-team](https://groups.google.com/forum/#!forum/k8s-infra-team).
 
-## Where is it hosted?
-
-We mostly host it in Google Cloud:
-  * GCP org = kubernetes.io / organizationId=758905017065
-  * GCP project = kubernetes-public
-
 ## Requesting a Audit PR for review
 
 The process for sumbitting an audit uses Github PRs.
@@ -38,8 +32,11 @@ Once this PR is created, it should be acknowledged by a secondary auditor.
 
 ### Performing an audit
 
+Note that this is an AUDIT, not a request for change.
+The audits can be used to generate discussion for reviewing the changes that have already occured.
+
 #### Update Pull Request
-First, the requsting auditor opens a PR with any updates applied to the appropriate YAML/JSON file.
+First, the requesting auditor opens a PR with any updates applied to the appropriate YAML/JSON file.
 Next, the requesting auditor validates that the PR looks correct for their request and responds `/lgtm`
 
 The a secondary auditor merges the PR once it has been LGTM'd
