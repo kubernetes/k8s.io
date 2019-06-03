@@ -170,6 +170,10 @@ issue:
 issues:
   type: CNAME
   value: redirect.k8s.io.
+# https://github.com/kubernetes-sigs/kind docs (@bentheelder, @munnerz)
+kind.sigs:
+  type: CNAME
+  value: k8s-kind.netlify.com.
 # Running in GKE (@dchen1107).
 node-perf-dash:
   type: A
@@ -191,6 +195,10 @@ prow:
 prs:
   type: CNAME
   value: redirect.k8s.io.
+# https://github.com/kubernetes-sigs/release-notes docs (@jeefy)
+relnotes:
+  type: CNAME
+  value: kubernetes-sigs-release-notes.netlify.com.
 sigs:
   type: CNAME
   value: redirect.k8s.io.
@@ -236,7 +244,3 @@ testgrid:
 velodrome:
   type: A
   value: 104.197.200.129
-# https://github.com/kubernetes-sigs/kind docs (@bentheelder, @munnerz)
-kind.sigs:
-  type: CNAME
-  value: k8s-kind.netlify.com.
