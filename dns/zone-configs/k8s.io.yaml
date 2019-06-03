@@ -191,6 +191,9 @@ prow:
 prs:
   type: CNAME
   value: redirect.k8s.io.
+relnotes:
+  type: CNAME
+  value: kubernetes-sigs-relnotes.netlify.com
 sigs:
   type: CNAME
   value: redirect.k8s.io.

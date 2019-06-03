@@ -1,10 +1,5 @@
 # Managing DNS for Kubernetes domains
 
-## Status
-
-WIP.  The zones are created and have been synced once for testing, but none of
-the rest of this is finalized.  Top-level NS records have not been flipped.
-
 ## Zones
 
 Zones we manage:
@@ -14,7 +9,7 @@ Zones we manage:
 ## How to become an admin
 
 Admin access is granted via
-[googlegroups](https://groups.google.com/forum/#!forum/k8s-infra-dns-admins).
+[googlegroups](https://groups.google.com/a/kubernetes.io/forum/#!forum/k8s-infra-dns-admins).
 
 You must have a Google account that will let you access the Google Cloud
 Console.

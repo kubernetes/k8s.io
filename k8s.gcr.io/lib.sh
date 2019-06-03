@@ -104,6 +104,7 @@ function ensure_project() {
 
     if ! gcloud projects describe "${project}" >/dev/null 2>&1; then
         gcloud projects create "${project}" \
+            --no-enable-cloud-apis \
             --organization "${GCP_ORG}"
     else
         org=$(gcloud projects \
@@ -381,4 +382,27 @@ function ensure_gcs_bucket_auto_deletion() {
           ]
         }
     " | gsutil lifecycle set /dev/stdin "${bucket}"
+}
+
+# Create a service account
+# $1: The GCP project
+# $2: The account name (e.g. "foo-manager")
+# $3: The account display-name (e.g. "Manages all foo")
+function ensure_service_account() {
+    if [ $# != 3 -o -z "$1" -o -z "$2" -o -x "$3" ]; then
+        echo "ensure_service_account(project, name, display_name) requires 3 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    name="$2"
+    display_name="$3"
+
+    acct=$(svc_acct_for "${project}" "${name}")
+
+    if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
+        gcloud --project "${project}" \
+            iam service-accounts create \
+            "${name}" \
+            --display-name="${display_name}"
+    fi
 }
