@@ -2,7 +2,7 @@
 name: DNS Update Request
 about: Request a create, delete or update of a kubernetes.io or k8s.io DNS record
 title: 'DNS REQUEST: <your-dns-record>'
-labels: wg/k8s-infra
+labels: wg/k8s-infra, area/dns
 assignees: ''
 
 ---
