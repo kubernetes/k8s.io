@@ -191,9 +191,10 @@ prow:
 prs:
   type: CNAME
   value: redirect.k8s.io.
+# https://github.com/kubernetes-sigs/release-notes docs (@jeefy)
 relnotes:
   type: CNAME
-  value: kubernetes-sigs-relnotes.netlify.com
+  value: kubernetes-sigs-release-notes.netlify.com.
 sigs:
   type: CNAME
   value: redirect.k8s.io.
