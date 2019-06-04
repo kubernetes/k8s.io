@@ -3,6 +3,15 @@
 # group is prefixed with "k8s-infra" to avoid polluting the other existing gsuite
 # mailing lists.
 groups:
+  - email-id: blog@kubernetes.io
+    members:
+      - codyclark@google.com
+      - jorgec@vmware.com
+      - kaitlynbarnard10@gmail.com
+      - parispittman@google.com
+      - rkillen@umich.edu
+      - vonguard@gmail.com
+      - zcorleissen@linuxfoundation.org
   - email-id: k8s-infra-alerts@kubernetes.io
     members:
       - amwat@google.com
