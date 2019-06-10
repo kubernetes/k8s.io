@@ -48,9 +48,9 @@ GCP_BILLING="018801-93540E-22A20E"
 # Get the GCS bucket name that backs a GCR repo.
 # $1: The GCR repo (same as the GCP project name)
 # $2: The GCR region (optional)
-function gcs_bucket_for() {
+function gcs_bucket_for_gcr() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
-        echo "gcs_bucket_for(repo, [region]) requires 1 or 2 arguments" >&2
+        echo "gcs_bucket_for_gcr(repo, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     repo="$1"
@@ -158,7 +158,7 @@ function ensure_repo() {
     project="$1"
     region="${2:-}"
 
-    bucket=$(gcs_bucket_for "${project}" "${region}")
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
         host=$(gcr_host_for "${region}")
         image="ceci-nest-pas-une-image"
@@ -228,7 +228,7 @@ function empower_gcr_admins() {
     fi
     project="$1"
     region="${2:-}"
-    bucket=$(gcs_bucket_for "${project}" "${region}")
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     # Grant project viewer so the UI will work.
     gcloud \
@@ -283,7 +283,7 @@ function empower_group_to_repo() {
     project="$1"
     group="$2"
     region="${3:-}"
-    bucket=$(gcs_bucket_for "${project}" "${region}")
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     gsutil iam ch \
         "group:${group}:objectAdmin" \
@@ -322,7 +322,7 @@ function empower_promoter() {
     fi
     project="$1"
     region="${2:-}"
-    bucket=$(gcs_bucket_for "${project}" "${region}")
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     acct=$(svc_acct_for "${project}" "${PROMOTER_SVCACCT}")
 
