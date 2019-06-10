@@ -73,7 +73,7 @@ for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Empowering image promoter to GCR: ${prj}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        empower_promoter "${prj}" "${r}"
+        empower_artifact_promoter "${prj}" "${r}"
     done
 done
 

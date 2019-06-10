@@ -306,9 +306,9 @@ function empower_group_to_gcs_bucket() {
 # Grant full privileges to the GCR promoter bot
 # $1: The GCP project
 # $2: The GCR region (optional)
-function empower_promoter() {
+function empower_artifact_promoter() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
-        echo "empower_promoter(project, [region]) requires 1 or 2 arguments" >&2
+        echo "empower_artifact_promoter(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     project="$1"
