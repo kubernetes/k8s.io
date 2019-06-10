@@ -65,9 +65,9 @@ function gcs_bucket_for_gcr() {
 
 # Get the GCR host name for a region
 # $1: The GCR region
-function gcr_host_for() {
+function gcr_host_for_region() {
     if [ $# != 1 ]; then
-        echo "gcr_host_for(region) requires 1 argument" >&2
+        echo "gcr_host_for_region(region) requires 1 argument" >&2
         return 1
     fi
     region="$1"
@@ -160,7 +160,7 @@ function ensure_repo() {
 
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
-        host=$(gcr_host_for "${region}")
+        host=$(gcr_host_for_region "${region}")
         image="ceci-nest-pas-une-image"
         dest="${host}/${project}/${image}"
         docker pull k8s.gcr.io/pause
