@@ -61,7 +61,7 @@ for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Ensuring the registry exists and is readable: ${prj}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        ensure_repo "${prj}" "${r}"
+        ensure_gcr_repo "${prj}" "${r}"
     done
 
     color 6 "Empowering GCR admins: ${prj}"

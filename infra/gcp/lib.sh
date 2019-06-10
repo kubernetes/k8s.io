@@ -138,12 +138,12 @@ function enable_api() {
     gcloud --project "${project}" services enable "${api}"
 }
 
-# Ensure the bucket backing the repo exists and is world-readable
+# Ensure the GCS bucket backing a GCR repo exists and is world-readable.
 # $1: The GCP project
 # $2: The GCR region (optional)
-function ensure_repo() {
+function ensure_gcr_repo() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
-        echo "ensure_repo(project, [region]) requires 1 or 2 arguments" >&2
+        echo "ensure_gcr_repo(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     project="$1"

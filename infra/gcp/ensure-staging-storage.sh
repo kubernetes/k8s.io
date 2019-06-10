@@ -81,7 +81,7 @@ for REPO; do
 
     # Push an image to trigger the bucket to be created
     color 6 "Ensuring the registry exists and is readable"
-    ensure_repo "${PROJECT}"
+    ensure_gcr_repo "${PROJECT}"
 
     # Enable GCR admins
     color 6 "Empowering GCR admins"
