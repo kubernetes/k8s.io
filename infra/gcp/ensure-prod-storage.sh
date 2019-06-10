@@ -105,6 +105,6 @@ ensure_gcs_web_policy "${PROD_BUCKET}"
 
 # rsync in any static content
 color 6 "Copying static content into bucket"
-upload_gcs_static_content "${PROD_BUCKET}" "${SCRIPT_DIR}/static/prod"
+upload_gcs_static_content "${PROD_BUCKET}" "${SCRIPT_DIR}/static/prod-storage"
 
 color 6 "Done"
