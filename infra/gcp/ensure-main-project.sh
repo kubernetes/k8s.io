@@ -78,7 +78,7 @@ color 6 "Creating service account for ${NODES_SVCACCT}"
 ensure_service_account "${PROJECT}" "${NODES_SVCACCT}" "Least-privilege SA for k8s nodes"
 
 color 6 "Empowering ${NODES_SVCACCT} with min permissions"
-acct=$(svc_acct_for "${PROJECT}" "${NODES_SVCACCT}")
+acct=$(svc_acct_email "${PROJECT}" "${NODES_SVCACCT}")
 gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "serviceAccount:${acct}" \
     --role roles/logging.logWriter

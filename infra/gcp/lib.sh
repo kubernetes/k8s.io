@@ -82,9 +82,9 @@ function gcr_host_for_region() {
 # Get the service account email for a given short name
 # $1: The GCP project
 # $2: The name
-function svc_acct_for() {
+function svc_acct_email() {
     if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
-        echo "svc_acct_for(project, name) requires 2 arguments" >&2
+        echo "svc_acct_email(project, name) requires 2 arguments" >&2
         return 1
     fi
     project="$1"
@@ -324,7 +324,7 @@ function empower_promoter() {
     region="${2:-}"
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    acct=$(svc_acct_for "${project}" "${PROMOTER_SVCACCT}")
+    acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -397,7 +397,7 @@ function ensure_service_account() {
     name="$2"
     display_name="$3"
 
-    acct=$(svc_acct_for "${project}" "${name}")
+    acct=$(svc_acct_email "${project}" "${name}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
