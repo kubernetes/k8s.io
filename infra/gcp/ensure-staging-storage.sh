@@ -73,9 +73,6 @@ for REPO; do
     color 6 "Ensuring project exists: ${PROJECT}"
     ensure_project "${PROJECT}"
 
-    color 6 "Configuring billing for ${PROJECT}"
-    ensure_billing "${PROJECT}"
-
     # Every project gets a GCR repo
 
     # Enable container registry APIs

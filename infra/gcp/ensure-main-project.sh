@@ -54,9 +54,6 @@ ACCOUNTING_GROUP="k8s-infra-gcp-accounting@kubernetes.io"
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
-color 6 "Configuring billing: ${PROJECT}"
-ensure_billing "${PROJECT}"
-
 # Enable APIs we know we need
 color 6 "Enabling the GCE API"
 enable_api "${PROJECT}" compute.googleapis.com

@@ -93,7 +93,8 @@ function svc_acct_email() {
     echo "${name}@${project}.iam.gserviceaccount.com"
 }
 
-# Ensure that a project exists in our org.
+# Ensure that a project exists in our org and has fundamental configurations as
+# we want them (e.g. billing).
 # $1: The GCP project
 function ensure_project() {
     if [ $# != 1 -o -z "$1" ]; then
@@ -118,16 +119,6 @@ function ensure_project() {
             return 2
         fi
     fi
-}
-
-# Link a project to our billing account
-# $1: The GCP project
-function ensure_billing() {
-    if [ $# != 1 -o -z "$1" ]; then
-        echo "ensure_billing(project) requires 1 argument" >&2
-        return 1
-    fi
-    project="$1"
 
     gcloud beta billing projects link "${project}" \
         --billing-account "${GCP_BILLING}"

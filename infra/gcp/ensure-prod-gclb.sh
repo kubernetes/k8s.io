@@ -49,9 +49,6 @@ DOMAIN=artifacts.k8s.io
 color 6 "Ensuring project exists: ${PROD_PROJECT}"
 ensure_project "${PROD_PROJECT}"
 
-color 6 "Configuring billing: ${PROD_PROJECT}"
-ensure_billing "${PROD_PROJECT}"
-
 color 6 "Enabling the compute API: ${PROD_PROJECT}"
 enable_api "${PROD_PROJECT}" compute.googleapis.com
 

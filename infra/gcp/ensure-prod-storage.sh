@@ -52,9 +52,6 @@ for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Ensuring project exists: ${prj}"
     ensure_project "${prj}"
 
-    color 6 "Configuring billing: ${prj}"
-    ensure_billing "${prj}"
-
     color 6 "Enabling the container registry API: ${prj}"
     enable_api "${prj}" containerregistry.googleapis.com
 
