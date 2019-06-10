@@ -287,9 +287,9 @@ function empower_group_to_gcr() {
 # Grant write privileges on a bucket to a group
 # $1: The googlegroups group
 # $2: The bucket
-function empower_group_to_bucket() {
+function empower_group_to_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_bucket(group_name, bucket) requires 2 arguments" >&2
+        echo "empower_group_to_gcs_bucket(group_name, bucket) requires 2 arguments" >&2
         return 1
     fi
     group="$1"
