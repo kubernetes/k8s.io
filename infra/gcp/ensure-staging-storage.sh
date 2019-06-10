@@ -89,7 +89,7 @@ for REPO; do
 
     # Enable repo writers
     color 6 "Empowering ${WRITERS} to GCR"
-    empower_group_to_repo "${PROJECT}" "${WRITERS}"
+    empower_group_to_gcr "${PROJECT}" "${WRITERS}"
 
     # Every project gets a GCS bucket
 
