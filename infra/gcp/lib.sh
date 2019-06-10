@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This is a library of functions used to create GCR stuff.
+# This is a library of functions used to create GCP stuff.
 
 function _color() {
     tput setf "$1" || true
