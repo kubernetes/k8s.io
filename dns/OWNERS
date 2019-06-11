@@ -6,3 +6,5 @@ approvers:
   - hh
   - idvoretskyi
   - thockin
+labels:
+  - area/dns
