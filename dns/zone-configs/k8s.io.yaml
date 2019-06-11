@@ -248,3 +248,7 @@ kind.sigs:
 cluster-api.sigs:
   type: CNAME
   value: kubernetes-sigs-cluster-api.netlify.com.
+# https://github.com/kubernetes/cloud-provider-vsphere docs (@andrewsykim, @frapposelli)
+cloud-provider-vsphere.sigs:
+  type: CNAME
+  value: kubernetes-sigs-cloud-provider-vsphere.netlify.com
