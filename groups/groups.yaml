@@ -27,6 +27,14 @@ groups:
       - justinsb@google.com
       - stefan.schimanski@gmail.com
       - nikitaraghunath@gmail.com
+  - email-id: k8s-infra-cluster-operators@kubernetes.io
+    members:
+      - ameukam@gmail.com
+      - davanum@gmail.com
+      - hh@ii.coop
+      - justinsb@google.com
+      - spiffxp@google.com
+      - thockin@google.com
   - email-id: k8s-infra-dns-admins@kubernetes.io
     members:
       - bentheelder@google.com
