@@ -188,6 +188,9 @@ pr-test:
 prow:
   type: A
   value: 35.186.196.185
+monitoring.prow:
+  type: A
+  value: 130.211.20.136
 prs:
   type: CNAME
   value: redirect.k8s.io.
