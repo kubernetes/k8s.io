@@ -43,6 +43,7 @@ STAGING_PROJECTS=(
     cluster-api
     csi
     kops
+    publishing-bot
 )
 if [ $# = 0 ]; then
     # default to all staging projects
