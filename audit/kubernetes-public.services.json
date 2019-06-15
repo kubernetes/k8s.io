@@ -1,0 +1,146 @@
+[
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "A data platform for customers to create, manage, share and query data."
+      },
+      "name": "bigquery-json.googleapis.com",
+      "quota": {},
+      "title": "BigQuery API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/bigquery-json.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Creates and runs virtual machines on Google Cloud Platform.\n"
+      },
+      "name": "compute.googleapis.com",
+      "quota": {},
+      "title": "Compute Engine API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud",
+          "serviceusage.googleapis.com/billing-enabled"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/compute.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {},
+      "name": "dns.googleapis.com",
+      "quota": {},
+      "title": "Google Cloud DNS API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud",
+          "serviceusage.googleapis.com/billing-enabled"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/dns.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Writes log entries and manages your Stackdriver Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the [Stackdriver Logging documentation](/logging/docs)."
+      },
+      "name": "logging.googleapis.com",
+      "quota": {},
+      "title": "Stackdriver Logging API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/logging.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the [Stackdriver Monitoring documentation](/monitoring/docs).\n"
+      },
+      "name": "monitoring.googleapis.com",
+      "quota": {},
+      "title": "Stackdriver Monitoring API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/monitoring.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Manages OS login configuration for Google account users."
+      },
+      "name": "oslogin.googleapis.com",
+      "quota": {},
+      "title": "Cloud OS Login API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/oslogin.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Lets you store and retrieve potentially-large, immutable data objects."
+      },
+      "name": "storage-api.googleapis.com",
+      "quota": {},
+      "title": "Google Cloud Storage JSON API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/storage-api.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Google Cloud Storage is a RESTful service for storing and accessing your data on Google's\n    infrastructure."
+      },
+      "name": "storage-component.googleapis.com",
+      "quota": {},
+      "title": "Cloud Storage",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/storage-component.googleapis.com",
+    "state": "ENABLED"
+  }
+]

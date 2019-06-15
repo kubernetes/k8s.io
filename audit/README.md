@@ -3,7 +3,7 @@
 ## Status
 
 WIP. Members of k8s-infra-gcp-auditors should be able to run this script to submit an audit PR. 
-Note this is an Audit of current configuration, not a requset for change.
+Note this is an Audit of current configuration, not a request for change.
 
 ## How to become an auditor
 

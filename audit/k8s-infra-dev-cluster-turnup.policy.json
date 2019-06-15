@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:terraform@k8s-infra-dev-cluster-turnup.iam.gserviceaccount.com"
+      ],
+      "role": "roles/browser"
+    },
+    {
+      "members": [
         "serviceAccount:service-396460694993@gcp-sa-cloudscheduler.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudscheduler.serviceAgent"
@@ -36,8 +42,20 @@
         "user:thockin@google.com"
       ],
       "role": "roles/owner"
+    },
+    {
+      "members": [
+        "serviceAccount:terraform@k8s-infra-dev-cluster-turnup.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:terraform@k8s-infra-dev-cluster-turnup.iam.gserviceaccount.com"
+      ],
+      "role": "roles/viewer"
     }
   ],
-  "etag": "BwWLKUjb2zw=",
+  "etag": "BwWLYUm4FJE=",
   "version": 1
 }
