@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "group:k8s-infra-gcp-accounting@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/CustomRole"
+    },
+    {
+      "members": [
         "user:ihor@cncf.io",
         "user:thockin@google.com",
         "user:twaggoner@linuxfoundation.org"
@@ -51,6 +57,6 @@
       "role": "roles/resourcemanager.projectDeleter"
     }
   ],
-  "etag": "BwWIgEd9TPI=",
+  "etag": "BwWLI_mG-qA=",
   "version": 1
 }

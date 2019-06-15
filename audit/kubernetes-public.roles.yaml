@@ -4,9 +4,3 @@ etag: BwV_JE8PWv4=
 name: projects/kubernetes-public/roles/ServiceAccountLister
 stage: GA
 title: Service Account Lister
----
-description: delete me 1
-etag: BwWIfSRcpWU=
-name: projects/kubernetes-public/roles/ThockinTest1
-stage: GA
-title: delete me 1

@@ -28,6 +28,12 @@ bindings:
   - serviceAccount:127754664067@cloudservices.gserviceaccount.com
   role: roles/editor
 - members:
+  - user:thockin@google.com
+  role: roles/iam.roleAdmin
+- members:
+  - user:thockin@google.com
+  role: roles/iam.securityAdmin
+- members:
   - serviceAccount:k8s-nodes@kubernetes-public.iam.gserviceaccount.com
   role: roles/logging.logWriter
 - members:
@@ -41,5 +47,5 @@ bindings:
   - user:ihor@cncf.io
   - user:thockin@google.com
   role: roles/owner
-etag: BwWIeZ1EG7o=
+etag: BwWLI83k-Rw=
 version: 1

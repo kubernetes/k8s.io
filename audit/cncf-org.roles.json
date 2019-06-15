@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "description": "Can view billing info",
+    "etag": "BwWLI_e8Xyo=",
+    "name": "organizations/758905017065/roles/CustomRole",
+    "stage": "GA",
+    "title": "Billing Viewer"
+  }
+]
