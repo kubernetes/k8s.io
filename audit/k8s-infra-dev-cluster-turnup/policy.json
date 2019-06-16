@@ -20,6 +20,12 @@
     },
     {
       "members": [
+        "serviceAccount:terraform@k8s-infra-dev-cluster-turnup.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.clusterAdmin"
+    },
+    {
+      "members": [
         "serviceAccount:service-396460694993@container-engine-robot.iam.gserviceaccount.com"
       ],
       "role": "roles/container.serviceAgent"
@@ -56,6 +62,6 @@
       "role": "roles/viewer"
     }
   ],
-  "etag": "BwWLYUm4FJE=",
+  "etag": "BwWLYvXsn1M=",
   "version": 1
 }
