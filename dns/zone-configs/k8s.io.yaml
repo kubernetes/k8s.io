@@ -116,10 +116,6 @@ cs:
   type: A
   value: 147.75.97.58
 # sig-contributor-experience
-devstats:
-  type: CNAME
-  value: k8s.devstats.cncf.io.
-# sig-contributor-experience
 discuss:
   type: CNAME
   value: kubernetes.hosted-by-discourse.com.

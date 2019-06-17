@@ -108,9 +108,6 @@ code:
 cs:
   type: CNAME
   value: cs.k8s.io.
-devstats:
-  type: CNAME
-  value: devstats.k8s.io.
 discuss:
   type: CNAME
   value: kubernetes.hosted-by-discourse.com.
