@@ -255,3 +255,7 @@ cluster-api.sigs:
 cloud-provider-vsphere.sigs:
   type: CNAME
   value: kubernetes-sigs-cloud-provider-vsphere.netlify.com.
+# https://github.com/kubernetes/minikube docs (@tstromberg, @afbjorklund)
+minikube.sigs:
+  type: CNAME
+  value: kubernetes-sigs-minikube.netlify.com.
