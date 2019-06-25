@@ -103,6 +103,11 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
       - justinsb@google.com
+  - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - stefan.schimanski@gmail.com
+      - nikitaraghunath@gmail.com
   - email-id: k8s-infra-team-private@kubernetes.io
     members:
       - jgrafton@google.com
