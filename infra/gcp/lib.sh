@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This is a library of functions used to create GCR stuff.
+# This is a library of functions used to create GCP stuff.
 
 function _color() {
     tput setf "$1" || true
@@ -48,9 +48,9 @@ GCP_BILLING="018801-93540E-22A20E"
 # Get the GCS bucket name that backs a GCR repo.
 # $1: The GCR repo (same as the GCP project name)
 # $2: The GCR region (optional)
-function gcs_bucket_for() {
+function gcs_bucket_for_gcr() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
-        echo "gcs_bucket_for(repo, [region]) requires 1 or 2 arguments" >&2
+        echo "gcs_bucket_for_gcr(repo, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     repo="$1"
@@ -65,9 +65,9 @@ function gcs_bucket_for() {
 
 # Get the GCR host name for a region
 # $1: The GCR region
-function gcr_host_for() {
+function gcr_host_for_region() {
     if [ $# != 1 ]; then
-        echo "gcr_host_for(region) requires 1 argument" >&2
+        echo "gcr_host_for_region(region) requires 1 argument" >&2
         return 1
     fi
     region="$1"
@@ -82,9 +82,9 @@ function gcr_host_for() {
 # Get the service account email for a given short name
 # $1: The GCP project
 # $2: The name
-function svc_acct_for() {
+function svc_acct_email() {
     if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
-        echo "svc_acct_for(project, name) requires 2 arguments" >&2
+        echo "svc_acct_email(project, name) requires 2 arguments" >&2
         return 1
     fi
     project="$1"
@@ -93,7 +93,8 @@ function svc_acct_for() {
     echo "${name}@${project}.iam.gserviceaccount.com"
 }
 
-# Ensure that a project exists in our org.
+# Ensure that a project exists in our org and has fundamental configurations as
+# we want them (e.g. billing).
 # $1: The GCP project
 function ensure_project() {
     if [ $# != 1 -o -z "$1" ]; then
@@ -118,16 +119,6 @@ function ensure_project() {
             return 2
         fi
     fi
-}
-
-# Link a project to our billing account
-# $1: The GCP project
-function ensure_billing() {
-    if [ $# != 1 -o -z "$1" ]; then
-        echo "ensure_billing(project) requires 1 argument" >&2
-        return 1
-    fi
-    project="$1"
 
     gcloud beta billing projects link "${project}" \
         --billing-account "${GCP_BILLING}"
@@ -147,20 +138,20 @@ function enable_api() {
     gcloud --project "${project}" services enable "${api}"
 }
 
-# Ensure the bucket backing the repo exists and is world-readable
+# Ensure the GCS bucket backing a GCR repo exists and is world-readable.
 # $1: The GCP project
 # $2: The GCR region (optional)
-function ensure_repo() {
+function ensure_gcr_repo() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
-        echo "ensure_repo(project, [region]) requires 1 or 2 arguments" >&2
+        echo "ensure_gcr_repo(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     project="$1"
     region="${2:-}"
 
-    bucket=$(gcs_bucket_for "${project}" "${region}")
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
-        host=$(gcr_host_for "${region}")
+        host=$(gcr_host_for_region "${region}")
         image="ceci-nest-pas-une-image"
         dest="${host}/${project}/${image}"
         docker pull k8s.gcr.io/pause
@@ -228,7 +219,7 @@ function empower_gcr_admins() {
     fi
     project="$1"
     region="${2:-}"
-    bucket=$(gcs_bucket_for "${project}" "${region}")
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     # Grant project viewer so the UI will work.
     gcloud \
@@ -275,15 +266,15 @@ function empower_gcs_admins() {
 # $1: The GCP project
 # $2: The googlegroups group
 # $3: The GCR region (optional)
-function empower_group_to_repo() {
+function empower_group_to_gcr() {
     if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_repo(project, group_name, [region]) requires 2 or 3 arguments" >&2
+        echo "empower_group_to_gcr(project, group_name, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
     project="$1"
     group="$2"
     region="${3:-}"
-    bucket=$(gcs_bucket_for "${project}" "${region}")
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     gsutil iam ch \
         "group:${group}:objectAdmin" \
@@ -296,9 +287,9 @@ function empower_group_to_repo() {
 # Grant write privileges on a bucket to a group
 # $1: The googlegroups group
 # $2: The bucket
-function empower_group_to_bucket() {
+function empower_group_to_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_bucket(group_name, bucket) requires 2 arguments" >&2
+        echo "empower_group_to_gcs_bucket(group_name, bucket) requires 2 arguments" >&2
         return 1
     fi
     group="$1"
@@ -315,16 +306,16 @@ function empower_group_to_bucket() {
 # Grant full privileges to the GCR promoter bot
 # $1: The GCP project
 # $2: The GCR region (optional)
-function empower_promoter() {
+function empower_artifact_promoter() {
     if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
-        echo "empower_promoter(project, [region]) requires 1 or 2 arguments" >&2
+        echo "empower_artifact_promoter(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     project="$1"
     region="${2:-}"
-    bucket=$(gcs_bucket_for "${project}" "${region}")
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    acct=$(svc_acct_for "${project}" "${PROMOTER_SVCACCT}")
+    acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -397,7 +388,7 @@ function ensure_service_account() {
     name="$2"
     display_name="$3"
 
-    acct=$(svc_acct_for "${project}" "${name}")
+    acct=$(svc_acct_email "${project}" "${name}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \

@@ -73,9 +73,6 @@ for REPO; do
     color 6 "Ensuring project exists: ${PROJECT}"
     ensure_project "${PROJECT}"
 
-    color 6 "Configuring billing for ${PROJECT}"
-    ensure_billing "${PROJECT}"
-
     # Every project gets a GCR repo
 
     # Enable container registry APIs
@@ -84,7 +81,7 @@ for REPO; do
 
     # Push an image to trigger the bucket to be created
     color 6 "Ensuring the registry exists and is readable"
-    ensure_repo "${PROJECT}"
+    ensure_gcr_repo "${PROJECT}"
 
     # Enable GCR admins
     color 6 "Empowering GCR admins"
@@ -92,7 +89,7 @@ for REPO; do
 
     # Enable repo writers
     color 6 "Empowering ${WRITERS} to GCR"
-    empower_group_to_repo "${PROJECT}" "${WRITERS}"
+    empower_group_to_gcr "${PROJECT}" "${WRITERS}"
 
     # Every project gets a GCS bucket
 
@@ -118,7 +115,7 @@ for REPO; do
 
     # Enable writers on the bucket
     color 6 "Empowering ${WRITERS} to GCS"
-    empower_group_to_bucket "${WRITERS}" "${BUCKET}"
+    empower_group_to_gcs_bucket "${WRITERS}" "${BUCKET}"
 
     color 6 "Done"
 done

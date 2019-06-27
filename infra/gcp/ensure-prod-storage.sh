@@ -52,9 +52,6 @@ for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Ensuring project exists: ${prj}"
     ensure_project "${prj}"
 
-    color 6 "Configuring billing: ${prj}"
-    ensure_billing "${prj}"
-
     color 6 "Enabling the container registry API: ${prj}"
     enable_api "${prj}" containerregistry.googleapis.com
 
@@ -64,7 +61,7 @@ for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Ensuring the registry exists and is readable: ${prj}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        ensure_repo "${prj}" "${r}"
+        ensure_gcr_repo "${prj}" "${r}"
     done
 
     color 6 "Empowering GCR admins: ${prj}"
@@ -76,7 +73,7 @@ for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Empowering image promoter to GCR: ${prj}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        empower_promoter "${prj}" "${r}"
+        empower_artifact_promoter "${prj}" "${r}"
     done
 done
 
@@ -84,7 +81,7 @@ done
 color 6 "Empowering cip-test group in cip-test for GCR"
 for r in "${PROD_REGIONS[@]}"; do
     color 3 "region $r"
-    empower_group_to_repo "${TEST_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io" "${r}"
+    empower_group_to_gcr "${TEST_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io" "${r}"
 done
 
 # Create bucket
@@ -108,6 +105,6 @@ ensure_gcs_web_policy "${PROD_BUCKET}"
 
 # rsync in any static content
 color 6 "Copying static content into bucket"
-upload_gcs_static_content "${PROD_BUCKET}" "${SCRIPT_DIR}/static/prod"
+upload_gcs_static_content "${PROD_BUCKET}" "${SCRIPT_DIR}/static/prod-storage"
 
 color 6 "Done"

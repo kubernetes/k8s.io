@@ -48,9 +48,6 @@ GSUITE_USER="wg-k8s-infra-api@kubernetes.io"
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
-color 6 "Configuring billing: ${PROJECT}"
-ensure_billing "${PROJECT}"
-
 # Enable GSuite APIs
 color 6 "Enabling the GSuite admin API"
 enable_api "${PROJECT}" admin.googleapis.com
