@@ -44,6 +44,7 @@ STAGING_PROJECTS=(
     csi
     kops
     publishing-bot
+    build-image
 )
 if [ $# = 0 ]; then
     # default to all staging projects

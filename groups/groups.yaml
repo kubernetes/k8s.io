@@ -89,6 +89,11 @@ groups:
   - email-id: k8s-infra-staging-coredns@kubernetes.io
     members:
       - davanum@gmail.com
+  - email-id: k8s-infra-staging-build-image@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - jbperez@google.com
+      - linusa@google.com
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     members:
       - davanum@gmail.com
