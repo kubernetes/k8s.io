@@ -41,6 +41,7 @@ STAGING_PROJECTS=(
     coredns
     cip-test
     cluster-api
+    cluster-api-aws
     csi
     kops
     publishing-bot

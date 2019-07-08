@@ -96,6 +96,13 @@ groups:
       - detiber@gmail.com
       - vince@vincepri.com
       - hi@amycod.es
+  - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - ha.chuck@gmail.com
+      - detiber@gmail.com
+      - vince@vincepri.com
+      - hi@amycod.es
   - email-id: k8s-infra-staging-kops@kubernetes.io
     members:
       - ihor@cncf.io
