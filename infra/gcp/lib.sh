@@ -181,6 +181,7 @@ function ensure_gcs_bucket() {
       gsutil mb -p "${project}" -l "${location}" "${bucket}"
     fi
     gsutil iam ch allUsers:objectViewer "${bucket}"
+    gsutil bucketpolicyonly set on "${bucket}"
 }
 
 # Sets the web policy on the bucket, including a default index.html page
