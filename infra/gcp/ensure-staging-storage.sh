@@ -37,15 +37,17 @@ function usage() {
     echo > /dev/stderr
 }
 
+# NB: Please keep this sorted.
 STAGING_PROJECTS=(
-    coredns
+    build-image
     cip-test
     cluster-api
     cluster-api-aws
+    coredns
     csi
     kops
     publishing-bot
-    build-image
+    release-test
 )
 if [ $# = 0 ]; then
     # default to all staging projects

@@ -120,6 +120,15 @@ groups:
       - davanum@gmail.com
       - stefan.schimanski@gmail.com
       - nikitaraghunath@gmail.com
+  - email-id: k8s-infra-staging-release-test@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - spiffxp@google.com
+      - thockin@google.com
+      - stephen@agst.us
+      - caselim@gmail.com
+      - tpepper@gmail.com
   - email-id: k8s-infra-team-private@kubernetes.io
     members:
       - jgrafton@google.com

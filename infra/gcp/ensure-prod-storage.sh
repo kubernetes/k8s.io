@@ -35,11 +35,17 @@ if [ $# != 0 ]; then
 fi
 
 # The GCP project names.
-TEST_PROJECT="k8s-cip-test-prod"
 PROD_PROJECT="k8s-artifacts-prod"
 TRASH_PROJECT="k8s-artifacts-graveyard"
+PROMOTER_TEST_PROJECT="k8s-cip-test-prod"
+RELEASE_TEST_PROJECT="k8s-release-test-prod"
 
-ALL_PROJECTS=("${TEST_PROJECT}" "${PROD_PROJECT}" "${TRASH_PROJECT}")
+ALL_PROJECTS=(
+    "${PROD_PROJECT}"
+    "${TRASH_PROJECT}"
+    "${PROMOTER_TEST_PROJECT}"
+    "${RELEASE_TEST_PROJECT}"
+)
 
 # GCS bucket for prod
 PROD_BUCKET=gs://k8s-artifacts-prod
@@ -81,7 +87,13 @@ done
 color 6 "Empowering cip-test group in cip-test for GCR"
 for r in "${PROD_REGIONS[@]}"; do
     color 3 "region $r"
-    empower_group_to_gcr "${TEST_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io" "${r}"
+    empower_group_to_gcr "${PROMOTER_TEST_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io" "${r}"
+done
+
+color 6 "Empowering release-test group in release-test for GCR"
+for r in "${PROD_REGIONS[@]}"; do
+    color 3 "region $r"
+    empower_group_to_gcr "${RELEASE_TEST_PROJECT}" "k8s-infra-staging-release-test@kubernetes.io" "${r}"
 done
 
 # Create bucket
