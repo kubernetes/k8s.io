@@ -24,15 +24,14 @@ set -o pipefail
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
+
 function usage() {
-    echo "usage: $0" > /dev/stderr
+    echo "usage: $0 [repo...]" > /dev/stderr
+    echo "example:" > /dev/stderr
+    echo "  $0 # do all production repos" > /dev/stderr
+    echo "  $0 k8s-release-test-prod # just do one" > /dev/stderr
     echo > /dev/stderr
 }
-
-if [ $# != 0 ]; then
-    usage
-    exit 1
-fi
 
 # The GCP project names.
 PROD_PROJECT="k8s-artifacts-prod"
@@ -53,33 +52,38 @@ PROD_BUCKET=gs://k8s-artifacts-prod
 # Regions for prod.
 PROD_REGIONS=(us eu asia)
 
-# Make the projects, if needed
-for prj in "${ALL_PROJECTS[@]}"; do
-    color 6 "Ensuring project exists: ${prj}"
-    ensure_project "${prj}"
+if [ $# = 0 ]; then
+    # default to all staging projects
+    set -- "${ALL_PROJECTS[@]}"
+fi
 
-    color 6 "Enabling the container registry API: ${prj}"
-    enable_api "${prj}" containerregistry.googleapis.com
+# Make the projects needed
+for PROJ; do
+    color 6 "Ensuring project exists: ${PROJ}"
+    ensure_project "${PROJ}"
 
-    color 6 "Enabling the container analysis API for: ${prj}"
-    enable_api "${prj}" containeranalysis.googleapis.com
+    color 6 "Enabling the container registry API: ${PROJ}"
+    enable_api "${PROJ}" containerregistry.googleapis.com
 
-    color 6 "Ensuring the registry exists and is readable: ${prj}"
+    color 6 "Enabling the container analysis API for: ${PROJ}"
+    enable_api "${PROJ}" containeranalysis.googleapis.com
+
+    color 6 "Ensuring the registry exists and is readable: ${PROJ}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        ensure_gcr_repo "${prj}" "${r}"
+        ensure_gcr_repo "${PROJ}" "${r}"
     done
 
-    color 6 "Empowering GCR admins: ${prj}"
+    color 6 "Empowering GCR admins: ${PROJ}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        empower_gcr_admins "${prj}" "${r}"
+        empower_gcr_admins "${PROJ}" "${r}"
     done
 
-    color 6 "Empowering image promoter to GCR: ${prj}"
+    color 6 "Empowering image promoter to GCR: ${PROJ}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        empower_artifact_promoter "${prj}" "${r}"
+        empower_artifact_promoter "${PROJ}" "${r}"
     done
 done
 
