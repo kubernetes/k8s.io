@@ -57,13 +57,11 @@ function empower_group_to_fake_prod() {
 
 # The GCP project names.
 PROD_PROJECT="k8s-artifacts-prod"
-TRASH_PROJECT="k8s-artifacts-graveyard"
 PROMOTER_TEST_PROJECT="k8s-cip-test-prod"
 RELEASE_TEST_PROJECT="k8s-release-test-prod"
 
 ALL_PROJECTS=(
     "${PROD_PROJECT}"
-    "${TRASH_PROJECT}"
     "${PROMOTER_TEST_PROJECT}"
     "${RELEASE_TEST_PROJECT}"
 )
