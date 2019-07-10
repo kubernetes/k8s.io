@@ -68,9 +68,6 @@ ALL_PROJECTS=(
     "${RELEASE_TEST_PROJECT}"
 )
 
-# GCS bucket for prod
-PROD_BUCKET=gs://k8s-artifacts-prod
-
 # Regions for prod.
 PROD_REGIONS=(us eu asia)
 
@@ -82,10 +79,10 @@ for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Enabling the container registry API: ${prj}"
     enable_api "${prj}" containerregistry.googleapis.com
 
-    color 6 "Enabling the container analysis API for: ${prj}"
+    color 6 "Enabling the container analysis API: ${prj}"
     enable_api "${prj}" containeranalysis.googleapis.com
 
-    color 6 "Ensuring the registry exists and is readable: ${prj}"
+    color 6 "Ensuring the GCR exists and is readable: ${prj}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         ensure_gcr_repo "${prj}" "${r}"
@@ -97,12 +94,30 @@ for prj in "${ALL_PROJECTS[@]}"; do
         empower_gcr_admins "${prj}" "${r}"
     done
 
-    color 6 "Empowering image promoter to GCR: ${prj}"
+    color 6 "Empowering image promoter: ${prj}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_artifact_promoter "${prj}" "${r}"
     done
+
+    color 6 "Enabling the GCS API: ${prj}"
+    enable_api "${prj}" storage-component.googleapis.com
+
+    color 6 "Ensuring the GCS bucket exists and is readable: ${prj}"
+    ensure_gcs_bucket "${prj}" "gs://${prj}"
+
+    color 6 "Empowering GCS admins: ${prj}"
+    empower_gcs_admins "${prj}" "gs://${prj}"
+
 done
+
+# Special case: set the web policy on the prod bucket.
+color 6 "Configuring the web policy on the bucket"
+ensure_gcs_web_policy "gs://${PROD_PROJECT}"
+
+# Special case: rsync static content into the prod bucket.
+color 6 "Copying static content into bucket"
+upload_gcs_static_content "gs://${PROD_PROJECT}" "${SCRIPT_DIR}/static/prod-storage"
 
 # Special case: grant the image promoter testing group access to their fake
 # prod project.
@@ -111,28 +126,5 @@ empower_group_to_fake_prod "${PROMOTER_TEST_PROJECT}" "k8s-infra-staging-cip-tes
 # Special case: grant the release tools testing group access to their fake
 # prod project.
 empower_group_to_fake_prod "${RELEASE_TEST_PROJECT}" "k8s-infra-staging-release-test@kubernetes.io"
-
-# Create bucket
-color 6 "Creating GCS bucket ${PROD_BUCKET} in ${PROD_PROJECT}"
-
-# Enable GCS APIs
-color 6 "Enabling the GCS API"
-enable_api "${PROD_PROJECT}" storage-component.googleapis.com
-
-# Create the GCS bucket (in the US multi-regional location)
-color 6 "Ensuring the bucket exists and is world readable"
-ensure_gcs_bucket "${PROD_PROJECT}" "${PROD_BUCKET}"
-
-# Enable admins on the bucket
-color 6 "Empowering GCS admins"
-empower_gcs_admins "${PROD_PROJECT}" "${PROD_BUCKET}"
-
-# Set the web policy on the bucket
-color 6 "Configuring the web policy on the bucket"
-ensure_gcs_web_policy "${PROD_BUCKET}"
-
-# rsync in any static content
-color 6 "Copying static content into bucket"
-upload_gcs_static_content "${PROD_BUCKET}" "${SCRIPT_DIR}/static/prod-storage"
 
 color 6 "Done"
