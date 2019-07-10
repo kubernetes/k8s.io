@@ -210,6 +210,23 @@ function upload_gcs_static_content() {
     gsutil rsync "${srcdir}" "${bucket}"
 }
 
+# Grant project viewew privileges to a principal
+# $1: The GCP project
+# $2: The group email
+function empower_group_as_viewer() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_empower_group_as_viewer(project, group) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    group="$2"
+
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "group:${group}" \
+        --role roles/viewer
+}
+
 # Grant full privileges to GCR admins
 # $1: The GCP project
 # $2: The GCR region (optional)
@@ -223,10 +240,7 @@ function empower_gcr_admins() {
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     # Grant project viewer so the UI will work.
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${GCR_ADMINS}" \
-        --role roles/viewer
+    empower_group_as_viewer "${project}" "${GCR_ADMINS}"
 
     # Grant admins access to do admin stuff.
     gsutil iam ch \
@@ -249,10 +263,7 @@ function empower_gcs_admins() {
     bucket="${2}"
 
     # Grant project viewer so the UI will work.
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${GCS_ADMINS}" \
-        --role roles/viewer
+    empower_group_as_viewer "${project}" "${GCS_ADMINS}"
 
     # Grant admins access to do admin stuff.
     gsutil iam ch \
