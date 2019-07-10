@@ -2,9 +2,21 @@
   "bindings": [
     {
       "members": [
-        "serviceAccount:terraform@k8s-infra-dev-cluster-turnup.iam.gserviceaccount.com"
+        "group:k8s-infra-bigquery-admins@kubernetes.io"
       ],
-      "role": "roles/browser"
+      "role": "roles/bigquery.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:396460694993@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "serviceAccount:service-396460694993@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
     },
     {
       "members": [
@@ -20,19 +32,13 @@
     },
     {
       "members": [
-        "serviceAccount:terraform@k8s-infra-dev-cluster-turnup.iam.gserviceaccount.com"
-      ],
-      "role": "roles/container.clusterAdmin"
-    },
-    {
-      "members": [
+        "serviceAccount:service-396460694993@container-engine-robot.iam.gserviceaccount.com",
         "serviceAccount:service-396460694993@container-engine-robot.iam.gserviceaccount.com"
       ],
       "role": "roles/container.serviceAgent"
     },
     {
       "members": [
-        "serviceAccount:396460694993-compute@developer.gserviceaccount.com",
         "serviceAccount:396460694993@cloudservices.gserviceaccount.com",
         "serviceAccount:service-396460694993@containerregistry.iam.gserviceaccount.com",
         "user:justinsb@google.com"
@@ -41,6 +47,7 @@
     },
     {
       "members": [
+        "serviceAccount:396460694993-compute@developer.gserviceaccount.com",
         "user:ameukam@gmail.com",
         "user:cblecker@gmail.com",
         "user:davanum@gmail.com",
@@ -48,20 +55,8 @@
         "user:thockin@google.com"
       ],
       "role": "roles/owner"
-    },
-    {
-      "members": [
-        "serviceAccount:terraform@k8s-infra-dev-cluster-turnup.iam.gserviceaccount.com"
-      ],
-      "role": "roles/storage.admin"
-    },
-    {
-      "members": [
-        "serviceAccount:terraform@k8s-infra-dev-cluster-turnup.iam.gserviceaccount.com"
-      ],
-      "role": "roles/viewer"
     }
   ],
-  "etag": "BwWLYvXsn1M=",
+  "etag": "BwWMhhCozj4=",
   "version": 1
 }

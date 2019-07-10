@@ -1,0 +1,39 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:service-925892675446@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-925892675446@container-analysis.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:925892675446-compute@developer.gserviceaccount.com",
+        "serviceAccount:925892675446@cloudservices.gserviceaccount.com",
+        "serviceAccount:service-925892675446@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:davanum@gmail.com"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "user:Stephen@agst.us"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "etag": "BwWNVodlPqs=",
+  "version": 1
+}

@@ -1,0 +1,4 @@
+gs://artifacts.k8s-staging-csi.appspot.com/containers/:
+
+gs://artifacts.k8s-staging-csi.appspot.com/containers/images/:
+gs://artifacts.k8s-staging-csi.appspot.com/containers/images/sha256:e0daa8927b685f8ec4098c03aca23a7ef5cc6fab18cd8ca3e0a1d5c211cba474

@@ -75,6 +75,25 @@
     "config": {
       "authentication": {},
       "documentation": {
+        "summary": "Creates and manages builds on Google Cloud Platform."
+      },
+      "name": "cloudbuild.googleapis.com",
+      "quota": {},
+      "title": "Cloud Build API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud",
+          "serviceusage.googleapis.com/billing-enabled"
+        ]
+      }
+    },
+    "name": "projects/396460694993/services/cloudbuild.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
         "summary": "Examines the call stack and variables of a running application without stopping or slowing it down.\n"
       },
       "name": "clouddebugger.googleapis.com",
@@ -217,24 +236,6 @@
       }
     },
     "name": "projects/396460694993/services/datastore.googleapis.com",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "The Google Cloud Deployment Manager V2 API provides services for configuring, deploying, and\nviewing Google Cloud services and APIs via templates which specify deployments of Cloud\nresources."
-      },
-      "name": "deploymentmanager.googleapis.com",
-      "quota": {},
-      "title": "Cloud Deployment Manager V2 API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "name": "projects/396460694993/services/deploymentmanager.googleapis.com",
     "state": "ENABLED"
   },
   {

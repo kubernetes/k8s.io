@@ -10,7 +10,7 @@
     },
     "clusterIpv4Cidr": "10.36.0.0/14",
     "createTime": "2019-01-09T06:05:43+00:00",
-    "currentMasterVersion": "1.11.8-gke.6",
+    "currentMasterVersion": "1.11.10-gke.5",
     "currentNodeCount": 1,
     "currentNodeVersion": "1.11.6-gke.6 *",
     "defaultMaxPodsConstraint": {
@@ -97,7 +97,7 @@
     },
     "clusterIpv4Cidr": "10.48.0.0/14",
     "createTime": "2019-03-09T04:16:34+00:00",
-    "currentMasterVersion": "1.11.8-gke.6",
+    "currentMasterVersion": "1.11.10-gke.5",
     "currentNodeCount": 1,
     "currentNodeVersion": "1.11.6-gke.6 *",
     "defaultMaxPodsConstraint": {

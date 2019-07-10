@@ -1,0 +1,13 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "user:thockin@google.com",
+        "user:wg-k8s-infra-api@kubernetes.io"
+      ],
+      "role": "roles/owner"
+    }
+  ],
+  "etag": "BwWIfLtm8Eg=",
+  "version": 1
+}

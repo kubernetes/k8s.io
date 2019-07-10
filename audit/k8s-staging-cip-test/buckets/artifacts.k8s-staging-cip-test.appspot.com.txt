@@ -1,0 +1,8 @@
+gs://artifacts.k8s-staging-cip-test.appspot.com/containers/:
+
+gs://artifacts.k8s-staging-cip-test.appspot.com/containers/images/:
+gs://artifacts.k8s-staging-cip-test.appspot.com/containers/images/sha256:8155c53ed5ae8d3bde70c4ffb6ec0640e61ccefa008b52f8804a1f6ec53e2659
+gs://artifacts.k8s-staging-cip-test.appspot.com/containers/images/sha256:85cea451eec057fa7e734548ca3ba6d779ed5836a3f9de14b8394575ef0d7d8e
+gs://artifacts.k8s-staging-cip-test.appspot.com/containers/images/sha256:c7ef9ed87f94892eadd9b22ad01ca0b433ec44fd58d78e7f0f2b8c283510cf51
+gs://artifacts.k8s-staging-cip-test.appspot.com/containers/images/sha256:f14163d5af2994657006ed328244ff592f2e14f707ade415c6ca5043bbbda484
+gs://artifacts.k8s-staging-cip-test.appspot.com/containers/images/sha256:fad6a0797eaca67680fd6ca22165f1dc2cda1f70a1f84bed725ebcc255992dcc

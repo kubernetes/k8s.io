@@ -1,0 +1,43 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-sig-release-prototype@googlegroups.com"
+      ], 
+      "role": "roles/storage.admin"
+    }, 
+    {
+      "members": [
+        "projectEditor:k8s-sig-release-prototype", 
+        "projectOwner:k8s-sig-release-prototype"
+      ], 
+      "role": "roles/storage.legacyBucketOwner"
+    }, 
+    {
+      "members": [
+        "projectViewer:k8s-sig-release-prototype"
+      ], 
+      "role": "roles/storage.legacyBucketReader"
+    }, 
+    {
+      "members": [
+        "projectEditor:k8s-sig-release-prototype", 
+        "projectOwner:k8s-sig-release-prototype"
+      ], 
+      "role": "roles/storage.legacyObjectOwner"
+    }, 
+    {
+      "members": [
+        "projectViewer:k8s-sig-release-prototype"
+      ], 
+      "role": "roles/storage.legacyObjectReader"
+    }, 
+    {
+      "members": [
+        "allUsers"
+      ], 
+      "role": "roles/storage.objectViewer"
+    }
+  ], 
+  "etag": "CAM="
+}

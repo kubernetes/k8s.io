@@ -1,0 +1,75 @@
+[
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Google Container Registry provides secure, private Docker image storage on Google Cloud Platform.  Our API follows the Docker Registry API specification, so we are fully compatible with the Docker CLI client, as well as standard tooling using the Docker Registry API."
+      },
+      "name": "containerregistry.googleapis.com",
+      "quota": {},
+      "title": "Container Registry API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud",
+          "serviceusage.googleapis.com/billing-enabled"
+        ]
+      }
+    },
+    "name": "projects/438481731081/services/containerregistry.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Provides reliable, many-to-many, asynchronous messaging between applications.\n"
+      },
+      "name": "pubsub.googleapis.com",
+      "quota": {},
+      "title": "Cloud Pub/Sub API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/438481731081/services/pubsub.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Lets you store and retrieve potentially-large, immutable data objects."
+      },
+      "name": "storage-api.googleapis.com",
+      "quota": {},
+      "title": "Google Cloud Storage JSON API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/438481731081/services/storage-api.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Google Cloud Storage is a RESTful service for storing and accessing your data on Google's\n    infrastructure."
+      },
+      "name": "storage-component.googleapis.com",
+      "quota": {},
+      "title": "Cloud Storage",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/438481731081/services/storage-component.googleapis.com",
+    "state": "ENABLED"
+  }
+]

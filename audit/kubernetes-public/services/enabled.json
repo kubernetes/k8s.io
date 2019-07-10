@@ -39,6 +39,44 @@
   {
     "config": {
       "authentication": {},
+      "documentation": {
+        "summary": "Builds and manages container-based applications, powered by the open source Kubernetes technology."
+      },
+      "name": "container.googleapis.com",
+      "quota": {},
+      "title": "Kubernetes Engine API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud",
+          "serviceusage.googleapis.com/billing-enabled"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/container.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Google Container Registry provides secure, private Docker image storage on Google Cloud Platform.  Our API follows the Docker Registry API specification, so we are fully compatible with the Docker CLI client, as well as standard tooling using the Docker Registry API."
+      },
+      "name": "containerregistry.googleapis.com",
+      "quota": {},
+      "title": "Container Registry API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud",
+          "serviceusage.googleapis.com/billing-enabled"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/containerregistry.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
       "documentation": {},
       "name": "dns.googleapis.com",
       "quota": {},
@@ -51,6 +89,42 @@
       }
     },
     "name": "projects/127754664067/services/dns.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls."
+      },
+      "name": "iam.googleapis.com",
+      "quota": {},
+      "title": "Identity and Access Management (IAM) API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/iam.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Creates short-lived, limited-privilege credentials for IAM service accounts."
+      },
+      "name": "iamcredentials.googleapis.com",
+      "quota": {},
+      "title": "IAM Service Account Credentials API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/iamcredentials.googleapis.com",
     "state": "ENABLED"
   },
   {
@@ -105,6 +179,24 @@
       }
     },
     "name": "projects/127754664067/services/oslogin.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Provides reliable, many-to-many, asynchronous messaging between applications.\n"
+      },
+      "name": "pubsub.googleapis.com",
+      "quota": {},
+      "title": "Cloud Pub/Sub API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ]
+      }
+    },
+    "name": "projects/127754664067/services/pubsub.googleapis.com",
     "state": "ENABLED"
   },
   {

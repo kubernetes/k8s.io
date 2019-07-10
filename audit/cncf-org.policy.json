@@ -8,6 +8,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-gcp-auditors@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/StorageBucketLister"
+    },
+    {
+      "members": [
         "user:ihor@cncf.io",
         "user:thockin@google.com",
         "user:twaggoner@linuxfoundation.org"
@@ -24,6 +30,18 @@
     },
     {
       "members": [
+        "user:davanum@gmail.com"
+      ],
+      "role": "roles/billing.user"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-auditors@kubernetes.io"
+      ],
+      "role": "roles/compute.viewer"
+    },
+    {
+      "members": [
         "user:thockin@google.com"
       ],
       "role": "roles/iam.organizationRoleAdmin"
@@ -36,6 +54,13 @@
     },
     {
       "members": [
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
         "user:domain-admin-lf@kubernetes.io",
         "user:ihor@cncf.io",
         "user:thockin@google.com",
@@ -45,7 +70,14 @@
     },
     {
       "members": [
+        "group:k8s-infra-gcp-auditors@kubernetes.io"
+      ],
+      "role": "roles/resourcemanager.organizationViewer"
+    },
+    {
+      "members": [
         "domain:kubernetes.io",
+        "user:davanum@gmail.com",
         "user:thockin@google.com"
       ],
       "role": "roles/resourcemanager.projectCreator"
@@ -55,8 +87,14 @@
         "user:thockin@google.com"
       ],
       "role": "roles/resourcemanager.projectDeleter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-auditors@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
     }
   ],
-  "etag": "BwWLI_mG-qA=",
+  "etag": "BwWNMJpajmE=",
   "version": 1
 }

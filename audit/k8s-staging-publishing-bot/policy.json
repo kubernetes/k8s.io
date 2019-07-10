@@ -1,0 +1,24 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:service-438481731081@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:thockin@google.com"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "etag": "BwWNVlkQGFo=",
+  "version": 1
+}
