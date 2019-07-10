@@ -108,6 +108,12 @@ groups:
       - detiber@gmail.com
       - vince@vincepri.com
       - hi@amycod.es
+  - email-id: k8s-infra-staging-descheduler@kubernetes.io
+    members:
+      - ravisantoshgudimetla@gmail.com
+      - avesh.ncsu@gmail.com
+      - spiffxp@google.com
+      - davanum@gmail.com
   - email-id: k8s-infra-staging-kops@kubernetes.io
     members:
       - ihor@cncf.io
