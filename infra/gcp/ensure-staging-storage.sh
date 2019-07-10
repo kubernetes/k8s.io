@@ -77,6 +77,10 @@ for REPO; do
     color 6 "Ensuring project exists: ${PROJECT}"
     ensure_project "${PROJECT}"
 
+    # Enable writers to use the UI
+    color 6 "Empowering ${WRITERS} as project viewers"
+    empower_group_as_viewer "${PROJECT}" "${WRITERS}"
+
     # Every project gets a GCR repo
 
     # Enable container registry APIs
@@ -91,7 +95,7 @@ for REPO; do
     color 6 "Empowering GCR admins"
     empower_gcr_admins "${PROJECT}"
 
-    # Enable repo writers
+    # Enable GCR writers
     color 6 "Empowering ${WRITERS} to GCR"
     empower_group_to_gcr "${PROJECT}" "${WRITERS}"
 

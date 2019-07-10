@@ -34,6 +34,27 @@ if [ $# != 0 ]; then
     exit 1
 fi
 
+# Grant access to "fake prod" projects for tol testing
+# $1: The GCP project
+# $2: The googlegroups group
+function empower_group_to_fake_prod() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group_to_fake_prod(project, group) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    group="$2"
+
+    color 6 "Empowering $group as project viewer in $project"
+    empower_group_as_viewer "${project}" "${group}"
+
+    color 6 "Empowering $group for GCR in $project"
+    for r in "${PROD_REGIONS[@]}"; do
+        color 3 "region $r"
+        empower_group_to_gcr "${project}" "${group}" "${r}"
+    done
+}
+
 # The GCP project names.
 PROD_PROJECT="k8s-artifacts-prod"
 TRASH_PROJECT="k8s-artifacts-graveyard"
@@ -83,18 +104,13 @@ for prj in "${ALL_PROJECTS[@]}"; do
     done
 done
 
-# Special cases
-color 6 "Empowering cip-test group in cip-test for GCR"
-for r in "${PROD_REGIONS[@]}"; do
-    color 3 "region $r"
-    empower_group_to_gcr "${PROMOTER_TEST_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io" "${r}"
-done
+# Special case: grant the image promoter testing group access to their fake
+# prod project.
+empower_group_to_fake_prod "${PROMOTER_TEST_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io"
 
-color 6 "Empowering release-test group in release-test for GCR"
-for r in "${PROD_REGIONS[@]}"; do
-    color 3 "region $r"
-    empower_group_to_gcr "${RELEASE_TEST_PROJECT}" "k8s-infra-staging-release-test@kubernetes.io" "${r}"
-done
+# Special case: grant the release tools testing group access to their fake
+# prod project.
+empower_group_to_fake_prod "${RELEASE_TEST_PROJECT}" "k8s-infra-staging-release-test@kubernetes.io"
 
 # Create bucket
 color 6 "Creating GCS bucket ${PROD_BUCKET} in ${PROD_PROJECT}"
