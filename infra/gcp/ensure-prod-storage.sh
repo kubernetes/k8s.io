@@ -34,7 +34,7 @@ if [ $# != 0 ]; then
     exit 1
 fi
 
-# Grant access to "fake prod" projects for tol testing
+# Grant access to "fake prod" projects for tool testing
 # $1: The GCP project
 # $2: The googlegroups group
 function empower_group_to_fake_prod() {
@@ -54,6 +54,11 @@ function empower_group_to_fake_prod() {
         empower_group_to_gcr "${project}" "${group}" "${r}"
     done
 }
+# The service account name for the image promoter.
+PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
+
+# Permissions to grant GCR service account
+PERMISSIONS=("objectAdmin" "legacyBucketOwner")
 
 # The GCP project names.
 PROD_PROJECT="k8s-artifacts-prod"
@@ -97,7 +102,10 @@ for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Empowering image promoter: ${prj}"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        empower_artifact_promoter "${prj}" "${r}"
+        for p in "${PERMISSIONS[@]}"; do
+            color 6 "Granting permission: ${p}"
+            empower_artifact_promoter "${PROMOTER_SVCACCT}" "${prj}" "${p}" "${r}"
+        done
     done
 
     color 6 "Enabling the GCS API: ${prj}"

@@ -38,9 +38,6 @@ GCR_ADMINS="k8s-infra-artifact-admins@kubernetes.io"
 # We use the same group as GCR
 GCS_ADMINS=$GCR_ADMINS
 
-# The service account name for the image promoter.
-PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
-
 # The GCP org stuff needed to turn it all on.
 GCP_ORG="758905017065" # kubernetes.io
 GCP_BILLING="018801-93540E-22A20E"
@@ -316,33 +313,35 @@ function empower_group_to_gcs_bucket() {
 }
 
 # Grant full privileges to the GCR promoter bot
-# $1: The GCP project
-# $2: The GCR region (optional)
+# $1: The Service Account Name
+# $2: The GCP project
+# $3: Account permission to grant service account
+# $4: The GCR region (optional)
 function empower_artifact_promoter() {
-    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
-        echo "empower_artifact_promoter(project, [region]) requires 1 or 2 arguments" >&2
+    if [ $# -lt 3 -o $# -gt 4 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "empower_artifact_promoter(service account, project, permission, [region]) requires 3 or 4 arguments" >&2
         return 1
     fi
-    project="$1"
-    region="${2:-}"
+
+    promoter_svcaccount="$1"
+    project="$2"
+    permission="$3"
+    region="${4:-}"
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
+    acct=$(svc_acct_email "${project}" "${promoter_svcaccount}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
             iam service-accounts create \
-            "${PROMOTER_SVCACCT}" \
+            "${promoter_svcaccount}" \
             --display-name="k8s-infra container image promoter"
     fi
 
-    # Grant admins access to do admin stuff.
+    # Grant admins access to permission
     gsutil iam ch \
-        "serviceAccount:${acct}:objectAdmin" \
-        "${bucket}"
-    gsutil iam ch \
-        "serviceAccount:${acct}:legacyBucketOwner" \
-        "${bucket}"
+    "serviceAccount:${acct}:${permission}" \
+    "${bucket}"
 }
 
 
