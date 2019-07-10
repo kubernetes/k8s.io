@@ -71,7 +71,7 @@ for REPO; do
     # 30d is also short enough that people should notice occasionally,
     # and not accidentally think of the staging buckets as permanent.
     RETENTION=30d
-    AUTO_DELETION_DAYS=30
+    AUTO_DELETION_DAYS=60
 
     # Make the project, if needed
     color 6 "Ensuring project exists: ${PROJECT}"
