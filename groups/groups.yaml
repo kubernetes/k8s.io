@@ -140,3 +140,9 @@ groups:
       - ihor@cncf.io
       - bentheelder@google.com
       - brendan.d.burns@gmail.com
+  # Group that owns administrative access to AWS accounts
+  - email-id: k8s-infra-aws-admins@kubernetes.io
+    members:
+      - ihor@cncf.io
+      - justinsb@google.com
+      - thockin@google.com
