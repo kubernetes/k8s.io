@@ -8,5 +8,12 @@ registries:
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia.gcr.io/k8s-artifacts-prod
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-images: []
-renames: []
+images:
+- name: cluster-api-controller
+  dmap:
+    "sha256:9057a2875d6620521ddea456f31655b8480f07f6a31a50c15b111c1ae09af487": ["v0.1.5"]
+renames:
+- - "gcr.io/k8s-staging-cluster-api/cluster-api-controller"
+  - "us.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller"
+  - "eu.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller"
+  - "asia.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller"
