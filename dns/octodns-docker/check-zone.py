@@ -33,6 +33,11 @@ from octodns.cmds.args import ArgumentParser
 from octodns.manager import Manager
 from octodns.zone import Zone
 
+try:
+    unicode
+except NameError:
+    unicode = str
+
 log = getLogger('check-zone')
 
 class AsyncResolver(Resolver):
