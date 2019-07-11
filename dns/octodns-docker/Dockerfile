@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# python:2-alpine as of April 30th, 2019
-ARG BASE_IMAGE=python@sha256:20ecc1d602d2993516daa9c480d42ee6c99c61a4fdd3f646991247e69c1c12cb
+# python:2-alpine as of July 11th, 2019
+ARG BASE_IMAGE=python@sha256:9a2db929c9e4c65118cb1da9ddb1d64f3ba8e4a722f07f3f2d34b58b1e8556b1
 FROM ${BASE_IMAGE}
 
 # install from requirements.txt and ensure that all requirements match
