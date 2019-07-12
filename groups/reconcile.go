@@ -320,30 +320,33 @@ func updateGroupSettingsToAllowExternalMembers(srv *groupssettings.Service, grou
 		}
 		return fmt.Errorf("unable to retrieve group info for group %s: %v", groupEmailId, err)
 	}
-	if g2.AllowExternalMembers != "true" ||
-		g2.WhoCanJoin != "INVITED_CAN_JOIN" ||
-		g2.WhoCanViewMembership != "ALL_MEMBERS_CAN_VIEW" ||
-		g2.WhoCanViewGroup != "ALL_MEMBERS_CAN_VIEW" ||
-		g2.WhoCanInvite != "ALL_MANAGERS_CAN_INVITE" ||
-		g2.WhoCanAdd != "ALL_MANAGERS_CAN_ADD" ||
-		g2.WhoCanApproveMembers != "ALL_MANAGERS_CAN_APPROVE" ||
-		g2.WhoCanModifyMembers != "OWNERS_ONLY" ||
-		g2.WhoCanModerateMembers != "OWNERS_ONLY" ||
-		g2.WhoCanDiscoverGroup != "ALL_MEMBERS_CAN_DISCOVER" {
+
+	settings := &groupssettings.Groups{
+		AllowExternalMembers:  "true",
+		WhoCanJoin:            "INVITED_CAN_JOIN",
+		WhoCanViewMembership:  "ALL_MEMBERS_CAN_VIEW",
+		WhoCanViewGroup:       "ALL_MEMBERS_CAN_VIEW",
+		WhoCanInvite:          "ALL_MANAGERS_CAN_INVITE",
+		WhoCanAdd:             "ALL_MANAGERS_CAN_ADD",
+		WhoCanApproveMembers:  "ALL_MANAGERS_CAN_APPROVE",
+		WhoCanModifyMembers:   "OWNERS_ONLY",
+		WhoCanModerateMembers: "OWNERS_ONLY",
+		WhoCanDiscoverGroup:   "ALL_MEMBERS_CAN_DISCOVER",
+	}
+
+	if g2.AllowExternalMembers != settings.AllowExternalMembers ||
+		g2.WhoCanJoin != settings.WhoCanJoin ||
+		g2.WhoCanViewMembership != settings.WhoCanViewMembership ||
+		g2.WhoCanViewGroup != settings.WhoCanViewGroup ||
+		g2.WhoCanInvite != settings.WhoCanInvite ||
+		g2.WhoCanAdd != settings.WhoCanAdd ||
+		g2.WhoCanApproveMembers != settings.WhoCanApproveManagers ||
+		g2.WhoCanModifyMembers != settings.WhoCanModifiyMembers ||
+		g2.WhoCanModerateMembers != settings.WhoCanModerateMembers ||
+		g2.WhoCanDiscoverGroup != settings.WhoCanDiscoverGroup {
 
 		if config.ConfirmChanges {
-			_, err := srv.Groups.Patch(groupEmailId, &groupssettings.Groups{
-				AllowExternalMembers:  "true",
-				WhoCanJoin:            "INVITED_CAN_JOIN",
-				WhoCanViewMembership:  "ALL_MEMBERS_CAN_VIEW",
-				WhoCanViewGroup:       "ALL_MEMBERS_CAN_VIEW",
-				WhoCanInvite:          "ALL_MANAGERS_CAN_INVITE",
-				WhoCanAdd:             "ALL_MANAGERS_CAN_ADD",
-				WhoCanApproveMembers:  "ALL_MANAGERS_CAN_APPROVE",
-				WhoCanModifyMembers:   "OWNERS_ONLY",
-				WhoCanModerateMembers: "OWNERS_ONLY",
-				WhoCanDiscoverGroup:   "ALL_MEMBERS_CAN_DISCOVER",
-			}).Do()
+			_, err := srv.Groups.Patch(groupEmailId, settings).Do()
 			if err != nil {
 				return fmt.Errorf("unable to update group info for group %s: %v", groupEmailId, err)
 			}
