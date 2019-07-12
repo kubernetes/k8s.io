@@ -322,28 +322,30 @@ func updateGroupSettingsToAllowExternalMembers(srv *groupssettings.Service, grou
 	}
 
 	settings := &groupssettings.Groups{
-		AllowExternalMembers:  "true",
-		WhoCanJoin:            "INVITED_CAN_JOIN",
-		WhoCanViewMembership:  "ALL_MEMBERS_CAN_VIEW",
-		WhoCanViewGroup:       "ALL_MEMBERS_CAN_VIEW",
-		WhoCanInvite:          "ALL_MANAGERS_CAN_INVITE",
-		WhoCanAdd:             "ALL_MANAGERS_CAN_ADD",
-		WhoCanApproveMembers:  "ALL_MANAGERS_CAN_APPROVE",
-		WhoCanModifyMembers:   "OWNERS_ONLY",
-		WhoCanModerateMembers: "OWNERS_ONLY",
-		WhoCanDiscoverGroup:   "ALL_MEMBERS_CAN_DISCOVER",
+		AllowExternalMembers: "true",
+		WhoCanJoin:           "INVITED_CAN_JOIN",
+		WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW",
+		WhoCanViewGroup:      "ALL_MEMBERS_CAN_VIEW",
+		WhoCanDiscoverGroup:  "ALL_MEMBERS_CAN_DISCOVER",
 	}
+
+	// We will remove any additional members, so there's no point in allowing invitations / adds
+	settings.WhoCanInvite = "NONE_CAN_INVITE"
+	settings.WhoCanAdd = "NONE_CAN_ADD"
+	settings.WhoCanApproveMembers = "NONE_CAN_APPROVE"
+	settings.WhoCanModifyMembers = "NONE"
+	settings.WhoCanModerateMembers = "NONE"
 
 	if g2.AllowExternalMembers != settings.AllowExternalMembers ||
 		g2.WhoCanJoin != settings.WhoCanJoin ||
 		g2.WhoCanViewMembership != settings.WhoCanViewMembership ||
 		g2.WhoCanViewGroup != settings.WhoCanViewGroup ||
+		g2.WhoCanDiscoverGroup != settings.WhoCanDiscoverGroup ||
 		g2.WhoCanInvite != settings.WhoCanInvite ||
 		g2.WhoCanAdd != settings.WhoCanAdd ||
 		g2.WhoCanApproveMembers != settings.WhoCanApproveManagers ||
 		g2.WhoCanModifyMembers != settings.WhoCanModifiyMembers ||
-		g2.WhoCanModerateMembers != settings.WhoCanModerateMembers ||
-		g2.WhoCanDiscoverGroup != settings.WhoCanDiscoverGroup {
+		g2.WhoCanModerateMembers != settings.WhoCanModerateMembers {
 
 		if config.ConfirmChanges {
 			_, err := srv.Groups.Patch(groupEmailId, settings).Do()
