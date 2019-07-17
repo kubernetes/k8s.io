@@ -343,8 +343,8 @@ func updateGroupSettingsToAllowExternalMembers(srv *groupssettings.Service, grou
 		g2.WhoCanDiscoverGroup != settings.WhoCanDiscoverGroup ||
 		g2.WhoCanInvite != settings.WhoCanInvite ||
 		g2.WhoCanAdd != settings.WhoCanAdd ||
-		g2.WhoCanApproveMembers != settings.WhoCanApproveManagers ||
-		g2.WhoCanModifyMembers != settings.WhoCanModifiyMembers ||
+		g2.WhoCanApproveMembers != settings.WhoCanApproveMembers ||
+		g2.WhoCanModifyMembers != settings.WhoCanModifyMembers ||
 		g2.WhoCanModerateMembers != settings.WhoCanModerateMembers {
 
 		if config.ConfirmChanges {
