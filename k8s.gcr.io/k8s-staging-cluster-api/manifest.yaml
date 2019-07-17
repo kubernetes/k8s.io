@@ -12,6 +12,7 @@ images:
 - name: cluster-api-controller
   dmap:
     "sha256:9057a2875d6620521ddea456f31655b8480f07f6a31a50c15b111c1ae09af487": ["v0.1.5", "v0.1.6"]
+    "sha256:663829ece3a14201b71ec1e211c3d33f99ecdf0ea8081f7486806442a61d925d": ["v0.1.7"]
 renames:
 - - "gcr.io/k8s-staging-cluster-api/cluster-api-controller"
   - "us.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller"
