@@ -45,6 +45,7 @@ STAGING_PROJECTS=(
     cluster-api-aws
     coredns
     csi
+    descheduler
     kops
     publishing-bot
     release-test
