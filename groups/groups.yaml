@@ -108,6 +108,14 @@ groups:
       - detiber@gmail.com
       - vince@vincepri.com
       - hi@amycod.es
+  - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - ha.chuck@gmail.com
+      - detiber@gmail.com
+      - vince@vincepri.com
+      - hi@amycod.es
+      - frostl@vmware.com
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     members:
       - ravisantoshgudimetla@gmail.com

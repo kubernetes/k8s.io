@@ -43,6 +43,7 @@ STAGING_PROJECTS=(
     cip-test
     cluster-api
     cluster-api-aws
+    capi-kubeadm
     coredns
     csi
     descheduler
