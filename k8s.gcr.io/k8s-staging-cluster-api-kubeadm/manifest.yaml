@@ -1,6 +1,6 @@
-# google group for gcr.io/k8s-staging-cluster-api-kubeadm is k8s-infra-staging-cluster-api-kubeadm@kubernetes.io
+# google group for gcr.io/k8s-staging-capi-kubeadm is k8s-infra-staging-capi-kubeadm@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-cluster-api-kubeadm
+- name: gcr.io/k8s-staging-capi-kubeadm
   src: true
 - name: us.gcr.io/k8s-artifacts-prod
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
