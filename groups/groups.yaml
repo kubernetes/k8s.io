@@ -101,6 +101,7 @@ groups:
       - detiber@gmail.com
       - vince@vincepri.com
       - hi@amycod.es
+      - goldsteina@vmware.com
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     members:
       - davanum@gmail.com
@@ -108,6 +109,7 @@ groups:
       - detiber@gmail.com
       - vince@vincepri.com
       - hi@amycod.es
+      - goldsteina@vmware.com
   - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
     members:
       - davanum@gmail.com
@@ -116,6 +118,7 @@ groups:
       - vince@vincepri.com
       - hi@amycod.es
       - frostl@vmware.com
+      - goldsteina@vmware.com
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     members:
       - ravisantoshgudimetla@gmail.com
