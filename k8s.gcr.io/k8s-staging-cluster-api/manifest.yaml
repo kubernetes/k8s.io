@@ -13,6 +13,7 @@ images:
   dmap:
     "sha256:9057a2875d6620521ddea456f31655b8480f07f6a31a50c15b111c1ae09af487": ["v0.1.5", "v0.1.6"]
     "sha256:663829ece3a14201b71ec1e211c3d33f99ecdf0ea8081f7486806442a61d925d": ["v0.1.7", "v0.1.8"]
+    "sha256:5867b7735a9d85ea13ed5ab0fce90ae0945c753a119e6bd02f7ceeebec2dd608": ["v0.1.9"]
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
