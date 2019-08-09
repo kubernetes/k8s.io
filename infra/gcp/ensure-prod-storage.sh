@@ -57,20 +57,20 @@ function empower_group_to_fake_prod() {
 
 # The GCP project names.
 PROD_PROJECT="k8s-artifacts-prod"
-PROMOTER_TEST_PROJECT="k8s-cip-test-prod"
-RELEASE_TEST_PROJECT="k8s-release-test-prod"
+PROMOTER_TESTPROD_PROJECT="k8s-cip-test-prod"
+RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 
-ALL_PROJECTS=(
+ALL_PROD_PROJECTS=(
     "${PROD_PROJECT}"
-    "${PROMOTER_TEST_PROJECT}"
-    "${RELEASE_TEST_PROJECT}"
+    "${PROMOTER_TESTPROD_PROJECT}"
+    "${RELEASE_TESTPROD_PROJECT}"
 )
 
 # Regions for prod.
 PROD_REGIONS=(us eu asia)
 
 # Make the projects, if needed
-for prj in "${ALL_PROJECTS[@]}"; do
+for prj in "${ALL_PROD_PROJECTS[@]}"; do
     color 6 "Ensuring project exists: ${prj}"
     ensure_project "${prj}"
 
@@ -119,10 +119,10 @@ upload_gcs_static_content "gs://${PROD_PROJECT}" "${SCRIPT_DIR}/static/prod-stor
 
 # Special case: grant the image promoter testing group access to their fake
 # prod project.
-empower_group_to_fake_prod "${PROMOTER_TEST_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io"
+empower_group_to_fake_prod "${PROMOTER_TESTPROD_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io"
 
 # Special case: grant the release tools testing group access to their fake
 # prod project.
-empower_group_to_fake_prod "${RELEASE_TEST_PROJECT}" "k8s-infra-staging-release-test@kubernetes.io"
+empower_group_to_fake_prod "${RELEASE_TESTPROD_PROJECT}" "k8s-infra-staging-release-test@kubernetes.io"
 
 color 6 "Done"
