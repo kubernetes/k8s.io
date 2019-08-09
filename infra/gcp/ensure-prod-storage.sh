@@ -115,14 +115,20 @@ ensure_gcs_web_policy "gs://${PROD_PROJECT}"
 
 # Special case: rsync static content into the prod bucket.
 color 6 "Copying static content into bucket"
-upload_gcs_static_content "gs://${PROD_PROJECT}" "${SCRIPT_DIR}/static/prod-storage"
+upload_gcs_static_content \
+    "gs://${PROD_PROJECT}" \
+    "${SCRIPT_DIR}/static/prod-storage"
 
 # Special case: grant the image promoter testing group access to their fake
 # prod project.
-empower_group_to_fake_prod "${PROMOTER_TESTPROD_PROJECT}" "k8s-infra-staging-cip-test@kubernetes.io"
+empower_group_to_fake_prod \
+    "${PROMOTER_TESTPROD_PROJECT}" \
+    "k8s-infra-staging-cip-test@kubernetes.io"
 
 # Special case: grant the release tools testing group access to their fake
 # prod project.
-empower_group_to_fake_prod "${RELEASE_TESTPROD_PROJECT}" "k8s-infra-staging-release-test@kubernetes.io"
+empower_group_to_fake_prod \
+    "${RELEASE_TESTPROD_PROJECT}" \
+    "k8s-infra-staging-release-test@kubernetes.io"
 
 color 6 "Done"
