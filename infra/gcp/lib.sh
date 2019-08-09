@@ -325,7 +325,6 @@ function empower_artifact_promoter() {
     fi
     project="$1"
     region="${2:-}"
-    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
 
@@ -336,6 +335,23 @@ function empower_artifact_promoter() {
             --display-name="k8s-infra container image promoter"
     fi
 
+    empower_service_account_to_artifacts "${acct}" "${project}" "${region}"
+}
+
+# Grant artifact privileges to a service account in a project/region.
+# $1: The GCP service account email
+# $2: The GCP project
+# $3: The GCR region (optional)
+function empower_service_account_to_artifacts () {
+    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_service_account_to_artifacts(acct, project, [region]) requires 2 or 3 arguments" >&2
+        return 1
+    fi
+    acct="$1"
+    project="$2"
+    region="${3:-}"
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+
     # Grant admins access to do admin stuff.
     gsutil iam ch \
         "serviceAccount:${acct}:objectAdmin" \
@@ -344,7 +360,6 @@ function empower_artifact_promoter() {
         "serviceAccount:${acct}:legacyBucketOwner" \
         "${bucket}"
 }
-
 
 # Ensure the bucket retention policy is set
 # $1: The GCS bucket

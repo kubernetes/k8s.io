@@ -58,6 +58,7 @@ function empower_group_to_fake_prod() {
 # The GCP project names.
 PROD_PROJECT="k8s-artifacts-prod"
 PROMOTER_TESTPROD_PROJECT="k8s-cip-test-prod"
+PROMOTER_STAGING_PROJECT="k8s-staging-cip-test"
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 
 ALL_PROD_PROJECTS=(
@@ -106,7 +107,6 @@ for prj in "${ALL_PROD_PROJECTS[@]}"; do
 
     color 6 "Empowering GCS admins: ${prj}"
     empower_gcs_admins "${prj}" "gs://${prj}"
-
 done
 
 # Special case: set the web policy on the prod bucket.
@@ -124,6 +124,12 @@ upload_gcs_static_content \
 empower_group_to_fake_prod \
     "${PROMOTER_TESTPROD_PROJECT}" \
     "k8s-infra-staging-cip-test@kubernetes.io"
+
+# Special case: grant the image promoter service account access to their
+# staging, to allow e2e tests to run as that account, instead of yet a another.
+empower_service_account_to_artifacts \
+    $(svc_acct_email "${PROMOTER_TESTPROD_PROJECT}" "${PROMOTER_SVCACCT}") \
+    "${PROMOTER_STAGING_PROJECT}"
 
 # Special case: grant the release tools testing group access to their fake
 # prod project.
