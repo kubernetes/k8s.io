@@ -137,4 +137,8 @@ empower_group_to_fake_prod \
     "${RELEASE_TESTPROD_PROJECT}" \
     "k8s-infra-staging-release-test@kubernetes.io"
 
+# Special case: don't use retention on cip-test buckets
+# (the retention appears to have been locked, so we set it to 1s instead)
+gsutil retention set 1s gs://k8s-cip-test-prod
+
 color 6 "Done"
