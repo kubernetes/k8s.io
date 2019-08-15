@@ -129,3 +129,6 @@ for REPO; do
 
     color 6 "Done"
 done
+
+# Special case: don't use retention on cip-test buckets
+gsutil retention clear gs://k8s-staging-cip-test
