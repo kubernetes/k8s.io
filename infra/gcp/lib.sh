@@ -207,7 +207,8 @@ function upload_gcs_static_content() {
     bucket="$1"
     srcdir="$2"
 
-    gsutil rsync "${srcdir}" "${bucket}"
+    # Checksum data to avoid no-op syncs.
+    gsutil rsync -c "${srcdir}" "${bucket}"
 }
 
 # Grant project viewew privileges to a principal
