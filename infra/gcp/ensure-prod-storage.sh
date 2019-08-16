@@ -105,6 +105,10 @@ for prj in "${ALL_PROD_PROJECTS[@]}"; do
     color 6 "Ensuring the GCS bucket exists and is readable: ${prj}"
     ensure_gcs_bucket "${prj}" "gs://${prj}"
 
+    color 6 "Ensuring the GCS bucket retention policy is set: ${prj}"
+    RETENTION="10y"
+    ensure_gcs_bucket_retention "gs://${prj}" "${RETENTION}"
+
     color 6 "Empowering GCS admins: ${prj}"
     empower_gcs_admins "${prj}" "gs://${prj}"
 done
@@ -138,7 +142,6 @@ empower_group_to_fake_prod \
     "k8s-infra-staging-release-test@kubernetes.io"
 
 # Special case: don't use retention on cip-test buckets
-# (the retention appears to have been locked, so we set it to 1s instead)
-gsutil retention set 1s gs://k8s-cip-test-prod
+gsutil retention clear gs://k8s-cip-test-prod
 
 color 6 "Done"
