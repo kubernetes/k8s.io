@@ -76,6 +76,13 @@ groups:
       - hh@ii.coop
       - tpepper@gmail.com
       - bartek@smykla.com
+  - email-id: k8s-infra-staging-promoter@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - linusa@google.com
+      - spiffxp@google.com
+      - thockin@google.com
   - email-id: k8s-infra-staging-cip-test@kubernetes.io
     members:
       - davanum@gmail.com

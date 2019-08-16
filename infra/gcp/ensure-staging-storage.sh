@@ -48,6 +48,7 @@ STAGING_PROJECTS=(
     csi
     descheduler
     kops
+    promoter
     publishing-bot
     release-test
 )
