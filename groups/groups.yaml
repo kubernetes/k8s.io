@@ -76,7 +76,7 @@ groups:
       - hh@ii.coop
       - tpepper@gmail.com
       - bartek@smykla.com
-  - email-id: k8s-infra-staging-promoter@kubernetes.io
+  - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     members:
       - davanum@gmail.com
       - ihor@cncf.io
