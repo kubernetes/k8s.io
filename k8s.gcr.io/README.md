@@ -25,7 +25,8 @@ alias for it in [groups.yaml]. The email alias should be of the form
 2. Create a directory `k8s-staging-<project-name>` and add a manifest
 file for it. You can look at the existing staging repos for examples.
 
-3. Add the project name to `STAGING_PROJECTS` in [ensure-staging-storage.sh].
+3. Add the project name to `STAGING_PROJECTS` in
+   [../infra/gcp/ensure-staging-storage.sh].
 
 4. Once the PR merges:
     - ping @dims or @cblecker to create the necessary google group.
