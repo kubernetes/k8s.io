@@ -39,6 +39,7 @@ function usage() {
 
 # NB: Please keep this sorted.
 STAGING_PROJECTS=(
+    artifact-promoter
     build-image
     cip-test
     cluster-api
@@ -48,7 +49,6 @@ STAGING_PROJECTS=(
     csi
     descheduler
     kops
-    promoter
     publishing-bot
     release-test
 )
