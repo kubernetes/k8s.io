@@ -31,7 +31,7 @@ resource "google_project_iam_member" "cluster_node_sa_monitoring_metricwriter" {
 }
 
 resource "google_bigquery_dataset" "usage_metering" {
-  dataset_id  = "usage_metering_${var.cluster_name}"
+  dataset_id  = replace("usage_metering_${var.cluster_name}", "-", "_")
   project     = data.google_project.project.id
   description = "GKE Usage Metering for ${var.cluster_name}"
   location    = "US"
@@ -97,7 +97,7 @@ resource "google_container_cluster" "cluster" {
 
   // Enable GKE Network Policy
   network_policy {
-    enabled = true
+    enabled  = true
     provider = "CALICO"
   }
 

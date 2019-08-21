@@ -33,7 +33,7 @@ EOT
 }
 
 variable "project" {
-  type = string
+  type        = string
   description = <<EOT
 The name of the GCP project to create the cluster in
 EOT

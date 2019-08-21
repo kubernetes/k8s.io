@@ -35,11 +35,11 @@ resource "google_container_node_pool" "pool-1" {
     machine_type    = "n1-standard-4"
     service_account = google_service_account.cluster_node_sa.email
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
-  }
 
-  // Restrict metadata config from workload
-  workload_metadata_config {
-    node_metadata = "SECURE"
+    // Restrict metadata config from workload
+    workload_metadata_config {
+      node_metadata = "SECURE"
+    }
   }
 
   // If we need to destroy the node pool, create the new one before destroying
