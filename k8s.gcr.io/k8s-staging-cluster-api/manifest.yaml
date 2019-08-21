@@ -2,11 +2,11 @@
 registries:
 - name: gcr.io/k8s-staging-cluster-api
   src: true
-- name: us.gcr.io/k8s-artifacts-prod
+- name: us.gcr.io/k8s-artifacts-prod/cluster-api
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: eu.gcr.io/k8s-artifacts-prod
+- name: eu.gcr.io/k8s-artifacts-prod/cluster-api
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: asia.gcr.io/k8s-artifacts-prod
+- name: asia.gcr.io/k8s-artifacts-prod/cluster-api
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 images:
 - name: cluster-api-controller
@@ -17,12 +17,4 @@ images:
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
-renames:
-- - "gcr.io/k8s-staging-cluster-api/cluster-api-controller"
-  - "us.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller"
-  - "eu.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller"
-  - "asia.gcr.io/k8s-artifacts-prod/cluster-api/cluster-api-controller"
-- - "gcr.io/k8s-staging-cluster-api/plantuml"
-  - "us.gcr.io/k8s-artifacts-prod/cluster-api/plantuml"
-  - "eu.gcr.io/k8s-artifacts-prod/cluster-api/plantuml"
-  - "asia.gcr.io/k8s-artifacts-prod/cluster-api/plantuml"
+renames: []
