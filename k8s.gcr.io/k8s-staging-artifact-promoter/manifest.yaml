@@ -7,5 +7,8 @@ registries:
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia.gcr.io/k8s-artifacts-prod/artifact-promoter
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-images: []
+images:
+- name: cip
+  dmap:
+    "sha256:799f81d9a855717eab7198310655d1b55919320b120f0f015c3bb43c4e90316d": ["20190821-v2.2.1-2-gc29e4fc"]
 renames: []
