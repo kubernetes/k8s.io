@@ -27,6 +27,7 @@ groups:
       - justinsb@google.com
       - stefan.schimanski@gmail.com
       - nikitaraghunath@gmail.com
+      - cblecker@gmail.com
   - email-id: k8s-infra-cluster-operators@kubernetes.io
     members:
       - ameukam@gmail.com
