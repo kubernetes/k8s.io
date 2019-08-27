@@ -106,26 +106,26 @@ groups:
       - davanum@gmail.com
       - ha.chuck@gmail.com
       - detiber@gmail.com
-      - vince@vincepri.com
       - hi@amycod.es
       - goldsteina@vmware.com
+      - prignanov@vmware.com
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     members:
       - davanum@gmail.com
       - ha.chuck@gmail.com
       - detiber@gmail.com
-      - vince@vincepri.com
       - hi@amycod.es
       - goldsteina@vmware.com
+      - prignanov@vmware.com
   - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
     members:
       - davanum@gmail.com
       - ha.chuck@gmail.com
       - detiber@gmail.com
-      - vince@vincepri.com
       - hi@amycod.es
       - frostl@vmware.com
       - goldsteina@vmware.com
+      - prignanov@vmware.com
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     members:
       - ravisantoshgudimetla@gmail.com
