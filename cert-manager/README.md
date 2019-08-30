@@ -1,5 +1,5 @@
 To bootstrap (per the [cert-manager getting started
-guide](https://cert-manager.readthedocs.io/en/release-0.7/getting-started/install.html#installing-with-regular-manifests)):
+guide](https://cert-manager.readthedocs.io/en/release-0.9/getting-started/install/kubernetes.html#installing-with-regular-manifests)):
 
 ```
 kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=$(gcloud config get-value core/account)
