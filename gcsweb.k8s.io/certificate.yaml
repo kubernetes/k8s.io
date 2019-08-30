@@ -12,10 +12,3 @@ spec:
   dnsNames:
   - gcsweb.k8s.io
   - gcsweb.kubernetes.io
-  acme:
-    config:
-    - http01:
-        ingress: gcsweb
-      domains:
-      - gcsweb.k8s.io
-      - gcsweb.kubernetes.io

@@ -8,5 +8,34 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letencrypt-prod-account-key
-    # Enable the HTTP01 challenge mechanism for this Issuer
+
+    # Leave the old-format HTTP01 config *enabled* until we have confirmed that
+    # all Certificate resources no longer specify a spec.acme field.
     http01: {}
+
+    solvers:
+
+    # Make a special exception for gcsweb - it has its own Ingress resource, so
+    # define a dedicated solver for it.
+    - selector:
+        dnsNames:
+        - gcsweb.k8s.io
+        - gcsweb.kubernetes.io
+      http01:
+        ingress:
+          name: gcsweb
+
+    # All other kubernetes.io and k8s.io domains should use the k8s-io ingress
+    # resource to solve challenges.
+    - selector:
+        dnsZones:
+        - kubernetes.io
+        - k8s.io
+      http01:
+        ingress:
+          name: k8s-io
+
+    # If any new services/ingresses are added, a new entry will need to be
+    # added here.
+    # See https://github.com/jetstack/cert-manager/issues/1666 for details on
+    # improving this in future to be more flexible.
