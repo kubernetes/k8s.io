@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: redirector-k8s-io
-  namespace: redirector-k8s-io-prod
   labels:
     app: redirector-k8s-io
     version: dirty
