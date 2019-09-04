@@ -44,7 +44,7 @@ STAGING_PROJECTS=(
     cip-test
     cluster-api
     cluster-api-aws
-    cluster-api-openstack
+    capi-openstack
     capi-kubeadm
     coredns
     csi
