@@ -118,6 +118,10 @@ groups:
       - hi@amycod.es
       - goldsteina@vmware.com
       - prignanov@vmware.com
+  - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
+    members:
+    - sbueringer@gmail.com
+    - jichenjc@cn.ibm.com
   - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
     members:
       - davanum@gmail.com
