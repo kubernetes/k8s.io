@@ -7,12 +7,12 @@ and change the resource name, name_prefix, and any other cluster specific settin
 */
 
 resource "google_container_node_pool" "pool-1" {
-  provider = google-beta
-
   name_prefix = "pool-1-"
-  project     = data.google_project.project.id
   location    = google_container_cluster.cluster.location
   cluster     = google_container_cluster.cluster.name
+
+  provider = google-beta
+  project  = data.google_project.project.id
 
   // Start with a single node
   initial_node_count = 1

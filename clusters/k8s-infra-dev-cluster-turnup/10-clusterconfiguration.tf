@@ -1,16 +1,23 @@
 /*
 This file defines:
 - GCP Service Account for nodes
+- Bigquery dataset for usage metering
 - GKE cluster configuration
 
 Note that it does not configure any node pools; this is done in a separate file.
 */
 
+locals {
+  cluster_name      = "k8s-services-cluster" // This is the name of the cluster defined in this file
+  cluster_location  = "us-central1"          // This is the GCP location (region or zone) where the cluster should be created
+  bigquery_location = "US"                   // This is the bigquery specific location where the dataset should be created
+}
+
 // Create SA for nodes
 resource "google_service_account" "cluster_node_sa" {
   project      = data.google_project.project.id
-  account_id   = "sa-${var.cluster_name}"
-  display_name = "Service Account for ${var.cluster_name}"
+  account_id   = "sa-${local.cluster_name}"
+  display_name = "Service Account for ${local.cluster_name}"
 }
 
 // Add roles for SA
@@ -31,10 +38,10 @@ resource "google_project_iam_member" "cluster_node_sa_monitoring_metricwriter" {
 }
 
 resource "google_bigquery_dataset" "usage_metering" {
-  dataset_id  = replace("usage_metering_${var.cluster_name}", "-", "_")
+  dataset_id  = replace("usage_metering_${local.cluster_name}", "-", "_")
   project     = data.google_project.project.id
-  description = "GKE Usage Metering for ${var.cluster_name}"
-  location    = "US"
+  description = "GKE Usage Metering for ${local.cluster_name}"
+  location    = local.bigquery_location
 
   access {
     role          = "OWNER"
@@ -44,16 +51,26 @@ resource "google_bigquery_dataset" "usage_metering" {
     role          = "WRITER"
     user_by_email = "${google_service_account.cluster_node_sa.email}"
   }
+
+  // This restricts deletion of this dataset if there is data in it
+  // IMPORTANT: Should be false on production cluster
+  delete_contents_on_destroy = true
+}
+
+// This retrives the available GKE versions
+data "google_container_engine_versions" "cluster" {
+  project  = data.google_project.project.id
+  location = local.cluster_location
 }
 
 // Create GKE cluster, but with no node pools. Node pools can be provisioned below
 resource "google_container_cluster" "cluster" {
-  provider = google-beta
+  name     = local.cluster_name
+  location = local.cluster_location
 
-  name               = var.cluster_name
+  provider           = google-beta
   project            = data.google_project.project.id
-  location           = data.google_container_engine_versions.us-central1.location
-  min_master_version = data.google_container_engine_versions.us-central1.latest_master_version
+  min_master_version = data.google_container_engine_versions.cluster.latest_master_version
 
   // Start with a single node, because we're going to delete the default pool
   initial_node_count = 1
@@ -109,7 +126,8 @@ resource "google_container_cluster" "cluster" {
   }
 
   // GKE clusters are critical objects and should not be destroyed
+  // IMPORTANT: should be true on production cluster
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
