@@ -4,7 +4,6 @@ metadata:
   name: redirector-k8s-io
   labels:
     app: redirector-k8s-io
-    version: dirty
 spec:
   revisionHistoryLimit: 2
   replicas: 2
@@ -24,7 +23,7 @@ spec:
         runAsNonRoot: true
       containers:
       - name: txtdirect
-        image: gcr.io/txtdirect-223710/txtdirect:dev-00984e2
+        image: gcr.io/txtdirect-223710/txtdirect:dev-9f1280f
         securityContext:
           # Run as any non-root user UID
           runAsUser: 1337
@@ -57,8 +56,7 @@ spec:
           - name: http
             containerPort: 8080
       - name: coredns
-        #TODO: switch to k8s.gcr.io/coredns:1.5.0, when available
-        image: coredns/coredns:1.5.0
+        image: k8s.gcr.io/coredns:1.5.0
         securityContext:
           # Run as any non-root user UID
           runAsUser: 1337
