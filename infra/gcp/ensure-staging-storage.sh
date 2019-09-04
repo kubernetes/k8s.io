@@ -50,6 +50,7 @@ STAGING_PROJECTS=(
     csi
     descheduler
     kops
+    multitenancy
     publishing-bot
     release-test
 )

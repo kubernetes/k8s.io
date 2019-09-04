@@ -144,6 +144,12 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
       - justinsb@google.com
+  - email-id: k8s-infra-staging-multitenancy@kubernetes.io
+    members:
+      - tasha.drew@gmail.com
+      - srampal@cisco.com
+      - f.guo@alibaba-inc.com 
+      - kevin.fox@pnnl.gov
   - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
     members:
       - davanum@gmail.com
