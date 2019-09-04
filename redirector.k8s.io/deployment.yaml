@@ -34,7 +34,6 @@ spec:
         command: [ "/txtdirect", "--log=stdout", "--conf=/config/caddyfile" ]
         resources:
           requests:
-            memory: "32Mi"
             cpu: "50m"
           limits:
             memory: "32Mi"
@@ -67,7 +66,6 @@ spec:
         args: [ "--conf=/config-cache/corefile" ]
         resources:
           requests:
-            memory: "32Mi"
             cpu: "50m"
           limits:
             memory: "32Mi"
