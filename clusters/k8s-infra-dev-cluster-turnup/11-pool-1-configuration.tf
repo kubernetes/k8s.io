@@ -1,13 +1,13 @@
 /*
 This file defines:
-- Node pool for pool-1
+- Node pool for pool1
 
 Note: If you wish to create additional node pools, please duplicate this file
 and change the resource name, name_prefix, and any other cluster specific settings.
 */
 
-resource "google_container_node_pool" "pool-1" {
-  name_prefix = "pool-1-"
+resource "google_container_node_pool" "pool1" {
+  name_prefix = "pool1-"
   location    = google_container_cluster.cluster.location
   cluster     = google_container_cluster.cluster.name
 
@@ -32,13 +32,19 @@ resource "google_container_node_pool" "pool-1" {
 
   // Set machine type, and enable all oauth scopes tied to the service account
   node_config {
-    machine_type    = "n1-standard-4"
+    machine_type = "n1-standard-4"
+    disk_size_gb = 100
+    disk_type    = "pd-standard"
+
     service_account = google_service_account.cluster_node_sa.email
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
 
-    // Restrict metadata config from workload
+    // Needed for workload identity
     workload_metadata_config {
-      node_metadata = "SECURE"
+      node_metadata = "GKE_METADATA_SERVER"
+    }
+    metadata = {
+      disable-legacy-endpoints = "true"
     }
   }
 

@@ -16,8 +16,8 @@ locals {
 // Create SA for nodes
 resource "google_service_account" "cluster_node_sa" {
   project      = data.google_project.project.id
-  account_id   = "sa-${local.cluster_name}"
-  display_name = "Service Account for ${local.cluster_name}"
+  account_id   = "gke-nodes-${local.cluster_name}"
+  display_name = "Nodes in GKE cluster '${local.cluster_name}'"
 }
 
 // Add roles for SA
@@ -37,10 +37,11 @@ resource "google_project_iam_member" "cluster_node_sa_monitoring_metricwriter" {
   member  = "serviceAccount:${google_service_account.cluster_node_sa.email}"
 }
 
+// BigQuery dataset for usage data
 resource "google_bigquery_dataset" "usage_metering" {
   dataset_id  = replace("usage_metering_${local.cluster_name}", "-", "_")
   project     = data.google_project.project.id
-  description = "GKE Usage Metering for ${local.cluster_name}"
+  description = "GKE Usage Metering for cluster '${local.cluster_name}'"
   location    = local.bigquery_location
 
   access {
@@ -57,20 +58,26 @@ resource "google_bigquery_dataset" "usage_metering" {
   delete_contents_on_destroy = true
 }
 
-// This retrives the available GKE versions
-data "google_container_engine_versions" "cluster" {
-  project  = data.google_project.project.id
-  location = local.cluster_location
-}
-
 // Create GKE cluster, but with no node pools. Node pools can be provisioned below
 resource "google_container_cluster" "cluster" {
   name     = local.cluster_name
   location = local.cluster_location
 
-  provider           = google-beta
-  project            = data.google_project.project.id
-  min_master_version = data.google_container_engine_versions.cluster.latest_master_version
+  provider = google-beta
+  project  = data.google_project.project.id
+
+  // GKE clusters are critical objects and should not be destroyed
+  // IMPORTANT: should be true on production cluster
+  lifecycle {
+    prevent_destroy = false
+  }
+
+  // Network config
+  network = "default"
+  ip_allocation_policy {
+    use_ip_aliases    = true
+    create_subnetwork = true
+  }
 
   // Start with a single node, because we're going to delete the default pool
   initial_node_count = 1
@@ -89,14 +96,24 @@ resource "google_container_cluster" "cluster" {
     }
   }
 
+  // Enable google-groups for RBAC
+  authenticator_groups_config {
+    security_group = "gke-security-groups@kubernetes.io"
+  }
+
+  // Enable workload identity for GCP IAM
+  workload_identity_config {
+    identity_namespace = "${data.google_project.project.id}.svc.id.goog"
+  }
+
   // Enable Stackdriver Kubernetes Monitoring
   logging_service    = "logging.googleapis.com/kubernetes"
   monitoring_service = "monitoring.googleapis.com/kubernetes"
 
-  // Set maintenance time to 03:00 PST
+  // Set maintenance time
   maintenance_policy {
     daily_maintenance_window {
-      start_time = "11:00"
+      start_time = "11:00" // (in UTC), 03:00 PST
     }
   }
 
@@ -120,14 +137,24 @@ resource "google_container_cluster" "cluster" {
 
   // Configure cluster addons
   addons_config {
+    horizontal_pod_autoscaling {
+      disabled = false
+    }
+    http_load_balancing {
+      disabled = false
+    }
     network_policy_config {
       disabled = false
     }
   }
 
-  // GKE clusters are critical objects and should not be destroyed
-  // IMPORTANT: should be true on production cluster
-  lifecycle {
-    prevent_destroy = false
+  // Enable PodSecurityPolicy enforcement
+  pod_security_policy_config {
+    enabled = false // TODO: we should turn this on
+  }
+
+  // Enable VPA
+  vertical_pod_autoscaling {
+    enabled = true
   }
 }
