@@ -122,6 +122,14 @@ groups:
     members:
     - sbueringer@gmail.com
     - jichenjc@cn.ibm.com
+  - email-id: k8s-infra-staging-capi-docker@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - ha.chuck@gmail.com
+      - detiber@gmail.com
+      - hi@amycod.es
+      - goldsteina@vmware.com
+      - prignanov@vmware.com    
   - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
     members:
       - davanum@gmail.com

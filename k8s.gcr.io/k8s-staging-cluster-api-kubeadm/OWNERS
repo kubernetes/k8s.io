@@ -1,0 +1,11 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- chuckha
+- davidewatson
+- detiber
+- fabriziopandini
+- justinsb
+- ncdc
+- timothysc
+- vincepri
