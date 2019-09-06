@@ -46,6 +46,7 @@ STAGING_PROJECTS=(
     cluster-api-aws
     capi-openstack
     capi-kubeadm
+    capi-docker
     coredns
     csi
     descheduler
