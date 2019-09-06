@@ -15,6 +15,7 @@ images:
     "sha256:663829ece3a14201b71ec1e211c3d33f99ecdf0ea8081f7486806442a61d925d": ["v0.1.7", "v0.1.8"]
     "sha256:5867b7735a9d85ea13ed5ab0fce90ae0945c753a119e6bd02f7ceeebec2dd608": ["v0.1.9"]
     "sha256:04e5bbda841ff8c34afd5fc598b9f3f8fd6b82cca49129ba4de7af316e40f87e": ["v0.2.0"]
+    "sha256:a2049bd4253224693abb248ad446c633a2028e1af5b0628491af5ef7877a0166": ["v0.2.1"]
 - name: cluster-api-controller-amd64
   dmap:
     "sha256:ea0e994082f56bf7713d36002abfbffbad43b2c257b89842b3e3694c987d3a07": ["v0.2.0"]
