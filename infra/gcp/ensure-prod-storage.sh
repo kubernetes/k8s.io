@@ -103,7 +103,7 @@ for prj in "${ALL_PROD_PROJECTS[@]}"; do
     enable_api "${prj}" storage-component.googleapis.com
 
     color 6 "Ensuring the GCS bucket exists and is readable: ${prj}"
-    ensure_gcs_bucket "${prj}" "gs://${prj}"
+    ensure_public_gcs_bucket "${prj}" "gs://${prj}"
 
     color 6 "Ensuring the GCS bucket retention policy is set: ${prj}"
     RETENTION="10y"
