@@ -44,6 +44,7 @@ STAGING_PROJECTS=(
     cip-test
     cluster-api
     cluster-api-aws
+    cluster-api-gcp
     capi-openstack
     capi-kubeadm
     capi-docker

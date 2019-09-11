@@ -118,6 +118,12 @@ groups:
       - hi@amycod.es
       - goldsteina@vmware.com
       - prignanov@vmware.com
+  - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - justinsb@google.com
+      - prignanov@vmware.com
   - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
     members:
     - sbueringer@gmail.com
@@ -129,7 +135,7 @@ groups:
       - detiber@gmail.com
       - hi@amycod.es
       - goldsteina@vmware.com
-      - prignanov@vmware.com    
+      - prignanov@vmware.com
   - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
     members:
       - davanum@gmail.com
@@ -156,7 +162,7 @@ groups:
     members:
       - tasha.drew@gmail.com
       - srampal@cisco.com
-      - f.guo@alibaba-inc.com 
+      - f.guo@alibaba-inc.com
       - kevin.fox@pnnl.gov
   - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
     members:
