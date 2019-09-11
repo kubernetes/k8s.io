@@ -41,6 +41,9 @@ GCS_ADMINS=$GCR_ADMINS
 # The service account name for the image promoter.
 PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
+# The service account email for Prow (not in this org for now).
+PROW_SVCACCT="deployer@k8s-prow.iam.gserviceaccount.com"
+
 # The GCP org stuff needed to turn it all on.
 GCP_ORG="758905017065" # kubernetes.io
 GCP_BILLING="018801-93540E-22A20E"
@@ -211,12 +214,12 @@ function upload_gcs_static_content() {
     gsutil rsync -c "${srcdir}" "${bucket}"
 }
 
-# Grant project viewew privileges to a principal
+# Grant project viewer privileges to a principal
 # $1: The GCP project
 # $2: The group email
 function empower_group_as_viewer() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_empower_group_as_viewer(project, group) requires 2 arguments" >&2
+        echo "empower_group_as_viewer(project, group) requires 2 arguments" >&2
         return 1
     fi
     project="$1"
@@ -226,6 +229,32 @@ function empower_group_as_viewer() {
         projects add-iam-policy-binding "${project}" \
         --member "group:${group}" \
         --role roles/viewer
+}
+
+# Grant privileges to prow in a staging project
+# $1: The GCP project
+# $2: The GCS scratch bucket
+function empower_prow() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_prow(project, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    bucket="$2"
+
+    # Allow prow to trigger builds.
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "serviceAccount:${PROW_SVCACCT}" \
+        --role roles/cloudbuild.builds.builder
+
+    # Allow prow to push source and access build logs.
+    gsutil iam ch \
+        "serviceAccount:${PROW_SVCACCT}:objectCreator" \
+        "${bucket}"
+    gsutil iam ch \
+        "serviceAccount:${PROW_SVCACCT}:objectViewer" \
+        "${bucket}"
 }
 
 # Grant full privileges to GCR admins

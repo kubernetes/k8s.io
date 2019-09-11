@@ -62,7 +62,7 @@ if [ $# = 0 ]; then
 fi
 
 for REPO; do
-    color 3 "${REPO}"
+    color 3 "Configuring staging: ${REPO}"
 
     # The GCP project name.
     PROJECT="k8s-staging-${REPO}"
@@ -70,14 +70,15 @@ for REPO; do
     # The group that can write to this staging repo.
     WRITERS="k8s-infra-staging-${REPO}@kubernetes.io"
 
-    # The name of the bucket
-    BUCKET="gs://${PROJECT}"
+    # The names of the buckets
+    STAGING_BUCKET="gs://${PROJECT}" # used by humans
+    GCB_BUCKET="gs://${PROJECT}-gcb" # used by GCB
+    ALL_BUCKETS=("${STAGING_BUCKET}" "${GCB_BUCKET}")
 
-    # A short retention - it can always be raised, but it is hard to lower
-    # We expect promotion within 30d, or for testing to "move on"
-    # 30d is also short enough that people should notice occasionally,
+    # A short expiration - it can always be raised, but it is hard to lower
+    # We expect promotion within 60d, or for testing to "move on", but
+    # it is also short enough that people should notice occasionally,
     # and not accidentally think of the staging buckets as permanent.
-    RETENTION=30d
     AUTO_DELETION_DAYS=60
 
     # Make the project, if needed
@@ -106,34 +107,41 @@ for REPO; do
     color 6 "Empowering ${WRITERS} to GCR"
     empower_group_to_gcr "${PROJECT}" "${WRITERS}"
 
-    # Every project gets a GCS bucket
+    # Every project gets some GCS buckets
 
     # Enable GCS APIs
     color 6 "Enabling the GCS API"
     enable_api "${PROJECT}" storage-component.googleapis.com
 
-    # Create the bucket
-    color 6 "Ensuring the bucket exists and is world readable"
-    ensure_gcs_bucket "${PROJECT}" "${BUCKET}"
+    for BUCKET in "${ALL_BUCKETS[@]}"; do
+      color 3 "Configuring bucket: ${BUCKET}"
 
-    # Set bucket retention
-    color 6 "Ensuring the bucket has retention of ${RETENTION}"
-    ensure_gcs_bucket_retention "${BUCKET}" "${RETENTION}"
+      # Create the bucket
+      color 6 "Ensuring the bucket exists and is world readable"
+      ensure_gcs_bucket "${PROJECT}" "${BUCKET}"
 
-    # Set bucket auto-deletion
-    color 6 "Ensuring the bucket has auto-deletion of ${AUTO_DELETION_DAYS} days"
-    ensure_gcs_bucket_auto_deletion "${BUCKET}" "${AUTO_DELETION_DAYS}"
+      # Set bucket auto-deletion
+      color 6 "Ensuring the bucket has auto-deletion of ${AUTO_DELETION_DAYS} days"
+      ensure_gcs_bucket_auto_deletion "${BUCKET}" "${AUTO_DELETION_DAYS}"
 
-    # Enable admins on the bucket
-    color 6 "Empowering GCS admins"
-    empower_gcs_admins "${PROJECT}" "${BUCKET}"
+      # Enable admins on the bucket
+      color 6 "Empowering GCS admins"
+      empower_gcs_admins "${PROJECT}" "${BUCKET}"
 
-    # Enable writers on the bucket
-    color 6 "Empowering ${WRITERS} to GCS"
-    empower_group_to_gcs_bucket "${WRITERS}" "${BUCKET}"
+      # Enable writers on the bucket
+      color 6 "Empowering ${WRITERS} to GCS"
+      empower_group_to_gcs_bucket "${WRITERS}" "${BUCKET}"
+    done
+
+    # Enable GCB and Prow to build and push images.
+
+    # Enable GCB APIs
+    color 6 "Enabling the GCB API"
+    enable_api "${PROJECT}" cloudbuild.googleapis.com
+
+    # Let prow trigger builds and access the scratch bucket
+    color 6 "Empowering Prow"
+    empower_prow "${PROJECT}" "${GCB_BUCKET}"
 
     color 6 "Done"
 done
-
-# Special case: don't use retention on cip-test buckets
-gsutil retention clear gs://k8s-staging-cip-test

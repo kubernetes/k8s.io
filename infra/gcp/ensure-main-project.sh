@@ -42,9 +42,6 @@ BQ_BILLING_DATASET="kubernetes_public_billing"
 # The BigQuery admins group.
 BQ_ADMINS_GROUP="k8s-infra-bigquery-admins@kubernetes.io"
 
-# The service account for GKE nodes.
-NODES_SVCACCT="k8s-nodes"
-
 # The cluster admins group.
 CLUSTER_ADMINS_GROUP="k8s-infra-cluster-admins@kubernetes.io"
 
@@ -69,22 +66,6 @@ color 6 "Enabling the GCS API"
 enable_api "${PROJECT}" storage-component.googleapis.com
 color 6 "Enabling the OSLogin API"
 enable_api "${PROJECT}" oslogin.googleapis.com
-
-# Make an account for GKE nodes to run as
-color 6 "Creating service account for ${NODES_SVCACCT}"
-ensure_service_account "${PROJECT}" "${NODES_SVCACCT}" "Least-privilege SA for k8s nodes"
-
-color 6 "Empowering ${NODES_SVCACCT} with min permissions"
-acct=$(svc_acct_email "${PROJECT}" "${NODES_SVCACCT}")
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "serviceAccount:${acct}" \
-    --role roles/logging.logWriter
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "serviceAccount:${acct}" \
-    --role roles/monitoring.viewer
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "serviceAccount:${acct}" \
-    --role roles/monitoring.metricWriter
 
 color 6 "Empowering BigQuery admins"
 gcloud projects add-iam-policy-binding "${PROJECT}" \
