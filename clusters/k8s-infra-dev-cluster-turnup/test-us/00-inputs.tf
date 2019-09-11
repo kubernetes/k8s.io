@@ -11,7 +11,7 @@ terraform {
 
   backend "gcs" {
     bucket = "k8s-infra-dev-cluster-turnup-terraform-state"
-    prefix = "k8s-services-cluster"
+    prefix = "k8s-infra-dev-cluster-turnup/test-us" // $project_name/$cluster_name
   }
 
   required_providers {
@@ -22,6 +22,5 @@ terraform {
 
 // This configures the source project where we should install the cluster
 data "google_project" "project" {
-  // should match workspace configuration name
   project_id = "k8s-infra-dev-cluster-turnup"
 }
