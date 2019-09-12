@@ -10,8 +10,8 @@ terraform {
   required_version = ">= 0.12.8"
 
   backend "gcs" {
-    bucket = "k8s-infra-dev-cluster-turnup-terraform-state"
-    prefix = "k8s-infra-dev-cluster-turnup/test-eu" // $project_name/$cluster_name
+    bucket = "k8s-infra-clusters-terraform"
+    prefix = "_example/test-us" // $project_name/$cluster_name
   }
 
   required_providers {
@@ -22,5 +22,5 @@ terraform {
 
 // This configures the source project where we should install the cluster
 data "google_project" "project" {
-  project_id = "k8s-infra-dev-cluster-turnup"
+  project_id = "_example"
 }
