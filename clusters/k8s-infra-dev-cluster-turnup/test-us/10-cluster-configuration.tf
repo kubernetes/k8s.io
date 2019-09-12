@@ -8,9 +8,9 @@ Note that it does not configure any node pools; this is done in a separate file.
 */
 
 locals {
-  cluster_name      = "k8s-services-cluster" // This is the name of the cluster defined in this file
-  cluster_location  = "us-central1"          // This is the GCP location (region or zone) where the cluster should be created
-  bigquery_location = "US"                   // This is the bigquery specific location where the dataset should be created
+  cluster_name      = "test-us"      // This is the name of the cluster defined in this file
+  cluster_location  = "us-central1"  // This is the GCP location (region or zone) where the cluster should be created
+  bigquery_location = "US"           // This is the bigquery specific location where the dataset should be created
 }
 
 // Create SA for nodes

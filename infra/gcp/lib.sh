@@ -168,7 +168,7 @@ function ensure_gcr_repo() {
     gsutil bucketpolicyonly set on "${bucket}"
 }
 
-# Ensure the bucket exists and is world-readable
+# Ensure the bucket exists
 # $1: The GCP project
 # $2: The bucket
 function ensure_gcs_bucket() {
@@ -183,8 +183,37 @@ function ensure_gcs_bucket() {
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
       gsutil mb -p "${project}" -l "${location}" "${bucket}"
     fi
-    gsutil iam ch allUsers:objectViewer "${bucket}"
     gsutil bucketpolicyonly set on "${bucket}"
+}
+
+# Ensure the bucket exists and is world-readable
+# $1: The GCP project
+# $2: The bucket
+function ensure_public_gcs_bucket() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_public_gcs_bucket(project, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    bucket="$2"
+
+    ensure_gcs_bucket "${project}" "${bucket}"
+    gsutil iam ch allUsers:objectViewer "${bucket}"
+}
+
+# Ensure the bucket exists and is NOT world-accessible
+# $1: The GCP project
+# $2: The bucket
+function ensure_private_gcs_bucket() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_private_gcs_bucket(project, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    bucket="$2"
+
+    ensure_gcs_bucket "${project}" "${bucket}"
+    gsutil iam ch -d allUsers "${bucket}"
 }
 
 # Sets the web policy on the bucket, including a default index.html page

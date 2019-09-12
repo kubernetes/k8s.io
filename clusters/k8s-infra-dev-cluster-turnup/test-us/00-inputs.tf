@@ -7,16 +7,11 @@ This file defines:
 */
 
 terraform {
-  required_version = ">= 0.12.6"
+  required_version = ">= 0.12.8"
 
-  backend "remote" {
-    hostname     = "app.terraform.io"
-    organization = "k8s-infra"
-
-    workspaces {
-      // should match the name of the gcp project
-      name = "k8s-infra-dev-cluster-turnup"
-    }
+  backend "gcs" {
+    bucket = "k8s-infra-dev-cluster-turnup-terraform-state"
+    prefix = "k8s-infra-dev-cluster-turnup/test-us" // $project_name/$cluster_name
   }
 
   required_providers {
@@ -27,6 +22,5 @@ terraform {
 
 // This configures the source project where we should install the cluster
 data "google_project" "project" {
-  // should match workspace configuration name
   project_id = "k8s-infra-dev-cluster-turnup"
 }

@@ -118,7 +118,7 @@ for REPO; do
 
       # Create the bucket
       color 6 "Ensuring the bucket exists and is world readable"
-      ensure_gcs_bucket "${PROJECT}" "${BUCKET}"
+      ensure_public_gcs_bucket "${PROJECT}" "${BUCKET}"
 
       # Set bucket auto-deletion
       color 6 "Ensuring the bucket has auto-deletion of ${AUTO_DELETION_DAYS} days"

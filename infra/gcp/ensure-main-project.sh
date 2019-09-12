@@ -48,6 +48,9 @@ CLUSTER_ADMINS_GROUP="k8s-infra-cluster-admins@kubernetes.io"
 # The accounting group.
 ACCOUNTING_GROUP="k8s-infra-gcp-accounting@kubernetes.io"
 
+# The GCS bucket which hold terraform state for clusters
+CLUSTER_TERRAFORM_BUCKET="k8s-infra-clusters-terraform"
+
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
@@ -66,6 +69,9 @@ color 6 "Enabling the GCS API"
 enable_api "${PROJECT}" storage-component.googleapis.com
 color 6 "Enabling the OSLogin API"
 enable_api "${PROJECT}" oslogin.googleapis.com
+
+color 6 "Ensuring the cluster terraform-state bucket exists"
+ensure_private_gcs_bucket "${PROJECT}" "gs://${CLUSTER_TERRAFORM_BUCKET}"
 
 color 6 "Empowering BigQuery admins"
 gcloud projects add-iam-policy-binding "${PROJECT}" \
@@ -90,6 +96,12 @@ fi
 gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "group:${CLUSTER_ADMINS_GROUP}" \
     --role "projects/${PROJECT}/roles/ServiceAccountLister"
+gsutil iam ch \
+    "group:${CLUSTER_ADMINS_GROUP}:objectAdmin" \
+    "gs://${CLUSTER_TERRAFORM_BUCKET}"
+gsutil iam ch \
+    "group:${CLUSTER_ADMINS_GROUP}:legacyBucketOwner" \
+    "gs://${CLUSTER_TERRAFORM_BUCKET}"
 
 color 6 "Empowering GCP accounting"
 gcloud projects add-iam-policy-binding "${PROJECT}" \
