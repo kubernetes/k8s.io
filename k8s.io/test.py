@@ -161,6 +161,9 @@ class RedirTest(unittest.TestCase):
                 'https://storage.googleapis.com/test-infra-oncall/oncall.html')
             self.assert_temp_redirect(base + 'owners',
                 'https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md')
+            self.assert_temp_redirect(base + 'owners/$ghuser',
+                'https://cs.k8s.io/?q=$ghuser&i=fosho&files=.*(%5E%5B%5Ev%5D.*OWNERS%24)%7C(%5Ev%5B%5Ee%5D.*OWNERS%24)%20%7C(%5Eve%5B%5En%5D.*OWNERS%24)%7C(%5Even%5B%5Ed%5D.*OWNERS%24)%7C(%5Evend%5B%5Eo%5D.*OWNERS%24)%7C(%5Evendo%5B%5Er%5D.*OWNERS%24)%7C(%5E%5B%5Ev%5D%5B%5Ee%5D%5B%5En%5D%5B%5Ed%5D%5B%5Eo%5D%5B%5Er%5D%2F.*OWNERS%24)%7C%5EOWNERS%24%7C%5EOWNERS_ALIASES%24&repos=',
+                 ghuser=rand_num())
             self.assert_temp_redirect(
                 base + 'partner-request',
                 'https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform')
