@@ -32,7 +32,8 @@ resource "google_container_node_pool" "pool1" {
 
   // Set machine type, and enable all oauth scopes tied to the service account
   node_config {
-    machine_type = "n1-standard-1" // IMPORTANT: Should be n1-standard-2 or 4 on prod cluster
+    // IMPORTANT: Should be n1-standard-1 on test clusters
+    machine_type = "n1-standard-2"
     disk_size_gb = 100
     disk_type    = "pd-standard"
 

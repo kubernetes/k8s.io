@@ -8,9 +8,9 @@ Note that it does not configure any node pools; this is done in a separate file.
 */
 
 locals {
-  cluster_name      = "test-eu"       // This is the name of the cluster defined in this file
-  cluster_location  = "europe-west1"  // This is the GCP location (region or zone) where the cluster should be created
-  bigquery_location = "US"            // This is the bigquery specific location where the dataset should be created
+  cluster_name      = "test-us"      // This is the name of the cluster defined in this file
+  cluster_location  = "us-central1"  // This is the GCP location (region or zone) where the cluster should be created
+  bigquery_location = "US"           // This is the bigquery specific location where the dataset should be created
 }
 
 // Create SA for nodes
@@ -54,8 +54,8 @@ resource "google_bigquery_dataset" "usage_metering" {
   }
 
   // This restricts deletion of this dataset if there is data in it
-  // IMPORTANT: Should be false on production cluster
-  delete_contents_on_destroy = true
+  // IMPORTANT: Should be true on test clusters
+  delete_contents_on_destroy = false
 }
 
 // Create GKE cluster, but with no node pools. Node pools can be provisioned below
@@ -67,9 +67,9 @@ resource "google_container_cluster" "cluster" {
   project  = data.google_project.project.id
 
   // GKE clusters are critical objects and should not be destroyed
-  // IMPORTANT: should be true on production cluster
+  // IMPORTANT: should be false on test clusters
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 
   // Network config
