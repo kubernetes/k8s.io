@@ -30,4 +30,4 @@ while true; do
   echo "want ${WANT}, found ${HAVE}"
 done
 
-make test TARGET_IP=104.197.208.221
+make test TARGET_IP=35.244.190.129
