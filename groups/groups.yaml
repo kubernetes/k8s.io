@@ -61,6 +61,12 @@ groups:
       - thockin@google.com
       - ihor@cncf.io
       - hh@ii.coop
+  - email-id: k8s-infra-org-admins@kubernetes.io
+    description: Organization Administrators for kubernetes.io
+    members:
+      - cblecker@gmail.com
+      - ihor@cncf.io
+      - thockin@google.com
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     members:
       - davanum@gmail.com
