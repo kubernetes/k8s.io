@@ -126,8 +126,8 @@ groups:
       - prignanov@vmware.com
   - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
     members:
-    - sbueringer@gmail.com
-    - jichenjc@cn.ibm.com
+      - sbueringer@gmail.com
+      - jichenjc@cn.ibm.com
   - email-id: k8s-infra-staging-capi-docker@kubernetes.io
     members:
       - davanum@gmail.com
@@ -189,8 +189,8 @@ groups:
       - ihor@cncf.io
       - bentheelder@google.com
       - brendan.d.burns@gmail.com
-  # Group that owns administrative access to AWS accounts
   - email-id: k8s-infra-aws-admins@kubernetes.io
+    description: Group that owns administrative access to AWS accounts
     members:
       - ihor@cncf.io
       - justinsb@google.com
