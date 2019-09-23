@@ -118,6 +118,12 @@ groups:
       - hi@amycod.es
       - goldsteina@vmware.com
       - prignanov@vmware.com
+  - email-id: k8s-infra-staging-cluster-api-azure@kubernetes.io
+    members:
+      - davanum@gmail.com
+      - Stephen@agst.us
+      - nicklaneovi@gmail.com
+      - prignanov@vmware.com
   - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
     members:
       - davanum@gmail.com
