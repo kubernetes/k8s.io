@@ -1,0 +1,16 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+# Should always mirror the maintainers/reviewers in https://sigs.k8s.io/cluster-api-provider-azure/OWNERS_ALIASES
+
+approvers:
+- awesomenix
+- justaugustus
+- soggiest
+reviewers:
+- CecileRobertMichon
+- juan-lee
+- serbrech
+- vincepri
+
+labels:
+- sig/cluster-lifecycle
+- area/provider/azure
