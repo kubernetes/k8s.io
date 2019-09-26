@@ -14,20 +14,6 @@ images:
     "sha256:7397e3ef7dfa72b102197eaa6bd20ca8b572ccbc31a30f3d262188376e95836a": ["v0.3.6"]
     "sha256:e167eec012a77eb6f1741bcb7c6b9514ffdd5ac154137cba86c14f40db979913": ["v0.3.7"]
     "sha256:b04cd8882f99aec51ef714a60bd16b7d1f6bae3e4f955bee834744c35b6fb21f": ["v0.3.8"]
+    "sha256:bd6cc9cd77414fe4ddb89eacad52ccd1b0048c9214751bbb868bfadf9587cded": ["v0.3.9"]
     "sha256:76cf7f26e0abfb5bd862670606a93593f4ac9c51a2ba1c281cc7d709869a2cc1": ["v0.4.0"]
-- name: cluster-api-aws-controller-amd64
-  dmap:
-    "sha256:0bd88bcba94f800715fca33ffc4bde430646a7c797237313cbccdcdef9f80f2d": ["v0.4.0"]
-- name: cluster-api-aws-controller-arm
-  dmap:
-    "sha256:19016ec3ce30985a128494909993aef9109a5bdd749874e9b3be20bd65056fee": ["v0.4.0"]
-- name: cluster-api-aws-controller-arm64
-  dmap:
-    "sha256:5c434128d7e28d96d25f11a096e6b9d666d52c5bb683662ba708d22792a0f154": ["v0.4.0"]
-- name: cluster-api-aws-controller-ppc64le
-  dmap:
-    "sha256:e0af472014f7639b6362e1649717a63e621faf91a5be1ed89f1055689111214c": ["v0.4.0"]
-- name: cluster-api-aws-controller-s390x
-  dmap:
-    "sha256:0ad4f92011b2fa5de88a6e6a2d8b97f38371246021c974760e5fc54b9b7069e5": ["v0.4.0"]
 renames: []
