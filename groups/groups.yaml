@@ -66,6 +66,8 @@ groups:
     members:
       - cblecker@gmail.com
       - ihor@cncf.io
+      - davanum@gmail.com
+      - spiffxp@google.com
       - thockin@google.com
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     members:
