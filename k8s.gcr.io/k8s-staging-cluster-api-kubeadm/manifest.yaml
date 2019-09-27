@@ -12,6 +12,7 @@ images:
 - name: cluster-api-kubeadm-controller
   dmap:
     "sha256:c3ee2e114b6bf81d0cf0686bc80ba3281d70782ffd56b2ae8ef281aec319530b": ["v0.1.0"]
+    "sha256:8f209a8fd54d45b97deaa40df173229c887bf5f33e731f7b21077f8938fbb634": ["v0.1.1"]
 - name: cluster-api-kubeadm-controller-amd64
   dmap:
     "sha256:51e5a17ac02cf8f2f9ce0bd0892da6fc52fa15d0a9d4ffd6a623d0e20d2eaacb": ["v0.1.0"]
