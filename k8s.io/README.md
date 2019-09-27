@@ -28,7 +28,7 @@ Vanity URL(s)
 | Downloads | https://releases.k8s.io <br> https://rel.k8s.io | https://releases.kubernetes.io <br> https://rel.kubernetes.io |
 | Kubernetes SIGs | https://sigs.k8s.io | |
 | Tide status (formerly submit queue) | https://prow.k8s.io/tide | https://prow.kubernetes.io/tide |
-| Test grid | https://testgrid.k8s.io | https://testgrid.kubernetes.io |
+| TestGrid | https://testgrid.k8s.io | https://testgrid.kubernetes.io |
 | YUM downloads | https://yum.k8s.io | https://yum.kubernetes.io |
 
 NOTE: please see k8s.io/k8s.io/configmap-nginx.yaml for `server` definitions
@@ -42,6 +42,7 @@ Redirections
 - https://go.k8s.io/help-wanted
 - https://go.k8s.io/needs-ok-to-test
 - https://go.k8s.io/oncall
+- https://go.k8s.io/oncall-hotlist
 - https://go.k8s.io/owners
 - https://go.k8s.io/owners/${GITHUB_USER}
 - https://go.k8s.io/partner-request
