@@ -234,6 +234,7 @@ data:
           rewrite ^/help-wanted$     https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22&type=Issues redirect;
           rewrite ^/needs-ok-to-test$ https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase&type=Issues redirect;
           rewrite ^/oncall$          https://storage.googleapis.com/test-infra-oncall/oncall.html redirect;
+          rewrite ^/oncall-hotlist$  https://github.com/kubernetes/test-infra/search?q=label%3Akind%2Foncall-hotlist+is%3Aopen&type=Issues redirect;
           rewrite ^/owners$          https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md redirect;
           rewrite ^/owners/([^/]*)/?$ https://cs.k8s.io/?q=$1&i=fosho&files=.*(%5E%5B%5Ev%5D.*OWNERS%24)%7C(%5Ev%5B%5Ee%5D.*OWNERS%24)%20%7C(%5Eve%5B%5En%5D.*OWNERS%24)%7C(%5Even%5B%5Ed%5D.*OWNERS%24)%7C(%5Evend%5B%5Eo%5D.*OWNERS%24)%7C(%5Evendo%5B%5Er%5D.*OWNERS%24)%7C(%5E%5B%5Ev%5D%5B%5Ee%5D%5B%5En%5D%5B%5Ed%5D%5B%5Eo%5D%5B%5Er%5D%2F.*OWNERS%24)%7C%5EOWNERS%24%7C%5EOWNERS_ALIASES%24&repos= redirect;
           rewrite ^/partner-request$ https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform redirect;
