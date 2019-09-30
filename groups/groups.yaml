@@ -209,3 +209,8 @@ groups:
       - ihor@cncf.io
       - justinsb@google.com
       - thockin@google.com
+  - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
+    members:
+      - fbranczyk@gmail.com
+      - cosiclili@gmail.com
+      - tariq181290@gmail.com

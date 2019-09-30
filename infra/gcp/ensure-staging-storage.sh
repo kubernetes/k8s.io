@@ -53,6 +53,7 @@ STAGING_PROJECTS=(
     csi
     descheduler
     kops
+    kube-state-metrics
     multitenancy
     publishing-bot
     release-test
