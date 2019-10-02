@@ -16,4 +16,5 @@ images:
     "sha256:b04cd8882f99aec51ef714a60bd16b7d1f6bae3e4f955bee834744c35b6fb21f": ["v0.3.8"]
     "sha256:bd6cc9cd77414fe4ddb89eacad52ccd1b0048c9214751bbb868bfadf9587cded": ["v0.3.9"]
     "sha256:76cf7f26e0abfb5bd862670606a93593f4ac9c51a2ba1c281cc7d709869a2cc1": ["v0.4.0"]
+    "sha256:099ff8f7a2d52e1083a2cc58bcaa9e87429e36f2e86a23da1b509af8807e7a9f": ["v0.4.1"]
 renames: []
