@@ -369,7 +369,7 @@ class ContentTest(unittest.TestCase):
         self.assertEqual(resp.status, 200)
         configmap = 'configmap-www-%s.yaml' % os.path.dirname(filename)
         with open(configmap) as f:
-            expected_body = yaml.load(f)['data'][os.path.basename(filename)]
+            expected_body = yaml.load(f, yaml.SafeLoader)['data'][os.path.basename(filename)]
         self.assertMultiLineEqual(body, expected_body)
 
     def assert_body_url(self, url, expected_content_url):
