@@ -36,6 +36,11 @@ groups:
       - justinsb@google.com
       - spiffxp@google.com
       - thockin@google.com
+  - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
+    members:
+      - james@munnelly.eu
+      - thockin@google.com
+      - cblecker@gmail.com
   - email-id: k8s-infra-dns-admins@kubernetes.io
     members:
       - bentheelder@google.com
