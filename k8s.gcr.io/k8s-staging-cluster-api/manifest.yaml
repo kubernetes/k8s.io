@@ -19,21 +19,7 @@ images:
     "sha256:a2049bd4253224693abb248ad446c633a2028e1af5b0628491af5ef7877a0166": ["v0.2.1"]
     "sha256:d5ca573e5fb723a52b267df51e00c811fe97f4d797fb8ad6f8680f13f3282008": ["v0.2.2"]
     "sha256:b6a3a5ee2821f91fbca65f1374997dd651470e0ca053bb61516c3354822f0ad9": ["v0.2.3"]
-- name: cluster-api-controller-amd64
-  dmap:
-    "sha256:ea0e994082f56bf7713d36002abfbffbad43b2c257b89842b3e3694c987d3a07": ["v0.2.0"]
-- name: cluster-api-controller-arm
-  dmap:
-    "sha256:ddac971ea0e62e0bc969263c57d10bcdaace99918ff5b304b0531ad115459a1f": ["v0.2.0"]
-- name: cluster-api-controller-arm64
-  dmap:
-    "sha256:86e2ae014190d8ab6f511ba8ed9c60658e906f4a2e6eab7adbb65debd91f51b7": ["v0.2.0"]
-- name: cluster-api-controller-ppc64le
-  dmap:
-    "sha256:d7ec2c3a3c353e5dccff16e5ca9253415d3e3b5398a7beb3f95bf54f1e270fb8": ["v0.2.0"]
-- name: cluster-api-controller-s390x
-  dmap:
-    "sha256:47e89f01c17f66513adddac0b48e035ab937469f3b93df7ab704d725d1e611c1": ["v0.2.0"]
+    "sha256:c26073cd27cd53e51b96b8b73fb11fce0b077c196bd650c5e356fa721d8e1bc1": ["v0.2.4"]
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
