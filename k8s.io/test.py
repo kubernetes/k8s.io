@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-
-from __future__ import print_function
+#!/usr/bin/env python3
 
 try:
     import HTMLParser
@@ -16,7 +14,7 @@ import socket
 import ssl
 import subprocess
 import unittest
-import urllib
+import urllib.request
 
 import yaml
 
@@ -371,14 +369,14 @@ class ContentTest(unittest.TestCase):
         self.assertEqual(resp.status, 200)
         configmap = 'configmap-www-%s.yaml' % os.path.dirname(filename)
         with open(configmap) as f:
-            expected_body = yaml.load(f)['data'][os.path.basename(filename)]
+            expected_body = yaml.load(f, yaml.SafeLoader)['data'][os.path.basename(filename)]
         self.assertMultiLineEqual(body, expected_body)
 
     def assert_body_url(self, url, expected_content_url):
         print('GET', url)
         resp, body = do_get(url)
         self.assertEqual(resp.status, 200)
-        expected_body = urllib.urlopen(expected_content_url).read()
+        expected_body = urllib.request.urlopen(expected_content_url).read().decode('utf-8')
         self.assertMultiLineEqual(body, expected_body)
 
     def assert_body_go_get(self, host, org, repo, path):
