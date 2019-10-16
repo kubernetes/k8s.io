@@ -52,6 +52,7 @@ STAGING_PROJECTS=(
     coredns
     csi
     descheduler
+    e2e-test
     kas-network-proxy
     kops
     kube-state-metrics
