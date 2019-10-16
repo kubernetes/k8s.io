@@ -34,6 +34,15 @@ file for it. You can look at the existing staging repos for examples.
     - ping @thockin or @justinsb to run [ensure-staging-storage.sh] to create
     the staging repo.
 
+### Enabling automatic builds
+
+Once your staging repo is up and running, you can enable automatic build and
+push.  Instructions are here: [1].
+
+NOTE: All sub-projects are *strongly* encouraged to use this mechanism, though
+it is not mandatory yet.  Over time this will become the primary way to build
+and push images, and anything else will become exceptional.
+
 ### Image Promoter
 
 The image promoter is currently WIP.
@@ -50,11 +59,12 @@ To promote an image, follow these steps:
 1. The PR should trigger a `pull-k8sio-cip` job; check that the `k8s-ci-robot`
    responds 'Job succeeded' for it.
 1. Merge the PR. This will trigger the actual promotion (the `pull-k8sio-cip`
-   is just a dry run). The actual promotion job is called `post-k8sio-cip` [1].
+   is just a dry run). The actual promotion job is called `post-k8sio-cip` [2].
 
 Essentially, in order to get images published to a production repo, you have to
 use the image promotion (PR creation) process defined above.
 
-[1]: https://k8s-testgrid.appspot.com/sig-release-misc#post-k8sio-cip
+[1]: https://github.com/kubernetes/test-infra/blob/master/config/jobs/image-pushing/README.md
+[2]: https://k8s-testgrid.appspot.com/sig-release-misc#post-k8sio-cip
 [ensure-staging-storage.sh]: /infra/gcp/ensure-staging-storage.sh
 [groups.yaml]: /groups/groups.yaml
