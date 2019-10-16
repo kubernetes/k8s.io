@@ -20,13 +20,14 @@ cannot be used yet. Only staging repositories can be used.
 
 1. Create a google group for granting push access by adding an email
 alias for it in [groups.yaml]. The email alias should be of the form
-`k8s-infra-staging-<project-name>@kubernetes.io`.
+`k8s-infra-staging-<project-name>@kubernetes.io`. The project name
+can have a maximum of 18 characters.
 
 2. Create a directory `k8s-staging-<project-name>` and add a manifest
 file for it. You can look at the existing staging repos for examples.
 
 3. Add the project name to `STAGING_PROJECTS` in
-   [../infra/gcp/ensure-staging-storage.sh].
+   [ensure-staging-storage.sh].
 
 4. Once the PR merges:
     - ping @dims or @cblecker to create the necessary google group.
@@ -55,5 +56,5 @@ Essentially, in order to get images published to a production repo, you have to
 use the image promotion (PR creation) process defined above.
 
 [1]: https://k8s-testgrid.appspot.com/sig-release-misc#post-k8sio-cip
-[ensure-staging-storage.sh]: /k8s.gcr.io/ensure-staging-storage.sh
+[ensure-staging-storage.sh]: /infra/gcp/ensure-staging-storage.sh
 [groups.yaml]: /groups/groups.yaml
