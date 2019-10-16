@@ -1,9 +1,12 @@
 /*
 Copyright 2019 The Kubernetes Authors.
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
+
     http://www.apache.org/licenses/LICENSE-2.0
+
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -83,7 +86,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = readGroupsConfig(config.GroupsFile)
+	err = readGroupsConfig(config.GroupsFile, &groupsConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -162,7 +165,7 @@ func readConfig(configFilePath *string, confirmChanges *bool) error {
 	return err
 }
 
-func readGroupsConfig(groupsConfigFilePath string) error {
+func readGroupsConfig(groupsConfigFilePath string, config *GroupsConfig) error {
 	var content []byte
 	var err error
 	groupsUrl, err := url.ParseRequestURI(groupsConfigFilePath)
@@ -179,7 +182,7 @@ func readGroupsConfig(groupsConfigFilePath string) error {
 			return fmt.Errorf("error reading groups config from file: %v", err)
 		}
 	}
-	if err = yaml.Unmarshal(content, &groupsConfig); err != nil {
+	if err = yaml.Unmarshal(content, config); err != nil {
 		return fmt.Errorf("error reading groups config: %v", err)
 	}
 	return nil
