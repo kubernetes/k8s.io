@@ -9,4 +9,3 @@ registries:
 - name: asia.gcr.io/k8s-artifacts-prod/capi-openstack
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 images: []
-renames: []
