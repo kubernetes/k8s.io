@@ -1,0 +1,7 @@
+- name: cluster-api-kubeadm-controller
+  dmap:
+    "sha256:c3ee2e114b6bf81d0cf0686bc80ba3281d70782ffd56b2ae8ef281aec319530b": ["v0.1.0"]
+    "sha256:8f209a8fd54d45b97deaa40df173229c887bf5f33e731f7b21077f8938fbb634": ["v0.1.1"]
+    "sha256:c5d59cf2bd2a1c7f1b8adba687432112cea9d6ea21165d7658e3c68c75d9d3c3": ["v0.1.2"]
+    "sha256:a72115558d6d09edc2f2d8ddc5c126d94468ffdbc8cf8026ce218125b2e616d2": ["v0.1.3"]
+    "sha256:616ebe071066449bef90701cef646f568af64f78a8997467a4ef0db8030557b9": ["v0.1.4"]

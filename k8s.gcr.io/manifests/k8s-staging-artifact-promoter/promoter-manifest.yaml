@@ -1,0 +1,10 @@
+registries:
+- name: gcr.io/k8s-staging-artifact-promoter
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod/artifact-promoter
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/artifact-promoter
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/artifact-promoter
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+imagesPath: "../../images/k8s-staging-artifact-promoter/images.yaml"

@@ -1,0 +1,11 @@
+# google group for gcr.io/k8s-staging-cluster-api-aws is k8s-infra-staging-cluster-api-aws@kubernetes.io
+registries:
+- name: gcr.io/k8s-staging-cluster-api-aws
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod/cluster-api-aws
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/cluster-api-aws
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/cluster-api-aws
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+imagesPath: "../../images/k8s-staging-cluster-api-aws/images.yaml"

@@ -1,0 +1,11 @@
+# google group for gcr.io/k8s-staging-capi-openstack is k8s-infra-staging-capi-openstack@kubernetes.io
+registries:
+- name: gcr.io/k8s-staging-capi-openstack
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod/capi-openstack
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/capi-openstack
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/capi-openstack
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+imagesPath: "../../images/k8s-staging-capi-openstack/images.yaml"
