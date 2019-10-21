@@ -23,8 +23,22 @@ alias for it in [groups.yaml]. The email alias should be of the form
 `k8s-infra-staging-<project-name>@kubernetes.io`. The project name
 can have a maximum of 18 characters.
 
-2. Create a directory `k8s-staging-<project-name>` and add a manifest
-file for it. You can look at the existing staging repos for examples.
+2. Create 3 files:
+    - `images/k8s-staging-<project-name>/OWNERS`
+    - `images/k8s-staging-<project-name>/images.yaml`
+    - `manifest/k8s-staging-<project-name>/promoter-manifest.yaml`
+
+The `promoter-manifest.yaml` file will house the credentials and other registry
+metadata, whereas the `images.yaml` file will hold only the image data. You can
+look at the existing staging repos for examples. This separation between
+`promoter-manifest.yaml` and `images.yaml` is there to prevent a single PR from
+modifying the source registry information as well as the image information. Any
+changes to the `manifest/...` folder is expected to be 1-time only during
+project setup.
+
+Be sure to add the project owners to the
+`images/k8s-staging-<project-name>/OWNERS` file to increase the number of
+people who can approve new images for promotion for your project.
 
 3. Add the project name to `STAGING_PROJECTS` in
    [ensure-staging-storage.sh].
@@ -54,8 +68,8 @@ To promote an image, follow these steps:
 1. Clone this git repo.
 1. Add the image into the promoter manifest. E.g., if you pushed
    gcr.io/k8s-staging-coredns/foo:1.3, then add a "foo" image entry into the
-   manifest.
-1. Create a PR to this git repo for your changes to the promoter manifest.
+   manifest in `images/k8s-staging-coredns/images.yaml`.
+1. Create a PR to this git repo for your changes.
 1. The PR should trigger a `pull-k8sio-cip` job; check that the `k8s-ci-robot`
    responds 'Job succeeded' for it.
 1. Merge the PR. This will trigger the actual promotion (the `pull-k8sio-cip`
