@@ -8,5 +8,4 @@ registries:
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia.gcr.io/k8s-artifacts-prod/kube-state-metrics
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-images: []
-renames: []
+imagesPath: "../../images/k8s-staging-kube-state-metrics/images.yaml"
