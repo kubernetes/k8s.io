@@ -141,6 +141,10 @@ for REPO; do
     color 6 "Enabling the GCB API"
     enable_api "${PROJECT}" cloudbuild.googleapis.com
 
+    # Let sub-project writers use GCB.
+    color 6 "Empowering ${WRITERS} as GCB editors"
+    empower_group_for_gcb "${PROJECT}" "${WRITERS}"
+
     # Let prow trigger builds and access the scratch bucket
     color 6 "Empowering Prow"
     empower_prow "${PROJECT}" "${GCB_BUCKET}"
