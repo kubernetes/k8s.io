@@ -55,15 +55,31 @@ function empower_group_to_fake_prod() {
     done
 }
 
+#
 # The GCP project names.
+#
+
+# This is the "real" prod project for artifacts serving and backups.
 PROD_PROJECT="k8s-artifacts-prod"
-PROMOTER_TESTPROD_PROJECT="k8s-cip-test-prod"
-PROMOTER_STAGING_PROJECT="k8s-staging-cip-test"
+PRODBAK_PROJECT="${PROD_PROJECT}-bak"
+
+# These are for testing the image promoter's promotion process.
+PROMOTER_TEST_PROD_PROJECT="k8s-cip-test-prod"
+PROMOTER_TEST_STAGING_PROJECT="k8s-staging-cip-test"
+
+# These are for testing the GCR backup/restore process.
+GCR_BACKUP_TEST_PROD_PROJECT="k8s-gcr-backup-test-prod"
+GCR_BACKUP_TEST_PRODBAK_PROJECT="${ARTIFACT_BACKUP_TEST_PROD_PROJECT}-bak"
+
+# This is for testing the release tools.
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 
 ALL_PROD_PROJECTS=(
     "${PROD_PROJECT}"
-    "${PROMOTER_TESTPROD_PROJECT}"
+    "${PRODBAK_PROJECT}"
+    "${PROMOTER_TEST_PROD_PROJECT}"
+    "${GCR_BACKUP_TEST_PROD_PROJECT}"
+    "${GCR_BACKUP_TEST_PRODBAK_PROJECT}"
     "${RELEASE_TESTPROD_PROJECT}"
 )
 
@@ -124,16 +140,22 @@ upload_gcs_static_content \
     "${SCRIPT_DIR}/static/prod-storage"
 
 # Special case: grant the image promoter testing group access to their fake
-# prod project.
+# prod projects.
 empower_group_to_fake_prod \
-    "${PROMOTER_TESTPROD_PROJECT}" \
+    "${PROMOTER_TEST_PROD_PROJECT}" \
+    "k8s-infra-staging-cip-test@kubernetes.io"
+empower_group_to_fake_prod \
+    "${GCR_BACKUP_TEST_PROD_PROJECT}" \
+    "k8s-infra-staging-cip-test@kubernetes.io"
+empower_group_to_fake_prod \
+    "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" \
     "k8s-infra-staging-cip-test@kubernetes.io"
 
-# Special case: grant the image promoter service account access to their
-# staging, to allow e2e tests to run as that account, instead of yet a another.
+# Special case: grant the image promoter test service account access to their
+# staging, to allow e2e tests to run as that account, instead of yet another.
 empower_service_account_to_artifacts \
-    $(svc_acct_email "${PROMOTER_TESTPROD_PROJECT}" "${PROMOTER_SVCACCT}") \
-    "${PROMOTER_STAGING_PROJECT}"
+    $(svc_acct_email "${PROMOTER_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
+    "${PROMOTER_TEST_STAGING_PROJECT}"
 
 # Special case: grant the release tools testing group access to their fake
 # prod project.
