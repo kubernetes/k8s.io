@@ -23,9 +23,6 @@ spec:
           image: k8s.gcr.io/gcsweb:v1.1.0
           args:
             - -upgrade-proxied-http-to-https
-            - -b=android-ci
-            - -b=crreleases
-            - -b=istio-prow
             - -b=kubernetes-jenkins
             - -b=kubernetes-release
             - -b=kubernetes-release-dev
