@@ -246,29 +246,29 @@ func printGroupMembersAndSettings(srv *admin.Service, srv2 *groupssettings.Servi
 		log.Println("No groups found.")
 		return nil
 	}
-	log.Printf("groups:")
+	fmt.Printf("groups:\n")
 	for _, g := range g.Groups {
-		log.Printf("  - email-id: %s\n", g.Email)
-		log.Printf("    name: %s\n", g.Name)
-		log.Printf("    description: |-\n")
+		fmt.Printf("  - email-id: %s\n", g.Email)
+		fmt.Printf("    name: %s\n", g.Name)
+		fmt.Printf("    description: |-\n")
 		for _, line := range strings.Split(g.Description, "\n") {
-			log.Printf("      %s\n", line)
+			fmt.Printf("      %s\n", line)
 		}
-		log.Printf("    settings: \n")
+		fmt.Printf("    settings: \n")
 		g2, err := srv2.Groups.Get(g.Email).Do()
 		if err != nil {
 			return fmt.Errorf("unable to retrieve group info for group %s: %v", g.Email, err)
 		}
-		log.Printf("      AllowExternalMembers: \"%s\"\n", g2.AllowExternalMembers)
-		log.Printf("      WhoCanJoin: \"%s\"\n", g2.WhoCanJoin)
-		log.Printf("      WhoCanViewMembership: \"%s\"\n", g2.WhoCanViewMembership)
-		log.Printf("      WhoCanViewGroup: \"%s\"\n", g2.WhoCanViewGroup)
-		log.Printf("      WhoCanDiscoverGroup: \"%s\"\n", g2.WhoCanDiscoverGroup)
-		log.Printf("      WhoCanInvite: \"%s\"\n", g2.WhoCanInvite)
-		log.Printf("      WhoCanAdd: \"%s\"\n", g2.WhoCanAdd)
-		log.Printf("      WhoCanApproveMembers: \"%s\"\n", g2.WhoCanApproveMembers)
-		log.Printf("      WhoCanModifyMembers: \"%s\"\n", g2.WhoCanModifyMembers)
-		log.Printf("      WhoCanModerateMembers: \"%s\"\n", g2.WhoCanModerateMembers)
+		fmt.Printf("      AllowExternalMembers: \"%s\"\n", g2.AllowExternalMembers)
+		fmt.Printf("      WhoCanJoin: \"%s\"\n", g2.WhoCanJoin)
+		fmt.Printf("      WhoCanViewMembership: \"%s\"\n", g2.WhoCanViewMembership)
+		fmt.Printf("      WhoCanViewGroup: \"%s\"\n", g2.WhoCanViewGroup)
+		fmt.Printf("      WhoCanDiscoverGroup: \"%s\"\n", g2.WhoCanDiscoverGroup)
+		fmt.Printf("      WhoCanInvite: \"%s\"\n", g2.WhoCanInvite)
+		fmt.Printf("      WhoCanAdd: \"%s\"\n", g2.WhoCanAdd)
+		fmt.Printf("      WhoCanApproveMembers: \"%s\"\n", g2.WhoCanApproveMembers)
+		fmt.Printf("      WhoCanModifyMembers: \"%s\"\n", g2.WhoCanModifyMembers)
+		fmt.Printf("      WhoCanModerateMembers: \"%s\"\n", g2.WhoCanModerateMembers)
 
 		l, err := srv.Members.List(g.Email).Do()
 		if err != nil {
@@ -278,26 +278,26 @@ func printGroupMembersAndSettings(srv *admin.Service, srv2 *groupssettings.Servi
 		if len(l.Members) == 0 {
 			log.Println("No members found in group.")
 		} else {
-			log.Printf("    owners:")
+			fmt.Printf("    owners:\n")
 			for _, m := range l.Members {
 				if m.Role == "OWNER" {
-					log.Printf("      - %s\n", m.Email)
+					fmt.Printf("      - %s\n", m.Email)
 				}
 			}
-			log.Printf("    managers:")
+			fmt.Printf("    managers:\n")
 			for _, m := range l.Members {
 				if m.Role == "MANAGER" {
-					log.Printf("      - %s\n", m.Email)
+					fmt.Printf("      - %s\n", m.Email)
 				}
 			}
-			log.Printf("    members:")
+			fmt.Printf("    members:\n")
 			for _, m := range l.Members {
 				if m.Role == "MEMBER" {
-					log.Printf("      - %s\n", m.Email)
+					fmt.Printf("      - %s\n", m.Email)
 				}
 			}
 		}
-		log.Printf("\n")
+		fmt.Printf("\n")
 
 	}
 	return nil
