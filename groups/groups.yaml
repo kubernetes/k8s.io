@@ -3,7 +3,162 @@
 # group is prefixed with "k8s-infra" to avoid polluting the other existing gsuite
 # mailing lists.
 groups:
+  - email-id: blog@kubernetes.io
+    name: blog editors
+    description: |-
+      Created via https://github.com/kubernetes/community/issues/3763
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "CAN_REQUEST_TO_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - jorgec@vmware.com
+      - kaitlynbarnard10@gmail.com
+      - parispittman@google.com
+      - rkillen@umich.edu
+      - zcorleissen@linuxfoundation.org
+    members:
+      - codyclark@google.com
+      - vonguard@gmail.com
+
+  - email-id: community@kubernetes.io
+    name: community
+    description: |-
+      
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "ALL_IN_DOMAIN_CAN_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - ihor@cncf.io
+      - jorgec@vmware.com
+      - killen.bob@gmail.com
+      - parispittman@google.com
+    managers:
+      - pal.nabarun95@gmail.com
+
+  - email-id: conduct@kubernetes.io
+    name: conduct
+    description: |-
+      
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "CAN_REQUEST_TO_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - aeva.online@gmail.com
+      - carolyn.vanslyck@microsoft.com
+      - jaice@google.com
+      - tasha.drew@gmail.com
+
+  - email-id: distributors-announce@kubernetes.io
+    name: distributors-announce
+    description: |-
+      
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "ALL_IN_DOMAIN_CAN_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - bphilips@redhat.com
+      - brandon@ifup.org
+      - cjcullen@google.com
+      - joelsmith@redhat.com
+      - jonathan.pulsifer@shopify.com
+      - lhinds@redhat.com
+      - liggitt@google.com
+      - stclair@google.com
+
+  - email-id: election@kubernetes.io
+    name: election
+    description: |-
+      Kubernetes elections committee
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "ALL_IN_DOMAIN_CAN_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - briangrant@google.com
+      - ihor@cncf.io
+      - jorgec@vmware.com
+      - killen.bob@gmail.com
+
+  - email-id: github@kubernetes.io
+    name: github
+    description: |-
+      Kubernetes GitHub Admins
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - cblecker@gmail.com
+      - sc3@kubernetes.io
+      - spiffxp@gmail.com
+      - spiffxp@google.com
+    managers:
+      - fejta@google.com
+      - ihor.dvoretskyi@gmail.com
+      - nikitaraghunath@gmail.com
+      - rkillen@umich.edu
+
   - email-id: k8s-infra-alerts@kubernetes.io
+    name: k8s-infra-alerts
+    description: |-
+      alerts for wg-k8s-infra
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - amwat@google.com
       - bentheelder@google.com
@@ -14,21 +169,108 @@ groups:
       - mkumatag@in.ibm.com
       - spiffxp@google.com
       - thockin@google.com
-  - email-id: k8s-infra-bigquery-admins@kubernetes.io
+
+  - email-id: k8s-infra-artifact-admins@kubernetes.io
+    name: k8s-infra-artifact-admins
+    description: |-
+      ACL for artifact-admins
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - davanum@gmail.com
+      - justinsb@google.com
+      - michelle.noorali@gmail.com
+      - spiffxp@google.com
       - thockin@google.com
+
+  - email-id: k8s-infra-aws-admins@kubernetes.io
+    name: k8s-infra-aws-admins
+    description: |-
+      ACL for aws-admins
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - ihor@cncf.io
+      - justinsb@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-bigquery-admins@kubernetes.io
+    name: k8s-infra-bigquery-admins
+    description: |-
+      ACL for bigquery-admins
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - davanum@gmail.com
       - ihor@cncf.io
       - spiffxp@google.com
-  - email-id: k8s-infra-cluster-admins@kubernetes.io
-    members:
-      - davanum@gmail.com
       - thockin@google.com
-      - justinsb@google.com
-      - stefan.schimanski@gmail.com
-      - nikitaraghunath@gmail.com
+
+  - email-id: k8s-infra-cluster-admins@kubernetes.io
+    name: k8s-infra-cluster-admins
+    description: |-
+      ACL for cluster-admins
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
       - cblecker@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+      - thockin@google.com
+
   - email-id: k8s-infra-cluster-operators@kubernetes.io
+    name: k8s-infra-cluster-operators
+    description: |-
+      ACL for cluster-operators
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - ameukam@gmail.com
       - davanum@gmail.com
@@ -36,12 +278,22 @@ groups:
       - justinsb@google.com
       - spiffxp@google.com
       - thockin@google.com
-  - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
-    members:
-      - james@munnelly.eu
-      - thockin@google.com
-      - cblecker@gmail.com
+
   - email-id: k8s-infra-dns-admins@kubernetes.io
+    name: k8s-infra-dns-admins
+    description: |-
+      ACL for dns-admins
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - bentheelder@google.com
       - brendan.d.burns@gmail.com
@@ -52,170 +304,735 @@ groups:
       - jgrafton@google.com
       - spiffxp@google.com
       - thockin@google.com
+
   - email-id: k8s-infra-gcp-accounting@kubernetes.io
+    name: k8s-infra-gcp-accounting
+    description: |-
+      ACL for GCP accounting
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - davanum@gmail.com
-      - spiffxp@google.com
-      - thockin@google.com
+      - ihor@cncf.io
       - justinsb@google.com
-      - ihor@cncf.io
-  - email-id: k8s-infra-gcp-auditors@kubernetes.io
-    members:
-      - davanum@gmail.com
       - spiffxp@google.com
       - thockin@google.com
-      - ihor@cncf.io
+
+  - email-id: k8s-infra-gcp-auditors@kubernetes.io
+    name: k8s-infra-gcp-auditors
+    description: |-
+      ACL for GCP Auditors
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - davanum@gmail.com
       - hh@ii.coop
+      - ihor@cncf.io
+      - spiffxp@google.com
+      - thockin@google.com
+
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
-    description: Organization Administrators for kubernetes.io
+    name: Organization Administrators for kubernetes.io
+    description: |-
+      Organization Administrators for kubernetes.io
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - cblecker@gmail.com
+      - davanum@gmail.com
       - ihor@cncf.io
-      - davanum@gmail.com
       - spiffxp@google.com
       - thockin@google.com
-  - email-id: k8s-infra-artifact-admins@kubernetes.io
+
+  - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
+    name: k8s-infra-rbac-cert-manager
+    description: |-
+      ACL for Cert Manager RBAC
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
-      - davanum@gmail.com
-      - spiffxp@google.com
+      - cblecker@gmail.com
+      - james@munnelly.eu
       - thockin@google.com
-      - justinsb@google.com
-      - michelle.noorali@gmail.com
+
   - email-id: k8s-infra-sig-release-prototype@kubernetes.io
+    name: k8s-infra-sig-release-prototype
+    description: |-
+      ACL for sig-release prototype
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
-      - davanum@gmail.com
-      - spiffxp@google.com
-      - thockin@google.com
-      - ihor@cncf.io
-      - hh@ii.coop
-      - tpepper@gmail.com
       - bartek@smykla.com
+      - davanum@gmail.com
+      - hh@ii.coop
+      - ihor@cncf.io
+      - spiffxp@google.com
+      - thockin@google.com
+      - tpepper@gmail.com
+
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
+    name: k8s-infra-staging-artifact-promoter
+    description: |-
+      ACL for staging artifact-promoter
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - davanum@gmail.com
       - ihor@cncf.io
       - linusa@google.com
       - spiffxp@google.com
       - thockin@google.com
-  - email-id: k8s-infra-staging-cip-test@kubernetes.io
-    members:
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - linusa@google.com
-      - spiffxp@google.com
-      - thockin@google.com
-  - email-id: k8s-infra-staging-csi@kubernetes.io
-    members:
-      - davanum@gmail.com
-  - email-id: k8s-infra-staging-coredns@kubernetes.io
-    members:
-      - davanum@gmail.com
+
   - email-id: k8s-infra-staging-build-image@kubernetes.io
+    name: k8s-infra-staging-build-image
+    description: |-
+      ACL for staging build images
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - davanum@gmail.com
       - jbperez@google.com
       - linusa@google.com
-  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
-    members:
-      - davanum@gmail.com
-      - ha.chuck@gmail.com
-      - detiber@gmail.com
-      - hi@amycod.es
-      - goldsteina@vmware.com
-      - prignanov@vmware.com
-  - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
-    members:
-      - davanum@gmail.com
-      - ha.chuck@gmail.com
-      - detiber@gmail.com
-      - hi@amycod.es
-      - goldsteina@vmware.com
-      - prignanov@vmware.com
-  - email-id: k8s-infra-staging-cluster-api-azure@kubernetes.io
-    members:
-      - davanum@gmail.com
-      - Stephen@agst.us
-      - nicklaneovi@gmail.com
-      - prignanov@vmware.com
-  - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
-    members:
-      - davanum@gmail.com
-      - detiber@gmail.com
-      - justinsb@google.com
-      - prignanov@vmware.com
-  - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
-    members:
-      - sbueringer@gmail.com
-      - jichenjc@cn.ibm.com
+
   - email-id: k8s-infra-staging-capi-docker@kubernetes.io
+    name: k8s-infra-staging-capi-docker
+    description: |-
+      ACL for staging CAPI for docker
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - davanum@gmail.com
-      - ha.chuck@gmail.com
       - detiber@gmail.com
-      - hi@amycod.es
       - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
       - prignanov@vmware.com
+
   - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
+    name: k8s-infra-staging-capi-kubeadm
+    description: |-
+      ACL for staging CAPI for kubeadm
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - davanum@gmail.com
-      - ha.chuck@gmail.com
       - detiber@gmail.com
-      - hi@amycod.es
       - frostl@vmware.com
       - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
       - prignanov@vmware.com
-  - email-id: k8s-infra-staging-descheduler@kubernetes.io
+
+  - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
+    name: k8s-infra-staging-capi-openstack
+    description: |-
+      ACL for staging CAPI for OpenStack
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
-      - ravisantoshgudimetla@gmail.com
-      - avesh.ncsu@gmail.com
-      - spiffxp@google.com
+      - jichenjc@cn.ibm.com
+      - sbueringer@gmail.com
+
+  - email-id: k8s-infra-staging-cip-test@kubernetes.io
+    name: k8s-infra-staging-cip-test
+    description: |-
+      ACL for staging cip-test buckets
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
       - davanum@gmail.com
-  - email-id: k8s-infra-staging-kops@kubernetes.io
-    members:
       - ihor@cncf.io
-      - davanum@gmail.com
+      - linusa@google.com
       - spiffxp@google.com
       - thockin@google.com
-      - justinsb@google.com
-  - email-id: k8s-infra-staging-multitenancy@kubernetes.io
+
+  - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
+    name: k8s-infra-staging-cluster-api-aws
+    description: |-
+      ACL for staging CAPI for AWS
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
-      - tasha.drew@gmail.com
-      - srampal@cisco.com
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-cluster-api-azure@kubernetes.io
+    name: k8s-infra-staging-cluster-api-azure
+    description: |-
+      ACL for staging CAPI for Azure
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - davanum@gmail.com
+      - nicklaneovi@gmail.com
+      - prignanov@vmware.com
+      - Stephen@agst.us
+
+  - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
+    name: k8s-infra-staging-cluster-api-gcp
+    description: |-
+      ACL for staging CAPI for GCP
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - justinsb@google.com
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
+    name: k8s-infra-staging-cluster-api
+    description: |-
+      ACL for staging CAPI
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-coredns@kubernetes.io
+    name: k8s-infra-staging-coredns
+    description: |-
+      ACL for staging coredns
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - davanum@gmail.com
+
+  - email-id: k8s-infra-staging-csi@kubernetes.io
+    name: k8s-infra-staging-csi
+    description: |-
+      ACL for staging CSI artifacts
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - davanum@gmail.com
+
+  - email-id: k8s-infra-staging-descheduler@kubernetes.io
+    name: k8s-infra-staging-descheduler
+    description: |-
+      ACL for staging descheduler
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - avesh.ncsu@gmail.com
+      - davanum@gmail.com
+      - ravisantoshgudimetla@gmail.com
+      - spiffxp@google.com
+
+  - email-id: k8s-infra-staging-kops@kubernetes.io
+    name: k8s-infra-staging-kops
+    description: |-
+      ACL for staging KOPS
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - justinsb@google.com
+      - spiffxp@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
+    name: k8s-infra-staging-kube-state-metrics
+    description: |-
+      ACL for kube-state-metrics
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    owners:
+    managers:
+    members:
+      - cosiclili@gmail.com
+      - fbranczyk@gmail.com
+      - tariq181290@gmail.com
+
+  - email-id: k8s-infra-staging-multitenancy@kubernetes.io
+    name: k8s-infra-staging-multitenancy
+    description: |-
+      ACL for Multitenancy WG
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
       - f.guo@alibaba-inc.com
       - kevin.fox@pnnl.gov
+      - srampal@cisco.com
+      - tasha.drew@gmail.com
+
   - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
+    name: k8s-infra-staging-publishing-bot
+    description: |-
+      ACL for staging publishing-bot
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
       - davanum@gmail.com
-      - stefan.schimanski@gmail.com
       - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+
   - email-id: k8s-infra-staging-release-test@kubernetes.io
+    name: k8s-infra-staging-release-test
+    description: |-
+      ACL for staging release-test
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
     members:
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - spiffxp@google.com
-      - thockin@google.com
-      - Stephen@agst.us
       - caselim@gmail.com
-      - tpepper@gmail.com
-  - email-id: k8s-infra-team-private@kubernetes.io
-    members:
-      - jgrafton@google.com
       - davanum@gmail.com
-      - spiffxp@google.com
-      - thockin@google.com
-      - justinsb@google.com
-      - cblecker@gmail.com
       - ihor@cncf.io
+      - spiffxp@google.com
+      - Stephen@agst.us
+      - thockin@google.com
+      - tpepper@gmail.com
+
+  - email-id: k8s-infra-team-private@kubernetes.io
+    name: k8s-infra-team-private
+    description: |-
+      Mailing list for wg-infra-team private communications
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+    members:
       - bentheelder@google.com
       - brendan.d.burns@gmail.com
-  - email-id: k8s-infra-aws-admins@kubernetes.io
-    description: Group that owns administrative access to AWS accounts
-    members:
+      - cblecker@gmail.com
+      - davanum@gmail.com
       - ihor@cncf.io
+      - jgrafton@google.com
       - justinsb@google.com
+      - spiffxp@google.com
       - thockin@google.com
-  - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
-    members:
-      - fbranczyk@gmail.com
-      - cosiclili@gmail.com
-      - tariq181290@gmail.com
+
+  - email-id: moderators@kubernetes.io
+    name: moderators
+    description: |-
+      Moderators for various Community properties
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "CAN_REQUEST_TO_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "ALL_OWNERS_CAN_INVITE"
+      WhoCanAdd: "ALL_OWNERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_OWNERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_ONLY"
+      WhoCanModerateMembers: "OWNERS_ONLY"
+    owners:
+      - parispittman@google.com
+    managers:
+      - alarcj137@gmail.com
+      - contributors@kubernetes.io
+      - dylan.graham@gmail.com
+      - idealhack@gmail.com
+      - ihor@cncf.io
+      - jaice@google.com
+      - jeef111x@gmail.com
+      - jorgec@vmware.com
+      - ktbry@google.com
+      - noah@coderanger.net
+      - rkillen@umich.edu
+
+  - email-id: release-managers-private@kubernetes.io
+    name: release-managers-private
+    description: |-
+      Release managers for security releases. Membership should include release leads and patch release managers.
+      
+      Membership by release leads and patch release managers.
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - Stephen@agst.us
+    managers:
+      - cmiles@pivotal.io
+      - feiskyer@gmail.com
+      - tpepper@vmware.com
+
+  - email-id: release-managers@kubernetes.io
+    name: release-managers
+    description: |-
+      Release Managers communications
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "CAN_REQUEST_TO_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - caselim@gmail.com
+      - cmiles@pivotal.io
+      - saugustus@vmware.com
+      - Stephen@agst.us
+      - tpepper@gmail.com
+      - tpepper@vmware.com
+
+  - email-id: security-discuss-private@kubernetes.io
+    name: security-discuss-private
+    description: |-
+      Private discussion forum for PST members.
+      
+      https://github.com/kubernetes/sig-release/blob/master/security-release-process-documentation/security-release-process.md#product-security-team-pst
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - bphilips@redhat.com
+      - brandon@ifup.org
+      - cjcullen@google.com
+      - joelsmith@redhat.com
+      - jonathan.pulsifer@shopify.com
+      - jordan@liggitt.net
+      - lhinds@redhat.com
+      - liggitt@google.com
+      - sc1@kubernetes.io
+      - tallclair@google.com
+
+  - email-id: security-release-team@kubernetes.io
+    name: security-release-team
+    description: |-
+      security release team mailing list
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "ALL_IN_DOMAIN_CAN_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - Stephen@agst.us
+
+  - email-id: security@kubernetes.io
+    name: security
+    description: |-
+      
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - bphilips@redhat.com
+      - brandon@ifup.org
+      - cjcullen@google.com
+      - joelsmith@redhat.com
+      - jonathan.pulsifer@shopify.com
+      - jordan@liggitt.net
+      - lhinds@redhat.com
+      - liggitt@google.com
+      - tallclair@google.com
+
+  - email-id: steering-private@kubernetes.io
+    name: steering-private
+    description: |-
+      Private list for the Kubernetes Steering Committee
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - nikhitaraghunath@gmail.com
+      - parispittman@google.com
+      - spiffxp@gmail.com
+      - timothysc@gmail.com
+
+  - email-id: steering@kubernetes.io
+    name: steering
+    description: |-
+      Public list for the Kubernetes Steering Committee.
+      
+      This list is for Steering Committee business.  It is public-access for transparency and so that community can raise topics, but it is not a forum for public debate.
+      
+      https://github.com/kubernetes/steering
+    settings: 
+      AllowExternalMembers: "true"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    owners:
+      - bburns@microsoft.com
+      - briangrant@google.com
+      - ccoleman@redhat.com
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - joe@heptio.com
+      - michelle.noorali@gmail.com
+      - sarah.novotny@gmail.com
+      - spiffxp@gmail.com
+      - thockin@google.com
+      - timothysc@gmail.com
+    managers:
+      - ihor.dvoretskyi@gmail.com
+      - jdumars@gmail.com
+      - jorge@heptio.com
+      - nikitaraghunath@gmail.com
+      - parispittman@google.com
