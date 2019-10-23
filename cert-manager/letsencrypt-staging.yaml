@@ -9,10 +9,6 @@ spec:
     privateKeySecretRef:
       name: letencrypt-staging-account-key
 
-    # Leave the old-format HTTP01 config *enabled* until we have confirmed that
-    # all Certificate resources no longer specify a spec.acme field.
-    http01: {}
-
     solvers:
 
     # Make a special exception for gcsweb - it has its own Ingress resource, so
