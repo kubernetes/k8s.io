@@ -69,7 +69,7 @@ PROMOTER_TEST_STAGING_PROJECT="k8s-staging-cip-test"
 
 # These are for testing the GCR backup/restore process.
 GCR_BACKUP_TEST_PROD_PROJECT="k8s-gcr-backup-test-prod"
-GCR_BACKUP_TEST_PRODBAK_PROJECT="${ARTIFACT_BACKUP_TEST_PROD_PROJECT}-bak"
+GCR_BACKUP_TEST_PRODBAK_PROJECT="${GCR_BACKUP_TEST_PROD_PROJECT}-bak"
 
 # This is for testing the release tools.
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
