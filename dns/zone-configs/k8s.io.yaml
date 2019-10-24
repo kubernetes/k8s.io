@@ -187,6 +187,12 @@ prow:
 monitoring.prow:
   type: A
   value: 130.211.20.136
+prow-canary:
+  type: A
+  value: 35.244.182.122
+monitoring.prow-canary:
+  type: A
+  value: 34.102.128.31
 prs:
   type: CNAME
   value: redirect.k8s.io.
