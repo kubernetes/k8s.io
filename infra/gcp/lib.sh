@@ -275,6 +275,16 @@ function empower_group_for_gcb() {
         projects add-iam-policy-binding "${project}" \
         --member "group:${group}" \
         --role roles/cloudbuild.builds.editor
+
+    # TODO(justaugustus/thockin): This only exists to grant the 
+    #      serviceusage.services.use permission allow writers access to execute
+    #      Cloud Builds. We should refactor this once we develop custom roles.
+    #
+    #      Ref: https://cloud.google.com/storage/docs/access-control/iam-console
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "group:${group}" \
+        --role roles/serviceusage.serviceUsageConsumer
 }
 
 # Grant privileges to prow in a staging project
