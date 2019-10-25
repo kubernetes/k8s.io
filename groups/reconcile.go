@@ -160,7 +160,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		if strings.HasPrefix(g.EmailId, "k8s-infra-") {
+		if g.Settings["ReconcileMembers"] == "true" {
 			members := append(g.Owners, g.Managers...)
 			members = append(members, g.Members...)
 			err = removeMembersFromGroup(srv, g.EmailId, members)
@@ -370,11 +370,6 @@ func deleteGroupsIfNecessary(service *admin.Service) error {
 		return nil
 	}
 	for _, g := range g.Groups {
-		// Don't touch existing mailing lists, we should
-		// always prefix with "k8s-infra-"
-		if !strings.HasPrefix(g.Email, "k8s-infra-") {
-			continue
-		}
 		found := false
 		for _, g2 := range groupsConfig.Groups {
 			if g2.EmailId == g.Email {
