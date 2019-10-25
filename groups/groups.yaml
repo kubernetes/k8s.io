@@ -314,6 +314,7 @@ groups:
       - nikitaraghunath@gmail.com
       - stefan.schimanski@gmail.com
       - thockin@google.com
+      - bartek@smykla.com
 
   - email-id: k8s-infra-cluster-operators@kubernetes.io
     name: k8s-infra-cluster-operators
