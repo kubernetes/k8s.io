@@ -772,6 +772,28 @@ groups:
       - ravisantoshgudimetla@gmail.com
       - spiffxp@google.com
 
+  - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
+    name: k8s-infra-staging-kas-netowrk-proxy
+    description: |-
+      ACL for staging apiserver-network-proxy
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
+    members:
+      - mike@crute.us
+      - patrik@ptrk.io
+      - wfender@google.com
+      - ygui@google.com
+
   - email-id: k8s-infra-staging-kops@kubernetes.io
     name: k8s-infra-staging-kops
     description: |-
