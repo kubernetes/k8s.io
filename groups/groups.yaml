@@ -773,7 +773,7 @@ groups:
       - spiffxp@google.com
 
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
-    name: k8s-infra-staging-kas-netowrk-proxy
+    name: k8s-infra-staging-kas-network-proxy
     description: |-
       ACL for staging apiserver-network-proxy
     settings:
