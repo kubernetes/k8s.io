@@ -34,6 +34,8 @@ import (
 	"google.golang.org/api/googleapi"
 	"google.golang.org/api/groupssettings/v1"
 	"gopkg.in/yaml.v2"
+
+	"k8s.io/test-infra/pkg/genyaml"
 )
 
 type Config struct {
@@ -51,26 +53,26 @@ type Config struct {
 }
 
 type GroupsConfig struct {
-	// List of google groups
-	Groups []GoogleGroup `yaml:"groups,omitempty"`
+	// This file has the list of groups in kubernetes.io gsuite org that we use
+	// for granting permissions to various community resources.
+	Groups []GoogleGroup `yaml:"groups,omitempty" json:"groups,omitempty"`
 }
 
 type GoogleGroup struct {
-	EmailId     string `yaml:"email-id"`
-	Name        string `yaml:"name"`
-	Description string `yaml:"description"`
+	EmailId     string `yaml:"email-id" json:"email-id"`
+	Name        string `yaml:"name" json:"name"`
+	Description string `yaml:"description" json:"description"`
 
-	// settings that govern who can do what actions
-	Settings map[string]string `yaml:"settings,omitempty"`
+	Settings map[string]string `yaml:"settings,omitempty" json:"settings,omitempty"`
 
-	// List of owners of the google group
-	Owners []string `yaml:"owners,omitempty"`
+	// +optional
+	Owners []string `yaml:"owners,omitempty" json:"owners,omitempty"`
 
-	// List of managers of the google group
-	Managers []string `yaml:"managers,omitempty"`
+	// +optional
+	Managers []string `yaml:"managers,omitempty" json:"managers,omitempty"`
 
-	// List of members in the google group
-	Members []string `yaml:"members,omitempty"`
+	// +optional
+	Members []string `yaml:"members,omitempty" json:"members,omitempty"`
 }
 
 func Usage() {
@@ -129,7 +131,6 @@ func main() {
 	}
 
 	if *printConfig {
-		log.Println(" =================== Current Status ======================")
 		err = printGroupMembersAndSettings(srv, srv2)
 		if err != nil {
 			log.Fatal(err)
@@ -246,29 +247,28 @@ func printGroupMembersAndSettings(srv *admin.Service, srv2 *groupssettings.Servi
 		log.Println("No groups found.")
 		return nil
 	}
-	fmt.Printf("groups:\n")
+	var groupsConfig GroupsConfig
 	for _, g := range g.Groups {
-		fmt.Printf("  - email-id: %s\n", g.Email)
-		fmt.Printf("    name: %s\n", g.Name)
-		fmt.Printf("    description: |-\n")
-		for _, line := range strings.Split(g.Description, "\n") {
-			fmt.Printf("      %s\n", line)
+		group := GoogleGroup{
+			EmailId: g.Email,
+			Name: g.Name,
+			Description: g.Description,
 		}
-		fmt.Printf("    settings: \n")
 		g2, err := srv2.Groups.Get(g.Email).Do()
 		if err != nil {
 			return fmt.Errorf("unable to retrieve group info for group %s: %v", g.Email, err)
 		}
-		fmt.Printf("      AllowExternalMembers: \"%s\"\n", g2.AllowExternalMembers)
-		fmt.Printf("      WhoCanJoin: \"%s\"\n", g2.WhoCanJoin)
-		fmt.Printf("      WhoCanViewMembership: \"%s\"\n", g2.WhoCanViewMembership)
-		fmt.Printf("      WhoCanViewGroup: \"%s\"\n", g2.WhoCanViewGroup)
-		fmt.Printf("      WhoCanDiscoverGroup: \"%s\"\n", g2.WhoCanDiscoverGroup)
-		fmt.Printf("      WhoCanInvite: \"%s\"\n", g2.WhoCanInvite)
-		fmt.Printf("      WhoCanAdd: \"%s\"\n", g2.WhoCanAdd)
-		fmt.Printf("      WhoCanApproveMembers: \"%s\"\n", g2.WhoCanApproveMembers)
-		fmt.Printf("      WhoCanModifyMembers: \"%s\"\n", g2.WhoCanModifyMembers)
-		fmt.Printf("      WhoCanModerateMembers: \"%s\"\n", g2.WhoCanModerateMembers)
+		group.Settings = make(map[string]string)
+		group.Settings["AllowExternalMembers"] = g2.AllowExternalMembers
+		group.Settings["WhoCanJoin"] = g2.WhoCanJoin
+		group.Settings["WhoCanViewMembership"] = g2.WhoCanViewMembership
+		group.Settings["WhoCanViewGroup"] = g2.WhoCanViewGroup
+		group.Settings["WhoCanDiscoverGroup"] = g2.WhoCanDiscoverGroup
+		group.Settings["WhoCanInvite"] = g2.WhoCanInvite
+		group.Settings["WhoCanAdd"] = g2.WhoCanAdd
+		group.Settings["WhoCanApproveMembers"] = g2.WhoCanApproveMembers
+		group.Settings["WhoCanModifyMembers"] = g2.WhoCanModifyMembers
+		group.Settings["WhoCanModerateMembers"] = g2.WhoCanModerateMembers
 
 		l, err := srv.Members.List(g.Email).Do()
 		if err != nil {
@@ -278,28 +278,32 @@ func printGroupMembersAndSettings(srv *admin.Service, srv2 *groupssettings.Servi
 		if len(l.Members) == 0 {
 			log.Println("No members found in group.")
 		} else {
-			fmt.Printf("    owners:\n")
 			for _, m := range l.Members {
 				if m.Role == "OWNER" {
-					fmt.Printf("      - %s\n", m.Email)
+					group.Owners = append(group.Owners, m.Email)
 				}
 			}
-			fmt.Printf("    managers:\n")
 			for _, m := range l.Members {
 				if m.Role == "MANAGER" {
-					fmt.Printf("      - %s\n", m.Email)
+					group.Managers = append(group.Managers, m.Email)
 				}
 			}
-			fmt.Printf("    members:\n")
 			for _, m := range l.Members {
 				if m.Role == "MEMBER" {
-					fmt.Printf("      - %s\n", m.Email)
+					group.Members = append(group.Members, m.Email)
 				}
 			}
 		}
-		fmt.Printf("\n")
 
+		groupsConfig.Groups = append(groupsConfig.Groups, group)
 	}
+
+	cm := genyaml.NewCommentMap("reconcile.go")
+	yamlSnippet, err := cm.GenYaml(groupsConfig)
+	if err != nil {
+		return fmt.Errorf("unable to generate yaml for groups : %v", err)
+	}
+	fmt.Println(yamlSnippet)
 	return nil
 }
 
