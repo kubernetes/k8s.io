@@ -456,6 +456,7 @@ groups:
       - cblecker@gmail.com
       - james@munnelly.eu
       - thockin@google.com
+      - bartsmykla@gmail.com  # sock-puppet for testing
 
   - email-id: k8s-infra-sig-release-prototype@kubernetes.io
     name: k8s-infra-sig-release-prototype
