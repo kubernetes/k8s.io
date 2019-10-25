@@ -25,7 +25,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strings"
 	"time"
 
 	"golang.org/x/net/context"
@@ -250,8 +249,8 @@ func printGroupMembersAndSettings(srv *admin.Service, srv2 *groupssettings.Servi
 	var groupsConfig GroupsConfig
 	for _, g := range g.Groups {
 		group := GoogleGroup{
-			EmailId: g.Email,
-			Name: g.Name,
+			EmailId:     g.Email,
+			Name:        g.Name,
 			Description: g.Description,
 		}
 		g2, err := srv2.Groups.Get(g.Email).Do()
@@ -494,7 +493,7 @@ func addOrUpdateMemberToGroup(service *admin.Service, groupEmailId string, membe
 				// We did not find the person in the google group, so we add them
 				if config.ConfirmChanges {
 					_, err := service.Members.Update(groupEmailId, m, &admin.Member{
-						Role:  role,
+						Role: role,
 					}).Do()
 					if err != nil {
 						return fmt.Errorf("unable to update %s to %s as %s : %v", m, groupEmailId, role, err)
