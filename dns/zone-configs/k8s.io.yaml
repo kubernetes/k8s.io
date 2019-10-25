@@ -265,3 +265,7 @@ cloud-provider-vsphere.sigs:
 minikube.sigs:
   type: CNAME
   value: kubernetes-sigs-minikube.netlify.com.
+# https://github.com/kubernetes/kops docs (@mikesplain @justinsb)
+kops.sigs:
+  type: CNAME
+  value: kubernetes-kops.netlify.com.
