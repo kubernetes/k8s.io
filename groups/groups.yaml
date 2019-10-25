@@ -7,17 +7,18 @@ groups:
     name: blog editors
     description: |-
       Created via https://github.com/kubernetes/community/issues/3763
-    settings: 
+    settings:
       AllowExternalMembers: "true"
-      WhoCanJoin: "CAN_REQUEST_TO_JOIN"
-      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
     owners:
       - jorgec@vmware.com
       - kaitlynbarnard10@gmail.com
@@ -31,18 +32,19 @@ groups:
   - email-id: community@kubernetes.io
     name: community
     description: |-
-      
-    settings: 
+
+    settings:
       AllowExternalMembers: "true"
-      WhoCanJoin: "ALL_IN_DOMAIN_CAN_JOIN"
-      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
     owners:
       - ihor@cncf.io
       - jorgec@vmware.com
@@ -50,22 +52,26 @@ groups:
       - parispittman@google.com
     managers:
       - pal.nabarun95@gmail.com
+    members:
+      - dgiles@linuxfoundation.org
+      - jberkus@redhat.com
 
   - email-id: conduct@kubernetes.io
     name: conduct
     description: |-
-      
-    settings: 
+
+    settings:
       AllowExternalMembers: "true"
-      WhoCanJoin: "CAN_REQUEST_TO_JOIN"
-      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
     owners:
       - aeva.online@gmail.com
       - carolyn.vanslyck@microsoft.com
@@ -75,18 +81,19 @@ groups:
   - email-id: distributors-announce@kubernetes.io
     name: distributors-announce
     description: |-
-      
-    settings: 
+
+    settings:
       AllowExternalMembers: "true"
-      WhoCanJoin: "ALL_IN_DOMAIN_CAN_JOIN"
-      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "false"
     owners:
       - bphilips@redhat.com
       - brandon@ifup.org
@@ -101,28 +108,7 @@ groups:
     name: election
     description: |-
       Kubernetes elections committee
-    settings: 
-      AllowExternalMembers: "true"
-      WhoCanJoin: "ALL_IN_DOMAIN_CAN_JOIN"
-      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
-      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
-      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
-      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
-      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
-    owners:
-      - briangrant@google.com
-      - ihor@cncf.io
-      - jorgec@vmware.com
-      - killen.bob@gmail.com
-
-  - email-id: github@kubernetes.io
-    name: github
-    description: |-
-      Kubernetes GitHub Admins
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -133,9 +119,31 @@ groups:
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
+    owners:
+      - briangrant@google.com
+      - ihor@cncf.io
+      - jorgec@vmware.com
+      - killen.bob@gmail.com
+
+  - email-id: github@kubernetes.io
+    name: github
+    description: |-
+      Kubernetes GitHub Admins
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
     owners:
       - cblecker@gmail.com
-      - sc3@kubernetes.io
       - spiffxp@gmail.com
       - spiffxp@google.com
     managers:
@@ -148,7 +156,7 @@ groups:
     name: k8s-infra-alerts
     description: |-
       alerts for wg-k8s-infra
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -159,6 +167,53 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
+    members:
+      - amwat@google.com
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - jgrafton@google.com
+      - mkumatag@in.ibm.com
+      - spiffxp@google.com
+      - thockin@google.com
+
+  - email-id: gke-security-groups@kubernetes.io
+    name: gke-security-groups
+    description: |-
+      Security Groups for GKE clusters
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-rbac-cert-manager@kubernetes.io
+
+  - email-id: k8s-infra-alerts@kubernetes.io
+    name: k8s-infra-alerts
+    description: |-
+      alerts for wg-k8s-infra
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - amwat@google.com
       - bentheelder@google.com
@@ -174,7 +229,7 @@ groups:
     name: k8s-infra-artifact-admins
     description: |-
       ACL for artifact-admins
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -185,6 +240,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - justinsb@google.com
@@ -196,7 +252,7 @@ groups:
     name: k8s-infra-aws-admins
     description: |-
       ACL for aws-admins
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -207,6 +263,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - ihor@cncf.io
       - justinsb@google.com
@@ -216,7 +273,7 @@ groups:
     name: k8s-infra-bigquery-admins
     description: |-
       ACL for bigquery-admins
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -227,6 +284,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - ihor@cncf.io
@@ -237,7 +295,7 @@ groups:
     name: k8s-infra-cluster-admins
     description: |-
       ACL for cluster-admins
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -248,6 +306,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -260,7 +319,7 @@ groups:
     name: k8s-infra-cluster-operators
     description: |-
       ACL for cluster-operators
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -271,6 +330,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - ameukam@gmail.com
       - davanum@gmail.com
@@ -283,7 +343,7 @@ groups:
     name: k8s-infra-dns-admins
     description: |-
       ACL for dns-admins
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -294,6 +354,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - bentheelder@google.com
       - brendan.d.burns@gmail.com
@@ -309,7 +370,7 @@ groups:
     name: k8s-infra-gcp-accounting
     description: |-
       ACL for GCP accounting
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -320,6 +381,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - ihor@cncf.io
@@ -331,7 +393,7 @@ groups:
     name: k8s-infra-gcp-auditors
     description: |-
       ACL for GCP Auditors
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -342,6 +404,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - hh@ii.coop
@@ -353,7 +416,7 @@ groups:
     name: Organization Administrators for kubernetes.io
     description: |-
       Organization Administrators for kubernetes.io
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -364,6 +427,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -375,7 +439,7 @@ groups:
     name: k8s-infra-rbac-cert-manager
     description: |-
       ACL for Cert Manager RBAC
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -386,6 +450,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - cblecker@gmail.com
       - james@munnelly.eu
@@ -395,7 +460,7 @@ groups:
     name: k8s-infra-sig-release-prototype
     description: |-
       ACL for sig-release prototype
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -406,6 +471,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - bartek@smykla.com
       - davanum@gmail.com
@@ -419,7 +485,7 @@ groups:
     name: k8s-infra-staging-artifact-promoter
     description: |-
       ACL for staging artifact-promoter
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -430,6 +496,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - ihor@cncf.io
@@ -441,7 +508,7 @@ groups:
     name: k8s-infra-staging-build-image
     description: |-
       ACL for staging build images
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -452,6 +519,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - jbperez@google.com
@@ -461,7 +529,7 @@ groups:
     name: k8s-infra-staging-capi-docker
     description: |-
       ACL for staging CAPI for docker
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -472,6 +540,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - detiber@gmail.com
@@ -484,7 +553,7 @@ groups:
     name: k8s-infra-staging-capi-kubeadm
     description: |-
       ACL for staging CAPI for kubeadm
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -495,6 +564,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - detiber@gmail.com
@@ -508,7 +578,7 @@ groups:
     name: k8s-infra-staging-capi-openstack
     description: |-
       ACL for staging CAPI for OpenStack
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -519,6 +589,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - jichenjc@cn.ibm.com
       - sbueringer@gmail.com
@@ -527,7 +598,7 @@ groups:
     name: k8s-infra-staging-cip-test
     description: |-
       ACL for staging cip-test buckets
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -538,6 +609,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - ihor@cncf.io
@@ -549,7 +621,7 @@ groups:
     name: k8s-infra-staging-cluster-api-aws
     description: |-
       ACL for staging CAPI for AWS
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -560,6 +632,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - detiber@gmail.com
@@ -572,7 +645,7 @@ groups:
     name: k8s-infra-staging-cluster-api-azure
     description: |-
       ACL for staging CAPI for Azure
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -583,6 +656,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - nicklaneovi@gmail.com
@@ -593,7 +667,7 @@ groups:
     name: k8s-infra-staging-cluster-api-gcp
     description: |-
       ACL for staging CAPI for GCP
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -604,6 +678,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - detiber@gmail.com
@@ -614,7 +689,7 @@ groups:
     name: k8s-infra-staging-cluster-api
     description: |-
       ACL for staging CAPI
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -625,6 +700,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - detiber@gmail.com
@@ -637,7 +713,7 @@ groups:
     name: k8s-infra-staging-coredns
     description: |-
       ACL for staging coredns
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -648,6 +724,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
 
@@ -655,7 +732,7 @@ groups:
     name: k8s-infra-staging-csi
     description: |-
       ACL for staging CSI artifacts
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -666,6 +743,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
 
@@ -673,7 +751,7 @@ groups:
     name: k8s-infra-staging-descheduler
     description: |-
       ACL for staging descheduler
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -684,6 +762,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - avesh.ncsu@gmail.com
       - davanum@gmail.com
@@ -694,7 +773,7 @@ groups:
     name: k8s-infra-staging-kops
     description: |-
       ACL for staging KOPS
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -705,6 +784,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - ihor@cncf.io
@@ -727,8 +807,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
-    owners:
-    managers:
+      ReconcileMembers: "true"
     members:
       - cosiclili@gmail.com
       - fbranczyk@gmail.com
@@ -738,7 +817,7 @@ groups:
     name: k8s-infra-staging-multitenancy
     description: |-
       ACL for Multitenancy WG
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -749,6 +828,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - f.guo@alibaba-inc.com
       - kevin.fox@pnnl.gov
@@ -759,7 +839,7 @@ groups:
     name: k8s-infra-staging-publishing-bot
     description: |-
       ACL for staging publishing-bot
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -770,6 +850,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - nikitaraghunath@gmail.com
@@ -779,7 +860,7 @@ groups:
     name: k8s-infra-staging-release-test
     description: |-
       ACL for staging release-test
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -790,6 +871,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - caselim@gmail.com
       - davanum@gmail.com
@@ -803,7 +885,7 @@ groups:
     name: k8s-infra-team-private
     description: |-
       Mailing list for wg-infra-team private communications
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
@@ -814,6 +896,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - bentheelder@google.com
       - brendan.d.burns@gmail.com
@@ -829,9 +912,9 @@ groups:
     name: moderators
     description: |-
       Moderators for various Community properties
-    settings: 
+    settings:
       AllowExternalMembers: "true"
-      WhoCanJoin: "CAN_REQUEST_TO_JOIN"
+      WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
       WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
       WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
@@ -840,6 +923,7 @@ groups:
       WhoCanApproveMembers: "ALL_OWNERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_ONLY"
       WhoCanModerateMembers: "OWNERS_ONLY"
+      ReconcileMembers: "true"
     owners:
       - parispittman@google.com
     managers:
@@ -854,38 +938,29 @@ groups:
       - ktbry@google.com
       - noah@coderanger.net
       - rkillen@umich.edu
+    members:
+      - cblecker@gmail.com
+      - guslees@gmail.com
+      - james@munnelly.eu
+      - joel.speed@pusher.com
+      - krajakavitha@gmail.com
+      - lenferinkroy@gmail.com
+      - loic_le_dru@carrefour.com
+      - manjunath.cse@gmail.com
+      - nikitaraghunath@gmail.com
+      - puja@giantswarm.io
+      - ramamoorthypandiyaraja@gmail.com
+      - spiffxp@google.com
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
     description: |-
       Release managers for security releases. Membership should include release leads and patch release managers.
-      
+
       Membership by release leads and patch release managers.
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
-      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
-      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
-      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
-      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
-    owners:
-      - Stephen@agst.us
-    managers:
-      - cmiles@pivotal.io
-      - feiskyer@gmail.com
-      - tpepper@vmware.com
-
-  - email-id: release-managers@kubernetes.io
-    name: release-managers
-    description: |-
-      Release Managers communications
-    settings: 
-      AllowExternalMembers: "true"
-      WhoCanJoin: "CAN_REQUEST_TO_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
       WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
@@ -894,6 +969,39 @@ groups:
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
+    owners:
+      - Stephen@agst.us
+    managers:
+      - cmiles@pivotal.io
+      - feiskyer@gmail.com
+      - tpepper@vmware.com
+    members:
+      - aleksandram@google.com
+      - ctadeu@gmail.com
+      - dmaceachern@vmware.com
+      - hhorl@pivotal.io
+      - idealhack@gmail.com
+      - kubernetes-release-managers-private@googlegroups.com
+      - saugustus@vmware.com
+      - tpepper@gmail.com
+
+  - email-id: release-managers@kubernetes.io
+    name: release-managers
+    description: |-
+      Release Managers communications
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "false"
     owners:
       - caselim@gmail.com
       - cmiles@pivotal.io
@@ -906,19 +1014,20 @@ groups:
     name: security-discuss-private
     description: |-
       Private discussion forum for PST members.
-      
+
       https://github.com/kubernetes/sig-release/blob/master/security-release-process-documentation/security-release-process.md#product-security-team-pst
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
     owners:
       - bphilips@redhat.com
       - brandon@ifup.org
@@ -928,42 +1037,43 @@ groups:
       - jordan@liggitt.net
       - lhinds@redhat.com
       - liggitt@google.com
-      - sc1@kubernetes.io
       - tallclair@google.com
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
     description: |-
       security release team mailing list
-    settings: 
+    settings:
       AllowExternalMembers: "true"
-      WhoCanJoin: "ALL_IN_DOMAIN_CAN_JOIN"
-      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
-      WhoCanViewGroup: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
       WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
     owners:
       - Stephen@agst.us
 
   - email-id: security@kubernetes.io
     name: security
     description: |-
-      
-    settings: 
+
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "false"
     owners:
       - bphilips@redhat.com
       - brandon@ifup.org
@@ -979,17 +1089,18 @@ groups:
     name: steering-private
     description: |-
       Private list for the Kubernetes Steering Committee
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
-      WhoCanViewMembership: "ALL_IN_DOMAIN_CAN_VIEW"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
     owners:
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -1003,11 +1114,11 @@ groups:
     name: steering
     description: |-
       Public list for the Kubernetes Steering Committee.
-      
+
       This list is for Steering Committee business.  It is public-access for transparency and so that community can raise topics, but it is not a forum for public debate.
-      
+
       https://github.com/kubernetes/steering
-    settings: 
+    settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
@@ -1018,21 +1129,16 @@ groups:
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "false"
     owners:
-      - bburns@microsoft.com
-      - briangrant@google.com
-      - ccoleman@redhat.com
+      - cblecker@gmail.com
       - davanum@gmail.com
       - decarr@redhat.com
-      - joe@heptio.com
-      - michelle.noorali@gmail.com
-      - sarah.novotny@gmail.com
+      - nikhitaraghunath@gmail.com
+      - parispittman@google.com
       - spiffxp@gmail.com
-      - thockin@google.com
       - timothysc@gmail.com
     managers:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
       - jorge@heptio.com
-      - nikitaraghunath@gmail.com
-      - parispittman@google.com
