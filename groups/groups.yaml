@@ -1007,7 +1007,6 @@ groups:
       - dmaceachern@vmware.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
-      - kubernetes-release-managers-private@googlegroups.com
       - saugustus@vmware.com
       - tpepper@gmail.com
 
@@ -1038,9 +1037,9 @@ groups:
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
     description: |-
-      Private discussion forum for PST members.
+      Private discussion forum for PSC members.
 
-      https://github.com/kubernetes/sig-release/blob/master/security-release-process-documentation/security-release-process.md#product-security-team-pst
+      https://github.com/kubernetes/security#product-security-committee-psc
     settings:
       AllowExternalMembers: "true"
       WhoCanJoin: "INVITED_CAN_JOIN"
