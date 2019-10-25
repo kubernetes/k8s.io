@@ -760,9 +760,9 @@ groups:
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
     description: |-
-      Private discussion forum for PST members.
+      Private discussion forum for PSC members.
 
-      https://github.com/kubernetes/sig-release/blob/master/security-release-process-documentation/security-release-process.md#product-security-team-pst
+      https://github.com/kubernetes/security#product-security-committee-psc
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
