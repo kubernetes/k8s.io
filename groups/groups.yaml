@@ -705,6 +705,7 @@ groups:
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
       WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
     members:
       - mike@crute.us
       - patrik@ptrk.io
