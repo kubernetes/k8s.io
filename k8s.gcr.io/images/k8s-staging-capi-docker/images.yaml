@@ -1,0 +1,3 @@
+- name: capd-manager
+  dmap:
+    "sha256:6c4dd8cb6c7efe69796a96343494c3a046bd80f46f7a89680cc42b61ce6f294c": ["v0.2.1"]
