@@ -94,7 +94,7 @@ groups:
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
       WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
-      ReconcileMembers: "false"
+      ReconcileMembers: "true"
     owners:
       - bphilips@redhat.com
       - brandon@ifup.org
@@ -104,6 +104,31 @@ groups:
       - lhinds@redhat.com
       - liggitt@google.com
       - stclair@google.com
+    members:
+      - argoprod@us.ibm.com
+      - aws-k8s-embargo-notification@amazon.com
+      - k8s-security@suse.de
+      - k8s_security_grp@oracle.com
+      - kops-security-response@googlegroups.com
+      - kubernetes-security-disclosure@google.com
+      - kubernetes-security-team@ml.ovh.net
+      - kubernetes-security@docker.com
+      - kubernetes-security@huawei.com
+      - kubernetes-security@service.aliyun.com
+      - kubernetes-security@service.microsoft.com
+      - kubernetes-security@weave.works
+      - mke-security@mesosphere.com
+      - release-managers-private@kubernetes.io
+      - secalert@redhat.com
+      - secure@sap.com
+      - security@gravitational.com
+      - security@kubernetes.io
+      - security@platform9.com
+      - security@rancher.com
+      - Security@Ubuntu.com
+      - security@vmware.com
+      - upstream-security@heptio.com
+      - vulnerabilityreports@cloudfoundry.org
 
   - email-id: election@kubernetes.io
     name: election
