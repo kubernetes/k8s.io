@@ -287,6 +287,23 @@ function empower_group_for_gcb() {
         --role roles/serviceusage.serviceUsageConsumer
 }
 
+# Grant KMS admin privileges to a principal
+# $1: The GCP project
+# $2: The group email
+function empower_group_for_kms() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group_for_kms(project, group) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    group="$2"
+
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "group:${group}" \
+        --role roles/cloudkms.admin
+}
+
 # Grant privileges to prow in a staging project
 # $1: The GCP project
 # $2: The GCS scratch bucket
