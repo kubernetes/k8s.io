@@ -1,0 +1,3 @@
+- name: capi-openstack-controller
+  dmap:
+    "sha256:6e6acd92a43715fc8ad2386da3eae2d255869096c4f15c509774bbb44dcaad44": ["v0.2.0"]
