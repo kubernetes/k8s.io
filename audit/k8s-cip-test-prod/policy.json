@@ -1,0 +1,44 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:service-693665670941@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-693665670941@container-analysis.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-693665670941@gcp-sa-containerscanning.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:693665670941-compute@developer.gserviceaccount.com",
+        "serviceAccount:693665670941@cloudservices.gserviceaccount.com",
+        "serviceAccount:service-693665670941@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:thockin@google.com"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "etag": "BwWNSe4FXsc=",
+  "version": 1
+}

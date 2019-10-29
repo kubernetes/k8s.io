@@ -1,0 +1,40 @@
+[
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Admin SDK lets administrators of enterprise domains to\n     view and manage resources like user, groups etc. It also provides\n     audit and usage reports of domain."
+      },
+      "name": "admin.googleapis.com",
+      "quota": {},
+      "title": "Admin SDK",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/universal",
+          "serviceusage.googleapis.com/tos/appsadmin"
+        ]
+      }
+    },
+    "name": "projects/91610859379/services/admin.googleapis.com",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "The Groups Settings API allows domain administrators to view and manage\n    access levels and advanced settings for a group."
+      },
+      "name": "groupssettings.googleapis.com",
+      "quota": {},
+      "title": "Groups Settings API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/universal",
+          "serviceusage.googleapis.com/tos/appsadmin"
+        ]
+      }
+    },
+    "name": "projects/91610859379/services/groupssettings.googleapis.com",
+    "state": "ENABLED"
+  }
+]
