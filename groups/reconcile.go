@@ -414,7 +414,6 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 		WhoCanInvite:          "NONE_CAN_INVITE",
 		WhoCanAdd:             "NONE_CAN_ADD",
 		WhoCanApproveMembers:  "NONE_CAN_APPROVE",
-		WhoCanModifyMembers:   "NONE",
 		WhoCanModerateMembers: "NONE",
 	}
 
@@ -436,8 +435,6 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 			settings.WhoCanAdd = value
 		case "WhoCanApproveMembers":
 			settings.WhoCanApproveMembers = value
-		case "WhoCanModifyMembers":
-			settings.WhoCanModifyMembers = value
 		case "WhoCanModerateMembers":
 			settings.WhoCanModerateMembers = value
 		}
@@ -451,7 +448,6 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 		g2.WhoCanInvite != settings.WhoCanInvite ||
 		g2.WhoCanAdd != settings.WhoCanAdd ||
 		g2.WhoCanApproveMembers != settings.WhoCanApproveMembers ||
-		g2.WhoCanModifyMembers != settings.WhoCanModifyMembers ||
 		g2.WhoCanModerateMembers != settings.WhoCanModerateMembers {
 
 		if config.ConfirmChanges {

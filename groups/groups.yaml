@@ -16,7 +16,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -42,7 +41,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -69,7 +67,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -92,7 +89,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -143,7 +139,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -165,7 +160,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -191,7 +185,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -218,7 +211,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -237,7 +229,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -264,7 +255,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -287,7 +277,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -308,7 +297,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -330,7 +318,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -355,7 +342,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -379,7 +365,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -406,7 +391,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -429,7 +413,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -452,7 +435,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -475,7 +457,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -498,7 +479,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -520,7 +500,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -549,7 +528,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -570,7 +548,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -595,7 +572,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -618,7 +594,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -639,7 +614,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -663,7 +637,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -688,7 +661,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -708,7 +680,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -731,7 +702,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -755,7 +725,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -777,7 +746,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -799,7 +767,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -823,7 +790,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -842,7 +808,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -861,7 +826,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -883,7 +847,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -905,7 +868,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -928,7 +890,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -949,7 +910,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -971,7 +931,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -992,7 +951,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -1017,7 +975,6 @@ groups:
       WhoCanInvite: "NONE_CAN_INVITE"
       WhoCanAdd: "NONE_CAN_ADD"
       WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
       WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
@@ -1044,7 +1001,6 @@ groups:
       WhoCanInvite: "ALL_OWNERS_CAN_INVITE"
       WhoCanAdd: "ALL_OWNERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_OWNERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_ONLY"
       WhoCanModerateMembers: "OWNERS_ONLY"
       ReconcileMembers: "true"
     owners:
@@ -1090,7 +1046,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -1124,7 +1079,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "false"
     owners:
@@ -1150,7 +1104,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -1177,7 +1130,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -1196,7 +1148,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "false"
     owners:
@@ -1223,7 +1174,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "true"
     owners:
@@ -1252,7 +1202,6 @@ groups:
       WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
       WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
       WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       ReconcileMembers: "false"
     owners:
