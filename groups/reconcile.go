@@ -428,7 +428,7 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 	wantSettings.WhoCanModerateMembers = "OWNERS_AND_MANAGERS"
 	wantSettings.WhoCanModerateContent = "OWNERS_AND_MANAGERS"
 	wantSettings.WhoCanPostMessage = "ALL_MEMBERS_CAN_POST"
-	wantSettings.MessageModerationLevel = "MODERATE_NON_MEMBERS"
+	wantSettings.MessageModerationLevel = "MODERATE_NONE"
 
 	for key, value := range groupSettings {
 		switch key {
