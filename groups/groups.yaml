@@ -150,23 +150,6 @@ groups:
     members:
       - k8s-infra-rbac-cert-manager@kubernetes.io
 
-  - email-id: k8s-infra-alerts@kubernetes.io
-    name: k8s-infra-alerts
-    description: |-
-      alerts for wg-k8s-infra
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - amwat@google.com
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - jgrafton@google.com
-      - mkumatag@in.ibm.com
-      - spiffxp@google.com
-      - thockin@google.com
-
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
     description: |-
