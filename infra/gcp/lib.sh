@@ -302,6 +302,11 @@ function empower_group_for_kms() {
         projects add-iam-policy-binding "${project}" \
         --member "group:${group}" \
         --role roles/cloudkms.admin
+
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "group:${group}" \
+        --role roles/cloudkms.cryptoKeyEncrypterDecrypter
 }
 
 # Grant privileges to prow in a staging project
