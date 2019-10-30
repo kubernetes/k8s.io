@@ -48,7 +48,7 @@ WRITERS="k8s-infra-release-editors@kubernetes.io"
 VIEWERS="k8s-infra-release-viewers@kubernetes.io"
 
 for PROJECT; do
-    color 3 "Configuring: ${REPO}"
+    color 3 "Configuring: ${PROJECT}"
 
     # The names of the buckets
     STAGING_BUCKET="gs://${PROJECT}" # used by humans
