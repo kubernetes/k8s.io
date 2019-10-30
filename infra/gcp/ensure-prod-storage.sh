@@ -71,6 +71,9 @@ PROMOTER_TEST_STAGING_PROJECT="k8s-staging-cip-test"
 GCR_BACKUP_TEST_PROD_PROJECT="k8s-gcr-backup-test-prod"
 GCR_BACKUP_TEST_PRODBAK_PROJECT="${GCR_BACKUP_TEST_PROD_PROJECT}-bak"
 
+# This is for testing the GCR auditing mechanism.
+GCR_AUDIT_TEST_PROD_PROJECT="k8s-gcr-audit-test-prod"
+
 # This is for testing the release tools.
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 
@@ -80,6 +83,7 @@ ALL_PROD_PROJECTS=(
     "${PROMOTER_TEST_PROD_PROJECT}"
     "${GCR_BACKUP_TEST_PROD_PROJECT}"
     "${GCR_BACKUP_TEST_PRODBAK_PROJECT}"
+    "${GCR_AUDIT_TEST_PROD_PROJECT}"
     "${RELEASE_TESTPROD_PROJECT}"
 )
 
@@ -149,6 +153,9 @@ empower_group_to_fake_prod \
     "k8s-infra-staging-cip-test@kubernetes.io"
 empower_group_to_fake_prod \
     "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" \
+    "k8s-infra-staging-cip-test@kubernetes.io"
+empower_group_to_fake_prod \
+    "${GCR_AUDIT_TEST_PROD_PROJECT}" \
     "k8s-infra-staging-cip-test@kubernetes.io"
 
 # Special case: grant the image promoter test service account access to their
