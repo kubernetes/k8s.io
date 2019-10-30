@@ -56,6 +56,7 @@ STAGING_PROJECTS=(
     kops
     kube-state-metrics
     multitenancy
+    provider-azure
     publishing-bot
     release-test
 )

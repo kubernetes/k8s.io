@@ -1,0 +1,22 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+# Should always mirror the maintainers/reviewers in https://sigs.k8s.io/cloud-provider-azure/OWNERS
+
+approvers:
+- andyzhangx
+- brendandburns
+- feiskyer
+- karataliu
+- khenidak
+- ritazh
+reviewers:
+- andyzhangx
+- brendandburns
+- feiskyer
+- justaugustus
+- karataliu
+- khenidak
+- ritazh
+
+labels:
+- sig/cloud-provider
+- area/provider/azure
