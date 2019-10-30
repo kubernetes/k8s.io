@@ -422,13 +422,10 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 	wantSettings.WhoCanViewMembership = "ALL_MEMBERS_CAN_VIEW"
 	wantSettings.WhoCanViewGroup = "ALL_MEMBERS_CAN_VIEW"
 	wantSettings.WhoCanDiscoverGroup = "ALL_IN_DOMAIN_CAN_DISCOVER"
-	wantSettings.WhoCanInvite = "NONE_CAN_INVITE"
-	wantSettings.WhoCanAdd = "NONE_CAN_ADD"
-	wantSettings.WhoCanApproveMembers = "NONE_CAN_APPROVE"
 	wantSettings.WhoCanModerateMembers = "OWNERS_AND_MANAGERS"
 	wantSettings.WhoCanModerateContent = "OWNERS_AND_MANAGERS"
 	wantSettings.WhoCanPostMessage = "ALL_MEMBERS_CAN_POST"
-	wantSettings.MessageModerationLevel = "MODERATE_NON_MEMBERS"
+	wantSettings.MessageModerationLevel = "MODERATE_NONE"
 
 	for key, value := range groupSettings {
 		switch key {
@@ -442,12 +439,6 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 			wantSettings.WhoCanViewGroup = value
 		case "WhoCanDiscoverGroup":
 			wantSettings.WhoCanDiscoverGroup = value
-		case "WhoCanInvite":
-			wantSettings.WhoCanInvite = value
-		case "WhoCanAdd":
-			wantSettings.WhoCanAdd = value
-		case "WhoCanApproveMembers":
-			wantSettings.WhoCanApproveMembers = value
 		case "WhoCanModerateMembers":
 			wantSettings.WhoCanModerateMembers = value
 		case "WhoCanPostMessage":
@@ -466,7 +457,8 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 			log.Printf("> Successfully updated group settings for %s to allow external members and other security settings\n", groupEmailId)
 		} else {
 			log.Printf("dry-run : skipping updating group settings for %s\n", groupEmailId)
-			log.Printf("dry-run : settings %q", wantSettings)
+			log.Printf("dry-run : current settings %+q", haveSettings)
+			log.Printf("dry-run : desired settings %+q", wantSettings)
 		}
 	}
 	return nil

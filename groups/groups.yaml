@@ -9,7 +9,6 @@ groups:
       Created via https://github.com/kubernetes/community/issues/3763
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - jorgec@vmware.com
@@ -27,7 +26,6 @@ groups:
 
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - ihor@cncf.io
@@ -46,7 +44,6 @@ groups:
 
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - aeva.online@gmail.com
@@ -102,7 +99,6 @@ groups:
       Kubernetes elections committee
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - briangrant@google.com
@@ -116,7 +112,6 @@ groups:
       Kubernetes GitHub Admins
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - cblecker@gmail.com
@@ -134,7 +129,6 @@ groups:
       alerts for wg-k8s-infra
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     members:
       - amwat@google.com
@@ -155,23 +149,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-rbac-cert-manager@kubernetes.io
-
-  - email-id: k8s-infra-alerts@kubernetes.io
-    name: k8s-infra-alerts
-    description: |-
-      alerts for wg-k8s-infra
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - amwat@google.com
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - jgrafton@google.com
-      - mkumatag@in.ibm.com
-      - spiffxp@google.com
-      - thockin@google.com
 
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
@@ -602,7 +579,6 @@ groups:
       Mailing list for wg-infra-team private communications
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     members:
       - bentheelder@google.com
@@ -621,7 +597,6 @@ groups:
       Moderators for various Community properties
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - parispittman@google.com
@@ -659,7 +634,6 @@ groups:
       https://git.k8s.io/sig-release/release-managers.md
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - Stephen@agst.us
@@ -685,7 +659,6 @@ groups:
       https://git.k8s.io/sig-release/release-managers.md
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "false"
     owners:
       - caselim@gmail.com
@@ -703,7 +676,6 @@ groups:
       https://github.com/kubernetes/sig-release/blob/master/security-release-process-documentation/security-release-process.md#product-security-team-pst
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - bphilips@redhat.com
@@ -722,7 +694,6 @@ groups:
       security release team mailing list
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - Stephen@agst.us
@@ -733,7 +704,6 @@ groups:
 
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "false"
     owners:
       - bphilips@redhat.com
@@ -752,7 +722,6 @@ groups:
       Private list for the Kubernetes Steering Committee
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "true"
     owners:
       - cblecker@gmail.com
@@ -773,7 +742,6 @@ groups:
       https://github.com/kubernetes/steering
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "false"
     owners:
       - cblecker@gmail.com
