@@ -18,6 +18,7 @@ package main
 
 import (
 	"crypto/tls"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -25,6 +26,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"reflect"
 	"time"
 
 	"golang.org/x/net/context"
@@ -404,65 +406,67 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 		return fmt.Errorf("unable to retrieve group info for group %s: %v", groupEmailId, err)
 	}
 
-	// We will remove any additional members, so there's no point in allowing invitations / adds
-	settings := &groupssettings.Groups{
-		AllowExternalMembers:  "true",
-		WhoCanJoin:            "INVITED_CAN_JOIN",
-		WhoCanViewMembership:  "ALL_MEMBERS_CAN_VIEW",
-		WhoCanViewGroup:       "ALL_MEMBERS_CAN_VIEW",
-		WhoCanDiscoverGroup:   "ALL_MEMBERS_CAN_DISCOVER",
-		WhoCanInvite:          "NONE_CAN_INVITE",
-		WhoCanAdd:             "NONE_CAN_ADD",
-		WhoCanApproveMembers:  "NONE_CAN_APPROVE",
-		WhoCanModifyMembers:   "NONE",
-		WhoCanModerateMembers: "NONE",
-	}
+	var (
+		haveSettings groupssettings.Groups
+		wantSettings groupssettings.Groups
+	)
+
+	// We copy the settings we get from the API into haveSettings, and then copy
+	// it again into wantSettings so we have a version we can manipulate.
+	deepCopySettings(&g2, &haveSettings)
+	deepCopySettings(&haveSettings, &wantSettings)
+
+	// This sets safe/sane defaults
+	wantSettings.AllowExternalMembers = "true"
+	wantSettings.WhoCanJoin = "INVITED_CAN_JOIN"
+	wantSettings.WhoCanViewMembership = "ALL_MEMBERS_CAN_VIEW"
+	wantSettings.WhoCanViewGroup = "ALL_MEMBERS_CAN_VIEW"
+	wantSettings.WhoCanDiscoverGroup = "ALL_IN_DOMAIN_CAN_DISCOVER"
+	wantSettings.WhoCanInvite = "NONE_CAN_INVITE"
+	wantSettings.WhoCanAdd = "NONE_CAN_ADD"
+	wantSettings.WhoCanApproveMembers = "NONE_CAN_APPROVE"
+	wantSettings.WhoCanModerateMembers = "OWNERS_AND_MANAGERS"
+	wantSettings.WhoCanModerateContent = "OWNERS_AND_MANAGERS"
+	wantSettings.WhoCanPostMessage = "ALL_MEMBERS_CAN_POST"
+	wantSettings.MessageModerationLevel = "MODERATE_NON_MEMBERS"
 
 	for key, value := range groupSettings {
 		switch key {
 		case "AllowExternalMembers":
-			settings.AllowExternalMembers = value
+			wantSettings.AllowExternalMembers = value
 		case "WhoCanJoin":
-			settings.WhoCanJoin = value
+			wantSettings.WhoCanJoin = value
 		case "WhoCanViewMembership":
-			settings.WhoCanViewMembership = value
+			wantSettings.WhoCanViewMembership = value
 		case "WhoCanViewGroup":
-			settings.WhoCanViewGroup = value
+			wantSettings.WhoCanViewGroup = value
 		case "WhoCanDiscoverGroup":
-			settings.WhoCanDiscoverGroup = value
+			wantSettings.WhoCanDiscoverGroup = value
 		case "WhoCanInvite":
-			settings.WhoCanInvite = value
+			wantSettings.WhoCanInvite = value
 		case "WhoCanAdd":
-			settings.WhoCanAdd = value
+			wantSettings.WhoCanAdd = value
 		case "WhoCanApproveMembers":
-			settings.WhoCanApproveMembers = value
-		case "WhoCanModifyMembers":
-			settings.WhoCanModifyMembers = value
+			wantSettings.WhoCanApproveMembers = value
 		case "WhoCanModerateMembers":
-			settings.WhoCanModerateMembers = value
+			wantSettings.WhoCanModerateMembers = value
+		case "WhoCanPostMessage":
+			wantSettings.WhoCanPostMessage = value
+		case "MessageModerationLevel":
+			wantSettings.MessageModerationLevel = value
 		}
 	}
 
-	if g2.AllowExternalMembers != settings.AllowExternalMembers ||
-		g2.WhoCanJoin != settings.WhoCanJoin ||
-		g2.WhoCanViewMembership != settings.WhoCanViewMembership ||
-		g2.WhoCanViewGroup != settings.WhoCanViewGroup ||
-		g2.WhoCanDiscoverGroup != settings.WhoCanDiscoverGroup ||
-		g2.WhoCanInvite != settings.WhoCanInvite ||
-		g2.WhoCanAdd != settings.WhoCanAdd ||
-		g2.WhoCanApproveMembers != settings.WhoCanApproveMembers ||
-		g2.WhoCanModifyMembers != settings.WhoCanModifyMembers ||
-		g2.WhoCanModerateMembers != settings.WhoCanModerateMembers {
-
+	if !reflect.DeepEqual(&haveSettings, &wantSettings) {
 		if config.ConfirmChanges {
-			_, err := srv.Groups.Patch(groupEmailId, settings).Do()
+			_, err := srv.Groups.Patch(groupEmailId, &wantSettings).Do()
 			if err != nil {
 				return fmt.Errorf("unable to update group info for group %s: %v", groupEmailId, err)
 			}
 			log.Printf("> Successfully updated group settings for %s to allow external members and other security settings\n", groupEmailId)
 		} else {
 			log.Printf("dry-run : skipping updating group settings for %s\n", groupEmailId)
-			log.Printf("dry-run : settings %q", groupSettings)
+			log.Printf("dry-run : settings %q", wantSettings)
 		}
 	}
 	return nil
@@ -590,4 +594,11 @@ func removeMembersFromGroup(service *admin.Service, groupEmailId string, members
 		}
 	}
 	return nil
+}
+
+// DeepCopy deepcopies a to b using json marshaling. This discards fields like
+// the server response that don't have a specifc json field name.
+func deepCopySettings(a, b interface{}) {
+	byt, _ := json.Marshal(a)
+	json.Unmarshal(byt, b)
 }
