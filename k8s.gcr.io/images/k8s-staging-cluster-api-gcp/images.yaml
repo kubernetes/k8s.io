@@ -1,0 +1,3 @@
+- name: cluster-api-gcp-controller
+  dmap:
+    "sha256:6dd212144fcfabc95b238e7614e54ad46087979fed8fdeea945e3ef188ec4944": ["v0.2.0-alpha.2"]
