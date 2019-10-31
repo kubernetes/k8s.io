@@ -289,4 +289,13 @@ data:
           rewrite ^/.*$  https://prow.k8s.io/tide redirect;
         }
       }
+
+      server {
+        server_name youtube.k8s.io youtube.kubernetes.io;
+        listen 80;
+
+        location / {
+          rewrite ^/.*$  https://www.youtube.com/c/kubernetescommunity redirect;
+        }
+      }
     }
