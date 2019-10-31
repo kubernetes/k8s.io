@@ -291,7 +291,7 @@ data:
       }
 
       server {
-        server_name youtube.k8s.io youtube.kubernetes.io;
+        server_name yt.k8s.io youtube.k8s.io youtube.kubernetes.io;
         listen 80;
 
         location / {
