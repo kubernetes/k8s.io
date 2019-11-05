@@ -51,6 +51,9 @@ ACCOUNTING_GROUP="k8s-infra-gcp-accounting@kubernetes.io"
 # The GCS bucket which hold terraform state for clusters
 CLUSTER_TERRAFORM_BUCKET="k8s-infra-clusters-terraform"
 
+# The GKE security groups group
+CLUSTER_USERS_GROUP="gke-security-groups@kubernetes.io"
+
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
@@ -102,6 +105,11 @@ gsutil iam ch \
 gsutil iam ch \
     "group:${CLUSTER_ADMINS_GROUP}:legacyBucketOwner" \
     "gs://${CLUSTER_TERRAFORM_BUCKET}"
+
+color 6 "Empowering cluster users"
+gcloud projects add-iam-policy-binding "${PROJECT}" \
+    --member "group:${CLUSTER_USERS_GROUP}" \
+    --role "roles/container.clusterViewer"
 
 color 6 "Empowering GCP accounting"
 gcloud projects add-iam-policy-binding "${PROJECT}" \
