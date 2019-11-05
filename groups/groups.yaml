@@ -636,15 +636,14 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - Stephen@agst.us
-    managers:
       - cmiles@pivotal.io
-      - feiskyer@gmail.com
+      - Stephen@agst.us
       - tpepper@vmware.com
     members:
       - aleksandram@google.com
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
+      - feiskyer@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
       - kubernetes-release-managers-private@googlegroups.com
@@ -659,7 +658,7 @@ groups:
       https://git.k8s.io/sig-release/release-managers.md
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "false"
+      ReconcileMembers: "true"
     owners:
       - caselim@gmail.com
       - cmiles@pivotal.io
@@ -667,6 +666,37 @@ groups:
       - Stephen@agst.us
       - tpepper@gmail.com
       - tpepper@vmware.com
+    members:
+      - alarcj137@gmail.com
+      - aleksandram@google.com
+      - alexeldeib@gmail.com
+      - cheryl.fong.yin.yin@gmail.com
+      - ctadeu@gmail.com
+      - dhaval.bhanu@gmail.com
+      - dmaceachern@vmware.com
+      - feiskyer@gmail.com
+      - girikuncoro@gmail.com
+      - guineveresaenger@gmail.com
+      - hhorl@pivotal.io
+      - idealhack@gmail.com
+      - jameswangel@gmail.com
+      - jbperez@google.com
+      - jeef111x@gmail.com
+      - kendrickcoleman@gmail.com
+      - linusa@google.com
+      - mntalla@pivotal.io
+      - mudrinic.mare@gmail.com
+      - nikhitaraghunath@gmail.com
+      - onlydole@gmail.com
+      - paul.bouwer@gmail.com
+      - peter.swica@outlook.com
+      - premdeeps@google.com
+      - release-managers-private@kubernetes.io
+      - sethpmccombs@gmail.com
+      - sgrunert@suse.com
+      - simony@google.com
+      - slicknik@gmail.com
+      - sumitranr@google.com
 
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
