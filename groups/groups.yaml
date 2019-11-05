@@ -313,7 +313,6 @@ groups:
       - dmaceachern@vmware.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
-      - saschagrunert@gmail.com
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
