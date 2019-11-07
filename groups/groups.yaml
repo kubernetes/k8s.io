@@ -616,6 +616,7 @@ groups:
       - justinsb@google.com
       - spiffxp@google.com
       - thockin@google.com
+      - bartek@smykla.com
 
   - email-id: moderators@kubernetes.io
     name: moderators
