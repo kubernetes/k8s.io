@@ -14,7 +14,7 @@ groups:
       - jorgec@vmware.com
       - kaitlynbarnard10@gmail.com
       - parispittman@google.com
-      - rkillen@umich.edu
+      - killen.bob@gmail.com
       - zcorleissen@linuxfoundation.org
     members:
       - codyclark@google.com
@@ -121,7 +121,7 @@ groups:
       - fejta@google.com
       - ihor.dvoretskyi@gmail.com
       - nikitaraghunath@gmail.com
-      - rkillen@umich.edu
+      - killen.bob@gmail.com
 
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
@@ -637,7 +637,7 @@ groups:
       - jorgec@vmware.com
       - ktbry@google.com
       - noah@coderanger.net
-      - rkillen@umich.edu
+      - killen.bob@gmail.com
     members:
       - cblecker@gmail.com
       - guslees@gmail.com
