@@ -292,7 +292,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - caselim@gmail.com
-      - Stephen@agst.us
+      - stephen.k8s@agst.us
       - tpepper@gmail.com
 
   - email-id: k8s-infra-release-editors@kubernetes.io
@@ -304,7 +304,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - caselim@gmail.com
-      - Stephen@agst.us
+      - stephen.k8s@agst.us
       - tpepper@gmail.com
     members:
       - aleksandram@google.com
@@ -323,7 +323,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - caselim@gmail.com
-      - Stephen@agst.us
+      - stephen.k8s@agst.us
       - tpepper@gmail.com
     members:
       - aleksandram@google.com
@@ -467,7 +467,7 @@ groups:
       - davanum@gmail.com
       - nicklaneovi@gmail.com
       - prignanov@vmware.com
-      - Stephen@agst.us
+      - stephen.k8s@agst.us
 
   - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
     name: k8s-infra-staging-cluster-api-gcp
@@ -595,7 +595,7 @@ groups:
       - davanum@gmail.com
       - ihor@cncf.io
       - spiffxp@google.com
-      - Stephen@agst.us
+      - stephen.k8s@agst.us
       - thockin@google.com
       - tpepper@gmail.com
 
@@ -663,7 +663,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cmiles@pivotal.io
-      - Stephen@agst.us
+      - stephen.k8s@agst.us
       - tpepper@vmware.com
     members:
       - aleksandram@google.com
@@ -689,7 +689,7 @@ groups:
       - caselim@gmail.com
       - cmiles@pivotal.io
       - saugustus@vmware.com
-      - Stephen@agst.us
+      - stephen.k8s@agst.us
       - tpepper@gmail.com
       - tpepper@vmware.com
     members:
@@ -752,7 +752,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - Stephen@agst.us
+      - stephen.k8s@agst.us
 
   - email-id: security@kubernetes.io
     name: security
