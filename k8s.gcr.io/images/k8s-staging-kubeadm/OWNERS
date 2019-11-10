@@ -1,0 +1,26 @@
+# See the OWNERS file documentation:
+#  https://github.com/kubernetes/community/blob/master/contributors/devel/owners.md
+
+approvers:
+- luxas
+- timothysc
+- fabriziopandini
+- neolit123
+- rosti
+- ereslibre
+reviewers:
+- luxas
+- timothysc
+- fabriziopandini
+- kad
+- detiber
+- dixudx
+- neolit123
+- rosti
+- yagonobre
+- ereslibre
+- SataQiu
+- yastij
+# Might want to add @xiangpengzhao, @stealthybox, @kargakis, @jamiehannaford, @krousey, @dmmcquay, @liztio and/or @chuckha back in the future
+labels:
+- sig/cluster-lifecycle
