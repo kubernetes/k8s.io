@@ -797,6 +797,9 @@ groups:
 
       https://github.com/kubernetes/steering
     settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "false"
     owners:
