@@ -17,7 +17,14 @@
 # This script is used to create a new "conformance" bucket in GCS.
 #
 # Each conformance bucket exists in its own GCP project, and is writable by a
-# dedicated googlegroup.
+# dedicated Google group.
+#
+# It will have a layout which is readable by testgrid.
+# (See also: https://github.com/kubernetes/test-infra/tree/master/gubernator#gcs-layout)
+# * each test result is stored in a "directory" with some monotonically increasing run identifier (commonly unix epoch time for third party uploads)
+# * they should contain a junit.*.xml file with the structured test results
+# * they should (optionally but commonly) contain a build-log.txt with the raw test output
+# * they should contain two small json files started.json and finished.json with some metadata
 
 set -o errexit
 set -o nounset
@@ -29,7 +36,7 @@ SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 function usage() {
     echo "usage: $0 [repo...]" > /dev/stderr
     echo "example:" > /dev/stderr
-    echo "  $0 # do all staging repos" > /dev/stderr
+    echo "  $0 # do all conformance repos" > /dev/stderr
     echo "  $0 coredns # just do one" > /dev/stderr
     echo > /dev/stderr
 }
@@ -39,28 +46,22 @@ CONFORMANCE_PROJECTS=(
     capi-openstack
 )
 if [ $# = 0 ]; then
-    # default to all staging projects
+    # default to all conformance projects
     set -- "${CONFORMANCE_PROJECTS[@]}"
 fi
 
 for REPO; do
-    color 3 "Configuring staging: ${REPO}"
+    color 3 "Configuring conformance: ${REPO}"
 
     # The GCP project name.
-    PROJECT="k8s-conformance-${REPO}"
+    PROJECT="k8s-cnfm-${REPO}"
 
-    # The group that can write to this staging repo.
+    # The group that can write to this conformance repo.
     WRITERS="k8s-infra-conformance-${REPO}@kubernetes.io"
 
     # The names of the buckets
-    STAGING_BUCKET="gs://${PROJECT}" # used by humans
-    ALL_BUCKETS=("${STAGING_BUCKET}")
-
-    # A short expiration - it can always be raised, but it is hard to lower
-    # We expect promotion within 60d, or for testing to "move on", but
-    # it is also short enough that people should notice occasionally,
-    # and not accidentally think of the conformance buckets as permanent.
-    AUTO_DELETION_DAYS=60
+    CONFORMANCE_BUCKET="gs://${PROJECT}" # used by humans
+    ALL_BUCKETS=("${CONFORMANCE_BUCKET}")
 
     # Make the project, if needed
     color 6 "Ensuring project exists: ${PROJECT}"
@@ -83,9 +84,9 @@ for REPO; do
       color 6 "Ensuring the bucket exists and is world readable"
       ensure_public_gcs_bucket "${PROJECT}" "${BUCKET}"
 
-      # Set bucket auto-deletion
-      color 6 "Ensuring the bucket has auto-deletion of ${AUTO_DELETION_DAYS} days"
-      ensure_gcs_bucket_auto_deletion "${BUCKET}" "${AUTO_DELETION_DAYS}"
+      color 6 "Ensuring the GCS bucket retention policy is set: ${PROJECT}"
+      RETENTION="10y"
+      ensure_gcs_bucket_retention "gs://${PROJECT}" "${RETENTION}"
 
       # Enable admins on the bucket
       color 6 "Empowering GCS admins"
