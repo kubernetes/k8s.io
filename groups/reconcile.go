@@ -419,7 +419,7 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 	// This sets safe/sane defaults
 	wantSettings.AllowExternalMembers = "true"
 	wantSettings.WhoCanJoin = "INVITED_CAN_JOIN"
-	wantSettings.WhoCanViewMembership = "ALL_MEMBERS_CAN_VIEW"
+	wantSettings.WhoCanViewMembership = "ALL_MANAGERS_CAN_VIEW"
 	wantSettings.WhoCanViewGroup = "ALL_MEMBERS_CAN_VIEW"
 	wantSettings.WhoCanDiscoverGroup = "ALL_IN_DOMAIN_CAN_DISCOVER"
 	wantSettings.WhoCanModerateMembers = "OWNERS_AND_MANAGERS"
