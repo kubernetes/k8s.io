@@ -54,10 +54,10 @@ for REPO; do
     color 3 "Configuring conformance: ${REPO}"
 
     # The GCP project name.
-    PROJECT="k8s-cnfm-${REPO}"
+    PROJECT="k8s-conform-${REPO}"
 
     # The group that can write to this conformance repo.
-    WRITERS="k8s-infra-conformance-${REPO}@kubernetes.io"
+    WRITERS="k8s-infra-conform-${REPO}@kubernetes.io"
 
     # The names of the buckets
     CONFORMANCE_BUCKET="gs://${PROJECT}" # used by humans
