@@ -76,6 +76,15 @@ type GoogleGroup struct {
 	Members []string `yaml:"members,omitempty" json:"members,omitempty"`
 }
 
+type AdminClientService interface {
+	GetService(client *http.Client) (*admin.Service, error)
+}
+
+func GetService(client *http.Client) (*admin.Service, error) {
+	srv, err := admin.New(client)
+	return srv, err
+}
+
 func Usage() {
 	fmt.Fprintf(os.Stderr, `
 Usage: %s [-config <config-yaml-file>] [--confirm]
@@ -121,7 +130,7 @@ func main() {
 	credential.Subject = config.BotID
 
 	client := credential.Client(context.Background())
-	srv, err := admin.New(client)
+	srv, err := GetService(client)
 	if err != nil {
 		log.Fatalf("Unable to retrieve directory Client %v", err)
 	}
