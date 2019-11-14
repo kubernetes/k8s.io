@@ -568,8 +568,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - aludwin@google.com
       - f.guo@alibaba-inc.com
       - kevin.fox@pnnl.gov
+      - laetitiah@google.com
+      - ryanjbezdicek@gmail.com
       - srampal@cisco.com
       - tasha.drew@gmail.com
 
