@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # python:3-alpine as of November 14th, 2019
-FROM python@sha256:b3f71617bb71f18ef341af1bee7f037423e25fd2ce5e258a2eddc1f7ddfd7333
+FROM python@sha256:9ecd1b34b5fef4dc806734f92eee1702175a63276bafe3552d122c8f4918ed8e
 
 # install from requirements.txt and ensure that all requirements match
 # pip freeze after, guaranteeing that we will install the same packages if we
