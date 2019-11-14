@@ -12,9 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# python:2-alpine as of July 11th, 2019
-ARG BASE_IMAGE=python@sha256:9a2db929c9e4c65118cb1da9ddb1d64f3ba8e4a722f07f3f2d34b58b1e8556b1
-FROM ${BASE_IMAGE}
+# python:3.7.5-alpine3.10 as of November 14th, 2019
+FROM python@sha256:b3f71617bb71f18ef341af1bee7f037423e25fd2ce5e258a2eddc1f7ddfd7333
 
 # install from requirements.txt and ensure that all requirements match
 # pip freeze after, guaranteeing that we will install the same packages if we
