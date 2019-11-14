@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# python:3.7.5-alpine3.10 as of November 14th, 2019
+# python:3-alpine as of November 14th, 2019
 FROM python@sha256:b3f71617bb71f18ef341af1bee7f037423e25fd2ce5e258a2eddc1f7ddfd7333
 
 # install from requirements.txt and ensure that all requirements match
