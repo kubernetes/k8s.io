@@ -86,6 +86,7 @@ groups:
       - secure@sap.com
       - security@gravitational.com
       - security@kubernetes.io
+      - security@loodse.com
       - security@platform9.com
       - security@rancher.com
       - Security@Ubuntu.com
