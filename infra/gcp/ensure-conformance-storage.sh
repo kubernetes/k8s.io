@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script is used to create a new "conformance" bucket in GCS.
+# This script is used to create the "k8s-conform" project and corresponding buckets in GCS.
 #
-# Each conformance bucket exists in its own GCP project, and is writable by a
-# dedicated Google group.
+# All conformance buckets are created in the "k8s-conform" GCP project, and are writable by
+# dedicated Google groups.
 #
-# It will have a layout which is readable by testgrid.
+# The buckets will have a layout which is readable by testgrid:
 # (See also: https://github.com/kubernetes/test-infra/tree/master/gubernator#gcs-layout)
 # * each test result is stored in a "directory" with some monotonically increasing run identifier (commonly unix epoch time for third party uploads)
 # * they should contain a junit.*.xml file with the structured test results
@@ -41,61 +41,58 @@ function usage() {
     echo > /dev/stderr
 }
 
+PROJECT="k8s-conform"
+
+PROJECT_VIEWER="k8s-infra-conform@kubernetes.io"
+
 # NB: Please keep this sorted.
-CONFORMANCE_PROJECTS=(
+CONFORMANCE_BUCKETS=(
     capi-openstack
 )
 if [ $# = 0 ]; then
-    # default to all conformance projects
-    set -- "${CONFORMANCE_PROJECTS[@]}"
+    # default to all conformance buckets
+    set -- "${CONFORMANCE_BUCKETS[@]}"
 fi
 
-for REPO; do
-    color 3 "Configuring conformance: ${REPO}"
+# Make the project, if needed
+color 6 "Ensuring project exists: ${PROJECT}"
+ensure_project "${PROJECT}"
 
-    # The GCP project name.
-    PROJECT="k8s-conform-${REPO}"
+# Enable writers to use the UI
+color 6 "Empowering ${PROJECT_VIEWER} as project viewers"
+empower_group_as_viewer "${PROJECT}" "${PROJECT_VIEWER}"
+
+# Enable GCS APIs
+color 6 "Enabling the GCS API"
+enable_api "${PROJECT}" storage-component.googleapis.com
+
+for REPO; do
+    color 3 "Configuring conformance bucket for ${REPO}"
 
     # The group that can write to this conformance repo.
-    WRITERS="k8s-infra-conform-${REPO}@kubernetes.io"
+    BUCKET_WRITERS="k8s-infra-conform-${REPO}@kubernetes.io"
 
     # The names of the buckets
-    CONFORMANCE_BUCKET="gs://${PROJECT}" # used by humans
-    ALL_BUCKETS=("${CONFORMANCE_BUCKET}")
-
-    # Make the project, if needed
-    color 6 "Ensuring project exists: ${PROJECT}"
-    ensure_project "${PROJECT}"
-
-    # Enable writers to use the UI
-    color 6 "Empowering ${WRITERS} as project viewers"
-    empower_group_as_viewer "${PROJECT}" "${WRITERS}"
+    BUCKET="gs://${PROJECT}-${REPO}" # used by humans
 
     # Every project gets some GCS buckets
+    color 3 "Configuring bucket: ${BUCKET}"
 
-    # Enable GCS APIs
-    color 6 "Enabling the GCS API"
-    enable_api "${PROJECT}" storage-component.googleapis.com
+    # Create the bucket
+    color 6 "Ensuring the bucket exists and is world readable"
+    ensure_public_gcs_bucket "${PROJECT}" "${BUCKET}"
 
-    for BUCKET in "${ALL_BUCKETS[@]}"; do
-      color 3 "Configuring bucket: ${BUCKET}"
+    color 6 "Ensuring the GCS bucket retention policy is set: ${PROJECT}"
+    RETENTION="10y"
+    ensure_gcs_bucket_retention "${BUCKET}" "${RETENTION}"
 
-      # Create the bucket
-      color 6 "Ensuring the bucket exists and is world readable"
-      ensure_public_gcs_bucket "${PROJECT}" "${BUCKET}"
+    # Enable admins on the bucket
+    color 6 "Empowering GCS admins"
+    empower_gcs_admins "${PROJECT}" "${BUCKET}"
 
-      color 6 "Ensuring the GCS bucket retention policy is set: ${PROJECT}"
-      RETENTION="10y"
-      ensure_gcs_bucket_retention "gs://${PROJECT}" "${RETENTION}"
-
-      # Enable admins on the bucket
-      color 6 "Empowering GCS admins"
-      empower_gcs_admins "${PROJECT}" "${BUCKET}"
-
-      # Enable writers on the bucket
-      color 6 "Empowering ${WRITERS} to GCS"
-      empower_group_to_gcs_bucket "${WRITERS}" "${BUCKET}"
-    done
+    # Enable writers on the bucket
+    color 6 "Empowering ${BUCKET_WRITERS} to GCS"
+    empower_group_to_gcs_bucket "${BUCKET_WRITERS}" "${BUCKET}"
 
     color 6 "Done"
 done
