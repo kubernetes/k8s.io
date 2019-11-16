@@ -141,6 +141,7 @@ groups:
       - mkumatag@in.ibm.com
       - spiffxp@google.com
       - thockin@google.com
+      - linusa@google.com
 
   - email-id: gke-security-groups@kubernetes.io
     name: gke-security-groups
