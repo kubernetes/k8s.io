@@ -31,6 +31,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+set -o xtrace
 
 GCRANE_CHECKOUT_DIR="${GOPATH}/src/github.com/google/go-containerregistry"
 
