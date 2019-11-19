@@ -1,0 +1,9 @@
+artifact-promoter/cip@sha256:f61e2ff9d38993b0e8acd93a8d3d9fbafedf67d97845c244bf4d329aadf0e3c4,artifact-promoter/cip:20191026-v2.3.1-36-g0e656d8
+capi-docker/capd-manager@sha256:6c4dd8cb6c7efe69796a96343494c3a046bd80f46f7a89680cc42b61ce6f294c,capi-docker/capd-manager:v0.2.1
+capi-kubeadm/cluster-api-kubeadm-controller@sha256:669f1661513b8b250e56bc0b519f8873c83bd65ffb3087e0139a0b6b95a69cbf,capi-kubeadm/cluster-api-kubeadm-controller:v0.1.5
+capi-openstack/capi-openstack-controller@sha256:6e6acd92a43715fc8ad2386da3eae2d255869096c4f15c509774bbb44dcaad44,capi-openstack/capi-openstack-controller:v0.2.0
+cluster-api-aws/cluster-api-aws-controller@sha256:87f616193989e61c99fd6f5159773dafe1dff3b96dd9580af60c0496913076dc,cluster-api-aws/cluster-api-aws-controller:v0.4.5
+cluster-api-azure/cluster-api-azure-controller@sha256:c05429083fb1580c18e0769d94f96486de086298a3abbd779dcf1e41af9f82d8,cluster-api-azure/cluster-api-azure-controller:v0.3.0-alpha.1
+cluster-api-gcp/cluster-api-gcp-controller@sha256:6dd212144fcfabc95b238e7614e54ad46087979fed8fdeea945e3ef188ec4944,cluster-api-gcp/cluster-api-gcp-controller:v0.2.0-alpha.2
+cluster-api/cluster-api-controller@sha256:092ae6da3a56cf4c379392602143ba783df6e329f5dc07739dcc815aef929e49,cluster-api/cluster-api-controller:v0.2.7
+cluster-api/plantuml@sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5,cluster-api/plantuml:1.2019.6
