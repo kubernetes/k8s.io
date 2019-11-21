@@ -55,6 +55,7 @@ STAGING_PROJECTS=(
     kas-network-proxy
     kops
     kube-state-metrics
+    metrics-server
     multitenancy
     publishing-bot
     release-test

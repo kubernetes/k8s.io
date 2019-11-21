@@ -563,6 +563,18 @@ groups:
       - fbranczyk@gmail.com
       - tariq181290@gmail.com
 
+  - email-id: k8s-infra-staging-metrics-server@kubernetes.io
+    name: k8s-infra-staging-metrics-server
+    description: |-
+      ACL for metrics server
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - siarkowicz@google.com
+      - sergiusz.urbaniak@gmail.com
+      - pszczesniak@google.com
+      - fbranczyk@gmail.com
+
   - email-id: k8s-infra-staging-multitenancy@kubernetes.io
     name: k8s-infra-staging-multitenancy
     description: |-
