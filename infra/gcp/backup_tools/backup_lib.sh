@@ -54,3 +54,11 @@ EOF
     # Perform backup by copying all images recursively over.
     "${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane" cp -r "${source_gcr_repo}" "${backup_gcr_repo}/${timestamp}"
 }
+
+check_creds_exist()
+{
+    if [[ ! -f "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
+        echo >&2 "\$GOOGLE_APPLICATION_CREDENTIALS (${GOOGLE_APPLICATION_CREDENTIALS}) does not exist"
+        exit 1
+    fi
+}

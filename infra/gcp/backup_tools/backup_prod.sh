@@ -45,6 +45,9 @@ prod_repos=(
     us.gcr.io/k8s-artifacts-prod
 )
 
+# Check creds exist.
+
+check_creds_exist
 # Build gcrane first.
 build_gcrane
 

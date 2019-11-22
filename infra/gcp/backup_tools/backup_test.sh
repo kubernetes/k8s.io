@@ -118,6 +118,9 @@ declare -A test_repos=(
     #[eu.gcr.io/k8s-gcr-backup-test-prod]=eu.gcr.io/k8s-gcr-backup-test-prod-bak
 )
 
+# Check creds exist.
+check_creds_exist
+
 # Build dependencies.
 build_gcrane
 build_cip
