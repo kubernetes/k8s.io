@@ -549,6 +549,17 @@ groups:
       - ravisantoshgudimetla@gmail.com
       - spiffxp@google.com
 
+  - email-id: k8s-infra-staging-external-dns@kubernetes.io
+    name: k8s-infra-staging-external-dns
+    description: |-
+      ACL for staging External DNS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - martin.linkhorst+github.com@posteo.de
+      - difazio.raffaele@gmail.com
+      - nick@juni.io
+
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
     name: k8s-infra-staging-kas-network-proxy
     description: |-
