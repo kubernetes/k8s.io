@@ -140,7 +140,7 @@ parse_args "$@";
 #
 
 ALL_PROJECTS=(
-    "example_project"
+    "gcsweb"
 )
 
 for prj in "${ALL_PROJECTS[@]}"; do
