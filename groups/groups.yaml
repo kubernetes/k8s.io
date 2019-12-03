@@ -315,6 +315,7 @@ groups:
       - dmaceachern@vmware.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
+      - saschagrunert@gmail.com
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
@@ -330,28 +331,21 @@ groups:
     members:
       - aleksandram@google.com
       - alexeldeib@gmail.com
-      - cheryl.fong.yin.yin@gmail.com
       - ctadeu@gmail.com
-      - dhaval.bhanu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
-      - girikuncoro@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
       - jameswangel@gmail.com
-      - jbperez@google.com
       - kendrickcoleman@gmail.com
       - linusa@google.com
       - mudrinic.mare@gmail.com
-      - nikhitaraghunath@gmail.com
       - onlydole@gmail.com
       - paul.bouwer@gmail.com
-      - peter.swica@outlook.com
       - premdeeps@google.com
       - sethpmccombs@gmail.com
       - saschagrunert@gmail.com
       - simony@google.com
-      - slicknik@gmail.com
       - sumitranr@google.com
 
   - email-id: k8s-infra-sig-release-prototype@kubernetes.io
@@ -701,32 +695,26 @@ groups:
       - alarcj137@gmail.com
       - aleksandram@google.com
       - alexeldeib@gmail.com
-      - cheryl.fong.yin.yin@gmail.com
       - ctadeu@gmail.com
-      - dhaval.bhanu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
-      - girikuncoro@gmail.com
       - guineveresaenger@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
       - jameswangel@gmail.com
-      - jbperez@google.com
       - jeef111x@gmail.com
       - kendrickcoleman@gmail.com
       - linusa@google.com
       - mntalla@pivotal.io
       - mudrinic.mare@gmail.com
-      - nikhitaraghunath@gmail.com
       - onlydole@gmail.com
       - paul.bouwer@gmail.com
-      - peter.swica@outlook.com
       - premdeeps@google.com
       - release-managers-private@kubernetes.io
+      - saschagrunert@gmail.com
       - sethpmccombs@gmail.com
       - sgrunert@suse.com
       - simony@google.com
-      - slicknik@gmail.com
       - sumitranr@google.com
 
   - email-id: security-discuss-private@kubernetes.io
