@@ -1,0 +1,13 @@
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: namespace-user
+  namespace: {{namespace}}
+subjects:
+  - kind: Group
+    name: k8s-infra-rbac-{{namespace}}@kubernetes.io
+roleRef:
+  kind: Role
+  name: namespace-user
+  apiGroup: rbac.authorization.k8s.io
