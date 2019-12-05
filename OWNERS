@@ -6,6 +6,7 @@ approvers:
 - mikedanese
 - nikhita # sig-contribex tl
 - spiffxp # wg-k8s-infra chair
+- bartsmykla # wg-k8s-infra chair
 
 labels:
 - wg/k8s-infra
