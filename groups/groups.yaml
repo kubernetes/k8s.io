@@ -151,6 +151,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-rbac-cert-manager@kubernetes.io
+      - k8s-infra-rbac-gcsweb@kubernetes.io
 
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
@@ -283,7 +284,17 @@ groups:
       - cblecker@gmail.com
       - james@munnelly.eu
       - thockin@google.com
-      - bartsmykla@gmail.com  # sock-puppet for testing
+      - bartek@smykla.com
+
+  - email-id: k8s-infra-rbac-gcsweb@kubernetes.io
+    name: k8s-infra-rbac-gcsweb
+    description: |-
+      ACL for gcsweb RBAC
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - thockin@google.com
+      - bartek@smykla.com
 
   - email-id: k8s-infra-release-admins@kubernetes.io
     name: k8s-infra-release-admins
