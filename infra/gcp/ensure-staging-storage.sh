@@ -56,6 +56,7 @@ STAGING_PROJECTS=(
     kas-network-proxy
     kops
     kube-state-metrics
+    kubeadm
     metrics-server
     multitenancy
     provider-azure
