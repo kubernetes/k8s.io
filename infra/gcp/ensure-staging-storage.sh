@@ -58,6 +58,7 @@ STAGING_PROJECTS=(
     kube-state-metrics
     metrics-server
     multitenancy
+    provider-azure
     publishing-bot
     release-test
 )

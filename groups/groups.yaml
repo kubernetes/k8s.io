@@ -502,6 +502,22 @@ groups:
       - hi@amycod.es
       - prignanov@vmware.com
 
+  - email-id: k8s-infra-staging-provider-azure@kubernetes.io
+    name: k8s-infra-staging-provider-azure
+    description: |-
+      ACL for staging cloud provider Azure
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - t-qini@microsoft.com
+      - Pengfei.Ni@microsoft.com
+      - stephen.k8s@agst.us
+      - xiazhang@microsoft.com
+      - bburns@microsoft.com
+      - doliu@microsoft.com
+      - khnidk@microsoft.com
+      - ritazh@microsoft.com
+
   - email-id: k8s-infra-staging-coredns@kubernetes.io
     name: k8s-infra-staging-coredns
     description: |-
