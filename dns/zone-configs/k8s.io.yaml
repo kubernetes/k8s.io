@@ -275,4 +275,4 @@ kops.sigs:
   value: kubernetes-kops.netlify.com.
 image-builder.sigs:
   type: CNAME
-  value: kubernetes-sigs-image-builder.netlify.com
+  value: kubernetes-sigs-image-builder.netlify.com.
