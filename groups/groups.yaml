@@ -818,3 +818,26 @@ groups:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
       - jorge@heptio.com
+
+  - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
+    name: Kubernetes E2E test image staging registry owners
+    description: |-
+      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
+      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
+      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
+      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
+      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      ReconcileMembers: "true"
+    owners:
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - thockin@google.com
+      - spiffxp@google.com
