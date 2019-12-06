@@ -780,12 +780,16 @@ groups:
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
     description: |-
-      security release team mailing list
+      Private list for coordinating security releases.
+
+      Membership is restricted to the Product Security Committee,
+      SIG Release Chairs, Patch Release Team, and Branch Managers.
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - stephen.k8s@agst.us
+      - release-managers-private@kubernetes.io
+      - security@kubernetes.io
 
   - email-id: security@kubernetes.io
     name: security
