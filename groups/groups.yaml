@@ -712,7 +712,7 @@ groups:
       - feiskyer@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
-      - kubernetes-release-managers-private@googlegroups.com
+      - saschagrunert@gmail.com
       - saugustus@vmware.com
       - tpepper@gmail.com
 
@@ -760,9 +760,9 @@ groups:
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
     description: |-
-      Private discussion forum for PST members.
+      Private discussion forum for PSC members.
 
-      https://github.com/kubernetes/sig-release/blob/master/security-release-process-documentation/security-release-process.md#product-security-team-pst
+      https://github.com/kubernetes/security#product-security-committee-psc
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
@@ -780,12 +780,16 @@ groups:
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
     description: |-
-      security release team mailing list
+      Private list for coordinating security releases.
+
+      Membership is restricted to the Product Security Committee,
+      SIG Release Chairs, Patch Release Team, and Branch Managers.
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - stephen.k8s@agst.us
+      - release-managers-private@kubernetes.io
+      - security@kubernetes.io
 
   - email-id: security@kubernetes.io
     name: security
