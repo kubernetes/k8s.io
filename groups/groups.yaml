@@ -787,7 +787,7 @@ groups:
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
-    owners:
+    members:
       - release-managers-private@kubernetes.io
       - security@kubernetes.io
 
