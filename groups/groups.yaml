@@ -516,7 +516,7 @@ groups:
       - bburns@microsoft.com
       - doliu@microsoft.com
       - khnidk@microsoft.com
-      - ritazh@microsoft.com
+      - Ritazh@microsoft.com
 
   - email-id: k8s-infra-staging-coredns@kubernetes.io
     name: k8s-infra-staging-coredns
