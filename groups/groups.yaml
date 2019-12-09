@@ -789,7 +789,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - release-managers-private@kubernetes.io
-      - security@kubernetes.io
+      - security-discuss-private@kubernetes.io
 
   - email-id: security@kubernetes.io
     name: security
