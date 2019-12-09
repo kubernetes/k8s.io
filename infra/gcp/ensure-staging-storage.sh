@@ -53,6 +53,7 @@ STAGING_PROJECTS=(
     csi
     descheduler
     e2e-test-images
+    external-dns
     kas-network-proxy
     kops
     kube-state-metrics
