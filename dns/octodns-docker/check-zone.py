@@ -122,6 +122,7 @@ def verify_dns(queries):
     """
     dns_error = False
     for record, responses in sorted(queries.items(), key=lambda d: d[0]):
+        record_error = False    
 
         # Print out a log each record
         stdout.write(record.fqdn)
@@ -152,6 +153,7 @@ def verify_dns(queries):
             # If we didn't get a response, it's an error
             if not response_values:
                 dns_error = True
+                record_error = False
                 continue
 
             # All configured_values should be included in the response
@@ -159,6 +161,7 @@ def verify_dns(queries):
                 if configured_value in response_values:
                     continue
                 log.error('*** Configured Value not in response: %s', record.fqdn)
+                record_error = True
                 dns_error = True
 
             # All reponses should be included in the configured_values
@@ -166,9 +169,10 @@ def verify_dns(queries):
                 if response_value in configured_values:
                     continue
                 log.error('*** Response not in configuration: %s', record.fqdn)
+                record_error = True
                 dns_error = True
 
-        if not dns_error:
+        if not record_error:
             stdout.write(',True\n')
         else:
             stdout.write(',False\n')
@@ -191,14 +195,27 @@ def main():
     for zone_name in args.zone:
         print('Checking records for {}'.format(zone_name))
         zone = Zone(zone_name, manager.configured_sub_zones(zone_name))
+
+        # Read our YAML configuration
+        yaml_config = manager.providers['config']
+
+        # Build a GCP provider in our project to read the nameservers from it
         gcp = manager.providers['gcp']
         project = gcp.gcloud_client.project
-        gcp.populate(zone)
-
+        
         # Retrieve the DNS Servers directly from the GCP configuration
         dns_servers = gcp.gcloud_zones[zone_name].name_servers
+
+        # k8s.io resolvers for testing without access to gcp
+        #dns_servers = ["NS-CLOUD-D1.GOOGLEDOMAINS.COM", "NS-CLOUD-D2.GOOGLEDOMAINS.COM", "NS-CLOUD-D3.GOOGLEDOMAINS.COM", "NS-CLOUD-D4.GOOGLEDOMAINS.COM"]
         print('Using GCP project {}'.format(project))
         print('name,type,ttl,{},consistent'.format(','.join(dns_servers)))
+        
+        # Populate the zone with those records defined in our YAML config
+        yaml_config.populate(zone)
+
+        # This would populate the zone with records already defined in Google Cloud DNS
+        # gcp.populate(zone)
 
         # Configure Resolvers (one per DNS server)
         resolvers = configure_resolvers(dns_servers)
