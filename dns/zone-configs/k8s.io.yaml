@@ -131,7 +131,7 @@ features:
 # Web frontend for unauthenticated GCS access.  Running in GKE (@thockin).
 gcsweb:
   type: A
-  value: 35.244.175.21
+  value: 35.190.8.208
 get:
   type: CNAME
   value: redirect.k8s.io.
