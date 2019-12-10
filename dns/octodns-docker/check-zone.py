@@ -120,8 +120,8 @@ def verify_dns(queries):
     """
     Iterate over the queries comparing the responses to the record configuration
     """
-    dns_error = False
     for record, responses in sorted(queries.items(), key=lambda d: d[0]):
+        dns_error = False    
 
         # Print out a log each record
         stdout.write(record.fqdn)
@@ -191,14 +191,24 @@ def main():
     for zone_name in args.zone:
         print('Checking records for {}'.format(zone_name))
         zone = Zone(zone_name, manager.configured_sub_zones(zone_name))
+
+        # Read our YAML configuration
+        yaml_config = manager.providers['config']
+
+        # Build a GCP provider in our project to read the nameservers from it
         gcp = manager.providers['gcp']
         project = gcp.gcloud_client.project
-        gcp.populate(zone)
-
+        
         # Retrieve the DNS Servers directly from the GCP configuration
         dns_servers = gcp.gcloud_zones[zone_name].name_servers
         print('Using GCP project {}'.format(project))
         print('name,type,ttl,{},consistent'.format(','.join(dns_servers)))
+        
+        # Populate the zone with those records defined in our YAML config
+        yaml_config.populate(zone)
+
+        # This would populate the zone with records already defined in Google Cloud DNS
+        # gcp.populate(zone)
 
         # Configure Resolvers (one per DNS server)
         resolvers = configure_resolvers(dns_servers)
