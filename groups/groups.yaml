@@ -994,3 +994,24 @@ groups:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
       - jorge@heptio.com
+
+  - email-id: k8s-infra-conform-cri-o@kubernetes.io
+    name: k8s-infra-conform-cri-o
+    description: |-
+      ACL for conformance CRI-O
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
+    members:
+      - mpatel@redhat.com
+      - pehunt@redhat.com
+      - saschagrunert@gmail.com

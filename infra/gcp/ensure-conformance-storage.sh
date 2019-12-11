@@ -46,6 +46,7 @@ PROJECT="k8s-conform"
 # NB: Please keep this sorted.
 CONFORMANCE_BUCKETS=(
     capi-openstack
+    cri-o
 )
 if [ $# = 0 ]; then
     # default to all conformance buckets
