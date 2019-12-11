@@ -7,11 +7,18 @@ CNCF_GCP_ORG=758905017065
 # User [hh@ii.coop] does not have permission to access organization []
 
 format=json
+
 echo "# Auditing CNCF CGP Org: ${CNCF_GCP_ORG} #"
-gcloud iam roles list --organization=$CNCF_GCP_ORG --format=$format \
-       > cncf-org.roles.$format
+mkdir -p org_kubernetes.io/roles
+for ROLE_PATH in `gcloud iam roles list --organization=$CNCF_GCP_ORG --format="value(name)"`
+do
+    ROLE=`basename $ROLE_PATH`
+    gcloud iam roles describe --organization=$CNCF_GCP_ORG $ROLE \
+        --format=json > org_kubernetes.io/roles/$ROLE.json
+done
 gcloud organizations get-iam-policy $CNCF_GCP_ORG --format=$format \
-       > cncf-org.policy.$format
+       > org_kubernetes.io/iam.$format
+
 echo "## Iterating over Projects ##"
 gcloud projects list \
        --filter "parent.id=$CNCF_GCP_ORG" \
