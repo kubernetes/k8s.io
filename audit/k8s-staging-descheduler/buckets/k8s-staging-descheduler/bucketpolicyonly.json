@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-descheduler:
+  Enabled: True
+  LockedTime: 2019-10-15 20:47:37.474000+00:00
+

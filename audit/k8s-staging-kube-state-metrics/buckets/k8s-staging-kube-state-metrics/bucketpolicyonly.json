@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-kube-state-metrics:
+  Enabled: True
+  LockedTime: 2020-01-20 16:07:43.083000+00:00
+

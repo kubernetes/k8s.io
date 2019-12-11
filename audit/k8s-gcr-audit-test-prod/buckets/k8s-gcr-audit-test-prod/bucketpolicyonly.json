@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-gcr-audit-test-prod:
+  Enabled: True
+  LockedTime: 2020-01-30 18:30:23.922000+00:00
+

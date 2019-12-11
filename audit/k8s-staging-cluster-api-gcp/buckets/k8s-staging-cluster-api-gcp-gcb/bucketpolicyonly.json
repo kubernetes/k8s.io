@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-cluster-api-gcp-gcb:
+  Enabled: True
+  LockedTime: 2019-12-10 16:20:03.612000+00:00
+

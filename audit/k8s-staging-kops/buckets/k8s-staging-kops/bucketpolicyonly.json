@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-kops:
+  Enabled: True
+  LockedTime: 2019-10-06 19:40:59.218000+00:00
+

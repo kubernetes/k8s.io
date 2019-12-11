@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-multitenancy:
+  Enabled: True
+  LockedTime: 2019-12-03 19:36:09.646000+00:00
+

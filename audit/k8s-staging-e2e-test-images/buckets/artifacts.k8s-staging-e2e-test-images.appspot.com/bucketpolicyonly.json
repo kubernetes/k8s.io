@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-e2e-test-images.appspot.com:
+  Enabled: True
+  LockedTime: 2020-03-05 17:23:51.041000+00:00
+

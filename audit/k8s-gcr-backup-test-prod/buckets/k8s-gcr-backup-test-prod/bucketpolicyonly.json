@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-gcr-backup-test-prod:
+  Enabled: True
+  LockedTime: 2020-01-21 19:10:04.821000+00:00
+

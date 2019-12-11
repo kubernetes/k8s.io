@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://us.artifacts.k8s-cip-test-prod.appspot.com:
+  Enabled: True
+  LockedTime: 2019-07-25 21:55:02.059000+00:00
+

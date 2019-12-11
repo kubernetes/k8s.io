@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-artifacts-prod:
+  Enabled: True
+  LockedTime: 2019-10-07 22:09:04.125000+00:00
+

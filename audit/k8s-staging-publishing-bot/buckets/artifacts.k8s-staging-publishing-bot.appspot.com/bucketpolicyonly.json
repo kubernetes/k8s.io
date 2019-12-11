@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-publishing-bot.appspot.com:
+  Enabled: True
+  LockedTime: 2019-09-23 05:09:51.226000+00:00
+

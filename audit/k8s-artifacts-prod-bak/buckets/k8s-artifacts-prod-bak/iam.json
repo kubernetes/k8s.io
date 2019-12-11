@@ -1,0 +1,31 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io", 
+        "projectEditor:k8s-artifacts-prod-bak", 
+        "projectOwner:k8s-artifacts-prod-bak"
+      ], 
+      "role": "roles/storage.legacyBucketOwner"
+    }, 
+    {
+      "members": [
+        "projectViewer:k8s-artifacts-prod-bak"
+      ], 
+      "role": "roles/storage.legacyBucketReader"
+    }, 
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ], 
+      "role": "roles/storage.objectAdmin"
+    }, 
+    {
+      "members": [
+        "allUsers"
+      ], 
+      "role": "roles/storage.objectViewer"
+    }
+  ], 
+  "etag": "CAo="
+}

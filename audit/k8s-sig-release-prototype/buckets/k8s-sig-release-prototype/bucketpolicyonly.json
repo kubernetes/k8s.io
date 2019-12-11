@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-sig-release-prototype:
+  Enabled: True
+  LockedTime: 2019-07-25 21:40:15.402000+00:00
+

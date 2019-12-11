@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-capi-kubeadm-gcb:
+  Enabled: True
+  LockedTime: 2019-12-10 16:22:06.807000+00:00
+

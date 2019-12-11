@@ -76,18 +76,13 @@ gcloud projects list \
                 echo TODO: Verify how Big Query is configured / audited
                 ;;
             storage-api)
-                echo TODO: $service needs storage.buckets.get for auditors
-                echo ...to kubernetes_public_billing and any newer buckets...
-                echo TODO: Ensure bucket-policy-only, for simplicity in Auditing
-                # https://cloud.google.com/storage/docs/bucket-policy-only
-                mkdir -p $PROJECT/buckets
                 for BUCKET in `gsutil ls -p $PROJECT | awk -F/ '{print $3}'`
                 do
-                    #### gsutil bucketpolicyonly get gs://$BUCKET/
-                    #### gsutil cors get gs://$BUCKET/
-                    #### gsutil logging get gs://$BUCKET/
-                    gsutil iam get gs://$BUCKET/ > $PROJECT/buckets/$BUCKET.iam.json
-                    gsutil ls -r gs://$BUCKET/ > $PROJECT/buckets/$BUCKET.txt
+                    mkdir -p $PROJECT/buckets/$BUCKET
+                    gsutil bucketpolicyonly get gs://$BUCKET/ > $PROJECT/buckets/$BUCKET/bucketpolicyonly.json
+                    gsutil cors get gs://$BUCKET/ > $PROJECT/buckets/$BUCKET/cors.json
+                    gsutil logging get gs://$BUCKET/ > $PROJECT/buckets/$BUCKET/logging.json
+                    gsutil iam get gs://$BUCKET/ > $PROJECT/buckets/$BUCKET/iam.json
                 done
                 ;;
             storage-component)
@@ -101,7 +96,6 @@ done
 
 
 # TODO:
-# Dump iam for each GCS Bucket
 # Dump iam for Big Query
 # Iterate over enabled APIs per project
 # Identify each resource, then dump iam

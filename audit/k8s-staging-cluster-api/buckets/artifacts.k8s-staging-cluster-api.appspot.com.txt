@@ -1,9 +1,0 @@
-gs://artifacts.k8s-staging-cluster-api.appspot.com/containers/:
-
-gs://artifacts.k8s-staging-cluster-api.appspot.com/containers/images/:
-gs://artifacts.k8s-staging-cluster-api.appspot.com/containers/images/sha256:1327a37c23a10f78f052dce7627f37f391f3823480207f4eb8ea825de5b40635
-gs://artifacts.k8s-staging-cluster-api.appspot.com/containers/images/sha256:1558143043601a425aa864511da238799b57fcf7d062d47044f6ddd0e04fe99a
-gs://artifacts.k8s-staging-cluster-api.appspot.com/containers/images/sha256:269521def953f8e22145983d8496b281bc1ecc258c07b45ef253af7d79b98216
-gs://artifacts.k8s-staging-cluster-api.appspot.com/containers/images/sha256:4eeed99bc155eead8af4df58716cbaec330024b9382fc02e536fe48fda3feb02
-gs://artifacts.k8s-staging-cluster-api.appspot.com/containers/images/sha256:539d8cf2979903a23fb58dfb0f896a0fa6e7563d7a553db0854da7bb61e6eed9
-gs://artifacts.k8s-staging-cluster-api.appspot.com/containers/images/sha256:a1f6935156b3112da678af6308418e05b2f4c99cf94581a83483b3bd555e37f5

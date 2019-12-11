@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-artifact-promoter:
+  Enabled: True
+  LockedTime: 2019-11-18 00:07:35.916000+00:00
+

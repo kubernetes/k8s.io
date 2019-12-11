@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-artifacts-prod-bak:
+  Enabled: True
+  LockedTime: 2020-01-21 19:06:08.221000+00:00
+

@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-kas-network-proxy:
+  Enabled: True
+  LockedTime: 2020-02-03 17:46:48.221000+00:00
+

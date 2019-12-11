@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-external-dns:
+  Enabled: True
+  LockedTime: 2020-03-08 22:29:34.317000+00:00
+
