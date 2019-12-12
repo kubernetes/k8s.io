@@ -65,191 +65,17 @@
         "test-managedvms.googleapis.com"
       ]
     },
-    "name": "projects/433651898792/services/cloudbuild.googleapis.com",
-    "parent": "projects/433651898792",
+    "name": "projects/817922591645/services/cloudbuild.googleapis.com",
+    "parent": "projects/817922591645",
     "serviceAccounts": [
       {
-        "email": "433651898792@cloudbuild.gserviceaccount.com",
+        "email": "817922591645@cloudbuild.gserviceaccount.com",
         "role": "roles/cloudbuild.builds.builder"
       },
       {
-        "email": "service-433651898792@gcp-sa-cloudbuild.iam.gserviceaccount.com",
+        "email": "service-817922591645@gcp-sa-cloudbuild.iam.gserviceaccount.com",
         "role": "roles/cloudbuild.serviceAgent",
         "tag": "p4sa"
-      }
-    ],
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "Creates and runs virtual machines on Google Cloud Platform.\n"
-      },
-      "features": [
-        "googleprod.com/service/use-monarch",
-        "serviceusage.googleapis.com/skip-activation",
-        "serviceusage.googleapis.com/skip-secure-gcp-if-no-resource-container"
-      ],
-      "legacy": {
-        "apiV1Name": "compute",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/compute/"
-        }
-      },
-      "migration": {},
-      "name": "compute.googleapis.com",
-      "quota": {},
-      "title": "Compute Engine API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud",
-          "serviceusage.googleapis.com/billing-enabled"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "compute.googleapis.com",
-        "oslogin.googleapis.com"
-      ],
-      "directlyDependsOn": [
-        "oslogin.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "appengineflex.googleapis.com",
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-notebooks.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "clouddataorchestration-test.sandbox.googleapis.com",
-        "clouduseraccounts.googleapis.com",
-        "composer.googleapis.com",
-        "container.googleapis.com",
-        "dataflow-daily.sandbox.googleapis.com",
-        "dataflow-dev-staging.sandbox.googleapis.com",
-        "dataflow-staging.sandbox.googleapis.com",
-        "dataflow.googleapis.com",
-        "datalogic.googleapis.com",
-        "dataproc-control.googleapis.com",
-        "dataproc.googleapis.com",
-        "dev-composer.sandbox.googleapis.com",
-        "file.googleapis.com",
-        "managedvms.googleapis.com",
-        "memcache.googleapis.com",
-        "notebooks.googleapis.com",
-        "osconfig.googleapis.com",
-        "redis.googleapis.com",
-        "spinnaker.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-composer.sandbox.googleapis.com",
-        "staging-container.sandbox.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-dataproc-control.sandbox.googleapis.com",
-        "staging-dataproc.sandbox.googleapis.com",
-        "staging-file.sandbox.googleapis.com",
-        "staging-managedvms.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-notebooks.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "staging-vpcaccess.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-container.sandbox.googleapis.com",
-        "test-dataproc-control.sandbox.googleapis.com",
-        "test-dataproc.sandbox.googleapis.com",
-        "test-file.sandbox.googleapis.com",
-        "test-managedvms.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "test-vpcaccess.sandbox.googleapis.com",
-        "tpu.googleapis.com",
-        "vpcaccess.googleapis.com"
-      ],
-      "requiredBy": [
-        "appengineflex.googleapis.com",
-        "autopush-datafusion.sandbox.googleapis.com",
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-notebooks.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "autoscaler.googleapis.com",
-        "binaryauthorization.googleapis.com",
-        "cloud-infrastructure.googleapis.com",
-        "clouddataorchestration-test.sandbox.googleapis.com",
-        "clouduseraccounts.googleapis.com",
-        "composer.googleapis.com",
-        "container.googleapis.com",
-        "dataflow-daily.sandbox.googleapis.com",
-        "dataflow-dev-staging.sandbox.googleapis.com",
-        "dataflow-staging.sandbox.googleapis.com",
-        "dataflow.googleapis.com",
-        "datafusion.googleapis.com",
-        "datalogic.googleapis.com",
-        "dataprep.googleapis.com",
-        "dataproc-control.googleapis.com",
-        "dataproc.googleapis.com",
-        "dev-composer.sandbox.googleapis.com",
-        "dev-dataprep.sandbox.googleapis.com",
-        "file.googleapis.com",
-        "managedvms.googleapis.com",
-        "manager.googleapis.com",
-        "memcache.googleapis.com",
-        "notebooks.googleapis.com",
-        "osconfig.googleapis.com",
-        "redis.googleapis.com",
-        "resourceviews.googleapis.com",
-        "spinnaker.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-binaryauthorization.sandbox.googleapis.com",
-        "staging-composer.sandbox.googleapis.com",
-        "staging-container.sandbox.googleapis.com",
-        "staging-datafusion.sandbox.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-dataprep.googleapis.com",
-        "staging-dataproc-control.sandbox.googleapis.com",
-        "staging-dataproc.sandbox.googleapis.com",
-        "staging-file.sandbox.googleapis.com",
-        "staging-managedvms.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-notebooks.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "staging-vpcaccess.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-binaryauthorization.sandbox.googleapis.com",
-        "test-container.sandbox.googleapis.com",
-        "test-dataproc-control.sandbox.googleapis.com",
-        "test-dataproc.sandbox.googleapis.com",
-        "test-file.sandbox.googleapis.com",
-        "test-managedvms.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "test-vpcaccess.sandbox.googleapis.com",
-        "tpu.googleapis.com",
-        "vpcaccess.googleapis.com"
-      ]
-    },
-    "name": "projects/433651898792/services/compute.googleapis.com",
-    "parent": "projects/433651898792",
-    "serviceAccounts": [
-      {
-        "email": "service-433651898792@compute-system.iam.gserviceaccount.com",
-        "role": "roles/compute.serviceAgent",
-        "tag": "compute-service-agent"
-      },
-      {
-        "email": "433651898792@cloudservices.gserviceaccount.com",
-        "role": "roles/editor",
-        "tag": "csr"
-      },
-      {
-        "email": "433651898792-compute@developer.gserviceaccount.com",
-        "role": "roles/editor"
       }
     ],
     "state": "ENABLED"
@@ -382,11 +208,11 @@
         "tpu.googleapis.com"
       ]
     },
-    "name": "projects/433651898792/services/containerregistry.googleapis.com",
-    "parent": "projects/433651898792",
+    "name": "projects/817922591645/services/containerregistry.googleapis.com",
+    "parent": "projects/817922591645",
     "serviceAccounts": [
       {
-        "email": "service-433651898792@containerregistry.iam.gserviceaccount.com",
+        "email": "service-817922591645@containerregistry.iam.gserviceaccount.com",
         "role": "roles/editor"
       }
     ],
@@ -563,111 +389,8 @@
         "vpcaccess.googleapis.com"
       ]
     },
-    "name": "projects/433651898792/services/logging.googleapis.com",
-    "parent": "projects/433651898792",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "You can use OS Login to manage access to your VM instances using IAM roles. For more information, read [OS Login](/compute/docs/oslogin/)."
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "oslogin.googleapis.com",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/compute/docs/oslogin/"
-        }
-      },
-      "migration": {},
-      "name": "oslogin.googleapis.com",
-      "quota": {},
-      "title": "Cloud OS Login API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "oslogin.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "compute.googleapis.com"
-      ],
-      "requiredBy": [
-        "appengineflex.googleapis.com",
-        "autopush-datafusion.sandbox.googleapis.com",
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-notebooks.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "autoscaler.googleapis.com",
-        "binaryauthorization.googleapis.com",
-        "cloud-infrastructure.googleapis.com",
-        "clouddataorchestration-test.sandbox.googleapis.com",
-        "clouduseraccounts.googleapis.com",
-        "composer.googleapis.com",
-        "compute.googleapis.com",
-        "container.googleapis.com",
-        "dataflow-daily.sandbox.googleapis.com",
-        "dataflow-dev-staging.sandbox.googleapis.com",
-        "dataflow-staging.sandbox.googleapis.com",
-        "dataflow.googleapis.com",
-        "datafusion.googleapis.com",
-        "datalogic.googleapis.com",
-        "dataprep.googleapis.com",
-        "dataproc-control.googleapis.com",
-        "dataproc.googleapis.com",
-        "dev-composer.sandbox.googleapis.com",
-        "dev-dataprep.sandbox.googleapis.com",
-        "file.googleapis.com",
-        "managedvms.googleapis.com",
-        "manager.googleapis.com",
-        "memcache.googleapis.com",
-        "notebooks.googleapis.com",
-        "osconfig.googleapis.com",
-        "redis.googleapis.com",
-        "resourceviews.googleapis.com",
-        "spinnaker.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-binaryauthorization.sandbox.googleapis.com",
-        "staging-composer.sandbox.googleapis.com",
-        "staging-container.sandbox.googleapis.com",
-        "staging-datafusion.sandbox.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-dataprep.googleapis.com",
-        "staging-dataproc-control.sandbox.googleapis.com",
-        "staging-dataproc.sandbox.googleapis.com",
-        "staging-file.sandbox.googleapis.com",
-        "staging-managedvms.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-notebooks.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "staging-vpcaccess.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-binaryauthorization.sandbox.googleapis.com",
-        "test-container.sandbox.googleapis.com",
-        "test-dataproc-control.sandbox.googleapis.com",
-        "test-dataproc.sandbox.googleapis.com",
-        "test-file.sandbox.googleapis.com",
-        "test-managedvms.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "test-vpcaccess.sandbox.googleapis.com",
-        "tpu.googleapis.com",
-        "vpcaccess.googleapis.com"
-      ]
-    },
-    "name": "projects/433651898792/services/oslogin.googleapis.com",
-    "parent": "projects/433651898792",
+    "name": "projects/817922591645/services/logging.googleapis.com",
+    "parent": "projects/817922591645",
     "state": "ENABLED"
   },
   {
@@ -830,11 +553,11 @@
         "workflow.googleapis.com"
       ]
     },
-    "name": "projects/433651898792/services/pubsub.googleapis.com",
-    "parent": "projects/433651898792",
+    "name": "projects/817922591645/services/pubsub.googleapis.com",
+    "parent": "projects/817922591645",
     "serviceAccounts": [
       {
-        "email": "service-433651898792@gcp-sa-pubsub.iam.gserviceaccount.com"
+        "email": "service-817922591645@gcp-sa-pubsub.iam.gserviceaccount.com"
       }
     ],
     "state": "ENABLED"
@@ -1012,8 +735,8 @@
         "tpu.googleapis.com"
       ]
     },
-    "name": "projects/433651898792/services/storage-api.googleapis.com",
-    "parent": "projects/433651898792",
+    "name": "projects/817922591645/services/storage-api.googleapis.com",
+    "parent": "projects/817922591645",
     "state": "ENABLED"
   },
   {
@@ -1151,8 +874,8 @@
         "tpu.googleapis.com"
       ]
     },
-    "name": "projects/433651898792/services/storage-component.googleapis.com",
-    "parent": "projects/433651898792",
+    "name": "projects/817922591645/services/storage-component.googleapis.com",
+    "parent": "projects/817922591645",
     "state": "ENABLED"
   }
 ]

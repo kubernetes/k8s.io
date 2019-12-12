@@ -3,281 +3,6 @@
     "config": {
       "authentication": {},
       "documentation": {
-        "summary": "A data platform for customers to create, manage, share and query data."
-      },
-      "features": [
-        "servicemanagement.googleapis.com/internal-per-day-per-user-quota",
-        "serviceusage.googleapis.com/skip-secure-gcp-if-no-resource-container"
-      ],
-      "legacy": {
-        "apiV1Name": "bigquery",
-        "devconsole": {
-          "learnmoreUrl": "https://developers.google.com/bigquery/",
-          "requestQuotaUrl": "https://cloud.google.com/bigquery/support"
-        }
-      },
-      "migration": {},
-      "name": "bigquery-json.googleapis.com",
-      "quota": {},
-      "title": "BigQuery API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "bigquery-json.googleapis.com",
-        "bigquery.googleapis.com",
-        "bigquerystorage.googleapis.com"
-      ],
-      "directlyDependsOn": [
-        "bigquery.googleapis.com",
-        "bigquerystorage.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "bigquery.googleapis.com",
-        "bigquerybiengine.googleapis.com",
-        "bigquerystorage.googleapis.com",
-        "cloudapis.googleapis.com",
-        "container.googleapis.com",
-        "dataprep.googleapis.com",
-        "dev-dataprep.sandbox.googleapis.com",
-        "load-bigquerybiengine.sandbox.googleapis.com",
-        "servicebroker.googleapis.com",
-        "staging-bigquerybiengine.sandbox.googleapis.com",
-        "staging-container.sandbox.googleapis.com",
-        "staging-dataprep.googleapis.com",
-        "staging-servicebroker.sandbox.googleapis.com",
-        "test-bigquerybiengine.sandbox.googleapis.com",
-        "test-container.sandbox.googleapis.com"
-      ],
-      "requiredBy": [
-        "appengineflex.googleapis.com",
-        "autopush-datafusion.sandbox.googleapis.com",
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "autoscaler.googleapis.com",
-        "bigquery.googleapis.com",
-        "bigquerybiengine.googleapis.com",
-        "bigquerystorage.googleapis.com",
-        "binaryauthorization.googleapis.com",
-        "cloud-infrastructure.googleapis.com",
-        "cloudapis.googleapis.com",
-        "composer.googleapis.com",
-        "container.googleapis.com",
-        "dataflow.googleapis.com",
-        "datafusion.googleapis.com",
-        "datalogic.googleapis.com",
-        "dataprep.googleapis.com",
-        "dev-composer.sandbox.googleapis.com",
-        "dev-dataprep.sandbox.googleapis.com",
-        "file.googleapis.com",
-        "load-bigquerybiengine.sandbox.googleapis.com",
-        "managedvms.googleapis.com",
-        "manager.googleapis.com",
-        "memcache.googleapis.com",
-        "redis.googleapis.com",
-        "resourceviews.googleapis.com",
-        "servicebroker.googleapis.com",
-        "spinnaker.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-bigquerybiengine.sandbox.googleapis.com",
-        "staging-binaryauthorization.sandbox.googleapis.com",
-        "staging-composer.sandbox.googleapis.com",
-        "staging-container.sandbox.googleapis.com",
-        "staging-datafusion.sandbox.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-dataprep.googleapis.com",
-        "staging-file.sandbox.googleapis.com",
-        "staging-managedvms.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-servicebroker.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-bigquerybiengine.sandbox.googleapis.com",
-        "test-binaryauthorization.sandbox.googleapis.com",
-        "test-container.sandbox.googleapis.com",
-        "test-file.sandbox.googleapis.com",
-        "test-managedvms.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "tpu.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/bigquery-json.googleapis.com",
-    "parent": "projects/848617618266",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {},
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "bigquerystorage.googleapis.com",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/bigquery/"
-        }
-      },
-      "migration": {},
-      "name": "bigquerystorage.googleapis.com",
-      "quota": {},
-      "title": "BigQuery Storage API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "bigquery-json.googleapis.com",
-        "bigquery.googleapis.com",
-        "bigquerystorage.googleapis.com"
-      ],
-      "directlyDependsOn": [
-        "bigquery-json.googleapis.com",
-        "bigquery.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "bigquery-json.googleapis.com",
-        "bigquery.googleapis.com"
-      ],
-      "requiredBy": [
-        "appengineflex.googleapis.com",
-        "autopush-datafusion.sandbox.googleapis.com",
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "autoscaler.googleapis.com",
-        "bigquery-json.googleapis.com",
-        "bigquery.googleapis.com",
-        "bigquerybiengine.googleapis.com",
-        "binaryauthorization.googleapis.com",
-        "cloud-infrastructure.googleapis.com",
-        "cloudapis.googleapis.com",
-        "composer.googleapis.com",
-        "container.googleapis.com",
-        "dataflow.googleapis.com",
-        "datafusion.googleapis.com",
-        "datalogic.googleapis.com",
-        "dataprep.googleapis.com",
-        "dev-composer.sandbox.googleapis.com",
-        "dev-dataprep.sandbox.googleapis.com",
-        "file.googleapis.com",
-        "load-bigquerybiengine.sandbox.googleapis.com",
-        "managedvms.googleapis.com",
-        "manager.googleapis.com",
-        "memcache.googleapis.com",
-        "redis.googleapis.com",
-        "resourceviews.googleapis.com",
-        "servicebroker.googleapis.com",
-        "spinnaker.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-bigquerybiengine.sandbox.googleapis.com",
-        "staging-binaryauthorization.sandbox.googleapis.com",
-        "staging-composer.sandbox.googleapis.com",
-        "staging-container.sandbox.googleapis.com",
-        "staging-datafusion.sandbox.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-dataprep.googleapis.com",
-        "staging-file.sandbox.googleapis.com",
-        "staging-managedvms.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-servicebroker.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-bigquerybiengine.sandbox.googleapis.com",
-        "test-binaryauthorization.sandbox.googleapis.com",
-        "test-container.sandbox.googleapis.com",
-        "test-file.sandbox.googleapis.com",
-        "test-managedvms.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "tpu.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/bigquerystorage.googleapis.com",
-    "parent": "projects/848617618266",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "This is a meta service for Google Cloud APIs for convenience. Enabling this service enables all commonly used Google Cloud APIs for the project. By default, it is enabled for all projects created through Google Cloud Console and Google Cloud SDK, and should be manually enabled for all other projects that intend to use Google Cloud APIs. Note: disabling this service has no effect on other services.\n"
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "cloudapis.googleapis.com",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com"
-        }
-      },
-      "migration": {},
-      "name": "cloudapis.googleapis.com",
-      "quota": {},
-      "title": "Google Cloud APIs",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ],
-        "serviceAccess": "PUBLIC"
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "bigquery-json.googleapis.com",
-        "bigquery.googleapis.com",
-        "bigquerystorage.googleapis.com",
-        "cloudapis.googleapis.com",
-        "clouddebugger.googleapis.com",
-        "cloudtrace.googleapis.com",
-        "datastore.googleapis.com",
-        "logging.googleapis.com",
-        "monitoring.googleapis.com",
-        "servicemanagement.googleapis.com",
-        "serviceusage.googleapis.com",
-        "sql-component.googleapis.com",
-        "storage-api.googleapis.com",
-        "storage-component.googleapis.com"
-      ],
-      "directlyDependsOn": [
-        "bigquery-json.googleapis.com",
-        "bigquery.googleapis.com",
-        "clouddebugger.googleapis.com",
-        "cloudtrace.googleapis.com",
-        "datastore.googleapis.com",
-        "logging.googleapis.com",
-        "monitoring.googleapis.com",
-        "servicemanagement.googleapis.com",
-        "serviceusage.googleapis.com",
-        "sql-component.googleapis.com",
-        "storage-api.googleapis.com",
-        "storage-component.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/cloudapis.googleapis.com",
-    "parent": "projects/848617618266",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
         "summary": "Creates and manages builds on Google Cloud Platform."
       },
       "features": [
@@ -340,153 +65,17 @@
         "test-managedvms.googleapis.com"
       ]
     },
-    "name": "projects/848617618266/services/cloudbuild.googleapis.com",
-    "parent": "projects/848617618266",
+    "name": "projects/129051311436/services/cloudbuild.googleapis.com",
+    "parent": "projects/129051311436",
     "serviceAccounts": [
       {
-        "email": "848617618266@cloudbuild.gserviceaccount.com",
+        "email": "129051311436@cloudbuild.gserviceaccount.com",
         "role": "roles/cloudbuild.builds.builder"
       },
       {
-        "email": "service-848617618266@gcp-sa-cloudbuild.iam.gserviceaccount.com",
+        "email": "service-129051311436@gcp-sa-cloudbuild.iam.gserviceaccount.com",
         "role": "roles/cloudbuild.serviceAgent",
         "tag": "p4sa"
-      }
-    ],
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "Examines the call stack and variables of a running application without stopping or slowing it down.\n"
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "clouddebugger",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/debugger"
-        }
-      },
-      "migration": {
-        "preferDistribDiscovery": true
-      },
-      "name": "clouddebugger.googleapis.com",
-      "quota": {},
-      "title": "Stackdriver Debugger API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "clouddebugger.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "cloudapis.googleapis.com",
-        "managedvms.googleapis.com",
-        "staging-managedvms.googleapis.com",
-        "test-managedvms.googleapis.com"
-      ],
-      "requiredBy": [
-        "cloudapis.googleapis.com",
-        "managedvms.googleapis.com",
-        "staging-managedvms.googleapis.com",
-        "test-managedvms.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/clouddebugger.googleapis.com",
-    "parent": "projects/848617618266",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "Sends application trace data to Stackdriver Trace for viewing. Trace data is collected for all App Engine applications by default. Trace data from other applications can be provided using this API. This library is used to interact with the Trace API directly. If you are looking to instrument your application for Stackdriver Trace, we recommend using OpenCensus.\n"
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "cloudtrace",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/trace",
-          "requestQuotaUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdfwtHpzI0qooPHn8pNUYJ7fYzjLNtS5QoTTHUz6wmxC_q_aA/viewform?entry.1042889977={email}&entry.567537273={id}"
-        }
-      },
-      "migration": {
-        "preferDistribDiscovery": true
-      },
-      "name": "cloudtrace.googleapis.com",
-      "quota": {},
-      "title": "Stackdriver Trace API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "cloudtrace.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-endpoints.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "cloudapis.googleapis.com",
-        "cloudscheduler.googleapis.com",
-        "datalogic.googleapis.com",
-        "dev-endpoints-googleapis.corp.google.com",
-        "endpoints.googleapis.com",
-        "memcache.googleapis.com",
-        "redis.googleapis.com",
-        "spinnaker.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "tpu.googleapis.com"
-      ],
-      "requiredBy": [
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-endpoints.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "cloudapis.googleapis.com",
-        "cloudscheduler.googleapis.com",
-        "datalogic.googleapis.com",
-        "dev-endpoints-googleapis.corp.google.com",
-        "endpoints.googleapis.com",
-        "memcache.googleapis.com",
-        "redis.googleapis.com",
-        "spinnaker.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "tpu.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/cloudtrace.googleapis.com",
-    "parent": "projects/848617618266",
-    "serviceAccounts": [
-      {
-        "email": "service-848617618266@gcp-sa-cloud-trace.iam.gserviceaccount.com"
       }
     ],
     "state": "ENABLED"
@@ -645,92 +234,22 @@
         "vpcaccess.googleapis.com"
       ]
     },
-    "name": "projects/848617618266/services/compute.googleapis.com",
-    "parent": "projects/848617618266",
+    "name": "projects/129051311436/services/compute.googleapis.com",
+    "parent": "projects/129051311436",
     "serviceAccounts": [
       {
-        "email": "service-848617618266@compute-system.iam.gserviceaccount.com",
+        "email": "service-129051311436@compute-system.iam.gserviceaccount.com",
         "role": "roles/compute.serviceAgent",
         "tag": "compute-service-agent"
       },
       {
-        "email": "848617618266@cloudservices.gserviceaccount.com",
+        "email": "129051311436@cloudservices.gserviceaccount.com",
         "role": "roles/editor",
         "tag": "csr"
       },
       {
-        "email": "848617618266-compute@developer.gserviceaccount.com",
+        "email": "129051311436-compute@developer.gserviceaccount.com",
         "role": "roles/editor"
-      }
-    ],
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "An implementation of the Grafeas API, which stores, and enables querying and retrieval of critical metadata about all of your software artifacts."
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "containeranalysis.googleapis.com",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/container-analysis/api/reference/rest/",
-          "requestQuotaUrl": "https://docs.google.com/forms/d/1lRDj_etJbQrdmqF6NtexnBBk7xm_81xLyG78eCatKfQ/viewform?entry_0={email}&entry_1={id}"
-        }
-      },
-      "migration": {},
-      "name": "containeranalysis.googleapis.com",
-      "quota": {},
-      "title": "Container Analysis API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ],
-        "serviceAccess": "PUBLIC"
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "containeranalysis.googleapis.com",
-        "pubsub.googleapis.com"
-      ],
-      "directlyDependsOn": [
-        "pubsub.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "binaryauthorization.googleapis.com",
-        "computescanning.googleapis.com",
-        "containerscanning.googleapis.com",
-        "deploymenthistory.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-binaryauthorization.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-binaryauthorization.sandbox.googleapis.com",
-        "test-computescanning.sandbox.googleapis.com",
-        "test-deploymenthistory.sandbox.googleapis.com"
-      ],
-      "requiredBy": [
-        "binaryauthorization.googleapis.com",
-        "computescanning.googleapis.com",
-        "containerscanning.googleapis.com",
-        "deploymenthistory.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-binaryauthorization.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-binaryauthorization.sandbox.googleapis.com",
-        "test-computescanning.sandbox.googleapis.com",
-        "test-deploymenthistory.sandbox.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/containeranalysis.googleapis.com",
-    "parent": "projects/848617618266",
-    "serviceAccounts": [
-      {
-        "email": "service-848617618266@container-analysis.iam.gserviceaccount.com",
-        "role": "roles/containeranalysis.ServiceAgent"
       }
     ],
     "state": "ENABLED"
@@ -863,103 +382,14 @@
         "tpu.googleapis.com"
       ]
     },
-    "name": "projects/848617618266/services/containerregistry.googleapis.com",
-    "parent": "projects/848617618266",
+    "name": "projects/129051311436/services/containerregistry.googleapis.com",
+    "parent": "projects/129051311436",
     "serviceAccounts": [
       {
-        "email": "service-848617618266@containerregistry.iam.gserviceaccount.com",
+        "email": "service-129051311436@containerregistry.iam.gserviceaccount.com",
         "role": "roles/editor"
       }
     ],
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "A service to scan containers for vulnerabilities."
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "containerscanning.googleapis.com",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/container-registry/docs/container-analysis"
-        }
-      },
-      "migration": {},
-      "name": "containerscanning.googleapis.com",
-      "quota": {},
-      "title": "Container Scanning API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "containeranalysis.googleapis.com",
-        "containerregistry.googleapis.com",
-        "containerscanning.googleapis.com",
-        "pubsub.googleapis.com",
-        "storage-api.googleapis.com"
-      ],
-      "directlyDependsOn": [
-        "containeranalysis.googleapis.com",
-        "containerregistry.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/containerscanning.googleapis.com",
-    "parent": "projects/848617618266",
-    "serviceAccounts": [
-      {
-        "email": "service-848617618266@gcp-sa-containerscanning.iam.gserviceaccount.com",
-        "role": "roles/containerscanning.ServiceAgent"
-      }
-    ],
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.\n"
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "datastore.googleapis.com",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/datastore/",
-          "requestQuotaUrl": "https://cloud.google.com/appengine/quotas/"
-        }
-      },
-      "migration": {},
-      "name": "datastore.googleapis.com",
-      "quota": {},
-      "title": "Cloud Datastore API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "datastore.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "cloudapis.googleapis.com"
-      ],
-      "requiredBy": [
-        "cloudapis.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/datastore.googleapis.com",
-    "parent": "projects/848617618266",
     "state": "ENABLED"
   },
   {
@@ -1133,116 +563,8 @@
         "vpcaccess.googleapis.com"
       ]
     },
-    "name": "projects/848617618266/services/logging.googleapis.com",
-    "parent": "projects/848617618266",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the [Stackdriver Monitoring documentation](/monitoring/docs).\n"
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "monitoring",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/monitoring/api/",
-          "requestQuotaUrl": "https://docs.google.com/a/google.com/forms/d/10Ubcf9S2OCdqlwawvesRfDymoSz5LbglR3ojTJbzhzA/viewform?entry_380798212={email}&entry_1258303214={id}"
-        }
-      },
-      "migration": {},
-      "name": "monitoring.googleapis.com",
-      "quota": {},
-      "title": "Stackdriver Monitoring API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "monitoring.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "appengineflex.googleapis.com",
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-endpoints.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "cloudapis.googleapis.com",
-        "composer.googleapis.com",
-        "datalogic.googleapis.com",
-        "dev-composer.sandbox.googleapis.com",
-        "dev-endpoints-googleapis.corp.google.com",
-        "endpoints.googleapis.com",
-        "memcache.googleapis.com",
-        "redis.googleapis.com",
-        "spinnaker.googleapis.com",
-        "stackdriver.googleapis.com",
-        "stackdriverprovisioning.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-composer.sandbox.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "staging-vpcaccess.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "test-vpcaccess.sandbox.googleapis.com",
-        "tpu.googleapis.com",
-        "vpcaccess.googleapis.com"
-      ],
-      "requiredBy": [
-        "appengineflex.googleapis.com",
-        "autopush-datalogic.sandbox.googleapis.com",
-        "autopush-endpoints.sandbox.googleapis.com",
-        "autopush-memcache.sandbox.googleapis.com",
-        "autopush-spinnaker.sandbox.googleapis.com",
-        "cloudapis.googleapis.com",
-        "composer.googleapis.com",
-        "datalogic.googleapis.com",
-        "dev-composer.sandbox.googleapis.com",
-        "dev-endpoints-googleapis.corp.google.com",
-        "endpoints.googleapis.com",
-        "memcache.googleapis.com",
-        "redis.googleapis.com",
-        "spinnaker.googleapis.com",
-        "stackdriver.googleapis.com",
-        "stackdriverprovisioning.googleapis.com",
-        "staging-appengineflex.sandbox.googleapis.com",
-        "staging-composer.sandbox.googleapis.com",
-        "staging-datalogic.sandbox.googleapis.com",
-        "staging-memcache.sandbox.googleapis.com",
-        "staging-redis.sandbox.googleapis.com",
-        "staging-spinnaker.sandbox.googleapis.com",
-        "staging-tpu.sandbox.googleapis.com",
-        "staging-vpcaccess.sandbox.googleapis.com",
-        "test-appengineflex.sandbox.googleapis.com",
-        "test-memcache.sandbox.googleapis.com",
-        "test-redis.sandbox.googleapis.com",
-        "test-tpu.sandbox.googleapis.com",
-        "test-vpcaccess.sandbox.googleapis.com",
-        "tpu.googleapis.com",
-        "vpcaccess.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/monitoring.googleapis.com",
-    "parent": "projects/848617618266",
-    "serviceAccounts": [
-      {
-        "email": "service-848617618266@gcp-sa-monitoring-notification.iam.gserviceaccount.com",
-        "role": "roles/monitoring.notificationServiceAgent",
-        "tag": "monitoring-notification"
-      }
-    ],
+    "name": "projects/129051311436/services/logging.googleapis.com",
+    "parent": "projects/129051311436",
     "state": "ENABLED"
   },
   {
@@ -1344,8 +666,8 @@
         "vpcaccess.googleapis.com"
       ]
     },
-    "name": "projects/848617618266/services/oslogin.googleapis.com",
-    "parent": "projects/848617618266",
+    "name": "projects/129051311436/services/oslogin.googleapis.com",
+    "parent": "projects/129051311436",
     "state": "ENABLED"
   },
   {
@@ -1508,139 +830,13 @@
         "workflow.googleapis.com"
       ]
     },
-    "name": "projects/848617618266/services/pubsub.googleapis.com",
-    "parent": "projects/848617618266",
+    "name": "projects/129051311436/services/pubsub.googleapis.com",
+    "parent": "projects/129051311436",
     "serviceAccounts": [
       {
-        "email": "service-848617618266@gcp-sa-pubsub.iam.gserviceaccount.com"
+        "email": "service-129051311436@gcp-sa-pubsub.iam.gserviceaccount.com"
       }
     ],
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers."
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "servicemanagement",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/service-management/",
-          "requestQuotaUrl": "https://docs.google.com/forms/d/1kHK14HCFuQqLoUMtP5FgIjfXhTqRJYLev75OU3CgNAQ/viewform?entry.1032417438={email}&entry.963033142={id}"
-        }
-      },
-      "migration": {},
-      "name": "servicemanagement.googleapis.com",
-      "quota": {},
-      "title": "Service Management API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ],
-        "serviceAccess": "ORG_PUBLIC"
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "servicemanagement.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "autopush-endpoints.sandbox.googleapis.com",
-        "cloudapis.googleapis.com",
-        "dev-endpoints-googleapis.corp.google.com",
-        "endpoints.googleapis.com"
-      ],
-      "requiredBy": [
-        "autopush-endpoints.sandbox.googleapis.com",
-        "cloudapis.googleapis.com",
-        "dev-endpoints-googleapis.corp.google.com",
-        "endpoints.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/servicemanagement.googleapis.com",
-    "parent": "projects/848617618266",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "Enables services that service consumers want to use on Google Cloud Platform, lists the available or enabled services, or disables services that service consumers no longer use."
-      },
-      "features": [
-        "googleprod.com/service/use-monarch"
-      ],
-      "legacy": {
-        "apiV1Name": "serviceusage.googleapis.com",
-        "devconsole": {
-          "learnmoreUrl": "https://cloud.google.com/service-usage/",
-          "requestQuotaUrl": "https://docs.google.com/forms/d/1GaO0qKifYs76Jy1XAZ0GTrskaCWlNK-61uaB3HAyklk/viewform?entry.963033142={id}"
-        }
-      },
-      "migration": {},
-      "name": "serviceusage.googleapis.com",
-      "quota": {},
-      "title": "Service Usage API",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "serviceusage.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "cloudapis.googleapis.com"
-      ],
-      "requiredBy": [
-        "cloudapis.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/serviceusage.googleapis.com",
-    "parent": "projects/848617618266",
-    "state": "ENABLED"
-  },
-  {
-    "config": {
-      "authentication": {},
-      "documentation": {
-        "summary": "Google Cloud SQL is a hosted and fully managed relational database service\n    on Google's infrastructure."
-      },
-      "legacy": {
-        "apiV1Name": "sql_component",
-        "devconsole": {
-          "learnmoreUrl": "https://code.google.com/apis/sqlservice/"
-        }
-      },
-      "migration": {},
-      "name": "sql-component.googleapis.com",
-      "quota": {},
-      "title": "Cloud SQL",
-      "usage": {
-        "requirements": [
-          "serviceusage.googleapis.com/tos/cloud"
-        ]
-      }
-    },
-    "dependencyConfig": {
-      "dependsOn": [
-        "sql-component.googleapis.com"
-      ],
-      "directlyRequiredBy": [
-        "cloudapis.googleapis.com"
-      ],
-      "requiredBy": [
-        "cloudapis.googleapis.com"
-      ]
-    },
-    "name": "projects/848617618266/services/sql-component.googleapis.com",
-    "parent": "projects/848617618266",
     "state": "ENABLED"
   },
   {
@@ -1816,8 +1012,8 @@
         "tpu.googleapis.com"
       ]
     },
-    "name": "projects/848617618266/services/storage-api.googleapis.com",
-    "parent": "projects/848617618266",
+    "name": "projects/129051311436/services/storage-api.googleapis.com",
+    "parent": "projects/129051311436",
     "state": "ENABLED"
   },
   {
@@ -1955,8 +1151,8 @@
         "tpu.googleapis.com"
       ]
     },
-    "name": "projects/848617618266/services/storage-component.googleapis.com",
-    "parent": "projects/848617618266",
+    "name": "projects/129051311436/services/storage-component.googleapis.com",
+    "parent": "projects/129051311436",
     "state": "ENABLED"
   }
 ]
