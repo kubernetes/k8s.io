@@ -1,5 +1,9 @@
 #!/bin/bash
-# set -x -e
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
 CNCF_GCP_ORG=758905017065
 
 # gcloud organizations describe ${CNCF_GCP_ORG} 2>&1
