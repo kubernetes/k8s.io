@@ -1,0 +1,50 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:606075400249@cloudbuild.gserviceaccount.com",
+        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-cluster-api-gcp@kubernetes.io"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-606075400249@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-606075400249@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:davanum@gmail.com"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-cluster-api-gcp@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-cluster-api-gcp@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "etag": "BwWVsIpR2c0=",
+  "version": 1
+}

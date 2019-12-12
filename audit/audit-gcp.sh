@@ -27,8 +27,7 @@ gcloud projects list \
     export CLOUDSDK_CORE_PROJECT=$PROJECT
     echo "### Auditing Project: ${PROJECT} ###"
     mkdir -p $PROJECT
-    gcloud projects get-iam-policy $PROJECT --format=$format > $PROJECT/policy.$format
-    gcloud iam roles list --project $PROJECT --format=$format > $PROJECT/roles.$format
+    gcloud projects get-iam-policy $PROJECT --format=$format > $PROJECT/iam.$format
     mkdir -p $PROJECT/roles
     for ROLE_PATH in `gcloud iam roles list --project $PROJECT --format="value(name)"`
     do

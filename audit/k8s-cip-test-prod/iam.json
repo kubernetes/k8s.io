@@ -34,11 +34,12 @@
     },
     {
       "members": [
-        "group:k8s-infra-artifact-admins@kubernetes.io"
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-cip-test@kubernetes.io"
       ],
       "role": "roles/viewer"
     }
   ],
-  "etag": "BwWNSe4FXsc=",
+  "etag": "BwWWyZoifPQ=",
   "version": 1
 }

@@ -1,0 +1,58 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:433651898792@cloudbuild.gserviceaccount.com",
+        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-cluster-api-aws@kubernetes.io"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-433651898792@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-433651898792@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:433651898792-compute@developer.gserviceaccount.com",
+        "serviceAccount:433651898792@cloudservices.gserviceaccount.com",
+        "serviceAccount:service-433651898792@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:davanum@gmail.com"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-cluster-api-aws@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-cluster-api-aws@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "etag": "BwWVsIn7RBI=",
+  "version": 1
+}

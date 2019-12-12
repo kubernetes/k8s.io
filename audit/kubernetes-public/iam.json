@@ -2,40 +2,45 @@
   "bindings": [
     {
       "members": [
-        "group:k8s-infra-cluster-admins@googlegroups.com"
+        "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "projects/kubernetes-public/roles/ServiceAccountLister"
     },
     {
       "members": [
-        "group:k8s-infra-bigquery-admins@googlegroups.com"
+        "group:k8s-infra-bigquery-admins@kubernetes.io"
       ],
       "role": "roles/bigquery.admin"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-accounting@googlegroups.com"
+        "group:k8s-infra-gcp-accounting@kubernetes.io"
       ],
       "role": "roles/bigquery.jobUser"
     },
     {
       "members": [
-        "serviceAccount:service-127754664067@compute-system.iam.gserviceaccount.com",
         "serviceAccount:service-127754664067@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"
     },
     {
       "members": [
-        "group:k8s-infra-cluster-admins@googlegroups.com"
+        "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/compute.viewer"
     },
     {
       "members": [
-        "group:k8s-infra-cluster-admins@googlegroups.com"
+        "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/container.admin"
+    },
+    {
+      "members": [
+        "group:gke-security-groups@kubernetes.io"
+      ],
+      "role": "roles/container.clusterViewer"
     },
     {
       "members": [
@@ -45,7 +50,7 @@
     },
     {
       "members": [
-        "group:k8s-infra-dns-admins@googlegroups.com"
+        "group:k8s-infra-dns-admins@kubernetes.io"
       ],
       "role": "roles/dns.admin"
     },
@@ -53,8 +58,7 @@
       "members": [
         "serviceAccount:127754664067-compute@developer.gserviceaccount.com",
         "serviceAccount:127754664067@cloudservices.gserviceaccount.com",
-        "serviceAccount:service-127754664067@containerregistry.iam.gserviceaccount.com",
-        "serviceAccount:127754664067@cloudservices.gserviceaccount.com"
+        "serviceAccount:service-127754664067@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
     },
@@ -72,19 +76,19 @@
     },
     {
       "members": [
-        "serviceAccount:k8s-nodes@kubernetes-public.iam.gserviceaccount.com"
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/logging.logWriter"
     },
     {
       "members": [
-        "serviceAccount:k8s-nodes@kubernetes-public.iam.gserviceaccount.com"
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.metricWriter"
     },
     {
       "members": [
-        "serviceAccount:k8s-nodes@kubernetes-public.iam.gserviceaccount.com"
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.viewer"
     },
@@ -97,6 +101,6 @@
       "role": "roles/owner"
     }
   ],
-  "etag": "BwWLnZU4oG4=",
+  "etag": "BwWXKX0oMGg=",
   "version": 1
 }
