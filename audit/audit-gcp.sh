@@ -23,6 +23,7 @@ echo "## Iterating over Projects ##"
 gcloud projects list \
        --filter "parent.id=$CNCF_GCP_ORG" \
        --format "value(name, projectNumber)" \
+    | sort \
     | while read PROJECT NUM; do \
     export CLOUDSDK_CORE_PROJECT=$PROJECT
     echo "### Auditing Project: ${PROJECT} ###"
@@ -35,11 +36,13 @@ gcloud projects list \
         gcloud iam roles --project=$PROJECT describe $ROLE \
                --format=json > $PROJECT/roles/$ROLE.json
     done
+
     echo "#### Iterating over ${PROJECT} Services: ####"
     mkdir -p $PROJECT/services
     gcloud services list --filter state:ENABLED --format=$format > $PROJECT/services/enabled.$format
-    for service in `gcloud services list --filter state:ENABLED --format=json \
-                    | jq -r .[].config.name | sed s:.googleapis.com::`
+    for service in $(gcloud services list --filter state:ENABLED --format=json \
+                    | jq -r .[].config.name | sed s:.googleapis.com:: \
+                    | sort)
     do
         case $service in
             compute)
@@ -47,11 +50,14 @@ gcloud projects list \
                 #### gcloud compute project-info describe
                 #### gcloud compute instances list --format=$format > $PROJECT/services/compute.instances.$format
                 #### gcloud compute disks list --format=$format > $PROJECT/services/compute.disks.$format
-                # I'm ensure why we see this when container.googleapis.com is DISABLED
-                gcloud container clusters list --format=$format > $PROJECT/services/clusters.$format
+                ;;
+            container)
+                # Don't do a JSON dump here - too much changes without human
+                # action.
+                mkdir -p $PROJECT/services/container
+                gcloud container clusters list > $PROJECT/services/container/clusters.txt
                 ;;
             dns)
-                echo Processing: $service
                 mkdir -p $PROJECT/services/dns
                 gcloud dns project-info describe $PROJECT --format=$format > $PROJECT/services/dns/info.$format
                 gcloud dns managed-zones list --format=$format > $PROJECT/services/dns/zones.$format
