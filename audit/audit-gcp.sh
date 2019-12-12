@@ -10,9 +10,9 @@ format=json
 
 echo "# Auditing CNCF CGP Org: ${CNCF_GCP_ORG} #"
 mkdir -p org_kubernetes.io/roles
-for ROLE_PATH in `gcloud iam roles list --organization=$CNCF_GCP_ORG --format="value(name)"`
+for ROLE_PATH in $(gcloud iam roles list --organization=$CNCF_GCP_ORG --format="value(name)")
 do
-    ROLE=`basename $ROLE_PATH`
+    ROLE=$(basename $ROLE_PATH)
     gcloud iam roles describe --organization=$CNCF_GCP_ORG $ROLE \
         --format=json > org_kubernetes.io/roles/$ROLE.json
 done
@@ -30,9 +30,9 @@ gcloud projects list \
     mkdir -p $PROJECT
     gcloud projects get-iam-policy $PROJECT --format=$format > $PROJECT/iam.$format
     mkdir -p $PROJECT/roles
-    for ROLE_PATH in `gcloud iam roles list --project $PROJECT --format="value(name)"`
+    for ROLE_PATH in $(gcloud iam roles list --project $PROJECT --format="value(name)")
     do
-        ROLE=`basename $ROLE_PATH`
+        ROLE=$(basename $ROLE_PATH)
         gcloud iam roles --project=$PROJECT describe $ROLE \
                --format=json > $PROJECT/roles/$ROLE.json
     done
@@ -81,7 +81,7 @@ gcloud projects list \
                 echo TODO: Verify how Big Query is configured / audited
                 ;;
             storage-api)
-                for BUCKET in `gsutil ls -p $PROJECT | awk -F/ '{print $3}'`
+                for BUCKET in $(gsutil ls -p $PROJECT | awk -F/ '{print $3}')
                 do
                     mkdir -p $PROJECT/buckets/$BUCKET
                     gsutil bucketpolicyonly get gs://$BUCKET/ > $PROJECT/buckets/$BUCKET/bucketpolicyonly.json
