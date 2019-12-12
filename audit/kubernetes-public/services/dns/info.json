@@ -1,17 +1,21 @@
 {
-  "id": "k8s-infra-dev-cluster-turnup",
+  "id": "kubernetes-public",
   "kind": "dns#project",
-  "number": "396460694993",
+  "number": "127754664067",
   "quota": {
     "dnsKeysPerManagedZone": 4,
     "kind": "dns#quota",
     "managedZones": 10000,
     "managedZonesPerNetwork": 10000,
     "networksPerManagedZone": 100,
+    "networksPerPolicy": 100,
+    "policies": 100,
     "resourceRecordsPerRrset": 100,
     "rrsetAdditionsPerChange": 1000,
     "rrsetDeletionsPerChange": 1000,
     "rrsetsPerManagedZone": 10000,
+    "targetNameServersPerManagedZone": 50,
+    "targetNameServersPerPolicy": 50,
     "totalRrdataSizePerChange": 100000,
     "whitelistedKeySpecs": [
       {

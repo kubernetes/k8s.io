@@ -52,9 +52,9 @@ gcloud projects list \
                 ;;
             dns)
                 echo Processing: $service
-                mkdir -p dns
-                gcloud dns project-info describe $PROJECT --format=$format > $PROJECT/services/dns.info.$format
-                gcloud dns managed-zones list --format=$format > $PROJECT/services/dns.zones.$format
+                mkdir -p $PROJECT/services/dns
+                gcloud dns project-info describe $PROJECT --format=$format > $PROJECT/services/dns/info.$format
+                gcloud dns managed-zones list --format=$format > $PROJECT/services/dns/zones.$format
                 ;;
             logging)
                 echo TODO: $service needs serviceusage.services.use

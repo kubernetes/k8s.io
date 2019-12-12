@@ -11,7 +11,8 @@
       "ns-cloud-c2.googledomains.com.",
       "ns-cloud-c3.googledomains.com.",
       "ns-cloud-c4.googledomains.com."
-    ]
+    ],
+    "visibility": "public"
   },
   {
     "creationTime": "2018-10-09T16:19:40.004Z",
@@ -25,7 +26,8 @@
       "ns-cloud-b2.googledomains.com.",
       "ns-cloud-b3.googledomains.com.",
       "ns-cloud-b4.googledomains.com."
-    ]
+    ],
+    "visibility": "public"
   },
   {
     "creationTime": "2018-09-07T15:08:37.689Z",
@@ -58,7 +60,8 @@
       "ns-cloud-d2.googledomains.com.",
       "ns-cloud-d3.googledomains.com.",
       "ns-cloud-d4.googledomains.com."
-    ]
+    ],
+    "visibility": "public"
   },
   {
     "creationTime": "2018-09-06T16:58:36.444Z",
@@ -91,6 +94,7 @@
       "ns-cloud-a2.googledomains.com.",
       "ns-cloud-a3.googledomains.com.",
       "ns-cloud-a4.googledomains.com."
-    ]
+    ],
+    "visibility": "public"
   }
 ]
