@@ -9,6 +9,7 @@ function kc() {
 }
 
 kc apply \
+    -f namespace-canary.yaml \
     -f configmap-nginx.yaml \
     -f configmap-www-get.yaml \
     -f deployment.yaml \
