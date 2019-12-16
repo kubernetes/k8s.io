@@ -152,6 +152,7 @@ groups:
     members:
       - k8s-infra-rbac-cert-manager@kubernetes.io
       - k8s-infra-rbac-gcsweb@kubernetes.io
+      - k8s-infra-rbac-publishing-bot@kubernetes.io
 
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
@@ -295,6 +296,20 @@ groups:
     members:
       - thockin@google.com
       - bartek@smykla.com
+
+  - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
+    name: k8s-infra-rbac-publishing-bot
+    description: |-
+      ACL for Publishing Bot
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bartek@smykla.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+      - thockin@google.com
 
   - email-id: k8s-infra-release-admins@kubernetes.io
     name: k8s-infra-release-admins

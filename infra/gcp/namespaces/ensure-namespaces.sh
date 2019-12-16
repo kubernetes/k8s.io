@@ -141,6 +141,7 @@ parse_args "$@";
 
 ALL_PROJECTS=(
     "gcsweb"
+    "publishing-bot"
 )
 
 for prj in "${ALL_PROJECTS[@]}"; do
