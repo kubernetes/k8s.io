@@ -897,3 +897,15 @@ groups:
       - timothysc@gmail.com
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
+
+  - email-id: k8s-infra-staging-service-apis@kubernetes.io
+    name: k8s-infra-staging-service-apis
+    description: |-
+      ACL for staging SIG-network service APIs
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - thockin@google.com
+      - bowei@google.com
+      - antonio.ojea.garcia@gmail.com
