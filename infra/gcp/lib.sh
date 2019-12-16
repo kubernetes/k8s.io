@@ -532,3 +532,24 @@ function ensure_service_account() {
             --display-name="${display_name}"
     fi
 }
+
+# Ensure that DNS managed zone exists, creating one if need.
+# $1 The GCP project
+# $2 The managed zone name (e.g. kubernetes-io)
+# $3 The DNS zone name (e.g. kubernetes.io)
+function ensure_dns_zone() {
+    if [ $# != 3 -o -z "$1" -o -z "$2" -o -x "$3" ]; then
+        echo "ensure_dns_zone(project, zone_name, dns_name) requires 3 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    zone_name="$2"
+    dns_name="$3"
+
+  if ! gcloud --project "${project}" dns managed-zones describe "${zone_name}" >/dev/null 2>&1; then
+      gcloud --project "${project}" \
+        dns managed-zone create \
+        "${zone_name}" \
+        --dns-name "${dns_name}"
+  fi
+}

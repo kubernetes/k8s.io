@@ -54,6 +54,9 @@ CLUSTER_TERRAFORM_BUCKET="k8s-infra-clusters-terraform"
 # The GKE security groups group
 CLUSTER_USERS_GROUP="gke-security-groups@kubernetes.io"
 
+# The DNS admins group.
+DNS_GROUP="k8s-infra-dns-admins@kubernetes.io"
+
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
@@ -72,6 +75,8 @@ color 6 "Enabling the GCS API"
 enable_api "${PROJECT}" storage-component.googleapis.com
 color 6 "Enabling the OSLogin API"
 enable_api "${PROJECT}" oslogin.googleapis.com
+color 6 "Enabling the DNS API"
+enable_api "${PROJECT}" dns.googleapis.com
 
 color 6 "Ensuring the cluster terraform-state bucket exists"
 ensure_private_gcs_bucket "${PROJECT}" "gs://${CLUSTER_TERRAFORM_BUCKET}"
@@ -115,6 +120,17 @@ color 6 "Empowering GCP accounting"
 gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "group:${ACCOUNTING_GROUP}" \
     --role roles/bigquery.jobUser
+
+color 6 "Empowering ${DNS_GROUP}"
+gcloud projects add-iam-policy-binding "${PROJECT}" \
+    --member "group:${DNS_GROUP}" \
+    --role roles/dns.admin
+
+# Bootstrap DNS zones
+ensure_dns_zone "${PROJECT}" "k8s-io" "k8s.io"
+ensure_dns_zone "${PROJECT}" "kubernetes-io" "kubernetes.io"
+ensure_dns_zone "${PROJECT}" "canary-k8s-io" "canary.k8s.io"
+ensure_dns_zone "${PROJECT}" "canary-kubernetes-io" "canary.kubernetes.io"
 
 color 6 "Creating the BigQuery dataset for billing data"
 if ! bq --project "${PROJECT}" ls "${BQ_BILLING_DATASET}" >/dev/null 2>&1; then
