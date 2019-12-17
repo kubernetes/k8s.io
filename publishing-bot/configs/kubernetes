@@ -1,0 +1,6 @@
+DOCKER_REPO = gcr.io/k8s-staging-publishing-bot/k8s-publishing-bot
+NAMESPACE = publishing-bot
+SCHEDULE = * */4 * * *
+INTERVAL = 14400
+MEMORY_REQUESTS = 2Gi
+MEMORY_LIMITS = 3Gi

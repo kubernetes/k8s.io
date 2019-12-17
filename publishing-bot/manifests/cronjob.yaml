@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: publisher
+  namespace: publishing-bot
+spec:
+  schedule: "SCHEDULE"
+  startingDeadlineSeconds: 36000
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 14
+  jobTemplate:
+    metadata:
+      labels:
+        app: publisher
+    template:
+      spec:
+        restartPolicy: Never

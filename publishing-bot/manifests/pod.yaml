@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: publisher
+  namespace: publishing-bot
+spec:
+  restartPolicy: Never

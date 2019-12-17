@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Replicaset
+metadata:
+  name: publisher
+  namespace: publishing-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: publisher
+  template:
+    metadata:
+      labels:
+        name: publisher
+    spec:
