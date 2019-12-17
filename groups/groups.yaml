@@ -699,6 +699,15 @@ groups:
       - bowei@google.com
       - antonio.ojea.garcia@gmail.com
 
+  - email-id: k8s-infra-staging-txtdirect@kubernetes.io
+    name: k8s-infra-staging-txtdirect
+    description: |-
+      ACL for staging TXTDirect
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - michaelg@okkur.org
+
   - email-id: k8s-infra-team-private@kubernetes.io
     name: k8s-infra-team-private
     description: |-

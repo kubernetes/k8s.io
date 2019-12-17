@@ -64,6 +64,7 @@ STAGING_PROJECTS=(
     publishing-bot
     release-test
     service-apis
+    txtdirect
 )
 if [ $# = 0 ]; then
     # default to all staging projects
