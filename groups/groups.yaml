@@ -664,6 +664,41 @@ groups:
       - thockin@google.com
       - tpepper@gmail.com
 
+  - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
+    name: Kubernetes E2E test image staging registry owners
+    description: |-
+      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - thockin@google.com
+      - spiffxp@google.com
+
+  - email-id: k8s-infra-staging-kubeadm@kubernetes.io
+    name: k8s-infra-staging-kubeadm
+    description: |-
+      ACL for staging kubeadm
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - timothysc@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+
+  - email-id: k8s-infra-staging-service-apis@kubernetes.io
+    name: k8s-infra-staging-service-apis
+    description: |-
+      ACL for staging SIG-network service APIs
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - thockin@google.com
+      - bowei@google.com
+      - antonio.ojea.garcia@gmail.com
+
   - email-id: k8s-infra-team-private@kubernetes.io
     name: k8s-infra-team-private
     description: |-
@@ -864,6 +899,7 @@ groups:
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
       WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
       WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
       - cblecker@gmail.com
@@ -877,50 +913,3 @@ groups:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
       - jorge@heptio.com
-
-  - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
-    name: Kubernetes E2E test image staging registry owners
-    description: |-
-      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
-    settings:
-      AllowExternalMembers: "true"
-      WhoCanJoin: "INVITED_CAN_JOIN"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanDiscoverGroup: "ALL_IN_DOMAIN_CAN_DISCOVER"
-      WhoCanInvite: "ALL_MANAGERS_CAN_INVITE"
-      WhoCanAdd: "ALL_MANAGERS_CAN_ADD"
-      WhoCanApproveMembers: "ALL_MANAGERS_CAN_APPROVE"
-      WhoCanModifyMembers: "OWNERS_AND_MANAGERS"
-      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
-      ReconcileMembers: "true"
-    owners:
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - justinsb@google.com
-      - thockin@google.com
-      - spiffxp@google.com
-
-  - email-id: k8s-infra-staging-kubeadm@kubernetes.io
-    name: k8s-infra-staging-kubeadm
-    description: |-
-      ACL for staging kubeadm
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    owners:
-      - timothysc@gmail.com
-      - fabrizio.pandini@gmail.com
-      - neolit123@gmail.com
-
-  - email-id: k8s-infra-staging-service-apis@kubernetes.io
-    name: k8s-infra-staging-service-apis
-    description: |-
-      ACL for staging SIG-network service APIs
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    owners:
-      - thockin@google.com
-      - bowei@google.com
-      - antonio.ojea.garcia@gmail.com
