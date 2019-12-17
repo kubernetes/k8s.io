@@ -63,6 +63,7 @@ STAGING_PROJECTS=(
     provider-azure
     publishing-bot
     release-test
+    service-apis
 )
 if [ $# = 0 ]; then
     # default to all staging projects

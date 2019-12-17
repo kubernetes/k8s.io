@@ -1,0 +1,10 @@
+# See the OWNERS file documentation:
+#  https://github.com/kubernetes/community/blob/master/contributors/devel/owners.md
+
+approvers:
+- thockin
+- bowei
+reviewers:
+- aojea
+labels:
+- sig/network
