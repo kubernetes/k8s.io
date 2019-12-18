@@ -142,6 +142,8 @@ parse_args "$@";
 ALL_PROJECTS=(
     "gcsweb"
     "publishing-bot"
+    "k8s-io-prod"
+    "k8s-io-canary"
 )
 
 for prj in "${ALL_PROJECTS[@]}"; do
