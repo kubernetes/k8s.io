@@ -236,6 +236,17 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-k8s-io-admins@kubernetes.io
+    name: k8s-infra-k8s-io-admins
+    description: |-
+      ACL for k8s.io-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - thockin@google.com
+
   - email-id: k8s-infra-gcp-accounting@kubernetes.io
     name: k8s-infra-gcp-accounting
     description: |-
