@@ -26,6 +26,7 @@ SCRIPT_DIR=$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")")
 # shellcheck source=../lib.sh
 . "${SCRIPT_DIR}/lib.sh"
 
+NAMESPACE_FILENAME="namespace.yml"
 ROLE_FILENAME="namespace-user-role.yml"
 ROLE_BINDING_FILENAME="namespace-user-role-binding.yml"
 
@@ -42,7 +43,7 @@ function parse_args() {
   args=()
 
   # named args
-  while [ "$1" != "" ]; do
+  while [ "$#" -gt 0 ]; do
       case "$1" in
           -p | --kubectl-path )         KUBECTL="$2";            shift;;
           -k | --kubeconfig-path )      KUBECONFIG_PATH="$2";    shift;;
@@ -55,11 +56,11 @@ function parse_args() {
   set -- "${args[@]}"
 
   # set defaults
-  if [[ -z "${KUBECONFIG_PATH}" ]]; then
+  if [[ -z "${KUBECONFIG_PATH:-}" ]]; then
       KUBECONFIG_PATH="$HOME/.kube/config";
   fi
 
-  if [[ -z "${KUBECTL}" ]]; then
+  if [[ -z "${KUBECTL:-}" ]]; then
     if ! [ -x "$(command -v kubectl)" ]; then
       echo >&2 "kubectl not found in \$PATH and --kubectl-path flag is not set. Aborting.";
       exit 1;
@@ -68,7 +69,7 @@ function parse_args() {
     fi
   fi
 
-  if [ "${#args[@]}" -lt 1 ]; then
+  if [ "${#args[@]}" -ne 1 ]; then
     usage
     exit 1
   fi
@@ -76,14 +77,15 @@ function parse_args() {
   CLUSTER="${args[0]}"
 }
 
-function create_namespace() {
+function apply_namespace() {
   if [ $# != 1 ]; then
-    echo "create_namespace(name) requires 1 argument" >&2
+    echo "apply_namespace(name) requires 1 argument" >&2
     return 1
   fi
   namespace="$1"
 
-  "$KUBECTL" create -c "$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" namespace "$namespace"
+  sed -e "s/{{name}}/${namespace}/" "$NAMESPACE_FILENAME" \
+      | "$KUBECTL" apply --cluster="$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -f -
 }
 
 function apply_role() {
@@ -94,7 +96,7 @@ function apply_role() {
   project_name="$1"
 
   sed -e "s/{{namespace}}/$project_name/" "$ROLE_FILENAME" \
-    | "$KUBECTL" apply -c "$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -n "$namespace" -f -
+    | "$KUBECTL" apply --cluster="$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -n "$namespace" -f -
 }
 
 function apply_role_binding() {
@@ -106,7 +108,7 @@ function apply_role_binding() {
   namespace="$project_name"
 
   sed -e "s/{{namespace}}/$project_name/" "$ROLE_BINDING_FILENAME" \
-    | "$KUBECTL" apply -c "$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -n "$namespace" -f -
+    | "$KUBECTL" apply --cluster="$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -n "$namespace" -f -
 }
 
 function ensure_only_one_proper_role_binding() {
@@ -116,7 +118,7 @@ function ensure_only_one_proper_role_binding() {
   fi
   project_name="$1"
   namespace="$project_name"
-  role_bindings_count=$("$KUBECTL" get rolebindings -c "$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -o json -n "$namespace" \
+  role_bindings_count=$("$KUBECTL" get rolebindings --cluster="$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -o json -n "$namespace" \
     | jq -r '.items | length')
 
   if [ "$role_bindings_count" -gt 1 ]; then
@@ -124,7 +126,7 @@ function ensure_only_one_proper_role_binding() {
     exit 1
   fi
 
-  role_binding_name=$("$KUBECTL" get rolebindings -c "$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -o json -n "$namespace" \
+  role_binding_name=$("$KUBECTL" get rolebindings --cluster="$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -o json -n "$namespace" \
     | jq -r '.items[0].metadata.name')
 
   if [ "$role_binding_name" != "namespace-user" ]; then
@@ -148,7 +150,7 @@ ALL_PROJECTS=(
 
 for prj in "${ALL_PROJECTS[@]}"; do
     color 6 "Create namespace: ${prj}"
-    create_namespace "${prj}"
+    apply_namespace "${prj}"
 
     color 6 "Apply namespace-user role: ${prj}"
     apply_role "${prj}"
