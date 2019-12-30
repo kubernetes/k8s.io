@@ -22,6 +22,16 @@ zones:
       - config
     targets:
       - gcp
+  canary.k8s-e2e.com.:
+    sources:
+      - config
+    targets:
+      - gcp
+  canary.x-k8s.io.:
+    sources:
+      - config
+    targets:
+      - gcp
 
   # Production targets.
   kubernetes.io.:
@@ -30,6 +40,16 @@ zones:
     targets:
       - gcp
   k8s.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  k8s-e2e.com.:
+    sources:
+      - config
+    targets:
+      - gcp
+  x-k8s.io.:
     sources:
       - config
     targets:
