@@ -1,0 +1,12 @@
+---
+# The top-level x-k8s.io zone
+
+
+# Canary zone for testing DNS pushes.
+canary:
+  type: NS
+  values:
+  - ns-cloud-d1.googledomains.com.
+  - ns-cloud-d2.googledomains.com.
+  - ns-cloud-d3.googledomains.com.
+  - ns-cloud-d4.googledomains.com.

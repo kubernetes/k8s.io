@@ -40,7 +40,7 @@ fi
 
 # Push to canaries.
 echo "Dry-run to canary zones"
-push canary.k8s.io. canary.kubernetes.io. > log.canary 2>&1
+push canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com. > log.canary 2>&1
 if [ $? != 0 ]; then
     echo "Canary dry-run FAILED, halting; log follows:"
     echo "========================================="
@@ -48,7 +48,7 @@ if [ $? != 0 ]; then
     exit 2
 fi
 echo "Pushing to canary zones"
-push --doit canary.k8s.io. canary.kubernetes.io. >> log.canary 2>&1
+push --doit canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com. >> log.canary 2>&1
 if [ $? != 0 ]; then
     echo "Canary push FAILED, halting; log follows:"
     echo "========================================="
@@ -57,7 +57,7 @@ if [ $? != 0 ]; then
 fi
 echo "Canary push SUCCEEDED"
 
-for zone in canary.k8s.io. canary.kubernetes.io.; do
+for zone in canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com.; do
     TRIES=12
     echo "Testing canary zone: $zone"
     for i in $(seq 1 "$TRIES"); do
@@ -80,7 +80,7 @@ done
 
 # Push to prod.
 echo "Dry-run to prod zones"
-push k8s.io. kubernetes.io. > log.prod 2>&1
+push k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com. > log.prod 2>&1
 if [ $? != 0 ]; then
     echo "Prod dry-run FAILED, halting; log follows:"
     echo "========================================="
@@ -89,7 +89,7 @@ if [ $? != 0 ]; then
 fi
 
 echo "Pushing to prod zones"
-push --doit k8s.io. kubernetes.io. >> log.prod 2>&1
+push --doit k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com. >> log.prod 2>&1
 if [ $? != 0 ]; then
     echo "Prod push FAILED, halting; log follows:"
     echo "========================================="
@@ -98,7 +98,7 @@ if [ $? != 0 ]; then
 fi
 echo "Prod push SUCCEEDED"
 
-for zone in k8s.io. kubernetes.io.; do
+for zone in k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com.; do
     TRIES=12
     echo "Testing prod zone: $zone"
     for i in $(seq 1 "$TRIES"); do

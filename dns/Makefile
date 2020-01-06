@@ -13,6 +13,8 @@
 # limitations under the License.
 
 SHELL := /usr/bin/env bash
+CANARY_ZONES := canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com.
+PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. canary.k8s-e2e.com.
 
 default: check
 
@@ -21,11 +23,11 @@ check: check-canary check-prod
 
 .PHONY: check-canary
 check-canary:
-	$(CURDIR)/check-zone.sh canary.k8s.io. canary.kubernetes.io.
+	$(CURDIR)/check-zone.sh $(CANARY_ZONES)
 
 .PHONY: check-prod
 check-prod:
-	$(CURDIR)/check-zone.sh k8s.io. kubernetes.io.
+	$(CURDIR)/check-zone.sh $(PROD_ZONES)
 
 .PHONY: push
 push:
