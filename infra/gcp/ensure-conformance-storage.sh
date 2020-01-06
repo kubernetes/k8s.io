@@ -43,8 +43,6 @@ function usage() {
 
 PROJECT="k8s-conform"
 
-PROJECT_VIEWER="k8s-infra-conform@kubernetes.io"
-
 # NB: Please keep this sorted.
 CONFORMANCE_BUCKETS=(
     capi-openstack
@@ -57,10 +55,6 @@ fi
 # Make the project, if needed
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
-
-# Enable writers to use the UI
-color 6 "Empowering ${PROJECT_VIEWER} as project viewers"
-empower_group_as_viewer "${PROJECT}" "${PROJECT_VIEWER}"
 
 # Enable GCS APIs
 color 6 "Enabling the GCS API"
