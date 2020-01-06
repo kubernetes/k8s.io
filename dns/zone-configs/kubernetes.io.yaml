@@ -6,7 +6,7 @@
 # documentation for each name is attached.
 '':
   - type: A
-    value: 45.54.44.102 # Netlify anycast CDN (@chenopis, @thockin)
+    value: 147.75.40.148 # Netlify anycast CDN (@chenopis, @thockin)
   - type: MX
     values:
     - exchange: aspmx.l.google.com.
