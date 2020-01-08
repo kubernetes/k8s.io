@@ -160,7 +160,8 @@ def verify_dns(queries):
             for configured_value in configured_values:
                 if configured_value in response_values:
                     continue
-                log.error('*** Configured Value not in response: %s', record.fqdn)
+                log.error('*** Configured Value not in response: %s (expected %s, got %s)',
+                        record.fqdn, configured_value, response_values)
                 record_error = True
                 dns_error = True
 
@@ -168,7 +169,8 @@ def verify_dns(queries):
             for response_value in response_values:
                 if response_value in configured_values:
                     continue
-                log.error('*** Response not in configuration: %s', record.fqdn)
+                log.error('*** Response not in configuration: %s (expected %s, got %s',
+                        record.fqdn, response_value, configured_values)
                 record_error = True
                 dns_error = True
 
