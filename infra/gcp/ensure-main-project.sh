@@ -129,8 +129,12 @@ gcloud projects add-iam-policy-binding "${PROJECT}" \
 # Bootstrap DNS zones
 ensure_dns_zone "${PROJECT}" "k8s-io" "k8s.io"
 ensure_dns_zone "${PROJECT}" "kubernetes-io" "kubernetes.io"
+ensure_dns_zone "${PROJECT}" "x-k8s-io" "x-k8s.io"
+ensure_dns_zone "${PROJECT}" "k8s-e2e-com" "k8s-e2e.com"
 ensure_dns_zone "${PROJECT}" "canary-k8s-io" "canary.k8s.io"
 ensure_dns_zone "${PROJECT}" "canary-kubernetes-io" "canary.kubernetes.io"
+ensure_dns_zone "${PROJECT}" "canary-x-k8s-io" "canary.x-k8s.io"
+ensure_dns_zone "${PROJECT}" "canary-k8s-e2e-com" "canary.k8s-e2e.com"
 
 color 6 "Creating the BigQuery dataset for billing data"
 if ! bq --project "${PROJECT}" ls "${BQ_BILLING_DATASET}" >/dev/null 2>&1; then
