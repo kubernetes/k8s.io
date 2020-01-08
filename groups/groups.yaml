@@ -272,6 +272,7 @@ groups:
       - ihor@cncf.io
       - spiffxp@google.com
       - thockin@google.com
+      - adolfo.garcia@uservers.net
 
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
     name: Organization Administrators for kubernetes.io
