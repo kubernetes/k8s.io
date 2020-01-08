@@ -361,6 +361,11 @@ class RedirTest(unittest.TestCase):
             self.assert_temp_redirect(base + '/$path', 'https://prow.k8s.io/tide',
                 path=rand_num())
 
+    def test_youtube(self):
+        for base in ('yt.k8s.io', 'youtube.k8s.io', 'youtube.kubernetes.io'):
+            self.assert_temp_redirect(base, 'https://www.youtube.com/c/kubernetescommunity')
+            self.assert_temp_redirect(base + '/$path', 'https://www.youtube.com/c/kubernetescommunity',
+                path=rand_num())
 
 class ContentTest(unittest.TestCase):
     def assert_body_configmap(self, url, filename):

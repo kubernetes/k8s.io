@@ -166,6 +166,12 @@ issue:
 issues:
   type: CNAME
   value: redirect.k8s.io.
+youtube:
+  type: CNAME
+  value: redirect.k8s.io.
+yt:
+  type: CNAME
+  value: redirect.k8s.io.
 # Running in GKE (@dchen1107).
 node-perf-dash:
   type: A
