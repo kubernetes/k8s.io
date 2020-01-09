@@ -186,10 +186,6 @@ class RedirTest(unittest.TestCase):
             self.assert_temp_redirect(
                 base + 'needs-ok-to-test',
                 'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase&type=Issues')
-            self.assert_temp_redirect(base + 'youtube',
-                'https://www.youtube.com/c/kubernetescommunity')
-            self.assert_temp_redirect(base + 'yt',
-                'https://www.youtube.com/c/kubernetescommunity')
 
     def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
