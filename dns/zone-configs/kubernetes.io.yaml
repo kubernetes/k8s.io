@@ -186,3 +186,6 @@ velodrome:
 youtube:
   type: CNAME
   value: redirect.k8s.io.
+yt:
+  type: CNAME
+  value: redirect.k8s.io.

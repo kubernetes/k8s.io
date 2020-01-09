@@ -30,7 +30,7 @@ Vanity URL(s)
 | Tide status (formerly submit queue) | https://prow.k8s.io/tide | https://prow.kubernetes.io/tide |
 | TestGrid | https://testgrid.k8s.io | https://testgrid.kubernetes.io |
 | YUM downloads | https://yum.k8s.io | https://yum.kubernetes.io |
-| Kubernetes YouTube | https://yt.k8s.io | https://youtube.k8s.io | https://youtube.kubernetes.io |
+| Kubernetes YouTube | https://yt.k8s.io | https://youtube.k8s.io | https://youtube.kubernetes.io | https://yt.kubernetes.io |
 
 NOTE: please see k8s.io/k8s.io/configmap-nginx.yaml for `server` definitions
 
@@ -53,6 +53,8 @@ Redirections
 - https://go.k8s.io/test-health
 - https://go.k8s.io/test-history
 - https://go.k8s.io/triage
+- https://go.k8s.io/youtube
+- https://go.k8s.io/yt
 
 NOTE: please see configmap-nginx.yaml for rewrite rules.
 
