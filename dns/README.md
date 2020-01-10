@@ -5,6 +5,8 @@
 Zones we manage:
   - kubernetes.io
   - k8s.io
+  - x-k8s.io
+  - k8s-e2e.com
 
 ## How to become an admin
 
