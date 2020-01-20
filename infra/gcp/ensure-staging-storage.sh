@@ -39,6 +39,7 @@ function usage() {
 
 # NB: Please keep this sorted.
 STAGING_PROJECTS=(
+    apisnoop
     artifact-promoter
     build-image
     cip-test
