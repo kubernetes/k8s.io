@@ -743,6 +743,20 @@ groups:
       - thockin@google.com
       - bartek@smykla.com
 
+  - email-id: k8s-infra-staging-apisnoop@kubernetes.io
+    name: k8s-infra-staging-apisnoop
+    description: |-
+      ACL for apisnoop images
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - caleb@ii.coop
+      - hh@ii.coop
+      - jbelamaric@google.com
+      - spiffxp@google.com
+      - zz@ii.coop
+
   - email-id: moderators@kubernetes.io
     name: moderators
     description: |-
