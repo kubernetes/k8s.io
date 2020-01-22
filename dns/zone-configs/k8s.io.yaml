@@ -183,6 +183,7 @@ pr-test:
 # Running in a GKE cluster somewhere (@ixdy).
 prow:
   type: A
+  ttl: 600 # this has needed to change in the past
   value: 35.186.196.185
 monitoring.prow:
   type: A

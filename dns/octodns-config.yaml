@@ -4,7 +4,7 @@ providers:
     class: octodns.provider.yaml.YamlProvider
     directory: /octodns/config
     enforce_order: false
-    default_ttl: 300
+    default_ttl: 3600
   gcp:
     class: octodns.provider.googlecloud.GoogleCloudProvider
     project: kubernetes-public
