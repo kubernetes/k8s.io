@@ -166,9 +166,6 @@ sigs:
 slack:
   type: A
   value: 130.211.42.98
-spartakus:
-  type: CNAME
-  value: spartakus.k8s.io.
 # Prow (@ixdy).
 submit-queue:
   type: CNAME

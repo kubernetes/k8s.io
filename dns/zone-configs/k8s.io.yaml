@@ -207,10 +207,6 @@ sigs:
 slack:
   type: A
   value: 130.211.42.98
-# Voluntary cluster data collector. Runs in GKE (@thockin).
-spartakus:
-  type: A
-  value: 107.178.240.20
 # Prow (@ixdy).
 submit-queue:
   type: CNAME
