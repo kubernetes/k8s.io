@@ -1,4 +1,4 @@
-# Managing Kubernetes container regstries
+# Managing Kubernetes container registries
 
 This directory is for tools and things that are used to administer the GCR
 repositories used to publish official container images for Kubernetes.
