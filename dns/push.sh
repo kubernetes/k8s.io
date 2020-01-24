@@ -15,6 +15,20 @@
 # limitations under the License.
 # This runs as you.  It assumes you have built an image named ${USER}/octodns.
 
+PROD_ZONES=(
+    k8s.io.
+    kubernetes.io.
+    x-k8s.io.
+    k8s-e2e.com.
+)
+
+CANARY_ZONES=("${PROD_ZONES[@]/#/canary.}")
+
+ALL_ZONES=(
+    "${CANARY_ZONES[@]}"
+    "${PROD_ZONES[@]}"
+)
+
 # Pushes config to zones.
 #   args: args to pass to octodns (e.g. --doit, --force, a list of zones)
 push () {
@@ -22,7 +36,7 @@ push () {
         -u `id -u` \
         -v ~/.config/gcloud:/.config/gcloud:ro \
         -v `pwd`/octodns-config.yaml:/octodns/config.yaml:ro \
-        -v `pwd`/zone-configs:/octodns/config:ro \
+        -v "${TMPCFG}":/octodns/config:ro \
         ${USER}/octodns \
         octodns-sync \
             --config-file=/octodns/config.yaml \
@@ -38,9 +52,26 @@ if [ ! -f octodns-config.yaml -o ! -d zone-configs ]; then
     exit 1
 fi
 
+# Where to hold processed configs for this run.
+TMPCFG=$(mktemp -d /tmp/octodns.XXXXXX)
+
+# Pre-cook our configs into $TMPCFG.  Some zones have multiple files that need
+# to be joined, for example.
+echo "Using ${TMPCFG} for cooked config files"
+for z in "${ALL_ZONES[@]}"; do
+    # Every zone should have 1 file $z.yaml or N files $z._*.yaml.
+    # $z already ends in a period.
+    cat zone-configs/${z}yaml zone-configs/${z}_*.yaml \
+        > "${TMPCFG}/${z}yaml" 2>/dev/null
+    if [ ! -s "${TMPCFG}/${z}yaml" ]; then
+        echo "${TMPCFG}/${z}yaml appears to be empty after pre-processing!"
+        exit 1
+    fi
+done
+
 # Push to canaries.
 echo "Dry-run to canary zones"
-push canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com. > log.canary 2>&1
+push "${CANARY_ZONES[@]}" > log.canary 2>&1
 if [ $? != 0 ]; then
     echo "Canary dry-run FAILED, halting; log follows:"
     echo "========================================="
@@ -48,7 +79,7 @@ if [ $? != 0 ]; then
     exit 2
 fi
 echo "Pushing to canary zones"
-push --doit canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com. >> log.canary 2>&1
+push --doit "${CANARY_ZONES[@]}" >> log.canary 2>&1
 if [ $? != 0 ]; then
     echo "Canary push FAILED, halting; log follows:"
     echo "========================================="
@@ -57,7 +88,7 @@ if [ $? != 0 ]; then
 fi
 echo "Canary push SUCCEEDED"
 
-for zone in canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com.; do
+for zone in "${CANARY_ZONES[@]}"; do
     TRIES=12
     echo "Testing canary zone: $zone"
     for i in $(seq 1 "$TRIES"); do
@@ -80,7 +111,7 @@ done
 
 # Push to prod.
 echo "Dry-run to prod zones"
-push k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com. > log.prod 2>&1
+push "${PROD_ZONES[@]}" > log.prod 2>&1
 if [ $? != 0 ]; then
     echo "Prod dry-run FAILED, halting; log follows:"
     echo "========================================="
@@ -89,7 +120,7 @@ if [ $? != 0 ]; then
 fi
 
 echo "Pushing to prod zones"
-push --doit k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com. >> log.prod 2>&1
+push --doit "${PROD_ZONES[@]}" >> log.prod 2>&1
 if [ $? != 0 ]; then
     echo "Prod push FAILED, halting; log follows:"
     echo "========================================="
@@ -98,7 +129,7 @@ if [ $? != 0 ]; then
 fi
 echo "Prod push SUCCEEDED"
 
-for zone in k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com.; do
+for zone in "${PROD_ZONES[@]}"; do
     TRIES=12
     echo "Testing prod zone: $zone"
     for i in $(seq 1 "$TRIES"); do

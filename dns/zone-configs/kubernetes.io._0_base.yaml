@@ -1,4 +1,3 @@
----
 # The top-level kubernetes.io zone
 #
 # In general, every name here has an equivalent in k8s.io.  For many of these
@@ -26,15 +25,6 @@
 www:
   type: CNAME
   value: kubernetes.io.
-
-# Canary zone for testing DNS pushes.
-canary:
-  type: NS
-  values:
-  - ns-cloud-b1.googledomains.com.
-  - ns-cloud-b2.googledomains.com.
-  - ns-cloud-b3.googledomains.com.
-  - ns-cloud-b4.googledomains.com.
 
 # Main docs site is a redirect (@chenopis)
 docs:
