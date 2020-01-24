@@ -180,3 +180,9 @@ pfjqlwt67ty3.testgrid:
 velodrome:
   type: CNAME
   value: velodrome.k8s.io.
+youtube:
+  type: CNAME
+  value: redirect.k8s.io.
+yt:
+  type: CNAME
+  value: redirect.k8s.io.
