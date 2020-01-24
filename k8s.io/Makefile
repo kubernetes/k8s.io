@@ -2,7 +2,7 @@ all: test
 
 .PHONY: test
 test:
-	python test.py -q
+	./test.py -q
 
 .PHONY: docker-test
 docker-test:
