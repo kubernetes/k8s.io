@@ -105,7 +105,7 @@ for PROJECT; do
         # Enable writers on the bucket
         for group in ${ADMINS} ${WRITERS}; do
             color 6 "Empowering ${group} to GCS"
-            empower_group_to_gcs_bucket "${group}" "${BUCKET}"
+            empower_group_to_write_gcs_bucket "${group}" "${BUCKET}"
         done
     done
 

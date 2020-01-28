@@ -90,6 +90,9 @@ ALL_PROD_PROJECTS=(
 # Regions for prod.
 PROD_REGIONS=(us eu asia)
 
+# Minimum time we expect to keep prod artifacts.
+PROD_RETENTION="10y"
+
 # Make the projects, if needed
 for prj in "${ALL_PROD_PROJECTS[@]}"; do
     color 6 "Ensuring project exists: ${prj}"
@@ -126,8 +129,7 @@ for prj in "${ALL_PROD_PROJECTS[@]}"; do
     ensure_public_gcs_bucket "${prj}" "gs://${prj}"
 
     color 6 "Ensuring the GCS bucket retention policy is set: ${prj}"
-    RETENTION="10y"
-    ensure_gcs_bucket_retention "gs://${prj}" "${RETENTION}"
+    ensure_gcs_bucket_retention "gs://${prj}" "${PROD_RETENTION}"
 
     color 6 "Empowering GCS admins: ${prj}"
     empower_gcs_admins "${prj}" "gs://${prj}"
@@ -142,6 +144,20 @@ color 6 "Copying static content into bucket"
 upload_gcs_static_content \
     "gs://${PROD_PROJECT}" \
     "${SCRIPT_DIR}/static/prod-storage"
+
+# Special case: grant the push groups access to their buckets.
+# This is for serving CNI artifacts.  We need a new bucket for this because
+# there's no concept of permissions on a "subdirectory" of a bucket.  So until we
+# have a promoter for k8s-artifacts-prod, we do this.
+CNI_BUCKET="k8s-artifacts-cni"
+CNI_GROUP="k8s-infra-push-cni@kubernetes.io"
+color 6 "Ensuring the CNI GCS bucket exists and is readable"
+ensure_public_gcs_bucket "${PROD_PROJECT}" "gs://${CNI_BUCKET}"
+color 6 "Ensuring the CNI GCS bucket retention policy is set"
+ensure_gcs_bucket_retention "gs://${CNI_BUCKET}" "${PROD_RETENTION}"
+color 6 "Empowering GCS admins to CNI"
+empower_gcs_admins "${PROD_PROJECT}" "gs://${CNI_BUCKET}"
+empower_group_to_write_gcs_bucket "${CNI_GROUP}" "gs://${CNI_BUCKET}"
 
 # Special case: grant the image promoter testing group access to their fake
 # prod projects.
