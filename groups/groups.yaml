@@ -653,6 +653,19 @@ groups:
       - srampal@cisco.com
       - tasha.drew@gmail.com
 
+  - email-id: k8s-infra-staging-npd@kubernetes.io
+    name: k8s-infra-staging-npd
+    description: |-
+      ACL for node-problem-detector
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - andy.xning@gmail.com
+      - dawnchen@google.com
+      - lantaol@google.com
+      - patrik@ptrk.io
+      - zhenw@google.com
+
   - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
     name: k8s-infra-staging-publishing-bot
     description: |-

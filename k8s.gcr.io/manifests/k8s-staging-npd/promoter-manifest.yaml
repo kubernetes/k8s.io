@@ -1,0 +1,11 @@
+# google group for gcr.io/k8s-staging-npd is k8s-infra-staging-npd@kubernetes.io
+registries:
+- name: gcr.io/k8s-staging-npd
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod/node-problem-detector
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/node-problem-detector
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/node-problem-detector
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+imagesPath: "../../images/k8s-staging-npd/images.yaml"
