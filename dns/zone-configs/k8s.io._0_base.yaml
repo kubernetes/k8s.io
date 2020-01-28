@@ -17,7 +17,7 @@
   - type: TXT
     values:
     - google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs
-    - v=spf1 include:_spf.google.com ~all
+    - v=spf1 include:_spf.google.com -all
 www:
   type: CNAME
   value: k8s.io.

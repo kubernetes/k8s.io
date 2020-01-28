@@ -21,7 +21,7 @@
   - type: TXT
     values:
     - google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8
-    - v=spf1 include:_spf.google.com ~all
+    - v=spf1 include:_spf.google.com -all
 www:
   type: CNAME
   value: kubernetes.io.
