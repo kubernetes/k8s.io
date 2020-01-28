@@ -287,6 +287,17 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-push-cni@kubernetes.io
+    name: k8s-infra-push-cni
+    description: |-
+      ACL for pushing CNI artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - dcbw@redhat.com
+      - stephen.k8s@agst.us
+      - thockin@google.com
+
   - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
     name: k8s-infra-rbac-cert-manager
     description: |-

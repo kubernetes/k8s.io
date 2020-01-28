@@ -141,7 +141,7 @@ for REPO; do
 
       # Enable writers on the bucket
       color 6 "Empowering ${WRITERS} to GCS"
-      empower_group_to_gcs_bucket "${WRITERS}" "${BUCKET}"
+      empower_group_to_write_gcs_bucket "${WRITERS}" "${BUCKET}"
     done
 
     # Enable GCB and Prow to build and push images.

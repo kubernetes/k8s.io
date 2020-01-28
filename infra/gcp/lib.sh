@@ -347,16 +347,8 @@ function empower_gcr_admins() {
     region="${2:-}"
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    # Grant project viewer so the UI will work.
     empower_group_as_viewer "${project}" "${GCR_ADMINS}"
-
-    # Grant admins access to do admin stuff.
-    gsutil iam ch \
-        "group:${GCR_ADMINS}:objectAdmin" \
-        "${bucket}"
-    gsutil iam ch \
-        "group:${GCR_ADMINS}:legacyBucketOwner" \
-        "${bucket}"
+    empower_group_to_admin_gcs_bucket "${GCR_ADMINS}" "${bucket}"
 }
 
 # Grant full privileges to GCS admins
@@ -370,16 +362,8 @@ function empower_gcs_admins() {
     project="${1}"
     bucket="${2}"
 
-    # Grant project viewer so the UI will work.
     empower_group_as_viewer "${project}" "${GCS_ADMINS}"
-
-    # Grant admins access to do admin stuff.
-    gsutil iam ch \
-        "group:${GCS_ADMINS}:objectAdmin" \
-        "${bucket}"
-    gsutil iam ch \
-        "group:${GCS_ADMINS}:legacyBucketOwner" \
-        "${bucket}"
+    empower_group_to_admin_gcs_bucket "${GCS_ADMINS}" "${bucket}"
 }
 
 # Grant GCR write privileges to a group
@@ -396,20 +380,15 @@ function empower_group_to_gcr() {
     region="${3:-}"
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    gsutil iam ch \
-        "group:${group}:objectAdmin" \
-        "${bucket}"
-    gsutil iam ch \
-        "group:${group}:legacyBucketReader" \
-        "${bucket}"
+    empower_group_to_write_gcs_bucket "${group}" "${bucket}"
 }
 
 # Grant write privileges on a bucket to a group
 # $1: The googlegroups group
 # $2: The bucket
-function empower_group_to_gcs_bucket() {
+function empower_group_to_write_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_gcs_bucket(group_name, bucket) requires 2 arguments" >&2
+        echo "empower_group_to_write_gcs_bucket(group_name, bucket) requires 2 arguments" >&2
         return 1
     fi
     group="$1"
@@ -420,6 +399,25 @@ function empower_group_to_gcs_bucket() {
         "${bucket}"
     gsutil iam ch \
         "group:${group}:legacyBucketReader" \
+        "${bucket}"
+}
+
+# Grant admin privileges on a bucket to a group
+# $1: The googlegroups group
+# $2: The bucket
+function empower_group_to_admin_gcs_bucket() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group_to_admin_gcs_bucket(group_name, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    group="$1"
+    bucket="$2"
+
+    gsutil iam ch \
+        "group:${group}:objectAdmin" \
+        "${bucket}"
+    gsutil iam ch \
+        "group:${group}:legacyBucketOwner" \
         "${bucket}"
 }
 
