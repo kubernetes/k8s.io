@@ -92,7 +92,7 @@ for zone in "${CANARY_ZONES[@]}"; do
     TRIES=12
     echo "Testing canary zone: $zone"
     for i in $(seq 1 "$TRIES"); do
-        ./check-zone.sh "$zone" >> log.canary 2>&1
+        ./check-zone.sh -c "${TMPCFG}" "$zone" >> log.canary 2>&1
         if [ $? == 0 ]; then
             break
         fi
@@ -133,7 +133,7 @@ for zone in "${PROD_ZONES[@]}"; do
     TRIES=12
     echo "Testing prod zone: $zone"
     for i in $(seq 1 "$TRIES"); do
-        ./check-zone.sh "$zone" >> log.prod 2>&1
+        ./check-zone.sh -c "${TMPCFG}" "$zone" >> log.prod 2>&1
         if [ $? == 0 ]; then
             break
         fi
