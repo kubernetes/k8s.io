@@ -260,6 +260,23 @@ function empower_group_as_viewer() {
         --role roles/viewer
 }
 
+# Grant project owner access.
+# $1: The GCP project
+# $2: The service account
+function empower_service_account_as_owner() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_service_account_as_owner(acct, project) requires 2 arguments" >&2
+        return 1
+    fi
+    acct="$1"
+    project="$2"
+
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "serviceAccount:${acct}" \
+        --role roles/owner
+}
+
 # Grant GCB admin privileges to a principal
 # $1: The GCP project
 # $2: The group email
