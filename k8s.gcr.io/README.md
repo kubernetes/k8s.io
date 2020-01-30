@@ -26,7 +26,7 @@ can have a maximum of 18 characters.
 2. Create 3 files:
     - `images/k8s-staging-<project-name>/OWNERS`
     - `images/k8s-staging-<project-name>/images.yaml`
-    - `manifest/k8s-staging-<project-name>/promoter-manifest.yaml`
+    - `manifests/k8s-staging-<project-name>/promoter-manifest.yaml`
 
 The `promoter-manifest.yaml` file will house the credentials and other registry
 metadata, whereas the `images.yaml` file will hold only the image data. You can
