@@ -1,0 +1,6 @@
+- name: proxy-agent
+  dmap:
+    "sha256:7479f04932b89ea42c9a1bc260ca52b0bb2575596962481fe9be0e6b4a583615": ["v0.0.4"]
+- name: proxy-server
+  dmap:
+    "sha256:5431119507b1da03ead713e5cfd79b7231d38026bb97189e5bd76d252f91fc3f": ["v0.0.4"]
