@@ -1,6 +1,7 @@
 - name: agnhost
   dmap:
     "sha256:3a09e7cc09aab76ac52f0447c16d6a6ec3e0537aa405301b165f5823aa6047e0": ["2.9"]
+    "sha256:20ff7cb1c0960acec927b4d3c6e8a6a9e3758f7c227b1fd14608b967dd9a487d": ["2.10"]
 - name: jessie-dnsutils
   dmap:
     "sha256:31183fd28aa9b4af81329e1886060492cfa67dd94e9d1132e00ed032ce685187": ["1.2"]
