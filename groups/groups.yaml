@@ -714,6 +714,18 @@ groups:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
 
+  - name: k8s-infra-staging-scl-image-builder
+    description: |-
+      ACL for Sig Cluster Lifecycle Image Builder project
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - moshe.immerman@gmail.com
+      - justinsb@google.com
+      - timothysc@gmail.com
+      - trhoden@gmail.com
+      - luoh@vmware.com
+
   - email-id: k8s-infra-staging-service-apis@kubernetes.io
     name: k8s-infra-staging-service-apis
     description: |-
