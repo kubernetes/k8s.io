@@ -29,7 +29,7 @@ The rest of this document explains the infrastructural improvements surrounding
 To get new images into the old `gcr.io/google-containers`, a Googler must approve a
 change in Google's private repository.
 
-On the other hand, `gcr.io/k8s-artifacts-prod` is integrated with a
+On the other hand, the new `gcr.io/k8s-artifacts-prod` is integrated with a
 publicly-visible GitHub repository, named [k8s.io][k8sio]. The [promoter][CIP]
 watches this repository for changes and promotes images. In addition, a system
 of setting up staging repos, and promoting from them into
