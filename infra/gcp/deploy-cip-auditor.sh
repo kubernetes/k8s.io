@@ -22,14 +22,21 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
+. "${SCRIPT_DIR}/lib.sh"
+
 CLOUD_RUN_SERVICE_NAME="cip-auditor"
 SUBSCRIPTION_NAME="cip-auditor-invoker"
 SERVICE_ACCOUNT="k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com"
 
 # This sets up the GCP project so that it can be ready to deploy the cip-auditor
 # service onto Cloud Run.
-this::prepare_env()
+prepare_env()
 {
+    # Create/add-permissions for necessary service accounts.
+    empower_artifact_auditor
+    empower_artifact_auditor_invoker
+
     # Enable APIs.
     services=(
 		"serviceusage.googleapis.com"
@@ -60,7 +67,7 @@ this::prepare_env()
         "--role=roles/iam.serviceAccountTokenCreator"
 }
 
-this::deploy_cip_auditor()
+deploy_cip_auditor()
 {
     # Deploy the auditor. The "--update-env-vars" is critical as it points to
     # the reference set of official promoter manifests to validate GCR changes
@@ -78,7 +85,7 @@ this::deploy_cip_auditor()
         --service-account="${SERVICE_ACCOUNT}"
 }
 
-this::finish_env()
+finish_env()
 {
     # Allow SERVICE_ACCOUNT to invoke the Cloud Run instance.
     gcloud \
@@ -95,14 +102,9 @@ this::finish_env()
 	# Create subscription if it doesn't exist yet.
 	if ! gcloud pubsub subscriptions list --format='value(name)' --project="${PROJECT_ID}" \
         | grep "projects/${PROJECT_ID}/subscriptions/${SUBSCRIPTION_NAME}"; then
-        # Find HTTPS push endpoint (invocation endpoint) of the auditor. During
-        # experiments, it has been shown that this endpoint does not change (even if
-        # the Cloud Run service is deleted and redeployed), as the endpoint is
-        # composed of the CLOUD_RUN_SERVICE_NAME and a unique hash that is tied to
-        # the PROJECT_ID. E.g., a sample endpoint is
-        # "https://cip-auditor-test-hkgjm7emua-uc.a.run.app", where presumably
-        # "cip-auditor-test" is the CLOUD_RUN_SERVICE_NAME and "hkgjm7emua-uc" is a
-        # UUID tied to a project.
+        # Find HTTPS push endpoint (invocation endpoint) of the auditor. This
+        # URL will never change (part of the service name is baked into it), as
+        # per https://cloud.google.com/run/docs/deploying#url.
         local auditor_endpoint
         auditor_endpoint=$(gcloud \
             run \
@@ -127,21 +129,21 @@ this::finish_env()
     fi
 }
 
-this::usage()
+usage()
 {
     echo >&2 "Usage: $0 [GCP_PROJECT_ID] [GCP_PROJECT_NUMBER] [CIP_AUDITOR_DIGEST]"
     exit 1
 }
 
-this::main()
+main()
 {
     if (( $# != 3 )); then
-        this::usage
+        usage
     fi
 
     for arg; do
         if [[ -z "$arg" ]]; then
-            this::usage
+            usage
         fi
     done
 
@@ -149,8 +151,8 @@ this::main()
     PROJECT_NUMBER="$2"
     CIP_AUDITOR_DIGEST="$3"
 
-    this::prepare_env
-    this::deploy_cip_auditor
+    prepare_env
+    deploy_cip_auditor
 }
 
-this::main "$@"
+main "$@"
