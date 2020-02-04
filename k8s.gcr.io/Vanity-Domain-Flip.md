@@ -26,7 +26,7 @@ The rest of this document explains the infrastructural improvements surrounding
 
 # How New Images Get Promoted (Pushed) to Production
 
-To get new images into `gcr.io/google-containers`, a Googler must approve a
+To get new images into the old `gcr.io/google-containers`, a Googler must approve a
 change in Google's private repository.
 
 On the other hand, `gcr.io/k8s-artifacts-prod` is integrated with a
