@@ -8,11 +8,11 @@ community-controlled repo.
 
 # The Solution
 
-The community has created a new repo called `gcr.io/k8s-artifacts-prod`, and it
+The community has created a new repo called `{asia,eu,us}.gcr.io/k8s-artifacts-prod`, and it
 has been agreed that the community should use it as the new place to push
 production images (instead of `gcr.io/google-containers`). **We can solve the
 above problem by flipping the vanity domain (`k8s.gcr.io`) from
-`gcr.io/google-containers` to `gcr.io/k8s-artifacts-prod`**. This way, no change
+`gcr.io/google-containers` to `{asia,eu,us}.gcr.io/k8s-artifacts-prod`**. This way, no change
 needs to be made in the Kubernetes codebase.
 
 The minimum prerequisite is that the existing images in `google-containers` must
@@ -22,18 +22,18 @@ other infrastructural improvements that the community has designed, such as
 explicit backups, disaster recovery, and also auditing and alerting.
 
 The rest of this document explains the infrastructural improvements surrounding
-`gcr.io/k8s-artifacts-prod`.
+`{asia,eu,us}.gcr.io/k8s-artifacts-prod`.
 
 # How New Images Get Promoted (Pushed) to Production
 
 To get new images into the old `gcr.io/google-containers`, a Googler must approve a
 change in Google's private repository.
 
-On the other hand, the new `gcr.io/k8s-artifacts-prod` is integrated with a
+On the other hand, the new `{asia,eu,us}.gcr.io/k8s-artifacts-prod` is integrated with a
 publicly-visible GitHub repository, named [k8s.io][k8sio]. The [promoter][CIP]
 watches this repository for changes and promotes images. In addition, a system
 of setting up staging repos, and promoting from them into
-`gcr.io/k8s-artifacts-prod` has been [created][staging-subproject] so that owners of
+`{asia,eu,us}.gcr.io/k8s-artifacts-prod` has been [created][staging-subproject] so that owners of
 subprojects in the community can take control of how their images are released.
 
 ## The Promoter (cip)
@@ -55,7 +55,7 @@ in the table below:
 - [`post-k8sio-cip`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/test-infra/test-infra-trusted.yaml)
   Postsubmit job against k8s.io repo holding promoter manifests. The promoter
   manifests here are those that promote from the various staging subproject
-  repos to `gcr.io/k8s-artifacts-prod/<subproject>/<image>`. It uses the
+  repos to `{asia,eu,us}.gcr.io/k8s-artifacts-prod/<subproject>/<image>`. It uses the
   `k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com` service
   account to write to `{asia,eu,us}.gcr.io/k8s-artifacts-prod`. For all
   intents and purposes, **this is the gatekeeper for new images going into
@@ -63,7 +63,7 @@ in the table below:
 - [`ci-k8sio-cip`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/test-infra/test-infra-trusted.yaml)
   Like `post-k8sio-cip`, but runs periodically. This is to ensure
   that even if images are accidentally deleted from
-  `gcr.io/k8s-artifacts-prod`, they are automatically copied back. It also
+  `{asia,eu,us}.gcr.io/k8s-artifacts-prod`, they are automatically copied back. It also
   acts as a kind of sanity check, to ensure that the promoter can run at all.
 - [`ci-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/test-infra/test-infra-trusted.yaml)
   Runs an hourly backup of all GCR images in
