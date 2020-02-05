@@ -86,7 +86,7 @@ for REPO; do
 
     # Enable writers on the bucket
     color 6 "Empowering ${BUCKET_WRITERS} to GCS"
-    empower_group_to_gcs_bucket "${BUCKET_WRITERS}" "${BUCKET}"
+    empower_group_to_write_gcs_bucket "${BUCKET_WRITERS}" "${BUCKET}"
 
     color 6 "Done"
 done
