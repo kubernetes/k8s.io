@@ -1,0 +1,10 @@
+{
+  "description": "Can list storage buckets",
+  "etag": "BwWMa3osHUc=",
+  "includedPermissions": [
+    "storage.buckets.get"
+  ],
+  "name": "organizations/758905017065/roles/StorageBucketLister",
+  "stage": "GA",
+  "title": "Storage Bucket Lister"
+}

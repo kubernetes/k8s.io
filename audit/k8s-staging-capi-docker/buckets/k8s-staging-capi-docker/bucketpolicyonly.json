@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-capi-docker:
+  Enabled: True
+  LockedTime: 2019-12-05 20:57:34.231000+00:00
+

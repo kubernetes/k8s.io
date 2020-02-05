@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "user:davanum@gmail.com"
+      ],
+      "role": "roles/owner"
+    }
+  ],
+  "etag": "BwWZC-6c8DY=",
+  "version": 1
+}

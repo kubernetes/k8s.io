@@ -5,6 +5,14 @@
       "documentation": {
         "summary": "Admin SDK lets administrators of enterprise domains to\n     view and manage resources like user, groups etc. It also provides\n     audit and usage reports of domain."
       },
+      "legacy": {
+        "apiV1Name": "admin",
+        "devconsole": {
+          "learnmoreUrl": "http://developers.google.com/admin-sdk/",
+          "requestQuotaUrl": "https://support.google.com/code/contact/admin_sdk_quota?email={email}&id={id}"
+        }
+      },
+      "migration": {},
       "name": "admin.googleapis.com",
       "quota": {},
       "title": "Admin SDK",
@@ -15,7 +23,13 @@
         ]
       }
     },
+    "dependencyConfig": {
+      "dependsOn": [
+        "admin.googleapis.com"
+      ]
+    },
     "name": "projects/91610859379/services/admin.googleapis.com",
+    "parent": "projects/91610859379",
     "state": "ENABLED"
   },
   {
@@ -24,6 +38,14 @@
       "documentation": {
         "summary": "The Groups Settings API allows domain administrators to view and manage\n    access levels and advanced settings for a group."
       },
+      "legacy": {
+        "apiV1Name": "groupssettings",
+        "devconsole": {
+          "learnmoreUrl": "http://code.google.com/googleapps/domain/group_settings/index.html",
+          "requestQuotaUrl": "https://support.google.com/code/contact/group_settings_quota?email={email}&id={id}"
+        }
+      },
+      "migration": {},
       "name": "groupssettings.googleapis.com",
       "quota": {},
       "title": "Groups Settings API",
@@ -31,10 +53,17 @@
         "requirements": [
           "serviceusage.googleapis.com/tos/universal",
           "serviceusage.googleapis.com/tos/appsadmin"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
+    "dependencyConfig": {
+      "dependsOn": [
+        "groupssettings.googleapis.com"
+      ]
+    },
     "name": "projects/91610859379/services/groupssettings.googleapis.com",
+    "parent": "projects/91610859379",
     "state": "ENABLED"
   }
 ]

@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-cluster-api-gcp.appspot.com:
+  Enabled: True
+  LockedTime: 2019-12-10 14:04:03.734000+00:00
+

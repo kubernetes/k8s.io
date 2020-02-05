@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-csi-gcb:
+  Enabled: True
+  LockedTime: 2019-12-10 16:25:14.309000+00:00
+

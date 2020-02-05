@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-release-test-prod-gcb:
+  Enabled: True
+  LockedTime: 2020-01-28 00:34:56.848000+00:00
+

@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-cip-test-gcb:
+  Enabled: True
+  LockedTime: 2019-12-10 16:17:19.108000+00:00
+

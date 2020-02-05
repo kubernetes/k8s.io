@@ -1,0 +1,100 @@
+[
+  {
+    "creationTime": "2018-10-09T16:18:27.446Z",
+    "description": "",
+    "dnsName": "canary.k8s.io.",
+    "id": "7690509341659612964",
+    "kind": "dns#managedZone",
+    "name": "canary-k8s-io",
+    "nameServers": [
+      "ns-cloud-c1.googledomains.com.",
+      "ns-cloud-c2.googledomains.com.",
+      "ns-cloud-c3.googledomains.com.",
+      "ns-cloud-c4.googledomains.com."
+    ],
+    "visibility": "public"
+  },
+  {
+    "creationTime": "2018-10-09T16:19:40.004Z",
+    "description": "",
+    "dnsName": "canary.kubernetes.io.",
+    "id": "4193576254815248920",
+    "kind": "dns#managedZone",
+    "name": "canary-kubernetes-io",
+    "nameServers": [
+      "ns-cloud-b1.googledomains.com.",
+      "ns-cloud-b2.googledomains.com.",
+      "ns-cloud-b3.googledomains.com.",
+      "ns-cloud-b4.googledomains.com."
+    ],
+    "visibility": "public"
+  },
+  {
+    "creationTime": "2018-09-07T15:08:37.689Z",
+    "description": "",
+    "dnsName": "k8s.io.",
+    "dnssecConfig": {
+      "defaultKeySpecs": [
+        {
+          "algorithm": "rsasha256",
+          "keyLength": 2048,
+          "keyType": "keySigning",
+          "kind": "dns#dnsKeySpec"
+        },
+        {
+          "algorithm": "rsasha256",
+          "keyLength": 1024,
+          "keyType": "zoneSigning",
+          "kind": "dns#dnsKeySpec"
+        }
+      ],
+      "kind": "dns#managedZoneDnsSecConfig",
+      "nonExistence": "nsec3",
+      "state": "off"
+    },
+    "id": "8257163024921094127",
+    "kind": "dns#managedZone",
+    "name": "k8s-io",
+    "nameServers": [
+      "ns-cloud-d1.googledomains.com.",
+      "ns-cloud-d2.googledomains.com.",
+      "ns-cloud-d3.googledomains.com.",
+      "ns-cloud-d4.googledomains.com."
+    ],
+    "visibility": "public"
+  },
+  {
+    "creationTime": "2018-09-06T16:58:36.444Z",
+    "description": "",
+    "dnsName": "kubernetes.io.",
+    "dnssecConfig": {
+      "defaultKeySpecs": [
+        {
+          "algorithm": "rsasha256",
+          "keyLength": 2048,
+          "keyType": "keySigning",
+          "kind": "dns#dnsKeySpec"
+        },
+        {
+          "algorithm": "rsasha256",
+          "keyLength": 1024,
+          "keyType": "zoneSigning",
+          "kind": "dns#dnsKeySpec"
+        }
+      ],
+      "kind": "dns#managedZoneDnsSecConfig",
+      "nonExistence": "nsec3",
+      "state": "off"
+    },
+    "id": "8283179273191389843",
+    "kind": "dns#managedZone",
+    "name": "kubernetes-io",
+    "nameServers": [
+      "ns-cloud-a1.googledomains.com.",
+      "ns-cloud-a2.googledomains.com.",
+      "ns-cloud-a3.googledomains.com.",
+      "ns-cloud-a4.googledomains.com."
+    ],
+    "visibility": "public"
+  }
+]

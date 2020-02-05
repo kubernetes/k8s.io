@@ -1,7 +1,0 @@
-gs://artifacts.k8s-staging-cluster-api-aws.appspot.com/containers/:
-
-gs://artifacts.k8s-staging-cluster-api-aws.appspot.com/containers/images/:
-gs://artifacts.k8s-staging-cluster-api-aws.appspot.com/containers/images/sha256:06367809424b06ef0c8a4c11083ca3d2a2dd4e5fe9bdb5b3074ba8b52bbd11ea
-gs://artifacts.k8s-staging-cluster-api-aws.appspot.com/containers/images/sha256:41d633039bbf795b04c097c6f127e26285d6e9242ae094915f347777dbdcf354
-gs://artifacts.k8s-staging-cluster-api-aws.appspot.com/containers/images/sha256:47419798aef377165f783a954f4bb63f063e50166c4291b592602ab94fb38244
-gs://artifacts.k8s-staging-cluster-api-aws.appspot.com/containers/images/sha256:5f5edd681dcbc3a4a9df93e200e59e1708031e65b2299970eabdc91a78cc8234

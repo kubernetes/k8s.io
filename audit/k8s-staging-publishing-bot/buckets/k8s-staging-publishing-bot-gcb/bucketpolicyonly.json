@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-publishing-bot-gcb:
+  Enabled: True
+  LockedTime: 2019-12-10 16:29:24.514000+00:00
+
