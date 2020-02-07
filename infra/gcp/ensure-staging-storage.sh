@@ -61,6 +61,7 @@ STAGING_PROJECTS=(
     kubeadm
     metrics-server
     multitenancy
+    nfd
     npd
     provider-azure
     publishing-bot
