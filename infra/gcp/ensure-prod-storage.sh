@@ -180,10 +180,10 @@ empower_service_account_to_artifacts \
     $(svc_acct_email "${PROMOTER_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
     "${PROMOTER_TEST_STAGING_PROJECT}"
 
-# Special case: grant the image promoter test service account OWNER access to
+# Special case: grant the image promoter test service account access to
 # their testing project (used for running e2e tests for the promoter auditing
 # mechanism).
-empower_service_account_as_owner \
+empower_service_account_for_cip_auditor_e2e_tester \
     $(svc_acct_email "${GCR_AUDIT_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
     "${GCR_AUDIT_TEST_PROD_PROJECT}"
 

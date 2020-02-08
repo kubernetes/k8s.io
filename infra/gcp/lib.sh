@@ -260,21 +260,35 @@ function empower_group_as_viewer() {
         --role roles/viewer
 }
 
-# Grant project owner access.
+# Grant roles for running cip-auditor E2E test
+# (https://github.com/kubernetes-sigs/k8s-container-image-promoter/tree/master/test-e2e#cip-auditor-cip-auditor-e2ego).
+
 # $1: The GCP project
 # $2: The service account
-function empower_service_account_as_owner() {
+function empower_service_account_for_cip_auditor_e2e_tester() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_service_account_as_owner(acct, project) requires 2 arguments" >&2
+        echo "empower_service_account_for_cip_auditor_e2e_tester(acct, project) requires 2 arguments" >&2
         return 1
     fi
     acct="$1"
     project="$2"
 
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "serviceAccount:${acct}" \
-        --role roles/owner
+    roles=(
+        roles/errorreporting.admin
+        roles/logging.admin
+        roles/pubsub.admin
+        roles/resourcemanager.projectIamAdmin
+        roles/run.admin
+        roles/serverless.serviceAgent
+        roles/storage.admin
+    )
+
+    for role in "${roles[@]}"; do
+        gcloud \
+            projects add-iam-policy-binding "${project}" \
+            --member "serviceAccount:${acct}" \
+            --role "${role}"
+    done
 }
 
 # Grant GCB admin privileges to a principal
