@@ -761,7 +761,8 @@ groups:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
 
-  - name: k8s-infra-staging-scl-image-builder
+  - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
+    name: k8s-infra-staging-scl-image-builder
     description: |-
       ACL for Sig Cluster Lifecycle Image Builder project
     settings:
