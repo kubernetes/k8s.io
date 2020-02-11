@@ -141,6 +141,10 @@ func main() {
 
 	log.Println(" ======================= Updates =========================")
 	for _, g := range groupsConfig.Groups {
+		if g.EmailId == "" {
+			log.Fatal(fmt.Sprintf("Group has no email-id: %#v", g))
+		}
+
 		err = createOrUpdateGroupIfNecessary(srv, g.EmailId, g.Name, g.Description)
 		if err != nil {
 			log.Fatal(err)
