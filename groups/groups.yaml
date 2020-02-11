@@ -612,6 +612,19 @@ groups:
       - ravisantoshgudimetla@gmail.com
       - spiffxp@google.com
 
+  - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
+    name: Kubernetes E2E test image staging registry owners
+    description: |-
+      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - thockin@google.com
+      - spiffxp@google.com
+
   - email-id: k8s-infra-staging-external-dns@kubernetes.io
     name: k8s-infra-staging-external-dns
     description: |-
@@ -647,6 +660,17 @@ groups:
       - justinsb@google.com
       - spiffxp@google.com
       - thockin@google.com
+
+  - email-id: k8s-infra-staging-kubeadm@kubernetes.io
+    name: k8s-infra-staging-kubeadm
+    description: |-
+      ACL for staging kubeadm
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - timothysc@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
 
   - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
     name: k8s-infra-staging-kube-state-metrics
@@ -736,30 +760,6 @@ groups:
       - stephen.k8s@agst.us
       - thockin@google.com
       - tpepper@gmail.com
-
-  - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
-    name: Kubernetes E2E test image staging registry owners
-    description: |-
-      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
-    settings:
-      ReconcileMembers: "true"
-    owners:
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - justinsb@google.com
-      - thockin@google.com
-      - spiffxp@google.com
-
-  - email-id: k8s-infra-staging-kubeadm@kubernetes.io
-    name: k8s-infra-staging-kubeadm
-    description: |-
-      ACL for staging kubeadm
-    settings:
-      ReconcileMembers: "true"
-    owners:
-      - timothysc@gmail.com
-      - fabrizio.pandini@gmail.com
-      - neolit123@gmail.com
 
   - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
     name: k8s-infra-staging-scl-image-builder
