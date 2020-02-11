@@ -66,6 +66,7 @@ STAGING_PROJECTS=(
     provider-azure
     publishing-bot
     release-test
+    scl-image-builder
     service-apis
     txtdirect
 )
