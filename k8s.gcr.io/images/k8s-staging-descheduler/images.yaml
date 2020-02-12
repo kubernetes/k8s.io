@@ -1,0 +1,3 @@
+- name: descheduler
+  dmap:
+    "sha256:c89ada9df9a950e351d21a1df5a83575e086b975cd665a8e636bcb258caf4fb9": ["v0.10.0"]
