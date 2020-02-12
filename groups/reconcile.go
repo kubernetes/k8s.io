@@ -87,6 +87,8 @@ Command line flags override config values.
 var config Config
 var groupsConfig GroupsConfig
 
+var verbose = flag.Bool("v", false, "log extra information")
+
 func main() {
 	configFilePath := flag.String("config", "config.yaml", "the config file in yaml format")
 	confirmChanges := flag.Bool("confirm", false, "false by default means that we do not push anything to google groups")
@@ -95,7 +97,7 @@ func main() {
 	flag.Usage = Usage
 	flag.Parse()
 
-	err := readConfig(configFilePath, confirmChanges)
+	err := readConfig(*configFilePath, *confirmChanges)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -141,6 +143,10 @@ func main() {
 
 	log.Println(" ======================= Updates =========================")
 	for _, g := range groupsConfig.Groups {
+		if g.EmailId == "" {
+			log.Fatal(fmt.Sprintf("Group has no email-id: %#v", g))
+		}
+
 		err = createOrUpdateGroupIfNecessary(srv, g.EmailId, g.Name, g.Description)
 		if err != nil {
 			log.Fatal(err)
@@ -159,7 +165,7 @@ func main() {
 		}
 		err = addOrUpdateMemberToGroup(srv, g.EmailId, g.Members, "MEMBER")
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 		if g.Settings["ReconcileMembers"] == "true" {
 			members := append(g.Owners, g.Managers...)
@@ -182,21 +188,25 @@ func main() {
 	}
 }
 
-func readConfig(configFilePath *string, confirmChanges *bool) error {
-	content, err := ioutil.ReadFile(*configFilePath)
+func readConfig(configFilePath string, confirmChanges bool) error {
+	if *verbose {
+		log.Printf("reading config file %s", configFilePath)
+	}
+	content, err := ioutil.ReadFile(configFilePath)
 	if err != nil {
-		return fmt.Errorf("error reading config from file: %v", err)
+		return fmt.Errorf("error reading config file %s: %v", configFilePath, err)
 	}
 	if err = yaml.Unmarshal(content, &config); err != nil {
-		return fmt.Errorf("error reading config: %v", err)
+		return fmt.Errorf("error parsing config file %s: %v", configFilePath, err)
 	}
-	if confirmChanges != nil {
-		config.ConfirmChanges = *confirmChanges
-	}
+	config.ConfirmChanges = confirmChanges
 	return err
 }
 
 func readGroupsConfig(groupsConfigFilePath string, config *GroupsConfig) error {
+	if *verbose {
+		log.Printf("reading group file %s", groupsConfigFilePath)
+	}
 	var content []byte
 	var err error
 	groupsUrl, err := url.ParseRequestURI(groupsConfigFilePath)
@@ -204,17 +214,17 @@ func readGroupsConfig(groupsConfigFilePath string, config *GroupsConfig) error {
 		// We have a URL, so try reading from it
 		if len(groupsUrl.Host) > 0 {
 			if content, err = readFromUrl(groupsUrl); err != nil {
-				return fmt.Errorf("error reading groups config from file: %v", err)
+				return fmt.Errorf("error reading groups config URL %s: %v", groupsUrl, err)
 			}
 		}
 	} else {
 		// We don't have a URL, we have a file path, so try reading from the file
 		if content, err = ioutil.ReadFile(groupsConfigFilePath); err != nil {
-			return fmt.Errorf("error reading groups config from file: %v", err)
+			return fmt.Errorf("error reading groups config file %s: %v", groupsConfigFilePath, err)
 		}
 	}
 	if err = yaml.Unmarshal(content, config); err != nil {
-		return fmt.Errorf("error reading groups config: %v", err)
+		return fmt.Errorf("error parsing groups config: %v", err)
 	}
 	return nil
 }
@@ -309,13 +319,16 @@ func printGroupMembersAndSettings(srv *admin.Service, srv2 *groupssettings.Servi
 }
 
 func createOrUpdateGroupIfNecessary(srv *admin.Service, groupEmailId string, name string, description string) error {
+	if *verbose {
+		log.Printf("createOrUpdateGroupIfNecessary %q", groupEmailId)
+	}
 	group, err := srv.Groups.Get(groupEmailId).Do()
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
 			if !config.ConfirmChanges {
-				log.Printf("dry-run : skipping creation of group %s\n", groupEmailId)
+				log.Printf("dry-run : skipping creation of group %q\n", groupEmailId)
 			} else {
-				log.Printf("Trying to create group: %s\n", groupEmailId)
+				log.Printf("Trying to create group: %q\n", groupEmailId)
 				g := admin.Group{
 					Email: groupEmailId,
 				}
@@ -327,20 +340,20 @@ func createOrUpdateGroupIfNecessary(srv *admin.Service, groupEmailId string, nam
 				}
 				g4, err := srv.Groups.Insert(&g).Do()
 				if err != nil {
-					return fmt.Errorf("unable to add new group %s: %v", groupEmailId, err)
+					return fmt.Errorf("unable to add new group %q: %v", groupEmailId, err)
 				}
 				log.Printf("> Successfully created group %s\n", g4.Email)
 			}
 		} else {
-			return fmt.Errorf("unable to fetch group: %#v", err.Error())
+			return fmt.Errorf("unable to fetch group %q: %#v", groupEmailId, err.Error())
 		}
 	} else {
 		if name != "" && group.Name != name ||
 			description != "" && group.Description != description {
 			if !config.ConfirmChanges {
-				log.Printf("dry-run : skipping update of group name/description %s\n", groupEmailId)
+				log.Printf("dry-run : skipping update of group name/description %q\n", groupEmailId)
 			} else {
-				log.Printf("Trying to update group: %s\n", groupEmailId)
+				log.Printf("Trying to update group: %q\n", groupEmailId)
 				g := admin.Group{
 					Email: groupEmailId,
 				}
@@ -352,7 +365,7 @@ func createOrUpdateGroupIfNecessary(srv *admin.Service, groupEmailId string, nam
 				}
 				g4, err := srv.Groups.Update(groupEmailId, &g).Do()
 				if err != nil {
-					return fmt.Errorf("unable to update group %s: %v", groupEmailId, err)
+					return fmt.Errorf("unable to update group %q: %v", groupEmailId, err)
 				}
 				log.Printf("> Successfully updated group %s\n", g4.Email)
 			}
@@ -383,6 +396,9 @@ func deleteGroupsIfNecessary(service *admin.Service) error {
 		}
 		// We did not find the group in our groups.xml, so delete the group
 		if config.ConfirmChanges {
+			if *verbose {
+				log.Printf("deleting group %s", g.Email)
+			}
 			err := service.Groups.Delete(g.Email).Do()
 			if err != nil {
 				return fmt.Errorf("unable to remove group %s : %v", g.Email, err)
@@ -397,13 +413,16 @@ func deleteGroupsIfNecessary(service *admin.Service) error {
 }
 
 func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, groupSettings map[string]string) error {
+	if *verbose {
+		log.Printf("updateGroupSettings %q", groupEmailId)
+	}
 	g2, err := srv.Groups.Get(groupEmailId).Do()
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
-			log.Printf("skipping updating group settings as group %s has not yet been created\n", groupEmailId)
+			log.Printf("skipping updating group settings as group %q has not yet been created\n", groupEmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve group info for group %s: %v", groupEmailId, err)
+		return fmt.Errorf("unable to retrieve group info for group %q: %v", groupEmailId, err)
 	}
 
 	var (
@@ -452,11 +471,11 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 		if config.ConfirmChanges {
 			_, err := srv.Groups.Patch(groupEmailId, &wantSettings).Do()
 			if err != nil {
-				return fmt.Errorf("unable to update group info for group %s: %v", groupEmailId, err)
+				return fmt.Errorf("unable to update group info for group %q: %v", groupEmailId, err)
 			}
-			log.Printf("> Successfully updated group settings for %s to allow external members and other security settings\n", groupEmailId)
+			log.Printf("> Successfully updated group settings for %q to allow external members and other security settings\n", groupEmailId)
 		} else {
-			log.Printf("dry-run : skipping updating group settings for %s\n", groupEmailId)
+			log.Printf("dry-run : skipping updating group settings for %q\n", groupEmailId)
 			log.Printf("dry-run : current settings %+q", haveSettings)
 			log.Printf("dry-run : desired settings %+q", wantSettings)
 		}
@@ -465,15 +484,17 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 }
 
 func addOrUpdateMemberToGroup(service *admin.Service, groupEmailId string, members []string, role string) error {
+	if *verbose {
+		log.Printf("addOrUpdateMemberToGroup %s %q %v", role, groupEmailId, members)
+	}
 	l, err := service.Members.List(groupEmailId).Do()
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
-			log.Printf("skipping adding members to group %s as it has not yet been created\n", groupEmailId)
+			log.Printf("skipping adding members to group %q as it has not yet been created\n", groupEmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %s: %v", groupEmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %v", groupEmailId, err)
 	}
-
 	for _, m := range members {
 		found := false
 		currentRole := ""
@@ -492,11 +513,11 @@ func addOrUpdateMemberToGroup(service *admin.Service, groupEmailId string, membe
 						Role: role,
 					}).Do()
 					if err != nil {
-						return fmt.Errorf("unable to update %s to %s as %s : %v", m, groupEmailId, role, err)
+						return fmt.Errorf("unable to update %s to %q as %s : %v", m, groupEmailId, role, err)
 					}
-					log.Printf("Updated %s to %s as a %s\n", m, groupEmailId, role)
+					log.Printf("Updated %s to %q as a %s\n", m, groupEmailId, role)
 				} else {
-					log.Printf("dry-run : Skipping updating %s to %s as %s\n", m, groupEmailId, role)
+					log.Printf("dry-run : Skipping updating %s to %q as %s\n", m, groupEmailId, role)
 				}
 			}
 			continue
@@ -508,24 +529,27 @@ func addOrUpdateMemberToGroup(service *admin.Service, groupEmailId string, membe
 				Role:  role,
 			}).Do()
 			if err != nil {
-				return fmt.Errorf("unable to add %s to %s as %s : %v", m, groupEmailId, role, err)
+				return fmt.Errorf("unable to add %s to %q as %s : %v", m, groupEmailId, role, err)
 			}
-			log.Printf("Added %s to %s as a %s\n", m, groupEmailId, role)
+			log.Printf("Added %s to %q as a %s\n", m, groupEmailId, role)
 		} else {
-			log.Printf("dry-run : Skipping adding %s to %s as %s\n", m, groupEmailId, role)
+			log.Printf("dry-run : Skipping adding %s to %q as %s\n", m, groupEmailId, role)
 		}
 	}
 	return nil
 }
 
 func removeOwnerOrManagersGroup(service *admin.Service, groupEmailId string, members []string) error {
+	if *verbose {
+		log.Printf("removeOwnerOrManagersGroup %q %v", groupEmailId, members)
+	}
 	l, err := service.Members.List(groupEmailId).Do()
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
-			log.Printf("skipping removing members group %s as group has not yet been created\n", groupEmailId)
+			log.Printf("skipping removing members group %q as group has not yet been created\n", groupEmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %s: %v", groupEmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %v", groupEmailId, err)
 	}
 
 	for _, m := range l.Members {
@@ -543,24 +567,27 @@ func removeOwnerOrManagersGroup(service *admin.Service, groupEmailId string, mem
 		if config.ConfirmChanges {
 			err := service.Members.Delete(groupEmailId, m.Email).Do()
 			if err != nil {
-				return fmt.Errorf("unable to remove %s from %s as OWNER or MANAGER : %v", m.Email, groupEmailId, err)
+				return fmt.Errorf("unable to remove %s from %q as OWNER or MANAGER : %v", m.Email, groupEmailId, err)
 			}
-			log.Printf("Removing %s from %s as OWNER or MANAGER\n", m.Email, groupEmailId)
+			log.Printf("Removing %s from %q as OWNER or MANAGER\n", m.Email, groupEmailId)
 		} else {
-			log.Printf("dry-run : Skipping removing %s from %s as OWNER or MANAGER\n", m.Email, groupEmailId)
+			log.Printf("dry-run : Skipping removing %s from %q as OWNER or MANAGER\n", m.Email, groupEmailId)
 		}
 	}
 	return nil
 }
 
 func removeMembersFromGroup(service *admin.Service, groupEmailId string, members []string) error {
+	if *verbose {
+		log.Printf("removeMembersFromGroup %q %v", groupEmailId, members)
+	}
 	l, err := service.Members.List(groupEmailId).Do()
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
-			log.Printf("skipping removing members group %s as group has not yet been created\n", groupEmailId)
+			log.Printf("skipping removing members group %q as group has not yet been created\n", groupEmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %s: %v", groupEmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %v", groupEmailId, err)
 	}
 
 	for _, m := range l.Members {
@@ -578,11 +605,11 @@ func removeMembersFromGroup(service *admin.Service, groupEmailId string, members
 		if config.ConfirmChanges {
 			err := service.Members.Delete(groupEmailId, m.Email).Do()
 			if err != nil {
-				return fmt.Errorf("unable to remove %s from %s as a %s : %v", m.Email, groupEmailId, m.Role, err)
+				return fmt.Errorf("unable to remove %s from %q as a %s : %v", m.Email, groupEmailId, m.Role, err)
 			}
-			log.Printf("Removing %s from %s as a %s\n", m.Email, groupEmailId, m.Role)
+			log.Printf("Removing %s from %q as a %s\n", m.Email, groupEmailId, m.Role)
 		} else {
-			log.Printf("dry-run : Skipping removing %s from %s as a %s\n", m.Email, groupEmailId, m.Role)
+			log.Printf("dry-run : Skipping removing %s from %q as a %s\n", m.Email, groupEmailId, m.Role)
 		}
 	}
 	return nil
