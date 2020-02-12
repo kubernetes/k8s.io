@@ -861,6 +861,31 @@ groups:
       - ramamoorthypandiyaraja@gmail.com
       - spiffxp@google.com
 
+  - email-id: release-comms@kubernetes.io
+    name: release-comms
+    description: |-
+      External Release Communications list.
+      Should be used when coordinating external release timelines e.g., with the CNCF.
+
+      Membership should include SIG Chairs, Release Team Leads and Lead Shadows, and 
+      the Communications team for the current release cycle.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - cmiles@pivotal.io
+      - stephen.k8s@agst.us
+      - tpepper@vmware.com
+    members:
+      - alarcj137@gmail.com
+      - chu.karen.h@gmail.com
+      - k8s@thatmightbe.com
+      - killen.bob@gmail.com
+      - max@koerbaecher.io
+      - meenakshi.kaushik@gmail.com
+      - nadolny.claudia@gmail.com
+      - onlydole@gmail.com
+
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
     description: |-
