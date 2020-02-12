@@ -211,6 +211,11 @@ The auditing mechanism uses 3 service accounts:
    - `roles/logging.logWriter`
    - `roles/errorreporting.writer`
 
+## Admin
+
+The `k8s-infra-prod-artifact-auditor@kubernetes.io` googlegroup manages the
+auditor service. Its members are listed [here](../groups/groups.yaml).
+
 # Glossary
 
 - GCR: Google Container Registry

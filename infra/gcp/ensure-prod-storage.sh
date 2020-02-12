@@ -189,4 +189,9 @@ empower_group_to_fake_prod \
 # Special case: don't use retention on cip-test buckets
 gsutil retention clear gs://k8s-cip-test-prod
 
+# Special case: give Cloud Run Admin privileges to the group that will administer the cip-auditor.
+empower_group_to_admin_artifact_auditor \
+    "${PROD_PROJECT}" \
+    "k8s-infra-prod-artifact-auditor@kubernetes.io"
+
 color 6 "Done"

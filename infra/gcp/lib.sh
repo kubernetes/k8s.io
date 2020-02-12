@@ -427,6 +427,25 @@ function empower_group_to_admin_gcs_bucket() {
         "${bucket}"
 }
 
+# Grant Cloud Run privileges to a group.
+# $1: The GCP project
+# $2: The googlegroups group
+function empower_group_to_admin_artifact_auditor() {
+    if [ $# != 2 ]; then
+        echo "empower_group_to_admin_artifact_auditor(project, group_name) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    group="$2"
+
+    # Grant Cloud Run Admin privileges.
+    roles/run.admin
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "group:${group}" \
+        --role roles/run.admin
+}
+
 # Grant full privileges to the GCR promoter bot
 # $1: The GCP project
 # $2: The GCR region (optional)
