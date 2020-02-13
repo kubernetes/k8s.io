@@ -194,7 +194,7 @@ empower_group_to_admin_artifact_auditor \
     "${PROD_PROJECT}" \
     "k8s-infra-prod-artifact-auditor@kubernetes.io"
 # Special case: create/add-permissions for necessary service accounts for the auditor.
-empower_artifact_auditor
-empower_artifact_auditor_invoker
+empower_artifact_auditor "${PROD_PROJECT}"
+empower_artifact_auditor_invoker "${PROD_PROJECT}"
 
 color 6 "Done"
