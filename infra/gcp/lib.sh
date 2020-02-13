@@ -492,6 +492,8 @@ function empower_service_account_to_artifacts () {
         "${bucket}"
 }
 
+# Ensure the auditor service account exists and has the ability to write logs and fire alerts to Stackdriver Error Reporting.
+# $1: The GCP project
 function empower_artifact_auditor() {
     if [ $# -lt 1 -o -z "$1" ]; then
         echo "empower_artifact_auditor(project) requires 1 argument" >&2
@@ -504,7 +506,7 @@ function empower_artifact_auditor() {
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
             iam service-accounts create \
-            "${acct}" \
+            "${AUDITOR_SVCACCT}" \
             --display-name="k8s-infra container image auditor"
     fi
 
@@ -525,6 +527,12 @@ function empower_artifact_auditor() {
     # production GCR which is already world-readable.
 }
 
+# Ensure the artifact auditor invoker service account exists and has the ability
+# to invoke the auditor service. The auditor invoker service account is tied to
+# the Pub/Sub subscription that triggers the Cloud Run instance (the
+# subscription getting its messages from the GCR topic "gcr", where changes to
+# GCR are posted).
+# $1: The GCP project
 function empower_artifact_auditor_invoker() {
     if [ $# -lt 1 -o -z "$1" ]; then
         echo "empower_artifact_auditor_invoker(project) requires 1 argument" >&2
@@ -537,11 +545,11 @@ function empower_artifact_auditor_invoker() {
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
             iam service-accounts create \
-            "${acct}" \
+            "${AUDITOR_INVOKER_SVCACCT}" \
             --display-name="k8s-infra container image auditor invoker"
     fi
 
-    # Allow auditor to write logs.
+    # Allow it to invoke Cloud Run.
     gcloud \
         projects add-iam-policy-binding "${project}" \
         --member "serviceAccount:${acct}" \

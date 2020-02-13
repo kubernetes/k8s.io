@@ -193,5 +193,8 @@ gsutil retention clear gs://k8s-cip-test-prod
 empower_group_to_admin_artifact_auditor \
     "${PROD_PROJECT}" \
     "k8s-infra-prod-artifact-auditor@kubernetes.io"
+# Special case: create/add-permissions for necessary service accounts for the auditor.
+empower_artifact_auditor
+empower_artifact_auditor_invoker
 
 color 6 "Done"

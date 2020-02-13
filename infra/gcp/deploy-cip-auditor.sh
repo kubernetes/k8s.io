@@ -27,16 +27,13 @@ SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 
 CLOUD_RUN_SERVICE_NAME="cip-auditor"
 SUBSCRIPTION_NAME="cip-auditor-invoker"
-SERVICE_ACCOUNT="k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com"
+CLOUD_RUN_SERVICE_ACCOUNT="$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_SVCACCT}")"
+CLOUD_RUN_INVOKER_SERVICE_ACCOUNT=$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_INVOKER_SVCACCT}")
 
 # This sets up the GCP project so that it can be ready to deploy the cip-auditor
 # service onto Cloud Run.
 prepare_env()
 {
-    # Create/add-permissions for necessary service accounts.
-    empower_artifact_auditor
-    empower_artifact_auditor_invoker
-
     # Enable APIs.
     services=(
 		"serviceusage.googleapis.com"
@@ -63,8 +60,8 @@ prepare_env()
         projects \
         add-iam-policy-binding \
         "${PROJECT_ID}" \
-        "--member=serviceAccount:service-${PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceaccount.com" \
-        "--role=roles/iam.serviceAccountTokenCreator"
+        --member="serviceAccount:service-${PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceaccount.com" \
+        --role=roles/iam.serviceAccountTokenCreator
 }
 
 deploy_cip_auditor()
@@ -75,6 +72,12 @@ deploy_cip_auditor()
     # [{asia,eu,us}.]gcr.io/k8s-artifacts-prod GCR (which we want to audit),
     # because the "gcr" Pub/Sub topic on the project will automatically pick up
     # changes seen in [{asia,eu,us}.]gcr.io/k8s-artifacts-prod.
+    #
+    # NOTE: This command is NOT IDEMPOTENT. Re-running it N times with the same
+    # args will create N Cloud Run "revisions", each time migrating 100% of new
+    # traffic to the newest revision. However, all Cloud Run revisions are
+    # recorded with a UUID and shown in the Cloud Run dashboard, and we can
+    # always roll back to an earlier revision.
     gcloud run deploy "${CLOUD_RUN_SERVICE_NAME}" \
         --image="us.gcr.io/k8s-artifacts-prod/artifact-promoter/cip-auditor@sha256:${CIP_AUDITOR_DIGEST}" \
         --update-env-vars="CIP_AUDIT_MANIFEST_REPO_URL=https://github.com/kubernetes/k8s.io,CIP_AUDIT_MANIFEST_REPO_BRANCH=master,CIP_AUDIT_MANIFEST_REPO_MANIFEST_DIR=k8s.gcr.io,CIP_AUDIT_GCP_PROJECT_ID=k8s-artifacts-prod" \
@@ -82,22 +85,22 @@ deploy_cip_auditor()
         --no-allow-unauthenticated \
         --region=us-central1 \
         --project="${PROJECT_ID}" \
-        --service-account="${SERVICE_ACCOUNT}"
+        --service-account="${CLOUD_RUN_SERVICE_ACCOUNT}"
 }
 
 finish_env()
 {
-    # Allow SERVICE_ACCOUNT to invoke the Cloud Run instance.
+    # Allow AUDITOR_INVOKER_SVCACCT to invoke the Cloud Run instance.
     gcloud \
 		run \
 		services \
 		add-iam-policy-binding \
 		"${CLOUD_RUN_SERVICE_NAME}" \
-		"--member=serviceAccount:${SERVICE_ACCOUNT}" \
-		"--role=roles/run.invoker" \
-		"--platform=managed" \
+		--member="serviceAccount:${CLOUD_RUN_INVOKER_SERVICE_ACCOUNT}" \
+		--role=roles/run.invoker \
+		--platform=managed \
         --project="${PROJECT_ID}" \
-		"--region=us-central1"
+		--region=us-central1
 
 	# Create subscription if it doesn't exist yet.
 	if ! gcloud pubsub subscriptions list --format='value(name)' --project="${PROJECT_ID}" \
@@ -106,32 +109,33 @@ finish_env()
         # URL will never change (part of the service name is baked into it), as
         # per https://cloud.google.com/run/docs/deploying#url.
         local auditor_endpoint
-        auditor_endpoint=$(gcloud \
-            run \
-            services \
-            describe \
-            "${CLOUD_RUN_SERVICE_NAME}" \
-            "--platform=managed" \
-            "--format=value(status.url)" \
-            --project="${PROJECT_ID}" \
-            "--region=us-central1")
+        auditor_endpoint=$(\
+            gcloud \
+                run \
+                services \
+                describe \
+                "${CLOUD_RUN_SERVICE_NAME}" \
+                --platform=managed \
+                --format='value(status.url)' \
+                --project="${PROJECT_ID}" \
+                --region=us-central1)
 
         gcloud \
             pubsub \
             subscriptions \
             create \
             "${SUBSCRIPTION_NAME}" \
-            "--topic=gcr" \
-            "--expiration-period=never" \
-            "--push-auth-service-account=${SERVICE_ACCOUNT}" \
-            "--push-endpoint=${auditor_endpoint}" \
+            --topic=gcr \
+            --expiration-period=never \
+            --push-auth-service-account="${CLOUD_RUN_INVOKER_SERVICE_ACCOUNT}" \
+            --push-endpoint="${auditor_endpoint}" \
             --project="${PROJECT_ID}"
     fi
 }
 
 usage()
 {
-    echo >&2 "Usage: $0 [GCP_PROJECT_ID] [GCP_PROJECT_NUMBER] [CIP_AUDITOR_DIGEST]"
+    echo >&2 "Usage: $0 <GCP_PROJECT_ID> <GCP_PROJECT_NUMBER> <CIP_AUDITOR_DIGEST>"
     exit 1
 }
 
@@ -153,6 +157,7 @@ main()
 
     prepare_env
     deploy_cip_auditor
+    finish_env
 }
 
 main "$@"
