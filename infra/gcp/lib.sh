@@ -581,11 +581,17 @@ function empower_artifact_auditor_invoker() {
             --display-name="k8s-infra container image auditor invoker"
     fi
 
-    # Allow it to invoke Cloud Run.
+    # Allow it to invoke the specific auditor Cloud Run service.
     gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "serviceAccount:${acct}" \
-        --role roles/run.invoker
+        run \
+        services \
+        add-iam-policy-binding \
+        "${AUDITOR_SERVICE_NAME}" \
+        --member="serviceAccount:${acct}" \
+        --role=roles/run.invoker \
+        --platform=managed \
+        --project="${project}" \
+        --region=us-central1
 }
 
 # Ensure the bucket retention policy is set
