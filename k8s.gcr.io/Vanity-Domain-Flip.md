@@ -50,8 +50,14 @@ Github repo][k8sio] defines such a set of promoter manifests.
 The act of invoking the promoter as a postsubmit against the k8s.io repo is done
 by [Prow][prow], as the `post-k8sio-cip` Prow job. There are other Prow jobs
 that integrate with the promoter, and the ones relevant to this doc are outlined
-in the table below:
+in the list below:
 
+- [`pull-k8sio-cip`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-k8sio-cip))
+  Dry run version of `post-k8sio-cip`. It is run as a presubmit
+  check to any PR against [k8s.io Github repo][k8sio]. In particular, it
+  catches things like tag moves (which are disallowed). Unlike
+  `post-k8sio-cip`, it does not run in the trusted cluster, because it does
+  not need to use prod credentials (in fact, it doesn't use any creds).
 - [`post-k8sio-cip`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/test-infra/test-infra-trusted.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/post-k8sio-cip))
   Postsubmit job against k8s.io repo holding promoter manifests. The promoter
   manifests here are those that promote from the various staging subproject
@@ -65,46 +71,22 @@ in the table below:
   that even if images are accidentally deleted from
   `{asia,eu,us}.gcr.io/k8s-artifacts-prod`, they are automatically copied back. It also
   acts as a kind of sanity check, to ensure that the promoter can run at all.
-- [`ci-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/test-infra/test-infra-trusted.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/ci-k8sio-backup))
-  Runs an hourly backup of all GCR images in
-  `{asia,eu,us}.gcr.io/k8s-artifacts-prod` to
-  `{asia,eu,us}.gcr.io/k8s-artifacts-prod-bak/YEAR/MONTH/DAY/HOUR/...`.
-- [`pull-k8sio-cip`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-k8sio-cip))
-  Dry run version of `post-k8sio-cip`. It is run as a presubmit
-  check to any PR against [k8s.io Github repo][k8sio]. In particular, it
-  catches things like tag moves (which are disallowed). Unlike
-  `post-k8sio-cip`, it does not run in the trusted cluster, because it does
-  not need to use prod credentials (in fact, it doesn't use any creds).
 - [`pull-cip-e2e`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-cip-e2e))
   Runs an [E2E][CIP-e2e] [test][CIP-e2e-promotion] for changes to the promoter source code. This
   test checks that the promoter can promote images (its main purpose). It uses
   the `k8s-infra-gcr-promoter@k8s-cip-test-prod.iam.gserviceaccount.com`
   service account to use the `k8s-cip-test-prod` GCP project resources for its
   test cases (creation/deletion of GCR images, etc.).
-- [`pull-cip-auditor-e2e`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-cip-auditor-e2e))
-  Like `pull-cip-e2e`, but runs E2E [tests][CIP-e2e-auditor] for the auditing
-  mechanism built into the promoter. While the actual auditing mechanism (known
-  as "cip-auditor") runs in production in the `k8s-artifacts-prod` project, the
-  E2E tests here run in the test-only project named `k8s-gcr-audit-test-prod`
-  which is dedicated solely to this purpose. The auditor code lives
-  [here][CIP-auditor-code], but the E2E tests for it live
-  [here][CIP-e2e-auditor]. The E2E test use the
-  `k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com` GCP
-  project resources for creating/deleting Cloud Run services in
-  `k8s-gcr-audit-test-prod`, as well as clearing Pub/Sub messages and
-  Stackdriver logs to run its tests. Note that it uses a separate GCP project
-  than the `pull-cip-e2e`, so that the two tests are isolated from each other.
+
+In addition there are some jobs that act solely as a sanity check on the
+promoter's own codebase:
+
 - [`pull-cip-unit-tests`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-cip-unit-tests))
   This runs unit tests for the promoter codebase, and are part of
   the PR presubmit checks.
 - [`pull-cip-lint`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-cip-lint))
   This runs [golangci-lint][golangci-lint] for the promoter
   codebase (which is primarily written in Go).
-- [`pull-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-k8sio-backup))
-  Checks that changes to the [backup scripts][k8sio-backup] are
-  valid. Like the `pull-cip-e2e` and `pull-cip-auditor-e2e` jobs, this job
-  uses GCP resources to check that the backup scripts work as intended in
-  `ci-k8sio-backup`.
 
 ## Critical User Journey for Promotion
 
@@ -139,6 +121,18 @@ The GCR images in `k8s-artifacts-prod` are backed up every hour. This is done
 with the `ci-k8sio-backup` [Prow job][ci-k8sio-backup-code]. All images are
 backed up, even legacy images that appeared before the promoter went online that
 were not tagged and can only be referenced by their digest.
+
+## Prow Integration
+
+- [`ci-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/test-infra/test-infra-trusted.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/ci-k8sio-backup))
+  Runs an hourly backup of all GCR images in
+  `{asia,eu,us}.gcr.io/k8s-artifacts-prod` to
+  `{asia,eu,us}.gcr.io/k8s-artifacts-prod-bak/YEAR/MONTH/DAY/HOUR/...`.
+- [`pull-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-k8sio-backup))
+  Checks that changes to the [backup scripts][k8sio-backup] are
+  valid. Like the `pull-cip-e2e` and `pull-cip-auditor-e2e` jobs, this job
+  uses GCP resources to check that the backup scripts work as intended in
+  `ci-k8sio-backup`.
 
 ## Disaster Recovery
 
@@ -183,6 +177,22 @@ gcloud \
 ```
 
 The configuration for deploying the prod Cloud Run instance is [here][../infra/gcp/deploy-cip-auditor.sh].
+
+## Prow Integration
+
+- [`pull-cip-auditor-e2e`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-cip-auditor-e2e))
+  Like `pull-cip-e2e`, but runs E2E [tests][CIP-e2e-auditor] for the auditing
+  mechanism built into the promoter. While the actual auditing mechanism (known
+  as "cip-auditor") runs in production in the `k8s-artifacts-prod` project, the
+  E2E tests here run in the test-only project named `k8s-gcr-audit-test-prod`
+  which is dedicated solely to this purpose. The auditor code lives
+  [here][CIP-auditor-code], but the E2E tests for it live
+  [here][CIP-e2e-auditor]. The E2E test use the
+  `k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com` GCP
+  project resources for creating/deleting Cloud Run services in
+  `k8s-gcr-audit-test-prod`, as well as clearing Pub/Sub messages and
+  Stackdriver logs to run its tests. Note that it uses a separate GCP project
+  than the `pull-cip-e2e`, so that the two tests are isolated from each other.
 
 ## Alerts
 
