@@ -470,7 +470,6 @@ function empower_group_to_admin_artifact_auditor() {
     group="$2"
 
     # Grant Cloud Run Admin privileges.
-    roles/run.admin
     gcloud \
         projects add-iam-policy-binding "${project}" \
         --member "group:${group}" \
@@ -551,7 +550,7 @@ function empower_artifact_auditor() {
     gcloud \
         projects add-iam-policy-binding "${project}" \
         --member "serviceAccount:${acct}" \
-        roles/errorreporting.writer
+        --role roles/errorreporting.writer
 
     # No other permissions are necessary because the cip-auditor process in the
     # Cloud Run instance running as this service account will read the
