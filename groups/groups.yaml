@@ -167,6 +167,19 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-artifact-auditor@kubernetes.io
+    name: k8s-infra-artifact-auditor
+    description: |-
+      ACL for managing the production instance of the auditor
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - linusa@google.com
+      - spiffxp@google.com
+      - thockin@google.com
+
   - email-id: k8s-infra-aws-admins@kubernetes.io
     name: k8s-infra-aws-admins
     description: |-
