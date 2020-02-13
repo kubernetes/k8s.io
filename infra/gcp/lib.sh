@@ -315,7 +315,7 @@ function empower_group_for_gcb() {
         --member "group:${group}" \
         --role roles/cloudbuild.builds.editor
 
-    # TODO(justaugustus/thockin): This only exists to grant the 
+    # TODO(justaugustus/thockin): This only exists to grant the
     #      serviceusage.services.use permission allow writers access to execute
     #      Cloud Builds. We should refactor this once we develop custom roles.
     #

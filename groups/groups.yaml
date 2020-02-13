@@ -868,7 +868,7 @@ groups:
       External Release Communications list.
       Should be used when coordinating external release timelines e.g., with the CNCF.
 
-      Membership should include SIG Chairs, Release Team Leads and Lead Shadows, and 
+      Membership should include SIG Chairs, Release Team Leads and Lead Shadows, and
       the Communications team for the current release cycle.
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
