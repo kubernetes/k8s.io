@@ -157,26 +157,14 @@ groups:
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
     description: |-
-      ACL for artifact-admins
+      ACL for artifact-admins, including the artifact auditor
     settings:
       ReconcileMembers: "true"
     members:
       - davanum@gmail.com
       - justinsb@google.com
-      - michelle.noorali@gmail.com
-      - spiffxp@google.com
-      - thockin@google.com
-
-  - email-id: k8s-infra-artifact-auditor@kubernetes.io
-    name: k8s-infra-artifact-auditor
-    description: |-
-      ACL for managing the production instance of the auditor
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - ihor@cncf.io
       - linusa@google.com
+      - michelle.noorali@gmail.com
       - spiffxp@google.com
       - thockin@google.com
 

@@ -199,7 +199,7 @@ gsutil retention clear gs://k8s-cip-test-prod
 # Special case: give Cloud Run Admin privileges to the group that will administer the cip-auditor.
 empower_group_to_admin_artifact_auditor \
     "${PROD_PROJECT}" \
-    "k8s-infra-prod-artifact-auditor@kubernetes.io"
+    "k8s-infra-artifact-admins@kubernetes.io"
 # Special case: create/add-permissions for necessary service accounts for the auditor.
 empower_artifact_auditor "${PROD_PROJECT}"
 empower_artifact_auditor_invoker "${PROD_PROJECT}"
