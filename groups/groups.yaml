@@ -511,6 +511,7 @@ groups:
       - linusa@google.com
       - spiffxp@google.com
       - thockin@google.com
+      - rajib.jolite@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     name: k8s-infra-staging-cluster-api-aws
