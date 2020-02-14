@@ -41,6 +41,21 @@ SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 
 SUBSCRIPTION_NAME="cip-auditor-invoker"
 
+# Get the auditor service's Cloud Run push endpoint (the HTTPS endpoint that the
+# Pub/Sub subscription listening to the "gcr" topic can hit).
+get_push_endpoint()
+{
+    gcloud \
+        run \
+        services \
+        describe \
+        "${AUDITOR_SERVICE_NAME}" \
+        --platform=managed \
+        --format='value(status.url)' \
+        --project="${PROJECT_ID}" \
+        --region=us-central1
+}
+
 # This sets up the GCP project so that it can be ready to deploy the cip-auditor
 # service onto Cloud Run.
 prepare_env()
@@ -82,21 +97,7 @@ prepare_env()
         # URL will never change (part of the service name is baked into it), as
         # per https://cloud.google.com/run/docs/deploying#url.
         local auditor_endpoint
-        auditor_endpoint=$(\
-            gcloud \
-                run \
-                services \
-                describe \
-                "${AUDITOR_SERVICE_NAME}" \
-                --platform=managed \
-                --format='value(status.url)' \
-                --project="${PROJECT_ID}" \
-                --region=us-central1)
-
-        if [[ -z "${auditor_endpoint}" ]]; then
-            echo >&2 "Please run the cip-auditor/deploy.sh script to first deploy the auditor before running this script."
-            exit 1
-        fi
+        auditor_endpoint=$(get_push_endpoint)
 
         gcloud \
             pubsub \
@@ -128,6 +129,11 @@ main()
             usage
         fi
     done
+
+    if ! get_push_endpoint; then
+        echo >&2 "Could not determine push endpoint for the auditor's Cloud Run service. Please run the cip-auditor/deploy.sh script to first deploy the auditor before running this script."
+        exit 1
+    fi
 
     PROJECT_ID="$1"
     PROJECT_NUMBER="$2"
