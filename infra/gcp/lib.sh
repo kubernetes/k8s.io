@@ -46,6 +46,8 @@ AUDITOR_SVCACCT="k8s-infra-gcr-auditor"
 # This is a separate service account tied to the Pub/Sub subscription that connects
 # GCR Pub/Sub messages to the Cloud Run instance of the GCR auditor.
 AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
+# This is the Cloud Run service name of the auditor.
+AUDITOR_SERVICE_NAME="cip-auditor"
 
 # The service account email for Prow (not in this org for now).
 PROW_SVCACCT="deployer@k8s-prow.iam.gserviceaccount.com"
@@ -579,11 +581,17 @@ function empower_artifact_auditor_invoker() {
             --display-name="k8s-infra container image auditor invoker"
     fi
 
-    # Allow it to invoke Cloud Run.
+    # Allow it to invoke the specific auditor Cloud Run service.
     gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "serviceAccount:${acct}" \
-        --role roles/run.invoker
+        run \
+        services \
+        add-iam-policy-binding \
+        "${AUDITOR_SERVICE_NAME}" \
+        --member="serviceAccount:${acct}" \
+        --role=roles/run.invoker \
+        --platform=managed \
+        --project="${project}" \
+        --region=us-central1
 }
 
 # Ensure the bucket retention policy is set
