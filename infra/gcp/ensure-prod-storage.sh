@@ -165,6 +165,9 @@ empower_group_to_fake_prod \
     "${PROMOTER_TEST_PROD_PROJECT}" \
     "k8s-infra-staging-cip-test@kubernetes.io"
 empower_group_to_fake_prod \
+    "${PROMOTER_TEST_STAGING_PROJECT}" \
+    "k8s-infra-staging-cip-test@kubernetes.io"
+empower_group_to_fake_prod \
     "${GCR_BACKUP_TEST_PROD_PROJECT}" \
     "k8s-infra-staging-cip-test@kubernetes.io"
 empower_group_to_fake_prod \
