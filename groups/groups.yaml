@@ -401,6 +401,7 @@ groups:
       - saschagrunert@gmail.com
       - simony@google.com
       - sumitranr@google.com
+      - bartek@smykla.com
 
   - email-id: k8s-infra-sig-release-prototype@kubernetes.io
     name: k8s-infra-sig-release-prototype
