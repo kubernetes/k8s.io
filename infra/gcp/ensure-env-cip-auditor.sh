@@ -43,8 +43,15 @@ SUBSCRIPTION_NAME="cip-auditor-invoker"
 
 # Get the auditor service's Cloud Run push endpoint (the HTTPS endpoint that the
 # Pub/Sub subscription listening to the "gcr" topic can hit).
-get_push_endpoint()
-{
+#
+#   $1: GCP project ID
+function get_push_endpoint() {
+    if [ $# -lt 1 -o -z "$1" ]; then
+        echo "get_push_endpoint(project_id) requires 1 argument" >&2
+        return 1
+    fi
+    project_id="$1"
+
     gcloud \
         run \
         services \
@@ -52,14 +59,23 @@ get_push_endpoint()
         "${AUDITOR_SERVICE_NAME}" \
         --platform=managed \
         --format='value(status.url)' \
-        --project="${PROJECT_ID}" \
+        --project="${project_id}" \
         --region=us-central1
 }
 
 # This sets up the GCP project so that it can be ready to deploy the cip-auditor
 # service onto Cloud Run.
-prepare_env()
-{
+#
+#   $1: GCP project ID
+#   $2: GCP project number
+function prepare_env() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "prepare_env(project_id, project_number) requires 2 arguments" >&2
+        return 1
+    fi
+    project_id="$1"
+    project_number="$2"
+
     # Enable APIs.
     services=(
         "serviceusage.googleapis.com"
@@ -69,14 +85,14 @@ prepare_env()
         "run.googleapis.com"
     )
     for service in "${services[@]}"; do
-        gcloud --quiet services enable "${service}" --project="${PROJECT_ID}"
+        gcloud --quiet services enable "${service}" --project="${project_id}"
     done
 
     # Create "gcr" topic if it doesn't exist yet.
-    if ! gcloud pubsub topics list --format='value(name)' --project="${PROJECT_ID}" \
-        | grep "projects/${PROJECT_ID}/topics/gcr"; then
+    if ! gcloud pubsub topics list --format='value(name)' --project="${project_id}" \
+        | grep "projects/${project_id}/topics/gcr"; then
 
-        gcloud pubsub topics create gcr --project="${PROJECT_ID}"
+        gcloud pubsub topics create gcr --project="${project_id}"
     fi
 
     # Allow the Pub/Sub to create auth tokens in the project. This is part of
@@ -85,19 +101,19 @@ prepare_env()
     gcloud \
         projects \
         add-iam-policy-binding \
-        "${PROJECT_ID}" \
-        --member="serviceAccount:service-${PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceaccount.com" \
+        "${project_id}" \
+        --member="serviceAccount:service-${project_number}@gcp-sa-pubsub.iam.gserviceaccount.com" \
         --role=roles/iam.serviceAccountTokenCreator
 
     # Create subscription if it doesn't exist yet.
-    if ! gcloud pubsub subscriptions list --format='value(name)' --project="${PROJECT_ID}" \
-        | grep "projects/${PROJECT_ID}/subscriptions/${SUBSCRIPTION_NAME}"; then
+    if ! gcloud pubsub subscriptions list --format='value(name)' --project="${project_id}" \
+        | grep "projects/${project_id}/subscriptions/${SUBSCRIPTION_NAME}"; then
 
         # Find HTTPS push endpoint (invocation endpoint) of the auditor. This
         # URL will never change (part of the service name is baked into it), as
         # per https://cloud.google.com/run/docs/deploying#url.
         local auditor_endpoint
-        auditor_endpoint=$(get_push_endpoint)
+        auditor_endpoint=$(get_push_endpoint "${project_id}")
 
         gcloud \
             pubsub \
@@ -106,20 +122,18 @@ prepare_env()
             "${SUBSCRIPTION_NAME}" \
             --topic=gcr \
             --expiration-period=never \
-            --push-auth-service-account="$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_INVOKER_SVCACCT}")" \
+            --push-auth-service-account="$(svc_acct_email "${project_id}" "${AUDITOR_INVOKER_SVCACCT}")" \
             --push-endpoint="${auditor_endpoint}" \
-            --project="${PROJECT_ID}"
+            --project="${project_id}"
     fi
 }
 
-usage()
-{
+function usage() {
     echo >&2 "Usage: $0 <GCP_PROJECT_ID> <GCP_PROJECT_NUMBER>"
     exit 1
 }
 
-main()
-{
+function main() {
     if (( $# != 2 )); then
         usage
     fi
@@ -130,15 +144,17 @@ main()
         fi
     done
 
-    if ! get_push_endpoint; then
-        echo >&2 "Could not determine push endpoint for the auditor's Cloud Run service. Please run the cip-auditor/deploy.sh script to first deploy the auditor before running this script."
-        exit 1
-    fi
-
     PROJECT_ID="$1"
     PROJECT_NUMBER="$2"
 
-    prepare_env
+    if ! get_push_endpoint "${PROJECT_ID}"; then
+        echo >&2 "Could not determine push endpoint for the auditor's Cloud Run service."
+        echo >&2 "Please run the cip-auditor/deploy.sh script to first deploy the auditor"
+        echo >&2 "before running this script."
+        exit 1
+    fi
+
+    prepare_env "${PROJECT_ID}" "${PROJECT_NUMBER}"
 }
 
 main "$@"
