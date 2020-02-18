@@ -41,7 +41,8 @@ GCS_ADMINS=$GCR_ADMINS
 # The service account name for the image promoter.
 PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
-# The service account name for the GCR auditor.
+# The service account name for the GCR auditor (Cloud Run runtime service
+# account).
 AUDITOR_SVCACCT="k8s-infra-gcr-auditor"
 # This is a separate service account tied to the Pub/Sub subscription that connects
 # GCR Pub/Sub messages to the Cloud Run instance of the GCR auditor.
@@ -315,7 +316,7 @@ function empower_group_for_gcb() {
         --member "group:${group}" \
         --role roles/cloudbuild.builds.editor
 
-    # TODO(justaugustus/thockin): This only exists to grant the 
+    # TODO(justaugustus/thockin): This only exists to grant the
     #      serviceusage.services.use permission allow writers access to execute
     #      Cloud Builds. We should refactor this once we develop custom roles.
     #
@@ -470,12 +471,19 @@ function empower_group_to_admin_artifact_auditor() {
     fi
     project="$1"
     group="$2"
+    acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
 
-    # Grant Cloud Run Admin privileges.
+    # Grant privileges to deploy the auditor Cloud Run service. See
+    # https://cloud.google.com/run/docs/reference/iam/roles#additional-configuration.
     gcloud \
         projects add-iam-policy-binding "${project}" \
         --member "group:${group}" \
         --role roles/run.admin
+    gcloud \
+        iam service-accounts add-iam-policy-binding \
+        "${acct}" \
+        --member="group:${group}" \
+        --role="roles/iam.serviceAccountUser"
 }
 
 # Grant full privileges to the GCR promoter bot

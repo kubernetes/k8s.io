@@ -165,6 +165,9 @@ empower_group_to_fake_prod \
     "${PROMOTER_TEST_PROD_PROJECT}" \
     "k8s-infra-staging-cip-test@kubernetes.io"
 empower_group_to_fake_prod \
+    "${PROMOTER_TEST_STAGING_PROJECT}" \
+    "k8s-infra-staging-cip-test@kubernetes.io"
+empower_group_to_fake_prod \
     "${GCR_BACKUP_TEST_PROD_PROJECT}" \
     "k8s-infra-staging-cip-test@kubernetes.io"
 empower_group_to_fake_prod \
@@ -196,7 +199,8 @@ empower_group_to_fake_prod \
 # Special case: don't use retention on cip-test buckets
 gsutil retention clear gs://k8s-cip-test-prod
 
-# Special case: give Cloud Run Admin privileges to the group that will administer the cip-auditor.
+# Special case: give Cloud Run Admin privileges to the group that will
+# administer the cip-auditor (so that they can deploy the auditor to Cloud Run).
 empower_group_to_admin_artifact_auditor \
     "${PROD_PROJECT}" \
     "k8s-infra-artifact-admins@kubernetes.io"
