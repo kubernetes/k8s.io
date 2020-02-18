@@ -173,6 +173,7 @@ groups:
     description: |-
       ACL for aws-admins
     settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
       - ihor@cncf.io
