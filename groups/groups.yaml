@@ -438,6 +438,26 @@ groups:
     - jichenjc@cn.ibm.com
     - sbueringer@gmail.com
 
+  - email-id: k8s-infra-conform-huaweicloud@kubernetes.io
+    name: k8s-infra-conform-huaweicloud
+    description: |-
+      ACL for conformance HUAWEI CLOUD
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
+    members:
+      - kevinwzf0126@gmail.com
+      - qdurenhongcai@gmail.com
+
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
     description: |-

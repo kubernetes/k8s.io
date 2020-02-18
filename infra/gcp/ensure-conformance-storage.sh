@@ -47,6 +47,7 @@ PROJECT="k8s-conform"
 CONFORMANCE_BUCKETS=(
     capi-openstack
     cri-o
+    huaweicloud
 )
 if [ $# = 0 ]; then
     # default to all conformance buckets
