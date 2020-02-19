@@ -239,17 +239,6 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
-  - email-id: k8s-infra-k8s-io-admins@kubernetes.io
-    name: k8s-infra-k8s-io-admins
-    description: |-
-      ACL for k8s.io-admins
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - thockin@google.com
-
   - email-id: k8s-infra-gcp-accounting@kubernetes.io
     name: k8s-infra-gcp-accounting
     description: |-
@@ -322,6 +311,28 @@ groups:
     members:
       - thockin@google.com
       - bartek@smykla.com
+
+  - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
+    name: k8s-infra-rbac-k8s-io-canary
+    description: |-
+      ACL for k8s.io-admins - keep in sync with k8s-infra-rbac-k8s-io-prod
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-rbac-k8s-io-prod@kubernetes.io
+    name: k8s-infra-rbac-k8s-io-prod
+    description: |-
+      ACL for k8s.io-admins - keep in sync with k8s-infra-rbac-k8s-io-canary
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - thockin@google.com
 
   - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
     name: k8s-infra-rbac-publishing-bot
