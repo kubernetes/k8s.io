@@ -5,14 +5,14 @@ set -o nounset
 set -o pipefail
 
 function kc() {
-  kubectl --context=utilicluster --namespace=k8s-io-canary "$@"
+  kubectl --cluster=prod-aaa --namespace=k8s-io-canary "$@"
 }
 
 kc apply \
     -f configmap-nginx.yaml \
     -f configmap-www-get.yaml \
     -f deployment.yaml \
-    -f service-canary.yaml
+    -f service.yaml
 
 kc scale deployment k8s-io --replicas=0
 kc scale deployment k8s-io --replicas=1
@@ -33,4 +33,4 @@ while true; do
   echo "  want ${WANT}, found ${HAVE} ready"
 done
 
-make test TARGET_IP=35.244.190.129
+make test TARGET_IP=34.102.239.89
