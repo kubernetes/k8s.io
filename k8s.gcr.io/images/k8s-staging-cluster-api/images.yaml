@@ -16,6 +16,12 @@
     "sha256:5e88a952ba83806ad66482b7df4ebbab355b0fc42179d84261d4434a2a807a52": ["v0.2.9"]
     "sha256:9ff774619864e2c28aca4734073133ab6a8e786723322cec4e70b8669205e586": ["v0.2.10"]
     "sha256:d5d95c20b10c13c065bed10c01974471eb86c841a5155d6d644097662cd60d89": ["v0.3.0-rc.0"]
+- name: kubeadm-bootstrap-controller
+  dmap:
+    "sha256:d62149bd0ad7df5096c38fde8dda1fb4e55e59e556eaae6bdbefa72bdff9de4e": ["v0.3.0-rc.0"]
+- name: kubeadm-control-plane-controller
+  dmap:
+    "sha256:65d6da638f20c872642b9d40ec8878f644866f50a68f1f1a87eca1b3b5eb5ffc": ["v0.3.0-rc.0"]
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
