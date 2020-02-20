@@ -423,16 +423,6 @@ groups:
     description: |-
       ACL for conformance CAPI OpenStack
     settings:
-      AllowExternalMembers: "true"
-      WhoCanJoin: "INVITED_CAN_JOIN"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
-      WhoCanInvite: "NONE_CAN_INVITE"
-      WhoCanAdd: "NONE_CAN_ADD"
-      WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
-      WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
     - jichenjc@cn.ibm.com
@@ -443,16 +433,6 @@ groups:
     description: |-
       ACL for conformance HUAWEI CLOUD
     settings:
-      AllowExternalMembers: "true"
-      WhoCanJoin: "INVITED_CAN_JOIN"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
-      WhoCanInvite: "NONE_CAN_INVITE"
-      WhoCanAdd: "NONE_CAN_ADD"
-      WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
-      WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
       - kevinwzf0126@gmail.com
@@ -1090,16 +1070,6 @@ groups:
     description: |-
       ACL for conformance CRI-O
     settings:
-      AllowExternalMembers: "true"
-      WhoCanJoin: "INVITED_CAN_JOIN"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
-      WhoCanInvite: "NONE_CAN_INVITE"
-      WhoCanAdd: "NONE_CAN_ADD"
-      WhoCanApproveMembers: "NONE_CAN_APPROVE"
-      WhoCanModifyMembers: "NONE"
-      WhoCanModerateMembers: "NONE"
       ReconcileMembers: "true"
     members:
       - mpatel@redhat.com
