@@ -207,6 +207,7 @@ groups:
       - stefan.schimanski@gmail.com
       - thockin@google.com
       - bartek@smykla.com
+      - james@munnelly.eu
 
   - email-id: k8s-infra-cluster-operators@kubernetes.io
     name: k8s-infra-cluster-operators
