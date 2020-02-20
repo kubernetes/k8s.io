@@ -2185,6 +2185,7 @@ spec:
           - --v=2
           - --cluster-resource-namespace=$(POD_NAMESPACE)
           - --leader-election-namespace=$(POD_NAMESPACE)
+          - --max-concurrent-challenges=20
           ports:
           - containerPort: 9402
           env:
