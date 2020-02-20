@@ -829,6 +829,7 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
       - bartek@smykla.com
+      - james@munnelly.eu
 
   - email-id: k8s-infra-staging-apisnoop@kubernetes.io
     name: k8s-infra-staging-apisnoop
