@@ -451,6 +451,8 @@ groups:
     members:
       - wangzefeng@huawei.com
       - renhongcai@huawei.com
+      - kevinwzf0126@gmail.com # Google account of wangzefeng@huawei.com
+      - qdurenhongcai@gmail.com # Google account of renhongcai@huawei.com
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
