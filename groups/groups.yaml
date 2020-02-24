@@ -289,7 +289,14 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - brucema19901024@gmail.com
+      - bryan@weave.works
+      - cdc@redhat.com
       - dcbw@redhat.com
+      - grosenhouse@pivotal.io
+      - matt@tigera.io
+      - mcambria@redhat.com
+      - piotr.skarmuk@gmail.com
       - stephen.k8s@agst.us
       - thockin@google.com
 
