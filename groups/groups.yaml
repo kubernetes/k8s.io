@@ -449,8 +449,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - wangzefeng@huawei.com
-      - renhongcai@huawei.com
       - kevinwzf0126@gmail.com # Google account of wangzefeng@huawei.com
       - qdurenhongcai@gmail.com # Google account of renhongcai@huawei.com
 
