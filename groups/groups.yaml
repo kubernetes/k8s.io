@@ -291,14 +291,22 @@ groups:
     members:
       - brucema19901024@gmail.com
       - bryan@weave.works
+      - caselim@gmail.com
       - cdc@redhat.com
+      - ctadeu@gmail.com
       - dcbw@redhat.com
+      - dmaceachern@vmware.com
+      - feiskyer@gmail.com
       - grosenhouse@pivotal.io
+      - hhorl@pivotal.io
+      - idealhack@gmail.com
       - matt@tigera.io
       - mcambria@redhat.com
       - piotr.skarmuk@gmail.com
+      - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - thockin@google.com
+      - tpepper@gmail.com
 
   - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
     name: k8s-infra-rbac-cert-manager
