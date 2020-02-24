@@ -28,8 +28,6 @@ set -o pipefail
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/../lib.sh"
 
-CLOUD_RUN_SERVICE_ACCOUNT="$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_SVCACCT}")"
-
 deploy_cip_auditor()
 {
     # Deploy the auditor. The "--update-env-vars" is critical as it points to
@@ -44,6 +42,8 @@ deploy_cip_auditor()
     # traffic to the newest revision. However, all Cloud Run revisions are
     # recorded with a UUID and shown in the Cloud Run dashboard, and we can
     # always roll back to an earlier revision.
+    CLOUD_RUN_SERVICE_ACCOUNT="$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_SVCACCT}")"
+
     gcloud run deploy "${AUDITOR_SERVICE_NAME}" \
         --image="us.gcr.io/k8s-artifacts-prod/artifact-promoter/cip-auditor@sha256:${CIP_AUDITOR_DIGEST}" \
         --update-env-vars="CIP_AUDIT_MANIFEST_REPO_URL=https://github.com/kubernetes/k8s.io,CIP_AUDIT_MANIFEST_REPO_BRANCH=master,CIP_AUDIT_MANIFEST_REPO_MANIFEST_DIR=k8s.gcr.io,CIP_AUDIT_GCP_PROJECT_ID=k8s-artifacts-prod" \
