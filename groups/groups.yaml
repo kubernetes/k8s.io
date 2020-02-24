@@ -449,8 +449,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - kevinwzf0126@gmail.com
-      - qdurenhongcai@gmail.com
+      - wangzefeng@huawei.com
+      - renhongcai@huawei.com
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
