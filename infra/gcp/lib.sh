@@ -480,6 +480,7 @@ function empower_group_to_admin_artifact_auditor() {
         --member "group:${group}" \
         --role roles/run.admin
     gcloud \
+        --project="${project}" \
         iam service-accounts add-iam-policy-binding \
         "${acct}" \
         --member="group:${group}" \
