@@ -53,9 +53,7 @@ function get_push_endpoint() {
     project_id="$1"
 
     gcloud \
-        run \
-        services \
-        describe \
+        run services describe \
         "${AUDITOR_SERVICE_NAME}" \
         --platform=managed \
         --format='value(status.url)' \
@@ -63,18 +61,15 @@ function get_push_endpoint() {
         --region=us-central1
 }
 
-# This sets up the GCP project so that it can be ready to deploy the cip-auditor
-# service onto Cloud Run.
+# This enables the necessary services to use Cloud Run.
 #
 #   $1: GCP project ID
-#   $2: GCP project number
-function prepare_env() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "prepare_env(project_id, project_number) requires 2 arguments" >&2
+function enable_services() {
+    if [ $# -ne 1 -o -z "$1" ]; then
+        echo "enable_services(project_id) requires 1 argument" >&2
         return 1
     fi
     project_id="$1"
-    project_number="$2"
 
     # Enable APIs.
     services=(
@@ -84,9 +79,24 @@ function prepare_env() {
         "clouderrorreporting.googleapis.com"
         "run.googleapis.com"
     )
+    echo "Enabling services"
     for service in "${services[@]}"; do
-        gcloud --quiet services enable "${service}" --project="${project_id}"
+        gcloud --project="${project_id}" services enable "${service}"
     done
+}
+
+# This sets up the GCP project so that it can be ready to deploy the cip-auditor
+# service onto Cloud Run.
+#
+#   $1: GCP project ID
+#   $2: GCP project number
+function link_run_to_pubsub() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "link_run_to_pubsub(project_id, project_number) requires 2 arguments" >&2
+        return 1
+    fi
+    project_id="$1"
+    project_number="$2"
 
     # Create "gcr" topic if it doesn't exist yet.
     if ! gcloud pubsub topics list --format='value(name)' --project="${project_id}" \
@@ -99,8 +109,7 @@ function prepare_env() {
     # the authentication bridge between the "gcr" Pub/Sub topic and the
     # "--no-allow-unauthenticated" Cloud Run service option.
     gcloud \
-        projects \
-        add-iam-policy-binding \
+        projects add-iam-policy-binding \
         "${project_id}" \
         --member="serviceAccount:service-${project_number}@gcp-sa-pubsub.iam.gserviceaccount.com" \
         --role=roles/iam.serviceAccountTokenCreator
@@ -116,9 +125,7 @@ function prepare_env() {
         auditor_endpoint=$(get_push_endpoint "${project_id}")
 
         gcloud \
-            pubsub \
-            subscriptions \
-            create \
+            pubsub subscriptions create \
             "${SUBSCRIPTION_NAME}" \
             --topic=gcr \
             --expiration-period=never \
@@ -128,33 +135,21 @@ function prepare_env() {
     fi
 }
 
-function usage() {
-    echo >&2 "Usage: $0 <GCP_PROJECT_ID> <GCP_PROJECT_NUMBER>"
-    exit 1
-}
-
 function main() {
-    if (( $# != 2 )); then
-        usage
-    fi
+    # We want to run in the artifacts project to get pubsub most easily.
+    PROJECT_ID="k8s-artifacts-prod"
+    PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format "value(projectNumber)")
 
-    for arg; do
-        if [[ -z "$arg" ]]; then
-            usage
-        fi
-    done
-
-    PROJECT_ID="$1"
-    PROJECT_NUMBER="$2"
+    enable_services "${PROJECT_ID}"
 
     if ! get_push_endpoint "${PROJECT_ID}"; then
         echo >&2 "Could not determine push endpoint for the auditor's Cloud Run service."
         echo >&2 "Please run the cip-auditor/deploy.sh script to first deploy the auditor"
-        echo >&2 "before running this script."
+        echo >&2 "before re-running this script."
         exit 1
     fi
 
-    prepare_env "${PROJECT_ID}" "${PROJECT_NUMBER}"
+    link_run_to_pubsub "${PROJECT_ID}" "${PROJECT_NUMBER}"
 }
 
 main "$@"
