@@ -2,7 +2,7 @@
   "bindings": [
     {
       "members": [
-        "group:k8s-infra-sig-release-prototype@googlegroups.com"
+        "group:k8s-infra-sig-release-prototype@kubernetes.io"
       ], 
       "role": "roles/storage.admin"
     }, 
@@ -39,5 +39,5 @@
       "role": "roles/storage.objectViewer"
     }
   ], 
-  "etag": "CAM="
+  "etag": "CAU="
 }

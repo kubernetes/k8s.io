@@ -2,21 +2,90 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:service-375340694213@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-375340694213@container-analysis.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.ServiceAgent"
     },
     {
       "members": [
+        "serviceAccount:375340694213-compute@developer.gserviceaccount.com",
+        "serviceAccount:375340694213@cloudservices.gserviceaccount.com",
         "serviceAccount:service-375340694213@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
     },
     {
       "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/errorreporting.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:service-375340694213@gcp-sa-pubsub.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountTokenCreator"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.admin"
+    },
+    {
+      "members": [
+        "user:linusa@google.com",
         "user:thockin@google.com"
       ],
       "role": "roles/owner"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/pubsub.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/resourcemanager.projectIamAdmin"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/run.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:service-375340694213@serverless-robot-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/run.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/serverless.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/serviceusage.serviceUsageAdmin"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.admin"
     },
     {
       "members": [
@@ -26,6 +95,6 @@
       "role": "roles/viewer"
     }
   ],
-  "etag": "BwWWyZuA1Wo=",
+  "etag": "BwWfWmuPdOQ=",
   "version": 1
 }

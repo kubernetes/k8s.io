@@ -20,7 +20,8 @@
         "requirements": [
           "serviceusage.googleapis.com/tos/universal",
           "serviceusage.googleapis.com/tos/appsadmin"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {

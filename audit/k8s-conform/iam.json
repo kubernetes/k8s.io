@@ -1,0 +1,31 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:service-228988630781@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:228988630781-compute@developer.gserviceaccount.com",
+        "serviceAccount:228988630781@cloudservices.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:thockin@google.com"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "etag": "BwWfS3_u6ow=",
+  "version": 1
+}

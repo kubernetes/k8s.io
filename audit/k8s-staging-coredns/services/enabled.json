@@ -7,6 +7,8 @@
       },
       "features": [
         "servicemanagement.googleapis.com/internal-per-day-per-user-quota",
+        "servicemanagement.googleapis.com/internal-per-resource-rate-quota",
+        "serviceusage.googleapis.com/skip-activation",
         "serviceusage.googleapis.com/skip-secure-gcp-if-no-resource-container"
       ],
       "legacy": {
@@ -17,13 +19,14 @@
         }
       },
       "migration": {},
-      "name": "bigquery-json.googleapis.com",
+      "name": "bigquery.googleapis.com",
       "quota": {},
       "title": "BigQuery API",
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -117,6 +120,122 @@
   {
     "config": {
       "authentication": {},
+      "documentation": {
+        "summary": "A data platform for customers to create, manage, share and query data."
+      },
+      "features": [
+        "servicemanagement.googleapis.com/internal-per-day-per-user-quota",
+        "servicemanagement.googleapis.com/internal-per-resource-rate-quota",
+        "serviceusage.googleapis.com/skip-activation",
+        "serviceusage.googleapis.com/skip-secure-gcp-if-no-resource-container"
+      ],
+      "legacy": {
+        "apiV1Name": "bigquery",
+        "devconsole": {
+          "learnmoreUrl": "https://developers.google.com/bigquery/",
+          "requestQuotaUrl": "https://cloud.google.com/bigquery/support"
+        }
+      },
+      "migration": {},
+      "name": "bigquery.googleapis.com",
+      "quota": {},
+      "title": "BigQuery API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ],
+        "serviceAccess": "PUBLIC"
+      }
+    },
+    "dependencyConfig": {
+      "dependsOn": [
+        "bigquery-json.googleapis.com",
+        "bigquery.googleapis.com",
+        "bigquerystorage.googleapis.com"
+      ],
+      "directlyDependsOn": [
+        "bigquery-json.googleapis.com",
+        "bigquerystorage.googleapis.com"
+      ],
+      "directlyRequiredBy": [
+        "bigquery-json.googleapis.com",
+        "bigquerybiengine.googleapis.com",
+        "bigquerystorage.googleapis.com",
+        "cloudapis.googleapis.com",
+        "container.googleapis.com",
+        "dataprep.googleapis.com",
+        "dev-dataprep.sandbox.googleapis.com",
+        "load-bigquerybiengine.sandbox.googleapis.com",
+        "staging-bigquerybiengine.sandbox.googleapis.com",
+        "staging-container.sandbox.googleapis.com",
+        "staging-dataprep.googleapis.com",
+        "test-bigquerybiengine.sandbox.googleapis.com",
+        "test-container.sandbox.googleapis.com"
+      ],
+      "requiredBy": [
+        "appengineflex.googleapis.com",
+        "autopush-datafusion.sandbox.googleapis.com",
+        "autopush-datalogic.sandbox.googleapis.com",
+        "autopush-memcache.sandbox.googleapis.com",
+        "autopush-spinnaker.sandbox.googleapis.com",
+        "autoscaler.googleapis.com",
+        "bigquery-json.googleapis.com",
+        "bigquerybiengine.googleapis.com",
+        "bigquerystorage.googleapis.com",
+        "binaryauthorization.googleapis.com",
+        "cloud-infrastructure.googleapis.com",
+        "cloudapis.googleapis.com",
+        "composer.googleapis.com",
+        "container.googleapis.com",
+        "dataflow.googleapis.com",
+        "datafusion.googleapis.com",
+        "datalogic.googleapis.com",
+        "dataprep.googleapis.com",
+        "dev-composer.sandbox.googleapis.com",
+        "dev-dataprep.sandbox.googleapis.com",
+        "file.googleapis.com",
+        "load-bigquerybiengine.sandbox.googleapis.com",
+        "managedvms.googleapis.com",
+        "manager.googleapis.com",
+        "memcache.googleapis.com",
+        "redis.googleapis.com",
+        "resourceviews.googleapis.com",
+        "servicebroker.googleapis.com",
+        "spinnaker.googleapis.com",
+        "staging-appengineflex.sandbox.googleapis.com",
+        "staging-bigquerybiengine.sandbox.googleapis.com",
+        "staging-binaryauthorization.sandbox.googleapis.com",
+        "staging-composer.sandbox.googleapis.com",
+        "staging-container.sandbox.googleapis.com",
+        "staging-datafusion.sandbox.googleapis.com",
+        "staging-datalogic.sandbox.googleapis.com",
+        "staging-dataprep.googleapis.com",
+        "staging-file.sandbox.googleapis.com",
+        "staging-managedvms.googleapis.com",
+        "staging-memcache.sandbox.googleapis.com",
+        "staging-redis.sandbox.googleapis.com",
+        "staging-servicebroker.sandbox.googleapis.com",
+        "staging-spinnaker.sandbox.googleapis.com",
+        "staging-tpu.sandbox.googleapis.com",
+        "test-appengineflex.sandbox.googleapis.com",
+        "test-bigquerybiengine.sandbox.googleapis.com",
+        "test-binaryauthorization.sandbox.googleapis.com",
+        "test-container.sandbox.googleapis.com",
+        "test-file.sandbox.googleapis.com",
+        "test-managedvms.googleapis.com",
+        "test-memcache.sandbox.googleapis.com",
+        "test-redis.sandbox.googleapis.com",
+        "test-tpu.sandbox.googleapis.com",
+        "tpu.googleapis.com"
+      ]
+    },
+    "name": "projects/848617618266/services/bigquery.googleapis.com",
+    "parent": "projects/848617618266",
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
       "documentation": {},
       "features": [
         "googleprod.com/service/use-monarch"
@@ -134,7 +253,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -297,7 +417,8 @@
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud",
           "serviceusage.googleapis.com/billing-enabled"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -379,7 +500,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -428,7 +550,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -499,6 +622,7 @@
       },
       "features": [
         "googleprod.com/service/use-monarch",
+        "servicemanagement.googleapis.com/internal-org-limit-only-rate-quota",
         "serviceusage.googleapis.com/skip-activation",
         "serviceusage.googleapis.com/skip-secure-gcp-if-no-resource-container"
       ],
@@ -516,7 +640,8 @@
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud",
           "serviceusage.googleapis.com/billing-enabled"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -660,7 +785,8 @@
       },
       {
         "email": "848617618266-compute@developer.gserviceaccount.com",
-        "role": "roles/editor"
+        "role": "roles/editor",
+        "tag": "default-compute-sa"
       }
     ],
     "state": "ENABLED"
@@ -758,7 +884,8 @@
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud",
           "serviceusage.googleapis.com/billing-enabled"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -781,21 +908,17 @@
         "dev-pod-cloudbuild.sandbox.googleapis.com",
         "preprod-pod-cloudbuild.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-cloudbuild.sandbox.googleapis.com",
         "staging-container.sandbox.googleapis.com",
         "staging-containerscanning.sandbox.googleapis.com",
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
         "test-cloudbuild.sandbox.googleapis.com",
         "test-container.sandbox.googleapis.com",
-        "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com"
+        "test-run.sandbox.googleapis.com"
       ],
       "requiredBy": [
         "appengineflex.googleapis.com",
@@ -825,11 +948,9 @@
         "memcache.googleapis.com",
         "preprod-pod-cloudbuild.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "redis.googleapis.com",
         "resourceviews.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "spinnaker.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-binaryauthorization.sandbox.googleapis.com",
@@ -846,7 +967,6 @@
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
@@ -858,7 +978,6 @@
         "test-memcache.sandbox.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
         "tpu.googleapis.com"
       ]
@@ -895,7 +1014,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -944,7 +1064,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -966,7 +1087,7 @@
     "config": {
       "authentication": {},
       "documentation": {
-        "summary": "Writes log entries and manages your Stackdriver Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the [Stackdriver Logging documentation](/logging/docs)."
+        "summary": "Writes log entries and manages your Stackdriver Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the <a href=https://cloud.google.com/logging/docs>Stackdriver Logging documentation</a>."
       },
       "features": [
         "googleprod.com/service/use-monarch",
@@ -986,7 +1107,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -1022,11 +1144,9 @@
         "preprod-cloudfunctions.sandbox.googleapis.com",
         "preprod-pod-cloudbuild.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "proxy-cloudbuild.sandbox.googleapis.com",
         "redis.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "spinnaker.googleapis.com",
         "stackdriver.googleapis.com",
         "stackdriverprovisioning.googleapis.com",
@@ -1042,7 +1162,6 @@
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
         "staging-vpcaccess.sandbox.googleapis.com",
@@ -1055,7 +1174,6 @@
         "test-ml.sandbox.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
         "test-vpcaccess.sandbox.googleapis.com",
         "tpu.googleapis.com",
@@ -1092,11 +1210,9 @@
         "preprod-cloudfunctions.sandbox.googleapis.com",
         "preprod-pod-cloudbuild.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "proxy-cloudbuild.sandbox.googleapis.com",
         "redis.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "spinnaker.googleapis.com",
         "stackdriver.googleapis.com",
         "stackdriverprovisioning.googleapis.com",
@@ -1113,7 +1229,6 @@
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
         "staging-vpcaccess.sandbox.googleapis.com",
@@ -1126,7 +1241,6 @@
         "test-ml.sandbox.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
         "test-vpcaccess.sandbox.googleapis.com",
         "tpu.googleapis.com",
@@ -1160,7 +1274,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -1267,7 +1382,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -1373,7 +1489,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -1396,9 +1513,7 @@
         "managedvms.googleapis.com",
         "preprod-cloudfunctions.sandbox.googleapis.com",
         "preprod-pod-cloudbuild.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "redis.googleapis.com",
-        "serverless.googleapis.com",
         "servicebroker.googleapis.com",
         "spinnaker.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
@@ -1410,7 +1525,6 @@
         "staging-managedvms.googleapis.com",
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-servicebroker.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
@@ -1420,7 +1534,6 @@
         "test-cloudfunctions.sandbox.googleapis.com",
         "test-managedvms.googleapis.com",
         "test-redis.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
         "tpu.googleapis.com",
         "workflow.googleapis.com"
@@ -1460,11 +1573,9 @@
         "preprod-cloudfunctions.sandbox.googleapis.com",
         "preprod-pod-cloudbuild.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "redis.googleapis.com",
         "resourceviews.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "servicebroker.googleapis.com",
         "spinnaker.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
@@ -1485,7 +1596,6 @@
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-servicebroker.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
@@ -1502,7 +1612,6 @@
         "test-memcache.sandbox.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
         "tpu.googleapis.com",
         "workflow.googleapis.com"
@@ -1541,7 +1650,7 @@
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
         ],
-        "serviceAccess": "ORG_PUBLIC"
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -1588,7 +1697,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -1625,7 +1735,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -1697,11 +1808,9 @@
         "preprod-cloudfunctions.sandbox.googleapis.com",
         "preprod-pod-cloudbuild.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "proxy-cloudbuild.sandbox.googleapis.com",
         "quantum.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "servicebroker.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-automl.sandbox.googleapis.com",
@@ -1715,7 +1824,6 @@
         "staging-managedvms.googleapis.com",
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-servicebroker.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
         "test-cloudbuild.sandbox.googleapis.com",
@@ -1723,8 +1831,7 @@
         "test-dataproc-control.sandbox.googleapis.com",
         "test-dataproc.sandbox.googleapis.com",
         "test-managedvms.googleapis.com",
-        "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com"
+        "test-run.sandbox.googleapis.com"
       ],
       "requiredBy": [
         "appengineflex.googleapis.com",
@@ -1766,13 +1873,11 @@
         "preprod-cloudfunctions.sandbox.googleapis.com",
         "preprod-pod-cloudbuild.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "proxy-cloudbuild.sandbox.googleapis.com",
         "quantum.googleapis.com",
         "redis.googleapis.com",
         "resourceviews.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "servicebroker.googleapis.com",
         "spinnaker.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
@@ -1795,7 +1900,6 @@
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-servicebroker.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
@@ -1811,7 +1915,6 @@
         "test-memcache.sandbox.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
         "tpu.googleapis.com"
       ]
@@ -1839,7 +1942,8 @@
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
-        ]
+        ],
+        "serviceAccess": "PUBLIC"
       }
     },
     "dependencyConfig": {
@@ -1867,11 +1971,9 @@
         "managedvms.googleapis.com",
         "preprod-cloudfunctions.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "quantum.googleapis.com",
         "redis.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "spinnaker.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-automl.sandbox.googleapis.com",
@@ -1883,7 +1985,6 @@
         "staging-managedvms.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
@@ -1893,7 +1994,6 @@
         "test-managedvms.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
         "tpu.googleapis.com"
       ],
@@ -1922,11 +2022,9 @@
         "managedvms.googleapis.com",
         "preprod-cloudfunctions.sandbox.googleapis.com",
         "preprod-run.sandbox.googleapis.com",
-        "preprod-serverless.sandbox.googleapis.com",
         "quantum.googleapis.com",
         "redis.googleapis.com",
         "run.googleapis.com",
-        "serverless.googleapis.com",
         "spinnaker.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-automl.sandbox.googleapis.com",
@@ -1940,7 +2038,6 @@
         "staging-managedvms.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
-        "staging-serverless.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
@@ -1950,7 +2047,6 @@
         "test-managedvms.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com",
-        "test-serverless.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
         "tpu.googleapis.com"
       ]

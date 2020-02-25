@@ -29,6 +29,18 @@
     },
     {
       "members": [
+        "serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/errorreporting.writer"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.logWriter"
+    },
+    {
+      "members": [
         "user:thockin@google.com"
       ],
       "role": "roles/owner"
@@ -37,9 +49,27 @@
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io"
       ],
+      "role": "roles/run.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-auditor-invoker@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/run.invoker"
+    },
+    {
+      "members": [
+        "serviceAccount:service-388270116193@serverless-robot-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/run.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ],
       "role": "roles/viewer"
     }
   ],
-  "etag": "BwWWGLFnCJ4=",
+  "etag": "BwWfXCYkUis=",
   "version": 1
 }

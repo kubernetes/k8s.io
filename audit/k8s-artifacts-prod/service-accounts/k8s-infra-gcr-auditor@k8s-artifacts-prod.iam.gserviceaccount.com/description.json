@@ -1,0 +1,9 @@
+{
+  "displayName": "k8s-infra container image auditor",
+  "email": "k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com",
+  "etag": "MDEwMjE5MjA=",
+  "name": "projects/k8s-artifacts-prod/serviceAccounts/k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "111422293292441494221",
+  "projectId": "k8s-artifacts-prod",
+  "uniqueId": "111422293292441494221"
+}

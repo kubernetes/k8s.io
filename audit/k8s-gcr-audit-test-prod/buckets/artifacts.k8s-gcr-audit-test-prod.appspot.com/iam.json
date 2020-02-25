@@ -1,0 +1,24 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:k8s-gcr-audit-test-prod", 
+        "projectOwner:k8s-gcr-audit-test-prod"
+      ], 
+      "role": "roles/storage.legacyBucketOwner"
+    }, 
+    {
+      "members": [
+        "projectViewer:k8s-gcr-audit-test-prod"
+      ], 
+      "role": "roles/storage.legacyBucketReader"
+    }, 
+    {
+      "members": [
+        "allUsers"
+      ], 
+      "role": "roles/storage.objectViewer"
+    }
+  ], 
+  "etag": "CAI="
+}

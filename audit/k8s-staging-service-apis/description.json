@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-12-17T00:44:47.411Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-service-apis",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-service-apis",
+  "projectNumber": "1031494980804"
+}

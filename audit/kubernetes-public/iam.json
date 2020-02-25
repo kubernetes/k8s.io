@@ -76,6 +76,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-127754664067@gcp-sa-pubsub.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountTokenCreator"
+    },
+    {
+      "members": [
         "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/logging.logWriter"
@@ -99,8 +105,20 @@
         "user:thockin@google.com"
       ],
       "role": "roles/owner"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@serverless-robot-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/run.serviceAgent"
+    },
+    {
+      "members": [
+        "user:thockin@gmail.com"
+      ],
+      "role": "roles/viewer"
     }
   ],
-  "etag": "BwWXKX0oMGg=",
+  "etag": "BwWfGuwd2WY=",
   "version": 1
 }

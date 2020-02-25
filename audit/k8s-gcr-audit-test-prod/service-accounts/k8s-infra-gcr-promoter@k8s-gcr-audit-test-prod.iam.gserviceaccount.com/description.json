@@ -1,0 +1,9 @@
+{
+  "displayName": "k8s-infra container image promoter",
+  "email": "k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com",
+  "etag": "MDEwMjE5MjA=",
+  "name": "projects/k8s-gcr-audit-test-prod/serviceAccounts/k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "100006926642424002701",
+  "projectId": "k8s-gcr-audit-test-prod",
+  "uniqueId": "100006926642424002701"
+}

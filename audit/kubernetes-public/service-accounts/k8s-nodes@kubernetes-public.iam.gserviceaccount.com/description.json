@@ -1,0 +1,10 @@
+{
+  "description": "Legacy: delete this once \"dev2\" cluster dies",
+  "displayName": "k8s-nodes",
+  "email": "k8s-nodes@kubernetes-public.iam.gserviceaccount.com",
+  "etag": "MDEwMjE5MjA=",
+  "name": "projects/kubernetes-public/serviceAccounts/k8s-nodes@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "102906005417360612620",
+  "projectId": "kubernetes-public",
+  "uniqueId": "102906005417360612620"
+}

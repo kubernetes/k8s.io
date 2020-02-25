@@ -1,9 +1,0 @@
-[
-  {
-    "description": "Can list ServiceAccounts.",
-    "etag": "BwWLKJVqdYA=",
-    "name": "projects/k8s-infra-dev-cluster-turnup/roles/ServiceAccountLister",
-    "stage": "GA",
-    "title": "Service Account Lister"
-  }
-]
