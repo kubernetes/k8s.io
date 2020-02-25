@@ -135,6 +135,21 @@ function link_run_to_pubsub() {
     fi
 }
 
+# This creates a dummy (NOP) Cloud Run service that shares the same
+# AUDITOR_SERVICE_NAME as the real production deployments. The point is to
+# create a Cloud Run endpoint (https:// URL) that can be used in the rest of
+# this script (as auditor_endpoint).
+function create_dummy_endpoint() {
+    CLOUD_RUN_SERVICE_ACCOUNT="$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_SVCACCT}")"
+    gcloud run deploy "${AUDITOR_SERVICE_NAME}" \
+        --image="gcr.io/cloudrun/hello" \
+        --platform=managed \
+        --no-allow-unauthenticated \
+        --region=us-central1 \
+        --project="${PROJECT_ID}" \
+        --service-account="${CLOUD_RUN_SERVICE_ACCOUNT}"
+}
+
 function main() {
     # We want to run in the artifacts project to get pubsub most easily.
     PROJECT_ID="k8s-artifacts-prod"
@@ -144,9 +159,8 @@ function main() {
 
     if ! get_push_endpoint "${PROJECT_ID}"; then
         echo >&2 "Could not determine push endpoint for the auditor's Cloud Run service."
-        echo >&2 "Please run the cip-auditor/deploy.sh script to first deploy the auditor"
-        echo >&2 "before re-running this script."
-        exit 1
+        echo >&2 "Deploying a dummy image instead to create the Cloud Run endpoint."
+        create_dummy_endpoint
     fi
 
     link_run_to_pubsub "${PROJECT_ID}" "${PROJECT_NUMBER}"
