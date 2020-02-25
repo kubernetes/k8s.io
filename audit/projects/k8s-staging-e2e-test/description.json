@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-12-06T16:56:47.584Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-e2e-test",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-e2e-test",
+  "projectNumber": "920654539991"
+}

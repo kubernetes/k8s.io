@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-apisnoop:
+  Enabled: True
+  LockedTime: 2020-04-20 18:13:01.916000+00:00
+

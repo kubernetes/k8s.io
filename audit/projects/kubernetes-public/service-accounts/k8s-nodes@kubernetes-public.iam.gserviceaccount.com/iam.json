@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@googlegroups.com"
+      ],
+      "role": "roles/iam.serviceAccountUser"
+    }
+  ],
+  "etag": "BwV-59tIQKE=",
+  "version": 1
+}

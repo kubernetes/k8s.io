@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-npd:
+  Enabled: True
+  LockedTime: 2020-05-05 17:58:24.218000+00:00
+

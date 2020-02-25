@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-scl-image-builder:
+  Enabled: True
+  LockedTime: 2020-05-11 21:35:32.621000+00:00
+

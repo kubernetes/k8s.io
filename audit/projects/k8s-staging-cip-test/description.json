@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-04-03T19:51:12.995Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-cip-test",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-cip-test",
+  "projectNumber": "324460563566"
+}
