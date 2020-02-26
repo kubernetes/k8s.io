@@ -487,9 +487,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - bentheelder@google.com
+      - cblecker@gmail.com
       - davanum@gmail.com
-      - jbperez@google.com
       - linusa@google.com
+      - stephen.k8s@agst.us
 
   - email-id: k8s-infra-staging-capi-docker@kubernetes.io
     name: k8s-infra-staging-capi-docker
