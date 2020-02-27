@@ -1,0 +1,181 @@
+{
+  "commonInstanceMetadata": {
+    "fingerprint": "KHOaT-1umbs=",
+    "kind": "compute#metadata"
+  },
+  "creationTimestamp": "2019-04-05T15:41:40.479-07:00",
+  "defaultNetworkTier": "PREMIUM",
+  "defaultServiceAccount": "874328413592-compute@developer.gserviceaccount.com",
+  "id": "202554181734262603",
+  "kind": "compute#project",
+  "name": "k8s-staging-csi",
+  "quotas": [
+    {
+      "limit": 5000.0,
+      "metric": "SNAPSHOTS",
+      "usage": 0.0
+    },
+    {
+      "limit": 15.0,
+      "metric": "NETWORKS",
+      "usage": 1.0
+    },
+    {
+      "limit": 200.0,
+      "metric": "FIREWALLS",
+      "usage": 4.0
+    },
+    {
+      "limit": 2000.0,
+      "metric": "IMAGES",
+      "usage": 0.0
+    },
+    {
+      "limit": 21.0,
+      "metric": "STATIC_ADDRESSES",
+      "usage": 0.0
+    },
+    {
+      "limit": 250.0,
+      "metric": "ROUTES",
+      "usage": 23.0
+    },
+    {
+      "limit": 45.0,
+      "metric": "FORWARDING_RULES",
+      "usage": 0.0
+    },
+    {
+      "limit": 150.0,
+      "metric": "TARGET_POOLS",
+      "usage": 0.0
+    },
+    {
+      "limit": 150.0,
+      "metric": "HEALTH_CHECKS",
+      "usage": 0.0
+    },
+    {
+      "limit": 69.0,
+      "metric": "IN_USE_ADDRESSES",
+      "usage": 0.0
+    },
+    {
+      "limit": 150.0,
+      "metric": "TARGET_INSTANCES",
+      "usage": 0.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "TARGET_HTTP_PROXIES",
+      "usage": 0.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "URL_MAPS",
+      "usage": 0.0
+    },
+    {
+      "limit": 9.0,
+      "metric": "BACKEND_SERVICES",
+      "usage": 0.0
+    },
+    {
+      "limit": 300.0,
+      "metric": "INSTANCE_TEMPLATES",
+      "usage": 0.0
+    },
+    {
+      "limit": 15.0,
+      "metric": "TARGET_VPN_GATEWAYS",
+      "usage": 0.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "VPN_TUNNELS",
+      "usage": 0.0
+    },
+    {
+      "limit": 9.0,
+      "metric": "BACKEND_BUCKETS",
+      "usage": 0.0
+    },
+    {
+      "limit": 10.0,
+      "metric": "ROUTERS",
+      "usage": 0.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "TARGET_SSL_PROXIES",
+      "usage": 0.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "TARGET_HTTPS_PROXIES",
+      "usage": 0.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "SSL_CERTIFICATES",
+      "usage": 0.0
+    },
+    {
+      "limit": 175.0,
+      "metric": "SUBNETWORKS",
+      "usage": 22.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "TARGET_TCP_PROXIES",
+      "usage": 0.0
+    },
+    {
+      "limit": 10.0,
+      "metric": "SECURITY_POLICIES",
+      "usage": 0.0
+    },
+    {
+      "limit": 100.0,
+      "metric": "SECURITY_POLICY_RULES",
+      "usage": 0.0
+    },
+    {
+      "limit": 45.0,
+      "metric": "PACKET_MIRRORINGS",
+      "usage": 0.0
+    },
+    {
+      "limit": 300.0,
+      "metric": "NETWORK_ENDPOINT_GROUPS",
+      "usage": 0.0
+    },
+    {
+      "limit": 6.0,
+      "metric": "INTERCONNECTS",
+      "usage": 0.0
+    },
+    {
+      "limit": 5000.0,
+      "metric": "GLOBAL_INTERNAL_ADDRESSES",
+      "usage": 0.0
+    },
+    {
+      "limit": 15.0,
+      "metric": "VPN_GATEWAYS",
+      "usage": 0.0
+    },
+    {
+      "limit": 2000.0,
+      "metric": "MACHINE_IMAGES",
+      "usage": 0.0
+    },
+    {
+      "limit": 15.0,
+      "metric": "EXTERNAL_VPN_GATEWAYS",
+      "usage": 0.0
+    }
+  ],
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-staging-csi",
+  "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
+}

@@ -1,0 +1,9 @@
+{
+  "displayName": "Nodes in GKE cluster 'aaa'",
+  "email": "gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+  "etag": "MDEwMjE5MjA=",
+  "name": "projects/kubernetes-public/serviceAccounts/gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "108417686403743706149",
+  "projectId": "kubernetes-public",
+  "uniqueId": "108417686403743706149"
+}

@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-11-01T18:27:31.752Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-gcr-audit-test-prod",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-gcr-audit-test-prod",
+  "projectNumber": "375340694213"
+}

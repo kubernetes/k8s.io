@@ -1,0 +1,199 @@
+{
+  "commonInstanceMetadata": {
+    "fingerprint": "9_em4FUS_lU=",
+    "items": [
+      {
+        "key": "sshKeys",
+        "value": "\ngke-d554984da2fcb0ac8bc0:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCciUMboaB8M/sJNv26iHSudr8Tv5P/TYDuiLlX6l3+4zxwzGa9rjT+0tmG4VkFFlZNEMq9Rn0bK2uFrJXaep8KbhpMz2pX9H8h+1RXOzVBjIBqbo3D5k87u9TzuLAgozdxxP/eiMdJ4OT0u/YIqTIDVJPcNEDvkHdo/Kl5KplfwBOQVpQq2muzqQweCBNeEvekvF6YL1YcUY25nnCR/e/ANLYZFnTofCe878wMZagdteimGh07fUuYJfOna2XhPQrfN1kNrDlEVfzwnQSvM81nFvCRlYezSZdvmT4GDUbDMf9sN1SbocLzNU2MjjwUd2xZfuuEI8PV/iCwWMYRSf5v gke-d554984da2fcb0ac8bc0@gke-d554984da2fcb0ac8bc0\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKXgEw3R4S+t496FUji26QwLbLIUESOgiWTPVTaxqEvQnNQzTV67IPk7JEgKoYV5Dff6Q3D3Zh0EJM1RhpIddhgQLTPOO9/vQcdtf9Vz7yLyL8s/f5ki5Lvj1zCEN7jObBG6KXihHxodPgOeMX4NidKUOAzHXnTCzDBa0JOl4lCUy1KOd803X5F1ZRsL3L2Hxt8o9XarNF1cB0i3Kp++FXVEhPtFy/mmt7nMW3vtibNde4YiUsRbdAX7NVuo5WAleKYLrm4Y+ag3YsVBXHrNc3tTX1qObAcyA1hMq9lj/gojsjMukAev4OpKUarLZ9/3HpJsNHNgiprzsf64D5Gc8N gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQt9qiv2SV6ov+lrjeD5pfqMU02I6BLmUPXJyMPwXAAnukAcBNyO1bS3jUuGWMb/jKRBS/vq8EV8+urAB0pbHUvuCXm4+sV4ijhvft4LX9cZlnC5OrvWnWTWXyWFTAv6fEGMd9MjxjOoBPKzrfDlPcdXNxa+1zCqG2zvDhhGKaEehqdGInnjmlDQbWKRzXB7zcIlf6mjK0VynPeoCpipQX4zRUqhAYKwIvrHDrFoP2hsdv2ohubAJ69PfqOX+QzVQacXbLFCDdN8DUVW7HouHzE2mfKKM2Jc9PFj/9iqG0aq0Yxfw+YAHqXs6T/rpN3nNxBuHdJWeLVrGRXaP/GQVt gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBNMH5E+KJ5ZCzXQHeGo2UviWijMTaOooI8DLkfM6gd1TWbta8QPxbz1R6haOTHwCuBosGe94ldwUgCGHBbCDdgGWvFHYRa7mGRYkqHtmaUafe0esUlfhA1dB3a7d4HvsCEXj2h6ukjA7RCJTH7Xo5Eohe9i61gecg84YNQjyop9mbBnCbwqfxx/z+wy+5kQ0+n5oeTJHT13xvZTcKbX4UuEFziive1J+O9pkXvDPStCRfzd08M39PzTxm9Ipi+10v9bk8KkH8ET0hnLtTJgveBVMszMr1St5JwNfMdTyihEWkAwlzG6v7HBEcude5YHmhypQQ/7/rRIzRV8lofFjn gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863"
+      },
+      {
+        "key": "gke-development2-d554984d-cidr",
+        "value": "default:10.48.0.0/14"
+      },
+      {
+        "key": "ssh-keys",
+        "value": "davanum:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAGzbjz/9gjnmMMxhoTtwBHsJ55MTVOq4DUV8L2h/hheAMp6UlDz63CVanDk9fhc4f9cFshNfz5cfJKFVghaNhuvJdg9/HZWM5Ittxedsk5V9AvLdAMpCn5u2HI7jAHLgTKff/XdjbanZPhvH2fLI6vaz2smsINzEFfMr3bqP64BM7VaHlM4BxOohL0o5S5oCjnuQaeVWSDd5BFuTeH25TsL7xzromCrubE9ARvXSUmPbHj5S1WrCEDXSfIWaOjJu4IVM28RtLtgVOrxR3J9hLnqz5nD2OB/1jC6agHSC/nZ50uu6+WGF8SRaOf5OfifDUCEhAFnHgIyFUU7BttOq8c0= google-ssh {\"userName\":\"davanum@gmail.com\",\"expireOn\":\"2020-01-28T15:21:55+0000\"}\ndavanum:ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO/UMR7NA99YiCIEntowu5TLd49fKv72D+rRJMPhrMUfPpM6HKFZq90x4vgK4z3TNUMw4dQvxaviu1dgQxH5R+w= google-ssh {\"userName\":\"davanum@gmail.com\",\"expireOn\":\"2020-01-28T15:21:52+0000\"}\n"
+      },
+      {
+        "key": "gke-aaa-4d0eb763-secondary-ranges",
+        "value": "services:default:gke-aaa-subnet-4d0eb763:gke-aaa-services-4d0eb763,pods:default:gke-aaa-subnet-4d0eb763:gke-aaa-pods-4d0eb763"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "creationTimestamp": "2018-08-31T09:57:25.762-07:00",
+  "defaultNetworkTier": "PREMIUM",
+  "defaultServiceAccount": "127754664067-compute@developer.gserviceaccount.com",
+  "id": "3358637803203513754",
+  "kind": "compute#project",
+  "name": "kubernetes-public",
+  "quotas": [
+    {
+      "limit": 10000.0,
+      "metric": "SNAPSHOTS",
+      "usage": 0.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "NETWORKS",
+      "usage": 1.0
+    },
+    {
+      "limit": 500.0,
+      "metric": "FIREWALLS",
+      "usage": 11.0
+    },
+    {
+      "limit": 5000.0,
+      "metric": "IMAGES",
+      "usage": 0.0
+    },
+    {
+      "limit": 175.0,
+      "metric": "STATIC_ADDRESSES",
+      "usage": 3.0
+    },
+    {
+      "limit": 300.0,
+      "metric": "ROUTES",
+      "usage": 27.0
+    },
+    {
+      "limit": 150.0,
+      "metric": "FORWARDING_RULES",
+      "usage": 6.0
+    },
+    {
+      "limit": 500.0,
+      "metric": "TARGET_POOLS",
+      "usage": 0.0
+    },
+    {
+      "limit": 500.0,
+      "metric": "HEALTH_CHECKS",
+      "usage": 3.0
+    },
+    {
+      "limit": 575.0,
+      "metric": "IN_USE_ADDRESSES",
+      "usage": 6.0
+    },
+    {
+      "limit": 500.0,
+      "metric": "TARGET_INSTANCES",
+      "usage": 0.0
+    },
+    {
+      "limit": 100.0,
+      "metric": "TARGET_HTTP_PROXIES",
+      "usage": 3.0
+    },
+    {
+      "limit": 100.0,
+      "metric": "URL_MAPS",
+      "usage": 3.0
+    },
+    {
+      "limit": 60.0,
+      "metric": "BACKEND_SERVICES",
+      "usage": 3.0
+    },
+    {
+      "limit": 1000.0,
+      "metric": "INSTANCE_TEMPLATES",
+      "usage": 7.0
+    },
+    {
+      "limit": 50.0,
+      "metric": "TARGET_VPN_GATEWAYS",
+      "usage": 0.0
+    },
+    {
+      "limit": 100.0,
+      "metric": "VPN_TUNNELS",
+      "usage": 0.0
+    },
+    {
+      "limit": 30.0,
+      "metric": "BACKEND_BUCKETS",
+      "usage": 0.0
+    },
+    {
+      "limit": 20.0,
+      "metric": "ROUTERS",
+      "usage": 0.0
+    },
+    {
+      "limit": 100.0,
+      "metric": "TARGET_SSL_PROXIES",
+      "usage": 0.0
+    },
+    {
+      "limit": 100.0,
+      "metric": "TARGET_HTTPS_PROXIES",
+      "usage": 3.0
+    },
+    {
+      "limit": 100.0,
+      "metric": "SSL_CERTIFICATES",
+      "usage": 3.0
+    },
+    {
+      "limit": 275.0,
+      "metric": "SUBNETWORKS",
+      "usage": 23.0
+    },
+    {
+      "limit": 100.0,
+      "metric": "TARGET_TCP_PROXIES",
+      "usage": 0.0
+    },
+    {
+      "limit": 10.0,
+      "metric": "SECURITY_POLICIES",
+      "usage": 0.0
+    },
+    {
+      "limit": 200.0,
+      "metric": "SECURITY_POLICY_RULES",
+      "usage": 0.0
+    },
+    {
+      "limit": 150.0,
+      "metric": "PACKET_MIRRORINGS",
+      "usage": 0.0
+    },
+    {
+      "limit": 1000.0,
+      "metric": "NETWORK_ENDPOINT_GROUPS",
+      "usage": 0.0
+    },
+    {
+      "limit": 6.0,
+      "metric": "INTERCONNECTS",
+      "usage": 0.0
+    },
+    {
+      "limit": 5000.0,
+      "metric": "GLOBAL_INTERNAL_ADDRESSES",
+      "usage": 0.0
+    },
+    {
+      "limit": 50.0,
+      "metric": "VPN_GATEWAYS",
+      "usage": 0.0
+    },
+    {
+      "limit": 5000.0,
+      "metric": "MACHINE_IMAGES",
+      "usage": 0.0
+    },
+    {
+      "limit": 50.0,
+      "metric": "EXTERNAL_VPN_GATEWAYS",
+      "usage": 0.0
+    }
+  ],
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/kubernetes-public",
+  "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
+}

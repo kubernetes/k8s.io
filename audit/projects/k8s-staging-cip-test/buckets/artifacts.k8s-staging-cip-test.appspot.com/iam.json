@@ -1,0 +1,35 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "projectEditor:k8s-staging-cip-test",
+        "projectOwner:k8s-staging-cip-test",
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-cip-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-cip-test@kubernetes.io",
+        "projectViewer:k8s-staging-cip-test"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-cip-test@kubernetes.io",
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-cip-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "allUsers"
+      ],
+      "role": "roles/storage.objectViewer"
+    }
+  ],
+  "etag": "CBk="
+}

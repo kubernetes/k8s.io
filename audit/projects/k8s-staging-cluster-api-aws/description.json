@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-07-08T16:38:22.868Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-cluster-api-aws",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-cluster-api-aws",
+  "projectNumber": "433651898792"
+}
