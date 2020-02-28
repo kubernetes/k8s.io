@@ -266,6 +266,11 @@ minikube.sigs:
 kops.sigs:
   type: CNAME
   value: kubernetes-kops.netlify.com.
+# https://github.com/kubernetes-sigs/image-builder docs (@moshloop @justinsb)
 image-builder.sigs:
   type: CNAME
   value: kubernetes-sigs-image-builder.netlify.com.
+# https://github.com/kubernetes-sigs/krew docs (@ahmetb, @corneliusweig)
+krew.sigs:
+- type: CNAME
+  value: kubernetes-sigs-krew.netlify.com.
