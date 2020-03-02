@@ -165,8 +165,9 @@ class RedirTest(unittest.TestCase):
             self.assert_temp_redirect(
                 base + 'partner-request',
                 'https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform')
-            self.assert_temp_redirect(base + 'start',
-                'https://kubernetes.io/docs/setup/pick-right-solution/')
+            self.assert_temp_redirect(
+                base + 'start',
+                'https://kubernetes.io/docs/setup/')
             self.assert_temp_redirect(
                 base + 'test-history',
                 'https://storage.googleapis.com/kubernetes-test-history/static/index.html')
@@ -178,7 +179,7 @@ class RedirTest(unittest.TestCase):
                 'http://velodrome.k8s.io/dashboard/db/bigquery-metrics')
             self.assert_temp_redirect(
                 base + 'pr-dashboard',
-                'https://k8s-gubernator.appspot.com/pr')
+                'https://gubernator.k8s.io/pr')
 
             self.assert_temp_redirect(
                 base + 'stuck-prs',
@@ -235,7 +236,8 @@ class RedirTest(unittest.TestCase):
     def test_code(self):
         path = rand_num()
         for base in ('changelog.kubernetes.io', 'changelog.k8s.io'):
-            self.assert_temp_redirect(base, 'https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md')
+            self.assert_temp_redirect(base,
+                    'https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/README.md')
             self.assert_temp_redirect(base + '/$path',
                 'https://github.com/kubernetes/kubernetes/releases/tag/$path',
                 path=path)
@@ -342,9 +344,9 @@ class RedirTest(unittest.TestCase):
 
     def test_pr_test(self):
         base = 'pr-test.kubernetes.io'
-        self.assert_temp_redirect(base, 'https://k8s-gubernator.appspot.com')
+        self.assert_temp_redirect(base, 'https://gubernator.k8s.io')
         self.assert_temp_redirect(base + '/$id',
-            'https://k8s-gubernator.appspot.com/pr/$id', id=rand_num())
+            'https://gubernator.k8s.io/pr/$id', id=rand_num())
 
     def test_release(self):
         for base in ('releases.k8s.io', 'rel.k8s.io',
