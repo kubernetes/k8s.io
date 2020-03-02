@@ -11,3 +11,21 @@ aliases:
     - dims
     - justaugustus
     - listx
+  release-engineering-approvers:
+    - calebamiles # subproject owner
+    - dougm # Patch Release Team
+    - feiskyer # Patch Release Team
+    - hoegaarden # Patch Release Team
+    - idealhack # Patch Release Team
+    - justaugustus # subproject owner / Patch Release Team
+    - tpepper # subproject owner / Patch Release Team
+  release-engineering-reviewers:
+    - calebamiles # subproject owner
+    - cpanato # Branch Manager
+    - dougm # Patch Release Team
+    - feiskyer # Patch Release Team
+    - hoegaarden # Patch Release Team
+    - idealhack # Patch Release Team
+    - justaugustus # subproject owner / Patch Release Team
+    - saschagrunert # Branch Manager
+    - tpepper # subproject owner / Patch Release Team

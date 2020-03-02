@@ -60,6 +60,7 @@ STAGING_PROJECTS=(
     kops
     kube-state-metrics
     kubeadm
+    kubernetes
     metrics-server
     multitenancy
     nfd
@@ -67,10 +68,18 @@ STAGING_PROJECTS=(
     provider-azure
     publishing-bot
     release-test
+    releng
     scl-image-builder
     service-apis
     txtdirect
 )
+
+RELEASE_STAGING_PROJECTS=(
+    kubernetes
+    release-test
+    releng
+)
+
 if [ $# = 0 ]; then
     # default to all staging projects
     set -- "${STAGING_PROJECTS[@]}"
@@ -163,4 +172,32 @@ for REPO; do
     empower_prow "${PROJECT}" "${GCB_BUCKET}"
 
     color 6 "Done"
+done
+
+# Special case: Release Managers
+for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
+    color 3 "Configuring special cases for Release Managers on: ${repo}"
+
+    # The GCP project name.
+    PROJECT="k8s-staging-${REPO}"
+
+    # Enable Release Manager Associates view access to
+    # Release Engineering projects
+    color 6 "Empowering ${RELEASE_VIEWERS} as project viewers"
+    empower_group_as_viewer "${PROJECT}" "${RELEASE_VIEWERS}"
+
+    # TODO(justaugustus): Remove once the k8s-releng-prod GCP project is
+    #                     configured to allow other release projects to decrypt
+    #                     KMS assets and existing KMS keys in the
+    #                     k8s-staging-release-test GCP project have been
+    #                     transferred over.
+    if [[ $PROJECT == "k8s-staging-release-test" ]]; then
+        # Enable KMS APIs
+        color 6 "Enabling the KMS API"
+        enable_api "${PROJECT}" cloudkms.googleapis.com
+
+        # Let Release Admins administer KMS.
+        color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"
+        empower_group_for_kms "${PROJECT}" "${RELEASE_ADMINS}"
+    fi
 done

@@ -733,6 +733,18 @@ groups:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
 
+  - email-id: k8s-infra-staging-kubernetes@kubernetes.io
+    name: k8s-infra-staging-kubernetes
+    description: |-
+      ACL for staging Kubernetes
+
+      This project is used to stage official Kubernetes release artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      # TODO(justaugustus): Add editors group after k8s.gcr.io domain flip
+      - k8s-infra-release-admins@kubernetes.io
+
   - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
     name: k8s-infra-staging-kube-state-metrics
     description: |-
@@ -814,13 +826,24 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - caselim@gmail.com
+      - k8s-infra-release-admins@kubernetes.io
+      - k8s-infra-release-editors@kubernetes.io
       - davanum@gmail.com
       - ihor@cncf.io
       - spiffxp@google.com
-      - stephen.k8s@agst.us
       - thockin@google.com
-      - tpepper@gmail.com
+
+  - email-id: k8s-infra-staging-releng@kubernetes.io
+    name: k8s-infra-staging-releng
+    description: |-
+      ACL for staging RelEng
+
+      This project is used to test and stage Release Engineering tooling.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-admins@kubernetes.io
+      - k8s-infra-release-editors@kubernetes.io
 
   - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
     name: k8s-infra-staging-scl-image-builder

@@ -1,0 +1,23 @@
+### ATTENTION ###
+# k8s-staging-kubernetes is the staging container registry for ROOT level k8s.gcr.io images.
+# Image promotion for this project is restricted to Release Managers.
+#
+# The following images are managed within this project:
+# - cloud-controller-manager
+# - conformance (will likely be moved to another staging project)
+# - hyperkube (to be deprecated in a future release)
+# - kube-apiserver
+# - kube-controller-manager
+# - kube-proxy
+# - kube-scheduler
+#
+# google group for gcr.io/k8s-staging-kubernetes is k8s-infra-staging-kubernetes@kubernetes.io
+registries:
+- name: gcr.io/k8s-staging-kubernetes
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com

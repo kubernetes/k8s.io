@@ -190,8 +190,12 @@ empower_service_account_for_cip_auditor_e2e_tester \
     $(svc_acct_email "${GCR_AUDIT_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
     "${GCR_AUDIT_TEST_PROD_PROJECT}"
 
-# Special case: grant the release tools testing group access to their fake
+# Special case: grant the Release Managers group access to their fake
 # prod project.
+empower_group_to_fake_prod \
+    "${RELEASE_TESTPROD_PROJECT}" \
+    "k8s-infra-staging-kubernetes@kubernetes.io"
+
 empower_group_to_fake_prod \
     "${RELEASE_TESTPROD_PROJECT}" \
     "k8s-infra-staging-release-test@kubernetes.io"

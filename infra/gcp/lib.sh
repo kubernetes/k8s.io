@@ -57,6 +57,14 @@ PROW_SVCACCT="deployer@k8s-prow.iam.gserviceaccount.com"
 GCP_ORG="758905017065" # kubernetes.io
 GCP_BILLING="018801-93540E-22A20E"
 
+# Release Engineering umbrella groups
+# - admins - edit and KMS access (Release Engineering subproject owners)
+# - managers - access to run stage/release jobs (Patch Release Team / Branch Managers)
+# - viewers - view access to Release Engineering projects (Release Manager Associates)
+RELEASE_ADMINS="k8s-infra-release-admins@kubernetes.io"
+RELEASE_MANAGERS="k8s-infra-release-editors@kubernetes.io"
+RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
+
 # Get the GCS bucket name that backs a GCR repo.
 # $1: The GCR repo (same as the GCP project name)
 # $2: The GCR region (optional)
