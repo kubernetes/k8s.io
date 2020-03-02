@@ -127,7 +127,7 @@ data:
         server_name changelog.kubernetes.io changelog.k8s.io;
         listen 80;
 
-        rewrite ^/$         https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md redirect;
+        rewrite ^/$         https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/README.md redirect;
         rewrite ^/(.*)?$    https://github.com/kubernetes/kubernetes/releases/tag/$1 redirect;
       }
       server {
@@ -238,8 +238,8 @@ data:
           rewrite ^/owners$          https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md redirect;
           rewrite ^/owners/([^/]*)/?$ https://cs.k8s.io/?q=$1&i=fosho&files=.*(%5E%5B%5Ev%5D.*OWNERS%24)%7C(%5Ev%5B%5Ee%5D.*OWNERS%24)%20%7C(%5Eve%5B%5En%5D.*OWNERS%24)%7C(%5Even%5B%5Ed%5D.*OWNERS%24)%7C(%5Evend%5B%5Eo%5D.*OWNERS%24)%7C(%5Evendo%5B%5Er%5D.*OWNERS%24)%7C(%5E%5B%5Ev%5D%5B%5Ee%5D%5B%5En%5D%5B%5Ed%5D%5B%5Eo%5D%5B%5Er%5D%2F.*OWNERS%24)%7C%5EOWNERS%24%7C%5EOWNERS_ALIASES%24&repos= redirect;
           rewrite ^/partner-request$ https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform redirect;
-          rewrite ^/pr-dashboard$    https://k8s-gubernator.appspot.com/pr redirect;
-          rewrite ^/start$           https://kubernetes.io/docs/setup/pick-right-solution/ redirect;
+          rewrite ^/pr-dashboard$    https://gubernator.k8s.io/pr redirect;
+          rewrite ^/start$           https://kubernetes.io/docs/setup/ redirect;
           rewrite ^/stuck-prs$       https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess redirect;
           rewrite ^/test-health$     http://velodrome.k8s.io/dashboard/db/bigquery-metrics redirect;
           rewrite ^/test-history$    https://storage.googleapis.com/kubernetes-test-history/static/index.html redirect;
@@ -267,8 +267,8 @@ data:
         server_name pr-test.kubernetes.io pr-test.k8s.io;
         listen 80;
 
-        rewrite ^/$       https://k8s-gubernator.appspot.com redirect;
-        rewrite ^/(.*)$   https://k8s-gubernator.appspot.com/pr/$1 redirect;
+        rewrite ^/$       https://gubernator.k8s.io redirect;
+        rewrite ^/(.*)$   https://gubernator.k8s.io/pr/$1 redirect;
 
       }
       server {
