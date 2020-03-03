@@ -98,6 +98,24 @@ gcloud \
     | sed 's/.googleapis.com//' \
     | while read -r SVC; do
         case "${SVC}" in
+            bigquery)
+                mkdir -p "projects/${PROJECT}/services/${SVC}"
+                bq \
+                    --format=prettyjson --project_id=$PROJECT ls
+                    > "projects/${PROJECT}/services/${SVC}/bigquery.datasets.json"                
+                # Only run if there are any datasets
+                if [ -s "projects/${PROJECT}/services/${SVC}/bigquery.datasets.json" ]
+                then
+                    bq \
+                        --project_id="{$PROJECT}" --format=json ls \
+                        | jq -r '.[] | .datasetReference["datasetId"]' \
+                        | while read -r DATASET; do                        
+                            bq \
+                                --project_id="${PROJECT}" --format=json show "${PROJECT}:${DATASET}" \
+                            | jq .access > "projects/${PROJECT}/services/${SVC}/bigquery.datasets.${DATASET}.access.json"
+                        done
+                fi
+                ;;
             compute)
                 mkdir -p "projects/${PROJECT}/services/${SVC}"
                 gcloud \
