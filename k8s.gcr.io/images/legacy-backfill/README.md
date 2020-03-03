@@ -7,7 +7,7 @@ Flip][VDF].
 
 **As such, these images are effectively FROZEN. New changes to them WILL BE
 REJECTED, and any new promotions MUST happen through individual sub-project
-staging repos, as detailed [here][recommended-method].**
+staging repos, as detailed in the policy [here][official-policy].**
 
 [VDF]: https://github.com/kubernetes/k8s.io/blob/master/k8s.gcr.io/Vanity-Domain-Flip.md
-[recommended-method]: https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io#creating-staging-repos
+[official-policy]: https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io#creating-staging-repos
