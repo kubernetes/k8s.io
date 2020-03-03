@@ -1,3 +1,20 @@
+#
+# WARNING: THIS FILE IS FROZEN. MODIFICATIONS TO THIS FILE ARE FORBIDDEN.
+#
+# The images below are effectively frozen. See the README.md in this directory
+# for more information.
+#
+# It was generated automatically by running "cip" with snapshot mode. To
+# reproduce, run:
+#
+# $ cd
+# $ git clone https://github.com/kubernetes-sigs/k8s-container-image-promoter go/src/sigs.k8s.io/k8s-container-image-promoter
+# $ cd go/src/sigs.k8s.io/k8s-container-image-promoter
+# $ bazel run \
+#   --workspace_status_command=$PWD/workspace_status.sh \
+#   --host_force_python=PY2 //:cip -- -snapshot=gcr.io/google-containers \
+#   -output-format=YAML > images.yaml
+
 - name: addon-builder
   dmap:
     sha256:19fdf151dd09e44045e7a5909d35b9b4ee08e0ffb63212df710720241ee59e1b: []

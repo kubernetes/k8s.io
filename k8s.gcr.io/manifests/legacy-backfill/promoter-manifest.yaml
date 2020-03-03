@@ -1,3 +1,7 @@
+#
+# WARNING: THIS FILE IS FROZEN. MODIFICATIONS TO THIS FILE ARE FORBIDDEN.
+#
+# Please see the [README](./README.md) for details.
 registries:
 - name: gcr.io/google-containers
   src: true
