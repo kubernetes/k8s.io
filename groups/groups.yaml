@@ -573,6 +573,20 @@ groups:
       - hi@amycod.es
       - prignanov@vmware.com
 
+  - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
+    name: k8s-infra-staging-capi-vsphere
+    description: |-
+      ACL for staging CAPI for vSphere
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - prignanov@vmware.com
+      - jeewan@vmware.com
+      - ytijani@vmware.com
+
   - email-id: k8s-infra-staging-cluster-api-azure@kubernetes.io
     name: k8s-infra-staging-cluster-api-azure
     description: |-
