@@ -479,6 +479,11 @@ function empower_group_to_admin_artifact_auditor() {
         projects add-iam-policy-binding "${project}" \
         --member "group:${group}" \
         --role roles/run.admin
+    # To read auditor's logs, we need serviceusage.services.use
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "group:${group}" \
+        --role roles/serviceusage.serviceUsageConsumer
     gcloud \
         --project="${project}" \
         iam service-accounts add-iam-policy-binding \
