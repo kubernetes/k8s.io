@@ -1,0 +1,16 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+options:
+  no_parent_owners: true
+approvers:
+  - release-engineering-approvers
+  - cblecker
+  - dims
+  - listx
+  - thockin
+reviewers:
+  - release-engineering-reviewers
+
+labels:
+  - sig/release
+  - area/release-eng
