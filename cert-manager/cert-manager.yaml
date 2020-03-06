@@ -1,5 +1,194 @@
-# Saved from https://github.com/jetstack/cert-manager/releases/download/v0.9.1/cert-manager.yaml
-
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: certificaterequests.cert-manager.io
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.conditions[?(@.type=="Ready")].status
+    name: Ready
+    type: string
+  - JSONPath: .spec.issuerRef.name
+    name: Issuer
+    priority: 1
+    type: string
+  - JSONPath: .status.conditions[?(@.type=="Ready")].message
+    name: Status
+    priority: 1
+    type: string
+  - JSONPath: .metadata.creationTimestamp
+    description: CreationTimestamp is a timestamp representing the server time when
+      this object was created. It is not guaranteed to be set in happens-before order
+      across separate operations. Clients may not set this value. It is represented
+      in RFC3339 form and is in UTC.
+    name: Age
+    type: date
+  group: cert-manager.io
+  preserveUnknownFields: false
+  names:
+    kind: CertificateRequest
+    listKind: CertificateRequestList
+    plural: certificaterequests
+    shortNames:
+    - cr
+    - crs
+    singular: certificaterequest
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      description: CertificateRequest is a type to represent a Certificate Signing
+        Request
+      type: object
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: CertificateRequestSpec defines the desired state of CertificateRequest
+          type: object
+          required:
+          - csr
+          - issuerRef
+          properties:
+            csr:
+              description: Byte slice containing the PEM encoded CertificateSigningRequest
+              type: string
+              format: byte
+            duration:
+              description: Requested certificate default Duration
+              type: string
+            isCA:
+              description: IsCA will mark the resulting certificate as valid for signing.
+                This implies that the 'cert sign' usage is set
+              type: boolean
+            issuerRef:
+              description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
+                the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                with the given name in the same namespace as the CertificateRequest
+                will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer
+                with the provided name will be used. The 'name' field in this stanza
+                is required at all times. The group field refers to the API group
+                of the issuer which defaults to 'cert-manager.io' if empty.
+              type: object
+              required:
+              - name
+              properties:
+                group:
+                  type: string
+                kind:
+                  type: string
+                name:
+                  type: string
+            usages:
+              description: Usages is the set of x509 actions that are enabled for
+                a given key. Defaults are ('digital signature', 'key encipherment')
+                if empty
+              type: array
+              items:
+                description: 'KeyUsage specifies valid usage contexts for keys. See:
+                  https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12
+                  Valid KeyUsage values are as follows: "signing", "digital signature",
+                  "content commitment", "key encipherment", "key agreement", "data
+                  encipherment", "cert sign", "crl sign", "encipher only", "decipher
+                  only", "any", "server auth", "client auth", "code signing", "email
+                  protection", "s/mime", "ipsec end system", "ipsec tunnel", "ipsec
+                  user", "timestamping", "ocsp signing", "microsoft sgc", "netscape
+                  sgc"'
+                type: string
+                enum:
+                - signing
+                - digital signature
+                - content commitment
+                - key encipherment
+                - key agreement
+                - data encipherment
+                - cert sign
+                - crl sign
+                - encipher only
+                - decipher only
+                - any
+                - server auth
+                - client auth
+                - code signing
+                - email protection
+                - s/mime
+                - ipsec end system
+                - ipsec tunnel
+                - ipsec user
+                - timestamping
+                - ocsp signing
+                - microsoft sgc
+                - netscape sgc
+        status:
+          description: CertificateStatus defines the observed state of CertificateRequest
+            and resulting signed certificate.
+          type: object
+          properties:
+            ca:
+              description: Byte slice containing the PEM encoded certificate authority
+                of the signed certificate.
+              type: string
+              format: byte
+            certificate:
+              description: Byte slice containing a PEM encoded signed certificate
+                resulting from the given certificate signing request.
+              type: string
+              format: byte
+            conditions:
+              type: array
+              items:
+                description: CertificateRequestCondition contains condition information
+                  for a CertificateRequest.
+                type: object
+                required:
+                - status
+                - type
+                properties:
+                  lastTransitionTime:
+                    description: LastTransitionTime is the timestamp corresponding
+                      to the last status change of this condition.
+                    type: string
+                    format: date-time
+                  message:
+                    description: Message is a human readable description of the details
+                      of the last transition, complementing reason.
+                    type: string
+                  reason:
+                    description: Reason is a brief machine readable explanation for
+                      the condition's last transition.
+                    type: string
+                  status:
+                    description: Status of the condition, one of ('True', 'False',
+                      'Unknown').
+                    type: string
+                    enum:
+                    - "True"
+                    - "False"
+                    - Unknown
+                  type:
+                    description: Type of the condition, currently ('Ready', 'InvalidRequest').
+                    type: string
+            failureTime:
+              description: FailureTime stores the time that this CertificateRequest
+                failed. This is used to influence garbage collection and back-off.
+              type: string
+              format: date-time
+  version: v1alpha2
+  versions:
+  - name: v1alpha2
+    served: true
+    storage: true
+---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
@@ -273,197 +462,6 @@ spec:
             notAfter:
               description: The expiration time of the certificate stored in the secret
                 named by this resource in spec.secretName.
-              type: string
-              format: date-time
-  version: v1alpha2
-  versions:
-  - name: v1alpha2
-    served: true
-    storage: true
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  name: certificaterequests.cert-manager.io
-spec:
-  additionalPrinterColumns:
-  - JSONPath: .status.conditions[?(@.type=="Ready")].status
-    name: Ready
-    type: string
-  - JSONPath: .spec.issuerRef.name
-    name: Issuer
-    priority: 1
-    type: string
-  - JSONPath: .status.conditions[?(@.type=="Ready")].message
-    name: Status
-    priority: 1
-    type: string
-  - JSONPath: .metadata.creationTimestamp
-    description: CreationTimestamp is a timestamp representing the server time when
-      this object was created. It is not guaranteed to be set in happens-before order
-      across separate operations. Clients may not set this value. It is represented
-      in RFC3339 form and is in UTC.
-    name: Age
-    type: date
-  group: cert-manager.io
-  preserveUnknownFields: false
-  names:
-    kind: CertificateRequest
-    listKind: CertificateRequestList
-    plural: certificaterequests
-    shortNames:
-    - cr
-    - crs
-    singular: certificaterequest
-  scope: Namespaced
-  subresources:
-    status: {}
-  validation:
-    openAPIV3Schema:
-      description: CertificateRequest is a type to represent a Certificate Signing
-        Request
-      type: object
-      properties:
-        apiVersion:
-          description: 'APIVersion defines the versioned schema of this representation
-            of an object. Servers should convert recognized schemas to the latest
-            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
-          type: string
-        kind:
-          description: 'Kind is a string value representing the REST resource this
-            object represents. Servers may infer this from the endpoint the client
-            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-          type: string
-        metadata:
-          type: object
-        spec:
-          description: CertificateRequestSpec defines the desired state of CertificateRequest
-          type: object
-          required:
-          - csr
-          - issuerRef
-          properties:
-            csr:
-              description: Byte slice containing the PEM encoded CertificateSigningRequest
-              type: string
-              format: byte
-            duration:
-              description: Requested certificate default Duration
-              type: string
-            isCA:
-              description: IsCA will mark the resulting certificate as valid for signing.
-                This implies that the 'cert sign' usage is set
-              type: boolean
-            issuerRef:
-              description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                the 'kind' field is not set, or set to 'Issuer', an Issuer resource
-                with the given name in the same namespace as the CertificateRequest
-                will be used.  If the 'kind' field is set to 'ClusterIssuer', a ClusterIssuer
-                with the provided name will be used. The 'name' field in this stanza
-                is required at all times. The group field refers to the API group
-                of the issuer which defaults to 'cert-manager.io' if empty.
-              type: object
-              required:
-              - name
-              properties:
-                group:
-                  type: string
-                kind:
-                  type: string
-                name:
-                  type: string
-            usages:
-              description: Usages is the set of x509 actions that are enabled for
-                a given key. Defaults are ('digital signature', 'key encipherment')
-                if empty
-              type: array
-              items:
-                description: 'KeyUsage specifies valid usage contexts for keys. See:
-                  https://tools.ietf.org/html/rfc5280#section-4.2.1.3      https://tools.ietf.org/html/rfc5280#section-4.2.1.12
-                  Valid KeyUsage values are as follows: "signing", "digital signature",
-                  "content commitment", "key encipherment", "key agreement", "data
-                  encipherment", "cert sign", "crl sign", "encipher only", "decipher
-                  only", "any", "server auth", "client auth", "code signing", "email
-                  protection", "s/mime", "ipsec end system", "ipsec tunnel", "ipsec
-                  user", "timestamping", "ocsp signing", "microsoft sgc", "netscape
-                  sgc"'
-                type: string
-                enum:
-                - signing
-                - digital signature
-                - content commitment
-                - key encipherment
-                - key agreement
-                - data encipherment
-                - cert sign
-                - crl sign
-                - encipher only
-                - decipher only
-                - any
-                - server auth
-                - client auth
-                - code signing
-                - email protection
-                - s/mime
-                - ipsec end system
-                - ipsec tunnel
-                - ipsec user
-                - timestamping
-                - ocsp signing
-                - microsoft sgc
-                - netscape sgc
-        status:
-          description: CertificateStatus defines the observed state of CertificateRequest
-            and resulting signed certificate.
-          type: object
-          properties:
-            ca:
-              description: Byte slice containing the PEM encoded certificate authority
-                of the signed certificate.
-              type: string
-              format: byte
-            certificate:
-              description: Byte slice containing a PEM encoded signed certificate
-                resulting from the given certificate signing request.
-              type: string
-              format: byte
-            conditions:
-              type: array
-              items:
-                description: CertificateRequestCondition contains condition information
-                  for a CertificateRequest.
-                type: object
-                required:
-                - status
-                - type
-                properties:
-                  lastTransitionTime:
-                    description: LastTransitionTime is the timestamp corresponding
-                      to the last status change of this condition.
-                    type: string
-                    format: date-time
-                  message:
-                    description: Message is a human readable description of the details
-                      of the last transition, complementing reason.
-                    type: string
-                  reason:
-                    description: Reason is a brief machine readable explanation for
-                      the condition's last transition.
-                    type: string
-                  status:
-                    description: Status of the condition, one of ('True', 'False',
-                      'Unknown').
-                    type: string
-                    enum:
-                    - "True"
-                    - "False"
-                    - Unknown
-                  type:
-                    description: Type of the condition, currently ('Ready', 'InvalidRequest').
-                    type: string
-            failureTime:
-              description: FailureTime stores the time that this CertificateRequest
-                failed. This is used to influence garbage collection and back-off.
               type: string
               format: date-time
   version: v1alpha2
@@ -5544,6 +5542,7 @@ spec:
     served: true
     storage: true
 ---
+---
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -5561,21 +5560,6 @@ metadata:
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.13.1
-
----
-# Source: cert-manager/templates/webhook-serviceaccount.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: cert-manager-webhook
-  namespace: "cert-manager"
-  labels:
-    app: webhook
-    app.kubernetes.io/name: webhook
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-
 ---
 # Source: cert-manager/templates/serviceaccount.yaml
 apiVersion: v1
@@ -5592,6 +5576,19 @@ metadata:
     helm.sh/chart: cert-manager-v0.13.1
 
 ---
+# Source: cert-manager/templates/webhook-serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cert-manager-webhook
+  namespace: "cert-manager"
+  labels:
+    app: webhook
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+---
 # Source: cert-manager/templates/cainjector-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -5604,24 +5601,24 @@ metadata:
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.13.1
 rules:
-- apiGroups: ["cert-manager.io"]
-  resources: ["certificates"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["events"]
-  verbs: ["get", "create", "update", "patch"]
-- apiGroups: ["admissionregistration.k8s.io"]
-  resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
-  verbs: ["get", "list", "watch", "update"]
-- apiGroups: ["apiregistration.k8s.io"]
-  resources: ["apiservices"]
-  verbs: ["get", "list", "watch", "update"]
-- apiGroups: ["apiextensions.k8s.io"]
-  resources: ["customresourcedefinitions"]
-  verbs: ["get", "list", "watch", "update"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["get", "create", "update", "patch"]
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
+    verbs: ["get", "list", "watch", "update"]
+  - apiGroups: ["apiregistration.k8s.io"]
+    resources: ["apiservices"]
+    verbs: ["get", "list", "watch", "update"]
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["get", "list", "watch", "update"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
@@ -5638,9 +5635,9 @@ roleRef:
   kind: ClusterRole
   name: cert-manager-cainjector
 subjects:
-- name: cert-manager-cainjector
-  namespace: "cert-manager"
-  kind: ServiceAccount
+  - name: cert-manager-cainjector
+    namespace: "cert-manager"
+    kind: ServiceAccount
 
 ---
 # leader election rules
@@ -5656,11 +5653,11 @@ metadata:
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.13.1
 rules:
-# Used for leader election by the controller
-# TODO: refine the permission to *just* the leader election configmap
-- apiGroups: [""]
-  resources: ["configmaps"]
-  verbs: ["get", "create", "update", "patch"]
+  # Used for leader election by the controller
+  # TODO: refine the permission to *just* the leader election configmap
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "create", "update", "patch"]
 
 ---
 
@@ -5682,433 +5679,9 @@ roleRef:
   kind: Role
   name: cert-manager-cainjector:leaderelection
 subjects:
-- kind: ServiceAccount
-  name: cert-manager-cainjector
-  namespace: cert-manager
----
-# Source: cert-manager/templates/rbac.yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: Role
-metadata:
-  name: cert-manager:leaderelection
-  namespace: kube-system
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-rules:
-# Used for leader election by the controller
-# TODO: refine the permission to *just* the leader election configmap
-- apiGroups: [""]
-  resources: ["configmaps"]
-  verbs: ["get", "create", "update", "patch"]
-
----
-
-# grant cert-manager permission to manage the leaderelection configmap in the
-# leader election namespace
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: RoleBinding
-metadata:
-  name: cert-manager:leaderelection
-  namespace: kube-system
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: cert-manager:leaderelection
-subjects:
-- apiGroup: ""
-  kind: ServiceAccount
-  name: cert-manager
-  namespace: cert-manager
-
----
-
-# Issuer controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
-metadata:
-  name: cert-manager-controller-issuers
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-rules:
-- apiGroups: ["cert-manager.io"]
-  resources: ["issuers", "issuers/status"]
-  verbs: ["update"]
-- apiGroups: ["cert-manager.io"]
-  resources: ["issuers"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "watch", "create", "update", "delete"]
-- apiGroups: [""]
-  resources: ["events"]
-  verbs: ["create", "patch"]
-
----
-
-# ClusterIssuer controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
-metadata:
-  name: cert-manager-controller-clusterissuers
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-rules:
-- apiGroups: ["cert-manager.io"]
-  resources: ["clusterissuers", "clusterissuers/status"]
-  verbs: ["update"]
-- apiGroups: ["cert-manager.io"]
-  resources: ["clusterissuers"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "watch", "create", "update", "delete"]
-- apiGroups: [""]
-  resources: ["events"]
-  verbs: ["create", "patch"]
-
----
-
-# Certificates controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
-metadata:
-  name: cert-manager-controller-certificates
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-rules:
-- apiGroups: ["cert-manager.io"]
-  resources: ["certificates", "certificates/status", "certificaterequests", "certificaterequests/status"]
-  verbs: ["update"]
-- apiGroups: ["cert-manager.io"]
-  resources: ["certificates", "certificaterequests", "clusterissuers", "issuers"]
-  verbs: ["get", "list", "watch"]
-# We require these rules to support users with the OwnerReferencesPermissionEnforcement
-# admission controller enabled:
-# https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
-- apiGroups: ["cert-manager.io"]
-  resources: ["certificates/finalizers", "certificaterequests/finalizers"]
-  verbs: ["update"]
-- apiGroups: ["acme.cert-manager.io"]
-  resources: ["orders"]
-  verbs: ["create", "delete", "get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "watch", "create", "update", "delete"]
-- apiGroups: [""]
-  resources: ["events"]
-  verbs: ["create", "patch"]
-
----
-
-# Orders controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
-metadata:
-  name: cert-manager-controller-orders
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-rules:
-- apiGroups: ["acme.cert-manager.io"]
-  resources: ["orders", "orders/status"]
-  verbs: ["update"]
-- apiGroups: ["acme.cert-manager.io"]
-  resources: ["orders", "challenges"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["cert-manager.io"]
-  resources: ["clusterissuers", "issuers"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["acme.cert-manager.io"]
-  resources: ["challenges"]
-  verbs: ["create", "delete"]
-# We require these rules to support users with the OwnerReferencesPermissionEnforcement
-# admission controller enabled:
-# https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
-- apiGroups: ["acme.cert-manager.io"]
-  resources: ["orders/finalizers"]
-  verbs: ["update"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["events"]
-  verbs: ["create", "patch"]
-
----
-
-# Challenges controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
-metadata:
-  name: cert-manager-controller-challenges
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-rules:
-# Use to update challenge resource status
-- apiGroups: ["acme.cert-manager.io"]
-  resources: ["challenges", "challenges/status"]
-  verbs: ["update"]
-# Used to watch challenge resources
-- apiGroups: ["acme.cert-manager.io"]
-  resources: ["challenges"]
-  verbs: ["get", "list", "watch"]
-# Used to watch challenges, issuer and clusterissuer resources
-- apiGroups: ["cert-manager.io"]
-  resources: ["issuers", "clusterissuers"]
-  verbs: ["get", "list", "watch"]
-# Need to be able to retrieve ACME account private key to complete challenges
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "watch"]
-# Used to create events
-- apiGroups: [""]
-  resources: ["events"]
-  verbs: ["create", "patch"]
-# HTTP01 rules
-- apiGroups: [""]
-  resources: ["pods", "services"]
-  verbs: ["get", "list", "watch", "create", "delete"]
-- apiGroups: ["extensions"]
-  resources: ["ingresses"]
-  verbs: ["get", "list", "watch", "create", "delete", "update"]
-# We require these rules to support users with the OwnerReferencesPermissionEnforcement
-# admission controller enabled:
-# https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
-- apiGroups: ["acme.cert-manager.io"]
-  resources: ["challenges/finalizers"]
-  verbs: ["update"]
-# DNS01 rules (duplicated above)
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "watch"]
-
----
-
-# ingress-shim controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
-metadata:
-  name: cert-manager-controller-ingress-shim
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-rules:
-- apiGroups: ["cert-manager.io"]
-  resources: ["certificates", "certificaterequests"]
-  verbs: ["create", "update", "delete"]
-- apiGroups: ["cert-manager.io"]
-  resources: ["certificates", "certificaterequests", "issuers", "clusterissuers"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: ["extensions"]
-  resources: ["ingresses"]
-  verbs: ["get", "list", "watch"]
-# We require these rules to support users with the OwnerReferencesPermissionEnforcement
-# admission controller enabled:
-# https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
-- apiGroups: ["extensions"]
-  resources: ["ingresses/finalizers"]
-  verbs: ["update"]
-- apiGroups: [""]
-  resources: ["events"]
-  verbs: ["create", "patch"]
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: cert-manager-controller-issuers
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cert-manager-controller-issuers
-subjects:
-- name: cert-manager
-  namespace: "cert-manager"
-  kind: ServiceAccount
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: cert-manager-controller-clusterissuers
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cert-manager-controller-clusterissuers
-subjects:
-- name: cert-manager
-  namespace: "cert-manager"
-  kind: ServiceAccount
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: cert-manager-controller-certificates
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cert-manager-controller-certificates
-subjects:
-- name: cert-manager
-  namespace: "cert-manager"
-  kind: ServiceAccount
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: cert-manager-controller-orders
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cert-manager-controller-orders
-subjects:
-- name: cert-manager
-  namespace: "cert-manager"
-  kind: ServiceAccount
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: cert-manager-controller-challenges
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cert-manager-controller-challenges
-subjects:
-- name: cert-manager
-  namespace: "cert-manager"
-  kind: ServiceAccount
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: cert-manager-controller-ingress-shim
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cert-manager-controller-ingress-shim
-subjects:
-- name: cert-manager
-  namespace: "cert-manager"
-  kind: ServiceAccount
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: cert-manager-view
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-    rbac.authorization.k8s.io/aggregate-to-view: "true"
-    rbac.authorization.k8s.io/aggregate-to-edit: "true"
-    rbac.authorization.k8s.io/aggregate-to-admin: "true"
-rules:
-- apiGroups: ["cert-manager.io"]
-  resources: ["certificates", "certificaterequests", "issuers"]
-  verbs: ["get", "list", "watch"]
-
----
-
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: cert-manager-edit
-  labels:
-    app: cert-manager
-    app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
-    rbac.authorization.k8s.io/aggregate-to-edit: "true"
-    rbac.authorization.k8s.io/aggregate-to-admin: "true"
-rules:
-- apiGroups: ["cert-manager.io"]
-  resources: ["certificates", "certificaterequests", "issuers"]
-  verbs: ["create", "delete", "deletecollection", "patch", "update"]
-
+  - kind: ServiceAccount
+    name: cert-manager-cainjector
+    namespace: cert-manager
 ---
 # Source: cert-manager/templates/webhook-rbac.yaml
 ### Webhook ###
@@ -6184,6 +5757,430 @@ rules:
   verbs:
   - create
 ---
+# Source: cert-manager/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: cert-manager:leaderelection
+  namespace: kube-system
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+rules:
+  # Used for leader election by the controller
+  # TODO: refine the permission to *just* the leader election configmap
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "create", "update", "patch"]
+
+---
+
+# grant cert-manager permission to manage the leaderelection configmap in the
+# leader election namespace
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: cert-manager:leaderelection
+  namespace: kube-system
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cert-manager:leaderelection
+subjects:
+  - apiGroup: ""
+    kind: ServiceAccount
+    name: cert-manager
+    namespace: cert-manager
+
+---
+
+# Issuer controller role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cert-manager-controller-issuers
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+rules:
+  - apiGroups: ["cert-manager.io"]
+    resources: ["issuers", "issuers/status"]
+    verbs: ["update"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["issuers"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+
+---
+
+# ClusterIssuer controller role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cert-manager-controller-clusterissuers
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+rules:
+  - apiGroups: ["cert-manager.io"]
+    resources: ["clusterissuers", "clusterissuers/status"]
+    verbs: ["update"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["clusterissuers"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+
+---
+
+# Certificates controller role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cert-manager-controller-certificates
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+rules:
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates", "certificates/status", "certificaterequests", "certificaterequests/status"]
+    verbs: ["update"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates", "certificaterequests", "clusterissuers", "issuers"]
+    verbs: ["get", "list", "watch"]
+  # We require these rules to support users with the OwnerReferencesPermissionEnforcement
+  # admission controller enabled:
+  # https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates/finalizers", "certificaterequests/finalizers"]
+    verbs: ["update"]
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["orders"]
+    verbs: ["create", "delete", "get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+
+---
+
+# Orders controller role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cert-manager-controller-orders
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+rules:
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["orders", "orders/status"]
+    verbs: ["update"]
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["orders", "challenges"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["clusterissuers", "issuers"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["challenges"]
+    verbs: ["create", "delete"]
+  # We require these rules to support users with the OwnerReferencesPermissionEnforcement
+  # admission controller enabled:
+  # https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["orders/finalizers"]
+    verbs: ["update"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+
+---
+
+# Challenges controller role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cert-manager-controller-challenges
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+rules:
+  # Use to update challenge resource status
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["challenges", "challenges/status"]
+    verbs: ["update"]
+  # Used to watch challenge resources
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["challenges"]
+    verbs: ["get", "list", "watch"]
+  # Used to watch challenges, issuer and clusterissuer resources
+  - apiGroups: ["cert-manager.io"]
+    resources: ["issuers", "clusterissuers"]
+    verbs: ["get", "list", "watch"]
+  # Need to be able to retrieve ACME account private key to complete challenges
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+  # Used to create events
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+  # HTTP01 rules
+  - apiGroups: [""]
+    resources: ["pods", "services"]
+    verbs: ["get", "list", "watch", "create", "delete"]
+  - apiGroups: ["extensions"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "watch", "create", "delete", "update"]
+  # We require these rules to support users with the OwnerReferencesPermissionEnforcement
+  # admission controller enabled:
+  # https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
+  - apiGroups: ["acme.cert-manager.io"]
+    resources: ["challenges/finalizers"]
+    verbs: ["update"]
+  # DNS01 rules (duplicated above)
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "watch"]
+
+---
+
+# ingress-shim controller role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cert-manager-controller-ingress-shim
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+rules:
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates", "certificaterequests"]
+    verbs: ["create", "update", "delete"]
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates", "certificaterequests", "issuers", "clusterissuers"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["extensions"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "watch"]
+  # We require these rules to support users with the OwnerReferencesPermissionEnforcement
+  # admission controller enabled:
+  # https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
+  - apiGroups: ["extensions"]
+    resources: ["ingresses/finalizers"]
+    verbs: ["update"]
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-controller-issuers
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-controller-issuers
+subjects:
+  - name: cert-manager
+    namespace: "cert-manager"
+    kind: ServiceAccount
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-controller-clusterissuers
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-controller-clusterissuers
+subjects:
+  - name: cert-manager
+    namespace: "cert-manager"
+    kind: ServiceAccount
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-controller-certificates
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-controller-certificates
+subjects:
+  - name: cert-manager
+    namespace: "cert-manager"
+    kind: ServiceAccount
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-controller-orders
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-controller-orders
+subjects:
+  - name: cert-manager
+    namespace: "cert-manager"
+    kind: ServiceAccount
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-controller-challenges
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-controller-challenges
+subjects:
+  - name: cert-manager
+    namespace: "cert-manager"
+    kind: ServiceAccount
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-controller-ingress-shim
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-controller-ingress-shim
+subjects:
+  - name: cert-manager
+    namespace: "cert-manager"
+    kind: ServiceAccount
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-manager-view
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates", "certificaterequests", "issuers"]
+    verbs: ["get", "list", "watch"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-manager-edit
+  labels:
+    app: cert-manager
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+  - apiGroups: ["cert-manager.io"]
+    resources: ["certificates", "certificaterequests", "issuers"]
+    verbs: ["create", "delete", "deletecollection", "patch", "update"]
+
+---
 # Source: cert-manager/templates/service.yaml
 
 apiVersion: v1
@@ -6200,9 +6197,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - protocol: TCP
-    port: 9402
-    targetPort: 9402
+    - protocol: TCP
+      port: 9402
+      targetPort: 9402
   selector:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/instance: cert-manager
@@ -6264,20 +6261,20 @@ spec:
     spec:
       serviceAccountName: cert-manager-cainjector
       containers:
-      - name: cert-manager
-        image: "quay.io/jetstack/cert-manager-cainjector:v0.13.1"
-        imagePullPolicy: IfNotPresent
-        args:
-        - --v=2
-        - --leader-election-namespace=kube-system
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        resources:
-          {}
-
+        - name: cert-manager
+          image: "quay.io/jetstack/cert-manager-cainjector:v0.13.1"
+          imagePullPolicy: IfNotPresent
+          args:
+          - --v=2
+          - --leader-election-namespace=kube-system
+          env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          resources:
+            {}
+            
 ---
 # Source: cert-manager/templates/deployment.yaml
 apiVersion: apps/v1
@@ -6314,31 +6311,31 @@ spec:
     spec:
       serviceAccountName: cert-manager
       containers:
-      - name: cert-manager
-        image: "quay.io/jetstack/cert-manager-controller:v0.13.1"
-        imagePullPolicy: IfNotPresent
-        args:
-        - --v=2
-        - --cluster-resource-namespace=$(POD_NAMESPACE)
-        - --leader-election-namespace=kube-system
-        - --webhook-namespace=$(POD_NAMESPACE)
-        - --webhook-ca-secret=cert-manager-webhook-ca
-        - --webhook-serving-secret=cert-manager-webhook-tls
-        - --webhook-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc
-        - --max-concurrent-challenges=20
-        ports:
-        - containerPort: 9402
-          protocol: TCP
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        resources:
-          requests:
-            cpu: 10m
-            memory: 32Mi
-
+        - name: cert-manager
+          image: "quay.io/jetstack/cert-manager-controller:v0.13.1"
+          imagePullPolicy: IfNotPresent
+          args:
+          - --v=2
+          - --cluster-resource-namespace=$(POD_NAMESPACE)
+          - --leader-election-namespace=kube-system
+          - --webhook-namespace=$(POD_NAMESPACE)
+          - --webhook-ca-secret=cert-manager-webhook-ca
+          - --webhook-serving-secret=cert-manager-webhook-tls
+          - --webhook-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc
+          - --max-concurrent-challenges=20
+          ports:
+          - containerPort: 9402
+            protocol: TCP
+          env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            
 
 ---
 # Source: cert-manager/templates/webhook-deployment.yaml
@@ -6373,35 +6370,35 @@ spec:
     spec:
       serviceAccountName: cert-manager-webhook
       containers:
-      - name: cert-manager
-        image: "quay.io/jetstack/cert-manager-webhook:v0.13.1"
-        imagePullPolicy: IfNotPresent
-        args:
-        - --v=2
-        - --secure-port=10250
-        - --tls-cert-file=/certs/tls.crt
-        - --tls-private-key-file=/certs/tls.key
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: 6080
-            scheme: HTTP
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 6080
-            scheme: HTTP
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        resources:
-          {}
-
-        volumeMounts:
-        - name: certs
-          mountPath: /certs
+        - name: cert-manager
+          image: "quay.io/jetstack/cert-manager-webhook:v0.13.1"
+          imagePullPolicy: IfNotPresent
+          args:
+          - --v=2
+          - --secure-port=10250
+          - --tls-cert-file=/certs/tls.crt
+          - --tls-private-key-file=/certs/tls.key
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 6080
+              scheme: HTTP
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 6080
+              scheme: HTTP
+          env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          resources:
+            {}
+            
+          volumeMounts:
+          - name: certs
+            mountPath: /certs
       volumes:
       - name: certs
         secret:
@@ -6421,25 +6418,64 @@ metadata:
   annotations:
     cert-manager.io/inject-ca-from-secret: "cert-manager/cert-manager-webhook-tls"
 webhooks:
-- name: webhook.cert-manager.io
-  rules:
-  - apiGroups:
-    - "cert-manager.io"
-    - "acme.cert-manager.io"
-    apiVersions:
-    - v1alpha2
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - "*/*"
-  failurePolicy: Fail
-  sideEffects: None
-  clientConfig:
-    service:
-      name: cert-manager-webhook
-      namespace: "cert-manager"
-      path: /mutate
+  - name: webhook.cert-manager.io
+    rules:
+      - apiGroups:
+          - "cert-manager.io"
+          - "acme.cert-manager.io"
+        apiVersions:
+          - v1alpha2
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - "*/*"
+    failurePolicy: Fail
+    sideEffects: None
+    clientConfig:
+      service:
+        name: cert-manager-webhook
+        namespace: "cert-manager"
+        path: /mutate
+---
+# Source: cert-manager/templates/cainjector-psp-clusterrole.yaml
+
+
+---
+# Source: cert-manager/templates/cainjector-psp-clusterrolebinding.yaml
+
+
+---
+# Source: cert-manager/templates/cainjector-psp.yaml
+
+---
+# Source: cert-manager/templates/psp-clusterrole.yaml
+
+
+---
+# Source: cert-manager/templates/psp-clusterrolebinding.yaml
+
+
+---
+# Source: cert-manager/templates/psp.yaml
+
+
+---
+# Source: cert-manager/templates/servicemonitor.yaml
+
+
+---
+# Source: cert-manager/templates/webhook-psp-clusterrole.yaml
+ 
+
+---
+# Source: cert-manager/templates/webhook-psp-clusterrolebinding.yaml
+
+
+---
+# Source: cert-manager/templates/webhook-psp.yaml
+
+
 ---
 # Source: cert-manager/templates/webhook-validating-webhook.yaml
 apiVersion: admissionregistration.k8s.io/v1beta1
@@ -6455,32 +6491,32 @@ metadata:
   annotations:
     cert-manager.io/inject-ca-from-secret: "cert-manager/cert-manager-webhook-tls"
 webhooks:
-- name: webhook.cert-manager.io
-  namespaceSelector:
-    matchExpressions:
-    - key: "cert-manager.io/disable-validation"
-      operator: "NotIn"
-      values:
-      - "true"
-    - key: "name"
-      operator: "NotIn"
-      values:
-      - cert-manager
-  rules:
-  - apiGroups:
-    - "cert-manager.io"
-    - "acme.cert-manager.io"
-    apiVersions:
-    - v1alpha2
-    operations:
-    - CREATE
-    - UPDATE
-    resources:
-    - "*/*"
-  failurePolicy: Fail
-  sideEffects: None
-  clientConfig:
-    service:
-      name: cert-manager-webhook
-      namespace: "cert-manager"
-      path: /mutate
+  - name: webhook.cert-manager.io
+    namespaceSelector:
+      matchExpressions:
+      - key: "cert-manager.io/disable-validation"
+        operator: "NotIn"
+        values:
+        - "true"
+      - key: "name"
+        operator: "NotIn"
+        values:
+        - cert-manager
+    rules:
+      - apiGroups:
+          - "cert-manager.io"
+          - "acme.cert-manager.io"
+        apiVersions:
+          - v1alpha2
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - "*/*"
+    failurePolicy: Fail
+    sideEffects: None
+    clientConfig:
+      service:
+        name: cert-manager-webhook
+        namespace: "cert-manager"
+        path: /mutate
