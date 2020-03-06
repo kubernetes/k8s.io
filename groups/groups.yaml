@@ -59,14 +59,13 @@ groups:
     settings:
       ReconcileMembers: "true"
     owners:
-      - bphilips@redhat.com
-      - brandon@ifup.org
       - cjcullen@google.com
       - joelsmith@redhat.com
-      - jonathan.pulsifer@shopify.com
+      - jordan@liggitt.net
       - lhinds@redhat.com
       - liggitt@google.com
-      - stclair@google.com
+      - mhausler@amazon.com
+      - tallclair@google.com
     members:
       - argoprod@us.ibm.com
       - aws-k8s-embargo-notification@amazon.com
@@ -1010,14 +1009,12 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - bphilips@redhat.com
-      - brandon@ifup.org
       - cjcullen@google.com
       - joelsmith@redhat.com
-      - jonathan.pulsifer@shopify.com
       - jordan@liggitt.net
       - lhinds@redhat.com
       - liggitt@google.com
+      - mhausler@amazon.com
       - tallclair@google.com
 
   - email-id: security-release-team@kubernetes.io
@@ -1042,14 +1039,12 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "false"
     owners:
-      - bphilips@redhat.com
-      - brandon@ifup.org
       - cjcullen@google.com
       - joelsmith@redhat.com
-      - jonathan.pulsifer@shopify.com
       - jordan@liggitt.net
       - lhinds@redhat.com
       - liggitt@google.com
+      - mhausler@amazon.com
       - tallclair@google.com
 
   - email-id: steering-private@kubernetes.io
