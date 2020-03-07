@@ -1,3 +1,18 @@
+- name: cluster-api-kubeadm-controller-amd64
+  dmap:
+    "sha256:51e5a17ac02cf8f2f9ce0bd0892da6fc52fa15d0a9d4ffd6a623d0e20d2eaacb": ["v0.1.0"]
+- name: cluster-api-kubeadm-controller-arm
+  dmap:
+    "sha256:3f53bf8a424f1d70ee58c1b94930ce892c9bad7874cd1a2d8ab4598a60545005": ["v0.1.0"]
+- name: cluster-api-kubeadm-controller-arm64
+  dmap:
+    "sha256:b3745c214ea8ca87339b58e898bcaaedeffc05015d22c5febdf50017a96626e8": ["v0.1.0"]
+- name: cluster-api-kubeadm-controller-ppc64le
+  dmap:
+    "sha256:801beba208ba51f1b8c5be64bb6c5c99e87449eef3544d4e082ac4e2044a148e": ["v0.1.0"]
+- name: cluster-api-kubeadm-controller-s390x
+  dmap:
+    "sha256:90d53f71722e6b3a1410747c261fc9a23fc6c4a5d02f67852cdec602dc43ced0": ["v0.1.0"]
 - name: cluster-api-kubeadm-controller
   dmap:
     "sha256:c3ee2e114b6bf81d0cf0686bc80ba3281d70782ffd56b2ae8ef281aec319530b": ["v0.1.0"]
