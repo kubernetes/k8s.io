@@ -1,3 +1,4 @@
 - name: external-dns
   dmap:
+    "sha256:403b9b0a8a7428c0d3fe57fe0aebf7ac8a69467d2660c2384a7463c574f3dbb2": ["v0.5.18"]
     "sha256:5f50d2660a41ed48bf263a85b92822d6c95a7973425f9e07f3535314ad05a168": ["v0.6.0"]
