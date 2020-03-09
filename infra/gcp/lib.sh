@@ -327,23 +327,6 @@ function empower_gcs_admins() {
     empower_group_to_admin_gcs_bucket "${GCS_ADMINS}" "${bucket}"
 }
 
-# Grant GCR write privileges to a group
-# $1: The GCP project
-# $2: The googlegroups group
-# $3: The GCR region (optional)
-function empower_group_to_write_gcr() {
-    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_write_gcr(project, group_name, [region]) requires 2 or 3 arguments" >&2
-        return 1
-    fi
-    project="$1"
-    group="$2"
-    region="${3:-}"
-    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
-
-    empower_group_to_write_gcs_bucket "${group}" "${bucket}"
-}
-
 # Grant Cloud Run privileges to a group.
 # $1: The GCP project
 # $2: The googlegroups group
@@ -396,6 +379,23 @@ function empower_artifact_promoter() {
     fi
 
     empower_service_account_to_artifacts "${acct}" "${project}" "${region}"
+}
+
+# Grant GCR write privileges to a group
+# $1: The GCP project
+# $2: The googlegroups group email
+# $3: The GCR region (optional)
+function empower_group_to_write_gcr() {
+    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group_to_write_gcr(project, group_name, [region]) requires 2 or 3 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    group="$2"
+    region="${3:-}"
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+
+    empower_group_to_write_gcs_bucket "${group}" "${bucket}"
 }
 
 # Grant artifact privileges to a service account in a project/region.
