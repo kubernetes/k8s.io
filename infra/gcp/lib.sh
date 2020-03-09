@@ -331,9 +331,9 @@ function empower_gcs_admins() {
 # $1: The GCP project
 # $2: The googlegroups group
 # $3: The GCR region (optional)
-function empower_group_to_gcr() {
+function empower_group_to_write_gcr() {
     if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_gcr(project, group_name, [region]) requires 2 or 3 arguments" >&2
+        echo "empower_group_to_write_gcr(project, group_name, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
     project="$1"

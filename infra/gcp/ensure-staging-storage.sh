@@ -129,7 +129,7 @@ for REPO; do
 
     # Enable GCR writers
     color 6 "Empowering ${WRITERS} to GCR"
-    empower_group_to_gcr "${PROJECT}" "${WRITERS}"
+    empower_group_to_write_gcr "${PROJECT}" "${WRITERS}"
 
     # Every project gets some GCS buckets
 

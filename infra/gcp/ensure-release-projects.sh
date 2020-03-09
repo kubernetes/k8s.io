@@ -82,7 +82,7 @@ for PROJECT; do
     # Enable GCR writers
     for group in ${ADMINS} ${WRITERS}; do
         color 6 "Empowering ${group} to GCR"
-        empower_group_to_gcr "${PROJECT}" "${group}"
+        empower_group_to_write_gcr "${PROJECT}" "${group}"
     done
 
     # Every project gets some GCS buckets
