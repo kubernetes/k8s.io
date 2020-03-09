@@ -412,13 +412,7 @@ function empower_service_account_to_artifacts () {
     region="${3:-}"
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    # Grant admins access to do admin stuff.
-    gsutil iam ch \
-        "serviceAccount:${acct}:objectAdmin" \
-        "${bucket}"
-    gsutil iam ch \
-        "serviceAccount:${acct}:legacyBucketOwner" \
-        "${bucket}"
+    empower_svcacct_to_admin_gcs_bucket "${group}" "${bucket}"
 }
 
 # Ensure the auditor service account exists and has the ability to write logs and fire alerts to Stackdriver Error Reporting.
