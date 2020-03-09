@@ -51,7 +51,7 @@ function empower_group_to_fake_prod() {
     color 6 "Empowering $group for GCR in $project"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        empower_group_to_write_gcr "${project}" "${group}" "${r}"
+        empower_group_to_write_gcr "${group}" "${project}" "${r}"
     done
 }
 
