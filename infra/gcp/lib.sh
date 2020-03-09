@@ -378,7 +378,7 @@ function empower_artifact_promoter() {
             --display-name="k8s-infra container image promoter"
     fi
 
-    empower_service_account_to_artifacts "${acct}" "${project}" "${region}"
+    empower_svcacct_to_admin_gcr "${acct}" "${project}" "${region}"
 }
 
 # Grant GCR write privileges to a group
@@ -398,13 +398,13 @@ function empower_group_to_write_gcr() {
     empower_group_to_write_gcs_bucket "${group}" "${bucket}"
 }
 
-# Grant artifact privileges to a service account in a project/region.
+# Grant GCR admin privileges to a service account in a project/region.
 # $1: The GCP service account email
 # $2: The GCP project
 # $3: The GCR region (optional)
-function empower_service_account_to_artifacts () {
+function empower_svcacct_to_admin_gcr () {
     if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_service_account_to_artifacts(acct, project, [region]) requires 2 or 3 arguments" >&2
+        echo "empower_svcacct_to_admin_gcr(acct, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
     acct="$1"
