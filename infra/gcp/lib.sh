@@ -431,42 +431,98 @@ function empower_group_to_gcr() {
     empower_group_to_write_gcs_bucket "${group}" "${bucket}"
 }
 
-# Grant write privileges on a bucket to a group
-# $1: The googlegroups group
+# Grant write privileges on a bucket to a principal
+# $1: The principal (group:<g> or serviceAccount:<s> or ...)
 # $2: The bucket
-function empower_group_to_write_gcs_bucket() {
+function empower_principal_to_write_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_write_gcs_bucket(group_name, bucket) requires 2 arguments" >&2
+        echo "empower_principal_to_write_gcs_bucket(principal, bucket) requires 2 arguments" >&2
         return 1
     fi
-    group="$1"
+    principal="$1"
     bucket="$2"
 
     gsutil iam ch \
-        "group:${group}:objectAdmin" \
+        "${principal}:objectAdmin" \
         "${bucket}"
     gsutil iam ch \
-        "group:${group}:legacyBucketReader" \
+        "${principal}:legacyBucketReader" \
         "${bucket}"
 }
 
-# Grant admin privileges on a bucket to a group
-# $1: The googlegroups group
+# Grant admin privileges on a bucket to a principal
+# $1: The principal (group:<g> or serviceAccount:<s> or ...)
 # $2: The bucket
-function empower_group_to_admin_gcs_bucket() {
+function empower_principal_to_admin_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_admin_gcs_bucket(group_name, bucket) requires 2 arguments" >&2
+        echo "empower_principal_to_admin_gcs_bucket(principal, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    principal="$1"
+    bucket="$2"
+
+    gsutil iam ch \
+        "${principal}:objectAdmin" \
+        "${bucket}"
+    gsutil iam ch \
+        "${principal}:legacyBucketOwner" \
+        "${bucket}"
+}
+
+# Grant write privileges on a bucket to a group
+# $1: The googlegroups group email
+# $2: The bucket
+function empower_group_to_write_gcs_bucket() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group_to_write_gcs_bucket(group_email, bucket) requires 2 arguments" >&2
         return 1
     fi
     group="$1"
     bucket="$2"
 
-    gsutil iam ch \
-        "group:${group}:objectAdmin" \
-        "${bucket}"
-    gsutil iam ch \
-        "group:${group}:legacyBucketOwner" \
-        "${bucket}"
+    empower_principal_to_write_gcs_bucket "group:${group}" "${bucket}"
+}
+
+# Grant admin privileges on a bucket to a group
+# $1: The googlegroups group email
+# $2: The bucket
+function empower_group_to_admin_gcs_bucket() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group_to_admin_gcs_bucket(group_email, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    group="$1"
+    bucket="$2"
+
+    empower_principal_to_admin_gcs_bucket "group:${group}" "${bucket}"
+}
+
+# Grant write privileges on a bucket to a service account
+# $1: The service account email
+# $2: The bucket
+function empower_svcacct_to_write_gcs_bucket() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_svcacct_to_write_gcs_bucket(svcacct_email, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    svcacct="$1"
+    bucket="$2"
+
+    empower_principal_to_write_gcs_bucket "serviceAccount:${svcacct}" "${bucket}"
+}
+
+# Grant admin privileges on a bucket to a service account
+# $1: The service account email
+# $2: The bucket
+function empower_svcacct_to_admin_gcs_bucket() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_svcacct_to_admin_gcs_bucket(svcacct_email, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    svcacct="$1"
+    bucket="$2"
+
+    empower_principal_to_admin_gcs_bucket "serviceAccount:${svcacct}" "${bucket}"
 }
 
 # Grant Cloud Run privileges to a group.
