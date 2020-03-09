@@ -15,9 +15,11 @@
 registries:
 - name: gcr.io/k8s-staging-kubernetes
   src: true
-- name: us.gcr.io/k8s-artifacts-prod
+# TODO(justaugustus): Change these values to {us,eu,asia}.gcr.io/k8s-artifacts-prod (ROOT level)
+#                     after releng image promotion testing is complete AND BEFORE the vanity domain flip.
+- name: us.gcr.io/k8s-artifacts-prod/releng-vdf-temp-prod
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: eu.gcr.io/k8s-artifacts-prod
+- name: eu.gcr.io/k8s-artifacts-prod/releng-vdf-temp-prod
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: asia.gcr.io/k8s-artifacts-prod
+- name: asia.gcr.io/k8s-artifacts-prod/releng-vdf-temp-prod
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
