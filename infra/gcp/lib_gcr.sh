@@ -149,3 +149,22 @@ function empower_svcacct_to_admin_gcr () {
 
     empower_svcacct_to_admin_gcs_bucket "${group}" "${bucket}"
 }
+
+# Grant the Prow service account access to the same perms as the given GCP
+# service account (for Workload Identity).
+# $1: The Prow service account being empowered
+# $2: The GCP service account to draw powers from
+function empower_prowacct_for_workload_identity() {
+    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_prowacct_for_workload_identity(prow_acct, gcp_acct) requires 2 arguments" >&2
+        return 1
+    fi
+
+    prow_acct="$1"
+    gcp_acct="$2"
+
+    gcloud iam service-accounts add-iam-policy-binding \
+        --role roles/iam.workloadIdentityUser \
+        --member "serviceAccount:${prow_acct}" \
+        "${gcp_acct}"
+}
