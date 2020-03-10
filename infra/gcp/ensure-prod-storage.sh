@@ -51,7 +51,7 @@ function empower_group_to_fake_prod() {
     color 6 "Empowering $group for GCR in $project"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
-        empower_group_to_gcr "${project}" "${group}" "${r}"
+        empower_group_to_write_gcr "${group}" "${project}" "${r}"
     done
 }
 
@@ -180,7 +180,7 @@ empower_group_to_fake_prod \
 
 # Special case: grant the image promoter test service account access to their
 # staging, to allow e2e tests to run as that account, instead of yet another.
-empower_service_account_to_artifacts \
+empower_svcacct_to_admin_gcr \
     $(svc_acct_email "${PROMOTER_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
     "${PROMOTER_TEST_STAGING_PROJECT}"
 
