@@ -76,6 +76,7 @@ GCR_AUDIT_TEST_PROD_PROJECT="k8s-gcr-audit-test-prod"
 
 # This is for testing the release tools.
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
+RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
 ALL_PROD_PROJECTS=(
     "${PROD_PROJECT}"
@@ -199,6 +200,13 @@ empower_group_to_fake_prod \
 empower_group_to_fake_prod \
     "${RELEASE_TESTPROD_PROJECT}" \
     "k8s-infra-staging-release-test@kubernetes.io"
+
+# Special case: grant the k8s-staging-kubernetes Cloud Build account access to
+# write to the primary test prod GCS bucket. This currently is a requirement
+# for anago.
+empower_svcacct_to_write_gcs_bucket \
+    "${RELEASE_STAGING_CLOUDBUILD_ACCOUNT}" \
+    "${RELEASE_TESTPROD_PROJECT}"
 
 # Special case: don't use retention on cip-test buckets
 gsutil retention clear gs://k8s-cip-test-prod

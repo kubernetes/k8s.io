@@ -157,6 +157,10 @@ for REPO; do
       empower_group_to_write_gcs_bucket "${WRITERS}" "${BUCKET}"
     done
 
+    # Enable KMS APIs
+    color 6 "Enabling the KMS API"
+    enable_api "${PROJECT}" cloudkms.googleapis.com
+
     # Enable GCB and Prow to build and push images.
 
     # Enable GCB APIs
@@ -192,10 +196,6 @@ for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
     #                     k8s-staging-release-test GCP project have been
     #                     transferred over.
     if [[ $PROJECT == "k8s-staging-release-test" ]]; then
-        # Enable KMS APIs
-        color 6 "Enabling the KMS API"
-        enable_api "${PROJECT}" cloudkms.googleapis.com
-
         # Let Release Admins administer KMS.
         color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"
         empower_group_for_kms "${PROJECT}" "${RELEASE_ADMINS}"
