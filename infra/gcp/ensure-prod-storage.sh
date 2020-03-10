@@ -206,7 +206,7 @@ empower_group_to_fake_prod \
 # for anago.
 empower_svcacct_to_write_gcs_bucket \
     "${RELEASE_STAGING_CLOUDBUILD_ACCOUNT}" \
-    "${RELEASE_TESTPROD_PROJECT}"
+    "gs://${RELEASE_TESTPROD_PROJECT}"
 
 # Special case: don't use retention on cip-test buckets
 gsutil retention clear gs://k8s-cip-test-prod

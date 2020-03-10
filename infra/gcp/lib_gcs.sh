@@ -23,7 +23,7 @@
 
 # Ensure that a bucket exists
 # $1: The GCP project
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function _ensure_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "_ensure_gcs_bucket(project, bucket) requires 2 arguments" >&2
@@ -41,7 +41,7 @@ function _ensure_gcs_bucket() {
 
 # Ensure the bucket exists and is world-readable
 # $1: The GCP project
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function ensure_public_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "ensure_public_gcs_bucket(project, bucket) requires 2 arguments" >&2
@@ -56,7 +56,7 @@ function ensure_public_gcs_bucket() {
 
 # Ensure the bucket exists and is NOT world-accessible
 # $1: The GCP project
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function ensure_private_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "ensure_private_gcs_bucket(project, bucket) requires 2 arguments" >&2
@@ -70,7 +70,7 @@ function ensure_private_gcs_bucket() {
 }
 
 # Sets the web policy on the bucket, including a default index.html page
-# $1: The bucket
+# $1: The bucket (e.g. gs://bucket-name)
 function ensure_gcs_web_policy() {
     if [ $# -lt 1 -o -z "$1" ]; then
         echo "ensure_gcs_web_policy(bucket) requires 1 argument" >&2
@@ -82,7 +82,7 @@ function ensure_gcs_web_policy() {
 }
 
 # Copies any static content into the bucket
-# $1: The bucket
+# $1: The bucket (e.g. gs://bucket-name)
 # $2: The source directory
 function upload_gcs_static_content() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
@@ -97,7 +97,7 @@ function upload_gcs_static_content() {
 }
 
 # Ensure the bucket retention policy is set
-# $1: The GCS bucket
+# $1: The GCS bucket (e.g. gs://bucket-name)
 # $2: The retention
 function ensure_gcs_bucket_retention() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
@@ -111,7 +111,7 @@ function ensure_gcs_bucket_retention() {
 }
 
 # Ensure the bucket auto-deletion policy is set
-# $1: The GCS bucket
+# $1: The GCS bucket (e.g. gs://bucket-name)
 # $2: The auto-deletion policy
 function ensure_gcs_bucket_auto_deletion() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
@@ -139,7 +139,7 @@ function ensure_gcs_bucket_auto_deletion() {
 
 # Grant write privileges on a bucket to a principal
 # $1: The principal (group:<g> or serviceAccount:<s> or ...)
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function _empower_principal_to_write_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "_empower_principal_to_write_gcs_bucket(principal, bucket) requires 2 arguments" >&2
@@ -158,7 +158,7 @@ function _empower_principal_to_write_gcs_bucket() {
 
 # Grant admin privileges on a bucket to a principal
 # $1: The principal (group:<g> or serviceAccount:<s> or ...)
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function _empower_principal_to_admin_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "_empower_principal_to_admin_gcs_bucket(principal, bucket) requires 2 arguments" >&2
@@ -177,7 +177,7 @@ function _empower_principal_to_admin_gcs_bucket() {
 
 # Grant write privileges on a bucket to a group
 # $1: The googlegroups group email
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function empower_group_to_write_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "empower_group_to_write_gcs_bucket(group_email, bucket) requires 2 arguments" >&2
@@ -191,7 +191,7 @@ function empower_group_to_write_gcs_bucket() {
 
 # Grant admin privileges on a bucket to a group
 # $1: The googlegroups group email
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function empower_group_to_admin_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "empower_group_to_admin_gcs_bucket(group_email, bucket) requires 2 arguments" >&2
@@ -205,7 +205,7 @@ function empower_group_to_admin_gcs_bucket() {
 
 # Grant write privileges on a bucket to a service account
 # $1: The service account email
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function empower_svcacct_to_write_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "empower_svcacct_to_write_gcs_bucket(svcacct_email, bucket) requires 2 arguments" >&2
@@ -219,7 +219,7 @@ function empower_svcacct_to_write_gcs_bucket() {
 
 # Grant admin privileges on a bucket to a service account
 # $1: The service account email
-# $2: The bucket
+# $2: The bucket (e.g. gs://bucket-name)
 function empower_svcacct_to_admin_gcs_bucket() {
     if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
         echo "empower_svcacct_to_admin_gcs_bucket(svcacct_email, bucket) requires 2 arguments" >&2
