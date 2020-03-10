@@ -250,6 +250,10 @@ cluster-api.sigs:
 release-0-1.cluster-api.sigs:
   type: CNAME
   value: release-0-1--kubernetes-sigs-cluster-api.netlify.com.
+# https://github.com/kubernetes-sigs/cluster-api release-0.2 docs (@dwat, @jdetiber, @justinsb)
+release-0-2.cluster-api.sigs:
+  type: CNAME
+  value: release-0-2--kubernetes-sigs-cluster-api.netlify.com.
 # https://github.com/kubernetes-sigs/cluster-api development docs (@dwat, @jdetiber, @justinsb)
 master.cluster-api.sigs:
   type: CNAME
