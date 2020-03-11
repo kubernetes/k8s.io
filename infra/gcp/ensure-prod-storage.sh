@@ -221,8 +221,10 @@ empower_artifact_auditor "${PROD_PROJECT}"
 empower_artifact_auditor_invoker "${PROD_PROJECT}"
 
 # Special case: empower Prow account to have access to GCR for Workload Identity.
-empower_prowacct_for_workload_identity \
-    "k8s-prow-builds.svc.id.googtest-pods/k8s-artifacts-prod" \
+empower_ksa_to_svcacct \
+    "k8s-prow-builds" \
+    "test-pods" \
+    "${PROD_PROJECT}" \
     $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")
 
 color 6 "Done"
