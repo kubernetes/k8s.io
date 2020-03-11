@@ -130,7 +130,7 @@ function empower_svcacct_to_write_gcr () {
     region="${3:-}"
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    empower_svcacct_to_write_gcs_bucket "${group}" "${bucket}"
+    empower_svcacct_to_write_gcs_bucket "${acct}" "${bucket}"
 }
 
 # Grant GCR admin privileges to a service account in a project/region.
@@ -147,5 +147,5 @@ function empower_svcacct_to_admin_gcr () {
     region="${3:-}"
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    empower_svcacct_to_admin_gcs_bucket "${group}" "${bucket}"
+    empower_svcacct_to_admin_gcs_bucket "${acct}" "${bucket}"
 }
