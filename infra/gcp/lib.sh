@@ -439,24 +439,28 @@ function ensure_dns_zone() {
 # the given GCP service account for the given GKE Project's Kubernetes
 # namespace; this is also called Workload Identity.
 #
-# $1: The GKE project wherein the KSA resides; used to construct the KSA.
-# $2: The K8s namespace; used to construct the KSA.
-# $3: The GCP project that owns the GCP service account; used to construct the KSA.
-# $4: The GCP service account to draw powers from
+# $1: The service account scoped to a (1) GKE project, (2) K8s namespace, and
+#     (3) K8s service account. The format is currently
+#
+#       "${gke_project}.svc.id.goog[${k8s_namespace}/${k8s_svcacct}]"
+#
+#     This is used to scope the grant of permissions to the combination of the
+#     above 3 variables
+# $2: The GCP project that owns the GCP service account.
+# $3: The GCP service account to draw powers from.
 function empower_ksa_to_svcacct() {
-    if [ ! $# -eq 4 -o -z "$1" -o -z "$2" -o -z "$3" -o -z "$4" ]; then
-        echo "empower_ksa_to_svcacct(gke_project, k8s_namespace, gcp_project, gcp_scvacct) requires 4 arguments" >&2
+    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "empower_ksa_to_svcacct(ksa_scope, gcp_project, gcp_scvacct) requires 3 arguments" >&2
         return 1
     fi
 
-    gke_project="$1"
-    k8s_namespace="$2"
-    gcp_project="$3"
-    gcp_svcacct="$4"
+    ksa_scope="$1"
+    gcp_project="$2"
+    gcp_svcacct="$3"
 
     gcloud iam service-accounts add-iam-policy-binding \
         --role roles/iam.workloadIdentityUser \
-        --member "serviceAccount:${gke_project}.svc.id.goog[${k8s_namespace}/${gcp_project}]" \
+        --member "serviceAccount:${ksa_scope}" \
         "${gcp_svcacct}" \
-        --project="${project}"
+        --project="${gcp_project}"
 }
