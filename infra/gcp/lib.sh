@@ -434,3 +434,33 @@ function ensure_dns_zone() {
         --dns-name "${dns_name}"
   fi
 }
+
+# Allow a Kubernetes service account (KSA) the ability to authenticate as the as
+# the given GCP service account for the given GKE Project's Kubernetes
+# namespace; this is also called Workload Identity.
+#
+# $1: The service account scoped to a (1) GKE project, (2) K8s namespace, and
+#     (3) K8s service account. The format is currently
+#
+#       "${gke_project}.svc.id.goog[${k8s_namespace}/${k8s_svcacct}]"
+#
+#     This is used to scope the grant of permissions to the combination of the
+#     above 3 variables
+# $2: The GCP project that owns the GCP service account.
+# $3: The GCP service account to draw powers from.
+function empower_ksa_to_svcacct() {
+    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "empower_ksa_to_svcacct(ksa_scope, gcp_project, gcp_scvacct) requires 3 arguments" >&2
+        return 1
+    fi
+
+    ksa_scope="$1"
+    gcp_project="$2"
+    gcp_svcacct="$3"
+
+    gcloud iam service-accounts add-iam-policy-binding \
+        --role roles/iam.workloadIdentityUser \
+        --member "serviceAccount:${ksa_scope}" \
+        "${gcp_svcacct}" \
+        --project="${gcp_project}"
+}

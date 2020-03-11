@@ -220,4 +220,11 @@ empower_group_to_admin_artifact_auditor \
 empower_artifact_auditor "${PROD_PROJECT}"
 empower_artifact_auditor_invoker "${PROD_PROJECT}"
 
+# Special case: empower Kubernetes service account to authenticate as a GCP
+# service account.
+empower_ksa_to_svcacct \
+    "k8s-prow-builds.svc.id.goog[test-pods/k8s-artifacts-prod]" \
+    "${PROD_PROJECT}" \
+    $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")
+
 color 6 "Done"
