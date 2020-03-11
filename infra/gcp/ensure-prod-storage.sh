@@ -220,7 +220,8 @@ empower_group_to_admin_artifact_auditor \
 empower_artifact_auditor "${PROD_PROJECT}"
 empower_artifact_auditor_invoker "${PROD_PROJECT}"
 
-# Special case: empower Prow account to have access to GCR for Workload Identity.
+# Special case: empower Kubernetes service account to authenticate as a GCP
+# service account.
 empower_ksa_to_svcacct \
     "k8s-prow-builds" \
     "test-pods" \
