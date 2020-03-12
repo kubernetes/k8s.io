@@ -70,6 +70,7 @@ STAGING_PROJECTS=(
     release-test
     releng
     scl-image-builder
+    secrets-store-csi-driver
     service-apis
     txtdirect
 )

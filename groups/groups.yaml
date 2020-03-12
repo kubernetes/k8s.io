@@ -1137,3 +1137,13 @@ groups:
       - mpatel@redhat.com
       - pehunt@redhat.com
       - saschagrunert@gmail.com
+
+  - email-id: k8s-infra-staging-secrets-store-csi@kubernetes.io
+    name: k8s-infra-staging-secrets-store-csi
+    description: |-
+      ACL for staging secrets-store-csi-driver
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anish.ramasekar@gmail.com
+      - ritazh@microsoft.com
