@@ -1138,8 +1138,8 @@ groups:
       - pehunt@redhat.com
       - saschagrunert@gmail.com
 
-  - email-id: k8s-infra-staging-secrets-store-csi@kubernetes.io
-    name: k8s-infra-staging-secrets-store-csi
+  - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
+    name: k8s-infra-staging-csi-secrets-store
     description: |-
       ACL for staging secrets-store-csi-driver
     settings:
