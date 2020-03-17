@@ -13,8 +13,8 @@ repository.
 Project owners can push to their staging repository and use the image promoter
 to promote images to the main serving repository.
 
-**Note**: Currently, the image promoter is WIP so main serving repositories
-cannot be used yet. Only staging repositories can be used. 
+**Note**: Currently, the [Vanity Domain Flip has not happened yet][vdf] and so
+only staging repositories can be used.
 
 ### Creating staging repos
 
@@ -59,8 +59,6 @@ and push images, and anything else will become exceptional.
 
 ### Image Promoter
 
-The image promoter is currently WIP.
-
 To promote an image, follow these steps:
 
 1. Push your image to one of the above staging docker repos. (E.g.,
@@ -82,3 +80,4 @@ use the image promotion (PR creation) process defined above.
 [2]: https://k8s-testgrid.appspot.com/sig-release-misc#post-k8sio-cip
 [ensure-staging-storage.sh]: /infra/gcp/ensure-staging-storage.sh
 [groups.yaml]: /groups/groups.yaml
+[vdf]:https://github.com/kubernetes/k8s.io/blob/master/k8s.gcr.io/Vanity-Domain-Flip.md
