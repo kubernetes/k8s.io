@@ -6,6 +6,7 @@ approvers:
   - cblecker
   - dims
   - thockin
+  - spiffxp
 
 labels:
   - wg/k8s-infra
