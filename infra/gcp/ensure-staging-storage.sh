@@ -41,6 +41,7 @@ function usage() {
 STAGING_PROJECTS=(
     apisnoop
     artifact-promoter
+    autoscaling
     build-image
     cip-test
     cluster-api
