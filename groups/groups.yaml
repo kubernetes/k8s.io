@@ -478,6 +478,22 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-staging-autoscaling@kubernetes.io
+    name: k8s-infra-staging-autoscaling
+    description: |-
+      ACL for staging k8s autoscaling components
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mwielgus@google.com
+      - lukaszos@google.com
+      - bskiba@google.com
+      - maciekpytel@google.com
+      - vivek.bagade92@gmail.com
+      - aleksandram@google.com
+      - ksiedlecki@google.com
+      - jbartosik@google.com
+
   - email-id: k8s-infra-staging-build-image@kubernetes.io
     name: k8s-infra-staging-build-image
     description: |-
