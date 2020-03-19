@@ -571,6 +571,15 @@ groups:
       - ha.chuck@gmail.com
       - hi@amycod.es
       - prignanov@vmware.com
+  
+  - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
+    name: k8s-infra-staging-cluster-api-do
+    description: |-
+      ACL for staging CAPI for DigitalOcean
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mudrinic.mare@gmail.com
 
   - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
     name: k8s-infra-staging-capi-vsphere

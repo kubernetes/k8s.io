@@ -46,6 +46,7 @@ STAGING_PROJECTS=(
     cluster-api
     cluster-api-aws
     cluster-api-azure
+    cluster-api-do
     cluster-api-gcp
     capi-openstack
     capi-kubeadm
