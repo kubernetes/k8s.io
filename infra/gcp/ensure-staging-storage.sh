@@ -80,6 +80,9 @@ RELEASE_STAGING_PROJECTS=(
     releng
 )
 
+# 'kubernetes-release-test' Cloud Build service account
+OLD_RELEASE_STAGING_CLOUDBUILD_ACCOUNT="648026197307@cloudbuild.gserviceaccount.com"
+
 if [ $# = 0 ]; then
     # default to all staging projects
     set -- "${STAGING_PROJECTS[@]}"
@@ -189,6 +192,21 @@ for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
     # Release Engineering projects
     color 6 "Empowering ${RELEASE_VIEWERS} as project viewers"
     empower_group_as_viewer "${PROJECT}" "${RELEASE_VIEWERS}"
+
+    # Special case: Grant the 'kubernetes-release-test' Cloud Build service
+    # account write access to the container artifacts GCS location for
+    # 'k8s-staging-kubernetes' ('gs://artifacts.k8s-staging-kubernetes.appspot.com').
+    #
+    # This currently is a requirement as a domain restriction organization
+    # policy is in place on the Google Infra projects, which prevents us from
+    # completely moving staging to K8s Infra until dl.k8s.io is moved as well.
+    #
+    # ref: https://github.com/kubernetes/release/issues/1176
+    if [[ "${PROJECT}" == "k8s-staging-kubernetes" ]]; then
+        empower_svcacct_to_write_gcs_bucket \
+            "${OLD_RELEASE_STAGING_CLOUDBUILD_ACCOUNT}" \
+            "gs://artifacts.${PROJECT}.appspot.com"
+    fi
 
     # TODO(justaugustus): Remove once the k8s-releng-prod GCP project is
     #                     configured to allow other release projects to decrypt
