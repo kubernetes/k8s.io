@@ -33,26 +33,24 @@ build_gcrane()
     popd
 }
 
-copy_with_date()
+gcrane_copy()
 {
     local source_gcr_repo
     local backup_gcr_repo
-    local timestamp
 
-    if (( $# != 3 )); then
+    if (( $# != 2 )); then
         cat << EOF >&2
-copy_with_date: usage <source_gcr_repo> <backup_gcr_repo> <timestamp>
-e.g. copy_with_date "us.gcr.io/k8s-artifacts-prod" "us.gcr.io/k8s-artifacts-prod-bak" "2019/01/01/00"
+gcrane_copy: usage <source_gcr_repo> <backup_gcr_repo>
+e.g. gcrane_copy "us.gcr.io/k8s-artifacts-prod" "us.gcr.io/k8s-artifacts-prod-bak"
 EOF
         exit 1
     fi
 
     source_gcr_repo="${1}" # "us.gcr.io/k8s-artifacts-prod"
     backup_gcr_repo="${2}" # "us.gcr.io/k8s-artifacts-prod-bak"
-    timestamp="${3}" # "2019/01/01/00"
 
     # Perform backup by copying all images recursively over.
-    "${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane" cp -r -j 10 "${source_gcr_repo}" "${backup_gcr_repo}/${timestamp}"
+    "${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane" cp -r -j 10 "${source_gcr_repo}" "${backup_gcr_repo}"
 }
 
 check_creds_exist()

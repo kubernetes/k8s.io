@@ -51,12 +51,7 @@ check_creds_exist
 # Build gcrane first.
 build_gcrane
 
-# We use a timestamp of the form YYYY/MM/DD/HH because this makes the backup
-# folders more easily traversable from a human perspective.
-# E.g. 2019/01/01/00 for 2019-01-01 12:00 AM
-timestamp="$(date -u +"%Y/%m/%d/%H")"
-
 # Copy each region to its backup.
 for repo in "${prod_repos[@]}"; do
-    copy_with_date "${repo}" "${repo}-bak" "${timestamp}"
+    gcrane_copy "${repo}" "${repo}-bak"
 done

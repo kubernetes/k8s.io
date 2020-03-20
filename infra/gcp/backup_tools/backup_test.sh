@@ -146,16 +146,15 @@ for repo in "${!test_repos[@]}"; do
     populate_test_prod_repo "${repo}"
 done
 
-BACKUP_TIMESTAMP="1970/01/01/00"
 # Copy each region to its backup.
 for repo in "${!test_repos[@]}"; do
-    copy_with_date "${repo}" "${test_repos[$repo]}" "${BACKUP_TIMESTAMP}"
+    gcrane_copy "${repo}" "${test_repos[$repo]}"
 done
 
 # Verify backup contents by listing the images.
 for repo in "${!test_repos[@]}"; do
     error_found=0
-    if ! verify_repo "${test_repos[$repo]}/${BACKUP_TIMESTAMP}"; then
+    if ! verify_repo "${test_repos[$repo]}"; then
         error_found=1
     fi
 done
