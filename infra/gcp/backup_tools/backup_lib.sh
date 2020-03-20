@@ -52,7 +52,7 @@ EOF
     timestamp="${3}" # "2019/01/01/00"
 
     # Perform backup by copying all images recursively over.
-    "${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane" cp -r "${source_gcr_repo}" "${backup_gcr_repo}/${timestamp}"
+    "${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane" cp -r -j 10 "${source_gcr_repo}" "${backup_gcr_repo}/${timestamp}"
 }
 
 check_creds_exist()
