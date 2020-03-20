@@ -743,6 +743,9 @@ groups:
     members:
       # TODO(justaugustus): Add editors group after k8s.gcr.io domain flip
       - k8s-infra-release-admins@kubernetes.io
+      # This is the old kubernetes-release-test project.  We need it until all
+      # the transitions to community-ownership are done for release process.
+      - 648026197307@cloudbuild.gserviceaccount.com
 
   - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
     name: k8s-infra-staging-kube-state-metrics
