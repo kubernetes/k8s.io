@@ -1,1 +1,4 @@
-# no images yet
+- name: cluster-autoscaler
+  dmap:
+    "sha256:299de63b7078a640e0224c4b2a387669759b20cf49b91f5887446faadc05174d": ["v1.18.0-beta.0"]
+
