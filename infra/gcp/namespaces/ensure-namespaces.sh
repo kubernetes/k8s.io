@@ -62,7 +62,7 @@ function parse_args() {
 
   if [[ -z "${KUBECTL:-}" ]]; then
     if ! [ -x "$(command -v kubectl)" ]; then
-      echo >&2 "kubectl not found in \$PATH and --kubectl-path flag is not set. Aborting.";
+      echo "kubectl not found in \$PATH and --kubectl-path flag is not set. Aborting." >&2;
       exit 1;
     else
       KUBECTL="kubectl"
