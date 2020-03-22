@@ -8,7 +8,7 @@ rules:
   - apiGroups: [""]
     resources: ["configmaps", "endpoints", "persistentvolumeclaims", "pods", "resourcequotas", "services"]
     verbs: ["*"]
-  - apiGroups: ["certmanager.k8s.io"]
+  - apiGroups: ["cert-manager.io"]
     resources: ["certificates"]
     verbs: ["*"]
   - apiGroups: ["coordination.k8s.io"]
