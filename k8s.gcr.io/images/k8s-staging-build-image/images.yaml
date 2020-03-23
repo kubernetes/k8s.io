@@ -12,7 +12,3 @@
     - v1.12.12-1
     sha256:df0a50772214025040ea31144a731b5fa76944cbfc9c87db05af98e4aa39aa7f:
     - v1.13.6-1
-- name: kube-cross-amd64
-  dmap:
-    sha256:60e119bc59d8e6c77ddf159af0a682d0634249e3baca69d5be2972d00942ff51:
-    - v1.13.9-1
