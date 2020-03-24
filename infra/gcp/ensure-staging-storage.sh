@@ -56,6 +56,7 @@ STAGING_PROJECTS=(
     coredns
     csi
     descheduler
+    dns
     e2e-test-images
     external-dns
     kas-network-proxy
