@@ -676,6 +676,9 @@ groups:
       - davanum@gmail.com
       - michaelg@okkur.org
       - srajan@infoblox.com
+      - jbelamaric@google.com
+      - cohaver@infoblox.com
+      - yong.tang.github@outlook.com
 
   - email-id: k8s-infra-staging-csi@kubernetes.io
     name: k8s-infra-staging-csi
