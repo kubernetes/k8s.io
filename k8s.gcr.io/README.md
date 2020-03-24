@@ -30,11 +30,19 @@ can have a maximum of 18 characters.
 
 The `promoter-manifest.yaml` file will house the credentials and other registry
 metadata, whereas the `images.yaml` file will hold only the image data. You can
-look at the existing staging repos for examples. This separation between
-`promoter-manifest.yaml` and `images.yaml` is there to prevent a single PR from
-modifying the source registry information as well as the image information. Any
-changes to the `manifest/...` folder is expected to be 1-time only during
-project setup.
+look at the existing staging repos for examples.
+
+NOTE: For `images/k8s-staging-<project-name>/images.yaml`, if you have no images
+to upload at this time, you must still create a blank file, like this:
+
+```
+# No images yet
+```
+
+The separation between `promoter-manifest.yaml` and `images.yaml` is there to
+prevent a single PR from modifying the source registry information as well as
+the image information. Any changes to the `manifest/...` folder is expected to
+be 1-time only during project setup.
 
 Be sure to add the project owners to the
 `images/k8s-staging-<project-name>/OWNERS` file to increase the number of
