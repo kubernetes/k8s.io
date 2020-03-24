@@ -675,6 +675,7 @@ groups:
     members:
       - davanum@gmail.com
       - michaelg@okkur.org
+      - srajan@infoblox.com
 
   - email-id: k8s-infra-staging-csi@kubernetes.io
     name: k8s-infra-staging-csi
