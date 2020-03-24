@@ -38,6 +38,5 @@
       ],
       "role": "roles/storage.objectViewer"
     }
-  ],
-  "etag": "CAU="
+  ]
 }

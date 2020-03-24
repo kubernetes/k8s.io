@@ -1,6 +1,5 @@
 {
   "description": "Can list storage buckets",
-  "etag": "BwWMa3osHUc=",
   "includedPermissions": [
     "storage.buckets.get"
   ],

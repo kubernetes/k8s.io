@@ -20,6 +20,5 @@
       ],
       "role": "roles/storage.objectAdmin"
     }
-  ],
-  "etag": "CAQ="
+  ]
 }
