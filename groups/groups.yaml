@@ -493,6 +493,7 @@ groups:
       - aleksandram@google.com
       - ksiedlecki@google.com
       - jbartosik@google.com
+      - jtuznik@google.com
 
   - email-id: k8s-infra-staging-build-image@kubernetes.io
     name: k8s-infra-staging-build-image
