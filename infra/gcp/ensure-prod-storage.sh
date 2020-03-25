@@ -223,7 +223,7 @@ empower_artifact_auditor_invoker "${PROD_PROJECT}"
 # Special case: empower Kubernetes service account to authenticate as a GCP
 # service account.
 empower_ksa_to_svcacct \
-    "k8s-prow-builds.svc.id.goog[test-pods/k8s-artifacts-prod]" \
+    "k8s-prow.svc.id.goog[test-pods/k8s-infra-gcr-promoter]" \
     "${PROD_PROJECT}" \
     $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")
 
