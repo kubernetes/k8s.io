@@ -1,7 +1,6 @@
 {
   "displayName": "Grants access to the googlegroups API in kubernetes.io GSuite",
   "email": "gsuite-groups-manager@k8s-gsuite.iam.gserviceaccount.com",
-  "etag": "MDEwMjE5MjA=",
   "name": "projects/k8s-gsuite/serviceAccounts/gsuite-groups-manager@k8s-gsuite.iam.gserviceaccount.com",
   "oauth2ClientId": "116748693853528872690",
   "projectId": "k8s-gsuite",

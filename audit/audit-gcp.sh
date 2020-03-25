@@ -21,11 +21,13 @@ gcloud \
     gcloud iam roles describe "${ROLE}" \
         --organization="${CNCF_GCP_ORG}" \
         --format=json \
+        | jq 'del(.etag)' \
         > "org_kubernetes.io/roles/${ROLE}.json"
 done
 gcloud \
     organizations get-iam-policy "${CNCF_GCP_ORG}" \
     --format=json \
+    | jq 'del(.etag)' \
     > "org_kubernetes.io/iam.json"
 
 echo "## Iterating over Projects"
@@ -48,6 +50,7 @@ gcloud \
     gcloud \
         projects get-iam-policy "${PROJECT}" \
         --format=json \
+        | jq 'del(.etag)' \
         > "projects/${PROJECT}/iam.json"
 
     echo "#### ${PROJECT} ServiceAccounts"
@@ -61,11 +64,13 @@ gcloud \
             iam service-accounts describe "${SVCACCT}" \
             --project="${PROJECT}" \
             --format=json \
+            | jq 'del(.etag)' \
             > "projects/${PROJECT}/service-accounts/${SVCACCT}/description.json"
         gcloud \
             iam service-accounts get-iam-policy "${SVCACCT}" \
             --project="${PROJECT}" \
             --format=json \
+            | jq 'del(.etag)' \
             > "projects/${PROJECT}/service-accounts/${SVCACCT}/iam.json"
     done
 
@@ -81,6 +86,7 @@ gcloud \
             iam roles describe "${ROLE}" \
             --project="${PROJECT}" \
             --format=json \
+            | jq 'del(.etag)' \
             > "projects/${PROJECT}/roles/${ROLE}.json"
     done
 
@@ -168,6 +174,7 @@ gcloud \
                     gsutil logging get "gs://${BUCKET}/" \
                         > "projects/${PROJECT}/buckets/${BUCKET}/logging.txt"
                     gsutil iam get "gs://${BUCKET}/" \
+                        | jq 'del(.etag)' \
                         > "projects/${PROJECT}/buckets/${BUCKET}/iam.json"
                 done
                 ;;

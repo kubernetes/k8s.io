@@ -1,6 +1,5 @@
 {
   "description": "Can view billing info",
-  "etag": "BwWLI_e8Xyo=",
   "includedPermissions": [
     "billing.accounts.getSpendingInformation",
     "billing.budgets.get",

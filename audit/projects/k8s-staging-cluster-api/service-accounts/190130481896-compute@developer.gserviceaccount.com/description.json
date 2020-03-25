@@ -1,7 +1,6 @@
 {
   "displayName": "Compute Engine default service account",
   "email": "190130481896-compute@developer.gserviceaccount.com",
-  "etag": "MDEwMjE5MjA=",
   "name": "projects/k8s-staging-cluster-api/serviceAccounts/190130481896-compute@developer.gserviceaccount.com",
   "oauth2ClientId": "113774457030358190463",
   "projectId": "k8s-staging-cluster-api",

@@ -1,7 +1,6 @@
 {
   "displayName": "Compute Engine default service account",
   "email": "324460563566-compute@developer.gserviceaccount.com",
-  "etag": "MDEwMjE5MjA=",
   "name": "projects/k8s-staging-cip-test/serviceAccounts/324460563566-compute@developer.gserviceaccount.com",
   "oauth2ClientId": "101237046382178675324",
   "projectId": "k8s-staging-cip-test",

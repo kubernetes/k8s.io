@@ -28,6 +28,5 @@
       ],
       "role": "roles/storage.objectViewer"
     }
-  ],
-  "etag": "CCQ="
+  ]
 }
