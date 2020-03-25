@@ -46,9 +46,11 @@
         "dev-composer.sandbox.googleapis.com",
         "managedvms.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
         "staging-managedvms.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-managedvms.googleapis.com"
       ],
       "requiredBy": [
@@ -59,10 +61,12 @@
         "dev-composer.sandbox.googleapis.com",
         "managedvms.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
         "staging-datalogic.sandbox.googleapis.com",
         "staging-managedvms.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-managedvms.googleapis.com"
       ]
     },
@@ -77,6 +81,54 @@
         "email": "service-152738448582@gcp-sa-cloudbuild.iam.gserviceaccount.com",
         "role": "roles/cloudbuild.serviceAgent",
         "tag": "p4sa"
+      }
+    ],
+    "state": "ENABLED"
+  },
+  {
+    "config": {
+      "authentication": {},
+      "documentation": {
+        "summary": "Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications.\n"
+      },
+      "features": [
+        "googleprod.com/service/use-monarch"
+      ],
+      "legacy": {
+        "apiV1Name": "cloudkms.googleapis.com",
+        "devconsole": {
+          "learnmoreUrl": "https://cloud.google.com/kms/"
+        }
+      },
+      "migration": {},
+      "name": "cloudkms.googleapis.com",
+      "quota": {},
+      "title": "Cloud Key Management Service (KMS) API",
+      "usage": {
+        "requirements": [
+          "serviceusage.googleapis.com/tos/cloud"
+        ],
+        "serviceAccess": "PUBLIC"
+      }
+    },
+    "dependencyConfig": {
+      "dependsOn": [
+        "cloudkms.googleapis.com"
+      ],
+      "directlyRequiredBy": [
+        "servicebroker.googleapis.com",
+        "staging-servicebroker.sandbox.googleapis.com"
+      ],
+      "requiredBy": [
+        "servicebroker.googleapis.com",
+        "staging-servicebroker.sandbox.googleapis.com"
+      ]
+    },
+    "name": "projects/152738448582/services/cloudkms.googleapis.com",
+    "parent": "projects/152738448582",
+    "serviceAccounts": [
+      {
+        "email": "service-152738448582@gcp-sa-ekms.iam.gserviceaccount.com"
       }
     ],
     "state": "ENABLED"
@@ -131,12 +183,14 @@
         "run.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-cloudbuild.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-container.sandbox.googleapis.com",
         "staging-containerscanning.sandbox.googleapis.com",
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
         "test-cloudbuild.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-container.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com"
       ],
@@ -175,6 +229,7 @@
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-binaryauthorization.sandbox.googleapis.com",
         "staging-cloudbuild.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
         "staging-container.sandbox.googleapis.com",
         "staging-containerscanning.sandbox.googleapis.com",
@@ -192,6 +247,7 @@
         "test-appengineflex.sandbox.googleapis.com",
         "test-binaryauthorization.sandbox.googleapis.com",
         "test-cloudbuild.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-container.sandbox.googleapis.com",
         "test-file.sandbox.googleapis.com",
         "test-managedvms.googleapis.com",
@@ -216,7 +272,7 @@
     "config": {
       "authentication": {},
       "documentation": {
-        "summary": "Writes log entries and manages your Stackdriver Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the <a href=https://cloud.google.com/logging/docs>Stackdriver Logging documentation</a>."
+        "summary": "Writes log entries and manages your Cloud Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the documentation at https://cloud.google.com/logging/docs."
       },
       "features": [
         "googleprod.com/service/use-monarch",
@@ -232,7 +288,7 @@
       "migration": {},
       "name": "logging.googleapis.com",
       "quota": {},
-      "title": "Stackdriver Logging API",
+      "title": "Cloud Logging API",
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"

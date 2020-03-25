@@ -350,7 +350,7 @@
       "migration": {},
       "name": "clouderrorreporting.googleapis.com",
       "quota": {},
-      "title": "Stackdriver Error Reporting API",
+      "title": "Error Reporting API",
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
@@ -661,6 +661,7 @@
         "containerregistry.googleapis.com",
         "iam.googleapis.com",
         "iamcredentials.googleapis.com",
+        "monitoring.googleapis.com",
         "oslogin.googleapis.com",
         "pubsub.googleapis.com",
         "storage-api.googleapis.com"
@@ -670,7 +671,8 @@
         "bigquery.googleapis.com",
         "compute.googleapis.com",
         "containerregistry.googleapis.com",
-        "iam.googleapis.com"
+        "iam.googleapis.com",
+        "monitoring.googleapis.com"
       ],
       "directlyRequiredBy": [
         "autopush-datafusion.sandbox.googleapis.com",
@@ -815,12 +817,14 @@
         "run.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-cloudbuild.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-container.sandbox.googleapis.com",
         "staging-containerscanning.sandbox.googleapis.com",
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
         "test-cloudbuild.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-container.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com"
       ],
@@ -859,6 +863,7 @@
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-binaryauthorization.sandbox.googleapis.com",
         "staging-cloudbuild.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
         "staging-container.sandbox.googleapis.com",
         "staging-containerscanning.sandbox.googleapis.com",
@@ -876,6 +881,7 @@
         "test-appengineflex.sandbox.googleapis.com",
         "test-binaryauthorization.sandbox.googleapis.com",
         "test-cloudbuild.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-container.sandbox.googleapis.com",
         "test-file.sandbox.googleapis.com",
         "test-managedvms.googleapis.com",
@@ -1122,7 +1128,7 @@
     "config": {
       "authentication": {},
       "documentation": {
-        "summary": "Writes log entries and manages your Stackdriver Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the <a href=https://cloud.google.com/logging/docs>Stackdriver Logging documentation</a>."
+        "summary": "Writes log entries and manages your Cloud Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the documentation at https://cloud.google.com/logging/docs."
       },
       "features": [
         "googleprod.com/service/use-monarch",
@@ -1138,7 +1144,7 @@
       "migration": {},
       "name": "logging.googleapis.com",
       "quota": {},
-      "title": "Stackdriver Logging API",
+      "title": "Cloud Logging API",
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
@@ -1290,7 +1296,7 @@
     "config": {
       "authentication": {},
       "documentation": {
-        "summary": "Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the [Stackdriver Monitoring documentation](/monitoring/docs).\n"
+        "summary": "Manages your Cloud Monitoring data and configurations. Most projects must be associated with a Workspace, with a few exceptions as noted on the individual method pages.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the [Cloud Monitoring documentation](/monitoring/docs).\n"
       },
       "features": [
         "googleprod.com/service/use-monarch"
@@ -1305,7 +1311,7 @@
       "migration": {},
       "name": "monitoring.googleapis.com",
       "quota": {},
-      "title": "Stackdriver Monitoring API",
+      "title": "Cloud Monitoring API",
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"
@@ -1325,6 +1331,7 @@
         "autopush-spinnaker.sandbox.googleapis.com",
         "cloudapis.googleapis.com",
         "composer.googleapis.com",
+        "container.googleapis.com",
         "datalogic.googleapis.com",
         "dev-composer.sandbox.googleapis.com",
         "dev-endpoints-googleapis.corp.google.com",
@@ -1336,6 +1343,7 @@
         "stackdriverprovisioning.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
+        "staging-container.sandbox.googleapis.com",
         "staging-datalogic.sandbox.googleapis.com",
         "staging-memcache.sandbox.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
@@ -1343,6 +1351,7 @@
         "staging-tpu.sandbox.googleapis.com",
         "staging-vpcaccess.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
+        "test-container.sandbox.googleapis.com",
         "test-memcache.sandbox.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",
@@ -1352,30 +1361,53 @@
       ],
       "requiredBy": [
         "appengineflex.googleapis.com",
+        "autopush-datafusion.sandbox.googleapis.com",
         "autopush-datalogic.sandbox.googleapis.com",
         "autopush-endpoints.sandbox.googleapis.com",
         "autopush-memcache.sandbox.googleapis.com",
         "autopush-spinnaker.sandbox.googleapis.com",
+        "autoscaler.googleapis.com",
+        "binaryauthorization.googleapis.com",
+        "cloud-infrastructure.googleapis.com",
         "cloudapis.googleapis.com",
         "composer.googleapis.com",
+        "container.googleapis.com",
+        "dataflow.googleapis.com",
+        "datafusion.googleapis.com",
         "datalogic.googleapis.com",
+        "dataprep.googleapis.com",
         "dev-composer.sandbox.googleapis.com",
+        "dev-dataprep.sandbox.googleapis.com",
         "dev-endpoints-googleapis.corp.google.com",
         "endpoints.googleapis.com",
+        "file.googleapis.com",
+        "managedvms.googleapis.com",
+        "manager.googleapis.com",
         "memcache.googleapis.com",
         "redis.googleapis.com",
+        "resourceviews.googleapis.com",
         "spinnaker.googleapis.com",
         "stackdriver.googleapis.com",
         "stackdriverprovisioning.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
+        "staging-binaryauthorization.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
+        "staging-container.sandbox.googleapis.com",
+        "staging-datafusion.sandbox.googleapis.com",
         "staging-datalogic.sandbox.googleapis.com",
+        "staging-dataprep.googleapis.com",
+        "staging-file.sandbox.googleapis.com",
+        "staging-managedvms.googleapis.com",
         "staging-memcache.sandbox.googleapis.com",
         "staging-redis.sandbox.googleapis.com",
         "staging-spinnaker.sandbox.googleapis.com",
         "staging-tpu.sandbox.googleapis.com",
         "staging-vpcaccess.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
+        "test-binaryauthorization.sandbox.googleapis.com",
+        "test-container.sandbox.googleapis.com",
+        "test-file.sandbox.googleapis.com",
+        "test-managedvms.googleapis.com",
         "test-memcache.sandbox.googleapis.com",
         "test-redis.sandbox.googleapis.com",
         "test-tpu.sandbox.googleapis.com",

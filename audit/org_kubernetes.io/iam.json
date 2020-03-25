@@ -45,6 +45,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-gcp-auditors@kubernetes.io"
+      ],
+      "role": "roles/dns.reader"
+    },
+    {
+      "members": [
         "group:k8s-infra-gcp-org-admins@kubernetes.io"
       ],
       "role": "roles/iam.organizationRoleAdmin"

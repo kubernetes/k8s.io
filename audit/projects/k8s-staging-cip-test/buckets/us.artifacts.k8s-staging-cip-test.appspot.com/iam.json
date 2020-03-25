@@ -11,6 +11,7 @@
     },
     {
       "members": [
+        "group:k8s-infra-staging-cip-test@kubernetes.io",
         "projectViewer:k8s-staging-cip-test"
       ],
       "role": "roles/storage.legacyBucketReader"
@@ -18,6 +19,7 @@
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-cip-test@kubernetes.io",
         "serviceAccount:k8s-infra-gcr-promoter@k8s-staging-cip-test.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"

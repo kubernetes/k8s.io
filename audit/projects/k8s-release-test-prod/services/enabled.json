@@ -46,9 +46,11 @@
         "dev-composer.sandbox.googleapis.com",
         "managedvms.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
         "staging-managedvms.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-managedvms.googleapis.com"
       ],
       "requiredBy": [
@@ -59,10 +61,12 @@
         "dev-composer.sandbox.googleapis.com",
         "managedvms.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
         "staging-datalogic.sandbox.googleapis.com",
         "staging-managedvms.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-managedvms.googleapis.com"
       ]
     },
@@ -426,12 +430,14 @@
         "run.googleapis.com",
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-cloudbuild.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-container.sandbox.googleapis.com",
         "staging-containerscanning.sandbox.googleapis.com",
         "staging-pod-cloudbuild.sandbox.googleapis.com",
         "staging-run.sandbox.googleapis.com",
         "test-appengineflex.sandbox.googleapis.com",
         "test-cloudbuild.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-container.sandbox.googleapis.com",
         "test-run.sandbox.googleapis.com"
       ],
@@ -470,6 +476,7 @@
         "staging-appengineflex.sandbox.googleapis.com",
         "staging-binaryauthorization.sandbox.googleapis.com",
         "staging-cloudbuild.sandbox.googleapis.com",
+        "staging-cloudfunctions.sandbox.googleapis.com",
         "staging-composer.sandbox.googleapis.com",
         "staging-container.sandbox.googleapis.com",
         "staging-containerscanning.sandbox.googleapis.com",
@@ -487,6 +494,7 @@
         "test-appengineflex.sandbox.googleapis.com",
         "test-binaryauthorization.sandbox.googleapis.com",
         "test-cloudbuild.sandbox.googleapis.com",
+        "test-cloudfunctions.sandbox.googleapis.com",
         "test-container.sandbox.googleapis.com",
         "test-file.sandbox.googleapis.com",
         "test-managedvms.googleapis.com",
@@ -511,7 +519,7 @@
     "config": {
       "authentication": {},
       "documentation": {
-        "summary": "Writes log entries and manages your Stackdriver Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the <a href=https://cloud.google.com/logging/docs>Stackdriver Logging documentation</a>."
+        "summary": "Writes log entries and manages your Cloud Logging configuration.\nThe table entries below are presented in alphabetical order, not in order of common use. For explanations of the concepts found in the table entries, read the documentation at https://cloud.google.com/logging/docs."
       },
       "features": [
         "googleprod.com/service/use-monarch",
@@ -527,7 +535,7 @@
       "migration": {},
       "name": "logging.googleapis.com",
       "quota": {},
-      "title": "Stackdriver Logging API",
+      "title": "Cloud Logging API",
       "usage": {
         "requirements": [
           "serviceusage.googleapis.com/tos/cloud"

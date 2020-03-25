@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-releng:
+  Enabled: True
+  LockedTime: 2020-06-04 23:32:32.717000+00:00
+

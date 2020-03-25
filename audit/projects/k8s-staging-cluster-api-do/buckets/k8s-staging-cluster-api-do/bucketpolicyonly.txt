@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-cluster-api-do:
+  Enabled: True
+  LockedTime: 2020-06-18 19:27:27.941000+00:00
+

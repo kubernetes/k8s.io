@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-autoscaling.appspot.com:
+  Enabled: True
+  LockedTime: 2020-06-18 19:01:27.162000+00:00
+

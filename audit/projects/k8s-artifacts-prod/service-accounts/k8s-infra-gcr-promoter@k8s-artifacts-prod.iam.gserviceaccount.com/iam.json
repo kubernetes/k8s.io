@@ -1,3 +1,11 @@
 {
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:k8s-prow-builds.svc.id.goog[test-pods/k8s-artifacts-prod]"
+      ],
+      "role": "roles/iam.workloadIdentityUser"
+    }
+  ],
   "version": 1
 }
