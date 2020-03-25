@@ -966,7 +966,7 @@ groups:
       - cblecker@gmail.com
       - guslees@gmail.com
       - james@munnelly.eu
-      - joel.speed@pusher.com
+      - jspeed@redhat.com
       - krajakavitha@gmail.com
       - lenferinkroy@gmail.com
       - loic_le_dru@carrefour.com
@@ -975,6 +975,8 @@ groups:
       - puja@giantswarm.io
       - ramamoorthypandiyaraja@gmail.com
       - spiffxp@google.com
+      - jberkus@redhat.com
+      - marky.r.jackson@gmail.com
 
   - email-id: release-comms@kubernetes.io
     name: release-comms
