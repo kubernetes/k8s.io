@@ -171,6 +171,11 @@
       "usage": 0.0
     },
     {
+      "limit": 20.0,
+      "metric": "SECURITY_POLICY_CEVAL_RULES",
+      "usage": 0.0
+    },
+    {
       "limit": 15.0,
       "metric": "EXTERNAL_VPN_GATEWAYS",
       "usage": 0.0

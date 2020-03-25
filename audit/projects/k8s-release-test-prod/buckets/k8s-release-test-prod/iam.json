@@ -12,7 +12,8 @@
       "members": [
         "group:k8s-infra-release-admins@kubernetes.io",
         "group:k8s-infra-release-editors@kubernetes.io",
-        "projectViewer:k8s-release-test-prod"
+        "projectViewer:k8s-release-test-prod",
+        "serviceAccount:615281671549@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketReader"
     },
@@ -20,7 +21,8 @@
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
         "group:k8s-infra-release-admins@kubernetes.io",
-        "group:k8s-infra-release-editors@kubernetes.io"
+        "group:k8s-infra-release-editors@kubernetes.io",
+        "serviceAccount:615281671549@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },

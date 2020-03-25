@@ -35,6 +35,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-388270116193@gcp-sa-pubsub.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountTokenCreator"
+    },
+    {
+      "members": [
         "serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/logging.logWriter"
@@ -62,6 +68,12 @@
         "serviceAccount:service-388270116193@serverless-robot-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/run.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
     },
     {
       "members": [

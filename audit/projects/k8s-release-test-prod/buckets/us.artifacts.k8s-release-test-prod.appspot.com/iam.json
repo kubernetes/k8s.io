@@ -11,6 +11,7 @@
     },
     {
       "members": [
+        "group:k8s-infra-staging-kubernetes@kubernetes.io",
         "group:k8s-infra-staging-release-test@kubernetes.io",
         "projectViewer:k8s-release-test-prod"
       ],
@@ -19,6 +20,7 @@
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-kubernetes@kubernetes.io",
         "group:k8s-infra-staging-release-test@kubernetes.io",
         "serviceAccount:k8s-infra-gcr-promoter@k8s-release-test-prod.iam.gserviceaccount.com"
       ],

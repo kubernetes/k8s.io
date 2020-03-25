@@ -1,0 +1,32 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "projectEditor:k8s-staging-autoscaling",
+        "projectOwner:k8s-staging-autoscaling"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-autoscaling@kubernetes.io",
+        "projectViewer:k8s-staging-autoscaling"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-autoscaling@kubernetes.io"
+      ],
+      "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "allUsers"
+      ],
+      "role": "roles/storage.objectViewer"
+    }
+  ]
+}
