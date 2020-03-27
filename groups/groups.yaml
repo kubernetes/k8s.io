@@ -232,13 +232,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - bartek@smykla.com
       - bentheelder@google.com
-      - brendan.d.burns@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
-      - hh@ii.coop
-      - ihor@cncf.io
-      - jgrafton@google.com
+      - james@munnelly.eu
       - spiffxp@google.com
       - thockin@google.com
 
@@ -588,7 +586,7 @@ groups:
       - ha.chuck@gmail.com
       - hi@amycod.es
       - prignanov@vmware.com
-  
+
   - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
     name: k8s-infra-staging-cluster-api-do
     description: |-
