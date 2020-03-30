@@ -296,6 +296,11 @@ function empower_group_to_admin_artifact_auditor() {
         "${acct}" \
         --member="group:${group}" \
         --role="roles/iam.serviceAccountUser"
+    # Also grant privileges to resolve Stackdriver Error Reporting errors.
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "group:${group}" \
+        --role roles/errorreporting.user
 }
 
 # Grant full privileges to the GCR promoter bot
