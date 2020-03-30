@@ -84,6 +84,7 @@ groups:
       - release-managers-private@kubernetes.io
       - secalert@redhat.com
       - secure@sap.com
+      - security@digitalocean.com
       - security@gravitational.com
       - security@kubernetes.io
       - security@loodse.com
