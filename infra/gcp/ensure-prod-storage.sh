@@ -197,9 +197,12 @@ empower_service_account_for_cip_auditor_e2e_tester \
 # already has access to the "backup-test prod backup" project (which models the
 # real $PRODBAK_PROJECT).  We don't want this same power for the non-test
 # backup system, so a compromised promoter can't nuke backups.
-empower_svcacct_to_write_gcr \
-    $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}") \
-    "${GCR_BACKUP_TEST_PROD_PROJECT}"
+for r in "${PROD_REGIONS[@]}"; do
+    empower_svcacct_to_write_gcr \
+        $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}") \
+        "${GCR_BACKUP_TEST_PROD_PROJECT}" \
+        "${r}"
+done
 
 # Special case: grant the Release Managers group access to their fake
 # prod project.
