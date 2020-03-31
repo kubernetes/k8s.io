@@ -152,7 +152,7 @@ function _empower_principal_to_write_gcs_bucket() {
         "${principal}:objectAdmin" \
         "${bucket}"
     gsutil iam ch \
-        "${principal}:legacyBucketReader" \
+        "${principal}:legacyBucketWriter" \
         "${bucket}"
 }
 
