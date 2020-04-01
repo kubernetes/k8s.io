@@ -18,12 +18,9 @@
 #
 # Tests for backing up prod registries.
 #
-# This script requires 2 environment variables to be defined:
+# This script requires 1 environment variable to be defined:
 #
 # 1) GOPATH: toplevel path for checking out gcrane's source code.
-#
-# 2) GOOGLE_APPLICATION_CREDENTIALS: path to the service account (JSON file)
-# that has write access to the test backup GCRs.
 
 set -o errexit
 set -o nounset
@@ -117,9 +114,6 @@ declare -A test_repos=(
     #[asia.gcr.io/k8s-gcr-backup-test-prod]=asia.gcr.io/k8s-gcr-backup-test-prod-bak
     #[eu.gcr.io/k8s-gcr-backup-test-prod]=eu.gcr.io/k8s-gcr-backup-test-prod-bak
 )
-
-# Check creds exist.
-check_creds_exist
 
 # Build dependencies.
 build_gcrane
