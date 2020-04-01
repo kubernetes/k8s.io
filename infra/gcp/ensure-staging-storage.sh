@@ -55,6 +55,7 @@ STAGING_PROJECTS=(
     capi-vsphere
     coredns
     csi
+    csi-secrets-store
     descheduler
     dns
     e2e-test-images
