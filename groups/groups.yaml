@@ -253,6 +253,7 @@ groups:
       - justinsb@google.com
       - spiffxp@google.com
       - thockin@google.com
+      - bartek@smykla.com
 
   - email-id: k8s-infra-gcp-auditors@kubernetes.io
     name: k8s-infra-gcp-auditors
