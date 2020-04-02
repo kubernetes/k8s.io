@@ -20,8 +20,8 @@ set -o pipefail
 set -o xtrace
 
 # GCRANE_REF is the commit SHA to use for building the gcrane binary.
-# Known-good commit from 2019-11-15
-export GCRANE_REF="f8574ec722f4dd4e2703689ea2ffe10c2021adc9"
+# Known-good commit from 2020-04-01
+export GCRANE_REF="3d03ed9b1ca2ad5d78d43832e8e46adc31d2b961"
 
 build_gcrane()
 {
@@ -33,32 +33,29 @@ build_gcrane()
     popd
 }
 
-copy_with_date()
+gcrane_copy()
 {
     local source_gcr_repo
     local backup_gcr_repo
-    local timestamp
 
-    if (( $# != 3 )); then
+    if (( $# != 2 )); then
         cat << EOF >&2
-copy_with_date: usage <source_gcr_repo> <backup_gcr_repo> <timestamp>
-e.g. copy_with_date "us.gcr.io/k8s-artifacts-prod" "us.gcr.io/k8s-artifacts-prod-bak" "2019/01/01/00"
+gcrane_copy: usage <source_gcr_repo> <backup_gcr_repo>
+e.g. gcrane_copy "us.gcr.io/k8s-artifacts-prod" "us.gcr.io/k8s-artifacts-prod-bak"
 EOF
         exit 1
     fi
 
     source_gcr_repo="${1}" # "us.gcr.io/k8s-artifacts-prod"
     backup_gcr_repo="${2}" # "us.gcr.io/k8s-artifacts-prod-bak"
-    timestamp="${3}" # "2019/01/01/00"
 
     # Perform backup by copying all images recursively over.
-    "${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane" cp -r "${source_gcr_repo}" "${backup_gcr_repo}/${timestamp}"
+    "${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane" cp -r -j 10 "${source_gcr_repo}" "${backup_gcr_repo}"
 }
 
-check_creds_exist()
+cred_sanity_check()
 {
-    if [[ ! -f "${GOOGLE_APPLICATION_CREDENTIALS}" ]]; then
-        echo >&2 "\$GOOGLE_APPLICATION_CREDENTIALS (${GOOGLE_APPLICATION_CREDENTIALS}) does not exist"
-        exit 1
-    fi
+    # Sanity check
+    gcloud auth list
+    gcloud --quiet auth configure-docker
 }

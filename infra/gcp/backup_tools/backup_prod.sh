@@ -19,12 +19,9 @@
 # Backs up prod registries. This is a thin orchestrator as all the heavy lifting
 # is done by the gcrane binary.
 #
-# This script requires 2 environment variables to be defined:
+# This script requires 1 environment variable to be defined:
 #
 # 1) GOPATH: toplevel path for checking out gcrane's source code.
-#
-# 2) GOOGLE_APPLICATION_CREDENTIALS: path to the service account (JSON file)
-# that has write access to the backup GCRs.
 
 set -o errexit
 set -o nounset
@@ -45,18 +42,13 @@ prod_repos=(
     us.gcr.io/k8s-artifacts-prod
 )
 
-# Check creds exist.
+# Sanity check
+cred_sanity_check
 
-check_creds_exist
 # Build gcrane first.
 build_gcrane
 
-# We use a timestamp of the form YYYY/MM/DD/HH because this makes the backup
-# folders more easily traversable from a human perspective.
-# E.g. 2019/01/01/00 for 2019-01-01 12:00 AM
-timestamp="$(date -u +"%Y/%m/%d/%H")"
-
 # Copy each region to its backup.
 for repo in "${prod_repos[@]}"; do
-    copy_with_date "${repo}" "${repo}-bak" "${timestamp}"
+    gcrane_copy "${repo}" "${repo}-bak"
 done

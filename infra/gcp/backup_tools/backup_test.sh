@@ -18,12 +18,9 @@
 #
 # Tests for backing up prod registries.
 #
-# This script requires 2 environment variables to be defined:
+# This script requires 1 environment variable to be defined:
 #
 # 1) GOPATH: toplevel path for checking out gcrane's source code.
-#
-# 2) GOOGLE_APPLICATION_CREDENTIALS: path to the service account (JSON file)
-# that has write access to the test backup GCRs.
 
 set -o errexit
 set -o nounset
@@ -34,11 +31,11 @@ export GCRANE_CHECKOUT_DIR="${GOPATH}/src/github.com/google/go-containerregistry
 GCRANE="${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane"
 
 export CIP_CHECKOUT_DIR="${GOPATH}/src/sigs.k8s.io/k8s-container-image-promoter"
-CIP_SNAPSHOT_CMD="${CIP_CHECKOUT_DIR}/cip -no-service-account -minimal-snapshot -output-format=CSV -snapshot"
+CIP_SNAPSHOT_CMD="${CIP_CHECKOUT_DIR}/cip -minimal-snapshot -output-format=CSV -snapshot"
 # CIP_REF is the commit SHA to use for building the cip binary (used only for
 # testing; not used by the actual prod backup job).
-# Known-good commit from 2019-10-28
-CIP_REF="1b6a872584d5560c54eb28e5354e5e71dae9d368"
+# Known-good commit from 2020-04-01
+CIP_REF="feb5dc08b2cbfa2c779c4c5d397dad40e669bc84"
 
 SCRIPT_ROOT="$(dirname "$(readlink -f "$0")")"
 # shellcheck disable=SC1090
@@ -67,9 +64,16 @@ clear_test_backup_repo()
     # For added safety, only delete the repo named
     # "gcr.io/k8s-gcr-backup-test-prod-bak".
     repo="${1}"
+    local i
 
+    i=0
     while [[ -n $("${GCRANE}" ls -r "${repo}") ]]; do
         "${GCRANE}" ls -r "${repo}" | xargs -n1 "${GCRANE}" delete || true
+        ((i=i+1))
+		if (( i == 4 )); then
+			echo >&2 "failed to clear ${repo}"
+			return 1
+		fi
     done
 }
 
@@ -118,19 +122,19 @@ declare -A test_repos=(
     #[eu.gcr.io/k8s-gcr-backup-test-prod]=eu.gcr.io/k8s-gcr-backup-test-prod-bak
 )
 
-# Check creds exist.
-check_creds_exist
+# Sanity check.
+cred_sanity_check
 
 # Build dependencies.
 build_gcrane
 build_cip
 
-# Clear test backup repos (k8s-gcr-backup-test-prod-bak). This will make
+# Clear test repos. This will make
 # reading from them simpler.
-# NOTE: We don't bother clearing the test_repos. This is because once the images
-# we should back up are in place, we can just reuse them across subsequent runs.
 for repo in "${!test_repos[@]}"; do
+    # Clear the k8s-gcr-backup-test-prod-bak repo.
     clear_test_backup_repo "${test_repos[$repo]}"
+    # Clear the k8s-gcr-backup-test-prod repo.
     clear_test_backup_repo "${repo}"
 done
 
@@ -146,16 +150,15 @@ for repo in "${!test_repos[@]}"; do
     populate_test_prod_repo "${repo}"
 done
 
-BACKUP_TIMESTAMP="1970/01/01/00"
 # Copy each region to its backup.
 for repo in "${!test_repos[@]}"; do
-    copy_with_date "${repo}" "${test_repos[$repo]}" "${BACKUP_TIMESTAMP}"
+    gcrane_copy "${repo}" "${test_repos[$repo]}"
 done
 
 # Verify backup contents by listing the images.
 for repo in "${!test_repos[@]}"; do
     error_found=0
-    if ! verify_repo "${test_repos[$repo]}/${BACKUP_TIMESTAMP}"; then
+    if ! verify_repo "${test_repos[$repo]}"; then
         error_found=1
     fi
 done
