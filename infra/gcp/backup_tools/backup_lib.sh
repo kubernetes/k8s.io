@@ -20,8 +20,8 @@ set -o pipefail
 set -o xtrace
 
 # GCRANE_REF is the commit SHA to use for building the gcrane binary.
-# Known-good commit from 2019-11-15
-export GCRANE_REF="f8574ec722f4dd4e2703689ea2ffe10c2021adc9"
+# Known-good commit from 2020-04-01
+export GCRANE_REF="3d03ed9b1ca2ad5d78d43832e8e46adc31d2b961"
 
 build_gcrane()
 {
