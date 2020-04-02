@@ -126,12 +126,12 @@ declare -A test_repos=(
 build_gcrane
 build_cip
 
-# Clear test backup repos (k8s-gcr-backup-test-prod-bak). This will make
+# Clear test repos. This will make
 # reading from them simpler.
-# NOTE: We don't bother clearing the test_repos. This is because once the images
-# we should back up are in place, we can just reuse them across subsequent runs.
 for repo in "${!test_repos[@]}"; do
+    # Clear the k8s-gcr-backup-test-prod-bak repo.
     clear_test_backup_repo "${test_repos[$repo]}"
+    # Clear the k8s-gcr-backup-test-prod repo.
     clear_test_backup_repo "${repo}"
 done
 
