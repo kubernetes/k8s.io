@@ -31,11 +31,11 @@ export GCRANE_CHECKOUT_DIR="${GOPATH}/src/github.com/google/go-containerregistry
 GCRANE="${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane"
 
 export CIP_CHECKOUT_DIR="${GOPATH}/src/sigs.k8s.io/k8s-container-image-promoter"
-CIP_SNAPSHOT_CMD="${CIP_CHECKOUT_DIR}/cip -no-service-account -minimal-snapshot -output-format=CSV -snapshot"
+CIP_SNAPSHOT_CMD="${CIP_CHECKOUT_DIR}/cip -minimal-snapshot -output-format=CSV -snapshot"
 # CIP_REF is the commit SHA to use for building the cip binary (used only for
 # testing; not used by the actual prod backup job).
-# Known-good commit from 2019-10-28
-CIP_REF="1b6a872584d5560c54eb28e5354e5e71dae9d368"
+# Known-good commit from 2020-04-01
+CIP_REF="feb5dc08b2cbfa2c779c4c5d397dad40e669bc84"
 
 SCRIPT_ROOT="$(dirname "$(readlink -f "$0")")"
 # shellcheck disable=SC1090
