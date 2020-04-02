@@ -64,9 +64,16 @@ clear_test_backup_repo()
     # For added safety, only delete the repo named
     # "gcr.io/k8s-gcr-backup-test-prod-bak".
     repo="${1}"
+    local i
 
+    i=0
     while [[ -n $("${GCRANE}" ls -r "${repo}") ]]; do
         "${GCRANE}" ls -r "${repo}" | xargs -n1 "${GCRANE}" delete || true
+        ((i=i+1))
+		if (( i == 4 )); then
+			echo >&2 "failed to clear ${repo}"
+			return 1
+		fi
     done
 }
 
