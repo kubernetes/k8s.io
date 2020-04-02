@@ -122,6 +122,9 @@ declare -A test_repos=(
     #[eu.gcr.io/k8s-gcr-backup-test-prod]=eu.gcr.io/k8s-gcr-backup-test-prod-bak
 )
 
+# Sanity check.
+cred_sanity_check
+
 # Build dependencies.
 build_gcrane
 build_cip

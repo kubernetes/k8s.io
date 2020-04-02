@@ -52,3 +52,10 @@ EOF
     # Perform backup by copying all images recursively over.
     "${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane" cp -r -j 10 "${source_gcr_repo}" "${backup_gcr_repo}"
 }
+
+cred_sanity_check()
+{
+    # Sanity check
+    gcloud auth list
+    gcloud --quiet auth configure-docker
+}

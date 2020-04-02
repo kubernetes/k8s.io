@@ -42,6 +42,9 @@ prod_repos=(
     us.gcr.io/k8s-artifacts-prod
 )
 
+# Sanity check
+cred_sanity_check
+
 # Build gcrane first.
 build_gcrane
 
