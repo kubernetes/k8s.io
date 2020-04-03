@@ -59,6 +59,7 @@ STAGING_PROJECTS=(
     descheduler
     dns
     e2e-test-images
+    etcd
     external-dns
     kas-network-proxy
     kops

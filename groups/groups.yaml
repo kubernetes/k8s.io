@@ -1194,3 +1194,14 @@ groups:
     members:
       - anish.ramasekar@gmail.com
       - rita.z.zhang@gmail.com
+
+  - email-id: k8s-infra-staging-etcd@kubernetes.io
+    name: k8s-infra-staging-etcd
+    description: |-
+      ACL for staging etcd
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - jpbetz@google.com
+      - wenjiazhang@google.com
+      - jingyih@google.com
