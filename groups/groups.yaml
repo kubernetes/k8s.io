@@ -743,6 +743,17 @@ groups:
       - thockin@google.com
       - spiffxp@google.com
 
+  - email-id: k8s-infra-staging-etcd@kubernetes.io
+    name: k8s-infra-staging-etcd
+    description: |-
+      ACL for staging etcd
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - jpbetz@google.com
+      - wenjiazhang@google.com
+      - jingyih@google.com
+
   - email-id: k8s-infra-staging-external-dns@kubernetes.io
     name: k8s-infra-staging-external-dns
     description: |-
@@ -1192,14 +1203,3 @@ groups:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
       - jorge@heptio.com
-
-  - email-id: k8s-infra-staging-etcd@kubernetes.io
-    name: k8s-infra-staging-etcd
-    description: |-
-      ACL for staging etcd
-    settings:
-      ReconcileMembers: "true"
-    owners:
-      - jpbetz@google.com
-      - wenjiazhang@google.com
-      - jingyih@google.com
