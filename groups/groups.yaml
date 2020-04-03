@@ -171,6 +171,18 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-artifact-security@kubernetes.io
+    name: k8s-infra-artifact-security
+    description: |-
+      ACL for artifact security, including things like vulnerability scans
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - security@kubernetes.io
+      - mikedanese@google.com
+      - alextc@google.com
+      - jsand@google.com
+
   - email-id: k8s-infra-aws-admins@kubernetes.io
     name: k8s-infra-aws-admins
     description: |-
