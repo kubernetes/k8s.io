@@ -696,6 +696,16 @@ groups:
     members:
       - davanum@gmail.com
 
+  - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
+    name: k8s-infra-staging-csi-secrets-store
+    description: |-
+      ACL for staging secrets-store-csi-driver
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anish.ramasekar@gmail.com
+      - rita.z.zhang@gmail.com
+
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     name: k8s-infra-staging-descheduler
     description: |-
@@ -1091,6 +1101,22 @@ groups:
       - simony@google.com
       - sumitranr@google.com
 
+  - email-id: security@kubernetes.io
+    name: security
+    description: |-
+
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "false"
+    owners:
+      - cjcullen@google.com
+      - joelsmith@redhat.com
+      - jordan@liggitt.net
+      - lhinds@redhat.com
+      - liggitt@google.com
+      - mhausler@amazon.com
+      - tallclair@google.com
+
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
     description: |-
@@ -1122,22 +1148,6 @@ groups:
     members:
       - release-managers-private@kubernetes.io
       - security-discuss-private@kubernetes.io
-
-  - email-id: security@kubernetes.io
-    name: security
-    description: |-
-
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "false"
-    owners:
-      - cjcullen@google.com
-      - joelsmith@redhat.com
-      - jordan@liggitt.net
-      - lhinds@redhat.com
-      - liggitt@google.com
-      - mhausler@amazon.com
-      - tallclair@google.com
 
   - email-id: steering-private@kubernetes.io
     name: steering-private
@@ -1182,16 +1192,6 @@ groups:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
       - jorge@heptio.com
-
-  - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
-    name: k8s-infra-staging-csi-secrets-store
-    description: |-
-      ACL for staging secrets-store-csi-driver
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - anish.ramasekar@gmail.com
-      - rita.z.zhang@gmail.com
 
   - email-id: k8s-infra-staging-etcd@kubernetes.io
     name: k8s-infra-staging-etcd
