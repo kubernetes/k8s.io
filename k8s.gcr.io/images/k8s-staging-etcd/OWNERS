@@ -1,0 +1,11 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+reviewers:
+  - jpbetz
+  - wenjiaswe
+  - jingyih
+approvers:
+  - jpbetz
+  - jingyih
+labels:
+- sig/api-machinery
