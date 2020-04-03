@@ -125,6 +125,19 @@ groups:
       - nikitaraghunath@gmail.com
       - killen.bob@gmail.com
 
+  - email-id: gke-security-groups@kubernetes.io
+    name: gke-security-groups
+    description: |-
+      Security Groups for GKE clusters
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-rbac-cert-manager@kubernetes.io
+      - k8s-infra-rbac-gcsweb@kubernetes.io
+      - k8s-infra-rbac-k8s-io-canary@kubernetes.io
+      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
+      - k8s-infra-rbac-publishing-bot@kubernetes.io
+
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
     description: |-
@@ -143,19 +156,6 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
       - linusa@google.com
-
-  - email-id: gke-security-groups@kubernetes.io
-    name: gke-security-groups
-    description: |-
-      Security Groups for GKE clusters
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-rbac-cert-manager@kubernetes.io
-      - k8s-infra-rbac-gcsweb@kubernetes.io
-      - k8s-infra-rbac-k8s-io-canary@kubernetes.io
-      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
-      - k8s-infra-rbac-publishing-bot@kubernetes.io
 
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
