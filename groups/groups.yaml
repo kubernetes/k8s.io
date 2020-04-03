@@ -224,20 +224,6 @@ groups:
       - bartek@smykla.com
       - james@munnelly.eu
 
-  - email-id: k8s-infra-cluster-operators@kubernetes.io
-    name: k8s-infra-cluster-operators
-    description: |-
-      ACL for cluster-operators
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - ameukam@gmail.com
-      - davanum@gmail.com
-      - hh@ii.coop
-      - justinsb@google.com
-      - spiffxp@google.com
-      - thockin@google.com
-
   - email-id: k8s-infra-dns-admins@kubernetes.io
     name: k8s-infra-dns-admins
     description: |-
