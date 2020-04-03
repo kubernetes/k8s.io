@@ -146,6 +146,17 @@ upload_gcs_static_content \
     "gs://${PROD_PROJECT}" \
     "${SCRIPT_DIR}/static/prod-storage"
 
+# Special case: enable vulnerability scanning on the prod GCR.
+enable_api "${PROD_PROJECT}" containerscanning.googleapis.com
+
+# Special case: enable people to read vulnerability reports.
+SEC_GROUP="k8s-infra-artifact-security@kubernetes.io"
+empower_group_as_viewer "${PROD_PROJECT}" "${SEC_GROUP}"
+gcloud \
+    projects add-iam-policy-binding "${PROD_PROJECT}" \
+    --member "group:${SEC_GROUP}" \
+    --role roles/containeranalysis.occurrences.viewer
+
 # Special case: grant the push groups access to their buckets.
 # This is for serving CNI artifacts.  We need a new bucket for this because
 # there's no concept of permissions on a "subdirectory" of a bucket.  So until we
