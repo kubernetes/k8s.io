@@ -598,6 +598,20 @@ groups:
       - thockin@google.com
       - rajib.jolite@gmail.com
 
+  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
+    name: k8s-infra-staging-cluster-api
+    description: |-
+      ACL for staging CAPI
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+      - prignanov@vmware.com
+
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     name: k8s-infra-staging-cluster-api-aws
     description: |-
@@ -644,20 +658,6 @@ groups:
       - davanum@gmail.com
       - detiber@gmail.com
       - justinsb@google.com
-      - prignanov@vmware.com
-
-  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
-    name: k8s-infra-staging-cluster-api
-    description: |-
-      ACL for staging CAPI
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - detiber@gmail.com
-      - goldsteina@vmware.com
-      - ha.chuck@gmail.com
-      - hi@amycod.es
       - prignanov@vmware.com
 
   - email-id: k8s-infra-staging-provider-azure@kubernetes.io
