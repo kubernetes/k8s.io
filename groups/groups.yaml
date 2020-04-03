@@ -453,6 +453,17 @@ groups:
     - jichenjc@cn.ibm.com
     - sbueringer@gmail.com
 
+  - email-id: k8s-infra-conform-cri-o@kubernetes.io
+    name: k8s-infra-conform-cri-o
+    description: |-
+      ACL for conformance CRI-O
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mpatel@redhat.com
+      - pehunt@redhat.com
+      - saschagrunert@gmail.com
+
   - email-id: k8s-infra-conform-huaweicloud@kubernetes.io
     name: k8s-infra-conform-huaweicloud
     description: |-
@@ -1171,17 +1182,6 @@ groups:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
       - jorge@heptio.com
-
-  - email-id: k8s-infra-conform-cri-o@kubernetes.io
-    name: k8s-infra-conform-cri-o
-    description: |-
-      ACL for conformance CRI-O
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - mpatel@redhat.com
-      - pehunt@redhat.com
-      - saschagrunert@gmail.com
 
   - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
     name: k8s-infra-staging-csi-secrets-store
