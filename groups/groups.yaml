@@ -125,6 +125,19 @@ groups:
       - nikitaraghunath@gmail.com
       - killen.bob@gmail.com
 
+  - email-id: gke-security-groups@kubernetes.io
+    name: gke-security-groups
+    description: |-
+      Security Groups for GKE clusters
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-rbac-cert-manager@kubernetes.io
+      - k8s-infra-rbac-gcsweb@kubernetes.io
+      - k8s-infra-rbac-k8s-io-canary@kubernetes.io
+      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
+      - k8s-infra-rbac-publishing-bot@kubernetes.io
+
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
     description: |-
@@ -144,19 +157,6 @@ groups:
       - thockin@google.com
       - linusa@google.com
 
-  - email-id: gke-security-groups@kubernetes.io
-    name: gke-security-groups
-    description: |-
-      Security Groups for GKE clusters
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-rbac-cert-manager@kubernetes.io
-      - k8s-infra-rbac-gcsweb@kubernetes.io
-      - k8s-infra-rbac-k8s-io-canary@kubernetes.io
-      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
-      - k8s-infra-rbac-publishing-bot@kubernetes.io
-
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
     description: |-
@@ -170,6 +170,18 @@ groups:
       - michelle.noorali@gmail.com
       - spiffxp@google.com
       - thockin@google.com
+
+  - email-id: k8s-infra-artifact-security@kubernetes.io
+    name: k8s-infra-artifact-security
+    description: |-
+      ACL for artifact security, including things like vulnerability scans
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - security@kubernetes.io
+      - mikedanese@google.com
+      - alextc@google.com
+      - jsand@google.com
 
   - email-id: k8s-infra-aws-admins@kubernetes.io
     name: k8s-infra-aws-admins
@@ -211,20 +223,6 @@ groups:
       - thockin@google.com
       - bartek@smykla.com
       - james@munnelly.eu
-
-  - email-id: k8s-infra-cluster-operators@kubernetes.io
-    name: k8s-infra-cluster-operators
-    description: |-
-      ACL for cluster-operators
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - ameukam@gmail.com
-      - davanum@gmail.com
-      - hh@ii.coop
-      - justinsb@google.com
-      - spiffxp@google.com
-      - thockin@google.com
 
   - email-id: k8s-infra-dns-admins@kubernetes.io
     name: k8s-infra-dns-admins
@@ -455,6 +453,17 @@ groups:
     - jichenjc@cn.ibm.com
     - sbueringer@gmail.com
 
+  - email-id: k8s-infra-conform-cri-o@kubernetes.io
+    name: k8s-infra-conform-cri-o
+    description: |-
+      ACL for conformance CRI-O
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mpatel@redhat.com
+      - pehunt@redhat.com
+      - saschagrunert@gmail.com
+
   - email-id: k8s-infra-conform-huaweicloud@kubernetes.io
     name: k8s-infra-conform-huaweicloud
     description: |-
@@ -464,6 +473,20 @@ groups:
     members:
       - kevinwzf0126@gmail.com # Google account of wangzefeng@huawei.com
       - qdurenhongcai@gmail.com # Google account of renhongcai@huawei.com
+
+  - email-id: k8s-infra-staging-apisnoop@kubernetes.io
+    name: k8s-infra-staging-apisnoop
+    description: |-
+      ACL for apisnoop images
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - caleb@ii.coop
+      - hh@ii.coop
+      - jbelamaric@google.com
+      - spiffxp@google.com
+      - zz@ii.coop
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
@@ -547,6 +570,20 @@ groups:
       - jichenjc@cn.ibm.com
       - sbueringer@gmail.com
 
+  - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
+    name: k8s-infra-staging-capi-vsphere
+    description: |-
+      ACL for staging CAPI for vSphere
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - prignanov@vmware.com
+      - jeewan@vmware.com
+      - ytijani@vmware.com
+
   - email-id: k8s-infra-staging-cip-test@kubernetes.io
     name: k8s-infra-staging-cip-test
     description: |-
@@ -575,6 +612,20 @@ groups:
       - thockin@google.com
       - rajib.jolite@gmail.com
 
+  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
+    name: k8s-infra-staging-cluster-api
+    description: |-
+      ACL for staging CAPI
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+      - prignanov@vmware.com
+
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     name: k8s-infra-staging-cluster-api-aws
     description: |-
@@ -598,20 +649,6 @@ groups:
     members:
       - detiber@gmail.com
       - mudrinic.mare@gmail.com
-
-  - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
-    name: k8s-infra-staging-capi-vsphere
-    description: |-
-      ACL for staging CAPI for vSphere
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - detiber@gmail.com
-      - goldsteina@vmware.com
-      - prignanov@vmware.com
-      - jeewan@vmware.com
-      - ytijani@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api-azure@kubernetes.io
     name: k8s-infra-staging-cluster-api-azure
@@ -637,36 +674,6 @@ groups:
       - justinsb@google.com
       - prignanov@vmware.com
 
-  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
-    name: k8s-infra-staging-cluster-api
-    description: |-
-      ACL for staging CAPI
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - detiber@gmail.com
-      - goldsteina@vmware.com
-      - ha.chuck@gmail.com
-      - hi@amycod.es
-      - prignanov@vmware.com
-
-  - email-id: k8s-infra-staging-provider-azure@kubernetes.io
-    name: k8s-infra-staging-provider-azure
-    description: |-
-      ACL for staging cloud provider Azure
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - t-qini@microsoft.com
-      - Pengfei.Ni@microsoft.com
-      - stephen.k8s@agst.us
-      - xiazhang@microsoft.com
-      - bburns@microsoft.com
-      - doliu@microsoft.com
-      - khnidk@microsoft.com
-      - Ritazh@microsoft.com
-
   - email-id: k8s-infra-staging-coredns@kubernetes.io
     name: k8s-infra-staging-coredns
     description: |-
@@ -688,6 +695,16 @@ groups:
       ReconcileMembers: "true"
     members:
       - davanum@gmail.com
+
+  - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
+    name: k8s-infra-staging-csi-secrets-store
+    description: |-
+      ACL for staging secrets-store-csi-driver
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anish.ramasekar@gmail.com
+      - rita.z.zhang@gmail.com
 
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     name: k8s-infra-staging-descheduler
@@ -725,6 +742,17 @@ groups:
       - justinsb@google.com
       - thockin@google.com
       - spiffxp@google.com
+
+  - email-id: k8s-infra-staging-etcd@kubernetes.io
+    name: k8s-infra-staging-etcd
+    description: |-
+      ACL for staging etcd
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - jpbetz@google.com
+      - wenjiazhang@google.com
+      - jingyih@google.com
 
   - email-id: k8s-infra-staging-external-dns@kubernetes.io
     name: k8s-infra-staging-external-dns
@@ -851,6 +879,22 @@ groups:
       - patrik@ptrk.io
       - zhenw@google.com
 
+  - email-id: k8s-infra-staging-provider-azure@kubernetes.io
+    name: k8s-infra-staging-provider-azure
+    description: |-
+      ACL for staging cloud provider Azure
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - t-qini@microsoft.com
+      - Pengfei.Ni@microsoft.com
+      - stephen.k8s@agst.us
+      - xiazhang@microsoft.com
+      - bburns@microsoft.com
+      - doliu@microsoft.com
+      - khnidk@microsoft.com
+      - Ritazh@microsoft.com
+
   - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
     name: k8s-infra-staging-publishing-bot
     description: |-
@@ -940,20 +984,6 @@ groups:
       - thockin@google.com
       - bartek@smykla.com
       - james@munnelly.eu
-
-  - email-id: k8s-infra-staging-apisnoop@kubernetes.io
-    name: k8s-infra-staging-apisnoop
-    description: |-
-      ACL for apisnoop images
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    members:
-      - caleb@ii.coop
-      - hh@ii.coop
-      - jbelamaric@google.com
-      - spiffxp@google.com
-      - zz@ii.coop
 
   - email-id: moderators@kubernetes.io
     name: moderators
@@ -1082,6 +1112,22 @@ groups:
       - simony@google.com
       - sumitranr@google.com
 
+  - email-id: security@kubernetes.io
+    name: security
+    description: |-
+
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "false"
+    owners:
+      - cjcullen@google.com
+      - joelsmith@redhat.com
+      - jordan@liggitt.net
+      - lhinds@redhat.com
+      - liggitt@google.com
+      - mhausler@amazon.com
+      - tallclair@google.com
+
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
     description: |-
@@ -1113,22 +1159,6 @@ groups:
     members:
       - release-managers-private@kubernetes.io
       - security-discuss-private@kubernetes.io
-
-  - email-id: security@kubernetes.io
-    name: security
-    description: |-
-
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "false"
-    owners:
-      - cjcullen@google.com
-      - joelsmith@redhat.com
-      - jordan@liggitt.net
-      - lhinds@redhat.com
-      - liggitt@google.com
-      - mhausler@amazon.com
-      - tallclair@google.com
 
   - email-id: steering-private@kubernetes.io
     name: steering-private
@@ -1173,35 +1203,3 @@ groups:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
       - jorge@heptio.com
-
-  - email-id: k8s-infra-conform-cri-o@kubernetes.io
-    name: k8s-infra-conform-cri-o
-    description: |-
-      ACL for conformance CRI-O
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - mpatel@redhat.com
-      - pehunt@redhat.com
-      - saschagrunert@gmail.com
-
-  - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
-    name: k8s-infra-staging-csi-secrets-store
-    description: |-
-      ACL for staging secrets-store-csi-driver
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - anish.ramasekar@gmail.com
-      - rita.z.zhang@gmail.com
-
-  - email-id: k8s-infra-staging-etcd@kubernetes.io
-    name: k8s-infra-staging-etcd
-    description: |-
-      ACL for staging etcd
-    settings:
-      ReconcileMembers: "true"
-    owners:
-      - jpbetz@google.com
-      - wenjiazhang@google.com
-      - jingyih@google.com
