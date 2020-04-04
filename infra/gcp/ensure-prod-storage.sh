@@ -252,6 +252,11 @@ empower_ksa_to_svcacct \
     "k8s-prow.svc.id.goog[test-pods/k8s-infra-gcr-promoter]" \
     "${PROD_PROJECT}" \
     $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")
+# For write access to k8s-artifacts-prod-bak GCR. This is only for backups.
+empower_ksa_to_svcacct \
+    "k8s-prow.svc.id.goog[test-pods/k8s-infra-gcr-promoter-bak]" \
+    "${PRODBAK_PROJECT}" \
+    $(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
 # For write access to:
 #   (1) k8s-gcr-backup-test-prod GCR
 #   (2) k8s-gcr-backup-test-prod-bak GCR.
