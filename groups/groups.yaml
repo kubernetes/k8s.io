@@ -729,6 +729,7 @@ groups:
       - zihongz@google.com
       - bowei@google.com
       - pavithrar@google.com
+      - 587340091677@cloudbuild.gserviceaccount.com
 
   - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
     name: Kubernetes E2E test image staging registry owners
