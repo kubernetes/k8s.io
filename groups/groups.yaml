@@ -38,6 +38,10 @@ groups:
     members:
       - dgiles@linuxfoundation.org
       - jberkus@redhat.com
+      - chris@chrisshort.net 
+      - jrosland@vmware.com
+      - samudralavamshi@gmail.com
+      - matthewbbroberg@gmail.com
 
   - email-id: conduct@kubernetes.io
     name: conduct
