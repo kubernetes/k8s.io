@@ -95,8 +95,7 @@ gcloud \
     gcloud \
         services list \
         --filter="state:ENABLED" \
-        --format=json \
-        > "projects/${PROJECT}/services/enabled.json"
+        > "projects/${PROJECT}/services/enabled.txt"
     gcloud \
         services list \
         --filter="state:ENABLED" \
