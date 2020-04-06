@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: perfdash
+  namespace: perfdash
+  labels:
+    app: perfdash
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: perf-dash-k8s-io-ingress-prod
+spec:
+  tls:
+  - secretName: perfdash-k8s-io-tls
+  backend:
+    serviceName: perfdash-status
+    servicePort: status

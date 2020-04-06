@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: perfdash-k8s-io
+  namespace: perfdash
+  annotations:
+    acme.cert-manager.io/http01-override-ingress-name: "perfdash"
+spec:
+  secretName: perfdash-k8s-io-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  dnsNames:
+  - perf-dash-canary.k8s.io
+  - perf-dash-canary.kubernetes.io

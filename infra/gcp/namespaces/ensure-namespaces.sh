@@ -146,6 +146,7 @@ ALL_PROJECTS=(
     "publishing-bot"
     "k8s-io-prod"
     "k8s-io-canary"
+    "perfdash"
 )
 
 for prj in "${ALL_PROJECTS[@]}"; do
