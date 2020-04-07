@@ -10,3 +10,4 @@ approvers:
 
 labels:
   - wg/k8s-infra
+  - area/access
