@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-dns-gcb:
+  Enabled: True
+  LockedTime: 2020-06-29 03:49:52.349000+00:00
+
