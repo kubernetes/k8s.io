@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:kubernetes-public.svc.id.goog[bart-test/dns-pusher]"
+      ],
+      "role": "roles/iam.workloadIdentityUser"
+    }
+  ],
+  "version": 1
+}

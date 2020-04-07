@@ -1,0 +1,9 @@
+{
+  "description": "Automated DNS pusher",
+  "displayName": "dns-pusher",
+  "email": "dns-pusher@kubernetes-public.iam.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/dns-pusher@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "100143166165648589946",
+  "projectId": "kubernetes-public",
+  "uniqueId": "100143166165648589946"
+}

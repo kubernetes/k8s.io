@@ -50,7 +50,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-dns-admins@kubernetes.io"
+        "group:k8s-infra-dns-admins@kubernetes.io",
+        "serviceAccount:dns-pusher@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/dns.admin"
     },
