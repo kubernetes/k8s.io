@@ -29,6 +29,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ],
+      "role": "roles/errorreporting.user"
+    },
+    {
+      "members": [
         "serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/errorreporting.writer"
