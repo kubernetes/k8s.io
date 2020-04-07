@@ -687,10 +687,10 @@ groups:
       - jbelamaric@google.com
       - cohaver@infoblox.com
 
-  - email-id: k8s-infra-staging-cpva@kubernetes.io
-    name: k8s-infra-staging-cpva
+  - email-id: k8s-infra-staging-cpa@kubernetes.io
+    name: k8s-infra-staging-cpa
     description: |-
-      ACL for staging cluster-proportional-vertical-autoscaler image.
+      ACL for staging cluster-proportional-autoscaler and cluster-proportional-vertical-autoscaler images.
     settings:
       ReconcileMembers: "true"
     members:
