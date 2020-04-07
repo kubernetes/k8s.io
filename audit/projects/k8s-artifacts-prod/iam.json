@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-artifact-security@kubernetes.io"
+      ],
+      "role": "roles/containeranalysis.occurrences.viewer"
+    },
+    {
+      "members": [
         "serviceAccount:service-388270116193@gcp-sa-containerscanning.iam.gserviceaccount.com"
       ],
       "role": "roles/containerscanning.ServiceAgent"
@@ -83,7 +89,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-artifact-admins@kubernetes.io"
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-artifact-security@kubernetes.io"
       ],
       "role": "roles/viewer"
     }
