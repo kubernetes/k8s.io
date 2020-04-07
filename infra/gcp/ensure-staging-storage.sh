@@ -54,6 +54,7 @@ STAGING_PROJECTS=(
     capi-docker
     capi-vsphere
     coredns
+    cpva
     csi
     csi-secrets-store
     descheduler
