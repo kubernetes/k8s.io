@@ -38,7 +38,7 @@
     {
       "limit": 250.0,
       "metric": "ROUTES",
-      "usage": 23.0
+      "usage": 24.0
     },
     {
       "limit": 45.0,
@@ -123,7 +123,7 @@
     {
       "limit": 175.0,
       "metric": "SUBNETWORKS",
-      "usage": 22.0
+      "usage": 23.0
     },
     {
       "limit": 30.0,
