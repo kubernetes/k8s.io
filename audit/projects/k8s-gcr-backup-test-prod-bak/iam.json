@@ -2,12 +2,20 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:service-521600603265@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-521600603265@container-analysis.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.ServiceAgent"
     },
     {
       "members": [
+        "serviceAccount:521600603265-compute@developer.gserviceaccount.com",
+        "serviceAccount:521600603265@cloudservices.gserviceaccount.com",
         "serviceAccount:service-521600603265@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"

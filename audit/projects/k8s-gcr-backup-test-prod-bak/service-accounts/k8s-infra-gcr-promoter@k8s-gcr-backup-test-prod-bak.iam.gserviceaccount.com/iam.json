@@ -1,1 +1,11 @@
-{}
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-promoter-test]"
+      ],
+      "role": "roles/iam.workloadIdentityUser"
+    }
+  ],
+  "version": 1
+}

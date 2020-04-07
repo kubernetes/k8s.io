@@ -19,6 +19,13 @@
     },
     {
       "members": [
+        "group:k8s-infra-staging-kubernetes@kubernetes.io",
+        "group:k8s-infra-staging-release-test@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
         "group:k8s-infra-staging-kubernetes@kubernetes.io",
         "group:k8s-infra-staging-release-test@kubernetes.io",

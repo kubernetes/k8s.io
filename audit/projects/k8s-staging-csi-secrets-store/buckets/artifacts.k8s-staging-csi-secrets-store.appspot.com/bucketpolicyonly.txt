@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-csi-secrets-store.appspot.com:
+  Enabled: True
+  LockedTime: 2020-06-30 23:26:54.527000+00:00
+

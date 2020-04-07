@@ -1,11 +1,3 @@
 {
-  "bindings": [
-    {
-      "members": [
-        "group:k8s-infra-cluster-admins@googlegroups.com"
-      ],
-      "role": "roles/iam.serviceAccountUser"
-    }
-  ],
   "version": 1
 }
