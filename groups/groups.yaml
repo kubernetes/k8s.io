@@ -386,7 +386,6 @@ groups:
       - stephen.k8s@agst.us
       - tpepper@gmail.com
     members:
-      - aleksandram@google.com
       - feiskyer@gmail.com
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
@@ -408,7 +407,6 @@ groups:
       - tpepper@gmail.com
     members:
       - alarcj137@gmail.com
-      - aleksandram@google.com
       - alexeldeib@gmail.com
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
@@ -1073,10 +1071,10 @@ groups:
       - stephen.k8s@agst.us
       - tpepper@vmware.com
     members:
-      - aleksandram@google.com
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
+      - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
       - saschagrunert@gmail.com
@@ -1101,7 +1099,6 @@ groups:
       - tpepper@vmware.com
     members:
       - alarcj137@gmail.com
-      - aleksandram@google.com
       - alexeldeib@gmail.com
       - ctadeu@gmail.com
       - daminisatya@gmail.com
