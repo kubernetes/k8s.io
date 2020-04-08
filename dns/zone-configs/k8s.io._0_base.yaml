@@ -170,6 +170,9 @@ node-perf-dash:
 perf-dash:
   type: A
   value: 35.188.102.189
+perf-dash-canary:
+  type: A
+  value: 34.102.200.94
 pr:
   type: CNAME
   value: redirect.k8s.io.
