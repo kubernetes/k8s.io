@@ -85,7 +85,7 @@ Essentially, in order to get images published to a production repo, you have to
 use the image promotion (PR creation) process defined above.
 
 [1]: https://github.com/kubernetes/test-infra/blob/master/config/jobs/image-pushing/README.md
-[2]: https://k8s-testgrid.appspot.com/sig-release-misc#post-k8sio-cip
+[2]: https://k8s-testgrid.appspot.com/sig-release-releng-blocking#post-k8sio-cip
 [ensure-staging-storage.sh]: /infra/gcp/ensure-staging-storage.sh
 [groups.yaml]: /groups/groups.yaml
 [vdf]:https://github.com/kubernetes/k8s.io/blob/master/k8s.gcr.io/Vanity-Domain-Flip.md
