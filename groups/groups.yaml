@@ -780,6 +780,7 @@ groups:
       - jpbetz@google.com
       - wenjiazhang@google.com
       - jingyih@google.com
+      - yczhou@google.com
 
   - email-id: k8s-infra-staging-external-dns@kubernetes.io
     name: k8s-infra-staging-external-dns
