@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-cpa:
+  Enabled: True
+  LockedTime: 2020-07-06 22:49:28.724000+00:00
+

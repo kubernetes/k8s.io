@@ -51,7 +51,7 @@
     {
       "limit": 175.0,
       "metric": "STATIC_ADDRESSES",
-      "usage": 3.0
+      "usage": 4.0
     },
     {
       "limit": 300.0,
