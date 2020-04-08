@@ -5,6 +5,7 @@ metadata:
   namespace: perfdash
   annotations:
     acme.cert-manager.io/http01-override-ingress-name: "perfdash"
+    cert-manager.io/issue-temporary-certificate: "true"
 spec:
   secretName: perfdash-k8s-io-tls
   issuerRef:
@@ -12,4 +13,3 @@ spec:
     name: letsencrypt-prod
   dnsNames:
   - perf-dash-canary.k8s.io
-  - perf-dash-canary.kubernetes.io
