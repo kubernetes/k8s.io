@@ -48,6 +48,7 @@ Redirections
 - https://go.k8s.io/owners/${GITHUB_USER}
 - https://go.k8s.io/partner-request
 - https://go.k8s.io/pr-dashboard
+- https://go.k8s.io/redirects
 - https://go.k8s.io/start
 - https://go.k8s.io/stuck-prs
 - https://go.k8s.io/test-health
