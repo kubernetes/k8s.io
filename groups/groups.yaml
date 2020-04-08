@@ -136,6 +136,7 @@ groups:
       - k8s-infra-rbac-gcsweb@kubernetes.io
       - k8s-infra-rbac-k8s-io-canary@kubernetes.io
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
+      - k8s-infra-rbac-perfdash@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io
 
   - email-id: k8s-infra-alerts@kubernetes.io
@@ -347,6 +348,22 @@ groups:
       - bentheelder@google.com
       - cblecker@gmail.com
       - thockin@google.com
+
+  - email-id: k8s-infra-rbac-perfdash@kubernetes.io
+    name: k8s-infra-rbac-perfdash
+    description: |-
+      ACL for Perfdash
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bartek@smykla.com
+      - janluk@google.com
+      - jkaniuk@google.com
+      - jprzychodzen@google.com
+      - maciejborsz@google.com
+      - mmatejczyk@google.com
+      - shyam123.jvs95@gmail.com
+      - wojtekt@google.com
 
   - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
     name: k8s-infra-rbac-publishing-bot
