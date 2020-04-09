@@ -3,6 +3,8 @@ kind: Certificate
 metadata:
   name: gcsweb-k8s-io
   namespace: gcsweb
+  annotations:
+    cert-manager.io/issue-temporary-certificate: "true"
 spec:
   secretName: gcsweb-k8s-io-tls
   issuerRef:

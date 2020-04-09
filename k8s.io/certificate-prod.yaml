@@ -3,6 +3,8 @@ kind: Certificate
 metadata:
   name: k8s-io-letsencrypt-prod
   namespace: k8s-io-prod
+  annotations:
+    cert-manager.io/issue-temporary-certificate: "true"
 spec:
   secretName: k8s-io-tls
   issuerRef:
