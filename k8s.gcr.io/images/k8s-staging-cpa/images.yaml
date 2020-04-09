@@ -1,1 +1,12 @@
-# No images yet
+- name: cpvpa-amd64
+  dmap:
+    "sha256:8341c10f341fc7cacfefa4564088414b4eaef45142d76a83f80891544f18b632": ["v0.8.2"]
+- name: cpvpa-arm
+  dmap:
+    "sha256:66c5c58c2becded71af3856de98409f4d9c6d6b045a952c6cd1a14bd73497898": ["v0.8.2"]
+- name: cpvpa-arm64
+  dmap:
+    "sha256:4c3cc0d9807fadff10d580e9d4c725ddffa59f7d8c6d55da8c0b098f4dc788b4": ["v0.8.2"]
+- name: cpvpa-ppc64le
+  dmap:
+    "sha256:5f3c69442753ca9bdaaec8b6b07dc44c3a73c069ff109aa4e4366f4e595ae275": ["v0.8.2"]
