@@ -10,10 +10,15 @@ community-controlled repo.
 
 The community has created a new repo called `{asia,eu,us}.gcr.io/k8s-artifacts-prod`, and it
 has been agreed that the community should use it as the new place to push
-production images (instead of `gcr.io/google-containers`). **We can solve the
-above problem by flipping the vanity domain (`k8s.gcr.io`) from
-`gcr.io/google-containers` to `{asia,eu,us}.gcr.io/k8s-artifacts-prod`**. This way, no change
-needs to be made in the Kubernetes codebase.
+production images (instead of `gcr.io/google-containers`). We can solve the
+above problem without changes to the Kubernetes codebase by doing two things:
+
+- flipping the vanity domain (`k8s.gcr.io`) from `gcr.io/google-containers` to
+  `{asia,eu,us}.gcr.io/k8s-artifacts-prod`, and
+- ensuring that the `k8s-artifacts-prod` project is whitelisted to be immune to
+  GCP VPC Service Control (VPC-SC) perimeters, [even if customers configure a 
+  perimeter that otherwise protects/restricts Google Cloud
+  Storage](https://cloud.google.com/vpc-service-controls/docs/supported-products#registry).
 
 The minimum prerequisite is that the existing images in `google-containers` must
 be copied into `k8s-artifacts-prod` in order to ensure that the domain flip
