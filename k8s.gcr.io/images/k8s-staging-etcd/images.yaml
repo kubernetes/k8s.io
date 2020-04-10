@@ -1,1 +1,7 @@
-# No images yet
+- name: etcd
+  dmap:
+    "sha256:80d539b791923b37fb501166729307c987a237bf9a72cef3dbfca24744b5cb76": ["3.4.7-0", "3.4.7"]
+- name: etcd-empty-dir-cleanup
+  dmap:
+    "sha256:f805272b4422efa92e20789295c343ed26ff36ddc4f70eeb5d7890d6b758b0fc": ["3.4.7.0"]
+
