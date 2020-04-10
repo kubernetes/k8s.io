@@ -35,9 +35,13 @@ groups:
     managers:
       - pal.nabarun95@gmail.com
       - ameukam@gmail.com
+      - matthewbbroberg@gmail.com
+      - jrosland@vmware.com
     members:
       - dgiles@linuxfoundation.org
       - jberkus@redhat.com
+      - chris@chrisshort.net 
+      - samudralavamshi@gmail.com
 
   - email-id: conduct@kubernetes.io
     name: conduct
