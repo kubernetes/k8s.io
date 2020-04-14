@@ -158,3 +158,26 @@ resource "google_container_cluster" "cluster" {
     enabled = true
   }
 }
+
+
+provider "kubernetes" {
+  host                   = "https://${google_container_cluster.cluster.endpoint}"
+  client_certificate     = base64decode(google_container_cluster.cluster[0].client_certificate)
+  client_key             = base64decode(google_container_cluster.cluster[0].client_key)
+  cluster_ca_certificate = base64decode(google_container_cluster.cluster[0].cluster_ca_certificate)
+  config_context         = "gke_kubernetes-public_us-central1_aaa"
+  load_config_file       = "true"
+}
+
+// Create ssd storage class (initialy for Publishing Bot)
+resource "kubernetes_storage_class" "ssd" {
+  metadata {
+    name = "ssd"
+  }
+
+  storage_provisioner = "kubernetes.io/gce-pd"
+
+  parameters = {
+    type = "pd-ssd"
+  }
+}
