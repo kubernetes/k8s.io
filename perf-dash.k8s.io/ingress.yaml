@@ -2,7 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: perfdash
-  namespace: perfdash
   labels:
     app: perfdash
   annotations:

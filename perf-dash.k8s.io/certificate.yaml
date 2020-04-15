@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: perfdash-k8s-io
-  namespace: perfdash
   annotations:
     acme.cert-manager.io/http01-override-ingress-name: "perfdash"
     cert-manager.io/issue-temporary-certificate: "true"
