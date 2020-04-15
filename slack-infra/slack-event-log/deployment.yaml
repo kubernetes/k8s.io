@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-event-log
+  labels:
+    app: slack-event-log
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: slack-event-log
+  template:
+    metadata:
+      labels:
+        app: slack-event-log
+    spec:
+      containers:
+      - name: slack-event-log
+        image: gcr.io/kubernetes-tools/slack-event-log:v20190415-bdf772f89
+        args:
+          - --config-path=/etc/slack-event-log/config.json
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+          - name: PATH_PREFIX
+            value: /infra/event-log
+        volumeMounts:
+        - mountPath: /etc/slack-event-log
+          name: config
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            scheme: HTTP
+            port: 8080
+      volumes:
+      - name: config
+        secret:
+          secretName: slack-event-log-config
