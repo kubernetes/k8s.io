@@ -677,6 +677,16 @@ groups:
       - justinsb@google.com
       - prignanov@vmware.com
 
+  - email-id: k8s-infra-staging-bootkube@kubernetes.io
+    name: k8s-infra-staging-bootkube
+    description: |-
+      ACL for staging bootkube image.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - andrew@andrewrynhard.com
+      - rahul@rmenn.in
+
   - email-id: k8s-infra-staging-coredns@kubernetes.io
     name: k8s-infra-staging-coredns
     description: |-
