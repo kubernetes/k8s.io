@@ -34,27 +34,6 @@ if [ $# != 0 ]; then
     exit 1
 fi
 
-# Grant access to "fake prod" projects for tol testing
-# $1: The GCP project
-# $2: The googlegroups group
-function empower_group_to_fake_prod() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_group_to_fake_prod(project, group) requires 2 arguments" >&2
-        return 1
-    fi
-    project="$1"
-    group="$2"
-
-    color 6 "Empowering $group as project viewer in $project"
-    empower_group_as_viewer "${project}" "${group}"
-
-    color 6 "Empowering $group for GCR in $project"
-    for r in "${PROD_REGIONS[@]}"; do
-        color 3 "region $r"
-        empower_group_to_write_gcr "${group}" "${project}" "${r}"
-    done
-}
-
 #
 # The GCP project names.
 #
@@ -78,6 +57,9 @@ GCR_AUDIT_TEST_PROD_PROJECT="k8s-gcr-audit-test-prod"
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
+# This is a list of all prod projects.  Each project will be configured
+# similarly, with a GCR repository and a GCS bucket of the same name.
+#
 ALL_PROD_PROJECTS=(
     "${PROD_PROJECT}"
     "${PRODBAK_PROJECT}"
@@ -88,13 +70,110 @@ ALL_PROD_PROJECTS=(
     "${RELEASE_TESTPROD_PROJECT}"
 )
 
-# Regions for prod.
+# This is a list of all prod GCS buckets, but only their trailing "name".  Each
+# name will get a GCS bucket called "k8s-artifacts-${name}", and write access
+# will be granted to the group "k8s-infra-push-${name}@kubernetes.io", which
+# must already exist.
+#
+ALL_PROD_BUCKETS=(
+    "cni"
+)
+
+# Regions for prod GCR.
 PROD_REGIONS=(us eu asia)
 
-# Minimum time we expect to keep prod artifacts.
+# Minimum time we expect to keep prod GCS artifacts.
 PROD_RETENTION="10y"
 
-# Make the projects, if needed
+# Make a prod GCR repository and grant access to it.
+#
+# $1: The GCP project name (GCR names == project names)
+function ensure_prod_gcr() {
+    if [ $# -ne 1 -o -z "$1" ]; then
+        echo "ensure_prod_gcr(project) requires 1 argument" >&2
+        return 1
+    fi
+    project="${1}"
+
+    color 6 "Ensuring the GCR exists and is readable"
+    for r in "${PROD_REGIONS[@]}"; do
+        color 3 "region $r"
+        ensure_gcr_repo "${project}" "${r}"
+    done
+
+    color 6 "Empowering GCR admins"
+    for r in "${PROD_REGIONS[@]}"; do
+        color 3 "region $r"
+        empower_gcr_admins "${project}" "${r}"
+    done
+
+    color 6 "Empowering image promoter"
+    for r in "${PROD_REGIONS[@]}"; do
+        color 3 "region $r"
+        empower_artifact_promoter "${project}" "${r}"
+    done
+
+}
+
+# Make a prod GCS bucket and grant access to it.  We need whole buckets for
+# this because we want to grant minimal permissions, but there's no concept of
+# permissions on a "subdirectory" of a bucket.  If we had a GCS promoter akin
+# to the GCR promoter, we might have used a single bucket, but we don't have
+# that yet.
+#
+# $1: The GCP project to make the bucket
+# $2: The bucket, including gs:// prefix
+# $3: The group email to empower (optional)
+function ensure_prod_gcs_bucket() {
+        if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_prod_gcs_bucket(project, bucket, [group]) requires 2 or 3 arguments" >&2
+        return 1
+    fi
+    project="${1}"
+    bucket="${2}"
+    group="${3:-}"
+
+    color 6 "Ensuring the GCS bucket exists and is readable"
+    ensure_public_gcs_bucket "${project}" "${bucket}"
+
+    color 6 "Ensuring the bucket retention policy is set"
+    ensure_gcs_bucket_retention "${bucket}" "${PROD_RETENTION}"
+
+    color 6 "Empowering GCS admins"
+    empower_gcs_admins "${project}" "${bucket}"
+
+    if [ -n "${group}" ]; then
+        color 6 "Empowering ${group} to write to the bucket"
+        empower_group_to_write_gcs_bucket "${group}" "${bucket}"
+    fi
+}
+
+# Grant access to "fake prod" projects for tol testing
+# $1: The GCP project
+# $2: The googlegroups group
+function empower_group_to_fake_prod() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_group_to_fake_prod(project, group) requires 2 arguments" >&2
+        return 1
+    fi
+    project="$1"
+    group="$2"
+
+    color 6 "Empowering $group as project viewer in $project"
+    empower_group_as_viewer "${project}" "${group}"
+
+    color 6 "Empowering $group for GCR in $project"
+    for r in "${PROD_REGIONS[@]}"; do
+        color 3 "region $r"
+        empower_group_to_write_gcr "${group}" "${project}" "${r}"
+    done
+}
+
+#
+# main()
+#
+
+# Create all prod artifact projects.
 for prj in "${ALL_PROD_PROJECTS[@]}"; do
     color 6 "Ensuring project exists: ${prj}"
     ensure_project "${prj}"
@@ -105,35 +184,22 @@ for prj in "${ALL_PROD_PROJECTS[@]}"; do
     color 6 "Enabling the container analysis API: ${prj}"
     enable_api "${prj}" containeranalysis.googleapis.com
 
-    color 6 "Ensuring the GCR exists and is readable: ${prj}"
-    for r in "${PROD_REGIONS[@]}"; do
-        color 3 "region $r"
-        ensure_gcr_repo "${prj}" "${r}"
-    done
-
-    color 6 "Empowering GCR admins: ${prj}"
-    for r in "${PROD_REGIONS[@]}"; do
-        color 3 "region $r"
-        empower_gcr_admins "${prj}" "${r}"
-    done
-
-    color 6 "Empowering image promoter: ${prj}"
-    for r in "${PROD_REGIONS[@]}"; do
-        color 3 "region $r"
-        empower_artifact_promoter "${prj}" "${r}"
-    done
+    color 6 "Ensuring the GCR repository: ${prj}"
+    ensure_prod_gcr "${prj}"
 
     color 6 "Enabling the GCS API: ${prj}"
     enable_api "${prj}" storage-component.googleapis.com
 
-    color 6 "Ensuring the GCS bucket exists and is readable: ${prj}"
-    ensure_public_gcs_bucket "${prj}" "gs://${prj}"
+    color 6 "Ensuring the GCS bucket: gs://${prj}"
+    ensure_prod_gcs_bucket "${prj}" "gs://${prj}"
+done
 
-    color 6 "Ensuring the GCS bucket retention policy is set: ${prj}"
-    ensure_gcs_bucket_retention "gs://${prj}" "${PROD_RETENTION}"
-
-    color 6 "Empowering GCS admins: ${prj}"
-    empower_gcs_admins "${prj}" "gs://${prj}"
+# Create all prod GCS buckets.
+for sfx in "${ALL_PROD_BUCKETS[@]}"; do
+    ensure_prod_gcs_bucket \
+        "${PROD_PROJECT}" \
+        "gs://k8s-artifacts-${sfx}" \
+        "k8s-infra-push-${sfx}@kubernetes.io"
 done
 
 # Special case: set the web policy on the prod bucket.
@@ -156,20 +222,6 @@ gcloud \
     projects add-iam-policy-binding "${PROD_PROJECT}" \
     --member "group:${SEC_GROUP}" \
     --role roles/containeranalysis.occurrences.viewer
-
-# Special case: grant the push groups access to their buckets.
-# This is for serving CNI artifacts.  We need a new bucket for this because
-# there's no concept of permissions on a "subdirectory" of a bucket.  So until we
-# have a promoter for k8s-artifacts-prod, we do this.
-CNI_BUCKET="k8s-artifacts-cni"
-CNI_GROUP="k8s-infra-push-cni@kubernetes.io"
-color 6 "Ensuring the CNI GCS bucket exists and is readable"
-ensure_public_gcs_bucket "${PROD_PROJECT}" "gs://${CNI_BUCKET}"
-color 6 "Ensuring the CNI GCS bucket retention policy is set"
-ensure_gcs_bucket_retention "gs://${CNI_BUCKET}" "${PROD_RETENTION}"
-color 6 "Empowering GCS admins to CNI"
-empower_gcs_admins "${PROD_PROJECT}" "gs://${CNI_BUCKET}"
-empower_group_to_write_gcs_bucket "${CNI_GROUP}" "gs://${CNI_BUCKET}"
 
 # Special case: grant the image promoter testing group access to their fake
 # prod projects.
