@@ -1,0 +1,14 @@
+# See the OWNERS file documentation:
+#  https://github.com/kubernetes/kubernetes/blob/master/docs/devel/owners.md
+
+reviewers:
+- amwat
+- aojea
+- BenTheElder
+- munnerz
+
+approvers:
+- amwat
+- aojea
+- BenTheElder
+- munnerz
