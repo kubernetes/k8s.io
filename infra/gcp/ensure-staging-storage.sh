@@ -63,6 +63,7 @@ STAGING_PROJECTS=(
     etcd
     external-dns
     kas-network-proxy
+    kind
     kops
     kube-state-metrics
     kubeadm

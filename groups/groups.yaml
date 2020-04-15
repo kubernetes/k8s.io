@@ -793,6 +793,18 @@ groups:
       - wfender@google.com
       - ygui@google.com
 
+  - email-id: k8s-infra-staging-kind@kubernetes.io
+    name: k8s-infra-staging-kind
+    description: |-
+      ACL for staging kind artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - amwat@google.com
+      - antonio.ojea.garcia@gmail.com 
+      - bentheelder@google.com
+      - james@munnelly.eu
+
   - email-id: k8s-infra-staging-kops@kubernetes.io
     name: k8s-infra-staging-kops
     description: |-
