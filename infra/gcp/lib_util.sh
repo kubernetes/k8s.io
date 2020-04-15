@@ -38,3 +38,9 @@ function color() {
     echo "$@"
     _nocolor
 }
+
+# Indent each line of stdin.
+# example: <command> | indent
+function indent() {
+    sed 's/^/  /'
+}
