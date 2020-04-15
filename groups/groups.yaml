@@ -129,6 +129,7 @@ groups:
       - nikitaraghunath@gmail.com
       - killen.bob@gmail.com
 
+  # Every RBAC group should be added here.
   - email-id: gke-security-groups@kubernetes.io
     name: gke-security-groups
     description: |-
@@ -286,6 +287,12 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  #
+  # Push groups: k8s-infra-push-*
+  #
+  # Each group here governs access to one GCS bucket.
+  #
+
   - email-id: k8s-infra-push-cni@kubernetes.io
     name: k8s-infra-push-cni
     description: |-
@@ -310,6 +317,12 @@ groups:
       - stephen.k8s@agst.us
       - thockin@google.com
       - tpepper@gmail.com
+
+  #
+  # RBAC groups: k8s-infra-rbac-*
+  #
+  # Each group here governs access to one k8s namespace.
+  #
 
   - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
     name: k8s-infra-rbac-cert-manager
@@ -446,6 +459,12 @@ groups:
       - simony@google.com
       - sumitranr@google.com
 
+  #
+  # Conformance groups: k8s-infra-conform-*
+  #
+  # Each group here governs access to one GCS bucket.
+  #
+
   - email-id: k8s-infra-conform-capi-openstack@kubernetes.io
     name: k8s-infra-conform-capi-openstack
     description: |-
@@ -476,6 +495,12 @@ groups:
     members:
       - kevinwzf0126@gmail.com # Google account of wangzefeng@huawei.com
       - qdurenhongcai@gmail.com # Google account of renhongcai@huawei.com
+
+  #
+  # Staging groups: k8s-infra-staging-*
+  #
+  # Each group here governs access to one staging project.
+  #
 
   - email-id: k8s-infra-staging-apisnoop@kubernetes.io
     name: k8s-infra-staging-apisnoop
