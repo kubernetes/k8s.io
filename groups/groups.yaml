@@ -318,6 +318,15 @@ groups:
       - thockin@google.com
       - tpepper@gmail.com
 
+  - email-id: k8s-infra-push-kind@kubernetes.io
+    name: k8s-infra-push-kind
+    description: |-
+      ACL for pushing KinD artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+
   #
   # RBAC groups: k8s-infra-rbac-*
   #

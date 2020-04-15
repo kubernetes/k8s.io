@@ -77,6 +77,7 @@ ALL_PROD_PROJECTS=(
 #
 ALL_PROD_BUCKETS=(
     "cni"
+    "kind"
 )
 
 # Regions for prod GCR.
