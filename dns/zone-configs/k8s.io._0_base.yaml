@@ -265,6 +265,10 @@ master.cluster-api.sigs:
 cloud-provider-vsphere.sigs:
   type: CNAME
   value: kubernetes-sigs-cloud-provider-vsphere.netlify.app.
+# https://github.com/kubernetes-sigs/vsphere-csi-driver docs (@divyenpatel, @SandeepPissay, @xing-yang)
+vsphere-csi-driver.sigs:
+  type: CNAME
+  value: kubernetes-sigs-vsphere-csi-driver.netlify.app.
 # https://github.com/kubernetes/minikube docs (@tstromberg, @afbjorklund)
 minikube.sigs:
   type: CNAME
