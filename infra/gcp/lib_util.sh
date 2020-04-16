@@ -42,5 +42,8 @@ function color() {
 # Indent each line of stdin.
 # example: <command> | indent
 function indent() {
-    sed 's/^/  /'
+    # Simple 'sed' messes up end-of-line when mixed with color codes,
+    # and I could not figure out why.
+    IFS=''
+    while read X; do echo "  ${X}"; done
 }
