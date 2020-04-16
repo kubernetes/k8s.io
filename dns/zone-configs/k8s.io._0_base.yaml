@@ -199,7 +199,7 @@ prs:
 # https://github.com/kubernetes-sigs/release-notes docs (@jeefy)
 relnotes:
   type: CNAME
-  value: kubernetes-sigs-release-notes.netlify.com.
+  value: kubernetes-sigs-release-notes.netlify.app.
 sigs:
   type: CNAME
   value: redirect.k8s.io.
@@ -244,40 +244,40 @@ velodrome:
 # https://github.com/kubernetes-sigs/kind docs (@bentheelder, @munnerz)
 kind.sigs:
   type: CNAME
-  value: k8s-kind.netlify.com.
+  value: k8s-kind.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api docs (@dwat, @jdetiber, @justinsb)
 cluster-api.sigs:
   type: CNAME
-  value: kubernetes-sigs-cluster-api.netlify.com.
+  value: kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@dwat, @jdetiber, @justinsb)
 release-0-1.cluster-api.sigs:
   type: CNAME
-  value: release-0-1--kubernetes-sigs-cluster-api.netlify.com.
+  value: release-0-1--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api release-0.2 docs (@dwat, @jdetiber, @justinsb)
 release-0-2.cluster-api.sigs:
   type: CNAME
-  value: release-0-2--kubernetes-sigs-cluster-api.netlify.com.
+  value: release-0-2--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api development docs (@dwat, @jdetiber, @justinsb)
 master.cluster-api.sigs:
   type: CNAME
-  value: master--kubernetes-sigs-cluster-api.netlify.com.
+  value: master--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes/cloud-provider-vsphere docs (@andrewsykim, @frapposelli)
 cloud-provider-vsphere.sigs:
   type: CNAME
-  value: kubernetes-sigs-cloud-provider-vsphere.netlify.com.
+  value: kubernetes-sigs-cloud-provider-vsphere.netlify.app.
 # https://github.com/kubernetes/minikube docs (@tstromberg, @afbjorklund)
 minikube.sigs:
   type: CNAME
-  value: kubernetes-sigs-minikube.netlify.com.
+  value: kubernetes-sigs-minikube.netlify.app.
 # https://github.com/kubernetes/kops docs (@mikesplain @justinsb)
 kops.sigs:
   type: CNAME
-  value: kubernetes-kops.netlify.com.
+  value: kubernetes-kops.netlify.app.
 # https://github.com/kubernetes-sigs/image-builder docs (@moshloop @justinsb)
 image-builder.sigs:
   type: CNAME
-  value: kubernetes-sigs-image-builder.netlify.com.
+  value: kubernetes-sigs-image-builder.netlify.app.
 # https://github.com/kubernetes-sigs/krew docs (@ahmetb, @corneliusweig)
 krew.sigs:
 - type: CNAME
-  value: kubernetes-sigs-krew.netlify.com.
+  value: kubernetes-sigs-krew.netlify.app.
