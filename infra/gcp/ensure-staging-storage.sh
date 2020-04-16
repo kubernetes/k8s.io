@@ -189,7 +189,7 @@ for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
     color 3 "Configuring special cases for Release Managers on: ${repo}"
 
     # The GCP project name.
-    PROJECT="k8s-staging-${REPO}"
+    PROJECT="k8s-staging-${repo}"
 
     # Enable Release Manager Associates view access to
     # Release Engineering projects
