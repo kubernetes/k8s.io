@@ -94,6 +94,7 @@ function apply_role() {
     return 1
   fi
   project_name="$1"
+  namespace="$project_name"
 
   sed -e "s/{{namespace}}/$project_name/" "$ROLE_FILENAME" \
     | "$KUBECTL" apply --cluster="$CLUSTER" --kubeconfig "$KUBECONFIG_PATH" -n "$namespace" -f -
