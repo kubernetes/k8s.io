@@ -62,6 +62,7 @@ ensure_project "${PROJECT}"
 color 6 "Enabling the GCS API"
 enable_api "${PROJECT}" storage-component.googleapis.com
 
+color 6 "Ensuring all conformance buckets"
 for REPO; do
     color 3 "Configuring conformance bucket for ${REPO}"
 
@@ -89,6 +90,5 @@ for REPO; do
     # Enable writers on the bucket
     color 6 "Empowering ${BUCKET_WRITERS} to GCS"
     empower_group_to_write_gcs_bucket "${BUCKET_WRITERS}" "${BUCKET}"
-
-    color 6 "Done"
-done
+done 2>&1 | indent
+color 6 "Done"

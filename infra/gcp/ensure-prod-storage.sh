@@ -100,19 +100,19 @@ function ensure_prod_gcr() {
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         ensure_gcr_repo "${project}" "${r}"
-    done | indent
+    done 2>&1 | indent
 
     color 6 "Empowering GCR admins"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_gcr_admins "${project}" "${r}"
-    done | indent
+    done 2>&1 | indent
 
     color 6 "Empowering image promoter"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_artifact_promoter "${project}" "${r}"
-    done | indent
+    done 2>&1 | indent
 
 }
 
@@ -126,7 +126,7 @@ function ensure_prod_gcr() {
 # $2: The bucket, including gs:// prefix
 # $3: The group email to empower (optional)
 function ensure_prod_gcs_bucket() {
-        if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
         echo "ensure_prod_gcs_bucket(project, bucket, [group]) requires 2 or 3 arguments" >&2
         return 1
     fi
@@ -187,14 +187,14 @@ for prj in "${ALL_PROD_PROJECTS[@]}"; do
     enable_api "${prj}" containeranalysis.googleapis.com
 
     color 6 "Ensuring the GCR repository: ${prj}"
-    ensure_prod_gcr "${prj}"
+    ensure_prod_gcr "${prj}" 2>&1 | indent
 
     color 6 "Enabling the GCS API: ${prj}"
     enable_api "${prj}" storage-component.googleapis.com
 
     color 6 "Ensuring the GCS bucket: gs://${prj}"
-    ensure_prod_gcs_bucket "${prj}" "gs://${prj}" | indent
-done | indent
+    ensure_prod_gcs_bucket "${prj}" "gs://${prj}" 2>&1 | indent
+done 2>&1 | indent
 
 # Create all prod GCS buckets.
 color 6 "Ensuring all prod buckets"
@@ -205,7 +205,7 @@ for sfx in "${ALL_PROD_BUCKETS[@]}"; do
         "gs://k8s-artifacts-${sfx}" \
         "k8s-infra-push-${sfx}@kubernetes.io" \
         | indent
-done | indent
+done 2>&1 | indent
 
 color 6 "Handling special cases"
 (
@@ -279,7 +279,7 @@ color 6 "Handling special cases"
             $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}") \
             "${GCR_BACKUP_TEST_PROD_PROJECT}" \
             "${r}"
-    done | indent
+    done 2>&1 | indent
 
     # Special case: grant the Release Managers group access to their fake
     # prod project.
@@ -345,6 +345,6 @@ color 6 "Handling special cases"
         "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-promoter-test]" \
         "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" \
         $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
-) | indent
+) 2>&1 | indent
 
 color 6 "Done"
