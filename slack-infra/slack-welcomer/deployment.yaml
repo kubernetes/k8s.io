@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-welcomer
+  labels:
+    app: slack-welcomer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: slack-welcomer
+  template:
+    metadata:
+      labels:
+        app: slack-welcomer
+    spec:
+      containers:
+      - name: slack-moderator
+        image: gcr.io/kubernetes-tools/slack-welcomer:v20190618-a9e322536
+        args:
+          - --config-path=/etc/slack-welcomer/config.json
+          - --message-path=/etc/welcome-message/welcome.md
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: PATH_PREFIX
+          value: /infra/welcomer
+        volumeMounts:
+        - mountPath: /etc/slack-welcomer
+          name: config
+        - mountPath: /etc/welcome-message
+          name: message
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            scheme: HTTP
+            port: 8080
+      volumes:
+      - name: config
+        secret:
+          secretName: slack-welcomer-config
+      - name: message
+        configMap:
+          name: slack-welcomer-message

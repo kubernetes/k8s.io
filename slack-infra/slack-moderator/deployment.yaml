@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-moderator
+  labels:
+    app: slack-moderator
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: slack-moderator
+  template:
+    metadata:
+      labels:
+        app: slack-moderator
+    spec:
+      containers:
+      - name: slack-moderator
+        image: gcr.io/kubernetes-tools/slack-moderator:v20190415-bdf772f89
+        args:
+          - --config-path=/etc/slack-moderator/config.json
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: PATH_PREFIX
+          value: /infra/moderator
+        volumeMounts:
+        - mountPath: /etc/slack-moderator
+          name: config
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            scheme: HTTP
+            port: 8080
+      volumes:
+      - name: config
+        secret:
+          secretName: slack-moderator-config

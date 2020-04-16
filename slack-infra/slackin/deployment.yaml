@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slackin-deployment
+  labels:
+    app: slackin2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: slackin2
+  template:
+    metadata:
+      labels:
+        app: slackin2
+    spec:
+      containers:
+      - name: slackin2
+        image: gcr.io/kubernetes-tools/slackin-kubernetes@sha256:d1a9b02239e690d5cbd78c76475a112aedf279dbd8ef401de1b8394f817a23b3
+        env:
+        - name: PORT
+          value: "80"
+        - name: SLACK_SUBDOMAIN
+          value: kubernetes
+        - name: SLACK_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: token
+              name: slackin-token
+        - name: BLOCKDOMAINS_SLACK_LIST
+          value: file:///etc/bad-domains/domains.txt
+        - name: GOOGLE_CAPTCHA_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: secret-key
+              name: recaptcha
+        - name: GOOGLE_CAPTCHA_SITEKEY
+          valueFrom:
+            secretKeyRef:
+              key: site-key
+              name: recaptcha
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/bad-domains
+          name: bad-domain-volume
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: bad-domains
+        name: bad-domain-volume

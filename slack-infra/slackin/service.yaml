@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: slackin2
+spec:
+  selector:
+    app: slackin2
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
