@@ -15,6 +15,7 @@
 SHELL := /usr/bin/env bash
 CANARY_ZONES := canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com.
 PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. canary.k8s-e2e.com.
+ZONE_CONFIGS := zone-configs
 
 default: check
 
@@ -23,11 +24,11 @@ check: check-canary check-prod
 
 .PHONY: check-canary
 check-canary:
-	$(CURDIR)/check-zone.sh $(CANARY_ZONES)
+	$(CURDIR)/check-zone.sh -c $(ZONE_CONFIGS) $(CANARY_ZONES)
 
 .PHONY: check-prod
 check-prod:
-	$(CURDIR)/check-zone.sh $(PROD_ZONES)
+	$(CURDIR)/check-zone.sh -c $(ZONE_CONFIGS) $(PROD_ZONES)
 
 .PHONY: push
 push:
