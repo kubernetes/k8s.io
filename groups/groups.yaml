@@ -1144,12 +1144,17 @@ groups:
     members:
       - alarcj137@gmail.com
       - chu.karen.h@gmail.com
-      - k8s@thatmightbe.com
+      - jeremy.r.rickard@gmail.com
+      - keroden@microsoft.com
       - killen.bob@gmail.com
+      - k8s@thatmightbe.com
       - max@koerbaecher.io
       - meenakshi.kaushik@gmail.com
       - nadolny.claudia@gmail.com
       - onlydole@gmail.com
+      - rcantw3ll@gmail.com
+      - sandoval@adobe.com
+      
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
