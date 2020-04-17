@@ -6,3 +6,13 @@
     "sha256:bd3714e294dcef2855e7c10f57c754b280fa2e7a1d470a511bbe6ac78150ff0f": ["v1.17.2"]
     "sha256:299de63b7078a640e0224c4b2a387669759b20cf49b91f5887446faadc05174d": ["v1.18.0-beta.0"]
     "sha256:1f5b11617389b8e4ce15eb45fdbbfd4321daeb63c234d46533449ab780b6ca9a": ["v1.18.1"]
+
+- name: vpa-admission-controller
+  dmap:
+    "sha256:29525bd6a967d255bf2f4a3f47c759b093b359d019a66b1ccbefae2e3cf3fdfb": ["0.8.0"]
+- name: vpa-recommender
+  dmap:
+    "sha256:87ab478afdfb31700aa58c848c2fa83b07e9cd9e0261bf447f8b510f03b86a44": ["0.8.0"]
+- name: vpa-updater
+  dmap:
+    "sha256:36d9f96c469c9e91663124d06feb0a33142cfb197b92d2c0aa69367242060776": ["0.8.0"]
