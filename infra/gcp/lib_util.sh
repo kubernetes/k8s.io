@@ -35,15 +35,11 @@ function _nocolor() {
 function color() {
     _color "$1"
     shift
-    echo "$@"
-    _nocolor
+    echo "$@$(_nocolor)"
 }
 
 # Indent each line of stdin.
 # example: <command> | indent
 function indent() {
-    # Simple 'sed' messes up end-of-line when mixed with color codes,
-    # and I could not figure out why.
-    IFS=''
-    while read X; do echo "  ${X}"; done
+    sed 's/^/  /'
 }
