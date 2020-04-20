@@ -136,6 +136,7 @@ groups:
       Security Groups for GKE clusters
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # needed for RBAC
     members:
       - k8s-infra-rbac-cert-manager@kubernetes.io
       - k8s-infra-rbac-gcsweb@kubernetes.io
@@ -335,6 +336,10 @@ groups:
   # RBAC groups: k8s-infra-rbac-*
   #
   # Each group here governs access to one k8s namespace.
+  # RBAC groups MUST have:
+  #
+  #   settings:
+  #     WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
   #
 
   - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
@@ -343,6 +348,7 @@ groups:
       ACL for Cert Manager RBAC
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - cblecker@gmail.com
       - james@munnelly.eu
@@ -355,6 +361,7 @@ groups:
       ACL for gcsweb RBAC
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - thockin@google.com
       - bartek@smykla.com
@@ -365,6 +372,7 @@ groups:
       ACL for k8s.io-admins
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
 
@@ -374,6 +382,7 @@ groups:
       ACL for k8s.io-admins
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - bentheelder@google.com
       - cblecker@gmail.com
@@ -385,6 +394,7 @@ groups:
       ACL for Perfdash
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - bartek@smykla.com
       - janluk@google.com
@@ -401,6 +411,7 @@ groups:
       ACL for Publishing Bot
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - bartek@smykla.com
       - cblecker@gmail.com
@@ -415,6 +426,7 @@ groups:
       ACL for Slack Event Log
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-slack-infra-admins@kubernetes.io
 
@@ -424,6 +436,7 @@ groups:
       ACL for Slack Moderator
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-slack-infra-admins@kubernetes.io
 
@@ -433,6 +446,7 @@ groups:
       ACL for Slack Welcomer
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-slack-infra-admins@kubernetes.io
 
@@ -442,6 +456,7 @@ groups:
       ACL for Slackin
     settings:
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-slack-infra-admins@kubernetes.io
 
