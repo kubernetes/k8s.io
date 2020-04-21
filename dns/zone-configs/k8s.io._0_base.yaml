@@ -169,7 +169,7 @@ node-perf-dash:
 # sig-scalability
 perf-dash:
   type: A
-  value: 35.188.102.189
+  value: 34.102.200.94
 perf-dash-canary:
   type: A
   value: 34.102.200.94
