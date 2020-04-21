@@ -1,18 +1,3 @@
 - name: metrics-server
   dmap:
     "sha256:eec279de92328954ec69e9c2ef920861de28d31bb14b5290b53b5ef3dfa96502": ["v0.3.7"]
-- name: metrics-server-amd64
-  dmap:
-    "sha256:c0efe772bb9e5c289db6cc4bc2002c268507d0226f2a3815f7213e00261c38e9": ["v0.3.7"]
-- name: metrics-server-arm
-  dmap:
-    "sha256:53f85e3b38d46a7b4fa0e10cfaa22cd1c2bb307d5171fbe3f1509875bf149eae": ["v0.3.7"]
-- name: metrics-server-arm64
-  dmap:
-    "sha256:328be26e74c3b516a4e7e0bfd2328a19e47d2fbea1fa97268ac183ad1c326fe1": ["v0.3.7"]
-- name: metrics-server-ppc64le
-  dmap:
-    "sha256:43e709f8b735321899f81bb4cb186aae4eb4a2b09c010da946c61c2383c0cb78": ["v0.3.7"]
-- name: metrics-server-s390x
-  dmap:
-    "sha256:af228cd639d5320e8230f1c3eadb61e01b8b63d83a69d61ec73ad77aec24630e": ["v0.3.7"]
