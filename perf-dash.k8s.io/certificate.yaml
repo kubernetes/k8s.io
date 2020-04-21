@@ -11,4 +11,5 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt-prod
   dnsNames:
+  - perf-dash.k8s.io
   - perf-dash-canary.k8s.io
