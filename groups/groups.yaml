@@ -144,10 +144,7 @@ groups:
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
       - k8s-infra-rbac-perfdash@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io
-      - k8s-infra-rbac-slack-event-log@kubernetes.io
-      - k8s-infra-rbac-slack-moderator@kubernetes.io
-      - k8s-infra-rbac-slack-welcomer@kubernetes.io
-      - k8s-infra-rbac-slackin@kubernetes.io
+      - k8s-infra-rbac-slack-infra@kubernetes.io
 
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
@@ -420,54 +417,13 @@ groups:
       - stefan.schimanski@gmail.com
       - thockin@google.com
 
-  - email-id: k8s-infra-rbac-slack-event-log@kubernetes.io
-    name: k8s-infra-rbac-slack-event-log
+  - email-id: k8s-infra-rbac-slack-infra@kubernetes.io
+    name: k8s-infra-rbac-slack-infra
     description: |-
-      ACL for Slack Event Log
+      ACL for Slack Infra
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - k8s-infra-slack-infra-admins@kubernetes.io
-
-  - email-id: k8s-infra-rbac-slack-moderator@kubernetes.io
-    name: k8s-infra-rbac-slack-moderator
-    description: |-
-      ACL for Slack Moderator
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - k8s-infra-slack-infra-admins@kubernetes.io
-
-  - email-id: k8s-infra-rbac-slack-welcomer@kubernetes.io
-    name: k8s-infra-rbac-slack-welcomer
-    description: |-
-      ACL for Slack Welcomer
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - k8s-infra-slack-infra-admins@kubernetes.io
-
-  - email-id: k8s-infra-rbac-slackin@kubernetes.io
-    name: k8s-infra-rbac-slackin
-    description: |-
-      ACL for Slackin
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - k8s-infra-slack-infra-admins@kubernetes.io
-
-  # Collective group for RBAC groups for slack infrastructure
-  # created to not duplicate members
-  - email-id: k8s-infra-slack-infra-admins@kubernetes.io
-    name: k8s-infra-slack-infra-admins
-    description: |-
-      ACL for Slack Infra Admins
-    settings:
-      ReconcileMembers: "true"
     members:
       - ameukam@gmail.com
       - bartek@smykla.com
