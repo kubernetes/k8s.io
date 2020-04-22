@@ -29,174 +29,140 @@
   "name": "kubernetes-public",
   "quotas": [
     {
-      "limit": 10000.0,
-      "metric": "SNAPSHOTS",
-      "usage": 0.0
+      "limit": 10000,
+      "metric": "SNAPSHOTS"
     },
     {
-      "limit": 30.0,
-      "metric": "NETWORKS",
-      "usage": 1.0
+      "limit": 30,
+      "metric": "NETWORKS"
     },
     {
-      "limit": 500.0,
-      "metric": "FIREWALLS",
-      "usage": 11.0
+      "limit": 500,
+      "metric": "FIREWALLS"
     },
     {
-      "limit": 5000.0,
-      "metric": "IMAGES",
-      "usage": 0.0
+      "limit": 5000,
+      "metric": "IMAGES"
     },
     {
-      "limit": 175.0,
-      "metric": "STATIC_ADDRESSES",
-      "usage": 4.0
+      "limit": 175,
+      "metric": "STATIC_ADDRESSES"
     },
     {
-      "limit": 300.0,
-      "metric": "ROUTES",
-      "usage": 28.0
+      "limit": 300,
+      "metric": "ROUTES"
     },
     {
-      "limit": 150.0,
-      "metric": "FORWARDING_RULES",
-      "usage": 8.0
+      "limit": 150,
+      "metric": "FORWARDING_RULES"
     },
     {
-      "limit": 500.0,
-      "metric": "TARGET_POOLS",
-      "usage": 0.0
+      "limit": 500,
+      "metric": "TARGET_POOLS"
     },
     {
-      "limit": 500.0,
-      "metric": "HEALTH_CHECKS",
-      "usage": 4.0
+      "limit": 500,
+      "metric": "HEALTH_CHECKS"
     },
     {
-      "limit": 575.0,
-      "metric": "IN_USE_ADDRESSES",
-      "usage": 8.0
+      "limit": 575,
+      "metric": "IN_USE_ADDRESSES"
     },
     {
-      "limit": 500.0,
-      "metric": "TARGET_INSTANCES",
-      "usage": 0.0
+      "limit": 500,
+      "metric": "TARGET_INSTANCES"
     },
     {
-      "limit": 100.0,
-      "metric": "TARGET_HTTP_PROXIES",
-      "usage": 4.0
+      "limit": 100,
+      "metric": "TARGET_HTTP_PROXIES"
     },
     {
-      "limit": 100.0,
-      "metric": "URL_MAPS",
-      "usage": 4.0
+      "limit": 100,
+      "metric": "URL_MAPS"
     },
     {
-      "limit": 60.0,
-      "metric": "BACKEND_SERVICES",
-      "usage": 4.0
+      "limit": 60,
+      "metric": "BACKEND_SERVICES"
     },
     {
-      "limit": 1000.0,
-      "metric": "INSTANCE_TEMPLATES",
-      "usage": 7.0
+      "limit": 1000,
+      "metric": "INSTANCE_TEMPLATES"
     },
     {
-      "limit": 50.0,
-      "metric": "TARGET_VPN_GATEWAYS",
-      "usage": 0.0
+      "limit": 50,
+      "metric": "TARGET_VPN_GATEWAYS"
     },
     {
-      "limit": 100.0,
-      "metric": "VPN_TUNNELS",
-      "usage": 0.0
+      "limit": 100,
+      "metric": "VPN_TUNNELS"
     },
     {
-      "limit": 30.0,
-      "metric": "BACKEND_BUCKETS",
-      "usage": 0.0
+      "limit": 30,
+      "metric": "BACKEND_BUCKETS"
     },
     {
-      "limit": 20.0,
-      "metric": "ROUTERS",
-      "usage": 0.0
+      "limit": 20,
+      "metric": "ROUTERS"
     },
     {
-      "limit": 100.0,
-      "metric": "TARGET_SSL_PROXIES",
-      "usage": 0.0
+      "limit": 100,
+      "metric": "TARGET_SSL_PROXIES"
     },
     {
-      "limit": 100.0,
-      "metric": "TARGET_HTTPS_PROXIES",
-      "usage": 4.0
+      "limit": 100,
+      "metric": "TARGET_HTTPS_PROXIES"
     },
     {
-      "limit": 100.0,
-      "metric": "SSL_CERTIFICATES",
-      "usage": 4.0
+      "limit": 100,
+      "metric": "SSL_CERTIFICATES"
     },
     {
-      "limit": 275.0,
-      "metric": "SUBNETWORKS",
-      "usage": 24.0
+      "limit": 275,
+      "metric": "SUBNETWORKS"
     },
     {
-      "limit": 100.0,
-      "metric": "TARGET_TCP_PROXIES",
-      "usage": 0.0
+      "limit": 100,
+      "metric": "TARGET_TCP_PROXIES"
     },
     {
-      "limit": 10.0,
-      "metric": "SECURITY_POLICIES",
-      "usage": 0.0
+      "limit": 10,
+      "metric": "SECURITY_POLICIES"
     },
     {
-      "limit": 200.0,
-      "metric": "SECURITY_POLICY_RULES",
-      "usage": 0.0
+      "limit": 200,
+      "metric": "SECURITY_POLICY_RULES"
     },
     {
-      "limit": 150.0,
-      "metric": "PACKET_MIRRORINGS",
-      "usage": 0.0
+      "limit": 150,
+      "metric": "PACKET_MIRRORINGS"
     },
     {
-      "limit": 1000.0,
-      "metric": "NETWORK_ENDPOINT_GROUPS",
-      "usage": 0.0
+      "limit": 1000,
+      "metric": "NETWORK_ENDPOINT_GROUPS"
     },
     {
-      "limit": 6.0,
-      "metric": "INTERCONNECTS",
-      "usage": 0.0
+      "limit": 6,
+      "metric": "INTERCONNECTS"
     },
     {
-      "limit": 5000.0,
-      "metric": "GLOBAL_INTERNAL_ADDRESSES",
-      "usage": 0.0
+      "limit": 5000,
+      "metric": "GLOBAL_INTERNAL_ADDRESSES"
     },
     {
-      "limit": 50.0,
-      "metric": "VPN_GATEWAYS",
-      "usage": 0.0
+      "limit": 50,
+      "metric": "VPN_GATEWAYS"
     },
     {
-      "limit": 5000.0,
-      "metric": "MACHINE_IMAGES",
-      "usage": 0.0
+      "limit": 5000,
+      "metric": "MACHINE_IMAGES"
     },
     {
-      "limit": 20.0,
-      "metric": "SECURITY_POLICY_CEVAL_RULES",
-      "usage": 0.0
+      "limit": 20,
+      "metric": "SECURITY_POLICY_CEVAL_RULES"
     },
     {
-      "limit": 50.0,
-      "metric": "EXTERNAL_VPN_GATEWAYS",
-      "usage": 0.0
+      "limit": 50,
+      "metric": "EXTERNAL_VPN_GATEWAYS"
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/kubernetes-public",

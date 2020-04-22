@@ -11,174 +11,140 @@
   "name": "k8s-cip-test-prod",
   "quotas": [
     {
-      "limit": 5000.0,
-      "metric": "SNAPSHOTS",
-      "usage": 0.0
+      "limit": 5000,
+      "metric": "SNAPSHOTS"
     },
     {
-      "limit": 15.0,
-      "metric": "NETWORKS",
-      "usage": 1.0
+      "limit": 15,
+      "metric": "NETWORKS"
     },
     {
-      "limit": 200.0,
-      "metric": "FIREWALLS",
-      "usage": 4.0
+      "limit": 200,
+      "metric": "FIREWALLS"
     },
     {
-      "limit": 2000.0,
-      "metric": "IMAGES",
-      "usage": 0.0
+      "limit": 2000,
+      "metric": "IMAGES"
     },
     {
-      "limit": 21.0,
-      "metric": "STATIC_ADDRESSES",
-      "usage": 0.0
+      "limit": 21,
+      "metric": "STATIC_ADDRESSES"
     },
     {
-      "limit": 250.0,
-      "metric": "ROUTES",
-      "usage": 24.0
+      "limit": 250,
+      "metric": "ROUTES"
     },
     {
-      "limit": 45.0,
-      "metric": "FORWARDING_RULES",
-      "usage": 0.0
+      "limit": 45,
+      "metric": "FORWARDING_RULES"
     },
     {
-      "limit": 150.0,
-      "metric": "TARGET_POOLS",
-      "usage": 0.0
+      "limit": 150,
+      "metric": "TARGET_POOLS"
     },
     {
-      "limit": 150.0,
-      "metric": "HEALTH_CHECKS",
-      "usage": 0.0
+      "limit": 150,
+      "metric": "HEALTH_CHECKS"
     },
     {
-      "limit": 69.0,
-      "metric": "IN_USE_ADDRESSES",
-      "usage": 0.0
+      "limit": 69,
+      "metric": "IN_USE_ADDRESSES"
     },
     {
-      "limit": 150.0,
-      "metric": "TARGET_INSTANCES",
-      "usage": 0.0
+      "limit": 150,
+      "metric": "TARGET_INSTANCES"
     },
     {
-      "limit": 30.0,
-      "metric": "TARGET_HTTP_PROXIES",
-      "usage": 0.0
+      "limit": 30,
+      "metric": "TARGET_HTTP_PROXIES"
     },
     {
-      "limit": 30.0,
-      "metric": "URL_MAPS",
-      "usage": 0.0
+      "limit": 30,
+      "metric": "URL_MAPS"
     },
     {
-      "limit": 9.0,
-      "metric": "BACKEND_SERVICES",
-      "usage": 0.0
+      "limit": 9,
+      "metric": "BACKEND_SERVICES"
     },
     {
-      "limit": 300.0,
-      "metric": "INSTANCE_TEMPLATES",
-      "usage": 0.0
+      "limit": 300,
+      "metric": "INSTANCE_TEMPLATES"
     },
     {
-      "limit": 15.0,
-      "metric": "TARGET_VPN_GATEWAYS",
-      "usage": 0.0
+      "limit": 15,
+      "metric": "TARGET_VPN_GATEWAYS"
     },
     {
-      "limit": 30.0,
-      "metric": "VPN_TUNNELS",
-      "usage": 0.0
+      "limit": 30,
+      "metric": "VPN_TUNNELS"
     },
     {
-      "limit": 9.0,
-      "metric": "BACKEND_BUCKETS",
-      "usage": 0.0
+      "limit": 9,
+      "metric": "BACKEND_BUCKETS"
     },
     {
-      "limit": 10.0,
-      "metric": "ROUTERS",
-      "usage": 0.0
+      "limit": 10,
+      "metric": "ROUTERS"
     },
     {
-      "limit": 30.0,
-      "metric": "TARGET_SSL_PROXIES",
-      "usage": 0.0
+      "limit": 30,
+      "metric": "TARGET_SSL_PROXIES"
     },
     {
-      "limit": 30.0,
-      "metric": "TARGET_HTTPS_PROXIES",
-      "usage": 0.0
+      "limit": 30,
+      "metric": "TARGET_HTTPS_PROXIES"
     },
     {
-      "limit": 30.0,
-      "metric": "SSL_CERTIFICATES",
-      "usage": 0.0
+      "limit": 30,
+      "metric": "SSL_CERTIFICATES"
     },
     {
-      "limit": 175.0,
-      "metric": "SUBNETWORKS",
-      "usage": 23.0
+      "limit": 175,
+      "metric": "SUBNETWORKS"
     },
     {
-      "limit": 30.0,
-      "metric": "TARGET_TCP_PROXIES",
-      "usage": 0.0
+      "limit": 30,
+      "metric": "TARGET_TCP_PROXIES"
     },
     {
-      "limit": 10.0,
-      "metric": "SECURITY_POLICIES",
-      "usage": 0.0
+      "limit": 10,
+      "metric": "SECURITY_POLICIES"
     },
     {
-      "limit": 100.0,
-      "metric": "SECURITY_POLICY_RULES",
-      "usage": 0.0
+      "limit": 100,
+      "metric": "SECURITY_POLICY_RULES"
     },
     {
-      "limit": 45.0,
-      "metric": "PACKET_MIRRORINGS",
-      "usage": 0.0
+      "limit": 45,
+      "metric": "PACKET_MIRRORINGS"
     },
     {
-      "limit": 300.0,
-      "metric": "NETWORK_ENDPOINT_GROUPS",
-      "usage": 0.0
+      "limit": 300,
+      "metric": "NETWORK_ENDPOINT_GROUPS"
     },
     {
-      "limit": 6.0,
-      "metric": "INTERCONNECTS",
-      "usage": 0.0
+      "limit": 6,
+      "metric": "INTERCONNECTS"
     },
     {
-      "limit": 5000.0,
-      "metric": "GLOBAL_INTERNAL_ADDRESSES",
-      "usage": 0.0
+      "limit": 5000,
+      "metric": "GLOBAL_INTERNAL_ADDRESSES"
     },
     {
-      "limit": 15.0,
-      "metric": "VPN_GATEWAYS",
-      "usage": 0.0
+      "limit": 15,
+      "metric": "VPN_GATEWAYS"
     },
     {
-      "limit": 2000.0,
-      "metric": "MACHINE_IMAGES",
-      "usage": 0.0
+      "limit": 2000,
+      "metric": "MACHINE_IMAGES"
     },
     {
-      "limit": 20.0,
-      "metric": "SECURITY_POLICY_CEVAL_RULES",
-      "usage": 0.0
+      "limit": 20,
+      "metric": "SECURITY_POLICY_CEVAL_RULES"
     },
     {
-      "limit": 15.0,
-      "metric": "EXTERNAL_VPN_GATEWAYS",
-      "usage": 0.0
+      "limit": 15,
+      "metric": "EXTERNAL_VPN_GATEWAYS"
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-cip-test-prod",
