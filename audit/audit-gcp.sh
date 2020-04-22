@@ -127,6 +127,7 @@ gcloud \
                     compute project-info describe \
                     --project="${PROJECT}" \
                     --format=json \
+                    | jq 'del(.quotas[].usage)' \
                     > "projects/${PROJECT}/services/${SVC}/project-info.json"
                 ;;
             container)
