@@ -1,0 +1,17 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:kubernetes-public",
+        "projectOwner:kubernetes-public"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:kubernetes-public"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    }
+  ]
+}

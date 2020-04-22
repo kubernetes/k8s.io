@@ -124,12 +124,6 @@
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/stackdriver.accounts.viewer"
-    },
-    {
-      "members": [
-        "user:thockin@gmail.com"
-      ],
-      "role": "roles/viewer"
     }
   ],
   "version": 1

@@ -4,6 +4,7 @@ bigquery.googleapis.com              BigQuery API
 bigquerystorage.googleapis.com       BigQuery Storage API
 clouderrorreporting.googleapis.com   Error Reporting API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
+cloudshell.googleapis.com            Cloud Shell API
 compute.googleapis.com               Compute Engine API
 container.googleapis.com             Kubernetes Engine API
 containerregistry.googleapis.com     Container Registry API

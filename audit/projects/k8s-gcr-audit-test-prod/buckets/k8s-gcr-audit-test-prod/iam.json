@@ -18,6 +18,12 @@
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io"
       ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ],
       "role": "roles/storage.objectAdmin"
     },
     {

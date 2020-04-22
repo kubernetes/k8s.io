@@ -19,6 +19,7 @@
     },
     {
       "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
         "serviceAccount:615281671549@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketWriter"
