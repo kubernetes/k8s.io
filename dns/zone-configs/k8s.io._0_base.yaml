@@ -204,6 +204,9 @@ sigs:
 slack:
   type: A
   value: 130.211.42.98
+slack-staging:
+  type: A
+  value: 34.107.195.71
 # Prow (@ixdy).
 submit-queue:
   type: CNAME
