@@ -231,6 +231,7 @@ groups:
       - thockin@google.com
       - bartek@smykla.com
       - james@munnelly.eu
+      - spiffxp@google.com
 
   - email-id: k8s-infra-dns-admins@kubernetes.io
     name: k8s-infra-dns-admins
