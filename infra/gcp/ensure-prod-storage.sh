@@ -94,7 +94,7 @@ function ensure_prod_gcr() {
         echo "ensure_prod_gcr(project) requires 1 argument" >&2
         return 1
     fi
-    project="${1}"
+    local project="${1}"
 
     color 6 "Ensuring the GCR exists and is readable"
     for r in "${PROD_REGIONS[@]}"; do
@@ -130,9 +130,9 @@ function ensure_prod_gcs_bucket() {
         echo "ensure_prod_gcs_bucket(project, bucket, [group]) requires 2 or 3 arguments" >&2
         return 1
     fi
-    project="${1}"
-    bucket="${2}"
-    group="${3:-}"
+    local project="${1}"
+    local bucket="${2}"
+    local group="${3:-}"
 
     color 6 "Ensuring the GCS bucket exists and is readable"
     ensure_public_gcs_bucket "${project}" "${bucket}"
@@ -157,8 +157,8 @@ function empower_group_to_fake_prod() {
         echo "empower_group_to_fake_prod(project, group) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    group="$2"
+    local project="$1"
+    local group="$2"
 
     color 6 "Empowering $group as project viewer in $project"
     empower_group_as_viewer "${project}" "${group}"

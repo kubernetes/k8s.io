@@ -62,8 +62,8 @@ function svc_acct_email() {
         echo "svc_acct_email(project, name) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    name="$2"
+    local project="$1"
+    local name="$2"
 
     echo "${name}@${project}.iam.gserviceaccount.com"
 }
@@ -76,14 +76,14 @@ function ensure_project() {
         echo "ensure_project(project) requires 1 argument" >&2
         return 1
     fi
-    project="$1"
+    local project="$1"
 
     if ! gcloud projects describe "${project}" >/dev/null 2>&1; then
         gcloud projects create "${project}" \
             --no-enable-cloud-apis \
             --organization "${GCP_ORG}"
     else
-        org=$(gcloud projects \
+        local org=$(gcloud projects \
                 describe "${project}" \
                 --flatten='parent[]' \
                 --format='csv[no-heading](type, id)' \
@@ -107,8 +107,8 @@ function enable_api() {
         echo "enable_api(project, api) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    api="$2"
+    local project="$1"
+    local api="$2"
 
     gcloud --project "${project}" services enable "${api}"
 }
@@ -121,8 +121,8 @@ function empower_group_as_viewer() {
         echo "empower_group_as_viewer(project, group) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    group="$2"
+    local project="$1"
+    local group="$2"
 
     gcloud \
         projects add-iam-policy-binding "${project}" \
@@ -140,10 +140,10 @@ function empower_service_account_for_cip_auditor_e2e_tester() {
         echo "empower_service_account_for_cip_auditor_e2e_tester(acct, project) requires 2 arguments" >&2
         return 1
     fi
-    acct="$1"
-    project="$2"
+    local acct="$1"
+    local project="$2"
 
-    roles=(
+    local roles=(
         roles/errorreporting.admin
         roles/logging.admin
         roles/pubsub.admin
@@ -169,8 +169,8 @@ function empower_group_for_gcb() {
         echo "empower_group_for_gcb(project, group) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    group="$2"
+    local project="$1"
+    local group="$2"
 
     gcloud \
         projects add-iam-policy-binding "${project}" \
@@ -196,8 +196,8 @@ function empower_group_for_kms() {
         echo "empower_group_for_kms(project, group) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    group="$2"
+    local project="$1"
+    local group="$2"
 
     gcloud \
         projects add-iam-policy-binding "${project}" \
@@ -218,8 +218,8 @@ function empower_prow() {
         echo "empower_prow(project, bucket) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    bucket="$2"
+    local project="$1"
+    local bucket="$2"
 
     # Allow prow to trigger builds.
     gcloud \
@@ -244,9 +244,9 @@ function empower_gcr_admins() {
         echo "empower_gcr_admins(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    region="${2:-}"
-    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local project="$1"
+    local region="${2:-}"
+    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_group_as_viewer "${project}" "${GCR_ADMINS}"
     empower_group_to_admin_gcs_bucket "${GCR_ADMINS}" "${bucket}"
@@ -260,8 +260,8 @@ function empower_gcs_admins() {
         echo "empower_gcs_admins(project, bucket) requires 2 arguments" >&2
         return 1
     fi
-    project="${1}"
-    bucket="${2}"
+    local project="${1}"
+    local bucket="${2}"
 
     empower_group_as_viewer "${project}" "${GCS_ADMINS}"
     empower_group_to_admin_gcs_bucket "${GCS_ADMINS}" "${bucket}"
@@ -275,9 +275,9 @@ function empower_group_to_admin_artifact_auditor() {
         echo "empower_group_to_admin_artifact_auditor(project, group_name) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    group="$2"
-    acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
+    local project="$1"
+    local group="$2"
+    local acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
 
     # Grant privileges to deploy the auditor Cloud Run service. See
     # https://cloud.google.com/run/docs/reference/iam/roles#additional-configuration.
@@ -311,10 +311,10 @@ function empower_artifact_promoter() {
         echo "empower_artifact_promoter(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    region="${2:-}"
+    local project="$1"
+    local region="${2:-}"
 
-    acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
+    local acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -333,9 +333,9 @@ function empower_artifact_auditor() {
         echo "empower_artifact_auditor(project) requires 1 argument" >&2
         return 1
     fi
-    project="$1"
+    local project="$1"
 
-    acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
+    local acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -372,9 +372,9 @@ function empower_artifact_auditor_invoker() {
         echo "empower_artifact_auditor_invoker(project) requires 1 argument" >&2
         return 1
     fi
-    project="$1"
+    local project="$1"
 
-    acct=$(svc_acct_email "${project}" "${AUDITOR_INVOKER_SVCACCT}")
+    local acct=$(svc_acct_email "${project}" "${AUDITOR_INVOKER_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -405,11 +405,11 @@ function ensure_service_account() {
         echo "ensure_service_account(project, name, display_name) requires 3 arguments" >&2
         return 1
     fi
-    project="$1"
-    name="$2"
-    display_name="$3"
+    local project="$1"
+    local name="$2"
+    local display_name="$3"
 
-    acct=$(svc_acct_email "${project}" "${name}")
+    local acct=$(svc_acct_email "${project}" "${name}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -428,9 +428,9 @@ function ensure_dns_zone() {
         echo "ensure_dns_zone(project, zone_name, dns_name) requires 3 arguments" >&2
         return 1
     fi
-    project="$1"
-    zone_name="$2"
-    dns_name="$3"
+    local project="$1"
+    local zone_name="$2"
+    local dns_name="$3"
 
   if ! gcloud --project "${project}" dns managed-zones describe "${zone_name}" >/dev/null 2>&1; then
       gcloud --project "${project}" \
@@ -459,9 +459,9 @@ function empower_ksa_to_svcacct() {
         return 1
     fi
 
-    ksa_scope="$1"
-    gcp_project="$2"
-    gcp_svcacct="$3"
+    local ksa_scope="$1"
+    local gcp_project="$2"
+    local gcp_svcacct="$3"
 
     gcloud iam service-accounts add-iam-policy-binding \
         --role roles/iam.workloadIdentityUser \

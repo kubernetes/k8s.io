@@ -50,7 +50,7 @@ function get_push_endpoint() {
         echo "get_push_endpoint(project_id) requires 1 argument" >&2
         return 1
     fi
-    project_id="$1"
+    local project_id="$1"
 
     gcloud \
         run services describe \
@@ -69,10 +69,10 @@ function enable_services() {
         echo "enable_services(project_id) requires 1 argument" >&2
         return 1
     fi
-    project_id="$1"
+    local project_id="$1"
 
     # Enable APIs.
-    services=(
+    local services=(
         "serviceusage.googleapis.com"
         "cloudresourcemanager.googleapis.com"
         "stackdriver.googleapis.com"
@@ -95,8 +95,8 @@ function link_run_to_pubsub() {
         echo "link_run_to_pubsub(project_id, project_number) requires 2 arguments" >&2
         return 1
     fi
-    project_id="$1"
-    project_number="$2"
+    local project_id="$1"
+    local project_number="$2"
 
     # Create "gcr" topic if it doesn't exist yet.
     if ! gcloud pubsub topics list --format='value(name)' --project="${project_id}" \
@@ -122,7 +122,7 @@ function link_run_to_pubsub() {
         # URL will never change (part of the service name is baked into it), as
         # per https://cloud.google.com/run/docs/deploying#url.
         local auditor_endpoint
-        auditor_endpoint=$(get_push_endpoint "${project_id}")
+        local auditor_endpoint=$(get_push_endpoint "${project_id}")
 
         gcloud \
             pubsub subscriptions create \
@@ -140,7 +140,7 @@ function link_run_to_pubsub() {
 # create a Cloud Run endpoint (https:// URL) that can be used in the rest of
 # this script (as auditor_endpoint).
 function create_dummy_endpoint() {
-    CLOUD_RUN_SERVICE_ACCOUNT="$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_SVCACCT}")"
+    local CLOUD_RUN_SERVICE_ACCOUNT="$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_SVCACCT}")"
     gcloud run deploy "${AUDITOR_SERVICE_NAME}" \
         --image="gcr.io/cloudrun/hello" \
         --platform=managed \
@@ -152,8 +152,8 @@ function create_dummy_endpoint() {
 
 function main() {
     # We want to run in the artifacts project to get pubsub most easily.
-    PROJECT_ID="k8s-artifacts-prod"
-    PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format "value(projectNumber)")
+    local PROJECT_ID="k8s-artifacts-prod"
+    local PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format "value(projectNumber)")
 
     enable_services "${PROJECT_ID}"
 

@@ -29,9 +29,9 @@ function _ensure_gcs_bucket() {
         echo "_ensure_gcs_bucket(project, bucket) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    bucket="$2"
-    location="us"
+    local project="$1"
+    local bucket="$2"
+    local location="us"
 
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
       gsutil mb -p "${project}" -l "${location}" "${bucket}"
@@ -47,8 +47,8 @@ function ensure_public_gcs_bucket() {
         echo "ensure_public_gcs_bucket(project, bucket) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    bucket="$2"
+    local project="$1"
+    local bucket="$2"
 
     _ensure_gcs_bucket "${project}" "${bucket}"
     gsutil iam ch allUsers:objectViewer "${bucket}"
@@ -62,8 +62,8 @@ function ensure_private_gcs_bucket() {
         echo "ensure_private_gcs_bucket(project, bucket) requires 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    bucket="$2"
+    local project="$1"
+    local bucket="$2"
 
     _ensure_gcs_bucket "${project}" "${bucket}"
     gsutil iam ch -d allUsers "${bucket}"
@@ -76,7 +76,7 @@ function ensure_gcs_web_policy() {
         echo "ensure_gcs_web_policy(bucket) requires 1 argument" >&2
         return 1
     fi
-    bucket="$1"
+    local bucket="$1"
 
     gsutil web set -m index.html "${bucket}"
 }
@@ -89,8 +89,8 @@ function upload_gcs_static_content() {
         echo "upload_gcs_static_content(bucket, dir) requires 2 arguments" >&2
         return 1
     fi
-    bucket="$1"
-    srcdir="$2"
+    local bucket="$1"
+    local srcdir="$2"
 
     # Checksum data to avoid no-op syncs.
     gsutil rsync -c "${srcdir}" "${bucket}"
@@ -104,8 +104,8 @@ function ensure_gcs_bucket_retention() {
         echo "ensure_gcs_bucket_retention(bucket, retention) requires 2 arguments" >&2
         return 1
     fi
-    bucket="$1"
-    retention="$2"
+    local bucket="$1"
+    local retention="$2"
 
     gsutil retention set "${retention}" "${bucket}"
 }
@@ -118,8 +118,8 @@ function ensure_gcs_bucket_auto_deletion() {
         echo "ensure_gcs_bucket_auto_deletion(bucket, auto_delettion_days) requires 2 arguments" >&2
         return 1
     fi
-    bucket="$1"
-    auto_deletion_days="$2"
+    local bucket="$1"
+    local auto_deletion_days="$2"
 
     echo "
         {
@@ -145,8 +145,8 @@ function _empower_principal_to_write_gcs_bucket() {
         echo "_empower_principal_to_write_gcs_bucket(principal, bucket) requires 2 arguments" >&2
         return 1
     fi
-    principal="$1"
-    bucket="$2"
+    local principal="$1"
+    local bucket="$2"
 
     gsutil iam ch \
         "${principal}:objectAdmin" \
@@ -164,8 +164,8 @@ function _empower_principal_to_admin_gcs_bucket() {
         echo "_empower_principal_to_admin_gcs_bucket(principal, bucket) requires 2 arguments" >&2
         return 1
     fi
-    principal="$1"
-    bucket="$2"
+    local principal="$1"
+    local bucket="$2"
 
     gsutil iam ch \
         "${principal}:objectAdmin" \
@@ -183,8 +183,8 @@ function empower_group_to_write_gcs_bucket() {
         echo "empower_group_to_write_gcs_bucket(group_email, bucket) requires 2 arguments" >&2
         return 1
     fi
-    group="$1"
-    bucket="$2"
+    local group="$1"
+    local bucket="$2"
 
     _empower_principal_to_write_gcs_bucket "group:${group}" "${bucket}"
 }
@@ -197,8 +197,8 @@ function empower_group_to_admin_gcs_bucket() {
         echo "empower_group_to_admin_gcs_bucket(group_email, bucket) requires 2 arguments" >&2
         return 1
     fi
-    group="$1"
-    bucket="$2"
+    local group="$1"
+    local bucket="$2"
 
     _empower_principal_to_admin_gcs_bucket "group:${group}" "${bucket}"
 }
@@ -211,8 +211,8 @@ function empower_svcacct_to_write_gcs_bucket() {
         echo "empower_svcacct_to_write_gcs_bucket(svcacct_email, bucket) requires 2 arguments" >&2
         return 1
     fi
-    svcacct="$1"
-    bucket="$2"
+    local svcacct="$1"
+    local bucket="$2"
 
     _empower_principal_to_write_gcs_bucket "serviceAccount:${svcacct}" "${bucket}"
 }
@@ -225,8 +225,8 @@ function empower_svcacct_to_admin_gcs_bucket() {
         echo "empower_svcacct_to_admin_gcs_bucket(svcacct_email, bucket) requires 2 arguments" >&2
         return 1
     fi
-    svcacct="$1"
-    bucket="$2"
+    local svcacct="$1"
+    local bucket="$2"
 
     _empower_principal_to_admin_gcs_bucket "serviceAccount:${svcacct}" "${bucket}"
 }
