@@ -6,7 +6,7 @@ metadata:
   namespace: {{namespace}}
 rules:
   - apiGroups: [""]
-    resources: ["configmaps", "endpoints", "persistentvolumeclaims", "pods", "resourcequotas", "services"]
+    resources: ["configmaps", "endpoints", "persistentvolumeclaims", "pods", "pods/log", "pods/status", "resourcequotas", "services"]
     verbs: ["*"]
   - apiGroups: ["autoscaling"]
     resources: ["horizontalpodautoscalers"]
