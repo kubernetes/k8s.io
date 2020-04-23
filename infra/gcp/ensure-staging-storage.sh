@@ -189,7 +189,6 @@ for REPO; do
     color 6 "Done"
 done
 
-exit 43
 # Special case: Release Managers
 color 6 "Configuring special cases for Release Managers"
 for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do

@@ -29,8 +29,8 @@ function gcs_bucket_for_gcr() {
         echo "gcs_bucket_for_gcr(repo, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
-    repo="$1"
-    region="${2:-}"
+    local repo="$1"
+    local region="${2:-}"
 
     if [ -z "${region}" ]; then
         echo "gs://artifacts.${repo}.appspot.com"
@@ -46,7 +46,7 @@ function gcr_host_for_region() {
         echo "gcr_host_for_region(region) requires 1 argument" >&2
         return 1
     fi
-    region="$1"
+    local region="$1"
 
     if [ -z "${region}" ]; then
         echo "gcr.io"
@@ -63,14 +63,14 @@ function ensure_gcr_repo() {
         echo "ensure_gcr_repo(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
-    project="$1"
-    region="${2:-}"
+    local project="$1"
+    local region="${2:-}"
 
-    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
-        host=$(gcr_host_for_region "${region}")
-        image="ceci-nest-pas-une-image"
-        dest="${host}/${project}/${image}"
+        local host=$(gcr_host_for_region "${region}")
+        local image="ceci-nest-pas-une-image"
+        local dest="${host}/${project}/${image}"
         docker pull k8s.gcr.io/pause
         docker tag k8s.gcr.io/pause "${dest}"
         docker push "${dest}"
@@ -91,10 +91,10 @@ function empower_group_to_write_gcr() {
         echo "empower_group_to_write_gcr(group_name, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
-    group="$1"
-    project="$2"
-    region="${3:-}"
-    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local group="$1"
+    local project="$2"
+    local region="${3:-}"
+    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_group_to_write_gcs_bucket "${group}" "${bucket}"
 }
@@ -108,10 +108,10 @@ function empower_group_to_admin_gcr() {
         echo "empower_group_to_admin_gcr(group_name, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
-    group="$1"
-    project="$2"
-    region="${3:-}"
-    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local group="$1"
+    local project="$2"
+    local region="${3:-}"
+    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_group_to_admin_gcs_bucket "${group}" "${bucket}"
 }
@@ -125,10 +125,10 @@ function empower_svcacct_to_write_gcr () {
         echo "empower_svcacct_to_write_gcr(acct, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
-    acct="$1"
-    project="$2"
-    region="${3:-}"
-    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local acct="$1"
+    local project="$2"
+    local region="${3:-}"
+    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_svcacct_to_write_gcs_bucket "${acct}" "${bucket}"
 }
@@ -142,10 +142,10 @@ function empower_svcacct_to_admin_gcr () {
         echo "empower_svcacct_to_admin_gcr(acct, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
-    acct="$1"
-    project="$2"
-    region="${3:-}"
-    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local acct="$1"
+    local project="$2"
+    local region="${3:-}"
+    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_svcacct_to_admin_gcs_bucket "${acct}" "${bucket}"
 }
