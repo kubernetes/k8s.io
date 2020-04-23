@@ -10,10 +10,15 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-coredns@kubernetes.io",
         "projectViewer:k8s-staging-coredns"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-coredns@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [

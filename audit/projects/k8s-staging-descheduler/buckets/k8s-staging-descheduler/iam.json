@@ -10,10 +10,15 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-descheduler@kubernetes.io",
         "projectViewer:k8s-staging-descheduler"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-descheduler@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [

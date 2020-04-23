@@ -10,7 +10,6 @@
     },
     {
       "members": [
-        "group:k8s-infra-push-cni@kubernetes.io",
         "projectViewer:k8s-artifacts-prod"
       ],
       "role": "roles/storage.legacyBucketReader"

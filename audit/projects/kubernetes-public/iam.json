@@ -20,6 +20,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "roles/compute.loadBalancerAdmin"
+    },
+    {
+      "members": [
         "serviceAccount:service-127754664067@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"
@@ -124,12 +130,6 @@
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/stackdriver.accounts.viewer"
-    },
-    {
-      "members": [
-        "user:thockin@gmail.com"
-      ],
-      "role": "roles/viewer"
     }
   ],
   "version": 1

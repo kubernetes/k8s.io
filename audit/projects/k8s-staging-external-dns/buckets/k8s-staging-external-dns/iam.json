@@ -10,10 +10,15 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-external-dns@kubernetes.io",
         "projectViewer:k8s-staging-external-dns"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-external-dns@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [

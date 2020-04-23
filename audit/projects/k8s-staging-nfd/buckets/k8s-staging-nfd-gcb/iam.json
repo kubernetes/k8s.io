@@ -10,10 +10,15 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-nfd@kubernetes.io",
         "projectViewer:k8s-staging-nfd"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-nfd@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
