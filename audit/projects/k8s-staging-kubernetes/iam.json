@@ -40,6 +40,7 @@
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-release-viewers@kubernetes.io",
         "group:k8s-infra-staging-kubernetes@kubernetes.io"
       ],
       "role": "roles/viewer"
