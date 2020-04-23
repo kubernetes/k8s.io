@@ -73,10 +73,3 @@ Use `make test` to run unit tests to verify the various endpoints on the server.
 Deploying
 ===
 Set kubectl to target the production cluster, then run `make deploy`.
-
-Publishing-bot
-===
-
-Details about running the [publishing-bot](https://git.k8s.io/publishing-bot)
-for the Kubernetes project can be found
-[here](https://git.k8s.io/publishing-bot/k8s-publishing-bot.md).
