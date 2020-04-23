@@ -10,10 +10,15 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-publishing-bot@kubernetes.io",
         "projectViewer:k8s-staging-publishing-bot"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-publishing-bot@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [

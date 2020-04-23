@@ -10,10 +10,15 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-dns@kubernetes.io",
         "projectViewer:k8s-staging-dns"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-dns@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [

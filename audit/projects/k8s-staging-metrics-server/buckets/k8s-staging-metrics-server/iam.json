@@ -10,10 +10,15 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-metrics-server@kubernetes.io",
         "projectViewer:k8s-staging-metrics-server"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-metrics-server@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
