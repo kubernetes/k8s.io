@@ -137,8 +137,8 @@ ensure_dns_zone "${PROJECT}" "canary-x-k8s-io" "canary.x-k8s.io"
 ensure_dns_zone "${PROJECT}" "canary-k8s-e2e-com" "canary.k8s-e2e.com"
 
 color 6 "Creating the BigQuery dataset for billing data"
-if ! bq --project "${PROJECT}" ls "${BQ_BILLING_DATASET}" >/dev/null 2>&1; then
-    bq --project "${PROJECT}" mk "${BQ_BILLING_DATASET}"
+if ! bq --project_id "${PROJECT}" ls "${BQ_BILLING_DATASET}" >/dev/null 2>&1; then
+    bq --project_id "${PROJECT}" mk "${BQ_BILLING_DATASET}"
 fi
 
 color 6 "Setting BigQuery permissions"
