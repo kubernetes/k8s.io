@@ -121,6 +121,18 @@ gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "group:${ACCOUNTING_GROUP}" \
     --role roles/bigquery.jobUser
 
+color 6 "Ensuring the k8s-infra-gcp-auditor serviceaccount exists"
+ensure_service_account \
+  "${PROJECT}" \
+  "k8s-infra-gcp-auditor" \
+  "Grants readonly access to org resources"
+
+color 6 "Empowering k8s-infra-gcp-auditor serviceaccount to be used on build cluster"
+empower_ksa_to_svcacct \
+  "kubernetes-public.svc.id.goog[test-pods/k8s-infra-gcp-auditor]" \
+  "${PROJECT}" \
+  $(svc_acct_email "${PROJECT}" "k8s-infra-gcp-auditor")
+
 color 6 "Empowering ${DNS_GROUP}"
 gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "group:${DNS_GROUP}" \
