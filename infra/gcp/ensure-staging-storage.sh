@@ -79,6 +79,7 @@ STAGING_PROJECTS=(
     releng
     scl-image-builder
     service-apis
+    slack-infra
     txtdirect
 )
 
