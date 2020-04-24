@@ -276,6 +276,7 @@ groups:
       - thockin@google.com
       - adolfo.garcia@uservers.net
       - bartek@smykla.com
+      - k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com
 
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
     name: Organization Administrators for kubernetes.io
