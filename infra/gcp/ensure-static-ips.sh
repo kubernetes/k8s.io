@@ -46,5 +46,5 @@ ADDRESSES=(
 
 for address in "${ADDRESSES[@]}"; do
     color 6 "Ensure address: $address"
-    ensure_global_ip "$address" "$PROJECT_NAME"
+    ensure_global_address "$address" "$PROJECT_NAME" "IP for aaa cluster Ingress"
 done

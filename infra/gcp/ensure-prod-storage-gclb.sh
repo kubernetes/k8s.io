@@ -53,9 +53,7 @@ color 6 "Enabling the compute API: ${PROD_PROJECT}"
 enable_api "${PROD_PROJECT}" compute.googleapis.com
 
 color 6 "Reconciling Global Address"
-if ! gcloud --project "${PROD_PROJECT}" compute addresses describe "${NAME}" --global >/dev/null 2>&1; then
-  gcloud --project "${PROD_PROJECT}" compute addresses create "${NAME}" --global --description="IP Address for GCLB for binary artifacts"
-fi
+ensure_global_address "${PROD_PROJECT}" "${NAME}" "IP Address for GCLB for binary artifacts"
 ip_addr=$(gcloud --project "${PROD_PROJECT}" compute addresses describe "${NAME}" --global --format='value(address)')
 echo "Address: ${ip_addr}"
 
