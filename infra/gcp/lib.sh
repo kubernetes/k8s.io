@@ -492,3 +492,28 @@ function ensure_global_address() {
         --global
     fi
 }
+
+# Ensure that a regional ip address exists, creating one if needed
+# $1 The GCP project
+# $2 The region (e.g. us-central1)
+# $3 The address name (e.g. foo-ingress)
+# $4 The address description (e.g. "IP address for the foo GCLB")
+function ensure_regional_address() {
+    if [ ! $# -eq 4 -o -z "$1" -o -z "$2" -o -z "$3" -o -z "$4" ]; then
+        echo "ensure_regional_address(gcp_project, region, name, description) requires 4 arguments" >&2
+        return 1
+    fi
+
+    local gcp_project="$1"
+    local region="$2"
+    local name="$3"
+    local description="$4"
+
+    if ! gcloud --project "${gcp_project}" compute addresses describe "${name}" --region="${region}" >/dev/null 2>&1; then
+      gcloud --project "${gcp_project}" \
+        compute addresses create \
+        "${name}" \
+        --description="${description}" \
+        --region="${region}"
+    fi
+}
