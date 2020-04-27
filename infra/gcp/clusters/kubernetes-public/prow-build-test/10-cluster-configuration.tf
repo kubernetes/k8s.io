@@ -50,7 +50,7 @@ resource "google_bigquery_dataset" "usage_metering" {
   }
   access {
     role          = "WRITER"
-    user_by_email = "${google_service_account.cluster_node_sa.email}"
+    user_by_email = google_service_account.cluster_node_sa.email
   }
 
   // This restricts deletion of this dataset if there is data in it
@@ -74,10 +74,6 @@ resource "google_container_cluster" "cluster" {
 
   // Network config
   network = "default"
-  ip_allocation_policy {
-    use_ip_aliases    = true
-    create_subnetwork = true
-  }
 
   // Start with a single node, because we're going to delete the default pool
   initial_node_count = 1
