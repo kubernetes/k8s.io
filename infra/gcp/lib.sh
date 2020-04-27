@@ -469,3 +469,23 @@ function empower_ksa_to_svcacct() {
         "${gcp_svcacct}" \
         --project="${gcp_project}"
 }
+
+# Ensure that global IP address exists, creating one if need.
+# $1 The IP name (e.g. k8s-io-ingress-prod)
+# $2 The GCP project
+function ensure_global_ip() {
+    if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_global_ip(name, project) requires 2 arguments" >&2
+        return 1
+    fi
+
+    local name="$1"
+    local project="$2"
+
+    # Create IP if it doesn't exist
+    if ! gcloud compute addresses describe "$name" --global \
+        --project "$project" > /dev/null 2>&1; then
+        gcloud compute addresses create "$name" --global \
+            --project "$project"
+    fi
+}
