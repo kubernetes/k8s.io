@@ -40,6 +40,9 @@ ensure_service_account \
   "kubernetes-public" \
   "prow-build-test" \
   "used by prowjobs that run in prow-build-test cluster"
+# the namespace "test-pods" here must match the namespace defined in prow's config.yaml
+# to launch pods defined by prowjobs
+# eg: https://github.com/kubernetes/test-infra/blob/master/config/prow/config.yaml#L73
 empower_ksa_to_svcacct \
   "kubernetes-public.svc.id.goog[test-pods/prow-build]" \
   "kubernetes-public" \
@@ -56,6 +59,11 @@ ensure_service_account \
   "kubernetes-public" \
   "boskos-janitor-test" \
   "used by boskos-janitor in prow-build-test cluster"
+# the namespace "test-pods" here must match the namespace defined in prows config.yaml
+# to launch pods defined by prowjobs because most prowjobs as-written assume they can
+# talk to either http://boskos (kubetest or bootstrap.py jobs) or 
+# https://boskos.svc.test-pods.cluster.local (some of the cluster-api jobs), and so
+# all boskos components are deployed to this namespace
 empower_ksa_to_svcacct \
   "kubernetes-public.svc.id.goog[test-pods/boskos-janitor]" \
   "kubernetes-public" \
@@ -107,9 +115,6 @@ for prj; do
     --role roles/editor
 
   # empower prowjobs in build cluster to ssh to nodes within projects
-  # TODO: the proper way to do this would be via WI + OS Login, prow doesn't do this yet
-  #       but I think this can be tied to workload identity with no prow changes?
-  # this key was manually generated, and is stored as a secret inside the build cluster
   prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
 
   # append to project-wide ssh-keys metadata if not present
