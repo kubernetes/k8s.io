@@ -1,2 +1,3 @@
 aaa	us-central1	us-central1-c;us-central1-a;us-central1-f	6	RUNNING
+prow-build-test	us-central1	us-central1-b;us-central1-a;us-central1-c	3	RUNNING
 development2	us-central1-b	us-central1-b		RUNNING

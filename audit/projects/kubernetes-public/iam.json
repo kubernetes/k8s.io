@@ -89,19 +89,22 @@
     },
     {
       "members": [
-        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+        "serviceAccount:gke-nodes-prow-build-test@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/logging.logWriter"
     },
     {
       "members": [
-        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+        "serviceAccount:gke-nodes-prow-build-test@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.metricWriter"
     },
     {
       "members": [
-        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+        "serviceAccount:gke-nodes-prow-build-test@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.viewer"
     },
