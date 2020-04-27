@@ -88,6 +88,7 @@ for prj; do
 
   # enable the necessary apis
   enable_api "${prj}" compute.googleapis.com
+  enable_api "${prj}" logging.googleapis.com
   enable_api "${prj}" storage-component.googleapis.com
 
   # empower prow to do what it needs within the project
