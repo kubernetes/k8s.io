@@ -10,7 +10,6 @@
     },
     {
       "members": [
-        "group:k8s-infra-conform-cri-o@kubernetes.io",
         "projectViewer:k8s-conform"
       ],
       "role": "roles/storage.legacyBucketReader"

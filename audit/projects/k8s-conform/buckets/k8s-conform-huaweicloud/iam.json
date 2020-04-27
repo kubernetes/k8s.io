@@ -10,7 +10,6 @@
     },
     {
       "members": [
-        "group:k8s-infra-conform-huaweicloud@kubernetes.io",
         "projectViewer:k8s-conform"
       ],
       "role": "roles/storage.legacyBucketReader"
