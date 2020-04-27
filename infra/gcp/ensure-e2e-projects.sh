@@ -70,8 +70,11 @@ ensure_regional_address \
 
 # TODO: replace spiffxp- projects with actual projects
 E2E_PROJECTS=(
+  # for manual use during node-e2e job migration, eg: --gcp-project=spiffxp-node-e2e-project
   spiffxp-node-e2e-project
+  # for manual use during job migration, eg: --gcp-project=spiffxp-gce-project
   spiffxp-gce-project
+  # managed by boskos, part of the gce-project pool, eg: --gcp-project-type=gce-project
   spiffxp-boskos-project-01
   spiffxp-boskos-project-02
   spiffxp-boskos-project-03
