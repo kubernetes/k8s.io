@@ -1,0 +1,26 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:service-563832977283@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:563832977283-compute@developer.gserviceaccount.com",
+        "serviceAccount:563832977283@cloudservices.gserviceaccount.com",
+        "serviceAccount:boskos-janitor-test@kubernetes-public.iam.gserviceaccount.com",
+        "serviceAccount:prow-build-test@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:spiffxp@google.com"
+      ],
+      "role": "roles/owner"
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,8 @@
+{
+  "displayName": "used by boskos-janitor in prow-build-test cluster",
+  "email": "boskos-janitor-test@kubernetes-public.iam.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/boskos-janitor-test@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "112754953974723030282",
+  "projectId": "kubernetes-public",
+  "uniqueId": "112754953974723030282"
+}

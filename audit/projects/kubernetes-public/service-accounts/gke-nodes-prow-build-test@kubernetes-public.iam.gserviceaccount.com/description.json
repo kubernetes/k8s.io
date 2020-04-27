@@ -1,0 +1,8 @@
+{
+  "displayName": "Nodes in GKE cluster 'prow-build-test'",
+  "email": "gke-nodes-prow-build-test@kubernetes-public.iam.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/gke-nodes-prow-build-test@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "111664200003425942667",
+  "projectId": "kubernetes-public",
+  "uniqueId": "111664200003425942667"
+}

@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prowjobs that run in prow-build-test cluster",
+  "email": "prow-build-test@kubernetes-public.iam.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/prow-build-test@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "106940697201046890677",
+  "projectId": "kubernetes-public",
+  "uniqueId": "106940697201046890677"
+}
