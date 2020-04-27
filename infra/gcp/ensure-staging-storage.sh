@@ -62,6 +62,7 @@ STAGING_PROJECTS=(
     e2e-test-images
     etcd
     external-dns
+    infra-tools
     kas-network-proxy
     kind
     kops
