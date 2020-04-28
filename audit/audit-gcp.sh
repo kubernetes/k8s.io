@@ -127,7 +127,7 @@ gcloud \
                     compute project-info describe \
                     --project="${PROJECT}" \
                     --format=json \
-                    | jq 'del(.quotas[].usage)' \
+                    | jq 'del(.quotas[].usage, .commonInstanceMetadata.fingerprint)' \
                     > "projects/${PROJECT}/services/${SVC}/project-info.json"
                 ;;
             container)
