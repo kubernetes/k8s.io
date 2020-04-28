@@ -38,8 +38,32 @@ function color() {
     echo "$@$(_nocolor)"
 }
 
+# ensure_gnu_sed
+# Determines which sed binary is gnu-sed on linux/darwin
+#
+# Sets:
+#  SED: The name of the gnu-sed binary
+#
+function ensure_gnu_sed() {
+  sed_help="$(LANG=C sed --help 2>&1 || true)"
+  if echo "${sed_help}" | grep -q "GNU\|BusyBox"; then
+    SED="sed"
+  elif command -v gsed &>/dev/null; then
+    SED="gsed"
+  else
+    >&2 echo "Failed to find GNU sed as sed or gsed. If you are on Mac: brew install gnu-sed"
+    return 1
+  fi
+  export SED
+}
+
+# indent relies on sed -u which isn't available in macOS's sed
+if ! ensure_gnu_sed; then
+  exit 1
+fi
+
 # Indent each line of stdin.
 # example: <command> | indent
 function indent() {
-    sed -u 's/^/  /'
+    ${SED} -u 's/^/  /'
 }
