@@ -61,6 +61,7 @@ STAGING_PROJECTS=(
     dns
     e2e-test-images
     etcd
+    etcdadm
     external-dns
     kas-network-proxy
     kind

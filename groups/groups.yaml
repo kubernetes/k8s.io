@@ -839,6 +839,17 @@ groups:
       - jingyih@google.com
       - yczhou@google.com
 
+  - email-id: k8s-infra-staging-etcadm@kubernetes.io
+    name: k8s-infra-staging-etcdadm
+    description: |-
+      ACL for staging etcdadm artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+      - dlipovetsky@d2iq.com
+      - neolit123@gmail.com
+
   - email-id: k8s-infra-staging-external-dns@kubernetes.io
     name: k8s-infra-staging-external-dns
     description: |-

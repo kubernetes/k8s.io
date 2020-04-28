@@ -1,0 +1,12 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+reviewers:
+  - dlipovetsky
+  - justinsb
+  - neolit123
+approvers:
+  - dlipovetsky
+  - justinsb
+  - neolit123
+labels:
+- sig/cluster-lifecycle
