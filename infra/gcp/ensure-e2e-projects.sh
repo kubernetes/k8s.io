@@ -36,10 +36,14 @@ function usage() {
 
 # TODO: replace prow-build-test with actual service account
 PROW_BUILD_SVCACCT=$(svc_acct_email "kubernetes-public" "prow-build-test")
+
+color 6 "Ensuring prow build cluster service-account exists"
 ensure_service_account \
   "kubernetes-public" \
   "prow-build-test" \
   "used by prowjobs that run in prow-build-test cluster"
+
+color 6 "Empowering prow build cluster service-account to be used on prow build cluster"
 # the namespace "test-pods" here must match the namespace defined in prow's config.yaml
 # to launch pods defined by prowjobs
 # eg: https://github.com/kubernetes/test-infra/blob/master/config/prow/config.yaml#L73
@@ -55,10 +59,14 @@ empower_ksa_to_svcacct \
 
 # TODO: replace boskos-janitor-test with actual service account
 BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "kubernetes-public" "boskos-janitor-test")
+
+color 6 "Ensuring boskos-janitor service account exists"
 ensure_service_account \
   "kubernetes-public" \
   "boskos-janitor-test" \
   "used by boskos-janitor in prow-build-test cluster"
+
+color 6 "Empowering boskos-janitor service-account to be used on prow build cluster"
 # the namespace "test-pods" here must match the namespace defined in prows config.yaml
 # to launch pods defined by prowjobs because most prowjobs as-written assume they can
 # talk to either http://boskos (kubetest or bootstrap.py jobs) or 
@@ -68,6 +76,9 @@ empower_ksa_to_svcacct \
   "kubernetes-public.svc.id.goog[test-pods/boskos-janitor]" \
   "kubernetes-public" \
   "${BOSKOS_JANITOR_SVCACCT}"
+
+color 6 "Ensuring external ip address exists for boskos-metrics service in prow build cluster"
+# TODO: replace this with a global address used by an ingress
 ensure_regional_address \
   "kubernetes-public" \
   "us-central1" \
@@ -94,27 +105,32 @@ if [ $# = 0 ]; then
 fi
 
 for prj; do
-  # create the project
+  color 6 "Ensuring e2e project exists: ${prj}"
   ensure_project "${prj}"
 
-  # enable the necessary apis
+  color 6 "Enabling APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
   enable_api "${prj}" compute.googleapis.com
   enable_api "${prj}" logging.googleapis.com
   enable_api "${prj}" storage-component.googleapis.com
 
-  # empower prow to do what it needs within the project
+  color 6 "Empower prow-build service account to edit e2e project: ${prj}"
+  # TODO: this is what prow.k8s.io uses today, but it is likely over-permissioned, we could
+  #       look into creating a more constrained IAM role and using that instead
   gcloud \
     projects add-iam-policy-binding "${prj}" \
     --member "serviceAccount:${PROW_BUILD_SVCACCT}" \
     --role roles/editor
 
-  # empower boskos-janitor to clean projects
+  color 6 "Empower boskos-janitor service account to clean e2e project: ${prj}"
+  # TODO: this is what prow.k8s.io uses today, but it is likely over-permissioned, we could
+  #       look into creating a more constrained IAM role and using that instead
   gcloud \
     projects add-iam-policy-binding "${prj}" \
     --member "serviceAccount:${BOSKOS_JANITOR_SVCACCT}" \
     --role roles/editor
 
-  # empower prowjobs in build cluster to ssh to nodes within projects
+  color 6 "Ensure prow-build prowjobs are able to ssh to instances in e2e project: ${prj}"
+  # TODO: this is what prow.k8s.io does today, we could look into use OS Login instead
   prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
 
   # append to project-wide ssh-keys metadata if not present
