@@ -12,7 +12,7 @@ resource "google_container_node_pool" "pool1" {
   cluster     = google_container_cluster.cluster.name
 
   provider = google-beta
-  project  = data.google_project.project.id
+  project  = data.google_project.project.name
 
   // Start with a single node
   initial_node_count = 1
