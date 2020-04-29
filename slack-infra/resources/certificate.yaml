@@ -11,4 +11,5 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt-prod
   dnsNames:
-  - slack-staging.k8s.io
+  - slack.k8s.io
+  - slack.kubernetes.io
