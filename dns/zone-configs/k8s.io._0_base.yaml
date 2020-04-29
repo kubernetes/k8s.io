@@ -200,10 +200,9 @@ relnotes:
 sigs:
   type: CNAME
   value: redirect.k8s.io.
-# Running on a GCE VM (@grodrigues3, @roberthbailey).
 slack:
   type: A
-  value: 130.211.42.98
+  value: 34.107.195.71
 slack-staging:
   type: A
   value: 34.107.195.71
