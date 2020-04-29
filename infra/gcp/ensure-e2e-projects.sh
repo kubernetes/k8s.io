@@ -37,51 +37,11 @@ function usage() {
 # TODO: replace prow-build-test with actual service account
 PROW_BUILD_SVCACCT=$(svc_acct_email "kubernetes-public" "prow-build-test")
 
-color 6 "Ensuring prow build cluster is empowered"
-(
-color 6 "Ensuring prow build cluster service-account exists"
-ensure_service_account \
-  "kubernetes-public" \
-  "prow-build-test" \
-  "used by prowjobs that run in prow-build-test cluster"
-
-color 6 "Empowering prow build cluster service-account to be used on prow build cluster"
-# the namespace "test-pods" here must match the namespace defined in prow's config.yaml
-# to launch pods defined by prowjobs
-# eg: https://github.com/kubernetes/test-infra/blob/master/config/prow/config.yaml#L73
-empower_ksa_to_svcacct \
-  "kubernetes-public.svc.id.goog[test-pods/prow-build]" \
-  "kubernetes-public" \
-  "${PROW_BUILD_SVCACCT}"
-
-# manual parts: 
-# - create key, add to prow-build-test as service-account secret
-# - gsutil iam ch serviceAccount:$PROW_BUILD_SVCACCT:objectAdmin gs://bashfire-prow
-# - gsutil iam ch serviceAccount:$PROW_BUILD_SVCACCT:objectCreator gs://bashfire-prow
-) 2>&1 | indent
-
 # TODO: replace boskos-janitor-test with actual service account
 BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "kubernetes-public" "boskos-janitor-test")
 
 color 6 "Ensuring boskos-janitor is empowered"
 (
-color 6 "Ensuring boskos-janitor service account exists"
-ensure_service_account \
-  "kubernetes-public" \
-  "boskos-janitor-test" \
-  "used by boskos-janitor in prow-build-test cluster"
-
-color 6 "Empowering boskos-janitor service-account to be used on prow build cluster"
-# the namespace "test-pods" here must match the namespace defined in prows config.yaml
-# to launch pods defined by prowjobs because most prowjobs as-written assume they can
-# talk to either http://boskos (kubetest or bootstrap.py jobs) or 
-# https://boskos.svc.test-pods.cluster.local (some of the cluster-api jobs), and so
-# all boskos components are deployed to this namespace
-empower_ksa_to_svcacct \
-  "kubernetes-public.svc.id.goog[test-pods/boskos-janitor]" \
-  "kubernetes-public" \
-  "${BOSKOS_JANITOR_SVCACCT}"
-
 color 6 "Ensuring external ip address exists for boskos-metrics service in prow build cluster"
 # this is so monitoring.prow.k8s.io is able to scrape metrics from boskos
 # TODO: replace this with a global address used by an ingress

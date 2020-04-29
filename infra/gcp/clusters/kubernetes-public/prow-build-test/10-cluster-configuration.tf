@@ -8,12 +8,64 @@ Note that it does not configure any node pools; this is done in a separate file.
 */
 
 locals {
-  cluster_name      = "prow-build-test" // This is the name of the cluster defined in this file
-  cluster_location  = "us-central1"     // This is the GCP location (region or zone) where the cluster should be created
-  bigquery_location = "US"              // This is the bigquery specific location where the dataset should be created
+  cluster_name            = "prow-build-test"     // The name of the cluster defined in this file
+  cluster_ksa_name        = "prow-build"          // MUST match the name of the KSA intended to use the prow_build_cluster_sa serviceaccount
+  cluster_location        = "us-central1"         // The GCP location (region or zone) where the cluster should be created
+  bigquery_location       = "US"                  // The bigquery specific location where the dataset should be created
+  pod_namespace           = "test-pods"           // MUST match whatever prow is configured to use when it schedules to this cluster
+  boskos_janitor_gsa_name = "boskos-janitor-test" // The name of the GCP SA used by boskos-janitor
+  boskos_janitor_ksa_name = "boskos-janitor"      // MUST match the name of the KSA intended to use the boskos_janitor_sa serviceaccount
 }
 
-// Create SA for nodes
+// Create GCP SA for pods
+// terraform import google_service_account.prow_build_cluster_sa projects/kubernetes-public/serviceAccounts/prow-build-test@kubernetes-public.iam.gserviceaccount.com
+resource "google_service_account" "prow_build_cluster_sa" {
+  project      = data.google_project.project.id
+  account_id   = local.cluster_name
+  display_name = "Used by pods in '${local.cluster_name}' GKE cluster"
+}
+// Allow pods using the build cluster KSA to use the GCP SA via workload identity
+data "google_iam_policy" "prow_build_cluster_sa_workload_identity" {
+  binding {
+    role = "roles/iam.workloadIdentityUser"
+
+    members = [
+      "serviceAccount:${data.google_project.project.id}.svc.id.goog[${local.pod_namespace}/${local.cluster_ksa_name}]",
+    ]
+  }
+}
+// Authoritative iam-policy: replaces any existing policy attached
+// terraform import google_service_account_iam_policy.prow_build_cluster_sa_iam projects/kubernetes-public/serviceAccounts/prow-build-test@kubernetes-public.iam.gserviceaccount.com
+resource "google_service_account_iam_policy" "prow_build_cluster_sa_iam" {
+  service_account_id = google_service_account.prow_build_cluster_sa.name
+  policy_data        = data.google_iam_policy.prow_build_cluster_sa_workload_identity.policy_data
+}
+
+// Create GCP SA for boskos-janitor
+// terraform import google_service_account.boskos_janitor_sa projects/kubernetes-public/serviceAccounts/boskos-janitor-test@kubernetes-public.iam.gserviceaccount.com
+resource "google_service_account" "boskos_janitor_sa" {
+  project      = data.google_project.project.id
+  account_id   = local.boskos_janitor_gsa_name
+  display_name = "Used by boskos-janitor in '${local.cluster_name}' GKE cluster"
+}
+// Allow pods using the build cluster KSA to use the GCP SA via workload identity
+data "google_iam_policy" "boskos_janitor_sa_workload_identity" {
+  binding {
+    role = "roles/iam.workloadIdentityUser"
+
+    members = [
+      "serviceAccount:${data.google_project.project.id}.svc.id.goog[${local.pod_namespace}/${local.boskos_janitor_ksa_name}]",
+    ]
+  }
+}
+// Authoritative iam-policy: replaces any existing policy attached
+// terraform import google_service_account_iam_policy.boskos_janitor_sa_iam projects/kubernetes-public/serviceAccounts/boskos-janitor-test@kubernetes-public.iam.gserviceaccount.com
+resource "google_service_account_iam_policy" "boskos_janitor_sa_iam" {
+  service_account_id = google_service_account.boskos_janitor_sa.name
+  policy_data        = data.google_iam_policy.boskos_janitor_sa_workload_identity.policy_data
+}
+
+// Create GCP SA for nodes
 resource "google_service_account" "cluster_node_sa" {
   project      = data.google_project.project.id
   account_id   = "gke-nodes-${local.cluster_name}"
