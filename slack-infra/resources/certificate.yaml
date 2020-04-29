@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: slack-infra
+  annotations:
+    acme.cert-manager.io/http01-override-ingress-name: "slack-infra"
+    cert-manager.io/issue-temporary-certificate: "true"
+spec:
+  secretName: slack-infra-k8s-io-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  dnsNames:
+  - slack-staging.k8s.io

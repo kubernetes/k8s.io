@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: slack-infra
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: slack-infra-ingress-prod
+spec:
+  tls:
+  - secretName: slack-infra-k8s-io-tls
+  backend:
+    serviceName: slackin2
+    servicePort: 80
+  rules:
+    - http:
+        paths:
+          - path: /infra/event-log/*
+            backend:
+              serviceName: slack-event-log
+              servicePort: 80
+          - path: /infra/moderator/*
+            backend:
+              serviceName: slack-moderator
+              servicePort: 80
+          - path: /infra/welcomer/*
+            backend:
+              serviceName: slack-welcomer
+              servicePort: 80
