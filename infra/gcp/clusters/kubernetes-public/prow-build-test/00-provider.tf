@@ -3,7 +3,6 @@ This file defines:
 - Required Terraform version
 - Required provider versions
 - Storage backend details
-- GCP project configuration
 */
 
 terraform {
@@ -18,9 +17,4 @@ terraform {
     google      = "~> 3.19.0"
     google-beta = "~> 3.19.0"
   }
-}
-
-// This configures the source project where we should install the cluster
-data "google_project" "project" {
-  project_id = "kubernetes-public"
 }
