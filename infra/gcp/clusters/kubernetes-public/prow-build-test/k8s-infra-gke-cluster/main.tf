@@ -1,48 +1,49 @@
-/*
-This file defines:
-- GCP Service Account for nodes
-- Bigquery dataset for usage metering
-- GKE cluster configuration
+/**
+ * Copyright 2020 The Kubernetes Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-Note that it does not configure any node pools; this is done in a separate file.
-*/
-
-locals {
-  cluster_name      = "prow-build-test" // This is the name of the cluster defined in this file
-  cluster_location  = "us-central1"     // This is the GCP location (region or zone) where the cluster should be created
-  bigquery_location = "US"              // This is the bigquery specific location where the dataset should be created
-}
-
-// Create SA for nodes
+// Create GCP SA for nodes
 resource "google_service_account" "cluster_node_sa" {
-  project      = data.google_project.project.id
-  account_id   = "gke-nodes-${local.cluster_name}"
-  display_name = "Nodes in GKE cluster '${local.cluster_name}'"
+  project      = var.project_name
+  account_id   = "gke-nodes-${var.cluster_name}"
+  display_name = "Nodes in GKE cluster '${var.cluster_name}'"
 }
 
 // Add roles for SA
 resource "google_project_iam_member" "cluster_node_sa_logging" {
-  project = data.google_project.project.id
+  project = var.project_name
   role    = "roles/logging.logWriter"
   member  = "serviceAccount:${google_service_account.cluster_node_sa.email}"
 }
 resource "google_project_iam_member" "cluster_node_sa_monitoring_viewer" {
-  project = data.google_project.project.id
+  project = var.project_name
   role    = "roles/monitoring.viewer"
   member  = "serviceAccount:${google_service_account.cluster_node_sa.email}"
 }
 resource "google_project_iam_member" "cluster_node_sa_monitoring_metricwriter" {
-  project = data.google_project.project.id
+  project = var.project_name
   role    = "roles/monitoring.metricWriter"
   member  = "serviceAccount:${google_service_account.cluster_node_sa.email}"
 }
 
 // BigQuery dataset for usage data
 resource "google_bigquery_dataset" "usage_metering" {
-  dataset_id  = replace("usage_metering_${local.cluster_name}", "-", "_")
-  project     = data.google_project.project.id
-  description = "GKE Usage Metering for cluster '${local.cluster_name}'"
-  location    = local.bigquery_location
+  dataset_id  = replace("usage_metering_${var.cluster_name}", "-", "_")
+  project     = var.project_name
+  description = "GKE Usage Metering for cluster '${var.cluster_name}'"
+  location    = var.bigquery_location
 
   access {
     role          = "OWNER"
@@ -60,11 +61,11 @@ resource "google_bigquery_dataset" "usage_metering" {
 
 // Create GKE cluster, but with no node pools. Node pools can be provisioned below
 resource "google_container_cluster" "cluster" {
-  name     = local.cluster_name
-  location = local.cluster_location
+  name     = var.cluster_name
+  location = var.cluster_location
 
   provider = google-beta
-  project  = data.google_project.project.id
+  project  = var.project_name
 
   // GKE clusters are critical objects and should not be destroyed
   // IMPORTANT: should be false on test clusters
@@ -99,7 +100,7 @@ resource "google_container_cluster" "cluster" {
 
   // Enable workload identity for GCP IAM
   workload_identity_config {
-    identity_namespace = "${data.google_project.project.id}.svc.id.goog"
+    identity_namespace = "${var.project_name}.svc.id.goog"
   }
 
   // Enable Stackdriver Kubernetes Monitoring
