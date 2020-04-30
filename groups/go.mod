@@ -3,9 +3,11 @@ module k8s.io/k8s.io/groups
 go 1.12
 
 require (
-	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297
-	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	google.golang.org/api v0.9.0
+	cloud.google.com/go v0.56.0
+	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e
+	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
+	google.golang.org/api v0.20.0
+	google.golang.org/genproto v0.0.0-20200429120912-1f37eeb960b2
 	gopkg.in/yaml.v2 v2.2.2
 	k8s.io/test-infra v0.0.0-20191024183346-202cefeb6ff5
 )
