@@ -34,6 +34,10 @@ check-prod:
 push:
 	$(CURDIR)/push.sh
 
+.PHONY: dry-run
+dry-run:
+	$(CURDIR)/push.sh --dry-run
+
 .PHONY: build
 build:
 	docker build -t $(USER)/octodns $(CURDIR)/octodns-docker
