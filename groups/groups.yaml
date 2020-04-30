@@ -291,6 +291,18 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-group-admins@kubernetes.io
+    name: Group Administrators for kubernetes.io
+    description: |-
+      People trusted to admin kubernetes.io google groups by
+      running the groups reconciler
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
   #
   # Push groups: k8s-infra-push-*
   #

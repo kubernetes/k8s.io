@@ -1,7 +1,7 @@
 # Configuration for the kubernetes.io Google Groups setup
 
-# file path of the google groups service account token
-token-file: k8s-gsuite-1781c2662b57.json
+# Secret version of the service account key to use
+secret-version: projects/k8s-gsuite/secrets/gsuite-groups-manager_key/versions/latest
 
 # Email id of the bot service account
 bot-id: wg-k8s-infra-api@kubernetes.io

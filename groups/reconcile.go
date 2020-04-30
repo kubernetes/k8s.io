@@ -29,11 +29,13 @@ import (
 	"reflect"
 	"time"
 
+	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/admin/directory/v1"
 	"google.golang.org/api/googleapi"
 	"google.golang.org/api/groupssettings/v1"
+	secretmanagerpb "google.golang.org/genproto/googleapis/cloud/secretmanager/v1"
 	"gopkg.in/yaml.v2"
 
 	"k8s.io/test-infra/pkg/genyaml"
@@ -43,8 +45,8 @@ type Config struct {
 	// the email id for the bot/service account
 	BotID string `yaml:"bot-id"`
 
-	// the file with the authentication information
-	TokenFile string `yaml:"token-file,omitempty"`
+	// the gcloud secret containing a service account key to authenticate with
+	SecretVersion string `yaml:"secret-version,omitempty"`
 
 	// the file with the groups/members information
 	GroupsFile string `yaml:"groups-file,omitempty"`
@@ -107,18 +109,14 @@ func main() {
 		log.Fatal(err)
 	}
 
-	jsonCredentials, err := ioutil.ReadFile(config.TokenFile)
-	if err != nil {
-		log.Fatal(err)
-	}
+	serviceAccountKey, err := accessSecretVersion(config.SecretVersion)
 
-	credential, err := google.JWTConfigFromJSON(jsonCredentials, admin.AdminDirectoryUserReadonlyScope,
+	credential, err := google.JWTConfigFromJSON(serviceAccountKey, admin.AdminDirectoryUserReadonlyScope,
 		admin.AdminDirectoryGroupScope,
 		admin.AdminDirectoryGroupMemberScope,
 		groupssettings.AppsGroupsSettingsScope)
 	if err != nil {
-		log.Fatalf("Unable to parse client secret file to config: %v\n. "+
-			"Please run 'git-crypt unlock'", err)
+		log.Fatalf("Unable to authenticate using key in secret-version %s, %v", config.SecretVersion, err)
 	}
 	credential.Subject = config.BotID
 
@@ -620,4 +618,25 @@ func removeMembersFromGroup(service *admin.Service, groupEmailId string, members
 func deepCopySettings(a, b interface{}) {
 	byt, _ := json.Marshal(a)
 	json.Unmarshal(byt, b)
+}
+
+// accessSecretVersion accesses the payload for the given secret version if one exists
+// secretVersion is of the form projects/{project}/secrets/{secret}/versions/{version}
+func accessSecretVersion(secretVersion string) ([]byte, error) {
+	ctx := context.Background()
+	client, err := secretmanager.NewClient(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create secretmanager client: %v", err)
+	}
+
+	req := &secretmanagerpb.AccessSecretVersionRequest{
+		Name: secretVersion,
+	}
+
+	result, err := client.AccessSecretVersion(ctx, req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to access secret version: %v", err)
+	}
+
+	return result.Payload.Data, nil
 }

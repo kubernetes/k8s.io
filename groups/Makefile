@@ -23,6 +23,4 @@ default: run
 
 .PHONY: run
 run:
-	git-crypt unlock
 	GO111MODULE=on go run reconcile.go $(runargs)
-	git-crypt lock
