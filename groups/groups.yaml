@@ -1053,6 +1053,18 @@ groups:
       - bowei@google.com
       - antonio.ojea.garcia@gmail.com
 
+  - email-id: k8s-infra-staging-slack-infra@kubernetes.io
+    name: k8s-infra-staging-slack-infra
+    description: |-
+      ACL for staging Slack Infra
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - ameukam@gmail.com
+      - bartek@smykla.com
+      - ktbry@google.com
+      - james@munnelly.eu
+
   - email-id: k8s-infra-staging-txtdirect@kubernetes.io
     name: k8s-infra-staging-txtdirect
     description: |-
