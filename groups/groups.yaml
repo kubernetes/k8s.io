@@ -850,6 +850,20 @@ groups:
       - difazio.raffaele@gmail.com
       - nick@juni.io
 
+  - email-id: k8s-infra-staging-infra-tools@kubernetes.io
+    name: k8s-infra-staging-infra-tools
+    description: |-
+      ACL for staging Infra Tools
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bartek@smykla.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - james@munnelly.eu
+      - thockin@google.com
+      - spiffxp@google.com
+
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
     name: k8s-infra-staging-kas-network-proxy
     description: |-
