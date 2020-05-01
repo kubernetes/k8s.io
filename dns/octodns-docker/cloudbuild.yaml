@@ -9,4 +9,4 @@ substitutions:
 images:
 - "gcr.io/$PROJECT_ID/octodns:$_GIT_TAG"
 options:
-  substitution_option: "ALLOW_LOOSE"
+  substitution_option: 'ALLOW_LOOSE'
