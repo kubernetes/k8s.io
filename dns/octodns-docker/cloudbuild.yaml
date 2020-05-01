@@ -5,6 +5,7 @@ steps:
           '.']
 substitutions:
   _GIT_TAG: "12345"
+  _PULL_BASE_REF: 'master'
 images:
 - "gcr.io/$PROJECT_ID/octodns:$_GIT_TAG"
 options:
