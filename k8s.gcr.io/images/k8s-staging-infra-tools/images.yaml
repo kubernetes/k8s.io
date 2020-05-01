@@ -1,1 +1,3 @@
-# No images yet
+- name: octodns
+  dmap:
+    "sha256:838d6134142eea4ce926c0bfe2f2bd2bbd7580e42e42aea39259575951273c44a": ["v20200501-36789b1"]
