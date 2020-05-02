@@ -9,3 +9,9 @@
 # - kube-controller-manager
 # - kube-proxy
 # - kube-scheduler
+# - pause
+
+- name: pause
+  dmap:
+    sha256:a319ac2280eb7e3a59e252e54b76327cb4a33cf8389053b0d78277f22bbca2fa:
+    - 3.3

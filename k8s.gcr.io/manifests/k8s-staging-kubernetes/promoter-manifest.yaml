@@ -9,6 +9,7 @@
 # - kube-controller-manager
 # - kube-proxy
 # - kube-scheduler
+# - pause
 #
 # google group for gcr.io/k8s-staging-kubernetes is k8s-infra-staging-kubernetes@kubernetes.io
 registries:
