@@ -40,7 +40,7 @@ groups:
     members:
       - dgiles@linuxfoundation.org
       - jberkus@redhat.com
-      - chris@chrisshort.net 
+      - chris@chrisshort.net
       - samudralavamshi@gmail.com
 
   - email-id: conduct@kubernetes.io
@@ -477,6 +477,7 @@ groups:
       - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
+      - marky.r.jackson@gmail.com
       - saschagrunert@gmail.com
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
@@ -896,7 +897,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - amwat@google.com
-      - antonio.ojea.garcia@gmail.com 
+      - antonio.ojea.garcia@gmail.com
       - bentheelder@google.com
       - james@munnelly.eu
 
@@ -1171,7 +1172,7 @@ groups:
       - onlydole@gmail.com
       - rcantw3ll@gmail.com
       - sandoval@adobe.com
-      
+
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
