@@ -5,8 +5,13 @@
 # The following images are managed within this project:
 # - cloud-controller-manager
 # - conformance (will likely be moved to another staging project)
-# - hyperkube (to be deprecated in a future release)
 # - kube-apiserver
 # - kube-controller-manager
 # - kube-proxy
 # - kube-scheduler
+# - pause
+
+- name: pause
+  dmap:
+    sha256:a319ac2280eb7e3a59e252e54b76327cb4a33cf8389053b0d78277f22bbca2fa:
+    - 3.3
