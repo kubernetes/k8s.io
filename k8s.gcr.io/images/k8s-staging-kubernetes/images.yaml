@@ -5,7 +5,6 @@
 # The following images are managed within this project:
 # - cloud-controller-manager
 # - conformance (will likely be moved to another staging project)
-# - hyperkube (to be deprecated in a future release)
 # - kube-apiserver
 # - kube-controller-manager
 # - kube-proxy

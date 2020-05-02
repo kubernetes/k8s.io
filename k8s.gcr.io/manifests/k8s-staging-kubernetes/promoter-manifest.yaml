@@ -5,7 +5,6 @@
 # The following images are managed within this project:
 # - cloud-controller-manager
 # - conformance (will likely be moved to another staging project)
-# - hyperkube (to be deprecated in a future release)
 # - kube-apiserver
 # - kube-controller-manager
 # - kube-proxy
@@ -15,11 +14,9 @@
 registries:
 - name: gcr.io/k8s-staging-kubernetes
   src: true
-# TODO(justaugustus): Change these values to {us,eu,asia}.gcr.io/k8s-artifacts-prod (ROOT level)
-#                     after releng image promotion testing is complete AND BEFORE the vanity domain flip.
-- name: us.gcr.io/k8s-artifacts-prod/releng-vdf-temp-prod
+- name: us.gcr.io/k8s-artifacts-prod/kubernetes
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: eu.gcr.io/k8s-artifacts-prod/releng-vdf-temp-prod
+- name: eu.gcr.io/k8s-artifacts-prod/kubernetes
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: asia.gcr.io/k8s-artifacts-prod/releng-vdf-temp-prod
+- name: asia.gcr.io/k8s-artifacts-prod/kubernetes
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
