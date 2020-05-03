@@ -20,3 +20,49 @@
   dmap:
     sha256:b118abac0bcf633b9db4086584ee718526fe394cf1bd18aee036e6cc497860f6:
     - v2.1.0
+    sha256:ebda8587ec0f49eb88ee3a608ef018484908cbc5aa32556a0d78356088c185d4:
+    - v2.0.0
+- name: debian-base-amd64
+  dmap:
+    sha256:d7be39e143d4e6677a28c81c0a84868b40800fc979dea1848bb19d526668a00c:
+    - v2.0.0
+- name: debian-base-arm
+  dmap:
+    sha256:fc731da13b0bc9013b85a86b583fc92e50869b5bc8e7aa6ca730ec0240954c7d:
+    - v2.0.0
+- name: debian-base-arm64
+  dmap:
+    sha256:12502c3eed050fa9b6d5fe353a44bfc5f437dc325c8912b1a48dcc180df36f1e:
+    - v2.0.0
+- name: debian-base-ppc64le
+  dmap:
+    sha256:4277aa59b63c5a1369e6d84a295ecc4ffa08985dcf114de9f7b6de1af4fcbc86:
+    - v2.0.0
+- name: debian-base-s390x
+  dmap:
+    sha256:78ef2a6b017539379c1654b4e52ba8519bfec821c62d0b3a1dbd15104b711e21:
+    - v2.0.0
+- name: debian-iptables
+  dmap:
+    sha256:d1cd487e89fb4cba853cd3a948a6e9016faf66f2a7bb53cb1ac6b6c9cb58f5ed:
+    - v12.0.1
+- name: debian-iptables-amd64
+  dmap:
+    sha256:852d3c569932059bcab3a52cb6105c432d85b4b7bbd5fc93153b78010e34a783:
+    - v12.0.1
+- name: debian-iptables-arm
+  dmap:
+    sha256:c10f01b414a7cd4b2f3e26e152c90c64a1e781d99f83a6809764cf74ecbc46c3:
+    - v12.0.1
+- name: debian-iptables-arm64
+  dmap:
+    sha256:5725e6fde13a6405cf800e22846ebd2bde24b0860f1dc3f6f5f256f03cfa85bd:
+    - v12.0.1
+- name: debian-iptables-ppc64le
+  dmap:
+    sha256:b6d6e56a0c34c0393dcba0d5faaa531b92e5876114c5ab5a90e82e4889724c5a:
+    - v12.0.1
+- name: debian-iptables-s390x
+  dmap:
+    sha256:39e67e9bf25d67fe35bd9dcb25367277e5967368e02f2741e0efd4ce8874db14:
+    - v12.0.1
