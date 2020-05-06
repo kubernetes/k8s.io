@@ -58,6 +58,12 @@ resource "google_project_service" "oslogin" {
   service = "oslogin.googleapis.com"
   disable_dependent_services = true
 }
+resource "google_project_service" "cloudbuild" {
+  project = google_project.project.project_id
+  service = "cloudbuild.googleapis.com"
+  disable_dependent_services = true
+}
+
 
 // "Empower cluster admins" is what ensure-main-project.sh says
 resource "google_project_iam_member" "cluster_admins_as_compute_viewer" {

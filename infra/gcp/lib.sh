@@ -39,8 +39,11 @@ AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
 # This is the Cloud Run service name of the auditor.
 AUDITOR_SERVICE_NAME="cip-auditor"
 
+# TODO: decommission this once we've flipped to prow-build-trusted
 # The service account email for Prow (not in this org for now).
 PROW_SVCACCT="deployer@k8s-prow.iam.gserviceaccount.com"
+# The service account email used by prow-build-trusted to trigger GCB and push to GCS
+GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
 
 # The GCP org stuff needed to turn it all on.
 GCP_ORG="758905017065" # kubernetes.io
@@ -221,10 +224,17 @@ function empower_prow() {
     local project="$1"
     local bucket="$2"
 
+    # commands are copy-pasted so that one set can turn into deletes
+    # when we're ready to decommission PROW_SVCACCT
+
     # Allow prow to trigger builds.
     gcloud \
         projects add-iam-policy-binding "${project}" \
         --member "serviceAccount:${PROW_SVCACCT}" \
+        --role roles/cloudbuild.builds.builder
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "serviceAccount:${GCB_BUILDER_SVCACCT}" \
         --role roles/cloudbuild.builds.builder
 
     # Allow prow to push source and access build logs.
@@ -233,6 +243,12 @@ function empower_prow() {
         "${bucket}"
     gsutil iam ch \
         "serviceAccount:${PROW_SVCACCT}:objectViewer" \
+        "${bucket}"
+    gsutil iam ch \
+        "serviceAccount:${GCB_BUILDER_SVCACCT}:objectCreator" \
+        "${bucket}"
+    gsutil iam ch \
+        "serviceAccount:${GCB_BUILDER_SVCACCT}:objectViewer" \
         "${bucket}"
 }
 

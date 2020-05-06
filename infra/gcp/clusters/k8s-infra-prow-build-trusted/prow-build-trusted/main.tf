@@ -24,11 +24,12 @@ This file defines:
 
 locals {
   project_id              = "k8s-infra-prow-build-trusted"
-  cluster_name            = "prow-build-trusted"   // The name of the cluster defined in this file
-  cluster_ksa_name        = "prow-build-trusted"   // MUST match the name of the KSA intended to use the prow_build_cluster_sa serviceaccount
-  cluster_location        = "us-central1"          // The GCP location (region or zone) where the cluster should be created
-  bigquery_location       = "US"                   // The bigquery specific location where the dataset should be created
-  pod_namespace           = "test-pods"            // MUST match whatever prow is configured to use when it schedules to this cluster
+  cluster_name            = "prow-build-trusted"  // The name of the cluster defined in this file
+  cluster_location        = "us-central1"         // The GCP location (region or zone) where the cluster should be created
+  bigquery_location       = "US"                  // The bigquery specific location where the dataset should be created
+  pod_namespace           = "test-pods"           // MUST match whatever prow is configured to use when it schedules to this cluster
+  cluster_sa_name         = "prow-build-trusted"  // Name of the GSA and KSA that pods use by default
+  gcb_builder_sa_name     = "gcb-builder"         // Name of the GSA and KSA that pods use to be allowed to run GCB builds and push to GCS buckets
 }
 
 // TODO: I think more people than me should have owner/edit access to this project
@@ -41,7 +42,7 @@ module "project" {
 // Create GCP SA for pods
 resource "google_service_account" "prow_build_cluster_sa" {
   project      = local.project_id
-  account_id   = local.cluster_name
+  account_id   = local.cluster_sa_name
   display_name = "Used by pods in '${local.cluster_name}' GKE cluster"
 }
 // Allow pods using the build cluster KSA to use the GCP SA via workload identity
@@ -50,7 +51,7 @@ data "google_iam_policy" "prow_build_cluster_sa_workload_identity" {
     role = "roles/iam.workloadIdentityUser"
 
     members = [
-      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.cluster_ksa_name}]",
+      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.cluster_sa_name}]",
     ]
   }
 }
@@ -58,6 +59,28 @@ data "google_iam_policy" "prow_build_cluster_sa_workload_identity" {
 resource "google_service_account_iam_policy" "prow_build_cluster_sa_iam" {
   service_account_id = google_service_account.prow_build_cluster_sa.name
   policy_data        = data.google_iam_policy.prow_build_cluster_sa_workload_identity.policy_data
+}
+
+// Create GCP SA for jobs that use GCB and push results to GCS
+resource "google_service_account" "gcb_builder_sa" {
+  project      = local.project_id
+  account_id   = local.gcb_builder_sa_name
+  display_name = local.gcb_builder_sa_name
+}
+// Allow pods using the build cluster KSA to use the GCP SA via workload identity
+data "google_iam_policy" "gcb_builder_sa_workload_identity" {
+  binding {
+    role = "roles/iam.workloadIdentityUser"
+
+    members = [
+      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.gcb_builder_sa_name}]",
+    ]
+  }
+}
+// Authoritative iam-policy: replaces any existing policy attached to this service_account
+resource "google_service_account_iam_policy" "gcb_builder_sa_iam" {
+  service_account_id = google_service_account.gcb_builder_sa.name
+  policy_data        = data.google_iam_policy.gcb_builder_sa_workload_identity.policy_data
 }
 
 module "prow_build_cluster" {
