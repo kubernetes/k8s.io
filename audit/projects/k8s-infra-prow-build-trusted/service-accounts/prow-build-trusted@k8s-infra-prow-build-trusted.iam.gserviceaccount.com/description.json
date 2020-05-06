@@ -1,0 +1,8 @@
+{
+  "displayName": "Used by pods in 'prow-build-trusted' GKE cluster",
+  "email": "prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "oauth2ClientId": "100468422900474789171",
+  "projectId": "k8s-infra-prow-build-trusted",
+  "uniqueId": "100468422900474789171"
+}

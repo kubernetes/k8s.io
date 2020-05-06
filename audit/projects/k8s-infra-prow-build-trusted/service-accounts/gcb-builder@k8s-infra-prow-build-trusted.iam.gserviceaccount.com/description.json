@@ -1,0 +1,8 @@
+{
+  "displayName": "gcb-builder",
+  "email": "gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "oauth2ClientId": "112742619569156756728",
+  "projectId": "k8s-infra-prow-build-trusted",
+  "uniqueId": "112742619569156756728"
+}
