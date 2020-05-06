@@ -34,17 +34,13 @@ function usage() {
 
 ## setup service accounts and ips for the prow build cluster
 
-# TODO(spiffxp): delete kubernetes-public prow-build-test SA
 PROW_BUILD_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
-# TODO(spiffxp): delete kubernetes-public boskos-janitor SA
 BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "boskos-janitor")
 
 color 6 "Ensuring boskos-janitor is empowered"
 (
 color 6 "Ensuring external ip address exists for boskos-metrics service in prow build cluster"
 # this is so monitoring.prow.k8s.io is able to scrape metrics from boskos
-# TODO(spiffxp): get rid of kubernetes-public/boskos-metrics regional ip address
-# TODO(spiffxp): redo this as a global ip address and use ingress
 ensure_regional_address \
   "k8s-infra-prow-build" \
   "us-central1" \
@@ -55,7 +51,6 @@ ensure_regional_address \
 ## setup projects to be used by e2e tests for standing up clusters
 
 E2E_PROJECTS=(
-  # TODO(spiffxp): delete spiffxp- projects
   # for manual use during node-e2e job migration, eg: --gcp-project=k8s-infra-e2e-gce-project
   k8s-infra-e2e-gce-project
   # for manual use during job migration, eg: --gcp-project=k8s-infra-e2e-node-e2e-project
