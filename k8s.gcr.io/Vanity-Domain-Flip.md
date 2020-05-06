@@ -94,7 +94,7 @@ In order for a user to push to `k8s-artifacts-prod`, they must:
 
 1. Ensure that they have a [subproject staging repo][staging-subproject] (e.g.,
    `gcr.io/k8s-staging-foo` for the `foo` subproject).
-2. Add the promotion metadata in the [manifests subdirectory][] in the k8s.io repo.
+2. Add the promotion metadata in the [manifests subdirectory][./manifests] in the k8s.io repo.
 
 ### Security Restrictions
 
@@ -176,7 +176,7 @@ gcloud \
     $(printf "resource.type=project logName=%s resource.labels.project_id=%s" cip-audit-log k8s-artifacts-prod)
 ```
 
-The configuration for deploying the prod Cloud Run instance is [here][../infra/gcp/deploy-cip-auditor.sh].
+The configuration for deploying the prod Cloud Run instance is [here][../infra/gcp/cip-auditor/deploy.sh].
 
 ## Prow Integration
 
