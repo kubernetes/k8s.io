@@ -1,0 +1,7 @@
+resources:
+- names:
+  - spiffxp-boskos-project-01
+  - spiffxp-boskos-project-02
+  - spiffxp-boskos-project-03
+  state: dirty
+  type: gce-project
