@@ -18,6 +18,13 @@
     },
     {
       "members": [
+        "group:k8s-infra-release-admins@kubernetes.io",
+        "group:k8s-infra-release-editors@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
         "group:k8s-infra-release-admins@kubernetes.io",
         "group:k8s-infra-release-editors@kubernetes.io"
@@ -26,14 +33,16 @@
     },
     {
       "members": [
-        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com"
+        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectCreator"
     },
     {
       "members": [
         "allUsers",
-        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com"
+        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectViewer"
     }
