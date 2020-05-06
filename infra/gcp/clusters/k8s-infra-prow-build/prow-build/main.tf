@@ -101,6 +101,11 @@ module "prow_build_nodepool" {
   name            = "pool1"
   min_count       = 2
   max_count       = 6
+  # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
+  # use an UBUNTU image instead. Why the CONTAINERD variant? I don't know, but
+  # it's what k8s-prow-builds/prow (prow.k8s.io's existing google.com build 
+  # cluster) is using today, so we're just going to follow that
+  image_type      = "UBUNTU_CONTAINERD"
   machine_type    = "n1-highmem-8"
   disk_size_gb    = 250
   disk_type       = "pd-ssd"
