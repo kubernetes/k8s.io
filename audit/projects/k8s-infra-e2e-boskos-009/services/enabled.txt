@@ -1,0 +1,6 @@
+NAME                              TITLE
+compute.googleapis.com            Compute Engine API
+logging.googleapis.com            Cloud Logging API
+monitoring.googleapis.com         Cloud Monitoring API
+oslogin.googleapis.com            Cloud OS Login API
+storage-component.googleapis.com  Cloud Storage
