@@ -3,7 +3,8 @@
     {
       "members": [
         "serviceAccount:220811308229@cloudbuild.gserviceaccount.com",
-        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com"
+        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.builder"
     },
