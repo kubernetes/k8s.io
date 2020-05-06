@@ -34,19 +34,19 @@ function usage() {
 
 ## setup service accounts and ips for the prow build cluster
 
-# TODO: replace prow-build-test with actual service account
-PROW_BUILD_SVCACCT=$(svc_acct_email "kubernetes-public" "prow-build-test")
-
-# TODO: replace boskos-janitor-test with actual service account
-BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "kubernetes-public" "boskos-janitor-test")
+# TODO(spiffxp): delete kubernetes-public prow-build-test SA
+PROW_BUILD_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
+# TODO(spiffxp): delete kubernetes-public boskos-janitor SA
+BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "boskos-janitor")
 
 color 6 "Ensuring boskos-janitor is empowered"
 (
 color 6 "Ensuring external ip address exists for boskos-metrics service in prow build cluster"
 # this is so monitoring.prow.k8s.io is able to scrape metrics from boskos
-# TODO: replace this with a global address used by an ingress
+# TODO(spiffxp): get rid of kubernetes-public/boskos-metrics regional ip address
+# TODO(spiffxp): redo this as a global ip address and use ingress
 ensure_regional_address \
-  "kubernetes-public" \
+  "k8s-infra-prow-build" \
   "us-central1" \
   "boskos-metrics" \
   "to allow monitoring.k8s.prow.io to scrape boskos metrics"
@@ -54,17 +54,17 @@ ensure_regional_address \
 
 ## setup projects to be used by e2e tests for standing up clusters
 
-# TODO: replace spiffxp- projects with actual projects
 E2E_PROJECTS=(
-  # for manual use during node-e2e job migration, eg: --gcp-project=spiffxp-node-e2e-project
-  spiffxp-node-e2e-project
-  # for manual use during job migration, eg: --gcp-project=spiffxp-gce-project
-  spiffxp-gce-project
-  # managed by boskos, part of the gce-project pool, eg: --gcp-project-type=gce-project
-  spiffxp-boskos-project-01
-  spiffxp-boskos-project-02
-  spiffxp-boskos-project-03
+  # TODO(spiffxp): delete spiffxp- projects
+  # for manual use during node-e2e job migration, eg: --gcp-project=k8s-infra-e2e-gce-project
+  k8s-infra-e2e-gce-project
+  # for manual use during job migration, eg: --gcp-project=k8s-infra-e2e-node-e2e-project
+  k8s-infra-e2e-node-e2e-project
 )
+
+for i in $(seq 1 40); do
+  E2E_PROJECTS+=($(printf "k8s-infra-e2e-boskos-%03i" $i))
+done
 
 if [ $# = 0 ]; then
     # default to all e2e projects
@@ -80,6 +80,7 @@ for prj; do
     color 6 "Enabling APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
     enable_api "${prj}" compute.googleapis.com
     enable_api "${prj}" logging.googleapis.com
+    enable_api "${prj}" monitoring.googleapis.com
     enable_api "${prj}" storage-component.googleapis.com
 
     color 6 "Empower prow-build service account to edit e2e project: ${prj}"
