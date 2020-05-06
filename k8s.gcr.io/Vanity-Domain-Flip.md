@@ -131,9 +131,9 @@ The backup GCR locations are:
 ## Prow Integration
 
 - [`ci-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/test-infra/test-infra-trusted.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/ci-k8sio-backup))
-  Runs an hourly backup of all GCR images in
+  Runs a backup of all GCR images in
   `{asia,eu,us}.gcr.io/k8s-artifacts-prod` to
-  `{asia,eu,us}.gcr.io/k8s-artifacts-prod-bak/YEAR/MONTH/DAY/HOUR/...`.
+  `{asia,eu,us}.gcr.io/k8s-artifacts-prod-bak/...`.
 - [`pull-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-k8sio-backup))
   Checks that changes to the [backup scripts][k8sio-backup] are
   valid. Like the `pull-cip-e2e` and `pull-cip-auditor-e2e` jobs, this job
