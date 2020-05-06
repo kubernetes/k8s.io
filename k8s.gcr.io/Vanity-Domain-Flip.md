@@ -117,10 +117,16 @@ access to GCR.
 
 # Backups
 
-The GCR images in `k8s-artifacts-prod` are backed up every hour. This is done
-with the `ci-k8sio-backup` [Prow job][ci-k8sio-backup-code]. All images are
-backed up, even legacy images that appeared before the promoter went online that
-were not tagged and can only be referenced by their digest.
+The GCR images in `k8s-artifacts-prod` are backed up every 12 hours, by region.
+This is done with the `ci-k8sio-backup` [Prow job][ci-k8sio-backup-code]. All
+images are backed up, even legacy images that appeared before the promoter went
+online that were not tagged and can only be referenced by their digest.
+
+The backup GCR locations are:
+
+- https://asia.gcr.io/k8s-artifacts-prod-bak
+- https://eu.gcr.io/k8s-artifacts-prod-bak
+- https://us.gcr.io/k8s-artifacts-prod-bak
 
 ## Prow Integration
 
