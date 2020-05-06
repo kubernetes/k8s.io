@@ -1,22 +1,13 @@
 {
   "commonInstanceMetadata": {
-    "fingerprint": "9_em4FUS_lU=",
     "items": [
-      {
-        "key": "sshKeys",
-        "value": "\ngke-d554984da2fcb0ac8bc0:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCciUMboaB8M/sJNv26iHSudr8Tv5P/TYDuiLlX6l3+4zxwzGa9rjT+0tmG4VkFFlZNEMq9Rn0bK2uFrJXaep8KbhpMz2pX9H8h+1RXOzVBjIBqbo3D5k87u9TzuLAgozdxxP/eiMdJ4OT0u/YIqTIDVJPcNEDvkHdo/Kl5KplfwBOQVpQq2muzqQweCBNeEvekvF6YL1YcUY25nnCR/e/ANLYZFnTofCe878wMZagdteimGh07fUuYJfOna2XhPQrfN1kNrDlEVfzwnQSvM81nFvCRlYezSZdvmT4GDUbDMf9sN1SbocLzNU2MjjwUd2xZfuuEI8PV/iCwWMYRSf5v gke-d554984da2fcb0ac8bc0@gke-d554984da2fcb0ac8bc0\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKXgEw3R4S+t496FUji26QwLbLIUESOgiWTPVTaxqEvQnNQzTV67IPk7JEgKoYV5Dff6Q3D3Zh0EJM1RhpIddhgQLTPOO9/vQcdtf9Vz7yLyL8s/f5ki5Lvj1zCEN7jObBG6KXihHxodPgOeMX4NidKUOAzHXnTCzDBa0JOl4lCUy1KOd803X5F1ZRsL3L2Hxt8o9XarNF1cB0i3Kp++FXVEhPtFy/mmt7nMW3vtibNde4YiUsRbdAX7NVuo5WAleKYLrm4Y+ag3YsVBXHrNc3tTX1qObAcyA1hMq9lj/gojsjMukAev4OpKUarLZ9/3HpJsNHNgiprzsf64D5Gc8N gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQt9qiv2SV6ov+lrjeD5pfqMU02I6BLmUPXJyMPwXAAnukAcBNyO1bS3jUuGWMb/jKRBS/vq8EV8+urAB0pbHUvuCXm4+sV4ijhvft4LX9cZlnC5OrvWnWTWXyWFTAv6fEGMd9MjxjOoBPKzrfDlPcdXNxa+1zCqG2zvDhhGKaEehqdGInnjmlDQbWKRzXB7zcIlf6mjK0VynPeoCpipQX4zRUqhAYKwIvrHDrFoP2hsdv2ohubAJ69PfqOX+QzVQacXbLFCDdN8DUVW7HouHzE2mfKKM2Jc9PFj/9iqG0aq0Yxfw+YAHqXs6T/rpN3nNxBuHdJWeLVrGRXaP/GQVt gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBNMH5E+KJ5ZCzXQHeGo2UviWijMTaOooI8DLkfM6gd1TWbta8QPxbz1R6haOTHwCuBosGe94ldwUgCGHBbCDdgGWvFHYRa7mGRYkqHtmaUafe0esUlfhA1dB3a7d4HvsCEXj2h6ukjA7RCJTH7Xo5Eohe9i61gecg84YNQjyop9mbBnCbwqfxx/z+wy+5kQ0+n5oeTJHT13xvZTcKbX4UuEFziive1J+O9pkXvDPStCRfzd08M39PzTxm9Ipi+10v9bk8KkH8ET0hnLtTJgveBVMszMr1St5JwNfMdTyihEWkAwlzG6v7HBEcude5YHmhypQQ/7/rRIzRV8lofFjn gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863"
-      },
-      {
-        "key": "gke-development2-d554984d-cidr",
-        "value": "default:10.48.0.0/14"
-      },
-      {
-        "key": "ssh-keys",
-        "value": "davanum:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAGzbjz/9gjnmMMxhoTtwBHsJ55MTVOq4DUV8L2h/hheAMp6UlDz63CVanDk9fhc4f9cFshNfz5cfJKFVghaNhuvJdg9/HZWM5Ittxedsk5V9AvLdAMpCn5u2HI7jAHLgTKff/XdjbanZPhvH2fLI6vaz2smsINzEFfMr3bqP64BM7VaHlM4BxOohL0o5S5oCjnuQaeVWSDd5BFuTeH25TsL7xzromCrubE9ARvXSUmPbHj5S1WrCEDXSfIWaOjJu4IVM28RtLtgVOrxR3J9hLnqz5nD2OB/1jC6agHSC/nZ50uu6+WGF8SRaOf5OfifDUCEhAFnHgIyFUU7BttOq8c0= google-ssh {\"userName\":\"davanum@gmail.com\",\"expireOn\":\"2020-01-28T15:21:55+0000\"}\ndavanum:ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO/UMR7NA99YiCIEntowu5TLd49fKv72D+rRJMPhrMUfPpM6HKFZq90x4vgK4z3TNUMw4dQvxaviu1dgQxH5R+w= google-ssh {\"userName\":\"davanum@gmail.com\",\"expireOn\":\"2020-01-28T15:21:52+0000\"}\n"
-      },
       {
         "key": "gke-aaa-4d0eb763-secondary-ranges",
         "value": "services:default:gke-aaa-subnet-4d0eb763:gke-aaa-services-4d0eb763,pods:default:gke-aaa-subnet-4d0eb763:gke-aaa-pods-4d0eb763"
+      },
+      {
+        "key": "sshKeys",
+        "value": "\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKXgEw3R4S+t496FUji26QwLbLIUESOgiWTPVTaxqEvQnNQzTV67IPk7JEgKoYV5Dff6Q3D3Zh0EJM1RhpIddhgQLTPOO9/vQcdtf9Vz7yLyL8s/f5ki5Lvj1zCEN7jObBG6KXihHxodPgOeMX4NidKUOAzHXnTCzDBa0JOl4lCUy1KOd803X5F1ZRsL3L2Hxt8o9XarNF1cB0i3Kp++FXVEhPtFy/mmt7nMW3vtibNde4YiUsRbdAX7NVuo5WAleKYLrm4Y+ag3YsVBXHrNc3tTX1qObAcyA1hMq9lj/gojsjMukAev4OpKUarLZ9/3HpJsNHNgiprzsf64D5Gc8N gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQt9qiv2SV6ov+lrjeD5pfqMU02I6BLmUPXJyMPwXAAnukAcBNyO1bS3jUuGWMb/jKRBS/vq8EV8+urAB0pbHUvuCXm4+sV4ijhvft4LX9cZlnC5OrvWnWTWXyWFTAv6fEGMd9MjxjOoBPKzrfDlPcdXNxa+1zCqG2zvDhhGKaEehqdGInnjmlDQbWKRzXB7zcIlf6mjK0VynPeoCpipQX4zRUqhAYKwIvrHDrFoP2hsdv2ohubAJ69PfqOX+QzVQacXbLFCDdN8DUVW7HouHzE2mfKKM2Jc9PFj/9iqG0aq0Yxfw+YAHqXs6T/rpN3nNxBuHdJWeLVrGRXaP/GQVt gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863\ngke-4d0eb7639c079dd86863:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBNMH5E+KJ5ZCzXQHeGo2UviWijMTaOooI8DLkfM6gd1TWbta8QPxbz1R6haOTHwCuBosGe94ldwUgCGHBbCDdgGWvFHYRa7mGRYkqHtmaUafe0esUlfhA1dB3a7d4HvsCEXj2h6ukjA7RCJTH7Xo5Eohe9i61gecg84YNQjyop9mbBnCbwqfxx/z+wy+5kQ0+n5oeTJHT13xvZTcKbX4UuEFziive1J+O9pkXvDPStCRfzd08M39PzTxm9Ipi+10v9bk8KkH8ET0hnLtTJgveBVMszMr1St5JwNfMdTyihEWkAwlzG6v7HBEcude5YHmhypQQ/7/rRIzRV8lofFjn gke-4d0eb7639c079dd86863@gke-4d0eb7639c079dd86863"
       }
     ],
     "kind": "compute#metadata"
