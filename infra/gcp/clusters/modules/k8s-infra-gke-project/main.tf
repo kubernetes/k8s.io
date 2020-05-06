@@ -63,6 +63,11 @@ resource "google_project_service" "cloudbuild" {
   service = "cloudbuild.googleapis.com"
   disable_dependent_services = true
 }
+resource "google_project_service" "stackdriver" {
+  project = google_project.project.project_id
+  service = "stackdriver.googleapis.com"
+  disable_dependent_services = true
+}
 
 
 // "Empower cluster admins" is what ensure-main-project.sh says
