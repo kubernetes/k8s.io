@@ -16,7 +16,12 @@
 
 output "cluster" {
   description = "The cluster"
-  value       = google_container_cluster.cluster
+  // Workaround from https://github.com/hashicorp/terraform/issues/22544#issuecomment-582974372
+  // This should be either test_cluster or prod_cluster
+  value       = coalescelist(
+    google_container_cluster.test_cluster.*,
+    google_container_cluster.prod_cluster.*
+  )[0]
 }
 
 output "cluster_node_sa" {

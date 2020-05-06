@@ -33,3 +33,9 @@ variable "bigquery_location" {
   description = "The bigquery specific location where the dataset should be created"
   type        = string
 }
+
+variable "is_prod_cluster" {
+  description = "If this is not a prod cluster it's safe to delete resources on destroy"
+  type        = string
+  default     = "false"
+}
