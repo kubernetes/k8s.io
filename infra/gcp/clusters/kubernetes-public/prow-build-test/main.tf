@@ -83,7 +83,7 @@ resource "google_service_account_iam_policy" "boskos_janitor_sa_iam" {
 }
 
 module "prow_build_test_cluster" {
-  source = "./k8s-infra-gke-cluster"
+  source = "../../modules/k8s-infra-gke-cluster"
   project_name      = data.google_project.project.name
   cluster_name      = local.cluster_name
   cluster_location  = local.cluster_location
@@ -91,7 +91,7 @@ module "prow_build_test_cluster" {
 }
 
 module "prow_build_test_nodepool" {
-  source = "./k8s-infra-gke-nodepool"
+  source = "../../modules/k8s-infra-gke-nodepool"
   project_name    = data.google_project.project.name
   cluster_name    = module.prow_build_test_cluster.cluster.name
   location        = module.prow_build_test_cluster.cluster.location

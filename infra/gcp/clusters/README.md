@@ -3,9 +3,9 @@
 This directory contains Terraform cluster configurations for the various GCP
 projects that the Kubernetes project maintains.
 
-Each directory represents a GCP project.  Each sub-directory of those represents
-a GKE cluster configuration.  We may template these into modules at some point,
-but for now they are designed to be straight forward and verbose.
+Each directory except `modules` represents a GCP project.  Each sub-directory of
+those represents a GKE cluster configuration.  Not everything is able to use the
+modules yet due to differences in google provider version. 
 
 Prerequisites:
 - Be a member of the k8s-infra-cluster-admins@kubernetes.io group.
