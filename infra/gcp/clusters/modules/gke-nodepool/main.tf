@@ -44,6 +44,8 @@ resource "google_container_node_pool" "node_pool" {
     machine_type = var.machine_type
     disk_size_gb = var.disk_size_gb
     disk_type    = var.disk_type
+    labels       = var.labels
+    taint        = var.taints
 
     service_account = var.service_account
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
@@ -61,5 +63,9 @@ resource "google_container_node_pool" "node_pool" {
   // the old one
   lifecycle {
     create_before_destroy = true
+    # https://www.terraform.io/docs/providers/google/r/container_cluster.html#taint
+    ignore_changes = [
+      node_config["taint"],
+    ]
   }
 }
