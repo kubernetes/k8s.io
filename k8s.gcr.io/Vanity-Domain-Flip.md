@@ -94,7 +94,7 @@ In order for a user to push to `k8s-artifacts-prod`, they must:
 
 1. Ensure that they have a [subproject staging repo][staging-subproject] (e.g.,
    `gcr.io/k8s-staging-foo` for the `foo` subproject).
-2. Add the promotion metadata in the [manifests subdirectory][./manifests] in the k8s.io repo.
+2. Add the promotion metadata in the [manifests subdirectory](/k8s.gcr.io/manifests) in the k8s.io repo.
 
 ### Security Restrictions
 
