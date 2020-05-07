@@ -98,3 +98,7 @@
     - v12.1.0
     sha256:39e67e9bf25d67fe35bd9dcb25367277e5967368e02f2741e0efd4ce8874db14:
     - v12.0.1
+- name: go-runner
+  dmap:
+    sha256:536ab131b0d0e3b13eb83c985cc0ac9ba7e69e7dac9521e6cacd6a8b6019e0a6:
+    - v0.1.0
