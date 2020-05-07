@@ -50,16 +50,34 @@ ensure_regional_address \
 
 ## setup projects to be used by e2e tests for standing up clusters
 
-E2E_PROJECTS=(
+E2E_MANUAL_PROJECTS=(
   # for manual use during node-e2e job migration, eg: --gcp-project=k8s-infra-e2e-gce-project
   k8s-infra-e2e-gce-project
   # for manual use during job migration, eg: --gcp-project=k8s-infra-e2e-node-e2e-project
   k8s-infra-e2e-node-e2e-project
+  # for manual use during job migration, eg: --gcp-projec=k8s-infra-e2e-scale-project
+  k8s-infra-e2e-scale-project
 )
 
+# general purpose e2e projects, no quota changes
+E2E_BOSKOS_PROJECTS=()
 for i in $(seq 1 40); do
-  E2E_PROJECTS+=($(printf "k8s-infra-e2e-boskos-%03i" $i))
+  E2E_BOSKOS_PROJECTS+=($(printf "k8s-infra-e2e-boskos-%03i" $i))
 done
+
+# e2e projects for scalability jobs
+# - us-east1 cpu quota raised to 125
+# - us-east1 in-use addresses quota raised to 125
+E2E_SCALE_PROJECTS=()
+for i in $(seq 1 5); do
+  E2E_SCALE_PROJECTS+=($(printf "k8s-infra-e2e-boskos-scale-%02i" $i))
+done
+
+E2E_PROJECTS=(
+  "${E2E_MANUAL_PROJECTS[@]}"
+  "${E2E_BOSKOS_PROJECTS[@]}"
+  "${E2E_SCALE_PROJECTS[@]}"
+)
 
 if [ $# = 0 ]; then
     # default to all e2e projects

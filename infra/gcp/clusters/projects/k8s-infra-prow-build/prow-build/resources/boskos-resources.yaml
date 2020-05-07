@@ -42,3 +42,11 @@ resources:
   - k8s-infra-e2e-boskos-040
   state: dirty
   type: k8s-infra-gce-project
+- names:
+  - k8s-infra-e2e-boskos-scale-01
+  - k8s-infra-e2e-boskos-scale-02
+  - k8s-infra-e2e-boskos-scale-03
+  - k8s-infra-e2e-boskos-scale-04
+  - k8s-infra-e2e-boskos-scale-05
+  state: dirty
+  type: scalability-project
