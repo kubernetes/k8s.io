@@ -238,7 +238,7 @@ auditor service. Its members are listed [here](../groups/groups.yaml).
 - GCS: Google Cloud Storage
 
 [CIP]:https://github.com/kubernetes-sigs/k8s-container-image-promoter
-[internal-promoter]:go/registry-promoter
+[internal-promoter]:http://go/registry-promoter
 [k8sio]:https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io
 [k8sio-manifests]:https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io/manifests
 [k8sio-backup]:https://github.com/kubernetes/k8s.io/tree/master/infra/gcp/backup_tools
