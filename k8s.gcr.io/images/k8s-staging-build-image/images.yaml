@@ -100,7 +100,7 @@
     - v12.0.1
 - name: go-runner
   dmap:
-    sha256:8ee20934e6c005a9ce8d6d8b7ed23698c3bb80e0b30a3d49e5aeca928cc69bf3:
+    sha256:536ab131b0d0e3b13eb83c985cc0ac9ba7e69e7dac9521e6cacd6a8b6019e0a6:
     - v0.1.0
     sha256:4892faa2de0533bc1af72b9b233936f21a9e7362063345d170de1a8f464f2ad8:
     - v0.1.1
