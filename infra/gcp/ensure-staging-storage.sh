@@ -178,6 +178,10 @@ for REPO; do
         color 6 "Enabling the KMS API"
         enable_api "${PROJECT}" cloudkms.googleapis.com
 
+        # Enable Secret Manager APIs
+        color 6 "Enabling the Secret Manager API"
+        enable_api "${PROJECT}" secretmanager.googleapis.com
+
         # Enable GCB and Prow to build and push images.
 
         # Enable GCB APIs
@@ -220,3 +224,5 @@ for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
         fi
     ) 2>&1 | indent
 done
+
+
