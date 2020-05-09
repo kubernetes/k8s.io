@@ -3,7 +3,8 @@
     {
       "members": [
         "serviceAccount:874328413592@cloudbuild.gserviceaccount.com",
-        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com"
+        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.builder"
     },
@@ -24,6 +25,12 @@
         "serviceAccount:service-874328413592@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-874328413592@container-engine-robot.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.serviceAgent"
     },
     {
       "members": [

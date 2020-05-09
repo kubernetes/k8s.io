@@ -1,0 +1,161 @@
+{
+  "commonInstanceMetadata": {
+    "items": [
+      {
+        "key": "gke-prow-build-trusted-8f83dcb7-cidr",
+        "value": "default:10.4.0.0/14"
+      },
+      {
+        "key": "sshKeys",
+        "value": "gke-8f83dcb7a83817de2408:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcqrAFbHYlsvt25hXLlNR1ZfOixmZUoaPh99ueAu1i94A507qQtfe4QbrQBIvR5r49QOpkDzL6kF0eluXbeLuke8blq7eMYVDOd9NWihUvVc40m79OCzxBXNWgd85en0JcPPuQS+SDNdCqf5CFvv93x3/NnU9riLNOQV6SOK+nTVmoNfKmrKqw0PgrwEFrxM8Wf3XDvSGmEqzT93Jpeij10Wn1tUDOODnPQAODYZQIRUp0WrJnenfE8UzUX75nbRCjiRfOcrQn4vmyMZ1XBkuv7HnbArsHWSRaEcJtF4C8wQx6sLdzw3o6F6LgwVQVEyc4EZJOPfDV+ysy6SnHROd1 gke-8f83dcb7a83817de2408@gke-8f83dcb7a83817de2408\ngke-8f83dcb7a83817de2408:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCVYGyDIkhLSSK6fUovrMQ+4IDeIoLBtVfcYPIQuEoOxS7CDxx1W6m5Hlrxp9pKV9wlQbDy9GbhbqZztisReG3zB11w71g9AMxTVc/IQpDVzOt++Nb4rFIJI46a3lLXuY8MMpH+ch483qtOWEz9hvuvbdqVZ2vLebvUW7oITiZUGaGnGfIjGe1tIDc3DGpBSV/71aJ4Uf235SuZy1D14Uiw6FeNnH7jEpEQdKm2t+wYE02M83DfC6HcQZcV42fvQopuYO9KrCtCA6Op+LBRCdtIKM9PAGik5seT5050bNznHGyqLTcqClT8qzQzzsLbAPnvMEiEGQlNKUH4VosJpAB7 gke-8f83dcb7a83817de2408@gke-8f83dcb7a83817de2408\ngke-8f83dcb7a83817de2408:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCaGRrHYdKzserLbKq4F90jANA1Og3gF79f4cOQ0N8skGqQkrwgFRh+Nb+PtT/Brr0uhZZB0bjdLBrcLWR5VoZQV+zCD/hmjLNBMWWx7satLnqShp2c2Q6db+IBwEuLfD152NqIZMAjgUELI8YmpoyG39u0blzDiDHj4LR2XzgCktYKPRwiPGWvx3I+sNk4YEnTAFynT9kXa601jzBwxr+VvSAMNSJXYf20aISLoPov+28gO5St970NOWjQYcQ8BQAi7jaTbizQOyd+92RWPsPksvvmAafhtqu3Lm5j9tA4ZqJFfX60WTMPeu4viUMf+tJrGNZmrNsFCb4Xvilly9a3 gke-8f83dcb7a83817de2408@gke-8f83dcb7a83817de2408"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "creationTimestamp": "2020-04-30T16:41:21.119-07:00",
+  "defaultNetworkTier": "PREMIUM",
+  "defaultServiceAccount": "180382678033-compute@developer.gserviceaccount.com",
+  "id": "7420505769285967055",
+  "kind": "compute#project",
+  "name": "k8s-infra-prow-build-trusted",
+  "quotas": [
+    {
+      "limit": 5000,
+      "metric": "SNAPSHOTS"
+    },
+    {
+      "limit": 15,
+      "metric": "NETWORKS"
+    },
+    {
+      "limit": 200,
+      "metric": "FIREWALLS"
+    },
+    {
+      "limit": 2000,
+      "metric": "IMAGES"
+    },
+    {
+      "limit": 21,
+      "metric": "STATIC_ADDRESSES"
+    },
+    {
+      "limit": 250,
+      "metric": "ROUTES"
+    },
+    {
+      "limit": 45,
+      "metric": "FORWARDING_RULES"
+    },
+    {
+      "limit": 150,
+      "metric": "TARGET_POOLS"
+    },
+    {
+      "limit": 150,
+      "metric": "HEALTH_CHECKS"
+    },
+    {
+      "limit": 69,
+      "metric": "IN_USE_ADDRESSES"
+    },
+    {
+      "limit": 150,
+      "metric": "TARGET_INSTANCES"
+    },
+    {
+      "limit": 30,
+      "metric": "TARGET_HTTP_PROXIES"
+    },
+    {
+      "limit": 30,
+      "metric": "URL_MAPS"
+    },
+    {
+      "limit": 9,
+      "metric": "BACKEND_SERVICES"
+    },
+    {
+      "limit": 300,
+      "metric": "INSTANCE_TEMPLATES"
+    },
+    {
+      "limit": 15,
+      "metric": "TARGET_VPN_GATEWAYS"
+    },
+    {
+      "limit": 30,
+      "metric": "VPN_TUNNELS"
+    },
+    {
+      "limit": 9,
+      "metric": "BACKEND_BUCKETS"
+    },
+    {
+      "limit": 10,
+      "metric": "ROUTERS"
+    },
+    {
+      "limit": 30,
+      "metric": "TARGET_SSL_PROXIES"
+    },
+    {
+      "limit": 30,
+      "metric": "TARGET_HTTPS_PROXIES"
+    },
+    {
+      "limit": 30,
+      "metric": "SSL_CERTIFICATES"
+    },
+    {
+      "limit": 175,
+      "metric": "SUBNETWORKS"
+    },
+    {
+      "limit": 30,
+      "metric": "TARGET_TCP_PROXIES"
+    },
+    {
+      "limit": 10,
+      "metric": "SECURITY_POLICIES"
+    },
+    {
+      "limit": 100,
+      "metric": "SECURITY_POLICY_RULES"
+    },
+    {
+      "limit": 45,
+      "metric": "PACKET_MIRRORINGS"
+    },
+    {
+      "limit": 300,
+      "metric": "NETWORK_ENDPOINT_GROUPS"
+    },
+    {
+      "limit": 6,
+      "metric": "INTERCONNECTS"
+    },
+    {
+      "limit": 5000,
+      "metric": "GLOBAL_INTERNAL_ADDRESSES"
+    },
+    {
+      "limit": 15,
+      "metric": "VPN_GATEWAYS"
+    },
+    {
+      "limit": 2000,
+      "metric": "MACHINE_IMAGES"
+    },
+    {
+      "limit": 20,
+      "metric": "SECURITY_POLICY_CEVAL_RULES"
+    },
+    {
+      "limit": 15,
+      "metric": "EXTERNAL_VPN_GATEWAYS"
+    }
+  ],
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted",
+  "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
+}

@@ -1,0 +1,8 @@
+{
+  "displayName": "Used by boskos-janitor in 'prow-build' GKE cluster",
+  "email": "boskos-janitor@k8s-infra-prow-build.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build/serviceAccounts/boskos-janitor@k8s-infra-prow-build.iam.gserviceaccount.com",
+  "oauth2ClientId": "113384456787846499978",
+  "projectId": "k8s-infra-prow-build",
+  "uniqueId": "113384456787846499978"
+}

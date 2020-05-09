@@ -1,0 +1,8 @@
+{
+  "displayName": "Compute Engine default service account",
+  "email": "180382678033-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/180382678033-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "109607001040581615842",
+  "projectId": "k8s-infra-prow-build-trusted",
+  "uniqueId": "109607001040581615842"
+}

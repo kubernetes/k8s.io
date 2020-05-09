@@ -1,0 +1,85 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "projects/k8s-infra-prow-build/roles/ServiceAccountLister"
+    },
+    {
+      "members": [
+        "serviceAccount:773781448124@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "serviceAccount:service-773781448124@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-773781448124@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "roles/compute.viewer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "roles/container.admin"
+    },
+    {
+      "members": [
+        "group:gke-security-groups@kubernetes.io"
+      ],
+      "role": "roles/container.clusterViewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-773781448124@container-engine-robot.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:773781448124-compute@developer.gserviceaccount.com",
+        "serviceAccount:773781448124@cloudservices.gserviceaccount.com",
+        "serviceAccount:service-773781448124@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "serviceAccount:gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.logWriter"
+    },
+    {
+      "members": [
+        "serviceAccount:gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.metricWriter"
+    },
+    {
+      "members": [
+        "serviceAccount:gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.viewer"
+    },
+    {
+      "members": [
+        "user:spiffxp@google.com"
+      ],
+      "role": "roles/owner"
+    }
+  ],
+  "version": 1
+}
