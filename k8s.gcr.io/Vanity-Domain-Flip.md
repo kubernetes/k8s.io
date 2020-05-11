@@ -94,7 +94,7 @@ In order for a user to push to `k8s-artifacts-prod`, they must:
 
 1. Ensure that they have a [subproject staging repo][staging-subproject] (e.g.,
    `gcr.io/k8s-staging-foo` for the `foo` subproject).
-2. Add the promotion metadata in the [manifests subdirectory][] in the k8s.io repo.
+2. Add the promotion metadata in the [manifests subdirectory](/k8s.gcr.io/manifests) in the k8s.io repo.
 
 ### Security Restrictions
 
@@ -117,17 +117,23 @@ access to GCR.
 
 # Backups
 
-The GCR images in `k8s-artifacts-prod` are backed up every hour. This is done
-with the `ci-k8sio-backup` [Prow job][ci-k8sio-backup-code]. All images are
-backed up, even legacy images that appeared before the promoter went online that
-were not tagged and can only be referenced by their digest.
+The GCR images in `k8s-artifacts-prod` are backed up every 12 hours, by region.
+This is done with the `ci-k8sio-backup` [Prow job][ci-k8sio-backup-code]. All
+images are backed up, even legacy images that appeared before the promoter went
+online that were not tagged and can only be referenced by their digest.
+
+The backup GCR locations are:
+
+- https://asia.gcr.io/k8s-artifacts-prod-bak
+- https://eu.gcr.io/k8s-artifacts-prod-bak
+- https://us.gcr.io/k8s-artifacts-prod-bak
 
 ## Prow Integration
 
 - [`ci-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/test-infra/test-infra-trusted.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/ci-k8sio-backup))
-  Runs an hourly backup of all GCR images in
+  Runs a backup of all GCR images in
   `{asia,eu,us}.gcr.io/k8s-artifacts-prod` to
-  `{asia,eu,us}.gcr.io/k8s-artifacts-prod-bak/YEAR/MONTH/DAY/HOUR/...`.
+  `{asia,eu,us}.gcr.io/k8s-artifacts-prod-bak/...`.
 - [`pull-k8sio-backup`](https://github.com/kubernetes/test-infra/tree/master/config/jobs/kubernetes/sig-release/cip/container-image-promoter.yaml) ([logs](https://prow.k8s.io/job-history/kubernetes-jenkins/logs/pull-k8sio-backup))
   Checks that changes to the [backup scripts][k8sio-backup] are
   valid. Like the `pull-cip-e2e` and `pull-cip-auditor-e2e` jobs, this job
@@ -176,7 +182,7 @@ gcloud \
     $(printf "resource.type=project logName=%s resource.labels.project_id=%s" cip-audit-log k8s-artifacts-prod)
 ```
 
-The configuration for deploying the prod Cloud Run instance is [here][../infra/gcp/deploy-cip-auditor.sh].
+The configuration for deploying the prod Cloud Run instance is [here](/infra/gcp/cip-auditor/deploy.sh).
 
 ## Prow Integration
 
@@ -232,7 +238,7 @@ auditor service. Its members are listed [here](../groups/groups.yaml).
 - GCS: Google Cloud Storage
 
 [CIP]:https://github.com/kubernetes-sigs/k8s-container-image-promoter
-[internal-promoter]:go/registry-promoter
+[internal-promoter]:http://go/registry-promoter
 [k8sio]:https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io
 [k8sio-manifests]:https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io/manifests
 [k8sio-backup]:https://github.com/kubernetes/k8s.io/tree/master/infra/gcp/backup_tools
