@@ -45,6 +45,7 @@ STAGING_PROJECTS=(
     bootkube
     build-image
     cip-test
+    provider-aws
     cluster-api
     cluster-api-aws
     cluster-api-azure
