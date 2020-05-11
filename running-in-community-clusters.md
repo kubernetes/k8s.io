@@ -67,7 +67,7 @@ Console](https://console.cloud.google.com/kubernetes/clusters/details/us-central
 The first time you use this, you must get credentials for the cluster.  From your CloudShell prompt, run:
 
 ```sh
-gcloud container clusters get-credentials aaa --region=us-central1
+gcloud container clusters get-credentials aaa --project kubernetes-public --region=us-central1
 ```
 
 You might want to abbreviate the context:
