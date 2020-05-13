@@ -149,6 +149,7 @@ ALL_PROJECTS=(
     "k8s-io-canary"
     "perfdash"
     "slack-infra"
+    "node-perf-dash"
 )
 
 for prj in "${ALL_PROJECTS[@]}"; do

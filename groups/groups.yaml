@@ -145,6 +145,7 @@ groups:
       - k8s-infra-rbac-perfdash@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io
       - k8s-infra-rbac-slack-infra@kubernetes.io
+      - k8s-infra-rbac-node-perf-dash@kubernetes.io
 
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
@@ -415,6 +416,19 @@ groups:
       - mmatejczyk@google.com
       - shyam123.jvs95@gmail.com
       - wojtekt@google.com
+
+  - email-id: k8s-infra-rbac-node-perf-dash@kubernetes.io
+    name: k8s-infra-rbac-node-perf-dash
+    description: |-
+      ACL for Node Perf Dashboard
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - karangoel@google.com
+      - tangent@google.com
+      - porterdavid@google.com
+      - hanfeil@google.com 
 
   - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
     name: k8s-infra-rbac-publishing-bot
