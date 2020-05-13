@@ -13,165 +13,181 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# This runs as you.  It assumes you have built an image named ${USER}/octodns.
 
-PROD_ZONES=(
-    k8s.io.
-    kubernetes.io.
-    x-k8s.io.
-    k8s-e2e.com.
-)
+set -o pipefail
 
-CANARY_ZONES=("${PROD_ZONES[@]/#/canary.}")
+source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 
-ALL_ZONES=(
-    "${CANARY_ZONES[@]}"
-    "${PROD_ZONES[@]}"
-)
+readonly SCRIPT_NAME="${0##*/}"
+readonly TEST_ZONES_TRIES="12"
 
-DRY_RUN=false
+print_usage() {
+  cat <<USAGE
+usage: push.sh [options]
+options:
+  --confirm
+            Confirmation the script will update the dns records and not run in
+            dry-run mode
+  --check-zone-script=FILE_PATH
+            Path to python script which will be used to check if zones were
+            updated and propagated properly
+  -h, --help
+            Show this help message and exit
+  --logs-dir=<PATH>
+            Where to place log files
+            (detault: ".")
+  --octodns-config=FILE_PATH
+            Path to octodns config file
+  --zone-configs=PATH
+            Path to directory with dns zone config files
 
-function parse_args() {
-  # positional args
-  args=()
-
-  # named args
-  while [ "$#" -gt 0 ]; do
-      case "$1" in
-          -d | --dry-run )          DRY_RUN=true;           ;;
-          * )                       args+=("$1")            # if no match, add it to the positional args
-      esac
-      shift # move to next kv pair
-  done
-
-  # restore positional args
-  set -- "${args[@]}"
+USAGE
 }
 
-parse_args "$@";
+# Parse script arguments
+# Globals:
+#   SCRIPT_NAME
+# Example usage:
+#   parse_args "$@"
+parse_args() {
+  local opts;
+  opts=$(lib::gnu_getopt \
+    --name "${SCRIPT_NAME}" \
+    --longoptions "help,confirm,octodns-config:,check-zone-script:,zone-configs:,logs-dir:" \
+    --options h \
+    -- "$@"
+  )
 
-# Pushes config to zones.
-#   args: args to pass to octodns (e.g. --doit, --force, a list of zones)
-push () {
-    docker run -ti \
-        -u `id -u` \
-        -v ~/.config/gcloud:/.config/gcloud:ro \
-        -v `pwd`/octodns-config.yaml:/octodns/config.yaml:ro \
-        -v "${TMPCFG}":/octodns/config:ro \
-        ${USER}/octodns \
-        octodns-sync \
-            --config-file=/octodns/config.yaml \
-            --log-stream-stdout \
-            --debug \
-            "$@"
-}
-
-# Assumes to be running in a checked-out git repo directory, and in the same
-# subdirectory as this file.
-if [ ! -f octodns-config.yaml -o ! -d zone-configs ]; then
-    echo "CWD does not appear to have the configs needed: $(pwd)"
+  if [[ $? != 0 ]] ; then
+    print_usage
     exit 1
-fi
+  fi
 
-# Where to hold processed configs for this run.
-TMPCFG=$(mktemp -d /tmp/octodns.XXXXXX)
+  # It is getopt's responsibility to make this safe
+  eval set -- ${opts}
 
-# Pre-cook our configs into $TMPCFG.  Some zones have multiple files that need
-# to be joined, for example.
-echo "Using ${TMPCFG} for cooked config files"
-for z in "${ALL_ZONES[@]}"; do
-    # Every zone should have 1 file $z.yaml or N files $z._*.yaml.
-    # $z already ends in a period.
-    cat zone-configs/${z}yaml zone-configs/${z}_*.yaml \
-        > "${TMPCFG}/${z}yaml" 2>/dev/null
-    if [ ! -s "${TMPCFG}/${z}yaml" ]; then
-        echo "${TMPCFG}/${z}yaml appears to be empty after pre-processing!"
-        exit 1
+  while : ; do
+    case "${1}" in
+      --help|-h)            print_usage               ;;
+      --confirm)            CONFIRMED=true            ;;
+      --check-zone-script)  CHECK_ZONE_SCRIPT="${2}"; shift;;
+      --logs-dir)           LOGS_DIR="${2}";          shift;;
+      --octodns-config)     OCTODNS_CONFIG="${2}";    shift;;
+      --zone-configs)       ZONE_CONFIGS="${2}";      shift;;
+      --) shift;
+        if [ $# -gt 0 ] ; then
+            echo "Error: Extra arguments found: $*"
+            print_usage
+            exit 1
+        fi
+        break;;
+      *) echo "Error: Invalid option ${1}"; exit 1;;
+    esac
+    shift
+  done
+
+  # set defaults
+  if [[ -z "${CONFIRMED:-}" ]]; then
+    CONFIRMED=false;
+  fi
+  if [[ -z "${LOGS_DIR:-}" ]]; then
+    LOGS_DIR=".";
+  fi
+
+  # validate options
+  if [[ ! -f "${CHECK_ZONE_SCRIPT}" ]]; then
+    echo -n "Error: '--check-zone-script' (${CHECK_ZONE_SCRIPT}) is not" >&2
+    echo    " an existing file" >&2
+    print_usage
+    exit 1
+  elif [[ ! -d "${LOGS_DIR}" ]]; then
+    echo -n "Error: '--logs-dir' (${LOGS_DIR}) is not" >&2
+    echo    " an existing directory" >&2
+    print_usage
+    exit 1
+  elif [[ ! -w "${LOGS_DIR}" ]]; then
+    echo "Error: '--logs-dir' (${LOGS_DIR}) is not writable" >&2
+    print_usage
+    exit 1
+  elif [[ ! -f "${OCTODNS_CONFIG}" ]]; then
+    echo -n "Error: '--octodns-config' (${OCTODNS_CONFIG}) is not" >&2
+    echo    " an existing file" >&2
+    print_usage
+    exit 1
+  elif [[ ! -d "${ZONE_CONFIGS}" ]]; then
+    echo -n "Error: '--zone-configs' (${ZONE_CONFIGS}) is not an existing" >&2
+    echo    " directory" >&2
+    print_usage
+    exit 1
+  fi
+}
+
+main() {
+  local tmp_path
+  tmp_path="$(lib::create_tmp_path)" || return
+
+  readonly TMP_PATH="${tmp_path}"
+  readonly TMP_CONFIG_PATH="${tmp_path}/octodns-config.yaml"
+  readonly TMP_ZONES_PATH="${tmp_path}/zones"
+  readonly CANARY_LOG_FILE="${LOGS_DIR}/log.canary"
+  readonly PROD_LOG_FILE="${LOGS_DIR}/log.prod"
+
+  # Clean tmp dir when exit
+  trap 'rm -rf "${TMP_PATH}"' EXIT
+
+  lib::precook_zone_configs \
+    "${ZONE_CONFIGS}" \
+    "${TMP_ZONES_PATH}" \
+    "${ALL_ZONES[@]}" || return
+
+  lib::precook_octodns_config \
+    "${OCTODNS_CONFIG}" \
+    "${TMP_CONFIG_PATH}" \
+    "${TMP_ZONES_PATH}" || return
+
+  # Canary zones
+    lib::dry_run \
+      "${TMP_CONFIG_PATH}" \
+      "${CANARY_LOG_FILE}" \
+      "${CANARY_ZONES[@]}" || return
+
+    # Push and test only if flag --confirm was passed
+    if ${CONFIRMED}; then
+      lib::push \
+        "${TMP_CONFIG_PATH}" \
+        "${CANARY_LOG_FILE}" \
+        "${CANARY_ZONES[@]}" || return
+
+      lib::test_zones \
+        "${TMP_CONFIG_PATH}" \
+        "${CHECK_ZONE_SCRIPT}" \
+        "${CANARY_LOG_FILE}" \
+        "${TEST_ZONES_TRIES}" \
+        "${CANARY_ZONES[@]}" || return
     fi
-done
 
-# Push to canaries.
-echo "Dry-run to canary zones"
-push "${CANARY_ZONES[@]}" > log.canary 2>&1
-if [ $? != 0 ]; then
-    echo "Canary dry-run FAILED, halting; log follows:"
-    echo "========================================="
-    cat log.canary
-    exit 2
-fi
+  # Prod zones
+    lib::dry_run \
+      "${TMP_CONFIG_PATH}" \
+      "${PROD_LOG_FILE}" \
+      "${PROD_ZONES[@]}" || return
 
-if [ "${DRY_RUN}" = false ]; then
-  echo "Pushing to canary zones"
-  push --doit "${CANARY_ZONES[@]}" >> log.canary 2>&1
-  if [ $? != 0 ]; then
-      echo "Canary push FAILED, halting; log follows:"
-      echo "========================================="
-      cat log.canary
-      exit 2
-  fi
-  echo "Canary push SUCCEEDED"
+    # Push and test only if flag --confirm was passed
+    if ${CONFIRMED}; then
+      lib::push \
+        "${TMP_CONFIG_PATH}" \
+        "${PROD_LOG_FILE}" \
+        "${PROD_ZONES[@]}" || return
 
-  for zone in "${CANARY_ZONES[@]}"; do
-      TRIES=12
-      echo "Testing canary zone: $zone"
-      for i in $(seq 1 "$TRIES"); do
-          ./check-zone.sh -c "${TMPCFG}" "$zone" >> log.canary 2>&1
-          if [ $? == 0 ]; then
-              break
-          fi
-          if [ $i != "$TRIES" ]; then
-              echo "  test failed, might be propagation delay, will retry..."
-              sleep 10
-          else
-              echo "Canary test FAILED, halting; log follows:"
-              echo "========================================="
-              cat log.canary
-              exit 2
-          fi
-      done
-      echo "Canary $zone SUCCEEDED"
-  done
-fi
+      lib::test_zones \
+        "${TMP_CONFIG_PATH}" \
+        "${CHECK_ZONE_SCRIPT}" \
+        "${PROD_LOG_FILE}" \
+        "${TEST_ZONES_TRIES}" \
+        "${PROD_ZONES[@]}" || return
+    fi
+}
 
-# Push to prod.
-echo "Dry-run to prod zones"
-push "${PROD_ZONES[@]}" > log.prod 2>&1
-if [ $? != 0 ]; then
-    echo "Prod dry-run FAILED, halting; log follows:"
-    echo "========================================="
-    cat log.prod
-    exit 3
-fi
-
-if [ "${DRY_RUN}" = false ]; then
-  echo "Pushing to prod zones"
-  push --doit "${PROD_ZONES[@]}" >> log.prod 2>&1
-  if [ $? != 0 ]; then
-      echo "Prod push FAILED, halting; log follows:"
-      echo "========================================="
-      cat log.prod
-      exit 3
-  fi
-  echo "Prod push SUCCEEDED"
-
-  for zone in "${PROD_ZONES[@]}"; do
-      TRIES=12
-      echo "Testing prod zone: $zone"
-      for i in $(seq 1 "$TRIES"); do
-          ./check-zone.sh -c "${TMPCFG}" "$zone" >> log.prod 2>&1
-          if [ $? == 0 ]; then
-              break
-          fi
-          if [ $i != "$TRIES" ]; then
-              echo "  test failed, might be propagation delay, will retry..."
-              sleep 10
-          else
-              echo "Prod test FAILED, halting; log follows:"
-              echo "========================================="
-              cat log.prod
-              exit 2
-          fi
-      done
-      echo "Prod $zone SUCCEEDED"
-  done
-fi
+lib::ensure_python3 || exit
+parse_args "$@" || exit
+main "$@"

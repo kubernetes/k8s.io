@@ -16,6 +16,12 @@
 ARG BASE_IMAGE=python@sha256:9ecd1b34b5fef4dc806734f92eee1702175a63276bafe3552d122c8f4918ed8e
 FROM ${BASE_IMAGE}
 
+RUN apk update && \
+    apk upgrade && \
+    apk add \
+        bash \
+        util-linux
+
 # install from requirements.txt and ensure that all requirements match
 # pip freeze after, guaranteeing that we will install the same packages if we
 # build again
@@ -29,4 +35,4 @@ RUN pip install -r /requirements.txt && \
 # pair with the following at breakpoints in python code:
 # import ipdb ; ipdb.set_trace()
 COPY check-zone.py /usr/local/bin/check-zone
-CMD /bin/sh
+CMD /bin/bash
