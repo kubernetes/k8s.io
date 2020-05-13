@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: node-perf-dash
+  namespace: node-perf-dash
   labels:
     app: node-perf-dash
     version: "0.3"
