@@ -10,6 +10,10 @@
 # - kube-proxy
 # - kube-scheduler
 # - pause
+#
+# Promotes to the following GCR locations:
+# - {us,eu,asia}.gcr.io/k8s-artifacts-prod --> k8s.gcr.io
+# - {us,eu,asia}.gcr.io/k8s-artifacts-prod/kubernetes --> k8s.gcr.io/kubernetes
 
 - name: pause
   dmap:
