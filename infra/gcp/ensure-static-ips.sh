@@ -42,6 +42,7 @@ ADDRESSES=(
     "k8s-io-ingress-prod"
     "perf-dash-k8s-io-ingress-prod"
     "slack-infra-ingress-prod"
+    "node-perf-dash-k8s-io-ingress-prod"
 )
 
 for address in "${ADDRESSES[@]}"; do
