@@ -67,3 +67,21 @@ fi
 function indent() {
     ${SED} -u 's/^/  /'
 }
+
+# Join things with separator
+# Arguments:
+#   $1:  Separator (has to be single character)
+#   $2+: The things to join
+# Example usage:
+#   join_by , foo bar baz
+function join_by() {
+  if [ $# -lt 2 ] || [ -z "${1}" ] || [ -z "${2}" ]; then
+      echo "join_by(separator, string...) requires at least 2 arguments" >&2
+      return 1
+  fi
+
+  local IFS="${1}"; shift
+  # Using $* and not $@ is not a mistake, as $* returns string and respect IFS
+  # and $@ returns array which doesn't respect IFS
+  echo "$*"
+}

@@ -96,14 +96,11 @@ gcloud projects add-iam-policy-binding "${PROJECT}" \
 gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "group:${CLUSTER_ADMINS_GROUP}" \
     --role roles/compute.loadBalancerAdmin
-if ! gcloud --project "${PROJECT}" iam roles describe ServiceAccountLister >/dev/null 2>&1; then
-    gcloud --project "${PROJECT}" --quiet \
-        iam roles create ServiceAccountLister \
-        --title "Service Account Lister" \
-        --description "Can list ServiceAccounts." \
-        --stage GA \
-        --permissions iam.serviceAccounts.list
-fi
+ensure_custom_iam_role "${PROJECT}" \
+    ServiceAccountLister \
+    "Service Account Lister" \
+    "Can list ServiceAccounts." \
+    iam.serviceAccounts.list
 gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "group:${CLUSTER_ADMINS_GROUP}" \
     --role "projects/${PROJECT}/roles/ServiceAccountLister"
