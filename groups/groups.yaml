@@ -13,7 +13,7 @@ groups:
     owners:
       - jorgec@vmware.com
       - kaitlynbarnard10@gmail.com
-      - parispittman@google.com
+      - paris.pittman@gmail.com
       - killen.bob@gmail.com
       - zcorleissen@linuxfoundation.org
     members:
@@ -31,7 +31,7 @@ groups:
       - ihor@cncf.io
       - jorgec@vmware.com
       - killen.bob@gmail.com
-      - parispittman@google.com
+      - paris.pittman@gmail.com
     managers:
       - pal.nabarun95@gmail.com
       - ameukam@gmail.com
@@ -1114,7 +1114,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - parispittman@google.com
+      - paris.pittman@gmail.com
     managers:
       - alarcj137@gmail.com
       - contributors@kubernetes.io
@@ -1297,7 +1297,7 @@ groups:
       - decarr@redhat.com
       - lachlan.evenson@gmail.com
       - nikhitaraghunath@gmail.com
-      - parispittman@google.com
+      - paris.pittman@gmail.com
       - spiffxp@gmail.com
 
   - email-id: steering@kubernetes.io
@@ -1321,7 +1321,7 @@ groups:
       - decarr@redhat.com
       - lachlan.evenson@gmail.com
       - nikhitaraghunath@gmail.com
-      - parispittman@google.com
+      - paris.pittman@gmail.com
       - spiffxp@gmail.com
     managers:
       - ihor.dvoretskyi@gmail.com
