@@ -5,6 +5,7 @@ metadata:
   namespace: node-perf-dash
   annotations:
     acme.cert-manager.io/http01-override-ingress-name: "node-perf-dash"
+    cert-manager.io/issue-temporary-certificate: "true"
 spec:
   secretName: node-perf-dash-k8s-io-tls
   issuerRef:
@@ -12,4 +13,4 @@ spec:
     name: letsencrypt-prod
   dnsNames:
   - node-perf-dash-staging.k8s.io
-  - node-perf-dash-staging.kubernetes.io
+  - node-perf-dash.k8s.io
