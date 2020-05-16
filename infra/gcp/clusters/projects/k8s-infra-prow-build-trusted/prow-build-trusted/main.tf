@@ -32,7 +32,6 @@ locals {
   gcb_builder_sa_name     = "gcb-builder"         // Name of the GSA and KSA that pods use to be allowed to run GCB builds and push to GCS buckets
 }
 
-// TODO: I think more people than me should have owner/edit access to this project
 module "project" {
   source = "../../../modules/gke-project"
   project_id            = local.project_id

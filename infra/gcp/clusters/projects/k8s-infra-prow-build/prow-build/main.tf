@@ -33,7 +33,6 @@ locals {
   boskos_janitor_sa_name  = "boskos-janitor"       // Name of the GSA and KSA used by boskos-janitor
 }
 
-// TODO: I think more people than me should have owner/edit access to this project
 module "project" {
   source = "../../../modules/gke-project"
   project_id            = local.project_id
