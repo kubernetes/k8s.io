@@ -39,9 +39,12 @@ resource "google_project_iam_member" "cluster_node_sa_monitoring_metricwriter" {
 }
 
 // BigQuery dataset for usage data
-// Workaround from https://github.com/hashicorp/terraform/issues/22544#issuecomment-582974372
+//
+// Uses a workaround from https://github.com/hashicorp/terraform/issues/22544#issuecomment-582974372
 // to set delete_contents_on_destroy to false if is_prod_cluster
-// keep prod_ and test_ identical except for "unique to " comments
+//
+// IMPORTANT: The prod_ and test_ forms of this resource MUST be kept in sync.
+//            Any changes in one MUST be reflected in the other.
 resource "google_bigquery_dataset" "prod_usage_metering" {
   count       = var.is_prod_cluster == "true" ? 1 : 0
   dataset_id  = replace("usage_metering_${var.cluster_name}", "-", "_")
@@ -58,8 +61,8 @@ resource "google_bigquery_dataset" "prod_usage_metering" {
     user_by_email = google_service_account.cluster_node_sa.email
   }
 
+  // NOTE: unique to prod_usage_metering
   // This restricts deletion of this dataset if there is data in it
-  // unique to prod_usage_metering
   delete_contents_on_destroy = false
 }
 resource "google_bigquery_dataset" "test_usage_metering" {
@@ -78,15 +81,17 @@ resource "google_bigquery_dataset" "test_usage_metering" {
     user_by_email = google_service_account.cluster_node_sa.email
   }
 
-  // This restricts deletion of this dataset if there is data in it
-  // unique to test_usage_metering
+  // NOTE: unique to test_usage_metering
   delete_contents_on_destroy = true
 }
 
-// Create GKE cluster, but with no node pools. Node pools can be provisioned below
-// Workaround from https://github.com/hashicorp/terraform/issues/22544#issuecomment-582974372
+// Create GKE cluster, but with no node pools. Node pools are provisioned via another module.
+//
+// Uses a workaround from https://github.com/hashicorp/terraform/issues/22544#issuecomment-582974372
 // to set lifecycle.prevent_destroy to false if is_prod_cluster
-// keep prod_ and test_ identical except for "unique to " comments
+//
+// IMPORTANT: The prod_ and test_ forms of this resource MUST be kept in sync.
+//            Any changes in one MUST be reflected in the other.
 resource "google_container_cluster" "prod_cluster" {
   count     = var.is_prod_cluster == "true" ? 1 : 0
   
@@ -96,8 +101,8 @@ resource "google_container_cluster" "prod_cluster" {
   provider = google-beta
   project  = var.project_name
 
+  // NOTE: unique to prod_cluster
   // GKE clusters are critical objects and should not be destroyed
-  // unique to prod_cluster
   lifecycle {
     prevent_destroy = true
   }
@@ -193,7 +198,7 @@ resource "google_container_cluster" "test_cluster" {
   provider = google-beta
   project  = var.project_name
 
-  // unique to test_cluster
+  // NOTE: unique to test_cluster
   lifecycle {
     prevent_destroy = false
   }
