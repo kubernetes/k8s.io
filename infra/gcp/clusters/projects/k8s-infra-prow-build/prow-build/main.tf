@@ -35,7 +35,7 @@ locals {
 
 // TODO: I think more people than me should have owner/edit access to this project
 module "project" {
-  source = "../../modules/k8s-infra-gke-project"
+  source = "../../../modules/k8s-infra-gke-project"
   project_id            = local.project_id
   project_name          = local.project_id
 }
@@ -85,7 +85,7 @@ resource "google_service_account_iam_policy" "boskos_janitor_sa_iam" {
 }
 
 module "prow_build_cluster" {
-  source = "../../modules/k8s-infra-gke-cluster"
+  source = "../../../modules/k8s-infra-gke-cluster"
   project_name      = local.project_id
   cluster_name      = local.cluster_name
   cluster_location  = local.cluster_location
@@ -94,7 +94,7 @@ module "prow_build_cluster" {
 }
 
 module "prow_build_nodepool" {
-  source = "../../modules/k8s-infra-gke-nodepool"
+  source = "../../../modules/k8s-infra-gke-nodepool"
   project_name    = local.project_id
   cluster_name    = module.prow_build_cluster.cluster.name
   location        = module.prow_build_cluster.cluster.location
