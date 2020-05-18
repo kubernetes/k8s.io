@@ -20,6 +20,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: greenhouse
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
