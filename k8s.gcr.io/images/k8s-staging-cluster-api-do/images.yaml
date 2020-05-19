@@ -1,2 +1,3 @@
-#- name: cluster-api-do-controller
-#  dmap: {}
+- name: cluster-api-do-controller
+  dmap:
+    "sha256:5f28c3476244e846cabb932911b4095e868cdbe636565d5daaba172633df220b": ["v0.3.1"]
