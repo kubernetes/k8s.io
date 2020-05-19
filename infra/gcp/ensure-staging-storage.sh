@@ -63,6 +63,7 @@ STAGING_PROJECTS=(
     etcd
     external-dns
     infra-tools
+    ingress-nginx
     kas-network-proxy
     kind
     kops
