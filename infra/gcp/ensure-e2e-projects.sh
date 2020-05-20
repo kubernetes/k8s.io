@@ -48,6 +48,15 @@ ensure_regional_address \
   "to allow monitoring.k8s.prow.io to scrape boskos metrics"
 ) 2>&1 | indent
 
+color 6 "Ensuring greenhouse is empowered"
+(
+ensure_regional_address \
+  "k8s-infra-prow-build" \
+  "us-central1" \
+  "greenhouse-metrics" \
+  "to allow monitoring.k8s.prow.io to scrape greenhouse metrics"
+) 2>&1 | indent
+
 ## setup projects to be used by e2e tests for standing up clusters
 
 E2E_PROJECTS=(

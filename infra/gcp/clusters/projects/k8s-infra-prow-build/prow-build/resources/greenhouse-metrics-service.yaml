@@ -11,5 +11,5 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 9090
-  loadBalancerIP: 35.225.115.154
+  loadBalancerIP: 34.72.140.202
   type: LoadBalancer
