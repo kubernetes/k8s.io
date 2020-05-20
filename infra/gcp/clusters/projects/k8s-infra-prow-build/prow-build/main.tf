@@ -122,7 +122,8 @@ module "greenhouse_nodepool" {
   taints          = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
   min_count       = 1
   max_count       = 1
-  image_type      = "COS"
+  # choosing this image for parity with the build nodepool
+  image_type      = "UBUNTU_CONTAINERD"
   # choosing a machine type to maximize IOPs
   machine_type    = "n1-standard-32"
   disk_size_gb    = 100
