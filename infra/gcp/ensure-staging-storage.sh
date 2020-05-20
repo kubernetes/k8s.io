@@ -42,6 +42,7 @@ STAGING_PROJECTS=(
     apisnoop
     artifact-promoter
     autoscaling
+    bootkube
     build-image
     cip-test
     cluster-api

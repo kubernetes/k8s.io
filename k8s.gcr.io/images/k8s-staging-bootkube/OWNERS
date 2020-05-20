@@ -1,0 +1,6 @@
+# See the OWNERS file documentation:
+#  https://go.k8s.io/owners
+
+approvers:
+  - andrewrynhard
+  - rmenn
