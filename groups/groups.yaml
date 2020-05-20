@@ -247,6 +247,7 @@ groups:
       - james@munnelly.eu
       - spiffxp@google.com
       - thockin@google.com
+      - k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com
 
   - email-id: k8s-infra-gcp-accounting@kubernetes.io
     name: k8s-infra-gcp-accounting

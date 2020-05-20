@@ -136,6 +136,19 @@ empower_ksa_to_svcacct \
   "${PROJECT}" \
   $(svc_acct_email "${PROJECT}" "k8s-infra-gcp-auditor")
 
+color 6 "Ensuring the k8s-infra-dns-updater serviceaccount exists"
+ensure_service_account \
+    "${PROJECT}" \
+    "k8s-infra-dns-updater" \
+    "k8s-infra dns updater"
+
+color 6 -n "Empowering k8s-infra-dns-updater serviceaccount to be used on"
+color 6 " build cluster"
+empower_ksa_to_svcacct \
+    "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-dns-updater]" \
+    "${PROJECT}" \
+    "$(svc_acct_email "${PROJECT}" "k8s-infra-dns-updater")"
+
 color 6 "Empowering ${DNS_GROUP}"
 gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "group:${DNS_GROUP}" \
