@@ -311,6 +311,20 @@ groups:
   # Each group here governs access to one GCS bucket.
   #
 
+  - email-id: k8s-infra-push-csi@kubernetes.io
+    name: k8s-infra-push-csi
+    description: |-
+      ACL for pushing CSI artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - saadali@google.com
+      - msau@google.com
+      - xingyang105@gmail.com
+      - jsafrane@redhat.com
+      - patrick.ohly@intel.com
+
   - email-id: k8s-infra-push-cni@kubernetes.io
     name: k8s-infra-push-cni
     description: |-
