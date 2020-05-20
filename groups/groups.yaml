@@ -726,7 +726,10 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - ahmadnurus.sh@gmail.com
+      - ctadeu@gmail.com
       - detiber@gmail.com
+      - jeremylevanmorris@gmail.com
       - mudrinic.mare@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-azure@kubernetes.io
