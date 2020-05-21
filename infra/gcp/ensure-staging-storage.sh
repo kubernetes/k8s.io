@@ -43,6 +43,7 @@ STAGING_PROJECTS=(
     artifact-promoter
     autoscaling
     bootkube
+    boskos
     build-image
     cip-test
     cluster-api

@@ -1,0 +1,10 @@
+# google group for gcr.io/k8s-staging-boskos is k8s-infra-staging-boskos@kubernetes.io
+registries:
+  - name: gcr.io/k8s-staging-boskos
+    src: true
+  - name: us.gcr.io/k8s-artifacts-prod/boskos
+    service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+  - name: eu.gcr.io/k8s-artifacts-prod/boskos
+    service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+  - name: asia.gcr.io/k8s-artifacts-prod/boskos
+    service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com

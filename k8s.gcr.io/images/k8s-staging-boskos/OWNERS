@@ -1,0 +1,15 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# These should match https://github.com/kubernetes-sigs/boskos/blob/master/OWNERS.
+reviewers:
+  - ixdy
+  - alvaroaleman
+  - stevekuznetsov
+
+approvers:
+  - ixdy
+  - alvaroaleman
+  - stevekuznetsov
+
+labels:
+  - sig/testing
