@@ -1,11 +1,15 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+options:
+  no_parent_owners: true
+approvers:
+  - release-engineering-approvers
 reviewers:
+  - release-engineering-reviewers
   - jpbetz
   - wenjiaswe
   - jingyih
-approvers:
-  - jpbetz
-  - jingyih
 labels:
-- sig/api-machinery
+  - sig/api-machinery
+  - sig/release
+  - area/release-eng

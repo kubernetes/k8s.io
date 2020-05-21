@@ -1,10 +1,27 @@
+### ATTENTION ###
+# k8s-staging-etcd is a staging container registry that promotes ROOT level k8s.gcr.io images.
+# Image promotion for this project is restricted to Release Managers.
+#
 # google group for gcr.io/k8s-staging-etcd is k8s-infra-staging-etcd@kubernetes.io
+
 registries:
 - name: gcr.io/k8s-staging-etcd
   src: true
-- name: us.gcr.io/k8s-artifacts-prod/etcd
+
+# Promotes to the following GCR locations:
+# - {us,eu,asia}.gcr.io/k8s-artifacts-prod --> k8s.gcr.io
+- name: us.gcr.io/k8s-artifacts-prod
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: eu.gcr.io/k8s-artifacts-prod/etcd
+- name: eu.gcr.io/k8s-artifacts-prod
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: asia.gcr.io/k8s-artifacts-prod/etcd
+- name: asia.gcr.io/k8s-artifacts-prod
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+
+# Promotes to the following GCR locations:
+# - {us,eu,asia}.gcr.io/k8s-artifacts-prod/kubernetes --> k8s.gcr.io/kubernetes
+- name: us.gcr.io/k8s-artifacts-prod/kubernetes
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/kubernetes
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/kubernetes
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
