@@ -517,3 +517,44 @@ function ensure_regional_address() {
         --region="${region}"
     fi
 }
+
+# Ensure that custom IAM role exists, creating one if needed
+# Arguments:
+#   $1:  The GCP project
+#   $2:  The role name (e.g. "ServiceAccountLister")
+#   $3:  The role title (e.g. "Service Account Lister")
+#   $4:  The role description (e.g. "Can list ServiceAccounts.")
+#   $5+: The role permissions (e.g. "iam.serviceAccounts.list")
+# Example usage:
+#   ensure_custom_iam_role \
+#       kubernetes-public \
+#       ServiceAccountLister \
+#       "Service Account Lister" \
+#       "Can list ServiceAccounts." \
+#       iam.serviceAccounts.list
+function ensure_custom_iam_role() {
+    if [ $# -lt 5 ] || [ -z "${1}" ] || [ -z "${2}" ] || [ -z "${3}" ] \
+        || [ -z "${4}" ] || [ -z "${5}" ]
+    then
+        echo -n "ensure_custom_iam_role(gcp_project, name, title," >&2
+        echo    " description, permission...) requires at least 5 arguments" >&2
+        return 1
+    fi
+
+    local gcp_project="${1}"; shift
+    local name="${1}"; shift
+    local title="${1}"; shift
+    local description="${1}"; shift
+    local permissions; permissions=$(join_by , "$@")
+
+    if ! gcloud --project "${gcp_project}" iam roles describe "${name}" \
+        >/dev/null 2>&1
+    then
+        gcloud --project "${gcp_project}" --quiet \
+            iam roles create "${name}" \
+            --title "${title}" \
+            --description "${description}" \
+            --stage GA \
+            --permissions "${permissions}"
+    fi
+}
