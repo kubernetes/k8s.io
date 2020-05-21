@@ -13,6 +13,7 @@ Kubernetes files for various sites and infrastructure
 - `perf-dash.k8s.io`: community-managed deployment of [perfdash]
 - `publishing-bot`: community-managed deployment of [publishing-bot]
 - `slack-infra`: community-managed deployment of [slack-infra]
+- `node-perf-dash`: community-managed performance dashboard for Kubernetes node tests.
 
 We provide a [publicly viewable billing-report][billing-report] accessible to members of [kubernetes-wg-k8s-infra@googlegroups.com]
 

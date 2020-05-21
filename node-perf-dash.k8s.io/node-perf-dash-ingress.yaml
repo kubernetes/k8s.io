@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: node-perf-dash
+  namespace: node-perf-dash
+  labels:
+    app: node-perf-dash
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: node-perf-dash-k8s-io-ingress-prod
+spec:
+  tls:
+  - secretName: node-perf-dash-k8s-io-tls
+  backend:
+    serviceName: node-perf-dash-status
+    servicePort: status
