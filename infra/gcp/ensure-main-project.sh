@@ -151,6 +151,28 @@ gcloud projects add-iam-policy-binding "${PROJECT}" \
     --member "group:${DNS_GROUP}" \
     --role roles/dns.admin
 
+# Monitoring
+MONITORING_SVCACCT_NAME="$(svc_acct_email "${PROJECT}" \
+    "k8s-infra-monitoring-viewer")"
+
+color 6 "Ensuring the k8s-infra-monitoring-viewer serviceaccount exists"
+ensure_service_account \
+    "${PROJECT}" \
+    "k8s-infra-monitoring-viewer" \
+    "k8s-infra monitoring viewer"
+
+color 6 -n "Empowering k8s-infra-monitoring-viewer serviceaccount to be used on"
+color 6 " the 'aaa' cluster inside the 'monitoring' namespace"
+empower_ksa_to_svcacct \
+    "kubernetes-public.svc.id.goog[monitoring/k8s-infra-monitoring-viewer]" \
+    "${PROJECT}" \
+    "${MONITORING_SVCACCT_NAME}"
+
+color 6 "Empowering service account ${MONITORING_SVCACCT_NAME}"
+gcloud projects add-iam-policy-binding "${PROJECT}" \
+    --member "serviceAccount:${MONITORING_SVCACCT_NAME}" \
+    --role roles/monitoring.viewer
+
 # Bootstrap DNS zones
 ensure_dns_zone "${PROJECT}" "k8s-io" "k8s.io"
 ensure_dns_zone "${PROJECT}" "kubernetes-io" "kubernetes.io"
