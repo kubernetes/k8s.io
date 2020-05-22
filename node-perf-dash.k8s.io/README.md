@@ -3,8 +3,8 @@
 To bootstrap `node-perf-dash`:
 
 ```bash
-kubectl apply -f node-perf-dash-certificate.yaml
-kubectl apply -f node-perf-dash-deployment.yaml
-kubectl apply -f node-perf-dash-ingress.yaml
-kubectl apply -f node-perf-dash-service.yaml
+kubectl apply -f certificate.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f ingress.yaml
+kubectl apply -f service.yaml
 ```
