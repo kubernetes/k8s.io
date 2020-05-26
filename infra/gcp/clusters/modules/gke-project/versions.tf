@@ -1,5 +1,5 @@
 /**
- * Copyright 2020 The Kubernetes Authors
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-variable "project_name" {
-  description = "The name of the project in which to provision resources."
-  type        = string
-}
-
-variable "cluster_name" {
-  description = "The name of the cluster"
-  type        = string
-}
-
-variable "cluster_location" {
-  description = "The GCP location (region or zone) where the cluster should be created"
-  type        = string
-}
-
-variable "bigquery_location" {
-  description = "The bigquery specific location where the dataset should be created"
-  type        = string
+terraform {
+  required_version = "~> 0.12.20"
+  required_providers {
+    google      = "~> 3.19.0"
+    google-beta = "~> 3.19.0"
+  }
 }

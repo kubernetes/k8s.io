@@ -14,12 +14,24 @@
  * limitations under the License.
  */
 
-output "cluster" {
-  description = "The cluster"
-  value       = google_container_cluster.cluster
+variable "project_id" {
+  description = "The id of the project, eg: my-awesome-project"
+  type        = string
 }
 
-output "cluster_node_sa" {
-  description = "The service_account created for the cluster's nodes"
-  value       = google_service_account.cluster_node_sa
+variable "project_name" {
+  description = "The display name of the project, eg: My Awesome Project"
+  type        = string
+}
+
+variable "cluster_admins_group" {
+  description = "The group to treat as cluster admins"
+  type        = string
+  default     = "k8s-infra-cluster-admins@kubernetes.io"
+}
+
+variable "cluster_users_group" {
+  description = "The group to treat as cluster users"
+  type        = string
+  default     = "gke-security-groups@kubernetes.io"
 }

@@ -6,11 +6,11 @@ This file defines:
 */
 
 terraform {
-  required_version = ">= 0.12.8"
+  required_version = "~> 0.12.20"
 
   backend "gcs" {
     bucket = "k8s-infra-clusters-terraform"
-    prefix = "kubernetes-public/prow-build-test" // $project_name/$cluster_name
+    prefix = "k8s-infra-prow-build-trusted/prow-build-trusted" // $project_name/$cluster_name
   }
 
   required_providers {

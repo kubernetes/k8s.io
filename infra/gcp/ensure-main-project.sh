@@ -127,7 +127,12 @@ ensure_service_account \
   "k8s-infra-gcp-auditor" \
   "Grants readonly access to org resources"
 
-color 6 "Empowering k8s-infra-gcp-auditor serviceaccount to be used on build cluster"
+color 6 "Empowering k8s-infra-gcp-auditor serviceaccount to be used on trusted build cluster"
+empower_ksa_to_svcacct \
+  "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-gcp-auditor]" \
+  "${PROJECT}" \
+  $(svc_acct_email "${PROJECT}" "k8s-infra-gcp-auditor")
+# TODO(spiffxp): delete this binding
 empower_ksa_to_svcacct \
   "kubernetes-public.svc.id.goog[test-pods/k8s-infra-gcp-auditor]" \
   "${PROJECT}" \

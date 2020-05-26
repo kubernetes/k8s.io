@@ -48,6 +48,12 @@ variable "machine_type" {
   type        = string
 }
 
+variable "image_type" {
+  description = "The image_type of this node_pool"
+  type        = string
+  default     = "COS"
+}
+
 variable "disk_size_gb" {
   description = "The disk_size_gb of this node_pool"
   type        = string
