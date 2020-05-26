@@ -706,6 +706,17 @@ groups:
       - thockin@google.com
       - rajib.jolite@gmail.com
 
+  - email-id: k8s-infra-staging-provider-aws@kubernetes.io
+    name: k8s-infra-staging-provider-aws
+    description: |-
+      ACL for external AWS Cloud Provider
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+      - kim.andrewsy@gmail.com
+      - nckturner@amazon.com
+
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     name: k8s-infra-staging-cluster-api
     description: |-
