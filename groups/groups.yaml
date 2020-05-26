@@ -429,7 +429,7 @@ groups:
       - karangoel@google.com
       - tangent@google.com
       - porterdavid@google.com
-      - hanfeil@google.com 
+      - hanfeil@google.com
 
   - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
     name: k8s-infra-rbac-publishing-bot
@@ -538,8 +538,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - jichenjc@cn.ibm.com
-    - sbueringer@gmail.com
+      - jichenjc@cn.ibm.com
+      - sbueringer@gmail.com
 
   - email-id: k8s-infra-conform-cri-o@kubernetes.io
     name: k8s-infra-conform-cri-o
@@ -791,6 +791,17 @@ groups:
     members:
       - andrew@andrewrynhard.com
       - rahul@rmenn.in
+
+  - email-id: k8s-infra-staging-boskos@kubernetes.io
+    name: k8s-infra-staging-boskos
+    description: |-
+      ACL for staging kubernetes-sigs/boskos images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aaleman@redhat.com
+      - jgrafton@google.com
+      - skuznets@redhat.com
 
   - email-id: k8s-infra-staging-coredns@kubernetes.io
     name: k8s-infra-staging-coredns
@@ -1205,7 +1216,6 @@ groups:
       - onlydole@gmail.com
       - rcantw3ll@gmail.com
       - sandoval@adobe.com
-
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
