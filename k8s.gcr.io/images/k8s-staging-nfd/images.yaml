@@ -1,1 +1,3 @@
-# TODO: add images
+- name: node-feature-discovery
+  dmap:
+    sha256:214155595901f31bc91481a3b26ce324b150c9549b5f41c87fbb495c3ad5bbfa: [v0.5.0-97-g59a88b0]
