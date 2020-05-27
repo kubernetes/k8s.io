@@ -12,5 +12,4 @@ spec:
     kind: ClusterIssuer
     name: letsencrypt-prod
   dnsNames:
-  - node-perf-dash-staging.k8s.io
   - node-perf-dash.k8s.io
