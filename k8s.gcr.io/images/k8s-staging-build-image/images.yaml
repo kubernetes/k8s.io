@@ -68,6 +68,30 @@
     - v2.0.0
     sha256:dac908eaa61d2034aec252576a470a7e4ab184c361f89170526f707a0c3c6082:
     - v2.1.0
+- name: debian-hyperkube-base
+  dmap:
+    sha256:8c8d854d868fb08352f73dda94f9e0b998c7318b48ddc587a355d0cbaf687f14:
+    - v1.0.0
+- name: debian-hyperkube-base-amd64
+  dmap:
+    sha256:73a8cb2bfd6707c8ed70c252e97bdccad8bc265a9a585db12b8e3dac50d6cd2a:
+    - v1.0.0
+- name: debian-hyperkube-base-arm
+  dmap:
+    sha256:aee7c2958c6e0de896995e8b04c8173fd0a7bbb16cddb1f4668e3ae010b8c786:
+    - v1.0.0
+- name: debian-hyperkube-base-arm64
+  dmap:
+    sha256:a74fc6d690e5c5e393fd509f50d7203fa5cd19bfbb127d4a3a996fd1ebcf35c4:
+    - v1.0.0
+- name: debian-hyperkube-base-ppc64le
+  dmap:
+    sha256:54afd9a85d6ecbe0792496f36012e7902601fb8084347cdc195c8b0561da39a3:
+    - v1.0.0
+- name: debian-hyperkube-base-s390x
+  dmap:
+    sha256:405a94e6b82f2eb89c773e0e9f6105eb73cde5605d4508ae36a150d922fe1c66:
+    - v1.0.0
 - name: debian-iptables
   dmap:
     sha256:1ae6d76dea462973759ff1c4e02263867da1f85db9aa10462a030ca421cbf0e9:
