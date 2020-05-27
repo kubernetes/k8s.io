@@ -417,7 +417,7 @@ function empower_artifact_auditor_invoker() {
 # $2: The account name (e.g. "foo-manager")
 # $3: The account display-name (e.g. "Manages all foo")
 function ensure_service_account() {
-    if [ $# != 3 -o -z "$1" -o -z "$2" -o -x "$3" ]; then
+    if [ $# != 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
         echo "ensure_service_account(project, name, display_name) requires 3 arguments" >&2
         return 1
     fi
@@ -440,7 +440,7 @@ function ensure_service_account() {
 # $2 The managed zone name (e.g. kubernetes-io)
 # $3 The DNS zone name (e.g. kubernetes.io)
 function ensure_dns_zone() {
-    if [ $# != 3 -o -z "$1" -o -z "$2" -o -x "$3" ]; then
+    if [ $# != 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
         echo "ensure_dns_zone(project, zone_name, dns_name) requires 3 arguments" >&2
         return 1
     fi
