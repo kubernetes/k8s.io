@@ -110,3 +110,23 @@ module "prow_build_nodepool" {
   disk_type       = "pd-ssd"
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }
+
+module "greenhouse_nodepool" {
+  source = "../../../modules/gke-nodepool"
+  project_name    = local.project_id
+  cluster_name    = module.prow_build_cluster.cluster.name
+  location        = module.prow_build_cluster.cluster.location
+  name            = "greenhouse"
+  labels          = { dedicated = "greenhouse" }
+  # NOTE: taints are only applied during creation and ignored after that, see module docs
+  taints          = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
+  min_count       = 1
+  max_count       = 1
+  # choosing this image for parity with the build nodepool
+  image_type      = "UBUNTU_CONTAINERD"
+  # choosing a machine type to maximize IOPs
+  machine_type    = "n1-standard-32"
+  disk_size_gb    = 100
+  disk_type       = "pd-standard"
+  service_account = module.prow_build_cluster.cluster_node_sa.email
+}

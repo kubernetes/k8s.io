@@ -64,6 +64,27 @@ variable "disk_type" {
   type        = string
 }
 
+variable "labels" {
+  description = "The labels to apply to this node_pool"
+  type        = map(string)
+  default     = {}
+}
+
+# Terraform docs suggest not using terraform to manage taints, because GKE is going
+# to auto-apply taints if certain features are enabled, and terraform doesn't do well
+# when something else is managing the same thing it's managing.
+#
+# So this is mostly here to describe intent. It will assign taints at creation time,
+# but cannot be used to ensure the taints remain applied throughout the node pool's
+# lifecycle
+#
+# ref: https://www.terraform.io/docs/providers/google/r/container_cluster.html#taint
+variable "taints" {
+  description = "The taints to apply to this node_pool upon creation (NOTE: changes will be ignored throughout lifecycle)"
+  type        = list(object({ key = string, value = string, effect = string }))
+  default     = []
+}
+
 variable "service_account" {
   description = "The email address of the GCP Service Account to be associated with nodes in this node_pool"
   type        = string
