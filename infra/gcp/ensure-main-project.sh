@@ -77,6 +77,9 @@ color 6 "Enabling the OSLogin API"
 enable_api "${PROJECT}" oslogin.googleapis.com
 color 6 "Enabling the DNS API"
 enable_api "${PROJECT}" dns.googleapis.com
+color 6 "Enabling the Secret Manager API"
+enable_api "${PROJECT}" secretmanager.googleapis.com
+
 
 color 6 "Ensuring the cluster terraform-state bucket exists"
 ensure_private_gcs_bucket "${PROJECT}" "gs://${CLUSTER_TERRAFORM_BUCKET}"
