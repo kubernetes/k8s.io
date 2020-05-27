@@ -16,3 +16,22 @@
 - name: vpa-updater
   dmap:
     "sha256:36d9f96c469c9e91663124d06feb0a33142cfb197b92d2c0aa69367242060776": ["0.8.0"]
+
+- name: addon-resizer
+  dmap:
+    "sha256:66aef446f63b92fae1c0afb3c70baad9f37306bf0fca4ba98d33e4b980bc3414": ["1.8.9"]
+- name: addon-resizer-amd64
+  dmap:
+    "sha256:66aef446f63b92fae1c0afb3c70baad9f37306bf0fca4ba98d33e4b980bc3414": ["1.8.9"]
+- name: addon-resizer-arm
+  dmap:
+    "sha256:0127b439e320be239478526dfb87f55fd0a6ecd3851ad2d3c5a83cf461cec6e3": ["1.8.9"]
+- name: addon-resizer-arm64
+  dmap:
+    "sha256:78223463c4bc2b46a5180299254bb1bc016a2a3a77aaf41b68f2b86e5f73b79b": ["1.8.9"]
+- name: addon-resizer-ppc64le
+  dmap:
+    "sha256:83cbddd7f3e051074f456277ca3ec6a1d6e3c5f0d5d5218766f3849053f01d6b": ["1.8.9"]
+- name: addon-resizer-s390x
+  dmap:
+    "sha256:8c7a36ffd4567f628b1561564474c86014942f5b72b82ca2a9678984ae68aebd": ["1.8.9"]
