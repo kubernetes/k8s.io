@@ -289,11 +289,6 @@ color 6 "Handling special cases"
         "${RELEASE_TESTPROD_PROJECT}" \
         "k8s-infra-staging-kubernetes@kubernetes.io"
 
-    color 6 "Empowering staging-release-test to release test-prod"
-    empower_group_to_fake_prod \
-        "${RELEASE_TESTPROD_PROJECT}" \
-        "k8s-infra-staging-release-test@kubernetes.io"
-
     # Special case: grant the k8s-staging-kubernetes Cloud Build account access to
     # write to the primary test prod GCS bucket. This currently is a requirement
     # for anago.
