@@ -1,7 +1,5 @@
 # slack-infra
 
-## NOTE: this is not yet live or deployed (except secrets)
-
 Cluster resources to deploy the following apps from [kubernetes-sigs/slack-infra]:
 
 - slack-event-log
@@ -9,7 +7,8 @@ Cluster resources to deploy the following apps from [kubernetes-sigs/slack-infra
 - slack-welcomer
 - slackin
 
-Secrets are stored as `secrets/{app}/{secret-name}-secret.yaml` and encrypted with git-crypt
+Secrets are stored in Secret Manager in the `kubernetes-public` project, with
+access granted to members of k8s-infra-rbac-slack-infra@kubernetes.io
 
 None of the resources have a namespace defined
 
@@ -21,10 +20,11 @@ From the "slack-infra" directory run:
 # Basic resources
 kubectl apply -n slack-infra -f resources/
 
-# Secrets (have to be deployed by someone who can decrypt them)
-git-crypt unlock
-kubectl apply -n slack-infra -f secrets/
-git-crypt lock
+# Secrets (have to be deployed by a member of k8s-infra-rbac-slack-infra@kubernetes.io)
+for s in $(gcloud secrets list --project=kubernetes-public --filter="labels.app=slack-infra" --format="value(name)"); do
+  gcloud secrets --project=kubernetes-public versions access latest --secret=$s |\
+    kubetctl apply -n slack-infra -f -
+done
 ```
 
 [kubernetes-sigs/slack-infra]: https://github.com/kubernetes-sigs/slack-infra
