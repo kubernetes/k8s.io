@@ -121,6 +121,28 @@ for prj; do
       --member "serviceAccount:${BOSKOS_JANITOR_SVCACCT}" \
       --role roles/editor
 
+    color 6 "Empower k8s-infra-prow-oncall@kubernetes.io to admin e2e project: ${prj}"
+    # TODO: this is what prow.k8s.io uses today, but it is likely over-permissioned, we could
+    #       look into creating a more constrained IAM role and using that instead
+    gcloud \
+      projects add-iam-policy-binding "${prj}" \
+      --member "group:k8s-infra-prow-oncall@kubernetes.io" \
+      --role roles/owner
+
+    color 6 "Empower k8s-infra-prow-viewer@kubernetes.io to view e2e project: ${prj}"
+    gcloud \
+      projects add-iam-policy-binding "${prj}" \
+      --member "group:k8s-infra-prow-viewer@kubernetes.io" \
+      --role roles/viewer
+    
+    if [[ "${prj}" =~ k8s-infra-e2e.*scale ]]; then
+      color 6 "Empower k8s-infra-sig-scalability-oncall@kubernetes.io to admin e2e project: ${prj}"
+      gcloud \
+        projects add-iam-policy-binding "${prj}" \
+        --member "group:k8s-infra-sig-scalability-oncall@kubernetes.io" \
+        --role roles/owner
+    fi
+
     color 6 "Ensure prow-build prowjobs are able to ssh to instances in e2e project: ${prj}"
     # TODO: this is what prow.k8s.io does today, we could look into use OS Login instead
     prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
@@ -134,5 +156,6 @@ for prj; do
       gcloud compute project-info add-metadata --project="${prj}" \
         --metadata-from-file ssh-keys="${ssh_pubkeys}"
     fi
+
   ) 2>&1 | indent
 done 2>&1 | indent
