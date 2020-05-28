@@ -231,12 +231,12 @@ done
 
 # Special case: Empower GCB in k8s-staging-e2e-test-images to access secrets
 #               that were manually added to k8s-infra-prow-trusted
-color 6 "Configuring special cases for GCB access to windows-image-promoter-cert secrets"
+color 6 "Configuring special cases for GCB access to windows-img-promoter-cert secrets"
 for repo in "${WINDOWS_REMOTE_DOCKER_PROJECTS[@]}"; do
     (
         PROJECT="k8s-staging-${repo}"
         SECRET_PROJECT="k8s-infra-prow-build-trusted"
-        SECRET_GROUP="windows-image-promoter-cert"
+        SECRET_GROUP="windows-img-promoter-cert"
         for secret in $(gcloud secrets list \
                         --format="value(name)" \
                         --project="${SECRET_PROJECT}" \
