@@ -165,9 +165,6 @@ yt:
 # Running in GKE (@dchen1107).
 node-perf-dash:
   type: A
-  value: 130.211.155.47
-node-perf-dash-staging:
-  type: A
   value: 35.227.254.215
 # sig-scalability
 perf-dash:
