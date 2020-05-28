@@ -47,6 +47,7 @@ STAGING_PROJECTS=(
     build-image
     cip-test
     provider-aws
+    certmanager
     cluster-api
     cluster-api-aws
     cluster-api-azure

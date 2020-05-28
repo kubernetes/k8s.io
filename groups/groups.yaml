@@ -745,6 +745,20 @@ groups:
       - hi@amycod.es
       - prignanov@vmware.com
 
+  - email-id: k8s-infra-staging-certmanager@kubernetes.io
+    name: k8s-infra-staging-certmanager
+    description: |-
+      ACL for staging certmanager
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - prignanov@vmware.com
+      - james@munnelly.eu
+      - Cecile.RobertMichon@microsoft.com
+
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     name: k8s-infra-staging-cluster-api-aws
     description: |-
