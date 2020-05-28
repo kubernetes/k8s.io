@@ -305,6 +305,7 @@ groups:
       - davanum@gmail.com
       - spiffxp@google.com
       - thockin@google.com
+
   #
   # Push groups: k8s-infra-push-*
   #
@@ -349,6 +350,22 @@ groups:
       - stephen.k8s@agst.us
       - thockin@google.com
       - tpepper@gmail.com
+
+  - email-id: k8s-infra-push-cri-tools@kubernetes.io
+    name: k8s-infra-push-cri-tools
+    description: |-
+      ACL for pushing CRI tools artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-admins@kubernetes.io
+      - k8s-infra-release-editors@kubernetes.io
+      - dawnchen@google.com
+      - decarr@redhat.com
+      - feiskyer@gmail.com
+      - saschagrunert@gmail.com
+      - tallclair@google.com
+      - thockin@google.com
 
   - email-id: k8s-infra-push-kind@kubernetes.io
     name: k8s-infra-push-kind
