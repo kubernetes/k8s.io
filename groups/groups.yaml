@@ -333,23 +333,16 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - k8s-infra-release-admins@kubernetes.io
+      - k8s-infra-release-editors@kubernetes.io
       - brucema19901024@gmail.com
       - bryan@weave.works
-      - caselim@gmail.com
       - cdc@redhat.com
-      - ctadeu@gmail.com
       - dcbw@redhat.com
-      - dmaceachern@vmware.com
-      - feiskyer@gmail.com
       - grosenhouse@pivotal.io
-      - hhorl@pivotal.io
-      - idealhack@gmail.com
       - matt@tigera.io
       - mcambria@redhat.com
-      - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
       - thockin@google.com
-      - tpepper@gmail.com
 
   - email-id: k8s-infra-push-cri-tools@kubernetes.io
     name: k8s-infra-push-cri-tools
