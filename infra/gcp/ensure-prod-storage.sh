@@ -76,6 +76,7 @@ ALL_PROD_PROJECTS=(
 # must already exist.
 #
 ALL_PROD_BUCKETS=(
+    "csi"
     "cni"
     "kind"
 )
