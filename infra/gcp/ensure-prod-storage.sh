@@ -78,6 +78,7 @@ ALL_PROD_PROJECTS=(
 ALL_PROD_BUCKETS=(
     "csi"
     "cni"
+    "cri-tools"
     "kind"
 )
 
