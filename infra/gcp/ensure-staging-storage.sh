@@ -94,6 +94,10 @@ RELEASE_STAGING_PROJECTS=(
     releng
 )
 
+WINDOWS_REMOTE_DOCKER_PROJECTS=(
+    e2e-test-images
+)
+
 if [ $# = 0 ]; then
     # default to all staging projects
     set -- "${STAGING_PROJECTS[@]}"
@@ -227,20 +231,22 @@ done
 
 # Special case: Empower GCB in k8s-staging-e2e-test-images to access secrets
 #               that were manually added to k8s-infra-prow-trusted
-color 6 "Configuring special case for k8s-staging-e2e-test-images"
-(
-    PROJECT="k8s-staging-e2e-test-images"
-    SECRET_PROJECT="k8s-infra-prow-build-trusted"
-    SECRET_GROUP="windows-image-promoter-cert"
-    for secret in $(gcloud secrets list \
-                    --format="value(name)" \
-                    --project="${SECRET_PROJECT}" \
-                    --filter="labels.secret-group=${SECRET_GROUP}"); do
-      color 6 "Empowering ${PROJECT}'s GCB service account to access secret ${secret} in ${SECRET_PROJECT}"
-      gcloud secrets add-iam-policy-binding \
-        "${secret}" \
-        --project="${SECRET_PROJECT}" \
-        --member="serviceAccount:$(gcb_service_account_email "k8s-staging-e2e-test-images")" \
-        --role="roles/secretmanager.secretAccessor"
-    done
-) 2>&1 | indent
+color 6 "Configuring special cases for GCB access to windows-image-promoter-cert secrets"
+for repo in "${WINDOWS_REMOTE_DOCKER_PROJECTS[@]}"; do
+    (
+        PROJECT="k8s-staging-${repo}"
+        SECRET_PROJECT="k8s-infra-prow-build-trusted"
+        SECRET_GROUP="windows-image-promoter-cert"
+        for secret in $(gcloud secrets list \
+                        --format="value(name)" \
+                        --project="${SECRET_PROJECT}" \
+                        --filter="labels.secret-group=${SECRET_GROUP}"); do
+          color 6 "Empowering ${PROJECT}'s GCB service account to access secret ${secret} in ${SECRET_PROJECT}"
+          gcloud secrets add-iam-policy-binding \
+            "${secret}" \
+            --project="${SECRET_PROJECT}" \
+            --member="serviceAccount:$(gcb_service_account_email "k8s-staging-e2e-test-images")" \
+            --role="roles/secretmanager.secretAccessor"
+        done
+    ) 2>&1 | indent
+done
