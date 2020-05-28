@@ -757,7 +757,7 @@ groups:
       - goldsteina@vmware.com
       - prignanov@vmware.com
       - james@munnelly.eu
-      - Cecile.RobertMichon@microsoft.com
+      - cerobert@microsoft.com
 
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     name: k8s-infra-staging-cluster-api-aws
