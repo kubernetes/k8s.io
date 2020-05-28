@@ -1,0 +1,10 @@
+# google group for gcr.io/k8s-staging-certmanager is k8s-infra-staging-certmanager@kubernetes.io
+registries:
+- name: gcr.io/k8s-staging-certmanager
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod/certmanager
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/certmanager
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/certmanager
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
