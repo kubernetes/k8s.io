@@ -162,7 +162,6 @@ youtube:
 yt:
   type: CNAME
   value: redirect.k8s.io.
-# Running in GKE (@dchen1107).
 node-perf-dash:
   type: A
   value: 35.227.254.215
