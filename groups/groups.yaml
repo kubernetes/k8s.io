@@ -1310,7 +1310,7 @@ groups:
 
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "false"
+      ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
       - joelsmith@redhat.com
