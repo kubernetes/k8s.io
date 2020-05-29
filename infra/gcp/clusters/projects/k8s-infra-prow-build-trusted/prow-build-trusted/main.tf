@@ -113,12 +113,12 @@ module "prow_build_nodepool" {
 }
 
 module "ghproxy_nodepool" {
-  source       = "../../modules/gke-nodepool"
-  project_name = local.project_id
-  cluster_name = module.prow_build_cluster.cluster.name
-  location     = module.prow_build_cluster.cluster.location
-  name         = "ghproxy"
-  labels       = { dedicated = "ghproxy" }
+  source          = "../../../modules/gke-nodepool"
+  project_name    = local.project_id
+  cluster_name    = module.prow_build_cluster.cluster.name
+  location        = module.prow_build_cluster.cluster.location
+  name            = "ghproxy"
+  labels          = { dedicated = "ghproxy" }
   # NOTE: taints are only applied during creation and ignored after that, see module docs
   taints          = [{ key = "dedicated", value = "ghproxy", effect = "NO_SCHEDULE" }]
   min_count       = 1
