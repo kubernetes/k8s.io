@@ -549,6 +549,51 @@ groups:
       - simony@google.com
       - sumitranr@google.com
 
+  - email-id: k8s-infra-prow-oncall@kubernetes.io
+    name: k8s-infra-prow-oncall
+    description: |-
+      ACL for oncall/break-glass access to resources used by prow.k8s.io
+    settings:
+      ReconcileMembers: "true"
+    members:
+      # test-infra-oncall
+      - amerai@google.com
+      - bentheelder@google.com
+      - clarketm@google.com
+      - colew@google.com
+      - fejta@google.com
+      - slchase@google.com
+      # wg-k8s-infra-oncall
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-prow-viewers@kubernetes.io
+    name: k8s-infra-prow-viewers
+    description: |-
+      ACL for view access to resources used by prow.k8s.io, including build clusters and e2e projects
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - spiffxp@gmail.com
+
+  - email-id: k8s-infra-sig-scalability-oncall@kubernetes.io
+    name: k8s-infra-sig-scalability-oncall
+    description: |-
+      ACL for oncall/break-glass access to projects used by sig-scalability tests (k8s-infra-e2e-boskos-scale-*)
+    settings:
+      ReconcileMembers: "true"
+    members:
+      # scalability-oncall
+      - jkaniuk@google.com
+      - jprzychodzen@google.com
+      - maciejborsz@google.com
+      # sig-scalability leads
+      - jeedigv@amazon.com
+      - mmatejczyk@google.com
+      - wojtekt@google.com
+
   #
   # Conformance groups: k8s-infra-conform-*
   #

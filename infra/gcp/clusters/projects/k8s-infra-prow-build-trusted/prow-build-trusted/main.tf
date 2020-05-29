@@ -38,6 +38,13 @@ module "project" {
   project_name          = local.project_id
 }
 
+// Ensure k8s-infra-prow-oncall@kuberentes.io has owner access to this project
+resource "google_project_iam_member" "k8s_infra_prow_oncall" {
+  project = local.project_id
+  role    = "roles/owner"
+  member  = "group:k8s-infra-prow-oncall@kubernetes.io"
+}
+
 // Create GCP SA for pods
 resource "google_service_account" "prow_build_cluster_sa" {
   project      = local.project_id
