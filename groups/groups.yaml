@@ -576,6 +576,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - ameukam@gmail.com
+      - bartek@smykla.com
       - spiffxp@gmail.com
 
   - email-id: k8s-infra-sig-scalability-oncall@kubernetes.io
