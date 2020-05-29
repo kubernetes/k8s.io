@@ -22,5 +22,9 @@ endif
 default: run
 
 .PHONY: run
-run:
-	GO111MODULE=on go run reconcile.go $(runargs)
+run: test
+	go run reconcile.go $(runargs)
+
+.PHONY: test
+test:
+	go test
