@@ -129,10 +129,10 @@ for prj; do
       --member "group:k8s-infra-prow-oncall@kubernetes.io" \
       --role roles/owner
 
-    color 6 "Empower k8s-infra-prow-viewer@kubernetes.io to view e2e project: ${prj}"
+    color 6 "Empower k8s-infra-prow-viewers@kubernetes.io to view e2e project: ${prj}"
     gcloud \
       projects add-iam-policy-binding "${prj}" \
-      --member "group:k8s-infra-prow-viewer@kubernetes.io" \
+      --member "group:k8s-infra-prow-viewers@kubernetes.io" \
       --role roles/viewer
     
     if [[ "${prj}" =~ k8s-infra-e2e.*scale ]]; then
