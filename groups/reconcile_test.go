@@ -31,7 +31,7 @@ import (
 // we are left with 18 chars for the project name.
 func TestStagingEmailLength(t *testing.T) {
 	var cfg GroupsConfig
-	if err := readGroupsConfig("groups.yaml", &cfg); err != nil {
+	if err := readGroupsConfig(".", "groups.yaml", &cfg); err != nil {
 		t.Fatal(err)
 	}
 

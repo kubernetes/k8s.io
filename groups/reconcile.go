@@ -26,6 +26,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"path/filepath"
 	"reflect"
 	"time"
 
@@ -104,7 +105,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = readGroupsConfig(config.GroupsFile, &groupsConfig)
+	err = readGroupsConfig(*configFilePath, config.GroupsFile, &groupsConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -201,7 +202,7 @@ func readConfig(configFilePath string, confirmChanges bool) error {
 	return err
 }
 
-func readGroupsConfig(groupsConfigFilePath string, config *GroupsConfig) error {
+func readGroupsConfig(configFilePath string, groupsConfigFilePath string, config *GroupsConfig) error {
 	if *verbose {
 		log.Printf("reading group file %s", groupsConfigFilePath)
 	}
@@ -217,7 +218,12 @@ func readGroupsConfig(groupsConfigFilePath string, config *GroupsConfig) error {
 		}
 	} else {
 		// We don't have a URL, we have a file path, so try reading from the file
-		if content, err = ioutil.ReadFile(groupsConfigFilePath); err != nil {
+		path := groupsConfigFilePath
+		// Interpret relative path as relative to config file
+		if !filepath.IsAbs(path) {
+			path = filepath.Join(filepath.Dir(configFilePath), path)
+		}
+		if content, err = ioutil.ReadFile(path); err != nil {
 			return fmt.Errorf("error reading groups config file %s: %v", groupsConfigFilePath, err)
 		}
 	}
