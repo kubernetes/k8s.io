@@ -946,12 +946,12 @@ groups:
       - pavithrar@google.com
 
   - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
-    name: Kubernetes E2E test image staging registry owners
+    name: k8s-infra-staging-e2e-test-images
     description: |-
       Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
     settings:
       ReconcileMembers: "true"
-    owners:
+    members:
       - cblecker@gmail.com
       - davanum@gmail.com
       - justinsb@google.com
@@ -964,7 +964,7 @@ groups:
       ACL for staging etcd
     settings:
       ReconcileMembers: "true"
-    owners:
+    members:
       - jpbetz@google.com
       - wenjiazhang@google.com
       - jingyih@google.com
@@ -1038,7 +1038,7 @@ groups:
       ACL for staging kubeadm
     settings:
       ReconcileMembers: "true"
-    owners:
+    members:
       - timothysc@gmail.com
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
@@ -1179,7 +1179,7 @@ groups:
       ACL for staging SIG-network service APIs
     settings:
       ReconcileMembers: "true"
-    owners:
+    members:
       - thockin@google.com
       - bowei@google.com
       - antonio.ojea.garcia@gmail.com
@@ -1190,7 +1190,7 @@ groups:
       ACL for staging Slack Infra
     settings:
       ReconcileMembers: "true"
-    owners:
+    members:
       - ameukam@gmail.com
       - bartek@smykla.com
       - ktbry@google.com

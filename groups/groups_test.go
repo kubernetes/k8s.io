@@ -17,11 +17,30 @@ limitations under the License.
 package main
 
 import (
+	"flag"
 	"fmt"
+	"os"
 	"strings"
 	"testing"
 	"unicode/utf8"
 )
+
+var cfg GroupsConfig
+
+var groupsConfigPath = flag.String("groups-config", "./groups.yaml", "Path to groups config")
+
+func TestMain(m *testing.M) {
+	flag.Parse()
+	if *groupsConfigPath == "" {
+		fmt.Println("--groups-config must be set")
+		os.Exit(1)
+	}
+	if err := readGroupsConfig(".", *groupsConfigPath, &cfg); err != nil {
+		fmt.Printf("Could not load groups-config: %v", err)
+		os.Exit(1)
+	}
+	os.Exit(m.Run())
+}
 
 // TestStagingEmailLength tests that the number of characters in the
 // project name in emails used for staging repos does not exceed 18.
@@ -30,11 +49,6 @@ import (
 // between 6 and 30. So after discounting the "k8s-staging" prefix,
 // we are left with 18 chars for the project name.
 func TestStagingEmailLength(t *testing.T) {
-	var cfg GroupsConfig
-	if err := readGroupsConfig("groups.yaml", &cfg); err != nil {
-		t.Fatal(err)
-	}
-
 	var errs []error
 	for _, g := range cfg.Groups {
 		if strings.HasPrefix(g.EmailId, "k8s-infra-staging-") {
@@ -50,6 +64,32 @@ func TestStagingEmailLength(t *testing.T) {
 	if errs != nil {
 		for _, err := range errs {
 			t.Error(err)
+		}
+	}
+}
+
+func TestK8sInfraGroupConventions(t *testing.T) {
+	for _, g := range cfg.Groups {
+		// TODO: expand from k8s-infra-staging-* to k8s-infra-*
+		if strings.HasPrefix(g.EmailId, "k8s-infra-staging") {
+
+			expectedEmailId := g.Name + "@kubernetes.io"
+			if g.EmailId != expectedEmailId {
+				t.Errorf("group '%s': expected email '%s', got '%s'", g.Name, expectedEmailId, g.EmailId)
+			}
+
+			if len(g.Owners) > 0 {
+				t.Errorf("group '%s': must have no owners, only members", g.Name)
+			}
+
+		}
+		if strings.HasPrefix(g.EmailId, "k8s-infra") {
+
+			reconcileMembers, ok := g.Settings["ReconcileMembers"]
+			if !ok || reconcileMembers != "true" {
+				t.Errorf("group '%s': must have settings.ReconcileMembers = true", g.Name)
+			}
+
 		}
 	}
 }
