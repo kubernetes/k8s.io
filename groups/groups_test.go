@@ -20,6 +20,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"reflect"
+	"sort"
 	"strings"
 	"testing"
 	"unicode/utf8"
@@ -90,6 +92,47 @@ func TestK8sInfraGroupConventions(t *testing.T) {
 				t.Errorf("group '%s': must have settings.ReconcileMembers = true", g.Name)
 			}
 
+		}
+	}
+}
+
+// NOTE: make very certain you know what you are doing if you change one
+// of these groups, we don't want to accidentally lock ourselves out
+func TestHardcodedGroupsForParanoia(t *testing.T) {
+	groups := map[string][]string{
+		"k8s-infra-gcp-org-admins@kubernetes.io": []string{
+			"cblecker@gmail.com",
+			"davanum@gmail.com",
+			"ihor@cncf.io",
+			"spiffxp@google.com",
+			"thockin@google.com",
+		},
+		"k8s-infra-group-admins@kubernetes.io": []string{
+			"cblecker@gmail.com",
+			"davanum@gmail.com",
+			"spiffxp@google.com",
+			"thockin@google.com",
+		},
+	}
+
+	found := make(map[string]bool)
+
+	for _, g := range cfg.Groups {
+		if expected, ok := groups[g.EmailId]; ok {
+			found[g.EmailId] = true
+			sort.Strings(expected)
+			actual := make([]string, len(g.Members))
+			copy(actual, g.Members)
+			sort.Strings(actual)
+			if !reflect.DeepEqual(expected, actual) {
+				t.Errorf("group '%s': expected members '%v', got '%v'", g.Name, expected, actual)
+			}
+		}
+	}
+
+	for email, _ := range groups {
+		if _, ok := found[email]; !ok {
+			t.Errorf("group '%s' is missing, should be present", email)
 		}
 	}
 }
