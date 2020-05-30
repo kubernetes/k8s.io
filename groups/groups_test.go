@@ -70,28 +70,75 @@ func TestStagingEmailLength(t *testing.T) {
 	}
 }
 
+// Enforce conventions for all groups
+func TestGroupConventions(t *testing.T) {
+	for _, g := range cfg.Groups {
+		// groups are easier to reason about if email and name match
+		expectedEmailId := g.Name + "@kubernetes.io"
+		if g.EmailId != expectedEmailId {
+			t.Errorf("group '%s': expected email '%s', got '%s'", g.Name, expectedEmailId, g.EmailId)
+		}
+	}
+}
+
+// Enforce conventions for all k8s-infra groups
 func TestK8sInfraGroupConventions(t *testing.T) {
 	for _, g := range cfg.Groups {
-		// TODO: expand from k8s-infra-staging-* to k8s-infra-*
-		if strings.HasPrefix(g.EmailId, "k8s-infra-staging") {
-
-			expectedEmailId := g.Name + "@kubernetes.io"
-			if g.EmailId != expectedEmailId {
-				t.Errorf("group '%s': expected email '%s', got '%s'", g.Name, expectedEmailId, g.EmailId)
-			}
-
+		if strings.HasPrefix(g.EmailId, "k8s-infra") {
+			// no owners because we want to prevent manual membership changes
 			if len(g.Owners) > 0 {
 				t.Errorf("group '%s': must have no owners, only members", g.Name)
 			}
 
-		}
-		if strings.HasPrefix(g.EmailId, "k8s-infra") {
-
+			// treat files here as source of truth for membership
 			reconcileMembers, ok := g.Settings["ReconcileMembers"]
 			if !ok || reconcileMembers != "true" {
 				t.Errorf("group '%s': must have settings.ReconcileMembers = true", g.Name)
 			}
+		}
+	}
+}
 
+// Enforce conventions for groups used by GKE Group-based RBAC
+// - there must be a gke-security-groups@ group
+// - its members must be k8s-infra-rbac-*@ groups (and vice-versa)
+// - all groups involved must have settings.WhoCanViewMembership = ALL_MEMBERS_CAN_VIEW
+func TestK8sInfraRBACGroupConventions(t *testing.T) {
+	rbacEmails := make(map[string]bool)
+	for _, g := range cfg.Groups {
+		if strings.HasPrefix(g.EmailId, "k8s-infra-rbac") {
+			rbacEmails[g.EmailId] = false
+			// this is necessary for group-based rbac to work
+			whoCanViewMembership, ok := g.Settings["WhoCanViewMembership"]
+			if !ok || whoCanViewMembership != "ALL_MEMBERS_CAN_VIEW" {
+				t.Errorf("group '%s': must have settings.WhoCanViewMembership = ALL_MEMBERS_CAN_VIEW", g.Name)
+			}
+		}
+	}
+	foundGKEGroup := false
+	for _, g := range cfg.Groups {
+		if g.EmailId == "gke-security-groups@kubernetes.io" {
+			foundGKEGroup = true
+			// this is necessary for group-based rbac to work
+			whoCanViewMembership, ok := g.Settings["WhoCanViewMembership"]
+			if !ok || whoCanViewMembership != "ALL_MEMBERS_CAN_VIEW" {
+				t.Errorf("group '%s': must have settings.WhoCanViewMembership = ALL_MEMBERS_CAN_VIEW", g.Name)
+			}
+			for _, email := range g.Members {
+				if _, ok := rbacEmails[email]; !ok {
+					t.Errorf("group '%s': invalid member '%s', must be a k8s-infra-rbac-*@kubernetes.io group", g.Name, email)
+				} else {
+					rbacEmails[email] = true
+				}
+			}
+		}
+	}
+	if !foundGKEGroup {
+		t.Errorf("group '%s' is missing", "gke-security-groups@kubernetes.io")
+	}
+	for email, found := range rbacEmails {
+		if !found {
+			t.Errorf("group '%s': must be a member of gke-security-groups@kubernetes.io", email)
 		}
 	}
 }
