@@ -4,8 +4,10 @@
 # mailing lists.
 groups:
   - email-id: blog@kubernetes.io
-    name: blog editors
+    name: blog
     description: |-
+      blog editors
+
       Created via https://github.com/kubernetes/community/issues/3763
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
@@ -281,7 +283,7 @@ groups:
       - k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com
 
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
-    name: Organization Administrators for kubernetes.io
+    name: k8s-infra-gcp-org-admins
     description: |-
       Organization Administrators for kubernetes.io
     settings:
@@ -294,7 +296,7 @@ groups:
       - thockin@google.com
 
   - email-id: k8s-infra-group-admins@kubernetes.io
-    name: Group Administrators for kubernetes.io
+    name: k8s-infra-group-admins
     description: |-
       People trusted to admin kubernetes.io google groups by
       running the groups reconciler
@@ -493,7 +495,7 @@ groups:
       https://git.k8s.io/sig-release/release-managers.md
     settings:
       ReconcileMembers: "true"
-    owners:
+    members:
       - caselim@gmail.com
       - stephen.k8s@agst.us
       - tpepper@gmail.com
@@ -505,11 +507,10 @@ groups:
       https://git.k8s.io/sig-release/release-managers.md
     settings:
       ReconcileMembers: "true"
-    owners:
+    members:
       - caselim@gmail.com
       - stephen.k8s@agst.us
       - tpepper@gmail.com
-    members:
       - feiskyer@gmail.com
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
@@ -525,11 +526,10 @@ groups:
       https://git.k8s.io/sig-release/release-managers.md
     settings:
       ReconcileMembers: "true"
-    owners:
+    members:
       - caselim@gmail.com
       - stephen.k8s@agst.us
       - tpepper@gmail.com
-    members:
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
