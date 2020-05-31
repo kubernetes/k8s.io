@@ -32,7 +32,7 @@ resource "google_container_node_pool" "node_pool" {
   }
 
   // Autoscale the cluster as needed. Note if using a regional cluster these values will be multiplied by 3
-  initial_node_count = var.min_count
+  initial_node_count = var.initial_count
   autoscaling {
     min_node_count = var.min_count
     max_node_count = var.max_count

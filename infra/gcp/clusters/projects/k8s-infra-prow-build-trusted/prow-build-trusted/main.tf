@@ -104,6 +104,7 @@ module "prow_build_nodepool" {
   cluster_name    = module.prow_build_cluster.cluster.name
   location        = module.prow_build_cluster.cluster.location
   name            = "trusted-pool1"
+  initial_count   = 1
   min_count       = 1
   max_count       = 3
   machine_type    = "n1-standard-8"
@@ -121,6 +122,7 @@ module "ghproxy_nodepool" {
   labels          = { dedicated = "ghproxy" }
   # NOTE: taints are only applied during creation and ignored after that, see module docs
   taints          = [{ key = "dedicated", value = "ghproxy", effect = "NO_SCHEDULE" }]
+  initial_count   = 1
   min_count       = 1
   max_count       = 1
   machine_type    = "n1-standard-8"
