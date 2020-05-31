@@ -33,6 +33,11 @@ variable "name" {
   type        = string
 }
 
+variable "initial_count" {
+  description = "The initial_node_count of this node_pool"
+  type        = string
+}
+
 variable "min_count" {
   description = "The min_node_count of this node_pool"
   type        = string

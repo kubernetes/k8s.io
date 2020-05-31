@@ -105,8 +105,9 @@ module "prow_build_nodepool" {
   cluster_name    = module.prow_build_cluster.cluster.name
   location        = module.prow_build_cluster.cluster.location
   name            = "pool1"
-  min_count       = 2
-  max_count       = 6
+  initial_count   = 2
+  min_count       = 6
+  max_count       = 30
   # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
   # use an UBUNTU image instead. Why the CONTAINERD variant? I don't know, but
   # it's what k8s-prow-builds/prow (prow.k8s.io's existing google.com build 
@@ -127,6 +128,7 @@ module "greenhouse_nodepool" {
   labels          = { dedicated = "greenhouse" }
   # NOTE: taints are only applied during creation and ignored after that, see module docs
   taints          = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
+  initial_count   = 1
   min_count       = 1
   max_count       = 1
   # choosing this image for parity with the build nodepool
