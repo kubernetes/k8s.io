@@ -1,0 +1,31 @@
+- name: csi-attacher
+  dmap:
+    "sha256:2ffa647e8107cfd39e5f464e738dce014c9f5e51b108da36c3ab621048d0bbab": [ "v2.2.0" ]
+- name: csi-node-driver-registrar
+  dmap:
+    "sha256:9622c6a6dac7499a055a382930f4de82905a3c5735c0753f7094115c9c871309": [ "v1.3.0" ]
+    "sha256:273175c272162d480d06849e09e6e3cdb0245239e3a82df6630df3bc059c6571": [ "v1.2.0" ]
+- name: csi-provisioner
+  dmap:
+    "sha256:78e3393f5fd5ff6c1e5dada2478cfa456fb7164929e573cf9a87bf6532730679": [ "v1.6.0" ]
+- name: csi-resizer
+  dmap:
+    "sha256:6c6a0332693a7c456378f6abd2bb40611826c1e1a733cadbdae2daab3125b71c": [ "v0.5.0" ]
+    "sha256:43195976fb9f94d943f5dd9d58b8afa543be22d09a1165e8a489b7dfe22c657a": [ "v0.4.0" ]
+- name: csi-snapshotter
+  dmap:
+    "sha256:35ead85dd09aa8cc612fdb598d4e0e2f048bef816f1b74df5eeab67cd21b10aa": [ "v2.1.0" ]
+    "sha256:1530db9fd380ecee86b48a7b3540568c46adb5a64b7fe718c51d9260c4834fd8": [ "v2.0.1" ]
+- name: hostpathplugin
+  dmap:
+- name: livenessprobe
+  dmap:
+    "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
+- name: mock-driver
+  dmap:
+    "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]
+- name: nfs-provisioner
+  dmap:
+    "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
+- name: snapshot-controller
+  dmap:
