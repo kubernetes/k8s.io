@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: ghproxy
+  labels:
+    app: ghproxy
+spec:
+  ports:
+    - name: main
+      port: 80
+      protocol: TCP
+      targetPort: 8888
+  selector:
+    app: ghproxy
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ghproxy-metrics
+  namespace: default
+  labels:
+    app: ghproxy
+spec:
+  selector:
+    app: ghproxy
+  ports:
+    - name: metrics
+      port: 9090
+  type: LoadBalancer
