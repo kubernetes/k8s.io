@@ -74,6 +74,11 @@ groups:
       - mhausler@amazon.com
       - tallclair@google.com
     members:
+      # Associate PSC members
+      - gaswamy@microsoft.com
+      - craig.ingram@salesforce.com
+      - mok@vmware.com
+      # Distributors
       - argoprod@us.ibm.com
       - aws-k8s-embargo-notification@amazon.com
       - k8s-security@suse.de
