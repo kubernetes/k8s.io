@@ -387,6 +387,7 @@ groups:
       - mattwon@amazon.com
       - kiran.mova@mayadata.io
       - humble.devassy@gmail.com
+      - patrick.ohly@intel.com
 
   #
   # RBAC groups: k8s-infra-rbac-*
