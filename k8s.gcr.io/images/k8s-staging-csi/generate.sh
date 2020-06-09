@@ -16,6 +16,6 @@ snapshot-controller
 for repo in $repos; do
     echo "- name: $repo"
     echo "  dmap:"
-    gcloud container images list-tags gcr.io/k8s-staging-csi/$repo --format='get(digest, tags)' --filter='tags~v.* AND NOT tags~v2020.* AND NOT tags~.*rc.*' |
+    gcloud container images list-tags gcr.io/k8s-staging-csi/$repo --format='get(digest, tags)' --filter='tags~^v AND NOT tags~v2020 AND NOT tags~-rc' |
         sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
 done
