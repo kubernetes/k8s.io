@@ -1,2 +1,0 @@
-groups/*.json   filter=git-crypt diff=git-crypt
-slack-infra/**/*secret*.yaml filter=git-crypt diff-git-crypt
