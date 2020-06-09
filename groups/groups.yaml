@@ -372,10 +372,10 @@ groups:
     members:
       - bentheelder@google.com
 
-  - email-id: k8s-infra-staging-storage@kubernetes.io
-    name: k8s-infra-staging-storage
+  - email-id: k8s-infra-staging-sig-storage@kubernetes.io
+    name: k8s-infra-staging-sig-storage
     description: |-
-      ACL for staging K8s Storage artifacts
+      ACL for staging sig storage artifacts
     settings:
       ReconcileMembers: "true"
     members:
