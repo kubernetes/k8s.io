@@ -1476,3 +1476,14 @@ groups:
       - aledbf@gmail.com
       - bowei@google.com
       - thockin@google.com
+
+  - email-id: k8s-infra-staging-ingressconformance@kubernetes.io
+    name: k8s-infra-staging-ingressconformance
+    description: |-
+      ACL for pushing ingress-controller-conformance artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aledbf@gmail.com
+      - bowei@google.com
+      - thockin@google.com
