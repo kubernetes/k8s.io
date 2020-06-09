@@ -94,6 +94,10 @@ RELEASE_STAGING_PROJECTS=(
     releng
 )
 
+WINDOWS_REMOTE_DOCKER_PROJECTS=(
+    e2e-test-images
+)
+
 if [ $# = 0 ]; then
     # default to all staging projects
     set -- "${STAGING_PROJECTS[@]}"
@@ -178,6 +182,10 @@ for REPO; do
         color 6 "Enabling the KMS API"
         enable_api "${PROJECT}" cloudkms.googleapis.com
 
+        # Enable Secret Manager APIs
+        color 6 "Enabling the Secret Manager API"
+        enable_api "${PROJECT}" secretmanager.googleapis.com
+
         # Enable GCB and Prow to build and push images.
 
         # Enable GCB APIs
@@ -218,5 +226,27 @@ for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
             color 6 "Empowering ${RELEASE_ADMINS} as KMS admins in ${PROJECT}"
             empower_group_for_kms "${PROJECT}" "${RELEASE_ADMINS}"
         fi
+    ) 2>&1 | indent
+done
+
+# Special case: Empower GCB in k8s-staging-e2e-test-images to access secrets
+#               that were manually added to k8s-infra-prow-trusted
+color 6 "Configuring special cases for GCB access to windows-img-promoter-cert secrets"
+for repo in "${WINDOWS_REMOTE_DOCKER_PROJECTS[@]}"; do
+    (
+        PROJECT="k8s-staging-${repo}"
+        SECRET_PROJECT="k8s-infra-prow-build-trusted"
+        SECRET_GROUP="windows-img-promoter-cert"
+        for secret in $(gcloud secrets list \
+                        --format="value(name)" \
+                        --project="${SECRET_PROJECT}" \
+                        --filter="labels.secret-group=${SECRET_GROUP}"); do
+          color 6 "Empowering ${PROJECT}'s GCB service account to access secret ${secret} in ${SECRET_PROJECT}"
+          gcloud secrets add-iam-policy-binding \
+            "${secret}" \
+            --project="${SECRET_PROJECT}" \
+            --member="serviceAccount:$(gcb_service_account_email "k8s-staging-e2e-test-images")" \
+            --role="roles/secretmanager.secretAccessor"
+        done
     ) 2>&1 | indent
 done

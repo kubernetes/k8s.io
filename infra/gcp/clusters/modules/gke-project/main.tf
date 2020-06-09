@@ -68,6 +68,11 @@ resource "google_project_service" "stackdriver" {
   service = "stackdriver.googleapis.com"
   disable_dependent_services = true
 }
+resource "google_project_service" "secretmanager" {
+  project = google_project.project.project_id
+  service = "secretmanager.googleapis.com"
+  disable_dependent_services = true
+}
 
 
 // "Empower cluster admins" is what ensure-main-project.sh says

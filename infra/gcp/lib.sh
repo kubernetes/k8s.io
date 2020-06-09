@@ -71,6 +71,22 @@ function svc_acct_email() {
     echo "${name}@${project}.iam.gserviceaccount.com"
 }
 
+# Get the cloud build service account email for a given project
+#   ref: https://cloud.google.com/cloud-build/docs/securing-builds/configure-access-control#service_account
+# $1 The GCP project
+function gcb_service_account_email() {
+    if [ $# != 1 -o -z "$1" ]; then
+        echo "gcb_service_account_email(project) requires 1 argument" >&2
+        return 1
+    fi
+    local project="$1"
+    gcloud projects get-iam-policy "${project}" \
+      --flatten="bindings[].members"\
+      --filter="bindings.role:roles/cloudbuild.builds.builder AND bindings.members ~ serviceAccount:[0-9]+@cloudbuild" \
+      --format="value(bindings.members)" |\
+      sed -e 's/^serviceAccount://'
+}
+
 # Ensure that a project exists in our org and has fundamental configurations as
 # we want them (e.g. billing).
 # $1: The GCP project
