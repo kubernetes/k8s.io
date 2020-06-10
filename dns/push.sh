@@ -31,10 +31,18 @@ ALL_ZONES=(
 
 DRY_RUN=false
 OCTODNS_CONFIG="octodns-config.yaml"
+LOGS_PATH="${ARTIFACTS:-.}"
 
 # Checking if octodns-sync is present as without it there is no sense to proceed
 if ! command -v octodns-sync &> /dev/null; then
     echo "Couldn't find octodns-sync"
+    exit 1
+fi
+
+# Checking if LOGS_PATH is an existing directory and if we can write to it.
+# Failing otherwise
+if [[ ! -d "${LOGS_PATH}" ]] || [[ ! -w "${LOGS_PATH}" ]]; then
+    echo "Can't write to LOGS_PATH (${LOGS_PATH}). Aborting"
     exit 1
 fi
 
@@ -51,7 +59,7 @@ TMPCFG=$(mktemp -d /tmp/octodns.XXXXXX)
 # set to directory with processed zone configs
 TMP_OCTODNS_CFG=$(mktemp /tmp/octodns.XXXXXX)
 
-echo "Using ${TMP_OCTODNS_CFG} as octodns config file"
+echo "Using ${TMP_OCTODNS_CFG} for octodns config file"
 
 # Change providers.config.directory in octodns config file to $TMPCFG
 # as it's the place where processed zone configs will be held
@@ -104,21 +112,21 @@ done
 
 # Push to canaries.
 echo "Dry-run to canary zones"
-push "${CANARY_ZONES[@]}" > log.canary 2>&1
+push "${CANARY_ZONES[@]}" > "${LOGS_PATH}/log.canary" 2>&1
 if [ $? != 0 ]; then
     echo "Canary dry-run FAILED, halting; log follows:"
     echo "========================================="
-    cat log.canary
+    cat "${LOGS_PATH}/log.canary"
     exit 2
 fi
 
 if [ "${DRY_RUN}" = false ]; then
   echo "Pushing to canary zones"
-  push --doit "${CANARY_ZONES[@]}" >> log.canary 2>&1
+  push --doit "${CANARY_ZONES[@]}" >> "${LOGS_PATH}/log.canary" 2>&1
   if [ $? != 0 ]; then
       echo "Canary push FAILED, halting; log follows:"
       echo "========================================="
-      cat log.canary
+      cat "${LOGS_PATH}/log.canary"
       exit 2
   fi
   echo "Canary push SUCCEEDED"
@@ -128,7 +136,7 @@ if [ "${DRY_RUN}" = false ]; then
       echo "Testing canary zone: $zone"
       for i in $(seq 1 "$TRIES"); do
           ./check-zone.sh -c "${TMPCFG}" -o "${TMP_OCTODNS_CFG}" \
-            "$zone" >> log.canary 2>&1
+            "$zone" >> "${LOGS_PATH}/log.canary" 2>&1
           if [ $? == 0 ]; then
               break
           fi
@@ -138,7 +146,7 @@ if [ "${DRY_RUN}" = false ]; then
           else
               echo "Canary test FAILED, halting; log follows:"
               echo "========================================="
-              cat log.canary
+              cat "${LOGS_PATH}/log.canary"
               exit 2
           fi
       done
@@ -148,21 +156,21 @@ fi
 
 # Push to prod.
 echo "Dry-run to prod zones"
-push "${PROD_ZONES[@]}" > log.prod 2>&1
+push "${PROD_ZONES[@]}" > "${LOGS_PATH}/log.prod" 2>&1
 if [ $? != 0 ]; then
     echo "Prod dry-run FAILED, halting; log follows:"
     echo "========================================="
-    cat log.prod
+    cat "${LOGS_PATH}/log.prod"
     exit 3
 fi
 
 if [ "${DRY_RUN}" = false ]; then
   echo "Pushing to prod zones"
-  push --doit "${PROD_ZONES[@]}" >> log.prod 2>&1
+  push --doit "${PROD_ZONES[@]}" >> "${LOGS_PATH}/log.prod" 2>&1
   if [ $? != 0 ]; then
       echo "Prod push FAILED, halting; log follows:"
       echo "========================================="
-      cat log.prod
+      cat "${LOGS_PATH}/log.prod"
       exit 3
   fi
   echo "Prod push SUCCEEDED"
@@ -172,7 +180,7 @@ if [ "${DRY_RUN}" = false ]; then
       echo "Testing prod zone: $zone"
       for i in $(seq 1 "$TRIES"); do
           ./check-zone.sh -c "${TMPCFG}" -o "${TMP_OCTODNS_CFG}" \
-            "$zone" >> log.prod 2>&1
+            "$zone" >> "${LOGS_PATH}/log.prod" 2>&1
           if [ $? == 0 ]; then
               break
           fi
@@ -182,7 +190,7 @@ if [ "${DRY_RUN}" = false ]; then
           else
               echo "Prod test FAILED, halting; log follows:"
               echo "========================================="
-              cat log.prod
+              cat "${LOGS_PATH}/log.prod"
               exit 2
           fi
       done
