@@ -21,19 +21,24 @@ OCTODNS_CONFIG := octodns-config.yaml
 # 		once the domain flip finishes.
 DOCKER_IMAGE ?= us.gcr.io/k8s-artifacts-prod/infra-tools/octodns:v20200501-36789b1
 
+check-canary check-prod: TMPCFG := $(shell mktemp -d /tmp/octodns.XXXXXX)
+check-canary check-prod: TMP_OCTODNS_CFG := $(shell mktemp /tmp/octodns.XXXXXX)
+check-canary: PRECOOK_ZONES := $(CANARY_ZONES)
+check-prod: PRECOOK_ZONES := $(PROD_ZONES)
+
 default: check
 
 .PHONY: check
 check: check-canary check-prod
 
 .PHONY: check-canary
-check-canary:
-	$(CURDIR)/check-zone.sh -c $(ZONE_CONFIGS) -o $(OCTODNS_CONFIG) \
+check-canary: precook-configs
+	$(CURDIR)/check-zone.sh -c $(TMPCFG) -o $(TMP_OCTODNS_CFG) \
 		$(CANARY_ZONES)
 
 .PHONY: check-prod
-check-prod:
-	$(CURDIR)/check-zone.sh -c $(ZONE_CONFIGS) -o $(OCTODNS_CONFIG) \
+check-prod: precook-configs
+	$(CURDIR)/check-zone.sh -c $(TMPCFG) -o $(TMP_OCTODNS_CFG) \
 		$(PROD_ZONES)
 
 .PHONY: build
@@ -63,3 +68,8 @@ push-local:
 .PHONY: dry-run-local
 dry-run-local: ARGS := --dry-run
 dry-run-local: push-local
+
+precook-configs:
+	source ./lib.sh; \
+	precook_zone_configs $(TMPCFG) $(PRECOOK_ZONES); \
+	precook_octodns_config $(OCTODNS_CONFIG) $(TMPCFG) $(TMP_OCTODNS_CFG);

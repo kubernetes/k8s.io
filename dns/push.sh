@@ -15,6 +15,9 @@
 # limitations under the License.
 # This runs as you.  It assumes you have built an image named ${USER}/octodns.
 
+SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
+source "${SCRIPT_DIR}/lib.sh"
+
 PROD_ZONES=(
     k8s.io.
     kubernetes.io.
@@ -59,13 +62,8 @@ TMPCFG=$(mktemp -d /tmp/octodns.XXXXXX)
 # set to directory with processed zone configs
 TMP_OCTODNS_CFG=$(mktemp /tmp/octodns.XXXXXX)
 
-echo "Using ${TMP_OCTODNS_CFG} for octodns config file"
-
-# Change providers.config.directory in octodns config file to $TMPCFG
-# as it's the place where processed zone configs will be held
-sed "s|directory:.*$|directory: ${TMPCFG}|" \
-    < "${OCTODNS_CONFIG}" \
-    > "${TMP_OCTODNS_CFG}"
+echo "Using ${TMP_OCTODNS_CFG} as octodns config file"
+precook_octodns_config "${OCTODNS_CONFIG}" "${TMPCFG}" "${TMP_OCTODNS_CFG}"
 
 function parse_args() {
   # positional args
@@ -96,19 +94,10 @@ push () {
         "$@"
 }
 
-# Pre-cook our configs into $TMPCFG.  Some zones have multiple files that need
+# Pre-cook our configs into $TMPCFG. Some zones have multiple files that need
 # to be joined, for example.
 echo "Using ${TMPCFG}/ for cooked config files"
-for z in "${ALL_ZONES[@]}"; do
-    # Every zone should have 1 file $z.yaml or N files $z._*.yaml.
-    # $z already ends in a period.
-    cat zone-configs/${z}yaml zone-configs/${z}_*.yaml \
-        > "${TMPCFG}/${z}yaml" 2>/dev/null
-    if [ ! -s "${TMPCFG}/${z}yaml" ]; then
-        echo "${TMPCFG}/${z}yaml appears to be empty after pre-processing!"
-        exit 1
-    fi
-done
+precook_zone_configs "${TMPCFG}" "${ALL_ZONES[@]}"
 
 # Push to canaries.
 echo "Dry-run to canary zones"
