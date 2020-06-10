@@ -28,13 +28,12 @@ function usage() {
     echo "usage: $0 [project...]" > /dev/stderr
     echo "example:" > /dev/stderr
     echo "  $0 # do all release projects" > /dev/stderr
-    echo "  $0 k8s-staging-release-test # just do one" > /dev/stderr
+    echo "  $0 k8s-release-test-prod # just do one" > /dev/stderr
     echo > /dev/stderr
 }
 
 # NB: Please keep this sorted.
 PROJECTS=(
-    k8s-staging-release-test
     k8s-release-test-prod
 )
 

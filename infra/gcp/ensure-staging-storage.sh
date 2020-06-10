@@ -80,7 +80,6 @@ STAGING_PROJECTS=(
     npd
     provider-azure
     publishing-bot
-    release-test
     releng
     scl-image-builder
     service-apis
@@ -91,7 +90,6 @@ STAGING_PROJECTS=(
 
 RELEASE_STAGING_PROJECTS=(
     kubernetes
-    release-test
     releng
 )
 
@@ -217,16 +215,6 @@ for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
         color 6 "Empowering ${RELEASE_VIEWERS} as project viewers in ${PROJECT}"
         empower_group_as_viewer "${PROJECT}" "${RELEASE_VIEWERS}"
 
-        # TODO(justaugustus): Remove once the k8s-releng-prod GCP project is
-        #                     configured to allow other release projects to decrypt
-        #                     KMS assets and existing KMS keys in the
-        #                     k8s-staging-release-test GCP project have been
-        #                     transferred over.
-        if [[ $PROJECT == "k8s-staging-release-test" ]]; then
-            # Let Release Admins administer KMS.
-            color 6 "Empowering ${RELEASE_ADMINS} as KMS admins in ${PROJECT}"
-            empower_group_for_kms "${PROJECT}" "${RELEASE_ADMINS}"
-        fi
     ) 2>&1 | indent
 done
 
