@@ -377,6 +377,23 @@ groups:
     members:
       - bentheelder@google.com
 
+  - email-id: k8s-infra-staging-sig-storage@kubernetes.io
+    name: k8s-infra-staging-sig-storage
+    description: |-
+      ACL for staging sig storage artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - saadali@google.com
+      - msau@google.com
+      - xingyang105@gmail.com
+      - jsafrane@redhat.com
+      - mattwon@amazon.com
+      - kiran.mova@mayadata.io
+      - humble.devassy@gmail.com
+      - patrick.ohly@intel.com
+
   #
   # RBAC groups: k8s-infra-rbac-*
   #
