@@ -28,5 +28,4 @@ RUN pip install -r /requirements.txt && \
 # RUN pip install ipython ipdb
 # pair with the following at breakpoints in python code:
 # import ipdb ; ipdb.set_trace()
-COPY check-zone.py /usr/local/bin/check-zone
 CMD /bin/sh
