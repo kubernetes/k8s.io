@@ -6,11 +6,10 @@ approvers:
 - CecileRobertMichon
 - justaugustus
 reviewers:
+- alexeldeib
 - devigned
 - juan-lee
 - nader-ziada
-- serbrech
-- vincepri
 
 labels:
 - sig/cluster-lifecycle
