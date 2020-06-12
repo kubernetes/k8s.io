@@ -2,7 +2,7 @@
 providers:
   config:
     class: octodns.provider.yaml.YamlProvider
-    directory: /octodns/config
+    directory: ./zone-configs
     enforce_order: false
     default_ttl: 3600
   gcp:

@@ -21,14 +21,17 @@
 
 read -r -d '' USAGE <<- EOF
   Usage:
-  $0 -c confdir example.com.\t\t# Check a single zone
-  $0 -c confdir example.com. example.io.\t# Check a multiple zones
+  $0 -c confdir -o octodns_config_path example.com.\t\t# Check a single zone
+  $0 -c confdir -o octodns_config_path example.com. example.io.\t# Check a multiple zones
 EOF
 
-while getopts ":hc:" opt; do
+while getopts ":hc:o:" opt; do
   case ${opt} in
     c )
       TMPCFG="${OPTARG}"
+      ;;
+    o )
+      OCTODNS_CONFIG="${OPTARG}"
       ;;
     h )
       echo -e "${USAGE}"
@@ -55,17 +58,22 @@ if [ ! -d "${TMPCFG}" ]; then
     echo -e "${USAGE}" >&2
     exit 2
 fi
+if [ -z "${OCTODNS_CONFIG}" ]; then
+    echo -e "octodns_config_path must be specified" >&2
+    echo -e "${USAGE}" >&2
+    exit 2
+fi
+if [ ! -f "${OCTODNS_CONFIG}" ]; then
+    echo -e "octodns_config_path must exist" >&2
+    echo -e "${USAGE}" >&2
+    exit 2
+fi
 
-echo "Checking that the GCP dns servers for (${DOMAINS[@]}) serve up everything in our octodns config"
-docker run -ti \
-       -u `id -u` \
-       -v ~/.config/gcloud:/.config/gcloud:ro \
-       -v `pwd`/octodns-config.yaml:/octodns/config.yaml:ro \
-       -v "${TMPCFG}":/octodns/config:ro \
-       ${USER}/octodns \
-       check-zone \
-       --config-file=/octodns/config.yaml \
-       ${DOMAINS[@]/#/--zone=}
+echo -n "Checking that the GCP dns servers for (${DOMAINS[*]})"
+echo    " serve up everything in our octodns config"
+./check-zone.py \
+    --config-file="${OCTODNS_CONFIG}" \
+    "${DOMAINS[@]/#/--zone=}"
 RESULT=$?
 if [ $RESULT != "0" ] ; then
     echo '***FAIL***'

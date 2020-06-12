@@ -15,6 +15,9 @@
 # limitations under the License.
 # This runs as you.  It assumes you have built an image named ${USER}/octodns.
 
+SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
+source "${SCRIPT_DIR}/lib.sh"
+
 PROD_ZONES=(
     k8s.io.
     kubernetes.io.
@@ -30,6 +33,37 @@ ALL_ZONES=(
 )
 
 DRY_RUN=false
+OCTODNS_CONFIG="octodns-config.yaml"
+LOGS_PATH="${ARTIFACTS:-.}"
+
+# Checking if octodns-sync is present as without it there is no sense to proceed
+if ! command -v octodns-sync &> /dev/null; then
+    echo "Couldn't find octodns-sync"
+    exit 1
+fi
+
+# Checking if LOGS_PATH is an existing directory and if we can write to it.
+# Failing otherwise
+if [[ ! -d "${LOGS_PATH}" ]] || [[ ! -w "${LOGS_PATH}" ]]; then
+    echo "Can't write to LOGS_PATH (${LOGS_PATH}). Aborting"
+    exit 1
+fi
+
+# Assumes to be running in a checked-out git repo directory, and in the same
+# subdirectory as this file.
+if [[ ! -f "${OCTODNS_CONFIG}" ]] || [[ ! -d zone-configs ]]; then
+    echo "CWD does not appear to have the configs needed: $(pwd)"
+    exit 1
+fi
+
+# Where to hold processed configs for this run.
+TMPCFG=$(mktemp -d /tmp/octodns.XXXXXX)
+# Where to hold processed octodns config file with providers.config.directory
+# set to directory with processed zone configs
+TMP_OCTODNS_CFG=$(mktemp /tmp/octodns.XXXXXX)
+
+echo "Using ${TMP_OCTODNS_CFG} as octodns config file"
+precook_octodns_config "${OCTODNS_CONFIG}" "${TMPCFG}" "${TMP_OCTODNS_CFG}"
 
 function parse_args() {
   # positional args
@@ -53,60 +87,35 @@ parse_args "$@";
 # Pushes config to zones.
 #   args: args to pass to octodns (e.g. --doit, --force, a list of zones)
 push () {
-    docker run -ti \
-        -u `id -u` \
-        -v ~/.config/gcloud:/.config/gcloud:ro \
-        -v `pwd`/octodns-config.yaml:/octodns/config.yaml:ro \
-        -v "${TMPCFG}":/octodns/config:ro \
-        ${USER}/octodns \
-        octodns-sync \
-            --config-file=/octodns/config.yaml \
-            --log-stream-stdout \
-            --debug \
-            "$@"
+    octodns-sync \
+        --config-file="${TMP_OCTODNS_CFG}" \
+        --log-stream-stdout \
+        --debug \
+        "$@"
 }
 
-# Assumes to be running in a checked-out git repo directory, and in the same
-# subdirectory as this file.
-if [ ! -f octodns-config.yaml -o ! -d zone-configs ]; then
-    echo "CWD does not appear to have the configs needed: $(pwd)"
-    exit 1
-fi
-
-# Where to hold processed configs for this run.
-TMPCFG=$(mktemp -d /tmp/octodns.XXXXXX)
-
-# Pre-cook our configs into $TMPCFG.  Some zones have multiple files that need
+# Pre-cook our configs into $TMPCFG. Some zones have multiple files that need
 # to be joined, for example.
-echo "Using ${TMPCFG} for cooked config files"
-for z in "${ALL_ZONES[@]}"; do
-    # Every zone should have 1 file $z.yaml or N files $z._*.yaml.
-    # $z already ends in a period.
-    cat zone-configs/${z}yaml zone-configs/${z}_*.yaml \
-        > "${TMPCFG}/${z}yaml" 2>/dev/null
-    if [ ! -s "${TMPCFG}/${z}yaml" ]; then
-        echo "${TMPCFG}/${z}yaml appears to be empty after pre-processing!"
-        exit 1
-    fi
-done
+echo "Using ${TMPCFG}/ for cooked config files"
+precook_zone_configs "${TMPCFG}" "${ALL_ZONES[@]}"
 
 # Push to canaries.
 echo "Dry-run to canary zones"
-push "${CANARY_ZONES[@]}" > log.canary 2>&1
+push "${CANARY_ZONES[@]}" > "${LOGS_PATH}/log.canary" 2>&1
 if [ $? != 0 ]; then
     echo "Canary dry-run FAILED, halting; log follows:"
     echo "========================================="
-    cat log.canary
+    cat "${LOGS_PATH}/log.canary"
     exit 2
 fi
 
 if [ "${DRY_RUN}" = false ]; then
   echo "Pushing to canary zones"
-  push --doit "${CANARY_ZONES[@]}" >> log.canary 2>&1
+  push --doit "${CANARY_ZONES[@]}" >> "${LOGS_PATH}/log.canary" 2>&1
   if [ $? != 0 ]; then
       echo "Canary push FAILED, halting; log follows:"
       echo "========================================="
-      cat log.canary
+      cat "${LOGS_PATH}/log.canary"
       exit 2
   fi
   echo "Canary push SUCCEEDED"
@@ -115,7 +124,8 @@ if [ "${DRY_RUN}" = false ]; then
       TRIES=12
       echo "Testing canary zone: $zone"
       for i in $(seq 1 "$TRIES"); do
-          ./check-zone.sh -c "${TMPCFG}" "$zone" >> log.canary 2>&1
+          ./check-zone.sh -c "${TMPCFG}" -o "${TMP_OCTODNS_CFG}" \
+            "$zone" >> "${LOGS_PATH}/log.canary" 2>&1
           if [ $? == 0 ]; then
               break
           fi
@@ -125,7 +135,7 @@ if [ "${DRY_RUN}" = false ]; then
           else
               echo "Canary test FAILED, halting; log follows:"
               echo "========================================="
-              cat log.canary
+              cat "${LOGS_PATH}/log.canary"
               exit 2
           fi
       done
@@ -135,21 +145,21 @@ fi
 
 # Push to prod.
 echo "Dry-run to prod zones"
-push "${PROD_ZONES[@]}" > log.prod 2>&1
+push "${PROD_ZONES[@]}" > "${LOGS_PATH}/log.prod" 2>&1
 if [ $? != 0 ]; then
     echo "Prod dry-run FAILED, halting; log follows:"
     echo "========================================="
-    cat log.prod
+    cat "${LOGS_PATH}/log.prod"
     exit 3
 fi
 
 if [ "${DRY_RUN}" = false ]; then
   echo "Pushing to prod zones"
-  push --doit "${PROD_ZONES[@]}" >> log.prod 2>&1
+  push --doit "${PROD_ZONES[@]}" >> "${LOGS_PATH}/log.prod" 2>&1
   if [ $? != 0 ]; then
       echo "Prod push FAILED, halting; log follows:"
       echo "========================================="
-      cat log.prod
+      cat "${LOGS_PATH}/log.prod"
       exit 3
   fi
   echo "Prod push SUCCEEDED"
@@ -158,7 +168,8 @@ if [ "${DRY_RUN}" = false ]; then
       TRIES=12
       echo "Testing prod zone: $zone"
       for i in $(seq 1 "$TRIES"); do
-          ./check-zone.sh -c "${TMPCFG}" "$zone" >> log.prod 2>&1
+          ./check-zone.sh -c "${TMPCFG}" -o "${TMP_OCTODNS_CFG}" \
+            "$zone" >> "${LOGS_PATH}/log.prod" 2>&1
           if [ $? == 0 ]; then
               break
           fi
@@ -168,7 +179,7 @@ if [ "${DRY_RUN}" = false ]; then
           else
               echo "Prod test FAILED, halting; log follows:"
               echo "========================================="
-              cat log.prod
+              cat "${LOGS_PATH}/log.prod"
               exit 2
           fi
       done
