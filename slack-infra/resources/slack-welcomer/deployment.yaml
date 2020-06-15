@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: slack-moderator
-        image: gcr.io/kubernetes-tools/slack-welcomer:v20190618-a9e322536
+        image: gcr.io/k8s-staging-slack-infra/slack-welcomer:v20200612-1c5d751
         args:
           - --config-path=/etc/slack-welcomer/config.json
           - --message-path=/etc/welcome-message/welcome.md

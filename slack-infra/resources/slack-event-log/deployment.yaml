@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: slack-event-log
-        image: gcr.io/kubernetes-tools/slack-event-log:v20190415-bdf772f89
+        image: gcr.io/k8s-staging-slack-infra/slack-event-log:v20200612-1c5d751
         args:
           - --config-path=/etc/slack-event-log/config.json
         ports:

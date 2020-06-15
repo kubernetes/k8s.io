@@ -1,1 +1,15 @@
-# No images yet
+- name: slack-event-log
+  dmap:
+    "sha256:a56c29108faf779b6ebd84e90a71a62d457cb290841508f69624efe298f4b403": ["v20200612-1c5d751"]
+- name: slack-moderator
+  dmap:
+    "sha256:8212fd9ae215d9974801b8c3e8d8b14156c93353bddb897d9be27c84a586db16": ["v20200612-1c5d751"]
+- name: slack-report-message
+  dmap:
+    "sha256:41e6c94a4b6c9a29d2742689bf515a7750f3cfdb3a9b1e36b3aa02ac21ab93cf": ["v20200612-1c5d751"]
+- name: slack-welcomer
+  dmap:
+    "sha256:5b80002652416013af7331d882fadf32e46c39c8ed034b5b8af5a3906422c9da": ["v20200612-1c5d751"]
+- name: tempelis
+  dmap:
+    "sha256:abafcc2fe91bd63202c7dc81d03a15c7dd878f232deecf795274422483616bf2": ["v20200612-1c5d751"]
