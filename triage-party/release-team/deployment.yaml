@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: triage-party
+  namespace: triageparty-release
+  labels:
+    app: triage-party
+spec:
+  selector:
+    matchLabels:
+      app: triage-party
+  template:
+    metadata:
+      labels:
+        app: triage-party
+    spec:
+      containers:
+        - name: triage-party
+          image: triageparty/triage-party:1.1.0
+          env:
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: triage-party-github-token
+                  key: token
+            - name: PERSIST_BACKEND
+              value: "disk"
+            - name: PERSIST_PATH
+              value: "/app/triage-party/cache"
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+            - name: pcache
+              mountPath: /app/triage-party
+      volumes:
+        - name: config
+          configMap:
+            name: triage-party-config-release
+        - name: pcache
+          persistentVolumeClaim:
+            claimName: triage-party-persistence

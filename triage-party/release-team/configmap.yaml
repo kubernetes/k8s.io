@@ -1,0 +1,455 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: triage-party-config-release
+  namespace: triageparty-release
+data:
+  # The contents of config/config.yaml
+  config.yaml: |
+    settings:
+      name: kubernetes
+      min_similarity: 0.8
+      repos:
+        - https://github.com/kubernetes/kubernetes
+
+      # Who should automatically be considered a project member?
+      # See: https://developer.github.com/v4/enum/commentauthorassociation/
+      # Default is "collaborator, owner, member", unless "members" is set
+      member-roles:
+      # - collaborator
+      # - owner
+      # - member
+
+      # Who else do we consider to be a project member? Default is empty.
+      # members:
+      # - k8s-ci-robot
+
+
+    collections:
+      - id: daily
+        name: Daily Triage
+        dedup: true
+        description: >
+          queue to be emptied once a day
+        rules:
+          - milestone-issues
+          - urgent-issues
+          - urgent-prs
+
+    rules:
+      ### Milestone ###
+      milestone-issues:
+        name: "v1.19 Issues"
+        resolution: "Add a milestone/ label"
+        type: issue
+        filters:
+        - milestone: "v1.19"
+
+      ### Daily Triage ####
+      issue-needs-priority-overdue:
+        name: "Unprioritized issues older than 7 days"
+        resolution: "Add a priority/ or triage/ label"
+        type: issue
+        filters:
+          - label: "!priority/.*"
+          - label: "!triage/.*"
+          - created: +7d
+
+      issue-needs-comment-overdue:
+        name: "Uncommented older than 7 days"
+        resolution: "Add a priority/ or triage/ label"
+        type: issue
+        filters:
+          - tag: "!commented"
+          - tag: "recv"
+          - created: +7d
+
+      issue-soon-overdue:
+        name: "Important soon, but no updates in 90 days"
+        resolution: "Downgrade to important-longterm"
+        type: issue
+        filters:
+          - label: "priority/important-soon"
+          - updated: +90d
+
+      issue-longterm-overdue:
+        name: "Important longterm, but no updates in 180 days"
+        resolution: "Downgrade to backlog"
+        type: issue
+        filters:
+          - label: "priority/important-longterm"
+          - updated: +180d
+
+      # Don't leave code reviews hanging
+      pr-reviewable:
+        name: "Pull Requests: Review Ready"
+        resolution: "Review requests or mark them as do-not-merge/work-in-progress"
+        type: pull_request
+        filters:
+          - label: "!do-not-merge.*"
+          - label: "!needs-rebase"
+          - label: "!cncf-cla: no"
+          - tag: "!requested-changes"
+          - tag: "!send"
+          # Temporarily workaround inability to track PR eligibility
+          - updated: +1d
+
+      # Issues missing initial feedback
+      issue-needs-kind:
+        name: "Unkinded Issues"
+        resolution: "Add a kind/ or triage/support label"
+        type: issue
+        filters:
+          - label: "!kind/.*"
+          - label: "!triage/support"
+
+      issue-needs-priority:
+        name: "Unprioritized Recent Issues"
+        resolution: "Add a priority/ or triage/ label"
+        type: issue
+        filters:
+          - label: "!priority/.*"
+          - label: "!triage/.*"
+
+      issue-needs-comment:
+        name: "Uncommented Recent Issues"
+        resolution: "Add a comment"
+        type: issue
+        filters:
+          - tag: "!commented"
+          - tag: "recv"
+          - created: -7d
+
+      # Issues that may need reprioritized
+      issue-new-with-reactions:
+        name: "New, has multiple reactions, but not important-soon"
+        resolution: "Check if issue should be prioritized as important-soon"
+        type: issue
+        filters:
+          - reactions: ">2"
+          - created: -10d
+          - tag: "!send"
+          - label: "!priority/important-soon"
+
+      issue-new-with-many-commenters:
+        name: "New, has multiple commenters, but not important-soon"
+        resolution: "Check if issue should be prioritized as important-soon"
+        type: issue
+        filters:
+          - commenters: ">3"
+          - created: -10d
+          - tag: "!send"
+          - label: "!priority/important-soon"
+
+      # Don't forget our users
+      issue-updated-needs-info:
+        name: "needs information, has update"
+        resolution: "Comment and remove triage/needs-information tag"
+        type: issue
+        filters:
+          - label: triage/needs-information
+          - tag: recv
+
+      issue-updated-has-question:
+          name: "Recently updated issue has a question"
+          resolution: "Add an answer"
+          type: issue
+          filters:
+            - tag: recv-q
+            - label: "!triage/needs-information"
+            - tag: "!member-last"
+            - tag: "!contributor-last"
+            - responded: +3d
+            - updated: -7d
+
+      ####### Weekly Triage #########
+      # SLO nearing
+      issue-near-soon-overdue:
+        name: "Important soon, but no updates in 60 days"
+        resolution: "Downgrade to important-longterm"
+        type: issue
+        filters:
+          - label: "priority/important-soon"
+          - updated: +60d
+
+      issue-near-longterm-overdue:
+        name: "Important longterm, but no updates in 120 days"
+        resolution: "Downgrade to backlog"
+        type: issue
+        filters:
+          - label: "priority/important-longterm"
+          - updated: +120d
+
+      # issues needing reprioritization
+      many-reactions:
+        name: "many reactions, low priority"
+        resolution: "Upgrade to priority-soon, priority-longterm, or longterm-support"
+        filters:
+          - reactions: ">3"
+          - reactions-per-month: ">0.75"
+          - label: "!priority/important-soon"
+          - label: "!priority/important-longterm"
+          - label: "!long-term-support"
+
+      many-commenters:
+        name: "many commenters, low priority"
+        resolution: "Upgrade to priority-soon, priority-longterm, or longterm-support"
+        filters:
+          - commenters: ">2"
+          - commenters-per-month: ">1.9"
+          - created: "+30d"
+          - label: "!priority/important-soon"
+          - label: "!priority/important-longterm"
+          - label: "!long-term-support"
+
+      issue-zombies:
+        name: "Screaming into the void"
+        resolution: "Reopen, or ask folks to open a new issue"
+        type: issue
+        filters:
+          - state: closed
+          - updated: -7d
+          - tag: recv
+          - comments-while-closed: ">1"
+
+      # Issues needing closure
+      issue-stale-needs-info:
+        name: "Needs information for over 2 weeks"
+        resolution: "Close or remove triage/needs-information label"
+        type: issue
+        filters:
+          - label: triage/needs-information
+          - updated: +13d
+
+      issue-stale-support:
+        name: "Support request over 30 days old"
+        resolution: "Close, or add to triage/long-term-support"
+        type: issue
+        filters:
+          - label: triage/support
+          - label: "!long-term-support"
+          - updated: +29d
+
+      lifecycle-rotten:
+        name: "Issues nearing expiration"
+        resolution: "Close or label as frozen"
+        filters:
+          - label: lifecycle/rotten
+
+      # PR's needing closure
+      pr-approved-stale:
+        name: "Pull requests: Approved and getting old"
+        type: pull_request
+        filters:
+          - label: "!do-not-merge.*"
+          - label: "!needs-rebase"
+          - label: "approved"
+          - updated: +5d
+
+      pr-unapproved-stale:
+        name: "Pull Requests: Stale"
+        resolution: "Add comment and/or close PR"
+        type: pull_request
+        filters:
+          - created: +20d
+          - updated: +5d
+
+      # People with questions
+      issue-has-question:
+        name: "Overdue answers for a question"
+        resolution: "Add a comment"
+        type: issue
+        filters:
+          - tag: recv-q
+          - label: "!triage/needs-information"
+          - tag: "!member-last"
+          - tag: "!contributor-last"
+          - responded: +6d
+
+      issue-updated-support:
+        name: "Updated support requests"
+        resolution: "Move out of support, or add a comment"
+        type: issue
+        filters:
+          - tag: recv
+          - label: "!triage/needs-information"
+          - tag: "!member-last"
+          - tag: "!contributor-last"
+          - responded: +6d
+
+      ## Bug Scrub ##
+      bugs-old-recv:
+        name: "Bugs that deserve a follow-up comment"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - tag: recv
+          - responded: +60d
+          - created: +60d
+          - label: "kind/bug"
+
+      features-old-recv:
+        name: "Features that deserve a follow-up comment"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - tag: recv
+          - responded: +90d
+          - created: +30d
+          - label: "kind/feature"
+
+      other-old-recv:
+        name: "Items that deserve a follow-up comment"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - tag: recv
+          - responded: +60d
+          - label: "!kind/feature"
+          - label: "!kind/bug"
+          - label: "!triage/support"
+
+      features-old:
+        name: "Features that have not been commented on within 90 days"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - responded: +90d
+          - created: +90d
+          - label: "kind/feature"
+
+      bugs-old:
+        name: "Bugs that have not been commented on within 60 days"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - label: "kind/bug"
+          - responded: +60d
+          - created: +60d
+          - label: "!priority/awaiting-evidence"
+
+      other-old:
+        name: "Items that have not been commented on within 60 days"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - responded: +90d
+          - created: +90d
+          - label: "!kind/feature"
+          - label: "!kind/bug"
+          - label: "!triage/support"
+          - label: "!priority/awaiting-evidence"
+
+      lifecycle-stale:
+        name: "Issues nearing expiration"
+        resolution: "Close or label as frozen"
+        filters:
+          - label: lifecycle/stale
+
+      # Receive queue
+      question-recv:
+        name: "Questions awaiting follow-up"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - tag: recv
+          - label: ".*question"
+
+      bugs-recv:
+        name: "Bugs awaiting follow-up"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - tag: recv
+          - label: ".*bug"
+
+      enhancement-recv:
+        name: "Features awaiting follow-up"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - tag: recv
+          - label: ".*(feature|enhancement|idea).*"
+
+      other-recv:
+        name: "Items that deserve a follow-up comment"
+        resolution: "Comment or close the issue"
+        type: issue
+        filters:
+          - tag: recv
+          - responded: +30d
+          - label: "!.*(feature|enhancement).*"
+          - label: "!.*bug"
+          - label: ".*question"
+
+      # Urgent
+      urgent-prs:
+        name: "Urgent Pull Requests"
+        type: pull_request
+        resolution: Merge em
+        filters:
+          - label: "priority/critical-urgent"
+
+      urgent-issues:
+        name: "Urgent Issues"
+        type: issue
+        resolution: Close or deprioritize
+        filters:
+          - label: "priority/critical-urgent"
+
+      # Soon
+      soon-bugs:
+        name: "bugs labelled important/soon"
+        type: issue
+        resolution: Close or deprioritize
+        filters:
+          - label: "priority/important-soon"
+          - label: "kind/bug"
+
+      soon-features:
+        name: "features labelled important/soon"
+        type: issue
+        resolution: Close or deprioritize
+        filters:
+          - label: "priority/important-soon"
+          - label: "kind/feature-request"
+
+      soon-other:
+        name: "other issues labelled important-soon"
+        type: issue
+        resolution: Close or deprioritize
+        filters:
+          - label: "priority/important-soon"
+          - label: "!kind/feature-request"
+          - label: "!kind/bug"
+
+      soon-prs:
+        name: "PR's labelled important-soon"
+        type: pull_request
+        resolution: Merge em
+        filters:
+          - label: "priority/important-soon"
+
+      ## Similar
+      similar-prs:
+        name: "Similar Pull Requests"
+        type: pull_request
+        resolution: Close as duplicate or give a better title
+        filters:
+          - tag: similar
+
+      similar-issues:
+        name: "Similar Issues"
+        type: issue
+        resolution: Close as duplicate or give a better title
+        filters:
+          - tag: similar
+
+      # for statistics generation
+      open-issues:
+        name: "Open Issues"
+        type: issue
+
+      open-prs:
+        name: "Open PRs"
+        type: pull_request
