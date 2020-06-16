@@ -19,7 +19,7 @@ ZONE_CONFIGS := zone-configs
 OCTODNS_CONFIG := octodns-config.yaml
 # TODO: This should just say "k8s.gcr.io/infra-tools/octodns:<tag>"
 # 		once the domain flip finishes.
-DOCKER_IMAGE ?= us.gcr.io/k8s-artifacts-prod/infra-tools/octodns:v20200612-d4db040
+DOCKER_IMAGE ?= us.gcr.io/k8s-artifacts-prod/infra-tools/octodns:v20200616-67ce585
 
 check-canary check-prod: TMPCFG := $(shell mktemp -d /tmp/octodns.XXXXXX)
 check-canary check-prod: TMP_OCTODNS_CFG := $(shell mktemp /tmp/octodns.XXXXXX)
