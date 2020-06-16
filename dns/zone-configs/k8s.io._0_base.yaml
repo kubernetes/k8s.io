@@ -22,6 +22,10 @@ www:
   type: CNAME
   value: k8s.io.
 
+dummy:
+  type: CNAME
+  value: k8s.io.
+
 # Our vanity redirector.  This is not just 'k8s.io', on the off chance this
 # becomes different from the main record. (@thockin)
 redirect:
