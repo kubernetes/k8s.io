@@ -16,10 +16,9 @@
 ARG BASE_IMAGE=python@sha256:9ecd1b34b5fef4dc806734f92eee1702175a63276bafe3552d122c8f4918ed8e
 FROM ${BASE_IMAGE}
 
-RUN apk update && \
-    apk upgrade && \
-    apk add \
-        bash
+RUN apk add \
+        bash=5.0.0-r0 \
+        make=4.2.1-r2
 
 # install from requirements.txt and ensure that all requirements match
 # pip freeze after, guaranteeing that we will install the same packages if we
