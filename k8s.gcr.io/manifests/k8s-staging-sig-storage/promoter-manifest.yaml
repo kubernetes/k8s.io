@@ -2,9 +2,9 @@
 registries:
 - name: gcr.io/k8s-staging-sig-storage
   src: true
-- name: us.gcr.io/k8s-artifacts-prod/storage
+- name: us.gcr.io/k8s-artifacts-prod/sig-storage
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: eu.gcr.io/k8s-artifacts-prod/storage
+- name: eu.gcr.io/k8s-artifacts-prod/sig-storage
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: asia.gcr.io/k8s-artifacts-prod/storage
+- name: asia.gcr.io/k8s-artifacts-prod/sig-storage
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
