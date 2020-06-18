@@ -1,9 +1,0 @@
-# See the OWNERS docs at https://go.k8s.io/owners
-
-# Current set of people in sig-storage-leads from
-# https://github.com/kubernetes/community/blob/master/OWNERS_ALIASES.
-approvers:
-- jsafrane
-- msau42
-- saad-ali
-- xing-yang
