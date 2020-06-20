@@ -1,6 +1,7 @@
 - name: etcd
   dmap:
     "sha256:bcdd5657b1edc1a2eb27356f33dd66b9400d4a084209c33461c7a7da0a32ebb3": ["3.4.7-2"]
+    "sha256:83c3e1f35b641e0cda53345f476c4c028fba697073bebafbaef19bcc1a9ce595": ["3.4.9-0"]
 - name: etcd-empty-dir-cleanup
   dmap:
     "sha256:f805272b4422efa92e20789295c343ed26ff36ddc4f70eeb5d7890d6b758b0fc": ["3.4.7.0"]
