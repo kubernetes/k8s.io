@@ -26,6 +26,10 @@
     - v1.13.9-2
     sha256:97e77164ddc1f9ab56bcbab3e2895b882097b1eabd820497e894f41c0e4908fe:
     - v1.12.12-1
+    sha256:a297fddaaa8f8e88620de1f94c44dbbf26aaaf5f256266bf5c7eca5f0f68f56d:
+    - v1.14.4-2
+    sha256:b33ada5ba9b267ab9fc77b18aa9ceebc51ced6c57fb262eecb2d5ac35a3cfa52:
+    - v1.13.12-2
     sha256:dde2f519f19059cb5d2edfc177ea6ff316e2c50daa0af6c6a44d185858bc7b0d:
     - v1.14.4-1
     sha256:df0a50772214025040ea31144a731b5fa76944cbfc9c87db05af98e4aa39aa7f:
