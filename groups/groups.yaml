@@ -22,6 +22,86 @@ groups:
       - codyclark@google.com
       - vonguard@gmail.com
 
+  - email-id: leads@kubernetes.io
+    name: leads
+    description: |-
+      SIG/WG/UG Leads
+    settings:
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      ReconcileMembers: "true"
+    owners:
+      - contributors@kubernetes.io
+    members:
+      - ahg@google.com
+      - alarcj137@gmail.com
+      - bartek@smykla.com
+      - bentheelder@google.com
+      - caniszczyk@linuxfoundation.org
+      - casey@tigera.io
+      - cblecker@gmail.com
+      - chiachenk@google.com
+      - cncf-speakers@linuxfoundation.org
+      - community@kubernetes.io
+      - davanum@gmail.com
+      - davidopp@google.com
+      - dawnchen@google.com
+      - dbosanac@redhat.com
+      - dbsmith@google.com
+      - dcbw@redhat.com
+      - deads@redhat.com
+      - decarr@redhat.com
+      - ehashman@redhat.com
+      - fbongiovanni@google.com
+      - frapposelli@vmware.com
+      - hankang@google.com
+      - hpandey@pivotal.io
+      - hweicdl@gmail.com
+      - jameswangel@gmail.com
+      - jbelamaric@google.com
+      - jeef111x@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - jonathan.berkhahn@gmail.com
+      - jorgec@vmware.com
+      - justin@fathomdb.com
+      - kaitlynbarnard10@gmail.com
+      - kbhawkey@gmail.com
+      - killen.bob@gmail.com
+      - kim.andrewsy@gmail.com
+      - klaus1982.cn@gmail.com
+      - lachlan.evenson@gmail.com
+      - liggitt@google.com
+      - maszulik@redhat.com
+      - matt.farina@gmail.com
+      - michmike@gmail.com
+      - mikedanese@google.com
+      - mwielgus@google.com
+      - neolit123@gmail.com
+      - nikitaraghunath@gmail.com
+      - nospam.wong@gmail.com
+      - onlydole@gmail.com
+      - paris.pittman@gmail.com
+      - prydonius@gmail.com
+      - quinton@hoole.biz
+      - saadali@google.com
+      - saugustus@vmware.com
+      - seans@google.com
+      - spiffxp@gmail.com
+      - stephen.k8s@agst.us
+      - szostok.mateusz@gmail.com
+      - tallclair@google.com
+      - tasha.drew@gmail.com
+      - theenjeru@gmail.com
+      - thockin@google.com
+      - tim@scalefactory.com
+      - timothysc@gmail.com
+      - tpepper@vmware.com
+      - wfender@google.com
+      - wojtekt@google.com
+      - xingyang105@gmail.com
+      - ynli@google.com
+      - zcorleissen@linuxfoundation.org
+
   - email-id: community@kubernetes.io
     name: community
     description: |-
