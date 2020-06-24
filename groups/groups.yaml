@@ -29,9 +29,19 @@ groups:
     settings:
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
       WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "true"
     owners:
       - contributors@kubernetes.io
+    managers:
+      - ihor@cncf.io
+      - jorgec@vmware.com
+      - jdumars@gmail.com
+      - killen.bob@gmail.com
+      - nikitaraghunath@gmail.com
+      - paris.pittman@gmail.com
+      - spiffxp@gmail.com
     members:
       - ahg@google.com
       - alarcj137@gmail.com
@@ -62,11 +72,9 @@ groups:
       - jeef111x@gmail.com
       - jeremy.r.rickard@gmail.com
       - jonathan.berkhahn@gmail.com
-      - jorgec@vmware.com
       - justin@fathomdb.com
       - kaitlynbarnard10@gmail.com
       - kbhawkey@gmail.com
-      - killen.bob@gmail.com
       - kim.andrewsy@gmail.com
       - klaus1982.cn@gmail.com
       - lachlan.evenson@gmail.com
@@ -77,16 +85,13 @@ groups:
       - mikedanese@google.com
       - mwielgus@google.com
       - neolit123@gmail.com
-      - nikitaraghunath@gmail.com
       - nospam.wong@gmail.com
       - onlydole@gmail.com
-      - paris.pittman@gmail.com
       - prydonius@gmail.com
       - quinton@hoole.biz
       - saadali@google.com
       - saugustus@vmware.com
       - seans@google.com
-      - spiffxp@gmail.com
       - stephen.k8s@agst.us
       - szostok.mateusz@gmail.com
       - tallclair@google.com
