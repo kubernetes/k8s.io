@@ -1,1 +1,3 @@
-# TODO: add images
+- name: nginx
+  dmap:
+    "sha256:35da1d3e00f5e763e59cb59159bf88ba0f0b6e8835885ac9d8b63029a478dba7": ["v20200625-g1813d1c56"]
