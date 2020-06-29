@@ -43,6 +43,7 @@ groups:
       - paris.pittman@gmail.com
       - spiffxp@gmail.com
     members:
+      - aaron@smallnet.org
       - ahg@google.com
       - alarcj137@gmail.com
       - bartek@smykla.com
@@ -53,6 +54,7 @@ groups:
       - chiachenk@google.com
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
+      - craig.ingram@salesforce.com
       - davanum@gmail.com
       - davidopp@google.com
       - dawnchen@google.com
@@ -69,9 +71,11 @@ groups:
       - hpandey@pivotal.io
       - hweicdl@gmail.com
       - jameswangel@gmail.com
+      - jbeale@inguardians.com
       - jbelamaric@google.com
       - jeef111x@gmail.com
       - jeremy.r.rickard@gmail.com
+      - joelsmith@redhat.com
       - jonathan.berkhahn@gmail.com
       - justin@fathomdb.com
       - kaitlynbarnard10@gmail.com
@@ -153,6 +157,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - craig.ingram@salesforce.com
       - joelsmith@redhat.com
       - jordan@liggitt.net
       - lhinds@redhat.com
@@ -162,7 +167,6 @@ groups:
     members:
       # Associate PSC members
       - gaswamy@microsoft.com
-      - craig.ingram@salesforce.com
       - mok@vmware.com
       # Distributors
       - argoprod@us.ibm.com
