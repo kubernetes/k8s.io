@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: triage-party-release
+  namespace: triageparty-release
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "triage-party-release-ingress-prod"
+  labels:
+    app: triage-party
+spec:
+  backend:
+    serviceName: triage-party-release
+    servicePort: 8080

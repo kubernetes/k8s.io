@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: triage-party-release
+  namespace: triageparty-release
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 32080
+      protocol: TCP
+  selector:
+    app: triage-party
