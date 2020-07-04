@@ -112,29 +112,6 @@ groups:
       - ynli@google.com
       - zcorleissen@linuxfoundation.org
 
-  - email-id: community@kubernetes.io
-    name: community
-    description: |-
-
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    owners:
-      - ihor@cncf.io
-      - jorgec@vmware.com
-      - killen.bob@gmail.com
-      - paris.pittman@gmail.com
-    managers:
-      - pal.nabarun95@gmail.com
-      - ameukam@gmail.com
-      - matthewbbroberg@gmail.com
-      - jrosland@vmware.com
-    members:
-      - dgiles@linuxfoundation.org
-      - jberkus@redhat.com
-      - chris@chrisshort.net
-      - samudralavamshi@gmail.com
-
   - email-id: conduct@kubernetes.io
     name: conduct
     description: |-

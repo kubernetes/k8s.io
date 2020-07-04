@@ -17,23 +17,20 @@ limitations under the License.
 package main
 
 import (
-	"crypto/tls"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"net/url"
 	"os"
 	"path/filepath"
 	"reflect"
-	"time"
 
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2/google"
-	"google.golang.org/api/admin/directory/v1"
+	admin "google.golang.org/api/admin/directory/v1"
 	"google.golang.org/api/googleapi"
 	"google.golang.org/api/groupssettings/v1"
 	secretmanagerpb "google.golang.org/genproto/googleapis/cloud/secretmanager/v1"
@@ -49,8 +46,11 @@ type Config struct {
 	// the gcloud secret containing a service account key to authenticate with
 	SecretVersion string `yaml:"secret-version,omitempty"`
 
-	// the file with the groups/members information
-	GroupsFile string `yaml:"groups-file,omitempty"`
+	// GroupsPath is the path to the directory with
+	// groups.yaml files containing groups/members information.
+	// It must be an absolute path. If not specified,
+	// it defaults to the directory containing the config.yaml file.
+	GroupsPath *string `yaml:"groups-path,omitempty"`
 
 	// If false, don't make any mutating API calls
 	ConfirmChanges bool
@@ -105,7 +105,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = readGroupsConfig(*configFilePath, config.GroupsFile, &groupsConfig)
+	// rootDir contains groups.yaml files
+	rootDir := filepath.Dir(*configFilePath)
+	if config.GroupsPath != nil {
+		if !filepath.IsAbs(*config.GroupsPath) {
+			log.Fatalf("groups-path \"%s\" must be an absolute path", *config.GroupsPath)
+		}
+		rootDir = *config.GroupsPath
+	}
+
+	err = readGroupsConfig(rootDir, &groupsConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -202,55 +211,36 @@ func readConfig(configFilePath string, confirmChanges bool) error {
 	return err
 }
 
-func readGroupsConfig(configFilePath string, groupsConfigFilePath string, config *GroupsConfig) error {
+// readGroupsConfig starts at the rootDir and recursively walksthrough
+// all directories and files. It reads the GroupsConfig from all groups.yaml
+// files and adds the groups in each GroupsConfig to config.Groups.
+func readGroupsConfig(rootDir string, config *GroupsConfig) error {
 	if *verbose {
-		log.Printf("reading group file %s", groupsConfigFilePath)
+		log.Printf("reading groups.yaml files recursively at %s", rootDir)
 	}
-	var content []byte
-	var err error
-	groupsUrl, err := url.ParseRequestURI(groupsConfigFilePath)
-	if err == nil {
-		// We have a URL, so try reading from it
-		if len(groupsUrl.Host) > 0 {
-			if content, err = readFromUrl(groupsUrl); err != nil {
-				return fmt.Errorf("error reading groups config URL %s: %v", groupsUrl, err)
+
+	return filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
+		if filepath.Base(path) == "groups.yaml" {
+			if *verbose {
+				log.Printf("reading group file %s", path)
+			}
+
+			var groupsConfigAtPath GroupsConfig
+			var content []byte
+
+			if content, err = ioutil.ReadFile(path); err != nil {
+				return fmt.Errorf("error reading groups config file %s: %v", path, err)
+			}
+			if err = yaml.Unmarshal(content, &groupsConfigAtPath); err != nil {
+				return fmt.Errorf("error parsing groups config at %s: %v", path, err)
+			}
+
+			for _, g := range groupsConfigAtPath.Groups {
+				config.Groups = append(config.Groups, g)
 			}
 		}
-	} else {
-		// We don't have a URL, we have a file path, so try reading from the file
-		path := groupsConfigFilePath
-		// Interpret relative path as relative to config file
-		if !filepath.IsAbs(path) {
-			path = filepath.Join(filepath.Dir(configFilePath), path)
-		}
-		if content, err = ioutil.ReadFile(path); err != nil {
-			return fmt.Errorf("error reading groups config file %s: %v", groupsConfigFilePath, err)
-		}
-	}
-	if err = yaml.Unmarshal(content, config); err != nil {
-		return fmt.Errorf("error parsing groups config: %v", err)
-	}
-	return nil
-}
-
-// readFromUrl reads the rule file from provided URL.
-func readFromUrl(u *url.URL) ([]byte, error) {
-	client := &http.Client{Transport: &http.Transport{
-		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-	}}
-	req, err := http.NewRequest("GET", u.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-	// timeout the request after 30 seconds
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
-	resp, err := client.Do(req.WithContext(ctx))
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	return ioutil.ReadAll(resp.Body)
+		return nil
+	})
 }
 
 func printGroupMembersAndSettings(srv *admin.Service, srv2 *groupssettings.Service) error {
