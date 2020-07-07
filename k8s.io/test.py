@@ -52,12 +52,19 @@ def do_get(url):
     return resp, body
 
 
-class RedirTest(unittest.TestCase):
+class HTTPTestCase(unittest.TestCase):
+    def do_get(self, url, expected_code):
+        resp, body = do_get(url)
+        self.assertEqual(resp.status, expected_code,
+                '\nGET "%s" got an unexpected status code:\n want: %d\n got:  %d'
+                % (url, expected_code, resp.status))
+        return resp, body
+
     def assert_code(self, url, expected_code):
         print('GET: %s => %s' % (url, expected_code))
-        resp, body = do_get(url)
-        self.assertEqual(resp.status, expected_code)
+        return self.do_get(url, expected_code)
 
+class RedirTest(HTTPTestCase):
     def assert_scheme_redirect(self, url, expected_loc, expected_code, **kwargs):
         for k, v in kwargs.items():
             k = '$%s' % k
@@ -65,9 +72,10 @@ class RedirTest(unittest.TestCase):
             url = url.replace(k, v)
             expected_loc = expected_loc.replace(k, v)
         print('REDIR: %s => %s' % (url, expected_loc))
-        resp, body = do_get(url)
-        self.assertEqual(resp.status, expected_code)
-        self.assertEqual(resp.getheader('location'), expected_loc)
+        resp, body = self.do_get(url, expected_code)
+        self.assertEqual(resp.getheader('location'), expected_loc,
+                '\nGET "%s" got an unexpected redirect location:\n want: %s\n got:  %s'
+                % (url, expected_loc, resp.getheader('location')))
 
     def assert_multischeme_redirect(self, partial_url, expected_loc, expected_code, **kwargs):
         for scheme in ('http', 'https'):
@@ -368,22 +376,22 @@ class RedirTest(unittest.TestCase):
             self.assert_temp_redirect(base + '/$path', 'https://www.youtube.com/c/kubernetescommunity',
                 path=rand_num())
 
-class ContentTest(unittest.TestCase):
+class ContentTest(HTTPTestCase):
     def assert_body_configmap(self, url, filename):
         print('GET', url)
-        resp, body = do_get(url)
-        self.assertEqual(resp.status, 200)
+        resp, body = self.do_get(url, 200)
         configmap = 'configmap-www-%s.yaml' % os.path.dirname(filename)
         with open(configmap) as f:
             expected_body = yaml.load(f, yaml.SafeLoader)['data'][os.path.basename(filename)]
-        self.assertMultiLineEqual(body, expected_body)
+        self.assertMultiLineEqual(body, expected_body,
+                '\nGET "%s" got an unexpected body' % (url))
 
     def assert_body_url(self, url, expected_content_url):
         print('GET', url)
-        resp, body = do_get(url)
-        self.assertEqual(resp.status, 200)
+        resp, body = self.do_get(url, 200)
         expected_body = urllib.request.urlopen(expected_content_url).read().decode('utf-8')
-        self.assertMultiLineEqual(body, expected_body)
+        self.assertMultiLineEqual(body, expected_body,
+                '\nGET "%s" got an unexpected body' % (url))
 
     def assert_body_go_get(self, host, org, repo, path):
         url = 'https://%s/%s/%s?go-get=1' % (host, repo, path)
@@ -396,8 +404,7 @@ class ContentTest(unittest.TestCase):
                               "https://github.com/%(org)s/%(repo)s/blob/master{/dir}/{file}#L{line}"
                               % {'repo': repo, 'host': host, 'org': org})
 
-        resp, body = do_get(url)
-        self.assertEqual(resp.status, 200)
+        resp, body = self.do_get(url, 200)
         p = GoMetaParser()
         p.feed(body)
 
