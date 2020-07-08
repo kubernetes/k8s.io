@@ -5,6 +5,3 @@ secret-version: projects/k8s-gsuite/secrets/gsuite-groups-manager_key/versions/l
 
 # Email id of the bot service account
 bot-id: wg-k8s-infra-api@kubernetes.io
-
-# Configuration file for the groups/members information
-groups-file: groups.yaml

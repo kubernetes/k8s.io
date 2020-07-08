@@ -9,5 +9,8 @@ require (
 	google.golang.org/api v0.20.0
 	google.golang.org/genproto v0.0.0-20200429120912-1f37eeb960b2
 	gopkg.in/yaml.v2 v2.2.2
+	k8s.io/apimachinery v0.0.0-20190817020851-f2f3a405f61d
 	k8s.io/test-infra v0.0.0-20191024183346-202cefeb6ff5
 )
+
+replace k8s.io/apimachinery => k8s.io/apimachinery v0.0.0-20190817020851-f2f3a405f61d

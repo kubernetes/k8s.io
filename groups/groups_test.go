@@ -20,28 +20,73 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"reflect"
 	"sort"
 	"strings"
 	"testing"
 	"unicode/utf8"
+
+	"k8s.io/apimachinery/pkg/util/sets"
 )
 
 var cfg GroupsConfig
 
-var groupsConfigPath = flag.String("groups-config", "./groups.yaml", "Path to groups config")
+var groupsPath = flag.String("groups-path", "", "Directory containing groups.yaml files")
 
 func TestMain(m *testing.M) {
 	flag.Parse()
-	if *groupsConfigPath == "" {
-		fmt.Println("--groups-config must be set")
+	var err error
+
+	if *groupsPath != "" && !filepath.IsAbs(*groupsPath) {
+		fmt.Printf("groups-path \"%s\" must be an absolute path\n", *groupsPath)
 		os.Exit(1)
 	}
-	if err := readGroupsConfig(".", *groupsConfigPath, &cfg); err != nil {
-		fmt.Printf("Could not load groups-config: %v", err)
+
+	if *groupsPath == "" {
+		*groupsPath, err = os.Getwd()
+		if err != nil {
+			fmt.Printf("Cannot get current working directory: %v\n", err)
+			os.Exit(1)
+		}
+	}
+
+	if err := readGroupsConfig(*groupsPath, &cfg); err != nil {
+		fmt.Printf("Could not load groups-file: %v\n", err)
 		os.Exit(1)
 	}
 	os.Exit(m.Run())
+}
+
+// TestMergedGroupsConfig tests that readGroupsConfig reads all
+// groups.yaml files and the merged config does not contain any duplicates.
+//
+// It tests that the config is merged by checking that the final
+// GroupsConfig contains at least one group that isn't in the
+// root groups.yaml file.
+func TestMergedGroupsConfig(t *testing.T) {
+	var containsMergedConfig bool
+	found := sets.String{}
+	dups := sets.String{}
+
+	for _, g := range cfg.Groups {
+		name := g.Name
+		if name == "community" {
+			containsMergedConfig = true
+		}
+
+		if found.Has(name) {
+			dups.Insert(name)
+		}
+		found.Insert(name)
+	}
+
+	if !containsMergedConfig {
+		t.Errorf("Final GroupsConfig does not have merged configs from all groups.yaml files")
+	}
+	if n := len(dups); n > 0 {
+		t.Errorf("%d duplicate groups: %s", n, strings.Join(dups.List(), ", "))
+	}
 }
 
 // TestStagingEmailLength tests that the number of characters in the
