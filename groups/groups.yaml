@@ -158,15 +158,13 @@ groups:
     owners:
       - cjcullen@google.com
       - craig.ingram@salesforce.com
+      - gaswamy@microsoft.com
       - joelsmith@redhat.com
-      - jordan@liggitt.net
       - lhinds@redhat.com
-      - liggitt@google.com
       - mhausler@amazon.com
       - tallclair@google.com
     members:
       # Associate PSC members
-      - gaswamy@microsoft.com
       - mok@vmware.com
       # Distributors
       - argoprod@us.ibm.com
@@ -1488,10 +1486,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - craig.ingram@salesforce.com
+      - gaswamy@microsoft.com
       - joelsmith@redhat.com
-      - jordan@liggitt.net
       - lhinds@redhat.com
-      - liggitt@google.com
       - mhausler@amazon.com
       - tallclair@google.com
 
@@ -1506,10 +1504,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - craig.ingram@salesforce.com
+      - gaswamy@microsoft.com
       - joelsmith@redhat.com
-      - jordan@liggitt.net
       - lhinds@redhat.com
-      - liggitt@google.com
       - mhausler@amazon.com
       - tallclair@google.com
 
