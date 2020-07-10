@@ -342,6 +342,16 @@ color 6 "Handling special cases"
         "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-promoter-test]" \
         "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" \
         $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+
+    color 6 "Empowering promoter-scanning namespace to use prod promoter vuln scanning svcacct"
+    empower_ksa_to_svcacct \
+        "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-promoter-scanning]" \
+        "${PROD_PROJECT}" \
+        $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
+    empower_ksa_to_svcacct \
+        "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-gcr-promoter-scanning]" \
+        "${PROD_PROJECT}" \
+        $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
 ) 2>&1 | indent
 
 color 6 "Done"
