@@ -4,12 +4,13 @@
 approvers:
 - awesomenix
 - CecileRobertMichon
+- devigned
 - justaugustus
+- nader-ziada
 reviewers:
 - alexeldeib
-- devigned
+- cpanato
 - juan-lee
-- nader-ziada
 
 labels:
 - sig/cluster-lifecycle
