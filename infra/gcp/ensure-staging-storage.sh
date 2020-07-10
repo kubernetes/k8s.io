@@ -137,6 +137,10 @@ for REPO; do
         color 6 "Enabling the container registry API"
         enable_api "${PROJECT}" containerregistry.googleapis.com
 
+        # Enable vulnerability scanning on the staging project
+        color 6 "Enabling vulnerability scanning in staging projects"
+        enable_api "${PROJECT}" containerscanning.googleapis.com
+
         # Push an image to trigger the bucket to be created
         color 6 "Ensuring the registry exists and is readable"
         ensure_gcr_repo "${PROJECT}"
