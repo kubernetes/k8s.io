@@ -30,6 +30,9 @@ GCS_ADMINS=$GCR_ADMINS
 # The service account name for the image promoter.
 PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
+# The service account name for the image promoter's vulnerability check.
+PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-promoter-vuln-scanning"
+
 # The service account name for the GCR auditor (Cloud Run runtime service
 # account).
 AUDITOR_SVCACCT="k8s-infra-gcr-auditor"
@@ -178,6 +181,23 @@ function empower_service_account_for_cip_auditor_e2e_tester() {
             --member "serviceAccount:${acct}" \
             --role "${role}"
     done
+}
+
+# Grant roles for running pull-cip-vuln
+# $1: The service account
+# $2: The GCP Project
+function empower_service_account_for_cip_vuln_scanning() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "empower_service_account_for_cip_vuln_scanning(acct, project) requires 2 arguments" >&2
+        return 1
+    fi
+    local acct="$1"
+    local project="$2"
+
+    gcloud \
+        projects add-iam-policy-binding "${project}" \
+        --member "serviceAccount:${acct}" \
+        --role roles/containeranalysis.occurrences.viewer
 }
 
 # Grant GCB admin privileges to a principal

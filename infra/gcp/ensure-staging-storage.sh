@@ -140,6 +140,11 @@ for REPO; do
         # Enable vulnerability scanning on the staging project
         color 6 "Enabling vulnerability scanning in staging projects"
         enable_api "${PROJECT}" containerscanning.googleapis.com
+        
+        # Enable image promoter access to vulnerability scanning results
+        empower_service_account_for_cip_vuln_scanning \
+            "$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")" \
+            "${PROJECT}"
 
         # Push an image to trigger the bucket to be created
         color 6 "Ensuring the registry exists and is readable"
