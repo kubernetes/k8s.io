@@ -162,6 +162,7 @@ groups:
       - secure@sap.com
       - security@digitalocean.com
       - security@gravitational.com
+      - security@kinvolk.io
       - security@kubernetes.io
       - security@loodse.com
       - security@platform9.com
