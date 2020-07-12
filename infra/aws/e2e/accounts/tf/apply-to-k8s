@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+KEY=$(cat gcs-encryption-key)
+
+gsutil -o "GSUtil:decryption_key1=${KEY}" cat gs://k8s-infra-clusters-terraform/aws/k8s/accounts-boskos.yaml | kubectl apply -f - --dry-run
