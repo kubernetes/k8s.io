@@ -1000,7 +1000,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - bowei@google.com
-      - dnardo@google.com
       - thockin@google.com
       - zihongz@google.com
 
