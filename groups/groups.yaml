@@ -33,6 +33,7 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "true"
     owners:
+      - cblecker@gmail.com
       - contributors@kubernetes.io
     managers:
       - ihor@cncf.io
@@ -50,7 +51,6 @@ groups:
       - bentheelder@google.com
       - caniszczyk@linuxfoundation.org
       - casey@tigera.io
-      - cblecker@gmail.com
       - chiachenk@google.com
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
