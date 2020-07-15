@@ -150,6 +150,9 @@ prow:
 prs:
   type: CNAME
   value: prs.k8s.io.
+release.triage:
+  type: CNAME
+  value: release.triage.k8s.io.
 sigs:
   type: CNAME
   value: sigs.k8s.io.
