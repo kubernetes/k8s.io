@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: triage-party
-          image: triageparty/triage-party:1.1.0
+          image: triageparty/triage-party:1.2.0
           env:
             - name: GITHUB_TOKEN
               valueFrom:
@@ -27,6 +27,15 @@ spec:
               value: "disk"
             - name: PERSIST_PATH
               value: "/app/triage-party/cache"
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            timeout: 5
           resources:
             limits:
               cpu: 1
