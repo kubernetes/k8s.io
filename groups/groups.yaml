@@ -170,7 +170,7 @@ groups:
       - security@rancher.com
       - Security@Ubuntu.com
       - security@vmware.com
-      - upstream-security@heptio.com
+      - tkg-cve-disclosure@groups.vmware.com
       - vulnerabilityreports@cloudfoundry.org
 
   - email-id: election@kubernetes.io
