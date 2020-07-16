@@ -1,43 +1,24 @@
-### ATTENTION ###
-# k8s-staging-kubernetes is the staging container registry for ROOT level k8s.gcr.io images.
-# Image promotion for this project is restricted to Release Managers.
-#
-# The following images are managed within this project:
-# - cloud-controller-manager
-# - conformance (will likely be moved to another staging project)
-# - kube-apiserver
-# - kube-controller-manager
-# - kube-proxy
-# - kube-scheduler
-# - pause
-#
-# Promotes to the following GCR locations:
-# - {us,eu,asia}.gcr.io/k8s-artifacts-prod --> k8s.gcr.io
-# - {us,eu,asia}.gcr.io/k8s-artifacts-prod/kubernetes --> k8s.gcr.io/kubernetes
-
 - name: pause
   dmap:
-    sha256:927d98197ec1141a368550822d18fa1c60bdae27b78b0c004f705f548c07814f:
-    - 3.2
-    sha256:a319ac2280eb7e3a59e252e54b76327cb4a33cf8389053b0d78277f22bbca2fa:
-    - 3.3
+    "sha256:927d98197ec1141a368550822d18fa1c60bdae27b78b0c004f705f548c07814f": ["3.2"]
+    "sha256:a319ac2280eb7e3a59e252e54b76327cb4a33cf8389053b0d78277f22bbca2fa": ["3.3"]
 - name: pause-amd64
   dmap:
-    sha256:4a1c4b21597c1b4415bdbecb28a3296c6b5e23ca4f9feeb599860a1dac6a0108:
-    - 3.2
+    "sha256:4a1c4b21597c1b4415bdbecb28a3296c6b5e23ca4f9feeb599860a1dac6a0108": ["3.2"]
+    "sha256:de361176a97942ea59f238a88743f22dbd5684225974447df1f476817714499b": ["3.3"]
 - name: pause-arm
   dmap:
-    sha256:bbb7780ca6592cfc98e601f2a5e94bbf748a232f9116518643905aa30fc01642:
-    - 3.2
+    "sha256:a0171a0d58c0ae1a277bff097f8d38e0985b4343f396d2fa8810d3d59fbdf872": ["3.3"]
+    "sha256:bbb7780ca6592cfc98e601f2a5e94bbf748a232f9116518643905aa30fc01642": ["3.2"]
 - name: pause-arm64
   dmap:
-    sha256:31d3efd12022ffeffb3146bc10ae8beb890c80ed2f07363515580add7ed47636:
-    - 3.2
+    "sha256:31d3efd12022ffeffb3146bc10ae8beb890c80ed2f07363515580add7ed47636": ["3.2"]
+    "sha256:9c4504dfea56cb8ce6e32432c5fd47afd3ce0f3c317165baa39f60eff4a7af24": ["3.3"]
 - name: pause-ppc64le
   dmap:
-    sha256:7f82fecd72730a6aeb70713476fb6f7545ed1bbf32cadd7414a77d25e235aaca:
-    - 3.2
+    "sha256:7f82fecd72730a6aeb70713476fb6f7545ed1bbf32cadd7414a77d25e235aaca": ["3.2"]
+    "sha256:972339de7b2584efd6c8b7e78cc7a769b445febf4c150ade780fbbcdc5308c60": ["3.3"]
 - name: pause-s390x
   dmap:
-    sha256:1175fd4d728641115e2802be80abab108b8d9306442ce35425a4e8707ca60521:
-    - 3.2
+    "sha256:1175fd4d728641115e2802be80abab108b8d9306442ce35425a4e8707ca60521": ["3.2"]
+    "sha256:91403ca32837caf28cc20fa087f4065eb6f66681302d9b583d071ba65b2b462a": ["3.3"]
