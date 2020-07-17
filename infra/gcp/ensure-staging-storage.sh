@@ -37,6 +37,8 @@ function usage() {
     echo > /dev/stderr
 }
 
+PROD_PROJECT="k8s-artifacts-prod"
+
 # NB: Please keep this sorted.
 STAGING_PROJECTS=(
     apisnoop
