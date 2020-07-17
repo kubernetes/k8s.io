@@ -31,7 +31,7 @@ GCS_ADMINS=$GCR_ADMINS
 PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
 # The service account name for the image promoter's vulnerability check.
-PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-promoter-vuln-scanning"
+PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
 
 # The service account name for the GCR auditor (Cloud Run runtime service
 # account).
