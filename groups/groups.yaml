@@ -1568,3 +1568,16 @@ groups:
       - aledbf@gmail.com
       - bowei@google.com
       - thockin@google.com
+
+  - email-id: k8s-infra-staging-cloud-provider-gcp@kubernetes.io
+    name: k8s-infra-staging-cloud-provider-gcp
+    description: |-
+      ACL for pushing GCP artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - msau@google.com
+      - saadali@google.com
+      - wfender@google.com
+      - mattcary@google.com
+      - saikat.royc85@gmail.com
