@@ -1,0 +1,10 @@
+# google group for gcr.io/k8s-staging-k8s-gsm-tools is k8s-infra-staging-k8s-gsm-tools@kubernetes.io
+registries:
+- name: gcr.io/k8s-staging-k8s-gsm-tools
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod/k8s-gsm-tools
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/k8s-gsm-tools
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/k8s-gsm-tools
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
