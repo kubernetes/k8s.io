@@ -11,3 +11,5 @@ spec:
   backend:
     serviceName: triage-party-release
     servicePort: 8080
+  tls:
+  - secretName : release-triage-k8s-io-tls
