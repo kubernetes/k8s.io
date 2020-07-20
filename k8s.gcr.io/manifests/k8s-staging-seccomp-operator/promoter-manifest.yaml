@@ -1,5 +1,5 @@
 # google group for gcr.io/k8s-staging-seccomp-operator is
-# k8s-staging-seccomp-operator@kubernetes.io
+# k8s-infra-staging-seccomp-operator@kubernetes.io
 registries:
 - name: gcr.io/k8s-staging-seccomp-operator
   src: true

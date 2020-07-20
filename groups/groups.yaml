@@ -1579,8 +1579,8 @@ groups:
       - mattcary@google.com
       - saikatroyc@google.com
 
-  - email-id: k8s-staging-seccomp-operator@kubernetes.io
-    name: k8s-staging-seccomp-operator
+  - email-id: k8s-infra-staging-seccomp-operator@kubernetes.io
+    name: k8s-infra-staging-seccomp-operator
     description: |-
       ACL for seccomp operator artifacts
     settings:
