@@ -1581,3 +1581,14 @@ groups:
       - wfender@google.com
       - mattcary@google.com
       - saikatroyc@google.com
+
+  - email-id: k8s-staging-seccomp-operator@kubernetes.io
+    name: k8s-staging-seccomp-operator
+    description: |-
+      ACL for seccomp operator artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - georgedanielmangum@gmail.com
+      - pjbgf@linux.com
+      - saschagrunert@gmail.com

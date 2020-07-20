@@ -84,6 +84,7 @@ STAGING_PROJECTS=(
     provider-azure
     publishing-bot
     releng
+    seccomp-operator
     scl-image-builder
     service-apis
     slack-infra
