@@ -839,7 +839,7 @@ groups:
       - jingyih@google.com
       - yczhou@google.com
 
-  - email-id: k8s-infra-staging-etcadm@kubernetes.io
+  - email-id: k8s-infra-staging-etcdadm@kubernetes.io
     name: k8s-infra-staging-etcdadm
     description: |-
       ACL for staging etcdadm artifacts.
