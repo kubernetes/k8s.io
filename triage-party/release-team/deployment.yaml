@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: triage-party
-          image: triageparty/triage-party:1.2.0
+          image: triageparty/triage-party:1.2.1
           env:
             - name: GITHUB_TOKEN
               valueFrom:
