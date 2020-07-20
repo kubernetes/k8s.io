@@ -72,6 +72,7 @@ STAGING_PROJECTS=(
     infra-tools
     ingressconformance
     ingress-nginx
+    k8s-gsm-tools
     kas-network-proxy
     kind
     kops

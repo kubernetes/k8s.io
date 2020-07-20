@@ -1288,6 +1288,17 @@ groups:
       - trhoden@gmail.com
       - luoh@vmware.com
 
+  - email-id: k8s-infra-staging-k8s-gsm-tools@kubernetes.io
+    name: k8s-infra-staging-k8s-gsm-tools
+    description: |-
+      ACL for staging kubernetes-sigs/k8s-gsm-tools
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - shanefu@google.com
+      - spiffxp@google.com
+
   - email-id: k8s-infra-staging-service-apis@kubernetes.io
     name: k8s-infra-staging-service-apis
     description: |-
