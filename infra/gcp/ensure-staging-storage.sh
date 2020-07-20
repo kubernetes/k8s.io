@@ -228,6 +228,17 @@ for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
         color 6 "Empowering ${RELEASE_VIEWERS} as project viewers in ${PROJECT}"
         empower_group_as_viewer "${PROJECT}" "${RELEASE_VIEWERS}"
 
+        # Grant the kubernete-release-test (old staging) GCB service account
+        # admin GCR access to the new staging project for Kubernetes releases.
+        # This is required for VDF as we need to continue running
+        # stages/releases from the old project while publishing container
+        # images to new project.
+        #
+        # ref: https://github.com/kubernetes/release/pull/1230
+        if [[ "${PROJECT}" == "k8s-staging-kubernetes" ]]; then
+            color 6 "Empowering kubernetes-release-test GCB service account to admin GCR"
+            empower_svcacct_to_admin_gcr "648026197307@cloudbuild.gserviceaccount.com" "${PROJECT}"
+        fi
     ) 2>&1 | indent
 done
 
