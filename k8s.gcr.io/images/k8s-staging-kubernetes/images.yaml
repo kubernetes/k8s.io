@@ -1,3 +1,93 @@
+- name: conformance
+  dmap:
+    "sha256:10b30e54a6367e69c52c22998f6f154475b7c94b7a674324f1b96b549048c50e": ["v1.19.0-rc.2"]
+- name: conformance-amd64
+  dmap:
+    "sha256:8c053fbfe74da394cf2c9ace242a060a27f62cb701b0d76f1377e14c0cc7ce4e": ["v1.19.0-rc.2"]
+- name: conformance-arm
+  dmap:
+    "sha256:de8a15f9c32e0c025bd3231ccfc8e8a0872b6978ab225a0c262d2e04cbe9cad7": ["v1.19.0-rc.2"]
+- name: conformance-arm64
+  dmap:
+    "sha256:255fe1e95ccd523817357db40eb56cef8ab6d93bb4fe30972a08dbc2f2be1ddf": ["v1.19.0-rc.2"]
+- name: conformance-ppc64le
+  dmap:
+    "sha256:2f7821c58fef43dec3d7cd8a92f6406c80855c60ce1cf80046c169859a3cf9ea": ["v1.19.0-rc.2"]
+- name: conformance-s390x
+  dmap:
+    "sha256:d469a8d9262ef2862f20bb6d93e580adee0aa8591c64180d201a13685ad12d11": ["v1.19.0-rc.2"]
+- name: kube-apiserver
+  dmap:
+    "sha256:d0b13c51d0d445fd114d75944883440d1057ee43a8b609b01e9838ca4013ab89": ["v1.19.0-rc.2"]
+- name: kube-apiserver-amd64
+  dmap:
+    "sha256:4da7d4a9176971d2af0a5e4bd6f764677648db4ad2814574fbb76962458c7bbb": ["v1.19.0-rc.2"]
+- name: kube-apiserver-arm
+  dmap:
+    "sha256:037a29623006b621ccb9bd08676c552db3f2902d2b15f8c4ef689296aaf40eb9": ["v1.19.0-rc.2"]
+- name: kube-apiserver-arm64
+  dmap:
+    "sha256:e4f07fe00cbd0d03968c0d273a7bbc206e1ae21343ac05e0d5696fa261821944": ["v1.19.0-rc.2"]
+- name: kube-apiserver-ppc64le
+  dmap:
+    "sha256:cc522b2d888f1c97dc203a65c1ca271a31c2ef837b9175e93d26a4c6db41e782": ["v1.19.0-rc.2"]
+- name: kube-apiserver-s390x
+  dmap:
+    "sha256:f6c1b99483471404cfff47d7f7a4923fb208bfd8bb823b0c228649ebc30224b1": ["v1.19.0-rc.2"]
+- name: kube-controller-manager
+  dmap:
+    "sha256:c726fd6f464175cd79f3988cafd48cd002f1b86a1a9d64127cbf7d9144873b1b": ["v1.19.0-rc.2"]
+- name: kube-controller-manager-amd64
+  dmap:
+    "sha256:fe2f399e7073af753e129e6168087501daaf74700aca179c6e303dce076929cb": ["v1.19.0-rc.2"]
+- name: kube-controller-manager-arm
+  dmap:
+    "sha256:db3bba94afe4babf9ffb8e13eae017120da30c3338047ecb0d7a935ab7d10d6c": ["v1.19.0-rc.2"]
+- name: kube-controller-manager-arm64
+  dmap:
+    "sha256:32a6c59d3be37d570039fe6983430eb74dedde2ff172d62e9fe30f0047266868": ["v1.19.0-rc.2"]
+- name: kube-controller-manager-ppc64le
+  dmap:
+    "sha256:82ccec6c9b90fac75aa85f0851ec23d96141cb521d1c9a07d643ce386e4421b8": ["v1.19.0-rc.2"]
+- name: kube-controller-manager-s390x
+  dmap:
+    "sha256:d6033385ac9297e787118ac26306b162f54a34389769c1295902dbd72f7f4d16": ["v1.19.0-rc.2"]
+- name: kube-proxy
+  dmap:
+    "sha256:7a30bc089887f801c8473fa51a083d2cad6e33260e32f251428838c164549165": ["v1.19.0-rc.2"]
+- name: kube-proxy-amd64
+  dmap:
+    "sha256:4562dd5c238c0233493795545093d68a01af43e6faec3e69bdf2b879798b94dd": ["v1.19.0-rc.2"]
+- name: kube-proxy-arm
+  dmap:
+    "sha256:e42c21d15672a9c0385b82b879300d4437ca6161203d9a123b99424f7c9edfac": ["v1.19.0-rc.2"]
+- name: kube-proxy-arm64
+  dmap:
+    "sha256:af9c7a88c095ff7fbfbbd81853406bab96f80d69146248ed87959ee700e70882": ["v1.19.0-rc.2"]
+- name: kube-proxy-ppc64le
+  dmap:
+    "sha256:8ab13b78bcc6fe65ee27e1eaf5beff838e57dd05407fda4123f71f31f16d9ed8": ["v1.19.0-rc.2"]
+- name: kube-proxy-s390x
+  dmap:
+    "sha256:037536c0498b08d7295533cb12da8db0779121580896806e579866c6dc4d0820": ["v1.19.0-rc.2"]
+- name: kube-scheduler
+  dmap:
+    "sha256:022b81d70447014f63fdc734df48cb9e3a2854c48f65acdca67aac5c1974fc22": ["v1.19.0-rc.2"]
+- name: kube-scheduler-amd64
+  dmap:
+    "sha256:1915d085a0d45eb02944b6a8386fa69af2dab20a31ec2f1a0834c4dffbf6552a": ["v1.19.0-rc.2"]
+- name: kube-scheduler-arm
+  dmap:
+    "sha256:6d4a6b6c98e10a50e69e8715880f7379b4cb90b09181a75b7ad3440b262c928e": ["v1.19.0-rc.2"]
+- name: kube-scheduler-arm64
+  dmap:
+    "sha256:dcff5a8ca1a9c2a72c6440b92bec4b1b415b84d7b7eb8221c0d954df47cb2700": ["v1.19.0-rc.2"]
+- name: kube-scheduler-ppc64le
+  dmap:
+    "sha256:953871efb6fa0d7e5a12646c5a8c671ae0d079bd6aeea07b63dfadca0fc45447": ["v1.19.0-rc.2"]
+- name: kube-scheduler-s390x
+  dmap:
+    "sha256:7124e82e35d5d4697d359be08134f33d3270da85613668f1812df2550572ffb7": ["v1.19.0-rc.2"]
 - name: pause
   dmap:
     "sha256:927d98197ec1141a368550822d18fa1c60bdae27b78b0c004f705f548c07814f": ["3.2"]
