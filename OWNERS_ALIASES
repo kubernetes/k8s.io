@@ -12,20 +12,21 @@ aliases:
     - justaugustus
     - listx
   release-engineering-approvers:
-    - calebamiles # subproject owner
+    - alejandrox1 # SIG Technical Lead
     - dougm # Patch Release Team
     - feiskyer # Patch Release Team
     - hoegaarden # Patch Release Team
     - idealhack # Patch Release Team
     - justaugustus # subproject owner / Patch Release Team
+    - saschagrunert # SIG Technical Lead
     - tpepper # subproject owner / Patch Release Team
   release-engineering-reviewers:
-    - calebamiles # subproject owner
+    - alejandrox1 # SIG Technical Lead
     - cpanato # Branch Manager
     - dougm # Patch Release Team
     - feiskyer # Patch Release Team
     - hoegaarden # Patch Release Team
     - idealhack # Patch Release Team
     - justaugustus # subproject owner / Patch Release Team
-    - saschagrunert # Branch Manager
+    - saschagrunert # SIG Technical Lead
     - tpepper # subproject owner / Patch Release Team
