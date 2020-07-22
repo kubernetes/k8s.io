@@ -533,6 +533,7 @@ groups:
       - mmatejczyk@google.com
       - shyam123.jvs95@gmail.com
       - wojtekt@google.com
+      - zawodny@google.com
 
   - email-id: k8s-infra-rbac-node-perf-dash@kubernetes.io
     name: k8s-infra-rbac-node-perf-dash
@@ -697,6 +698,7 @@ groups:
       - jkaniuk@google.com
       - jprzychodzen@google.com
       - maciejborsz@google.com
+      - zawodny@google.com
       # sig-scalability leads
       - jeedigv@amazon.com
       - mmatejczyk@google.com
