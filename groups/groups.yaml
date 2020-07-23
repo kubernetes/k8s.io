@@ -1122,11 +1122,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - jying@google.com
       - mike@crute.us
       - patrik@ptrk.io
       - wfender@google.com
       - ygui@google.com
-      - jying@google.com
 
   - email-id: k8s-infra-staging-kind@kubernetes.io
     name: k8s-infra-staging-kind
