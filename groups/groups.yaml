@@ -1456,11 +1456,14 @@ groups:
       - tpepper@gmail.com
       - tpepper@vmware.com
     members:
+      - amwat@google.com
+      - bentheelder@google.com
       - ctadeu@gmail.com
       - daminisatya@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
       - georgedanielmangum@gmail.com
+      - gmccloskey@google.com
       - gveronicalg@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
@@ -1475,6 +1478,7 @@ groups:
       - sethpmccombs@gmail.com
       - saschagrunert@gmail.com
       - simony@google.com
+      - spiffxp@google.com
       - sumitranr@google.com
 
   - email-id: security@kubernetes.io
