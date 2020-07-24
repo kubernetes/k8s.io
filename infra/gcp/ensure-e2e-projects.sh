@@ -32,6 +32,12 @@ function usage() {
     echo > /dev/stderr
 }
 
+## setup custom role for prow troubleshooting
+color 6 "Ensuring custom org role prow.viewer role exists"
+(
+    ensure_custom_org_role_from_file "prow.viewer" "${SCRIPT_DIR}/roles/prow.viewer.yaml"
+) 2>&1 | indent
+
 ## setup service accounts and ips for the prow build cluster
 
 PROW_BUILD_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
@@ -133,7 +139,7 @@ for prj; do
     gcloud \
       projects add-iam-policy-binding "${prj}" \
       --member "group:k8s-infra-prow-viewers@kubernetes.io" \
-      --role roles/viewer
+      --role $(custom_org_role_name "prow.viewer")
     
     if [[ "${prj}" =~ k8s-infra-e2e.*scale ]]; then
       color 6 "Empower k8s-infra-sig-scalability-oncall@kubernetes.io to admin e2e project: ${prj}"

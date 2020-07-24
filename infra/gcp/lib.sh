@@ -610,3 +610,39 @@ function ensure_custom_iam_role() {
             --permissions "${permissions}"
     fi
 }
+
+# Ensure that custom IAM role exists and is in sync with definition in file
+# Arguments:
+#   $1:  The role name (e.g. "prow.viewer")
+#   $2:  The file (e.g. "/path/to/file.yaml")
+function ensure_custom_org_role_from_file() {
+    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_custom_org_role_from_file(name, file) requires 2 arguments" >&2
+        return 1
+    fi
+
+    local org="${GCP_ORG}"
+    local name="${1}"
+    local file="${2}"
+    
+    if ! gcloud iam roles describe "${name}" --organization "${org}" \
+        >/dev/null 2>&1
+    then
+      # be noisy when creating a role
+      gcloud iam roles create "${name}" --organization "${org}" --file "${file}"
+    else
+      # be quiet when updating, only output name of role
+      gcloud iam roles update "${name}" --organization "${org}" --file "${file}" | grep ^name:
+    fi
+}
+
+function custom_org_role_name() {
+    if [ ! $# -eq 1 -o -z "$1" ]; then
+        echo "custom_org_role_name(name) requires 1 arguments" >&2
+        return 1
+    fi
+    
+    local name="${1}"
+
+    echo "organizations/${GCP_ORG}/roles/${name}"
+}

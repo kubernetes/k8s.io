@@ -46,6 +46,14 @@ resource "google_project_iam_member" "k8s_infra_prow_oncall" {
   member  = "group:k8s-infra-prow-oncall@kubernetes.io"
 }
 
+// Ensure k8s-infra-prow-viewers@kuberentes.io has prow.viewer access to this project
+resource "google_project_iam_member" "k8s_infra_prow_viewers" {
+  project = local.project_id
+  # TODO: use data resource to get org role name instead of hardcode
+  role    = "organizations/758905017065/roles/prow.viewer"
+  member  = "group:k8s-infra-prow-viewers@kubernetes.io"
+}
+
 // Create GCP SA for pods
 resource "google_service_account" "prow_build_cluster_sa" {
   project      = local.project_id
