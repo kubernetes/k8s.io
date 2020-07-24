@@ -1,0 +1,11 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# https://github.com/kubernetes/community/blob/master/OWNERS_ALIASES.
+approvers:
+- CecileRobertMichon
+- codenrhoden
+- detiber
+- moshloop
+
+reviewers:
+- justinsb
