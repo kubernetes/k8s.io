@@ -351,11 +351,11 @@ color 6 "Handling special cases"
 
     color 6 "Empowering promoter-scanning namespace to use prod promoter vuln scanning svcacct"
     empower_ksa_to_svcacct \
-        "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-promoter-scanning]" \
+        "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-vuln-scanning]" \
         "${PROD_PROJECT}" \
         $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
     empower_ksa_to_svcacct \
-        "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-gcr-promoter-scanning]" \
+        "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-gcr-vuln-scanning]" \
         "${PROD_PROJECT}" \
         $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
 ) 2>&1 | indent
