@@ -166,6 +166,9 @@ includedPermissions:
 - serviceusage.quotas.get
 - serviceusage.services.get
 - serviceusage.services.list
+# roles/container.clusterViewer
+- container.clusters.get
+- container.clusters.list
 # roles/container.viewer
 - container.apiServices.get
 - container.apiServices.list
