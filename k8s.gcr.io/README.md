@@ -13,9 +13,6 @@ repository.
 Project owners can push to their staging repository and use the image promoter
 to promote images to the main serving repository.
 
-**Note**: Currently, the [Vanity Domain Flip has not happened yet][vdf] and so
-only staging repositories can be used.
-
 ### Creating staging repos
 
 1. Create a google group for granting push access by adding an email

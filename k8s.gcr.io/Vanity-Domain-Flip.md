@@ -1,3 +1,11 @@
+# UPDATE
+
+The flip has
+[completed](https://groups.google.com/g/kubernetes-sig-release/c/lFmJZKwIxyI/m/ytVrkTYNAQAJ)
+as of July 24, 2020! That is, `k8s.gcr.io` now refers to
+**`{asia,eu,us}.gcr.io/k8s-artifacts-prod`**, *not*
+`{asia,eu,us}.gcr.io/google-containers`.
+
 # The Problem
 
 Currently, `k8s.gcr.io` is a vanity domain that points to
