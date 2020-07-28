@@ -143,7 +143,9 @@ groups:
       - tallclair@google.com
     members:
       # Associate PSC members
+      - alextc@google.com
       - mok@vmware.com
+      - sfowler@redhat.com
       # Distributors
       - argoprod@us.ibm.com
       - aws-k8s-embargo-notification@amazon.com
