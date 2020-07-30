@@ -1217,6 +1217,7 @@ groups:
       - ryan.j.bezdicek@gmail.com
       - srampal@cisco.com
       - tasha.drew@gmail.com
+      - srajakum@amazon.com
 
   - email-id: k8s-infra-staging-nfd@kubernetes.io
     name: k8s-infra-staging-nfd
