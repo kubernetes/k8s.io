@@ -183,10 +183,9 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - briangrant@google.com
       - ihor@cncf.io
-      - jorgec@vmware.com
-      - killen.bob@gmail.com
+      - josh@berkus.org
+      - jdumars@gmail.com
 
   - email-id: github@kubernetes.io
     name: github
