@@ -96,6 +96,7 @@ groups:
       - phil.wittrock@gmail.com
       - quinton@hoole.biz
       - saadali@google.com
+      - saschagrunert@gmail.com
       - saugustus@vmware.com
       - seans@google.com
       - stephen.k8s@agst.us
@@ -605,7 +606,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - caselim@gmail.com
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@gmail.com
 
@@ -617,7 +619,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - caselim@gmail.com
+      - alarcj137@gmail.com
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
@@ -636,7 +638,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - caselim@gmail.com
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@gmail.com
       - ctadeu@gmail.com
@@ -653,7 +656,6 @@ groups:
       - mudrinic.mare@gmail.com
       - onlydole@gmail.com
       - sethpmccombs@gmail.com
-      - saschagrunert@gmail.com
       - simony@google.com
       - sumitranr@google.com
 
@@ -1407,7 +1409,8 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - cmiles@pivotal.io
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@vmware.com
     members:
@@ -1430,7 +1433,8 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - cmiles@pivotal.io
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@vmware.com
     members:
@@ -1440,7 +1444,6 @@ groups:
       - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
-      - saschagrunert@gmail.com
       - saugustus@vmware.com
       - tpepper@gmail.com
 
@@ -1454,8 +1457,8 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - caselim@gmail.com
-      - cmiles@pivotal.io
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - saugustus@vmware.com
       - stephen.k8s@agst.us
       - tpepper@gmail.com
@@ -1481,7 +1484,6 @@ groups:
       - onlydole@gmail.com
       - release-managers-private@kubernetes.io
       - sethpmccombs@gmail.com
-      - saschagrunert@gmail.com
       - simony@google.com
       - spiffxp@google.com
       - sumitranr@google.com
