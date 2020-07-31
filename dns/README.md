@@ -76,7 +76,7 @@ Example of an update.
 ### Performing an update
 
 #### Update Pull Request
-First, the DNS adminstrator opens a PR with the requested update applied to the appropriate YAML file.
+First, the DNS administrator opens a PR with the requested update applied to the appropriate YAML file.
 Next, the requestor validates that the PR looks correct for their request and responds `/lgtm`
 
 The DNS adminstrator merges the PR once it has been LGTM'd
