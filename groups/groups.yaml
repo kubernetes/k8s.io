@@ -1244,7 +1244,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - t-qini@microsoft.com
-      - Pengfei.Ni@microsoft.com
+      - feiskyer@gmail.com
       - stephen.k8s@agst.us
       - xiazhang@microsoft.com
       - bburns@microsoft.com
