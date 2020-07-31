@@ -410,7 +410,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-admins@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
       - brucema19901024@gmail.com
       - bryan@weave.works
@@ -428,7 +427,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-admins@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
       - dawnchen@google.com
       - decarr@redhat.com
@@ -619,7 +617,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - alarcj137@gmail.com
+      - k8s-infra-release-admins@kubernetes.io
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
@@ -638,16 +636,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - alarcj137@gmail.com
-      - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
-      - tpepper@gmail.com
-      - ctadeu@gmail.com
-      - dmaceachern@vmware.com
-      - feiskyer@gmail.com
+      - k8s-infra-release-editors@kubernetes.io
       - gveronicalg@gmail.com
-      - hhorl@pivotal.io
-      - idealhack@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - killen.bob@gmail.com
@@ -1180,7 +1170,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-admins@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
 
   - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
@@ -1282,7 +1271,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-admins@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
 
   - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
