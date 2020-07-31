@@ -76,7 +76,7 @@ E2E_MANUAL_PROJECTS=(
 
 # general purpose e2e projects, no quota changes
 E2E_BOSKOS_PROJECTS=()
-for i in $(seq 1 40); do
+for i in $(seq 1 80); do
   E2E_BOSKOS_PROJECTS+=($(printf "k8s-infra-e2e-boskos-%03i" $i))
 done
 
