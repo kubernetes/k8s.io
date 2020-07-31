@@ -96,6 +96,7 @@ groups:
       - phil.wittrock@gmail.com
       - quinton@hoole.biz
       - saadali@google.com
+      - saschagrunert@gmail.com
       - saugustus@vmware.com
       - seans@google.com
       - stephen.k8s@agst.us
@@ -409,7 +410,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-admins@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
       - brucema19901024@gmail.com
       - bryan@weave.works
@@ -427,7 +427,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-admins@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
       - dawnchen@google.com
       - decarr@redhat.com
@@ -605,7 +604,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - caselim@gmail.com
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@gmail.com
 
@@ -617,7 +617,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - caselim@gmail.com
+      - k8s-infra-release-admins@kubernetes.io
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
@@ -636,24 +636,15 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - caselim@gmail.com
-      - stephen.k8s@agst.us
-      - tpepper@gmail.com
-      - ctadeu@gmail.com
-      - dmaceachern@vmware.com
-      - feiskyer@gmail.com
+      - k8s-infra-release-editors@kubernetes.io
       - gveronicalg@gmail.com
-      - hhorl@pivotal.io
-      - idealhack@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - killen.bob@gmail.com
       - linusa@google.com
-      - marky.r.jackson@gmail.com
       - mudrinic.mare@gmail.com
       - onlydole@gmail.com
       - sethpmccombs@gmail.com
-      - saschagrunert@gmail.com
       - simony@google.com
       - sumitranr@google.com
 
@@ -684,6 +675,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - k8s-infra-release-viewers@kubernetes.io
       - ameukam@gmail.com
       - bartek@smykla.com
       - georgedanielmangum@gmail.com
@@ -803,6 +795,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - k8s-infra-release-editors@kubernetes.io
       - bentheelder@google.com
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -1178,7 +1171,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-admins@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
 
   - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
@@ -1280,7 +1272,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-admins@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
 
   - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
@@ -1407,7 +1398,8 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - cmiles@pivotal.io
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@vmware.com
     members:
@@ -1430,7 +1422,8 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - cmiles@pivotal.io
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@vmware.com
     members:
@@ -1440,7 +1433,6 @@ groups:
       - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
-      - saschagrunert@gmail.com
       - saugustus@vmware.com
       - tpepper@gmail.com
 
@@ -1454,8 +1446,8 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - caselim@gmail.com
-      - cmiles@pivotal.io
+      - alarcj137@gmail.com
+      - saschagrunert@gmail.com
       - saugustus@vmware.com
       - stephen.k8s@agst.us
       - tpepper@gmail.com
@@ -1464,7 +1456,6 @@ groups:
       - amwat@google.com
       - bentheelder@google.com
       - ctadeu@gmail.com
-      - daminisatya@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
       - georgedanielmangum@gmail.com
@@ -1475,16 +1466,11 @@ groups:
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - killen.bob@gmail.com
-      - linusa@google.com
-      - marky.r.jackson@gmail.com
       - mudrinic.mare@gmail.com
       - onlydole@gmail.com
       - release-managers-private@kubernetes.io
       - sethpmccombs@gmail.com
-      - saschagrunert@gmail.com
-      - simony@google.com
       - spiffxp@google.com
-      - sumitranr@google.com
 
   - email-id: security@kubernetes.io
     name: security
