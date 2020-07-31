@@ -99,4 +99,5 @@ data:
 kind: ConfigMap
 metadata:
   creationTimestamp: null
-  name: boskos-resources.yaml
+  name: resources
+  namespace: test-pods
