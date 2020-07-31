@@ -43,9 +43,6 @@ data:
       - k8s-infra-e2e-boskos-038
       - k8s-infra-e2e-boskos-039
       - k8s-infra-e2e-boskos-040
-      state: dirty
-      type: k8s-infra-gce-project
-    - names:
       - k8s-infra-e2e-boskos-041
       - k8s-infra-e2e-boskos-042
       - k8s-infra-e2e-boskos-043
