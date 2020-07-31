@@ -21,11 +21,15 @@
     "sha256:4e78bb0116555a10ef59c1cdf0648b06b483903a1919def5e3c7ba68b9fa08cb": [ "v1.2.0" ]
 - name: hostpathplugin
   dmap:
+    "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
 - name: livenessprobe
   dmap:
     "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
 - name: mock-driver
   dmap:
     "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]
+- name: nfs-provisioner
+  dmap:
+    "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
 - name: snapshot-controller
   dmap:

@@ -10,6 +10,7 @@ csi-snapshotter
 hostpathplugin
 livenessprobe
 mock-driver
+nfs-provisioner
 snapshot-controller
 "
 
