@@ -794,6 +794,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - k8s-infra-release-editors@kubernetes.io
       - bentheelder@google.com
       - cblecker@gmail.com
       - davanum@gmail.com
