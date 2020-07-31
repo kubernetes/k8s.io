@@ -21,4 +21,4 @@ spec:
         image: gcr.io/k8s-prow/boskos/reaper:v20200422-8c8546d74
         args:
         - --boskos-url=http://boskos.test-pods.svc.cluster.local.
-        - --resource-type=k8s-infra-gce-project,scalability-project
+        - --resource-type=gce-project,k8s-infra-gce-project,scalability-project
