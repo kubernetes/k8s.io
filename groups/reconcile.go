@@ -559,7 +559,7 @@ func removeOwnerOrManagersGroup(service *admin.Service, groupEmailId string, mem
 		}
 		// a person was deleted from a group, let's remove them
 		if config.ConfirmChanges {
-			err := service.Members.Delete(groupEmailId, m.Email).Do()
+			err := service.Members.Delete(groupEmailId, m.Id).Do()
 			if err != nil {
 				return fmt.Errorf("unable to remove %s from %q as OWNER or MANAGER : %v", m.Email, groupEmailId, err)
 			}
@@ -597,7 +597,7 @@ func removeMembersFromGroup(service *admin.Service, groupEmailId string, members
 		}
 		// a person was deleted from a group, let's remove them
 		if config.ConfirmChanges {
-			err := service.Members.Delete(groupEmailId, m.Email).Do()
+			err := service.Members.Delete(groupEmailId, m.Id).Do()
 			if err != nil {
 				return fmt.Errorf("unable to remove %s from %q as a %s : %v", m.Email, groupEmailId, m.Role, err)
 			}
