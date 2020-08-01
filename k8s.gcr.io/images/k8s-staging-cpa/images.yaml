@@ -1,3 +1,18 @@
+- name: cluster-proportional-autoscaler
+  dmap:
+    "sha256:762ef69b7093a8c4c83472aabdf79f4c5eb6743b122b2c06ca740f44cb00ca9d": ["1.8.2"]
+- name: cluster-proportional-autoscaler-amd64
+  dmap:
+    "sha256:e310b7e60ed5dabcf9945fb86ee049bafde69b01ac0b9eb647c2b96c273e18d8": ["1.8.2"]
+- name: cluster-proportional-autoscaler-arm
+  dmap:
+    "sha256:ba9d51870f9a718f91fb2a0df6366da36b2e5484a3331049b226310b5d59993d": ["1.8.2"]
+- name: cluster-proportional-autoscaler-arm64
+  dmap:
+    "sha256:549b40bf6c29920f0f023fd97a6a9197f785f15799523c3486456a1bd24c840f": ["1.8.2"]
+- name: cluster-proportional-autoscaler-ppc64le
+  dmap:
+    "sha256:a9ba5e939a4f8f0ded4a6b222d01b6922fce231f7977098112d51e409fce81f0": ["1.8.2"]
 - name: cpvpa-amd64
   dmap:
     "sha256:8341c10f341fc7cacfefa4564088414b4eaef45142d76a83f80891544f18b632": ["v0.8.2"]
