@@ -23,6 +23,8 @@ PROD_ZONES=(
     kubernetes.io.
     x-k8s.io.
     k8s-e2e.com.
+    k8s.dev.
+    kubernetes.dev.
 )
 
 CANARY_ZONES=("${PROD_ZONES[@]/#/canary.}")
