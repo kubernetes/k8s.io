@@ -66,12 +66,16 @@ ensure_regional_address \
 ## setup projects to be used by e2e tests for standing up clusters
 
 E2E_MANUAL_PROJECTS=(
-  # for manual use during node-e2e job migration, eg: --gcp-project=k8s-infra-e2e-gce-project
+  # for manual use during node-e2e job migration, eg: --gcp-project=gce-project
   k8s-infra-e2e-gce-project
-  # for manual use during job migration, eg: --gcp-project=k8s-infra-e2e-node-e2e-project
+  # for manual use during job migration, eg: --gcp-project=node-e2e-project
   k8s-infra-e2e-node-e2e-project
-  # for manual use during job migration, eg: --gcp-projec=k8s-infra-e2e-scale-project
+  # for manual use during job migration, eg: --gcp-project=scale-project
   k8s-infra-e2e-scale-project
+  # for manual use during job migration, eg: --gcp-project=gpu-project
+  k8s-infra-e2e-gpu-project
+  # for manual use during job migration, eg: --gcp-project=ingress-project
+  k8s-infra-e2e-ingress-project
 )
 
 # general purpose e2e projects, no quota changes
