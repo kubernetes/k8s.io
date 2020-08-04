@@ -19,6 +19,10 @@
     "sha256:35ead85dd09aa8cc612fdb598d4e0e2f048bef816f1b74df5eeab67cd21b10aa": [ "v2.1.0" ]
     "sha256:1530db9fd380ecee86b48a7b3540568c46adb5a64b7fe718c51d9260c4834fd8": [ "v2.0.1" ]
     "sha256:4e78bb0116555a10ef59c1cdf0648b06b483903a1919def5e3c7ba68b9fa08cb": [ "v1.2.0" ]
+- name: csi-external-health-monitor-agent
+  dmap:
+- name: csi-external-health-monitor-controller
+  dmap:
 - name: hostpathplugin
   dmap:
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
@@ -33,3 +37,4 @@
     "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
 - name: snapshot-controller
   dmap:
+    "sha256:2bde7d7f9d73c4309d67e9d7f94df52110295ef06c9488ca76c40da32b65f05e": [ "v2.1.1" ]

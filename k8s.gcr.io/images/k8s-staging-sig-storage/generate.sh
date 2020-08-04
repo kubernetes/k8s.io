@@ -7,6 +7,8 @@ csi-node-driver-registrar
 csi-provisioner
 csi-resizer
 csi-snapshotter
+csi-external-health-monitor-agent
+csi-external-health-monitor-controller
 hostpathplugin
 livenessprobe
 mock-driver
