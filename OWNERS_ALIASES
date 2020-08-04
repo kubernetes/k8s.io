@@ -1,4 +1,175 @@
 aliases:
+  sig-api-machinery-leads:
+    - deads2k
+    - fedebongio
+    - lavalamp
+  sig-apps-leads:
+    - janetkuo
+    - kow3ns
+    - mattfarina
+    - prydonius
+  sig-architecture-leads:
+    - derekwaynecarr
+    - dims
+    - johnbelamaric
+  sig-auth-leads:
+    - deads2k
+    - enj
+    - liggitt
+    - mikedanese
+    - tallclair
+  sig-autoscaling-leads:
+    - gjtempleton
+    - mwielgus
+  sig-cli-leads:
+    - pwittrock
+    - seans3
+    - soltysh
+  sig-cloud-provider-leads:
+    - andrewsykim
+    - cheftako
+  sig-cluster-lifecycle-leads:
+    - fabriziopandini
+    - justinsb
+    - neolit123
+    - timothysc
+  sig-contributor-experience-leads:
+    - castrojo
+    - cblecker
+    - mrbobbytables
+    - nikhita
+  sig-docs-leads:
+    - jimangel
+    - kbarnard10
+    - kbhawkey
+    - onlydole
+    - sftim
+    - zacharysarah
+  sig-instrumentation-leads:
+    - brancz
+    - dashpole
+    - ehashman
+    - logicalhan
+  sig-multicluster-leads:
+    - pmorie
+    - quinton-hoole
+  sig-network-leads:
+    - caseydavenport
+    - dcbw
+    - thockin
+  sig-node-leads:
+    - dchen1107
+    - derekwaynecarr
+  sig-release-leads:
+    - alejandrox1
+    - justaugustus
+    - saschagrunert
+    - tpepper
+  sig-scalability-leads:
+    - mm4tt
+    - shyamjvs
+    - wojtek-t
+  sig-scheduling-leads:
+    - Huang-Wei
+    - ahg-g
+  sig-service-catalog-leads:
+    - jberkhahn
+    - mszostok
+  sig-storage-leads:
+    - jsafrane
+    - msau42
+    - saad-ali
+    - xing-yang
+  sig-testing-leads:
+    - BenTheElder
+    - spiffxp
+    - stevekuznetsov
+  sig-ui-leads:
+    - floreks
+    - jeefy
+    - maciaszczykm
+  sig-usability-leads:
+    - hpandeycodeit
+    - tashimi
+  sig-windows-leads:
+    - benmoss
+    - ddebroy
+    - marosset
+    - michmike
+  wg-api-expression-leads:
+    - apelisse
+    - kwiesmueller
+  wg-component-standard-leads:
+    - mtaufen
+    - stealthybox
+  wg-data-protection-leads:
+    - xing-yang
+    - yuxiangqian
+  wg-iot-edge-leads:
+    - cantbewong
+    - cindyxing
+    - dejanb
+  wg-k8s-infra-leads:
+    - bartsmykla
+    - dims
+    - spiffxp
+  wg-lts-leads:
+    - imkin
+    - quinton-hoole
+    - tpepper
+    - youngnick
+  wg-machine-learning-leads:
+    - k82cn
+    - kow3ns
+    - vishh
+  wg-multitenancy-leads:
+    - srampal
+    - tashimi
+  wg-naming-leads:
+    - celestehorgan
+    - jdumars
+    - justaugustus
+    - zacharysarah
+  wg-policy-leads:
+    - ericavonb
+    - hannibalhuang
+  wg-security-audit-leads:
+    - aasmall
+    - cji
+    - jaybeale
+    - joelsmith
+  ug-big-data-leads:
+    - erikerlandson
+    - foxish
+    - liyinan926
+  ug-vmware-users-leads:
+    - brysonshepherd
+    - cantbewong
+    - mylesagray
+    - phenixblue
+  committee-code-of-conduct:
+    - AevaOnline
+    - Bradamant3
+    - carolynvs
+    - jdumars
+    - tashimi
+  committee-product-security:
+    - cjcullen
+    - cji
+    - joelsmith
+    - lukehinds
+    - micahhausler
+    - swamymsft
+    - tallclair
+  committee-steering:
+    - cblecker
+    - derekwaynecarr
+    - dims
+    - lachie83
+    - nikhita
+    - parispittman
+    - spiffxp
+## BEGIN CUSTOM CONTENT
   build-image-approvers:
     - BenTheElder
     - cblecker
@@ -11,6 +182,26 @@ aliases:
     - dims
     - justaugustus
     - listx
+  provider-aws:
+    - d-nishi
+    - justinsb
+    - kris-nova
+  provider-azure:
+    - craiglpeters
+    - justaugustus
+    - feiskyer
+    - khenidak
+  provider-gcp:
+    - abgworrall
+  provider-ibmcloud:
+    - spzala
+  provider-openstack:
+    - chrigl
+    - lingxiankong
+    - ramineni
+  provider-vmware:
+    - cantbewong
+    - frapposelli
   release-engineering-approvers:
     - alejandrox1 # SIG Technical Lead
     - dougm # Patch Release Team
@@ -30,3 +221,4 @@ aliases:
     - justaugustus # subproject owner / Patch Release Team
     - saschagrunert # SIG Technical Lead
     - tpepper # subproject owner / Patch Release Team
+## END CUSTOM CONTENT
