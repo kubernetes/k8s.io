@@ -607,7 +607,7 @@ groups:
       - alarcj137@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@gmail.com
+      - tpepper@vmware.com
 
   - email-id: k8s-infra-release-editors@kubernetes.io
     name: k8s-infra-release-editors
@@ -626,7 +626,7 @@ groups:
       - idealhack@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@gmail.com
+      - tpepper@vmware.com
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
@@ -1438,7 +1438,7 @@ groups:
       - hhorl@pivotal.io
       - idealhack@gmail.com
       - saugustus@vmware.com
-      - tpepper@gmail.com
+      - tpepper@vmware.com
 
   - email-id: release-managers@kubernetes.io
     name: release-managers
