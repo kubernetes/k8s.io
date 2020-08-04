@@ -34,6 +34,7 @@ function usage() {
 
 # NB: Please keep this sorted.
 PROJECTS=(
+    k8s-release
     k8s-release-test-prod
 )
 
@@ -134,3 +135,41 @@ for PROJECT; do
 
     color 6 "Done"
 done
+
+## Special case: setup buckets that are used by CI
+
+# community-owned equivalents to gs://kubernetes-release-{dev,pull}
+RELEASE_BUCKETS=(
+  "gs://k8s-release-dev"
+  "gs://k8s-release-dev-asia"
+  "gs://k8s-release-dev-eu"
+  "gs://k8s-release-pull"
+)
+PROW_BUILD_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
+
+for BUCKET in "${ALL_BUCKETS[@]}"; do
+    color 3 "Configuring bucket: ${BUCKET}"
+
+    # Create the bucket
+    color 6 "Ensuring the bucket exists and is world readable"
+    ensure_public_gcs_bucket "k8s-release" "${BUCKET}"
+
+    # Enable admins on the bucket
+    color 6 "Empowering GCS admins"
+    empower_gcs_admins "k8s-release" "${BUCKET}"
+
+    # Enable prow to write to the bucket
+    # TODO(spiffxp): I almost guarantee prow will need admin privileges but 
+    #                let's start restricted and find out
+    empower_svcacct_to_write_gcs_bucket "${PROW_BUILD_SVCACCT}" "${BUCKET}"
+
+    # Enable writers on the bucket
+    for group in ${ADMINS} ${WRITERS}; do
+        color 6 "Empowering ${group} to GCS"
+        empower_group_to_write_gcs_bucket "${group}" "${BUCKET}"
+    done
+done
+
+color 6 "Ensure auto-deletion policies are set for CI buckets"
+ensure_gcs_bucket_auto_deletion "gs://k8s-release-dev" 90
+ensure_gcs_bucket_auto_deletion "gs://k8s-release-pull" 14
