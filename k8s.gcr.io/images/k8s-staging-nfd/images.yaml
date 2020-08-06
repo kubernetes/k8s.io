@@ -1,3 +1,4 @@
 - name: node-feature-discovery
   dmap:
     sha256:d82df7c2bb076211119177b339d4de4af88d1f8b4fa3976c103a0f80a06e964c: [v0.5.0]
+    sha256:a1e72dbc35a16cbdcf0007fc4fb207bce723ff67c61853d2d8d8051558ce6de7: [v0.6.0]
