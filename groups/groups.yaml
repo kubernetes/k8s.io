@@ -617,6 +617,13 @@ groups:
       - mrfaizal@google.com
       - rob.kielty@gmail.com
       - spiffxp@gmail.com
+      # sig-scalability
+      - jeedigv@amazon.com
+      - jkaniuk@google.com
+      - jprzychodzen@google.com
+      - maciejborsz@google.com
+      - mmatejczyk@google.com
+      - wojtekt@google.com
       - zawodny@google.com
 
   - email-id: k8s-infra-sig-scalability-oncall@kubernetes.io
