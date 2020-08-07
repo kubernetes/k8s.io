@@ -86,6 +86,19 @@ data:
       state: dirty
       type: gce-project
     - names:
+      - k8s-infra-e2e-boskos-gpu-01
+      - k8s-infra-e2e-boskos-gpu-02
+      - k8s-infra-e2e-boskos-gpu-03
+      - k8s-infra-e2e-boskos-gpu-04
+      - k8s-infra-e2e-boskos-gpu-05
+      - k8s-infra-e2e-boskos-gpu-06
+      - k8s-infra-e2e-boskos-gpu-07
+      - k8s-infra-e2e-boskos-gpu-08
+      - k8s-infra-e2e-boskos-gpu-09
+      - k8s-infra-e2e-boskos-gpu-10
+      state: dirty
+      type: gpu-project
+    - names:
       - k8s-infra-e2e-boskos-scale-01
       - k8s-infra-e2e-boskos-scale-02
       - k8s-infra-e2e-boskos-scale-03
