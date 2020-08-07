@@ -92,10 +92,18 @@ for i in $(seq 1 5); do
   E2E_SCALE_PROJECTS+=($(printf "k8s-infra-e2e-boskos-scale-%02i" $i))
 done
 
+# e2e projects for gpu jobs
+# - us-west1 Committed NVIDIA K80 GPUs raised to 2
+E2E_GPU_PROJECTS=()
+for i in $(seq 1 10); do
+  E2E_GPU_PROJECTS+=($(printf "k8s-infra-e2e-boskos-gpu-%02i" $i))
+done
+
 E2E_PROJECTS=(
   "${E2E_MANUAL_PROJECTS[@]}"
   "${E2E_BOSKOS_PROJECTS[@]}"
   "${E2E_SCALE_PROJECTS[@]}"
+  "${E2E_GPU_PROJECTS[@]}"
 )
 
 if [ $# = 0 ]; then
