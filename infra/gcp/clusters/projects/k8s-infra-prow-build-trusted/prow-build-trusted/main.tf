@@ -30,6 +30,7 @@ locals {
   pod_namespace           = "test-pods"           // MUST match whatever prow is configured to use when it schedules to this cluster
   cluster_sa_name         = "prow-build-trusted"  // Name of the GSA and KSA that pods use by default
   gcb_builder_sa_name     = "gcb-builder"         // Name of the GSA and KSA that pods use to be allowed to run GCB builds and push to GCS buckets
+  prow_deployer_sa_name   = "prow-deployer"       // Name of the GSA and KSA that pods use to be allowed to deploy to prow build clusters
 }
 
 module "project" {
@@ -87,6 +88,39 @@ data "google_iam_policy" "gcb_builder_sa_workload_identity" {
 resource "google_service_account_iam_policy" "gcb_builder_sa_iam" {
   service_account_id = google_service_account.gcb_builder_sa.name
   policy_data        = data.google_iam_policy.gcb_builder_sa_workload_identity.policy_data
+}
+
+// Create GCP SA for jobs that deploy to k8s-infra prow clusters
+resource "google_service_account" "prow_deployer_sa" {
+  project      = local.project_id
+  account_id   = local.prow_deployer_sa_name
+  display_name = local.prow_deployer_sa_name
+}
+// Allow pods using the build cluster KSA to use the GCP SA via workload identity
+data "google_iam_policy" "prow_deployer_sa_workload_identity" {
+  binding {
+    role = "roles/iam.workloadIdentityUser"
+
+    members = [
+      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.prow_deployer_sa_name}]",
+    ]
+  }
+}
+// Authoritative iam-policy: replaces any existing policy attached to this service_account
+resource "google_service_account_iam_policy" "prow_deployer_sa_iam" {
+  service_account_id = google_service_account.prow_deployer_sa.name
+  policy_data        = data.google_iam_policy.prow_deployer_sa_workload_identity.policy_data
+}
+
+resource "google_project_iam_member" "prow_deployer_for_prow_build_trusted" {
+  project = local.project_id
+  role    = "roles/container.developer"
+  member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
+}
+resource "google_project_iam_member" "prow_deployer_for_prow_build" {
+  project = "k8s-infra-prow-build"
+  role    = "roles/container.developer"
+  member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
 }
 
 module "prow_build_cluster" {
