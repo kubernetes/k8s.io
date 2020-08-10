@@ -83,6 +83,46 @@ data:
       - k8s-infra-e2e-boskos-078
       - k8s-infra-e2e-boskos-079
       - k8s-infra-e2e-boskos-080
+      - k8s-infra-e2e-boskos-081
+      - k8s-infra-e2e-boskos-082
+      - k8s-infra-e2e-boskos-083
+      - k8s-infra-e2e-boskos-084
+      - k8s-infra-e2e-boskos-085
+      - k8s-infra-e2e-boskos-086
+      - k8s-infra-e2e-boskos-087
+      - k8s-infra-e2e-boskos-088
+      - k8s-infra-e2e-boskos-089
+      - k8s-infra-e2e-boskos-090
+      - k8s-infra-e2e-boskos-091
+      - k8s-infra-e2e-boskos-092
+      - k8s-infra-e2e-boskos-093
+      - k8s-infra-e2e-boskos-094
+      - k8s-infra-e2e-boskos-095
+      - k8s-infra-e2e-boskos-096
+      - k8s-infra-e2e-boskos-097
+      - k8s-infra-e2e-boskos-098
+      - k8s-infra-e2e-boskos-099
+      - k8s-infra-e2e-boskos-100
+      - k8s-infra-e2e-boskos-101
+      - k8s-infra-e2e-boskos-102
+      - k8s-infra-e2e-boskos-103
+      - k8s-infra-e2e-boskos-104
+      - k8s-infra-e2e-boskos-105
+      - k8s-infra-e2e-boskos-106
+      - k8s-infra-e2e-boskos-107
+      - k8s-infra-e2e-boskos-108
+      - k8s-infra-e2e-boskos-109
+      - k8s-infra-e2e-boskos-110
+      - k8s-infra-e2e-boskos-111
+      - k8s-infra-e2e-boskos-112
+      - k8s-infra-e2e-boskos-113
+      - k8s-infra-e2e-boskos-114
+      - k8s-infra-e2e-boskos-115
+      - k8s-infra-e2e-boskos-116
+      - k8s-infra-e2e-boskos-117
+      - k8s-infra-e2e-boskos-118
+      - k8s-infra-e2e-boskos-119
+      - k8s-infra-e2e-boskos-120
       state: dirty
       type: gce-project
     - names:
