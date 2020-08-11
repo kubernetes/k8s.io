@@ -124,6 +124,7 @@ groups:
       - jeremy.r.rickard@gmail.com
       - keroden@microsoft.com
       - killen.bob@gmail.com
+      - lauri.d.apple@gmail.com
       - max@koerbaecher.io
       - meenakshi.kaushik@gmail.com
       - onlydole@gmail.com
@@ -184,6 +185,7 @@ groups:
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - killen.bob@gmail.com
+      - lauri.d.apple@gmail.com
       - mudrinic.mare@gmail.com
       - onlydole@gmail.com
       - release-managers-private@kubernetes.io
@@ -203,3 +205,17 @@ groups:
     members:
       - release-managers-private@kubernetes.io
       - security-discuss-private@kubernetes.io
+
+  - email-id: sig-release-leads@kubernetes.io
+    name: sig-release-leads
+    description: |-
+      SIG Release Chairs, Technical Leads, and Program Managers comms
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - alarcj137@gmail.com
+      - lauri.d.apple@gmail.com
+      - saschagrunert@gmail.com
+      - stephen.k8s@agst.us
+      - tpepper@vmware.com
