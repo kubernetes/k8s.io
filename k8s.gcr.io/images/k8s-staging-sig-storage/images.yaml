@@ -16,6 +16,7 @@
     "sha256:43195976fb9f94d943f5dd9d58b8afa543be22d09a1165e8a489b7dfe22c657a": [ "v0.4.0" ]
 - name: csi-snapshotter
   dmap:
+    "sha256:de94e695fc27ee421da8b9932c3d42699fe7b848bc34717f67f4350946bc46c9": [ "v2.1.1" ]
     "sha256:35ead85dd09aa8cc612fdb598d4e0e2f048bef816f1b74df5eeab67cd21b10aa": [ "v2.1.0" ]
     "sha256:1530db9fd380ecee86b48a7b3540568c46adb5a64b7fe718c51d9260c4834fd8": [ "v2.0.1" ]
     "sha256:4e78bb0116555a10ef59c1cdf0648b06b483903a1919def5e3c7ba68b9fa08cb": [ "v1.2.0" ]
