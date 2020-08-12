@@ -5,6 +5,7 @@ groups:
 
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
+      MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
       - ihor@cncf.io
