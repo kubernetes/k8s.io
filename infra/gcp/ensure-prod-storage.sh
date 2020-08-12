@@ -358,6 +358,39 @@ color 6 "Handling special cases"
         "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-gcr-vuln-scanning]" \
         "${PROD_PROJECT}" \
         $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
+
+    color 6 "Ensuring prod promoter vuln-dashboard svcacct exists"
+    ensure_service_account \
+        "${PROD_PROJECT}" \
+        "${VULN_DASHBOARD_SVCACCT}" \
+        "k8s-infra container image vuln scanning"
+
+    color 6 "Empowering promoter-scanning namespace to use prod promoter vuln-dashboard svcacct"
+    empower_ksa_to_svcacct \
+        "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-vuln-dashboard]" \
+        "${PROD_PROJECT}" \
+        $(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")
+    empower_ksa_to_svcacct \
+        "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-gcr-vuln-dashboard]" \
+        "${PROD_PROJECT}" \
+        $(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")
+
+
+    # Special case: grant the k8s-infra-gcr-vuln-dashboard account access to
+    # write to the prod vuln dashboard GCS bucket.
+    ensure_prod_gcs_bucket "${PROD_PROJECT}" "gs://${PROD_PROJECT}-vuln-dashboard" 2>&1 | indent
+
+    color 6 "Empowering vuln-dashboard svcacct to vuln-dashboard bucket"
+    empower_svcacct_to_write_gcs_bucket \
+        "$(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")" \
+        "gs://${PROD_PROJECT}-vuln-dashboard"
+
+    # Special case: grant the k8s-infra-gcr-vuln-dashboard account access to
+    # container analysis results for the prod project.
+    color 6 "Empowering vuln-dashboard svcacct to prod vulnerability scanning"
+    empower_service_account_for_cip_vuln_scanning \
+        "$(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")" \
+        "${PROD_PROJECT}"
 ) 2>&1 | indent
 
 color 6 "Done"
