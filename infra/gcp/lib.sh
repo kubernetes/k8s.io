@@ -34,7 +34,7 @@ PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
 
 # The service account name for the k8s vulnerability dashboard.
-VULN_DASHBOARD_SVCACCT = "k8s-infra-gcr-vuln-dashboard"
+VULN_DASHBOARD_SVCACCT="k8s-infra-gcr-vuln-dashboard"
 
 # The service account name for the GCR auditor (Cloud Run runtime service
 # account).
