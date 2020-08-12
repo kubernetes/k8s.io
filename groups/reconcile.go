@@ -274,6 +274,7 @@ func printGroupMembersAndSettings(srv *admin.Service, srv2 *groupssettings.Servi
 		group.Settings["WhoCanApproveMembers"] = g2.WhoCanApproveMembers
 		group.Settings["WhoCanModifyMembers"] = g2.WhoCanModifyMembers
 		group.Settings["WhoCanModerateMembers"] = g2.WhoCanModerateMembers
+		group.Settings["MembersCanPostAsTheGroup"] = g2.MembersCanPostAsTheGroup
 
 		l, err := srv.Members.List(g.Email).Do()
 		if err != nil {
@@ -439,6 +440,7 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 	wantSettings.WhoCanModerateContent = "OWNERS_AND_MANAGERS"
 	wantSettings.WhoCanPostMessage = "ALL_MEMBERS_CAN_POST"
 	wantSettings.MessageModerationLevel = "MODERATE_NONE"
+	wantSettings.MembersCanPostAsTheGroup = "false"
 
 	for key, value := range groupSettings {
 		switch key {
@@ -458,6 +460,8 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 			wantSettings.WhoCanPostMessage = value
 		case "MessageModerationLevel":
 			wantSettings.MessageModerationLevel = value
+		case "MembersCanPostAsTheGroup":
+			wantSettings.MembersCanPostAsTheGroup = value
 		}
 	}
 
