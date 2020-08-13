@@ -50,6 +50,7 @@ STAGING_PROJECTS=(
     cip-test
     provider-aws
     cloud-provider-gcp
+    cluster-addons
     cluster-api
     cluster-api-aws
     cluster-api-azure
