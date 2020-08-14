@@ -7,6 +7,8 @@ Zones we manage:
   - k8s.io
   - x-k8s.io
   - k8s-e2e.com
+  - kubernetes.dev
+  - k8s.dev
 
 ## How to become an admin
 

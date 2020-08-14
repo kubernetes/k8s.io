@@ -8,3 +8,11 @@ canary:
   - ns-cloud-b2.googledomains.com.
   - ns-cloud-b3.googledomains.com.
   - ns-cloud-b4.googledomains.com.
+
+'':
+  type: CNAME
+  value: kubernetes-contributor.netlify.app.
+
+www:
+  type: CNAME
+  value: kubernetes.dev.
