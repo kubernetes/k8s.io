@@ -79,7 +79,7 @@ Example of an update.
 First, the DNS administrator opens a PR with the requested update applied to the appropriate YAML file.
 Next, the requestor validates that the PR looks correct for their request and responds `/lgtm`
 
-The DNS adminstrator merges the PR once it has been LGTM'd
+The DNS administrator merges the PR once it has been LGTM'd
 
 #### Applying the update
 The DNS adminstrator applies the update using the instructions below. Once the update has been
