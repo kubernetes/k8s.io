@@ -54,7 +54,7 @@ groups:
       - chiachenk@google.com
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
-      - craig.ingram@salesforce.com
+      - cji@stripe.com
       - davanum@gmail.com
       - davidopp@google.com
       - dawnchen@google.com
@@ -136,7 +136,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - craig.ingram@salesforce.com
+      - cji@stripe.com
       - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
@@ -1316,7 +1316,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - craig.ingram@salesforce.com
+      - cji@stripe.com
       - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
@@ -1334,7 +1334,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - craig.ingram@salesforce.com
+      - cji@stripe.com
       - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
