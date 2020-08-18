@@ -10,9 +10,9 @@ canary:
   - ns-cloud-a4.googledomains.com.
 
 '':
-  type: CNAME
-  value: kubernetes-contributor.netlify.app.
+  type: A
+  value: 104.198.14.52
 
 www:
   type: CNAME
-  value: k8s.dev.
+  value: kubernetes-contributor.netlify.app.
