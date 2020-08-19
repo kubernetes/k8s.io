@@ -73,6 +73,11 @@ resource "google_project_service" "secretmanager" {
   service = "secretmanager.googleapis.com"
   disable_dependent_services = true
 }
+resource "google_project_service" "serviceusage" {
+  project = google_project.project.project_id
+  service = "serviceusage.googleapis.com"
+  disable_dependent_services = true
+}
 
 
 // "Empower cluster admins" is what ensure-main-project.sh says
