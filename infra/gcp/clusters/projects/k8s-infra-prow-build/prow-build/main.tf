@@ -113,7 +113,7 @@ module "prow_build_nodepool" {
   cluster_name    = module.prow_build_cluster.cluster.name
   location        = module.prow_build_cluster.cluster.location
   name            = "pool1"
-  initial_count   = 6
+  initial_count   = 12
   min_count       = 6
   max_count       = 30
   # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
