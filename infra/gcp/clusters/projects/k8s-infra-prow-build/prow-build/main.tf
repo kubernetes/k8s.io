@@ -127,6 +127,26 @@ module "prow_build_nodepool" {
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }
 
+module "prow_build_nodepool_n1_highmem_16" {
+  source = "../../../modules/gke-nodepool"
+  project_name    = local.project_id
+  cluster_name    = module.prow_build_cluster.cluster.name
+  location        = module.prow_build_cluster.cluster.location
+  name            = "pool2"
+  initial_count   = 1
+  min_count       = 1
+  max_count       = 30
+  # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
+  # use an UBUNTU image instead. Why the CONTAINERD variant? I don't know, but
+  # it's what k8s-prow-builds/prow (prow.k8s.io's existing google.com build 
+  # cluster) is using today, so we're just going to follow that
+  image_type      = "UBUNTU_CONTAINERD"
+  machine_type    = "n1-highmem-16"
+  disk_size_gb    = 250
+  disk_type       = "pd-ssd"
+  service_account = module.prow_build_cluster.cluster_node_sa.email
+}
+
 module "greenhouse_nodepool" {
   source = "../../../modules/gke-nodepool"
   project_name    = local.project_id
