@@ -139,7 +139,7 @@ module "prow_build_nodepool_n1_highmem_8" {
   # use an UBUNTU image instead. Keep parity with the existing google.com 
   # k8s-prow-builds/prow cluster by using the CONTAINERD variant
   image_type      = "UBUNTU_CONTAINERD"
-  machine_type    = "n1-highmem-16"
+  machine_type    = "n1-highmem-8"
   disk_size_gb    = 250
   disk_type       = "pd-ssd"
   service_account = module.prow_build_cluster.cluster_node_sa.email
