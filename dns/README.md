@@ -85,7 +85,7 @@ The DNS administrator merges the PR once it has been LGTM'd
 
 #### Applying the update
 The DNS adminstrator applies the update using the instructions below. Once the update has been
-applied, the DNS adminstrator closes the issue.
+applied, the DNS administrator closes the issue.
 
 Note that in the future, we hope to automate this update so that it happens in response to the
 merge of the update PR.
