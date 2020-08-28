@@ -1,10 +1,12 @@
 - name: csi-attacher
   dmap:
     "sha256:2ffa647e8107cfd39e5f464e738dce014c9f5e51b108da36c3ab621048d0bbab": [ "v2.2.0" ]
+    "sha256:bc6d3ca87c62a2587470ba7adca84e9e5e7db61be1a35176084cc9ec3b4a87d5": [ "v3.0.0" ]
 - name: csi-node-driver-registrar
   dmap:
     "sha256:9622c6a6dac7499a055a382930f4de82905a3c5735c0753f7094115c9c871309": [ "v1.3.0" ]
     "sha256:273175c272162d480d06849e09e6e3cdb0245239e3a82df6630df3bc059c6571": [ "v1.2.0" ]
+    "sha256:6580572570d538aca0699a1aba3b986227ddbaa966bcfe8f9f1982a753975edc": [ "v2.0.0" ]
 - name: csi-provisioner
   dmap:
     "sha256:78e3393f5fd5ff6c1e5dada2478cfa456fb7164929e573cf9a87bf6532730679": [ "v1.6.0" ]
@@ -33,6 +35,7 @@
 - name: livenessprobe
   dmap:
     "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
+    "sha256:b0a9eb3e489150d79bff1c97681f34c579e6fcb1a4ed0289c19180eb83ebc83d": [ "v2.1.0" ]
 - name: mock-driver
   dmap:
     "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]
