@@ -88,7 +88,7 @@ done
 # - us-east1 cpu quota raised to 125
 # - us-east1 in-use addresses quota raised to 125
 E2E_SCALE_PROJECTS=()
-for i in $(seq 1 15); do
+for i in $(seq 1 30); do
   E2E_SCALE_PROJECTS+=($(printf "k8s-infra-e2e-boskos-scale-%02i" $i))
 done
 

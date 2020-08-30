@@ -154,6 +154,21 @@ data:
       - k8s-infra-e2e-boskos-scale-13
       - k8s-infra-e2e-boskos-scale-14
       - k8s-infra-e2e-boskos-scale-15
+      - k8s-infra-e2e-boskos-scale-16
+      - k8s-infra-e2e-boskos-scale-17
+      - k8s-infra-e2e-boskos-scale-18
+      - k8s-infra-e2e-boskos-scale-19
+      - k8s-infra-e2e-boskos-scale-20
+      - k8s-infra-e2e-boskos-scale-21
+      - k8s-infra-e2e-boskos-scale-22
+      - k8s-infra-e2e-boskos-scale-23
+      - k8s-infra-e2e-boskos-scale-24
+      - k8s-infra-e2e-boskos-scale-25
+      - k8s-infra-e2e-boskos-scale-26
+      - k8s-infra-e2e-boskos-scale-27
+      - k8s-infra-e2e-boskos-scale-28
+      - k8s-infra-e2e-boskos-scale-29
+      - k8s-infra-e2e-boskos-scale-30
       state: dirty
       type: scalability-project
 kind: ConfigMap
