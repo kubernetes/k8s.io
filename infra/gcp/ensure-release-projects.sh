@@ -147,7 +147,7 @@ RELEASE_BUCKETS=(
 )
 PROW_BUILD_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
 
-for BUCKET in "${ALL_BUCKETS[@]}"; do
+for BUCKET in "${RELEASE_BUCKETS[@]}"; do
     color 3 "Configuring bucket: ${BUCKET}"
 
     # Create the bucket
