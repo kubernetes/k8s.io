@@ -84,6 +84,7 @@ STAGING_PROJECTS=(
     multitenancy
     nfd
     npd
+    nvidia-gpu
     provider-azure
     publishing-bot
     releng

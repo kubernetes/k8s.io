@@ -1169,6 +1169,16 @@ groups:
       - lantaol@google.com
       - patrik@ptrk.io
       - zhenw@google.com
+  
+  - email-id: k8s-infra-staging-nvidia-gpu@kubernetes.io
+    name: k8s-infra-staging-nvidia-gpu
+    description: |-
+      ACL for Nvidia GPU device plugin
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - pradvenkat@google.com
+      - ruiwen@google.com
 
   - email-id: k8s-infra-staging-provider-azure@kubernetes.io
     name: k8s-infra-staging-provider-azure
