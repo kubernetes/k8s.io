@@ -367,7 +367,7 @@ color 6 "Handling special cases"
 
     color 6 "Empowering promoter-scanning namespace to use prod promoter vuln-dashboard svcacct"
     empower_ksa_to_svcacct \
-        "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-vuln-dashboard]" \
+        "k8s-prow.svc.id.goog[test-pods/k8s-infra-gcr-vuln-dashboard]" \
         "${PROD_PROJECT}" \
         $(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")
     empower_ksa_to_svcacct \
