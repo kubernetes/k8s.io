@@ -57,6 +57,16 @@ GCR_AUDIT_TEST_PROD_PROJECT="k8s-gcr-audit-test-prod"
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
+PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
+    "k8s-prow-build"
+    "k8s-infra-prow-build"
+)
+
+PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
+    "k8s-prow"
+    "k8s-infra-prow-build-trusted"
+)
+
 # This is a list of all prod projects.  Each project will be configured
 # similarly, with a GCR repository and a GCS bucket of the same name.
 #
@@ -318,16 +328,20 @@ color 6 "Handling special cases"
     #
     # For write access to k8s-artifacts-prod GCR.
     color 6 "Empowering promoter namespace to use prod promoter svcacct"
-    empower_ksa_to_svcacct \
-        "k8s-prow.svc.id.goog[test-pods/k8s-infra-gcr-promoter]" \
-        "${PROD_PROJECT}" \
-        $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")
+    for project in "${PROW_TRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
+        empower_ksa_to_svcacct \
+            "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter]" \
+            "${PROD_PROJECT}" \
+            $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")
+    done
     # For write access to k8s-artifacts-prod-bak GCR. This is only for backups.
     color 6 "Empowering promoter-bak namespace to use prod-bak promoter svcacct"
-    empower_ksa_to_svcacct \
-        "k8s-prow.svc.id.goog[test-pods/k8s-infra-gcr-promoter-bak]" \
-        "${PRODBAK_PROJECT}" \
-        $(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+    for project in "${PROW_TRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
+        empower_ksa_to_svcacct \
+            "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter-bak]" \
+            "${PRODBAK_PROJECT}" \
+            $(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+    done
     # For write access to:
     #   (1) k8s-gcr-backup-test-prod GCR
     #   (2) k8s-gcr-backup-test-prod-bak GCR.
@@ -338,10 +352,12 @@ color 6 "Handling special cases"
     # Also, note that the project name for the GKE cluster is "k8s-prow-builds",
     # which is the non-trusted Prow cluster.
     color 6 "Empowering promoter-test namespace to use backup-test-prod-bak promoter svcacct"
-    empower_ksa_to_svcacct \
-        "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-promoter-test]" \
-        "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" \
-        $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+    for project in "${PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
+        empower_ksa_to_svcacct \
+            "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter-test]" \
+            "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" \
+            $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+    done
 
     color 6 "Ensuring prod promoter vuln scanning svcacct exists"
     ensure_service_account \
@@ -350,14 +366,12 @@ color 6 "Handling special cases"
         "k8s-infra container image vuln scanning"
 
     color 6 "Empowering promoter-scanning namespace to use prod promoter vuln scanning svcacct"
-    empower_ksa_to_svcacct \
-        "k8s-prow-builds.svc.id.goog[test-pods/k8s-infra-gcr-vuln-scanning]" \
-        "${PROD_PROJECT}" \
-        $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
-    empower_ksa_to_svcacct \
-        "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-gcr-vuln-scanning]" \
-        "${PROD_PROJECT}" \
-        $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
+    for project in "${PROW_TRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
+        empower_ksa_to_svcacct \
+            "${project}.svc.id.goog[test-pods/k8s-infra-gcr-vuln-scanning]" \
+            "${PROD_PROJECT}" \
+            $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
+    done
 
     color 6 "Ensuring prod promoter vuln-dashboard svcacct exists"
     ensure_service_account \
@@ -366,15 +380,12 @@ color 6 "Handling special cases"
         "k8s-infra container image vuln scanning"
 
     color 6 "Empowering promoter-scanning namespace to use prod promoter vuln-dashboard svcacct"
-    empower_ksa_to_svcacct \
-        "k8s-prow.svc.id.goog[test-pods/k8s-infra-gcr-vuln-dashboard]" \
-        "${PROD_PROJECT}" \
-        $(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")
-    empower_ksa_to_svcacct \
-        "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-gcr-vuln-dashboard]" \
-        "${PROD_PROJECT}" \
-        $(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")
-
+    for project in "${PROW_TRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
+        empower_ksa_to_svcacct \
+            "${project}.svc.id.goog[test-pods/k8s-infra-gcr-vuln-dashboard]" \
+            "${PROD_PROJECT}" \
+            $(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")
+    done
 
     # Special case: grant the k8s-infra-gcr-vuln-dashboard account access to
     # write to the prod vuln dashboard GCS bucket.
