@@ -58,7 +58,7 @@ RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
 PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
-    "k8s-prow-build"
+    "k8s-prow-builds"
     "k8s-infra-prow-build"
 )
 
