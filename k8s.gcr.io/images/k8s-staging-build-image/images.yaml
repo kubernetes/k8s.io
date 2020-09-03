@@ -54,6 +54,7 @@
     "sha256:dac908eaa61d2034aec252576a470a7e4ab184c361f89170526f707a0c3c6082": ["v2.1.0"]
 - name: debian-hyperkube-base
   dmap:
+    "sha256:41754f0f74447a1d0989c1e8ce9c804cee6239d84e45fdca5ee8d9c52320b6dc": ["buster-v1.1.4"]
     "sha256:8c8d854d868fb08352f73dda94f9e0b998c7318b48ddc587a355d0cbaf687f14": ["v1.0.0"]
     "sha256:9190cda1ba1c1bf07eace001240d648a1d480bc55cc383b49f4d29d4f9ce6a51": ["buster-v1.1.3", "v1.1.3"]
     "sha256:ce7a6205a175f8eca8edc1bbff4c06516da523db6751085b6c7929d111fecb7f": ["v1.1.0"]
@@ -61,6 +62,7 @@
     "sha256:f7f47c37bf6b0fc4b168912edbd45550240cecaf96fd53dccbe06c2a6bd268f2": ["v1.1.1"]
 - name: debian-hyperkube-base-amd64
   dmap:
+    "sha256:2726491fe7ec4ae8d263f4b76633c765b0a179f7106ee830b17e0d438e17d45d": ["buster-v1.1.4"]
     "sha256:5cab0f210e47d4e04fe06fa0a20d8c7fde3bcfe14fe73b3eab3c7070790c4927": ["v1.1.0"]
     "sha256:73a8cb2bfd6707c8ed70c252e97bdccad8bc265a9a585db12b8e3dac50d6cd2a": ["v1.0.0"]
     "sha256:9f1f43babd36bfd2cce05a63b0331ed580c1fea876c833aae7036ffa5c6346c0": ["buster-v1.1.3", "v1.1.3"]
@@ -68,6 +70,7 @@
     "sha256:d0830921ae6c9636788ac89980bc8f77cb4a47fe53985f0b31b10d978a905a1a": ["v1.1.1"]
 - name: debian-hyperkube-base-arm
   dmap:
+    "sha256:13fd28dd0202e2cc7b751f203d8b617abb64e7268810acb17518a8f64924a719": ["buster-v1.1.4"]
     "sha256:16008b63c012d4052c004a6b1d2ae9d5b2cd341e474f0984808b3f808d86aa1a": ["v1.1.2"]
     "sha256:7321a64a58e942f0ba0fe5e2979b4ac22df2dcecedf7d118c4e643f5018b305a": ["v1.1.0"]
     "sha256:aee7c2958c6e0de896995e8b04c8173fd0a7bbb16cddb1f4668e3ae010b8c786": ["v1.0.0"]
@@ -80,11 +83,13 @@
     "sha256:a74fc6d690e5c5e393fd509f50d7203fa5cd19bfbb127d4a3a996fd1ebcf35c4": ["v1.0.0"]
     "sha256:c471afeec232448c2bafd52762a977470c85e4246ebca67bba544844f93b4b03": ["v1.1.1"]
     "sha256:e40601e9f1d173bf895321fd925d9442fcc71aaa4d5724527d418ba381147c98": ["v1.1.2"]
+    "sha256:ed53943d632a063766c134ba6929130ba27d40fe5cf9a17051f1d516eb9a68c4": ["buster-v1.1.4"]
 - name: debian-hyperkube-base-ppc64le
   dmap:
     "sha256:0ba61ab0ec8b2ed9501e4e1245119fd8af1c211eab0cf3bfddb1dbd95ed7ef08": ["buster-v1.1.3", "v1.1.3"]
     "sha256:54afd9a85d6ecbe0792496f36012e7902601fb8084347cdc195c8b0561da39a3": ["v1.0.0"]
     "sha256:5edc20fb8ffa3ea80880b3d45fe2cce4004e5784523eaebfd3086cac8c7452e3": ["v1.1.2"]
+    "sha256:905bc5d4c721c7cd842a42208f5393b6685c221f61ef5c88bb9b4a9a21b426de": ["buster-v1.1.4"]
     "sha256:d51068e84f5113af53ca5a1f917f7705b15dd968a42a0dda049c2c7b3ba9ff0e": ["v1.1.0"]
     "sha256:d62012612769d4d803ca8d78782a0b3643df362ddf338c9926738ea9dca9d624": ["v1.1.1"]
 - name: debian-hyperkube-base-s390x
@@ -92,6 +97,7 @@
     "sha256:38670cf1b300b532685aa102e860ab14950bb1f57bc5d51760bf9d0bf246c563": ["v1.1.2"]
     "sha256:405a94e6b82f2eb89c773e0e9f6105eb73cde5605d4508ae36a150d922fe1c66": ["v1.0.0"]
     "sha256:504417278bd2935f8ed72ebcc1bba6ae4deae9959b07769280fda2948fe76dd4": ["v1.1.1"]
+    "sha256:694bfcdecbd10069c48308b4ad87857448010c56673895a1f868c5ac6d8737d9": ["buster-v1.1.4"]
     "sha256:9251a1524956d960243ba42ee16274baa93942ee7514b1ef7a1c26f84e959dd8": ["v1.1.0"]
     "sha256:f031fe21b338443166ae00142d05601507f9959d1bce94b5d4f0dbe5cd75f64b": ["buster-v1.1.3", "v1.1.3"]
 - name: debian-iptables
