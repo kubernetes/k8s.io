@@ -101,7 +101,7 @@ groups:
       - seans@google.com
       - stephen.k8s@agst.us
       - szostok.mateusz@gmail.com
-      - tallclair@google.com
+      - timallclair@gmail.com
       - tasha.drew@gmail.com
       - theenjeru@gmail.com
       - thockin@google.com
@@ -141,7 +141,7 @@ groups:
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - tallclair@google.com
+      - timallclair@gmail.com
     members:
       # Associate PSC members
       - alextc@google.com
@@ -433,7 +433,7 @@ groups:
       - decarr@redhat.com
       - feiskyer@gmail.com
       - saschagrunert@gmail.com
-      - tallclair@google.com
+      - timallclair@gmail.com
       - thockin@google.com
 
   - email-id: k8s-infra-push-kind@kubernetes.io
@@ -1324,7 +1324,7 @@ groups:
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - tallclair@google.com
+      - timallclair@gmail.com
 
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
@@ -1342,7 +1342,7 @@ groups:
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - tallclair@google.com
+      - timallclair@gmail.com
 
   - email-id: steering-private@kubernetes.io
     name: steering-private
