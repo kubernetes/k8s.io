@@ -87,6 +87,7 @@ STAGING_PROJECTS=(
     provider-azure
     publishing-bot
     releng
+    scheduler-plugins
     seccomp-operator
     scl-image-builder
     service-apis
