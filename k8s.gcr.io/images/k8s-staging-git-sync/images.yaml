@@ -1,0 +1,3 @@
+- name: git-sync
+  dmap:
+    #"sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx": ["vx.y.z"]

@@ -70,6 +70,7 @@ STAGING_PROJECTS=(
     etcd
     etcdadm
     external-dns
+    git-sync
     infra-tools
     ingressconformance
     ingress-nginx
