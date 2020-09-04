@@ -6,6 +6,7 @@
   dmap:
     "sha256:9622c6a6dac7499a055a382930f4de82905a3c5735c0753f7094115c9c871309": [ "v1.3.0" ]
     "sha256:273175c272162d480d06849e09e6e3cdb0245239e3a82df6630df3bc059c6571": [ "v1.2.0" ]
+    "sha256:e07f914c32f0505e4c470a62a40ee43f84cbf8dc46ff861f31b14457ccbad108": [ "v2.0.1" ]
     "sha256:6580572570d538aca0699a1aba3b986227ddbaa966bcfe8f9f1982a753975edc": [ "v2.0.0" ]
 - name: csi-provisioner
   dmap:
@@ -27,8 +28,10 @@
     "sha256:7f93019f399454598370aab2cc1a652a3b8ff722ab92ec4ca9db0eed53acc4b4": [ "v1.1.0" ]
 - name: csi-external-health-monitor-agent
   dmap:
+    "sha256:f8eff7dc8187f1153faebd5d087e30f4580e00fcc1265fe2ab2472ec010db8f7": [ "v0.1.0" ]
 - name: csi-external-health-monitor-controller
   dmap:
+    "sha256:8d30fae5935c0b9fb537fe7744f1e6ce1f7c28383ff1eab636803a0f55910b46": [ "v0.1.0" ]
 - name: hostpathplugin
   dmap:
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
@@ -39,6 +42,8 @@
 - name: mock-driver
   dmap:
     "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]
+    "sha256:440277cf19e242ae2652c3bb7915197a628b0f4d0490a4cfd9cd15d8ee716407": [ "v4.0.0" ]
+    "sha256:6824ea165907f6b44913609d4f05305aa5aed9ea9a2b1b8f3c3b010a88616ac6": [ "v4.0.1" ]
 - name: nfs-provisioner
   dmap:
     "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
