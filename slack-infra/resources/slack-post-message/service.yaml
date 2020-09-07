@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: slack-post-message
+spec:
+  selector:
+    app: slack-post-message
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
