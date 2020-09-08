@@ -150,7 +150,8 @@ data:
       - k8s-infra-e2e-boskos-scale-09
       - k8s-infra-e2e-boskos-scale-10
       - k8s-infra-e2e-boskos-scale-11
-      - k8s-infra-e2e-boskos-scale-12
+      # TODO(https://github.com/kubernetes/kubernetes/issues/94450): Uncomment when resolved
+      #- k8s-infra-e2e-boskos-scale-12
       - k8s-infra-e2e-boskos-scale-13
       - k8s-infra-e2e-boskos-scale-14
       - k8s-infra-e2e-boskos-scale-15
