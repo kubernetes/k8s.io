@@ -1044,6 +1044,16 @@ groups:
       - difazio.raffaele@gmail.com
       - nick@juni.io
 
+  - email-id: k8s-infra-staging-git-sync@kubernetes.io
+    name: k8s-infra-staging-git-sync
+    description: |-
+      ACL for staging git-sync
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - thockin@google.com
+      - michaelg@okkur.org
+
   - email-id: k8s-infra-staging-infra-tools@kubernetes.io
     name: k8s-infra-staging-infra-tools
     description: |-
