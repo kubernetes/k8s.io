@@ -5,6 +5,7 @@ Cluster resources to deploy the following apps from [kubernetes-sigs/slack-infra
 - slack-event-log
 - slack-moderator
 - slack-welcomer
+- slack-post-message
 - slackin
 
 Secrets are stored in Secret Manager in the `kubernetes-public` project, with

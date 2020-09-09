@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-post-message
+  labels:
+    app: slack-post-message
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: slack-post-message
+  template:
+    metadata:
+      labels:
+        app: slack-post-message
+    spec:
+      containers:
+      - name: slack-post-message
+        image: gcr.io/k8s-staging-slack-infra/slack-post-message:v20200901-117c06f 
+        args:
+          - --config-path=/etc/slack-post-message/config.json
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: PATH_PREFIX
+          value: /infra/post-message
+        volumeMounts:
+        - mountPath: /etc/slack-post-message
+          name: config
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            scheme: HTTP
+            port: 8080
+      volumes:
+      - name: config
+        secret:
+          secretName: slack-post-message-config
