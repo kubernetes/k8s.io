@@ -78,23 +78,23 @@ Example of an update.
 ### Performing an update
 
 #### Update Pull Request
+
 First, the DNS administrator opens a PR with the requested update applied to the appropriate YAML file.
 Next, the requestor validates that the PR looks correct for their request and responds `/lgtm`
 
 The DNS administrator merges the PR once it has been LGTM'd
 
 #### Applying the update
-The DNS adminstrator applies the update using the instructions below. Once the update has been
-applied, the DNS administrator closes the issue.
 
-Note that in the future, we hope to automate this update so that it happens in response to the
-merge of the update PR.
+The update will be processed by
+[prow](https://github.com/kubernetes/test-infra/tree/master/prow)
+([job `post-k8sio-dns-update`](https://github.com/kubernetes/test-infra/blob/9ff09c1cc31965de97a1ed9b44cc7a1111406e19/config/jobs/kubernetes/wg-k8s-infra/trusted/wg-k8s-infra-trusted.yaml#L48-L68))
+and will start automatically after Pull Request will be merged. Once the
+update has been applied, the DNS administrator closes the issue.
 
-## How to update
+## How to update manually
 
 We use [OctoDNS](https://github.com/github/octodns) to manage the live config.
-Eventually we want this automated and triggered by git commits.  Until then,
-manual runs are OK.
 
 ### Docker image
 
@@ -120,7 +120,6 @@ make push
 To run it automated (with GCP service account creds), get the JSON for the
 service account, edit octodns-config.yaml and un-comment the `credentials_file`.
 
-
 ```
 # Assumes to be running in a checked-out git repo directory, and in the same
 # subdirectory as this file.
@@ -145,20 +144,10 @@ Administrative:
   * Usage report
   * Monitoring / alerts / on-call for DNS?
 
-How to automate:
-  * Need a k8s cluster to run it
-  * PR to github, cronjob in a cluster syncs
-  * PR to github, manually apply a configmap, inotify/poll in a deployment
-  * PR to github, webhook triggers run in a cluster
-  * How to handle "too many updates"?
-    * manual intervention?
-    * always --force?
-  * Push an official image to GCR
-    * When to rebuild?
-
 DNS content fixes:
   * Get owner names and comments on all records
   * Can we just have a * -> redirect.k8s.io as a catchall?
     * PRO: less rules overall, less churn
-    * CON: any rando URL will now land somewhere (we could make them 404, maybe?)
+    * CON: any random URL will now land somewhere (we could make them
+      404, maybe?)
   * Fix dl.k8s.io -> gcsweb or something useful
