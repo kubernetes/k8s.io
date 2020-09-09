@@ -93,6 +93,7 @@ STAGING_PROJECTS=(
     service-apis
     slack-infra
     sig-storage
+    storage-migrator
     txtdirect
 )
 
