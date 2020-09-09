@@ -18,12 +18,12 @@ From the "slack-infra" directory run:
 
 ```bash
 # Basic resources
-kubectl apply -n slack-infra -f resources/
+kubectl apply -n slack-infra -Rf resources/
 
 # Secrets (have to be deployed by a member of k8s-infra-rbac-slack-infra@kubernetes.io)
 for s in $(gcloud secrets list --project=kubernetes-public --filter="labels.app=slack-infra" --format="value(name)"); do
   gcloud secrets --project=kubernetes-public versions access latest --secret=$s |\
-    kubetctl apply -n slack-infra -f -
+    kubectl apply -n slack-infra -f -
 done
 ```
 
