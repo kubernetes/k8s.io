@@ -1,0 +1,6 @@
+# google group for gcr.io/k8s-staging-kops is k8s-infra-staging-kops@kubernetes.io
+filestores:
+- base: gs://k8s-staging-kops/kops/releases/
+  src: true
+- base: gs://k8s-artifacts-prod/binaries/kops/
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
