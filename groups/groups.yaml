@@ -1214,6 +1214,17 @@ groups:
       - nikitaraghunath@gmail.com
       - stefan.schimanski@gmail.com
 
+  - email-id: k8s-infra-staging-scheduler-plugins@kubernetes.io
+    name: k8s-infra-staging-scheduler-plugins
+    description: |-
+      ACL for staging scheduler-plugins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ahg@google.com
+      - hweicdl@gmail.com
+      - wangqingcan1990@gmail.com
+
   - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
     name: k8s-infra-staging-scl-image-builder
     description: |-
