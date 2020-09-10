@@ -582,8 +582,9 @@ groups:
       - cblecker@gmail.com
       - davanum@gmail.com
       - ktbry@google.com
-      - thockin@google.com
+      - rajula96reddy@gmail.com
       - spiffxp@google.com
+      - thockin@google.com
 
   - email-id: k8s-infra-prow-oncall@kubernetes.io
     name: k8s-infra-prow-oncall
@@ -1259,6 +1260,7 @@ groups:
       - bartek@smykla.com
       - ktbry@google.com
       - james@munnelly.eu
+      - rajula96reddy@gmail.com
 
   - email-id: k8s-infra-staging-txtdirect@kubernetes.io
     name: k8s-infra-staging-txtdirect
