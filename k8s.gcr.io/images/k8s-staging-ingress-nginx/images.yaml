@@ -15,6 +15,7 @@
     "sha256:d731d822e8a29627d91aac928a8c2b337c68d04b6abb248acbc1826f289f73d0": ["v20200811-g4ecd38dca"]
     "sha256:3bafc6840f2477c05eb029580fa8ecf4bd33b0f0765e3cd9cc82ad91f817ccf3": ["v20200812-g0673e5e17"]
     "sha256:ef38aa45e7ae82b311f3287e53c4e0b3f1c000b6394ffe5cdb74d25aa149c567": ["v20200903-g333288e75"]
+    "sha256:646a0815768536be16d180e4fb218d88527b42effadbeab39589261d916b17ee": ["v20200909-ge480f024e"]
 
 # image to run tests
 # https://github.com/kubernetes/ingress-nginx/tree/master/images/test-runner
