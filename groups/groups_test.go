@@ -188,6 +188,43 @@ func TestK8sInfraRBACGroupConventions(t *testing.T) {
 	}
 }
 
+// An e-mail address can only show up once within a given group, whether that
+// be as a member, manager, or owner
+func TestNoDuplicateMembers(t *testing.T) {
+	for _, g := range cfg.Groups {
+		members := map[string]bool{}
+		for _, m := range g.Members {
+			if _, ok := members[m]; ok {
+				t.Errorf("group '%s' cannot have duplicate member '%s'", g.EmailId, m)
+			}
+			members[m] = true
+		}
+		managers := map[string]bool{}
+		for _, m := range g.Managers {
+			if _, ok := members[m]; ok {
+				t.Errorf("group '%s' manager '%s' cannot also be listed as a member", g.EmailId, m)
+			}
+			if _, ok := managers[m]; ok {
+				t.Errorf("group '%s' cannot have duplicate manager '%s'", g.EmailId, m)
+			}
+			managers[m] = true
+		}
+		owners := map[string]bool{}
+		for _, m := range g.Owners {
+			if _, ok := members[m]; ok {
+				t.Errorf("group '%s' owner '%s' cannot also be listed as a member", g.EmailId, m)
+			}
+			if _, ok := managers[m]; ok {
+				t.Errorf("group '%s' owner '%s' cannot also be listed as a manager", g.EmailId, m)
+			}
+			if _, ok := owners[m]; ok {
+				t.Errorf("group '%s' cannot have duplicate owner '%s'", g.EmailId, m)
+			}
+			owners[m] = true
+		}
+	}
+}
+
 // NOTE: make very certain you know what you are doing if you change one
 // of these groups, we don't want to accidentally lock ourselves out
 func TestHardcodedGroupsForParanoia(t *testing.T) {

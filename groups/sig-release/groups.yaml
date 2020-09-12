@@ -154,7 +154,6 @@ groups:
       - hhorl@pivotal.io
       - idealhack@gmail.com
       - saugustus@vmware.com
-      - tpepper@vmware.com
 
   - email-id: release-managers@kubernetes.io
     name: release-managers
