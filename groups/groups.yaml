@@ -128,10 +128,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - aeva.online@gmail.com
-      - carolyn.vanslyck@microsoft.com
-      - jdumars@gmail.com
-      - jennifer.rondeau@gmail.com
       - tasha.drew@gmail.com
+      - celeste@cncf.io
+      - tpepper@vmware.com
+      - chu.karen.h@gmail.com 
 
   - email-id: distributors-announce@kubernetes.io
     name: distributors-announce
