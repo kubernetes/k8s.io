@@ -1,1 +1,9 @@
-# No images yet
+- name: storage-version-migration-initializer
+  dmap:
+    "sha256:953d447acf3e7522bad92b2b87b3a16de6e964ac1f309a79a3a28a4c3d3148de": ["v0.0.3"]
+- name: storage-version-migration-migrator
+  dmap:
+    "sha256:7847799bff35aa5dc1f2574d3785d7255851d7e3ce9e29694d5e3c7d0e82b647": ["v0.0.3"]
+- name: storage-version-migration-trigger
+  dmap:
+    "sha256:12d1c5147be527c0cd71faa1074d607f97e0945a6af60165ddfa77175a571ad4": ["v0.0.3"]
