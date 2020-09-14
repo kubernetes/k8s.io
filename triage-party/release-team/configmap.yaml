@@ -26,11 +26,11 @@ data:
 
 
     collections:
-      - id: daily
-        name: Daily Triage
+      - id: bug-triage
+        name: Bug Triage
         dedup: true
         description: >
-          queue to be emptied once a day
+          Dashboard tracking the current status of all issues and PRs targeting the current release (1.20).
         rules:
           - milestone-issues
           - urgent-issues
@@ -39,11 +39,11 @@ data:
     rules:
       ### Milestone ###
       milestone-issues:
-        name: "v1.19 Issues"
+        name: "v1.20 Issues"
         resolution: "Add a milestone/ label"
         type: issue
         filters:
-        - milestone: "v1.19"
+        - milestone: "v1.20"
 
       ### Daily Triage ####
       issue-needs-priority-overdue:
