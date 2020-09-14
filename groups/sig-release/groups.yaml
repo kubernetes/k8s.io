@@ -44,6 +44,7 @@ groups:
       - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
+      - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@vmware.com
@@ -61,7 +62,6 @@ groups:
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - linusa@google.com
-      - mudrinic.mare@gmail.com
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
       - saveetha13@gmail.com
@@ -153,6 +153,7 @@ groups:
       - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
+      - mudrinic.mare@gmail.com
       - saugustus@vmware.com
 
   - email-id: release-managers@kubernetes.io
