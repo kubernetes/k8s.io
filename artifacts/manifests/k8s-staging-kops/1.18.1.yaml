@@ -1,0 +1,25 @@
+files:
+- name: 1.18.1/darwin/amd64/kops
+  sha256: 03ae0e7150f39ce85c9bcfc729ad2cd39d491a1802a0f0a4398547143903b31b
+- name: 1.18.1/darwin/amd64/kops.sha1
+  sha256: 02f7a47c03c5893b855b0e5e637ad6c915832940921fdabda24d1847ac208184
+- name: 1.18.1/darwin/amd64/kops.sha256
+  sha256: 3c9412c551640aeda420aacd68d9149bc6ac5911727797a1ccaf1e0e2554c4fe
+- name: 1.18.1/images/protokube.tar.gz
+  sha256: 9c189dc0f1142b6bd3d15154fb417a5d9bbaace9e058bde8d5e7f5a387c371a4
+- name: 1.18.1/images/protokube.tar.gz.sha1
+  sha256: 8d4da9cd00639fbe765abfdd0ddda2234ca0129517b97d95846be0ca206496fd
+- name: 1.18.1/images/protokube.tar.gz.sha256
+  sha256: f37b4e945548db541246c72e44266fd8e93059ada4c9358d72b58ed3f80511b2
+- name: 1.18.1/linux/amd64/kops
+  sha256: 22d8a564fd2155271c9f4c06aaa1dc935bb296b24108731bc72d1317306106ae
+- name: 1.18.1/linux/amd64/kops.sha1
+  sha256: e92838093753e6e6b39c63e44d0cc5fe3aa965aa638f414f29405fa058c4eca9
+- name: 1.18.1/linux/amd64/kops.sha256
+  sha256: 55315b681ba97d591a4a6b23b07510eac206cc4e89a4c2bf6e5cc4bb858993f1
+- name: 1.18.1/linux/amd64/nodeup
+  sha256: e50a56389bce4a5f15259fa84daa30f8bac33ef47a35cbb8a9c40a91aaa2c7c9
+- name: 1.18.1/linux/amd64/nodeup.sha1
+  sha256: be637d2bc437d683e889e1ae0c5bd33ab60712f5ec463b764533fa4e9fa5630b
+- name: 1.18.1/linux/amd64/nodeup.sha256
+  sha256: ff52b4b656887fca88c1bf4e5d9d36f70afb80f088c7ded3199f857d813ae65e
