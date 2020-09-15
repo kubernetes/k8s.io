@@ -256,3 +256,24 @@ groups:
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
       - rob.kielty@gmail.com # 1.20 CI Signal Lead
       - v@gor.io # 1.20 Bug Triage Lead
+
+  - email-id: release-team-shadows@kubernetes.io
+    name: release-team-shadows
+    description: |-
+      Release Team Shadow Communications.
+      Includes SIG Release Leads, EA and Current Release Team Shadows.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - alarcj137@gmail.com
+      - lauri.d.apple@gmail.com
+      - saschagrunert@gmail.com
+      - stephen.k8s@agst.us
+      - tpepper@vmware.com
+    managers:
+      - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
+    members:
+      - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
+      - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
+      - saveetha13@gmail.com # 1.20 RT Lead Shadow
