@@ -36,6 +36,19 @@ data:
           - urgent-issues
           - urgent-prs
 
+      - id: milestone
+        name: Current Milestone
+        dedup: true
+        description: >
+          A Kanban visualization of milestones, showing the flow of issues through each stage.
+        rules:
+          - milestone-not-started
+          - milestone-assignee-updated
+          - milestone-pr-needs-review
+          - milestone-pr-needs-work
+          - milestone-pr-needs-merge
+          - milestone-recently-closed
+
     rules:
       ### Milestone ###
       milestone-issues:
@@ -44,6 +57,47 @@ data:
         type: issue
         filters:
         - milestone: "v1.20"
+
+      ### Milestone Kanban ###
+      milestone-not-started:
+        name: "Not started"
+        type: issue
+        filters:
+          - tag: open-milestone
+          - tag: "!assignee-updated"
+          - tag: "!(assignee-open-pr|assignee-closed-pr)"
+      milestone-assignee-updated:
+        name: "In Progress"
+        type: issue
+        filters:
+          - tag: open-milestone
+          - tag: "assignee-updated"
+          - tag: "!(pr-changes-requested|pr-reviewer-comment|pr-unreviewed|pr-new-commits|pr-approved|pr-changes-requested)"
+      milestone-pr-needs-merge:
+        name: "PR needs Merge"
+        type: issue
+        filters:
+          - tag: open-milestone
+          - tag: "(pr-approved|pr-approved-but-pushed)"
+      milestone-pr-needs-review:
+        name: "PR needs Review"
+        type: issue
+        filters:
+          - tag: open-milestone
+          - tag: "(pr-unreviewed|pr-new-commits)"
+      milestone-pr-needs-work:
+        name: "PR needs work"
+        type: issue
+        filters:
+          - tag: open-milestone
+          - tag: "(pr-changes-requested|pr-reviewer-comment)"
+      milestone-recently-closed:
+        name: "Finish Line"
+        type: issue
+        filters:
+          - tag: open-milestone
+          - state: closed
+          - updated: -30d
 
       ### Daily Triage ####
       issue-needs-priority-overdue:
