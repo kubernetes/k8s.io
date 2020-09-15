@@ -44,6 +44,7 @@ groups:
       - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
+      - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
       - tpepper@vmware.com
@@ -57,11 +58,13 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+      - adolfo.garcia@uservers.net
+      - gianarb92@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - linusa@google.com
-      - mudrinic.mare@gmail.com
+      - max@koerbaecher.io
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
       - saveetha13@gmail.com
@@ -153,6 +156,7 @@ groups:
       - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
+      - mudrinic.mare@gmail.com
       - saugustus@vmware.com
 
   - email-id: release-managers@kubernetes.io
@@ -172,12 +176,14 @@ groups:
       - tpepper@gmail.com
       - tpepper@vmware.com
     members:
+      - adolfo.garcia@uservers.net
       - amwat@google.com
       - bentheelder@google.com
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
       - georgedanielmangum@gmail.com
+      - gianarb92@gmail.com
       - gmccloskey@google.com
       - gveronicalg@gmail.com
       - hhorl@pivotal.io
@@ -185,6 +191,7 @@ groups:
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - lauri.d.apple@gmail.com
+      - max@koerbaecher.io
       - mudrinic.mare@gmail.com
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
