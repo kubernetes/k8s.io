@@ -1173,6 +1173,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - alexander.kanevskiy@intel.com
+      - carangog@redhat.com
       - jordanjacobelli04@gmail.com
       - markus.lehtonen@intel.com
       - zkosic@redhat.com
