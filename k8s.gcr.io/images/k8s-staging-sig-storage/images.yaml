@@ -14,6 +14,8 @@
     "sha256:6fe39f4682c8677af7761948b196f27c45de566fb5f1612bb8114cd68bfe535e": [ "v1.5.0" ]
     "sha256:438c04395d03fa671f8656d6f951332516754e330d1ac4f9588df1ba2870a366": [ "v1.4.0" ]
     "sha256:271b0049ba7885e536d575a72ef56ab3b94c6989f36812d3fe4d886c4d8aed96": [ "v2.0.0" ]
+    "sha256:1de3c0ebd7089014b975f12c02433ca5307cfc7a1071a3ba212afffa8eeb9aa6": [ "v2.0.2" ]
+    "sha256:95eb3a3aecc127cf632bdea2b48d676dbe28fe5fa8cf24bd11f26402ace8d888": [ "v2.0.1" ]
 - name: csi-resizer
   dmap:
     "sha256:6c6a0332693a7c456378f6abd2bb40611826c1e1a733cadbdae2daab3125b71c": [ "v0.5.0" ]
@@ -27,6 +29,7 @@
     "sha256:46ec7b441027cb6db9f7a5b3355623c18fe7da9d4095c2816f48ffc8ad47c170": [ "v1.2.2" ]
     "sha256:4e78bb0116555a10ef59c1cdf0648b06b483903a1919def5e3c7ba68b9fa08cb": [ "v1.2.0" ]
     "sha256:7f93019f399454598370aab2cc1a652a3b8ff722ab92ec4ca9db0eed53acc4b4": [ "v1.1.0" ]
+    "sha256:ece29e2217e0faf87973565c062c8508c2b78039169e855032bb357acefa3c98": [ "v3.0.0" ]
 - name: csi-external-health-monitor-agent
   dmap:
     "sha256:f8eff7dc8187f1153faebd5d087e30f4580e00fcc1265fe2ab2472ec010db8f7": [ "v0.1.0" ]
@@ -51,3 +54,4 @@
 - name: snapshot-controller
   dmap:
     "sha256:2bde7d7f9d73c4309d67e9d7f94df52110295ef06c9488ca76c40da32b65f05e": [ "v2.1.1" ]
+    "sha256:36ca32433c069246ea8988a7b3dbdf0aabf8345be9122b8a25426e6c487878de": [ "v3.0.0" ]
