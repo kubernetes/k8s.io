@@ -1,1 +1,72 @@
-# No images yet
+- name: k8s-dns-dnsmasq-nanny
+  dmap:
+    "sha256:8e1873e7d4fbec1613b5254c118737d69607c028fb4c6d1c68b152814c611c2c": ["1.15.14"]
+- name: k8s-dns-dnsmasq-nanny-amd64
+  dmap:
+    "sha256:3cbde8048c55d0005eb203b7f2cfe50b1b7d374937340a159cb0affed93f5be9": ["1.15.14"]
+- name: k8s-dns-dnsmasq-nanny-arm
+  dmap:
+    "sha256:5756ed1bdc0d7669c88841bac36b3573068719d827c3a288b5a7a9e0770a77a0": ["1.15.14"]
+- name: k8s-dns-dnsmasq-nanny-arm64
+  dmap:
+    "sha256:bf684bcd490d27779431f182e9102be2994bc6b08e707ef9a1493f379003baa2": ["1.15.14"]
+- name: k8s-dns-dnsmasq-nanny-ppc64le
+  dmap:
+    "sha256:4166e7863ed41a6169bce97e00873e0c82ce953e29b6c652f52614388ba0d684": ["1.15.14"]
+- name: k8s-dns-dnsmasq-nanny-s390x
+  dmap:
+    "sha256:573dddb92bb0c6757a399f1858aab7790501b6a445e6614fdb6cb340983310e8": ["1.15.14"]
+- name: k8s-dns-kube-dns
+  dmap:
+    "sha256:2dc9dfc8e4094db36d36e1f2836f264280eeb9e83ef1016d920a7f1d1d5e33d7": ["1.15.14"]
+- name: k8s-dns-kube-dns-amd64
+  dmap:
+    "sha256:115730a02727798dd847a727baa3d9d6f94d66a06b10833d0ae7f04e2989bac9": ["1.15.14"]
+- name: k8s-dns-kube-dns-arm
+  dmap:
+    "sha256:a046c1f5d971a0a4d3ac2c106d6c7427b9df267308e57b7db9804dcf1be954f1": ["1.15.14"]
+- name: k8s-dns-kube-dns-arm64
+  dmap:
+    "sha256:b57e1f560da2012dcb13fa53760401c340b1b9cd6d57a73e9ebc05d98422bab8": ["1.15.14"]
+- name: k8s-dns-kube-dns-ppc64le
+  dmap:
+    "sha256:3589f34e7c1595c19dd99f22117f6e1c086724e7ccdefdc4c4b8d1ad28d69a2f": ["1.15.14"]
+- name: k8s-dns-kube-dns-s390x
+  dmap:
+    "sha256:76f68341b9cffc2c8e794db12c885d26e48b72700767d81e7e8b653d1b5de253": ["1.15.14"]
+- name: k8s-dns-sidecar
+  dmap:
+    "sha256:9d74628cb30efd18162ce2c818bdac6d674c19ac3d063a5c9390b14d2334ca1e": ["1.15.14"]
+- name: k8s-dns-sidecar-amd64
+  dmap:
+    "sha256:4aaacce85eec917f2f7f96652f1418781d0a78bed4f93d96496e77ee80f75ac2": ["1.15.14"]
+- name: k8s-dns-sidecar-arm
+  dmap:
+    "sha256:a7f439319b896e1d1613cc436d2a7ca96fb0f24df609348fe220f3dc447f39d9": ["1.15.14"]
+- name: k8s-dns-sidecar-arm64
+  dmap:
+    "sha256:25dd6378e526d5ebe0d5ba77bac6538e3c1aa9063d8587f714a1a6f564a13929": ["1.15.14"]
+- name: k8s-dns-sidecar-ppc64le
+  dmap:
+    "sha256:f49affbb7036d95f233fac883877269423bb0538c03516dac587b13b6822a4c0": ["1.15.14"]
+- name: k8s-dns-sidecar-s390x
+  dmap:
+    "sha256:2906f9867c635617b148029a998024ecccf1f2874cf272809b4cd007d7f7da36": ["1.15.14"]
+- name: k8s-dns-node-cache
+  dmap:
+    "sha256:140f63dddfcdeb898cd3ae4a505988bdca29f79cd43d08f506936db1c94cadab": ["1.15.14"]
+- name: k8s-dns-node-cache-amd64
+  dmap:
+    "sha256:5f375a8a6e7498c9eb1f47b97e18fbfe8b3fc7a22bad61c05c8720d6819e41aa": ["1.15.14"]
+- name: k8s-dns-node-cache-arm
+  dmap:
+    "sha256:aa526d5715696ecbc2d459304b95c6160c7cb2f4d37bb3769d3de859cccbd457": ["1.15.14"]
+- name: k8s-dns-node-cache-arm64
+  dmap:
+    "sha256:b6a67375f599bb49cd9a70af96cbe5e455163ae898330ee1dd5550452ea30f29": ["1.15.14"]
+- name: k8s-dns-node-cache-ppc64le
+  dmap:
+    "sha256:3dd8f4b6e4ead97218f1f1b3d3c20ea52cdff7ab152e3adb848500d6cb2c7675": ["1.15.14"]
+- name: k8s-dns-node-cache-s390x
+  dmap:
+    "sha256:4f2903a9861298bb90f63ac9173cdd013e57e8c7d89681a4fd7b20d8d8a70b53": ["1.15.14"]
