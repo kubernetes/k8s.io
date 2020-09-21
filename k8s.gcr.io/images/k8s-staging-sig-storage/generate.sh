@@ -14,6 +14,7 @@ livenessprobe
 mock-driver
 nfs-provisioner
 snapshot-controller
+snapshot-validation-webhook
 "
 
 for repo in $repos; do
