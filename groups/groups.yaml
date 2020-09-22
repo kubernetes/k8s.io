@@ -833,7 +833,7 @@ groups:
     members:
       - justinsb@google.com
       - kim.andrewsy@gmail.com
-      - nckturner@amazon.com
+      - nturner4@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     name: k8s-infra-staging-cluster-api
