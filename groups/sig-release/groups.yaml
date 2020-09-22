@@ -251,11 +251,15 @@ groups:
       - sig-release-leads@kubernetes.io
       - antheabjung@gmail.com # 1.20 Docs Lead
       - james@jameslaverack.com # 1.20 Release Notes Lead
+      - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.20 Communications Lead
+      - kefroden@gmail.com # 1.20 RT Enhancements Shadow
       - kikis.github@gmail.com # 1.20 Enhancements Lead
       - kcmartin2@mac.com # 1.20 Docs Shadow
+      - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
       - leslie@eagleusb.com # 1.20 Docs Shadow
+      - mik.json@gmail.com # 1.20 RT Enhancements Shadow
       - rey.lejano@rx-m.com # 1.20 Docs Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
       - rob.kielty@gmail.com # 1.20 CI Signal Lead
@@ -293,3 +297,7 @@ groups:
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
+      - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
+      - kefroden@gmail.com # 1.20 RT Enhancements Shadow
+      - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
+      - mik.json@gmail.com # 1.20 RT Enhancements Shadow
