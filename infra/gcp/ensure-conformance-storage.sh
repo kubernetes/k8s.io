@@ -96,50 +96,52 @@ for REPO; do
     color 6 "Empowering ${BUCKET_WRITERS} to GCS"
     empower_group_to_write_gcs_bucket "${BUCKET_WRITERS}" "${BUCKET}"
 
-    readonly SERVICE_ACCOUNT_NAME="service-${REPO}"
-    readonly SERVICE_ACCOUNT_EMAIL="$(svc_acct_email "${PROJECT}" \
-        "${SERVICE_ACCOUNT_NAME}")"
-    readonly SECRET_ID="${SERVICE_ACCOUNT_NAME}-key"
-    readonly TMP_DIR=$(mktemp -d "/tmp/${SERVICE_ACCOUNT_NAME}.XXXXXX")
-    readonly KEY_FILE="${TMP_DIR}/key.json"
+    (
+        readonly SERVICE_ACCOUNT_NAME="service-${REPO}"
+        readonly SERVICE_ACCOUNT_EMAIL="$(svc_acct_email "${PROJECT}" \
+            "${SERVICE_ACCOUNT_NAME}")"
+        readonly SECRET_ID="${SERVICE_ACCOUNT_NAME}-key"
+        readonly TMP_DIR=$(mktemp -d "/tmp/${SERVICE_ACCOUNT_NAME}.XXXXXX")
+        readonly KEY_FILE="${TMP_DIR}/key.json"
 
-    # Clean tmp dir when exit
-    trap 'rm -rf "${TMP_DIR}"' EXIT
+        # Clean tmp dir when exit
+        trap 'rm -rf "${TMP_DIR}"' EXIT
 
-    if ! gcloud iam service-accounts describe "${SERVICE_ACCOUNT_EMAIL}" \
-        --project "${PROJECT}" >/dev/null 2>&1
-    then
-        color 6 "Creating service account: ${SERVICE_ACCOUNT_NAME}"
-        ensure_service_account \
-            "${PROJECT}" \
-            "${SERVICE_ACCOUNT_NAME}" \
-            "${SERVICE_ACCOUNT_NAME}"
+        if ! gcloud iam service-accounts describe "${SERVICE_ACCOUNT_EMAIL}" \
+            --project "${PROJECT}" >/dev/null 2>&1
+        then
+            color 6 "Creating service account: ${SERVICE_ACCOUNT_NAME}"
+            ensure_service_account \
+                "${PROJECT}" \
+                "${SERVICE_ACCOUNT_NAME}" \
+                "${SERVICE_ACCOUNT_NAME}"
 
-        color 6 "Empowering service account: ${SERVICE_ACCOUNT_NAME} to GCS"
-        empower_svcacct_to_write_gcs_bucket \
-            "${SERVICE_ACCOUNT_EMAIL}" \
-            "${BUCKET}"
+            color 6 "Empowering service account: ${SERVICE_ACCOUNT_NAME} to GCS"
+            empower_svcacct_to_write_gcs_bucket \
+                "${SERVICE_ACCOUNT_EMAIL}" \
+                "${BUCKET}"
 
-        color 6 "Creating private key for service account: ${SERVICE_ACCOUNT_NAME}"
-        gcloud iam service-accounts keys create "${KEY_FILE}" \
-            --project "${PROJECT}" \
-            --iam-account "${SERVICE_ACCOUNT_EMAIL}"
-        
-        color 6 "Creating secret to store private key"
-        gcloud secrets create "${SECRET_ID}" \
-            --project "${PROJECT}" \
-            --replication-policy "automatic"
+            color 6 "Creating private key for service account: ${SERVICE_ACCOUNT_NAME}"
+            gcloud iam service-accounts keys create "${KEY_FILE}" \
+                --project "${PROJECT}" \
+                --iam-account "${SERVICE_ACCOUNT_EMAIL}"
+            
+            color 6 "Creating secret to store private key"
+            gcloud secrets create "${SECRET_ID}" \
+                --project "${PROJECT}" \
+                --replication-policy "automatic"
 
-        color 6 "Adding private key to secret"
-        gcloud secrets versions add "${SECRET_ID}" \
-            --project "${PROJECT}" \
-            --data-file "${KEY_FILE}"
+            color 6 "Adding private key to secret"
+            gcloud secrets versions add "${SECRET_ID}" \
+                --project "${PROJECT}" \
+                --data-file "${KEY_FILE}"
 
-        color 6 "Empowering ${BUCKET_WRITERS} for read secret"
-        gcloud secrets add-iam-policy-binding "${SECRET_ID}" \
-            --project "${PROJECT}" \
-            --member "group:${BUCKET_WRITERS}" \
-            --role "roles/secretmanager.secretAccessor"
-    fi
+            color 6 "Empowering ${BUCKET_WRITERS} for read secret"
+            gcloud secrets add-iam-policy-binding "${SECRET_ID}" \
+                --project "${PROJECT}" \
+                --member "group:${BUCKET_WRITERS}" \
+                --role "roles/secretmanager.secretAccessor"
+        fi
+    )
 done 2>&1 | indent
 color 6 "Done"
