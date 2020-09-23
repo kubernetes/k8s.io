@@ -256,6 +256,8 @@ groups:
     members:
       - sig-release-leads@kubernetes.io
       - antheabjung@gmail.com # 1.20 Docs Lead
+      - celeste@cncf.io # 1.20 Release Notes Shadow
+      - jackytan@Outlook.com # 1.20 Release Notes Shadow
       - james@jameslaverack.com # 1.20 Release Notes Lead
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.20 Communications Lead
@@ -268,12 +270,14 @@ groups:
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
       - rey.lejano@rx-m.com # 1.20 Docs Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
+      - soniasingla.1812@gmail.com # 1.20 Release Notes Shadow
       - rob.kielty@gmail.com # 1.20 CI Signal Lead
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - v@gor.io # 1.20 Bug Triage Lead
+      - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -292,11 +296,13 @@ groups:
     managers:
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
     members:
+      - celeste@cncf.io # 1.20 Release Notes Shadow
       - dcampau1@gmail.com # 1.20 Bug Triage Shadow
       - droslean@gmail.com # 1.20 Bug Triage Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
+      - jackytan@Outlook.com # 1.20 Release Notes Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - kcmartin2@mac.com # 1.20 Docs Shadow
       - kefroden@gmail.com # 1.20 RT Enhancements Shadow
@@ -311,4 +317,6 @@ groups:
       - saveetha13@gmail.com # 1.20 RT Lead Shadow
       - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
+      - soniasingla.1812@gmail.com # 1.20 Release Notes Shadow
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
+      - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
