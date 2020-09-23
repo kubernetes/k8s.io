@@ -695,6 +695,18 @@ groups:
       - kevinwzf0126@gmail.com # Google account of wangzefeng@huawei.com
       - qdurenhongcai@gmail.com # Google account of renhongcai@huawei.com
 
+  - email-id: k8s-infra-conform-s390x@kubernetes.io
+    name: k8s-infra-conform-s390x
+    description: |-
+      ACL for conformance s390x
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aborkar@us.ibm.com
+      - cinderel@ca.ibm.com
+      - gsalgaon@us.ibm.com
+      - rajas.kakodkar@ibm.com
+
   #
   # Staging groups: k8s-infra-staging-*
   #
