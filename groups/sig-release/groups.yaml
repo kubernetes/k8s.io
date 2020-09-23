@@ -253,8 +253,12 @@ groups:
       - james@jameslaverack.com # 1.20 Release Notes Lead
       - joseph.r.sandoval@gmail.com # 1.20 Communications Lead
       - kikis.github@gmail.com # 1.20 Enhancements Lead
+      - kcmartin2@mac.com # 1.20 Docs Shadow
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
+      - leslie@eagleusb.com # 1.20 Docs Shadow
+      - rey.lejano@rx-m.com # 1.20 Docs Shadow
       - rob.kielty@gmail.com # 1.20 CI Signal Lead
+      - somtochionyekwere@gmail.com # 1.20 Docs Shadow
       - v@gor.io # 1.20 Bug Triage Lead
 
   - email-id: release-team-shadows@kubernetes.io
@@ -275,5 +279,9 @@ groups:
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
     members:
       - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
+      - kcmartin2@mac.com # 1.20 Docs Shadow
+      - leslie@eagleusb.com # 1.20 Docs Shadow
       - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
+      - rey.lejano@rx-m.com # 1.20 Docs Shadow
       - saveetha13@gmail.com # 1.20 RT Lead Shadow
+      - somtochionyekwere@gmail.com # 1.20 Docs Shadow
