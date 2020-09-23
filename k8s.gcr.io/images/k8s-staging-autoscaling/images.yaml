@@ -15,12 +15,15 @@
 - name: vpa-admission-controller
   dmap:
     "sha256:29525bd6a967d255bf2f4a3f47c759b093b359d019a66b1ccbefae2e3cf3fdfb": ["0.8.0"]
+    "sha256:748abc8e6b4c2e0082d3a28fdefd90eee442f8331245e58499337ff671a73599": ["0.8.1"]
 - name: vpa-recommender
   dmap:
     "sha256:87ab478afdfb31700aa58c848c2fa83b07e9cd9e0261bf447f8b510f03b86a44": ["0.8.0"]
+    "sha256:912a864cfa31493346f30880ad73d8961c227bfa4db9bbe1b221eb1731e90dd4": ["0.8.1"]
 - name: vpa-updater
   dmap:
     "sha256:36d9f96c469c9e91663124d06feb0a33142cfb197b92d2c0aa69367242060776": ["0.8.0"]
+    "sha256:2a746af0550cfd17a7aaf536266a6eaa53f6404a9034a2968189235fc06cbe2e": ["0.8.1"]
 
 - name: addon-resizer
   dmap:
