@@ -10,11 +10,15 @@ groups:
       - k8s-infra-release-viewers@kubernetes.io
       - ameukam@gmail.com
       - bartek@smykla.com
-      - droslean@gmail.com
       - gianarb92@gmail.com # 1.19 Bug Triage Lead
-      - jtslear@gmail.com
-      - kmbruner@gmail.com
-      - v@gor.io
+      - jtslear@gmail.com  # 1.19 Bug Triage Shadow
+      - kmbruner@gmail.com   # 1.19 Bug Triage Shadow
+      - droslean@gmail.com # 1.20 Bug Triage Shadow
+      - max@koerbaecher.io # 1.20 Bug Triage Shadow
+      - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
+      - dcampau1@gmail.com # 1.20 Bug Triage Shadow
+      - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
+      - v@gor.io # 1.20 Bug Triage Lead
 
   - email-id: k8s-infra-release-admins@kubernetes.io
     name: k8s-infra-release-admins
@@ -301,3 +305,8 @@ groups:
       - kefroden@gmail.com # 1.20 RT Enhancements Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
+      - droslean@gmail.com # 1.20 Bug Triage Shadow
+      - max@koerbaecher.io # 1.20 Bug Triage Shadow
+      - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
+      - dcampau1@gmail.com # 1.20 Bug Triage Shadow
+      - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
