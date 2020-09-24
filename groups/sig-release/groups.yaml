@@ -10,11 +10,15 @@ groups:
       - k8s-infra-release-viewers@kubernetes.io
       - ameukam@gmail.com
       - bartek@smykla.com
-      - droslean@gmail.com
+      - dcampau1@gmail.com # 1.20 Bug Triage Shadow
+      - droslean@gmail.com # 1.20 Bug Triage Shadow
       - gianarb92@gmail.com # 1.19 Bug Triage Lead
-      - jtslear@gmail.com
-      - kmbruner@gmail.com
-      - v@gor.io
+      - jtslear@gmail.com  # 1.19 Bug Triage Shadow
+      - kmbruner@gmail.com   # 1.19 Bug Triage Shadow
+      - max@koerbaecher.io # 1.20 Bug Triage Shadow
+      - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
+      - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
+      - v@gor.io # 1.20 Bug Triage Lead
 
   - email-id: k8s-infra-release-admins@kubernetes.io
     name: k8s-infra-release-admins
@@ -286,18 +290,23 @@ groups:
     managers:
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
     members:
-      - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
-      - kcmartin2@mac.com # 1.20 Docs Shadow
-      - leslie@eagleusb.com # 1.20 Docs Shadow
-      - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
-      - rey.lejano@rx-m.com # 1.20 Docs Shadow
-      - saveetha13@gmail.com # 1.20 RT Lead Shadow
-      - somtochionyekwere@gmail.com # 1.20 Docs Shadow
-      - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
-      - thejoycekung@gmail.com # 1.20 CI Signal Shadow
-      - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
+      - dcampau1@gmail.com # 1.20 Bug Triage Shadow
+      - droslean@gmail.com # 1.20 Bug Triage Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
+      - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
+      - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
+      - kcmartin2@mac.com # 1.20 Docs Shadow
       - kefroden@gmail.com # 1.20 RT Enhancements Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
+      - leslie@eagleusb.com # 1.20 Docs Shadow
+      - max@koerbaecher.io # 1.20 Bug Triage Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
+      - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
+      - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
+      - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
+      - rey.lejano@rx-m.com # 1.20 Docs Shadow
+      - saveetha13@gmail.com # 1.20 RT Lead Shadow
+      - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
+      - somtochionyekwere@gmail.com # 1.20 Docs Shadow
+      - thejoycekung@gmail.com # 1.20 CI Signal Shadow
