@@ -1,0 +1,10 @@
+# google group for gcr.io/k8s-staging-addon-manager is k8s-infra-staging-addon-manager@kubernetes.io
+registries:
+- name: gcr.io/k8s-staging-addon-manager
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod/addon-manager
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/addon-manager
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/addon-manager
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com 

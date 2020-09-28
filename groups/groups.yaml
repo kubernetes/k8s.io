@@ -713,6 +713,16 @@ groups:
   # Each group here governs access to one staging project.
   #
 
+  - email-id: k8s-infra-staging-addon-manager@kubernetes.io
+    name: k8s-infra-staging-addon-manager
+    description: |-
+      ACL for staging addon-manager images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jsand@google.com
+      - zihongz@google.com
+
   - email-id: k8s-infra-staging-apisnoop@kubernetes.io
     name: k8s-infra-staging-apisnoop
     description: |-

@@ -41,6 +41,7 @@ PROD_PROJECT="k8s-artifacts-prod"
 
 # NB: Please keep this sorted.
 STAGING_PROJECTS=(
+    addon-manager
     apisnoop
     artifact-promoter
     autoscaling
