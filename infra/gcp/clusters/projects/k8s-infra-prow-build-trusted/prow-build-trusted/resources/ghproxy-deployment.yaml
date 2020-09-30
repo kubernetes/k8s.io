@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: ghproxy
+  labels:
+    app: ghproxy
+spec:
+  selector:
+    matchLabels:
+      app: ghproxy
+  replicas: 1 # TODO(fejta): this should be HA
+  template:
+    metadata:
+      labels:
+        app: ghproxy
+    spec:
+      containers:
+        - name: ghproxy
+          image: gcr.io/k8s-prow/ghproxy:v20200611-4c51f3fcb1
+          args:
+            - --cache-dir=/cache
+            - --cache-sizeGB=99
+            # TODO: uncomment once the monitoring.prow.k8s.io and pushgateway are migrated
+            #- --push-gateway=pushgateway
+            - --serve-metrics=true
+          ports:
+            - containerPort: 8888
+          volumeMounts:
+            - name: cache
+              mountPath: /cache
+      volumes:
+        - name: cache
+          persistentVolumeClaim:
+            claimName: ghproxy
