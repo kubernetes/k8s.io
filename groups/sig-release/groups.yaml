@@ -282,6 +282,7 @@ groups:
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - v@gor.io # 1.20 Bug Triage Lead
       - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
+      - xander@grzy.dev # 1.20 Comms Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -328,3 +329,4 @@ groups:
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
       - tony@gosselin.it # 1.20 Comms Shadow
       - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
+      - xander@grzy.dev # 1.20 Comms Shadow
