@@ -257,6 +257,8 @@ groups:
       - sig-release-leads@kubernetes.io
       - antheabjung@gmail.com # 1.20 Docs Lead
       - celeste@cncf.io # 1.20 Release Notes Shadow
+      - chris@chrisshort.net # 1.20 Comms Shadow
+      - divya.mohan0209@gmail.com # 1.20 Comms Shadow
       - jackytan@Outlook.com # 1.20 Release Notes Shadow
       - james@jameslaverack.com # 1.20 Release Notes Lead
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
@@ -269,8 +271,10 @@ groups:
       - leslie@eagleusb.com # 1.20 Docs Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
       - rey.lejano@rx-m.com # 1.20 Docs Shadow
+      - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
       - soniasingla.1812@gmail.com # 1.20 Release Notes Shadow
+      - tony@gosselin.it # 1.20 Comms Shadow
       - rob.kielty@gmail.com # 1.20 CI Signal Lead
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
@@ -297,7 +301,9 @@ groups:
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
     members:
       - celeste@cncf.io # 1.20 Release Notes Shadow
+      - chris@chrisshort.net # 1.20 Comms Shadow
       - dcampau1@gmail.com # 1.20 Bug Triage Shadow
+      - divya.mohan0209@gmail.com # 1.20 Comms Shadow
       - droslean@gmail.com # 1.20 Bug Triage Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
@@ -316,7 +322,9 @@ groups:
       - rey.lejano@rx-m.com # 1.20 Docs Shadow
       - saveetha13@gmail.com # 1.20 RT Lead Shadow
       - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
+      - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
       - soniasingla.1812@gmail.com # 1.20 Release Notes Shadow
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
+      - tony@gosselin.it # 1.20 Comms Shadow
       - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
