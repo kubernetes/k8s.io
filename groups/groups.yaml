@@ -470,6 +470,7 @@ groups:
       - kiran.mova@mayadata.io
       - humble.devassy@gmail.com
       - patrick.ohly@intel.com
+      - jinxu@google.com
 
   #
   # RBAC groups: k8s-infra-rbac-*
@@ -1478,6 +1479,7 @@ groups:
       - wfender@google.com
       - mattcary@google.com
       - saikatroyc@google.com
+      - jinxu@google.com
 
   - email-id: k8s-infra-staging-seccomp-operator@kubernetes.io
     name: k8s-infra-staging-seccomp-operator
