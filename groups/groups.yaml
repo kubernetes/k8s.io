@@ -454,6 +454,17 @@ groups:
     members:
       - bentheelder@google.com
 
+  - email-id: k8s-infra-staging-sig-docs@kubernetes.io
+    name: k8s-infra-staging-sig-docs
+    description: |-
+      ACL for sig docs artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - bentheelder@google.com
+      - k8s-sig-docs-leads@googlegroups.com
+
   - email-id: k8s-infra-staging-sig-storage@kubernetes.io
     name: k8s-infra-staging-sig-storage
     description: |-
