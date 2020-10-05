@@ -878,11 +878,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - cecilerobertm@gmail.com
       - davanum@gmail.com
       - detiber@gmail.com
+      - fpandini@vmware.com
       - goldsteina@vmware.com
-      - ha.chuck@gmail.com
-      - hi@amycod.es
       - prignanov@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
@@ -892,11 +892,12 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - andrewrudoi@gmail.com
       - davanum@gmail.com
       - detiber@gmail.com
+      - fpandini@vmware.com
       - goldsteina@vmware.com
-      - ha.chuck@gmail.com
-      - hi@amycod.es
+      - jeewan@vmware.com
       - prignanov@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
@@ -919,8 +920,10 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - cecilerobertm@gmail.com
       - davanum@gmail.com
-      - nicklaneovi@gmail.com
+      - david@devigned.com
+      - nziada@vmware.com
       - prignanov@vmware.com
       - stephen.k8s@agst.us
 
