@@ -135,7 +135,7 @@ groups:
       - tasha.drew@gmail.com
       - celeste@cncf.io
       - tpepper@vmware.com
-      - chu.karen.h@gmail.com 
+      - chu.karen.h@gmail.com
 
   - email-id: distributors-announce@kubernetes.io
     name: distributors-announce
