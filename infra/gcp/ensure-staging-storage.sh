@@ -94,6 +94,7 @@ STAGING_PROJECTS=(
     scl-image-builder
     service-apis
     slack-infra
+    sig-docs
     sig-storage
     storage-migrator
     txtdirect
@@ -151,7 +152,7 @@ for REPO; do
         # Enable vulnerability scanning on the staging project
         color 6 "Enabling vulnerability scanning in staging projects"
         enable_api "${PROJECT}" containerscanning.googleapis.com
-        
+
         # Enable image promoter access to vulnerability scanning results
         empower_service_account_for_cip_vuln_scanning \
             "$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")" \
