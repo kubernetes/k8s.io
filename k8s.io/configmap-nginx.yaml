@@ -230,9 +230,9 @@ data:
           rewrite ^/api-review$      https://github.com/kubernetes/community/blob/master/sig-architecture/api-review-process.md redirect;
           rewrite ^/bot-commands$    https://prow.k8s.io/command-help redirect;
           rewrite ^/github-labels$   https://github.com/kubernetes/test-infra/blob/master/label_sync/labels.md redirect;
-          rewrite ^/good-first-issue$ https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22&type=Issues redirect;
-          rewrite ^/help-wanted$     https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22&type=Issues redirect;
-          rewrite ^/needs-ok-to-test$ https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-incubator+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase&type=Issues redirect;
+          rewrite ^/good-first-issue$ https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22&type=Issues redirect;
+          rewrite ^/help-wanted$     https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22&type=Issues redirect;
+          rewrite ^/needs-ok-to-test$ https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase&type=Issues redirect;
           rewrite ^/oncall$          https://storage.googleapis.com/test-infra-oncall/oncall.html redirect;
           rewrite ^/oncall-hotlist$  https://github.com/kubernetes/test-infra/search?q=label%3Akind%2Foncall-hotlist+is%3Aopen&type=Issues redirect;
           rewrite ^/owners$          https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md redirect;
