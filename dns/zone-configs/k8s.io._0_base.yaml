@@ -214,14 +214,6 @@ slack:
 submit-queue:
   type: CNAME
   value: redirect.k8s.io.
-# Kops testing e2e (@justinsb).
-test-cncf-aws:
-  type: NS
-  values:
-  - ns-1458.awsdns-54.org.
-  - ns-1825.awsdns-36.co.uk.
-  - ns-265.awsdns-33.com.
-  - ns-687.awsdns-21.net.
 # Running on Google App Engine (@michelle192837)
 testgrid:
   - type: A

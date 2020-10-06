@@ -1,5 +1,3 @@
-# The top-level x-k8s.io zone
-
 # Canary zone for testing DNS pushes.
 canary:
   type: NS
