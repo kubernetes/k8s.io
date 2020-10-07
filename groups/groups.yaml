@@ -135,7 +135,7 @@ groups:
       - tasha.drew@gmail.com
       - celeste@cncf.io
       - tpepper@vmware.com
-      - chu.karen.h@gmail.com 
+      - chu.karen.h@gmail.com
 
   - email-id: distributors-announce@kubernetes.io
     name: distributors-announce
@@ -1492,10 +1492,10 @@ groups:
       - saikatroyc@google.com
       - jinxu@google.com
 
-  - email-id: k8s-infra-staging-seccomp-operator@kubernetes.io
-    name: k8s-infra-staging-seccomp-operator
+  - email-id: k8s-infra-staging-sp-operator@kubernetes.io
+    name: k8s-infra-staging-sp-operator
     description: |-
-      ACL for seccomp operator artifacts
+      ACL for security-profiles-operator artifacts
     settings:
       ReconcileMembers: "true"
     members:

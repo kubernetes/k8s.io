@@ -90,12 +90,12 @@ STAGING_PROJECTS=(
     publishing-bot
     releng
     scheduler-plugins
-    seccomp-operator
     scl-image-builder
     service-apis
     slack-infra
     sig-docs
     sig-storage
+    sp-operator
     storage-migrator
     txtdirect
 )
