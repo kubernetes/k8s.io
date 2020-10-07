@@ -1,6 +1,6 @@
 # 2.0.0-alpha
 - name: kube-state-metrics
-  dmap: 
+  dmap:
     "sha256:73867f9c84ef0ffb061b1bcb950b1947b1d60cb842ede63c0321a94b8cc6b6c8": ["2.0.0-alpha"]
 - name: kube-state-metrics-amd64
   dmap:
@@ -9,5 +9,18 @@
   dmap:
     "sha256:f18e7fff7b327511ca6ccd85b11b5cc14df9d99307baaab85ec7b4d18ca13a61": ["2.0.0-alpha"]
 - name: kube-state-metrics-arm
-  dmap: 
+  dmap:
     "sha256:255894e01b3042564d8b5968abbc027dc7be816ba14c7d7426bd3ce54131219c": ["2.0.0-alpha"]
+# 2.0.0-alpha.1
+- name: kube-state-metrics
+  dmap:
+    "sha256:e3b9095a56b7d75b868c134089326566c545aa086360713647b1675c1a1738f3": ["2.0.0-alpha.1"]
+- name: kube-state-metrics-amd64
+  dmap:
+    "sha256:e3b9095a56b7d75b868c134089326566c545aa086360713647b1675c1a1738f3": ["2.0.0-alpha.1"]
+- name: kube-state-metrics-arm64
+  dmap:
+    "sha256:5dcbaec3e9fa314f34eb61083e293b0d12a8ca44181eb177280187b838d29460": ["2.0.0-alpha.1"]
+- name: kube-state-metrics-arm
+  dmap:
+    "sha256:6f8a6c406ae8bab657f87338527afca0a35dcf43d6336e929c1d5c18a35dc7dc": ["2.0.0-alpha.1"]
