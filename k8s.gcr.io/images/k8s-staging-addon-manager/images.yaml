@@ -1,1 +1,18 @@
-# No images yet 
+- name: kube-addon-manager
+  dmap:
+    "sha256:a4f55e897391d6d46bee8bc2b7388c6fa146b9d956985db8ca3d72ca027c70f8": ["v9.1.2"]
+- name: kube-addon-manager-amd64
+  dmap:
+    "sha256:a4f55e897391d6d46bee8bc2b7388c6fa146b9d956985db8ca3d72ca027c70f8": ["v9.1.2"]
+- name: kube-addon-manager-arm
+  dmap:
+    "sha256:7a341655fe377b2b409c38b5944e27afef557d4803b7413320c7cb387df34655": ["v9.1.2"]
+- name: kube-addon-manager-arm64
+  dmap:
+    "sha256:dd17f08a81b60c8025e5e991cdd31341c7bc7b049e3fb603ed8827636aaa6dcf": ["v9.1.2"]
+- name: kube-addon-manager-ppc64le
+  dmap:
+    "sha256:a7aba057e5b31f1709121878ce21ab33de2cd7929a417bd1efa37573a7ddd92b": ["v9.1.2"]
+- name: kube-addon-manager-s390x
+  dmap:
+    "sha256:086f879de315fc2af950c7c916e01a7a1a573032aa34a0ec8dd1fc8a003bd468": ["v9.1.2"]
