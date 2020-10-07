@@ -1,5 +1,3 @@
-# The top-level kubernetes.dev zone
-
 # Canary zone for testing DNS pushes.
 canary:
   type: NS
@@ -8,11 +6,3 @@ canary:
   - ns-cloud-b2.googledomains.com.
   - ns-cloud-b3.googledomains.com.
   - ns-cloud-b4.googledomains.com.
-
-'':
-  type: A
-  value: 104.198.14.52
-
-www:
-  type: CNAME
-  value: kubernetes-contributor.netlify.app.

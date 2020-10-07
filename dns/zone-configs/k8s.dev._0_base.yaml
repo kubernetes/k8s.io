@@ -1,0 +1,9 @@
+# The top-level k8s.dev zone
+
+'':
+  type: A
+  value: 104.198.14.52
+
+www:
+  type: CNAME
+  value: kubernetes-contributor.netlify.app.
