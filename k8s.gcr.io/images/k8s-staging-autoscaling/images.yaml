@@ -11,14 +11,64 @@
   dmap:
     "sha256:29525bd6a967d255bf2f4a3f47c759b093b359d019a66b1ccbefae2e3cf3fdfb": ["0.8.0"]
     "sha256:748abc8e6b4c2e0082d3a28fdefd90eee442f8331245e58499337ff671a73599": ["0.8.1"]
+    "sha256:690e8d48fb6e11fac2be2cfe3f699bd864ae5e961e35b8dd292102104ecae521": ["0.9.0"]
+- name: vpa-admission-controller-amd64
+  dmap:
+    "sha256:15e683e5b9a421ba12d8523ccb01b7fd0de13c8938111319e61917e28e1297a4": ["0.9.0"]
+- name: vpa-admission-controller-arm
+  dmap:
+    "sha256:c8be2a3038a17aa3df9d126d220535c7675e89defa81a25366ec3c90962d3db4": ["0.9.0"]
+- name: vpa-admission-controller-arm64
+  dmap:
+    "sha256:9adfc92e922d1d9e9710a8a2aca16d2f5a944233d0d6f20aff5c43c00ae1bc2e": ["0.9.0"]
+- name: vpa-admission-controller-ppc64le
+  dmap:
+    "sha256:fbed4219e4b875e5a6772dc177c6114f5c12c6b6362191b3ed5291db07f0efad": ["0.9.0"]
+- name: vpa-admission-controller-s390x
+  dmap:
+    "sha256:f6302f50dae80f846811d26b8da9eb4f7376ea91696c7cfa7dd837485e506b03": ["0.9.0"]
+
 - name: vpa-recommender
   dmap:
     "sha256:87ab478afdfb31700aa58c848c2fa83b07e9cd9e0261bf447f8b510f03b86a44": ["0.8.0"]
     "sha256:912a864cfa31493346f30880ad73d8961c227bfa4db9bbe1b221eb1731e90dd4": ["0.8.1"]
+    "sha256:073850854b9cc5eecb09d01d89346d200487eeaf6356bd5ef9d7e8dd4c088493": ["0.9.0"]
+- name: vpa-recommender-amd64
+  dmap:
+    "sha256:442257c02a805e3ea393477fd50f44f2e22d006a177d975013b9264efb9ac2ae": ["0.9.0"]
+- name: vpa-recommender-arm
+  dmap:
+    "sha256:588dc52b76e3bc1af799276323d7c625ca430f20a463dc2f827dfb4cdeff638e": ["0.9.0"]
+- name: vpa-recommender-arm64
+  dmap:
+    "sha256:0170cb994d9511d7268b75cc2aa0a393ed6ec6ee64fc1219576c6f1a5f814d6d": ["0.9.0"]
+- name: vpa-recommender-ppc64le
+  dmap:
+    "sha256:d3f9e5a6a9bc09290688bfb5e1fc7a4ae1135b96a1499e70a19a23b56de1bec4": ["0.9.0"]
+- name: vpa-recommender-s390x
+  dmap:
+    "sha256:ca16a43f4a0f3bac92b53910e83dbf44b13ecd8bbb66b521b7721a78563efd84": ["0.9.0"]
+
 - name: vpa-updater
   dmap:
     "sha256:36d9f96c469c9e91663124d06feb0a33142cfb197b92d2c0aa69367242060776": ["0.8.0"]
     "sha256:2a746af0550cfd17a7aaf536266a6eaa53f6404a9034a2968189235fc06cbe2e": ["0.8.1"]
+    "sha256:f2f85053098e957b28e4b4fe8ec60354ce4073ab9a7822c7a2ef18e5a0614a28": ["0.9.0"]
+- name: vpa-updater-amd64
+  dmap:
+    "sha256:7579e58b8ca1b387a9cb8bb64479358b8fe9e0e97628a2520ad8649a9a0e4eda": ["0.9.0"]
+- name: vpa-updater-arm
+  dmap:
+    "sha256:a404b782172ffacf17246c3a27b55e994cc78e9a58fadbf588f887f7b8d4d4d5": ["0.9.0"]
+- name: vpa-updater-arm64
+  dmap:
+    "sha256:f197a5675d195ae3bd18e89d142a3c28c7ad61d560b9ffc8d9479abc9d510a4b": ["0.9.0"]
+- name: vpa-updater-ppc64le
+  dmap:
+    "sha256:3eb878a4b2d467f94bdf6ef2ef2a856b7873eea8ed0aa972477dacb64bb821e3": ["0.9.0"]
+- name: vpa-updater-s390x
+  dmap:
+    "sha256:b98061975801342dc875cebfa679bfc1b35d097062a572a918fc45899475e0fa": ["0.9.0"]
 
 - name: addon-resizer
   dmap:
