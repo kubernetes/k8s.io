@@ -42,12 +42,16 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-admins@kubernetes.io
+      - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
       - georgedanielmangum@gmail.com
       - hhorl@pivotal.io
       - idealhack@gmail.com
+      - jameswangel@gmail.com
+      - marky.r.jackson@gmail.com
+      - max@koerbaecher.io
       - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
