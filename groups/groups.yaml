@@ -1423,10 +1423,10 @@ groups:
       - cblecker@gmail.com
       - davanum@gmail.com
       - decarr@redhat.com
-      - lachlan.evenson@gmail.com
+      - killen.bob@gmail.com
+      - liggitt@google.com
       - nikhitaraghunath@gmail.com
       - paris.pittman@gmail.com
-      - spiffxp@gmail.com
 
   - email-id: steering@kubernetes.io
     name: steering
@@ -1447,10 +1447,10 @@ groups:
       - cblecker@gmail.com
       - davanum@gmail.com
       - decarr@redhat.com
-      - lachlan.evenson@gmail.com
+      - killen.bob@gmail.com
+      - liggitt@google.com
       - nikhitaraghunath@gmail.com
       - paris.pittman@gmail.com
-      - spiffxp@gmail.com
     managers:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
