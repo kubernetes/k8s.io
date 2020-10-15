@@ -27,6 +27,7 @@ groups:
     description: |-
       SIG/WG/UG Leads
     settings:
+      AllowWebPosting: "true"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
       WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
       WhoCanPostMessage: "ANYONE_CAN_POST"

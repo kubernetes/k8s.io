@@ -265,3 +265,43 @@ func TestHardcodedGroupsForParanoia(t *testing.T) {
 		}
 	}
 }
+
+// Setting AllowWebPosting should be set for every group which should support
+// access to the group not only via gmail but also via web (you can see the list
+// and history of threads and also use web interface to operate the group)
+// More info:
+// 	https://developers.google.com/admin-sdk/groups-settings/v1/reference/groups#allowWebPosting
+func TestGroupsWhichShouldSupportHistory(t *testing.T) {
+	groups := map[string]struct{}{
+		"leads@kubernetes.io": {},
+	}
+
+	found := make(map[string]struct{})
+
+	for _, group := range cfg.Groups {
+		emailId := group.EmailId
+		found[emailId] = struct{}{}
+		if _, ok := groups[emailId]; ok {
+			allowedWebPosting, ok := group.Settings["AllowWebPosting"]
+			if !ok {
+				t.Errorf(
+					"group '%s': must have 'settings.allowedWebPosting = true'",
+					group.Name,
+				)
+			} else if allowedWebPosting != "true" {
+				t.Errorf(
+					"group '%s': must have 'settings.allowedWebPosting = true'" +
+						" but have 'settings.allowedWebPosting = %s' instead",
+					group.Name,
+					allowedWebPosting,
+				)
+			}
+		}
+	}
+
+	for email := range groups {
+		if _, ok := found[email]; !ok {
+			t.Errorf("group '%s' is missing, should be present", email)
+		}
+	}
+}
