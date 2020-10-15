@@ -33,6 +33,7 @@ import (
 	admin "google.golang.org/api/admin/directory/v1"
 	"google.golang.org/api/googleapi"
 	"google.golang.org/api/groupssettings/v1"
+	"google.golang.org/api/option"
 	secretmanagerpb "google.golang.org/genproto/googleapis/cloud/secretmanager/v1"
 	"gopkg.in/yaml.v2"
 
@@ -130,13 +131,16 @@ func main() {
 	}
 	credential.Subject = config.BotID
 
-	client := credential.Client(context.Background())
-	srv, err := admin.New(client)
+	ctx := context.Background()
+	client := credential.Client(ctx)
+	clientOption := option.WithHTTPClient(client)
+
+	srv, err := admin.NewService(ctx, clientOption)
 	if err != nil {
 		log.Fatalf("Unable to retrieve directory Client %v", err)
 	}
 
-	srv2, err := groupssettings.New(client)
+	srv2, err := groupssettings.NewService(ctx, clientOption)
 	if err != nil {
 		log.Fatalf("Unable to retrieve groupssettings Service %v", err)
 	}
