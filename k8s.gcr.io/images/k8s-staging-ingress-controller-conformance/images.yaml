@@ -1,1 +1,5 @@
-# TODO: add images
+# echoserver image
+# https://github.com/kubernetes-sigs/ingress-controller-conformance/tree/master/images/echoserver
+- name: echoserver
+  dmap:
+    "sha256:9b34b17f391f87fb2155f01da2f2f90b7a4a5c1110ed84cb5379faa4f570dc52": ["v0.0.1"]
