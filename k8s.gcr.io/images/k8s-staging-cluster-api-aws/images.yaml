@@ -41,6 +41,11 @@
     "sha256:f6cf550b45dfe1f3d5b0c3bfb9f5f2866baa2df2a8b40eca86859a80149cbdf1": ["v0.5.5-rc.0"]
     "sha256:da165ca0dffc971c93416e96cbd04b16fcf831fbdaef815c18412eac73cce857": ["v0.5.5"]
     "sha256:3b203b611709889b6b2764be9212d38658ab4e063596d4be42193f2f6b4fac6f": ["v0.6.0"]
+    "sha256:06d0cb7915223848f5caf6faf387c75fbe7c7abab05c960785b366c8d4ece941": ["v0.6.1"]
 - name: eks-bootstrap-controller
   dmap:
     "sha256:0dda3f1be2c56b0ffee4668c67a9da2a5af33a5aa66c7db91c98534140265408": ["v0.6.0"]
+    "sha256:7477755d1f161213bcab6797ac700c454267cccca91ead91c08e0593567940d6": ["v0.6.1"]
+- name: eks-controlplane-controller
+  dmap:
+    "sha256:34ed66c9300b663a7c0a9200a2fa542757e419ce05b65b76a3045c7af2f074a9": ["v0.6.1"]
