@@ -446,6 +446,8 @@ func updateGroupSettings(srv *groupssettings.Service, groupEmailId string, group
 		switch key {
 		case "AllowExternalMembers":
 			wantSettings.AllowExternalMembers = value
+		case "AllowWebPosting":
+			wantSettings.AllowWebPosting = value
 		case "WhoCanJoin":
 			wantSettings.WhoCanJoin = value
 		case "WhoCanViewMembership":
