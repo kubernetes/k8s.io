@@ -753,19 +753,6 @@ groups:
       - spiffxp@google.com
       - zz@ii.coop
 
-  - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
-    name: k8s-infra-staging-artifact-promoter
-    description: |-
-      ACL for staging artifact-promoter
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - linusa@google.com
-      - spiffxp@google.com
-      - thockin@google.com
-
   - email-id: k8s-infra-staging-autoscaling@kubernetes.io
     name: k8s-infra-staging-autoscaling
     description: |-
