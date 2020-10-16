@@ -180,6 +180,16 @@ aliases:
     - dims
     - justaugustus
     - listx
+  cip-approvers:
+    - justaugustus
+    - justinsb
+    - listx
+    - thockin
+  cip-reviewers:
+    - justaugustus
+    - justinsb
+    - listx
+    - thockin
   provider-aws:
     - d-nishi
     - justinsb
