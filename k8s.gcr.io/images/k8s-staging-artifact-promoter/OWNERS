@@ -1,5 +1,15 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+options:
+  no_parent_owners: true
 approvers:
-- listx
-- thockin
+  - cip-approvers
+  - wg-k8s-infra-leads
+reviewers:
+  - cip-reviewers
+  - release-engineering-approvers
+  - release-engineering-reviewers
+
+labels:
+  - sig/release
+  - area/release-eng

@@ -39,20 +39,20 @@ aliases:
     - mrbobbytables
     - nikhita
   sig-docs-leads:
-    - irvifa
     - jimangel
     - kbarnard10
     - kbhawkey
     - onlydole
     - sftim
+    - zacharysarah
   sig-instrumentation-leads:
     - brancz
     - dashpole
     - ehashman
     - logicalhan
   sig-multicluster-leads:
+    - jeremyot
     - pmorie
-    - quinton-hoole
   sig-network-leads:
     - caseydavenport
     - dcbw
@@ -72,6 +72,9 @@ aliases:
   sig-scheduling-leads:
     - Huang-Wei
     - ahg-g
+  sig-security-leads:
+    - iancoldwater
+    - tabbysable
   sig-service-catalog-leads:
     - jberkhahn
     - mszostok
@@ -118,10 +121,6 @@ aliases:
     - quinton-hoole
     - tpepper
     - youngnick
-  wg-machine-learning-leads:
-    - k82cn
-    - kow3ns
-    - vishh
   wg-multitenancy-leads:
     - srampal
     - tashimi
@@ -133,11 +132,10 @@ aliases:
   wg-policy-leads:
     - ericavonb
     - hannibalhuang
-  wg-security-audit-leads:
-    - aasmall
-    - cji
-    - jaybeale
-    - joelsmith
+  wg-reliability-leads:
+    - deads2k
+    - stevekuznetsov
+    - wojtek-t
   ug-big-data-leads:
     - erikerlandson
     - foxish
@@ -165,10 +163,10 @@ aliases:
     - cblecker
     - derekwaynecarr
     - dims
-    - lachie83
+    - liggitt
+    - mrbobbytables
     - nikhita
     - parispittman
-    - spiffxp
 ## BEGIN CUSTOM CONTENT
   build-image-approvers:
     - BenTheElder
@@ -182,6 +180,16 @@ aliases:
     - dims
     - justaugustus
     - listx
+  cip-approvers:
+    - justaugustus
+    - justinsb
+    - listx
+    - thockin
+  cip-reviewers:
+    - justaugustus
+    - justinsb
+    - listx
+    - thockin
   provider-aws:
     - d-nishi
     - justinsb
@@ -204,21 +212,26 @@ aliases:
     - frapposelli
   release-engineering-approvers:
     - alejandrox1 # SIG Technical Lead
-    - dougm # Patch Release Team
-    - feiskyer # Patch Release Team
-    - hoegaarden # Patch Release Team
-    - idealhack # Patch Release Team
-    - justaugustus # subproject owner / Patch Release Team
+    - cpanato # Release Manager
+    - dougm # Release Manager
+    - feiskyer # Release Manager
+    - hasheddan # Release Manager
+    - hoegaarden # Release Manager
+    - idealhack # Release Manager
+    - justaugustus # subproject owner / Release Manager / SIG Chair
     - saschagrunert # SIG Technical Lead
-    - tpepper # subproject owner / Patch Release Team
+    - tpepper # subproject owner / Release Manager / SIG Chair
+    - xmudrii # Release Manager
   release-engineering-reviewers:
     - alejandrox1 # SIG Technical Lead
-    - cpanato # Branch Manager
-    - dougm # Patch Release Team
-    - feiskyer # Patch Release Team
-    - hoegaarden # Patch Release Team
-    - idealhack # Patch Release Team
-    - justaugustus # subproject owner / Patch Release Team
+    - cpanato # Release Manager
+    - dougm # Release Manager
+    - feiskyer # Release Manager
+    - hasheddan # Release Manager
+    - hoegaarden # Release Manager
+    - idealhack # Release Manager
+    - justaugustus # subproject owner / Release Manager / SIG Chair
     - saschagrunert # SIG Technical Lead
-    - tpepper # subproject owner / Patch Release Team
+    - tpepper # subproject owner / Release Manager / SIG Chair
+    - xmudrii # Release Manager
 ## END CUSTOM CONTENT

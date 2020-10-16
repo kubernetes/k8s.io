@@ -78,6 +78,20 @@ groups:
       - simony@google.com
       - sumitranr@google.com
 
+  - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
+    name: k8s-infra-staging-artifact-promoter
+    description: |-
+      ACL for staging artifact-promoter
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - linusa@google.com
+      - spiffxp@google.com
+      - thockin@google.com
+
   - email-id: k8s-infra-staging-build-image@kubernetes.io
     name: k8s-infra-staging-build-image
     description: |-
