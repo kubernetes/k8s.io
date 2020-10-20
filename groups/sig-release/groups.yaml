@@ -106,6 +106,17 @@ groups:
       - linusa@google.com
       - stephen.k8s@agst.us
 
+  - email-id: k8s-infra-staging-ci-images@kubernetes.io
+    name: k8s-infra-staging-ci-images
+    description: |-
+      ACL for staging CI images
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-prow-oncall@kubernetes.io
+      - k8s-infra-release-editors@kubernetes.io
+      - ameukam@gmail.com
+
   - email-id: k8s-infra-staging-kubernetes@kubernetes.io
     name: k8s-infra-staging-kubernetes
     description: |-
