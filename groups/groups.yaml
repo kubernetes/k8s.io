@@ -155,9 +155,10 @@ groups:
       - timallclair@gmail.com
     members:
       # Associate PSC members
-      - alextc@google.com
       - mok@vmware.com
       - sfowler@redhat.com
+      - taahm@google.com
+      - tabitha.c.sable@gmail.com
       # Distributors
       - argoprod@us.ibm.com
       - aws-k8s-embargo-notification@amazon.com
