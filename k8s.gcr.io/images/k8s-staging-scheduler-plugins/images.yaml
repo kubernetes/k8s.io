@@ -1,1 +1,3 @@
-# no images yet
+- name: kube-scheduler
+  dmap:
+    "sha256:01d1b53bce3c2477ab403b54914ff9229e073d99e9b711f161b796cec73176be": ["v0.18.9"]
