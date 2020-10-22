@@ -1507,10 +1507,10 @@ groups:
       - xuchao@google.com
       - haoweic@google.com
 
-  - email-id: k8s-infra-staging-sigs-kustomize@kubernetes.io
-    name: k8s-infra-staging-sigs-kustomize
+  - email-id: k8s-infra-staging-kustomize@kubernetes.io
+    name: k8s-infra-staging-kustomize
     description: |-
-      ACL for k8s-infra-staging-sigs-kustomize
+      ACL for k8s-infra-staging-kustomize
     settings:
       ReconcileMembers: "true"
     members:
