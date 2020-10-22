@@ -1195,6 +1195,20 @@ groups:
       - tasha.drew@gmail.com
       - srajakum@amazon.com
 
+  - email-id: k8s-infra-staging-networking@kubernetes.io
+    name: k8s-infra-staging-networking
+    description: |-
+      ACL for staging networking images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bowei@google.com
+      - jsand@google.com
+      - pavithrar@google.com
+      - thockin@google.com
+      - varunmar@google.com
+      - zihongz@google.com
+
   - email-id: k8s-infra-staging-nfd@kubernetes.io
     name: k8s-infra-staging-nfd
     description: |-
