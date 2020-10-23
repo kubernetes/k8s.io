@@ -82,6 +82,7 @@ STAGING_PROJECTS=(
     kube-state-metrics
     kubeadm
     kubernetes
+    kustomize
     metrics-server
     multitenancy
     nfd
