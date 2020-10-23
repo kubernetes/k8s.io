@@ -1,0 +1,10 @@
+# google group for gcr.io/k8s-staging-kustomize k8s-infra-staging-kustomize@kubernetes.io
+registries:
+- name: gcr.io/k8s-staging-kustomize
+  src: true
+- name: us.gcr.io/k8s-artifacts-prod/kustomize
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: eu.gcr.io/k8s-artifacts-prod/kustomize
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia.gcr.io/k8s-artifacts-prod/kustomize
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
