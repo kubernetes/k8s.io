@@ -61,6 +61,7 @@ STAGING_PROJECTS=(
     capi-kubeadm
     capi-docker
     capi-vsphere
+    ci-images
     coredns
     cpa
     csi
