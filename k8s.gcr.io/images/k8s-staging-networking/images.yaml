@@ -1,1 +1,15 @@
-# No images yet
+- name: ip-masq-agent
+  dmap:
+    "sha256:0d27fb2864a100a56da9582b3112f98fb06fa1f930c8c47773aa18bb0988d14d": ["v2.6.0"]
+- name: ip-masq-agent-amd64
+  dmap:
+    "sha256:5469b2315904f5f720034495c3938a4d6f058ec468ce4eca0b1a9291c616c494": ["v2.6.0"]
+- name: ip-masq-agent-arm
+  dmap:
+    "sha256:55119a67d3c92b27a67b30875642911a7bf1650e632ec17abb9916cc2b5a3a45": ["v2.6.0"]
+- name: ip-masq-agent-arm64
+  dmap:
+    "sha256:1f9e9889109ded149475aa3987d61d21e2f08097ab36338466c16bda63631382": ["v2.6.0"]
+- name: ip-masq-agent-ppc64le
+  dmap:
+    "sha256:fd7449efcd712a85dbcdf6c1648f5f9bb674c208862f469c457ccd154d7d12bf": ["v2.6.0"]
