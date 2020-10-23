@@ -84,6 +84,7 @@ STAGING_PROJECTS=(
     kubernetes
     metrics-server
     multitenancy
+    networking
     nfd
     npd
     provider-azure
