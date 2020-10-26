@@ -11,6 +11,7 @@
 ## Manual deploy
 
 - Must be run by someone who is a member of the k8s-infra-group-admins@kubernetes.io group
+- Run `gcloud auth application-default login` to login
 - Use `make run` to dry run the changes
 - Use `make run -- --confirm` if the changes suggested in the previous step looks good
 
