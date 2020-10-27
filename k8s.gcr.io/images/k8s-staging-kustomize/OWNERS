@@ -1,0 +1,16 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# Current set of people in kustomize-maintainers and kustomize-admins from
+# https://github.com/kubernetes/org/blob/master/config/kubernetes-sigs/sig-cli/teams.yaml.
+
+reviewers:
+- Liujingfang1
+- monopole
+- pwittrock
+- mortent
+
+approvers:
+- Liujingfang1
+- monopole
+- pwittrock
+- Shell32-Natsu
