@@ -4,15 +4,12 @@
 # https://github.com/kubernetes/org/blob/master/config/kubernetes-sigs/sig-cli/teams.yaml.
 
 reviewers:
-- droot
 - Liujingfang1
 - monopole
 - pwittrock
-- haiyanmeng
 - mortent
 
 approvers:
-- droot
 - Liujingfang1
 - monopole
 - pwittrock
