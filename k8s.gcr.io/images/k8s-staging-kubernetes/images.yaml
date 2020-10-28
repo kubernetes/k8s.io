@@ -1227,7 +1227,7 @@
     "sha256:5c77e58c2539bfab44e7fcd7fafc64fc863e7263f8fddb1baec4c536168254de": ["v1.19.3-rc.0"]
     "sha256:614917fac2c8c050dbdd4ef79f9ec46f73f99e61e86743807a89040da10694a8": ["v1.18.8"]
     "sha256:6e5d5744d7743687426da752d77f6d511edb0c0cae050c92925ab7d55b62e2ad": ["v1.18.10-rc.0"]
-    "sha256:7124e82e35d5d4697d359be08134f33d3270da85613668f1812df2550572ffb7": ["v1.19.0-rc.2"]
+    "sha256:i7124e82e35d5d4697d359be08134f33d3270da85613668f1812df2550572ffb7": ["v1.19.0-rc.2"]
     "sha256:766468d66c6c6c55043b048bf9f9d739eb3c7324eb5fcb61657fb2385bc0c137": ["v1.18.11-rc.0"]
     "sha256:956850b645aebf944842aec968b4f9cf035858d6fe85e1025e89685f3c3a577e": ["v1.20.0-alpha.2"]
     "sha256:a8022fa50ad250537638106a4c31eb90751e83ce3b0839861514dcf1616b97c4": ["v1.19.3"]
@@ -1240,100 +1240,6 @@
     "sha256:eedb3fb4018bbe2b508ea586ef2f1d76250c9938f6298c9b2a560ec9dbdbb408": ["v1.20.0-alpha.3"]
     "sha256:f5de4ad913ffd66ceee261f40fecaec852342168596c9e6d2d8c6fe9f1cd7359": ["v1.18.9"]
     "sha256:f86066539c4a8fb82715e049ef13c0161dbc3b534881b2315476b254b0556733": ["v1.19.1"]
-- name: mock/conformance
-  dmap:
-    "sha256:f8af5a886b8ebb2772c745b8f0dc63352d0c20ae09583b1cc295c1b291c11b7b": ["v1.20.0-beta.0"]
-- name: mock/conformance-amd64
-  dmap:
-    "sha256:bf64b91d7fd7af6d5c17e3615f5f1957d67b48f03fe8bf3cd5c27ce2cf8f1d5b": ["v1.20.0-beta.0"]
-- name: mock/conformance-arm
-  dmap:
-    "sha256:ee527a9d7dd70f7528961b8afc22c1b4386992ced6c85592b97e54aa014356cc": ["v1.20.0-beta.0"]
-- name: mock/conformance-arm64
-  dmap:
-    "sha256:2d4174a7459730245daa6f3b8e457fb49fe3227cd34036b3b3e65e991d6d8d57": ["v1.20.0-beta.0"]
-- name: mock/conformance-ppc64le
-  dmap:
-    "sha256:140adc239f72193472558d31b665e7668a4d76086e7df5ab6f1728013e52d545": ["v1.20.0-beta.0"]
-- name: mock/conformance-s390x
-  dmap:
-    "sha256:fb52abb90c944950ec3f34f54146ad7d01b07eacb029908df6c5041960c60497": ["v1.20.0-beta.0"]
-- name: mock/kube-apiserver
-  dmap:
-    "sha256:03a6c8d54f19e8bbe898b214ee524dffb8105fa7a706b38e4fbab48d132ad728": ["v1.20.0-beta.0"]
-- name: mock/kube-apiserver-amd64
-  dmap:
-    "sha256:d023247567aff363ba9fb900993d779c8ee27759d11ed8e5e8946232861a92eb": ["v1.20.0-beta.0"]
-- name: mock/kube-apiserver-arm
-  dmap:
-    "sha256:e747a1db0d2e42714b236a88ad85fb24d5156fa3889a4948caf541e3078d2b7e": ["v1.20.0-beta.0"]
-- name: mock/kube-apiserver-arm64
-  dmap:
-    "sha256:42eccc45c260f4e2d0a13eb4374079773a6e436725185dafabbf12d3dcba8ac6": ["v1.20.0-beta.0"]
-- name: mock/kube-apiserver-ppc64le
-  dmap:
-    "sha256:8116f9ec0fe3f709e8cb413ec0d365cf7f8704faf1d85baf91b3de366acfd7cf": ["v1.20.0-beta.0"]
-- name: mock/kube-apiserver-s390x
-  dmap:
-    "sha256:875a6ae6dab83a7d47dd4dd215dffee37c2b6aa9b01ae3bbf16b8b0d1f503c1d": ["v1.20.0-beta.0"]
-- name: mock/kube-controller-manager
-  dmap:
-    "sha256:053b543a834101d396ca1ffed0a3f19ead2795839936a383d1bde0842aeca966": ["v1.20.0-beta.0"]
-- name: mock/kube-controller-manager-amd64
-  dmap:
-    "sha256:ee95e0ae734b50997d08501411f5616cae01699f5405910ac33b7a572183b433": ["v1.20.0-beta.0"]
-- name: mock/kube-controller-manager-arm
-  dmap:
-    "sha256:2f4cb2485362dec48e54aa8b459ed439ff69b89ffa3fe0a3607d9d9feb517d47": ["v1.20.0-beta.0"]
-- name: mock/kube-controller-manager-arm64
-  dmap:
-    "sha256:7ce9ee411b82689c32543e9eed32f1de5a324c5ef077216454b23df3d46d4720": ["v1.20.0-beta.0"]
-- name: mock/kube-controller-manager-ppc64le
-  dmap:
-    "sha256:3e0ee3e77d320d7905b034f501c7e9c27ba717e49c4e5586037794b5628b5bea": ["v1.20.0-beta.0"]
-- name: mock/kube-controller-manager-s390x
-  dmap:
-    "sha256:fe41a501ff49deb22c0ccad6b0a5d6995ac3d4af5990271b76843569ed2491e9": ["v1.20.0-beta.0"]
-- name: mock/kube-proxy
-  dmap:
-    "sha256:ea8609611670c0e22ad135194c40742e712be7bb46bbe938cbfac32699fa4977": ["v1.20.0-beta.0"]
-- name: mock/kube-proxy-amd64
-  dmap:
-    "sha256:fd9ba3755ab681446c44f8be9815aefe3e9edc4997a8ad3309f89148b8330a53": ["v1.20.0-beta.0"]
-- name: mock/kube-proxy-arm
-  dmap:
-    "sha256:184da46cdb9021bf1714bc4568716dcafa545646315a8b7ebeb371b20d51f34c": ["v1.20.0-beta.0"]
-- name: mock/kube-proxy-arm64
-  dmap:
-    "sha256:8d526cc4a9e7c1e83f04bbd0ee782b18a3f101ef510a0c829e2171dd2ce9fb5d": ["v1.20.0-beta.0"]
-- name: mock/kube-proxy-ppc64le
-  dmap:
-    "sha256:861349bbcb2dc67d55a3c5da0875f516d9e1a42b9571e58da9b98f661eb79f96": ["v1.20.0-beta.0"]
-- name: mock/kube-proxy-s390x
-  dmap:
-    "sha256:5698a6ca1e4913a4e271a72945f9cde5db8fb818fdedf107eef30c87c0182e67": ["v1.20.0-beta.0"]
-- name: mock/kube-scheduler
-  dmap:
-    "sha256:777fea08edaca75b0daa78f5352b0f9d36f4fac8fcb527224e8a2505bf47f749": ["v1.20.0-beta.0"]
-- name: mock/kube-scheduler-amd64
-  dmap:
-    "sha256:be235bfde818b4dfa7c0d73b16973a432d46d46abeeadf3f898359086202f891": ["v1.20.0-beta.0"]
-- name: mock/kube-scheduler-arm
-  dmap:
-    "sha256:b5d1c11aca47a7828d925aea7b2b86957fc479ad9786d4d7721fc9a990d5d67d": ["v1.20.0-beta.0"]
-- name: mock/kube-scheduler-arm64
-  dmap:
-    "sha256:f68cabfe683496515fd54bf828c8d87b3a1d42814cc846d76b2fb2ba69f8a6a9": ["v1.20.0-beta.0"]
-- name: mock/kube-scheduler-ppc64le
-  dmap:
-    "sha256:b56e3bd556d79b7175b61c54713998794ff88f8b458c1bd27ac73e836a0f96dc": ["v1.20.0-beta.0"]
-- name: mock/kube-scheduler-s390x
-  dmap:
-    "sha256:f2bb609163ea65b37b152c22e116ce7fbdd8ed3e884e99c8224b4b64d2a80281": ["v1.20.0-beta.0"]
-- name: pause
-  dmap:
-    "sha256:927d98197ec1141a368550822d18fa1c60bdae27b78b0c004f705f548c07814f": ["3.2"]
-    "sha256:a319ac2280eb7e3a59e252e54b76327cb4a33cf8389053b0d78277f22bbca2fa": ["3.3"]
 - name: pause-amd64
   dmap:
     "sha256:4a1c4b21597c1b4415bdbecb28a3296c6b5e23ca4f9feeb599860a1dac6a0108": ["3.2"]
