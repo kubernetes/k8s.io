@@ -68,6 +68,10 @@ Set `TARGET_IP` to the ingress IP of the running service:
 
     export TARGET_IP=$(kubectl get svc k8s-io '--template={{range .status.loadBalancer.ingress}}{{.ip}}{{end}}')
 
+If you have IPv6 connectivity, you can get the ingress IPv6 address too:
+
+    export TARGET_IP=$(kubectl get svc k8s-io-v6 '--template={{range .status.loadBalancer.ingress}}{{.ip}}{{end}}')
+
 Use `make test` to run unit tests to verify the various endpoints on the server.
 
 Deploying

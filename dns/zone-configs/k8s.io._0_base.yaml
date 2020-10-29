@@ -2,6 +2,8 @@
 '':
   - type: A
     value: 34.107.204.206 # Our vanity redirector, hosted in GKE
+  - type: AAAA
+    value: 2600:1901:0:26f3:: # Our vanity redirector, hosted in GKE
   - type: MX
     values:
     - exchange: aspmx.l.google.com.
@@ -29,9 +31,10 @@ dummy:
 # Our vanity redirector.  This is not just 'k8s.io', on the off chance this
 # becomes different from the main record. (@thockin)
 redirect:
-  type: A
-  value: 34.107.204.206
-
+  - type: A
+    value: 34.107.204.206
+  - type: AAAA
+    value: 2600:1901:0:26f3::
 # Main docs site is a redirect (@chenopis)
 docs:
   type: CNAME

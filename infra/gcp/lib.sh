@@ -527,7 +527,7 @@ function empower_ksa_to_svcacct() {
 
 # Ensure that a global ip address exists, creating one if needed
 # $1 The GCP project
-# $2 The address name (e.g. foo-ingress)
+# $2 The address name (e.g. foo-ingress), IPv6 addresses must have a "-v6" suffix
 # $3 The address description (e.g. "IP address for the foo GCLB")
 function ensure_global_address() {
     if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
@@ -539,11 +539,18 @@ function ensure_global_address() {
     local name="$2"
     local description="$3"
 
+    local ip_version="IPV4"
+    local re='[a-zA-Z0-9_.-]+-v6$'
+    if [[ $name =~ $re ]]; then
+        local ip_version="IPV6"
+    fi
+
     if ! gcloud --project "${gcp_project}" compute addresses describe "${name}" --global >/dev/null 2>&1; then
       gcloud --project "${gcp_project}" \
         compute addresses create \
         "${name}" \
         --description="${description}" \
+        --ip-version="${ip_version}" \
         --global
     fi
 }
