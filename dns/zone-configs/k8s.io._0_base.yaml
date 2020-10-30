@@ -3,7 +3,7 @@
   - type: A
     value: 34.107.204.206 # Our vanity redirector, hosted in GKE
   - type: AAAA
-    value: 2600:1901:0:26f3:: # Our vanity redirector, hosted in GKE
+    value: "2600:1901:0:26f3::" # Our vanity redirector, hosted in GKE
   - type: MX
     values:
     - exchange: aspmx.l.google.com.
@@ -34,7 +34,7 @@ redirect:
   - type: A
     value: 34.107.204.206
   - type: AAAA
-    value: 2600:1901:0:26f3::
+    value: "2600:1901:0:26f3::"
 # Main docs site is a redirect (@chenopis)
 docs:
   type: CNAME
