@@ -17,9 +17,7 @@ CANARY_ZONES := canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s
 PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. canary.k8s-e2e.com.
 ZONE_CONFIGS := zone-configs
 OCTODNS_CONFIG := octodns-config.yaml
-# TODO: This should just say "k8s.gcr.io/infra-tools/octodns:<tag>"
-# 		once the domain flip finishes.
-DOCKER_IMAGE ?= us.gcr.io/k8s-artifacts-prod/infra-tools/octodns:v20200616-67ce585
+DOCKER_IMAGE ?= k8s.gcr.io/infra-tools/octodns:v20200616-67ce585
 
 check-canary check-prod: TMPCFG := $(shell mktemp -d /tmp/octodns.XXXXXX)
 check-canary check-prod: TMP_OCTODNS_CFG := $(shell mktemp /tmp/octodns.XXXXXX)
