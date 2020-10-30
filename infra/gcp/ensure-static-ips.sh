@@ -40,6 +40,8 @@ ADDRESSES=(
     "gcsweb-k8s-io"
     "k8s-io-ingress-canary"
     "k8s-io-ingress-prod"
+    "k8s-io-ingress-canary-v6"
+    "k8s-io-ingress-prod-v6"
     "perf-dash-k8s-io-ingress-prod"
     "slack-infra-ingress-prod"
     "node-perf-dash-k8s-io-ingress-prod"

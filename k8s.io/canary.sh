@@ -34,3 +34,6 @@ while true; do
 done
 
 make test TARGET_IP=34.102.239.89
+
+# it needs IPv6 connectivity
+# make test TARGET_IP=2600:1901:0:26f3::
