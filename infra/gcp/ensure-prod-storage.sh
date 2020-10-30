@@ -377,7 +377,7 @@ color 6 "Handling special cases"
     ensure_service_account \
         "${PROD_PROJECT}" \
         "${VULN_DASHBOARD_SVCACCT}" \
-        "k8s-infra container image vuln scanning"
+        "k8s-infra container image vuln dashboard"
 
     color 6 "Empowering promoter-scanning namespace to use prod promoter vuln-dashboard svcacct"
     for project in "${PROW_TRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
