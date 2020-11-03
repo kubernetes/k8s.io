@@ -4,3 +4,6 @@
 - name: kubepkg-rpm
   dmap:
     "sha256:f5fc791f5ef03c5fe3329fff3a40b80a44029a6e236981a2e5133ebf9597f9dd": ["v0.1.0", "v20201103-v0.5.0-63-ga247d79"]
+- name: releng-ci
+  dmap:
+    "sha256:6d826fb99f970cf5c27a3f1ffb1031ec19f2668453e3209687a046a7e6fb9224": ["v0.1.1"]
