@@ -1,0 +1,6 @@
+- name: kubepkg
+  dmap:
+    "sha256:caef826cde3d4cc884ccbac3a1805769ae59fe07f6f8234bf22dbfeb82312a99": ["v0.1.0", "v20201103-v0.5.0-63-ga247d79"]
+- name: kubepkg-rpm
+  dmap:
+    "sha256:f5fc791f5ef03c5fe3329fff3a40b80a44029a6e236981a2e5133ebf9597f9dd": ["v0.1.0", "v20201103-v0.5.0-63-ga247d79"]
