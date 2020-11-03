@@ -263,6 +263,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - k8s-infra-release-admins@kubernetes.io
       - davanum@gmail.com
       - justinsb@google.com
       - linusa@google.com
