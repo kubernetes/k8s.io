@@ -116,6 +116,35 @@ groups:
       - k8s-infra-release-editors@kubernetes.io
       - ameukam@gmail.com
 
+  - email-id: k8s-infra-staging-cip-test@kubernetes.io
+    name: k8s-infra-staging-cip-test
+    description: |-
+      ACL for staging cip-test buckets, also the test-only backup and auditing
+      jobs for the promoter. The associated test-only GCP Project IDs are:
+
+        - k8s-cip-test-prod: This is used for testing the promoter to see that
+          it can still promote things, as part of an E2E test.
+
+        - k8s-staging-cip-test: Also used for the promotion E2E test.
+
+        - k8s-gcr-backup-test-prod: Used for testing the backup script in
+          infra/gcr/backup_tools.
+
+        - k8s-gcr-backup-test-prod-bak: Same as above.
+
+        - k8s-gcr-audit-test-prod: Used for an E2E test for the cip-auditor
+          Cloud Run service.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - linusa@google.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - rajib.jolite@gmail.com
+
   - email-id: k8s-infra-staging-kubernetes@kubernetes.io
     name: k8s-infra-staging-kubernetes
     description: |-
