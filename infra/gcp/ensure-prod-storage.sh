@@ -402,6 +402,14 @@ color 6 "Handling special cases"
     empower_service_account_for_cip_vuln_scanning \
         "$(svc_acct_email "${PROD_PROJECT}" "${VULN_DASHBOARD_SVCACCT}")" \
         "${PROD_PROJECT}"
+
+    # Special case: don't use retention on vulnerability dashboard bucket
+    #               'ci-release-vulndash-update' runs periodically in Prow and
+    #               requires access to overwrite the dashboard's html.
+    #               This should maybe one day be wired up as a Netlify site, but
+    #               one step at a time!
+    color 6 "Removing retention on the ${PROD_PROJECT}-vuln-dashboard bucket"
+    gsutil retention clear "gs://${PROD_PROJECT}-vuln-dashboard"
 ) 2>&1 | indent
 
 color 6 "Done"
