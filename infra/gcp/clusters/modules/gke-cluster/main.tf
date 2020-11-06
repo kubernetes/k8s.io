@@ -179,6 +179,10 @@ resource "google_container_cluster" "prod_cluster" {
     }
   }
 
+  release_channel {
+    channel = var.release_channel
+  }
+
   // Enable PodSecurityPolicy enforcement
   pod_security_policy_config {
     enabled = false // TODO: we should turn this on

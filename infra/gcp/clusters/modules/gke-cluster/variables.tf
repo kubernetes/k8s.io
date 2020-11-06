@@ -39,3 +39,15 @@ variable "is_prod_cluster" {
   type        = string
   default     = "false"
 }
+
+variable "release_channel" {
+  type        = string
+  default     = "UNSPECIFIED"
+  description = <<EOF
+  The release channel of this cluster. Accepted values are `UNSPECIFIED`, `RAPID`, `REGULAR` and `STABLE`.
+
+  Setting a release channel overrides the 'min_master_version' option.
+
+  More information about release channels can be found here : https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels.
+EOF
+}
