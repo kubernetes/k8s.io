@@ -115,7 +115,6 @@ groups:
       - k8s-infra-prow-oncall@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
       - ameukam@gmail.com
-      - prow-build@k8s-infra-prow-build.iam.gserviceaccount.com
 
   - email-id: k8s-infra-staging-cip-test@kubernetes.io
     name: k8s-infra-staging-cip-test
