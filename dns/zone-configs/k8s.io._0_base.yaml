@@ -299,3 +299,13 @@ krew.sigs:
 secrets-store-csi-driver.sigs:
 - type: CNAME
   value: kubernetes-sigs-secrets-store-csi-driver.netlify.app.
+# https://github.com/kubernetes-sigs/cli-experimental docs (@pwittrock @seans3 @eddiezane @soltysh)
+# kustomize and kubectl share the same docs site
+kustomize.sigs:
+  type: CNAME
+  value: cli-experimental.netlify.app.
+# https://github.com/kubernetes-sigs/cli-experimental docs (@pwittrock @seans3 @eddiezane @soltysh)
+# kustomize and kubectl share the same docs site
+kubectl.sigs:
+  type: CNAME
+  value: cli-experimental.netlify.app.
