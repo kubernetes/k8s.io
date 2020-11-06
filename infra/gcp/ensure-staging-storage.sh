@@ -274,3 +274,15 @@ for repo in "${WINDOWS_REMOTE_DOCKER_PROJECTS[@]}"; do
         done
     ) 2>&1 | indent
 done
+
+# Special case: In order for ci-kubernetes-build to run on k8s-infra-prow-build,
+#               it needs write access to gcr.io/k8s-staging-ci-images. For now,
+#               we will grant the prow-build service account write access. Longer
+#               term we would prefer service accounts per project, and restrictions
+#               on which jobs can use which service accounts.
+color 6 "Configuring special case for k8s-staging-ci-images"
+(
+    PROJECT="k8s-staging-ci-images"
+    SERVICE_ACCOUNT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
+    empower_svcacct_to_write_gcr "${SERVICE_ACCOUNT}" "${PROJECT}"
+)
