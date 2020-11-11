@@ -57,6 +57,11 @@ CLUSTER_USERS_GROUP="gke-security-groups@kubernetes.io"
 # The DNS admins group.
 DNS_GROUP="k8s-infra-dns-admins@kubernetes.io"
 
+# Buckets for the logs of prow
+PROW_BUCKETS=(
+    k8s-prow-staging-logs
+)
+
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
@@ -83,6 +88,45 @@ enable_api "${PROJECT}" secretmanager.googleapis.com
 
 color 6 "Ensuring the cluster terraform-state bucket exists"
 ensure_private_gcs_bucket "${PROJECT}" "gs://${CLUSTER_TERRAFORM_BUCKET}"
+
+
+color 6 "Ensuring all the prow buckets exist"
+for bucket in "${PROW_BUCKETS[@]}"; do
+    color 6 "Ensuring bucket ${bucket} exists."
+    ensure_public_gcs_bucket "${PROJECT}" "gs://${bucket}"
+
+    SERVICE_ACCOUNT_NAME="sa-${bucket}"
+    SERVICE_ACCOUNT_EMAIL="$(svc_acct_email "${PROJECT}" \
+        "${SERVICE_ACCOUNT_NAME}")"
+    SECRET_ID="${SERVICE_ACCOUNT_NAME}-key"
+    TMP_DIR=$(mktemp -d "/tmp/${SERVICE_ACCOUNT_NAME}.XXXXXX")
+    KEY_FILE="${TMP_DIR}/key.json"
+
+    color 6 "Creating service account: ${SERVICE_ACCOUNT_NAME}"
+    ensure_service_account \
+        "${PROJECT}" \
+        "${SERVICE_ACCOUNT_NAME}" \
+        "${SERVICE_ACCOUNT_NAME}"
+
+    color 6 "Empowering service account: ${SERVICE_ACCOUNT_NAME}"
+    empower_svcacct_to_write_gcs_bucket "${SERVICE_ACCOUNT_EMAIL}" "gs://${bucket}"
+
+    color 6 "Creating private key for service account: ${SERVICE_ACCOUNT_NAME}"
+    gcloud iam service-accounts keys create "${KEY_FILE}" \
+        --project "${PROJECT}" \
+        --iam-account "${SERVICE_ACCOUNT_EMAIL}"
+
+    color 6 "Creating secret to store private key"
+    gcloud secrets create "${SECRET_ID}" \
+        --project "${PROJECT}" \
+        --replication-policy "automatic"
+
+    color 6 "Adding private key to secret ${SECRET_ID}"
+    gcloud secrets versions add "${SECRET_ID}" \
+        --project "${PROJECT}" \
+        --data-file "${KEY_FILE}"
+
+done 2>&1 | indent
 
 color 6 "Empowering BigQuery admins"
 gcloud projects add-iam-policy-binding "${PROJECT}" \
