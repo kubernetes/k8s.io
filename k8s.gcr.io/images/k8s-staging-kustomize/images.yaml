@@ -1,1 +1,3 @@
-# No images yet
+- name: kustomize
+  dmap:
+    "sha256:98c4429165e543c8a5489e3923d10e78649ed0ccb7eef5a003fe16b3554c3cf9": ["v3.8.7"]
