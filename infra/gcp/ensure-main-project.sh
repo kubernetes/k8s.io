@@ -57,6 +57,11 @@ CLUSTER_USERS_GROUP="gke-security-groups@kubernetes.io"
 # The DNS admins group.
 DNS_GROUP="k8s-infra-dns-admins@kubernetes.io"
 
+# Buckets for the logs of prow
+PROW_BUCKETS=(
+    k8s-prow-infra-logs
+)
+
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
@@ -78,6 +83,40 @@ color 6 "Ensuring the cluster terraform-state bucket exists"
 ensure_private_gcs_bucket \
     "${PROJECT}" \
     "gs://${CLUSTER_TERRAFORM_BUCKET}"
+
+
+color 6 "Ensuring all the prow buckets exist"
+for bucket in "${PROW_BUCKETS[@]}"; do
+    color 6 "Ensuring bucket ${bucket} exists and is only word-readable"
+    ensure_public_gcs_bucket "${PROJECT}" "gs://${bucket}"
+
+    local SERVICE_ACCOUNT_NAME="${bucket}-sa"
+    local SERVICE_ACCOUNT_EMAIL="$(svc_acct_email "${PROJECT}" \
+        "${SERVICE_ACCOUNT_NAME}")"
+    local SECRET_ID="${SERVICE_ACCOUNT_NAME}-key"
+
+    color 6 "Creating service account: ${SERVICE_ACCOUNT_NAME}"
+    ensure_service_account \
+        "${PROJECT}" \
+        "${SERVICE_ACCOUNT_NAME}" \
+        "${SERVICE_ACCOUNT_NAME}"
+
+    color 6 "Empowering service account: ${SERVICE_ACCOUNT_NAME}"
+    empower_svcacct_to_write_gcs_bucket "${SERVICE_ACCOUNT_EMAIL}" "gs://${bucket}"
+
+    color 6 "Ensure secret ${SECRET_ID} exists in project ${PROJECT}"
+    ensure_secret "${PROJECT}" "${SECRET_ID}"
+
+    color "Ensure ${SECRET_ID} contains secret key for ${SERVICE_ACCOUNT_NAME}"
+    ensure_serviceaccount_key_secret "${PROJECT}" "${SECRET_ID}" "${SERVICE_ACCOUNT_EMAIL}"
+
+    color 6 "Empowering k8s-infra-prow-oncall@kubernetes.io to read secret ${SECRET_ID}"
+    ensure_secrets_role_binding \
+        "projects/${PROJECT}/secrets/${SECRET_ID}" \
+        "group:k8s-infra-prow-oncall@kubernetes.io" \
+        "roles/secretmanager.secretAccessor"
+
+done 2>&1 | indent
 
 color 6 "Empowering BigQuery admins"
 ensure_project_role_binding \
