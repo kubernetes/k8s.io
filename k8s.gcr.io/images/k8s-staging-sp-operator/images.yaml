@@ -1,3 +1,4 @@
 - name: security-profiles-operator
   dmap:
     "sha256:67c97995264f949ab2d2e028cc6fb981cf5fe4646442abb8b422e9559c6a5732": ["v0.1.0"]
+    "sha256:16c33e6b749f91802e22d99ce6fabdd23aa283309fe77134c6271afd298db805": ["v0.2.0"]
