@@ -108,10 +108,10 @@ code:
   type: CNAME
   value: redirect.k8s.io.
 # Code search (@dims)
-# TODO: Where does this run?
+# This service runs in a equinix host managed by @dims
 cs:
   type: A
-  value: 147.75.97.58
+  value: 139.178.84.205
 # sig-contributor-experience
 discuss:
   type: CNAME
