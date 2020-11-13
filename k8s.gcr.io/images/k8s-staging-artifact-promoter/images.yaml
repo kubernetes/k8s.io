@@ -26,4 +26,5 @@
     "sha256:fed92a03f4fa54db70605f5ea0889424a9f4aa6f5d88c175ba20c7f65a2ba72e": ["20200122-v2.3.1-79-gb737803"]
 - name: vulndash
   dmap:
+    "sha256:739b7d395aabed36c0a917eb59daf972eda4d3fa1a1162efcdfb7d9b6bebbd2b": ["v0.3.0-1"]
     "sha256:c015bfcc07326924927521709ea04cf19b7ab98ee16d97793a39a038b11a0693": ["v0.3.0"]
