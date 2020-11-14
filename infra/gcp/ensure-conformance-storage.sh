@@ -48,6 +48,7 @@ CONFORMANCE_BUCKETS=(
     capi-openstack
     cri-o
     huaweicloud
+    inspur
     s390x-k8s
 )
 if [ $# = 0 ]; then
