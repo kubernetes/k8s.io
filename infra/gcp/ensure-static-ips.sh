@@ -43,6 +43,7 @@ ADDRESSES=(
     "k8s-io-ingress-canary-v6"
     "k8s-io-ingress-prod-v6"
     "perf-dash-k8s-io-ingress-prod"
+    "prow-k8s-io-ingress-staging"
     "slack-infra-ingress-prod"
     "node-perf-dash-k8s-io-ingress-prod"
     "triage-party-release-ingress-prod"
