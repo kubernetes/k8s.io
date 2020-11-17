@@ -64,6 +64,7 @@ STAGING_PROJECTS=(
     ci-images
     coredns
     cpa
+    cri-tools
     csi
     csi-secrets-store
     descheduler
