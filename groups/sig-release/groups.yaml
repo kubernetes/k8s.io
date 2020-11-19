@@ -42,6 +42,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-admins@kubernetes.io
+      - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
@@ -62,7 +63,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
-      - adolfo.garcia@uservers.net
       - gianarb92@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
@@ -206,6 +206,7 @@ groups:
       - stephen.k8s@agst.us
       - tpepper@vmware.com
     members:
+      - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
       - dmaceachern@vmware.com
       - feiskyer@gmail.com
@@ -232,7 +233,6 @@ groups:
       - tpepper@gmail.com
       - tpepper@vmware.com
     members:
-      - adolfo.garcia@uservers.net
       - amwat@google.com
       - bentheelder@google.com
       - ctadeu@gmail.com
