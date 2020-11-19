@@ -62,9 +62,9 @@ aliases:
     - derekwaynecarr
   sig-release-leads:
     - alejandrox1
+    - hasheddan
     - justaugustus
     - saschagrunert
-    - tpepper
   sig-scalability-leads:
     - mm4tt
     - shyamjvs
@@ -213,25 +213,23 @@ aliases:
   release-engineering-approvers:
     - alejandrox1 # SIG Technical Lead
     - cpanato # Release Manager
-    - dougm # Release Manager
     - feiskyer # Release Manager
-    - hasheddan # Release Manager
-    - hoegaarden # Release Manager
+    - hasheddan # subproject owner / Release Manager / SIG Technical Lead
     - idealhack # Release Manager
     - justaugustus # subproject owner / Release Manager / SIG Chair
-    - saschagrunert # SIG Technical Lead
-    - tpepper # subproject owner / Release Manager / SIG Chair
+    - puerco # Release Manager
+    - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - tpepper # subproject owner
     - xmudrii # Release Manager
   release-engineering-reviewers:
     - alejandrox1 # SIG Technical Lead
     - cpanato # Release Manager
-    - dougm # Release Manager
     - feiskyer # Release Manager
-    - hasheddan # Release Manager
-    - hoegaarden # Release Manager
+    - hasheddan # subproject owner / Release Manager / SIG Technical Lead
     - idealhack # Release Manager
     - justaugustus # subproject owner / Release Manager / SIG Chair
-    - saschagrunert # SIG Technical Lead
-    - tpepper # subproject owner / Release Manager / SIG Chair
+    - puerco # Release Manager
+    - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - tpepper # subproject owner
     - xmudrii # Release Manager
 ## END CUSTOM CONTENT

@@ -28,10 +28,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - alarcj137@gmail.com
+      - georgedanielmangum@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
 
   - email-id: k8s-infra-release-editors@kubernetes.io
     name: k8s-infra-release-editors
@@ -42,16 +41,14 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-admins@kubernetes.io
+      - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - dmaceachern@vmware.com
       - feiskyer@gmail.com
       - georgedanielmangum@gmail.com
-      - hhorl@pivotal.io
       - idealhack@gmail.com
       - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
@@ -62,20 +59,17 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
-      - adolfo.garcia@uservers.net
+      - ameukam@gmail.com
       - gianarb92@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
-      - linusa@google.com
       - marky.r.jackson@gmail.com
       - max@koerbaecher.io
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
-      - simony@google.com
-      - sumitranr@google.com
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
@@ -180,9 +174,11 @@ groups:
       ReconcileMembers: "true"
     owners:
       - alarcj137@gmail.com
+      - georgedanielmangum@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
+    managers:
+      - tpepper@vmware.com # Release Team subproject owner
     members:
       - jeremy.r.rickard@gmail.com
       - keroden@microsoft.com
@@ -205,15 +201,13 @@ groups:
       ReconcileMembers: "true"
     owners:
       - alarcj137@gmail.com
+      - georgedanielmangum@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
     members:
+      - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - dmaceachern@vmware.com
       - feiskyer@gmail.com
-      - georgedanielmangum@gmail.com
-      - hhorl@pivotal.io
       - idealhack@gmail.com
       - mudrinic.mare@gmail.com
       - saugustus@vmware.com
@@ -229,23 +223,20 @@ groups:
       ReconcileMembers: "true"
     owners:
       - alarcj137@gmail.com
+      - georgedanielmangum@gmail.com
       - saschagrunert@gmail.com
       - saugustus@vmware.com
       - stephen.k8s@agst.us
-      - tpepper@gmail.com
-      - tpepper@vmware.com
     members:
-      - adolfo.garcia@uservers.net
+      - release-managers-private@kubernetes.io
+      - ameukam@gmail.com
       - amwat@google.com
       - bentheelder@google.com
       - ctadeu@gmail.com
-      - dmaceachern@vmware.com
       - feiskyer@gmail.com
-      - georgedanielmangum@gmail.com
       - gianarb92@gmail.com
       - gmccloskey@google.com
       - gveronicalg@gmail.com
-      - hhorl@pivotal.io
       - idealhack@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
@@ -255,7 +246,6 @@ groups:
       - mudrinic.mare@gmail.com
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
-      - release-managers-private@kubernetes.io
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
       - spiffxp@google.com
@@ -283,10 +273,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - alarcj137@gmail.com
+      - georgedanielmangum@gmail.com
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
 
   - email-id: release-team@kubernetes.io
     name: release-team
@@ -298,15 +288,15 @@ groups:
       ReconcileMembers: "true"
     owners:
       - alarcj137@gmail.com
+      - georgedanielmangum@gmail.com
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
     managers:
-      - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
       - jeremy.r.rickard@gmail.com # 1.20 RT Lead
       - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
       - saveetha13@gmail.com # 1.20 RT Lead Shadow
+      - tpepper@vmware.com # Release Team subproject owner
     members:
       - sig-release-leads@kubernetes.io
       - antheabjung@gmail.com # 1.20 Docs Lead
@@ -348,12 +338,13 @@ groups:
       ReconcileMembers: "true"
     owners:
       - alarcj137@gmail.com
+      - georgedanielmangum@gmail.com
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
     managers:
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
+      - tpepper@vmware.com # Release Team subproject owner
     members:
       - celeste@cncf.io # 1.20 Release Notes Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
@@ -361,7 +352,6 @@ groups:
       - divya.mohan0209@gmail.com # 1.20 Comms Shadow
       - droslean@gmail.com # 1.20 Bug Triage Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
-      - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
       - jackytan@outlook.com # 1.20 Release Notes Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
