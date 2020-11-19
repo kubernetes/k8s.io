@@ -148,6 +148,7 @@ ALL_PROJECTS=(
     "k8s-io-canary"
     "node-perf-dash"
     "perfdash"
+    "prow"
     "publishing-bot"
     "slack-infra"
     "triageparty-release"
