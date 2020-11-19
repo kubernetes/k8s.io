@@ -63,6 +63,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+      - ameukam@gmail.com
       - gianarb92@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
@@ -233,6 +234,7 @@ groups:
       - tpepper@gmail.com
       - tpepper@vmware.com
     members:
+      - ameukam@gmail.com
       - amwat@google.com
       - bentheelder@google.com
       - ctadeu@gmail.com
