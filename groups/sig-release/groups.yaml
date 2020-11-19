@@ -176,7 +176,8 @@ groups:
       - alarcj137@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
+    managers:
+      - tpepper@vmware.com # Release Team subproject owner
     members:
       - jeremy.r.rickard@gmail.com
       - keroden@microsoft.com
@@ -274,7 +275,6 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
 
   - email-id: release-team@kubernetes.io
     name: release-team
@@ -289,12 +289,12 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
     managers:
       - georgedanielmangum@gmail.com # 1.20 RT Lead Shadow
       - jeremy.r.rickard@gmail.com # 1.20 RT Lead
       - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
       - saveetha13@gmail.com # 1.20 RT Lead Shadow
+      - tpepper@vmware.com # Release Team subproject owner
     members:
       - sig-release-leads@kubernetes.io
       - antheabjung@gmail.com # 1.20 Docs Lead
@@ -339,9 +339,9 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
-      - tpepper@vmware.com
     managers:
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
+      - tpepper@vmware.com # Release Team subproject owner
     members:
       - celeste@cncf.io # 1.20 Release Notes Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
