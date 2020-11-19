@@ -28,7 +28,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - alarcj137@gmail.com
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
 
