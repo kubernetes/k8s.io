@@ -67,15 +67,12 @@ groups:
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
-      - linusa@google.com
       - marky.r.jackson@gmail.com
       - max@koerbaecher.io
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
-      - simony@google.com
-      - sumitranr@google.com
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
