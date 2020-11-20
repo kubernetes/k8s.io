@@ -20,6 +20,22 @@ groups:
       - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
       - v@gor.io # 1.20 Bug Triage Lead
 
+  - email-id: k8s-infra-google-build-admins@kubernetes.io
+    name: k8s-infra-google-build-admins
+    description: |-
+      ACL for Google Build Admins (edit access to Docker Hub mirror, view
+      access to Release GCP projects)
+
+      https://git.k8s.io/sig-release/release-managers.md#build-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - amwat@google.com
+      - bentheelder@google.com
+      - mushuee@google.com
+      - spiffxp@google.com
+
   - email-id: k8s-infra-release-admins@kubernetes.io
     name: k8s-infra-release-admins
     description: |-
@@ -59,6 +75,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+      - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
       - gianarb92@gmail.com
       - gveronicalg@gmail.com
@@ -149,6 +166,22 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-mirror@kubernetes.io
+    name: k8s-infra-staging-mirror
+    description: |-
+      ACL for staging mirror images
+
+      This project is used to stage images mirrored from Docker Hub.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - k8s-infra-google-build-admins@kubernetes.io
+      - cblecker@gmail.com # wg-k8s-infra-oncall
+      - davanum@gmail.com # wg-k8s-infra-oncall
+      - spiffxp@google.com # wg-k8s-infra-oncall
+      - thockin@google.com # wg-k8s-infra-oncall
 
   - email-id: k8s-infra-staging-releng@kubernetes.io
     name: k8s-infra-staging-releng
