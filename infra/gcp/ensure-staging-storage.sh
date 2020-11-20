@@ -86,6 +86,7 @@ STAGING_PROJECTS=(
     kubernetes
     kustomize
     metrics-server
+    mirror
     multitenancy
     networking
     nfd
@@ -106,6 +107,7 @@ STAGING_PROJECTS=(
 
 RELEASE_STAGING_PROJECTS=(
     kubernetes
+    mirror
     releng
 )
 
