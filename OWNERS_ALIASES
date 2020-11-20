@@ -168,6 +168,11 @@ aliases:
     - nikhita
     - parispittman
 ## BEGIN CUSTOM CONTENT
+  build-admins:
+    - amwat
+    - BenTheElder
+    - MushuEE
+    - spiffxp
   build-image-approvers:
     - BenTheElder
     - cblecker
