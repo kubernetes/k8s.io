@@ -1094,6 +1094,17 @@ groups:
       - dlipovetsky@d2iq.com
       - neolit123@gmail.com
 
+  - email-id: k8s-infra-staging-examples@kubernetes.io
+    name: k8s-infra-staging-examples
+    description: |-
+      ACL for staging example artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ihor@cncf.io # github:idvoretskyi
+      - justinsb@google.com # github:justinsb
+      - runseb@gmail.com # github:sebgoa
+
   - email-id: k8s-infra-staging-external-dns@kubernetes.io
     name: k8s-infra-staging-external-dns
     description: |-
