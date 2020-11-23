@@ -1,1 +1,3 @@
-# No images yet
+- name: gcp-filestore-csi-driver
+  dmap:
+    "sha256:351548ca4bb0556e717c27309e1e559f65c9ae5826e60d48e0215f267835b80f": ["v0.3.1"]
