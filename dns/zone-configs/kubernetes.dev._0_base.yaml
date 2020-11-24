@@ -5,7 +5,7 @@
     value: 104.198.14.52
   - type: TXT
     values:
-    - google-site-verification=i44Ja96OGA5YEJW32LscN9DgUKsy5tQ9dCXjpSRBQZI
+    - google-site-verification=UxFPOMk_vLiVIXmJ4IDFqIX0ISJBLMBrgTYcUFBpmiw
 
 www:
   type: CNAME
