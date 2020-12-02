@@ -15,6 +15,7 @@ mock-driver
 nfs-provisioner
 snapshot-controller
 snapshot-validation-webhook
+local-volume-provisioner
 "
 
 for repo in $repos; do
