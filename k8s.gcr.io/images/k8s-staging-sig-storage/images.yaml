@@ -73,3 +73,6 @@
   dmap:
     "sha256:8bfd19dc57bb86ca4438b9592578a1a9afaf559f22e63a9b308b8b2be8d789ad": [ "v3.0.0" ]
     "sha256:ef62b3d2885a2a9f9fd97b4bff6facd97d9bedd8c5c62429bbf81797f20cb998": [ "v3.0.2" ]
+- name: local-volume-provisioner
+  dmap:
+    "sha256:63859b69f9dfc0858e5d8746218e435c36e205c041fb6d8baf71ad132e24737f": [ "v2.4.0" ]
