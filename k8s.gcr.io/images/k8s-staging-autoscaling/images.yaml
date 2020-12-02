@@ -15,6 +15,7 @@
     "sha256:ad77e9587aff8cdaa90fb371cfff4458205ef63a4783734b5dd667872d1e91e1": ["v1.18.3"]
     "sha256:d6e51b58808b5abe74b57666114efab748a6d8ba73afdb24cd2a7f91f11c4b1b": ["v1.19.0"]
     "sha256:06969498d858f456929b5715b82c7eae23788729763590ffa4e622c1c6b8c1c6": ["v1.19.1"]
+    "sha256:1c19fa17b29db548d0304e9444adf84e8a6f38ee4c0a12d2ecaf262cb10c0e50": ["v1.20.0"]
 
 - name: vpa-admission-controller
   dmap:
