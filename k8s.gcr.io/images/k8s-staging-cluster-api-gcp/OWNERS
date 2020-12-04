@@ -4,3 +4,13 @@ approvers:
 - detiber
 - justinsb
 - vincepri
+
+reviewers:
+- cpanato
+- detiber
+- justinsb
+- vincepri
+
+labels:
+- sig/cluster-lifecycle
+- area/provider/gcp
