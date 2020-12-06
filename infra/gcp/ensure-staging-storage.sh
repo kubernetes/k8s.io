@@ -72,6 +72,7 @@ STAGING_PROJECTS=(
     e2e-test-images
     etcd
     etcdadm
+    examples
     external-dns
     git-sync
     infra-tools
