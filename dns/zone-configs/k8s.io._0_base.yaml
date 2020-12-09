@@ -200,6 +200,10 @@ prow-canary:
 monitoring.prow-canary:
   type: A
   value: 34.102.128.31
+#wg-k8s-infra (@ameukam)
+prow-staging:
+  type: A
+  value: 35.190.121.209
 prs:
   type: CNAME
   value: redirect.k8s.io.
