@@ -13,3 +13,6 @@
 - name: ip-masq-agent-ppc64le
   dmap:
     "sha256:fd7449efcd712a85dbcdf6c1648f5f9bb674c208862f469c457ccd154d7d12bf": ["v2.6.0"]
+- name: ingress-gce-404-server-with-metrics-amd64
+  dmap:
+    "sha256:76112e92b5fd530e5ee16eea097507b6a1c053cd58f030f2fdc1e9f997e8e0f1": ["v1.10.10"]
