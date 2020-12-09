@@ -1,1 +1,4 @@
-# no images yet
+- name: aws-ebs-csi-driver
+  dmap:
+    "sha256:a8ed0a90b49c16301f3ca934b75db63b8d5c8d68c377a865bce15c9af4a12ff5": ["v0.8.0"]
+    "sha256:f0a70741879930df4c70ae855c5dfc106e83c9678d956f80e965f71a57ac89c1": ["v0.8.0-amazonlinux"]
