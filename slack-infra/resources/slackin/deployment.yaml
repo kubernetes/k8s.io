@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: slackin2
-        image: gcr.io/kubernetes-tools/slackin-kubernetes@sha256:d1a9b02239e690d5cbd78c76475a112aedf279dbd8ef401de1b8394f817a23b3
+        image: gcr.io/k8s-staging-slack-infra/slackin-kubernetes@sha256:d1a9b02239e690d5cbd78c76475a112aedf279dbd8ef401de1b8394f817a23b3
         env:
         - name: PORT
           value: "80"
