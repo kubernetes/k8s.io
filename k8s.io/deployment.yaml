@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: k8s-io
@@ -7,7 +7,10 @@ metadata:
     version: v1
 spec:
   replicas: 2
-  # selector defaults to template's labels
+  selector:
+    matchLabels:
+      app: k8s-io
+      version: v1
   strategy:
     type: RollingUpdate
     rollingUpdate:
