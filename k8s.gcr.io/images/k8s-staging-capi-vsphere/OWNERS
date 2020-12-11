@@ -4,5 +4,7 @@ approvers:
 - randomvariable
 - yastij
 - detiber
-- ncdc
 - vincepri
+
+emeritus_approvers:
+- ncdc
