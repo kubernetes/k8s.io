@@ -6,6 +6,8 @@ approvers:
 - detiber
 - fabriziopandini
 - justinsb
-- ncdc
 - timothysc
 - vincepri
+
+emeritus_approvers:
+- ncdc

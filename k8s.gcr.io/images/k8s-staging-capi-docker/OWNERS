@@ -5,6 +5,8 @@ approvers:
 - davidewatson
 - detiber
 - justinsb
-- ncdc
 - timothysc
 - vincepri
+
+emeritus_approvers:
+- ncdc
