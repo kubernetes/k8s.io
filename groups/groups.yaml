@@ -1239,6 +1239,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - bannai@google.com
       - bowei@google.com
       - jsand@google.com
       - mixia@google.com
