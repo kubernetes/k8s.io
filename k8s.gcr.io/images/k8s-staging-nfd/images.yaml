@@ -3,3 +3,6 @@
     sha256:d82df7c2bb076211119177b339d4de4af88d1f8b4fa3976c103a0f80a06e964c: [v0.5.0]
     sha256:a1e72dbc35a16cbdcf0007fc4fb207bce723ff67c61853d2d8d8051558ce6de7: [v0.6.0]
     sha256:5d116c2c340be665a2c8adc9aca7f91396bd5cbde4add4fdc8dab95d8db43425: [v0.7.0]
+- name: node-feature-discovery-operator
+  dmap:
+    sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16: [v0.2.0]
