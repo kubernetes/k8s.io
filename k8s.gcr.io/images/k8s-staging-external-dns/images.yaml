@@ -7,3 +7,13 @@
     "sha256:da8f1dfcf7f9497b0fdd074c210385944abd231ff4f3e4dc10c60ef62a6b4901": ["v0.7.2"]
     "sha256:221454cbba7aa159097e89751c3b461de84a23f652450e645d97e29190c5d5de": ["v0.7.3"]
     "sha256:6847c7ce7216c7670c6c24305d44030b61d2fa1e7d26056bd31d4a7ee3b35d35": ["v0.7.4"]
+    "sha256:ec0b0f8fe353f827511e3e74493e2b77f5ba5def83baf403f9e36ef7dfd7f5f6": ["v0.7.5"]
+- name: external-dns-amd64
+  dmap:
+    "sha256:f4c75744c051d1a28fab4f6b42f51c07c07db5e16c2324e2a2c4030dcea7437c": ["v0.7.5"]
+- name: external-dns-arm32v7
+  dmap:
+    "sha256:ee97c708867498a4c0b122f9b7a7aec6575b3f8eb06d4d227a08d5c04ffc1bfa": ["v0.7.5"]
+- name: external-dns-arm64v8
+  dmap:
+    "sha256:ce66aede1bb2911813768e4c58e0d88209a439ccaaee2705c71d34f04bce1c5c": ["v0.7.5"]
