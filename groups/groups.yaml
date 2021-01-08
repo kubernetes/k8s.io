@@ -1349,9 +1349,13 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - thockin@google.com
-      - bowei@google.com
       - antonio.ojea.garcia@gmail.com
+      - bowei@google.com
+      - cmluciano@us.ibm.com
+      - daneyonhansen@gmail.com
+      - harrybagdi@gmail.com
+      - robertjscott@google.com
+      - thockin@google.com
 
   - email-id: k8s-infra-staging-slack-infra@kubernetes.io
     name: k8s-infra-staging-slack-infra
