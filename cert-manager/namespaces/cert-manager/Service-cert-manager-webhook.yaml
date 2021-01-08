@@ -1,0 +1,23 @@
+# Source: cert-manager/templates/webhook-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: cert-manager-webhook
+  namespace: "cert-manager"
+  labels:
+    app: webhook
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cert-manager-v0.13.1
+spec:
+  type: ClusterIP
+  ports:
+  - name: https
+    port: 443
+    targetPort: 10250
+  selector:
+    app: webhook
+    app.kubernetes.io/name: webhook
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
