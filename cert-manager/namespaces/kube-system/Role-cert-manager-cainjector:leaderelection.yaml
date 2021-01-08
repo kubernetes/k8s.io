@@ -1,19 +1,28 @@
-# leader election rules
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: cert-manager-cainjector:leaderelection
-  namespace: kube-system
   labels:
     app: cainjector
-    app.kubernetes.io/name: cainjector
+    app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
+    app.kubernetes.io/name: cainjector
+  name: cert-manager-cainjector:leaderelection
+  namespace: kube-system
 rules:
-  # Used for leader election by the controller
-  # TODO: refine the permission to *just* the leader election configmap
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["get", "create", "update", "patch"]
-
+- apiGroups:
+  - ""
+  resourceNames:
+  - cert-manager-cainjector-leader-election
+  - cert-manager-cainjector-leader-election-core
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create

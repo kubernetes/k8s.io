@@ -1,51 +1,91 @@
-
-# Challenges controller role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: cert-manager-controller-challenges
   labels:
     app: cert-manager
-    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.13.1
+    app.kubernetes.io/name: cert-manager
+  name: cert-manager-controller-challenges
 rules:
-  # Use to update challenge resource status
-  - apiGroups: ["acme.cert-manager.io"]
-    resources: ["challenges", "challenges/status"]
-    verbs: ["update"]
-  # Used to watch challenge resources
-  - apiGroups: ["acme.cert-manager.io"]
-    resources: ["challenges"]
-    verbs: ["get", "list", "watch"]
-  # Used to watch challenges, issuer and clusterissuer resources
-  - apiGroups: ["cert-manager.io"]
-    resources: ["issuers", "clusterissuers"]
-    verbs: ["get", "list", "watch"]
-  # Need to be able to retrieve ACME account private key to complete challenges
-  - apiGroups: [""]
-    resources: ["secrets"]
-    verbs: ["get", "list", "watch"]
-  # Used to create events
-  - apiGroups: [""]
-    resources: ["events"]
-    verbs: ["create", "patch"]
-  # HTTP01 rules
-  - apiGroups: [""]
-    resources: ["pods", "services"]
-    verbs: ["get", "list", "watch", "create", "delete"]
-  - apiGroups: ["extensions"]
-    resources: ["ingresses"]
-    verbs: ["get", "list", "watch", "create", "delete", "update"]
-  # We require these rules to support users with the OwnerReferencesPermissionEnforcement
-  # admission controller enabled:
-  # https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#ownerreferencespermissionenforcement
-  - apiGroups: ["acme.cert-manager.io"]
-    resources: ["challenges/finalizers"]
-    verbs: ["update"]
-  # DNS01 rules (duplicated above)
-  - apiGroups: [""]
-    resources: ["secrets"]
-    verbs: ["get", "list", "watch"]
-
+- apiGroups:
+  - acme.cert-manager.io
+  resources:
+  - challenges
+  - challenges/status
+  verbs:
+  - update
+- apiGroups:
+  - acme.cert-manager.io
+  resources:
+  - challenges
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - issuers
+  - clusterissuers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - route.openshift.io
+  resources:
+  - routes/custom-host
+  verbs:
+  - create
+- apiGroups:
+  - acme.cert-manager.io
+  resources:
+  - challenges/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
