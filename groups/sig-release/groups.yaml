@@ -81,11 +81,13 @@ groups:
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
+      - kikis.github@gmail.com
       - marky.r.jackson@gmail.com
       - max@koerbaecher.io
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
       - saveetha13@gmail.com
+      - v@gor.io
       - sethpmccombs@gmail.com
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
@@ -273,6 +275,7 @@ groups:
       - idealhack@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
+      - kikis.github@gmail.com
       - lauri.d.apple@gmail.com
       - marky.r.jackson@gmail.com
       - max@koerbaecher.io
@@ -282,6 +285,7 @@ groups:
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
       - spiffxp@google.com
+      - v@gor.io
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
@@ -326,10 +330,11 @@ groups:
       - saschagrunert@gmail.com
       - stephen.k8s@agst.us
     managers:
-      - jeremy.r.rickard@gmail.com # 1.20 RT Lead
-      - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
-      - saveetha13@gmail.com # 1.20 RT Lead Shadow
+      - kikis.github@gmail.com # 1.21 RT Lead Shadow
+      - pal.nabarun95@gmail.com  # 1.21 RT Lead
+      - saveetha13@gmail.com # 1.21 RT Lead Shadow
       - tpepper@vmware.com # Release Team subproject owner
+      - v@gor.io # 1.21 RT Lead Shadow
     members:
       - sig-release-leads@kubernetes.io
       - antheabjung@gmail.com # 1.20 Docs Lead
@@ -341,7 +346,6 @@ groups:
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.20 Communications Lead
       - kefroden@gmail.com # 1.20 RT Enhancements Shadow
-      - kikis.github@gmail.com # 1.20 Enhancements Lead
       - kcmartin2@mac.com # 1.20 Docs Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
@@ -357,7 +361,6 @@ groups:
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
-      - v@gor.io # 1.20 Bug Triage Lead
       - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
       - xander@grzy.dev # 1.20 Comms Shadow
 
