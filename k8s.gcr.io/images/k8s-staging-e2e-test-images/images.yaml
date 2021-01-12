@@ -14,6 +14,9 @@
 - name: nonewprivs
   dmap:
     "sha256:553fcda2222ccea7cd534c8da34b709feb768d6389eb7333444b13f296bd168f": ["1.1"]
+- name: regression-issue-74839
+  dmap:
+    "sha256:b4f1d8d61bdad84bd50442d161d5460e4019d53e989b64220fdbc62fc87d76bf": ["1.2"]
 - name: resource-consumer
   dmap:
     "sha256:74e800780d7656d42fb0f28e153619044a826e5f532d1871cac4b7c4d66d946f": ["1.6"]
