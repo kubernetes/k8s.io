@@ -45,8 +45,8 @@ groups:
       ReconcileMembers: "true"
     members:
       - georgedanielmangum@gmail.com
+      - k8s@auggie.dev
       - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
 
   - email-id: k8s-infra-release-editors@kubernetes.io
     name: k8s-infra-release-editors
@@ -62,9 +62,9 @@ groups:
       - feiskyer@gmail.com
       - georgedanielmangum@gmail.com
       - idealhack@gmail.com
+      - k8s@auggie.dev
       - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
@@ -115,8 +115,8 @@ groups:
       - bentheelder@google.com
       - cblecker@gmail.com
       - davanum@gmail.com
+      - k8s@auggie.dev
       - linusa@google.com
-      - stephen.k8s@agst.us
 
   - email-id: k8s-infra-staging-ci-images@kubernetes.io
     name: k8s-infra-staging-ci-images
@@ -210,8 +210,8 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - k8s@auggie.dev
       - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
     managers:
       - tpepper@vmware.com # Release Team subproject owner
     members:
@@ -237,8 +237,8 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - k8s@auggie.dev
       - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
     members:
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
@@ -259,9 +259,9 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - k8s@auggie.dev
       - saschagrunert@gmail.com
       - saugustus@vmware.com
-      - stephen.k8s@agst.us
     members:
       - release-managers-private@kubernetes.io
       - ameukam@gmail.com
@@ -311,9 +311,9 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - k8s@auggie.dev
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
 
   - email-id: release-team@kubernetes.io
     name: release-team
@@ -326,9 +326,9 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - k8s@auggie.dev
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
     managers:
       - kikis.github@gmail.com # 1.21 RT Lead Shadow
       - pal.nabarun95@gmail.com  # 1.21 RT Lead
@@ -375,9 +375,9 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - k8s@auggie.dev
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
-      - stephen.k8s@agst.us
     managers:
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
       - tpepper@vmware.com # Release Team subproject owner
