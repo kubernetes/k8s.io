@@ -89,6 +89,7 @@ groups:
       - jonathan.berkhahn@gmail.com
       - jsafrane@redhat.com
       - justin@fathomdb.com
+      - k8s@auggie.dev
       - kaitlynbarnard10@gmail.com
       - kbhawkey@gmail.com
       - kikis.github@gmail.com
@@ -114,7 +115,6 @@ groups:
       - saugustus@vmware.com
       - saveetha13@gmail.com
       - seans@google.com
-      - stephen.k8s@agst.us
       - szostok.mateusz@gmail.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
@@ -927,9 +927,9 @@ groups:
       - cecilerobertm@gmail.com
       - davanum@gmail.com
       - david@devigned.com
+      - k8s@auggie.dev
       - nziada@vmware.com
       - prignanov@vmware.com
-      - stephen.k8s@agst.us
 
   - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
     name: k8s-infra-staging-cluster-api-gcp
@@ -1289,7 +1289,7 @@ groups:
     members:
       - t-qini@microsoft.com
       - feiskyer@gmail.com
-      - stephen.k8s@agst.us
+      - k8s@auggie.dev
       - xiazhang@microsoft.com
       - bburns@microsoft.com
       - doliu@microsoft.com
