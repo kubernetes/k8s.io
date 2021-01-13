@@ -165,7 +165,7 @@ gcloud \
             secretmanager)
                 gcloud \
                     secrets list \
-                    --project=k8s-gsuite \
+                    --project="${PROJECT}" \
                     --format="value(name)" \
                 | while read -r SECRET; do
                     path="projects/${PROJECT}/secrets/${SECRET}"
