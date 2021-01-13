@@ -1,0 +1,33 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-prow-viewers@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/prow.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-329234377247@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:329234377247-compute@developer.gserviceaccount.com",
+        "serviceAccount:329234377247@cloudservices.gserviceaccount.com",
+        "serviceAccount:boskos-janitor@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "group:k8s-infra-prow-oncall@kubernetes.io",
+        "user:spiffxp@google.com"
+      ],
+      "role": "roles/owner"
+    }
+  ],
+  "version": 1
+}

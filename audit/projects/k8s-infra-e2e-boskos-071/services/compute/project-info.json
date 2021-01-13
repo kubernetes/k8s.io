@@ -1,0 +1,169 @@
+{
+  "commonInstanceMetadata": {
+    "items": [
+      {
+        "key": "ssh-keys",
+        "value": "prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow\nprow:prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIvxrIm116KcgsKNTAHAbDqE3ZmgT5mIs1b0oOaGJWmQYbYjXV4pHJYB2Dy4ko5IT3rXMcxO7IhENbm5b1zPb4Q/lLLPnZzm+36PmoEjky+Vj0tbWN0t/FbqE9jvtq8cgnoIaWqAVws5137mbJyTY4nDgICp1OAcQm7hG7+Pe1T/G0jjprzG5LAuRPS8HRL/7rx08cLfsngqIJ1VzaYGUZ6nqs377sA3SBgbT4AuOWs6MJ1M8tYDjBDMdJbQa96g8IWCnnL4xLhvkfi77ZYKCW0WTmxmIHP4bafTm52yvc+eR/TC34xh43D+y4SrY/pvzCDLBigPmQtHLl67f2Up/D root@3aed3fc6-d8ea-11ea-8c1c-d23af84fd26f\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3WdKVQzDBBKR9IHDHrffIXNZsyqlJOZyVoV00xCoSJxpwVamG5BLyE34qaAr+lYwCLYpm1F5cYjTDdwn6dbvpMR5xKPL3m18lWLTr7OxMI9oG1X0cYhSRbo+iBfG7xaswL3dnPZvWOHG1Idc8zVho3rPvph4NmKHbPIYKp1kE6vLr+dVRfzdeKUmGsub9gKw/iMOLHvVCdVG263WltZ6o2dBd491bwzwFqE+iTenNZTlx6hVe9C76Fh9XKLqY21iVXHmzGa/gphrCX+LmJos1uJlzqTyMcyKfx90+splZsD2bwHFu7lI3mGUpswcdLme2ihr57bkeu6HCIDaHVWi7 root@392c8f7d-d99b-11ea-8c1c-d23af84fd26f\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9FjkMaIpzuy46LcDoRu6nD+yGZt9PG03s9NDf8kDD6SO4s6na4VPvP2He1X8cWoLOQCAgMFDt9e3ZyPS8UptR0HdTYVPpzfSj4RxVgi2wsHjAp8TVC4z+OPSFa+UlRDQO3XICm9lIBrzyQuiN6eMCCdjZAivRgZa3a5LUzGEyXq55ytF/jLLjCh4OckNZ/sZ3OncFTxz85B8XWjeiC6mRKBQFILStchKq32CsRjkhFqqO2ffQZxBJdbwMY4ojRT+R3hwWDwyKWjRBIjJOI47x84n7WWj19XxUXs7u+dWIWRFwzyUm7y8v9phGn8k9KaHc+AaFFKH9/qywf3TuvLeD root@a5ce895d-ddd0-11ea-8a0c-be937dd98cfb\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBOa7U/Fas9hmhFryiX638/lSkM5cqrsfDZVCY3nE/EuhG86jVodVfLxkxvqG5dy1+z7EdZPFOanp79ALgzq3MpbJrjebfUO4xohvI8jMGqYn401sB2F82EFGUBOQHb/PPa1R7qPYkVB1HD5/Y4+voKT2ruE/YYqWyJUq6mzGUHDTcG6aagKSam71Ik+6Q5NXiXOKU+aDeqOkJr/MWHJ1IHxipn1y/4X2gi4d7BbyH9Qm7ob0Z05842JbU2PjYuW5sLF0ZK4YJH33jAcr1PKHvmnO3DdIAQX+W0h3KV0Rer9UEIUuAlV/36gj4zD8hrwtLazWZdehintJV69/wtAGx root@b1f76db2-e048-11ea-a57e-2eecf92acd21\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCeOtr6+psX/RawknDtpUBDI++5H02U4TFpP0EvZq5+Nz8GsWSsxKiRNmqTciys8j18BF1aDtXQhH8ddRYspbt1RxYGRkEIeCeSN5ArJ65j7iClbKp+v8DqHeLU0Re8xmMs8sEQuemUut/WPHIKq+NtsbjlaMyLAPqfMVmrknVmlQdpmYzI0vrEMVLtnpII0amwJOTKErkhjIUHGweMePP4jJS5SPeWYUIHZ7oOV2qs1cn62U2h550p0akOhcHDYHnADPh79CZV7p+vAM3o+nivBGFS6Ki0xh8UgUFZ9AQQO8PXEfSAVT/Jh9WYJyfGcduetWLDuRCaWrJp9urZW5bF root@e29cb9fd-e361-11ea-99eb-2ebeded86955\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChhMjoA9H4BuCqND8lH+xL/K8v4wKYomvQBF/96dk7Ekuxsn04wgRQwDrpt/rlZgxWkLjn8mcABA+yOyiLteZkulE406FjR8tbiqIwExt0Xi4yDm6E1WhFIXD34FaoFzZwwnuscQNJScn2d1pdBiuFnP7+F9oUOfm2EUf994InGiXD4Zj2CU1RqxvQp7mSjqmCw85RmO985ZNkgIie5IUJM0dbWhfkJKWSTBzQGPNw/VPiexU1njqw3japaRyH+HmIAIc//iimwAgVNNUiAFD+2f7T5ePWPDj0sOODGZa3HwOdshSXi3xikcFkuum2cZv0mbm+tfIfzb4V7P5GVG23 root@bbef3b75-e671-11ea-99eb-2ebeded86955\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPPgXGz8AJZiOXKhu/NBp20TS97qImwsptuSTMefyJjRnkWZPEBq5Tyqe8rZOIkxe77kttYJ1+SWuoMFRza5YI7AGme56CiVMndyclBHiVwNL6/q3dUZrNJhYcRZrmxJ+3ALjRl9DhJHbKG5bu5rMgFO7ycKVAsMXAVispjJV/hE4yZxLmryv4dEF9VFTrq3FcrWDDCHVqsNvKPdq9kvlmjckj+2YIyeQLqbHLx5A3TF7OL1qe7hdzPx+bX8rx/tWYhqc6g/AAG/dgWobab0w02H/M/K3W7GW661hg8dMHqML7DlZjlqv5KA3b3c+G4fWo5UIaEbyx0wCIWtx0ug8H root@bba8ee9d-ecc3-11ea-aebe-3e85ddc86bf2\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDY4RVvtnWK+ytldHB47pxxjKEaYnZv+3kxT5IY4yqOx5tWU+Bi/MCurtJ7d3yq4tSKgEEpzk0aOvTBsRUdPWpXB49BJiYF2wBUdWPnIOkr0CHS6zW5+T7bkkhCGYCucVhx9fzeDvLvJXn59NG4+QoS3YSmhVWKmukVN7On8ynfinTmNv4bbs4EjuB/Utp8HCOsSKXwNTlc+rHRldLkwRzvq7qf4cbJUjZG4U7aWk6F6zHIn4eYOtOk4OflU7Vwjx9qL6x0OqS4/M/Q4QJUQRacJ7WE4iUog9LQuC3fJVe9fUDUqHtkPjzeIHsoqJzzP76tTLy8iY/Q4W6Pb1iBu3ER root@b884acaf-ee02-11ea-81dc-96f5b1c9140a\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtRhZRL2H/sNvGOzVqnJ8WBh40CGI6CIR8kj1HA9t5YDj+c7EW508UZ2EylBwD8wKJEuGDW4B105Gphx9epEqWagh2Rmul+k7nB/l+RzSRWh2ea0EPlrJIuMrESyVdQhroUC5DKVBSfvhreuEn5O80ubvLDc9HQWj50GlmUcSQwVukpwwKCP/JOJEzKFKNmjnTvm7riQRb/axcTCBYBqiycdI1JwSG62EBrI1o1QHjl5ko/W6DIm0CrOKgHQ3gj5wU2LkZ35y+zuTdKlr8QHz/+gT0JcV1q/7I8/plYVtoE8qdPV4y/w1T4nBhQZcTQmnTrBB5VFKYpYh+4Mus0avz root@d39427b6-f4dc-11ea-a70f-5aa2e503d61b\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRWePFOo2DzoIAKqNTINVOqUdxMs3/T7fvDl+a2gGcjQtS9y3UzQBxwvXcrO2GtK4s4JBlT/BJzrNBJi0KDPObnuMRJDOE2vuYXVNbmyyP5BOc5y8gbxEuSR3yujI8r922YuIGbcPYzbObaAe2mzR/PE0WkrSROwKVY/+gRwGbmGbbORNU53HSvtgJBRLMFJtR9M8uLvgYyEykCI/Dngr96/XpL8X0DMoh5OIJUwGXpYkcsfKBe2PqgJjQ+u5C0OBayLiGEiTGyXB0mqMISkUUvw/g0U2FdfuNmvgOl/hDQkrm+bXY+baKkRfxowrpXdCPNleUkfIV34pf+RpHVVcj root@caaa3642-f7a0-11ea-872a-bae3dc204648\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDO5XwOFHaJblOS63b9DvdC7GnR/mwbvwGROmswwrjnl8ZrBs3liBbor7B0lLGBXf1+h9a3gPDP1x+rH31pRH0pR/Y2f331ospimNDyww2sYe/OO/ysbyo1xNX06yEnPQs71YAkKf8RfM1Tj1HeFF6clZJIakqTyz6vxbfyw5jOyhCN4Lb0V9WmgGxX39yNhunXJZm3C5klpyHNkvWaL9H5A1RLRGnaAXdrgWckZxf92yydiBg7KJA3UHUdAdyCNcriDUOgwXmZ8Wiq0joVuLv6VvkSRAkhkJvc047vBkerGMNQgGJyo4I2GPlpgrcyEBQUDGlGUyYNy6i1+f5ClM4R root@865e04b4-058d-11eb-9dc4-ba187aea6a9a\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC++1ok/Fr6hiGmc5sSze9bWsrDiQJOqNWuLIxNa0UM+q/Q01PfSrQj9Qti5VADZdyFbLN8vF7zgPvmHaoPLGFhosPDa66vwIZJKFNbtaS1WHIWuITcy4dOF2MtJLKJ7gaPVemSQkzZ2YhV/VrBp5gRbmzxr9SGEcxSEy0zoUcptl0wNcdtzNMzspmmmAXituStAdvSkoQWBbIY0OWS2Giv5tVFJahT7HMsJm8DdyMes88xFFvsexmZjJNLToAAn7e8XODMfgOEXq2rZXxiTFbSjPspd9gbh6uw8D7Z3BlE/r5LICfLdwMmiyL2bf0Ckzoa2bfQY1qDVaW+g/sVW8oD root@62f036c7-132e-11eb-a3c5-629ea79d0103\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZxQqx/iLEFQL6qgjOi9ZnZ659M165F8JrabiE6JGMkTyHVNTC1+zbnH8Xtbo08TBKON+mVEaZWdVfWWlKVQjtyOyoYQ1wjRS5FYgfEfr2f+HyI1ZRqj0El2RM0JTZLylt6oU0IOlM9PgBVwWWdMHJOsVt6OvdN/3jFEZKkyOqb0Ree9mIYmQIvqon4dWfuiJhjgBPKY9e+DNiMP6m3mSuHrAgHngaA4Wvn8yqdEb/l8qFC7zhQZp3oIhDwfgVWHws0/EuVMiR9U4sSce6n/mkEypRIDwBeIyES1AzfTMm/ZAcdUTtsf712i86QOSUjoC8SFWzcqTR297BGsZlI1ev root@2a0e7ba3-16ef-11eb-b256-6ee25ea2e440\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDwD0N6uPTrCgqh3EqY1rJaO2Xmmhbo1oakK31eB3oxeK2Z3eBdV/DFUXC9blyWY9H1G0h154LclAMLalm1IPSIN772zI0SXAf3ggZDXAbWLB9Z4N2cg9PGI8XE8VZgy7wDGJGW4keFIQEu0u54arxs6tfMkhxxFD+F9OfxyxqEqAKIG26uNuMnZc137bx1i+W13vce8VaXudK2gs9Vd0uT2nahapjK3CZ7B4QAUZG3QwxD2j95Z7W/CTz7Z3wR+LZ9XikQruWjXZZck6jyes8K1i2grhRyc+XXxBhWfr79wSjTNvdCoEWZmiZLguk3C6W/lwL2CcKAwZ8zig6Qt6En root@2e51253d-18b6-11eb-ac0b-9a760af27878\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXN5of0C8yNMQllXYtmwGTZdYNmHbbOIqPzrbBKo2n/M0KpP5q34RoAN5bJhJkIWU1PH0ue+qm7YK94pPrY7neQJr10SvqOtg3ux4FwD7QvCPx/zm6EqWceE3uXDY0Lxp+b82xMRf5LaRokwhTivuA1tjs13PXEUNqCkZ9dnTi0uINmpH3fYbGWoGQd12MdvZlXgo9U3MqFUF96BQC0TVYVmW1nhbsricR9dooYYZXLtiVcJLh4aChdjjhKI/KIHsCSjMEod5RGFDuglOpK7EvqF1e1yj3PqdjX4fmmdDaI7npWH8WXPQwRBTq0ItATWWn0KIYiuvPP9OqlBHtpWS3 root@a64e8dd5-2476-11eb-bd88-f687e5d66392\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDUIWW9SbfhtEzIXrbVoRJMxUOwwdLtQQgxhDqdI3o1WnwZ9CAXay3uWA3LKK1fSpN54sWUCiIiqcZRhllJ/oPgLebTw7z7U5H5MOtHyifl2aP7+QsPFfkTgMVZpttE8oG9bd3Yfq7BhSBO5Ev2ygveUTb69W3KED03+QLIlFuZfavPk0nB7KbN/FEqMgCf5vGicdAebAW7YkYfGLlvYgWgAddUGHVNyzB5/bjmlabMp1HIrdhoLHVpER8KeLKTv+AUuifONk/LgUOkbBykJshYrDraEMzBTFp8bCu45ktqfZ/pOi1FHUZI55WMluqeiUFYj0WQQtYkWD4rhK67SYx1 root@827018da-24c2-11eb-bd88-f687e5d66392\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfbWj1twQH2ND0+3ygHww68P0Ovyk7P0JI26cAK9ie5OBwqscsjmMEJ6d5Bj8u02r9Bx/7wyiB8P4ZKJ69lcM7abqBd1j8HRuRxM2PruV/+PD4ePvdc+5/WT4AHIfRJnin5croJNQxu212jsEJRAX60Rrw58MQzMSwRiTAYSw6pey31QJDGT4cWe2Q2nRrmBRR5qowd9TgU8dNl8vnBBBdZENiCoiO8F7JYd3tKqd/7JJyHxfSJqS04Ao0PCjZg8owCIaoh0rZeV4qhg9yFc+Dtsn5MREGTul+QkjGpYYH/0mdTHyLpXYB4NDxw2AOrw5QXiYVbrzTgGtr43Ti6oHd root@b0d1b357-26ee-11eb-bb1f-6e397dbce9be\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDRmDWZZaVfj/ydo1kf8BIfJ13N8zlX4vylu3PfDYkxipaURt6wapcTCwrmrVsPOJjkaSMJ8/WO1wCoMnHShV89TYT5aj6GTjlmWQPiAvAEDAJ+yjXpJmLYvq4BEZ8tGOCm9SDFTyYD6a04XlmsyD9/0u7E5JjoRgNQfboTFoqOOXbYD8Z+lyLQlyUqIOW/AbKYfj5FqPeurVIO7n3DaYJsQeFy22Gn01saAfXdMIkwqsQa3FaFOgCBM/6dIrDce5XLKv7RW/vtCBqkHvFZYp3w4Q61Fannqo5uc+O0qP5HlwNqIg9rc+cDRwaxq5Ahdc8jTCZXc2T79Dpc+Xaq54/x root@4e49cb43-350e-11eb-9896-aabf0c108015\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnoAdaUd+GqmFt5iz7/JFT8eQgSHr0GnDD+SbjRx+WEf8g32FZJam0OQhhT5+sWqdS3MlLyXIuVoinEKGH0+6LHxZI2X/Tr/D8Kt5tc2lPHWynPtJG3cljx6QhKKzDNTBDYW+UZMVA/aJZjwuAghmA/YjIisdLB1RHWEV6fP6+eKwIjgx6NCqvtOTZ5jN+u+lxAjwJzUD0S0FBM75DBX7mYP1McRTQOhHh0pAKhRebkcUbH/kI9AGOwFszwaLiXCzIAfyji5hKJNmK78WuDmcX8wcyd30djJ+zY0MO81MKukTxQHzc5Ewq4aeStl4SY6PksaDsjXvPmkBy4xPn8tOD root@60647805-3624-11eb-8ecf-c2fbd71c5254\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkj74L2iDHwImorvKnWLJIf5s6Tno4kSfsgZ3G9tjkzjzaS/rlpoDo0yIwJPSkL8qgNkpGyXhNUGsUa8KtJRK5WvOXYNiIeVZDq6Xp5bVhWcTyHTGii5oZUcy4IMsBBQFkpIp94Xtg7f2Cl125XiiSUfvay5x8IIqR4pQLhNYxTxdwJy2s/RDB+mKoz5gEKiIbklHbJB6vsklZQP7JhCzQGhwEKqpAVbAX3ERvwX4ccXTdykNAw8TbR6DQiZAit+fi/86KYc2RRf2UwkfCZKkGv7wc8RrGYHX2LLzCL07XqSGKeVh7WPCPsuEriKEPgZTfGnqJjOIKYpDjDhaxKw7B root@cb437bd1-4f07-11eb-af93-4e5abfa0c065"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "creationTimestamp": "2020-07-30T18:33:54.953-07:00",
+  "defaultNetworkTier": "PREMIUM",
+  "defaultServiceAccount": "804042965184-compute@developer.gserviceaccount.com",
+  "id": "4827046723183365101",
+  "kind": "compute#project",
+  "name": "k8s-infra-e2e-boskos-071",
+  "quotas": [
+    {
+      "limit": 10000,
+      "metric": "SNAPSHOTS"
+    },
+    {
+      "limit": 30,
+      "metric": "NETWORKS"
+    },
+    {
+      "limit": 500,
+      "metric": "FIREWALLS"
+    },
+    {
+      "limit": 5000,
+      "metric": "IMAGES"
+    },
+    {
+      "limit": 175,
+      "metric": "STATIC_ADDRESSES"
+    },
+    {
+      "limit": 300,
+      "metric": "ROUTES"
+    },
+    {
+      "limit": 150,
+      "metric": "FORWARDING_RULES"
+    },
+    {
+      "limit": 500,
+      "metric": "TARGET_POOLS"
+    },
+    {
+      "limit": 500,
+      "metric": "HEALTH_CHECKS"
+    },
+    {
+      "limit": 575,
+      "metric": "IN_USE_ADDRESSES"
+    },
+    {
+      "limit": 500,
+      "metric": "TARGET_INSTANCES"
+    },
+    {
+      "limit": 100,
+      "metric": "TARGET_HTTP_PROXIES"
+    },
+    {
+      "limit": 100,
+      "metric": "URL_MAPS"
+    },
+    {
+      "limit": 30,
+      "metric": "BACKEND_SERVICES"
+    },
+    {
+      "limit": 1000,
+      "metric": "INSTANCE_TEMPLATES"
+    },
+    {
+      "limit": 50,
+      "metric": "TARGET_VPN_GATEWAYS"
+    },
+    {
+      "limit": 100,
+      "metric": "VPN_TUNNELS"
+    },
+    {
+      "limit": 30,
+      "metric": "BACKEND_BUCKETS"
+    },
+    {
+      "limit": 20,
+      "metric": "ROUTERS"
+    },
+    {
+      "limit": 100,
+      "metric": "TARGET_SSL_PROXIES"
+    },
+    {
+      "limit": 100,
+      "metric": "TARGET_HTTPS_PROXIES"
+    },
+    {
+      "limit": 100,
+      "metric": "SSL_CERTIFICATES"
+    },
+    {
+      "limit": 275,
+      "metric": "SUBNETWORKS"
+    },
+    {
+      "limit": 100,
+      "metric": "TARGET_TCP_PROXIES"
+    },
+    {
+      "limit": 10,
+      "metric": "SECURITY_POLICIES"
+    },
+    {
+      "limit": 200,
+      "metric": "SECURITY_POLICY_RULES"
+    },
+    {
+      "limit": 150,
+      "metric": "PACKET_MIRRORINGS"
+    },
+    {
+      "limit": 1000,
+      "metric": "NETWORK_ENDPOINT_GROUPS"
+    },
+    {
+      "limit": 6,
+      "metric": "INTERCONNECTS"
+    },
+    {
+      "limit": 5000,
+      "metric": "GLOBAL_INTERNAL_ADDRESSES"
+    },
+    {
+      "limit": 50,
+      "metric": "VPN_GATEWAYS"
+    },
+    {
+      "limit": 5000,
+      "metric": "MACHINE_IMAGES"
+    },
+    {
+      "limit": 20,
+      "metric": "SECURITY_POLICY_CEVAL_RULES"
+    },
+    {
+      "limit": 50,
+      "metric": "EXTERNAL_VPN_GATEWAYS"
+    },
+    {
+      "limit": 1,
+      "metric": "PUBLIC_ADVERTISED_PREFIXES"
+    },
+    {
+      "limit": 10,
+      "metric": "PUBLIC_DELEGATED_PREFIXES"
+    },
+    {
+      "limit": 1024,
+      "metric": "STATIC_BYOIP_ADDRESSES"
+    }
+  ],
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-boskos-071",
+  "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
+}

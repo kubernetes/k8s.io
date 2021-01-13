@@ -1,0 +1,169 @@
+{
+  "commonInstanceMetadata": {
+    "items": [
+      {
+        "key": "ssh-keys",
+        "value": "prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow\nprow:prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt2fOJXnYzG50X6msMYoTcW8dzDF+S5yW3JYdRA96DNF1wJQconUQzLfZoK6LyrMJQgzaqUAZmpRxL0YdAs7BXvMcPKwIn0/+LamJFMKnemumldPXIU8YqwuRW2kSh9YdqDWioEuGS2IZRoLmUHxw+VGonTgbkaFbIjB4hdMMAAHkzfD79vD+7qbPFck6FiQ5BsddsRz4Sze56OzHqzBhdPZzFc28CPhui55f/ah74EjlE2taWpAUGe28lVTTiE1cBA0HGrxkMC4PQ2EnumprbbG5FCz1XH4+5xMUdzZo9g5ms8eWzwwJoiGZYqrenLmPRk9o86FboTLn3T2n7dPwH root@6a7bf562-decd-11ea-a57e-2eecf92acd21\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4T1DXLA2K1Qgnt10deDaVsQrTyseVyKrOsw3h4i6yJuhfjUUPOm5mT6HeFzUAB7YzgRyh8ziTXTcagZAvuTvAAoiu99xuD8D8qxck2HoZgkWzBmxCI993wWsfNzLgZcIcE0V1BKz2igkYRDQ2F5PR81W6CbzNhKx0NZwa/GoyhKBp5nNo+2q2MdAM+ha1ocQ2Dg8+L89FxT5qdW1lSnFPY1Ck3KZOKrI8/GOjELhOAjlZeT8Z3Xf12Bp4YxmNY/53vYXWtTYKTgIhXSuJHQc/zhFsaneoNOr1aF6UUtDv32doIe5RtPgwWMMtWIUs9Y+Pac+Q4O/iMBglAlRdT3Jj root@04fbc2b9-e5da-11ea-99eb-2ebeded86955\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTQE0D55S4PcAKCIabh94y7/rJuLrHHnbVnRa9vZOFRz0Tf102EPfsHZjORwsUSMPkEI2OMz/3atqeqHfrD+G7iHEBADkijdWCKnZQLw6CEOBwoxy331tagaD1Rjrbs+1jg90icJSckjfhFBrsDW8IztHUM+Csnas8pTKIYSGFVKhNnAwp83PWUHqPACmkRDDSwUXVWmdh6VNYERgdG7rvgjVAHUKtlyeyviJlQokKrULY9KFte6+wYJMhg9oL2YON7nh6ELCxKf92CUT8CHrfrRPbEZM7i5AljlLweToWh1qBrHHldB0okdwd4UL8RsTrgKw7YtaROupHpzJxf5kD root@3eab126d-eb2f-11ea-b653-e644ef4dd131\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCYMSHsXqQM4vslPjQhQGnc6cRzXlSvX4banI5RY93pFYizkmJS9dRqjavlLXQhkn0qvHhs8aQciYeaKEi6iTfHuWXUOlQfEJwGcB3zsIqSe/IxBZX/Xygc35OXGNjxavJ2CzKJ2juDAKAPc2OhNq8GRKTdd2e9FxXrk7Q+YlbVs1kVT7fqpUICY+bnNNcYB/K+u+l+m71RnuC7Ys8c/nHovK5a91dcayMNgvxX3SvQr4QtewoaQC4yXvCNp4uKaqPyPNuz/pZcgluINsdHkcLRkhEKHaPlqhXMrREYW0kynUs7EPfWlLPqZTEP+Vw1RPIzL0808JY3mBDHtEM5b4T root@ee024f00-eeef-11ea-81dc-96f5b1c9140a\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDdK3OKfNLOZYTxM3PxMBRGL5wtfljqfnO5ptrkxVcBrtHS3f+PB9CC3nECNP/0udA+/LNAMxKvJQbYYcWz5b7nmxpMgtB+a0iYN27MiU0RoI7khgiHs80QTMxiRXMR+UYiyQfoKUWtAH39qkrgtZ/XZK4pgW6eaUEtRSHbiwIrh2S5cKV1iIsa95dxpAANY+2v03ADMY5p7FfEMQAd4+L3nEUa5ePUjDbfJj0eU65OOybVGjrfM63+kIeffP8dhDMf2+9cD4IV9HeFj7m4auRClGN/UZ0gJK8GWksmbMMkcihlu3Hir9w6/XYiah7xllnAjbpWwNCcdczMpul6jLP root@89b10990-f574-11ea-a70f-5aa2e503d61b\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDW02RGaaDM1npVzCS9O5r3E7cTYqLpn7amPFPzm1h4s2lGrBQdxkKwLLTA4iFq8fPSad7cvObVEtAMz880vL72HU0ydVfh9hOZF31YDsmAIJPZW+ueLr860XXGHaQZ9XvZmBzIFRtBuu9X4FzDdjH/cxBKTOeQNq+YJEfNtRQShlniKTFSDGQ0VxXjzq9GO3HAoeTDIMFuFxseFcZIjiQO2vpMQacQXZ3T17o1EV+sjAtemn+e2nOWhtWz5v9g03xtzdzp5AYgGvI6wqS5pVoz9BqlE1law0eY3PJbyvZxtVaNnl0utThj74hYz8JA6F5KJLlC4obqNd9l4BWOuLPn root@f5c771bf-02e2-11eb-aa74-ba383c228abc\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxlzrVWxBnsnQGUPwXZ/5rQr+MAnGz/zzI40hEeGEMrf8mrU9TeyL+HoMpXGyyuVHeodOCk4AvPu+SoC0oBD6jIV+H6hQbIgFT4o+yL7/yr+Sz5mwvWPGliV4ak9nuN2acZSHt59jM+NlpISxy15PzTFtpnGErJKV33H4E0jVrYq7Ejrp0LY7Kc3HTjxBOJlSP9ATDVkgspu2po/D8WZDYHXdOLDF2fUIgleh+IxfVfhC0OGJQKiazR7Vz48cuaxDFU4usBCDOrm8HEprWz2PtBnTQVppuc/9DwgDuc5jkDdv7XyES2OfVFn8tMwcYCkgKDY/X+JspcLhv/uJaBR/B root@89d4828b-20e8-11eb-95d4-12a87eb4bba5\nkubetest2:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKy39JbAaNoQEf0v4Kkk1Q0kOfXOPc+7Fq6PJFCWwjrR4HGyItJOO+DtdCMZKhMkIB6d/Glhgy7mrjTTDcMSxNxc+3Wc5NJIEZqjBP26othPqNcZp5wn6SF52uMQS2Eo0JJBZtTZYzdB+0OFeJuyFBwXMIEW65eD656QTdqfdVCDvWSGE7dl4I1a5J3NmEJHou+wxu0taJrJTUfYSMh5/u27NkpfjTvkROI8C963SUziLw4fJCNHK1SCpw4oFY0vYZxsKNXfyubFDSPsY/zAQVLTZLbYt6zKYE9z9IYCUvEM9Ze4H9IEiBPCbjJFx1npr13v5XZNq9V7m5MvGusndn root@8c0da2bd-3d8c-11eb-a772-a610f2f25584"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "creationTimestamp": "2020-07-30T17:59:09.089-07:00",
+  "defaultNetworkTier": "PREMIUM",
+  "defaultServiceAccount": "37678502337-compute@developer.gserviceaccount.com",
+  "id": "3755553318857790003",
+  "kind": "compute#project",
+  "name": "k8s-infra-e2e-boskos-054",
+  "quotas": [
+    {
+      "limit": 10000,
+      "metric": "SNAPSHOTS"
+    },
+    {
+      "limit": 30,
+      "metric": "NETWORKS"
+    },
+    {
+      "limit": 500,
+      "metric": "FIREWALLS"
+    },
+    {
+      "limit": 5000,
+      "metric": "IMAGES"
+    },
+    {
+      "limit": 175,
+      "metric": "STATIC_ADDRESSES"
+    },
+    {
+      "limit": 300,
+      "metric": "ROUTES"
+    },
+    {
+      "limit": 150,
+      "metric": "FORWARDING_RULES"
+    },
+    {
+      "limit": 500,
+      "metric": "TARGET_POOLS"
+    },
+    {
+      "limit": 500,
+      "metric": "HEALTH_CHECKS"
+    },
+    {
+      "limit": 575,
+      "metric": "IN_USE_ADDRESSES"
+    },
+    {
+      "limit": 500,
+      "metric": "TARGET_INSTANCES"
+    },
+    {
+      "limit": 100,
+      "metric": "TARGET_HTTP_PROXIES"
+    },
+    {
+      "limit": 100,
+      "metric": "URL_MAPS"
+    },
+    {
+      "limit": 30,
+      "metric": "BACKEND_SERVICES"
+    },
+    {
+      "limit": 1000,
+      "metric": "INSTANCE_TEMPLATES"
+    },
+    {
+      "limit": 50,
+      "metric": "TARGET_VPN_GATEWAYS"
+    },
+    {
+      "limit": 100,
+      "metric": "VPN_TUNNELS"
+    },
+    {
+      "limit": 30,
+      "metric": "BACKEND_BUCKETS"
+    },
+    {
+      "limit": 20,
+      "metric": "ROUTERS"
+    },
+    {
+      "limit": 100,
+      "metric": "TARGET_SSL_PROXIES"
+    },
+    {
+      "limit": 100,
+      "metric": "TARGET_HTTPS_PROXIES"
+    },
+    {
+      "limit": 100,
+      "metric": "SSL_CERTIFICATES"
+    },
+    {
+      "limit": 275,
+      "metric": "SUBNETWORKS"
+    },
+    {
+      "limit": 100,
+      "metric": "TARGET_TCP_PROXIES"
+    },
+    {
+      "limit": 10,
+      "metric": "SECURITY_POLICIES"
+    },
+    {
+      "limit": 200,
+      "metric": "SECURITY_POLICY_RULES"
+    },
+    {
+      "limit": 150,
+      "metric": "PACKET_MIRRORINGS"
+    },
+    {
+      "limit": 1000,
+      "metric": "NETWORK_ENDPOINT_GROUPS"
+    },
+    {
+      "limit": 6,
+      "metric": "INTERCONNECTS"
+    },
+    {
+      "limit": 5000,
+      "metric": "GLOBAL_INTERNAL_ADDRESSES"
+    },
+    {
+      "limit": 50,
+      "metric": "VPN_GATEWAYS"
+    },
+    {
+      "limit": 5000,
+      "metric": "MACHINE_IMAGES"
+    },
+    {
+      "limit": 20,
+      "metric": "SECURITY_POLICY_CEVAL_RULES"
+    },
+    {
+      "limit": 50,
+      "metric": "EXTERNAL_VPN_GATEWAYS"
+    },
+    {
+      "limit": 1,
+      "metric": "PUBLIC_ADVERTISED_PREFIXES"
+    },
+    {
+      "limit": 10,
+      "metric": "PUBLIC_DELEGATED_PREFIXES"
+    },
+    {
+      "limit": 1024,
+      "metric": "STATIC_BYOIP_ADDRESSES"
+    }
+  ],
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-boskos-054",
+  "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
+}
