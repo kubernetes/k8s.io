@@ -72,8 +72,7 @@
         "group:k8s-infra-release-admins@kubernetes.io",
         "group:k8s-infra-release-editors@kubernetes.io",
         "group:k8s-infra-release-viewers@kubernetes.io",
-        "group:k8s-infra-staging-kubernetes@kubernetes.io",
-        "group:k8s-infra-staging-release-test@kubernetes.io"
+        "group:k8s-infra-staging-kubernetes@kubernetes.io"
       ],
       "role": "roles/viewer"
     }
