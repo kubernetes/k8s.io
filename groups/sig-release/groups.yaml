@@ -210,20 +210,22 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
       - tpepper@vmware.com # Release Team subproject owner
     members:
-      - jeremy.r.rickard@gmail.com
-      - keroden@microsoft.com
-      - killen.bob@gmail.com
-      - lauri.d.apple@gmail.com
-      - max@koerbaecher.io
-      - meenakshi.kaushik@gmail.com
-      - onlydole@gmail.com
-      - rcantw3ll@gmail.com
-      - sandoval@adobe.com
+      - divya.mohan0209@gmail.com
+      - evelyn.cupil.garcia@duke.edu
+      - justinleegarrison@gmail.com
+      - kikis.github@gmail.com
+      - lauri.d.apple@gmail.com # Program Manager
+      - pal.nabarun95@gmail.com
+      - peeyushgupta91@gmail.com
+      - saveetha13@gmail.com
+      - v@gor.io
+      - xander@grzy.dev
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -237,6 +239,7 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
@@ -259,6 +262,7 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
       - saugustus@vmware.com
@@ -274,7 +278,6 @@ groups:
       - gveronicalg@gmail.com
       - idealhack@gmail.com
       - jameswangel@gmail.com
-      - jeremy.r.rickard@gmail.com
       - kikis.github@gmail.com
       - lauri.d.apple@gmail.com
       - marky.r.jackson@gmail.com
@@ -311,6 +314,7 @@ groups:
     owners:
       - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
+      - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
