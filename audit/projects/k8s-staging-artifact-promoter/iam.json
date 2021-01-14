@@ -22,6 +22,32 @@
     },
     {
       "members": [
+        "serviceAccount:service-675573440409@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-675573440409@container-analysis.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.occurrences.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-675573440409@gcp-sa-containerscanning.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:675573440409-compute@developer.gserviceaccount.com",
+        "serviceAccount:675573440409@cloudservices.gserviceaccount.com",
         "serviceAccount:service-675573440409@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
