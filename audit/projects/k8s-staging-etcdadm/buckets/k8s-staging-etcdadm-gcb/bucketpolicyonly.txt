@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-etcdadm-gcb:
+  Enabled: True
+  LockedTime: 2020-10-18 21:50:01.422000+00:00
+

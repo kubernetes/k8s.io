@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-git-sync-gcb:
+  Enabled: True
+  LockedTime: 2020-12-07 00:07:21.323000+00:00
+

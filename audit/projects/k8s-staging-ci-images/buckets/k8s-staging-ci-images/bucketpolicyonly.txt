@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-ci-images:
+  Enabled: True
+  LockedTime: 2021-01-24 01:04:00.640000+00:00
+

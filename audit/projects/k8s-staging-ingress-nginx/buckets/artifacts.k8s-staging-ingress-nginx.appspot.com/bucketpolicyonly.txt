@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-ingress-nginx.appspot.com:
+  Enabled: True
+  LockedTime: 2020-08-24 18:49:22.327000+00:00
+

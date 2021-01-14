@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-cluster-addons:
+  Enabled: True
+  LockedTime: 2020-11-12 18:42:26.724000+00:00
+

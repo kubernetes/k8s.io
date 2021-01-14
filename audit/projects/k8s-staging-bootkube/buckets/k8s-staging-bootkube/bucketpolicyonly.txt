@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-bootkube:
+  Enabled: True
+  LockedTime: 2020-09-07 22:18:20.834000+00:00
+

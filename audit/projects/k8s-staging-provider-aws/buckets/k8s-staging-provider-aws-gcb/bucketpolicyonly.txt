@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-provider-aws-gcb:
+  Enabled: True
+  LockedTime: 2020-08-24 18:44:02.525000+00:00
+

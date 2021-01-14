@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-git-sync.appspot.com:
+  Enabled: True
+  LockedTime: 2020-12-07 00:06:47.108000+00:00
+

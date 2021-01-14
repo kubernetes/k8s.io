@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-networking.appspot.com:
+  Enabled: True
+  LockedTime: 2021-01-21 19:24:05.941000+00:00
+

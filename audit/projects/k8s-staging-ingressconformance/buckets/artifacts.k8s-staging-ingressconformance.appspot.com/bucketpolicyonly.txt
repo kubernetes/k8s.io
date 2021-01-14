@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-staging-ingressconformance.appspot.com:
+  Enabled: True
+  LockedTime: 2020-09-07 21:45:50.021000+00:00
+
