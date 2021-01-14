@@ -8,8 +8,9 @@ clouddebugger.googleapis.com      Cloud Debugger API
 cloudkms.googleapis.com           Cloud Key Management Service (KMS) API
 cloudtrace.googleapis.com         Cloud Trace API
 compute.googleapis.com            Compute Engine API
-container.googleapis.com          Kubernetes Engine API
+containeranalysis.googleapis.com  Container Analysis API
 containerregistry.googleapis.com  Container Registry API
+containerscanning.googleapis.com  Container Scanning API
 datastore.googleapis.com          Cloud Datastore API
 iam.googleapis.com                Identity and Access Management (IAM) API
 iamcredentials.googleapis.com     IAM Service Account Credentials API
@@ -17,6 +18,7 @@ logging.googleapis.com            Cloud Logging API
 monitoring.googleapis.com         Cloud Monitoring API
 oslogin.googleapis.com            Cloud OS Login API
 pubsub.googleapis.com             Cloud Pub/Sub API
+secretmanager.googleapis.com      Secret Manager API
 servicemanagement.googleapis.com  Service Management API
 serviceusage.googleapis.com       Service Usage API
 sql-component.googleapis.com      Cloud SQL
