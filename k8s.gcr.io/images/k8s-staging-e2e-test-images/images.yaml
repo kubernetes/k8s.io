@@ -8,26 +8,71 @@
     "sha256:17e61a0b9e498b6c73ed97670906be3d5a3ae394739c1bd5b619e1a004885cf0": ["2.20"]
     "sha256:ab055cd3d45f50b90732c14593a5bf50f210871bb4f91994c756fc22db6d922a": ["2.21"]
     "sha256:a3f7549ea04c419276e8b84e90a515bbce5bc8a057be2ed974ec45492eca346e": ["2.26"]
+- name: apparmor-loader
+  dmap:
+    "sha256:60629fe42de6260c9b930b48a2923b69168dc1c71fa5f762f70036477ffd74b6": ["1.2"]
+- name: cuda-vector-add
+  dmap:
+    "sha256:dc92c37785a73a45912a3a18bb89d72bf15c377938a5b122c12425b682bf880d": ["2.2"]
+- name: ipc-utils
+  dmap:
+    "sha256:06e2eb28e041f114941fba36b83f40c313f58a29d8b60777bde1fc4650e0b4f2": ["1.2"]
 - name: jessie-dnsutils
   dmap:
     "sha256:31183fd28aa9b4af81329e1886060492cfa67dd94e9d1132e00ed032ce685187": ["1.2"]
     "sha256:8b03e4185ecd305bc9b410faac15d486a3b1ef1946196d429245cdd3c7b152eb": ["1.3"]
+    "sha256:702a992280fb7c3303e84a5801acbb4c9c7fcf48cffe0e9c8be3f0c60f74cf89": ["1.4"]
 - name: kitten
   dmap:
     "sha256:362f3964ae393998e3943e563ebed01a07c1c58361cb5d4a6d236914c99a3942": ["1.4"]
 - name: nautilus
   dmap:
     "sha256:1f36a24cfb5e0c3f725d7565a867c2384282fcbeccc77b07b423c9da95763a9a": ["1.4"]
+- name: node-perf/npb-ep
+  dmap:
+    "sha256:ac7a746f351635663abb0c240c0af71b229d1e321e478664c7816de4f4176818": ["1.1"]
+- name: node-perf/npb-is
+  dmap:
+    "sha256:4d0c0cef373fba0752721552f8d7a478156c255c8dbf90522165784e790f1ab7": ["1.1"]
+- name: node-perf/tf-wide-deep
+  dmap:
+    "sha256:d5d5822ef70f81db66c1271662e1b9d4556fb267ac7ae09dee5d91aa10736431": ["1.1"]
 - name: nonewprivs
   dmap:
     "sha256:553fcda2222ccea7cd534c8da34b709feb768d6389eb7333444b13f296bd168f": ["1.1"]
     "sha256:8ac1264691820febacf3aea5d152cbde6d10685731ec14966a9401c6f47a68ac": ["1.3"]
+- name: nonroot
+  dmap:
+    "sha256:4051e85640c22f8e00c34dbd273576fc9e1e2829992656588062be9c0f69b04b": ["1.1"]
+- name: pets/redis-installer
+  dmap:
+    "sha256:9e197f5ef8820d9775a479bed147715811dca5ce275a3262dd17a0818455cce2": ["1.5"]
+- name: pets/zookeeper-installer
+  dmap:
+    "sha256:8cc5701cf3d0882cb2b7cd85cf1cdabb63294e5495c2329b67727008c42e44ee": ["1.5"]
 - name: regression-issue-74839
   dmap:
     "sha256:b4f1d8d61bdad84bd50442d161d5460e4019d53e989b64220fdbc62fc87d76bf": ["1.2"]
 - name: resource-consumer
   dmap:
     "sha256:74e800780d7656d42fb0f28e153619044a826e5f532d1871cac4b7c4d66d946f": ["1.6"]
+    "sha256:cf70a5b07cb2dd47085e962e8df3381c41130284cd0a30d4927b1511fbc00070": ["1.8"]
 - name: sample-apiserver
   dmap:
     "sha256:eb820c8133a6bbe63a97268713fb85bfc9129e380e8c06f99a34ba0051665c92": ["1.17.2"]
+    "sha256:e7fddbaac4c3451da2365ab90bad149d32f11409738034e41e0f460927f7c276": ["1.17.4"]
+- name: sample-device-plugin
+  dmap:
+    "sha256:e84f6ca27c51ddedf812637dd2bcf771ad69fdca1173e5690c372370d0f93c40": ["1.3"]
+- name: volume/gluster
+  dmap:
+    "sha256:660af738347dd94cdd8069647136c84f11d03fc6dde3af0e746b302d3dfd10ec": ["1.2"]
+- name: volume/iscsi
+  dmap:
+    "sha256:2240be8a918ad3d70d68f0b977ccdd360e72ed5a92ab8f26e6aeee8edad02525": ["2.2"]
+- name: volume/nfs
+  dmap:
+    "sha256:124a375b4f930627c65b2f84c0d0f09229a96bc527eec18ad0eeac150b96d1c2": ["1.2"]
+- name: volume/rbd
+  dmap:
+    "sha256:eae2077ff658ce99e1224afbba6c18ffbcab0f3cf8b0a6536ac57643c7d950d0": ["1.0.3"]
