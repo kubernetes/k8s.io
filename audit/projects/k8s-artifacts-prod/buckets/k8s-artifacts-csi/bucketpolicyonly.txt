@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-artifacts-csi:
+  Enabled: True
+  LockedTime: 2020-08-26 12:51:59.575000+00:00
+

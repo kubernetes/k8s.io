@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-artifacts-gcslogs:
+  Enabled: True
+  LockedTime: 2020-10-21 17:33:09.316000+00:00
+
