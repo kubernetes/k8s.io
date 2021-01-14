@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://artifacts.k8s-release.appspot.com:
+  Enabled: True
+  LockedTime: 2020-11-05 20:49:48.627000+00:00
+
