@@ -1,1 +1,11 @@
-{}
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:k8s-infra-prow-build-trusted.svc.id.goog[test-pods/gsuite-groups-manager]"
+      ],
+      "role": "roles/iam.workloadIdentityUser"
+    }
+  ],
+  "version": 1
+}
