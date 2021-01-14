@@ -34,6 +34,18 @@
     },
     {
       "members": [
+        "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.occurrences.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-324460563566@gcp-sa-containerscanning.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:324460563566-compute@developer.gserviceaccount.com",
         "serviceAccount:324460563566@cloudservices.gserviceaccount.com",
         "serviceAccount:service-324460563566@containerregistry.iam.gserviceaccount.com"

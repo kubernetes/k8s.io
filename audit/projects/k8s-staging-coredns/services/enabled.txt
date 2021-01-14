@@ -16,6 +16,7 @@ logging.googleapis.com            Cloud Logging API
 monitoring.googleapis.com         Cloud Monitoring API
 oslogin.googleapis.com            Cloud OS Login API
 pubsub.googleapis.com             Cloud Pub/Sub API
+secretmanager.googleapis.com      Secret Manager API
 servicemanagement.googleapis.com  Service Management API
 serviceusage.googleapis.com       Service Usage API
 sql-component.googleapis.com      Cloud SQL
