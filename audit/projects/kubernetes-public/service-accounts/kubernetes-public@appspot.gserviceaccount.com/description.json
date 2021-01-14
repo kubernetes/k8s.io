@@ -1,0 +1,8 @@
+{
+  "displayName": "App Engine default service account",
+  "email": "kubernetes-public@appspot.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/kubernetes-public@appspot.gserviceaccount.com",
+  "oauth2ClientId": "105254750883748360742",
+  "projectId": "kubernetes-public",
+  "uniqueId": "105254750883748360742"
+}
