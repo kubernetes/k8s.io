@@ -16,8 +16,7 @@
 - name: external-dns-arm32v7
   dmap:
     "sha256:ee97c708867498a4c0b122f9b7a7aec6575b3f8eb06d4d227a08d5c04ffc1bfa": ["v0.7.5"]
-    "sha256:41fbe6d84b9da7ae6d70c3ad14666a12d859ef0974743e77f52aa2d0926886b1
-": ["v0.7.6"]
+    "sha256:41fbe6d84b9da7ae6d70c3ad14666a12d859ef0974743e77f52aa2d0926886b1": ["v0.7.6"]
 - name: external-dns-arm64v8
   dmap:
     "sha256:ce66aede1bb2911813768e4c58e0d88209a439ccaaee2705c71d34f04bce1c5c": ["v0.7.5"]
