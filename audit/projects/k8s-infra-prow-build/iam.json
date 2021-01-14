@@ -50,6 +50,12 @@
     },
     {
       "members": [
+        "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.developer"
+    },
+    {
+      "members": [
         "serviceAccount:service-773781448124@container-engine-robot.iam.gserviceaccount.com"
       ],
       "role": "roles/container.serviceAgent"
