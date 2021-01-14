@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "group:k8s-infra-prow-viewers@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/prow.viewer"
+    },
+    {
+      "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "projects/k8s-infra-prow-build/roles/ServiceAccountLister"
@@ -76,6 +82,7 @@
     },
     {
       "members": [
+        "group:k8s-infra-prow-oncall@kubernetes.io",
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"
