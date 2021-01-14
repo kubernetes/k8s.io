@@ -72,6 +72,8 @@
         "group:k8s-infra-gcp-org-admins@kubernetes.io",
         "user:domain-admin-lf@kubernetes.io",
         "user:ihor@cncf.io",
+        "user:spiffxp@google.com",
+        "user:thockin@google.com",
         "user:twaggoner@linuxfoundation.org"
       ],
       "role": "roles/resourcemanager.organizationAdmin"
@@ -93,6 +95,12 @@
         "group:k8s-infra-gcp-org-admins@kubernetes.io"
       ],
       "role": "roles/resourcemanager.projectDeleter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/servicemanagement.quotaAdmin"
     },
     {
       "members": [
