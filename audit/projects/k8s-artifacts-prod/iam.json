@@ -14,7 +14,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-artifact-security@kubernetes.io"
+        "group:k8s-infra-artifact-security@kubernetes.io",
+        "serviceAccount:k8s-infra-gcr-vuln-dashboard@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.occurrences.viewer"
     },
