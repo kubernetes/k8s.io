@@ -2,8 +2,12 @@
 #  https://github.com/kubernetes/community/blob/master/contributors/devel/owners.md
 
 approvers:
-- thockin
 - bowei
+- cmluciano
+- danehans
+- hbagdi
+- robscott
+- thockin
 reviewers:
 - aojea
 labels:
