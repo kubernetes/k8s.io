@@ -122,6 +122,7 @@ for prj; do
     enable_api "${prj}" logging.googleapis.com
     enable_api "${prj}" monitoring.googleapis.com
     enable_api "${prj}" storage-component.googleapis.com
+    enable_api "${prj}" containerregistry.googleapis.com
 
     color 6 "Empower prow-build service account to edit e2e project: ${prj}"
     # TODO: this is what prow.k8s.io uses today, but it is likely over-permissioned, we could
