@@ -64,6 +64,7 @@ aliases:
   sig-release-leads:
     - alejandrox1
     - hasheddan
+    - jeremyrickard
     - justaugustus
     - saschagrunert
   sig-scalability-leads:
@@ -222,6 +223,7 @@ aliases:
     - feiskyer # Release Manager
     - hasheddan # subproject owner / Release Manager / SIG Technical Lead
     - idealhack # Release Manager
+    - jeremyrickard # SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - puerco # Release Manager
     - saschagrunert # subproject owner / Release Manager / SIG Chair
@@ -233,6 +235,7 @@ aliases:
     - feiskyer # Release Manager
     - hasheddan # subproject owner / Release Manager / SIG Technical Lead
     - idealhack # Release Manager
+    - jeremyrickard # SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - puerco # Release Manager
     - saschagrunert # subproject owner / Release Manager / SIG Chair
