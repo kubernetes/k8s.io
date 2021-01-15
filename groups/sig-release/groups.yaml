@@ -339,15 +339,16 @@ groups:
       - v@gor.io # 1.21 RT Lead Shadow
     members:
       - sig-release-leads@kubernetes.io
-      - antheabjung@gmail.com # 1.20 Docs Lead
+      - antheabjung@gmail.com # 1.21 Enhancements Lead
+      - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - celeste@cncf.io # 1.20 Release Notes Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
       - divya.mohan0209@gmail.com # 1.20 Comms Shadow
       - jackytan@outlook.com # 1.20 Release Notes Shadow
-      - james@jameslaverack.com # 1.20 Release Notes Lead
+      - james@jameslaverack.com # 1.21 Enhancements Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
-      - joseph.r.sandoval@gmail.com # 1.20 Communications Lead
-      - kefroden@gmail.com # 1.20 RT Enhancements Shadow
+      - joseph.r.sandoval@gmail.com # 1.21 Enhancements Shadow
+      - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - kcmartin2@mac.com # 1.20 Docs Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
@@ -381,9 +382,10 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
-      - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
+      - onlydole@gmail.com # 1.21 Emeritus Advisor
       - tpepper@vmware.com # Release Team subproject owner
     members:
+      - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - celeste@cncf.io # 1.20 Release Notes Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
       - dcampau1@gmail.com # 1.20 Bug Triage Shadow
@@ -392,9 +394,11 @@ groups:
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
       - jackytan@outlook.com # 1.20 Release Notes Shadow
+      - james@jameslaverack.com # 1.21 RT Enhancements Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
+      - joseph.r.sandoval@gmail.com # 1.21 RT Enhancements Shadow
       - kcmartin2@mac.com # 1.20 Docs Shadow
-      - kefroden@gmail.com # 1.20 RT Enhancements Shadow
+      - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - leslie@eagleusb.com # 1.20 Docs Shadow
       - max@koerbaecher.io # 1.20 Bug Triage Shadow
