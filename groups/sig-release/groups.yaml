@@ -101,7 +101,6 @@ groups:
       - davanum@gmail.com
       - ihor@cncf.io
       - linusa@google.com
-      - spiffxp@google.com
       - thockin@google.com
 
   - email-id: k8s-infra-staging-build-image@kubernetes.io
@@ -154,7 +153,6 @@ groups:
       - davanum@gmail.com
       - ihor@cncf.io
       - linusa@google.com
-      - spiffxp@google.com
       - thockin@google.com
       - rajib.jolite@gmail.com
 
@@ -183,6 +181,7 @@ groups:
       - cblecker@gmail.com # wg-k8s-infra-oncall
       - davanum@gmail.com # wg-k8s-infra-oncall
       - spiffxp@google.com # wg-k8s-infra-oncall
+      - spiffxp@gmail.com
       - thockin@google.com # wg-k8s-infra-oncall
 
   - email-id: k8s-infra-staging-releng@kubernetes.io
