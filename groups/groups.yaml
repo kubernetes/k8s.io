@@ -369,6 +369,7 @@ groups:
       - hh@ii.coop
       - ihor@cncf.io
       - spiffxp@google.com
+      - spiffxp@gmail.com
       - thockin@google.com
       - adolfo.garcia@uservers.net
       - bartek@smykla.com
@@ -589,6 +590,7 @@ groups:
       - ameukam@gmail.com
       - bentheelder@google.com
       - spiffxp@google.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
     name: k8s-infra-rbac-publishing-bot
@@ -620,6 +622,7 @@ groups:
       - ktbry@google.com
       - rajula96reddy@gmail.com
       - spiffxp@google.com
+      - spiffxp@gmail.com
       - thockin@google.com
 
   - email-id: k8s-infra-prow-oncall@kubernetes.io
@@ -787,7 +790,6 @@ groups:
       - caleb@ii.coop
       - hh@ii.coop
       - jbelamaric@google.com
-      - spiffxp@google.com
       - zz@ii.coop
 
   - email-id: k8s-infra-staging-autoscaling@kubernetes.io
@@ -1047,7 +1049,6 @@ groups:
       - davanum@gmail.com
       - mdame@redhat.com
       - ravisantoshgudimetla@gmail.com
-      - spiffxp@google.com
 
   - email-id: k8s-infra-staging-dns@kubernetes.io
     name: k8s-infra-staging-dns
@@ -1072,6 +1073,7 @@ groups:
       - justinsb@google.com
       - thockin@google.com
       - spiffxp@google.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-etcd@kubernetes.io
     name: k8s-infra-staging-etcd
@@ -1141,6 +1143,7 @@ groups:
       - james@munnelly.eu
       - thockin@google.com
       - spiffxp@google.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
     name: k8s-infra-staging-kas-network-proxy
@@ -1177,7 +1180,6 @@ groups:
       - davanum@gmail.com
       - ihor@cncf.io
       - justinsb@google.com
-      - spiffxp@google.com
       - thockin@google.com
 
   - email-id: k8s-infra-staging-kubeadm@kubernetes.io
@@ -1337,6 +1339,7 @@ groups:
       - bentheelder@google.com
       - shanefu@google.com
       - spiffxp@google.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-service-apis@kubernetes.io
     name: k8s-infra-staging-service-apis
