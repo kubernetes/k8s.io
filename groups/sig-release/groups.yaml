@@ -215,14 +215,17 @@ groups:
     managers:
       - tpepper@vmware.com # Release Team subproject owner
     members:
-      - keroden@microsoft.com
-      - killen.bob@gmail.com
+      - divya.mohan0209@gmail.com # 1.21 Comms Lead
+      - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
+      - justinleegarrison@gmail.com # 1.21 Comms Shadow
+      - kikis.github@gmail.com # 1.21 RT Lead Shadow
       - lauri.d.apple@gmail.com
-      - max@koerbaecher.io
-      - meenakshi.kaushik@gmail.com
-      - onlydole@gmail.com
-      - rcantw3ll@gmail.com
-      - sandoval@adobe.com
+      - onlydole@gmail.com # 1.21 Emeritus Advisor
+      - pal.nabarun95@gmail.com  # 1.21 RT Lead
+      - peeyushgupta91@gmail.com # 1.21 Comms Shadow
+      - saveetha13@gmail.com # 1.21 RT Lead Shadow
+      - v@gor.io # 1.21 RT Lead Shadow
+      - xander@grzy.dev # 1.21 Comms Shadow  
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -342,17 +345,20 @@ groups:
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - celeste@cncf.io # 1.20 Release Notes Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
-      - divya.mohan0209@gmail.com # 1.20 Comms Shadow
+      - divya.mohan0209@gmail.com # 1.21 Comms Lead
+      - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
       - jackytan@outlook.com # 1.20 Release Notes Shadow
       - james@jameslaverack.com # 1.21 Enhancements Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.21 Enhancements Shadow
+      - justinleegarrison@gmail.com # 1.21 Comms Shadow
       - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - kcmartin2@mac.com # 1.20 Docs Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
       - leslie@eagleusb.com # 1.20 Docs Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
+      - peeyushgupta91@gmail.com # 1.21 Comms Shadow
       - rlejano@gmail.com # 1.21 Docs Lead
       - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
@@ -364,7 +370,7 @@ groups:
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
-      - xander@grzy.dev # 1.20 Comms Shadow
+      - xander@grzy.dev # 1.21 Comms Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -388,14 +394,15 @@ groups:
       - celeste@cncf.io # 1.20 Release Notes Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
       - dcampau1@gmail.com # 1.20 Bug Triage Shadow
-      - divya.mohan0209@gmail.com # 1.20 Comms Shadow
       - droslean@gmail.com # 1.20 Bug Triage Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
+      - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
       - jackytan@outlook.com # 1.20 Release Notes Shadow
       - james@jameslaverack.com # 1.21 RT Enhancements Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.21 RT Enhancements Shadow
+      - justinleegarrison@gmail.com # 1.21 Comms Shadow
       - kcmartin2@mac.com # 1.20 Docs Shadow
       - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
@@ -405,6 +412,7 @@ groups:
       - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
       - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
+      - peeyushgupta91@gmail.com # 1.21 Comms Shadow
       - saveetha13@gmail.com # 1.20 RT Lead Shadow
       - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
       - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
@@ -413,4 +421,4 @@ groups:
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
       - tony@gosselin.it # 1.20 Comms Shadow
       - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
-      - xander@grzy.dev # 1.20 Comms Shadow
+      - xander@grzy.dev # 1.21 Comms Shadow
