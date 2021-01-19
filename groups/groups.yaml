@@ -641,6 +641,7 @@ groups:
       - fejta@google.com
       - slchase@google.com
       # wg-k8s-infra-oncall
+      - ameukam@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
       - spiffxp@google.com
