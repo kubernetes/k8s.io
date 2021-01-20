@@ -12,6 +12,12 @@
   dmap:
     "sha256:31183fd28aa9b4af81329e1886060492cfa67dd94e9d1132e00ed032ce685187": ["1.2"]
     "sha256:8b03e4185ecd305bc9b410faac15d486a3b1ef1946196d429245cdd3c7b152eb": ["1.3"]
+- name: kitten
+  dmap:
+    "sha256:362f3964ae393998e3943e563ebed01a07c1c58361cb5d4a6d236914c99a3942": ["1.4"]
+- name: nautilus
+  dmap:
+    "sha256:1f36a24cfb5e0c3f725d7565a867c2384282fcbeccc77b07b423c9da95763a9a": ["1.4"]
 - name: nonewprivs
   dmap:
     "sha256:553fcda2222ccea7cd534c8da34b709feb768d6389eb7333444b13f296bd168f": ["1.1"]
