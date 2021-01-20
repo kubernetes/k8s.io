@@ -343,12 +343,11 @@ groups:
       - sig-release-leads@kubernetes.io
       - antheabjung@gmail.com # 1.21 Enhancements Lead
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
-      - celeste@cncf.io # 1.20 Release Notes Shadow
+      - ashnehete@gmail.com # 1.21 Release Notes Shadow
       - chandani.madnani@gmail.com # 1.21 Docs Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
       - divya.mohan0209@gmail.com # 1.21 Comms Lead
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
-      - jackytan@outlook.com # 1.20 Release Notes Shadow
       - james@jameslaverack.com # 1.21 Enhancements Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.21 Enhancements Shadow
@@ -358,13 +357,15 @@ groups:
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
       - leslie@eagleusb.com # 1.20 Docs Shadow
+      - meloncattiel@gmail.com # 1.21 Release Notes Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
       - mvortizr@gmail.com # 1.21 Docs Shadow
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
+      - pmmalinov01@gmail.com # 1.21 Release Notes Shadow
       - rlejano@gmail.com # 1.21 Docs Lead
       - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
-      - soniasingla.1812@gmail.com # 1.20 Release Notes Shadow
+      - soniasingla.1812@gmail.com # 1.21 Release Notes Shadow
       - tengqim@cn.ibm.com # 1.21 Docs Shadow
       - tony@gosselin.it # 1.20 Comms Shadow
       - rob.kielty@gmail.com # 1.20 CI Signal Lead
@@ -373,7 +374,7 @@ groups:
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - victor@cloudflavor.io # 1.21 Docs Shadow
-      - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
+      - wilsonehusin@gmail.com # 1.21 Release Notes Lead
       - xander@grzy.dev # 1.21 Comms Shadow
 
   - email-id: release-team-shadows@kubernetes.io
@@ -395,7 +396,7 @@ groups:
       - tpepper@vmware.com # Release Team subproject owner
     members:
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
-      - celeste@cncf.io # 1.20 Release Notes Shadow
+      - ashnehete@gmail.com # 1.21 Release Notes Shadow
       - chandani.madnani@gmail.com # 1.21 Docs Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
       - dcampau1@gmail.com # 1.20 Bug Triage Shadow
@@ -403,7 +404,6 @@ groups:
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
-      - jackytan@outlook.com # 1.20 Release Notes Shadow
       - james@jameslaverack.com # 1.21 RT Enhancements Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.21 RT Enhancements Shadow
@@ -413,20 +413,21 @@ groups:
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - leslie@eagleusb.com # 1.20 Docs Shadow
       - max@koerbaecher.io # 1.20 Bug Triage Shadow
+      - meloncattiel@gmail.com # 1.21 Release Notes Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
       - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
       - mvortizr@gmail.com # 1.21 Docs Shadow
       - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
+      - pmmalinov01@gmail.com # 1.21 Release Notes Shadow
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
       - saveetha13@gmail.com # 1.20 RT Lead Shadow
       - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
       - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
-      - soniasingla.1812@gmail.com # 1.20 Release Notes Shadow
+      - soniasingla.1812@gmail.com # 1.21 Release Notes Shadow
       - tengqim@cn.ibm.com # 1.21 Docs Shadow
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
       - tony@gosselin.it # 1.20 Comms Shadow
       - victor@cloudflavor.io # 1.21 Docs Shadow
-      - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
       - xander@grzy.dev # 1.21 Comms Shadow
