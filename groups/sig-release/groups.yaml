@@ -344,6 +344,7 @@ groups:
       - antheabjung@gmail.com # 1.21 Enhancements Lead
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - celeste@cncf.io # 1.20 Release Notes Shadow
+      - chandani.madnani@gmail.com # 1.21 Docs Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
       - divya.mohan0209@gmail.com # 1.21 Comms Lead
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
@@ -352,23 +353,26 @@ groups:
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.21 Enhancements Shadow
       - justinleegarrison@gmail.com # 1.21 Comms Shadow
-      - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - kcmartin2@mac.com # 1.20 Docs Shadow
+      - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
       - leslie@eagleusb.com # 1.20 Docs Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
+      - mvortizr@gmail.com # 1.21 Docs Shadow
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
       - rlejano@gmail.com # 1.21 Docs Lead
       - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
       - soniasingla.1812@gmail.com # 1.20 Release Notes Shadow
+      - tengqim@cn.ibm.com # 1.21 Docs Shadow
       - tony@gosselin.it # 1.20 Comms Shadow
       - rob.kielty@gmail.com # 1.20 CI Signal Lead
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
+      - victor@cloudflavor.io # 1.21 Docs Shadow
       - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
       - xander@grzy.dev # 1.21 Comms Shadow
 
@@ -392,6 +396,7 @@ groups:
     members:
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - celeste@cncf.io # 1.20 Release Notes Shadow
+      - chandani.madnani@gmail.com # 1.21 Docs Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
       - dcampau1@gmail.com # 1.20 Bug Triage Shadow
       - droslean@gmail.com # 1.20 Bug Triage Shadow
@@ -410,6 +415,7 @@ groups:
       - max@koerbaecher.io # 1.20 Bug Triage Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
       - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
+      - mvortizr@gmail.com # 1.21 Docs Shadow
       - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
       - prashsh1@in.ibm.com # 1.20 CI Signal Shadow
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
@@ -418,7 +424,9 @@ groups:
       - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
       - soniasingla.1812@gmail.com # 1.20 Release Notes Shadow
+      - tengqim@cn.ibm.com # 1.21 Docs Shadow
       - thejoycekung@gmail.com # 1.20 CI Signal Shadow
       - tony@gosselin.it # 1.20 Comms Shadow
+      - victor@cloudflavor.io # 1.21 Docs Shadow
       - wilsonehusin@gmail.com # 1.20 Release Notes Shadow
       - xander@grzy.dev # 1.21 Comms Shadow
