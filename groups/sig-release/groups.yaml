@@ -8,17 +8,13 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
       - k8s-infra-release-viewers@kubernetes.io
+      - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
       - ameukam@gmail.com
       - bartek@smykla.com
-      - dcampau1@gmail.com # 1.20 Bug Triage Shadow
-      - droslean@gmail.com # 1.20 Bug Triage Shadow
-      - gianarb92@gmail.com # 1.19 Bug Triage Lead
-      - jtslear@gmail.com  # 1.19 Bug Triage Shadow
-      - kmbruner@gmail.com   # 1.19 Bug Triage Shadow
-      - max@koerbaecher.io # 1.20 Bug Triage Shadow
-      - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
-      - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
-      - v@gor.io # 1.20 Bug Triage Lead
+      - dcampau1@gmail.com # 1.21 Bug Triage Lead
+      - desponda@vmware.com # 1.21 Bug Triage Shadow
+      - kcmartin2@mac.com # 1.21 Bug Triage Shadow
+      - menna.elmasry@suse.com # 1.21 Bug Triage Shadow
 
   - email-id: k8s-infra-google-build-admins@kubernetes.io
     name: k8s-infra-google-build-admins
@@ -341,24 +337,28 @@ groups:
       - v@gor.io # 1.21 RT Lead Shadow
     members:
       - sig-release-leads@kubernetes.io
+      - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
       - antheabjung@gmail.com # 1.21 Enhancements Lead
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - ashnehete@gmail.com # 1.21 Release Notes Shadow
       - chandani.madnani@gmail.com # 1.21 Docs Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
+      - dcampau1@gmail.com # 1.21 Bug Triage Lead
+      - desponda@vmware.com # 1.21 Bug Triage Shadow
       - divya.mohan0209@gmail.com # 1.21 Comms Lead
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
       - james@jameslaverack.com # 1.21 Enhancements Shadow
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.21 Enhancements Shadow
       - justinleegarrison@gmail.com # 1.21 Comms Shadow
-      - kcmartin2@mac.com # 1.20 Docs Shadow
+      - kcmartin2@mac.com # 1.21 Bug Triage Shadow
       - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - lachlan.evenson@gmail.com # 1.20 Emeritus Advisor
       - leslie@eagleusb.com # 1.20 Docs Shadow
       - max@koerbaecher.io # 1.21 CI Signal Shadow
       - meloncattiel@gmail.com # 1.21 Release Notes Shadow
+      - menna.elmasry@suse.com # 1.21 Bug Triage Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
       - mvortizr@gmail.com # 1.21 Docs Shadow
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
@@ -395,12 +395,12 @@ groups:
       - onlydole@gmail.com # 1.21 Emeritus Advisor
       - tpepper@vmware.com # Release Team subproject owner
     members:
+      - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - ashnehete@gmail.com # 1.21 Release Notes Shadow
       - chandani.madnani@gmail.com # 1.21 Docs Shadow
       - chris@chrisshort.net # 1.20 Comms Shadow
-      - dcampau1@gmail.com # 1.20 Bug Triage Shadow
-      - droslean@gmail.com # 1.20 Bug Triage Shadow
+      - desponda@vmware.com # 1.21 Bug Triage Shadow
       - eddiezane@gmail.com # 1.20 CI Signal Shadow
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
       - hkamel.msft@gmail.com # 1.20 CI Signal Shadow
@@ -408,14 +408,14 @@ groups:
       - jeremylevanmorris@gmail.com # 1.20 RT Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.21 RT Enhancements Shadow
       - justinleegarrison@gmail.com # 1.21 Comms Shadow
-      - kcmartin2@mac.com # 1.20 Docs Shadow
+      - kcmartin2@mac.com # 1.21 Bug Triage Shadow
       - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - kinarashah108@gmail.com # 1.20 RT Enhancements Shadow
       - leslie@eagleusb.com # 1.20 Docs Shadow
       - max@koerbaecher.io # 1.21 CI Signal Shadow
       - meloncattiel@gmail.com # 1.21 Release Notes Shadow
+      - menna.elmasry@suse.com # 1.21 Bug Triage Shadow
       - mik.json@gmail.com # 1.20 RT Enhancements Shadow
-      - monmonmsc@gmail.com # 1.20 Bug Triage Shadow
       - mvortizr@gmail.com # 1.21 Docs Shadow
       - pal.nabarun95@gmail.com  # 1.20 RT Lead Shadow
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
@@ -423,7 +423,6 @@ groups:
       - priyankahariharan421@gmail.com # 1.21 CI Signal Shadow
       - saumya00@outlook.com # 1.21 CI Signal Shadow
       - saveetha13@gmail.com # 1.20 RT Lead Shadow
-      - sayan.chowdhury2012@gmail.com # 1.20 Bug Triage Shadow
       - shubhamtatvamasi@gmail.com # 1.20 Comms Shadow
       - snichols@vmware.com # 1.21 CI Signal Shadow
       - somtochionyekwere@gmail.com # 1.20 Docs Shadow
