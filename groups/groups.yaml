@@ -906,6 +906,7 @@ groups:
       - goldsteina@vmware.com
       - jeewan@vmware.com
       - prignanov@vmware.com
+      - richmcase@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
     name: k8s-infra-staging-cluster-api-do
