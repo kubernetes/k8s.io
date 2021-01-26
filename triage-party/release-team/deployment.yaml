@@ -39,7 +39,7 @@ spec:
           resources:
             limits:
               cpu: 1
-              memory: 1Gi
+              memory: 4Gi
           volumeMounts:
             - name: config
               mountPath: /app/config
