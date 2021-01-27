@@ -32,6 +32,7 @@
 - name: metadata-concealment
   dmap:
     "sha256:7bfe2e947fcc33de0efb728b318006b21b7a90a0e98e8abf847f18d7388c978e": ["1.5"]
+    "sha256:5cde3c696f251edad324efe91e858fdf47628e5a3c98f0af18edc765a33e1f12": ["1.6"]
 - name: nautilus
   dmap:
     "sha256:1f36a24cfb5e0c3f725d7565a867c2384282fcbeccc77b07b423c9da95763a9a": ["1.4"]
