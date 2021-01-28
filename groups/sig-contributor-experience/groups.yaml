@@ -8,8 +8,8 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
+      - alison@alisondowdney.com
       - ihor@cncf.io
-      - jorgec@vmware.com
       - killen.bob@gmail.com
       - paris.pittman@gmail.com
     managers:

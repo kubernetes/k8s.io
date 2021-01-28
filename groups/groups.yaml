@@ -38,7 +38,7 @@ groups:
       - contributors@kubernetes.io
     managers:
       - ihor@cncf.io
-      - jorgec@vmware.com
+      - alison@alisondowdney.com
       - jdumars@gmail.com
       - killen.bob@gmail.com
       - nikitaraghunath@gmail.com
@@ -1517,7 +1517,7 @@ groups:
     managers:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
-      - jorge@heptio.com
+      - alison@alisondowdney.com
 
   - email-id: k8s-infra-staging-ingress-nginx@kubernetes.io
     name: k8s-infra-staging-ingress-nginx
