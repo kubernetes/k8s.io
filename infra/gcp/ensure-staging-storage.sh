@@ -73,6 +73,7 @@ STAGING_PROJECTS=(
     etcd
     etcdadm
     examples
+    experimental
     external-dns
     git-sync
     infra-tools
@@ -108,6 +109,7 @@ STAGING_PROJECTS=(
 )
 
 RELEASE_STAGING_PROJECTS=(
+    experimental
     kubernetes
     mirror
     releng
