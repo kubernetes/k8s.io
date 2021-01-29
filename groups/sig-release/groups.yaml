@@ -191,6 +191,17 @@ groups:
     members:
       - k8s-infra-release-editors@kubernetes.io
 
+  - email-id: k8s-infra-staging-releng-test@kubernetes.io
+    name: k8s-infra-staging-releng-test
+    description: |-
+      ACL for staging RelEng
+
+      This project is primarily used to validate Release Engineering images in presubmit.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
   - email-id: release-comms@kubernetes.io
     name: release-comms
     description: |-

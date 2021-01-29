@@ -159,7 +159,7 @@ for BUCKET in "${RELEASE_BUCKETS[@]}"; do
     empower_gcs_admins "k8s-release" "${BUCKET}"
 
     # Enable prow to write to the bucket
-    # TODO(spiffxp): I almost guarantee prow will need admin privileges but 
+    # TODO(spiffxp): I almost guarantee prow will need admin privileges but
     #                let's start restricted and find out
     empower_svcacct_to_write_gcs_bucket "${PROW_BUILD_SVCACCT}" "${BUCKET}"
 
