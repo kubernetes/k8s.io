@@ -152,6 +152,18 @@ groups:
       - thockin@google.com
       - rajib.jolite@gmail.com
 
+  - email-id: k8s-infra-staging-experimental@kubernetes.io
+    name: k8s-infra-staging-experimental
+    description: |-
+      ACL for staging experimental images
+
+      This project is used to stage experimental images, for example, support
+      for new architectures.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
   - email-id: k8s-infra-staging-kubernetes@kubernetes.io
     name: k8s-infra-staging-kubernetes
     description: |-
