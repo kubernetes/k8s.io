@@ -59,6 +59,7 @@
 - name: hostpathplugin
   dmap:
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
+    "sha256:de166db2f9245cd0cccacfea9527f7e4c25816fde401e920163b5c17637daad1": [ "v1.5.0" ]
 - name: livenessprobe
   dmap:
     "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
