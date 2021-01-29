@@ -1,9 +1,10 @@
 - name: etcd
   dmap:
-    "sha256:bcdd5657b1edc1a2eb27356f33dd66b9400d4a084209c33461c7a7da0a32ebb3": ["3.4.7-2"]
-    "sha256:83c3e1f35b641e0cda53345f476c4c028fba697073bebafbaef19bcc1a9ce595": ["3.4.9-0"]
     "sha256:4ad90a11b55313b182afc186b9876c8e891531b8db4c9bf1541953021618d0e2": ["3.4.13-0"]
+    "sha256:528ff5e3c80ca0d58d1ab15dc329dc300f9c3fefaffa4c822ca2c389ce254644": ["3.4.13-3"]
+    "sha256:83c3e1f35b641e0cda53345f476c4c028fba697073bebafbaef19bcc1a9ce595": ["3.4.9-0"]
+    "sha256:bcdd5657b1edc1a2eb27356f33dd66b9400d4a084209c33461c7a7da0a32ebb3": ["3.4.7-2"]
+    "sha256:ea5725ef6227c89b5077fc2470a81ffaea0ef6a48bbf1573063e49bd8e0f15be": ["3.4.13-2"]
 - name: etcd-empty-dir-cleanup
   dmap:
     "sha256:f805272b4422efa92e20789295c343ed26ff36ddc4f70eeb5d7890d6b758b0fc": ["3.4.7.0"]
-
