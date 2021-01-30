@@ -1283,6 +1283,7 @@ groups:
       - dawnchen@google.com
       - lantaol@google.com
       - patrik@ptrk.io
+      - teratipally@google.com
       - zhenw@google.com
 
   - email-id: k8s-infra-staging-provider-azure@kubernetes.io
