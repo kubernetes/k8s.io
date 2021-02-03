@@ -148,6 +148,20 @@ resource "google_container_cluster" "cluster" {
     }
   }
 
+  // Enable NAP
+  cluster_autoscaling {
+    enabled = true
+    resource_limits {
+      resource_type = "cpu"
+      minimum = 2
+      maximum = 16
+    }
+    resource_limits {
+      resource_type = "memory"
+      maximum = 64
+    }
+  }
+
   // Enable PodSecurityPolicy enforcement
   pod_security_policy_config {
     enabled = false // TODO: we should turn this on
