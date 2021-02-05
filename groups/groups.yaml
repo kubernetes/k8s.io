@@ -241,6 +241,7 @@ groups:
       - k8s-infra-rbac-triageparty-release@kubernetes.io
       - k8s-infra-rbac-slack-infra@kubernetes.io
       - k8s-infra-rbac-node-perf-dash@kubernetes.io
+      - k8s-infra-rbac-wg-reliability@kubernetes.io
 
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
@@ -627,6 +628,18 @@ groups:
       - spiffxp@google.com
       - spiffxp@gmail.com
       - thockin@google.com
+
+  - email-id: k8s-infra-rbac-wg-reliability@kubernetes.io
+    name: k8s-infra-rbac-wg-reliability
+    description: |-
+      ACL for wg-reliability Infra
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - deads@redhat.com
+      - wojtekt@google.com
+      - skuznets@redhat.com
 
   - email-id: k8s-infra-prow-oncall@kubernetes.io
     name: k8s-infra-prow-oncall
