@@ -12,12 +12,22 @@
   dmap:
     "sha256:60629fe42de6260c9b930b48a2923b69168dc1c71fa5f762f70036477ffd74b6": ["1.2"]
     "sha256:b9c08bcbea5b933ddb324e360b5bd2c2b611e7db30258a5bbf1373eb563c4c87": ["1.3"]
+- name: busybox
+  dmap:
+    "sha256:d67d1eda84b05ebfc47290ba490aa2474caa11d90be6a5ef70da1b3f2ca2a2e7": ["1.29"]
 - name: cuda-vector-add
   dmap:
     "sha256:dc92c37785a73a45912a3a18bb89d72bf15c377938a5b122c12425b682bf880d": ["2.2"]
 - name: echoserver
   dmap:
     "sha256:60bd75eb661054404b49f745694714b0c3298c698d8f08d21180189581e6a0f2": ["2.3"]
+- name: glusterdynamic-provisioner
+  dmap:
+    "sha256:8bc20b52ce066dd4ea3d9eaac40c04ea8a77f47c33789676580cf4c7c9ea3c3d": ["v1.0"]
+- name: httpd
+  dmap:
+    "sha256:5fa11b592a35a7dd992a7a6540eb7935e0b386558e57fee863ce9af3960a5ed1": ["2.4.38-alpine"]
+    "sha256:ded922beab64b03ba02abe05cb8848b0121942638e7421134d466a82f7761caf": ["2.4.39-alpine"]
 - name: ipc-utils
   dmap:
     "sha256:06e2eb28e041f114941fba36b83f40c313f58a29d8b60777bde1fc4650e0b4f2": ["1.2"]
@@ -36,6 +46,10 @@
 - name: nautilus
   dmap:
     "sha256:1f36a24cfb5e0c3f725d7565a867c2384282fcbeccc77b07b423c9da95763a9a": ["1.4"]
+- name: nginx
+  dmap:
+    "sha256:dc81c9e400528c35e5b58d5208e7aece2b7452985009a44a341f42bebaabf07b": ["1.14-alpine"]
+    "sha256:05ac4b4aef14d4a594afc8e6a63076197debfee2a7b8c191f65c7d653beee0e0": ["1.15-alpine"]
 - name: node-perf/npb-ep
   dmap:
     "sha256:ac7a746f351635663abb0c240c0af71b229d1e321e478664c7816de4f4176818": ["1.1"]
@@ -52,6 +66,9 @@
 - name: nonroot
   dmap:
     "sha256:4051e85640c22f8e00c34dbd273576fc9e1e2829992656588062be9c0f69b04b": ["1.1"]
+- name: perl
+  dmap:
+    "sha256:c613344cdd31c5055961b078f831ef9d9199fc9111efe6e81bea3f00d78bd979": ["5.26"]
 - name: pets/peer-finder
   dmap:
     "sha256:7ed8e7c55c32894f04550e6af00d3563d974b623728c12a7286989189623abfc": ["1.5"]
