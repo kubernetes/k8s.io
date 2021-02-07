@@ -293,3 +293,15 @@ color 6 "Configuring special case for k8s-staging-ci-images"
     SERVICE_ACCOUNT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
     empower_svcacct_to_write_gcr "${SERVICE_ACCOUNT}" "${PROJECT}"
 )
+
+# Special case: In order for pull-release-image-* to run on k8s-infra-prow-build,
+#               it needs write access to gcr.io/k8s-staging-releng-test. For now,
+#               we will grant the prow-build service account write access. Longer
+#               term we would prefer service accounts per project, and restrictions
+#               on which jobs can use which service accounts.
+color 6 "Configuring special case for k8s-staging-releng-test"
+(
+    PROJECT="k8s-staging-releng-test"
+    SERVICE_ACCOUNT=$(svc_acct_email "k8s-infra-prow-build" "k8s-infra-staging-releng-test")
+    empower_svcacct_to_write_gcr "${SERVICE_ACCOUNT}" "${PROJECT}"
+)
