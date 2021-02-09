@@ -296,12 +296,32 @@ color 6 "Configuring special case for k8s-staging-ci-images"
 
 # Special case: In order for pull-release-image-* to run on k8s-infra-prow-build,
 #               it needs write access to gcr.io/k8s-staging-releng-test. For now,
-#               we will grant the prow-build service account write access. Longer
-#               term we would prefer service accounts per project, and restrictions
-#               on which jobs can use which service accounts.
+
 color 6 "Configuring special case for k8s-staging-releng-test"
 (
-    PROJECT="k8s-staging-releng-test"
-    SERVICE_ACCOUNT=$(svc_acct_email "k8s-infra-prow-build" "k8s-infra-staging-releng-test")
-    empower_svcacct_to_write_gcr "${SERVICE_ACCOUNT}" "${PROJECT}"
+    STAGING="releng-test"
+    PROJECT="k8s-staging-${STAGING}"
+    SERVICE_ACCOUNT_NAME="gcb-builder-${STAGING}"
+    SERVICE_ACCOUNT_EMAIL=$(svc_acct_email "${PROJECT}" "${SERVICE_ACCOUNT_NAME}")
+
+    color 6 "Ensuring ${SERVICE_ACCOUNT_EMAIL} serviceaccount exists"
+    ensure_service_account \
+      "${PROJECT}" \
+      "${SERVICE_ACCOUNT_NAME}" \
+      "used by k8s-infra-prow-build to trigger GCB, write to GCR for ${PROJECT}"
+
+    color 6 "Empowering ${SERVICE_ACCOUNT_EMAIL} to write to GCR for ${PROJECT}"
+    empower_svcacct_to_write_gcr "${SERVICE_ACCOUNT_EMAIL}" "${PROJECT}"
+
+    color 6 "Empowering ${SERVICE_ACCOUNT_EMAIL} to trigger GCB for ${PROJECT}"
+    gcloud \
+      projects add-iam-policy-binding "${PROJECT}" \
+      --member "serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
+      --role roles/cloudbuild.builds.builder
+
+    color 6 "Empowering ${SERVICE_ACCOUNT_EMAIL} to be used by k8s-infra-prow-build cluster"
+    empower_ksa_to_svcacct \
+        "k8s-infra-prow-build.svc.id.goog[test-pods/${SERVICE_ACCOUNT_NAME}]" \
+        "${PROJECT}" \
+        "${SERVICE_ACCOUNT_EMAIL}"
 )
