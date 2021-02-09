@@ -1,1 +1,6 @@
-# No images yet
+- name: snoopdb 
+  dmap:
+    "sha256:c4151a15c8439265d98f66d25ef17964e9e975d894822a54ed7e72db78dba6c6": ["v0.1.0"]
+- name: auditlogger
+  dmap: 
+    "sha256:c4151a15c8439265d98f66d25ef17964e9e975d894822a54ed7e72db78dba6c6": ["v0.1.0"]
