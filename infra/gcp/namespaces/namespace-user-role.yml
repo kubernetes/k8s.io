@@ -24,7 +24,7 @@ rules:
     resources: ["leases"]
     verbs: ["*"]
   - apiGroups: ["networking.k8s.io"]
-    resources: ["networkpolicies"]
+    resources: ["networkpolicies","ingresses"]
     verbs: ["*"]
   - apiGroups: ["cert-manager.io"]
     resources: ["certificates"]
