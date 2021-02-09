@@ -105,6 +105,7 @@ module "prow_build_cluster" {
   cluster_location  = local.cluster_location
   bigquery_location = local.bigquery_location
   is_prod_cluster   = "true"
+  release_channel   = "STABLE"
 }
 
 module "prow_build_nodepool_n1_highmem_8_maxiops" {
