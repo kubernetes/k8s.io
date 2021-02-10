@@ -651,17 +651,20 @@ groups:
     members:
       # test-infra-oncall
       - amerai@google.com
-      - bentheelder@google.com
-      - clarketm@google.com
+      - chaodai@google.com
       - colew@google.com
       - eblackwelder@google.com
       - fejta@google.com
       - slchase@google.com
-      # wg-k8s-infra-oncall
+      # sig-testing leads
+      - bentheelder@google.com
+      - skuznets@redhat.com
+      - spiffxp@google.com
+      - spiffxp@gmail.com
+      # wg-k8s-infra members
       - ameukam@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
-      - spiffxp@google.com
       - thockin@google.com
 
   - email-id: k8s-infra-prow-viewers@kubernetes.io
@@ -691,14 +694,7 @@ groups:
       - thejoycekung@gmail.com
       - neolit123@gmail.com
       - philjohnson96@gmail.com
-      # sig-scalability
-      - jeedigv@amazon.com
-      - jkaniuk@google.com
-      - jprzychodzen@google.com
-      - maciejborsz@google.com
-      - mmatejczyk@google.com
-      - wojtekt@google.com
-      - zawodny@google.com
+      - k8s-infra-sig-scalability-oncall@kubernetes.io
 
   - email-id: k8s-infra-sig-scalability-oncall@kubernetes.io
     name: k8s-infra-sig-scalability-oncall
