@@ -29,7 +29,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - extensions
+  - networking.k8s.io
   resources:
   - ingresses
   verbs:
@@ -37,7 +37,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - extensions
+  - networking.k8s.io
   resources:
   - ingresses/finalizers
   verbs:

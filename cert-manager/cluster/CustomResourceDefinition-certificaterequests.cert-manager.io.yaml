@@ -1,4 +1,4 @@
-# Copyright  The Jetstack cert-manager contributors.
+# Copyright  The cert-manager Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,6 +36,8 @@ spec:
       - v1beta1
   group: cert-manager.io
   names:
+    categories:
+    - cert-manager
     kind: CertificateRequest
     listKind: CertificateRequestList
     plural: certificaterequests
@@ -71,7 +73,7 @@ spec:
           from one of the configured issuers. \n All fields within the CertificateRequest's
           `spec` are immutable after creation. A CertificateRequest will either succeed
           or fail, as denoted by its `status.state` field. \n A CertificateRequest
-          is a 'one-shot' resource, meaning it represents a single point in time request
+          is a one-shot resource, meaning it represents a single point in time request
           for a certificate and cannot be re-used."
         properties:
           apiVersion:
@@ -105,12 +107,12 @@ spec:
                 type: boolean
               issuerRef:
                 description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                  the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                  the `kind` field is not set, or set to `Issuer`, an Issuer resource
                   with the given name in the same namespace as the CertificateRequest
-                  will be used.  If the 'kind' field is set to 'ClusterIssuer', a
-                  ClusterIssuer with the provided name will be used. The 'name' field
+                  will be used.  If the `kind` field is set to `ClusterIssuer`, a
+                  ClusterIssuer with the provided name will be used. The `name` field
                   in this stanza is required at all times. The group field refers
-                  to the API group of the issuer which defaults to 'cert-manager.io'
+                  to the API group of the issuer which defaults to `cert-manager.io`
                   if empty.
                 properties:
                   group:
@@ -208,16 +210,16 @@ spec:
                         for the condition's last transition.
                       type: string
                     status:
-                      description: Status of the condition, one of ('True', 'False',
-                        'Unknown').
+                      description: Status of the condition, one of (`True`, `False`,
+                        `Unknown`).
                       enum:
                       - "True"
                       - "False"
                       - Unknown
                       type: string
                     type:
-                      description: Type of the condition, known values are ('Ready',
-                        'InvalidRequest').
+                      description: Type of the condition, known values are (`Ready`,
+                        `InvalidRequest`).
                       type: string
                   required:
                   - status
@@ -261,7 +263,7 @@ spec:
           from one of the configured issuers. \n All fields within the CertificateRequest's
           `spec` are immutable after creation. A CertificateRequest will either succeed
           or fail, as denoted by its `status.state` field. \n A CertificateRequest
-          is a 'one-shot' resource, meaning it represents a single point in time request
+          is a one-shot resource, meaning it represents a single point in time request
           for a certificate and cannot be re-used."
         properties:
           apiVersion:
@@ -295,12 +297,12 @@ spec:
                 type: boolean
               issuerRef:
                 description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                  the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                  the `kind` field is not set, or set to `Issuer`, an Issuer resource
                   with the given name in the same namespace as the CertificateRequest
-                  will be used.  If the 'kind' field is set to 'ClusterIssuer', a
-                  ClusterIssuer with the provided name will be used. The 'name' field
+                  will be used.  If the `kind` field is set to `ClusterIssuer`, a
+                  ClusterIssuer with the provided name will be used. The `name` field
                   in this stanza is required at all times. The group field refers
-                  to the API group of the issuer which defaults to 'cert-manager.io'
+                  to the API group of the issuer which defaults to `cert-manager.io`
                   if empty.
                 properties:
                   group:
@@ -398,16 +400,16 @@ spec:
                         for the condition's last transition.
                       type: string
                     status:
-                      description: Status of the condition, one of ('True', 'False',
-                        'Unknown').
+                      description: Status of the condition, one of (`True`, `False`,
+                        `Unknown`).
                       enum:
                       - "True"
                       - "False"
                       - Unknown
                       type: string
                     type:
-                      description: Type of the condition, known values are ('Ready',
-                        'InvalidRequest').
+                      description: Type of the condition, known values are (`Ready`,
+                        `InvalidRequest`).
                       type: string
                   required:
                   - status
@@ -451,7 +453,7 @@ spec:
           from one of the configured issuers. \n All fields within the CertificateRequest's
           `spec` are immutable after creation. A CertificateRequest will either succeed
           or fail, as denoted by its `status.state` field. \n A CertificateRequest
-          is a 'one-shot' resource, meaning it represents a single point in time request
+          is a one-shot resource, meaning it represents a single point in time request
           for a certificate and cannot be re-used."
         properties:
           apiVersion:
@@ -480,12 +482,12 @@ spec:
                 type: boolean
               issuerRef:
                 description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                  the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                  the `kind` field is not set, or set to `Issuer`, an Issuer resource
                   with the given name in the same namespace as the CertificateRequest
-                  will be used.  If the 'kind' field is set to 'ClusterIssuer', a
-                  ClusterIssuer with the provided name will be used. The 'name' field
+                  will be used.  If the `kind` field is set to `ClusterIssuer`, a
+                  ClusterIssuer with the provided name will be used. The `name` field
                   in this stanza is required at all times. The group field refers
-                  to the API group of the issuer which defaults to 'cert-manager.io'
+                  to the API group of the issuer which defaults to `cert-manager.io`
                   if empty.
                 properties:
                   group:
@@ -588,16 +590,16 @@ spec:
                         for the condition's last transition.
                       type: string
                     status:
-                      description: Status of the condition, one of ('True', 'False',
-                        'Unknown').
+                      description: Status of the condition, one of (`True`, `False`,
+                        `Unknown`).
                       enum:
                       - "True"
                       - "False"
                       - Unknown
                       type: string
                     type:
-                      description: Type of the condition, known values are ('Ready',
-                        'InvalidRequest').
+                      description: Type of the condition, known values are (`Ready`,
+                        `InvalidRequest`).
                       type: string
                   required:
                   - status
@@ -643,7 +645,7 @@ spec:
           from one of the configured issuers. \n All fields within the CertificateRequest's
           `spec` are immutable after creation. A CertificateRequest will either succeed
           or fail, as denoted by its `status.state` field. \n A CertificateRequest
-          is a 'one-shot' resource, meaning it represents a single point in time request
+          is a one-shot resource, meaning it represents a single point in time request
           for a certificate and cannot be re-used."
         properties:
           apiVersion:
@@ -672,12 +674,12 @@ spec:
                 type: boolean
               issuerRef:
                 description: IssuerRef is a reference to the issuer for this CertificateRequest.  If
-                  the 'kind' field is not set, or set to 'Issuer', an Issuer resource
+                  the `kind` field is not set, or set to `Issuer`, an Issuer resource
                   with the given name in the same namespace as the CertificateRequest
-                  will be used.  If the 'kind' field is set to 'ClusterIssuer', a
-                  ClusterIssuer with the provided name will be used. The 'name' field
+                  will be used.  If the `kind` field is set to `ClusterIssuer`, a
+                  ClusterIssuer with the provided name will be used. The `name` field
                   in this stanza is required at all times. The group field refers
-                  to the API group of the issuer which defaults to 'cert-manager.io'
+                  to the API group of the issuer which defaults to `cert-manager.io`
                   if empty.
                 properties:
                   group:
@@ -781,16 +783,16 @@ spec:
                         for the condition's last transition.
                       type: string
                     status:
-                      description: Status of the condition, one of ('True', 'False',
-                        'Unknown').
+                      description: Status of the condition, one of (`True`, `False`,
+                        `Unknown`).
                       enum:
                       - "True"
                       - "False"
                       - Unknown
                       type: string
                     type:
-                      description: Type of the condition, known values are ('Ready',
-                        'InvalidRequest').
+                      description: Type of the condition, known values are (`Ready`,
+                        `InvalidRequest`).
                       type: string
                   required:
                   - status

@@ -22,6 +22,9 @@ spec:
       - v1beta1
   group: acme.cert-manager.io
   names:
+    categories:
+    - cert-manager
+    - cert-manager-acme
     kind: Challenge
     listKind: ChallengeList
     plural: challenges
