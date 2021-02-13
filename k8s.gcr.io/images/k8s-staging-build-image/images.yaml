@@ -255,3 +255,21 @@
     "sha256:ea3831515921431f5db2a86bd86b6d8ead488285955a5dda162717b70f84cc74": ["v1.16.0-rc.1-1"]
     "sha256:eca6e44f2f2a9c2d5079ac81732e15a91d8d9bbd4aae9c1246c7f9e235a30886": ["v1.14.2-4"]
     "sha256:f9f569e6e1da0fa6ac441b625e599bead8ab10f480ad2a84966cd4a0091e76a8": ["v1.12.17-2"]
+- name: setcap
+  dmap:
+    "sha256:b0fede27e44020bd9305c29540d7f8d9c1df8edc21adc3278946bbd994418946": ["buster-v1.4.0"]
+- name: setcap-amd64
+  dmap:
+    "sha256:55a3f08949f9d2bc1f108c3b02dc2f0393c5efaa1e45cf7b79b150c40202884e": ["buster-v1.4.0"]
+- name: setcap-arm
+  dmap:
+    "sha256:f90282d9af7046e0ab47a9a1b1ff5c3720af2a320943bb5fb748d63898592f42": ["buster-v1.4.0"]
+- name: setcap-arm64
+  dmap:
+    "sha256:d37a70f8e2198b8dd86511b009d963a66df34228f0485861023e7be52faa6a3f": ["buster-v1.4.0"]
+- name: setcap-ppc64le
+  dmap:
+    "sha256:198bfd5378949af1e1c2ed8f5da945a091bb40866e70f60b3896cd0cfccdaea0": ["buster-v1.4.0"]
+- name: setcap-s390x
+  dmap:
+    "sha256:a4775180f6a24b1d708d1e0aa884eeb7f30f4b2ac9dcb987664ccbf33823ee31": ["buster-v1.4.0"]
