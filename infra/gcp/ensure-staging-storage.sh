@@ -94,6 +94,7 @@ STAGING_PROJECTS=(
     nfd
     npd
     provider-azure
+    provider-openstack
     publishing-bot
     releng
     releng-test

@@ -49,6 +49,7 @@ CONFORMANCE_BUCKETS=(
     cri-o
     huaweicloud
     inspur
+    provider-openstack
     s390x-k8s
 )
 if [ $# = 0 ]; then
