@@ -36,6 +36,7 @@ gcloud \
     --filter="parent.id=${CNCF_GCP_ORG}" \
     --format="value(name, projectNumber)" \
 | sort \
+| tail -1 | head -1 \
 | while read -r PROJECT NUM; do
     export CLOUDSDK_CORE_PROJECT="${PROJECT}"
 
