@@ -769,6 +769,17 @@ groups:
       - kevinwzf0126@gmail.com # Google account of wangzefeng@huawei.com
       - qdurenhongcai@gmail.com # Google account of renhongcai@huawei.com
 
+  - email-id: k8s-infra-conform-provider-openstack@kubernetes.io
+    name: k8s-infra-conform-provider-openstack
+    description: |-
+      ACL for conformance of external Cloud Provider OpenStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anusha.iiitm@gmail.com
+      - anlin.kong@gmail.com
+      - glaubich@gmail.com
+
   - email-id: k8s-infra-conform-s390x-k8s@kubernetes.io
     name: k8s-infra-conform-s390x-k8s
     description: |-
@@ -890,6 +901,17 @@ groups:
       - justinsb@google.com
       - kim.andrewsy@gmail.com
       - nturner4@gmail.com
+
+  - email-id: k8s-infra-staging-provider-openstack@kubernetes.io
+    name: k8s-infra-staging-provider-openstack
+    description: |-
+      ACL for external Cloud Provider OpenStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anusha.iiitm@gmail.com
+      - anlin.kong@gmail.com
+      - glaubich@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     name: k8s-infra-staging-cluster-api
