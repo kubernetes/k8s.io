@@ -162,32 +162,32 @@ gcloud \
                 #### gcloud alpha monitoring channels list > "projects/${PROJECT}/services/monitoring.channels.json"
                 #### gcloud alpha monitoring channel-descriptors list > "projects/${PROJECT}/services/monitoring.channel-descriptors.json"
                 ;;
-            secretmanager)
-                gcloud \
-                    secrets list \
-                    --project=k8s-gsuite \
-                    --format="value(name)" \
-                | while read -r SECRET; do
-                    path="projects/${PROJECT}/secrets/${SECRET}"
-                    mkdir -p "${path}"
-                    gcloud \
-                        secrets describe "${SECRET}" \
-                        --project="${PROJECT}" \
-                        --format=json \
-                        > "${path}/description.json"
-                    gcloud \
-                        secrets versions list "${SECRET}" \
-                        --project="${PROJECT}" \
-                        --format=json \
-                        > "${path}/versions.json"
-                    gcloud \
-                        secrets get-iam-policy "${SECRET}" \
-                        --project="${PROJECT}" \
-                        --format=json \
-                        | jq 'del(.etag)' \
-                        > "${path}/iam.json"
-                done
-                ;;
+            # secretmanager)
+            #     gcloud \
+            #         secrets list \
+            #         --project=k8s-gsuite \
+            #         --format="value(name)" \
+            #     | while read -r SECRET; do
+            #         path="projects/${PROJECT}/secrets/${SECRET}"
+            #         mkdir -p "${path}"
+            #         gcloud \
+            #             secrets describe "${SECRET}" \
+            #             --project="${PROJECT}" \
+            #             --format=json \
+            #             > "${path}/description.json"
+            #         gcloud \
+            #             secrets versions list "${SECRET}" \
+            #             --project="${PROJECT}" \
+            #             --format=json \
+            #             > "${path}/versions.json"
+            #         gcloud \
+            #             secrets get-iam-policy "${SECRET}" \
+            #             --project="${PROJECT}" \
+            #             --format=json \
+            #             | jq 'del(.etag)' \
+            #             > "${path}/iam.json"
+            #     done
+            #     ;;
             storage-api)
                 gsutil ls -p "${PROJECT}" \
                 | awk -F/ '{print $3}' \
