@@ -72,7 +72,7 @@
       "metric": "URL_MAPS"
     },
     {
-      "limit": 60,
+      "limit": 100,
       "metric": "BACKEND_SERVICES"
     },
     {
@@ -124,6 +124,10 @@
       "metric": "SECURITY_POLICY_RULES"
     },
     {
+      "limit": 1000,
+      "metric": "XPN_SERVICE_PROJECTS"
+    },
+    {
       "limit": 150,
       "metric": "PACKET_MIRRORINGS"
     },
@@ -154,6 +158,18 @@
     {
       "limit": 50,
       "metric": "EXTERNAL_VPN_GATEWAYS"
+    },
+    {
+      "limit": 1,
+      "metric": "PUBLIC_ADVERTISED_PREFIXES"
+    },
+    {
+      "limit": 10,
+      "metric": "PUBLIC_DELEGATED_PREFIXES"
+    },
+    {
+      "limit": 1024,
+      "metric": "STATIC_BYOIP_ADDRESSES"
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/kubernetes-public",
