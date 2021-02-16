@@ -72,6 +72,7 @@
         "group:k8s-infra-gcp-org-admins@kubernetes.io",
         "user:domain-admin-lf@kubernetes.io",
         "user:ihor@cncf.io",
+        "user:psharma@linuxfoundation.org",
         "user:spiffxp@google.com",
         "user:thockin@google.com",
         "user:twaggoner@linuxfoundation.org"
