@@ -16,99 +16,99 @@
   "name": "k8s-infra-e2e-gce-project",
   "quotas": [
     {
-      "limit": 5000,
+      "limit": 10000,
       "metric": "SNAPSHOTS"
     },
     {
-      "limit": 15,
+      "limit": 30,
       "metric": "NETWORKS"
     },
     {
-      "limit": 200,
+      "limit": 500,
       "metric": "FIREWALLS"
     },
     {
-      "limit": 2000,
+      "limit": 5000,
       "metric": "IMAGES"
     },
     {
-      "limit": 21,
+      "limit": 175,
       "metric": "STATIC_ADDRESSES"
     },
     {
-      "limit": 250,
+      "limit": 300,
       "metric": "ROUTES"
     },
     {
-      "limit": 45,
+      "limit": 150,
       "metric": "FORWARDING_RULES"
     },
     {
-      "limit": 150,
+      "limit": 500,
       "metric": "TARGET_POOLS"
     },
     {
-      "limit": 150,
+      "limit": 500,
       "metric": "HEALTH_CHECKS"
     },
     {
-      "limit": 69,
+      "limit": 575,
       "metric": "IN_USE_ADDRESSES"
     },
     {
-      "limit": 150,
+      "limit": 500,
       "metric": "TARGET_INSTANCES"
     },
     {
-      "limit": 30,
+      "limit": 100,
       "metric": "TARGET_HTTP_PROXIES"
     },
     {
-      "limit": 30,
+      "limit": 100,
       "metric": "URL_MAPS"
     },
     {
-      "limit": 9,
+      "limit": 30,
       "metric": "BACKEND_SERVICES"
     },
     {
-      "limit": 300,
+      "limit": 1000,
       "metric": "INSTANCE_TEMPLATES"
     },
     {
-      "limit": 15,
+      "limit": 50,
       "metric": "TARGET_VPN_GATEWAYS"
     },
     {
-      "limit": 30,
+      "limit": 100,
       "metric": "VPN_TUNNELS"
     },
     {
-      "limit": 9,
+      "limit": 30,
       "metric": "BACKEND_BUCKETS"
     },
     {
-      "limit": 10,
+      "limit": 20,
       "metric": "ROUTERS"
     },
     {
-      "limit": 30,
+      "limit": 100,
       "metric": "TARGET_SSL_PROXIES"
     },
     {
-      "limit": 30,
+      "limit": 100,
       "metric": "TARGET_HTTPS_PROXIES"
     },
     {
-      "limit": 30,
+      "limit": 100,
       "metric": "SSL_CERTIFICATES"
     },
     {
-      "limit": 175,
+      "limit": 275,
       "metric": "SUBNETWORKS"
     },
     {
-      "limit": 30,
+      "limit": 100,
       "metric": "TARGET_TCP_PROXIES"
     },
     {
@@ -116,15 +116,19 @@
       "metric": "SECURITY_POLICIES"
     },
     {
-      "limit": 100,
+      "limit": 200,
       "metric": "SECURITY_POLICY_RULES"
     },
     {
-      "limit": 45,
+      "limit": 1000,
+      "metric": "XPN_SERVICE_PROJECTS"
+    },
+    {
+      "limit": 150,
       "metric": "PACKET_MIRRORINGS"
     },
     {
-      "limit": 300,
+      "limit": 1000,
       "metric": "NETWORK_ENDPOINT_GROUPS"
     },
     {
@@ -136,11 +140,11 @@
       "metric": "GLOBAL_INTERNAL_ADDRESSES"
     },
     {
-      "limit": 15,
+      "limit": 50,
       "metric": "VPN_GATEWAYS"
     },
     {
-      "limit": 2000,
+      "limit": 5000,
       "metric": "MACHINE_IMAGES"
     },
     {
@@ -148,8 +152,20 @@
       "metric": "SECURITY_POLICY_CEVAL_RULES"
     },
     {
-      "limit": 15,
+      "limit": 50,
       "metric": "EXTERNAL_VPN_GATEWAYS"
+    },
+    {
+      "limit": 1,
+      "metric": "PUBLIC_ADVERTISED_PREFIXES"
+    },
+    {
+      "limit": 10,
+      "metric": "PUBLIC_DELEGATED_PREFIXES"
+    },
+    {
+      "limit": 1024,
+      "metric": "STATIC_BYOIP_ADDRESSES"
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-gce-project",

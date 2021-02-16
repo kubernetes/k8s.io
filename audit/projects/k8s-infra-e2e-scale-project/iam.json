@@ -8,28 +8,30 @@
     },
     {
       "members": [
-        "serviceAccount:service-855765450555@compute-system.iam.gserviceaccount.com"
+        "serviceAccount:service-189277497252@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"
     },
     {
       "members": [
-        "serviceAccount:service-855765450555@containerregistry.iam.gserviceaccount.com"
+        "serviceAccount:service-189277497252@container-engine-robot.iam.gserviceaccount.com"
       ],
-      "role": "roles/containerregistry.ServiceAgent"
+      "role": "roles/container.serviceAgent"
     },
     {
       "members": [
-        "serviceAccount:855765450555-compute@developer.gserviceaccount.com",
-        "serviceAccount:855765450555@cloudservices.gserviceaccount.com",
+        "serviceAccount:189277497252-compute@developer.gserviceaccount.com",
+        "serviceAccount:189277497252@cloudservices.gserviceaccount.com",
         "serviceAccount:boskos-janitor@k8s-infra-prow-build.iam.gserviceaccount.com",
-        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "serviceAccount:service-189277497252@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
     },
     {
       "members": [
         "group:k8s-infra-prow-oncall@kubernetes.io",
+        "group:k8s-infra-sig-scalability-oncall@kubernetes.io",
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"

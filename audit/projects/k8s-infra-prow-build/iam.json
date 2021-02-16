@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "group:k8s-infra-prow-viewers@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/prow.viewer"
+    },
+    {
+      "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "projects/k8s-infra-prow-build/roles/ServiceAccountLister"
@@ -44,6 +50,12 @@
     },
     {
       "members": [
+        "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.developer"
+    },
+    {
+      "members": [
         "serviceAccount:service-773781448124@container-engine-robot.iam.gserviceaccount.com"
       ],
       "role": "roles/container.serviceAgent"
@@ -76,6 +88,7 @@
     },
     {
       "members": [
+        "group:k8s-infra-prow-oncall@kubernetes.io",
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"

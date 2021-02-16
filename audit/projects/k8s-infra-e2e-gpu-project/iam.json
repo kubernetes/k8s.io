@@ -8,20 +8,20 @@
     },
     {
       "members": [
-        "serviceAccount:service-855765450555@compute-system.iam.gserviceaccount.com"
+        "serviceAccount:service-438213416405@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"
     },
     {
       "members": [
-        "serviceAccount:service-855765450555@containerregistry.iam.gserviceaccount.com"
+        "serviceAccount:service-438213416405@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/containerregistry.ServiceAgent"
     },
     {
       "members": [
-        "serviceAccount:855765450555-compute@developer.gserviceaccount.com",
-        "serviceAccount:855765450555@cloudservices.gserviceaccount.com",
+        "serviceAccount:438213416405-compute@developer.gserviceaccount.com",
+        "serviceAccount:438213416405@cloudservices.gserviceaccount.com",
         "serviceAccount:boskos-janitor@k8s-infra-prow-build.iam.gserviceaccount.com",
         "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
       ],
@@ -33,12 +33,6 @@
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"
-    },
-    {
-      "members": [
-        "group:k8s-infra-prow-viewers@kubernetes.io"
-      ],
-      "role": "roles/viewer"
     }
   ],
   "version": 1

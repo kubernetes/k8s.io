@@ -2,22 +2,18 @@
   "commonInstanceMetadata": {
     "items": [
       {
-        "key": "gke-prow-build-trusted-8f83dcb7-cidr",
-        "value": "default:10.4.0.0/14"
-      },
-      {
-        "key": "sshKeys",
-        "value": "gke-8f83dcb7a83817de2408:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcqrAFbHYlsvt25hXLlNR1ZfOixmZUoaPh99ueAu1i94A507qQtfe4QbrQBIvR5r49QOpkDzL6kF0eluXbeLuke8blq7eMYVDOd9NWihUvVc40m79OCzxBXNWgd85en0JcPPuQS+SDNdCqf5CFvv93x3/NnU9riLNOQV6SOK+nTVmoNfKmrKqw0PgrwEFrxM8Wf3XDvSGmEqzT93Jpeij10Wn1tUDOODnPQAODYZQIRUp0WrJnenfE8UzUX75nbRCjiRfOcrQn4vmyMZ1XBkuv7HnbArsHWSRaEcJtF4C8wQx6sLdzw3o6F6LgwVQVEyc4EZJOPfDV+ysy6SnHROd1 gke-8f83dcb7a83817de2408@gke-8f83dcb7a83817de2408\ngke-8f83dcb7a83817de2408:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCVYGyDIkhLSSK6fUovrMQ+4IDeIoLBtVfcYPIQuEoOxS7CDxx1W6m5Hlrxp9pKV9wlQbDy9GbhbqZztisReG3zB11w71g9AMxTVc/IQpDVzOt++Nb4rFIJI46a3lLXuY8MMpH+ch483qtOWEz9hvuvbdqVZ2vLebvUW7oITiZUGaGnGfIjGe1tIDc3DGpBSV/71aJ4Uf235SuZy1D14Uiw6FeNnH7jEpEQdKm2t+wYE02M83DfC6HcQZcV42fvQopuYO9KrCtCA6Op+LBRCdtIKM9PAGik5seT5050bNznHGyqLTcqClT8qzQzzsLbAPnvMEiEGQlNKUH4VosJpAB7 gke-8f83dcb7a83817de2408@gke-8f83dcb7a83817de2408\ngke-8f83dcb7a83817de2408:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCaGRrHYdKzserLbKq4F90jANA1Og3gF79f4cOQ0N8skGqQkrwgFRh+Nb+PtT/Brr0uhZZB0bjdLBrcLWR5VoZQV+zCD/hmjLNBMWWx7satLnqShp2c2Q6db+IBwEuLfD152NqIZMAjgUELI8YmpoyG39u0blzDiDHj4LR2XzgCktYKPRwiPGWvx3I+sNk4YEnTAFynT9kXa601jzBwxr+VvSAMNSJXYf20aISLoPov+28gO5St970NOWjQYcQ8BQAi7jaTbizQOyd+92RWPsPksvvmAafhtqu3Lm5j9tA4ZqJFfX60WTMPeu4viUMf+tJrGNZmrNsFCb4Xvilly9a3 gke-8f83dcb7a83817de2408@gke-8f83dcb7a83817de2408"
+        "key": "ssh-keys",
+        "value": "prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow\nprow:prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
       }
     ],
     "kind": "compute#metadata"
   },
-  "creationTimestamp": "2020-04-30T16:41:21.119-07:00",
+  "creationTimestamp": "2020-08-04T13:39:56.468-07:00",
   "defaultNetworkTier": "PREMIUM",
-  "defaultServiceAccount": "180382678033-compute@developer.gserviceaccount.com",
-  "id": "7420505769285967055",
+  "defaultServiceAccount": "741153779759-compute@developer.gserviceaccount.com",
+  "id": "5169880856814451059",
   "kind": "compute#project",
-  "name": "k8s-infra-prow-build-trusted",
+  "name": "k8s-infra-e2e-ingress-project",
   "quotas": [
     {
       "limit": 10000,
@@ -172,6 +168,6 @@
       "metric": "STATIC_BYOIP_ADDRESSES"
     }
   ],
-  "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted",
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-ingress-project",
   "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
 }
