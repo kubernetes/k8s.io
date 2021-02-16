@@ -136,7 +136,6 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - cji@stripe.com
       - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
@@ -1319,7 +1318,6 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - cji@stripe.com
       - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
@@ -1337,7 +1335,6 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - cji@stripe.com
       - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
