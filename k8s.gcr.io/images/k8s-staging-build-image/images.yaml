@@ -204,6 +204,7 @@
     "sha256:be4039f250f26e1321d048e4dd6e81b78a80825c2dd490bacc0ac80ebb94bbc5": ["v12.1.1"]
 - name: go-runner
   dmap:
+    "sha256:004c18fbd8ca3fd431d60654edd0c19eed7e805385afac40d2b5b6b45cbd9e8e": ["v2.3.1-go1.16-buster.0"]
     "sha256:059fd64240ad0fcd0f6eee6a791004747f1b4a5d3c44dd5ca68258bda4555e67": ["buster-v2.2.4"]
     "sha256:0c8bac67a806659c4ee97c9ab6731a5d21d6b02de3290432e7d13f8c98b227d1": ["buster-v1.0.1"]
     "sha256:384e84aa715aed583798a77b92b78747f786f238a3bf9a43419d80029ecb3cf8": ["buster-v2.2.2"]
