@@ -4,7 +4,6 @@
   "number": "44019431644",
   "quota": {
     "dnsKeysPerManagedZone": 4,
-    "gkeClustersPerPolicy": 100,
     "kind": "dns#quota",
     "managedZones": 10000,
     "managedZonesPerNetwork": 10000,
