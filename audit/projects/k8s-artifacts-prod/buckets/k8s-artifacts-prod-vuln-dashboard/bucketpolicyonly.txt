@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-artifacts-prod-vuln-dashboard:
-  Enabled: True
-  LockedTime: 2020-11-10 20:06:45.035000+00:00
-
