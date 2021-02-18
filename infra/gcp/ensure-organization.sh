@@ -45,6 +45,9 @@ color 6 "Ensuring custom org role prow.viewer role exists"
 
 color 6 "Ensuring org-level IAM bindings exist"
 (
+    # k8s-infra-prow-oncall@kubernetes.io should be able to browse org resources
+    ensure_org_role_binding "group:k8s-infra-prow-oncall@kubernetes.io" "roles/browser"
+    
     # TODO: this already exists, but seems overprivileged for a group that is about
     #       access to the "aaa" cluster in "kubernetes-public"
     ensure_org_role_binding "group:gke-security-groups@kubernetes.io" "roles/browser"
