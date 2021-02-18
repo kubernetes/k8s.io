@@ -177,6 +177,9 @@ resource "google_container_cluster" "prod_cluster" {
     network_policy_config {
       disabled = false
     }
+    dns_cache_config {
+      enabled = var.enable_node_local_dns_cache
+    }
   }
 
   release_channel {
