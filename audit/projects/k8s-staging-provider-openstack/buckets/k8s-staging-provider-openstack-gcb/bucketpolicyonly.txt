@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-provider-openstack-gcb:
+  Enabled: True
+  LockedTime: 2021-05-16 15:19:21.741000+00:00
+
