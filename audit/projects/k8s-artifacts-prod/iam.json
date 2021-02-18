@@ -42,7 +42,7 @@
     },
     {
       "members": [
-        "serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com"
+        "deleted:serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com?uid=111422293292441494221"
       ],
       "role": "roles/errorreporting.writer"
     },
@@ -54,7 +54,7 @@
     },
     {
       "members": [
-        "serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com"
+        "deleted:serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com?uid=111422293292441494221"
       ],
       "role": "roles/logging.logWriter"
     },
