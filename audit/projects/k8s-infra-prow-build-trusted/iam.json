@@ -44,6 +44,12 @@
     },
     {
       "members": [
+        "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.developer"
+    },
+    {
+      "members": [
         "serviceAccount:service-180382678033@container-engine-robot.iam.gserviceaccount.com"
       ],
       "role": "roles/container.serviceAgent"
@@ -76,6 +82,7 @@
     },
     {
       "members": [
+        "group:k8s-infra-prow-oncall@kubernetes.io",
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"

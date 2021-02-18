@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-release-dev-eu:
+  Enabled: True
+  LockedTime: 2020-11-29 23:11:50.322000+00:00
+

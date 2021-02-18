@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-k8s-gsm-tools-gcb:
+  Enabled: True
+  LockedTime: 2020-10-15 22:24:05.028000+00:00
+

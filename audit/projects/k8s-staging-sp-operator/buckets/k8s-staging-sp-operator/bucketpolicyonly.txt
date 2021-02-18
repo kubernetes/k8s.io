@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-sp-operator:
+  Enabled: True
+  LockedTime: 2021-01-12 13:38:17.242000+00:00
+

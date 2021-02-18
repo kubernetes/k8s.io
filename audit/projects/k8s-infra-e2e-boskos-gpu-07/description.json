@@ -1,0 +1,11 @@
+{
+  "createTime": "2020-08-07T19:51:02.169Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-infra-e2e-boskos-gpu-07",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-infra-e2e-boskos-gpu-07",
+  "projectNumber": "593515467300"
+}

@@ -1,0 +1,8 @@
+{
+  "displayName": "k8s-infra container image vuln dashboard",
+  "email": "k8s-infra-gcr-vuln-dashboard@k8s-artifacts-prod.iam.gserviceaccount.com",
+  "name": "projects/k8s-artifacts-prod/serviceAccounts/k8s-infra-gcr-vuln-dashboard@k8s-artifacts-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "114106329282535755089",
+  "projectId": "k8s-artifacts-prod",
+  "uniqueId": "114106329282535755089"
+}

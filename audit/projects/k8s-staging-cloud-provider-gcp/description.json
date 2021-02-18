@@ -1,0 +1,11 @@
+{
+  "createTime": "2020-07-17T16:04:12.032Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-cloud-provider-gcp",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-cloud-provider-gcp",
+  "projectNumber": "67010995753"
+}

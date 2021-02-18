@@ -1,0 +1,8 @@
+{
+  "displayName": "prow-deployer",
+  "email": "prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "oauth2ClientId": "108520437172201123758",
+  "projectId": "k8s-infra-prow-build-trusted",
+  "uniqueId": "108520437172201123758"
+}

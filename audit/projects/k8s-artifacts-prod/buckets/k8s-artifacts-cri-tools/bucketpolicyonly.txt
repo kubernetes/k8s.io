@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-artifacts-cri-tools:
+  Enabled: True
+  LockedTime: 2020-08-26 18:32:05.672000+00:00
+

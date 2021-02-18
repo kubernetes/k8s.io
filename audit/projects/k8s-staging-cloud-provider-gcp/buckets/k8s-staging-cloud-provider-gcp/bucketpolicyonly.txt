@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-cloud-provider-gcp:
+  Enabled: True
+  LockedTime: 2020-10-15 21:53:03.842000+00:00
+

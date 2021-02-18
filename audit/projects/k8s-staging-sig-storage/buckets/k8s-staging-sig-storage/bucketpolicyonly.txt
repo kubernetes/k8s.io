@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-sig-storage:
+  Enabled: True
+  LockedTime: 2020-09-08 03:17:50.721000+00:00
+

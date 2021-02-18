@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-storage-migrator:
+  Enabled: True
+  LockedTime: 2020-12-09 13:43:44.043000+00:00
+

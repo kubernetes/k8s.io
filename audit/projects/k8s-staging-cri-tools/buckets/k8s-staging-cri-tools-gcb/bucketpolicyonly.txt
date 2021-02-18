@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-cri-tools-gcb:
+  Enabled: True
+  LockedTime: 2021-02-17 19:29:07.746000+00:00
+

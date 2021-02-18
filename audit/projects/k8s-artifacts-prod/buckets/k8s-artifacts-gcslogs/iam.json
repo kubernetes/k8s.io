@@ -1,0 +1,44 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "projectEditor:k8s-artifacts-prod",
+        "projectOwner:k8s-artifacts-prod"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-artifacts-prod"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:cloud-storage-analytics@google.com"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
+        "projectEditor:k8s-artifacts-prod",
+        "projectOwner:k8s-artifacts-prod"
+      ],
+      "role": "roles/storage.legacyObjectOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-artifacts-prod"
+      ],
+      "role": "roles/storage.legacyObjectReader"
+    },
+    {
+      "members": [
+        "group:cloud-storage-analytics@google.com",
+        "group:k8s-infra-artifact-admins@kubernetes.io"
+      ],
+      "role": "roles/storage.objectAdmin"
+    }
+  ]
+}

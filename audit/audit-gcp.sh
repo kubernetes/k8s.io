@@ -165,7 +165,7 @@ gcloud \
             secretmanager)
                 gcloud \
                     secrets list \
-                    --project=k8s-gsuite \
+                    --project="${PROJECT}" \
                     --format="value(name)" \
                 | while read -r SECRET; do
                     path="projects/${PROJECT}/secrets/${SECRET}"
@@ -206,6 +206,21 @@ gcloud \
                 ;;
             *)
                 echo "##### Unhandled Service ${SVC}"
+                # (these were all enabled for kubernetes-public)
+                # TODO: handle (or ignore) bigquerystorage
+                # TODO: handle (or ignore) clouderrorreporting
+                # TODO: handle (or ignore) cloudfunctions
+                # TODO: handle (or ignore) cloudresourcemanager
+                # TODO: handle (or ignore) cloudshell
+                # TODO: handle (or ignore) containerregistry
+                # TODO: handle (or ignore) iam
+                # TODO: handle (or ignore) iamcredentials
+                # TODO: handle (or ignore) oslogin
+                # TODO: handle (or ignore) pubsub
+                # TODO: handle (or ignore) serviceusage
+                # TODO: handle (or ignore) source
+                # TODO: handle (or ignore) stackdriver
+                # TODO: handle (or ignore) storage-component
                 ;;
         esac
     done

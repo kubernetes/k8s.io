@@ -1,0 +1,169 @@
+{
+  "commonInstanceMetadata": {
+    "items": [
+      {
+        "key": "ssh-keys",
+        "value": "prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow\nprow:prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
+      }
+    ],
+    "kind": "compute#metadata"
+  },
+  "creationTimestamp": "2020-08-07T12:51:12.945-07:00",
+  "defaultNetworkTier": "PREMIUM",
+  "defaultServiceAccount": "593515467300-compute@developer.gserviceaccount.com",
+  "id": "7721290966228799071",
+  "kind": "compute#project",
+  "name": "k8s-infra-e2e-boskos-gpu-07",
+  "quotas": [
+    {
+      "limit": 5000,
+      "metric": "SNAPSHOTS"
+    },
+    {
+      "limit": 15,
+      "metric": "NETWORKS"
+    },
+    {
+      "limit": 200,
+      "metric": "FIREWALLS"
+    },
+    {
+      "limit": 2000,
+      "metric": "IMAGES"
+    },
+    {
+      "limit": 21,
+      "metric": "STATIC_ADDRESSES"
+    },
+    {
+      "limit": 250,
+      "metric": "ROUTES"
+    },
+    {
+      "limit": 45,
+      "metric": "FORWARDING_RULES"
+    },
+    {
+      "limit": 150,
+      "metric": "TARGET_POOLS"
+    },
+    {
+      "limit": 150,
+      "metric": "HEALTH_CHECKS"
+    },
+    {
+      "limit": 69,
+      "metric": "IN_USE_ADDRESSES"
+    },
+    {
+      "limit": 150,
+      "metric": "TARGET_INSTANCES"
+    },
+    {
+      "limit": 30,
+      "metric": "TARGET_HTTP_PROXIES"
+    },
+    {
+      "limit": 30,
+      "metric": "URL_MAPS"
+    },
+    {
+      "limit": 9,
+      "metric": "BACKEND_SERVICES"
+    },
+    {
+      "limit": 300,
+      "metric": "INSTANCE_TEMPLATES"
+    },
+    {
+      "limit": 15,
+      "metric": "TARGET_VPN_GATEWAYS"
+    },
+    {
+      "limit": 30,
+      "metric": "VPN_TUNNELS"
+    },
+    {
+      "limit": 9,
+      "metric": "BACKEND_BUCKETS"
+    },
+    {
+      "limit": 10,
+      "metric": "ROUTERS"
+    },
+    {
+      "limit": 30,
+      "metric": "TARGET_SSL_PROXIES"
+    },
+    {
+      "limit": 30,
+      "metric": "TARGET_HTTPS_PROXIES"
+    },
+    {
+      "limit": 30,
+      "metric": "SSL_CERTIFICATES"
+    },
+    {
+      "limit": 175,
+      "metric": "SUBNETWORKS"
+    },
+    {
+      "limit": 30,
+      "metric": "TARGET_TCP_PROXIES"
+    },
+    {
+      "limit": 10,
+      "metric": "SECURITY_POLICIES"
+    },
+    {
+      "limit": 100,
+      "metric": "SECURITY_POLICY_RULES"
+    },
+    {
+      "limit": 45,
+      "metric": "PACKET_MIRRORINGS"
+    },
+    {
+      "limit": 300,
+      "metric": "NETWORK_ENDPOINT_GROUPS"
+    },
+    {
+      "limit": 6,
+      "metric": "INTERCONNECTS"
+    },
+    {
+      "limit": 5000,
+      "metric": "GLOBAL_INTERNAL_ADDRESSES"
+    },
+    {
+      "limit": 15,
+      "metric": "VPN_GATEWAYS"
+    },
+    {
+      "limit": 2000,
+      "metric": "MACHINE_IMAGES"
+    },
+    {
+      "limit": 20,
+      "metric": "SECURITY_POLICY_CEVAL_RULES"
+    },
+    {
+      "limit": 15,
+      "metric": "EXTERNAL_VPN_GATEWAYS"
+    },
+    {
+      "limit": 1,
+      "metric": "PUBLIC_ADVERTISED_PREFIXES"
+    },
+    {
+      "limit": 10,
+      "metric": "PUBLIC_DELEGATED_PREFIXES"
+    },
+    {
+      "limit": 1024,
+      "metric": "STATIC_BYOIP_ADDRESSES"
+    }
+  ],
+  "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-boskos-gpu-07",
+  "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
+}

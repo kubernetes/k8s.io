@@ -1,0 +1,8 @@
+{
+  "displayName": "k8s-infra monitoring viewer",
+  "email": "k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "109438172956774474706",
+  "projectId": "kubernetes-public",
+  "uniqueId": "109438172956774474706"
+}

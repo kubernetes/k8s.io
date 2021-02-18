@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-mirror-gcb:
+  Enabled: True
+  LockedTime: 2021-02-19 00:11:54.744000+00:00
+
