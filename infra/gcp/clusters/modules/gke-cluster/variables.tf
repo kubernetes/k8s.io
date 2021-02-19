@@ -53,7 +53,7 @@ EOF
 }
 
 variable "enable_node_local_dns_cache" {
-  description = "If this cluster want to have NodeLocal DNSCache enabled"
+  description = "If this cluster should have NodeLocal DNSCache enabled"
   type        = string
   default     = "false"
 }

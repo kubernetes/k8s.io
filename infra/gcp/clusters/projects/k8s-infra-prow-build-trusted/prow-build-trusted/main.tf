@@ -132,7 +132,7 @@ module "prow_build_cluster" {
   bigquery_location = local.bigquery_location
   is_prod_cluster   = "true"
   release_channel   = "STABLE"
-  enable_node_local_dns_cache = var.enable_node_local_dns_cache
+  enable_node_local_dns_cache = local.enable_node_local_dns_cache
 }
 
 module "prow_build_nodepool" {
@@ -148,6 +148,5 @@ module "prow_build_nodepool" {
   disk_size_gb    = 200
   disk_type       = "pd-standard"
   service_account = module.prow_build_cluster.cluster_node_sa.email
-  enable_node_local_dns_cache = var.enable_node_local_dns_cache
 }
 
