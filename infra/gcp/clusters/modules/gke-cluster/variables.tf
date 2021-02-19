@@ -51,3 +51,9 @@ variable "release_channel" {
   More information about release channels can be found here : https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels.
 EOF
 }
+
+variable "enable_node_local_dns_cache" {
+  description = "If this cluster should have NodeLocal DNSCache enabled"
+  type        = string
+  default     = "false"
+}

@@ -24,13 +24,14 @@ This file defines:
 */
 
 locals {
-  project_id              = "k8s-infra-prow-build"
-  cluster_name            = "prow-build"           // The name of the cluster defined in this file
-  cluster_location        = "us-central1"          // The GCP location (region or zone) where the cluster should be created
-  bigquery_location       = "US"                   // The bigquery specific location where the dataset should be created
-  pod_namespace           = "test-pods"            // MUST match whatever prow is configured to use when it schedules to this cluster
-  cluster_sa_name         = "prow-build"           // Name of the GSA and KSA that pods use by default
-  boskos_janitor_sa_name  = "boskos-janitor"       // Name of the GSA and KSA used by boskos-janitor
+  project_id                   = "k8s-infra-prow-build"
+  cluster_name                 = "prow-build"           // The name of the cluster defined in this file
+  cluster_location             = "us-central1"          // The GCP location (region or zone) where the cluster should be created
+  bigquery_location            = "US"                   // The bigquery specific location where the dataset should be created
+  pod_namespace                = "test-pods"            // MUST match whatever prow is configured to use when it schedules to this cluster
+  cluster_sa_name              = "prow-build"           // Name of the GSA and KSA that pods use by default
+  boskos_janitor_sa_name       = "boskos-janitor"       // Name of the GSA and KSA used by boskos-janitor
+  enable_node_local_dns_cache  = "true"                 // Enable NodeLocal DNSCache
 }
 
 module "project" {
@@ -106,6 +107,7 @@ module "prow_build_cluster" {
   bigquery_location = local.bigquery_location
   is_prod_cluster   = "true"
   release_channel   = "STABLE"
+  enable_node_local_dns_cache = local.enable_node_local_dns_cache
 }
 
 module "prow_build_nodepool_n1_highmem_8_maxiops" {
