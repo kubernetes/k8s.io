@@ -178,17 +178,12 @@ resource "google_container_cluster" "prod_cluster" {
       disabled = false
     }
     dns_cache_config {
-      enabled = var.enable_node_local_dns_cache
+      enabled = var.dns_cache_enabled
     }
   }
 
   release_channel {
     channel = var.release_channel
-  }
-
-  // Enable PodSecurityPolicy enforcement
-  pod_security_policy_config {
-    enabled = false // TODO: we should turn this on
   }
 
   // Enable VPA
@@ -280,11 +275,9 @@ resource "google_container_cluster" "test_cluster" {
     network_policy_config {
       disabled = false
     }
-  }
-
-  // Enable PodSecurityPolicy enforcement
-  pod_security_policy_config {
-    enabled = false // TODO: we should turn this on
+    dns_cache_config {
+      enabled = var.dns_cache_enabled
+    }
   }
 
   // Enable VPA

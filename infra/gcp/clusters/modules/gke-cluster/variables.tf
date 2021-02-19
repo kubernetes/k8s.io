@@ -41,8 +41,6 @@ variable "is_prod_cluster" {
 }
 
 variable "release_channel" {
-  type        = string
-  default     = "UNSPECIFIED"
   description = <<EOF
   The release channel of this cluster. Accepted values are `UNSPECIFIED`, `RAPID`, `REGULAR` and `STABLE`.
 
@@ -50,10 +48,19 @@ variable "release_channel" {
 
   More information about release channels can be found here : https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels.
 EOF
+  type        = string
+  default     = "UNSPECIFIED"
 }
 
-variable "enable_node_local_dns_cache" {
-  description = "If this cluster should have NodeLocal DNSCache enabled"
+variable "dns_cache_enabled" {
+  description = <<EOF
+  Whether the cluster has the NodeLocal DNSCache add-on enabled
+
+  NOTE: changes to this value require node recreation to take effect (will happen during next maintenance window, or if gcloud command is used)
+
+  More information available here: https://cloud.google.com/kubernetes-engine/docs/how-to/nodelocal-dns-cache
+EOF
   type        = string
+  // TODO: default this true (and/or remove this option) once kubernetes-public/aaa uses this module
   default     = "false"
 }
