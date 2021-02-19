@@ -186,11 +186,6 @@ resource "google_container_cluster" "prod_cluster" {
     channel = var.release_channel
   }
 
-  // Enable PodSecurityPolicy enforcement
-  pod_security_policy_config {
-    enabled = false // TODO: we should turn this on
-  }
-
   // Enable VPA
   vertical_pod_autoscaling {
     enabled = true
@@ -283,11 +278,6 @@ resource "google_container_cluster" "test_cluster" {
     dns_cache_config {
       enabled = var.dns_cache_enabled
     }
-  }
-
-  // Enable PodSecurityPolicy enforcement
-  pod_security_policy_config {
-    enabled = false // TODO: we should turn this on
   }
 
   // Enable VPA
