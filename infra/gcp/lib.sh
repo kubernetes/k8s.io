@@ -653,3 +653,23 @@ function custom_org_role_name() {
 
     echo "organizations/${GCP_ORG}/roles/${name}"
 }
+
+# Ensure that IAM binding exists at org level
+# Arguments:
+#   $1:  The role name (e.g. "prow.viewer")
+#   $2:  The file (e.g. "/path/to/file.yaml")
+function ensure_org_role_binding() {
+    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_org_role_binding(principal, role) requires 2 arguments" >&2
+        return 1
+    fi
+
+    local org="${GCP_ORG}"
+    local principal="${1}"
+    local role="${2}"
+
+    gcloud \
+        organizations add-iam-policy-binding "${GCP_ORG}" \
+        --member "${principal}" \
+        --role "${role}"
+}
