@@ -31,7 +31,6 @@ locals {
   cluster_sa_name              = "prow-build-trusted"  // Name of the GSA and KSA that pods use by default
   gcb_builder_sa_name          = "gcb-builder"         // Name of the GSA and KSA that pods use to be allowed to run GCB builds and push to GCS buckets
   prow_deployer_sa_name        = "prow-deployer"       // Name of the GSA and KSA that pods use to be allowed to deploy to prow build clusters
-  enable_node_local_dns_cache  = "true"                // Enable NodeLocal DNSCache
 }
 
 module "project" {
@@ -132,7 +131,7 @@ module "prow_build_cluster" {
   bigquery_location = local.bigquery_location
   is_prod_cluster   = "true"
   release_channel   = "STABLE"
-  enable_node_local_dns_cache = local.enable_node_local_dns_cache
+  dns_cache_enabled = "true"
 }
 
 module "prow_build_nodepool" {

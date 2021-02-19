@@ -178,7 +178,7 @@ resource "google_container_cluster" "prod_cluster" {
       disabled = false
     }
     dns_cache_config {
-      enabled = var.enable_node_local_dns_cache
+      enabled = var.dns_cache_enabled
     }
   }
 
@@ -279,6 +279,9 @@ resource "google_container_cluster" "test_cluster" {
     }
     network_policy_config {
       disabled = false
+    }
+    dns_cache_config {
+      enabled = var.dns_cache_enabled
     }
   }
 
