@@ -12,6 +12,9 @@ data:
     }
 
     http {
+      # Disable to show the nginx version
+      server_tokens off;
+
       # This is the main site.
       server {
         server_name k8s.io;
