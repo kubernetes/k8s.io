@@ -1,0 +1,12 @@
+# This is to address a known issue with node local dns cache
+# https://cloud.google.com/kubernetes-engine/docs/how-to/nodelocal-dns-cache#known_issues
+# TODO: remove when cluster version is >= 1.19.7-gke.1500
+# NOTE: string containing structured data, was retrieved from v1.17.15-gke.800, may fail 
+#       silently in the future if the expected schema changes
+apiVersion: v1
+data:
+  linear: '{"coresPerReplica":256,"nodesPerReplica":16,"preventSinglePointFailure":true}'
+kind: ConfigMap
+metadata:
+  name: kube-dns-autoscaler
+  namespace: kube-system
