@@ -5,7 +5,7 @@
 #       silently in the future if the expected schema changes
 apiVersion: v1
 data:
-  linear: '{"coresPerReplica":256,"nodesPerReplica":16,"preventSinglePointFailure":true}'
+  linear: '{"coresPerReplica":256,"nodesPerReplica":8,"min":4,"preventSinglePointFailure":true}'
 kind: ConfigMap
 metadata:
   name: kube-dns-autoscaler
