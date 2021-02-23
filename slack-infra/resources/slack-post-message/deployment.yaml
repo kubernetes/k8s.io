@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: slack-post-message
-        image: gcr.io/k8s-staging-slack-infra/slack-post-message:v20200901-117c06f 
+        image: gcr.io/k8s-staging-slack-infra/slack-post-message:v20210223-8525eb3
         args:
           - --config-path=/etc/slack-post-message/config.json
         ports:
