@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: triage-party
-          image: triageparty/triage-party:1.3.0
+          image: triageparty/triage-party:1.4.0-beta.1
           env:
             - name: GITHUB_TOKEN
               valueFrom:
@@ -30,11 +30,13 @@ spec:
           ports:
             - containerPort: 8080
           readinessProbe:
-            failureThreshold: 3
+            failureThreshold: 5
             httpGet:
               path: /health
               port: 8080
               scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 60
             timeoutSeconds: 5
           resources:
             limits:
