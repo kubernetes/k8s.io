@@ -20,6 +20,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-127754664067@gcf-admin-robot.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudfunctions.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/compute.loadBalancerAdmin"
@@ -65,6 +71,7 @@
       "members": [
         "serviceAccount:127754664067-compute@developer.gserviceaccount.com",
         "serviceAccount:127754664067@cloudservices.gserviceaccount.com",
+        "serviceAccount:kubernetes-public@appspot.gserviceaccount.com",
         "serviceAccount:service-127754664067@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
@@ -95,13 +102,19 @@
     },
     {
       "members": [
+        "group:gke-security-groups@kubernetes.io"
+      ],
+      "role": "roles/logging.privateLogViewer"
+    },
+    {
+      "members": [
         "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.metricWriter"
     },
     {
       "members": [
-        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
+        "group:gke-security-groups@kubernetes.io"
       ],
       "role": "roles/monitoring.viewer"
     },
@@ -109,6 +122,7 @@
       "members": [
         "user:domain-admin-lf@kubernetes.io",
         "user:ihor@cncf.io",
+        "user:psharma@linuxfoundation.org",
         "user:thockin@google.com"
       ],
       "role": "roles/owner"

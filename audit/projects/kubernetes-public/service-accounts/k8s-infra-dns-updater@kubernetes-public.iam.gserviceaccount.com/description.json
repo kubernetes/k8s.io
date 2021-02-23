@@ -1,0 +1,8 @@
+{
+  "displayName": "k8s-infra dns updater",
+  "email": "k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "103924646831481972185",
+  "projectId": "kubernetes-public",
+  "uniqueId": "103924646831481972185"
+}
