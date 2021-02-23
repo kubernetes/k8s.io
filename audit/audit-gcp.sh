@@ -6,9 +6,8 @@ set -o pipefail
 
 CNCF_GCP_ORG=758905017065
 
-echo "# Removing existing audit files"
+echo "# Removing existing org audit files"
 rm -rf org_kubernetes.io
-rm -rf projects
 
 echo "# Auditing CNCF CGP Org: ${CNCF_GCP_ORG}"
 mkdir -p org_kubernetes.io/roles
@@ -36,11 +35,13 @@ gcloud \
     --filter="parent.id=${CNCF_GCP_ORG}" \
     --format="value(name, projectNumber)" \
 | sort \
-| tail -1 | head -1 \
+| tail -5 | head -5 \
 | while read -r PROJECT NUM; do
     export CLOUDSDK_CORE_PROJECT="${PROJECT}"
 
     echo "### Auditing Project ${PROJECT}"
+    echo "#### Removing existing ${PROJECTS} audit files"
+    rm -rf "projects/${PROJECT}" # clear out old audit data
     mkdir -p "projects/${PROJECT}"
     gcloud \
         projects describe "${PROJECT}" \
@@ -163,32 +164,32 @@ gcloud \
                 #### gcloud alpha monitoring channels list > "projects/${PROJECT}/services/monitoring.channels.json"
                 #### gcloud alpha monitoring channel-descriptors list > "projects/${PROJECT}/services/monitoring.channel-descriptors.json"
                 ;;
-            # secretmanager)
-            #     gcloud \
-            #         secrets list \
-            #         --project=k8s-gsuite \
-            #         --format="value(name)" \
-            #     | while read -r SECRET; do
-            #         path="projects/${PROJECT}/secrets/${SECRET}"
-            #         mkdir -p "${path}"
-            #         gcloud \
-            #             secrets describe "${SECRET}" \
-            #             --project="${PROJECT}" \
-            #             --format=json \
-            #             > "${path}/description.json"
-            #         gcloud \
-            #             secrets versions list "${SECRET}" \
-            #             --project="${PROJECT}" \
-            #             --format=json \
-            #             > "${path}/versions.json"
-            #         gcloud \
-            #             secrets get-iam-policy "${SECRET}" \
-            #             --project="${PROJECT}" \
-            #             --format=json \
-            #             | jq 'del(.etag)' \
-            #             > "${path}/iam.json"
-            #     done
-            #     ;;
+            secretmanager)
+                gcloud \
+                    secrets list \
+                    --project=${PROJECT} \
+                    --format="value(name)" \
+                | while read -r SECRET; do
+                    path="projects/${PROJECT}/secrets/${SECRET}"
+                    mkdir -p "${path}"
+                    gcloud \
+                        secrets describe "${SECRET}" \
+                        --project="${PROJECT}" \
+                        --format=json \
+                        > "${path}/description.json"
+                    gcloud \
+                        secrets versions list "${SECRET}" \
+                        --project="${PROJECT}" \
+                        --format=json \
+                        > "${path}/versions.json"
+                    gcloud \
+                        secrets get-iam-policy "${SECRET}" \
+                        --project="${PROJECT}" \
+                        --format=json \
+                        | jq 'del(.etag)' \
+                        > "${path}/iam.json"
+                done
+                ;;
             storage-api)
                 gsutil ls -p "${PROJECT}" \
                 | awk -F/ '{print $3}' \
