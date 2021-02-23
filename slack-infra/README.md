@@ -4,6 +4,7 @@ Cluster resources to deploy the following apps from [kubernetes-sigs/slack-infra
 
 - slack-event-log
 - slack-moderator
+- slack-moderator-words
 - slack-welcomer
 - slack-post-message
 - slackin

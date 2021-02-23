@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-moderator-words
+  labels:
+    app: slack-moderator-words
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: slack-moderator-words
+  template:
+    metadata:
+      labels:
+        app: slack-moderator-words
+    spec:
+      containers:
+      - name: slack-moderator-words
+        image: gcr.io/k8s-staging-slack-infra/slack-moderator-words:latest
+        imagePullPolicy: Always
+        args:
+          - --config-path=/etc/slack-moderator-words/config.json
+          - --filter-config-path=/etc/filters/filters.yaml
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        - name: PATH_PREFIX
+          value: /infra/moderator-words
+        volumeMounts:
+        - mountPath: /etc/slack-moderator-words
+          name: config
+        - mountPath: /etc/filters
+          name: filters
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            scheme: HTTP
+            port: 8080
+      volumes:
+      - name: config
+        secret:
+          secretName: slack-moderator-words-config
+      - name: filters
+        configMap:
+          name: slack-moderator-words-filters
