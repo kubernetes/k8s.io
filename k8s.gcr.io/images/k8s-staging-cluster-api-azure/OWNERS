@@ -2,10 +2,8 @@
 # Should always mirror the maintainers/reviewers in https://sigs.k8s.io/cluster-api-provider-azure/OWNERS_ALIASES
 
 approvers:
-- awesomenix
 - CecileRobertMichon
 - devigned
-- justaugustus
 - nader-ziada
 reviewers:
 - alexeldeib
