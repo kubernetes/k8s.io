@@ -623,7 +623,10 @@ groups:
       - bartek@smykla.com
       - cblecker@gmail.com
       - davanum@gmail.com
+      - jeef111x@gmail.com
+      - killen.bob@gmail.com
       - ktbry@google.com
+      - nikitaraghunath@gmail.com
       - rajula96reddy@gmail.com
       - spiffxp@google.com
       - spiffxp@gmail.com
@@ -1406,8 +1409,11 @@ groups:
     members:
       - ameukam@gmail.com
       - bartek@smykla.com
+      - jeef111x@gmail.com
+      - killen.bob@gmail.com
       - ktbry@google.com
       - james@munnelly.eu
+      - nikitaraghunath@gmail.com
       - rajula96reddy@gmail.com
 
   - email-id: k8s-infra-staging-txtdirect@kubernetes.io
