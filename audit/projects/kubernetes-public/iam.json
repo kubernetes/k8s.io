@@ -122,6 +122,7 @@
       "members": [
         "user:domain-admin-lf@kubernetes.io",
         "user:ihor@cncf.io",
+        "user:psharma@linuxfoundation.org",
         "user:thockin@google.com"
       ],
       "role": "roles/owner"
