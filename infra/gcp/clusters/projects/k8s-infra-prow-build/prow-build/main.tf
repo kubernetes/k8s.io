@@ -117,7 +117,7 @@ module "prow_build_nodepool_n1_highmem_8_maxiops" {
   name            = "pool4"
   initial_count   = 1
   min_count       = 1
-  max_count       = 50
+  max_count       = 80
   # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
   # use an UBUNTU image instead. Keep parity with the existing google.com 
   # k8s-prow-builds/prow cluster by using the CONTAINERD variant
