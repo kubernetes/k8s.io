@@ -4,7 +4,8 @@
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
         "projectEditor:k8s-staging-e2e-test-images",
-        "projectOwner:k8s-staging-e2e-test-images"
+        "projectOwner:k8s-staging-e2e-test-images",
+        "serviceAccount:456067983721@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketOwner"
     },

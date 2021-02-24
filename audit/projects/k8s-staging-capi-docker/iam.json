@@ -22,6 +22,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-44019431644@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-44019431644@container-analysis.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.ServiceAgent"
@@ -40,6 +46,8 @@
     },
     {
       "members": [
+        "serviceAccount:44019431644-compute@developer.gserviceaccount.com",
+        "serviceAccount:44019431644@cloudservices.gserviceaccount.com",
         "serviceAccount:service-44019431644@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"

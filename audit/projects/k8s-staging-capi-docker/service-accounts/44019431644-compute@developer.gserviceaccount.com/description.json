@@ -1,0 +1,8 @@
+{
+  "displayName": "Compute Engine default service account",
+  "email": "44019431644-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-capi-docker/serviceAccounts/44019431644-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "108793772350733493223",
+  "projectId": "k8s-staging-capi-docker",
+  "uniqueId": "108793772350733493223"
+}
