@@ -33,7 +33,14 @@
     },
     {
       "members": [
-        "group:gke-security-groups@kubernetes.io"
+        "group:k8s-infra-gcp-accounting@kubernetes.io"
+      ],
+      "role": "roles/billing.viewer"
+    },
+    {
+      "members": [
+        "group:gke-security-groups@kubernetes.io",
+        "group:k8s-infra-prow-oncall@kubernetes.io"
       ],
       "role": "roles/browser"
     },
@@ -72,6 +79,7 @@
         "group:k8s-infra-gcp-org-admins@kubernetes.io",
         "user:domain-admin-lf@kubernetes.io",
         "user:ihor@cncf.io",
+        "user:psharma@linuxfoundation.org",
         "user:spiffxp@google.com",
         "user:thockin@google.com",
         "user:twaggoner@linuxfoundation.org"
@@ -95,6 +103,12 @@
         "group:k8s-infra-gcp-org-admins@kubernetes.io"
       ],
       "role": "roles/resourcemanager.projectDeleter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-auditors@kubernetes.io"
+      ],
+      "role": "roles/secretmanager.viewer"
     },
     {
       "members": [
