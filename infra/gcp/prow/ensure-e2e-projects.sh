@@ -22,7 +22,7 @@ set -o nounset
 set -o pipefail
 
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
-. "${SCRIPT_DIR}/lib.sh"
+. "${SCRIPT_DIR}/../lib.sh"
 
 function usage() {
     echo "usage: $0 [repo...]" > /dev/stderr
@@ -111,6 +111,16 @@ for prj; do
   (
     ensure_project "${prj}"
 
+    color 6 "Ensure stale role bindings have been removed from e2e project: ${prj}"
+    (
+      # TODO(https://github.com/kubernetes/k8s.io/issues/1661): remove once verified as consistent
+      color 6 "group:k8s-infra-prow-viewers@kubernetes.io should not have roles/viewer (ref: https://github.com/kubernetes/k8s.io/issues/1661)"
+      ensure_removed_project_role_binding "${prj}" "group:k8s-infra-prow-viewers@kubernetes.io" "roles/viewer"
+      # TODO(https://github.com/kubernetes/k8s.io/issues/299): remove once smarter logic folded into ensure_project
+      color 6 "user:* should not have roles/owner for projects (ref: https://github.com/kubernetes/k8s.io/issues/299)"
+      ensure_removed_project_role_binding "${prj}" "spiffxp@google.com" "roles/owner"
+    ) 2>&1 | indent
+
     color 6 "Enabling APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
     enable_api "${prj}" compute.googleapis.com
     enable_api "${prj}" logging.googleapis.com
@@ -143,7 +153,7 @@ for prj; do
       --role roles/owner
 
     # NB: prow.viewer role is defined in ensure-organization.sh, that needs to have been run first
-    color 6 "Empower k8s-infra-prow-viewers@kubernetes.io to view e2e project: ${prj}"
+    color 6 "Empower k8s-infra-prow-viewers@kubernetes.io to view specific resources in e2e project: ${prj}"
     gcloud \
       projects add-iam-policy-binding "${prj}" \
       --member "group:k8s-infra-prow-viewers@kubernetes.io" \

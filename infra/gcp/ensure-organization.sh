@@ -40,7 +40,7 @@ fi
 ## setup custom role for prow troubleshooting
 color 6 "Ensuring custom org role prow.viewer role exists"
 (
-    ensure_custom_org_role_from_file "prow.viewer" "${SCRIPT_DIR}/roles/prow.viewer.yaml"
+    ensure_custom_iam_role_from_file "org" "prow.viewer" "${SCRIPT_DIR}/roles/prow.viewer.yaml"
 ) 2>&1 | indent
 
 color 6 "Ensuring org-level IAM bindings exist"
