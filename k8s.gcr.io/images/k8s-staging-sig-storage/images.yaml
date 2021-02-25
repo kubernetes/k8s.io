@@ -61,6 +61,7 @@
   dmap:
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
     "sha256:de166db2f9245cd0cccacfea9527f7e4c25816fde401e920163b5c17637daad1": [ "v1.5.0" ]
+    "sha256:b526bd29630261eceecf2d38c84d4f340a424d57e1e2661111e2649a4663b659": [ "v1.6.0" ]
 - name: livenessprobe
   dmap:
     "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
@@ -72,6 +73,7 @@
     "sha256:440277cf19e242ae2652c3bb7915197a628b0f4d0490a4cfd9cd15d8ee716407": [ "v4.0.0" ]
     "sha256:6824ea165907f6b44913609d4f05305aa5aed9ea9a2b1b8f3c3b010a88616ac6": [ "v4.0.1" ]
     "sha256:8e977ceafa6261c6677a9d9d84deeb7d5ef34a4bdee128814072be1fe9d92c9f": [ "v4.0.2" ]
+    "sha256:a7b517f9e0f42ffade802eef9cefa271372386b85f55b702b493241e58459793": [ "v4.1.0" ]
 - name: nfs-provisioner
   dmap:
     "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
