@@ -17,6 +17,7 @@
 # This is a library of functions used to create GCP stuff.
 
 . "$(dirname "${BASH_SOURCE[0]}")/lib_util.sh"
+. "$(dirname "${BASH_SOURCE[0]}")/lib_iam.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcr.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcs.sh"
 
@@ -575,101 +576,4 @@ function ensure_regional_address() {
         --description="${description}" \
         --region="${region}"
     fi
-}
-
-# Ensure that custom IAM role exists, creating one if needed
-# Arguments:
-#   $1:  The GCP project
-#   $2:  The role name (e.g. "ServiceAccountLister")
-#   $3:  The role title (e.g. "Service Account Lister")
-#   $4:  The role description (e.g. "Can list ServiceAccounts.")
-#   $5+: The role permissions (e.g. "iam.serviceAccounts.list")
-# Example usage:
-#   ensure_custom_iam_role \
-#       kubernetes-public \
-#       ServiceAccountLister \
-#       "Service Account Lister" \
-#       "Can list ServiceAccounts." \
-#       iam.serviceAccounts.list
-function ensure_custom_iam_role() {
-    if [ $# -lt 5 ] || [ -z "${1}" ] || [ -z "${2}" ] || [ -z "${3}" ] \
-        || [ -z "${4}" ] || [ -z "${5}" ]
-    then
-        echo -n "ensure_custom_iam_role(gcp_project, name, title," >&2
-        echo    " description, permission...) requires at least 5 arguments" >&2
-        return 1
-    fi
-
-    local gcp_project="${1}"; shift
-    local name="${1}"; shift
-    local title="${1}"; shift
-    local description="${1}"; shift
-    local permissions; permissions=$(join_by , "$@")
-
-    if ! gcloud --project "${gcp_project}" iam roles describe "${name}" \
-        >/dev/null 2>&1
-    then
-        gcloud --project "${gcp_project}" --quiet \
-            iam roles create "${name}" \
-            --title "${title}" \
-            --description "${description}" \
-            --stage GA \
-            --permissions "${permissions}"
-    fi
-}
-
-# Ensure that custom IAM role exists and is in sync with definition in file
-# Arguments:
-#   $1:  The role name (e.g. "prow.viewer")
-#   $2:  The file (e.g. "/path/to/file.yaml")
-function ensure_custom_org_role_from_file() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
-        echo "ensure_custom_org_role_from_file(name, file) requires 2 arguments" >&2
-        return 1
-    fi
-
-    local org="${GCP_ORG}"
-    local name="${1}"
-    local file="${2}"
-    
-    if ! gcloud iam roles describe "${name}" --organization "${org}" \
-        >/dev/null 2>&1
-    then
-      # be noisy when creating a role
-      gcloud iam roles create "${name}" --organization "${org}" --file "${file}"
-    else
-      # be quiet when updating, only output name of role
-      gcloud iam roles update "${name}" --organization "${org}" --file "${file}" | grep ^name:
-    fi
-}
-
-function custom_org_role_name() {
-    if [ ! $# -eq 1 -o -z "$1" ]; then
-        echo "custom_org_role_name(name) requires 1 arguments" >&2
-        return 1
-    fi
-    
-    local name="${1}"
-
-    echo "organizations/${GCP_ORG}/roles/${name}"
-}
-
-# Ensure that IAM binding exists at org level
-# Arguments:
-#   $1:  The role name (e.g. "prow.viewer")
-#   $2:  The file (e.g. "/path/to/file.yaml")
-function ensure_org_role_binding() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
-        echo "ensure_org_role_binding(principal, role) requires 2 arguments" >&2
-        return 1
-    fi
-
-    local org="${GCP_ORG}"
-    local principal="${1}"
-    local role="${2}"
-
-    gcloud \
-        organizations add-iam-policy-binding "${GCP_ORG}" \
-        --member "${principal}" \
-        --role "${role}"
 }
