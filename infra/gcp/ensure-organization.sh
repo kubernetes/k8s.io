@@ -51,9 +51,6 @@ color 6 "Ensuring organization custom roles exist"
     done
 ) 2>&1 | indent
 
-echo "exiting early to confirm role creation has worked"
-exit 0
-
 color 6 "Ensuring org-level IAM bindings exist"
 (
     # k8s-infra-prow-oncall@kubernetes.io should be able to browse org resources
@@ -67,19 +64,22 @@ color 6 "Ensuring org-level IAM bindings exist"
     ensure_org_role_binding "group:k8s-infra-gcp-accounting@kubernetes.io" "$(custom_org_role_name "CustomRole")"
 
     # k8s-infra-gcp-auditors@
-    # TODO: this is what already exists, but it might be better to collapse this 
-    #       into a custom role, or use browser+viewer
-    audit_roles=(
-        $(custom_org_role_name "StorageBucketLister")
+    ensure_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "$(custom_org_role_name "audit.viewer")"
+    # TODO(https://github.com/kubernetes/k8s.io/issues/1659): obviated by audit.viewer, remove when bindings gone
+    old_audit_roles=(
+        "$(custom_org_role_name "StorageBucketLister")"
         roles/compute.viewer
         roles/dns.reader
         roles/iam.securityReviewer
         roles/resourcemanager.organizationViewer
         roles/serviceusage.serviceUsageConsumer
     )
-    for role in "${audit_roles[@]}"; do
-        ensure_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "${role}"
+    for role in "${old_audit_roles[@]}"; do
+        ensure_removed_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "${role}"
     done
+
+    echo "exiting early to confirm audit.viewer role migration has worked"
+    exit 0
 
     # k8s-infra-org-admins@
     # TODO: there are more granular roles also bound, they seem redundant given
