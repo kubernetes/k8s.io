@@ -166,7 +166,7 @@ function ensure_project_role_binding() {
         --role "${role}"
 }
 
-# Ensure that IAM binding has been removed at project level
+# Ensure that IAM binding has been removed from project
 # Arguments:
 #   $1:  The project id (e.g. "k8s-infra-foo")
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
@@ -176,11 +176,29 @@ function ensure_removed_project_role_binding() {
         echo "ensure_removed_project_role_binding(project, principal, role) requires 3 arguments" >&2
         return 1
     fi
+
     local project="${1}"
     local principal="${2}"
     local role="${3}"
 
     _ensure_removed_resource_role_binding "projects" "${project}" "${principal}" "${role}"
+}
+
+# Ensure that IAM binding has been removed from organization
+# Arguments:
+#   $1:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
+#   $2:  The role name (e.g. "roles/foo.bar")
+function ensure_removed_org_role_binding() {
+    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_removed_org_role_binding(principal, role) requires 2 arguments" >&2
+        return 1
+    fi
+
+    local organization="${GCP_ORG}"
+    local principal="${1}"
+    local role="${2}"
+
+    _ensure_removed_resource_role_binding "organizations" "${organization}" "${principal}" "${role}"
 }
 
 # Ensure that IAM binding has been removed at resource level
