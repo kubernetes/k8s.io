@@ -94,7 +94,7 @@ resource "google_bigquery_dataset" "test_usage_metering" {
 //            Any changes in one MUST be reflected in the other.
 resource "google_container_cluster" "prod_cluster" {
   count     = var.is_prod_cluster == "true" ? 1 : 0
-  
+
   name     = var.cluster_name
   location = var.cluster_location
 
@@ -149,7 +149,10 @@ resource "google_container_cluster" "prod_cluster" {
   }
 
   // Restrict master to Google IP space; use Cloud Shell to access
-  master_authorized_networks_config {
+  dynamic "master_authorized_networks_config" {
+    for_each = var.cloud_shell_access ? [1] : []
+    content {
+    }
   }
 
   // Enable GKE Usage Metering
@@ -193,7 +196,7 @@ resource "google_container_cluster" "prod_cluster" {
 }
 resource "google_container_cluster" "test_cluster" {
   count     = var.is_prod_cluster == "true" ? 0 : 1
-  
+
   name     = var.cluster_name
   location = var.cluster_location
 
@@ -247,7 +250,10 @@ resource "google_container_cluster" "test_cluster" {
   }
 
   // Restrict master to Google IP space; use Cloud Shell to access
-  master_authorized_networks_config {
+  dynamic "master_authorized_networks_config" {
+    for_each = var.cloud_shell_access ? [1] : []
+    content {
+    }
   }
 
   // Enable GKE Usage Metering
