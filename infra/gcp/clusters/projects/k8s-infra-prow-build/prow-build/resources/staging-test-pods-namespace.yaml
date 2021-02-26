@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
-spec:
+metadata:
   name: staging-test-pods
