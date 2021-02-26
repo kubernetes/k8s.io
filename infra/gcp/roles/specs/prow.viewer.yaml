@@ -1,0 +1,19 @@
+# a subset of convenience role roles/viewer to allow community members
+# to view resources used by prow or jobs that lease e2e projects from boskos
+# using GCP console or gcloud commands
+title: Prow Viewer
+description: View access to services for troubleshooting prow
+name: prow.viewer
+include:
+  roles:
+  - roles/compute.viewer
+  - roles/container.clusterViewer
+  - roles/container.viewer
+  - roles/logging.viewer
+  - roles/monitoring.viewer
+  permissions:
+  - storage.buckets.get
+  - storage.buckets.getIamPolicy
+  - storage.buckets.list
+  - storage.objects.get
+  - storage.objects.list
