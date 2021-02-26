@@ -100,13 +100,14 @@ resource "google_service_account_iam_policy" "boskos_janitor_sa_iam" {
 
 module "prow_build_cluster" {
   source = "../../../modules/gke-cluster"
-  project_name      = local.project_id
-  cluster_name      = local.cluster_name
-  cluster_location  = local.cluster_location
-  bigquery_location = local.bigquery_location
-  is_prod_cluster   = "true"
-  release_channel   = "REGULAR"
-  dns_cache_enabled = "true"
+  project_name       = local.project_id
+  cluster_name       = local.cluster_name
+  cluster_location   = local.cluster_location
+  bigquery_location  = local.bigquery_location
+  is_prod_cluster    = "true"
+  release_channel    = "REGULAR"
+  dns_cache_enabled  = "true"
+  cloud_shell_access = false
 }
 
 module "prow_build_nodepool_n1_highmem_8_maxiops" {

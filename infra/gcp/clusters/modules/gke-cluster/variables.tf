@@ -64,3 +64,9 @@ EOF
   // TODO: default this true (and/or remove this option) once kubernetes-public/aaa uses this module
   default     = "false"
 }
+
+variable "cloud_shell_access" {
+  description = "Control plane access restricted to Google Cloud Shell"
+  type        = bool
+  default     = true
+}
