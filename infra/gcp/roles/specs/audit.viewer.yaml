@@ -1,0 +1,26 @@
+# an aggregate of different service roles to allow auditing of all resources
+# in the organization hierarchy using GCP console or gcloud commands
+title: Audit Viewer
+description: View access to resources
+name: audit.viewer
+include:
+  roles:
+  - roles/compute.viewer
+  - roles/dns.reader
+  - roles/iam.securityReviewer
+  - roles/resourcemanager.organizationViewer
+  - roles/serviceusage.serviceUsageConsumer
+  permissions:
+  - storage.buckets.get
+  - storage.buckets.getIamPolicy
+  - storage.buckets.list
+exclude:
+  permissionRegexes:
+  # permissions with custom roles support level NOT_SUPPORTED
+  # ref: https://cloud.google.com/iam/docs/custom-roles-permissions-support
+  - ^cloudonefs.
+  - ^gcp.redisenterprise.
+  - ^datastore.
+  - ^domains.registrations.
+  - ^gkehub.
+  - ^servicemanagement.consumerSettings
