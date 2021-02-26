@@ -34,14 +34,25 @@ if [ $# != 0 ]; then
     exit 1
 fi
 
-# TODO: setup custom role StorageBucketLister, I don't see that defined in code
-# TODO: setup custom role CustomRole ("Billing Viewer"), I don't see that defined in code
+org_roles=(
+    prow.viewer
+    audit.viewer
+    secretmanager.secretLister
+    organization.admin
+    CustomRole
+    StorageBucketLister
+)
 
-## setup custom role for prow troubleshooting
-color 6 "Ensuring custom org role prow.viewer role exists"
+color 6 "Ensuring organization custom roles exist"
 (
-    ensure_custom_iam_role_from_file "org" "prow.viewer" "${SCRIPT_DIR}/roles/prow.viewer.yaml"
+    for role in "${org_roles[@]}"; do
+      color 6 "Ensuring organization custom role ${role}"
+      ensure_custom_iam_role_from_file "org" "${role}" "${SCRIPT_DIR}/roles/${role}.yaml"
+    done
 ) 2>&1 | indent
+
+echo "exiting early to confirm role creation has worked"
+exit 0
 
 color 6 "Ensuring org-level IAM bindings exist"
 (
@@ -53,8 +64,6 @@ color 6 "Ensuring org-level IAM bindings exist"
     ensure_org_role_binding "group:gke-security-groups@kubernetes.io" "roles/browser"
 
     # k8s-infra-gcp-accounting@
-    # TODO: CustomRole is a brittle name, we should create a better named role,
-    #       or is there a reason we're not using predefined roles/billing.viewer?
     ensure_org_role_binding "group:k8s-infra-gcp-accounting@kubernetes.io" "$(custom_org_role_name "CustomRole")"
 
     # k8s-infra-gcp-auditors@
