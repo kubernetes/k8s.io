@@ -18,9 +18,10 @@ set -o nounset
 set -o pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd )"
 
 pip=pip3
-pip_requirements="${SCRIPT_DIR}/requirements.txt"
+pip_requirements="${REPO_ROOT}/requirements.txt"
 yamllint_config="${SCRIPT_DIR}/.yamllint.conf"
 yamllint_version=$(<"${pip_requirements}" grep yamllint | sed -e 's/.*==//')
 
@@ -35,17 +36,16 @@ if [ $# != 0 ]; then
     exit 1
 fi
 
-if ! which yamllint >/dev/null 2>&1; then
-  echo >&2 "ERROR: yamllint not found - please install with: ${pip} install -r ${pip_requirements}"
+if ! command -v yamllint >/dev/null 2>&1; then
+  echo >/dev/stderr "ERROR: yamllint not found - please install with: ${pip} install -r ${pip_requirements}"
   exit 1
 fi
 
 version=$(yamllint --version | awk '{ print $2 }')
 if [[ "${version}" != "${yamllint_version}" ]]; then
-  echo >&2 "ERROR: incorrect yamllint version '${version}' - please install with: ${pip} install ${pip_requirements}"
+  echo >/dev/stderr "ERROR: incorrect yamllint version '${version}' - please install with: ${pip} install ${pip_requirements}"
   exit 1
 fi
 
-cd ${SCRIPT_DIR}/..
-
+cd "${REPO_ROOT}"
 yamllint -c "${yamllint_config}" .
