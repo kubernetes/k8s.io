@@ -1,0 +1,4 @@
+apiVersion: v1
+kind: Namespace
+spec:
+  name: staging-test-pods
