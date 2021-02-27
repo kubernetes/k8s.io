@@ -22,7 +22,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 pip=pip3
 pip_requirements="${SCRIPT_DIR}/requirements.txt"
 yamllint_config="${SCRIPT_DIR}/.yamllint.conf"
-yamllint_version=$(<${pip_requirements} grep yamllint | sed -e 's/.*==//'
+yamllint_version=$(<"${pip_requirements}" grep yamllint | sed -e 's/.*==//')
 
 function usage() {
     echo "usage: $0" > /dev/stderr
@@ -47,4 +47,5 @@ if [[ "${version}" != "${yamllint_version}" ]]; then
 fi
 
 cd ${SCRIPT_DIR}/..
-yamllint -c ${yamllint_config} .
+
+yamllint -c "${yamllint_config}" .
