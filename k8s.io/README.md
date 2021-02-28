@@ -38,6 +38,7 @@ Redirections
 ====
 - https://go.k8s.io/api-review
 - https://go.k8s.io/bot-commands
+- https://go.k8s.io/calendar
 - https://go.k8s.io/github-labels
 - https://go.k8s.io/good-first-issue
 - https://go.k8s.io/help-wanted
