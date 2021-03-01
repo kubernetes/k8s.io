@@ -21,6 +21,9 @@
 #
 # This MUST NOT be used directly. Source it via lib.sh instead.
 
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+repo_root=$(cd "${script_dir}/../.." && pwd)
+
 function _color() {
     tput setf "$1" || true
 }
@@ -35,7 +38,7 @@ function _nocolor() {
 function color() {
     _color "$1"
     shift
-    echo "$@$(_nocolor)"
+    echo "$*$(_nocolor)"
 }
 
 # ensure_gnu_sed
@@ -45,20 +48,39 @@ function color() {
 #  SED: The name of the gnu-sed binary
 #
 function ensure_gnu_sed() {
-  sed_help="$(LANG=C sed --help 2>&1 || true)"
-  if echo "${sed_help}" | grep -q "GNU\|BusyBox"; then
-    SED="sed"
-  elif command -v gsed &>/dev/null; then
-    SED="gsed"
-  else
-    >&2 echo "Failed to find GNU sed as sed or gsed. If you are on Mac: brew install gnu-sed"
-    return 1
-  fi
-  export SED
+    sed_help="$(LANG=C sed --help 2>&1 || true)"
+    if echo "${sed_help}" | grep -q "GNU\|BusyBox"; then
+        SED="sed"
+    elif command -v gsed &>/dev/null; then
+        SED="gsed"
+    else
+        >&2 echo "Failed to find GNU sed as sed or gsed. If you are on Mac: brew install gnu-sed"
+        return 1
+    fi
+    export SED
 }
 
-# indent relies on sed -u which isn't available in macOS's sed
-if ! ensure_gnu_sed; then
+function verify_prereqs() {
+    # indent relies on sed -u which isn't available in macOS's sed
+    if ! ensure_gnu_sed; then
+        exit 1
+    fi
+    # ensure-e2e-projects, ensure-main-project, ensure-namespaces rely on this
+    # we're not checking for a specific version; 1.6 has not yet made it to distributions
+    if ! command -v jq &>/dev/null; then
+        >&2 echo "jq not found. Please install: https://stedolan.github.io/jq/download/"
+        exit 1
+    fi
+    # generate-role-yaml relies on this
+    # opting for https://kislyuk.github.io/yq/ over https://github.com/mikefarah/yq due to
+    # parity with jq, but may be worth reconsidering
+    if ! command -v yq &>/dev/null; then
+        >&2 echo "yq not found. Please install, e.g. pip3 install -r ${repo_root}/requirements.txt"
+        exit 1
+    fi
+}
+
+if ! verify_prereqs; then
   exit 1
 fi
 
