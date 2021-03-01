@@ -1,0 +1,30 @@
+---
+gitHubLogin: "TODO"
+gitHubToken: "TODO"
+gitName: "TODO"
+gitEmail: "TODO"
+skipPullRequest: false
+gitHubOrg: "kubernetes"
+gitHubRepo: "k8s.io"
+remoteName: "k8s.io"
+upstreamURLBase: "https://raw.githubusercontent.com/kubernetes/k8s.io/main"
+includedConfigPaths:
+  - "infra/gcp/clusters/projects/k8s-infra-prow-build/prow-build/resources"
+  - "infra/gcp/clusters/projects/k8s-infra-prow-build-trusted/prow-build-trusted/resources"
+excludedConfigPaths:
+  - "k8s.gcr.io"
+extraFiles:
+  - "hack/verify-yamllint.sh"
+targetVersion: "latest"
+prefixes:
+  - name: "ghproxy"
+    prefix: "gcr.io/k8s-prow/ghproxy"
+    refConfigFile: "infra/gcp/clusters/projects/k8s-infra-prow-build-trusted/prow-build-trusted/resources/ghproxy-deployment.yaml"
+    repo: "https://github.com/kubernetes/test-infra"
+    summarise: false
+  - name: "boskos"
+    prefix: "gcr.io/k8s-staging-boskos/"
+    refConfigFile: "infra/gcp/clusters/projects/k8s-infra-prow-build/prow-build/resources/boskos.yaml"
+    repo: "https://github.com/kubernetes-sigs/boskos"
+    summarise: false
+    consistentImages: true
