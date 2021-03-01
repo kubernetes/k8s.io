@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:k8s-infra-prow-build.svc.id.goog[test-pods/gcb-builder-releng-test]"
+      ],
+      "role": "roles/iam.workloadIdentityUser"
+    }
+  ],
+  "version": 1
+}

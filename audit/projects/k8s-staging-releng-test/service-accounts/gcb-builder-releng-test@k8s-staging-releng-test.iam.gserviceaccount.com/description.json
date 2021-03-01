@@ -1,0 +1,8 @@
+{
+  "displayName": "used by k8s-infra-prow-build to trigger GCB, write to GCR for k8s-staging-releng-test",
+  "email": "gcb-builder-releng-test@k8s-staging-releng-test.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-releng-test/serviceAccounts/gcb-builder-releng-test@k8s-staging-releng-test.iam.gserviceaccount.com",
+  "oauth2ClientId": "106077646816281830376",
+  "projectId": "k8s-staging-releng-test",
+  "uniqueId": "106077646816281830376"
+}

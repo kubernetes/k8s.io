@@ -1,19 +1,20 @@
-NAME                              TITLE
-bigquery.googleapis.com           BigQuery API
-bigquerystorage.googleapis.com    BigQuery Storage API
-cloudbuild.googleapis.com         Cloud Build API
-cloudkms.googleapis.com           Cloud Key Management Service (KMS) API
-compute.googleapis.com            Compute Engine API
-container.googleapis.com          Kubernetes Engine API
-containeranalysis.googleapis.com  Container Analysis API
-containerregistry.googleapis.com  Container Registry API
-containerscanning.googleapis.com  Container Scanning API
-iam.googleapis.com                Identity and Access Management (IAM) API
-iamcredentials.googleapis.com     IAM Service Account Credentials API
-logging.googleapis.com            Cloud Logging API
-monitoring.googleapis.com         Cloud Monitoring API
-oslogin.googleapis.com            Cloud OS Login API
-pubsub.googleapis.com             Cloud Pub/Sub API
-secretmanager.googleapis.com      Secret Manager API
-storage-api.googleapis.com        Google Cloud Storage JSON API
-storage-component.googleapis.com  Cloud Storage
+NAME                                 TITLE
+bigquery.googleapis.com              BigQuery API
+bigquerystorage.googleapis.com       BigQuery Storage API
+cloudbuild.googleapis.com            Cloud Build API
+cloudkms.googleapis.com              Cloud Key Management Service (KMS) API
+compute.googleapis.com               Compute Engine API
+container.googleapis.com             Kubernetes Engine API
+containeranalysis.googleapis.com     Container Analysis API
+containerregistry.googleapis.com     Container Registry API
+containerscanning.googleapis.com     Container Scanning API
+iam.googleapis.com                   Identity and Access Management (IAM) API
+iamcredentials.googleapis.com        IAM Service Account Credentials API
+logging.googleapis.com               Cloud Logging API
+monitoring.googleapis.com            Cloud Monitoring API
+oslogin.googleapis.com               Cloud OS Login API
+policytroubleshooter.googleapis.com  Policy Troubleshooter API
+pubsub.googleapis.com                Cloud Pub/Sub API
+secretmanager.googleapis.com         Secret Manager API
+storage-api.googleapis.com           Google Cloud Storage JSON API
+storage-component.googleapis.com     Cloud Storage
