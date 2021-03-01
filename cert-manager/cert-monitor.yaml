@@ -1,0 +1,94 @@
+apiVersion: v1
+data:
+  prometheus.yaml: |
+    global:
+      scrape_interval:     600s
+      evaluation_interval: 600s
+    rule_files:
+      - "cert_rules.yaml"
+    scrape_configs:
+      - job_name: certmanager
+        static_configs:
+        - targets: ['cert-manager.cert-manager:9402']
+        metric_relabel_configs:
+        - source_labels: ['namespace']
+          target_label: 'k8s_ns'
+  cert_rules.yaml: |
+    groups:
+    - name: certificate_rules
+      rules:
+      - record: certificate_expire_remaining_days 
+        expr: (certmanager_certificate_expiration_timestamp_seconds - time())/86400
+  sdexporter.yaml: |
+    static_metadata:
+    - metric: certificate_expire_remaining_days
+      type: gauge 
+      value_type: double 
+      help: Seconds until a certificate days
+kind: ConfigMap
+metadata:
+  name: exporterconfig
+  namespace: cert-manager
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prom-certmanager
+  name: prom-certmanager
+  namespace: cert-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prom-certmanager
+  template:
+    metadata:
+      labels:
+        app: prom-certmanager
+    spec:
+      containers:
+      - image: prom/prometheus:v2.24.1
+        name: prometheus
+        args:
+        - --storage.tsdb.path=/data
+        - --config.file=/etc/prometheus/prometheus.yaml
+        volumeMounts:
+        - mountPath: /etc/prometheus
+          name: exporterconfig
+        - mountPath: /data
+          name: promdata
+      - name: sidecar
+        image: gcr.io/stackdriver-prometheus/stackdriver-prometheus-sidecar:0.8.2
+        imagePullPolicy: Always
+        args:
+        - --stackdriver.project-id=fluent-plate-304118
+        - --stackdriver.generic.location=us-central1-c
+        - --stackdriver.generic.namespace=cert-manager
+        - --prometheus.api-address=http://127.0.0.1:9090
+        - --prometheus.wal-directory=/data/wal
+        - --include=certificate_expire_remaining_days
+        - --config-file=/etc/stackdriver/sdexporter.yaml
+        ports:
+        - name: sidecar
+          containerPort: 9091
+        volumeMounts:
+        - mountPath: /etc/stackdriver
+          name: exporterconfig
+        - name: promdata
+          mountPath: /data
+      volumes:
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: prometheus.yaml
+            path: prometheus.yaml
+          - key: cert_rules.yaml
+            path: cert_rules.yaml
+          - key: sdexporter.yaml
+            path: sdexporter.yaml
+          name: exporterconfig
+        name: exporterconfig
+      - name: promdata
+        emptyDir: {}
+
