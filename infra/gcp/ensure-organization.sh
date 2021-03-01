@@ -40,6 +40,7 @@ org_roles=(
     secretmanager.secretLister
     organization.admin
     CustomRole
+    iam.serviceAccountLister
 )
 
 old_org_roles=(
