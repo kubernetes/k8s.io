@@ -76,26 +76,39 @@ function ensure_custom_iam_role_from_file() {
     local scope="${1}"
     local name="${2}"
     local file="${3}"
+    local full_name="${name}"
 
     scope_flag=""
     if [[ "${scope}" == "org" ]]; then
         scope_flag="--organization ${GCP_ORG}" 
+        full_name="organizations/${GCP_ORG}/roles/${name}"
     elif [[ "${scope}" =~ "^project:" ]]; then
-        scope_flag="--project $(echo ${scope} | cut -d: -f2-)"
+        project=$(echo "${scope}" | cut -d: -f2-)
+        scope_flag="--project ${project}"
+        full_name="projects/${project}/roles/${name}"
     else
         echo "ensure_custom_iam_role_from_file(scope, name, file) scope must be one of 'org' or 'project:project-id'" >&2
         return 1
     fi
 
-    if ! gcloud iam roles describe ${scope_flag} "${name}" \
-        >/dev/null 2>&1
-    then
-        # be noisy when creating a role
-        gcloud iam roles create ${scope_flag} "${name}" --file "${file}"
-    else
-        # be quiet when updating, only output name of role
-        gcloud iam roles update ${scope_flag} "${name}" --file "${file}" | grep ^name:
+    tmp_dir=$(mktemp -d "/tmp/ensure-role-${name}-XXXXX")
+    trap 'rm -rf "${tmp_dir}"' EXIT
+    before="${tmp_dir}/before.${role}.yaml"
+    ready="${tmp_dir}/ready.${role}.yaml"
+    after="${tmp_dir}/after.${role}.yaml"
+
+    # detect if we should create or update and dump role; silently ignore error
+    verb="update"
+    if ! (gcloud iam roles describe ${scope_flag} "${name}" >"${before}") >/dev/null 2>&1; then
+      verb="create"
     fi
+
+    # name is foo.bar, but gcloud wants scope/id/role/foo.bar in the file
+    <"${file}" sed -e "s|^name: ${name}|name: ${full_name}|" >"${ready}"
+    gcloud iam roles "${verb}" ${scope_flag} "${name}" --file "${ready}" > "${after}"
+
+    # if they differ, ignore the error
+    diff "${before}" "${after}" || true
 }
 
 # Return the full name of a custom IAM role defined at the org level
@@ -153,7 +166,7 @@ function ensure_project_role_binding() {
         --role "${role}"
 }
 
-# Ensure that IAM binding has been removed at project level
+# Ensure that IAM binding has been removed from project
 # Arguments:
 #   $1:  The project id (e.g. "k8s-infra-foo")
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
@@ -163,11 +176,29 @@ function ensure_removed_project_role_binding() {
         echo "ensure_removed_project_role_binding(project, principal, role) requires 3 arguments" >&2
         return 1
     fi
+
     local project="${1}"
     local principal="${2}"
     local role="${3}"
 
     _ensure_removed_resource_role_binding "projects" "${project}" "${principal}" "${role}"
+}
+
+# Ensure that IAM binding has been removed from organization
+# Arguments:
+#   $1:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
+#   $2:  The role name (e.g. "roles/foo.bar")
+function ensure_removed_org_role_binding() {
+    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_removed_org_role_binding(principal, role) requires 2 arguments" >&2
+        return 1
+    fi
+
+    local organization="${GCP_ORG}"
+    local principal="${1}"
+    local role="${2}"
+
+    _ensure_removed_resource_role_binding "organizations" "${organization}" "${principal}" "${role}"
 }
 
 # Ensure that IAM binding has been removed at resource level

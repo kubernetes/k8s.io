@@ -34,13 +34,21 @@ if [ $# != 0 ]; then
     exit 1
 fi
 
-# TODO: setup custom role StorageBucketLister, I don't see that defined in code
-# TODO: setup custom role CustomRole ("Billing Viewer"), I don't see that defined in code
+org_roles=(
+    prow.viewer
+    audit.viewer
+    secretmanager.secretLister
+    organization.admin
+    CustomRole
+    StorageBucketLister
+)
 
-## setup custom role for prow troubleshooting
-color 6 "Ensuring custom org role prow.viewer role exists"
+color 6 "Ensuring organization custom roles exist"
 (
-    ensure_custom_iam_role_from_file "org" "prow.viewer" "${SCRIPT_DIR}/roles/prow.viewer.yaml"
+    for role in "${org_roles[@]}"; do
+      color 6 "Ensuring organization custom role ${role}"
+      ensure_custom_iam_role_from_file "org" "${role}" "${SCRIPT_DIR}/roles/${role}.yaml"
+    done
 ) 2>&1 | indent
 
 color 6 "Ensuring org-level IAM bindings exist"
@@ -53,27 +61,46 @@ color 6 "Ensuring org-level IAM bindings exist"
     ensure_org_role_binding "group:gke-security-groups@kubernetes.io" "roles/browser"
 
     # k8s-infra-gcp-accounting@
-    # TODO: CustomRole is a brittle name, we should create a better named role,
-    #       or is there a reason we're not using predefined roles/billing.viewer?
     ensure_org_role_binding "group:k8s-infra-gcp-accounting@kubernetes.io" "$(custom_org_role_name "CustomRole")"
 
     # k8s-infra-gcp-auditors@
-    # TODO: this is what already exists, but it might be better to collapse this 
-    #       into a custom role, or use browser+viewer
-    audit_roles=(
-        $(custom_org_role_name "StorageBucketLister")
+    ensure_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "$(custom_org_role_name "audit.viewer")"
+    # TODO(https://github.com/kubernetes/k8s.io/issues/1659): obviated by audit.viewer, remove when bindings gone
+    old_audit_roles=(
+        "$(custom_org_role_name "StorageBucketLister")"
         roles/compute.viewer
         roles/dns.reader
         roles/iam.securityReviewer
         roles/resourcemanager.organizationViewer
         roles/serviceusage.serviceUsageConsumer
     )
-    for role in "${audit_roles[@]}"; do
-        ensure_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "${role}"
+    for role in "${old_audit_roles[@]}"; do
+        ensure_removed_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "${role}"
     done
 
+    echo "exiting early to confirm audit.viewer role migration has worked"
+    exit 0
+
     # k8s-infra-org-admins@
-    # TODO: there are more granular roles also bound, they seem redundant given
-    #       this role
+    # roles/owner has too many permissions to aggregate into a custom role,
+    # and some services (e.g. storage) add bindings based on membership in it
     ensure_org_role_binding "group:k8s-infra-gcp-org-admins@kubernetes.io" "roles/owner"
+    # everything org admins need beyond roles/owner to manage the org
+    ensure_org_role_binding "group:k8s-infra-gcp-org-admins@kubernetes.io" "$(custom_org_role_name "organization.admin")"
+    # TODO(https://github.com/kubernetes/k8s.io/issues/1659): obviated by organization.admin, remove when bindings gone
+    old_org_admin_roles=(
+        roles/billing.user
+        roles/iam.organizationRoleAdmin
+        roles/resourcemanager.organizationAdmin
+        roles/resourcemanager.projectCreator
+        roles/resourcemanager.projectDeleter
+        roles/servicemanagement.quotaAdmin
+    )
+    for role in "${old_audit_roles[@]}"; do
+        # TODO(spiffxp): remove the extra super duper paranoia once we verify
+        #                I haven't locked myself out via group membership
+        ensure_org_role_binding "user:thockin@google.com" "${role}"
+        ensure_org_role_binding "user:davanum@gmail.com" "${role}"
+        ensure_removed_org_role_binding "group:k8s-infra-gcp-org-admins@kubernetes.io" "${role}"
+    done
 ) 2>&1 | indent
