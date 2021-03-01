@@ -113,16 +113,18 @@ data:
       - k8s-infra-e2e-boskos-108
       - k8s-infra-e2e-boskos-109
       - k8s-infra-e2e-boskos-110
-      - k8s-infra-e2e-boskos-111
-      - k8s-infra-e2e-boskos-112
-      - k8s-infra-e2e-boskos-113
-      - k8s-infra-e2e-boskos-114
-      - k8s-infra-e2e-boskos-115
-      - k8s-infra-e2e-boskos-116
-      - k8s-infra-e2e-boskos-117
-      - k8s-infra-e2e-boskos-118
-      - k8s-infra-e2e-boskos-119
-      - k8s-infra-e2e-boskos-120
+      # TODO(spiffxp): uncomment when done with experiment,
+      # ref: https://github.com/kubernetes-sigs/boskos/issues/20#issuecomment-788158669
+      # - k8s-infra-e2e-boskos-111
+      # - k8s-infra-e2e-boskos-112
+      # - k8s-infra-e2e-boskos-113
+      # - k8s-infra-e2e-boskos-114
+      # - k8s-infra-e2e-boskos-115
+      # - k8s-infra-e2e-boskos-116
+      # - k8s-infra-e2e-boskos-117
+      # - k8s-infra-e2e-boskos-118
+      # - k8s-infra-e2e-boskos-119
+      # - k8s-infra-e2e-boskos-120
       state: dirty
       type: gce-project
     - names:
