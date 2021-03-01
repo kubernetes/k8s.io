@@ -62,8 +62,8 @@ spec:
         image: gcr.io/stackdriver-prometheus/stackdriver-prometheus-sidecar:0.8.2
         imagePullPolicy: Always
         args:
-        - --stackdriver.project-id=fluent-plate-304118
-        - --stackdriver.generic.location=us-central1-c
+        - --stackdriver.project-id=kubernetes-public
+        - --stackdriver.generic.location=us-central1
         - --stackdriver.generic.namespace=cert-manager
         - --prometheus.api-address=http://127.0.0.1:9090
         - --prometheus.wal-directory=/data/wal
