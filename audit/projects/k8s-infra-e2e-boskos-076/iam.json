@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-850357009671@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerregistry.ServiceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:850357009671-compute@developer.gserviceaccount.com",
         "serviceAccount:850357009671@cloudservices.gserviceaccount.com",
         "serviceAccount:boskos-janitor@k8s-infra-prow-build.iam.gserviceaccount.com",
