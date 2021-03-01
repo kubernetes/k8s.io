@@ -3,27 +3,29 @@
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "projectEditor:k8s-artifacts-prod",
-        "projectOwner:k8s-artifacts-prod"
+        "projectEditor:k8s-conform",
+        "projectOwner:k8s-conform"
       ],
       "role": "roles/storage.legacyBucketOwner"
     },
     {
       "members": [
-        "projectViewer:k8s-artifacts-prod"
+        "projectViewer:k8s-conform"
       ],
       "role": "roles/storage.legacyBucketReader"
     },
     {
       "members": [
-        "serviceAccount:k8s-infra-gcr-vuln-dashboard@k8s-artifacts-prod.iam.gserviceaccount.com"
+        "group:k8s-infra-conform-provider-openstack@kubernetes.io",
+        "serviceAccount:service-provider-openstack@k8s-conform.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "serviceAccount:k8s-infra-gcr-vuln-dashboard@k8s-artifacts-prod.iam.gserviceaccount.com"
+        "group:k8s-infra-conform-provider-openstack@kubernetes.io",
+        "serviceAccount:service-provider-openstack@k8s-conform.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },

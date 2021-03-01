@@ -124,6 +124,10 @@
       "metric": "SECURITY_POLICY_RULES"
     },
     {
+      "limit": 1000,
+      "metric": "XPN_SERVICE_PROJECTS"
+    },
+    {
       "limit": 150,
       "metric": "PACKET_MIRRORINGS"
     },

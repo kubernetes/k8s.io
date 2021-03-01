@@ -16,7 +16,16 @@
     },
     {
       "members": [
-        "group:k8s-infra-artifact-admins@kubernetes.io"
+        "group:k8s-infra-conform-inspur@kubernetes.io",
+        "serviceAccount:service-inspur@k8s-conform.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-conform-inspur@kubernetes.io",
+        "serviceAccount:service-inspur@k8s-conform.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },
