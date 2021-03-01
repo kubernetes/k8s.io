@@ -14,12 +14,31 @@
  * limitations under the License.
  */
 
-/// Create the project in which we're creating the cluster
+// hardcoded org and billing account, not sure we want this
+// reusable outside of k8s-infra
+locals {
+  org_domain      = "kubernetes.io"
+  billing_account = "018801-93540E-22A20E"
+}
+
+data "google_organization" "org" {
+  domain = local.org_domain
+}
+
+// TODO(spiffxp): explicitly not using a data source for this until
+// I have a better sense of whether this requires more permissions
+// than (are / should be) available for k8s-infra-prow-oncall and
+// k8s-infra-cluster-admins
+// data google_billing_account {
+// billing_account = locals.billing_account
+// }
+
+// Create the project in which we're creating the cluster
 resource "google_project" "project" {
   name            = var.project_name
   project_id      = var.project_name
-  org_id          = "758905017065"          // kubernetes.io
-  billing_account = "018801-93540E-22A20E"
+  org_id          = data.google_organization.org.org_id
+  billing_account = local.billing_account
 }
 
 // Services we need
@@ -91,16 +110,15 @@ resource "google_project_iam_member" "cluster_admins_as_container_admin" {
   role    = "roles/container.admin"
   member  = "group:${var.cluster_admins_group}"
 }
-resource "google_project_iam_custom_role" "service_account_lister" {
-  project     = google_project.project.project_id
-  role_id     = "ServiceAccountLister"
-  title       = "Service Account Lister"
-  description = "Can list ServiceAccounts."
-  permissions = ["iam.serviceAccounts.list"]
+
+// Role created by infra/gcp/ensure-organization.sh, use a data source to ensure it exists
+data "google_iam_role" "service_account_lister" {
+  name = "${data.google_organization.org.name}/roles/iam.serviceAccountLister"
 }
+
 resource "google_project_iam_member" "cluster_admins_as_service_account_lister" {
   project = google_project.project.project_id
-  role    = "projects/${google_project.project.project_id}/roles/${google_project_iam_custom_role.service_account_lister.role_id}"
+  role    = data.google_iam_role.service_account_lister.name
   member  = "group:${var.cluster_admins_group}"
 }
 

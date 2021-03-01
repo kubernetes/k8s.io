@@ -90,23 +90,20 @@ gcloud projects add-iam-policy-binding "${PROJECT}" \
     --role roles/bigquery.admin
 
 color 6 "Empowering cluster admins"
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "group:${CLUSTER_ADMINS_GROUP}" \
-    --role roles/compute.viewer
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "group:${CLUSTER_ADMINS_GROUP}" \
-    --role roles/container.admin
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "group:${CLUSTER_ADMINS_GROUP}" \
-    --role roles/compute.loadBalancerAdmin
-ensure_custom_iam_role "${PROJECT}" \
-    ServiceAccountLister \
-    "Service Account Lister" \
-    "Can list ServiceAccounts." \
-    iam.serviceAccounts.list
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "group:${CLUSTER_ADMINS_GROUP}" \
-    --role "projects/${PROJECT}/roles/ServiceAccountLister"
+# TODO: this can also be a custom role
+cluster_admin_roles=(
+    roles/compute.viewer
+    roles/container.admin
+    roles/compute.loadBalancerAdmin
+    $(custom_org_role_name iam.serviceAccountLister)
+)
+for role in "${cluster_admin_roles[@]}"; do
+    ensure_project_role_binding "${PROJECT}" "group:${CLUSTER_ADMINS_GROUP}" "${role}"
+done
+# TODO(spiffxp): remove when bindings for custom project role are gone
+ensure_removed_project_role_binding "${PROJECT}" "group:${CLUSTER_ADMINS_GROUP}" "$(custom_project_role_name "${PROJECT}" ServiceAccountLister)"
+ensure_removed_project_role "${PROJECT}" "ServiceAccountLister"
+
 gsutil iam ch \
     "group:${CLUSTER_ADMINS_GROUP}:objectAdmin" \
     "gs://${CLUSTER_TERRAFORM_BUCKET}"
