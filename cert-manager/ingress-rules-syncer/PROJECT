@@ -1,0 +1,11 @@
+domain: x-k8s.io
+layout: go.kubebuilder.io/v3
+projectName: ingress-rules-syncer
+repo: k8s.io/k8s.io/cert-manager/ingress-rules-syncer
+resources:
+- controller: true
+  domain: x-k8s.io
+  group: networking.k8s.io
+  kind: Ingress
+  version: v1beta1
+version: "3"
