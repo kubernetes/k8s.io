@@ -4,6 +4,25 @@ These terraform resources define a GCP project containing a GKE cluster
 intended to serve as a "build cluster" for prow.k8s.io. There are also
 some service accounts defined for use by pods within the cluster.
 
+## Accessing the control plane
+
+Access to the [k8s-infra-prow-build project][k8s-infra-prow-build-console] hosting the cluster is granted by membership in one of two @kubernetes.io groups:
+- [k8s-infra-prow-oncall@kubernetes.io][k8s-infra-prow-oncall@]: grants [`roles/owner`][roles/owner] access
+- [k8s-infra-prow-viewers@kubernetes.io][k8s-infra-prow-viewers@]: grants [`prow.viewer`][roles/prow.viewer] access
+
+If you are not a member of either of these groups, please [follow these instructions to join][join-groups]
+
+```shell
+# Login to set the authenticated user for gcloud
+gcloud auth login
+
+# Get kubeconfig credentials for the cluster
+gcloud container clusters get-credentials \
+  prow-build --project=k8s-infra-prow-build --region=us-central1
+
+# Now you can use kubectl...
+```
+
 ## Initial Setup
 
 ### Provisioning
@@ -17,13 +36,9 @@ There was some manual work in bringing this up fully:
   - edit `resources/boskos-resources.yaml` to include the projects
   - edit `resources/boskos.yaml` to have `boskos-metrics` use the external ip
 - deploy resources to the cluster
-```
-# from with a cloud-shell
-# e.g. gcloud alpha cloud-shell ssh --project=k8s-infra-prow-build
-
-# get credentials for the cluster
-gcloud container clusters get-credentials \
-  prow-build --project=k8s-prow-build --region=us-central1
+```shell
+# First get access to the cluster control plane by following the instructions
+# in the section above.
 
 # get k8s.io on here, for this example we'll assume everything's pushed to git
 git clone git://github.com/kubernetes/k8s.io
@@ -60,13 +75,9 @@ rm prow-build-test.ssh-key*
 There was some manual work to hook this up to prow.k8s.io:
 - generate a kubeconfig with credentials that prow.k8s.io will use to access
   the build cluster, and hand it off to prow.k8s.io on-call
-```
-# from with a cloud-shell
-# e.g. gcloud alpha cloud-shell ssh --project=k8s-infra-prow-build
-
-# get credentials for the cluster
-gcloud container clusters get-credentials \
-  prow-build --project=k8s-prow-build --region=us-central1
+```shell
+# First get access to the cluster control plane by following the instructions
+# in the section above.
 
 # generate a kubeconfig to handoff to prow.k8s.io on-call
 # the "name" is what prowjobs will specify in their cluster: field
@@ -81,7 +92,7 @@ cd test-infra/gencred && go build .
 ```
 - ask prow.k8s.io on-call to give the build cluster's service account the
   following IAM privileges
-```
+```shell
 # write build logs/artifacts to kubernetes-jenkins
 gsutil iam ch \
   serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com:objectAdmin \
@@ -103,3 +114,10 @@ gsutil iam ch \
 - create a nodepool for greenhouse and deploy to this cluster
 - setup postsubmit to deploy boskos-resources.yaml
 - decide the story for deploying/upgrading boskos
+
+[k8s-infra-prow-build-console]: https://console.cloud.google.com/home/dashboard?project=k8s-infra-prow-build
+[k8s-infra-prow-oncall]: https://github.com/kubernetes/k8s.io/blob/3a1aea1652f02a95253402bde2bca63cb4292f8e/groups/groups.yaml#L647-L670
+[k8s-infra-prow-viewers]: https://github.com/kubernetes/k8s.io/blob/3a1aea1652f02a95253402bde2bca63cb4292f8e/groups/groups.yaml#L672-L699
+[roles/owner]: https://cloud.google.com/iam/docs/understanding-roles#basic-definitions
+[roles/prow.viewer]: https://github.com/kubernetes/k8s.io/blob/main/infra/gcp/roles/prow.viewer.yaml
+[join-groups]: https://github.com/kubernetes/k8s.io/tree/main/groups#making-changes
