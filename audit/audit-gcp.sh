@@ -136,7 +136,7 @@ gcloud \
                 # action.
                 gcloud \
                     container clusters list \
-                    --format="value(name, location, locations, currentNodeCount, status)" \
+                    --format="value(name, location, locations, status)" \
                     > "projects/${PROJECT}/services/${SVC}/clusters.txt"
                 ;;
             dns)
