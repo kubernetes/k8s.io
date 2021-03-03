@@ -113,12 +113,7 @@ for prj; do
 
     color 6 "Ensure stale role bindings have been removed from e2e project: ${prj}"
     (
-      # TODO(https://github.com/kubernetes/k8s.io/issues/1661): remove once verified as consistent
-      color 6 "group:k8s-infra-prow-viewers@kubernetes.io should not have roles/viewer (ref: https://github.com/kubernetes/k8s.io/issues/1661)"
-      ensure_removed_project_role_binding "${prj}" "group:k8s-infra-prow-viewers@kubernetes.io" "roles/viewer"
-      # TODO(https://github.com/kubernetes/k8s.io/issues/299): remove once smarter logic folded into ensure_project
-      color 6 "user:* should not have roles/owner for projects (ref: https://github.com/kubernetes/k8s.io/issues/299)"
-      ensure_removed_project_role_binding "${prj}" "spiffxp@google.com" "roles/owner"
+        echo "no stale bindings slated for removal"
     ) 2>&1 | indent
 
     color 6 "Enabling APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
