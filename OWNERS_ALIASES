@@ -249,6 +249,7 @@ aliases:
     - e-blackwelder
     - fejta
     - michelle192837
+    - mpherman2
   # people with sufficient privileges to run scripts in /infra/gcp
   wg-k8s-infra-org-admins:
     - cblecker
