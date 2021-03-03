@@ -33,12 +33,6 @@
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"
-    },
-    {
-      "members": [
-        "group:k8s-infra-prow-viewers@kubernetes.io"
-      ],
-      "role": "roles/viewer"
     }
   ],
   "version": 1

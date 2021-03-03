@@ -8,9 +8,22 @@
     },
     {
       "members": [
-        "group:k8s-infra-gcp-auditors@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "organizations/758905017065/roles/StorageBucketLister"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-auditors@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/audit.viewer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/organization.admin"
     },
     {
       "members": [
@@ -27,37 +40,49 @@
     },
     {
       "members": [
-        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/billing.user"
     },
     {
       "members": [
-        "group:gke-security-groups@kubernetes.io"
+        "group:k8s-infra-gcp-accounting@kubernetes.io"
+      ],
+      "role": "roles/billing.viewer"
+    },
+    {
+      "members": [
+        "group:gke-security-groups@kubernetes.io",
+        "group:k8s-infra-prow-oncall@kubernetes.io"
       ],
       "role": "roles/browser"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-auditors@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/compute.viewer"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-auditors@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/dns.reader"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/iam.organizationRoleAdmin"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-auditors@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/iam.securityReviewer"
     },
@@ -69,9 +94,10 @@
     },
     {
       "members": [
-        "group:k8s-infra-gcp-org-admins@kubernetes.io",
+        "user:davanum@gmail.com",
         "user:domain-admin-lf@kubernetes.io",
         "user:ihor@cncf.io",
+        "user:psharma@linuxfoundation.org",
         "user:spiffxp@google.com",
         "user:thockin@google.com",
         "user:twaggoner@linuxfoundation.org"
@@ -80,31 +106,42 @@
     },
     {
       "members": [
-        "group:k8s-infra-gcp-auditors@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/resourcemanager.organizationViewer"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/resourcemanager.projectCreator"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/resourcemanager.projectDeleter"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+        "group:k8s-infra-gcp-auditors@kubernetes.io"
+      ],
+      "role": "roles/secretmanager.viewer"
+    },
+    {
+      "members": [
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/servicemanagement.quotaAdmin"
     },
     {
       "members": [
-        "group:k8s-infra-gcp-auditors@kubernetes.io"
+        "user:davanum@gmail.com",
+        "user:thockin@google.com"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"
     }

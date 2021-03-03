@@ -1,9 +1,0 @@
-{
-  "description": "Can list storage buckets",
-  "includedPermissions": [
-    "storage.buckets.get"
-  ],
-  "name": "organizations/758905017065/roles/StorageBucketLister",
-  "stage": "GA",
-  "title": "Storage Bucket Lister"
-}
