@@ -1,0 +1,33 @@
+{
+  "description": "Access to administer all resources belonging to the organization",
+  "includedPermissions": [
+    "billing.accounts.get",
+    "billing.accounts.getIamPolicy",
+    "billing.accounts.list",
+    "billing.accounts.redeemPromotion",
+    "billing.credits.list",
+    "billing.resourceAssociations.create",
+    "orgpolicy.policy.get",
+    "resourcemanager.folders.create",
+    "resourcemanager.folders.delete",
+    "resourcemanager.folders.get",
+    "resourcemanager.folders.getIamPolicy",
+    "resourcemanager.folders.list",
+    "resourcemanager.folders.move",
+    "resourcemanager.folders.setIamPolicy",
+    "resourcemanager.folders.undelete",
+    "resourcemanager.folders.update",
+    "resourcemanager.organizations.get",
+    "resourcemanager.organizations.getIamPolicy",
+    "resourcemanager.organizations.setIamPolicy",
+    "resourcemanager.projects.create",
+    "resourcemanager.projects.get",
+    "resourcemanager.projects.getIamPolicy",
+    "resourcemanager.projects.list",
+    "resourcemanager.projects.move",
+    "resourcemanager.projects.setIamPolicy"
+  ],
+  "name": "organizations/758905017065/roles/organization.admin",
+  "stage": "GA",
+  "title": "Organization Admin"
+}

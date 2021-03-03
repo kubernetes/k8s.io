@@ -166,6 +166,10 @@
     {
       "limit": 1024,
       "metric": "STATIC_BYOIP_ADDRESSES"
+    },
+    {
+      "limit": 45,
+      "metric": "INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES"
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-boskos-gpu-06",
