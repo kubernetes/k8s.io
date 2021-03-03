@@ -90,11 +90,10 @@ color 6 "Ensuring organization IAM bindings exist"
 
 color 6 "Ensuring removed organization IAM bindings do not exist"
 (
+    # TODO(spiffxp): remove this once the old bindings are confirmed gone
     for role in "${old_org_admin_roles[@]}"; do
-        # TODO(spiffxp): remove the extra super duper paranoia once we verify
-        #                I haven't locked myself out via group membership
-        ensure_org_role_binding "user:thockin@google.com" "${role}"
-        ensure_org_role_binding "user:davanum@gmail.com" "${role}"
+        ensure_removed_org_role_binding "user:thockin@google.com" "${role}"
+        ensure_removed_org_role_binding "user:davanum@gmail.com" "${role}"
     done
 ) 2>&1 | indent
 
