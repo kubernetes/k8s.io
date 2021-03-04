@@ -122,6 +122,12 @@ if [ $# = 0 ]; then
 fi
 
 for REPO; do
+
+    if ! (printf '%s\n' "${STAGING_PROJECTS[@]}" | grep -q "^${REPO}$"); then
+      color 2 "Skipping unrecognized staging project name: ${REPO}"
+      continue
+    fi
+
     color 3 "Configuring staging: ${REPO}"
 
     (
