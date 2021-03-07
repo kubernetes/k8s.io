@@ -37,8 +37,8 @@ if [ $# != 0 ]; then
 fi
 
 if ! command -v yamllint >/dev/null 2>&1; then
-  echo >/dev/stderr "ERROR: yamllint not found - please install with: ${pip} install -r ${pip_requirements}"
-  exit 1
+  echo "yamllint not found - installing with: ${pip} install -r ${pip_requirements}"
+  ${pip} install -r ${pip_requirements}
 fi
 
 version=$(yamllint --version | awk '{ print $2 }')
