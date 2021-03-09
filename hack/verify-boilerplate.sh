@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright 2021 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-all: test
+set -o errexit
+set -o nounset
+set -o pipefail
 
-.PHONY: test
-test:
-	./test.py -q
+VERSION=v0.2.0
+URL_BASE=https://raw.githubusercontent.com/kubernetes/repo-infra
+URL=$URL_BASE/$VERSION/hack/verify_boilerplate.py
+BIN_DIR=bin
+SCRIPT=$BIN_DIR/verify_boilerplate.py
 
-.PHONY: docker-test
-docker-test:
-	docker build -t k8s-io-test -f Dockerfile-test .
-	docker run -it --rm -e TARGET_IP=${TARGET_IP} k8s-io-test
+if [[ ! -f $SCRIPT ]]; then
+    mkdir -p $BIN_DIR
+    curl -sfL $URL -o $SCRIPT
+    chmod +x $SCRIPT
+fi
+
+$SCRIPT --boilerplate-dir hack/boilerplate
