@@ -32,6 +32,7 @@ fi
 # Excluded check patterns are always skipped.
 EXCLUDED_PATTERNS=(
   "verify-*-dockerized.sh"       # Don't run any scripts that intended to be run dockerized
+  "verify-terraform.sh"          # Expect a cluster as an argument
   )
 
 EXCLUDED_CHECKS=$(ls ${EXCLUDED_PATTERNS[@]/#/${KUBE_ROOT}\/hack\/} 2>/dev/null || true)
