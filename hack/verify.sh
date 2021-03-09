@@ -18,7 +18,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-KUBE_ROOT=$(dirname "${BASH_SOURCE}")/..
+REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")/..
 
 # Some useful colors.
 if [[ -z "${color_start-}" ]]; then
@@ -35,7 +35,7 @@ EXCLUDED_PATTERNS=(
   "verify-terraform.sh"          # Expect a cluster as an argument
   )
 
-EXCLUDED_CHECKS=$(ls ${EXCLUDED_PATTERNS[@]/#/${KUBE_ROOT}\/hack\/} 2>/dev/null || true)
+EXCLUDED_CHECKS=$(ls ${EXCLUDED_PATTERNS[@]/#/${REPO_ROOT}\/hack\/} 2>/dev/null || true)
 
 function is-excluded {
   for e in ${EXCLUDED_CHECKS[@]}; do
@@ -111,7 +111,7 @@ if ${SILENT} ; then
 fi
 
 ret=0
-run-checks "${KUBE_ROOT}/hack/verify-*.sh" bash
+run-checks "${REPO_ROOT}/hack/verify-*.sh" bash
 
 if [[ ${ret} -eq 1 ]]; then
     print-failed-tests
