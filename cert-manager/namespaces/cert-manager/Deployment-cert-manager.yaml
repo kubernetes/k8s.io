@@ -32,6 +32,7 @@ spec:
         - --v=2
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --leader-election-namespace=kube-system
+        - --max-concurrent-challenges=20
         env:
         - name: POD_NAMESPACE
           valueFrom:
@@ -43,5 +44,8 @@ spec:
         ports:
         - containerPort: 9402
           protocol: TCP
-        resources: {}
+        resources: 
+          requests:
+            cpu: 10m
+            memory: 32Mi
       serviceAccountName: cert-manager
