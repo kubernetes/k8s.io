@@ -215,7 +215,7 @@ function empower_group_for_gcb() {
     gcloud \
         projects add-iam-policy-binding "${project}" \
         --member "group:${group}" \
-        --role roles/cloudbuild.builds.editor
+        --role roles/cloudbuild.builds.builder
 
     # TODO(justaugustus/thockin): This only exists to grant the
     #      serviceusage.services.use permission allow writers access to execute
