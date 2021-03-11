@@ -8,13 +8,6 @@
     },
     {
       "members": [
-        "user:davanum@gmail.com",
-        "user:thockin@google.com"
-      ],
-      "role": "organizations/758905017065/roles/StorageBucketLister"
-    },
-    {
-      "members": [
         "group:k8s-infra-gcp-auditors@kubernetes.io"
       ],
       "role": "organizations/758905017065/roles/audit.viewer"
