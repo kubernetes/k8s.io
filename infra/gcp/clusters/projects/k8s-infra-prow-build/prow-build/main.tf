@@ -33,6 +33,10 @@ locals {
   boskos_janitor_sa_name       = "boskos-janitor"       // Name of the GSA and KSA used by boskos-janitor
 }
 
+data "google_organization" "org" {
+  domain = "kubernetes.io"
+}
+
 module "project" {
   source = "../../../modules/gke-project"
   project_id            = local.project_id
@@ -46,11 +50,15 @@ resource "google_project_iam_member" "k8s_infra_prow_oncall" {
   member  = "group:k8s-infra-prow-oncall@kubernetes.io"
 }
 
+// Role created by infra/gcp/ensure-organization.sh, use a data source to ensure it exists
+data "google_iam_role" "prow_viewer" {
+  name = "${data.google_organization.org.name}/roles/prow.viewer"
+}
+
 // Ensure k8s-infra-prow-viewers@kuberentes.io has prow.viewer access to this project
 resource "google_project_iam_member" "k8s_infra_prow_viewers" {
   project = local.project_id
-  # TODO: use data resource to get org role name instead of hardcode
-  role    = "organizations/758905017065/roles/prow.viewer"
+  role    = data.google_iam_role.prow_viewer.name
   member  = "group:k8s-infra-prow-viewers@kubernetes.io"
 }
 

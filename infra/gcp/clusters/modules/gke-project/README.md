@@ -6,8 +6,9 @@ that is intended to host a GKE cluster created by the [`gke-cluster`] module:
 - Project is linked to CNCF billing account
 - Services necessary to support [`gke-cluster`] are enabled
 - Some default IAM bindings are added:
-  - k8s-infra-cluster-admins@ gets `roles/compute.viewer`, `roles/container.admin`, `roles/ServiceAccountLister`
+  - k8s-infra-cluster-admins@ gets `roles/compute.viewer`, `roles/container.admin`, org role [`ServiceAccountLister`]
   - gke-security-groups@ gets `roles/container.clusterViewer`
 
 [`gke-cluster`]: /infra/gcp/clusters/modules/gke-cluster
 [`gke-nodepool`]: /infra/gcp/clusters/modules/gke-nodepool
+[`ServiceAccountLister`]: /infra/gcp/roles/iam.serviceAccountLister.yaml

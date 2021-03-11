@@ -40,18 +40,32 @@ org_roles=(
     secretmanager.secretLister
     organization.admin
     CustomRole
+    iam.serviceAccountLister
+)
+
+old_org_roles=(
     StorageBucketLister
+)
+
+# TODO(https://github.com/kubernetes/k8s.io/issues/1659): obviated by organization.admin, remove when bindings gone
+old_org_admin_roles=(
+    roles/billing.user
+    roles/iam.organizationRoleAdmin
+    roles/resourcemanager.organizationAdmin
+    roles/resourcemanager.projectCreator
+    roles/resourcemanager.projectDeleter
+    roles/servicemanagement.quotaAdmin
 )
 
 color 6 "Ensuring organization custom roles exist"
 (
     for role in "${org_roles[@]}"; do
       color 6 "Ensuring organization custom role ${role}"
-      ensure_custom_iam_role_from_file "org" "${role}" "${SCRIPT_DIR}/roles/${role}.yaml"
+      ensure_custom_org_iam_role_from_file "${role}" "${SCRIPT_DIR}/roles/${role}.yaml"
     done
 ) 2>&1 | indent
 
-color 6 "Ensuring org-level IAM bindings exist"
+color 6 "Ensuring organization IAM bindings exist"
 (
     # k8s-infra-prow-oncall@kubernetes.io should be able to browse org resources
     ensure_org_role_binding "group:k8s-infra-prow-oncall@kubernetes.io" "roles/browser"
@@ -65,21 +79,6 @@ color 6 "Ensuring org-level IAM bindings exist"
 
     # k8s-infra-gcp-auditors@
     ensure_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "$(custom_org_role_name "audit.viewer")"
-    # TODO(https://github.com/kubernetes/k8s.io/issues/1659): obviated by audit.viewer, remove when bindings gone
-    old_audit_roles=(
-        "$(custom_org_role_name "StorageBucketLister")"
-        roles/compute.viewer
-        roles/dns.reader
-        roles/iam.securityReviewer
-        roles/resourcemanager.organizationViewer
-        roles/serviceusage.serviceUsageConsumer
-    )
-    for role in "${old_audit_roles[@]}"; do
-        ensure_removed_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "${role}"
-    done
-
-    echo "exiting early to confirm audit.viewer role migration has worked"
-    exit 0
 
     # k8s-infra-org-admins@
     # roles/owner has too many permissions to aggregate into a custom role,
@@ -87,20 +86,23 @@ color 6 "Ensuring org-level IAM bindings exist"
     ensure_org_role_binding "group:k8s-infra-gcp-org-admins@kubernetes.io" "roles/owner"
     # everything org admins need beyond roles/owner to manage the org
     ensure_org_role_binding "group:k8s-infra-gcp-org-admins@kubernetes.io" "$(custom_org_role_name "organization.admin")"
-    # TODO(https://github.com/kubernetes/k8s.io/issues/1659): obviated by organization.admin, remove when bindings gone
-    old_org_admin_roles=(
-        roles/billing.user
-        roles/iam.organizationRoleAdmin
-        roles/resourcemanager.organizationAdmin
-        roles/resourcemanager.projectCreator
-        roles/resourcemanager.projectDeleter
-        roles/servicemanagement.quotaAdmin
-    )
-    for role in "${old_audit_roles[@]}"; do
-        # TODO(spiffxp): remove the extra super duper paranoia once we verify
-        #                I haven't locked myself out via group membership
-        ensure_org_role_binding "user:thockin@google.com" "${role}"
-        ensure_org_role_binding "user:davanum@gmail.com" "${role}"
-        ensure_removed_org_role_binding "group:k8s-infra-gcp-org-admins@kubernetes.io" "${role}"
+) 2>&1 | indent
+
+color 6 "Ensuring removed organization IAM bindings do not exist"
+(
+    # TODO(spiffxp): remove this once the old bindings are confirmed gone
+    for role in "${old_org_admin_roles[@]}"; do
+        ensure_removed_org_role_binding "user:thockin@google.com" "${role}"
+        ensure_removed_org_role_binding "user:davanum@gmail.com" "${role}"
     done
 ) 2>&1 | indent
+
+color 6 "Ensuring removed organization custom roles do not exist"
+(
+    for role in "${old_org_roles[@]}"; do
+      color 6 "Ensuring removed organization custom role ${role}"
+      ensure_removed_custom_org_iam_role "${role}"
+    done
+) 2>&1 | indent
+
+color 6 "All done!"
