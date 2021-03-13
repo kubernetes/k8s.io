@@ -241,8 +241,7 @@ function _ensure_custom_iam_role_from_file() {
     <"${file}" sed -e "s|^name: ${name}|name: ${full_name}|" >"${ready}"
     gcloud iam roles "${verb}" ${scope_flag} "${name}" --file "${ready}" | yq -Y 'del(.etag)' > "${after}"
 
-    # if they differ, ignore the error
-    diff -u "${before}" "${after}" || true
+    diff_colorized "${before}" "${after}"
 }
 
 # Ensure that custom IAM role exists in scope and in sync with definition in file
@@ -272,7 +271,7 @@ function _ensure_removed_custom_iam_role() {
     local before="${tmp_dir}/iam-bind.before.txt"
 
     # gcloud iam roles delete errors if role doesn't exist, so confirm it does
-    if ! gcloud iam roles describe ${scope_flag} ${name} --format="value(deleted)" > "${before}"; then
+    if ! gcloud iam roles describe ${scope_flag} ${name} --format="value(deleted)" > "${before}" 2>/dev/null; then
         # not found, or can't see... no point in continuing
         return
     fi
@@ -282,6 +281,19 @@ function _ensure_removed_custom_iam_role() {
         return
     fi
     gcloud iam roles delete ${scope_flag} "${name}"
+}
+
+# Format gcloud $resource get-iam-policy output to produce list of:
+# - member: user:foo@example.com
+#   role: roles/foo.bar
+# ... sorted by member, for ease of diffing
+# (couldn't find a gcloud --flatten --format incantation to do this)
+function _format_iam_policy() {
+  # shellcheck disable=SC2016
+  # $r is a jq variable, not a bash expression
+  yq -Y '.bindings 
+    | map(.role as $r | .members | map({member: ., role: $r})) 
+    | flatten | sort_by(.member)'
 }
 
 # Ensure that IAM binding is present for resource
@@ -304,18 +316,22 @@ function _ensure_resource_role_binding() {
     local before="${tmp_dir}/iam-bind.before.yaml"
     local after="${tmp_dir}/iam-bind.after.yaml"
 
-    # gcloud add-iam-policy-binding will not error on adding a duplicate binding
-    # TODO: that said, it is annoying to see lots of "updated iam policy for X" when nothing changed,
-    #       so consider avoiding the call
-    gcloud "${resource}" get-iam-policy "${id}" | yq -Y 'del(.etag)' > "${before}"
-    # add the binding
-    gcloud \
-        "${resource}" add-iam-policy-binding "${id}" \
-        --member "${principal}" \
-        --role "${role}" | \
-        yq -Y 'del(.etag)' > "${after}"
-    # if they differ, ignore the error
-    diff -u "${before}" "${after}" || true
+    gcloud "${resource}" get-iam-policy "${id}" | _format_iam_policy >"${before}"
+
+    # `gcloud add-iam-policy-binding` is idempotent, 
+    # but avoid calling if we can, to reduce output noise
+    if ! <"${before}" yq --exit-status \
+        ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
+        >/dev/null; then
+
+        gcloud \
+            "${resource}" add-iam-policy-binding "${id}" \
+            --member "${principal}" \
+            --role "${role}" \
+        | _format_iam_policy >"${after}"
+
+        diff_colorized "${before}" "${after}"
+    fi
 }
 
 # Ensure that IAM binding has been removed from resource
@@ -335,14 +351,23 @@ function _ensure_removed_resource_role_binding() {
     local principal="${3}"
     local role="${4}"
 
-    # gcloud remove-iam-policy-binding errors if binding doesn't exist, so confirm it does
-    if gcloud "${resource}" get-iam-policy "${id}" \
-        --flatten="bindings[].members" \
-        --format='value(bindings.role)' \
-        --filter="bindings.members='${principal}' AND bindings.role='${role}'" | grep -q "${role}"; then
+    local before="${tmp_dir}/iam-bind.before.txt"
+    local after="${tmp_dir}/iam-bind.after.txt"
+
+    gcloud "${resource}" get-iam-policy "${id}" | _format_iam_policy >"${before}"
+
+    # `gcloud remove-iam-policy-binding` errors if binding doesn't exist,
+    #  so avoid calling if we can, to reduce output noise
+    if <"${before}" yq --exit-status \
+      ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
+        >/dev/null; then
+
         gcloud \
             "${resource}" remove-iam-policy-binding "${id}" \
             --member "${principal}" \
-            --role "${role}"
+            --role "${role}" \
+        | _format_iam_policy >"${after}"
+
+        diff_colorized "${before}" "${after}"
     fi
 }
