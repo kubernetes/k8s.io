@@ -75,7 +75,7 @@ E2E_MANUAL_PROJECTS=(
 # general purpose e2e projects, no quota changes
 E2E_BOSKOS_PROJECTS=()
 for i in $(seq 1 120); do
-  E2E_BOSKOS_PROJECTS+=($(printf "k8s-infra-e2e-boskos-%03i" $i))
+  E2E_BOSKOS_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-%03i" $i)")
 done
 
 # e2e projects for scalability jobs
@@ -83,14 +83,14 @@ done
 # - us-east1 in-use addresses quota raised to 125
 E2E_SCALE_PROJECTS=()
 for i in $(seq 1 30); do
-  E2E_SCALE_PROJECTS+=($(printf "k8s-infra-e2e-boskos-scale-%02i" $i))
+  E2E_SCALE_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-scale-%02i" $i)")
 done
 
 # e2e projects for gpu jobs
 # - us-west1 Committed NVIDIA K80 GPUs raised to 2
 E2E_GPU_PROJECTS=()
 for i in $(seq 1 10); do
-  E2E_GPU_PROJECTS+=($(printf "k8s-infra-e2e-boskos-gpu-%02i" $i))
+  E2E_GPU_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-gpu-%02i" $i)")
 done
 
 E2E_PROJECTS=(
@@ -107,6 +107,12 @@ fi
 
 color 6 "Ensuring e2e projects exist and are appropriately configured"
 for prj; do
+
+  if ! (printf '%s\n' "${E2E_PROJECTS[@]}" | grep -q "^${prj}$"); then
+    color 2 "Skipping unrecognized e2e project name: ${prj}"
+    continue
+  fi
+
   color 6 "Ensuring e2e project exists and is appropriately configured: ${prj}"
   (
     ensure_project "${prj}"
@@ -116,62 +122,59 @@ for prj; do
         echo "no stale bindings slated for removal"
     ) 2>&1 | indent
 
-    color 6 "Enabling APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
-    enable_api "${prj}" compute.googleapis.com
-    enable_api "${prj}" logging.googleapis.com
-    enable_api "${prj}" monitoring.googleapis.com
-    enable_api "${prj}" storage-component.googleapis.com
-    enable_api "${prj}" containerregistry.googleapis.com
+    color 6 "Ensuring only APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
+    ensure_only_services "${prj}" \
+        compute.googleapis.com \
+        containerregistry.googleapis.com \
+        logging.googleapis.com \
+        monitoring.googleapis.com \
+        storage-component.googleapis.com
 
+    # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
+    #       could consider using a more limited custom IAM role instead
     color 6 "Empower prow-build service account to edit e2e project: ${prj}"
-    # TODO: this is what prow.k8s.io uses today, but it is likely over-permissioned, we could
-    #       look into creating a more constrained IAM role and using that instead
-    gcloud \
-      projects add-iam-policy-binding "${prj}" \
-      --member "serviceAccount:${PROW_BUILD_SVCACCT}" \
-      --role roles/editor
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:${PROW_BUILD_SVCACCT}" \
+      "roles/editor"
 
+    # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
+    #       could consider using a more limited custom IAM role instead
     color 6 "Empower boskos-janitor service account to clean e2e project: ${prj}"
-    # TODO: this is what prow.k8s.io uses today, but it is likely over-permissioned, we could
-    #       look into creating a more constrained IAM role and using that instead
-    gcloud \
-      projects add-iam-policy-binding "${prj}" \
-      --member "serviceAccount:${BOSKOS_JANITOR_SVCACCT}" \
-      --role roles/editor
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:${BOSKOS_JANITOR_SVCACCT}" \
+      "roles/editor"
 
     color 6 "Empower k8s-infra-prow-oncall@kubernetes.io to admin e2e project: ${prj}"
-    # TODO: this is what prow.k8s.io uses today, but it is likely over-permissioned, we could
-    #       look into creating a more constrained IAM role and using that instead
-    gcloud \
-      projects add-iam-policy-binding "${prj}" \
-      --member "group:k8s-infra-prow-oncall@kubernetes.io" \
-      --role roles/owner
+    ensure_project_role_binding "${prj}" \
+      "group:k8s-infra-prow-oncall@kubernetes.io" \
+      "roles/owner"
 
     # NB: prow.viewer role is defined in ensure-organization.sh, that needs to have been run first
     color 6 "Empower k8s-infra-prow-viewers@kubernetes.io to view specific resources in e2e project: ${prj}"
-    gcloud \
-      projects add-iam-policy-binding "${prj}" \
-      --member "group:k8s-infra-prow-viewers@kubernetes.io" \
-      --role $(custom_org_role_name "prow.viewer")
-    
+    ensure_project_role_binding "${prj}" \
+      "group:k8s-infra-prow-viewers@kubernetes.io" \
+      "$(custom_org_role_name "prow.viewer")"
+
     if [[ "${prj}" =~ k8s-infra-e2e.*scale ]]; then
       color 6 "Empower k8s-infra-sig-scalability-oncall@kubernetes.io to admin e2e project: ${prj}"
-      gcloud \
-        projects add-iam-policy-binding "${prj}" \
-        --member "group:k8s-infra-sig-scalability-oncall@kubernetes.io" \
-        --role roles/owner
+      ensure_project_role_binding "${prj}" \
+        "group:k8s-infra-sig-scalability-oncall@kubernetes.io" \
+        "roles/owner"
     fi
 
     color 6 "Ensure prow-build prowjobs are able to ssh to instances in e2e project: ${prj}"
-    # TODO: this is what prow.k8s.io does today, we could look into use OS Login instead
     prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
 
     # append to project-wide ssh-keys metadata if not present
     ssh_pubkeys=$(mktemp "/tmp/${prj}-ssh-keys-XXXX")
-    gcloud compute project-info describe --project="${prj}" --format=json | \
-      jq -r '(.commonInstanceMetadata.items//[])[]|select(.key=="ssh-keys").value' > "${ssh_pubkeys}"
+    gcloud compute project-info describe --project="${prj}" \
+      --format='value(commonInstanceMetadata.items.filter(key:ssh-keys).extract(value).flatten())' > "${ssh_pubkeys}"
     if ! grep -q "${prow_build_ssh_pubkey}" "${ssh_pubkeys}"; then
-      echo "${prow_build_ssh_pubkey}" >> "${ssh_pubkeys}"
+      if [ "${K8S_INFRA_ENSURE_E2E_PROJECTS_RESETS_SSH_KEYS}" == "true" ]; then
+        echo "${prow_build_ssh_pubkey}" > "${ssh_pubkeys}"
+      else
+        echo "${prow_build_ssh_pubkey}" >> "${ssh_pubkeys}"
+      fi
       gcloud compute project-info add-metadata --project="${prj}" \
         --metadata-from-file ssh-keys="${ssh_pubkeys}"
     fi
