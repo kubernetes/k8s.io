@@ -43,19 +43,7 @@ org_roles=(
     iam.serviceAccountLister
 )
 
-old_org_roles=(
-    StorageBucketLister
-)
-
-# TODO(https://github.com/kubernetes/k8s.io/issues/1659): obviated by organization.admin, remove when bindings gone
-old_org_admin_roles=(
-    roles/billing.user
-    roles/iam.organizationRoleAdmin
-    roles/resourcemanager.organizationAdmin
-    roles/resourcemanager.projectCreator
-    roles/resourcemanager.projectDeleter
-    roles/servicemanagement.quotaAdmin
-)
+old_org_roles=()
 
 color 6 "Ensuring organization custom roles exist"
 (
@@ -90,11 +78,7 @@ color 6 "Ensuring organization IAM bindings exist"
 
 color 6 "Ensuring removed organization IAM bindings do not exist"
 (
-    # TODO(spiffxp): remove this once the old bindings are confirmed gone
-    for role in "${old_org_admin_roles[@]}"; do
-        ensure_removed_org_role_binding "user:thockin@google.com" "${role}"
-        ensure_removed_org_role_binding "user:davanum@gmail.com" "${role}"
-    done
+    color 6 "No bindings to remove"
 ) 2>&1 | indent
 
 color 6 "Ensuring removed organization custom roles do not exist"
