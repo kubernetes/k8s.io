@@ -54,6 +54,8 @@ Redirections
 - https://go.k8s.io/test-health
 - https://go.k8s.io/test-history
 - https://go.k8s.io/triage
+- https://go.k8s.io/logo
+
 
 NOTE: please see configmap-nginx.yaml for rewrite rules.
 
