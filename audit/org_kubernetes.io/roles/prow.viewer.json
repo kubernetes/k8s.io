@@ -352,6 +352,7 @@
     "logging.queries.delete",
     "logging.queries.get",
     "logging.queries.list",
+    "logging.queries.listShared",
     "logging.queries.update",
     "logging.sinks.get",
     "logging.sinks.list",
