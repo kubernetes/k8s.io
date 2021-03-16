@@ -57,23 +57,20 @@ Redirections
 
 NOTE: please see configmap-nginx.yaml for rewrite rules.
 
-Testing
+How to deploy
 ====
-Configure kubectl to target a test cluster on GKE.
 
-Run `make deploy-fake-secret deploy` and wait for the service to be available--
-the load balancer may take some time to configure.
+1) Log into Google Cloud Shell.  Our clusters do not allow access from the
+   internet.
 
-Set `TARGET_IP` to the ingress IP of the running service:
+2) Get the credentials for the cluster, if you don't already have them.  Run
+   `gcloud container clusters get-credentials aaa --region us-central1
+   --project kubernetes-public`.  When this is done, you should be able to list
+   namespaces with `kubectl --context gke_kubernetes-public_us-central1_aaa get
+   ns`.
 
-    export TARGET_IP=$(kubectl get svc k8s-io '--template={{range .status.loadBalancer.ingress}}{{.ip}}{{end}}')
+3) Run `./deploy.sh canary`.  This will push the configs to our canary namespace and
+   run the tests against it.
 
-If you have IPv6 connectivity, you can get the ingress IPv6 address too:
-
-    export TARGET_IP=$(kubectl get svc k8s-io-v6 '--template={{range .status.loadBalancer.ingress}}{{.ip}}{{end}}')
-
-Use `make test` to run unit tests to verify the various endpoints on the server.
-
-Deploying
-===
-Set kubectl to target the production cluster, then run `make deploy`.
+4) Assuming the tests pass, run `./deploy.sh prod`.  This will push the configs
+   to our prod namespace and run the tests against it.
