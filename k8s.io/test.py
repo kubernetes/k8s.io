@@ -197,6 +197,9 @@ class RedirTest(HTTPTestCase):
                 base + 'triage',
                 'https://storage.googleapis.com/k8s-gubernator/triage/index.html')
             self.assert_temp_redirect(
+                base + 'logo',
+                'https://branding.cncf.io/projects/kubernetes/')
+            self.assert_temp_redirect(
                 base + 'test-health',
                 'http://velodrome.k8s.io/dashboard/db/bigquery-metrics')
             self.assert_temp_redirect(
