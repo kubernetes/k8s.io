@@ -230,7 +230,7 @@ func TestNoDuplicateMembers(t *testing.T) {
 func TestHardcodedGroupsForParanoia(t *testing.T) {
 	groups := map[string][]string{
 		"k8s-infra-gcp-org-admins@kubernetes.io": []string{
-			"cblecker@gmail.com",
+			"ameukam@gmail.com",
 			"davanum@gmail.com",
 			"ihor@cncf.io",
 			"spiffxp@google.com",

@@ -115,7 +115,7 @@ aliases:
     - cindyxing
     - dejanb
   wg-k8s-infra-leads:
-    - bartsmykla
+    - ameukam
     - dims
     - spiffxp
   wg-lts-leads:
@@ -252,7 +252,7 @@ aliases:
     - mpherman2
   # people with sufficient privileges to run scripts in /infra/gcp
   wg-k8s-infra-org-admins:
-    - cblecker
+    - ameukam
     - dims
     - spiffxp
     - thockin
