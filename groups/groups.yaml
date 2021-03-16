@@ -47,7 +47,7 @@ groups:
     members:
       - ahg@google.com
       - alarcj137@gmail.com
-      - bartek@smykla.com
+      - ameukam@gmail.com
       - bentheelder@google.com
       - caniszczyk@linuxfoundation.org
       - casey@tigera.io
@@ -321,6 +321,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - ameukam@gmail.com
       - bentheelder@google.com
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -328,7 +329,6 @@ groups:
       - nikitaraghunath@gmail.com
       - stefan.schimanski@gmail.com
       - thockin@google.com
-      - bartek@smykla.com
       - james@munnelly.eu
       - spiffxp@google.com
 
@@ -339,7 +339,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - bartek@smykla.com
       - bentheelder@google.com
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -355,12 +354,12 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - ameukam@gmail.com
       - davanum@gmail.com
       - ihor@cncf.io
       - justinsb@google.com
       - spiffxp@google.com
       - thockin@google.com
-      - bartek@smykla.com
 
   - email-id: k8s-infra-gcp-auditors@kubernetes.io
     name: k8s-infra-gcp-auditors
@@ -378,6 +377,7 @@ groups:
       - thockin@google.com
       - adolfo.garcia@uservers.net
       - bartek@smykla.com
+      - cblecker@gmail.com
       - k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com
 
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
@@ -387,7 +387,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - cblecker@gmail.com
+      - ameukam@gmail.com 
       - davanum@gmail.com
       - ihor@cncf.io
       - spiffxp@google.com
@@ -517,7 +517,7 @@ groups:
       - cblecker@gmail.com
       - james@munnelly.eu
       - thockin@google.com
-      - bartek@smykla.com
+      - ameukamn@gmail.com
 
   - email-id: k8s-infra-rbac-gcsweb@kubernetes.io
     name: k8s-infra-rbac-gcsweb
@@ -528,7 +528,7 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - thockin@google.com
-      - bartek@smykla.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
     name: k8s-infra-rbac-k8s-io-canary
@@ -561,7 +561,6 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - bartek@smykla.com
       - janluk@google.com
       - jkaniuk@google.com
       - jprzychodzen@google.com
@@ -605,7 +604,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - bartek@smykla.com
+      - ameukam@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
       - nikitaraghunath@gmail.com
@@ -621,7 +620,6 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - ameukam@gmail.com
-      - bartek@smykla.com
       - cblecker@gmail.com
       - ctadeu@gmail.com
       - davanum@gmail.com
@@ -1183,7 +1181,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - bartek@smykla.com
+      - ameukam@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
       - james@munnelly.eu
@@ -1411,7 +1409,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - ameukam@gmail.com
-      - bartek@smykla.com
       - ctadeu@gmail.com
       - jeef111x@gmail.com
       - killen.bob@gmail.com
@@ -1437,6 +1434,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
+      - ameukam@gmail.com
       - bentheelder@google.com
       - brendan.d.burns@gmail.com
       - cblecker@gmail.com
