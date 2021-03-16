@@ -1,3 +1,20 @@
+- name: controller
+  dmap:
+    "sha256:b87a6c40964f375f04c18107d94dc9ce6d2c14de2caf677afa83867eba8ad411": ["v0.19.8"]
+- name: controller-amd64
+  dmap:
+    "sha256:288cca93667fb2342193d98b3a9bea7825db75186ef8df2f0b5185f3189a1eab": ["v0.19.8"]
+- name: controller-arm64
+  dmap:
+    "sha256:806e6e44547247f6d652c6ddb06e953cbc7707c7a67690d93559f77380e23fa2": ["v0.19.8"]
 - name: kube-scheduler
   dmap:
     "sha256:01d1b53bce3c2477ab403b54914ff9229e073d99e9b711f161b796cec73176be": ["v0.18.9"]
+    "sha256:9ebeee43235d201992ff3cea13adcb248b451d400d898d0e499844bb99dc2b10": ["v0.19.8"]
+- name: kube-scheduler-amd64
+  dmap:
+    "sha256:7e0c8a520f4aba7f9bf21f1cbece760079a219c36309052815fa7d04208be042": ["v0.19.8"]
+- name: kube-scheduler-arm64
+  dmap:
+    "sha256:d920cb0d251c90430ed7da0a1d12bd521ef0f996bbf909384cd7b78cd7f4d963": ["v0.19.8"]
+
