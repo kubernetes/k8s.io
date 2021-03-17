@@ -107,3 +107,8 @@ function join_by() {
   # and $@ returns array which doesn't respect IFS
   echo "$*"
 }
+
+# use git-diff for color output, strip patch header
+function diff_colorized() {
+  git --no-pager diff --color --no-prefix --no-index "$@" | tail -n+5
+}
