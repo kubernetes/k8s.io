@@ -110,5 +110,5 @@ function join_by() {
 
 # use git-diff for color output, strip patch header
 function diff_colorized() {
-  git --no-pager diff --color --no-prefix --no-index "$@" | tail -n+5
+  (git --no-pager diff --color --no-prefix --no-index "$@" | tail -n+5) || true
 }
