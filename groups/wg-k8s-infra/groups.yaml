@@ -1,0 +1,71 @@
+groups:
+  - email-id: k8s-infra-alerts@kubernetes.io
+    name: k8s-infra-alerts
+    description: |-
+      alerts for wg-k8s-infra
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - amwat@google.com
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - jgrafton@google.com
+      - mkumatag@in.ibm.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - linusa@google.com
+
+  - email-id: k8s-infra-cluster-admins@kubernetes.io
+    name: k8s-infra-cluster-admins
+    description: |-
+      ACL for cluster-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+      - thockin@google.com
+      - james@munnelly.eu
+      - spiffxp@google.com
+
+  - email-id: k8s-infra-team-private@kubernetes.io
+    name: k8s-infra-team-private
+    description: |-
+      Mailing list for wg-infra-team private communications
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - bentheelder@google.com
+      - brendan.d.burns@gmail.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - jgrafton@google.com
+      - justinsb@google.com
+      - spiffxp@google.com
+      - thockin@google.com
+      - james@munnelly.eu
+
+  - email-id: wg-k8s-infra-leads@kubernetes.io
+    name: wg-k8s-infra-leads
+    description: |-
+      WG Chairs and Technical leads
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - ameukam@gmail.com
+      - davanum@gmail.com
+      - spiffxp@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
