@@ -16,7 +16,7 @@
     "sha256:b9c08bcbea5b933ddb324e360b5bd2c2b611e7db30258a5bbf1373eb563c4c87": ["1.3"]
 - name: busybox
   dmap:
-    "sha256:d67d1eda84b05ebfc47290ba490aa2474caa11d90be6a5ef70da1b3f2ca2a2e7": ["1.29"]
+    "sha256:39e1e963e5310e9c313bad51523be012ede7b35bb9316517d19089a010356592": ["1.29-1"]
 - name: cuda-vector-add
   dmap:
     "sha256:dc92c37785a73a45912a3a18bb89d72bf15c377938a5b122c12425b682bf880d": ["2.2"]
