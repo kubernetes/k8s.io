@@ -1,0 +1,6 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - wg-k8s-infra-leads
+reviewers:
+  - wg-k8s-infra-leads

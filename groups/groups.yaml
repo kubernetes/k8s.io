@@ -244,25 +244,6 @@ groups:
       - k8s-infra-rbac-node-perf-dash@kubernetes.io
       - k8s-infra-rbac-wg-reliability@kubernetes.io
 
-  - email-id: k8s-infra-alerts@kubernetes.io
-    name: k8s-infra-alerts
-    description: |-
-      alerts for wg-k8s-infra
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    members:
-      - amwat@google.com
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - jgrafton@google.com
-      - mkumatag@in.ibm.com
-      - spiffxp@google.com
-      - thockin@google.com
-      - linusa@google.com
-
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
     description: |-
@@ -313,24 +294,6 @@ groups:
       - ihor@cncf.io
       - spiffxp@google.com
       - thockin@google.com
-
-  - email-id: k8s-infra-cluster-admins@kubernetes.io
-    name: k8s-infra-cluster-admins
-    description: |-
-      ACL for cluster-admins
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - ameukam@gmail.com
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - justinsb@google.com
-      - nikitaraghunath@gmail.com
-      - stefan.schimanski@gmail.com
-      - thockin@google.com
-      - james@munnelly.eu
-      - spiffxp@google.com
 
   - email-id: k8s-infra-dns-admins@kubernetes.io
     name: k8s-infra-dns-admins
@@ -1425,27 +1388,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - michaelg@okkur.org
-
-  - email-id: k8s-infra-team-private@kubernetes.io
-    name: k8s-infra-team-private
-    description: |-
-      Mailing list for wg-infra-team private communications
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    members:
-      - ameukam@gmail.com
-      - bentheelder@google.com
-      - brendan.d.burns@gmail.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - jgrafton@google.com
-      - justinsb@google.com
-      - spiffxp@google.com
-      - thockin@google.com
-      - bartek@smykla.com
-      - james@munnelly.eu
 
   - email-id: moderators@kubernetes.io
     name: moderators
