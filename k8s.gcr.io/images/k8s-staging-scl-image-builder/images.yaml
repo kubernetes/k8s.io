@@ -1,3 +1,4 @@
 - name: cluster-node-image-builder-amd64
   dmap:
     "sha256:1160917e3feebdb84d8b4b978c025d82b6bfd6af3c6f01f94a1e966e60b17eb5": ["v0.1.7"]
+    "sha256:4d4e1db3bf2530ca5ca20629cb15c9050e4940703828a9025c443978f2156ee4": ["v0.1.8"]
