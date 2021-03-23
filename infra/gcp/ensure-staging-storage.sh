@@ -86,6 +86,7 @@ STAGING_PROJECTS=(
     kube-state-metrics
     kubeadm
     kubernetes
+    kubetest2
     kustomize
     metrics-server
     mirror
