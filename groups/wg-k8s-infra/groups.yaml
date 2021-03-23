@@ -1,4 +1,9 @@
 groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list, not intended to govern access
+  #
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
     description: |-
@@ -18,24 +23,7 @@ groups:
       - thockin@google.com
       - linusa@google.com
 
-  - email-id: k8s-infra-cluster-admins@kubernetes.io
-    name: k8s-infra-cluster-admins
-    description: |-
-      ACL for cluster-admins
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - ameukam@gmail.com
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - justinsb@google.com
-      - nikitaraghunath@gmail.com
-      - stefan.schimanski@gmail.com
-      - thockin@google.com
-      - james@munnelly.eu
-      - spiffxp@google.com
-
+  # TODO(spiffxp): rename this to wg-k8s-infra-private at some point
   - email-id: k8s-infra-team-private@kubernetes.io
     name: k8s-infra-team-private
     description: |-
@@ -67,5 +55,108 @@ groups:
       - ameukam@gmail.com
       - davanum@gmail.com
       - spiffxp@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+  #
+  # Infrastructure ownership
+  #
+  # Each group here represents potentially privileged access to core parts of
+  # kubernetes project infrastructure. A high level of trust is required for
+  # membership in these groups.
+  #
+
+  # infrastructure owners
+  - email-id: k8s-infra-aws-admins@kubernetes.io
+    name: k8s-infra-aws-admins
+    description: |-
+      ACL for aws-admins
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - ihor@cncf.io
+      - justinsb@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-cluster-admins@kubernetes.io
+    name: k8s-infra-cluster-admins
+    description: |-
+      ACL for cluster-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+      - thockin@google.com
+      - james@munnelly.eu
+      - spiffxp@google.com
+
+  - email-id: k8s-infra-gcp-accounting@kubernetes.io
+    name: k8s-infra-gcp-accounting
+    description: |-
+      ACL for GCP accounting
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - justinsb@google.com
+      - spiffxp@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-gcp-auditors@kubernetes.io
+    name: k8s-infra-gcp-auditors
+    description: |-
+      granted read-only access to all GCP infrastructure with the kubernetes.io
+      GCP organization, excluding sensitive/secret values
+
+      access granted via custom organization role audit.viewer
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - hh@ii.coop
+      - caleb@ii.coop
+      - ihor@cncf.io
+      - spiffxp@google.com
+      - spiffxp@gmail.com
+      - thockin@google.com
+      - adolfo.garcia@uservers.net
+      - bartek@smykla.com
+      - cblecker@gmail.com
+      - k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com
+
+  - email-id: k8s-infra-gcp-org-admins@kubernetes.io
+    name: k8s-infra-gcp-org-admins
+    description: |-
+      granted owner access to the kubernetes.io GCP organization, as well as
+      additional privileges necessary for billing and admin purposes
+
+      access granted via custom organization role organization.admin
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - spiffxp@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-group-admins@kubernetes.io
+    name: k8s-infra-group-admins
+    description: |-
+      People trusted to admin kubernetes.io google groups by
+      running the groups reconciler
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cblecker@gmail.com
+      - davanum@gmail.com
       - spiffxp@google.com
       - thockin@google.com
