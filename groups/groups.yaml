@@ -406,10 +406,10 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
+      - ameukam@gmail.com
       - cblecker@gmail.com
       - james@munnelly.eu
       - thockin@google.com
-      - ameukamn@gmail.com
 
   - email-id: k8s-infra-rbac-gcsweb@kubernetes.io
     name: k8s-infra-rbac-gcsweb
