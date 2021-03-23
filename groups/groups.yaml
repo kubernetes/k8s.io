@@ -511,10 +511,12 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
+      - antonio.ojea.garcia@gmail.com
       - bentheelder@google.com
       - cblecker@gmail.com
+      - davanum@gmail.com
+      - spiffxp@gmail.com
       - thockin@google.com
-      - antonio.ojea.garcia@gmail.com
 
   - email-id: k8s-infra-rbac-perfdash@kubernetes.io
     name: k8s-infra-rbac-perfdash

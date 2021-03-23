@@ -3,14 +3,17 @@
 options:
   no_parent_owners: true
 approvers:
-- ixdy
-- thockin
 - aojea
 - bentheelder
 - cblecker
 - dims
 - spiffxp
+- thockin
 
 # limiting factor from being an approver is inability to deploy changes once PRs merge
 reviewers:
 - nikhita
+
+labels:
+- sig/contributor-experience
+- wg/k8s-infra
