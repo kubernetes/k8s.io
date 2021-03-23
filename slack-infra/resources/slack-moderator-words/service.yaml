@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: slack-moderator-words
+spec:
+  selector:
+    app: slack-moderator-words
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

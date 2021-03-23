@@ -29,3 +29,7 @@ spec:
             backend:
               serviceName: slack-post-message
               servicePort: 80
+          - path: /infra/moderator-words/*
+            backend:
+              serviceName: slack-moderator-words
+              servicePort: 80
