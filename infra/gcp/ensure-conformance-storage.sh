@@ -45,7 +45,6 @@ PROJECT="k8s-conform"
 
 # NB: Please keep this sorted.
 CONFORMANCE_BUCKETS=(
-    capi-openstack
     cri-o
     huaweicloud
     inspur
