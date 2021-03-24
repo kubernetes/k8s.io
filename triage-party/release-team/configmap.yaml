@@ -11,6 +11,7 @@ data:
       min_similarity: 0.8
       repos:
         - https://github.com/kubernetes/kubernetes
+        - https://github.com/kubernetes/release
 
       # Who should automatically be considered a project member?
       # See: https://developer.github.com/v4/enum/commentauthorassociation/
@@ -24,18 +25,7 @@ data:
       # members:
       # - k8s-ci-robot
 
-
     collections:
-      - id: bug-triage
-        name: Bug Triage
-        dedup: true
-        description: >
-          Dashboard tracking the current status of all issues and PRs targeting the current release (1.20).
-        rules:
-          - milestone-issues
-          - urgent-issues
-          - urgent-prs
-
       - id: milestone
         name: Current Milestone
         dedup: true
@@ -49,14 +39,54 @@ data:
           - milestone-pr-needs-merge
           - milestone-recently-closed
 
+      - id: sig-release
+        name: Sig Release Triage
+        dedup: true
+        description: >
+          Dashboard tracking the current status of all issues and PRs targeting the current release (1.22).
+        rules:
+          - milestone-issues
+          - urgent-issues
+          - urgent-prs
+
+      - id: release-team
+        name: Release Team
+        dedup: true
+        description: >
+          Dashboard tracking the current status of all issues and PRs for the release team.
+        rules:
+          - release-team
+          - urgent-issues
+          - urgent-prs
+
+      - id: release-engineering
+        name: Release Engineering Team
+        dedup: true
+        description: >
+          Dashboard tracking the current status of all issues and PRs for the release engineering.
+        rules:
+          - sig-release
+          - release-engineering
+          - urgent-issues
+          - urgent-prs
+
+      - id: ci-signal
+        name: CI Signal
+        dedup: true
+        description: >
+          Dashboard tracking CI Signal issues.
+        rules:
+          - kind-flake
+          - kind-failing-test
+
     rules:
       ### Milestone ###
       milestone-issues:
-        name: "v1.20 Issues"
+        name: "v1.22 Issues"
         resolution: "Add a milestone/ label"
         type: issue
         filters:
-        - milestone: "v1.20"
+        - milestone: "v1.22"
 
       ### Milestone Kanban ###
       milestone-not-started:
@@ -398,6 +428,40 @@ data:
         resolution: "Close or label as frozen"
         filters:
           - label: lifecycle/stale
+
+      release-team:
+        name: "Area/Release-Team"
+        type: issue
+        filters:
+          - label: area/release-team
+
+      release-engineering:
+        name: "area/release-eng"
+        type: issue
+        repos:
+          - "https://github.com/kubernetes/release"
+        filters:
+          - label: area/release-eng
+
+      sig-release:
+        name: "sig/release"
+        type: issue
+        repos:
+          - "https://github.com/kubernetes/release"
+        filters:
+          - label: sig/release
+
+      kind-flake:
+        name: "Items that are classified as flake"
+        type: issue
+        filters:
+          - label: kind/flake
+
+      kind-failing-test:
+        name: "Items that are classified as failing test"
+        type: issue
+        filters:
+          - label: kind/failing-test
 
       # Receive queue
       question-recv:
