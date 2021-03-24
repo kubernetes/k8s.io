@@ -9,24 +9,17 @@ Cluster resources to deploy the following apps from [kubernetes-sigs/slack-infra
 - slack-post-message
 - slackin
 
-Secrets are stored in Secret Manager in the `kubernetes-public` project, with
-access granted to members of k8s-infra-rbac-slack-infra@kubernetes.io
-
 None of the resources have a namespace defined
 
 ## How to deploy
 
-From the "slack-infra" directory run:
+Ensure you have [access to the cluster]
 
-```bash
-# Basic resources
-kubectl apply -n slack-infra -Rf resources/
+Ensure you are a member of both:
+- k8s-infra-cluster-admins@kubernetes.io (for access to Kubernetes secrets in-cluster)
+- k8s-infra-rbac-slack-infra@kubernetes.io (for access to Secret Manager secrets for slack-infra)
 
-# Secrets (have to be deployed by a member of k8s-infra-rbac-slack-infra@kubernetes.io)
-for s in $(gcloud secrets list --project=kubernetes-public --filter="labels.app=slack-infra" --format="value(name)"); do
-  gcloud secrets --project=kubernetes-public versions access latest --secret=$s |\
-    kubectl apply -n slack-infra -f -
-done
-```
+From within this directory, run `deploy.sh`
 
 [kubernetes-sigs/slack-infra]: https://github.com/kubernetes-sigs/slack-infra
+[access to the cluster]: https://github.com/kubernetes/k8s.io/blob/main/running-in-community-clusters.md#access-the-cluster
