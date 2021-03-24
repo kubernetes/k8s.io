@@ -182,6 +182,7 @@ groups:
       - secalert@redhat.com
       - secure@sap.com
       - security@digitalocean.com
+      - security@giantswarm.io
       - security@gravitational.com
       - security@kinvolk.io
       - security@kubernetes.io
