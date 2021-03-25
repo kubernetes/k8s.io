@@ -32,3 +32,28 @@ https://github.com/kubernetes/test-infra/tree/master/gcsweb into Docker
 container, which is then uploaded to private container storage at
 https://k8s.gcr.io/gcsweb-amd64 and fetched during processing
 of `deployment.yaml` by `kubectl apply`.
+
+##### How to deploy
+
+Ensure you have [access to the cluster]
+
+Ensure you are a member of both:
+
+- k8s-infra-cluster-admins@kubernetes.io
+- k8s-infra-rbac-gcsweb@kubernetes.io
+
+Connecting to cloud-shell:
+
+```shell
+gcloud alpha cloud-shell ssh --authorize-session --project kubernetes-public
+```
+
+Deploy gcsweb:
+
+```shell
+git clone https://github.com/kubernetes/k8s.io
+cd k8s.io
+kubectl apply -Rf gcsweb/
+```
+
+[access to the cluster]: https://github.com/kubernetes/k8s.io/blob/main/running-in-community-clusters.md#access-the-cluster
