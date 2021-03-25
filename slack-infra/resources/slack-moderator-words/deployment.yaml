@@ -26,6 +26,8 @@ spec:
         env:
         - name: PATH_PREFIX
           value: /infra/moderator-words
+        - name: PORT
+          value: "8080"
         volumeMounts:
         - mountPath: /etc/slack-moderator-words
           name: config
