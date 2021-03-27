@@ -17,10 +17,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+REPO_ROOT="$(cd ${SCRIPT_ROOT}/.. && pwd)"
 
 function usage() {
-  echo >&2 "Usage: $0 <CLUSTER_NAME>"
+  echo >&2 "Usage: $0 <PATH>"
   exit 1
 }
 
@@ -54,12 +55,12 @@ if [ -z "$(which curl)" ]; then
   exit 1
 fi
 
-
 if [ -z "$(which tfswitch)" ]; then
   echo "Installing tfswitch locally"
-  curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | sudo bash
+  curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash
 else
 tfswitch --version
 fi
 
-check_terraform "${DIR}/../$1"
+cd "$REPO_ROOT"
+check_terraform $1
