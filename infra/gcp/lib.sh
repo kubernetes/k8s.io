@@ -100,26 +100,50 @@ function ensure_project() {
         return 1
     fi
     local project="$1"
+    local account
+    local org
 
     if ! gcloud projects describe "${project}" >/dev/null 2>&1; then
         gcloud projects create "${project}" \
             --no-enable-cloud-apis \
             --organization "${GCP_ORG}"
     else
-        local org=$(gcloud projects \
+        org=$(gcloud projects \
                 describe "${project}" \
                 --flatten='parent[]' \
                 --format='csv[no-heading](type, id)' \
                 | grep ^organization \
                 | cut -f2 -d,)
-        if [ "$org" != "${GCP_ORG}" ]; then
+        if [ "${org}" != "${GCP_ORG}" ]; then
             echo "project ${project} exists, but not in our org: got ${org}" >&2
             return 2
         fi
     fi
 
-    gcloud beta billing projects link "${project}" \
-        --billing-account "${GCP_BILLING}"
+    # Avoid calling link if not needed, so accounts with project ownership but
+    # without billing privileges can still run scripts that use this function
+    # to manage projects that have already been provisioned
+    account=$(gcloud beta billing projects describe "${project}" --format="value(billingAccountName)")
+    if [ "${account}" != "billingAccounts/${GCP_BILLING}" ]; then
+        gcloud beta billing projects link "${project}" \
+            --billing-account "${GCP_BILLING}"
+    fi
+
+    # Ensure projects are not owned by users; they should be owned by groups.
+    # If this is being run by a user, and project creation happened above,
+    # this will remove the roles/owner binding that was implicitly created.
+    # It is acceptable if this results in no direct project ownership, as we
+    # have ownership propgating down from parent resources (folders, org, etc)
+    while read -r user; do
+        # But OK one special case for now: leave @kubernetes.io users alone,
+        # we have one setup to own k8s-gsuite, we may find we need others
+        if ! (echo "${user}" | grep -q "@kubernetes.io$"); then
+            ensure_removed_project_role_binding "${project}" "${user}" "roles/owner"
+        fi
+    done < <(gcloud projects get-iam-policy "${project}" \
+        --flatten="bindings[].members" \
+        --filter="bindings.role=roles/owner AND bindings.members ~ ^user:" \
+        --format="value(bindings.members)")
 }
 
 # Enable an API
