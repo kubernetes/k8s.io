@@ -63,6 +63,8 @@
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
     "sha256:de166db2f9245cd0cccacfea9527f7e4c25816fde401e920163b5c17637daad1": [ "v1.5.0" ]
     "sha256:b526bd29630261eceecf2d38c84d4f340a424d57e1e2661111e2649a4663b659": [ "v1.6.0" ]
+    "sha256:f25046a9991d0b385c994889f11720c29ab3acd6ce2530db793c0b679fc63e9d": [ "v1.6.1" ]
+    "sha256:f74a0ba3e72a2ceace6a187de6ccbb295a9e4409f6f33ce88c8411ee39e71fcf": [ "v1.6.2" ]
 - name: livenessprobe
   dmap:
     "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
@@ -78,6 +80,7 @@
 - name: nfs-provisioner
   dmap:
     "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
+    "sha256:2de1d15fc1f2a33618c61ff8d499ef22a7b2b8961952f059656a245b98498ba4": [ "v3.0.0" ]
 - name: snapshot-controller
   dmap:
     "sha256:2bde7d7f9d73c4309d67e9d7f94df52110295ef06c9488ca76c40da32b65f05e": [ "v2.1.1" ]
