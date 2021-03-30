@@ -143,16 +143,17 @@ parse_args "$@";
 #
 
 ALL_PROJECTS=(
-    "gcsweb"
-    "k8s-io-prod"
-    "k8s-io-canary"
-    "node-perf-dash"
-    "perfdash"
-    "prow"
-    "publishing-bot"
-    "slack-infra"
-    "triageparty-release"
-    "wg-reliability-sippy"
+    gcsweb
+    k8s-io-prod
+    k8s-io-canary
+    node-perf-dash
+    perfdash
+    prow
+    publishing-bot
+    sippy
+    slack-infra
+    triageparty-release
+    wg-reliability-sippy
 )
 
 for prj in "${ALL_PROJECTS[@]}"; do
