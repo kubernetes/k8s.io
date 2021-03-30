@@ -74,7 +74,6 @@ groups:
       - k8s-infra-release-editors@kubernetes.io
       - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
-      - gianarb92@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
@@ -293,7 +292,6 @@ groups:
       - bentheelder@google.com
       - ctadeu@gmail.com
       - feiskyer@gmail.com
-      - gianarb92@gmail.com
       - gmccloskey@google.com
       - gveronicalg@gmail.com
       - idealhack@gmail.com
