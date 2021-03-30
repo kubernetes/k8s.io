@@ -192,6 +192,7 @@ groups:
       - k8s-infra-rbac-prow@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io
       - k8s-infra-rbac-triageparty-release@kubernetes.io
+      - k8s-infra-rbac-sippy@kubernetes.io
       - k8s-infra-rbac-slack-infra@kubernetes.io
       - k8s-infra-rbac-node-perf-dash@kubernetes.io
       - k8s-infra-rbac-wg-reliability@kubernetes.io
@@ -353,7 +354,7 @@ groups:
   - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
     name: k8s-infra-rbac-cert-manager
     description: |-
-      ACL for Cert Manager RBAC
+      Grants access to the `namespace-user` role in the `cert-manager` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -366,7 +367,7 @@ groups:
   - email-id: k8s-infra-rbac-gcsweb@kubernetes.io
     name: k8s-infra-rbac-gcsweb
     description: |-
-      ACL for gcsweb RBAC
+      Grants access to the `namespace-user` role in the `gcsweb` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -377,7 +378,7 @@ groups:
   - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
     name: k8s-infra-rbac-k8s-io-canary
     description: |-
-      ACL for k8s.io-admins
+      Grants access to the `namespace-user` role in the `k8s-io-canary` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -387,7 +388,7 @@ groups:
   - email-id: k8s-infra-rbac-k8s-io-prod@kubernetes.io
     name: k8s-infra-rbac-k8s-io-prod
     description: |-
-      ACL for k8s.io-admins
+      Grants access to the `namespace-user` role in the `k8s-io-prod` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -402,7 +403,7 @@ groups:
   - email-id: k8s-infra-rbac-perfdash@kubernetes.io
     name: k8s-infra-rbac-perfdash
     description: |-
-      ACL for Perfdash
+      Grants access to the `namespace-user` role in the `perfdash` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -419,7 +420,7 @@ groups:
   - email-id: k8s-infra-rbac-node-perf-dash@kubernetes.io
     name: k8s-infra-rbac-node-perf-dash
     description: |-
-      ACL for Node Perf Dashboard
+      Grants access to the `namespace-user` role in the `node-perf-dash` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -432,7 +433,7 @@ groups:
   - email-id: k8s-infra-rbac-prow@kubernetes.io
     name: k8s-infra-rbac-prow
     description:
-      ACL for test-infra prow
+      Grants access to the `namespace-user` role in the `prow` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -445,7 +446,7 @@ groups:
   - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
     name: k8s-infra-rbac-publishing-bot
     description: |-
-      ACL for Publishing Bot
+      Grants access to the `namespace-user` role in the `publishing-bot` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -460,7 +461,7 @@ groups:
   - email-id: k8s-infra-rbac-slack-infra@kubernetes.io
     name: k8s-infra-rbac-slack-infra
     description: |-
-      ACL for Slack Infra
+      Grants access to the `namespace-user` role in the `slack-infra` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -478,10 +479,11 @@ groups:
       - spiffxp@gmail.com
       - thockin@google.com
 
+  # TODO(spiffxp): delete when sippy works
   - email-id: k8s-infra-rbac-wg-reliability@kubernetes.io
     name: k8s-infra-rbac-wg-reliability
     description: |-
-      ACL for wg-reliability Infra
+      Grants access to the `namespace-user` role in the `wg-reliability` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
@@ -489,6 +491,20 @@ groups:
       - deads@redhat.com
       - wojtekt@google.com
       - skuznets@redhat.com
+      - spiffxp@gmail.com
+
+  - email-id: k8s-infra-rbac-sippy@kubernetes.io
+    name: k8s-infra-rbac-sippy
+    description: |-
+      Grants access to the `namespace-user` role in the `sippy` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - deads@redhat.com
+      - wojtekt@google.com
+      - skuznets@redhat.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-prow-oncall@kubernetes.io
     name: k8s-infra-prow-oncall
