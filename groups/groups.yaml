@@ -195,7 +195,6 @@ groups:
       - k8s-infra-rbac-sippy@kubernetes.io
       - k8s-infra-rbac-slack-infra@kubernetes.io
       - k8s-infra-rbac-node-perf-dash@kubernetes.io
-      - k8s-infra-rbac-wg-reliability@kubernetes.io
 
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
@@ -478,20 +477,6 @@ groups:
       - spiffxp@google.com
       - spiffxp@gmail.com
       - thockin@google.com
-
-  # TODO(spiffxp): delete when sippy works
-  - email-id: k8s-infra-rbac-wg-reliability@kubernetes.io
-    name: k8s-infra-rbac-wg-reliability
-    description: |-
-      Grants access to the `namespace-user` role in the `wg-reliability` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - deads@redhat.com
-      - wojtekt@google.com
-      - skuznets@redhat.com
-      - spiffxp@gmail.com
 
   - email-id: k8s-infra-rbac-sippy@kubernetes.io
     name: k8s-infra-rbac-sippy

@@ -153,7 +153,6 @@ ALL_PROJECTS=(
     sippy
     slack-infra
     triageparty-release
-    wg-reliability-sippy
 )
 
 for prj in "${ALL_PROJECTS[@]}"; do
