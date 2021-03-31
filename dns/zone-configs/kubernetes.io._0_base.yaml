@@ -18,6 +18,14 @@
       preference: 10
     - exchange: alt4.aspmx.l.google.com.
       preference: 10
+  - type: CAA # The CAA record set for a domain also applies to all sub-domains. If a sub-domain has its own CAA record set, it takes precedence.
+    values:
+    - flags: 0
+      tag: issue
+      value: pki.goog
+    - flags: 0
+      tag: issue
+      value: letsencrypt.org
   - type: TXT
     values:
     - google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8
