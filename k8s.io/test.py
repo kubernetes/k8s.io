@@ -290,15 +290,15 @@ class RedirTest(HTTPTestCase):
             # A few /ci/ tests
             self.assert_temp_redirect(
                 base + '/ci/v$ver/$path',
-                'https://storage.googleapis.com/kubernetes-release-dev/ci/v$ver/$path',
+                'https://storage.googleapis.com/k8s-release-dev/ci/v$ver/$path',
                 ver=rand_num(), path=rand_num())
             self.assert_temp_redirect(
                 base + '/ci/latest-$ver.txt',
-                'https://storage.googleapis.com/kubernetes-release-dev/ci/latest-$ver.txt',
+                'https://storage.googleapis.com/k8s-release-dev/ci/latest-$ver.txt',
                 ver=rand_num())
             self.assert_temp_redirect(
                 base + '/ci-cross/v$ver/$path',
-                'https://storage.googleapis.com/kubernetes-release-dev/ci-cross/v$ver/$path',
+                'https://storage.googleapis.com/k8s-release-dev/ci-cross/v$ver/$path',
                 ver=rand_num(), path=rand_num())
             # Base case
             self.assert_temp_redirect(
