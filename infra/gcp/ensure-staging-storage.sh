@@ -40,7 +40,7 @@ function usage() {
 PROD_PROJECT="k8s-artifacts-prod"
 
 # NB: Please keep this sorted.
-STAGING_PROJECTS=(
+readonly STAGING_PROJECTS=(
     addon-manager
     apisnoop
     artifact-promoter
@@ -48,8 +48,12 @@ STAGING_PROJECTS=(
     bootkube
     boskos
     build-image
+    capi-docker
+    capi-kubeadm
+    capi-openstack
+    capi-vsphere
+    ci-images
     cip-test
-    provider-aws
     cloud-provider-gcp
     cluster-addons
     cluster-api
@@ -57,11 +61,6 @@ STAGING_PROJECTS=(
     cluster-api-azure
     cluster-api-do
     cluster-api-gcp
-    capi-openstack
-    capi-kubeadm
-    capi-docker
-    capi-vsphere
-    ci-images
     coredns
     cpa
     cri-tools
@@ -77,8 +76,8 @@ STAGING_PROJECTS=(
     external-dns
     git-sync
     infra-tools
-    ingressconformance
     ingress-nginx
+    ingressconformance
     k8s-gsm-tools
     kas-network-proxy
     kind
@@ -94,6 +93,7 @@ STAGING_PROJECTS=(
     networking
     nfd
     npd
+    provider-aws
     provider-azure
     provider-openstack
     publishing-bot
@@ -102,19 +102,28 @@ STAGING_PROJECTS=(
     scheduler-plugins
     scl-image-builder
     service-apis
-    slack-infra
     sig-docs
     sig-storage
+    slack-infra
     sp-operator
     storage-migrator
     txtdirect
 )
 
-RELEASE_STAGING_PROJECTS=(
+readonly RELEASE_STAGING_PROJECTS=(
     experimental
     kubernetes
     mirror
     releng
+)
+
+readonly STAGING_PROJECT_SERVICES=(
+    cloudbuild.googleapis.com
+    cloudkms.googleapis.com
+    containerregistry.googleapis.com
+    containerscanning.googleapis.com
+    secretmanager.googleapis.com
+    storage-component.googleapis.com
 )
 
 if [ $# = 0 ]; then
@@ -155,22 +164,18 @@ for REPO; do
 
         # Enable writers to use the UI
         color 6 "Empowering ${WRITERS} as project viewers"
-        empower_group_as_viewer "${PROJECT}" "${WRITERS}"
+        ensure_project_role_binding "${PROJECT}" "group:${WRITERS}" "roles/viewer"
 
-        # Every project gets a GCR repo
-
-        # Enable container registry APIs
-        color 6 "Enabling the container registry API"
-        enable_api "${PROJECT}" containerregistry.googleapis.com
-
-        # Enable vulnerability scanning on the staging project
-        color 6 "Enabling vulnerability scanning in staging projects"
-        enable_api "${PROJECT}" containerscanning.googleapis.com
+        # Enable services for staging projects and their direct dependencies; prune anything else
+        color 6 "Ensuring only necessary services are enabled for staging project: ${PROJECT}"
+        ensure_only_services "${PROJECT}" "${STAGING_PROJECT_SERVICES[@]}"
 
         # Enable image promoter access to vulnerability scanning results
-        empower_service_account_for_cip_vuln_scanning \
-            "$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")" \
-            "${PROJECT}"
+        serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")"
+        color 6 "Empowering ${serviceaccount} to view vulnernability scanning results for project: ${PROJECT}"
+        ensure_project_role_binding "${PROJECT}" "serviceAccount:${serviceaccount}" "roles/containeranalysis.occurrences.viewer"
+
+        # Every project gets a GCR repo
 
         # Push an image to trigger the bucket to be created
         color 6 "Ensuring the registry exists and is readable"
@@ -185,11 +190,6 @@ for REPO; do
         empower_group_to_write_gcr "${WRITERS}" "${PROJECT}"
 
         # Every project gets some GCS buckets
-
-        # Enable GCS APIs
-        color 6 "Enabling the GCS API"
-        enable_api "${PROJECT}" storage-component.googleapis.com
-
         for BUCKET in "${ALL_BUCKETS[@]}"; do
           color 3 "Configuring bucket: ${BUCKET}"
 
@@ -212,19 +212,8 @@ for REPO; do
           ) 2>&1 | indent
         done
 
-        # Enable KMS APIs
-        color 6 "Enabling the KMS API"
-        enable_api "${PROJECT}" cloudkms.googleapis.com
-
-        # Enable Secret Manager APIs
-        color 6 "Enabling the Secret Manager API"
-        enable_api "${PROJECT}" secretmanager.googleapis.com
 
         # Enable GCB and Prow to build and push images.
-
-        # Enable GCB APIs
-        color 6 "Enabling the GCB API"
-        enable_api "${PROJECT}" cloudbuild.googleapis.com
 
         # Let sub-project writers use GCB.
         color 6 "Empowering ${WRITERS} as GCB editors"
@@ -248,7 +237,7 @@ for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
         # Enable Release Manager Associates view access to
         # Release Engineering projects
         color 6 "Empowering ${RELEASE_VIEWERS} as project viewers in ${PROJECT}"
-        empower_group_as_viewer "${PROJECT}" "${RELEASE_VIEWERS}"
+        ensure_project_role_binding "${PROJECT}" "group:${RELEASE_VIEWERS}" "roles/viewer"
 
         # Grant the kubernete-release-test (old staging) GCB service account
         # admin GCR access to the new staging project for Kubernetes releases.
@@ -276,34 +265,48 @@ color 6 "Configuring special case for k8s-staging-ci-images"
     empower_svcacct_to_write_gcr "${SERVICE_ACCOUNT}" "${PROJECT}"
 )
 
-# Special case: In order for pull-release-image-* to run on k8s-infra-prow-build,
-#               it needs write access to gcr.io/k8s-staging-releng-test. For now,
+# Create a gcb-builder-{staging} GCP service account in project k8s-staging-{staging}
+# that can trigger GCB within that project. Allow GKE clusters in {prow_project}
+# to use this when running as a kubernetes service account of the same name in
+# the "test-pods" namespace
+# $1: The staging name (e.g. kubetest2)
+# $2: The prow project name (e.g. k8s-infra-prow-build)
+function ensure_staging_gcb_builder_service_account() {
+    if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_staging_gcb_builder_service_account(staging, prow_project) requires 2 arguments" >&2
+        return 1
+    fi
 
+    local staging="$1"
+    local prow_project="$2"
+    local prow_job_namespace="test-pods"
+    local project="k8s-staging-${staging}"
+    local sa_name="gcb-builder-${staging}"
+    local sa_email="${sa_name}@${project}.iam.gserviceaccount.com"
+
+    ensure_service_account \
+      "${project}" \
+      "${sa_name}" \
+      "used by k8s-infra-prow-build to trigger GCB, write to GCR for ${project}"
+
+    empower_svcacct_to_write_gcr "${sa_email}" "${project}"
+
+    ensure_project_role_binding \
+      "${project}" \
+      "serviceAccount:${sa_email}" \
+      "roles/cloudbuild.builds.builder"
+
+    empower_ksa_to_svcacct \
+        "${prow_project}.svc.id.goog[${prow_job_namespace}/${sa_name}]" \
+        "${project}" \
+        "${sa_email}"
+}
+
+# Special case: In order for pull-release-image-* to run on k8s-infra-prow-build,
+#               it needs write access to gcr.io/k8s-staging-releng-test. We are
+#               wary of what untrusted code is allowed to do, so we don't allow
+#               presubmits to run on k8s-infra-prow-build-trusted.
 color 6 "Configuring special case for k8s-staging-releng-test"
 (
-    STAGING="releng-test"
-    PROJECT="k8s-staging-${STAGING}"
-    SERVICE_ACCOUNT_NAME="gcb-builder-${STAGING}"
-    SERVICE_ACCOUNT_EMAIL=$(svc_acct_email "${PROJECT}" "${SERVICE_ACCOUNT_NAME}")
-
-    color 6 "Ensuring ${SERVICE_ACCOUNT_EMAIL} serviceaccount exists"
-    ensure_service_account \
-      "${PROJECT}" \
-      "${SERVICE_ACCOUNT_NAME}" \
-      "used by k8s-infra-prow-build to trigger GCB, write to GCR for ${PROJECT}"
-
-    color 6 "Empowering ${SERVICE_ACCOUNT_EMAIL} to write to GCR for ${PROJECT}"
-    empower_svcacct_to_write_gcr "${SERVICE_ACCOUNT_EMAIL}" "${PROJECT}"
-
-    color 6 "Empowering ${SERVICE_ACCOUNT_EMAIL} to trigger GCB for ${PROJECT}"
-    gcloud \
-      projects add-iam-policy-binding "${PROJECT}" \
-      --member "serviceAccount:${SERVICE_ACCOUNT_EMAIL}" \
-      --role roles/cloudbuild.builds.builder
-
-    color 6 "Empowering ${SERVICE_ACCOUNT_EMAIL} to be used by k8s-infra-prow-build cluster"
-    empower_ksa_to_svcacct \
-        "k8s-infra-prow-build.svc.id.goog[test-pods/${SERVICE_ACCOUNT_NAME}]" \
-        "${PROJECT}" \
-        "${SERVICE_ACCOUNT_EMAIL}"
+    ensure_staging_gcb_builder_service_account "releng-test" "k8s-infra-prow-build"
 )
