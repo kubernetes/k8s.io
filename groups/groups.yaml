@@ -175,6 +175,18 @@ groups:
       - nikitaraghunath@gmail.com
       - killen.bob@gmail.com
 
+  - email-id: k8s-infra-ci-robot@kubernetes.io
+    name: k8s-infra-ci-robot
+    description: |-
+      Github admins for github account k8s-infra-ci-robot
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    managers:
+      - ameukam@gmail.com
+      - spiffxp@gmail.com
+      - spiffxp@google.com
+
   # Every RBAC group should be added here.
   - email-id: gke-security-groups@kubernetes.io
     name: gke-security-groups
