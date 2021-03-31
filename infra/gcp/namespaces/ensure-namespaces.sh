@@ -144,6 +144,7 @@ parse_args "$@";
 
 ALL_PROJECTS=(
     gcsweb
+    kettle
     k8s-io-prod
     k8s-io-canary
     node-perf-dash
