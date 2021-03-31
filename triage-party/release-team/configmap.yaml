@@ -65,10 +65,8 @@ data:
         description: >
           Dashboard tracking the current status of all issues and PRs for the release engineering.
         rules:
-          - sig-release
-          - release-engineering
-          - urgent-issues
-          - urgent-prs
+          - release-engineering-issues
+          - release-engineering-prs
 
       - id: ci-signal
         name: CI Signal
@@ -435,13 +433,23 @@ data:
         filters:
           - label: area/release-team
 
-      release-engineering:
-        name: "area/release-eng"
+      release-engineering-issues:
+        name: "release-eng-issues"
         type: issue
         repos:
           - "https://github.com/kubernetes/release"
         filters:
           - label: area/release-eng
+          - label: sig/release
+
+      release-engineering-prs:
+        name: "release-eng-prs"
+        type: pull_request
+        repos:
+          - "https://github.com/kubernetes/release"
+        filters:
+          - label: area/release-eng
+          - label: sig/release
 
       sig-release:
         name: "sig/release"
