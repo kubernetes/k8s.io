@@ -21,9 +21,6 @@
 #
 # This MUST NOT be used directly. Source it via lib.sh instead.
 
-readonly tmp_dir=$(mktemp -d "/tmp/k8sinfra-lib_iam.XXXXX")
-trap 'rm -rf "${tmp_dir}"' EXIT
-
 # Ensure that custom IAM role exists in organization and in sync with definition in file
 # Arguments:
 #   $1:  The role name (e.g. "foo.barrer")
@@ -106,7 +103,7 @@ function custom_org_role_name() {
     echo "organizations/${GCP_ORG}/roles/${name}"
 }
 
-# Return the full name of a custom IAM role defined at the org level
+# Return the full name of a custom IAM role defined at the project level
 # Arguments:
 #   $1:  The is of the project (e.g. "k8s-infra-foo")
 #   $2:  The role name (e.g. "foo.barrer")
@@ -159,6 +156,42 @@ function ensure_project_role_binding() {
     _ensure_resource_role_binding "projects" "${project}" "${principal}" "${role}"
 }
 
+# Ensure that IAM binding is present for project
+# Arguments:
+#   $1:  The fully qualified secret id (e.g. "projects/k8s-infra-foo/secrets/my-secret-id")
+#   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
+#   $3:  The role name (e.g. "roles/storage.objectAdmin")
+function ensure_secret_role_binding() {
+    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "ensure_secret_role_binding(secret, principal, role) requires 3 arguments" >&2
+        return 1
+    fi
+
+    local secret="${1}"
+    local principal="${2}"
+    local role="${3}"
+
+    _ensure_resource_role_binding "secrets" "${secret}" "${principal}" "${role}"
+}
+
+# Ensure that IAM binding is present for service-account
+# Arguments:
+#   $1:  The serviceaccount email (e.g. "my-serviceaccount@k8s-infra-foo.iam.gserviceaccount.com")
+#   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
+#   $3:  The role name (e.g. "roles/storage.objectAdmin")
+function ensure_serviceaccount_role_binding() {
+    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "ensure_project_role_binding(serviceaccount, principal, role) requires 3 arguments" >&2
+        return 1
+    fi
+
+    local serviceaccount="${1}"
+    local principal="${2}"
+    local role="${3}"
+
+    _ensure_resource_role_binding "iam service-accounts" "${serviceaccount}" "${principal}" "${role}"
+}
+
 # Ensure that IAM binding has been removed from organization
 # Arguments:
 #   $1:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
@@ -194,6 +227,42 @@ function ensure_removed_project_role_binding() {
     _ensure_removed_resource_role_binding "projects" "${project}" "${principal}" "${role}"
 }
 
+# Ensure that IAM binding has been removed from secret
+# Arguments:
+#   $1:  The fully qualified secret id (e.g. "projects/k8s-infra-foo/secrets/my-secret-id")
+#   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
+#   $3:  The role name (e.g. "roles/storage.objectAdmin")
+function ensure_removed_secret_role_binding() {
+    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "ensure_removed_secret_role_binding(secret, principal, role) requires 3 arguments" >&2
+        return 1
+    fi
+
+    local secret="${1}"
+    local principal="${2}"
+    local role="${3}"
+
+    _ensure_removed_resource_role_binding "secrets" "${secret}" "${principal}" "${role}"
+}
+
+# Ensure that IAM binding has been removed from service-account
+# Arguments:
+#   $1:  The serviceaccount id (e.g. "my-serviceaccount@k8s-infra-foo.iam.gserviceaccount.com")
+#   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
+#   $3:  The role name (e.g. "roles/storage.objectAdmin")
+function ensure_removed_serviceaccount_role_binding() {
+    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "ensure_removed_serviceaccount_role_binding(serviceaccount, principal, role) requires 3 arguments" >&2
+        return 1
+    fi
+
+    local serviceaccount="${1}"
+    local principal="${2}"
+    local role="${3}"
+
+    _ensure_removed_resource_role_binding "iam service-accounts" "${serviceaccount}" "${principal}" "${role}"
+}
+
 # Ensure that custom IAM role exists in scope and in sync with definition in file
 # Arguments:
 #   $1:  The scope of the role (e.g. "organization", "project")
@@ -213,12 +282,18 @@ function _ensure_custom_iam_role_from_file() {
     case "${scope}" in
       organization | project ) ;;
       * )
-        echo "_ensure_custom_iam_role_from_file(scope, id, name, file) scope must 'organization' or 'project'" >&2
+        echo "_ensure_custom_iam_role_from_file(scope, id, name, file) scope must be 'organization' or 'project'" >&2
         return 1
         ;;
     esac
 
     local scope_flag="--${scope} ${id}"
+
+    local tmp_dir
+    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
+    # shellcheck disable=SC2064
+    trap "rm -rf ${tmp_dir}" EXIT
 
     local before="${tmp_dir}/custom-role.before.yaml"
     local ready="${tmp_dir}/custom-role.ready.yaml"
@@ -226,7 +301,7 @@ function _ensure_custom_iam_role_from_file() {
 
     # detect if we should create or update and dump role; silently ignore error
     verb="update"
-    if ! (gcloud iam roles describe ${scope_flag} "${name}" | yq -Y 'del(.etag)' >"${before}") >/dev/null 2>&1; then
+    if ! (gcloud iam roles describe ${scope_flag} "${name}" | yq -y 'del(.etag)' >"${before}") >/dev/null 2>&1; then
         verb="create"
     fi
 
@@ -239,7 +314,7 @@ function _ensure_custom_iam_role_from_file() {
     # name is foo.bar, but gcloud wants scopes/id/role/foo.bar in the file
     local full_name="${scope}s/${id}/roles/${name}"
     <"${file}" sed -e "s|^name: ${name}|name: ${full_name}|" >"${ready}"
-    gcloud iam roles "${verb}" ${scope_flag} "${name}" --file "${ready}" | yq -Y 'del(.etag)' > "${after}"
+    gcloud iam roles "${verb}" ${scope_flag} "${name}" --file "${ready}" | yq -y 'del(.etag)' > "${after}"
 
     diff_colorized "${before}" "${after}"
 }
@@ -268,6 +343,12 @@ function _ensure_removed_custom_iam_role() {
 
     local scope_flag="--${scope} ${id}"
 
+    local tmp_dir
+    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
+    # shellcheck disable=SC2064
+    trap "rm -rf ${tmp_dir}" EXIT
+
     local before="${tmp_dir}/iam-bind.before.txt"
 
     # gcloud iam roles delete errors if role doesn't exist, so confirm it does
@@ -280,7 +361,10 @@ function _ensure_removed_custom_iam_role() {
         # already deleted, nothing to do
         return
     fi
-    gcloud iam roles delete ${scope_flag} "${name}"
+
+    gcloud iam roles delete ${scope_flag} "${name}" > "${after}"
+
+    diff_colorized "${before}" "${after}"
 }
 
 # Format gcloud $resource get-iam-policy output to produce list of:
@@ -291,8 +375,8 @@ function _ensure_removed_custom_iam_role() {
 function _format_iam_policy() {
   # shellcheck disable=SC2016
   # $r is a jq variable, not a bash expression
-  yq -Y '.bindings 
-    | map(.role as $r | .members | map({member: ., role: $r})) 
+  yq -y '.bindings
+    | map(.role as $r | .members | map({member: ., role: $r}))
     | flatten | sort_by(.member)'
 }
 
@@ -313,19 +397,29 @@ function _ensure_resource_role_binding() {
     local principal="${3}"
     local role="${4}"
 
+    local tmp_dir
+    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
+    # shellcheck disable=SC2064
+    trap "rm -rf ${tmp_dir}" EXIT
+
     local before="${tmp_dir}/iam-bind.before.yaml"
     local after="${tmp_dir}/iam-bind.after.yaml"
 
-    gcloud "${resource}" get-iam-policy "${id}" | _format_iam_policy >"${before}"
+    # intentionally word-split resource, e.g. iam service-accounts
+    # shellcheck disable=SC2086
+    gcloud ${resource} get-iam-policy "${id}" | _format_iam_policy >"${before}"
 
-    # `gcloud add-iam-policy-binding` is idempotent, 
+    # `gcloud add-iam-policy-binding` is idempotent,
     # but avoid calling if we can, to reduce output noise
     if ! <"${before}" yq --exit-status \
         ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
         >/dev/null; then
 
+        # intentionally word-split resource, e.g. iam service-accounts
+        # shellcheck disable=SC2086
         gcloud \
-            "${resource}" add-iam-policy-binding "${id}" \
+            ${resource} add-iam-policy-binding "${id}" \
             --member "${principal}" \
             --role "${role}" \
         | _format_iam_policy >"${after}"
@@ -351,10 +445,18 @@ function _ensure_removed_resource_role_binding() {
     local principal="${3}"
     local role="${4}"
 
+    local tmp_dir
+    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
+    # shellcheck disable=SC2064
+    trap "rm -rf ${tmp_dir}" EXIT
+
     local before="${tmp_dir}/iam-bind.before.txt"
     local after="${tmp_dir}/iam-bind.after.txt"
 
-    gcloud "${resource}" get-iam-policy "${id}" | _format_iam_policy >"${before}"
+    # intentionally word-split resource, e.g. iam service-accounts
+    # shellcheck disable=SC2086
+    gcloud ${resource} get-iam-policy "${id}" | _format_iam_policy >"${before}"
 
     # `gcloud remove-iam-policy-binding` errors if binding doesn't exist,
     #  so avoid calling if we can, to reduce output noise
@@ -362,8 +464,10 @@ function _ensure_removed_resource_role_binding() {
       ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
         >/dev/null; then
 
+        # intentionally word-split resource, e.g. iam service-accounts
+        # shellcheck disable=SC2086
         gcloud \
-            "${resource}" remove-iam-policy-binding "${id}" \
+            ${resource} remove-iam-policy-binding "${id}" \
             --member "${principal}" \
             --role "${role}" \
         | _format_iam_policy >"${after}"
