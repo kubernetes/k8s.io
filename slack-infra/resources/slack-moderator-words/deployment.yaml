@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: slack-moderator-words
-        image: gcr.io/k8s-staging-slack-infra/slack-moderator-words:v20210331-8e74e50
+        image: gcr.io/k8s-staging-slack-infra/slack-moderator-words:v20210331-aa10965
         args:
           - --config-path=/etc/slack-moderator-words/config.json
           - --filter-config-path=/etc/filters/filters.yaml
