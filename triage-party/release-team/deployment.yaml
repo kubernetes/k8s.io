@@ -6,6 +6,7 @@ metadata:
   labels:
     app: triage-party
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: triage-party
