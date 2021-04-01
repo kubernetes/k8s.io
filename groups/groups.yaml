@@ -186,6 +186,7 @@ groups:
     members:
       - k8s-infra-rbac-cert-manager@kubernetes.io
       - k8s-infra-rbac-gcsweb@kubernetes.io
+      - k8s-infra-rbac-kettle@kubernetes.io
       - k8s-infra-rbac-k8s-io-canary@kubernetes.io
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
       - k8s-infra-rbac-perfdash@kubernetes.io
@@ -373,6 +374,16 @@ groups:
     members:
       - thockin@google.com
       - spiffxp@gmail.com
+
+  - email-id: k8s-infra-rbac-kettle@kubernetes.io
+    name: k8s-infra-rbac-kettle
+    description: |
+      Grants access to the `namespace-user` role in the `kettle` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - k8s-infra-prow-oncall@kubernetes.io
 
   - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
     name: k8s-infra-rbac-k8s-io-canary
