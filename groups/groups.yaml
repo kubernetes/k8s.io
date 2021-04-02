@@ -202,6 +202,7 @@ groups:
       - k8s-infra-rbac-kettle@kubernetes.io
       - k8s-infra-rbac-k8s-io-canary@kubernetes.io
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
+      - k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
       - k8s-infra-rbac-perfdash@kubernetes.io
       - k8s-infra-rbac-prow@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io

@@ -180,6 +180,24 @@ ensure_project_role_binding \
     "serviceAccount:${MONITORING_SVCACCT_NAME}" \
     "roles/monitoring.viewer"
 
+# Kubernetes External Secrets
+color 6 -n "Ensure the kubernetes-external-secrets serviceaccount exists"
+ensure_service_account \
+    "${PROJECT}" \
+    "kubernetes-external-secrets" \
+    "Kubernetes External Secrets Service Account"
+
+color 6 -n "Empowering kubernetes-external-secrets serviceaccount to be used on aaa cluster"
+empower_ksa_to_svcacct \
+    "kubernetes-public.svc.id.goog[kubernetes-external-secrets/kubernetes-external-secrets]" \
+    "${PROJECT}" \
+    "$(svc_acct_email "${PROJECT}" "kubernetes-external-secrets")"
+
+color 6 "Empowering service account kubernetes-external-services to access payloads of the secrets"
+ensure_project_role_binding "${PROJECT}" \
+    "serviceAccount:$(svc_acct_email "${PROJECT}" "kubernetes-external-secrets")" \
+    roles/secretmanager.secretAccessor
+
 # Bootstrap DNS zones
 ensure_dns_zone "${PROJECT}" "k8s-io" "k8s.io"
 ensure_dns_zone "${PROJECT}" "kubernetes-io" "kubernetes.io"
