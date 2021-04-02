@@ -181,6 +181,7 @@ groups:
       Github admins for github account k8s-infra-ci-robot
     settings:
       ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     managers:
       - ameukam@gmail.com
