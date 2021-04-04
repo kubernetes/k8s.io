@@ -1397,6 +1397,7 @@ groups:
     members:
       - aledbf@gmail.com
       - bowei@google.com
+      - ricardo.katz@gmail.com
       - thockin@google.com
 
   - email-id: k8s-infra-staging-ingressconformance@kubernetes.io
