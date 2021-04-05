@@ -8,12 +8,6 @@
     },
     {
       "members": [
-        "group:k8s-infra-rbac-slack-infra@kubernetes.io"
-      ],
-      "role": "organizations/758905017065/roles/secretmanager.secretLister"
-    },
-    {
-      "members": [
         "group:k8s-infra-bigquery-admins@kubernetes.io"
       ],
       "role": "roles/bigquery.admin"

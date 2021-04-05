@@ -1,6 +1,5 @@
 NAME                              TITLE
 bigquery.googleapis.com           BigQuery API
-bigquery.googleapis.com           BigQuery API
 bigquerystorage.googleapis.com    BigQuery Storage API
 cloudapis.googleapis.com          Google Cloud APIs
 cloudbuild.googleapis.com         Cloud Build API
