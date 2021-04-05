@@ -78,8 +78,7 @@ function ensure_gcr_repo() {
             container images delete --quiet "${dest}:latest"
     fi
 
-    gsutil iam ch allUsers:objectViewer "${bucket}"
-    gsutil bucketpolicyonly set on "${bucket}"
+    ensure_public_gcs_bucket "${project}" "${bucket}"
 }
 
 # Grant write privileges on a GCR to a group
