@@ -25,7 +25,7 @@ script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 repo_root=$(cd "${script_dir}/../.." && pwd)
 
 function _color() {
-    tput setf "$1" || true
+    tput setaf "$1" || true
 }
 
 function _nocolor() {
