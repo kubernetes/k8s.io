@@ -982,6 +982,9 @@ groups:
       Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
     settings:
       ReconcileMembers: "true"
+      # TODO(spiffxp): trying to see if "in domain" means members of groups
+      #                in this domain
+      WhoCanPostMessage: "ALL_IN_DOMAIN_CAN_POST"
     members:
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -1091,11 +1094,15 @@ groups:
       ACL for staging KOPS
     settings:
       ReconcileMembers: "true"
+      # TODO(spiffxp): trying to see if "in domain" means members of groups
+      #                in this domain
+      WhoCanPostMessage: "ALL_IN_DOMAIN_CAN_POST"
     members:
       - davanum@gmail.com
       - ihor@cncf.io
       - justinsb@google.com
       - thockin@google.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-kubeadm@kubernetes.io
     name: k8s-infra-staging-kubeadm
