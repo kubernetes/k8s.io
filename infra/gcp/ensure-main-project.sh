@@ -61,33 +61,29 @@ color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
 # Enable APIs we know we need
-color 6 "Enabling the GCE API"
-enable_api "${PROJECT}" compute.googleapis.com
-color 6 "Enabling the StackDriver logging API"
-enable_api "${PROJECT}" logging.googleapis.com
-color 6 "Enabling the StackDriver monitoring API"
-enable_api "${PROJECT}" monitoring.googleapis.com
-color 6 "Enabling the BigQuery API"
-enable_api "${PROJECT}" bigquery-json.googleapis.com
-color 6 "Enabling the GKE API"
-enable_api "${PROJECT}" container.googleapis.com
-color 6 "Enabling the GCS API"
-enable_api "${PROJECT}" storage-component.googleapis.com
-color 6 "Enabling the OSLogin API"
-enable_api "${PROJECT}" oslogin.googleapis.com
-color 6 "Enabling the DNS API"
-enable_api "${PROJECT}" dns.googleapis.com
-color 6 "Enabling the Secret Manager API"
-enable_api "${PROJECT}" secretmanager.googleapis.com
-
+apis=(
+    bigquery-json.googleapis.com
+    compute.googleapis.com
+    container.googleapis.com
+    dns.googleapis.com
+    logging.googleapis.com
+    monitoring.googleapis.com
+    oslogin.googleapis.com
+    secretmanager.googleapis.com
+    storage-component.googleapis.com
+)
+ensure_only_services "${PROJECT}" "${apis[@]}"
 
 color 6 "Ensuring the cluster terraform-state bucket exists"
-ensure_private_gcs_bucket "${PROJECT}" "gs://${CLUSTER_TERRAFORM_BUCKET}"
+ensure_private_gcs_bucket \
+    "${PROJECT}" \
+    "gs://${CLUSTER_TERRAFORM_BUCKET}"
 
 color 6 "Empowering BigQuery admins"
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "group:${BQ_ADMINS_GROUP}" \
-    --role roles/bigquery.admin
+ensure_project_role_binding \
+    "${PROJECT}" \
+    "group:${BQ_ADMINS_GROUP}" \
+    "roles/bigquery.admin"
 
 color 6 "Empowering cluster admins"
 # TODO: this can also be a custom role
@@ -102,24 +98,29 @@ for role in "${cluster_admin_roles[@]}"; do
 done
 # TODO(spiffxp): remove when bindings for custom project role are gone
 ensure_removed_project_role_binding "${PROJECT}" "group:${CLUSTER_ADMINS_GROUP}" "$(custom_project_role_name "${PROJECT}" ServiceAccountLister)"
-ensure_removed_project_role "${PROJECT}" "ServiceAccountLister"
+ensure_removed_custom_project_iam_role "${PROJECT}" "ServiceAccountLister"
 
-gsutil iam ch \
-    "group:${CLUSTER_ADMINS_GROUP}:objectAdmin" \
-    "gs://${CLUSTER_TERRAFORM_BUCKET}"
-gsutil iam ch \
-    "group:${CLUSTER_ADMINS_GROUP}:legacyBucketOwner" \
-    "gs://${CLUSTER_TERRAFORM_BUCKET}"
+color 6 "Empowering cluster admins to own gs://${CLUSTER_TERRAFORM_BUCKET}"
+ensure_gcs_role_binding \
+    "gs://${CLUSTER_TERRAFORM_BUCKET}" \
+    "group:${CLUSTER_ADMINS_GROUP}" \
+    "objectAdmin"
+ensure_gcs_role_binding \
+    "gs://${CLUSTER_TERRAFORM_BUCKET}" \
+    "group:${CLUSTER_ADMINS_GROUP}" \
+    "legacyBucketOwner"
 
 color 6 "Empowering cluster users"
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "group:${CLUSTER_USERS_GROUP}" \
-    --role "roles/container.clusterViewer"
+ensure_project_role_binding \
+    "${PROJECT}" \
+    "group:${CLUSTER_USERS_GROUP}" \
+    "roles/container.clusterViewer"
 
 color 6 "Empowering GCP accounting"
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "group:${ACCOUNTING_GROUP}" \
-    --role roles/bigquery.jobUser
+ensure_project_role_binding \
+  "${PROJECT}" \
+  "group:${ACCOUNTING_GROUP}" \
+  "roles/bigquery.jobUser"
 
 color 6 "Ensuring the k8s-infra-gcp-auditor serviceaccount exists"
 ensure_service_account \
@@ -144,17 +145,18 @@ ensure_service_account \
     "k8s-infra-dns-updater" \
     "k8s-infra dns updater"
 
-color 6 -n "Empowering k8s-infra-dns-updater serviceaccount to be used on"
-color 6 " build cluster"
+color 6 "Empowering k8s-infra-dns-updater serviceaccount to be used on build cluster"
 empower_ksa_to_svcacct \
     "k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-infra-dns-updater]" \
     "${PROJECT}" \
     "$(svc_acct_email "${PROJECT}" "k8s-infra-dns-updater")"
 
 color 6 "Empowering ${DNS_GROUP}"
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "group:${DNS_GROUP}" \
-    --role roles/dns.admin
+color 6 "Empowering BigQuery admins"
+ensure_project_role_binding \
+    "${PROJECT}" \
+    "group:${DNS_GROUP}" \
+    "roles/dns.admin"
 
 # Monitoring
 MONITORING_SVCACCT_NAME="$(svc_acct_email "${PROJECT}" \
@@ -166,17 +168,17 @@ ensure_service_account \
     "k8s-infra-monitoring-viewer" \
     "k8s-infra monitoring viewer"
 
-color 6 -n "Empowering k8s-infra-monitoring-viewer serviceaccount to be used on"
-color 6 " the 'aaa' cluster inside the 'monitoring' namespace"
+color 6 "Empowering k8s-infra-monitoring-viewer serviceaccount to be used on the 'aaa' cluster inside the 'monitoring' namespace"
 empower_ksa_to_svcacct \
     "kubernetes-public.svc.id.goog[monitoring/k8s-infra-monitoring-viewer]" \
     "${PROJECT}" \
     "${MONITORING_SVCACCT_NAME}"
 
 color 6 "Empowering service account ${MONITORING_SVCACCT_NAME}"
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "serviceAccount:${MONITORING_SVCACCT_NAME}" \
-    --role roles/monitoring.viewer
+ensure_project_role_binding \
+    "${PROJECT}" \
+    "serviceAccount:${MONITORING_SVCACCT_NAME}" \
+    "roles/monitoring.viewer"
 
 # Bootstrap DNS zones
 ensure_dns_zone "${PROJECT}" "k8s-io" "k8s.io"
@@ -200,10 +202,10 @@ color 6 "Setting BigQuery permissions"
 #   * The full list is large and has stuff that is inherited listed in it
 #   * All of our other IAM binding logic calls are additive
 
-CUR=$(mktemp -p /tmp k8s-infra-bq-access-cur-XXXXXX)
+CUR=${TMPDIR}/k8s-infra-bq-access.before.json
 bq show --format=prettyjson "${PROJECT}":"${BQ_BILLING_DATASET}"  > "${CUR}"
 
-ENSURE=$(mktemp -p /tmp k8s-infra-bq-access-new-XXXXXX)
+ENSURE=${TMPDIR}/k8s-infra-bq-access.ensure.json
 cat > "${ENSURE}" << __EOF__
 {
   "access": [
@@ -223,7 +225,7 @@ cat > "${ENSURE}" << __EOF__
 }
 __EOF__
 
-FINAL=$(mktemp -p /tmp k8s-infra-bq-access-new-XXXXXX)
+FINAL=${TMPDIR}/k8s-infra-bq-access.final.json
 jq -s '.[0].access + .[1].access | { access: . }' "${CUR}" "${ENSURE}" > "${FINAL}"
 
 bq update --source "${FINAL}" "${PROJECT}":"${BQ_BILLING_DATASET}"
