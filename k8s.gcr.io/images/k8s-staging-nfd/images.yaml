@@ -5,6 +5,8 @@
     sha256:5d116c2c340be665a2c8adc9aca7f91396bd5cbde4add4fdc8dab95d8db43425: [v0.7.0]
     sha256:8fe7c0b200dab7687aca9d75fce8feb0dcac7c4520cf6b6b9eb5082e51719601: [v0.8.0]
     sha256:fca342989ed8c7c56e7779e0271818e3944285bcea0bccea3e1ae4ed32ebfeaa: [v0.8.0-minimal]
+    sha256:164e25ac67133c09695c9c86629f4a11ac4205dae02e1455a51a0465f4cfff01: [v0.8.1]
+    sha256:7de7f21fe3b561e87d4866e7bfb8f8f7478ead74307563216caa33da9874c3cb: [v0.8.1-minimal]
 - name: node-feature-discovery-operator
   dmap:
     sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16: [v0.2.0]
