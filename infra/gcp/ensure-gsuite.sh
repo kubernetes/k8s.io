@@ -52,15 +52,16 @@ GSUITE_GROUP_ADMINS="k8s-infra-group-admins@kubernetes.io"
 color 6 "Ensuring project exists: ${PROJECT}"
 ensure_project "${PROJECT}"
 
+GSUITE_PROJECT_SERVICES=(
+    admin.googleapis.com
+    groupssettings.googleapis.com
+    secretmanager.googleapis.com
+)
+
 # Enable GSuite APIs
-color 6 "Enabling the GSuite admin API"
-enable_api "${PROJECT}" admin.googleapis.com
+color 6 "Ensure services necessary for GSuite administration are enabled for: ${PROJECT}"
 
-color 6 "Enabling the GSuite groups API"
-enable_api "${PROJECT}" groupssettings.googleapis.com
-
-color 6 "Enabling the Secret Manager API"
-enable_api "${PROJECT}" secretmanager.googleapis.com
+ensure_only_services "${PROJECT}" "${GSUITE_PROJECT_SERVICES[@]}"
 
 # Create a service account for gsuite to grant access to.
 color 6 "Creating service account for ${GSUITE_SVCACCT}"
@@ -87,18 +88,16 @@ if ! gcloud --project="${PROJECT}" \
     color 4 "  rm tmp.json"
 else
     color 6 "Empowering ${GSUITE_GROUP_ADMINS} to access the ${GSUITE_SVCACCT}_key secret"
-    gcloud --project="${PROJECT}" \
-        secrets add-iam-policy-binding "${GSUITE_SVCACCT}_key" \
-        --member="group:${GSUITE_GROUP_ADMINS}" \
-        --role="roles/secretmanager.secretAccessor"
+    ensure_secret_role_binding \
+        "projects/${PROJECT}/secrets/${GSUITE_SVCACCT}_key" \
+        "group:${GSUITE_GROUP_ADMINS}" \
+        "roles/secretmanager.secretAccessor"
 fi
   
 # Grant project owner for now because I have no idea exactly which specific
 # permissions are needed, and the UI is really not helping.
 color 6 "Empowering ${GSUITE_USER}"
-gcloud projects add-iam-policy-binding "${PROJECT}" \
-    --member "user:${GSUITE_USER}" \
-    --role roles/owner
+ensure_project_role_binding "${PROJECT}" "user:${GSUITE_USER}" "roles/owner"
 
 color 4 -n "The service account "
 color 6 -n "${GSUITE_SVCACCT}"
