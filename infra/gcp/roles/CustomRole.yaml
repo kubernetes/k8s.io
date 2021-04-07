@@ -33,6 +33,7 @@
 #
 description: View access to billing info
 includedPermissions:
+  - billing.accounts.getPricing
   - billing.accounts.getSpendingInformation
   - billing.budgets.get
   - billing.budgets.list
@@ -41,6 +42,7 @@ includedPermissions:
   - billing.resourceCosts.get
   - billing.subscriptions.get
   - billing.subscriptions.list
+  - commerceoffercatalog.offers.get
   - resourcemanager.projects.get
   - resourcemanager.projects.list
 name: CustomRole

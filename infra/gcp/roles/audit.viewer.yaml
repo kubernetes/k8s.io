@@ -76,6 +76,7 @@ includedPermissions:
   - apigee.developerapps.list
   - apigee.developerattributes.list
   - apigee.developers.list
+  - apigee.developersubscriptions.list
   - apigee.envgroupattachments.list
   - apigee.envgroups.list
   - apigee.environments.getIamPolicy
@@ -94,6 +95,7 @@ includedPermissions:
   - apigee.proxies.list
   - apigee.proxyrevisions.list
   - apigee.queries.list
+  - apigee.rateplans.list
   - apigee.references.list
   - apigee.reports.list
   - apigee.resourcefiles.list
@@ -190,6 +192,7 @@ includedPermissions:
   - cloudkms.importJobs.list
   - cloudkms.keyRings.getIamPolicy
   - cloudkms.keyRings.list
+  - cloudkms.locations.list
   - cloudnotifications.activities.list
   - cloudprivatecatalogproducer.associations.list
   - cloudprivatecatalogproducer.catalogAssociations.list
@@ -234,6 +237,7 @@ includedPermissions:
   - cloudvolumesgcp-api.netapp.com/serviceLevels.list
   - cloudvolumesgcp-api.netapp.com/snapshots.list
   - cloudvolumesgcp-api.netapp.com/volumes.list
+  - commerceprice.privateoffers.list
   - composer.environments.list
   - composer.imageversions.list
   - composer.operations.list
@@ -508,6 +512,8 @@ includedPermissions:
   - datafusion.instances.getIamPolicy
   - datafusion.instances.list
   - datafusion.locations.list
+  - datafusion.namespaces.getIamPolicy
+  - datafusion.namespaces.list
   - datafusion.operations.list
   - datalabeling.annotateddatasets.list
   - datalabeling.annotationspecsets.list
@@ -646,6 +652,12 @@ includedPermissions:
   - genomics.datasets.getIamPolicy
   - genomics.datasets.list
   - genomics.operations.list
+  - gkemulticloud.awsClusters.list
+  - gkemulticloud.awsNodePools.list
+  - gkemulticloud.azureClients.list
+  - gkemulticloud.azureClusters.list
+  - gkemulticloud.azureNodePools.list
+  - gkemulticloud.operations.list
   - gsuiteaddons.deployments.list
   - healthcare.annotationStores.getIamPolicy
   - healthcare.annotationStores.list
@@ -705,6 +717,7 @@ includedPermissions:
   - memcache.instances.list
   - memcache.locations.list
   - memcache.operations.list
+  - metastore.backups.list
   - metastore.imports.list
   - metastore.locations.list
   - metastore.operations.list
@@ -763,6 +776,7 @@ includedPermissions:
   - notebooks.schedules.getIamPolicy
   - notebooks.schedules.list
   - ondemandscanning.operations.list
+  - opsconfigmonitoring.resourceMetadata.list
   - osconfig.guestPolicies.list
   - osconfig.patchDeployments.list
   - osconfig.patchJobs.list
