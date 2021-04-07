@@ -18,6 +18,14 @@ spec:
       containers:
         - name: triage-party
           image: triageparty/triage-party:1.4.0-beta.1
+          command:
+            - "/app/main"
+          args:
+            - --github-api-url http://ghproxy.prow.svc.cluster.local/
+            - --min-refresh=30s
+            - --max-refresh=5m
+            - --site=/app/site
+            - --3p=/app/third_party
           env:
             - name: GITHUB_TOKEN
               valueFrom:
