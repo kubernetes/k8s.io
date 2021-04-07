@@ -11,9 +11,11 @@ provider "google" {
 // Manual step: Create a StackDriver alert channel pointing to a channel in Slack
 // It will select the channel here by its display name
 data "google_monitoring_notification_channel" "alertchannel" {
-  display_name = "Kubernetes.io Cert Alert"
+  type = "slack"
+  labels = {
+    "channel_name" = "#k8s-infra-alerts"
+  }
 }
-
 
 // We can turn this into a module and then add then standardize the resource display names
 resource "google_monitoring_uptime_check_config" "uptime_check" {
