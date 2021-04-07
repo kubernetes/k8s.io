@@ -289,15 +289,9 @@ function _ensure_custom_iam_role_from_file() {
 
     local scope_flag="--${scope} ${id}"
 
-    local tmp_dir
-    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
-    # shellcheck disable=SC2064
-    trap "rm -rf ${tmp_dir}" EXIT
-
-    local before="${tmp_dir}/custom-role.before.yaml"
-    local ready="${tmp_dir}/custom-role.ready.yaml"
-    local after="${tmp_dir}/custom-role.after.yaml"
+    local before="${TMPDIR}/custom-role.before.yaml"
+    local ready="${TMPDIR}/custom-role.ready.yaml"
+    local after="${TMPDIR}/custom-role.after.yaml"
 
     # detect if we should create or update and dump role; silently ignore error
     verb="update"
@@ -343,13 +337,8 @@ function _ensure_removed_custom_iam_role() {
 
     local scope_flag="--${scope} ${id}"
 
-    local tmp_dir
-    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
-    # shellcheck disable=SC2064
-    trap "rm -rf ${tmp_dir}" EXIT
-
-    local before="${tmp_dir}/iam-bind.before.txt"
+    local before="${TMPDIR}/iam-bind.before.txt"
+    local before="${TMPDIR}/iam-bind.after.txt"
 
     # gcloud iam roles delete errors if role doesn't exist, so confirm it does
     if ! gcloud iam roles describe ${scope_flag} ${name} --format="value(deleted)" > "${before}" 2>/dev/null; then
@@ -397,14 +386,8 @@ function _ensure_resource_role_binding() {
     local principal="${3}"
     local role="${4}"
 
-    local tmp_dir
-    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
-    # shellcheck disable=SC2064
-    trap "rm -rf ${tmp_dir}" EXIT
-
-    local before="${tmp_dir}/iam-bind.before.yaml"
-    local after="${tmp_dir}/iam-bind.after.yaml"
+    local before="${TMPDIR}/iam-bind.before.yaml"
+    local after="${TMPDIR}/iam-bind.after.yaml"
 
     # intentionally word-split resource, e.g. iam service-accounts
     # shellcheck disable=SC2086
@@ -445,14 +428,8 @@ function _ensure_removed_resource_role_binding() {
     local principal="${3}"
     local role="${4}"
 
-    local tmp_dir
-    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
-    # shellcheck disable=SC2064
-    trap "rm -rf ${tmp_dir}" EXIT
-
-    local before="${tmp_dir}/iam-bind.before.txt"
-    local after="${tmp_dir}/iam-bind.after.txt"
+    local before="${TMPDIR}/iam-bind.before.txt"
+    local after="${TMPDIR}/iam-bind.after.txt"
 
     # intentionally word-split resource, e.g. iam service-accounts
     # shellcheck disable=SC2086

@@ -123,15 +123,9 @@ function ensure_gcs_bucket_auto_deletion() {
     local bucket="$1"
     local auto_deletion_days="$2"
 
-    local tmp_dir
-    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
-    # shellcheck disable=SC2064
-    trap "rm -rf ${tmp_dir}" EXIT
-
-    local intent="${tmp_dir}/gcs-lifecycle.intent.yaml"
-    local before="${tmp_dir}/gcs-lifecycle.before.yaml"
-    local after="${tmp_dir}/gcs-lifecycle.after.yaml"
+    local intent="${TMPDIR}/gcs-lifecycle.intent.yaml"
+    local before="${TMPDIR}/gcs-lifecycle.before.yaml"
+    local after="${TMPDIR}/gcs-lifecycle.after.yaml"
 
     echo "{\"rule\": [{\"action\": {\"type\": \"Delete\"}, \"condition\": {\"age\": ${auto_deletion_days}}}]}" > "${intent}"
     gsutil lifecycle get "${bucket}"> "${before}"
@@ -187,14 +181,8 @@ ensure_gcs_role_binding() {
     local principal="${2}"
     local role="${3}"
 
-    local tmp_dir
-    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
-    # shellcheck disable=SC2064
-    trap "rm -rf ${tmp_dir}" EXIT
-
-    local before="${tmp_dir}/gcs-bind.before.yaml"
-    local after="${tmp_dir}/gcs-bind.after.yaml"
+    local before="${TMPDIR}/gcs-bind.before.yaml"
+    local after="${TMPDIR}/gcs-bind.after.yaml"
 
     gsutil iam get "${bucket}" | yq -y | _format_iam_policy > "${before}"
 
@@ -225,14 +213,8 @@ ensure_removed_gcs_role_binding() {
     local principal="${2}"
     local role="${3}"
 
-    local tmp_dir
-    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
-    # shellcheck disable=SC2064
-    trap "rm -rf ${tmp_dir}" EXIT
-
-    local before="${tmp_dir}/gcs-bind.before.yaml"
-    local after="${tmp_dir}/gcs-bind.after.yaml"
+    local before="${TMPDIR}/gcs-bind.before.yaml"
+    local after="${TMPDIR}/gcs-bind.after.yaml"
 
     gsutil iam get "${bucket}" | yq -y | _format_iam_policy > "${before}"
 

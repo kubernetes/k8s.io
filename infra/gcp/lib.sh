@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+readonly TMPDIR=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+trap 'rm -rf "${TMPDIR}"' EXIT
+
 # This is a library of functions used to create GCP stuff.
 
 . "$(dirname "${BASH_SOURCE[0]}")/lib_util.sh"
@@ -603,15 +606,9 @@ function ensure_only_services() {
 
     local gcp_project="$1"; shift
 
-    local tmp_dir
-    tmp_dir=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-    # tmp_dir is local but trap is global, so expand now to avoid unbound variable on exit
-    # shellcheck disable=SC2064
-    trap "rm -rf ${tmp_dir}" EXIT
-
-    local before="${tmp_dir}/ensure-only-services.before.yaml"
-    local after_enable="${tmp_dir}/ensure-only-services.after_enable.yaml"
-    local after_disable="${tmp_dir}/ensure-only-services.after_disable.yaml"
+    local before="${TMPDIR}/ensure-only-services.before.yaml"
+    local after_enable="${TMPDIR}/ensure-only-services.after_enable.yaml"
+    local after_disable="${TMPDIR}/ensure-only-services.after_disable.yaml"
 
     # get services before modifying to diff against when finished
     _plan_enabled_services "${gcp_project}" "$@" > "${before}"
