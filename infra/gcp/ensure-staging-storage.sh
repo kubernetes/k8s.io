@@ -63,7 +63,6 @@ readonly STAGING_PROJECTS=(
     cluster-api-gcp
     coredns
     cpa
-    cri-o
     cri-tools
     csi
     csi-secrets-store
