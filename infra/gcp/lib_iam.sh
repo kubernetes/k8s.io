@@ -364,7 +364,7 @@ function _ensure_removed_custom_iam_role() {
 function _format_iam_policy() {
   # shellcheck disable=SC2016
   # $r is a jq variable, not a bash expression
-  yq -y '.bindings
+  yq -y '(.bindings // [])
     | map(.role as $r | .members | map({member: ., role: $r}))
     | flatten | sort_by(.member)'
 }
