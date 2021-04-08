@@ -1,0 +1,15 @@
+groups:
+  - email-id: sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-alerts
+    description: |-
+
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - detiber@gmail.com
+      - jdetiberus@equinix.com
+      - jeewan@vmware.com
+      - sbueringer@gmail.com
+    members:
+      - naadir@randomvariable.co.uk
