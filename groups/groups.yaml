@@ -1465,3 +1465,14 @@ groups:
       - natashasarkar@google.com
       - extaeger@google.com
       - samwronski@google.com
+
+  - email-id: k8s-infra-staging-cri-o@kubernetes.io
+    name: k8s-infra-staging-cri-o
+    description: |-
+      ACL for staging CRI-O artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mpatel@redhat.com
+      - pehunt@redhat.com
+      - saschagrunert@gmail.com

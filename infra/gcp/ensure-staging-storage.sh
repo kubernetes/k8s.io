@@ -64,6 +64,7 @@ STAGING_PROJECTS=(
     ci-images
     coredns
     cpa
+    cri-o
     cri-tools
     csi
     csi-secrets-store
