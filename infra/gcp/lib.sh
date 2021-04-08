@@ -15,7 +15,15 @@
 # limitations under the License.
 
 readonly TMPDIR=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-trap 'rm -rf "${TMPDIR}"' EXIT
+function cleanup_tmpdir() {
+  if [ "${K8S_INFRA_DEBUG:-"false"}" == "true" ]; then
+    echo "K8S_INFRA_DEBUG mode, not removing tmpdir: ${TMPDIR}"
+    ls -l "${TMPDIR}"
+  else
+    rm -rf "${TMPDIR}"
+  fi
+}
+trap 'cleanup_tmpdir' EXIT
 
 # This is a library of functions used to create GCP stuff.
 
