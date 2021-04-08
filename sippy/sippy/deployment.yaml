@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sippy
+  name: sippy
+  namespace: sippy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sippy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sippy
+    spec:
+      containers:
+        - image: quay.io/bparees/sippy:unstable
+          imagePullPolicy: Always
+          name: sippy
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: 1500M
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          command:
+            - /tmp/src/sippy
+          args:
+            - --server
+            - --end-day
+            - "7"
+            - --local-data
+            - /data
+            - --dashboard
+            - kube-master=sig-release-master-blocking,sig-release-master-informing=
+            - --variant=kube
+          volumeMounts:
+            - mountPath: /data
+              name: data
+        - image: quay.io/bparees/sippy:unstable
+          imagePullPolicy: Always
+          name: fetchdata
+          resources:
+            limits:
+              memory: 500M
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          # This runs in a loop to collect data every hour or so.  We run it in the same pod so that both containers can mount
+          # and we don't need r/w many.
+          command:
+            - /tmp/src/scripts/fetchdata-kube.sh
+          volumeMounts:
+            - mountPath: /data
+              name: data
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: sippy

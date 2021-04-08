@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: sippy
+  namespace: sippy
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "sippy-ingress-prod"
+  labels:
+    app: sippy
+spec:
+  defaultBackend:
+    service:
+      name: sippy
+      port:
+        number: 8080
+  tls:
+  - secretName : sippy-k8s-io-tls
