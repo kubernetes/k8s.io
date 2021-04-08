@@ -443,29 +443,6 @@ function empower_artifact_auditor_invoker() {
         --region=us-central1
 }
 
-# Create a service account
-# $1: The GCP project
-# $2: The account name (e.g. "foo-manager")
-# $3: The account display-name (e.g. "Manages all foo")
-function ensure_service_account() {
-    if [ $# != 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
-        echo "ensure_service_account(project, name, display_name) requires 3 arguments" >&2
-        return 1
-    fi
-    local project="$1"
-    local name="$2"
-    local display_name="$3"
-
-    local acct=$(svc_acct_email "${project}" "${name}")
-
-    if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
-        gcloud --project "${project}" \
-            iam service-accounts create \
-            "${name}" \
-            --display-name="${display_name}"
-    fi
-}
-
 # Ensure that DNS managed zone exists, creating one if need.
 # $1 The GCP project
 # $2 The managed zone name (e.g. kubernetes-io)
