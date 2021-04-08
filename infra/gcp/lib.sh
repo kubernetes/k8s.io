@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+readonly TMPDIR=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+trap 'rm -rf "${TMPDIR}"' EXIT
+
 # This is a library of functions used to create GCP stuff.
 
 . "$(dirname "${BASH_SOURCE[0]}")/lib_util.sh"
@@ -100,26 +103,50 @@ function ensure_project() {
         return 1
     fi
     local project="$1"
+    local account
+    local org
 
     if ! gcloud projects describe "${project}" >/dev/null 2>&1; then
         gcloud projects create "${project}" \
             --no-enable-cloud-apis \
             --organization "${GCP_ORG}"
     else
-        local org=$(gcloud projects \
+        org=$(gcloud projects \
                 describe "${project}" \
                 --flatten='parent[]' \
                 --format='csv[no-heading](type, id)' \
                 | grep ^organization \
                 | cut -f2 -d,)
-        if [ "$org" != "${GCP_ORG}" ]; then
+        if [ "${org}" != "${GCP_ORG}" ]; then
             echo "project ${project} exists, but not in our org: got ${org}" >&2
             return 2
         fi
     fi
 
-    gcloud beta billing projects link "${project}" \
-        --billing-account "${GCP_BILLING}"
+    # Avoid calling link if not needed, so accounts with project ownership but
+    # without billing privileges can still run scripts that use this function
+    # to manage projects that have already been provisioned
+    account=$(gcloud beta billing projects describe "${project}" --format="value(billingAccountName)")
+    if [ "${account}" != "billingAccounts/${GCP_BILLING}" ]; then
+        gcloud beta billing projects link "${project}" \
+            --billing-account "${GCP_BILLING}"
+    fi
+
+    # Ensure projects are not owned by users; they should be owned by groups.
+    # If this is being run by a user, and project creation happened above,
+    # this will remove the roles/owner binding that was implicitly created.
+    # It is acceptable if this results in no direct project ownership, as we
+    # have ownership propgating down from parent resources (folders, org, etc)
+    while read -r user; do
+        # But OK one special case for now: leave @kubernetes.io users alone,
+        # we have one setup to own k8s-gsuite, we may find we need others
+        if ! (echo "${user}" | grep -q "@kubernetes.io$"); then
+            ensure_removed_project_role_binding "${project}" "${user}" "roles/owner"
+        fi
+    done < <(gcloud projects get-iam-policy "${project}" \
+        --flatten="bindings[].members" \
+        --filter="bindings.role=roles/owner AND bindings.members ~ ^user:" \
+        --format="value(bindings.members)")
 }
 
 # Enable an API
@@ -147,10 +174,7 @@ function empower_group_as_viewer() {
     local project="$1"
     local group="$2"
 
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${group}" \
-        --role roles/viewer
+    ensure_project_role_binding "${project}" "group:${group}" "roles/viewer"
 }
 
 # Grant roles for running cip-auditor E2E test
@@ -177,28 +201,8 @@ function empower_service_account_for_cip_auditor_e2e_tester() {
     )
 
     for role in "${roles[@]}"; do
-        gcloud \
-            projects add-iam-policy-binding "${project}" \
-            --member "serviceAccount:${acct}" \
-            --role "${role}"
+        ensure_project_role_binding "${project}" "serviceAccount:${acct}" "${role}"
     done
-}
-
-# Grant roles for running pull-cip-vuln
-# $1: The service account
-# $2: The GCP Project
-function empower_service_account_for_cip_vuln_scanning() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_service_account_for_cip_vuln_scanning(acct, project) requires 2 arguments" >&2
-        return 1
-    fi
-    local acct="$1"
-    local project="$2"
-
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "serviceAccount:${acct}" \
-        --role roles/containeranalysis.occurrences.viewer
 }
 
 # Grant GCB admin privileges to a principal
@@ -212,20 +216,18 @@ function empower_group_for_gcb() {
     local project="$1"
     local group="$2"
 
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${group}" \
-        --role roles/cloudbuild.builds.editor
-
-    # TODO(justaugustus/thockin): This only exists to grant the
-    #      serviceusage.services.use permission allow writers access to execute
-    #      Cloud Builds. We should refactor this once we develop custom roles.
-    #
-    #      Ref: https://cloud.google.com/storage/docs/access-control/iam-console
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${group}" \
-        --role roles/serviceusage.serviceUsageConsumer
+    local roles=(
+        roles/cloudbuild.builds.editor
+        # TODO(justaugustus/thockin): This only exists to grant the
+        #      serviceusage.services.use permission allow writers access to execute
+        #      Cloud Builds. We should refactor this once we develop custom roles.
+        #
+        #      Ref: https://cloud.google.com/storage/docs/access-control/iam-console
+        roles/serviceusage.serviceUsageConsumer
+    )
+    for role in "${roles[@]}"; do
+        ensure_project_role_binding "${project}" "group:${group}" "${role}"
+    done
 }
 
 # Grant KMS admin privileges to a principal
@@ -239,15 +241,14 @@ function empower_group_for_kms() {
     local project="$1"
     local group="$2"
 
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${group}" \
-        --role roles/cloudkms.admin
+    local roles=(
+        roles/cloudkms.admin
+        roles/cloudkms.cryptoKeyEncrypterDecrypter
+    )
 
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${group}" \
-        --role roles/cloudkms.cryptoKeyEncrypterDecrypter
+    for role in "${roles[@]}"; do
+        ensure_project_role_binding "${project}" "group:${group}" "${role}"
+    done
 }
 
 # Grant privileges to prow in a staging project
@@ -261,32 +262,20 @@ function empower_prow() {
     local project="$1"
     local bucket="$2"
 
+    local prow_principal="serviceAccount:${PROW_SVCACCT}"
+    local gcb_builder_principal="serviceAccount:${GCB_BUILDER_SVCACCT}"
     # commands are copy-pasted so that one set can turn into deletes
     # when we're ready to decommission PROW_SVCACCT
 
     # Allow prow to trigger builds.
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "serviceAccount:${PROW_SVCACCT}" \
-        --role roles/cloudbuild.builds.builder
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "serviceAccount:${GCB_BUILDER_SVCACCT}" \
-        --role roles/cloudbuild.builds.builder
+    ensure_project_role_binding "${project}" "${prow_principal}" "roles/cloudbuild.builds.builder"
+    ensure_project_role_binding "${project}" "${gcb_builder_principal}" "roles/cloudbuild.builds.builder"
 
     # Allow prow to push source and access build logs.
-    gsutil iam ch \
-        "serviceAccount:${PROW_SVCACCT}:objectCreator" \
-        "${bucket}"
-    gsutil iam ch \
-        "serviceAccount:${PROW_SVCACCT}:objectViewer" \
-        "${bucket}"
-    gsutil iam ch \
-        "serviceAccount:${GCB_BUILDER_SVCACCT}:objectCreator" \
-        "${bucket}"
-    gsutil iam ch \
-        "serviceAccount:${GCB_BUILDER_SVCACCT}:objectViewer" \
-        "${bucket}"
+    ensure_gcs_role_binding "${bucket}" "${prow_principal}" "objectCreator"
+    ensure_gcs_role_binding "${bucket}" "${prow_principal}" "objectViewer"
+    ensure_gcs_role_binding "${bucket}" "${gcb_builder_principal}" "objectCreator"
+    ensure_gcs_role_binding "${bucket}" "${gcb_builder_principal}" "objectViewer"
 }
 
 # Grant full privileges to GCR admins
@@ -301,7 +290,7 @@ function empower_gcr_admins() {
     local region="${2:-}"
     local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
-    empower_group_as_viewer "${project}" "${GCR_ADMINS}"
+    ensure_project_role_binding "${project}" "group:${GCR_ADMINS}" "roles/viewer"
     empower_group_to_admin_gcs_bucket "${GCR_ADMINS}" "${bucket}"
 }
 
@@ -316,7 +305,7 @@ function empower_gcs_admins() {
     local project="${1}"
     local bucket="${2}"
 
-    empower_group_as_viewer "${project}" "${GCS_ADMINS}"
+    ensure_project_role_binding "${project}" "group:${GCS_ADMINS}" "roles/viewer"
     empower_group_to_admin_gcs_bucket "${GCS_ADMINS}" "${bucket}"
 }
 
@@ -332,28 +321,26 @@ function empower_group_to_admin_artifact_auditor() {
     local group="$2"
     local acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
 
-    # Grant privileges to deploy the auditor Cloud Run service. See
-    # https://cloud.google.com/run/docs/reference/iam/roles#additional-configuration.
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${group}" \
-        --role roles/run.admin
-    # To read auditor's logs, we need serviceusage.services.use
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${group}" \
-        --role roles/serviceusage.serviceUsageConsumer
+    local roles=(
+        # Grant privileges to deploy the auditor Cloud Run service. See
+        # https://cloud.google.com/run/docs/reference/iam/roles#additional-configuration.
+        roles/run.admin
+        # To read auditor's logs, we need serviceusage.services.use
+        roles/serviceusage.serviceUsageConsumer
+        # Also grant privileges to resolve Stackdriver Error Reporting errors.
+        roles/errorreporting.user
+    )
+
+    for role in "${roles[@]}"; do
+        ensure_project_role_binding "${project}" "group:${group}" "${role}"
+    done
+
     gcloud \
         --project="${project}" \
         iam service-accounts add-iam-policy-binding \
         "${acct}" \
         --member="group:${group}" \
         --role="roles/iam.serviceAccountUser"
-    # Also grant privileges to resolve Stackdriver Error Reporting errors.
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "group:${group}" \
-        --role roles/errorreporting.user
 }
 
 # Grant full privileges to the GCR promoter bot
@@ -388,6 +375,16 @@ function empower_artifact_auditor() {
     fi
     local project="$1"
 
+    local roles=(
+        # Allow auditor to write logs.
+        roles/logging.logWriter
+        # Allow auditor to write Stackdriver Error Reporting alerts.
+        roles/errorreporting.writer
+        # No other permissions are necessary because the cip-auditor process in the
+        # Cloud Run instance running as this service account will read the
+        # production GCR which is already world-readable.
+    )
+
     local acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
@@ -397,21 +394,9 @@ function empower_artifact_auditor() {
             --display-name="k8s-infra container image auditor"
     fi
 
-    # Allow auditor to write logs.
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "serviceAccount:${acct}" \
-        --role roles/logging.logWriter
-
-    # Allow auditor to write Stackdriver Error Reporting alerts.
-    gcloud \
-        projects add-iam-policy-binding "${project}" \
-        --member "serviceAccount:${acct}" \
-        --role roles/errorreporting.writer
-
-    # No other permissions are necessary because the cip-auditor process in the
-    # Cloud Run instance running as this service account will read the
-    # production GCR which is already world-readable.
+    for role in "${roles[@]}"; do
+        ensure_project_role_binding "${project}" "serviceAccount:${acct}" "${role}"
+    done
 }
 
 # Ensure the artifact auditor invoker service account exists and has the ability
@@ -516,11 +501,7 @@ function empower_ksa_to_svcacct() {
     local gcp_project="$2"
     local gcp_svcacct="$3"
 
-    gcloud iam service-accounts add-iam-policy-binding \
-        --role roles/iam.workloadIdentityUser \
-        --member "serviceAccount:${ksa_scope}" \
-        "${gcp_svcacct}" \
-        --project="${gcp_project}"
+    ensure_serviceaccount_role_binding "${gcp_svcacct}" "serviceAccount:${ksa_scope}" "roles/iam.workloadIdentityUser"
 }
 
 # Ensure that a global ip address exists, creating one if needed
@@ -576,4 +557,96 @@ function ensure_regional_address() {
         --description="${description}" \
         --region="${region}"
     fi
+}
+
+# Output a plan of services to enable/disable for a given gcp project; format
+# is YAML, each key is a list of services e.g. [pubsub.googleapis.com, ...]
+#   intent:     # services we wish to enable
+#   enabled:    # services that are presently enabled
+#   expected:   # intent + any services directly depended on by intent
+#   to_enable:  # services in intent that are not enabled
+#   to_disable: # services that are enabled but not in expected
+# $1  The GCP project
+# $2+ Service names that are expected to be enabled (e.g. pubsub.googleapis.com)
+function _plan_enabled_services() {
+    if [ $# -lt 2 -o -z "$1" ]; then
+        echo "list_services(gcp_project, service...) requires at least 2 arguments" >&2
+        return 1
+    fi
+
+    local gcp_project="$1"; shift
+
+    gcloud services list --enabled --project="${gcp_project}" \
+      --format='yaml(config.name,dependencyConfig.directlyDependsOn)' \
+      | yq --slurp -y --args '($ARGS.positional | sort) as $intent | {
+        intent: $intent,
+        enabled: map(.config.name) | sort,
+        expected: (
+          map(
+            select([.config.name] | inside($intent))
+            | (.dependencyConfig?.directlyDependsOn // [])
+          ) + $intent
+        )
+        | flatten
+        | map({key:., value:true}) | from_entries | keys | sort
+      } | . += {
+        to_enable: (.expected - .enabled),
+        to_disable: (.enabled - .expected)
+      }' "$@"
+}
+
+# Ensure that only the given services and their direct dependencies are enabled; disable any other services
+# $1  The GCP project for which to enable/disable services
+# $2+ The service names (e.g. pubsub.googleapis.com)
+function ensure_only_services() {
+    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+        echo "ensure_only_services(gcp_project, service...) requires at least 2 arguments" >&2
+        return 1
+    fi
+
+    local gcp_project="$1"; shift
+
+    local before="${TMPDIR}/ensure-only-services.before.yaml"
+    local after_enable="${TMPDIR}/ensure-only-services.after_enable.yaml"
+    local after_disable="${TMPDIR}/ensure-only-services.after_disable.yaml"
+
+    # get services before modifying to diff against when finished
+    _plan_enabled_services "${gcp_project}" "$@" > "${before}"
+
+    # if there's nothing to do, return early
+    if ! <"${before}" yq --exit-status '[.to_enable, .to_disable] | map (length > 0) | any' >/dev/null; then
+      return
+    fi
+
+    echo "plan to enable/disable the following services"
+    <"${before}" yq -y '{to_enable, to_disable}'
+
+    # enable services that need to be enabled
+    for service in $(<"${before}" yq -r '.to_enable[]'); do
+        gcloud services enable --project="${gcp_project}" "${service}"
+    done
+
+    # disable services not explicitly enabled or directly required
+    _plan_enabled_services "${gcp_project}" "$@" > "${after_enable}"
+
+
+    # TODO(spiffxp): get comfortable with --force or redo to disable in dep-order;
+    #                until then, set an obnoxiously long env var to actually disable
+    local disable_cmd='echo "INFO: dry-run mode, would run:" gcloud'
+    if [ "${K8S_INFRA_ENSURE_ONLY_SERVICES_WILL_FORCE_DISABLE:-""}" == "true" ]; then
+        disable_cmd=gcloud
+    fi
+    for service in $( (<"${after_enable}" yq -r '.to_disable[]') | sort | uniq -u); do
+        ${disable_cmd} services disable --force "${service}" --project="${gcp_project}"
+    done
+
+    _plan_enabled_services "${gcp_project}" "$@" > "${after_disable}"
+
+    # in the event that an enable/disable cycle doesn't do enough, let's warn
+    if <"${after_disable}" yq --exit-status '[.to_enable, .to_disable] | map (length > 0) | any' >/dev/null; then
+      echo "WARN: ensure_only_services: after enable/disable cycle, still projects to enable/disable: ${gcp_project}"
+      cat "${after_disable}"
+    fi
+
+    diff_colorized "${before}" "${after_disable}"
 }

@@ -59,7 +59,7 @@ for PROJECT; do
 
     # Enable KMS APIs
     color 6 "Enabling the KMS API"
-    enable_api "${PROJECT}" cloudkms.googleapis.com
+    ensure_only_services "${PROJECT}" cloudkms.googleapis.com
 
     # Let project admins use KMS.
     color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"

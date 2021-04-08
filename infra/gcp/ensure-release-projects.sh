@@ -47,6 +47,14 @@ ADMINS="k8s-infra-release-admins@kubernetes.io"
 WRITERS="k8s-infra-release-editors@kubernetes.io"
 VIEWERS="k8s-infra-release-viewers@kubernetes.io"
 
+readonly RELEASE_PROJECT_SERVICES=(
+    cloudbuild.googleapis.com
+    cloudkms.googleapis.com
+    containerregistry.googleapis.com
+    secretmanager.googleapis.com
+    storage-component.googleapis.com
+)
+
 for PROJECT; do
     color 3 "Configuring: ${PROJECT}"
 
@@ -65,11 +73,11 @@ for PROJECT; do
         empower_group_as_viewer "${PROJECT}" "${group}"
     done
 
-    # Every project gets a GCR repo
+    # Enable services for release projects and their direct dependencies; prune anything else
+    color 6 "Ensuring only necessary services are enabled for release project: ${PROJECT}"
+    ensure_only_services "${PROJECT}" "${RELEASE_PROJECT_SERVICES[@]}"
 
-    # Enable container registry APIs
-    color 6 "Enabling the container registry API"
-    enable_api "${PROJECT}" containerregistry.googleapis.com
+    # Every project gets a GCR repo
 
     # Push an image to trigger the bucket to be created
     color 6 "Ensuring the registry exists and is readable"
@@ -86,10 +94,6 @@ for PROJECT; do
     done
 
     # Every project gets some GCS buckets
-
-    # Enable GCS APIs
-    color 6 "Enabling the GCS API"
-    enable_api "${PROJECT}" storage-component.googleapis.com
 
     for BUCKET in "${ALL_BUCKETS[@]}"; do
         color 3 "Configuring bucket: ${BUCKET}"
@@ -111,10 +115,6 @@ for PROJECT; do
 
     # Enable GCB and Prow to build and push images.
 
-    # Enable GCB APIs
-    color 6 "Enabling the GCB API"
-    enable_api "${PROJECT}" cloudbuild.googleapis.com
-
     # Let project writers use GCB.
     for group in ${ADMINS} ${WRITERS}; do
         color 6 "Empowering ${group} as GCB editors"
@@ -124,10 +124,6 @@ for PROJECT; do
     # Let prow trigger builds and access the scratch bucket
     color 6 "Empowering Prow"
     empower_prow "${PROJECT}" "${GCB_BUCKET}"
-
-    # Enable KMS APIs
-    color 6 "Enabling the KMS API"
-    enable_api "${PROJECT}" cloudkms.googleapis.com
 
     # Let project admins use KMS.
     color 6 "Empowering ${ADMINS} as KMS admins"
@@ -159,8 +155,6 @@ for BUCKET in "${RELEASE_BUCKETS[@]}"; do
     empower_gcs_admins "k8s-release" "${BUCKET}"
 
     # Enable prow to write to the bucket
-    # TODO(spiffxp): I almost guarantee prow will need admin privileges but
-    #                let's start restricted and find out
     empower_svcacct_to_write_gcs_bucket "${PROW_BUILD_SVCACCT}" "${BUCKET}"
 
     # Enable writers on the bucket
