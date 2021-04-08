@@ -29,8 +29,9 @@ trap 'cleanup_tmpdir' EXIT
 
 . "$(dirname "${BASH_SOURCE[0]}")/lib_util.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_iam.sh"
-. "$(dirname "${BASH_SOURCE[0]}")/lib_gcr.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcs.sh"
+. "$(dirname "${BASH_SOURCE[0]}")/lib_gcr.sh"
+. "$(dirname "${BASH_SOURCE[0]}")/lib_gsm.sh"
 
 # The group that admins all GCR repos.
 GCR_ADMINS="k8s-infra-artifact-admins@kubernetes.io"
