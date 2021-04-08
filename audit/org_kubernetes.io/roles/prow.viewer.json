@@ -382,6 +382,7 @@
     "monitoring.timeSeries.list",
     "monitoring.uptimeCheckConfigs.get",
     "monitoring.uptimeCheckConfigs.list",
+    "opsconfigmonitoring.resourceMetadata.list",
     "resourcemanager.projects.get",
     "resourcemanager.projects.list",
     "serviceusage.quotas.get",

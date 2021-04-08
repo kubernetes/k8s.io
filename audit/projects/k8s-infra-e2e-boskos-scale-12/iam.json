@@ -36,8 +36,7 @@
     {
       "members": [
         "group:k8s-infra-prow-oncall@kubernetes.io",
-        "group:k8s-infra-sig-scalability-oncall@kubernetes.io",
-        "user:spiffxp@google.com"
+        "group:k8s-infra-sig-scalability-oncall@kubernetes.io"
       ],
       "role": "roles/owner"
     }

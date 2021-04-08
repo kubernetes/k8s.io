@@ -40,13 +40,6 @@
     },
     {
       "members": [
-        "user:linusa@google.com",
-        "user:thockin@google.com"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/pubsub.admin"

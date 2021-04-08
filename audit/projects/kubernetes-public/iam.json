@@ -114,18 +114,10 @@
     },
     {
       "members": [
-        "group:gke-security-groups@kubernetes.io"
+        "group:gke-security-groups@kubernetes.io",
+        "serviceAccount:k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.viewer"
-    },
-    {
-      "members": [
-        "user:domain-admin-lf@kubernetes.io",
-        "user:ihor@cncf.io",
-        "user:psharma@linuxfoundation.org",
-        "user:thockin@google.com"
-      ],
-      "role": "roles/owner"
     },
     {
       "members": [

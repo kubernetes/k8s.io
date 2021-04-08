@@ -1,12 +1,10 @@
 NAME                              TITLE
 cloudbuild.googleapis.com         Cloud Build API
 cloudkms.googleapis.com           Cloud Key Management Service (KMS) API
-compute.googleapis.com            Compute Engine API
 containeranalysis.googleapis.com  Container Analysis API
 containerregistry.googleapis.com  Container Registry API
 containerscanning.googleapis.com  Container Scanning API
 logging.googleapis.com            Cloud Logging API
-oslogin.googleapis.com            Cloud OS Login API
 pubsub.googleapis.com             Cloud Pub/Sub API
 secretmanager.googleapis.com      Secret Manager API
 storage-api.googleapis.com        Google Cloud Storage JSON API

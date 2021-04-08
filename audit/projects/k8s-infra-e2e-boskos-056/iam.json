@@ -29,8 +29,7 @@
     },
     {
       "members": [
-        "group:k8s-infra-prow-oncall@kubernetes.io",
-        "user:spiffxp@google.com"
+        "group:k8s-infra-prow-oncall@kubernetes.io"
       ],
       "role": "roles/owner"
     }

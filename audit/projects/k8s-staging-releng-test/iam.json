@@ -47,12 +47,6 @@
     },
     {
       "members": [
-        "user:davanum@gmail.com"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "group:k8s-infra-staging-releng-test@kubernetes.io"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"

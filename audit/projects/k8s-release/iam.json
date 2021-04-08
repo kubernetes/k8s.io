@@ -35,15 +35,21 @@
     },
     {
       "members": [
-        "serviceAccount:service-304687256732@containerregistry.iam.gserviceaccount.com"
+        "serviceAccount:service-304687256732@container-analysis.iam.gserviceaccount.com"
       ],
-      "role": "roles/editor"
+      "role": "roles/containeranalysis.ServiceAgent"
     },
     {
       "members": [
-        "user:spiffxp@google.com"
+        "serviceAccount:service-304687256732@gcp-sa-containerscanning.iam.gserviceaccount.com"
       ],
-      "role": "roles/owner"
+      "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-304687256732@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
     },
     {
       "members": [

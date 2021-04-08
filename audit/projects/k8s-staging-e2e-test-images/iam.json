@@ -60,12 +60,6 @@
     },
     {
       "members": [
-        "user:davanum@gmail.com"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "serviceAccount:456067983721@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/secretmanager.secretAccessor"

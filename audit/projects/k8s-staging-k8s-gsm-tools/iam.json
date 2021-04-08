@@ -10,6 +10,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-staging-k8s-gsm-tools@kubernetes.io"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
+    },
+    {
+      "members": [
         "serviceAccount:service-1073099305721@gcp-sa-cloudbuild.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.serviceAgent"
@@ -40,13 +46,14 @@
     },
     {
       "members": [
-        "user:spiffxp@google.com"
+        "group:k8s-infra-staging-k8s-gsm-tools@kubernetes.io"
       ],
-      "role": "roles/owner"
+      "role": "roles/serviceusage.serviceUsageConsumer"
     },
     {
       "members": [
-        "group:k8s-infra-artifact-admins@kubernetes.io"
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-k8s-gsm-tools@kubernetes.io"
       ],
       "role": "roles/viewer"
     }
