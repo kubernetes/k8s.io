@@ -15,12 +15,6 @@
     },
     {
       "members": [
-        "user:thockin@google.com"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io"
       ],
       "role": "roles/viewer"

@@ -46,17 +46,11 @@
     },
     {
       "members": [
+        "serviceAccount:272675062337-compute@developer.gserviceaccount.com",
         "serviceAccount:272675062337@cloudservices.gserviceaccount.com",
-        "serviceAccount:service-272675062337@containerregistry.iam.gserviceaccount.com",
-        "serviceAccount:272675062337-compute@developer.gserviceaccount.com"
+        "serviceAccount:service-272675062337@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
-    },
-    {
-      "members": [
-        "user:spiffxp@google.com"
-      ],
-      "role": "roles/owner"
     },
     {
       "members": [

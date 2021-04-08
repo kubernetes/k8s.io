@@ -2,7 +2,6 @@
   "bindings": [
     {
       "members": [
-        "user:thockin@google.com",
         "user:wg-k8s-infra-api@kubernetes.io"
       ],
       "role": "roles/owner"

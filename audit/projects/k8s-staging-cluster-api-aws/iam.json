@@ -54,12 +54,6 @@
     },
     {
       "members": [
-        "user:davanum@gmail.com"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "group:k8s-infra-staging-cluster-api-aws@kubernetes.io"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"

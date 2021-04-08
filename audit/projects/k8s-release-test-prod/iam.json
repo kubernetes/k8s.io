@@ -55,12 +55,6 @@
     },
     {
       "members": [
-        "user:davanum@gmail.com"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "group:k8s-infra-release-admins@kubernetes.io",
         "group:k8s-infra-release-editors@kubernetes.io"
       ],

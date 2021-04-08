@@ -60,12 +60,6 @@
     },
     {
       "members": [
-        "user:thockin@google.com"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "group:k8s-infra-staging-csi@kubernetes.io"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"

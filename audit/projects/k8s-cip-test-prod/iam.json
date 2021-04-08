@@ -28,12 +28,6 @@
     },
     {
       "members": [
-        "user:thockin@google.com"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
         "group:k8s-infra-staging-cip-test@kubernetes.io"
       ],
