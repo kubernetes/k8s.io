@@ -8,10 +8,8 @@ metadata:
   labels:
     app: sippy
 spec:
-  defaultBackend:
-    service:
-      name: sippy
-      port:
-        number: 8080
+  backend:
+    serviceName: sippy
+    servicePort: 8080
   tls:
   - secretName : sippy-k8s-io-tls
