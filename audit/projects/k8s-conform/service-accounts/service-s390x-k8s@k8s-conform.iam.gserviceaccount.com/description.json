@@ -1,5 +1,5 @@
 {
-  "displayName": "service-s390x-k8s",
+  "displayName": "Grants write access to gs://k8s-conform-s390x-k8s",
   "email": "service-s390x-k8s@k8s-conform.iam.gserviceaccount.com",
   "name": "projects/k8s-conform/serviceAccounts/service-s390x-k8s@k8s-conform.iam.gserviceaccount.com",
   "oauth2ClientId": "111763825701389683173",

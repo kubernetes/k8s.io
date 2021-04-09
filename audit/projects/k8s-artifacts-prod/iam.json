@@ -29,8 +29,7 @@
       "members": [
         "serviceAccount:388270116193-compute@developer.gserviceaccount.com",
         "serviceAccount:388270116193@cloudservices.gserviceaccount.com",
-        "serviceAccount:service-388270116193@containerregistry.iam.gserviceaccount.com",
-        "user:justinsb@google.com"
+        "serviceAccount:service-388270116193@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
     },

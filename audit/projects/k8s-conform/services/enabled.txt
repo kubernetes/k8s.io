@@ -1,6 +1,4 @@
 NAME                              TITLE
-compute.googleapis.com            Compute Engine API
-oslogin.googleapis.com            Cloud OS Login API
 secretmanager.googleapis.com      Secret Manager API
 storage-api.googleapis.com        Google Cloud Storage JSON API
 storage-component.googleapis.com  Cloud Storage

@@ -1,5 +1,5 @@
 {
-  "displayName": "service-huaweicloud",
+  "displayName": "Grants write access to gs://k8s-conform-huaweicloud",
   "email": "service-huaweicloud@k8s-conform.iam.gserviceaccount.com",
   "name": "projects/k8s-conform/serviceAccounts/service-huaweicloud@k8s-conform.iam.gserviceaccount.com",
   "oauth2ClientId": "115892797574676430686",
