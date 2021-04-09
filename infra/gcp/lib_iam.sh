@@ -21,6 +21,42 @@
 #
 # This MUST NOT be used directly. Source it via lib.sh instead.
 
+# Ensure that a the given GCP project contains a service account with
+# the given name and display_name
+# $1: The GCP project
+# $2: The account name (e.g. "foo-manager")
+# $3: The account display-name (e.g. "Manages all foo")
+function ensure_service_account() {
+    if [ $# != 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "ensure_service_account(project, name, display_name) requires 3 arguments" >&2
+        return 1
+    fi
+    local project="$1"
+    local name="$2"
+    local display_name="$3"
+
+    local email=$(svc_acct_email "${project}" "${name}")
+
+    local before="${TMPDIR}/service-account.before.yaml"
+    local after="${TMPDIR}/service-account.after.yaml"
+    local verb=""
+
+    if ! gcloud iam service-accounts --project "${project}" describe "${email}" >"${before}" 2>/dev/null; then
+        verb="create"
+    elif [ "$(<"${before}" yq -r .displayName)" != "${display_name}" ]; then
+        verb="update"
+    fi
+
+    if [ -n "${verb}" ]; then
+        gcloud iam service-accounts "${verb}" \
+          --project "${project}" \
+          "${email}" \
+          --display-name="${display_name}"
+        gcloud iam service-accounts --project "${project}" describe "${email}" > "${after}"
+        diff_colorized "${before}" "${after}"
+    fi
+}
+
 # Ensure that custom IAM role exists in organization and in sync with definition in file
 # Arguments:
 #   $1:  The role name (e.g. "foo.barrer")
@@ -364,7 +400,7 @@ function _ensure_removed_custom_iam_role() {
 function _format_iam_policy() {
   # shellcheck disable=SC2016
   # $r is a jq variable, not a bash expression
-  yq -y '.bindings
+  yq -y '(.bindings // [])
     | map(.role as $r | .members | map({member: ., role: $r}))
     | flatten | sort_by(.member)'
 }

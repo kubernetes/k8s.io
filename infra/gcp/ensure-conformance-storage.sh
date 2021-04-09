@@ -43,100 +43,113 @@ function usage() {
 
 PROJECT="k8s-conform"
 
+CONFORMANCE_SERVICES=(
+    # secretmanager to host service-account keys
+    secretmanager.googleapis.com
+    # storage-api to store results in GCS via JSON API
+    storage-api.googleapis.com
+    # storage-component to store results in GCS via XML API
+    storage-component.googleapis.com
+)
+
+readonly CONFORMANCE_RETENTION="10y"
+
+# "Offering" comes from https://github.com/cncf/k8s-conformance/blob/master/terms-conditions/Certified_Kubernetes_Terms.md
 # NB: Please keep this sorted.
-CONFORMANCE_BUCKETS=(
+CONFORMANCE_OFFERINGS=(
     cri-o
     huaweicloud
     inspur
     provider-openstack
     s390x-k8s
 )
+
 if [ $# = 0 ]; then
     # default to all conformance buckets
-    set -- "${CONFORMANCE_BUCKETS[@]}"
+    set -- "${CONFORMANCE_OFFERINGS[@]}"
 fi
 
 # Make the project, if needed
-color 6 "Ensuring project exists: ${PROJECT}"
-ensure_project "${PROJECT}"
+function ensure_conformance_project() {
+    color 6 "Ensuring project exists: ${PROJECT}"
+    ensure_project "${PROJECT}"
 
-# Enable GCS APIs
-color 6 "Ensuring only necessary services are enabled for conformance project: ${PROJECT}"
-ensure_only_services "${PROJECT}" \
-    storage-component.googleapis.com \
-    secretmanager.googleapis.com \
+    # Enable GCS APIs
+    color 6 "Ensuring only necessary services are enabled for conformance project: ${PROJECT}"
+    ensure_only_services "${PROJECT}" "${CONFORMANCE_SERVICES[@]}"
+}
+
+# ensure_conformance_bucket ensure that:
+# - the given bucket exists and is publicly readable
+# - the given bucket has the conformance retention policy setup
+# - the given bucket is writable by the given group
+function ensure_conformance_bucket() {
+    local bucket="${1}"
+    local writers="${2}"
+
+    color 6 "Ensuring ${PROJECT} contains world readadble GCS bucket: ${bucket}"
+    ensure_public_gcs_bucket "${PROJECT}" "${bucket}"
+
+    color 6 "Empowering GCS admins for GCS bucket: ${bucket}"
+    empower_gcs_admins "${PROJECT}" "${bucket}"
+
+    color 6 "Ensuring ${bucket} retention policy is set to: ${CONFORMANCE_RETENTION}"
+    ensure_gcs_bucket_retention "${bucket}" "${CONFORMANCE_RETENTION}"
+
+    color 6 "Empowering ${writers} to write to GCS bucket: ${bucket}"
+    empower_group_to_write_gcs_bucket "${writers}" "${bucket}"
+
+}
+
+# ensure_conformance_serviceaccount ensures that:
+# - a serviceaccount of the given name exists in PROJECT
+# - it can write to the given bucket
+# - it has a private key stored in a secret in PROJECT accessible to the given group
+function ensure_conformance_serviceaccount() {
+    local name="${1}"
+    local bucket="${2}"
+    local secret_accessors="${3}"
+
+    local email="$(svc_acct_email "${PROJECT}" "${name}")"
+    local secret="${name}-key"
+    local private_key_file="${TMPDIR}/key.json"
+
+    color 6 "Ensuring service account exists: ${email}"
+    ensure_service_account "${PROJECT}"  "${name}" "Grants write access to ${bucket}"
+
+    color 6 "Ensuring ${PROJECT} contains secret ${secret} with private key for ${email}"
+    ensure_serviceaccount_key_secret "${PROJECT}" "${secret}" "${email}"
+
+    color 6 "Empowering ${secret_accessors} to access secret: ${secret}"
+    ensure_secret_role_binding \
+        "projects/${PROJECT}/secrets/${secret}" \
+        "group:${secret_accessors}" \
+        "roles/secretmanager.secretAccessor"
+
+    color 6 "Empowering ${email} to write to ${bucket}"
+    empower_svcacct_to_write_gcs_bucket "${email}"  "${bucket}"
+}
+
+ensure_conformance_project
 
 color 6 "Ensuring all conformance buckets"
-for REPO; do
-    color 3 "Configuring conformance bucket for ${REPO}"
+for OFFERING; do
+    # The GCS bucket to hold conformance results for this offering
+    BUCKET="gs://${PROJECT}-${OFFERING}" # used by humans
+    # The group that can write to GCS bucket
+    BUCKET_WRITERS="k8s-infra-conform-${OFFERING}@kubernetes.io"
+    # The service account that can write to the GCS bucket
+    SERVICE_ACCOUNT_NAME="service-${OFFERING}"
 
-    # The group that can write to this conformance repo.
-    BUCKET_WRITERS="k8s-infra-conform-${REPO}@kubernetes.io"
+    if ! (printf '%s\n' "${CONFORMANCE_OFFERINGS[@]}" | grep -q "^${OFFERING}$"); then
+      color 2 "Skipping unrecognized conformance offering: ${OFFERING}"
+      continue
+    fi
 
-    # The names of the buckets
-    BUCKET="gs://${PROJECT}-${REPO}" # used by humans
+    color 3 "Ensuring conformance bucket for ${OFFERING}"
+    ensure_conformance_bucket "${BUCKET}" "${BUCKET_WRITERS}" 2>&1 | indent
 
-    # Every project gets some GCS buckets
-    color 3 "Configuring bucket: ${BUCKET}"
-
-    # Create the bucket
-    color 6 "Ensuring the bucket exists and is world readable"
-    ensure_public_gcs_bucket "${PROJECT}" "${BUCKET}"
-
-    color 6 "Ensuring the GCS bucket retention policy is set: ${PROJECT}"
-    RETENTION="10y"
-    ensure_gcs_bucket_retention "${BUCKET}" "${RETENTION}"
-
-    # Enable admins on the bucket
-    color 6 "Empowering GCS admins"
-    empower_gcs_admins "${PROJECT}" "${BUCKET}"
-
-    # Enable writers on the bucket
-    color 6 "Empowering ${BUCKET_WRITERS} to GCS"
-    empower_group_to_write_gcs_bucket "${BUCKET_WRITERS}" "${BUCKET}"
-
-    (
-        readonly SERVICE_ACCOUNT_NAME="service-${REPO}"
-        readonly SERVICE_ACCOUNT_EMAIL="$(svc_acct_email "${PROJECT}" \
-            "${SERVICE_ACCOUNT_NAME}")"
-        readonly SECRET_ID="${SERVICE_ACCOUNT_NAME}-key"
-        readonly KEY_FILE="${TMPDIR}/key.json"
-
-        if ! gcloud iam service-accounts describe "${SERVICE_ACCOUNT_EMAIL}" \
-            --project "${PROJECT}" >/dev/null 2>&1
-        then
-            color 6 "Creating service account: ${SERVICE_ACCOUNT_NAME}"
-            ensure_service_account \
-                "${PROJECT}" \
-                "${SERVICE_ACCOUNT_NAME}" \
-                "${SERVICE_ACCOUNT_NAME}"
-
-            color 6 "Empowering service account: ${SERVICE_ACCOUNT_NAME} to GCS"
-            empower_svcacct_to_write_gcs_bucket \
-                "${SERVICE_ACCOUNT_EMAIL}" \
-                "${BUCKET}"
-
-            color 6 "Creating private key for service account: ${SERVICE_ACCOUNT_NAME}"
-            gcloud iam service-accounts keys create "${KEY_FILE}" \
-                --project "${PROJECT}" \
-                --iam-account "${SERVICE_ACCOUNT_EMAIL}"
-
-            color 6 "Creating secret to store private key"
-            gcloud secrets create "${SECRET_ID}" \
-                --project "${PROJECT}" \
-                --replication-policy "automatic"
-
-            color 6 "Adding private key to secret"
-            gcloud secrets versions add "${SECRET_ID}" \
-                --project "${PROJECT}" \
-                --data-file "${KEY_FILE}"
-
-            color 6 "Empowering ${BUCKET_WRITERS} for read secret"
-            ensure_secret_role_binding \
-                "projects/${PROJECT}/secrets/${SECRET_ID}" \
-                "group:${BUCKET_WRITERS}" \
-                "roles/secretmanager.secretAccessor"
-        fi
-    )
+    color 3 "Ensuring conformance service account for ${OFFERING}" 2>&1 | indent
+    ensure_conformance_serviceaccount "${SERVICE_ACCOUNT_NAME}" "${BUCKET}" "${BUCKET_WRITERS}"
 done 2>&1 | indent
 color 6 "Done"
