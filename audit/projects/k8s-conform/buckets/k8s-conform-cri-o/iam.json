@@ -16,7 +16,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-conform-cri-o@kubernetes.io"
+        "group:k8s-infra-conform-cri-o@kubernetes.io",
+        "serviceAccount:service-cri-o@k8s-conform.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketWriter"
     },
