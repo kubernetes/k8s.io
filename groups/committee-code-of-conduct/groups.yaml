@@ -1,0 +1,14 @@
+groups:
+  - email-id: conduct@kubernetes.io
+    name: conduct
+    description: |-
+      Public list for the Code of Conduct Committee
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - aeva.online@gmail.com
+      - celeste@cncf.io
+      - chu.karen.h@gmail.com
+      - tasha.drew@gmail.com
+      - tpepper@vmware.com
