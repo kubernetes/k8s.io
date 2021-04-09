@@ -16,14 +16,16 @@
     },
     {
       "members": [
-        "group:k8s-infra-conform-huaweicloud@kubernetes.io"
+        "group:k8s-infra-conform-huaweicloud@kubernetes.io",
+        "serviceAccount:service-huaweicloud@k8s-conform.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "group:k8s-infra-conform-huaweicloud@kubernetes.io"
+        "group:k8s-infra-conform-huaweicloud@kubernetes.io",
+        "serviceAccount:service-huaweicloud@k8s-conform.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },
