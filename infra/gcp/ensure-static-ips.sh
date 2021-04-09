@@ -45,6 +45,7 @@ ADDRESSES=(
     "perf-dash-k8s-io-ingress-prod"
     "prow-k8s-io-ingress-staging"
     "slack-infra-ingress-prod"
+    "sippy-ingress-prod"
     "node-perf-dash-k8s-io-ingress-prod"
     "triage-party-release-ingress-prod"
 )
