@@ -161,7 +161,6 @@ for prj; do
         "group:k8s-infra-sig-scalability-oncall@kubernetes.io" \
         "roles/owner"
     fi
-    fi
 
     color 6 "Ensure prow-build prowjobs are able to ssh to instances in e2e project: ${prj}"
     prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
@@ -193,7 +192,7 @@ for prj; do
     fi
 
     if ! diff ${ssh_keys_before} ${ssh_keys_after} >/dev/null; then
-      cloud compute project-info add-metadata --project="${prj}" \
+      gcloud compute project-info add-metadata --project="${prj}" \
         --metadata-from-file ssh-keys="${ssh_keys_after}"
       diff_colorized "${ssh_keys_before}" "${ssh_keys_after}"
     fi
