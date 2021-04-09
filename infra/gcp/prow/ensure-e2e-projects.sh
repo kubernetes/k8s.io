@@ -161,22 +161,30 @@ for prj; do
         "group:k8s-infra-sig-scalability-oncall@kubernetes.io" \
         "roles/owner"
     fi
+    fi
 
     color 6 "Ensure prow-build prowjobs are able to ssh to instances in e2e project: ${prj}"
     prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
 
     # append to project-wide ssh-keys metadata if not present
-    ssh_pubkeys=$(mktemp "/tmp/${prj}-ssh-keys-XXXX")
+    ssh_keys_before="${TMPDIR}/ssh-keys.before.txt"
+    ssh_keys_after="${TMPDIR}/ssh-keys.after.txt"
     gcloud compute project-info describe --project="${prj}" \
-      --format='value(commonInstanceMetadata.items.filter(key:ssh-keys).extract(value).flatten())' > "${ssh_pubkeys}"
-    if ! grep -q "${prow_build_ssh_pubkey}" "${ssh_pubkeys}"; then
-      if [ "${K8S_INFRA_ENSURE_E2E_PROJECTS_RESETS_SSH_KEYS}" == "true" ]; then
-        echo "${prow_build_ssh_pubkey}" > "${ssh_pubkeys}"
-      else
-        echo "${prow_build_ssh_pubkey}" >> "${ssh_pubkeys}"
-      fi
+      --format='value(commonInstanceMetadata.items.filter(key:ssh-keys).extract(value).flatten())' \
+      | sed '$d' > "${ssh_keys_before}"
+
+    cp "${ssh_keys_before}" "${ssh_keys_after}"
+
+    if [ "${K8S_INFRA_ENSURE_E2E_PROJECTS_RESETS_SSH_KEYS}" == "true" ]; then
+      echo "${prow_build_ssh_pubkey}" > "${ssh_keys_after}"
+    elif ! grep -q "${prow_build_ssh_pubkey}" "${ssh_keys_before}"; then
+      echo "${prow_build_ssh_pubkey}" >> "${ssh_keys_after}"
+    fi
+
+    if ! diff ${ssh_keys_before} ${ssh_keys_after} >/dev/null; then
       gcloud compute project-info add-metadata --project="${prj}" \
-        --metadata-from-file ssh-keys="${ssh_pubkeys}"
+        --metadata-from-file ssh-keys="${ssh_keys_after}"
+      diff_colorized "${ssh_keys_before}" "${ssh_keys_after}"
     fi
 
   ) 2>&1 | indent
