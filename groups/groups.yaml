@@ -1465,3 +1465,17 @@ groups:
       - natashasarkar@google.com
       - extaeger@google.com
       - samwronski@google.com
+
+  - email-id: k8s-infra-gcs-access-logs@kubernetes.io
+    name: k8s-infra-gcs-access-logs
+    description: |-
+      Access to gcs logs for log analysis
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - hh@ii.coop
+      - caleb@ii.coop
+      - stephen@ii.coop
+      - zz@ii.coop
+      - bb@ii.coop
+      - riaan@ii.coop
