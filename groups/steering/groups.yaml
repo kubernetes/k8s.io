@@ -1,0 +1,44 @@
+groups:
+  - email-id: steering-private@kubernetes.io
+    name: steering-private
+    description: |-
+      Private list for the Kubernetes Steering Committee
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - killen.bob@gmail.com
+      - liggitt@google.com
+      - nikhitaraghunath@gmail.com
+      - paris.pittman@gmail.com
+
+  - email-id: steering@kubernetes.io
+    name: steering
+    description: |-
+      Public list for the Kubernetes Steering Committee.
+
+      This list is for Steering Committee business.  It is public-access for transparency and so that community can raise topics, but it is not a forum for public debate.
+
+      https://github.com/kubernetes/steering
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - killen.bob@gmail.com
+      - liggitt@google.com
+      - nikhitaraghunath@gmail.com
+      - paris.pittman@gmail.com
+    managers:
+      - ihor.dvoretskyi@gmail.com
+      - jdumars@gmail.com
+      - alison@alisondowdney.com
