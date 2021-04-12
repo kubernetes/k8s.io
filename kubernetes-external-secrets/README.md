@@ -8,7 +8,9 @@ Ensure you have [access to the cluster]
 
 Ensure you are a member of:
 
-- k8s-infra-cluster-admins@kubernetes.io
+- k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
+
+If you encounter any issue during the deployment, reach out to k8s-infra-cluster-admins@kubernetes.io for help.
 
 To boostrap Kubernetes External Secrets:
 
