@@ -45,9 +45,8 @@ data:
         description: >
           Dashboard tracking the current status of all issues and PRs targeting the current release (1.22).
         rules:
-          - milestone-issues
-          - urgent-issues
-          - urgent-prs
+          - sig-release-issues
+          - sig-release-prs
 
       - id: release-team
         name: Release Team
@@ -451,13 +450,21 @@ data:
           - label: area/release-eng
           - label: sig/release
 
-      sig-release:
-        name: "sig/release"
+      sig-release-issues:
+        name: "sig-release-issues"
         type: issue
-        repos:
-          - "https://github.com/kubernetes/release"
         filters:
-          - label: sig/release
+          - label: area/release-eng
+          - label: area/release-team
+          - milestone: "v1.22"
+
+      sig-release-prs:
+        name: "sig-release-prs"
+        type: pull_request
+        filters:
+          - label: area/release-eng
+          - label: area/release-team
+          - milestone: "v1.22"
 
       kind-flake:
         name: "Items that are classified as flake"
