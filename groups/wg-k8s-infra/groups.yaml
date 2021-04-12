@@ -170,3 +170,13 @@ groups:
       - davanum@gmail.com
       - spiffxp@google.com
       - thockin@google.com
+
+  - email-id: k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
+    name: k8s-infra-rbac-kubernetes-external-secrets
+    description: |-
+      Grants access to the `namespace-user` role in the `kubernetes-external-secrets` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - k8s-infra-cluster-admins@kubernetes.io
