@@ -25,11 +25,12 @@ csi-external-health-monitor-agent
 csi-external-health-monitor-controller
 hostpathplugin
 livenessprobe
+local-volume-provisioner
 mock-driver
 nfs-provisioner
+nfs-subdir-external-provisioner
 snapshot-controller
 snapshot-validation-webhook
-local-volume-provisioner
 "
 
 for repo in $repos; do
