@@ -13,5 +13,5 @@ spec:
   selector:
     app: sippy
   sessionAffinity: None
-  type: ClusterIP
+  type: NodePort
 
