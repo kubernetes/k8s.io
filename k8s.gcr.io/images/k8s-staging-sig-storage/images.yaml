@@ -71,6 +71,9 @@
     "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
     "sha256:b0a9eb3e489150d79bff1c97681f34c579e6fcb1a4ed0289c19180eb83ebc83d": [ "v2.1.0" ]
     "sha256:48da0e4ed7238ad461ea05f68c25921783c37b315f21a5c5a2780157a6460994": [ "v2.2.0" ]
+- name: local-volume-provisioner
+  dmap:
+    "sha256:63859b69f9dfc0858e5d8746218e435c36e205c041fb6d8baf71ad132e24737f": [ "v2.4.0" ]
 - name: mock-driver
   dmap:
     "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]
@@ -82,6 +85,11 @@
   dmap:
     "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
     "sha256:2de1d15fc1f2a33618c61ff8d499ef22a7b2b8961952f059656a245b98498ba4": [ "v3.0.0" ]
+- name: nfs-subdir-external-provisioner
+  dmap:
+    "sha256:3ce0fdba4d8eca7d9d3444f2f1ec2f2c5a48e936525177e0caaaa9c0fcc9c345": [ "v4.0.0" ]
+    "sha256:2b9dc857b15124d38c8a7da56d85cf8d456b5f95036d8256ecaabb162aab64c7": [ "v4.0.1" ]
+    "sha256:63d5e04551ec8b5aae83b6f35938ca5ddc50a88d85492d9731810c31591fa4c9": [ "v4.0.2" ]
 - name: snapshot-controller
   dmap:
     "sha256:2bde7d7f9d73c4309d67e9d7f94df52110295ef06c9488ca76c40da32b65f05e": [ "v2.1.1" ]
@@ -100,6 +108,3 @@
     "sha256:ef62b3d2885a2a9f9fd97b4bff6facd97d9bedd8c5c62429bbf81797f20cb998": [ "v3.0.2" ]
     "sha256:fc09c8eb77ec6815db641f7fe160de7abe6d01377d7a7d221fe34b7bc6e1e229": [ "v3.0.3" ]
     "sha256:609b64376054aefc0d2daf8a85ec48713a414b2bd85bcbaea09eaf1b628b1e48": [ "v4.0.0" ]
-- name: local-volume-provisioner
-  dmap:
-    "sha256:63859b69f9dfc0858e5d8746218e435c36e205c041fb6d8baf71ad132e24737f": [ "v2.4.0" ]
