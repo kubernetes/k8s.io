@@ -9,6 +9,7 @@ reviewers:
 - alexeldeib
 - cpanato
 - juan-lee
+- shysank
 
 labels:
 - sig/cluster-lifecycle
