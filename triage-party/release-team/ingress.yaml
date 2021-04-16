@@ -4,12 +4,13 @@ metadata:
   name: triage-party-release
   namespace: triageparty-release
   annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.class: "gce"
     kubernetes.io/ingress.global-static-ip-name: "triage-party-release-ingress-prod"
+    networking.gke.io/managed-certificates: "release-triage-k8s-io"
   labels:
     app: triage-party
 spec:
   backend:
     serviceName: triage-party-release
     servicePort: 8080
-  tls:
-  - secretName : release-triage-k8s-io-tls
