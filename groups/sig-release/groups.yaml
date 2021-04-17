@@ -74,6 +74,9 @@ groups:
       - k8s-infra-release-editors@kubernetes.io
       - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
+      - antheabjung@gmail.com
+      - dcampau1@gmail.com
+      - divya.mohan0209@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
@@ -81,9 +84,7 @@ groups:
       - marky.r.jackson@gmail.com
       - max@koerbaecher.io
       - onlydole@gmail.com
-      - pal.nabarun95@gmail.com
       - saveetha13@gmail.com
-      - v@gor.io
       - sethpmccombs@gmail.com
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
@@ -289,8 +290,11 @@ groups:
       - release-managers-private@kubernetes.io
       - ameukam@gmail.com
       - amwat@google.com
+      - antheabjung@gmail.com
       - bentheelder@google.com
       - ctadeu@gmail.com
+      - dcampau1@gmail.com
+      - divya.mohan0209@gmail.com
       - feiskyer@gmail.com
       - gmccloskey@google.com
       - gveronicalg@gmail.com
@@ -302,11 +306,9 @@ groups:
       - max@koerbaecher.io
       - mudrinic.mare@gmail.com
       - onlydole@gmail.com
-      - pal.nabarun95@gmail.com
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
       - spiffxp@google.com
-      - v@gor.io
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
@@ -352,21 +354,19 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
-      - kikis.github@gmail.com # 1.21 RT Lead Shadow
-      - pal.nabarun95@gmail.com  # 1.21 RT Lead
-      - saveetha13@gmail.com # 1.21 RT Lead Shadow
+      - antheabjung@gmail.com # 1.22 RT Lead Shadow
+      - dcampau1@gmail.com # 1.22 RT Lead Shadow
+      - divya.mohan0209@gmail.com # 1.22 RT Lead Shadow
+      - kikis.github@gmail.com # 1.22 RT Lead Shadow
+      - saveetha13@gmail.com # 1.22 RT Lead
       - tpepper@vmware.com # Release Team subproject owner
-      - v@gor.io # 1.21 RT Lead Shadow
     members:
       - sig-release-leads@kubernetes.io
       - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
-      - antheabjung@gmail.com # 1.21 Enhancements Lead
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - ashnehete@gmail.com # 1.21 Release Notes Shadow
       - chandani.madnani@gmail.com # 1.21 Docs Shadow
-      - dcampau1@gmail.com # 1.21 Bug Triage Lead
       - desponda@vmware.com # 1.21 Bug Triage Shadow
-      - divya.mohan0209@gmail.com # 1.21 Comms Lead
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
       - james@jameslaverack.com # 1.21 Enhancements Shadow
       - joseph.r.sandoval@gmail.com # 1.21 Enhancements Shadow
