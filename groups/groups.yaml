@@ -1264,10 +1264,10 @@ groups:
       - spiffxp@google.com
       - spiffxp@gmail.com
 
-  - email-id: k8s-infra-staging-service-apis@kubernetes.io
-    name: k8s-infra-staging-service-apis
+  - email-id: k8s-infra-staging-gateway-api@kubernetes.io
+    name: k8s-infra-staging-gateway-api
     description: |-
-      ACL for staging SIG-network service APIs
+      ACL for staging SIG-network gateway api
     settings:
       ReconcileMembers: "true"
     members:
