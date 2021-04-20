@@ -1,0 +1,7 @@
+# note: this file details ASNs and artifact/container stores for Amazon
+name: amazon
+redirectsTo:
+  registry: kubernetes.ecr.io
+  artifacts: kubernetes.s3.amazon.com
+asns:
+  - 16509
