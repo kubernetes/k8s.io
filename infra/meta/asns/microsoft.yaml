@@ -1,0 +1,11 @@
+# note: this file details ASNs and artifact/container stores for Microsoft
+name: microsoft
+redirectsTo:
+  registry: kubernetes.acr.io
+  artifacts: k8s-artifacts.acr.io
+asns:
+- 12076
+- 8075
+- 8068
+- 8069
+- 16550
