@@ -36,9 +36,8 @@ function _nocolor() {
 # $1: The color code (numeric, see `tput setf`)
 # $2+: The things to print
 function color() {
-    _color "$1"
-    shift
-    echo "$*$(_nocolor)"
+    _color "$1"; shift
+    echo "${@}" "$(_nocolor)"
 }
 
 # ensure_gnu_sed
