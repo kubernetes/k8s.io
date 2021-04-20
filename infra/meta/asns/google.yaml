@@ -1,0 +1,14 @@
+# note: this file details ASNs and artifact/container stores for Google
+name: google
+redirectsTo:
+  registry: k8s.gcr.io
+  artifacts: kubernetes-release.storage.googleapis.com
+asns:
+- 39190
+- 139070
+- 45566
+- 15169
+- 19527
+- 36040
+- 43515
+- 16550
