@@ -43,7 +43,7 @@ roleRef:
   kind: ClusterRole
   name: kubernetes-external-secrets
 subjects:
-  - name: RELEASE-NAME-kubernetes-external-secrets
+  - name: kubernetes-external-secrets
     namespace: kubernetes-external-secrets
     kind: ServiceAccount
 ---
