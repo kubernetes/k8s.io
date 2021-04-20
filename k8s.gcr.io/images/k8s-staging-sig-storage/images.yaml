@@ -6,6 +6,7 @@
     "sha256:7495d30800fb3ef22f3dc6d5fe9a0a6ec40ba32a2bdc0cf5e7fcaa507adc921e": [ "v3.0.1" ]
     "sha256:6f80b12657a7e0a5c683b24e806c4bbbe33a43e39b041fe9b7514d665d478ea4": [ "v3.0.2" ]
     "sha256:50c3cfd458fc8e0bf3c8c521eac39172009382fc66dc5044a330d137c6ed0b09": [ "v3.1.0" ]
+    "sha256:c5be65d6679efabb969d9b019300d187437ae876f992c40911fd2892bbef3b36": [ "v3.2.0" ]
 - name: csi-node-driver-registrar
   dmap:
     "sha256:273175c272162d480d06849e09e6e3cdb0245239e3a82df6630df3bc059c6571": [ "v1.2.0" ]
@@ -28,6 +29,7 @@
     "sha256:20c828075d1e36f679d6a91e905b0927141eef5e15be0c9a1ca4a6a0ed9313d2": [ "v2.1.0" ]
     "sha256:695505fcfcc69f1cf35665dce487aad447adbb9af69b796d6437f869015d1157": [ "v2.1.1" ]
     "sha256:1f0543c712262d8f3e25b7a8f0d069d97db6ac5ba32849ebdd5d00bc047b8c3c": [ "v2.1.2" ]
+    "sha256:c8e03f60afa90a28e4bb6ec9a8d0fc36d89de4b7475cf2d613afa793ec969fe0": [ "v2.2.0" ]
 - name: csi-resizer
   dmap:
     "sha256:43195976fb9f94d943f5dd9d58b8afa543be22d09a1165e8a489b7dfe22c657a": [ "v0.4.0" ]
@@ -61,6 +63,7 @@
   dmap:
     "sha256:8d30fae5935c0b9fb537fe7744f1e6ce1f7c28383ff1eab636803a0f55910b46": [ "v0.1.0" ]
     "sha256:14988b598a180cc0282f3f4bc982371baf9a9c9b80878fb385f8ae8bd04ecf16": [ "v0.2.0" ]
+    "sha256:46346c621c4d7e0976ddfb1e8722f1eb0af4e32a1d9648228b04364d9d4830ec": [ "v0.3.0" ]
 - name: hostpathplugin
   dmap:
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
