@@ -13,3 +13,13 @@ groups:
       - sbueringer@gmail.com
     members:
       - naadir@randomvariable.co.uk
+  - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-kubeadm-alerts
+    description: |-
+
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - fabriziopandini@gmail.com
+      - neolit123@gmail.com
