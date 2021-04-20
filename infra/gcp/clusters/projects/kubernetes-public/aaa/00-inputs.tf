@@ -10,13 +10,17 @@ terraform {
   required_version = ">= 0.12.8"
 
   backend "gcs" {
-    bucket = "k8s-infra-clusters-terraform"
+    bucket = "k8s-infra-tf-public-clusters"
     prefix = "kubernetes-public/aaa" // $project_name/$cluster_name
   }
 
   required_providers {
-    google      = "~> 2.14"
-    google-beta = "~> 2.14"
+    google      = {
+      version = "~> 2.14"
+    }
+    google-beta = {
+      version = "~> 2.14"
+    }
   }
 }
 

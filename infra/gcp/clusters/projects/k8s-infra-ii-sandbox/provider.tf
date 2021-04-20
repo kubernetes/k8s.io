@@ -7,7 +7,9 @@ This file defines:
 terraform {
 
   backend "gcs" {
-    bucket = "k8s-infra-clusters-terraform"
+    bucket = "k8s-infra-tf-sandbox-ii"
+    // TODO(spiffxp): the names not matching weirds me out a bit, it would be
+    //                nice to rename the project at some point
     prefix = "k8s-infra-ii-sandbox"
   }
 
