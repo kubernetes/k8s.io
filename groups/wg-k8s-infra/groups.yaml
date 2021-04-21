@@ -180,3 +180,19 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-cluster-admins@kubernetes.io
+
+  - email-id: k8s-infra-ii-coop@kubernetes.io
+    name: k8s-infra-ii-coop
+    description: |-
+      granted access to logs around billing and audit logs
+
+      access granted via custom organization role audit.viewer
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - hh@ii.coop
+      - riaan@ii.coop
+      - caleb@ii.coop
+      - bb@ii.coop
+      - zz@ii.coop
+      - stephen@ii.coop
