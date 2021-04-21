@@ -264,11 +264,11 @@ groups:
       - saschagrunert@gmail.com
     members:
       - adolfo.garcia@uservers.net
+      - augustus@cisco.com
       - ctadeu@gmail.com
       - feiskyer@gmail.com
       - idealhack@gmail.com
       - mudrinic.mare@gmail.com
-      - saugustus@vmware.com
 
   - email-id: release-managers@kubernetes.io
     name: release-managers
@@ -285,12 +285,12 @@ groups:
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
-      - saugustus@vmware.com
     members:
       - release-managers-private@kubernetes.io
       - ameukam@gmail.com
       - amwat@google.com
       - antheabjung@gmail.com
+      - augustus@cisco.com
       - bentheelder@google.com
       - ctadeu@gmail.com
       - dcampau1@gmail.com
