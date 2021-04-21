@@ -1,6 +1,8 @@
 - name: snoopdb 
   dmap:
     "sha256:c4151a15c8439265d98f66d25ef17964e9e975d894822a54ed7e72db78dba6c6": ["v0.1.0"]
+    "sha256:a41a91e366e973da0bfd6fce44ba131d561ab435119ff7e1050d1e226a06dbda": ["v0.2.0"]
 - name: auditlogger
   dmap: 
     "sha256:c4151a15c8439265d98f66d25ef17964e9e975d894822a54ed7e72db78dba6c6": ["v0.1.0"]
+    "sha256:2c9c8df42ac7525e556bbff81aa9a62960888c69d5faad4aad408893bc95cbc9": ["v0.2.0"]
