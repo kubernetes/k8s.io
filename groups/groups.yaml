@@ -1415,13 +1415,22 @@ groups:
   - email-id: k8s-infra-gcs-access-logs@kubernetes.io
     name: k8s-infra-gcs-access-logs
     description: |-
-      Access to gcs logs for log analysis
+      ACL for access to gcs bucket `k8s-artifacts-gcslogs` for analysis.
     settings:
       ReconcileMembers: "true"
     members:
-      - hh@ii.coop
+      - k8s-infra-ii-coop@kubernetes.io
+
+  - email-id: k8s-infra-ii-coop@kubernetes.io
+    name: k8s-infra-ii-coop
+    description: |-
+      ACL for II Coop
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bb@ii.coop
       - caleb@ii.coop
+      - hh@ii.coop
+      - riaan@ii.coop
       - stephen@ii.coop
       - zz@ii.coop
-      - bb@ii.coop
-      - riaan@ii.coop
