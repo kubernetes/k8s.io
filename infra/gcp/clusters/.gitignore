@@ -1,4 +1,13 @@
 .terraform/
+.terraform.lock.hcl
+
+# .tfstate files
+*.tfstate
 *.tfstate*
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+*override.tf*
+
 crash.log
 .envrc
