@@ -50,7 +50,7 @@ resource "google_bigquery_dataset" "usage_metering" {
   }
   access {
     role          = "WRITER"
-    user_by_email = "${google_service_account.cluster_node_sa.email}"
+    user_by_email = google_service_account.cluster_node_sa.email
   }
 
   // This restricts deletion of this dataset if there is data in it
