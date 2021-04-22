@@ -6,13 +6,12 @@ groups:
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
-    owners:
+    members:
+      - naadir@randomvariable.co.uk
       - detiber@gmail.com
       - jdetiberus@equinix.com
       - jeewan@vmware.com
       - sbueringer@gmail.com
-    members:
-      - naadir@randomvariable.co.uk
   - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubeadm-alerts
     description: |-
