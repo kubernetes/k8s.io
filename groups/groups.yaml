@@ -250,7 +250,6 @@ groups:
       - james@munnelly.eu
       - spiffxp@google.com
       - thockin@google.com
-      - k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com
 
   #
   # Push groups: k8s-infra-push-*
