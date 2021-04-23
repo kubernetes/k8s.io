@@ -45,6 +45,13 @@
 #   generate-role-yaml.sh specs/foo.bar.yaml
 #   diff foo.yaml foo.bar.yaml
 #   gcloud iam roles create --project project-id foo.bar --file foo.bar.yaml
+#
+# Note it's possible to generate a custom role that is too large:
+#
+#   "The total size of the title, description, and permission names for a
+#    custom role is limited to 64 KB"
+#
+#   ref: https://cloud.google.com/iam/docs/creating-custom-roles
 
 set -o errexit
 set -o nounset
@@ -73,8 +80,9 @@ function output_role_yaml() {
   name=$(<"${spec}" yq -r .name)
   mapfile -t include_roles < <(<"${spec}" yq -r '.include? | .roles//[] | .[]')
   mapfile -t include_permissions < <(<"${spec}" yq -r '.include? | .permissions//[] | .[]')
-  include_regex=$(<"${spec}" yq -r '.include? | .permissionRegexes//[] | join("|")')
-  exclude_regex=$(<"${spec}" yq -r '.exclude? | .permissionRegexes//[] | join("|")')
+  # wrap regexes in their own groups
+  include_regex=$(<"${spec}" yq -r '.include? | .permissionRegexes//[] | map("(\(.))") | join("|")')
+  exclude_regex=$(<"${spec}" yq -r '.exclude? | .permissionRegexes//[] | map("(\(.))") | join("|")')
 
   local output_path="${output_dir}/${name}.yaml"
 
