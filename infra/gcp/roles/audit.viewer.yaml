@@ -7,15 +7,33 @@
 # name: audit.viewer
 # include:
 #   roles:
+#   # TODO: consider using roles/viewer instead of per-service?
+#   # view/read-only roles for specific services of interest
+#   # read access to compute
 #   - roles/compute.viewer
+#   # read access to dns
 #   - roles/dns.reader
+#   # read access to cloud assets metadata
+#   - roles/cloudasset.viewer
+# 
+#   # meta roles (regardless of roles/viewer)
+#   # read access for the project hierarchy (org, folders, projects)
+#   - roles/browser
+#   # list all resources and their IAM policies
 #   - roles/iam.securityReviewer
-#   - roles/resourcemanager.organizationViewer
+#   # TODO: what specifically needs serviceusage.services.use?
+#   #       could we use roles/serviceusage.serviceUsageViewer instead?
 #   - roles/serviceusage.serviceUsageConsumer
 #   permissions:
+#   # for gsutil _ get: cors, iam, label, logging, lifecycle, retention, ubla
 #   - storage.buckets.get
-#   - storage.buckets.getIamPolicy
-#   - storage.buckets.list
+#   permissionRegexes:
+#   # restrict to get|list calls...
+#   - \.(list|get)[^\.]*$
+#   # ...except for specific services of interest mentioned above
+#   - ^(compute|cloudasset)\.
+#   # ...and this specific permission from roles/serviceusage.serviceUsageConsumer
+#   - serviceusage.services.use
 # exclude:
 #   permissionRegexes:
 #   # permissions with custom roles support level NOT_SUPPORTED
@@ -173,6 +191,100 @@ includedPermissions:
   - binaryauthorization.policy.getIamPolicy
   - clientauthconfig.brands.list
   - clientauthconfig.clients.list
+  - cloudasset.assets.analyzeIamPolicy
+  - cloudasset.assets.exportAccessLevel
+  - cloudasset.assets.exportAccessPolicy
+  - cloudasset.assets.exportAllAccessPolicy
+  - cloudasset.assets.exportAppengineApplications
+  - cloudasset.assets.exportAppengineServices
+  - cloudasset.assets.exportAppengineVersions
+  - cloudasset.assets.exportBigqueryDatasets
+  - cloudasset.assets.exportBigqueryTables
+  - cloudasset.assets.exportBigtableCluster
+  - cloudasset.assets.exportBigtableInstance
+  - cloudasset.assets.exportBigtableTable
+  - cloudasset.assets.exportCloudbillingBillingAccounts
+  - cloudasset.assets.exportCloudkmsCryptoKeyVersions
+  - cloudasset.assets.exportCloudkmsCryptoKeys
+  - cloudasset.assets.exportCloudkmsImportJobs
+  - cloudasset.assets.exportCloudkmsKeyRings
+  - cloudasset.assets.exportCloudresourcemanagerFolders
+  - cloudasset.assets.exportCloudresourcemanagerOrganizations
+  - cloudasset.assets.exportCloudresourcemanagerProjects
+  - cloudasset.assets.exportComputeAddress
+  - cloudasset.assets.exportComputeAutoscalers
+  - cloudasset.assets.exportComputeBackendBuckets
+  - cloudasset.assets.exportComputeBackendServices
+  - cloudasset.assets.exportComputeDisks
+  - cloudasset.assets.exportComputeFirewalls
+  - cloudasset.assets.exportComputeForwardingRules
+  - cloudasset.assets.exportComputeGlobalAddress
+  - cloudasset.assets.exportComputeGlobalForwardingRules
+  - cloudasset.assets.exportComputeHealthChecks
+  - cloudasset.assets.exportComputeHttpHealthChecks
+  - cloudasset.assets.exportComputeHttpsHealthChecks
+  - cloudasset.assets.exportComputeImages
+  - cloudasset.assets.exportComputeInstanceGroupManagers
+  - cloudasset.assets.exportComputeInstanceGroups
+  - cloudasset.assets.exportComputeInstanceTemplates
+  - cloudasset.assets.exportComputeInstances
+  - cloudasset.assets.exportComputeInterconnect
+  - cloudasset.assets.exportComputeInterconnectAttachment
+  - cloudasset.assets.exportComputeLicenses
+  - cloudasset.assets.exportComputeNetworks
+  - cloudasset.assets.exportComputeProjects
+  - cloudasset.assets.exportComputeRegionAutoscaler
+  - cloudasset.assets.exportComputeRegionBackendServices
+  - cloudasset.assets.exportComputeRegionDisk
+  - cloudasset.assets.exportComputeRegionInstanceGroup
+  - cloudasset.assets.exportComputeRegionInstanceGroupManager
+  - cloudasset.assets.exportComputeRouters
+  - cloudasset.assets.exportComputeRoutes
+  - cloudasset.assets.exportComputeSecurityPolicy
+  - cloudasset.assets.exportComputeSnapshots
+  - cloudasset.assets.exportComputeSslCertificates
+  - cloudasset.assets.exportComputeSubnetworks
+  - cloudasset.assets.exportComputeTargetHttpProxies
+  - cloudasset.assets.exportComputeTargetHttpsProxies
+  - cloudasset.assets.exportComputeTargetInstances
+  - cloudasset.assets.exportComputeTargetPools
+  - cloudasset.assets.exportComputeTargetSslProxies
+  - cloudasset.assets.exportComputeTargetTcpProxies
+  - cloudasset.assets.exportComputeTargetVpnGateways
+  - cloudasset.assets.exportComputeUrlMaps
+  - cloudasset.assets.exportComputeVpnTunnels
+  - cloudasset.assets.exportContainerClusterrole
+  - cloudasset.assets.exportContainerClusterrolebinding
+  - cloudasset.assets.exportContainerClusters
+  - cloudasset.assets.exportContainerNamespace
+  - cloudasset.assets.exportContainerNode
+  - cloudasset.assets.exportContainerNodepool
+  - cloudasset.assets.exportContainerPod
+  - cloudasset.assets.exportContainerRole
+  - cloudasset.assets.exportContainerRolebinding
+  - cloudasset.assets.exportContainerregistryImage
+  - cloudasset.assets.exportDatafusionInstance
+  - cloudasset.assets.exportDataprocClusters
+  - cloudasset.assets.exportDataprocJobs
+  - cloudasset.assets.exportDnsManagedZones
+  - cloudasset.assets.exportDnsPolicies
+  - cloudasset.assets.exportIamPolicy
+  - cloudasset.assets.exportIamRoles
+  - cloudasset.assets.exportIamServiceAccountKeys
+  - cloudasset.assets.exportIamServiceAccounts
+  - cloudasset.assets.exportManagedidentitiesDomain
+  - cloudasset.assets.exportOrgPolicy
+  - cloudasset.assets.exportPubsubSubscriptions
+  - cloudasset.assets.exportPubsubTopics
+  - cloudasset.assets.exportResource
+  - cloudasset.assets.exportServicePerimeter
+  - cloudasset.assets.exportServicemanagementServices
+  - cloudasset.assets.exportSpannerDatabases
+  - cloudasset.assets.exportSpannerInstances
+  - cloudasset.assets.exportSqladminInstances
+  - cloudasset.assets.exportStorageBuckets
+  - cloudasset.assets.searchAllIamPolicies
+  - cloudasset.assets.searchAllResources
   - cloudasset.feeds.list
   - cloudbuild.builds.list
   - clouddebugger.breakpoints.list
@@ -823,6 +935,7 @@ includedPermissions:
   - pubsublite.subscriptions.list
   - pubsublite.topics.list
   - recaptchaenterprise.keys.list
+  - recommender.cloudAssetInsights.get
   - recommender.cloudAssetInsights.list
   - recommender.cloudsqlInstanceDiskUsageTrendInsights.list
   - recommender.cloudsqlInstanceOutOfDiskRecommendations.list
@@ -840,6 +953,7 @@ includedPermissions:
   - recommender.iamPolicyInsights.list
   - recommender.iamPolicyRecommendations.list
   - recommender.iamServiceAccountInsights.list
+  - recommender.locations.get
   - recommender.locations.list
   - recommender.loggingProductSuggestionContainerInsights.list
   - recommender.loggingProductSuggestionContainerRecommendations.list
@@ -851,6 +965,7 @@ includedPermissions:
   - redis.operations.list
   - remotebuildexecution.instances.list
   - remotebuildexecution.workerpools.list
+  - resourcemanager.folders.get
   - resourcemanager.folders.getIamPolicy
   - resourcemanager.folders.list
   - resourcemanager.hierarchyNodes.listTagBindings
@@ -942,6 +1057,7 @@ includedPermissions:
   - tpu.tensorflowversions.list
   - transcoder.jobTemplates.list
   - transcoder.jobs.list
+  - translationhub.portals.list
   - vmmigration.cloneJobs.list
   - vmmigration.cutoverJobs.list
   - vmmigration.datacenterConnectors.list

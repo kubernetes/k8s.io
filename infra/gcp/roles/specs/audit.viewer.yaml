@@ -5,15 +5,33 @@ description: View access to resources
 name: audit.viewer
 include:
   roles:
+  # TODO: consider using roles/viewer instead of per-service?
+  # view/read-only roles for specific services of interest
+  # read access to compute
   - roles/compute.viewer
+  # read access to dns
   - roles/dns.reader
+  # read access to cloud assets metadata
+  - roles/cloudasset.viewer
+
+  # meta roles (regardless of roles/viewer)
+  # read access for the project hierarchy (org, folders, projects)
+  - roles/browser
+  # list all resources and their IAM policies
   - roles/iam.securityReviewer
-  - roles/resourcemanager.organizationViewer
+  # TODO: what specifically needs serviceusage.services.use?
+  #       could we use roles/serviceusage.serviceUsageViewer instead?
   - roles/serviceusage.serviceUsageConsumer
   permissions:
+  # for gsutil _ get: cors, iam, label, logging, lifecycle, retention, ubla
   - storage.buckets.get
-  - storage.buckets.getIamPolicy
-  - storage.buckets.list
+  permissionRegexes:
+  # restrict to get|list calls...
+  - \.(list|get)[^\.]*$
+  # ...except for specific services of interest mentioned above
+  - ^(compute|cloudasset)\.
+  # ...and this specific permission from roles/serviceusage.serviceUsageConsumer
+  - serviceusage.services.use
 exclude:
   permissionRegexes:
   # permissions with custom roles support level NOT_SUPPORTED
