@@ -43,50 +43,97 @@ org_roles=(
     iam.serviceAccountLister
 )
 
-old_org_roles=()
+removed_org_roles=()
 
-color 6 "Ensuring organization custom roles exist"
-(
+org_role_bindings=(
+  # empower k8s-infra-org-admins@
+  # NOTE: roles/owner has too many permissions to aggregate into a custom role,
+  # and some services automatically add bindings for roles/owner, e.g.
+  # https://cloud.google.com/storage/docs/access-control/iam-roles#basic-roles-intrinsic
+  "group:k8s-infra-gcp-org-admins@kubernetes.io:roles/owner"
+  "group:k8s-infra-gcp-org-admins@kubernetes.io:$(custom_org_role_name "organization.admin")"
+
+  # empower k8s-infra-prow-oncall@ to use GCP Console to navigate to their projects
+  "group:k8s-infra-prow-oncall@kubernetes.io:roles/browser"
+
+  # TODO: not sure this is required for GKE Google Group RBAC, is this proxy
+  #       for "let people running apps in aaa use GCP console to navigate" ?
+  "group:gke-security-groups@kubernetes.io:roles/browser"
+
+  # TODO: what is the purpose of this role?
+  "group:k8s-infra-gcp-accounting@kubernetes.io:$(custom_org_role_name "CustomRole")"
+
+  # empower k8s-infra-gcp-auditors@ and equivalent service-account
+  "group:k8s-infra-gcp-auditors@kubernetes.io:$(custom_org_role_name "audit.viewer")"
+  "serviceAccount:$(svc_acct_email "kubernetes-public" "k8s-infra-gcp-auditor"):$(custom_org_role_name "audit.viewer")"
+)
+
+removed_org_role_bindings=()
+
+function ensure_org_roles() {
     for role in "${org_roles[@]}"; do
-      color 6 "Ensuring organization custom role ${role}"
-      ensure_custom_org_iam_role_from_file "${role}" "${SCRIPT_DIR}/roles/${role}.yaml"
+        color 6 "Ensuring organization custom role ${role}"
+        ensure_custom_org_iam_role_from_file "${role}" "${SCRIPT_DIR}/roles/${role}.yaml"
     done
-) 2>&1 | indent
+}
 
-color 6 "Ensuring organization IAM bindings exist"
-(
-    # k8s-infra-prow-oncall@kubernetes.io should be able to browse org resources
-    ensure_org_role_binding "group:k8s-infra-prow-oncall@kubernetes.io" "roles/browser"
-    
-    # TODO: this already exists, but seems overprivileged for a group that is about
-    #       access to the "aaa" cluster in "kubernetes-public"
-    ensure_org_role_binding "group:gke-security-groups@kubernetes.io" "roles/browser"
-
-    # k8s-infra-gcp-accounting@
-    ensure_org_role_binding "group:k8s-infra-gcp-accounting@kubernetes.io" "$(custom_org_role_name "CustomRole")"
-
-    # k8s-infra-gcp-auditors@
-    ensure_org_role_binding "group:k8s-infra-gcp-auditors@kubernetes.io" "$(custom_org_role_name "audit.viewer")"
-
-    # k8s-infra-org-admins@
-    # roles/owner has too many permissions to aggregate into a custom role,
-    # and some services (e.g. storage) add bindings based on membership in it
-    ensure_org_role_binding "group:k8s-infra-gcp-org-admins@kubernetes.io" "roles/owner"
-    # everything org admins need beyond roles/owner to manage the org
-    ensure_org_role_binding "group:k8s-infra-gcp-org-admins@kubernetes.io" "$(custom_org_role_name "organization.admin")"
-) 2>&1 | indent
-
-color 6 "Ensuring removed organization IAM bindings do not exist"
-(
-    color 6 "No bindings to remove"
-) 2>&1 | indent
-
-color 6 "Ensuring removed organization custom roles do not exist"
-(
-    for role in "${old_org_roles[@]}"; do
-      color 6 "Ensuring removed organization custom role ${role}"
-      ensure_removed_custom_org_iam_role "${role}"
+function ensure_removed_org_roles() {
+    for role in "${removed_org_roles[@]}"; do
+        color 6 "Ensuring removed organization custom role ${role}"
+        ensure_removed_custom_org_iam_role "${role}"
     done
-) 2>&1 | indent
+}
 
-color 6 "All done!"
+function ensure_org_role_bindings() {
+    for binding in "${org_role_bindings[@]}"; do
+        principal_type="$(echo "${binding}" | cut -d: -f1)"
+        principal_email="$(echo "${binding}" | cut -d: -f2)"
+        principal="$(echo "${binding}" | cut -d: -f1-2)"
+        role="$(echo "${binding}" | cut -d: -f3-)"
+
+        # avoid dependency-cycles by skipping, e.g.
+        # - serviceaccount bound in this script, created by ensure-main-project.sh
+        # - custom org roles used by ensure-main-project.sh, created by this script
+        # - so allow this to run to completion before ensure-main-project.sh, and
+        #   accept that bootstrapping means: run this, then that, then this again
+        case ${principal_type} in
+        serviceAccount)
+            if ! gcloud iam service-accounts describe "${principal_email}" >/dev/null 2>&1; then
+                color 2 "Skipping ${principal} bound to ${role}: principal does not exist"
+                continue
+            fi
+            ;;
+        group|user) ;; # TODO: need access to Directory API
+        esac
+
+        color 6 "Ensuring ${principal} bound to ${role}"
+        ensure_org_role_binding "${principal}" "${role}" 2>&1 | indent
+    done
+}
+
+function ensure_removed_org_role_bindings() {
+    for binding in "${removed_org_role_bindings[@]}"; do
+        principal="$(echo "${binding}" | cut -d: -f1-2)"
+        role="$(echo "${binding}" | cut -d: -f3-)"
+        color 6 "Ensuring ${principal} bound to ${role}"
+        ensure_removed_org_role_binding "${principal}" "${role}" 2>&1 | indent
+    done
+}
+
+function main() {
+    color 6 "Ensuring organization custom roles exist"
+    ensure_org_roles 2>&1 | indent
+
+    color 6 "Ensuring organization IAM bindings exist"
+    ensure_org_role_bindings 2>&1 | indent
+
+    color 6 "Ensuring removed organization IAM bindings do not exist"
+    ensure_removed_org_role_bindings 2>&1 | indent
+
+    color 6 "Ensuring removed organization custom roles do not exist"
+    ensure_removed_org_roles 2>&1 | indent
+
+    color 6 "All done!"
+}
+
+main
