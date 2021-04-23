@@ -694,8 +694,6 @@ includedPermissions:
   - iap.webServiceVersions.getIamPolicy
   - iap.webServices.getIamPolicy
   - iap.webTypes.getIamPolicy
-  - identityplatform.workloadPoolProviders.list
-  - identityplatform.workloadPools.list
   - lifesciences.operations.list
   - logging.buckets.list
   - logging.exclusions.list
@@ -706,6 +704,7 @@ includedPermissions:
   - logging.logServices.list
   - logging.logs.list
   - logging.notificationRules.list
+  - logging.operations.list
   - logging.privateLogEntries.list
   - logging.queries.list
   - logging.sinks.list
@@ -745,6 +744,12 @@ includedPermissions:
   - monitoring.slos.list
   - monitoring.timeSeries.list
   - monitoring.uptimeCheckConfigs.list
+  - networkconnectivity.hubs.getIamPolicy
+  - networkconnectivity.hubs.list
+  - networkconnectivity.locations.list
+  - networkconnectivity.operations.list
+  - networkconnectivity.spokes.getIamPolicy
+  - networkconnectivity.spokes.list
   - networkmanagement.connectivitytests.getIamPolicy
   - networkmanagement.connectivitytests.list
   - networkmanagement.locations.list
@@ -773,19 +778,29 @@ includedPermissions:
   - notebooks.instances.list
   - notebooks.locations.list
   - notebooks.operations.list
+  - notebooks.runtimes.getIamPolicy
+  - notebooks.runtimes.list
   - notebooks.schedules.getIamPolicy
   - notebooks.schedules.list
   - ondemandscanning.operations.list
   - opsconfigmonitoring.resourceMetadata.list
   - osconfig.guestPolicies.list
+  - osconfig.instanceOSPoliciesCompliances.list
+  - osconfig.inventories.list
+  - osconfig.osPolicyAssignments.list
   - osconfig.patchDeployments.list
   - osconfig.patchJobs.list
+  - osconfig.vulnerabilityReports.list
   - policysimulator.replayResults.list
   - policysimulator.replays.list
+  - privateca.caPools.getIamPolicy
+  - privateca.caPools.list
   - privateca.certificateAuthorities.getIamPolicy
   - privateca.certificateAuthorities.list
   - privateca.certificateRevocationLists.getIamPolicy
   - privateca.certificateRevocationLists.list
+  - privateca.certificateTemplates.getIamPolicy
+  - privateca.certificateTemplates.list
   - privateca.certificates.getIamPolicy
   - privateca.certificates.list
   - privateca.locations.list
@@ -808,6 +823,9 @@ includedPermissions:
   - pubsublite.subscriptions.list
   - pubsublite.topics.list
   - recaptchaenterprise.keys.list
+  - recommender.cloudAssetInsights.list
+  - recommender.cloudsqlInstanceDiskUsageTrendInsights.list
+  - recommender.cloudsqlInstanceOutOfDiskRecommendations.list
   - recommender.commitmentUtilizationInsights.list
   - recommender.computeAddressIdleResourceInsights.list
   - recommender.computeAddressIdleResourceRecommendations.list
@@ -835,12 +853,12 @@ includedPermissions:
   - remotebuildexecution.workerpools.list
   - resourcemanager.folders.getIamPolicy
   - resourcemanager.folders.list
+  - resourcemanager.hierarchyNodes.listTagBindings
   - resourcemanager.organizations.get
   - resourcemanager.organizations.getIamPolicy
   - resourcemanager.projects.get
   - resourcemanager.projects.getIamPolicy
   - resourcemanager.projects.list
-  - resourcemanager.resourceTagBindings.list
   - resourcemanager.tagKeys.getIamPolicy
   - resourcemanager.tagKeys.list
   - resourcemanager.tagValues.getIamPolicy
@@ -912,6 +930,7 @@ includedPermissions:
   - storage.buckets.getIamPolicy
   - storage.buckets.list
   - storage.hmacKeys.list
+  - storage.multipartUploads.list
   - storage.objects.getIamPolicy
   - storage.objects.list
   - storagetransfer.jobs.list
@@ -923,7 +942,17 @@ includedPermissions:
   - tpu.tensorflowversions.list
   - transcoder.jobTemplates.list
   - transcoder.jobs.list
+  - vmmigration.cloneJobs.list
+  - vmmigration.cutoverJobs.list
+  - vmmigration.datacenterConnectors.list
   - vmmigration.deployments.list
+  - vmmigration.groups.list
+  - vmmigration.locations.list
+  - vmmigration.migratingVms.list
+  - vmmigration.operations.list
+  - vmmigration.sources.list
+  - vmmigration.targets.list
+  - vmmigration.utilizationReports.list
   - vpcaccess.connectors.list
   - vpcaccess.locations.list
   - vpcaccess.operations.list
