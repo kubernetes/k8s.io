@@ -188,6 +188,33 @@ func TestK8sInfraRBACGroupConventions(t *testing.T) {
 	}
 }
 
+// Enforce conventions for PSC groups
+// - groups can't own other groups, so for groups that should be owned by
+//	 security@kubernetes.io should own, make sure the owners match
+func TestProductSecurityCommitteeGroups(t *testing.T) {
+	pscGroups := []string{
+		"distributors-announce@kubernetes.io",
+		"security-discuss-private@kubernetes.io",
+	}
+	owners := []string{}
+	for _, g := range cfg.Groups {
+		if g.EmailId == "security@kubernetes.io" {
+			owners = g.Owners
+			break
+		}
+	}
+	for _, pscGroup := range pscGroups {
+		for _, g := range cfg.Groups {
+			if g.EmailId == pscGroup {
+				if !reflect.DeepEqual(owners, g.Owners) {
+					t.Errorf("group '%s': owners must match owners from security@kubernetes.io, expected: %v, actual: %v", pscGroup, owners, g.Owners)
+				}
+				break
+			}
+		}
+	}
+}
+
 // An e-mail address can only show up once within a given group, whether that
 // be as a member, manager, or owner
 func TestNoDuplicateMembers(t *testing.T) {
@@ -290,7 +317,7 @@ func TestGroupsWhichShouldSupportHistory(t *testing.T) {
 				)
 			} else if allowedWebPosting != "true" {
 				t.Errorf(
-					"group '%s': must have 'settings.allowedWebPosting = true'" +
+					"group '%s': must have 'settings.allowedWebPosting = true'"+
 						" but have 'settings.allowedWebPosting = %s' instead",
 					group.Name,
 					allowedWebPosting,
