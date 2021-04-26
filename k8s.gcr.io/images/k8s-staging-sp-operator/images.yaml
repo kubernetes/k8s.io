@@ -1,4 +1,11 @@
 - name: security-profiles-operator
   dmap:
-    "sha256:67c97995264f949ab2d2e028cc6fb981cf5fe4646442abb8b422e9559c6a5732": ["v0.1.0"]
     "sha256:16c33e6b749f91802e22d99ce6fabdd23aa283309fe77134c6271afd298db805": ["v0.2.0"]
+    "sha256:67c97995264f949ab2d2e028cc6fb981cf5fe4646442abb8b422e9559c6a5732": ["v0.1.0"]
+    "sha256:a4c13ed50d53fc83fa789d52293627e3f6d301b5a9245c19fe1e678128fdd725": ["v0.3.0"]
+- name: security-profiles-operator-amd64
+  dmap:
+    "sha256:9b691f7fa46219897d99d8d1353b97e056c5c2c40e09f5c3e572dc039b7ffa45": ["v0.3.0"]
+- name: security-profiles-operator-arm64
+  dmap:
+    "sha256:ef48f1aac6e3229d9eaefb5727825dc314afb8a5eca7e266336f0c21c6320177": ["v0.3.0"]
