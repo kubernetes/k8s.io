@@ -1,0 +1,8 @@
+{
+  "displayName": "Kubernetes External Secrets Service Account",
+  "email": "kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "101774440407211070893",
+  "projectId": "kubernetes-public",
+  "uniqueId": "101774440407211070893"
+}

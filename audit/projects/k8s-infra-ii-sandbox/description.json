@@ -1,0 +1,11 @@
+{
+  "createTime": "2021-04-26T13:49:16.042Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-infra-ii-sandbox",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-infra-ii-sandbox",
+  "projectNumber": "631771264409"
+}
