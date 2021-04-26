@@ -74,6 +74,7 @@ readonly STAGING_PROJECTS=(
     examples
     experimental
     external-dns
+    gateway-api
     git-sync
     infra-tools
     ingress-nginx
@@ -101,7 +102,6 @@ readonly STAGING_PROJECTS=(
     releng-test
     scheduler-plugins
     scl-image-builder
-    service-apis
     sig-docs
     sig-storage
     slack-infra
