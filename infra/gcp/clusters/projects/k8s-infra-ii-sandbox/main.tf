@@ -50,10 +50,9 @@ resource "google_project_service" "project" {
   service = each.key
 }
 
-// Ensure k8s-infra-ii-coop@kuberentes.io has editor access to this project
+// Ensure k8s-infra-ii-coop@kubernetes.io has editor access to this project
 resource "google_project_iam_member" "k8s_infra_ii_coop" {
   project = google_project.project.id
   role    = "roles/owner"
-  member  = "group:k8s-infra-ii-coop@kuberentes.io"
+  member  = "group:k8s-infra-ii-coop@kubernetes.io"
 }
-
