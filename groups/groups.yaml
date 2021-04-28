@@ -539,6 +539,7 @@ groups:
       - k8s-infra-release-viewers@kubernetes.io
       - alarcj137@gmail.com
       - ameukam@gmail.com
+      - ania0102@gmail.com # 1.22 CI Signal Shadow
       - antonio.ojea.garcia@gmail.com
       - bartek@smykla.com
       - eddiezane@gmail.com
@@ -546,15 +547,14 @@ groups:
       - gmccloskey@google.com
       - helenfengzhi@gmail.com
       - liggitt@google.com
-      - max@koerbaecher.io # 1.21 CI Signal Shadow
+      - max@koerbaecher.io # 1.22 CI Signal Lead
       - mrfaizal@google.com
-      - priyankahariharan421@gmail.com # 1.21 CI Signal Shadow
+      - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
       - ricardo.katz@gmail.com
       - rob.kielty@gmail.com
-      - saumya00@outlook.com # 1.21 CI Signal Shadow
-      - snichols@vmware.com # 1.21 CI Signal Shadow
+      - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
+      - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
       - spiffxp@gmail.com
-      - thejoycekung@gmail.com
       - neolit123@gmail.com
       - philjohnson96@gmail.com
       - k8s-infra-sig-scalability-oncall@kubernetes.io
