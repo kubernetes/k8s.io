@@ -363,6 +363,7 @@ groups:
     members:
       - sig-release-leads@kubernetes.io
       - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
+      - ania0102@gmail.com # 1.22 CI Signal Shadow
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - ashnehete@gmail.com # 1.21 Release Notes Shadow
       - chandani.madnani@gmail.com # 1.21 Docs Shadow
@@ -373,20 +374,18 @@ groups:
       - justinleegarrison@gmail.com # 1.21 Comms Shadow
       - kcmartin2@mac.com # 1.21 Bug Triage Shadow
       - kefroden@gmail.com # 1.21 RT Enhancements Shadow
-      - max@koerbaecher.io # 1.21 CI Signal Shadow
+      - max@koerbaecher.io # 1.22 CI Signal Lead
       - meloncattiel@gmail.com # 1.21 Release Notes Shadow
       - monmonmsc@gmail.com # 1.21 Bug Triage Shadow
       - mvortizr@gmail.com # 1.21 Docs Shadow
       - onlydole@gmail.com # 1.21 Emeritus Advisor
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
       - pmmalinov01@gmail.com # 1.21 Release Notes Shadow
-      - priyankahariharan421@gmail.com # 1.21 CI Signal Shadow
+      - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
       - rlejano@gmail.com # 1.21 Docs Lead
-      - saumya00@outlook.com # 1.21 CI Signal Shadow
-      - snichols@vmware.com # 1.21 CI Signal Shadow
-      - soniasingla.1812@gmail.com # 1.21 Release Notes Shadow
+      - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
+      - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
       - tengqim@cn.ibm.com # 1.21 Docs Shadow
-      - thejoycekung@gmail.com # 1.21 CI Signal Lead
       - victor@cloudflavor.io # 1.21 Docs Shadow
       - wilsonehusin@gmail.com # 1.21 Release Notes Lead
       - xander@grzy.dev # 1.21 Comms Shadow
@@ -410,6 +409,7 @@ groups:
       - tpepper@vmware.com # Release Team subproject owner
     members:
       - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
+      - ania0102@gmail.com # 1.22 CI Signal Shadow
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - ashnehete@gmail.com # 1.21 Release Notes Shadow
       - chandani.madnani@gmail.com # 1.21 Docs Shadow
@@ -420,16 +420,14 @@ groups:
       - justinleegarrison@gmail.com # 1.21 Comms Shadow
       - kcmartin2@mac.com # 1.21 Bug Triage Shadow
       - kefroden@gmail.com # 1.21 RT Enhancements Shadow
-      - max@koerbaecher.io # 1.21 CI Signal Shadow
       - meloncattiel@gmail.com # 1.21 Release Notes Shadow
       - monmonmsc@gmail.com # 1.21 Bug Triage Shadow
       - mvortizr@gmail.com # 1.21 Docs Shadow
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
       - pmmalinov01@gmail.com # 1.21 Release Notes Shadow
-      - priyankahariharan421@gmail.com # 1.21 CI Signal Shadow
-      - saumya00@outlook.com # 1.21 CI Signal Shadow
-      - snichols@vmware.com # 1.21 CI Signal Shadow
-      - soniasingla.1812@gmail.com # 1.21 Release Notes Shadow
+      - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
+      - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
+      - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
       - tengqim@cn.ibm.com # 1.21 Docs Shadow
       - victor@cloudflavor.io # 1.21 Docs Shadow
       - xander@grzy.dev # 1.21 Comms Shadow
