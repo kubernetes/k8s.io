@@ -69,6 +69,26 @@ function ensure_private_gcs_bucket() {
 
     _ensure_gcs_bucket "${project}" "${bucket}"
     ensure_removed_gcs_role_binding "${bucket}" "allUsers" "objectViewer"
+    # roles/storage.legacyBucketOwner contains storage.buckets.setIamPolicy,
+    # but not storage.objects.get. This means someone with roles/editor on the
+    # project could grant themselves access to read bucket contents that they
+    # aren't supposed to be able to read.
+    #
+    # Given that roles/editor has no *.setIamPolicy permissions for other
+    # service resources, this seems like a security gap that should be closed.
+    #
+    # Ideally we would do this in _ensure_gcs_bucket. However, removing this
+    # role means removing other (possibly needed) permissions that may be used
+    # by GCP service agent service accounts (e.g. App Engine, GCR, GCE):
+    # - storage.buckets.get
+    # - storage.multipartUploads.(abort|create|list|listParts)
+    # - storage.objects.(create|delete|list)
+    #
+    # So until we have time to research what buckets those service agents
+    # specifically need access to, we'll leave them alone and constrain this
+    # policy to "private" gcs buckets that are currently only used by humans
+    # to store terraform state containing potentially sensitive info
+    ensure_removed_gcs_role_binding "${bucket}" "projectEditor:${project}" "legacyBucketOwner"
 }
 
 # Sets the web policy on the bucket, including a default index.html page
