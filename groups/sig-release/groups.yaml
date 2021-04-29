@@ -367,6 +367,8 @@ groups:
       - ashnehete@gmail.com # 1.22 Release Docs Shadow
       - carlisia@grokkingtech.io # 1.22 Release Docs Shadow
       - chandani.madnani@gmail.com # 1.21 Docs Shadow
+      - cicih@google.com # 1.22 Release Notes Shadow
+      - Damanarora@cmail.carleton.ca # 1.22 Release Notes Shadow
       - desponda@vmware.com # 1.21 Bug Triage Shadow
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
       - james@jameslaverack.com # 1.21 Enhancements Shadow
@@ -375,23 +377,22 @@ groups:
       - kcmartin2@mac.com # 1.21 Bug Triage Shadow
       - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - max@koerbaecher.io # 1.21 CI Signal Shadow
-      - meloncattiel@gmail.com # 1.21 Release Notes Shadow
       - monmonmsc@gmail.com # 1.21 Bug Triage Shadow
       - mvortizr@gmail.com # 1.21 Docs Shadow
       - onlydole@gmail.com # 1.21 Emeritus Advisor
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
-      - pmmalinov01@gmail.com # 1.21 Release Notes Shadow
+      - pmmalinov01@gmail.com # 1.22 Release Notes Lead
       - priyankahariharan421@gmail.com # 1.21 CI Signal Shadow
       - rpanjwani@vmware.com # 1.22 Release Docs Shadow
       - rlejano@gmail.com # 1.21 Docs Lead
       - saumya00@outlook.com # 1.21 CI Signal Shadow
+      - simran.thind@outlook.com # 1.22 Release Notes Shadow
+      - sladygit98@gmail.com # 1.22 Release Notes Shadow
       - snichols@vmware.com # 1.21 CI Signal Shadow
-      - soniasingla.1812@gmail.com # 1.21 Release Notes Shadow
       - striker57@gmail.com # 1.22 Release Docs Shadow
       - tengqim@cn.ibm.com # 1.21 Docs Shadow
       - thejoycekung@gmail.com # 1.21 CI Signal Lead
       - victor@cloudflavor.io # 1.22 Docs Lead
-      - wilsonehusin@gmail.com # 1.21 Release Notes Lead
       - xander@grzy.dev # 1.21 Comms Shadow
 
   - email-id: release-team-shadows@kubernetes.io
@@ -416,6 +417,8 @@ groups:
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
       - ashnehete@gmail.com # 1.22 Release Docs Shadow
       - carlisia@grokkingtech.io # 1.22 Release Docs Shadow
+      - cicih@google.com # 1.22 Release Notes Shadow
+      - Damanarora@cmail.carleton.ca # 1.22 Release Notes Shadow
       - desponda@vmware.com # 1.21 Bug Triage Shadow
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
       - james@jameslaverack.com # 1.21 RT Enhancements Shadow
@@ -424,14 +427,13 @@ groups:
       - kcmartin2@mac.com # 1.21 Bug Triage Shadow
       - kefroden@gmail.com # 1.21 RT Enhancements Shadow
       - max@koerbaecher.io # 1.21 CI Signal Shadow
-      - meloncattiel@gmail.com # 1.21 Release Notes Shadow
       - monmonmsc@gmail.com # 1.21 Bug Triage Shadow
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
-      - pmmalinov01@gmail.com # 1.21 Release Notes Shadow
       - priyankahariharan421@gmail.com # 1.21 CI Signal Shadow
       - rpanjwani@vmware.com # 1.22 Release Docs Shadow
       - saumya00@outlook.com # 1.21 CI Signal Shadow
+      - simran.thind@outlook.com # 1.22 Release Notes Shadow
+      - sladygit98@gmail.com # 1.22 Release Notes Shadow
       - snichols@vmware.com # 1.21 CI Signal Shadow
-      - soniasingla.1812@gmail.com # 1.21 Release Notes Shadow
       - striker57@gmail.com # 1.22 Release Docs Shadow
       - xander@grzy.dev # 1.21 Comms Shadow
