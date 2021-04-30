@@ -54,9 +54,8 @@ data:
         description: >
           Dashboard tracking the current status of all issues and PRs for the release team.
         rules:
-          - release-team
-          - urgent-issues
-          - urgent-prs
+          - release-team-prs
+          - release-team-issues
 
       - id: release-engineering
         name: Release Engineering Team
@@ -357,38 +356,6 @@ data:
           - tag: "!contributor-last"
           - responded: +6d
 
-      ## Bug Scrub ##
-      bugs-old-recv:
-        name: "Bugs that deserve a follow-up comment"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - tag: recv
-          - responded: +60d
-          - created: +60d
-          - label: "kind/bug"
-
-      features-old-recv:
-        name: "Features that deserve a follow-up comment"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - tag: recv
-          - responded: +90d
-          - created: +30d
-          - label: "kind/feature"
-
-      other-old-recv:
-        name: "Items that deserve a follow-up comment"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - tag: recv
-          - responded: +60d
-          - label: "!kind/feature"
-          - label: "!kind/bug"
-          - label: "!kind/support"
-
       features-old:
         name: "Features that have not been commented on within 90 days"
         resolution: "Comment or close the issue"
@@ -398,45 +365,29 @@ data:
           - created: +90d
           - label: "kind/feature"
 
-      bugs-old:
-        name: "Bugs that have not been commented on within 60 days"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - label: "kind/bug"
-          - responded: +60d
-          - created: +60d
-          - label: "!priority/awaiting-evidence"
-
-      other-old:
-        name: "Items that have not been commented on within 60 days"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - responded: +90d
-          - created: +90d
-          - label: "!kind/feature"
-          - label: "!kind/bug"
-          - label: "!kind/support"
-          - label: "!priority/awaiting-evidence"
-
       lifecycle-stale:
         name: "Issues nearing expiration"
         resolution: "Close or label as frozen"
         filters:
           - label: lifecycle/stale
 
-      release-team:
-        name: "Area/Release-Team"
+      release-team-issues:
+        name: "area-release-team"
         type: issue
         filters:
           - label: area/release-team
+          - label: sig/release
+
+      release-team-prs:
+        name: "area-release-team-prs"
+        type: pull_request
+        filters:
+          - label: area/release-team
+          - label: sig/release
 
       release-engineering-issues:
         name: "release-eng-issues"
         type: issue
-        repos:
-          - "https://github.com/kubernetes/release"
         filters:
           - label: area/release-eng
           - label: sig/release
@@ -444,8 +395,6 @@ data:
       release-engineering-prs:
         name: "release-eng-prs"
         type: pull_request
-        repos:
-          - "https://github.com/kubernetes/release"
         filters:
           - label: area/release-eng
           - label: sig/release
@@ -477,42 +426,6 @@ data:
         type: issue
         filters:
           - label: kind/failing-test
-
-      # Receive queue
-      question-recv:
-        name: "Questions awaiting follow-up"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - tag: recv
-          - label: ".*question"
-
-      bugs-recv:
-        name: "Bugs awaiting follow-up"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - tag: recv
-          - label: ".*bug"
-
-      enhancement-recv:
-        name: "Features awaiting follow-up"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - tag: recv
-          - label: ".*(feature|enhancement|idea).*"
-
-      other-recv:
-        name: "Items that deserve a follow-up comment"
-        resolution: "Comment or close the issue"
-        type: issue
-        filters:
-          - tag: recv
-          - responded: +30d
-          - label: "!.*(feature|enhancement).*"
-          - label: "!.*bug"
-          - label: ".*question"
 
       # Urgent
       urgent-prs:
