@@ -1352,6 +1352,7 @@ groups:
       - bowei@google.com
       - ricardo.katz@gmail.com
       - thockin@google.com
+      - strong.james.e@gmail.com
 
   - email-id: k8s-infra-staging-ingressconformance@kubernetes.io
     name: k8s-infra-staging-ingressconformance
