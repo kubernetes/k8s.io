@@ -1,1 +1,10 @@
-# No images yet
+# 3.0.20210430
+- name: etcd-backup
+  dmap:
+    "sha256:d3042152737d5b7a54f368b8a54a58a87601366f1682a1792bf375e0c5da7317": ["3.0.20210430"]
+- name: etcd-dump
+  dmap:
+    "sha256:7113a3198a7892195384f657166423d67cbe54bb42aecf19ce40b64374d02339": ["3.0.20210430"]
+- name: etcd-manager
+  dmap:
+    "sha256:ebb73d3d4a99da609f9e01c556cd9f9aa7a0aecba8f5bc5588d7c45eb38e3a7e": ["3.0.20210430"]
