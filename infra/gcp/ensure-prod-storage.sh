@@ -138,7 +138,7 @@ function ensure_prod_gcr() {
 # $2: The bucket, including gs:// prefix
 # $3: The group email to empower (optional)
 function ensure_prod_gcs_bucket() {
-    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ $# -gt 3 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "ensure_prod_gcs_bucket(project, bucket, [group]) requires 2 or 3 arguments" >&2
         return 1
     fi
@@ -165,7 +165,7 @@ function ensure_prod_gcs_bucket() {
 # $1: The GCP project
 # $2: The googlegroups group
 function empower_group_to_fake_prod() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_group_to_fake_prod(project, group) requires 2 arguments" >&2
         return 1
     fi
@@ -270,7 +270,7 @@ function ensure_all_prod_special_cases() {
     # staging, to allow e2e tests to run as that account, instead of yet another.
     color 6 "Empowering test-prod promoter to promoter staging GCR"
     empower_svcacct_to_admin_gcr \
-        $(svc_acct_email "${PROMOTER_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
+        "$(svc_acct_email "${PROMOTER_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}")" \
         "${PROMOTER_TEST_STAGING_PROJECT}"
 
     # Special case: grant the image promoter test service account access to
@@ -278,7 +278,7 @@ function ensure_all_prod_special_cases() {
     # mechanism).
     color 6 "Empowering test-prod promoter to test-prod auditor"
     empower_service_account_for_cip_auditor_e2e_tester \
-        $(svc_acct_email "${GCR_AUDIT_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
+        "$(svc_acct_email "${GCR_AUDIT_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}")" \
         "${GCR_AUDIT_TEST_PROD_PROJECT}"
 
     # Special case: grant the GCR backup-test svcacct access to the "backup-test
@@ -291,7 +291,7 @@ function ensure_all_prod_special_cases() {
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_svcacct_to_write_gcr \
-            $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}") \
+            "$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")" \
             "${GCR_BACKUP_TEST_PROD_PROJECT}" \
             "${r}"
     done 2>&1 | indent
@@ -335,7 +335,7 @@ function ensure_all_prod_special_cases() {
         empower_ksa_to_svcacct \
             "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter]" \
             "${PROD_PROJECT}" \
-            $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")
+            "$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")"
     done
     # For write access to k8s-artifacts-prod-bak GCR. This is only for backups.
     color 6 "Empowering promoter-bak namespace to use prod-bak promoter svcacct"
@@ -343,7 +343,7 @@ function ensure_all_prod_special_cases() {
         empower_ksa_to_svcacct \
             "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter-bak]" \
             "${PRODBAK_PROJECT}" \
-            $(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+            "$(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")"
     done
     # For write access to:
     #   (1) k8s-gcr-backup-test-prod GCR
@@ -359,7 +359,7 @@ function ensure_all_prod_special_cases() {
         empower_ksa_to_svcacct \
             "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter-test]" \
             "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" \
-            $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+            "$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")"
     done
 
     # Special case: empower k8s-infra-gcs-access-logs@kubernetes.io to read k8s-artifacts-gcslogs
@@ -379,7 +379,7 @@ function ensure_all_prod_special_cases() {
         empower_ksa_to_svcacct \
             "${project}.svc.id.goog[test-pods/k8s-infra-gcr-vuln-scanning]" \
             "${PROD_PROJECT}" \
-            $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
+            "$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")"
     done
 }
 
