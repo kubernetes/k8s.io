@@ -138,7 +138,7 @@ function ensure_prod_gcr() {
 # $2: The bucket, including gs:// prefix
 # $3: The group email to empower (optional)
 function ensure_prod_gcs_bucket() {
-    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ $# -gt 3 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "ensure_prod_gcs_bucket(project, bucket, [group]) requires 2 or 3 arguments" >&2
         return 1
     fi
@@ -165,7 +165,7 @@ function ensure_prod_gcs_bucket() {
 # $1: The GCP project
 # $2: The googlegroups group
 function empower_group_to_fake_prod() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_group_to_fake_prod(project, group) requires 2 arguments" >&2
         return 1
     fi
@@ -187,40 +187,43 @@ function empower_group_to_fake_prod() {
 #
 
 # Create all prod artifact projects.
-color 6 "Ensuring all prod projects"
-for prj in "${ALL_PROD_PROJECTS[@]}"; do
-    color 6 "Ensuring project exists: ${prj}"
-    ensure_project "${prj}"
+function ensure_all_prod_projects() {
+    for prj in "${ALL_PROD_PROJECTS[@]}"; do
+        color 6 "Ensuring project exists: ${prj}"
+        ensure_project "${prj}"
 
-    color 6 "Enabling the container registry API: ${prj}"
-    enable_api "${prj}" containerregistry.googleapis.com
+        color 6 "Enabling the container registry API: ${prj}"
+        enable_api "${prj}" containerregistry.googleapis.com
 
-    color 6 "Enabling the container analysis API: ${prj}"
-    enable_api "${prj}" containeranalysis.googleapis.com
+        color 6 "Enabling the container analysis API: ${prj}"
+        enable_api "${prj}" containeranalysis.googleapis.com
 
-    color 6 "Ensuring the GCR repository: ${prj}"
-    ensure_prod_gcr "${prj}" 2>&1 | indent
+        color 6 "Ensuring the GCR repository: ${prj}"
+        ensure_prod_gcr "${prj}" 2>&1 | indent
 
-    color 6 "Enabling the GCS API: ${prj}"
-    enable_api "${prj}" storage-component.googleapis.com
+        color 6 "Enabling the GCS API: ${prj}"
+        enable_api "${prj}" storage-component.googleapis.com
 
-    color 6 "Ensuring the GCS bucket: gs://${prj}"
-    ensure_prod_gcs_bucket "${prj}" "gs://${prj}" 2>&1 | indent
-done 2>&1 | indent
+        color 6 "Ensuring the GCS bucket: gs://${prj}"
+        ensure_prod_gcs_bucket "${prj}" "gs://${prj}" 2>&1 | indent
+    done
+}
+
 
 # Create all prod GCS buckets.
-color 6 "Ensuring all prod buckets"
-for sfx in "${ALL_PROD_BUCKETS[@]}"; do
-    color 6 "Ensuring the GCS bucket: gs://k8s-artifacts-${sfx}"
-    ensure_prod_gcs_bucket \
-        "${PROD_PROJECT}" \
-        "gs://k8s-artifacts-${sfx}" \
-        "k8s-infra-push-${sfx}@kubernetes.io" \
-        | indent
-done 2>&1 | indent
+function ensure_all_prod_buckets() {
+    for sfx in "${ALL_PROD_BUCKETS[@]}"; do
+        color 6 "Ensuring the GCS bucket: gs://k8s-artifacts-${sfx}"
+        ensure_prod_gcs_bucket \
+            "${PROD_PROJECT}" \
+            "gs://k8s-artifacts-${sfx}" \
+            "k8s-infra-push-${sfx}@kubernetes.io" \
+            | indent
+    done
+}
 
-color 6 "Handling special cases"
-(
+
+function ensure_all_prod_special_cases() {
     # Special case: set the web policy on the prod bucket.
     color 6 "Configuring the web policy on the prod bucket"
     ensure_gcs_web_policy "gs://${PROD_PROJECT}"
@@ -267,7 +270,7 @@ color 6 "Handling special cases"
     # staging, to allow e2e tests to run as that account, instead of yet another.
     color 6 "Empowering test-prod promoter to promoter staging GCR"
     empower_svcacct_to_admin_gcr \
-        $(svc_acct_email "${PROMOTER_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
+        "$(svc_acct_email "${PROMOTER_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}")" \
         "${PROMOTER_TEST_STAGING_PROJECT}"
 
     # Special case: grant the image promoter test service account access to
@@ -275,7 +278,7 @@ color 6 "Handling special cases"
     # mechanism).
     color 6 "Empowering test-prod promoter to test-prod auditor"
     empower_service_account_for_cip_auditor_e2e_tester \
-        $(svc_acct_email "${GCR_AUDIT_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}") \
+        "$(svc_acct_email "${GCR_AUDIT_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}")" \
         "${GCR_AUDIT_TEST_PROD_PROJECT}"
 
     # Special case: grant the GCR backup-test svcacct access to the "backup-test
@@ -288,7 +291,7 @@ color 6 "Handling special cases"
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_svcacct_to_write_gcr \
-            $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}") \
+            "$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")" \
             "${GCR_BACKUP_TEST_PROD_PROJECT}" \
             "${r}"
     done 2>&1 | indent
@@ -312,16 +315,17 @@ color 6 "Handling special cases"
     color 6 "Removing retention on promoter test-prod"
     gsutil retention clear gs://k8s-cip-test-prod
 
+    # Special case: create/add-permissions for necessary service accounts for the auditor.
+    color 6 "Empowering artifact auditor"
+    empower_artifact_auditor "${PROD_PROJECT}"
+    empower_artifact_auditor_invoker "${PROD_PROJECT}"
+
     # Special case: give Cloud Run Admin privileges to the group that will
     # administer the cip-auditor (so that they can deploy the auditor to Cloud Run).
     color 6 "Empowering artifact-admins to release prod auditor"
     empower_group_to_admin_artifact_auditor \
         "${PROD_PROJECT}" \
         "k8s-infra-artifact-admins@kubernetes.io"
-    # Special case: create/add-permissions for necessary service accounts for the auditor.
-    color 6 "Empowering artifact auditor"
-    empower_artifact_auditor "${PROD_PROJECT}"
-    empower_artifact_auditor_invoker "${PROD_PROJECT}"
 
     # Special case: empower Kubernetes service account to authenticate as a GCP
     # service account.
@@ -332,7 +336,7 @@ color 6 "Handling special cases"
         empower_ksa_to_svcacct \
             "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter]" \
             "${PROD_PROJECT}" \
-            $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")
+            "$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")"
     done
     # For write access to k8s-artifacts-prod-bak GCR. This is only for backups.
     color 6 "Empowering promoter-bak namespace to use prod-bak promoter svcacct"
@@ -340,7 +344,7 @@ color 6 "Handling special cases"
         empower_ksa_to_svcacct \
             "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter-bak]" \
             "${PRODBAK_PROJECT}" \
-            $(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+            "$(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")"
     done
     # For write access to:
     #   (1) k8s-gcr-backup-test-prod GCR
@@ -356,7 +360,7 @@ color 6 "Handling special cases"
         empower_ksa_to_svcacct \
             "${project}.svc.id.goog[test-pods/k8s-infra-gcr-promoter-test]" \
             "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" \
-            $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
+            "$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")"
     done
 
     # Special case: empower k8s-infra-gcs-access-logs@kubernetes.io to read k8s-artifacts-gcslogs
@@ -376,8 +380,21 @@ color 6 "Handling special cases"
         empower_ksa_to_svcacct \
             "${project}.svc.id.goog[test-pods/k8s-infra-gcr-vuln-scanning]" \
             "${PROD_PROJECT}" \
-            $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
+            "$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")"
     done
-) 2>&1 | indent
+}
 
-color 6 "Done"
+function main() {
+    color 6 "Ensuring all prod projects"
+    ensure_all_prod_projects 2>&1 | indent
+
+    color 6 "Ensuring all prod buckets"
+    ensure_all_prod_buckets 2>&1 | indent
+
+    color 6 "Handling special cases"
+    ensure_all_prod_special_cases 2>&1 | indent
+
+    color 6 "Done"
+}
+
+main
