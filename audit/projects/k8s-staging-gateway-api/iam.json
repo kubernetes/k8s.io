@@ -1,0 +1,68 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:27800831195@cloudbuild.gserviceaccount.com",
+        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-gateway-api@kubernetes.io"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-27800831195@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-27800831195@container-analysis.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.occurrences.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-27800831195@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerregistry.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-27800831195@gcp-sa-containerscanning.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-27800831195@gcp-sa-pubsub.iam.gserviceaccount.com"
+      ],
+      "role": "roles/pubsub.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-gateway-api@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-gateway-api@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "version": 1
+}
