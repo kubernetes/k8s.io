@@ -107,6 +107,7 @@ readonly STAGING_PROJECTS=(
     slack-infra
     sp-operator
     storage-migrator
+    test-infra
     txtdirect
 )
 
