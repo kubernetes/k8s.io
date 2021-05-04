@@ -359,6 +359,12 @@ color 6 "Handling special cases"
             $(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")
     done
 
+    # Special case: empower k8s-infra-gcs-access-logs@kubernetes.io to read k8s-artifacts-gcslogs
+    # k8s-artifacts-gcslogs receive and store Cloud Audit logs for k8s-artificats-prod.
+    ensure_gcs_role_binding "gs://k8s-artifacts-gcslogs" \
+        "group:k8s-infra-gcs-access-logs@kubernetes.io" \
+        "objectViewer"
+
     color 6 "Ensuring prod promoter vuln scanning svcacct exists"
     ensure_service_account \
         "${PROD_PROJECT}" \
