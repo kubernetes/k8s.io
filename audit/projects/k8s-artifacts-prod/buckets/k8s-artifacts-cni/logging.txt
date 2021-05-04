@@ -1,1 +1,1 @@
-gs://k8s-artifacts-cni/ has no logging configuration.
+{"logBucket": "k8s-artifacts-gcslogs", "logObjectPrefix": "k8s-artifacts-cni"}

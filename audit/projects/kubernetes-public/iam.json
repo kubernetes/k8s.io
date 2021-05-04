@@ -63,7 +63,8 @@
     {
       "members": [
         "group:k8s-infra-dns-admins@kubernetes.io",
-        "serviceAccount:dns-pusher@kubernetes-public.iam.gserviceaccount.com"
+        "serviceAccount:dns-pusher@kubernetes-public.iam.gserviceaccount.com",
+        "serviceAccount:k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/dns.admin"
     },
@@ -124,6 +125,12 @@
         "serviceAccount:service-127754664067@serverless-robot-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/run.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/secretmanager.secretAccessor"
     },
     {
       "members": [

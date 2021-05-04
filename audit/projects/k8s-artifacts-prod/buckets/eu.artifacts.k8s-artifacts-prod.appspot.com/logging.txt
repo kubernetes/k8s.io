@@ -1,1 +1,1 @@
-gs://eu.artifacts.k8s-artifacts-prod.appspot.com/ has no logging configuration.
+{"logBucket": "k8s-artifacts-gcslogs", "logObjectPrefix": "eu.artifacts.k8s-artifacts-prod.appspot.com"}

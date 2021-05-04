@@ -1,1 +1,1 @@
-gs://k8s-artifacts-prod/ has no logging configuration.
+{"logBucket": "k8s-artifacts-gcslogs", "logObjectPrefix": "k8s-artifacts-prod"}

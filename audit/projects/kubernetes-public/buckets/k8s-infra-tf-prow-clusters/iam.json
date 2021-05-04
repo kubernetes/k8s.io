@@ -1,0 +1,30 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/storage.admin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-prow-oncall@kubernetes.io",
+        "projectEditor:kubernetes-public",
+        "projectOwner:kubernetes-public"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:kubernetes-public"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-prow-oncall@kubernetes.io"
+      ],
+      "role": "roles/storage.objectAdmin"
+    }
+  ]
+}

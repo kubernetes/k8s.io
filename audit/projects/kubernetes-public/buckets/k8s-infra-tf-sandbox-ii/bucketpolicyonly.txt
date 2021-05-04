@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-infra-tf-sandbox-ii:
+  Enabled: True
+  LockedTime: 2021-07-25 14:10:50.454000+00:00
+

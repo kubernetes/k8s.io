@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://k8s-staging-gateway-api:
+  Enabled: True
+  LockedTime: 2021-07-25 20:53:40.857000+00:00
+
