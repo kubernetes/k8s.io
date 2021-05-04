@@ -187,40 +187,43 @@ function empower_group_to_fake_prod() {
 #
 
 # Create all prod artifact projects.
-color 6 "Ensuring all prod projects"
-for prj in "${ALL_PROD_PROJECTS[@]}"; do
-    color 6 "Ensuring project exists: ${prj}"
-    ensure_project "${prj}"
+function ensure_all_prod_projects() {
+    for prj in "${ALL_PROD_PROJECTS[@]}"; do
+        color 6 "Ensuring project exists: ${prj}"
+        ensure_project "${prj}"
 
-    color 6 "Enabling the container registry API: ${prj}"
-    enable_api "${prj}" containerregistry.googleapis.com
+        color 6 "Enabling the container registry API: ${prj}"
+        enable_api "${prj}" containerregistry.googleapis.com
 
-    color 6 "Enabling the container analysis API: ${prj}"
-    enable_api "${prj}" containeranalysis.googleapis.com
+        color 6 "Enabling the container analysis API: ${prj}"
+        enable_api "${prj}" containeranalysis.googleapis.com
 
-    color 6 "Ensuring the GCR repository: ${prj}"
-    ensure_prod_gcr "${prj}" 2>&1 | indent
+        color 6 "Ensuring the GCR repository: ${prj}"
+        ensure_prod_gcr "${prj}" 2>&1 | indent
 
-    color 6 "Enabling the GCS API: ${prj}"
-    enable_api "${prj}" storage-component.googleapis.com
+        color 6 "Enabling the GCS API: ${prj}"
+        enable_api "${prj}" storage-component.googleapis.com
 
-    color 6 "Ensuring the GCS bucket: gs://${prj}"
-    ensure_prod_gcs_bucket "${prj}" "gs://${prj}" 2>&1 | indent
-done 2>&1 | indent
+        color 6 "Ensuring the GCS bucket: gs://${prj}"
+        ensure_prod_gcs_bucket "${prj}" "gs://${prj}" 2>&1 | indent
+    done
+}
+
 
 # Create all prod GCS buckets.
-color 6 "Ensuring all prod buckets"
-for sfx in "${ALL_PROD_BUCKETS[@]}"; do
-    color 6 "Ensuring the GCS bucket: gs://k8s-artifacts-${sfx}"
-    ensure_prod_gcs_bucket \
-        "${PROD_PROJECT}" \
-        "gs://k8s-artifacts-${sfx}" \
-        "k8s-infra-push-${sfx}@kubernetes.io" \
-        | indent
-done 2>&1 | indent
+function ensure_all_prod_buckets() {
+    for sfx in "${ALL_PROD_BUCKETS[@]}"; do
+        color 6 "Ensuring the GCS bucket: gs://k8s-artifacts-${sfx}"
+        ensure_prod_gcs_bucket \
+            "${PROD_PROJECT}" \
+            "gs://k8s-artifacts-${sfx}" \
+            "k8s-infra-push-${sfx}@kubernetes.io" \
+            | indent
+    done
+}
 
-color 6 "Handling special cases"
-(
+
+function ensure_all_prod_special_cases() {
     # Special case: set the web policy on the prod bucket.
     color 6 "Configuring the web policy on the prod bucket"
     ensure_gcs_web_policy "gs://${PROD_PROJECT}"
@@ -378,6 +381,19 @@ color 6 "Handling special cases"
             "${PROD_PROJECT}" \
             $(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")
     done
-) 2>&1 | indent
+}
 
-color 6 "Done"
+function main() {
+    color 6 "Ensuring all prod projects"
+    ensure_all_prod_projects 2>&1 | indent
+
+    color 6 "Ensuring all prod buckets"
+    ensure_all_prod_buckets 2>&1 | indent
+
+    color 6 "Handling special cases"
+    ensure_all_prod_special_cases 2>&1 | indent
+
+    color 6 "Done"
+}
+
+main
