@@ -315,16 +315,17 @@ function ensure_all_prod_special_cases() {
     color 6 "Removing retention on promoter test-prod"
     gsutil retention clear gs://k8s-cip-test-prod
 
+    # Special case: create/add-permissions for necessary service accounts for the auditor.
+    color 6 "Empowering artifact auditor"
+    empower_artifact_auditor "${PROD_PROJECT}"
+    empower_artifact_auditor_invoker "${PROD_PROJECT}"
+
     # Special case: give Cloud Run Admin privileges to the group that will
     # administer the cip-auditor (so that they can deploy the auditor to Cloud Run).
     color 6 "Empowering artifact-admins to release prod auditor"
     empower_group_to_admin_artifact_auditor \
         "${PROD_PROJECT}" \
         "k8s-infra-artifact-admins@kubernetes.io"
-    # Special case: create/add-permissions for necessary service accounts for the auditor.
-    color 6 "Empowering artifact auditor"
-    empower_artifact_auditor "${PROD_PROJECT}"
-    empower_artifact_auditor_invoker "${PROD_PROJECT}"
 
     # Special case: empower Kubernetes service account to authenticate as a GCP
     # service account.
