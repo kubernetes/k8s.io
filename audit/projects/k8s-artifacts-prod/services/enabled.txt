@@ -9,6 +9,7 @@ cloudtrace.googleapis.com            Cloud Trace API
 compute.googleapis.com               Compute Engine API
 containeranalysis.googleapis.com     Container Analysis API
 containerregistry.googleapis.com     Container Registry API
+containerscanning.googleapis.com     Container Scanning API
 datastore.googleapis.com             Cloud Datastore API
 logging.googleapis.com               Cloud Logging API
 monitoring.googleapis.com            Cloud Monitoring API

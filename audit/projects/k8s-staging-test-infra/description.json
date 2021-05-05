@@ -1,0 +1,11 @@
+{
+  "createTime": "2021-05-04T20:26:34.947Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-test-infra",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-test-infra",
+  "projectNumber": "958928310150"
+}

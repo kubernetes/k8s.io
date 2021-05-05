@@ -2,14 +2,14 @@
   "bindings": [
     {
       "members": [
-        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+        "group:k8s-infra-gcp-org-admins@kubernetes.io",
+        "user:spiffxp@google.com"
       ],
       "role": "roles/storage.admin"
     },
     {
       "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io",
-        "projectEditor:kubernetes-public",
         "projectOwner:kubernetes-public"
       ],
       "role": "roles/storage.legacyBucketOwner"

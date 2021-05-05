@@ -116,6 +116,7 @@
     {
       "members": [
         "group:gke-security-groups@kubernetes.io",
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
         "serviceAccount:k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.viewer"
@@ -143,6 +144,12 @@
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/stackdriver.accounts.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/viewer"
     }
   ],
   "version": 1

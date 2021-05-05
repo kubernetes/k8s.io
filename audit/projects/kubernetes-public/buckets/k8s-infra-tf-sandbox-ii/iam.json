@@ -9,7 +9,6 @@
     {
       "members": [
         "group:k8s-infra-ii-coop@kubernetes.io",
-        "projectEditor:kubernetes-public",
         "projectOwner:kubernetes-public"
       ],
       "role": "roles/storage.legacyBucketOwner"
