@@ -193,10 +193,14 @@ function empower_cluster_admins_and_users() {
     ensure_removed_custom_project_iam_role "${project}" "ServiceAccountLister"
 
     color 6 "Empowering cluster users"
-    ensure_project_role_binding \
-        "${project}" \
-        "group:${CLUSTER_USERS_GROUP}" \
-        "roles/container.clusterViewer"
+    cluster_user_roles=(
+        roles/container.clusterViewer
+        roles/logging.privateLogViewer
+        roles/monitoring.viewer
+    )
+    for role in "${cluster_user_roles[@]}"; do
+        ensure_project_role_binding "${project}" "group:${CLUSTER_USERS_GROUP}" "${role}"
+    done
 }
 
 
