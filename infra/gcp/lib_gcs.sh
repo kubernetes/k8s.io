@@ -68,7 +68,7 @@ function ensure_private_gcs_bucket() {
     local bucket="$2"
 
     _ensure_gcs_bucket "${project}" "${bucket}"
-    gsutil iam ch -d allUsers "${bucket}"
+    ensure_removed_gcs_role_binding "${bucket}" "allUsers" "objectViewer"
 }
 
 # Sets the web policy on the bucket, including a default index.html page
@@ -181,20 +181,38 @@ ensure_gcs_role_binding() {
     local principal="${2}"
     local role="${3}"
 
-    local before="${TMPDIR}/gcs-bind.before.yaml"
-    local after="${TMPDIR}/gcs-bind.after.yaml"
+    # use json for gsutil iam set, yaml for easier diffing
+    local before_json="${TMPDIR}/gsutil-iam-get.before.json"
+    local after_json="${TMPDIR}/gsutil-iam-get.after.json"
+    local before_yaml="${TMPDIR}/gcs-role-binding.before.yaml"
+    local after_yaml="${TMPDIR}/gcs-role-binding.after.yaml"
 
-    gsutil iam get "${bucket}" | yq -y | _format_iam_policy > "${before}"
+    gsutil iam get "${bucket}" > "${before_json}"
+    <"${before_json}" yq -y | _format_iam_policy > "${before_yaml}"
 
-    # `gsutil iam ch` is idempotent, but avoid calling if we can, to reduce output noise
-    if ! <"${before}" yq --exit-status \
+    # Avoid calling `gsutil iam set` if we can, to reduce output noise
+    if ! <"${before_yaml}" yq --exit-status \
         ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
         >/dev/null; then
 
-        gsutil iam ch "${principal}:${role}" "${bucket}" 
-        gsutil iam get "${bucket}" | yq -y | _format_iam_policy > "${after}"
+        # add the binding, then merge with existing bindings
+        <"${before_json}" yq --arg role "${role}" --arg principal "${principal}" \
+          '.bindings |= (
+              . + [{
+                members: [$principal],
+                role: ("roles/storage." + $role)
+              }]
+              | group_by(.role)
+              | map({
+                  members: map(.members) | flatten | unique,
+                  role: .[0].role
+                })
+            )' > "${after_json}"
 
-        diff_colorized "${before}" "${after}"
+        gsutil iam set "${after_json}" "${bucket}"
+        <"${after_json}" yq -y | _format_iam_policy > "${after_yaml}"
+
+        diff_colorized "${before_yaml}" "${after_yaml}"
     fi
 }
 
@@ -213,20 +231,35 @@ ensure_removed_gcs_role_binding() {
     local principal="${2}"
     local role="${3}"
 
-    local before="${TMPDIR}/gcs-bind.before.yaml"
-    local after="${TMPDIR}/gcs-bind.after.yaml"
+    # use json for gsutil iam set, yaml for easier diffing
+    local before_json="${TMPDIR}/gsutil-iam-get.before.json"
+    local after_json="${TMPDIR}/gsutil-iam-get.after.json"
+    local before_yaml="${TMPDIR}/gcs-role-binding.before.yaml"
+    local after_yaml="${TMPDIR}/gcs-role-binding.after.yaml"
 
-    gsutil iam get "${bucket}" | yq -y | _format_iam_policy > "${before}"
+    gsutil iam get "${bucket}" > "${before_json}"
+    <"${before_json}" yq -y | _format_iam_policy > "${before_yaml}"
 
-    # `gsutil iam ch` is idempotent, but avoid calling if we can, to reduce output noise
-    if <"${before}" yq --exit-status \
+    # Avoid calling `gsutil iam set` if we can, to reduce output noise
+    if <"${before_yaml}" yq --exit-status \
         ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
         >/dev/null; then
 
-        gsutil iam ch -d "${principal}:${role}" "${bucket}"
-        gsutil iam get "${bucket}" | yq -y | _format_iam_policy > "${after}"
+        # remove member from role if it exists; gcs deletes bindings with no
+        # members, so we don't need to bother pruning them here
+        <"${before_json}" yq --arg role "${role}" --arg principal "${principal}" \
+          '.bindings |= map(
+              if .role == ("roles/storage." + $role) then
+                .members -= [$principal]
+              else
+                .
+              end
+            )' > "${after_json}"
 
-        diff_colorized "${before}" "${after}"
+        gsutil iam set "${after_json}" "${bucket}"
+        <"${after_json}" yq -y | _format_iam_policy > "${after_yaml}"
+
+        diff_colorized "${before_yaml}" "${after_yaml}"
     fi
 }
 
