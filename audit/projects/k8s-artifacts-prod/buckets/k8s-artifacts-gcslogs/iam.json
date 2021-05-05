@@ -39,6 +39,12 @@
         "group:k8s-infra-artifact-admins@kubernetes.io"
       ],
       "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcs-access-logs@kubernetes.io"
+      ],
+      "role": "roles/storage.objectViewer"
     }
   ]
 }

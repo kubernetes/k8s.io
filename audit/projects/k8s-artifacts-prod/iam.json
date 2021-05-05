@@ -41,9 +41,21 @@
     },
     {
       "members": [
+        "serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/errorreporting.writer"
+    },
+    {
+      "members": [
         "serviceAccount:service-388270116193@gcp-sa-pubsub.iam.gserviceaccount.com"
       ],
       "role": "roles/iam.serviceAccountTokenCreator"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-auditor@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.logWriter"
     },
     {
       "members": [

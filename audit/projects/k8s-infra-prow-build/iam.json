@@ -2,15 +2,15 @@
   "bindings": [
     {
       "members": [
-        "group:k8s-infra-prow-viewers@kubernetes.io"
+        "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
-      "role": "organizations/758905017065/roles/prow.viewer"
+      "role": "organizations/758905017065/roles/iam.serviceAccountLister"
     },
     {
       "members": [
-        "group:k8s-infra-cluster-admins@kubernetes.io"
+        "group:k8s-infra-prow-viewers@kubernetes.io"
       ],
-      "role": "projects/k8s-infra-prow-build/roles/ServiceAccountLister"
+      "role": "organizations/758905017065/roles/prow.viewer"
     },
     {
       "members": [

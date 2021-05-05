@@ -4,7 +4,7 @@
       "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
-      "role": "projects/k8s-infra-prow-build-trusted/roles/ServiceAccountLister"
+      "role": "organizations/758905017065/roles/iam.serviceAccountLister"
     },
     {
       "members": [

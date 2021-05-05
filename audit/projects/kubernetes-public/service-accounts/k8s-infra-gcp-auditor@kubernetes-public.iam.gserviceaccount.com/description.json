@@ -1,5 +1,5 @@
 {
-  "displayName": "Grants readonly access to org resources",
+  "displayName": "k8s-infra-gcp-auditor",
   "email": "k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com",
   "name": "projects/kubernetes-public/serviceAccounts/k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com",
   "oauth2ClientId": "114307448815736377866",
