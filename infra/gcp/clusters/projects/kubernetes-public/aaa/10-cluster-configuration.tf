@@ -158,7 +158,7 @@ resource "google_container_cluster" "cluster" {
     }
     resource_limits {
       resource_type = "memory"
-      maximum = 500
+      maximum = 256
     }
   }
 
