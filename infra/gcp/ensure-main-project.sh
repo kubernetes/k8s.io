@@ -49,7 +49,7 @@ CLUSTER_ADMINS_GROUP="k8s-infra-cluster-admins@kubernetes.io"
 ACCOUNTING_GROUP="k8s-infra-gcp-accounting@kubernetes.io"
 
 # The GCS bucket which hold terraform state for clusters
-CLUSTER_TERRAFORM_BUCKET="k8s-infra-clusters-terraform"
+LEGACY_CLUSTER_TERRAFORM_BUCKET="k8s-infra-clusters-terraform"
 
 # The GKE security groups group
 CLUSTER_USERS_GROUP="gke-security-groups@kubernetes.io"
@@ -74,10 +74,35 @@ apis=(
 )
 ensure_only_services "${PROJECT}" "${apis[@]}"
 
-color 6 "Ensuring the cluster terraform-state bucket exists"
-ensure_private_gcs_bucket \
-    "${PROJECT}" \
-    "gs://${CLUSTER_TERRAFORM_BUCKET}"
+# buckets to hold terraform state
+# - since we are using uniform bucket level access (ubla), each bucket should
+#   represent a logical group of access, with org admins given storage.admin
+#   for break-glass purposes
+# - the legacy bucket (k8s-infra-clusters-terraform) assumed the same set of
+#   users should have access to all gke clusters
+# - new bucket schema is "k8s-infra-tf-{folder}[-{suffix}]" where:
+#   - folder: intended GCP folder for GCP projects managed by this terraform,
+#             access level is ~owners of folder
+#   - suffix: some subset of resources contained somewhere underneath folder,
+#             access level is ~editors of those resources
+# - entry syntax is "bucket_name:owners_group" (: is invalid bucket name char)
+terraform_state_bucket_entries=(
+  "${LEGACY_CLUSTER_TERRAFORM_BUCKET}:${CLUSTER_ADMINS_GROUP}"
+  k8s-infra-tf-aws:k8s-infra-aws-admins@kubernetes.io
+  k8s-infra-tf-prow-clusters:k8s-infra-prow-oncall@kubernetes.io
+  k8s-infra-tf-public-clusters:"${CLUSTER_ADMINS_GROUP}"
+  k8s-infra-tf-sandbox-ii:k8s-infra-ii-coop@kubernetes.io
+)
+color 6 "Ensuring terraform state buckets exist with correct permissions"
+for entry in "${terraform_state_bucket_entries[@]}"; do
+    bucket="gs://$(echo "${entry}" | cut -d: -f1)"
+    owners="$(echo "${entry}" | cut -d: -f2-)"
+    color 6 "Ensuring '${bucket}' exists as private with owners '${owners}'"; (
+        ensure_private_gcs_bucket "${PROJECT}" "${bucket}"
+        empower_group_to_admin_gcs_bucket "${owners}" "${bucket}"
+        ensure_gcs_role_binding "${bucket}" "group:k8s-infra-gcp-org-admins@kubernetes.io" "roles/storage.admin"
+    ) 2>&1 | indent
+done 2>&1 | indent
 
 color 6 "Empowering BigQuery admins"
 ensure_project_role_binding \
@@ -100,15 +125,6 @@ done
 ensure_removed_project_role_binding "${PROJECT}" "group:${CLUSTER_ADMINS_GROUP}" "$(custom_project_role_name "${PROJECT}" ServiceAccountLister)"
 ensure_removed_custom_project_iam_role "${PROJECT}" "ServiceAccountLister"
 
-color 6 "Empowering cluster admins to own gs://${CLUSTER_TERRAFORM_BUCKET}"
-ensure_gcs_role_binding \
-    "gs://${CLUSTER_TERRAFORM_BUCKET}" \
-    "group:${CLUSTER_ADMINS_GROUP}" \
-    "objectAdmin"
-ensure_gcs_role_binding \
-    "gs://${CLUSTER_TERRAFORM_BUCKET}" \
-    "group:${CLUSTER_ADMINS_GROUP}" \
-    "legacyBucketOwner"
 
 color 6 "Empowering cluster users"
 ensure_project_role_binding \

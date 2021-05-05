@@ -7,7 +7,7 @@ This file defines:
 terraform {
 
   backend "gcs" {
-    bucket = "k8s-infra-clusters-terraform"
+    bucket = "k8s-infra-tf-prow-clusters"
     prefix = "k8s-infra-prow-build-trusted/prow-build-trusted" // $project_name/$cluster_name
   }
 
