@@ -119,11 +119,15 @@ readonly RELEASE_STAGING_PROJECTS=(
 )
 
 readonly STAGING_PROJECT_SERVICES=(
+    # These projects use GCB to build/push images to GCR
     cloudbuild.googleapis.com
+    # Some GCB jobs may use KMS
     cloudkms.googleapis.com
+    # These projects host images in GCR
     containerregistry.googleapis.com
-    containerscanning.googleapis.com
+    # Some GCB jobs may use Secret Manager (preferred over KMS)
     secretmanager.googleapis.com
+    # These projects may host binaries in GCS
     storage-component.googleapis.com
 )
 

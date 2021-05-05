@@ -234,10 +234,6 @@ function ensure_all_prod_special_cases() {
         "gs://${PROD_PROJECT}" \
         "${SCRIPT_DIR}/static/prod-storage"
 
-    # Special case: enable vulnerability scanning on the prod GCR.
-    color 6 "Enabling GCR vulnerability scanning in the prod GCR"
-    enable_api "${PROD_PROJECT}" containerscanning.googleapis.com
-
     # Special case: enable people to read vulnerability reports.
     color 6 "Empowering artifact-security group to real vulnerability reports"
     SEC_GROUP="k8s-infra-artifact-security@kubernetes.io"
