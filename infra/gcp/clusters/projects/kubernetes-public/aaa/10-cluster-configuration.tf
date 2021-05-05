@@ -154,11 +154,11 @@ resource "google_container_cluster" "cluster" {
     resource_limits {
       resource_type = "cpu"
       minimum = 2
-      maximum = 16
+      maximum = 64
     }
     resource_limits {
       resource_type = "memory"
-      maximum = 64
+      maximum = 256
     }
   }
 
