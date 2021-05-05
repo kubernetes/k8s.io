@@ -160,6 +160,9 @@ function ensure_terraform_state_buckets() {
             ensure_private_gcs_bucket "${project}" "${bucket}"
             empower_group_to_admin_gcs_bucket "${owners}" "${bucket}"
             ensure_gcs_role_binding "${bucket}" "group:k8s-infra-gcp-org-admins@kubernetes.io" "admin"
+            # ensure owners have storage.buckets.list permission for their bucket
+            # TODO(spiffxp): figure out a way to do this per-bucket
+            ensure_project_role_binding "${project}" "group:${owners}" "roles/viewer"
         ) 2>&1 | indent
     done
 }
