@@ -100,7 +100,7 @@ for entry in "${terraform_state_bucket_entries[@]}"; do
     color 6 "Ensuring '${bucket}' exists as private with owners '${owners}'"; (
         ensure_private_gcs_bucket "${PROJECT}" "${bucket}"
         empower_group_to_admin_gcs_bucket "${owners}" "${bucket}"
-        ensure_gcs_role_binding "${bucket}" "group:k8s-infra-gcp-org-admins@kubernetes.io" "roles/storage.admin"
+        ensure_gcs_role_binding "${bucket}" "group:k8s-infra-gcp-org-admins@kubernetes.io" "admin"
     ) 2>&1 | indent
 done 2>&1 | indent
 
