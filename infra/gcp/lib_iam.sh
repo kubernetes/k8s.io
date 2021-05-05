@@ -216,8 +216,8 @@ function ensure_secret_role_binding() {
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $3:  The role name (e.g. "roles/storage.objectAdmin")
 function ensure_serviceaccount_role_binding() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
-        echo "ensure_project_role_binding(serviceaccount, principal, role) requires 3 arguments" >&2
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+        echo "${FUNCNAME[0]}(serviceaccount, principal, role) requires 3 arguments" >&2
         return 1
     fi
 
@@ -225,7 +225,15 @@ function ensure_serviceaccount_role_binding() {
     local principal="${2}"
     local role="${3}"
 
-    _ensure_resource_role_binding "iam service-accounts" "${serviceaccount}" "${principal}" "${role}"
+    # When running without `--project foo`, gcloud iam service-accounts...
+    # - add-iam-policy-binding: expects 'projects/p/serviceAccounts/email'
+    # - get-iam-policy: rejects the above, expects 'numeric id' or 'email'
+    #
+    # So, parse out project, to allow use of 'email' for read/write
+    local project
+    project="$(gcloud iam service-accounts describe "${serviceaccount}" --format="value(name)" | cut -d/ -f2)"
+
+    _ensure_resource_role_binding "iam service-accounts" "${serviceaccount}" "${principal}" "${role}" "${project}"
 }
 
 # Ensure that IAM binding has been removed from organization
@@ -287,8 +295,8 @@ function ensure_removed_secret_role_binding() {
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $3:  The role name (e.g. "roles/storage.objectAdmin")
 function ensure_removed_serviceaccount_role_binding() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
-        echo "ensure_removed_serviceaccount_role_binding(serviceaccount, principal, role) requires 3 arguments" >&2
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+        echo "${FUNCNAME[0]}(serviceaccount, principal, role) requires 3 arguments" >&2
         return 1
     fi
 
@@ -296,7 +304,15 @@ function ensure_removed_serviceaccount_role_binding() {
     local principal="${2}"
     local role="${3}"
 
-    _ensure_removed_resource_role_binding "iam service-accounts" "${serviceaccount}" "${principal}" "${role}"
+    # When running without `--project foo`, gcloud iam service-accounts...
+    # - remove-iam-policy-binding: expects 'projects/p/serviceAccounts/email'
+    # - get-iam-policy: rejects the above, expects 'numeric id' or 'email'
+    #
+    # So, parse out project, to allow use of 'email' for read/write
+    local project
+    project="$(gcloud iam service-accounts describe "${serviceaccount}" --format="value(name)" | cut -d/ -f2)"
+
+    _ensure_removed_resource_role_binding "iam service-accounts" "${serviceaccount}" "${principal}" "${role}" "${project}"
 }
 
 # Ensure that custom IAM role exists in scope and in sync with definition in file
@@ -411,9 +427,10 @@ function _format_iam_policy() {
 #   $2:  The id of the resource (e.g. "k8s-infra-foo", "12345")
 #   $3:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $4:  The role name (e.g. "roles/foo.bar")
+#  [$5]: (Optional) the id of the project hosting the resource (e.g. "k8s-infra-foo")
 function _ensure_resource_role_binding() {
-    if [ ! $# -eq 4 -o -z "$1" -o -z "$2" -o -z "$3" -o -z "$4" ]; then
-        echo "_ensure_resource_role_binding(resource, id, principal, role) requires 4 arguments" >&2
+    if [ $# -lt 4 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
+        echo "${FUNCNAME[0]}(resource, id, principal, role, [project]) requires at least 4 arguments" >&2
         return 1
     fi
 
@@ -421,13 +438,19 @@ function _ensure_resource_role_binding() {
     local id="${2}"
     local principal="${3}"
     local role="${4}"
+    local project="${5:-""}"
+
+    local flags=()
+    if [ -n "${project}" ]; then
+      flags+=(--project "${project}")
+    fi
 
     local before="${TMPDIR}/iam-bind.before.yaml"
     local after="${TMPDIR}/iam-bind.after.yaml"
 
     # intentionally word-split resource, e.g. iam service-accounts
     # shellcheck disable=SC2086
-    gcloud ${resource} get-iam-policy "${id}" | _format_iam_policy >"${before}"
+    gcloud ${resource} get-iam-policy "${id}" "${flags[@]}" | _format_iam_policy >"${before}"
 
     # `gcloud add-iam-policy-binding` is idempotent,
     # but avoid calling if we can, to reduce output noise
@@ -441,6 +464,7 @@ function _ensure_resource_role_binding() {
             ${resource} add-iam-policy-binding "${id}" \
             --member "${principal}" \
             --role "${role}" \
+            "${flags[@]}" \
         | _format_iam_policy >"${after}"
 
         diff_colorized "${before}" "${after}"
@@ -453,9 +477,10 @@ function _ensure_resource_role_binding() {
 #   $2:  The id of the resource (e.g. "k8s-infra-foo", "12345")
 #   $3:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $4:  The role name (e.g. "roles/foo.bar")
+#  [$5]: (Optional) the id of the project hosting the resource (e.g. "k8s-infra-foo")
 function _ensure_removed_resource_role_binding() {
-    if [ ! $# -eq 4 -o -z "$1" -o -z "$2" -o -z "$3" -o -z "$4" ]; then
-        echo "_ensure_removed_resource_role_binding(resource, id, principal, role) requires 4 arguments" >&2
+    if [ $# -lt 4 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
+        echo "${FUNCNAME[0]}(resource, id, principal, role, [project]) requires at least 4 arguments" >&2
         return 1
     fi
 
@@ -463,13 +488,19 @@ function _ensure_removed_resource_role_binding() {
     local id="${2}"
     local principal="${3}"
     local role="${4}"
+    local project="${5:-""}"
+
+    local flags=()
+    if [ -n "${project}" ]; then
+      flags+=(--project "${project}")
+    fi
 
     local before="${TMPDIR}/iam-bind.before.txt"
     local after="${TMPDIR}/iam-bind.after.txt"
 
     # intentionally word-split resource, e.g. iam service-accounts
     # shellcheck disable=SC2086
-    gcloud ${resource} get-iam-policy "${id}" | _format_iam_policy >"${before}"
+    gcloud ${resource} get-iam-policy "${id}" "${flags[@]}" | _format_iam_policy >"${before}"
 
     # `gcloud remove-iam-policy-binding` errors if binding doesn't exist,
     #  so avoid calling if we can, to reduce output noise
@@ -483,6 +514,7 @@ function _ensure_removed_resource_role_binding() {
             ${resource} remove-iam-policy-binding "${id}" \
             --member "${principal}" \
             --role "${role}" \
+            "${flags[@]}" \
         | _format_iam_policy >"${after}"
 
         diff_colorized "${before}" "${after}"

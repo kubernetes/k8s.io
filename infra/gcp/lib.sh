@@ -490,6 +490,67 @@ function empower_ksa_to_svcacct() {
     ensure_serviceaccount_role_binding "${gcp_svcacct}" "serviceAccount:${ksa_scope}" "roles/iam.workloadIdentityUser"
 }
 
+# Allow GKE clusters in the given GCP project to run workloads using a
+# Kubernetes service account in the given namepsace to act as the given
+# GCP service account via Workload Identity when the name of the Kubernetes
+# service account matches the optionally provided name if given, or the
+# name of the GCP service account.
+#
+# ref: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
+#
+# $1:   The GCP project that hosts the GKE clusters (e.g. k8s-infra-foo-clusters)
+# $2:   The K8s namespace that hosts the Kubernetes service account (e.g. my-app-ns)
+# $3:   The GCP service account to be bound (e.g. k8s-infra-doer@k8s-infra-foo.iam.gserviceaccount.com)
+# [$4]: Optional: The Kubernetes service account name (e.g. my-app-doer; default: k8s-infra-doer)
+#
+# e.g. the above allows pods running as my-app-ns/my-app-doer in clusters in
+#      k8s-infra-foo-clusters to act as k8s-infra-doer@k8s-infra-foo.iam.gserviceaccount.com
+function empower_gke_for_serviceaccount() {
+    if [ $# -lt 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+        echo "${FUNCNAME[0]}(gcp_project, k8s_namespace, gcp_sa_email, [k8s_sa_name]) requires at least 3 arguments" >&2
+        return 1
+    fi
+
+    local gke_project="$1"
+    local k8s_namespace="$2"
+    local gcp_sa_email="${3}"
+    local k8s_sa_name="${4:-""}"
+    if [ -z "${k8s_sa_name}" ]; then
+      k8s_sa_name="$(echo "${gcp_sa_email}" | cut -d@ -f1)"
+    fi
+
+    local principal="serviceAccount:${gke_project}.svc.id.goog[${k8s_namespace}/${k8s_sa_name}]"
+
+    ensure_serviceaccount_role_binding "${gcp_sa_email}" "${principal}" "roles/iam.workloadIdentityUser"
+}
+
+# Prevent clusters in the given GCP project from running workloads using a
+# Kubernetes service account in the given namespace to act as the given
+# GCP service account. aka the opposite of empower_gke_for_serviceaccount
+#
+# $1:   The GCP project that hosts the GKE clusters (e.g. k8s-infra-foo-clusters)
+# $2:   The K8s namespace that hosts the Kubernetes service account (e.g. my-app-ns)
+# $3:   The GCP service account to be unbound (e.g. k8s-infra-doer@k8s-infra-foo.iam.gserviceaccount.com)
+# [$4]: Optional: The Kubernetes service account name (e.g. my-app-doer; default: k8s-infra-doer)
+function unempower_gke_for_serviceaccount() {
+    if [ $# -lt 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+        echo "${FUNCNAME[0]}(gcp_project, k8s_namespace, gcp_sa_email, [k8s_sa_name]) requires at least 3 arguments" >&2
+        return 1
+    fi
+
+    local gke_project="$1"
+    local k8s_namespace="$2"
+    local gcp_sa_email="${3}"
+    local k8s_sa_name="${4:-""}"
+    if [ -z "${k8s_sa_name}" ]; then
+      k8s_sa_name="$(echo "${gcp_sa_email}" | cut -d@ -f1)"
+    fi
+
+    local principal="serviceAccount:${gke_project}.svc.id.goog[${k8s_namespace}/${k8s_sa_name}]"
+
+    ensure_removed_serviceaccount_role_binding "${gcp_sa_email}" "${principal}" "roles/iam.workloadIdentityUser"
+}
+
 # Ensure that a global ip address exists, creating one if needed
 # $1 The GCP project
 # $2 The address name (e.g. foo-ingress), IPv6 addresses must have a "-v6" suffix
