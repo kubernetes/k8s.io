@@ -39,6 +39,7 @@
     "sha256:5a8d85cdd1c80f43fb8fe6dcde1fae707a3177aaf0a786ff4b9f6f20247ec3ff": [ "v1.0.0" ]
     "sha256:ca160717df7f6b7964c936faf608b914f2277363e6d708ea2e2dbbf2c5f56a83": [ "v1.0.1" ]
     "sha256:7a5ba58a44e0d749e0767e4e37315bcf6a61f33ce3185c1991848af4db0fb70a": [ "v1.1.0" ]
+    "sha256:36c31f7e1f433c9634d24f876353e8646246d81a03c4e351202c2644daff1620": [ "v1.2.0" ]
 - name: csi-snapshotter
   dmap:
     "sha256:7f93019f399454598370aab2cc1a652a3b8ff722ab92ec4ca9db0eed53acc4b4": [ "v1.1.0" ]
@@ -56,6 +57,7 @@
     "sha256:26e327b018c21a49523b759d7787e99553181ae9ef90b6bdc13abe362a43ced0": [ "v3.0.2" ]
     "sha256:9af9bf28430b00a0cedeb2ec29acadce45e6afcecd8bdf31c793c624cfa75fa7": [ "v3.0.3" ]
     "sha256:51f2dfde5bccac7854b3704689506aeecfb793328427b91115ba253a93e60782": [ "v4.0.0" ]
+    "sha256:e27ad21f007bae28eef68934a4834ca0a5c669e4c246c4900378e7ed1680c37e": [ "v4.1.0" ]
 - name: csi-external-health-monitor-agent
   dmap:
     "sha256:f8eff7dc8187f1153faebd5d087e30f4580e00fcc1265fe2ab2472ec010db8f7": [ "v0.1.0" ]
@@ -109,9 +111,11 @@
     "sha256:a494ff6ec10e05a454458fbf44247d93c9b3a0d983a00b538e442f353b7030c8": [ "v3.0.2" ]
     "sha256:7092470172782a926e819a75344aff15cfbdb603f7ec75c117ba499dd93c2cd8": [ "v3.0.3" ]
     "sha256:00fcc441ea9f72899c25eed61d602272a2a58c5f0014332bdcb5ac24acef08e4": [ "v4.0.0" ]
+    "sha256:ae335399175b47a47f04db0317d5c0ce4b4e073ab61f5b784326625278009107": [ "v4.1.0" ]
 - name: snapshot-validation-webhook
   dmap:
     "sha256:8bfd19dc57bb86ca4438b9592578a1a9afaf559f22e63a9b308b8b2be8d789ad": [ "v3.0.0" ]
     "sha256:ef62b3d2885a2a9f9fd97b4bff6facd97d9bedd8c5c62429bbf81797f20cb998": [ "v3.0.2" ]
     "sha256:fc09c8eb77ec6815db641f7fe160de7abe6d01377d7a7d221fe34b7bc6e1e229": [ "v3.0.3" ]
     "sha256:609b64376054aefc0d2daf8a85ec48713a414b2bd85bcbaea09eaf1b628b1e48": [ "v4.0.0" ]
+    "sha256:1dae49d3fd5f962d8afb77072867540c1fffd3a2f517c77a58c3a928f724d7e1": [ "v4.1.0" ]
