@@ -52,6 +52,9 @@ org_role_bindings=(
   # https://cloud.google.com/storage/docs/access-control/iam-roles#basic-roles-intrinsic
   "group:k8s-infra-gcp-org-admins@kubernetes.io:roles/owner"
   "group:k8s-infra-gcp-org-admins@kubernetes.io:$(custom_org_role_name "organization.admin")"
+  # orgpolicy.policy.set is not allowed in custom roles, this is the only role that has it
+  "group:k8s-infra-gcp-org-admins@kubernetes.io:roles/orgpolicy.policyAdmin"
+  
 
   # empower k8s-infra-prow-oncall@ to use GCP Console to navigate to their projects
   "group:k8s-infra-prow-oncall@kubernetes.io:roles/browser"
