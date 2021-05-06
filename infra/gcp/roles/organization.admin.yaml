@@ -8,19 +8,50 @@
 # name: organization.admin
 # include:
 #   roles:
+#   # specific billing permissions we need
+#   # TODO(spiffxp): should we just use billing.admin? or save this for GCP accounting group?
+#   # maybe for resourceAssociations.create
 #   - roles/billing.user
+#   # for billing.accounts.create (to create a budget for a project)
+#   - roles/billing.creator
+#   # maybe for budgets.*, this also offers accounts.updateUsageExportSpec
+#   - roles/billing.costsManager
+# 
+#   # resourcemanager.* permissions missing from roles/owner
+#   # for resourcemanager.folders.*
 #   - roles/resourcemanager.folderAdmin
+#   # for resourcemanager.organizations.*
 #   - roles/resourcemanager.organizationAdmin
+#   # for resourcemanager.projects.create
 #   - roles/resourcemanager.projectCreator
+# 
+#   # for storage.buckets.(get|update|(get|set)IamPolicy)
+#   - roles/storage.admin
+#   permissionRegexes:
+#   # to ensure storage.buckets.* is all we get from roles/storage.admin
+#   - ^billing.
+#   - ^orgpolicy.
+#   - ^resourcemanager.
+#   - ^storage.buckets.
 #
 description: Access to administer all resources belonging to the organization
 includedPermissions:
+  - billing.accounts.create
   - billing.accounts.get
   - billing.accounts.getIamPolicy
+  - billing.accounts.getSpendingInformation
+  - billing.accounts.getUsageExportSpec
   - billing.accounts.list
   - billing.accounts.redeemPromotion
+  - billing.accounts.updateUsageExportSpec
+  - billing.budgets.create
+  - billing.budgets.delete
+  - billing.budgets.get
+  - billing.budgets.list
+  - billing.budgets.update
   - billing.credits.list
   - billing.resourceAssociations.create
+  - billing.resourceAssociations.list
   - orgpolicy.policy.get
   - resourcemanager.folders.create
   - resourcemanager.folders.delete
@@ -40,6 +71,13 @@ includedPermissions:
   - resourcemanager.projects.list
   - resourcemanager.projects.move
   - resourcemanager.projects.setIamPolicy
+  - storage.buckets.create
+  - storage.buckets.delete
+  - storage.buckets.get
+  - storage.buckets.getIamPolicy
+  - storage.buckets.list
+  - storage.buckets.setIamPolicy
+  - storage.buckets.update
 name: organization.admin
 stage: GA
 title: Organization Admin
