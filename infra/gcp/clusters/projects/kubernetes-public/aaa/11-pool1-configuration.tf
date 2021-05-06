@@ -12,7 +12,7 @@ resource "google_container_node_pool" "pool1" {
   cluster     = google_container_cluster.cluster.name
 
   provider = google-beta
-  project  = data.google_project.project.id
+  project  = "kubernetes-public"
 
   // Start with a single node
   initial_node_count = 1
@@ -47,6 +47,11 @@ resource "google_container_node_pool" "pool1" {
     metadata = {
       disable-legacy-endpoints = "true"
     }
+  }
+
+  upgrade_settings {
+    max_surge       = 1
+    max_unavailable = 0
   }
 
   // If we need to destroy the node pool, create the new one before destroying
