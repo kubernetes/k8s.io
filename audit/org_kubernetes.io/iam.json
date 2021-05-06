@@ -70,6 +70,12 @@
       "members": [
         "group:k8s-infra-gcp-org-admins@kubernetes.io"
       ],
+      "role": "roles/orgpolicy.policyAdmin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
       "role": "roles/owner"
     },
     {

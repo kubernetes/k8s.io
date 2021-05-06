@@ -147,6 +147,10 @@
     },
     {
       "members": [
+        "group:k8s-infra-aws-admins@kubernetes.io",
+        "group:k8s-infra-cluster-admins@kubernetes.io",
+        "group:k8s-infra-ii-coop@kubernetes.io",
+        "group:k8s-infra-prow-oncall@kubernetes.io",
         "serviceAccount:k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/viewer"
