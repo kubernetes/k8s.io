@@ -188,21 +188,23 @@ function empower_group_to_fake_prod() {
 
 # Create all prod artifact projects.
 function ensure_all_prod_projects() {
+    prod_project_services=(
+      # prod projects may perform container analysis
+      containeranalysis.googleapis.com
+      # prod projects host containers in GCR
+      containerregistry.googleapis.com
+      # prod projects host binaries in GCS
+      storage-component.googleapis.com
+    )
     for prj in "${ALL_PROD_PROJECTS[@]}"; do
         color 6 "Ensuring project exists: ${prj}"
-        ensure_project "${prj}"
+        ensure_project "${prj}" 2>&1 | indent
 
-        color 6 "Enabling the container registry API: ${prj}"
-        enable_api "${prj}" containerregistry.googleapis.com
-
-        color 6 "Enabling the container analysis API: ${prj}"
-        enable_api "${prj}" containeranalysis.googleapis.com
+        color 6 "Ensuring Services to host and analyze aritfacts: ${prj}"
+        ensure_services "${prj}" "${prod_project_services[@]}" 2>&1 | indent
 
         color 6 "Ensuring the GCR repository: ${prj}"
         ensure_prod_gcr "${prj}" 2>&1 | indent
-
-        color 6 "Enabling the GCS API: ${prj}"
-        enable_api "${prj}" storage-component.googleapis.com
 
         color 6 "Ensuring the GCS bucket: gs://${prj}"
         ensure_prod_gcs_bucket "${prj}" "gs://${prj}" 2>&1 | indent

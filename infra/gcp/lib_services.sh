@@ -21,10 +21,14 @@
 #
 # This MUST NOT be used directly. Source it via lib.sh instead.
 
-# Enable an API
+# Ensure one or more GCP Services (APIs) are enabled.
 # $1:  The GCP project
-# $2+: The APIs to enable (e.g. containerregistry.googleapis.com)
-function enable_api() {
+# $2+: The Services to enable (e.g. containerregistry.googleapis.com)
+#
+# NOTE: this is not guaranteed to be fully automated / unattended, as some
+#       services may prompt for additional information
+# ref: https://cloud.google.com/service-usage/docs/enable-disable#enabling
+function ensure_services() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "${FUNCNAME[0]}(gcp_project, service...) requires at least 2 arguments" >&2
         return 1
@@ -37,6 +41,7 @@ function enable_api() {
     done
 }
 
+# TODO: perhaps just store the .jq file in this repo?
 readonly services_plan_jq="${TMPDIR}/services_plan.jq"
 function _ensure_services_plan_jq() {
     if [ -f "${services_plan_jq}" ]; then return; fi
