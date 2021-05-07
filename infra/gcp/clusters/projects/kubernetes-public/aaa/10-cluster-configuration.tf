@@ -15,24 +15,24 @@ locals {
 
 // Create SA for nodes
 resource "google_service_account" "cluster_node_sa" {
-  project      = "kubernetes-public"
+  project      = data.google_project.project.project_id
   account_id   = "gke-nodes-${local.cluster_name}"
   display_name = "Nodes in GKE cluster '${local.cluster_name}'"
 }
 
 // Add roles for SA
 resource "google_project_iam_member" "cluster_node_sa_logging" {
-  project = "kubernetes-public"
+  project = data.google_project.project.project_id
   role    = "roles/logging.logWriter"
   member  = "serviceAccount:${google_service_account.cluster_node_sa.email}"
 }
 resource "google_project_iam_member" "cluster_node_sa_monitoring_viewer" {
-  project = "kubernetes-public"
+  project = data.google_project.project.project_id
   role    = "roles/monitoring.viewer"
   member  = "serviceAccount:${google_service_account.cluster_node_sa.email}"
 }
 resource "google_project_iam_member" "cluster_node_sa_monitoring_metricwriter" {
-  project = "kubernetes-public"
+  project = data.google_project.project.project_id
   role    = "roles/monitoring.metricWriter"
   member  = "serviceAccount:${google_service_account.cluster_node_sa.email}"
 }
@@ -40,7 +40,7 @@ resource "google_project_iam_member" "cluster_node_sa_monitoring_metricwriter" {
 // BigQuery dataset for usage data
 resource "google_bigquery_dataset" "usage_metering" {
   dataset_id  = replace("usage_metering_${local.cluster_name}", "-", "_")
-  project     = "kubernetes-public"
+  project     = data.google_project.project.project_id
   description = "GKE Usage Metering for cluster '${local.cluster_name}'"
   location    = local.bigquery_location
 
@@ -64,7 +64,7 @@ resource "google_container_cluster" "cluster" {
   location = local.cluster_location
 
   provider = google-beta
-  project  = "kubernetes-public"
+  project  = data.google_project.project.project_id
 
   // GKE clusters are critical objects and should not be destroyed
   // IMPORTANT: should be false on test clusters
@@ -108,7 +108,7 @@ resource "google_container_cluster" "cluster" {
 
   // Enable workload identity for GCP IAM
   workload_identity_config {
-    identity_namespace = "kubernetes-public.svc.id.goog"
+    identity_namespace = "${data.google_project.project.project_id}.svc.id.goog"
   }
 
   // Enable Stackdriver Kubernetes Monitoring
