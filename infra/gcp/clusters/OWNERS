@@ -10,4 +10,4 @@ reviewers:
 - thockin
 
 labels:
-- area/terraform
+- area/infra/terraform
