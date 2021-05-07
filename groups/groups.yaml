@@ -968,6 +968,20 @@ groups:
       - bowei@google.com
       - pavithrar@google.com
 
+  - email-id: k8s-infra-staging-e2e-test-auth-img@kubernetes.io
+    name: k8s-infra-staging-e2e-test-auth-img
+    description: |-
+      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-auth-img staging registry
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - thockin@google.com
+      - spiffxp@google.com
+      - spiffxp@gmail.com
+
   - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
     name: k8s-infra-staging-e2e-test-images
     description: |-

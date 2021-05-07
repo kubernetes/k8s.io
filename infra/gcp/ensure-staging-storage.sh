@@ -68,6 +68,7 @@ readonly STAGING_PROJECTS=(
     csi-secrets-store
     descheduler
     dns
+    e2e-test-auth-img
     e2e-test-images
     etcd
     etcdadm
@@ -125,6 +126,10 @@ readonly STAGING_PROJECT_SERVICES=(
     containerscanning.googleapis.com
     secretmanager.googleapis.com
     storage-component.googleapis.com
+)
+
+PRIVATE_PROJECTS=(
+    e2e-test-auth-img
 )
 
 if [ $# = 0 ]; then
@@ -311,3 +316,13 @@ color 6 "Configuring special case for k8s-staging-releng-test"
 (
     ensure_staging_gcb_builder_service_account "releng-test" "k8s-infra-prow-build"
 )
+
+# Special case: Create private registries thar require authentication
+color 6 "Configuring special cases for authenticated access to private registries"
+for repo in "${PRIVATE_PROJECTS[@]}"; do
+    (
+        PROJECT="k8s-staging-${repo}"
+        local bucket=$(gcs_bucket_for_gcr "${PROJECT}")
+        ensure_private_gcs_bucket "${PROJECT}" "${bucket}"
+    ) 2>&1 | indent
+done
