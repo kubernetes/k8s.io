@@ -7,7 +7,7 @@ This file defines:
 */
 
 terraform {
-  required_version = "~> 0.13.6"
+  required_version = "~> 0.13.7"
 
   backend "gcs" {
     bucket = "k8s-infra-tf-public-clusters"
@@ -16,10 +16,10 @@ terraform {
 
   required_providers {
     google = {
-      version = "~> 3.46.0"
+      version = "~> 3.66.1"
     }
     google-beta = {
-      version = "~> 3.46.0"
+      version = "~> 3.66.1"
     }
   }
 }
