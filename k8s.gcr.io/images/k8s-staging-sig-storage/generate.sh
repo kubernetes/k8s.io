@@ -24,6 +24,7 @@ csi-snapshotter
 csi-external-health-monitor-agent
 csi-external-health-monitor-controller
 hostpathplugin
+iscsiplugin
 livenessprobe
 local-volume-provisioner
 mock-driver
