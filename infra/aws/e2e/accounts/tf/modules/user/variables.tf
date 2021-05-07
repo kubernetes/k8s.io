@@ -1,0 +1,5 @@
+variable "id" {
+}
+
+variable "orgid" {
+}

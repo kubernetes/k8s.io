@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+KEY=$(cat gcs-encryption-key)
+
+terraform init -backend-config="encryption_key=${KEY}"
+
+terraform apply
+
+# To view the encrypted state file
+#gsutil -o "GSUtil:decryption_key1=${KEY}" cat gs://k8s-infra-clusters-terraform/aws/accounts/default.tfstate
+
+find boskos/ -name "*.yaml" | sort | xargs cat > boskos/joined
+gsutil -o "GSUtil:encryption_key=${KEY}" cp boskos/joined gs://k8s-infra-clusters-terraform/aws/k8s/accounts-boskos.yaml
