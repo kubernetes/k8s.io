@@ -37,6 +37,29 @@ function enable_api() {
     done
 }
 
+readonly services_plan_jq="${TMPDIR}/services_plan.jq"
+function _ensure_services_plan_jq() {
+    if [ -f "${services_plan_jq}" ]; then return; fi
+    # quote EOF to avoid $expansion in here-document
+    >"${services_plan_jq}" cat <<"EOF"
+    ($ARGS.positional | sort) as $intent | {
+      intent: $intent,
+      enabled: map(.config.name) | sort,
+      expected: (
+        map(
+          select([.config.name] | inside($intent))
+          | (.dependencyConfig?.directlyDependsOn // [])
+        ) + $intent
+      )
+      | flatten
+      | map({key:., value:true}) | from_entries | keys | sort
+    } | . += {
+      to_enable: (.expected - .enabled),
+      to_disable: (.enabled - .expected)
+    }
+EOF
+}
+
 # Output a plan of services to enable/disable for a given gcp project; format
 # is YAML, each key is a list of services e.g. [pubsub.googleapis.com, ...]
 #   intent:     # services we wish to enable
@@ -54,23 +77,11 @@ function _plan_enabled_services() {
 
     local gcp_project="$1"; shift
 
+    _ensure_services_plan_jq
+
     gcloud services list --enabled --project="${gcp_project}" \
       --format='yaml(config.name,dependencyConfig.directlyDependsOn)' \
-      | yq --slurp -y --args '($ARGS.positional | sort) as $intent | {
-        intent: $intent,
-        enabled: map(.config.name) | sort,
-        expected: (
-          map(
-            select([.config.name] | inside($intent))
-            | (.dependencyConfig?.directlyDependsOn // [])
-          ) + $intent
-        )
-        | flatten
-        | map({key:., value:true}) | from_entries | keys | sort
-      } | . += {
-        to_enable: (.expected - .enabled),
-        to_disable: (.enabled - .expected)
-      }' "$@"
+      | yq --slurp -y --args --from-file "${services_plan_jq}" "$@"
 }
 
 # Ensure that only the given services and their direct dependencies are enabled; disable any other services
