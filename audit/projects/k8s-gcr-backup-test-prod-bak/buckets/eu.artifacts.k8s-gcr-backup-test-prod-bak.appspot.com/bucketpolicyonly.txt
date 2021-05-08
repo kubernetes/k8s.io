@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://eu.artifacts.k8s-gcr-backup-test-prod-bak.appspot.com:
-  Enabled: True
-  LockedTime: 2020-01-21 19:11:49.524000+00:00
-

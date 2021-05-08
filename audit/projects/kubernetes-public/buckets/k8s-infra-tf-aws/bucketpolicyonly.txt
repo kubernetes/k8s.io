@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-infra-tf-aws:
-  Enabled: True
-  LockedTime: 2021-07-19 03:52:58.271000+00:00
-

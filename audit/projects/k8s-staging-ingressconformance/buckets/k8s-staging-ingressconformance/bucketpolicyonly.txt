@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-ingressconformance:
-  Enabled: True
-  LockedTime: 2020-09-07 21:46:13.424000+00:00
-

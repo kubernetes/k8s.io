@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-coredns:
-  Enabled: True
-  LockedTime: 2019-10-06 19:33:51.820000+00:00
-

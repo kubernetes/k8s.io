@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-etcd:
-  Enabled: True
-  LockedTime: 2020-07-02 17:27:34.219000+00:00
-

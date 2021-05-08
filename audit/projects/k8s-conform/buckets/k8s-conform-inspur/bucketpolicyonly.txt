@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-conform-inspur:
-  Enabled: True
-  LockedTime: 2021-02-18 14:08:58.277000+00:00
-

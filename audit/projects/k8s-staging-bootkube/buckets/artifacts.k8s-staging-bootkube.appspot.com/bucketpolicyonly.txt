@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://artifacts.k8s-staging-bootkube.appspot.com:
-  Enabled: True
-  LockedTime: 2020-09-07 22:17:57.029000+00:00
-

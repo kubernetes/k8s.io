@@ -1,3 +1,0 @@
-Bucket Policy Only setting for gs://kubernetes-staging-68992d9289-eu:
-  Enabled: False
-

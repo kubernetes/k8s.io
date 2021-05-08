@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://artifacts.k8s-staging-sig-storage.appspot.com:
-  Enabled: True
-  LockedTime: 2020-09-08 03:17:26.822000+00:00
-
