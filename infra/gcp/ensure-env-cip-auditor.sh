@@ -39,7 +39,15 @@ set -o pipefail
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
-SUBSCRIPTION_NAME="cip-auditor-invoker"
+readonly CIP_AUDITOR_SUBSCRIPTION_NAME="cip-auditor-invoker"
+
+readonly CIP_AUDITOR_SERVICES=(
+    serviceusage.googleapis.com
+    cloudresourcemanager.googleapis.com
+    stackdriver.googleapis.com
+    clouderrorreporting.googleapis.com
+    run.googleapis.com
+)
 
 # Get the auditor service's Cloud Run push endpoint (the HTTPS endpoint that the
 # Pub/Sub subscription listening to the "gcr" topic can hit).
@@ -59,30 +67,6 @@ function get_push_endpoint() {
         --format='value(status.url)' \
         --project="${project_id}" \
         --region=us-central1
-}
-
-# This enables the necessary services to use Cloud Run.
-#
-#   $1: GCP project ID
-function enable_services() {
-    if [ $# -ne 1 -o -z "$1" ]; then
-        echo "enable_services(project_id) requires 1 argument" >&2
-        return 1
-    fi
-    local project_id="$1"
-
-    # Enable APIs.
-    local services=(
-        "serviceusage.googleapis.com"
-        "cloudresourcemanager.googleapis.com"
-        "stackdriver.googleapis.com"
-        "clouderrorreporting.googleapis.com"
-        "run.googleapis.com"
-    )
-    echo "Enabling services"
-    for service in "${services[@]}"; do
-        gcloud --project="${project_id}" services enable "${service}"
-    done
 }
 
 # This sets up the GCP project so that it can be ready to deploy the cip-auditor
@@ -116,7 +100,7 @@ function link_run_to_pubsub() {
 
     # Create subscription if it doesn't exist yet.
     if ! gcloud pubsub subscriptions list --format='value(name)' --project="${project_id}" \
-        | grep "projects/${project_id}/subscriptions/${SUBSCRIPTION_NAME}"; then
+        | grep "projects/${project_id}/subscriptions/${CIP_AUDITOR_SUBSCRIPTION_NAME}"; then
 
         # Find HTTPS push endpoint (invocation endpoint) of the auditor. This
         # URL will never change (part of the service name is baked into it), as
@@ -126,7 +110,7 @@ function link_run_to_pubsub() {
 
         gcloud \
             pubsub subscriptions create \
-            "${SUBSCRIPTION_NAME}" \
+            "${CIP_AUDITOR_SUBSCRIPTION_NAME}" \
             --topic=gcr \
             --expiration-period=never \
             --push-auth-service-account="$(svc_acct_email "${project_id}" "${AUDITOR_INVOKER_SVCACCT}")" \
@@ -155,7 +139,8 @@ function main() {
     local PROJECT_ID="k8s-artifacts-prod"
     local PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format "value(projectNumber)")
 
-    enable_services "${PROJECT_ID}"
+    echo "Enabling services"
+    ensure_services "${project_id}" "${CIP_AUDITOR_SERVICES[@]}" 2>&1 | indent
 
     if ! get_push_endpoint "${PROJECT_ID}"; then
         echo >&2 "Could not determine push endpoint for the auditor's Cloud Run service."
