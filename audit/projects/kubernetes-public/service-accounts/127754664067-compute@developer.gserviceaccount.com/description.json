@@ -1,8 +1,0 @@
-{
-  "displayName": "Compute Engine default service account",
-  "email": "127754664067-compute@developer.gserviceaccount.com",
-  "name": "projects/kubernetes-public/serviceAccounts/127754664067-compute@developer.gserviceaccount.com",
-  "oauth2ClientId": "108720443019014139260",
-  "projectId": "kubernetes-public",
-  "uniqueId": "108720443019014139260"
-}

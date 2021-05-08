@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-e2e-test-images-gcb:
-  Enabled: True
-  LockedTime: 2020-03-05 17:24:25.517000+00:00
-

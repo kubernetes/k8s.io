@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-capi-openstack-gcb:
-  Enabled: True
-  LockedTime: 2019-12-10 16:21:06.109000+00:00
-

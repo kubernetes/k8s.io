@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://artifacts.k8s-staging-kas-network-proxy.appspot.com:
-  Enabled: True
-  LockedTime: 2020-02-03 17:46:30.043000+00:00
-

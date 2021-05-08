@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-ingress-nginx-gcb:
-  Enabled: True
-  LockedTime: 2020-08-24 18:50:16.825000+00:00
-

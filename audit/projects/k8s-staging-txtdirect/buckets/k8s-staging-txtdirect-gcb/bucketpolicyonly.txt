@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-txtdirect-gcb:
-  Enabled: True
-  LockedTime: 2020-03-16 22:18:06.318000+00:00
-
