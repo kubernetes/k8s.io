@@ -241,7 +241,7 @@ groups:
       - kikis.github@gmail.com # 1.21 RT Lead Shadow
       - lauri.d.apple@gmail.com
       - onlydole@gmail.com # 1.21 Emeritus Advisor
-      - pal.nabarun95@gmail.com  # 1.21 RT Lead
+      - pal.nabarun95@gmail.com # 1.21 RT Lead
       - peeyushgupta91@gmail.com # 1.21 Comms Shadow
       - saveetha13@gmail.com # 1.21 RT Lead Shadow
       - v@gor.io # 1.21 RT Lead Shadow
@@ -409,7 +409,7 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
-      - onlydole@gmail.com # 1.21 Emeritus Advisor
+      - guineveresaenger@gmail.com # 1.22 Emeritus Advisor
       - tpepper@vmware.com # Release Team subproject owner
     members:
       - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
