@@ -16,12 +16,15 @@
     "sha256:d6e51b58808b5abe74b57666114efab748a6d8ba73afdb24cd2a7f91f11c4b1b": ["v1.19.0"]
     "sha256:06969498d858f456929b5715b82c7eae23788729763590ffa4e622c1c6b8c1c6": ["v1.19.1"]
     "sha256:1c19fa17b29db548d0304e9444adf84e8a6f38ee4c0a12d2ecaf262cb10c0e50": ["v1.20.0"]
+    "sha256:7a8123595b4878dff6eeef2b8f47d1903f6adcd930a420006ea1af95c98c62f4": ["v1.21.0"]
 - name: cluster-autoscaler-amd64
   dmap:
     "sha256:3289e3d49471ada20a9a2b9263224f327da9bb0dde57c2256723b15d6a018e1d": ["v1.20.0"]
+    "sha256:723c1e8e8307495cbf6a9f71368edd1066d75b8716dc99fa794bb8a1e4b77bf1": ["v1.21.0"]
 - name: cluster-autoscaler-arm64
   dmap:
     "sha256:d0ca207c0b791fec7131c73d1ac9e36ae0e6f2c424d475ccdf861b01405f03da": ["v1.20.0"]
+    "sha256:d63ef899828e67f9413c555bafd7011b48132fc47b9b0dd25edabbc563a2fe27": ["v1.21.0"]
 
 - name: vpa-admission-controller
   dmap:
