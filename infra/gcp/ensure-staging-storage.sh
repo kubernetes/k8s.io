@@ -311,3 +311,13 @@ color 6 "Configuring special case for k8s-staging-releng-test"
 (
     ensure_staging_gcb_builder_service_account "releng-test" "k8s-infra-prow-build"
 )
+
+# Special case: In order to build the node images using image-builder it needs
+#               the compute api to be enabled because it will create a VM
+#               to build the node image.
+color 6 "Configuring special case for k8s-staging-cluster-api-gcp"
+(
+    readonly STAGING_PROJECT="k8s-staging-cluster-api-gcp"
+    enable_api "${STAGING_PROJECT}" compute.googleapis.com
+    ensure_staging_gcb_builder_service_account "cluster-api-gcp" "k8s-infra-prow-build-trusted"
+)
