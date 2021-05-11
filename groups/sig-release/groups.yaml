@@ -84,8 +84,11 @@ groups:
       - marky.r.jackson@gmail.com
       - max@koerbaecher.io
       - onlydole@gmail.com
+      - pal.nabarun95@gmail.com
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
+      - thejoycekung@gmail.com
+      - wilsonehusin@gmail.com
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
@@ -305,10 +308,13 @@ groups:
       - marky.r.jackson@gmail.com
       - max@koerbaecher.io
       - mudrinic.mare@gmail.com
+      - pal.nabarun95@gmail.com
       - onlydole@gmail.com
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
       - spiffxp@google.com
+      - thejoycekung@gmail.com
+      - wilsonehusin@gmail.com
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
