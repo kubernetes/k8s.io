@@ -1,0 +1,4 @@
+# note: this file details ASNs and artifact/container stores for Amazon
+name: baidu
+asns:
+  - 55967
