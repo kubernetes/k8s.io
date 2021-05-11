@@ -1,9 +1,9 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-  - build-image-approvers
+  - release-engineering-approvers
 reviewers:
-  - build-image-reviewers
+  - release-engineering-reviewers
 
 labels:
   - sig/release
