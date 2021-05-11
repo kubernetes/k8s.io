@@ -1,0 +1,5 @@
+# note: this file details ASNs and artifact/container stores for Amazon
+name: alibabagroup
+asns:
+  - 45102
+  - 37963

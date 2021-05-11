@@ -1,0 +1,6 @@
+# note: this file details ASNs and artifact/container stores for Amazon
+name: tencentcloud
+asns:
+  - 132591
+  - 132203
+  - 45090
