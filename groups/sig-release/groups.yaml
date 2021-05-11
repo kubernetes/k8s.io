@@ -56,9 +56,7 @@ groups:
       - k8s-infra-release-admins@kubernetes.io
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - feiskyer@gmail.com
       - georgedanielmangum@gmail.com
-      - idealhack@gmail.com
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
@@ -111,11 +109,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - k8s@auggie.dev
-      - linusa@google.com
 
   - email-id: k8s-infra-staging-ci-images@kubernetes.io
     name: k8s-infra-staging-ci-images
@@ -230,13 +223,10 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
-    managers:
-      - tpepper@vmware.com # Release Team subproject owner
     members:
       - divya.mohan0209@gmail.com # 1.21 Comms Lead
       - evelyn.cupil.garcia@duke.edu # 1.21 Comms Shadow
@@ -260,7 +250,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
@@ -269,8 +258,6 @@ groups:
       - adolfo.garcia@uservers.net
       - augustus@cisco.com
       - ctadeu@gmail.com
-      - feiskyer@gmail.com
-      - idealhack@gmail.com
       - mudrinic.mare@gmail.com
 
   - email-id: release-managers@kubernetes.io
@@ -283,7 +270,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
@@ -298,10 +284,8 @@ groups:
       - ctadeu@gmail.com
       - dcampau1@gmail.com
       - divya.mohan0209@gmail.com
-      - feiskyer@gmail.com
       - gmccloskey@google.com
       - gveronicalg@gmail.com
-      - idealhack@gmail.com
       - jameswangel@gmail.com
       - kikis.github@gmail.com
       - lauri.d.apple@gmail.com
@@ -338,7 +322,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
@@ -354,7 +337,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
       - k8s@auggie.dev
       - lauri.d.apple@gmail.com
@@ -365,7 +347,6 @@ groups:
       - divya.mohan0209@gmail.com # 1.22 RT Lead Shadow
       - kikis.github@gmail.com # 1.22 RT Lead Shadow
       - saveetha13@gmail.com # 1.22 RT Lead
-      - tpepper@vmware.com # Release Team subproject owner
     members:
       - sig-release-leads@kubernetes.io
       - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
@@ -409,14 +390,12 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - alarcj137@gmail.com
       - georgedanielmangum@gmail.com
       - k8s@auggie.dev
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
       - guineveresaenger@gmail.com # 1.22 Emeritus Advisor
-      - tpepper@vmware.com # Release Team subproject owner
     members:
       - alessandro.vozza@microsoft.com # 1.21 Bug Triage Shadow
       - arunmk@gmail.com # 1.21 RT Enhancements Shadow
