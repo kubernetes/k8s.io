@@ -175,27 +175,17 @@ aliases:
     - BenTheElder
     - MushuEE
     - spiffxp
-  build-image-approvers:
-    - BenTheElder
-    - cblecker
-    - dims
-    - justaugustus
-    - listx
-  build-image-reviewers:
-    - BenTheElder
-    - cblecker
-    - dims
-    - justaugustus
-    - listx
   cip-approvers:
+    - hasheddan
     - justaugustus
-    - justinsb
     - listx
+    - saschagrunert
     - thockin
   cip-reviewers:
+    - hasheddan
     - justaugustus
-    - justinsb
     - listx
+    - saschagrunert
     - thockin
   provider-aws:
     - d-nishi
@@ -218,28 +208,20 @@ aliases:
     - cantbewong
     - frapposelli
   release-engineering-approvers:
-    - alejandrox1 # SIG Technical Lead
     - cpanato # Release Manager
-    - feiskyer # Release Manager
     - hasheddan # subproject owner / Release Manager / SIG Technical Lead
-    - idealhack # Release Manager
     - jeremyrickard # SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - puerco # Release Manager
     - saschagrunert # subproject owner / Release Manager / SIG Chair
-    - tpepper # subproject owner
     - xmudrii # Release Manager
   release-engineering-reviewers:
-    - alejandrox1 # SIG Technical Lead
     - cpanato # Release Manager
-    - feiskyer # Release Manager
     - hasheddan # subproject owner / Release Manager / SIG Technical Lead
-    - idealhack # Release Manager
     - jeremyrickard # SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - puerco # Release Manager
     - saschagrunert # subproject owner / Release Manager / SIG Chair
-    - tpepper # subproject owner
     - xmudrii # Release Manager
   # business hours oncall for prow etc (https://go.k8s.io/oncall)
   test-infra-oncall:
