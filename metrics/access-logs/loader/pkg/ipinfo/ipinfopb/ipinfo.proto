@@ -1,0 +1,18 @@
+syntax = "proto3";
+package ipinfopb;
+
+option go_package = "k8s.io/k8s.io/metrics/access-logs/loader/pkg/ipinfo/ipinfopb";
+
+message CIDRInfo {
+  string cidr = 1;
+
+  string entity = 2;
+  string service = 3;
+  string region = 4;
+
+  string aws_network_border_group = 5;
+}
+
+message CIDRMap {
+  repeated CIDRInfo cidrs = 1;
+}

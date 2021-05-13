@@ -1,0 +1,35 @@
+syntax = "proto3";
+package datapb;
+
+option go_package = "k8s.io/k8s.io/metrics/access-logs/loader/pkg/datapb";
+
+message RawGCSRow {
+  int64 request_time = 1;
+  string c_ip = 2;
+  int32 c_ip_type = 3;
+  string c_ip_region = 4;
+  string cs_method = 5;
+  string cs_uri = 6;
+  int32 sc_status = 7;
+  int64 cs_bytes = 8;
+  int64 sc_bytes = 9;
+  int64 time_taken_micros = 10;
+  string cs_host = 11;
+  string cs_referer = 12;
+  string cs_user_agent = 13;
+  string s_request_id = 14;
+  string cs_operation = 15;
+  string cs_bucket = 16;
+  string cs_object = 17;
+
+  // Messages to load into bigquery must be self-contained
+  message CIDRInfo {
+    string entity = 2;
+    string service = 3;
+    string region = 4;
+
+    string aws_network_border_group = 5;
+  }
+
+  CIDRInfo cidr_info = 18;
+}

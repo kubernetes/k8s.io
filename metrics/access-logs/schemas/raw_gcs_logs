@@ -1,0 +1,130 @@
+[
+  {
+    "name": "request_time",
+    "type": "timestamp",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "c_ip",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "c_ip_type",
+    "type": "integer",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "c_ip_region",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_method",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_uri",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "sc_status",
+    "type": "integer",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_bytes",
+    "type": "integer",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "sc_bytes",
+    "type": "integer",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "time_taken_micros",
+    "type": "integer",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_host",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_referer",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_user_agent",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "s_request_id",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_operation",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_bucket",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "name": "cs_object",
+    "type": "string",
+    "mode": "NULLABLE"
+  },
+
+  {
+    "fields": [
+      {
+        "mode": "NULLABLE",
+        "name": "cidr",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "entity",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "region",
+        "type": "STRING"
+      },
+      {
+        "mode": "NULLABLE",
+        "name": "aws_network_border_group",
+        "type": "STRING"
+      }
+    ],
+    "mode": "NULLABLE",
+    "name": "cidr_info",
+    "type": "RECORD"
+  }
+]
