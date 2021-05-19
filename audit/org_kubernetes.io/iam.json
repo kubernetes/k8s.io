@@ -97,12 +97,6 @@
     },
     {
       "members": [
-        "group:k8s-infra-gcp-auditors@kubernetes.io"
-      ],
-      "role": "roles/secretmanager.viewer"
-    },
-    {
-      "members": [
         "user:davanum@gmail.com",
         "user:thockin@google.com"
       ],

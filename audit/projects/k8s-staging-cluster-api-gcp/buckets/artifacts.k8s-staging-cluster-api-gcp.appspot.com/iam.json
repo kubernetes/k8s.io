@@ -17,14 +17,16 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-cluster-api-gcp@kubernetes.io"
+        "group:k8s-infra-staging-cluster-api-gcp@kubernetes.io",
+        "serviceAccount:gcb-builder-cluster-api-gcp@k8s-staging-cluster-api-gcp.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "group:k8s-infra-staging-cluster-api-gcp@kubernetes.io"
+        "group:k8s-infra-staging-cluster-api-gcp@kubernetes.io",
+        "serviceAccount:gcb-builder-cluster-api-gcp@k8s-staging-cluster-api-gcp.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },

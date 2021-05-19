@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "user:ameukam@gmail.com"
+      ],
+      "role": "roles/owner"
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,5 @@
+NAME                              TITLE
+bigquery.googleapis.com           BigQuery API
+bigquerystorage.googleapis.com    BigQuery Storage API
+logging.googleapis.com            Cloud Logging API
+storage-component.googleapis.com  Cloud Storage

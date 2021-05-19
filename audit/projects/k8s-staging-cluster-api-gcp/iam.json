@@ -4,6 +4,7 @@
       "members": [
         "serviceAccount:606075400249@cloudbuild.gserviceaccount.com",
         "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
+        "serviceAccount:gcb-builder-cluster-api-gcp@k8s-staging-cluster-api-gcp.iam.gserviceaccount.com",
         "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.builder"
@@ -19,6 +20,12 @@
         "serviceAccount:service-606075400249@gcp-sa-cloudbuild.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-606075400249@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
     },
     {
       "members": [
@@ -40,6 +47,8 @@
     },
     {
       "members": [
+        "serviceAccount:606075400249-compute@developer.gserviceaccount.com",
+        "serviceAccount:606075400249@cloudservices.gserviceaccount.com",
         "serviceAccount:service-606075400249@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
