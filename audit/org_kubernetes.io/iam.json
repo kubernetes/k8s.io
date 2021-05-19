@@ -47,27 +47,6 @@
     },
     {
       "members": [
-        "user:davanum@gmail.com",
-        "user:thockin@google.com"
-      ],
-      "role": "roles/compute.viewer"
-    },
-    {
-      "members": [
-        "user:davanum@gmail.com",
-        "user:thockin@google.com"
-      ],
-      "role": "roles/dns.reader"
-    },
-    {
-      "members": [
-        "user:davanum@gmail.com",
-        "user:thockin@google.com"
-      ],
-      "role": "roles/iam.securityReviewer"
-    },
-    {
-      "members": [
         "group:k8s-infra-gcp-org-admins@kubernetes.io"
       ],
       "role": "roles/orgpolicy.policyAdmin"
@@ -83,24 +62,9 @@
         "user:domain-admin-lf@kubernetes.io",
         "user:ihor@cncf.io",
         "user:psharma@linuxfoundation.org",
-        "user:spiffxp@google.com",
         "user:twaggoner@linuxfoundation.org"
       ],
       "role": "roles/resourcemanager.organizationAdmin"
-    },
-    {
-      "members": [
-        "user:davanum@gmail.com",
-        "user:thockin@google.com"
-      ],
-      "role": "roles/resourcemanager.organizationViewer"
-    },
-    {
-      "members": [
-        "user:davanum@gmail.com",
-        "user:thockin@google.com"
-      ],
-      "role": "roles/serviceusage.serviceUsageConsumer"
     }
   ],
   "version": 1
