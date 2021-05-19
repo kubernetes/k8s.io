@@ -71,7 +71,21 @@ org_role_bindings=(
   "serviceAccount:$(svc_acct_email "kubernetes-public" "k8s-infra-gcp-auditor"):$(custom_org_role_name "audit.viewer")"
 )
 
-removed_org_role_bindings=()
+removed_org_role_bindings=(
+  # TODO(spiffxp): remove all of these in followup PR once deployed
+  "group:k8s-infra-gcp-auditors@kubernetes.io:roles/secretmanager.viewer"
+  "user:davanum@gmail.com:roles/compute.viewer"
+  "user:davanum@gmail.com:roles/dns.reader"
+  "user:davanum@gmail.com:roles/iam.securityReviewer"
+  "user:davanum@gmail.com:roles/resourcemanager.organizationViewer"
+  "user:davanum@gmail.com:roles/serviceusage.serviceUsageConsumer"
+  "user:thockin@google.com:roles/compute.viewer"
+  "user:thockin@google.com:roles/dns.reader"
+  "user:thockin@google.com:roles/iam.securityReviewer"
+  "user:thockin@google.com:roles/resourcemanager.organizationViewer"
+  "user:thockin@google.com:roles/serviceusage.serviceUsageConsumer"
+  "user:spiffxp@google.com:roles/resourcemanager.organizationAdmin"
+)
 
 function ensure_org_roles() {
     for role in "${org_roles[@]}"; do

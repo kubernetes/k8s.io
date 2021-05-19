@@ -15,6 +15,8 @@
 #   - roles/dns.reader
 #   # read access to cloud assets metadata
 #   - roles/cloudasset.viewer
+#   # read access to secrets metadata (not their contents)
+#   - roles/secretmanager.viewer
 # 
 #   # meta roles (regardless of roles/viewer)
 #   # read access for the project hierarchy (org, folders, projects)
@@ -70,6 +72,7 @@ includedPermissions:
   - aiplatform.modelEvaluationSlices.list
   - aiplatform.modelEvaluations.list
   - aiplatform.models.list
+  - aiplatform.nasJobs.list
   - aiplatform.operations.list
   - aiplatform.specialistPools.list
   - aiplatform.studies.list
@@ -192,6 +195,7 @@ includedPermissions:
   - clientauthconfig.brands.list
   - clientauthconfig.clients.list
   - cloudasset.assets.analyzeIamPolicy
+  - cloudasset.assets.analyzeMove
   - cloudasset.assets.exportAccessLevel
   - cloudasset.assets.exportAccessPolicy
   - cloudasset.assets.exportAllAccessPolicy
@@ -283,6 +287,7 @@ includedPermissions:
   - cloudasset.assets.exportSpannerInstances
   - cloudasset.assets.exportSqladminInstances
   - cloudasset.assets.exportStorageBuckets
+  - cloudasset.assets.listCloudkmsCryptoKeys
   - cloudasset.assets.searchAllIamPolicies
   - cloudasset.assets.searchAllResources
   - cloudasset.feeds.list
@@ -682,18 +687,23 @@ includedPermissions:
   - dialogflow.participants.list
   - dialogflow.phoneNumberOrders.list
   - dialogflow.phoneNumbers.list
+  - dialogflow.securitySettings.list
   - dialogflow.sessionEntityTypes.list
   - dialogflow.smartMessagingEntries.list
   - dialogflow.transitionRouteGroups.list
   - dialogflow.versions.list
   - dialogflow.webhooks.list
   - dlp.analyzeRiskTemplates.list
+  - dlp.columnDataProfiles.list
   - dlp.deidentifyTemplates.list
+  - dlp.estimates.list
   - dlp.inspectFindings.list
   - dlp.inspectTemplates.list
   - dlp.jobTriggers.list
   - dlp.jobs.list
+  - dlp.projectDataProfiles.list
   - dlp.storedInfoTypes.list
+  - dlp.tableDataProfiles.list
   - dns.changes.get
   - dns.changes.list
   - dns.dnsKeys.get
@@ -706,6 +716,7 @@ includedPermissions:
   - dns.policies.getIamPolicy
   - dns.policies.list
   - dns.projects.get
+  - dns.resourceRecordSets.get
   - dns.resourceRecordSets.list
   - documentai.evaluations.list
   - documentai.labelerPools.list
@@ -978,6 +989,7 @@ includedPermissions:
   - resourcemanager.tagKeys.list
   - resourcemanager.tagValues.getIamPolicy
   - resourcemanager.tagValues.list
+  - resourcesettings.settings.list
   - retail.catalogs.list
   - retail.operations.list
   - retail.products.list
@@ -994,9 +1006,12 @@ includedPermissions:
   - runtimeconfig.variables.list
   - runtimeconfig.waiters.getIamPolicy
   - runtimeconfig.waiters.list
+  - secretmanager.locations.get
   - secretmanager.locations.list
+  - secretmanager.secrets.get
   - secretmanager.secrets.getIamPolicy
   - secretmanager.secrets.list
+  - secretmanager.versions.get
   - secretmanager.versions.list
   - securitycenter.assets.list
   - securitycenter.findings.list
