@@ -102,8 +102,13 @@ function ensure_secret_with_admins() {
 #   $2: The secret name (e.g. "my-secret")
 #   $3: The service-account (e.g. "foo@k8s-infra.iam.gserviceaccount.com")
 function ensure_serviceaccount_key_secret() {
+<<<<<<< HEAD
     if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "${FUNCNAME[0]}(project, secret, serviceaccountt) requires 3 arguments" >&2
+=======
+    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+        echo "ensure_serviceaccount_key_secret(project, secret, serviceaccount) requires 3 arguments" >&2
+>>>>>>> 0b821977 (Add gcs public bucket for k8s-infra-prow logs.)
         return 1
     fi
 

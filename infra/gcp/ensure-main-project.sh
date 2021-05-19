@@ -78,6 +78,12 @@ readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
     k8s-infra-tf-sandbox-ii:k8s-infra-ii-coop@kubernetes.io
 )
 
+
+#GCS buckets for k8s-infra-prow
+readonly PROW_BUCKETS=(
+    k8s-infra-prow-results
+)
+
 # The services we explicitly want enabled for the main project
 #
 # NOTE: Expected services include dependencies of these services, which may be
@@ -166,6 +172,48 @@ function ensure_terraform_state_buckets() {
             # TODO(spiffxp): figure out a way to do this per-bucket
             ensure_project_role_binding "${project}" "group:${owners}" "roles/viewer"
         ) 2>&1 | indent
+    done
+}
+
+function ensure_prow_buckets() {
+    if [ $# -ne 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(gcp_project) requires 1 argument" >&2
+        return 1
+    fi
+
+    local project="${1}"
+
+    for bucket in "${PROW_BUCKETS[@]}"; do
+        local svc_acct_name="${bucket}-sa"
+        local svc_acct_email="$(svc_acct_email "${project}" \
+        "${svc_acct_name}")"
+        local SECRET_ID="${svc_acct_name}-key"
+
+        color 6 "Ensuring bucket ${bucket} exists and is only word-readable"
+        ensure_public_gcs_bucket "${project}" "gs://${bucket}"
+
+
+        color 6 "Creating service account: ${svc_acct_name}"
+        ensure_service_account \
+            "${project}" \
+            "${svc_acct_name}" \
+            "${svc_acct_name}"
+
+        color 6 "Empowering service account: ${svc_acct_name}"
+        empower_svcacct_to_write_gcs_bucket "${svc_acct_email}" "gs://${bucket}"
+
+        color 6 "Ensure secret ${SECRET_ID} exists in project ${PROJECT}"
+        ensure_secret "${project}" "${SECRET_ID}"
+
+        color "Ensure ${SECRET_ID} contains secret key for ${svc_acct_name}"
+        ensure_serviceaccount_key_secret "${project}" "${SECRET_ID}" "${svc_acct_email}"
+
+        color 6 "Empowering k8s-infra-prow-oncall@kubernetes.io to read secret ${SECRET_ID}"
+        ensure_secrets_role_binding \
+            "projects/${project}/secrets/${SECRET_ID}" \
+            "group:k8s-infra-prow-oncall@kubernetes.io" \
+            "roles/secretmanager.secretAccessor"
+
     done
 }
 
@@ -378,6 +426,9 @@ function ensure_main_project() {
 
     color 6 "Ensuring terraform state buckets exist with correct permissions in: ${project}"
     ensure_terraform_state_buckets "${project}" 2>&1 | indent
+
+    color 6 "Ensuring prow buckets exist in: ${project}"
+    ensure_prow_buckets "${project}" 2>&1 | indent
 
     color 6 "Empowering cluster users and admins for clusters in: ${project}"
     empower_cluster_admins_and_users "${project}" 2>&1 | indent
