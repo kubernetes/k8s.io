@@ -39,19 +39,23 @@ function ensure_service_account() {
 
     local before="${TMPDIR}/service-account.before.yaml"
     local after="${TMPDIR}/service-account.after.yaml"
-    local verb=""
+    local updated=false
 
     if ! gcloud iam service-accounts --project "${project}" describe "${email}" >"${before}" 2>/dev/null; then
-        verb="create"
+        gcloud iam service-accounts create \
+          --project "${project}" \
+          "${name}" \
+          --display-name="${display_name}"
+        updated=true
     elif [ "$(<"${before}" yq -r .displayName)" != "${display_name}" ]; then
-        verb="update"
-    fi
-
-    if [ -n "${verb}" ]; then
-        gcloud iam service-accounts "${verb}" \
+        gcloud iam service-accounts update \
           --project "${project}" \
           "${email}" \
           --display-name="${display_name}"
+        updated=true
+    fi
+
+    if [ "${updated}" == "true" ]; then
         gcloud iam service-accounts --project "${project}" describe "${email}" > "${after}"
         diff_colorized "${before}" "${after}"
     fi
