@@ -1,0 +1,8 @@
+{
+  "displayName": "used by k8s-infra-prow-build to trigger GCB, write to GCR for k8s-staging-cluster-api-gcp",
+  "email": "gcb-builder-cluster-api-gcp@k8s-staging-cluster-api-gcp.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-cluster-api-gcp/serviceAccounts/gcb-builder-cluster-api-gcp@k8s-staging-cluster-api-gcp.iam.gserviceaccount.com",
+  "oauth2ClientId": "108043822519400192439",
+  "projectId": "k8s-staging-cluster-api-gcp",
+  "uniqueId": "108043822519400192439"
+}

@@ -1,0 +1,8 @@
+{
+  "displayName": "Compute Engine default service account",
+  "email": "606075400249-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-cluster-api-gcp/serviceAccounts/606075400249-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "100071067010720040798",
+  "projectId": "k8s-staging-cluster-api-gcp",
+  "uniqueId": "100071067010720040798"
+}

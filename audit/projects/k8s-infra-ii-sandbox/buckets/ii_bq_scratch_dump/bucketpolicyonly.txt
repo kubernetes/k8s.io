@@ -1,0 +1,4 @@
+Bucket Policy Only setting for gs://ii_bq_scratch_dump:
+  Enabled: True
+  LockedTime: 2021-08-09 23:05:03.678000+00:00
+

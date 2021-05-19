@@ -2,6 +2,18 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:service-631771264409@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquerydatatransfer.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-631771264409@gcp-sa-cloudasset.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudasset.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:631771264409@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.builder"
@@ -45,7 +57,29 @@
     },
     {
       "members": [
+        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562",
+        "serviceAccount:ii-sandbox-bobymcbobs-oitq@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.logWriter"
+    },
+    {
+      "members": [
+        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562",
+        "serviceAccount:ii-sandbox-bobymcbobs-oitq@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.metricWriter"
+    },
+    {
+      "members": [
+        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562",
+        "serviceAccount:ii-sandbox-bobymcbobs-oitq@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.viewer"
+    },
+    {
+      "members": [
         "group:k8s-infra-ii-coop@kubernetes.io",
+        "serviceAccount:bobymcbobs@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
         "user:ameukam@gmail.com"
       ],
       "role": "roles/owner"
