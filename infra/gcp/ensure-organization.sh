@@ -71,7 +71,9 @@ org_role_bindings=(
   "serviceAccount:$(svc_acct_email "kubernetes-public" "k8s-infra-gcp-auditor"):$(custom_org_role_name "audit.viewer")"
 )
 
-removed_org_role_bindings=()
+removed_org_role_bindings=(
+  "group:k8s-infra-gcp-auditors@kubernetes.io:roles/secretmanager.viewer"
+)
 
 function ensure_org_roles() {
     for role in "${org_roles[@]}"; do
