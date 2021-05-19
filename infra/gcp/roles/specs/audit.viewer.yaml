@@ -13,6 +13,8 @@ include:
   - roles/dns.reader
   # read access to cloud assets metadata
   - roles/cloudasset.viewer
+  # read access to secrets metadata (not their contents)
+  - roles/secretmanager.viewer
 
   # meta roles (regardless of roles/viewer)
   # read access for the project hierarchy (org, folders, projects)
