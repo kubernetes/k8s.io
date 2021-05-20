@@ -14,7 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-readonly TMPDIR=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+# This is a library of functions used to create GCP stuff.
+
+# Setup TMPDIR before including any other functions
+TMPDIR=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+readonly TMPDIR
 function cleanup_tmpdir() {
   if [ "${K8S_INFRA_DEBUG:-"false"}" == "true" ]; then
     echo "K8S_INFRA_DEBUG mode, not removing tmpdir: ${TMPDIR}"
@@ -25,53 +29,100 @@ function cleanup_tmpdir() {
 }
 trap 'cleanup_tmpdir' EXIT
 
-# This is a library of functions used to create GCP stuff.
+#
+# Include sub-libraries
+#
 
+# order matters here
+# - utils are used by everthing
 . "$(dirname "${BASH_SOURCE[0]}")/lib_util.sh"
+# - iam is used by almost everything
 . "$(dirname "${BASH_SOURCE[0]}")/lib_iam.sh"
+# - gcs is used by gcr
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcs.sh"
+
+# order doesn't matter here, so keep sorted
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcr.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gsm.sh"
 
+#
+# Useful organization-wide constants
+#
+
+# The GCP org stuff needed to turn it all on.
+readonly GCP_ORG="758905017065" # kubernetes.io
+readonly GCP_BILLING="018801-93540E-22A20E"
+
 # The group that admins all GCR repos.
-GCR_ADMINS="k8s-infra-artifact-admins@kubernetes.io"
+readonly GCR_ADMINS="k8s-infra-artifact-admins@kubernetes.io"
 
 # The group that admins all GCS buckets.
 # We use the same group as GCR
-GCS_ADMINS=$GCR_ADMINS
+readonly GCS_ADMINS="${GCR_ADMINS}"
 
-# The service account name for the image promoter.
-PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
-
-# The service account name for the image promoter's vulnerability check.
-PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
+#
+# Release Engineering constants
+#
 
 # The service account name for the GCR auditor (Cloud Run runtime service
 # account).
-AUDITOR_SVCACCT="k8s-infra-gcr-auditor"
+readonly AUDITOR_SVCACCT="k8s-infra-gcr-auditor"
 # This is a separate service account tied to the Pub/Sub subscription that connects
 # GCR Pub/Sub messages to the Cloud Run instance of the GCR auditor.
-AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
+readonly AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
 # This is the Cloud Run service name of the auditor.
-AUDITOR_SERVICE_NAME="cip-auditor"
+readonly AUDITOR_SERVICE_NAME="cip-auditor"
 
-# TODO: decommission this once we've flipped to prow-build-trusted
-# The service account email for Prow (not in this org for now).
-PROW_SVCACCT="deployer@k8s-prow.iam.gserviceaccount.com"
-# The service account email used by prow-build-trusted to trigger GCB and push to GCS
-GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+# The service account name for the image promoter.
+readonly PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
-# The GCP org stuff needed to turn it all on.
-GCP_ORG="758905017065" # kubernetes.io
-GCP_BILLING="018801-93540E-22A20E"
+# The service account name for the image promoter's vulnerability check.
+readonly PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
 
 # Release Engineering umbrella groups
 # - admins - edit and KMS access (Release Engineering subproject owners)
 # - managers - access to run stage/release jobs (Patch Release Team / Branch Managers)
 # - viewers - view access to Release Engineering projects (Release Manager Associates)
-RELEASE_ADMINS="k8s-infra-release-admins@kubernetes.io"
-RELEASE_MANAGERS="k8s-infra-release-editors@kubernetes.io"
-RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
+readonly RELEASE_ADMINS="k8s-infra-release-admins@kubernetes.io"
+readonly RELEASE_MANAGERS="k8s-infra-release-editors@kubernetes.io"
+readonly RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
+
+#
+# Prow constants
+#
+
+# The service account email used by prow-build-trusted to trigger GCB and push to GCS
+readonly GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+
+readonly PROW_BUILD_SERVICE_ACCOUNT="prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+
+# TODO: decommission this once we've flipped to prow-build-trusted
+# The service account email for Prow (not in this org for now).
+readonly PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT="deployer@k8s-prow.iam.gserviceaccount.com"
+
+# Projects hosting prow build clusters that run untrusted code, such as
+# presubmits that build and test unmerged code from PRs
+readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
+    # The google.com build cluster for prow.k8s.io
+    # TODO: remove support for this where possible
+    "k8s-prow-builds"
+    # The kubernetes.io build cluster
+    "k8s-infra-prow-build"
+)
+
+# Projects hosting prow build clusters that run trusted code, such as periodics
+# that run merged/approved code that need access to sensitive secrets
+readonly PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
+    # The google.com trusted build cluster for prow.k8s.io
+    # TODO: remove support for this where possible
+    "k8s-prow"
+    # The kubernetes.io build cluster
+    "k8s-infra-prow-build-trusted"
+)
+
+#
+# Functions
+#
 
 # Get the service account email for a given short name
 # $1: The GCP project
@@ -271,10 +322,10 @@ function empower_prow() {
     local project="$1"
     local bucket="$2"
 
-    local prow_principal="serviceAccount:${PROW_SVCACCT}"
+    local prow_principal="serviceAccount:${PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT}"
     local gcb_builder_principal="serviceAccount:${GCB_BUILDER_SVCACCT}"
     # commands are copy-pasted so that one set can turn into deletes
-    # when we're ready to decommission PROW_SVCACCT
+    # when we're ready to decommission PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT
 
     # Allow prow to trigger builds.
     ensure_project_role_binding "${project}" "${prow_principal}" "roles/cloudbuild.builds.builder"

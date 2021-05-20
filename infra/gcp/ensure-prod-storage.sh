@@ -57,16 +57,6 @@ GCR_AUDIT_TEST_PROD_PROJECT="k8s-gcr-audit-test-prod"
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
-PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
-    "k8s-prow-builds"
-    "k8s-infra-prow-build"
-)
-
-PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
-    "k8s-prow"
-    "k8s-infra-prow-build-trusted"
-)
-
 # This is a list of all prod projects.  Each project will be configured
 # similarly, with a GCR repository and a GCS bucket of the same name.
 #
