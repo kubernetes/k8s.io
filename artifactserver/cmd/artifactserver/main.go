@@ -50,6 +50,8 @@ func main() {
 	if err != nil {
 		klog.Fatalf("Yaml unmarshalling error: %v\n", err)
 	}
+	fmt.Println("# artifactserver Config")
+	fmt.Println(string(data))
 
 	err = run()
 	if err != nil {
@@ -61,10 +63,6 @@ func main() {
 }
 
 func run() error {
-	for b, c := range config.Backends {
-		fmt.Println(b, c)
-	}
-
 	httpServer := &http.Server{
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
@@ -130,7 +128,7 @@ func (s *Redirector) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var backend *Backend
-	for n, v := range s.Backends {
+	for _, v := range s.Backends {
 		if backend == nil {
 			backend = v
 		}
@@ -170,8 +168,7 @@ func (s *Redirector) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		Host:   backend.Host,
 	}
 
-	path := strings.TrimPrefix(r.URL.Path, "/"+backend.Name)
-	path = strings.TrimPrefix(path, "/")
+	path := strings.TrimPrefix(r.URL.Path, "/")
 	target.Path = backend.PathPrefix + "/" + path
 
 	klog.Infof("%s -> 302 %s", r.URL.Path, target)
