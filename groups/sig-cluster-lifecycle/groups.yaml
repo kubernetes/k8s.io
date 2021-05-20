@@ -18,7 +18,9 @@ groups:
 
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    members:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
       - fabriziopandini@gmail.com
       - neolit123@gmail.com
