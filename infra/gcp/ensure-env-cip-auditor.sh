@@ -74,21 +74,6 @@ function get_push_endpoint() {
         --region=us-central1
 }
 
-# This enables the necessary services to use Cloud Run.
-#
-#   $1: GCP project ID
-function enable_services() {
-    if [ $# != 1 ] || [ -z "$1" ]; then
-        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
-        return 1
-    fi
-    local project="$1"
-
-    for service in "${CIP_AUDITOR_SERVICES[@]}"; do
-        gcloud --project="${project}" services enable "${service}"
-    done
-}
-
 # This sets up the GCP project so that it can be ready to deploy the cip-auditor
 # service onto Cloud Run.
 #
@@ -171,7 +156,7 @@ function ensure_cip_auditor_env() {
     project_number=$(gcloud projects describe "${project}" --format "value(projectNumber)")
 
     echo "Enabling services"
-    enable_services "${project}"
+    ensure_services "${project}" "${CIP_AUDITOR_SERVICES[@]}" 2>&1 | indent
 
     if ! get_push_endpoint "${project}"; then
         echo >&2 "Could not determine push endpoint for the auditor's Cloud Run service."

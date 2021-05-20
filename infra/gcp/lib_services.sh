@@ -21,10 +21,14 @@
 #
 # This MUST NOT be used directly. Source it via lib.sh instead.
 
-# Enable an API
+# Ensure one or more GCP Services (APIs) are enabled in the given project
 # $1:  The GCP project
-# $2+: The APIs to enable (e.g. containerregistry.googleapis.com)
-function enable_api() {
+# $2+: The Services to enable (e.g. foo.googleapis.com)
+#
+# NOTE: this is not guaranteed to be fully automated / unattended, as some
+#       services may prompt for additional information
+# ref: https://cloud.google.com/service-usage/docs/enable-disable#enabling
+function ensure_services() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "${FUNCNAME[0]}(gcp_project, service...) requires at least 2 arguments" >&2
         return 1
@@ -37,6 +41,30 @@ function enable_api() {
     done
 }
 
+# Ensure one or more GCP Services (APIs) are disabled in the given project
+# $1:  The GCP project
+# $2+: The Services to enable (e.g. foo.googleapis.com)
+#
+# NOTE: Use this CAREFULLY; the fact that it's using --force means
+#       dependent services will _also_ get disabled. You would be
+#       surprised how many services you can disable by accidentally
+#       disabling GCS, for example.
+#
+# ref: https://cloud.google.com/service-usage/docs/enable-disable#disabling
+function ensure_disabled_services() {
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(gcp_project, service...) requires at least 2 arguments" >&2
+        return 1
+    fi
+    local project="$1"; shift
+    local services=("${@}")
+
+    for s in "${services[@]}"; do
+        gcloud --project "${project}" services disable --force "${s}"
+    done
+}
+
+# TODO: perhaps just store the .jq file in this repo?
 readonly services_plan_jq="${TMPDIR}/services_plan.jq"
 function _ensure_services_plan_jq() {
     if [ -f "${services_plan_jq}" ]; then return; fi
