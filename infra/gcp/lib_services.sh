@@ -22,17 +22,42 @@
 # This MUST NOT be used directly. Source it via lib.sh instead.
 
 # Enable an API
-# $1: The GCP project
-# $2: The API (e.g. containerregistry.googleapis.com)
+# $1:  The GCP project
+# $2+: The APIs to enable (e.g. containerregistry.googleapis.com)
 function enable_api() {
-    if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
-        echo "enable_api(project, api) requires 2 arguments" >&2
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(gcp_project, service...) requires at least 2 arguments" >&2
         return 1
     fi
-    local project="$1"
-    local api="$2"
+    local project="$1"; shift
+    local services=("${@}")
 
-    gcloud --project "${project}" services enable "${api}"
+    for s in "${services[@]}"; do
+        gcloud --project "${project}" services enable "${s}"
+    done
+}
+
+readonly services_plan_jq="${TMPDIR}/services_plan.jq"
+function _ensure_services_plan_jq() {
+    if [ -f "${services_plan_jq}" ]; then return; fi
+    # quote EOF to avoid $expansion in here-document
+    >"${services_plan_jq}" cat <<"EOF"
+    ($ARGS.positional | sort) as $intent | {
+      intent: $intent,
+      enabled: map(.config.name) | sort,
+      expected: (
+        map(
+          select([.config.name] | inside($intent))
+          | (.dependencyConfig?.directlyDependsOn // [])
+        ) + $intent
+      )
+      | flatten
+      | map({key:., value:true}) | from_entries | keys | sort
+    } | . += {
+      to_enable: (.expected - .enabled),
+      to_disable: (.enabled - .expected)
+    }
+EOF
 }
 
 # Output a plan of services to enable/disable for a given gcp project; format
@@ -45,38 +70,26 @@ function enable_api() {
 # $1  The GCP project
 # $2+ Service names that are expected to be enabled (e.g. pubsub.googleapis.com)
 function _plan_enabled_services() {
-    if [ $# -lt 2 -o -z "$1" ]; then
-        echo "list_services(gcp_project, service...) requires at least 2 arguments" >&2
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(gcp_project, service...) requires at least 2 arguments" >&2
         return 1
     fi
 
     local gcp_project="$1"; shift
 
+    _ensure_services_plan_jq
+
     gcloud services list --enabled --project="${gcp_project}" \
       --format='yaml(config.name,dependencyConfig.directlyDependsOn)' \
-      | yq --slurp -y --args '($ARGS.positional | sort) as $intent | {
-        intent: $intent,
-        enabled: map(.config.name) | sort,
-        expected: (
-          map(
-            select([.config.name] | inside($intent))
-            | (.dependencyConfig?.directlyDependsOn // [])
-          ) + $intent
-        )
-        | flatten
-        | map({key:., value:true}) | from_entries | keys | sort
-      } | . += {
-        to_enable: (.expected - .enabled),
-        to_disable: (.enabled - .expected)
-      }' "$@"
+      | yq --slurp -y --args --from-file "${services_plan_jq}" "$@"
 }
 
 # Ensure that only the given services and their direct dependencies are enabled; disable any other services
 # $1  The GCP project for which to enable/disable services
 # $2+ The service names (e.g. pubsub.googleapis.com)
 function ensure_only_services() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "ensure_only_services(gcp_project, service...) requires at least 2 arguments" >&2
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(gcp_project, service...) requires at least 2 arguments" >&2
         return 1
     fi
 
