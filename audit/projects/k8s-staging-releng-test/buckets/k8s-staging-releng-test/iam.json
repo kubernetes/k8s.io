@@ -29,7 +29,14 @@
     },
     {
       "members": [
-        "allUsers"
+        "serviceAccount:gcb-builder-releng-test@k8s-staging-releng-test.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectCreator"
+    },
+    {
+      "members": [
+        "allUsers",
+        "serviceAccount:gcb-builder-releng-test@k8s-staging-releng-test.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectViewer"
     }

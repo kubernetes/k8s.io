@@ -29,7 +29,7 @@
     },
     {
       "members": [
-        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
+        "serviceAccount:gcb-builder-releng-test@k8s-staging-releng-test.iam.gserviceaccount.com",
         "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectCreator"
@@ -37,7 +37,7 @@
     {
       "members": [
         "allUsers",
-        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
+        "serviceAccount:gcb-builder-releng-test@k8s-staging-releng-test.iam.gserviceaccount.com",
         "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectViewer"
