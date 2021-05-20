@@ -39,25 +39,38 @@ set -o pipefail
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
-SUBSCRIPTION_NAME="cip-auditor-invoker"
+readonly CIP_AUDITOR_SUBSCRIPTION_NAME="cip-auditor-invoker"
+
+readonly CIP_AUDITOR_SERVICES=(
+    # TODO: used directly, if so what for? if not, dependency of something else?
+    clouderrorreporting.googleapis.com
+    # TODO: used directly, if so what for? if not, dependency of something else?
+    cloudresourcemanager.googleapis.com
+    # The GCR auditor runs in Cloud Run
+    run.googleapis.com
+    # TODO: used directly, if so what for? if not, dependency of something else?
+    serviceusage.googleapis.com
+    # TODO: used directly, if so what for? if not, dependency of something else?
+    stackdriver.googleapis.com
+)
 
 # Get the auditor service's Cloud Run push endpoint (the HTTPS endpoint that the
 # Pub/Sub subscription listening to the "gcr" topic can hit).
 #
 #   $1: GCP project ID
 function get_push_endpoint() {
-    if [ $# -lt 1 -o -z "$1" ]; then
-        echo "get_push_endpoint(project_id) requires 1 argument" >&2
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
         return 1
     fi
-    local project_id="$1"
+    local project="${1}"
 
     gcloud \
         run services describe \
         "${AUDITOR_SERVICE_NAME}" \
         --platform=managed \
         --format='value(status.url)' \
-        --project="${project_id}" \
+        --project="${project}" \
         --region=us-central1
 }
 
@@ -65,23 +78,14 @@ function get_push_endpoint() {
 #
 #   $1: GCP project ID
 function enable_services() {
-    if [ $# -ne 1 -o -z "$1" ]; then
-        echo "enable_services(project_id) requires 1 argument" >&2
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
         return 1
     fi
-    local project_id="$1"
+    local project="$1"
 
-    # Enable APIs.
-    local services=(
-        "serviceusage.googleapis.com"
-        "cloudresourcemanager.googleapis.com"
-        "stackdriver.googleapis.com"
-        "clouderrorreporting.googleapis.com"
-        "run.googleapis.com"
-    )
-    echo "Enabling services"
-    for service in "${services[@]}"; do
-        gcloud --project="${project_id}" services enable "${service}"
+    for service in "${CIP_AUDITOR_SERVICES[@]}"; do
+        gcloud --project="${project}" services enable "${service}"
     done
 }
 
@@ -91,47 +95,50 @@ function enable_services() {
 #   $1: GCP project ID
 #   $2: GCP project number
 function link_run_to_pubsub() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "link_run_to_pubsub(project_id, project_number) requires 2 arguments" >&2
+    if [ $# != 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(project, project_number) requires 2 arguments" >&2
         return 1
     fi
-    local project_id="$1"
+    local project="$1"
     local project_number="$2"
 
-    # Create "gcr" topic if it doesn't exist yet.
-    if ! gcloud pubsub topics list --format='value(name)' --project="${project_id}" \
-        | grep "projects/${project_id}/topics/gcr"; then
+    local pubsub_serviceagent="service-${project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+    local auditor_invoker_sa
+    auditor_invoker_sa=$(svc_acct_email "${project}" "${AUDITOR_INVOKER_SVCACCT}")
 
-        gcloud pubsub topics create gcr --project="${project_id}"
+    # Create "gcr" topic if it doesn't exist yet.
+    if ! gcloud pubsub topics list --format='value(name)' --project="${project}" \
+        | grep "projects/${project}/topics/gcr"; then
+
+        gcloud pubsub topics create gcr --project="${project}"
     fi
 
     # Allow the Pub/Sub to create auth tokens in the project. This is part of
     # the authentication bridge between the "gcr" Pub/Sub topic and the
     # "--no-allow-unauthenticated" Cloud Run service option.
-    gcloud \
-        projects add-iam-policy-binding \
-        "${project_id}" \
-        --member="serviceAccount:service-${project_number}@gcp-sa-pubsub.iam.gserviceaccount.com" \
-        --role=roles/iam.serviceAccountTokenCreator
+    ensure_project_role_binding \
+        "${project}" \
+        "serviceAccount:${pubsub_serviceagent}" \
+        "roles/iam.serviceAccountTokenCreator"
 
     # Create subscription if it doesn't exist yet.
-    if ! gcloud pubsub subscriptions list --format='value(name)' --project="${project_id}" \
-        | grep "projects/${project_id}/subscriptions/${SUBSCRIPTION_NAME}"; then
+    if ! gcloud pubsub subscriptions list --format='value(name)' --project="${project}" \
+        | grep "projects/${project}/subscriptions/${CIP_AUDITOR_SUBSCRIPTION_NAME}"; then
 
         # Find HTTPS push endpoint (invocation endpoint) of the auditor. This
         # URL will never change (part of the service name is baked into it), as
         # per https://cloud.google.com/run/docs/deploying#url.
         local auditor_endpoint
-        local auditor_endpoint=$(get_push_endpoint "${project_id}")
+        auditor_endpoint=$(get_push_endpoint "${project}")
 
         gcloud \
             pubsub subscriptions create \
-            "${SUBSCRIPTION_NAME}" \
+            "${CIP_AUDITOR_SUBSCRIPTION_NAME}" \
             --topic=gcr \
             --expiration-period=never \
-            --push-auth-service-account="$(svc_acct_email "${project_id}" "${AUDITOR_INVOKER_SVCACCT}")" \
+            --push-auth-service-account="${auditor_invoker_sa}"\
             --push-endpoint="${auditor_endpoint}" \
-            --project="${project_id}"
+            --project="${project}"
     fi
 }
 
@@ -140,30 +147,40 @@ function link_run_to_pubsub() {
 # create a Cloud Run endpoint (https:// URL) that can be used in the rest of
 # this script (as auditor_endpoint).
 function create_dummy_endpoint() {
-    local CLOUD_RUN_SERVICE_ACCOUNT="$(svc_acct_email "${PROJECT_ID}" "${AUDITOR_SVCACCT}")"
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
+        return 1
+    fi
+    local project="${1}"
+
+    local serviceaccount
+    serviceaccount="$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")"
+
     gcloud run deploy "${AUDITOR_SERVICE_NAME}" \
         --image="gcr.io/cloudrun/hello" \
         --platform=managed \
         --no-allow-unauthenticated \
         --region=us-central1 \
-        --project="${PROJECT_ID}" \
-        --service-account="${CLOUD_RUN_SERVICE_ACCOUNT}"
+        --project="${project}" \
+        --service-account="${serviceaccount}"
 }
 
-function main() {
-    # We want to run in the artifacts project to get pubsub most easily.
-    local PROJECT_ID="k8s-artifacts-prod"
-    local PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format "value(projectNumber)")
+function ensure_cip_auditor_env() {
+    local project="${1}"
+    local project_number
+    project_number=$(gcloud projects describe "${project}" --format "value(projectNumber)")
 
-    enable_services "${PROJECT_ID}"
+    echo "Enabling services"
+    enable_services "${project}"
 
-    if ! get_push_endpoint "${PROJECT_ID}"; then
+    if ! get_push_endpoint "${project}"; then
         echo >&2 "Could not determine push endpoint for the auditor's Cloud Run service."
         echo >&2 "Deploying a dummy image instead to create the Cloud Run endpoint."
-        create_dummy_endpoint
+        create_dummy_endpoint "${project}"
     fi
 
-    link_run_to_pubsub "${PROJECT_ID}" "${PROJECT_NUMBER}"
+    link_run_to_pubsub "${project}" "${project_number}"
 }
 
-main "$@"
+# We want to run in the artifacts project to get pubsub most easily.
+ensure_cip_auditor_env "k8s-artifacts-prod"
