@@ -91,6 +91,11 @@ readonly PROD_PROJECT_SERVICES=(
     storage-component.googleapis.com
 )
 
+readonly PROD_PROJECT_DISABLED_SERVICES=(
+    # Disabling per https://github.com/kubernetes/k8s.io/issues/1963
+    containerscanning.googleapis.com
+)
+
 # Regions for prod GCR.
 PROD_REGIONS=(us eu asia)
 
@@ -194,6 +199,9 @@ function ensure_all_prod_projects() {
         color 6 "Ensuring Services to host and analyze aritfacts: ${prj}"
         ensure_services "${prj}" "${PROD_PROJECT_SERVICES[@]}" 2>&1 | indent
 
+        color 6 "Ensuring disabled services for prod project: ${prj}"
+        ensure_disabled_services "${prj}" "${PROD_PROJECT_DISABLED_SERVICES[@]}" 2>&1 | indent
+
         color 6 "Ensuring the GCR repository: ${prj}"
         ensure_prod_gcr "${prj}" 2>&1 | indent
 
@@ -226,10 +234,6 @@ function ensure_all_prod_special_cases() {
     upload_gcs_static_content \
         "gs://${PROD_PROJECT}" \
         "${SCRIPT_DIR}/static/prod-storage"
-
-    # Special case: enable vulnerability scanning on the prod GCR.
-    color 6 "Enabling GCR vulnerability scanning in the prod GCR"
-    enable_api "${PROD_PROJECT}" containerscanning.googleapis.com
 
     # Special case: enable people to read vulnerability reports.
     color 6 "Empowering artifact-security group to real vulnerability reports"

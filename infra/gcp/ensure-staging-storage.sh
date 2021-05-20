@@ -127,12 +127,15 @@ readonly STAGING_PROJECT_SERVICES=(
     cloudkms.googleapis.com
     # These projects host images in GCR
     containerregistry.googleapis.com
-    # TODO(spiffxp): disable this per https://github.com/kubernetes/k8s.io/issues/1963
-    containerscanning.googleapis.com
     # Some GCB jobs may use Secret Manager (preferred over KMS)
     secretmanager.googleapis.com
     # These projects may host binaries in GCS
     storage-component.googleapis.com
+)
+
+readonly STAGING_PROJECT_DISABLED_SERVICES=(
+    # Disabling per https://github.com/kubernetes/k8s.io/issues/1963
+    containerscanning.googleapis.com
 )
 
 # A short expiration - it can always be raised, but it is hard to lower
@@ -197,6 +200,9 @@ function ensure_staging_project() {
     #       only does so if an obnoxiously long environment var is set,
     #       K8S_INFRA_ENSURE_ONLY_SERVICES_WILL_FORCE_DISABLE=true
     ensure_only_services "${project}" "${STAGING_PROJECT_SERVICES[@]}"
+
+    color 6 "Ensuring disabled services for staging project: ${project}"
+    ensure_disabled_services "${project}" "${STAGING_PROJECT_DISABLED_SERVICES[@]}"
 
     # Enable image promoter access to vulnerability scanning results
     color 6 "Ensuring ${cip_principal} can view vulnernability scanning results for project: ${project}"
