@@ -19,9 +19,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
+	"sigs.k8s.io/yaml"
 	"strings"
 	"time"
 
@@ -29,15 +31,27 @@ import (
 )
 
 var listen = ":8080"
+var config = &Redirector{}
 
 func main() {
 	klog.InitFlags(nil)
 
+	configPath := "config.yaml"
 	flag.Set("logtostderr", "true")
 	flag.StringVar(&listen, "listen", listen, "endpoint on which to listen")
+	flag.StringVar(&configPath, "config", configPath, "path to a config.yaml")
 	flag.Parse()
 
-	err := run()
+	data, err := ioutil.ReadFile(configPath)
+	if err != nil {
+		klog.Fatalf("File reading error: %v\n", err)
+	}
+	err = yaml.Unmarshal(data, &config)
+	if err != nil {
+		klog.Fatalf("Yaml unmarshalling error: %v\n", err)
+	}
+
+	err = run()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)
@@ -47,24 +61,15 @@ func main() {
 }
 
 func run() error {
-	r := &Redirector{
-		backends: make(map[string]*Backend),
-	}
-
-	// TODO: Load from configmap or similar
-	if err := r.SetBackend(&Backend{
-		Name:       "kops",
-		Host:       "kubeupv2.s3.amazonaws.com",
-		PathPrefix: "kops/",
-	}); err != nil {
-		return err
+	for b, c := range config.Backends {
+		fmt.Println(b, c)
 	}
 
 	httpServer := &http.Server{
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  120 * time.Second,
-		Handler:      r,
+		Handler:      config,
 		Addr:         listen,
 	}
 
@@ -79,33 +84,42 @@ func run() error {
 // Redirector acts as an HTTP server, redirecting requests to backends
 type Redirector struct {
 	// backends is a map from subtrees to backends
-	backends map[string]*Backend
+	Backends map[string]*Backend `yaml:"backends"`
+}
+
+// Conditions for rewriting a request a given backend
+type Conditions struct {
+	// Headers are HTTP header and value key pairs
+	Headers map[string]string `yaml:"headers"`
+
+	// Paths are request paths to choose the backend
+	Paths []string `yaml:"paths"`
 }
 
 // Backend holds the data for a target backend; we redirect requests to that backend
 type Backend struct {
-	// Name of the subtree to serve: artifacts.k8s.io/<name>/...
-	Name string
-
 	// Host is the host to which we redirect - storage.googleapis.com for GCS, <bucket>.s3.amazonaws.com for AWS, etc
-	Host string
+	Host string `yaml:"host"`
 
 	// PathPrefix is the prefix we insert into the path to force requests into a subpath of the target
-	PathPrefix string
+	PathPrefix string `yaml:"pathPrefix"`
+
+	// Conditions are conditions for whether the request should be rewritten to a given backend
+	Conditions Conditions `yaml:"conditions"`
 }
 
 func (r *Redirector) SetBackend(b *Backend) error {
-	if b.Name == "" {
-		return fmt.Errorf("backend did not have name")
-	}
-
 	b.PathPrefix = strings.TrimSuffix(b.PathPrefix, "/")
-	r.backends[b.Name] = b
+	r.Backends[b.Host] = b
 	return nil
 }
 
 func (s *Redirector) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	klog.Infof("request %s %s", r.Method, r.URL)
+	sourceIP := r.Header.Get("X-Real-Ip")
+	if sourceIP == "" {
+		sourceIP = r.RemoteAddr
+	}
+	klog.Infof("%v %v %v %v %v %s\n", r.Method, r.URL, r.Proto, r.Response, sourceIP)
 
 	tokens := strings.Split(strings.TrimPrefix(r.URL.Path, "/"), "/")
 
@@ -115,7 +129,22 @@ func (s *Redirector) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	backend := s.backends[tokens[0]]
+	var backend *Backend
+	for n, v := range s.Backends {
+		if backend == nil {
+			backend = v
+		}
+		for hk, hv := range v.Conditions.Headers {
+			if r.Header.Get(hk) == hv {
+				backend = v
+			}
+		}
+		for _, p := range v.Conditions.Paths {
+			if r.URL.Path == p && p != "" {
+				backend = v
+			}
+		}
+	}
 
 	if backend == nil {
 		// healthz check endpoint
@@ -130,7 +159,7 @@ func (s *Redirector) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if r.Method != "GET" && r.Method != "HEAD" {
+	if !(r.Method == "GET" || r.Method == "HEAD") {
 		klog.Infof("%s %s -> 405", r.Method, r.URL.Path)
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
