@@ -312,6 +312,9 @@ function ensure_staging_gcb() {
     ensure_project_role_binding "${project}" "${principal}" "roles/cloudbuild.builds.builder"
     ensure_gcs_role_binding "${bucket}" "${principal}" "objectCreator"
     ensure_gcs_role_binding "${bucket}" "${principal}" "objectViewer"
+
+    color 6 "Ensuring k8s-prow / test-infra-trusted can no longer use GCB in project: ${project}"
+    ensure_removed_google_prow_bindings "${project}" "${bucket}"
 }
 
 # TODO(spiffxp): rename this to just prow@project and deprecate/rm the gcb-builder-foo

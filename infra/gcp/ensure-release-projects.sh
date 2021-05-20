@@ -124,8 +124,16 @@ for PROJECT; do
     done
 
     # Let prow trigger builds and access the scratch bucket
-    color 6 "Empowering Prow"
-    empower_prow "${PROJECT}" "${GCB_BUCKET}"
+    serviceaccount="${GCB_BUILDER_SVCACCT}"
+    principal="serviceAccount:${serviceaccount}"
+
+    color 6 "Ensuring ${serviceaccount} can use GCB in project: ${PROJECT}"
+    ensure_project_role_binding "${PROJECT}" "${principal}" "roles/cloudbuild.builds.builder"
+    ensure_gcs_role_binding "${GCB_BUCKET}" "${principal}" "objectCreator"
+    ensure_gcs_role_binding "${GCB_BUCKET}" "${principal}" "objectViewer"
+
+    color 6 "Ensuring k8s-prow / test-infra-trusted can no longer use GCB in project: ${PROJECT}"
+    ensure_removed_google_prow_bindings "${PROJECT}" "${GCB_BUCKET}"
 
     # Let project admins use KMS.
     color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"

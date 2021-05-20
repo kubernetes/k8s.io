@@ -298,31 +298,24 @@ function empower_group_for_kms() {
     done
 }
 
-# Grant privileges to prow in a staging project
+# TODO(spiffxp): remove this in a follow-up PR
+# Remove privileges previously granted to the google-owned test-infra-trusted
+# cluster's "deployer" service account
 # $1: The GCP project
 # $2: The GCS scratch bucket
-function empower_prow() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_prow(project, bucket) requires 2 arguments" >&2
+function ensure_removed_google_prow_bindings() {
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(project, bucket) requires 2 arguments" >&2
         return 1
     fi
     local project="$1"
     local bucket="$2"
 
-    local prow_principal="serviceAccount:${PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT}"
-    local gcb_builder_principal="serviceAccount:${GCB_BUILDER_SVCACCT}"
-    # commands are copy-pasted so that one set can turn into deletes
-    # when we're ready to decommission PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT
+    local google_prow_principal="serviceAccount:${PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT}"
 
-    # Allow prow to trigger builds.
-    ensure_project_role_binding "${project}" "${prow_principal}" "roles/cloudbuild.builds.builder"
-    ensure_project_role_binding "${project}" "${gcb_builder_principal}" "roles/cloudbuild.builds.builder"
-
-    # Allow prow to push source and access build logs.
-    ensure_gcs_role_binding "${bucket}" "${prow_principal}" "objectCreator"
-    ensure_gcs_role_binding "${bucket}" "${prow_principal}" "objectViewer"
-    ensure_gcs_role_binding "${bucket}" "${gcb_builder_principal}" "objectCreator"
-    ensure_gcs_role_binding "${bucket}" "${gcb_builder_principal}" "objectViewer"
+    ensure_removed_project_role_binding "${project}" "${google_prow_principal}" "roles/cloudbuild.builds.builder"
+    ensure_removed_gcs_role_binding "${bucket}" "${google_prow_principal}" "objectCreator"
+    ensure_removed_gcs_role_binding "${bucket}" "${google_prow_principal}" "objectViewer"
 }
 
 # Grant full privileges to GCR admins
