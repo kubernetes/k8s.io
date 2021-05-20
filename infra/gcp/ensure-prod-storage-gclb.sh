@@ -50,7 +50,7 @@ color 6 "Ensuring project exists: ${PROD_PROJECT}"
 ensure_project "${PROD_PROJECT}"
 
 color 6 "Enabling the compute API: ${PROD_PROJECT}"
-enable_api "${PROD_PROJECT}" compute.googleapis.com
+ensure_services "${PROD_PROJECT}" compute.googleapis.com
 
 color 6 "Reconciling Global Address"
 ensure_global_address "${PROD_PROJECT}" "${NAME}" "IP Address for GCLB for binary artifacts"

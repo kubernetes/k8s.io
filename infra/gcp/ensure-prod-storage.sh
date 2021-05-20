@@ -57,16 +57,6 @@ GCR_AUDIT_TEST_PROD_PROJECT="k8s-gcr-audit-test-prod"
 RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
 RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
-PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
-    "k8s-prow-builds"
-    "k8s-infra-prow-build"
-)
-
-PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
-    "k8s-prow"
-    "k8s-infra-prow-build-trusted"
-)
-
 # This is a list of all prod projects.  Each project will be configured
 # similarly, with a GCR repository and a GCS bucket of the same name.
 #
@@ -90,6 +80,20 @@ ALL_PROD_BUCKETS=(
     "cni"
     "cri-tools"
     "kind"
+)
+
+readonly PROD_PROJECT_SERVICES=(
+    # prod projects may perform container analysis
+    containeranalysis.googleapis.com
+    # prod projects host containers in GCR
+    containerregistry.googleapis.com
+    # prod projects host binaries in GCS
+    storage-component.googleapis.com
+)
+
+readonly PROD_PROJECT_DISABLED_SERVICES=(
+    # Disabling per https://github.com/kubernetes/k8s.io/issues/1963
+    containerscanning.googleapis.com
 )
 
 # Regions for prod GCR.
@@ -192,17 +196,14 @@ function ensure_all_prod_projects() {
         color 6 "Ensuring project exists: ${prj}"
         ensure_project "${prj}"
 
-        color 6 "Enabling the container registry API: ${prj}"
-        enable_api "${prj}" containerregistry.googleapis.com
+        color 6 "Ensuring Services to host and analyze aritfacts: ${prj}"
+        ensure_services "${prj}" "${PROD_PROJECT_SERVICES[@]}" 2>&1 | indent
 
-        color 6 "Enabling the container analysis API: ${prj}"
-        enable_api "${prj}" containeranalysis.googleapis.com
+        color 6 "Ensuring disabled services for prod project: ${prj}"
+        ensure_disabled_services "${prj}" "${PROD_PROJECT_DISABLED_SERVICES[@]}" 2>&1 | indent
 
         color 6 "Ensuring the GCR repository: ${prj}"
         ensure_prod_gcr "${prj}" 2>&1 | indent
-
-        color 6 "Enabling the GCS API: ${prj}"
-        enable_api "${prj}" storage-component.googleapis.com
 
         color 6 "Ensuring the GCS bucket: gs://${prj}"
         ensure_prod_gcs_bucket "${prj}" "gs://${prj}" 2>&1 | indent
@@ -233,10 +234,6 @@ function ensure_all_prod_special_cases() {
     upload_gcs_static_content \
         "gs://${PROD_PROJECT}" \
         "${SCRIPT_DIR}/static/prod-storage"
-
-    # Special case: enable vulnerability scanning on the prod GCR.
-    color 6 "Enabling GCR vulnerability scanning in the prod GCR"
-    enable_api "${PROD_PROJECT}" containerscanning.googleapis.com
 
     # Special case: enable people to read vulnerability reports.
     color 6 "Empowering artifact-security group to real vulnerability reports"

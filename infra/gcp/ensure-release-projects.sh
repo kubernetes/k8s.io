@@ -43,10 +43,6 @@ if [ $# = 0 ]; then
     set -- "${PROJECTS[@]}"
 fi
 
-ADMINS="k8s-infra-release-admins@kubernetes.io"
-WRITERS="k8s-infra-release-editors@kubernetes.io"
-VIEWERS="k8s-infra-release-viewers@kubernetes.io"
-
 readonly RELEASE_PROJECT_SERVICES=(
     cloudbuild.googleapis.com
     cloudkms.googleapis.com
@@ -56,6 +52,12 @@ readonly RELEASE_PROJECT_SERVICES=(
 )
 
 for PROJECT; do
+
+    if ! (printf '%s\n' "${PROJECTS[@]}" | grep -q "^${PROJECT}$"); then
+        color 2 "Skipping unrecognized release project name: ${PROJECT}"
+        continue
+    fi
+
     color 3 "Configuring: ${PROJECT}"
 
     # The names of the buckets
@@ -67,7 +69,7 @@ for PROJECT; do
     color 6 "Ensuring project exists: ${PROJECT}"
     ensure_project "${PROJECT}"
 
-    for group in ${ADMINS} ${WRITERS} ${VIEWERS}; do
+    for group in ${RELEASE_ADMINS} ${RELEASE_MANAGERS} ${RELEASE_VIEWERS}; do
         # Enable admins to use the UI
         color 6 "Empowering ${group} as project viewers"
         empower_group_as_viewer "${PROJECT}" "${group}"
@@ -88,7 +90,7 @@ for PROJECT; do
     empower_gcr_admins "${PROJECT}"
 
     # Enable GCR writers
-    for group in ${ADMINS} ${WRITERS}; do
+    for group in ${RELEASE_ADMINS} ${RELEASE_MANAGERS}; do
         color 6 "Empowering ${group} to GCR"
         empower_group_to_write_gcr "${group}" "${PROJECT}"
     done
@@ -107,7 +109,7 @@ for PROJECT; do
         empower_gcs_admins "${PROJECT}" "${BUCKET}"
 
         # Enable writers on the bucket
-        for group in ${ADMINS} ${WRITERS}; do
+        for group in ${RELEASE_ADMINS} ${RELEASE_MANAGERS}; do
             color 6 "Empowering ${group} to GCS"
             empower_group_to_write_gcs_bucket "${group}" "${BUCKET}"
         done
@@ -116,18 +118,26 @@ for PROJECT; do
     # Enable GCB and Prow to build and push images.
 
     # Let project writers use GCB.
-    for group in ${ADMINS} ${WRITERS}; do
+    for group in ${RELEASE_ADMINS} ${RELEASE_MANAGERS}; do
         color 6 "Empowering ${group} as GCB editors"
         empower_group_for_gcb "${PROJECT}" "${group}"
     done
 
     # Let prow trigger builds and access the scratch bucket
-    color 6 "Empowering Prow"
-    empower_prow "${PROJECT}" "${GCB_BUCKET}"
+    serviceaccount="${GCB_BUILDER_SVCACCT}"
+    principal="serviceAccount:${serviceaccount}"
+
+    color 6 "Ensuring ${serviceaccount} can use GCB in project: ${PROJECT}"
+    ensure_project_role_binding "${PROJECT}" "${principal}" "roles/cloudbuild.builds.builder"
+    ensure_gcs_role_binding "${GCB_BUCKET}" "${principal}" "objectCreator"
+    ensure_gcs_role_binding "${GCB_BUCKET}" "${principal}" "objectViewer"
+
+    color 6 "Ensuring k8s-prow / test-infra-trusted can no longer use GCB in project: ${PROJECT}"
+    ensure_removed_google_prow_bindings "${PROJECT}" "${GCB_BUCKET}"
 
     # Let project admins use KMS.
-    color 6 "Empowering ${ADMINS} as KMS admins"
-    empower_group_for_kms "${PROJECT}" "${ADMINS}"
+    color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"
+    empower_group_for_kms "${PROJECT}" "${RELEASE_ADMINS}"
 
     color 6 "Done"
 done
@@ -141,7 +151,6 @@ RELEASE_BUCKETS=(
   "gs://k8s-release-dev-eu"
   "gs://k8s-release-pull"
 )
-PROW_BUILD_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
 
 for BUCKET in "${RELEASE_BUCKETS[@]}"; do
     color 3 "Configuring bucket: ${BUCKET}"
@@ -155,10 +164,10 @@ for BUCKET in "${RELEASE_BUCKETS[@]}"; do
     empower_gcs_admins "k8s-release" "${BUCKET}"
 
     # Enable prow to write to the bucket
-    empower_svcacct_to_write_gcs_bucket "${PROW_BUILD_SVCACCT}" "${BUCKET}"
+    empower_svcacct_to_write_gcs_bucket "${PROW_BUILD_SERVICE_ACCOUNT}" "${BUCKET}"
 
     # Enable writers on the bucket
-    for group in ${ADMINS} ${WRITERS}; do
+    for group in ${RELEASE_ADMINS} ${RELEASE_MANAGERS}; do
         color 6 "Empowering ${group} to GCS"
         empower_group_to_write_gcs_bucket "${group}" "${BUCKET}"
     done

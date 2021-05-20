@@ -14,7 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-readonly TMPDIR=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+# This is a library of functions used to create GCP stuff.
+
+# Setup TMPDIR before including any other functions
+TMPDIR=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
+readonly TMPDIR
 function cleanup_tmpdir() {
   if [ "${K8S_INFRA_DEBUG:-"false"}" == "true" ]; then
     echo "K8S_INFRA_DEBUG mode, not removing tmpdir: ${TMPDIR}"
@@ -25,53 +29,101 @@ function cleanup_tmpdir() {
 }
 trap 'cleanup_tmpdir' EXIT
 
-# This is a library of functions used to create GCP stuff.
+#
+# Include sub-libraries
+#
 
+# order matters here
+# - utils are used by everthing
 . "$(dirname "${BASH_SOURCE[0]}")/lib_util.sh"
+# - iam is used by almost everything
 . "$(dirname "${BASH_SOURCE[0]}")/lib_iam.sh"
+# - gcs is used by gcr
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcs.sh"
+
+# order doesn't matter here, so keep sorted
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcr.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gsm.sh"
+. "$(dirname "${BASH_SOURCE[0]}")/lib_services.sh"
+
+#
+# Useful organization-wide constants
+#
+
+# The GCP org stuff needed to turn it all on.
+readonly GCP_ORG="758905017065" # kubernetes.io
+readonly GCP_BILLING="018801-93540E-22A20E"
 
 # The group that admins all GCR repos.
-GCR_ADMINS="k8s-infra-artifact-admins@kubernetes.io"
+readonly GCR_ADMINS="k8s-infra-artifact-admins@kubernetes.io"
 
 # The group that admins all GCS buckets.
 # We use the same group as GCR
-GCS_ADMINS=$GCR_ADMINS
+readonly GCS_ADMINS="${GCR_ADMINS}"
 
-# The service account name for the image promoter.
-PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
-
-# The service account name for the image promoter's vulnerability check.
-PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
+#
+# Release Engineering constants
+#
 
 # The service account name for the GCR auditor (Cloud Run runtime service
 # account).
-AUDITOR_SVCACCT="k8s-infra-gcr-auditor"
+readonly AUDITOR_SVCACCT="k8s-infra-gcr-auditor"
 # This is a separate service account tied to the Pub/Sub subscription that connects
 # GCR Pub/Sub messages to the Cloud Run instance of the GCR auditor.
-AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
+readonly AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
 # This is the Cloud Run service name of the auditor.
-AUDITOR_SERVICE_NAME="cip-auditor"
+readonly AUDITOR_SERVICE_NAME="cip-auditor"
 
-# TODO: decommission this once we've flipped to prow-build-trusted
-# The service account email for Prow (not in this org for now).
-PROW_SVCACCT="deployer@k8s-prow.iam.gserviceaccount.com"
-# The service account email used by prow-build-trusted to trigger GCB and push to GCS
-GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+# The service account name for the image promoter.
+readonly PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
-# The GCP org stuff needed to turn it all on.
-GCP_ORG="758905017065" # kubernetes.io
-GCP_BILLING="018801-93540E-22A20E"
+# The service account name for the image promoter's vulnerability check.
+readonly PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
 
 # Release Engineering umbrella groups
 # - admins - edit and KMS access (Release Engineering subproject owners)
 # - managers - access to run stage/release jobs (Patch Release Team / Branch Managers)
 # - viewers - view access to Release Engineering projects (Release Manager Associates)
-RELEASE_ADMINS="k8s-infra-release-admins@kubernetes.io"
-RELEASE_MANAGERS="k8s-infra-release-editors@kubernetes.io"
-RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
+readonly RELEASE_ADMINS="k8s-infra-release-admins@kubernetes.io"
+readonly RELEASE_MANAGERS="k8s-infra-release-editors@kubernetes.io"
+readonly RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
+
+#
+# Prow constants
+#
+
+# The service account email used by prow-build-trusted to trigger GCB and push to GCS
+readonly GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+
+readonly PROW_BUILD_SERVICE_ACCOUNT="prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+
+# TODO: decommission this once we've flipped to prow-build-trusted
+# The service account email for Prow (not in this org for now).
+readonly PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT="deployer@k8s-prow.iam.gserviceaccount.com"
+
+# Projects hosting prow build clusters that run untrusted code, such as
+# presubmits that build and test unmerged code from PRs
+readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
+    # The google.com build cluster for prow.k8s.io
+    # TODO: remove support for this where possible
+    "k8s-prow-builds"
+    # The kubernetes.io build cluster
+    "k8s-infra-prow-build"
+)
+
+# Projects hosting prow build clusters that run trusted code, such as periodics
+# that run merged/approved code that need access to sensitive secrets
+readonly PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
+    # The google.com trusted build cluster for prow.k8s.io
+    # TODO: remove support for this where possible
+    "k8s-prow"
+    # The kubernetes.io build cluster
+    "k8s-infra-prow-build-trusted"
+)
+
+#
+# Functions
+#
 
 # Get the service account email for a given short name
 # $1: The GCP project
@@ -156,20 +208,6 @@ function ensure_project() {
         --flatten="bindings[].members" \
         --filter="bindings.role=roles/owner AND bindings.members ~ ^user:" \
         --format="value(bindings.members)")
-}
-
-# Enable an API
-# $1: The GCP project
-# $2: The API (e.g. containerregistry.googleapis.com)
-function enable_api() {
-    if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
-        echo "enable_api(project, api) requires 2 arguments" >&2
-        return 1
-    fi
-    local project="$1"
-    local api="$2"
-
-    gcloud --project "${project}" services enable "${api}"
 }
 
 # Grant project viewer privileges to a principal
@@ -260,31 +298,24 @@ function empower_group_for_kms() {
     done
 }
 
-# Grant privileges to prow in a staging project
+# TODO(spiffxp): remove this in a follow-up PR
+# Remove privileges previously granted to the google-owned test-infra-trusted
+# cluster's "deployer" service account
 # $1: The GCP project
 # $2: The GCS scratch bucket
-function empower_prow() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "empower_prow(project, bucket) requires 2 arguments" >&2
+function ensure_removed_google_prow_bindings() {
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(project, bucket) requires 2 arguments" >&2
         return 1
     fi
     local project="$1"
     local bucket="$2"
 
-    local prow_principal="serviceAccount:${PROW_SVCACCT}"
-    local gcb_builder_principal="serviceAccount:${GCB_BUILDER_SVCACCT}"
-    # commands are copy-pasted so that one set can turn into deletes
-    # when we're ready to decommission PROW_SVCACCT
+    local google_prow_principal="serviceAccount:${PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT}"
 
-    # Allow prow to trigger builds.
-    ensure_project_role_binding "${project}" "${prow_principal}" "roles/cloudbuild.builds.builder"
-    ensure_project_role_binding "${project}" "${gcb_builder_principal}" "roles/cloudbuild.builds.builder"
-
-    # Allow prow to push source and access build logs.
-    ensure_gcs_role_binding "${bucket}" "${prow_principal}" "objectCreator"
-    ensure_gcs_role_binding "${bucket}" "${prow_principal}" "objectViewer"
-    ensure_gcs_role_binding "${bucket}" "${gcb_builder_principal}" "objectCreator"
-    ensure_gcs_role_binding "${bucket}" "${gcb_builder_principal}" "objectViewer"
+    ensure_removed_project_role_binding "${project}" "${google_prow_principal}" "roles/cloudbuild.builds.builder"
+    ensure_removed_gcs_role_binding "${bucket}" "${google_prow_principal}" "objectCreator"
+    ensure_removed_gcs_role_binding "${bucket}" "${google_prow_principal}" "objectViewer"
 }
 
 # Grant full privileges to GCR admins
@@ -604,96 +635,4 @@ function ensure_regional_address() {
         --description="${description}" \
         --region="${region}"
     fi
-}
-
-# Output a plan of services to enable/disable for a given gcp project; format
-# is YAML, each key is a list of services e.g. [pubsub.googleapis.com, ...]
-#   intent:     # services we wish to enable
-#   enabled:    # services that are presently enabled
-#   expected:   # intent + any services directly depended on by intent
-#   to_enable:  # services in intent that are not enabled
-#   to_disable: # services that are enabled but not in expected
-# $1  The GCP project
-# $2+ Service names that are expected to be enabled (e.g. pubsub.googleapis.com)
-function _plan_enabled_services() {
-    if [ $# -lt 2 -o -z "$1" ]; then
-        echo "list_services(gcp_project, service...) requires at least 2 arguments" >&2
-        return 1
-    fi
-
-    local gcp_project="$1"; shift
-
-    gcloud services list --enabled --project="${gcp_project}" \
-      --format='yaml(config.name,dependencyConfig.directlyDependsOn)' \
-      | yq --slurp -y --args '($ARGS.positional | sort) as $intent | {
-        intent: $intent,
-        enabled: map(.config.name) | sort,
-        expected: (
-          map(
-            select([.config.name] | inside($intent))
-            | (.dependencyConfig?.directlyDependsOn // [])
-          ) + $intent
-        )
-        | flatten
-        | map({key:., value:true}) | from_entries | keys | sort
-      } | . += {
-        to_enable: (.expected - .enabled),
-        to_disable: (.enabled - .expected)
-      }' "$@"
-}
-
-# Ensure that only the given services and their direct dependencies are enabled; disable any other services
-# $1  The GCP project for which to enable/disable services
-# $2+ The service names (e.g. pubsub.googleapis.com)
-function ensure_only_services() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
-        echo "ensure_only_services(gcp_project, service...) requires at least 2 arguments" >&2
-        return 1
-    fi
-
-    local gcp_project="$1"; shift
-
-    local before="${TMPDIR}/ensure-only-services.before.yaml"
-    local after_enable="${TMPDIR}/ensure-only-services.after_enable.yaml"
-    local after_disable="${TMPDIR}/ensure-only-services.after_disable.yaml"
-
-    # get services before modifying to diff against when finished
-    _plan_enabled_services "${gcp_project}" "$@" > "${before}"
-
-    # if there's nothing to do, return early
-    if ! <"${before}" yq --exit-status '[.to_enable, .to_disable] | map (length > 0) | any' >/dev/null; then
-      return
-    fi
-
-    echo "plan to enable/disable the following services"
-    <"${before}" yq -y '{to_enable, to_disable}'
-
-    # enable services that need to be enabled
-    for service in $(<"${before}" yq -r '.to_enable[]'); do
-        gcloud services enable --project="${gcp_project}" "${service}"
-    done
-
-    # disable services not explicitly enabled or directly required
-    _plan_enabled_services "${gcp_project}" "$@" > "${after_enable}"
-
-
-    # TODO(spiffxp): get comfortable with --force or redo to disable in dep-order;
-    #                until then, set an obnoxiously long env var to actually disable
-    local disable_cmd='echo "INFO: dry-run mode, would run:" gcloud'
-    if [ "${K8S_INFRA_ENSURE_ONLY_SERVICES_WILL_FORCE_DISABLE:-""}" == "true" ]; then
-        disable_cmd=gcloud
-    fi
-    for service in $( (<"${after_enable}" yq -r '.to_disable[]') | sort | uniq -u); do
-        ${disable_cmd} services disable --force "${service}" --project="${gcp_project}"
-    done
-
-    _plan_enabled_services "${gcp_project}" "$@" > "${after_disable}"
-
-    # in the event that an enable/disable cycle doesn't do enough, let's warn
-    if <"${after_disable}" yq --exit-status '[.to_enable, .to_disable] | map (length > 0) | any' >/dev/null; then
-      echo "WARN: ensure_only_services: after enable/disable cycle, still projects to enable/disable: ${gcp_project}"
-      cat "${after_disable}"
-    fi
-
-    diff_colorized "${before}" "${after_disable}"
 }
