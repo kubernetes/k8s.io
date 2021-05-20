@@ -52,6 +52,12 @@ readonly RELEASE_PROJECT_SERVICES=(
 )
 
 for PROJECT; do
+
+    if ! (printf '%s\n' "${PROJECTS[@]}" | grep -q "^${PROJECT}$"); then
+        color 2 "Skipping unrecognized release project name: ${PROJECT}"
+        continue
+    fi
+
     color 3 "Configuring: ${PROJECT}"
 
     # The names of the buckets
