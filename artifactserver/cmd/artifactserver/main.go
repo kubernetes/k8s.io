@@ -88,7 +88,7 @@ type Redirector struct {
 // Conditions for rewriting a request a given backend
 type Conditions struct {
 	// Headers are HTTP header and value key pairs
-	Headers map[string]string `yaml:"headers"`
+	Headers map[string][]string `yaml:"headers"`
 
 	// Paths are request paths to choose the backend
 	Paths []string `yaml:"paths"`
@@ -132,9 +132,11 @@ func (s *Redirector) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		if backend == nil {
 			backend = v
 		}
-		for hk, hv := range v.Conditions.Headers {
-			if r.Header.Get(hk) == hv {
-				backend = v
+		for hk, h := range v.Conditions.Headers {
+			for _, hv := range h {
+				if r.Header.Get(hk) == hv {
+					backend = v
+				}
 			}
 		}
 		for _, p := range v.Conditions.Paths {
