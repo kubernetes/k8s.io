@@ -313,6 +313,51 @@ EOF
     read -rs
 }
 
+# Eventually we would like to use kubernetes-external-secrets to manage
+# all secrets in aaa; not sure how far we are on that. So for now, at least
+# ensure that the existing kubernetes-public secrets created for humans
+# to manually sync into the aaa cluster are managed by this script.
+function ensure_aaa_external_secrets() {
+    if [ $# -ne 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
+        return 1
+    fi
+    local project="${1}"
+    local secret_specs=()
+
+    # another sign that we should move to using YAML as source of intent;
+    # bash and indirect array access don't play nice, so we get this...
+    local slack_infra_secrets=(
+        recaptcha
+        slack-event-log-config
+        slack-moderator-config
+        slack-moderator-words-config
+        slack-welcomer-config
+        slackin-token
+    )
+    local triageparty_release_secrets=(
+        triage-party-github-token
+    )
+    mapfile -t secret_specs < <(
+        printf "%s/slack-infra/sig-contributor-experience\n" "${slack_infra_secrets[@]}"
+        printf "%s/triageparty-release/sig-release\n" "${triageparty_release_secrets[@]}"
+    )
+
+    for spec in "${secret_specs[@]}"; do
+        local secret app k8s_group
+        secret="$(echo "${spec}" | cut -d/ -f1)"
+        app="$(echo "${spec}" | cut -d/ -f2)"
+        k8s_group="$(echo "${spec}" | cut -d/ -f3)"
+
+        local admins="k8s-infra-rbac-${app}@kubernetes.io"
+        local labels=("app=${app}" "group=${k8s_group}")
+
+        color 6 "Ensuring '${app}' secret '${secret}' exists in '${project}' and is owned by '${admins}'"
+        ensure_secret_with_admins "${project}" "${secret}" "${admins}"
+        ensure_secret_labels "${project}" "${secret}" "${labels[@]}"
+    done
+}
+
 function ensure_main_project() {
     if [ $# -ne 1 ] || [ -z "$1" ]; then
         echo "${FUNCNAME[0]}(gcp_project) requires 1 argument" >&2
@@ -364,6 +409,9 @@ function ensure_main_project() {
 
     color 6 "Ensuring DNS is configured in: ${project}"
     ensure_dns "${project}" 2>&1 | indent
+
+    color 6 "Ensuring secrets destined for apps in 'aaa' exist in: ${project}"
+    ensure_aaa_external_secrets "${project}" 2>&1 | indent
 
     color 6 "Ensuring biquery configured for billing and access by appropriate groups in: ${project}"
     ensure_billing_bigquery "${project}" 2>&1 | indent
