@@ -361,10 +361,10 @@ function ensure_staging_gcb_builder_service_account() {
     ensure_gcs_role_binding "${gcb_bucket}" "${principal}" "objectCreator"
     ensure_gcs_role_binding "${gcb_bucket}" "${principal}" "objectViewer"
 
-    color 6 "Ensuring ${sa_email} usable by GKE clusters in ${prow_project} running as ${sa_name} in ${prow_job_namespace} namespace"
-    empower_ksa_to_svcacct \
-        "${prow_project}.svc.id.goog[${prow_job_namespace}/${sa_name}]" \
-        "${project}" \
+    color 6 "Ensuring GKE clusters in '${prow_project}' can run pods in '${prow_job_namespace}' as '${sa_email}'"
+    empower_gke_for_serviceaccount \
+        "${prow_project}" \
+        "${prow_job_namespace}" \
         "${sa_email}"
 }
 

@@ -471,32 +471,6 @@ function ensure_dns_zone() {
   fi
 }
 
-# Allow a Kubernetes service account (KSA) the ability to authenticate as the as
-# the given GCP service account for the given GKE Project's Kubernetes
-# namespace; this is also called Workload Identity.
-#
-# $1: The service account scoped to a (1) GKE project, (2) K8s namespace, and
-#     (3) K8s service account. The format is currently
-#
-#       "${gke_project}.svc.id.goog[${k8s_namespace}/${k8s_svcacct}]"
-#
-#     This is used to scope the grant of permissions to the combination of the
-#     above 3 variables
-# $2: The GCP project that owns the GCP service account.
-# $3: The GCP service account to draw powers from.
-function empower_ksa_to_svcacct() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
-        echo "empower_ksa_to_svcacct(ksa_scope, gcp_project, gcp_scvacct) requires 3 arguments" >&2
-        return 1
-    fi
-
-    local ksa_scope="$1"
-    local gcp_project="$2"
-    local gcp_svcacct="$3"
-
-    ensure_serviceaccount_role_binding "${gcp_svcacct}" "serviceAccount:${ksa_scope}" "roles/iam.workloadIdentityUser"
-}
-
 # Allow GKE clusters in the given GCP project to run workloads using a
 # Kubernetes service account in the given namepsace to act as the given
 # GCP service account via Workload Identity when the name of the Kubernetes
@@ -508,7 +482,7 @@ function empower_ksa_to_svcacct() {
 # $1:   The GCP project that hosts the GKE clusters (e.g. k8s-infra-foo-clusters)
 # $2:   The K8s namespace that hosts the Kubernetes service account (e.g. my-app-ns)
 # $3:   The GCP service account to be bound (e.g. k8s-infra-doer@k8s-infra-foo.iam.gserviceaccount.com)
-# [$4]: Optional: The Kubernetes service account name (e.g. my-app-doer; default: k8s-infra-doer)
+# [$4]: Optional: The Kubernetes service account name (e.g. my-app-doer; default e.g. k8s-infra-doer)
 #
 # e.g. the above allows pods running as my-app-ns/my-app-doer in clusters in
 #      k8s-infra-foo-clusters to act as k8s-infra-doer@k8s-infra-foo.iam.gserviceaccount.com
