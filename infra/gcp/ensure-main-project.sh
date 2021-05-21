@@ -343,12 +343,12 @@ function ensure_main_project() {
         # is custom role audit.viewer on the kubernetes.io org, but that is
         # handled by ensure-organization.sh
         svcacct_args=("${project}" "k8s-infra-gcp-auditor" "roles/viewer")
-        cluster_args=("k8s-infra-prow-build-trusted" "test-pods")
+        cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
         color 6 "Ensuring DNS Updater serviceaccount"
         svcacct_args=("${project}" "k8s-infra-dns-updater" "roles/dns.admin")
-        cluster_args=("k8s-infra-prow-build-trusted" "test-pods")
+        cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
         color 6 "Ensuring Monitoring Viewer serviceaccount"

@@ -71,10 +71,10 @@ ensure_service_account \
     "Grants access to the googlegroups API in kubernetes.io GSuite"
 
 # Allow k8s-infra-prow-builds-trusted to run pods as this service account
-color 6 "Ensuring GKE clusters in 'k8s-infra-prow-build-trusted' can run pods in 'test-pods' as '${GSUITE_SVCACCT}'"
+color 6 "Ensuring GKE clusters in 'k8s-infra-prow-build-trusted' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${GSUITE_SVCACCT}'"
 empower_gke_for_serviceaccount \
     "k8s-infra-prow-build-trusted" \
-    "test-pods" \
+    "${PROWJOB_POD_NAMESPACE}" \
     "$(svc_acct_email "${PROJECT}" "${GSUITE_SVCACCT}")"
 
 # Ensure the service account has a key in a secret accessible by the right people

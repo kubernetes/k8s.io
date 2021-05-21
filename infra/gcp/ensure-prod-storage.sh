@@ -339,23 +339,23 @@ function ensure_all_prod_special_cases() {
     for project in "${PROW_TRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
         # Grant write access to k8s-artifacts-prod GCR
         serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")"
-        color 6 "Ensuring GKE clusters in '${project}' can run pods in 'test-pods' as '${serviceaccount}'"
+        color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
-            "${project}" "test-pods" \
+            "${project}" "${PROWJOB_POD_NAMESPACE}" \
             "${serviceaccount}" "k8s-infra-gcr-promoter"
 
         # Grant write access to k8s-artifacts-prod-bak GCR (for backups)
         serviceaccount="$(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")"
-        color 6 "Ensuring GKE clusters in '${project}' can run pods in 'test-pods' as '${serviceaccount}'"
+        color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
-            "${project}" "test-pods" \
+            "${project}" "${PROWJOB_POD_NAMESPACE}" \
             "${serviceaccount}" "k8s-infra-gcr-promoter-bak"
 
         # TODO: Grant ??? acccess to k8s-artifacts-prod ???
         serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")"
-        color 6 "Ensuring GKE clusters in '${project}' can run pods in 'test-pods' as '${serviceaccount}'"
+        color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
-            "${project}" "test-pods" \
+            "${project}" "${PROWJOB_POD_NAMESPACE}" \
             "${serviceaccount}" "k8s-infra-gcr-vuln-scanning" 
     done
 
@@ -371,9 +371,9 @@ function ensure_all_prod_special_cases() {
     color 6 "Empowering promoter-test namespace to use backup-test-prod-bak promoter svcacct"
     serviceaccount="$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")"
     for project in "${PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
-        color 6 "Ensuring GKE clusters in '${project}' can run pods in 'test-pods' as '${serviceaccount}'"
+        color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
-            "${project}" "test-pods" \
+            "${project}" "${PROWJOB_POD_NAMESPACE}" \
             "${serviceaccount}" "k8s-infra-gcr-promoter-test"
     done
 

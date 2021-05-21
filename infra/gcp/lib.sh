@@ -101,7 +101,7 @@ readonly PROW_BUILD_SERVICE_ACCOUNT="prow-build@k8s-infra-prow-build.iam.gservic
 # presubmits that build and test unmerged code from PRs
 readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
     # The google.com build cluster for prow.k8s.io
-    # TODO: remove support for this where possible
+    # TODO(spiffxp): remove support for this where possible
     "k8s-prow-builds"
     # The kubernetes.io build cluster
     "k8s-infra-prow-build"
@@ -111,11 +111,21 @@ readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
 # that run merged/approved code that need access to sensitive secrets
 readonly PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
     # The google.com trusted build cluster for prow.k8s.io
-    # TODO: remove support for this where possible
+    # TODO(spiffxp): remove support for this where possible
     "k8s-prow"
     # The kubernetes.io build cluster
     "k8s-infra-prow-build-trusted"
 )
+
+# The namespace prowjobs run in; at present things are configured to use the
+# same namespace across all prow build clusters. This means this value needs
+# to be kept consistent across a few places:
+#
+# - https://git.k8s.io/test-infra/config/prow/config.yaml # pod_namespace: test-pods
+# - infra/gcp/clusters/projects/k8s-infra-prow-*/*/main.tf # pod_namespace = test-pods
+# # TODO: not all resources belong in test-pods, would be good to shard into folders
+# - infra/gcp/clusters/projects/k8s-infra-prow-*/*/resources/* # namespace: test-pods
+readonly PROWJOB_POD_NAMESPACE="test-pods"
 
 #
 # Functions
