@@ -78,7 +78,7 @@ function ensure_serviceaccount_key_secret() {
 
         gcloud iam service-accounts keys create "${private_key_file}" \
             --project "${project}" \
-            --iam-account "${email}"
+            --iam-account "${serviceaccount}"
 
         gcloud secrets versions add "${secret}" \
             --project "${project}" \
