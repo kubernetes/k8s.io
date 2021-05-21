@@ -54,6 +54,46 @@ function ensure_secret() {
     fi
 }
 
+# Ensures the give labels exist on the given secret in the given project
+# Arguments:
+#   $1: The project id hosting the secret (e.g. "k8s-infra-foo")
+#   $2: The secret name (e.g. "my-secret")
+#   $3+ Labels in the form of key=value (e.g. "app=foo" "sig=awesome")
+function ensure_secret_labels() {
+    if [ $# -lt 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+        echo "${FUNCNAME[0]}(project, secret, labels) requires at least 3 arguments" >&2
+        return 1
+    fi
+
+    local project="${1}"; shift
+    local secret="${1}"; shift
+
+    gcloud secrets update --project "${project}" "${secret}" "${@/#/"--update-labels="}"
+}
+
+# Ensures a secret exists in the given project with the given name and that
+# its admins are the given group
+# Arguments:
+#   $1: The project id hosting the secret (e.g. "k8s-infra-foo")
+#   $2: The secret name (e.g. "my-secret")
+#   $3: The admin group (e.g. "k8s-infra-foo-admins@kubernetes.io")
+function ensure_secret_with_admins() {
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+        echo "${FUNCNAME[0]}(project, secret, admins) requires 3 arguments" >&2
+        return 1
+    fi
+    local project="${1}"
+    local secret="${2}"
+    local admins="${3}"
+
+    ensure_secret "${project}" "${secret}"
+
+    ensure_secret_role_binding \
+      "$(secret_full_name "${project}" "${secret}")" \
+      "group:${admins}" \
+      "roles/secretmanager.admin"
+}
+
 # Ensures a secret exists in the given project with the given name. If the
 # secret does not exist, it is pre-populated with a newly created private key
 # for the given service-account
