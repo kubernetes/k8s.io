@@ -23,8 +23,8 @@
 #   $1: The project id hosting the secret (e.g. "k8s-infra-foo")
 #   $2: The secret name (e.g. "my-secret")
 function secret_full_name() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
-        echo "secret_full_name(project, secret) requires 2 arguments" >&2
+    if [ ! $# -eq 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(project, secret) requires 2 arguments" >&2
         return 1
     fi
 
@@ -41,15 +41,15 @@ function secret_full_name() {
 #   $1: The project id hosting the secret (e.g. "k8s-infra-foo")
 #   $2: The secret name (e.g. "my-secret")
 function ensure_secret() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
-        echo "ensure_secret(project, secret) requires 2 arguments" >&2
+    if [ ! $# -eq 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(project, secret) requires 2 arguments" >&2
         return 1
     fi
 
     local project="${1}"
     local secret="${2}"
 
-    if ! gcloud secrets describe --project "${project}" "${secret}" > /dev/null; then
+    if ! gcloud secrets describe --project "${project}" "${secret}" >/dev/null 2>&1; then
       gcloud secrets create --project "${project}" "${secret}"
     fi
 }
@@ -62,8 +62,8 @@ function ensure_secret() {
 #   $2: The secret name (e.g. "my-secret")
 #   $3: The service-account (e.g. "foo@k8s-infra.iam.gserviceaccount.com")
 function ensure_serviceaccount_key_secret() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
-        echo "ensure_serviceaccount_key_secret(project, secret, serviceaccountt) requires 3 arguments" >&2
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+        echo "${FUNCNAME[0]}(project, secret, serviceaccountt) requires 3 arguments" >&2
         return 1
     fi
 
@@ -73,7 +73,7 @@ function ensure_serviceaccount_key_secret() {
 
     local private_key_file="${TMPDIR}/key.json"
 
-    if ! gcloud secrets describe --project "${project}" "${secret}" > /dev/null; then
+    if ! gcloud secrets describe --project "${project}" "${secret}" >/dev/null 2>&1; then
         ensure_secret "${project}" "${secret}"
 
         gcloud iam service-accounts keys create "${private_key_file}" \
