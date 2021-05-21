@@ -3,7 +3,6 @@
     {
       "members": [
         "serviceAccount:687417645981@cloudbuild.gserviceaccount.com",
-        "serviceAccount:deployer@k8s-prow.iam.gserviceaccount.com",
         "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.builder"
@@ -43,12 +42,6 @@
         "serviceAccount:service-687417645981@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
-    },
-    {
-      "members": [
-        "user:davanum@gmail.com"
-      ],
-      "role": "roles/owner"
     },
     {
       "members": [
