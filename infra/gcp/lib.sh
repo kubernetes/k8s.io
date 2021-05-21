@@ -97,10 +97,6 @@ readonly GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserv
 
 readonly PROW_BUILD_SERVICE_ACCOUNT="prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
 
-# TODO: decommission this once we've flipped to prow-build-trusted
-# The service account email for Prow (not in this org for now).
-readonly PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT="deployer@k8s-prow.iam.gserviceaccount.com"
-
 # Projects hosting prow build clusters that run untrusted code, such as
 # presubmits that build and test unmerged code from PRs
 readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
@@ -296,26 +292,6 @@ function empower_group_for_kms() {
     for role in "${roles[@]}"; do
         ensure_project_role_binding "${project}" "group:${group}" "${role}"
     done
-}
-
-# TODO(spiffxp): remove this in a follow-up PR
-# Remove privileges previously granted to the google-owned test-infra-trusted
-# cluster's "deployer" service account
-# $1: The GCP project
-# $2: The GCS scratch bucket
-function ensure_removed_google_prow_bindings() {
-    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "${FUNCNAME[0]}(project, bucket) requires 2 arguments" >&2
-        return 1
-    fi
-    local project="$1"
-    local bucket="$2"
-
-    local google_prow_principal="serviceAccount:${PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT}"
-
-    ensure_removed_project_role_binding "${project}" "${google_prow_principal}" "roles/cloudbuild.builds.builder"
-    ensure_removed_gcs_role_binding "${bucket}" "${google_prow_principal}" "objectCreator"
-    ensure_removed_gcs_role_binding "${bucket}" "${google_prow_principal}" "objectViewer"
 }
 
 # Grant full privileges to GCR admins
