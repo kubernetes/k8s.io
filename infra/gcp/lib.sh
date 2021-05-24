@@ -97,15 +97,11 @@ readonly GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserv
 
 readonly PROW_BUILD_SERVICE_ACCOUNT="prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
 
-# TODO: decommission this once we've flipped to prow-build-trusted
-# The service account email for Prow (not in this org for now).
-readonly PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT="deployer@k8s-prow.iam.gserviceaccount.com"
-
 # Projects hosting prow build clusters that run untrusted code, such as
 # presubmits that build and test unmerged code from PRs
 readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
     # The google.com build cluster for prow.k8s.io
-    # TODO: remove support for this where possible
+    # TODO(spiffxp): remove support for this where possible
     "k8s-prow-builds"
     # The kubernetes.io build cluster
     "k8s-infra-prow-build"
@@ -115,11 +111,21 @@ readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
 # that run merged/approved code that need access to sensitive secrets
 readonly PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
     # The google.com trusted build cluster for prow.k8s.io
-    # TODO: remove support for this where possible
+    # TODO(spiffxp): remove support for this where possible
     "k8s-prow"
     # The kubernetes.io build cluster
     "k8s-infra-prow-build-trusted"
 )
+
+# The namespace prowjobs run in; at present things are configured to use the
+# same namespace across all prow build clusters. This means this value needs
+# to be kept consistent across a few places:
+#
+# - https://git.k8s.io/test-infra/config/prow/config.yaml # pod_namespace: test-pods
+# - infra/gcp/clusters/projects/k8s-infra-prow-*/*/main.tf # pod_namespace = test-pods
+# # TODO: not all resources belong in test-pods, would be good to shard into folders
+# - infra/gcp/clusters/projects/k8s-infra-prow-*/*/resources/* # namespace: test-pods
+readonly PROWJOB_POD_NAMESPACE="test-pods"
 
 #
 # Functions
@@ -296,26 +302,6 @@ function empower_group_for_kms() {
     for role in "${roles[@]}"; do
         ensure_project_role_binding "${project}" "group:${group}" "${role}"
     done
-}
-
-# TODO(spiffxp): remove this in a follow-up PR
-# Remove privileges previously granted to the google-owned test-infra-trusted
-# cluster's "deployer" service account
-# $1: The GCP project
-# $2: The GCS scratch bucket
-function ensure_removed_google_prow_bindings() {
-    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "${FUNCNAME[0]}(project, bucket) requires 2 arguments" >&2
-        return 1
-    fi
-    local project="$1"
-    local bucket="$2"
-
-    local google_prow_principal="serviceAccount:${PROW_GOOGLE_TRUSTED_SERVICE_ACCOUNT}"
-
-    ensure_removed_project_role_binding "${project}" "${google_prow_principal}" "roles/cloudbuild.builds.builder"
-    ensure_removed_gcs_role_binding "${bucket}" "${google_prow_principal}" "objectCreator"
-    ensure_removed_gcs_role_binding "${bucket}" "${google_prow_principal}" "objectViewer"
 }
 
 # Grant full privileges to GCR admins
@@ -495,32 +481,6 @@ function ensure_dns_zone() {
   fi
 }
 
-# Allow a Kubernetes service account (KSA) the ability to authenticate as the as
-# the given GCP service account for the given GKE Project's Kubernetes
-# namespace; this is also called Workload Identity.
-#
-# $1: The service account scoped to a (1) GKE project, (2) K8s namespace, and
-#     (3) K8s service account. The format is currently
-#
-#       "${gke_project}.svc.id.goog[${k8s_namespace}/${k8s_svcacct}]"
-#
-#     This is used to scope the grant of permissions to the combination of the
-#     above 3 variables
-# $2: The GCP project that owns the GCP service account.
-# $3: The GCP service account to draw powers from.
-function empower_ksa_to_svcacct() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
-        echo "empower_ksa_to_svcacct(ksa_scope, gcp_project, gcp_scvacct) requires 3 arguments" >&2
-        return 1
-    fi
-
-    local ksa_scope="$1"
-    local gcp_project="$2"
-    local gcp_svcacct="$3"
-
-    ensure_serviceaccount_role_binding "${gcp_svcacct}" "serviceAccount:${ksa_scope}" "roles/iam.workloadIdentityUser"
-}
-
 # Allow GKE clusters in the given GCP project to run workloads using a
 # Kubernetes service account in the given namepsace to act as the given
 # GCP service account via Workload Identity when the name of the Kubernetes
@@ -532,7 +492,7 @@ function empower_ksa_to_svcacct() {
 # $1:   The GCP project that hosts the GKE clusters (e.g. k8s-infra-foo-clusters)
 # $2:   The K8s namespace that hosts the Kubernetes service account (e.g. my-app-ns)
 # $3:   The GCP service account to be bound (e.g. k8s-infra-doer@k8s-infra-foo.iam.gserviceaccount.com)
-# [$4]: Optional: The Kubernetes service account name (e.g. my-app-doer; default: k8s-infra-doer)
+# [$4]: Optional: The Kubernetes service account name (e.g. my-app-doer; default e.g. k8s-infra-doer)
 #
 # e.g. the above allows pods running as my-app-ns/my-app-doer in clusters in
 #      k8s-infra-foo-clusters to act as k8s-infra-doer@k8s-infra-foo.iam.gserviceaccount.com

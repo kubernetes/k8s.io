@@ -343,21 +343,12 @@ function ensure_main_project() {
         # is custom role audit.viewer on the kubernetes.io org, but that is
         # handled by ensure-organization.sh
         svcacct_args=("${project}" "k8s-infra-gcp-auditor" "roles/viewer")
-        cluster_args=("k8s-infra-prow-build-trusted" "test-pods")
+        cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
-
-        # TODO(spiffxp): remove once this binding has been deleted
-        local gcp_auditor_email
-        gcp_auditor_email=$(svc_acct_email "${project}" "k8s-infra-gcp-auditor")
-        color 6 "Ensuring removed workload identity on kubernetes-public/test-pods for ${gcp_auditor_email}"
-        unempower_gke_for_serviceaccount \
-            "kubernetes-public" \
-            "test-pods" \
-            "${gcp_auditor_email}" 2>&1 | indent
 
         color 6 "Ensuring DNS Updater serviceaccount"
         svcacct_args=("${project}" "k8s-infra-dns-updater" "roles/dns.admin")
-        cluster_args=("k8s-infra-prow-build-trusted" "test-pods")
+        cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
         color 6 "Ensuring Monitoring Viewer serviceaccount"

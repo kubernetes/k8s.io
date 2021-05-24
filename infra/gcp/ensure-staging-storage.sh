@@ -318,9 +318,6 @@ function ensure_staging_gcb() {
     ensure_project_role_binding "${project}" "${principal}" "roles/cloudbuild.builds.builder"
     ensure_gcs_role_binding "${bucket}" "${principal}" "objectCreator"
     ensure_gcs_role_binding "${bucket}" "${principal}" "objectViewer"
-
-    color 6 "Ensuring k8s-prow / test-infra-trusted can no longer use GCB in project: ${project}"
-    ensure_removed_google_prow_bindings "${project}" "${bucket}"
 }
 
 # TODO(spiffxp): rename this to just prow@project and deprecate/rm the gcb-builder-foo
@@ -328,8 +325,8 @@ function ensure_staging_gcb() {
 #                the project directly, as well as triggering GCB to do the same
 # Create a gcb-builder-{staging} GCP service account in project k8s-staging-{staging}
 # that can trigger GCB within that project. Allow GKE clusters in {prow_project}
-# to use this when running as a kubernetes service account of the same name in
-# the "test-pods" namespace
+# to use this when running pods as a kubernetes service account of the same name in
+# PROWJOB_POD_NAMESPACE
 #
 # $1: The staging name (e.g. kubetest2)
 # $2: The prow project name (e.g. k8s-infra-prow-build)
@@ -341,7 +338,6 @@ function ensure_staging_gcb_builder_service_account() {
 
     local staging="$1"
     local prow_project="$2"
-    local prow_job_namespace="test-pods"
     local project="k8s-staging-${staging}"
     local sa_name="gcb-builder-${staging}"
     local sa_email="${sa_name}@${project}.iam.gserviceaccount.com"
@@ -364,10 +360,10 @@ function ensure_staging_gcb_builder_service_account() {
     ensure_gcs_role_binding "${gcb_bucket}" "${principal}" "objectCreator"
     ensure_gcs_role_binding "${gcb_bucket}" "${principal}" "objectViewer"
 
-    color 6 "Ensuring ${sa_email} usable by GKE clusters in ${prow_project} running as ${sa_name} in ${prow_job_namespace} namespace"
-    empower_ksa_to_svcacct \
-        "${prow_project}.svc.id.goog[${prow_job_namespace}/${sa_name}]" \
-        "${project}" \
+    color 6 "Ensuring GKE clusters in '${prow_project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${sa_email}'"
+    empower_gke_for_serviceaccount \
+        "${prow_project}" \
+        "${PROWJOB_POD_NAMESPACE}" \
         "${sa_email}"
 }
 

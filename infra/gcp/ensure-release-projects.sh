@@ -132,9 +132,6 @@ for PROJECT; do
     ensure_gcs_role_binding "${GCB_BUCKET}" "${principal}" "objectCreator"
     ensure_gcs_role_binding "${GCB_BUCKET}" "${principal}" "objectViewer"
 
-    color 6 "Ensuring k8s-prow / test-infra-trusted can no longer use GCB in project: ${PROJECT}"
-    ensure_removed_google_prow_bindings "${PROJECT}" "${GCB_BUCKET}"
-
     # Let project admins use KMS.
     color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"
     empower_group_for_kms "${PROJECT}" "${RELEASE_ADMINS}"
