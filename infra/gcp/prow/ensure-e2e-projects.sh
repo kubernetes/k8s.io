@@ -37,84 +37,66 @@ function usage() {
 PROW_BUILD_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
 BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "boskos-janitor")
 
-color 6 "Ensuring boskos-janitor is empowered"
-(
-color 6 "Ensuring external ip address exists for boskos-metrics service in prow build cluster"
-# this is so monitoring.prow.k8s.io is able to scrape metrics from boskos
-ensure_regional_address \
-  "k8s-infra-prow-build" \
-  "us-central1" \
-  "boskos-metrics" \
-  "to allow monitoring.k8s.prow.io to scrape boskos metrics"
-) 2>&1 | indent
-
-color 6 "Ensuring greenhouse is empowered"
-(
-ensure_regional_address \
-  "k8s-infra-prow-build" \
-  "us-central1" \
-  "greenhouse-metrics" \
-  "to allow monitoring.k8s.prow.io to scrape greenhouse metrics"
-) 2>&1 | indent
-
 ## setup projects to be used by e2e tests for standing up clusters
 
-E2E_MANUAL_PROJECTS=(
-  # for manual use during node-e2e job migration, eg: --gcp-project=gce-project
-  k8s-infra-e2e-gce-project
-  # for manual use during job migration, eg: --gcp-project=node-e2e-project
-  k8s-infra-e2e-node-e2e-project
-  # for manual use during job migration, eg: --gcp-project=scale-project
-  k8s-infra-e2e-scale-project
-  # for manual use during job migration, eg: --gcp-project=gpu-project
-  k8s-infra-e2e-gpu-project
-  # for manual use during job migration, eg: --gcp-project=ingress-project
-  k8s-infra-e2e-ingress-project
+readonly E2E_MANUAL_PROJECTS=(
+    # for manual use during node-e2e job migration, eg: --gcp-project=gce-project
+    k8s-infra-e2e-gce-project
+    # for manual use during job migration, eg: --gcp-project=node-e2e-project
+    k8s-infra-e2e-node-e2e-project
+    # for manual use during job migration, eg: --gcp-project=scale-project
+    k8s-infra-e2e-scale-project
+    # for manual use during job migration, eg: --gcp-project=gpu-project
+    k8s-infra-e2e-gpu-project
+    # for manual use during job migration, eg: --gcp-project=ingress-project
+    k8s-infra-e2e-ingress-project
 )
 
 # general purpose e2e projects, no quota changes
 E2E_BOSKOS_PROJECTS=()
 for i in $(seq 1 120); do
-  E2E_BOSKOS_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-%03i" $i)")
+    E2E_BOSKOS_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-%03i" "$i")")
 done
+readonly E2E_BOSKOS_PROJECTS
 
 # e2e projects for scalability jobs
 # - us-east1 cpu quota raised to 125
 # - us-east1 in-use addresses quota raised to 125
 E2E_SCALE_PROJECTS=()
 for i in $(seq 1 30); do
-  E2E_SCALE_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-scale-%02i" $i)")
+    E2E_SCALE_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-scale-%02i" "$i")")
 done
+readonly E2E_SCALE_PROJECTS
 
 # e2e projects for gpu jobs
 # - us-west1 Committed NVIDIA K80 GPUs raised to 2
 E2E_GPU_PROJECTS=()
 for i in $(seq 1 10); do
-  E2E_GPU_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-gpu-%02i" $i)")
+    E2E_GPU_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-gpu-%02i" "$i")")
 done
+readonly E2E_GPU_PROJECTS
 
-E2E_PROJECTS=(
+readonly E2E_PROJECTS=(
   "${E2E_MANUAL_PROJECTS[@]}"
   "${E2E_BOSKOS_PROJECTS[@]}"
   "${E2E_SCALE_PROJECTS[@]}"
   "${E2E_GPU_PROJECTS[@]}"
 )
 
-if [ $# = 0 ]; then
-    # default to all e2e projects
-    set -- "${E2E_PROJECTS[@]}"
-fi
+# prow build cluster services that expose metrics endpoints to be scraped
+# by monitoring.prow.k8s.io; they each get a regional address
+readonly PROW_BUILD_CLUSTER_METRICS_SERVICES=(
+    "boskos-metrics"
+    "greenhouse-metrics"
+)
 
-color 6 "Ensuring e2e projects exist and are appropriately configured"
-for prj; do
+function ensure_e2e_project() {
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
+        return 1
+    fi
+    local prj="${1}"
 
-  if ! (printf '%s\n' "${E2E_PROJECTS[@]}" | grep -q "^${prj}$"); then
-    color 2 "Skipping unrecognized e2e project name: ${prj}"
-    continue
-  fi
-
-  color 6 "Ensuring e2e project exists and is appropriately configured: ${prj}"
-  (
     ensure_project "${prj}"
 
     color 6 "Ensure stale role bindings have been removed from e2e project: ${prj}"
@@ -191,11 +173,89 @@ for prj; do
       done
     fi
 
-    if ! diff ${ssh_keys_before} ${ssh_keys_after} >/dev/null; then
+    if ! diff "${ssh_keys_before}" "${ssh_keys_after}" >/dev/null; then
       gcloud compute project-info add-metadata --project="${prj}" \
         --metadata-from-file ssh-keys="${ssh_keys_after}"
       diff_colorized "${ssh_keys_before}" "${ssh_keys_after}"
     fi
+}
 
-  ) 2>&1 | indent
-done 2>&1 | indent
+# TODO: this should be moved to the terraform responsible for k8s-infra-prow-build
+function ensure_prow_build_cluster_metrics_endpoints() {
+    local project="k8s-infra-prow-build"
+    local region="us-central1"
+    for service in "${PROW_BUILD_CLUSTER_METRICS_SERVICES[@]}"; do
+        color 6 "Ensuring monitoring.prow.k8s.io can scrape ${service} for: ${project}"
+        ensure_regional_address \
+          "${project}" \
+          "${region}" \
+          "${service}" \
+          "to allow monitoring.k8s.prow.io to scrape ${service}" \
+          2>&1 | indent
+    done
+}
+
+# TODO: this should be moved to the terraform responsible for k8s-infra-prow-build-trusted
+function ensure_trusted_prow_build_cluster_secrets() {
+    local project="k8s-infra-prow-build-trusted"
+    local secret_specs=(
+        cncf-ci-github-token/sig-testing/k8s-infra-ii-coop@kubernetes.io
+        snyk-token/sig-architecture/k8s-infra-code-organization@kubernetes.io
+    )
+
+    for spec in "${secret_specs[@]}"; do
+        local secret k8s_group admin_group
+        secret="$(echo "${spec}" | cut -d/ -f1)"
+        k8s_group="$(echo "${spec}" | cut -d/ -f2)"
+        admin_group="$(echo "${spec}" | cut -d/ -f3)"
+
+        local admins=("k8s-infra-prow-oncall@kubernetes.io" "${admin_group}")
+        local labels=("group=${k8s_group}")
+
+        color 6 "Ensuring secret '${secret}' exists in '${project}' and is owned by '${admin_group}'"
+        ensure_secret "${project}" "${secret}"
+        ensure_secret_labels "${project}" "${secret}" "${labels[@]}"
+        for group in "${admins[@]}"; do
+            ensure_secret_role_binding \
+                "$(secret_full_name "${project}" "${secret}")" \
+                "group:${group}" \
+                "roles/secretmanager.admin"
+        done
+    done
+}
+
+function ensure_e2e_projects() {
+    # default to all staging projects
+    if [ $# = 0 ]; then
+        set -- "${E2E_PROJECTS[@]}"
+    fi
+
+    for project in "${@}"; do
+        if ! (printf '%s\n' "${E2E_PROJECTS[@]}" | grep -q "^${project}$"); then
+          color 2 "Skipping unrecognized e2e project name: ${project}"
+          continue
+        fi
+
+        color 3 "Configuring e2e project: ${project}"
+        ensure_e2e_project "${project}" 2>&1 | indent
+    done
+}
+
+#
+# main
+#
+
+function main() {
+  color 6 "Ensuring monitoring.prow.k8s.io can scrape k8s-infra-prow-build metrics endpoints"
+  ensure_prow_build_cluster_metrics_endpoints 2>&1 | indent
+
+  color 6 "Ensuring external secrets exist for use by k8s-infra-prow-build-trusted"
+  ensure_trusted_prow_build_cluster_secrets 2>&1 | indent
+
+  color 6 "Ensuring e2e projects used by prow..."
+  ensure_e2e_projects "${@}" 2>&1 | indent
+
+  color 6 "Done"
+}
+
+main "${@}"
