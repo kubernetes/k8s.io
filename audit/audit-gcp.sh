@@ -126,7 +126,7 @@ gcloud \
                 if [ -s "projects/${PROJECT}/services/${SVC}/bigquery.datasets.json" ]
                 then
                     bq \
-                        --project_id="{$PROJECT}" --format=json ls \
+                        --project_id="${PROJECT}" --format=json ls \
                         | jq -r '.[] | .datasetReference["datasetId"]' \
                         | while read -r DATASET; do                        
                             bq \
