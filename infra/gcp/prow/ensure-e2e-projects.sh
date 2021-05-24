@@ -200,6 +200,7 @@ function ensure_trusted_prow_build_cluster_secrets() {
     local project="k8s-infra-prow-build-trusted"
     local secret_specs=(
         cncf-ci-github-token/sig-testing/k8s-infra-ii-coop@kubernetes.io
+        snyk-token/sig-architecture/k8s-infra-code-organization@kubernetes.io
     )
 
     for spec in "${secret_specs[@]}"; do
