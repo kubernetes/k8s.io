@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: gcsweb
   namespace: gcsweb
-  labels:
-    app: gcsweb
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   selector:
     app: gcsweb
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: http
       port: 80
