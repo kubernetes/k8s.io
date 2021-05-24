@@ -1446,3 +1446,15 @@ groups:
       - riaan@ii.coop
       - stephen@ii.coop
       - zz@ii.coop
+
+  - email-id: k8s-infra-code-organization@kubernetes.io
+    name: k8s-infra-code-organization
+    description: |-
+      ACL for managing snyk CI job secrets under code-organization
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - davanum@gmail.com
+      - liggitt@google.com
+      - shaikhnavid14@gmail.com
