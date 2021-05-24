@@ -116,6 +116,7 @@ gcloud \
         --format="value(config.name)" \
     | sed 's/.googleapis.com//' \
     | while read -r SVC; do
+        echo "##### projects/${PROJECT}/services/${SVC}"
         case "${SVC}" in
             bigquery)
                 mkdir -p "projects/${PROJECT}/services/${SVC}"
@@ -227,7 +228,7 @@ gcloud \
                 done
                 ;;
             *)
-                echo "##### Unhandled Service ${SVC}"
+                echo "WARN: Unaudited service enabled in project ${PROJECT}: ${SVC}"
                 # (these were all enabled for kubernetes-public)
                 # TODO: handle (or ignore) bigquerystorage
                 # TODO: handle (or ignore) clouderrorreporting
