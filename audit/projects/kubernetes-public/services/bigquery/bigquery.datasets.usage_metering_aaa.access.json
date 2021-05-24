@@ -1,0 +1,10 @@
+[
+  {
+    "role": "WRITER",
+    "userByEmail": "gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
+  },
+  {
+    "role": "OWNER",
+    "specialGroup": "projectOwners"
+  }
+]

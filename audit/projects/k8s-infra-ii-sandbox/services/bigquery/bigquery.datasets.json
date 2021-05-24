@@ -1,0 +1,41 @@
+[
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:hh",
+    "datasetReference": {
+      "datasetId": "hh",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:k8s_artifacts_dataset_bb_test",
+    "datasetReference": {
+      "datasetId": "k8s_artifacts_dataset_bb_test",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "labels": {
+      "managed-by-cnrm": "true"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:k8s_artifacts_gcslogs_appspot",
+    "datasetReference": {
+      "datasetId": "k8s_artifacts_gcslogs_appspot",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:kubernetes_public_logs",
+    "datasetReference": {
+      "datasetId": "kubernetes_public_logs",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  }
+]

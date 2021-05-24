@@ -1,0 +1,18 @@
+[
+  {
+    "role": "WRITER",
+    "specialGroup": "projectWriters"
+  },
+  {
+    "role": "OWNER",
+    "specialGroup": "projectOwners"
+  },
+  {
+    "role": "OWNER",
+    "userByEmail": "hh@ii.coop"
+  },
+  {
+    "role": "READER",
+    "specialGroup": "projectReaders"
+  }
+]

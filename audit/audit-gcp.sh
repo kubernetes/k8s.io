@@ -20,6 +20,11 @@ set -o pipefail
 
 CNCF_GCP_ORG=758905017065
 
+function format_gcloud_json() {
+  # recursively delete any fields named "etag"
+  jq 'delpaths([path(..|.etag?|select(.))])'
+}
+
 echo "# Removing existing audit files"
 rm -rf org_kubernetes.io
 rm -rf projects
@@ -34,14 +39,12 @@ gcloud \
     ROLE=$(basename "${ROLE_PATH}")
     gcloud iam roles describe "${ROLE}" \
         --organization="${CNCF_GCP_ORG}" \
-        --format=json \
-        | jq 'del(.etag)' \
+        --format=json | format_gcloud_json \
         > "org_kubernetes.io/roles/${ROLE}.json"
 done
 gcloud \
     organizations get-iam-policy "${CNCF_GCP_ORG}" \
-    --format=json \
-    | jq 'del(.etag)' \
+    --format=json | format_gcloud_json \
     > "org_kubernetes.io/iam.json"
 
 echo "## Iterating over Projects"
@@ -55,16 +58,16 @@ gcloud \
 
     echo "### Auditing Project ${PROJECT}"
     mkdir -p "projects/${PROJECT}"
+
     gcloud \
         projects describe "${PROJECT}" \
-        --format=json \
+        --format=json | format_gcloud_json \
         > "projects/${PROJECT}/description.json"
 
     echo "#### ${PROJECT} IAM"
     gcloud \
         projects get-iam-policy "${PROJECT}" \
-        --format=json \
-        | jq 'del(.etag)' \
+        --format=json | format_gcloud_json \
         > "projects/${PROJECT}/iam.json"
 
     echo "#### ${PROJECT} ServiceAccounts"
@@ -77,14 +80,12 @@ gcloud \
         gcloud \
             iam service-accounts describe "${SVCACCT}" \
             --project="${PROJECT}" \
-            --format=json \
-            | jq 'del(.etag)' \
+            --format=json | format_gcloud_json \
             > "projects/${PROJECT}/service-accounts/${SVCACCT}/description.json"
         gcloud \
             iam service-accounts get-iam-policy "${SVCACCT}" \
             --project="${PROJECT}" \
-            --format=json \
-            | jq 'del(.etag)' \
+            --format=json | format_gcloud_json \
             > "projects/${PROJECT}/service-accounts/${SVCACCT}/iam.json"
     done
 
@@ -99,8 +100,7 @@ gcloud \
         gcloud \
             iam roles describe "${ROLE}" \
             --project="${PROJECT}" \
-            --format=json \
-            | jq 'del(.etag)' \
+            --format=json | format_gcloud_json \
             > "projects/${PROJECT}/roles/${ROLE}.json"
     done
 
@@ -116,22 +116,32 @@ gcloud \
         --format="value(config.name)" \
     | sed 's/.googleapis.com//' \
     | while read -r SVC; do
+        echo "##### projects/${PROJECT}/services/${SVC}"
         case "${SVC}" in
             bigquery)
                 mkdir -p "projects/${PROJECT}/services/${SVC}"
                 bq \
-                    --format=prettyjson --project_id=$PROJECT ls
+                    ls \
+                    --project_id="${PROJECT}" \
+                    --format=json | format_gcloud_json \
                     > "projects/${PROJECT}/services/${SVC}/bigquery.datasets.json"                
                 # Only run if there are any datasets
                 if [ -s "projects/${PROJECT}/services/${SVC}/bigquery.datasets.json" ]
                 then
                     bq \
-                        --project_id="{$PROJECT}" --format=json ls \
+                        ls \
+                        --project_id="${PROJECT}" \
+                        --format=json | format_gcloud_json \
                         | jq -r '.[] | .datasetReference["datasetId"]' \
                         | while read -r DATASET; do                        
                             bq \
-                                --project_id="${PROJECT}" --format=json show "${PROJECT}:${DATASET}" \
-                            | jq .access > "projects/${PROJECT}/services/${SVC}/bigquery.datasets.${DATASET}.access.json"
+                                show \
+                                --project_id="${PROJECT}" \
+                                --format=json \
+                                "${PROJECT}:${DATASET}" \
+                                | format_gcloud_json \
+                                | jq .access \
+                                > "projects/${PROJECT}/services/${SVC}/bigquery.datasets.${DATASET}.access.json"
                         done
                 fi
                 ;;
@@ -140,7 +150,7 @@ gcloud \
                 gcloud \
                     compute project-info describe \
                     --project="${PROJECT}" \
-                    --format=json \
+                    --format=json | format_gcloud_json \
                     | jq 'del(.quotas[].usage, .commonInstanceMetadata.fingerprint)' \
                     > "projects/${PROJECT}/services/${SVC}/project-info.json"
                 ;;
@@ -157,11 +167,11 @@ gcloud \
                 mkdir -p "projects/${PROJECT}/services/${SVC}"
                 gcloud \
                     dns project-info describe "${PROJECT}" \
-                    --format=json \
+                    --format=json | format_gcloud_json \
                     > "projects/${PROJECT}/services/${SVC}/info.json"
                 gcloud \
                     dns managed-zones list \
-                    --format=json \
+                    --format=json | format_gcloud_json \
                     > "projects/${PROJECT}/services/${SVC}/zones.json"
                 ;;
             logging)
@@ -187,7 +197,7 @@ gcloud \
                     gcloud \
                         secrets describe "${SECRET}" \
                         --project="${PROJECT}" \
-                        --format=json \
+                        --format=json | format_gcloud_json \
                         > "${path}/description.json"
                     gcloud \
                         secrets versions list "${SECRET}" \
@@ -197,8 +207,7 @@ gcloud \
                     gcloud \
                         secrets get-iam-policy "${SECRET}" \
                         --project="${PROJECT}" \
-                        --format=json \
-                        | jq 'del(.etag)' \
+                        --format=json | format_gcloud_json \
                         > "${path}/iam.json"
                 done
                 ;;
@@ -214,12 +223,12 @@ gcloud \
                     gsutil logging get "gs://${BUCKET}/" \
                         > "projects/${PROJECT}/buckets/${BUCKET}/logging.txt"
                     gsutil iam get "gs://${BUCKET}/" \
-                        | jq 'del(.etag)' \
+                        | format_gcloud_json \
                         > "projects/${PROJECT}/buckets/${BUCKET}/iam.json"
                 done
                 ;;
             *)
-                echo "##### Unhandled Service ${SVC}"
+                echo "WARN: Unaudited service enabled in project ${PROJECT}: ${SVC}"
                 # (these were all enabled for kubernetes-public)
                 # TODO: handle (or ignore) bigquerystorage
                 # TODO: handle (or ignore) clouderrorreporting
@@ -239,7 +248,3 @@ gcloud \
         esac
     done
 done
-
-
-# TODO:
-# Dump iam for Big Query
