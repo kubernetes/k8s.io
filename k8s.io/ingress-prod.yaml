@@ -7,9 +7,9 @@ metadata:
   namespace: k8s-io-prod
   annotations:
     kubernetes.io/ingress.global-static-ip-name: k8s-io-ingress-prod
+    kubernetes.io/ingress.class: gce
+    networking.gke.io/managed-certificates: k8s-io-prod
 spec:
-  tls:
-  - secretName: k8s-io-tls
   backend:
     serviceName: k8s-io
     servicePort: http
