@@ -4,9 +4,9 @@ metadata:
   name: slack-infra
   annotations:
     kubernetes.io/ingress.global-static-ip-name: slack-infra-ingress-prod
+    kubernetes.io/ingress.class: gce
+    networking.gke.io/managed-certificates: slack-infra
 spec:
-  tls:
-  - secretName: slack-infra-k8s-io-tls
   backend:
     serviceName: slackin2
     servicePort: 80
