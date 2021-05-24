@@ -195,6 +195,34 @@ function ensure_prow_build_cluster_metrics_endpoints() {
     done
 }
 
+# TODO: this should be moved to the terraform responsible for k8s-infra-prow-build-trusted
+function ensure_trusted_prow_build_cluster_secrets() {
+    local project="k8s-infra-prow-build-trusted"
+    local secret_specs=(
+        cncf-ci-github-token/sig-testing/k8s-infra-ii-coop@kubernetes.io
+    )
+
+    for spec in "${secret_specs[@]}"; do
+        local secret k8s_group admin_group
+        secret="$(echo "${spec}" | cut -d/ -f1)"
+        k8s_group="$(echo "${spec}" | cut -d/ -f2)"
+        admin_group="$(echo "${spec}" | cut -d/ -f3)"
+
+        local admins=("k8s-infra-prow-oncall@kubernetes.io" "${admin_group}")
+        local labels=("group=${k8s_group}")
+
+        color 6 "Ensuring secret '${secret}' exists in '${project}' and is owned by '${admin_group}'"
+        ensure_secret "${project}" "${secret}"
+        ensure_secret_labels "${project}" "${secret}" "${labels[@]}"
+        for group in "${admins[@]}"; do
+            ensure_secret_role_binding \
+                "$(secret_full_name "${project}" "${secret}")" \
+                "group:${group}" \
+                "roles/secretmanager.admin"
+        done
+    done
+}
+
 function ensure_e2e_projects() {
     # default to all staging projects
     if [ $# = 0 ]; then
@@ -219,6 +247,9 @@ function ensure_e2e_projects() {
 function main() {
   color 6 "Ensuring monitoring.prow.k8s.io can scrape k8s-infra-prow-build metrics endpoints"
   ensure_prow_build_cluster_metrics_endpoints 2>&1 | indent
+
+  color 6 "Ensuring external secrets exist for use by k8s-infra-prow-build-trusted"
+  ensure_trusted_prow_build_cluster_secrets 2>&1 | indent
 
   color 6 "Ensuring e2e projects used by prow..."
   ensure_e2e_projects "${@}" 2>&1 | indent
