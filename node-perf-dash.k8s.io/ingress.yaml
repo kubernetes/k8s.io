@@ -6,10 +6,10 @@ metadata:
   labels:
     app: node-perf-dash
   annotations:
+    kubernetes.io/ingress.class: gce
     kubernetes.io/ingress.global-static-ip-name: node-perf-dash-k8s-io-ingress-prod
+    networking.gke.io/managed-certificates: node-perf-dash-k8s-io
 spec:
-  tls:
-  - secretName: node-perf-dash-k8s-io-tls
   backend:
     serviceName: node-perf-dash-status
     servicePort: status
