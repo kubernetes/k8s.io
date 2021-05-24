@@ -1,0 +1,14 @@
+[
+  {
+    "role": "WRITER",
+    "userByEmail": "p388270116193-330742@gcp-sa-logging.iam.gserviceaccount.com"
+  },
+  {
+    "role": "OWNER",
+    "specialGroup": "projectWriters"
+  },
+  {
+    "role": "OWNER",
+    "userByEmail": "justinsb@google.com"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-artifacts-prod:gcs_logs",
+    "datasetReference": {
+      "datasetId": "gcs_logs",
+      "projectId": "k8s-artifacts-prod"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-artifacts-prod:http_lb_logs",
+    "datasetReference": {
+      "datasetId": "http_lb_logs",
+      "projectId": "k8s-artifacts-prod"
+    },
+    "location": "US"
+  }
+]

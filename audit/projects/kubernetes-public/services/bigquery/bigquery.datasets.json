@@ -1,0 +1,20 @@
+[
+  {
+    "kind": "bigquery#dataset",
+    "id": "kubernetes-public:kubernetes_public_billing",
+    "datasetReference": {
+      "datasetId": "kubernetes_public_billing",
+      "projectId": "kubernetes-public"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "kubernetes-public:usage_metering_aaa",
+    "datasetReference": {
+      "datasetId": "usage_metering_aaa",
+      "projectId": "kubernetes-public"
+    },
+    "location": "US"
+  }
+]

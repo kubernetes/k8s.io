@@ -1,0 +1,34 @@
+[
+  {
+    "role": "WRITER",
+    "specialGroup": "projectWriters"
+  },
+  {
+    "role": "OWNER",
+    "specialGroup": "projectOwners"
+  },
+  {
+    "role": "OWNER",
+    "userByEmail": "billing-export-bigquery@system.gserviceaccount.com"
+  },
+  {
+    "role": "OWNER",
+    "userByEmail": "ihor@cncf.io"
+  },
+  {
+    "role": "READER",
+    "groupByEmail": "k8s-infra-gcp-accounting@kubernetes.io"
+  },
+  {
+    "role": "READER",
+    "specialGroup": "projectReaders"
+  },
+  {
+    "role": "roles/bigquery.metadataViewer",
+    "groupByEmail": "k8s-infra-gcp-accounting@kubernetes.io"
+  },
+  {
+    "role": "roles/bigquery.user",
+    "groupByEmail": "k8s-infra-gcp-accounting@kubernetes.io"
+  }
+]
