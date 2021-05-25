@@ -290,7 +290,7 @@ function audit_gcp_project_service() {
     esac
 }
 
-function main() {
+function audit_k8s_infra_gcp() {
     echo "Removing all existing GCP project audit files"
     remove_all_gcp_project_audit_files 2>&1 | indent
 
@@ -300,6 +300,17 @@ function main() {
     # TODO: this will miss projects that are under folders
     echo "Exporting all GCP projects with parent id: ${KUBERNETES_IO_GCP_ORG}"
     audit_all_projects_with_parent_id "${KUBERNETES_IO_GCP_ORG}" 2>&1 | indent
+}
+
+function main() {
+    if [ $# -gt 0 ]; then
+        for project in "$@"; do
+            echo "Exporting GCP project: ${project}"
+            audit_gcp_project "${project}" 2>&1 | indent
+        done
+    else
+        audit_k8s_infra_gcp
+    fi
 }
 
 main "$@"
