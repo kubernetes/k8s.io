@@ -23,6 +23,25 @@ readonly REPO_ROOT
 . "${REPO_ROOT}/infra/gcp/lib.sh"
 
 readonly KUBERNETES_IO_GCP_ORG="${GCP_ORG}"
+readonly AUDIT_DIR="${REPO_ROOT}/audit"
+
+# TODO: this should maybe just be a call to verify_prereqs from lib_util.sh,
+#       but that currently enforces presence of `yq` which I'm not sure is
+#       present on the image used by the prowjob that runs this script
+function ensure_dependencies() {
+    if ! command -v jq &>/dev/null; then
+      >&2 echo "jq not found. Please install: https://stedolan.github.io/jq/download/"
+      exit 1
+    fi
+
+    # the 'bq show' command is called as a hack to dodge the config prompts that bq presents
+    # the first time it is run. A newline is passed to stdin to skip the prompt for default project
+    # when the service account in use has access to multiple projects.
+    bq show <<< $'\n' >/dev/null
+
+    # right now most of this script assumes it's been run within the audit dir
+    pushd "${AUDIT_DIR}" >/dev/null
+}
 
 function format_gcloud_json() {
     # recursively delete any fields named "etag"
@@ -303,6 +322,7 @@ function audit_k8s_infra_gcp() {
 }
 
 function main() {
+    ensure_dependencies
     if [ $# -gt 0 ]; then
         for project in "$@"; do
             echo "Exporting GCP project: ${project}"
