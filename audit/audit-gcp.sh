@@ -20,24 +20,62 @@ set -o pipefail
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 readonly REPO_ROOT
-. "${REPO_ROOT}/infra/gcp/lib.sh"
 
-readonly KUBERNETES_IO_GCP_ORG="${GCP_ORG}"
+# TODO: Including this automatically calls verify_prereqs, which looks for yq,
+#       which is not present in gcr.io/k8s-staging-releng/releng-ci:latest, the
+#       image used to run this script at present. Update to use an image that
+#       does have it installed, or at least pip3. In the meantime, copy-paste
+#       the indent function.
+# . "${REPO_ROOT}/infra/gcp/lib.sh"
+
+# ensure_gnu_sed
+# Determines which sed binary is gnu-sed on linux/darwin
+#
+# Sets:
+#  SED: The name of the gnu-sed binary
+#
+function ensure_gnu_sed() {
+    sed_help="$(LANG=C sed --help 2>&1 || true)"
+    if echo "${sed_help}" | grep -q "GNU\|BusyBox"; then
+        SED="sed"
+    elif command -v gsed &>/dev/null; then
+        SED="gsed"
+    else
+        >&2 echo "Failed to find GNU sed as sed or gsed. If you are on Mac: brew install gnu-sed"
+        return 1
+    fi
+    export SED
+}
+
+# Indent each line of stdin.
+# example: <command> 2>&1 | indent
+function indent() {
+    ${SED} -u 's/^/  /'
+}
+
 readonly AUDIT_DIR="${REPO_ROOT}/audit"
+readonly KUBERNETES_IO_GCP_ORG="758905017065" # kubernetes.io
 
-# TODO: this should maybe just be a call to verify_prereqs from lib_util.sh,
-#       but that currently enforces presence of `yq` which I'm not sure is
-#       present on the image used by the prowjob that runs this script
+# TODO: this should delegate to verify_prereqs from infra/gcp/lib_util.sh once
+#       we can guarantee this runs in an image with `yq` and/or pip3 installed
 function ensure_dependencies() {
+    # indent relies on sed -u which isn't available in macOS's sed
+    if ! ensure_gnu_sed; then
+        exit 1
+    fi
+
     if ! command -v jq &>/dev/null; then
-      >&2 echo "jq not found. Please install: https://stedolan.github.io/jq/download/"
-      exit 1
+        echo "jq not found. Please install: https://stedolan.github.io/jq/download/" >&2
+        exit 1
     fi
 
     # the 'bq show' command is called as a hack to dodge the config prompts that bq presents
     # the first time it is run. A newline is passed to stdin to skip the prompt for default project
     # when the service account in use has access to multiple projects.
-    bq show <<< $'\n' >/dev/null
+    if ! bq show <<< $'\n' >/dev/null; then
+        # ignore errors from bq while doing this hack
+        true
+    fi
 
     # right now most of this script assumes it's been run within the audit dir
     pushd "${AUDIT_DIR}" >/dev/null
@@ -313,7 +351,7 @@ function audit_k8s_infra_gcp() {
     echo "Removing all existing GCP project audit files"
     remove_all_gcp_project_audit_files 2>&1 | indent
 
-    echo "Exporting GCP organization: ${organization}"
+    echo "Exporting GCP organization: ${KUBERNETES_IO_GCP_ORG}"
     audit_gcp_organization "${KUBERNETES_IO_GCP_ORG}" 2>&1 | indent
 
     # TODO: this will miss projects that are under folders

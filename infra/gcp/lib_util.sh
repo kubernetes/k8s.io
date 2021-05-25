@@ -70,7 +70,7 @@ function verify_prereqs() {
         >&2 echo "jq not found. Please install: https://stedolan.github.io/jq/download/"
         exit 1
     fi
-    # generate-role-yaml relies on this
+    # generate-role-yaml, lib_iam, lib_gcs, lib_services rely on this
     # opting for https://kislyuk.github.io/yq/ over https://github.com/mikefarah/yq due to
     # parity with jq, but may be worth reconsidering
     if ! command -v yq &>/dev/null; then
