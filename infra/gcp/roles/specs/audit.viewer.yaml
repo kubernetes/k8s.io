@@ -5,37 +5,68 @@ description: View access to resources
 name: audit.viewer
 include:
   roles:
-  # TODO: consider using roles/viewer instead of per-service?
   # view/read-only roles for specific services of interest
-  # read access to compute
-  - roles/compute.viewer
-  # read access to dns
-  - roles/dns.reader
+  # TODO: consider using roles/viewer instead of per-service?
+  #
+  # read access to bigquery data resources, but not their contents (e.g. datasets, tables, views)
+  - roles/bigquery.metadataViewer
+  # read access to bigquery resource resources (e.g. jobs, reservations)
+  - roles/bigquery.resourceViewer
   # read access to cloud assets metadata
   - roles/cloudasset.viewer
+  # TODO: determine if viewing builds could expose anything sensitive
+  # - roles/cloudbuild.builds.viewer
+  # read access to cloudkms public keys
+  # ref: https://cloud.google.com/kms/docs/reference/permissions-and-roles#access-control-guidelines
+  - roles/cloudkms.publicKeyViewer
+  # read access to compute
+  - roles/compute.viewer
+  # read access to compute
+  - roles/container.clusterViewer
+  # read access to dns
+  - roles/dns.reader
+  # read access to logs (NB: removing permissions to create/run/delete queries)
+  - roles/logging.viewer
+  # read access to monitoring
+  - roles/monitoring.viewer
+  # read access to pubsub schemas, snapshots, subscriptions, topics (but not messages)
+  - roles/pubsub.viewer
+  # TODO: determine if viewing cloud run configurations could expose anything sensitive
+  # - roles/run.viewer
   # read access to secrets metadata (not their contents)
   - roles/secretmanager.viewer
 
   # meta roles (regardless of roles/viewer)
+  #
   # read access for the project hierarchy (org, folders, projects)
   - roles/browser
-  # list all resources and their IAM policies
+  # *.list and *.getIamPolicy
   - roles/iam.securityReviewer
-  # TODO: what specifically needs serviceusage.services.use?
-  #       could we use roles/serviceusage.serviceUsageViewer instead?
+  # TODO: Granting serviceusage.services.use on an entire organization
+  #       effectively allows an auditor to use any project they wish
+  #       for billing or quota purposes. This seems... not right.
   - roles/serviceusage.serviceUsageConsumer
+
+  # specific permissions that don't come from a well-scoped pre-defined role
   permissions:
   # for gsutil _ get: cors, iam, label, logging, lifecycle, retention, ubla
   - storage.buckets.get
+
+  # use regexes to filter permissions pulled in from the above
   permissionRegexes:
-  # restrict to get|list calls...
+  # only include (get|list).* (e.g. get, getIamPolicy, etc.)
   - \.(list|get)[^\.]*$
-  # ...except for specific services of interest mentioned above
-  - ^(compute|cloudasset)\.
-  # ...and this specific permission from roles/serviceusage.serviceUsageConsumer
+  # include some exceptions from service-specific roles:
+  # ...everything from roles/cloudasset.viewer
+  - ^cloudasset.assets.(analyze|export|search)[^\.]*$
+  # ...this specific permission from roles/cloudkms.publicKeyViewer
+  - cloudkms.cryptoKeyVersions.viewPublicKey
+  # ...this specific permission from roles/serviceusage.serviceUsageConsumer
   - serviceusage.services.use
 exclude:
   permissionRegexes:
+  # permissions that would modify logging queries
+  - ^logging.queries.(create|delete|update)$
   # permissions with custom roles support level NOT_SUPPORTED
   # ref: https://cloud.google.com/iam/docs/custom-roles-permissions-support
   - ^cloudonefs.
