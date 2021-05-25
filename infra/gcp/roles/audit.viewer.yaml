@@ -7,37 +7,68 @@
 # name: audit.viewer
 # include:
 #   roles:
-#   # TODO: consider using roles/viewer instead of per-service?
 #   # view/read-only roles for specific services of interest
-#   # read access to compute
-#   - roles/compute.viewer
-#   # read access to dns
-#   - roles/dns.reader
+#   # TODO: consider using roles/viewer instead of per-service?
+#   #
+#   # read access to bigquery data resources, but not their contents (e.g. datasets, tables, views)
+#   - roles/bigquery.metadataViewer
+#   # read access to bigquery resource resources (e.g. jobs, reservations)
+#   - roles/bigquery.resourceViewer
 #   # read access to cloud assets metadata
 #   - roles/cloudasset.viewer
+#   # TODO: determine if viewing builds could expose anything sensitive
+#   # - roles/cloudbuild.builds.viewer
+#   # read access to cloudkms public keys
+#   # ref: https://cloud.google.com/kms/docs/reference/permissions-and-roles#access-control-guidelines
+#   - roles/cloudkms.publicKeyViewer
+#   # read access to compute
+#   - roles/compute.viewer
+#   # read access to compute
+#   - roles/container.clusterViewer
+#   # read access to dns
+#   - roles/dns.reader
+#   # read access to logs (NB: removing permissions to create/run/delete queries)
+#   - roles/logging.viewer
+#   # read access to monitoring
+#   - roles/monitoring.viewer
+#   # read access to pubsub schemas, snapshots, subscriptions, topics (but not messages)
+#   - roles/pubsub.viewer
+#   # TODO: determine if viewing cloud run configurations could expose anything sensitive
+#   # - roles/run.viewer
 #   # read access to secrets metadata (not their contents)
 #   - roles/secretmanager.viewer
 # 
 #   # meta roles (regardless of roles/viewer)
+#   #
 #   # read access for the project hierarchy (org, folders, projects)
 #   - roles/browser
-#   # list all resources and their IAM policies
+#   # *.list and *.getIamPolicy
 #   - roles/iam.securityReviewer
-#   # TODO: what specifically needs serviceusage.services.use?
-#   #       could we use roles/serviceusage.serviceUsageViewer instead?
+#   # TODO: Granting serviceusage.services.use on an entire organization
+#   #       effectively allows an auditor to use any project they wish
+#   #       for billing or quota purposes. This seems... not right.
 #   - roles/serviceusage.serviceUsageConsumer
+# 
+#   # specific permissions that don't come from a well-scoped pre-defined role
 #   permissions:
 #   # for gsutil _ get: cors, iam, label, logging, lifecycle, retention, ubla
 #   - storage.buckets.get
+# 
+#   # use regexes to filter permissions pulled in from the above
 #   permissionRegexes:
-#   # restrict to get|list calls...
+#   # only include (get|list).* (e.g. get, getIamPolicy, etc.)
 #   - \.(list|get)[^\.]*$
-#   # ...except for specific services of interest mentioned above
-#   - ^(compute|cloudasset)\.
-#   # ...and this specific permission from roles/serviceusage.serviceUsageConsumer
+#   # include some exceptions from service-specific roles:
+#   # ...everything from roles/cloudasset.viewer
+#   - ^cloudasset.assets.(analyze|export|search)[^\.]*$
+#   # ...this specific permission from roles/cloudkms.publicKeyViewer
+#   - cloudkms.cryptoKeyVersions.viewPublicKey
+#   # ...this specific permission from roles/serviceusage.serviceUsageConsumer
 #   - serviceusage.services.use
 # exclude:
 #   permissionRegexes:
+#   # permissions that would modify logging queries
+#   - ^logging.queries.(create|delete|update)$
 #   # permissions with custom roles support level NOT_SUPPORTED
 #   # ref: https://cloud.google.com/iam/docs/custom-roles-permissions-support
 #   - ^cloudonefs.
@@ -61,21 +92,40 @@ includedPermissions:
   - actions.agentVersions.list
   - aiplatform.annotationSpecs.list
   - aiplatform.annotations.list
+  - aiplatform.artifacts.list
   - aiplatform.batchPredictionJobs.list
+  - aiplatform.contexts.list
   - aiplatform.customJobs.list
   - aiplatform.dataItems.list
   - aiplatform.dataLabelingJobs.list
   - aiplatform.datasets.list
+  - aiplatform.edgeDeploymentJobs.list
+  - aiplatform.edgeDevices.list
   - aiplatform.endpoints.list
+  - aiplatform.entityTypes.list
+  - aiplatform.executions.list
+  - aiplatform.features.list
+  - aiplatform.featurestores.list
+  - aiplatform.humanInTheLoops.list
   - aiplatform.hyperparameterTuningJobs.list
+  - aiplatform.indexEndpoints.list
+  - aiplatform.indexes.list
   - aiplatform.locations.list
+  - aiplatform.metadataSchemas.list
+  - aiplatform.metadataStores.list
+  - aiplatform.modelDeploymentMonitoringJobs.list
   - aiplatform.modelEvaluationSlices.list
   - aiplatform.modelEvaluations.list
   - aiplatform.models.list
   - aiplatform.nasJobs.list
   - aiplatform.operations.list
+  - aiplatform.pipelineJobs.list
   - aiplatform.specialistPools.list
   - aiplatform.studies.list
+  - aiplatform.tensorboardExperiments.list
+  - aiplatform.tensorboardRuns.list
+  - aiplatform.tensorboardTimeSeries.list
+  - aiplatform.tensorboards.list
   - aiplatform.trainingPipelines.list
   - aiplatform.trials.list
   - apigateway.apiconfigs.getIamPolicy
@@ -160,16 +210,25 @@ includedPermissions:
   - automlrecommendations.placements.list
   - automlrecommendations.recommendations.list
   - autoscaling.sites.getIamPolicy
+  - bigquery.bireservations.get
+  - bigquery.capacityCommitments.get
   - bigquery.capacityCommitments.list
   - bigquery.connections.getIamPolicy
   - bigquery.connections.list
+  - bigquery.datasets.get
   - bigquery.datasets.getIamPolicy
+  - bigquery.jobs.get
   - bigquery.jobs.list
+  - bigquery.jobs.listAll
+  - bigquery.models.getMetadata
   - bigquery.models.list
   - bigquery.reservationAssignments.list
+  - bigquery.reservations.get
   - bigquery.reservations.list
+  - bigquery.routines.get
   - bigquery.routines.list
   - bigquery.savedqueries.list
+  - bigquery.tables.get
   - bigquery.tables.getIamPolicy
   - bigquery.tables.list
   - bigtable.appProfiles.list
@@ -287,7 +346,12 @@ includedPermissions:
   - cloudasset.assets.exportSpannerInstances
   - cloudasset.assets.exportSqladminInstances
   - cloudasset.assets.exportStorageBuckets
+  - cloudasset.assets.listAccessPolicy
   - cloudasset.assets.listCloudkmsCryptoKeys
+  - cloudasset.assets.listIamPolicy
+  - cloudasset.assets.listOSInventories
+  - cloudasset.assets.listOrgPolicy
+  - cloudasset.assets.listResource
   - cloudasset.assets.searchAllIamPolicies
   - cloudasset.assets.searchAllResources
   - cloudasset.feeds.list
@@ -303,12 +367,14 @@ includedPermissions:
   - cloudiot.registries.list
   - cloudjobdiscovery.companies.list
   - cloudkms.cryptoKeyVersions.list
+  - cloudkms.cryptoKeyVersions.viewPublicKey
   - cloudkms.cryptoKeys.getIamPolicy
   - cloudkms.cryptoKeys.list
   - cloudkms.importJobs.getIamPolicy
   - cloudkms.importJobs.list
   - cloudkms.keyRings.getIamPolicy
   - cloudkms.keyRings.list
+  - cloudkms.locations.get
   - cloudkms.locations.list
   - cloudnotifications.activities.list
   - cloudprivatecatalogproducer.associations.list
@@ -388,7 +454,6 @@ includedPermissions:
   - compute.globalAddresses.list
   - compute.globalForwardingRules.get
   - compute.globalForwardingRules.list
-  - compute.globalForwardingRules.pscGet
   - compute.globalNetworkEndpointGroups.get
   - compute.globalNetworkEndpointGroups.list
   - compute.globalOperations.get
@@ -485,7 +550,6 @@ includedPermissions:
   - compute.regionTargetHttpsProxies.list
   - compute.regionUrlMaps.get
   - compute.regionUrlMaps.list
-  - compute.regionUrlMaps.validate
   - compute.regions.get
   - compute.regions.list
   - compute.reservations.get
@@ -530,7 +594,6 @@ includedPermissions:
   - compute.targetVpnGateways.list
   - compute.urlMaps.get
   - compute.urlMaps.list
-  - compute.urlMaps.validate
   - compute.vpnGateways.get
   - compute.vpnGateways.list
   - compute.vpnTunnels.get
@@ -551,6 +614,7 @@ includedPermissions:
   - container.certificateSigningRequests.list
   - container.clusterRoleBindings.list
   - container.clusterRoles.list
+  - container.clusters.get
   - container.clusters.list
   - container.componentStatuses.list
   - container.configMaps.list
@@ -817,11 +881,22 @@ includedPermissions:
   - iap.webServiceVersions.getIamPolicy
   - iap.webServices.getIamPolicy
   - iap.webTypes.getIamPolicy
+  - integrations.apigeeAuthConfigs.list
+  - integrations.apigeeExecutions.list
+  - integrations.apigeeIntegrationVers.list
+  - integrations.apigeeIntegrations.list
+  - integrations.apigeeSfdcChannels.list
+  - integrations.apigeeSfdcInstances.list
+  - integrations.apigeeSuspensions.list
   - lifesciences.operations.list
+  - logging.buckets.get
   - logging.buckets.list
+  - logging.exclusions.get
   - logging.exclusions.list
+  - logging.locations.get
   - logging.locations.list
   - logging.logEntries.list
+  - logging.logMetrics.get
   - logging.logMetrics.list
   - logging.logServiceIndexes.list
   - logging.logServices.list
@@ -829,8 +904,13 @@ includedPermissions:
   - logging.notificationRules.list
   - logging.operations.list
   - logging.privateLogEntries.list
+  - logging.queries.get
   - logging.queries.list
+  - logging.queries.listShared
+  - logging.sinks.get
   - logging.sinks.list
+  - logging.usage.get
+  - logging.views.get
   - logging.views.list
   - managedidentities.domains.getIamPolicy
   - managedidentities.domains.list
@@ -855,17 +935,28 @@ includedPermissions:
   - ml.studies.list
   - ml.trials.list
   - ml.versions.list
+  - monitoring.alertPolicies.get
   - monitoring.alertPolicies.list
+  - monitoring.dashboards.get
   - monitoring.dashboards.list
+  - monitoring.groups.get
   - monitoring.groups.list
+  - monitoring.metricDescriptors.get
   - monitoring.metricDescriptors.list
+  - monitoring.monitoredResourceDescriptors.get
   - monitoring.monitoredResourceDescriptors.list
+  - monitoring.notificationChannelDescriptors.get
   - monitoring.notificationChannelDescriptors.list
+  - monitoring.notificationChannels.get
   - monitoring.notificationChannels.list
+  - monitoring.publicWidgets.get
   - monitoring.publicWidgets.list
+  - monitoring.services.get
   - monitoring.services.list
+  - monitoring.slos.get
   - monitoring.slos.list
   - monitoring.timeSeries.list
+  - monitoring.uptimeCheckConfigs.get
   - monitoring.uptimeCheckConfigs.list
   - networkconnectivity.hubs.getIamPolicy
   - networkconnectivity.hubs.list
@@ -935,12 +1026,16 @@ includedPermissions:
   - proximitybeacon.beacons.list
   - proximitybeacon.namespaces.getIamPolicy
   - proximitybeacon.namespaces.list
+  - pubsub.schemas.get
   - pubsub.schemas.getIamPolicy
   - pubsub.schemas.list
+  - pubsub.snapshots.get
   - pubsub.snapshots.getIamPolicy
   - pubsub.snapshots.list
+  - pubsub.subscriptions.get
   - pubsub.subscriptions.getIamPolicy
   - pubsub.subscriptions.list
+  - pubsub.topics.get
   - pubsub.topics.getIamPolicy
   - pubsub.topics.list
   - pubsublite.subscriptions.list
@@ -1056,6 +1151,7 @@ includedPermissions:
   - spanner.instances.getIamPolicy
   - spanner.instances.list
   - spanner.sessions.list
+  - stackdriver.projects.get
   - storage.buckets.get
   - storage.buckets.getIamPolicy
   - storage.buckets.list
