@@ -61,21 +61,40 @@ includedPermissions:
   - actions.agentVersions.list
   - aiplatform.annotationSpecs.list
   - aiplatform.annotations.list
+  - aiplatform.artifacts.list
   - aiplatform.batchPredictionJobs.list
+  - aiplatform.contexts.list
   - aiplatform.customJobs.list
   - aiplatform.dataItems.list
   - aiplatform.dataLabelingJobs.list
   - aiplatform.datasets.list
+  - aiplatform.edgeDeploymentJobs.list
+  - aiplatform.edgeDevices.list
   - aiplatform.endpoints.list
+  - aiplatform.entityTypes.list
+  - aiplatform.executions.list
+  - aiplatform.features.list
+  - aiplatform.featurestores.list
+  - aiplatform.humanInTheLoops.list
   - aiplatform.hyperparameterTuningJobs.list
+  - aiplatform.indexEndpoints.list
+  - aiplatform.indexes.list
   - aiplatform.locations.list
+  - aiplatform.metadataSchemas.list
+  - aiplatform.metadataStores.list
+  - aiplatform.modelDeploymentMonitoringJobs.list
   - aiplatform.modelEvaluationSlices.list
   - aiplatform.modelEvaluations.list
   - aiplatform.models.list
   - aiplatform.nasJobs.list
   - aiplatform.operations.list
+  - aiplatform.pipelineJobs.list
   - aiplatform.specialistPools.list
   - aiplatform.studies.list
+  - aiplatform.tensorboardExperiments.list
+  - aiplatform.tensorboardRuns.list
+  - aiplatform.tensorboardTimeSeries.list
+  - aiplatform.tensorboards.list
   - aiplatform.trainingPipelines.list
   - aiplatform.trials.list
   - apigateway.apiconfigs.getIamPolicy
@@ -287,7 +306,12 @@ includedPermissions:
   - cloudasset.assets.exportSpannerInstances
   - cloudasset.assets.exportSqladminInstances
   - cloudasset.assets.exportStorageBuckets
+  - cloudasset.assets.listAccessPolicy
   - cloudasset.assets.listCloudkmsCryptoKeys
+  - cloudasset.assets.listIamPolicy
+  - cloudasset.assets.listOSInventories
+  - cloudasset.assets.listOrgPolicy
+  - cloudasset.assets.listResource
   - cloudasset.assets.searchAllIamPolicies
   - cloudasset.assets.searchAllResources
   - cloudasset.feeds.list
@@ -817,6 +841,13 @@ includedPermissions:
   - iap.webServiceVersions.getIamPolicy
   - iap.webServices.getIamPolicy
   - iap.webTypes.getIamPolicy
+  - integrations.apigeeAuthConfigs.list
+  - integrations.apigeeExecutions.list
+  - integrations.apigeeIntegrationVers.list
+  - integrations.apigeeIntegrations.list
+  - integrations.apigeeSfdcChannels.list
+  - integrations.apigeeSfdcInstances.list
+  - integrations.apigeeSuspensions.list
   - lifesciences.operations.list
   - logging.buckets.list
   - logging.exclusions.list
