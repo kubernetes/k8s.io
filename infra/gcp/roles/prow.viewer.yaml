@@ -8,12 +8,32 @@
 # name: prow.viewer
 # include:
 #   roles:
+#   # view/read-only roles for specific services of interest
+#   #
+#   # read access to compute
 #   - roles/compute.viewer
+#   # read access to GKE cluster metadata
 #   - roles/container.clusterViewer
+#   # read access to GKE cluster resources (e.g. pods)
 #   - roles/container.viewer
+#   # read access to logs, ability to run queries
+#   # TODO: does this require serviceusage.services.use to actually run queries?
 #   - roles/logging.viewer
+#   # read access to monitoring
 #   - roles/monitoring.viewer
+#   # read access to pubsub schemas, snapshots, subscriptions, topics (but not messages)
+#   - roles/pubsub.viewer
+#   # read access to secrets metadata (not their contents)
+#   - roles/secretmanager.viewer
+# 
+#   # meta roles
+#   # 
+#   # read access for the project hierarchy (org, folders, projects)
+#   - roles/browser
+# 
+#   # specific permissions that don't come from a well-scoped pre-defined role
 #   permissions:
+#   # read access to buckets and their objects 
 #   - storage.buckets.get
 #   - storage.buckets.getIamPolicy
 #   - storage.buckets.list
@@ -404,8 +424,28 @@ includedPermissions:
   - monitoring.uptimeCheckConfigs.get
   - monitoring.uptimeCheckConfigs.list
   - opsconfigmonitoring.resourceMetadata.list
+  - pubsub.schemas.get
+  - pubsub.schemas.list
+  - pubsub.schemas.validate
+  - pubsub.snapshots.get
+  - pubsub.snapshots.list
+  - pubsub.subscriptions.get
+  - pubsub.subscriptions.list
+  - pubsub.topics.get
+  - pubsub.topics.list
+  - resourcemanager.folders.get
+  - resourcemanager.folders.list
+  - resourcemanager.organizations.get
   - resourcemanager.projects.get
+  - resourcemanager.projects.getIamPolicy
   - resourcemanager.projects.list
+  - secretmanager.locations.get
+  - secretmanager.locations.list
+  - secretmanager.secrets.get
+  - secretmanager.secrets.getIamPolicy
+  - secretmanager.secrets.list
+  - secretmanager.versions.get
+  - secretmanager.versions.list
   - serviceusage.quotas.get
   - serviceusage.services.get
   - serviceusage.services.list

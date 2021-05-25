@@ -6,12 +6,32 @@ description: View access to services for troubleshooting prow
 name: prow.viewer
 include:
   roles:
+  # view/read-only roles for specific services of interest
+  #
+  # read access to compute
   - roles/compute.viewer
+  # read access to GKE cluster metadata
   - roles/container.clusterViewer
+  # read access to GKE cluster resources (e.g. pods)
   - roles/container.viewer
+  # read access to logs, ability to run queries
+  # TODO: does this require serviceusage.services.use to actually run queries?
   - roles/logging.viewer
+  # read access to monitoring
   - roles/monitoring.viewer
+  # read access to pubsub schemas, snapshots, subscriptions, topics (but not messages)
+  - roles/pubsub.viewer
+  # read access to secrets metadata (not their contents)
+  - roles/secretmanager.viewer
+
+  # meta roles
+  # 
+  # read access for the project hierarchy (org, folders, projects)
+  - roles/browser
+
+  # specific permissions that don't come from a well-scoped pre-defined role
   permissions:
+  # read access to buckets and their objects 
   - storage.buckets.get
   - storage.buckets.getIamPolicy
   - storage.buckets.list
