@@ -1,14 +1,8 @@
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
 metadata:
   name: perfdash-k8s-io
-  annotations:
-    acme.cert-manager.io/http01-override-ingress-name: "perfdash"
-    cert-manager.io/issue-temporary-certificate: "true"
+  namespace: perfdash
 spec:
-  secretName: perfdash-k8s-io-tls
-  issuerRef:
-    kind: ClusterIssuer
-    name: letsencrypt-prod
-  dnsNames:
+  domains:
   - perf-dash.k8s.io
