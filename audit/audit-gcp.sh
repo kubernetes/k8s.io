@@ -134,7 +134,7 @@ function audit_gcp_organization() {
 function audit_all_projects_with_parent_id() {
     local parent_id="${1}"
     echo "Removing existing audit files"
-    rm -rf projects
+    ensure_clean_dir "projects/"
     gcloud \
         projects list \
         --filter="parent.id=${parent_id}" \
@@ -148,60 +148,60 @@ function audit_all_projects_with_parent_id() {
 
 function audit_gcp_project() {
     local project="${1}"
+    local project_dir="projects/${project}"
 
     echo "Removing existing audit files for project: ${project}"
-    rm -rf "projects/${project}"
-
-    mkdir -p "projects/${project}"
+    ensure_clean_dir "${project_dir}"
 
     echo "Exporting project description for project: ${project}"
     gcloud \
         projects describe "${project}" \
         --format=json | format_gcloud_json \
-        > "projects/${project}/description.json"
+        > "${project_dir}/description.json"
 
     echo "Exporting IAM policy for project: ${project}"
     gcloud \
         projects get-iam-policy "${project}" \
         --format=json | format_gcloud_json \
-        > "projects/${project}/iam.json"
+        > "${project_dir}/iam.json"
 
     echo "Exporting IAM serviceaccounts for project: ${project}"
+    ensure_clean_dir "${project_dir}/service-accounts"
     gcloud \
         iam service-accounts list \
         --project="${project}" \
         --format="value(email)" \
     | while read -r SVCACCT; do
-        mkdir -p "projects/${project}/service-accounts/${SVCACCT}"
+        mkdir -p "${project_dir}/service-accounts/${SVCACCT}"
         gcloud \
             iam service-accounts describe "${SVCACCT}" \
             --project="${project}" \
             --format=json | format_gcloud_json \
-            > "projects/${project}/service-accounts/${SVCACCT}/description.json"
+            > "${project_dir}/service-accounts/${SVCACCT}/description.json"
         gcloud \
             iam service-accounts get-iam-policy "${SVCACCT}" \
             --project="${project}" \
             --format=json | format_gcloud_json \
-            > "projects/${project}/service-accounts/${SVCACCT}/iam.json"
+            > "${project_dir}/service-accounts/${SVCACCT}/iam.json"
     done
 
     echo "Exporting IAM roles for project: ${project}"
+    ensure_clean_dir "projects/${project}/roles"
     gcloud \
         iam roles list \
         --project="${project}" \
         --format="value(name)" \
     | while read -r role_path; do
-        mkdir -p "projects/${project}/roles"
         role=$(basename "${role_path}")
         gcloud \
             iam roles describe "${role}" \
             --project="${project}" \
             --format=json | format_gcloud_json \
-            > "projects/${project}/roles/${role}.json"
+            > "${project_dir}/roles/${role}.json"
     done
 
     echo "Exporting enabled services for project: ${project}"
-    mkdir -p "projects/${project}/services"
+    ensure_clean_dir "projects/${project}/services"
     gcloud \
         services list \
         --project="${project}" \
@@ -224,17 +224,18 @@ function audit_gcp_project() {
 function audit_gcp_project_service() {
     local project="${1}"
     local service="${2}"
+    local service_dir="projects/${project}/services/${service}"
+    ensure_clean_dir "${service_dir}"
 
     case "${service}" in
         bigquery)
-            mkdir -p "projects/${project}/services/${service}"
             bq \
                 ls \
                 --project_id="${project}" \
                 --format=json | format_gcloud_json \
-                > "projects/${project}/services/${service}/bigquery.datasets.json"
+                > "${service_dir}/bigquery.datasets.json"
             # Only run if there are any datasets
-            if [ -s "projects/${project}/services/${service}/bigquery.datasets.json" ]
+            if [ -s "${service_dir}/bigquery.datasets.json" ]
             then
                 bq \
                     ls \
@@ -249,18 +250,17 @@ function audit_gcp_project_service() {
                             "${project}:${DATASET}" \
                             | format_gcloud_json \
                             | jq .access \
-                            > "projects/${project}/services/${service}/bigquery.datasets.${DATASET}.access.json"
+                            > "${service_dir}/bigquery.datasets.${DATASET}.access.json"
                     done
             fi
             ;;
         compute)
-            mkdir -p "projects/${project}/services/${service}"
             gcloud \
                 compute project-info describe \
                 --project="${project}" \
                 --format=json | format_gcloud_json \
                 | jq 'del(.quotas[].usage, .commonInstanceMetadata.fingerprint)' \
-                > "projects/${project}/services/${service}/project-info.json"
+                > "${service_dir}/project-info.json"
             ;;
         container)
             mkdir -p "projects/${project}/services/${service}"
@@ -273,16 +273,15 @@ function audit_gcp_project_service() {
                 > "projects/${project}/services/${service}/clusters.txt"
             ;;
         dns)
-            mkdir -p "projects/${project}/services/${service}"
             gcloud \
                 dns project-info describe "${project}" \
                 --format=json | format_gcloud_json \
-                > "projects/${project}/services/${service}/info.json"
+                > "${service_dir}/info.json"
             gcloud \
                 dns managed-zones list \
                 --project="${project}" \
                 --format=json | format_gcloud_json \
-                > "projects/${project}/services/${service}/zones.json"
+                > "${service_dir}/zones.json"
             ;;
         logging)
             echo "TODO: ${service} needs serviceusage.services.use"
