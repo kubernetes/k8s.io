@@ -1,0 +1,17 @@
+[
+  {
+    "createTime": "2020-03-31T00:22:03.194834184Z",
+    "description": "CIP Auditor has an alert",
+    "filter": "logName=\"projects/k8s-artifacts-prod/logs/cip-audit-log\" AND severity>=ERROR ",
+    "metricDescriptor": {
+      "description": "CIP Auditor has an alert",
+      "metricKind": "DELTA",
+      "name": "projects/k8s-artifacts-prod/metricDescriptors/logging.googleapis.com/user/cip-auditor-alert",
+      "type": "logging.googleapis.com/user/cip-auditor-alert",
+      "unit": "1",
+      "valueType": "INT64"
+    },
+    "name": "cip-auditor-alert",
+    "updateTime": "2020-03-31T00:34:18.785786156Z"
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "bigqueryOptions": {
+      "usePartitionedTables": true,
+      "usesTimestampColumnPartitioning": true
+    },
+    "createTime": "2020-07-22T17:05:30.407916876Z",
+    "destination": "bigquery.googleapis.com/projects/k8s-artifacts-prod/datasets/http_lb_logs",
+    "filter": "resource.type=\"http_load_balancer\"",
+    "name": "http_lb_logs",
+    "updateTime": "2020-07-22T17:05:30.407916876Z",
+    "writerIdentity": "serviceAccount:p388270116193-330742@gcp-sa-logging.iam.gserviceaccount.com"
+  },
+  {
+    "destination": "logging.googleapis.com/projects/k8s-artifacts-prod/locations/global/buckets/_Required",
+    "filter": "LOG_ID(\"cloudaudit.googleapis.com/activity\") OR LOG_ID(\"externalaudit.googleapis.com/activity\") OR LOG_ID(\"cloudaudit.googleapis.com/system_event\") OR LOG_ID(\"externalaudit.googleapis.com/system_event\") OR LOG_ID(\"cloudaudit.googleapis.com/access_transparency\") OR LOG_ID(\"externalaudit.googleapis.com/access_transparency\")",
+    "name": "_Required"
+  },
+  {
+    "destination": "logging.googleapis.com/projects/k8s-artifacts-prod/locations/global/buckets/_Default",
+    "filter": "NOT LOG_ID(\"cloudaudit.googleapis.com/activity\") AND NOT LOG_ID(\"externalaudit.googleapis.com/activity\") AND NOT LOG_ID(\"cloudaudit.googleapis.com/system_event\") AND NOT LOG_ID(\"externalaudit.googleapis.com/system_event\") AND NOT LOG_ID(\"cloudaudit.googleapis.com/access_transparency\") AND NOT LOG_ID(\"externalaudit.googleapis.com/access_transparency\")",
+    "name": "_Default"
+  }
+]
