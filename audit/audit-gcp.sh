@@ -291,10 +291,22 @@ function audit_gcp_project_service() {
                 > "${service_dir}/zones.json"
             ;;
         logging)
-            echo "TODO: ${service} needs serviceusage.services.use"
-            ##### gcloud logging logs list --format=json > "projects/${project}/services/logging.logs.json"
-            ##### gcloud logging metrics list --format=json > "projects/${project}/services/logging.metrics.json"
-            ##### gcloud logging sinks list --format=json > "projects/${project}/services/logging.sinks.json"
+            # TODO: does this actually need serviceusage.services.use?
+            echo "logs"
+            gcloud logging logs list \
+              --project="${project}" \
+              --format=json | format_gcloud_json \
+              > "${service_dir}/logs.json"
+            echo "metrics"
+            gcloud logging metrics list \
+              --project="${project}" \
+              --format=json | format_gcloud_json \
+              > "${service_dir}/metrics.json"
+            echo "sinks"
+            gcloud logging sinks list \
+              --project="${project}" \
+              --format=json | format_gcloud_json \
+              > "${service_dir}/sinks.json"
             ;;
         monitoring)
             echo "TODO: ${service} needs serviceusage.services.use"
