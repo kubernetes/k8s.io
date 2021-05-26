@@ -263,14 +263,21 @@ function audit_gcp_project_service() {
                 > "${service_dir}/project-info.json"
             ;;
         container)
-            mkdir -p "projects/${project}/services/${service}"
-            # Don't do a JSON dump here - too much changes without human
-            # action.
+            # TODO: this may get noisy since there are things that change
+            # without human interaction; prune more fields as discovered
+            local clusters_dir="${service_dir}/clusters"
+            ensure_clean_dir "${clusters_dir}"
             gcloud \
                 container clusters list \
                 --project="${project}" \
-                --format="value(name, location, locations, status)" \
-                > "projects/${project}/services/${service}/clusters.txt"
+                --format=json | format_gcloud_json \
+            | jq -r 'map("\(.name) \(.)")[]' \
+            | while read -r name json; do \
+                echo "cluster: ${name}"
+                echo "${json}" \
+                | jq 'del(.masterAuth, .status, .nodePools[].status, .currentNodeCount)' \
+                > "${clusters_dir}/${name}.json"
+            done
             ;;
         dns)
             gcloud \
@@ -371,12 +378,34 @@ function audit_k8s_infra_gcp() {
 
 function migrate_audit_format() {
     local migrated=false
+    local projects=("$@")
+    if [ $# -eq 0 ]; then
+        mapfile -t projects < <(echo projects/* | xargs basename)
+    fi
+
     if [ -d org_kubernetes.io ]; then
         mkdir -p organizations/kubernetes.io
         git mv org_kubernetes.io/* organizations/kubernetes.io
         rm -rf org_kubernetes.io
         migrated=true
     fi
+
+    for project in "${projects[@]}"; do
+        # project=${dir#projects/}
+        dir=projects/${project}
+        old_clusters=${dir}/services/container/clusters.txt
+        if [ -f "${old_clusters}" ]; then
+            mkdir -p "${dir}/services/container/clusters"
+            while read -r name zone _; do
+              new_cluster="${dir}/services/container/clusters/$name.json"
+              echo "{ \"name\": \"$name\", \"location\": \"$zone\" }" \
+                | jq > "${new_cluster}"
+              git add "${new_cluster}"
+            done <"${old_clusters}"
+            git rm "${old_clusters}"
+            migrated=true
+        fi
+    done
 
     if ${migrated}; then
         git commit -m "audit: migrate to new file layout"
@@ -385,7 +414,7 @@ function migrate_audit_format() {
 
 function main() {
     ensure_dependencies
-    migrate_audit_format
+    migrate_audit_format "$@"
     if [ $# -gt 0 ]; then
         for project in "$@"; do
             echo "Exporting GCP project: ${project}"
