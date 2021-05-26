@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-nfd-gcb:
-  Enabled: True
-  LockedTime: 2020-05-07 18:08:25.421000+00:00
-

@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-addon-manager:
-  Enabled: True
-  LockedTime: 2020-12-29 15:50:35.841000+00:00
-

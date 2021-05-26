@@ -1,0 +1,18 @@
+gs://kubernetes-staging-507c9f54e7-eu/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			TBD
+	Time updated:			TBD
+	Metageneration:			8
+	Bucket Policy Only enabled:	False
+	ACL:				[]
+	Default ACL:			[]

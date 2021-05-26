@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://artifacts.k8s-staging-external-dns.appspot.com:
-  Enabled: True
-  LockedTime: 2020-03-08 22:29:14.922000+00:00
-

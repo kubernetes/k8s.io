@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-kubernetes-gcb:
-  Enabled: True
-  LockedTime: 2020-06-04 23:31:00.823000+00:00
-
