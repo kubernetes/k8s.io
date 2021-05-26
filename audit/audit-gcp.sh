@@ -86,38 +86,49 @@ function format_gcloud_json() {
     jq 'delpaths([path(..|.etag?|select(.))])'
 }
 
+function ensure_clean_dir() {
+  rm -rf "${1}" && mkdir -p "${1}"
+}
+
 function remove_all_gcp_project_audit_files() {
     rm -rf projects
 }
 
 function audit_gcp_organization() {
-    local organization="${1}"
+    local org_name="${1}"
+    local org_id
+    local org_dir="organizations/${org_name}"
 
-    echo "Removing existing audit files for organization: ${organization}"
-    rm -rf org_kubernetes.io
+    echo "Removing existing audit files for organization: ${org_name}"
+    ensure_clean_dir "${org_dir}"
 
-    echo "Exporting IAM roles for organization: ${organization}"
-    rm -rf org_kubernetes.io/roles
-    mkdir -p org_kubernetes.io/roles
+    echo "Exporting organization description for organization: ${org_name}"
     gcloud \
-        iam roles list \
-        --organization="${organization}" \
-        --format="value(name)" \
-    | while read -r ROLE_PATH; do
-        ROLE=$(basename "${ROLE_PATH}")
-        gcloud iam roles describe "${ROLE}" \
-            --organization="${organization}" \
-            --format=json | format_gcloud_json \
-            > "org_kubernetes.io/roles/${ROLE}.json"
-    done
-
-    echo "Exporting IAM policy for organization: ${organization}"
-    rm -rf org_kubernetes.io/iam.json
-    gcloud \
-        organizations get-iam-policy "${organization}" \
+        organizations describe "${org_name}" \
         --format=json | format_gcloud_json \
-        > "org_kubernetes.io/iam.json"
+        > "${org_dir}/description.json"
 
+    # gcloud iam calls require the numeric organization id
+    org_id=$(<"${org_dir}/description.json" jq -r .name | cut -d/ -f2)
+
+    echo "Exporting IAM policy for organization: ${org_name}"
+    gcloud \
+        organizations get-iam-policy "${org_id}" \
+        --format=json | format_gcloud_json \
+        > "${org_dir}/iam.json"
+
+    echo "Exporting IAM roles for organization: ${org_name}"
+    ensure_clean_dir "${org_dir}/roles"
+    mapfile -t roles < <(
+        gcloud iam roles list --organization="${org_id}" --format="value(name)"
+    )
+
+    for role in "${roles[@]##*/}"; do
+        gcloud iam roles describe "${role}" \
+            --organization="${org_id}" \
+            --format=json | format_gcloud_json \
+            > "${org_dir}/roles/${role}.json"
+    done
 }
 
 function audit_all_projects_with_parent_id() {
@@ -179,14 +190,14 @@ function audit_gcp_project() {
         iam roles list \
         --project="${project}" \
         --format="value(name)" \
-    | while read -r ROLE_PATH; do
+    | while read -r role_path; do
         mkdir -p "projects/${project}/roles"
-        ROLE=$(basename "${ROLE_PATH}")
+        role=$(basename "${role_path}")
         gcloud \
-            iam roles describe "${ROLE}" \
+            iam roles describe "${role}" \
             --project="${project}" \
             --format=json | format_gcloud_json \
-            > "projects/${project}/roles/${ROLE}.json"
+            > "projects/${project}/roles/${role}.json"
     done
 
     echo "Exporting enabled services for project: ${project}"
@@ -351,16 +362,31 @@ function audit_k8s_infra_gcp() {
     echo "Removing all existing GCP project audit files"
     remove_all_gcp_project_audit_files 2>&1 | indent
 
-    echo "Exporting GCP organization: ${KUBERNETES_IO_GCP_ORG}"
-    audit_gcp_organization "${KUBERNETES_IO_GCP_ORG}" 2>&1 | indent
+    echo "Exporting GCP organization: kubernetes.io"
+    audit_gcp_organization "kubernetes.io" 2>&1 | indent
 
     # TODO: this will miss projects that are under folders
     echo "Exporting all GCP projects with parent id: ${KUBERNETES_IO_GCP_ORG}"
     audit_all_projects_with_parent_id "${KUBERNETES_IO_GCP_ORG}" 2>&1 | indent
 }
 
+function migrate_audit_format() {
+    local migrated=false
+    if [ -d org_kubernetes.io ]; then
+        mkdir -p organizations/kubernetes.io
+        git mv org_kubernetes.io/* organizations/kubernetes.io
+        rm -rf org_kubernetes.io
+        migrated=true
+    fi
+
+    if ${migrated}; then
+        git commit -m "audit: migrate to new file layout"
+    fi
+}
+
 function main() {
     ensure_dependencies
+    migrate_audit_format
     if [ $# -gt 0 ]; then
         for project in "$@"; do
             echo "Exporting GCP project: ${project}"
@@ -369,6 +395,7 @@ function main() {
     else
         audit_k8s_infra_gcp
     fi
+    echo "Done"
 }
 
 main "$@"
