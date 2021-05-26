@@ -328,20 +328,48 @@ function audit_gcp_project_service() {
             done
             ;;
         storage-api)
-            gsutil ls -p "${project}" \
-            | awk -F/ '{print $3}' \
-            | while read -r BUCKET; do
-                mkdir -p "projects/${project}/buckets/${BUCKET}"
-                gsutil bucketpolicyonly get "gs://${BUCKET}/" \
-                    > "projects/${project}/buckets/${BUCKET}/bucketpolicyonly.txt"
-                gsutil cors get "gs://${BUCKET}/" \
-                    > "projects/${project}/buckets/${BUCKET}/cors.txt"
-                gsutil logging get "gs://${BUCKET}/" \
-                    > "projects/${project}/buckets/${BUCKET}/logging.txt"
-                gsutil iam get "gs://${BUCKET}/" \
-                    | format_gcloud_json \
-                    > "projects/${project}/buckets/${BUCKET}/iam.json"
+            local buckets_dir="projects/${project}/buckets"
+            ensure_clean_dir "${buckets_dir}"
+            # save gsutil calls by listing all buckets at once, then splitting
+            # into separate files with awk after the fact
+            gsutil ls -L -b -p "${project}" \
+                | awk "/^gs:/ { split(\$1,a,\"/\"); f=\"${buckets_dir}/\" a[3] \".txt\"} {print > f}"
+            mapfile -t buckets < <(
+                find "${buckets_dir}" -name '*.txt' -maxdepth 1 -exec basename {} .txt \;
+            )
+            for bucket in "${buckets[@]}"; do
+                echo "bucket: ${bucket}"
+                local bucket_dir="${buckets_dir}/${bucket}"
+                ensure_clean_dir "${bucket_dir}"
+                mv "${buckets_dir}/${bucket}"{,/metadata}.txt
             done
+            # save gsutil calls for per-bucket configuration by only getting
+            # configuration that is Present according to bucket metadata
+            for bucket in "${buckets[@]}"; do
+                local bucket_dir="${buckets_dir}/${bucket}"
+                echo "bucket iam: ${bucket}"
+                gsutil iam get "gs://${bucket}" \
+                    | format_gcloud_json \
+                    > "${bucket_dir}/iam.json"
+                if grep -q "Logging configuration:.*Present" "${bucket_dir}/metadata.txt"; then
+                    echo "bucket logging: ${bucket}"
+                    gsutil logging get "gs://${bucket}" \
+                      > "${bucket_dir}/logging.json"
+                fi
+                if grep -q "Retention Policy:.*Present" "${bucket_dir}/metadata.txt"; then
+                    echo "bucket retention: ${bucket}"
+                    gsutil retention get "gs://${bucket}" \
+                      > "${bucket_dir}/retention.txt"
+                fi
+                if grep -q "Lifecycle configuration:.*Present" "${bucket_dir}/metadata.txt"; then
+                    echo "bucket lifecycle: ${bucket}"
+                    gsutil lifecycle get "gs://${bucket}" \
+                      > "${bucket_dir}/lifecycle.json"
+                fi
+            done
+            ;;
+        storage-component)
+            echo "skipping; same resources as storage-api"
             ;;
         *)
             echo "WARN: Unaudited service ${service} enabled in project: ${project}"
@@ -359,7 +387,6 @@ function audit_gcp_project_service() {
             # TODO: handle (or ignore) serviceusage
             # TODO: handle (or ignore) source
             # TODO: handle (or ignore) stackdriver
-            # TODO: handle (or ignore) storage-component
             ;;
     esac
 }
@@ -391,20 +418,72 @@ function migrate_audit_format() {
     fi
 
     for project in "${projects[@]}"; do
-        # project=${dir#projects/}
-        dir=projects/${project}
-        old_clusters=${dir}/services/container/clusters.txt
+        local project_dir=projects/${project}
+
+        # migrate container)
+        local old_clusters="${project_dir}/services/container/clusters.txt"
         if [ -f "${old_clusters}" ]; then
-            mkdir -p "${dir}/services/container/clusters"
+            local clusters_dir="${project_dir}/services/container/clusters"
+            mkdir -p "${clusters_dir}"
             while read -r name zone _; do
-              new_cluster="${dir}/services/container/clusters/$name.json"
-              echo "{ \"name\": \"$name\", \"location\": \"$zone\" }" \
-                | jq > "${new_cluster}"
-              git add "${new_cluster}"
+                local new_cluster="${clusters_dir}/$name.json"
+                echo "{ \"name\": \"$name\", \"location\": \"$zone\" }" \
+                    | jq > "${new_cluster}"
+                git add "${new_cluster}"
             done <"${old_clusters}"
             git rm "${old_clusters}"
             migrated=true
         fi
+
+        # migrate storage-api)
+        local cors ubla logging
+        for bucket in $(find "${project_dir}" -name 'bucketpolicyonly.txt' | cut -d/ -f4 | sort); do
+            local bucket_dir=${project_dir}/buckets/${bucket}
+            cors="None"
+            if ! grep -q "has no CORS configuration" "${bucket_dir}/cors.txt"; then
+                # not actually sure what it would be, none of our buckets have it
+                cors="Present"
+            else
+                git rm "${bucket_dir}/cors.txt"
+            fi
+            logging="None"
+            if ! grep -q "has no logging configuration" "${bucket_dir}/logging.txt"; then
+                logging="Present"
+                git mv "${bucket_dir}/logging.txt" "${bucket_dir}/logging.json"
+            else
+                git rm "${bucket_dir}/logging.txt"
+            fi
+            ubla="False"
+            if grep -q "Enabled: True" "${bucket_dir}/bucketpolicyonly.txt"; then
+                ubla="True"
+            fi
+            git rm "${bucket_dir}/bucketpolicyonly.txt"
+
+            # there are very intentionally tab characters in this, since that's what gsutil outputs
+            cat >"${bucket_dir}/metadata.txt" <<EOF
+gs://${bucket}/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		${logging}
+	Website configuration:		None
+	CORS configuration: 		${cors}
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			TBD
+	Time updated:			TBD
+	Metageneration:			8
+	Bucket Policy Only enabled:	${ubla}
+	ACL:				[]
+	Default ACL:			[]
+EOF
+              git add "${bucket_dir}/metadata.txt"
+              migrated=true
+         done
+
     done
 
     if ${migrated}; then
@@ -415,6 +494,7 @@ function migrate_audit_format() {
 function main() {
     ensure_dependencies
     migrate_audit_format "$@"
+
     if [ $# -gt 0 ]; then
         for project in "$@"; do
             echo "Exporting GCP project: ${project}"
