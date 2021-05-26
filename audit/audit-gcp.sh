@@ -309,7 +309,19 @@ function audit_gcp_project_service() {
               > "${service_dir}/sinks.json"
             ;;
         monitoring)
-            echo "TODO: ${service} needs serviceusage.services.use"
+            # TODO: does this actually need serviceusage.services.use?
+            local dashboards_dir="${service_dir}/dashboards"
+            ensure_clean_dir "${dashboards_dir}"
+            gcloud monitoring dashboards list \
+              --project="${project}" \
+              --format=json | format_gcloud_json \
+            | jq -r 'map("\(.displayName) \(.)")[]' \
+            | while read -r name json; do \
+                echo "dashboard: ${name}"
+                echo "${json}" \
+                > "${dashboards_dir}/${name}.json"
+            done
+            # TODO: ensure gcloud beta and gcloud alpha are available
             #### gcloud alpha monitoring policies list > "projects/${project}/services/monitoring.policies.json"
             #### gcloud alpha monitoring channels list > "projects/${project}/services/monitoring.channels.json"
             #### gcloud alpha monitoring channel-descriptors list > "projects/${project}/services/monitoring.channel-descriptors.json"
