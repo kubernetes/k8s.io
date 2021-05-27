@@ -100,6 +100,7 @@ groups:
       - ihor@cncf.io
       - linusa@google.com
       - thockin@google.com
+      - tjferrara@google.com
 
   - email-id: k8s-infra-staging-build-image@kubernetes.io
     name: k8s-infra-staging-build-image
