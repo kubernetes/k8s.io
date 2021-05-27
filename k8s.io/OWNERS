@@ -10,14 +10,11 @@ approvers:
 - bentheelder
 - cblecker
 - dims
+- nikhita
 - spiffxp
 - thockin
 emeritus_approvers:
 - ixdy
-
-# limiting factor from being an approver is inability to deploy changes once PRs merge
-reviewers:
-- nikhita
 
 labels:
 - sig/contributor-experience
