@@ -1,0 +1,9 @@
+[
+  "projects/k8s-gcr-audit-test-prod/logs/cip-audit-log",
+  "projects/k8s-gcr-audit-test-prod/logs/cloudaudit.googleapis.com%2Factivity",
+  "projects/k8s-gcr-audit-test-prod/logs/cloudaudit.googleapis.com%2Fsystem_event",
+  "projects/k8s-gcr-audit-test-prod/logs/clouderrorreporting.googleapis.com%2Finsights",
+  "projects/k8s-gcr-audit-test-prod/logs/clouderrorreporting.googleapis.com%2Freported_errors",
+  "projects/k8s-gcr-audit-test-prod/logs/run.googleapis.com%2Frequests",
+  "projects/k8s-gcr-audit-test-prod/logs/run.googleapis.com%2Fstderr"
+]

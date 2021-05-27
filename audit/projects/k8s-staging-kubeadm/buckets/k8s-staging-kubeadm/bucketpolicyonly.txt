@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-kubeadm:
-  Enabled: True
-  LockedTime: 2020-03-05 22:34:09.517000+00:00
-

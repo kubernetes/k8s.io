@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-examples-gcb:
-  Enabled: True
-  LockedTime: 2021-03-06 20:54:13.538000+00:00
-

@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://artifacts.k8s-staging-coredns.appspot.com:
-  Enabled: True
-  LockedTime: 2019-07-25 21:54:01.153000+00:00
-

@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-staging-infra-tools-gcb:
-  Enabled: True
-  LockedTime: 2020-07-29 16:50:49.629000+00:00
-

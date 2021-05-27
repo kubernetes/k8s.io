@@ -1,0 +1,8 @@
+[
+  "projects/k8s-infra-e2e-boskos-118/logs/GCEGuestAgent",
+  "projects/k8s-infra-e2e-boskos-118/logs/OSConfigAgent",
+  "projects/k8s-infra-e2e-boskos-118/logs/cloudaudit.googleapis.com%2Factivity",
+  "projects/k8s-infra-e2e-boskos-118/logs/cloudaudit.googleapis.com%2Fsystem_event",
+  "projects/k8s-infra-e2e-boskos-118/logs/compute.googleapis.com%2Fshielded_vm_integrity",
+  "projects/k8s-infra-e2e-boskos-118/logs/requests"
+]

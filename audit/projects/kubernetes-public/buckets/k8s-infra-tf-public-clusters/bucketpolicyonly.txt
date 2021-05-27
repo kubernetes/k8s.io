@@ -1,4 +1,0 @@
-Bucket Policy Only setting for gs://k8s-infra-tf-public-clusters:
-  Enabled: True
-  LockedTime: 2021-07-19 01:25:55.893000+00:00
-

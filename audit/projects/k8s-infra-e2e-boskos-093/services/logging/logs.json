@@ -1,0 +1,23 @@
+[
+  "projects/k8s-infra-e2e-boskos-093/logs/GCEGuestAgent",
+  "projects/k8s-infra-e2e-boskos-093/logs/OSConfigAgent",
+  "projects/k8s-infra-e2e-boskos-093/logs/cloud-controller-manager",
+  "projects/k8s-infra-e2e-boskos-093/logs/cloudaudit.googleapis.com%2Factivity",
+  "projects/k8s-infra-e2e-boskos-093/logs/cloudaudit.googleapis.com%2Fsystem_event",
+  "projects/k8s-infra-e2e-boskos-093/logs/compute.googleapis.com%2Fshielded_vm_integrity",
+  "projects/k8s-infra-e2e-boskos-093/logs/container-runtime",
+  "projects/k8s-infra-e2e-boskos-093/logs/docker",
+  "projects/k8s-infra-e2e-boskos-093/logs/etcd",
+  "projects/k8s-infra-e2e-boskos-093/logs/etcd-empty-dir-cleanup",
+  "projects/k8s-infra-e2e-boskos-093/logs/fluentd-gcp",
+  "projects/k8s-infra-e2e-boskos-093/logs/glbc",
+  "projects/k8s-infra-e2e-boskos-093/logs/kube-apiserver",
+  "projects/k8s-infra-e2e-boskos-093/logs/kube-controller-manager",
+  "projects/k8s-infra-e2e-boskos-093/logs/kube-proxy",
+  "projects/k8s-infra-e2e-boskos-093/logs/kube-scheduler",
+  "projects/k8s-infra-e2e-boskos-093/logs/kubelet",
+  "projects/k8s-infra-e2e-boskos-093/logs/l7-lb-controller",
+  "projects/k8s-infra-e2e-boskos-093/logs/node-problem-detector",
+  "projects/k8s-infra-e2e-boskos-093/logs/prometheus-to-sd-exporter",
+  "projects/k8s-infra-e2e-boskos-093/logs/requests"
+]
