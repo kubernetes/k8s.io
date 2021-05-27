@@ -164,19 +164,6 @@ groups:
       - nikitaraghunath@gmail.com
       - killen.bob@gmail.com
 
-  - email-id: k8s-infra-ci-robot@kubernetes.io
-    name: k8s-infra-ci-robot
-    description: |-
-      Github admins for github account k8s-infra-ci-robot
-    settings:
-      ReconcileMembers: "true"
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    managers:
-      - ameukam@gmail.com
-      - spiffxp@gmail.com
-      - spiffxp@google.com
-
   # Every RBAC group should be added here.
   - email-id: gke-security-groups@kubernetes.io
     name: gke-security-groups
@@ -305,15 +292,6 @@ groups:
       - timallclair@gmail.com
       - thockin@google.com
 
-  - email-id: k8s-infra-push-kind@kubernetes.io
-    name: k8s-infra-push-kind
-    description: |-
-      ACL for pushing KinD artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - bentheelder@google.com
-
   - email-id: k8s-infra-staging-sig-docs@kubernetes.io
     name: k8s-infra-staging-sig-docs
     description: |-
@@ -365,27 +343,6 @@ groups:
       - cblecker@gmail.com
       - james@munnelly.eu
       - thockin@google.com
-
-  - email-id: k8s-infra-rbac-gcsweb@kubernetes.io
-    name: k8s-infra-rbac-gcsweb
-    description: |-
-      Grants access to the `namespace-user` role in the `gcsweb` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - thockin@google.com
-      - spiffxp@gmail.com
-
-  - email-id: k8s-infra-rbac-kettle@kubernetes.io
-    name: k8s-infra-rbac-kettle
-    description: |
-      Grants access to the `namespace-user` role in the `kettle` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - k8s-infra-prow-oncall@kubernetes.io
 
   - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
     name: k8s-infra-rbac-k8s-io-canary
@@ -442,19 +399,6 @@ groups:
       - porterdavid@google.com
       - hanfeil@google.com
 
-  - email-id: k8s-infra-rbac-prow@kubernetes.io
-    name: k8s-infra-rbac-prow
-    description:
-      Grants access to the `namespace-user` role in the `prow` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - ameukam@gmail.com
-      - bentheelder@google.com
-      - spiffxp@google.com
-      - spiffxp@gmail.com
-
   - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
     name: k8s-infra-rbac-publishing-bot
     description: |-
@@ -503,62 +447,6 @@ groups:
       - wojtekt@google.com
       - skuznets@redhat.com
       - spiffxp@gmail.com
-
-  - email-id: k8s-infra-prow-oncall@kubernetes.io
-    name: k8s-infra-prow-oncall
-    description: |-
-      ACL for oncall/break-glass access to resources used by prow.k8s.io
-    settings:
-      ReconcileMembers: "true"
-    members:
-      # test-infra-oncall
-      - amerai@google.com
-      - chaodai@google.com
-      - colew@google.com
-      - eblackwelder@google.com
-      - fejta@google.com
-      - mpherman@google.com
-      - slchase@google.com
-      # sig-testing leads
-      - bentheelder@google.com
-      - skuznets@redhat.com
-      - spiffxp@google.com
-      - spiffxp@gmail.com
-      # wg-k8s-infra members
-      - ameukam@gmail.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - thockin@google.com
-
-  - email-id: k8s-infra-prow-viewers@kubernetes.io
-    name: k8s-infra-prow-viewers
-    description: |-
-      ACL for view access to resources used by prow.k8s.io, including build clusters and e2e projects
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-release-viewers@kubernetes.io
-      - alarcj137@gmail.com
-      - ameukam@gmail.com
-      - antonio.ojea.garcia@gmail.com
-      - bartek@smykla.com
-      - eddiezane@gmail.com
-      - georgedanielmangum@gmail.com
-      - gmccloskey@google.com
-      - helenfengzhi@gmail.com
-      - liggitt@google.com
-      - max@koerbaecher.io # 1.21 CI Signal Shadow
-      - mrfaizal@google.com
-      - priyankahariharan421@gmail.com # 1.21 CI Signal Shadow
-      - ricardo.katz@gmail.com
-      - rob.kielty@gmail.com
-      - saumya00@outlook.com # 1.21 CI Signal Shadow
-      - snichols@vmware.com # 1.21 CI Signal Shadow
-      - spiffxp@gmail.com
-      - thejoycekung@gmail.com
-      - neolit123@gmail.com
-      - philjohnson96@gmail.com
-      - k8s-infra-sig-scalability-oncall@kubernetes.io
 
   - email-id: k8s-infra-sig-scalability-oncall@kubernetes.io
     name: k8s-infra-sig-scalability-oncall
@@ -858,17 +746,6 @@ groups:
       - andrew@andrewrynhard.com
       - rahul@rmenn.in
 
-  - email-id: k8s-infra-staging-boskos@kubernetes.io
-    name: k8s-infra-staging-boskos
-    description: |-
-      ACL for staging kubernetes-sigs/boskos images.
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - aaleman@redhat.com
-      - jgrafton@google.com
-      - skuznets@redhat.com
-
   - email-id: k8s-infra-staging-cluster-addons@kubernetes.io
     name: k8s-infra-staging-cluster-addons
     description: |-
@@ -968,23 +845,6 @@ groups:
       - bowei@google.com
       - pavithrar@google.com
 
-  - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
-    name: k8s-infra-staging-e2e-test-images
-    description: |-
-      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
-    settings:
-      ReconcileMembers: "true"
-      # TODO(spiffxp): trying to see if "in domain" means members of groups
-      #                in this domain
-      WhoCanPostMessage: "ALL_IN_DOMAIN_CAN_POST"
-    members:
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - justinsb@google.com
-      - thockin@google.com
-      - spiffxp@google.com
-      - spiffxp@gmail.com
-
   - email-id: k8s-infra-staging-etcd@kubernetes.io
     name: k8s-infra-staging-etcd
     description: |-
@@ -1068,27 +928,12 @@ groups:
       - wfender@google.com
       - ygui@google.com
 
-  - email-id: k8s-infra-staging-kind@kubernetes.io
-    name: k8s-infra-staging-kind
-    description: |-
-      ACL for staging kind artifacts.
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - amwat@google.com
-      - antonio.ojea.garcia@gmail.com
-      - bentheelder@google.com
-      - james@munnelly.eu
-
   - email-id: k8s-infra-staging-kops@kubernetes.io
     name: k8s-infra-staging-kops
     description: |-
       ACL for staging KOPS
     settings:
       ReconcileMembers: "true"
-      # TODO(spiffxp): trying to see if "in domain" means members of groups
-      #                in this domain
-      WhoCanPostMessage: "ALL_IN_DOMAIN_CAN_POST"
     members:
       - davanum@gmail.com
       - ihor@cncf.io
@@ -1118,16 +963,6 @@ groups:
       - fbranczyk@gmail.com
       - tariq181290@gmail.com
 
-  - email-id: k8s-infra-staging-kubetest2@kubernetes.io
-    name: k8s-infra-staging-kubetest2
-    description: |-
-      ACL for staging kubetest2 artifacts.
-    settings:
-      ReconcileMembers: "true"
-    members:
-    - amwat@google.com
-    - bentheelder@google.com
-    - spiffxp@google.com
 
   - email-id: k8s-infra-staging-metrics-server@kubernetes.io
     name: k8s-infra-staging-metrics-server
@@ -1255,18 +1090,6 @@ groups:
       - trhoden@gmail.com
       - luoh@vmware.com
 
-  - email-id: k8s-infra-staging-k8s-gsm-tools@kubernetes.io
-    name: k8s-infra-staging-k8s-gsm-tools
-    description: |-
-      ACL for staging kubernetes-sigs/k8s-gsm-tools
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - bentheelder@google.com
-      - shanefu@google.com
-      - spiffxp@google.com
-      - spiffxp@gmail.com
-
   - email-id: k8s-infra-staging-gateway-api@kubernetes.io
     name: k8s-infra-staging-gateway-api
     description: |-
@@ -1297,15 +1120,6 @@ groups:
       - james@munnelly.eu
       - nikitaraghunath@gmail.com
       - rajula96reddy@gmail.com
-
-  - email-id: k8s-infra-staging-test-infra@kubernetes.io
-    name: k8s-infra-staging-test-infra
-    description: |
-      ACL for staging Test Infra
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-prow-oncall@kubernetes.io
 
   - email-id: k8s-infra-staging-txtdirect@kubernetes.io
     name: k8s-infra-staging-txtdirect
