@@ -86,44 +86,55 @@ function format_gcloud_json() {
     jq 'delpaths([path(..|.etag?|select(.))])'
 }
 
+function ensure_clean_dir() {
+  rm -rf "${1}" && mkdir -p "${1}"
+}
+
 function remove_all_gcp_project_audit_files() {
     rm -rf projects
 }
 
 function audit_gcp_organization() {
-    local organization="${1}"
+    local org_name="${1}"
+    local org_id
+    local org_dir="organizations/${org_name}"
 
-    echo "Removing existing audit files for organization: ${organization}"
-    rm -rf org_kubernetes.io
+    echo "Removing existing audit files for organization: ${org_name}"
+    ensure_clean_dir "${org_dir}"
 
-    echo "Exporting IAM roles for organization: ${organization}"
-    rm -rf org_kubernetes.io/roles
-    mkdir -p org_kubernetes.io/roles
+    echo "Exporting organization description for organization: ${org_name}"
     gcloud \
-        iam roles list \
-        --organization="${organization}" \
-        --format="value(name)" \
-    | while read -r ROLE_PATH; do
-        ROLE=$(basename "${ROLE_PATH}")
-        gcloud iam roles describe "${ROLE}" \
-            --organization="${organization}" \
-            --format=json | format_gcloud_json \
-            > "org_kubernetes.io/roles/${ROLE}.json"
-    done
-
-    echo "Exporting IAM policy for organization: ${organization}"
-    rm -rf org_kubernetes.io/iam.json
-    gcloud \
-        organizations get-iam-policy "${organization}" \
+        organizations describe "${org_name}" \
         --format=json | format_gcloud_json \
-        > "org_kubernetes.io/iam.json"
+        > "${org_dir}/description.json"
 
+    # gcloud iam calls require the numeric organization id
+    org_id=$(<"${org_dir}/description.json" jq -r .name | cut -d/ -f2)
+
+    echo "Exporting IAM policy for organization: ${org_name}"
+    gcloud \
+        organizations get-iam-policy "${org_id}" \
+        --format=json | format_gcloud_json \
+        > "${org_dir}/iam.json"
+
+    echo "Exporting IAM roles for organization: ${org_name}"
+    ensure_clean_dir "${org_dir}/roles"
+    mapfile -t roles < <(
+        gcloud iam roles list --organization="${org_id}" --format="value(name)"
+    )
+
+    for role in "${roles[@]##*/}"; do
+        gcloud iam roles describe "${role}" \
+            --organization="${org_id}" \
+            --format=json | format_gcloud_json \
+            > "${org_dir}/roles/${role}.json"
+    done
 }
 
 function audit_all_projects_with_parent_id() {
     local parent_id="${1}"
     echo "Removing existing audit files"
-    rm -rf projects
+    ensure_clean_dir "projects/"
     gcloud \
         projects list \
         --filter="parent.id=${parent_id}" \
@@ -137,60 +148,60 @@ function audit_all_projects_with_parent_id() {
 
 function audit_gcp_project() {
     local project="${1}"
+    local project_dir="projects/${project}"
 
     echo "Removing existing audit files for project: ${project}"
-    rm -rf "projects/${project}"
-
-    mkdir -p "projects/${project}"
+    ensure_clean_dir "${project_dir}"
 
     echo "Exporting project description for project: ${project}"
     gcloud \
         projects describe "${project}" \
         --format=json | format_gcloud_json \
-        > "projects/${project}/description.json"
+        > "${project_dir}/description.json"
 
     echo "Exporting IAM policy for project: ${project}"
     gcloud \
         projects get-iam-policy "${project}" \
         --format=json | format_gcloud_json \
-        > "projects/${project}/iam.json"
+        > "${project_dir}/iam.json"
 
     echo "Exporting IAM serviceaccounts for project: ${project}"
+    ensure_clean_dir "${project_dir}/service-accounts"
     gcloud \
         iam service-accounts list \
         --project="${project}" \
         --format="value(email)" \
     | while read -r SVCACCT; do
-        mkdir -p "projects/${project}/service-accounts/${SVCACCT}"
+        mkdir -p "${project_dir}/service-accounts/${SVCACCT}"
         gcloud \
             iam service-accounts describe "${SVCACCT}" \
             --project="${project}" \
             --format=json | format_gcloud_json \
-            > "projects/${project}/service-accounts/${SVCACCT}/description.json"
+            > "${project_dir}/service-accounts/${SVCACCT}/description.json"
         gcloud \
             iam service-accounts get-iam-policy "${SVCACCT}" \
             --project="${project}" \
             --format=json | format_gcloud_json \
-            > "projects/${project}/service-accounts/${SVCACCT}/iam.json"
+            > "${project_dir}/service-accounts/${SVCACCT}/iam.json"
     done
 
     echo "Exporting IAM roles for project: ${project}"
+    ensure_clean_dir "projects/${project}/roles"
     gcloud \
         iam roles list \
         --project="${project}" \
         --format="value(name)" \
-    | while read -r ROLE_PATH; do
-        mkdir -p "projects/${project}/roles"
-        ROLE=$(basename "${ROLE_PATH}")
+    | while read -r role_path; do
+        role=$(basename "${role_path}")
         gcloud \
-            iam roles describe "${ROLE}" \
+            iam roles describe "${role}" \
             --project="${project}" \
             --format=json | format_gcloud_json \
-            > "projects/${project}/roles/${ROLE}.json"
+            > "${project_dir}/roles/${role}.json"
     done
 
     echo "Exporting enabled services for project: ${project}"
-    mkdir -p "projects/${project}/services"
+    ensure_clean_dir "projects/${project}/services"
     gcloud \
         services list \
         --project="${project}" \
@@ -213,17 +224,18 @@ function audit_gcp_project() {
 function audit_gcp_project_service() {
     local project="${1}"
     local service="${2}"
+    local service_dir="projects/${project}/services/${service}"
+    ensure_clean_dir "${service_dir}"
 
     case "${service}" in
         bigquery)
-            mkdir -p "projects/${project}/services/${service}"
             bq \
                 ls \
                 --project_id="${project}" \
                 --format=json | format_gcloud_json \
-                > "projects/${project}/services/${service}/bigquery.datasets.json"
+                > "${service_dir}/bigquery.datasets.json"
             # Only run if there are any datasets
-            if [ -s "projects/${project}/services/${service}/bigquery.datasets.json" ]
+            if [ -s "${service_dir}/bigquery.datasets.json" ]
             then
                 bq \
                     ls \
@@ -238,49 +250,78 @@ function audit_gcp_project_service() {
                             "${project}:${DATASET}" \
                             | format_gcloud_json \
                             | jq .access \
-                            > "projects/${project}/services/${service}/bigquery.datasets.${DATASET}.access.json"
+                            > "${service_dir}/bigquery.datasets.${DATASET}.access.json"
                     done
             fi
             ;;
         compute)
-            mkdir -p "projects/${project}/services/${service}"
             gcloud \
                 compute project-info describe \
                 --project="${project}" \
                 --format=json | format_gcloud_json \
                 | jq 'del(.quotas[].usage, .commonInstanceMetadata.fingerprint)' \
-                > "projects/${project}/services/${service}/project-info.json"
+                > "${service_dir}/project-info.json"
             ;;
         container)
-            mkdir -p "projects/${project}/services/${service}"
-            # Don't do a JSON dump here - too much changes without human
-            # action.
+            # TODO: this may get noisy since there are things that change
+            # without human interaction; prune more fields as discovered
+            local clusters_dir="${service_dir}/clusters"
+            ensure_clean_dir "${clusters_dir}"
             gcloud \
                 container clusters list \
                 --project="${project}" \
-                --format="value(name, location, locations, status)" \
-                > "projects/${project}/services/${service}/clusters.txt"
+                --format=json | format_gcloud_json \
+            | jq -r 'map("\(.name) \(.)")[]' \
+            | while read -r name json; do \
+                echo "cluster: ${name}"
+                echo "${json}" \
+                | jq 'del(.masterAuth, .status, .nodePools[].status, .currentNodeCount)' \
+                > "${clusters_dir}/${name}.json"
+            done
             ;;
         dns)
-            mkdir -p "projects/${project}/services/${service}"
             gcloud \
                 dns project-info describe "${project}" \
                 --format=json | format_gcloud_json \
-                > "projects/${project}/services/${service}/info.json"
+                > "${service_dir}/info.json"
             gcloud \
                 dns managed-zones list \
                 --project="${project}" \
                 --format=json | format_gcloud_json \
-                > "projects/${project}/services/${service}/zones.json"
+                > "${service_dir}/zones.json"
             ;;
         logging)
-            echo "TODO: ${service} needs serviceusage.services.use"
-            ##### gcloud logging logs list --format=json > "projects/${project}/services/logging.logs.json"
-            ##### gcloud logging metrics list --format=json > "projects/${project}/services/logging.metrics.json"
-            ##### gcloud logging sinks list --format=json > "projects/${project}/services/logging.sinks.json"
+            # TODO: does this actually need serviceusage.services.use?
+            echo "logs"
+            gcloud logging logs list \
+              --project="${project}" \
+              --format=json | format_gcloud_json \
+              > "${service_dir}/logs.json"
+            echo "metrics"
+            gcloud logging metrics list \
+              --project="${project}" \
+              --format=json | format_gcloud_json \
+              > "${service_dir}/metrics.json"
+            echo "sinks"
+            gcloud logging sinks list \
+              --project="${project}" \
+              --format=json | format_gcloud_json \
+              > "${service_dir}/sinks.json"
             ;;
         monitoring)
-            echo "TODO: ${service} needs serviceusage.services.use"
+            # TODO: does this actually need serviceusage.services.use?
+            local dashboards_dir="${service_dir}/dashboards"
+            ensure_clean_dir "${dashboards_dir}"
+            gcloud monitoring dashboards list \
+              --project="${project}" \
+              --format=json | format_gcloud_json \
+            | jq -r 'map("\(.displayName) \(.)")[]' \
+            | while read -r name json; do \
+                echo "dashboard: ${name}"
+                echo "${json}" \
+                > "${dashboards_dir}/${name}.json"
+            done
+            # TODO: ensure gcloud beta and gcloud alpha are available
             #### gcloud alpha monitoring policies list > "projects/${project}/services/monitoring.policies.json"
             #### gcloud alpha monitoring channels list > "projects/${project}/services/monitoring.channels.json"
             #### gcloud alpha monitoring channel-descriptors list > "projects/${project}/services/monitoring.channel-descriptors.json"
@@ -311,20 +352,48 @@ function audit_gcp_project_service() {
             done
             ;;
         storage-api)
-            gsutil ls -p "${project}" \
-            | awk -F/ '{print $3}' \
-            | while read -r BUCKET; do
-                mkdir -p "projects/${project}/buckets/${BUCKET}"
-                gsutil bucketpolicyonly get "gs://${BUCKET}/" \
-                    > "projects/${project}/buckets/${BUCKET}/bucketpolicyonly.txt"
-                gsutil cors get "gs://${BUCKET}/" \
-                    > "projects/${project}/buckets/${BUCKET}/cors.txt"
-                gsutil logging get "gs://${BUCKET}/" \
-                    > "projects/${project}/buckets/${BUCKET}/logging.txt"
-                gsutil iam get "gs://${BUCKET}/" \
-                    | format_gcloud_json \
-                    > "projects/${project}/buckets/${BUCKET}/iam.json"
+            local buckets_dir="projects/${project}/buckets"
+            ensure_clean_dir "${buckets_dir}"
+            # save gsutil calls by listing all buckets at once, then splitting
+            # into separate files with awk after the fact
+            gsutil ls -L -b -p "${project}" \
+                | awk "/^gs:/ { split(\$1,a,\"/\"); f=\"${buckets_dir}/\" a[3] \".txt\"} {print > f}"
+            mapfile -t buckets < <(
+                find "${buckets_dir}" -name '*.txt' -maxdepth 1 -exec basename {} .txt \;
+            )
+            for bucket in "${buckets[@]}"; do
+                echo "bucket: ${bucket}"
+                local bucket_dir="${buckets_dir}/${bucket}"
+                ensure_clean_dir "${bucket_dir}"
+                mv "${buckets_dir}/${bucket}"{,/metadata}.txt
             done
+            # save gsutil calls for per-bucket configuration by only getting
+            # configuration that is Present according to bucket metadata
+            for bucket in "${buckets[@]}"; do
+                local bucket_dir="${buckets_dir}/${bucket}"
+                echo "bucket iam: ${bucket}"
+                gsutil iam get "gs://${bucket}" \
+                    | format_gcloud_json \
+                    > "${bucket_dir}/iam.json"
+                if grep -q "Logging configuration:.*Present" "${bucket_dir}/metadata.txt"; then
+                    echo "bucket logging: ${bucket}"
+                    gsutil logging get "gs://${bucket}" \
+                      > "${bucket_dir}/logging.json"
+                fi
+                if grep -q "Retention Policy:.*Present" "${bucket_dir}/metadata.txt"; then
+                    echo "bucket retention: ${bucket}"
+                    gsutil retention get "gs://${bucket}" \
+                      > "${bucket_dir}/retention.txt"
+                fi
+                if grep -q "Lifecycle configuration:.*Present" "${bucket_dir}/metadata.txt"; then
+                    echo "bucket lifecycle: ${bucket}"
+                    gsutil lifecycle get "gs://${bucket}" \
+                      > "${bucket_dir}/lifecycle.json"
+                fi
+            done
+            ;;
+        storage-component)
+            echo "skipping; same resources as storage-api"
             ;;
         *)
             echo "WARN: Unaudited service ${service} enabled in project: ${project}"
@@ -342,7 +411,6 @@ function audit_gcp_project_service() {
             # TODO: handle (or ignore) serviceusage
             # TODO: handle (or ignore) source
             # TODO: handle (or ignore) stackdriver
-            # TODO: handle (or ignore) storage-component
             ;;
     esac
 }
@@ -351,16 +419,106 @@ function audit_k8s_infra_gcp() {
     echo "Removing all existing GCP project audit files"
     remove_all_gcp_project_audit_files 2>&1 | indent
 
-    echo "Exporting GCP organization: ${KUBERNETES_IO_GCP_ORG}"
-    audit_gcp_organization "${KUBERNETES_IO_GCP_ORG}" 2>&1 | indent
+    echo "Exporting GCP organization: kubernetes.io"
+    audit_gcp_organization "kubernetes.io" 2>&1 | indent
 
     # TODO: this will miss projects that are under folders
     echo "Exporting all GCP projects with parent id: ${KUBERNETES_IO_GCP_ORG}"
     audit_all_projects_with_parent_id "${KUBERNETES_IO_GCP_ORG}" 2>&1 | indent
 }
 
+function migrate_audit_format() {
+    local migrated=false
+    local projects=("$@")
+    if [ $# -eq 0 ]; then
+        mapfile -t projects < <(echo projects/* | xargs basename)
+    fi
+
+    if [ -d org_kubernetes.io ]; then
+        mkdir -p organizations/kubernetes.io
+        git mv org_kubernetes.io/* organizations/kubernetes.io
+        rm -rf org_kubernetes.io
+        migrated=true
+    fi
+
+    for project in "${projects[@]}"; do
+        local project_dir=projects/${project}
+
+        # migrate container)
+        local old_clusters="${project_dir}/services/container/clusters.txt"
+        if [ -f "${old_clusters}" ]; then
+            local clusters_dir="${project_dir}/services/container/clusters"
+            mkdir -p "${clusters_dir}"
+            while read -r name zone _; do
+                local new_cluster="${clusters_dir}/$name.json"
+                echo "{ \"name\": \"$name\", \"location\": \"$zone\" }" \
+                    | jq > "${new_cluster}"
+                git add "${new_cluster}"
+            done <"${old_clusters}"
+            git rm "${old_clusters}"
+            migrated=true
+        fi
+
+        # migrate storage-api)
+        local cors ubla logging
+        for bucket in $(find "${project_dir}" -name 'bucketpolicyonly.txt' | cut -d/ -f4 | sort); do
+            local bucket_dir=${project_dir}/buckets/${bucket}
+            cors="None"
+            if ! grep -q "has no CORS configuration" "${bucket_dir}/cors.txt"; then
+                # not actually sure what it would be, none of our buckets have it
+                cors="Present"
+            else
+                git rm "${bucket_dir}/cors.txt"
+            fi
+            logging="None"
+            if ! grep -q "has no logging configuration" "${bucket_dir}/logging.txt"; then
+                logging="Present"
+                git mv "${bucket_dir}/logging.txt" "${bucket_dir}/logging.json"
+            else
+                git rm "${bucket_dir}/logging.txt"
+            fi
+            ubla="False"
+            if grep -q "Enabled: True" "${bucket_dir}/bucketpolicyonly.txt"; then
+                ubla="True"
+            fi
+            git rm "${bucket_dir}/bucketpolicyonly.txt"
+
+            # there are very intentionally tab characters in this, since that's what gsutil outputs
+            cat >"${bucket_dir}/metadata.txt" <<EOF
+gs://${bucket}/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		${logging}
+	Website configuration:		None
+	CORS configuration: 		${cors}
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			TBD
+	Time updated:			TBD
+	Metageneration:			8
+	Bucket Policy Only enabled:	${ubla}
+	ACL:				[]
+	Default ACL:			[]
+EOF
+              git add "${bucket_dir}/metadata.txt"
+              migrated=true
+         done
+
+    done
+
+    if ${migrated}; then
+        git commit -m "audit: migrate to new file layout"
+    fi
+}
+
 function main() {
     ensure_dependencies
+    migrate_audit_format "$@"
+
     if [ $# -gt 0 ]; then
         for project in "$@"; do
             echo "Exporting GCP project: ${project}"
@@ -369,6 +527,7 @@ function main() {
     else
         audit_k8s_infra_gcp
     fi
+    echo "Done"
 }
 
 main "$@"
