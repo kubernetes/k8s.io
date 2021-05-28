@@ -135,6 +135,9 @@ issue:
 issues:
   type: CNAME
   value: issues.k8s.io.
+kep:
+  type: CNAME
+  value: kep.k8s.io.
 node-perf-dash:
   type: CNAME
   value: node-perf-dash.k8s.io.

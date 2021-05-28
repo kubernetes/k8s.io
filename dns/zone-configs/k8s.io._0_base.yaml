@@ -163,6 +163,9 @@ issue:
 issues:
   type: CNAME
   value: redirect.k8s.io.
+kep:
+  type: CNAME
+  value: redirect.k8s.io.
 youtube:
   type: CNAME
   value: redirect.k8s.io.
