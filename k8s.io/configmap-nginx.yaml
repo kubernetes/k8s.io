@@ -262,6 +262,14 @@ data:
         }
       }
       server {
+        server_name kep.k8s.io kep.kubernetes.io;
+        listen 80;
+
+        location / {
+          rewrite ^/(.*)$  https://github.com/kubernetes/enhancements/issues/$1 redirect;
+        }
+      }
+      server {
         server_name pr.k8s.io prs.k8s.io pr.kubernetes.io prs.kubernetes.io;
         listen 80;
 

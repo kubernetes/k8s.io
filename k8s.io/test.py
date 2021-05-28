@@ -359,6 +359,15 @@ class RedirTest(HTTPTestCase):
                 'https://github.com/kubernetes/kubernetes/issues/$path',
                 path=rand_num())
 
+    def test_kep(self):
+        for base in ('kep.k8s.io', 'kep.kubernetes.io'):
+            self.assert_temp_redirect(base,
+                'https://github.com/kubernetes/enhancements/issues/',
+                path=rand_num())
+            self.assert_temp_redirect(base + '/$path',
+                'https://github.com/kubernetes/enhancements/issues/$path',
+                path=rand_num())
+
     def test_prs(self):
         for base in ('prs.k8s.io', 'pr.k8s.io',
                      'prs.kubernetes.io', 'pr.kubernetes.io'):
