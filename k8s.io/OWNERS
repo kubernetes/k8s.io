@@ -1,18 +1,20 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+# deploying this is still a manual process, so restricting
+# to approvers who are comfortable doing so
 options:
   no_parent_owners: true
+
 approvers:
 - aojea
 - bentheelder
 - cblecker
 - dims
+- nikhita
 - spiffxp
 - thockin
-
-# limiting factor from being an approver is inability to deploy changes once PRs merge
-reviewers:
-- nikhita
+emeritus_approvers:
+- ixdy
 
 labels:
 - sig/contributor-experience

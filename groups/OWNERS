@@ -1,7 +1,18 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+# approval is restricted to members of k8s-infra-group-admins@
+# because they have the ability to manually run, troubleshoot, and undo
+# changes
+#
+# approval will not be delegated to deeper directories until sufficient
+# checks are in place (via testing or policy enforcement) to ensure that
+# someone can't escalate privileges or create arbitrary groups
+#
+# ref: https://github.com/kubernetes/k8s.io/issues/460#issuecomment-849958721
+
 options:
   no_parent_owners: true
+
 approvers:
   - cblecker
   - dims

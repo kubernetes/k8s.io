@@ -7,7 +7,8 @@ approvers:
 - nikhita # sig-contribex tl
 - spiffxp # wg-k8s-infra chair
 - thockin
-emeritus:
+
+emeritus_approvers:
 - mikedanese
 - bartsmykla
 
