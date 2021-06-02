@@ -21,7 +21,6 @@ spec:
           command:
             - "/app/main"
           args:
-            - --github-api-url=http://ghproxy.prow.svc.cluster.local/
             - --min-refresh=30s
             - --max-refresh=5m
             - --site=/app/site
