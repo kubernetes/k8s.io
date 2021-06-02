@@ -6,13 +6,13 @@ gs://k8s-staging-csi/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 10 May 2019 03:42:03 GMT
+	Time updated:			Fri, 29 Jan 2021 15:35:02 GMT
+	Metageneration:			47
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

@@ -6,12 +6,12 @@ gs://k8s-staging-provider-openstack/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
+	Time created:			Mon, 15 Feb 2021 15:19:03 GMT
+	Time updated:			Mon, 15 Feb 2021 15:19:17 GMT
 	Metageneration:			8
 	Bucket Policy Only enabled:	True
 	ACL:				[]

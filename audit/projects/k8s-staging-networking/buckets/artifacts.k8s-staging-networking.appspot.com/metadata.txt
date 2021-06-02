@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-networking.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 23 Oct 2020 19:23:51 GMT
+	Time updated:			Fri, 23 Oct 2020 19:24:17 GMT
+	Metageneration:			7
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

@@ -6,13 +6,13 @@ gs://k8s-staging-kas-network-proxy-gcb/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 05 Nov 2019 17:47:01 GMT
+	Time updated:			Thu, 20 May 2021 10:02:42 GMT
+	Metageneration:			26
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

@@ -8,11 +8,12 @@ gs://k8s-artifacts-csi/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Thu, 28 May 2020 12:51:57 GMT
+	Time updated:			Mon, 24 May 2021 17:36:28 GMT
+	Metageneration:			53
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

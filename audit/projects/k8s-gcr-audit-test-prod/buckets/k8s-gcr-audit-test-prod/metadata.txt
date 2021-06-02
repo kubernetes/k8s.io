@@ -8,11 +8,12 @@ gs://k8s-gcr-audit-test-prod/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 01 Nov 2019 18:30:22 GMT
+	Time updated:			Mon, 24 May 2021 17:35:10 GMT
+	Metageneration:			59
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

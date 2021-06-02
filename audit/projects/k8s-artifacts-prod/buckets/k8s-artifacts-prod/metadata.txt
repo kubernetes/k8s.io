@@ -4,15 +4,16 @@ gs://k8s-artifacts-prod/ :
 	Location constraint:		US
 	Versioning enabled:		None
 	Logging configuration:		Present
-	Website configuration:		None
+	Website configuration:		Present
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 01 May 2019 00:54:58 GMT
+	Time updated:			Mon, 24 May 2021 17:37:19 GMT
+	Metageneration:			123
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

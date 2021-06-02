@@ -10,9 +10,61 @@ gs://kubernetes-staging-8b8311a802/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Sat, 02 May 2020 03:41:54 GMT
+	Time updated:			Sat, 02 May 2020 03:41:54 GMT
+	Metageneration:			1
 	Bucket Policy Only enabled:	False
-	ACL:				[]
-	Default ACL:			[]
+	ACL:				
+	  [
+	    {
+	      "entity": "project-owners-993482628758",
+	      "projectTeam": {
+	        "projectNumber": "993482628758",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-993482628758",
+	      "projectTeam": {
+	        "projectNumber": "993482628758",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-993482628758",
+	      "projectTeam": {
+	        "projectNumber": "993482628758",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-993482628758",
+	      "projectTeam": {
+	        "projectNumber": "993482628758",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-993482628758",
+	      "projectTeam": {
+	        "projectNumber": "993482628758",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-993482628758",
+	      "projectTeam": {
+	        "projectNumber": "993482628758",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

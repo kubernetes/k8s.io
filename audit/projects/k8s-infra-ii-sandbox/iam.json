@@ -57,22 +57,19 @@
     },
     {
       "members": [
-        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562",
-        "serviceAccount:ii-sandbox-bobymcbobs-oitq@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562"
       ],
       "role": "roles/logging.logWriter"
     },
     {
       "members": [
-        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562",
-        "serviceAccount:ii-sandbox-bobymcbobs-oitq@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562"
       ],
       "role": "roles/monitoring.metricWriter"
     },
     {
       "members": [
-        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562",
-        "serviceAccount:ii-sandbox-bobymcbobs-oitq@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+        "deleted:serviceAccount:ii-sandbox-bobymcbobs-qtyp@k8s-infra-ii-sandbox.iam.gserviceaccount.com?uid=114495406038893813562"
       ],
       "role": "roles/monitoring.viewer"
     },

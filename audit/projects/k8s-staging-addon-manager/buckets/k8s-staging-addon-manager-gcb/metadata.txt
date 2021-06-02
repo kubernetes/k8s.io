@@ -6,13 +6,13 @@ gs://k8s-staging-addon-manager-gcb/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 30 Sep 2020 15:50:57 GMT
+	Time updated:			Thu, 20 May 2021 09:14:26 GMT
+	Metageneration:			16
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

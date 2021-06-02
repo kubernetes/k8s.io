@@ -6,13 +6,13 @@ gs://k8s-staging-slack-infra/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Thu, 30 Apr 2020 16:47:14 GMT
+	Time updated:			Fri, 17 Jul 2020 22:45:50 GMT
+	Metageneration:			18
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

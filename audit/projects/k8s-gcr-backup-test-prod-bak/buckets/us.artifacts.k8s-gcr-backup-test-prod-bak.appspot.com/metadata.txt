@@ -10,9 +10,9 @@ gs://us.artifacts.k8s-gcr-backup-test-prod-bak.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 23 Oct 2019 19:10:48 GMT
+	Time updated:			Fri, 12 Feb 2021 23:10:19 GMT
+	Metageneration:			34
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

@@ -22,6 +22,12 @@
     },
     {
       "members": [
+        "serviceAccount:gcb-builder-cluster-api-gcp@k8s-staging-cluster-api-gcp.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.instanceAdmin.v1"
+    },
+    {
+      "members": [
         "serviceAccount:service-606075400249@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"

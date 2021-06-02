@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-capi-docker.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 06 Sep 2019 20:56:39 GMT
+	Time updated:			Fri, 29 Jan 2021 15:29:57 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-storage-migrator.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Thu, 10 Sep 2020 13:43:04 GMT
+	Time updated:			Thu, 10 Sep 2020 13:43:34 GMT
+	Metageneration:			7
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

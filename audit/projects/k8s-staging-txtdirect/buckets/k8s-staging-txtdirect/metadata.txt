@@ -6,13 +6,13 @@ gs://k8s-staging-txtdirect/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 17 Dec 2019 22:17:48 GMT
+	Time updated:			Fri, 17 Jul 2020 22:48:21 GMT
+	Metageneration:			26
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

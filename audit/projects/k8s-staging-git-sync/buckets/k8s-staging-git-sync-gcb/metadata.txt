@@ -6,13 +6,13 @@ gs://k8s-staging-git-sync-gcb/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 08 Sep 2020 00:07:20 GMT
+	Time updated:			Thu, 20 May 2021 09:56:31 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

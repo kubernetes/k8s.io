@@ -1,7 +1,7 @@
 gs://eu.artifacts.k8s-staging-cip-test.appspot.com/ :
 	Storage class:			STANDARD
 	Location type:			multi-region
-	Location constraint:		US
+	Location constraint:		EU
 	Versioning enabled:		None
 	Logging configuration:		None
 	Website configuration:		None
@@ -10,9 +10,9 @@ gs://eu.artifacts.k8s-staging-cip-test.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 30 Oct 2019 03:56:58 GMT
+	Time updated:			Sat, 04 Apr 2020 01:55:38 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

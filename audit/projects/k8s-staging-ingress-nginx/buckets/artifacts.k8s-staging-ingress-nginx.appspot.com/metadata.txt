@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-ingress-nginx.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 26 May 2020 18:48:53 GMT
+	Time updated:			Fri, 17 Jul 2020 22:21:19 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

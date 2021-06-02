@@ -10,9 +10,9 @@ gs://k8s-release-dev-eu/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Mon, 31 Aug 2020 23:11:48 GMT
+	Time updated:			Mon, 31 Aug 2020 23:12:12 GMT
+	Metageneration:			11
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

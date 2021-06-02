@@ -1,5 +1,5 @@
 gs://kubernetes_public_billing/ :
-	Storage class:			STANDARD
+	Storage class:			MULTI_REGIONAL
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
@@ -10,9 +10,66 @@ gs://kubernetes_public_billing/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Thu, 10 Jan 2019 14:34:51 GMT
+	Time updated:			Sat, 27 Apr 2019 03:17:28 GMT
+	Metageneration:			5
 	Bucket Policy Only enabled:	False
-	ACL:				[]
-	Default ACL:			[]
+	ACL:				
+	  [
+	    {
+	      "entity": "project-owners-127754664067",
+	      "projectTeam": {
+	        "projectNumber": "127754664067",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-127754664067",
+	      "projectTeam": {
+	        "projectNumber": "127754664067",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-127754664067",
+	      "projectTeam": {
+	        "projectNumber": "127754664067",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    },
+	    {
+	      "email": "509219875288-kscf0cheafmf4f6tp1auij5me8qakbin@developer.gserviceaccount.com",
+	      "entity": "user-509219875288-kscf0cheafmf4f6tp1auij5me8qakbin@developer.gserviceaccount.com",
+	      "role": "WRITER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-127754664067",
+	      "projectTeam": {
+	        "projectNumber": "127754664067",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-127754664067",
+	      "projectTeam": {
+	        "projectNumber": "127754664067",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-127754664067",
+	      "projectTeam": {
+	        "projectNumber": "127754664067",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

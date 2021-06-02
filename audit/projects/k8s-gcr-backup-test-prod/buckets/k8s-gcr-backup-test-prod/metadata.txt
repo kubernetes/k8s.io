@@ -8,11 +8,12 @@ gs://k8s-gcr-backup-test-prod/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 23 Oct 2019 19:10:02 GMT
+	Time updated:			Mon, 24 May 2021 17:32:58 GMT
+	Metageneration:			61
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

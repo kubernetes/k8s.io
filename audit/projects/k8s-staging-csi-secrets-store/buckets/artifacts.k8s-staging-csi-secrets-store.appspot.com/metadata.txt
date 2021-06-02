@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-csi-secrets-store.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 01 Apr 2020 23:26:31 GMT
+	Time updated:			Fri, 29 Jan 2021 15:35:40 GMT
+	Metageneration:			12
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

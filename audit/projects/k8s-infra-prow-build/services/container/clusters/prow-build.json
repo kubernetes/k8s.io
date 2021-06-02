@@ -1,4 +1,254 @@
 {
+  "addonsConfig": {
+    "dnsCacheConfig": {
+      "enabled": true
+    },
+    "horizontalPodAutoscaling": {},
+    "httpLoadBalancing": {},
+    "kubernetesDashboard": {
+      "disabled": true
+    },
+    "networkPolicyConfig": {}
+  },
+  "authenticatorGroupsConfig": {
+    "enabled": true,
+    "securityGroup": "gke-security-groups@kubernetes.io"
+  },
+  "autoscaling": {},
+  "binaryAuthorization": {},
+  "clusterIpv4Cidr": "10.32.0.0/14",
+  "createTime": "2020-04-30T21:31:49+00:00",
+  "currentMasterVersion": "1.19.9-gke.1400",
+  "currentNodeVersion": "1.19.9-gke.1400",
+  "databaseEncryption": {
+    "state": "DECRYPTED"
+  },
+  "defaultMaxPodsConstraint": {
+    "maxPodsPerNode": "110"
+  },
+  "endpoint": "34.69.231.159",
+  "id": "8d7225b757872b0f06a6e02c3ea8b5713dc926100f32754e0e754bff0afeb3c6",
+  "initialClusterVersion": "1.14.10-gke.27",
+  "initialNodeCount": 1,
+  "instanceGroupUrls": [
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-848a7936-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-22356fd4-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-647fc6db-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-b6fe6f0c-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-6b0f3325-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-aee934c3-grp"
+  ],
+  "ipAllocationPolicy": {
+    "useRoutes": true
+  },
+  "labelFingerprint": "a9dc16a7",
+  "legacyAbac": {},
+  "location": "us-central1",
+  "locations": [
+    "us-central1-c",
+    "us-central1-f",
+    "us-central1-b"
+  ],
+  "loggingService": "logging.googleapis.com/kubernetes",
+  "maintenancePolicy": {
+    "resourceVersion": "44fb9d63",
+    "window": {
+      "dailyMaintenanceWindow": {
+        "duration": "PT4H0M0S",
+        "startTime": "11:00"
+      }
+    }
+  },
+  "masterAuthorizedNetworksConfig": {},
+  "monitoringService": "monitoring.googleapis.com/kubernetes",
   "name": "prow-build",
-  "location": "us-central1"
+  "network": "default",
+  "networkConfig": {
+    "defaultSnatStatus": {},
+    "network": "projects/k8s-infra-prow-build/global/networks/default",
+    "subnetwork": "projects/k8s-infra-prow-build/regions/us-central1/subnetworks/default"
+  },
+  "networkPolicy": {
+    "enabled": true,
+    "provider": "CALICO"
+  },
+  "nodeConfig": {
+    "diskSizeGb": 100,
+    "diskType": "pd-standard",
+    "imageType": "UBUNTU_CONTAINERD",
+    "labels": {
+      "dedicated": "greenhouse"
+    },
+    "machineType": "n1-standard-32",
+    "metadata": {
+      "disable-legacy-endpoints": "true"
+    },
+    "oauthScopes": [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ],
+    "serviceAccount": "gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+    "shieldedInstanceConfig": {
+      "enableIntegrityMonitoring": true
+    },
+    "taints": [
+      {
+        "effect": "NO_SCHEDULE",
+        "key": "dedicated",
+        "value": "greenhouse"
+      }
+    ],
+    "workloadMetadataConfig": {
+      "mode": "GKE_METADATA"
+    }
+  },
+  "nodeIpv4CidrSize": 24,
+  "nodePools": [
+    {
+      "autoscaling": {
+        "enabled": true,
+        "maxNodeCount": 1,
+        "minNodeCount": 1
+      },
+      "conditions": [
+        {
+          "canonicalCode": "RESOURCE_EXHAUSTED",
+          "message": "Insufficient quota to satisfy the request: waiting on IG: instance https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instances/gke-prow-build-greenhouse-20200518173-848a7936-cf4a is still CREATING. Last attempt error: [QUOTA_EXCEEDED] Instance 'gke-prow-build-greenhouse-20200518173-848a7936-cf4a' creation failed: Quota 'CPUS' exceeded.  Limit: 256.0 in region us-central1. - ."
+        },
+        {
+          "canonicalCode": "RESOURCE_EXHAUSTED",
+          "message": "Insufficient quota to satisfy the request: waiting on IG: instance https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instances/gke-prow-build-greenhouse-20200518173-848a7936-i70q is still CREATING. Last attempt error: [QUOTA_EXCEEDED] Instance 'gke-prow-build-greenhouse-20200518173-848a7936-i70q' creation failed: Quota 'CPUS' exceeded.  Limit: 256.0 in region us-central1. - ."
+        },
+        {
+          "canonicalCode": "INTERNAL",
+          "message": "INTERNAL_ERROR: internal error: Node https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instances/gke-prow-build-greenhouse-20200518173-647fc6db-gjd3 still exists in k8s despite deletion"
+        },
+        {
+          "canonicalCode": "NOT_FOUND",
+          "message": "Google Compute Engine: Managed instance gke-prow-build-greenhouse-20200518173-647fc6db-68wz not found."
+        }
+      ],
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "pd-standard",
+        "imageType": "UBUNTU_CONTAINERD",
+        "labels": {
+          "dedicated": "greenhouse"
+        },
+        "machineType": "n1-standard-32",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ],
+        "serviceAccount": "gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "taints": [
+          {
+            "effect": "NO_SCHEDULE",
+            "key": "dedicated",
+            "value": "greenhouse"
+          }
+        ],
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "initialNodeCount": 1,
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-848a7936-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-22356fd4-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-647fc6db-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-f",
+        "us-central1-b"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "name": "greenhouse-20200518173345958100000001",
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build/nodePools/greenhouse-20200518173345958100000001",
+      "upgradeSettings": {
+        "maxSurge": 1
+      },
+      "version": "1.19.9-gke.1400"
+    },
+    {
+      "autoscaling": {
+        "enabled": true,
+        "maxNodeCount": 80,
+        "minNodeCount": 1
+      },
+      "config": {
+        "diskSizeGb": 500,
+        "diskType": "pd-ssd",
+        "imageType": "UBUNTU_CONTAINERD",
+        "machineType": "n1-highmem-8",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ],
+        "serviceAccount": "gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "initialNodeCount": 1,
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-b6fe6f0c-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-6b0f3325-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-aee934c3-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-f",
+        "us-central1-b"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "name": "pool4-20200828175901156000000001",
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build/nodePools/pool4-20200828175901156000000001",
+      "upgradeSettings": {
+        "maxSurge": 1
+      },
+      "version": "1.19.9-gke.1400"
+    }
+  ],
+  "releaseChannel": {
+    "channel": "REGULAR"
+  },
+  "resourceUsageExportConfig": {
+    "bigqueryDestination": {
+      "datasetId": "usage_metering_prow_build"
+    },
+    "consumptionMeteringConfig": {
+      "enabled": true
+    },
+    "enableNetworkEgressMetering": true
+  },
+  "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build",
+  "servicesIpv4Cidr": "10.35.240.0/20",
+  "shieldedNodes": {},
+  "subnetwork": "default",
+  "verticalPodAutoscaling": {
+    "enabled": true
+  },
+  "workloadIdentityConfig": {
+    "workloadPool": "k8s-infra-prow-build.svc.id.goog"
+  },
+  "zone": "us-central1"
 }
