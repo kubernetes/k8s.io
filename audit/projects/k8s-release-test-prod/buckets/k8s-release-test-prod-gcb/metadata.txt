@@ -10,9 +10,9 @@ gs://k8s-release-test-prod-gcb/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 30 Oct 2019 00:34:55 GMT
+	Time updated:			Thu, 20 May 2021 08:29:58 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

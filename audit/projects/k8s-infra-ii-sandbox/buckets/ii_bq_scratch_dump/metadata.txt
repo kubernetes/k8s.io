@@ -1,7 +1,7 @@
 gs://ii_bq_scratch_dump/ :
 	Storage class:			STANDARD
-	Location type:			multi-region
-	Location constraint:		US
+	Location type:			region
+	Location constraint:		US-EAST1
 	Versioning enabled:		None
 	Logging configuration:		None
 	Website configuration:		None
@@ -10,9 +10,9 @@ gs://ii_bq_scratch_dump/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 11 May 2021 23:05:03 GMT
+	Time updated:			Tue, 11 May 2021 23:05:03 GMT
+	Metageneration:			1
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

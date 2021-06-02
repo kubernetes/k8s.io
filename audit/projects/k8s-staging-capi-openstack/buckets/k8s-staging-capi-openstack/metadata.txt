@@ -6,13 +6,14 @@ gs://k8s-staging-capi-openstack/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 04 Sep 2019 19:19:51 GMT
+	Time updated:			Fri, 29 Jan 2021 15:28:28 GMT
+	Metageneration:			30
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

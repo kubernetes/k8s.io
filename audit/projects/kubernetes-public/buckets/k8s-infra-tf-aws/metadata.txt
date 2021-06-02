@@ -10,8 +10,8 @@ gs://k8s-infra-tf-aws/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
+	Time created:			Tue, 20 Apr 2021 03:52:55 GMT
+	Time updated:			Wed, 05 May 2021 07:09:50 GMT
 	Metageneration:			8
 	Bucket Policy Only enabled:	True
 	ACL:				[]

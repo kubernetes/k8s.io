@@ -10,9 +10,9 @@ gs://k8s-artifacts-gcslogs/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Thu, 23 Jul 2020 17:33:09 GMT
+	Time updated:			Tue, 04 May 2021 21:14:34 GMT
+	Metageneration:			9
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

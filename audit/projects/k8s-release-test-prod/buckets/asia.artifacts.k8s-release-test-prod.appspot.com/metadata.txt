@@ -1,7 +1,7 @@
 gs://asia.artifacts.k8s-release-test-prod.appspot.com/ :
 	Storage class:			STANDARD
 	Location type:			multi-region
-	Location constraint:		US
+	Location constraint:		ASIA
 	Versioning enabled:		None
 	Logging configuration:		None
 	Website configuration:		None
@@ -10,9 +10,9 @@ gs://asia.artifacts.k8s-release-test-prod.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 09 Jul 2019 22:06:53 GMT
+	Time updated:			Fri, 12 Feb 2021 23:12:22 GMT
+	Metageneration:			40
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

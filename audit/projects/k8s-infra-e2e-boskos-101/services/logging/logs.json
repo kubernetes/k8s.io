@@ -11,7 +11,6 @@
   "projects/k8s-infra-e2e-boskos-101/logs/app",
   "projects/k8s-infra-e2e-boskos-101/logs/autoscaler",
   "projects/k8s-infra-e2e-boskos-101/logs/busybox-host-aliasesc712b0df-df8d-44bb-8cb9-69f535a63872",
-  "projects/k8s-infra-e2e-boskos-101/logs/busybox-privileged-false-0c5a7c3d-b32b-445a-a72c-95504e6558c8",
   "projects/k8s-infra-e2e-boskos-101/logs/busybox-privileged-false-33b71268-029f-4cb5-9c44-52b3ab1a72b5",
   "projects/k8s-infra-e2e-boskos-101/logs/busybox-readonly-fs829f862a-d0cb-4558-b97d-94984d3a72aa",
   "projects/k8s-infra-e2e-boskos-101/logs/busybox-scheduling-3e6c8081-7b54-47df-b130-dff158bb3ad0",
@@ -63,7 +62,6 @@
   "projects/k8s-infra-e2e-boskos-101/logs/pause",
   "projects/k8s-infra-e2e-boskos-101/logs/pod-adoption",
   "projects/k8s-infra-e2e-boskos-101/logs/pod-release",
-  "projects/k8s-infra-e2e-boskos-101/logs/pod2-1-sched-preemption-medium-priority",
   "projects/k8s-infra-e2e-boskos-101/logs/pod3",
   "projects/k8s-infra-e2e-boskos-101/logs/primary",
   "projects/k8s-infra-e2e-boskos-101/logs/projected-all-volume-test",
@@ -88,6 +86,5 @@
   "projects/k8s-infra-e2e-boskos-101/logs/test-rs",
   "projects/k8s-infra-e2e-boskos-101/logs/volume-snapshot-controller",
   "projects/k8s-infra-e2e-boskos-101/logs/webserver",
-  "projects/k8s-infra-e2e-boskos-101/logs/with-labels",
   "projects/k8s-infra-e2e-boskos-101/logs/without-label"
 ]

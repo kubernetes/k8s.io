@@ -10,9 +10,9 @@ gs://us.artifacts.k8s-staging-cip-test.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 30 Oct 2019 03:56:33 GMT
+	Time updated:			Sat, 04 Apr 2020 01:55:33 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

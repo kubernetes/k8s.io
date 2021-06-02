@@ -6,13 +6,13 @@ gs://k8s-staging-etcd/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 03 Apr 2020 17:27:32 GMT
+	Time updated:			Fri, 29 Jan 2021 15:39:17 GMT
+	Metageneration:			20
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

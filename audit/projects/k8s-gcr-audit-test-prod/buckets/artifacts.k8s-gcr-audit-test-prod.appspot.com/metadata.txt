@@ -10,9 +10,61 @@ gs://artifacts.k8s-gcr-audit-test-prod.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Mon, 10 Feb 2020 18:58:24 GMT
+	Time updated:			Tue, 11 Feb 2020 00:28:16 GMT
+	Metageneration:			2
 	Bucket Policy Only enabled:	False
-	ACL:				[]
-	Default ACL:			[]
+	ACL:				
+	  [
+	    {
+	      "entity": "project-editors-375340694213",
+	      "projectTeam": {
+	        "projectNumber": "375340694213",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-owners-375340694213",
+	      "projectTeam": {
+	        "projectNumber": "375340694213",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-375340694213",
+	      "projectTeam": {
+	        "projectNumber": "375340694213",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-375340694213",
+	      "projectTeam": {
+	        "projectNumber": "375340694213",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-375340694213",
+	      "projectTeam": {
+	        "projectNumber": "375340694213",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-375340694213",
+	      "projectTeam": {
+	        "projectNumber": "375340694213",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

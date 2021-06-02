@@ -8,11 +8,12 @@ gs://k8s-release-test-prod/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 10 Jul 2019 22:17:00 GMT
+	Time updated:			Mon, 24 May 2021 17:36:17 GMT
+	Metageneration:			80
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

@@ -6,12 +6,12 @@ gs://k8s-staging-sig-docs/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
+	Time created:			Mon, 05 Oct 2020 17:45:41 GMT
+	Time updated:			Mon, 05 Oct 2020 17:46:09 GMT
 	Metageneration:			8
 	Bucket Policy Only enabled:	True
 	ACL:				[]

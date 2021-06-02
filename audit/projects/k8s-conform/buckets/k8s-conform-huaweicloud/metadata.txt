@@ -8,11 +8,12 @@ gs://k8s-conform-huaweicloud/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Mon, 24 Feb 2020 04:08:39 GMT
+	Time updated:			Fri, 09 Apr 2021 00:52:06 GMT
+	Metageneration:			35
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

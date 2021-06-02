@@ -8,11 +8,12 @@ gs://k8s-conform-provider-openstack/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Mon, 15 Feb 2021 15:12:15 GMT
+	Time updated:			Fri, 09 Apr 2021 00:52:43 GMT
+	Metageneration:			21
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

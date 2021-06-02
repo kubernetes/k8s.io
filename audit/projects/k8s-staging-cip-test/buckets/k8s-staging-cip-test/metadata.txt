@@ -6,13 +6,14 @@ gs://k8s-staging-cip-test/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 10 May 2019 05:15:09 GMT
+	Time updated:			Fri, 29 Jan 2021 15:21:04 GMT
+	Metageneration:			52
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

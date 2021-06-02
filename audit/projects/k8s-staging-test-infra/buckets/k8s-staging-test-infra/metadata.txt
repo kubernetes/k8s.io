@@ -6,12 +6,12 @@ gs://k8s-staging-test-infra/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
+	Time created:			Tue, 04 May 2021 20:28:38 GMT
+	Time updated:			Tue, 04 May 2021 20:29:11 GMT
 	Metageneration:			8
 	Bucket Policy Only enabled:	True
 	ACL:				[]

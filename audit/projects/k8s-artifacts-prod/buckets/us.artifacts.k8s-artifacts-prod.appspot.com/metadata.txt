@@ -10,9 +10,9 @@ gs://us.artifacts.k8s-artifacts-prod.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 01 May 2019 00:24:52 GMT
+	Time updated:			Fri, 09 Apr 2021 23:55:19 GMT
+	Metageneration:			49
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

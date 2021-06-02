@@ -6,12 +6,12 @@ gs://k8s-staging-mirror/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
+	Time created:			Sat, 21 Nov 2020 00:11:36 GMT
+	Time updated:			Sat, 21 Nov 2020 00:11:50 GMT
 	Metageneration:			8
 	Bucket Policy Only enabled:	True
 	ACL:				[]

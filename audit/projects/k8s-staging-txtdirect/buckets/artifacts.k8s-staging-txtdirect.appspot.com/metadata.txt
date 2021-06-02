@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-txtdirect.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 17 Dec 2019 22:17:10 GMT
+	Time updated:			Fri, 17 Jul 2020 22:48:04 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

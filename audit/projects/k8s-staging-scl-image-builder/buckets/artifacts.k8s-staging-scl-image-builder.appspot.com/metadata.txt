@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-scl-image-builder.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 11 Feb 2020 21:34:52 GMT
+	Time updated:			Fri, 17 Jul 2020 22:42:49 GMT
+	Metageneration:			12
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

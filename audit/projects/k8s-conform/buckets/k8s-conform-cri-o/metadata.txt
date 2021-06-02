@@ -8,11 +8,12 @@ gs://k8s-conform-cri-o/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 07 Feb 2020 00:44:26 GMT
+	Time updated:			Fri, 09 Apr 2021 00:51:47 GMT
+	Metageneration:			42
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

@@ -6,13 +6,13 @@ gs://k8s-staging-csi-secrets-store-gcb/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 01 Apr 2020 23:27:31 GMT
+	Time updated:			Thu, 20 May 2021 09:44:15 GMT
+	Metageneration:			28
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

@@ -6,13 +6,13 @@ gs://k8s-staging-provider-aws-gcb/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 26 May 2020 18:44:00 GMT
+	Time updated:			Thu, 20 May 2021 10:19:36 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

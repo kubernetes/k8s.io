@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-ingressconformance.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 09 Jun 2020 21:45:32 GMT
+	Time updated:			Fri, 17 Jul 2020 22:20:02 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

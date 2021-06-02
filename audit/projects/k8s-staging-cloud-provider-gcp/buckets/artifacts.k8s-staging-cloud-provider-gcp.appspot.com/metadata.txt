@@ -10,8 +10,8 @@ gs://artifacts.k8s-staging-cloud-provider-gcp.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
+	Time created:			Fri, 17 Jul 2020 21:52:21 GMT
+	Time updated:			Fri, 29 Jan 2021 15:22:32 GMT
 	Metageneration:			8
 	Bucket Policy Only enabled:	True
 	ACL:				[]

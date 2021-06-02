@@ -6,13 +6,13 @@ gs://k8s-staging-cpa/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 07 Apr 2020 22:49:26 GMT
+	Time updated:			Fri, 29 Jan 2021 15:33:23 GMT
+	Metageneration:			24
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

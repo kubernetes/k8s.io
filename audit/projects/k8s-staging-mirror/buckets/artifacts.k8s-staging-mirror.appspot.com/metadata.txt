@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-mirror.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Sat, 21 Nov 2020 00:11:06 GMT
+	Time updated:			Sat, 21 Nov 2020 00:11:26 GMT
+	Metageneration:			7
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

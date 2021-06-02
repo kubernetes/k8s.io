@@ -10,9 +10,61 @@ gs://artifacts.k8s-infra-e2e-boskos-scale-04.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 15 Jan 2021 13:54:00 GMT
+	Time updated:			Fri, 15 Jan 2021 13:54:00 GMT
+	Metageneration:			1
 	Bucket Policy Only enabled:	False
-	ACL:				[]
-	Default ACL:			[]
+	ACL:				
+	  [
+	    {
+	      "entity": "project-owners-881216629017",
+	      "projectTeam": {
+	        "projectNumber": "881216629017",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-881216629017",
+	      "projectTeam": {
+	        "projectNumber": "881216629017",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-881216629017",
+	      "projectTeam": {
+	        "projectNumber": "881216629017",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-881216629017",
+	      "projectTeam": {
+	        "projectNumber": "881216629017",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-881216629017",
+	      "projectTeam": {
+	        "projectNumber": "881216629017",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-881216629017",
+	      "projectTeam": {
+	        "projectNumber": "881216629017",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

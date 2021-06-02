@@ -6,13 +6,13 @@ gs://k8s-staging-cri-tools-gcb/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Thu, 19 Nov 2020 19:29:06 GMT
+	Time updated:			Thu, 20 May 2021 09:41:46 GMT
+	Metageneration:			16
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

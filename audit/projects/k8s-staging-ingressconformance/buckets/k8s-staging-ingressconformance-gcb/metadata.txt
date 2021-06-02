@@ -6,13 +6,13 @@ gs://k8s-staging-ingressconformance-gcb/ :
 	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Tue, 09 Jun 2020 21:46:34 GMT
+	Time updated:			Thu, 20 May 2021 10:00:14 GMT
+	Metageneration:			20
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

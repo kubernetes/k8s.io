@@ -1,7 +1,7 @@
 gs://asia.artifacts.k8s-gcr-audit-test-prod.appspot.com/ :
 	Storage class:			STANDARD
 	Location type:			multi-region
-	Location constraint:		US
+	Location constraint:		ASIA
 	Versioning enabled:		None
 	Logging configuration:		None
 	Website configuration:		None
@@ -10,9 +10,9 @@ gs://asia.artifacts.k8s-gcr-audit-test-prod.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 01 Nov 2019 18:29:06 GMT
+	Time updated:			Fri, 12 Feb 2021 23:11:26 GMT
+	Metageneration:			32
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

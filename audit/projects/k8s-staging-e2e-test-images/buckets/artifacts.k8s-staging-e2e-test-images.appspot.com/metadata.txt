@@ -10,9 +10,9 @@ gs://artifacts.k8s-staging-e2e-test-images.appspot.com/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 06 Dec 2019 17:23:28 GMT
+	Time updated:			Tue, 23 Feb 2021 01:56:20 GMT
+	Metageneration:			18
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

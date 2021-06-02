@@ -1,7 +1,7 @@
 gs://kubernetes-staging-3c5a215eca-eu/ :
 	Storage class:			STANDARD
 	Location type:			multi-region
-	Location constraint:		US
+	Location constraint:		EU
 	Versioning enabled:		None
 	Logging configuration:		None
 	Website configuration:		None
@@ -10,9 +10,61 @@ gs://kubernetes-staging-3c5a215eca-eu/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Fri, 31 Jul 2020 14:14:36 GMT
+	Time updated:			Fri, 31 Jul 2020 14:14:36 GMT
+	Metageneration:			1
 	Bucket Policy Only enabled:	False
-	ACL:				[]
-	Default ACL:			[]
+	ACL:				
+	  [
+	    {
+	      "entity": "project-owners-93697223430",
+	      "projectTeam": {
+	        "projectNumber": "93697223430",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-93697223430",
+	      "projectTeam": {
+	        "projectNumber": "93697223430",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-93697223430",
+	      "projectTeam": {
+	        "projectNumber": "93697223430",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-93697223430",
+	      "projectTeam": {
+	        "projectNumber": "93697223430",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-93697223430",
+	      "projectTeam": {
+	        "projectNumber": "93697223430",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-93697223430",
+	      "projectTeam": {
+	        "projectNumber": "93697223430",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

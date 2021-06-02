@@ -10,9 +10,9 @@ gs://k8s-cip-test-prod/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			TBD
-	Time updated:			TBD
-	Metageneration:			8
+	Time created:			Wed, 10 Jul 2019 22:16:04 GMT
+	Time updated:			Mon, 24 May 2021 17:39:08 GMT
+	Metageneration:			98
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]
