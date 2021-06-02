@@ -12,6 +12,7 @@ data:
       repos:
         - https://github.com/kubernetes/kubernetes
         - https://github.com/kubernetes/release
+        - https://github.com/kubernetes/sig-release
 
       # Who should automatically be considered a project member?
       # See: https://developer.github.com/v4/enum/commentauthorassociation/
@@ -403,7 +404,6 @@ data:
         name: "sig-release-issues"
         type: issue
         filters:
-          - label: area/release-eng
           - label: area/release-team
           - milestone: "v1.22"
 
@@ -411,7 +411,6 @@ data:
         name: "sig-release-prs"
         type: pull_request
         filters:
-          - label: area/release-eng
           - label: area/release-team
           - milestone: "v1.22"
 
