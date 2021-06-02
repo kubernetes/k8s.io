@@ -416,10 +416,13 @@ function staging_special_case__k8s_staging_releng_test() {
 # the compute api to be enabled because it will create a VM
 # to build the node image.
 function staging_special_case__k8s_staging_cluster_api_gcp() {
-    ensure_services "k8s-staging-cluster-api-gcp" compute.googleapis.com
+    readonly STAGING_PROJECT="k8s-staging-cluster-api-gcp"
+    readonly serviceaccount="$(svc_acct_email "${STAGING_PROJECT}" "gcb-builder-cluster-api-gcp")"
+
+    ensure_services "${STAGING_PROJECT}" compute.googleapis.com
+    ensure_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/compute.instanceAdmin.v1"
     ensure_staging_gcb_builder_service_account "cluster-api-gcp" "k8s-infra-prow-build-trusted"
 }
-
 
 #
 # main
