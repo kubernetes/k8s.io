@@ -417,7 +417,7 @@ function staging_special_case__k8s_staging_releng_test() {
 # to build the node image.
 function staging_special_case__k8s_staging_cluster_api_gcp() {
     readonly STAGING_PROJECT="k8s-staging-cluster-api-gcp"
-    readonly serviceaccount="$(svc_acct_email "${STAGING_PROJECT}" "gcb-builder-cluster-api-gcp")"
+    local serviceaccount="$(svc_acct_email "${STAGING_PROJECT}" "gcb-builder-cluster-api-gcp")"
 
     ensure_services "${STAGING_PROJECT}" compute.googleapis.com
     ensure_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/compute.instanceAdmin.v1"
