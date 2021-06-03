@@ -63,6 +63,7 @@ readonly STAGING_PROJECTS=(
     cluster-api-azure
     cluster-api-do
     cluster-api-gcp
+    cluster-api-nested
     coredns
     cpa
     cri-tools

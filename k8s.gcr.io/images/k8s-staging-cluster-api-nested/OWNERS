@@ -1,0 +1,14 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- christopherhein
+- sig-cluster-lifecycle-leads
+- vincepri
+
+reviewers:
+- christopherhein
+- sig-cluster-lifecycle-leads
+- vincepri
+
+labels:
+- sig/cluster-lifecycle
