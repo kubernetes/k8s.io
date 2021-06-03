@@ -1,15 +1,8 @@
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
 metadata:
   name: sippy-k8s-io
   namespace: sippy
-  annotations:
-    acme.cert-manager.io/http01-override-ingress-name: "sippy"
-    cert-manager.io/issue-temporary-certificate: "true"
 spec:
-  secretName: sippy-k8s-io-tls
-  issuerRef:
-    kind: ClusterIssuer
-    name: letsencrypt-prod
-  dnsNames:
+  domains:
     - sippy.k8s.io
