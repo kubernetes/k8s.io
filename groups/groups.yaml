@@ -737,6 +737,18 @@ groups:
       - justinsb@google.com
       - prignanov@vmware.com
 
+  - email-id: k8s-infra-staging-cluster-api-nested@kubernetes.io
+    name: k8s-infra-staging-cluster-api-nested
+    description: |-
+      ACL for staging CAPI for Nested
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - charleszheng44@gmail.com
+      - me@chrishein.com
+      - prignanov@vmware.com
+      - vrgf2003@gmail.com
+
   - email-id: k8s-infra-staging-bootkube@kubernetes.io
     name: k8s-infra-staging-bootkube
     description: |-
