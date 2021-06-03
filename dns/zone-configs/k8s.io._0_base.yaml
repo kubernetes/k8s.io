@@ -217,6 +217,9 @@ relnotes:
 sigs:
   type: CNAME
   value: redirect.k8s.io.
+sippy:
+  type: A
+  value: 35.244.255.27
 slack:
   type: A
   value: 34.107.195.71
