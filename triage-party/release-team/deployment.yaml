@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: triage-party
-          image: triageparty/triage-party:1.4.0-beta.1
+          image: triageparty/triage-party:1.4.0
           command:
             - "/app/main"
           args:
