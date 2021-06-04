@@ -130,6 +130,7 @@ groups:
       - spiffxp@google.com
       - spiffxp@gmail.com
       - thockin@google.com
+      - jdagostino2@gmail.com
 
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
     name: k8s-infra-gcp-org-admins
