@@ -1,12 +1,16 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
+- charleszheng44
 - christopherhein
+- Fei-Guo
 - sig-cluster-lifecycle-leads
 - vincepri
 
 reviewers:
+- charleszheng44
 - christopherhein
+- Fei-Guo
 - sig-cluster-lifecycle-leads
 - vincepri
 
