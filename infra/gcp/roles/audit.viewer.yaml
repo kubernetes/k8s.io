@@ -31,6 +31,8 @@
 #   - roles/logging.viewer
 #   # read access to monitoring
 #   - roles/monitoring.viewer
+#   # read access to org policies
+#   - roles/orgpolicy.policyViewer
 #   # read access to pubsub schemas, snapshots, subscriptions, topics (but not messages)
 #   - roles/pubsub.viewer
 #   # TODO: determine if viewing cloud run configurations could expose anything sensitive
@@ -139,6 +141,7 @@ includedPermissions:
   - apigee.apiproductattributes.list
   - apigee.apiproducts.list
   - apigee.apps.list
+  - apigee.archivedeployments.list
   - apigee.caches.list
   - apigee.datacollectors.list
   - apigee.datastores.list
@@ -723,6 +726,16 @@ includedPermissions:
   - dataprocessing.datasources.list
   - dataprocessing.featurecontrols.list
   - dataprocessing.groupcontrols.list
+  - datastream.connectionProfiles.getIamPolicy
+  - datastream.connectionProfiles.list
+  - datastream.locations.list
+  - datastream.operations.list
+  - datastream.privateConnections.getIamPolicy
+  - datastream.privateConnections.list
+  - datastream.routes.getIamPolicy
+  - datastream.routes.list
+  - datastream.streams.getIamPolicy
+  - datastream.streams.list
   - deploymentmanager.compositeTypes.list
   - deploymentmanager.deployments.getIamPolicy
   - deploymentmanager.deployments.list
@@ -998,6 +1011,7 @@ includedPermissions:
   - notebooks.schedules.list
   - ondemandscanning.operations.list
   - opsconfigmonitoring.resourceMetadata.list
+  - orgpolicy.policy.get
   - osconfig.guestPolicies.list
   - osconfig.instanceOSPoliciesCompliances.list
   - osconfig.inventories.list
@@ -1005,6 +1019,8 @@ includedPermissions:
   - osconfig.patchDeployments.list
   - osconfig.patchJobs.list
   - osconfig.vulnerabilityReports.list
+  - paymentsresellersubscription.products.list
+  - paymentsresellersubscription.promotions.list
   - policysimulator.replayResults.list
   - policysimulator.replays.list
   - privateca.caPools.getIamPolicy
