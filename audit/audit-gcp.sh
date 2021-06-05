@@ -98,16 +98,19 @@ function indent() {
 # TODO: this should delegate to verify_prereqs from infra/gcp/lib_util.sh once
 #       we can guarantee this runs in an image with `yq` and/or pip3 installed
 function ensure_dependencies() {
+    echo "gnu sed"
     # indent relies on sed -u which isn't available in macOS's sed
     if ! ensure_gnu_sed; then
         exit 1
     fi
 
+    echo "jq"
     if ! command -v jq &>/dev/null; then
         echo "jq not found. Please install: https://stedolan.github.io/jq/download/" >&2
         exit 1
     fi
 
+    echo "bq"
     # the 'bq show' command is called as a hack to dodge the config prompts that bq presents
     # the first time it is run. A newline is passed to stdin to skip the prompt for default project
     # when the service account in use has access to multiple projects.
@@ -116,6 +119,8 @@ function ensure_dependencies() {
         true
     fi
 
+    echo "gcloud config"
+    gcloud config list
 
     # right now most of this script assumes it's been run within the audit dir
     pushd "${AUDIT_DIR}" >/dev/null
@@ -168,12 +173,13 @@ function audit_gcp_organization() {
     )
 
     for role in "${roles[@]##*/}"; do
+        echo "role: ${role}"
         gcloud \
             iam roles describe "${role}" \
             --organization="${org_id}" \
             --format=json | format_gcloud_json \
         > "${org_dir}/roles/${role}.json"
-    done
+    done 2>&1 | indent
 }
 
 function audit_all_projects_with_parent_id() {
@@ -217,6 +223,7 @@ function audit_gcp_project() {
         --project="${project}" \
         --format="value(email)" \
     | while read -r SVCACCT; do
+        echo "serviceaccount: ${SVCACCT}"
         mkdir -p "${project_dir}/service-accounts/${SVCACCT}"
         gcloud \
             iam service-accounts describe "${SVCACCT}" \
@@ -333,7 +340,7 @@ function audit_gcp_project_service() {
                     --format=json | format_gcloud_json \
                     | jq -r '.[] | .datasetReference["datasetId"]' \
                     | while read -r DATASET; do
-                        echo "dataset: ${DATASET}"
+                        echo "dataset access: ${DATASET}"
                         bq \
                             show \
                             --project_id="${project}" \
@@ -518,6 +525,7 @@ function audit_gcp_project_service() {
                 --project="${project}" \
                 --format="value(name)" \
             | while read -r SECRET; do
+                echo "secret: ${SECRET}"
                 path="projects/${project}/secrets/${SECRET}"
                 mkdir -p "${path}"
                 gcloud \
@@ -626,6 +634,8 @@ function migrate_audit_format() {
         mapfile -t projects < <(echo projects/* | xargs basename)
     fi
 
+    echo "Migrating audit format for projects: ${projects[*]}"
+
     if [ -d org_kubernetes.io ]; then
         mkdir -p organizations/kubernetes.io
         git mv org_kubernetes.io/* organizations/kubernetes.io
@@ -709,6 +719,7 @@ EOF
 
 function main() {
     local projects=("$@")
+    echo "Ensuring dependencies"
     ensure_dependencies
 
     migrate_audit_format "${projects[@]}"
