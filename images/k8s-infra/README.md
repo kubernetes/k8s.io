@@ -43,7 +43,9 @@ export REPO=gcr.io/this IMAGE=is TAG=fine
 make build
 make run WHAT="hack/verify-boilerplate.sh"
 ```
+
 Example: use Google Cloud Build in `my-project` with staging bucket `gs://my-bucket` to build/push `gcr.io/my-repo/k8s-infra:v{date}-{sha}`:
+
 ```sh
 export PROJECT_ID=`my-project` GCB_BUCKET=`my-bucket` REPO=`gcr.io/my-repo`
 make cloudbuild
