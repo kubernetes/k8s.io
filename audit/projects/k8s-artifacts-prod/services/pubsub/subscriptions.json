@@ -1,0 +1,18 @@
+[
+  {
+    "ackDeadlineSeconds": 600,
+    "expirationPolicy": {},
+    "messageRetentionDuration": "604800s",
+    "name": "projects/k8s-artifacts-prod/subscriptions/cip-auditor-invoker",
+    "pushConfig": {
+      "attributes": {
+        "x-goog-version": "v1"
+      },
+      "oidcToken": {
+        "serviceAccountEmail": "k8s-infra-gcr-auditor-invoker@k8s-artifacts-prod.iam.gserviceaccount.com"
+      },
+      "pushEndpoint": "https://cip-auditor-ertsmqqccq-uc.a.run.app"
+    },
+    "topic": "projects/k8s-artifacts-prod/topics/gcr"
+  }
+]

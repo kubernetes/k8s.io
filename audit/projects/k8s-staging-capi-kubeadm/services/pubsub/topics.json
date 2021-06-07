@@ -1,0 +1,17 @@
+[
+  {
+    "name": "projects/k8s-staging-capi-kubeadm/topics/cloud-builds"
+  },
+  {
+    "name": "projects/k8s-staging-capi-kubeadm/topics/container-analysis-notes-v1"
+  },
+  {
+    "name": "projects/k8s-staging-capi-kubeadm/topics/container-analysis-occurrences-v1beta1"
+  },
+  {
+    "name": "projects/k8s-staging-capi-kubeadm/topics/container-analysis-notes-v1beta1"
+  },
+  {
+    "name": "projects/k8s-staging-capi-kubeadm/topics/container-analysis-occurrences-v1"
+  }
+]

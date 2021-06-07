@@ -60,6 +60,12 @@
     },
     {
       "members": [
+        "serviceAccount:gcb-builder-cluster-api-gcp@k8s-staging-cluster-api-gcp.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountUser"
+    },
+    {
+      "members": [
         "group:k8s-infra-staging-cluster-api-gcp@kubernetes.io"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"
