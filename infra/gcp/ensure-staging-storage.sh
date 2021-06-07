@@ -422,7 +422,8 @@ function staging_special_case__k8s_staging_cluster_api_gcp() {
 
     ensure_services "${STAGING_PROJECT}" compute.googleapis.com
     ensure_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/compute.instanceAdmin.v1"
-    ensure_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/iam.serviceAccountUser"
+    ensure_removed_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/iam.serviceAccountUser"
+    ensure_serviceaccount_role_binding "${serviceaccount}" "serviceAccount:${serviceaccount}" "roles/iam.serviceAccountUser"
     ensure_staging_gcb_builder_service_account "cluster-api-gcp" "k8s-infra-prow-build-trusted"
 }
 
