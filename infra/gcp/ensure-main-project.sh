@@ -87,6 +87,8 @@ readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
 readonly MAIN_PROJECT_SERVICES=(
     # billing data gets exported to bigquery
     bigquery.googleapis.com
+    # we use cloud asset inventory from this project to audit all projects
+    cloudasset.googleapis.com
     # GKE clusters are hosted in this project
     container.googleapis.com
     # DNS zones are managed in this project
