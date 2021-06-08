@@ -28,9 +28,11 @@ locals {
   cluster_location             = "us-central1"         // The GCP location (region or zone) where the cluster should be created
   bigquery_location            = "US"                  // The bigquery specific location where the dataset should be created
   pod_namespace                = "test-pods"           // MUST match whatever prow is configured to use when it schedules to this cluster
-  cluster_sa_name              = "prow-build-trusted"  // Name of the GSA and KSA that pods use by default
-  gcb_builder_sa_name          = "gcb-builder"         // Name of the GSA and KSA that pods use to be allowed to run GCB builds and push to GCS buckets
-  prow_deployer_sa_name        = "prow-deployer"       // Name of the GSA and KSA that pods use to be allowed to deploy to prow build clusters
+
+  // Service Accounts in ${pod_namespace} (usable via Workload Identity)
+  cluster_sa_name              = "prow-build-trusted"           // Pods use this by default
+  gcb_builder_sa_name          = "gcb-builder"                  // Allowed to run GCB builds and push to GCS buckets
+  prow_deployer_sa_name        = "prow-deployer"                // Allowed to deploy to prow build clusters
 }
 
 module "project" {
@@ -121,6 +123,42 @@ resource "google_project_iam_member" "prow_deployer_for_prow_build" {
   project = "k8s-infra-prow-build"
   role    = "roles/container.developer"
   member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
+}
+
+// Create GCP SA for kubernetes-external-secrets
+resource "google_service_account" "kubernetes_external_secrets_sa" {
+  project      = local.project_id
+  account_id   = "kubernetes-external-secrets"
+  display_name = "kubernetes-external-secrets"
+}
+// Allow kubernetes-external-secrets pods to use the GCP SA
+data "google_iam_policy" "kubernetes_external_secrets_sa_workload_identity" {
+  binding {
+    role = "roles/iam.workloadIdentityUser"
+
+    members = [
+      "serviceAccount:${local.project_id}.svc.id.goog[kubernetes-external-secrets/kubernetes-external-secrets]",
+    ]
+  }
+}
+// Authoritative iam-policy: replaces any existing policy attached to this service_account
+resource "google_service_account_iam_policy" "kubernetes_external_secrets_sa_iam" {
+  service_account_id = google_service_account.kubernetes_external_secrets_sa.name
+  policy_data        = data.google_iam_policy.kubernetes_external_secrets_sa_workload_identity.policy_data
+}
+resource "google_project_iam_member" "kubernetes_external_secrets_for_prow_build_trusted" {
+  project = local.project_id
+  role    = "roles/secretmanager.secretAccessor"
+  member  = "serviceAccount:${google_service_account.kubernetes_external_secrets_sa.email}"
+}
+
+
+resource "google_compute_address" "kubernetes_external_secrets_metrics_address" {
+  name         = "kubernetes-external-secrets-metrics"
+  description  = "to allow monitoring.k8s.prow.io to scrape kubernetes-external-secrets metrics"
+  project      = local.project_id
+  region       = local.cluster_location
+  address_type = "EXTERNAL"
 }
 
 module "prow_build_cluster" {
