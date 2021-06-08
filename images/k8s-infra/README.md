@@ -17,6 +17,7 @@ One goal is to use this image for all of of our CI jobs, and make it easy to run
 - tools:
   - `conftest`
   - `curl`
+  - `gcc`
   - `gcloud` (via `apt-get` for smaller size); components include:
     - `bq`
     - `gcloud alpha`
@@ -26,6 +27,7 @@ One goal is to use this image for all of of our CI jobs, and make it easy to run
   - `gh`
   - `jq`
   - `kubectl`
+  - `make`
   - `opa`
   - `pr-creator` (from kubernetes/test-infra)
   - `shellcheck`

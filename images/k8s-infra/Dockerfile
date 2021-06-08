@@ -33,7 +33,7 @@ ARG GO_VERSION=1.16.5
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
-ARG K8S_VERSION=1.19.11
+ARG K8S_VERSION=1.20.7
 ARG OPA_VERSION=0.28.0
 ARG SHELLCHECK_VERSION=0.7.2
 ARG TFSWITCH_VERSION=0.12.1092
@@ -57,8 +57,11 @@ RUN set -o errexit nounset pipefail \
         && apt-get update \
         && apt-get install -y --no-install-recommends \
             curl \
+            gcc \
             git \
             gnupg2 \
+            make \
+            libc6-dev \
             python3 \
             python3-pip \
             xz-utils \
