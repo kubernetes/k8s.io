@@ -57,8 +57,11 @@ RUN set -o errexit nounset pipefail \
         && apt-get update \
         && apt-get install -y --no-install-recommends \
             curl \
+            gcc \
             git \
             gnupg2 \
+            make \
+            libc6-dev \
             python3 \
             python3-pip \
             xz-utils \
