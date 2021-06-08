@@ -1,0 +1,20 @@
+# roles/container.developer++ (roles/container.admin - GKE cluster permissions)
+#
+# grants permissions to CRUD all kubernetes resources on a GKE cluster,
+# including potentially sensitive resources related to RBAC or webhooks
+title: Container Deployer
+description:
+name: container.deployer
+include:
+  roles:
+  - roles/container.admin
+exclude:
+  permissionRegexes:
+  # non-CRUD permissions for potentially sensitive kubernetes resources
+  - ^container\.certifiateSigningRequests\.(approve|getStatus)$
+  - ^container\.clusterRoles\.(bind|escalate)$
+  - ^container\.roles\.(bind|escalate)$
+  # GKE cluster permissions
+  - ^container\.clusters\.(create|delete|getCredentials|update)$
+  - ^container\.operations\.
+  - ^container\.hostServiceAgent\.

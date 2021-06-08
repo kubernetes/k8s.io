@@ -41,6 +41,7 @@ org_roles=(
     organization.admin
     CustomRole
     iam.serviceAccountLister
+    container.deployer
 )
 
 removed_org_roles=()
