@@ -1,4 +1,5 @@
 [
   "projects/k8s-staging-cluster-api-nested/logs/cloudaudit.googleapis.com%2Factivity",
-  "projects/k8s-staging-cluster-api-nested/logs/cloudaudit.googleapis.com%2Fsystem_event"
+  "projects/k8s-staging-cluster-api-nested/logs/cloudaudit.googleapis.com%2Fsystem_event",
+  "projects/k8s-staging-cluster-api-nested/logs/cloudbuild"
 ]
