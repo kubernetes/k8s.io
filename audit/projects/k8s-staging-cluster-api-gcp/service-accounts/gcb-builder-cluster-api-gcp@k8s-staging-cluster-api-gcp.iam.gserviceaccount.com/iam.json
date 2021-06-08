@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:gcb-builder-cluster-api-gcp@k8s-staging-cluster-api-gcp.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountUser"
+    },
+    {
+      "members": [
         "serviceAccount:k8s-infra-prow-build-trusted.svc.id.goog[test-pods/gcb-builder-cluster-api-gcp]"
       ],
       "role": "roles/iam.workloadIdentityUser"

@@ -32,7 +32,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-cluster-admins@kubernetes.io"
+        "group:k8s-infra-cluster-admins@kubernetes.io",
+        "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/container.admin"
     },
@@ -86,6 +87,12 @@
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"
+    },
+    {
+      "members": [
+        "serviceAccount:kubernetes-external-secrets@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/secretmanager.secretAccessor"
     }
   ],
   "version": 1

@@ -1,0 +1,8 @@
+{
+  "displayName": "kubernetes-external-secrets",
+  "email": "kubernetes-external-secrets@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/kubernetes-external-secrets@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "oauth2ClientId": "100845667979825510580",
+  "projectId": "k8s-infra-prow-build-trusted",
+  "uniqueId": "100845667979825510580"
+}
