@@ -37,5 +37,14 @@
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:riaan_data_store",
+    "datasetReference": {
+      "datasetId": "riaan_data_store",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
   }
 ]

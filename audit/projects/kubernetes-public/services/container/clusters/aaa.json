@@ -13,6 +13,7 @@
   },
   "autoscaling": {
     "autoprovisioningNodePoolDefaults": {
+      "imageType": "COS",
       "oauthScopes": [
         "https://www.googleapis.com/auth/logging.write",
         "https://www.googleapis.com/auth/monitoring"

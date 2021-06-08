@@ -1,6 +1,7 @@
 NAME                                 TITLE
 bigquery.googleapis.com              BigQuery API
 bigquerystorage.googleapis.com       BigQuery Storage API
+cloudasset.googleapis.com            Cloud Asset API
 clouderrorreporting.googleapis.com   Error Reporting API
 cloudfunctions.googleapis.com        Cloud Functions API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
