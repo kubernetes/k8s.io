@@ -34,7 +34,7 @@ spec:
             - name: PERSIST_BACKEND
               value: "disk"
             - name: PERSIST_PATH
-              value: "/app/triage-party/cache"
+              value: "/app/triage-party/"
           ports:
             - containerPort: 8080
           readinessProbe:
