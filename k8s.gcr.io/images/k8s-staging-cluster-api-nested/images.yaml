@@ -1,1 +1,6 @@
-# No images yet
+- name: cluster-api-nested-controller
+  dmap:
+    "sha256:82347cfd6fb3d55b6d21e36aaa4962e3b9a3eab5cf264d72139f19904d4fd47c": ["v0.1.0"]
+- name: nested-controlplane-controller
+  dmap:
+    "sha256:1a4107fa91f8942381878fda08863a7233c0e7a8df7fadb34838e7bb24f147ea": ["v0.1.0"]
