@@ -5,3 +5,12 @@ redirectsTo:
   artifacts: kubernetes.s3.amazon.com
 asns:
   - 16509
+  - 7224
+  - 10124
+  - 14618
+  - 16509
+  - 17493
+  - 38895
+  - 58588
+  - 62785
+  - 135630
