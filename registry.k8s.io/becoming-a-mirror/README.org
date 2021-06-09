@@ -1,0 +1,74 @@
+#+TITLE: Becoming a mirror
+
+* Requirements
+- at least 1TB of storage (TODO@BobyMCbobs: determine storage requirements)
+- the container registry must be publically pull-able without any credentials
+- the container registry implementation must be OCI compliant
+- one read-only pull account with known basic htpasswd credentials for private pull
+- one read-write pull and push account with private basic htpasswd credientials for image distribution
+- tests must pass
+- no vendor branding on pages related to the mirroring
+
+* Adding your mirror
+1. set up your mirror (registry, artifacts)
+2. create a PR in /kubernetes/k8s.io/registry.k8s.io/infra/meta/asns/ with:
+  - your ASNs (/asns/)
+  - your human recognisable vendor name (/name/)
+  - domain where registry and artifacts will be redirected to (/redirectsTo/)
+  - at least two email contacts (/contacts/)
+  - read-only private credentials (/readOnlyPrivateCredentials/)
+3. allow time for testing
+
+#+begin_notes
+- currently there are no /contacts/, /readOnlyPrivateCredentials/ fields in the ASN yamls
+#+end_notes
+
+* Validation
+Run the test script against your registry and artifact domains.
+The script will:
+- perform a /docker pull/ for a container image
+- run a cURL against a file in artifacts
+
+#+begin_notes
+- doing a pull won't work immediately, without images already existing in the container registry
+#+end_notes
+
+* Diagram :noexport:
+#+begin_src dot :file registry-k8s-io-becoming-mirror-diagram.svg :results silent
+digraph "becoming a mirror" {
+    label="registry.k8s.io becoming a mirror diagram"
+    labelloc="t"
+    graph [compound=true]
+
+    CheckRequirements [label="Check requirements"]
+    MakeAPR [label="Make a PR"]
+    ArtifactHostingAcceptance [label="Artifact hosting accepted"]
+
+    subgraph AddingYourMirror {
+        label="Adding your mirror"
+        color=blue
+        SetupRegistry [label="Set up an OCI compliant container registry"]
+        SetupBucket [label="Set up a bucket with public ingress URI"]
+
+        SetupRegistry -> MakeAPR
+        SetupBucket -> MakeAPR
+    }
+    subgraph Validation {
+        label="Validation"
+        color=blue
+        RunTests [label="Run tests"]
+    }
+
+    CheckRequirements -> SetupRegistry
+    CheckRequirements -> SetupBucket
+    MakeAPR -> RunTests [label="by human or ProwJob"]
+    RunTests -> ArtifactHostingAcceptance [label="if tests pass"]
+}
+#+end_src
+
+#+begin_src shell :results silent :dir .
+cp registry-k8s-io-becoming-mirror-diagram.svg $HOME/public_html/
+#+end_src
+
+* Process
+[[./registry-k8s-io-becoming-mirror-diagram.svg]]
