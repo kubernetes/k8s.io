@@ -1,6 +1,15 @@
 [
   {
     "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_staging",
+    "datasetReference": {
+      "datasetId": "etl_staging",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
     "id": "k8s-infra-ii-sandbox:hh",
     "datasetReference": {
       "datasetId": "hh",
