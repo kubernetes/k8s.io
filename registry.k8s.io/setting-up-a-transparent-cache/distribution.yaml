@@ -1,0 +1,118 @@
+
+
+# Define the deployment
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: distribution
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: distribution-data
+  namespace: distribution
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: distribution
+  namespace: distribution
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: distribution
+  template:
+    metadata:
+      labels:
+        app: distribution
+    spec:
+      containers:
+      - name: distribution
+        image: registry:2.7.1
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 10m
+            memory: 30Mi
+          requests:
+            cpu: 10m
+            memory: 30Mi
+        ports:
+          - containerPort: 5000
+        env:
+          - name: TZ
+            value: "Pacific/Auckland"
+        volumeMounts:
+          - name: distribution-data
+            mountPath: /var/lib/registry
+          - name: distribution-config
+            mountPath: /etc/docker/registry/config.yml
+            subPath: config.yml
+          - name: distribution-auth
+            mountPath: /etc/docker/registry/htpasswd
+            subPath: htpasswd
+        readinessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 2
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 1
+          periodSeconds: 20
+      volumes:
+        - name: distribution-data
+          persistentVolumeClaim:
+            claimName: distribution-data
+        - name: distribution-config
+          configMap:
+            name: distribution-config
+        - name: distribution-auth
+          secret:
+            secretName: distribution-auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: distribution
+  namespace: distribution
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app: distribution
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: distribution
+  namespace: distribution
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  tls:
+    - hosts:
+      - my-registry.mirror.host
+      secretName: letsencrypt-prod
+  rules:
+  - host: my-registry.mirror.host
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: distribution
+            port:
+              number: 5000

@@ -1,0 +1,238 @@
+#+TITLE: Setting up a transparent cache
+
+Hosting your own copies of Kubernetes images is a sustainable way to give back to the Kubernetes community.
+By setting up a transparent proxy cache, images will be pulled from you closer OCI compatible cache and then from /k8s.gcr.io/.
+
+* Deploying a proxy cache
+Here are two OCI compatible container registries that you can bring up to host container images.
+
+** Distribution
+Define the config
+#+begin_src yaml :tangle ./config.yml
+version: 0.1
+log:
+  accesslog:
+    disabled: true
+  level: debug
+  fields:
+    service: registry
+    environment: development
+auth:
+  htpasswd:
+    realm: basic-realm
+    path: /etc/docker/registry/htpasswd
+storage:
+  delete:
+    enabled: true
+  filesystem:
+    rootdirectory: /var/lib/registry
+  maintenance:
+    uploadpurging:
+      enabled: false
+http:
+  addr: :5000
+  secret: registry-k8s-io-registry-k8s-io
+  debug:
+    addr: :5001
+    prometheus:
+      enabled: true
+      path: /metrics
+    headers:
+      X-Content-Type-Options: [nosniff]
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
+proxy:
+  remoteurl: https://k8s.gcr.io
+#+end_src
+
+*** Deploy with Docker
+#+begin_src shell
+USERNAME=distribution
+PASSWORD=Distritest1234!
+htpasswd -Bbn $USERNAME $PASSWORD > /tmp/htpasswd
+#+end_src
+
+#+begin_src shell :results silent
+docker run -d \
+    -p 5000:5000 \
+    -v /tmp/htpasswd:/etc/docker/registry/htpasswd \
+    -v /tmp/config.yml:/etc/docker/registry/config.yml \
+    --restart always \
+    --name registry-proxy-cache \
+    registry:2.7.1
+#+end_src
+
+#+begin_src shell :results silent
+docker rm -f registry-proxy-cache
+#+end_src
+
+*** Deploy with Kubernetes
+
+Create the namespace
+#+begin_src shell
+kubectl create ns distribution
+#+end_src
+
+Create the config
+#+begin_src shell
+kubectl -n distribution create configmap distribution-config --from-file=config\.yml=distribution-config.yaml --dry-run=client -o yaml | kubectl apply -f -
+#+end_src
+
+Create the auth secret
+#+begin_src shell
+USERNAME=distribution
+PASSWORD=Distritest1234!
+kubectl -n distribution create secret generic distribution-auth --from-literal=htpasswd="$(htpasswd -Bbn $USERNAME $PASSWORD)"
+#+end_src
+
+Define the deployment
+#+begin_src yaml :tangle ./distribution.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: distribution
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: distribution-data
+  namespace: distribution
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: distribution
+  namespace: distribution
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: distribution
+  template:
+    metadata:
+      labels:
+        app: distribution
+    spec:
+      containers:
+      - name: distribution
+        image: registry:2.7.1
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 10m
+            memory: 30Mi
+          requests:
+            cpu: 10m
+            memory: 30Mi
+        ports:
+          - containerPort: 5000
+        env:
+          - name: TZ
+            value: "Pacific/Auckland"
+        volumeMounts:
+          - name: distribution-data
+            mountPath: /var/lib/registry
+          - name: distribution-config
+            mountPath: /etc/docker/registry/config.yml
+            subPath: config.yml
+          - name: distribution-auth
+            mountPath: /etc/docker/registry/htpasswd
+            subPath: htpasswd
+        readinessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 2
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 1
+          periodSeconds: 20
+      volumes:
+        - name: distribution-data
+          persistentVolumeClaim:
+            claimName: distribution-data
+        - name: distribution-config
+          configMap:
+            name: distribution-config
+        - name: distribution-auth
+          secret:
+            secretName: distribution-auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: distribution
+  namespace: distribution
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app: distribution
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: distribution
+  namespace: distribution
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  tls:
+    - hosts:
+      - my-registry.mirror.host
+      secretName: letsencrypt-prod
+  rules:
+  - host: my-registry.mirror.host
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: distribution
+            port:
+              number: 5000
+#+end_src
+
+Install distribution
+#+begin_src shell
+kubectl apply -f distribution.yaml
+#+end_src
+
+** Harbor
+*** Deploy with the installer
+https://goharbor.io/docs/2.2.0/install-config/download-installer/
+*** Deploy with Helm in Kubernetes
+https://goharbor.io/docs/2.2.0/install-config/harbor-ha-helm/
+
+* Deploy
+** Kubeadm
+#+begin_src shell
+kubeadm init --image-repository="my-registry.mirror.host"
+#+end_src
+
+** Kops
+https://kops.sigs.k8s.io/cluster_spec/#registry-mirrors
+https://kops.sigs.k8s.io/cluster_spec/#containerproxy
+#+begin_src yaml
+spec:
+  assets:
+    containerProxy: my-registry.mirror.host
+#+end_src
+
+** ClusterAPI
+Requires v1alpha4
+https://github.com/kubernetes-sigs/cluster-api/blob/af33e43/bootstrap/kubeadm/api/v1alpha4/kubeadm_types.go#L115-L120
+
