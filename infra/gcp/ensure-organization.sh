@@ -34,13 +34,14 @@ if [ $# != 0 ]; then
     exit 1
 fi
 
-org_roles=(
-    prow.viewer
-    audit.viewer
-    secretmanager.secretLister
-    organization.admin
+readonly org_roles=(
     CustomRole
+    audit.viewer
+    container.deployer
     iam.serviceAccountLister
+    organization.admin
+    prow.viewer
+    secretmanager.secretLister
 )
 
 removed_org_roles=()
