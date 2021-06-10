@@ -35,6 +35,10 @@ locals {
   prow_deployer_sa_name        = "prow-deployer"                // Allowed to deploy to prow build clusters
 }
 
+data "google_organization" "org" {
+  domain = "kubernetes.io"
+}
+
 module "project" {
   source = "../../../modules/gke-project"
   project_id            = local.project_id
@@ -116,12 +120,12 @@ resource "google_service_account_iam_policy" "prow_deployer_sa_iam" {
 
 resource "google_project_iam_member" "prow_deployer_for_prow_build_trusted" {
   project = local.project_id
-  role    = "roles/container.developer"
+  role    = "${data.google_organization.org.name}/roles/container.deployer"
   member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
 }
 resource "google_project_iam_member" "prow_deployer_for_prow_build" {
   project = "k8s-infra-prow-build"
-  role    = "roles/container.developer"
+  role    = "${data.google_organization.org.name}/roles/container.deployer"
   member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
 }
 
