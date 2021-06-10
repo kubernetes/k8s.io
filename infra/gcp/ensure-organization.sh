@@ -69,7 +69,7 @@ org_role_bindings=(
 
   # empower k8s-infra-gcp-auditors@ and equivalent service-account
   "group:k8s-infra-gcp-auditors@kubernetes.io:$(custom_org_role_name "audit.viewer")"
-  "serviceAccount:$(svc_acct_email "kubernetes-public" "k8s-infra-gcp-auditor"):$(custom_org_role_name "audit.viewer")"
+  "serviceAccount:$(svc_acct_email "$(k8s_infra_project "public" "kubernetes-public")" "k8s-infra-gcp-auditor"):$(custom_org_role_name "audit.viewer")"
 )
 
 removed_org_role_bindings=()

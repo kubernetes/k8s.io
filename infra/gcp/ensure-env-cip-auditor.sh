@@ -168,4 +168,4 @@ function ensure_cip_auditor_env() {
 }
 
 # We want to run in the artifacts project to get pubsub most easily.
-ensure_cip_auditor_env "k8s-artifacts-prod"
+ensure_cip_auditor_env "$(k8s_infra_project "prod" "k8s-artifacts-prod")"

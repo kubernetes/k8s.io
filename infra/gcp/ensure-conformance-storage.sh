@@ -41,9 +41,10 @@ function usage() {
     echo > /dev/stderr
 }
 
-PROJECT="k8s-conform"
+PROJECT=$(k8s_infra_project "public" "k8s-conform")
+readonly PROJECT
 
-CONFORMANCE_SERVICES=(
+readonly CONFORMANCE_SERVICES=(
     # secretmanager to host service-account keys
     secretmanager.googleapis.com
     # storage-api to store results in GCS via JSON API
@@ -56,7 +57,7 @@ readonly CONFORMANCE_RETENTION="10y"
 
 # "Offering" comes from https://github.com/cncf/k8s-conformance/blob/master/terms-conditions/Certified_Kubernetes_Terms.md
 # NB: Please keep this sorted.
-CONFORMANCE_OFFERINGS=(
+readonly CONFORMANCE_OFFERINGS=(
     cri-o
     huaweicloud
     inspur

@@ -35,7 +35,7 @@ if [ $# != 0 ]; then
 fi
 
 # The GCP project name.
-PROJECT="k8s-gsuite"
+PROJECT=$(k8s_infra_project "public" "k8s-gsuite")
 
 # The service account name in $PROJECT.
 GSUITE_SVCACCT="gsuite-groups-manager"

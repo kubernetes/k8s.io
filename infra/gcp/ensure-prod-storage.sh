@@ -39,36 +39,28 @@ fi
 #
 
 # This is the "real" prod project for artifacts serving and backups.
-PROD_PROJECT="k8s-artifacts-prod"
-PRODBAK_PROJECT="${PROD_PROJECT}-bak"
+PROD_PROJECT=$(k8s_infra_project "prod" "k8s-artifacts-prod")
+PRODBAK_PROJECT=$(k8s_infra_project "prod" "${PROD_PROJECT}-bak")
 
 # These are for testing the image promoter's promotion process.
-PROMOTER_TEST_PROD_PROJECT="k8s-cip-test-prod"
-PROMOTER_TEST_STAGING_PROJECT="k8s-staging-cip-test"
+PROMOTER_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-cip-test-prod")
+PROMOTER_TEST_STAGING_PROJECT=$(k8s_infra_project "staging" "k8s-staging-cip-test")
 
 # These are for testing the GCR backup/restore process.
-GCR_BACKUP_TEST_PROD_PROJECT="k8s-gcr-backup-test-prod"
-GCR_BACKUP_TEST_PRODBAK_PROJECT="${GCR_BACKUP_TEST_PROD_PROJECT}-bak"
+GCR_BACKUP_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-gcr-backup-test-prod")
+GCR_BACKUP_TEST_PRODBAK_PROJECT=$(k8s_infra_project "prod" "${GCR_BACKUP_TEST_PROD_PROJECT}-bak")
 
 # This is for testing the GCR auditing mechanism.
-GCR_AUDIT_TEST_PROD_PROJECT="k8s-gcr-audit-test-prod"
+GCR_AUDIT_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-gcr-audit-test-prod")
 
 # This is for testing the release tools.
-RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
+RELEASE_TESTPROD_PROJECT=$(k8s_infra_project "prod" "k8s-release-test-prod")
 RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
 # This is a list of all prod projects.  Each project will be configured
 # similarly, with a GCR repository and a GCS bucket of the same name.
-#
-ALL_PROD_PROJECTS=(
-    "${PROD_PROJECT}"
-    "${PRODBAK_PROJECT}"
-    "${PROMOTER_TEST_PROD_PROJECT}"
-    "${GCR_BACKUP_TEST_PROD_PROJECT}"
-    "${GCR_BACKUP_TEST_PRODBAK_PROJECT}"
-    "${GCR_AUDIT_TEST_PROD_PROJECT}"
-    "${RELEASE_TESTPROD_PROJECT}"
-)
+mapfile -t ALL_PROD_PROJECTS < <(k8s_infra_projects "prod")
+readonly ALL_PROD_PROJECTS
 
 # This is a list of all prod GCS buckets, but only their trailing "name".  Each
 # name will get a GCS bucket called "k8s-artifacts-${name}", and write access
@@ -106,7 +98,7 @@ PROD_RETENTION="10y"
 #
 # $1: The GCP project name (GCR names == project names)
 function ensure_prod_gcr() {
-    if [ $# -ne 1 -o -z "$1" ]; then
+    if [ $# != 1 ] || [ -z "$1" ]; then
         echo "ensure_prod_gcr(project) requires 1 argument" >&2
         return 1
     fi

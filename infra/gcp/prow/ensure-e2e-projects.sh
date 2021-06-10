@@ -32,56 +32,20 @@ function usage() {
     echo > /dev/stderr
 }
 
+## projects hosting prow build clusters managed by wg-k8s-infra
+
+BUILD_CLUSTER_PROJECT=$(k8s_infra_project "prow" "k8s-infra-prow-build")
+TRUSTED_BUILD_CLUSTER_PROJECT=$(k8s_infra_project "prow" "k8s-infra-prow-build-trusted")
+
 ## setup service accounts and ips for the prow build cluster
 
-PROW_BUILD_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "prow-build")
-BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "k8s-infra-prow-build" "boskos-janitor")
+PROW_BUILD_SVCACCT=$(svc_acct_email "${BUILD_CLUSTER_PROJECT}" "prow-build")
+BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "${BUILD_CLUSTER_PROJECT}" "boskos-janitor")
 
 ## setup projects to be used by e2e tests for standing up clusters
 
-readonly E2E_MANUAL_PROJECTS=(
-    # for manual use during node-e2e job migration, eg: --gcp-project=gce-project
-    k8s-infra-e2e-gce-project
-    # for manual use during job migration, eg: --gcp-project=node-e2e-project
-    k8s-infra-e2e-node-e2e-project
-    # for manual use during job migration, eg: --gcp-project=scale-project
-    k8s-infra-e2e-scale-project
-    # for manual use during job migration, eg: --gcp-project=gpu-project
-    k8s-infra-e2e-gpu-project
-    # for manual use during job migration, eg: --gcp-project=ingress-project
-    k8s-infra-e2e-ingress-project
-)
-
-# general purpose e2e projects, no quota changes
-E2E_BOSKOS_PROJECTS=()
-for i in $(seq 1 120); do
-    E2E_BOSKOS_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-%03i" "$i")")
-done
-readonly E2E_BOSKOS_PROJECTS
-
-# e2e projects for scalability jobs
-# - us-east1 cpu quota raised to 125
-# - us-east1 in-use addresses quota raised to 125
-E2E_SCALE_PROJECTS=()
-for i in $(seq 1 30); do
-    E2E_SCALE_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-scale-%02i" "$i")")
-done
-readonly E2E_SCALE_PROJECTS
-
-# e2e projects for gpu jobs
-# - us-west1 Committed NVIDIA K80 GPUs raised to 2
-E2E_GPU_PROJECTS=()
-for i in $(seq 1 10); do
-    E2E_GPU_PROJECTS+=("$(printf "k8s-infra-e2e-boskos-gpu-%02i" "$i")")
-done
-readonly E2E_GPU_PROJECTS
-
-readonly E2E_PROJECTS=(
-  "${E2E_MANUAL_PROJECTS[@]}"
-  "${E2E_BOSKOS_PROJECTS[@]}"
-  "${E2E_SCALE_PROJECTS[@]}"
-  "${E2E_GPU_PROJECTS[@]}"
-)
+mapfile -t E2E_PROJECTS < <(k8s_infra_projects "e2e")
+readonly E2E_PROJECTS
 
 # prow build cluster services that expose metrics endpoints to be scraped
 # by monitoring.prow.k8s.io; they each get a regional address
@@ -182,7 +146,7 @@ function ensure_e2e_project() {
 
 # TODO: this should be moved to the terraform responsible for k8s-infra-prow-build
 function ensure_prow_build_cluster_metrics_endpoints() {
-    local project="k8s-infra-prow-build"
+    local project="${BUILD_CLUSTER_PROJECT}"
     local region="us-central1"
     for service in "${PROW_BUILD_CLUSTER_METRICS_SERVICES[@]}"; do
         color 6 "Ensuring monitoring.prow.k8s.io can scrape ${service} for: ${project}"
@@ -197,7 +161,7 @@ function ensure_prow_build_cluster_metrics_endpoints() {
 
 # TODO: this should be moved to the terraform responsible for k8s-infra-prow-build-trusted
 function ensure_trusted_prow_build_cluster_secrets() {
-    local project="k8s-infra-prow-build-trusted"
+    local project="${TRUSTED_BUILD_CLUSTER_PROJECT}"
     local secret_specs=(
         cncf-ci-github-token/sig-testing/k8s-infra-ii-coop@kubernetes.io
         snyk-token/sig-architecture/k8s-infra-code-organization@kubernetes.io
