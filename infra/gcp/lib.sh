@@ -36,6 +36,8 @@ trap 'cleanup_tmpdir' EXIT
 # order matters here
 # - utils are used by everthing
 . "$(dirname "${BASH_SOURCE[0]}")/lib_util.sh"
+# - declarations in infra.yaml should be available as early as possible
+. "$(dirname "${BASH_SOURCE[0]}")/lib_infra.sh"
 # - iam is used by almost everything
 . "$(dirname "${BASH_SOURCE[0]}")/lib_iam.sh"
 # - gcs is used by gcr
@@ -104,7 +106,7 @@ readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
     # TODO(spiffxp): remove support for this where possible
     "k8s-prow-builds"
     # The kubernetes.io build cluster
-    "k8s-infra-prow-build"
+    "$(k8s_infra_project "prow" "k8s-infra-prow-build")"
 )
 
 # Projects hosting prow build clusters that run trusted code, such as periodics
@@ -114,7 +116,7 @@ readonly PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
     # TODO(spiffxp): remove support for this where possible
     "k8s-prow"
     # The kubernetes.io build cluster
-    "k8s-infra-prow-build-trusted"
+    "$(k8s_infra_project "prow" "k8s-infra-prow-build-trusted")"
 )
 
 # The namespace prowjobs run in; at present things are configured to use the
