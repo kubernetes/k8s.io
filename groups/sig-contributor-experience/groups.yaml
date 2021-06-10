@@ -23,3 +23,20 @@ groups:
       - jberkus@redhat.com
       - chris@chrisshort.net
       - samudralavamshi@gmail.com
+  - email-id: stream-team@kubernetes.io
+    name: stream-team
+    description: |-
+      Team with access to streamyard and YouTube.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MembersCanPostAsTheGroup: "true"
+      ReconcileMembers: "true"
+    owners:
+      - alison@alisondowdney.com
+      - killen.bob@gmail.com
+      - paris.pittman@gmail.com
+    members:
+      - jberkus@redhat.com
+      - chris@chrisshort.net
+      - dpapandrea@gmail.com
+      - david.andrew.mckay@gmail.com
