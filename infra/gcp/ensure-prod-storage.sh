@@ -25,14 +25,12 @@ SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
 function usage() {
-    echo "usage: $0" > /dev/stderr
+    echo "usage: $0 [project...]" > /dev/stderr
+    echo "example:" > /dev/stderr
+    echo "  $0 # do all projects" > /dev/stderr
+    echo "  $0 k8s-artifacts-prod # just do one" > /dev/stderr
     echo > /dev/stderr
 }
-
-if [ $# != 0 ]; then
-    usage
-    exit 1
-fi
 
 #
 # The GCP project names.
@@ -184,7 +182,14 @@ function empower_group_to_fake_prod() {
 
 # Create all prod artifact projects.
 function ensure_all_prod_projects() {
-    for prj in "${ALL_PROD_PROJECTS[@]}"; do
+    if [ $# = 0 ]; then
+        set -- "${ALL_PROD_PROJECTS[@]}"
+    fi
+    for prj in "${@}"; do
+        if ! k8s_infra_project "prod" "${prj}" >/dev/null; then
+            color 1 "Skipping unrecognized prod project name: ${prj}"
+            continue
+        fi
         color 6 "Ensuring project exists: ${prj}"
         ensure_project "${prj}"
 
@@ -378,7 +383,7 @@ function ensure_all_prod_special_cases() {
 
 function main() {
     color 6 "Ensuring all prod projects"
-    ensure_all_prod_projects 2>&1 | indent
+    ensure_all_prod_projects "${@}" 2>&1 | indent
 
     color 6 "Ensuring all prod buckets"
     ensure_all_prod_buckets 2>&1 | indent
@@ -389,4 +394,4 @@ function main() {
     color 6 "Done"
 }
 
-main
+main "${@}"
