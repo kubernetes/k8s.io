@@ -50,8 +50,9 @@ function deploy_cluster_resources() {
 }
 
 function main() {
-  # TODO: deploy_cluster_terraform
-  deploy_cluster_resources
+    # TODO: deploy_cluster_terraform
+    echo "deploying resources to cluster ${cluster} in project ${project} and region ${region}"
+    deploy_cluster_resources
 }
 
 main
