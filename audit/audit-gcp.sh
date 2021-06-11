@@ -38,6 +38,7 @@ set -o pipefail
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 readonly REPO_ROOT
+. "${REPO_ROOT}/infra/gcp/lib.sh"
 
 #
 # config
@@ -56,60 +57,12 @@ IFS=', ' read -r -a AUDIT_SERVICES <<< "${K8S_INFRA_AUDIT_SERVICES:-""}"
 readonly AUDIT_SERVICES
 
 #
-# utils (copied from infra/gcp/lib*.sh)
-#
-
-# TODO: Including this automatically calls verify_prereqs, which looks for yq,
-#       which is not present in gcr.io/k8s-staging-releng/releng-ci:latest, the
-#       image used to run this script at present. Update to use an image that
-#       does have it installed, or at least pip3. In the meantime, copy-paste
-#       the indent function.
-# . "${REPO_ROOT}/infra/gcp/lib.sh"
-
-# ensure_gnu_sed
-# Determines which sed binary is gnu-sed on linux/darwin
-#
-# Sets:
-#  SED: The name of the gnu-sed binary
-#
-function ensure_gnu_sed() {
-    sed_help="$(LANG=C sed --help 2>&1 || true)"
-    if echo "${sed_help}" | grep -q "GNU\|BusyBox"; then
-        SED="sed"
-    elif command -v gsed &>/dev/null; then
-        SED="gsed"
-    else
-        >&2 echo "Failed to find GNU sed as sed or gsed. If you are on Mac: brew install gnu-sed"
-        return 1
-    fi
-    export SED
-}
-
-# Indent each line of stdin.
-# example: <command> 2>&1 | indent
-function indent() {
-    ${SED} -u 's/^/  /'
-}
-
-#
 # utils
 #
 
 # TODO: this should delegate to verify_prereqs from infra/gcp/lib_util.sh once
 #       we can guarantee this runs in an image with `yq` and/or pip3 installed
-function ensure_dependencies() {
-    echo "gnu sed"
-    # indent relies on sed -u which isn't available in macOS's sed
-    if ! ensure_gnu_sed; then
-        exit 1
-    fi
-
-    echo "jq"
-    if ! command -v jq &>/dev/null; then
-        echo "jq not found. Please install: https://stedolan.github.io/jq/download/" >&2
-        exit 1
-    fi
-
+function ensure_audit_dependencies() {
     echo "bq"
     # the 'bq show' command is called as a hack to dodge the config prompts that bq presents
     # the first time it is run. A newline is passed to stdin to skip the prompt for default project
@@ -720,7 +673,7 @@ EOF
 function main() {
     local projects=("$@")
     echo "Ensuring dependencies"
-    ensure_dependencies
+    ensure_audit_dependencies
 
     migrate_audit_format "${projects[@]}"
 
