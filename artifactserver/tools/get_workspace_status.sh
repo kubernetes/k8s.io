@@ -27,7 +27,7 @@ if [[ -z "${DOCKER_REGISTRY}" ]]; then
   DOCKER_REGISTRY="gcr.io"
 fi
 if [[ -z "${DOCKER_IMAGE_PREFIX}" ]]; then
-  DOCKER_IMAGE_PREFIX=`gcloud config get-value project`/
+  DOCKER_IMAGE_PREFIX=$(gcloud config get-value project)/
 fi
 if [[ -z "${DOCKER_TAG}" ]]; then
   DOCKER_TAG="latest"
@@ -36,6 +36,6 @@ echo "STABLE_DOCKER_REGISTRY ${DOCKER_REGISTRY}"
 echo "STABLE_DOCKER_IMAGE_PREFIX ${DOCKER_IMAGE_PREFIX}"
 echo "STABLE_DOCKER_TAG ${DOCKER_TAG}"
 if [[ -z "${K8S_CLUSTER}" ]]; then
-  K8S_CLUSTER=`kubectl config current-context`
+  K8S_CLUSTER=$(kubectl config current-context)
 fi
 echo "STABLE_K8S_CLUSTER ${K8S_CLUSTER}"
