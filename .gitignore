@@ -1,2 +1,3 @@
 # Verify scripts may leave programs in this directory
 bin/
+tmp/
