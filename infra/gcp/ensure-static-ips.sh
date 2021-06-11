@@ -24,7 +24,7 @@ set -o pipefail
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
-PROJECT_NAME="kubernetes-public"
+PROJECT_NAME=$(k8s_infra_project "public" "kubernetes-public")
 
 function usage() {
     echo "usage: $0" > /dev/stderr

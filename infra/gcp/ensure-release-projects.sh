@@ -32,11 +32,8 @@ function usage() {
     echo > /dev/stderr
 }
 
-# NB: Please keep this sorted.
-PROJECTS=(
-    k8s-release
-    k8s-release-test-prod
-)
+mapfile -t PROJECTS < <(k8s_infra_projects "release")
+readonly PROJECTS
 
 if [ $# = 0 ]; then
     # default to all release projects
@@ -53,8 +50,8 @@ readonly RELEASE_PROJECT_SERVICES=(
 
 for PROJECT; do
 
-    if ! (printf '%s\n' "${PROJECTS[@]}" | grep -q "^${PROJECT}$"); then
-        color 2 "Skipping unrecognized release project name: ${PROJECT}"
+    if ! k8s_infra_project "release" "${PROJECT}" >/dev/null; then
+        color 1 "Skipping unrecognized release project name: ${PROJECT}"
         continue
     fi
 

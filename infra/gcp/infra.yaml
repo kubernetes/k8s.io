@@ -1,0 +1,321 @@
+# Copyright 2021 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# List of all projects currently managed by wg-k8s-infra broken up into
+# the following schema:
+#
+# infra:
+#   {project_type}: # ideally this ~= folder
+#     [managed_by:] # default script/file used to manage projects
+#     projects:
+#       {project_id}:
+#         [managed_by:] overrides default; script used to manage _this_ project
+#
+# TODO:
+# - these project don't actually live in folders yet; consider this a proposal
+# - validate the schema
+# - validate audit results against this
+# - consider breaking up into multiple files vs. one large file
+infra:
+  e2e:
+    managed_by: infra/gcp/prow/ensure-e2e-projects.sh
+    projects:
+      # general purpose e2e projects, no quota changes
+      k8s-infra-e2e-boskos-001:
+      k8s-infra-e2e-boskos-002:
+      k8s-infra-e2e-boskos-003:
+      k8s-infra-e2e-boskos-004:
+      k8s-infra-e2e-boskos-005:
+      k8s-infra-e2e-boskos-006:
+      k8s-infra-e2e-boskos-007:
+      k8s-infra-e2e-boskos-008:
+      k8s-infra-e2e-boskos-009:
+      k8s-infra-e2e-boskos-010:
+      k8s-infra-e2e-boskos-011:
+      k8s-infra-e2e-boskos-012:
+      k8s-infra-e2e-boskos-013:
+      k8s-infra-e2e-boskos-014:
+      k8s-infra-e2e-boskos-015:
+      k8s-infra-e2e-boskos-016:
+      k8s-infra-e2e-boskos-017:
+      k8s-infra-e2e-boskos-018:
+      k8s-infra-e2e-boskos-019:
+      k8s-infra-e2e-boskos-020:
+      k8s-infra-e2e-boskos-021:
+      k8s-infra-e2e-boskos-022:
+      k8s-infra-e2e-boskos-023:
+      k8s-infra-e2e-boskos-024:
+      k8s-infra-e2e-boskos-025:
+      k8s-infra-e2e-boskos-026:
+      k8s-infra-e2e-boskos-027:
+      k8s-infra-e2e-boskos-028:
+      k8s-infra-e2e-boskos-029:
+      k8s-infra-e2e-boskos-030:
+      k8s-infra-e2e-boskos-031:
+      k8s-infra-e2e-boskos-032:
+      k8s-infra-e2e-boskos-033:
+      k8s-infra-e2e-boskos-034:
+      k8s-infra-e2e-boskos-035:
+      k8s-infra-e2e-boskos-036:
+      k8s-infra-e2e-boskos-037:
+      k8s-infra-e2e-boskos-038:
+      k8s-infra-e2e-boskos-039:
+      k8s-infra-e2e-boskos-040:
+      k8s-infra-e2e-boskos-041:
+      k8s-infra-e2e-boskos-042:
+      k8s-infra-e2e-boskos-043:
+      k8s-infra-e2e-boskos-044:
+      k8s-infra-e2e-boskos-045:
+      k8s-infra-e2e-boskos-046:
+      k8s-infra-e2e-boskos-047:
+      k8s-infra-e2e-boskos-048:
+      k8s-infra-e2e-boskos-049:
+      k8s-infra-e2e-boskos-050:
+      k8s-infra-e2e-boskos-051:
+      k8s-infra-e2e-boskos-052:
+      k8s-infra-e2e-boskos-053:
+      k8s-infra-e2e-boskos-054:
+      k8s-infra-e2e-boskos-055:
+      k8s-infra-e2e-boskos-056:
+      k8s-infra-e2e-boskos-057:
+      k8s-infra-e2e-boskos-058:
+      k8s-infra-e2e-boskos-059:
+      k8s-infra-e2e-boskos-060:
+      k8s-infra-e2e-boskos-061:
+      k8s-infra-e2e-boskos-062:
+      k8s-infra-e2e-boskos-063:
+      k8s-infra-e2e-boskos-064:
+      k8s-infra-e2e-boskos-065:
+      k8s-infra-e2e-boskos-066:
+      k8s-infra-e2e-boskos-067:
+      k8s-infra-e2e-boskos-068:
+      k8s-infra-e2e-boskos-069:
+      k8s-infra-e2e-boskos-070:
+      k8s-infra-e2e-boskos-071:
+      k8s-infra-e2e-boskos-072:
+      k8s-infra-e2e-boskos-073:
+      k8s-infra-e2e-boskos-074:
+      k8s-infra-e2e-boskos-075:
+      k8s-infra-e2e-boskos-076:
+      k8s-infra-e2e-boskos-077:
+      k8s-infra-e2e-boskos-078:
+      k8s-infra-e2e-boskos-079:
+      k8s-infra-e2e-boskos-080:
+      k8s-infra-e2e-boskos-081:
+      k8s-infra-e2e-boskos-082:
+      k8s-infra-e2e-boskos-083:
+      k8s-infra-e2e-boskos-084:
+      k8s-infra-e2e-boskos-085:
+      k8s-infra-e2e-boskos-086:
+      k8s-infra-e2e-boskos-087:
+      k8s-infra-e2e-boskos-088:
+      k8s-infra-e2e-boskos-089:
+      k8s-infra-e2e-boskos-090:
+      k8s-infra-e2e-boskos-091:
+      k8s-infra-e2e-boskos-092:
+      k8s-infra-e2e-boskos-093:
+      k8s-infra-e2e-boskos-094:
+      k8s-infra-e2e-boskos-095:
+      k8s-infra-e2e-boskos-096:
+      k8s-infra-e2e-boskos-097:
+      k8s-infra-e2e-boskos-098:
+      k8s-infra-e2e-boskos-099:
+      k8s-infra-e2e-boskos-100:
+      k8s-infra-e2e-boskos-101:
+      k8s-infra-e2e-boskos-102:
+      k8s-infra-e2e-boskos-103:
+      k8s-infra-e2e-boskos-104:
+      k8s-infra-e2e-boskos-105:
+      k8s-infra-e2e-boskos-106:
+      k8s-infra-e2e-boskos-107:
+      k8s-infra-e2e-boskos-108:
+      k8s-infra-e2e-boskos-109:
+      k8s-infra-e2e-boskos-110:
+      k8s-infra-e2e-boskos-111:
+      k8s-infra-e2e-boskos-112:
+      k8s-infra-e2e-boskos-113:
+      k8s-infra-e2e-boskos-114:
+      k8s-infra-e2e-boskos-115:
+      k8s-infra-e2e-boskos-116:
+      k8s-infra-e2e-boskos-117:
+      k8s-infra-e2e-boskos-118:
+      k8s-infra-e2e-boskos-119:
+      k8s-infra-e2e-boskos-120:
+      # e2e projects for gpu jobs (--gcp-project-type=gpu-project)
+      # - us-west1 Committed NVIDIA K80 GPUs raised to 2
+      k8s-infra-e2e-boskos-gpu-01:
+      k8s-infra-e2e-boskos-gpu-02:
+      k8s-infra-e2e-boskos-gpu-03:
+      k8s-infra-e2e-boskos-gpu-04:
+      k8s-infra-e2e-boskos-gpu-05:
+      k8s-infra-e2e-boskos-gpu-06:
+      k8s-infra-e2e-boskos-gpu-07:
+      k8s-infra-e2e-boskos-gpu-08:
+      k8s-infra-e2e-boskos-gpu-09:
+      k8s-infra-e2e-boskos-gpu-10:
+      # e2e projects for scalability jobs (--gcp-project-type=scalability-project)
+      # - us-east1 cpu quota raised to 125
+      # - us-east1 in-use addresses quota raised to 125
+      k8s-infra-e2e-boskos-scale-01:
+      k8s-infra-e2e-boskos-scale-02:
+      k8s-infra-e2e-boskos-scale-03:
+      k8s-infra-e2e-boskos-scale-04:
+      k8s-infra-e2e-boskos-scale-05:
+      k8s-infra-e2e-boskos-scale-06:
+      k8s-infra-e2e-boskos-scale-07:
+      k8s-infra-e2e-boskos-scale-08:
+      k8s-infra-e2e-boskos-scale-09:
+      k8s-infra-e2e-boskos-scale-10:
+      k8s-infra-e2e-boskos-scale-11:
+      k8s-infra-e2e-boskos-scale-12:
+      k8s-infra-e2e-boskos-scale-13:
+      k8s-infra-e2e-boskos-scale-14:
+      k8s-infra-e2e-boskos-scale-15:
+      k8s-infra-e2e-boskos-scale-16:
+      k8s-infra-e2e-boskos-scale-17:
+      k8s-infra-e2e-boskos-scale-18:
+      k8s-infra-e2e-boskos-scale-19:
+      k8s-infra-e2e-boskos-scale-20:
+      k8s-infra-e2e-boskos-scale-21:
+      k8s-infra-e2e-boskos-scale-22:
+      k8s-infra-e2e-boskos-scale-23:
+      k8s-infra-e2e-boskos-scale-24:
+      k8s-infra-e2e-boskos-scale-25:
+      k8s-infra-e2e-boskos-scale-26:
+      k8s-infra-e2e-boskos-scale-27:
+      k8s-infra-e2e-boskos-scale-28:
+      k8s-infra-e2e-boskos-scale-29:
+      k8s-infra-e2e-boskos-scale-30:
+      # e2e projects for manual use (e.g. job migration, debugging a job)
+      # - one for each --gcp-project-type value used in prow.k8s.io job configs
+      k8s-infra-e2e-gce-project:
+      k8s-infra-e2e-gpu-project:
+      k8s-infra-e2e-ingress-project:
+      k8s-infra-e2e-node-e2e-project:
+      k8s-infra-e2e-scale-project:
+
+  prod:
+    managed_by: infra/gcp/ensure-prod-storage.sh
+    projects:
+      k8s-artifacts-prod: # TODO: _also_ managed by ensure-env-cip-auditor.sh
+      k8s-artifacts-prod-bak:
+      k8s-cip-test-prod:
+      k8s-gcr-backup-test-prod:
+      k8s-gcr-backup-test-prod-bak:
+      k8s-gcr-audit-test-prod:
+      k8s-release-test-prod: # TODO: should this be prod or release?:
+
+  prow:
+    projects:
+      k8s-infra-prow-build:
+        managed_by: infra/gcp/clusters/projects/k8s-infra-prow-build/prow-build/main.tf
+      k8s-infra-prow-build-trusted:
+        managed_by: infra/gcp/clusters/projects/k8s-infra-prow-build-trusted/prow-build-trusted/main.tf
+
+  public:
+    projects:
+      k8s-conform:
+        managed_by: infra/gcp/ensure-conformance-storage.sh
+      k8s-gsuite:
+        managed_by: infra/gcp/ensure-gsuite.sh
+      k8s-infra-public-pii:
+        managed_by: TODO
+      kubernetes-public:
+        managed_by: infra/gcp/ensure-main-project.sh
+
+  release:
+    managed_by: infra/gcp/ensure-release-projects.sh
+    projects:
+      k8s-release:
+      k8s-release-test-prod: # TODO: should this be prod or release?:
+      k8s-releng-prod:
+        managed_by: infra/gcp/ensure-releng-project.sh
+
+  sandbox:
+    projects:
+      k8s-infra-ii-sandbox:
+        managed_by: infra/gcp/clusters/projects/k8s-infra-ii-sandbox/main.tf
+
+  staging:
+    managed_by: infra/gcp/ensure-staging-storage.sh
+    projects:
+      k8s-staging-addon-manager:
+      k8s-staging-apisnoop:
+      k8s-staging-artifact-promoter:
+      k8s-staging-autoscaling:
+      k8s-staging-bootkube:
+      k8s-staging-boskos:
+      k8s-staging-build-image:
+      k8s-staging-capi-docker:
+      k8s-staging-capi-kubeadm:
+      k8s-staging-capi-openstack:
+      k8s-staging-capi-vsphere:
+      k8s-staging-ci-images:
+      k8s-staging-cip-test:
+      k8s-staging-cloud-provider-gcp:
+      k8s-staging-cluster-addons:
+      k8s-staging-cluster-api:
+      k8s-staging-cluster-api-aws:
+      k8s-staging-cluster-api-azure:
+      k8s-staging-cluster-api-do:
+      k8s-staging-cluster-api-gcp:
+      k8s-staging-cluster-api-nested:
+      k8s-staging-coredns:
+      k8s-staging-cpa:
+      k8s-staging-cri-tools:
+      k8s-staging-csi:
+      k8s-staging-csi-secrets-store:
+      k8s-staging-descheduler:
+      k8s-staging-dns:
+      k8s-staging-e2e-test-images:
+      k8s-staging-etcd:
+      k8s-staging-etcdadm:
+      k8s-staging-examples:
+      k8s-staging-experimental:
+      k8s-staging-external-dns:
+      k8s-staging-gateway-api:
+      k8s-staging-git-sync:
+      k8s-staging-infra-tools:
+      k8s-staging-ingress-nginx:
+      k8s-staging-ingressconformance:
+      k8s-staging-k8s-gsm-tools:
+      k8s-staging-kas-network-proxy:
+      k8s-staging-kind:
+      k8s-staging-kops:
+      k8s-staging-kube-state-metrics:
+      k8s-staging-kubeadm:
+      k8s-staging-kubernetes:
+      k8s-staging-kubetest2:
+      k8s-staging-kustomize:
+      k8s-staging-metrics-server:
+      k8s-staging-mirror:
+      k8s-staging-multitenancy:
+      k8s-staging-networking:
+      k8s-staging-nfd:
+      k8s-staging-npd:
+      k8s-staging-provider-aws:
+      k8s-staging-provider-azure:
+      k8s-staging-provider-openstack:
+      k8s-staging-publishing-bot:
+      k8s-staging-releng:
+      k8s-staging-releng-test:
+      k8s-staging-scheduler-plugins:
+      k8s-staging-scl-image-builder:
+      k8s-staging-sig-docs:
+      k8s-staging-sig-storage:
+      k8s-staging-slack-infra:
+      k8s-staging-sp-operator:
+      k8s-staging-storage-migrator:
+      k8s-staging-test-infra:
+      k8s-staging-txtdirect:

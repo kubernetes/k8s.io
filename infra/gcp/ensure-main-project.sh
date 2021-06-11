@@ -34,7 +34,8 @@ if [ $# != 0 ]; then
 fi
 
 # The GCP project name.
-readonly PROJECT="kubernetes-public"
+PROJECT=$(k8s_infra_project "public" "kubernetes-public")
+readonly PROJECT
 
 # The BigQuery dataset for billing data.
 readonly BQ_BILLING_DATASET="kubernetes_public_billing"

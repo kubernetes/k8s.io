@@ -40,85 +40,14 @@ function usage() {
 #
 # Staging project configuration
 #
-
-# NB: Please keep this sorted.
-readonly STAGING_PROJECTS=(
-    addon-manager
-    apisnoop
-    artifact-promoter
-    autoscaling
-    bootkube
-    boskos
-    build-image
-    capi-docker
-    capi-kubeadm
-    capi-openstack
-    capi-vsphere
-    ci-images
-    cip-test
-    cloud-provider-gcp
-    cluster-addons
-    cluster-api
-    cluster-api-aws
-    cluster-api-azure
-    cluster-api-do
-    cluster-api-gcp
-    cluster-api-nested
-    coredns
-    cpa
-    cri-tools
-    csi
-    csi-secrets-store
-    descheduler
-    dns
-    e2e-test-images
-    etcd
-    etcdadm
-    examples
-    experimental
-    external-dns
-    gateway-api
-    git-sync
-    infra-tools
-    ingress-nginx
-    ingressconformance
-    k8s-gsm-tools
-    kas-network-proxy
-    kind
-    kops
-    kube-state-metrics
-    kubeadm
-    kubernetes
-    kubetest2
-    kustomize
-    metrics-server
-    mirror
-    multitenancy
-    networking
-    nfd
-    npd
-    provider-aws
-    provider-azure
-    provider-openstack
-    publishing-bot
-    releng
-    releng-test
-    scheduler-plugins
-    scl-image-builder
-    sig-docs
-    sig-storage
-    slack-infra
-    sp-operator
-    storage-migrator
-    test-infra
-    txtdirect
-)
+mapfile -t STAGING_PROJECTS < <(k8s_infra_projects "staging")
+readonly STAGING_PROJECTS
 
 readonly RELEASE_STAGING_PROJECTS=(
-    experimental
-    kubernetes
-    mirror
-    releng
+    k8s-staging-experimental
+    k8s-staging-kubernetes
+    k8s-staging-mirror
+    k8s-staging-releng
 )
 
 readonly STAGING_PROJECT_SERVICES=(
@@ -380,20 +309,15 @@ function ensure_staging_gcb_builder_service_account() {
 # running stages/releases from the old project while publishing container
 # images to new project. ref: https://github.com/kubernetes/release/pull/1230
 function ensure_release_manager_special_cases() {
-    for repo in "${RELEASE_STAGING_PROJECTS[@]}"; do
-        (
-            # The GCP project name.
-            local project="k8s-staging-${repo}"
+    for project in "${RELEASE_STAGING_PROJECTS[@]}"; do
+        color 6 "Empowering ${RELEASE_VIEWERS} as project viewers in ${project}"
+        ensure_project_role_binding "${project}" "group:${RELEASE_VIEWERS}" "roles/viewer"
 
-            color 6 "Empowering ${RELEASE_VIEWERS} as project viewers in ${project}"
-            ensure_project_role_binding "${project}" "group:${RELEASE_VIEWERS}" "roles/viewer"
-
-            if [[ "${project}" == "k8s-staging-kubernetes" ]]; then
-                color 6 "Empowering kubernetes-release-test GCB service account to admin GCR"
-                empower_svcacct_to_admin_gcr "648026197307@cloudbuild.gserviceaccount.com" "${project}"
-            fi
-        ) 2>&1 | indent
-    done
+        if [[ "${project}" == "k8s-staging-kubernetes" ]]; then
+            color 6 "Empowering kubernetes-release-test GCB service account to admin GCR"
+            empower_svcacct_to_admin_gcr "648026197307@cloudbuild.gserviceaccount.com" "${project}"
+        fi
+    done 2>&1 | indent
 }
 
 # In order for ci-kubernetes-build to run on k8s-infra-prow-build,
@@ -418,7 +342,8 @@ function staging_special_case__k8s_staging_releng_test() {
 # to build the node image.
 function staging_special_case__k8s_staging_cluster_api_gcp() {
     readonly STAGING_PROJECT="k8s-staging-cluster-api-gcp"
-    local serviceaccount="$(svc_acct_email "${STAGING_PROJECT}" "gcb-builder-cluster-api-gcp")"
+    local serviceaccount
+    serviceaccount="$(svc_acct_email "${STAGING_PROJECT}" "gcb-builder-cluster-api-gcp")"
 
     ensure_services "${STAGING_PROJECT}" compute.googleapis.com
     ensure_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/compute.instanceAdmin.v1"
@@ -439,17 +364,19 @@ function ensure_staging_projects() {
         set -- "${STAGING_PROJECTS[@]}"
     fi
 
-    for repo in "${@}"; do
-        if ! (printf '%s\n' "${STAGING_PROJECTS[@]}" | grep -q "^${repo}$"); then
-          color 2 "Skipping unrecognized staging project name: ${repo}"
-          continue
+    for arg in "${@}"; do
+        local repo="${arg#k8s-staging-}"
+        local project="k8s-staging-${repo}"
+        if ! k8s_infra_project "staging" "${project}" >/dev/null; then
+            color 1 "Skipping unrecognized staging project name: ${project}"
+            continue
         fi
 
-        color 3 "Configuring staging: ${repo}"
+        color 3 "Configuring staging project: ${project}"
         ensure_staging_project \
-          "k8s-staging-${repo}" \
-          "k8s-infra-staging-${repo}@kubernetes.io" \
-          2>&1 | indent
+            "${project}" \
+            "k8s-infra-staging-${repo}@kubernetes.io" \
+            2>&1 | indent
 
     done
 

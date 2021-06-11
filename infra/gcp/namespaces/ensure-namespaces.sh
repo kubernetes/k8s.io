@@ -142,7 +142,7 @@ parse_args "$@";
 # Project names
 #
 
-ALL_PROJECTS=(
+ALL_APPS=(
     gcsweb
     kettle
     k8s-io-prod
@@ -157,7 +157,7 @@ ALL_PROJECTS=(
     triageparty-release
 )
 
-for prj in "${ALL_PROJECTS[@]}"; do
+for prj in "${ALL_APPS[@]}"; do
     color 6 "Create namespace: ${prj}"
     apply_namespace "${prj}"
 

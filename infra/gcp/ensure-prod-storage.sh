@@ -25,50 +25,40 @@ SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
 function usage() {
-    echo "usage: $0" > /dev/stderr
+    echo "usage: $0 [project...]" > /dev/stderr
+    echo "example:" > /dev/stderr
+    echo "  $0 # do all projects" > /dev/stderr
+    echo "  $0 k8s-artifacts-prod # just do one" > /dev/stderr
     echo > /dev/stderr
 }
-
-if [ $# != 0 ]; then
-    usage
-    exit 1
-fi
 
 #
 # The GCP project names.
 #
 
 # This is the "real" prod project for artifacts serving and backups.
-PROD_PROJECT="k8s-artifacts-prod"
-PRODBAK_PROJECT="${PROD_PROJECT}-bak"
+PROD_PROJECT=$(k8s_infra_project "prod" "k8s-artifacts-prod")
+PRODBAK_PROJECT=$(k8s_infra_project "prod" "${PROD_PROJECT}-bak")
 
 # These are for testing the image promoter's promotion process.
-PROMOTER_TEST_PROD_PROJECT="k8s-cip-test-prod"
-PROMOTER_TEST_STAGING_PROJECT="k8s-staging-cip-test"
+PROMOTER_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-cip-test-prod")
+PROMOTER_TEST_STAGING_PROJECT=$(k8s_infra_project "staging" "k8s-staging-cip-test")
 
 # These are for testing the GCR backup/restore process.
-GCR_BACKUP_TEST_PROD_PROJECT="k8s-gcr-backup-test-prod"
-GCR_BACKUP_TEST_PRODBAK_PROJECT="${GCR_BACKUP_TEST_PROD_PROJECT}-bak"
+GCR_BACKUP_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-gcr-backup-test-prod")
+GCR_BACKUP_TEST_PRODBAK_PROJECT=$(k8s_infra_project "prod" "${GCR_BACKUP_TEST_PROD_PROJECT}-bak")
 
 # This is for testing the GCR auditing mechanism.
-GCR_AUDIT_TEST_PROD_PROJECT="k8s-gcr-audit-test-prod"
+GCR_AUDIT_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-gcr-audit-test-prod")
 
 # This is for testing the release tools.
-RELEASE_TESTPROD_PROJECT="k8s-release-test-prod"
+RELEASE_TESTPROD_PROJECT=$(k8s_infra_project "prod" "k8s-release-test-prod")
 RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
 # This is a list of all prod projects.  Each project will be configured
 # similarly, with a GCR repository and a GCS bucket of the same name.
-#
-ALL_PROD_PROJECTS=(
-    "${PROD_PROJECT}"
-    "${PRODBAK_PROJECT}"
-    "${PROMOTER_TEST_PROD_PROJECT}"
-    "${GCR_BACKUP_TEST_PROD_PROJECT}"
-    "${GCR_BACKUP_TEST_PRODBAK_PROJECT}"
-    "${GCR_AUDIT_TEST_PROD_PROJECT}"
-    "${RELEASE_TESTPROD_PROJECT}"
-)
+mapfile -t ALL_PROD_PROJECTS < <(k8s_infra_projects "prod")
+readonly ALL_PROD_PROJECTS
 
 # This is a list of all prod GCS buckets, but only their trailing "name".  Each
 # name will get a GCS bucket called "k8s-artifacts-${name}", and write access
@@ -106,7 +96,7 @@ PROD_RETENTION="10y"
 #
 # $1: The GCP project name (GCR names == project names)
 function ensure_prod_gcr() {
-    if [ $# -ne 1 -o -z "$1" ]; then
+    if [ $# != 1 ] || [ -z "$1" ]; then
         echo "ensure_prod_gcr(project) requires 1 argument" >&2
         return 1
     fi
@@ -192,7 +182,14 @@ function empower_group_to_fake_prod() {
 
 # Create all prod artifact projects.
 function ensure_all_prod_projects() {
-    for prj in "${ALL_PROD_PROJECTS[@]}"; do
+    if [ $# = 0 ]; then
+        set -- "${ALL_PROD_PROJECTS[@]}"
+    fi
+    for prj in "${@}"; do
+        if ! k8s_infra_project "prod" "${prj}" >/dev/null; then
+            color 1 "Skipping unrecognized prod project name: ${prj}"
+            continue
+        fi
         color 6 "Ensuring project exists: ${prj}"
         ensure_project "${prj}"
 
@@ -386,7 +383,7 @@ function ensure_all_prod_special_cases() {
 
 function main() {
     color 6 "Ensuring all prod projects"
-    ensure_all_prod_projects 2>&1 | indent
+    ensure_all_prod_projects "${@}" 2>&1 | indent
 
     color 6 "Ensuring all prod buckets"
     ensure_all_prod_buckets 2>&1 | indent
@@ -397,4 +394,4 @@ function main() {
     color 6 "Done"
 }
 
-main
+main "${@}"

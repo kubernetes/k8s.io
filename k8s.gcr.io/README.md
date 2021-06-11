@@ -45,18 +45,18 @@ Be sure to add the project owners to the
 `images/k8s-staging-<project-name>/OWNERS` file to increase the number of
 people who can approve new images for promotion for your project.
 
-3. Add the project name to `STAGING_PROJECTS` in
-   [ensure-staging-storage.sh].
+3. Add the project name to the `infra.staging.projects` list defined in
+   [`infra/gcp/infra.yaml`][infra.yaml]
 
-4. Once the PR merges:
-    - ping @dims or @cblecker to create the necessary google group.
-    - ping @thockin or @justinsb to run [ensure-staging-storage.sh] to create
-    the staging repo.
+4. One your PR merges:
+    - a postsubmit job will create the necessary google group
+    - whoever approved your PR will run [the necessary bash script(s)][staging-bash]
+      to create the staging repo
 
 ### Enabling automatic builds
 
 Once your staging repo is up and running, you can enable automatic build and
-push.  Instructions are here: [1].
+push.  For more info, see [the instructions here][image-pushing-readme]
 
 NOTE: All sub-projects are *strongly* encouraged to use this mechanism, though
 it is not mandatory yet.  Over time this will become the primary way to build
@@ -73,17 +73,21 @@ To promote an image, follow these steps:
    gcr.io/k8s-staging-coredns/foo:1.3, then add a "foo" image entry into the
    manifest in `images/k8s-staging-coredns/images.yaml`.
 1. Create a PR to this git repo for your changes.
-1. The PR should trigger a `pull-k8sio-cip` job; check that the `k8s-ci-robot`
-   responds 'Job succeeded' for it.
-1. Merge the PR. This will trigger the actual promotion (the `pull-k8sio-cip`
-   is just a dry run). The actual promotion job is called `post-k8sio-cip` [2].
+1. The PR should trigger a `pull-k8sio-cip` job which will validate and dry-run
+   your changes; check that the `k8s-ci-robot` responds 'Job succeeded' for it.
+1. Merge the PR. Your image will be promoted by one of two jobs:
+   - [`post-k8sio-image-promo`][post-promo-job] is a postsubmit that runs immediately after merge
+   - [`ci-k8sio-cip`][ci-promo-job] is a postsubmit that runs immediately after merge
+1. A periodic 
 1. Published images will appear on k8s.gcr.io and can be viewed [here](https://console.cloud.google.com/gcr/images/k8s-artifacts-prod).
 
 Essentially, in order to get images published to a production repo, you have to
 use the image promotion (PR creation) process defined above.
 
-[1]: https://github.com/kubernetes/test-infra/blob/master/config/jobs/image-pushing/README.md
-[2]: https://k8s-testgrid.appspot.com/sig-release-releng-blocking#post-k8sio-cip
-[ensure-staging-storage.sh]: /infra/gcp/ensure-staging-storage.sh
+[image-pushing-readme]: https://git.k8s.io/test-infra/config/jobs/image-pushing/README.md
 [groups.yaml]: /groups/groups.yaml
-[vdf]:https://github.com/kubernetes/k8s.io/blob/master/k8s.gcr.io/Vanity-Domain-Flip.md
+[infra.yaml]: /infra/gcp/infra.yaml
+[staging-bash]: /infra/gcp/ensure-staging-storage.sh
+[vdf]: /k8s.gcr.io/Vanity-Domain-Flip.md
+[post-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#post-k8sio-image-promo
+[ci-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#ci-k8sio-image-promo
