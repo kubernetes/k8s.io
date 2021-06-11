@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "organizations/758905017065/roles/container.deployer"
+    },
+    {
+      "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "organizations/758905017065/roles/iam.serviceAccountLister"
@@ -47,12 +53,6 @@
         "group:gke-security-groups@kubernetes.io"
       ],
       "role": "roles/container.clusterViewer"
-    },
-    {
-      "members": [
-        "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
-      ],
-      "role": "roles/container.developer"
     },
     {
       "members": [
