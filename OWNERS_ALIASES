@@ -62,10 +62,11 @@ aliases:
     - dchen1107
     - derekwaynecarr
   sig-release-leads:
-    - alejandrox1
+    - cpanato
     - hasheddan
     - jeremyrickard
     - justaugustus
+    - puerco
     - saschagrunert
   sig-scalability-leads:
     - mm4tt
@@ -208,19 +209,19 @@ aliases:
     - cantbewong
     - frapposelli
   release-engineering-approvers:
-    - cpanato # Release Manager
+    - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - hasheddan # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
-    - puerco # Release Manager
+    - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
     - xmudrii # Release Manager
   release-engineering-reviewers:
-    - cpanato # Release Manager
+    - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - hasheddan # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
-    - puerco # Release Manager
+    - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
     - xmudrii # Release Manager
   # business hours oncall for prow etc (https://go.k8s.io/oncall)
