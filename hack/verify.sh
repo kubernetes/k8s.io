@@ -24,7 +24,6 @@ REPO_ROOT=$(dirname "${BASH_SOURCE[0]}")/..
 if [[ -z "${color_start-}" ]]; then
   declare -r color_start="\033["
   declare -r color_red="${color_start}0;31m"
-  declare -r color_yellow="${color_start}0;33m"
   declare -r color_green="${color_start}0;32m"
   declare -r color_norm="${color_start}0m"
 fi
@@ -35,11 +34,11 @@ EXCLUDED_PATTERNS=(
   "verify-terraform.sh"          # Expect a cluster as an argument
   )
 
-EXCLUDED_CHECKS=$(ls ${EXCLUDED_PATTERNS[@]/#/${REPO_ROOT}\/hack\/} 2>/dev/null || true)
+EXCLUDED_CHECKS=$(ls "${EXCLUDED_PATTERNS[@]/#/${REPO_ROOT}\/hack\/}" 2>/dev/null || true)
 
 function is-excluded {
-  for e in ${EXCLUDED_CHECKS[@]}; do
-    if [[ $1 -ef "$e" ]]; then
+  for e in "${EXCLUDED_CHECKS[@]}"; do
+    if [[ "${1}" -ef "$e" ]]; then
       return
     fi
   done
@@ -61,7 +60,7 @@ function print-failed-tests {
   echo -e "========================"
   echo -e "${color_red}FAILED TESTS${color_norm}"
   echo -e "========================"
-  for t in ${FAILED_TESTS[@]}; do
+  for t in "${FAILED_TESTS[@]}"; do
       echo -e "${color_red}${t}${color_norm}"
   done
 }
@@ -69,25 +68,26 @@ function print-failed-tests {
 function run-checks {
   local -r pattern=$1
   local -r runner=$2
+  local check_name start elapsed
 
   local t
-  for t in $(ls ${pattern})
+  for t in ${pattern};
   do
-    local check_name="$(basename "${t}")"
+    check_name="$(basename "${t}")"
     if is-excluded "${t}" ; then
       echo "Skipping ${check_name}"
       continue
     fi
     echo -e "Verifying ${check_name}"
-    local start=$(date +%s)
+    start=$(date +%s)
     run-cmd "${runner}" "${t}" && tr=$? || tr=$?
-    local elapsed=$(($(date +%s) - ${start}))
+    elapsed=$(($(date +%s) - start))
     if [[ ${tr} -eq 0 ]]; then
       echo -e "${color_green}SUCCESS${color_norm}  ${check_name}\t${elapsed}s"
     else
       echo -e "${color_red}FAILED${color_norm}   ${check_name}\t${elapsed}s"
       ret=1
-      FAILED_TESTS+=(${t})
+      FAILED_TESTS+=("${t}")
     fi
   done
 }
