@@ -114,7 +114,7 @@ EOF
         actual=$(cat "${f}")
 
         # policy: non-US buckets should have location in name
-        location=$(<${f} grep "Location constraint:" | awk '{ print $3 }')
+        location=$(<"${f}" grep "Location constraint:" | awk '{ print $3 }')
         if [ "${location}" == "ASIA" ] && ! { [[ "${bucket}" =~ -asia ]] || [[ "${bucket}" =~ asia\. ]]; }; then
             echo "FAIL: ${project} bucket ${bucket} change location is ${location} but bucket name lacks 'asia'"; continue
         elif [ "${location}" == "EU" ] && ! { [[ "${bucket}" =~ -eu ]] || [[ "${bucket}" =~ eu\. ]]; }; then
@@ -126,7 +126,7 @@ EOF
         #
         # however, there are many buckets that don't follow this, so triage to
         # expected buckets vs unexpected
-        acl=$(<${f} grep "\tACL:" | awk '{ print $2 }')
+        acl=$(<"${f}" grep "\tACL:" | awk '{ print $2 }')
         if [ "${acl}" != "[]" ]; then
             if [[ "${bucket}" =~ ^kubernetes-staging-[0-9a-f]+ ]] \
                 && {    [[ "${project}" =~ ^k8s-infra-e2e-boskos- ]] \
@@ -160,7 +160,7 @@ EOF
         # policy: most buckets should not have lifecycles; if they do, it
         #         should be one of three well known lifecycles depending on
         #         the project name and bucket name
-        lifecycle=$(<${f} grep "\tLifecycle configuration:" | awk '{ print $3 }')
+        lifecycle=$(<"${f}" grep "\tLifecycle configuration:" | awk '{ print $3 }')
         if [ "${lifecycle}" == "Present" ]; then
             lifecycle_file="projects/${project}/buckets/${bucket}/lifecycle.json"
             lifecycle=$(cat "${lifecycle_file}")
@@ -180,7 +180,7 @@ EOF
 
         # policy: most buckets should not have logging; if they do, it
         #         should be a well known configuration
-        logging=$(<${f} grep "\tLogging configuration:" | awk '{ print $3 }')
+        logging=$(<"${f}" grep "\tLogging configuration:" | awk '{ print $3 }')
         if [ "${logging}" == "Present" ]; then
             logging_file="projects/${project}/buckets/${bucket}/logging.json"
             logging=$(cat "${logging_file}")
@@ -197,7 +197,7 @@ EOF
         #         adhering to naming conventions and durations appropriate to each
         # for whatever reason a bucket with no retention policy doesn't have
         # "None" for the field, but lacks the field entirely
-        if <${f} grep -q "\tRetention Policy:.*Present"; then
+        if <"${f}" grep -q "\tRetention Policy:.*Present"; then
             retention_file="projects/${project}/buckets/${bucket}/retention.txt"
             retention=$(<"${retention_file}" grep Duration | cut -d: -f2)
             if { { [[ "${project}" == "k8s-conform" ]] && [[ "${bucket}" =~ ^k8s-conform- ]]; } \
@@ -219,7 +219,7 @@ EOF
         #         match a standard template, excluding the case-by-case
         #         exceptions made for specific fields above
         if [ "${project}" != "k8s-infra-ii-sandbox" ]; then
-            if ! diff <(</tmp/expected_metadata grep -E "${metadata_fields_regex}") <(<${f} grep -E "${metadata_fields_regex}") >/tmp/diff.txt; then
+            if ! diff <(</tmp/expected_metadata grep -E "${metadata_fields_regex}") <(<"${f}" grep -E "${metadata_fields_regex}") >/tmp/diff.txt; then
                 if [ "${project}" == "kubernetes-public" ] && </tmp/diff.txt grep -q "Storage class:"; then
                     # TODO: this should probably be corrected
                     echo "SKIP: ${project} bucket ${bucket} change has a non-default storage class, which is a known policy violation"
@@ -267,7 +267,7 @@ function check_container() {
     for f in "${files[@]}"; do
         project=$(echo "${f}" | cut -d/ -f2)
         if [[ "${f}" =~ services/container/clusters/[a-z-]*.json ]]; then
-            cluster=$(basename ${f} .json)
+            cluster=$(basename "${f}" .json)
             cluster_tf_dir="${REPO_ROOT}/infra/gcp/clusters/projects/${project}/${cluster}"
             if [ -d "${cluster_tf_dir}" ]; then
                 echo "PASS: ${project} has container cluster resource ${cluster} is expected, auto-accepting for now"
@@ -311,9 +311,9 @@ function check_logging() {
     )
     for f in "${files[@]}"; do
         project=$(echo "${f}" | cut -d/ -f2)
-        case "$(basename ${f})" in
+        case "$(basename "${f}")" in
         metrics.json)
-            actual=$(cat ${f})
+            actual=$(cat "${f}")
             if [ "${actual}" == "[]" ]; then
                 # TODO: this should be corrected
                 echo "SKIP: ${project} has empty logging metrics change, which is a known policy violation"

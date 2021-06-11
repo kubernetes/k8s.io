@@ -18,11 +18,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-if [ $# -ne 1 -o -z "${1:-}" ]; then
+if [ $# -ne 1 ] || [ -z "${1:-}" ]; then
     echo "usage: $0 [ canary | prod ]"
     exit 1
 fi
-if [ "$1" != "canary" -a "$1" != "prod" ]; then
+if [ "$1" != "canary" ] && [ "$1" != "prod" ]; then
     echo "unsupported target '$1'"
     echo "usage: $0 [ canary | prod ]"
     exit 1
@@ -49,18 +49,18 @@ kc rollout restart deployment k8s-io
 echo "waiting for all replicas to be up"
 while true; do
   sleep 3
-  read WANT HAVE UNAVAIL < <( \
+  read -r WANT HAVE UNAVAIL < <( \
       kc get deployment k8s-io \
           -o go-template='{{.spec.replicas}} {{.status.readyReplicas}} {{.status.unavailableReplicas}}{{"\n"}}'
   )
 
-  if [ -z "${HAVE}" -o "${HAVE}" == "<no value>" ]; then
+  if [ -z "${HAVE}" ] || [ "${HAVE}" == "<no value>" ]; then
       HAVE=0
   fi
-  if [ -z "${UNAVAIL}" -o "${UNAVAIL}" == "<no value>" ]; then
+  if [ -z "${UNAVAIL}" ] || [ "${UNAVAIL}" == "<no value>" ]; then
       UNAVAIL=0
   fi
-  if [ -n "${WANT}" -a -n "${HAVE}" -a "${WANT}" == "${HAVE}" -a "${UNAVAIL}" == 0 ]; then
+  if [ -n "${WANT}" ] && [ -n "${HAVE}" ] && [ "${WANT}" == "${HAVE}" ] && [ "${UNAVAIL}" == 0 ]; then
     break
   fi
   echo "  want ${WANT}, found ${HAVE} ready and ${UNAVAIL} unavailable"

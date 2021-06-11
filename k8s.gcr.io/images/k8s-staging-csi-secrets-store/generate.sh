@@ -14,12 +14,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-repos="
-driver
-"
+set -o errexit
+set -o nounset
+set -o pipefail
 
-for repo in $repos; do
-    echo "- name: $repo"
+readonly repo="gcr.io/k8s-staging-csi-secrets-store"
+readonly tag_filter="tags~^v[0-9]+.[0-9]+.[0-9]+$ AND NOT tags=v0.0.11"
+readonly images=(
+    driver
+)
+
+for image in "${images[@]}"; do
+    echo "- name: ${image}"
     echo "  dmap:"
-    gcloud container images list-tags gcr.io/k8s-staging-csi-secrets-store/$repo --format='get(digest, tags)' --sort-by='tags' --filter='tags~^v[0-9]+.[0-9]+.[0-9]+$ AND NOT tags=v0.0.11' | sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
+    gcloud container images list-tags \
+        "${repo}/$image" \
+        --format="get(digest, tags)" \
+        --sort-by="tags" \
+        --filter="${tag_filter}" \
+        | sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
 done

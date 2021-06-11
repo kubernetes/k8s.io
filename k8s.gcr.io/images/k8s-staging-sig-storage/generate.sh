@@ -14,30 +14,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -o errexit
+set -o nounset
+set -o pipefail
+
+readonly repo="gcr.io/k8s-staging-sig-storage"
+readonly tag_filter="tags~^v AND NOT tags~v2020 AND NOT tags~-rc"
 # List of repos under https://console.cloud.google.com/gcr/images/k8s-staging-sig-storage/GLOBAL
-repos="
-csi-attacher
-csi-node-driver-registrar
-csi-provisioner
-csi-resizer
-csi-snapshotter
-csi-external-health-monitor-agent
-csi-external-health-monitor-controller
-hostpathplugin
-iscsiplugin
-livenessprobe
-local-volume-provisioner
-mock-driver
-nfs-provisioner
-nfs-subdir-external-provisioner
-snapshot-controller
-snapshot-validation-webhook
-"
+readonly images=(
+    csi-attacher
+    csi-external-health-monitor-agent
+    csi-external-health-monitor-controller
+    csi-node-driver-registrar
+    csi-provisioner
+    csi-resizer
+    csi-snapshotter
+    hostpathplugin
+    iscsiplugin
+    livenessprobe
+    local-volume-provisioner
+    mock-driver
+    nfs-provisioner
+    nfs-subdir-external-provisioner
+    # TODO: nfsplugin?
+    snapshot-controller
+    snapshot-validation-webhook
+    # TODO: validation-webhook?
+)
 
-for repo in $repos; do
-    echo "- name: $repo"
+for image in "${images[@]}"; do
+    echo "- name: ${image}"
     echo "  dmap:"
-    gcloud container images list-tags gcr.io/k8s-staging-sig-storage/$repo --format='get(digest, tags)' --filter='tags~^v AND NOT tags~v2020 AND NOT tags~-rc' --sort-by=tags |
-        sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
+    gcloud container images list-tags \
+        "${repo}/$image" \
+        --format="get(digest, tags)" \
+        --sort-by="tags" \
+        --filter="${tag_filter}" \
+        | sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
 done
-

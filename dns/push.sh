@@ -104,8 +104,7 @@ precook_zone_configs "${TMPCFG}" "${ALL_ZONES[@]}"
 
 # Push to canaries.
 echo "Dry-run to canary zones"
-push "${CANARY_ZONES[@]}" > "${LOGS_PATH}/log.canary" 2>&1
-if [ $? != 0 ]; then
+if ! push "${CANARY_ZONES[@]}" > "${LOGS_PATH}/log.canary" 2>&1; then
     echo "Canary dry-run FAILED, halting; log follows:"
     echo "========================================="
     cat "${LOGS_PATH}/log.canary"
@@ -114,8 +113,7 @@ fi
 
 if [ "${DRY_RUN}" = false ]; then
   echo "Pushing to canary zones"
-  push --doit "${CANARY_ZONES[@]}" >> "${LOGS_PATH}/log.canary" 2>&1
-  if [ $? != 0 ]; then
+  if ! push --doit "${CANARY_ZONES[@]}" >> "${LOGS_PATH}/log.canary" 2>&1; then
       echo "Canary push FAILED, halting; log follows:"
       echo "========================================="
       cat "${LOGS_PATH}/log.canary"
@@ -127,12 +125,11 @@ if [ "${DRY_RUN}" = false ]; then
       TRIES=12
       echo "Testing canary zone: $zone"
       for i in $(seq 1 "$TRIES"); do
-          ./check-zone.sh -c "${TMPCFG}" -o "${TMP_OCTODNS_CFG}" \
-            "$zone" >> "${LOGS_PATH}/log.canary" 2>&1
-          if [ $? == 0 ]; then
+          if ./check-zone.sh -c "${TMPCFG}" -o "${TMP_OCTODNS_CFG}" \
+            "$zone" >> "${LOGS_PATH}/log.canary" 2>&1; then
               break
           fi
-          if [ $i != "$TRIES" ]; then
+          if [ "$i" != "$TRIES" ]; then
               echo "  test failed, might be propagation delay, will retry..."
               sleep 10
           else
@@ -148,8 +145,7 @@ fi
 
 # Push to prod.
 echo "Dry-run to prod zones"
-push "${PROD_ZONES[@]}" > "${LOGS_PATH}/log.prod" 2>&1
-if [ $? != 0 ]; then
+if ! push "${PROD_ZONES[@]}" > "${LOGS_PATH}/log.prod" 2>&1; then
     echo "Prod dry-run FAILED, halting; log follows:"
     echo "========================================="
     cat "${LOGS_PATH}/log.prod"
@@ -158,8 +154,7 @@ fi
 
 if [ "${DRY_RUN}" = false ]; then
   echo "Pushing to prod zones"
-  push --doit "${PROD_ZONES[@]}" >> "${LOGS_PATH}/log.prod" 2>&1
-  if [ $? != 0 ]; then
+  if ! push --doit "${PROD_ZONES[@]}" >> "${LOGS_PATH}/log.prod" 2>&1; then
       echo "Prod push FAILED, halting; log follows:"
       echo "========================================="
       cat "${LOGS_PATH}/log.prod"
@@ -171,12 +166,11 @@ if [ "${DRY_RUN}" = false ]; then
       TRIES=12
       echo "Testing prod zone: $zone"
       for i in $(seq 1 "$TRIES"); do
-          ./check-zone.sh -c "${TMPCFG}" -o "${TMP_OCTODNS_CFG}" \
-            "$zone" >> "${LOGS_PATH}/log.prod" 2>&1
-          if [ $? == 0 ]; then
+          if ./check-zone.sh -c "${TMPCFG}" -o "${TMP_OCTODNS_CFG}" \
+            "$zone" >> "${LOGS_PATH}/log.prod" 2>&1; then
               break
           fi
-          if [ $i != "$TRIES" ]; then
+          if [ "$i" != "$TRIES" ]; then
               echo "  test failed, might be propagation delay, will retry..."
               sleep 10
           else

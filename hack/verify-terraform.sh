@@ -17,8 +17,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-SCRIPT_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
-REPO_ROOT="$(cd ${SCRIPT_ROOT}/.. && pwd)"
+REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 
 function usage() {
   echo >&2 "Usage: $0 <PATH>"
@@ -63,4 +62,4 @@ tfswitch --version
 fi
 
 cd "$REPO_ROOT"
-check_terraform $1
+check_terraform "$1"

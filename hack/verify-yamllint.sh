@@ -39,7 +39,7 @@ fi
 # we assume that pip3 is already installed
 if ! command -v yamllint >/dev/null 2>&1; then
   echo "yamllint not found - installing with: ${pip} install -r ${pip_requirements}"
-  ${pip} install -r ${pip_requirements}
+  "${pip}" install -r "${pip_requirements}"
 fi
 
 version=$(yamllint --version | awk '{ print $2 }')
