@@ -27,7 +27,7 @@
 # $2: The account name (e.g. "foo-manager")
 # $3: The account display-name (e.g. "Manages all foo")
 function ensure_service_account() {
-    if [ $# != 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ $# != 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "ensure_service_account(project, name, display_name) requires 3 arguments" >&2
         return 1
     fi
@@ -35,7 +35,8 @@ function ensure_service_account() {
     local name="$2"
     local display_name="$3"
 
-    local email=$(svc_acct_email "${project}" "${name}")
+    local email
+    email=$(svc_acct_email "${project}" "${name}")
 
     local before="${TMPDIR}/service-account.before.yaml"
     local after="${TMPDIR}/service-account.after.yaml"
@@ -66,7 +67,7 @@ function ensure_service_account() {
 #   $1:  The role name (e.g. "foo.barrer")
 #   $2:  The file (e.g. "/path/to/file.yaml")
 function ensure_custom_org_iam_role_from_file() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+    if [ ! $# -eq 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "ensure_custom_org_iam_role_from_file(name, file) requires 2 arguments" >&2
         return 1
     fi
@@ -84,7 +85,7 @@ function ensure_custom_org_iam_role_from_file() {
 #   $2:  The role name (e.g. "foo.barrer")
 #   $3:  The file (e.g. "/path/to/file.yaml")
 function ensure_custom_project_iam_role_from_file() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "ensure_custom_project_iam_role_from_file(project, name, file) requires 3 arguments" >&2
         return 1
     fi
@@ -100,7 +101,7 @@ function ensure_custom_project_iam_role_from_file() {
 # Arguments:
 #   $1:  The role name (e.g. "foo.barrer")
 function ensure_removed_custom_org_iam_role() {
-    if [ ! $# -eq 1 -o -z "$1" ]; then
+    if [ ! $# -eq 1 ] || [ -z "$1" ]; then
         echo "ensure_removed_custom_org_iam_role(name) requires 1 arguments" >&2
         return 1
     fi
@@ -116,7 +117,7 @@ function ensure_removed_custom_org_iam_role() {
 #   $1:  The id of the project (e.g. "k8s-infra-foo")
 #   $2:  The role name (e.g. "foo.barrer")
 function ensure_removed_custom_project_iam_role() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+    if [ ! $# -eq 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "ensure_removed_custom_project_iam_role(project, name) requires 2 arguments" >&2
         return 1
     fi
@@ -131,7 +132,7 @@ function ensure_removed_custom_project_iam_role() {
 # Arguments:
 #   $1:  The role name (e.g. "foo.barrer")
 function custom_org_role_name() {
-    if [ ! $# -eq 1 -o -z "$1" ]; then
+    if [ ! $# -eq 1 ] || [ -z "$1" ]; then
         echo "custom_org_role_name(name) requires 1 arguments" >&2
         return 1
     fi
@@ -148,7 +149,7 @@ function custom_org_role_name() {
 #   $1:  The is of the project (e.g. "k8s-infra-foo")
 #   $2:  The role name (e.g. "foo.barrer")
 function custom_project_role_name() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+    if [ ! $# -eq 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "custom_project_role_name(project, name) requires 2 arguments" >&2
         return 1
     fi
@@ -166,7 +167,7 @@ function custom_project_role_name() {
 #   $1:  The role name (e.g. "foo.barrer")
 #   $2:  The file (e.g. "/path/to/file.yaml")
 function ensure_org_role_binding() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+    if [ ! $# -eq 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "ensure_org_role_binding(principal, role) requires 2 arguments" >&2
         return 1
     fi
@@ -184,7 +185,7 @@ function ensure_org_role_binding() {
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $3:  The role name (e.g. "roles/storage.objectAdmin")
 function ensure_project_role_binding() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "ensure_project_role_binding(project, principal, role) requires 3 arguments" >&2
         return 1
     fi
@@ -202,7 +203,7 @@ function ensure_project_role_binding() {
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $3:  The role name (e.g. "roles/storage.objectAdmin")
 function ensure_secret_role_binding() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "ensure_secret_role_binding(secret, principal, role) requires 3 arguments" >&2
         return 1
     fi
@@ -245,7 +246,7 @@ function ensure_serviceaccount_role_binding() {
 #   $1:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $2:  The role name (e.g. "roles/foo.bar")
 function ensure_removed_org_role_binding() {
-    if [ ! $# -eq 2 -o -z "$1" -o -z "$2" ]; then
+    if [ ! $# -eq 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "ensure_removed_org_role_binding(principal, role) requires 2 arguments" >&2
         return 1
     fi
@@ -263,7 +264,7 @@ function ensure_removed_org_role_binding() {
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $3:  The role name (e.g. "roles/foo.bar")
 function ensure_removed_project_role_binding() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "ensure_removed_project_role_binding(project, principal, role) requires 3 arguments" >&2
         return 1
     fi
@@ -281,7 +282,7 @@ function ensure_removed_project_role_binding() {
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
 #   $3:  The role name (e.g. "roles/storage.objectAdmin")
 function ensure_removed_secret_role_binding() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "ensure_removed_secret_role_binding(secret, principal, role) requires 3 arguments" >&2
         return 1
     fi
@@ -326,7 +327,7 @@ function ensure_removed_serviceaccount_role_binding() {
 #   $3:  The role name (e.g. "foo.barrer")
 #   $4:  The file (e.g. "/path/to/file.yaml")
 function _ensure_custom_iam_role_from_file() {
-    if [ ! $# -eq 4 -o -z "$1" -o -z "$2" -o -z "$3" -o -z "$4" ]; then
+    if [ ! $# -eq 4 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
         echo "_ensure_custom_iam_role_from_file(scope, id, name, file) requires 4 arguments" >&2
         return 1
     fi
@@ -343,7 +344,7 @@ function _ensure_custom_iam_role_from_file() {
         ;;
     esac
 
-    local scope_flag="--${scope} ${id}"
+    local scope_flag="--${scope}=${id}"
 
     local before="${TMPDIR}/custom-role.before.yaml"
     local ready="${TMPDIR}/custom-role.ready.yaml"
@@ -351,20 +352,20 @@ function _ensure_custom_iam_role_from_file() {
 
     # detect if we should create or update and dump role; silently ignore error
     verb="update"
-    if ! (gcloud iam roles describe ${scope_flag} "${name}" | yq -y 'del(.etag)' >"${before}") >/dev/null 2>&1; then
+    if ! (gcloud iam roles describe "${scope_flag}" "${name}" | yq -y 'del(.etag)' >"${before}") >/dev/null 2>&1; then
         verb="create"
     fi
 
     # deleted roles can be undeleted within 7 days; after that must wait 30 days to create a role with same id
     # ref: https://cloud.google.com/iam/docs/creating-custom-roles#deleting-custom-role
     if <"${before}" grep -q "^deleted: true"; then
-        gcloud iam roles undelete ${scope_flag} "${name}"
+        gcloud iam roles undelete "${scope_flag}" "${name}"
     fi
 
     # name is foo.bar, but gcloud wants scopes/id/role/foo.bar in the file
     local full_name="${scope}s/${id}/roles/${name}"
     <"${file}" sed -e "s|^name: ${name}|name: ${full_name}|" >"${ready}"
-    gcloud iam roles "${verb}" ${scope_flag} "${name}" --file "${ready}" | yq -y 'del(.etag)' > "${after}"
+    gcloud iam roles "${verb}" "${scope_flag}" "${name}" --file "${ready}" | yq -y 'del(.etag)' > "${after}"
 
     diff_colorized "${before}" "${after}"
 }
@@ -375,7 +376,7 @@ function _ensure_custom_iam_role_from_file() {
 #   $2:  The id of the scope (e.g. "12345819", "k8s-infra-foo")
 #   $3:  The role name (e.g. "foo.barrer")
 function _ensure_removed_custom_iam_role() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "_ensure_removed_custom_iam_role(scope, id, name) requires 3 arguments" >&2
         return 1
     fi
@@ -391,13 +392,13 @@ function _ensure_removed_custom_iam_role() {
         ;;
     esac
 
-    local scope_flag="--${scope} ${id}"
+    local scope_flag="--${scope}=${id}"
 
     local before="${TMPDIR}/iam-bind.before.txt"
     local before="${TMPDIR}/iam-bind.after.txt"
 
     # gcloud iam roles delete errors if role doesn't exist, so confirm it does
-    if ! gcloud iam roles describe ${scope_flag} ${name} --format="value(deleted)" > "${before}" 2>/dev/null; then
+    if ! gcloud iam roles describe "${scope_flag}" "${name}" --format="value(deleted)" > "${before}" 2>/dev/null; then
         # not found, or can't see... no point in continuing
         return
     fi
@@ -407,7 +408,7 @@ function _ensure_removed_custom_iam_role() {
         return
     fi
 
-    gcloud iam roles delete ${scope_flag} "${name}" > "${after}"
+    gcloud iam roles delete "${scope_flag}" "${name}" > "${after}"
 
     diff_colorized "${before}" "${after}"
 }

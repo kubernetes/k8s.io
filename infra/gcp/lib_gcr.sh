@@ -25,7 +25,7 @@
 # $1: The GCR repo (same as the GCP project name)
 # $2: The GCR region (optional)
 function gcs_bucket_for_gcr() {
-    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+    if [ $# -lt 1 ] || [ $# -gt 2 ] || [ -z "$1" ]; then
         echo "gcs_bucket_for_gcr(repo, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
@@ -59,16 +59,18 @@ function gcr_host_for_region() {
 # $1: The GCP project
 # $2: The GCR region (optional)
 function ensure_gcr_repo() {
-    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+    if [ $# -lt 1 ] || [ $# -gt 2 ] || [ -z "$1" ]; then
         echo "ensure_gcr_repo(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     local project="$1"
     local region="${2:-}"
 
-    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local bucket
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
-        local host=$(gcr_host_for_region "${region}")
+        local host
+        host=$(gcr_host_for_region "${region}")
         local image="ceci-nest-pas-une-image"
         local dest="${host}/${project}/${image}"
         docker pull k8s.gcr.io/pause
@@ -86,14 +88,15 @@ function ensure_gcr_repo() {
 # $2: The GCP project
 # $3: The GCR region (optional)
 function empower_group_to_write_gcr() {
-    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ $# -gt 3 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_group_to_write_gcr(group_name, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
     local group="$1"
     local project="$2"
     local region="${3:-}"
-    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local bucket
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_group_to_write_gcs_bucket "${group}" "${bucket}"
 }
@@ -103,14 +106,15 @@ function empower_group_to_write_gcr() {
 # $2: The GCP project
 # $3: The GCR region (optional)
 function empower_group_to_admin_gcr() {
-    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ $# -gt 3 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_group_to_admin_gcr(group_name, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
     local group="$1"
     local project="$2"
     local region="${3:-}"
-    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local bucket
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_group_to_admin_gcs_bucket "${group}" "${bucket}"
 }
@@ -120,14 +124,15 @@ function empower_group_to_admin_gcr() {
 # $2: The GCP project
 # $3: The GCR region (optional)
 function empower_svcacct_to_write_gcr () {
-    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ $# -gt 3 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_svcacct_to_write_gcr(acct, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
     local acct="$1"
     local project="$2"
     local region="${3:-}"
-    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local bucket
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_svcacct_to_write_gcs_bucket "${acct}" "${bucket}"
 }
@@ -137,14 +142,15 @@ function empower_svcacct_to_write_gcr () {
 # $2: The GCP project
 # $3: The GCR region (optional)
 function empower_svcacct_to_admin_gcr () {
-    if [ $# -lt 2 -o $# -gt 3 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ $# -gt 3 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_svcacct_to_admin_gcr(acct, project, [region]) requires 2 or 3 arguments" >&2
         return 1
     fi
     local acct="$1"
     local project="$2"
     local region="${3:-}"
-    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local bucket
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     empower_svcacct_to_admin_gcs_bucket "${acct}" "${bucket}"
 }

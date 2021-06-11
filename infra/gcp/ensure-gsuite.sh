@@ -113,6 +113,6 @@ color 4 "  1: enable domain-wide delegation on that service account"
 color 4 "  2: download the JSON key and give it to GSuite"
 echo
 color 4 "Press enter to acknowledge"
-read -s
+read -r -s
 
 color 6 "Done"

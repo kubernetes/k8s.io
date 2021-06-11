@@ -18,7 +18,7 @@
 
 # Setup TMPDIR before including any other functions
 TMPDIR=$(mktemp -d "/tmp/k8sio-infra-gcp-lib.XXXXX")
-readonly TMPDIR
+export TMPDIR
 function cleanup_tmpdir() {
   if [ "${K8S_INFRA_DEBUG:-"false"}" == "true" ]; then
     echo "K8S_INFRA_DEBUG mode, not removing tmpdir: ${TMPDIR}"
@@ -80,27 +80,32 @@ readonly AUDITOR_SERVICE_NAME="cip-auditor"
 readonly PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
 # The service account name for the image promoter's vulnerability check.
-readonly PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
+# used in: ensure-prod-storage.sh ensure-staging-storage.sh
+export PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
 
 # Release Engineering umbrella groups
 # - admins - edit and KMS access (Release Engineering subproject owners)
 # - managers - access to run stage/release jobs (Patch Release Team / Branch Managers)
 # - viewers - view access to Release Engineering projects (Release Manager Associates)
-readonly RELEASE_ADMINS="k8s-infra-release-admins@kubernetes.io"
-readonly RELEASE_MANAGERS="k8s-infra-release-editors@kubernetes.io"
-readonly RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
+# used in: ensure-release-projects.sh ensure-releng.sh ensure-staging-storage.sh
+export RELEASE_ADMINS="k8s-infra-release-admins@kubernetes.io"
+export RELEASE_MANAGERS="k8s-infra-release-editors@kubernetes.io"
+export RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
 
 #
 # Prow constants
 #
 
 # The service account email used by prow-build-trusted to trigger GCB and push to GCS
-readonly GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+# used in: ensure-release-proejcts.sh ensure-staging-storage.sh
+export GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
 
-readonly PROW_BUILD_SERVICE_ACCOUNT="prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+# used in: ensure-release-proejcts.sh ensure-staging-storage.sh
+export PROW_BUILD_SERVICE_ACCOUNT="prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
 
 # Projects hosting prow build clusters that run untrusted code, such as
 # presubmits that build and test unmerged code from PRs
+# shellcheck disable=SC2034 # TODO(spiffxp): can't export arrays; address when infra.yaml PR merged
 readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
     # The google.com build cluster for prow.k8s.io
     # TODO(spiffxp): remove support for this where possible
@@ -111,6 +116,7 @@ readonly PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS=(
 
 # Projects hosting prow build clusters that run trusted code, such as periodics
 # that run merged/approved code that need access to sensitive secrets
+# shellcheck disable=SC2034 # TODO(spiffxp): can't export arrays; address when infra.yaml PR merged
 readonly PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
     # The google.com trusted build cluster for prow.k8s.io
     # TODO(spiffxp): remove support for this where possible
@@ -127,7 +133,8 @@ readonly PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
 # - infra/gcp/clusters/projects/k8s-infra-prow-*/*/main.tf # pod_namespace = test-pods
 # # TODO: not all resources belong in test-pods, would be good to shard into folders
 # - infra/gcp/clusters/projects/k8s-infra-prow-*/*/resources/* # namespace: test-pods
-readonly PROWJOB_POD_NAMESPACE="test-pods"
+# used in: ensure-gsuite.sh ensure-main-project.sh ensure-prod-storage.sh ensure-staging-storage.sh
+export PROWJOB_POD_NAMESPACE="test-pods"
 
 #
 # Functions
@@ -137,7 +144,7 @@ readonly PROWJOB_POD_NAMESPACE="test-pods"
 # $1: The GCP project
 # $2: The name
 function svc_acct_email() {
-    if [ $# != 2 -o -z "$1" -o -z "$2" ]; then
+    if [ $# != 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "svc_acct_email(project, name) requires 2 arguments" >&2
         return 1
     fi
@@ -151,7 +158,7 @@ function svc_acct_email() {
 #   ref: https://cloud.google.com/cloud-build/docs/securing-builds/configure-access-control#service_account
 # $1 The GCP project
 function gcb_service_account_email() {
-    if [ $# != 1 -o -z "$1" ]; then
+    if [ $# != 1 ] || [ -z "$1" ]; then
         echo "gcb_service_account_email(project) requires 1 argument" >&2
         return 1
     fi
@@ -167,7 +174,7 @@ function gcb_service_account_email() {
 # we want them (e.g. billing).
 # $1: The GCP project
 function ensure_project() {
-    if [ $# != 1 -o -z "$1" ]; then
+    if [ $# != 1 ] || [ -z "$1" ]; then
         echo "ensure_project(project) requires 1 argument" >&2
         return 1
     fi
@@ -222,7 +229,7 @@ function ensure_project() {
 # $1: The GCP project
 # $2: The group email
 function empower_group_as_viewer() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_group_as_viewer(project, group) requires 2 arguments" >&2
         return 1
     fi
@@ -238,7 +245,7 @@ function empower_group_as_viewer() {
 # $1: The GCP project
 # $2: The service account
 function empower_service_account_for_cip_auditor_e2e_tester() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_service_account_for_cip_auditor_e2e_tester(acct, project) requires 2 arguments" >&2
         return 1
     fi
@@ -264,7 +271,7 @@ function empower_service_account_for_cip_auditor_e2e_tester() {
 # $1: The GCP project
 # $2: The group email
 function empower_group_for_gcb() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_group_for_gcb(project, group) requires 2 arguments" >&2
         return 1
     fi
@@ -289,7 +296,7 @@ function empower_group_for_gcb() {
 # $1: The GCP project
 # $2: The group email
 function empower_group_for_kms() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_group_for_kms(project, group) requires 2 arguments" >&2
         return 1
     fi
@@ -310,13 +317,14 @@ function empower_group_for_kms() {
 # $1: The GCP project
 # $2: The GCR region (optional)
 function empower_gcr_admins() {
-    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+    if [ $# -lt 1 ] || [ $# -gt 2 ] || [ -z "$1" ]; then
         echo "empower_gcr_admins(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     local project="$1"
     local region="${2:-}"
-    local bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
+    local bucket
+    bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
     ensure_project_role_binding "${project}" "group:${GCR_ADMINS}" "roles/viewer"
     empower_group_to_admin_gcs_bucket "${GCR_ADMINS}" "${bucket}"
@@ -326,7 +334,7 @@ function empower_gcr_admins() {
 # $1: The GCP project
 # $2: The bucket
 function empower_gcs_admins() {
-    if [ $# -lt 2 -o -z "$1" -o -z "$2" ]; then
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
         echo "empower_gcs_admins(project, bucket) requires 2 arguments" >&2
         return 1
     fi
@@ -347,7 +355,8 @@ function empower_group_to_admin_artifact_auditor() {
     fi
     local project="$1"
     local group="$2"
-    local acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
+    local acct
+    acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
 
     local roles=(
         # Grant privileges to deploy the auditor Cloud Run service. See
@@ -375,14 +384,14 @@ function empower_group_to_admin_artifact_auditor() {
 # $1: The GCP project
 # $2: The GCR region (optional)
 function empower_artifact_promoter() {
-    if [ $# -lt 1 -o $# -gt 2 -o -z "$1" ]; then
+    if [ $# -lt 1 ] || [ $# -gt 2 ] || [ -z "$1" ]; then
         echo "empower_artifact_promoter(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     local project="$1"
     local region="${2:-}"
-
-    local acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
+    local acct=
+    acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -397,7 +406,7 @@ function empower_artifact_promoter() {
 # Ensure the auditor service account exists and has the ability to write logs and fire alerts to Stackdriver Error Reporting.
 # $1: The GCP project
 function empower_artifact_auditor() {
-    if [ $# -lt 1 -o -z "$1" ]; then
+    if [ $# -lt 1 ] || [ -z "$1" ]; then
         echo "empower_artifact_auditor(project) requires 1 argument" >&2
         return 1
     fi
@@ -413,7 +422,8 @@ function empower_artifact_auditor() {
         # production GCR which is already world-readable.
     )
 
-    local acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
+    local acct
+    acct=$(svc_acct_email "${project}" "${AUDITOR_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -434,13 +444,14 @@ function empower_artifact_auditor() {
 # GCR are posted).
 # $1: The GCP project
 function empower_artifact_auditor_invoker() {
-    if [ $# -lt 1 -o -z "$1" ]; then
+    if [ $# -lt 1 ] || [ -z "$1" ]; then
         echo "empower_artifact_auditor_invoker(project) requires 1 argument" >&2
         return 1
     fi
     local project="$1"
 
-    local acct=$(svc_acct_email "${project}" "${AUDITOR_INVOKER_SVCACCT}")
+    local acct
+    acct=$(svc_acct_email "${project}" "${AUDITOR_INVOKER_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
@@ -467,7 +478,7 @@ function empower_artifact_auditor_invoker() {
 # $2 The managed zone name (e.g. kubernetes-io)
 # $3 The DNS zone name (e.g. kubernetes.io)
 function ensure_dns_zone() {
-    if [ $# != 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ $# != 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "ensure_dns_zone(project, zone_name, dns_name) requires 3 arguments" >&2
         return 1
     fi
@@ -549,7 +560,7 @@ function unempower_gke_for_serviceaccount() {
 # $2 The address name (e.g. foo-ingress), IPv6 addresses must have a "-v6" suffix
 # $3 The address description (e.g. "IP address for the foo GCLB")
 function ensure_global_address() {
-    if [ ! $# -eq 3 -o -z "$1" -o -z "$2" -o -z "$3" ]; then
+    if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
         echo "ensure_global_address(gcp_project, name, description) requires 3 arguments" >&2
         return 1
     fi
@@ -580,7 +591,7 @@ function ensure_global_address() {
 # $3 The address name (e.g. foo-ingress)
 # $4 The address description (e.g. "IP address for the foo GCLB")
 function ensure_regional_address() {
-    if [ ! $# -eq 4 -o -z "$1" -o -z "$2" -o -z "$3" -o -z "$4" ]; then
+    if [ ! $# -eq 4 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
         echo "ensure_regional_address(gcp_project, region, name, description) requires 4 arguments" >&2
         return 1
     fi

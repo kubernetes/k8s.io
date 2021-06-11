@@ -125,7 +125,7 @@ if [ $# = 0 ]; then
 fi
 
 for path; do
-  for f in $(find ${path} -type f -name '*.yaml' | sort); do
+  for f in $(find "${path}" -type f -name '*.yaml' | sort); do
     output_role_yaml "${f}"
   done
 done

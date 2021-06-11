@@ -111,9 +111,9 @@ function ensure_conformance_serviceaccount() {
     local bucket="${2}"
     local secret_accessors="${3}"
 
-    local email="$(svc_acct_email "${PROJECT}" "${name}")"
+    local email
+    email="$(svc_acct_email "${PROJECT}" "${name}")"
     local secret="${name}-key"
-    local private_key_file="${TMPDIR}/key.json"
 
     color 6 "Ensuring service account exists: ${email}"
     ensure_service_account "${PROJECT}"  "${name}" "Grants write access to ${bucket}"
