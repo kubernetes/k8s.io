@@ -230,10 +230,10 @@ groups:
       - saschagrunert@gmail.com
     members:
       - antheabjung@gmail.com # 1.22 RT Lead Shadow
-      - butlerjl@amazon.com # 1.22 Comms Shadow
       - dcampau1@gmail.com # 1.22 RT Lead Shadow
       - divya.mohan0209@gmail.com # 1.22 RT Lead Shadow
       - guineveresaenger@gmail.com # 1.22 Emeritus Advisor
+      - jeeves.butler@gmail.com # 1.22 Comms Lead
       - kikis.github@gmail.com # 1.22 RT Lead Shadow
       - klkfr@amazon.com # 1.22 Comms Shadow
       - kunalkushwaha453@gmail.com # 1.22 Comms Shadow
@@ -351,12 +351,12 @@ groups:
       - sig-release-leads@kubernetes.io
       - ania0102@gmail.com # 1.22 CI Signal Shadow
       - ashnehete@gmail.com # 1.22 Release Docs Shadow
-      - butlerjl@amazon.com # 1.22 Comms Shadow
       - carlisia@grokkingtech.io # 1.22 Release Docs Shadow
       - cicih@google.com # 1.22 Release Notes Shadow
       - Damanarora@cmail.carleton.ca # 1.22 Release Notes Shadow
       - gossanth@gmail.com # 1.22 Bug Triage Shadow
       - james@jameslaverack.com # 1.22 Enhancements Lead
+      - jeeves.butler@gmail.com # 1.22 Comms Lead 
       - jgavinray@linux.com # 1.22 Bug Triage Shadow
       - joseph.r.sandoval@gmail.com # 1.22 Enhancements Shadow
       - klkfr@amazon.com # 1.22 Comms Shadow
@@ -364,7 +364,6 @@ groups:
       - max@koerbaecher.io # 1.22 CI Signal Lead
       - menna.elmasry@suse.com # 1.22 Bug Triage Lead
       - nng.grace@gmail.com # 1.22 Enhancements Shadow
-      - peeyushgupta91@gmail.com # 1.22 Comms Lead
       - pmmalinov01@gmail.com # 1.22 Release Notes Lead
       - rajula96reddy@gmail.com # 1.22 Comms Shadow
       - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
@@ -415,7 +414,6 @@ groups:
       - jgavinray@linux.com # 1.22 Bug Triage Shadow
       - kunalkushwaha453@gmail.com # 1.22 Comms Shadow
       - rajula96reddy@gmail.com # 1.22 Comms Shadow
-      - butlerjl@amazon.com # 1.22 Comms Shadow
       - klkfr@amazon.com # 1.22 Comms Shadow
       - joseph.r.sandoval@gmail.com # 1.22 Enhancements Shadow
       - xander@grzy.dev # 1.22 Enhancements Shadow
