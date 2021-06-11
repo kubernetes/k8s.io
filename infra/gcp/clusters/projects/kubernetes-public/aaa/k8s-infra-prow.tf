@@ -85,7 +85,8 @@ resource "google_storage_bucket_iam_member" "k8s_infra_prow_oncall" {
 
 // Create a secret for GCP Service Account key of k8s-infra-prow
 resource "google_secret_manager_secret" "k8s_infra_prow_key" {
-  secret_id = google_service_account.k8s_infra_prow.name
+  project   = data.google_project.project.project_id
+  secret_id = "${local.prow_service_account}-sa-key"
 
   replication {
     automatic = true
