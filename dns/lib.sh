@@ -31,7 +31,7 @@ precook_zone_configs() {
     for z in "${zones[@]}"; do
         # Every zone should have 1 file $z.yaml or N files $z._*.yaml.
         # $z already ends in a period.
-        cat zone-configs/${z}yaml zone-configs/${z}_*.yaml \
+        cat "zone-configs/${z}"yaml "zone-configs/${z}"_*.yaml \
             > "${path}/${z}yaml" 2>/dev/null
         if [ ! -s "${path}/${z}yaml" ]; then
             echo "${path}/${z}yaml appears to be empty after pre-processing!"
