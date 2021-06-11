@@ -834,6 +834,7 @@ groups:
     members:
       - anish.ramasekar@gmail.com
       - rita.z.zhang@gmail.com
+      - tommymurphy@google.com
 
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     name: k8s-infra-staging-descheduler
