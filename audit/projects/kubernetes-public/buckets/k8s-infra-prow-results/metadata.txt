@@ -1,0 +1,18 @@
+gs://k8s-infra-prow-results/ :
+	Storage class:			REGIONAL
+	Location type:			region
+	Location constraint:		US-CENTRAL1
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Fri, 11 Jun 2021 21:57:46 GMT
+	Time updated:			Fri, 11 Jun 2021 21:58:31 GMT
+	Metageneration:			4
+	Bucket Policy Only enabled:	True
+	ACL:				[]
+	Default ACL:			[]

@@ -1,4 +1,3 @@
 [
-  "projects/k8s-infra-public-pii/logs/cloudaudit.googleapis.com%2Factivity",
-  "projects/k8s-infra-public-pii/logs/cloudaudit.googleapis.com%2Fdata_access"
+  "projects/k8s-infra-public-pii/logs/cloudaudit.googleapis.com%2Factivity"
 ]

@@ -2,7 +2,6 @@
   "projects/k8s-infra-prow-build/logs/GCEGuestAgent",
   "projects/k8s-infra-prow-build/logs/cloudaudit.googleapis.com%2Factivity",
   "projects/k8s-infra-prow-build/logs/cloudaudit.googleapis.com%2Fsystem_event",
-  "projects/k8s-infra-prow-build/logs/clouderrorreporting.googleapis.com%2Finsights",
   "projects/k8s-infra-prow-build/logs/compute.googleapis.com%2Fshielded_vm_integrity",
   "projects/k8s-infra-prow-build/logs/container-runtime",
   "projects/k8s-infra-prow-build/logs/container.googleapis.com%2Fcluster-autoscaler-visibility",

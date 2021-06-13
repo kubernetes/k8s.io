@@ -1,0 +1,48 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:kubernetes-public",
+        "projectOwner:kubernetes-public"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:kubernetes-public"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-prow@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
+        "projectEditor:kubernetes-public",
+        "projectOwner:kubernetes-public"
+      ],
+      "role": "roles/storage.legacyObjectOwner"
+    },
+    {
+      "members": [
+        "projectViewer:kubernetes-public"
+      ],
+      "role": "roles/storage.legacyObjectReader"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-prow@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-prow-oncall@kubernetes.io"
+      ],
+      "role": "roles/storage.objectViewer"
+    }
+  ]
+}
