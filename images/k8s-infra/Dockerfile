@@ -121,6 +121,7 @@ RUN set -o errexit nounset pipefail \
     && echo "Installing terraform ..." \
         && tfswitch --latest-stable=0.14 \
         && tfswitch --latest-stable=0.15 \
+        && tfswitch --latest-stable=1.0 \
     && echo "Installing pr-creator" \
         && git clone --depth 1 https://github.com/kubernetes/test-infra \
         && pushd ./test-infra \
