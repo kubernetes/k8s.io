@@ -274,6 +274,8 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
       - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
@@ -285,7 +287,6 @@ groups:
       - antheabjung@gmail.com
       - augustus@cisco.com
       - bentheelder@google.com
-      - ctadeu@gmail.com
       - dcampau1@gmail.com
       - divya.mohan0209@gmail.com
       - gmccloskey@google.com
