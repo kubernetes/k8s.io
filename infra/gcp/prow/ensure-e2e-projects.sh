@@ -47,13 +47,6 @@ BOSKOS_JANITOR_SVCACCT=$(svc_acct_email "${BUILD_CLUSTER_PROJECT}" "boskos-janit
 mapfile -t E2E_PROJECTS < <(k8s_infra_projects "e2e")
 readonly E2E_PROJECTS
 
-# prow build cluster services that expose metrics endpoints to be scraped
-# by monitoring.prow.k8s.io; they each get a regional address
-readonly PROW_BUILD_CLUSTER_METRICS_SERVICES=(
-    "boskos-metrics"
-    "greenhouse-metrics"
-)
-
 function ensure_e2e_project() {
     if [ $# != 1 ] || [ -z "$1" ]; then
         echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
@@ -142,21 +135,6 @@ function ensure_e2e_project() {
         --metadata-from-file ssh-keys="${ssh_keys_after}"
       diff_colorized "${ssh_keys_before}" "${ssh_keys_after}"
     fi
-}
-
-# TODO: this should be moved to the terraform responsible for k8s-infra-prow-build
-function ensure_prow_build_cluster_metrics_endpoints() {
-    local project="${BUILD_CLUSTER_PROJECT}"
-    local region="us-central1"
-    for service in "${PROW_BUILD_CLUSTER_METRICS_SERVICES[@]}"; do
-        color 6 "Ensuring monitoring.prow.k8s.io can scrape ${service} for: ${project}"
-        ensure_regional_address \
-          "${project}" \
-          "${region}" \
-          "${service}" \
-          "to allow monitoring.k8s.prow.io to scrape ${service}" \
-          2>&1 | indent
-    done
 }
 
 # TODO: this should be moved to the terraform responsible for k8s-infra-prow-build-trusted

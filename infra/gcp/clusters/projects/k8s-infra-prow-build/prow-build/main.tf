@@ -106,6 +106,24 @@ resource "google_service_account_iam_policy" "boskos_janitor_sa_iam" {
   policy_data        = data.google_iam_policy.boskos_janitor_sa_workload_identity.policy_data
 }
 
+// external ip formerly managed by infra/gcp/prow/ensure-e2e-projects.sh
+resource "google_compute_address" "boskos_metrics" {
+  name         = "boskos-metrics"
+  description  = "to allow monitoring.k8s.prow.io to scrape boskos metrics"
+  project      = local.project_id
+  region       = local.cluster_location
+  address_type = "EXTERNAL"
+}
+
+// external ip formerly managed by infra/gcp/prow/ensure-e2e-projects.sh
+resource "google_compute_address" "greenhouse_metrics" {
+  name         = "greenhouse-metrics"
+  description  = "to allow monitoring.k8s.prow.io to scrape greenhouse metrics"
+  project      = local.project_id
+  region       = local.cluster_location
+  address_type = "EXTERNAL"
+}
+
 module "prow_build_cluster" {
   source = "../../../modules/gke-cluster"
   project_name       = local.project_id
