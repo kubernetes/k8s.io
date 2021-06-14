@@ -149,6 +149,7 @@ groups:
       - linusa@google.com
       - thockin@google.com
       - rajib.jolite@gmail.com
+      - tjferrara@google.com
 
   - email-id: k8s-infra-staging-experimental@kubernetes.io
     name: k8s-infra-staging-experimental
