@@ -60,7 +60,6 @@ groups:
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
-      - wilsonehusin@gmail.com
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
