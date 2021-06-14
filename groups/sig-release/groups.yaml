@@ -41,6 +41,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
       - georgedanielmangum@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
