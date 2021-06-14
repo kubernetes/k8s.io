@@ -104,6 +104,7 @@ groups:
       ReconcileMembers: "true"
     members:
     - k8s-infra-prow-oncall@kubernetes.io
+    - cglombek@redhat.com
 
   #
   # sig-testing k8s-infra gcs write access
