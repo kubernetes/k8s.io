@@ -45,7 +45,7 @@ resource "google_project_service" "project" {
   for_each = toset([
     "bigquery.googleapis.com",
     "bigqueryreservation.googleapis.com",
-    "bigquerytransfer.googleapis.com",
+    "bigquerydatatransfer.googleapis.com",
     "storage-component.googleapis.com"
   ])
 
@@ -83,11 +83,12 @@ resource "google_storage_bucket" "audit-logs-gcs" {
 
   // NOTE: Prevent the bucket from being deleted
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 }
 
-// Grant write access to group-cloud-storage-analytics@google.com
+
+/* TODO(ameukam): This not working. possible conflict between both bindings
 data "google_iam_policy" "storage_policy_objectadmin" {
   binding {
     role = "roles/storage.objectAdmin"
@@ -102,6 +103,8 @@ resource "google_storage_bucket_iam_policy" "analytics_objectadmin_policy" {
   policy_data = data.google_iam_policy.storage_policy_objectadmin.policy_data
 }
 
+
+
 data "google_iam_policy" "storage_policy_legacybucketwriter" {
   binding {
     role = "roles/storage.legacyBucketWriter"
@@ -114,7 +117,7 @@ data "google_iam_policy" "storage_policy_legacybucketwriter" {
 resource "google_storage_bucket_iam_policy" "analytics_legacybucketwriter_policy" {
   bucket      = google_storage_bucket.audit-logs-gcs.name
   policy_data = data.google_iam_policy.storage_policy_legacybucketwriter.policy_data
-}
+} */
 
 // Allow ready-only access to k8s-infra-gcs-access-logs@kubernetes.io
 resource "google_storage_bucket_iam_member" "artificats-gcs-logs" {
