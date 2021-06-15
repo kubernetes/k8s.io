@@ -1,0 +1,18 @@
+gs://k8s-infra-tf-public-pii/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Mon, 14 Jun 2021 17:08:43 GMT
+	Time updated:			Mon, 14 Jun 2021 17:09:23 GMT
+	Metageneration:			6
+	Bucket Policy Only enabled:	True
+	ACL:				[]
+	Default ACL:			[]

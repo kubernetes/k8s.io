@@ -56,9 +56,7 @@
       }
     }
   },
-  "masterAuthorizedNetworksConfig": {
-    "enabled": true
-  },
+  "masterAuthorizedNetworksConfig": {},
   "monitoringService": "monitoring.googleapis.com/kubernetes",
   "name": "prow-build-trusted",
   "network": "default",

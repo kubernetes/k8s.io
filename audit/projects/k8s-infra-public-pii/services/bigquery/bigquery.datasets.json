@@ -1,0 +1,12 @@
+[
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-public-pii:k8s_infra_artifacts_gcslogs",
+    "datasetReference": {
+      "datasetId": "k8s_infra_artifacts_gcslogs",
+      "projectId": "k8s-infra-public-pii"
+    },
+    "friendlyName": "k8s_infra_artifacts_gcslogs",
+    "location": "US"
+  }
+]
