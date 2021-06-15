@@ -174,6 +174,7 @@ module "prow_build_cluster" {
   is_prod_cluster   = "true"
   release_channel   = "REGULAR"
   dns_cache_enabled = "true"
+  cloud_shell_access = false
 }
 
 module "prow_build_nodepool" {
