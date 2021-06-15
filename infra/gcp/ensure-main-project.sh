@@ -331,6 +331,12 @@ function ensure_aaa_external_secrets() {
 
     # another sign that we should move to using YAML as source of intent;
     # bash and indirect array access don't play nice, so we get this...
+
+    # prow as in the k8s-infra-prow instance being stood up on aaa, not the
+    # build clusters managed via infra/gcp/clusters/k8s-infra-prow-build*
+    local prow_secrets=(
+        k8s-infra-ci-robot-github-token
+    )
     local slack_infra_secrets=(
         recaptcha
         slack-event-log-config
@@ -343,6 +349,7 @@ function ensure_aaa_external_secrets() {
         triage-party-github-token
     )
     mapfile -t secret_specs < <(
+        printf "%s/prow/sig-testing\n" "${prow_secrets[@]}"
         printf "%s/slack-infra/sig-contributor-experience\n" "${slack_infra_secrets[@]}"
         printf "%s/triageparty-release/sig-release\n" "${triageparty_release_secrets[@]}"
     )
