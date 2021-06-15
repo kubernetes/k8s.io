@@ -1,5 +1,8 @@
-NAME                              TITLE
-bigquery.googleapis.com           BigQuery API
-bigquerystorage.googleapis.com    BigQuery Storage API
-logging.googleapis.com            Cloud Logging API
-storage-component.googleapis.com  Cloud Storage
+NAME                                 TITLE
+bigquery.googleapis.com              BigQuery API
+bigquerydatatransfer.googleapis.com  BigQuery Data Transfer API
+bigqueryreservation.googleapis.com   BigQuery Reservation API
+bigquerystorage.googleapis.com       BigQuery Storage API
+cloudresourcemanager.googleapis.com  Cloud Resource Manager API
+logging.googleapis.com               Cloud Logging API
+storage-component.googleapis.com     Cloud Storage
