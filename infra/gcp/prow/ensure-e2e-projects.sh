@@ -188,9 +188,6 @@ function ensure_e2e_projects() {
 #
 
 function main() {
-  color 6 "Ensuring monitoring.prow.k8s.io can scrape k8s-infra-prow-build metrics endpoints"
-  ensure_prow_build_cluster_metrics_endpoints 2>&1 | indent
-
   color 6 "Ensuring external secrets exist for use by k8s-infra-prow-build-trusted"
   ensure_trusted_prow_build_cluster_secrets 2>&1 | indent
 
