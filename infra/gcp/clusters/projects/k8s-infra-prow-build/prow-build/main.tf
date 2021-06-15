@@ -24,13 +24,14 @@ This file defines:
 */
 
 locals {
-  project_id                   = "k8s-infra-prow-build"
-  cluster_name                 = "prow-build"           // The name of the cluster defined in this file
-  cluster_location             = "us-central1"          // The GCP location (region or zone) where the cluster should be created
-  bigquery_location            = "US"                   // The bigquery specific location where the dataset should be created
-  pod_namespace                = "test-pods"            // MUST match whatever prow is configured to use when it schedules to this cluster
-  cluster_sa_name              = "prow-build"           // Name of the GSA and KSA that pods use by default
-  boskos_janitor_sa_name       = "boskos-janitor"       // Name of the GSA and KSA used by boskos-janitor
+  project_id                         = "k8s-infra-prow-build"
+  cluster_name                       = "prow-build"                       // The name of the cluster defined in this file
+  cluster_location                   = "us-central1"                      // The GCP location (region or zone) where the cluster should be created
+  bigquery_location                  = "US"                               // The bigquery specific location where the dataset should be created
+  pod_namespace                      = "test-pods"                        // MUST match whatever prow is configured to use when it schedules to this cluster
+  cluster_sa_name                    = "prow-build"                       // Name of the GSA and KSA that pods use by default
+  boskos_janitor_sa_name             = "boskos-janitor"                   // Name of the GSA and KSA used by boskos-janitor
+  scalability_tests_logs_bucket_name = "k8s-infra-scalability-tests-logs" // Name of the bucket for the scalability test results
 }
 
 data "google_organization" "org" {
@@ -157,22 +158,55 @@ module "prow_build_nodepool_n1_highmem_8_maxiops" {
 }
 
 module "greenhouse_nodepool" {
-  source = "../../../modules/gke-nodepool"
-  project_name    = local.project_id
-  cluster_name    = module.prow_build_cluster.cluster.name
-  location        = module.prow_build_cluster.cluster.location
-  name            = "greenhouse"
-  labels          = { dedicated = "greenhouse" }
+  source       = "../../../modules/gke-nodepool"
+  project_name = local.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  name         = "greenhouse"
+  labels       = { dedicated = "greenhouse" }
   # NOTE: taints are only applied during creation and ignored after that, see module docs
-  taints          = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
-  initial_count   = 1
-  min_count       = 1
-  max_count       = 1
+  taints        = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
+  initial_count = 1
+  min_count     = 1
+  max_count     = 1
   # choosing this image for parity with the build nodepool
-  image_type      = "UBUNTU_CONTAINERD"
+  image_type = "UBUNTU_CONTAINERD"
   # choosing a machine type to maximize IOPs
   machine_type    = "n1-standard-32"
   disk_size_gb    = 100
   disk_type       = "pd-standard"
   service_account = module.prow_build_cluster.cluster_node_sa.email
+}
+
+
+// Bucket for scalability tests results
+resource "google_storage_bucket" "scalability_tests_logs" {
+  project = local.project_id
+  name    = local.scalability_tests_logs_bucket_name
+
+  uniform_bucket_level_access = true
+}
+
+// Ensure bucket is world readable
+resource "google_storage_bucket_iam_member" "scalability_tests_logs_objectviewer" {
+  bucket = google_storage_bucket.scalability_tests_logs.name
+  role   = "roles/storage.objectViewer"
+  member = "allUsers"
+}
+
+// Allows service account prow-build to create and read objects from the bucket
+data "google_iam_policy" "prow_build_cluster_sa_scalability_storageadmin" {
+  binding {
+    role = "roles/storage.objectAdmin"
+
+    members = [
+      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.cluster_sa_name}]",
+    ]
+  }
+}
+
+// Authoritative iam-policy: replaces any existing policy attached to the bucket
+resource "google_storage_bucket_iam_policy" "boskos_janitor_sa_iam" {
+  bucket      = google_storage_bucket.scalability_tests_logs.name
+  policy_data = data.google_iam_policy.prow_build_cluster_sa_scalability_storageadmin.policy_data
 }
