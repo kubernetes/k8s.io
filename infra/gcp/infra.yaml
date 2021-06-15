@@ -204,6 +204,8 @@ infra:
       k8s-infra-e2e-ingress-project:
       k8s-infra-e2e-node-e2e-project:
       k8s-infra-e2e-scale-project:
+      # e2e projects for scalability jobs with 5000 nodes
+      k8s-infra-e2e-scale-5k-project:
 
   prod:
     managed_by: infra/gcp/ensure-prod-storage.sh
