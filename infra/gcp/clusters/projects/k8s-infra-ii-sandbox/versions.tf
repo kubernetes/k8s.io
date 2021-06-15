@@ -4,5 +4,5 @@ This file defines:
 */
 
 terraform {
-  required_version = "~> 0.15"
+  required_version = "~> 1.0.0"
 }
