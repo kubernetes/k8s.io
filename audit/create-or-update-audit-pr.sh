@@ -34,9 +34,15 @@ set -o pipefail
 GH_USER=cncf-ci
 GH_NAME="CNCF CI Bot"
 GH_EMAIL="cncf-ci@ii.coop"
+GH_TOKEN=$(cat /etc/github-token/token)
 FORK_GH_REPO=k8s.io
 FORK_GH_BRANCH=autoaudit-${PROW_INSTANCE_NAME:-prow}
 FORK_URI="https://github.com/${GH_USER}/${FORK_GH_REPO}"
+
+if [ -z "${GH_TOKEN}" ]; then
+  >&2 echo "ERROR: GH_TOKEN is empty"
+  exit 1
+fi
 
 echo "Ensure git configured" >&2
 git config user.name "${GH_NAME}"
@@ -78,7 +84,7 @@ if ! command -v "${prcreator}" &>/dev/null; then
 fi
 
 echo "Pushing commit to github.com/${GH_USER}/${FORK_GH_REPO}..." >&2
-GH_TOKEN=$(cat /etc/github-token/token)
+
 git push -f "https://${GH_USER}:${GH_TOKEN}@github.com/${GH_USER}/${FORK_GH_REPO}" "HEAD:${FORK_GH_BRANCH}" 2>/dev/null
 
 echo "Creating or updating PR to merge ${GH_USER}:${FORK_GH_BRANCH} into kubernetes:main..." >&2
