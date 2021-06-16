@@ -1,0 +1,23 @@
+periodics:
+- cron: "*/5 * * * *" # Every 5 minutes
+  name: k8s-infra-prow-heartbeat
+  decorate: true
+  cluster: k8s-infra-prow-build
+  extra_refs:
+  - org: kubernetes
+    repo: k8s.io
+    base_ref: main
+  spec:
+    containers:
+    - image: gcr.io/k8s-staging-infra-tools/k8s-infra:latest
+      command:
+      - "echo"
+      args:
+      - "Everything is fine!"
+      resources:
+        limits:
+          cpu: 100m
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 512Mi

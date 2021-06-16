@@ -1,0 +1,55 @@
+# Plugin configuration
+---
+
+approve:
+- repos:
+  - kubernetes/k8s.io
+  lgtm_acts_as_approve: true
+  require_self_approval: false
+
+lgtm:
+- repos:
+  - kubernetes/k8s.io
+  review_acts_as_lgtm: true
+
+config_updater:
+  maps:
+    prow/config.yaml:
+      name: config
+      clusters:
+        k8s-infra-prow-build-trusted:
+          - prow
+    prow/plugins.yaml:
+      name: plugins
+      clusters:
+        k8s-infra-prow-build-trusted:
+          - prow
+    prow/prowjobs/**/*.yaml:
+      name: job-config
+      gzip: true
+      clusters:
+        k8s-infra-prow-build:
+          - k8s-infra-test-pods
+        k8s-infra-prow-build-trusted:
+          - k8s-infra-test-pods
+
+plugins:
+  kubernetes/k8s.io:
+    plugins:
+    - approve
+    - assign
+    - config-updater
+    - help
+    - hold
+    - invalidcommitmsg
+    - label
+    - lgtm
+    - lifecycle
+    # - owners-label
+    - shrug
+    - size
+    - skip
+    - trigger
+    - wip
+    # - verify-owners
+    - yuks

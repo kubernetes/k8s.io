@@ -12,12 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
----
-kind: ServiceAccount
 apiVersion: v1
+kind: Service
 metadata:
-  name: ghproxy
-  namespace: prow
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}' # Creates a NEG after an Ingress is created
   labels:
-    app: prow
-    component: ghproxy
+    app: hook
+  name: hook
+  namespace: prow
+spec:
+  selector:
+    app: hook
+  ports:
+  - name: main
+    port: 8888
+  - name: metrics
+    port: 9090
