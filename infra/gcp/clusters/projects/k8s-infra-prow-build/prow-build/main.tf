@@ -24,14 +24,13 @@ This file defines:
 */
 
 locals {
-  project_id                         = "k8s-infra-prow-build"
-  cluster_name                       = "prow-build"                       // The name of the cluster defined in this file
-  cluster_location                   = "us-central1"                      // The GCP location (region or zone) where the cluster should be created
-  bigquery_location                  = "US"                               // The bigquery specific location where the dataset should be created
-  pod_namespace                      = "test-pods"                        // MUST match whatever prow is configured to use when it schedules to this cluster
-  cluster_sa_name                    = "prow-build"                       // Name of the GSA and KSA that pods use by default
-  boskos_janitor_sa_name             = "boskos-janitor"                   // Name of the GSA and KSA used by boskos-janitor
-  scalability_tests_logs_bucket_name = "k8s-infra-scalability-tests-logs" // Name of the bucket for the scalability test results
+  project_id             = "k8s-infra-prow-build"
+  cluster_name           = "prow-build"                       // The name of the cluster defined in this file
+  cluster_location       = "us-central1"                      // The GCP location (region or zone) where the cluster should be created
+  bigquery_location      = "US"                               // The bigquery specific location where the dataset should be created
+  pod_namespace          = "test-pods"                        // MUST match whatever prow is configured to use when it schedules to this cluster
+  cluster_sa_name        = "prow-build"                       // Name of the GSA and KSA that pods use by default
+  boskos_janitor_sa_name = "boskos-janitor"                   // Name of the GSA and KSA used by boskos-janitor
 }
 
 data "google_organization" "org" {
@@ -176,58 +175,4 @@ module "greenhouse_nodepool" {
   disk_size_gb    = 100
   disk_type       = "pd-standard"
   service_account = module.prow_build_cluster.cluster_node_sa.email
-}
-
-
-// Bucket for scalability tests results
-resource "google_storage_bucket" "scalability_tests_logs" {
-  project = local.project_id
-  name    = local.scalability_tests_logs_bucket_name
-
-  uniform_bucket_level_access = true
-}
-
-data "google_iam_policy" "scalability_tests_logs_bindings" {
-  // Ensure k8s-infra-prow-oncall has admin privileges, and keep existing
-  // legacy bindings since we're overwriting all existing bindings below
-  binding {
-    members = [
-      "group:k8s-infra-prow-oncall@kubernetes.io",
-    ]
-    role = "roles/storage.admin"
-  }
-  binding {
-    members = [
-      "group:k8s-infra-prow-oncall@kubernetes.io",
-      "projectEditor:${local.project_id}",
-      "projectOwner:${local.project_id}",
-    ]
-    role = "roles/storage.legacyBucketOwner"
-  }
-  binding {
-    members = [
-      "projectViewer:${local.project_id}",
-    ]
-    role = "roles/storage.legacyBucketReader"
-  }
-  // Ensure prow-build serviceaccount can write to bucket
-  binding {
-    role = "roles/storage.objectAdmin"
-    members = [
-      "serviceAccount:${google_service_account.prow_build_cluster_sa.email}",
-    ]
-  }
-  // Ensure bucket is world readable
-  binding {
-    role = "roles/storage.objectViewer"
-    members = [
-      "allUsers"
-    ]
-  }
-}
-
-// Authoritative iam-policy: replaces any existing policy attached to the bucket
-resource "google_storage_bucket_iam_policy" "scalability_tests_logs_policy" {
-  bucket      = google_storage_bucket.scalability_tests_logs.name
-  policy_data = data.google_iam_policy.scalability_tests_logs_bindings.policy_data
 }

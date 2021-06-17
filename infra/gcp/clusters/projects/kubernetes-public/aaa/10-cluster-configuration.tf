@@ -8,9 +8,10 @@ Note that it does not configure any node pools; this is done in a separate file.
 */
 
 locals {
-  cluster_name      = "aaa"         // This is the name of the cluster defined in this file
-  cluster_location  = "us-central1" // This is the GCP location (region or zone) where the cluster should be created
-  bigquery_location = "US"          // This is the bigquery specific location where the dataset should be created
+  cluster_name                       = "aaa"         // This is the name of the cluster defined in this file
+  cluster_location                   = "us-central1" // This is the GCP location (region or zone) where the cluster should be created
+  bigquery_location                  = "US"          // This is the bigquery specific location where the dataset should be created
+  scalability_tests_logs_bucket_name = "k8s-infra-scalability-tests-logs" // Name of the bucket for the scalability test results
 }
 
 // Create SA for nodes
@@ -176,4 +177,57 @@ resource "google_container_cluster" "cluster" {
   vertical_pod_autoscaling {
     enabled = true
   }
+}
+
+// Bucket for scalability tests results
+resource "google_storage_bucket" "scalability_tests_logs" {
+  project = data.google_project.project.project_id
+  name    = local.scalability_tests_logs_bucket_name
+
+  uniform_bucket_level_access = true
+}
+
+data "google_iam_policy" "scalability_tests_logs_bindings" {
+  // Ensure k8s-infra-prow-oncall has admin privileges, and keep existing
+  // legacy bindings since we're overwriting all existing bindings below
+  binding {
+    members = [
+      "group:k8s-infra-prow-oncall@kubernetes.io",
+    ]
+    role = "roles/storage.admin"
+  }
+  binding {
+    members = [
+      "group:k8s-infra-prow-oncall@kubernetes.io",
+      "projectEditor:${data.google_project.project.project_id}",
+      "projectOwner:${data.google_project.project.project_id}",
+    ]
+    role = "roles/storage.legacyBucketOwner"
+  }
+  binding {
+    members = [
+      "projectViewer:${data.google_project.project.project_id}",
+    ]
+    role = "roles/storage.legacyBucketReader"
+  }
+  // Ensure prow-build serviceaccount can write to bucket
+  binding {
+    role = "roles/storage.objectAdmin"
+    members = [
+      "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+    ]
+  }
+  // Ensure bucket is world readable
+  binding {
+    role = "roles/storage.objectViewer"
+    members = [
+      "allUsers"
+    ]
+  }
+}
+
+// Authoritative iam-policy: replaces any existing policy attached to the bucket
+resource "google_storage_bucket_iam_policy" "scalability_tests_logs_policy" {
+  bucket      = google_storage_bucket.scalability_tests_logs.name
+  policy_data = data.google_iam_policy.scalability_tests_logs_bindings.policy_data
 }
