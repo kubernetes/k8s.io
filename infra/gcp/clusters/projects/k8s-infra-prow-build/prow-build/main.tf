@@ -39,9 +39,9 @@ data "google_organization" "org" {
 }
 
 module "project" {
-  source = "../../../modules/gke-project"
-  project_id            = local.project_id
-  project_name          = local.project_id
+  source       = "../../../modules/gke-project"
+  project_id   = local.project_id
+  project_name = local.project_id
 }
 
 // Ensure k8s-infra-prow-oncall@kuberentes.io has owner access to this project
@@ -126,7 +126,7 @@ resource "google_compute_address" "greenhouse_metrics" {
 }
 
 module "prow_build_cluster" {
-  source = "../../../modules/gke-cluster"
+  source             = "../../../modules/gke-cluster"
   project_name       = local.project_id
   cluster_name       = local.cluster_name
   cluster_location   = local.cluster_location
@@ -138,19 +138,19 @@ module "prow_build_cluster" {
 }
 
 module "prow_build_nodepool_n1_highmem_8_maxiops" {
-  source = "../../../modules/gke-nodepool"
-  project_name    = local.project_id
-  cluster_name    = module.prow_build_cluster.cluster.name
-  location        = module.prow_build_cluster.cluster.location
-  name            = "pool4"
-  initial_count   = 1
-  min_count       = 1
-  max_count       = 80
+  source        = "../../../modules/gke-nodepool"
+  project_name  = local.project_id
+  cluster_name  = module.prow_build_cluster.cluster.name
+  location      = module.prow_build_cluster.cluster.location
+  name          = "pool4"
+  initial_count = 1
+  min_count     = 1
+  max_count     = 80
   # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
-  # use an UBUNTU image instead. Keep parity with the existing google.com 
+  # use an UBUNTU image instead. Keep parity with the existing google.com
   # k8s-prow-builds/prow cluster by using the CONTAINERD variant
-  image_type      = "UBUNTU_CONTAINERD"
-  machine_type    = "n1-highmem-8"
+  image_type   = "UBUNTU_CONTAINERD"
+  machine_type = "n1-highmem-8"
   # Use an ssd volume sized to allow the max IOPS supported by n1 instances w/ 8 vCPU
   disk_size_gb    = 500
   disk_type       = "pd-ssd"
@@ -187,26 +187,47 @@ resource "google_storage_bucket" "scalability_tests_logs" {
   uniform_bucket_level_access = true
 }
 
-// Ensure bucket is world readable
-resource "google_storage_bucket_iam_member" "scalability_tests_logs_objectviewer" {
-  bucket = google_storage_bucket.scalability_tests_logs.name
-  role   = "roles/storage.objectViewer"
-  member = "allUsers"
-}
-
-// Allows service account prow-build to create and read objects from the bucket
-data "google_iam_policy" "prow_build_cluster_sa_scalability_storageadmin" {
+data "google_iam_policy" "scalability_tests_logs_bindings" {
+  // Ensure k8s-infra-prow-oncall has admin privileges, and keep existing
+  // legacy bindings since we're overwriting all existing bindings below
+  binding {
+    members = [
+      "group:k8s-infra-prow-oncall@kubernetes.io",
+    ]
+    role = "roles/storage.admin"
+  }
+  binding {
+    members = [
+      "group:k8s-infra-prow-oncall@kubernetes.io",
+      "projectEditor:${local.project_id}",
+      "projectOwner:${local.project_id}",
+    ]
+    role = "roles/storage.legacyBucketOwner"
+  }
+  binding {
+    members = [
+      "projectViewer:${local.project_id}",
+    ]
+    role = "roles/storage.legacyBucketReader"
+  }
+  // Ensure prow-build serviceaccount can write to bucket
   binding {
     role = "roles/storage.objectAdmin"
-
     members = [
-      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.cluster_sa_name}]",
+      "serviceAccount:${google_service_account.prow_build_cluster_sa.email}",
+    ]
+  }
+  // Ensure bucket is world readable
+  binding {
+    role = "roles/storage.objectViewer"
+    members = [
+      "allUsers"
     ]
   }
 }
 
 // Authoritative iam-policy: replaces any existing policy attached to the bucket
-resource "google_storage_bucket_iam_policy" "boskos_janitor_sa_iam" {
+resource "google_storage_bucket_iam_policy" "scalability_tests_logs_policy" {
   bucket      = google_storage_bucket.scalability_tests_logs.name
-  policy_data = data.google_iam_policy.prow_build_cluster_sa_scalability_storageadmin.policy_data
+  policy_data = data.google_iam_policy.scalability_tests_logs_bindings.policy_data
 }
