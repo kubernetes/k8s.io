@@ -4,7 +4,7 @@ These terraform resources define a GCP project containing a GKE cluster
 intended to serve as a "build cluster" for prow.k8s.io. There are also
 some service accounts defined for use by pods within the cluster.
 
-## Accessing the control plane
+## Access
 
 Access to the [k8s-infra-prow-build project][k8s-infra-prow-build-console] hosting the cluster is granted by membership in one of two @kubernetes.io groups:
 - [k8s-infra-prow-oncall@kubernetes.io][k8s-infra-prow-oncall@]: grants [`roles/owner`][roles/owner] access
@@ -31,10 +31,10 @@ There was some manual work in bringing this up fully:
 - expect `terraform apply` to fail initially while trying to create bindings
   for `roles/iam.workloadIdentityUser`, as the identity namespace won't exist
   until the GKE cluster is created; re-run to succeed
-- run `ensure_e2e_projects.sh` to ensure e2e projects have been provisioned,
-  and an external ip has been created for boskos-metrics
+- edit `resources/boskos.yaml` to have `boskos-metrics` use the external ip
+  provisioned by terraform
+- run `ensure_e2e_projects.sh` to ensure e2e projects have been provisioned
   - edit `resources/boskos-resources.yaml` to include the projects
-  - edit `resources/boskos.yaml` to have `boskos-metrics` use the external ip
 - deploy resources to the cluster
 ```shell
 # First get access to the cluster control plane by following the instructions
@@ -44,11 +44,8 @@ There was some manual work in bringing this up fully:
 git clone git://github.com/kubernetes/k8s.io
 
 # deploy the resources; note boskos-resources.yaml isn't a configmap
-cd k8s.io/infra/gcp/clusters/k8s-infra-prow-build/prow-build
-kubectl apply -f ./resources
-kubectl create configmap -n test-pods resources \
-  --from-file=config=./resources/boskos-resources.yaml \
-  --dry-run -o=yaml | k replace -f -
+cd k8s.io/infra/gcp/clusters/k8s-infra-prow-build
+./deploy.sh
 
 # create the service-account secret
 gcloud iam service-accounts keys create \
@@ -101,19 +98,50 @@ gsutil iam ch \
 gsutil iam ch \
   serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com:objectAdmin \
   gs://kubernetes-release-pull
-# TODO: this isn't working, the bucket is in google-containers project which has
-#       a ban on non-google.com accounts being added to iam
-gsutil iam ch \
-  serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com:objectAdmin \
-  gs://kubernetes-release-dev
 ```
 
-## TODO
+## Ongoing Maintenance
+
+### prow-build cluster
+
+#### Deploy cluster resources
+
+- resources are deployed by [post-k8sio-deploy-prow-build-resources] when PRs
+  merge
+- the job runs [deploy.sh] to deploy resources; if neccessary, users with
+  [sufficient privileges](#access) can run this script to do the same thing
+
+#### Deploy cluster changes
+
+- open a PR with the proposed changes
+- run `tfswitch` to ensure the correct version of terraform is installed
+- run `terraform init` to ensure the correct version of modules/providers
+  are installed
+- run `terraform plan` to verify what changes will be deployed; if there are
+  unexpected deletions or changes, ask for help in [#wg-k8s-infra]
+- run `terraform apply` to deploy the changes
+
+#### Upgrade cluster version
+
+- upgrades are handled automatically by GKE during a scheduled maintenance window
+
+### Supporting infrastructure
+
+#### Deploy k8s-infra-prow-build GCP resource changes
+
+- this covers things like Service Accounts, GCS Buckets, APIs / Services,
+  Google Secret Manager Secrets, etc.
+- add resources to `main.tf`, then follow the same steps as [Deploy cluster changes]
+
+#### Deploy e2e project changes
+
+- run [`ensure-e2e-projects.sh`][ensure-e2e-projects.sh]
+
+## Known Issues / TODO
 
 - some jobs can't be migrated until we use a bucket other than gs://kubernetes-release-dev
-- create a nodepool for greenhouse and deploy to this cluster
-- setup postsubmit to deploy boskos-resources.yaml
-- decide the story for deploying/upgrading boskos
+- setup an autobump jump for all components installed to this build cluster
+- try using local SSD for the node pools for faster IOPS
 
 [k8s-infra-prow-build-console]: https://console.cloud.google.com/home/dashboard?project=k8s-infra-prow-build
 [k8s-infra-prow-oncall]: https://github.com/kubernetes/k8s.io/blob/3a1aea1652f02a95253402bde2bca63cb4292f8e/groups/groups.yaml#L647-L670
@@ -121,3 +149,7 @@ gsutil iam ch \
 [roles/owner]: https://cloud.google.com/iam/docs/understanding-roles#basic-definitions
 [roles/prow.viewer]: https://github.com/kubernetes/k8s.io/blob/main/infra/gcp/roles/prow.viewer.yaml
 [join-groups]: https://github.com/kubernetes/k8s.io/tree/main/groups#making-changes
+[post-k8sio-deploy-prow-build-resources]: https://testgrid.k8s.io/wg-k8s-infra-k8sio#post-k8sio-deploy-prow-build-resources
+[deploy.sh]: /infra/gcp/clusters/k8s-infra-prow-build/deploy.sh
+[ensure-e2e-projects.sh]: /infra/gcp/prow/ensure-e2e-projects.sh
+[#wg-k8s-infra]: https://kubernetes.slack.com/messages/wg-k8s-infra
