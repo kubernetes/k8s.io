@@ -76,6 +76,15 @@ data:
           - kind-flake
           - kind-failing-test
 
+      ### For SIG Node BSP June 24-25, 2021 ###
+      - id: sig-node-bsp
+        name: SIG Node Bug Scrub
+        dedup: true
+        description: >
+          Dashboard tracking open SIG Node issues.
+        rules:
+          - kind-node-bsp
+
     rules:
       ### Milestone ###
       milestone-issues:
@@ -497,3 +506,11 @@ data:
       open-prs:
         name: "Open PRs"
         type: pull_request
+
+      ### For SIG Node BSP June 24-25, 2021 ###
+      kind-node-bsp:
+        name: "issues for Node Bug Scrub"
+        type: issue
+        resolution: Categorize, clean up, and close
+        filters:
+          - label: "sig/node"
