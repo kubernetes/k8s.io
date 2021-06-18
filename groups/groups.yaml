@@ -135,6 +135,8 @@ groups:
       - xingyang105@gmail.com
       - ynli@google.com
       - zcorleissen@linuxfoundation.org
+      - jim@nirmata.com
+      - rficcaglia@gmail.com
 
   - email-id: election@kubernetes.io
     name: election
