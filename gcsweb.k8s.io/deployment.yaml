@@ -29,6 +29,8 @@ spec:
             - -b=kubernetes-jenkins
             - -b=kubernetes-release
             - -b=kubernetes-release-dev
+            - -b=k8s-infra-prow-results
+            - -b=k8s-infra-scalability-tests-logs
             - -b=k8s-release-dev
             - -p=8080
           ports:
