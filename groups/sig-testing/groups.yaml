@@ -47,6 +47,20 @@ groups:
     - jgrafton@google.com
     - skuznets@redhat.com
 
+  - email-id: k8s-infra-staging-e2e-test-auth-img@kubernetes.io
+    name: k8s-infra-staging-e2e-test-auth-img
+    description: |-
+      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-auth-img staging registry
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - davanum@gmail.com
+      - linusa@google.com
+      - mkumatag@in.ibm.com
+      - spiffxp@google.com
+      - spiffxp@gmail.com
+
   - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
     name: k8s-infra-staging-e2e-test-images
     description: |-

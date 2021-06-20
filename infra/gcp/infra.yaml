@@ -280,6 +280,7 @@ infra:
       k8s-staging-csi-secrets-store:
       k8s-staging-descheduler:
       k8s-staging-dns:
+      k8s-staging-e2e-test-auth-img:
       k8s-staging-e2e-test-images:
       k8s-staging-etcd:
       k8s-staging-etcdadm:
