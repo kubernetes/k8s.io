@@ -36,6 +36,7 @@ resource "google_container_node_pool" "pool2" {
     machine_type = "n1-standard-4"
     disk_size_gb = 100
     disk_type    = "pd-standard"
+    image_type   = "COS_CONTAINERD"
 
     service_account = google_service_account.cluster_node_sa.email
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
