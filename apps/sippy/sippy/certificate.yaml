@@ -3,6 +3,8 @@ kind: ManagedCertificate
 metadata:
   name: sippy-k8s-io
   namespace: sippy
+  labels:
+    app: sippy
 spec:
   domains:
     - sippy.k8s.io

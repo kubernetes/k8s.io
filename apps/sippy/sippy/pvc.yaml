@@ -3,6 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   name: sippy
   namespace: sippy
+  labels:
+    app: sippy
 spec:
   accessModes:
     - ReadWriteOnce
