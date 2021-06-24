@@ -261,16 +261,24 @@ cluster-api.sigs:
 cluster-api-aws.sigs:
   type: CNAME
   value: kubernetes-sigs-cluster-api-provider-aws.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@dwat, @jdetiber, @justinsb)
+# https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vince)
 release-0-1.cluster-api.sigs:
   type: CNAME
   value: release-0-1--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.2 docs (@dwat, @jdetiber, @justinsb)
+# https://github.com/kubernetes-sigs/cluster-api release-0.2 docs (@CecileRobertMichon, @vince)
 release-0-2.cluster-api.sigs:
   type: CNAME
   value: release-0-2--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api development docs (@dwat, @jdetiber, @justinsb)
+# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vince)
+release-0-3.cluster-api.sigs:
+  type: CNAME
+  value: release-0-3--kubernetes-sigs-cluster-api.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vince)
 master.cluster-api.sigs:
+  type: CNAME
+  value: master--kubernetes-sigs-cluster-api.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vince)
+tip.cluster-api.sigs:
   type: CNAME
   value: master--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-azure docs (@CecileRobertMichon, @nader-ziada, @devigned)
