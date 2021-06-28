@@ -2,22 +2,27 @@
   dmap:
     "sha256:762ef69b7093a8c4c83472aabdf79f4c5eb6743b122b2c06ca740f44cb00ca9d": ["1.8.2"]
     "sha256:67640771ad9fc56f109d5b01e020f0c858e7c890bb0eb15ba0ebd325df3285e7": ["1.8.3"]
+    "sha256:fd636b33485c7826fb20ef0688a83ee0910317dbb6c0c6f3ad14661c1db25def": ["1.8.4"]
 - name: cluster-proportional-autoscaler-amd64
   dmap:
     "sha256:e310b7e60ed5dabcf9945fb86ee049bafde69b01ac0b9eb647c2b96c273e18d8": ["1.8.2"]
     "sha256:dce43068853ad396b0fb5ace9a56cc14114e31979e241342d12d04526be1dfcc": ["1.8.3"]
+    "sha256:a3321bc68b416e52df7d33a1f2e5869d86588bfc0309bcdf920c82a62c34be02": ["1.8.4"]
 - name: cluster-proportional-autoscaler-arm
   dmap:
     "sha256:ba9d51870f9a718f91fb2a0df6366da36b2e5484a3331049b226310b5d59993d": ["1.8.2"]
     "sha256:241ee3c88ee69c0362b1e9f20b288345b42f2a59645c1ea8b7d39fdec221af38": ["1.8.3"]
+    "sha256:67f87af25b080b6c9573738f8a598be07284f42ffd562ddc13f2fff29de7d923": ["1.8.4"]
 - name: cluster-proportional-autoscaler-arm64
   dmap:
     "sha256:549b40bf6c29920f0f023fd97a6a9197f785f15799523c3486456a1bd24c840f": ["1.8.2"]
     "sha256:a456b304377b79cba3290e9990003040941c0b3da18621a5ed734265287968c5": ["1.8.3"]
+    "sha256:133f02f52c05d8d633a2d0ff3e81e5a50787b682e2f1b74280755ca36f9c2e07": ["1.8.4"]
 - name: cluster-proportional-autoscaler-ppc64le
   dmap:
     "sha256:a9ba5e939a4f8f0ded4a6b222d01b6922fce231f7977098112d51e409fce81f0": ["1.8.2"]
     "sha256:ac90f5dc759a917c2c98de81a9b5b77bf426b95e56caebaefcc0f2e01e2b8db9": ["1.8.3"]
+    "sha256:c5da89a1e675930f97ec4a585d3aacb895b32c02a6f526ab5ec18f79a5f72d7e": ["1.8.4"]
 - name: cpvpa-amd64
   dmap:
     "sha256:8341c10f341fc7cacfefa4564088414b4eaef45142d76a83f80891544f18b632": ["v0.8.2"]
