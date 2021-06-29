@@ -306,6 +306,7 @@ infra:
       k8s-staging-networking:
       k8s-staging-nfd:
       k8s-staging-npd:
+      k8s-staging-prometheus-adapter:
       k8s-staging-provider-aws:
       k8s-staging-provider-azure:
       k8s-staging-provider-openstack:

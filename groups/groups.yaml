@@ -995,6 +995,17 @@ groups:
       - pszczesniak@google.com
       - fbranczyk@gmail.com
 
+  - email-id: k8s-infra-staging-prometheus-adapter@kubernetes.io
+    name: k8s-infra-staging-prometheus-adapter
+    description: |-
+      ACL for prometheus-adapter
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - dgrisonn@redhat.com
+      - fbranczyk@gmail.com
+      - sergiusz.urbaniak@gmail.com
+
   - email-id: k8s-infra-staging-multitenancy@kubernetes.io
     name: k8s-infra-staging-multitenancy
     description: |-
