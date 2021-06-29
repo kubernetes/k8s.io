@@ -87,25 +87,14 @@ resource "google_storage_bucket" "audit-logs-gcs" {
   }
 }
 
-
-/* TODO(ameukam): This not working. possible conflict between both bindings
-data "google_iam_policy" "storage_policy_objectadmin" {
+//grants role WRITER to cloud-storage-analytics@google.com
+data "google_iam_policy" "audit_logs_gcs_bindings" {
   binding {
     role = "roles/storage.objectAdmin"
     members = [
       "group:cloud-storage-analytics@google.com",
     ]
   }
-}
-
-resource "google_storage_bucket_iam_policy" "analytics_objectadmin_policy" {
-  bucket      = google_storage_bucket.audit-logs-gcs.name
-  policy_data = data.google_iam_policy.storage_policy_objectadmin.policy_data
-}
-
-
-
-data "google_iam_policy" "storage_policy_legacybucketwriter" {
   binding {
     role = "roles/storage.legacyBucketWriter"
     members = [
@@ -114,10 +103,10 @@ data "google_iam_policy" "storage_policy_legacybucketwriter" {
   }
 }
 
-resource "google_storage_bucket_iam_policy" "analytics_legacybucketwriter_policy" {
+resource "google_storage_bucket_iam_policy" "analytics_objectadmin_policy" {
   bucket      = google_storage_bucket.audit-logs-gcs.name
-  policy_data = data.google_iam_policy.storage_policy_legacybucketwriter.policy_data
-} */
+  policy_data = data.google_iam_policy.audit_logs_gcs_bindings.policy_data
+}
 
 // Allow ready-only access to k8s-infra-gcs-access-logs@kubernetes.io
 resource "google_storage_bucket_iam_member" "artificats-gcs-logs" {
