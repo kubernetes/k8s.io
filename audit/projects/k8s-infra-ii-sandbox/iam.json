@@ -2,6 +2,24 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.dataEditor"
+    },
+    {
+      "members": [
+        "serviceAccount:asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.dataOwner"
+    },
+    {
+      "members": [
+        "serviceAccount:asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.user"
+    },
+    {
+      "members": [
         "serviceAccount:service-631771264409@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquerydatatransfer.serviceAgent"

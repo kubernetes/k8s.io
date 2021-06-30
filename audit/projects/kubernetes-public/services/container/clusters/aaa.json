@@ -36,8 +36,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.18.17-gke.1900",
-  "currentNodeVersion": "1.18.17-gke.1200 *",
+  "currentMasterVersion": "1.18.17-gke.1901",
+  "currentNodeVersion": "1.18.17-gke.1901",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -102,7 +102,7 @@
   "nodeConfig": {
     "diskSizeGb": 100,
     "diskType": "pd-standard",
-    "imageType": "COS",
+    "imageType": "COS_CONTAINERD",
     "machineType": "n1-standard-2",
     "metadata": {
       "disable-legacy-endpoints": "true"
@@ -128,7 +128,7 @@
       "config": {
         "diskSizeGb": 100,
         "diskType": "pd-standard",
-        "imageType": "COS",
+        "imageType": "COS_CONTAINERD",
         "machineType": "n1-standard-2",
         "metadata": {
           "disable-legacy-endpoints": "true"
@@ -168,7 +168,7 @@
       "upgradeSettings": {
         "maxSurge": 1
       },
-      "version": "1.18.17-gke.1200"
+      "version": "1.18.17-gke.1901"
     },
     {
       "autoscaling": {
@@ -179,7 +179,7 @@
       "config": {
         "diskSizeGb": 100,
         "diskType": "pd-standard",
-        "imageType": "COS",
+        "imageType": "COS_CONTAINERD",
         "machineType": "n1-standard-4",
         "metadata": {
           "disable-legacy-endpoints": "true"
@@ -219,7 +219,7 @@
       "upgradeSettings": {
         "maxSurge": 1
       },
-      "version": "1.18.17-gke.1200"
+      "version": "1.18.17-gke.1901"
     }
   ],
   "releaseChannel": {

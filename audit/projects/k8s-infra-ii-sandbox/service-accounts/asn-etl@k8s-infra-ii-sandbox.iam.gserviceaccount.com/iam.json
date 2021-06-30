@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "user:bb@ii.coop"
+      ],
+      "role": "roles/owner"
+    }
+  ],
+  "version": 1
+}

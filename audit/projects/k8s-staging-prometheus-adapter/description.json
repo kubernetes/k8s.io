@@ -1,0 +1,11 @@
+{
+  "createTime": "2021-06-29T19:55:02.429Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-prometheus-adapter",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-prometheus-adapter",
+  "projectNumber": "1086206622026"
+}

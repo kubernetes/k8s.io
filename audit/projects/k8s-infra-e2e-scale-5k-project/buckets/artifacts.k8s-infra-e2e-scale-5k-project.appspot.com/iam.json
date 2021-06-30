@@ -1,0 +1,17 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:k8s-infra-e2e-scale-5k-project",
+        "projectOwner:k8s-infra-e2e-scale-5k-project"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-e2e-scale-5k-project"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    }
+  ]
+}

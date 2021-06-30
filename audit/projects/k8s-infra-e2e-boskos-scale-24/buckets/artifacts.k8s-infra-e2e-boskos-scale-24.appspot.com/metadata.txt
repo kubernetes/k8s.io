@@ -1,0 +1,70 @@
+gs://artifacts.k8s-infra-e2e-boskos-scale-24.appspot.com/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Mon, 28 Jun 2021 15:12:16 GMT
+	Time updated:			Mon, 28 Jun 2021 15:12:16 GMT
+	Metageneration:			1
+	Bucket Policy Only enabled:	False
+	ACL:				
+	  [
+	    {
+	      "entity": "project-owners-211820429131",
+	      "projectTeam": {
+	        "projectNumber": "211820429131",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-211820429131",
+	      "projectTeam": {
+	        "projectNumber": "211820429131",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-211820429131",
+	      "projectTeam": {
+	        "projectNumber": "211820429131",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-211820429131",
+	      "projectTeam": {
+	        "projectNumber": "211820429131",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-211820429131",
+	      "projectTeam": {
+	        "projectNumber": "211820429131",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-211820429131",
+	      "projectTeam": {
+	        "projectNumber": "211820429131",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
