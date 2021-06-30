@@ -189,6 +189,9 @@ function ensure_staging_gcs_bucket() {
 
     color 6 "Ensuring ${writers} can write to ${bucket} in project: ${project}"
     empower_group_to_write_gcs_bucket "${writers}" "${bucket}"
+
+    # Ensure logging is turned on
+    ensure_gcs_bucket_logging "${bucket}"
 }
 
 # Ensure a GCR repo is provisioned in the given staging project, with
@@ -205,6 +208,7 @@ function ensure_staging_gcr_repo() {
     fi
     local project="${1}"
     local writers="${2}"
+    local gcr_bucket="gs://artifacts.${1}.appspot.com"
 
     color 6 "Ensuring a GCR repo exists for project: ${project}"
     ensure_gcr_repo "${project}"
@@ -214,6 +218,9 @@ function ensure_staging_gcr_repo() {
 
     color 6 "Ensuring GCR admins can admin GCR for project: ${project}"
     empower_gcr_admins "${project}"
+    
+    color 6 "Ensuring logging on ${gcr_bucket} for GCR project: ${project}"
+    ensure_gcs_bucket_logging "${gcr_bucket}"
 }
 
 # Ensure GCB is setup for the given staging project, by ensuring the
