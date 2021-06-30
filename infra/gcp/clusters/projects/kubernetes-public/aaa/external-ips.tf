@@ -40,36 +40,39 @@ resource "google_compute_global_address" "k8s_io_ingress_prod_v6" {
 }
 
 // used by node-perf-dash.k8s.io
-resource "google_compute_global_address" "k8s_infra_prow" {
+resource "google_compute_global_address" "node_perf_dash" {
   project       = data.google_project.project.project_id
   name          = "node-perf-dash-k8s-io-ingress-prod"
+  description   = "IP for aaa cluster Ingress"
   address_type  = "EXTERNAL"
 }
 
 // used by perf-dash.k8s.io
-resource "google_compute_global_address" "k8s_infra_prow" {
+resource "google_compute_global_address" "perf_dash" {
   project       = data.google_project.project.project_id
   name          = "perf-dash-k8s-io-ingress-prod"
   address_type  = "EXTERNAL"
 }
 
 // used by sippy.k8s.io
-resource "google_compute_global_address" "k8s_infra_prow" {
+resource "google_compute_global_address" "sippy" {
   project       = data.google_project.project.project_id
   name          = "sippy-ingress-prod"
+  description   = "IP for aaa cluster Ingress"
   address_type  = "EXTERNAL"
 }
 
 // used by slack.k8s.io
-resource "google_compute_global_address" "k8s_infra_prow" {
+resource "google_compute_global_address" "slack" {
   project       = data.google_project.project.project_id
   name          = "slack-infra-ingress-prod"
   address_type  = "EXTERNAL"
 }
 
 // used by release.triage.k8s.io
-resource "google_compute_global_address" "k8s_infra_prow" {
+resource "google_compute_global_address" "release_triage" {
   project       = data.google_project.project.project_id
   name          = "triage-party-release-ingress-prod"
+  description   = "IP for aaa cluster Ingress"
   address_type  = "EXTERNAL"
 }
