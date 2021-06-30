@@ -10,8 +10,8 @@ and tests.  Visit (placeholder for eventual URL) to see the kube instance.
 
 - Have [access](https://github.com/kubernetes/k8s.io/blob/master/running-in-community-clusters.md) to the GKE cluster `aaa`.
 
-- From the `sippy` directory run:
+- From the `apps/sippy` directory run:
 
 ```console
-kubectl apply -f sippy/
+kubectl apply -f .
 ```

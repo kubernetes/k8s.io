@@ -3,12 +3,12 @@ kind: Ingress
 metadata:
   name: sippy
   namespace: sippy
+  labels:
+    app: sippy
   annotations:
     kubernetes.io/ingress.class: gce
     kubernetes.io/ingress.global-static-ip-name: "sippy-ingress-prod"
     networking.gke.io/managed-certificates: sippy-k8s-io
-  labels:
-    app: sippy
 spec:
   backend:
     serviceName: sippy
