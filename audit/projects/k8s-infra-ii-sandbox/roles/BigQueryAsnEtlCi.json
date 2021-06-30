@@ -1,0 +1,9 @@
+{
+  "description": "Created on: 2021-06-22\n\nAdds permissions for ASN ETL BigQuery job",
+  "includedPermissions": [
+    "bigquery.jobs.create"
+  ],
+  "name": "projects/k8s-infra-ii-sandbox/roles/BigQueryAsnEtlCi",
+  "stage": "GA",
+  "title": "BigQueryAsnEtlCi"
+}
