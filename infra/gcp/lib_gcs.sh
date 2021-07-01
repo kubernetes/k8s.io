@@ -56,6 +56,28 @@ function ensure_public_gcs_bucket() {
     ensure_gcs_role_binding "${bucket}" "allUsers" "objectViewer"
 }
 
+# Set up logging
+# $1: The GCS bucket (e.g. gs://k8s-infra-foo)
+function ensure_gcs_bucket_logging() {
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "ensure_gcs_bucket_logging(bucket) requires 1 argument" >&2
+        return 1
+    fi
+    local bucket="$1"
+
+    local intent="${TMPDIR}/gcs-bucket-logging.intent.yaml"
+    local before="${TMPDIR}/gcs-bucket-logging.before.yaml"
+    local after="${TMPDIR}/gcs-bucket-logging.after.yaml"
+
+    echo "{\"logBucket\": \"${K8S_INFRA_GCSLOGS_BUCKET}\", \"logObjectPrefix\": \"$bucket\"}" > "${intent}"
+    gsutil logging get "${bucket}"> "${before}"
+    if ! diff "${intent}" "${before}"; then
+        gsutil logging set on -b "${K8S_INFRA_GCSLOGS_BUCKET}" -o "${bucket#gs://}" "${bucket}"
+        gsutil logging get on -b "${K8S_INFRA_GCSLOGS_BUCKET}" -o "${bucket#gs://}" "${bucket}" > "${after}"
+        diff_colorized "${before}" "${after}"
+    fi
+}
+
 # Ensure the bucket exists and is NOT world-accessible
 # $1: The GCP project
 # $2: The bucket (e.g. gs://bucket-name)

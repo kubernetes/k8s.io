@@ -52,6 +52,9 @@ trap 'cleanup_tmpdir' EXIT
 # Useful organization-wide constants
 #
 
+# Set up logs bucket
+export K8S_INFRA_GCSLOGS_BUCKET="gs://k8s-infra-artifacts-gcslogs"
+
 # The GCP org stuff needed to turn it all on.
 readonly GCP_ORG="758905017065" # kubernetes.io
 readonly GCP_BILLING="018801-93540E-22A20E"
