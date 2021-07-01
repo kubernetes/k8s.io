@@ -171,7 +171,7 @@ function ensure_gcs_bucket_auto_deletion() {
 
     echo "{\"rule\": [{\"action\": {\"type\": \"Delete\"}, \"condition\": {\"age\": ${auto_deletion_days}}}]}" > "${intent}"
     gsutil lifecycle get "${bucket}"> "${before}"
-    if ! diff "${intent}" "${before}"; then
+    if ! diff "${intent}" "${before}" >/dev/null; then
         gsutil lifecycle set "${intent}" "${bucket}"
         gsutil lifecycle get "${bucket}" > "${after}"
         diff_colorized "${before}" "${after}"
