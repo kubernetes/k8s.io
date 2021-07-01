@@ -146,7 +146,7 @@ function ensure_staging_project() {
     # Ensure staging project GCS
 
     color 3 "Ensuring staging GCS bucket: ${staging_bucket}"
-    ensure_staging_gcs_bucket "${project}" "${staging_bucket}" "${writers}" 2>&1 | indent
+    ensure_staging_gcs_bucket "${project}" "${staging_bucket}" "${writers}" "true" 2>&1 | indent
 
     # Ensure staging project GCB
 
@@ -164,19 +164,22 @@ function ensure_staging_project() {
 
 # Ensure the given GCS bucket exists in the given staging project
 # with auto-deletion enabled and appropriate permissions for the
-# given group and GCS admins
+# given group and GCS admins. If an optional fourth parameter is
+# set to "true", access logging will be enabled.
 #
 # $1: The GCP project (e.g. k8s-staging-foo)
 # $2: The GCS bucket (e.g. gs://k8s-staging-foo)
 # $3: The group to grant write access (e.g. k8s-infra-staging-foo@kubernetes.io)
+# [$4:] Enable access logs (e.g. "true", default: false)
 function ensure_staging_gcs_bucket() {
-    if [ $# != 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
-        echo "${FUNCNAME[0]}(project, gcs_bucket, writers) requires 3 arguments" >&2
+    if [ $# -lt 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+        echo "${FUNCNAME[0]}(project, gcs_bucket, writers, [logging]) requires at least 3 arguments" >&2
         return 1
     fi
     local project="${1}"
     local bucket="${2}"
     local writers="${3}"
+    local logging="${4:-false}"
 
     color 6 "Ensuring ${bucket} exists and is world readable in project: ${project}"
     ensure_public_gcs_bucket "${project}" "${bucket}"
@@ -190,8 +193,10 @@ function ensure_staging_gcs_bucket() {
     color 6 "Ensuring ${writers} can write to ${bucket} in project: ${project}"
     empower_group_to_write_gcs_bucket "${writers}" "${bucket}"
 
-    # Ensure logging is turned on
-    ensure_gcs_bucket_logging "${bucket}"
+    if [ "${logging}" == "true" ]; then
+      color 6 "Ensuring GCS access logs enabled for ${bucket} in project: ${project}"
+      ensure_gcs_bucket_logging "${bucket}"
+    fi
 }
 
 # Ensure a GCR repo is provisioned in the given staging project, with
@@ -219,7 +224,7 @@ function ensure_staging_gcr_repo() {
     color 6 "Ensuring GCR admins can admin GCR for project: ${project}"
     empower_gcr_admins "${project}"
     
-    color 6 "Ensuring logging on ${gcr_bucket} for GCR project: ${project}"
+    color 6 "Ensuring GCS access logs enabled for GCR bucket in project: ${project}"
     ensure_gcs_bucket_logging "${gcr_bucket}"
 }
 
