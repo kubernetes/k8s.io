@@ -8,7 +8,7 @@ and tests.  Visit (placeholder for eventual URL) to see the kube instance.
 
 ## How to deploy sippy
 
-- Have [access](https://github.com/kubernetes/k8s.io/blob/master/running-in-community-clusters.md) to the GKE cluster `aaa`.
+- Have [access](https://github.com/kubernetes/k8s.io/blob/main/running-in-community-clusters.md) to the GKE cluster `aaa`.
 
 - From the `apps/sippy` directory run:
 
