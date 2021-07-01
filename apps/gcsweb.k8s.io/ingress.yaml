@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: gcsweb
   namespace: gcsweb
+  labels:
+    app: gcsweb
   annotations:
     kubernetes.io/ingress.global-static-ip-name: gcsweb-k8s-io
     kubernetes.io/ingress.class: gce

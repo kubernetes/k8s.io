@@ -2,6 +2,9 @@ apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
   name: gcsweb
+  namespace: gcsweb
+  labels:
+    app: gcsweb
 spec:
   domains:
   - gcsweb.k8s.io
