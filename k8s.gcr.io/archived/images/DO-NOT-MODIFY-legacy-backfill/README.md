@@ -9,5 +9,5 @@ Flip][VDF].
 REJECTED, and any new promotions MUST happen through individual sub-project
 staging repos, as detailed in the policy [here][official-policy].**
 
-[VDF]: https://github.com/kubernetes/k8s.io/blob/master/k8s.gcr.io/Vanity-Domain-Flip.md
-[official-policy]: https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io#creating-staging-repos
+[VDF]: https://github.com/kubernetes/k8s.io/blob/main/k8s.gcr.io/Vanity-Domain-Flip.md
+[official-policy]: https://github.com/kubernetes/k8s.io/tree/main/k8s.gcr.io#creating-staging-repos

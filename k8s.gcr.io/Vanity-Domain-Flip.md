@@ -247,13 +247,13 @@ auditor service. Its members are listed [here](../groups/groups.yaml).
 
 [CIP]:https://github.com/kubernetes-sigs/k8s-container-image-promoter
 [internal-promoter]:http://go/registry-promoter
-[k8sio]:https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io
-[k8sio-manifests]:https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io/manifests
-[k8sio-backup]:https://github.com/kubernetes/k8s.io/tree/master/infra/gcp/backup_tools
-[staging-subproject]:https://github.com/kubernetes/k8s.io/tree/master/k8s.gcr.io#staging-repos
+[k8sio]:https://github.com/kubernetes/k8s.io/tree/main/k8s.gcr.io
+[k8sio-manifests]:https://github.com/kubernetes/k8s.io/tree/main/k8s.gcr.io/manifests
+[k8sio-backup]:https://github.com/kubernetes/k8s.io/tree/main/infra/gcp/backup_tools
+[staging-subproject]:https://github.com/kubernetes/k8s.io/tree/main/k8s.gcr.io#staging-repos
 [prow]:https://github.com/kubernetes/test-infra/tree/master/prow
 [golangci-lint]:https://github.com/golangci/golangci-lint
-[groups]:https://github.com/kubernetes/k8s.io/blob/master/groups/groups.yaml
+[groups]:https://github.com/kubernetes/k8s.io/blob/main/groups/groups.yaml
 [CIP-e2e]:https://github.com/kubernetes-sigs/k8s-container-image-promoter/tree/master/test-e2e
 [CIP-e2e-promotion]:https://github.com/kubernetes-sigs/k8s-container-image-promoter/tree/master/test-e2e/cip
 [CIP-e2e-auditor]:https://github.com/kubernetes-sigs/k8s-container-image-promoter/tree/master/test-e2e/cip-auditor
