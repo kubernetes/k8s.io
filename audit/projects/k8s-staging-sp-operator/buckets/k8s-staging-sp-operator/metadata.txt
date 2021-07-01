@@ -3,7 +3,7 @@ gs://k8s-staging-sp-operator/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	Present
@@ -11,8 +11,8 @@ gs://k8s-staging-sp-operator/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 14 Oct 2020 13:38:15 GMT
-	Time updated:			Wed, 14 Oct 2020 13:38:32 GMT
-	Metageneration:			8
+	Time updated:			Thu, 01 Jul 2021 02:50:52 GMT
+	Metageneration:			9
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]
