@@ -71,9 +71,9 @@ function ensure_gcs_bucket_logging() {
 
     echo "{\"logBucket\": \"${K8S_INFRA_GCSLOGS_BUCKET}\", \"logObjectPrefix\": \"$bucket\"}" > "${intent}"
     gsutil logging get "${bucket}"> "${before}"
-    if ! diff "${intent}" "${before}"; then
+    if ! diff "${intent}" "${before}" >/dev/null; then
         gsutil logging set on -b "${K8S_INFRA_GCSLOGS_BUCKET}" -o "${bucket#gs://}" "${bucket}"
-        gsutil logging get on -b "${K8S_INFRA_GCSLOGS_BUCKET}" -o "${bucket#gs://}" "${bucket}" > "${after}"
+        gsutil logging get "${bucket}" > "${after}"
         diff_colorized "${before}" "${after}"
     fi
 }
