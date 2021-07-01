@@ -56,6 +56,7 @@ run:
 		--tty \
 		--volume $(HOME)/.config/gcloud:/root/.config/gcloud \
 		--volume $(HOME)/.gitconfig:/root/.gitconfig \
+		--volume $(HOME)/.gitignore_global:/root/.gitignore_global \
 		--volume $(HOME)/.secrets/github.token:/etc/github-token/token \
 		--volume $(repo_root):/workspace/kubernetes/k8s.io \
 		--workdir /workspace/kubernetes/k8s.io \
