@@ -3,7 +3,7 @@ gs://artifacts.k8s-staging-cip-test.appspot.com/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	None
@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-cip-test.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 03 Apr 2019 19:51:34 GMT
-	Time updated:			Fri, 29 Jan 2021 15:20:53 GMT
-	Metageneration:			31
+	Time updated:			Thu, 01 Jul 2021 01:42:46 GMT
+	Metageneration:			32
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

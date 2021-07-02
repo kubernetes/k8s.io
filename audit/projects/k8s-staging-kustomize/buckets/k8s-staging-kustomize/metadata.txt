@@ -3,7 +3,7 @@ gs://k8s-staging-kustomize/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	Present
@@ -11,8 +11,8 @@ gs://k8s-staging-kustomize/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 27 Oct 2020 18:42:46 GMT
-	Time updated:			Tue, 27 Oct 2020 18:43:03 GMT
-	Metageneration:			8
+	Time updated:			Thu, 01 Jul 2021 02:27:09 GMT
+	Metageneration:			9
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

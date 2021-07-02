@@ -1,4 +1,34 @@
 {
+  "auditConfigs": [
+    {
+      "auditLogConfigs": [
+        {
+          "logType": "ADMIN_READ"
+        },
+        {
+          "logType": "DATA_READ"
+        },
+        {
+          "logType": "DATA_WRITE"
+        }
+      ],
+      "service": "iam.googleapis.com"
+    },
+    {
+      "auditLogConfigs": [
+        {
+          "logType": "ADMIN_READ"
+        },
+        {
+          "logType": "DATA_READ"
+        },
+        {
+          "logType": "DATA_WRITE"
+        }
+      ],
+      "service": "compute.googleapis.com"
+    }
+  ],
   "bindings": [
     {
       "members": [

@@ -3,7 +3,7 @@ gs://artifacts.k8s-staging-k8s-gsm-tools.appspot.com/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	None
@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-k8s-gsm-tools.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 17 Jul 2020 22:23:00 GMT
-	Time updated:			Tue, 06 Apr 2021 20:22:47 GMT
-	Metageneration:			10
+	Time updated:			Thu, 01 Jul 2021 02:16:52 GMT
+	Metageneration:			11
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

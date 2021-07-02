@@ -3,7 +3,7 @@ gs://k8s-staging-test-infra/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	Present
@@ -11,8 +11,8 @@ gs://k8s-staging-test-infra/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 04 May 2021 20:28:38 GMT
-	Time updated:			Tue, 04 May 2021 20:29:11 GMT
-	Metageneration:			8
+	Time updated:			Thu, 01 Jul 2021 02:53:18 GMT
+	Metageneration:			9
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]
