@@ -13,5 +13,5 @@ and tests.  Visit (placeholder for eventual URL) to see the kube instance.
 - From the `apps/sippy` directory run:
 
 ```console
-kubectl apply -f .
+./deploy.sh
 ```
