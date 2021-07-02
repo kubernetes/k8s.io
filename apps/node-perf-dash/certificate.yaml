@@ -3,6 +3,8 @@ kind: ManagedCertificate
 metadata:
   name: node-perf-dash-k8s-io
   namespace: node-perf-dash
+  labels:
+    app: node-perf-dash
 spec:
   domains:
   - node-perf-dash.k8s.io
