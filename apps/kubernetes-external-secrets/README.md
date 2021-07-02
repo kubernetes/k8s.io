@@ -12,10 +12,8 @@ Ensure you are a member of:
 
 If you encounter any issue during the deployment, reach out to k8s-infra-cluster-admins@kubernetes.io for help.
 
-To boostrap Kubernetes External Secrets:
-
 ```shell
-kubectl apply -Rf kubernetes-external-secrets/
+./deploy.sh
 ```
 
 [access to the cluster]: https://github.com/kubernetes/k8s.io/blob/main/running-in-community-clusters.md#access-the-cluster
