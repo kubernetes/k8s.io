@@ -155,6 +155,7 @@ ALL_APPS=(
     sippy
     slack-infra
     triageparty-release
+    triageparty-scalability
 )
 
 for prj in "${ALL_APPS[@]}"; do
