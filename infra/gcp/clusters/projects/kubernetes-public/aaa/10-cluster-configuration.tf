@@ -99,7 +99,7 @@ resource "google_container_cluster" "cluster" {
 
   // Release Channel subscriptions. See https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels
   release_channel {
-    channel = "STABLE"
+    channel = "REGULAR"
   }
 
   // Enable google-groups for RBAC
