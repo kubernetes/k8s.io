@@ -1,5 +1,15 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-  - bartsmykla
   - munnerz
+  - wg-k8s-infra-leads
+
+reviewers:
+  - munnerz
+  - wg-k8s-infra-leads
+
+emeritus-approvers:
+  - bartsmykla
+
+labels:
+  - wg/k8s-infra
