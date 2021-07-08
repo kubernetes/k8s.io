@@ -4,7 +4,7 @@ metadata:
   name: triage-party-persistence
   namespace: triageparty-release
   labels:
-    app: triageparty
+    app: triageparty-release
 spec:
   accessModes:
     - ReadWriteOnce

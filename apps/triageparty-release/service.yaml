@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: triage-party-release
   namespace: triageparty-release
+  labels:
+    app: triageparty-release
 spec:
   type: NodePort
   ports:
@@ -10,4 +12,4 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: triage-party
+    app: triageparty-release
