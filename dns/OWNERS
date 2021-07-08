@@ -3,12 +3,14 @@
 options:
   no_parent_owners: true
 approvers:
-  - bartsmykla
   - bentheelder
   - cblecker
   - dims
   - munnerz
   - spiffxp
   - thockin
+emeritus_approvers:
+  - bartsmykla
+
 labels:
   - area/dns
