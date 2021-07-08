@@ -37,23 +37,12 @@ of `deployment.yaml` by `kubectl apply`.
 
 Ensure you have [access to the cluster]
 
-Ensure you are a member of both:
+Ensure you are a member of `k8s-infra-rbac-gcsweb@kubernetes.io`
 
-- k8s-infra-cluster-admins@kubernetes.io
-- k8s-infra-rbac-gcsweb@kubernetes.io
-
-Connecting to cloud-shell:
+From within this directory:
 
 ```shell
-gcloud alpha cloud-shell ssh --authorize-session --project kubernetes-public
-```
-
-Deploy gcsweb:
-
-```shell
-git clone https://github.com/kubernetes/k8s.io
-cd k8s.io
-kubectl apply -Rf gcsweb/
+./deploy.sh
 ```
 
 [access to the cluster]: https://github.com/kubernetes/k8s.io/blob/main/running-in-community-clusters.md#access-the-cluster

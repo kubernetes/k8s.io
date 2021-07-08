@@ -1,0 +1,11 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - sig-node-leads
+reviewers:
+  - sig-node-leads
+emeritus_approvers:
+  - karan
+
+labels:
+  - sig/node
