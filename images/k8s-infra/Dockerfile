@@ -27,16 +27,16 @@ FROM debian:buster
 # are not pinned to a specific version
 
 ARG CONFTEST_VERSION=0.25.0
-ARG GCLOUD_VERSION=343.0.0
-ARG GH_VERSION=1.11.0
-ARG GO_VERSION=1.16.5
+ARG GCLOUD_VERSION=347.0.0
+ARG GH_VERSION=1.12.1
+ARG GO_VERSION=1.16.6
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
 ARG K8S_VERSION=1.20.7
 ARG OPA_VERSION=0.28.0
 ARG SHELLCHECK_VERSION=0.7.2
-ARG TFSWITCH_VERSION=0.12.1097
+ARG TFSWITCH_VERSION=0.12.1119
 
 # build everything in /build
 WORKDIR /build
