@@ -2,11 +2,16 @@
 
 reviewers:
   - dlipovetsky
+  - hakman
   - justinsb
+  - olemarkus
   - neolit123
 approvers:
   - dlipovetsky
+  - hakman
   - justinsb
+  - olemarkus
   - neolit123
+  - rifelpet
 labels:
 - sig/cluster-lifecycle
