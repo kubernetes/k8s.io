@@ -5,9 +5,10 @@ Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
     - `gcsweb`: instance of [gcsweb] at https://gcsweb.k8s.io - owned by [sig-testing]
     - `kubernetes-external-secrets`: instance of [kubernetes-external-secrets] - owned by [sig-testing]
-    - `node-perf-dash`: instance of [node-perf-dash] - owned by [sig-node] (TODO(https://github.com/kubernetes/k8s.io/issues/2150) migrate to apps/)
+    - `node-perf-dash`: instance of [node-perf-dash] - owned by [sig-node]
     - `sippy`: instance of [sippy] at https://sippy.k8s.io - owned by [sig-architecture] (on behalf of [wg-reliability])
     - `slack-infra`: instance of [slack-infra] including https://slack.k8s.io - owned by [sig-contributor-experience]
+    - `triageparty-release`: instance of [triage-party] - owned by [sig-release]
 - `audit`: scripts to export all relevant gcp resources, and the most recently-reviewed export
 - `cert-manager`: instance of [cert-manager] for the `aaa` cluster - owned by ???
 - `dns`: DNS for kubernetes.io and k8s.io
@@ -23,7 +24,6 @@ Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8
 - `prow`: work-in-pogress instance of [prow] - owned by [sig-testing] (TODO(https://github.com/kubernetes/k8s.io/issues/2150) migrate to apps/)
 - `publishing-bot`: instance of [publishing-bot] - owned by [sig-release] (TODO(https://github.com/kubernetes/k8s.io/issues/2150) migrate to apps/)
 - `registry.k8s.io`: work-in-progress to support cross-cloud mirroring/hosting of containers and binaries
-- `triage-party/release-team`: instance of [triage-party] - owned by [sig-release] (TODO(https://github.com/kubernetes/k8s.io/issues/2150) migrate to apps/)
 
 TODO: are these actively in use or should they be retired?
 - `artifacts`

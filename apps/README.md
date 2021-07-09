@@ -31,7 +31,7 @@ actually fits the apps we run today.
 - enforcement
     - OWNER constraints enforcemed by humans
     - no validation of yaml beyond yamllint
-    - `app:` convention enforcement by humands
+    - `app:` convention enforcement by humans
 - `*.yaml` can be more than k8s resources
     - consider a `resources/` subdir convention for all k8s resources
     - allows for config files etc. at app root
