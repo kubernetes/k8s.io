@@ -4,16 +4,16 @@ metadata:
   name: triage-party
   namespace: triageparty-release
   labels:
-    app: triageparty-release
+    app: triage-party
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: triageparty-release
+      app: triage-party
   template:
     metadata:
       labels:
-        app: triageparty-release
+        app: triage-party
     spec:
       containers:
         - name: triage-party

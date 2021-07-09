@@ -4,7 +4,7 @@ metadata:
   name: release-triage-k8s-io
   namespace: triageparty-release
   labels:
-    app: triageparty-release
+    app: triage-party
 spec:
   domains:
     - release.triage.k8s.io

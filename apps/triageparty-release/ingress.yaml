@@ -4,7 +4,7 @@ metadata:
   name: triage-party-release
   namespace: triageparty-release
   labels:
-    app: triageparty-release
+    app: triage-party
   annotations:
     kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.class: "gce"
