@@ -35,7 +35,7 @@ cluster_region="us-central1"
 # coordinates to locate the app on the target cluster
 namespace="${app}"
 
-# custom var(s) specifc to app deploy
+# custom var(s) specific to this apps deployment 
 perfdash_repo_url="https://raw.githubusercontent.com/kubernetes/perf-tests/master/perfdash"
 
 # well known name set by `gcloud container clusters get-credentials`
