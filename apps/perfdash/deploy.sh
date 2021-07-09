@@ -38,7 +38,6 @@ namespace="${app}"
 # custom var(s) specifc to app deploy
 perfdash_repo_url="https://raw.githubusercontent.com/kubernetes/perf-tests/master/perfdash"
 
-
 # well known name set by `gcloud container clusters get-credentials`
 gke_context="gke_${cluster_project}_${cluster_region}_${cluster_name}"
 context="${KUBECTL_CONTEXT:-${gke_context}}"
@@ -51,6 +50,6 @@ fi
 
 # deploy kubernetes resources
 pushd "${SCRIPT_ROOT}" >/dev/null
-kubectl --context="${context}" --namespace="${namespace}" -f "${PERFDASH_REPO_URL}/deployment.yaml"
-kubectl --context="${context}" --namespace="${namespace}" -f "${PERFDASH_REPO_URL}/perfdash-service.yaml"
+kubectl --context="${context}" --namespace="${namespace}" apply -f "${perfdash_repo_url}/deployment.yaml"
+kubectl --context="${context}" --namespace="${namespace}" apply -f "${perfdash_repo_url}/perfdash-service.yaml"
 kubectl --context="${context}" --namespace="${namespace}" apply -f .
