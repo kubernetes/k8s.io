@@ -7,6 +7,7 @@ Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8
     - `kubernetes-external-secrets`: instance of [kubernetes-external-secrets] - owned by [sig-testing]
     - `node-perf-dash`: instance of [node-perf-dash] - owned by [sig-node]
     - `perfdash`: instance of [perfdash] - owned by [sig-scalability]
+    - `publishing-bot`: instance of [publishing-bot] - owned by [sig-release]
     - `sippy`: instance of [sippy] at https://sippy.k8s.io - owned by [sig-architecture] (on behalf of [wg-reliability])
     - `slack-infra`: instance of [slack-infra] including https://slack.k8s.io - owned by [sig-contributor-experience]
     - `triageparty-release`: instance of [triage-party] - owned by [sig-release]
@@ -22,7 +23,6 @@ Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8
 - `k8s.gcr.io`: container images published by the project, promoted from `gcr.io/k8s-staging-*` repos
 - `k8s.io`: instance of nginx that provides redirects/reverse-proxying for k8s.io and its subdomains - owned by [sig-contributor-experience] and [sig-testing] (TODO(https://github.com/kubernetes/k8s.io/issues/2150) migrate to apps/)
 - `prow`: work-in-pogress instance of [prow] - owned by [sig-testing] (TODO(https://github.com/kubernetes/k8s.io/issues/2150) migrate to apps/)
-- `publishing-bot`: instance of [publishing-bot] - owned by [sig-release] (TODO(https://github.com/kubernetes/k8s.io/issues/2150) migrate to apps/)
 - `registry.k8s.io`: work-in-progress to support cross-cloud mirroring/hosting of containers and binaries
 
 TODO: are these actively in use or should they be retired?
