@@ -19,7 +19,10 @@ Ensure you are a member of both:
 - k8s-infra-cluster-admins@kubernetes.io (for access to Kubernetes secrets in-cluster)
 - k8s-infra-rbac-slack-infra@kubernetes.io (for access to Secret Manager secrets for slack-infra)
 
-From within this directory, run `deploy.sh`
+From within this directory:
+```shell
+./deploy.sh
+```
 
 [kubernetes-sigs/slack-infra]: https://github.com/kubernetes-sigs/slack-infra
 [access to the cluster]: https://github.com/kubernetes/k8s.io/blob/main/running-in-community-clusters.md#access-the-cluster
