@@ -183,6 +183,21 @@ function ensure_project_oslogin() {
     fi
 }
 
+function disable_project_oslogin() {
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
+        return 1
+    fi
+
+    local prj="${1}"
+
+    enabled=$(gcloud compute project-info describe --project="${prj}" \
+      --format='value(commonInstanceMetadata.items[enable-oslogin])')
+    if [ "${enabled}" == "TRUE" ]; then
+      gcloud compute project-info --project="${prj}" remove-metadata --keys "enable-oslogin"
+    fi
+}
+
 function ensure_e2e_projects() {
     # default to all staging projects
     if [ $# = 0 ]; then
@@ -198,8 +213,8 @@ function ensure_e2e_projects() {
         color 3 "Configuring e2e project: ${project}"
         ensure_e2e_project "${project}" 2>&1 | indent
 
-        color 3 "Ensuring OS Login is enabled for $project"
-        ensure_project_oslogin "${project}" 2>&1 | indent
+        color 3 "Ensuring OS Login is disabled for $project"
+        disable_project_oslogin "${project}" 2>&1 | indent
     done
 }
 
