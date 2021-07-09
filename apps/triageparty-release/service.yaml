@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: triage-party-release
   namespace: triageparty-release
+  labels:
+    app: triage-party
 spec:
   type: NodePort
   ports:

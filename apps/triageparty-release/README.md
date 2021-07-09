@@ -14,8 +14,8 @@ The GitHub token is stored in Secret Manager in the `kubernetes-public` project,
 
 - Have [access](https://github.com/kubernetes/k8s.io/blob/main/running-in-community-clusters.md) to the GKE cluster `aaa`.
 
-- From the `triage-party` directory run:
+- From the `triageparty-release` directory run:
 
-```console
-kubectl apply -f release-team/
+```shell
+./deploy.sh
 ```

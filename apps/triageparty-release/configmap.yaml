@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: triage-party-config-release
   namespace: triageparty-release
+  labels:
+    app: triage-party
 data:
   # The contents of config/config.yaml
   config.yaml: |
