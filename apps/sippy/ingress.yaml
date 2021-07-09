@@ -12,4 +12,4 @@ metadata:
 spec:
   backend:
     serviceName: sippy
-    servicePort: 8080
+    servicePort: 9080
