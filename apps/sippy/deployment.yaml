@@ -30,7 +30,7 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           command:
-            - /tmp/src/sippy
+            - /go/src/sippy/sippy
           args:
             - --server
             - --end-day
@@ -54,7 +54,7 @@ spec:
           # This runs in a loop to collect data every hour or so.  We run it in the same pod so that both containers can mount
           # and we don't need r/w many.
           command:
-            - /tmp/src/scripts/fetchdata-kube.sh
+            - /go/src/sippy/scripts/fetchdata-kube.sh
           volumeMounts:
             - mountPath: /data
               name: data
