@@ -52,7 +52,7 @@ for file in "${files[@]}"; do
     else
         passed_files+=("${file}")
     fi
-done 
+done
 
 result="passed"
 code=0
@@ -65,8 +65,8 @@ echo "result: ${result}"
 echo "shellcheck_cmd: ${shellcheck_cmd[*]} {file}"
 echo "shellcheck_output: >"
 <"${SHELLCHECK_OUTPUT}" sed -e 's/^/  /'
-echo "passing_files:"
-printf "%s\n" "${passed_files[@]/#${REPO_ROOT}\//- }"
+# echo "passing_files:"
+# printf "%s\n" "${passed_files[@]/#${REPO_ROOT}\//- }"
 echo "failing_files:"
 printf "%s\n" "${failed_files[@]/#${REPO_ROOT}\//- }"
 exit "${code}"
