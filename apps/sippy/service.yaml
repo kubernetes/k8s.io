@@ -14,4 +14,3 @@ spec:
     app: sippy
   sessionAffinity: None
   type: NodePort
-

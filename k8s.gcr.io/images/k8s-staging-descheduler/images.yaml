@@ -16,4 +16,3 @@
 - name: descheduler-arm
   dmap:
     "sha256:a71ecf15cf6df636b6739c620170dcdb02838c4cf85a47779daf12ee021e4078": ["v0.21.0"]
-

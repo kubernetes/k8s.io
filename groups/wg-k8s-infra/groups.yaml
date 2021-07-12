@@ -172,4 +172,3 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-cluster-admins@kubernetes.io
-
