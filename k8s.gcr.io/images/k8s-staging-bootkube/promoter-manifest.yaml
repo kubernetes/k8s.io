@@ -1,4 +1,4 @@
- # google group for gcr.io/k8s-staging-bootkube is k8s-infra-staging-bootkube@kubernetes.io 
+ # google group for gcr.io/k8s-staging-bootkube is k8s-infra-staging-bootkube@kubernetes.io
 registries:
 - name: gcr.io/k8s-staging-bootkube
   src: true

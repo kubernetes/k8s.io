@@ -39,7 +39,7 @@
 #   # - roles/run.viewer
 #   # read access to secrets metadata (not their contents)
 #   - roles/secretmanager.viewer
-# 
+#
 #   # meta roles (regardless of roles/viewer)
 #   #
 #   # read access for the project hierarchy (org, folders, projects)
@@ -50,12 +50,12 @@
 #   #       effectively allows an auditor to use any project they wish
 #   #       for billing or quota purposes. This seems... not right.
 #   - roles/serviceusage.serviceUsageConsumer
-# 
+#
 #   # specific permissions that don't come from a well-scoped pre-defined role
 #   permissions:
 #   # for gsutil _ get: cors, iam, label, logging, lifecycle, retention, ubla
 #   - storage.buckets.get
-# 
+#
 #   # use regexes to filter permissions pulled in from the above
 #   permissionRegexes:
 #   # only include (get|list).* (e.g. get, getIamPolicy, etc.)
