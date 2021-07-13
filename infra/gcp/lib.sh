@@ -103,8 +103,14 @@ export RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
 # used in: ensure-release-proejcts.sh ensure-staging-storage.sh
 export GCB_BUILDER_SVCACCT="gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
 
-# used in: ensure-release-proejcts.sh ensure-staging-storage.sh
+# The service account e-mail used by nodes on the prow-build cluster in k8s-infra-prow-build
+# used in: ensure-release-projects.sh ensure-staging-storage.sh
 export PROW_BUILD_SERVICE_ACCOUNT="prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+
+# TODO(spiffxp): remove support for this when finished migrating jobs that write to k8s-release-dev
+# The service account e-mail used by the google.com-owned k8s-prow or k8s-prow-builds clusters
+# used in: ensure-release-projects.sh
+export PR_KUBEKINS_SERVICE_ACCOUNT="pr-kubekins@kubernetes-jenkins-pull.iam.gserviceaccount.com"
 
 # Projects hosting prow build clusters that run untrusted code, such as
 # presubmits that build and test unmerged code from PRs
