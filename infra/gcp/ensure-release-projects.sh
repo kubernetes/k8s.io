@@ -138,35 +138,72 @@ done
 
 ## Special case: setup buckets that are used by CI
 
-# community-owned equivalents to gs://kubernetes-release-{dev,pull}
-RELEASE_BUCKETS=(
-  "gs://k8s-release-dev"
-  "gs://k8s-release-dev-asia"
-  "gs://k8s-release-dev-eu"
-  "gs://k8s-release-pull"
-)
+# Ensure the given GCS bucket exists in the given project with auto-deletion
+# enabled after a default or optionally specified number of days, and
+# appropriate permissions for prow, on-call, and release-managers
+#
+# $1: The GCP project (e.g. k8s-release)
+# $2: The GCS bucket (e.g. gs://k8s-release-dev)
+# [$3]: The number of days after which objects are auto-delete (e.g. 14, default: 90)
+function ensure_kubernetes_ci_gcs_bucket() {
+    if [ $# -lt 2 ] || [ $# -gt 4 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "${3:-"x"}" ]; then
+        echo "${FUNCNAME[0]}(project, gcs_bucket, [auto_deletion_days])" >&2
+        return 1
+    fi
+    local project="${1}"
+    local bucket="${2}"
+    local auto_deletion_days="${3:-"90"}"
 
-for BUCKET in "${RELEASE_BUCKETS[@]}"; do
-    color 3 "Configuring bucket: ${BUCKET}"
+    color 6 "Ensuring ${bucket} exists and is world readable in project: ${project}"
+    ensure_public_gcs_bucket "${project}" "${bucket}"
 
-    # Create the bucket
-    color 6 "Ensuring the bucket exists and is world readable"
-    ensure_public_gcs_bucket "k8s-release" "${BUCKET}"
+    color 6 "Ensuring ${bucket} has auto-deletion of ${auto_deletion_days} days"
+    ensure_gcs_bucket_auto_deletion "${bucket}" "${auto_deletion_days}"
 
-    # Enable admins on the bucket
-    color 6 "Empowering GCS admins"
-    empower_gcs_admins "k8s-release" "${BUCKET}"
+    color 6 "Ensuring GCS admins can admin ${bucket} in project: ${project}"
+    empower_gcs_admins "${project}" "${bucket}"
 
-    # Enable prow to write to the bucket
-    empower_svcacct_to_write_gcs_bucket "${PROW_BUILD_SERVICE_ACCOUNT}" "${BUCKET}"
+    color 6 "Ensuring prow on-call can admin ${bucket} in project: ${project}"
+    empower_group_to_admin_gcs_bucket "k8s-infra-prow-oncall@kubernetes.io" "${bucket}"
 
-    # Enable writers on the bucket
+    color 6 "Ensuring prow service account ${PROW_BUILD_SERVICE_ACCOUNT} can write to ${bucket} in project: ${project}"
+    empower_svcacct_to_write_gcs_bucket "${PROW_BUILD_SERVICE_ACCOUNT}" "${bucket}"
+
+    # Empower prow jobs running on google.com-owned k8s-prow or k8s-prow-builds
+    # clusters to write CI artifacts to the bucket
+    # TODO(spiffxp): remove this once we've migrated the jobs that rely on this account
+    #                to community-owned build cluster(s)
+    color 6 "Ensuring prow service account ${PR_KUBEKINS_SERVICE_ACCOUNT} can write to ${bucket} in project: ${project}"
+    empower_svcacct_to_write_gcs_bucket "${PR_KUBEKINS_SERVICE_ACCOUNT}" "${bucket}"
+
+    # Enable access logs to identify what pr-kubekins writes to this bucket
+    # TODO(spiffxp): consider disabling this once migration is complete
+    color 6 "Ensuring GCS access logs enabled for ${bucket} in project: ${project}"
+    ensure_gcs_bucket_logging "${bucket}"
+
+    # TODO(spiffxp): I'm not actually sure this makes sense. These groups don't
+    #                have permissions to do this with gs://kubernetes-release-dev
+    #                today. These buckets should be strictly-CI unless there are
+    #                very exceptional circumstances (which is when I'd suggest we
+    #                escalate to the admins above)
     for group in ${RELEASE_ADMINS} ${RELEASE_MANAGERS}; do
-        color 6 "Empowering ${group} to GCS"
-        empower_group_to_write_gcs_bucket "${group}" "${BUCKET}"
+        color 6 "Ensuring group ${group} can write to ${bucket} in project: ${project}"
+        empower_group_to_write_gcs_bucket "${group}" "${bucket}"
     done
-done
 
-color 6 "Ensure auto-deletion policies are set for CI buckets"
-ensure_gcs_bucket_auto_deletion "gs://k8s-release-dev" 90
-ensure_gcs_bucket_auto_deletion "gs://k8s-release-pull" 14
+}
+
+function special_case_kubernetes_ci_buckets() {
+  # community-owned equivalents to gs://kubernetes-release-{dev,pull}
+  ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-dev"
+  # TODO: we're squatting on these bucket names until we decide what to do:
+  # - these buckets aren't setup as regional buckets in ASIA and EU -> delete and recreate properly?
+  # - the kubernetes-release-dev-asia and -eu buckets are unpopulated -> forget the whole thing?
+  ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-dev-asia"
+  ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-dev-eu"
+  # TODO(https://github.com/kubernetes/test-infra/issues/18789) remove this bucket when no longer needed
+  ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-pull" 14
+}
+
+color 3 "Special case: ensuring GCS buckets for kubernetes CI artifacts exist"
+special_case_kubernetes_ci_buckets 2>&1 | indent
