@@ -16,7 +16,7 @@ data:
     - Find a  <https://git.k8s.io/community/sig-list.md|SIG channel> to join and ask your question.
 
     *Looking to contribute?*
-    - Ask questions in  #kubernetes-dev.
+    - Ask questions in  #kubernetes-contributors.
     - Join a <https://git.k8s.io/community/sig-list.md|SIG channel>.
     - Have your question answered live  on stream in #meet-our-contributors during the monthly <https://git.k8s.io/community/meet-our-contributors.md|MoC>.
     - Have a PR you need reviewed? Hop into #pr-reviews to get some feedback.
