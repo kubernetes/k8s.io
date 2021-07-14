@@ -22,6 +22,7 @@
     "sha256:39e1e963e5310e9c313bad51523be012ede7b35bb9316517d19089a010356592": ["1.29-1"]
 - name: cuda-vector-add
   dmap:
+    "sha256:0d474909d4b4f59f3cb3e1240396b334f2ce2c7d45b8f11ae41f7e847fd768d9": ["1.0"]
     "sha256:dc92c37785a73a45912a3a18bb89d72bf15c377938a5b122c12425b682bf880d": ["2.2"]
 - name: echoserver
   dmap:
