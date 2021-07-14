@@ -22,7 +22,7 @@ data:
     - Have a PR you need reviewed? Hop into #pr-reviews to get some feedback.
 
     *See some spam? or being harrassed?*
-    - Use the _"< https://www.k8s.dev/docs/comms/slack/#escalating-andor-reporting-a-problem|Report Message>"_ message action.
+    - Use the _"<https://www.k8s.dev/docs/comms/slack/#escalating-andor-reporting-a-problem|Report Message>"_ message action.
     - Escalate by joining #slack-admins and ask for an Admin's assistance.
 
     *Looking to join a local community?*
