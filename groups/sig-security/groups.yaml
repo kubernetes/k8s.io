@@ -6,9 +6,8 @@ groups:
       identified via automated scans of artifacts in k/k
 
       Membership is restricted to the SIG Security Chairs,
-      SIG Security Tooling Project Lead,
-      Product Security Committee / Security Response Committee,
-      SIG Release Chairs,  Patch Release Team, and Branch Managers.
+      SIG Security Tooling Lead, Security Response Committee,
+      SIG Release Chairs, Patch Release Team, and Branch Managers.
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"

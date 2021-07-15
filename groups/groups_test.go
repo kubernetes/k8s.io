@@ -115,6 +115,32 @@ func TestStagingEmailLength(t *testing.T) {
 	}
 }
 
+// TestDescriptionLength tests that the number of characters in the
+// google groups description does not exceed 300.
+//
+// This validation is needed because gcloud allows apps:description
+// with length no greater than 300
+func TestDescriptionLength(t *testing.T) {
+	var errs []error
+	for _, g := range cfg.Groups {
+		description := g.Description
+
+		len := utf8.RuneCountInString(description)
+		//Ref: https://developers.google.com/admin-sdk/groups-settings/v1/reference/groups
+		if len > 300 {
+			errs = append(errs,
+				fmt.Errorf("Number of characters in description \"%s\" for group name \"%s\" "+
+					"should not exceed 300; is: %d", description, g.Name, len))
+		}
+	}
+
+	if errs != nil {
+		for _, err := range errs {
+			t.Error(err)
+		}
+	}
+}
+
 // Enforce conventions for all groups
 func TestGroupConventions(t *testing.T) {
 	for _, g := range cfg.Groups {
