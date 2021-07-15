@@ -41,7 +41,7 @@
     "sha256:224da667cf3047998ea691e9766fedd1eab94257a39df81374bfa14536da3688": ["v20210115-gba0502603"]
     "sha256:fcfa3e9d1f8ec3141efedbf77cf659640f452a9c22165c78006ea462b84d06f6": ["v20210324-g8baef769d"]
     "sha256:a7356029dd0c26cc3466bf7a27daec0f4df73aa14ca6c8b871a767022a812c0b": ["v20210530-g6aab4c291"]
-    
+
 # image to run tests
 # https://github.com/kubernetes/ingress-nginx/tree/master/images/test-runner
 - name: e2e-test-runner

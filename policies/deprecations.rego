@@ -34,3 +34,16 @@ _warn = msg {
   input.kind == "Ingress"
   msg := sprintf("%s/%s: API extensions/v1beta1 for Ingress is deprecated from Kubernetes 1.14, use networking.k8s.io/v1beta1 instead.", [input.kind, input.metadata.name])
 }
+
+# ref: https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/
+_warn = msg {
+  input.apiVersion == "apiextensions.k8s.io/v1beta1"
+  input.kind == "CustomResourceDefinition"
+  msg := sprintf("%s/%s: apiextensions.k8s.io/v1beta1 CustomResourceDefinition is deprecated in v1.16+, unavailable in v1.22+; use apiextensions.k8s.io/v1 CustomResourceDefinition instead", [input.kind, input.metadata.name])
+}
+
+_warn = msg {
+  input.apiVersion == "networking.k8s.io/v1beta1"
+  input.kind == "Ingress"
+  msg := sprintf("%s/%s: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress instead", [input.kind, input.metadata.name])
+}

@@ -364,7 +364,7 @@ groups:
       - Damanarora@cmail.carleton.ca # 1.22 Release Notes Shadow
       - gossanth@gmail.com # 1.22 Bug Triage Shadow
       - james@jameslaverack.com # 1.22 Enhancements Lead
-      - jeeves.butler@gmail.com # 1.22 Comms Lead 
+      - jeeves.butler@gmail.com # 1.22 Comms Lead
       - jgavinray@linux.com # 1.22 Bug Triage Shadow
       - joseph.r.sandoval@gmail.com # 1.22 Enhancements Shadow
       - klkfr@amazon.com # 1.22 Comms Shadow
@@ -386,7 +386,7 @@ groups:
       - taylorchprr@gmail.com # 1.22 Bug Triage Shadow
       - victor@cloudflavor.io # 1.22 Docs Lead
       - voigt.christoph@gmail.com # 1.22 Bug Triage Shadow
-      - xander@grzy.dev # 1.22 Enhancements Shadow 
+      - xander@grzy.dev # 1.22 Enhancements Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -412,7 +412,7 @@ groups:
       - Damanarora@cmail.carleton.ca # 1.22 Release Notes Shadow
       - sladynnunes98@gmail.com # 1.22 Release Notes Shadow
       - simran.thind@outlook.com # 1.22 Release Notes Shadow
-      - salahi.hossein@gmail.com # 1.22 CI Signal Shadow 
+      - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
       - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
       - ania0102@gmail.com # 1.22 CI Signal Shadow
       - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
@@ -428,4 +428,3 @@ groups:
       - rlejano@gmail.com # 1.22 Enhancements Shadow
       - supriyapremkumar1@gmail.com # 1.22 Enhancements Shadow
       - nng.grace@gmail.com # 1.22 Enhancements Shadow
-

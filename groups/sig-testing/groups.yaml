@@ -116,7 +116,7 @@ groups:
   #
   # Membership should correspond roughly to subproject owners for the set of
   # subproject artifacts being stored in the GCS bucket
-  #     
+  #
   - email-id: k8s-infra-push-kind@kubernetes.io
     name: k8s-infra-push-kind
     description: |-
@@ -169,7 +169,7 @@ groups:
     - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
     - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
     - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
-  
+
   #
   # sig-testing k8s-infra owners
   #
@@ -177,7 +177,7 @@ groups:
   # infrastructure owned or managed by sig-testing. A high level of trust is
   # required for membership in these groups.
   #
-  
+
   - email-id: k8s-infra-ci-robot@kubernetes.io
     name: k8s-infra-ci-robot
     description: |-

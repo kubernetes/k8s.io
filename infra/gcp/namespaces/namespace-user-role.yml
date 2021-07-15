@@ -21,7 +21,7 @@ rules:
     resources: ["leases"]
     verbs: ["*"]
   - apiGroups: ["networking.k8s.io"]
-    resources: ["networkpolicies","ingresses"]
+    resources: ["networkpolicies", "ingresses"]
     verbs: ["*"]
   - apiGroups: ["metrics.k8s.io"]
     resources: ["pods"]

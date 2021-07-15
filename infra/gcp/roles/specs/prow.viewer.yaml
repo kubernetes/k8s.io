@@ -25,13 +25,13 @@ include:
   - roles/secretmanager.viewer
 
   # meta roles
-  # 
+  #
   # read access for the project hierarchy (org, folders, projects)
   - roles/browser
 
   # specific permissions that don't come from a well-scoped pre-defined role
   permissions:
-  # read access to buckets and their objects 
+  # read access to buckets and their objects
   - storage.buckets.get
   - storage.buckets.getIamPolicy
   - storage.buckets.list

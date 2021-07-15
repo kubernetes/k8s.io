@@ -108,7 +108,7 @@ groups:
       - ihor@cncf.io
       - jdagostino2@gmail.com
       - justinsb@google.com
-      - k8s-infra-ii-coop@kubernetes.io      
+      - k8s-infra-ii-coop@kubernetes.io
       - spiffxp@gmail.com
       - spiffxp@google.com
       - thockin@google.com
@@ -172,4 +172,3 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-cluster-admins@kubernetes.io
-

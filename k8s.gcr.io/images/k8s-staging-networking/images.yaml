@@ -16,4 +16,3 @@
 - name: ingress-gce-404-server-with-metrics-amd64
   dmap:
     "sha256:7eb7b3cee4d33c10c49893ad3c386232b86d4067de5251294d4c620d6e072b93": ["v1.10.11"]
-    

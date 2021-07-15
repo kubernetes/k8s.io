@@ -20,13 +20,13 @@ spec:
       - image: k8s.gcr.io/node-perf-dash:v0.3
         command:
           - /node-perf-dash
-          -   --www=true
-          -   --dir=/www
-          -   --address=0.0.0.0:8080
-          -   --builds=30
-          -   --datasource=google-gcs
-          -   --tracing=true
-          -   --jenkins-job=ci-kubernetes-node-kubelet-benchmark,ci-cri-containerd-node-e2e-benchmark
+          - --www=true
+          - --dir=/www
+          - --address=0.0.0.0:8080
+          - --builds=30
+          - --datasource=google-gcs
+          - --tracing=true
+          - --jenkins-job=ci-kubernetes-node-kubelet-benchmark,ci-cri-containerd-node-e2e-benchmark
         imagePullPolicy: Always
         name: node-perf-dash
         ports:

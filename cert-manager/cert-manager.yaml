@@ -6274,7 +6274,7 @@ spec:
                 fieldPath: metadata.namespace
           resources:
             {}
-            
+
 ---
 # Source: cert-manager/templates/deployment.yaml
 apiVersion: apps/v1
@@ -6335,7 +6335,7 @@ spec:
             requests:
               cpu: 10m
               memory: 32Mi
-            
+
 
 ---
 # Source: cert-manager/templates/webhook-deployment.yaml
@@ -6395,7 +6395,7 @@ spec:
                 fieldPath: metadata.namespace
           resources:
             {}
-            
+
           volumeMounts:
           - name: certs
             mountPath: /certs
@@ -6466,7 +6466,7 @@ webhooks:
 
 ---
 # Source: cert-manager/templates/webhook-psp-clusterrole.yaml
- 
+
 
 ---
 # Source: cert-manager/templates/webhook-psp-clusterrolebinding.yaml
