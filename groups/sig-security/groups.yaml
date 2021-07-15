@@ -1,0 +1,22 @@
+groups:
+  - email-id: security-tooling-private@kubernetes.io
+    name: security-tooling-private
+    description: |-
+      Private list for non-public (internal) triage of security vulnerabilities
+      identified via automated scans of artifacts in k/k
+
+      Membership is restricted to the SIG Security Chairs,
+      SIG Security Tooling Project Lead,
+      Product Security Committee / Security Response Committee,
+      SIG Release Chairs,  Patch Release Team, and Branch Managers.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - contributors@kubernetes.io
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+      - pushkarj.at.work@gmail.com
+    members:
+      - security-release-team@kubernetes.io
+
