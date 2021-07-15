@@ -36,10 +36,8 @@ function usage() {
     echo > /dev/stderr
 }
 
-# NB: Please keep this sorted.
-PROJECTS=(
-    k8s-releng-prod
-)
+mapfile -t PROJECTS < <(k8s_infra_projects "releng")
+readonly PROJECTS
 
 if [ $# = 0 ]; then
     # default to all release projects
@@ -47,6 +45,12 @@ if [ $# = 0 ]; then
 fi
 
 for PROJECT; do
+
+    if ! k8s_infra_project "releng" "${PROJECT}" >/dev/null; then
+        color 1 "Skipping unrecognized release project name: ${PROJECT}"
+        continue
+    fi
+
     color 3 "Configuring: ${PROJECT}"
 
     # Make the project, if needed
