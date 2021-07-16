@@ -7,29 +7,29 @@ data:
     Welcome to the Kubernetes Community Slack!
 
     The Kubernetes Slack can be a large and intimidating place, please don't be afraid to ask questions. The community is quite welcoming :)
-    To ensure Slack remains a welcoming place for all, the Kubernetes Community adheres to a <https://git.k8s.io/community/code-of-conduct.md|Code of Conduct>.
+    To ensure Slack remains a welcoming place for all, the Kubernetes Community adheres to a <https://k8s.dev/community/code-of-conduct|Code of Conduct>.
 
     *Have a general Kubernetes question?*
     - Ask your question on the <https://discuss.kubernetes.io|official Kubernetes Forum>.
     - Join #kubernetes-novice.
-    - Have your question answered live on stream in #office-hours during the monthly <https://git.k8s.io/community/events/office-hours.md|Office Hours>.
-    - Find a  <https://git.k8s.io/community/sig-list.md|SIG channel> to join and ask your question.
+    - Have your question answered live on stream in #office-hours during the monthly <https://k8s.dev/events/office-hours|Office Hours>.
+    - Find a  <https://k8s.dev/community/community-groups|SIG channel> to join and ask your question.
 
     *Looking to contribute?*
-    - Ask questions in  #kubernetes-dev.
-    - Join a <https://git.k8s.io/community/sig-list.md|SIG channel>.
-    - Have your question answered live  on stream in #meet-our-contributors during the monthly <https://git.k8s.io/community/meet-our-contributors.md|MoC>.
+    - Ask questions in  #kubernetes-contributors.
+    - Join a <https://k8s.dev/community/community-groups|SIG channel>.
+    - Have your question answered live  on stream in #meet-our-contributors during the monthly <https://k8s.dev/events/meet-our-contributors|MoC>.
     - Have a PR you need reviewed? Hop into #pr-reviews to get some feedback.
 
     *See some spam? or being harrassed?*
-    - Use the _"<https://git.k8s.io/community/communication/slack-guidelines.md#escalating-andor-reporting-a-problem|Report Message>"_ message action.
+    - Use the _"<https://k8s.dev/docs/comms/slack/#escalating-andor-reporting-a-problem|Report Message>"_ message action.
     - Escalate by joining #slack-admins and ask for an Admin's assistance.
 
     *Looking to join a local community?*
     - There are many channels for regions and meetups, look for channels like `#meetup-[region]` or `#[region]-users`.
 
     *Other channels of note:*
-    - #kubecon - Get your question answered about any upcoming <https://www.cncf.io/community/kubecon-cloudnativecon-events/|KubeCon/CloudNativeCon>.
+    - #kubecon - Get your question answered about any upcoming <https://cncf.io/community/kubecon-cloudnativecon-events|KubeCon/CloudNativeCon>.
     - #kubernetes-careers - A place to post Kubernetes related jobs.
 
-    Have any other questions? Please see the <http://git.k8s.io/community/communication/slack-guidelines.md|Slack communications guidelines> to start.
+    Have any other questions? Please see the <https://k8s.dev/docs/comms/slack|Slack communications guidelines> to start.
