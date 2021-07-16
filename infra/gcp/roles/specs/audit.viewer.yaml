@@ -33,8 +33,8 @@ include:
   - roles/orgpolicy.policyViewer
   # read access to pubsub schemas, snapshots, subscriptions, topics (but not messages)
   - roles/pubsub.viewer
-  # TODO: determine if viewing cloud run configurations could expose anything sensitive
-  # - roles/run.viewer
+  # read access to run configurations, olocations, reviewers, routes, services
+  - roles/run.viewer
   # read access to secrets metadata (not their contents)
   - roles/secretmanager.viewer
 
