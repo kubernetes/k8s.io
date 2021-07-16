@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-689098785215@gcp-sa-cloudkms.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-release-admins@kubernetes.io"
       ],
       "role": "roles/viewer"
