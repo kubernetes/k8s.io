@@ -241,6 +241,9 @@ infra:
     projects:
       k8s-release:
       k8s-release-test-prod: # TODO: should this be prod or release?:
+
+  releng:
+    projects:
       k8s-releng-prod:
         managed_by: infra/gcp/ensure-releng-project.sh
 
