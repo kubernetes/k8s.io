@@ -58,7 +58,7 @@
   dmap:
     "sha256:dc81c9e400528c35e5b58d5208e7aece2b7452985009a44a341f42bebaabf07b": ["1.14-alpine"]
     "sha256:05ac4b4aef14d4a594afc8e6a63076197debfee2a7b8c191f65c7d653beee0e0": ["1.15-alpine"]
-    "sha256:503b7abb89e57383eba61cc8a9cb0b495ea575c516108f7d972a6ff6e1ab3c9b": ["1.14-1"]
+    "sha256:503b7abb89e57383eba61cc8a9cb0b495ea575c516108f7d972a6ff6e1ab3c9b": ["1.14-1", "1.14-1-copy"]
     "sha256:6e029eca4e40d373819f5fd710c487a7f002d6ae70de85989348c18eef7f22f5": ["1.15-1"]
 - name: node-perf/npb-ep
   dmap:
