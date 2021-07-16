@@ -40,6 +40,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-304687256732@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerregistry.ServiceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-304687256732@gcp-sa-containerscanning.iam.gserviceaccount.com"
       ],
       "role": "roles/containerscanning.ServiceAgent"
