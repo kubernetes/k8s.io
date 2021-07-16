@@ -26,12 +26,15 @@ spec:
           image: k8s.gcr.io/gcsweb:v1.1.0
           args:
             - -upgrade-proxied-http-to-https
+            # buckets owned by kubernetes.io
             - -b=k8s-infra-prow-results
             - -b=k8s-infra-scalability-tests-logs
             - -b=k8s-release-dev
+            # buckets owned by google.com
             - -b=kubernetes-jenkins
             - -b=kubernetes-release
             - -b=kubernetes-release-dev
+            - -b=sig-scalability-logs
             - -p=8080
           ports:
             - containerPort: 8080
