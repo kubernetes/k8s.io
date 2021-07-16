@@ -112,6 +112,7 @@ groups:
       - spiffxp@gmail.com
       - spiffxp@google.com
       - thockin@google.com
+      - tjferrara@google.com
 
   - email-id: k8s-infra-gcp-auditors@kubernetes.io
     name: k8s-infra-gcp-auditors
