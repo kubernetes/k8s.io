@@ -37,10 +37,13 @@
     "resourcemanager.projects.move",
     "resourcemanager.projects.setIamPolicy",
     "storage.buckets.create",
+    "storage.buckets.createTagBinding",
     "storage.buckets.delete",
+    "storage.buckets.deleteTagBinding",
     "storage.buckets.get",
     "storage.buckets.getIamPolicy",
     "storage.buckets.list",
+    "storage.buckets.listTagBindings",
     "storage.buckets.setIamPolicy",
     "storage.buckets.update"
   ],
