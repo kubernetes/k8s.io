@@ -35,8 +35,8 @@
 #   - roles/orgpolicy.policyViewer
 #   # read access to pubsub schemas, snapshots, subscriptions, topics (but not messages)
 #   - roles/pubsub.viewer
-#   # TODO: determine if viewing cloud run configurations could expose anything sensitive
-#   # - roles/run.viewer
+#   # read access to run configurations, olocations, reviewers, routes, services
+#   - roles/run.viewer
 #   # read access to secrets metadata (not their contents)
 #   - roles/secretmanager.viewer
 # 
@@ -1119,10 +1119,14 @@ includedPermissions:
   - retail.catalogs.list
   - retail.operations.list
   - retail.products.list
+  - run.configurations.get
   - run.configurations.list
   - run.locations.list
+  - run.revisions.get
   - run.revisions.list
+  - run.routes.get
   - run.routes.list
+  - run.services.get
   - run.services.getIamPolicy
   - run.services.list
   - runtimeconfig.configs.getIamPolicy
