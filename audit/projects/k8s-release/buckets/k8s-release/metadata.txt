@@ -11,8 +11,8 @@ gs://k8s-release/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 07 Aug 2020 20:50:17 GMT
-	Time updated:			Fri, 07 Aug 2020 20:50:37 GMT
-	Metageneration:			9
+	Time updated:			Thu, 15 Jul 2021 23:25:55 GMT
+	Metageneration:			12
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]
