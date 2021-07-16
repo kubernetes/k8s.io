@@ -25,12 +25,12 @@
 #   - roles/pubsub.viewer
 #   # read access to secrets metadata (not their contents)
 #   - roles/secretmanager.viewer
-#
+# 
 #   # meta roles
 #   #
 #   # read access for the project hierarchy (org, folders, projects)
 #   - roles/browser
-#
+# 
 #   # specific permissions that don't come from a well-scoped pre-defined role
 #   permissions:
 #   # read access to buckets and their objects
@@ -265,6 +265,7 @@ includedPermissions:
   - container.daemonSets.getStatus
   - container.daemonSets.list
   - container.deployments.get
+  - container.deployments.getScale
   - container.deployments.getStatus
   - container.deployments.list
   - container.endpointSlices.get
@@ -351,13 +352,16 @@ includedPermissions:
   - container.services.getStatus
   - container.services.list
   - container.statefulSets.get
+  - container.statefulSets.getScale
   - container.statefulSets.getStatus
   - container.statefulSets.list
   - container.storageClasses.get
   - container.storageClasses.list
   - container.storageStates.get
+  - container.storageStates.getStatus
   - container.storageStates.list
   - container.storageVersionMigrations.get
+  - container.storageVersionMigrations.getStatus
   - container.storageVersionMigrations.list
   - container.thirdPartyObjects.get
   - container.thirdPartyObjects.list
@@ -374,6 +378,7 @@ includedPermissions:
   - container.volumeSnapshotClasses.get
   - container.volumeSnapshotClasses.list
   - container.volumeSnapshotContents.get
+  - container.volumeSnapshotContents.getStatus
   - container.volumeSnapshotContents.list
   - container.volumeSnapshots.get
   - container.volumeSnapshots.list

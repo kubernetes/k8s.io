@@ -16,7 +16,7 @@
 #   - roles/billing.creator
 #   # maybe for budgets.*, this also offers accounts.updateUsageExportSpec
 #   - roles/billing.costsManager
-#
+# 
 #   # resourcemanager.* permissions missing from roles/owner
 #   # for resourcemanager.folders.*
 #   - roles/resourcemanager.folderAdmin
@@ -24,7 +24,7 @@
 #   - roles/resourcemanager.organizationAdmin
 #   # for resourcemanager.projects.create
 #   - roles/resourcemanager.projectCreator
-#
+# 
 #   # for storage.buckets.(get|update|(get|set)IamPolicy)
 #   - roles/storage.admin
 #   permissionRegexes:
@@ -72,10 +72,13 @@ includedPermissions:
   - resourcemanager.projects.move
   - resourcemanager.projects.setIamPolicy
   - storage.buckets.create
+  - storage.buckets.createTagBinding
   - storage.buckets.delete
+  - storage.buckets.deleteTagBinding
   - storage.buckets.get
   - storage.buckets.getIamPolicy
   - storage.buckets.list
+  - storage.buckets.listTagBindings
   - storage.buckets.setIamPolicy
   - storage.buckets.update
 name: organization.admin

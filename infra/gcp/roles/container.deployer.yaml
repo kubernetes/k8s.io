@@ -19,7 +19,8 @@
 #   # GKE cluster permissions
 #   - ^container\.clusters\.(create|delete|getCredentials|update)$
 #   - ^container\.operations\.
-#   - ^container\.hostServiceAgent\.#
+#   - ^container\.hostServiceAgent\.
+#
 description: null
 includedPermissions:
   - container.apiServices.create

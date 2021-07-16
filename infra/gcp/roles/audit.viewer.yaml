@@ -39,7 +39,7 @@
 #   # - roles/run.viewer
 #   # read access to secrets metadata (not their contents)
 #   - roles/secretmanager.viewer
-#
+# 
 #   # meta roles (regardless of roles/viewer)
 #   #
 #   # read access for the project hierarchy (org, folders, projects)
@@ -50,12 +50,12 @@
 #   #       effectively allows an auditor to use any project they wish
 #   #       for billing or quota purposes. This seems... not right.
 #   - roles/serviceusage.serviceUsageConsumer
-#
+# 
 #   # specific permissions that don't come from a well-scoped pre-defined role
 #   permissions:
 #   # for gsutil _ get: cors, iam, label, logging, lifecycle, retention, ubla
 #   - storage.buckets.get
-#
+# 
 #   # use regexes to filter permissions pulled in from the above
 #   permissionRegexes:
 #   # only include (get|list).* (e.g. get, getIamPolicy, etc.)
@@ -418,13 +418,6 @@ includedPermissions:
   - cloudtranslate.glossaries.list
   - cloudtranslate.locations.list
   - cloudtranslate.operations.list
-  - cloudvolumesgcp-api.netapp.com/activeDirectories.list
-  - cloudvolumesgcp-api.netapp.com/ipRanges.list
-  - cloudvolumesgcp-api.netapp.com/jobs.list
-  - cloudvolumesgcp-api.netapp.com/regions.list
-  - cloudvolumesgcp-api.netapp.com/serviceLevels.list
-  - cloudvolumesgcp-api.netapp.com/snapshots.list
-  - cloudvolumesgcp-api.netapp.com/volumes.list
   - commerceprice.privateoffers.list
   - composer.environments.list
   - composer.imageversions.list
@@ -704,8 +697,6 @@ includedPermissions:
   - datafusion.instances.getIamPolicy
   - datafusion.instances.list
   - datafusion.locations.list
-  - datafusion.namespaces.getIamPolicy
-  - datafusion.namespaces.list
   - datafusion.operations.list
   - datalabeling.annotateddatasets.list
   - datalabeling.annotationspecsets.list
@@ -755,6 +746,7 @@ includedPermissions:
   - dialogflow.agents.list
   - dialogflow.answerrecords.list
   - dialogflow.callMatchers.list
+  - dialogflow.changelogs.list
   - dialogflow.contexts.list
   - dialogflow.conversationDatasets.list
   - dialogflow.conversationModels.list
@@ -803,6 +795,10 @@ includedPermissions:
   - dns.projects.get
   - dns.resourceRecordSets.get
   - dns.resourceRecordSets.list
+  - dns.responsePolicies.get
+  - dns.responsePolicies.list
+  - dns.responsePolicyRules.get
+  - dns.responsePolicyRules.list
   - documentai.evaluations.list
   - documentai.labelerPools.list
   - documentai.locations.list
@@ -824,6 +820,7 @@ includedPermissions:
   - eventarc.operations.list
   - eventarc.triggers.getIamPolicy
   - eventarc.triggers.list
+  - fcmdata.deliverydata.list
   - file.backups.list
   - file.instances.list
   - file.locations.list
@@ -910,6 +907,11 @@ includedPermissions:
   - integrations.apigeeSfdcInstances.list
   - integrations.apigeeSuspensions.list
   - lifesciences.operations.list
+  - livestream.channels.list
+  - livestream.events.list
+  - livestream.inputs.list
+  - livestream.locations.list
+  - livestream.operations.list
   - logging.buckets.get
   - logging.buckets.list
   - logging.exclusions.get
@@ -937,6 +939,7 @@ includedPermissions:
   - managedidentities.domains.list
   - managedidentities.locations.list
   - managedidentities.operations.list
+  - managedidentities.sqlintegrations.list
   - memcache.instances.list
   - memcache.locations.list
   - memcache.operations.list
@@ -1062,6 +1065,7 @@ includedPermissions:
   - pubsub.topics.get
   - pubsub.topics.getIamPolicy
   - pubsub.topics.list
+  - pubsublite.reservations.list
   - pubsublite.subscriptions.list
   - pubsublite.topics.list
   - recaptchaenterprise.keys.list
@@ -1081,6 +1085,7 @@ includedPermissions:
   - recommender.computeInstanceIdleResourceRecommendations.list
   - recommender.computeInstanceMachineTypeRecommendations.list
   - recommender.iamPolicyInsights.list
+  - recommender.iamPolicyLateralMovementInsights.list
   - recommender.iamPolicyRecommendations.list
   - recommender.iamServiceAccountInsights.list
   - recommender.locations.get
@@ -1089,6 +1094,8 @@ includedPermissions:
   - recommender.loggingProductSuggestionContainerRecommendations.list
   - recommender.monitoringProductSuggestionComputeInsights.list
   - recommender.monitoringProductSuggestionComputeRecommendations.list
+  - recommender.resourcemanagerProjectUtilizationInsights.list
+  - recommender.resourcemanagerProjectUtilizationRecommendations.list
   - recommender.usageCommitmentRecommendations.list
   - redis.instances.list
   - redis.locations.list
@@ -1193,6 +1200,18 @@ includedPermissions:
   - transcoder.jobTemplates.list
   - transcoder.jobs.list
   - translationhub.portals.list
+  - visualinspection.annotationSets.list
+  - visualinspection.annotationSpecs.list
+  - visualinspection.annotations.list
+  - visualinspection.datasets.list
+  - visualinspection.images.list
+  - visualinspection.locations.list
+  - visualinspection.modelEvaluations.list
+  - visualinspection.models.list
+  - visualinspection.modules.list
+  - visualinspection.operations.list
+  - visualinspection.solutionArtifacts.list
+  - visualinspection.solutions.list
   - vmmigration.cloneJobs.list
   - vmmigration.cutoverJobs.list
   - vmmigration.datacenterConnectors.list
