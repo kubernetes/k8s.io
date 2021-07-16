@@ -173,9 +173,9 @@ class RedirTest(HTTPTestCase):
             self.assert_temp_redirect(base + 'github-labels',
                 'https://github.com/kubernetes/test-infra/blob/master/label_sync/labels.md')
             self.assert_temp_redirect(base + 'good-first-issue',
-                'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+no%3Aassignee&type=Issues')
+                'https://github.com/issues?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+no%3Aassignee')
             self.assert_temp_redirect(base + 'help-wanted',
-                'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22+no%3Aassignee&type=Issues')
+                'https://github.com/issues?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22+no%3Aassignee')
             self.assert_temp_redirect(
                 base + 'oncall',
                 'https://storage.googleapis.com/test-infra-oncall/oncall.html')
@@ -211,7 +211,7 @@ class RedirTest(HTTPTestCase):
                 'https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess')
             self.assert_temp_redirect(
                 base + 'needs-ok-to-test',
-                'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase&type=Issues')
+                'https://github.com/pulls?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase')
 
     def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
