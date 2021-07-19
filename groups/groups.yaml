@@ -384,10 +384,11 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - janluk@google.com
       - jkaniuk@google.com
       - jprzychodzen@google.com
+      - jupblb@google.com
       - maciejborsz@google.com
+      - marcelzieba@google.com
       - mmatejczyk@google.com
       - shyam123.jvs95@gmail.com
       - wojtekt@google.com
@@ -478,7 +479,9 @@ groups:
       # scalability-oncall
       - jkaniuk@google.com
       - jprzychodzen@google.com
+      - jupblb@google.com
       - maciejborsz@google.com
+      - marcelzieba@google.com
       - zawodny@google.com
       # sig-scalability leads
       - jeedigv@amazon.com
