@@ -46,7 +46,7 @@ deploy_cip_auditor()
 
     gcloud run deploy "${AUDITOR_SERVICE_NAME}" \
         --image="us.gcr.io/k8s-artifacts-prod/artifact-promoter/cip-auditor@sha256:${CIP_AUDITOR_DIGEST}" \
-        --update-env-vars="CIP_AUDIT_MANIFEST_REPO_URL=https://github.com/kubernetes/k8s.io,CIP_AUDIT_MANIFEST_REPO_BRANCH=master,CIP_AUDIT_MANIFEST_REPO_MANIFEST_DIR=k8s.gcr.io,CIP_AUDIT_GCP_PROJECT_ID=k8s-artifacts-prod" \
+        --update-env-vars="CIP_AUDIT_MANIFEST_REPO_URL=https://github.com/kubernetes/k8s.io,CIP_AUDIT_MANIFEST_REPO_BRANCH=main,CIP_AUDIT_MANIFEST_REPO_MANIFEST_DIR=k8s.gcr.io,CIP_AUDIT_GCP_PROJECT_ID=k8s-artifacts-prod" \
         --platform=managed \
         --no-allow-unauthenticated \
         --region=us-central1 \
