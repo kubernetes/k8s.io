@@ -15,6 +15,8 @@
   "projects/kubernetes-public/logs/kube-proxy",
   "projects/kubernetes-public/logs/kubelet",
   "projects/kubernetes-public/logs/kubelet-monitor",
+  "projects/kubernetes-public/logs/monitoring.googleapis.com%2FViolationAutoResolveEventv1",
+  "projects/kubernetes-public/logs/monitoring.googleapis.com%2FViolationOpenEventv1",
   "projects/kubernetes-public/logs/node-problem-detector",
   "projects/kubernetes-public/logs/requests",
   "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_1_output",

@@ -117,7 +117,8 @@
       "members": [
         "group:gke-security-groups@kubernetes.io",
         "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
-        "serviceAccount:k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com"
+        "serviceAccount:k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com",
+        "user:tjferrara@google.com"
       ],
       "role": "roles/monitoring.viewer"
     },
