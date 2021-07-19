@@ -19,6 +19,9 @@ include:
   # read access to cloudkms public keys
   # ref: https://cloud.google.com/kms/docs/reference/permissions-and-roles#access-control-guidelines
   - roles/cloudkms.publicKeyViewer
+  # full access to trace console, but is filtered back to read-only
+  # ref: https://cloud.google.com/trace/docs/iam#roles
+  - roles/cloudtrace.user
   # read access to compute
   - roles/compute.viewer
   # read access to compute

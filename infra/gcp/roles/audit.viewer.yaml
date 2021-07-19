@@ -332,8 +332,12 @@ includedPermissions:
   - cloudtoolresults.executions.list
   - cloudtoolresults.histories.list
   - cloudtoolresults.steps.list
+  - cloudtrace.insights.get
   - cloudtrace.insights.list
+  - cloudtrace.stats.get
+  - cloudtrace.tasks.get
   - cloudtrace.tasks.list
+  - cloudtrace.traces.get
   - cloudtrace.traces.list
   - cloudtranslate.glossaries.list
   - cloudtranslate.locations.list
