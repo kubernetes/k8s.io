@@ -33,7 +33,7 @@ spec:
             # buckets owned by google.com
             - -b=kubernetes-jenkins
             - -b=kubernetes-release
-            - -b=kubernetes-release-dev
+            - -b=kubernetes-release-dev # TODO: remove when v1.22 unsupported, or no more builds exist her
             - -b=sig-scalability-logs
             - -p=8080
           ports:

@@ -43,7 +43,7 @@ There was some manual work in bringing this up fully:
 # get k8s.io on here, for this example we'll assume everything's pushed to git
 git clone git://github.com/kubernetes/k8s.io
 
-# deploy the resources; note boskos-resources.yaml isn't a configmap
+# deploy the resources
 cd k8s.io/infra/gcp/clusters/k8s-infra-prow-build
 ./deploy.sh
 
@@ -139,7 +139,7 @@ gsutil iam ch \
 
 ## Known Issues / TODO
 
-- some jobs can't be migrated until we use a bucket other than gs://kubernetes-release-dev
+- jobs are not segmented into separate nodepools
 - setup an autobump jump for all components installed to this build cluster
 - try using local SSD for the node pools for faster IOPS
 

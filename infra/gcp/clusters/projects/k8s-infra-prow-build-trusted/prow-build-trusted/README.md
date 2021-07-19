@@ -78,15 +78,4 @@ gsutil iam ch \
 gsutil iam ch \
   serviceAccount:prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com:objectAdmin \
   gs://kubernetes-release-pull
-# TODO: this isn't working, the bucket is in google-containers project which has
-#       a ban on non-google.com accounts being added to iam
-gsutil iam ch \
-  serviceAccount:prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com:objectAdmin \
-  gs://kubernetes-release-dev
 ```
-
-## TODO
-
-- figure out whether this build cluster needs write access to gs://kubernetes-release-dev
-- deploy ghproxy to this cluster (does this need its own nodepool/instance?)
-- try out a dry-run peribolos job on this cluster

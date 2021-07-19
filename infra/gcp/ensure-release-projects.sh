@@ -182,7 +182,7 @@ function ensure_kubernetes_ci_gcs_bucket() {
     ensure_gcs_bucket_logging "${bucket}"
 
     # TODO(spiffxp): I'm not actually sure this makes sense. These groups don't
-    #                have permissions to do this with gs://kubernetes-release-dev
+    #                have permissions to do this with the google.com-owned bucket
     #                today. These buckets should be strictly-CI unless there are
     #                very exceptional circumstances (which is when I'd suggest we
     #                escalate to the admins above)
@@ -198,7 +198,7 @@ function special_case_kubernetes_ci_buckets() {
   ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-dev"
   # TODO: we're squatting on these bucket names until we decide what to do:
   # - these buckets aren't setup as regional buckets in ASIA and EU -> delete and recreate properly?
-  # - the kubernetes-release-dev-asia and -eu buckets are unpopulated -> forget the whole thing?
+  # - the google.com-owned -asia and -eu buckets are unpopulated -> forget the whole thing?
   ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-dev-asia"
   ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-dev-eu"
   # TODO(https://github.com/kubernetes/test-infra/issues/18789) remove this bucket when no longer needed
