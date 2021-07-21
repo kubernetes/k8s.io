@@ -6,7 +6,7 @@ metadata:
     app: k8s-io
 data:
   # Adding new entries here will make them appear as files in the deployment.
-  # Please update k8s.io/k8s.io/README.md when you update this file
+  # Please update kubernetes/k8s.io/apps/k8s-io/README.md when you update this file
   nginx.conf: |
     worker_processes 5;
 
