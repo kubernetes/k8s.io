@@ -16,6 +16,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+set -x
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd )"
@@ -37,10 +38,16 @@ function main() {
 
     pushd "${REPO_ROOT}" >/dev/null
     local k8s_yaml_paths=(
-        apps/
-        infra/gcp/clusters/projects/*/*/resources/*.yaml
+        apps
+        infra/gcp/clusters/projects/*/*/resources
     )
-    conftest test --policy policies/ "${k8s_yaml_paths[@]}"
+    local conftest_flags=(
+        # override the default of looking for $(pwd)/policy
+        --policy "${REPO_ROOT}/policies/"
+        # for some reason conftest tries to parse Makefiles as yaml
+        --ignore Makefile
+    )
+    conftest test "${conftest_flags[@]}" "${k8s_yaml_paths[@]}"
 
 }
 

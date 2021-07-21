@@ -2,9 +2,11 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nginx
+  labels:
+    app: k8s-io
 data:
   # Adding new entries here will make them appear as files in the deployment.
-  # Please update k8s.io/k8s.io/README.md when you update this file
+  # Please update kubernetes/k8s.io/apps/k8s-io/README.md when you update this file
   nginx.conf: |
     worker_processes 5;
 
@@ -244,7 +246,7 @@ data:
           rewrite ^/owners/([^/]*)/?$ https://cs.k8s.io/?q=$1&i=fosho&files=OWNERS&excludeFiles=vendor%2F&repos= redirect;
           rewrite ^/partner-request$ https://docs.google.com/forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform redirect;
           rewrite ^/pr-dashboard$    https://gubernator.k8s.io/pr redirect;
-          rewrite ^/redirects$       https://github.com/kubernetes/k8s.io/tree/main/k8s.io#redirections redirect;
+          rewrite ^/redirects$       https://github.com/kubernetes/k8s.io/tree/main/apps/k8s-io/README.md#redirections redirect;
           rewrite ^/start$           https://kubernetes.io/docs/setup/ redirect;
           rewrite ^/stuck-prs$       https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess redirect;
           rewrite ^/test-health$     http://velodrome.k8s.io/dashboard/db/bigquery-metrics redirect;
