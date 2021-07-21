@@ -13,7 +13,6 @@
   "projects/k8s-infra-prow-build-trusted/logs/node-problem-detector",
   "projects/k8s-infra-prow-build-trusted/logs/serialconsole.googleapis.com%2Fserial_port_1_output",
   "projects/k8s-infra-prow-build-trusted/logs/serialconsole.googleapis.com%2Fserial_port_2_output",
-  "projects/k8s-infra-prow-build-trusted/logs/serialconsole.googleapis.com%2Fserial_port_debug_output",
   "projects/k8s-infra-prow-build-trusted/logs/stderr",
   "projects/k8s-infra-prow-build-trusted/logs/stdout"
 ]
