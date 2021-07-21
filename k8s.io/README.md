@@ -72,8 +72,6 @@ How to deploy
    namespaces with `kubectl --context gke_kubernetes-public_us-central1_aaa get
    ns`.
 
-3) Run `./deploy.sh canary`.  This will push the configs to our canary namespace and
-   run the tests against it.
-
-4) Assuming the tests pass, run `./deploy.sh prod`.  This will push the configs
-   to our prod namespace and run the tests against it.
+3) Run `./deploy.sh`.  This will effectively run `./deploy.sh canary` to push
+   and test configs in the canary namespace, followed by `./deploy.sh prod` to
+   do the same in prod if tests pass against canary.
