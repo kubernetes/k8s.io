@@ -47,4 +47,8 @@ fi
 
 # deploy kubernetes resources
 pushd "${SCRIPT_ROOT}" >/dev/null
-kubectl --context="${context}" --namespace="${namespace}" apply -f .
+
+echo "Deploying ${app} to ${namespace}"
+# NOTE: cert-manager has resources in kube-system, and cluster-scoped resources, so we trust
+#       that the namespaces as defined in the resources are as they should be
+kubectl --context="${context}" apply -f .
