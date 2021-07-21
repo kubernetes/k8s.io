@@ -29,7 +29,7 @@ spec:
         - k8s.io
       http01:
         ingress:
-          name: k8s-io
+          name: k8s-io-v6
 
     # If any new services/ingresses are added, a new entry will need to be
     # added here.
