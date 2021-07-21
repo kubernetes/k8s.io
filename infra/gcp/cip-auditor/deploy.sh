@@ -51,7 +51,9 @@ deploy_cip_auditor()
         --no-allow-unauthenticated \
         --region=us-central1 \
         --project="${PROJECT_ID}" \
-        --service-account="${CLOUD_RUN_SERVICE_ACCOUNT}"
+        --service-account="${CLOUD_RUN_SERVICE_ACCOUNT}" \
+        --min-instances=1 \
+        --max-instances=1
 }
 
 usage()
