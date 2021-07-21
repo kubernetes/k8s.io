@@ -189,15 +189,13 @@ function empower_cluster_admins_and_users() {
     for role in "${cluster_admin_roles[@]}"; do
         ensure_project_role_binding "${project}" "group:${CLUSTER_ADMINS_GROUP}" "${role}"
     done
-    # TODO(spiffxp): remove when these bindings have been removed
-    removed_cluster_admin_roles=(
-        "$(custom_project_role_name "${project}" ServiceAccountLister)"
-    )
-    for role in "${removed_cluster_admin_roles[@]}"; do
-        ensure_removed_project_role_binding "${project}" "group:${CLUSTER_ADMINS_GROUP}" "${role}"
-    done
-    # TODO(spiffxp): ensure this is removed when the binding(s) using it have been removed
-    ensure_removed_custom_project_iam_role "${project}" "ServiceAccountLister"
+
+    # TODO(spiffxp): consider replacing this with a service account per namespace
+    local prow_deployer_acct prow_deployer_role
+    prow_deployer_acct="prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    prow_deployer_role=$(custom_org_role_name "container.deployer")
+    color 6 "Empowering ${prow_deployer_acct} to deploy to clusters in project: ${project}"
+    ensure_project_role_binding "${project}" "serviceAccount:${prow_deployer_acct}" "${prow_deployer_role}"
 
     color 6 "Empowering cluster users"
     cluster_user_roles=(
