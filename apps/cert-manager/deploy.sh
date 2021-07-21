@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Deploys this app to the aaa cluster, or whatever cluster is pointed to
-# by KUBECTL_CONTEXT if set. Assumes the app's namespace already exists.
+# by KUBECTL_CONTEXT if set.
 #
 # Members of k8s-infra-rbac-${app}@kubernetes.io can run this.
 
@@ -32,9 +32,6 @@ cluster_name="aaa"
 cluster_project="kubernetes-public"
 cluster_region="us-central1"
 
-# coordinates to locate the app on the target cluster
-namespace="${app}"
-
 # well known name set by `gcloud container clusters get-credentials`
 gke_context="gke_${cluster_project}_${cluster_region}_${cluster_name}"
 context="${KUBECTL_CONTEXT:-${gke_context}}"
@@ -47,4 +44,4 @@ fi
 
 # deploy kubernetes resources
 pushd "${SCRIPT_ROOT}" >/dev/null
-kubectl --context="${context}" --namespace="${namespace}" apply -f .
+kubectl --context="${context}" apply -f .
