@@ -1,0 +1,18 @@
+gs://k8s-infra-scale-golang-builds/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Wed, 21 Jul 2021 12:42:00 GMT
+	Time updated:			Wed, 21 Jul 2021 12:42:01 GMT
+	Metageneration:			2
+	Bucket Policy Only enabled:	True
+	ACL:				[]
+	Default ACL:			[]
