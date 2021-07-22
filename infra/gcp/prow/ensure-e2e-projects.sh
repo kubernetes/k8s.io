@@ -141,6 +141,7 @@ function ensure_e2e_project() {
 function ensure_trusted_prow_build_cluster_secrets() {
     local project="${TRUSTED_BUILD_CLUSTER_PROJECT}"
     local secret_specs=(
+        k8s-triage-robot-github-token/sig-contributor-experience/github@kubernetes.io
         cncf-ci-github-token/sig-testing/k8s-infra-ii-coop@kubernetes.io
         snyk-token/sig-architecture/k8s-infra-code-organization@kubernetes.io
     )
