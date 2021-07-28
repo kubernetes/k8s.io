@@ -26,8 +26,11 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"regexp"
+	"strings"
 
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
+	"github.com/bmatcuk/doublestar"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2/google"
 	admin "google.golang.org/api/admin/directory/v1"
@@ -52,6 +55,11 @@ type Config struct {
 	// It must be an absolute path. If not specified,
 	// it defaults to the directory containing the config.yaml file.
 	GroupsPath *string `yaml:"groups-path,omitempty"`
+
+	// RestrictionsPath is the absolute path to the configuration file
+	// containing restrictions for which groups can be defined in sub-directories.
+	// If not specified, it defaults to "restrictions.yaml" in the groups-path directory.
+	RestrictionsPath *string `yaml:"restrictions-path,omitempty"`
 
 	// If false, don't make any mutating API calls
 	ConfirmChanges bool
@@ -80,6 +88,23 @@ type GoogleGroup struct {
 	Members []string `yaml:"members,omitempty" json:"members,omitempty"`
 }
 
+// RestrictionsConfig contains the list of restrictions for
+// which groups can be defined in sub-directories.
+type RestrictionsConfig struct {
+	Restrictions []Restriction `yaml:"restrictions,omitempty" json:"restrictions,omitempty"`
+}
+type Restriction struct {
+	// Path is the relative path of a sub-directory to the groups-path.
+	Path string `yaml:"path" json:"path"`
+	// AllowedGroups is the list of regular expressions for email-ids
+	// of groups that can be defined for the Path.
+	//
+	// Compiles to AllowedGroupsRe during config load.
+	AllowedGroups []string `yaml:"allowedGroups" json:"allowedGroups"`
+
+	AllowedGroupsRe []*regexp.Regexp
+}
+
 func Usage() {
 	fmt.Fprintf(os.Stderr, `
 Usage: %s [-config <config-yaml-file>] [--confirm]
@@ -88,10 +113,17 @@ Command line flags override config values.
 	flag.PrintDefaults()
 }
 
-var config Config
-var groupsConfig GroupsConfig
+var (
+	config             Config
+	groupsConfig       GroupsConfig
+	restrictionsConfig RestrictionsConfig
 
-var verbose = flag.Bool("v", false, "log extra information")
+	verbose = flag.Bool("v", false, "log extra information")
+
+	defaultRestrictionsFile = "restrictions.yaml"
+	emptyRegexp             = regexp.MustCompile("")
+	defaultRestriction      = Restriction{Path: "*", AllowedGroupsRe: []*regexp.Regexp{emptyRegexp}}
+)
 
 func main() {
 	configFilePath := flag.String("config", "config.yaml", "the config file in yaml format")
@@ -115,6 +147,11 @@ func main() {
 		log.Fatal(err)
 	}
 
+	err = readRestrictionsConfig(*config.RestrictionsPath, &restrictionsConfig)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// rootDir contains groups.yaml files
 	rootDir := filepath.Dir(*configFilePath)
 	if config.GroupsPath != nil {
@@ -124,7 +161,7 @@ func main() {
 		rootDir = *config.GroupsPath
 	}
 
-	err = readGroupsConfig(rootDir, &groupsConfig)
+	err = readGroupsConfig(rootDir, &groupsConfig, &restrictionsConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -220,14 +257,49 @@ func readConfig(configFilePath string, confirmChanges bool) error {
 	if err = yaml.Unmarshal(content, &config); err != nil {
 		return fmt.Errorf("error parsing config file %s: %v", configFilePath, err)
 	}
+
+	if config.RestrictionsPath == nil {
+		rPath := filepath.Join(filepath.Dir(configFilePath), defaultRestrictionsFile)
+		config.RestrictionsPath = &rPath
+	}
 	config.ConfirmChanges = confirmChanges
+	return err
+}
+
+func readRestrictionsConfig(restrictionsFilePath string, rConfig *RestrictionsConfig) error {
+	if *verbose {
+		log.Printf("reading restrictions config file %s", restrictionsFilePath)
+	}
+	content, err := ioutil.ReadFile(restrictionsFilePath)
+	if err != nil {
+		return fmt.Errorf("error reading restrictions config file %s: %v", restrictionsFilePath, err)
+	}
+	if err = yaml.Unmarshal(content, &rConfig); err != nil {
+		return fmt.Errorf("error parsing restrictions config file %s: %v", restrictionsFilePath, err)
+	}
+
+	ret := make([]Restriction, 0, len(rConfig.Restrictions))
+	for _, r := range rConfig.Restrictions {
+		r.AllowedGroupsRe = make([]*regexp.Regexp, 0, len(r.AllowedGroups))
+		for _, g := range r.AllowedGroups {
+			re, err := regexp.Compile(g)
+			if err != nil {
+				return fmt.Errorf("error parsing group pattern %q for path %q: %v", g, r.Path, err)
+			}
+			r.AllowedGroupsRe = append(r.AllowedGroupsRe, re)
+		}
+		ret = append(ret, r)
+	}
+	rConfig.Restrictions = ret
 	return err
 }
 
 // readGroupsConfig starts at the rootDir and recursively walksthrough
 // all directories and files. It reads the GroupsConfig from all groups.yaml
-// files and adds the groups in each GroupsConfig to config.Groups.
-func readGroupsConfig(rootDir string, config *GroupsConfig) error {
+// files and verifies that the groups in GroupsConfig satisfy the
+// restrictions in restrictionsConfig.
+// Finally, it adds all the groups in each GroupsConfig to config.Groups.
+func readGroupsConfig(rootDir string, config *GroupsConfig, rConfig *RestrictionsConfig) error {
 	if *verbose {
 		log.Printf("reading groups.yaml files recursively at %s", rootDir)
 	}
@@ -248,12 +320,52 @@ func readGroupsConfig(rootDir string, config *GroupsConfig) error {
 				return fmt.Errorf("error parsing groups config at %s: %v", path, err)
 			}
 
-			for _, g := range groupsConfigAtPath.Groups {
-				config.Groups = append(config.Groups, g)
+			r := getRestrictionForPath(path, rootDir, rConfig)
+			mergedGroups, err := mergeGroups(config.Groups, groupsConfigAtPath.Groups, r)
+			if err != nil {
+				return fmt.Errorf("couldn't merge groups: %v", err)
 			}
+			config.Groups = mergedGroups
 		}
 		return nil
 	})
+}
+
+func getRestrictionForPath(path, rootDir string, rConfig *RestrictionsConfig) Restriction {
+	for _, r := range rConfig.Restrictions {
+		if match, err := doublestar.Match(r.Path, strings.TrimPrefix(path[len(rootDir):], "/")); err == nil && match {
+			return r
+		}
+	}
+	return defaultRestriction
+}
+
+func mergeGroups(a []GoogleGroup, b []GoogleGroup, r Restriction) ([]GoogleGroup, error) {
+	emails := map[string]struct{}{}
+	for _, v := range a {
+		emails[v.EmailId] = struct{}{}
+	}
+	for _, v := range b {
+		if v.EmailId == "" {
+			return nil, fmt.Errorf("groups must have email-id")
+		}
+		if !matchesRegexList(v.EmailId, r.AllowedGroupsRe) {
+			return nil, fmt.Errorf("cannot define group %q in %q", v.EmailId, r.Path)
+		}
+		if _, ok := emails[v.EmailId]; ok {
+			return nil, fmt.Errorf("cannot overwrite group definitions (duplicate group name %s)", v.EmailId)
+		}
+	}
+	return append(a, b...), nil
+}
+
+func matchesRegexList(s string, list []*regexp.Regexp) bool {
+	for _, r := range list {
+		if r.MatchString(s) {
+			return true
+		}
+	}
+	return false
 }
 
 func printGroupMembersAndSettings(adminService *admin.Service, srv2 *groupssettings.Service) error {

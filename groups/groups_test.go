@@ -31,12 +31,34 @@ import (
 )
 
 var cfg GroupsConfig
+var rConfig RestrictionsConfig
 
 var groupsPath = flag.String("groups-path", "", "Directory containing groups.yaml files")
+var restrictionsPath = flag.String("restrictions-path", "", "Path to the configuration file containing restrictions")
 
 func TestMain(m *testing.M) {
 	flag.Parse()
 	var err error
+
+	if *restrictionsPath != "" && !filepath.IsAbs(*restrictionsPath) {
+		fmt.Printf("restrictions-path \"%s\" must be an absolute path\n", *restrictionsPath)
+		os.Exit(1)
+	}
+
+	if *restrictionsPath == "" {
+		baseDir, err := os.Getwd()
+		if err != nil {
+			fmt.Printf("Cannot get current working directory: %v\n", err)
+			os.Exit(1)
+		}
+		rPath := filepath.Join(baseDir, defaultRestrictionsFile)
+		restrictionsPath = &rPath
+	}
+
+	if err := readRestrictionsConfig(*restrictionsPath, &rConfig); err != nil {
+		fmt.Printf("Could not load restrictions config: %v\n", err)
+		os.Exit(1)
+	}
 
 	if *groupsPath != "" && !filepath.IsAbs(*groupsPath) {
 		fmt.Printf("groups-path \"%s\" must be an absolute path\n", *groupsPath)
@@ -51,8 +73,8 @@ func TestMain(m *testing.M) {
 		}
 	}
 
-	if err := readGroupsConfig(*groupsPath, &cfg); err != nil {
-		fmt.Printf("Could not load groups-file: %v\n", err)
+	if err := readGroupsConfig(*groupsPath, &cfg, &rConfig); err != nil {
+		fmt.Printf("Could not load groups config: %v\n", err)
 		os.Exit(1)
 	}
 	os.Exit(m.Run())

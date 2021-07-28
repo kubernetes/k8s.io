@@ -2,7 +2,7 @@
 
 ## Making changes
 
-- Edit `groups.yaml` to add a new group or update an existing group
+- Edit `groups.yaml` and `restrictions.yaml` to add a new group or update an existing group
 - Use `make test` to ensure the changes meet conventions
 - Open a pull request
 - When the pull request merges, the [post-k8sio-groups] job will deploy the changes
