@@ -87,22 +87,41 @@ readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
 #       graph here? ensure_only_services dynamically computes the set of
 #       expected services
 readonly MAIN_PROJECT_SERVICES=(
-    # billing data gets exported to bigquery
+    # We export billing data to bigquery
     bigquery.googleapis.com
-    # we use cloud asset inventory from this project to audit all projects
+    # We use cloud asset inventory from this project to audit all projects
     cloudasset.googleapis.com
-    # GKE clusters are hosted in this project
+    # We require use of cloud shell to access clusters in this project
+    cloudshell.googleapis.com
+    # We host GKE clusters in this project
     container.googleapis.com
-    # DNS zones are managed in this project
+    # We manage kubernetes DNS zones in this project
     dns.googleapis.com
     # We look at logs in this project (e.g. from GKE)
     logging.googleapis.com
     # We look at monitoring dashboards in this project
     monitoring.googleapis.com
-    # Secrets are hosted in this project
+    # We host secrets in this project for use by prow and other apps
     secretmanager.googleapis.com
-    # GCS buckets are hosted in this project
+    # We host public-facing and private GCS buckets in this project
+    storage-api.googleapis.com
+    # TODO: do we really need the legacy XML API enabled for them though?
     storage-component.googleapis.com
+
+    ## Dependencies
+    # container.googleapis.com depends on compute
+    compute.googleapis.com
+    # container.googleapis.com depends on containerregistry
+    containerregistry.googleapis.com
+    # container.googleapis.com depends on iam
+    iam.googleapis.com
+    # container.googleapis.com, iam.googleapis.com depend on iamcredentials
+    iamcredentials.googleapis.com
+    # compute.googleapis.com, container.googleapis.com depend on oslogin
+    oslogin.googleapis.com
+    # container.googleapis.com, containerregistry.googleapis.com depend on pubsub
+    pubsub.googleapis.com
+
 )
 
 # Create a GCP service account intended for use by GKE cluster workloads
