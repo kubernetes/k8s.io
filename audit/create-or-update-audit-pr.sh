@@ -30,6 +30,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+set -x
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 
@@ -108,8 +109,7 @@ function ensure_dependencies() {
     else
         git remote add "${FORK_REMOTE_NAME}" "${fork_private_url}"
     fi
-    # TODO: this will fail if FORK_REMOTE_URL doesn't exist; use `gh fork` instead?
-    git fetch "${FORK_REMOTE_NAME}" "${FORK_BRANCH}"
+    git fetch "${FORK_REMOTE_NAME}"
 
     echo "Ensure gcloud creds are working ..."
     gcloud config list
