@@ -2,8 +2,6 @@ NAME                                 TITLE
 bigquery.googleapis.com              BigQuery API
 bigquerystorage.googleapis.com       BigQuery Storage API
 cloudasset.googleapis.com            Cloud Asset API
-clouderrorreporting.googleapis.com   Error Reporting API
-cloudfunctions.googleapis.com        Cloud Functions API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
 cloudshell.googleapis.com            Cloud Shell API
 compute.googleapis.com               Compute Engine API
@@ -18,7 +16,6 @@ oslogin.googleapis.com               Cloud OS Login API
 pubsub.googleapis.com                Cloud Pub/Sub API
 secretmanager.googleapis.com         Secret Manager API
 serviceusage.googleapis.com          Service Usage API
-source.googleapis.com                Legacy Cloud Source Repositories API
 stackdriver.googleapis.com           Stackdriver API
 storage-api.googleapis.com           Google Cloud Storage JSON API
 storage-component.googleapis.com     Cloud Storage
