@@ -1,8 +1,8 @@
 ---
-gitHubLogin: "TODO"
-gitHubToken: "TODO"
-gitName: "TODO"
-gitEmail: "TODO"
+gitHubLogin: "k8s-infra-ci-robot"
+gitHubToken: "/etc/github-token/token"
+gitName: "Kubernetes Prow Robot"
+gitEmail: "k8s-infra-ci-robot@kubernetes.io"
 skipPullRequest: false
 gitHubOrg: "kubernetes"
 gitHubRepo: "k8s.io"
