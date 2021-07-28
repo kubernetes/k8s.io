@@ -368,6 +368,21 @@ function ensure_aaa_external_secrets() {
     done
 }
 
+# Special-case IAM bindings that are necessary for k8s-infra prow or
+# its build clusters to operate on resources within the given project
+function ensure_prow_special_cases {
+    if [ $# -ne 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
+        return 1
+    fi
+    local project="${1}"
+    color 6 "Special case: ensuring k8s-infra-ci-robot-github-token accessible by k8s-infra-prow-build-trusted"
+    local principal secret
+    principal="serviceAccount:$(svc_acct_email "k8s-infra-prow-build-trusted" "kubernetes-external-secrets")"
+    secret=$(secret_full_name "${project}" "k8s-infra-ci-robot-github-token")
+    ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.secretAccessor"
+}
+
 function ensure_main_project() {
     if [ $# -ne 1 ] || [ -z "$1" ]; then
         echo "${FUNCNAME[0]}(gcp_project) requires 1 argument" >&2
@@ -422,6 +437,9 @@ function ensure_main_project() {
 
     color 6 "Ensuring secrets destined for apps in 'aaa' exist in: ${project}"
     ensure_aaa_external_secrets "${project}" 2>&1 | indent
+
+    color 6 "Ensuring prow special cases for: ${project}"
+    ensure_prow_special_cases "${project}" 2>&1 | indent
 
     color 6 "Ensuring biquery configured for billing and access by appropriate groups in: ${project}"
     ensure_billing_bigquery "${project}" 2>&1 | indent
