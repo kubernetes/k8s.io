@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:service-226195303281@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquerydatatransfer.serviceAgent"
+    },
+    {
+      "members": [
         "user:ameukam@gmail.com"
       ],
       "role": "roles/owner"
