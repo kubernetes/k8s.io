@@ -12,13 +12,12 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
+      - ameukam@gmail.com
       - amwat@google.com
       - bentheelder@google.com
       - cblecker@gmail.com
       - davanum@gmail.com
-      - ihor@cncf.io
-      - jgrafton@google.com
-      - mkumatag@in.ibm.com
+      - spiffxp@gmail.com
       - spiffxp@google.com
       - thockin@google.com
       - linusa@google.com
