@@ -30,6 +30,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+set -x
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 
@@ -42,8 +43,8 @@ readonly TEST_INFRA_DIR="${TEST_INFRA_DIR:-${REPO_ROOT}/../test-infra}"
 readonly AUDIT_BIN_DIR="${AUDIT_BIN_DIR:-${REPO_ROOT}/tmp/bin}"
 
 # git name/e-mail that will commit changes
-readonly GIT_NAME=${GIT_NAME:-"CNCF CI Bot"}
-readonly GIT_EMAIL=${GIT_EMAIL:-"cncf-ci@ii.coop"}
+readonly GIT_NAME=${GIT_NAME:-"Kubernetes Prow Robot"}
+readonly GIT_EMAIL=${GIT_EMAIL:-"k8s-infra-ci-robot@kubernetes.io"}
 
 # github user that will push and PR changes. They must have permissions to:
 # - push FORK_BRANCH to ${fork_public_url}
@@ -51,7 +52,7 @@ readonly GIT_EMAIL=${GIT_EMAIL:-"cncf-ci@ii.coop"}
 #
 # NB: since pr-creator requires a token path, this script does not support
 #     automatically picking up GITHUB_TOKEN from en
-readonly GITHUB_USER=${GITHUB_USER:-"cncf-ci"}
+readonly GITHUB_USER=${GITHUB_USER:-"k8s-infra-ci-robot"}
 readonly GITHUB_TOKEN_PATH=${GITHUB_TOKEN_PATH:-"/etc/github-token/token"}
 GITHUB_TOKEN=$(cat "${GITHUB_TOKEN_PATH}")
 readonly GITHUB_TOKEN
@@ -108,8 +109,7 @@ function ensure_dependencies() {
     else
         git remote add "${FORK_REMOTE_NAME}" "${fork_private_url}"
     fi
-    # TODO: this will fail if FORK_REMOTE_URL doesn't exist; use `gh fork` instead?
-    git fetch "${FORK_REMOTE_NAME}" "${FORK_BRANCH}"
+    git fetch "${FORK_REMOTE_NAME}"
 
     echo "Ensure gcloud creds are working ..."
     gcloud config list
