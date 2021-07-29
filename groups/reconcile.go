@@ -171,6 +171,9 @@ func main() {
 	}
 
 	serviceAccountKey, err := accessSecretVersion(config.SecretVersion)
+	if err != nil {
+		log.Fatalf("Unable to access secret-version %s, %v", config.SecretVersion, err)
+	}
 
 	credential, err := google.JWTConfigFromJSON(serviceAccountKey, admin.AdminDirectoryUserReadonlyScope,
 		admin.AdminDirectoryGroupScope,
