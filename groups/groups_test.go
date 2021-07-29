@@ -73,7 +73,7 @@ func TestMain(m *testing.M) {
 		}
 	}
 
-	if err := readGroupsConfig(*groupsPath, &cfg, &rConfig); err != nil {
+	if err := cfg.Load(*groupsPath, &rConfig); err != nil {
 		fmt.Printf("Could not load groups config: %v\n", err)
 		os.Exit(1)
 	}

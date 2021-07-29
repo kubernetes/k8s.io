@@ -158,7 +158,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = readGroupsConfig(config.GroupsPath, &groupsConfig, &restrictionsConfig)
+	err = groupsConfig.Load(config.GroupsPath, &restrictionsConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -307,7 +307,7 @@ func (rc *RestrictionsConfig) Load(path string) error {
 // files and verifies that the groups in GroupsConfig satisfy the
 // restrictions in restrictionsConfig.
 // Finally, it adds all the groups in each GroupsConfig to config.Groups.
-func readGroupsConfig(rootDir string, config *GroupsConfig, rConfig *RestrictionsConfig) error {
+func (gc *GroupsConfig) Load(rootDir string, restrictions *RestrictionsConfig) error {
 	log.Printf("reading groups.yaml files recursively at %s", rootDir)
 
 	return filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
@@ -325,12 +325,12 @@ func readGroupsConfig(rootDir string, config *GroupsConfig, rConfig *Restriction
 				return fmt.Errorf("error parsing groups config at %s: %v", path, err)
 			}
 
-			r := rConfig.GetRestrictionForPath(path, rootDir)
-			mergedGroups, err := mergeGroups(config.Groups, groupsConfigAtPath.Groups, r)
+			r := restrictions.GetRestrictionForPath(path, rootDir)
+			mergedGroups, err := mergeGroups(gc.Groups, groupsConfigAtPath.Groups, r)
 			if err != nil {
 				return fmt.Errorf("couldn't merge groups: %v", err)
 			}
-			config.Groups = mergedGroups
+			gc.Groups = mergedGroups
 		}
 		return nil
 	})
