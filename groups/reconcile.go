@@ -54,12 +54,12 @@ type Config struct {
 	// groups.yaml files containing groups/members information.
 	// It must be an absolute path. If not specified,
 	// it defaults to the directory containing the config.yaml file.
-	GroupsPath *string `yaml:"groups-path,omitempty"`
+	GroupsPath string `yaml:"groups-path,omitempty"`
 
 	// RestrictionsPath is the absolute path to the configuration file
 	// containing restrictions for which groups can be defined in sub-directories.
 	// If not specified, it defaults to "restrictions.yaml" in the groups-path directory.
-	RestrictionsPath *string `yaml:"restrictions-path,omitempty"`
+	RestrictionsPath string `yaml:"restrictions-path,omitempty"`
 
 	// If false, don't make any mutating API calls
 	ConfirmChanges bool
@@ -147,7 +147,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	err = readRestrictionsConfig(*config.RestrictionsPath, &restrictionsConfig)
+	err = readRestrictionsConfig(config.RestrictionsPath, &restrictionsConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -157,11 +157,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("unable to convert config path '%v' into absolute path: %v", *configFilePath, err)
 	}
-	if config.GroupsPath != nil {
-		if !filepath.IsAbs(*config.GroupsPath) {
-			log.Fatalf("groups-path \"%s\" must be an absolute path", *config.GroupsPath)
+	if config.GroupsPath != "" {
+		if !filepath.IsAbs(config.GroupsPath) {
+			log.Fatalf("groups-path \"%s\" must be an absolute path", config.GroupsPath)
 		}
-		rootDir = *config.GroupsPath
+		rootDir = config.GroupsPath
 	}
 
 	err = readGroupsConfig(rootDir, &groupsConfig, &restrictionsConfig)
@@ -261,9 +261,9 @@ func readConfig(configFilePath string, confirmChanges bool) error {
 		return fmt.Errorf("error parsing config file %s: %v", configFilePath, err)
 	}
 
-	if config.RestrictionsPath == nil {
+	if config.RestrictionsPath == "" {
 		rPath := filepath.Join(filepath.Dir(configFilePath), defaultRestrictionsFile)
-		config.RestrictionsPath = &rPath
+		config.RestrictionsPath = rPath
 	}
 	config.ConfirmChanges = confirmChanges
 	return err
