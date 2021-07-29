@@ -120,13 +120,14 @@ var (
 
 	verbose = flag.Bool("v", false, "log extra information")
 
+	defaultConfigFile       = "config.yaml"
 	defaultRestrictionsFile = "restrictions.yaml"
 	emptyRegexp             = regexp.MustCompile("")
 	defaultRestriction      = Restriction{Path: "*", AllowedGroupsRe: []*regexp.Regexp{emptyRegexp}}
 )
 
 func main() {
-	configFilePath := flag.String("config", "config.yaml", "the config file in yaml format")
+	configFilePath := flag.String("config", defaultConfigFile, "the config file in yaml format")
 	confirmChanges := flag.Bool("confirm", false, "false by default means that we do not push anything to google groups")
 	printConfig := flag.Bool("print", false, "print the existing group information")
 
