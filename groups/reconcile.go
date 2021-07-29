@@ -142,7 +142,7 @@ func main() {
 		log.Printf("confirm: %v -- dry-run mode, changes will not be pushed", *confirmChanges)
 	}
 
-	err := readConfig(*configFilePath, *confirmChanges)
+	err := config.Load(*configFilePath, *confirmChanges)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -246,31 +246,31 @@ func main() {
 	}
 }
 
-func readConfig(configFilePath string, confirmChanges bool) error {
+func (c *Config) Load(configFilePath string, confirmChanges bool) error {
 	log.Printf("reading config file: %s", configFilePath)
 	content, err := ioutil.ReadFile(configFilePath)
 	if err != nil {
 		return fmt.Errorf("error reading config file %s: %v", configFilePath, err)
 	}
-	if err = yaml.Unmarshal(content, &config); err != nil {
+	if err = yaml.Unmarshal(content, &c); err != nil {
 		return fmt.Errorf("error parsing config file %s: %v", configFilePath, err)
 	}
 
-	if config.GroupsPath == "" {
-		config.GroupsPath, err = filepath.Abs(filepath.Dir(configFilePath))
+	if c.GroupsPath == "" {
+		c.GroupsPath, err = filepath.Abs(filepath.Dir(configFilePath))
 		if err != nil {
-			return fmt.Errorf("error converting groups-path %v to absolute path: %w", config.GroupsPath, err)
+			return fmt.Errorf("error converting groups-path %v to absolute path: %w", c.GroupsPath, err)
 		}
 	}
 	if !filepath.IsAbs(config.GroupsPath) {
-		return fmt.Errorf("groups-path must be an absolute path, got: %v ", config.GroupsPath)
+		return fmt.Errorf("groups-path must be an absolute path, got: %v ", c.GroupsPath)
 	}
 
-	if config.RestrictionsPath == "" {
-		config.RestrictionsPath = filepath.Join(config.GroupsPath, defaultRestrictionsFile)
+	if c.RestrictionsPath == "" {
+		c.RestrictionsPath = filepath.Join(c.GroupsPath, defaultRestrictionsFile)
 	}
 
-	config.ConfirmChanges = confirmChanges
+	c.ConfirmChanges = confirmChanges
 	return err
 }
 
