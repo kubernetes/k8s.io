@@ -353,6 +353,7 @@ function ensure_aaa_external_secrets() {
     # build clusters managed via infra/gcp/clusters/k8s-infra-prow-build*
     local prow_secrets=(
         k8s-infra-build-clusters-kubeconfig
+        k8s-infra-ci-robot-github-account-password
         k8s-infra-ci-robot-github-token
     )
     local slack_infra_secrets=(
