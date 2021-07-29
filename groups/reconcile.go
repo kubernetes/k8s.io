@@ -158,19 +158,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// rootDir contains groups.yaml files
-	rootDir, err := filepath.Abs(filepath.Dir(*configFilePath))
-	if err != nil {
-		log.Fatalf("unable to convert config path '%v' into absolute path: %v", *configFilePath, err)
-	}
-	if config.GroupsPath != "" {
-		if !filepath.IsAbs(config.GroupsPath) {
-			log.Fatalf("groups-path \"%s\" must be an absolute path", config.GroupsPath)
-		}
-		rootDir = config.GroupsPath
-	}
-
-	err = readGroupsConfig(rootDir, &groupsConfig, &restrictionsConfig)
+	err = readGroupsConfig(config.GroupsPath, &groupsConfig, &restrictionsConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -268,10 +256,20 @@ func readConfig(configFilePath string, confirmChanges bool) error {
 		return fmt.Errorf("error parsing config file %s: %v", configFilePath, err)
 	}
 
-	if config.RestrictionsPath == "" {
-		rPath := filepath.Join(filepath.Dir(configFilePath), defaultRestrictionsFile)
-		config.RestrictionsPath = rPath
+	if config.GroupsPath == "" {
+		config.GroupsPath, err = filepath.Abs(filepath.Dir(configFilePath))
+		if err != nil {
+			return fmt.Errorf("error converting groups-path %v to absolute path: %w", config.GroupsPath, err)
+		}
 	}
+	if !filepath.IsAbs(config.GroupsPath) {
+		return fmt.Errorf("groups-path must be an absolute path, got: %v ", config.GroupsPath)
+	}
+
+	if config.RestrictionsPath == "" {
+		config.RestrictionsPath = filepath.Join(config.GroupsPath, defaultRestrictionsFile)
+	}
+
 	config.ConfirmChanges = confirmChanges
 	return err
 }
