@@ -134,7 +134,6 @@ func main() {
 	flag.Usage = Usage
 	flag.Parse()
 
-	log.Printf("config: %v -- reading config from this file", *configFilePath)
 	if *printConfig {
 		log.Printf("print: %v -- disabling confirm, will print existing group information", *confirmChanges)
 		*confirmChanges = false
@@ -147,6 +146,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	log.Printf("config: BotID:            %v", config.BotID)
+	log.Printf("config: SecretVersion:    %v", config.SecretVersion)
+	log.Printf("config: GroupsPath:       %v", config.GroupsPath)
+	log.Printf("config: RestrictionsPath: %v", config.RestrictionsPath)
+	log.Printf("config: ConfirmChanges:   %v", config.ConfirmChanges)
 
 	err = readRestrictionsConfig(config.RestrictionsPath, &restrictionsConfig)
 	if err != nil {
@@ -254,9 +259,7 @@ func main() {
 }
 
 func readConfig(configFilePath string, confirmChanges bool) error {
-	if *verbose {
-		log.Printf("reading config file %s", configFilePath)
-	}
+	log.Printf("reading config file: %s", configFilePath)
 	content, err := ioutil.ReadFile(configFilePath)
 	if err != nil {
 		return fmt.Errorf("error reading config file %s: %v", configFilePath, err)
@@ -274,9 +277,7 @@ func readConfig(configFilePath string, confirmChanges bool) error {
 }
 
 func readRestrictionsConfig(restrictionsFilePath string, rConfig *RestrictionsConfig) error {
-	if *verbose {
-		log.Printf("reading restrictions config file %s", restrictionsFilePath)
-	}
+	log.Printf("reading restrictions config file: %s", restrictionsFilePath)
 	content, err := ioutil.ReadFile(restrictionsFilePath)
 	if err != nil {
 		return fmt.Errorf("error reading restrictions config file %s: %v", restrictionsFilePath, err)
@@ -307,15 +308,12 @@ func readRestrictionsConfig(restrictionsFilePath string, rConfig *RestrictionsCo
 // restrictions in restrictionsConfig.
 // Finally, it adds all the groups in each GroupsConfig to config.Groups.
 func readGroupsConfig(rootDir string, config *GroupsConfig, rConfig *RestrictionsConfig) error {
-	if *verbose {
-		log.Printf("reading groups.yaml files recursively at %s", rootDir)
-	}
+	log.Printf("reading groups.yaml files recursively at %s", rootDir)
 
 	return filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
 		if filepath.Base(path) == "groups.yaml" {
-			if *verbose {
-				log.Printf("reading group file %s", path)
-			}
+			cleanPath := strings.Trim(strings.TrimPrefix(path, rootDir), string(filepath.Separator))
+			log.Printf("groups: %s", cleanPath)
 
 			var groupsConfigAtPath GroupsConfig
 			var content []byte
