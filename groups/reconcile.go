@@ -54,12 +54,12 @@ type Config struct {
 	// groups.yaml files containing groups/members information.
 	// It must be an absolute path. If not specified,
 	// it defaults to the directory containing the config.yaml file.
-	GroupsPath *string `yaml:"groups-path,omitempty"`
+	GroupsPath string `yaml:"groups-path,omitempty"`
 
 	// RestrictionsPath is the absolute path to the configuration file
 	// containing restrictions for which groups can be defined in sub-directories.
 	// If not specified, it defaults to "restrictions.yaml" in the groups-path directory.
-	RestrictionsPath *string `yaml:"restrictions-path,omitempty"`
+	RestrictionsPath string `yaml:"restrictions-path,omitempty"`
 
 	// If false, don't make any mutating API calls
 	ConfirmChanges bool
@@ -120,20 +120,20 @@ var (
 
 	verbose = flag.Bool("v", false, "log extra information")
 
+	defaultConfigFile       = "config.yaml"
 	defaultRestrictionsFile = "restrictions.yaml"
 	emptyRegexp             = regexp.MustCompile("")
 	defaultRestriction      = Restriction{Path: "*", AllowedGroupsRe: []*regexp.Regexp{emptyRegexp}}
 )
 
 func main() {
-	configFilePath := flag.String("config", "config.yaml", "the config file in yaml format")
+	configFilePath := flag.String("config", defaultConfigFile, "the config file in yaml format")
 	confirmChanges := flag.Bool("confirm", false, "false by default means that we do not push anything to google groups")
 	printConfig := flag.Bool("print", false, "print the existing group information")
 
 	flag.Usage = Usage
 	flag.Parse()
 
-	log.Printf("config: %v -- reading config from this file", *configFilePath)
 	if *printConfig {
 		log.Printf("print: %v -- disabling confirm, will print existing group information", *confirmChanges)
 		*confirmChanges = false
@@ -142,34 +142,31 @@ func main() {
 		log.Printf("confirm: %v -- dry-run mode, changes will not be pushed", *confirmChanges)
 	}
 
-	err := readConfig(*configFilePath, *confirmChanges)
+	err := config.Load(*configFilePath, *confirmChanges)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = readRestrictionsConfig(*config.RestrictionsPath, &restrictionsConfig)
+	log.Printf("config: BotID:            %v", config.BotID)
+	log.Printf("config: SecretVersion:    %v", config.SecretVersion)
+	log.Printf("config: GroupsPath:       %v", config.GroupsPath)
+	log.Printf("config: RestrictionsPath: %v", config.RestrictionsPath)
+	log.Printf("config: ConfirmChanges:   %v", config.ConfirmChanges)
+
+	err = restrictionsConfig.Load(config.RestrictionsPath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// rootDir contains groups.yaml files
-	rootDir, err := filepath.Abs(filepath.Dir(*configFilePath))
-	if err != nil {
-		log.Fatalf("unable to convert config path '%v' into absolute path: %v", *configFilePath, err)
-	}
-	if config.GroupsPath != nil {
-		if !filepath.IsAbs(*config.GroupsPath) {
-			log.Fatalf("groups-path \"%s\" must be an absolute path", *config.GroupsPath)
-		}
-		rootDir = *config.GroupsPath
-	}
-
-	err = readGroupsConfig(rootDir, &groupsConfig, &restrictionsConfig)
+	err = groupsConfig.Load(config.GroupsPath, &restrictionsConfig)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	serviceAccountKey, err := accessSecretVersion(config.SecretVersion)
+	if err != nil {
+		log.Fatalf("Unable to access secret-version %s, %v", config.SecretVersion, err)
+	}
 
 	credential, err := google.JWTConfigFromJSON(serviceAccountKey, admin.AdminDirectoryUserReadonlyScope,
 		admin.AdminDirectoryGroupScope,
@@ -249,40 +246,48 @@ func main() {
 	}
 }
 
-func readConfig(configFilePath string, confirmChanges bool) error {
-	if *verbose {
-		log.Printf("reading config file %s", configFilePath)
-	}
+func (c *Config) Load(configFilePath string, confirmChanges bool) error {
+	log.Printf("reading config file: %s", configFilePath)
 	content, err := ioutil.ReadFile(configFilePath)
 	if err != nil {
 		return fmt.Errorf("error reading config file %s: %v", configFilePath, err)
 	}
-	if err = yaml.Unmarshal(content, &config); err != nil {
+	if err = yaml.Unmarshal(content, &c); err != nil {
 		return fmt.Errorf("error parsing config file %s: %v", configFilePath, err)
 	}
 
-	if config.RestrictionsPath == nil {
-		rPath := filepath.Join(filepath.Dir(configFilePath), defaultRestrictionsFile)
-		config.RestrictionsPath = &rPath
+	if c.GroupsPath == "" {
+		c.GroupsPath, err = filepath.Abs(filepath.Dir(configFilePath))
+		if err != nil {
+			return fmt.Errorf("error converting groups-path %v to absolute path: %w", c.GroupsPath, err)
+		}
 	}
-	config.ConfirmChanges = confirmChanges
+	if !filepath.IsAbs(config.GroupsPath) {
+		return fmt.Errorf("groups-path must be an absolute path, got: %v ", c.GroupsPath)
+	}
+
+	if c.RestrictionsPath == "" {
+		c.RestrictionsPath = filepath.Join(c.GroupsPath, defaultRestrictionsFile)
+	}
+
+	c.ConfirmChanges = confirmChanges
 	return err
 }
 
-func readRestrictionsConfig(restrictionsFilePath string, rConfig *RestrictionsConfig) error {
-	if *verbose {
-		log.Printf("reading restrictions config file %s", restrictionsFilePath)
-	}
-	content, err := ioutil.ReadFile(restrictionsFilePath)
+// Load populates the RestrictionsConfig with data parsed from path and returns
+// nil if successful, or an error otherwise
+func (rc *RestrictionsConfig) Load(path string) error {
+	log.Printf("reading restrictions config file: %s", path)
+	content, err := ioutil.ReadFile(path)
 	if err != nil {
-		return fmt.Errorf("error reading restrictions config file %s: %v", restrictionsFilePath, err)
+		return fmt.Errorf("error reading restrictions config file %s: %v", path, err)
 	}
-	if err = yaml.Unmarshal(content, &rConfig); err != nil {
-		return fmt.Errorf("error parsing restrictions config file %s: %v", restrictionsFilePath, err)
+	if err = yaml.Unmarshal(content, &rc); err != nil {
+		return fmt.Errorf("error parsing restrictions config file %s: %v", path, err)
 	}
 
-	ret := make([]Restriction, 0, len(rConfig.Restrictions))
-	for _, r := range rConfig.Restrictions {
+	ret := make([]Restriction, 0, len(rc.Restrictions))
+	for _, r := range rc.Restrictions {
 		r.AllowedGroupsRe = make([]*regexp.Regexp, 0, len(r.AllowedGroups))
 		for _, g := range r.AllowedGroups {
 			re, err := regexp.Compile(g)
@@ -293,7 +298,7 @@ func readRestrictionsConfig(restrictionsFilePath string, rConfig *RestrictionsCo
 		}
 		ret = append(ret, r)
 	}
-	rConfig.Restrictions = ret
+	rc.Restrictions = ret
 	return err
 }
 
@@ -302,16 +307,13 @@ func readRestrictionsConfig(restrictionsFilePath string, rConfig *RestrictionsCo
 // files and verifies that the groups in GroupsConfig satisfy the
 // restrictions in restrictionsConfig.
 // Finally, it adds all the groups in each GroupsConfig to config.Groups.
-func readGroupsConfig(rootDir string, config *GroupsConfig, rConfig *RestrictionsConfig) error {
-	if *verbose {
-		log.Printf("reading groups.yaml files recursively at %s", rootDir)
-	}
+func (gc *GroupsConfig) Load(rootDir string, restrictions *RestrictionsConfig) error {
+	log.Printf("reading groups.yaml files recursively at %s", rootDir)
 
 	return filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
 		if filepath.Base(path) == "groups.yaml" {
-			if *verbose {
-				log.Printf("reading group file %s", path)
-			}
+			cleanPath := strings.Trim(strings.TrimPrefix(path, rootDir), string(filepath.Separator))
+			log.Printf("groups: %s", cleanPath)
 
 			var groupsConfigAtPath GroupsConfig
 			var content []byte
@@ -323,20 +325,24 @@ func readGroupsConfig(rootDir string, config *GroupsConfig, rConfig *Restriction
 				return fmt.Errorf("error parsing groups config at %s: %v", path, err)
 			}
 
-			r := getRestrictionForPath(path, rootDir, rConfig)
-			mergedGroups, err := mergeGroups(config.Groups, groupsConfigAtPath.Groups, r)
+			r := restrictions.GetRestrictionForPath(path, rootDir)
+			mergedGroups, err := mergeGroups(gc.Groups, groupsConfigAtPath.Groups, r)
 			if err != nil {
 				return fmt.Errorf("couldn't merge groups: %v", err)
 			}
-			config.Groups = mergedGroups
+			gc.Groups = mergedGroups
 		}
 		return nil
 	})
 }
 
-func getRestrictionForPath(path, rootDir string, rConfig *RestrictionsConfig) Restriction {
-	for _, r := range rConfig.Restrictions {
-		if match, err := doublestar.Match(r.Path, strings.TrimPrefix(path[len(rootDir):], "/")); err == nil && match {
+// GetRestrictionForPath returns the first Restriction whose Path matches the
+// given path relative to the given rootDir, or defaultRestriction if no
+// Restriction is found
+func (rc *RestrictionsConfig) GetRestrictionForPath(path, rootDir string) Restriction {
+	cleanPath := strings.Trim(strings.TrimPrefix(path, rootDir), string(filepath.Separator))
+	for _, r := range rc.Restrictions {
+		if match, err := doublestar.Match(r.Path, cleanPath); err == nil && match {
 			return r
 		}
 	}
