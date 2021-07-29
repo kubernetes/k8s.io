@@ -20,6 +20,7 @@
     "sha256:e9fb216ace49dfa4a5983b183067e97496e7a8b307d2093f4278cd550c303899": ["v0.48.1"]
     "sha256:32f3f02a038c0d7cf33b71a14028c3a4ddee6f4c3fe5fadfa14b915e5e0d9faf": ["v1.0.0-alpha.1"]
     "sha256:04a0ad3a1279c2a58898e789eed767eafa138ee1e5b9b23a988c6e8485cf958d": ["v1.0.0-alpha.2"]
+    "sha256:f058f3fdc940095957695829745956c6acddcaef839907360965e27fd3348e2e": ["v1.0.0-beta.1"]
 
 # custom base NGINX image
 # https://github.com/kubernetes/ingress-nginx/tree/master/images/nginx
