@@ -153,7 +153,10 @@ func main() {
 	}
 
 	// rootDir contains groups.yaml files
-	rootDir := filepath.Dir(*configFilePath)
+	rootDir, err := filepath.Abs(filepath.Dir(*configFilePath))
+	if err != nil {
+		log.Fatalf("unable to convert config path '%v' into absolute path: %v", *configFilePath, err)
+	}
 	if config.GroupsPath != nil {
 		if !filepath.IsAbs(*config.GroupsPath) {
 			log.Fatalf("groups-path \"%s\" must be an absolute path", *config.GroupsPath)
