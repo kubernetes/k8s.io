@@ -55,7 +55,7 @@ func TestMain(m *testing.M) {
 		restrictionsPath = &rPath
 	}
 
-	if err := readRestrictionsConfig(*restrictionsPath, &rConfig); err != nil {
+	if err := rConfig.Load(*restrictionsPath); err != nil {
 		fmt.Printf("Could not load restrictions config: %v\n", err)
 		os.Exit(1)
 	}

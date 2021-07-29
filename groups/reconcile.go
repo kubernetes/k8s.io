@@ -153,7 +153,7 @@ func main() {
 	log.Printf("config: RestrictionsPath: %v", config.RestrictionsPath)
 	log.Printf("config: ConfirmChanges:   %v", config.ConfirmChanges)
 
-	err = readRestrictionsConfig(config.RestrictionsPath, &restrictionsConfig)
+	err = restrictionsConfig.Load(config.RestrictionsPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -274,18 +274,20 @@ func readConfig(configFilePath string, confirmChanges bool) error {
 	return err
 }
 
-func readRestrictionsConfig(restrictionsFilePath string, rConfig *RestrictionsConfig) error {
-	log.Printf("reading restrictions config file: %s", restrictionsFilePath)
-	content, err := ioutil.ReadFile(restrictionsFilePath)
+// Load populates the RestrictionsConfig with data parsed from path and returns
+// nil if successful, or an error otherwise
+func (rc *RestrictionsConfig) Load(path string) error {
+	log.Printf("reading restrictions config file: %s", path)
+	content, err := ioutil.ReadFile(path)
 	if err != nil {
-		return fmt.Errorf("error reading restrictions config file %s: %v", restrictionsFilePath, err)
+		return fmt.Errorf("error reading restrictions config file %s: %v", path, err)
 	}
-	if err = yaml.Unmarshal(content, &rConfig); err != nil {
-		return fmt.Errorf("error parsing restrictions config file %s: %v", restrictionsFilePath, err)
+	if err = yaml.Unmarshal(content, &rc); err != nil {
+		return fmt.Errorf("error parsing restrictions config file %s: %v", path, err)
 	}
 
-	ret := make([]Restriction, 0, len(rConfig.Restrictions))
-	for _, r := range rConfig.Restrictions {
+	ret := make([]Restriction, 0, len(rc.Restrictions))
+	for _, r := range rc.Restrictions {
 		r.AllowedGroupsRe = make([]*regexp.Regexp, 0, len(r.AllowedGroups))
 		for _, g := range r.AllowedGroups {
 			re, err := regexp.Compile(g)
@@ -296,7 +298,7 @@ func readRestrictionsConfig(restrictionsFilePath string, rConfig *RestrictionsCo
 		}
 		ret = append(ret, r)
 	}
-	rConfig.Restrictions = ret
+	rc.Restrictions = ret
 	return err
 }
 
@@ -323,7 +325,7 @@ func readGroupsConfig(rootDir string, config *GroupsConfig, rConfig *Restriction
 				return fmt.Errorf("error parsing groups config at %s: %v", path, err)
 			}
 
-			r := getRestrictionForPath(path, rootDir, rConfig)
+			r := rConfig.GetRestrictionForPath(path, rootDir)
 			mergedGroups, err := mergeGroups(config.Groups, groupsConfigAtPath.Groups, r)
 			if err != nil {
 				return fmt.Errorf("couldn't merge groups: %v", err)
@@ -334,9 +336,13 @@ func readGroupsConfig(rootDir string, config *GroupsConfig, rConfig *Restriction
 	})
 }
 
-func getRestrictionForPath(path, rootDir string, rConfig *RestrictionsConfig) Restriction {
-	for _, r := range rConfig.Restrictions {
-		if match, err := doublestar.Match(r.Path, strings.TrimPrefix(path[len(rootDir):], "/")); err == nil && match {
+// GetRestrictionForPath returns the first Restriction whose Path matches the
+// given path relative to the given rootDir, or defaultRestriction if no
+// Restriction is found
+func (rc *RestrictionsConfig) GetRestrictionForPath(path, rootDir string) Restriction {
+	cleanPath := strings.Trim(strings.TrimPrefix(path, rootDir), string(filepath.Separator))
+	for _, r := range rc.Restrictions {
+		if match, err := doublestar.Match(r.Path, cleanPath); err == nil && match {
 			return r
 		}
 	}
