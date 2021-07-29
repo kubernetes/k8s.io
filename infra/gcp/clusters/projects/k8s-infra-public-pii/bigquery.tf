@@ -3,6 +3,7 @@
 resource "google_service_account" "bq_data_transfer_writer" {
   account_id  = "bq-data-transfer"
   description = "Service Acccount BigQuery Data Transfer"
+  project     = google_project.project.project_id
 }
 
 // grant bigquery dataEditor role to the service account so that scheduled query can run
