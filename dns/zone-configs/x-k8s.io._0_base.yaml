@@ -1,3 +1,13 @@
 # The top-level x-k8s.io zone
+# point x-k8s.io at redirector to get sent to kubernetes.io
+'':
+  - type: A
+    value: 34.107.204.206 # Our vanity redirector, hosted in GKE
+  - type: AAAA
+    value: "2600:1901:0:26f3::" # Our vanity redirector, hosted in GKE
 
-# Nothing here.
+# there are no subdomains and no plans for any fancy redirect logic,
+# this is a placeholder domain to allow the use of x-k8s.io as
+# a namespace for "SIG sponsored CRD based APIs outside of the core"
+#
+# ref: https://git.k8s.io/community/sig-architecture/api-review-process.md#voluntary
