@@ -49,6 +49,8 @@ if ! kubectl config get-contexts "${context}" >/dev/null 2>&1; then
 fi
 
 # Deploy kubernetes resources (excluding secrets)
+pushd "${SCRIPT_ROOT}"
+
 #
 # These can be deployed by members of k8s-infra-rbac-slack-infra@kubernetes.io
 kubectl --context="${context}" apply -n "${namespace}" -Rf resources/
