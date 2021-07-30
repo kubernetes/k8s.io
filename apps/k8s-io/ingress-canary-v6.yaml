@@ -14,4 +14,4 @@ spec:
       port:
         name: http
   tls:
-  - secretName: testsecret-tls
+  - secretName: k8s-io-tls
