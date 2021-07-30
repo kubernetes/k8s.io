@@ -1279,11 +1279,12 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - jregan@google.com
+      - jeff.regan@gmail.com
       - donnyxia@google.com
       - natashasarkar@google.com
       - extaeger@google.com
       - samwronski@google.com
+      - kn.verey@gmail.com
 
   - email-id: k8s-infra-gcs-access-logs@kubernetes.io
     name: k8s-infra-gcs-access-logs
