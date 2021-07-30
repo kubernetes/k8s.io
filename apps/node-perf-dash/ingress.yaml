@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: node-perf-dash
@@ -10,6 +10,8 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: node-perf-dash-k8s-io-ingress-prod
     networking.gke.io/managed-certificates: node-perf-dash-k8s-io
 spec:
-  backend:
-    serviceName: node-perf-dash-status
-    servicePort: status
+  defaultBackend:
+    service:
+      name: node-perf-dash-status
+      port:
+        name: status

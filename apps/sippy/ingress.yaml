@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sippy
@@ -10,6 +10,8 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: "sippy-ingress-prod"
     networking.gke.io/managed-certificates: sippy-k8s-io
 spec:
-  backend:
-    serviceName: sippy
-    servicePort: 9080
+  defaultBackend:
+    service:
+      name: sippy
+      port:
+        number: 9080
