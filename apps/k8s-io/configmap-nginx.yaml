@@ -66,7 +66,7 @@ data:
       # ref: https://git.k8s.io/community/sig-architecture/api-review-process.md#voluntary
       server {
         server_name x-k8s.io;
-        listen 80 default_server;
+        listen 80;
         location / {
           return 301 https://kubernetes.io;
         }
