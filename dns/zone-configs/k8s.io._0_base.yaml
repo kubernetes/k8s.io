@@ -178,9 +178,6 @@ youtube:
 yt:
   type: CNAME
   value: redirect.k8s.io.
-node-perf-dash:
-  type: A
-  value: 35.227.254.215
 # sig-scalability
 perf-dash:
   type: A

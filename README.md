@@ -5,7 +5,6 @@ Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
     - `gcsweb`: instance of [gcsweb] at https://gcsweb.k8s.io - owned by [sig-testing]
     - `kubernetes-external-secrets`: instance of [kubernetes-external-secrets] - owned by [sig-testing]
-    - `node-perf-dash`: instance of [node-perf-dash] - owned by [sig-node]
     - `perfdash`: instance of [perfdash] - owned by [sig-scalability]
     - `prow`: work-in-pogress instance of [prow] - owned by [sig-testing]
     - `publishing-bot`: instance of [publishing-bot] - owned by [sig-release]
@@ -38,7 +37,6 @@ Please see https://git.k8s.io/community/wg-k8s-infra for more information
 [cert-manager]: https://github.com/jetstack/cert-manager
 [gcsweb]: https://git.k8s.io/test-infra/gcsweb
 [kubernetes-external-secrets]: https://github.com/external-secrets/kubernetes-external-secrets
-[node-perf-dash]: https://github.com/kubernetes-retired/contrib/tree/master/node-perf-dash
 [perfdash]: https://git.k8s.io/perf-tests/perfdash
 [prow]: https://git.k8s.io/test-infra/prow
 [publishing-bot]: https://git.k8s.io/publishing-bot

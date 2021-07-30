@@ -138,9 +138,6 @@ issues:
 kep:
   type: CNAME
   value: kep.k8s.io.
-node-perf-dash:
-  type: CNAME
-  value: node-perf-dash.k8s.io.
 pr:
   type: CNAME
   value: pr.k8s.io.
