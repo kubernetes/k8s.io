@@ -59,6 +59,19 @@ data:
         }
       }
 
+      # Redirect x-k8s.io to main site as proof of domain ownership to allow
+      # the use of x-k8s.io as a namespace for "SIG sponsored CRD based APIs
+      # outside of the core"
+      #
+      # ref: https://git.k8s.io/community/sig-architecture/api-review-process.md#voluntary
+      server {
+        server_name x-k8s.io;
+        listen 80 default_server;
+        location / {
+          return 301 https://kubernetes.io;
+        }
+      }
+
       # Vanity redirects for the new kubernetes-sigs repos
       server {
         server_name sigs.k8s.io sigs.kubernetes.io;
