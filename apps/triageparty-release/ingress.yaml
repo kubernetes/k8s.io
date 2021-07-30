@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: triage-party-release
@@ -11,6 +11,8 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: "triage-party-release-ingress-prod"
     networking.gke.io/managed-certificates: "release-triage-k8s-io"
 spec:
-  backend:
-    serviceName: triage-party-release
-    servicePort: 8080
+  defaultBackend:
+    service:
+      name: triage-party-release
+      port:
+        number: 8080

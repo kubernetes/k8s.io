@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gcsweb
@@ -10,6 +10,8 @@ metadata:
     kubernetes.io/ingress.class: gce
     networking.gke.io/managed-certificates: gcsweb
 spec:
-  backend:
-    serviceName: gcsweb
-    servicePort: http
+  defaultBackend:
+    service:
+      name: gcsweb
+      port:
+        name: http

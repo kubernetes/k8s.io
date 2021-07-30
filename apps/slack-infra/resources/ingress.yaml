@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: slack-infra
@@ -7,29 +7,46 @@ metadata:
     kubernetes.io/ingress.class: gce
     networking.gke.io/managed-certificates: slack-infra
 spec:
-  backend:
-    serviceName: slackin2
-    servicePort: 80
+  defaultBackend:
+    service:
+      name: slackin2
+      port:
+        number: 80
   rules:
-    - http:
-        paths:
-          - path: /infra/event-log/*
-            backend:
-              serviceName: slack-event-log
-              servicePort: 80
-          - path: /infra/moderator/*
-            backend:
-              serviceName: slack-moderator
-              servicePort: 80
-          - path: /infra/welcomer/*
-            backend:
-              serviceName: slack-welcomer
-              servicePort: 80
-          - path: /infra/post-message/*
-            backend:
-              serviceName: slack-post-message
-              servicePort: 80
-          - path: /infra/moderator-words/*
-            backend:
-              serviceName: slack-moderator-words
-              servicePort: 80
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/infra/event-log/*"
+        backend:
+          service:
+            name: slack-event-log
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/infra/moderator/*"
+        backend:
+          service:
+            name: slack-moderator
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/infra/welcomer/*"
+        backend:
+          service:
+            name: slack-welcomer
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/infra/post-message/*"
+        backend:
+          service:
+            name: slack-post-message
+            port:
+              number: 80
+      - pathType: Prefix
+        path: "/infra/moderator-words/*"
+        backend:
+          service:
+            name: slack-moderator-words
+            port:
+              number: 80

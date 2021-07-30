@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: k8s-io
@@ -10,6 +10,8 @@ metadata:
     kubernetes.io/ingress.class: gce
     networking.gke.io/managed-certificates: k8s-io-prod
 spec:
-  backend:
-    serviceName: k8s-io
-    servicePort: http
+  defaultBackend:
+    service:
+      name: k8s-io
+      port:
+        name: http
