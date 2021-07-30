@@ -148,7 +148,6 @@ ALL_APPS=(
     k8s-io-prod
     k8s-io-canary
     kubernetes-external-secrets
-    node-perf-dash
     perfdash
     prow
     publishing-bot
