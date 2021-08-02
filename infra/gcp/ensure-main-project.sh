@@ -404,7 +404,7 @@ function ensure_prow_special_cases {
     secret=$(secret_full_name "${project}" "k8s-infra-ci-robot-github-token")
     ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.secretAccessor" 2>&1 | indent
 
-    color 6 "Special case: ensuring gs://k8s-metrics-canary exists for gs://k8s-metrics migration"
+    color 6 "Special case: ensuring gs://k8s-project-metrics exists for gs://k8s-metrics migration"
     (
       bucket="gs://k8s-project-metrics"
       owners="k8s-infra-prow-oncall@kubernetes.io"
@@ -422,7 +422,7 @@ function ensure_prow_special_cases {
       ensure_gcs_role_binding "${bucket}" "${principal}" "objectAdmin"
       ensure_gcs_role_binding "${bucket}" "${principal}" "legacyBucketWriter"
       # k8s-infra-prow-build-trusted can write to this bucket
-      principal="serviceAccount:$(svc_acc_email "k8s-infra-prow-build-trusted" "k8s-metrics")"
+      principal="serviceAccount:$(svc_acct_email "k8s-infra-prow-build-trusted" "k8s-metrics")"
       ensure_gcs_role_binding "${bucket}" "${principal}" "objectAdmin"
       ensure_gcs_role_binding "${bucket}" "${principal}" "legacyBucketWriter"
     ) 2>&1 | indent
