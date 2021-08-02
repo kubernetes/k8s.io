@@ -29,4 +29,5 @@ spec:
   ports:
     - name: metrics
       port: 9090
+  loadBalancerIP: 34.121.239.242 # k8s-infra-prow-build-trusted/ghproxy-metrics
   type: LoadBalancer
