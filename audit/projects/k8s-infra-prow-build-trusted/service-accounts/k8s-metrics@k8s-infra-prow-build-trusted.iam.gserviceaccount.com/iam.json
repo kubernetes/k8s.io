@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:k8s-infra-prow-build-trusted.svc.id.goog[test-pods/k8s-metrics]"
+      ],
+      "role": "roles/iam.workloadIdentityUser"
+    }
+  ],
+  "version": 1
+}

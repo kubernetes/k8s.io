@@ -1,0 +1,8 @@
+{
+  "displayName": "k8s-metrics",
+  "email": "k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "oauth2ClientId": "108684425368600202785",
+  "projectId": "k8s-infra-prow-build-trusted",
+  "uniqueId": "108684425368600202785"
+}

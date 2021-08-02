@@ -154,6 +154,7 @@
     },
     {
       "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
         "group:k8s-infra-aws-admins@kubernetes.io",
         "group:k8s-infra-cluster-admins@kubernetes.io",
         "group:k8s-infra-ii-coop@kubernetes.io",
