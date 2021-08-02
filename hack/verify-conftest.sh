@@ -42,8 +42,8 @@ function main() {
         infra/gcp/clusters/projects/*/*/resources
     )
     local conftest_flags=(
-        # override the default of looking for $(pwd)/policy
-        --policy "${REPO_ROOT}/policies/"
+        # be explicit about looking for $(pwd)/policy
+        --policy "${REPO_ROOT}/policy"
         # for some reason conftest tries to parse Makefiles as yaml
         --ignore Makefile
     )

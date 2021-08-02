@@ -1,0 +1,10 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- ameukam
+- spiffxp
+
+labels:
+- wg/k8s-infra
+- sig/testing
+- area/policy
