@@ -36,8 +36,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.19.9-gke.1900",
-  "currentNodeVersion": "1.19.9-gke.1900",
+  "currentMasterVersion": "1.20.8-gke.900",
+  "currentNodeVersion": "1.19.9-gke.1900 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },

@@ -26,7 +26,7 @@
     },
     {
       "members": [
-        "serviceAccount:service-127754664067@gcf-admin-robot.iam.gserviceaccount.com"
+        "deleted:serviceAccount:service-127754664067@gcf-admin-robot.iam.gserviceaccount.com?uid=116904371009860244686"
       ],
       "role": "roles/cloudfunctions.serviceAgent"
     },

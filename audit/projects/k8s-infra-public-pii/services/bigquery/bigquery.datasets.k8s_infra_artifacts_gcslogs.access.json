@@ -4,6 +4,10 @@
     "specialGroup": "projectWriters"
   },
   {
+    "role": "WRITER",
+    "userByEmail": "service-226195303281@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+  },
+  {
     "role": "OWNER",
     "specialGroup": "projectOwners"
   },

@@ -1,0 +1,8 @@
+{
+  "description": "Service Acccount BigQuery Data Transfer",
+  "email": "bq-data-transfer@k8s-infra-public-pii.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-public-pii/serviceAccounts/bq-data-transfer@k8s-infra-public-pii.iam.gserviceaccount.com",
+  "oauth2ClientId": "105765836197633619709",
+  "projectId": "k8s-infra-public-pii",
+  "uniqueId": "105765836197633619709"
+}

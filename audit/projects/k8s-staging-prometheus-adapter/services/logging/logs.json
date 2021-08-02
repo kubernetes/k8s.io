@@ -1,5 +1,4 @@
 [
   "projects/k8s-staging-prometheus-adapter/logs/cloudaudit.googleapis.com%2Factivity",
-  "projects/k8s-staging-prometheus-adapter/logs/cloudaudit.googleapis.com%2Fsystem_event",
   "projects/k8s-staging-prometheus-adapter/logs/cloudbuild"
 ]

@@ -5,5 +5,6 @@
   "projects/k8s-artifacts-prod/logs/clouderrorreporting.googleapis.com%2Finsights",
   "projects/k8s-artifacts-prod/logs/requests",
   "projects/k8s-artifacts-prod/logs/run.googleapis.com%2Frequests",
-  "projects/k8s-artifacts-prod/logs/run.googleapis.com%2Fstderr"
+  "projects/k8s-artifacts-prod/logs/run.googleapis.com%2Fstderr",
+  "projects/k8s-artifacts-prod/logs/run.googleapis.com%2Fvarlog%2Fsystem"
 ]
