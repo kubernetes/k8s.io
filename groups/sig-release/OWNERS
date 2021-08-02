@@ -1,9 +1,9 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 reviewers:
-  - sig-release-leads
-  - release-engineering-approvers
+- sig-release-leads
+- release-engineering-approvers
 
 labels:
-  - sig/release
-  - area/release-eng
+- sig/release
+- area/release-eng
