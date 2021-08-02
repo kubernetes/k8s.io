@@ -24,15 +24,16 @@ This file defines:
 
 locals {
   project_id                   = "k8s-infra-prow-build-trusted"
-  cluster_name                 = "prow-build-trusted"  // The name of the cluster defined in this file
-  cluster_location             = "us-central1"         // The GCP location (region or zone) where the cluster should be created
-  bigquery_location            = "US"                  // The bigquery specific location where the dataset should be created
-  pod_namespace                = "test-pods"           // MUST match whatever prow is configured to use when it schedules to this cluster
+  cluster_name                 = "prow-build-trusted"   // The name of the cluster defined in this file
+  cluster_location             = "us-central1"          // The GCP location (region or zone) where the cluster should be created
+  bigquery_location            = "US"                   // The bigquery specific location where the dataset should be created
+  pod_namespace                = "test-pods"            // MUST match whatever prow is configured to use when it schedules to this cluster
 
   // Service Accounts in ${pod_namespace} (usable via Workload Identity)
-  cluster_sa_name              = "prow-build-trusted"           // Pods use this by default
-  gcb_builder_sa_name          = "gcb-builder"                  // Allowed to run GCB builds and push to GCS buckets
-  prow_deployer_sa_name        = "prow-deployer"                // Allowed to deploy to prow build clusters
+  cluster_sa_name              = "prow-build-trusted"   // Pods use this by default
+  gcb_builder_sa_name          = "gcb-builder"          // Allowed to run GCB builds and push to GCS buckets
+  prow_deployer_sa_name        = "prow-deployer"        // Allowed to deploy to prow build clusters
+  k8s_metrics_sa_name          = "k8s-metrics"          // Allowed to write to gs://k8s-metrics
 }
 
 data "google_organization" "org" {
@@ -116,6 +117,27 @@ data "google_iam_policy" "prow_deployer_sa_workload_identity" {
 resource "google_service_account_iam_policy" "prow_deployer_sa_iam" {
   service_account_id = google_service_account.prow_deployer_sa.name
   policy_data        = data.google_iam_policy.prow_deployer_sa_workload_identity.policy_data
+}
+// Create GCP SA for jobs that write to gs://k8s-metrics and gs://k8s-project-metrics
+resource "google_service_account" "k8s_metrics_sa" {
+  project      = local.project_id
+  account_id   = local.k8s_metrics_sa_name
+  display_name = local.k8s_metrics_sa_name
+}
+// Allow pods using the build cluster KSA to use the GCP SA via workload identity
+data "google_iam_policy" "k8s_metrics_sa_workload_identity" {
+  binding {
+    role = "roles/iam.workloadIdentityUser"
+
+    members = [
+      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.k8s_metrics_sa_name}]",
+    ]
+  }
+}
+// Authoritative iam-policy: replaces any existing policy attached to this service_account
+resource "google_service_account_iam_policy" "k8s_metrics_sa_iam" {
+  service_account_id = google_service_account.k8s_metrics_sa.name
+  policy_data        = data.google_iam_policy.k8s_metrics_sa_workload_identity.policy_data
 }
 
 resource "google_project_iam_member" "prow_deployer_for_prow_build_trusted" {
