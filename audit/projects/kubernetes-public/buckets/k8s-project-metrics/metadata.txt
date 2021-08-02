@@ -1,0 +1,18 @@
+gs://k8s-project-metrics/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Mon, 02 Aug 2021 18:01:51 GMT
+	Time updated:			Mon, 02 Aug 2021 19:19:56 GMT
+	Metageneration:			12
+	Bucket Policy Only enabled:	True
+	ACL:				[]
+	Default ACL:			[]
