@@ -56,3 +56,17 @@ resource "google_project_iam_member" "k8s_infra_ii_coop" {
   role    = "roles/owner"
   member  = "group:k8s-infra-ii-coop@kubernetes.io"
 }
+
+// Ensure bq-data-transfer@k8s-infra-public-pii.iam.gserviceaccount.com to get read-only access
+// to the BQ dataset riaan_data_store.
+data "google_service_account" "bq_data_transfer" {
+  account_id = "bq-data-transfer"
+  project = "k8s-infra-public-pii"
+}
+
+resource "google_bigquery_dataset_iam_member" "bq_data_transfer_binding" {
+  project    = local.project_id
+  dataset_id = "riaan_data_store"
+  role       = "roles/bigquery.dataViewer"
+  member     = "serviceAccount:${data.google_service_account.bq_data_transfer.email}"
+}
