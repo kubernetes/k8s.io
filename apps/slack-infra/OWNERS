@@ -1,17 +1,17 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- aojea
-- bentheelder
+- ameukam
 - cblecker
+- cpanato
 - dims
+- jeefy
+- mrbobbytables
 - nikhita
+- rajula96reddy
 - spiffxp
 - thockin
 
-emeritus_approvers:
-- ixdy
-
 labels:
 - sig/contributor-experience
-- area/apps/k8s.io
+- area/apps/slack-infra

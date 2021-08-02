@@ -3,8 +3,10 @@
 approvers:
 - spiffxp
 - thockin
+
 emeritus_approvers:
 - ixdy
 
 labels:
 - sig/testing
+- area/apps/gcsweb

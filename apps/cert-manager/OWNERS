@@ -1,8 +1,11 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-  - munnerz
+- munnerz
+
 emeritus_approvers:
-  - ixdy
+- ixdy
+
 labels:
-  - area/infra/cert-manager
+- wg/k8s-infra
+- area/apps/cert-manager

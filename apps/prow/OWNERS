@@ -1,10 +1,15 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
-required_reviewers:
-  - bentheelder
-  - cblecker
-  - spiffxp
+approvers:
+- ameukam
+- bentheelder
+- spiffxp
+
+reviewers:
+- ameukam
+- bentheelder
+- spiffxp
 
 labels:
-- area/prow/bump
 - sig/testing
+- area/apps/prow

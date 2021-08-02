@@ -2,11 +2,10 @@
 
 approvers:
 - ameukam
+- dims
 - spiffxp
-
-reviewers:
-- wg-k8s-infra-leads
+- thockin
 
 labels:
 - wg/k8s-infra
-- area/apps/kubernetes-external-secrets
+- area/apps
