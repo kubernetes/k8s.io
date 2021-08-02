@@ -165,6 +165,14 @@ resource "google_compute_address" "kubernetes_external_secrets_metrics_address" 
   address_type = "EXTERNAL"
 }
 
+resource "google_compute_address" "ghproxy_metrics_address" {
+  name         = "ghproxy-metrics"
+  description  = "to allow monitoring.k8s.prow.io to scrape ghproxy metrics"
+  project      = local.project_id
+  region       = local.cluster_location
+  address_type = "EXTERNAL"
+}
+
 module "prow_build_cluster" {
   source = "../../../modules/gke-cluster"
   project_name      = local.project_id
