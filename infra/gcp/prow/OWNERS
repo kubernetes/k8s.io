@@ -1,12 +1,13 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+approvers:
+- wg-k8s-infra-org-admins
+
 reviewers:
 - sig-testing-leads
 - release-engineering-reviewers
 - test-infra-oncall
-approvers:
-- wg-k8s-infra-org-admins
 
 labels:
-- area/prow
 - sig/testing
+- area/prow

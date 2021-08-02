@@ -1,13 +1,14 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
-reviewers:
-- sig-testing-leads
-- release-engineering-reviewers
-- test-infra-oncall
 approvers:
 - sig-testing-leads
 - ameukam
 
+reviewers:
+- sig-testing-leads
+- release-engineering-reviewers
+- test-infra-oncall
+
 labels:
-- area/prow
 - sig/testing
+- area/prow

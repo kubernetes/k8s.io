@@ -2,13 +2,10 @@
 
 approvers:
 - ameukam
-- spiffxp
-
-reviewers:
-- ameukam
 - dims
 - spiffxp
 - thockin
 
 labels:
-- area/terraform
+- wg/k8s-infra
+- area/apps
