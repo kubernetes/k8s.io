@@ -1,3 +1,4 @@
 [
-  "projects/k8s-staging-capi-kubeadm/logs/cloudaudit.googleapis.com%2Factivity"
+  "projects/k8s-staging-capi-kubeadm/logs/cloudaudit.googleapis.com%2Factivity",
+  "projects/k8s-staging-capi-kubeadm/logs/cloudbuild"
 ]

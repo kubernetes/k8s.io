@@ -1,4 +1,5 @@
 [
+  "projects/kubernetes-public/logs/GCEGuestAgent",
   "projects/kubernetes-public/logs/OSConfigAgent",
   "projects/kubernetes-public/logs/cloudaudit.googleapis.com%2Factivity",
   "projects/kubernetes-public/logs/cloudaudit.googleapis.com%2Fdata_access",
@@ -17,6 +18,7 @@
   "projects/kubernetes-public/logs/kubelet-monitor",
   "projects/kubernetes-public/logs/monitoring.googleapis.com%2FViolationAutoResolveEventv1",
   "projects/kubernetes-public/logs/monitoring.googleapis.com%2FViolationOpenEventv1",
+  "projects/kubernetes-public/logs/monitoring.googleapis.com%2Fuptime_checks",
   "projects/kubernetes-public/logs/node-problem-detector",
   "projects/kubernetes-public/logs/requests",
   "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_1_output",
