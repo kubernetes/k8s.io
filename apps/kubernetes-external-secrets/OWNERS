@@ -1,6 +1,12 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-    - wg-k8s-infra-leads
+- ameukam
+- spiffxp
+
 reviewers:
-    - wg-k8s-infra-leads
+- wg-k8s-infra-leads
+
+labels:
+- wg/k8s-infra
+- area/apps/kubernetes-external-secrets

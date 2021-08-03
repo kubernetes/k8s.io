@@ -1,4 +1,10 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+approvers:
+- ameukam
+- spiffxp
+- thockin
+
 labels:
-- area/infra/auditing
+- wg/k8s-infra
+- area/audit

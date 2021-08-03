@@ -1,13 +1,17 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
-reviewers:
-- alisondy
+approvers:
+- ameukam
 - cblecker
-- idvoretskyi
-- jdumars
+- cpanato
+- dims
+- jeefy
 - mrbobbytables
 - nikhita
-- parispittman
+- rajula96reddy
+- spiffxp
+- thockin
 
 labels:
 - sig/contributor-experience
+- area/apps/slack-infra

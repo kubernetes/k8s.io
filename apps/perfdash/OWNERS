@@ -1,4 +1,12 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
 approvers:
-  - bartsmykla
-  - mm4tt
-  - wojtek-t
+- mm4tt
+- wojtek-t
+
+emeritus_approvers:
+- bartsmykla
+
+labels:
+- sig/scalability
+- area/apps/perfdash

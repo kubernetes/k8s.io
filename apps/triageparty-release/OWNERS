@@ -1,10 +1,12 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-  - release-engineering-approvers
+- release-engineering-approvers
+
 reviewers:
-  - release-engineering-reviewers
+- release-engineering-reviewers
 
 labels:
-  - sig/release
-  - area/release-eng
+- sig/release
+- area/release-eng
+- area/apps/triageparty-release

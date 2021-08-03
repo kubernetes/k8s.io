@@ -1,9 +1,14 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+approvers:
+- dims
+- nikhita
+- sttts
+
 reviewers:
-- sig-release-leads
-- release-engineering-approvers
+- mfojtik
+- nikhita
 
 labels:
 - sig/release
-- area/release-eng
+- area/apps/publishing-bot

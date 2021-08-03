@@ -14,11 +14,15 @@ options:
   no_parent_owners: true
 
 approvers:
-  - cblecker
-  - dims
-  - thockin
-  - spiffxp
+- cblecker
+- dims
+- thockin
+- spiffxp
+
+reviewers:
+- nikhita
 
 labels:
-  - wg/k8s-infra
-  - area/access
+- wg/k8s-infra
+- area/access
+- area/groups
