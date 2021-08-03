@@ -14,9 +14,7 @@
     "enabled": true,
     "securityGroup": "gke-security-groups@kubernetes.io"
   },
-  "autoscaling": {
-    "autoscalingProfile": "BALANCED"
-  },
+  "autoscaling": {},
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.4.0.0/14",
   "createTime": "2020-04-30T23:44:46+00:00",
