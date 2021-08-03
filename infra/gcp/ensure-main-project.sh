@@ -397,17 +397,17 @@ function ensure_prow_special_cases {
     fi
     local project="${1}"
 
-    local bucket principal secret
+    local principal secret
 
     color 6 "Special case: ensuring k8s-infra-ci-robot-github-token accessible by k8s-infra-prow-build-trusted"
     principal="serviceAccount:$(svc_acct_email "k8s-infra-prow-build-trusted" "kubernetes-external-secrets")"
     secret=$(secret_full_name "${project}" "k8s-infra-ci-robot-github-token")
     ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.secretAccessor" 2>&1 | indent
 
-    color 6 "Special case: ensuring gs://k8s-project-metrics exists for gs://k8s-metrics migration"
+    color 6 "Special case: ensuring gs://k8s-metrics exists"
     (
-      bucket="gs://k8s-project-metrics"
-      owners="k8s-infra-prow-oncall@kubernetes.io"
+      local bucket="gs://k8s-metrics"
+      local owners="k8s-infra-prow-oncall@kubernetes.io"
       local old_service_account="triage@k8s-gubernator.iam.gserviceaccount.com"
 
       ensure_public_gcs_bucket "${project}" "${bucket}"
@@ -416,15 +416,20 @@ function ensure_prow_special_cases {
       empower_gcs_admins "${project}" "${bucket}"
       # bucket owners can admin this bucket
       empower_group_to_admin_gcs_bucket "${owners}" "${bucket}"
-      # TODO(spiffxp): copy pasted to flip to ensure_removed when migrated
-      # k8s-prow-builds can write to this bucket
+      # TODO(spiffxp): remove once bindings have been removed
+      # k8s-prow-builds can no longer write to this bucket
       principal="serviceAccount:${old_service_account}"
-      ensure_gcs_role_binding "${bucket}" "${principal}" "objectAdmin"
-      ensure_gcs_role_binding "${bucket}" "${principal}" "legacyBucketWriter"
+      ensure_removed_gcs_role_binding "${bucket}" "${principal}" "objectAdmin"
+      ensure_removed_gcs_role_binding "${bucket}" "${principal}" "legacyBucketWriter"
       # k8s-infra-prow-build-trusted can write to this bucket
       principal="serviceAccount:$(svc_acct_email "k8s-infra-prow-build-trusted" "k8s-metrics")"
       ensure_gcs_role_binding "${bucket}" "${principal}" "objectAdmin"
       ensure_gcs_role_binding "${bucket}" "${principal}" "legacyBucketWriter"
+      # TODO(spiffxp): this is a test to confirm we _can_ charge bigquery usage elsewhere
+      #                and might prove convenient since there are datasets in this project,
+      #                but this should probably not be the long-term home of usage billing
+      # k8s-infra-prow-build-trusted can charge bigquery usage to this project
+      ensure_project_role_binding "${project}" "${principal}" "roles/bigquery.user"
     ) 2>&1 | indent
 }
 

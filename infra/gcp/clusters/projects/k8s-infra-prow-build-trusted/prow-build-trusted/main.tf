@@ -53,13 +53,25 @@ resource "google_project_iam_member" "k8s_infra_prow_oncall" {
   member  = "group:k8s-infra-prow-oncall@kubernetes.io"
 }
 
-// Create GCP SA for pods
+// TODO: consider making this a real module to reduce copy-pasta
+// 
+// The "workload_identity_service_account" comment denotes a pseudo-module of
+// copy-pasted resources, similar to "ensure_workload_identity_serviceaccount"
+// in ensure-main-project.sh.
+//
+// It is a shorthand for making a Kubernetes Service Account bound to a GCP
+// Service Account of the same name, and optionally assigning it IAM roles.
+// Some of the roles are assigned in bash or other terraform modules, so as
+// to keep the permissions necessary to run this terraform module scoped to
+// "roles/owner" for local.project_id
+
+// workload_identity_service_account: prow-build-trusted
+// description: intended as default service account for pods in this cluster
 resource "google_service_account" "prow_build_cluster_sa" {
   project      = local.project_id
   account_id   = local.cluster_sa_name
   display_name = "Used by pods in '${local.cluster_name}' GKE cluster"
 }
-// Allow pods using the build cluster KSA to use the GCP SA via workload identity
 data "google_iam_policy" "prow_build_cluster_sa_workload_identity" {
   binding {
     role = "roles/iam.workloadIdentityUser"
@@ -69,19 +81,18 @@ data "google_iam_policy" "prow_build_cluster_sa_workload_identity" {
     ]
   }
 }
-// Authoritative iam-policy: replaces any existing policy attached to this service_account
 resource "google_service_account_iam_policy" "prow_build_cluster_sa_iam" {
   service_account_id = google_service_account.prow_build_cluster_sa.name
   policy_data        = data.google_iam_policy.prow_build_cluster_sa_workload_identity.policy_data
 }
 
-// Create GCP SA for jobs that use GCB and push results to GCS
+// workload_identity_service_account: gcb-builder
+// description: used to trigger GCB builds in all k8s-staging projects
 resource "google_service_account" "gcb_builder_sa" {
   project      = local.project_id
   account_id   = local.gcb_builder_sa_name
   display_name = local.gcb_builder_sa_name
 }
-// Allow pods using the build cluster KSA to use the GCP SA via workload identity
 data "google_iam_policy" "gcb_builder_sa_workload_identity" {
   binding {
     role = "roles/iam.workloadIdentityUser"
@@ -91,19 +102,19 @@ data "google_iam_policy" "gcb_builder_sa_workload_identity" {
     ]
   }
 }
-// Authoritative iam-policy: replaces any existing policy attached to this service_account
 resource "google_service_account_iam_policy" "gcb_builder_sa_iam" {
   service_account_id = google_service_account.gcb_builder_sa.name
   policy_data        = data.google_iam_policy.gcb_builder_sa_workload_identity.policy_data
 }
+// roles: come from ensure-staging-storage.sh
 
-// Create GCP SA for jobs that deploy to k8s-infra prow clusters
+// workload_identity_service_account: prow-deployer
+// description: used to deploy k8s resources to k8s clusters
 resource "google_service_account" "prow_deployer_sa" {
   project      = local.project_id
   account_id   = local.prow_deployer_sa_name
   display_name = local.prow_deployer_sa_name
 }
-// Allow pods using the build cluster KSA to use the GCP SA via workload identity
 data "google_iam_policy" "prow_deployer_sa_workload_identity" {
   binding {
     role = "roles/iam.workloadIdentityUser"
@@ -113,33 +124,11 @@ data "google_iam_policy" "prow_deployer_sa_workload_identity" {
     ]
   }
 }
-// Authoritative iam-policy: replaces any existing policy attached to this service_account
 resource "google_service_account_iam_policy" "prow_deployer_sa_iam" {
   service_account_id = google_service_account.prow_deployer_sa.name
   policy_data        = data.google_iam_policy.prow_deployer_sa_workload_identity.policy_data
 }
-// Create GCP SA for jobs that write to gs://k8s-metrics and gs://k8s-project-metrics
-resource "google_service_account" "k8s_metrics_sa" {
-  project      = local.project_id
-  account_id   = local.k8s_metrics_sa_name
-  display_name = local.k8s_metrics_sa_name
-}
-// Allow pods using the build cluster KSA to use the GCP SA via workload identity
-data "google_iam_policy" "k8s_metrics_sa_workload_identity" {
-  binding {
-    role = "roles/iam.workloadIdentityUser"
-
-    members = [
-      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.k8s_metrics_sa_name}]",
-    ]
-  }
-}
-// Authoritative iam-policy: replaces any existing policy attached to this service_account
-resource "google_service_account_iam_policy" "k8s_metrics_sa_iam" {
-  service_account_id = google_service_account.k8s_metrics_sa.name
-  policy_data        = data.google_iam_policy.k8s_metrics_sa_workload_identity.policy_data
-}
-
+// roles: prow-deployer (there are also some assigned in ensure-main-project.sh)
 resource "google_project_iam_member" "prow_deployer_for_prow_build_trusted" {
   project = local.project_id
   role    = "${data.google_organization.org.name}/roles/container.deployer"
@@ -151,13 +140,38 @@ resource "google_project_iam_member" "prow_deployer_for_prow_build" {
   member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
 }
 
-// Create GCP SA for kubernetes-external-secrets
+// workload_identity_service_account: k8s-metrics
+resource "google_service_account" "k8s_metrics_sa" {
+  project      = local.project_id
+  account_id   = local.k8s_metrics_sa_name
+  display_name = local.k8s_metrics_sa_name
+}
+data "google_iam_policy" "k8s_metrics_sa_workload_identity" {
+  binding {
+    role = "roles/iam.workloadIdentityUser"
+    members = [
+      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.k8s_metrics_sa_name}]",
+    ]
+  }
+}
+resource "google_service_account_iam_policy" "k8s_metrics_sa_iam" {
+  service_account_id = google_service_account.k8s_metrics_sa.name
+  policy_data        = data.google_iam_policy.k8s_metrics_sa_workload_identity.policy_data
+}
+// roles: k8s-metrics
+resource "google_project_iam_member" "k8s_metrics_sa_bigquery_user" {
+  project = local.project_id
+  role    = "roles/bigquery.user"
+  member  = "serviceAccount:${google_service_account.k8s_metrics_sa.email}"
+}
+
+// workload_identity_service_account: kubernetes-external-secrets
+// description: used by kubernetes-external-secrets to read specific secrets in this and other projects
 resource "google_service_account" "kubernetes_external_secrets_sa" {
   project      = local.project_id
   account_id   = "kubernetes-external-secrets"
   display_name = "kubernetes-external-secrets"
 }
-// Allow kubernetes-external-secrets pods to use the GCP SA
 data "google_iam_policy" "kubernetes_external_secrets_sa_workload_identity" {
   binding {
     role = "roles/iam.workloadIdentityUser"
@@ -167,11 +181,11 @@ data "google_iam_policy" "kubernetes_external_secrets_sa_workload_identity" {
     ]
   }
 }
-// Authoritative iam-policy: replaces any existing policy attached to this service_account
 resource "google_service_account_iam_policy" "kubernetes_external_secrets_sa_iam" {
   service_account_id = google_service_account.kubernetes_external_secrets_sa.name
   policy_data        = data.google_iam_policy.kubernetes_external_secrets_sa_workload_identity.policy_data
 }
+// roles: kubernetes-external-secrets
 resource "google_project_iam_member" "kubernetes_external_secrets_for_prow_build_trusted" {
   project = local.project_id
   role    = "roles/secretmanager.secretAccessor"
@@ -179,6 +193,7 @@ resource "google_project_iam_member" "kubernetes_external_secrets_for_prow_build
 }
 
 
+// external (regional) ip addresses
 resource "google_compute_address" "kubernetes_external_secrets_metrics_address" {
   name         = "kubernetes-external-secrets-metrics"
   description  = "to allow monitoring.k8s.prow.io to scrape kubernetes-external-secrets metrics"
