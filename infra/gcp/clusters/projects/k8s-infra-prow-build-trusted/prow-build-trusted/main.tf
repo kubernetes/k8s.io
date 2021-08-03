@@ -34,6 +34,7 @@ locals {
   gcb_builder_sa_name          = "gcb-builder"          // Allowed to run GCB builds and push to GCS buckets
   prow_deployer_sa_name        = "prow-deployer"        // Allowed to deploy to prow build clusters
   k8s_metrics_sa_name          = "k8s-metrics"          // Allowed to write to gs://k8s-metrics
+  k8s_triage_sa_name           = "k8s-triage"           // Allowed to write to gs://k8s-project-triage
 }
 
 data "google_organization" "org" {
@@ -163,6 +164,31 @@ resource "google_project_iam_member" "k8s_metrics_sa_bigquery_user" {
   project = local.project_id
   role    = "roles/bigquery.user"
   member  = "serviceAccount:${google_service_account.k8s_metrics_sa.email}"
+}
+
+// workload_identity_service_account: triage
+resource "google_service_account" "k8s_triage_sa" {
+  project      = local.project_id
+  account_id   = local.k8s_triage_sa_name
+  display_name = local.k8s_triage_sa_name
+}
+data "google_iam_policy" "k8s_triage_sa_workload_identity" {
+  binding {
+    role = "roles/iam.workloadIdentityUser"
+    members = [
+      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.k8s_triage_sa_name}]",
+    ]
+  }
+}
+resource "google_service_account_iam_policy" "k8s_triage_sa_iam" {
+  service_account_id = google_service_account.k8s_triage_sa.name
+  policy_data        = data.google_iam_policy.k8s_triage_sa_workload_identity.policy_data
+}
+// roles: triage
+resource "google_project_iam_member" "k8s_triage_sa_bigquery_user" {
+  project = local.project_id
+  role    = "roles/bigquery.user"
+  member  = "serviceAccount:${google_service_account.k8s_triage_sa.email}"
 }
 
 // workload_identity_service_account: kubernetes-external-secrets
