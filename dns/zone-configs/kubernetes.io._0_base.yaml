@@ -153,6 +153,9 @@ prs:
 release.triage:
   type: CNAME
   value: release.triage.k8s.io.
+sbom:
+  type: CNAME
+  value: redirect.k8s.io.
 sigs:
   type: CNAME
   value: sigs.k8s.io.

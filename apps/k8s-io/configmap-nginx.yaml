@@ -313,6 +313,14 @@ data:
       }
 
       server {
+        server_name sbom.k8s.io sbom.kubernetes.io
+        listen 80;
+
+        rewrite ^/(.*)?/release$ https://storage.googleapis.com/kubernetes-release/release/$1/kubernetes-release.spdx redirect;
+        rewrite ^/(.*)?/source$  https://storage.googleapis.com/kubernetes-release/release/$1/kubernetes-source.spdx redirect;
+      }
+
+      server {
         server_name submit-queue.k8s.io submit-queue.kubernetes.io;
         listen 80;
 

@@ -213,6 +213,9 @@ prs:
 relnotes:
   type: CNAME
   value: kubernetes-sigs-release-notes.netlify.app.
+sbom:
+  type: CNAME
+  value: redirect.k8s.io.
 sigs:
   type: CNAME
   value: redirect.k8s.io.
