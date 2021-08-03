@@ -41,3 +41,14 @@ groups:
       - dpapandrea@gmail.com
       - david.andrew.mckay@gmail.com
       - ihor@cncf.io
+  - email-id: lwkd@kubernetes.io
+    name: lwkd
+    description: |-
+      alias for Last Week In Kubernetes editors
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MembersCanPostAsTheGroup: "true"
+      ReconcileMembers: "true"
+    members:
+      - jberkus@redhat.com
+      - noah@coderanger.net
