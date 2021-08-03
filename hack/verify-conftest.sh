@@ -16,7 +16,6 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-set -x
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd )"
