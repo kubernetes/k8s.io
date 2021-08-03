@@ -14,5 +14,9 @@
   {
     "role": "READER",
     "specialGroup": "projectReaders"
+  },
+  {
+    "role": "READER",
+    "userByEmail": "bq-data-transfer@k8s-infra-public-pii.iam.gserviceaccount.com"
   }
 ]

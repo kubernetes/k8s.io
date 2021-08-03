@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "serviceAccount:k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.user"
+    },
+    {
+      "members": [
         "serviceAccount:180382678033@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.builder"

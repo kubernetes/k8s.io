@@ -1,4 +1,4 @@
-gs://k8s-infra-scalability-tests-logs/ :
+gs://k8s-metrics/ :
 	Storage class:			STANDARD
 	Location type:			multi-region
 	Location constraint:		US
@@ -10,9 +10,9 @@ gs://k8s-infra-scalability-tests-logs/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			Thu, 17 Jun 2021 20:05:52 GMT
-	Time updated:			Tue, 03 Aug 2021 18:54:17 GMT
-	Metageneration:			3
+	Time created:			Tue, 03 Aug 2021 17:30:17 GMT
+	Time updated:			Tue, 03 Aug 2021 17:31:03 GMT
+	Metageneration:			12
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]
