@@ -30,7 +30,6 @@
 set -o errexit
 set -o nounset
 set -o pipefail
-set -x
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 
