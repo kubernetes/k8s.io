@@ -29,6 +29,15 @@ resource "google_storage_bucket" "scalability_tests_logs" {
   name    = local.scalability_tests_logs_bucket_name
 
   uniform_bucket_level_access = true
+
+  lifecycle_rule {
+    condition {
+      age = 90 // days
+    }
+    action {
+      type = "Delete"
+    }
+  }
 }
 
 data "google_iam_policy" "scalability_tests_logs_bindings" {
