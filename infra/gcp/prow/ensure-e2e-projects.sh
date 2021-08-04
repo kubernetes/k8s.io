@@ -167,23 +167,8 @@ function ensure_trusted_prow_build_cluster_secrets() {
     done
 }
 
-# Enable OS Login at the project level
+# Disable OS Login at the project level
 # $1 The GCP Project
-function ensure_project_oslogin() {
-    if [ $# != 1 ] || [ -z "$1" ]; then
-        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
-        return 1
-    fi
-
-    local prj="${1}"
-
-    enabled=$(gcloud compute project-info describe --project="${prj}" \
-      --format='value(commonInstanceMetadata.items[enable-oslogin])')
-    if [ "${enabled}" != "TRUE" ]; then
-      gcloud compute project-info --project="${prj}" add-metadata --metadata enable-oslogin=TRUE
-    fi
-}
-
 function disable_project_oslogin() {
     if [ $# != 1 ] || [ -z "$1" ]; then
         echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
