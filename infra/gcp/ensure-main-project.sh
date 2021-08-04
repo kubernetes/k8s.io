@@ -433,14 +433,13 @@ function ensure_prow_special_cases {
       ensure_project_role_binding "${project}" "${principal}" "roles/bigquery.user"
     ) 2>&1 | indent
 
-    color 6 "Special case: ensuring gs://k8s-project-triage exists"
+    color 6 "Special case: ensuring gs://k8s-triage exists"
     (
-      local bucket="gs://k8s-project-triage"
+      local bucket="gs://k8s-triage"
       local owners="k8s-infra-prow-oncall@kubernetes.io"
       local old_service_account="triage@k8s-gubernator.iam.gserviceaccount.com"
 
       ensure_public_gcs_bucket "${project}" "${bucket}"
-      ensure_gcs_bucket_auto_deletion "${bucket}" "365" # match gs://k8s-metrics
       # GCS admins can admin all GCS buckets
       empower_gcs_admins "${project}" "${bucket}"
       # bucket owners can admin this bucket
@@ -526,4 +525,8 @@ function ensure_main_project() {
     color 6 "Done"
 }
 
-ensure_main_project "${PROJECT}"
+project="${PROJECT}"
+color 6 "Ensuring prow special cases for: ${project}"
+ensure_prow_special_cases "${project}" 2>&1 | indent
+
+# ensure_main_project "${PROJECT}"
