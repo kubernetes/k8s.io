@@ -2,6 +2,7 @@ apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
   name: k8s-io-prod
+  namespace: k8s-io-prod
   labels:
     app: k8s-io
 spec:
