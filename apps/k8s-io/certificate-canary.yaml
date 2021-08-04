@@ -55,6 +55,8 @@ spec:
   - rel.kubernetes.io
   - releases.k8s.io
   - releases.kubernetes.io
+  - sbom.k8s.io
+  - sbom.kubernetes.io
   - sigs.k8s.io
   - sigs.kubernetes.io
   - submit-queue.k8s.io
