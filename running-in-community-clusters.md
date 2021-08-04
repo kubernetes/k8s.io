@@ -48,6 +48,9 @@ multiple namespaces that should be kept in sync, say so in the description.
 Add these new groups to the group called "gke-security-groups", which will
 enable the RBAC linkage.
 
+Finally, add the groups as regular expressions to the `path: "groups.yaml"`
+section of [restrictions.yaml](/groups/restrictions.yaml).
+
 ### Send your PR
 
 Once reviewed and merged, one of the group admins will create the
