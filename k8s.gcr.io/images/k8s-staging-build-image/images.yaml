@@ -277,6 +277,7 @@
 - name: go-runner
   dmap:
     "sha256:004c18fbd8ca3fd431d60654edd0c19eed7e805385afac40d2b5b6b45cbd9e8e": ["v2.3.1-go1.16-buster.0"]
+    "sha256:03bd1dcdffa6023c89d850aa89f13cbbd72eae902197d05e67d23d50707d9c8c": ["v2.3.1-go1.17rc2-buster.0"]
     "sha256:059fd64240ad0fcd0f6eee6a791004747f1b4a5d3c44dd5ca68258bda4555e67": ["buster-v2.2.4"]
     "sha256:0c8bac67a806659c4ee97c9ab6731a5d21d6b02de3290432e7d13f8c98b227d1": ["buster-v1.0.1"]
     "sha256:25a3b0b27a8d799becc2fe7696d45c19836faef76f772868a55aa0d55474e40d": ["v2.3.1-go1.16.4-buster.0"]
@@ -350,6 +351,7 @@
     "sha256:a20a0d599c27ad3f79258efdf22dd865505ef1615ebe42c806016e40b7e1e301": ["v1.15.0-rc.1-1"]
     "sha256:a297fddaaa8f8e88620de1f94c44dbbf26aaaf5f256266bf5c7eca5f0f68f56d": ["v1.14.4-2"]
     "sha256:a8fc61236af20c71e97ec981f1e46cf119b8419be44f2ca0d8dfda3654ffb314": ["v1.15.11-legacy-1"]
+    "sha256:b090a1a2372552547f2b6d80c4894a7b979690e58d4e6e4aa895dd4397466540": ["v1.17.0-rc.2-1"]
     "sha256:b33ada5ba9b267ab9fc77b18aa9ceebc51ced6c57fb262eecb2d5ac35a3cfa52": ["v1.13.12-2"]
     "sha256:b376d6551bac71ca1f64a7f764d5ec59a120bac6839ebe55d33f581bba30fc76": ["v1.15.11-1"]
     "sha256:b69ddf24bc8f3ab4c7289b2bff7d945e92847c7d4b41dca05719562d59b9dbb8": ["v1.15.12-legacy-1"]
