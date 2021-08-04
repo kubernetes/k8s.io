@@ -153,6 +153,7 @@ ALL_APPS=(
     publishing-bot
     sippy
     slack-infra
+    triageparty-cli
     triageparty-release
     triageparty-scalability
 )
