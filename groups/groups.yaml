@@ -187,6 +187,7 @@ groups:
       - k8s-infra-rbac-perfdash@kubernetes.io
       - k8s-infra-rbac-prow@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io
+      - k8s-infra-rbac-triageparty-cli@kubernetes.io
       - k8s-infra-rbac-triageparty-release@kubernetes.io
       - k8s-infra-rbac-triageparty-scalability@kubernetes.io
       - k8s-infra-rbac-sippy@kubernetes.io
@@ -392,6 +393,18 @@ groups:
       - shyam123.jvs95@gmail.com
       - wojtekt@google.com
       - zawodny@google.com
+
+  - email-id: k8s-infra-rbac-triageparty-cli@kubernetes.io
+    name: k8s-infra-rbac-triageparty-cli
+    description: |-
+      ACL for Bug Triage CLI Team
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - eddiezane@gmail.com
+      - kn.verey@gmail.com
+      - maszulik@redhat.com
 
   - email-id: k8s-infra-rbac-triageparty-scalability@kubernetes.io
     name: k8s-infra-rbac-triageparty-scalability
