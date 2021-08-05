@@ -11,8 +11,8 @@ gs://k8s-metrics/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 03 Aug 2021 17:30:17 GMT
-	Time updated:			Tue, 03 Aug 2021 17:31:03 GMT
-	Metageneration:			12
+	Time updated:			Tue, 03 Aug 2021 19:38:36 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

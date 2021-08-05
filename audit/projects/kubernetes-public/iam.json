@@ -26,6 +26,13 @@
     },
     {
       "members": [
+        "serviceAccount:k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+        "serviceAccount:k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.user"
+    },
+    {
+      "members": [
         "deleted:serviceAccount:service-127754664067@gcf-admin-robot.iam.gserviceaccount.com?uid=116904371009860244686"
       ],
       "role": "roles/cloudfunctions.serviceAgent"

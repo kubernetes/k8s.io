@@ -20,6 +20,7 @@
       ],
       "serviceAccount": "default"
     },
+    "autoscalingProfile": "BALANCED",
     "enableNodeAutoprovisioning": true,
     "resourceLimits": [
       {
@@ -74,6 +75,14 @@
     "us-central1-a",
     "us-central1-f"
   ],
+  "loggingConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS",
+        "WORKLOADS"
+      ]
+    }
+  },
   "loggingService": "logging.googleapis.com/kubernetes",
   "maintenancePolicy": {
     "resourceVersion": "44fb9d63",
@@ -86,6 +95,13 @@
   },
   "masterAuthorizedNetworksConfig": {
     "enabled": true
+  },
+  "monitoringConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS"
+      ]
+    }
   },
   "monitoringService": "monitoring.googleapis.com/kubernetes",
   "name": "aaa",
@@ -163,6 +179,10 @@
         "maxPodsPerNode": "110"
       },
       "name": "pool1-20190918234853194900000001",
+      "networkConfig": {
+        "podIpv4CidrBlock": "10.40.0.0/14",
+        "podRange": "gke-aaa-pods-4d0eb763"
+      },
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/pool1-20190918234853194900000001",
       "upgradeSettings": {
@@ -214,6 +234,10 @@
         "maxPodsPerNode": "110"
       },
       "name": "pool2-20200316195138785800000001",
+      "networkConfig": {
+        "podIpv4CidrBlock": "10.40.0.0/14",
+        "podRange": "gke-aaa-pods-4d0eb763"
+      },
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/pool2-20200316195138785800000001",
       "upgradeSettings": {

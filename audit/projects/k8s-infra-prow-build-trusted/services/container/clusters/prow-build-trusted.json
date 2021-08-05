@@ -14,12 +14,14 @@
     "enabled": true,
     "securityGroup": "gke-security-groups@kubernetes.io"
   },
-  "autoscaling": {},
+  "autoscaling": {
+    "autoscalingProfile": "BALANCED"
+  },
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.4.0.0/14",
   "createTime": "2020-04-30T23:44:46+00:00",
   "currentMasterVersion": "1.20.8-gke.900",
-  "currentNodeVersion": "1.19.9-gke.1900 *",
+  "currentNodeVersion": "1.20.8-gke.900",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -46,6 +48,14 @@
     "us-central1-f",
     "us-central1-b"
   ],
+  "loggingConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS",
+        "WORKLOADS"
+      ]
+    }
+  },
   "loggingService": "logging.googleapis.com/kubernetes",
   "maintenancePolicy": {
     "resourceVersion": "44fb9d63",
@@ -57,6 +67,13 @@
     }
   },
   "masterAuthorizedNetworksConfig": {},
+  "monitoringConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS"
+      ]
+    }
+  },
   "monitoringService": "monitoring.googleapis.com/kubernetes",
   "name": "prow-build-trusted",
   "network": "default",
@@ -136,7 +153,7 @@
       "upgradeSettings": {
         "maxSurge": 1
       },
-      "version": "1.19.9-gke.1900"
+      "version": "1.20.8-gke.900"
     }
   ],
   "releaseChannel": {
