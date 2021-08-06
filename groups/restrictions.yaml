@@ -104,6 +104,7 @@ restrictions:
     allowedGroups:
       - "^community@kubernetes.io$"
       - "^stream-team@kubernetes.io$"
+      - "^lwkd@kubernetes.io$"
   - path: "sig-release/groups.yaml"
     allowedGroups:
       - "^k8s-infra-rbac-triageparty-release@kubernetes.io$"
