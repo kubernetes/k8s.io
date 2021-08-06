@@ -12,5 +12,5 @@ If this is a "prod" cluster:
 - the BigQuery dataset will NOT be deleted on `terraform destroy`
 - the GKE cluster will NOT be deleted on `terraform destroy`
 
-[`gke-project`]: /infra/gcp/clusters/modules/gke-project
-[`gke-nodepool`]: /infra/gcp/clusters/modules/gke-nodepool
+[`gke-project`]: /infra/gcp/terraform/modules/gke-project
+[`gke-nodepool`]: /infra/gcp/terraform/modules/gke-nodepool

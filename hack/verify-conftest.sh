@@ -38,7 +38,7 @@ function main() {
     pushd "${REPO_ROOT}" >/dev/null
     local k8s_yaml_paths=(
         apps
-        infra/gcp/clusters/projects/*/*/resources
+        infra/gcp/terraform/**/resources
     )
     local conftest_flags=(
         # be explicit about looking for $(pwd)/policy

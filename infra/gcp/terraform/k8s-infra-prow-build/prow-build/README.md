@@ -44,7 +44,7 @@ There was some manual work in bringing this up fully:
 git clone git://github.com/kubernetes/k8s.io
 
 # deploy the resources
-cd k8s.io/infra/gcp/clusters/k8s-infra-prow-build
+cd k8s.io/infra/gcp/terraform/k8s-infra-prow-build
 ./deploy.sh
 
 # create the service-account secret
@@ -150,6 +150,6 @@ gsutil iam ch \
 [roles/prow.viewer]: https://github.com/kubernetes/k8s.io/blob/main/infra/gcp/roles/prow.viewer.yaml
 [join-groups]: https://github.com/kubernetes/k8s.io/tree/main/groups#making-changes
 [post-k8sio-deploy-prow-build-resources]: https://testgrid.k8s.io/wg-k8s-infra-k8sio#post-k8sio-deploy-prow-build-resources
-[deploy.sh]: /infra/gcp/clusters/k8s-infra-prow-build/deploy.sh
+[deploy.sh]: /infra/gcp/terraform/k8s-infra-prow-build/deploy.sh
 [ensure-e2e-projects.sh]: /infra/gcp/prow/ensure-e2e-projects.sh
 [#wg-k8s-infra]: https://kubernetes.slack.com/messages/wg-k8s-infra

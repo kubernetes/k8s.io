@@ -7,5 +7,5 @@ This terraform module defines a GKE nodepool following wg-k8s-infra conventions,
 
 It is assumed that the associated GKE cluster has been provisioned using the [`gke-cluster`] module
 
-[`gke-cluster`]: /infra/gcp/clusters/modules/gke-cluster
-[`gke-project`]: /infra/gcp/clusters/modules/gke-project
+[`gke-cluster`]: /infra/gcp/terraform/modules/gke-cluster
+[`gke-project`]: /infra/gcp/terraform/modules/gke-project
