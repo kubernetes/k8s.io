@@ -355,6 +355,9 @@ function ensure_aaa_external_secrets() {
         k8s-infra-build-clusters-kubeconfig
         k8s-infra-ci-robot-github-account-password
         k8s-infra-ci-robot-github-token
+        k8s-infra-prow-cookie
+        k8s-infra-prow-github-oauth-config
+        k8s-infra-prow-hmac-token
     )
     local slack_infra_secrets=(
         recaptcha

@@ -1,0 +1,128 @@
+# Copyright 2021 The Kubernetes Authors All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: prow
+  name: deck
+  labels:
+    app: deck
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: deck
+  template:
+    metadata:
+      labels:
+        app: deck
+    spec:
+      serviceAccountName: deck
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: deck
+        image: gcr.io/k8s-prow/deck:v20210407-51f95c2d52
+        imagePullPolicy: Always
+        ports:
+          - name: http
+            containerPort: 8080
+        args:
+        - --config-path=/etc/config/config.yaml
+        - --cookie-secret=/etc/cookie/secret
+        - --github-token-path=/etc/github/token
+        - --github-endpoint=http://ghproxy.prow.svc.cluster.local
+        - --github-endpoint=https://api.github.com
+        - --github-oauth-config-file=/etc/githuboauth/secret
+        - --hook-url=http://hook:8888/plugin-help
+        - --kubeconfig=/etc/kubeconfig/config
+        - --job-config-path=/etc/job-config
+        - --oauth-url=/github-login
+        - --plugin-config=/etc/plugins/plugins.yaml
+        - --redirect-http-to=k8s-infra-prow.k8s.io
+        - --rerun-creates-job
+        - --spyglass=true
+        - --tide-url=http://tide/
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - "ALL"
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - name: oauth-config
+          mountPath: /etc/githuboauth
+          readOnly: true
+        - name: cookie-secret
+          mountPath: /etc/cookie
+          readOnly: true
+        - mountPath: /etc/kubeconfig
+          name: kubeconfig
+          readOnly: true
+        - name: config
+          mountPath: /etc/config
+          readOnly: true
+        - name: job-config
+          mountPath: /etc/job-config
+          readOnly: true
+        - name: github-token
+          mountPath: /etc/github
+          readOnly: true
+        - name: plugins
+          mountPath: /etc/plugins
+          readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz/ready
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 3
+          timeoutSeconds: 600
+      volumes:
+      - name: oauth-config
+        secret:
+          defaultMode: 420
+          secretName: k8s-infra-prow-github-oauth-config
+      - name: github-token
+        secret:
+          defaultMode: 420
+          secretName: k8s-infra-ci-robot-github-token
+      - name: cookie-secret
+        secret:
+          secretName: k8s-infra-prow-cookie
+      - name: kubeconfig
+        secret:
+          defaultMode: 420
+          secretName: k8s-infra-build-clusters-config
+      - name: config
+        configMap:
+          name: config
+      - name: job-config
+        configMap:
+          name: job-config
+      - name: plugins
+        configMap:
+          name: plugins

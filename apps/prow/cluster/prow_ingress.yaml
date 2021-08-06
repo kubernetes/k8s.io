@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-infra-prow-k8s-io
+  namespace: prow
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: k8s-infra-prow
+    networking.gke.io/managed-certificates: k8s-infra-prow-k8s-io
+spec:
+  rules:
+  - host: k8s-infra-prow.k8s.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          service:
+            name: deck
+            port:
+              number: 80
+      - path: /hook
+        backend:
+          service:
+            name: hook
+            port:
+              number: 8888
