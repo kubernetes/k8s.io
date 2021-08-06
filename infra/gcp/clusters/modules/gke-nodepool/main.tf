@@ -65,7 +65,7 @@ resource "google_container_node_pool" "node_pool" {
     create_before_destroy = true
     # https://www.terraform.io/docs/providers/google/r/container_cluster.html#taint
     ignore_changes = [
-      node_config["taint"],
+      node_config[0].taint,
     ]
   }
 }
