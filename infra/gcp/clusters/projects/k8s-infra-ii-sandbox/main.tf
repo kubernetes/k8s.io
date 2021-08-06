@@ -67,6 +67,6 @@ data "google_service_account" "bq_data_transfer" {
 resource "google_bigquery_dataset_iam_member" "bq_data_transfer_binding" {
   project    = local.project_id
   dataset_id = "riaan_data_store"
-  role       = "roles/bigquery.dataViewer"
+  role       = "roles/bigquery.admin"
   member     = "serviceAccount:${data.google_service_account.bq_data_transfer.email}"
 }
