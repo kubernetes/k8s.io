@@ -15,35 +15,35 @@ spec:
   rules:
   - http:
       paths:
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: "/infra/event-log/*"
         backend:
           service:
             name: slack-event-log
             port:
               number: 80
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: "/infra/moderator/*"
         backend:
           service:
             name: slack-moderator
             port:
               number: 80
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: "/infra/welcomer/*"
         backend:
           service:
             name: slack-welcomer
             port:
               number: 80
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: "/infra/post-message/*"
         backend:
           service:
             name: slack-post-message
             port:
               number: 80
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: "/infra/moderator-words/*"
         backend:
           service:
