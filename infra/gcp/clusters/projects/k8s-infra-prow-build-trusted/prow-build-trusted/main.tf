@@ -256,10 +256,12 @@ module "prow_build_nodepool" {
   name            = "trusted-pool1"
   initial_count   = 1
   min_count       = 1
-  max_count       = 3
-  machine_type    = "n1-standard-8"
+  max_count       = 6
+  # image/machine/disk match prow-build for consistency's sake
+  image_type      = "UBUNTU_CONTAINERD"
+  machine_type    = "n1-highmem-8"
   disk_size_gb    = 200
-  disk_type       = "pd-standard"
+  disk_type       = "pd-ssd"
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }
 
