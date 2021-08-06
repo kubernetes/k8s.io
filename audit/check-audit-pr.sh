@@ -268,7 +268,7 @@ function check_container() {
         project=$(echo "${f}" | cut -d/ -f2)
         if [[ "${f}" =~ services/container/clusters/[a-z-]*.json ]]; then
             cluster=$(basename "${f}" .json)
-            cluster_tf_dir="${REPO_ROOT}/infra/gcp/clusters/projects/${project}/${cluster}"
+            cluster_tf_dir="${REPO_ROOT}/infra/gcp/terraform/${project}${cluster}"
             if [ -d "${cluster_tf_dir}" ]; then
                 echo "PASS: ${project} has container cluster resource ${cluster} is expected, auto-accepting for now"
             else

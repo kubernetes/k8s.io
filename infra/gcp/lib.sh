@@ -139,9 +139,9 @@ readonly PROW_TRUSTED_BUILD_CLUSTER_PROJECTS=(
 # to be kept consistent across a few places:
 #
 # - https://git.k8s.io/test-infra/config/prow/config.yaml # pod_namespace: test-pods
-# - infra/gcp/clusters/projects/k8s-infra-prow-*/*/main.tf # pod_namespace = test-pods
+# - infra/gcp/terraform/k8s-infra-prow-**/main.tf # pod_namespace = test-pods
 # # TODO: not all resources belong in test-pods, would be good to shard into folders
-# - infra/gcp/clusters/projects/k8s-infra-prow-*/*/resources/* # namespace: test-pods
+# - infra/gcp/terraform/k8s-infra-prow-**/resources/* # namespace: test-pods
 # used in: ensure-gsuite.sh ensure-main-project.sh ensure-prod-storage.sh ensure-staging-storage.sh
 export PROWJOB_POD_NAMESPACE="test-pods"
 

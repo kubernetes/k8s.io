@@ -221,9 +221,9 @@ infra:
   prow:
     projects:
       k8s-infra-prow-build:
-        managed_by: infra/gcp/clusters/projects/k8s-infra-prow-build/prow-build/main.tf
+        managed_by: infra/gcp/terraform/k8s-infra-prow-buildprow-build/main.tf
       k8s-infra-prow-build-trusted:
-        managed_by: infra/gcp/clusters/projects/k8s-infra-prow-build-trusted/prow-build-trusted/main.tf
+        managed_by: infra/gcp/terraform/k8s-infra-prow-build-trustedprow-build-trusted/main.tf
 
   public:
     projects:
@@ -250,7 +250,7 @@ infra:
   sandbox:
     projects:
       k8s-infra-ii-sandbox:
-        managed_by: infra/gcp/clusters/projects/k8s-infra-ii-sandbox/main.tf
+        managed_by: infra/gcp/terraform/k8s-infra-ii-sandboxmain.tf
 
   staging:
     managed_by: infra/gcp/ensure-staging-storage.sh

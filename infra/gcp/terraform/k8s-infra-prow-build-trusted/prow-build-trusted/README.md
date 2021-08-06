@@ -30,7 +30,7 @@ gcloud container clusters get-credentials \
 git clone git://github.com/kubernetes/k8s.io
 
 # deploy the resources; note boskos-resources.yaml isn't a configmap
-cd k8s.io/infra/gcp/clusters/k8s-infra-prow-build-trusted/prow-build-trusted
+cd k8s.io/infra/gcp/terraform/k8s-infra-prow-build-trusted/prow-build-trusted
 kubectl apply -f ./resources
 
 # create the service-account secret

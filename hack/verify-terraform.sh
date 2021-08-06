@@ -72,7 +72,7 @@ function main() {
             | xargs -0 -n1 dirname \
             | sort \
             | uniq \
-            | grep -v ^./infra/gcp/clusters/modules/
+            | grep -v ^./infra/gcp/terraform/modules/
         )
     fi
 
