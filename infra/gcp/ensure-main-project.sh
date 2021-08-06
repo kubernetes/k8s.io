@@ -212,8 +212,11 @@ function empower_cluster_admins_and_users() {
     # TODO(spiffxp): consider replacing this with a service account per namespace
     local prow_deployer_acct prow_deployer_role
     prow_deployer_acct="prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    # TODO(spiffxp): use container.deployer once we figure out why it isn't getting RBAC privileges
+    old_prow_deployer_role=$(custom_org_role_name "container.deployer")
     prow_deployer_role=$(custom_org_role_name "container.deployer")
     color 6 "Empowering ${prow_deployer_acct} to deploy to clusters in project: ${project}"
+    ensure_removed_project_role_binding "${project}" "serviceAccount:${prow_deployer_acct}" "${old_prow_deployer_role}"
     ensure_project_role_binding "${project}" "serviceAccount:${prow_deployer_acct}" "${prow_deployer_role}"
 
     color 6 "Empowering cluster users"
