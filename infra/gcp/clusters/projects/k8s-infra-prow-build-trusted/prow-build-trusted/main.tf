@@ -132,12 +132,12 @@ resource "google_service_account_iam_policy" "prow_deployer_sa_iam" {
 // roles: prow-deployer (there are also some assigned in ensure-main-project.sh)
 resource "google_project_iam_member" "prow_deployer_for_prow_build_trusted" {
   project = local.project_id
-  role    = "${data.google_organization.org.name}/roles/container.deployer"
+  role    = "roles/container.admin"
   member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
 }
 resource "google_project_iam_member" "prow_deployer_for_prow_build" {
   project = "k8s-infra-prow-build"
-  role    = "${data.google_organization.org.name}/roles/container.deployer"
+  role    = "roles/container.admin"
   member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
 }
 
