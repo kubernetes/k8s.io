@@ -33,7 +33,7 @@ spec:
         - --github-endpoint=https://api.github.com
         - --github-token-path=/etc/github/token
         - --job-config-path=/etc/job-config
-        - --kubeconfig=/etc/kubeconfig/config
+        - --kubeconfig=/etc/kubeconfig/kubeconfig
         ports:
           - name: http
             containerPort: 8888
@@ -43,7 +43,6 @@ spec:
             drop:
               - "ALL"
           privileged: false
-          readOnlyRootFilesystem: true
         volumeMounts:
         - name: hmac
           mountPath: /etc/webhook
@@ -79,7 +78,7 @@ spec:
       volumes:
       - name: hmac
         secret:
-          secretName: hmac-token
+          secretName: k8s-infra-prow-hmac-token
       - name: github-token
         secret:
           defaultMode: 420
@@ -87,7 +86,7 @@ spec:
       - name: kubeconfig
         secret:
           defaultMode: 420
-          secretName: k8s-infra-build-clusters-config
+          secretName: k8s-infra-build-clusters-kubeconfig
       - name: config
         configMap:
           name: config

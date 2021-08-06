@@ -42,7 +42,7 @@ spec:
         - --github-token-path=/etc/github/token
         - --github-workers=5
         - --job-config-path=/etc/job-config
-        - --kubeconfig=/etc/kubeconfig/config
+        - --kubeconfig=/etc/kubeconfig/kubeconfig
         - --kubernetes-blob-storage-workers=1
         securityContext:
           allowPrivilegeEscalation: false
@@ -61,7 +61,7 @@ spec:
         - name: job-config
           mountPath: /etc/job-config
           readOnly: true
-        - name: token
+        - name: github-token
           mountPath: /etc/github
           readOnly: true
       volumes:
@@ -77,4 +77,4 @@ spec:
       - name: kubeconfig
         secret:
           defaultMode: 420
-          secretName: k8s-infra-build-clusters-config
+          secretName: k8s-infra-build-clusters-kubeconfig

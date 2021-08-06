@@ -51,7 +51,6 @@ spec:
         - --github-endpoint=https://api.github.com
         - --github-oauth-config-file=/etc/githuboauth/secret
         - --hook-url=http://hook:8888/plugin-help
-        - --kubeconfig=/etc/kubeconfig/config
         - --job-config-path=/etc/job-config
         - --oauth-url=/github-login
         - --plugin-config=/etc/plugins/plugins.yaml
@@ -59,13 +58,16 @@ spec:
         - --rerun-creates-job
         - --spyglass=true
         - --tide-url=http://tide/
+        env:
+        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
+        - name: KUBECONFIG
+          value: "/etc/kubeconfig/kubeconfig"
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
             drop:
               - "ALL"
           privileged: false
-          readOnlyRootFilesystem: true
         volumeMounts:
         - name: oauth-config
           mountPath: /etc/githuboauth
@@ -116,7 +118,7 @@ spec:
       - name: kubeconfig
         secret:
           defaultMode: 420
-          secretName: k8s-infra-build-clusters-config
+          secretName: k8s-infra-build-clusters-kubeconfig
       - name: config
         configMap:
           name: config

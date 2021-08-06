@@ -23,8 +23,7 @@ plank:
       gcs_configuration:
         bucket: k8s-infra-prow-results
         path_strategy: explicit
-      # k8s-infra-prow@kubernetes-public.iam.gserviceaccount.com on projects/kubernetes-public/clusters/aaa
-      gcs_credentials_secret: "" #Usage of workloadIdentity
+      gcs_credentials_secret: "k8s-infra-prow-sa-key"
       resources:
         clonerefs:
           requests:

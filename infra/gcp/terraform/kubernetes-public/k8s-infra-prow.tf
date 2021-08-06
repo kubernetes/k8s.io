@@ -10,7 +10,7 @@ locals {
   bucket_name               = "k8s-infra-prow-results"
   bucket_location           = "us-central1"
   prow_service_account      = "k8s-infra-prow"
-  test_pods_namespace       = "k8s-infra-prow-pods"
+  test_pods_namespace       = "k8s-infra-test-pods"
   test_pods_service_account = "default"
 }
 

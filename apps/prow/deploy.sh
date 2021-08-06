@@ -47,4 +47,7 @@ fi
 
 # deploy kubernetes resources
 pushd "${SCRIPT_ROOT}" >/dev/null
+make update-config
+make update-plugins
+make update-prowjobs
 kubectl --context="${context}" --namespace="${namespace}" apply -Rf cluster/

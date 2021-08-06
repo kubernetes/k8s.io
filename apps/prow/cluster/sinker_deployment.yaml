@@ -22,7 +22,7 @@ spec:
         - --config-path=/etc/config/config.yaml
         - --dry-run=false
         - --job-config-path=/etc/job-config
-        - --kubeconfig=/etc/kubeconfig/config
+        - --kubeconfig=/etc/kubeconfig/kubeconfig
         image: gcr.io/k8s-prow/sinker:v20210407-51f95c2d52
         securityContext:
           allowPrivilegeEscalation: false
@@ -45,7 +45,7 @@ spec:
       - name: kubeconfig
         secret:
           defaultMode: 420
-          secretName: k8s-infra-build-clusters-config
+          secretName: k8s-infra-build-clusters-kubeconfig
       - name: config
         configMap:
           name: config
