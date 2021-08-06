@@ -9,8 +9,8 @@ gitHubRepo: "k8s.io"
 remoteName: "k8s.io"
 upstreamURLBase: "https://raw.githubusercontent.com/kubernetes/k8s.io/main"
 includedConfigPaths:
-  - "infra/gcp/terraform/k8s-infra-prow-buildprow-build/resources"
-  - "infra/gcp/terraform/k8s-infra-prow-build-trustedprow-build-trusted/resources"
+  - "infra/gcp/terraform/k8s-infra-prow-build/prow-build/resources"
+  - "infra/gcp/terraform/k8s-infra-prow-build-trusted/prow-build-trusted/resources"
 excludedConfigPaths:
   - "k8s.gcr.io"
 extraFiles:
@@ -19,12 +19,12 @@ targetVersion: "latest"
 prefixes:
   - name: "ghproxy"
     prefix: "gcr.io/k8s-prow/ghproxy"
-    refConfigFile: "infra/gcp/terraform/k8s-infra-prow-build-trustedprow-build-trusted/resources/ghproxy-deployment.yaml"
+    refConfigFile: "infra/gcp/terraform/k8s-infra-prow-build-trusted/prow-build-trusted/resources/ghproxy-deployment.yaml"
     repo: "https://github.com/kubernetes/test-infra"
     summarise: false
   - name: "boskos"
     prefix: "gcr.io/k8s-staging-boskos/"
-    refConfigFile: "infra/gcp/terraform/k8s-infra-prow-buildprow-build/resources/boskos.yaml"
+    refConfigFile: "infra/gcp/terraform/k8s-infra-prow-build/prow-build/resources/boskos.yaml"
     repo: "https://github.com/kubernetes-sigs/boskos"
     summarise: false
     consistentImages: true
