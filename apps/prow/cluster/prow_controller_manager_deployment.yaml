@@ -40,7 +40,7 @@ spec:
         - --dry-run=false
         - --enable-controller=plank
         - --job-config-path=/etc/job-config
-        - --kubeconfig=/etc/kubeconfig/config
+        - --kubeconfig=/etc/kubeconfig/kubeconfig
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -62,7 +62,7 @@ spec:
       - name: kubeconfig
         secret:
           defaultMode: 420
-          secretName: k8s-infra-build-clusters-config
+          secretName: k8s-infra-build-clusters-kubeconfig
       - name: config
         configMap:
           name: config

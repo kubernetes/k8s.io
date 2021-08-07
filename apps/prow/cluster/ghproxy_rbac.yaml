@@ -13,7 +13,7 @@
 # limitations under the License.
 
  apiVersion: v1
- kind: serviceAccount
+ kind: ServiceAccount
  metadata:
    name: ghproxy
    namespace: prow

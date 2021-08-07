@@ -13,12 +13,14 @@ spec:
     http:
       paths:
       - path: /*
+        pathType: ImplementationSpecific
         backend:
           service:
             name: deck
             port:
               number: 80
       - path: /hook
+        pathType: ImplementationSpecific
         backend:
           service:
             name: hook
