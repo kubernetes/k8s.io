@@ -19,6 +19,9 @@
   - type: TXT
     values:
     - google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs
+    # Domain validation for k8s.io on https://search.google.com/search-console/welcome
+    # Only Org admins have access to the console. (contact @ameukam)
+    - google-site-verification=dgC0yQp0oE3cj8yqkbQTfPmStJmi1Qaha_MHwM4Sa10
     - v=spf1 include:_spf.google.com ~all
 www:
   type: CNAME
