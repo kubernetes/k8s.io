@@ -14,17 +14,17 @@ lgtm:
 
 config_updater:
   maps:
-    prow/config.yaml:
+    apps/prow/config.yaml:
       name: config
       clusters:
         k8s-infra-prow-build-trusted:
           - prow
-    prow/plugins.yaml:
+    apps/prow/plugins.yaml:
       name: plugins
       clusters:
         k8s-infra-prow-build-trusted:
           - prow
-    prow/prowjobs/**/*.yaml:
+    apps/prow/prowjobs/**/*.yaml:
       name: job-config
       gzip: true
       clusters:

@@ -41,6 +41,7 @@ spec:
         - --github-endpoint=http://ghproxy.prow.svc.cluster.local
         - --github-endpoint=https://api.github.com
         - --github-token-path=/etc/github/token
+        - --gcs-credentials-file=/etc/gcs-credentials/service-account.json
         - --job-config-path=/etc/job-config
         - --history-uri=gs://k8s-infra-prow-results/tide-history.json
         - --status-path=gs://k8s-infra-prow-results/tide-status-checkpoint.yaml
@@ -63,11 +64,18 @@ spec:
         - name: job-config
           mountPath: /etc/job-config
           readOnly: true
+        - name: gcs-credentials
+          mountPath: /etc/gcs-credentials
+          readOnly: true
       volumes:
       - name: github-token
         secret:
           defaultMode: 420
           secretName: k8s-infra-ci-robot-github-token
+      - name: gcs-credentials
+        secret:
+          defaultMode: 420
+          secretName: k8s-infra-prow-sa-key
       - name: config
         configMap:
           name: config

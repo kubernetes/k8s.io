@@ -30,4 +30,4 @@ update-plugins: get-cluster-credentials
 	kubectl -n "$(NAMESPACE)" create configmap plugins --from-file=plugins.yaml=plugins.yaml --dry-run=client -o yaml | kubectl replace configmap plugins -f -
 
 update-prowjobs: get-cluster-credentials
-	kubectl -n "$(NAMESPACE)" create configmap job-config --from-file=$PWD/prowjobs/kubernetes/k8s.io/ --dry-run=client -o yaml | kubectl replace configmap job-config -f -
+	kubectl -n "$(NAMESPACE)" create configmap job-config --from-file=$(PWD)/prowjobs/kubernetes/k8s.io/ --dry-run=client -o yaml | kubectl replace configmap job-config -f -
