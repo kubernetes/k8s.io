@@ -1,5 +1,17 @@
 [
   {
     "name": "projects/k8s-staging-txtdirect/topics/cloud-builds"
+  },
+  {
+    "name": "projects/k8s-staging-txtdirect/topics/container-analysis-occurrences-v1beta1"
+  },
+  {
+    "name": "projects/k8s-staging-txtdirect/topics/container-analysis-notes-v1beta1"
+  },
+  {
+    "name": "projects/k8s-staging-txtdirect/topics/container-analysis-occurrences-v1"
+  },
+  {
+    "name": "projects/k8s-staging-txtdirect/topics/container-analysis-notes-v1"
   }
 ]

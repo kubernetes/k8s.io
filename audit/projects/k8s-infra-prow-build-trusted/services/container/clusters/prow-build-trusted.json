@@ -33,9 +33,9 @@
   "initialClusterVersion": "1.14.10-gke.27",
   "initialNodeCount": 1,
   "instanceGroupUrls": [
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-a/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-fd38017e-grp",
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-f/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-caef7902-grp",
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-b/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-5e50b276-grp"
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-a/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-7f1b1054-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-f/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-e930fff4-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-b/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-4044b2cc-grp"
   ],
   "ipAllocationPolicy": {
     "useRoutes": true
@@ -88,9 +88,9 @@
   },
   "nodeConfig": {
     "diskSizeGb": 200,
-    "diskType": "pd-standard",
-    "imageType": "COS",
-    "machineType": "n1-standard-8",
+    "diskType": "pd-ssd",
+    "imageType": "UBUNTU_CONTAINERD",
+    "machineType": "n1-highmem-8",
     "metadata": {
       "disable-legacy-endpoints": "true"
     },
@@ -110,14 +110,14 @@
     {
       "autoscaling": {
         "enabled": true,
-        "maxNodeCount": 3,
+        "maxNodeCount": 6,
         "minNodeCount": 1
       },
       "config": {
         "diskSizeGb": 200,
-        "diskType": "pd-standard",
-        "imageType": "COS",
-        "machineType": "n1-standard-8",
+        "diskType": "pd-ssd",
+        "imageType": "UBUNTU_CONTAINERD",
+        "machineType": "n1-highmem-8",
         "metadata": {
           "disable-legacy-endpoints": "true"
         },
@@ -134,9 +134,9 @@
       },
       "initialNodeCount": 1,
       "instanceGroupUrls": [
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-a/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-fd38017e-grp",
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-f/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-caef7902-grp",
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-b/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-5e50b276-grp"
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-a/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-7f1b1054-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-f/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-e930fff4-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-b/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-4044b2cc-grp"
       ],
       "locations": [
         "us-central1-a",
@@ -147,9 +147,9 @@
         "autoRepair": true,
         "autoUpgrade": true
       },
-      "name": "trusted-pool1-20200430235251092500000001",
+      "name": "trusted-pool1-20210806160125616800000001",
       "podIpv4CidrSize": 24,
-      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build-trusted/locations/us-central1/clusters/prow-build-trusted/nodePools/trusted-pool1-20200430235251092500000001",
+      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build-trusted/locations/us-central1/clusters/prow-build-trusted/nodePools/trusted-pool1-20210806160125616800000001",
       "upgradeSettings": {
         "maxSurge": 1
       },

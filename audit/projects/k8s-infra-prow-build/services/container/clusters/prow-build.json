@@ -14,7 +14,9 @@
     "enabled": true,
     "securityGroup": "gke-security-groups@kubernetes.io"
   },
-  "autoscaling": {},
+  "autoscaling": {
+    "autoscalingProfile": "BALANCED"
+  },
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.32.0.0/14",
   "createTime": "2020-04-30T21:31:49+00:00",
@@ -49,6 +51,14 @@
     "us-central1-f",
     "us-central1-b"
   ],
+  "loggingConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS",
+        "WORKLOADS"
+      ]
+    }
+  },
   "loggingService": "logging.googleapis.com/kubernetes",
   "maintenancePolicy": {
     "resourceVersion": "44fb9d63",
@@ -60,6 +70,13 @@
     }
   },
   "masterAuthorizedNetworksConfig": {},
+  "monitoringConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS"
+      ]
+    }
+  },
   "monitoringService": "monitoring.googleapis.com/kubernetes",
   "name": "prow-build",
   "network": "default",
