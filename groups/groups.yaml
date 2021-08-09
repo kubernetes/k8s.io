@@ -611,6 +611,7 @@ groups:
       - ksiedlecki@google.com
       - jbartosik@google.com
       - jtuznik@google.com
+      - danielmk@google.com
 
   - email-id: k8s-infra-staging-capi-docker@kubernetes.io
     name: k8s-infra-staging-capi-docker
