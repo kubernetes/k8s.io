@@ -11,6 +11,7 @@
   "projects/k8s-infra-prow-build-trusted/logs/docker",
   "projects/k8s-infra-prow-build-trusted/logs/events",
   "projects/k8s-infra-prow-build-trusted/logs/kube-container-runtime-monitor",
+  "projects/k8s-infra-prow-build-trusted/logs/kube-logrotate",
   "projects/k8s-infra-prow-build-trusted/logs/kube-node-configuration",
   "projects/k8s-infra-prow-build-trusted/logs/kube-node-installation",
   "projects/k8s-infra-prow-build-trusted/logs/kube-proxy",
