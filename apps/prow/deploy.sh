@@ -47,7 +47,14 @@ fi
 
 # deploy kubernetes resources
 pushd "${SCRIPT_ROOT}" >/dev/null
+
+echo "Update k8s-infra-prow config"
 make update-config
+
+echo "Update k8s-infra-prow plugins"
 make update-plugins
+
+echo "Update k8s-infra-prow prowjobs"
 make update-prowjobs
+
 kubectl --context="${context}" --namespace="${namespace}" apply -Rf cluster/
