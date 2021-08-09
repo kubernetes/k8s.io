@@ -75,3 +75,35 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: "sinker"
+### RBAC for namespace k8s-infra-test-pods
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: "sinker"
+  namespace: k8s-infra-test-pods
+rules:
+  - apiGroups:
+    - ""
+    resources:
+      - pods
+    verbs:
+      - delete
+      - get
+      - list
+      - patch
+      - watch
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: "sinker"
+  namespace: k8s-infra-test-pods
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "sinker"
+subjects:
+- kind: ServiceAccount
+  name: "sinker"
+  namespace: prow
