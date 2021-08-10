@@ -83,6 +83,13 @@ resource "google_storage_bucket_iam_member" "k8s_infra_prow_admin_legacy" {
   member = "serviceAccount:${google_service_account.k8s_infra_prow.email}"
 }
 
+// Allow the bucket k8s-infra-prow-results to be word-readable
+resource "google_storage_bucket_iam_member" "k8s_infra_prow_public_access" {
+  bucket = google_storage_bucket.k8s_infra_prow_bucket.name
+  role   = "roles/storage.objectViewer"
+  member = "allUsers"
+}
+
 // Allow read access to members of k8s-infra-prow-oncall@kubernetes.io
 resource "google_storage_bucket_iam_member" "k8s_infra_prow_oncall" {
   bucket = google_storage_bucket.k8s_infra_prow_bucket.name
