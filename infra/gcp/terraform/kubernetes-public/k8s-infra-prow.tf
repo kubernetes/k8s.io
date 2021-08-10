@@ -42,6 +42,14 @@ resource "google_service_account_iam_member" "prow_build_trusted_cluster_sa_iam"
   member             = format("serviceAccount:%s.svc.id.goog[%s/%s]", "k8s-infra-prow-build-trusted", local.test_pods_namespace, local.test_pods_service_account)
 }
 
+// Allow deck (component of k8s-infra-prow) service account to use GCP SA k8s-infra-prow via workload identity
+// TODO (ameukam): move hardcoded value to terraform variables
+resource "google_service_account_iam_member" "aaa_cluster_sa_iam" {
+  role               = "roles/iam.workloadIdentityUser"
+  service_account_id = google_service_account.k8s_infra_prow.name
+  member             = format("serviceAccount:%s.svc.id.goog[%s/%s]", "kubernetes-public", "prow", "deck")
+}
+
 // Create a GCS bucket for ProwJobs logs and tide history
 resource "google_storage_bucket" "k8s_infra_prow_bucket" {
   name          = local.bucket_name
@@ -73,6 +81,13 @@ resource "google_storage_bucket_iam_member" "k8s_infra_prow_admin_legacy" {
   bucket = google_storage_bucket.k8s_infra_prow_bucket.name
   role   = "roles/storage.legacyBucketWriter"
   member = "serviceAccount:${google_service_account.k8s_infra_prow.email}"
+}
+
+// Allow the bucket k8s-infra-prow-results to be word-readable
+resource "google_storage_bucket_iam_member" "k8s_infra_prow_public_access" {
+  bucket = google_storage_bucket.k8s_infra_prow_bucket.name
+  role   = "roles/storage.objectViewer"
+  member = "allUsers"
 }
 
 // Allow read access to members of k8s-infra-prow-oncall@kubernetes.io
