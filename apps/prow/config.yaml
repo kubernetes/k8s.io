@@ -16,10 +16,10 @@ plank:
       timeout: 2h
       grace_period: 15s
       utility_images:
-        clonerefs: "gcr.io/k8s-prow/clonerefs:v20210809-536a8e4c65"
-        initupload: "gcr.io/k8s-prow/initupload:v20210809-536a8e4c65"
-        entrypoint: "gcr.io/k8s-prow/entrypoint:v20210809-536a8e4c65"
-        sidecar: "gcr.io/k8s-prow/sidecar:v20210809-536a8e4c65"
+        clonerefs: "gcr.io/k8s-prow/clonerefs:v20210809-f7cf0bd038"
+        initupload: "gcr.io/k8s-prow/initupload:v20210809-f7cf0bd038"
+        entrypoint: "gcr.io/k8s-prow/entrypoint:v20210809-f7cf0bd038"
+        sidecar: "gcr.io/k8s-prow/sidecar:v20210809-f7cf0bd038"
       gcs_configuration:
         bucket: k8s-infra-prow-results
         path_strategy: explicit
