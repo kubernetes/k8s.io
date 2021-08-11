@@ -3,7 +3,8 @@
     {
       "members": [
         "serviceAccount:k8s-infra-prow-build-trusted.svc.id.goog[k8s-infra-test-pods/default]",
-        "serviceAccount:k8s-infra-prow-build.svc.id.goog[k8s-infra-test-pods/default]"
+        "serviceAccount:k8s-infra-prow-build.svc.id.goog[k8s-infra-test-pods/default]",
+        "serviceAccount:kubernetes-public.svc.id.goog[prow/deck]"
       ],
       "role": "roles/iam.workloadIdentityUser"
     }

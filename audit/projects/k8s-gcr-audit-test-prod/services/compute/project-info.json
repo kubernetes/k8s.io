@@ -62,7 +62,7 @@
       "metric": "URL_MAPS"
     },
     {
-      "limit": 150,
+      "limit": 30,
       "metric": "BACKEND_SERVICES"
     },
     {
