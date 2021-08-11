@@ -1,0 +1,31 @@
+presubmits:
+  kubernetes/k8s.io:
+  - name: pull-k8s-infra-prow-config-validate
+    cluster: k8s-infra-prow-build
+    branches:
+    - ^main$
+    decorate: true
+    run_if_changed: '^(apps/prow/(config|plugins).yaml$|prowjobs/.*.yaml$)'
+    spec:
+      containers:
+        - image: gcr.io/k8s-prow/checkconfig:v20210810-945418dcfd
+          imagePullPolicy: Always
+          command:
+            - /checkconfig
+          args:
+            - --config-path=apps/prow/config.yaml
+            - --job-config-path=apps/prow/prowjobs
+            - --plugin-config=apps/prow/plugins.yaml
+            - --strict
+            - --warnings=mismatched-tide-lenient
+            - --warnings=tide-strict-branch
+            - --warnings=needs-ok-to-test
+            - --warnings=validate-owners
+            - --warnings=validate-urls
+            - --warnings=duplicate-job-refs
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 1Gi
