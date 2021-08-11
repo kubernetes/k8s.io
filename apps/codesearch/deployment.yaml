@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codesearch
+  namespace: codesearch
+  labels:
+    app: codesearch
+spec:
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: codesearch
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: codesearch
+          image: k8scode/hound:v0.1.0
+          ports:
+            - containerPort: 8080
+              protocol: TCP

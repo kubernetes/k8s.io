@@ -3,6 +3,7 @@
 Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8s-infra]
 
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
+    - `codesearch`: instance of [codesearch] at https://cs.k8s.io - owned by ??
     - `gcsweb`: instance of [gcsweb] at https://gcsweb.k8s.io - owned by [sig-testing]
     - `kubernetes-external-secrets`: instance of [kubernetes-external-secrets] - owned by [sig-testing]
     - `perfdash`: instance of [perfdash] - owned by [sig-scalability]
@@ -35,6 +36,7 @@ Please see https://git.k8s.io/community/wg-k8s-infra for more information
 
 <!-- apps -->
 [cert-manager]: https://github.com/jetstack/cert-manager
+[codesearch]: https://cs.k8s.io
 [gcsweb]: https://git.k8s.io/test-infra/gcsweb
 [kubernetes-external-secrets]: https://github.com/external-secrets/kubernetes-external-secrets
 [perfdash]: https://git.k8s.io/perf-tests/perfdash

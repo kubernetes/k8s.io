@@ -24,6 +24,13 @@ resource "google_compute_global_address" "k8s_io_ingress_canary_v6" {
   ip_version   = "IPV6"
 }
 
+// used by cs.k8s.io
+resource "google_compute_global_address" "cs_k8s_io" {
+  project      = data.google_project.project.project_id
+  name         = "cs-k8s-io"
+  address_type = "EXTERNAL"
+}
+
 // used by k8s-infra-prow.k8s.io
 resource "google_compute_global_address" "k8s_infra_prow" {
   project      = data.google_project.project.project_id

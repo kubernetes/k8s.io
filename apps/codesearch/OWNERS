@@ -1,0 +1,12 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- dims
+# TODO: Anyone else?? - jimdaga
+
+reviewers:
+- dims
+# TODO: Anyone else?? - jimdaga
+
+labels:
+- area/apps/codesearch

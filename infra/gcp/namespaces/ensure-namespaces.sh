@@ -143,6 +143,7 @@ parse_args "$@";
 #
 
 ALL_APPS=(
+    codesearch
     gcsweb
     kettle
     k8s-io-prod

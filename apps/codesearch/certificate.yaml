@@ -1,0 +1,10 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: codesearch
+  namespace: codesearch
+  labels:
+    app: codesearch
+spec:
+  domains:
+  - cs.k8s.io

@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: codesearch
+  namespace: codesearch
+  labels:
+    app: codesearch
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: cs-k8s-io
+    kubernetes.io/ingress.class: gce
+    networking.gke.io/managed-certificates: codesearch
+spec:
+  defaultBackend:
+    service:
+      name: codesearch
+      port:
+        name: http

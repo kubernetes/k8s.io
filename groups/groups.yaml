@@ -179,6 +179,7 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # needed for RBAC
     members:
       - k8s-infra-rbac-cert-manager@kubernetes.io
+      - k8s-infra-rbac-codesearch@kubernetes.io
       - k8s-infra-rbac-gcsweb@kubernetes.io
       - k8s-infra-rbac-kettle@kubernetes.io
       - k8s-infra-rbac-k8s-io-canary@kubernetes.io
@@ -349,6 +350,18 @@ groups:
       - cblecker@gmail.com
       - james@munnelly.eu
       - thockin@google.com
+
+  - email-id: k8s-infra-rbac-codesearch@kubernetes.io
+    name: k8s-infra-rbac-codesearch
+    description: |-
+      Grants access to the `namespace-user` role in the `codesearch` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - davanum@gmail.com
+      - jdagostino2@gmail.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
     name: k8s-infra-rbac-k8s-io-canary
