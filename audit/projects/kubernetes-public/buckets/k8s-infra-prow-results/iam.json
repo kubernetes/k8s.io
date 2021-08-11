@@ -40,6 +40,7 @@
     },
     {
       "members": [
+        "allUsers",
         "group:k8s-infra-prow-oncall@kubernetes.io"
       ],
       "role": "roles/storage.objectViewer"
