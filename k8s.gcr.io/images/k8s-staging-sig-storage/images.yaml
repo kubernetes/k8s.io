@@ -8,6 +8,16 @@
     "sha256:50c3cfd458fc8e0bf3c8c521eac39172009382fc66dc5044a330d137c6ed0b09": [ "v3.1.0" ]
     "sha256:c5be65d6679efabb969d9b019300d187437ae876f992c40911fd2892bbef3b36": [ "v3.2.0" ]
     "sha256:60ab9b3e6a030d3038c87c0d6bca2930f58d1d72823e6a4af09767dc83b696a2": [ "v3.2.1" ]
+    "sha256:80dec81b679a733fda448be92a2331150d99095947d04003ecff3dbd7f2a476a": [ "v3.3.0" ]
+- name: csi-external-health-monitor-agent
+  dmap:
+    "sha256:f8eff7dc8187f1153faebd5d087e30f4580e00fcc1265fe2ab2472ec010db8f7": [ "v0.1.0" ]
+    "sha256:c20d4a4772599e68944452edfcecc944a1df28c19e94b942d526ca25a522ea02": [ "v0.2.0" ]
+- name: csi-external-health-monitor-controller
+  dmap:
+    "sha256:8d30fae5935c0b9fb537fe7744f1e6ce1f7c28383ff1eab636803a0f55910b46": [ "v0.1.0" ]
+    "sha256:14988b598a180cc0282f3f4bc982371baf9a9c9b80878fb385f8ae8bd04ecf16": [ "v0.2.0" ]
+    "sha256:46346c621c4d7e0976ddfb1e8722f1eb0af4e32a1d9648228b04364d9d4830ec": [ "v0.3.0" ]
 - name: csi-node-driver-registrar
   dmap:
     "sha256:273175c272162d480d06849e09e6e3cdb0245239e3a82df6630df3bc059c6571": [ "v1.2.0" ]
@@ -16,6 +26,7 @@
     "sha256:e07f914c32f0505e4c470a62a40ee43f84cbf8dc46ff861f31b14457ccbad108": [ "v2.0.1" ]
     "sha256:a61d309da54641db41fb8f35718f744e9f730d4d0384f8c4b186ddc9f06cbd5f": [ "v2.1.0" ]
     "sha256:2dee3fe5fe861bb66c3a4ac51114f3447a4cd35870e0f2e2b558c7a400d89589": [ "v2.2.0" ]
+    "sha256:f9bcee63734b7b01555ee8fc8fb01ac2922478b2c8934bf8d468dd2916edc405": [ "v2.3.0" ]
 - name: csi-provisioner
   dmap:
     "sha256:438c04395d03fa671f8656d6f951332516754e330d1ac4f9588df1ba2870a366": [ "v1.4.0" ]
@@ -34,6 +45,7 @@
     "sha256:c8e03f60afa90a28e4bb6ec9a8d0fc36d89de4b7475cf2d613afa793ec969fe0": [ "v2.2.0" ]
     "sha256:4e74c0492bceddc598de1c90cc5bc14dcda94cb49fa9c5bad9d117c4834b5e08": [ "v2.2.1" ]
     "sha256:04c55b93a032ad8075cae540d60fc740a72c31006590dbdb61ad4ab9813959d0": [ "v2.2.2" ]
+    "sha256:6477988532358148d2e98f7c747db4e9250bbc7ad2664bf666348abf9ee1f5aa": [ "v3.0.0" ]
 - name: csi-resizer
   dmap:
     "sha256:43195976fb9f94d943f5dd9d58b8afa543be22d09a1165e8a489b7dfe22c657a": [ "v0.4.0" ]
@@ -62,15 +74,6 @@
     "sha256:51f2dfde5bccac7854b3704689506aeecfb793328427b91115ba253a93e60782": [ "v4.0.0" ]
     "sha256:e27ad21f007bae28eef68934a4834ca0a5c669e4c246c4900378e7ed1680c37e": [ "v4.1.0" ]
     "sha256:ed98431376c9e944e19a465fe8ea944806714dd95416a0821096c78d66b579bd": [ "v4.1.1" ]
-- name: csi-external-health-monitor-agent
-  dmap:
-    "sha256:f8eff7dc8187f1153faebd5d087e30f4580e00fcc1265fe2ab2472ec010db8f7": [ "v0.1.0" ]
-    "sha256:c20d4a4772599e68944452edfcecc944a1df28c19e94b942d526ca25a522ea02": [ "v0.2.0" ]
-- name: csi-external-health-monitor-controller
-  dmap:
-    "sha256:8d30fae5935c0b9fb537fe7744f1e6ce1f7c28383ff1eab636803a0f55910b46": [ "v0.1.0" ]
-    "sha256:14988b598a180cc0282f3f4bc982371baf9a9c9b80878fb385f8ae8bd04ecf16": [ "v0.2.0" ]
-    "sha256:46346c621c4d7e0976ddfb1e8722f1eb0af4e32a1d9648228b04364d9d4830ec": [ "v0.3.0" ]
 - name: hostpathplugin
   dmap:
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
