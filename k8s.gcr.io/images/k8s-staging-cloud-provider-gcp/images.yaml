@@ -5,6 +5,7 @@
     "sha256:e9c355dd1ce57de91a0f9164bd2fe688938723e7f9bd40bb13652d603f41d25a": ["v1.2.2"]
 - name: gcp-filestore-csi-driver
   dmap:
+    "sha256:0ff5800855e8f98467b1976cb442b402f00fed2e2ffab62b8f9a9c9f133e6d98": ["v0.6.1"]
     "sha256:34c1ad4b62db8fb26f48fa37ad4fd607c55cad0e0a39572d954a30a1214abd6a": ["v0.6.0"]
     "sha256:10ae6b591a3db0adf727f09a8581f4624fce5b6feda0b10cdfbc86db5022e3b0": ["v0.5.0"]
     "sha256:351548ca4bb0556e717c27309e1e559f65c9ae5826e60d48e0215f267835b80f": ["v0.3.1"]
