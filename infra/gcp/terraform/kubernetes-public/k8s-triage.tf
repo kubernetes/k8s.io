@@ -8,7 +8,6 @@ This file defines:
 locals {
   // TODO(spiffxp): remove legacy serviceaccount when migration completed
   triage_legacy_sa_email = "triage@k8s-gubernator.iam.gserviceaccount.com"
-  triage_dataset               = "k8s-triage"
 }
 
 // Use a data source for the service account
@@ -84,8 +83,39 @@ resource "google_storage_bucket_iam_policy" "triage_bucket_iam_policy" {
 }
 
 // Ensure triage service account can run bigquery jobs by billing to this project
-resource "google_project_iam_member" "k8s_triage_sa_bigquery_user" {
+resource "google_project_iam_member" "triage_sa_bigquery_user" {
   project = data.google_project.project.project_id
   role    = "roles/bigquery.user"
   member  = "serviceAccount:${data.google_service_account.triage_sa.email}"
+}
+
+// BigQuery dataset for triage to store temporary results
+resource "google_bigquery_dataset" "triage_dataset" {
+  dataset_id  = "k8s-triage"
+  project     = data.google_project.project.project_id
+  description = "Dataset for kubernetes/test-infra/triage to store temprorary results"
+  location    = "US"
+
+  // Data is precious, make it difficult to delete by accident
+  delete_contents_on_destroy = false
+}
+
+data "google_iam_policy" "triage_dataset_iam_policy" {
+  binding {
+    members = [
+      "group:${local.prow_owners}",
+    ]
+    role = "roles/bigquery.dataOwner"
+  }
+  binding {
+    members = [
+      "serviceAccount:${data.google_service_account.triage_sa.email}",
+    ]
+    role = "roles/bigquery.dataEditor"
+  }
+}
+
+resource "google_bigquery_dataset_iam_policy" "triage_dataset" {
+  dataset_id  = google_bigquery_dataset.triage_dataset
+  policy_data = data.google_iam_policy.triage_dataset_iam_policy.policy_data
 }
