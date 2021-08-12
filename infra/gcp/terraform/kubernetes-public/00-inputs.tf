@@ -6,6 +6,10 @@ This file defines:
 - GCP project configuration
 */
 
+locals {
+  prow_owners = "k8s-infra-prow-oncall@kubernetes.io"
+}
+
 terraform {
   required_version = "~> 1.0.0"
 

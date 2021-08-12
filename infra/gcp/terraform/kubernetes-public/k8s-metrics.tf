@@ -5,10 +5,6 @@ This file defines:
 - IAM bindings
 */
 
-locals {
-  prow_owners                  = "k8s-infra-prow-oncall@kubernetes.io"
-}
-
 // Use a data source for the service account
 // NB: we can't do this for triage_legacy_sa_email as we lack sufficient privileges
 data "google_service_account" "metrics_sa" {
@@ -22,7 +18,7 @@ resource "google_storage_bucket" "metrics_bucket" {
   location                    = "us-central1"
   storage_class               = "REGIONAL"
   uniform_bucket_level_access = true
-  
+
   lifecycle_rule {
     condition {
       age = 365 // days
@@ -35,7 +31,7 @@ resource "google_storage_bucket" "metrics_bucket" {
 }
 
 data "google_iam_policy" "metrics_bucket_iam_bindings" {
-  // Ensure k8s-infra-prow-oncall has admin privileges, and keep existing
+  // Ensure prow owners have admin privileges, and keep existing
   // legacy bindings since we're overwriting all existing bindings below
   binding {
     members = [
@@ -84,7 +80,7 @@ data "google_iam_policy" "metrics_bucket_iam_bindings" {
 }
 
 // Authoritative iam-policy: replaces any existing policy attached to the bucket
-resource "google_storage_bucket_iam_policy" "triage_bucket_iam_policy" {
+resource "google_storage_bucket_iam_policy" "metrics_bucket_iam_policy" {
   bucket      = google_storage_bucket.metrics_bucket.name
   policy_data = data.google_iam_policy.metrics_bucket_iam_bindings.policy_data
 }

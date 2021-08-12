@@ -9,7 +9,6 @@ locals {
   // TODO(spiffxp): remove legacy serviceaccount when migration completed
   triage_legacy_sa_email = "triage@k8s-gubernator.iam.gserviceaccount.com"
   triage_dataset               = "k8s-triage"
-  prow_owners                  = "k8s-infra-prow-oncall@kubernetes.io"
 }
 
 // Use a data source for the service account
@@ -28,7 +27,7 @@ resource "google_storage_bucket" "triage_bucket" {
 }
 
 data "google_iam_policy" "triage_bucket_iam_bindings" {
-  // Ensure k8s-infra-prow-oncall has admin privileges, and keep existing
+  // Ensure prow owners have admin privileges, and keep existing
   // legacy bindings since we're overwriting all existing bindings below
   binding {
     members = [
