@@ -94,6 +94,7 @@ export PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
 export RELEASE_ADMINS="k8s-infra-release-admins@kubernetes.io"
 export RELEASE_MANAGERS="k8s-infra-release-editors@kubernetes.io"
 export RELEASE_VIEWERS="k8s-infra-release-viewers@kubernetes.io"
+export RELEASE_BUILD_ADMINS="k8s-infra-google-build-admins@kubernetes.io"
 
 #
 # Prow constants

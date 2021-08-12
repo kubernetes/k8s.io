@@ -186,7 +186,10 @@ function ensure_kubernetes_ci_gcs_bucket() {
     #                today. These buckets should be strictly-CI unless there are
     #                very exceptional circumstances (which is when I'd suggest we
     #                escalate to the admins above)
-    for group in ${RELEASE_ADMINS} ${RELEASE_MANAGERS}; do
+    #
+    # Note(puerco):  added k8s-infra-google-build-admins to allow @google-build-admin 
+    #                members to stage packages.
+    for group in ${RELEASE_ADMINS} ${RELEASE_MANAGERS} ${RELEASE_BUILD_ADMINS}; do
         color 6 "Ensuring group ${group} can write to ${bucket} in project: ${project}"
         empower_group_to_write_gcs_bucket "${group}" "${bucket}"
     done
