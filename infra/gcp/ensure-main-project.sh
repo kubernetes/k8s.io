@@ -432,33 +432,6 @@ function ensure_prow_special_cases {
       # k8s-infra-prow-build-trusted can charge bigquery usage to this project
       ensure_project_role_binding "${project}" "${principal}" "roles/bigquery.user"
     ) 2>&1 | indent
-
-    color 6 "Special case: ensuring gs://k8s-triage exists"
-    (
-      local bucket="gs://k8s-triage"
-      local owners="k8s-infra-prow-oncall@kubernetes.io"
-      local old_service_account="triage@k8s-gubernator.iam.gserviceaccount.com"
-
-      ensure_public_gcs_bucket "${project}" "${bucket}"
-      # GCS admins can admin all GCS buckets
-      empower_gcs_admins "${project}" "${bucket}"
-      # bucket owners can admin this bucket
-      empower_group_to_admin_gcs_bucket "${owners}" "${bucket}"
-      # TODO(spiffxp): remove once bindings have been removed
-      # k8s-prow-builds can no longer write to this bucket
-      principal="serviceAccount:${old_service_account}"
-      ensure_gcs_role_binding "${bucket}" "${principal}" "objectAdmin"
-      ensure_gcs_role_binding "${bucket}" "${principal}" "legacyBucketWriter"
-      # k8s-infra-prow-build-trusted can write to this bucket
-      principal="serviceAccount:$(svc_acct_email "k8s-infra-prow-build-trusted" "k8s-triage")"
-      ensure_gcs_role_binding "${bucket}" "${principal}" "objectAdmin"
-      ensure_gcs_role_binding "${bucket}" "${principal}" "legacyBucketWriter"
-      # TODO(spiffxp): this is a test to confirm we _can_ charge bigquery usage elsewhere
-      #                and might prove convenient since there are datasets in this project,
-      #                but this should probably not be the long-term home of usage billing
-      # k8s-infra-prow-build-trusted can charge bigquery usage to this project
-      ensure_project_role_binding "${project}" "${principal}" "roles/bigquery.user"
-    ) 2>&1 | indent
 }
 
 function ensure_main_project() {
