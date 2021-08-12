@@ -50,14 +50,14 @@ spec:
         - --github-endpoint=http://ghproxy.prow.svc.cluster.local
         - --github-endpoint=https://api.github.com
         - --github-oauth-config-file=/etc/githuboauth/secret
-        - --hook-url=http://hook:8888/plugin-help
+        - --hook-url=http://hook.prow.svc.cluster.local:8888/plugin-help
         - --job-config-path=/etc/job-config
         - --oauth-url=/github-login
         - --plugin-config=/etc/plugins/plugins.yaml
         - --redirect-http-to=k8s-infra-prow.k8s.io
         - --rerun-creates-job
         - --spyglass=true
-        - --tide-url=http://tide/
+        - --tide-url=http://tide.prow.svc.cluster.local/
         env:
         # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
         - name: KUBECONFIG
