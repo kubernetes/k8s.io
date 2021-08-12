@@ -41,17 +41,17 @@ resource "google_storage_bucket" "scalability_tests_logs" {
 }
 
 data "google_iam_policy" "scalability_tests_logs_bindings" {
-  // Ensure k8s-infra-prow-oncall has admin privileges, and keep existing
+  // Ensure prow owners have admin privileges, and keep existing
   // legacy bindings since we're overwriting all existing bindings below
   binding {
     members = [
-      "group:k8s-infra-prow-oncall@kubernetes.io",
+      "group:${local.prow_owners}",
     ]
     role = "roles/storage.admin"
   }
   binding {
     members = [
-      "group:k8s-infra-prow-oncall@kubernetes.io",
+      "group:${local.prow_owners}",
       "projectEditor:${data.google_project.project.project_id}",
       "projectOwner:${data.google_project.project.project_id}",
     ]

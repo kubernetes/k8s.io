@@ -90,12 +90,12 @@ resource "google_storage_bucket_iam_member" "k8s_infra_prow_public_access" {
   member = "allUsers"
 }
 
-// Allow read access to members of k8s-infra-prow-oncall@kubernetes.io
-resource "google_storage_bucket_iam_member" "k8s_infra_prow_oncall" {
+// Allow read access to prow owners
+resource "google_storage_bucket_iam_member" "k8s_infra_prow_owners" {
   bucket = google_storage_bucket.k8s_infra_prow_bucket.name
   role   = "roles/storage.objectViewer"
   //TODO(ameukam): switch to allUsers when https://github.com/kubernetes/k8s.io/issues/752 is closed.
-  member = "group:k8s-infra-prow-oncall@kubernetes.io"
+  member = "group:${local.prow_owners}"
 }
 
 // Create a secret for GCP Service Account key of k8s-infra-prow
@@ -114,13 +114,13 @@ resource "google_secret_manager_secret_version" "k8s_infra_prow_key_version" {
   secret_data = base64decode(google_service_account_key.k8s_infra_prow.private_key)
 }
 
-// Allow read access to members of k8s-infra-prow-oncall@kubernetes.io
+// Allow read access to prow owners
 resource "google_secret_manager_secret_iam_binding" "name" {
   project   = data.google_project.project.project_id
   secret_id = google_secret_manager_secret.k8s_infra_prow_key.id
   role      = "roles/secretmanager.admin"
   members = [
-    "group:k8s-infra-prow-oncall@kubernetes.io"
+    "group:${local.prow_owners}"
   ]
 }
 
