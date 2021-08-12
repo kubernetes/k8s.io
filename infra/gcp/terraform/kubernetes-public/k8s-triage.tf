@@ -20,8 +20,8 @@ data "google_service_account" "triage_sa" {
 resource "google_storage_bucket" "triage_bucket" {
   name                        = "k8s-triage"
   project                     = data.google_project.project.project_id
-  location                    = "us-central1"
-  storage_class               = "REGIONAL"
+  location                    = "US"
+  storage_class               = "STANDARD"
   uniform_bucket_level_access = true
 }
 
@@ -91,7 +91,7 @@ resource "google_project_iam_member" "triage_sa_bigquery_user" {
 
 // BigQuery dataset for triage to store temporary results
 resource "google_bigquery_dataset" "triage_dataset" {
-  dataset_id  = "k8s-triage"
+  dataset_id  = "k8s_triage"
   project     = data.google_project.project.project_id
   description = "Dataset for kubernetes/test-infra/triage to store temprorary results"
   location    = "US"
@@ -116,6 +116,7 @@ data "google_iam_policy" "triage_dataset_iam_policy" {
 }
 
 resource "google_bigquery_dataset_iam_policy" "triage_dataset" {
-  dataset_id  = google_bigquery_dataset.triage_dataset
+  dataset_id  = google_bigquery_dataset.triage_dataset.dataset_id
+  project = google_bigquery_dataset.triage_dataset.project
   policy_data = data.google_iam_policy.triage_dataset_iam_policy.policy_data
 }

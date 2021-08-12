@@ -15,8 +15,8 @@ data "google_service_account" "metrics_sa" {
 resource "google_storage_bucket" "metrics_bucket" {
   name                        = "k8s-metrics"
   project                     = data.google_project.project.project_id
-  location                    = "us-central1"
-  storage_class               = "REGIONAL"
+  location                    = "US"
+  storage_class               = "STANDARD"
   uniform_bucket_level_access = true
 
   lifecycle_rule {
