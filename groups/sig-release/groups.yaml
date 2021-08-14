@@ -74,21 +74,16 @@ groups:
       - k8s-infra-release-editors@kubernetes.io
       - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
-      - antheabjung@gmail.com
-      - dcampau1@gmail.com
-      - divya.mohan0209@gmail.com
       - gveronicalg@gmail.com
       - james.laverack@jetstack.io
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - joseph.r.sandoval@gmail.com
-      - kikis.github@gmail.com
       - max@koerbaecher.io
       - monmonmsc@gmail.com
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
       - rlejano@gmail.com
-      - saveetha13@gmail.com
       - sethpmccombs@gmail.com
       - thejoycekung@gmail.com
       - wilsonehusin@gmail.com
@@ -225,22 +220,17 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - antheabjung@gmail.com # 1.22 RT Lead Shadow
-      - dcampau1@gmail.com # 1.22 RT Lead Shadow
-      - divya.mohan0209@gmail.com # 1.22 RT Lead Shadow
-      - guineveresaenger@gmail.com # 1.22 Emeritus Advisor
+      - jeremy.r.rickard@gmail.com # 1.23 Emeritus Advisor
       - james.laverack@jetstack.io # 1.23 RT Lead Shadow
       - jeeves.butler@gmail.com # 1.22 Comms Lead
       - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
-      - kikis.github@gmail.com # 1.22 RT Lead Shadow
       - klkfr@amazon.com # 1.22 Comms Shadow
       - kunalkushwaha453@gmail.com # 1.22 Comms Shadow
       - lauri.d.apple@gmail.com
       - max@koerbaecher.io # 1.23 RT Lead Shadow
-      - monmonmsc@gmail.com # RT Lead Shadow
+      - monmonmsc@gmail.com # 1.23 RT Lead Shadow
       - rajula96reddy@gmail.com # 1.22 Comms Shadow
       - rlejano@gmail.com # 1.23 RT Lead
-      - saveetha13@gmail.com # 1.22 RT Lead
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -350,16 +340,11 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
-      - antheabjung@gmail.com # 1.22 RT Lead Shadow
-      - dcampau1@gmail.com # 1.22 RT Lead Shadow
-      - divya.mohan0209@gmail.com # 1.22 RT Lead Shadow
-      - kikis.github@gmail.com # 1.22 RT Lead Shadow
       - james.laverack@jetstack.io # 1.23 RT Lead Shadow
       - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
       - max@koerbaecher.io # 1.23 RT Lead Shadow
       - monmonmsc@gmail.com # 1.23 RT Lead Shadow
       - rlejano@gmail.com # 1.23 RT Lead
-      - saveetha13@gmail.com # 1.22 RT Lead
     members:
       - sig-release-leads@kubernetes.io
       - ania0102@gmail.com # 1.22 CI Signal Shadow
