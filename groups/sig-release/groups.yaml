@@ -220,7 +220,6 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - jeremy.r.rickard@gmail.com # 1.23 Emeritus Advisor
       - james.laverack@jetstack.io # 1.23 RT Lead Shadow
       - jeeves.butler@gmail.com # 1.22 Comms Lead
       - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
