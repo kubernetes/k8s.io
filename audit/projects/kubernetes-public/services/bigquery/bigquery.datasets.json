@@ -1,6 +1,15 @@
 [
   {
     "kind": "bigquery#dataset",
+    "id": "kubernetes-public:k8s_triage",
+    "datasetReference": {
+      "datasetId": "k8s_triage",
+      "projectId": "kubernetes-public"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
     "id": "kubernetes-public:kubernetes_public_billing",
     "datasetReference": {
       "datasetId": "kubernetes_public_billing",
