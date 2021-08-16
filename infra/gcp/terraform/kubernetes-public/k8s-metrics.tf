@@ -1,17 +1,15 @@
 /*
 This file defines:
-- bigquery dataset for triage to store temp results
-- GCS bucket to serve go.k8s.io/triage results
+- GCS bucket to serve metrics bigquery results
 - IAM bindings
 */
 
 // Use a data source for the service account
-// NB: we can't do this for triage_legacy_sa_email as we lack sufficient privileges
 data "google_service_account" "metrics_sa" {
   account_id = "k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
 }
 
-// Create a GCS bucket for triage results
+// Create a GCS bucket for metrics query results
 resource "google_storage_bucket" "metrics_bucket" {
   name                        = "k8s-metrics"
   project                     = data.google_project.project.project_id
@@ -48,10 +46,10 @@ data "google_iam_policy" "metrics_bucket_iam_bindings" {
     ]
     role = "roles/storage.legacyBucketOwner"
   }
-  // Ensure triage service accounts have write access to the bucket
+  // Ensure metrics service accounts have write access to the bucket
   binding {
     members = [
-      "serviceAccount:${data.google_service_account.triage_sa.email}",
+      "serviceAccount:${data.google_service_account.metrics_sa.email}",
     ]
     role = "roles/storage.legacyBucketWriter"
   }
@@ -62,12 +60,12 @@ data "google_iam_policy" "metrics_bucket_iam_bindings" {
     ]
     role = "roles/storage.legacyBucketReader"
   }
-  // Ensure triage service accounts have write/update/delete access to objects
+  // Ensure metrics service accounts have write/update/delete access to objects
   binding {
     role = "roles/storage.objectAdmin"
     members = [
       "group:${local.prow_owners}",
-      "serviceAccount:${data.google_service_account.triage_sa.email}",
+      "serviceAccount:${data.google_service_account.metrics_sa.email}",
     ]
   }
   // Ensure bucket contents are world readable
@@ -85,7 +83,7 @@ resource "google_storage_bucket_iam_policy" "metrics_bucket_iam_policy" {
   policy_data = data.google_iam_policy.metrics_bucket_iam_bindings.policy_data
 }
 
-// Ensure triage service account can run bigquery jobs by billing to this project
+// Ensure metrics service account can run bigquery jobs by billing to this project
 resource "google_project_iam_member" "k8s_metrics_sa_bigquery_user" {
   project = data.google_project.project.project_id
   role    = "roles/bigquery.user"
