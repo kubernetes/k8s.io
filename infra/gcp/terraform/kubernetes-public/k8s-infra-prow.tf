@@ -11,7 +11,7 @@ locals {
   bucket_location           = "us-central1"
   prow_service_account      = "k8s-infra-prow"
   test_pods_namespace       = "k8s-infra-test-pods"
-  test_pods_service_account = "default"
+  test_pods_service_account = "prowjob-default-sa"
 }
 
 
