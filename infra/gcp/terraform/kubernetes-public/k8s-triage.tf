@@ -34,7 +34,7 @@ data "google_iam_policy" "triage_bucket_iam_bindings" {
     ]
     role = "roles/storage.admin"
   }
-  // Preserve legacy storage bindings, give storage.admim members legacy bucket owner
+  // Preserve legacy storage bindings, give storage.admin members legacy bucket owner
   binding {
     members = [
       "group:${local.prow_owners}",
@@ -93,7 +93,7 @@ resource "google_project_iam_member" "triage_sa_bigquery_user" {
 resource "google_bigquery_dataset" "triage_dataset" {
   dataset_id  = "k8s_triage"
   project     = data.google_project.project.project_id
-  description = "Dataset for kubernetes/test-infra/triage to store temprorary results"
+  description = "Dataset for kubernetes/test-infra/triage to store temporary results"
   location    = "US"
 
   // Data is precious, make it difficult to delete by accident
