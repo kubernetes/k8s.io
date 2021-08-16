@@ -101,9 +101,10 @@ deck:
         - podinfo.json
   tide_update_period: 1s
   rerun_auth_configs:
-    kubernetes/k8s.io:
-      github_users:
-      - wg-k8s-infra-leads
+    '*':
+      github_team_slugs:
+        - org: kubernetes
+          slug: wg-k8s-infra-leads
 
 presets:
 # enable GOPROXY by default
