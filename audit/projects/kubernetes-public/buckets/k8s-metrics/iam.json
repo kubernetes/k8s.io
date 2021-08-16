@@ -2,7 +2,12 @@
   "bindings": [
     {
       "members": [
-        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-prow-oncall@kubernetes.io"
+      ],
+      "role": "roles/storage.admin"
+    },
+    {
+      "members": [
         "group:k8s-infra-prow-oncall@kubernetes.io",
         "projectEditor:kubernetes-public",
         "projectOwner:kubernetes-public"
@@ -17,15 +22,14 @@
     },
     {
       "members": [
-        "serviceAccount:k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+        "serviceAccount:k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
-        "group:k8s-infra-artifact-admins@kubernetes.io",
         "group:k8s-infra-prow-oncall@kubernetes.io",
-        "serviceAccount:k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+        "serviceAccount:k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },

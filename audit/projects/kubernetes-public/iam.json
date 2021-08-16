@@ -132,12 +132,6 @@
     },
     {
       "members": [
-        "deleted:serviceAccount:service-127754664067@serverless-robot-prod.iam.gserviceaccount.com?uid=118182660088477675409"
-      ],
-      "role": "roles/run.serviceAgent"
-    },
-    {
-      "members": [
         "serviceAccount:kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/secretmanager.secretAccessor"
