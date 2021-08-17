@@ -29,3 +29,4 @@ spec:
     port: 8888
   - name: metrics
     port: 9090
+  type: ClusterIP
