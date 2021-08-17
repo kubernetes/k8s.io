@@ -93,12 +93,6 @@ resource "google_service_account" "asn_etl" {
 }
 
 // service account for running ASN etl pipeline job
-data "google_service_account" "public_pii_asn_etl" {
-  account_id = "asn-etl"
-  project    = local.project_id
-}
-
-// service account for running ASN etl pipeline job
 data "google_service_account" "ii_sandbox_asn_etl" {
   account_id = "asn-etl"
   project    = "k8s-infra-ii-sandbox"
@@ -121,13 +115,13 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
   binding {
     role = "roles/storage.legacyBucketReader"
     members = [
-      "serviceAccount:${data.google_service_account.public_pii_asn_etl}",
+      "serviceAccount:${google_service_account.public_pii_asn_etl.email}",
     ]
   }
   binding {
     role = "roles/storage.legacyBucketReader"
     members = [
-      "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl}",
+      "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl.email}",
     ]
   }
 }
