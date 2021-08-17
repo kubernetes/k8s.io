@@ -1,0 +1,3 @@
+- name: prometheus-adapter
+  dmap:
+    "sha256:1ee5ec118dc55988794b4132b5518de885e35f71a1dcab9c7ba5f811616f9edd": ["v0.9.0"]
