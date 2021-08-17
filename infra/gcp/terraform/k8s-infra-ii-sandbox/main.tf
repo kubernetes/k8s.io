@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
- locals {
-     project_id = "k8s-infra-ii-sandbox"
- }
+locals {
+  project_id = "k8s-infra-ii-sandbox"
+}
 
 
 data "google_billing_account" "account" {
@@ -28,10 +28,10 @@ data "google_organization" "org" {
 }
 
 resource "google_project" "project" {
-    name = local.project_id
-    project_id = local.project_id
-    org_id = data.google_organization.org.org_id
-    billing_account = data.google_billing_account.account.id
+  name            = local.project_id
+  project_id      = local.project_id
+  org_id          = data.google_organization.org.org_id
+  billing_account = data.google_billing_account.account.id
 }
 
 
@@ -60,7 +60,7 @@ resource "google_project_iam_member" "k8s_infra_ii_coop" {
 // to the BQ dataset riaan_data_store.
 data "google_service_account" "bq_data_transfer" {
   account_id = "bq-data-transfer"
-  project = "k8s-infra-public-pii"
+  project    = "k8s-infra-public-pii"
 }
 
 resource "google_bigquery_dataset_iam_member" "bq_data_transfer_binding" {
@@ -68,4 +68,10 @@ resource "google_bigquery_dataset_iam_member" "bq_data_transfer_binding" {
   dataset_id = "riaan_data_store"
   role       = "roles/bigquery.admin"
   member     = "serviceAccount:${data.google_service_account.bq_data_transfer.email}"
+}
+
+resource "google_service_account" "asn_etl" {
+  project      = local.project_id
+  account_id   = "asn-etl"
+  display_name = "asn-etl"
 }

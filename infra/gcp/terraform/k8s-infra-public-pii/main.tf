@@ -85,6 +85,12 @@ resource "google_storage_bucket" "audit-logs-gcs" {
   }
 }
 
+// service account for running ASN etl pipeline job
+data "google_service_account" "ii_sandbox_asn_etl" {
+  account_id = "asn-etl"
+  project    = "k8s-infra-ii-sandbox"
+}
+
 //grants role WRITER to cloud-storage-analytics@google.com
 data "google_iam_policy" "audit_logs_gcs_bindings" {
   binding {
@@ -97,6 +103,12 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
     role = "roles/storage.legacyBucketWriter"
     members = [
       "group:cloud-storage-analytics@google.com",
+    ]
+  }
+  binding {
+    role = "roles/storage.legacyBucketReader"
+    members = [
+      "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl}",
     ]
   }
 }
