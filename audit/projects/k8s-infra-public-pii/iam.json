@@ -8,9 +8,28 @@
     },
     {
       "members": [
+        "serviceAccount:bq-data-transfer@k8s-infra-public-pii.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.jobUser"
+    },
+    {
+      "members": [
         "serviceAccount:service-226195303281@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquerydatatransfer.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-226195303281@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:226195303281-compute@developer.gserviceaccount.com",
+        "serviceAccount:226195303281@cloudservices.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
     },
     {
       "members": [
