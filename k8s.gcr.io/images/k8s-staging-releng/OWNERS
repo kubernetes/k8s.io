@@ -4,10 +4,6 @@ options:
   no_parent_owners: true
 approvers:
   - release-engineering-approvers
-  - cblecker
-  - dims
-  - listx
-  - thockin
 reviewers:
   - release-engineering-reviewers
 
