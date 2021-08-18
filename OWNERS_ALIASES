@@ -61,7 +61,6 @@ aliases:
     - derekwaynecarr
   sig-release-leads:
     - cpanato
-    - hasheddan
     - jeremyrickard
     - justaugustus
     - puerco
@@ -175,13 +174,11 @@ aliases:
     - MushuEE
     - spiffxp
   cip-approvers:
-    - hasheddan
     - justaugustus
     - listx
     - saschagrunert
     - thockin
   cip-reviewers:
-    - hasheddan
     - justaugustus
     - listx
     - saschagrunert
@@ -208,7 +205,6 @@ aliases:
     - frapposelli
   release-engineering-approvers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
-    - hasheddan # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - puerco # subproject owner / Release Manager / SIG Technical Lead
@@ -216,7 +212,6 @@ aliases:
     - xmudrii # Release Manager
   release-engineering-reviewers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
-    - hasheddan # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - puerco # subproject owner / Release Manager / SIG Technical Lead

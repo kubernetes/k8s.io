@@ -76,7 +76,6 @@ groups:
       - fbongiovanni@google.com
       - fbranczyk@gmail.com
       - frapposelli@vmware.com
-      - georgedanielmangum@gmail.com
       - guyjtempleton@googlemail.com
       - hankang@google.com
       - hpandey@pivotal.io
@@ -1260,7 +1259,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - georgedanielmangum@gmail.com
       - pjbgf@linux.com
       - saschagrunert@gmail.com
 

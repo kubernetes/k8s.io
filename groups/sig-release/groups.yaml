@@ -43,7 +43,6 @@ groups:
     members:
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - georgedanielmangum@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
 
@@ -58,7 +57,6 @@ groups:
       - k8s-infra-release-admins@kubernetes.io
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - georgedanielmangum@gmail.com
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
@@ -216,7 +214,6 @@ groups:
     owners:
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
@@ -244,7 +241,6 @@ groups:
     owners:
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
@@ -264,7 +260,6 @@ groups:
     owners:
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
@@ -320,7 +315,6 @@ groups:
     owners:
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
-      - georgedanielmangum@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - lauri.d.apple@gmail.com
@@ -335,7 +329,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - georgedanielmangum@gmail.com
       - k8s@auggie.dev
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
@@ -383,7 +376,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - georgedanielmangum@gmail.com
       - k8s@auggie.dev
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
