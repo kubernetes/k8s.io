@@ -36,6 +36,11 @@ locals {
       description   = "deploys k8s resources to k8s clusters"
       project_roles = ["roles/container.admin"]
     }
+    // also assigned roles by:
+    // - terraform/kubernetes-public
+    k8s-keps = {
+      description   = "write to gs://k8s-keps"
+    }
     k8s-metrics = {
       description   = "read bigquery and write to gs://k8s-metrics"
       project_roles = ["roles/bigquery.user"]

@@ -78,6 +78,19 @@ groups:
       - wojtekt@google.com
       - ehashman@redhat.com
 
+  - email-id: k8s-infra-keps@kubernetes.io
+    name: k8s-infra-keps
+    description: |-
+      ACL for access to KEP related infrastructure
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - jeremy.r.rickard@gmail.com
+    - jbelamaric@google.com
+    - k8s@auggie.dev
+    - killen.bob@gmail.com
+    - pal.nabarun95@gmail.com
+
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
