@@ -93,6 +93,7 @@
     "sha256:b0a9eb3e489150d79bff1c97681f34c579e6fcb1a4ed0289c19180eb83ebc83d": [ "v2.1.0" ]
     "sha256:48da0e4ed7238ad461ea05f68c25921783c37b315f21a5c5a2780157a6460994": [ "v2.2.0" ]
     "sha256:1b7c978a792a8fa4e96244e8059bd71bb49b07e2e5a897fb0c867bdc6db20d5d": [ "v2.3.0" ]
+    "sha256:529be2c9770add0cdd0c989115222ea9fc1be430c11095eb9f6dafcf98a36e2b": [ "v2.4.0" ]
 - name: local-volume-provisioner
   dmap:
     "sha256:63859b69f9dfc0858e5d8746218e435c36e205c041fb6d8baf71ad132e24737f": [ "v2.4.0" ]
