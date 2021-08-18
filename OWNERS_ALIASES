@@ -174,13 +174,19 @@ aliases:
     - MushuEE
     - spiffxp
   cip-approvers:
+    - cpanato
+    - jeremyrickard
     - justaugustus
     - listx
+    - puerco
     - saschagrunert
     - thockin
   cip-reviewers:
+    - cpanato
+    - jeremyrickard
     - justaugustus
     - listx
+    - puerco
     - saschagrunert
     - thockin
   provider-aws:
@@ -205,14 +211,14 @@ aliases:
     - frapposelli
   release-engineering-approvers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
-    - jeremyrickard # SIG Technical Lead
+    - jeremyrickard # subproject owner / SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
     - xmudrii # Release Manager
   release-engineering-reviewers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
-    - jeremyrickard # SIG Technical Lead
+    - jeremyrickard # subproject owner / SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
