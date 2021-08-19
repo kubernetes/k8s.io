@@ -4,12 +4,12 @@ options:
   no_parent_owners: true
 approvers:
   - cip-approvers
-  - wg-k8s-infra-leads
+  - release-engineering-approvers
 reviewers:
   - cip-reviewers
-  - release-engineering-approvers
   - release-engineering-reviewers
 
 labels:
   - sig/release
   - area/release-eng
+  - area/artifacts

@@ -2,10 +2,10 @@
 
 approvers:
 - cip-approvers
+- release-engineering-approvers
 - wg-k8s-infra-leads
 reviewers:
 - cip-reviewers
-- release-engineering-approvers
 - release-engineering-reviewers
 
 labels:

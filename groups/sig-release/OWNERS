@@ -2,7 +2,6 @@
 
 reviewers:
 - sig-release-leads
-- release-engineering-approvers
 
 labels:
 - sig/release
