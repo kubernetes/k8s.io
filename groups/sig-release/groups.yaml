@@ -296,7 +296,7 @@ groups:
     description: |-
       Private list for coordinating security releases.
 
-      Membership is restricted to the Product Security Committee,
+      Membership is restricted to the Security Response Committee,
       SIG Release Chairs, Patch Release Team, and Branch Managers.
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
