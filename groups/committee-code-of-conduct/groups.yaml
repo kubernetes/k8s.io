@@ -7,8 +7,8 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - aeva.online@gmail.com
       - celeste@cncf.io
       - chu.karen.h@gmail.com
-      - tasha.drew@gmail.com
+      - pal.nabarun95@gmail.com
       - tpepper@vmware.com
+      - vallery@zeitgeistlabs.io
