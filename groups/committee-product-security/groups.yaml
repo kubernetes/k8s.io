@@ -18,7 +18,7 @@ groups:
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
     members:
-      # Associate PSC members
+      # Associate SRC members
       - mok@vmware.com
       - sfowler@redhat.com
       - taahm@google.com
@@ -70,9 +70,9 @@ groups:
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
     description: |-
-      Private discussion forum for PSC members.
+      Private discussion forum for SRC members.
 
-      https://github.com/kubernetes/security#product-security-committee-psc
+      https://github.com/kubernetes/security#security-response-committee-psc
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"

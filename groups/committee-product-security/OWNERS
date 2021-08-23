@@ -1,7 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 reviewers:
-- committee-product-security
+- committee-security-response
 
 labels:
-- committee/product-security
+- committee/security-response
