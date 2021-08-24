@@ -115,7 +115,7 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
   binding {
     role = "roles/storage.legacyBucketReader"
     members = [
-      "serviceAccount:${google_service_account.public_pii_asn_etl.email}",
+      "serviceAccount:${google_service_account.asn_etl.email}",
     ]
   }
   binding {
