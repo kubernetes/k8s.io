@@ -325,3 +325,4 @@ infra:
       k8s-staging-storage-migrator:
       k8s-staging-test-infra:
       k8s-staging-txtdirect:
+      k8s-staging-cloud-provider-ibm:

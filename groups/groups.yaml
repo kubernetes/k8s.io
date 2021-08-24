@@ -1320,3 +1320,13 @@ groups:
       - davanum@gmail.com
       - liggitt@google.com
       - shaikhnavid14@gmail.com
+
+  - email-id: k8s-infra-staging-cloud-provider-ibm@kubernetes.io
+    name: k8s-infra-staging-cloud-provider-ibm 
+    description: |-
+      ACL for pushing IBM artefacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ambiknai@in.ibm.com
+      - arahamad@in.ibm.com
