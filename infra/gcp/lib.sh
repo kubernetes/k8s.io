@@ -314,6 +314,7 @@ function empower_group_for_kms() {
     local roles=(
         roles/cloudkms.admin
         roles/cloudkms.cryptoKeyEncrypterDecrypter
+        roles/cloudkms.signerVerifier
     )
 
     for role in "${roles[@]}"; do
