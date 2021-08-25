@@ -113,6 +113,18 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
     ]
   }
   binding {
+    role = "roles/storage.legacyObjectReader"
+    members = [
+      "serviceAccount:${google_service_account.asn_etl.email}",
+    ]
+  }
+  binding {
+    role = "roles/storage.legacyObjectReader"
+    members = [
+      "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl.email}",
+    ]
+  }
+  binding {
     role = "roles/storage.legacyBucketReader"
     members = [
       "serviceAccount:${google_service_account.asn_etl.email}",
@@ -131,7 +143,7 @@ resource "google_storage_bucket_iam_policy" "analytics_objectadmin_policy" {
   policy_data = data.google_iam_policy.audit_logs_gcs_bindings.policy_data
 }
 
-// Allow ready-only access to k8s-infra-gcs-access-logs@kubernetes.io
+// Allow read-only access to k8s-infra-gcs-access-logs@kubernetes.io
 resource "google_storage_bucket_iam_member" "artificats-gcs-logs" {
   bucket = google_storage_bucket.audit-logs-gcs.name
   role   = "roles/storage.objectViewer"
