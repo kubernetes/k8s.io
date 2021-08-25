@@ -1,0 +1,10 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: cli-triage-k8s-io
+  namespace: triageparty-cli
+  labels:
+    app: triage-party
+spec:
+  domains:
+    - cli.triage.k8s.io

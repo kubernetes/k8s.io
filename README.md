@@ -11,6 +11,7 @@ Kubernetes project infrastructure, managed by the kubernetes comunity via [sig-k
     - `publishing-bot`: instance of [publishing-bot] - owned by [sig-release]
     - `sippy`: instance of [sippy] at https://sippy.k8s.io - owned by [sig-architecture] (on behalf of [wg-reliability])
     - `slack-infra`: instance of [slack-infra] including https://slack.k8s.io - owned by [sig-contributor-experience]
+    - `triageparty-cli`: instance of [triage-party] - owned by [sig-cli]
     - `triageparty-release`: instance of [triage-party] - owned by [sig-release]
 - `audit`: scripts to export all relevant gcp resources, and the most recently-reviewed export
 - `dns`: DNS for kubernetes.io and k8s.io
@@ -54,6 +55,7 @@ Please see https://git.k8s.io/community/sig-k8s-infra for more information
 
 <!-- community groups -->
 [sig-architecture]: https://git.k8s.io/community/sig-architecture
+[sig-cli]: https://git.k8s.io/community/sig-cli
 [sig-contributor-experience]: https://git.k8s.io/community/sig-contributor-experience
 [sig-k8s-infra]: https://git.k8s.io/community/sig-k8s-infra
 [sig-node]: https://git.k8s.io/community/sig-node
