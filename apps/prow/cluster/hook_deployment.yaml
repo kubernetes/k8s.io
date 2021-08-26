@@ -35,8 +35,10 @@ spec:
         - --job-config-path=/etc/job-config
         - --kubeconfig=/etc/kubeconfig/kubeconfig
         ports:
-          - name: http
-            containerPort: 8888
+        - name: http
+          containerPort: 8888
+        - name: metrics
+          containerPort: 9090
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

@@ -41,6 +41,9 @@ spec:
         - --enable-controller=plank
         - --job-config-path=/etc/job-config
         - --kubeconfig=/etc/kubeconfig/kubeconfig
+        ports:
+        - name: metrics
+          containerPort: 9090
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

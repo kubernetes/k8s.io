@@ -57,10 +57,10 @@ spec:
             - --cache-sizeGB=99
             - --serve-metrics=true
           ports:
-            - name: main
-              containerPort: 8888
-            - name: metrics
-              containerPort: 9090
+          - name: main
+            containerPort: 8888
+          - name: metrics
+            containerPort: 9090
           resources:
             requests:
               cpu: 2
