@@ -51,6 +51,9 @@ spec:
               - "ALL"
           privileged: false
           readOnlyRootFilesystem: true
+        ports:
+        - name: metrics
+          containerPort: 9090
         volumeMounts:
         - mountPath: /etc/kubeconfig
           name: kubeconfig

@@ -41,10 +41,10 @@ spec:
         image: gcr.io/k8s-prow/deck:v20210825-bc8cae85fb
         imagePullPolicy: Always
         ports:
-          - name: http
-            containerPort: 8080
-          - name: metrics
-            containerPort: 9090
+        - name: http
+          containerPort: 8080
+        - name: metrics
+          containerPort: 9090
         args:
         - --config-path=/etc/config/config.yaml
         - --cookie-secret=/etc/cookie/secret
