@@ -21,5 +21,5 @@ output "email" {
 
 output "iam_policy" {
   description = "The serviceaccount iam_policy"
-  value       = google_service_account_iam_policy.serviceaccount_iam
+  value       = google_service_account_iam_policy.serviceaccount_iam.policy_data
 }
