@@ -186,4 +186,3 @@ module "prow_build_nodepool" {
   disk_type       = "pd-ssd"
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }
-
