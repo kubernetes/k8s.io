@@ -14,27 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required provider versions
-- Storage backend details
-*/
+output "email" {
+  description = "The email of the serviceaccount that was created"
+  value       = google_service_account.serviceaccount.email
+}
 
-terraform {
-
-  backend "gcs" {
-    bucket = "k8s-infra-tf-prow-clusters"
-    prefix = "k8s-infra-prow-build/prow-build" // $project_name/$cluster_name
-  }
-
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 3.74.0"
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "~> 3.74.0"
-    }
-  }
+output "iam_policy" {
+  description = "The serviceaccount iam_policy"
+  value       = google_service_account_iam_policy.serviceaccount_iam.policy_data
 }

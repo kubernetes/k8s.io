@@ -25,12 +25,12 @@ This file defines:
 
 locals {
   project_id             = "k8s-infra-prow-build"
-  cluster_name           = "prow-build"                       // The name of the cluster defined in this file
-  cluster_location       = "us-central1"                      // The GCP location (region or zone) where the cluster should be created
-  bigquery_location      = "US"                               // The bigquery specific location where the dataset should be created
-  pod_namespace          = "test-pods"                        // MUST match whatever prow is configured to use when it schedules to this cluster
-  cluster_sa_name        = "prow-build"                       // Name of the GSA and KSA that pods use by default
-  boskos_janitor_sa_name = "boskos-janitor"                   // Name of the GSA and KSA used by boskos-janitor
+  cluster_name           = "prow-build"     // The name of the cluster defined in this file
+  cluster_location       = "us-central1"    // The GCP location (region or zone) where the cluster should be created
+  bigquery_location      = "US"             // The bigquery specific location where the dataset should be created
+  pod_namespace          = "test-pods"      // MUST match whatever prow is configured to use when it schedules to this cluster
+  cluster_sa_name        = "prow-build"     // Name of the GSA and KSA that pods use by default
+  boskos_janitor_sa_name = "boskos-janitor" // Name of the GSA and KSA used by boskos-janitor
 }
 
 data "google_organization" "org" {
@@ -38,7 +38,7 @@ data "google_organization" "org" {
 }
 
 module "project" {
-  source       = "../../../modules/gke-project"
+  source       = "../modules/gke-project"
   project_id   = local.project_id
   project_name = local.project_id
 }
@@ -62,48 +62,20 @@ resource "google_project_iam_member" "k8s_infra_prow_viewers" {
   member  = "group:k8s-infra-prow-viewers@kubernetes.io"
 }
 
-// Create GCP SA for pods
-resource "google_service_account" "prow_build_cluster_sa" {
-  project      = local.project_id
-  account_id   = local.cluster_sa_name
-  display_name = "Used by pods in '${local.cluster_name}' GKE cluster"
-}
-// Allow pods using the build cluster KSA to use the GCP SA via workload identity
-data "google_iam_policy" "prow_build_cluster_sa_workload_identity" {
-  binding {
-    role = "roles/iam.workloadIdentityUser"
-
-    members = [
-      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.cluster_sa_name}]",
-    ]
-  }
-}
-// Authoritative iam-policy: replaces any existing policy attached to this service_account
-resource "google_service_account_iam_policy" "prow_build_cluster_sa_iam" {
-  service_account_id = google_service_account.prow_build_cluster_sa.name
-  policy_data        = data.google_iam_policy.prow_build_cluster_sa_workload_identity.policy_data
+module "prow_build_cluster_sa" {
+  source            = "../modules/workload-identity-service-account"
+  project_id        = local.project_id
+  name              = local.cluster_sa_name
+  description       = "default service account for pods in ${local.cluster_name}"
+  cluster_namespace = local.pod_namespace
 }
 
-// Create GCP SA for boskos-janitor
-resource "google_service_account" "boskos_janitor_sa" {
-  project      = local.project_id
-  account_id   = local.boskos_janitor_sa_name
-  display_name = "Used by ${local.boskos_janitor_sa_name} in '${local.cluster_name}' GKE cluster"
-}
-// Allow pods using the build cluster KSA to use the GCP SA via workload identity
-data "google_iam_policy" "boskos_janitor_sa_workload_identity" {
-  binding {
-    role = "roles/iam.workloadIdentityUser"
-
-    members = [
-      "serviceAccount:${local.project_id}.svc.id.goog[${local.pod_namespace}/${local.boskos_janitor_sa_name}]",
-    ]
-  }
-}
-// Authoritative iam-policy: replaces any existing policy attached to this service account
-resource "google_service_account_iam_policy" "boskos_janitor_sa_iam" {
-  service_account_id = google_service_account.boskos_janitor_sa.name
-  policy_data        = data.google_iam_policy.boskos_janitor_sa_workload_identity.policy_data
+module "boskos_janitor_sa" {
+  source            = "../modules/workload-identity-service-account"
+  project_id        = local.project_id
+  name              = local.boskos_janitor_sa_name
+  description       = "used by boskos-janitor in ${local.cluster_name}"
+  cluster_namespace = local.pod_namespace
 }
 
 // external ip formerly managed by infra/gcp/prow/ensure-e2e-projects.sh
@@ -125,7 +97,7 @@ resource "google_compute_address" "greenhouse_metrics" {
 }
 
 module "prow_build_cluster" {
-  source             = "../../../modules/gke-cluster"
+  source             = "../modules/gke-cluster"
   project_name       = local.project_id
   cluster_name       = local.cluster_name
   cluster_location   = local.cluster_location
@@ -137,7 +109,7 @@ module "prow_build_cluster" {
 }
 
 module "prow_build_nodepool_n1_highmem_8_maxiops" {
-  source        = "../../../modules/gke-nodepool"
+  source        = "../modules/gke-nodepool"
   project_name  = local.project_id
   cluster_name  = module.prow_build_cluster.cluster.name
   location      = module.prow_build_cluster.cluster.location
@@ -157,7 +129,7 @@ module "prow_build_nodepool_n1_highmem_8_maxiops" {
 }
 
 module "greenhouse_nodepool" {
-  source       = "../../../modules/gke-nodepool"
+  source       = "../modules/gke-nodepool"
   project_name = local.project_id
   cluster_name = module.prow_build_cluster.cluster.name
   location     = module.prow_build_cluster.cluster.location

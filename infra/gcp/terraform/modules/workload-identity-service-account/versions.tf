@@ -13,20 +13,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-/*
-This file defines:
-- Required provider versions
-- Storage backend details
-*/
-
 terraform {
-
-  backend "gcs" {
-    bucket = "k8s-infra-tf-prow-clusters"
-    prefix = "k8s-infra-prow-build/prow-build" // $project_name/$cluster_name
-  }
-
+  required_version = "~> 1.0.0"
   required_providers {
     google = {
       source  = "hashicorp/google"
