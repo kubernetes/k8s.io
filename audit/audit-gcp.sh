@@ -38,7 +38,7 @@ set -o pipefail
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 readonly REPO_ROOT
-. "${REPO_ROOT}/infra/gcp/lib.sh"
+. "${REPO_ROOT}/infra/gcp/bash/lib.sh"
 
 #
 # config
