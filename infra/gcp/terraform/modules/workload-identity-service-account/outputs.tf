@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-output "service_account" {
-  description = "The serviceaccount that was created"
-  value       = google_service_account.serviceaccount
+output "email" {
+  description = "The email of the serviceaccount that was created"
+  value       = google_service_account.serviceaccount.email
 }
 
 output "iam_policy" {

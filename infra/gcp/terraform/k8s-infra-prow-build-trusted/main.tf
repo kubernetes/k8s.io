@@ -110,7 +110,7 @@ module "k8s_metrics_sa" {
 resource "google_project_iam_member" "k8s_metrics_sa_bigquery_user" {
   project = local.project_id
   role    = "roles/bigquery.user"
-  member  = "serviceAccount:${module.k8s_metrics_sa.service_account.email}"
+  member  = "serviceAccount:${module.k8s_metrics_sa.email}"
 }
 
 module "k8s_triage_sa" {
@@ -124,7 +124,7 @@ module "k8s_triage_sa" {
 resource "google_project_iam_member" "k8s_triage_sa_bigquery_user" {
   project = local.project_id
   role    = "roles/bigquery.user"
-  member  = "serviceAccount:${module.k8s_triage_sa.service_account.email}"
+  member  = "serviceAccount:${module.k8s_triage_sa.email}"
 }
 
 module "kubernetes_external_secrets_sa" {
@@ -138,7 +138,7 @@ module "kubernetes_external_secrets_sa" {
 resource "google_project_iam_member" "kubernetes_external_secrets_for_prow_build_trusted" {
   project = local.project_id
   role    = "roles/secretmanager.secretAccessor"
-  member  = "serviceAccount:${module.kubernetes_external_secrets_sa.service_account.email}"
+  member  = "serviceAccount:${module.kubernetes_external_secrets_sa.email}"
 }
 
 // external (regional) ip addresses
