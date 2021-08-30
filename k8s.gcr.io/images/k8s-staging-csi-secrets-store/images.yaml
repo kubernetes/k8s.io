@@ -14,7 +14,9 @@
     "sha256:e25d4daca186e8c3b26db395d67af56c7a5d0e3aaf61d36de39ea2f17b21ed98": [ "v0.0.23" ]
     "sha256:d6f02c93da117e5d56bd8beec0a10a0112c09c0257d219b07db32645c3f3cdb0": [ "v0.1.0" ]
     "sha256:6ee985700ed7151290531bde375b92e64ae09a8587baf6b0c8f5bcf4da6dce93": [ "v0.2.0" ]
+    "sha256:0fa92243e61f3513631445cac9957f6a1bfb76ea4aaad8241c9bfbd10e30fa14": [ "v0.3.0" ]
 - name: driver-crds
   dmap:
     "sha256:508f58321f8085877a8b8e7268e5a5efbca707ebe10e8c705124a5c9e1b5ceab": [ "v0.1.0" ]
     "sha256:6b8740d237cb6c295bac93c7145c932d90f26c065c26886f28632fc6b4b6c9bf": [ "v0.2.0" ]
+    "sha256:fd318cfe3d4ead4656d38a717962172e4f47d5caec551ac56396e3feb26fc0d1": [ "v0.3.0" ]
