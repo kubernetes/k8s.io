@@ -22,6 +22,12 @@
       "members": [
         "group:k8s-infra-release-admins@kubernetes.io"
       ],
+      "role": "roles/cloudkms.signerVerifier"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io"
+      ],
       "role": "roles/viewer"
     }
   ],
