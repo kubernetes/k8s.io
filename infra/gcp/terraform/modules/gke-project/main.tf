@@ -111,7 +111,7 @@ resource "google_project_iam_member" "cluster_admins_as_container_admin" {
   member  = "group:${var.cluster_admins_group}"
 }
 
-// Role created by infra/gcp/ensure-organization.sh, use a data source to ensure it exists
+// Role created by ensure-organization.sh, use a data source to ensure it exists
 data "google_iam_role" "service_account_lister" {
   name = "${data.google_organization.org.name}/roles/iam.serviceAccountLister"
 }

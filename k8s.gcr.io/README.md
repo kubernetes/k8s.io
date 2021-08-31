@@ -87,7 +87,7 @@ use the image promotion (PR creation) process defined above.
 [image-pushing-readme]: https://git.k8s.io/test-infra/config/jobs/image-pushing/README.md
 [groups.yaml]: /groups/groups.yaml
 [infra.yaml]: /infra/gcp/infra.yaml
-[staging-bash]: /infra/gcp/ensure-staging-storage.sh
+[staging-bash]: /infra/gcp/bash/ensure-staging-storage.sh
 [vdf]: /k8s.gcr.io/Vanity-Domain-Flip.md
 [post-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#post-k8sio-image-promo
 [ci-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#ci-k8sio-image-promo

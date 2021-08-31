@@ -33,7 +33,7 @@ You can include all of these steps in a single PR.
 
 You will get one or more namespaces to run your thing.  Decide what names you
 want and make sure they are available.  Check the list in [the namespaces
-config](/infra/gcp/namespaces/ensure-namespaces.sh), and add your names there.
+config](/infra/gcp/bash/namespaces/ensure-namespaces.sh), and add your names there.
 Keep them short but descriptive.
 
 ### Create a google-group for each namespace

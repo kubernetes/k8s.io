@@ -18,7 +18,7 @@
 
 # This MUST NOT be used directly. Source it via lib.sh instead.
 
-INFRA_YAML="$(dirname "${BASH_SOURCE[0]}")/infra.yaml"
+INFRA_YAML="$(dirname "${BASH_SOURCE[0]}")/../infra.yaml"
 readonly INFRA_YAML
 
 # Echo the name of the given project if it has been

@@ -50,7 +50,7 @@ resource "google_project_iam_member" "k8s_infra_prow_oncall" {
   member  = "group:k8s-infra-prow-oncall@kubernetes.io"
 }
 
-// Role created by infra/gcp/ensure-organization.sh, use a data source to ensure it exists
+// Role created by ensure-organization.sh, use a data source to ensure it exists
 data "google_iam_role" "prow_viewer" {
   name = "${data.google_organization.org.name}/roles/prow.viewer"
 }
@@ -78,7 +78,7 @@ module "boskos_janitor_sa" {
   cluster_namespace = local.pod_namespace
 }
 
-// external ip formerly managed by infra/gcp/prow/ensure-e2e-projects.sh
+// external ip formerly managed by infra/gcp/bash/prow/ensure-e2e-projects.sh
 resource "google_compute_address" "boskos_metrics" {
   name         = "boskos-metrics"
   description  = "to allow monitoring.k8s.prow.io to scrape boskos metrics"
@@ -87,7 +87,7 @@ resource "google_compute_address" "boskos_metrics" {
   address_type = "EXTERNAL"
 }
 
-// external ip formerly managed by infra/gcp/prow/ensure-e2e-projects.sh
+// external ip formerly managed by infra/gcp/bash/prow/ensure-e2e-projects.sh
 resource "google_compute_address" "greenhouse_metrics" {
   name         = "greenhouse-metrics"
   description  = "to allow monitoring.k8s.prow.io to scrape greenhouse metrics"

@@ -125,7 +125,7 @@ groups:
     name: k8s-infra-staging-cip-test
     description: |-
       ACL for staging cip-test buckets, the test-only backup, and auditing
-      jobs for the promoter. See infra/gcp/ensure-prod-storage.sh for more
+      jobs for the promoter. See infra/gcp/bash/ensure-prod-storage.sh for more
       details.
     settings:
       ReconcileMembers: "true"
