@@ -263,6 +263,7 @@ infra:
       k8s-staging-boskos:
       k8s-staging-build-image:
       k8s-staging-capi-docker:
+      k8s-staging-capi-ibmcloud:
       k8s-staging-capi-kubeadm:
       k8s-staging-capi-openstack:
       k8s-staging-capi-vsphere:
