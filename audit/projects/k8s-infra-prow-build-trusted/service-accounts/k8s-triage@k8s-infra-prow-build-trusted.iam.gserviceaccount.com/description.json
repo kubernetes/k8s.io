@@ -1,5 +1,5 @@
 {
-  "displayName": "k8s-triage",
+  "displayName": "read bigquery and write to gs://k8s-triage",
   "email": "k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
   "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
   "oauth2ClientId": "117348528566017062039",
