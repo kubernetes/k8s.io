@@ -10,12 +10,13 @@ groups:
       - k8s-infra-release-viewers@kubernetes.io
       - ameukam@gmail.com
       - bartek@smykla.com
-      - gossanth@gmail.com # 1.22 Bug Triage Shadow
       - gveronicalg@gmail.com
-      - jgavinray@linux.com # 1.22 Bug Triage Shadow
-      - menna.elmasry@suse.com # 1.22 Bug Triage Lead
-      - taylorchprr@gmail.com # 1.22 Bug Triage Shadow
-      - voigt.christoph@gmail.com # 1.22 Bug Triage Shadow
+      - jyotima@amazon.com # 1.23 Bug Triage Shadow
+      - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
+      - sanchitac067@gmail.com # 1.23 Bug Triage Shadow
+      - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
+      - voigt.christoph@gmail.com # 1.23 Bug Triage Lead
+      - x.cai@reply.de # 1.23 Bug Triage Shadow
 
   - email-id: k8s-infra-google-build-admins@kubernetes.io
     name: k8s-infra-google-build-admins
@@ -218,15 +219,16 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
+      - cccswann@gmail.com # 1.23 Release Comms Shadow
+      - chu.karen.h@gmail.com # 1.23 Release Comms Lead
       - james.laverack@jetstack.io # 1.23 RT Lead Shadow
-      - jeeves.butler@gmail.com # 1.22 Comms Lead
       - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
-      - klkfr@amazon.com # 1.22 Comms Shadow
-      - kunalkushwaha453@gmail.com # 1.22 Comms Shadow
+      - kaslin.fields@gmail.com # 1.23 Release Comms Shadow
+      - kat.cosgrove@gmail.com # 1.23 Release Comms Shadow
       - lauri.d.apple@gmail.com
       - max@koerbaecher.io # 1.23 RT Lead Shadow
+      - mickey.boxell@oracle.com # 1.23 Release Comms Shadow
       - monmonmsc@gmail.com # 1.23 RT Lead Shadow
-      - rajula96reddy@gmail.com # 1.22 Comms Shadow
       - rlejano@gmail.com # 1.23 RT Lead
 
   - email-id: release-managers-private@kubernetes.io
@@ -343,32 +345,39 @@ groups:
       - rlejano@gmail.com # 1.23 RT Lead
     members:
       - sig-release-leads@kubernetes.io
-      - ania0102@gmail.com # 1.22 CI Signal Shadow
-      - ashnehete@gmail.com # 1.22 Release Docs Shadow
-      - carlisia@grokkingtech.io # 1.22 Release Docs Shadow
-      - cicih@google.com # 1.22 Release Notes Shadow
-      - Damanarora@cmail.carleton.ca # 1.22 Release Notes Shadow
-      - gossanth@gmail.com # 1.22 Bug Triage Shadow
-      - james@jameslaverack.com # 1.22 Enhancements Lead
-      - jeeves.butler@gmail.com # 1.22 Comms Lead
-      - jgavinray@linux.com # 1.22 Bug Triage Shadow
-      - klkfr@amazon.com # 1.22 Comms Shadow
-      - kunalkushwaha453@gmail.com # 1.22 Comms Shadow
-      - nng.grace@gmail.com # 1.22 Enhancements Shadow
-      - pmmalinov01@gmail.com # 1.22 Release Notes Lead
-      - rajula96reddy@gmail.com # 1.22 Comms Shadow
-      - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
-      - rpanjwani@vmware.com # 1.22 Release Docs Shadow
-      - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
-      - simran.thind@outlook.com # 1.22 Release Notes Shadow
-      - sladynnunes98@gmail.com # 1.22 Release Notes Shadow
-      - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
-      - supriyapremkumar1@gmail.com # 1.22 Enhancements Shadow
-      - striker57@gmail.com # 1.22 Release Docs Shadow
-      - taylorchprr@gmail.com # 1.22 Bug Triage Shadow
-      - victor@cloudflavor.io # 1.22 Docs Lead
-      - voigt.christoph@gmail.com # 1.22 Bug Triage Shadow
-      - xander@grzy.dev # 1.22 Enhancements Shadow
+      - arshsharma461@gmail.com # 1.23 CI Signal Shadow
+      - calvinho.ca@gmail.com # 1.23 CI Signal Shadow
+      - cccswann@gmail.com # 1.23 Release Comms Shadow
+      - chu.karen.h@gmail.com # 1.23 Release Comms Lead
+      - Cicih@google.com # 1.23 Release Notes Lead
+      - DamanArora@cmail.carleton.ca # 1.23 Release Notes Shadow
+      - jeeves.butler@gmail.com # 1.23 Docs Lead
+      - jyotima@amazon.com # 1.23 Bug Triage Shadow
+      - kaslin.fields@gmail.com # 1.23 Release Comms Shadow
+      - kat.cosgrove@gmail.com # 1.23 Release Comms Shadow
+      - kevindelgado@google.com # 1.23 Enhancements Shadow
+      - lauralorenz@google.com # 1.23 Enhancements Shadow
+      - leonard.pahlke@googlemail.com # 1.23 CI Signal Shadow
+      - lucasdwyer@pm.me # 1.23 Release Notes Shadow
+      - mail@samcogan.com # 1.23 Release Notes Shadow
+      - mehabhalodiya@gmail.com # 1.23 Docs Shadow
+      - mickey.boxell@oracle.com # 1.23 Release Comms Shadow
+      - nng.grace@gmail.com # 1.23 Enhancements Shadow
+      - nwaddington@cncf.io # 1.23 Docs Shadow
+      - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
+      - parulsahoo5jan@gmail.com # 1.23 Release Notes Shadow
+      - priyankasaggu11929@gmail.com # 1.23 Enhancements Shadow
+      - rajula96reddy@gmail.com # 1.23 CI Signal Shadow
+      - ramses.green.2@gmail.com # 1.23 Docs Shadow
+      - salahi.hossein@gmail.com # 1.23 CI Signal Lead
+      - sanchitac067@gmail.com # 1.23 Bug Triage Shadow
+      - simrangupta172002@gmail.com # 1.23 CI Signal Shadow
+      - striker57@gmail.com # 1.23 Docs Shadow
+      - supriyapremkumar1@gmail.com # 1.23 Enhancements Shadow
+      - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
+      - voigt.christoph@gmail.com # 1.23 Bug Triage Lead
+      - x.cai@reply.de # 1.23 Bug Triage Shadow
+      - xander@grzy.dev # 1.23 Enhancements Lead
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -386,29 +395,32 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
-      - guineveresaenger@gmail.com # 1.22 Emeritus Advisor
+      - rlejano@gmail.com # 1.23 RT Lead
     members:
-      - ashnehete@gmail.com # 1.22 Release Docs Shadow
-      - carlisia@grokkingtech.io # 1.22 Release Docs Shadow
-      - rpanjwani@vmware.com # 1.22 Release Docs Shadow
-      - striker57@gmail.com # 1.22 Release Docs Shadow
-      - cicih@google.com # 1.22 Release Notes Shadow
-      - Damanarora@cmail.carleton.ca # 1.22 Release Notes Shadow
-      - sladynnunes98@gmail.com # 1.22 Release Notes Shadow
-      - simran.thind@outlook.com # 1.22 Release Notes Shadow
-      - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
-      - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
-      - ania0102@gmail.com # 1.22 CI Signal Shadow
-      - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
-      - voigt.christoph@gmail.com # 1.22 Bug Triage Shadow
-      - gossanth@gmail.com # 1.22 Bug Triage Shadow
-      - taylorchprr@gmail.com # 1.22 Bug Triage Shadow
-      - jgavinray@linux.com # 1.22 Bug Triage Shadow
-      - kunalkushwaha453@gmail.com # 1.22 Comms Shadow
-      - rajula96reddy@gmail.com # 1.22 Comms Shadow
-      - klkfr@amazon.com # 1.22 Comms Shadow
-      - joseph.r.sandoval@gmail.com # 1.22 Enhancements Shadow
-      - xander@grzy.dev # 1.22 Enhancements Shadow
-      - rlejano@gmail.com # 1.22 Enhancements Shadow
-      - supriyapremkumar1@gmail.com # 1.22 Enhancements Shadow
-      - nng.grace@gmail.com # 1.22 Enhancements Shadow
+      - arshsharma461@gmail.com # 1.23 CI Signal Shadow
+      - calvinho.ca@gmail.com # 1.23 CI Signal Shadow
+      - cccswann@gmail.com # 1.23 Release Comms Shadow
+      - DamanArora@cmail.carleton.ca # 1.23 Release Notes Shadow
+      - jyotima@amazon.com # 1.23 Bug Triage Shadow
+      - kaslin.fields@gmail.com # 1.23 Release Comms Shadow
+      - kat.cosgrove@gmail.com # 1.23 Release Comms Shadow
+      - kevindelgado@google.com # 1.23 Enhancements Shadow
+      - lauralorenz@google.com # 1.23 Enhancements Shadow
+      - leonard.pahlke@googlemail.com # 1.23 CI Signal Shadow
+      - lucasdwyer@pm.me # 1.23 Release Notes Shadow
+      - mail@samcogan.com # 1.23 Release Notes Shadow
+      - mehabhalodiya@gmail.com # 1.23 Docs Shadow
+      - mickey.boxell@oracle.com # 1.23 Release Comms Shadow
+      - nng.grace@gmail.com # 1.23 Enhancements Shadow
+      - nwaddington@cncf.io # 1.23 Docs Shadow
+      - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
+      - parulsahoo5jan@gmail.com # 1.23 Release Notes Shadow
+      - priyankasaggu11929@gmail.com # 1.23 Enhancements Shadow
+      - rajula96reddy@gmail.com # 1.23 CI Signal Shadow
+      - ramses.green.2@gmail.com # 1.23 Docs Shadow
+      - sanchitac067@gmail.com # 1.23 Bug Triage Shadow
+      - simrangupta172002@gmail.com # 1.23 CI Signal Shadow
+      - striker57@gmail.com # 1.23 Docs Shadow
+      - supriyapremkumar1@gmail.com # 1.23 Enhancements Shadow
+      - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
+      - x.cai@reply.de # 1.23 Bug Triage Shadow
