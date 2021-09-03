@@ -626,6 +626,17 @@ groups:
       - hi@amycod.es
       - prignanov@vmware.com
 
+  - email-id: k8s-infra-staging-capi-ibmcloud@kubernetes.io
+    name: k8s-infra-staging-capi-ibmcloud
+    description: |-
+      ACL for staging CAPI for IBMCloud
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - gyliu513@gmail.com
+      - manjunath.cse@gmail.com
+      - jichenjc@cn.ibm.com
+
   - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
     name: k8s-infra-staging-capi-kubeadm
     description: |-
