@@ -16,7 +16,7 @@ to promote images to the main serving repository.
 ### Creating staging repos
 
 1. Create a google group for granting push access by adding an email
-alias for it in [groups.yaml]. The email alias should be of the form
+alias for it in [groups.yaml] and [restrictions.yaml]. The email alias should be of the form
 `k8s-infra-staging-<project-name>@kubernetes.io`. The project name
 can have a maximum of 18 characters.
 
@@ -86,6 +86,7 @@ use the image promotion (PR creation) process defined above.
 
 [image-pushing-readme]: https://git.k8s.io/test-infra/config/jobs/image-pushing/README.md
 [groups.yaml]: /groups/groups.yaml
+[restrictions.yaml]: /groups/restrictions.yaml
 [infra.yaml]: /infra/gcp/infra.yaml
 [staging-bash]: /infra/gcp/bash/ensure-staging-storage.sh
 [vdf]: /k8s.gcr.io/Vanity-Domain-Flip.md
