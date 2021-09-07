@@ -18,7 +18,7 @@
 # infrastructure managed by wg-k8s-infra.
 
 # base image
-FROM debian:buster
+FROM debian:bullseye
 
 # build args
 
@@ -26,15 +26,15 @@ FROM debian:buster
 # latest at the time, and package-based installs from debian-maintained repos
 # are not pinned to a specific version
 
-ARG CONFTEST_VERSION=0.25.0
-ARG GCLOUD_VERSION=347.0.0
-ARG GH_VERSION=1.12.1
-ARG GO_VERSION=1.16.6
+ARG CONFTEST_VERSION=0.27.0
+ARG GCLOUD_VERSION=355.0.0
+ARG GH_VERSION=2.0.0
+ARG GO_VERSION=1.17
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
-ARG K8S_VERSION=1.20.7
-ARG OPA_VERSION=0.28.0
+ARG K8S_VERSION=1.21.4
+ARG OPA_VERSION=0.32.0
 ARG SHELLCHECK_VERSION=0.7.2
 ARG TFSWITCH_VERSION=0.12.1119
 
@@ -69,7 +69,7 @@ RUN set -o errexit nounset pipefail \
         && pip3 install --requirement requirements.txt \
     && echo "Installing go ..." \
         && export GO_TARBALL="go${GO_VERSION}.linux-amd64.tar.gz" \
-        && curl -fsSL "https://storage.googleapis.com/golang/${GO_TARBALL}" --output tarball.tar.gz \
+        && curl -fsSL "https://golang.org/dl/${GO_TARBALL}" --output tarball.tar.gz \
         && tar xf tarball.tar.gz -C /usr/local \
         && rm tarball.tar.gz \
     && echo "Installing Google Cloud SDK ..." \
