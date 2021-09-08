@@ -1,4 +1,12 @@
 groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
   - email-id: community@kubernetes.io
     name: community
     description: |-
@@ -23,6 +31,72 @@ groups:
       - jberkus@redhat.com
       - chris@chrisshort.net
       - samudralavamshi@gmail.com
+
+  - email-id: github@kubernetes.io
+    name: github
+    description: |-
+      Kubernetes GitHub Admins
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - cblecker@gmail.com
+      - spiffxp@gmail.com
+      - spiffxp@google.com
+    managers:
+      - fejta@google.com
+      - ihor.dvoretskyi@gmail.com
+      - nikitaraghunath@gmail.com
+      - killen.bob@gmail.com
+
+  - email-id: lwkd@kubernetes.io
+    name: lwkd
+    description: |-
+      alias for Last Week In Kubernetes editors
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MembersCanPostAsTheGroup: "true"
+      ReconcileMembers: "true"
+    members:
+      - jberkus@redhat.com
+      - noah@coderanger.net
+
+  - email-id: moderators@kubernetes.io
+    name: moderators
+    description: |-
+      Moderators for various Community properties
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - paris.pittman@gmail.com
+    managers:
+      - alarcj137@gmail.com
+      - contributors@kubernetes.io
+      - dylan.graham@gmail.com
+      - idealhack@gmail.com
+      - ihor@cncf.io
+      - jdumars@gmail.com
+      - jeef111x@gmail.com
+      - jorgec@vmware.com
+      - ktbry@google.com
+      - noah@coderanger.net
+      - killen.bob@gmail.com
+    members:
+      - cblecker@gmail.com
+      - guslees@gmail.com
+      - james@munnelly.eu
+      - jspeed@redhat.com
+      - krajakavitha@gmail.com
+      - lenferinkroy@gmail.com
+      - manjunath.cse@gmail.com
+      - nikitaraghunath@gmail.com
+      - puja@giantswarm.io
+      - ramamoorthypandiyaraja@gmail.com
+      - spiffxp@google.com
+      - jberkus@redhat.com
+      - marky.r.jackson@gmail.com
+
   - email-id: stream-team@kubernetes.io
     name: stream-team
     description: |-
@@ -41,14 +115,50 @@ groups:
       - dpapandrea@gmail.com
       - david.andrew.mckay@gmail.com
       - ihor@cncf.io
-  - email-id: lwkd@kubernetes.io
-    name: lwkd
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+
+  - email-id: k8s-infra-rbac-slack-infra@kubernetes.io
+    name: k8s-infra-rbac-slack-infra
     description: |-
-      alias for Last Week In Kubernetes editors
+      Grants access to the `namespace-user` role in the `slack-infra` namespace on the `aaa` cluster
     settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - jberkus@redhat.com
-      - noah@coderanger.net
+      - ameukam@gmail.com
+      - cblecker@gmail.com
+      - ctadeu@gmail.com
+      - davanum@gmail.com
+      - jeef111x@gmail.com
+      - killen.bob@gmail.com
+      - ktbry@google.com
+      - nikitaraghunath@gmail.com
+      - rajula96reddy@gmail.com
+      - spiffxp@gmail.com
+      - thockin@google.com

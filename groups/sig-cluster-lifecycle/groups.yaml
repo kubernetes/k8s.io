@@ -1,4 +1,12 @@
 groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
   - email-id: sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-alerts
     description: |-
@@ -12,6 +20,7 @@ groups:
       - jdetiberus@equinix.com
       - jeewan@vmware.com
       - sbueringer@gmail.com
+
   - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubeadm-alerts
     description: |-
@@ -26,3 +35,211 @@ groups:
     owners:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-addon-manager@kubernetes.io
+    name: k8s-infra-staging-addon-manager
+    description: |-
+      ACL for staging addon-manager images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jsand@google.com
+      - zihongz@google.com
+
+  - email-id: k8s-infra-staging-capi-docker@kubernetes.io
+    name: k8s-infra-staging-capi-docker
+    description: |-
+      ACL for staging CAPI for docker
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-capi-ibmcloud@kubernetes.io
+    name: k8s-infra-staging-capi-ibmcloud
+    description: |-
+      ACL for staging CAPI for IBMCloud
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - gyliu513@gmail.com
+      - manjunath.cse@gmail.com
+      - jichenjc@cn.ibm.com
+
+  - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
+    name: k8s-infra-staging-capi-kubeadm
+    description: |-
+      ACL for staging CAPI for kubeadm
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - frostl@vmware.com
+      - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
+    name: k8s-infra-staging-capi-openstack
+    description: |-
+      ACL for staging CAPI for OpenStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jichenjc@cn.ibm.com
+      - sbueringer@gmail.com
+
+  - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
+    name: k8s-infra-staging-capi-vsphere
+    description: |-
+      ACL for staging CAPI for vSphere
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - prignanov@vmware.com
+      - jeewan@vmware.com
+      - ytijani@vmware.com
+
+  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
+    name: k8s-infra-staging-cluster-api
+    description: |-
+      ACL for staging CAPI
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cecilerobertm@gmail.com
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - fpandini@vmware.com
+      - goldsteina@vmware.com
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
+    name: k8s-infra-staging-cluster-api-aws
+    description: |-
+      ACL for staging CAPI for AWS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - andrewrudoi@gmail.com
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - fpandini@vmware.com
+      - goldsteina@vmware.com
+      - jeewan@vmware.com
+      - prignanov@vmware.com
+      - richmcase@gmail.com
+      - sedefsavas@gmail.com
+
+  - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
+    name: k8s-infra-staging-cluster-api-do
+    description: |-
+      ACL for staging CAPI for DigitalOcean
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ahmadnurus.sh@gmail.com
+      - ctadeu@gmail.com
+      - detiber@gmail.com
+      - jeremylevanmorris@gmail.com
+      - ttr314@googlemail.com
+
+  - email-id: k8s-infra-staging-cluster-api-azure@kubernetes.io
+    name: k8s-infra-staging-cluster-api-azure
+    description: |-
+      ACL for staging CAPI for Azure
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cecilerobertm@gmail.com
+      - davanum@gmail.com
+      - david@devigned.com
+      - k8s@auggie.dev
+      - nziada@vmware.com
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
+    name: k8s-infra-staging-cluster-api-gcp
+    description: |-
+      ACL for staging CAPI for GCP
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ctadeu@gmail.com
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - justinsb@google.com
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-cluster-api-nested@kubernetes.io
+    name: k8s-infra-staging-cluster-api-nested
+    description: |-
+      ACL for staging CAPI for Nested
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - charleszheng44@gmail.com
+      - me@chrishein.com
+      - prignanov@vmware.com
+      - vrgf2003@gmail.com
+
+  - email-id: k8s-infra-staging-cluster-addons@kubernetes.io
+    name: k8s-infra-staging-cluster-addons
+    description: |-
+      ACL for staging cluster-addons
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - daniel@weave.works
+      - justinsb@google.com
+      - leigh@weave.works
+      - luoh@vmware.com
+      - timothysc@gmail.com
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

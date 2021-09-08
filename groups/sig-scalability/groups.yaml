@@ -1,0 +1,98 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+  - email-id: k8s-infra-sig-scalability-oncall@kubernetes.io
+    name: k8s-infra-sig-scalability-oncall
+    description: |-
+      ACL for oncall/break-glass access to projects used by sig-scalability tests (k8s-infra-e2e-boskos-scale-*)
+    settings:
+      ReconcileMembers: "true"
+    members:
+      # scalability-oncall
+      - jkaniuk@google.com
+      - jprzychodzen@google.com
+      - jupblb@google.com
+      - maciejborsz@google.com
+      - marcelzieba@google.com
+      - zawodny@google.com
+      # sig-scalability leads
+      - jeedigv@amazon.com
+      - mmatejczyk@google.com
+      - wojtekt@google.com
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+
+  - email-id: k8s-infra-rbac-perfdash@kubernetes.io
+    name: k8s-infra-rbac-perfdash
+    description: |-
+      Grants access to the `namespace-user` role in the `perfdash` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - jkaniuk@google.com
+      - jprzychodzen@google.com
+      - jupblb@google.com
+      - maciejborsz@google.com
+      - marcelzieba@google.com
+      - mmatejczyk@google.com
+      - shyam123.jvs95@gmail.com
+      - wojtekt@google.com
+      - zawodny@google.com
+
+  - email-id: k8s-infra-rbac-triageparty-scalability@kubernetes.io
+    name: k8s-infra-rbac-triageparty-scalability
+    description: |-
+      ACL for Bug Triage Scalability Team
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - mmatejczyk@google.com
+      - shyam123.jvs95@gmail.com
+      - wojtekt@google.com
+      - marcelzieba@google.com
