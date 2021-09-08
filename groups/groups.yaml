@@ -450,7 +450,6 @@ groups:
       - ktbry@google.com
       - nikitaraghunath@gmail.com
       - rajula96reddy@gmail.com
-      - spiffxp@google.com
       - spiffxp@gmail.com
       - thockin@google.com
 
@@ -465,7 +464,6 @@ groups:
       - deads@redhat.com
       - wojtekt@google.com
       - skuznets@redhat.com
-      - spiffxp@gmail.com
 
   - email-id: k8s-infra-sig-scalability-oncall@kubernetes.io
     name: k8s-infra-sig-scalability-oncall
@@ -958,7 +956,6 @@ groups:
       - davanum@gmail.com
       - james@munnelly.eu
       - thockin@google.com
-      - spiffxp@google.com
       - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
@@ -985,7 +982,6 @@ groups:
       - ihor@cncf.io
       - justinsb@google.com
       - thockin@google.com
-      - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-kubeadm@kubernetes.io
     name: k8s-infra-staging-kubeadm
