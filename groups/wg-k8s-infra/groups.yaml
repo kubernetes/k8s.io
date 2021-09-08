@@ -275,6 +275,16 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-gcs-access-logs@kubernetes.io
+    name: k8s-infra-gcs-access-logs
+    description: |-
+      ACL for access to gcs bucket `k8s-artifacts-gcslogs` for analysis.
+      Membership restricted to those who are authorized to handle PII
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-ii-coop@kubernetes.io
+
   - email-id: k8s-infra-group-admins@kubernetes.io
     name: k8s-infra-group-admins
     description: |-
