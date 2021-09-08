@@ -216,19 +216,6 @@ groups:
   # Each group here governs access to one staging project.
   #
 
-  - email-id: k8s-infra-staging-apisnoop@kubernetes.io
-    name: k8s-infra-staging-apisnoop
-    description: |-
-      ACL for apisnoop images
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    members:
-      - caleb@ii.coop
-      - hh@ii.coop
-      - jbelamaric@google.com
-      - zz@ii.coop
-
   - email-id: k8s-infra-staging-autoscaling@kubernetes.io
     name: k8s-infra-staging-autoscaling
     description: |-
