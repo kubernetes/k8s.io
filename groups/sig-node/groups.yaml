@@ -19,6 +19,21 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-cri-tools@kubernetes.io
+    name: k8s-infra-staging-cri-tools
+    description: |-
+      ACL for staging cri-tools images
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - dawnchen@google.com
+      - decarr@redhat.com
+      - feiskyer@gmail.com
+      - saschagrunert@gmail.com
+      - timallclair@gmail.com
+      - thockin@google.com
+
   #
   # k8s-infra gcs write access
   #

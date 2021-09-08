@@ -22,7 +22,6 @@ restrictions:
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-cpa@kubernetes.io$"
-      - "^k8s-infra-staging-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-csi@kubernetes.io$"
       - "^k8s-infra-staging-csi-secrets-store@kubernetes.io$"
       - "^k8s-infra-staging-descheduler@kubernetes.io$"
@@ -112,6 +111,7 @@ restrictions:
   - path: "sig-node/groups.yaml"
     allowedGroups:
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
+      - "^k8s-infra-staging-cri-tools@kubernetes.io$"
   - path: "sig-release/groups.yaml"
     allowedGroups:
       - "^k8s-infra-rbac-publishing-bot@kubernetes.io$"
