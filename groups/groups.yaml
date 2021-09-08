@@ -174,23 +174,6 @@ groups:
   # Each group here governs access to one GCS bucket.
   #
 
-  - email-id: k8s-infra-push-cni@kubernetes.io
-    name: k8s-infra-push-cni
-    description: |-
-      ACL for pushing CNI artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-release-editors@kubernetes.io
-      - brucema19901024@gmail.com
-      - bryan@weave.works
-      - cdc@redhat.com
-      - dcbw@redhat.com
-      - grosenhouse@pivotal.io
-      - matt@tigera.io
-      - mcambria@redhat.com
-      - thockin@google.com
-
   - email-id: k8s-infra-push-cri-tools@kubernetes.io
     name: k8s-infra-push-cri-tools
     description: |-

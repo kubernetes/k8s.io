@@ -13,7 +13,6 @@ restrictions:
       - "^election@kubernetes.io$"
       - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-artifact-security@kubernetes.io$"
-      - "^k8s-infra-push-cni@kubernetes.io$"
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-sig-docs@kubernetes.io$"
       - "^k8s-infra-rbac-cert-manager@kubernetes.io$"
@@ -104,6 +103,9 @@ restrictions:
   - path: "sig-docs/groups.yaml"
     allowedGroups:
       - "^blog@kubernetes.io$"
+  - path: "sig-network/groups.yaml"
+    allowedGroups:
+      - "^k8s-infra-push-cni@kubernetes.io$"
   - path: "sig-release/groups.yaml"
     allowedGroups:
       - "^k8s-infra-rbac-triageparty-release@kubernetes.io$"
