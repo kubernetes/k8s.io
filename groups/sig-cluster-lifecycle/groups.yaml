@@ -240,6 +240,18 @@ groups:
       - trhoden@gmail.com
       - luoh@vmware.com
 
+  - email-id: k8s-infra-staging-kops@kubernetes.io
+    name: k8s-infra-staging-kops
+    description: |-
+      ACL for staging KOPS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - justinsb@google.com
+      - thockin@google.com
+
   #
   # k8s-infra gcs write access
   #

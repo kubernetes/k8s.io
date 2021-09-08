@@ -319,18 +319,6 @@ groups:
       - wfender@google.com
       - ygui@google.com
 
-  - email-id: k8s-infra-staging-kops@kubernetes.io
-    name: k8s-infra-staging-kops
-    description: |-
-      ACL for staging KOPS
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - justinsb@google.com
-      - thockin@google.com
-
   - email-id: k8s-infra-staging-kubeadm@kubernetes.io
     name: k8s-infra-staging-kubeadm
     description: |-
