@@ -19,6 +19,23 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-sig-storage@kubernetes.io
+    name: k8s-infra-staging-sig-storage
+    description: |-
+      ACL for staging sig storage artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - saadali@google.com
+      - msau@google.com
+      - xingyang105@gmail.com
+      - jsafrane@redhat.com
+      - mattwon@amazon.com
+      - kiran.mova@mayadata.io
+      - humble.devassy@gmail.com
+      - patrick.ohly@intel.com
+      - jinxu@google.com
 
   #
   # k8s-infra gcs write access
