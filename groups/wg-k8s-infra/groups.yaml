@@ -108,6 +108,22 @@ groups:
     members:
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
 
+  - email-id: k8s-infra-rbac-k8s-io-prod@kubernetes.io
+    name: k8s-infra-rbac-k8s-io-prod
+    description: |-
+      Grants access to the `namespace-user` role in the `k8s-io-prod` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - antonio.ojea.garcia@gmail.com
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - nikhitaraghunath@gmail.com
+      - spiffxp@gmail.com
+      - thockin@google.com
+
   - email-id: k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
     name: k8s-infra-rbac-kubernetes-external-secrets
     description: |-

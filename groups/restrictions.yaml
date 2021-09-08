@@ -13,7 +13,6 @@ restrictions:
       - "^election@kubernetes.io$"
       - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-artifact-security@kubernetes.io$"
-      - "^k8s-infra-rbac-k8s-io-prod@kubernetes.io$"
       - "^k8s-infra-rbac-perfdash@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-scalability@kubernetes.io$"
@@ -172,5 +171,6 @@ restrictions:
       - "^k8s-infra-group-admins@kubernetes.io$"
       - "^k8s-infra-rbac-cert-manager@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-canary@kubernetes.io$"
+      - "^k8s-infra-rbac-k8s-io-prod@kubernetes.io$"
       - "^k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
