@@ -7,6 +7,10 @@ restrictions:
       - "^distributors-announce@kubernetes.io$"
       - "^security@kubernetes.io$"
       - "^security-discuss-private@kubernetes.io$"
+  - path: "committee-steering/groups.yaml"
+    allowedGroups:
+      - "^steering-private@kubernetes.io$"
+      - "^steering@kubernetes.io$"
   - path: "groups.yaml"
     allowedGroups:
       - "^leads@kubernetes.io$"
@@ -156,10 +160,6 @@ restrictions:
       - "^k8s-infra-rbac-gcsweb@kubernetes.io$"
       - "^k8s-infra-rbac-kettle@kubernetes.io$"
       - "^k8s-infra-rbac-prow@kubernetes.io$"
-  - path: "steering/groups.yaml"
-    allowedGroups:
-      - "^steering-private@kubernetes.io$"
-      - "^steering@kubernetes.io$"
   - path: "wg-k8s-infra/groups.yaml"
     allowedGroups:
       - "^k8s-infra-alerts@kubernetes.io$"
