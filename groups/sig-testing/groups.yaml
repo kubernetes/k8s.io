@@ -58,7 +58,6 @@ groups:
     - davanum@gmail.com
     - justinsb@google.com
     - thockin@google.com
-    - spiffxp@google.com
     - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-k8s-gsm-tools@kubernetes.io
@@ -70,7 +69,6 @@ groups:
     members:
     - bentheelder@google.com
     - shanefu@google.com
-    - spiffxp@google.com
     - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-kind@kubernetes.io
@@ -94,7 +92,7 @@ groups:
     members:
     - amwat@google.com
     - bentheelder@google.com
-    - spiffxp@google.com
+    - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-test-infra@kubernetes.io
     name: k8s-infra-staging-test-infra
