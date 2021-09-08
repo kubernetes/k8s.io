@@ -252,6 +252,17 @@ groups:
       - justinsb@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-staging-kubeadm@kubernetes.io
+    name: k8s-infra-staging-kubeadm
+    description: |-
+      ACL for staging kubeadm
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - timothysc@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+
   #
   # k8s-infra gcs write access
   #

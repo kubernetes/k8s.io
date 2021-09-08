@@ -319,17 +319,6 @@ groups:
       - wfender@google.com
       - ygui@google.com
 
-  - email-id: k8s-infra-staging-kubeadm@kubernetes.io
-    name: k8s-infra-staging-kubeadm
-    description: |-
-      ACL for staging kubeadm
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - timothysc@gmail.com
-      - fabrizio.pandini@gmail.com
-      - neolit123@gmail.com
-
   - email-id: k8s-infra-staging-multitenancy@kubernetes.io
     name: k8s-infra-staging-multitenancy
     description: |-
