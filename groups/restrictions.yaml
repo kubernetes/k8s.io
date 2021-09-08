@@ -18,7 +18,6 @@ restrictions:
       - "^k8s-infra-staging-provider-aws@kubernetes.io$"
       - "^k8s-infra-staging-provider-openstack@kubernetes.io$"
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
-      - "^k8s-infra-staging-cluster-addons@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-cpa@kubernetes.io$"
       - "^k8s-infra-staging-cri-tools@kubernetes.io$"
@@ -88,6 +87,7 @@ restrictions:
       - "^k8s-infra-staging-cluster-api-azure@kubernetes.io$"
       - "^k8s-infra-staging-cluster-api-gcp@kubernetes.io$"
       - "^k8s-infra-staging-cluster-api-nested@kubernetes.io$"
+      - "^k8s-infra-staging-cluster-addons@kubernetes.io$"
   - path: "sig-contributor-experience/groups.yaml"
     allowedGroups:
       - "^community@kubernetes.io$"

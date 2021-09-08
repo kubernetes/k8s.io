@@ -248,19 +248,6 @@ groups:
       - andrew@andrewrynhard.com
       - rahul@rmenn.in
 
-  - email-id: k8s-infra-staging-cluster-addons@kubernetes.io
-    name: k8s-infra-staging-cluster-addons
-    description: |-
-      ACL for staging cluster-addons
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - daniel@weave.works
-      - justinsb@google.com
-      - leigh@weave.works
-      - luoh@vmware.com
-      - timothysc@gmail.com
-
   - email-id: k8s-infra-staging-coredns@kubernetes.io
     name: k8s-infra-staging-coredns
     description: |-
