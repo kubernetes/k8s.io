@@ -174,16 +174,7 @@ groups:
   # Each group here governs access to one GCS bucket.
   #
 
-  - email-id: k8s-infra-staging-sig-docs@kubernetes.io
-    name: k8s-infra-staging-sig-docs
-    description: |-
-      ACL for sig docs artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - ameukam@gmail.com
-      - bentheelder@google.com
-      - k8s-sig-docs-leads@googlegroups.com
+
 
   #
   # RBAC groups: k8s-infra-rbac-*
@@ -194,19 +185,6 @@ groups:
   #   settings:
   #     WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
   #
-
-  - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
-    name: k8s-infra-rbac-cert-manager
-    description: |-
-      Grants access to the `namespace-user` role in the `cert-manager` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - ameukam@gmail.com
-      - cblecker@gmail.com
-      - james@munnelly.eu
-      - thockin@google.com
 
   - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
     name: k8s-infra-rbac-k8s-io-canary
