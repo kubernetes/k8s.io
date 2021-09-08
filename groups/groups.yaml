@@ -156,21 +156,6 @@ groups:
       - k8s-infra-rbac-sippy@kubernetes.io
       - k8s-infra-rbac-slack-infra@kubernetes.io
 
-  - email-id: k8s-infra-artifact-admins@kubernetes.io
-    name: k8s-infra-artifact-admins
-    description: |-
-      ACL for artifact-admins, including the artifact auditor
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-release-admins@kubernetes.io
-      - davanum@gmail.com
-      - justinsb@google.com
-      - linusa@google.com
-      - michelle.noorali@gmail.com
-      - spiffxp@google.com
-      - thockin@google.com
-
   - email-id: k8s-infra-artifact-security@kubernetes.io
     name: k8s-infra-artifact-security
     description: |-
