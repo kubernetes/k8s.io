@@ -37,6 +37,19 @@ groups:
       - patrick.ohly@intel.com
       - jinxu@google.com
 
+  - email-id: k8s-infra-staging-csi@kubernetes.io
+    name: k8s-infra-staging-csi
+    description: |-
+      ACL for staging CSI artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - saadali@google.com
+      - msau@google.com
+      - xingyang105@gmail.com
+      - jsafrane@redhat.com
+      - patrick.ohly@intel.com
   #
   # k8s-infra gcs write access
   #

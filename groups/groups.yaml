@@ -229,20 +229,6 @@ groups:
       - thockin@google.com
       - zihongz@google.com
 
-  - email-id: k8s-infra-staging-csi@kubernetes.io
-    name: k8s-infra-staging-csi
-    description: |-
-      ACL for staging CSI artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - saadali@google.com
-      - msau@google.com
-      - xingyang105@gmail.com
-      - jsafrane@redhat.com
-      - patrick.ohly@intel.com
-
   - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
     name: k8s-infra-staging-csi-secrets-store
     description: |-
