@@ -3,25 +3,6 @@
 # group is prefixed with "k8s-infra" to avoid polluting the other existing gsuite
 # mailing lists.
 groups:
-  - email-id: blog@kubernetes.io
-    name: blog
-    description: |-
-      blog editors
-
-      Created via https://github.com/kubernetes/community/issues/3763
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    owners:
-      - jorgec@vmware.com
-      - kaitlynbarnard10@gmail.com
-      - paris.pittman@gmail.com
-      - killen.bob@gmail.com
-      - zcorleissen@linuxfoundation.org
-    members:
-      - codyclark@google.com
-      - vonguard@gmail.com
-
   - email-id: leads@kubernetes.io
     name: leads
     description: |-

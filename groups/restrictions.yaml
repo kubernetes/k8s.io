@@ -9,7 +9,6 @@ restrictions:
       - "^security-discuss-private@kubernetes.io$"
   - path: "groups.yaml"
     allowedGroups:
-      - "^blog@kubernetes.io$"
       - "^leads@kubernetes.io$"
       - "^election@kubernetes.io$"
       - "^github@kubernetes.io$"
@@ -107,6 +106,9 @@ restrictions:
       - "^community@kubernetes.io$"
       - "^stream-team@kubernetes.io$"
       - "^lwkd@kubernetes.io$"
+  - path: "sig-docs/groups.yaml"
+    allowedGroups:
+      - "^blog@kubernetes.io$"
   - path: "sig-release/groups.yaml"
     allowedGroups:
       - "^k8s-infra-rbac-triageparty-release@kubernetes.io$"
