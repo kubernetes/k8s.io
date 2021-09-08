@@ -186,16 +186,6 @@ groups:
   #     WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
   #
 
-  - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
-    name: k8s-infra-rbac-k8s-io-canary
-    description: |-
-      Grants access to the `namespace-user` role in the `k8s-io-canary` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
-
   - email-id: k8s-infra-rbac-k8s-io-prod@kubernetes.io
     name: k8s-infra-rbac-k8s-io-prod
     description: |-
