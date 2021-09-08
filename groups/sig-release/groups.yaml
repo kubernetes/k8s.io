@@ -182,6 +182,17 @@ groups:
     members:
       - k8s-infra-release-editors@kubernetes.io
 
+  - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
+    name: k8s-infra-staging-publishing-bot
+    description: |-
+      ACL for staging publishing-bot
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+
   - email-id: release-comms@kubernetes.io
     name: release-comms
     description: |-

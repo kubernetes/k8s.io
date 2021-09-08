@@ -439,17 +439,6 @@ groups:
       - teratipally@google.com
       - zhenw@google.com
 
-  - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
-    name: k8s-infra-staging-publishing-bot
-    description: |-
-      ACL for staging publishing-bot
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - nikitaraghunath@gmail.com
-      - stefan.schimanski@gmail.com
-
   - email-id: k8s-infra-staging-scheduler-plugins@kubernetes.io
     name: k8s-infra-staging-scheduler-plugins
     description: |-
