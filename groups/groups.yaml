@@ -195,28 +195,6 @@ groups:
   # Each group here governs access to one staging project.
   #
 
-  - email-id: k8s-infra-staging-provider-aws@kubernetes.io
-    name: k8s-infra-staging-provider-aws
-    description: |-
-      ACL for external AWS Cloud Provider
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - justinsb@google.com
-      - kim.andrewsy@gmail.com
-      - nturner4@gmail.com
-
-  - email-id: k8s-infra-staging-provider-openstack@kubernetes.io
-    name: k8s-infra-staging-provider-openstack
-    description: |-
-      ACL for external Cloud Provider OpenStack
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - anusha.iiitm@gmail.com
-      - anlin.kong@gmail.com
-      - glaubich@gmail.com
-
   - email-id: k8s-infra-staging-bootkube@kubernetes.io
     name: k8s-infra-staging-bootkube
     description: |-
@@ -515,22 +493,6 @@ groups:
       - patrik@ptrk.io
       - teratipally@google.com
       - zhenw@google.com
-
-  - email-id: k8s-infra-staging-provider-azure@kubernetes.io
-    name: k8s-infra-staging-provider-azure
-    description: |-
-      ACL for staging cloud provider Azure
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - t-qini@microsoft.com
-      - feiskyer@gmail.com
-      - k8s@auggie.dev
-      - xiazhang@microsoft.com
-      - bburns@microsoft.com
-      - doliu@microsoft.com
-      - khnidk@microsoft.com
-      - Ritazh@microsoft.com
 
   - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
     name: k8s-infra-staging-publishing-bot

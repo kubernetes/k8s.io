@@ -19,8 +19,6 @@ restrictions:
       - "^k8s-infra-artifact-security@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
       - "^k8s-infra-rbac-sippy@kubernetes.io$"
-      - "^k8s-infra-staging-provider-aws@kubernetes.io$"
-      - "^k8s-infra-staging-provider-openstack@kubernetes.io$"
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-cpa@kubernetes.io$"
@@ -45,7 +43,6 @@ restrictions:
       - "^k8s-infra-staging-networking@kubernetes.io$"
       - "^k8s-infra-staging-nfd@kubernetes.io$"
       - "^k8s-infra-staging-npd@kubernetes.io$"
-      - "^k8s-infra-staging-provider-azure@kubernetes.io$"
       - "^k8s-infra-staging-publishing-bot@kubernetes.io$"
       - "^k8s-infra-staging-scheduler-plugins@kubernetes.io$"
       - "^k8s-infra-staging-sched-simulator@kubernetes.io$"
@@ -74,6 +71,11 @@ restrictions:
   - path: "sig-autoscaling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-autoscaling@kubernetes.io$"
+  - path: "sig-cloud-provider/groups.yaml"
+    allowedGroups:
+      - "^k8s-infra-staging-provider-aws@kubernetes.io$"
+      - "^k8s-infra-staging-provider-openstack@kubernetes.io$"
+      - "^k8s-infra-staging-provider-azure@kubernetes.io$"
   - path: "sig-cluster-lifecycle/groups.yaml"
     allowedGroups:
       - "^sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io$"
