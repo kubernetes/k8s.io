@@ -18,6 +18,26 @@ groups:
   # Membership should correspond roughly to subproject owners for the set of
   # subproject artifacts being stored in a given staging project
   #
+  
+  - email-id: k8s-infra-staging-networking@kubernetes.io
+    name: k8s-infra-staging-networking
+    description: |-
+      ACL for staging networking images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bannai@google.com
+      - bowei@google.com
+      - jsand@google.com
+      - mixia@google.com
+      - pavithrar@google.com
+      - thockin@google.com
+      - rramkumar@google.com
+      - shance@google.com
+      - smatti@google.com
+      - srepakula@google.com
+      - varunmar@google.com
+      - zihongz@google.com
 
   #
   # k8s-infra gcs write access
