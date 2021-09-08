@@ -19,6 +19,17 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
+    name: k8s-infra-staging-kube-state-metrics
+    description: |-
+      ACL for kube-state-metrics
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cosiclili@gmail.com
+      - fbranczyk@gmail.com
+      - tariq181290@gmail.com
+
   - email-id: k8s-infra-staging-prometheus-adapter@kubernetes.io
     name: k8s-infra-staging-prometheus-adapter
     description: |-

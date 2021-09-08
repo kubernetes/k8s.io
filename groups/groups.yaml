@@ -342,17 +342,6 @@ groups:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
 
-  - email-id: k8s-infra-staging-kube-state-metrics@kubernetes.io
-    name: k8s-infra-staging-kube-state-metrics
-    description: |-
-      ACL for kube-state-metrics
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - cosiclili@gmail.com
-      - fbranczyk@gmail.com
-      - tariq181290@gmail.com
-
   - email-id: k8s-infra-staging-metrics-server@kubernetes.io
     name: k8s-infra-staging-metrics-server
     description: |-
