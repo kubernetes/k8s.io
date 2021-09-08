@@ -38,6 +38,16 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-sig-docs@kubernetes.io
+    name: k8s-infra-staging-sig-docs
+    description: |-
+      ACL for sig docs artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - bentheelder@google.com
+      - k8s-sig-docs-leads@googlegroups.com
 
   #
   # k8s-infra owners for sig-owned subprojects
