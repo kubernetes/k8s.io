@@ -240,18 +240,6 @@ groups:
       - rita.z.zhang@gmail.com
       - tommymurphy@google.com
 
-  - email-id: k8s-infra-staging-descheduler@kubernetes.io
-    name: k8s-infra-staging-descheduler
-    description: |-
-      ACL for staging descheduler
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - avesh.ncsu@gmail.com
-      - davanum@gmail.com
-      - mdame@redhat.com
-      - ravisantoshgudimetla@gmail.com
-
   - email-id: k8s-infra-staging-dns@kubernetes.io
     name: k8s-infra-staging-dns
     description: |-
