@@ -1,4 +1,12 @@
 groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
   - email-id: sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-alerts
     description: |-
@@ -12,6 +20,7 @@ groups:
       - jdetiberus@equinix.com
       - jeewan@vmware.com
       - sbueringer@gmail.com
+
   - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubeadm-alerts
     description: |-
@@ -26,3 +35,41 @@ groups:
     owners:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
