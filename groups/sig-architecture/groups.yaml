@@ -1,0 +1,129 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+  
+
+  #
+  # k8s-infra-conform gcs write access
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+ 
+  - email-id: k8s-infra-conform-inspur@kubernetes.io
+    name: k8s-infra-conform-inspur
+    description: |-
+      ACL for conformance Inspur
+    settings:
+      AllowExternalMembers: "true"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanInvite: "NONE_CAN_INVITE"
+      WhoCanAdd: "NONE_CAN_ADD"
+      WhoCanApproveMembers: "NONE_CAN_APPROVE"
+      WhoCanModifyMembers: "NONE"
+      WhoCanModerateMembers: "NONE"
+      ReconcileMembers: "true"
+    members:
+      - 13906102@qq.com # Google account of shiguangyin@inspur.com
+      - ydcool2012@gmail.com # Google account of yindongchao@inspur.com
+
+  - email-id: k8s-infra-conform-capi-openstack@kubernetes.io
+    name: k8s-infra-conform-capi-openstack
+    description: |-
+      ACL for conformance CAPI OpenStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jichenjc@cn.ibm.com
+      - sbueringer@gmail.com
+
+  - email-id: k8s-infra-conform-cri-o@kubernetes.io
+    name: k8s-infra-conform-cri-o
+    description: |-
+      ACL for conformance CRI-O
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mpatel@redhat.com
+      - pehunt@redhat.com
+      - saschagrunert@gmail.com
+
+  - email-id: k8s-infra-conform-huaweicloud@kubernetes.io
+    name: k8s-infra-conform-huaweicloud
+    description: |-
+      ACL for conformance HUAWEI CLOUD
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - kevinwzf0126@gmail.com # Google account of wangzefeng@huawei.com
+      - qdurenhongcai@gmail.com # Google account of renhongcai@huawei.com
+
+  - email-id: k8s-infra-conform-provider-openstack@kubernetes.io
+    name: k8s-infra-conform-provider-openstack
+    description: |-
+      ACL for conformance of external Cloud Provider OpenStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anusha.iiitm@gmail.com
+      - anlin.kong@gmail.com
+      - glaubich@gmail.com
+
+  - email-id: k8s-infra-conform-s390x-k8s@kubernetes.io
+    name: k8s-infra-conform-s390x-k8s
+    description: |-
+      ACL for conformance s390x-k8s
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aborkar@us.ibm.com
+      - cinderel@ca.ibm.com
+      - gsalgaon@us.ibm.com
+      - vitthalb@us.ibm.com
