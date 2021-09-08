@@ -198,26 +198,6 @@ groups:
       - kn.verey@gmail.com
       - maszulik@redhat.com
 
-  - email-id: k8s-infra-rbac-slack-infra@kubernetes.io
-    name: k8s-infra-rbac-slack-infra
-    description: |-
-      Grants access to the `namespace-user` role in the `slack-infra` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - ameukam@gmail.com
-      - cblecker@gmail.com
-      - ctadeu@gmail.com
-      - davanum@gmail.com
-      - jeef111x@gmail.com
-      - killen.bob@gmail.com
-      - ktbry@google.com
-      - nikitaraghunath@gmail.com
-      - rajula96reddy@gmail.com
-      - spiffxp@gmail.com
-      - thockin@google.com
-
   - email-id: k8s-infra-rbac-sippy@kubernetes.io
     name: k8s-infra-rbac-sippy
     description: |-

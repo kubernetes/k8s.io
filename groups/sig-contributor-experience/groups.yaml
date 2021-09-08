@@ -106,3 +106,23 @@ groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
   # - must be members of gke-security-groups@kubernetes.io
+
+  - email-id: k8s-infra-rbac-slack-infra@kubernetes.io
+    name: k8s-infra-rbac-slack-infra
+    description: |-
+      Grants access to the `namespace-user` role in the `slack-infra` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - ameukam@gmail.com
+      - cblecker@gmail.com
+      - ctadeu@gmail.com
+      - davanum@gmail.com
+      - jeef111x@gmail.com
+      - killen.bob@gmail.com
+      - ktbry@google.com
+      - nikitaraghunath@gmail.com
+      - rajula96reddy@gmail.com
+      - spiffxp@gmail.com
+      - thockin@google.com

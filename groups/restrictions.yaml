@@ -14,7 +14,6 @@ restrictions:
       - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-artifact-security@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
-      - "^k8s-infra-rbac-slack-infra@kubernetes.io$"
       - "^k8s-infra-rbac-sippy@kubernetes.io$"
       - "^k8s-infra-sig-scalability-oncall@kubernetes.io$"
       - "^k8s-infra-conform-inspur@kubernetes.io$"
@@ -92,6 +91,7 @@ restrictions:
       - "^github@kubernetes.io$"
       - "^lwkd@kubernetes.io$"
       - "^stream-team@kubernetes.io$"
+      - "^k8s-infra-rbac-slack-infra@kubernetes.io$"
   - path: "sig-docs/groups.yaml"
     allowedGroups:
       - "^blog@kubernetes.io$"
