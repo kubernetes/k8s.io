@@ -13,7 +13,6 @@ restrictions:
       - "^election@kubernetes.io$"
       - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-artifact-security@kubernetes.io$"
-      - "^k8s-infra-rbac-perfdash@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-scalability@kubernetes.io$"
       - "^k8s-infra-rbac-publishing-bot@kubernetes.io$"
@@ -128,6 +127,9 @@ restrictions:
       - "^sig-release-leads@kubernetes.io$"
       - "^release-team@kubernetes.io$"
       - "^release-team-shadows@kubernetes.io$"
+  - path: "sig-scalability/groups.yaml"
+    allowedGroups:
+      - "^k8s-infra-rbac-perfdash@kubernetes.io$"
   - path: "sig-security/groups.yaml"
     allowedGroups:
       - "^security-tooling-private@kubernetes.io$"
