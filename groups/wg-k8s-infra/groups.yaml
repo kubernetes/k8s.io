@@ -162,6 +162,18 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-bigquery-admins@kubernetes.io
+    name: k8s-infra-bigquery-admins
+    description: |-
+      ACL for bigquery-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - spiffxp@google.com
+      - thockin@google.com
+
   - email-id: k8s-infra-cluster-admins@kubernetes.io
     name: k8s-infra-cluster-admins
     description: |-
