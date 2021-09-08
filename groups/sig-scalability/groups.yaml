@@ -42,6 +42,24 @@ groups:
   # required for membership in these groups.
   #
 
+  - email-id: k8s-infra-sig-scalability-oncall@kubernetes.io
+    name: k8s-infra-sig-scalability-oncall
+    description: |-
+      ACL for oncall/break-glass access to projects used by sig-scalability tests (k8s-infra-e2e-boskos-scale-*)
+    settings:
+      ReconcileMembers: "true"
+    members:
+      # scalability-oncall
+      - jkaniuk@google.com
+      - jprzychodzen@google.com
+      - jupblb@google.com
+      - maciejborsz@google.com
+      - marcelzieba@google.com
+      - zawodny@google.com
+      # sig-scalability leads
+      - jeedigv@amazon.com
+      - mmatejczyk@google.com
+      - wojtekt@google.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
