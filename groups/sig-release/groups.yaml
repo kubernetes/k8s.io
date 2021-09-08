@@ -1,23 +1,4 @@
 groups:
-  - email-id: k8s-infra-rbac-triageparty-release@kubernetes.io
-    name: k8s-infra-rbac-triageparty-release
-    description: |-
-      ACL for Bug Triage Release Team
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-    members:
-      - k8s-infra-release-viewers@kubernetes.io
-      - ameukam@gmail.com
-      - bartek@smykla.com
-      - gveronicalg@gmail.com
-      - jyotima@amazon.com # 1.23 Bug Triage Shadow
-      - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
-      - sanchitac067@gmail.com # 1.23 Bug Triage Shadow
-      - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
-      - voigt.christoph@gmail.com # 1.23 Bug Triage Lead
-      - x.cai@reply.de # 1.23 Bug Triage Shadow
-
   - email-id: k8s-infra-google-build-admins@kubernetes.io
     name: k8s-infra-google-build-admins
     description: |-
@@ -424,3 +405,28 @@ groups:
       - supriyapremkumar1@gmail.com # 1.23 Enhancements Shadow
       - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
       - x.cai@reply.de # 1.23 Bug Triage Shadow
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+ 
+  - email-id: k8s-infra-rbac-triageparty-release@kubernetes.io
+    name: k8s-infra-rbac-triageparty-release
+    description: |-
+      ACL for Bug Triage Release Team
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+      - k8s-infra-release-viewers@kubernetes.io
+      - ameukam@gmail.com
+      - bartek@smykla.com
+      - gveronicalg@gmail.com
+      - jyotima@amazon.com # 1.23 Bug Triage Shadow
+      - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
+      - sanchitac067@gmail.com # 1.23 Bug Triage Shadow
+      - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
+      - voigt.christoph@gmail.com # 1.23 Bug Triage Lead
+      - x.cai@reply.de # 1.23 Bug Triage Shadow
+
