@@ -58,6 +58,70 @@ groups:
       - jsand@google.com
       - zihongz@google.com
 
+  - email-id: k8s-infra-staging-capi-docker@kubernetes.io
+    name: k8s-infra-staging-capi-docker
+    description: |-
+      ACL for staging CAPI for docker
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-capi-ibmcloud@kubernetes.io
+    name: k8s-infra-staging-capi-ibmcloud
+    description: |-
+      ACL for staging CAPI for IBMCloud
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - gyliu513@gmail.com
+      - manjunath.cse@gmail.com
+      - jichenjc@cn.ibm.com
+
+  - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
+    name: k8s-infra-staging-capi-kubeadm
+    description: |-
+      ACL for staging CAPI for kubeadm
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - frostl@vmware.com
+      - goldsteina@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+      - prignanov@vmware.com
+
+  - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
+    name: k8s-infra-staging-capi-openstack
+    description: |-
+      ACL for staging CAPI for OpenStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jichenjc@cn.ibm.com
+      - sbueringer@gmail.com
+
+  - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
+    name: k8s-infra-staging-capi-vsphere
+    description: |-
+      ACL for staging CAPI for vSphere
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - goldsteina@vmware.com
+      - prignanov@vmware.com
+      - jeewan@vmware.com
+      - ytijani@vmware.com
+
   #
   # k8s-infra gcs write access
   #
