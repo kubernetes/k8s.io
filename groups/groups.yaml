@@ -174,21 +174,6 @@ groups:
   # Each group here governs access to one GCS bucket.
   #
 
-  - email-id: k8s-infra-push-cri-tools@kubernetes.io
-    name: k8s-infra-push-cri-tools
-    description: |-
-      ACL for pushing CRI tools artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-release-editors@kubernetes.io
-      - dawnchen@google.com
-      - decarr@redhat.com
-      - feiskyer@gmail.com
-      - saschagrunert@gmail.com
-      - timallclair@gmail.com
-      - thockin@google.com
-
   - email-id: k8s-infra-staging-sig-docs@kubernetes.io
     name: k8s-infra-staging-sig-docs
     description: |-
