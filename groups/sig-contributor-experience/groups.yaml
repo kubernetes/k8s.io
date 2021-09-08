@@ -128,6 +128,21 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-slack-infra@kubernetes.io
+    name: k8s-infra-staging-slack-infra
+    description: |-
+      ACL for staging Slack Infra
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - ctadeu@gmail.com
+      - jeef111x@gmail.com
+      - killen.bob@gmail.com
+      - ktbry@google.com
+      - james@munnelly.eu
+      - nikitaraghunath@gmail.com
+      - rajula96reddy@gmail.com
 
   #
   # k8s-infra owners for sig-owned subprojects
