@@ -53,6 +53,17 @@ groups:
   # required for membership in these groups.
   #
 
+  - email-id: k8s-infra-code-organization@kubernetes.io
+    name: k8s-infra-code-organization
+    description: |-
+      ACL for managing snyk CI job secrets under code-organization
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - davanum@gmail.com
+      - liggitt@google.com
+      - shaikhnavid14@gmail.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster

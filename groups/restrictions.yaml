@@ -56,7 +56,6 @@ restrictions:
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
       - "^k8s-infra-staging-kustomize@kubernetes.io$"
       - "^k8s-infra-ii-coop@kubernetes.io$"
-      - "^k8s-infra-code-organization@kubernetes.io$"
       - "^k8s-infra-staging-cloud-provider-ibm@kubernetes.io$"
   - path: "sig-architecture/groups.yaml"
     allowedGroups:
@@ -67,6 +66,7 @@ restrictions:
       - "^k8s-infra-conform-provider-openstack@kubernetes.io$"
       - "^k8s-infra-conform-s390x-k8s@kubernetes.io$"
       - "^k8s-infra-staging-apisnoop@kubernetes.io$"
+      - "^k8s-infra-code-organization@kubernetes.io$"
   - path: "sig-autoscaling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-autoscaling@kubernetes.io$"
