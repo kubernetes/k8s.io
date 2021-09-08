@@ -607,20 +607,6 @@ groups:
       - bowei@google.com
       - thockin@google.com
 
-  - email-id: k8s-infra-staging-cloud-provider-gcp@kubernetes.io
-    name: k8s-infra-staging-cloud-provider-gcp
-    description: |-
-      ACL for pushing GCP artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - msau@google.com
-      - saadali@google.com
-      - wfender@google.com
-      - mattcary@google.com
-      - saikatroyc@google.com
-      - jinxu@google.com
-
   - email-id: k8s-infra-staging-sp-operator@kubernetes.io
     name: k8s-infra-staging-sp-operator
     description: |-
@@ -668,13 +654,3 @@ groups:
       - riaan@ii.coop
       - stephen@ii.coop
       - zz@ii.coop
-
-  - email-id: k8s-infra-staging-cloud-provider-ibm@kubernetes.io
-    name: k8s-infra-staging-cloud-provider-ibm
-    description: |-
-      ACL for pushing IBM artefacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - ambiknai@in.ibm.com
-      - arahamad@in.ibm.com
