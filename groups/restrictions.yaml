@@ -11,7 +11,6 @@ restrictions:
     allowedGroups:
       - "^leads@kubernetes.io$"
       - "^election@kubernetes.io$"
-      - "^github@kubernetes.io$"
       - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-artifact-admins@kubernetes.io$"
       - "^k8s-infra-artifact-security@kubernetes.io$"
@@ -104,8 +103,9 @@ restrictions:
   - path: "sig-contributor-experience/groups.yaml"
     allowedGroups:
       - "^community@kubernetes.io$"
-      - "^stream-team@kubernetes.io$"
+      - "^github@kubernetes.io$"
       - "^lwkd@kubernetes.io$"
+      - "^stream-team@kubernetes.io$"
   - path: "sig-docs/groups.yaml"
     allowedGroups:
       - "^blog@kubernetes.io$"
