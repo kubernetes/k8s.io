@@ -1125,7 +1125,6 @@ includedPermissions:
   - serviceusage.quotas.get
   - serviceusage.services.get
   - serviceusage.services.list
-  - serviceusage.services.use
   - source.repos.getIamPolicy
   - source.repos.list
   - spanner.backupOperations.list

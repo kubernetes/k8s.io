@@ -40,6 +40,8 @@ include:
   - roles/run.viewer
   # read access to secrets metadata (not their contents)
   - roles/secretmanager.viewer
+  # read access to service states and operations
+  - roles/serviceusage.serviceUsageViewer
 
   # meta roles (regardless of roles/viewer)
   #
@@ -47,10 +49,6 @@ include:
   - roles/browser
   # *.list and *.getIamPolicy
   - roles/iam.securityReviewer
-  # TODO: Granting serviceusage.services.use on an entire organization
-  #       effectively allows an auditor to use any project they wish
-  #       for billing or quota purposes. This seems... not right.
-  - roles/serviceusage.serviceUsageConsumer
 
   # specific permissions that don't come from a well-scoped pre-defined role
   permissions:
