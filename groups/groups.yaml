@@ -392,19 +392,6 @@ groups:
       - tasha.drew@gmail.com
       - srajakum@amazon.com
 
-  - email-id: k8s-infra-staging-nfd@kubernetes.io
-    name: k8s-infra-staging-nfd
-    description: |-
-      ACL for staging node-feature-discovery (nfd)
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - alexander.kanevskiy@intel.com
-      - carangog@redhat.com
-      - jordanjacobelli04@gmail.com
-      - markus.lehtonen@intel.com
-      - zkosic@redhat.com
-
   - email-id: k8s-infra-staging-npd@kubernetes.io
     name: k8s-infra-staging-npd
     description: |-

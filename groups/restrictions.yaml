@@ -36,7 +36,6 @@ restrictions:
       - "^k8s-infra-staging-metrics-server@kubernetes.io$"
       - "^k8s-infra-staging-prometheus-adapter@kubernetes.io$"
       - "^k8s-infra-staging-multitenancy@kubernetes.io$"
-      - "^k8s-infra-staging-nfd@kubernetes.io$"
       - "^k8s-infra-staging-npd@kubernetes.io$"
       - "^k8s-infra-staging-scheduler-plugins@kubernetes.io$"
       - "^k8s-infra-staging-sched-simulator@kubernetes.io$"
@@ -108,6 +107,7 @@ restrictions:
     allowedGroups:
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-cri-tools@kubernetes.io$"
+      - "^k8s-infra-staging-nfd@kubernetes.io$"
   - path: "sig-release/groups.yaml"
     allowedGroups:
       - "^k8s-infra-rbac-publishing-bot@kubernetes.io$"

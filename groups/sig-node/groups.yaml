@@ -34,6 +34,19 @@ groups:
       - timallclair@gmail.com
       - thockin@google.com
 
+  - email-id: k8s-infra-staging-nfd@kubernetes.io
+    name: k8s-infra-staging-nfd
+    description: |-
+      ACL for staging node-feature-discovery (nfd)
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - alexander.kanevskiy@intel.com
+      - carangog@redhat.com
+      - jordanjacobelli04@gmail.com
+      - markus.lehtonen@intel.com
+      - zkosic@redhat.com
+
   #
   # k8s-infra gcs write access
   #
