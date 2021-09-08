@@ -133,6 +133,7 @@ includedPermissions:
   - automlrecommendations.placements.list
   - automlrecommendations.recommendations.list
   - autoscaling.sites.getIamPolicy
+  - baremetalsolution.instances.list
   - bigquery.bireservations.get
   - bigquery.capacityCommitments.get
   - bigquery.capacityCommitments.list
@@ -281,8 +282,17 @@ includedPermissions:
   - cloudasset.assets.searchAllResources
   - cloudasset.feeds.list
   - cloudbuild.builds.list
+  - cloudbuild.workerpools.list
   - clouddebugger.breakpoints.list
   - clouddebugger.debuggees.list
+  - clouddeploy.deliveryPipelines.getIamPolicy
+  - clouddeploy.deliveryPipelines.list
+  - clouddeploy.locations.list
+  - clouddeploy.operations.list
+  - clouddeploy.releases.list
+  - clouddeploy.rollouts.list
+  - clouddeploy.targets.getIamPolicy
+  - clouddeploy.targets.list
   - cloudfunctions.functions.getIamPolicy
   - cloudfunctions.functions.list
   - cloudfunctions.locations.list
@@ -342,6 +352,13 @@ includedPermissions:
   - cloudtranslate.glossaries.list
   - cloudtranslate.locations.list
   - cloudtranslate.operations.list
+  - cloudvolumesgcp-api.netapp.com/activeDirectories.list
+  - cloudvolumesgcp-api.netapp.com/ipRanges.list
+  - cloudvolumesgcp-api.netapp.com/jobs.list
+  - cloudvolumesgcp-api.netapp.com/regions.list
+  - cloudvolumesgcp-api.netapp.com/serviceLevels.list
+  - cloudvolumesgcp-api.netapp.com/snapshots.list
+  - cloudvolumesgcp-api.netapp.com/volumes.list
   - commerceprice.privateoffers.list
   - composer.environments.list
   - composer.imageversions.list
@@ -355,6 +372,7 @@ includedPermissions:
   - compute.backendBuckets.get
   - compute.backendBuckets.list
   - compute.backendServices.get
+  - compute.backendServices.getIamPolicy
   - compute.backendServices.list
   - compute.commitments.get
   - compute.commitments.list
@@ -452,6 +470,7 @@ includedPermissions:
   - compute.publicDelegatedPrefixes.get
   - compute.publicDelegatedPrefixes.list
   - compute.regionBackendServices.get
+  - compute.regionBackendServices.getIamPolicy
   - compute.regionBackendServices.list
   - compute.regionHealthCheckServices.get
   - compute.regionHealthCheckServices.list
@@ -635,6 +654,7 @@ includedPermissions:
   - datamigration.migrationjobs.getIamPolicy
   - datamigration.migrationjobs.list
   - datamigration.operations.list
+  - datapipelines.pipelines.list
   - dataproc.agents.list
   - dataproc.autoscalingPolicies.getIamPolicy
   - dataproc.autoscalingPolicies.list
@@ -849,6 +869,7 @@ includedPermissions:
   - logging.logServices.list
   - logging.logs.list
   - logging.notificationRules.list
+  - logging.operations.get
   - logging.operations.list
   - logging.privateLogEntries.list
   - logging.queries.get
@@ -863,6 +884,8 @@ includedPermissions:
   - managedidentities.domains.list
   - managedidentities.locations.list
   - managedidentities.operations.list
+  - managedidentities.peerings.getIamPolicy
+  - managedidentities.peerings.list
   - managedidentities.sqlintegrations.list
   - memcache.instances.list
   - memcache.locations.list
@@ -926,6 +949,8 @@ includedPermissions:
   - networksecurity.serverTlsPolicies.list
   - networkservices.endpointConfigSelectors.getIamPolicy
   - networkservices.endpointConfigSelectors.list
+  - networkservices.endpointPolicies.getIamPolicy
+  - networkservices.endpointPolicies.list
   - networkservices.httpFilters.getIamPolicy
   - networkservices.httpFilters.list
   - networkservices.httpfilters.getIamPolicy
@@ -989,6 +1014,7 @@ includedPermissions:
   - pubsub.topics.get
   - pubsub.topics.getIamPolicy
   - pubsub.topics.list
+  - pubsublite.operations.list
   - pubsublite.reservations.list
   - pubsublite.subscriptions.list
   - pubsublite.topics.list
@@ -1043,6 +1069,9 @@ includedPermissions:
   - retail.catalogs.list
   - retail.operations.list
   - retail.products.list
+  - riskmanager.operations.list
+  - riskmanager.policies.list
+  - riskmanager.reports.list
   - run.configurations.get
   - run.configurations.list
   - run.locations.list
@@ -1110,6 +1139,8 @@ includedPermissions:
   - spanner.instances.getIamPolicy
   - spanner.instances.list
   - spanner.sessions.list
+  - speech.customClasses.list
+  - speech.phraseSets.list
   - stackdriver.projects.get
   - storage.buckets.get
   - storage.buckets.getIamPolicy
@@ -1118,6 +1149,7 @@ includedPermissions:
   - storage.multipartUploads.list
   - storage.objects.getIamPolicy
   - storage.objects.list
+  - storagetransfer.agentpools.list
   - storagetransfer.jobs.list
   - storagetransfer.operations.list
   - tpu.acceleratortypes.list
