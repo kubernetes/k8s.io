@@ -306,20 +306,6 @@ groups:
       - thockin@google.com
       - michaelg@okkur.org
 
-  - email-id: k8s-infra-staging-infra-tools@kubernetes.io
-    name: k8s-infra-staging-infra-tools
-    description: |-
-      ACL for staging Infra Tools
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - ameukam@gmail.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - james@munnelly.eu
-      - thockin@google.com
-      - spiffxp@gmail.com
-
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
     name: k8s-infra-staging-kas-network-proxy
     description: |-

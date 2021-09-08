@@ -70,6 +70,19 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-infra-tools@kubernetes.io
+    name: k8s-infra-staging-infra-tools
+    description: |-
+      ACL for staging Infra Tools
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - james@munnelly.eu
+      - thockin@google.com
+      - spiffxp@gmail.com
 
   #
   # k8s-infra owners for sig-owned subprojects

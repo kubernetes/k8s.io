@@ -29,7 +29,6 @@ restrictions:
       - "^k8s-infra-staging-examples@kubernetes.io$"
       - "^k8s-infra-staging-external-dns@kubernetes.io$"
       - "^k8s-infra-staging-git-sync@kubernetes.io$"
-      - "^k8s-infra-staging-infra-tools@kubernetes.io$"
       - "^k8s-infra-staging-kas-network-proxy@kubernetes.io$"
       - "^k8s-infra-staging-kops@kubernetes.io$"
       - "^k8s-infra-staging-kubeadm@kubernetes.io$"
@@ -185,4 +184,5 @@ restrictions:
       - "^k8s-infra-rbac-k8s-io-canary@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-prod@kubernetes.io$"
       - "^k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io$"
+      - "^k8s-infra-staging-infra-tools@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
