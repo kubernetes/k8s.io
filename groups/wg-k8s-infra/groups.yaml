@@ -192,6 +192,20 @@ groups:
       - james@munnelly.eu
       - spiffxp@google.com
 
+  - email-id: k8s-infra-dns-admins@kubernetes.io
+    name: k8s-infra-dns-admins
+    description: |-
+      ACL for dns-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - james@munnelly.eu
+      - spiffxp@google.com
+      - thockin@google.com
+
   - email-id: k8s-infra-gcp-accounting@kubernetes.io
     name: k8s-infra-gcp-accounting
     description: |-

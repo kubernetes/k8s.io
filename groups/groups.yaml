@@ -168,20 +168,6 @@ groups:
       - alextc@google.com
       - jsand@google.com
 
-  - email-id: k8s-infra-dns-admins@kubernetes.io
-    name: k8s-infra-dns-admins
-    description: |-
-      ACL for dns-admins
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - james@munnelly.eu
-      - spiffxp@google.com
-      - thockin@google.com
-
   #
   # Push groups: k8s-infra-push-*
   #
