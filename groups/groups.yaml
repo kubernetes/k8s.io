@@ -119,19 +119,6 @@ groups:
       - jim@nirmata.com
       - rficcaglia@gmail.com
 
-  - email-id: election@kubernetes.io
-    name: election
-    description: |-
-      Kubernetes elections committee
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      MembersCanPostAsTheGroup: "true"
-      ReconcileMembers: "true"
-    owners:
-      - ihor@cncf.io
-      - josh@berkus.org
-      - jdumars@gmail.com
-
   # Every RBAC group should be added here.
   - email-id: gke-security-groups@kubernetes.io
     name: gke-security-groups
