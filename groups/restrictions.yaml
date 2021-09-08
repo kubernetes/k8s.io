@@ -14,7 +14,6 @@ restrictions:
       - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-artifact-security@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
-      - "^k8s-infra-rbac-publishing-bot@kubernetes.io$"
       - "^k8s-infra-rbac-slack-infra@kubernetes.io$"
       - "^k8s-infra-rbac-sippy@kubernetes.io$"
       - "^k8s-infra-sig-scalability-oncall@kubernetes.io$"
@@ -105,6 +104,7 @@ restrictions:
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
   - path: "sig-release/groups.yaml"
     allowedGroups:
+      - "^k8s-infra-rbac-publishing-bot@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-release@kubernetes.io$"
       - "^k8s-infra-google-build-admins@kubernetes.io$"
       - "^k8s-infra-release-admins@kubernetes.io$"

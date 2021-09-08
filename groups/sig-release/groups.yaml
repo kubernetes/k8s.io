@@ -410,7 +410,22 @@ groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
   # - must be members of gke-security-groups@kubernetes.io
- 
+
+  - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
+    name: k8s-infra-rbac-publishing-bot
+    description: |-
+      Grants access to the `namespace-user` role in the `publishing-bot` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - ameukam@gmail.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+      - thockin@google.com
+
   - email-id: k8s-infra-rbac-triageparty-release@kubernetes.io
     name: k8s-infra-rbac-triageparty-release
     description: |-
