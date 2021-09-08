@@ -2,7 +2,8 @@ groups:
   #
   # Mailing lists
   #
-  # Each group here represents a mailing list, not intended to govern access
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
   #
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
@@ -56,15 +57,84 @@ groups:
       - spiffxp@gmail.com
       - spiffxp@google.com
       - thockin@google.com
+
   #
-  # Infrastructure ownership
+  # k8s-staging write access for SIG-owned subprojects
   #
-  # Each group here represents potentially privileged access to core parts of
-  # kubernetes project infrastructure. A high level of trust is required for
-  # membership in these groups.
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
   #
 
-  # infrastructure owners
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+
+
+
+  - email-id: k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
+    name: k8s-infra-rbac-kubernetes-external-secrets
+    description: |-
+      Grants access to the `namespace-user` role in the `kubernetes-external-secrets` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - k8s-infra-cluster-admins@kubernetes.io
+
+  #
+  # k8s-infra org-wide infrastructure read-only groups
+  #
+  # Each group here represents read-only access to large amounts of kubernetes
+  # project infrastructure (e.g. all GCP infrastructure, all storage, etc).
+  # Membership is generally open to anyone who is interested, with caveats
+  # that may be raised on a case-by-case basis
+  #
+
+  - email-id: k8s-infra-gcp-auditors@kubernetes.io
+    name: k8s-infra-gcp-auditors
+    description: |-
+      granted read-only access to all GCP infrastructure with the kubernetes.io
+      GCP organization, excluding sensitive/secret values
+
+      access granted via custom organization role audit.viewer
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - adolfo.garcia@uservers.net
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - jdagostino2@gmail.com
+      - k8s-infra-ii-coop@kubernetes.io
+      - spiffxp@gmail.com
+      - thockin@google.com
+      - tjferrara@google.com
+
+  #
+  # k8s-infra org-wide infrastructure admin groups
+  #
+  # Each group here represents highly privileged access large amounts of
+  # kubernetes project infrastructure (e.g. all GCP infrastructure, all AWS
+  # infrastructure, etc.). A high level of trust is required for membership
+  # in these groups
+  #
+
   - email-id: k8s-infra-aws-admins@kubernetes.io
     name: k8s-infra-aws-admins
     description: |-
@@ -111,26 +181,6 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
-  - email-id: k8s-infra-gcp-auditors@kubernetes.io
-    name: k8s-infra-gcp-auditors
-    description: |-
-      granted read-only access to all GCP infrastructure with the kubernetes.io
-      GCP organization, excluding sensitive/secret values
-
-      access granted via custom organization role audit.viewer
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - adolfo.garcia@uservers.net
-      - cblecker@gmail.com
-      - davanum@gmail.com
-      - ihor@cncf.io
-      - jdagostino2@gmail.com
-      - k8s-infra-ii-coop@kubernetes.io
-      - spiffxp@gmail.com
-      - thockin@google.com
-      - tjferrara@google.com
-
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
     name: k8s-infra-gcp-org-admins
     description: |-
@@ -159,13 +209,3 @@ groups:
       - davanum@gmail.com
       - spiffxp@google.com
       - thockin@google.com
-
-  - email-id: k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
-    name: k8s-infra-rbac-kubernetes-external-secrets
-    description: |-
-      Grants access to the `namespace-user` role in the `kubernetes-external-secrets` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - k8s-infra-cluster-admins@kubernetes.io
