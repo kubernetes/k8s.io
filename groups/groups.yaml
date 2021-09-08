@@ -216,24 +216,6 @@ groups:
   # Each group here governs access to one staging project.
   #
 
-  - email-id: k8s-infra-staging-autoscaling@kubernetes.io
-    name: k8s-infra-staging-autoscaling
-    description: |-
-      ACL for staging k8s autoscaling components
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - mwielgus@google.com
-      - lukaszos@google.com
-      - bskiba@google.com
-      - maciekpytel@google.com
-      - vivek.bagade92@gmail.com
-      - aleksandram@google.com
-      - ksiedlecki@google.com
-      - jbartosik@google.com
-      - jtuznik@google.com
-      - danielmk@google.com
-
   - email-id: k8s-infra-staging-provider-aws@kubernetes.io
     name: k8s-infra-staging-provider-aws
     description: |-
