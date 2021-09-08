@@ -34,7 +34,6 @@ restrictions:
       - "^k8s-infra-staging-kubeadm@kubernetes.io$"
       - "^k8s-infra-staging-kube-state-metrics@kubernetes.io$"
       - "^k8s-infra-staging-metrics-server@kubernetes.io$"
-      - "^k8s-infra-staging-prometheus-adapter@kubernetes.io$"
       - "^k8s-infra-staging-multitenancy@kubernetes.io$"
       - "^k8s-infra-staging-sched-simulator@kubernetes.io$"
       - "^k8s-infra-staging-gateway-api@kubernetes.io$"
@@ -97,6 +96,9 @@ restrictions:
     allowedGroups:
       - "^blog@kubernetes.io$"
       - "^k8s-infra-staging-sig-docs@kubernetes.io$"
+  - path: "sig-instrumentation/groups.yaml"
+    allowedGroups:
+      - "^k8s-infra-staging-prometheus-adapter@kubernetes.io$"
   - path: "sig-network/groups.yaml"
     allowedGroups:
       - "^k8s-infra-push-cni@kubernetes.io$"
