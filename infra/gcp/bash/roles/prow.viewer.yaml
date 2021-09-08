@@ -12,6 +12,7 @@ includedPermissions:
   - compute.backendBuckets.get
   - compute.backendBuckets.list
   - compute.backendServices.get
+  - compute.backendServices.getIamPolicy
   - compute.backendServices.list
   - compute.commitments.get
   - compute.commitments.list
@@ -110,6 +111,7 @@ includedPermissions:
   - compute.publicDelegatedPrefixes.get
   - compute.publicDelegatedPrefixes.list
   - compute.regionBackendServices.get
+  - compute.regionBackendServices.getIamPolicy
   - compute.regionBackendServices.list
   - compute.regionHealthCheckServices.get
   - compute.regionHealthCheckServices.list
@@ -354,6 +356,8 @@ includedPermissions:
   - logging.logServiceIndexes.list
   - logging.logServices.list
   - logging.logs.list
+  - logging.operations.get
+  - logging.operations.list
   - logging.queries.create
   - logging.queries.delete
   - logging.queries.get
