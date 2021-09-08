@@ -36,7 +36,7 @@ groups:
       - jbartosik@google.com
       - jtuznik@google.com
       - danielmk@google.com
-  
+
   #
   # k8s-infra gcs write access
   #

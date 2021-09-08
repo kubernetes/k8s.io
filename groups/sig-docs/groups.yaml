@@ -6,7 +6,7 @@ groups:
   # Each group here represents a mailing list for the SIG or its subprojects,
   # and is not intended to govern access to infrastructure
   #
-  
+
   - email-id: blog@kubernetes.io
     name: blog
     description: |-
@@ -62,4 +62,3 @@ groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
   # - must be members of gke-security-groups@kubernetes.io
-

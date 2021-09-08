@@ -156,14 +156,6 @@ groups:
       - jsand@google.com
 
   #
-  # Push groups: k8s-infra-push-*
-  #
-  # Each group here governs access to one GCS bucket.
-  #
-
-
-
-  #
   # RBAC groups: k8s-infra-rbac-*
   #
   # Each group here governs access to one k8s namespace.

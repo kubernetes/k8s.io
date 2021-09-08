@@ -95,7 +95,7 @@ groups:
       - ramamoorthypandiyaraja@gmail.com
       - spiffxp@google.com
       - jberkus@redhat.com
-      - marky.r.jackson@gmail.com 
+      - marky.r.jackson@gmail.com
 
   - email-id: stream-team@kubernetes.io
     name: stream-team
