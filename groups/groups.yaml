@@ -404,19 +404,6 @@ groups:
       - adtac@google.com
       - handbomusic@gmail.com
 
-  - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
-    name: k8s-infra-staging-scl-image-builder
-    description: |-
-      ACL for Sig Cluster Lifecycle Image Builder project
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - moshe.immerman@gmail.com
-      - justinsb@google.com
-      - timothysc@gmail.com
-      - trhoden@gmail.com
-      - luoh@vmware.com
-
   - email-id: k8s-infra-staging-gateway-api@kubernetes.io
     name: k8s-infra-staging-gateway-api
     description: |-
