@@ -61,6 +61,42 @@ groups:
       - jberkus@redhat.com
       - noah@coderanger.net
 
+  - email-id: moderators@kubernetes.io
+    name: moderators
+    description: |-
+      Moderators for various Community properties
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - paris.pittman@gmail.com
+    managers:
+      - alarcj137@gmail.com
+      - contributors@kubernetes.io
+      - dylan.graham@gmail.com
+      - idealhack@gmail.com
+      - ihor@cncf.io
+      - jdumars@gmail.com
+      - jeef111x@gmail.com
+      - jorgec@vmware.com
+      - ktbry@google.com
+      - noah@coderanger.net
+      - killen.bob@gmail.com
+    members:
+      - cblecker@gmail.com
+      - guslees@gmail.com
+      - james@munnelly.eu
+      - jspeed@redhat.com
+      - krajakavitha@gmail.com
+      - lenferinkroy@gmail.com
+      - manjunath.cse@gmail.com
+      - nikitaraghunath@gmail.com
+      - puja@giantswarm.io
+      - ramamoorthypandiyaraja@gmail.com
+      - spiffxp@google.com
+      - jberkus@redhat.com
+      - marky.r.jackson@gmail.com 
+
   - email-id: stream-team@kubernetes.io
     name: stream-team
     description: |-
