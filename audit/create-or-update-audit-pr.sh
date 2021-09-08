@@ -134,9 +134,12 @@ function run_audit() {
     "${audit_dir}/audit-gcp.sh" "$@"
 }
 
-function push_changes_if_any() {
+function list_changes() {
     echo "Identifying changes ..." >&2
-    git status --porcelain "${audit_dir}"
+    git status --porcelain "${audit_dir}" | grep ".*"
+}
+
+function push_changes_if_any() {
     echo "Adding changes ..." >&2
     # TODO: use a branch instead of HEAD?
     git add "${audit_dir}"
@@ -178,8 +181,12 @@ function create_or_update_audit_pr() {
 function main() {
     ensure_dependencies
     run_audit "$@"
-    push_changes_if_any
-    create_or_update_audit_pr
+    if ! list_changes; then
+        echo "No changes found"
+    else
+        push_changes_if_any
+        create_or_update_audit_pr
+    fi
     echo "Done!"
 }
 
