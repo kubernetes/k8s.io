@@ -48,6 +48,16 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-addon-manager@kubernetes.io
+    name: k8s-infra-staging-addon-manager
+    description: |-
+      ACL for staging addon-manager images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jsand@google.com
+      - zihongz@google.com
+
   #
   # k8s-infra gcs write access
   #
