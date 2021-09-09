@@ -246,21 +246,6 @@ groups:
       - tasha.drew@gmail.com
       - srajakum@amazon.com
 
-  - email-id: k8s-infra-staging-gateway-api@kubernetes.io
-    name: k8s-infra-staging-gateway-api
-    description: |-
-      ACL for staging SIG-network gateway api
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - antonio.ojea.garcia@gmail.com
-      - bowei@google.com
-      - cmluciano@us.ibm.com
-      - daneyonhansen@gmail.com
-      - harrybagdi@gmail.com
-      - robertjscott@google.com
-      - thockin@google.com
-
   - email-id: k8s-infra-staging-txtdirect@kubernetes.io
     name: k8s-infra-staging-txtdirect
     description: |-

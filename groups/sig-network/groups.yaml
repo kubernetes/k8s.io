@@ -72,6 +72,21 @@ groups:
       - difazio.raffaele@gmail.com
       - nick@juni.io
 
+  - email-id: k8s-infra-staging-gateway-api@kubernetes.io
+    name: k8s-infra-staging-gateway-api
+    description: |-
+      ACL for staging SIG-network gateway api
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - antonio.ojea.garcia@gmail.com
+      - bowei@google.com
+      - cmluciano@us.ibm.com
+      - daneyonhansen@gmail.com
+      - harrybagdi@gmail.com
+      - robertjscott@google.com
+      - thockin@google.com
+
   #
   # k8s-infra gcs write access
   #
