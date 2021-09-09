@@ -19,47 +19,19 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
-  - email-id: k8s-infra-staging-sig-storage@kubernetes.io
-    name: k8s-infra-staging-sig-storage
+  - email-id: k8s-infra-staging-kustomize@kubernetes.io
+    name: k8s-infra-staging-kustomize
     description: |-
-      ACL for staging sig storage artifacts
+      ACL for k8s-infra-staging-kustomize
     settings:
       ReconcileMembers: "true"
     members:
-      - davanum@gmail.com
-      - saadali@google.com
-      - msau@google.com
-      - xingyang105@gmail.com
-      - jsafrane@redhat.com
-      - mattwon@amazon.com
-      - kiran.mova@mayadata.io
-      - humble.devassy@gmail.com
-      - patrick.ohly@intel.com
-      - jinxu@google.com
-
-  - email-id: k8s-infra-staging-csi@kubernetes.io
-    name: k8s-infra-staging-csi
-    description: |-
-      ACL for staging CSI artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - saadali@google.com
-      - msau@google.com
-      - xingyang105@gmail.com
-      - jsafrane@redhat.com
-      - patrick.ohly@intel.com
-
-  - email-id: k8s-infra-staging-git-sync@kubernetes.io
-    name: k8s-infra-staging-git-sync
-    description: |-
-      ACL for staging git-sync
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - thockin@google.com
-      - michaelg@okkur.org
+      - jeff.regan@gmail.com
+      - donnyxia@google.com
+      - natashasarkar@google.com
+      - extaeger@google.com
+      - samwronski@google.com
+      - kn.verey@gmail.com
   #
   # k8s-infra gcs write access
   #
@@ -71,20 +43,6 @@ groups:
   # Membership should correspond roughly to subproject owners for the set of
   # subproject artifacts being stored in the GCS bucket
   #
-
-  - email-id: k8s-infra-push-csi@kubernetes.io
-    name: k8s-infra-push-csi
-    description: |-
-      ACL for pushing CSI artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - saadali@google.com
-      - msau@google.com
-      - xingyang105@gmail.com
-      - jsafrane@redhat.com
-      - patrick.ohly@intel.com
 
   #
   # k8s-infra owners for sig-owned subprojects

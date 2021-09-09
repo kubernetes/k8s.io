@@ -227,6 +227,53 @@ groups:
       - luoh@vmware.com
       - timothysc@gmail.com
 
+  - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
+    name: k8s-infra-staging-scl-image-builder
+    description: |-
+      ACL for Sig Cluster Lifecycle Image Builder project
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - moshe.immerman@gmail.com
+      - justinsb@google.com
+      - timothysc@gmail.com
+      - trhoden@gmail.com
+      - luoh@vmware.com
+
+  - email-id: k8s-infra-staging-kops@kubernetes.io
+    name: k8s-infra-staging-kops
+    description: |-
+      ACL for staging KOPS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - justinsb@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-staging-kubeadm@kubernetes.io
+    name: k8s-infra-staging-kubeadm
+    description: |-
+      ACL for staging kubeadm
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - timothysc@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+
+  - email-id: k8s-infra-staging-etcdadm@kubernetes.io
+    name: k8s-infra-staging-etcdadm
+    description: |-
+      ACL for staging etcdadm artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+      - dlipovetsky@d2iq.com
+      - neolit123@gmail.com
+
   #
   # k8s-infra gcs write access
   #

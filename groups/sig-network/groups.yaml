@@ -19,6 +19,100 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-networking@kubernetes.io
+    name: k8s-infra-staging-networking
+    description: |-
+      ACL for staging networking images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bannai@google.com
+      - bowei@google.com
+      - jsand@google.com
+      - mixia@google.com
+      - pavithrar@google.com
+      - thockin@google.com
+      - rramkumar@google.com
+      - shance@google.com
+      - smatti@google.com
+      - srepakula@google.com
+      - varunmar@google.com
+      - zihongz@google.com
+
+  - email-id: k8s-infra-staging-cpa@kubernetes.io
+    name: k8s-infra-staging-cpa
+    description: |-
+      ACL for staging cluster-proportional-autoscaler and cluster-proportional-vertical-autoscaler images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bowei@google.com
+      - thockin@google.com
+      - zihongz@google.com
+
+  - email-id: k8s-infra-staging-dns@kubernetes.io
+    name: k8s-infra-staging-dns
+    description: |-
+      ACL for staging kube-dns and node-local-dns images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - zihongz@google.com
+      - bowei@google.com
+      - pavithrar@google.com
+
+  - email-id: k8s-infra-staging-external-dns@kubernetes.io
+    name: k8s-infra-staging-external-dns
+    description: |-
+      ACL for staging External DNS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - martin.linkhorst+github.com@posteo.de
+      - difazio.raffaele@gmail.com
+      - nick@juni.io
+
+  - email-id: k8s-infra-staging-gateway-api@kubernetes.io
+    name: k8s-infra-staging-gateway-api
+    description: |-
+      ACL for staging SIG-network gateway api
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - antonio.ojea.garcia@gmail.com
+      - bowei@google.com
+      - cmluciano@us.ibm.com
+      - daneyonhansen@gmail.com
+      - harrybagdi@gmail.com
+      - robertjscott@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-staging-ingress-nginx@kubernetes.io
+    name: k8s-infra-staging-ingress-nginx
+    description: |-
+      ACL for pushing ingress-nginx artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aledbf@gmail.com
+      - bowei@google.com
+      - ricardo.katz@gmail.com
+      - thockin@google.com
+      - strong.james.e@gmail.com
+      - longwuyuan@gmail.com
+      - zhangjintao9020@gmail.com
+
+  - email-id: k8s-infra-staging-ingressconformance@kubernetes.io
+    name: k8s-infra-staging-ingressconformance
+    description: |-
+      ACL for pushing ingress-controller-conformance artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aledbf@gmail.com
+      - bowei@google.com
+      - thockin@google.com
+
   #
   # k8s-infra gcs write access
   #

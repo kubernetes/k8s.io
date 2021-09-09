@@ -19,57 +19,80 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
-  - email-id: k8s-infra-staging-cri-tools@kubernetes.io
-    name: k8s-infra-staging-cri-tools
+  - email-id: k8s-infra-staging-provider-aws@kubernetes.io
+    name: k8s-infra-staging-provider-aws
     description: |-
-      ACL for staging cri-tools images
+      ACL for external AWS Cloud Provider
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-release-editors@kubernetes.io
-      - dawnchen@google.com
-      - decarr@redhat.com
+      - justinsb@google.com
+      - kim.andrewsy@gmail.com
+      - nturner4@gmail.com
+
+  - email-id: k8s-infra-staging-provider-openstack@kubernetes.io
+    name: k8s-infra-staging-provider-openstack
+    description: |-
+      ACL for external Cloud Provider OpenStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anusha.iiitm@gmail.com
+      - anlin.kong@gmail.com
+      - glaubich@gmail.com
+
+  - email-id: k8s-infra-staging-provider-azure@kubernetes.io
+    name: k8s-infra-staging-provider-azure
+    description: |-
+      ACL for staging cloud provider Azure
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - t-qini@microsoft.com
       - feiskyer@gmail.com
-      - saschagrunert@gmail.com
-      - timallclair@gmail.com
-      - thockin@google.com
+      - k8s@auggie.dev
+      - xiazhang@microsoft.com
+      - bburns@microsoft.com
+      - doliu@microsoft.com
+      - khnidk@microsoft.com
+      - Ritazh@microsoft.com
 
-  - email-id: k8s-infra-staging-nfd@kubernetes.io
-    name: k8s-infra-staging-nfd
+  - email-id: k8s-infra-staging-cloud-provider-gcp@kubernetes.io
+    name: k8s-infra-staging-cloud-provider-gcp
     description: |-
-      ACL for staging node-feature-discovery (nfd)
+      ACL for pushing GCP artifacts
     settings:
       ReconcileMembers: "true"
     members:
-      - alexander.kanevskiy@intel.com
-      - carangog@redhat.com
-      - jordanjacobelli04@gmail.com
-      - markus.lehtonen@intel.com
-      - zkosic@redhat.com
+      - msau@google.com
+      - saadali@google.com
+      - wfender@google.com
+      - mattcary@google.com
+      - saikatroyc@google.com
+      - jinxu@google.com
 
-  - email-id: k8s-infra-staging-npd@kubernetes.io
-    name: k8s-infra-staging-npd
+  - email-id: k8s-infra-staging-cloud-provider-ibm@kubernetes.io
+    name: k8s-infra-staging-cloud-provider-ibm
     description: |-
-      ACL for node-problem-detector
+      ACL for pushing IBM artefacts
     settings:
       ReconcileMembers: "true"
     members:
-      - andy.xning@gmail.com
-      - dawnchen@google.com
-      - lantaol@google.com
+      - ambiknai@in.ibm.com
+      - arahamad@in.ibm.com
+
+  - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
+    name: k8s-infra-staging-kas-network-proxy
+    description: |-
+      ACL for staging apiserver-network-proxy
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jying@google.com
+      - mike@crute.us
       - patrik@ptrk.io
-      - teratipally@google.com
-      - zhenw@google.com
-
-  - email-id: k8s-infra-staging-sp-operator@kubernetes.io
-    name: k8s-infra-staging-sp-operator
-    description: |-
-      ACL for security-profiles-operator artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - pjbgf@linux.com
-      - saschagrunert@gmail.com
+      - wfender@google.com
+      - ygui@google.com
 
   #
   # k8s-infra gcs write access
@@ -83,20 +106,6 @@ groups:
   # subproject artifacts being stored in the GCS bucket
   #
 
-  - email-id: k8s-infra-push-cri-tools@kubernetes.io
-    name: k8s-infra-push-cri-tools
-    description: |-
-      ACL for pushing CRI tools artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-release-editors@kubernetes.io
-      - dawnchen@google.com
-      - decarr@redhat.com
-      - feiskyer@gmail.com
-      - saschagrunert@gmail.com
-      - timallclair@gmail.com
-      - thockin@google.com
 
   #
   # k8s-infra owners for sig-owned subprojects

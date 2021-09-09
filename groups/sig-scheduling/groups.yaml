@@ -19,51 +19,43 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
-  - email-id: k8s-infra-staging-sig-storage@kubernetes.io
-    name: k8s-infra-staging-sig-storage
+  - email-id: k8s-infra-staging-descheduler@kubernetes.io
+    name: k8s-infra-staging-descheduler
     description: |-
-      ACL for staging sig storage artifacts
+      ACL for staging descheduler
     settings:
       ReconcileMembers: "true"
     members:
+      - avesh.ncsu@gmail.com
       - davanum@gmail.com
-      - saadali@google.com
-      - msau@google.com
-      - xingyang105@gmail.com
-      - jsafrane@redhat.com
-      - mattwon@amazon.com
-      - kiran.mova@mayadata.io
-      - humble.devassy@gmail.com
-      - patrick.ohly@intel.com
-      - jinxu@google.com
+      - mdame@redhat.com
+      - ravisantoshgudimetla@gmail.com
 
-  - email-id: k8s-infra-staging-csi@kubernetes.io
-    name: k8s-infra-staging-csi
+  - email-id: k8s-infra-staging-scheduler-plugins@kubernetes.io
+    name: k8s-infra-staging-scheduler-plugins
     description: |-
-      ACL for staging CSI artifacts
+      ACL for staging scheduler-plugins
     settings:
       ReconcileMembers: "true"
     members:
-      - davanum@gmail.com
-      - saadali@google.com
-      - msau@google.com
-      - xingyang105@gmail.com
-      - jsafrane@redhat.com
-      - patrick.ohly@intel.com
+      - ahg@google.com
+      - hweicdl@gmail.com
+      - wangqingcan1990@gmail.com
 
-  - email-id: k8s-infra-staging-git-sync@kubernetes.io
-    name: k8s-infra-staging-git-sync
+  - email-id: k8s-infra-staging-sched-simulator@kubernetes.io
+    name: k8s-infra-staging-sched-simulator
     description: |-
-      ACL for staging git-sync
+      ACL for staging kube-scheduler-simulator images.
     settings:
       ReconcileMembers: "true"
     members:
-      - thockin@google.com
-      - michaelg@okkur.org
+      - hweicdl@gmail.com
+      - acondor@google.com
+      - adtac@google.com
+      - handbomusic@gmail.com
+
   #
   # k8s-infra gcs write access
-  #
-  # TODO: where is the bucket? is this prod or staging?
   #
   # Each group here governs access to one GCS bucket. Ideally this level of
   # access is used solely for troubleshooting purposes.
@@ -71,20 +63,6 @@ groups:
   # Membership should correspond roughly to subproject owners for the set of
   # subproject artifacts being stored in the GCS bucket
   #
-
-  - email-id: k8s-infra-push-csi@kubernetes.io
-    name: k8s-infra-push-csi
-    description: |-
-      ACL for pushing CSI artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - davanum@gmail.com
-      - saadali@google.com
-      - msau@google.com
-      - xingyang105@gmail.com
-      - jsafrane@redhat.com
-      - patrick.ohly@intel.com
 
   #
   # k8s-infra owners for sig-owned subprojects
