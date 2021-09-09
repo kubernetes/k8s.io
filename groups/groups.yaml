@@ -554,8 +554,8 @@ groups:
       - hweicdl@gmail.com
       - wangqingcan1990@gmail.com
 
-  - email-id: k8s-infra-staging-scheduler-simulator@kubernetes.io
-    name: k8s-infra-staging-scheduler-simulator
+  - email-id: k8s-infra-staging-sched-simulator@kubernetes.io
+    name: k8s-infra-staging-sched-simulator
     description: |-
       ACL for staging kube-scheduler-simulator images.
     settings:
