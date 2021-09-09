@@ -61,6 +61,15 @@ readonly STAGING_PROJECT_SERVICES=(
     secretmanager.googleapis.com
     # These projects may host binaries in GCS
     storage-component.googleapis.com
+
+    # Dependencies (gcloud services used to encode these in its response)
+
+    # logging used by: cloudbuild
+    logging.googleapis.com
+    # pubsub used by: cloudbuild, containerregistry
+    pubsub.googleapis.com
+    # storage-api used by: cloudbuild, containerregistry
+    storage-api.googleapis.com
 )
 
 readonly STAGING_PROJECT_DISABLED_SERVICES=(
