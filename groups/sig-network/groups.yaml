@@ -87,6 +87,21 @@ groups:
       - robertjscott@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-staging-ingress-nginx@kubernetes.io
+    name: k8s-infra-staging-ingress-nginx
+    description: |-
+      ACL for pushing ingress-nginx artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aledbf@gmail.com
+      - bowei@google.com
+      - ricardo.katz@gmail.com
+      - thockin@google.com
+      - strong.james.e@gmail.com
+      - longwuyuan@gmail.com
+      - zhangjintao9020@gmail.com
+
   #
   # k8s-infra gcs write access
   #
