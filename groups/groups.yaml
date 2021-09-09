@@ -255,16 +255,6 @@ groups:
     members:
       - michaelg@okkur.org
 
-  - email-id: k8s-infra-staging-sp-operator@kubernetes.io
-    name: k8s-infra-staging-sp-operator
-    description: |-
-      ACL for security-profiles-operator artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - pjbgf@linux.com
-      - saschagrunert@gmail.com
-
   - email-id: k8s-infra-staging-storage-migrator@kubernetes.io
     name: k8s-infra-staging-storage-migrator
     description: |-
