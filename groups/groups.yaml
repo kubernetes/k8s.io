@@ -255,20 +255,6 @@ groups:
     members:
       - michaelg@okkur.org
 
-  - email-id: k8s-infra-staging-kustomize@kubernetes.io
-    name: k8s-infra-staging-kustomize
-    description: |-
-      ACL for k8s-infra-staging-kustomize
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - jeff.regan@gmail.com
-      - donnyxia@google.com
-      - natashasarkar@google.com
-      - extaeger@google.com
-      - samwronski@google.com
-      - kn.verey@gmail.com
-
   - email-id: k8s-infra-ii-coop@kubernetes.io
     name: k8s-infra-ii-coop
     description: |-
