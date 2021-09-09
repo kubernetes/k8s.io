@@ -21,7 +21,6 @@ restrictions:
       - "^k8s-infra-rbac-sippy@kubernetes.io$"
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
-      - "^k8s-infra-staging-cpa@kubernetes.io$"
       - "^k8s-infra-staging-csi-secrets-store@kubernetes.io$"
       - "^k8s-infra-staging-dns@kubernetes.io$"
       - "^k8s-infra-staging-etcd@kubernetes.io$"
@@ -101,6 +100,7 @@ restrictions:
     allowedGroups:
       - "^k8s-infra-push-cni@kubernetes.io$"
       - "^k8s-infra-staging-networking@kubernetes.io$"
+      - "^k8s-infra-staging-cpa@kubernetes.io$"
   - path: "sig-node/groups.yaml"
     allowedGroups:
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
