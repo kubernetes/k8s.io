@@ -102,24 +102,23 @@ function ensure_prod_gcr() {
     fi
     local project="${1}"
 
-    color 6 "Ensuring the GCR exists and is readable"
-    for r in "${PROD_REGIONS[@]}"; do
-        color 3 "region $r"
-        ensure_gcr_repo "${project}" "${r}"
-    done 2>&1 | indent
+    color 6 "Ensuring prod GCR for regions: ${PROD_REGIONS[*]}"
+    for region in "${PROD_REGIONS[@]}"; do
+        local gcr_bucket="gs://${region}.artifacts.${project}.appspot.com"
 
-    color 6 "Empowering GCR admins"
-    for r in "${PROD_REGIONS[@]}"; do
-        color 3 "region $r"
-        empower_gcr_admins "${project}" "${r}"
-    done 2>&1 | indent
+        color 3 "region: ${region}"
+        color 6 "Ensuring a GCR repo exists in region: ${region} for project: ${project}"
+        ensure_gcr_repo "${project}" "${region}"
 
-    color 6 "Empowering image promoter"
-    for r in "${PROD_REGIONS[@]}"; do
-        color 3 "region $r"
-        empower_artifact_promoter "${project}" "${r}"
-    done 2>&1 | indent
+        color 6 "Ensuring GCR admins can admin GCR in region: ${region} for project: ${project}"
+        empower_gcr_admins "${project}" "${region}"
+        
+        color 6 "Empowering image promoter for region: ${region} in project: ${project}"
+        empower_artifact_promoter "${project}" "${region}"
 
+        color 6 "Ensuring GCS access logs enabled for GCR bucket in region: ${region} in project: ${project}"
+        ensure_gcs_bucket_logging "${gcr_bucket}"
+    done 2>&1 | indent
 }
 
 # Make a prod GCS bucket and grant access to it.  We need whole buckets for
@@ -148,6 +147,9 @@ function ensure_prod_gcs_bucket() {
 
     color 6 "Empowering GCS admins"
     empower_gcs_admins "${project}" "${bucket}"
+
+    color 6 "Ensuring GCS access logs enabled for ${bucket} in project: ${project}"
+    ensure_gcs_bucket_logging "${bucket}"
 
     if [ -n "${group}" ]; then
         color 6 "Empowering ${group} to write to the bucket"
