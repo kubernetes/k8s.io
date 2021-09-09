@@ -56,7 +56,7 @@ groups:
       - doliu@microsoft.com
       - khnidk@microsoft.com
       - Ritazh@microsoft.com
-  
+
   - email-id: k8s-infra-staging-cloud-provider-gcp@kubernetes.io
     name: k8s-infra-staging-cloud-provider-gcp
     description: |-

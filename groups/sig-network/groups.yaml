@@ -18,7 +18,7 @@ groups:
   # Membership should correspond roughly to subproject owners for the set of
   # subproject artifacts being stored in a given staging project
   #
-  
+
   - email-id: k8s-infra-staging-networking@kubernetes.io
     name: k8s-infra-staging-networking
     description: |-
