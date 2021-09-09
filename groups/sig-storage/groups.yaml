@@ -50,6 +50,16 @@ groups:
       - xingyang105@gmail.com
       - jsafrane@redhat.com
       - patrick.ohly@intel.com
+
+  - email-id: k8s-infra-staging-git-sync@kubernetes.io
+    name: k8s-infra-staging-git-sync
+    description: |-
+      ACL for staging git-sync
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - thockin@google.com
+      - michaelg@okkur.org
   #
   # k8s-infra gcs write access
   #
