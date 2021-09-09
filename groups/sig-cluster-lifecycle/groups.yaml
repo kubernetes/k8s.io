@@ -7,6 +7,15 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
+  - email-id: k8s-infra-kops-maintainers@kubernetes.io
+    name: k8s-infra-kops-maintainers
+    description: |
+      ACL for kOps maintainers
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+
   - email-id: sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-alerts
     description: |-
