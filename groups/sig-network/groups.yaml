@@ -102,6 +102,17 @@ groups:
       - longwuyuan@gmail.com
       - zhangjintao9020@gmail.com
 
+  - email-id: k8s-infra-staging-ingressconformance@kubernetes.io
+    name: k8s-infra-staging-ingressconformance
+    description: |-
+      ACL for pushing ingress-controller-conformance artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aledbf@gmail.com
+      - bowei@google.com
+      - thockin@google.com
+
   #
   # k8s-infra gcs write access
   #
