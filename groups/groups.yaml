@@ -230,17 +230,6 @@ groups:
       - jingyih@google.com
       - yczhou@google.com
 
-  - email-id: k8s-infra-staging-examples@kubernetes.io
-    name: k8s-infra-staging-examples
-    description: |-
-      ACL for staging example artifacts.
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - ihor@cncf.io # github:idvoretskyi
-      - justinsb@google.com # github:justinsb
-      - runseb@gmail.com # github:sebgoa
-
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
     name: k8s-infra-staging-kas-network-proxy
     description: |-

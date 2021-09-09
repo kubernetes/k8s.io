@@ -22,7 +22,6 @@ restrictions:
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-etcd@kubernetes.io$"
-      - "^k8s-infra-staging-examples@kubernetes.io$"
       - "^k8s-infra-staging-kas-network-proxy@kubernetes.io$"
       - "^k8s-infra-staging-multitenancy@kubernetes.io$"
       - "^k8s-infra-staging-gateway-api@kubernetes.io$"
@@ -33,6 +32,9 @@ restrictions:
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
       - "^k8s-infra-staging-kustomize@kubernetes.io$"
       - "^k8s-infra-ii-coop@kubernetes.io$"
+  - path: "sig-apps/groups.yaml"
+    allowedGroups:
+      - "^k8s-infra-staging-examples@kubernetes.io$"
   - path: "sig-architecture/groups.yaml"
     allowedGroups:
       - "^k8s-infra-conform-inspur@kubernetes.io$"
