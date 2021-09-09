@@ -61,6 +61,17 @@ groups:
       - bowei@google.com
       - pavithrar@google.com
 
+  - email-id: k8s-infra-staging-external-dns@kubernetes.io
+    name: k8s-infra-staging-external-dns
+    description: |-
+      ACL for staging External DNS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - martin.linkhorst+github.com@posteo.de
+      - difazio.raffaele@gmail.com
+      - nick@juni.io
+
   #
   # k8s-infra gcs write access
   #
