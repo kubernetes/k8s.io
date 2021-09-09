@@ -98,7 +98,6 @@ data "google_service_account" "ii_sandbox_asn_etl" {
   project    = "k8s-infra-ii-sandbox"
 }
 
-//grants role WRITER to cloud-storage-analytics@google.com
 data "google_iam_policy" "audit_logs_gcs_bindings" {
   binding {
     role = "roles/storage.objectAdmin"
@@ -116,11 +115,6 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
     role = "roles/storage.legacyObjectReader"
     members = [
       "serviceAccount:${google_service_account.asn_etl.email}",
-    ]
-  }
-  binding {
-    role = "roles/storage.legacyObjectReader"
-    members = [
       "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl.email}",
     ]
   }
@@ -128,12 +122,14 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
     role = "roles/storage.legacyBucketReader"
     members = [
       "serviceAccount:${google_service_account.asn_etl.email}",
+      "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl.email}",
     ]
   }
+  // Allow read-only access to k8s-infra-gcs-access-logs@kubernetes.io
   binding {
-    role = "roles/storage.legacyBucketReader"
+    role = "roles/storage.objectViewer"
     members = [
-      "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl.email}",
+      "group:k8s-infra-gcs-access-logs@kubernetes.io"
     ]
   }
 }
@@ -141,11 +137,4 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
 resource "google_storage_bucket_iam_policy" "analytics_objectadmin_policy" {
   bucket      = google_storage_bucket.audit-logs-gcs.name
   policy_data = data.google_iam_policy.audit_logs_gcs_bindings.policy_data
-}
-
-// Allow read-only access to k8s-infra-gcs-access-logs@kubernetes.io
-resource "google_storage_bucket_iam_member" "artificats-gcs-logs" {
-  bucket = google_storage_bucket.audit-logs-gcs.name
-  role   = "roles/storage.objectViewer"
-  member = "group:k8s-infra-gcs-access-logs@kubernetes.io"
 }
