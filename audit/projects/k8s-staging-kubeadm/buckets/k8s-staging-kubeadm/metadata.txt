@@ -11,8 +11,9 @@ gs://k8s-staging-kubeadm/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Dec 2019 22:34:08 GMT
-	Time updated:			Thu, 01 Jul 2021 02:23:27 GMT
-	Metageneration:			21
+	Time updated:			Thu, 09 Sep 2021 16:23:02 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

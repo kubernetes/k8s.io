@@ -14,5 +14,6 @@ gs://eu.artifacts.k8s-gcr-audit-test-prod.appspot.com/ :
 	Time updated:			Thu, 09 Sep 2021 01:51:08 GMT
 	Metageneration:			33
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

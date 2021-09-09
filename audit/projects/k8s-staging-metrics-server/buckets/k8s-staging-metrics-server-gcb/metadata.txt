@@ -14,5 +14,6 @@ gs://k8s-staging-metrics-server-gcb/ :
 	Time updated:			Thu, 20 May 2021 10:12:14 GMT
 	Metageneration:			28
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -11,8 +11,9 @@ gs://k8s-staging-ci-images/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 26 Oct 2020 01:03:58 GMT
-	Time updated:			Thu, 01 Jul 2021 01:41:49 GMT
-	Metageneration:			13
+	Time updated:			Thu, 09 Sep 2021 15:37:57 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

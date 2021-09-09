@@ -14,5 +14,6 @@ gs://k8s-staging-nfd-gcb/ :
 	Time updated:			Thu, 20 May 2021 10:17:08 GMT
 	Metageneration:			26
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

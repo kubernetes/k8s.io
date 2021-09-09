@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-nfd.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 07 Feb 2020 18:07:33 GMT
-	Time updated:			Thu, 01 Jul 2021 02:33:04 GMT
-	Metageneration:			13
+	Time updated:			Thu, 09 Sep 2021 16:33:40 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

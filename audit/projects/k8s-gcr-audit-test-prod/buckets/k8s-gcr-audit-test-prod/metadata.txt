@@ -15,5 +15,6 @@ gs://k8s-gcr-audit-test-prod/ :
 	Time updated:			Thu, 09 Sep 2021 01:51:46 GMT
 	Metageneration:			61
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

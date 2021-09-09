@@ -11,8 +11,9 @@ gs://k8s-staging-kustomize/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 27 Oct 2020 18:42:46 GMT
-	Time updated:			Thu, 01 Jul 2021 02:27:09 GMT
-	Metageneration:			9
+	Time updated:			Thu, 09 Sep 2021 16:27:21 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

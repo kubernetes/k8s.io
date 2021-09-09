@@ -14,5 +14,6 @@ gs://eu.artifacts.k8s-gcr-backup-test-prod-bak.appspot.com/ :
 	Time updated:			Thu, 09 Sep 2021 01:54:06 GMT
 	Metageneration:			35
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

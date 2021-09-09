@@ -11,8 +11,9 @@ gs://k8s-staging-sig-storage/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 10 Jun 2020 03:17:48 GMT
-	Time updated:			Thu, 01 Jul 2021 02:48:25 GMT
-	Metageneration:			13
+	Time updated:			Thu, 09 Sep 2021 16:49:37 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

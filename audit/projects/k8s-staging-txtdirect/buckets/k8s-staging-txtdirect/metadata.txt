@@ -11,8 +11,9 @@ gs://k8s-staging-txtdirect/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 17 Dec 2019 22:17:48 GMT
-	Time updated:			Thu, 01 Jul 2021 02:54:31 GMT
-	Metageneration:			27
+	Time updated:			Thu, 09 Sep 2021 16:55:14 GMT
+	Metageneration:			28
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

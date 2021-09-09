@@ -11,8 +11,9 @@ gs://k8s-staging-npd/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 05 Feb 2020 17:58:22 GMT
-	Time updated:			Thu, 01 Jul 2021 02:34:37 GMT
-	Metageneration:			21
+	Time updated:			Thu, 09 Sep 2021 16:35:15 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -15,5 +15,6 @@ gs://k8s-conform-s390x-k8s/ :
 	Time updated:			Mon, 30 Aug 2021 10:13:05 GMT
 	Metageneration:			23
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

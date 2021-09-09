@@ -14,5 +14,6 @@ gs://k8s-metrics/ :
 	Time updated:			Mon, 16 Aug 2021 17:22:04 GMT
 	Metageneration:			16
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

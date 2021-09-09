@@ -14,5 +14,6 @@ gs://k8s-infra-scale-golang-builds/ :
 	Time updated:			Wed, 21 Jul 2021 12:42:01 GMT
 	Metageneration:			2
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-ingressconformance.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 09 Jun 2020 21:45:32 GMT
-	Time updated:			Thu, 01 Jul 2021 02:15:38 GMT
-	Metageneration:			11
+	Time updated:			Thu, 09 Sep 2021 16:14:38 GMT
+	Metageneration:			12
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-provider-openstack.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 15 Feb 2021 15:18:35 GMT
-	Time updated:			Thu, 01 Jul 2021 02:39:13 GMT
-	Metageneration:			8
+	Time updated:			Thu, 09 Sep 2021 16:39:33 GMT
+	Metageneration:			9
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

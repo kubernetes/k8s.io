@@ -14,6 +14,7 @@ gs://kubernetes-staging-32a7e5d723-eu/ :
 	Time updated:			Fri, 31 Jul 2020 06:57:38 GMT
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
+	Public access prevention:	unspecified
 	ACL:				
 	  [
 	    {
