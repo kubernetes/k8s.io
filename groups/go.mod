@@ -9,7 +9,7 @@ require (
 	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d
 	google.golang.org/api v0.20.0
 	google.golang.org/genproto v0.0.0-20200429120912-1f37eeb960b2
-	gopkg.in/yaml.v2 v2.2.2
+	gopkg.in/yaml.v3 v3.0.0-20190709130402-674ba3eaed22
 	k8s.io/apimachinery v0.0.0-20190817020851-f2f3a405f61d
 	k8s.io/test-infra v0.0.0-20191024183346-202cefeb6ff5
 )
@@ -25,7 +25,6 @@ require (
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.6.5 // indirect
 	google.golang.org/grpc v1.28.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20190709130402-674ba3eaed22 // indirect
 )
 
 replace k8s.io/apimachinery => k8s.io/apimachinery v0.0.0-20190817020851-f2f3a405f61d
