@@ -103,7 +103,7 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
   binding {
     role = "roles/storage.admin"
     members = [
-      "group:k8s-infra-gcp-org-admins@google.com",
+      "group:k8s-infra-gcp-org-admins@kubernetes.io",
     ]
   }
   // Allow GCS access logs to be written to this bucket
