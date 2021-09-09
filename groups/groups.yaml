@@ -255,16 +255,6 @@ groups:
     members:
       - michaelg@okkur.org
 
-  - email-id: k8s-infra-staging-storage-migrator@kubernetes.io
-    name: k8s-infra-staging-storage-migrator
-    description: |-
-      ACL for kube-storage-version-migrator
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - xuchao@google.com
-      - haoweic@google.com
-
   - email-id: k8s-infra-staging-kustomize@kubernetes.io
     name: k8s-infra-staging-kustomize
     description: |-
