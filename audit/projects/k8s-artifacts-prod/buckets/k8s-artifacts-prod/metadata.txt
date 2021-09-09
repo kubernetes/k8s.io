@@ -12,8 +12,8 @@ gs://k8s-artifacts-prod/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 01 May 2019 00:54:58 GMT
-	Time updated:			Thu, 10 Jun 2021 20:22:31 GMT
-	Metageneration:			125
+	Time updated:			Thu, 09 Sep 2021 01:57:35 GMT
+	Metageneration:			128
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

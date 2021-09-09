@@ -11,8 +11,8 @@ gs://asia.artifacts.k8s-artifacts-prod.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 01 May 2019 00:25:55 GMT
-	Time updated:			Fri, 09 Apr 2021 23:55:32 GMT
-	Metageneration:			49
+	Time updated:			Thu, 09 Sep 2021 01:46:58 GMT
+	Metageneration:			50
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

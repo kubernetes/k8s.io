@@ -3,16 +3,17 @@ gs://k8s-cip-test-prod/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 10 Jul 2019 22:16:04 GMT
-	Time updated:			Thu, 10 Jun 2021 20:25:06 GMT
-	Metageneration:			99
+	Time updated:			Thu, 09 Sep 2021 01:50:13 GMT
+	Metageneration:			101
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]
