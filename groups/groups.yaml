@@ -430,7 +430,6 @@ groups:
       - fbranczyk@gmail.com
       - tariq181290@gmail.com
 
-
   - email-id: k8s-infra-staging-metrics-server@kubernetes.io
     name: k8s-infra-staging-metrics-server
     description: |-
@@ -554,6 +553,18 @@ groups:
       - ahg@google.com
       - hweicdl@gmail.com
       - wangqingcan1990@gmail.com
+
+  - email-id: k8s-infra-staging-sched-simulator@kubernetes.io
+    name: k8s-infra-staging-sched-simulator
+    description: |-
+      ACL for staging kube-scheduler-simulator images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - hweicdl@gmail.com
+      - acondor@google.com
+      - adtac@google.com
+      - handbomusic@gmail.com
 
   - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
     name: k8s-infra-staging-scl-image-builder

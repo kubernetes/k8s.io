@@ -319,6 +319,7 @@ infra:
       k8s-staging-releng:
       k8s-staging-releng-test:
       k8s-staging-scheduler-plugins:
+      k8s-staging-sched-simulator:
       k8s-staging-scl-image-builder:
       k8s-staging-sig-docs:
       k8s-staging-sig-storage:
