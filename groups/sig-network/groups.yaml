@@ -50,6 +50,17 @@ groups:
       - thockin@google.com
       - zihongz@google.com
 
+  - email-id: k8s-infra-staging-dns@kubernetes.io
+    name: k8s-infra-staging-dns
+    description: |-
+      ACL for staging kube-dns and node-local-dns images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - zihongz@google.com
+      - bowei@google.com
+      - pavithrar@google.com
+
   #
   # k8s-infra gcs write access
   #

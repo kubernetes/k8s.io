@@ -218,17 +218,6 @@ groups:
       - jbelamaric@google.com
       - cohaver@infoblox.com
 
-  - email-id: k8s-infra-staging-dns@kubernetes.io
-    name: k8s-infra-staging-dns
-    description: |-
-      ACL for staging kube-dns and node-local-dns images.
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - zihongz@google.com
-      - bowei@google.com
-      - pavithrar@google.com
-
   - email-id: k8s-infra-staging-etcd@kubernetes.io
     name: k8s-infra-staging-etcd
     description: |-
