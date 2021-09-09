@@ -99,6 +99,14 @@ data "google_service_account" "ii_sandbox_asn_etl" {
 }
 
 data "google_iam_policy" "audit_logs_gcs_bindings" {
+  // Allow GCP org admins to admin this bucket
+  binding {
+    role = "roles/storage.admin"
+    members = [
+      "group:k8s-infra-gcp-org-admins@google.com",
+    ]
+  }
+  // Allow GCS access logs to be written to this bucket
   binding {
     role = "roles/storage.objectAdmin"
     members = [
@@ -111,6 +119,7 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
       "group:cloud-storage-analytics@google.com",
     ]
   }
+  // Allow read-only access to authorized service accounts
   binding {
     role = "roles/storage.legacyObjectReader"
     members = [
