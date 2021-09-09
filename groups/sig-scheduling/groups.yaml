@@ -42,6 +42,18 @@ groups:
       - hweicdl@gmail.com
       - wangqingcan1990@gmail.com
 
+  - email-id: k8s-infra-staging-sched-simulator@kubernetes.io
+    name: k8s-infra-staging-sched-simulator
+    description: |-
+      ACL for staging kube-scheduler-simulator images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - hweicdl@gmail.com
+      - acondor@google.com
+      - adtac@google.com
+      - handbomusic@gmail.com
+
   #
   # k8s-infra gcs write access
   #

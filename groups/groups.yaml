@@ -325,18 +325,6 @@ groups:
       - tasha.drew@gmail.com
       - srajakum@amazon.com
 
-  - email-id: k8s-infra-staging-sched-simulator@kubernetes.io
-    name: k8s-infra-staging-sched-simulator
-    description: |-
-      ACL for staging kube-scheduler-simulator images.
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - hweicdl@gmail.com
-      - acondor@google.com
-      - adtac@google.com
-      - handbomusic@gmail.com
-
   - email-id: k8s-infra-staging-gateway-api@kubernetes.io
     name: k8s-infra-staging-gateway-api
     description: |-
