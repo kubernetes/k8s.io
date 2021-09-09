@@ -476,8 +476,4 @@ function ensure_main_project() {
     color 6 "Done"
 }
 
-project="${PROJECT}"
-color 6 "Ensuring prow special cases for: ${project}"
-ensure_prow_special_cases "${project}" 2>&1 | indent
-
-# ensure_main_project "${PROJECT}"
+ensure_main_project "${PROJECT}"
