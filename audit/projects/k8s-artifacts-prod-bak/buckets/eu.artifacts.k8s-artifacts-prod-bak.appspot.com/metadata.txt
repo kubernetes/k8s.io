@@ -3,7 +3,7 @@ gs://eu.artifacts.k8s-artifacts-prod-bak.appspot.com/ :
 	Location type:			multi-region
 	Location constraint:		EU
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	None
@@ -11,8 +11,8 @@ gs://eu.artifacts.k8s-artifacts-prod-bak.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 23 Oct 2019 19:04:11 GMT
-	Time updated:			Fri, 12 Feb 2021 23:07:32 GMT
-	Metageneration:			33
+	Time updated:			Thu, 09 Sep 2021 01:48:04 GMT
+	Metageneration:			34
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]

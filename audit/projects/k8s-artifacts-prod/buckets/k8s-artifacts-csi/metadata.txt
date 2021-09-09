@@ -12,8 +12,8 @@ gs://k8s-artifacts-csi/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 28 May 2020 12:51:57 GMT
-	Time updated:			Thu, 10 Jun 2021 20:21:23 GMT
-	Metageneration:			54
+	Time updated:			Thu, 09 Sep 2021 01:56:31 GMT
+	Metageneration:			56
 	Bucket Policy Only enabled:	True
 	ACL:				[]
 	Default ACL:			[]
