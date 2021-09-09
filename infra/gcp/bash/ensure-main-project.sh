@@ -356,6 +356,7 @@ function ensure_aaa_external_secrets() {
     # build clusters managed via infra/gcp/terraform/k8s-infra-prow-build*
     local prow_secrets=(
         k8s-infra-build-clusters-kubeconfig
+        k8s-infra-cherrypick-robot-github-token
         k8s-infra-ci-robot-github-account-password
         k8s-infra-ci-robot-github-token
         k8s-infra-prow-cookie
@@ -408,6 +409,12 @@ function ensure_prow_special_cases {
     color 6 "Special case: ensuring k8s-infra-ci-robot-github-token accessible by k8s-infra-prow-build-trusted"
     principal="serviceAccount:$(svc_acct_email "k8s-infra-prow-build-trusted" "kubernetes-external-secrets")"
     secret=$(secret_full_name "${project}" "k8s-infra-ci-robot-github-token")
+    ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.secretAccessor" 2>&1 | indent
+
+    # TODO: remove when cherrypicker is running solely on k8s-infra-prow.k8s.io
+    color 6 "Special case: ensuring k8s-infra-cherrypicker-github-token accessible by k8s-prow"
+    principal="kubernetes-external-secrets-sa@k8s-prow.iam.gserviceaccount.com"
+    secret=$(secret_full_name "${project}" "k8s-infra-cherrypick-robot-github-token")
     ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.secretAccessor" 2>&1 | indent
 }
 
@@ -475,8 +482,4 @@ function ensure_main_project() {
     color 6 "Done"
 }
 
-project="${PROJECT}"
-color 6 "Ensuring prow special cases for: ${project}"
-ensure_prow_special_cases "${project}" 2>&1 | indent
-
-# ensure_main_project "${PROJECT}"
+ensure_main_project "${PROJECT}"
