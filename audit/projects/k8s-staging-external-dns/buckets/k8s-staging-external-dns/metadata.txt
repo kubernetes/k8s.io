@@ -11,8 +11,9 @@ gs://k8s-staging-external-dns/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 09 Dec 2019 22:29:32 GMT
-	Time updated:			Thu, 01 Jul 2021 02:09:46 GMT
-	Metageneration:			21
+	Time updated:			Thu, 09 Sep 2021 16:08:09 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-prometheus-adapter.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 29 Jun 2021 19:56:12 GMT
-	Time updated:			Thu, 01 Jul 2021 02:35:31 GMT
-	Metageneration:			8
+	Time updated:			Thu, 09 Sep 2021 16:36:04 GMT
+	Metageneration:			9
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

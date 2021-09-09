@@ -14,5 +14,6 @@ gs://k8s-infra-tf-prow-clusters/ :
 	Time updated:			Wed, 05 May 2021 07:10:04 GMT
 	Metageneration:			11
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

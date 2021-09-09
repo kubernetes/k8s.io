@@ -12,8 +12,9 @@ gs://k8s-staging-capi-openstack/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 04 Sep 2019 19:19:51 GMT
-	Time updated:			Thu, 01 Jul 2021 01:39:22 GMT
-	Metageneration:			31
+	Time updated:			Thu, 09 Sep 2021 15:35:18 GMT
+	Metageneration:			32
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

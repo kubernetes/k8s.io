@@ -15,5 +15,6 @@ gs://k8s-conform-cri-o/ :
 	Time updated:			Mon, 30 Aug 2021 10:09:28 GMT
 	Metageneration:			44
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

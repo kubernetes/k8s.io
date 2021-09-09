@@ -14,5 +14,6 @@ gs://ii_bq_scratch_dump/ :
 	Time updated:			Mon, 28 Jun 2021 03:03:15 GMT
 	Metageneration:			6
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

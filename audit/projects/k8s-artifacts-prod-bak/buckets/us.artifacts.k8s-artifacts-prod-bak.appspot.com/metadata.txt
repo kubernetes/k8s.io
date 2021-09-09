@@ -14,5 +14,6 @@ gs://us.artifacts.k8s-artifacts-prod-bak.appspot.com/ :
 	Time updated:			Thu, 09 Sep 2021 01:47:41 GMT
 	Metageneration:			34
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

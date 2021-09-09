@@ -11,8 +11,9 @@ gs://k8s-staging-mirror/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Sat, 21 Nov 2020 00:11:36 GMT
-	Time updated:			Thu, 01 Jul 2021 02:29:44 GMT
-	Metageneration:			9
+	Time updated:			Thu, 09 Sep 2021 16:30:01 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -11,8 +11,9 @@ gs://k8s-staging-prometheus-adapter/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 29 Jun 2021 19:56:53 GMT
-	Time updated:			Thu, 01 Jul 2021 02:35:51 GMT
-	Metageneration:			9
+	Time updated:			Thu, 09 Sep 2021 16:36:22 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

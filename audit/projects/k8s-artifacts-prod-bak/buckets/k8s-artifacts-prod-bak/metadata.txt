@@ -15,5 +15,6 @@ gs://k8s-artifacts-prod-bak/ :
 	Time updated:			Thu, 09 Sep 2021 01:48:43 GMT
 	Metageneration:			86
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

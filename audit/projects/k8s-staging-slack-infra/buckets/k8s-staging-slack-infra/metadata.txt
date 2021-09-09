@@ -11,8 +11,9 @@ gs://k8s-staging-slack-infra/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 30 Apr 2020 16:47:14 GMT
-	Time updated:			Thu, 01 Jul 2021 02:49:38 GMT
-	Metageneration:			19
+	Time updated:			Thu, 09 Sep 2021 16:50:46 GMT
+	Metageneration:			20
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

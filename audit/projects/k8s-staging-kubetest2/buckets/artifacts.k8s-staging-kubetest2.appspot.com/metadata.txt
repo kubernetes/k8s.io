@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-kubetest2.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 24 Mar 2021 18:15:38 GMT
-	Time updated:			Thu, 01 Jul 2021 02:25:35 GMT
-	Metageneration:			21
+	Time updated:			Thu, 09 Sep 2021 16:25:38 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

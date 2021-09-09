@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-capi-ibmcloud.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 03 Sep 2021 10:19:42 GMT
-	Time updated:			Fri, 03 Sep 2021 10:20:28 GMT
-	Metageneration:			8
+	Time updated:			Thu, 09 Sep 2021 15:32:23 GMT
+	Metageneration:			9
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -15,5 +15,6 @@ gs://k8s-conform-inspur/ :
 	Time updated:			Mon, 30 Aug 2021 10:11:16 GMT
 	Metageneration:			25
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

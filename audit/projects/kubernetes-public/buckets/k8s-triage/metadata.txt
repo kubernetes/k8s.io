@@ -14,5 +14,6 @@ gs://k8s-triage/ :
 	Time updated:			Thu, 12 Aug 2021 22:09:54 GMT
 	Metageneration:			12
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

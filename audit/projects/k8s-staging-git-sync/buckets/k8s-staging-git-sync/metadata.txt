@@ -11,8 +11,9 @@ gs://k8s-staging-git-sync/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 08 Sep 2020 00:07:03 GMT
-	Time updated:			Thu, 01 Jul 2021 02:12:15 GMT
-	Metageneration:			9
+	Time updated:			Thu, 09 Sep 2021 16:10:56 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

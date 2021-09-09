@@ -14,5 +14,6 @@ gs://k8s-staging-etcdadm-gcb/ :
 	Time updated:			Thu, 20 May 2021 09:50:20 GMT
 	Metageneration:			16
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]
