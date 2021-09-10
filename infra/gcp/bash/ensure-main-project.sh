@@ -87,6 +87,8 @@ readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
 #       graph here? ensure_only_services dynamically computes the set of
 #       expected services
 readonly MAIN_PROJECT_SERVICES=(
+    # We store budgets applied to projects of the kubernetes.io org
+    billingbudgets.googleapis.com
     # We export billing data to bigquery
     bigquery.googleapis.com
     # We use cloud asset inventory from this project to audit all projects
