@@ -80,11 +80,11 @@ readonly AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
 readonly AUDITOR_SERVICE_NAME="cip-auditor"
 
 # The service account name for the image promoter.
-readonly PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
+readonly IMAGE_PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
 # The service account name for the image promoter's vulnerability check.
 # used in: ensure-prod-storage.sh ensure-staging-storage.sh
-export PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
+export IMAGE_PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
 
 # Release Engineering umbrella groups
 # - admins - edit and KMS access (Release Engineering subproject owners)
@@ -400,12 +400,12 @@ function empower_artifact_promoter() {
     local project="$1"
     local region="${2:-}"
     local acct=
-    acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
+    acct=$(svc_acct_email "${project}" "${IMAGE_PROMOTER_SVCACCT}")
 
     if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
         gcloud --project "${project}" \
             iam service-accounts create \
-            "${PROMOTER_SVCACCT}" \
+            "${IMAGE_PROMOTER_SVCACCT}" \
             --display-name="k8s-infra container image promoter"
     fi
 

@@ -94,8 +94,8 @@ readonly AUTO_DELETION_DAYS=60
 
 readonly PROD_PROJECT="k8s-artifacts-prod"
 
-PROD_PROMOTER_SCANNING_SERVICE_ACCOUNT="$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")"
-readonly PROD_PROMOTER_SCANNING_SERVICE_ACCOUNT
+PROD_IMAGE_PROMOTER_SCANNING_SERVICE_ACCOUNT="$(svc_acct_email "${PROD_PROJECT}" "${IMAGE_PROMOTER_VULN_SCANNING_SVCACCT}")"
+readonly PROD_IMAGE_PROMOTER_SCANNING_SERVICE_ACCOUNT
 
 #
 # Staging functions
@@ -127,7 +127,7 @@ function ensure_staging_project() {
     local staging_bucket="gs://${project}" # used by humans
     local gcb_bucket="gs://${project}-gcb" # used by GCB
 
-    local cip_principal="serviceAccount:${PROD_PROMOTER_SCANNING_SERVICE_ACCOUNT}"
+    local cip_principal="serviceAccount:${PROD_IMAGE_PROMOTER_SCANNING_SERVICE_ACCOUNT}"
 
     color 6 "Ensuring project exists: ${project}"
     ensure_project "${project}"
