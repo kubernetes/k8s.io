@@ -114,7 +114,7 @@ function ensure_prod_gcr() {
         empower_gcr_admins "${project}" "${region}"
         
         color 6 "Empowering image promoter for region: ${region} in project: ${project}"
-        empower_artifact_promoter "${project}" "${region}"
+        empower_image_promoter "${project}" "${region}"
 
         color 6 "Ensuring GCS access logs enabled for GCR bucket in region: ${region} in project: ${project}"
         ensure_gcs_bucket_logging "${gcr_bucket}"
@@ -315,13 +315,13 @@ function ensure_all_prod_special_cases() {
 
     # Special case: create/add-permissions for necessary service accounts for the auditor.
     color 6 "Empowering artifact auditor"
-    empower_artifact_auditor "${PROD_PROJECT}"
-    empower_artifact_auditor_invoker "${PROD_PROJECT}"
+    empower_image_auditor "${PROD_PROJECT}"
+    empower_image_auditor_invoker "${PROD_PROJECT}"
 
     # Special case: give Cloud Run Admin privileges to the group that will
     # administer the cip-auditor (so that they can deploy the auditor to Cloud Run).
     color 6 "Empowering artifact-admins to release prod auditor"
-    empower_group_to_admin_artifact_auditor \
+    empower_group_to_admin_image_auditor \
         "${PROD_PROJECT}" \
         "k8s-infra-artifact-admins@kubernetes.io"
 

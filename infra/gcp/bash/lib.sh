@@ -357,9 +357,9 @@ function empower_gcs_admins() {
 # Grant Cloud Run privileges to a group.
 # $1: The GCP project
 # $2: The googlegroups group
-function empower_group_to_admin_artifact_auditor() {
+function empower_group_to_admin_image_auditor() {
     if [ $# != 2 ]; then
-        echo "empower_group_to_admin_artifact_auditor(project, group_name) requires 2 arguments" >&2
+        echo "empower_group_to_admin_image_auditor(project, group_name) requires 2 arguments" >&2
         return 1
     fi
     local project="$1"
@@ -392,9 +392,9 @@ function empower_group_to_admin_artifact_auditor() {
 # Grant full privileges to the GCR promoter bot
 # $1: The GCP project
 # $2: The GCR region (optional)
-function empower_artifact_promoter() {
+function empower_image_promoter() {
     if [ $# -lt 1 ] || [ $# -gt 2 ] || [ -z "$1" ]; then
-        echo "empower_artifact_promoter(project, [region]) requires 1 or 2 arguments" >&2
+        echo "empower_image_promoter(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     local project="$1"
@@ -414,9 +414,9 @@ function empower_artifact_promoter() {
 
 # Ensure the auditor service account exists and has the ability to write logs and fire alerts to Stackdriver Error Reporting.
 # $1: The GCP project
-function empower_artifact_auditor() {
+function empower_image_auditor() {
     if [ $# -lt 1 ] || [ -z "$1" ]; then
-        echo "empower_artifact_auditor(project) requires 1 argument" >&2
+        echo "empower_image_auditor(project) requires 1 argument" >&2
         return 1
     fi
     local project="$1"
@@ -452,9 +452,9 @@ function empower_artifact_auditor() {
 # subscription getting its messages from the GCR topic "gcr", where changes to
 # GCR are posted).
 # $1: The GCP project
-function empower_artifact_auditor_invoker() {
+function empower_image_auditor_invoker() {
     if [ $# -lt 1 ] || [ -z "$1" ]; then
-        echo "empower_artifact_auditor_invoker(project) requires 1 argument" >&2
+        echo "empower_image_auditor_invoker(project) requires 1 argument" >&2
         return 1
     fi
     local project="$1"
