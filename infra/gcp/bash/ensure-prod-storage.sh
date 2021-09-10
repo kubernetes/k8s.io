@@ -237,7 +237,7 @@ function ensure_all_prod_special_cases() {
     color 6 "Copying static content into the prod bucket"
     upload_gcs_static_content \
         "gs://${PROD_PROJECT}" \
-        "${SCRIPT_DIR}/static/prod-storage"
+        "${SCRIPT_DIR}/../static/prod-storage"
 
     # Special case: enable people to read vulnerability reports.
     color 6 "Empowering artifact-security group to real vulnerability reports"
