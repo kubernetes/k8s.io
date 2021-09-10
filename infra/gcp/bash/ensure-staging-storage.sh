@@ -73,7 +73,9 @@ readonly STAGING_PROJECT_SERVICES=(
 )
 
 readonly STAGING_PROJECT_DISABLED_SERVICES=(
-    # Disabling per https://github.com/kubernetes/k8s.io/issues/1963
+    # Disabled per https://github.com/kubernetes/k8s.io/issues/1963
+    containeranalysis.googleapis.com
+    # Disabled per https://github.com/kubernetes/k8s.io/issues/1963
     containerscanning.googleapis.com
 )
 
@@ -142,6 +144,10 @@ function ensure_staging_project() {
 
     color 6 "Ensuring disabled services for staging project: ${project}"
     ensure_disabled_services "${project}" "${STAGING_PROJECT_DISABLED_SERVICES[@]}"
+
+    # TODO(spiffxp): remove when binding has been removed
+    color 6 "Ensuring containeranalysis service agent binding removed for staging project: ${project}"
+    ensure_removed_containeranalysis_serviceagent "${project}"
 
     # Enable image promoter access to vulnerability scanning results
     color 6 "Ensuring ${cip_principal} can view vulnernability scanning results for project: ${project}"
@@ -316,6 +322,28 @@ function ensure_staging_gcb_builder_service_account() {
         "${prow_project}" \
         "${PROWJOB_POD_NAMESPACE}" \
         "${sa_email}"
+}
+
+# Ensures the containeranalysis service agent iam binding has been removed
+# from the given project (as well as any other members that happen to have
+# the service agent role)
+#
+# $1: The project name
+function ensure_removed_containeranalysis_serviceagent() {
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(project) requires 2 arguments" >&2
+        return 1
+    fi
+    local project="$1"
+    local role="roles/containeranalysis.ServiceAgent"
+
+    gcloud projects get-iam-policy "${project}" > "${TMPDIR}/iam.yaml"
+    mapfile -t members < <(
+      <"${TMPDIR}/iam.yaml" yq -r ".bindings | map(select(.role==\"${role}\").members) | flatten | .[]"
+    )
+    for member in "${members[@]}"; do
+      ensure_removed_project_role_binding "${project}" "${member}" "${role}"
+    done
 }
 
 #
