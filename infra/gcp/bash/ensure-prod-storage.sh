@@ -339,6 +339,13 @@ function ensure_all_prod_special_cases() {
     # prod-related GCP service accounts
     color 6 "Empowering trusted prow build clusters to use prod-related GCP service accounts"
     for project in "${PROW_TRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
+        # Grant write access to k8s-artifacts-prod GCS
+        serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${FILE_PROMOTER_SVCACCT}")"
+        color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
+        empower_gke_for_serviceaccount \
+            "${project}" "${PROWJOB_POD_NAMESPACE}" \
+            "${serviceaccount}" "k8s-infra-promoter"
+
         # Grant write access to k8s-artifacts-prod GCR
         serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
         color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
