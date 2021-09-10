@@ -27,12 +27,6 @@
     },
     {
       "members": [
-        "serviceAccount:service-324460563566@container-analysis.iam.gserviceaccount.com"
-      ],
-      "role": "roles/containeranalysis.ServiceAgent"
-    },
-    {
-      "members": [
         "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.occurrences.viewer"
