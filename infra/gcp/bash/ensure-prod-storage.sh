@@ -148,6 +148,9 @@ function ensure_prod_gcs_bucket() {
     color 6 "Empowering GCS admins"
     empower_gcs_admins "${project}" "${bucket}"
 
+    color 6 "Empowering file promoter in project: ${project}"
+    empower_file_promoter "${project}" "${bucket}"
+
     color 6 "Ensuring GCS access logs enabled for ${bucket} in project: ${project}"
     ensure_gcs_bucket_logging "${bucket}"
 

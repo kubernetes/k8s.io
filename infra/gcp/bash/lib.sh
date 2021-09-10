@@ -79,6 +79,9 @@ readonly AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
 # This is the Cloud Run service name of the auditor.
 readonly AUDITOR_SERVICE_NAME="cip-auditor"
 
+# The service account name for the file promoter.
+readonly FILE_PROMOTER_SVCACCT="k8s-infra-promoter"
+
 # The service account name for the image promoter.
 readonly IMAGE_PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
@@ -389,6 +392,26 @@ function empower_group_to_admin_image_auditor() {
         --role="roles/iam.serviceAccountUser"
 }
 
+# Grant write privileges to the file promoter bot
+# $1: The GCP project
+# $2: The bucket (e.g. gs://bucket-name)
+function empower_file_promoter() {
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "empower_file_promoter(project, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    local project="$1"
+    local bucket="$2"
+    local acct
+    acct=$(svc_acct_email "${project}" "${FILE_PROMOTER_SVCACCT}")
+
+    ensure_service_account "${project}" "${FILE_PROMOTER_SVCACCT}" "artifact promoter"
+
+    # TODO(kpromo): Determine if admin access is required here.
+    #               ref: https://github.com/kubernetes-sigs/k8s-container-image-promoter/issues/413
+    empower_svcacct_to_write_gcs_bucket "${acct}" "${bucket}"
+}
+
 # Grant full privileges to the GCR promoter bot
 # $1: The GCP project
 # $2: The GCR region (optional)
@@ -399,15 +422,10 @@ function empower_image_promoter() {
     fi
     local project="$1"
     local region="${2:-}"
-    local acct=
+    local acct
     acct=$(svc_acct_email "${project}" "${IMAGE_PROMOTER_SVCACCT}")
 
-    if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
-        gcloud --project "${project}" \
-            iam service-accounts create \
-            "${IMAGE_PROMOTER_SVCACCT}" \
-            --display-name="k8s-infra container image promoter"
-    fi
+    ensure_service_account "${project}" "${IMAGE_PROMOTER_SVCACCT}" "k8s-infra container image promoter"
 
     empower_svcacct_to_admin_gcr "${acct}" "${project}" "${region}"
 }
