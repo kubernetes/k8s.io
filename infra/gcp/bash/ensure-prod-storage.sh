@@ -41,8 +41,8 @@ PROD_PROJECT=$(k8s_infra_project "prod" "k8s-artifacts-prod")
 PRODBAK_PROJECT=$(k8s_infra_project "prod" "${PROD_PROJECT}-bak")
 
 # These are for testing the image promoter's promotion process.
-PROMOTER_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-cip-test-prod")
-PROMOTER_TEST_STAGING_PROJECT=$(k8s_infra_project "staging" "k8s-staging-cip-test")
+IMAGE_PROMOTER_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-cip-test-prod")
+IMAGE_PROMOTER_TEST_STAGING_PROJECT=$(k8s_infra_project "staging" "k8s-staging-cip-test")
 
 # These are for testing the GCR backup/restore process.
 GCR_BACKUP_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-gcr-backup-test-prod")
@@ -114,7 +114,7 @@ function ensure_prod_gcr() {
         empower_gcr_admins "${project}" "${region}"
         
         color 6 "Empowering image promoter for region: ${region} in project: ${project}"
-        empower_artifact_promoter "${project}" "${region}"
+        empower_image_promoter "${project}" "${region}"
 
         color 6 "Ensuring GCS access logs enabled for GCR bucket in region: ${region} in project: ${project}"
         ensure_gcs_bucket_logging "${gcr_bucket}"
@@ -147,6 +147,9 @@ function ensure_prod_gcs_bucket() {
 
     color 6 "Empowering GCS admins"
     empower_gcs_admins "${project}" "${bucket}"
+
+    color 6 "Empowering file promoter in project: ${project}"
+    empower_file_promoter "${project}" "${bucket}"
 
     color 6 "Ensuring GCS access logs enabled for ${bucket} in project: ${project}"
     ensure_gcs_bucket_logging "${bucket}"
@@ -249,10 +252,10 @@ function ensure_all_prod_special_cases() {
     # prod projects.
     color 6 "Empowering staging-cip-test group to fake-prod"
     empower_group_to_fake_prod \
-        "${PROMOTER_TEST_PROD_PROJECT}" \
+        "${IMAGE_PROMOTER_TEST_PROD_PROJECT}" \
         "k8s-infra-staging-cip-test@kubernetes.io"
     empower_group_to_fake_prod \
-        "${PROMOTER_TEST_STAGING_PROJECT}" \
+        "${IMAGE_PROMOTER_TEST_STAGING_PROJECT}" \
         "k8s-infra-staging-cip-test@kubernetes.io"
     empower_group_to_fake_prod \
         "${GCR_BACKUP_TEST_PROD_PROJECT}" \
@@ -268,15 +271,15 @@ function ensure_all_prod_special_cases() {
     # staging, to allow e2e tests to run as that account, instead of yet another.
     color 6 "Empowering test-prod promoter to promoter staging GCR"
     empower_svcacct_to_admin_gcr \
-        "$(svc_acct_email "${PROMOTER_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}")" \
-        "${PROMOTER_TEST_STAGING_PROJECT}"
+        "$(svc_acct_email "${IMAGE_PROMOTER_TEST_PROD_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")" \
+        "${IMAGE_PROMOTER_TEST_STAGING_PROJECT}"
 
     # Special case: grant the image promoter test service account access to
     # their testing project (used for running e2e tests for the promoter auditing
     # mechanism).
     color 6 "Empowering test-prod promoter to test-prod auditor"
     empower_service_account_for_cip_auditor_e2e_tester \
-        "$(svc_acct_email "${GCR_AUDIT_TEST_PROD_PROJECT}" "${PROMOTER_SVCACCT}")" \
+        "$(svc_acct_email "${GCR_AUDIT_TEST_PROD_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")" \
         "${GCR_AUDIT_TEST_PROD_PROJECT}"
 
     # Special case: grant the GCR backup-test svcacct access to the "backup-test
@@ -289,7 +292,7 @@ function ensure_all_prod_special_cases() {
     for r in "${PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_svcacct_to_write_gcr \
-            "$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")" \
+            "$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")" \
             "${GCR_BACKUP_TEST_PROD_PROJECT}" \
             "${r}"
     done 2>&1 | indent
@@ -315,13 +318,13 @@ function ensure_all_prod_special_cases() {
 
     # Special case: create/add-permissions for necessary service accounts for the auditor.
     color 6 "Empowering artifact auditor"
-    empower_artifact_auditor "${PROD_PROJECT}"
-    empower_artifact_auditor_invoker "${PROD_PROJECT}"
+    empower_image_auditor "${PROD_PROJECT}"
+    empower_image_auditor_invoker "${PROD_PROJECT}"
 
     # Special case: give Cloud Run Admin privileges to the group that will
     # administer the cip-auditor (so that they can deploy the auditor to Cloud Run).
     color 6 "Empowering artifact-admins to release prod auditor"
-    empower_group_to_admin_artifact_auditor \
+    empower_group_to_admin_image_auditor \
         "${PROD_PROJECT}" \
         "k8s-infra-artifact-admins@kubernetes.io"
 
@@ -329,29 +332,36 @@ function ensure_all_prod_special_cases() {
     color 6 "Ensuring prod promoter vuln scanning svcacct exists"
     ensure_service_account \
         "${PROD_PROJECT}" \
-        "${PROMOTER_VULN_SCANNING_SVCACCT}" \
+        "${IMAGE_PROMOTER_VULN_SCANNING_SVCACCT}" \
         "k8s-infra container image vuln scanning"
 
     # Special case: allow prow trusted build clusters to run jobs as
     # prod-related GCP service accounts
     color 6 "Empowering trusted prow build clusters to use prod-related GCP service accounts"
     for project in "${PROW_TRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
+        # Grant write access to k8s-artifacts-prod GCS
+        serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${FILE_PROMOTER_SVCACCT}")"
+        color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
+        empower_gke_for_serviceaccount \
+            "${project}" "${PROWJOB_POD_NAMESPACE}" \
+            "${serviceaccount}" "k8s-infra-promoter"
+
         # Grant write access to k8s-artifacts-prod GCR
-        serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_SVCACCT}")"
+        serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
         color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
             "${project}" "${PROWJOB_POD_NAMESPACE}" \
             "${serviceaccount}" "k8s-infra-gcr-promoter"
 
         # Grant write access to k8s-artifacts-prod-bak GCR (for backups)
-        serviceaccount="$(svc_acct_email "${PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")"
+        serviceaccount="$(svc_acct_email "${PRODBAK_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
         color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
             "${project}" "${PROWJOB_POD_NAMESPACE}" \
             "${serviceaccount}" "k8s-infra-gcr-promoter-bak"
 
         # TODO: Grant ??? acccess to k8s-artifacts-prod ???
-        serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${PROMOTER_VULN_SCANNING_SVCACCT}")"
+        serviceaccount="$(svc_acct_email "${PROD_PROJECT}" "${IMAGE_PROMOTER_VULN_SCANNING_SVCACCT}")"
         color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
             "${project}" "${PROWJOB_POD_NAMESPACE}" \
@@ -368,7 +378,7 @@ function ensure_all_prod_special_cases() {
     # NOTE: This is granted to prow build clusters that run untrusted code,
     #       such as presubmit jobs using PRs.
     color 6 "Empowering promoter-test namespace to use backup-test-prod-bak promoter svcacct"
-    serviceaccount="$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${PROMOTER_SVCACCT}")"
+    serviceaccount="$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
     for project in "${PROW_UNTRUSTED_BUILD_CLUSTER_PROJECTS[@]}"; do
         color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \

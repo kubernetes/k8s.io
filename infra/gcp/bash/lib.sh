@@ -79,12 +79,15 @@ readonly AUDITOR_INVOKER_SVCACCT="k8s-infra-gcr-auditor-invoker"
 # This is the Cloud Run service name of the auditor.
 readonly AUDITOR_SERVICE_NAME="cip-auditor"
 
+# The service account name for the file promoter.
+readonly FILE_PROMOTER_SVCACCT="k8s-infra-promoter"
+
 # The service account name for the image promoter.
-readonly PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
+readonly IMAGE_PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
 # The service account name for the image promoter's vulnerability check.
 # used in: ensure-prod-storage.sh ensure-staging-storage.sh
-export PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
+export IMAGE_PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"
 
 # Release Engineering umbrella groups
 # - admins - edit and KMS access (Release Engineering subproject owners)
@@ -357,9 +360,9 @@ function empower_gcs_admins() {
 # Grant Cloud Run privileges to a group.
 # $1: The GCP project
 # $2: The googlegroups group
-function empower_group_to_admin_artifact_auditor() {
+function empower_group_to_admin_image_auditor() {
     if [ $# != 2 ]; then
-        echo "empower_group_to_admin_artifact_auditor(project, group_name) requires 2 arguments" >&2
+        echo "empower_group_to_admin_image_auditor(project, group_name) requires 2 arguments" >&2
         return 1
     fi
     local project="$1"
@@ -389,34 +392,49 @@ function empower_group_to_admin_artifact_auditor() {
         --role="roles/iam.serviceAccountUser"
 }
 
+# Grant write privileges to the file promoter bot
+# $1: The GCP project
+# $2: The bucket (e.g. gs://bucket-name)
+function empower_file_promoter() {
+    if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "empower_file_promoter(project, bucket) requires 2 arguments" >&2
+        return 1
+    fi
+    local project="$1"
+    local bucket="$2"
+    local acct
+    acct=$(svc_acct_email "${project}" "${FILE_PROMOTER_SVCACCT}")
+
+    ensure_service_account "${project}" "${FILE_PROMOTER_SVCACCT}" "artifact promoter"
+
+    # TODO(kpromo): Determine if admin access is required here.
+    #               ref: https://github.com/kubernetes-sigs/k8s-container-image-promoter/issues/413
+    empower_svcacct_to_write_gcs_bucket "${acct}" "${bucket}"
+}
+
 # Grant full privileges to the GCR promoter bot
 # $1: The GCP project
 # $2: The GCR region (optional)
-function empower_artifact_promoter() {
+function empower_image_promoter() {
     if [ $# -lt 1 ] || [ $# -gt 2 ] || [ -z "$1" ]; then
-        echo "empower_artifact_promoter(project, [region]) requires 1 or 2 arguments" >&2
+        echo "empower_image_promoter(project, [region]) requires 1 or 2 arguments" >&2
         return 1
     fi
     local project="$1"
     local region="${2:-}"
-    local acct=
-    acct=$(svc_acct_email "${project}" "${PROMOTER_SVCACCT}")
+    local acct
+    acct=$(svc_acct_email "${project}" "${IMAGE_PROMOTER_SVCACCT}")
 
-    if ! gcloud --project "${project}" iam service-accounts describe "${acct}" >/dev/null 2>&1; then
-        gcloud --project "${project}" \
-            iam service-accounts create \
-            "${PROMOTER_SVCACCT}" \
-            --display-name="k8s-infra container image promoter"
-    fi
+    ensure_service_account "${project}" "${IMAGE_PROMOTER_SVCACCT}" "k8s-infra container image promoter"
 
     empower_svcacct_to_admin_gcr "${acct}" "${project}" "${region}"
 }
 
 # Ensure the auditor service account exists and has the ability to write logs and fire alerts to Stackdriver Error Reporting.
 # $1: The GCP project
-function empower_artifact_auditor() {
+function empower_image_auditor() {
     if [ $# -lt 1 ] || [ -z "$1" ]; then
-        echo "empower_artifact_auditor(project) requires 1 argument" >&2
+        echo "empower_image_auditor(project) requires 1 argument" >&2
         return 1
     fi
     local project="$1"
@@ -452,9 +470,9 @@ function empower_artifact_auditor() {
 # subscription getting its messages from the GCR topic "gcr", where changes to
 # GCR are posted).
 # $1: The GCP project
-function empower_artifact_auditor_invoker() {
+function empower_image_auditor_invoker() {
     if [ $# -lt 1 ] || [ -z "$1" ]; then
-        echo "empower_artifact_auditor_invoker(project) requires 1 argument" >&2
+        echo "empower_image_auditor_invoker(project) requires 1 argument" >&2
         return 1
     fi
     local project="$1"
