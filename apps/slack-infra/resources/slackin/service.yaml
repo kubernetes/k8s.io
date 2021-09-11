@@ -2,10 +2,12 @@ kind: Service
 apiVersion: v1
 metadata:
   name: slackin2
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   selector:
     app: slackin2
-  type: NodePort
+  type: ClusterIP
   ports:
   - protocol: TCP
     port: 80

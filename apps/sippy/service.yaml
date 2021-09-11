@@ -5,6 +5,8 @@ metadata:
   namespace: sippy
   labels:
     app: sippy
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   ports:
     - port: 9080
@@ -13,4 +15,4 @@ spec:
   selector:
     app: sippy
   sessionAffinity: None
-  type: NodePort
+  type: ClusterIP

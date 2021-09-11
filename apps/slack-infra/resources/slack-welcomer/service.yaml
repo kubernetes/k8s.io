@@ -2,10 +2,12 @@ kind: Service
 apiVersion: v1
 metadata:
   name: slack-welcomer
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   selector:
     app: slack-welcomer
-  type: NodePort
+  type: ClusterIP
   ports:
   - protocol: TCP
     port: 80
