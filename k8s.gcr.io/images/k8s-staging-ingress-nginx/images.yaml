@@ -109,6 +109,6 @@
 
 # custom-error-pages
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/custom-error-pages
-- name: kube-webhook-certgen
+- name: nginx-errors
   dmap:
     "sha256:5530c7fc1fa75b49e068d6b7b4f8f1c13a5834c155ba7abd5943b9057c3b925b": ["0.48.1"]
