@@ -1,5 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+approvers:
+- committee-code-of-conduct
 reviewers:
 - committee-code-of-conduct
 
