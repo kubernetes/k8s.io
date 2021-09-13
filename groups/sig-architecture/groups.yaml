@@ -65,6 +65,19 @@ groups:
       - liggitt@google.com
       - shaikhnavid14@gmail.com
 
+  - email-id: k8s-infra-prod-readiness@kubernetes.io
+    name: k8s-infra-prod-readiness
+    description: |-
+      ACL for managing access to prod-readiness-related infrastructure such as
+      the k8s-prod-readiness bigquery dataset
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jbelamaric@google.com
+      - deads@redhat.com
+      - wojtekt@google.com
+      - ehashman@redhat.com
+
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
