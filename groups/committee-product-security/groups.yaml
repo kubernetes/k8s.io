@@ -3,6 +3,14 @@
 # group is prefixed with "k8s-infra" to avoid polluting the other existing gsuite
 # mailing lists.
 groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
   - email-id: distributors-announce@kubernetes.io
     name: distributors-announce
     description: |-
@@ -84,3 +92,41 @@ groups:
       - mhausler@amazon.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+  - email-id: k8s-infra-artifact-security@kubernetes.io
+    name: k8s-infra-artifact-security
+    description: |-
+      ACL for artifact security, including things like vulnerability scans
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - security@kubernetes.io
+      - mikedanese@google.com
+      - alextc@google.com
+      - jsand@google.com
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

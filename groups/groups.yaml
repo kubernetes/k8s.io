@@ -119,18 +119,6 @@ groups:
       - jim@nirmata.com
       - rficcaglia@gmail.com
 
-  - email-id: k8s-infra-artifact-security@kubernetes.io
-    name: k8s-infra-artifact-security
-    description: |-
-      ACL for artifact security, including things like vulnerability scans
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - security@kubernetes.io
-      - mikedanese@google.com
-      - alextc@google.com
-      - jsand@google.com
-
   #
   # Staging groups: k8s-infra-staging-*
   #
