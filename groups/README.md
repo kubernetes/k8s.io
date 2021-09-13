@@ -2,7 +2,8 @@
 
 ## Making changes
 
-- Edit `groups.yaml` and `restrictions.yaml` to add a new group or update an existing group
+- Edit your SIG's `groups.yaml`, e.g. [`sig-release/groups.yaml`][/groups/sig-release/groups.yaml]
+- If adding or removing a group, edit [`restrictions.yaml`] to add or remove the group name
 - Use `make test` to ensure the changes meet conventions
 - Open a pull request
 - When the pull request merges, the [post-k8sio-groups] job will deploy the changes
