@@ -1,0 +1,17 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# This file should stay in sync with the following OWNERS:
+# - https://sigs.k8s.io/cri-tools/OWNERS
+
+approvers:
+  - Random-Liu
+  - dchen1107
+  - feiskyer
+  - mrunalp
+  - saschagrunert
+  - tallclair
+  - xlgao-zju
+  - yujuhong
+  # TODO(cri-tools): The following approvers need to be added as org members
+  #- heartlock
+  #- runcom
