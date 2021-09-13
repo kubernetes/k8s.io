@@ -1,5 +1,9 @@
 # Automation of Google Groups maintenance for k8s-infra permissions
 
+- [Making changes](#making-changes)
+  - [Staging access groups](#staging-access-groups)
+- [Manual deploy](#manual-deploy)
+
 ## Making changes
 
 - Edit your SIG's `groups.yaml`, e.g. [`sig-release/groups.yaml`][/groups/sig-release/groups.yaml]
@@ -7,6 +11,17 @@
 - Use `make test` to ensure the changes meet conventions
 - Open a pull request
 - When the pull request merges, the [post-k8sio-groups] job will deploy the changes
+
+### Staging access groups
+
+Google Groups for granting push access to container repositories and/or buckets
+must be of the form:
+
+```console
+k8s-infra-staging-<project-name>@kubernetes.io`
+```
+
+**The project name has a max length of 18 characters.**
 
 ## Manual deploy
 
