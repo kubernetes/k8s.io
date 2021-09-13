@@ -173,7 +173,7 @@ aliases:
     - BenTheElder
     - MushuEE
     - spiffxp
-  cip-approvers:
+  promo-tools-approvers:
     - cpanato
     - jeremyrickard
     - justaugustus
@@ -181,7 +181,7 @@ aliases:
     - puerco
     - saschagrunert
     - thockin
-  cip-reviewers:
+  promo-tools-reviewers:
     - cpanato
     - jeremyrickard
     - justaugustus

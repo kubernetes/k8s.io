@@ -3,10 +3,10 @@
 options:
   no_parent_owners: true
 approvers:
-  - cip-approvers
+  - promo-tools-approvers
   - release-engineering-approvers
 reviewers:
-  - cip-reviewers
+  - promo-tools-reviewers
   - release-engineering-reviewers
 
 labels:
