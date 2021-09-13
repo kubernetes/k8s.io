@@ -16,7 +16,14 @@
     },
     {
       "members": [
-        "group:k8s-infra-artifact-admins@kubernetes.io"
+        "serviceAccount:k8s-infra-promoter@k8s-gcr-backup-test-prod-bak.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "serviceAccount:k8s-infra-promoter@k8s-gcr-backup-test-prod-bak.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },

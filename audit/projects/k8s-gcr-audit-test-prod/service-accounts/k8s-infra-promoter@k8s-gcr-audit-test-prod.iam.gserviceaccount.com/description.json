@@ -1,0 +1,8 @@
+{
+  "displayName": "artifact promoter",
+  "email": "k8s-infra-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com",
+  "name": "projects/k8s-gcr-audit-test-prod/serviceAccounts/k8s-infra-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "101830761205812123263",
+  "projectId": "k8s-gcr-audit-test-prod",
+  "uniqueId": "101830761205812123263"
+}

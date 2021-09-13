@@ -1,6 +1,7 @@
 NAME                                 TITLE
 bigquery.googleapis.com              BigQuery API
 bigquerystorage.googleapis.com       BigQuery Storage API
+billingbudgets.googleapis.com        Cloud Billing Budget API
 cloudasset.googleapis.com            Cloud Asset API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
 cloudshell.googleapis.com            Cloud Shell API

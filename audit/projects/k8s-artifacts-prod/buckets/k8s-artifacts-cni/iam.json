@@ -16,14 +16,16 @@
     },
     {
       "members": [
-        "group:k8s-infra-push-cni@kubernetes.io"
+        "group:k8s-infra-push-cni@kubernetes.io",
+        "serviceAccount:k8s-infra-promoter@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "group:k8s-infra-push-cni@kubernetes.io"
+        "group:k8s-infra-push-cni@kubernetes.io",
+        "serviceAccount:k8s-infra-promoter@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },
