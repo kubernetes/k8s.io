@@ -165,18 +165,6 @@ groups:
   #     WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
   #
 
-  - email-id: k8s-infra-rbac-triageparty-cli@kubernetes.io
-    name: k8s-infra-rbac-triageparty-cli
-    description: |-
-      ACL for Bug Triage CLI Team
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - eddiezane@gmail.com
-      - kn.verey@gmail.com
-      - maszulik@redhat.com
-
   - email-id: k8s-infra-rbac-sippy@kubernetes.io
     name: k8s-infra-rbac-sippy
     description: |-
