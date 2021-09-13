@@ -1,4 +1,21 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+options:
+  # Root approvers for this repo include contributors who are not involved
+  # in artifact promotion. We're blocking root approvals here to ensure
+  # manifests are reviewed by Release Engineering and/or WG K8s Infra
+  # approvers.
+  #
+  # Long-term, a separate repo has been proposed for these artifact promotion
+  # manifests: https://github.com/kubernetes/org/issues/2342
+  no_parent_owners: true
+approvers:
+  - promo-tools-approvers
+  - release-engineering-approvers
+  - wg-k8s-infra-leads
+reviewers:
+  - promo-tools-reviewers
+  - release-engineering-reviewers
+
 labels:
 - area/artifacts

@@ -1,11 +1,11 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- cip-approvers
+- promo-tools-approvers
 - release-engineering-approvers
 - wg-k8s-infra-leads
 reviewers:
-- cip-reviewers
+- promo-tools-reviewers
 - release-engineering-reviewers
 
 labels:
