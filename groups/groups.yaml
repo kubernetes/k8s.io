@@ -165,18 +165,6 @@ groups:
   #     WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
   #
 
-  - email-id: k8s-infra-rbac-sippy@kubernetes.io
-    name: k8s-infra-rbac-sippy
-    description: |-
-      Grants access to the `namespace-user` role in the `sippy` namespace on the `aaa` cluster
-    settings:
-      ReconcileMembers: "true"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
-    members:
-      - deads@redhat.com
-      - wojtekt@google.com
-      - skuznets@redhat.com
-
   #
   # Staging groups: k8s-infra-staging-*
   #
