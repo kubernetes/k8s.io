@@ -92,6 +92,29 @@ groups:
   # required for membership in these groups.
   #
 
+  # Every RBAC group should be added here.
+  - email-id: gke-security-groups@kubernetes.io
+    name: gke-security-groups
+    description: |-
+      Security Groups for GKE clusters
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # needed for RBAC
+    members:
+      - k8s-infra-rbac-cert-manager@kubernetes.io
+      - k8s-infra-rbac-gcsweb@kubernetes.io
+      - k8s-infra-rbac-kettle@kubernetes.io
+      - k8s-infra-rbac-k8s-io-canary@kubernetes.io
+      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
+      - k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
+      - k8s-infra-rbac-perfdash@kubernetes.io
+      - k8s-infra-rbac-prow@kubernetes.io
+      - k8s-infra-rbac-publishing-bot@kubernetes.io
+      - k8s-infra-rbac-triageparty-cli@kubernetes.io
+      - k8s-infra-rbac-triageparty-release@kubernetes.io
+      - k8s-infra-rbac-triageparty-scalability@kubernetes.io
+      - k8s-infra-rbac-sippy@kubernetes.io
+      - k8s-infra-rbac-slack-infra@kubernetes.io
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
