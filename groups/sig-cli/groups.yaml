@@ -57,3 +57,15 @@ groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
   # - must be members of gke-security-groups@kubernetes.io
+
+  - email-id: k8s-infra-rbac-triageparty-cli@kubernetes.io
+    name: k8s-infra-rbac-triageparty-cli
+    description: |-
+      ACL for Bug Triage CLI Team
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - eddiezane@gmail.com
+      - kn.verey@gmail.com
+      - maszulik@redhat.com

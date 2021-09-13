@@ -70,6 +70,17 @@ groups:
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
   # - must be members of gke-security-groups@kubernetes.io
 
+  - email-id: k8s-infra-rbac-sippy@kubernetes.io
+    name: k8s-infra-rbac-sippy
+    description: |-
+      Grants access to the `namespace-user` role in the `sippy` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - deads@redhat.com
+      - wojtekt@google.com
+      - skuznets@redhat.com
 
   #
   # k8s-infra-conform gcs write access

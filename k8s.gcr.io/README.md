@@ -15,10 +15,11 @@ to promote images to the main serving repository.
 
 ### Creating staging repos
 
-1. Create a google group for granting push access by adding an email
-alias for it in [groups.yaml] and [restrictions.yaml]. The email alias should be of the form
-`k8s-infra-staging-<project-name>@kubernetes.io`. The project name
-can have a maximum of 18 characters.
+1. Create a google group for granting push access by adding an entry in your
+SIG's groups.yaml, e.g. [sig-release/groups.yaml][/groups/sig-release/groups.yaml],
+as well as an entry in [restrictions.yaml]. The group name should be of the form
+`k8s-infra-staging-<project-name>`. The project name has a max length of 18
+characters.
 
 2. Create 3 files:
     - `images/k8s-staging-<project-name>/OWNERS`
@@ -85,7 +86,6 @@ Essentially, in order to get images published to a production repo, you have to
 use the image promotion (PR creation) process defined above.
 
 [image-pushing-readme]: https://git.k8s.io/test-infra/config/jobs/image-pushing/README.md
-[groups.yaml]: /groups/groups.yaml
 [restrictions.yaml]: /groups/restrictions.yaml
 [infra.yaml]: /infra/gcp/infra.yaml
 [staging-bash]: /infra/gcp/bash/ensure-staging-storage.sh

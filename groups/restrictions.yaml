@@ -7,6 +7,7 @@ restrictions:
       - "^distributors-announce@kubernetes.io$"
       - "^security@kubernetes.io$"
       - "^security-discuss-private@kubernetes.io$"
+      - "^k8s-infra-artifact-security@kubernetes.io$"
   - path: "committee-steering/groups.yaml"
     allowedGroups:
       - "^steering-private@kubernetes.io$"
@@ -15,16 +16,10 @@ restrictions:
   - path: "groups.yaml"
     allowedGroups:
       - "^leads@kubernetes.io$"
-      - "^gke-security-groups@kubernetes.io$"
-      - "^k8s-infra-artifact-security@kubernetes.io$"
-      - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
-      - "^k8s-infra-rbac-sippy@kubernetes.io$"
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-etcd@kubernetes.io$"
-      - "^k8s-infra-staging-multitenancy@kubernetes.io$"
       - "^k8s-infra-staging-txtdirect@kubernetes.io$"
-      - "^k8s-infra-ii-coop@kubernetes.io$"
   - path: "sig-api-machinery/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
@@ -41,15 +36,18 @@ restrictions:
       - "^k8s-infra-conform-s390x-k8s@kubernetes.io$"
       - "^k8s-infra-staging-apisnoop@kubernetes.io$"
       - "^k8s-infra-code-organization@kubernetes.io$"
+      - "^k8s-infra-rbac-sippy@kubernetes.io$"
   - path: "sig-auth/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-csi-secrets-store@kubernetes.io$"
+      - "^k8s-infra-staging-multitenancy@kubernetes.io$"
   - path: "sig-autoscaling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-autoscaling@kubernetes.io$"
   - path: "sig-cli/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-kustomize@kubernetes.io$"
+      - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
   - path: "sig-cloud-provider/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-provider-aws@kubernetes.io$"
@@ -178,6 +176,7 @@ restrictions:
       - "^k8s-infra-rbac-prow@kubernetes.io$"
   - path: "wg-k8s-infra/groups.yaml"
     allowedGroups:
+      - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-alerts@kubernetes.io$"
       - "^k8s-infra-team-private@kubernetes.io$"
       - "^wg-k8s-infra-leads@kubernetes.io$"
@@ -196,4 +195,5 @@ restrictions:
       - "^k8s-infra-rbac-k8s-io-prod@kubernetes.io$"
       - "^k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io$"
       - "^k8s-infra-staging-infra-tools@kubernetes.io$"
+      - "^k8s-infra-ii-coop@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
