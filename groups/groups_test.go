@@ -312,8 +312,10 @@ func TestHardcodedGroupsForParanoia(t *testing.T) {
 			"thockin@google.com",
 		},
 		"k8s-infra-group-admins@kubernetes.io": []string{
+			"ameukam@gmail.com",
 			"cblecker@gmail.com",
 			"davanum@gmail.com",
+			"nikhitaraghunath@gmail.com",
 			"spiffxp@google.com",
 			"thockin@google.com",
 		},
