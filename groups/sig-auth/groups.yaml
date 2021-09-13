@@ -30,6 +30,23 @@ groups:
       - rita.z.zhang@gmail.com
       - tommymurphy@google.com
 
+  - email-id: k8s-infra-staging-multitenancy@kubernetes.io
+    name: k8s-infra-staging-multitenancy
+    description: |-
+      ACL for multitenancy WG driven subprojects such as multi-tenancy and
+      hierachical-namespace-controller
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aludwin@google.com
+      - f.guo@alibaba-inc.com
+      - kevin.fox@pnnl.gov
+      - laetitiah@google.com
+      - ryan.j.bezdicek@gmail.com
+      - srampal@cisco.com
+      - tasha.drew@gmail.com
+      - srajakum@amazon.com
+
   #
   # k8s-infra gcs write access
   #

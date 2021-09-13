@@ -19,7 +19,6 @@ restrictions:
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-etcd@kubernetes.io$"
-      - "^k8s-infra-staging-multitenancy@kubernetes.io$"
       - "^k8s-infra-staging-txtdirect@kubernetes.io$"
   - path: "sig-api-machinery/groups.yaml"
     allowedGroups:
@@ -41,6 +40,7 @@ restrictions:
   - path: "sig-auth/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-csi-secrets-store@kubernetes.io$"
+      - "^k8s-infra-staging-multitenancy@kubernetes.io$"
   - path: "sig-autoscaling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-autoscaling@kubernetes.io$"
