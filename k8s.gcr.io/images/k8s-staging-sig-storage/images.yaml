@@ -87,6 +87,7 @@
     "sha256:f74a0ba3e72a2ceace6a187de6ccbb295a9e4409f6f33ce88c8411ee39e71fcf": [ "v1.6.2" ]
     "sha256:232fe80174d60d520d36043103853a1d7ab4b7f3782cf43e45034f04ccda58ce": [ "v1.7.1" ]
     "sha256:76dad56dda3e7519b72c9501dfee039c6a33ea5a5075eadd9bd0cdc4ba7b476d": [ "v1.7.2" ]
+    "sha256:6029c252dae6178c99b580de72d7776158edbc81be0de15cedc4152a3acfed18": [ "v1.7.3" ]
 - name: iscsiplugin
   dmap:
 - name: livenessprobe
