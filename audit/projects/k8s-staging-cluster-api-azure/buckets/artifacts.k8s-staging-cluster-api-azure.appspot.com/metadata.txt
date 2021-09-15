@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-cluster-api-azure.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 23 Sep 2019 16:09:09 GMT
-	Time updated:			Thu, 01 Jul 2021 01:48:56 GMT
-	Metageneration:			14
+	Time updated:			Thu, 09 Sep 2021 15:48:06 GMT
+	Metageneration:			15
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

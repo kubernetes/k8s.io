@@ -36,17 +36,27 @@ function deploy_cluster_terraform() {
 }
 
 function deploy_cluster_resources() {
+    pushd "${SCRIPT_ROOT}/${cluster}/resources"
+
     gcloud \
         container clusters get-credentials \
         --project="${project}" \
         --region="${region}" \
         "${cluster}"
 
-    kubectl \
-        --context="${context}" \
-        apply \
-          -f "${SCRIPT_ROOT}/${cluster}/resources" \
-          --recursive
+    kubectl --context="${context}" apply \
+        --filename ./*.yaml
+
+    find . -type d -mindepth 1 -maxdepth 1 | sed -e 's|^./||' \
+    | while read -r namespace; do
+        echo "deploying resources in namespace: ${namespace}"
+        kubectl --context="${context}" apply \
+            --namespace "${namespace}" \
+            --filename "${namespace}/" \
+            --recursive
+    done
+
+    popd
 }
 
 function main() {

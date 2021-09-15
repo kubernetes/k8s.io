@@ -12,8 +12,9 @@ gs://k8s-conform-huaweicloud/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 24 Feb 2020 04:08:39 GMT
-	Time updated:			Thu, 10 Jun 2021 20:21:47 GMT
-	Metageneration:			36
+	Time updated:			Mon, 30 Aug 2021 10:10:20 GMT
+	Metageneration:			37
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

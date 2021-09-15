@@ -38,16 +38,18 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: deck
-        image: gcr.io/k8s-prow/deck:v20210810-beb809847f
+        image: gcr.io/k8s-prow/deck:v20210902-01e03305a2
         imagePullPolicy: Always
         ports:
-          - name: http
-            containerPort: 8080
+        - name: http
+          containerPort: 8080
+        - name: metrics
+          containerPort: 9090
         args:
         - --config-path=/etc/config/config.yaml
         - --cookie-secret=/etc/cookie/secret
         - --github-token-path=/etc/github/token
-        - --github-endpoint=http://ghproxy.prow.svc.cluster.local
+        - --github-endpoint=http://ghproxy
         - --github-endpoint=https://api.github.com
         - --github-oauth-config-file=/etc/githuboauth/secret
         - --hook-url=http://hook:8888/plugin-help

@@ -3,7 +3,7 @@ gs://asia.artifacts.k8s-gcr-backup-test-prod-bak.appspot.com/ :
 	Location type:			multi-region
 	Location constraint:		ASIA
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	None
@@ -11,8 +11,9 @@ gs://asia.artifacts.k8s-gcr-backup-test-prod-bak.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 23 Oct 2019 19:11:52 GMT
-	Time updated:			Fri, 12 Feb 2021 23:10:29 GMT
-	Metageneration:			34
+	Time updated:			Fri, 10 Sep 2021 21:10:30 GMT
+	Metageneration:			37
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

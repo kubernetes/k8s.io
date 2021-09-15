@@ -14,5 +14,6 @@ gs://k8s-staging-capi-docker-gcb/ :
 	Time updated:			Thu, 20 May 2021 09:23:26 GMT
 	Metageneration:			30
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

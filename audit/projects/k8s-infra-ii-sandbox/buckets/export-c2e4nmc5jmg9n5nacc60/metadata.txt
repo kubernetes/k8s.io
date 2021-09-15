@@ -14,6 +14,7 @@ gs://export-c2e4nmc5jmg9n5nacc60/ :
 	Time updated:			Wed, 12 May 2021 21:42:50 GMT
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
+	Public access prevention:	unspecified
 	ACL:				
 	  [
 	    {

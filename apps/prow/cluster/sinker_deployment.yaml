@@ -23,7 +23,7 @@ spec:
         - --dry-run=false
         - --job-config-path=/etc/job-config
         - --kubeconfig=/etc/kubeconfig/kubeconfig
-        image: gcr.io/k8s-prow/sinker:v20210810-beb809847f
+        image: gcr.io/k8s-prow/sinker:v20210902-01e03305a2
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -31,6 +31,9 @@ spec:
               - "ALL"
           privileged: false
           readOnlyRootFilesystem: true
+        ports:
+        - name: metrics
+          containerPort: 9090
         volumeMounts:
         - mountPath: /etc/kubeconfig
           name: kubeconfig

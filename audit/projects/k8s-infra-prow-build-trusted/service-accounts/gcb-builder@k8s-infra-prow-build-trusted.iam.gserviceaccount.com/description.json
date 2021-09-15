@@ -1,5 +1,5 @@
 {
-  "displayName": "gcb-builder",
+  "displayName": "trigger GCB builds in all k8s-staging projects",
   "email": "gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
   "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
   "oauth2ClientId": "112742619569156756728",

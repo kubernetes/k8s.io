@@ -165,10 +165,8 @@ issues:
   value: redirect.k8s.io.
 #wg-k8s-infra
 k8s-infra-prow:
-  - type: A
-    value: 34.117.224.94 # Hosted on GKE cluster aaa
-  - type: AAAA
-    value: "2600:1901:0:b267::" # Hosted on GKE cluster aaa
+  type: A
+  value: 34.117.224.94 # Hosted on GKE cluster aaa
 kep:
   type: CNAME
   value: redirect.k8s.io.
@@ -263,6 +261,10 @@ cluster-api.sigs:
 cluster-api-aws.sigs:
   type: CNAME
   value: kubernetes-sigs-cluster-api-provider-aws.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-openstack/ (@jichenjc @sbueringer @hidekazuna)
+cluster-api-openstack.sigs:
+- type: CNAME
+  value: kubernetes-sigs-cluster-api-openstack.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vince)
 release-0-1.cluster-api.sigs:
   type: CNAME

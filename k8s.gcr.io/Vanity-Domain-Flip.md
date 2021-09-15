@@ -190,7 +190,7 @@ gcloud \
     $(printf "resource.type=project logName=%s resource.labels.project_id=%s" cip-audit-log k8s-artifacts-prod)
 ```
 
-The configuration for deploying the prod Cloud Run instance is [here](/infra/gcp/cip-auditor/deploy.sh).
+The configuration for deploying the prod Cloud Run instance is [here](/infra/gcp/bash/cip-auditor/deploy.sh).
 
 ## Prow Integration
 

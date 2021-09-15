@@ -11,8 +11,9 @@ gs://k8s-staging-e2e-test-images/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Dec 2019 17:24:09 GMT
-	Time updated:			Thu, 01 Jul 2021 02:03:23 GMT
-	Metageneration:			29
+	Time updated:			Thu, 09 Sep 2021 16:02:02 GMT
+	Metageneration:			30
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-cip-test.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 03 Apr 2019 19:51:34 GMT
-	Time updated:			Thu, 01 Jul 2021 01:42:46 GMT
-	Metageneration:			32
+	Time updated:			Thu, 09 Sep 2021 15:39:00 GMT
+	Metageneration:			33
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

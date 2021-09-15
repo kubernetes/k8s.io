@@ -29,7 +29,7 @@
 # - consider breaking up into multiple files vs. one large file
 infra:
   e2e:
-    managed_by: infra/gcp/prow/ensure-e2e-projects.sh
+    managed_by: infra/gcp/bash/prow/ensure-e2e-projects.sh
     projects:
       # general purpose e2e projects, no quota changes
       k8s-infra-e2e-boskos-001:
@@ -208,7 +208,7 @@ infra:
       k8s-infra-e2e-scale-5k-project:
 
   prod:
-    managed_by: infra/gcp/ensure-prod-storage.sh
+    managed_by: infra/gcp/bash/ensure-prod-storage.sh
     projects:
       k8s-artifacts-prod: # TODO: _also_ managed by ensure-env-cip-auditor.sh
       k8s-artifacts-prod-bak:
@@ -228,16 +228,16 @@ infra:
   public:
     projects:
       k8s-conform:
-        managed_by: infra/gcp/ensure-conformance-storage.sh
+        managed_by: infra/gcp/bash/ensure-conformance-storage.sh
       k8s-gsuite:
-        managed_by: infra/gcp/ensure-gsuite.sh
+        managed_by: infra/gcp/bash/ensure-gsuite.sh
       k8s-infra-public-pii:
         managed_by: TODO
       kubernetes-public:
-        managed_by: infra/gcp/ensure-main-project.sh
+        managed_by: infra/gcp/bash/ensure-main-project.sh
 
   release:
-    managed_by: infra/gcp/ensure-release-projects.sh
+    managed_by: infra/gcp/bash/ensure-release-projects.sh
     projects:
       k8s-release:
       k8s-release-test-prod: # TODO: should this be prod or release?:
@@ -245,7 +245,7 @@ infra:
   releng:
     projects:
       k8s-releng-prod:
-        managed_by: infra/gcp/ensure-releng-project.sh
+        managed_by: infra/gcp/bash/ensure-releng-project.sh
 
   sandbox:
     projects:
@@ -253,7 +253,7 @@ infra:
         managed_by: infra/gcp/terraform/k8s-infra-ii-sandbox/main.tf
 
   staging:
-    managed_by: infra/gcp/ensure-staging-storage.sh
+    managed_by: infra/gcp/bash/ensure-staging-storage.sh
     projects:
       k8s-staging-addon-manager:
       k8s-staging-apisnoop:
@@ -263,12 +263,14 @@ infra:
       k8s-staging-boskos:
       k8s-staging-build-image:
       k8s-staging-capi-docker:
+      k8s-staging-capi-ibmcloud:
       k8s-staging-capi-kubeadm:
       k8s-staging-capi-openstack:
       k8s-staging-capi-vsphere:
       k8s-staging-ci-images:
       k8s-staging-cip-test:
       k8s-staging-cloud-provider-gcp:
+      k8s-staging-cloud-provider-ibm:
       k8s-staging-cluster-addons:
       k8s-staging-cluster-api:
       k8s-staging-cluster-api-aws:
@@ -317,6 +319,7 @@ infra:
       k8s-staging-releng:
       k8s-staging-releng-test:
       k8s-staging-scheduler-plugins:
+      k8s-staging-sched-simulator:
       k8s-staging-scl-image-builder:
       k8s-staging-sig-docs:
       k8s-staging-sig-storage:

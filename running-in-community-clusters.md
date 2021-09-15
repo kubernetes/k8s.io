@@ -33,23 +33,24 @@ You can include all of these steps in a single PR.
 
 You will get one or more namespaces to run your thing.  Decide what names you
 want and make sure they are available.  Check the list in [the namespaces
-config](/infra/gcp/namespaces/ensure-namespaces.sh), and add your names there.
+config](/infra/gcp/bash/namespaces/ensure-namespaces.sh), and add your names there.
 Keep them short but descriptive.
 
 ### Create a google-group for each namespace
 
-Add a block to [groups.yaml](/groups/groups.yaml) for each namespace you want.  Each group
-should be named `k8s-infra-rbac-<namespace>`.
+Add an RBAC group for each namespace you want to your SIG's `groups.yaml` file,
+e.g. [sig-release/groups.yaml][/groups/sig-release/groups.yaml]. Each group
+should be named `k8s-infra-rbac-<namespace>`. Each group name should also be
+added as a regular expression to the appropriate stanza in
+[restrictions.yaml][/groups/restrictions.yaml].
 
 Add the approriate set of users to these groups.  Keep it as small as possible,
 but make sure there are enough to people to keep it running.  If you have
 multiple namespaces that should be kept in sync, say so in the description.
 
-Add these new groups to the group called "gke-security-groups", which will
-enable the RBAC linkage.
-
-Finally, add the groups as regular expressions to the `path: "groups.yaml"`
-section of [restrictions.yaml](/groups/restrictions.yaml).
+Add these new groups as members of the `gke-security-groups` defined in
+[wg-k8s-infra/groups.yaml][/groups/wg-k8s-infra/groups.yaml], which will enable
+the RBAC linkage.
 
 ### Send your PR
 

@@ -1,5 +1,5 @@
 # ingress-nginx controller image
-# https://github.com/kubernetes/ingress-nginx/tree/master/rootfs
+# https://github.com/kubernetes/ingress-nginx/tree/main/rootfs
 - name: controller
   dmap:
     "sha256:56633bd00dab33d92ba14c6e709126a762d54a75a6e72437adefeaaca0abb069": ["v0.34.0"]
@@ -21,9 +21,12 @@
     "sha256:32f3f02a038c0d7cf33b71a14028c3a4ddee6f4c3fe5fadfa14b915e5e0d9faf": ["v1.0.0-alpha.1"]
     "sha256:04a0ad3a1279c2a58898e789eed767eafa138ee1e5b9b23a988c6e8485cf958d": ["v1.0.0-alpha.2"]
     "sha256:f058f3fdc940095957695829745956c6acddcaef839907360965e27fd3348e2e": ["v1.0.0-beta.1"]
+    "sha256:44a7a06b71187a4529b0a9edee5cc22bdf71b414470eff696c3869ea8d90a695": ["v1.0.0-beta.3"]
+    "sha256:e9707504ad0d4c119036b6d41ace4a33596139d3feb9ccb6617813ce48c3eeef": ["v0.49.0"]
+    "sha256:0851b34f69f69352bf168e6ccf30e1e20714a264ab1ecd1933e4d8c0fc3215c6": ["v1.0.0"]
 
 # custom base NGINX image
-# https://github.com/kubernetes/ingress-nginx/tree/master/images/nginx
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/nginx
 - name: nginx
   dmap:
     "sha256:35da1d3e00f5e763e59cb59159bf88ba0f0b6e8835885ac9d8b63029a478dba7": ["v20200625-g1813d1c56"]
@@ -43,9 +46,10 @@
     "sha256:fcfa3e9d1f8ec3141efedbf77cf659640f452a9c22165c78006ea462b84d06f6": ["v20210324-g8baef769d"]
     "sha256:a7356029dd0c26cc3466bf7a27daec0f4df73aa14ca6c8b871a767022a812c0b": ["v20210530-g6aab4c291"]
     "sha256:f9363669cf26514c9548c1fe4f8f4e2f58dfb76616bcd638a0ff7f0ec3457c17": ["v20210809-g98288bc3c"]
+    "sha256:fac972a7e43b18408ecb9e87da868df519428294e2e988c16be72479ee873c0e": ["v20210904-gb7c973dce"]
 
 # image to run tests
-# https://github.com/kubernetes/ingress-nginx/tree/master/images/test-runner
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/test-runner
 - name: e2e-test-runner
   dmap:
     "sha256:7dece116c5cc1a51496095de97cc9249a07e9f1a4ed0dc378630074c6857ff46": ["v20200630-g2bff8ed3b"]
@@ -63,15 +67,16 @@
     "sha256:f84dcddc84e5cba220260f315e18cd47fc8c6b7f3f4f57b7b3e9cc2ea25324b7": ["v20210601-g96a87c79b"]
     "sha256:0f3c0d0bda953aa7f1164c452cc0165ce8a0c72469b550988a9601c539f61608": ["v20210806-g26768e957"]
     "sha256:7d7393a8c6c72d76145282df53ea0679a5b769211fd1cd6b8910b6dda1bd986d": ["v20210810-g820a21a74"]
-
+    "sha256:55c568d9e35e15d94b3ab41fe549b8ee4cd910cc3e031ddcccd06256755c5d89": ["v20210822-g5e5faa24d"]
+    "sha256:cf7079b5c05b8b1b108b16752c6ff4ca312cf96700e91eef6088b9e0c4a7aff1": ["v20210906-g7d577d976"]
 # custom cfssl image for e2e tests
-# https://github.com/kubernetes/ingress-nginx/tree/master/images/cfssl
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/cfssl
 - name: e2e-test-cfssl
   dmap:
     "sha256:be2f69024f7b7053f35b86677de16bdaa5d3ff0f81b17581ef0b0c6804188b03": ["v20200627-g1fcf4444c"]
 
 # custom echo HTTP server image for e2e tests
-# https://github.com/kubernetes/ingress-nginx/tree/master/images/echo
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/echo
 - name: e2e-test-echo
   dmap:
     "sha256:41c043188a499d460e7425883a3b196e13f10bf40c395895dbdf06caf3324536": ["v20200627-g35e992fe0"]
@@ -84,20 +89,26 @@
     "sha256:131ece0637b29231470cfaa04690c2966a2e0b147d3c9df080a0857b78982410": ["v20210810-g820a21a74"]
 
 # fastcgi HTTP server image for e2e tests
-# https://github.com/kubernetes/ingress-nginx/tree/master/images/fastcgi-helloserver
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/fastcgi-helloserver
 - name: e2e-test-fastcgi-helloserver
   dmap:
     "sha256:723b8187e1768d199b93fd939c37c1ce9427dcbca72ec6415f4d890bca637fcc": ["v20200627-g1fcf4444c"]
 
 # httpbin image for e2e tests
-# https://github.com/kubernetes/ingress-nginx/tree/master/images/httpbin
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/httpbin
 - name: e2e-test-httpbin
   dmap:
     "sha256:c6372ef57a775b95f18e19d4c735a9819f2e7bb4641e5e3f27287d831dfeb7e8": ["v20200627-gfc91afac8"]
     "sha256:12f18b0ce1fa12e40a29b4b142cbfc6b909b65a0be02421bc3d1889c824747f7": ["v20200808-gc500bd4b3"]
 
 # kube-webhook-certgen
-# https://github.com/kubernetes/ingress-nginx/tree/master/images/kube-webhook-certgen
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/kube-webhook-certgen
 - name: kube-webhook-certgen
   dmap:
     "sha256:f3b6b39a6062328c095337b4cadcefd1612348fdd5190b1dcbcb9b9e90bd8068": ["v1.0"]
+
+# nginx-errors
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/custom-error-pages
+- name: nginx-errors
+  dmap:
+    "sha256:5530c7fc1fa75b49e068d6b7b4f8f1c13a5834c155ba7abd5943b9057c3b925b": ["0.48.1"]

@@ -1,0 +1,12 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- adtac
+- alculquicondor
+- Huang-Wei
+reviewers:
+- adtac
+- alculquicondor
+- Huang-Wei
+labels:
+- sig/scheduling

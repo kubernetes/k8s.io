@@ -42,6 +42,8 @@ spec:
     matchLabels:
       component: ghproxy
   replicas: 1
+  strategy:
+    type: "Recreate"
   template:
     metadata:
       labels:
@@ -49,13 +51,16 @@ spec:
     spec:
       containers:
         - name: ghproxy
-          image: gcr.io/k8s-prow/ghproxy:v20210810-beb809847f
+          image: gcr.io/k8s-prow/ghproxy:v20210902-01e03305a2
           args:
             - --cache-dir=/cache
             - --cache-sizeGB=99
             - --serve-metrics=true
           ports:
-            - containerPort: 8888
+          - name: main
+            containerPort: 8888
+          - name: metrics
+            containerPort: 9090
           resources:
             requests:
               cpu: 2

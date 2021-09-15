@@ -1,4 +1,20 @@
 /*
+Copyright 2021 The Kubernetes Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+ 
+/*
 This file defines:
 - a bucket for k8s-infra-prow
 - a GCP service account for the bucket
@@ -11,7 +27,7 @@ locals {
   bucket_location           = "us-central1"
   prow_service_account      = "k8s-infra-prow"
   test_pods_namespace       = "k8s-infra-test-pods"
-  test_pods_service_account = "default"
+  test_pods_service_account = "prowjob-default-sa"
 }
 
 
@@ -90,12 +106,12 @@ resource "google_storage_bucket_iam_member" "k8s_infra_prow_public_access" {
   member = "allUsers"
 }
 
-// Allow read access to members of k8s-infra-prow-oncall@kubernetes.io
-resource "google_storage_bucket_iam_member" "k8s_infra_prow_oncall" {
+// Allow read access to prow owners
+resource "google_storage_bucket_iam_member" "k8s_infra_prow_owners" {
   bucket = google_storage_bucket.k8s_infra_prow_bucket.name
   role   = "roles/storage.objectViewer"
   //TODO(ameukam): switch to allUsers when https://github.com/kubernetes/k8s.io/issues/752 is closed.
-  member = "group:k8s-infra-prow-oncall@kubernetes.io"
+  member = "group:${local.prow_owners}"
 }
 
 // Create a secret for GCP Service Account key of k8s-infra-prow
@@ -114,13 +130,13 @@ resource "google_secret_manager_secret_version" "k8s_infra_prow_key_version" {
   secret_data = base64decode(google_service_account_key.k8s_infra_prow.private_key)
 }
 
-// Allow read access to members of k8s-infra-prow-oncall@kubernetes.io
+// Allow read access to prow owners
 resource "google_secret_manager_secret_iam_binding" "name" {
   project   = data.google_project.project.project_id
   secret_id = google_secret_manager_secret.k8s_infra_prow_key.id
   role      = "roles/secretmanager.admin"
   members = [
-    "group:k8s-infra-prow-oncall@kubernetes.io"
+    "group:${local.prow_owners}"
   ]
 }
 

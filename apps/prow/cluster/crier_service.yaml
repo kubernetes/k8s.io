@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: crier
-    namespace: prow
+  namespace: prow
   name: crier
 spec:
   ports:

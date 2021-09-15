@@ -38,7 +38,7 @@ set -o pipefail
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 readonly REPO_ROOT
-. "${REPO_ROOT}/infra/gcp/lib.sh"
+. "${REPO_ROOT}/infra/gcp/bash/lib.sh"
 
 #
 # config
@@ -60,8 +60,6 @@ readonly AUDIT_SERVICES
 # utils
 #
 
-# TODO: this should delegate to verify_prereqs from infra/gcp/lib_util.sh once
-#       we can guarantee this runs in an image with `yq` and/or pip3 installed
 function ensure_audit_dependencies() {
     echo "bq"
     # the 'bq show' command is called as a hack to dodge the config prompts that bq presents

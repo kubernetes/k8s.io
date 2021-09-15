@@ -38,7 +38,7 @@ import (
 	"google.golang.org/api/groupssettings/v1"
 	"google.golang.org/api/option"
 	secretmanagerpb "google.golang.org/genproto/googleapis/cloud/secretmanager/v1"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 
 	"k8s.io/test-infra/pkg/genyaml"
 )

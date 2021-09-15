@@ -27,12 +27,6 @@
     },
     {
       "members": [
-        "deleted:serviceAccount:service-127754664067@gcf-admin-robot.iam.gserviceaccount.com?uid=116904371009860244686"
-      ],
-      "role": "roles/cloudfunctions.serviceAgent"
-    },
-    {
-      "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/compute.loadBalancerAdmin"
@@ -129,12 +123,6 @@
         "user:tjferrara@google.com"
       ],
       "role": "roles/monitoring.viewer"
-    },
-    {
-      "members": [
-        "deleted:serviceAccount:service-127754664067@serverless-robot-prod.iam.gserviceaccount.com?uid=118182660088477675409"
-      ],
-      "role": "roles/run.serviceAgent"
     },
     {
       "members": [

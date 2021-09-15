@@ -4,5 +4,7 @@ bigquerydatatransfer.googleapis.com  BigQuery Data Transfer API
 bigqueryreservation.googleapis.com   BigQuery Reservation API
 bigquerystorage.googleapis.com       BigQuery Storage API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
+compute.googleapis.com               Compute Engine API
 logging.googleapis.com               Cloud Logging API
+oslogin.googleapis.com               Cloud OS Login API
 storage-component.googleapis.com     Cloud Storage

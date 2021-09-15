@@ -34,7 +34,7 @@ spec:
       serviceAccountName: tide
       containers:
       - name: tide
-        image: gcr.io/k8s-prow/tide:v20210810-beb809847f
+        image: gcr.io/k8s-prow/tide:v20210902-01e03305a2
         args:
         - --config-path=/etc/config/config.yaml
         - --dry-run=false
@@ -48,6 +48,8 @@ spec:
         ports:
         - name: http
           containerPort: 8888
+        - name: metrics
+          containerPort: 9090
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:

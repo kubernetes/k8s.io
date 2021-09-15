@@ -147,9 +147,9 @@ gsutil iam ch \
 [k8s-infra-prow-oncall]: https://github.com/kubernetes/k8s.io/blob/3a1aea1652f02a95253402bde2bca63cb4292f8e/groups/groups.yaml#L647-L670
 [k8s-infra-prow-viewers]: https://github.com/kubernetes/k8s.io/blob/3a1aea1652f02a95253402bde2bca63cb4292f8e/groups/groups.yaml#L672-L699
 [roles/owner]: https://cloud.google.com/iam/docs/understanding-roles#basic-definitions
-[roles/prow.viewer]: https://github.com/kubernetes/k8s.io/blob/main/infra/gcp/roles/prow.viewer.yaml
+[roles/prow.viewer]: https://github.com/kubernetes/k8s.io/blob/main/infra/gcp/bash/roles/prow.viewer.yaml
 [join-groups]: https://github.com/kubernetes/k8s.io/tree/main/groups#making-changes
 [post-k8sio-deploy-prow-build-resources]: https://testgrid.k8s.io/wg-k8s-infra-k8sio#post-k8sio-deploy-prow-build-resources
 [deploy.sh]: /infra/gcp/terraform/k8s-infra-prow-build/deploy.sh
-[ensure-e2e-projects.sh]: /infra/gcp/prow/ensure-e2e-projects.sh
+[ensure-e2e-projects.sh]: /infra/gcp/bash/prow/ensure-e2e-projects.sh
 [#wg-k8s-infra]: https://kubernetes.slack.com/messages/wg-k8s-infra

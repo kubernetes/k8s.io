@@ -11,8 +11,9 @@ gs://k8s-staging-provider-aws/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 26 May 2020 18:43:37 GMT
-	Time updated:			Thu, 01 Jul 2021 02:37:05 GMT
-	Metageneration:			17
+	Time updated:			Thu, 09 Sep 2021 16:37:32 GMT
+	Metageneration:			18
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

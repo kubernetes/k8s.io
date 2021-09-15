@@ -11,8 +11,9 @@ gs://k8s-staging-artifact-promoter/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 20 Aug 2019 00:07:32 GMT
-	Time updated:			Thu, 01 Jul 2021 01:30:47 GMT
-	Metageneration:			31
+	Time updated:			Thu, 09 Sep 2021 15:25:30 GMT
+	Metageneration:			32
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

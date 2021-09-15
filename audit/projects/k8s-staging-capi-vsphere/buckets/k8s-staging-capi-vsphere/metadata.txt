@@ -11,8 +11,9 @@ gs://k8s-staging-capi-vsphere/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Mar 2020 15:39:56 GMT
-	Time updated:			Thu, 01 Jul 2021 01:40:36 GMT
-	Metageneration:			25
+	Time updated:			Thu, 09 Sep 2021 15:36:39 GMT
+	Metageneration:			26
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

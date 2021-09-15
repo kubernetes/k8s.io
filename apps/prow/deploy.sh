@@ -25,15 +25,17 @@ set -o pipefail
 
 SCRIPT_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
-app=$(basename "${SCRIPT_ROOT}")
+#TODO(ameukam): drop usage of it.
+#app=$(basename "${SCRIPT_ROOT}")
 
 # coordinates to locate the target cluster in gke
 cluster_name="aaa"
 cluster_project="kubernetes-public"
 cluster_region="us-central1"
 
+#TODO(ameukam): drop usage of it.
 # coordinates to locate the app on the target cluster
-namespace="${app}"
+#namespace="${app}"
 
 # well known name set by `gcloud container clusters get-credentials`
 gke_context="gke_${cluster_project}_${cluster_region}_${cluster_name}"
@@ -57,4 +59,4 @@ make update-plugins
 echo "Update k8s-infra-prow prowjobs"
 make update-prowjobs
 
-kubectl --context="${context}" --namespace="${namespace}" apply -Rf cluster/
+kubectl --context="${context}" apply -Rf cluster/

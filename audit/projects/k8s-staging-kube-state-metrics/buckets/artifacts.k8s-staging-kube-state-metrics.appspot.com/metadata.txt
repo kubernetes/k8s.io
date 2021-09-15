@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-kube-state-metrics.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 01 May 2020 05:52:22 GMT
-	Time updated:			Thu, 01 Jul 2021 02:21:53 GMT
-	Metageneration:			11
+	Time updated:			Thu, 09 Sep 2021 16:21:17 GMT
+	Metageneration:			12
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -14,5 +14,6 @@ gs://k8s-staging-prometheus-adapter-gcb/ :
 	Time updated:			Tue, 29 Jun 2021 19:58:10 GMT
 	Metageneration:			10
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- sig-scheduling-leads
+reviewers:
+- sig-scheduling-leads
+
+labels:
+- sig/scheduling

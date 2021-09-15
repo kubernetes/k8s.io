@@ -1,0 +1,74 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
+    name: k8s-infra-staging-csi-secrets-store
+    description: |-
+      ACL for staging secrets-store-csi-driver
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anish.ramasekar@gmail.com
+      - rita.z.zhang@gmail.com
+      - tommymurphy@google.com
+
+  - email-id: k8s-infra-staging-multitenancy@kubernetes.io
+    name: k8s-infra-staging-multitenancy
+    description: |-
+      ACL for multitenancy WG driven subprojects such as multi-tenancy and
+      hierachical-namespace-controller
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aludwin@google.com
+      - f.guo@alibaba-inc.com
+      - kevin.fox@pnnl.gov
+      - laetitiah@google.com
+      - ryan.j.bezdicek@gmail.com
+      - srampal@cisco.com
+      - tasha.drew@gmail.com
+      - srajakum@amazon.com
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

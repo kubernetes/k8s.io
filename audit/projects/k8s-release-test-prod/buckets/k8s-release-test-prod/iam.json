@@ -22,6 +22,7 @@
         "group:k8s-infra-release-admins@kubernetes.io",
         "group:k8s-infra-release-editors@kubernetes.io",
         "serviceAccount:615281671549@cloudbuild.gserviceaccount.com",
+        "serviceAccount:k8s-infra-promoter@k8s-release-test-prod.iam.gserviceaccount.com",
         "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketWriter"
@@ -32,6 +33,7 @@
         "group:k8s-infra-release-admins@kubernetes.io",
         "group:k8s-infra-release-editors@kubernetes.io",
         "serviceAccount:615281671549@cloudbuild.gserviceaccount.com",
+        "serviceAccount:k8s-infra-promoter@k8s-release-test-prod.iam.gserviceaccount.com",
         "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"

@@ -11,8 +11,9 @@ gs://k8s-staging-experimental/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 29 Jan 2021 15:44:51 GMT
-	Time updated:			Thu, 01 Jul 2021 02:08:32 GMT
-	Metageneration:			9
+	Time updated:			Thu, 09 Sep 2021 16:06:59 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

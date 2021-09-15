@@ -11,8 +11,9 @@ gs://k8s-staging-etcd/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 03 Apr 2020 17:27:32 GMT
-	Time updated:			Thu, 01 Jul 2021 02:04:40 GMT
-	Metageneration:			21
+	Time updated:			Thu, 09 Sep 2021 16:03:14 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

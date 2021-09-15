@@ -11,8 +11,9 @@ gs://k8s-staging-scl-image-builder/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 11 Feb 2020 21:35:31 GMT
-	Time updated:			Thu, 01 Jul 2021 02:45:59 GMT
-	Metageneration:			21
+	Time updated:			Thu, 09 Sep 2021 16:47:19 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -14,5 +14,6 @@ gs://artifacts.k8s-release.appspot.com/ :
 	Time updated:			Fri, 07 Aug 2020 20:50:05 GMT
 	Metageneration:			9
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

@@ -1,20 +1,18 @@
+/*
+Copyright 2021 The Kubernetes Authors.
 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-/**
- * Copyright 2021 The Kubernetes Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 locals {
   project_id  = "k8s-infra-public-pii"
@@ -87,8 +85,28 @@ resource "google_storage_bucket" "audit-logs-gcs" {
   }
 }
 
-//grants role WRITER to cloud-storage-analytics@google.com
+// service account for running ASN etl pipeline job
+resource "google_service_account" "asn_etl" {
+  project      = local.project_id
+  account_id   = "asn-etl"
+  display_name = "asn-etl"
+}
+
+// service account for running ASN etl pipeline job
+data "google_service_account" "ii_sandbox_asn_etl" {
+  account_id = "asn-etl"
+  project    = "k8s-infra-ii-sandbox"
+}
+
 data "google_iam_policy" "audit_logs_gcs_bindings" {
+  // Allow GCP org admins to admin this bucket
+  binding {
+    role = "roles/storage.admin"
+    members = [
+      "group:k8s-infra-gcp-org-admins@kubernetes.io",
+    ]
+  }
+  // Allow GCS access logs to be written to this bucket
   binding {
     role = "roles/storage.objectAdmin"
     members = [
@@ -101,16 +119,31 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
       "group:cloud-storage-analytics@google.com",
     ]
   }
+  // Allow read-only access to authorized service accounts
+  binding {
+    role = "roles/storage.legacyObjectReader"
+    members = [
+      "serviceAccount:${google_service_account.asn_etl.email}",
+      "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl.email}",
+    ]
+  }
+  binding {
+    role = "roles/storage.legacyBucketReader"
+    members = [
+      "serviceAccount:${google_service_account.asn_etl.email}",
+      "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl.email}",
+    ]
+  }
+  // Allow read-only access to k8s-infra-gcs-access-logs@kubernetes.io
+  binding {
+    role = "roles/storage.objectViewer"
+    members = [
+      "group:k8s-infra-gcs-access-logs@kubernetes.io"
+    ]
+  }
 }
 
 resource "google_storage_bucket_iam_policy" "analytics_objectadmin_policy" {
   bucket      = google_storage_bucket.audit-logs-gcs.name
   policy_data = data.google_iam_policy.audit_logs_gcs_bindings.policy_data
-}
-
-// Allow ready-only access to k8s-infra-gcs-access-logs@kubernetes.io
-resource "google_storage_bucket_iam_member" "artificats-gcs-logs" {
-  bucket = google_storage_bucket.audit-logs-gcs.name
-  role   = "roles/storage.objectViewer"
-  member = "group:k8s-infra-gcs-access-logs@kubernetes.io"
 }

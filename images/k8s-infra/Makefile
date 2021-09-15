@@ -22,7 +22,7 @@ TAG ?= $(TAG_DATE_SHA)
 # run
 WHAT ?= /bin/bash
 # cloudbuild
-PROJECT_ID ?= k8s-staging-infra-tools
+PROJECT_ID ?= k8s-staging-infra-toolsw
 GCB_BUCKET ?= gs://$(PROJECT_ID)
 
 ## user-facing targets
@@ -47,9 +47,9 @@ build:
 
 # includes env vars known to be consumed by k8s-infra scripts:
 # - audit/audit-gcp.sh
-# - infra/gcp/lib.sh
-# - infra/gcp/lib_services.sh (via infra/gcp/ensure-*.sh)
-# - infra/gcp/prow/ensure-e2e-projects.sh
+# - infra/gcp/bash/lib.sh
+# - infra/gcp/bash/lib_services.sh (via infra/gcp/bash/ensure-*.sh)
+# - infra/gcp/bash/prow/ensure-e2e-projects.sh
 run:
 	docker run \
 		--rm --interactive \

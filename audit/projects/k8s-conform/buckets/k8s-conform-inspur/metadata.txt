@@ -12,8 +12,9 @@ gs://k8s-conform-inspur/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 20 Nov 2020 14:08:57 GMT
-	Time updated:			Thu, 10 Jun 2021 20:22:14 GMT
-	Metageneration:			24
+	Time updated:			Mon, 30 Aug 2021 10:11:16 GMT
+	Metageneration:			25
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

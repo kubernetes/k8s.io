@@ -12,8 +12,9 @@ gs://k8s-artifacts-cri-tools/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 28 May 2020 18:32:04 GMT
-	Time updated:			Thu, 10 Jun 2021 20:22:00 GMT
-	Metageneration:			48
+	Time updated:			Fri, 10 Sep 2021 21:14:14 GMT
+	Metageneration:			56
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

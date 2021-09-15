@@ -34,6 +34,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-release-admins@kubernetes.io"
+      ],
+      "role": "roles/cloudkms.signerVerifier"
+    },
+    {
+      "members": [
         "serviceAccount:service-925892675446@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"

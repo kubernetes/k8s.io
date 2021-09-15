@@ -11,8 +11,9 @@ gs://artifacts.k8s-staging-scheduler-plugins.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 10 Sep 2020 13:41:45 GMT
-	Time updated:			Thu, 01 Jul 2021 02:44:25 GMT
-	Metageneration:			8
+	Time updated:			Thu, 09 Sep 2021 16:45:49 GMT
+	Metageneration:			9
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

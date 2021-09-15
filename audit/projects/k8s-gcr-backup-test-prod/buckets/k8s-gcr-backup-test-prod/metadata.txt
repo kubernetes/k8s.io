@@ -3,7 +3,7 @@ gs://k8s-gcr-backup-test-prod/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	None
@@ -12,8 +12,9 @@ gs://k8s-gcr-backup-test-prod/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 23 Oct 2019 19:10:02 GMT
-	Time updated:			Mon, 24 May 2021 17:32:58 GMT
-	Metageneration:			61
+	Time updated:			Fri, 10 Sep 2021 21:09:06 GMT
+	Metageneration:			69
 	Bucket Policy Only enabled:	True
+	Public access prevention:	unspecified
 	ACL:				[]
 	Default ACL:			[]

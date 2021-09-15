@@ -3,4 +3,4 @@ filestores:
 - base: gs://k8s-staging-kops/kops/releases/
   src: true
 - base: gs://k8s-artifacts-prod/binaries/kops/
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+  service-account: k8s-infra-promoter@k8s-artifacts-prod.iam.gserviceaccount.com

@@ -3,6 +3,11 @@
 This directory is for tools and things that are used to administer the GCR
 repositories used to publish official container images for Kubernetes.
 
+- [Staging repos](#staging-repos)
+  - [Creating staging repos](#creating-staging-repos)
+  - [Enabling automatic builds](#enabling-automatic-builds)
+  - [Image Promoter](#image-promoter)
+
 ## Staging repos
 
 Each "project" (as decided by people) that feeds into Kubernetes' main
@@ -15,11 +20,7 @@ to promote images to the main serving repository.
 
 ### Creating staging repos
 
-1. Create a google group for granting push access by adding an email
-alias for it in [groups.yaml]. The email alias should be of the form
-`k8s-infra-staging-<project-name>@kubernetes.io`. The project name
-can have a maximum of 18 characters.
-
+1. [Create a Google Group][google-groups]
 2. Create 3 files:
     - `images/k8s-staging-<project-name>/OWNERS`
     - `images/k8s-staging-<project-name>/images.yaml`
@@ -32,7 +33,7 @@ look at the existing staging repos for examples.
 NOTE: For `images/k8s-staging-<project-name>/images.yaml`, if you have no images
 to upload at this time, you must still create a blank file, like this:
 
-```
+```yaml
 # No images yet
 ```
 
@@ -84,10 +85,11 @@ To promote an image, follow these steps:
 Essentially, in order to get images published to a production repo, you have to
 use the image promotion (PR creation) process defined above.
 
+[google-groups]: /groups/README.md
 [image-pushing-readme]: https://git.k8s.io/test-infra/config/jobs/image-pushing/README.md
-[groups.yaml]: /groups/groups.yaml
+[restrictions.yaml]: /groups/restrictions.yaml
 [infra.yaml]: /infra/gcp/infra.yaml
-[staging-bash]: /infra/gcp/ensure-staging-storage.sh
+[staging-bash]: /infra/gcp/bash/ensure-staging-storage.sh
 [vdf]: /k8s.gcr.io/Vanity-Domain-Flip.md
 [post-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#post-k8sio-image-promo
 [ci-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#ci-k8sio-image-promo

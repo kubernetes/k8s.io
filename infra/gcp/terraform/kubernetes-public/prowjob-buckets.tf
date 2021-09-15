@@ -1,24 +1,25 @@
-/**
- * Copyright 2020 The Kubernetes Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+/*
+Copyright 2020 The Kubernetes Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
 
 /*
 This file defines all GCS buckets that prow jobs write to
 */
 
 locals {
+  kops_ci_bucket_name                   = "k8s-infra-kops-ci-results"        // Name of the bucket for kops ci jobs results (version markers, binaries, etc...)
   scalability_tests_logs_bucket_name    = "k8s-infra-scalability-tests-logs" // Name of the bucket for the scalability test results
   scalability_golang_builds_bucket_name = "k8s-infra-scale-golang-builds"    // Name of the bucket for the scalability golang builds
 }
@@ -41,17 +42,17 @@ resource "google_storage_bucket" "scalability_tests_logs" {
 }
 
 data "google_iam_policy" "scalability_tests_logs_bindings" {
-  // Ensure k8s-infra-prow-oncall has admin privileges, and keep existing
+  // Ensure prow owners have admin privileges, and keep existing
   // legacy bindings since we're overwriting all existing bindings below
   binding {
     members = [
-      "group:k8s-infra-prow-oncall@kubernetes.io",
+      "group:${local.prow_owners}",
     ]
     role = "roles/storage.admin"
   }
   binding {
     members = [
-      "group:k8s-infra-prow-oncall@kubernetes.io",
+      "group:${local.prow_owners}",
       "projectEditor:${data.google_project.project.project_id}",
       "projectOwner:${data.google_project.project.project_id}",
     ]
@@ -136,4 +137,57 @@ data "google_iam_policy" "scalability_golang_builds_bindings" {
 resource "google_storage_bucket_iam_policy" "scalability_golang_builds_policy" {
   bucket      = google_storage_bucket.scalability_golang_builds.name
   policy_data = data.google_iam_policy.scalability_golang_builds_bindings.policy_data
+}
+
+// Bucket for kops CI jobs results
+resource "google_storage_bucket" "kops_ci_bucket" {
+  project = data.google_project.project.project_id
+  name    = local.kops_ci_bucket_name
+
+  uniform_bucket_level_access = true
+}
+
+data "google_iam_policy" "kops_ci_bucket_bindings" {
+  // Ensure k8s-infra-kops-maintainers has admin privileges
+  binding {
+    members = [
+      "group:k8s-infra-kops-maintainers@kubernetes.io",
+    ]
+    role = "roles/storage.admin"
+  }
+  // Maintain legacy admins privilegies
+  binding {
+    members = [
+      "group:k8s-infra-kops-maintainers@kubernetes.io",
+      "projectEditor:${data.google_project.project.project_id}",
+      "projectOwner:${data.google_project.project.project_id}",
+    ]
+    role = "roles/storage.legacyBucketOwner"
+  }
+  binding {
+    members = [
+      "projectViewer:${data.google_project.project.project_id}",
+    ]
+    role = "roles/storage.legacyBucketReader"
+  }
+  // Ensure prow-build serviceaccount can write to bucket
+  binding {
+    role = "roles/storage.objectAdmin"
+    members = [
+      "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+    ]
+  }
+  // Ensure bucket is world readable
+  binding {
+    role = "roles/storage.objectViewer"
+    members = [
+      "allUsers"
+    ]
+  }
+}
+
+// Authoritative iam-policy: replaces any existing policy attached to the bucket
+resource "google_storage_bucket_iam_policy" "kops_ci_bucket_bindings" {
+  bucket      = google_storage_bucket.kops_ci_bucket.name
+  policy_data = data.google_iam_policy.kops_ci_bucket_bindings.policy_data
 }
