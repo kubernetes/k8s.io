@@ -24,7 +24,7 @@ spec:
       initContainers:
       - name: codesearch-fetch
         # Placeholder image until we can add image under control of k8s.io
-        image: jdagostino2/codesearch-fetch:0.1.5
+        image: jdagostino2/codesearch-fetch:0.1.6
         volumeMounts:
         - name: config
           mountPath: /data
@@ -34,9 +34,9 @@ spec:
             memory: 128Mi
       containers:
         - name: codesearch
-          image: k8scode/hound:v0.1.0
+          image: ghcr.io/hound-search/hound:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 6080
               protocol: TCP
           volumeMounts:
           - name: config
