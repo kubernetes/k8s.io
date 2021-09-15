@@ -174,7 +174,7 @@ data "google_iam_policy" "kops_ci_bucket_bindings" {
   binding {
     role = "roles/storage.objectAdmin"
     members = [
-      "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+      "serviceAccount:prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
     ]
   }
   // Ensure bucket is world readable
