@@ -15,6 +15,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - justinsb@google.com
+      - pgrifel@gmail.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-alerts
