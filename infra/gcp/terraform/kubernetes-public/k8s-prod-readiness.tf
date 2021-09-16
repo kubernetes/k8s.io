@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
- 
+
 /*
 This file defines:
 - A BigQuery dataset for prod-readiness reporting
@@ -46,6 +46,15 @@ data "google_iam_policy" "prod_readiness_dataset_iam_policy" {
 
 resource "google_bigquery_dataset_iam_policy" "prod_readiness_dataset" {
   dataset_id  = google_bigquery_dataset.prod_readiness_dataset.dataset_id
-  project = google_bigquery_dataset.prod_readiness_dataset.project
+  project     = google_bigquery_dataset.prod_readiness_dataset.project
   policy_data = data.google_iam_policy.prod_readiness_dataset_iam_policy.policy_data
+}
+
+// This is intended solely for queries against k8s_prod_readiness but since
+// we can't apply this role at the dataset level, we need to grant the ability
+// to run jobs against any dataset in this project.
+resource "google_project_iam_member" "prod_readiness_job_user" {
+  project = google_bigquery_dataset.prod_readiness_dataset.project
+  role    = "roles/bigquery.jobUser"
+  member  = "group:${local.prod_readiness_owners}"
 }
