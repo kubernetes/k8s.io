@@ -2,11 +2,12 @@
 
 approvers:
 - dims
-# TODO: Anyone else?? - jimdaga
+# TODO: Anyone else??
 
 reviewers:
 - dims
-# TODO: Anyone else?? - jimdaga
+- jimdaga
+# TODO: Anyone else??
 
 labels:
 - area/apps/codesearch
