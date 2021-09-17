@@ -91,6 +91,8 @@ readonly MAIN_PROJECT_SERVICES=(
     billingbudgets.googleapis.com
     # We export billing data to bigquery
     bigquery.googleapis.com
+    # We transfer data from other BigQuery datasets
+    bigquerydatatransfer.googleapis.com
     # We use cloud asset inventory from this project to audit all projects
     cloudasset.googleapis.com
     # We require use of cloud shell to access clusters in this project
