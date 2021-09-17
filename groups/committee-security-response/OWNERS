@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- committee-security-response
+reviewers:
+- committee-security-response
+
+labels:
+- committee/security-response

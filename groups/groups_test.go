@@ -236,10 +236,10 @@ func TestK8sInfraRBACGroupConventions(t *testing.T) {
 	}
 }
 
-// Enforce conventions for PSC groups
+// Enforce conventions for SRC groups
 // - groups can't own other groups, so for groups that should be owned by
 //	 security@kubernetes.io should own, make sure the owners match
-func TestProductSecurityCommitteeGroups(t *testing.T) {
+func TestSecurityResponseCommitteeGroups(t *testing.T) {
 	pscGroups := []string{
 		"distributors-announce@kubernetes.io",
 		"security-discuss-private@kubernetes.io",

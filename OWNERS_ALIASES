@@ -6,8 +6,7 @@ aliases:
   sig-apps-leads:
     - janetkuo
     - kow3ns
-    - mattfarina
-    - prydonius
+    - soltysh
   sig-architecture-leads:
     - derekwaynecarr
     - dims
@@ -150,7 +149,7 @@ aliases:
     - karenhchu
     - tashimi
     - tpepper
-  committee-product-security:
+  committee-security-response:
     - cjcullen
     - cji
     - joelsmith

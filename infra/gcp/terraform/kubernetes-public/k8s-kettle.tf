@@ -13,12 +13,21 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
- 
+
 /*
 This file defines:
 - A BigQuery dataset for kettle tests results
 - IAM bindings on that dataset
 */
+
+//Service used by Kubernetes Service Account kettle in namespace kettle
+module "aaa_kettle_sa" {
+  source            = "../modules/workload-identity-service-account"
+  project_id        = "kubernetes-public"
+  name              = "kettle"
+  description       = "default service account for pods in ${local.cluster_name}"
+  cluster_namespace = "kettle"
+}
 
 // BigQuery dataset for Kettle
 resource "google_bigquery_dataset" "prod_kettle_dataset" {
@@ -32,18 +41,61 @@ resource "google_bigquery_dataset" "prod_kettle_dataset" {
 }
 
 data "google_iam_policy" "prod_kettle_dataset_iam_policy" {
+  // Ensure prow on-call team have admin privileges
   binding {
     members = [
-      "group:k8s-infra-prow-oncall@kubernetes.io",
+      "group:${local.prow_owners}",
     ]
     role = "roles/bigquery.dataOwner"
+  }
+  // Ensure service accounts can create/update/get/delete dataset's table
+  binding {
+    members = [
+      "serviceAccount:${module.aaa_kettle_sa.email}",
+      "serviceAccount:${google_service_account.bq_kettle_data_transfer_writer.email}"
+    ]
+    role = "roles/bigquery.dataEditor"
   }
 }
 
 resource "google_bigquery_dataset_iam_policy" "prod_kettle_dataset" {
   dataset_id  = google_bigquery_dataset.prod_kettle_dataset.dataset_id
-  project = google_bigquery_dataset.prod_kettle_dataset.project
+  project     = google_bigquery_dataset.prod_kettle_dataset.project
   policy_data = data.google_iam_policy.prod_kettle_dataset_iam_policy.policy_data
 }
 
 
+// Service account dedicated for BigQuery Data Transfer from BQ dataset k8s-gubernator:builds
+// TODO: remove when kettle migration is over
+resource "google_service_account" "bq_kettle_data_transfer_writer" {
+  account_id  = "bq-data-transfer-kettle"
+  description = "Service Acccount BigQuery Data Transfer"
+  project     = data.google_project.project.project_id
+}
+
+// grant bigquery jobUser role to the service account
+// so the job transfer can launch BigQuery jobs
+resource "google_project_iam_member" "bq_kettle_data_transfer_jobuser_binding" {
+  project = data.google_project.project.project_id
+  role    = "roles/bigquery.jobUser"
+  member  = "serviceAccount:${google_service_account.bq_kettle_data_transfer_writer.email}"
+}
+
+resource "google_bigquery_data_transfer_config" "bq_data_transfer_kettle" {
+  display_name           = "BigQuery data transfer to ${google_bigquery_dataset.prod_kettle_dataset.dataset_id}"
+  project                = data.google_project.project.project_id
+  data_source_id         = "cross_region_copy"
+  destination_dataset_id = google_bigquery_dataset.prod_kettle_dataset.dataset_id
+  service_account_name   = google_service_account.bq_kettle_data_transfer_writer.email
+  disabled               = true
+
+  params = {
+    overwrite_destination_table = "true"
+    source_dataset_id           = "build"
+    source_project_id           = "k8s-gubernator"
+  }
+
+  email_preferences {
+    enable_failure_email = false
+  }
+}
