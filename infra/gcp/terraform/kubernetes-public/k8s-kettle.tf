@@ -87,7 +87,7 @@ resource "google_bigquery_data_transfer_config" "bq_data_transfer_kettle" {
   data_source_id         = "cross_region_copy"
   destination_dataset_id = google_bigquery_dataset.prod_kettle_dataset.dataset_id
   service_account_name   = google_service_account.bq_kettle_data_transfer_writer.email
-  disabled               = true
+  disabled               = false
 
   params = {
     overwrite_destination_table = "true"
