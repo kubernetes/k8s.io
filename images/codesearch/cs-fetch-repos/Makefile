@@ -46,19 +46,12 @@ build:
 		--tag $(REPO)/$(IMAGE):$(TAG_DATE_SHA) \
 		.
 
-# includes env vars known to be consumed by k8s-infra scripts:
-# - audit/audit-gcp.sh
-# - infra/gcp/bash/lib.sh
-# - infra/gcp/bash/lib_services.sh (via infra/gcp/bash/ensure-*.sh)
-# - infra/gcp/bash/prow/ensure-e2e-projects.sh
 run:
 	docker run \
 		--rm \
 		$(image_spec) \
 		$(WHAT)
 
-# an approximation of what kubernetes/test-infra/images/builder calls,
-# with TAG overriden to prevent accidental manual pushes to :latest
 cloudbuild:
 	gcloud builds submit \
 		--verbosity info \
