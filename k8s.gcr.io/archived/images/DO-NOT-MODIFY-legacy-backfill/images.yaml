@@ -7,11 +7,8 @@
 # It was generated automatically by running "cip-mm". To
 # reproduce, run:
 #
-# $ cd
-# $ git clone https://github.com/kubernetes-sigs/k8s-container-image-promoter go/src/sigs.k8s.io/k8s-container-image-promoter
-# $ cd go/src/sigs.k8s.io/k8s-container-image-promoter
-# $ make install
-# $ cip-mm -base_dir PATH/TO/k8s.gcr.io -staging_repo gcr.io/google-containers
+# $ go install sigs.k8s.io/promo-tools/cmd/cip-mm
+# $ $(go env GOPATH)/bin/cip-mm --base_dir k8s.gcr.io/archived --staging_repo gcr.io/google-containers
 
 - name: addon-builder
   dmap:
