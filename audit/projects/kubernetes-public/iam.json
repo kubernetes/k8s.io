@@ -14,7 +14,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-gcp-accounting@kubernetes.io"
+        "group:k8s-infra-gcp-accounting@kubernetes.io",
+        "group:k8s-infra-prod-readiness@kubernetes.io"
       ],
       "role": "roles/bigquery.jobUser"
     },
