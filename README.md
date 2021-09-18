@@ -38,7 +38,7 @@ Please see https://git.k8s.io/community/wg-k8s-infra for more information
 
 <!-- apps -->
 [cert-manager]: https://github.com/jetstack/cert-manager
-[codesearch]: https://github.com/dims/k8s-code.appspot.com
+[codesearch]: https://cs.k8s.io
 [gcsweb]: https://git.k8s.io/test-infra/gcsweb
 [kubernetes-external-secrets]: https://github.com/external-secrets/kubernetes-external-secrets
 [perfdash]: https://git.k8s.io/perf-tests/perfdash
