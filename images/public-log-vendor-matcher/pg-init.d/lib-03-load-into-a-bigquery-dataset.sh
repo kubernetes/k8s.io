@@ -8,6 +8,8 @@ bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).potaroo_all_asn_na
 bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).pyasn_ip_asn_extended" /tmp/pyasn_expanded_ipv4.csv asn:integer,ip:string,ip_start:string,ip_end:string
 
 ## Lets go convert the beginning and end into ints
+GCP_BIGQUERY_DATASET_WITH_DATE="${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d)"
+export GCP_BIGQUERY_DATASET_WITH_DATE
 envsubst < /app/ext-ip-asn.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).vendor"
 
 mkdir -p /tmp/vendor
