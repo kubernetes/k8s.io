@@ -4,12 +4,7 @@ set -x
 set -eo pipefail
 eval "${ASN_DATA_PIPELINE_PREINIT:-}"
 
-PARENTPID=$(ps -o ppid= -p $$)
-echo MY PID     :: $$
-echo PARENT PID :: $PARENTPID
-ps aux
-
-cat << EOF > $HOME/.bigqueryrc
+cat << EOF > "$HOME/.bigqueryrc"
 credential_file = ${GOOGLE_APPLICATION_CREDENTIALS}
 project_id = ${GCP_PROJECT}
 EOF
@@ -44,9 +39,9 @@ if [ ! -f "/tmp/potaroo_data.csv" ]; then
 fi
 
 # Strip data to only return ASN numbers
-cat /tmp/potaroo_data.csv | cut -d ',' -f1 | sed 's/"//' | sed 's/"//'| cut -d 'S' -f2 | tail +2 > /tmp/potaroo_asn.txt
+< /tmp/potaroo_data.csv cut -d ',' -f1 | sed 's/"//' | sed 's/"//'| cut -d 'S' -f2 | tail +2 > /tmp/potaroo_asn.txt
 
-cat /tmp/potaroo_data.csv | tail +2 | sed 's,^AS,,g' > /tmp/potaroo_asn_companyname.csv
+< /tmp/potaroo_data.csv tail -n +2 | sed 's,^AS,,g' > /tmp/potaroo_asn_companyname.csv
 
 ## GET PYASN section
 ## using https://github.com/ii/org/blob/main/research/asn-data-pipeline/etl_asn_vendor_table.org
