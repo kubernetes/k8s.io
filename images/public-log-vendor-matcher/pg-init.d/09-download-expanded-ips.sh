@@ -1,11 +1,13 @@
+#!/bin/bash
+
 ## Set a timestamp to work with
 TIMESTAMP=$(date +%Y%m%d%H%M)
 echo $TIMESTAMP > /tmp/my-timestamp.txt
 ## Dump the entire table to gcs
 bq extract \
---destination_format CSV \
-${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).5_vendor_with_company_name \
-gs://ii_bq_scratch_dump/vendor-$TIMESTAMP-*.csv
+  --destination_format CSV \
+  "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).5_vendor_with_company_name" \
+  "gs://ii_bq_scratch_dump/vendor-$TIMESTAMP-*.csv"
 ## Download the files
 TIMESTAMP=$(cat /tmp/my-timestamp.txt | tr -d '\n')
 mkdir -p /tmp/expanded_pyasn/

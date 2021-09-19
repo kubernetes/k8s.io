@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [ ! "${ASN_DATA_PIPELINE_RETAIN:-}" = true ]; then
     # in the Postgres container image,
     # the command run changes to "postgres" once it's completed loading up

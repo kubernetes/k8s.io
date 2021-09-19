@@ -1,5 +1,6 @@
+#!/bin/bash
+
 ## Get single clientip as int.
-export GCP_BIGQUERY_DATASET_WITH_DATE="${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d)"
 if [ -n "${GCP_BIGQUERY_DATASET_LOGS:-}" ]; then
     envsubst < /app/distinct_c_ip_count_logs.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET_WITH_DATE}.1_ip_count"
 else

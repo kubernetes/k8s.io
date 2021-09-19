@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## Load csv to bq
 bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).potaroo_all_asn_name" /tmp/potaroo_asn_companyname.csv asn:integer,companyname:string
 
@@ -6,7 +8,6 @@ bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).potaroo_all_asn_na
 bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).pyasn_ip_asn_extended" /tmp/pyasn_expanded_ipv4.csv asn:integer,ip:string,ip_start:string,ip_end:string
 
 ## Lets go convert the beginning and end into ints
-export GCP_BIGQUERY_DATASET_WITH_DATE="${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d)"
 envsubst < /app/ext-ip-asn.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).vendor"
 
 mkdir -p /tmp/vendor
