@@ -1,5 +1,13 @@
 [
   {
+    "role": "WRITER",
+    "userByEmail": "bq-data-transfer-kettle@kubernetes-public.iam.gserviceaccount.com"
+  },
+  {
+    "role": "WRITER",
+    "userByEmail": "kettle@kubernetes-public.iam.gserviceaccount.com"
+  },
+  {
     "role": "OWNER",
     "groupByEmail": "k8s-infra-prow-oncall@kubernetes.io"
   }
