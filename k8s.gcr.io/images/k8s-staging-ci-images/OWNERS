@@ -5,7 +5,7 @@ options:
 approvers:
   - release-engineering-approvers
   - sig-testing-leads
-  - wg-k8s-infra-leads
+  - sig-k8s-infra-leads
 reviewers:
   - release-engineering-reviewers
 
