@@ -90,6 +90,24 @@ resource "random_password" "db_password" {
 
 resource "google_sql_user" "db_user" {
   instance = google_sql_database_instance.db_instance.name
+  project  = data.google_project.project.project_id
   name     = var.db_user
   password = random_password.db_password.result
+}
+
+resource "google_compute_global_address" "db_private_ip_address" {
+  name          = "k8s-infra-db-election-private-ip"
+  project       = data.google_project.project.project_id
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 16
+  network       = "projects/${data.google_project.project.project_id}/global/networks/default"
+}
+
+resource "google_service_networking_connection" "private_vpc_connection" {
+  network = "projects/${data.google_project.project.project_id}/global/networks/default"
+  service = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [
+    google_compute_global_address.db_private_ip_address.name
+  ]
 }

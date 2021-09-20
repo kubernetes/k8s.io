@@ -107,6 +107,8 @@ readonly MAIN_PROJECT_SERVICES=(
     monitoring.googleapis.com
     # We host secrets in this project for use by prow and other apps
     secretmanager.googleapis.com
+    # We create internal IP addresses for GCP managed services
+    servicenetworking.googleapis.com
     # We store elections results in Cloud SQL databases
     sql-component.googleapis.com
     # We host public-facing and private GCS buckets in this project

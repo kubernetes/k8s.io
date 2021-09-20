@@ -101,7 +101,7 @@ variable "cloudsql_tier" {
 
 variable "cloudsql_disk_size_gb" {
   type    = number
-  default = 5
+  default = 10
 
   description = "Size of the Cloud SQL disk, in GB."
 }
