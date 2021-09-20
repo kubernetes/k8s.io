@@ -6,7 +6,7 @@ approvers:
   - sig-release-leads
   - sig-testing-leads
   - release-engineering-approvers
-  - wg-k8s-infra-leads
+  - sig-k8s-infra-leads
   - build-admins
 reviewers:
   - release-engineering-reviewers
