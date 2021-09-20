@@ -15,5 +15,5 @@ gsutil cp \
   "gs://ii_bq_scratch_dump/vendor-$TIMESTAMP-*.csv" \
   /tmp/expanded_pyasn/
 ## Merge the data
-< /tmp/expanded_pyasn/*.csv tail -n +2 > /tmp/expanded_pyasn_1.csv
+cat < /tmp/expanded_pyasn/*.csv | tail -n +2 > /tmp/expanded_pyasn_1.csv
 < /tmp/expanded_pyasn_1.csv grep -v cidr_ip > /tmp/expanded_pyasn.csv

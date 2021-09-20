@@ -19,7 +19,7 @@ if [ -z "${GCP_BIGQUERY_DATASET_LOGS:-}" ]; then
                 --autodetect \
                 --max_bad_records=2000 \
                 "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).usage_all_raw" \
-                "gs://k8s-infra-artifacts-gcslogs/${BUCKET}_usage*"
-            \ || true
+                "gs://k8s-infra-artifacts-gcslogs/${BUCKET}_usage*" \
+            || true
     done
 fi
