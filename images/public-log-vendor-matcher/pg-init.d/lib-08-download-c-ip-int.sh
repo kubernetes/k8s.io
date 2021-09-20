@@ -7,7 +7,7 @@ echo "$TIMESTAMP" > /tmp/my-timestamp.txt
 bq extract \
   --destination_format CSV \
   "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).2a_ip_int" \
-  "gs://ii_bq_scratch_dump/2a_ip_inti-$TIMESTAMP-*.csv"
+  "gs://ii_bq_scratch_dump/2a_ip_inti-$TIMESTAMP-*.csv" > "${BQ_OUTPUT:-/dev/null}" 2>&1
 ## Download the files
 TIMESTAMP=$(< /tmp/my-timestamp.txt tr -d '\n')
 mkdir -p /tmp/usage_all_ip_only/

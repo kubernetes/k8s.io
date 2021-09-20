@@ -1,16 +1,16 @@
 #!/bin/bash
 
 ## Load csv to bq
-bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).potaroo_all_asn_name" /tmp/potaroo_asn_companyname.csv asn:integer,companyname:string
+bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).potaroo_all_asn_name" /tmp/potaroo_asn_companyname.csv asn:integer,companyname:string > "${BQ_OUTPUT:-/dev/null}" 2>&1
 
 ## Load a copy of the potaroo_data to bq
 # https://github.com/ii/org/blob/main/research/asn-data-pipeline/match-ip-to-ip-range.org
-bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).pyasn_ip_asn_extended" /tmp/pyasn_expanded_ipv4.csv asn:integer,ip:string,ip_start:string,ip_end:string
+bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).pyasn_ip_asn_extended" /tmp/pyasn_expanded_ipv4.csv asn:integer,ip:string,ip_start:string,ip_end:string > "${BQ_OUTPUT:-/dev/null}" 2>&1
 
 ## Lets go convert the beginning and end into ints
 GCP_BIGQUERY_DATASET_WITH_DATE="${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d)"
 export GCP_BIGQUERY_DATASET_WITH_DATE
-envsubst < /app/ext-ip-asn.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).vendor"
+envsubst < /app/ext-ip-asn.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).vendor" > "${BQ_OUTPUT:-/dev/null}" 2>&1
 
 mkdir -p /tmp/vendor
 
@@ -34,7 +34,7 @@ for VENDOR in ${VENDORS[*]}; do
       | yq e . -j - \
       | jq -r '.name as $name | .redirectsTo.registry as $redirectsToRegistry | .redirectsTo.artifacts as $redirectsToArtifacts | .asns[] | [. ,$name, $redirectsToRegistry, $redirectsToArtifacts] | @csv' \
         > "/tmp/vendor/${VENDOR}_yaml.csv"
-  bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).vendor_yaml" "/tmp/vendor/${VENDOR}_yaml.csv" asn_yaml:integer,name_yaml:string,redirectsToRegistry:string,redirectsToArtifacts:string
+  bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).vendor_yaml" "/tmp/vendor/${VENDOR}_yaml.csv" asn_yaml:integer,name_yaml:string,redirectsToRegistry:string,redirectsToArtifacts:string > "${BQ_OUTPUT:-/dev/null}" 2>&1
 done
 
 ASN_VENDORS=(
@@ -59,7 +59,7 @@ curl 'https://ip-ranges.amazonaws.com/ip-ranges.json' \
 
 ## Load all the csv
 for VENDOR in ${ASN_VENDORS[*]}; do
-  bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).vendor_json" "/tmp/vendor/${VENDOR}_raw_subnet_region.csv" ipprefix:string,service:string,region:string
+  bq load --autodetect "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).vendor_json" "/tmp/vendor/${VENDOR}_raw_subnet_region.csv" ipprefix:string,service:string,region:string > "${BQ_OUTPUT:-/dev/null}" 2>&1
 done
 
 mkdir -p /tmp/peeringdb-tables
