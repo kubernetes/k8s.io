@@ -2,6 +2,18 @@
 
 A Postgres-based k8s-infra data pipeline that produces BigQuery tables for reviewing Kubernetes Public artifact traffic in DataStudio.
 
+## Environment variables
+
+| Name                             | Default                                                | Description                                                                           |
+| -------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| `TZ`                             | ``                                                     | Container time zone                                                                   |
+| `GOOGLE_APPLICATION_CREDENTIALS` | ``                                                     | The path to the GCP service account json key                                          |
+| `GCP_PROJECT`                    | `k8s-infra-ii-sandbox`                                 | The project to target                                                                 |
+| `GCP_SERVICEACCOUNT`             | `asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com` | The GCP service account name                                                          |
+| `GCP_BIGQUERY_DATASET`           | `etl_script_generated_set`                             | The dataset and basename to write to (appends date)                                   |
+| `NO_PROMOTE`                     | ``                                                     | Disable the promotion of `${GCP_BIGQUERY_DATASET}_${DATE}` to ${GCP_BIGQUERY_DATASET} |
+| `ASN_DATA_PIPELINE_RETAIN`       | ``                                                     | Keeps Postgres running after the job has completed                                    |
+
 ## Running the Pipeline Manually
 
 Generate a key file for ServiceAccount auth
