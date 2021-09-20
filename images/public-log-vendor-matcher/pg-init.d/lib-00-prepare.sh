@@ -1,8 +1,9 @@
 #!/bin/bash
-set -x
-
-set -eo pipefail
+set -xeo pipefail
 eval "${ASN_DATA_PIPELINE_PREINIT:-}"
+
+PIPELINE_DATE="$(date +%Y%m%d)"
+export PIPELINE_DATE
 
 cat << EOF > "$HOME/.bigqueryrc"
 credential_file = ${GOOGLE_APPLICATION_CREDENTIALS}
@@ -26,13 +27,13 @@ gcloud auth list
 
 bq ls
 # Remove the previous data set
-bq rm -r -f "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d)" || true
+bq rm -r -f "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}" || true
 
 # initalise a new data set with the given name
 bq mk \
     --dataset \
-    --description "etl pipeline dataset for ASN data from CNCF supporting vendors of k8s infrastructure" \
-    "${GCP_PROJECT}:${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d)"
+    --description "Kubernetes Public artifact traffic, related to CNCF supporting vendors of k8s infrastructure (${PIPELINE_DATE})" \
+    "${GCP_PROJECT}:${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}"
 
 if [ ! -f "/tmp/potaroo_data.csv" ]; then
     gsutil cp gs://ii_bq_scratch_dump/potaroo_company_asn.csv  /tmp/potaroo_data.csv

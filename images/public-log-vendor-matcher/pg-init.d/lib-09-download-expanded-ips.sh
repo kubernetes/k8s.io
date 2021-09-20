@@ -6,7 +6,7 @@ echo "$TIMESTAMP" > /tmp/my-timestamp.txt
 ## Dump the entire table to gcs
 bq extract \
   --destination_format CSV \
-  "${GCP_BIGQUERY_DATASET}_$(date +%Y%m%d).5_vendor_with_company_name" \
+  "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.5_vendor_with_company_name" \
   "gs://ii_bq_scratch_dump/vendor-$TIMESTAMP-*.csv" > "${BQ_OUTPUT:-/dev/null}" 2>&1
 ## Download the files
 TIMESTAMP=$(< /tmp/my-timestamp.txt tr -d '\n')
