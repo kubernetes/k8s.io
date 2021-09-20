@@ -2,7 +2,7 @@
 set -xeo pipefail
 eval "${ASN_DATA_PIPELINE_PREINIT:-}"
 
-PIPELINE_DATE="$(date +%Y%m%d)"
+PIPELINE_DATE="${PIPELINE_DATE:-$(date +%Y%m%d)}"
 export PIPELINE_DATE
 
 cat << EOF > "$HOME/.bigqueryrc"
@@ -42,6 +42,7 @@ fi
 # Strip data to only return ASN numbers
 < /tmp/potaroo_data.csv cut -d ',' -f1 | sed 's/"//' | sed 's/"//'| cut -d 'S' -f2 | tail +2 > /tmp/potaroo_asn.txt
 
+# remove the '^AS' from each line
 < /tmp/potaroo_data.csv tail -n +2 | sed 's,^AS,,g' > /tmp/potaroo_asn_companyname.csv
 
 ## GET PYASN section
