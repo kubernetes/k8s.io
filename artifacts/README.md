@@ -117,10 +117,10 @@ To promote a set of artifacts, follow these steps:
       schedule (currently every 4 hours)
 7. Published artifacts will appear artifacts.k8s.io
 
-[generate-manifest]: https://sigs.k8s.io/k8s-container-image-promoter/cmd/kpromo#generating-a-file-promotion-manifest
+[generate-manifest]: https://sigs.k8s.io/promo-tools/cmd/kpromo#generating-a-file-promotion-manifest
 [google-groups]: /groups/README.md
 [infra.yaml]: /infra/gcp/infra.yaml
-[kpromo]: https://sigs.k8s.io/k8s-container-image-promoter/cmd/kpromo
+[kpromo]: https://sigs.k8s.io/promo-tools/cmd/kpromo
 [periodic]: https://prow.k8s.io/job-history/gs/kubernetes-jenkins/logs/ci-k8sio-file-promo
 [postsubmit]: https://prow.k8s.io/job-history/gs/kubernetes-jenkins/logs/post-k8sio-file-promo
 [presubmit]: https://prow.k8s.io/job-history/gs/kubernetes-jenkins/pr-logs/directory/pull-k8sio-file-promo
