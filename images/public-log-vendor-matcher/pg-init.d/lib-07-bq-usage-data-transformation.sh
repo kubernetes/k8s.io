@@ -1,6 +1,7 @@
 #!/bin/bash
 
-## Get single clientip as int.
+# Load IP, Potaroo, and Vendor data into BigQuery
+
 GCP_BIGQUERY_DATASET_WITH_DATE="${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}"
 export GCP_BIGQUERY_DATASET_WITH_DATE
 

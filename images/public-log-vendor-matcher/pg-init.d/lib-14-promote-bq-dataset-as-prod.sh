@@ -1,6 +1,8 @@
 #!/bin/bash
 
-[ "${NO_PROMOTE}" = "true" ] && \
+# Promote all the tables to the un-timestamped dataset
+
+[ ! "${NO_PROMOTE}" = "true" ] && \
 for TABLE in $(bq ls "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}" | awk '{print $1}' | tail +3 | xargs); do
     echo "Removing table '${GCP_BIGQUERY_DATASET}.$TABLE'"
     bq rm -f "${GCP_BIGQUERY_DATASET}.$TABLE" > "${BQ_OUTPUT:-/-dev/null}" 2>&1

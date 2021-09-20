@@ -1,6 +1,5 @@
 #!/bin/bash
 set -xeo pipefail
-eval "${ASN_DATA_PIPELINE_PREINIT:-}"
 
 PIPELINE_DATE="${PIPELINE_DATE:-$(date +%Y%m%d)}"
 export PIPELINE_DATE
@@ -25,7 +24,6 @@ gcloud auth list
 ## This will pull a fresh copy, I prefer to use what we have in gs
 # curl -s  https://bgp.potaroo.net/cidr/autnums.html | sed -nre '/AS[0-9]/s/.*as=([^&]+)&.*">([^<]+)<\/a> ([^,]+), (.*)/"\1", "\3", "\4"/p'  | head
 
-bq ls
 # Remove the previous data set
 bq rm -r -f "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}" || true
 

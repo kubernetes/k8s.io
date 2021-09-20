@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Get single clientip as int.
+# Create final table
 GCP_BIGQUERY_DATASET_WITH_DATE="${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}"
 export GCP_BIGQUERY_DATASET_WITH_DATE
 
