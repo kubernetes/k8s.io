@@ -342,9 +342,11 @@ groups:
       - chu.karen.h@gmail.com # 1.23 Release Comms Lead
       - Cicih@google.com # 1.23 Release Notes Lead
       - DamanArora@cmail.carleton.ca # 1.23 Release Notes Shadow
+      - gveronicalg@gmail.com # 1.23 Release Branch Manager
       - jeeves.butler@gmail.com # 1.23 Docs Lead
       - jyotima@amazon.com # 1.23 Bug Triage Shadow
       - kaslin.fields@gmail.com # 1.23 Release Comms Shadow
+      - kaslin@google.com # 1.23 Release Comms Shadow
       - kat.cosgrove@gmail.com # 1.23 Release Comms Shadow
       - kevindelgado@google.com # 1.23 Enhancements Shadow
       - lauralorenz@google.com # 1.23 Enhancements Shadow
@@ -353,6 +355,8 @@ groups:
       - mail@samcogan.com # 1.23 Release Notes Shadow
       - mehabhalodiya@gmail.com # 1.23 Docs Shadow
       - mickey.boxell@oracle.com # 1.23 Release Comms Shadow
+      - m.r.boxell@gmail.com # 1.23 Release Comms Shadow
+      - pal.nabarun95@gmail.com # 1.23 Release Branch Manager Shadow
       - nng.grace@gmail.com # 1.23 Enhancements Shadow
       - nwaddington@cncf.io # 1.23 Docs Shadow
       - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
@@ -367,8 +371,8 @@ groups:
       - supriyapremkumar1@gmail.com # 1.23 Enhancements Shadow
       - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
       - voigt.christoph@gmail.com # 1.23 Bug Triage Lead
-      - x.cai@reply.de # 1.23 Bug Triage Shadow
       - xander@grzy.dev # 1.23 Enhancements Lead
+      - xinyuan.cai.k8s@gmail.com # 1.23 Bug Triage Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
