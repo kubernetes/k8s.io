@@ -8,7 +8,7 @@ filters:
     - spiffxp
     - thockin
     labels:
-    - wg/k8s-infra
+    - sig/k8s-infra
     - area/infra
   "\\.sh$":
     labels:

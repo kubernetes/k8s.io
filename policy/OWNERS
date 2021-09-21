@@ -5,6 +5,6 @@ approvers:
 - spiffxp
 
 labels:
-- wg/k8s-infra
+- sig/k8s-infra
 - sig/testing
 - area/policy

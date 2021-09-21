@@ -6,5 +6,5 @@ approvers:
 - thockin
 
 labels:
-- wg/k8s-infra
+- sig/k8s-infra
 - area/audit

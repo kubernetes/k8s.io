@@ -16,6 +16,6 @@ approvers:
 - nikhita
 
 labels:
-- wg/k8s-infra
+- sig/k8s-infra
 - area/access
 - area/groups

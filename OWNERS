@@ -13,4 +13,4 @@ emeritus_approvers:
 - bartsmykla
 
 labels:
-- wg/k8s-infra
+- sig/k8s-infra
