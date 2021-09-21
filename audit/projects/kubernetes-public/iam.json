@@ -140,6 +140,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-127754664067@service-networking.iam.gserviceaccount.com"
+      ],
+      "role": "roles/servicenetworking.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/stackdriver.accounts.editor"
