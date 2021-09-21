@@ -30,23 +30,27 @@ import (
 	"google.golang.org/api/option"
 )
 
-type Service interface {
-	SetGroup(GoogleGroup)
-}
+const (
+	OwnerRole   = "OWNER"
+	ManagerRole = "MANAGER"
+	MemberRole  = "MEMBER"
+)
 
+// AdminService provides functionality to perform high level
+// tasks using a AdminServiceClient.
 type AdminService interface {
-	Service
-	AddOrUpdateGroupMembers(role string, members []string) error
-	CreateOrUpdateGroupIfNescessary() error
+	AddOrUpdateGroupMembers(group GoogleGroup, role string, members []string) error
+	CreateOrUpdateGroupIfNescessary(group GoogleGroup) error
 	DeleteGroupsIfNecessary() error
-	RemoveOwnerOrManagersFromGroup(members []string) error
-	RemoveMembersFromGroup(members []string) error
+	RemoveOwnerOrManagersFromGroup(group GoogleGroup, members []string) error
+	RemoveMembersFromGroup(group GoogleGroup, members []string) error
 	GetClient() AdminServiceClient
 }
 
+// GroupService provides functionality to perform high level
+// tasks using a GroupServiceClient.
 type GroupService interface {
-	Service
-	UpdateGroupSettings() error
+	UpdateGroupSettings(group GoogleGroup) error
 	GetClient() GroupServiceClient
 }
 
@@ -70,25 +74,23 @@ func NewGroupService(ctx context.Context, clientOption option.ClientOption) (Gro
 
 type adminService struct {
 	client AdminServiceClient
-	group  GoogleGroup
 }
 
-func (as *adminService) SetGroup(group GoogleGroup) {
-	as.group = group
-}
-
-func (as *adminService) AddOrUpdateGroupMembers(role string, members []string) error {
+// AddOrUpdateGroupMembers first lists all members that are part of group. Based on this list and the
+// members, it will update the member in the group (if needed) or if the member is not found in the
+// list, it will create the member.
+func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, members []string) error {
 	if *verbose {
-		log.Printf("addOrUpdateMembersToGroup %s %q %v", role, as.group.EmailId, members)
+		log.Printf("adminService.AddOrUpdateGroupMembers %s %s %v", group.EmailId, role, members)
 	}
 
-	l, err := as.client.ListMembers(as.group.EmailId)
+	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
-			log.Printf("skipping adding members to group %q as it has not yet been created\n", as.group.EmailId)
+			log.Printf("skipping adding members to group %q as it has not yet been created\n", group.EmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %q: %v", as.group.EmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %v", group.EmailId, err)
 	}
 
 	for _, memberEmailId := range members {
@@ -105,13 +107,13 @@ func (as *adminService) AddOrUpdateGroupMembers(role string, members []string) e
 			if member.Role != role {
 				member.Role = role
 				if config.ConfirmChanges {
-					_, err := as.client.UpdateMember(as.group.EmailId, member.Email, member)
+					_, err := as.client.UpdateMember(group.EmailId, member.Email, member)
 					if err != nil {
-						return fmt.Errorf("unable to update %s in %q as %s : %v", memberEmailId, as.group.EmailId, role, err)
+						return fmt.Errorf("unable to update %s in %q as %s : %v", memberEmailId, group.EmailId, role, err)
 					}
-					log.Printf("Updated %s to %q as a %s\n", memberEmailId, as.group.EmailId, role)
+					log.Printf("Updated %s to %q as a %s\n", memberEmailId, group.EmailId, role)
 				} else {
-					log.Printf("dry-run: would update %s to %q as %s\n", memberEmailId, as.group.EmailId, role)
+					log.Printf("dry-run: would update %s to %q as %s\n", memberEmailId, group.EmailId, role)
 				}
 			}
 			continue
@@ -123,68 +125,71 @@ func (as *adminService) AddOrUpdateGroupMembers(role string, members []string) e
 
 		// We did not find the person in the google group, so we add them
 		if config.ConfirmChanges {
-			_, err := as.client.InsertMember(as.group.EmailId, member)
+			_, err := as.client.InsertMember(group.EmailId, member)
 			if err != nil {
-				return fmt.Errorf("unable to add %s to %q as %s : %v", memberEmailId, as.group.EmailId, role, err)
+				return fmt.Errorf("unable to add %s to %q as %s : %v", memberEmailId, group.EmailId, role, err)
 			}
-			log.Printf("Added %s to %q as a %s\n", memberEmailId, as.group.EmailId, role)
+			log.Printf("Added %s to %q as a %s\n", memberEmailId, group.EmailId, role)
 		} else {
-			log.Printf("dry-run: would add %s to %q as %s\n", memberEmailId, as.group.EmailId, role)
+			log.Printf("dry-run: would add %s to %q as %s\n", memberEmailId, group.EmailId, role)
 		}
 	}
 
 	return nil
 }
 
-func (as *adminService) CreateOrUpdateGroupIfNescessary() error {
+// CreateOrUpdateGroupIfNescessary will create a group if the provided group's email ID
+// does not already exist. If it exists, it will update the group if needed to match the
+// provided group.
+func (as *adminService) CreateOrUpdateGroupIfNescessary(group GoogleGroup) error {
 	if *verbose {
-		log.Printf("createOrUpdateGroupIfNecessary %q", as.group.EmailId)
+		log.Printf("adminService.CreateOrUpdateGroupIfNecessary %s", group.EmailId)
 	}
 
-	group, err := as.client.GetGroup(as.group.EmailId)
+	grp, err := as.client.GetGroup(group.EmailId)
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
 			if !config.ConfirmChanges {
-				log.Printf("dry-run: would create group %q\n", as.group.EmailId)
+				log.Printf("dry-run: would create group %q\n", group.EmailId)
 			} else {
-				log.Printf("Trying to create group: %q\n", as.group.EmailId)
+				log.Printf("Trying to create group: %q\n", group.EmailId)
 				g := admin.Group{
-					Email: as.group.EmailId,
+					Email: group.EmailId,
 				}
-				if as.group.Name != "" {
-					g.Name = as.group.Name
+				if group.Name != "" {
+					g.Name = group.Name
 				}
-				if as.group.Description != "" {
-					g.Description = as.group.Description
+				if group.Description != "" {
+					g.Description = group.Description
 				}
 				g4, err := as.client.InsertGroup(&g)
 				if err != nil {
-					return fmt.Errorf("unable to add new group %q: %v", as.group.EmailId, err)
+					return fmt.Errorf("unable to add new group %q: %v", group.EmailId, err)
 				}
 				log.Printf("> Successfully created group %s\n", g4.Email)
 			}
 		} else {
-			return fmt.Errorf("unable to fetch group %q: %#v", as.group.EmailId, err.Error())
+			return fmt.Errorf("unable to fetch group %q: %#v", group.EmailId, err.Error())
 		}
 	} else {
-		if as.group.Name != "" && group.Name != as.group.Name ||
-			as.group.Description != "" && group.Description != as.group.Description {
+		if group.Name != "" && grp.Name != group.Name ||
+			group.Description != "" && grp.Description != group.Description {
 			if !config.ConfirmChanges {
-				log.Printf("dry-run: would update group name/description %q\n", as.group.EmailId)
+				log.Printf("dry-run: would update group name/description %q\n", group.EmailId)
 			} else {
-				log.Printf("Trying to update group: %q\n", as.group.EmailId)
+				log.Printf("Trying to update group: %q\n", group.EmailId)
 				g := admin.Group{
-					Email: as.group.EmailId,
+					Email: group.EmailId,
 				}
-				if as.group.Name != "" {
-					g.Name = as.group.Name
+				if group.Name != "" {
+					g.Name = group.Name
 				}
-				if as.group.Description != "" {
-					g.Description = as.group.Description
+				if group.Description != "" {
+					g.Description = group.Description
 				}
-				g4, err := as.client.UpdateGroup(as.group.EmailId, &g)
+				g4, err := as.client.UpdateGroup(group.EmailId, &g)
 				if err != nil {
-					return fmt.Errorf("unable to update group %q: %v", as.group.EmailId, err)
+					return fmt.Errorf("unable to update group %q: %v", group.EmailId, err)
 				}
 				log.Printf("> Successfully updated group %s\n", g4.Email)
 			}
@@ -193,14 +198,13 @@ func (as *adminService) CreateOrUpdateGroupIfNescessary() error {
 	return nil
 }
 
+// DeleteGroupsIfNecessary checks against the groups config provided by the user. It
+// first lists all existing groups, if a group in this list does not appear in the
+// provided group config, it will delete this group to match the desired state.
 func (as *adminService) DeleteGroupsIfNecessary() error {
 	g, err := as.client.ListGroups()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve users in domain: %v", err)
-	}
-	if len(g.Groups) == 0 {
-		log.Println("No groups found.")
-		return nil
 	}
 
 	for _, g := range g.Groups {
@@ -234,17 +238,20 @@ func (as *adminService) DeleteGroupsIfNecessary() error {
 	return nil
 }
 
-func (as *adminService) RemoveOwnerOrManagersFromGroup(members []string) error {
+// RemoveOwnerOrManagersFromGroup lists members of the group and checks against the list of members
+// passed. If a member from the retrieved list of members does not exist in the passed list of members,
+// this member is removed - provided this member had a OWNER/MANAGER role.
+func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, members []string) error {
 	if *verbose {
-		log.Printf("removeOwnerOrManagersGroup %q %v", as.group.EmailId, members)
+		log.Printf("adminService.RemoveOwnerOrManagersGroup %s %v", group.EmailId, members)
 	}
-	l, err := as.client.ListMembers(as.group.EmailId)
+	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
-			log.Printf("skipping removing members group %q as group has not yet been created\n", as.group.EmailId)
+			log.Printf("skipping removing members group %q as group has not yet been created\n", group.EmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %q: %v", as.group.EmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %v", group.EmailId, err)
 	}
 
 	for _, m := range l.Members {
@@ -255,34 +262,44 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(members []string) error {
 				break
 			}
 		}
-		if found || m.Role == "MEMBER" {
+
+		// If a member m exists in our desired list of members, do nothing.
+		// However, if this member m does not exist in our desired list of
+		// members but is in the role of a MEMBER (non OWNER/MANAGER), still
+		// do nothing since we care only about OWNER/MANAGER roles here.
+		if found || m.Role == MemberRole {
 			continue
 		}
 		// a person was deleted from a group, let's remove them
 		if config.ConfirmChanges {
-			err := as.client.DeleteMember(as.group.EmailId, m.Id)
+			err := as.client.DeleteMember(group.EmailId, m.Id)
 			if err != nil {
-				return fmt.Errorf("unable to remove %s from %q as OWNER or MANAGER : %v", m.Email, as.group.EmailId, err)
+				return fmt.Errorf("unable to remove %s from %q as OWNER or MANAGER : %v", m.Email, group.EmailId, err)
 			}
-			log.Printf("Removing %s from %q as OWNER or MANAGER\n", m.Email, as.group.EmailId)
+			log.Printf("Removing %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 		} else {
-			log.Printf("dry-run: would remove %s from %q as OWNER or MANAGER\n", m.Email, as.group.EmailId)
+			log.Printf("dry-run: would remove %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 		}
 	}
+
 	return nil
 }
 
-func (as *adminService) RemoveMembersFromGroup(members []string) error {
+// RemoveMembersFromGroup lists members of the group and checks against the list of members passed.
+// If a member from the retrieved list of members does not exist in the passed list of members, this
+// member is removed. Unlike RemoveOwnerOrManagersFromGroup, RemoveMembersFromGroup will remove the
+// member regardless of the role that the member held.
+func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []string) error {
 	if *verbose {
-		log.Printf("removeMembersFromGroup %q %v", as.group.EmailId, members)
+		log.Printf("adminService.RemoveMembersFromGroup %s %v", group.EmailId, members)
 	}
-	l, err := as.client.ListMembers(as.group.EmailId)
+	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
-			log.Printf("skipping removing members group %q as group has not yet been created\n", as.group.EmailId)
+			log.Printf("skipping removing members group %q as group has not yet been created\n", group.EmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %q: %v", as.group.EmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %v", group.EmailId, err)
 	}
 
 	for _, m := range l.Members {
@@ -296,20 +313,23 @@ func (as *adminService) RemoveMembersFromGroup(members []string) error {
 		if found {
 			continue
 		}
+
 		// a person was deleted from a group, let's remove them
 		if config.ConfirmChanges {
-			err := as.client.DeleteMember(as.group.EmailId, m.Id)
+			err := as.client.DeleteMember(group.EmailId, m.Id)
 			if err != nil {
-				return fmt.Errorf("unable to remove %s from %q as a %s : %v", m.Email, as.group.EmailId, m.Role, err)
+				return fmt.Errorf("unable to remove %s from %q as a %s : %v", m.Email, group.EmailId, m.Role, err)
 			}
-			log.Printf("Removing %s from %q as a %s\n", m.Email, as.group.EmailId, m.Role)
+			log.Printf("Removing %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 		} else {
-			log.Printf("dry-run: would remove %s from %q as a %s\n", m.Email, as.group.EmailId, m.Role)
+			log.Printf("dry-run: would remove %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 		}
 	}
+
 	return nil
 }
 
+// GetClient simply returns the underlying AdminServiceClient being used.
 func (as *adminService) GetClient() AdminServiceClient {
 	return as.client
 }
@@ -318,24 +338,21 @@ var _ AdminService = (*adminService)(nil)
 
 type groupService struct {
 	client GroupServiceClient
-	group  GoogleGroup
 }
 
-func (gs *groupService) SetGroup(group GoogleGroup) {
-	gs.group = group
-}
-
-func (gs *groupService) UpdateGroupSettings() error {
+// UpdateGroupSettings updates the groupsettings.Groups corresponding to the
+// passed group based on what the current state of the groupsetting.Groups is.
+func (gs *groupService) UpdateGroupSettings(group GoogleGroup) error {
 	if *verbose {
-		log.Printf("updateGroupSettings %q", gs.group.EmailId)
+		log.Printf("groupService.UpdateGroupSettings %s", group.EmailId)
 	}
-	g2, err := gs.client.Get(gs.group.EmailId)
+	g2, err := gs.client.Get(group.EmailId)
 	if err != nil {
 		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
-			log.Printf("skipping updating group settings as group %q has not yet been created\n", gs.group.EmailId)
+			log.Printf("skipping updating group settings as group %q has not yet been created\n", group.EmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve group info for group %q: %v", gs.group.EmailId, err)
+		return fmt.Errorf("unable to retrieve group info for group %q: %v", group.EmailId, err)
 	}
 
 	var (
@@ -360,7 +377,7 @@ func (gs *groupService) UpdateGroupSettings() error {
 	wantSettings.MessageModerationLevel = "MODERATE_NONE"
 	wantSettings.MembersCanPostAsTheGroup = "false"
 
-	for key, value := range gs.group.Settings {
+	for key, value := range group.Settings {
 		switch key {
 		case "AllowExternalMembers":
 			wantSettings.AllowExternalMembers = value
@@ -387,20 +404,22 @@ func (gs *groupService) UpdateGroupSettings() error {
 
 	if !reflect.DeepEqual(&haveSettings, &wantSettings) {
 		if config.ConfirmChanges {
-			_, err := gs.client.Patch(gs.group.EmailId, &wantSettings)
+			_, err := gs.client.Patch(group.EmailId, &wantSettings)
 			if err != nil {
-				return fmt.Errorf("unable to update group info for group %q: %v", gs.group.EmailId, err)
+				return fmt.Errorf("unable to update group info for group %q: %v", group.EmailId, err)
 			}
-			log.Printf("> Successfully updated group settings for %q to allow external members and other security settings\n", gs.group.EmailId)
+			log.Printf("> Successfully updated group settings for %q to allow external members and other security settings\n", group.EmailId)
 		} else {
-			log.Printf("dry-run: would update group settings for %q\n", gs.group.EmailId)
+			log.Printf("dry-run: would update group settings for %q\n", group.EmailId)
 			log.Printf("dry-run: current settings %+q", haveSettings)
 			log.Printf("dry-run: desired settings %+q", wantSettings)
 		}
 	}
+
 	return nil
 }
 
+// GetClient simply returns the underlying GroupServiceClient being used.
 func (gs *groupService) GetClient() GroupServiceClient {
 	return gs.client
 }

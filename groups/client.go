@@ -30,7 +30,7 @@ type AdminServiceClient interface {
 	ListGroups() (*admin.Groups, error)
 	ListMembers(groupKey string) (*admin.Members, error)
 	InsertGroup(group *admin.Group) (*admin.Group, error)
-	InsertMember(groupKey string, memberKey *admin.Member) (*admin.Member, error)
+	InsertMember(groupKey string, member *admin.Member) (*admin.Member, error)
 	UpdateGroup(groupKey string, group *admin.Group) (*admin.Group, error)
 	UpdateMember(groupKey, memberKey string, member *admin.Member) (*admin.Member, error)
 	DeleteGroup(groupKey string) error
@@ -70,8 +70,8 @@ func (asc *adminServiceClient) InsertGroup(group *admin.Group) (*admin.Group, er
 	return asc.service.Groups.Insert(group).Do()
 }
 
-func (asc *adminServiceClient) InsertMember(groupKey string, memberKey *admin.Member) (*admin.Member, error) {
-	return asc.service.Members.Insert(groupKey, memberKey).Do()
+func (asc *adminServiceClient) InsertMember(groupKey string, member *admin.Member) (*admin.Member, error) {
+	return asc.service.Members.Insert(groupKey, member).Do()
 }
 
 func (asc *adminServiceClient) UpdateGroup(groupKey string, group *admin.Group) (*admin.Group, error) {

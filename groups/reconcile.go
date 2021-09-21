@@ -39,12 +39,6 @@ import (
 	"k8s.io/test-infra/pkg/genyaml"
 )
 
-const (
-	ownerRole   = "OWNER"
-	managerRole = "MANAGER"
-	memberRole  = "MEMBER"
-)
-
 type Config struct {
 	// the email id for the bot/service account
 	BotID string `yaml:"bot-id"`
@@ -184,13 +178,13 @@ func main() {
 	client := credential.Client(ctx)
 	clientOption := option.WithHTTPClient(client)
 
-	r, err := newReconciler(ctx, clientOption)
+	r, err := NewReconciler(ctx, clientOption)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	if *printConfig {
-		err = r.printGroupMembersAndSettings()
+		err = printGroupMembersAndSettings(r.AdminSvc, r.GroupSvc)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -198,21 +192,21 @@ func main() {
 	}
 
 	log.Println(" ======================= Updates =======================")
-	err = r.reconcileGroups(groupsConfig.Groups)
+	err = r.ReconcileGroups(groupsConfig.Groups)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-// reconciler syncs the actual state of the world with the configuration.
+// Reconciler syncs the actual state of the world with the configuration.
 // It does so by making use of AdminService and GroupService which are mockable
 // interfaces.
-type reconciler struct {
-	adminService AdminService
-	groupService GroupService
+type Reconciler struct {
+	AdminSvc AdminService
+	GroupSvc GroupService
 }
 
-func newReconciler(ctx context.Context, clientOption option.ClientOption) (*reconciler, error) {
+func NewReconciler(ctx context.Context, clientOption option.ClientOption) (*Reconciler, error) {
 	as, err := NewAdminService(ctx, clientOption)
 	if err != nil {
 		return nil, err
@@ -223,36 +217,32 @@ func newReconciler(ctx context.Context, clientOption option.ClientOption) (*reco
 		return nil, err
 	}
 
-	return &reconciler{adminService: as, groupService: gs}, nil
+	return &Reconciler{AdminSvc: as, GroupSvc: gs}, nil
 }
 
-func (r *reconciler) reconcileGroups(groups []GoogleGroup) error {
+func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
 	for _, g := range groups {
 		if g.EmailId == "" {
 			return fmt.Errorf("group has no email-id: %#v", g)
 		}
 
-		// update the group that is currently being considered.
-		r.adminService.SetGroup(g)
-		r.groupService.SetGroup(g)
-
-		err := r.adminService.CreateOrUpdateGroupIfNescessary()
+		err := r.AdminSvc.CreateOrUpdateGroupIfNescessary(g)
 		if err != nil {
 			return err
 		}
-		err = r.groupService.UpdateGroupSettings()
+		err = r.GroupSvc.UpdateGroupSettings(g)
 		if err != nil {
 			return err
 		}
-		err = r.adminService.AddOrUpdateGroupMembers(ownerRole, g.Owners)
+		err = r.AdminSvc.AddOrUpdateGroupMembers(g, OwnerRole, g.Owners)
 		if err != nil {
 			return err
 		}
-		err = r.adminService.AddOrUpdateGroupMembers(managerRole, g.Managers)
+		err = r.AdminSvc.AddOrUpdateGroupMembers(g, ManagerRole, g.Managers)
 		if err != nil {
 			return err
 		}
-		err = r.adminService.AddOrUpdateGroupMembers(memberRole, g.Members)
+		err = r.AdminSvc.AddOrUpdateGroupMembers(g, MemberRole, g.Members)
 		if err != nil {
 			log.Println(err)
 		}
@@ -260,99 +250,23 @@ func (r *reconciler) reconcileGroups(groups []GoogleGroup) error {
 		if g.Settings["ReconcileMembers"] == "true" {
 			members := append(g.Owners, g.Managers...)
 			members = append(members, g.Members...)
-			err = r.adminService.RemoveMembersFromGroup(members)
+			err = r.AdminSvc.RemoveMembersFromGroup(g, members)
 			if err != nil {
 				return err
 			}
 		} else {
 			members := append(g.Owners, g.Managers...)
-			err = r.adminService.RemoveOwnerOrManagersFromGroup(members)
+			err = r.AdminSvc.RemoveOwnerOrManagersFromGroup(g, members)
 			if err != nil {
 				return err
 			}
 		}
 	}
-	err := r.adminService.DeleteGroupsIfNecessary()
+	err := r.AdminSvc.DeleteGroupsIfNecessary()
 	if err != nil {
 		return err
 	}
 
-	return nil
-}
-
-func (r *reconciler) printGroupMembersAndSettings() error {
-	asClient := r.adminService.GetClient()
-	gsClient := r.groupService.GetClient()
-
-	g, err := asClient.ListGroups()
-	if err != nil {
-		return fmt.Errorf("unable to retrieve users in domain: %v", err)
-	}
-
-	if len(g.Groups) == 0 {
-		log.Println("No groups found.")
-		return nil
-	}
-
-	var groupsConfig GroupsConfig
-	for _, g := range g.Groups {
-		group := GoogleGroup{
-			EmailId:     g.Email,
-			Name:        g.Name,
-			Description: g.Description,
-		}
-		g2, err := gsClient.Get(g.Email)
-		if err != nil {
-			return fmt.Errorf("unable to retrieve group info for group %s: %v", g.Email, err)
-		}
-		group.Settings = make(map[string]string)
-		group.Settings["AllowExternalMembers"] = g2.AllowExternalMembers
-		group.Settings["WhoCanJoin"] = g2.WhoCanJoin
-		group.Settings["WhoCanViewMembership"] = g2.WhoCanViewMembership
-		group.Settings["WhoCanViewGroup"] = g2.WhoCanViewGroup
-		group.Settings["WhoCanDiscoverGroup"] = g2.WhoCanDiscoverGroup
-		group.Settings["WhoCanInvite"] = g2.WhoCanInvite
-		group.Settings["WhoCanAdd"] = g2.WhoCanAdd
-		group.Settings["WhoCanApproveMembers"] = g2.WhoCanApproveMembers
-		group.Settings["WhoCanModifyMembers"] = g2.WhoCanModifyMembers
-		group.Settings["WhoCanModerateMembers"] = g2.WhoCanModerateMembers
-		group.Settings["MembersCanPostAsTheGroup"] = g2.MembersCanPostAsTheGroup
-
-		l, err := asClient.ListMembers(g.Email)
-		if err != nil {
-			return fmt.Errorf("unable to retrieve members in group : %v", err)
-		}
-
-		if len(l.Members) == 0 {
-			log.Println("No members found in group.")
-		} else {
-			for _, m := range l.Members {
-				if m.Role == ownerRole {
-					group.Owners = append(group.Owners, m.Email)
-				}
-			}
-			for _, m := range l.Members {
-				if m.Role == managerRole {
-					group.Managers = append(group.Managers, m.Email)
-				}
-			}
-			for _, m := range l.Members {
-				if m.Role == memberRole {
-					group.Members = append(group.Members, m.Email)
-				}
-			}
-		}
-
-		groupsConfig.Groups = append(groupsConfig.Groups, group)
-	}
-
-	cm := genyaml.NewCommentMap("reconcile.go")
-	yamlSnippet, err := cm.GenYaml(groupsConfig)
-	if err != nil {
-		return fmt.Errorf("unable to generate yaml for groups : %v", err)
-	}
-
-	fmt.Println(yamlSnippet)
 	return nil
 }
 
@@ -420,11 +334,7 @@ func (rc *RestrictionsConfig) Load(path string) error {
 func (gc *GroupsConfig) Load(rootDir string, restrictions *RestrictionsConfig) error {
 	log.Printf("reading groups.yaml files recursively at %s", rootDir)
 
-	return filepath.Walk(rootDir, func(path string, info os.FileInfo, err error) error {
-		// check if the current path is accessible or not.
-		if err != nil {
-			return err
-		}
+	return filepath.Walk(rootDir, func(path string, info os.FileInfo, _ error) error {
 		if filepath.Base(path) == "groups.yaml" {
 			cleanPath := strings.Trim(strings.TrimPrefix(path, rootDir), string(filepath.Separator))
 			log.Printf("groups: %s", cleanPath)
@@ -492,6 +402,82 @@ func matchesRegexList(s string, list []*regexp.Regexp) bool {
 		}
 	}
 	return false
+}
+
+func printGroupMembersAndSettings(adminService AdminService, groupService GroupService) error {
+	asClient := adminService.GetClient()
+	gsClient := groupService.GetClient()
+
+	g, err := asClient.ListGroups()
+	if err != nil {
+		return fmt.Errorf("unable to retrieve users in domain: %v", err)
+	}
+
+	if len(g.Groups) == 0 {
+		log.Println("No groups found.")
+		return nil
+	}
+
+	var groupsConfig GroupsConfig
+	for _, g := range g.Groups {
+		group := GoogleGroup{
+			EmailId:     g.Email,
+			Name:        g.Name,
+			Description: g.Description,
+		}
+		g2, err := gsClient.Get(g.Email)
+		if err != nil {
+			return fmt.Errorf("unable to retrieve group info for group %s: %v", g.Email, err)
+		}
+		group.Settings = make(map[string]string)
+		group.Settings["AllowExternalMembers"] = g2.AllowExternalMembers
+		group.Settings["WhoCanJoin"] = g2.WhoCanJoin
+		group.Settings["WhoCanViewMembership"] = g2.WhoCanViewMembership
+		group.Settings["WhoCanViewGroup"] = g2.WhoCanViewGroup
+		group.Settings["WhoCanDiscoverGroup"] = g2.WhoCanDiscoverGroup
+		group.Settings["WhoCanInvite"] = g2.WhoCanInvite
+		group.Settings["WhoCanAdd"] = g2.WhoCanAdd
+		group.Settings["WhoCanApproveMembers"] = g2.WhoCanApproveMembers
+		group.Settings["WhoCanModifyMembers"] = g2.WhoCanModifyMembers
+		group.Settings["WhoCanModerateMembers"] = g2.WhoCanModerateMembers
+		group.Settings["MembersCanPostAsTheGroup"] = g2.MembersCanPostAsTheGroup
+
+		l, err := asClient.ListMembers(g.Email)
+		if err != nil {
+			return fmt.Errorf("unable to retrieve members in group : %v", err)
+		}
+
+		if len(l.Members) == 0 {
+			log.Println("No members found in group.")
+		} else {
+			for _, m := range l.Members {
+				if m.Role == OwnerRole {
+					group.Owners = append(group.Owners, m.Email)
+				}
+			}
+			for _, m := range l.Members {
+				if m.Role == ManagerRole {
+					group.Managers = append(group.Managers, m.Email)
+				}
+			}
+			for _, m := range l.Members {
+				if m.Role == MemberRole {
+					group.Members = append(group.Members, m.Email)
+				}
+			}
+		}
+
+		groupsConfig.Groups = append(groupsConfig.Groups, group)
+	}
+
+	cm := genyaml.NewCommentMap("reconcile.go")
+	yamlSnippet, err := cm.GenYaml(groupsConfig)
+	if err != nil {
+		return fmt.Errorf("unable to generate yaml for groups : %v", err)
+	}
+
+	fmt.Println(yamlSnippet)
+	return nil
 }
 
 // accessSecretVersion accesses the payload for the given secret version if one exists
