@@ -1,6 +1,6 @@
 # k8s.io
 
-Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8s-infra]
+Kubernetes project infrastructure, managed by the kubernetes comunity via [sig-k8s-infra]
 
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
     - `gcsweb`: instance of [gcsweb] at https://gcsweb.k8s.io - owned by [sig-testing]
@@ -31,9 +31,9 @@ TODO: are these actively in use or should they be retired?
 - `artifacts`
 - `artifactserver`
 
-We provide a [publicly viewable billing-report][billing-report] accessible to members of [kubernetes-wg-k8s-infra@googlegroups.com]
+We provide a [publicly viewable billing report][billing-report] accessible to members of [kubernetes-sig-k8s-infra@googlegroups.com][mailing-list]
 
-Please see https://git.k8s.io/community/wg-k8s-infra for more information
+Please see https://git.k8s.io/community/sig-k8s-infra for more information
 
 <!-- apps -->
 [cert-manager]: https://github.com/jetstack/cert-manager
@@ -48,16 +48,16 @@ Please see https://git.k8s.io/community/wg-k8s-infra for more information
 
 <!-- misc -->
 [billing-report]: https://datastudio.google.com/u/0/reporting/14UWSuqD5ef9E4LnsCD9uJWTPv8MHOA3e
-[kubernetes-wg-k8s-infra@]: https://groups.google.com/forum/#!forum/kubernetes-wg-k8s-infra
 [opa]: https://www.openpolicyagent.org
 [conftest]: https://www.conftest.dev
+[mailing-list]: https://groups.google.com/g/kubernetes-sig-k8s-infra
 
 <!-- community groups -->
 [sig-architecture]: https://git.k8s.io/community/sig-architecture
 [sig-contributor-experience]: https://git.k8s.io/community/sig-contributor-experience
+[sig-k8s-infra]: https://git.k8s.io/community/sig-k8s-infra
 [sig-node]: https://git.k8s.io/community/sig-node
 [sig-release]: https://git.k8s.io/community/sig-release
 [sig-scalability]: https://git.k8s.io/community/sig-scalability
 [sig-testing]: https://git.k8s.io/community/sig-testing
-[wg-k8s-infra]: https://git.k8s.io/community/wg-k8s-infra
 [wg-reliability]: https://git.k8s.io/community/wg-reliability
