@@ -1,6 +1,6 @@
 # `gke-project` terraform module
 
-This terraform module defines a GCP project following wg-k8s-infra conventions
+This terraform module defines a GCP project following sig-k8s-infra conventions
 that is intended to host a GKE cluster created by the [`gke-cluster`] module:
 - Project is associated with CNCF org
 - Project is linked to CNCF billing account

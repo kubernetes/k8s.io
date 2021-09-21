@@ -104,7 +104,7 @@ deck:
     '*':
       github_team_slugs:
         - org: kubernetes
-          slug: wg-k8s-infra-leads
+          slug: sig-k8s-infra-leads
 
 presets:
 # enable GOPROXY by default

@@ -23,7 +23,7 @@ of workloads to increase.
 
 Your escape hatch at every step is to reach out to the kubernetes community
 cluster-admins.  You can email k8s-infra-cluster-admins@kubernetes.io or find
-many of us in the #wg-k8s-infra Slack channel.
+many of us in the #sig-k8s-infra Slack channel.
 
 ## Prep a Pull Request against this repo
 

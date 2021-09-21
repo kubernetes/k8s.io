@@ -234,7 +234,7 @@ aliases:
     - michelle192837
     - mpherman2
   # people with sufficient privileges to run scripts in /infra/gcp
-  wg-k8s-infra-org-admins:
+  sig-k8s-infra-org-admins:
     - ameukam
     - dims
     - spiffxp

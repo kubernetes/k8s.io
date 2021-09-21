@@ -13,9 +13,9 @@
 # limitations under the License.
 
 # Intended to hold all dependencies needed to build, test and run all tools
-# used by wg-k8s-infra. With sufficient credentials mounted in, should be
+# used by sig-k8s-infra. With sufficient credentials mounted in, should be
 # capable of running those tools to test and deploy all kubernetes project
-# infrastructure managed by wg-k8s-infra.
+# infrastructure managed by sig-k8s-infra.
 
 # base image
 FROM debian:bullseye

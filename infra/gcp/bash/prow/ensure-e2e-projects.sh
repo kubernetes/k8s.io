@@ -32,7 +32,7 @@ function usage() {
     echo > /dev/stderr
 }
 
-## projects hosting prow build clusters managed by wg-k8s-infra
+## projects hosting prow build clusters managed by sig-k8s-infra
 
 BUILD_CLUSTER_PROJECT=$(k8s_infra_project "prow" "k8s-infra-prow-build")
 TRUSTED_BUILD_CLUSTER_PROJECT=$(k8s_infra_project "prow" "k8s-infra-prow-build-trusted")

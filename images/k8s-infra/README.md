@@ -1,6 +1,6 @@
 # k8s-infra
 
-Intended to hold all dependencies needed to build, test and run all tools used by wg-k8s-infra. With sufficient credentials mounted in, should be capable of running those tools to test and deploy all kubernetes project infrastructure managed by wg-k8s-infra.
+Intended to hold all dependencies needed to build, test and run all tools used by sig-k8s-infra. With sufficient credentials mounted in, should be capable of running those tools to test and deploy all kubernetes project infrastructure managed by sig-k8s-infra.
 
 One goal is to use this image for all of of our CI jobs, and make it easy to run locally to verify CI job changes prior to deployment.
 
