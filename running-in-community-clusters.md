@@ -49,7 +49,7 @@ but make sure there are enough to people to keep it running.  If you have
 multiple namespaces that should be kept in sync, say so in the description.
 
 Add these new groups as members of the `gke-security-groups` defined in
-[wg-k8s-infra/groups.yaml][/groups/wg-k8s-infra/groups.yaml], which will enable
+[sig-k8s-infra/groups.yaml][/groups/sig-k8s-infra/groups.yaml], which will enable
 the RBAC linkage.
 
 ### Send your PR

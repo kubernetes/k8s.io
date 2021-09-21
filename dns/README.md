@@ -88,7 +88,7 @@ The DNS administrator merges the PR once it has been LGTM'd
 
 The update will be processed by
 [prow](https://github.com/kubernetes/test-infra/tree/master/prow)
-([job `post-k8sio-dns-update`](https://github.com/kubernetes/test-infra/blob/9ff09c1cc31965de97a1ed9b44cc7a1111406e19/config/jobs/kubernetes/wg-k8s-infra/trusted/wg-k8s-infra-trusted.yaml#L48-L68))
+([job `post-k8sio-dns`](https://github.com/kubernetes/test-infra/blob/2b748fdf2a157abded6b74288c7c8f9642eca85e/config/jobs/kubernetes/sig-k8s-infra/trusted/sig-k8s-infra-dns.yaml#L3-L31))
 and will start automatically after Pull Request will be merged. Once the
 update has been applied, the DNS administrator closes the issue.
 

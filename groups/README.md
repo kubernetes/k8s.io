@@ -30,4 +30,4 @@ k8s-infra-staging-<project-name>@kubernetes.io`
 - Use `make run` to dry run the changes
 - Use `make run -- --confirm` if the changes suggested in the previous step looks good
 
-[post-k8sio-groups]: https://testgrid.k8s.io/wg-k8s-infra-k8sio#post-k8sio-groups 
+[post-k8sio-groups]: https://testgrid.k8s.io/sig-k8s-infra-k8sio#post-k8sio-groups

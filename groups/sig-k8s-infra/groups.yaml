@@ -8,7 +8,7 @@ groups:
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
     description: |-
-      alerts for wg-k8s-infra
+      alerts for sig-k8s-infra
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
