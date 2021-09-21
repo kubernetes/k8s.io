@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Exports select GCP resources in the kubernetes.io organization managed
-# by wg-k8s-infra, for purposes of auditing review.
+# by sig-k8s-infra, for purposes of auditing review.
 #
 # Must be run by an authenticated member of the GCP auditors group
 # (k8s-infra-gcp-auditors@kubernetes.io) or as a service-account that has the

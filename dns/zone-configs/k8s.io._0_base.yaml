@@ -163,7 +163,7 @@ issue:
 issues:
   type: CNAME
   value: redirect.k8s.io.
-#wg-k8s-infra
+#sig-k8s-infra
 k8s-infra-prow:
   type: A
   value: 34.117.224.94 # Hosted on GKE cluster aaa

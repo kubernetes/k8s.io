@@ -168,7 +168,7 @@ function create_or_update_audit_pr() {
         --source="${FORK_GITHUB_USER}:${FORK_BRANCH}"
         --head-branch="${FORK_BRANCH}"
         --title="audit: update as of $(date +%Y-%m-%d)"
-        --body="Audit Updates wg-k8s-infra"
+        --body="Audit Updates sig-k8s-infra"
         --confirm
     )
     pr-creator "${args[@]}"

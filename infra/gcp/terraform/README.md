@@ -1,7 +1,7 @@
 # terraform
 
 This directory contains Terraform modules and configurations for some of the
-GCP projects maintained by wg-k8s-infra.
+GCP projects maintained by sig-k8s-infra.
 
 ## Layout
 
@@ -55,9 +55,9 @@ containing manifests that are deployed to the cluster
 
 ## Deleting
 
-- Get approval from a WG K8s Infra lead (ask in [#wg-k8s-infra] before doing this)
+- Get approval from a WG K8s Infra lead (ask in [#sig-k8s-infra] before doing this)
 - Ensure you are logged into your GCP account with `gcloud auth application-default login`
 - From within a module directory:
   - `terraform destroy` will destroy and clean up all created resources
 
-[#wg-k8s-infra]: https://kubernetes.slack.com/messages/wg-k8s-infra
+[#sig-k8s-infra]: https://kubernetes.slack.com/messages/sig-k8s-infra
