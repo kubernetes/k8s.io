@@ -15,7 +15,6 @@
   if [ ! "$(cat /proc/"$PARENTPID"/cmdline)" = "/tools/entrypoint" ] && [ ! "$PARENTPID" -eq 0 ]; then
       PID=$PARENTPID
   fi
-  ps aux
   until [ "$(< /proc/"$PID"/cmdline tr '\0' '\n' | head -n 1)" = "postgres" ]; do
       sleep 1s
   done

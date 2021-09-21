@@ -39,6 +39,6 @@ docker run \
     -e GCP_BIGQUERY_DATASET=etl_script_generated_set \
     -v /tmp/asn-etl-pipeline-gcp-sa.json:/tmp/asn-etl-pipeline-gcp-sa.json:ro \
     -v "${TMP_DIR_ETL}:/tmp" \
-    asn-etl-pipeline
+    public-log-vendor-matcher
 echo "${TMP_DIR_ETL}"
 ```
