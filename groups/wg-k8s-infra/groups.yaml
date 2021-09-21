@@ -44,10 +44,25 @@ groups:
       - thockin@google.com
       - james@munnelly.eu
 
+  # TODO: remove after ACL are updated
   - email-id: wg-k8s-infra-leads@kubernetes.io
     name: wg-k8s-infra-leads
     description: |-
       WG Chairs and Technical leads
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - ameukam@gmail.com
+      - davanum@gmail.com
+      - spiffxp@gmail.com
+      - spiffxp@google.com
+      - thockin@google.com
+
+  - email-id: sig-k8s-infra-leads@kubernetes.io
+    name: sig-k8s-infra-leads
+    description: |-
+      SIG Chairs and Technical leads
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
@@ -263,6 +278,7 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  #TODO: Cleanup after conversion to SIG is done: https://github.com/kubernetes/community/issues/6036
   - email-id: k8s-infra-cluster-admins@kubernetes.io
     name: k8s-infra-cluster-admins
     description: |-
@@ -279,6 +295,7 @@ groups:
       - stefan.schimanski@gmail.com
       - thockin@google.com
       - james@munnelly.eu
+      - sig-k8s-infra-leads@kubernetes.io
       - spiffxp@google.com
 
   - email-id: k8s-infra-dns-admins@kubernetes.io
