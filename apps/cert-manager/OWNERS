@@ -7,5 +7,5 @@ emeritus_approvers:
 - ixdy
 
 labels:
-- wg/k8s-infra
+- sig/k8s-infra
 - area/apps/cert-manager

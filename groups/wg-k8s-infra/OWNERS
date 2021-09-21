@@ -6,4 +6,4 @@ reviewers:
 - sig-k8s-infra-leads
 
 labels:
-- wg/k8s-infra
+- sig/k8s-infra
