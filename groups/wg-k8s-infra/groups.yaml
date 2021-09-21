@@ -102,6 +102,7 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # needed for RBAC
     members:
       - k8s-infra-rbac-cert-manager@kubernetes.io
+      - k8s-infra-rbac-elekto@kubernetes.io
       - k8s-infra-rbac-gcsweb@kubernetes.io
       - k8s-infra-rbac-kettle@kubernetes.io
       - k8s-infra-rbac-k8s-io-canary@kubernetes.io

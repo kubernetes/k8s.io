@@ -52,6 +52,6 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - ihor@cncf.io
+      - alison@alisondowdney.com
       - josh@berkus.org
-      - jdumars@gmail.com
+      - noah@coderanger.net

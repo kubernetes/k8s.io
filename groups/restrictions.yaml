@@ -86,6 +86,7 @@ restrictions:
       - "^lwkd@kubernetes.io$"
       - "^moderators@kubernetes.io$"
       - "^stream-team@kubernetes.io$"
+      - "^k8s-infra-rbac-elekto@kubernetes.io$"
       - "^k8s-infra-rbac-slack-infra@kubernetes.io$"
       - "^k8s-infra-staging-slack-infra@kubernetes.io$"
   - path: "sig-docs/groups.yaml"
