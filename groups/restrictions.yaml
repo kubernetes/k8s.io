@@ -181,7 +181,6 @@ restrictions:
       - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-alerts@kubernetes.io$"
       - "^k8s-infra-team-private@kubernetes.io$"
-      - "^wg-k8s-infra-leads@kubernetes.io$"
       - "^k8s-infra-aws-admins@kubernetes.io$"
       - "^k8s-infra-artifact-admins@kubernetes.io$"
       - "^k8s-infra-bigquery-admins@kubernetes.io$"
