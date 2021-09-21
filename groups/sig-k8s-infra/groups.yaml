@@ -23,11 +23,11 @@ groups:
       - thockin@google.com
       - linusa@google.com
 
-  # TODO(spiffxp): rename this to wg-k8s-infra-private at some point
-  - email-id: k8s-infra-team-private@kubernetes.io
-    name: k8s-infra-team-private
+  - email-id: sig-k8s-infra-private@kubernetes.io
+    name: sig-k8s-infra-private
     description: |-
-      Mailing list for wg-infra-team private communications
+      Mailing list for private / sensitive communication (e.g. incident
+      response, embargoed comms)
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
