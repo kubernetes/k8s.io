@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elekto
+  namespace: elekto
+  labels:
+    app: elekto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elekto
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: elekto
+    spec:
+      containers:
+        - image: ghcr.io/elekto-io/elekto:sha-8d58a8e
+          imagePullPolicy: Always
+          name: elekto
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: 1500M
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            runAsNonRoot: true
+          envFrom:
+            - configMapRef:
+                name: elekto-config
+            - secretRef:
+                name: elekto-secret
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
