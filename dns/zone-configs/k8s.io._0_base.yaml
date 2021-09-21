@@ -116,6 +116,10 @@ cs:
 discuss:
   type: CNAME
   value: kubernetes.hosted-by-discourse.com.
+# Elections platform running on aaa cluster.
+elections:
+  type: A
+  value: 35.244.193.193
 examples:
   type: CNAME
   value: redirect.k8s.io.
