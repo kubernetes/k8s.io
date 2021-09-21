@@ -23,7 +23,7 @@ default: run
 
 .PHONY: run
 run: test
-	go run reconcile.go $(runargs)
+	go run . $(runargs)
 
 .PHONY: test
 test:
