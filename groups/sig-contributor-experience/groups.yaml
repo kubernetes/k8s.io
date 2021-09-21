@@ -158,6 +158,16 @@ groups:
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
   # - must be members of gke-security-groups@kubernetes.io
 
+  - email-id: k8s-infra-rbac-elekto@kubernetes.io
+    name: k8s-infra-rbac-elekto
+    description: |-
+      Grants access to the `namespace-user` role in the `elekto` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - election@kubernetes.io
+
   - email-id: k8s-infra-rbac-slack-infra@kubernetes.io
     name: k8s-infra-rbac-slack-infra
     description: |-

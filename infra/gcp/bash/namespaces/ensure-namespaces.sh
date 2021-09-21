@@ -143,6 +143,7 @@ parse_args "$@";
 #
 
 ALL_APPS=(
+    elekto
     gcsweb
     kettle
     k8s-io-prod
