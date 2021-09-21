@@ -153,11 +153,7 @@ groups:
     members:
       - k8s-infra-release-editors@kubernetes.io
       - k8s-infra-google-build-admins@kubernetes.io
-      - cblecker@gmail.com # wg-k8s-infra-oncall
-      - davanum@gmail.com # wg-k8s-infra-oncall
-      - spiffxp@google.com # wg-k8s-infra-oncall
-      - spiffxp@gmail.com
-      - thockin@google.com # wg-k8s-infra-oncall
+      - k8s-infra-gcp-org-admins@kubernetes.io
 
   - email-id: k8s-infra-staging-releng@kubernetes.io
     name: k8s-infra-staging-releng
