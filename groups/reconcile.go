@@ -290,7 +290,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 
 	g, err := asClient.ListGroups()
 	if err != nil {
-		return fmt.Errorf("unable to retrieve users in domain: %v", err)
+		return fmt.Errorf("unable to retrieve users in domain: %w", err)
 	}
 
 	if len(g.Groups) == 0 {
@@ -307,7 +307,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 		}
 		g2, err := gsClient.Get(g.Email)
 		if err != nil {
-			return fmt.Errorf("unable to retrieve group info for group %s: %v", g.Email, err)
+			return fmt.Errorf("unable to retrieve group info for group %s: %w", g.Email, err)
 		}
 		group.Settings = make(map[string]string)
 		group.Settings["AllowExternalMembers"] = g2.AllowExternalMembers
@@ -324,7 +324,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 
 		l, err := asClient.ListMembers(g.Email)
 		if err != nil {
-			return fmt.Errorf("unable to retrieve members in group : %v", err)
+			return fmt.Errorf("unable to retrieve members in group : %w", err)
 		}
 
 		if len(l.Members) == 0 {
@@ -353,7 +353,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 	cm := genyaml.NewCommentMap("reconcile.go")
 	yamlSnippet, err := cm.GenYaml(groupsConfig)
 	if err != nil {
-		return fmt.Errorf("unable to generate yaml for groups : %v", err)
+		return fmt.Errorf("unable to generate yaml for groups : %w", err)
 	}
 
 	fmt.Println(yamlSnippet)
@@ -364,10 +364,10 @@ func (c *Config) Load(configFilePath string, confirmChanges bool) error {
 	log.Printf("reading config file: %s", configFilePath)
 	content, err := ioutil.ReadFile(configFilePath)
 	if err != nil {
-		return fmt.Errorf("error reading config file %s: %v", configFilePath, err)
+		return fmt.Errorf("error reading config file %s: %w", configFilePath, err)
 	}
 	if err = yaml.Unmarshal(content, &c); err != nil {
-		return fmt.Errorf("error parsing config file %s: %v", configFilePath, err)
+		return fmt.Errorf("error parsing config file %s: %w", configFilePath, err)
 	}
 
 	if c.GroupsPath == "" {
@@ -394,10 +394,10 @@ func (rc *RestrictionsConfig) Load(path string) error {
 	log.Printf("reading restrictions config file: %s", path)
 	content, err := ioutil.ReadFile(path)
 	if err != nil {
-		return fmt.Errorf("error reading restrictions config file %s: %v", path, err)
+		return fmt.Errorf("error reading restrictions config file %s: %w", path, err)
 	}
 	if err = yaml.Unmarshal(content, &rc); err != nil {
-		return fmt.Errorf("error parsing restrictions config file %s: %v", path, err)
+		return fmt.Errorf("error parsing restrictions config file %s: %w", path, err)
 	}
 
 	ret := make([]Restriction, 0, len(rc.Restrictions))
@@ -406,7 +406,7 @@ func (rc *RestrictionsConfig) Load(path string) error {
 		for _, g := range r.AllowedGroups {
 			re, err := regexp.Compile(g)
 			if err != nil {
-				return fmt.Errorf("error parsing group pattern %q for path %q: %v", g, r.Path, err)
+				return fmt.Errorf("error parsing group pattern %q for path %q: %w", g, r.Path, err)
 			}
 			r.AllowedGroupsRe = append(r.AllowedGroupsRe, re)
 		}
@@ -436,16 +436,16 @@ func (gc *GroupsConfig) Load(rootDir string, restrictions *RestrictionsConfig) e
 			)
 
 			if content, err = ioutil.ReadFile(path); err != nil {
-				return fmt.Errorf("error reading groups config file %s: %v", path, err)
+				return fmt.Errorf("error reading groups config file %s: %w", path, err)
 			}
 			if err = yaml.Unmarshal(content, &groupsConfigAtPath); err != nil {
-				return fmt.Errorf("error parsing groups config at %s: %v", path, err)
+				return fmt.Errorf("error parsing groups config at %s: %w", path, err)
 			}
 
 			r := restrictions.GetRestrictionForPath(path, rootDir)
 			mergedGroups, err := mergeGroups(gc.Groups, groupsConfigAtPath.Groups, r)
 			if err != nil {
-				return fmt.Errorf("couldn't merge groups: %v", err)
+				return fmt.Errorf("couldn't merge groups: %w", err)
 			}
 			gc.Groups = mergedGroups
 		}
@@ -500,7 +500,7 @@ func accessSecretVersion(secretVersion string) ([]byte, error) {
 	ctx := context.Background()
 	client, err := secretmanager.NewClient(ctx)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create secretmanager client: %v", err)
+		return nil, fmt.Errorf("failed to create secretmanager client: %w", err)
 	}
 
 	req := &secretmanagerpb.AccessSecretVersionRequest{
@@ -509,7 +509,7 @@ func accessSecretVersion(secretVersion string) ([]byte, error) {
 
 	result, err := client.AccessSecretVersion(ctx, req)
 	if err != nil {
-		return nil, fmt.Errorf("failed to access secret version: %v", err)
+		return nil, fmt.Errorf("failed to access secret version: %w", err)
 	}
 
 	return result.Payload.Data, nil
