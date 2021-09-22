@@ -260,4 +260,5 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
+    - eddiezane@gmail.com
     - k8s-infra-prow-oncall@kubernetes.io
