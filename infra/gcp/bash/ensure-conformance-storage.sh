@@ -53,8 +53,6 @@ readonly CONFORMANCE_SERVICES=(
     storage-component.googleapis.com
 )
 
-readonly CONFORMANCE_RETENTION="10y"
-
 # "Offering" comes from https://github.com/cncf/k8s-conformance/blob/master/terms-conditions/Certified_Kubernetes_Terms.md
 # NB: Please keep this sorted.
 readonly CONFORMANCE_OFFERINGS=(
@@ -94,8 +92,9 @@ function ensure_conformance_bucket() {
     color 6 "Empowering GCS admins for GCS bucket: ${bucket}"
     empower_gcs_admins "${PROJECT}" "${bucket}"
 
-    color 6 "Ensuring ${bucket} retention policy is set to: ${CONFORMANCE_RETENTION}"
-    ensure_gcs_bucket_retention "${bucket}" "${CONFORMANCE_RETENTION}"
+    # TODO(spiffxp): remove once retention has been removed from existing conformance buckets
+    color 6 "Ensuring ${bucket} retention policy is removed"
+    ensure_removed_gcs_bucket_retention "${bucket}"
 
     color 6 "Empowering ${writers} to write to GCS bucket: ${bucket}"
     empower_group_to_write_gcs_bucket "${writers}" "${bucket}"
