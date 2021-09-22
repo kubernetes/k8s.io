@@ -62,6 +62,10 @@ locals {
       name        = "triage-party-release-ingress-prod",
       description = "IP for aaa cluster Ingress"
     },
+    triage-party-cli = {
+      name        = "triage-party-cli-ingress-prod",
+      description = "IP for aaa cluster Ingress"
+    },
   }
 }
 
