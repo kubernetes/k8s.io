@@ -154,6 +154,18 @@ function ensure_gcs_bucket_retention() {
     gsutil retention set "${retention}" "${bucket}"
 }
 
+# Ensure the bucket retention policy is not set
+# $1: The GCS bucket (e.g. gs://bucket-name)
+function ensure_removed_gcs_bucket_retention() {
+    if [ $# -lt 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(bucket) requires 1 argument" >&2
+        return 1
+    fi
+    local bucket="$1"
+
+    gsutil retention clear "${bucket}"
+}
+
 # Ensure the bucket auto-deletion policy is set
 # $1: The GCS bucket (e.g. gs://bucket-name)
 # $2: The auto-deletion policy
