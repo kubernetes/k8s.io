@@ -36,6 +36,7 @@ import (
 	secretmanagerpb "google.golang.org/genproto/googleapis/cloud/secretmanager/v1"
 	"gopkg.in/yaml.v3"
 
+	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/test-infra/pkg/genyaml"
 )
 
@@ -221,30 +222,42 @@ func NewReconciler(ctx context.Context, clientOption option.ClientOption) (*Reco
 }
 
 func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
 	for _, g := range groups {
 		if g.EmailId == "" {
-			return fmt.Errorf("group has no email-id: %#v", g)
+			errs = append(errs, fmt.Errorf("group has no email-id: %#v", g))
+			continue
 		}
 
 		err := r.AdminSvc.CreateOrUpdateGroupIfNescessary(g)
 		if err != nil {
-			return err
+			errs = append(errs, err)
+			continue
 		}
+
 		err = r.GroupSvc.UpdateGroupSettings(g)
 		if err != nil {
-			return err
+			errs = append(errs, err)
+			continue
 		}
+
 		err = r.AdminSvc.AddOrUpdateGroupMembers(g, OwnerRole, g.Owners)
 		if err != nil {
-			return err
+			errs = append(errs, err)
+			continue
 		}
+
 		err = r.AdminSvc.AddOrUpdateGroupMembers(g, ManagerRole, g.Managers)
 		if err != nil {
-			return err
+			errs = append(errs, err)
+			continue
 		}
+
 		err = r.AdminSvc.AddOrUpdateGroupMembers(g, MemberRole, g.Members)
 		if err != nil {
-			log.Println(err)
+			errs = append(errs, err)
+			continue
 		}
 
 		if g.Settings["ReconcileMembers"] == "true" {
@@ -252,22 +265,23 @@ func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
 			members = append(members, g.Members...)
 			err = r.AdminSvc.RemoveMembersFromGroup(g, members)
 			if err != nil {
-				return err
+				errs = append(errs, err)
 			}
 		} else {
 			members := append(g.Owners, g.Managers...)
 			err = r.AdminSvc.RemoveOwnerOrManagersFromGroup(g, members)
 			if err != nil {
-				return err
+				errs = append(errs, err)
 			}
 		}
 	}
+
 	err := r.AdminSvc.DeleteGroupsIfNecessary()
 	if err != nil {
-		return err
+		errs = append(errs, err)
 	}
 
-	return nil
+	return utilerrors.NewAggregate(errs)
 }
 
 func (r *Reconciler) printGroupMembersAndSettings() error {
