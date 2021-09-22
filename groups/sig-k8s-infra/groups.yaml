@@ -34,11 +34,9 @@ groups:
     members:
       - ameukam@gmail.com
       - bentheelder@google.com
-      - brendan.d.burns@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
       - ihor@cncf.io
-      - jgrafton@google.com
       - justinsb@google.com
       - spiffxp@google.com
       - thockin@google.com
@@ -214,7 +212,6 @@ groups:
       - k8s-infra-ii-coop@kubernetes.io
       - spiffxp@gmail.com
       - thockin@google.com
-      - tjferrara@google.com
 
   #
   # k8s-infra org-wide infrastructure admin groups
@@ -248,7 +245,6 @@ groups:
       - davanum@gmail.com
       - justinsb@google.com
       - linusa@google.com
-      - michelle.noorali@gmail.com
       - spiffxp@google.com
       - thockin@google.com
 
@@ -264,7 +260,6 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
-  #TODO: Cleanup after conversion to SIG is done: https://github.com/kubernetes/community/issues/6036
   - email-id: k8s-infra-cluster-admins@kubernetes.io
     name: k8s-infra-cluster-admins
     description: |-
@@ -272,17 +267,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
       - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
       - justinsb@google.com
-      - nikitaraghunath@gmail.com
-      - stefan.schimanski@gmail.com
-      - thockin@google.com
       - james@munnelly.eu
       - sig-k8s-infra-leads@kubernetes.io
-      - spiffxp@google.com
 
   - email-id: k8s-infra-dns-admins@kubernetes.io
     name: k8s-infra-dns-admins
