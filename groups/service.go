@@ -28,6 +28,7 @@ import (
 	"google.golang.org/api/googleapi"
 	groupssettings "google.golang.org/api/groupssettings/v1"
 	"google.golang.org/api/option"
+	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 )
 
 const (
@@ -90,9 +91,11 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 			log.Printf("skipping adding members to group %q as it has not yet been created\n", group.EmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %q: %v", group.EmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %w", group.EmailId, err)
 	}
 
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
 	for _, memberEmailId := range members {
 		var member *admin.Member
 		for _, m := range l.Members {
@@ -109,7 +112,8 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 				if config.ConfirmChanges {
 					_, err := as.client.UpdateMember(group.EmailId, member.Email, member)
 					if err != nil {
-						return fmt.Errorf("unable to update %s in %q as %s : %v", memberEmailId, group.EmailId, role, err)
+						errs = append(errs, fmt.Errorf("unable to update %s in %q as %s : %w", memberEmailId, group.EmailId, role, err))
+						continue
 					}
 					log.Printf("Updated %s to %q as a %s\n", memberEmailId, group.EmailId, role)
 				} else {
@@ -127,7 +131,8 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 		if config.ConfirmChanges {
 			_, err := as.client.InsertMember(group.EmailId, member)
 			if err != nil {
-				return fmt.Errorf("unable to add %s to %q as %s : %v", memberEmailId, group.EmailId, role, err)
+				errs = append(errs, fmt.Errorf("unable to add %s to %q as %s : %w", memberEmailId, group.EmailId, role, err))
+				continue
 			}
 			log.Printf("Added %s to %q as a %s\n", memberEmailId, group.EmailId, role)
 		} else {
@@ -135,7 +140,7 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 		}
 	}
 
-	return nil
+	return utilerrors.NewAggregate(errs)
 }
 
 // CreateOrUpdateGroupIfNescessary will create a group if the provided group's email ID
@@ -164,12 +169,12 @@ func (as *adminService) CreateOrUpdateGroupIfNescessary(group GoogleGroup) error
 				}
 				g4, err := as.client.InsertGroup(&g)
 				if err != nil {
-					return fmt.Errorf("unable to add new group %q: %v", group.EmailId, err)
+					return fmt.Errorf("unable to add new group %q: %w", group.EmailId, err)
 				}
 				log.Printf("> Successfully created group %s\n", g4.Email)
 			}
 		} else {
-			return fmt.Errorf("unable to fetch group %q: %#v", group.EmailId, err.Error())
+			return fmt.Errorf("unable to fetch group %q: %w", group.EmailId, err)
 		}
 	} else {
 		if group.Name != "" && grp.Name != group.Name ||
@@ -189,7 +194,7 @@ func (as *adminService) CreateOrUpdateGroupIfNescessary(group GoogleGroup) error
 				}
 				g4, err := as.client.UpdateGroup(group.EmailId, &g)
 				if err != nil {
-					return fmt.Errorf("unable to update group %q: %v", group.EmailId, err)
+					return fmt.Errorf("unable to update group %q: %w", group.EmailId, err)
 				}
 				log.Printf("> Successfully updated group %s\n", g4.Email)
 			}
@@ -204,9 +209,11 @@ func (as *adminService) CreateOrUpdateGroupIfNescessary(group GoogleGroup) error
 func (as *adminService) DeleteGroupsIfNecessary() error {
 	g, err := as.client.ListGroups()
 	if err != nil {
-		return fmt.Errorf("unable to retrieve users in domain: %v", err)
+		return fmt.Errorf("unable to retrieve users in domain: %w", err)
 	}
 
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
 	for _, g := range g.Groups {
 		found := false
 		for _, g2 := range groupsConfig.Groups {
@@ -226,7 +233,8 @@ func (as *adminService) DeleteGroupsIfNecessary() error {
 			}
 			err := as.client.DeleteGroup(g.Email)
 			if err != nil {
-				return fmt.Errorf("unable to remove group %s : %v", g.Email, err)
+				errs = append(errs, fmt.Errorf("unable to remove group %s : %w", g.Email, err))
+				continue
 			}
 			log.Printf("Removing group %s\n", g.Email)
 		} else {
@@ -235,7 +243,7 @@ func (as *adminService) DeleteGroupsIfNecessary() error {
 
 	}
 
-	return nil
+	return utilerrors.NewAggregate(errs)
 }
 
 // RemoveOwnerOrManagersFromGroup lists members of the group and checks against the list of members
@@ -251,9 +259,11 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 			log.Printf("skipping removing members group %q as group has not yet been created\n", group.EmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %q: %v", group.EmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %w", group.EmailId, err)
 	}
 
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
 	for _, m := range l.Members {
 		found := false
 		for _, m2 := range members {
@@ -274,7 +284,8 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 		if config.ConfirmChanges {
 			err := as.client.DeleteMember(group.EmailId, m.Id)
 			if err != nil {
-				return fmt.Errorf("unable to remove %s from %q as OWNER or MANAGER : %v", m.Email, group.EmailId, err)
+				errs = append(errs, fmt.Errorf("unable to remove %s from %q as OWNER or MANAGER : %w", m.Email, group.EmailId, err))
+				continue
 			}
 			log.Printf("Removing %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 		} else {
@@ -282,7 +293,7 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 		}
 	}
 
-	return nil
+	return utilerrors.NewAggregate(errs)
 }
 
 // RemoveMembersFromGroup lists members of the group and checks against the list of members passed.
@@ -299,9 +310,11 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 			log.Printf("skipping removing members group %q as group has not yet been created\n", group.EmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve members in group %q: %v", group.EmailId, err)
+		return fmt.Errorf("unable to retrieve members in group %q: %w", group.EmailId, err)
 	}
 
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
 	for _, m := range l.Members {
 		found := false
 		for _, m2 := range members {
@@ -318,7 +331,8 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 		if config.ConfirmChanges {
 			err := as.client.DeleteMember(group.EmailId, m.Id)
 			if err != nil {
-				return fmt.Errorf("unable to remove %s from %q as a %s : %v", m.Email, group.EmailId, m.Role, err)
+				errs = append(errs, fmt.Errorf("unable to remove %s from %q as a %s : %w", m.Email, group.EmailId, m.Role, err))
+				continue
 			}
 			log.Printf("Removing %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 		} else {
@@ -326,7 +340,7 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 		}
 	}
 
-	return nil
+	return utilerrors.NewAggregate(errs)
 }
 
 // GetClient simply returns the underlying AdminServiceClient being used.
@@ -352,7 +366,7 @@ func (gs *groupService) UpdateGroupSettings(group GoogleGroup) error {
 			log.Printf("skipping updating group settings as group %q has not yet been created\n", group.EmailId)
 			return nil
 		}
-		return fmt.Errorf("unable to retrieve group info for group %q: %v", group.EmailId, err)
+		return fmt.Errorf("unable to retrieve group info for group %q: %w", group.EmailId, err)
 	}
 
 	var (
@@ -406,7 +420,7 @@ func (gs *groupService) UpdateGroupSettings(group GoogleGroup) error {
 		if config.ConfirmChanges {
 			_, err := gs.client.Patch(group.EmailId, &wantSettings)
 			if err != nil {
-				return fmt.Errorf("unable to update group info for group %q: %v", group.EmailId, err)
+				return fmt.Errorf("unable to update group info for group %q: %w", group.EmailId, err)
 			}
 			log.Printf("> Successfully updated group settings for %q to allow external members and other security settings\n", group.EmailId)
 		} else {
