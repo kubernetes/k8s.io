@@ -52,16 +52,6 @@ github_reporter:
 
 tide:
   sync_period: 1m
-  queries:
-  - repos:
-    - kubernetes/k8s.io
-    labels:
-    - lgtm
-    - approved
-    - a-label-that-does-not-exist
-    missingLabels:
-    - do-not-merge/hold
-    - do-not-merge/work-in-progress
   pr_status_base_urls:
     '*': https://k8s-infra-prow.k8s.io/pr
 
