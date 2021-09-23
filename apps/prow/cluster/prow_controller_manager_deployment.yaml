@@ -41,7 +41,10 @@ spec:
         - --dry-run=false
         - --enable-controller=plank
         - --job-config-path=/etc/job-config
-        - --kubeconfig=/etc/kubeconfig/kubeconfig
+        env:
+        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
+        - name: KUBECONFIG
+          value: "/etc/kubeconfig/kubeconfig"
         ports:
         - name: metrics
           containerPort: 9090
