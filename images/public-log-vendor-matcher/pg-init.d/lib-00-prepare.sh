@@ -15,7 +15,7 @@ gcloud config set project "${GCP_PROJECT}"
 ## Use the activate-service-account live once it has permissions
 ## The container is being run it so it should let me manually do the auth
 # gcloud auth login
-gcloud auth activate-service-account "${GCP_SERVICEACCOUNT}" --key-file="${GOOGLE_APPLICATION_CREDENTIALS}"
+gcloud auth activate-service-account --key-file="${GOOGLE_APPLICATION_CREDENTIALS}"
 
 gcloud auth list
 

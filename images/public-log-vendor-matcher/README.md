@@ -4,15 +4,14 @@ A Postgres-based k8s-infra data pipeline that produces BigQuery tables for revie
 
 ## Environment variables
 
-| Name                             | Default                                                | Description                                                                           |
-| -------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------- |
-| `TZ`                             | ``                                                     | Container time zone                                                                   |
-| `GOOGLE_APPLICATION_CREDENTIALS` | ``                                                     | The path to the GCP service account json key                                          |
-| `GCP_PROJECT`                    | `k8s-infra-ii-sandbox`                                 | The project to target                                                                 |
-| `GCP_SERVICEACCOUNT`             | `asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com` | The GCP service account name                                                          |
-| `GCP_BIGQUERY_DATASET`           | `etl_script_generated_set`                             | The dataset and basename to write to (appends date)                                   |
-| `NO_PROMOTE`                     | ``                                                     | Disable the promotion of `${GCP_BIGQUERY_DATASET}_${DATE}` to ${GCP_BIGQUERY_DATASET} |
-| `ASN_DATA_PIPELINE_RETAIN`       | ``                                                     | Keeps Postgres running after the job has completed                                    |
+| Name                             | Default                    | Description                                                                           |
+| -------------------------------- | -------------------------- | ------------------------------------------------------------------------------------- |
+| `TZ`                             | ``                         | Container time zone                                                                   |
+| `GOOGLE_APPLICATION_CREDENTIALS` | ``                         | The path to the GCP service account json key                                          |
+| `GCP_PROJECT`                    | `k8s-infra-ii-sandbox`     | The project to target                                                                 |
+| `GCP_BIGQUERY_DATASET`           | `etl_script_generated_set` | The dataset and basename to write to (appends date)                                   |
+| `NO_PROMOTE`                     | ``                         | Disable the promotion of `${GCP_BIGQUERY_DATASET}_${DATE}` to ${GCP_BIGQUERY_DATASET} |
+| `ASN_DATA_PIPELINE_RETAIN`       | ``                         | Keeps Postgres running after the job has completed                                    |
 
 ## Running the Pipeline Manually
 
@@ -35,7 +34,6 @@ docker run \
     -e POSTGRES_PASSWORD="postgres" \
     -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/asn-etl-pipeline-gcp-sa.json \
     -e GCP_PROJECT=k8s-infra-ii-sandbox \
-    -e GCP_SERVICEACCOUNT=asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com \
     -e GCP_BIGQUERY_DATASET=etl_script_generated_set \
     -v /tmp/asn-etl-pipeline-gcp-sa.json:/tmp/asn-etl-pipeline-gcp-sa.json:ro \
     -v "${TMP_DIR_ETL}:/tmp" \
