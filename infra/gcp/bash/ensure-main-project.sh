@@ -383,10 +383,13 @@ function ensure_aaa_external_secrets() {
         triage-party-github-token
     )
     local elekto_secrets=(
+        elekto-db-database
+        elekto-db-host
+        elekto-db-password
+        elekto-db-port
+        elekto-db-username
         elekto-github-client-id
         elekto-github-client-secret
-        elekto-db-username
-        elekto-db-password
         elekto-meta-secret
     )
     mapfile -t secret_specs < <(
