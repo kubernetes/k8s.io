@@ -9,7 +9,7 @@ data:
   # The contents of config/config.yaml
   config.yaml: |
     settings:
-    name: sig-cli
+      name: sig-cli
       min_similarity: 0.75
 
     collections:
