@@ -1,0 +1,10 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: elections-k8s-io
+  namespace: elekto
+  labels:
+    app: elekto
+spec:
+  domains:
+    - elections.k8s.io
