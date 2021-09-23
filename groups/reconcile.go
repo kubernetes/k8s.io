@@ -227,37 +227,31 @@ func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
 	for _, g := range groups {
 		if g.EmailId == "" {
 			errs = append(errs, fmt.Errorf("group has no email-id: %#v", g))
-			continue
 		}
 
 		err := r.AdminSvc.CreateOrUpdateGroupIfNescessary(g)
 		if err != nil {
 			errs = append(errs, err)
-			continue
 		}
 
 		err = r.GroupSvc.UpdateGroupSettings(g)
 		if err != nil {
 			errs = append(errs, err)
-			continue
 		}
 
 		err = r.AdminSvc.AddOrUpdateGroupMembers(g, OwnerRole, g.Owners)
 		if err != nil {
 			errs = append(errs, err)
-			continue
 		}
 
 		err = r.AdminSvc.AddOrUpdateGroupMembers(g, ManagerRole, g.Managers)
 		if err != nil {
 			errs = append(errs, err)
-			continue
 		}
 
 		err = r.AdminSvc.AddOrUpdateGroupMembers(g, MemberRole, g.Members)
 		if err != nil {
 			errs = append(errs, err)
-			continue
 		}
 
 		if g.Settings["ReconcileMembers"] == "true" {
