@@ -58,7 +58,6 @@ tide:
     labels:
     - lgtm
     - approved
-    - a-label-that-does-not-exist
     missingLabels:
     - do-not-merge/hold
     - do-not-merge/work-in-progress
