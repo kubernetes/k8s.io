@@ -8,7 +8,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: gce
     kubernetes.io/ingress.global-static-ip-name: elekto-k8s-io-ingress-prod
-    networking.gke.io/managed-certificates: elekto-k8s-io
+    networking.gke.io/managed-certificates: elections-k8s-io
 spec:
   defaultBackend:
     service:
