@@ -1,6 +1,7 @@
 - name: gcp-compute-persistent-disk-csi-driver
   dmap:
     "sha256:23d2fe20c5307c3ef2580ed035084d9a57866717bd8b80bdc2dabd2097591227": ["v1.2.1"]
+    "sha256:60c31b6b1f5e18e14e8f9be312afbad67ff5c46785e01e99d2ee3fb815a3c29c": ["v1.3.3"]
     "sha256:7d20ed9af18c24b68b6afe715aeb539fd9c352af875d8329df4652bd0bc38ea8": ["v1.2.3"]
     "sha256:8e04ffa8060e46b5e07d70990f80ad15446b2f27b286df4a47569e1c818dcce7": ["v1.3.0"]
     "sha256:af42e4cf7bd5af41744d8c3a6c238da1a988cd38ec5dca5efcea343a96a05763": ["v1.3.1"]
