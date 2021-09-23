@@ -396,7 +396,6 @@ function staging_special_case__k8s_staging_cluster_api_gcp() {
 
     ensure_services "${STAGING_PROJECT}" compute.googleapis.com
     ensure_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/compute.instanceAdmin.v1"
-    ensure_removed_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/iam.serviceAccountUser"
     ensure_serviceaccount_role_binding "${serviceaccount}" "serviceAccount:${serviceaccount}" "roles/iam.serviceAccountUser"
     ensure_staging_gcb_builder_service_account "cluster-api-gcp" "k8s-infra-prow-build-trusted"
 }
@@ -405,16 +404,19 @@ function staging_special_case__k8s_staging_cluster_api_gcp() {
 # able to create and manage a keyring to encrypt a secret token
 # that will be accessed and decrypted by a cloud build job.
 function staging_special_case__k8s_staging_kustomize() {
-    readonly STAGING_PROJECT="k8s-staging-kustomize"
+    readonly project="k8s-staging-kustomize"
+    local principal
 
-    local sa_email_group="k8s-infra-staging-kustomize@kubernetes.io"
-    local principal_group="serviceAccount:${sa_email_group}"
-    ensure_project_role_binding "${STAGING_PROJECT}" "${principal_group}" "roles/cloudkms.admin"
+    # ensure owners can manage keyrings
+    local owners="k8s-infra-staging-kustomize@kubernetes.io"
+    principal="group:${owners}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.admin"
 
-    local sa_email_cloudbuild="660796270509@cloudbuild.gserviceaccount.com"
-    local principal_cloudbuild="serviceAccount:${sa_email_cloudbuild}"
-    ensure_project_role_binding "${STAGING_PROJECT}" "${principal_cloudbuild}" "roles/cloudkms.cryptoKeyDecrypter"
-    ensure_project_role_binding "${STAGING_PROJECT}" "${principal_cloudbuild}" "roles/secretmanager.secretAccessor"
+    # ensure cloud builds can access keyrings for decryption
+    local cloudbuild_sa_email="660796270509@cloudbuild.gserviceaccount.com"
+    principal="serviceAccount:${cloudbuild_sa_email}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyDecrypter"
+    ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
 }
 
 #
