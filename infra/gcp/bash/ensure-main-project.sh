@@ -382,10 +382,18 @@ function ensure_aaa_external_secrets() {
     local triageparty_release_secrets=(
         triage-party-github-token
     )
+    local elekto_secrets=(
+        elekto-github-client-id
+        elekto-github-client-secret
+        elekto-db-username
+        elekto-db-password
+        elekto-meta-secret
+    )
     mapfile -t secret_specs < <(
         printf "%s/prow/sig-testing\n" "${prow_secrets[@]}"
         printf "%s/slack-infra/sig-contributor-experience\n" "${slack_infra_secrets[@]}"
         printf "%s/triageparty-release/sig-release\n" "${triageparty_release_secrets[@]}"
+        printf "%s/elekto/sig-contributor-experience\n" "${elekto_secrets[@]}"
     )
 
     for spec in "${secret_specs[@]}"; do
