@@ -401,6 +401,22 @@ function staging_special_case__k8s_staging_cluster_api_gcp() {
     ensure_staging_gcb_builder_service_account "cluster-api-gcp" "k8s-infra-prow-build-trusted"
 }
 
+# In order to build the release artifacts, the group needs to be
+# able to create and manage a keyring to encrypt a secret token
+# that will be accessed and decrypted by a cloud build job.
+function staging_special_case__k8s_staging_kustomize() {
+    readonly STAGING_PROJECT="k8s-staging-kustomize"
+
+    local sa_email_group="k8s-infra-staging-kustomize@kubernetes.io"
+    local principal_group="serviceAccount:${sa_email_group}"
+    ensure_project_role_binding "${STAGING_PROJECT}" "${principal_group}" "roles/cloudkms.admin"
+
+    local sa_email_cloudbuild="660796270509@cloudbuild.gserviceaccount.com"
+    local principal_cloudbuild="serviceAccount:${sa_email_cloudbuild}"
+    ensure_project_role_binding "${STAGING_PROJECT}" "${principal_cloudbuild}" "roles/cloudkms.cryptoKeyDecrypter"
+    ensure_project_role_binding "${STAGING_PROJECT}" "${principal_cloudbuild}" "roles/secretmanager.secretAccessor"
+}
+
 #
 # main
 #
