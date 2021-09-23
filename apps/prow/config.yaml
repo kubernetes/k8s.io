@@ -58,6 +58,8 @@ tide:
     labels:
     - lgtm
     - approved
+    # This label is used to prevent k8s-infra-ci-robot from double merging
+    # PRs because k8s-ci-robot is still the active Tide account.
     - a-label-that-does-not-exist
     missingLabels:
     - do-not-merge/hold
