@@ -8,12 +8,11 @@ gs://k8s-conform-s390x-k8s/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
-	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 23 Sep 2020 20:17:38 GMT
-	Time updated:			Mon, 30 Aug 2021 10:13:05 GMT
-	Metageneration:			23
+	Time updated:			Wed, 22 Sep 2021 19:00:20 GMT
+	Metageneration:			24
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]

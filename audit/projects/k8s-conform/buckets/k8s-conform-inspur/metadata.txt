@@ -8,12 +8,11 @@ gs://k8s-conform-inspur/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
-	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 20 Nov 2020 14:08:57 GMT
-	Time updated:			Mon, 30 Aug 2021 10:11:16 GMT
-	Metageneration:			25
+	Time updated:			Wed, 22 Sep 2021 18:59:34 GMT
+	Metageneration:			26
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]
