@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: elekto
+  namespace: elekto
+  labels:
+    app: elekto
+  annotations:
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.global-static-ip-name: elekto-k8s-io-ingress-prod
+    networking.gke.io/managed-certificates: elekto-k8s-io
+spec:
+  defaultBackend:
+    service:
+      name: elekto
+      port:
+        name: http
