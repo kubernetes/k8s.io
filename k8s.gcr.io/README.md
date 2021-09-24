@@ -10,13 +10,31 @@ repositories used to publish official container images for Kubernetes.
 
 ## Staging repos
 
-Each "project" (as decided by people) that feeds into Kubernetes' main
-image-serving system (k8s.gcr.io) gets a staging repository.  Each staging
-repository is governed by a googlegroup, which grants push access to that
-repository.
+Kubernetes subprojects may use a dedicated staging GCP project to build and
+host container images. We refer to the GCR provided by each staging project
+as a staging repository. Images are promoted from staging repositories into
+the main Kubernetes image-serving system (k8s.gcr.io).
 
-Project owners can push to their staging repository and use the image promoter
-to promote images to the main serving repository.
+Access to each staging project is governed by a googlegroup, which grants the
+ability to manually trigger GCB or push container images in the event that
+automated builds via something like prow.k8s.io are not setup or are broken.
+
+### Requirements
+
+The rule of thumb is that staging repositories should be used to host
+artifacts produced by code that is part of the Kubernetes project. In other
+words, code that is not part of the Kubernetes project should not have its
+artifacts hosted in staging repos. SIG K8s Infra may make exceptions to this
+policy on a case-by-case basis.
+
+For example:
+
+- CRI-O is not part of the kubernetes project, it does not meet the
+  requirements to get a staging repo
+- While etcd and coredns are not part of the kubernetes project, we do
+  bundle them with kubernetes as part of the release, so for this specific
+  case are allowing a staging repo to host them (solely within the context
+  of the kubernetes project)
 
 ### Creating staging repos
 
