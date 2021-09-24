@@ -9,7 +9,7 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-txtdirect@kubernetes.io"
+        "deleted:group:k8s-infra-staging-txtdirect@kubernetes.io?uid=505919533506830406385"
       ],
       "role": "roles/cloudbuild.builds.editor"
     },
@@ -39,14 +39,14 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-txtdirect@kubernetes.io"
+        "deleted:group:k8s-infra-staging-txtdirect@kubernetes.io?uid=505919533506830406385"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"
     },
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "group:k8s-infra-staging-txtdirect@kubernetes.io"
+        "deleted:group:k8s-infra-staging-txtdirect@kubernetes.io?uid=505919533506830406385"
       ],
       "role": "roles/viewer"
     }
