@@ -97,9 +97,10 @@ To promote an image, follow these steps:
 1. The PR should trigger a `pull-k8sio-cip` job which will validate and dry-run
    your changes; check that the `k8s-ci-robot` responds 'Job succeeded' for it.
 1. Merge the PR. Your image will be promoted by one of two jobs:
-   - [`post-k8sio-image-promo`][post-promo-job] is a postsubmit that runs immediately after merge
-   - [`ci-k8sio-cip`][ci-promo-job] is a postsubmit that runs immediately after merge
-1. A periodic
+   - [`post-k8sio-image-promo`][post-promo-job] is a postsubmit that runs
+     immediately after merge
+   - [`ci-k8sio-cip`][ci-promo-job] is a periodic job that runs every four
+     hours in case there are transient failures of the postsubmit jobs
 1. Published images will appear on k8s.gcr.io and can be viewed [here](https://console.cloud.google.com/gcr/images/k8s-artifacts-prod).
 
 Essentially, in order to get images published to a production repo, you have to
