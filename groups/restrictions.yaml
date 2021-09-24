@@ -19,7 +19,6 @@ restrictions:
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-etcd@kubernetes.io$"
-      - "^k8s-infra-staging-txtdirect@kubernetes.io$"
   - path: "sig-api-machinery/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
