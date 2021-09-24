@@ -2,6 +2,14 @@
 
 A Postgres-based k8s-infra data pipeline that produces BigQuery tables for reviewing Kubernetes Public artifact traffic in DataStudio.
 
+## Flow (WIP)
+
+1. Kubernetes Public GCS buckets for artifacts are configured to write public access logs to a GCS bucket called _k8s-infra-artifacts-gcslogs_ in the _k8s-infra-public-pii_ project
+2. Data from ASN aggregators (PyASN, Potaroo) is collated in Postgres for matching ASN owners / Companies to IP ranges
+3. The ASN data is then loaded into BigQuery
+4. Publicly known company vendor ASNs from the k8s.io repo into BigQuery
+5. PeeringDB company information
+
 ## Environment variables
 
 | Name                             | Default                    | Description                                                                           |
@@ -15,28 +23,20 @@ A Postgres-based k8s-infra data pipeline that produces BigQuery tables for revie
 
 ## Running the Pipeline Manually
 
-Generate a key file for ServiceAccount auth
-
-```
-gcloud iam service-accounts keys create /tmp/asn-etl-pipeline-gcp-sa.json --iam-account=asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com
-```
-
-Run in Docker
+Run in Docker (WIP)
 
 ```
 TMP_DIR_ETL=$(mktemp -d)
+echo "${TMP_DIR_ETL}"
 sudo chmod 0777 "${TMP_DIR_ETL}"
-sudo chown 999 /tmp/asn-etl-pipeline-gcp-sa.json
 docker run \
     -it \
     --rm \
     -e TZ=$TZ \
     -e POSTGRES_PASSWORD="postgres" \
-    -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/asn-etl-pipeline-gcp-sa.json \
     -e GCP_PROJECT=k8s-infra-ii-sandbox \
     -e GCP_BIGQUERY_DATASET=etl_script_generated_set \
-    -v /tmp/asn-etl-pipeline-gcp-sa.json:/tmp/asn-etl-pipeline-gcp-sa.json:ro \
+    -v $HOME/.config/gcloud:/root/.config/gcloud \
     -v "${TMP_DIR_ETL}:/tmp" \
     public-log-vendor-matcher
-echo "${TMP_DIR_ETL}"
 ```
