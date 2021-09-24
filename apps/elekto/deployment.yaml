@@ -18,12 +18,21 @@ spec:
         app: elekto
     spec:
       containers:
-        - image: ghcr.io/elekto-io/elekto:sha-8d58a8e
+        - image: ghcr.io/elekto-io/elekto:sha-83523b4
           imagePullPolicy: Always
           name: elekto
           ports:
             - containerPort: 8080
               protocol: TCP
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            timeoutSeconds: 5
           resources:
             limits:
               memory: 1500M
