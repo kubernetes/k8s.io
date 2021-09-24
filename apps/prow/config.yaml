@@ -24,7 +24,7 @@ plank:
       gcs_configuration:
         bucket: k8s-infra-prow-results
         path_strategy: explicit
-      gcs_credentials_secret: "k8s-infra-prow-sa-key"
+      gcs_credentials_secret: "" # Use GKE Workload identity
       resources:
         clonerefs:
           requests:
