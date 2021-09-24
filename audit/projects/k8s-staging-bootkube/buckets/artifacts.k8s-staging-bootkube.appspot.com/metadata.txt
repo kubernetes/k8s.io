@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-bootkube.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 09 Jun 2020 22:17:36 GMT
-	Time updated:			Thu, 09 Sep 2021 15:27:40 GMT
-	Metageneration:			12
+	Time updated:			Fri, 24 Sep 2021 20:16:29 GMT
+	Metageneration:			13
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]
