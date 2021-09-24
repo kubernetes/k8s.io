@@ -50,6 +50,19 @@ groups:
       - thockin@google.com
       - zihongz@google.com
 
+  - email-id: k8s-infra-staging-coredns@kubernetes.io
+    name: k8s-infra-staging-coredns
+    description: |-
+      ACL for staging coredns
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - michaelg@okkur.org
+      - srajan@infoblox.com
+      - jbelamaric@google.com
+      - cohaver@infoblox.com
+
   - email-id: k8s-infra-staging-dns@kubernetes.io
     name: k8s-infra-staging-dns
     description: |-
