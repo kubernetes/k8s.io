@@ -410,6 +410,7 @@ function staging_special_case__k8s_staging_kustomize() {
     local owners="k8s-infra-staging-kustomize@kubernetes.io"
     principal="group:${owners}"
     ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.admin"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyEncrypter"
 
     # ensure cloud builds can access keyrings for decryption
     local cloudbuild_sa_email="660796270509@cloudbuild.gserviceaccount.com"
