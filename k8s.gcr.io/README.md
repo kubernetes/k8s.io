@@ -22,10 +22,12 @@ automated builds via something like prow.k8s.io are not setup or are broken.
 ### Requirements
 
 The rule of thumb is that staging repositories should be used to host
-artifacts produced by code that is part of the Kubernetes project. In other
-words, code that is not part of the Kubernetes project should not have its
-artifacts hosted in staging repos. SIG K8s Infra may make exceptions to this
-policy on a case-by-case basis.
+artifacts produced by code that is part of the Kubernetes project, as defined
+by presence in one of the [project-owned GitHub Organizations][project-github].
+
+In other words, code that is not part of the Kubernetes project should not
+have its artifacts hosted in staging repos. SIG K8s Infra may make exceptions
+to this policy on a case-by-case basis.
 
 For example:
 
@@ -97,7 +99,7 @@ To promote an image, follow these steps:
 1. Merge the PR. Your image will be promoted by one of two jobs:
    - [`post-k8sio-image-promo`][post-promo-job] is a postsubmit that runs immediately after merge
    - [`ci-k8sio-cip`][ci-promo-job] is a postsubmit that runs immediately after merge
-1. A periodic 
+1. A periodic
 1. Published images will appear on k8s.gcr.io and can be viewed [here](https://console.cloud.google.com/gcr/images/k8s-artifacts-prod).
 
 Essentially, in order to get images published to a production repo, you have to
@@ -111,3 +113,4 @@ use the image promotion (PR creation) process defined above.
 [vdf]: /k8s.gcr.io/Vanity-Domain-Flip.md
 [post-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#post-k8sio-image-promo
 [ci-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#ci-k8sio-image-promo
+[project-github]: https://git.k8s.io/community/github-management#project-owned-organizations
