@@ -129,7 +129,6 @@ restrictions:
       - "^k8s-infra-staging-cip-test@kubernetes.io$"
       - "^k8s-infra-staging-experimental@kubernetes.io$"
       - "^k8s-infra-staging-kubernetes@kubernetes.io$"
-      - "^k8s-infra-staging-mirror@kubernetes.io$"
       - "^k8s-infra-staging-releng@kubernetes.io$"
       - "^k8s-infra-staging-releng-test@kubernetes.io$"
       - "^k8s-infra-staging-publishing-bot@kubernetes.io$"

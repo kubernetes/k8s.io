@@ -44,10 +44,9 @@ mapfile -t STAGING_PROJECTS < <(k8s_infra_projects "staging")
 readonly STAGING_PROJECTS
 
 readonly RELEASE_STAGING_PROJECTS=(
-    k8s-staging-experimental
-    k8s-staging-kubernetes
-    k8s-staging-mirror
-    k8s-staging-releng
+    "$(k8s_infra_project staging k8s-staging-experimental)"
+    "$(k8s_infra_project staging k8s-staging-kubernetes)"
+    "$(k8s_infra_project staging k8s-staging-releng)"
 )
 
 readonly STAGING_PROJECT_SERVICES=(

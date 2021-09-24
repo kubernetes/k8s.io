@@ -306,7 +306,6 @@ infra:
       k8s-staging-kubetest2:
       k8s-staging-kustomize:
       k8s-staging-metrics-server:
-      k8s-staging-mirror:
       k8s-staging-multitenancy:
       k8s-staging-networking:
       k8s-staging-nfd:
