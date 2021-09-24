@@ -8,7 +8,7 @@ plank:
   report_templates:
     '*': '[Full PR test history](https://k8s-infra-prow.k8s.io/pr-history?org={{.Spec.Refs.Org}}&repo={{.Spec.Refs.Repo}}&pr={{with index .Spec.Refs.Pulls 0}}{{.Number}}{{end}}). [Your PR dashboard](https://k8s-infra-prow.k8s.io/pr?query=is%3Apr%20state%3Aopen%20author%3A{{with index .Spec.Refs.Pulls 0}}{{.Author}}{{end}}).'
   job_url_prefix_config:
-    '*': https://k8s-infra-prow.k8s.io/view/gs/
+    '*': https://k8s-infra-prow.k8s.io/view/
   pod_pending_timeout: 15m
   pod_unscheduled_timeout: 5m
   default_decoration_configs:
