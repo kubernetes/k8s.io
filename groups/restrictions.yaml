@@ -17,10 +17,9 @@ restrictions:
     allowedGroups:
       - "^leads@kubernetes.io$"
       - "^k8s-infra-staging-bootkube@kubernetes.io$"
-      - "^k8s-infra-staging-coredns@kubernetes.io$"
-      - "^k8s-infra-staging-etcd@kubernetes.io$"
   - path: "sig-api-machinery/groups.yaml"
     allowedGroups:
+      - "^k8s-infra-staging-etcd@kubernetes.io$"
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
   - path: "sig-apps/groups.yaml"
     allowedGroups:
@@ -101,6 +100,7 @@ restrictions:
     allowedGroups:
       - "^k8s-infra-push-cni@kubernetes.io$"
       - "^k8s-infra-staging-networking@kubernetes.io$"
+      - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-cpa@kubernetes.io$"
       - "^k8s-infra-staging-dns@kubernetes.io$"
       - "^k8s-infra-staging-external-dns@kubernetes.io$"
