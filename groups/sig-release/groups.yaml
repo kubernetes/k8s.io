@@ -142,19 +142,6 @@ groups:
     members:
       - k8s-infra-release-editors@kubernetes.io
 
-  - email-id: k8s-infra-staging-mirror@kubernetes.io
-    name: k8s-infra-staging-mirror
-    description: |-
-      ACL for staging mirror images
-
-      This project is used to stage images mirrored from Docker Hub.
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - k8s-infra-release-editors@kubernetes.io
-      - k8s-infra-google-build-admins@kubernetes.io
-      - k8s-infra-gcp-org-admins@kubernetes.io
-
   - email-id: k8s-infra-staging-releng@kubernetes.io
     name: k8s-infra-staging-releng
     description: |-
