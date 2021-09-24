@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-cluster-addons.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 14 Aug 2020 18:41:42 GMT
-	Time updated:			Thu, 09 Sep 2021 15:44:07 GMT
-	Metageneration:			10
+	Time updated:			Fri, 24 Sep 2021 20:31:07 GMT
+	Metageneration:			11
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]

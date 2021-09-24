@@ -33,6 +33,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-staging-kustomize@kubernetes.io"
+      ],
+      "role": "roles/cloudkms.cryptoKeyEncrypter"
+    },
+    {
+      "members": [
         "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.occurrences.viewer"
