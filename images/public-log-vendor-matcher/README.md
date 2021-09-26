@@ -23,12 +23,13 @@ A Postgres-based k8s-infra data pipeline that produces BigQuery tables for revie
 
 ## Running the Pipeline Manually
 
-Run in Docker (WIP)
+Run in Docker
 
 ```
 TMP_DIR_ETL=$(mktemp -d)
 echo "${TMP_DIR_ETL}"
 sudo chmod 0777 "${TMP_DIR_ETL}"
+sudo chown 999 ~/.config/gcloud # allow for postgres user
 docker run \
     -it \
     --rm \
@@ -36,7 +37,7 @@ docker run \
     -e POSTGRES_PASSWORD="postgres" \
     -e GCP_PROJECT=k8s-infra-ii-sandbox \
     -e GCP_BIGQUERY_DATASET=etl_script_generated_set \
-    -v $HOME/.config/gcloud:/root/.config/gcloud \
+    -v $HOME/.config/gcloud:/var/lib/postgresql/.config/gcloud \
     -v "${TMP_DIR_ETL}:/tmp" \
     public-log-vendor-matcher
 ```
