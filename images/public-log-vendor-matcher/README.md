@@ -8,7 +8,13 @@ A Postgres-based k8s-infra data pipeline that produces BigQuery tables for revie
 2. Data from ASN aggregators (PyASN, Potaroo) is collated in Postgres for matching ASN owners / Companies to IP ranges
 3. The ASN data is then loaded into BigQuery
 4. Publicly known company vendor ASNs from the k8s.io repo into BigQuery
-5. PeeringDB company information
+5. PeeringDB company information is fetched via their API and transformed into Postgres with the Potaroo data before being uploaded to BigQuery
+6. The Kubernetes Public GCS logs are then loaded into the _usage_all_raw_ table of the BigQuery dataset
+7. Various tables are formed out of the previously loaded data in BigQuery, such as IPs and companies to join things together better
+8. The IPs are joined and expanded with the IP ranges from the ASN data, then loaded into the dataset as a table
+9. All the data is then linked into a single table
+10. Tables are then promoted to the stable _${GCP_BIGQUERY_DATASET}_ table for usage in DataStudio
+11. Postgres is halted, exiting 0
 
 ## Environment variables
 
@@ -29,7 +35,7 @@ Run in Docker
 TMP_DIR_ETL=$(mktemp -d)
 echo "${TMP_DIR_ETL}"
 sudo chmod 0777 "${TMP_DIR_ETL}"
-sudo chown 999 ~/.config/gcloud # allow for postgres user
+sudo chown -R 999 ~/.config/gcloud # allow for postgres user
 docker run \
     -it \
     --rm \
