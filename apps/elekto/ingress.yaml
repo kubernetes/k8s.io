@@ -6,6 +6,7 @@ metadata:
   labels:
     app: elekto
   annotations:
+    kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.class: gce
     kubernetes.io/ingress.global-static-ip-name: k8s-io-elections
     networking.gke.io/managed-certificates: elections-k8s-io
