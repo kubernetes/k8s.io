@@ -145,6 +145,15 @@
   },
   {
     "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20210927",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20210927",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
     "id": "k8s-infra-ii-sandbox:etl_script_generated_set_deletemelol",
     "datasetReference": {
       "datasetId": "etl_script_generated_set_deletemelol",
@@ -157,6 +166,15 @@
     "id": "k8s-infra-ii-sandbox:etl_script_generated_set_prod",
     "datasetReference": {
       "datasetId": "etl_script_generated_set_prod",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_testdeleteme",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_testdeleteme",
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"

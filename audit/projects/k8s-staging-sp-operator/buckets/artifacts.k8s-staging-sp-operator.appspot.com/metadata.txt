@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-sp-operator.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 14 Oct 2020 13:37:42 GMT
-	Time updated:			Thu, 09 Sep 2021 16:51:35 GMT
-	Metageneration:			9
+	Time updated:			Fri, 24 Sep 2021 21:33:03 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]

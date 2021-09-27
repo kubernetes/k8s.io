@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-storage-migrator.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 10 Sep 2020 13:43:04 GMT
-	Time updated:			Thu, 09 Sep 2021 16:52:42 GMT
-	Metageneration:			9
+	Time updated:			Fri, 24 Sep 2021 21:34:17 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]
