@@ -50,7 +50,6 @@ MS_SERVICETAG_PUBLIC_REF=$(curl -s https://www.microsoft.com/en-us/download/conf
 curl "${MS_SERVICETAG_PUBLIC_REF}" \
     | jq -r '.values[] | .properties.platform as $service | .properties.region as $region | .properties.addressPrefixes[] | [., $service, $region] | @csv' \
       > /tmp/vendor/microsoft_raw_subnet_region.csv
-echo "latest MS ServiceTag: $(echo $MS_SERVICETAG_PUBLIC_REF | sed )"
 
 ## Load all the csv
 for VENDOR in ${ASN_VENDORS[*]}; do
