@@ -273,30 +273,26 @@ cluster-api-aws.sigs:
 cluster-api-openstack.sigs:
 - type: CNAME
   value: kubernetes-sigs-cluster-api-openstack.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vince)
+# https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vincepri)
 release-0-1.cluster-api.sigs:
   type: CNAME
   value: release-0-1--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.2 docs (@CecileRobertMichon, @vince)
+# https://github.com/kubernetes-sigs/cluster-api release-0.2 docs (@CecileRobertMichon, @vincepri)
 release-0-2.cluster-api.sigs:
   type: CNAME
   value: release-0-2--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.3 docs (@CecileRobertMichon, @vince)
+# https://github.com/kubernetes-sigs/cluster-api release-0.3 docs (@CecileRobertMichon, @vincepri)
 release-0-3.cluster-api.sigs:
   type: CNAME
   value: release-0-3--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.4 docs (@CecileRobertMichon, @vince)
+# https://github.com/kubernetes-sigs/cluster-api release-0.4 docs (@CecileRobertMichon, @vincepri)
 release-0-4.cluster-api.sigs:
   type: CNAME
   value: release-0-4--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vince)
-master.cluster-api.sigs:
+# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vincepri)
+main.cluster-api.sigs:
   type: CNAME
-  value: master--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vince)
-tip.cluster-api.sigs:
-  type: CNAME
-  value: master--kubernetes-sigs-cluster-api.netlify.app.
+  value: main--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-azure docs (@CecileRobertMichon, @nader-ziada, @devigned)
 capz.sigs:
   type: CNAME
