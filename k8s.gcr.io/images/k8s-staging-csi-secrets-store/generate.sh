@@ -19,7 +19,8 @@ set -o nounset
 set -o pipefail
 
 readonly repo="gcr.io/k8s-staging-csi-secrets-store"
-readonly tag_filter="tags~^v[0-9]+.[0-9]+.[0-9]+$ AND NOT tags=v0.0.11"
+# release candidates will be created for >=1.0.0 releases that we want published to the prod registry
+readonly tag_filter="(tags~^v[0-9]+.[0-9]+.[0-9]+$ AND NOT tags=v0.0.11) OR (tags~^v[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+$ AND tags >= v1.0.0)"
 readonly images=(
     driver
     driver-crds
