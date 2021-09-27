@@ -14,14 +14,14 @@ envsubst < /app/ext-ip-asn.sql | bq query --nouse_legacy_sql --replace --destina
 mkdir -p /tmp/vendor
 
 VENDORS=(
-    microsoft
-    google
-    amazon
     alibabagroup
+    amazon
     baidu
     digitalocean
     equinixmetal
+    google
     huawei
+    microsoft
     tencentcloud
 )
 ## This should be the end of pyasn section, we have results table that covers start_ip/end_ip from fs our requirements
@@ -40,16 +40,17 @@ ASN_VENDORS=(
 )
 
 # Fetch the known IP ranges from vendors that publish them
-## curl "https://download.microsoft.com/download/7/1/D/71D86715-5596-4529-9B13-DA13A5DE5B63/ServiceTags_Public_${PIPELINE_DATE}.json" \
-curl "https://download.microsoft.com/download/7/1/D/71D86715-5596-4529-9B13-DA13A5DE5B63/ServiceTags_Public_20210906.json" \
-    | jq -r '.values[] | .properties.platform as $service | .properties.region as $region | .properties.addressPrefixes[] | [., $service, $region] | @csv' \
-      > /tmp/vendor/microsoft_raw_subnet_region.csv
-curl 'https://www.gstatic.com/ipranges/cloud.json' \
-    | jq -r '.prefixes[] | [.ipv4Prefix, .service, .scope] | @csv' \
-      > /tmp/vendor/google_raw_subnet_region.csv
 curl 'https://ip-ranges.amazonaws.com/ip-ranges.json' \
     | jq -r '.prefixes[] | [.ip_prefix, .service, .region] | @csv' \
       > /tmp/vendor/amazon_raw_subnet_region.csv
+curl 'https://www.gstatic.com/ipranges/cloud.json' \
+    | jq -r '.prefixes[] | [.ipv4Prefix, .service, .scope] | @csv' \
+      > /tmp/vendor/google_raw_subnet_region.csv
+MS_SERVICETAG_PUBLIC_REF=$(curl -s https://www.microsoft.com/en-us/download/confirmation.aspx?id=56519 | grep '71D86715-5596-4529-9B13-DA13A5DE5B63' | sed 's,.*href="\(https://.*\.json\).*,\1,g' | tail -n 1)
+curl "${MS_SERVICETAG_PUBLIC_REF}" \
+    | jq -r '.values[] | .properties.platform as $service | .properties.region as $region | .properties.addressPrefixes[] | [., $service, $region] | @csv' \
+      > /tmp/vendor/microsoft_raw_subnet_region.csv
+echo "latest MS ServiceTag: $(echo $MS_SERVICETAG_PUBLIC_REF | sed )"
 
 ## Load all the csv
 for VENDOR in ${ASN_VENDORS[*]}; do

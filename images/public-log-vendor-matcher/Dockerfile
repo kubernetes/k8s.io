@@ -16,6 +16,8 @@ RUN apt-get update && \
   python3-pip \
   python3-wheel \
   python3-setuptools \
+  python3-bs4 \
+  python3-lxml \
   jq \
   curl \
   git \
