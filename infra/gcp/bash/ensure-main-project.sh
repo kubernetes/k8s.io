@@ -371,6 +371,9 @@ function ensure_aaa_external_secrets() {
         k8s-infra-prow-github-oauth-config
         k8s-infra-prow-hmac-token
     )
+    local publishing_bot_secrets=(
+        publishing-bot-github-token
+    )
     local slack_infra_secrets=(
         recaptcha
         slack-event-log-config
@@ -394,6 +397,7 @@ function ensure_aaa_external_secrets() {
     )
     mapfile -t secret_specs < <(
         printf "%s/prow/sig-testing\n" "${prow_secrets[@]}"
+        printf "%s/publishing-bot/sig-release\n" "${publishing_bot_secrets[@]}"
         printf "%s/slack-infra/sig-contributor-experience\n" "${slack_infra_secrets[@]}"
         printf "%s/triageparty-release/sig-release\n" "${triageparty_release_secrets[@]}"
         printf "%s/elekto/sig-contributor-experience\n" "${elekto_secrets[@]}"
