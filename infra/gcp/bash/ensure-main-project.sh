@@ -375,10 +375,12 @@ function ensure_aaa_external_secrets() {
         publishing-bot-github-token
     )
     local slack_infra_secrets=(
-        recaptcha
+        recaptcha-secret-key
+        recaptcha-site-key
         slack-event-log-config
         slack-moderator-config
         slack-moderator-words-config
+        slack-post-message-config
         slack-welcomer-config
         slackin-token
     )
