@@ -114,6 +114,14 @@ resource "google_compute_address" "greenhouse_metrics" {
   address_type = "EXTERNAL"
 }
 
+resource "google_compute_address" "kubernetes_external_secrets_metrics" {
+  name         = "kubernetes-external-secrets-metrics"
+  description  = "to allow monitoring.k8s.prow.io to scrape kubernetes-external-secrets metrics"
+  project      = local.project_id
+  region       = local.cluster_location
+  address_type = "EXTERNAL"
+}
+
 module "prow_build_cluster" {
   source             = "../modules/gke-cluster"
   project_name       = local.project_id
