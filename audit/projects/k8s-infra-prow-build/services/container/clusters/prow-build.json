@@ -20,8 +20,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.32.0.0/14",
   "createTime": "2020-04-30T21:31:49+00:00",
-  "currentMasterVersion": "1.20.9-gke.701",
-  "currentNodeVersion": "1.20.9-gke.701",
+  "currentMasterVersion": "1.20.9-gke.1001",
+  "currentNodeVersion": "1.20.9-gke.701 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -38,7 +38,10 @@
     "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-647fc6db-grp",
     "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-b6fe6f0c-grp",
     "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-6b0f3325-grp",
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-aee934c3-grp"
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool4-2020082817590115-aee934c3-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-pool5-2021092720171833-60f88634-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-pool5-2021092720171833-59239380-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool5-2021092720171833-c8b404fa-grp"
   ],
   "ipAllocationPolicy": {
     "useRoutes": true
@@ -243,6 +246,61 @@
         "maxSurge": 1
       },
       "version": "1.20.9-gke.701"
+    },
+    {
+      "autoscaling": {
+        "enabled": true,
+        "maxNodeCount": 5,
+        "minNodeCount": 1
+      },
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "pd-standard",
+        "imageType": "UBUNTU_CONTAINERD",
+        "machineType": "n1-highmem-8",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ],
+        "serviceAccount": "gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "taints": [
+          {
+            "effect": "NO_SCHEDULE",
+            "key": "ephemeral-ssd-experiment",
+            "value": "true"
+          }
+        ],
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "initialNodeCount": 1,
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-pool5-2021092720171833-60f88634-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-pool5-2021092720171833-59239380-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool5-2021092720171833-c8b404fa-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-f",
+        "us-central1-b"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "name": "pool5-20210927201718330300000001",
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build/nodePools/pool5-20210927201718330300000001",
+      "upgradeSettings": {
+        "maxSurge": 1
+      },
+      "version": "1.20.9-gke.1001"
     }
   ],
   "releaseChannel": {
