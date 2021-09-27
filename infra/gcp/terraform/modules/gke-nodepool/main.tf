@@ -50,6 +50,13 @@ resource "google_container_node_pool" "node_pool" {
     service_account = var.service_account
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
 
+    dynamic "ephemeral_storage_config" {
+      for_each = var.ephemeral_local_ssd_count > 0 ? [var.ephemeral_local_ssd_count] : [] 
+      content {
+        local_ssd_count = ephemeral_storage_config.value
+      }
+    }
+
     // Needed for workload identity
     workload_metadata_config {
       node_metadata = "GKE_METADATA_SERVER"
