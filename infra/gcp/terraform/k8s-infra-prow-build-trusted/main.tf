@@ -29,13 +29,39 @@ locals {
   bigquery_location = "US"                 // The bigquery specific location where the dataset should be created
   pod_namespace     = "test-pods"          // MUST match whatever prow is configured to use when it schedules to this cluster
 
+  workload_identity_service_accounts = [
+    {
+      name        = "prow-build-trusted"
+      description = "default service account for pods in ${local.cluster_name}"
+    },
+    {
+      name        = "gcb-builder"
+      description = "trigger GCB builds in all k8s-staging projects"
+    },
+    {
+      name          = "prow-deployer"
+      description   = "deploys k8s resources to k8s clusters"
+      project_roles = ["roles/container.admin"] // also some assigned in ensure-main-project
+    },
+    {
+      name          = "k8s-metrics"
+      description   = "read bigquery and write to gs://k8s-metrics"
+      project_roles = ["roles/bigquery.user"]
+    },
+    {
+      name          = "k8s-triage"
+      description   = "read bigquery and write to gs://k8s-triage"
+      project_roles = ["roles/bigquery.user"]
+    },
+    {
+      name              = "kubernetes-external-secrets"
+      description       = "sync K8s secrets from GSM in this and other projects"
+      project_roles     = ["roles/secretmanager.secretAccessor"]
+      cluster_namespace = "kubernetes-external-secrets"
+    }
+  ]
   // Service Accounts in ${pod_namespace} (usable via Workload Identity)
-  cluster_sa_name                     = "prow-build-trusted"          // Pods use this by default
-  gcb_builder_sa_name                 = "gcb-builder"                 // Allowed to run GCB builds and push to GCS buckets
-  prow_deployer_sa_name               = "prow-deployer"               // Allowed to deploy to prow build clusters
-  k8s_metrics_sa_name                 = "k8s-metrics"                 // Allowed to write to gs://k8s-metrics
-  k8s_triage_sa_name                  = "k8s-triage"                  // Allowed to write to gs://k8s-project-triage
-  kubernetes_external_secrets_sa_name = "kubernetes-external-secrets" // Allowed to read from GSM in this and other projects
+  prow_deployer_sa_name = "prow-deployer" // Allowed to deploy to prow build clusters
 }
 
 data "google_organization" "org" {
@@ -62,63 +88,21 @@ resource "google_project_iam_member" "k8s_infra_prow_oncall" {
 // to keep the permissions necessary to run this terraform module scoped to
 // "roles/owner" for local.project_id
 
-module "prow_build_cluster_sa" {
+module "workload_identity_service_accounts" {
+  for_each          = { for x in local.workload_identity_service_accounts : x.name => x }
   source            = "../modules/workload-identity-service-account"
   project_id        = local.project_id
-  name              = local.cluster_sa_name
-  description       = "default service account for pods in ${local.cluster_name}"
-  cluster_namespace = local.pod_namespace
+  name              = each.value.name
+  description       = each.value.description
+  cluster_namespace = lookup(each.value, "pod_namespace", local.pod_namespace)
+  project_roles     = lookup(each.value, "project_roles", [])
 }
 
-module "gcb_builder_sa" {
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = local.gcb_builder_sa_name
-  description       = "trigger GCB builds in all k8s-staging projects"
-  cluster_namespace = local.pod_namespace
-  // roles come from ensure-staging-storage.sh
-}
-
-module "prow_deployer_sa" {
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = local.prow_deployer_sa_name
-  description       = "deploys k8s resources to k8s clusters"
-  cluster_namespace = local.pod_namespace
-  project_roles     = ["roles/container.admin"]
-}
-// roles: there are also some assigned in ensure-main-project.sh
+// TODO: this role belongs in k8s-infra-prow-build
 resource "google_project_iam_member" "prow_deployer_for_prow_build" {
   project = "k8s-infra-prow-build"
   role    = "roles/container.admin"
-  member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
-}
-
-module "k8s_metrics_sa" {
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = local.k8s_metrics_sa_name
-  description       = "read bigquery and write to gs://k8s-metrics"
-  cluster_namespace = local.pod_namespace
-  project_roles     = ["roles/bigquery.user"]
-}
-
-module "k8s_triage_sa" {
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = local.k8s_triage_sa_name
-  description       = "read bigquery and write to gs://k8s-triage"
-  cluster_namespace = local.pod_namespace
-  project_roles     = ["roles/bigquery.user"]
-}
-
-module "kubernetes_external_secrets_sa" {
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = local.kubernetes_external_secrets_sa_name
-  description       = "sync K8s secrets from GSM in this and other projects"
-  cluster_namespace = "kubernetes-external-secrets"
-  project_roles     = ["roles/secretmanager.secretAccessor"]
+  member  = "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
 }
 
 // external (regional) ip addresses
