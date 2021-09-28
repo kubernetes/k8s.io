@@ -20,8 +20,8 @@ limitations under the License.
 // running as cluster_serviceaccount_name
 
 locals {
-  description = var.description != "" ? var.description : var.name
-  cluster_project_id = var.cluster_project_id != "" ? var.cluster_project_id : var.project_id
+  description                 = var.description != "" ? var.description : var.name
+  cluster_project_id          = var.cluster_project_id != "" ? var.cluster_project_id : var.project_id
   cluster_serviceaccount_name = var.cluster_serviceaccount_name != "" ? var.cluster_serviceaccount_name : var.name
 }
 
@@ -42,4 +42,11 @@ data "google_iam_policy" "workload_identity" {
 resource "google_service_account_iam_policy" "serviceaccount_iam" {
   service_account_id = google_service_account.serviceaccount.name
   policy_data        = data.google_iam_policy.workload_identity.policy_data
+}
+// optional: roles to grant the serviceaccount on the project
+resource "google_project_iam_member" "project_roles" {
+  for_each = toset(var.project_roles)
+  project  = var.project_id
+  role     = each.value
+  member   = "serviceAccount:${google_service_account.serviceaccount.email}"
 }

@@ -46,3 +46,9 @@ variable "cluster_namespace" {
   description = "The namespace of the kubernetes service account that will bind to the service account, eg: my-namespace"
   type        = string
 }
+
+variable "project_roles" {
+  description = "A list of roles to bind to the serviceaccount in its project, eg: [ \"roles/bigquery.user\" ]"
+  type        = list(string)
+  default     = []
+}
