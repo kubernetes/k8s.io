@@ -69,7 +69,6 @@ module "prow_build_cluster_sa" {
   description       = "default service account for pods in ${local.cluster_name}"
   cluster_namespace = local.pod_namespace
 }
-// roles: none
 
 module "gcb_builder_sa" {
   source            = "../modules/workload-identity-service-account"
@@ -77,8 +76,8 @@ module "gcb_builder_sa" {
   name              = local.gcb_builder_sa_name
   description       = "trigger GCB builds in all k8s-staging projects"
   cluster_namespace = local.pod_namespace
+  // roles come from ensure-staging-storage.sh
 }
-// roles: come from ensure-staging-storage.sh
 
 module "prow_deployer_sa" {
   source            = "../modules/workload-identity-service-account"
@@ -86,13 +85,9 @@ module "prow_deployer_sa" {
   name              = local.prow_deployer_sa_name
   description       = "deploys k8s resources to k8s clusters"
   cluster_namespace = local.pod_namespace
+  project_roles     = ["roles/container.admin"]
 }
 // roles: there are also some assigned in ensure-main-project.sh
-resource "google_project_iam_member" "prow_deployer_for_prow_build_trusted" {
-  project = local.project_id
-  role    = "roles/container.admin"
-  member  = "serviceAccount:${local.prow_deployer_sa_name}@${local.project_id}.iam.gserviceaccount.com"
-}
 resource "google_project_iam_member" "prow_deployer_for_prow_build" {
   project = "k8s-infra-prow-build"
   role    = "roles/container.admin"
@@ -105,12 +100,7 @@ module "k8s_metrics_sa" {
   name              = local.k8s_metrics_sa_name
   description       = "read bigquery and write to gs://k8s-metrics"
   cluster_namespace = local.pod_namespace
-}
-// roles
-resource "google_project_iam_member" "k8s_metrics_sa_bigquery_user" {
-  project = local.project_id
-  role    = "roles/bigquery.user"
-  member  = "serviceAccount:${module.k8s_metrics_sa.email}"
+  project_roles     = ["roles/bigquery.user"]
 }
 
 module "k8s_triage_sa" {
@@ -119,12 +109,7 @@ module "k8s_triage_sa" {
   name              = local.k8s_triage_sa_name
   description       = "read bigquery and write to gs://k8s-triage"
   cluster_namespace = local.pod_namespace
-}
-// roles
-resource "google_project_iam_member" "k8s_triage_sa_bigquery_user" {
-  project = local.project_id
-  role    = "roles/bigquery.user"
-  member  = "serviceAccount:${module.k8s_triage_sa.email}"
+  project_roles     = ["roles/bigquery.user"]
 }
 
 module "kubernetes_external_secrets_sa" {
@@ -133,12 +118,7 @@ module "kubernetes_external_secrets_sa" {
   name              = local.kubernetes_external_secrets_sa_name
   description       = "sync K8s secrets from GSM in this and other projects"
   cluster_namespace = "kubernetes-external-secrets"
-}
-// roles
-resource "google_project_iam_member" "kubernetes_external_secrets_for_prow_build_trusted" {
-  project = local.project_id
-  role    = "roles/secretmanager.secretAccessor"
-  member  = "serviceAccount:${module.kubernetes_external_secrets_sa.email}"
+  project_roles     = ["roles/secretmanager.secretAccessor"]
 }
 
 // external (regional) ip addresses
