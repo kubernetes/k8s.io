@@ -134,6 +134,8 @@ module "prow_build_cluster" {
   cloud_shell_access = false
 }
 
+# TODO(spiffxp): remove this once all jobs/pods have fully migrated over to
+#                pool5
 module "prow_build_nodepool_n1_highmem_8_maxiops" {
   source        = "../modules/gke-nodepool"
   project_name  = local.project_id
@@ -154,20 +156,15 @@ module "prow_build_nodepool_n1_highmem_8_maxiops" {
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }
 
-# TODO(spiffxp): intent is to replace pool4 with this after scheduling a few select
-#                jobs to this pool to confirm things work as expected; this will
-#                involve dropping the taints, raising the max_count
 module "prow_build_nodepool_n1_highmem_8_localssd" {
   source        = "../modules/gke-nodepool"
   project_name  = local.project_id
   cluster_name  = module.prow_build_cluster.cluster.name
   location      = module.prow_build_cluster.cluster.location
   name          = "pool5"
-  # NOTE: taints are only applied during creation and ignored after that, see module docs
-  taints        = [{ key = "ephemeral-ssd-experiment", value = "true", effect = "NO_SCHEDULE" }]
   initial_count = 1
   min_count     = 1
-  max_count     = 5
+  max_count     = 80
   # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
   # use an UBUNTU image instead. Keep parity with the existing google.com
   # k8s-prow-builds/prow cluster by using the CONTAINERD variant
