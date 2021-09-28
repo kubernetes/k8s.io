@@ -24,17 +24,17 @@ This file defines:
 */
 
 locals {
-  project_id             = "k8s-infra-prow-build"
-  cluster_name           = "prow-build"     // The name of the cluster defined in this file
-  cluster_location       = "us-central1"    // The GCP location (region or zone) where the cluster should be created
-  bigquery_location      = "US"             // The bigquery specific location where the dataset should be created
-  pod_namespace          = "test-pods"      // MUST match whatever prow is configured to use when it schedules to this cluster
+  project_id        = "k8s-infra-prow-build"
+  cluster_name      = "prow-build"  // The name of the cluster defined in this file
+  cluster_location  = "us-central1" // The GCP location (region or zone) where the cluster should be created
+  bigquery_location = "US"          // The bigquery specific location where the dataset should be created
+  pod_namespace     = "test-pods"   // MUST match whatever prow is configured to use when it schedules to this cluster
 
   // Service Accounts in ${pod_namespace} (usable via Workload Identity)
-  cluster_sa_name        = "prow-build"     // Name of the GSA and KSA that pods use by default
-  boskos_janitor_sa_name = "boskos-janitor" // Name of the GSA and KSA used by boskos-janitor
+  cluster_sa_name                     = "prow-build"                  // Name of the GSA and KSA that pods use by default
+  boskos_janitor_sa_name              = "boskos-janitor"              // Name of the GSA and KSA used by boskos-janitor
   kubernetes_external_secrets_sa_name = "kubernetes-external-secrets" // Allowed to read from GSM in this and other projects
-  
+
 }
 
 data "google_organization" "org" {
@@ -88,12 +88,7 @@ module "kubernetes_external_secrets_sa" {
   name              = local.kubernetes_external_secrets_sa_name
   description       = "sync K8s secrets from GSM in this and other projects"
   cluster_namespace = "kubernetes-external-secrets"
-}
-// roles
-resource "google_project_iam_member" "kubernetes_external_secrets_for_prow_build" {
-  project = local.project_id
-  role    = "roles/secretmanager.secretAccessor"
-  member  = "serviceAccount:${module.kubernetes_external_secrets_sa.email}"
+  project_roles     = ["roles/secretmanager.secretAccessor"]
 }
 
 // external ip formerly managed by infra/gcp/bash/prow/ensure-e2e-projects.sh
@@ -134,42 +129,42 @@ module "prow_build_cluster" {
   cloud_shell_access = false
 }
 
+# Why use UBUNTU_CONTAINERD for image_type?
+# - ipv6 jobs need an ipv6 stack; COS lacks one, so use UBUNTU
+# - k8s-prow-builds/prow cluster uses _CONTAINERD variant, keep parity
 module "prow_build_nodepool_n1_highmem_8_localssd" {
-  source        = "../modules/gke-nodepool"
-  project_name  = local.project_id
-  cluster_name  = module.prow_build_cluster.cluster.name
-  location      = module.prow_build_cluster.cluster.location
-  name          = "pool5"
-  initial_count = 1
-  min_count     = 1
-  max_count     = 80
-  # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
-  # use an UBUNTU image instead. Keep parity with the existing google.com
-  # k8s-prow-builds/prow cluster by using the CONTAINERD variant
-  image_type   = "UBUNTU_CONTAINERD"
-  machine_type = "n1-highmem-8"
-  disk_size_gb    = 100
-  disk_type       = "pd-standard"
-  # Use local SSDs for ephemeral storage; each SSD is 375GB
-  ephemeral_local_ssd_count =  2
-  service_account = module.prow_build_cluster.cluster_node_sa.email
+  source                    = "../modules/gke-nodepool"
+  project_name              = local.project_id
+  cluster_name              = module.prow_build_cluster.cluster.name
+  location                  = module.prow_build_cluster.cluster.location
+  name                      = "pool5"
+  initial_count             = 1
+  min_count                 = 1
+  max_count                 = 80
+  image_type                = "UBUNTU_CONTAINERD"
+  machine_type              = "n1-highmem-8"
+  disk_size_gb              = 100
+  disk_type                 = "pd-standard"
+  ephemeral_local_ssd_count = 2 # each is 375GB
+  service_account           = module.prow_build_cluster.cluster_node_sa.email
 }
 
+# Why the large machine type?
+# - To maximize IOPs, which are CPU-limited for network attached storage
+#
+# NOTE: updating taints requires recreating the underlying resource, see module docs
 module "greenhouse_nodepool" {
-  source       = "../modules/gke-nodepool"
-  project_name = local.project_id
-  cluster_name = module.prow_build_cluster.cluster.name
-  location     = module.prow_build_cluster.cluster.location
-  name         = "greenhouse"
-  labels       = { dedicated = "greenhouse" }
-  # NOTE: taints are only applied during creation and ignored after that, see module docs
-  taints        = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
-  initial_count = 1
-  min_count     = 1
-  max_count     = 1
-  # choosing this image for parity with the build nodepool
-  image_type = "UBUNTU_CONTAINERD"
-  # choosing a machine type to maximize IOPs
+  source          = "../modules/gke-nodepool"
+  project_name    = local.project_id
+  cluster_name    = module.prow_build_cluster.cluster.name
+  location        = module.prow_build_cluster.cluster.location
+  name            = "greenhouse"
+  labels          = { dedicated = "greenhouse" }
+  taints          = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
+  initial_count   = 1
+  min_count       = 1
+  max_count       = 1
+  image_type      = "UBUNTU_CONTAINERD"
   machine_type    = "n1-standard-32"
   disk_size_gb    = 100
   disk_type       = "pd-standard"
