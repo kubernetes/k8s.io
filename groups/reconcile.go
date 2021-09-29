@@ -203,8 +203,8 @@ func main() {
 // It does so by making use of AdminService and GroupService which are mockable
 // interfaces.
 type Reconciler struct {
-	AdminSvc AdminService
-	GroupSvc GroupService
+	adminService AdminService
+	groupService GroupService
 }
 
 func NewReconciler(ctx context.Context, clientOption option.ClientOption) (*Reconciler, error) {
@@ -218,7 +218,7 @@ func NewReconciler(ctx context.Context, clientOption option.ClientOption) (*Reco
 		return nil, err
 	}
 
-	return &Reconciler{AdminSvc: as, GroupSvc: gs}, nil
+	return &Reconciler{adminService: as, groupService: gs}, nil
 }
 
 func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
@@ -229,27 +229,27 @@ func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
 			errs = append(errs, fmt.Errorf("group has no email-id: %#v", g))
 		}
 
-		err := r.AdminSvc.CreateOrUpdateGroupIfNescessary(g)
+		err := r.adminService.CreateOrUpdateGroupIfNescessary(g)
 		if err != nil {
 			errs = append(errs, err)
 		}
 
-		err = r.GroupSvc.UpdateGroupSettings(g)
+		err = r.groupService.UpdateGroupSettings(g)
 		if err != nil {
 			errs = append(errs, err)
 		}
 
-		err = r.AdminSvc.AddOrUpdateGroupMembers(g, OwnerRole, g.Owners)
+		err = r.adminService.AddOrUpdateGroupMembers(g, OwnerRole, g.Owners)
 		if err != nil {
 			errs = append(errs, err)
 		}
 
-		err = r.AdminSvc.AddOrUpdateGroupMembers(g, ManagerRole, g.Managers)
+		err = r.adminService.AddOrUpdateGroupMembers(g, ManagerRole, g.Managers)
 		if err != nil {
 			errs = append(errs, err)
 		}
 
-		err = r.AdminSvc.AddOrUpdateGroupMembers(g, MemberRole, g.Members)
+		err = r.adminService.AddOrUpdateGroupMembers(g, MemberRole, g.Members)
 		if err != nil {
 			errs = append(errs, err)
 		}
@@ -257,20 +257,20 @@ func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
 		if g.Settings["ReconcileMembers"] == "true" {
 			members := append(g.Owners, g.Managers...)
 			members = append(members, g.Members...)
-			err = r.AdminSvc.RemoveMembersFromGroup(g, members)
+			err = r.adminService.RemoveMembersFromGroup(g, members)
 			if err != nil {
 				errs = append(errs, err)
 			}
 		} else {
 			members := append(g.Owners, g.Managers...)
-			err = r.AdminSvc.RemoveOwnerOrManagersFromGroup(g, members)
+			err = r.adminService.RemoveOwnerOrManagersFromGroup(g, members)
 			if err != nil {
 				errs = append(errs, err)
 			}
 		}
 	}
 
-	err := r.AdminSvc.DeleteGroupsIfNecessary()
+	err := r.adminService.DeleteGroupsIfNecessary()
 	if err != nil {
 		errs = append(errs, err)
 	}
@@ -279,17 +279,9 @@ func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
 }
 
 func (r *Reconciler) printGroupMembersAndSettings() error {
-	asClient := r.AdminSvc.GetClient()
-	gsClient := r.GroupSvc.GetClient()
-
-	g, err := asClient.ListGroups()
+	g, err := r.adminService.ListGroups()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve users in domain: %w", err)
-	}
-
-	if len(g.Groups) == 0 {
-		log.Println("No groups found.")
-		return nil
 	}
 
 	var groupsConfig GroupsConfig
@@ -299,7 +291,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 			Name:        g.Name,
 			Description: g.Description,
 		}
-		g2, err := gsClient.Get(g.Email)
+		g2, err := r.groupService.Get(g.Email)
 		if err != nil {
 			return fmt.Errorf("unable to retrieve group info for group %s: %w", g.Email, err)
 		}
@@ -316,28 +308,19 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 		group.Settings["WhoCanModerateMembers"] = g2.WhoCanModerateMembers
 		group.Settings["MembersCanPostAsTheGroup"] = g2.MembersCanPostAsTheGroup
 
-		l, err := asClient.ListMembers(g.Email)
+		l, err := r.adminService.ListMembers(g.Email)
 		if err != nil {
 			return fmt.Errorf("unable to retrieve members in group : %w", err)
 		}
 
-		if len(l.Members) == 0 {
-			log.Println("No members found in group.")
-		} else {
-			for _, m := range l.Members {
-				if m.Role == OwnerRole {
-					group.Owners = append(group.Owners, m.Email)
-				}
-			}
-			for _, m := range l.Members {
-				if m.Role == ManagerRole {
-					group.Managers = append(group.Managers, m.Email)
-				}
-			}
-			for _, m := range l.Members {
-				if m.Role == MemberRole {
-					group.Members = append(group.Members, m.Email)
-				}
+		for _, m := range l.Members {
+			switch m.Role {
+			case OwnerRole:
+				group.Owners = append(group.Owners, m.Email)
+			case ManagerRole:
+				group.Managers = append(group.Managers, m.Email)
+			case MemberRole:
+				group.Members = append(group.Members, m.Email)
 			}
 		}
 
