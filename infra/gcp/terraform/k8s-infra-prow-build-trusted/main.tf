@@ -157,8 +157,8 @@ resource "google_secret_manager_secret" "build_cluster_secrets" {
 
 resource "google_secret_manager_secret_iam_binding" "build_cluster_secret_admins" {
   for_each  = local.build_cluster_secrets
-  project   = local.project_id
-  secret_id = each.key
+  project   = google_secret_manager_secret.build_cluster_secrets[each.key].project
+  secret_id = google_secret_manager_secret.build_cluster_secrets[each.key].id
   role      = "roles/secretmanager.admin"
   members = [
     "group:k8s-infra-prow-oncall@kubernetes.io",
