@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
- 
+
 /*
 This file defines all the external IP addresses in kubernetes-public
 */
@@ -36,6 +36,10 @@ locals {
       address_type = "EXTERNAL",
       ip_version = "IPV4"
     },
+    elections = {
+      name        = "k8s-io-elections",
+      description = "Used for elections.k8s.io"
+    },
     infra-prow = {
       name = "k8s-infra-prow",
     },
@@ -54,24 +58,28 @@ locals {
       name = "perf-dash-k8s-io-ingress-prod",
     },
     sippy = {
-      name = "sippy-ingress-prod",
-      description  = "IP for aaa cluster Ingress"
+      name        = "sippy-ingress-prod",
+      description = "IP for aaa cluster Ingress"
     },
     slack = {
       name = "slack-infra-ingress-prod",
     },
     triage-party-release = {
-      name = "triage-party-release-ingress-prod",
-      description  = "IP for aaa cluster Ingress"
+      name        = "triage-party-release-ingress-prod",
+      description = "IP for aaa cluster Ingress"
+    },
+    triage-party-cli = {
+      name        = "triage-party-cli-ingress-prod",
+      description = "IP for aaa cluster Ingress"
     },
   }
 }
 
 resource "google_compute_global_address" "k8s_io" {
-  project       = data.google_project.project.project_id
-  for_each      = local.external_ips
-  name          = each.value.name
-  description   = lookup(each.value, "description", null)
-  address_type  = "EXTERNAL"
-  ip_version    = lookup(each.value, "ipv6", false) ? "IPV6" : "IPV4"
+  project      = data.google_project.project.project_id
+  for_each     = local.external_ips
+  name         = each.value.name
+  description  = lookup(each.value, "description", null)
+  address_type = "EXTERNAL"
+  ip_version   = lookup(each.value, "ipv6", false) ? "IPV6" : "IPV4"
 }

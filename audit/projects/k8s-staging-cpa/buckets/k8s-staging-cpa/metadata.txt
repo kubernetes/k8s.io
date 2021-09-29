@@ -11,8 +11,8 @@ gs://k8s-staging-cpa/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 07 Apr 2020 22:49:26 GMT
-	Time updated:			Thu, 09 Sep 2021 15:54:43 GMT
-	Metageneration:			26
+	Time updated:			Fri, 24 Sep 2021 20:41:40 GMT
+	Metageneration:			27
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]

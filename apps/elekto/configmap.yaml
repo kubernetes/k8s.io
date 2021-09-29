@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elekto-config
+  namespace: elekto
+data:
+  APP_NAME: "k8s.elections"
+  APP_ENV: production
+  APP_KEY: "N/A"
+  APP_DEBUG: "False"
+  APP_URL: "http://localhost"
+  APP_PORT: "8080"
+  APP_HOST: localhost
+  APP_CONNECT: http
+  DB_CONNECTION: postgresql
+  META_REPO: "https://github.com/kubernetes/community.git"
+  ELECTION_DIR: "events/elections"
+  META_DEPLOYMENT: local
+  META_PATH: "/tmp/meta"
+  META_BRANCH: master
+  GITHUB_REDIRECT: "/oauth/github/callback"

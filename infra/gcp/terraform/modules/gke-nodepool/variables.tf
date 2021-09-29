@@ -70,6 +70,12 @@ variable "disk_type" {
   type        = string
 }
 
+variable "ephemeral_local_ssd_count" {
+  description = "Number of local SSDs to provision for ephemeral storage. If 0, ephemeral storage is backed by boot disk"
+  type        = string
+  default     = 0
+}
+
 variable "labels" {
   description = "The labels to apply to this node_pool"
   type        = map(string)

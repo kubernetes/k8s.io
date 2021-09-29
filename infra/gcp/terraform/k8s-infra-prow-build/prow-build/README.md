@@ -118,7 +118,7 @@ gsutil iam ch \
 - run `terraform init` to ensure the correct version of modules/providers
   are installed
 - run `terraform plan` to verify what changes will be deployed; if there are
-  unexpected deletions or changes, ask for help in [#wg-k8s-infra]
+  unexpected deletions or changes, ask for help in [#sig-k8s-infra]
 - run `terraform apply` to deploy the changes
 
 #### Upgrade cluster version
@@ -149,7 +149,7 @@ gsutil iam ch \
 [roles/owner]: https://cloud.google.com/iam/docs/understanding-roles#basic-definitions
 [roles/prow.viewer]: https://github.com/kubernetes/k8s.io/blob/main/infra/gcp/bash/roles/prow.viewer.yaml
 [join-groups]: https://github.com/kubernetes/k8s.io/tree/main/groups#making-changes
-[post-k8sio-deploy-prow-build-resources]: https://testgrid.k8s.io/wg-k8s-infra-k8sio#post-k8sio-deploy-prow-build-resources
+[post-k8sio-deploy-prow-build-resources]: https://testgrid.k8s.io/sig-k8s-infra-k8sio#post-k8sio-deploy-prow-build-resources
 [deploy.sh]: /infra/gcp/terraform/k8s-infra-prow-build/deploy.sh
 [ensure-e2e-projects.sh]: /infra/gcp/bash/prow/ensure-e2e-projects.sh
-[#wg-k8s-infra]: https://kubernetes.slack.com/messages/wg-k8s-infra
+[#sig-k8s-infra]: https://kubernetes.slack.com/messages/sig-k8s-infra

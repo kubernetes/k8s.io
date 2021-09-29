@@ -32,15 +32,12 @@ cluster_name="aaa"
 cluster_project="kubernetes-public"
 cluster_region="us-central1"
 
-# coordinates to locate the secretmanager secrets to sync to kubernetes secrets
-secrets_project="${cluster_project}"
+# coordinates to locate the app on the target cluster
+namespace="${app}"
 
 # well known name set by `gcloud container clusters get-credentials`
 gke_context="gke_${cluster_project}_${cluster_region}_${cluster_name}"
 context="${KUBECTL_CONTEXT:-${gke_context}}"
-
-# coordinates to locate the app on the target cluster
-namespace="${app}"
 
 # ensure we have a context to talk to the target cluster
 if ! kubectl config get-contexts "${context}" >/dev/null 2>&1; then
@@ -48,20 +45,6 @@ if ! kubectl config get-contexts "${context}" >/dev/null 2>&1; then
   context="${gke_context}"
 fi
 
-# Deploy kubernetes resources (excluding secrets)
-pushd "${SCRIPT_ROOT}"
-
-#
-# These can be deployed by members of k8s-infra-rbac-slack-infra@kubernetes.io
+# Deploy kubernetes resources
+pushd "${SCRIPT_ROOT}" >/dev/null
 kubectl --context="${context}" apply -n "${namespace}" -Rf resources/
-
-# Deploy kubernetes secrets
-#
-# These can only be deployed by a member of k8s-infra-cluster-admins@kubernetes.io
-# 
-# These are expected to be stored in Google Secret Manager as Kubernetes Secret
-# manifests. Regardless of whether they have a namespace set, it is overridden
-for s in $(gcloud secrets list --project="${secrets_project}" --filter="labels.app=${app}" --format="value(name)"); do
-  gcloud secrets --project="${secrets_project}" versions access latest --secret="${s}" |\
-    kubectl --context="${context}" apply -n "${namespace}" -f -
-done

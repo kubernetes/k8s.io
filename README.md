@@ -1,9 +1,10 @@
 # k8s.io
 
-Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8s-infra]
+Kubernetes project infrastructure, managed by the kubernetes comunity via [sig-k8s-infra]
 
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
     - `codesearch`: instance of [codesearch] at https://cs.k8s.io - owned by ??
+    - `elekto`: instance of [elekto] at https://elections.k8s.io - owned by Elections officers (on behalf of [sig-contributor-experience])
     - `gcsweb`: instance of [gcsweb] at https://gcsweb.k8s.io - owned by [sig-testing]
     - `k8s.io`: instance of nginx that provides redirects/reverse-proxying for k8s.io and its subdomains - owned by [sig-contributor-experience] and [sig-testing]
     - `kubernetes-external-secrets`: instance of [kubernetes-external-secrets] - owned by [sig-testing]
@@ -12,6 +13,7 @@ Kubernetes project infrastructure, managed by the kubernetes comunity via [wg-k8
     - `publishing-bot`: instance of [publishing-bot] - owned by [sig-release]
     - `sippy`: instance of [sippy] at https://sippy.k8s.io - owned by [sig-architecture] (on behalf of [wg-reliability])
     - `slack-infra`: instance of [slack-infra] including https://slack.k8s.io - owned by [sig-contributor-experience]
+    - `triageparty-cli`: instance of [triage-party] - owned by [sig-cli]
     - `triageparty-release`: instance of [triage-party] - owned by [sig-release]
 - `audit`: scripts to export all relevant gcp resources, and the most recently-reviewed export
 - `dns`: DNS for kubernetes.io and k8s.io
@@ -32,13 +34,14 @@ TODO: are these actively in use or should they be retired?
 - `artifacts`
 - `artifactserver`
 
-We provide a [publicly viewable billing-report][billing-report] accessible to members of [kubernetes-wg-k8s-infra@googlegroups.com]
+We provide a [publicly viewable billing report][billing-report] accessible to members of [kubernetes-sig-k8s-infra@googlegroups.com][mailing-list]
 
-Please see https://git.k8s.io/community/wg-k8s-infra for more information
+Please see https://git.k8s.io/community/sig-k8s-infra for more information
 
 <!-- apps -->
 [cert-manager]: https://github.com/jetstack/cert-manager
 [codesearch]: https://cs.k8s.io
+[elekto]: https://elekto.dev/
 [gcsweb]: https://git.k8s.io/test-infra/gcsweb
 [kubernetes-external-secrets]: https://github.com/external-secrets/kubernetes-external-secrets
 [perfdash]: https://git.k8s.io/perf-tests/perfdash
@@ -50,16 +53,17 @@ Please see https://git.k8s.io/community/wg-k8s-infra for more information
 
 <!-- misc -->
 [billing-report]: https://datastudio.google.com/u/0/reporting/14UWSuqD5ef9E4LnsCD9uJWTPv8MHOA3e
-[kubernetes-wg-k8s-infra@]: https://groups.google.com/forum/#!forum/kubernetes-wg-k8s-infra
 [opa]: https://www.openpolicyagent.org
 [conftest]: https://www.conftest.dev
+[mailing-list]: https://groups.google.com/g/kubernetes-sig-k8s-infra
 
 <!-- community groups -->
 [sig-architecture]: https://git.k8s.io/community/sig-architecture
+[sig-cli]: https://git.k8s.io/community/sig-cli
 [sig-contributor-experience]: https://git.k8s.io/community/sig-contributor-experience
+[sig-k8s-infra]: https://git.k8s.io/community/sig-k8s-infra
 [sig-node]: https://git.k8s.io/community/sig-node
 [sig-release]: https://git.k8s.io/community/sig-release
 [sig-scalability]: https://git.k8s.io/community/sig-scalability
 [sig-testing]: https://git.k8s.io/community/sig-testing
-[wg-k8s-infra]: https://git.k8s.io/community/wg-k8s-infra
 [wg-reliability]: https://git.k8s.io/community/wg-reliability

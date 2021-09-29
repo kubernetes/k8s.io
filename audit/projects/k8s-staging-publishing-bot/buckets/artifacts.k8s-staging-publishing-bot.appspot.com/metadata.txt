@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-publishing-bot.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 25 Jun 2019 05:09:27 GMT
-	Time updated:			Thu, 09 Sep 2021 16:40:43 GMT
-	Metageneration:			21
+	Time updated:			Fri, 24 Sep 2021 21:22:56 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]

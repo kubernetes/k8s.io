@@ -26,7 +26,7 @@
 # $2: The bucket (e.g. gs://bucket-name)
 function _ensure_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "_ensure_gcs_bucket(project, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(project, bucket) requires 2 arguments" >&2
         return 1
     fi
     local project="$1"
@@ -46,7 +46,7 @@ function _ensure_gcs_bucket() {
 # $2: The bucket (e.g. gs://bucket-name)
 function ensure_public_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "ensure_public_gcs_bucket(project, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(project, bucket) requires 2 arguments" >&2
         return 1
     fi
     local project="$1"
@@ -60,7 +60,7 @@ function ensure_public_gcs_bucket() {
 # $1: The GCS bucket (e.g. gs://k8s-infra-foo)
 function ensure_gcs_bucket_logging() {
     if [ $# != 1 ] || [ -z "$1" ]; then
-        echo "ensure_gcs_bucket_logging(bucket) requires 1 argument" >&2
+        echo "${FUNCNAME[0]}(bucket) requires 1 argument" >&2
         return 1
     fi
     local bucket="$1"
@@ -83,7 +83,7 @@ function ensure_gcs_bucket_logging() {
 # $2: The bucket (e.g. gs://bucket-name)
 function ensure_private_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "ensure_private_gcs_bucket(project, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(project, bucket) requires 2 arguments" >&2
         return 1
     fi
     local project="$1"
@@ -117,7 +117,7 @@ function ensure_private_gcs_bucket() {
 # $1: The bucket (e.g. gs://bucket-name)
 function ensure_gcs_web_policy() {
     if [ $# -lt 1 ] || [ -z "$1" ]; then
-        echo "ensure_gcs_web_policy(bucket) requires 1 argument" >&2
+        echo "${FUNCNAME[0]}(bucket) requires 1 argument" >&2
         return 1
     fi
     local bucket="$1"
@@ -130,7 +130,7 @@ function ensure_gcs_web_policy() {
 # $2: The source directory
 function upload_gcs_static_content() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "upload_gcs_static_content(bucket, dir) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(bucket, dir) requires 2 arguments" >&2
         return 1
     fi
     local bucket="$1"
@@ -145,7 +145,7 @@ function upload_gcs_static_content() {
 # $2: The retention
 function ensure_gcs_bucket_retention() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "ensure_gcs_bucket_retention(bucket, retention) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(bucket, retention) requires 2 arguments" >&2
         return 1
     fi
     local bucket="$1"
@@ -154,12 +154,24 @@ function ensure_gcs_bucket_retention() {
     gsutil retention set "${retention}" "${bucket}"
 }
 
+# Ensure the bucket retention policy is not set
+# $1: The GCS bucket (e.g. gs://bucket-name)
+function ensure_removed_gcs_bucket_retention() {
+    if [ $# -lt 1 ] || [ -z "$1" ]; then
+        echo "${FUNCNAME[0]}(bucket) requires 1 argument" >&2
+        return 1
+    fi
+    local bucket="$1"
+
+    gsutil retention clear "${bucket}"
+}
+
 # Ensure the bucket auto-deletion policy is set
 # $1: The GCS bucket (e.g. gs://bucket-name)
 # $2: The auto-deletion policy
 function ensure_gcs_bucket_auto_deletion() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "ensure_gcs_bucket_auto_deletion(bucket, auto_delettion_days) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(bucket, auto_delettion_days) requires 2 arguments" >&2
         return 1
     fi
     local bucket="$1"
@@ -183,7 +195,7 @@ function ensure_gcs_bucket_auto_deletion() {
 # $2: The bucket (e.g. gs://bucket-name)
 function _empower_principal_to_write_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "_empower_principal_to_write_gcs_bucket(principal, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(principal, bucket) requires 2 arguments" >&2
         return 1
     fi
     local principal="$1"
@@ -198,7 +210,7 @@ function _empower_principal_to_write_gcs_bucket() {
 # $2: The bucket (e.g. gs://bucket-name)
 function _empower_principal_to_admin_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "_empower_principal_to_admin_gcs_bucket(principal, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(principal, bucket) requires 2 arguments" >&2
         return 1
     fi
     local principal="$1"
@@ -215,7 +227,7 @@ function _empower_principal_to_admin_gcs_bucket() {
 #   $3:  The role name (e.g. "objectAdmin", "legacyBucketOwner", etc.)
 ensure_gcs_role_binding() {
     if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
-        echo "ensure_gcs_role_binding(bucket, principal, role) requires 3 arguments" >&2
+        echo "${FUNCNAME[0]}(bucket, principal, role) requires 3 arguments" >&2
         return 1
     fi
 
@@ -266,7 +278,7 @@ ensure_gcs_role_binding() {
 #   $3:  The role name (e.g. "objectAdmin", "legacyBucketOwner", etc.)
 ensure_removed_gcs_role_binding() {
     if [ ! $# -eq 3 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
-        echo "ensure_removed_gcs_role_binding(bucket, principal, role) requires 3 arguments" >&2
+        echo "${FUNCNAME[0]}(bucket, principal, role) requires 3 arguments" >&2
         return 1
     fi
 
@@ -312,7 +324,7 @@ ensure_removed_gcs_role_binding() {
 # $2: The bucket (e.g. gs://bucket-name)
 function empower_group_to_write_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "empower_group_to_write_gcs_bucket(group_email, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(group_email, bucket) requires 2 arguments" >&2
         return 1
     fi
     local group="$1"
@@ -326,7 +338,7 @@ function empower_group_to_write_gcs_bucket() {
 # $2: The bucket (e.g. gs://bucket-name)
 function empower_group_to_admin_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "empower_group_to_admin_gcs_bucket(group_email, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(group_email, bucket) requires 2 arguments" >&2
         return 1
     fi
     local group="$1"
@@ -340,7 +352,7 @@ function empower_group_to_admin_gcs_bucket() {
 # $2: The bucket (e.g. gs://bucket-name)
 function empower_svcacct_to_write_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "empower_svcacct_to_write_gcs_bucket(svcacct_email, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(svcacct_email, bucket) requires 2 arguments" >&2
         return 1
     fi
     local svcacct="$1"
@@ -354,7 +366,7 @@ function empower_svcacct_to_write_gcs_bucket() {
 # $2: The bucket (e.g. gs://bucket-name)
 function empower_svcacct_to_admin_gcs_bucket() {
     if [ $# -lt 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "empower_svcacct_to_admin_gcs_bucket(svcacct_email, bucket) requires 2 arguments" >&2
+        echo "${FUNCNAME[0]}(svcacct_email, bucket) requires 2 arguments" >&2
         return 1
     fi
     local svcacct="$1"

@@ -12,7 +12,7 @@ options:
 approvers:
   - promo-tools-approvers
   - release-engineering-approvers
-  - wg-k8s-infra-leads
+  - sig-k8s-infra-leads
 reviewers:
   - promo-tools-reviewers
   - release-engineering-reviewers

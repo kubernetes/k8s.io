@@ -250,8 +250,8 @@ function empower_group_as_viewer() {
     ensure_project_role_binding "${project}" "group:${group}" "roles/viewer"
 }
 
-# Grant roles for running cip-auditor E2E test
-# (https://github.com/kubernetes-sigs/k8s-container-image-promoter/tree/master/test-e2e#cip-auditor-cip-auditor-e2ego).
+# Grant roles for running cip-auditor E2E tests
+# (https://sigs.k8s.io/promo-tools/test-e2e)
 
 # $1: The GCP project
 # $2: The service account
@@ -407,8 +407,6 @@ function empower_file_promoter() {
 
     ensure_service_account "${project}" "${FILE_PROMOTER_SVCACCT}" "artifact promoter"
 
-    # TODO(kpromo): Determine if admin access is required here.
-    #               ref: https://github.com/kubernetes-sigs/k8s-container-image-promoter/issues/413
     empower_svcacct_to_write_gcs_bucket "${acct}" "${bucket}"
 }
 

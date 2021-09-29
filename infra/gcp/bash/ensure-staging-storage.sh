@@ -44,10 +44,9 @@ mapfile -t STAGING_PROJECTS < <(k8s_infra_projects "staging")
 readonly STAGING_PROJECTS
 
 readonly RELEASE_STAGING_PROJECTS=(
-    k8s-staging-experimental
-    k8s-staging-kubernetes
-    k8s-staging-mirror
-    k8s-staging-releng
+    "$(k8s_infra_project staging k8s-staging-experimental)"
+    "$(k8s_infra_project staging k8s-staging-kubernetes)"
+    "$(k8s_infra_project staging k8s-staging-releng)"
 )
 
 readonly STAGING_PROJECT_SERVICES=(
@@ -137,10 +136,17 @@ function ensure_staging_project() {
 
     # Enable services for staging projects and their direct dependencies; prune anything else
     color 6 "Ensuring necessary enabled services staging project: ${project}"
-    # TODO: this may eventually disable other services; for now it
-    #       only does so if an obnoxiously long environment var is set,
-    #       K8S_INFRA_ENSURE_ONLY_SERVICES_WILL_FORCE_DISABLE=true
-    ensure_only_services "${project}" "${STAGING_PROJECT_SERVICES[@]}"
+    # NOTE: horrible bash to allow special cases of staging projects needing
+    #       more services than the default set... since bash doesn't let us
+    #       pass around arrays, wrap an array in a function that echoes it,
+    #       and append the output of that function to the default set
+    local special_case_services="staging_special_case_services__${project//-/_}"
+    local enabled_services=("${STAGING_PROJECT_SERVICES[@]}")
+    if [ "$(type -t "${special_case_services}")" == "function" ]; then
+        mapfile -t -O "${#enabled_services[@]}" enabled_services < <(${special_case_services})
+    fi
+    K8S_INFRA_ENSURE_ONLY_SERVICES_WILL_FORCE_DISABLE=true \
+      ensure_only_services "${project}" "${enabled_services[@]}"
 
     color 6 "Ensuring disabled services for staging project: ${project}"
     ensure_disabled_services "${project}" "${STAGING_PROJECT_DISABLED_SERVICES[@]}"
@@ -378,6 +384,47 @@ function staging_special_case__k8s_staging_ci_images() {
     empower_svcacct_to_write_gcr "${PROW_BUILD_SERVICE_ACCOUNT}" "k8s-staging-ci-images"
 }
 
+# In order to build the node images using image-builder it needs
+# the compute api to be enabled because it will create a VM
+# to build the node image.
+function staging_special_case_services__k8s_staging_cluster_api_gcp() {
+    # needed to build images using packer via image-builder
+    echo compute.googleapis.com
+    # dependency of compute
+    echo oslogin.googleapis.com
+}
+function staging_special_case__k8s_staging_cluster_api_gcp() {
+    readonly suffix="cluster-api-gcp"
+    readonly project="k8s-staging-${suffix}"
+    local serviceaccount
+    serviceaccount="$(svc_acct_email "${project}" "gcb-builder-cluster-api-gcp")"
+
+    ensure_project_role_binding "${project}" "serviceAccount:${serviceaccount}" "roles/compute.instanceAdmin.v1"
+    ensure_serviceaccount_role_binding "${serviceaccount}" "serviceAccount:${serviceaccount}" "roles/iam.serviceAccountUser"
+    ensure_staging_gcb_builder_service_account "${suffix}" "k8s-infra-prow-build-trusted"
+}
+
+
+# In order to build the release artifacts, the group needs to be
+# able to create and manage a keyring to encrypt a secret token
+# that will be accessed and decrypted by a cloud build job.
+function staging_special_case__k8s_staging_kustomize() {
+    readonly project="k8s-staging-kustomize"
+    local principal
+
+    # ensure owners can manage keyrings
+    local owners="k8s-infra-staging-kustomize@kubernetes.io"
+    principal="group:${owners}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.admin"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyEncrypter"
+
+    # ensure cloud builds can access keyrings for decryption
+    local cloudbuild_sa_email="660796270509@cloudbuild.gserviceaccount.com"
+    principal="serviceAccount:${cloudbuild_sa_email}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyDecrypter"
+    ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
+}
+
 # In order for pull-release-image-* to run on k8s-infra-prow-build,
 # it needs write access to gcr.io/k8s-staging-releng-test. We are
 # wary of what untrusted code is allowed to do, so we don't allow
@@ -386,19 +433,11 @@ function staging_special_case__k8s_staging_releng_test() {
     ensure_staging_gcb_builder_service_account "releng-test" "k8s-infra-prow-build"
 }
 
-# In order to build the node images using image-builder it needs
-# the compute api to be enabled because it will create a VM
-# to build the node image.
-function staging_special_case__k8s_staging_cluster_api_gcp() {
-    readonly STAGING_PROJECT="k8s-staging-cluster-api-gcp"
-    local serviceaccount
-    serviceaccount="$(svc_acct_email "${STAGING_PROJECT}" "gcb-builder-cluster-api-gcp")"
-
-    ensure_services "${STAGING_PROJECT}" compute.googleapis.com
-    ensure_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/compute.instanceAdmin.v1"
-    ensure_removed_project_role_binding "${STAGING_PROJECT}" "serviceAccount:${serviceaccount}" "roles/iam.serviceAccountUser"
-    ensure_serviceaccount_role_binding "${serviceaccount}" "serviceAccount:${serviceaccount}" "roles/iam.serviceAccountUser"
-    ensure_staging_gcb_builder_service_account "cluster-api-gcp" "k8s-infra-prow-build-trusted"
+# sig-storage has these enabled
+function staging_special_case_services__k8s_staging_sig_storage() {
+    echo compute.googleapis.com
+    # dependency of compute
+    echo oslogin.googleapis.com
 }
 
 #

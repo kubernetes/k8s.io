@@ -10,13 +10,33 @@ repositories used to publish official container images for Kubernetes.
 
 ## Staging repos
 
-Each "project" (as decided by people) that feeds into Kubernetes' main
-image-serving system (k8s.gcr.io) gets a staging repository.  Each staging
-repository is governed by a googlegroup, which grants push access to that
-repository.
+Kubernetes subprojects may use a dedicated staging GCP project to build and
+host container images. We refer to the GCR provided by each staging project
+as a staging repository. Images are promoted from staging repositories into
+the main Kubernetes image-serving system (k8s.gcr.io).
 
-Project owners can push to their staging repository and use the image promoter
-to promote images to the main serving repository.
+Access to each staging project is governed by a googlegroup, which grants the
+ability to manually trigger GCB or push container images in the event that
+automated builds via something like prow.k8s.io are not setup or are broken.
+
+### Requirements
+
+The rule of thumb is that staging repositories should be used to host
+artifacts produced by code that is part of the Kubernetes project, as defined
+by presence in one of the [project-owned GitHub Organizations][project-github].
+
+In other words, code that is not part of the Kubernetes project should not
+have its artifacts hosted in staging repos. SIG K8s Infra may make exceptions
+to this policy on a case-by-case basis.
+
+For example:
+
+- CRI-O is not part of the kubernetes project, it does not meet the
+  requirements to get a staging repo
+- While etcd and coredns are not part of the kubernetes project, we do
+  bundle them with kubernetes as part of the release, so for this specific
+  case are allowing a staging repo to host them (solely within the context
+  of the kubernetes project)
 
 ### Creating staging repos
 
@@ -77,9 +97,10 @@ To promote an image, follow these steps:
 1. The PR should trigger a `pull-k8sio-cip` job which will validate and dry-run
    your changes; check that the `k8s-ci-robot` responds 'Job succeeded' for it.
 1. Merge the PR. Your image will be promoted by one of two jobs:
-   - [`post-k8sio-image-promo`][post-promo-job] is a postsubmit that runs immediately after merge
-   - [`ci-k8sio-cip`][ci-promo-job] is a postsubmit that runs immediately after merge
-1. A periodic 
+   - [`post-k8sio-image-promo`][post-promo-job] is a postsubmit that runs
+     immediately after merge
+   - [`ci-k8sio-cip`][ci-promo-job] is a periodic job that runs every four
+     hours in case there are transient failures of the postsubmit jobs
 1. Published images will appear on k8s.gcr.io and can be viewed [here](https://console.cloud.google.com/gcr/images/k8s-artifacts-prod).
 
 Essentially, in order to get images published to a production repo, you have to
@@ -93,3 +114,4 @@ use the image promotion (PR creation) process defined above.
 [vdf]: /k8s.gcr.io/Vanity-Domain-Flip.md
 [post-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#post-k8sio-image-promo
 [ci-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#ci-k8sio-image-promo
+[project-github]: https://git.k8s.io/community/github-management#project-owned-organizations

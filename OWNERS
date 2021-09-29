@@ -1,11 +1,11 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- ameukam # wg-k8s-infra chair
+- ameukam # sig-k8s-infra chair
 - cblecker # sig-contribex tl
-- dims # wg-k8s-infra chair
+- dims # sig-k8s-infra chair
 - nikhita # sig-contribex tl
-- spiffxp # wg-k8s-infra chair
+- spiffxp # sig-k8s-infra chair
 - thockin
 
 emeritus_approvers:
@@ -13,4 +13,4 @@ emeritus_approvers:
 - bartsmykla
 
 labels:
-- wg/k8s-infra
+- sig/k8s-infra

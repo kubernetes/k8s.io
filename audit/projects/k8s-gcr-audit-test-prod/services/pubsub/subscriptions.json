@@ -11,7 +11,7 @@
       "oidcToken": {
         "serviceAccountEmail": "k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
       },
-      "pushEndpoint": "https://cip-auditor-test-lhkagr5sjq-uc.a.run.app"
+      "pushEndpoint": "https://kpromo-auditor-test-lhkagr5sjq-uc.a.run.app"
     },
     "topic": "projects/k8s-gcr-audit-test-prod/topics/gcr"
   }

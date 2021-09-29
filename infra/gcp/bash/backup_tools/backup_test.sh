@@ -30,12 +30,14 @@ set -o xtrace
 export GCRANE_CHECKOUT_DIR="${GOPATH}/src/github.com/google/go-containerregistry"
 GCRANE="${GCRANE_CHECKOUT_DIR}/cmd/gcrane/gcrane"
 
-export CIP_CHECKOUT_DIR="${GOPATH}/src/sigs.k8s.io/k8s-container-image-promoter"
-CIP_SNAPSHOT_CMD="${CIP_CHECKOUT_DIR}/cip -minimal-snapshot -output-format=CSV -snapshot"
-# CIP_REF is the commit SHA to use for building the cip binary (used only for
+export PROMO_TOOLS_CHECKOUT_DIR="${GOPATH}/src/sigs.k8s.io/promo-tools"
+SNAPSHOT_CMD="${PROMO_TOOLS_CHECKOUT_DIR}/cip -minimal-snapshot -output-format=CSV -snapshot"
+# PROMO_TOOLS_REF is the commit SHA to use for building the cip binary (used only for
 # testing; not used by the actual prod backup job).
+#
+# TODO(releng): Update me
 # Known-good commit from 2020-04-01
-CIP_REF="feb5dc08b2cbfa2c779c4c5d397dad40e669bc84"
+PROMO_TOOLS_REF="feb5dc08b2cbfa2c779c4c5d397dad40e669bc84"
 
 SCRIPT_ROOT="$(dirname "$(readlink -f "$0")")"
 # shellcheck disable=SC1090
@@ -47,9 +49,9 @@ build_cip()
 {
     local cip_path
 
-    git clone https://github.com/kubernetes-sigs/k8s-container-image-promoter "${CIP_CHECKOUT_DIR}"
-    pushd "${CIP_CHECKOUT_DIR}"
-    git reset --hard "${CIP_REF}"
+    git clone https://github.com/kubernetes-sigs/promo-tools "${PROMO_TOOLS_CHECKOUT_DIR}"
+    pushd "${PROMO_TOOLS_CHECKOUT_DIR}"
+    git reset --hard "${PROMO_TOOLS_REF}"
     make
     # Leave a symlink to the cip binary that was built from the above command.
     cip_path=$(find "$(bazel info bazel-bin)" -type f -name cip)
@@ -107,7 +109,7 @@ verify_repo()
 
     diff -u \
         <(cat "${TEST_IMAGES_FILE}") \
-        <(${CIP_SNAPSHOT_CMD} "${repo}")
+        <(${SNAPSHOT_CMD} "${repo}")
 }
 
 # Backup GCRs for prod.

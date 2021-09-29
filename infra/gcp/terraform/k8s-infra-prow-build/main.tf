@@ -24,13 +24,28 @@ This file defines:
 */
 
 locals {
-  project_id             = "k8s-infra-prow-build"
-  cluster_name           = "prow-build"     // The name of the cluster defined in this file
-  cluster_location       = "us-central1"    // The GCP location (region or zone) where the cluster should be created
-  bigquery_location      = "US"             // The bigquery specific location where the dataset should be created
-  pod_namespace          = "test-pods"      // MUST match whatever prow is configured to use when it schedules to this cluster
-  cluster_sa_name        = "prow-build"     // Name of the GSA and KSA that pods use by default
-  boskos_janitor_sa_name = "boskos-janitor" // Name of the GSA and KSA used by boskos-janitor
+  project_id        = "k8s-infra-prow-build"
+  cluster_name      = "prow-build"  // The name of the cluster defined in this file
+  cluster_location  = "us-central1" // The GCP location (region or zone) where the cluster should be created
+  bigquery_location = "US"          // The bigquery specific location where the dataset should be created
+  pod_namespace     = "test-pods"   // MUST match whatever prow is configured to use when it schedules to this cluster
+
+  workload_identity_service_accounts = [
+    {
+      name        = "prow-build",
+      description = "default service account for pods in ${local.cluster_name}"
+    },
+    {
+      name        = "boskos-janitor",
+      description = "uesd by boskos-janitor in ${local.cluster_name}"
+    },
+    {
+      name          = "kubernetes-external-secrets"
+      description   = "sync K8s secrets from GSM in this and other projects"
+      project_roles = ["roles/secretmanager.secretAccessor"],
+      cluster_namespace = "kubernetes-external-secrets"
+    }
+  ]
 }
 
 data "google_organization" "org" {
@@ -62,20 +77,14 @@ resource "google_project_iam_member" "k8s_infra_prow_viewers" {
   member  = "group:k8s-infra-prow-viewers@kubernetes.io"
 }
 
-module "prow_build_cluster_sa" {
+module "workload_identity_service_accounts" {
+  for_each          = { for x in local.workload_identity_service_accounts : x.name => x }
   source            = "../modules/workload-identity-service-account"
   project_id        = local.project_id
-  name              = local.cluster_sa_name
-  description       = "default service account for pods in ${local.cluster_name}"
-  cluster_namespace = local.pod_namespace
-}
-
-module "boskos_janitor_sa" {
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = local.boskos_janitor_sa_name
-  description       = "used by boskos-janitor in ${local.cluster_name}"
-  cluster_namespace = local.pod_namespace
+  name              = each.value.name
+  description       = each.value.description
+  cluster_namespace = lookup(each.value, "pod_namespace", local.pod_namespace)
+  project_roles     = lookup(each.value, "project_roles", [])
 }
 
 // external ip formerly managed by infra/gcp/bash/prow/ensure-e2e-projects.sh
@@ -96,6 +105,50 @@ resource "google_compute_address" "greenhouse_metrics" {
   address_type = "EXTERNAL"
 }
 
+resource "google_compute_address" "kubernetes_external_secrets_metrics" {
+  name         = "kubernetes-external-secrets-metrics"
+  description  = "to allow monitoring.k8s.prow.io to scrape kubernetes-external-secrets metrics"
+  project      = local.project_id
+  region       = local.cluster_location
+  address_type = "EXTERNAL"
+}
+
+locals {
+  build_cluster_secrets = {
+    prow-build-service-account = {
+      group  = "sig-testing"
+      owners = "k8s-infra-prow-oncall@kubernetes.io"
+    }
+    prow-build-ssh-key-secret = {
+      group  = "sig-testing"
+      owners = "k8s-infra-prow-oncall@kubernetes.io"
+    }
+  }
+}
+
+resource "google_secret_manager_secret" "build_cluster_secrets" {
+  for_each  = local.build_cluster_secrets
+  project   = local.project_id
+  secret_id = each.key
+  labels = {
+    group = each.value.group
+  }
+  replication {
+    automatic = true
+  }
+}
+
+resource "google_secret_manager_secret_iam_binding" "build_cluster_secret_admins" {
+  for_each  = local.build_cluster_secrets
+  project   = google_secret_manager_secret.build_cluster_secrets[each.key].project
+  secret_id = google_secret_manager_secret.build_cluster_secrets[each.key].id
+  role      = "roles/secretmanager.admin"
+  members = [
+    "group:k8s-infra-prow-oncall@kubernetes.io",
+    "group:${each.value.owners}"
+  ]
+}
+
 module "prow_build_cluster" {
   source             = "../modules/gke-cluster"
   project_name       = local.project_id
@@ -108,41 +161,42 @@ module "prow_build_cluster" {
   cloud_shell_access = false
 }
 
-module "prow_build_nodepool_n1_highmem_8_maxiops" {
-  source        = "../modules/gke-nodepool"
-  project_name  = local.project_id
-  cluster_name  = module.prow_build_cluster.cluster.name
-  location      = module.prow_build_cluster.cluster.location
-  name          = "pool4"
-  initial_count = 1
-  min_count     = 1
-  max_count     = 80
-  # kind-ipv6 jobs need an ipv6 stack; COS doesn't provide one, so we need to
-  # use an UBUNTU image instead. Keep parity with the existing google.com
-  # k8s-prow-builds/prow cluster by using the CONTAINERD variant
-  image_type   = "UBUNTU_CONTAINERD"
-  machine_type = "n1-highmem-8"
-  # Use an ssd volume sized to allow the max IOPS supported by n1 instances w/ 8 vCPU
-  disk_size_gb    = 500
-  disk_type       = "pd-ssd"
-  service_account = module.prow_build_cluster.cluster_node_sa.email
+# Why use UBUNTU_CONTAINERD for image_type?
+# - ipv6 jobs need an ipv6 stack; COS lacks one, so use UBUNTU
+# - k8s-prow-builds/prow cluster uses _CONTAINERD variant, keep parity
+module "prow_build_nodepool_n1_highmem_8_localssd" {
+  source                    = "../modules/gke-nodepool"
+  project_name              = local.project_id
+  cluster_name              = module.prow_build_cluster.cluster.name
+  location                  = module.prow_build_cluster.cluster.location
+  name                      = "pool5"
+  initial_count             = 1
+  min_count                 = 1
+  max_count                 = 80
+  image_type                = "UBUNTU_CONTAINERD"
+  machine_type              = "n1-highmem-8"
+  disk_size_gb              = 100
+  disk_type                 = "pd-standard"
+  ephemeral_local_ssd_count = 2 # each is 375GB
+  service_account           = module.prow_build_cluster.cluster_node_sa.email
 }
 
+# Why the large machine type?
+# - To maximize IOPs, which are CPU-limited for network attached storage
+#
+# NOTE: updating taints requires recreating the underlying resource, see module docs
 module "greenhouse_nodepool" {
-  source       = "../modules/gke-nodepool"
-  project_name = local.project_id
-  cluster_name = module.prow_build_cluster.cluster.name
-  location     = module.prow_build_cluster.cluster.location
-  name         = "greenhouse"
-  labels       = { dedicated = "greenhouse" }
-  # NOTE: taints are only applied during creation and ignored after that, see module docs
-  taints        = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
-  initial_count = 1
-  min_count     = 1
-  max_count     = 1
-  # choosing this image for parity with the build nodepool
-  image_type = "UBUNTU_CONTAINERD"
-  # choosing a machine type to maximize IOPs
+  source          = "../modules/gke-nodepool"
+  project_name    = local.project_id
+  cluster_name    = module.prow_build_cluster.cluster.name
+  location        = module.prow_build_cluster.cluster.location
+  name            = "greenhouse"
+  labels          = { dedicated = "greenhouse" }
+  taints          = [{ key = "dedicated", value = "greenhouse", effect = "NO_SCHEDULE" }]
+  initial_count   = 1
+  min_count       = 1
+  max_count       = 1
+  image_type      = "UBUNTU_CONTAINERD"
   machine_type    = "n1-standard-32"
   disk_size_gb    = 100
   disk_type       = "pd-standard"

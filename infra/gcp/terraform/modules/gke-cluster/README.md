@@ -1,6 +1,6 @@
 # `gke-cluster` terraform module
 
-This terraform module defines a GKE cluster following wg-k8s-infra conventions:
+This terraform module defines a GKE cluster following sig-k8s-infra conventions:
 - GCP Service Account for nodes
 - BigQuery dataset for usage metering
 - GKE cluster with some useful defaults

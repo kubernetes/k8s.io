@@ -2,14 +2,14 @@
 
 approvers:
   - munnerz
-  - wg-k8s-infra-leads
+  - sig-k8s-infra-leads
 
 reviewers:
   - munnerz
-  - wg-k8s-infra-leads
+  - sig-k8s-infra-leads
 
 emeritus-approvers:
   - bartsmykla
 
 labels:
-  - wg/k8s-infra
+  - sig/k8s-infra

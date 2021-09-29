@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# List of all projects currently managed by wg-k8s-infra broken up into
+# List of all projects currently managed by sig-k8s-infra broken up into
 # the following schema:
 #
 # infra:
@@ -259,7 +259,6 @@ infra:
       k8s-staging-apisnoop:
       k8s-staging-artifact-promoter:
       k8s-staging-autoscaling:
-      k8s-staging-bootkube:
       k8s-staging-boskos:
       k8s-staging-build-image:
       k8s-staging-capi-docker:
@@ -306,7 +305,6 @@ infra:
       k8s-staging-kubetest2:
       k8s-staging-kustomize:
       k8s-staging-metrics-server:
-      k8s-staging-mirror:
       k8s-staging-multitenancy:
       k8s-staging-networking:
       k8s-staging-nfd:
@@ -327,4 +325,3 @@ infra:
       k8s-staging-sp-operator:
       k8s-staging-storage-migrator:
       k8s-staging-test-infra:
-      k8s-staging-txtdirect:

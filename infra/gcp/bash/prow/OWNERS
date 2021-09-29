@@ -1,7 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- wg-k8s-infra-org-admins
+- sig-k8s-infra-org-admins
 
 reviewers:
 - sig-testing-leads

@@ -1,6 +1,6 @@
 # `gke-nodepool` terraform module
 
-This terraform module defines a GKE nodepool following wg-k8s-infra conventions, including:
+This terraform module defines a GKE nodepool following sig-k8s-infra conventions, including:
 - Workload Identity is enabled by default for this nodepool
 - Legacy metadata endpoints are disabled
 - Auto-repair and auto-upgrade are enabled

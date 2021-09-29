@@ -5,8 +5,8 @@ approvers:
 - spiffxp
 
 reviewers:
-- wg-k8s-infra-leads
+- sig-k8s-infra-leads
 
 labels:
-- wg/k8s-infra
+- sig/k8s-infra
 - area/apps/kubernetes-external-secrets

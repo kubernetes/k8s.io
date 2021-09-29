@@ -116,6 +116,10 @@ cs:
 discuss:
   type: CNAME
   value: kubernetes.hosted-by-discourse.com.
+# Elections platform running on aaa cluster.
+elections:
+  type: A
+  value: 35.244.193.193
 examples:
   type: CNAME
   value: redirect.k8s.io.
@@ -163,7 +167,7 @@ issue:
 issues:
   type: CNAME
   value: redirect.k8s.io.
-#wg-k8s-infra
+#sig-k8s-infra
 k8s-infra-prow:
   type: A
   value: 34.117.224.94 # Hosted on GKE cluster aaa
@@ -186,10 +190,14 @@ pr:
 pr-test:
   type: CNAME
   value: redirect.k8s.io.
-#sig-release
+# sig-release
 release.triage:
   type: A
   value: 35.186.239.70
+# sig-cli
+cli.triage:
+  type: A
+  value: 34.117.106.163
 # Running in a GKE cluster somewhere (@ixdy).
 prow:
   type: A
@@ -265,30 +273,26 @@ cluster-api-aws.sigs:
 cluster-api-openstack.sigs:
 - type: CNAME
   value: kubernetes-sigs-cluster-api-openstack.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vince)
+# https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vincepri)
 release-0-1.cluster-api.sigs:
   type: CNAME
   value: release-0-1--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.2 docs (@CecileRobertMichon, @vince)
+# https://github.com/kubernetes-sigs/cluster-api release-0.2 docs (@CecileRobertMichon, @vincepri)
 release-0-2.cluster-api.sigs:
   type: CNAME
   value: release-0-2--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.3 docs (@CecileRobertMichon, @vince)
+# https://github.com/kubernetes-sigs/cluster-api release-0.3 docs (@CecileRobertMichon, @vincepri)
 release-0-3.cluster-api.sigs:
   type: CNAME
   value: release-0-3--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api release-0.4 docs (@CecileRobertMichon, @vince)
+# https://github.com/kubernetes-sigs/cluster-api release-0.4 docs (@CecileRobertMichon, @vincepri)
 release-0-4.cluster-api.sigs:
   type: CNAME
   value: release-0-4--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vince)
-master.cluster-api.sigs:
+# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vincepri)
+main.cluster-api.sigs:
   type: CNAME
-  value: master--kubernetes-sigs-cluster-api.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vince)
-tip.cluster-api.sigs:
-  type: CNAME
-  value: master--kubernetes-sigs-cluster-api.netlify.app.
+  value: main--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-azure docs (@CecileRobertMichon, @nader-ziada, @devigned)
 capz.sigs:
   type: CNAME

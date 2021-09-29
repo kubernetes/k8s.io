@@ -1,0 +1,8 @@
+{
+  "displayName": "default service account for pods in aaa",
+  "email": "kettle@kubernetes-public.iam.gserviceaccount.com",
+  "name": "projects/kubernetes-public/serviceAccounts/kettle@kubernetes-public.iam.gserviceaccount.com",
+  "oauth2ClientId": "114194964615740869019",
+  "projectId": "kubernetes-public",
+  "uniqueId": "114194964615740869019"
+}

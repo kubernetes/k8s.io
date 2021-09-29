@@ -130,7 +130,7 @@ func TestStagingEmailLength(t *testing.T) {
 		}
 	}
 
-	if errs != nil {
+	if len(errs) > 0 {
 		for _, err := range errs {
 			t.Error(err)
 		}
@@ -156,7 +156,7 @@ func TestDescriptionLength(t *testing.T) {
 		}
 	}
 
-	if errs != nil {
+	if len(errs) > 0 {
 		for _, err := range errs {
 			t.Error(err)
 		}
@@ -304,14 +304,14 @@ func TestNoDuplicateMembers(t *testing.T) {
 // of these groups, we don't want to accidentally lock ourselves out
 func TestHardcodedGroupsForParanoia(t *testing.T) {
 	groups := map[string][]string{
-		"k8s-infra-gcp-org-admins@kubernetes.io": []string{
+		"k8s-infra-gcp-org-admins@kubernetes.io": {
 			"ameukam@gmail.com",
 			"davanum@gmail.com",
 			"ihor@cncf.io",
 			"spiffxp@google.com",
 			"thockin@google.com",
 		},
-		"k8s-infra-group-admins@kubernetes.io": []string{
+		"k8s-infra-group-admins@kubernetes.io": {
 			"ameukam@gmail.com",
 			"cblecker@gmail.com",
 			"davanum@gmail.com",
@@ -336,7 +336,7 @@ func TestHardcodedGroupsForParanoia(t *testing.T) {
 		}
 	}
 
-	for email, _ := range groups {
+	for email := range groups {
 		if _, ok := found[email]; !ok {
 			t.Errorf("group '%s' is missing, should be present", email)
 		}

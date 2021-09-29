@@ -91,6 +91,8 @@ readonly MAIN_PROJECT_SERVICES=(
     billingbudgets.googleapis.com
     # We export billing data to bigquery
     bigquery.googleapis.com
+    # We transfer data from other BigQuery datasets
+    bigquerydatatransfer.googleapis.com
     # We use cloud asset inventory from this project to audit all projects
     cloudasset.googleapis.com
     # We require use of cloud shell to access clusters in this project
@@ -105,6 +107,10 @@ readonly MAIN_PROJECT_SERVICES=(
     monitoring.googleapis.com
     # We host secrets in this project for use by prow and other apps
     secretmanager.googleapis.com
+    # We create internal IP addresses for GCP managed services
+    servicenetworking.googleapis.com
+    # We store elections results in Cloud SQL databases
+    sql-component.googleapis.com
     # We host public-facing and private GCS buckets in this project
     storage-api.googleapis.com
     # TODO: do we really need the legacy XML API enabled for them though?
@@ -365,21 +371,38 @@ function ensure_aaa_external_secrets() {
         k8s-infra-prow-github-oauth-config
         k8s-infra-prow-hmac-token
     )
+    local publishing_bot_secrets=(
+        publishing-bot-github-token
+    )
     local slack_infra_secrets=(
-        recaptcha
+        recaptcha-secret-key
+        recaptcha-site-key
         slack-event-log-config
         slack-moderator-config
         slack-moderator-words-config
+        slack-post-message-config
         slack-welcomer-config
         slackin-token
     )
     local triageparty_release_secrets=(
         triage-party-github-token
     )
+    local elekto_secrets=(
+        elekto-db-database
+        elekto-db-host
+        elekto-db-password
+        elekto-db-port
+        elekto-db-username
+        elekto-github-client-id
+        elekto-github-client-secret
+        elekto-meta-secret
+    )
     mapfile -t secret_specs < <(
         printf "%s/prow/sig-testing\n" "${prow_secrets[@]}"
+        printf "%s/publishing-bot/sig-release\n" "${publishing_bot_secrets[@]}"
         printf "%s/slack-infra/sig-contributor-experience\n" "${slack_infra_secrets[@]}"
         printf "%s/triageparty-release/sig-release\n" "${triageparty_release_secrets[@]}"
+        printf "%s/elekto/sig-contributor-experience\n" "${elekto_secrets[@]}"
     )
 
     for spec in "${secret_specs[@]}"; do

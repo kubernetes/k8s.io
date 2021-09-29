@@ -11,8 +11,8 @@ gs://k8s-staging-sp-operator/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 14 Oct 2020 13:38:15 GMT
-	Time updated:			Thu, 09 Sep 2021 16:51:53 GMT
-	Metageneration:			10
+	Time updated:			Fri, 24 Sep 2021 21:33:21 GMT
+	Metageneration:			11
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
 	ACL:				[]

@@ -221,7 +221,7 @@ groups:
     - skuznets@redhat.com
     - spiffxp@google.com
     - spiffxp@gmail.com
-    # wg-k8s-infra members
+    # sig-k8s-infra members
     - ameukam@gmail.com
     - cblecker@gmail.com
     - davanum@gmail.com
@@ -260,4 +260,5 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
+    - eddiezane@gmail.com
     - k8s-infra-prow-oncall@kubernetes.io

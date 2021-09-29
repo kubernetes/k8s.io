@@ -23,7 +23,7 @@ of workloads to increase.
 
 Your escape hatch at every step is to reach out to the kubernetes community
 cluster-admins.  You can email k8s-infra-cluster-admins@kubernetes.io or find
-many of us in the #wg-k8s-infra Slack channel.
+many of us in the #sig-k8s-infra Slack channel.
 
 ## Prep a Pull Request against this repo
 
@@ -49,7 +49,7 @@ but make sure there are enough to people to keep it running.  If you have
 multiple namespaces that should be kept in sync, say so in the description.
 
 Add these new groups as members of the `gke-security-groups` defined in
-[wg-k8s-infra/groups.yaml][/groups/wg-k8s-infra/groups.yaml], which will enable
+[sig-k8s-infra/groups.yaml][/groups/sig-k8s-infra/groups.yaml], which will enable
 the RBAC linkage.
 
 ### Send your PR

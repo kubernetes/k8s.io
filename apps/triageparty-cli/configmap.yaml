@@ -1,0 +1,89 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: triage-party-config-cli
+  namespace: triageparty-cli
+  labels:
+    app: triage-party
+data:
+  # The contents of config/config.yaml
+  config.yaml: |
+    settings:
+      name: sig-cli
+      min_similarity: 0.75
+
+    collections:
+      - id: kubectl
+        name: Kubectl Triage
+        dedup: true
+        description: To be emptied out daily
+        rules:
+          - kubectl-issue-needs-triage
+
+      - id: kubernetes
+        name: Kubernetes Triage
+        dedup: true
+        description: To be emptied out daily
+        rules:
+          - kubernetes-issue-needs-triage
+          - kubernetes-pr-needs-attention
+
+      - id: kustomize
+        name: Kustomize Triage
+        dedup: true
+        description: To be emptied out daily
+        rules:
+          - kustomize-issue-needs-triage
+          - kustomize-pr-needs-attention
+
+    rules:
+      kubectl-issue-needs-triage:
+        name: "New issues that need triage"
+        repos:
+          - https://github.com/kubernetes/kubectl
+        resolution: "Apply a triage label"
+        type: issue
+        filters:
+          - label: "needs-triage"
+
+
+      kubernetes-issue-needs-triage:
+        name: "New issues that need triage"
+        repos:
+          - https://github.com/kubernetes/kubernetes
+        resolution: "Apply a triage label"
+        type: issue
+        filters:
+          - label: "needs-triage"
+          - label: "sig/cli"
+      kubernetes-pr-needs-attention:
+        name: "PRs that need attention"
+        repos:
+          - https://github.com/kubernetes/kubernetes
+        resolution: "Comment, review, merge, or close the PR"
+        type: pull_request
+        filters:
+          - state: open
+          - label: "sig/cli"
+          - tag: "recv|pr-unreviewed"
+          - tag: "!draft"
+
+
+      kustomize-issue-needs-triage:
+        name: "New issues that need triage"
+        repos:
+          - https://github.com/kubernetes-sigs/kustomize
+        resolution: "Apply a triage label"
+        type: issue
+        filters:
+          - label: "needs-triage"
+      kustomize-pr-needs-attention:
+        name: "PRs that need attention"
+        repos:
+          - https://github.com/kubernetes-sigs/kustomize
+        resolution: "Comment, review, merge, or close the PR"
+        type: pull_request
+        filters:
+          - state: open
+          - tag: "recv|pr-unreviewed"
+          - tag: "!draft"
