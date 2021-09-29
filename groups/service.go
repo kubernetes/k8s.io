@@ -45,14 +45,21 @@ type AdminService interface {
 	DeleteGroupsIfNecessary() error
 	RemoveOwnerOrManagersFromGroup(group GoogleGroup, members []string) error
 	RemoveMembersFromGroup(group GoogleGroup, members []string) error
-	GetClient() AdminServiceClient
+	// ListGroup here is a proxy to the ListGroups method of the underlying
+	// AdminServiceClient being used.
+	ListGroups() (*admin.Groups, error)
+	// ListMembers here is a proxy to the ListMembers method of the underlying
+	// AdminServiceClient being used.
+	ListMembers(groupKey string) (*admin.Members, error)
 }
 
 // GroupService provides functionality to perform high level
 // tasks using a GroupServiceClient.
 type GroupService interface {
 	UpdateGroupSettings(group GoogleGroup) error
-	GetClient() GroupServiceClient
+	// Get here is a proxy to the Get method of the
+	// underlying GroupServiceClient
+	Get(groupUniqueID string) (*groupssettings.Groups, error)
 }
 
 func NewAdminService(ctx context.Context, clientOption option.ClientOption) (AdminService, error) {
@@ -343,9 +350,14 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 	return utilerrors.NewAggregate(errs)
 }
 
-// GetClient simply returns the underlying AdminServiceClient being used.
-func (as *adminService) GetClient() AdminServiceClient {
-	return as.client
+// ListGroups lists all the groups available.
+func (as *adminService) ListGroups() (*admin.Groups, error) {
+	return as.client.ListGroups()
+}
+
+// ListMembers lists all the members of a group with a particular groupKey.
+func (as *adminService) ListMembers(groupKey string) (*admin.Members, error) {
+	return as.client.ListMembers(groupKey)
 }
 
 var _ AdminService = (*adminService)(nil)
@@ -433,9 +445,9 @@ func (gs *groupService) UpdateGroupSettings(group GoogleGroup) error {
 	return nil
 }
 
-// GetClient simply returns the underlying GroupServiceClient being used.
-func (gs *groupService) GetClient() GroupServiceClient {
-	return gs.client
+// Get retrieves the group settings of a group with groupUniqueID.
+func (gs *groupService) Get(groupUniqueID string) (*groupssettings.Groups, error) {
+	return gs.client.Get(groupUniqueID)
 }
 
 var _ GroupService = (*groupService)(nil)

@@ -279,10 +279,7 @@ func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
 }
 
 func (r *Reconciler) printGroupMembersAndSettings() error {
-	asClient := r.AdminSvc.GetClient()
-	gsClient := r.GroupSvc.GetClient()
-
-	g, err := asClient.ListGroups()
+	g, err := r.AdminSvc.ListGroups()
 	if err != nil {
 		return fmt.Errorf("unable to retrieve users in domain: %w", err)
 	}
@@ -299,7 +296,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 			Name:        g.Name,
 			Description: g.Description,
 		}
-		g2, err := gsClient.Get(g.Email)
+		g2, err := r.GroupSvc.Get(g.Email)
 		if err != nil {
 			return fmt.Errorf("unable to retrieve group info for group %s: %w", g.Email, err)
 		}
@@ -316,7 +313,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 		group.Settings["WhoCanModerateMembers"] = g2.WhoCanModerateMembers
 		group.Settings["MembersCanPostAsTheGroup"] = g2.MembersCanPostAsTheGroup
 
-		l, err := asClient.ListMembers(g.Email)
+		l, err := r.AdminSvc.ListMembers(g.Email)
 		if err != nil {
 			return fmt.Errorf("unable to retrieve members in group : %w", err)
 		}
