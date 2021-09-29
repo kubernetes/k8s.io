@@ -30,11 +30,22 @@ locals {
   bigquery_location = "US"          // The bigquery specific location where the dataset should be created
   pod_namespace     = "test-pods"   // MUST match whatever prow is configured to use when it schedules to this cluster
 
-  // Service Accounts in ${pod_namespace} (usable via Workload Identity)
-  cluster_sa_name                     = "prow-build"                  // Name of the GSA and KSA that pods use by default
-  boskos_janitor_sa_name              = "boskos-janitor"              // Name of the GSA and KSA used by boskos-janitor
-  kubernetes_external_secrets_sa_name = "kubernetes-external-secrets" // Allowed to read from GSM in this and other projects
-
+  workload_identity_service_accounts = [
+    {
+      name        = "prow-build",
+      description = "default service account for pods in ${local.cluster_name}"
+    },
+    {
+      name        = "boskos-janitor",
+      description = "uesd by boskos-janitor in ${local.cluster_name}"
+    },
+    {
+      name          = "kubernetes-external-secrets"
+      description   = "sync K8s secrets from GSM in this and other projects"
+      project_roles = ["roles/secretmanager.secretAccessor"],
+      cluster_namespace = "kubernetes-external-secrets"
+    }
+  ]
 }
 
 data "google_organization" "org" {
@@ -66,29 +77,14 @@ resource "google_project_iam_member" "k8s_infra_prow_viewers" {
   member  = "group:k8s-infra-prow-viewers@kubernetes.io"
 }
 
-module "prow_build_cluster_sa" {
+module "workload_identity_service_accounts" {
+  for_each          = { for x in local.workload_identity_service_accounts : x.name => x }
   source            = "../modules/workload-identity-service-account"
   project_id        = local.project_id
-  name              = local.cluster_sa_name
-  description       = "default service account for pods in ${local.cluster_name}"
-  cluster_namespace = local.pod_namespace
-}
-
-module "boskos_janitor_sa" {
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = local.boskos_janitor_sa_name
-  description       = "used by boskos-janitor in ${local.cluster_name}"
-  cluster_namespace = local.pod_namespace
-}
-
-module "kubernetes_external_secrets_sa" {
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = local.kubernetes_external_secrets_sa_name
-  description       = "sync K8s secrets from GSM in this and other projects"
-  cluster_namespace = "kubernetes-external-secrets"
-  project_roles     = ["roles/secretmanager.secretAccessor"]
+  name              = each.value.name
+  description       = each.value.description
+  cluster_namespace = lookup(each.value, "pod_namespace", local.pod_namespace)
+  project_roles     = lookup(each.value, "project_roles", [])
 }
 
 // external ip formerly managed by infra/gcp/bash/prow/ensure-e2e-projects.sh
