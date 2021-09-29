@@ -107,13 +107,6 @@ module "workload_identity_service_accounts" {
   project_roles     = lookup(each.value, "project_roles", [])
 }
 
-// TODO: this role belongs in k8s-infra-prow-build
-resource "google_project_iam_member" "prow_deployer_for_prow_build" {
-  project = "k8s-infra-prow-build"
-  role    = "roles/container.admin"
-  member  = "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
-}
-
 // external (regional) ip addresses
 resource "google_compute_address" "kubernetes_external_secrets_metrics_address" {
   name         = "kubernetes-external-secrets-metrics"

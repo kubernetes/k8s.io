@@ -85,6 +85,14 @@ resource "google_project_iam_member" "k8s_infra_prow_viewers" {
   member  = "group:k8s-infra-prow-viewers@kubernetes.io"
 }
 
+// Allow prow-deployer service account in k8s-infra-prow-build-trusted to deploy
+// to the cluster defined in here
+resource "google_project_iam_member" "prow_deployer_for_prow_build" {
+  project = module.project.project_id
+  role    = "roles/container.admin"
+  member  = "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+}
+
 module "workload_identity_service_accounts" {
   for_each          = local.workload_identity_service_accounts
   source            = "../modules/workload-identity-service-account"
