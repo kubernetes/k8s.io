@@ -117,6 +117,42 @@ resource "google_compute_address" "kubernetes_external_secrets_metrics" {
   address_type = "EXTERNAL"
 }
 
+locals {
+  build_cluster_secrets = {
+    prow-build-service-account = {
+      group  = "sig-testing"
+      owners = "k8s-infra-prow-oncall@kubernetes.io"
+    }
+    prow-build-ssh-key-secret = {
+      group  = "sig-testing"
+      owners = "k8s-infra-prow-oncall@kubernetes.io"
+    }
+  }
+}
+
+resource "google_secret_manager_secret" "build_cluster_secrets" {
+  for_each  = local.build_cluster_secrets
+  project   = local.project_id
+  secret_id = each.key
+  labels = {
+    group = each.value.group
+  }
+  replication {
+    automatic = true
+  }
+}
+
+resource "google_secret_manager_secret_iam_binding" "build_cluster_secret_admins" {
+  for_each  = local.build_cluster_secrets
+  project   = local.project_id
+  secret_id = each.key
+  role      = "roles/secretmanager.admin"
+  members = [
+    "group:k8s-infra-prow-oncall@kubernetes.io",
+    "group:${each.value.owners}"
+  ]
+}
+
 module "prow_build_cluster" {
   source             = "../modules/gke-cluster"
   project_name       = local.project_id
