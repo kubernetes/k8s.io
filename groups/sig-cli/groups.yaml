@@ -7,6 +7,19 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
+  - email-id: sig-cli-leads@kubernetes.io
+    name: sig-cli-leads
+    description: |-
+      SIG CLI chairs and technical leads comms
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - eddiezane@gmail.com
+      - kn.verey@gmail.com
+      - maszulik@redhat.com
+      - seans@google.com
+
   #
   # k8s-staging write access for SIG-owned subprojects
   #
