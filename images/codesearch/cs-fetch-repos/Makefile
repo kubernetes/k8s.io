@@ -23,7 +23,7 @@ TAG ?= $(TAG_DATE_SHA)
 WHAT ?= python ./fetch-repos.py
 
 # cloudbuild
-PROJECT_ID ?= k8s-staging-infra-toolsw
+PROJECT_ID ?= k8s-staging-infra-tools
 GCB_BUCKET ?= gs://$(PROJECT_ID)
 
 ## user-facing targets
