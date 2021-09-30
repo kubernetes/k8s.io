@@ -20,7 +20,11 @@ locals {
       group  = "sig-testing"
       owners = "k8s-infra-prow-oncall@kubernetes.io"
     }
-    prow-build-ssh-key-secret = {
+    prow-build-ssh-key-secret-ssh-private = {
+      group  = "sig-testing"
+      owners = "k8s-infra-prow-oncall@kubernetes.io"
+    }
+    prow-build-ssh-key-secret-ssh-public = {
       group  = "sig-testing"
       owners = "k8s-infra-prow-oncall@kubernetes.io"
     }
