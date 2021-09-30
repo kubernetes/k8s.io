@@ -49,3 +49,11 @@ docker run \
     -v "${TMP_DIR_ETL}:/tmp" \
     public-log-vendor-matcher
 ```
+
+## Generating the bucket list
+
+A list of buckets is used for their `.*_usage` bucket which stores the public access logs
+
+```bash
+./generate-buckets.sh
+```

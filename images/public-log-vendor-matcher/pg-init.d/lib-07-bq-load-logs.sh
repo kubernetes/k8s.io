@@ -3,17 +3,7 @@
 
 if [ -z "${GCP_BIGQUERY_DATASET_LOGS:-}" ]; then
     echo "Using dataset logs, since \$GCP_BIGQUERY_DATASET_LOGS was provided and set to '${GCP_BIGQUERY_DATASET_LOGS:-}'"
-    BUCKETS=(
-        asia.artifacts.k8s-artifacts-prod.appspot.com
-        eu.artifacts.k8s-artifacts-prod.appspot.com
-        k8s-artifacts-cni
-        k8s-artifacts-cri-tools
-        k8s-artifacts-csi
-        k8s-artifacts-gcslogs
-        k8s-artifacts-kind
-        k8s-artifacts-prod
-        us.artifacts.k8s-artifacts-prod.appspot.com
-    )
+    BUCKETS=$(cat /app/buckets.txt)
     for BUCKET in ${BUCKETS[*]}; do
             bq load \
                 --autodetect \
