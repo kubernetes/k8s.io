@@ -8,7 +8,7 @@ echo "$TIMESTAMP" > /tmp/my-timestamp.txt
 bq extract \
   --destination_format CSV \
   "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.5_vendor_with_company_name" \
-  "gs://${GCP_BQ_DUMP_BUCKET}/vendor-$TIMESTAMP-*.csv" > "${BQ_OUTPUT:-/dev/null}" 2>&1
+  "gs://${GCP_BQ_DUMP_BUCKET}/vendor-$TIMESTAMP-*.csv" >> "${BQ_OUTPUT:-/dev/null}" 2>&1
 ## Download the files
 TIMESTAMP=$(< /tmp/my-timestamp.txt tr -d '\n')
 mkdir -p /tmp/expanded_pyasn/
