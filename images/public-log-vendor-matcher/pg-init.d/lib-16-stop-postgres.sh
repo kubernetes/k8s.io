@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# Stop Postgres
+# Purpose: Stop Postgres
 
 [ ! "${ASN_DATA_PIPELINE_RETAIN:-}" = true ] && \
 # in the Postgres container image,

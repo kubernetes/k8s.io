@@ -1,6 +1,6 @@
 #!/bin/bash
+# Purpose: Load the k8s-infra-artifacts-gcslogs logs into the usage_all_raw dataset
 
-# Load the k8s-infra-artifacts-gcslogs logs into the usage_all_raw dataset
 if [ -z "${GCP_BIGQUERY_DATASET_LOGS:-}" ]; then
     echo "Using dataset logs, since \$GCP_BIGQUERY_DATASET_LOGS was provided and set to '${GCP_BIGQUERY_DATASET_LOGS:-}'"
     BUCKETS=(

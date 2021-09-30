@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# Promote all the tables to the un-timestamped dataset
+# Purpose: Promote all the tables to the un-timestamped dataset
 
 if [ ! "${NO_PROMOTE}" = "true" ]; then
   for TABLE in $(bq ls "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}" | awk '{print $1}' | tail +3 | xargs); do

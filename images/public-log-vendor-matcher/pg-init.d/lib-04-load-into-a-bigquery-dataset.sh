@@ -1,4 +1,5 @@
 #!/bin/bash
+# Purpose: Prepare, fetch, and load company data, PyASN data, PeeringDB, and Vendor data
 
 ## Load csv to bq
 bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.potaroo_all_asn_name" /tmp/potaroo_asn_companyname.csv asn:integer,companyname:string > "${BQ_OUTPUT:-/dev/null}" 2>&1

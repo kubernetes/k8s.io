@@ -1,4 +1,5 @@
 #!/bin/bash
+# Purpose: Extract and prepare vendors with their IPs
 
 ## Set a timestamp to work with
 TIMESTAMP=$(date +%Y%m%d%H%M)

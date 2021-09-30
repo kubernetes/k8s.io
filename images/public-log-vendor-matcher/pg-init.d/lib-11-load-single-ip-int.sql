@@ -1,3 +1,5 @@
+-- Purpose: Combine vendor data
+
 -- Copy the customer ip in
 copy cust_ip from '/tmp/usage_all_ip_only.csv';
 -- Copy pyasn expanded in

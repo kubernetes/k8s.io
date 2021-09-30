@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Purpose: download, prepare, and parse public ASN data
 set -euo pipefail
 
 curl -o /tmp/autnums.html -L https://bgp.potaroo.net/cidr/autnums.html
@@ -10,12 +11,6 @@ python3 /app/asn-vendor-autnums-extractor.py /tmp/autnums.html /tmp/potaroo_data
 # remove the '^AS' from each line
 < /tmp/potaroo_data.csv tail -n +2 | sed 's,^AS,,g' > /tmp/potaroo_asn_companyname.csv
 
-## GET PYASN section
-## using https://github.com/ii/org/blob/main/research/asn-data-pipeline/etl_asn_vendor_table.org
-
-## pyasn installs its utils in ~/.local/bin/*
-## Add pyasn utils to path (dockerfile?)
-## full list of RIB files on ftp://archive.routeviews.org//bgpdata/2021.05/RIBS/
 cd /tmp
 if [ ! -f "rib.latest.bz2" ]; then
     pyasn_util_download.py --latest

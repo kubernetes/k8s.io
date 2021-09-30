@@ -1,3 +1,5 @@
+-- Purpose: create tables for local temporary ASN data and IP storage and matching
+
 begin;
 
 create table if not exists cust_ip (

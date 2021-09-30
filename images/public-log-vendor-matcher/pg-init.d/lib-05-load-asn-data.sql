@@ -1,3 +1,5 @@
+-- Purpose: Merge the Potaroo ASN data with the PeeringDB data for networks and point of contact
+
 copy asnproc from '/tmp/potaroo_asn.txt';
 
 copy peeriingdbnet (data) from '/tmp/peeringdb-tables/net.json' csv quote e'\x01' delimiter e'\x02';

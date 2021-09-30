@@ -24,15 +24,11 @@ EOF
 
 gcloud config set project "${GCP_PROJECT}"
 
+# if using a ServiceAccount
 [ -n "${GOOGLE_APPLICATION_CREDENTIALS}" ] && \
   gcloud auth activate-service-account --key-file="${GOOGLE_APPLICATION_CREDENTIALS}"
 
 gcloud auth list
-
-## GET ASN_COMAPNY section
-## using https://github.com/ii/org/blob/main/research/asn-data-pipeline/etl_asn_company_table.org
-## This will pull a fresh copy, I prefer to use what we have in gs
-# curl -s  https://bgp.potaroo.net/cidr/autnums.html | sed -nre '/AS[0-9]/s/.*as=([^&]+)&.*">([^<]+)<\/a> ([^,]+), (.*)/"\1", "\3", "\4"/p'  | head
 
 # Remove the previous data set
 bq rm -r -f "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}" || true

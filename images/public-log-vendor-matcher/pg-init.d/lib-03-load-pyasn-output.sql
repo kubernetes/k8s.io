@@ -1,3 +1,5 @@
+-- Purpose: select and export from the company and PyASN data
+
 copy company_asn from '/tmp/potaroo_data.csv' delimiter ',' csv;
 copy pyasn_ip_asn from '/tmp/pyAsnOutput.csv' delimiter ',' csv;
 

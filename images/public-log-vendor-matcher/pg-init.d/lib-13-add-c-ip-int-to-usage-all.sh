@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# Load table for matching IP to usage
+# Purpose: Load table for matching IP to usage
 
 GCP_BIGQUERY_DATASET_WITH_DATE="${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}"
 export GCP_BIGQUERY_DATASET_WITH_DATE
