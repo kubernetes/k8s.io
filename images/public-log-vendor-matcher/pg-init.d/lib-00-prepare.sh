@@ -1,5 +1,18 @@
 #!/bin/bash
+# Purpose: check environment [variables] and auth, prepare dataset for tables
 set -xeo pipefail
+
+require_env() {
+  NAME="${1}"
+  if [ -z "${!NAME}" ]; then
+    echo "Error: env '${NAME}' is empty and required"
+    exit 1
+  fi
+}
+
+require_env GCP_PROJECT
+require_env GCP_BIGQUERY_DATASET
+require_env GCP_BQ_DUMP_BUCKET
 
 PIPELINE_DATE="${PIPELINE_DATE:-$(date +%Y%m%d)}"
 export PIPELINE_DATE
