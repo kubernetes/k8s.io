@@ -30,6 +30,7 @@ The output is finally loaded in a DataStudio report and reviewed by members [sig
 | Name                             | Default                    | Description                                                                           |
 | -------------------------------- | -------------------------- | ------------------------------------------------------------------------------------- |
 | `TZ`                             | ``                         | Container time zone                                                                   |
+| `POSTGRES_PASSWORD`              | `postgres`                 | The password to set for Postgres                                                      |
 | `GOOGLE_APPLICATION_CREDENTIALS` | ``                         | The path to the GCP service account json key                                          |
 | `GCP_PROJECT`                    | `k8s-infra-ii-sandbox`     | The project to target                                                                 |
 | `GCP_BIGQUERY_DATASET`           | `etl_script_generated_set` | The dataset and basename to write to (appends date)                                   |
