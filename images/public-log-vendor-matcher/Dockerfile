@@ -1,7 +1,3 @@
-FROM golang:1.16.5-stretch AS godeps
-RUN go get -u github.com/mikefarah/yq/v4 && \
-  test -f /go/bin/yq
-
 FROM postgres:12.7 AS final
 LABEL maintainer "ii <public-log-vendor-matcher@ii.coop>"
 RUN apt-get update && \
@@ -27,9 +23,10 @@ RUN apt-get update && \
   procps \
   google-cloud-sdk && \
   rm -rf /var/lib/apt/lists/*
-RUN pip3 install pyasn
+RUN pip3 install \
+  pyasn \
+  yq==2.12.0
 WORKDIR /app
-COPY --from=godeps /go/bin/yq /usr/local/bin/yq
 COPY ./pg-init.d /docker-entrypoint-initdb.d
 COPY ./app .
 COPY ./buckets.txt /app
