@@ -2,9 +2,9 @@
 
 A Postgres-based k8s-infra data pipeline that produces BigQuery tables for reviewing Kubernetes Public artifact traffic in DataStudio.
 
-## Flow (WIP)
+## Flow
 
-1. Kubernetes Public GCS buckets for artifacts are configured to write public access logs to a GCS bucket called _k8s-infra-artifacts-gcslogs_ in the _k8s-infra-public-pii_ project
+1. Kubernetes Public GCS buckets for artifacts are configured to write public access logs to a GCS bucket called `k8s-infra-artifacts-gcslogs` in the `k8s-infra-public-pii` project
 2. Data from ASN aggregators (PyASN, Potaroo) is collated in Postgres for matching ASN owners / Companies to IP ranges
 3. The ASN data is then loaded into BigQuery
 4. Publicly known company vendor ASNs from the k8s.io repo into BigQuery
@@ -32,7 +32,7 @@ A Postgres-based k8s-infra data pipeline that produces BigQuery tables for revie
 
 Run in Docker
 
-```
+```bash
 TMP_DIR_ETL=$(mktemp -d)
 echo "${TMP_DIR_ETL}"
 sudo chmod 0777 "${TMP_DIR_ETL}"
