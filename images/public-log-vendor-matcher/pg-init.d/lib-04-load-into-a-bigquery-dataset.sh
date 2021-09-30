@@ -28,6 +28,7 @@ VENDORS=(
 ## This should be the end of pyasn section, we have results table that covers start_ip/end_ip from fs our requirements
 for VENDOR in ${VENDORS[*]}; do
   curl -s "https://raw.githubusercontent.com/kubernetes/k8s.io/main/registry.k8s.io/infra/meta/asns/${VENDOR}.yaml" \
+    # shellcheck disable=SC2016
       | yq -r '.name as $name | .redirectsTo.registry as $redirectsToRegistry | .redirectsTo.artifacts as $redirectsToArtifacts | .asns[] | [. ,$name, $redirectsToRegistry, $redirectsToArtifacts] | @csv' \
         > "/tmp/vendor/${VENDOR}_yaml.csv"
   bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor_yaml" "/tmp/vendor/${VENDOR}_yaml.csv" asn_yaml:integer,name_yaml:string,redirectsToRegistry:string,redirectsToArtifacts:string > "${BQ_OUTPUT:-/dev/null}" 2>&1
