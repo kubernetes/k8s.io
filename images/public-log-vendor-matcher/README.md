@@ -37,6 +37,7 @@ The output is finally loaded in a DataStudio report and reviewed by members [sig
 | `NO_PROMOTE`                     | ``                         | Disable the promotion of `${GCP_BIGQUERY_DATASET}_${DATE}` to ${GCP_BIGQUERY_DATASET} |
 | `ASN_DATA_PIPELINE_RETAIN`       | ``                         | Keeps Postgres running after the job has completed                                    |
 | `GCP_BQ_DUMP_BUCKET`             | ``                         | A GCP bucket to dump content from BigQuery                                            |
+| `BQ_OUTPUT`                      | `/dev/null`                | The file to output the logs for BigQuery to                                           |
 
 ## Running the Pipeline Manually
 
