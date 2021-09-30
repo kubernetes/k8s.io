@@ -14,7 +14,7 @@ A Postgres-based k8s-infra data pipeline that produces BigQuery tables for revie
 8. The IPs are joined and expanded with the IP ranges from the ASN data, then loaded into the dataset as a table
 9. All the data is then linked into a single table
 10. Tables are then promoted to the stable _${GCP_BIGQUERY_DATASET}_ table for usage in DataStudio
-11. Postgres is halted, exiting 0
+11. Wait until PID1's cmdline is `postgres` (meaning finished init) then halting Postgres cleanly with `pg_ctl kill quit $PID_FOR_POSTGRES`, exiting 0
 
 ## Environment variables
 
