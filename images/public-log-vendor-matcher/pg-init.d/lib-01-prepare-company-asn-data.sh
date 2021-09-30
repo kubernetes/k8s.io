@@ -6,7 +6,11 @@ curl -o /tmp/autnums.html -L https://bgp.potaroo.net/cidr/autnums.html
 python3 /app/asn-vendor-autnums-extractor.py /tmp/autnums.html /tmp/potaroo_data.csv
 
 # Strip data to only return ASN numbers
-< /tmp/potaroo_data.csv cut -d ',' -f1 | sed 's/"//' | sed 's/"//' | sed '/^$/d' | cut -d 'S' -f2 > /tmp/potaroo_asn.txt
+< /tmp/potaroo_data.csv cut -d ',' -f1 \
+    | sed 's/"//' | sed 's/"//' \
+    | sed '/^$/d' | cut -d 'S' -f2 \
+    | sort | uniq \
+    > /tmp/potaroo_asn.txt
 
 # remove the '^AS' from each line
 < /tmp/potaroo_data.csv tail -n +2 | sed 's,^AS,,g' > /tmp/potaroo_asn_companyname.csv
