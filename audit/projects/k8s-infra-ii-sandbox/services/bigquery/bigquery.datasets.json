@@ -154,6 +154,15 @@
   },
   {
     "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211001",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20211001",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
     "id": "k8s-infra-ii-sandbox:etl_script_generated_set_deletemelol",
     "datasetReference": {
       "datasetId": "etl_script_generated_set_deletemelol",
