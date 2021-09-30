@@ -2,6 +2,15 @@
 
 A Postgres-based k8s-infra data pipeline that produces BigQuery tables for reviewing Kubernetes Public artifact traffic in DataStudio.
 
+It utilises Postgres for some local querying and the Postgres container image's init folder, where several shell scripts are sourced and SQL queries are run.
+Some scripts call from the `/app` folder, in the folder there are:
+
+- some SQL to run against BigQuery
+- some Python scripts for local data management
+- a text file containing the names of buckets that container access logs (with `_usage` emitted)
+
+The output is finally loaded in a DataStudio report and reviewed by members [sig-k8s-infra](https://github.com/kubernetes/community/blob/master/sig-k8s-infra/README.md) without PII displayed.
+
 ## Flow
 
 1. Kubernetes Public GCS buckets for artifacts are configured to write public access logs to a GCS bucket called `k8s-infra-artifacts-gcslogs` in the `k8s-infra-public-pii` project
