@@ -26,6 +26,7 @@ A Postgres-based k8s-infra data pipeline that produces BigQuery tables for revie
 | `GCP_BIGQUERY_DATASET`           | `etl_script_generated_set` | The dataset and basename to write to (appends date)                                   |
 | `NO_PROMOTE`                     | ``                         | Disable the promotion of `${GCP_BIGQUERY_DATASET}_${DATE}` to ${GCP_BIGQUERY_DATASET} |
 | `ASN_DATA_PIPELINE_RETAIN`       | ``                         | Keeps Postgres running after the job has completed                                    |
+| `GCP_BQ_DUMP_BUCKET`             | ``                         | A GCP bucket to dump content from BigQuery                                            |
 
 ## Running the Pipeline Manually
 
@@ -43,6 +44,7 @@ docker run \
     -e POSTGRES_PASSWORD="postgres" \
     -e GCP_PROJECT=k8s-infra-ii-sandbox \
     -e GCP_BIGQUERY_DATASET=etl_script_generated_set \
+    -e GCP_BQ_DUMP_BUCKET=ii_bq_scratch_dump \
     -v $HOME/.config/gcloud:/var/lib/postgresql/.config/gcloud \
     -v "${TMP_DIR_ETL}:/tmp" \
     public-log-vendor-matcher
