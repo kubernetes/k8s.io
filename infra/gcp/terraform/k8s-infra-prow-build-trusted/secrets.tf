@@ -16,6 +16,18 @@ limitations under the License.
 
 locals {
   build_cluster_secrets = {
+    cncf-ci-github-token = {
+      group  = "sig-testing"
+      owners = "k8s-infra-ii-coop@kubernetes.io"
+    }
+    k8s-cip-test-prod-service-account = {
+      group = "sig-release"
+      owners = "k8s-infra-release-admins@kubernetes.io"
+    }
+    k8s-gcr-audit-test-prod-service-account = {
+      group = "sig-release"
+      owners = "k8s-infra-release-admins@kubernetes.io"
+    }
     k8s-infra-kops-e2e-tests-aws-ssh-key = {
       group  = "sig-cluster-lifecycle"
       owners = "k8s-infra-kops-maintainers@kubernetes.io"
@@ -24,9 +36,13 @@ locals {
       group  = "sig-contributor-experience"
       owners = "github@kubernetes.io"
     }
-    cncf-ci-github-token = {
-      group  = "sig-testing"
-      owners = "k8s-infra-ii-coop@kubernetes.io"
+    service-account = {
+      group = "sig-testing"
+      owners = "k8s-infra-prow-oncall@kubernetes.io"
+    }
+    slack-tempelis-auth = {
+      group = "sig-contributor-experience"
+      owners = "k8s-infra-rbac-slack-infra@kubernetes.io"
     }
     snyk-token = {
       group  = "sig-architecture"
