@@ -7,6 +7,7 @@ export GCP_BIGQUERY_DATASET_WITH_DATE
 if [ -n "${GCP_BIGQUERY_DATASET_LOGS:-}" ]; then
     USE_LOGS=_logs
 fi
+# shellcheck disable=SC2129
 envsubst < /app/distinct_c_ip_count${USE_LOGS:-}.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET_WITH_DATE}.1_ip_count" >> "${BQ_OUTPUT:-/dev/null}" 2>&1
 envsubst < /app/distinct_ip_int.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET_WITH_DATE}.2_ip_int" >> "${BQ_OUTPUT:-/dev/null}" 2>&1
 envsubst < /app/distinct_ipint_only.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET_WITH_DATE}.2a_ip_int" >> "${BQ_OUTPUT:-/dev/null}" 2>&1
