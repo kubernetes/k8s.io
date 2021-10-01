@@ -28,10 +28,6 @@ locals {
       group = "sig-release"
       owners = "k8s-infra-release-admins@kubernetes.io"
     }
-    k8s-infra-kops-e2e-tests-aws-ssh-key = {
-      group  = "sig-cluster-lifecycle"
-      owners = "k8s-infra-kops-maintainers@kubernetes.io"
-    }
     k8s-triage-robot-github-token = {
       group  = "sig-contributor-experience"
       owners = "github@kubernetes.io"
