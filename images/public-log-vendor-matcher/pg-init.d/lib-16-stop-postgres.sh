@@ -14,7 +14,7 @@
   if [ ! "$(cat /proc/"${PARENTPID}"/cmdline)" = "/tools/entrypoint" ] && [ ! "${PARENTPID}" -eq 0 ]; then
       PID_FOR_POSTGRES=${PARENTPID}
   fi
-  until [ "$(< /proc/"${PID}"/cmdline tr '\0' '\n' | head -n 1)" = "postgres" ]; do
+  until [ "$(< /proc/"${PID_FOR_POSTGRES}"/cmdline tr '\0' '\n' | head -n 1)" = "postgres" ]; do
       sleep 1s
   done
   # exit Postgres with a code of 0
