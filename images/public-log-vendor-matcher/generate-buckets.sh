@@ -11,7 +11,9 @@ GIT_ROOT="$(git rev-parse --show-toplevel)"
 (
     for B in "${GIT_ROOT}"/audit/projects/*/buckets/*; do
         BUCKET_NAME="$(basename "${B}")"
-        if echo "${BUCKET_NAME}" | grep -E '^k8s-artifacts|^k8s-staging|.*\.artifacts.k8s-artifacts-prod.appspot.com'; then
+        if echo "${BUCKET_NAME}" \
+            | grep -E '^k8s-artifacts|^k8s-staging|.*\.artifacts.k8s-artifacts-prod.appspot.com' \
+            | grep -v '^.*-gcb$'; then
             echo "${BUCKET_NAME}"
         fi
     done
