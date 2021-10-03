@@ -32,7 +32,7 @@ The output is finally loaded in a DataStudio report and reviewed by members [sig
 | `TZ`                             | ``                         | Container time zone                                                                   |
 | `POSTGRES_PASSWORD`              | `postgres`                 | The password to set for Postgres                                                      |
 | `GOOGLE_APPLICATION_CREDENTIALS` | ``                         | The path to the GCP service account json key                                          |
-| `GCP_PROJECT`                    | `k8s-infra-ii-sandbox`     | The project to target                                                                 |
+| `GCP_PROJECT`                    | `k8s-infra-ii-sandbox`     | The project to target which hosts `${GCP_BIGQUERY_DATASET}` and also will be billed   |
 | `GCP_BIGQUERY_DATASET`           | `etl_script_generated_set` | The dataset and basename to write to (appends date)                                   |
 | `NO_PROMOTE`                     | ``                         | Disable the promotion of `${GCP_BIGQUERY_DATASET}_${DATE}` to ${GCP_BIGQUERY_DATASET} |
 | `ASN_DATA_PIPELINE_RETAIN`       | ``                         | Keeps Postgres running after the job has completed                                    |
