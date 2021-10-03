@@ -25,9 +25,11 @@
     "sha256:e9707504ad0d4c119036b6d41ace4a33596139d3feb9ccb6617813ce48c3eeef": ["v0.49.0"]
     "sha256:4080849490fd4f61416ad7bdba6fdd0ee58164f2e13df1128b407ce82d5f3986": ["v0.49.1"]
     "sha256:84e351228337bb7b09f0e90e6b6f5e2f8f4cf7d618c1ddc1e966f23902d273db": ["v0.49.2"]
+    "sha256:84e351228337bb7b09f0e90e6b6f5e2f8f4cf7d618c1ddc1e966f239XXXXXXXX": ["v0.49.3"]
     "sha256:0851b34f69f69352bf168e6ccf30e1e20714a264ab1ecd1933e4d8c0fc3215c6": ["v1.0.0"]
     "sha256:26bbd57f32bac3b30f90373005ef669aae324a4de4c19588a13ddba399c6664e": ["v1.0.1"]
     "sha256:85b53b493d6d658d8c013449223b0ffd739c76d76dc9bf9000786669ec04e049": ["v1.0.2"]
+    "sha256:4ade87838eb8256b094fbb5272d7dda9b6c7fa8b759e6af5383c1300996a7452": ["v1.0.3"]
 
 # custom base NGINX image
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/nginx
