@@ -38,8 +38,8 @@ groups:
     members:
       - k8s-infra-release-admins@kubernetes.io
       - adolfo.garcia@uservers.net
-      - ameukam@gmail.com
       - ctadeu@gmail.com
+      - gveronicalg@gmail.com
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
@@ -55,7 +55,6 @@ groups:
       - k8s-infra-release-editors@kubernetes.io
       - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
-      - gveronicalg@gmail.com
       - james.laverack@jetstack.io
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
@@ -223,6 +222,7 @@ groups:
       - saschagrunert@gmail.com
     members:
       - augustus@cisco.com
+      - gveronicalg@gmail.com
       - mudrinic.mare@gmail.com
 
   - email-id: release-managers@kubernetes.io
