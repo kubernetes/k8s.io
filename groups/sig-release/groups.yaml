@@ -222,6 +222,7 @@ groups:
       - saschagrunert@gmail.com
     members:
       - augustus@cisco.com
+      - gveronicalg@gmail.com
       - mudrinic.mare@gmail.com
 
   - email-id: release-managers@kubernetes.io
