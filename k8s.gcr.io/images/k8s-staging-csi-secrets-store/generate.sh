@@ -33,6 +33,8 @@ for image in "${images[@]}"; do
         "${repo}/$image" \
         --format="get(digest, tags)" \
         --sort-by="tags" \
-        --filter="${tag_filter}" \
-        | sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
+        --filter="${tag_filter}" | \
+    sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/' | \
+    # fix for v0.0.22
+    sed -e 's/981d4a484d156273a673b3d4e130ce6a7e09d25d8275b4acef78df697a67d7b2/1db2d1879a4ef656e3037a1d32be6bdb08cb10ea5800b6cca393361d6ac0330c/g'
 done
