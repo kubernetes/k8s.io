@@ -3,6 +3,8 @@
 A Postgres-based k8s-infra data pipeline that produces BigQuery tables for reviewing Kubernetes Public artifact traffic in DataStudio.
 
 It utilises Postgres for some local querying and the Postgres container image's init folder, where several shell scripts are sourced and SQL queries are run.
+The process is split between multiple steps, the steps can be found in the `./pg-init.d` folder in this repo or the `/docker-entrypoint-initdb.d`.
+
 Some scripts call from the `/app` folder, in the folder there are:
 
 - some SQL to run against BigQuery
