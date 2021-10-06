@@ -32,6 +32,7 @@
 - name: kpromo
   dmap:
     "sha256:2b7cc025d062669c54bb835e3107df0eca930d3695f63f0c9a3dfce7a1260341": ["v3.3.0-beta.0-1"]
+    "sha256:38bb7941de666b3fcc4d6e378b28abb7a405efeca4dd8a100123ffe90506038a": ["v3.3.0-beta.1-2"]
     "sha256:573e3374bd1dab36d245497e560672330fc786e436f20e0cbb7f5b2329fec5cc": ["v3.3.0-beta.1-1"]
     "sha256:71d689c855f1bbb5bb2c6dc7e696a5c6d70de715fb98858c0cb2140aa33f9ed0": ["v3.2.0-1"]
     "sha256:74b0d15dcf5791ee0dcb1dfed7e867d725d2bdb2e9260247c57fd1e8212aa3c8": ["v0.2.3-1"]
@@ -45,6 +46,7 @@
 - name: kpromo-auditor
   dmap:
     "sha256:4553f498ef64671000c6d9dbb8481622459a2c9954f9f85f30b38ec29efa54de": ["v3.3.0-beta.0-2"]
+    "sha256:e20cbb48ecbc8a2efb6b3e6738388c8001deb52a0db8ed50f2e753eb15f3c7fe": ["v3.3.0-beta.1-2"]
     "sha256:e7aa141ee242ddaa985b96b351d29fa46c5dd8bbf9ffa6e79b87e2ff2859b1ba": ["v3.3.0-beta.1-1"]
     "sha256:fdab15b5242904ef977a39ba500cab8a74c3ff6bf234e313b6f50f65f758d0ef": ["v3.3.0-beta.0-1"]
 - name: vulndash
