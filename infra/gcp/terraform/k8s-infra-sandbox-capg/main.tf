@@ -39,14 +39,24 @@ resource "google_project_service" "project" {
   project = google_project.project.id
 
   for_each = toset([
+    "bigquery.googleapis.com",
+    "bigquerystorage.googleapis.com",
+    "compute.googleapis.com",
     "container.googleapis.com",
+    "containerregistry.googleapis.com",
+    "iam.googleapis.com",
+    "iamcredentials.googleapis.com",
+    "monitoring.googleapis.com",
+    "oslogin.googleapis.com",
+    "pubsub.googleapis.com",
+    "storage-api.googleapis.com",
     "storage-component.googleapis.com"
   ])
 
   service = each.key
 }
 
-// Ensure k8s-infra-sandbox-capg@kubernetes.io has editor access to this project
+// Ensure k8s-infra-sandbox-capg@kubernetes.io has owner access to this project
 resource "google_project_iam_member" "k8s_infra_sandbox_capg" {
   project = google_project.project.id
   role    = "roles/owner"
