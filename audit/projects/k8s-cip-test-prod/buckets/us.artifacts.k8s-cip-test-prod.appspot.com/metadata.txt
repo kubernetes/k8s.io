@@ -15,5 +15,6 @@ gs://us.artifacts.k8s-cip-test-prod.appspot.com/ :
 	Metageneration:			55
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

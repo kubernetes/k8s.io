@@ -15,5 +15,6 @@ gs://k8s-release-test-prod-gcb/ :
 	Metageneration:			22
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

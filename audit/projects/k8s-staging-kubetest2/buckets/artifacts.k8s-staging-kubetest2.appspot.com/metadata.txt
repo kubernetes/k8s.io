@@ -15,5 +15,6 @@ gs://artifacts.k8s-staging-kubetest2.appspot.com/ :
 	Metageneration:			24
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

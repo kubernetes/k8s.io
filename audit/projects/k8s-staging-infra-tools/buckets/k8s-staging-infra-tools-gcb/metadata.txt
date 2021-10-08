@@ -15,5 +15,6 @@ gs://k8s-staging-infra-tools-gcb/ :
 	Metageneration:			26
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

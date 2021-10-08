@@ -15,5 +15,6 @@ gs://artifacts.k8s-staging-cloud-provider-gcp.appspot.com/ :
 	Metageneration:			11
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
