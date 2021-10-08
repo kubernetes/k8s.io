@@ -131,6 +131,19 @@ groups:
       - stephen@ii.coop
       - zz@ii.coop
 
+  # owners of the k8s-infra-sandbox-capg project, working on cluster-api provider for GCP
+  - email-id: k8s-infra-sandbox-capg@kubernetes.io
+    name: k8s-infra-sandbox-capg
+    description: |-
+      ACL for CAPG sandbox
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - ctadeu@gmail.com
+      - jayesh0200@gmail.com
+      - ii.sayantani.ii@gmail.com
+
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
