@@ -15,6 +15,7 @@ gs://artifacts.k8s-infra-ii-sandbox.appspot.com/ :
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				
 	  [
 	    {

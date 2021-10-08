@@ -15,5 +15,6 @@ gs://artifacts.k8s-staging-cluster-api.appspot.com/ :
 	Metageneration:			35
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

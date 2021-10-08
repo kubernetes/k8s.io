@@ -15,6 +15,7 @@ gs://artifacts.k8s-gcr-audit-test-prod.appspot.com/ :
 	Metageneration:			2
 	Bucket Policy Only enabled:	False
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				
 	  [
 	    {

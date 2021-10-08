@@ -18,6 +18,7 @@ gs://k8s-infra-ii-sandbox-bb-test/ :
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				
 	  [
 	    {

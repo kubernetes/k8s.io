@@ -15,5 +15,6 @@ gs://artifacts.k8s-staging-descheduler.appspot.com/ :
 	Metageneration:			17
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

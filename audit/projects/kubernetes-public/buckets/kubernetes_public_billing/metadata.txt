@@ -15,6 +15,7 @@ gs://kubernetes_public_billing/ :
 	Metageneration:			5
 	Bucket Policy Only enabled:	False
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				
 	  [
 	    {

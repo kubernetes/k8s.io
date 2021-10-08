@@ -15,5 +15,6 @@ gs://k8s-staging-apisnoop-gcb/ :
 	Metageneration:			30
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
