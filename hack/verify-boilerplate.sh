@@ -18,17 +18,20 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# TODO: uncomment once vendor fix is upstream
+REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
+readonly REPO_ROOT
+
+# TODO: uncomment downloading from upstream once fix is upstreamed
 # VERSION=v0.2.0
 # URL_BASE=https://raw.githubusercontent.com/kubernetes/repo-infra
 # URL=$URL_BASE/$VERSION/hack/verify_boilerplate.py
-# BIN_DIR=bin
-# SCRIPT=$BIN_DIR/verify_boilerplate.py
-# 
+BIN_DIR=${REPO_ROOT}/hack/bin
+SCRIPT=${BIN_DIR}/verify_boilerplate.py
+
 # if [[ ! -f $SCRIPT ]]; then
     # mkdir -p $BIN_DIR
     # curl -sfL $URL -o $SCRIPT
     # chmod +x $SCRIPT
 # fi
 
-$SCRIPT --boilerplate-dir hack/boilerplate
+"${SCRIPT}" --boilerplate-dir "${REPO_ROOT}/hack/boilerplate" --rootdir "${REPO_ROOT}" --skip=/audit/projects

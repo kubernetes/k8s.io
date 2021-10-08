@@ -45,7 +45,7 @@ def get_args():
             'node_modules',
             '_output',
             'third_party',
-            'vendor',
+            'vendor/',
             'verify/boilerplate/test',
         ],
         action='append',
@@ -190,6 +190,7 @@ def normalize_files(files):
 
 def get_files(extensions):
     files = []
+    skip = [ s.rstrip("/") for s in ARGS.skip ]
     if ARGS.filenames:
         files = ARGS.filenames
     else:
@@ -198,9 +199,17 @@ def get_files(extensions):
             # as we would prune these later in normalize_files(). But doing it
             # cuts down the amount of filesystem walking we do and cuts down
             # the size of the file list
-            for dpath in ARGS.skip:
-                if dpath in dirs:
-                    dirs.remove(dpath)
+            toremove=[]
+            relroot = os.path.relpath(root, ARGS.rootdir)
+            for d in dirs:
+                # "/"-prefixed dirs are relative to rootdir, e.g.
+                # - "/bar" will skip "/bar" but walk "foo/bar"
+                # - "bar" will skip "/bar" and "/foo/bar"
+                rootd = "/" + os.path.join(relroot, d)
+                if d in skip or rootd in skip:
+                    toremove.append(d)
+            for d in toremove:
+                dirs.remove(d)
 
             for name in walkfiles:
                 pathname = os.path.join(root, name)
