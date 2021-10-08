@@ -18,16 +18,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-VERSION=v0.2.0
-URL_BASE=https://raw.githubusercontent.com/kubernetes/repo-infra
-URL=$URL_BASE/$VERSION/hack/verify_boilerplate.py
-BIN_DIR=bin
-SCRIPT=$BIN_DIR/verify_boilerplate.py
-
-if [[ ! -f $SCRIPT ]]; then
-    mkdir -p $BIN_DIR
-    curl -sfL $URL -o $SCRIPT
-    chmod +x $SCRIPT
-fi
+# TODO: uncomment once vendor fix is upstream
+# VERSION=v0.2.0
+# URL_BASE=https://raw.githubusercontent.com/kubernetes/repo-infra
+# URL=$URL_BASE/$VERSION/hack/verify_boilerplate.py
+# BIN_DIR=bin
+# SCRIPT=$BIN_DIR/verify_boilerplate.py
+# 
+# if [[ ! -f $SCRIPT ]]; then
+    # mkdir -p $BIN_DIR
+    # curl -sfL $URL -o $SCRIPT
+    # chmod +x $SCRIPT
+# fi
 
 $SCRIPT --boilerplate-dir hack/boilerplate
