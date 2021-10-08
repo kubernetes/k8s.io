@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
- 
+
 /*
 This file defines:
 - Required provider versions
@@ -31,11 +31,11 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 3.74.0"
+      version = "~> 3.87.0"
     }
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "~> 3.74.0"
+      version = "~> 3.87.0"
     }
   }
 }
