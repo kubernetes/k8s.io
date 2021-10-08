@@ -26,17 +26,17 @@ FROM debian:bullseye
 # latest at the time, and package-based installs from debian-maintained repos
 # are not pinned to a specific version
 
-ARG CONFTEST_VERSION=0.27.0
-ARG GCLOUD_VERSION=355.0.0
+ARG CONFTEST_VERSION=0.28.1
+ARG GCLOUD_VERSION=360.0.0
 ARG GH_VERSION=2.0.0
-ARG GO_VERSION=1.17
+ARG GO_VERSION=1.17.2
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
-ARG K8S_VERSION=1.21.4
-ARG OPA_VERSION=0.32.0
+ARG K8S_VERSION=1.21.5
+ARG OPA_VERSION=0.33.1
 ARG SHELLCHECK_VERSION=0.7.2
-ARG TFSWITCH_VERSION=0.12.1119
+ARG TFSWITCH_VERSION=0.12.1168
 
 # build everything in /build
 WORKDIR /build
