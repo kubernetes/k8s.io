@@ -62,14 +62,14 @@ module "prow_build_cluster" {
 
 // The image/machine/disk match prow-build for consistency's sake
 module "prow_build_nodepool" {
-  source        = "../modules/gke-nodepool"
-  project_name  = module.project.project_id
-  cluster_name  = module.prow_build_cluster.cluster.name
-  location      = module.prow_build_cluster.cluster.location
-  name          = "trusted-pool1"
-  initial_count = 1
-  min_count     = 1
-  max_count     = 6
+  source          = "../modules/gke-nodepool"
+  project_name    = module.project.project_id
+  cluster_name    = module.prow_build_cluster.cluster.name
+  location        = module.prow_build_cluster.cluster.location
+  name            = "trusted-pool1"
+  initial_count   = 1
+  min_count       = 1
+  max_count       = 6
   image_type      = "UBUNTU_CONTAINERD"
   machine_type    = "n1-highmem-8"
   disk_size_gb    = 200

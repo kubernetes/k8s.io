@@ -21,11 +21,11 @@ locals {
       owners = "k8s-infra-ii-coop@kubernetes.io"
     }
     k8s-cip-test-prod-service-account = {
-      group = "sig-release"
+      group  = "sig-release"
       owners = "k8s-infra-release-admins@kubernetes.io"
     }
     k8s-gcr-audit-test-prod-service-account = {
-      group = "sig-release"
+      group  = "sig-release"
       owners = "k8s-infra-release-admins@kubernetes.io"
     }
     k8s-triage-robot-github-token = {
@@ -33,11 +33,11 @@ locals {
       owners = "github@kubernetes.io"
     }
     service-account = {
-      group = "sig-testing"
+      group  = "sig-testing"
       owners = "k8s-infra-prow-oncall@kubernetes.io"
     }
     slack-tempelis-auth = {
-      group = "sig-contributor-experience"
+      group  = "sig-contributor-experience"
       owners = "k8s-infra-rbac-slack-infra@kubernetes.io"
     }
     snyk-token = {
