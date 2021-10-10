@@ -1,4 +1,4 @@
-# Public log vendor matcher
+# Public log asn matcher
 
 A Postgres-based k8s-infra data pipeline that produces BigQuery tables for reviewing Kubernetes Public artifact traffic in DataStudio.
 
@@ -60,7 +60,7 @@ docker run \
     -e GCP_BQ_DUMP_BUCKET=ii_bq_scratch_dump \
     -v $HOME/.config/gcloud:/var/lib/postgresql/.config/gcloud \
     -v "${TMP_DIR_ETL}:/tmp" \
-    public-log-vendor-matcher
+    public-log-asn-matcher
 ```
 
 ## Generating the bucket list
