@@ -1,6 +1,8 @@
 #!/bin/bash
 # Purpose: check environment [variables] and auth, prepare dataset for tables
-set -xeo pipefail
+set -o errexit
+set -o nounset
+set -o pipefail
 
 require_env() {
   NAME="${1}"
