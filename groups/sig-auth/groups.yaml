@@ -19,6 +19,21 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-sig-auth@kubernetes.io
+    name: k8s-infra-staging-sig-auth
+    description: |-
+      ACL for SIG-Auth owned container images that do not fall under one of the dedicated
+      sub-projects
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - deads@redhat.com
+      - liggitt@google.com
+      - mikedanese@google.com
+      - rita.z.zhang@gmail.com
+      - theenjeru@gmail.com
+      - timallclair@gmail.com
+
   - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
     name: k8s-infra-staging-csi-secrets-store
     description: |-
