@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright 2021 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#!/bin/bash
 # Purpose: Load the k8s-infra-artifacts-gcslogs logs into the usage_all_raw dataset
 
 if [ -z "${GCP_BIGQUERY_DATASET_LOGS:-}" ]; then
