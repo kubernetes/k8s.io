@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:service-631771264409@gcp-sa-anthosconfigmanagement.iam.gserviceaccount.com"
+      ],
+      "role": "roles/anthosconfigmanagement.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquery.dataEditor"
@@ -72,6 +78,12 @@
         "serviceAccount:631771264409@cloudservices.gserviceaccount.com"
       ],
       "role": "roles/editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-631771264409@gcp-sa-gkehub.iam.gserviceaccount.com"
+      ],
+      "role": "roles/gkehub.serviceAgent"
     },
     {
       "members": [

@@ -15,5 +15,6 @@ gs://asia.artifacts.k8s-gcr-backup-test-prod-bak.appspot.com/ :
 	Metageneration:			37
 	Bucket Policy Only enabled:	True
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
