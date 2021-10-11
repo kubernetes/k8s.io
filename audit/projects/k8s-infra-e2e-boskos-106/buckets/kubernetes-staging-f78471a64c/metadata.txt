@@ -15,6 +15,7 @@ gs://kubernetes-staging-f78471a64c/ :
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
 	Public access prevention:	unspecified
+	RPO:				DEFAULT
 	ACL:				
 	  [
 	    {
