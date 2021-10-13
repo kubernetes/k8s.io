@@ -166,6 +166,12 @@ data:
         rewrite ^/(.*)?$    https://github.com/kubernetes/kubernetes/tree/master/$1 redirect;
       }
       server {
+        server_name conduct.kubernetes.io conduct.k8s.io;
+        listen 80;
+
+        rewrite ^/(.*)?$    https://github.com/kubernetes/community/tree/master/committee-code-of-conduct/$1 redirect;
+      }
+      server {
         server_name dl.k8s.io dl.kubernetes.io;
         listen 80;
 

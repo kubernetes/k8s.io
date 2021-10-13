@@ -110,6 +110,10 @@ ci-test:
 code:
   type: CNAME
   value: redirect.k8s.io.
+# committee-code-of-conduct vanity redirect
+conduct:
+  type: CNAME
+  value: redirect.k8s.io.
 # Code search (@dims)
 # This service runs in a equinix host managed by @dims
 cs:
