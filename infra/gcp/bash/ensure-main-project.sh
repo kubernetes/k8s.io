@@ -74,12 +74,13 @@ readonly DNS_GROUP="k8s-infra-dns-admins@kubernetes.io"
 readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
     "${LEGACY_CLUSTER_TERRAFORM_BUCKET}:${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-aws:k8s-infra-aws-admins@kubernetes.io
+    k8s-infra-tf-gcp:k8s-infra-gcp-org-admins@kubernetes.io
     k8s-infra-tf-monitoring:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-prow-clusters:k8s-infra-prow-oncall@kubernetes.io
     k8s-infra-tf-public-clusters:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-public-pii:"${CLUSTER_ADMINS_GROUP}"
-    k8s-infra-tf-sandbox-ii:k8s-infra-ii-coop@kubernetes.io
     k8s-infra-tf-sandbox-capg:k8s-infra-sandbox-capg@kubernetes.io
+    k8s-infra-tf-sandbox-ii:k8s-infra-ii-coop@kubernetes.io
 )
 
 # The services we explicitly want enabled for the main project
