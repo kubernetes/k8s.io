@@ -271,6 +271,13 @@ class RedirTest(HTTPTestCase):
                 'https://github.com/kubernetes/kubernetes/tree/master/$path',
                 path=path)
 
+    def test_conduct(self):
+        path = rand_num()
+        for base in ('conduct.kubernetes.io', 'conduct.k8s.io'):
+            self.assert_temp_redirect(base + '/$path',
+                'https://github.com/kubernetes/community/tree/master/committee-code-of-conduct/$path',
+                path=path)
+
     def test_dl(self):
         for base in ('dl.k8s.io', 'dl.kubernetes.io'):
             # Valid release version numbers
