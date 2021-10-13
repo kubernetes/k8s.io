@@ -17,9 +17,11 @@ limitations under the License.
 package main
 
 import (
+	"reflect"
 	"testing"
 
 	admin "google.golang.org/api/admin/directory/v1"
+	groupssettings "google.golang.org/api/groupssettings/v1"
 	"k8s.io/k8s.io/groups/fake"
 )
 
@@ -61,6 +63,37 @@ func augmentAdminServiceFakeClient(fakeClient *fake.FakeAdminServiceClient) *fak
 				Role:  OwnerRole,
 				Id:    "m2-group2@email.com",
 			},
+		},
+	}
+
+	return fakeClient
+}
+
+func augmentGroupServiceFakeClient(fakeClient *fake.FakeGroupServiceClient) *fake.FakeGroupServiceClient {
+	fakeClient.GsGroups = map[string]*groupssettings.Groups{
+		"group1@email.com": {
+			AllowExternalMembers:     "true",
+			WhoCanJoin:               "CAN_REQUEST_TO_JOIN",
+			WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
+			WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
+			WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
+			WhoCanModerateMembers:    "OWNERS_AND_MANAGERS",
+			WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
+			WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
+			MessageModerationLevel:   "MODERATE_NONE",
+			MembersCanPostAsTheGroup: "true",
+		},
+		"group2@email.com": {
+			AllowExternalMembers:     "true",
+			WhoCanJoin:               "INVITED_CAN_JOIN",
+			WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
+			WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
+			WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
+			WhoCanModerateMembers:    "OWNERS_ONLY",
+			WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
+			WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
+			MessageModerationLevel:   "MODERATE_NONE",
+			MembersCanPostAsTheGroup: "false",
 		},
 	}
 
@@ -497,6 +530,119 @@ func TestRemoveMembersFromGroup(t *testing.T) {
 				getMemberListInPrintableForm(c.expectedMembers),
 				getMemberListInPrintableForm(result.Members),
 			)
+		}
+	}
+}
+
+func TestUpdateGroupSettings(t *testing.T) {
+	config.ConfirmChanges = true
+	cases := []struct {
+		desc             string
+		g                GoogleGroup
+		expectedSettings *groupssettings.Groups
+	}{
+		{
+			desc: "group settings match, no change",
+			g: GoogleGroup{
+				EmailId: "group1@email.com",
+				Settings: map[string]string{
+					"AllowExternalMembers":     "true",
+					"WhoCanJoin":               "CAN_REQUEST_TO_JOIN",
+					"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+					"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+					"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+					"WhoCanModerateMembers":    "OWNERS_AND_MANAGERS",
+					"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+					"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+					"MessageModerationLevel":   "MODERATE_NONE",
+					"MembersCanPostAsTheGroup": "true",
+				},
+			},
+			expectedSettings: &groupssettings.Groups{
+				AllowExternalMembers:     "true",
+				WhoCanJoin:               "CAN_REQUEST_TO_JOIN",
+				WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
+				WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
+				WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
+				WhoCanModerateMembers:    "OWNERS_AND_MANAGERS",
+				WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
+				WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
+				MessageModerationLevel:   "MODERATE_NONE",
+				MembersCanPostAsTheGroup: "true",
+			},
+		},
+		{
+			desc: "group settings don't match, attempt to update",
+			g: GoogleGroup{
+				EmailId: "group1@email.com",
+				Settings: map[string]string{
+					"AllowExternalMembers":     "true",
+					"WhoCanJoin":               "CAN_REQUEST_TO_JOIN",
+					"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+					"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+					"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+					"WhoCanModerateMembers":    "OWNERS_ONLY",
+					"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+					"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+					"MessageModerationLevel":   "MODERATE_NONE",
+					"MembersCanPostAsTheGroup": "false",
+				},
+			},
+			expectedSettings: &groupssettings.Groups{
+				AllowExternalMembers:     "true",
+				WhoCanJoin:               "CAN_REQUEST_TO_JOIN",
+				WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
+				WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
+				WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
+				WhoCanModerateMembers:    "OWNERS_ONLY",
+				WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
+				WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
+				MessageModerationLevel:   "MODERATE_NONE",
+				MembersCanPostAsTheGroup: "false",
+			},
+		},
+		{
+			desc: "group settings don't match, attempt to update (test for defaults being set)",
+			g:    GoogleGroup{EmailId: "group1@email.com", Settings: map[string]string{}},
+			expectedSettings: &groupssettings.Groups{
+				AllowExternalMembers:     "true",
+				WhoCanJoin:               "INVITED_CAN_JOIN",
+				WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
+				WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
+				WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
+				WhoCanModerateMembers:    "OWNERS_AND_MANAGERS",
+				WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
+				WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
+				MessageModerationLevel:   "MODERATE_NONE",
+				MembersCanPostAsTheGroup: "false",
+			},
+		},
+	}
+
+	errFunc = func(err error) bool {
+		return err != nil
+	}
+	for _, c := range cases {
+		fakeClient := fake.NewFakeGroupServiceClient()
+		fakeClient = augmentGroupServiceFakeClient(fakeClient)
+
+		groupSvc, err := NewGroupServiceWithClient(fakeClient)
+		if err != nil {
+			t.Errorf("error creating client %w", err)
+		}
+
+		err = groupSvc.UpdateGroupSettings(c.g)
+		if err != nil {
+			t.Errorf("error while executing UpdateGroupSettings for case %s: %s", c.desc, err.Error())
+		}
+
+		result, err := fakeClient.Get(c.g.EmailId)
+		if err != nil {
+			t.Errorf("error while getting groupsettings of group with groupKey %s: %w", c.g.EmailId, err)
+		}
+
+		if !reflect.DeepEqual(result, c.expectedSettings) {
+			t.Errorf("unexpected groupsettings for case %s, expected: %#v, got: %#v", c.desc, c.expectedSettings, result)
 		}
 	}
 }
