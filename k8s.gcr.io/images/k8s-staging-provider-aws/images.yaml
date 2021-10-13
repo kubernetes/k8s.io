@@ -32,6 +32,7 @@
     "sha256:6dda9d13dfe77e4440097c0aee379c703185fad7c01c4b96909f6bc28ea2dfd4": ["v1.2.1-amazonlinux"]
     "sha256:b39ea6bb1496aa57a50898d1c94c24abf7f0a02c4077aa2285ad24449734b804": ["v1.3.0"]
     "sha256:e2073961c0ba1ac67eeb3361a6c6f4c5e2e80af6cc3bea0a39e647dffb3b5fd8": ["v1.3.1"]
+    "sha256:5c03401df9e8fa384b66efc8bfd954a0371ad584a9430eca7d4d9338654d7fe0": ["v1.4.0"]
 - name: cloud-controller-manager
   dmap:
     "sha256:f900d8b4a358847cd311950c7802f938dad083f645eee784cd52b7aec0de8dfb": ["v1.18.0-alpha.0"]
