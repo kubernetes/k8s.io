@@ -36,5 +36,8 @@ for image in "${images[@]}"; do
         --filter="${tag_filter}" | \
     sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/' | \
     # fix for v0.0.22
-    sed -e 's/981d4a484d156273a673b3d4e130ce6a7e09d25d8275b4acef78df697a67d7b2/1db2d1879a4ef656e3037a1d32be6bdb08cb10ea5800b6cca393361d6ac0330c/g'
+    sed -e 's/981d4a484d156273a673b3d4e130ce6a7e09d25d8275b4acef78df697a67d7b2/1db2d1879a4ef656e3037a1d32be6bdb08cb10ea5800b6cca393361d6ac0330c/g' | \
+    # v1.0.0-rc.1 was rebuilt for base image CVE fix. But since the prod tag is immutable we need to use the old one for the RC
+    sed -e 's/80b95ffe1d3f6a53228811163f0cb19ce3f16dbacc667253ac1457d2248415ff/551b115899673133513093245b009d41bb2f520f6ba758c99ef020e23366f810/g' | \
+    sed -e 's/4db5d24dbe7610199d27f0791a1b238bcb06de80305755a0d558c358c5467327/6a7f1eeb51fcd396f628821ed9b06d86723e91dc83c0e77e1c5185ac9bc52398/g'
 done
