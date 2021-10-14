@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:kubernetes-public.svc.id.goog[test-pods/tf-monitoring-deployer]"
+      ],
+      "role": "roles/iam.workloadIdentityUser"
+    }
+  ],
+  "version": 1
+}
