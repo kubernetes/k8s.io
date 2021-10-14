@@ -74,6 +74,7 @@ readonly DNS_GROUP="k8s-infra-dns-admins@kubernetes.io"
 readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
     "${LEGACY_CLUSTER_TERRAFORM_BUCKET}:${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-aws:k8s-infra-aws-admins@kubernetes.io
+    k8s-infra-tf-monitoring:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-prow-clusters:k8s-infra-prow-oncall@kubernetes.io
     k8s-infra-tf-public-clusters:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-public-pii:"${CLUSTER_ADMINS_GROUP}"
@@ -471,7 +472,7 @@ function ensure_main_project() {
     color 6 "Ensuring specific workload identity serviceaccounts exist in: ${project}"; (
         local svcacct_args cluster_args
 
-        color 6 "Ensuring GCP Auditor serviceaccount"
+        color 6 "Ensuring GCP Auditor service account"
         # roles/viewer on kubernetes-public is a bootstrap; the true purpose
         # is custom role audit.viewer on the kubernetes.io org, but that is
         # handled by ensure-organization.sh
@@ -479,19 +480,24 @@ function ensure_main_project() {
         cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
-        color 6 "Ensuring DNS Updater serviceaccount"
+        color 6 "Ensuring DNS Updater service account"
         svcacct_args=("${project}" "k8s-infra-dns-updater" "roles/dns.admin")
         cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
-        color 6 "Ensuring Monitoring Viewer serviceaccount"
+        color 6 "Ensuring Monitoring Viewer service account"
         svcacct_args=("${project}" "k8s-infra-monitoring-viewer" "roles/monitoring.viewer")
         cluster_args=("${project}" "monitoring")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
-        color 6 "Ensuring Kubernetes External Secrets serviceaccount"
+        color 6 "Ensuring Kubernetes External Secrets service account"
         svcacct_args=("${project}" "kubernetes-external-secrets" "roles/secretmanager.secretAccessor")
         cluster_args=("${project}" "kubernetes-external-secrets")
+        ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
+
+        color 6 "Ensure Monitoring Admin service account for Terraform"
+        svcacct_args=("${project}" "tf-monitoring-deployer" "roles/monitoring.admin")
+        cluster_args=("${project}" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
     ) 2>&1 | indent
 
