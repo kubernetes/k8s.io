@@ -41,6 +41,16 @@ resource "google_project_service" "project" {
   service = each.value
 }
 
+// Ensure ONLY k8s-infra-gcp-org-admins@kubernetes.io has owner access
+// to this project
+resource "google_project_iam_binding" "owner" {
+  project = google_project.project.id
+  role    = "roles/owner"
+  members = [
+    "group:k8s-infra-gcp-org-admins@kubernetes.io"
+  ]
+}
+
 data "google_project" "kubernetes_public" {
   project_id = "kubernetes-public"
 }
