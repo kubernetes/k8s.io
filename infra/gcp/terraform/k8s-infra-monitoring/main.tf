@@ -24,4 +24,14 @@ data "google_monitoring_notification_channel" "slack_alerts" {
   project      = data.google_project.project.project_id
 }
 
-
+resource "google_monitoring_notification_channel" "email" {
+  for_each = toset([
+    "steering@kubernetes.io",
+    "sig-k8s-infra-leads@kubernetes.io",
+  ])
+  display_name = each.value
+  type = "email"
+  labels = {
+    email_address = each.value
+  }
+}
