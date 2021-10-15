@@ -1,1 +1,3 @@
-# No images yet
+- name: pod-security-webhook
+  dmap:
+    "sha256:818c11eaaf3863a9f1c9e8de9c310ac85b29cd89ebc54f832aa212bb52b5e7af": ["v1.22-alpha.0"]
