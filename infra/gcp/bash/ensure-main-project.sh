@@ -498,7 +498,7 @@ function ensure_main_project() {
 
         color 6 "Ensure Monitoring Admin service account for Terraform"
         svcacct_args=("${project}" "tf-monitoring-deployer" "roles/monitoring.admin")
-        cluster_args=("${project}" "${PROWJOB_POD_NAMESPACE}")
+        cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
     ) 2>&1 | indent
 
