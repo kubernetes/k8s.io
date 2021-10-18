@@ -79,6 +79,7 @@ data "google_iam_role" "service_account_lister" {
   name = "${data.google_organization.org.name}/roles/iam.serviceAccountLister"
 }
 
+// "Empower cluster admins" is what ensure-main-project.sh says
 resource "google_project_iam_member" "cluster_admins" {
   for_each = local.cluster_admins_group_iam
   project  = google_project.project.project_id
