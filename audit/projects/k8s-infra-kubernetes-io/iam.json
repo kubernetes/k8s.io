@@ -2,7 +2,7 @@
   "bindings": [
     {
       "members": [
-        "user:spiffxp@google.com"
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
       ],
       "role": "roles/owner"
     }
