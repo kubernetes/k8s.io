@@ -35,10 +35,13 @@ locals {
   ]
 
 
-  cluster_users_group_iam = [
+  cluster_admins_group_iam = [
     "roles/compute.viewer",
     "roles/container.admin",
     data.google_iam_role.service_account_lister.name,
+  ]
+
+  cluster_users_group_iam = [
     "roles/container.clusterViewer"
   ]
 }
@@ -64,8 +67,8 @@ resource "google_project" "project" {
 }
 
 // Services we need
-resource "google_project_service" "this" {
-  for_each                   = toset(distinct(local.project_services))
+resource "google_project_service" "services" {
+  for_each                   = toset(local.project_services)
   project                    = google_project.project.project_id
   service                    = each.value
   disable_dependent_services = true
@@ -74,6 +77,13 @@ resource "google_project_service" "this" {
 // Role created by ensure-organization.sh, use a data source to ensure it exists
 data "google_iam_role" "service_account_lister" {
   name = "${data.google_organization.org.name}/roles/iam.serviceAccountLister"
+}
+
+resource "google_project_iam_member" "cluster_admins" {
+  for_each = local.cluster_admins_group_iam
+  project  = google_project.project.project_id
+  role     = each.value
+  member   = "group:${var.cluster_admins_group}"
 }
 
 // "Empowering cluster users" is what ensure-main-project.sh says
