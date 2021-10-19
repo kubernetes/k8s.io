@@ -247,6 +247,26 @@ groups:
       - justinsb@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-azure-admins@kubernetes.io
+    name: k8s-infra-azure-admins
+    description: |-
+      ACL for Azure admins
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    managers:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-equinix-admins@kubernetes.io
+    name: k8s-infra-equinix-admins
+    description: |-
+      ACL for Equinix admins
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    managers:
+      - sig-k8s-infra-leads@kubernetes.io
+
   - email-id: k8s-infra-artifact-admins@kubernetes.io
     name: k8s-infra-artifact-admins
     description: |-
