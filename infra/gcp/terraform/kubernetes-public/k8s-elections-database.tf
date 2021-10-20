@@ -95,6 +95,14 @@ resource "google_sql_user" "db_user" {
   password = random_password.db_password.result
 }
 
+resource "google_project_iam_binding" "cloud_sql_access" {
+  project = data.google_project.project.project_id
+  role    = "roles/cloudsql.editor"
+  members = [
+    "group:k8s-infra-rbac-elekto@kubernetes.io"
+  ]
+}
+
 resource "google_compute_global_address" "db_private_ip_address" {
   name          = "k8s-infra-db-election-private-ip"
   project       = data.google_project.project.project_id
