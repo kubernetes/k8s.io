@@ -18,7 +18,7 @@ spec:
         app: elekto
     spec:
       containers:
-        - image: ghcr.io/elekto-io/elekto:sha-46597d4
+        - image: ghcr.io/elekto-io/elekto:norevoke1
           imagePullPolicy: Always
           name: elekto
           ports:
