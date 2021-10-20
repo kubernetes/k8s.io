@@ -35,6 +35,12 @@
     },
     {
       "members": [
+        "group:k8s-infra-rbac-elekto@kubernetes.io"
+      ],
+      "role": "roles/cloudsql.editor"
+    },
+    {
+      "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io"
       ],
       "role": "roles/compute.loadBalancerAdmin"
