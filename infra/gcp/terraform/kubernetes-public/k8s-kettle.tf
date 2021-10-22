@@ -94,8 +94,4 @@ resource "google_bigquery_data_transfer_config" "bq_data_transfer_kettle" {
     source_dataset_id           = "build"
     source_project_id           = "k8s-gubernator"
   }
-
-  email_preferences {
-    enable_failure_email = false
-  }
 }
