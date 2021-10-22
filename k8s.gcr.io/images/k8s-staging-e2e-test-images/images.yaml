@@ -18,6 +18,7 @@
   dmap:
     "sha256:60629fe42de6260c9b930b48a2923b69168dc1c71fa5f762f70036477ffd74b6": ["1.2"]
     "sha256:b9c08bcbea5b933ddb324e360b5bd2c2b611e7db30258a5bbf1373eb563c4c87": ["1.3"]
+    "sha256:c2ba46d9cf4549528f80d4850630b712372715e0c556d35d5c3016144365d882": ["1.4"]
 - name: busybox
   dmap:
     "sha256:39e1e963e5310e9c313bad51523be012ede7b35bb9316517d19089a010356592": ["1.29-1"]
@@ -33,6 +34,7 @@
 - name: glusterdynamic-provisioner
   dmap:
     "sha256:8bc20b52ce066dd4ea3d9eaac40c04ea8a77f47c33789676580cf4c7c9ea3c3d": ["v1.0"]
+    "sha256:7ed3bfb1429e97f721cbd8b2953ffb1f0186e89c1c99ee0e919d563b0caa81d2": ["v1.3"]
 - name: httpd
   dmap:
     "sha256:5fa11b592a35a7dd992a7a6540eb7935e0b386558e57fee863ce9af3960a5ed1": ["2.4.38-alpine"]
@@ -44,6 +46,7 @@
 - name: ipc-utils
   dmap:
     "sha256:06e2eb28e041f114941fba36b83f40c313f58a29d8b60777bde1fc4650e0b4f2": ["1.2"]
+    "sha256:647d092bada3b46c449d875adf31d71c1dd29c244e9cca6a04fddf9d6bcac136": ["1.3"]
 - name: jessie-dnsutils
   dmap:
     "sha256:31183fd28aa9b4af81329e1886060492cfa67dd94e9d1132e00ed032ce685187": ["1.2"]
@@ -73,9 +76,11 @@
 - name: node-perf/npb-ep
   dmap:
     "sha256:ac7a746f351635663abb0c240c0af71b229d1e321e478664c7816de4f4176818": ["1.1"]
+    "sha256:90b5cfc5451428aad4dd6af9960640f2506804d35aa05e83c11bf0a46ac318c8": ["1.2"]
 - name: node-perf/npb-is
   dmap:
     "sha256:4d0c0cef373fba0752721552f8d7a478156c255c8dbf90522165784e790f1ab7": ["1.1"]
+    "sha256:8285539c79625b192a5e33fc3d21edc1a7776fb9afe15fae3b5037a7a8020839": ["1.2"]
 - name: node-perf/tf-wide-deep
   dmap:
     "sha256:d5d5822ef70f81db66c1271662e1b9d4556fb267ac7ae09dee5d91aa10736431": ["1.1"]
@@ -123,12 +128,16 @@
 - name: volume/gluster
   dmap:
     "sha256:660af738347dd94cdd8069647136c84f11d03fc6dde3af0e746b302d3dfd10ec": ["1.2"]
+    "sha256:033a12fe65438751690b519cebd4135a3485771086bcf437212b7b886bb7956c": ["1.3"]
 - name: volume/iscsi
   dmap:
     "sha256:2240be8a918ad3d70d68f0b977ccdd360e72ed5a92ab8f26e6aeee8edad02525": ["2.2"]
+    "sha256:b239250b2c94456131e26d8e68e7a692a3a52469863cb6d2e5aca543111b26c4": ["2.3"]
 - name: volume/nfs
   dmap:
     "sha256:124a375b4f930627c65b2f84c0d0f09229a96bc527eec18ad0eeac150b96d1c2": ["1.2"]
+    "sha256:3bda73f2428522b0e342af80a0b9679e8594c2126f2b3cca39ed787589741b9e": ["1.3"]
 - name: volume/rbd
   dmap:
     "sha256:eae2077ff658ce99e1224afbba6c18ffbcab0f3cf8b0a6536ac57643c7d950d0": ["1.0.3"]
+    "sha256:5fc44eaded09ed71e91d8291f508f0486dca730f4bb52f35510aef3661d1c70d": ["1.0.4"]
