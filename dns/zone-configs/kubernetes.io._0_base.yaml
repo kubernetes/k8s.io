@@ -184,9 +184,6 @@ testgrid:
 pfjqlwt67ty3.testgrid:
   type: CNAME
   value: gv-bymjxdpk6uolpo.dv.googlehosted.com.
-velodrome:
-  type: CNAME
-  value: velodrome.k8s.io.
 youtube:
   type: CNAME
   value: redirect.k8s.io.

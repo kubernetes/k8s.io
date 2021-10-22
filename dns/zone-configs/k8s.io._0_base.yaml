@@ -263,10 +263,6 @@ testgrid:
 7ujw4gp3z2cq.testgrid:
   type: CNAME
   value: gv-t2drtmd73nsutd.dv.googlehosted.com.
-# Project metrics.  Running in GKE (@spiffxp, @cjwagner)
-velodrome:
-  type: A
-  value: 104.197.200.129
 # https://github.com/kubernetes-sigs/kind docs (@bentheelder, @munnerz)
 kind.sigs:
   type: CNAME
