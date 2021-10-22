@@ -30,9 +30,14 @@ resource "google_monitoring_notification_channel" "email" {
     "sig-k8s-infra-leads@kubernetes.io",
   ])
   display_name = each.value
-  project = data.google_project.project.project_id
-  type = "email"
+  project      = data.google_project.project.project_id
+  type         = "email"
   labels = {
     email_address = each.value
   }
+}
+
+resource "google_monitoring_dashboard" "gcs_dashboard" {
+  project        = data.google_project.project.project_id
+  dashboard_json = file("./dashboards/cloud-storage-monitoring.json")
 }
