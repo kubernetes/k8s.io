@@ -200,9 +200,6 @@ class RedirTest(HTTPTestCase):
                 base + 'logo',
                 'https://branding.cncf.io/projects/kubernetes/')
             self.assert_temp_redirect(
-                base + 'test-health',
-                'http://velodrome.k8s.io/dashboard/db/bigquery-metrics')
-            self.assert_temp_redirect(
                 base + 'pr-dashboard',
                 'https://gubernator.k8s.io/pr')
 
