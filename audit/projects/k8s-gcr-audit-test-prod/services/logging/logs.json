@@ -6,6 +6,5 @@
   "projects/k8s-gcr-audit-test-prod/logs/clouderrorreporting.googleapis.com%2Freported_errors",
   "projects/k8s-gcr-audit-test-prod/logs/run.googleapis.com%2Frequests",
   "projects/k8s-gcr-audit-test-prod/logs/run.googleapis.com%2Fstderr",
-  "projects/k8s-gcr-audit-test-prod/logs/run.googleapis.com%2Fstdout",
-  "projects/k8s-gcr-audit-test-prod/logs/run.googleapis.com%2Fvarlog%2Fsystem"
+  "projects/k8s-gcr-audit-test-prod/logs/run.googleapis.com%2Fstdout"
 ]
