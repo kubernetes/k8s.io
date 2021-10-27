@@ -72,6 +72,17 @@ func NewAdminService(ctx context.Context, clientOption option.ClientOption) (Adm
 }
 
 func NewAdminServiceWithClient(client AdminServiceClient) (AdminService, error) {
+	errFunc := func(err error) bool {
+		apierr, ok := err.(*googleapi.Error)
+		return ok && apierr.Code == http.StatusNotFound
+	}
+	return &adminService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
+}
+
+func NewAdminServiceWithClientAndErrFunc(client AdminServiceClient, errFunc clientErrCheckFunc) (AdminService, error) {
 	return &adminService{
 		client:            client,
 		checkForAPIErr404: errFunc,
@@ -88,6 +99,17 @@ func NewGroupService(ctx context.Context, clientOption option.ClientOption) (Gro
 }
 
 func NewGroupServiceWithClient(client GroupServiceClient) (GroupService, error) {
+	errFunc := func(err error) bool {
+		apierr, ok := err.(*googleapi.Error)
+		return ok && apierr.Code == http.StatusNotFound
+	}
+	return &groupService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
+}
+
+func NewGroupServiceWithClientAndErrFunc(client GroupServiceClient, errFunc clientErrCheckFunc) (GroupService, error) {
 	return &groupService{
 		client:            client,
 		checkForAPIErr404: errFunc,
@@ -100,11 +122,6 @@ func NewGroupServiceWithClient(client GroupServiceClient) (GroupService, error) 
 // by the client. The boolean return signifies if the
 // check for the error passed or not.
 type clientErrCheckFunc func(error) bool
-
-var errFunc clientErrCheckFunc = func(err error) bool {
-	apierr, ok := err.(*googleapi.Error)
-	return ok && apierr.Code == http.StatusNotFound
-}
 
 type adminService struct {
 	client            AdminServiceClient

@@ -25,81 +25,6 @@ import (
 	"k8s.io/k8s.io/groups/fake"
 )
 
-func augmentAdminServiceFakeClient(fakeClient *fake.FakeAdminServiceClient) *fake.FakeAdminServiceClient {
-	fakeClient.Groups = map[string]*admin.Group{
-		"group1@email.com": {
-			Email:       "group1@email.com",
-			Name:        "group1",
-			Description: "group1",
-		},
-		"group2@email.com": {
-			Email:       "group2@email.com",
-			Name:        "group2",
-			Description: "group2",
-		},
-	}
-
-	fakeClient.Members = map[string]map[string]*admin.Member{
-		"group1@email.com": {
-			"m1-group1@email.com": {
-				Email: "m1-group1@email.com",
-				Role:  MemberRole,
-				Id:    "m1-group1@email.com",
-			},
-			"m2-group1@email.com": {
-				Email: "m2-group1@email.com",
-				Role:  ManagerRole,
-				Id:    "m2-group1@email.com",
-			},
-		},
-		"group2@email.com": {
-			"m1-group2@email.com": {
-				Email: "m1-group2@email.com",
-				Role:  MemberRole,
-				Id:    "m1-group2@email.com",
-			},
-			"m2-group2@email.com": {
-				Email: "m2-group2@email.com",
-				Role:  OwnerRole,
-				Id:    "m2-group2@email.com",
-			},
-		},
-	}
-
-	return fakeClient
-}
-
-func augmentGroupServiceFakeClient(fakeClient *fake.FakeGroupServiceClient) *fake.FakeGroupServiceClient {
-	fakeClient.GsGroups = map[string]*groupssettings.Groups{
-		"group1@email.com": {
-			AllowExternalMembers:     "true",
-			WhoCanJoin:               "CAN_REQUEST_TO_JOIN",
-			WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
-			WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
-			WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
-			WhoCanModerateMembers:    "OWNERS_AND_MANAGERS",
-			WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
-			WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
-			MessageModerationLevel:   "MODERATE_NONE",
-			MembersCanPostAsTheGroup: "true",
-		},
-		"group2@email.com": {
-			AllowExternalMembers:     "true",
-			WhoCanJoin:               "INVITED_CAN_JOIN",
-			WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
-			WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
-			WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
-			WhoCanModerateMembers:    "OWNERS_ONLY",
-			WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
-			WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
-			MessageModerationLevel:   "MODERATE_NONE",
-			MembersCanPostAsTheGroup: "false",
-		},
-	}
-
-	return fakeClient
-}
-
 // This checks for equality of two member lists based on two things:
 // 1. Email ID
 // 2. Role
@@ -108,19 +33,21 @@ func checkForMemberListEquality(a, b []*admin.Member) bool {
 		return false
 	}
 
+	aMap := make(map[string]*admin.Member)
 	bMap := make(map[string]*admin.Member)
 	for i := 0; i < len(b); i++ {
+		aMap[a[i].Email] = a[i]
 		bMap[b[i].Email] = b[i]
 	}
 
-	for i := 0; i < len(a); i++ {
-		if inB, ok := bMap[a[i].Email]; ok {
-			if inB.Role != a[i].Role {
-				return false
-			}
-			continue
+	for aEmail, aMember := range aMap {
+		inB, ok := bMap[aEmail]
+		if !ok {
+			return false
 		}
-		return false
+		if inB.Role != aMember.Role {
+			return false
+		}
 	}
 
 	return true
@@ -135,19 +62,21 @@ func checkForGroupListEquality(a, b []*admin.Group) bool {
 		return false
 	}
 
+	aMap := make(map[string]*admin.Group)
 	bMap := make(map[string]*admin.Group)
 	for i := 0; i < len(b); i++ {
+		aMap[a[i].Email] = a[i]
 		bMap[b[i].Email] = b[i]
 	}
 
-	for i := 0; i < len(a); i++ {
-		if inB, ok := bMap[a[i].Email]; ok {
-			if inB.Name != a[i].Name || inB.Description != a[i].Description {
-				return false
-			}
-			continue
+	for aEmail, aGroup := range aMap {
+		inB, ok := bMap[aEmail]
+		if !ok {
+			return false
 		}
-		return false
+		if inB.Name != aGroup.Name || inB.Description != aGroup.Description {
+			return false
+		}
 	}
 
 	return true
@@ -162,19 +91,21 @@ func checkForAdminGroupGoogleGroupEquality(a []*admin.Group, b []GoogleGroup) bo
 		return false
 	}
 
+	aMap := make(map[string]*admin.Group)
 	bMap := make(map[string]GoogleGroup)
 	for i := 0; i < len(b); i++ {
+		aMap[a[i].Email] = a[i]
 		bMap[b[i].EmailId] = b[i]
 	}
 
-	for i := 0; i < len(a); i++ {
-		if inB, ok := bMap[a[i].Email]; ok {
-			if inB.Name != a[i].Name || inB.Description != a[i].Description {
-				return false
-			}
-			continue
+	for aEmail, aGroup := range aMap {
+		inB, ok := bMap[aEmail]
+		if !ok {
+			return false
 		}
-		return false
+		if inB.Name != aGroup.Name || inB.Description != aGroup.Description {
+			return false
+		}
 	}
 
 	return true
@@ -240,14 +171,13 @@ func TestAddOrUpdateGroupMembers(t *testing.T) {
 		},
 	}
 
-	errFunc = func(err error) bool {
+	errFunc := func(err error) bool {
 		return err != nil
 	}
 	for _, c := range cases {
-		fakeClient := fake.NewFakeAdminServiceClient()
-		fakeClient = augmentAdminServiceFakeClient(fakeClient)
+		fakeClient := fake.NewAugmentedFakeAdminServiceClient()
 
-		adminSvc, err := NewAdminServiceWithClient(fakeClient)
+		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
 			t.Errorf("error creating client %w", err)
 		}
@@ -312,14 +242,13 @@ func TestCreateOrUpdateGroupIfNescessary(t *testing.T) {
 		},
 	}
 
-	errFunc = func(err error) bool {
+	errFunc := func(err error) bool {
 		return err != nil
 	}
 	for _, c := range cases {
-		fakeClient := fake.NewFakeAdminServiceClient()
-		fakeClient = augmentAdminServiceFakeClient(fakeClient)
+		fakeClient := fake.NewAugmentedFakeAdminServiceClient()
 
-		adminSvc, err := NewAdminServiceWithClient(fakeClient)
+		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
 			t.Errorf("error creating client %w", err)
 		}
@@ -358,22 +287,20 @@ func TestDeleteGroupsIfNecessary(t *testing.T) {
 			},
 		},
 		{
-			desc: "mismatch in desired state, delete group3 group",
+			desc: "mismatch in desired state, delete group2",
 			desiredState: []GoogleGroup{
 				{EmailId: "group1@email.com", Name: "group1", Description: "group1"},
-				{EmailId: "group2@email.com", Name: "group2", Description: "group2"},
 			},
 		},
 	}
 
-	errFunc = func(err error) bool {
+	errFunc := func(err error) bool {
 		return err != nil
 	}
 	for _, c := range cases {
-		fakeClient := fake.NewFakeAdminServiceClient()
-		fakeClient = augmentAdminServiceFakeClient(fakeClient)
+		fakeClient := fake.NewAugmentedFakeAdminServiceClient()
 
-		adminSvc, err := NewAdminServiceWithClient(fakeClient)
+		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
 			t.Errorf("error creating client %w", err)
 		}
@@ -435,14 +362,13 @@ func TestRemoveOwnerOrManagersFromGroup(t *testing.T) {
 		},
 	}
 
-	errFunc = func(err error) bool {
+	errFunc := func(err error) bool {
 		return err != nil
 	}
 	for _, c := range cases {
-		fakeClient := fake.NewFakeAdminServiceClient()
-		fakeClient = augmentAdminServiceFakeClient(fakeClient)
+		fakeClient := fake.NewAugmentedFakeAdminServiceClient()
 
-		adminSvc, err := NewAdminServiceWithClient(fakeClient)
+		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
 			t.Errorf("error creating client %w", err)
 		}
@@ -502,14 +428,13 @@ func TestRemoveMembersFromGroup(t *testing.T) {
 		},
 	}
 
-	errFunc = func(err error) bool {
+	errFunc := func(err error) bool {
 		return err != nil
 	}
 	for _, c := range cases {
-		fakeClient := fake.NewFakeAdminServiceClient()
-		fakeClient = augmentAdminServiceFakeClient(fakeClient)
+		fakeClient := fake.NewAugmentedFakeAdminServiceClient()
 
-		adminSvc, err := NewAdminServiceWithClient(fakeClient)
+		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
 			t.Errorf("error creating client %w", err)
 		}
@@ -619,14 +544,13 @@ func TestUpdateGroupSettings(t *testing.T) {
 		},
 	}
 
-	errFunc = func(err error) bool {
+	errFunc := func(err error) bool {
 		return err != nil
 	}
 	for _, c := range cases {
-		fakeClient := fake.NewFakeGroupServiceClient()
-		fakeClient = augmentGroupServiceFakeClient(fakeClient)
+		fakeClient := fake.NewAugmentedFakeGroupServiceClient()
 
-		groupSvc, err := NewGroupServiceWithClient(fakeClient)
+		groupSvc, err := NewGroupServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
 			t.Errorf("error creating client %w", err)
 		}
