@@ -33,10 +33,10 @@ type state struct {
 	groupClient GroupServiceClient
 }
 
-// isStateReconciled constructs the current state of the world using
-// adminClient and groupClient and checks if it is reconciled against
-// the desiredState and matches it.
-func (s state) isStateReconciled(desiredState []GoogleGroup) error {
+// isReconciled constructs the current state of the world using adminClient
+// and groupClient and checks if it is reconciled against the desiredState
+// and matches it.
+func (s state) isReconciled(desiredState []GoogleGroup) error {
 	// incrementally construct the state of the world and check
 	// against the desiredState.
 	// see if the groups that exist are reconciled or not.
@@ -113,6 +113,25 @@ func constructMemberListFromGoogleGroup(g GoogleGroup) []*admin.Member {
 }
 
 func constructGroupSettingsFromGoogleGroup(g GoogleGroup) *groupssettings.Groups {
+	requiredSettingsDefaults := map[string]string{
+		"AllowExternalMembers":     "true",
+		"WhoCanJoin":               "INVITED_CAN_JOIN",
+		"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+		"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+		"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+		"WhoCanModerateMembers":    "OWNERS_AND_MANAGERS",
+		"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+		"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+		"MessageModerationLevel":   "MODERATE_NONE",
+		"MembersCanPostAsTheGroup": "false",
+	}
+
+	for s, v := range requiredSettingsDefaults {
+		if _, ok := g.Settings[s]; !ok {
+			g.Settings[s] = v
+		}
+	}
+
 	return &groupssettings.Groups{
 		AllowExternalMembers:     g.Settings["AllowExternalMembers"],
 		WhoCanJoin:               g.Settings["WhoCanJoin"],
@@ -199,8 +218,18 @@ func TestRestrictionForPath(t *testing.T) {
 func TestReconcileGroups(t *testing.T) {
 	config.ConfirmChanges = true
 	cases := []struct {
-		desc         string
-		desiredState []GoogleGroup
+		desc string
+		// desired state is not nescessarily the same as expected state.
+		// We might need the two of them to differ in cases where we want
+		// to test out functionality where our desired state warrants for
+		// a change but in actuality this change should not occur - which
+		// is signified via expected state. shouldConsiderExpectedState is
+		// what differentiates what we should consider when comparing results.
+		// If false - desired is same as expected. This is done because in
+		// most cases these two are same and we can avoid clutter.
+		shouldConsiderExpectedState bool
+		desiredState                []GoogleGroup
+		expectedState               []GoogleGroup
 	}{
 		{
 			desc: "state matches, nothing to reconcile",
@@ -401,6 +430,84 @@ func TestReconcileGroups(t *testing.T) {
 			},
 		},
 		{
+			desc: "member with MEMBER role deleted from group1 with ReconcileMembers setting disabled, no change",
+			desiredState: []GoogleGroup{
+				{
+					EmailId: "group1@email.com", Name: "group1", Description: "group1",
+					Settings: map[string]string{
+						"AllowExternalMembers":     "true",
+						"WhoCanJoin":               "CAN_REQUEST_TO_JOIN",
+						"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+						"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+						"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+						"WhoCanModerateMembers":    "OWNERS_AND_MANAGERS",
+						"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+						"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+						"MessageModerationLevel":   "MODERATE_NONE",
+						"MembersCanPostAsTheGroup": "true",
+						"ReconcileMembers":         "false",
+					},
+					Members:  []string{}, // member removed
+					Managers: []string{"m2-group1@email.com"},
+				},
+				{
+					EmailId: "group2@email.com", Name: "group2", Description: "group2",
+					Settings: map[string]string{
+						"AllowExternalMembers":     "true",
+						"WhoCanJoin":               "INVITED_CAN_JOIN",
+						"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+						"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+						"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+						"WhoCanModerateMembers":    "OWNERS_ONLY",
+						"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+						"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+						"MessageModerationLevel":   "MODERATE_NONE",
+						"MembersCanPostAsTheGroup": "false",
+					},
+					Members: []string{"m1-group2@email.com"},
+					Owners:  []string{"m2-group2@email.com"},
+				},
+			},
+			shouldConsiderExpectedState: true,
+			expectedState: []GoogleGroup{
+				{
+					EmailId: "group1@email.com", Name: "group1", Description: "group1",
+					Settings: map[string]string{
+						"AllowExternalMembers":     "true",
+						"WhoCanJoin":               "CAN_REQUEST_TO_JOIN",
+						"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+						"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+						"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+						"WhoCanModerateMembers":    "OWNERS_AND_MANAGERS",
+						"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+						"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+						"MessageModerationLevel":   "MODERATE_NONE",
+						"MembersCanPostAsTheGroup": "true",
+						"ReconcileMembers":         "false", // setting disabled.
+					},
+					Members:  []string{"m1-group1@email.com"}, // member not removed.
+					Managers: []string{"m2-group1@email.com"},
+				},
+				{
+					EmailId: "group2@email.com", Name: "group2", Description: "group2",
+					Settings: map[string]string{
+						"AllowExternalMembers":     "true",
+						"WhoCanJoin":               "INVITED_CAN_JOIN",
+						"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+						"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+						"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+						"WhoCanModerateMembers":    "OWNERS_ONLY",
+						"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+						"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+						"MessageModerationLevel":   "MODERATE_NONE",
+						"MembersCanPostAsTheGroup": "false",
+					},
+					Members: []string{"m1-group2@email.com"},
+					Owners:  []string{"m2-group2@email.com"},
+				},
+			},
+		},
+		{
 			desc: "group2 deleted, attempt to reconcile",
 			desiredState: []GoogleGroup{
 				{
@@ -482,24 +589,104 @@ func TestReconcileGroups(t *testing.T) {
 				},
 			},
 		},
+		{
+			desc: "move member from MEMBER role in group1 to OWNER role.",
+			desiredState: []GoogleGroup{
+				{
+					EmailId: "group1@email.com", Name: "group1", Description: "group1",
+					Settings: map[string]string{
+						"AllowExternalMembers":     "true",
+						"WhoCanJoin":               "CAN_REQUEST_TO_JOIN",
+						"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+						"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+						"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+						"WhoCanModerateMembers":    "OWNERS_AND_MANAGERS",
+						"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+						"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+						"MessageModerationLevel":   "MODERATE_NONE",
+						"MembersCanPostAsTheGroup": "true",
+					},
+					Members:  []string{},
+					Managers: []string{"m2-group1@email.com"},
+					Owners:   []string{"m1-group1@email.com"},
+				},
+				{
+					EmailId: "group2@email.com", Name: "group2", Description: "group2",
+					Settings: map[string]string{
+						"AllowExternalMembers":     "true",
+						"WhoCanJoin":               "INVITED_CAN_JOIN",
+						"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+						"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+						"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+						"WhoCanModerateMembers":    "OWNERS_ONLY",
+						"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+						"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+						"MessageModerationLevel":   "MODERATE_NONE",
+						"MembersCanPostAsTheGroup": "false",
+					},
+					Members: []string{"m1-group2@email.com"},
+					Owners:  []string{"m2-group2@email.com"},
+				},
+			},
+		},
+		{
+			desc: "move member from OWNER role in group2 to MEMBER role.",
+			desiredState: []GoogleGroup{
+				{
+					EmailId: "group1@email.com", Name: "group1", Description: "group1",
+					Settings: map[string]string{
+						"AllowExternalMembers":     "true",
+						"WhoCanJoin":               "CAN_REQUEST_TO_JOIN",
+						"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+						"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+						"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+						"WhoCanModerateMembers":    "OWNERS_AND_MANAGERS",
+						"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+						"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+						"MessageModerationLevel":   "MODERATE_NONE",
+						"MembersCanPostAsTheGroup": "true",
+					},
+					Members:  []string{"m1-group1@email.com"},
+					Managers: []string{"m2-group1@email.com"},
+				},
+				{
+					EmailId: "group2@email.com", Name: "group2", Description: "group2",
+					Settings: map[string]string{
+						"AllowExternalMembers":     "true",
+						"WhoCanJoin":               "INVITED_CAN_JOIN",
+						"WhoCanViewMembership":     "ALL_MANAGERS_CAN_VIEW",
+						"WhoCanViewGroup":          "ALL_MEMBERS_CAN_VIEW",
+						"WhoCanDiscoverGroup":      "ALL_IN_DOMAIN_CAN_DISCOVER",
+						"WhoCanModerateMembers":    "OWNERS_ONLY",
+						"WhoCanModerateContent":    "OWNERS_AND_MANAGERS",
+						"WhoCanPostMessage":        "ALL_MEMBERS_CAN_POST",
+						"MessageModerationLevel":   "MODERATE_NONE",
+						"MembersCanPostAsTheGroup": "false",
+					},
+					Members: []string{"m1-group2@email.com", "m2-group2@email.com"},
+					Owners:  []string{},
+				},
+			},
+		},
 	}
 
-	errFunc = func(err error) bool {
+	errFunc := func(err error) bool {
 		return err != nil
 	}
 	for _, c := range cases {
 		groupsConfig.Groups = c.desiredState
-		fakeAdminClient := fake.NewFakeAdminServiceClient()
-		fakeGroupClient := fake.NewFakeGroupServiceClient()
+		fakeAdminClient := fake.NewAugmentedFakeAdminServiceClient()
+		fakeGroupClient := fake.NewAugmentedFakeGroupServiceClient()
 
-		fakeAdminClient = fakeAdminClient.WithCallback(func(groupKey string) {
-			fakeGroupClient.GsGroups[groupKey] = &groupssettings.Groups{}
+		fakeAdminClient.RegisterCallback(func(groupKey string) {
+			_, ok := fakeGroupClient.GsGroups[groupKey]
+			if !ok {
+				fakeGroupClient.GsGroups[groupKey] = &groupssettings.Groups{}
+			}
 		})
-		fakeAdminClient = augmentAdminServiceFakeClient(fakeAdminClient)
-		fakeGroupClient = augmentGroupServiceFakeClient(fakeGroupClient)
 
-		adminSvc, _ := NewAdminServiceWithClient(fakeAdminClient)
-		groupSvc, _ := NewGroupServiceWithClient(fakeGroupClient)
+		adminSvc, _ := NewAdminServiceWithClientAndErrFunc(fakeAdminClient, errFunc)
+		groupSvc, _ := NewGroupServiceWithClientAndErrFunc(fakeGroupClient, errFunc)
 
 		reconciler := &Reconciler{adminService: adminSvc, groupService: groupSvc}
 		err := reconciler.ReconcileGroups(c.desiredState)
@@ -509,7 +696,13 @@ func TestReconcileGroups(t *testing.T) {
 
 		s := state{adminClient: fakeAdminClient, groupClient: fakeGroupClient}
 
-		if err = s.isStateReconciled(c.desiredState); err != nil {
+		var expectedState []GoogleGroup
+		if c.shouldConsiderExpectedState {
+			expectedState = c.expectedState
+		} else {
+			expectedState = c.desiredState
+		}
+		if err = s.isReconciled(expectedState); err != nil {
 			t.Errorf("reconciliation unsuccessful for case %s: %w", c.desc, err)
 		}
 	}
