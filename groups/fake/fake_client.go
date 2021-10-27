@@ -45,9 +45,53 @@ func NewFakeAdminServiceClient() *FakeAdminServiceClient {
 	}
 }
 
-func (fasc *FakeAdminServiceClient) WithCallback(onGroupInsert func(string)) *FakeAdminServiceClient {
+func NewAugmentedFakeAdminServiceClient() *FakeAdminServiceClient {
+	fakeClient := NewFakeAdminServiceClient()
+	fakeClient.Groups = map[string]*admin.Group{
+		"group1@email.com": {
+			Email:       "group1@email.com",
+			Name:        "group1",
+			Description: "group1",
+		},
+		"group2@email.com": {
+			Email:       "group2@email.com",
+			Name:        "group2",
+			Description: "group2",
+		},
+	}
+
+	fakeClient.Members = map[string]map[string]*admin.Member{
+		"group1@email.com": {
+			"m1-group1@email.com": {
+				Email: "m1-group1@email.com",
+				Role:  "MEMBER",
+				Id:    "m1-group1@email.com",
+			},
+			"m2-group1@email.com": {
+				Email: "m2-group1@email.com",
+				Role:  "MANAGER",
+				Id:    "m2-group1@email.com",
+			},
+		},
+		"group2@email.com": {
+			"m1-group2@email.com": {
+				Email: "m1-group2@email.com",
+				Role:  "MEMBER",
+				Id:    "m1-group2@email.com",
+			},
+			"m2-group2@email.com": {
+				Email: "m2-group2@email.com",
+				Role:  "OWNER",
+				Id:    "m2-group2@email.com",
+			},
+		},
+	}
+
+	return fakeClient
+}
+
+func (fasc *FakeAdminServiceClient) RegisterCallback(onGroupInsert func(string)) {
 	fasc.onGroupInsert = onGroupInsert
-	return fasc
 }
 
 func (fasc *FakeAdminServiceClient) GetGroup(groupKey string) (*admin.Group, error) {
@@ -74,7 +118,11 @@ func (fasc *FakeAdminServiceClient) GetMember(groupKey, memberKey string) (*admi
 }
 
 func (fasc *FakeAdminServiceClient) ListGroups() (*admin.Groups, error) {
-	return fasc.constructAdminGroups(), nil
+	groups := &admin.Groups{}
+	for _, group := range fasc.Groups {
+		groups.Groups = append(groups.Groups, group)
+	}
+	return groups, nil
 }
 
 func (fasc *FakeAdminServiceClient) ListMembers(groupKey string) (*admin.Members, error) {
@@ -83,7 +131,12 @@ func (fasc *FakeAdminServiceClient) ListMembers(groupKey string) (*admin.Members
 		return nil, fmt.Errorf("groupKey %s not found", groupKey)
 	}
 
-	return fasc.constructAdminMembers(groupKey), nil
+	members := &admin.Members{}
+	for _, member := range fasc.Members[groupKey] {
+		members.Members = append(members.Members, member)
+	}
+
+	return members, nil
 }
 
 func (fasc *FakeAdminServiceClient) InsertGroup(group *admin.Group) (*admin.Group, error) {
@@ -156,25 +209,6 @@ func (fasc *FakeAdminServiceClient) DeleteMember(groupKey, memberKey string) err
 	return nil
 }
 
-func (fasc *FakeAdminServiceClient) constructAdminGroups() *admin.Groups {
-	groups := &admin.Groups{}
-	for _, group := range fasc.Groups {
-		groups.Groups = append(groups.Groups, group)
-	}
-
-	return groups
-}
-
-// This function assumes that groupKey is present in the members map.
-func (fasc *FakeAdminServiceClient) constructAdminMembers(groupKey string) *admin.Members {
-	members := &admin.Members{}
-	for _, member := range fasc.Members[groupKey] {
-		members.Members = append(members.Members, member)
-	}
-
-	return members
-}
-
 // FakeGroupServiceClient implements the GroupServiceClient but is fake.
 type FakeGroupServiceClient struct {
 	GsGroups map[string]*groupssettings.Groups
@@ -184,6 +218,38 @@ func NewFakeGroupServiceClient() *FakeGroupServiceClient {
 	return &FakeGroupServiceClient{
 		GsGroups: make(map[string]*groupssettings.Groups),
 	}
+}
+
+func NewAugmentedFakeGroupServiceClient() *FakeGroupServiceClient {
+	fakeClient := NewFakeGroupServiceClient()
+	fakeClient.GsGroups = map[string]*groupssettings.Groups{
+		"group1@email.com": {
+			AllowExternalMembers:     "true",
+			WhoCanJoin:               "CAN_REQUEST_TO_JOIN",
+			WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
+			WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
+			WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
+			WhoCanModerateMembers:    "OWNERS_AND_MANAGERS",
+			WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
+			WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
+			MessageModerationLevel:   "MODERATE_NONE",
+			MembersCanPostAsTheGroup: "true",
+		},
+		"group2@email.com": {
+			AllowExternalMembers:     "true",
+			WhoCanJoin:               "INVITED_CAN_JOIN",
+			WhoCanViewMembership:     "ALL_MANAGERS_CAN_VIEW",
+			WhoCanViewGroup:          "ALL_MEMBERS_CAN_VIEW",
+			WhoCanDiscoverGroup:      "ALL_IN_DOMAIN_CAN_DISCOVER",
+			WhoCanModerateMembers:    "OWNERS_ONLY",
+			WhoCanModerateContent:    "OWNERS_AND_MANAGERS",
+			WhoCanPostMessage:        "ALL_MEMBERS_CAN_POST",
+			MessageModerationLevel:   "MODERATE_NONE",
+			MembersCanPostAsTheGroup: "false",
+		},
+	}
+
+	return fakeClient
 }
 
 func (fgsc *FakeGroupServiceClient) Get(groupUniqueID string) (*groupssettings.Groups, error) {
