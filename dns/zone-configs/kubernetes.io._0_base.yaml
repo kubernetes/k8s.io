@@ -29,7 +29,11 @@
   - type: TXT
     values:
     - google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8
+    # Domain validation for kubernetes.io on https://search.google.com/search-console/welcome
+    # Only Org admins have access to the console. (contact @ameukam)
+    - google-site-verification=qmfDqvHjWJBL78F9saApyW0VFRyymuSMpqMn8gtGmd0
     - v=spf1 include:_spf.google.com ~all
+
 www:
   type: CNAME
   value: kubernetes.io.
