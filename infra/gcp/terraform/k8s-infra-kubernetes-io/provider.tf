@@ -30,11 +30,11 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 3.87.0"
+      version = "~> 3.89.0"
     }
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "~> 3.87.0"
+      version = "~> 3.89.0"
     }
   }
 }
@@ -46,5 +46,5 @@ provider "google" {
   #       another gcloud project with cloudresourcemanager and serviceusage
   #       APIs enabled
   user_project_override = true
-  billing_project = "k8s-infra-kubernetes-io"
+  billing_project       = "k8s-infra-kubernetes-io"
 }
