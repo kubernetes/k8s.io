@@ -94,8 +94,28 @@ resource "google_bigquery_data_transfer_config" "bq_data_transfer_kettle" {
     source_dataset_id           = "build"
     source_project_id           = "k8s-gubernator"
   }
+}
 
-  email_preferences {
-    enable_failure_email = false
-  }
+# Used to monitor kubernetes jenkings changes
+resource "google_pubsub_topic" "notification_topic" {
+  project = data.google_project.project.project_id
+  name    = "k8s-infra-kubernetes-jenkins-changes"
+}
+
+# Use by kettle to collect job information
+resource "google_pubsub_subscription" "kettle_subscription" {
+  name    = "k8s-infra-kettle-staging"
+  topic   = google_pubsub_topic.notification_topic.name
+  project = data.google_project.project.project_id
+
+  filter = "attributes.eventType = \"OBJECT_FINALIZE\""
+}
+
+resource "google_pubsub_subscription_iam_binding" "subscription_binding" {
+  project      = data.google_project.project.project_id
+  subscription = google_pubsub_subscription.kettle_subscription.name
+  role         = "roles/pubsub.editor"
+  members = [
+    "serviceAccount:${module.aaa_kettle_sa.email}"
+  ]
 }
