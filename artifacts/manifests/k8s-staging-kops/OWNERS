@@ -1,4 +1,5 @@
 # See the OWNERS docs at https://go.k8s.io/owners
+# Synced to the root OWNERS file in k8s.io/kops as of 11/01/21
 
 # These OWNERS files should stay in sync:
 # https://github.com/kubernetes/test-infra/blob/master/config/jobs/kubernetes/kops/OWNERS
@@ -16,11 +17,11 @@ approvers:
 - justinsb
 - kashifsaadat
 - mikesplain
+- olemarkus
 - rdrgmnzs
 - rifelpet
 - zetaab
 reviewers:
-- gjtempleton
 - hakman
 - johngmyers
 - joshbranham
