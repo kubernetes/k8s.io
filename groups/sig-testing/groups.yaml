@@ -191,14 +191,14 @@ groups:
   - email-id: k8s-infra-cherrypick-robot@kubernetes.io
     name: k8s-infra-cherrypick-robot
     description: |-
-      Github admins for github account k8s-cherry-pick-bot (to be renamed to match group name)
+      Github admins for github account k8s-infra-cherry-pick-bot.
+      2fa in kubernetes.1password.com SIG Testing vault
     settings:
       ReconcileMembers: "true"
       WhoCanPostMessage: "ANYONE_CAN_POST"
     managers:
-    - ameukam@gmail.com
-    - spiffxp@gmail.com
-    - spiffxp@google.com
+    - k8s-infra-prow-oncall@kubernetes.io
+    - github@kubernetes.io
 
   - email-id: k8s-infra-prow-oncall@kubernetes.io
     name: k8s-infra-prow-oncall
