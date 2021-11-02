@@ -13,43 +13,38 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
+ 
 /*
 This file defines:
-- GCS bucket to serve metrics bigquery results
+- GCS bucket to serve KEP reports
 - IAM bindings
 */
 
-// Use a data source for the service account
-data "google_service_account" "metrics_sa" {
-  account_id = "k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+locals {
+  keps_owners = "k8s-infra-keps@kubernetes.io"
 }
 
-// Create a GCS bucket for metrics query results
-resource "google_storage_bucket" "metrics_bucket" {
-  name                        = "k8s-metrics"
+// Use a data source for the service account
+data "google_service_account" "keps_sa" {
+  account_id = "k8s-keps@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+}
+
+// Create a GCS bucket for KEP reports
+resource "google_storage_bucket" "keps_bucket" {
+  name                        = "k8s-keps"
   project                     = data.google_project.project.project_id
   location                    = "US"
   storage_class               = "STANDARD"
   uniform_bucket_level_access = true
-
-  lifecycle_rule {
-    condition {
-      age = 365 // days
-    }
-    action {
-      type = "Delete"
-    }
-  }
-
 }
 
-data "google_iam_policy" "metrics_bucket_iam_bindings" {
+data "google_iam_policy" "keps_bucket_iam_bindings" {
   // Ensure prow owners have admin privileges, and keep existing
   // legacy bindings since we're overwriting all existing bindings below
   binding {
     members = [
       "group:${local.prow_owners}",
+      "group:${local.keps_owners}",
     ]
     role = "roles/storage.admin"
   }
@@ -57,15 +52,16 @@ data "google_iam_policy" "metrics_bucket_iam_bindings" {
   binding {
     members = [
       "group:${local.prow_owners}",
+      "group:${local.keps_owners}",
       "projectEditor:${data.google_project.project.project_id}",
       "projectOwner:${data.google_project.project.project_id}",
     ]
     role = "roles/storage.legacyBucketOwner"
   }
-  // Ensure metrics service accounts have write access to the bucket
+  // Ensure keps service accounts have write access to the bucket
   binding {
     members = [
-      "serviceAccount:${data.google_service_account.metrics_sa.email}",
+      "serviceAccount:${data.google_service_account.keps_sa.email}",
     ]
     role = "roles/storage.legacyBucketWriter"
   }
@@ -76,12 +72,13 @@ data "google_iam_policy" "metrics_bucket_iam_bindings" {
     ]
     role = "roles/storage.legacyBucketReader"
   }
-  // Ensure metrics service accounts have write/update/delete access to objects
+  // Ensure keps service accounts have write/update/delete access to objects
   binding {
     role = "roles/storage.objectAdmin"
     members = [
       "group:${local.prow_owners}",
-      "serviceAccount:${data.google_service_account.metrics_sa.email}",
+      "group:${local.keps_owners}",
+      "serviceAccount:${data.google_service_account.keps_sa.email}",
     ]
   }
   // Ensure bucket contents are world readable
@@ -94,14 +91,7 @@ data "google_iam_policy" "metrics_bucket_iam_bindings" {
 }
 
 // Authoritative iam-policy: replaces any existing policy attached to the bucket
-resource "google_storage_bucket_iam_policy" "metrics_bucket_iam_policy" {
-  bucket      = google_storage_bucket.metrics_bucket.name
-  policy_data = data.google_iam_policy.metrics_bucket_iam_bindings.policy_data
-}
-
-// Ensure metrics service account can run bigquery jobs by billing to this project
-resource "google_project_iam_member" "k8s_metrics_sa_bigquery_user" {
-  project = data.google_project.project.project_id
-  role    = "roles/bigquery.user"
-  member  = "serviceAccount:${data.google_service_account.metrics_sa.email}"
+resource "google_storage_bucket_iam_policy" "keps_bucket_iam_policy" {
+  bucket      = google_storage_bucket.keps_bucket.name
+  policy_data = data.google_iam_policy.keps_bucket_iam_bindings.policy_data
 }
