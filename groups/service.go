@@ -68,7 +68,25 @@ func NewAdminService(ctx context.Context, clientOption option.ClientOption) (Adm
 		return nil, err
 	}
 
-	return &adminService{client: client}, nil
+	return NewAdminServiceWithClient(client)
+}
+
+func NewAdminServiceWithClient(client AdminServiceClient) (AdminService, error) {
+	errFunc := func(err error) bool {
+		apierr, ok := err.(*googleapi.Error)
+		return ok && apierr.Code == http.StatusNotFound
+	}
+	return &adminService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
+}
+
+func NewAdminServiceWithClientAndErrFunc(client AdminServiceClient, errFunc clientErrCheckFunc) (AdminService, error) {
+	return &adminService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
 }
 
 func NewGroupService(ctx context.Context, clientOption option.ClientOption) (GroupService, error) {
@@ -77,11 +95,37 @@ func NewGroupService(ctx context.Context, clientOption option.ClientOption) (Gro
 		return nil, err
 	}
 
-	return &groupService{client: client}, nil
+	return NewGroupServiceWithClient(client)
 }
 
+func NewGroupServiceWithClient(client GroupServiceClient) (GroupService, error) {
+	errFunc := func(err error) bool {
+		apierr, ok := err.(*googleapi.Error)
+		return ok && apierr.Code == http.StatusNotFound
+	}
+	return &groupService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
+}
+
+func NewGroupServiceWithClientAndErrFunc(client GroupServiceClient, errFunc clientErrCheckFunc) (GroupService, error) {
+	return &groupService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
+}
+
+// clientErrCheckFunc is stubbed out here for testing
+// purposes in order to implement custome error checking
+// logic. This function is used to check errors returned
+// by the client. The boolean return signifies if the
+// check for the error passed or not.
+type clientErrCheckFunc func(error) bool
+
 type adminService struct {
-	client AdminServiceClient
+	client            AdminServiceClient
+	checkForAPIErr404 clientErrCheckFunc
 }
 
 // AddOrUpdateGroupMembers first lists all members that are part of group. Based on this list and the
@@ -94,7 +138,7 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 
 	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if as.checkForAPIErr404(err) {
 			log.Printf("skipping adding members to group %q as it has not yet been created\n", group.EmailId)
 			return nil
 		}
@@ -160,7 +204,7 @@ func (as *adminService) CreateOrUpdateGroupIfNescessary(group GoogleGroup) error
 
 	grp, err := as.client.GetGroup(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if as.checkForAPIErr404(err) {
 			if !config.ConfirmChanges {
 				log.Printf("dry-run: would create group %q\n", group.EmailId)
 			} else {
@@ -262,7 +306,7 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 	}
 	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if as.checkForAPIErr404(err) {
 			log.Printf("skipping removing members group %q as group has not yet been created\n", group.EmailId)
 			return nil
 		}
@@ -313,7 +357,7 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 	}
 	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if as.checkForAPIErr404(err) {
 			log.Printf("skipping removing members group %q as group has not yet been created\n", group.EmailId)
 			return nil
 		}
@@ -363,7 +407,8 @@ func (as *adminService) ListMembers(groupKey string) (*admin.Members, error) {
 var _ AdminService = (*adminService)(nil)
 
 type groupService struct {
-	client GroupServiceClient
+	client            GroupServiceClient
+	checkForAPIErr404 clientErrCheckFunc
 }
 
 // UpdateGroupSettings updates the groupsettings.Groups corresponding to the
@@ -374,7 +419,7 @@ func (gs *groupService) UpdateGroupSettings(group GoogleGroup) error {
 	}
 	g2, err := gs.client.Get(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if gs.checkForAPIErr404(err) {
 			log.Printf("skipping updating group settings as group %q has not yet been created\n", group.EmailId)
 			return nil
 		}
