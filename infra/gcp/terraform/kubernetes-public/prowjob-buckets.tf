@@ -26,9 +26,9 @@ locals {
 
 // Bucket for scalability tests results
 resource "google_storage_bucket" "scalability_tests_logs" {
-  project = data.google_project.project.project_id
-  name    = local.scalability_tests_logs_bucket_name
-
+  project                     = data.google_project.project.project_id
+  name                        = local.scalability_tests_logs_bucket_name
+  location                    = "US"
   uniform_bucket_level_access = true
 
   lifecycle_rule {
@@ -88,9 +88,9 @@ resource "google_storage_bucket_iam_policy" "scalability_tests_logs_policy" {
 
 // Bucket used for Golang Scalability builds
 resource "google_storage_bucket" "scalability_golang_builds" {
-  project = data.google_project.project.project_id
-  name    = local.scalability_golang_builds_bucket_name
-
+  project                     = data.google_project.project.project_id
+  name                        = local.scalability_golang_builds_bucket_name
+  location                    = "US"
   uniform_bucket_level_access = true
 }
 
@@ -141,9 +141,9 @@ resource "google_storage_bucket_iam_policy" "scalability_golang_builds_policy" {
 
 // Bucket for kops CI jobs results
 resource "google_storage_bucket" "kops_ci_bucket" {
-  project = data.google_project.project.project_id
-  name    = local.kops_ci_bucket_name
-
+  project                     = data.google_project.project.project_id
+  name                        = local.kops_ci_bucket_name
+  location                    = "US"
   uniform_bucket_level_access = true
 }
 

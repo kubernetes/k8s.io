@@ -29,6 +29,12 @@ variable "cluster_location" {
   type        = string
 }
 
+variable "enable_shielded_nodes" {
+  type        = bool
+  default     = false
+  description = "Enable Shielded Nodes on all nodes in this cluster."
+}
+
 variable "bigquery_location" {
   description = "The bigquery specific location where the dataset should be created"
   type        = string
@@ -62,7 +68,7 @@ variable "dns_cache_enabled" {
 EOF
   type        = string
   // TODO: default this true (and/or remove this option) once kubernetes-public/aaa uses this module
-  default     = "false"
+  default = "false"
 }
 
 variable "cloud_shell_access" {
