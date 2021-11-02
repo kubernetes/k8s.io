@@ -70,3 +70,19 @@ A list of buckets is used for their `.*_usage` bucket which stores the public ac
 ```bash
 ./generate-buckets.sh
 ```
+
+## Run a test build
+
+```bash
+TAG="$(date -u '+%Y%m%d')-$(git describe --tags --always --dirty)"
+PROJECT="k8s-infra-ii-sandbox"
+BUCKET="ii_bq_scratch_dump"
+
+gcloud builds submit \
+    --verbosity info \
+    --config cloudbuild.yaml \
+    --substitutions _TAG="${TAG}",_GIT_TAG="${TAG}" \
+    --project ${PROJECT} \
+    --gcs-source-staging-dir "gs://${BUCKET}/source" \
+    .
+```
