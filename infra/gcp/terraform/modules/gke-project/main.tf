@@ -19,6 +19,31 @@ limitations under the License.
 locals {
   org_domain      = "kubernetes.io"
   billing_account = "018801-93540E-22A20E"
+
+  project_services = [
+    "bigquery.googleapis.com",
+    "cloudbuild.googleapis.com",
+    "compute.googleapis.com",
+    "container.googleapis.com",
+    "logging.googleapis.com",
+    "monitoring.googleapis.com",
+    "oslogin.googleapis.com",
+    "secretmanager.googleapis.com",
+    "serviceusage.googleapis.com",
+    "stackdriver.googleapis.com",
+    "storage-component.googleapis.com",
+  ]
+
+
+  cluster_admins_group_iam = [
+    "roles/compute.viewer",
+    "roles/container.admin",
+    data.google_iam_role.service_account_lister.name,
+  ]
+
+  cluster_users_group_iam = [
+    "roles/container.clusterViewer"
+  ]
 }
 
 data "google_organization" "org" {
@@ -42,73 +67,11 @@ resource "google_project" "project" {
 }
 
 // Services we need
-resource "google_project_service" "compute" {
-  project = google_project.project.project_id
-  service = "compute.googleapis.com"
+resource "google_project_service" "services" {
+  for_each                   = toset(local.project_services)
+  project                    = google_project.project.project_id
+  service                    = each.value
   disable_dependent_services = true
-}
-resource "google_project_service" "logging" {
-  project = google_project.project.project_id
-  service = "logging.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "monitoring" {
-  project = google_project.project.project_id
-  service = "monitoring.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "bigquery" {
-  project = google_project.project.project_id
-  service = "bigquery.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "container" {
-  project = google_project.project.project_id
-  service = "container.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "storage_component" {
-  project = google_project.project.project_id
-  service = "storage-component.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "oslogin" {
-  project = google_project.project.project_id
-  service = "oslogin.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "cloudbuild" {
-  project = google_project.project.project_id
-  service = "cloudbuild.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "stackdriver" {
-  project = google_project.project.project_id
-  service = "stackdriver.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "secretmanager" {
-  project = google_project.project.project_id
-  service = "secretmanager.googleapis.com"
-  disable_dependent_services = true
-}
-resource "google_project_service" "serviceusage" {
-  project = google_project.project.project_id
-  service = "serviceusage.googleapis.com"
-  disable_dependent_services = true
-}
-
-
-// "Empower cluster admins" is what ensure-main-project.sh says
-resource "google_project_iam_member" "cluster_admins_as_compute_viewer" {
-  project = google_project.project.project_id
-  role    = "roles/compute.viewer"
-  member  = "group:${var.cluster_admins_group}"
-}
-resource "google_project_iam_member" "cluster_admins_as_container_admin" {
-  project = google_project.project.project_id
-  role    = "roles/container.admin"
-  member  = "group:${var.cluster_admins_group}"
 }
 
 // Role created by ensure-organization.sh, use a data source to ensure it exists
@@ -116,15 +79,18 @@ data "google_iam_role" "service_account_lister" {
   name = "${data.google_organization.org.name}/roles/iam.serviceAccountLister"
 }
 
-resource "google_project_iam_member" "cluster_admins_as_service_account_lister" {
-  project = google_project.project.project_id
-  role    = data.google_iam_role.service_account_lister.name
-  member  = "group:${var.cluster_admins_group}"
+// "Empower cluster admins" is what ensure-main-project.sh says
+resource "google_project_iam_member" "cluster_admins" {
+  for_each = local.cluster_admins_group_iam
+  project  = google_project.project.project_id
+  role     = each.value
+  member   = "group:${var.cluster_admins_group}"
 }
 
 // "Empowering cluster users" is what ensure-main-project.sh says
-resource "google_project_iam_member" "cluster_users_as_container_cluster_viewer" {
-  project = google_project.project.project_id
-  role    = "roles/container.clusterViewer"
-  member  = "group:${var.cluster_users_group}"
+resource "google_project_iam_member" "cluster_users" {
+  for_each = local.cluster_users_group_iam
+  project  = google_project.project.project_id
+  role     = each.value
+  member   = "group:${var.cluster_users_group}"
 }
