@@ -81,7 +81,7 @@ data "google_iam_role" "service_account_lister" {
 
 // "Empower cluster admins" is what ensure-main-project.sh says
 resource "google_project_iam_member" "cluster_admins" {
-  for_each = local.cluster_admins_group_iam
+  for_each = toset(local.cluster_admins_group_iam)
   project  = google_project.project.project_id
   role     = each.value
   member   = "group:${var.cluster_admins_group}"
@@ -89,7 +89,7 @@ resource "google_project_iam_member" "cluster_admins" {
 
 // "Empowering cluster users" is what ensure-main-project.sh says
 resource "google_project_iam_member" "cluster_users" {
-  for_each = local.cluster_users_group_iam
+  for_each = toset(local.cluster_users_group_iam)
   project  = google_project.project.project_id
   role     = each.value
   member   = "group:${var.cluster_users_group}"
