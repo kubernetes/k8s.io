@@ -59,6 +59,12 @@
       "members": [
         "serviceAccount:660796270509@cloudbuild.gserviceaccount.com"
       ],
+      "role": "roles/ondemandscanning.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:660796270509@cloudbuild.gserviceaccount.com"
+      ],
       "role": "roles/secretmanager.secretAccessor"
     },
     {
