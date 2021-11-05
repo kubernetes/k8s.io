@@ -2,18 +2,6 @@
   "bindings": [
     {
       "members": [
-        "serviceAccount:bq-data-transfer@k8s-infra-public-pii.iam.gserviceaccount.com"
-      ],
-      "role": "roles/bigquery.dataEditor"
-    },
-    {
-      "members": [
-        "serviceAccount:bq-data-transfer@k8s-infra-public-pii.iam.gserviceaccount.com"
-      ],
-      "role": "roles/bigquery.jobUser"
-    },
-    {
-      "members": [
         "serviceAccount:service-226195303281@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquerydatatransfer.serviceAgent"
