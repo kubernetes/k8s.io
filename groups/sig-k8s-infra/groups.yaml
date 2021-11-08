@@ -254,7 +254,7 @@ groups:
     settings:
       ReconcileMembers: "true"
       WhoCanPostMessage: "ANYONE_CAN_POST"
-    managers:
+    members:
       - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-equinix-admins@kubernetes.io
@@ -264,7 +264,7 @@ groups:
     settings:
       ReconcileMembers: "true"
       WhoCanPostMessage: "ANYONE_CAN_POST"
-    managers:
+    members:
       - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-artifact-admins@kubernetes.io
