@@ -23,6 +23,7 @@ import (
 	"log"
 	"net/http"
 	"reflect"
+	"strings"
 
 	admin "google.golang.org/api/admin/directory/v1"
 	"google.golang.org/api/googleapi"
@@ -147,10 +148,11 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
+
 	for _, memberEmailId := range members {
 		var member *admin.Member
 		for _, m := range l.Members {
-			if m.Email == memberEmailId {
+			if EmailAddressEquals(m.Email, memberEmailId) {
 				member = m
 				break
 			}
@@ -161,9 +163,12 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 			if member.Role != role {
 				member.Role = role
 				if config.ConfirmChanges {
+					log.Printf("Updating %s to %q as a %s\n", memberEmailId, group.EmailId, role)
 					_, err := as.client.UpdateMember(group.EmailId, member.Email, member)
 					if err != nil {
-						errs = append(errs, fmt.Errorf("unable to update %s in %q as %s : %w", memberEmailId, group.EmailId, role, err))
+						logErr := fmt.Errorf("unable to update %s in %q as %s: %w", memberEmailId, group.EmailId, role, err)
+						log.Printf("%s\n", logErr)
+						errs = append(errs, logErr)
 						continue
 					}
 					log.Printf("Updated %s to %q as a %s\n", memberEmailId, group.EmailId, role)
@@ -173,6 +178,7 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 			}
 			continue
 		}
+
 		member = &admin.Member{
 			Email: memberEmailId,
 			Role:  role,
@@ -180,9 +186,12 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 
 		// We did not find the person in the google group, so we add them
 		if config.ConfirmChanges {
+			log.Printf("Adding %s to %q as a %s\n", memberEmailId, group.EmailId, role)
 			_, err := as.client.InsertMember(group.EmailId, member)
 			if err != nil {
-				errs = append(errs, fmt.Errorf("unable to add %s to %q as %s : %w", memberEmailId, group.EmailId, role, err))
+				logErr := fmt.Errorf("unable to add %s to %q as %s: %w", memberEmailId, group.EmailId, role, err)
+				log.Printf("%s\n", logErr)
+				errs = append(errs, logErr)
 				continue
 			}
 			log.Printf("Added %s to %q as a %s\n", memberEmailId, group.EmailId, role)
@@ -265,10 +274,11 @@ func (as *adminService) DeleteGroupsIfNecessary() error {
 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
+
 	for _, g := range g.Groups {
 		found := false
 		for _, g2 := range groupsConfig.Groups {
-			if g2.EmailId == g.Email {
+			if EmailAddressEquals(g2.EmailId, g.Email) {
 				found = true
 				break
 			}
@@ -279,15 +289,13 @@ func (as *adminService) DeleteGroupsIfNecessary() error {
 
 		// We did not find the group in our groups.xml, so delete the group
 		if config.ConfirmChanges {
-			if *verbose {
-				log.Printf("deleting group %s", g.Email)
-			}
+			log.Printf("Deleting group %s", g.Email)
 			err := as.client.DeleteGroup(g.Email)
 			if err != nil {
 				errs = append(errs, fmt.Errorf("unable to remove group %s : %w", g.Email, err))
 				continue
 			}
-			log.Printf("Removing group %s\n", g.Email)
+			log.Printf("Removed group %s\n", g.Email)
 		} else {
 			log.Printf("dry-run: would remove group %s\n", g.Email)
 		}
@@ -315,10 +323,11 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
+
 	for _, m := range l.Members {
 		found := false
 		for _, m2 := range members {
-			if m2 == m.Email {
+			if EmailAddressEquals(m2, m.Email) {
 				found = true
 				break
 			}
@@ -331,14 +340,18 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 		if found || m.Role == MemberRole {
 			continue
 		}
+
 		// a person was deleted from a group, let's remove them
 		if config.ConfirmChanges {
+			log.Printf("Removing %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 			err := as.client.DeleteMember(group.EmailId, m.Id)
 			if err != nil {
-				errs = append(errs, fmt.Errorf("unable to remove %s from %q as OWNER or MANAGER : %w", m.Email, group.EmailId, err))
+				logErr := fmt.Errorf("unable to remove %s from %q as a %s: %w", m.Email, group.EmailId, m.Role, err)
+				log.Printf("%s\n", logErr)
+				errs = append(errs, logErr)
 				continue
 			}
-			log.Printf("Removing %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
+			log.Printf("Removed %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 		} else {
 			log.Printf("dry-run: would remove %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 		}
@@ -366,10 +379,11 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
+
 	for _, m := range l.Members {
 		found := false
 		for _, m2 := range members {
-			if m2 == m.Email {
+			if EmailAddressEquals(m2, m.Email) {
 				found = true
 				break
 			}
@@ -380,12 +394,15 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 
 		// a person was deleted from a group, let's remove them
 		if config.ConfirmChanges {
+			log.Printf("Removing %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 			err := as.client.DeleteMember(group.EmailId, m.Id)
 			if err != nil {
-				errs = append(errs, fmt.Errorf("unable to remove %s from %q as a %s : %w", m.Email, group.EmailId, m.Role, err))
+				logErr := fmt.Errorf("unable to remove %s from %q as a %s: %w", m.Email, group.EmailId, m.Role, err)
+				log.Printf("%s\n", logErr)
+				errs = append(errs, logErr)
 				continue
 			}
-			log.Printf("Removing %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
+			log.Printf("Removed %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 		} else {
 			log.Printf("dry-run: would remove %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 		}
@@ -502,4 +519,27 @@ var _ GroupService = (*groupService)(nil)
 func deepCopySettings(a, b interface{}) {
 	byt, _ := json.Marshal(a)
 	json.Unmarshal(byt, b)
+}
+
+// EmailAddressEquals checks equivalence between two e-mail addresses according
+// to the following rules:
+// - email addresses are case-insensitive (e.g. FOO@bar.com == foo@bar.com)
+// - local parts are dot-inensitive (e.g. foo@bar.com == f.o.o@bar.com)
+func EmailAddressEquals(a, b string) bool {
+	// if they match case-insensitive, don't bother checking dot-insensitive
+	if strings.EqualFold(a, b) {
+		return true
+	}
+	aParts := strings.Split(a, "@")
+	bParts := strings.Split(b, "@")
+	// These aren't valid e-mail addresses if they don't have exactly one @
+	// and we already know they're not case-insensitively equal, so return false
+	if len(aParts) != 2 || len(bParts) != 2 {
+		return false
+	}
+	// strip dots from local parts and case-insensitively compare the resulting
+	// email addresses
+	aLocal := strings.ReplaceAll(aParts[0], ".", "")
+	bLocal := strings.ReplaceAll(bParts[0], ".", "")
+	return strings.EqualFold(aLocal+"@"+aParts[1], bLocal+"@"+bParts[1])
 }

@@ -570,3 +570,75 @@ func TestUpdateGroupSettings(t *testing.T) {
 		}
 	}
 }
+
+func TestEmailAddressEquals(t *testing.T) {
+	testcases := []struct {
+		name     string
+		a        string
+		b        string
+		expected bool
+	}{
+		{
+			name:     "empty",
+			a:        "",
+			b:        "",
+			expected: true,
+		},
+		{
+			name:     "empty vs not",
+			a:        "",
+			b:        "foo@bar.com",
+			expected: false,
+		},
+		{
+			name:     "equal",
+			a:        "foo@bar.com",
+			b:        "foo@bar.com",
+			expected: true,
+		},
+		{
+			name:     "different",
+			a:        "foo@bar.com",
+			b:        "bar@foo.com",
+			expected: false,
+		},
+		{
+			name:     "equal case-insensitive",
+			a:        "foo@bar.com",
+			b:        "FOO@bar.com",
+			expected: true,
+		},
+		{
+			name:     "equal dot-insensitive",
+			a:        "foo@bar.com",
+			b:        "f.o.o@bar.com",
+			expected: true,
+		},
+		{
+			name:     "equal case-and-dot-insensitive",
+			a:        "foo@bar.com",
+			b:        "F.O.O@bar.com",
+			expected: true,
+		},
+		{
+			name:     "host is dot-sensitive",
+			a:        "foo@bar.com",
+			b:        "f.o.o@b.a.r.com",
+			expected: false,
+		},
+		{
+			name:     "host is case-insensitive",
+			a:        "foo@bar.com",
+			b:        "foo@BAR.com",
+			expected: true,
+		},
+	}
+	for _, tc := range testcases {
+		t.Run(tc.name, func(t *testing.T) {
+			actual := EmailAddressEquals(tc.a, tc.b)
+			if actual != tc.expected {
+				t.Errorf("Expected %v emailequals %v to be %v, got: %v", tc.a, tc.b, tc.expected, actual)
+			}
+		})
+	}
+}

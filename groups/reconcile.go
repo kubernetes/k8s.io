@@ -347,18 +347,20 @@ func (c *Config) Load(configFilePath string, confirmChanges bool) error {
 		return fmt.Errorf("error parsing config file %s: %w", configFilePath, err)
 	}
 
-	if c.GroupsPath == "" {
-		c.GroupsPath, err = filepath.Abs(filepath.Dir(configFilePath))
-		if err != nil {
-			return fmt.Errorf("error converting groups-path %v to absolute path: %w", c.GroupsPath, err)
-		}
+	if !filepath.IsAbs(c.GroupsPath) {
+		c.GroupsPath = filepath.Clean(filepath.Join(filepath.Dir(configFilePath), c.GroupsPath))
 	}
-	if !filepath.IsAbs(config.GroupsPath) {
-		return fmt.Errorf("groups-path must be an absolute path, got: %v ", c.GroupsPath)
+	c.GroupsPath, err = filepath.Abs(c.GroupsPath)
+	if err != nil {
+		return fmt.Errorf("error converting groups-path %v to absolute path: %w", c.GroupsPath, err)
 	}
 
 	if c.RestrictionsPath == "" {
-		c.RestrictionsPath = filepath.Join(c.GroupsPath, defaultRestrictionsFile)
+		c.RestrictionsPath = filepath.Join(filepath.Dir(configFilePath), defaultRestrictionsFile)
+	}
+	c.RestrictionsPath, err = filepath.Abs(c.RestrictionsPath)
+	if err != nil {
+		return fmt.Errorf("error converting retrictions-path %v to absolute path: %w", c.RestrictionsPath, err)
 	}
 
 	c.ConfirmChanges = confirmChanges
