@@ -132,6 +132,14 @@ resource "google_container_cluster" "cluster" {
   master_authorized_networks_config {
   }
 
+  // Enable GKE workloads monitoring
+  monitoring_config {
+    enable_components = [
+      "SYSTEM_COMPONENTS",
+      "WORKLOADS"
+    ]
+  }
+
   // Enable GKE Usage Metering
   resource_usage_export_config {
     enable_network_egress_metering = true
