@@ -10,6 +10,7 @@ restrictions:
       - "^k8s-infra-artifact-security@kubernetes.io$"
   - path: "committee-steering/groups.yaml"
     allowedGroups:
+      - "^steering-emeritus@kubernetes.io$"
       - "^steering-private@kubernetes.io$"
       - "^steering@kubernetes.io$"
       - "^election@kubernetes.io$"
