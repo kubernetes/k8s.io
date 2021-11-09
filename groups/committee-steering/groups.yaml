@@ -1,4 +1,35 @@
 groups:
+  - email-id: steering-emeritus@kubernetes.io
+    name: steering-emeritus
+    description: |-
+      Private list for current and emeritus members of the Kubernetes Steering Committee
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - bburns@microsoft.com
+      - briangrant@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - joe.k8s@bedafamily.com
+      - k8s@auggie.dev
+      - killen.bob@gmail.com
+      - lachlan.evenson@microsoft.com
+      - liggitt@google.com
+      - nikhitaraghunath@gmail.com
+      - paris.pittman@gmail.com
+      - phil.wittrock@gmail.com
+      - quintonh@gmail.com
+      - sarah.novotny@gmail.com
+      - smarterclayton@gmail.com
+      - spiffxp@gmail.com
+      - thockin@google.com
+      - timothysc@gmail.com
+      - tpepper@vmware.com
+      # missing folks:
+      # Michelle Noorali
+      # Brandon Philips
+
   - email-id: steering-private@kubernetes.io
     name: steering-private
     description: |-
@@ -9,11 +40,11 @@ groups:
     owners:
       - cblecker@gmail.com
       - davanum@gmail.com
-      - decarr@redhat.com
+      - k8s@auggie.dev
       - killen.bob@gmail.com
       - liggitt@google.com
-      - nikhitaraghunath@gmail.com
       - paris.pittman@gmail.com
+      - tpepper@vmware.com
 
   - email-id: steering@kubernetes.io
     name: steering
@@ -33,11 +64,11 @@ groups:
     owners:
       - cblecker@gmail.com
       - davanum@gmail.com
-      - decarr@redhat.com
+      - k8s@auggie.dev
       - killen.bob@gmail.com
       - liggitt@google.com
-      - nikhitaraghunath@gmail.com
       - paris.pittman@gmail.com
+      - tpepper@vmware.com
     managers:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
