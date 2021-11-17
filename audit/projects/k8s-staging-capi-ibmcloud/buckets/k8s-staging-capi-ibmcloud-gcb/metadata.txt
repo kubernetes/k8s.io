@@ -14,7 +14,7 @@ gs://k8s-staging-capi-ibmcloud-gcb/ :
 	Time updated:			Fri, 03 Sep 2021 10:22:05 GMT
 	Metageneration:			10
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
