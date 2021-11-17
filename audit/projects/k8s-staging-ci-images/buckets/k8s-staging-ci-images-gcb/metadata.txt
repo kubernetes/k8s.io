@@ -14,7 +14,7 @@ gs://k8s-staging-ci-images-gcb/ :
 	Time updated:			Thu, 20 May 2021 09:28:11 GMT
 	Metageneration:			18
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
