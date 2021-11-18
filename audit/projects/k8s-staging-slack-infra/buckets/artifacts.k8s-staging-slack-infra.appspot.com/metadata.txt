@@ -14,7 +14,7 @@ gs://artifacts.k8s-staging-slack-infra.appspot.com/ :
 	Time updated:			Fri, 24 Sep 2021 21:31:58 GMT
 	Metageneration:			16
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
