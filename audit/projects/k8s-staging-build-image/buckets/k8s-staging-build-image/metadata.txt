@@ -14,7 +14,7 @@ gs://k8s-staging-build-image/ :
 	Time updated:			Fri, 24 Sep 2021 20:19:14 GMT
 	Metageneration:			48
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

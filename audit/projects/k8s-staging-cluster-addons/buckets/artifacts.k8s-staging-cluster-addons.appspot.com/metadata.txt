@@ -14,7 +14,7 @@ gs://artifacts.k8s-staging-cluster-addons.appspot.com/ :
 	Time updated:			Fri, 24 Sep 2021 20:31:07 GMT
 	Metageneration:			11
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

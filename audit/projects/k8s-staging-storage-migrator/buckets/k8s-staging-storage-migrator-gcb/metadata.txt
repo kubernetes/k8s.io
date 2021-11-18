@@ -14,7 +14,7 @@ gs://k8s-staging-storage-migrator-gcb/ :
 	Time updated:			Thu, 20 May 2021 10:34:58 GMT
 	Metageneration:			14
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

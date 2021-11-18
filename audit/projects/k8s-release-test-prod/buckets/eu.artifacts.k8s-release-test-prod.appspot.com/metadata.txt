@@ -14,7 +14,7 @@ gs://eu.artifacts.k8s-release-test-prod.appspot.com/ :
 	Time updated:			Fri, 10 Sep 2021 21:11:56 GMT
 	Metageneration:			43
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
