@@ -14,7 +14,7 @@ gs://asia.artifacts.k8s-staging-cip-test.appspot.com/ :
 	Time updated:			Sat, 04 Apr 2020 01:55:43 GMT
 	Metageneration:			10
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

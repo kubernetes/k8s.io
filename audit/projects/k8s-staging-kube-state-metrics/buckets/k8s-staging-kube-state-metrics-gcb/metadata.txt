@@ -14,7 +14,7 @@ gs://k8s-staging-kube-state-metrics-gcb/ :
 	Time updated:			Thu, 20 May 2021 10:06:17 GMT
 	Metageneration:			26
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

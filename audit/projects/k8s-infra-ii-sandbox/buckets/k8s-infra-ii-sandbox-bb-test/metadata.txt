@@ -17,7 +17,7 @@ gs://k8s-infra-ii-sandbox-bb-test/ :
 	Time updated:			Thu, 20 May 2021 21:26:12 GMT
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				
 	  [
