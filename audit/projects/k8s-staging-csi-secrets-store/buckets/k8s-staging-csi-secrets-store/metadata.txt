@@ -14,7 +14,7 @@ gs://k8s-staging-csi-secrets-store/ :
 	Time updated:			Fri, 24 Sep 2021 20:45:25 GMT
 	Metageneration:			25
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

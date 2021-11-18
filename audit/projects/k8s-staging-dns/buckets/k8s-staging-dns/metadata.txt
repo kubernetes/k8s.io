@@ -14,7 +14,7 @@ gs://k8s-staging-dns/ :
 	Time updated:			Fri, 24 Sep 2021 20:47:54 GMT
 	Metageneration:			27
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
