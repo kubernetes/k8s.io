@@ -404,11 +404,6 @@ function staging_special_case__k8s_staging_cluster_api_gcp() {
     ensure_staging_gcb_builder_service_account "${suffix}" "k8s-infra-prow-build-trusted"
 }
 
-# Enable additional API services to the kustomize project.
-function staging_special_case_services__k8s_staging_kustomize() {
-    # Enable the On-Demand Scanning API to run vulnerability scanning on kustomize images.
-    echo ondemandscanning.googleapis.com
-}
 
 # In order to build the release artifacts, the group needs to be
 # able to create and manage a keyring to encrypt a secret token
@@ -428,9 +423,6 @@ function staging_special_case__k8s_staging_kustomize() {
     principal="serviceAccount:${cloudbuild_sa_email}"
     ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyDecrypter"
     ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
-    # Grant the GSA permissions to on-demonad scanning kustomize images. 
-    # This requires the ondemandscanning.googleapis.com service be enabled.
-    ensure_project_role_binding "${project}" "${principal}" "roles/ondemandscanning.admin"
 }
 
 # In order for pull-release-image-* to run on k8s-infra-prow-build,
