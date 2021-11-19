@@ -14,7 +14,7 @@ gs://k8s-conform-provider-openstack/ :
 	Time updated:			Wed, 22 Sep 2021 18:59:57 GMT
 	Metageneration:			24
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

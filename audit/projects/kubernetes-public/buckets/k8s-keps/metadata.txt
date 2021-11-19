@@ -14,7 +14,7 @@ gs://k8s-keps/ :
 	Time updated:			Tue, 02 Nov 2021 19:48:36 GMT
 	Metageneration:			2
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

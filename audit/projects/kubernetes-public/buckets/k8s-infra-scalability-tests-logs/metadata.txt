@@ -14,7 +14,7 @@ gs://k8s-infra-scalability-tests-logs/ :
 	Time updated:			Tue, 03 Aug 2021 18:54:17 GMT
 	Metageneration:			3
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

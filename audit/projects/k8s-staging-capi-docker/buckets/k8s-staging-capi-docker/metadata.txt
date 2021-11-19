@@ -15,7 +15,7 @@ gs://k8s-staging-capi-docker/ :
 	Time updated:			Fri, 24 Sep 2021 20:20:27 GMT
 	Metageneration:			30
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

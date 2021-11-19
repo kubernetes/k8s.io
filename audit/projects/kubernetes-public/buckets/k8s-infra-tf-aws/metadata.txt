@@ -14,7 +14,7 @@ gs://k8s-infra-tf-aws/ :
 	Time updated:			Wed, 05 May 2021 07:09:50 GMT
 	Metageneration:			8
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
