@@ -14,7 +14,7 @@ gs://k8s-staging-kustomize/ :
 	Time updated:			Thu, 18 Nov 2021 21:25:14 GMT
 	Metageneration:			18
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

@@ -14,7 +14,7 @@ gs://k8s-staging-addon-manager/ :
 	Time updated:			Fri, 24 Sep 2021 20:12:03 GMT
 	Metageneration:			13
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
