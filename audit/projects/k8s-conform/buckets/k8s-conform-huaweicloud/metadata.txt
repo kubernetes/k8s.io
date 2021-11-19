@@ -14,7 +14,7 @@ gs://k8s-conform-huaweicloud/ :
 	Time updated:			Wed, 22 Sep 2021 18:59:10 GMT
 	Metageneration:			38
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

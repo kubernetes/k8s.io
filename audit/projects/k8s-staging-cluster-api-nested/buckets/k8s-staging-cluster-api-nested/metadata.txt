@@ -14,7 +14,7 @@ gs://k8s-staging-cluster-api-nested/ :
 	Time updated:			Fri, 24 Sep 2021 20:39:07 GMT
 	Metageneration:			11
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
