@@ -14,7 +14,7 @@ gs://k8s-staging-capi-openstack-gcb/ :
 	Time updated:			Thu, 20 May 2021 09:25:52 GMT
 	Metageneration:			30
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

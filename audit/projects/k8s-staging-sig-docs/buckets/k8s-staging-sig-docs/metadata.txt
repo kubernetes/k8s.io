@@ -14,7 +14,7 @@ gs://k8s-staging-sig-docs/ :
 	Time updated:			Fri, 24 Sep 2021 21:30:04 GMT
 	Metageneration:			11
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
