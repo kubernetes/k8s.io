@@ -14,7 +14,7 @@ gs://k8s-staging-kas-network-proxy/ :
 	Time updated:			Fri, 24 Sep 2021 21:03:51 GMT
 	Metageneration:			23
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

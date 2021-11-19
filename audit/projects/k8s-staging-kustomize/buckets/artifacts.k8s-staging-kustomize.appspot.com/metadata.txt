@@ -14,7 +14,7 @@ gs://artifacts.k8s-staging-kustomize.appspot.com/ :
 	Time updated:			Thu, 18 Nov 2021 21:24:55 GMT
 	Metageneration:			17
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

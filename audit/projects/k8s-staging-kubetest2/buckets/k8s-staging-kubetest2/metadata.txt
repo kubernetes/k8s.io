@@ -14,7 +14,7 @@ gs://k8s-staging-kubetest2/ :
 	Time updated:			Fri, 24 Sep 2021 21:10:55 GMT
 	Metageneration:			38
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

@@ -14,7 +14,7 @@ gs://k8s-staging-k8s-gsm-tools/ :
 	Time updated:			Fri, 24 Sep 2021 21:02:37 GMT
 	Metageneration:			15
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

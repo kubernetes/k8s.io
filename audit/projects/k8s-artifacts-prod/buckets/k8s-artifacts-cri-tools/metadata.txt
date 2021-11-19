@@ -15,7 +15,7 @@ gs://k8s-artifacts-cri-tools/ :
 	Time updated:			Fri, 10 Sep 2021 21:14:14 GMT
 	Metageneration:			56
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

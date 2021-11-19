@@ -14,7 +14,7 @@ gs://k8s-staging-coredns/ :
 	Time updated:			Fri, 24 Sep 2021 20:40:21 GMT
 	Metageneration:			55
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
