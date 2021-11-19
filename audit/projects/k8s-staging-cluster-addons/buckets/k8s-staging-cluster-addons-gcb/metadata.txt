@@ -14,7 +14,7 @@ gs://k8s-staging-cluster-addons-gcb/ :
 	Time updated:			Thu, 20 May 2021 09:31:52 GMT
 	Metageneration:			16
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
