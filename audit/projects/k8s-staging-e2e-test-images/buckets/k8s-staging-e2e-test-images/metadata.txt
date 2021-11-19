@@ -14,7 +14,7 @@ gs://k8s-staging-e2e-test-images/ :
 	Time updated:			Fri, 24 Sep 2021 20:49:09 GMT
 	Metageneration:			31
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

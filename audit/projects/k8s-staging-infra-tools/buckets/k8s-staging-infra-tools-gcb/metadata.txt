@@ -14,7 +14,7 @@ gs://k8s-staging-infra-tools-gcb/ :
 	Time updated:			Thu, 01 Jul 2021 01:21:46 GMT
 	Metageneration:			26
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

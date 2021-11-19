@@ -14,7 +14,7 @@ gs://k8s-staging-cluster-api-aws-gcb/ :
 	Time updated:			Thu, 20 May 2021 09:34:20 GMT
 	Metageneration:			30
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

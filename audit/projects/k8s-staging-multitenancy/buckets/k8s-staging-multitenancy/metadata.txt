@@ -15,7 +15,7 @@ gs://k8s-staging-multitenancy/ :
 	Time updated:			Fri, 24 Sep 2021 21:14:21 GMT
 	Metageneration:			26
 	Bucket Policy Only enabled:	True
-	Public access prevention:	inherited
+	Public access prevention:	unspecified
 	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]
