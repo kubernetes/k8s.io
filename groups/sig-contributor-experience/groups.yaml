@@ -115,6 +115,9 @@ groups:
       - dpapandrea@gmail.com
       - david.andrew.mckay@gmail.com
       - ihor@cncf.io
+      - hh@ii.coop
+      - caleb@ii.coop
+      - stephen@ii.coop
 
   #
   # k8s-staging write access for SIG-owned subprojects
