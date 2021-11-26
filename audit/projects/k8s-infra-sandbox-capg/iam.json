@@ -28,7 +28,6 @@
     {
       "members": [
         "group:k8s-infra-sandbox-capg@kubernetes.io",
-        "deleted:serviceAccount:cpanato-svc@k8s-infra-sandbox-capg.iam.gserviceaccount.com?uid=114932827956639983865",
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"
