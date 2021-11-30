@@ -54,6 +54,11 @@ data:
             ';
           }
 
+          # Redirect go import paths to Go package documentation.
+          if ($repo ~ "api|apimachinery|client-go|kubernetes") {
+            return 301 https://pkg.go.dev/k8s.io/$repo/$subpath;
+          }
+
           # Default to redirecting to the "real" site.
           return 301 https://kubernetes.io$request_uri;
         }

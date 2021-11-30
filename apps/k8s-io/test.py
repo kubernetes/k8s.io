@@ -149,6 +149,19 @@ class RedirTest(HTTPTestCase):
                     'http://' + url + path,
                     'https://' + url + path, 301)
 
+    def test_godoc_redirect(self):
+        self.assert_scheme_redirect(
+                'http://k8s.io/kubernetes',
+                'https://k8s.io/kubernetes', 301)
+        for repo in ('api', 'apimachinery', 'client-go', 'kubernetes'):
+          self.assert_scheme_redirect(
+                  'https://k8s.io/%s' % repo,
+                  'https://pkg.go.dev/k8s.io/%s' % repo, 301)
+        # Sub-paths also work.
+        self.assert_scheme_redirect(
+                'https://k8s.io/api/core/v1',
+                'https://pkg.go.dev/k8s.io/api/core/v1', 301)
+
     def test_go_get(self):
         self.assert_scheme_redirect(
                 'http://k8s.io/kubernetes?go-get=1',
