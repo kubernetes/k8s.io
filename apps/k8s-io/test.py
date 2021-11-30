@@ -153,7 +153,7 @@ class RedirTest(HTTPTestCase):
         self.assert_scheme_redirect(
                 'http://k8s.io/kubernetes',
                 'https://k8s.io/kubernetes', 301)
-        for repo in ('api', 'apimachinery', 'client-go', 'kubernetes'):
+        for repo in ('api', 'apimachinery', 'client-go'):
           self.assert_scheme_redirect(
                   'https://k8s.io/%s' % repo,
                   'https://pkg.go.dev/k8s.io/%s' % repo, 301)
