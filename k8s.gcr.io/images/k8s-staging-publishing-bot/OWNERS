@@ -3,11 +3,10 @@
 options:
   no_parent_owners: true
 approvers:
+  - publishing-bot-approvers
   - release-engineering-approvers
-  - dims
-  - nikhita
-  - sttts
 reviewers:
+  - publishing-bot-reviewers
   - release-engineering-reviewers
 
 labels:
