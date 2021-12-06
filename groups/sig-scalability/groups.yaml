@@ -50,6 +50,7 @@ groups:
       ReconcileMembers: "true"
     members:
       # scalability-oncall
+      - azylinski@google.com
       - jkaniuk@google.com
       - jprzychodzen@google.com
       - jupblb@google.com
@@ -74,6 +75,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
+      - azylinski@google.com
       - jkaniuk@google.com
       - jprzychodzen@google.com
       - jupblb@google.com
