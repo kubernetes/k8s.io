@@ -20,6 +20,14 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-perf-tests@kubernetes.io
+    name: k8s-infra-staging-perf-tests
+    description: |-
+      ACL for staging perf-tests artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-sig-scalability-oncall@kubernetes.io
 
   #
   # k8s-infra gcs write access
