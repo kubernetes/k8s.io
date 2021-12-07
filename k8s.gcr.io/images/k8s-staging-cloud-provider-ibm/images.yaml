@@ -1,3 +1,4 @@
 - name: ibm-vpc-block-csi-driver
   dmap:
     "sha256:7fbf041a9952c3ea54c626ba54e2fa1cbb243d3b04806cfc554f9ab37676a55f": ["v0.0.0"]
+    "sha256:39e9d71ded90227e25c3135ebeb2b73092fddbfeb4cd2d67ec80f568cbe666bc": ["v4.1.0"]
