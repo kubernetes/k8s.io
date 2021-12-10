@@ -279,6 +279,10 @@ cluster-api-aws.sigs:
 cluster-api-openstack.sigs:
 - type: CNAME
   value: kubernetes-sigs-cluster-api-openstack.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @gyliu513)
+cluster-api-ibmcloud.sigs:
+  - type: CNAME
+    value: kubernetes-sigs-cluster-api-ibmcloud.netlify.app
 # https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vincepri)
 release-0-1.cluster-api.sigs:
   type: CNAME
