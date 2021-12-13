@@ -139,8 +139,7 @@
       "members": [
         "group:gke-security-groups@kubernetes.io",
         "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
-        "serviceAccount:k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com",
-        "user:tjferrara@google.com"
+        "serviceAccount:k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.viewer"
     },
@@ -177,8 +176,7 @@
         "group:k8s-infra-ii-coop@kubernetes.io",
         "group:k8s-infra-prow-oncall@kubernetes.io",
         "group:k8s-infra-sandbox-capg@kubernetes.io",
-        "serviceAccount:k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com",
-        "user:mixia@google.com"
+        "serviceAccount:k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/viewer"
     }
