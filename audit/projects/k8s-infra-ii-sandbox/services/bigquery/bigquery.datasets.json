@@ -205,5 +205,14 @@
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211201",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20211201",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
   }
 ]
