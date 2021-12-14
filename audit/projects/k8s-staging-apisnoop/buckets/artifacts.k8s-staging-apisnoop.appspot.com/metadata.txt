@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-apisnoop.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 21 Jan 2020 18:12:15 GMT
-	Time updated:			Fri, 24 Sep 2021 20:12:56 GMT
-	Metageneration:			17
+	Time updated:			Tue, 14 Dec 2021 18:32:19 GMT
+	Metageneration:			18
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

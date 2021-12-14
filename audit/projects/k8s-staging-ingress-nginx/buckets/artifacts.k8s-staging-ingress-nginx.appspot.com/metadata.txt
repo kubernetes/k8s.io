@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-ingress-nginx.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 26 May 2020 18:48:53 GMT
-	Time updated:			Fri, 24 Sep 2021 20:59:54 GMT
-	Metageneration:			13
+	Time updated:			Tue, 14 Dec 2021 19:16:01 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
