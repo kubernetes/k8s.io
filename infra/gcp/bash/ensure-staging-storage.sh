@@ -220,6 +220,36 @@ function ensure_staging_gcs_bucket() {
     fi
 }
 
+# Ensure a GAR repo is provisioned in the given staging project, with
+# appropriate permissions for the given group and GAR admins
+# with auto-deletion enabled and appropriate permissions for the
+# given group and GCS admins
+#
+# $1: The GCP project (e.g. k8s-staging-foo)
+# $2: The group to grant write access (e.g. k8s-infra-staging-foo@kubernetes.io)
+function ensure_staging_gar_repo() {
+    if [ $# != 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
+        echo "${FUNCNAME[0]}(project, writers) requires 2 arguments" >&2
+        return 1
+    fi
+    local project="${1}"
+    local writers="${2}"
+    #local gar_bucket="gs://artifacts.${1}.appspot.com"
+
+    color 6 "Ensuring a GAR repo exists for project: ${project}"
+    ensure_gar_repo "${project}"
+
+    color 6 "Ensuring ${writers} can write to GAR for project: ${project}"
+    empower_group_to_write_gar "${writers}" "${project}"
+
+    color 6 "Ensuring GAR admins can admin GAR for project: ${project}"
+    empower_gar_admins "${project}"
+
+    # TODO(gar): Is this required?
+    #color 6 "Ensuring GCS access logs enabled for GAR bucket in project: ${project}"
+    #ensure_gcs_bucket_logging "${gcr_bucket}"
+}
+
 # Ensure a GCR repo is provisioned in the given staging project, with
 # appropriate permissions for the given group and GCR admins
 # with auto-deletion enabled and appropriate permissions for the
