@@ -83,6 +83,9 @@
   "networkConfig": {
     "defaultSnatStatus": {},
     "network": "projects/k8s-infra-prow-build/global/networks/default",
+    "serviceExternalIpsConfig": {
+      "enabled": true
+    },
     "subnetwork": "projects/k8s-infra-prow-build/regions/us-central1/subnetworks/default"
   },
   "networkPolicy": {

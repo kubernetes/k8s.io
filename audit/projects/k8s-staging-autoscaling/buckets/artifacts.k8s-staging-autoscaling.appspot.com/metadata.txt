@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-autoscaling.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 20 Mar 2020 19:00:58 GMT
-	Time updated:			Fri, 24 Sep 2021 20:15:18 GMT
-	Metageneration:			16
+	Time updated:			Tue, 14 Dec 2021 18:34:39 GMT
+	Metageneration:			17
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

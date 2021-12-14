@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-slack-infra.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 30 Apr 2020 16:46:24 GMT
-	Time updated:			Fri, 24 Sep 2021 21:31:58 GMT
-	Metageneration:			16
+	Time updated:			Tue, 14 Dec 2021 19:51:47 GMT
+	Metageneration:			17
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
