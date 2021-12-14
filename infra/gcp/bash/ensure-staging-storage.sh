@@ -356,22 +356,40 @@ function ensure_removed_containeranalysis_serviceagent() {
 # Special cases
 #
 
-# Release Manager Associates need view access to Release Engineering projects
-#
-# For k8s-staging-kubernetes, grant the kubernetes-release-test (old staging)
-# GCB service account admin GCR access to the new stging project for
-# Kubernetes releases. This is required for VDF as we need to continue
-# running stages/releases from the old project while publishing container
-# images to new project. ref: https://github.com/kubernetes/release/pull/1230
+# Release Manager special cases
 function ensure_release_manager_special_cases() {
     for project in "${RELEASE_STAGING_PROJECTS[@]}"; do
+        # Release Manager Associates need view access to Release Engineering
+        # projects
         color 6 "Empowering ${RELEASE_VIEWERS} as project viewers in ${project}"
         ensure_project_role_binding "${project}" "group:${RELEASE_VIEWERS}" "roles/viewer"
 
+        # For k8s-staging-kubernetes, grant the kubernetes-release-test (old
+        # staging) GCB service account admin GCR access to the new staging
+        # project for Kubernetes releases. This is required for VDF as we need
+        # to continue running stages/releases from the old project while
+        # publishing container images to new project.
+        # ref: https://github.com/kubernetes/release/pull/1230
         if [[ "${project}" == "k8s-staging-kubernetes" ]]; then
             color 6 "Empowering kubernetes-release-test GCB service account to admin GCR"
             empower_svcacct_to_admin_gcr "648026197307@cloudbuild.gserviceaccount.com" "${project}"
         fi
+
+        # Artifact Registry
+        #
+        # Enable Google Artifact Registry to allow Release Managers to prepare
+        # for GCR to Artifact Registry migration
+        # ref: https://github.com/kubernetes/k8s.io/issues/1343
+        ensure_services "${project}" artifactregistry.googleapis.com
+
+        # Roles: https://cloud.google.com/artifact-registry/docs/access-control#roles
+        #
+        # Empower Release Manager admins to create and manage repositories and
+        # artifacts
+        ensure_project_role_binding "${project}" "group:${RELEASE_ADMINS}" "roles/artifactregistry.admin"
+
+        # Empower Release Managers to read, write, and delete artifacts
+        ensure_project_role_binding "${project}" "group:${RELEASE_MANAGERS}" "roles/artifactregistry.repoAdmin"
     done 2>&1 | indent
 }
 
