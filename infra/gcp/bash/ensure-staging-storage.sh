@@ -44,9 +44,15 @@ mapfile -t STAGING_PROJECTS < <(k8s_infra_projects "staging")
 readonly STAGING_PROJECTS
 
 readonly RELEASE_STAGING_PROJECTS=(
+    "$(k8s_infra_project staging k8s-staging-artifact-promoter)"
+    "$(k8s_infra_project staging k8s-staging-build-image)"
+    "$(k8s_infra_project staging k8s-staging-ci-images)"
+    "$(k8s_infra_project staging k8s-staging-cip-test)"
     "$(k8s_infra_project staging k8s-staging-experimental)"
     "$(k8s_infra_project staging k8s-staging-kubernetes)"
     "$(k8s_infra_project staging k8s-staging-releng)"
+    "$(k8s_infra_project staging k8s-staging-releng-test)"
+    "$(k8s_infra_project staging k8s-staging-publishing-bot)"
 )
 
 readonly STAGING_PROJECT_SERVICES=(
