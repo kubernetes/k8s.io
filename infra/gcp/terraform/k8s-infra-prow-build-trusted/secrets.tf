@@ -16,6 +16,10 @@ limitations under the License.
 
 locals {
   build_cluster_secrets = {
+    capdo-quayio-registry-secret = {
+      group = "sig-cluster-lifecycle"
+      owners = "k8s-infra-staging-cluster-api-do@kubernetes.io"
+    }
     cncf-ci-github-token = {
       group  = "sig-testing"
       owners = "k8s-infra-ii-coop@kubernetes.io"
