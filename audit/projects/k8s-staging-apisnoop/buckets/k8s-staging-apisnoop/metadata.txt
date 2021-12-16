@@ -11,8 +11,8 @@ gs://k8s-staging-apisnoop/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 21 Jan 2020 18:13:00 GMT
-	Time updated:			Tue, 14 Dec 2021 18:32:38 GMT
-	Metageneration:			30
+	Time updated:			Thu, 16 Dec 2021 01:58:01 GMT
+	Metageneration:			34
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

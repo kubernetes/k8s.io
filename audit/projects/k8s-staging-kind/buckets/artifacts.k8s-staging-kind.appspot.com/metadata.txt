@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-kind.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 15 Apr 2020 00:28:09 GMT
-	Time updated:			Tue, 14 Dec 2021 19:20:40 GMT
-	Metageneration:			15
+	Time updated:			Thu, 16 Dec 2021 02:45:25 GMT
+	Metageneration:			18
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

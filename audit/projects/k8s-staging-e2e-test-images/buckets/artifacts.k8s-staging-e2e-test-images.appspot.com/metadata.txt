@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-e2e-test-images.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Dec 2019 17:23:28 GMT
-	Time updated:			Tue, 14 Dec 2021 19:05:25 GMT
-	Metageneration:			22
+	Time updated:			Thu, 16 Dec 2021 02:30:48 GMT
+	Metageneration:			26
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

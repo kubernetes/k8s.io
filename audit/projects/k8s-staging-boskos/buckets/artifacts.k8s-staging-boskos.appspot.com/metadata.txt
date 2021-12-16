@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-boskos.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 26 May 2020 18:52:54 GMT
-	Time updated:			Tue, 14 Dec 2021 18:35:51 GMT
-	Metageneration:			15
+	Time updated:			Thu, 16 Dec 2021 02:01:20 GMT
+	Metageneration:			19
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
