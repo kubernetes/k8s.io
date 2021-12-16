@@ -109,6 +109,9 @@
   "networkConfig": {
     "defaultSnatStatus": {},
     "network": "projects/kubernetes-public/global/networks/default",
+    "serviceExternalIpsConfig": {
+      "enabled": true
+    },
     "subnetwork": "projects/kubernetes-public/regions/us-central1/subnetworks/gke-aaa-subnet-4d0eb763"
   },
   "networkPolicy": {

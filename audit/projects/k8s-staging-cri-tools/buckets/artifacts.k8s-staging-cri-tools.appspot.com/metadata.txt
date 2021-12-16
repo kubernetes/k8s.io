@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-cri-tools.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 19 Nov 2020 19:28:20 GMT
-	Time updated:			Tue, 14 Dec 2021 18:59:30 GMT
-	Metageneration:			12
+	Time updated:			Thu, 16 Dec 2021 02:25:24 GMT
+	Metageneration:			16
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

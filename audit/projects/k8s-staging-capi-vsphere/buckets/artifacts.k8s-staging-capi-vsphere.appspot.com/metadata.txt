@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-capi-vsphere.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Mar 2020 15:39:11 GMT
-	Time updated:			Tue, 14 Dec 2021 18:42:45 GMT
-	Metageneration:			17
+	Time updated:			Thu, 16 Dec 2021 02:08:40 GMT
+	Metageneration:			21
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

@@ -2,6 +2,18 @@
   "bindings": [
     {
       "members": [
+        "group:k8s-infra-release-admins@kubernetes.io"
+      ],
+      "role": "roles/artifactregistry.admin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-editors@kubernetes.io"
+      ],
+      "role": "roles/artifactregistry.repoAdmin"
+    },
+    {
+      "members": [
         "serviceAccount:960211007710@cloudbuild.gserviceaccount.com",
         "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
@@ -46,6 +58,7 @@
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-release-viewers@kubernetes.io",
         "group:k8s-infra-staging-build-image@kubernetes.io"
       ],
       "role": "roles/viewer"
