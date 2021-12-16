@@ -26,9 +26,9 @@ groups:
       - thockin@google.com
       - timothysc@gmail.com
       - tpepper@vmware.com
+      - brandon@ifup.org
       # missing folks:
       # Michelle Noorali
-      # Brandon Philips
 
   - email-id: steering-private@kubernetes.io
     name: steering-private
