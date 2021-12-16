@@ -16,6 +16,7 @@ groups:
       - killen.bob@gmail.com
       - lachlan.evenson@microsoft.com
       - liggitt@google.com
+      - michelle.noorali@gmail.com
       - nikhitaraghunath@gmail.com
       - paris.pittman@gmail.com
       - phil.wittrock@gmail.com
@@ -27,8 +28,6 @@ groups:
       - timothysc@gmail.com
       - tpepper@vmware.com
       - brandon@ifup.org
-      # missing folks:
-      # Michelle Noorali
 
   - email-id: steering-private@kubernetes.io
     name: steering-private
