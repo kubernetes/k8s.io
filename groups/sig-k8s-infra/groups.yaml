@@ -56,6 +56,20 @@ groups:
       - spiffxp@google.com
       - thockin@google.com
 
+  - email-id: sig-k8s-infra@kubernetes.io
+    name: sig-k8s-infra
+    description: |-
+      Public mailing list for SIG K8s Infra
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - sig-k8s-infra-leads@kubernetes.io
+
   #
   # k8s-staging write access for SIG-owned subprojects
   #
