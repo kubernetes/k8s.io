@@ -23,7 +23,7 @@ spec:
         - --dry-run=false
         - --job-config-path=/etc/job-config
         - --kubeconfig=/etc/kubeconfig/kubeconfig
-        image: gcr.io/k8s-prow/sinker:v20211215-2ac42ad900
+        image: gcr.io/k8s-prow/sinker:v20211216-b5865074c4
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
