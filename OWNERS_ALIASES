@@ -212,22 +212,28 @@ aliases:
     - cpanato
     - jeremyrickard
     - justaugustus
+    - palnabarun
     - puerco
     - saschagrunert
     - xmudrii
+    - Verolop
   release-engineering-approvers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # subproject owner / SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - Verolop # Release Manager
     - xmudrii # Release Manager
   release-engineering-reviewers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # subproject owner / SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - Verolop # Release Manager
     - xmudrii # Release Manager
   # business hours oncall for prow etc (https://go.k8s.io/oncall)
   test-infra-oncall:

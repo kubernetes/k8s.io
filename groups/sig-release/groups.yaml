@@ -42,6 +42,7 @@ groups:
       - gveronicalg@gmail.com
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
+      - pal.nabarun95@gmail.com
       - saschagrunert@gmail.com
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
@@ -225,6 +226,7 @@ groups:
       - augustus@cisco.com
       - gveronicalg@gmail.com
       - mudrinic.mare@gmail.com
+      - pal.nabarun95@gmail.com
 
   - email-id: release-managers@kubernetes.io
     name: release-managers
@@ -343,7 +345,7 @@ groups:
       - m.r.boxell@gmail.com # 1.23 Release Comms Shadow
       - nng.grace@gmail.com # 1.23 Enhancements Shadow
       - nwaddington@cncf.io # 1.23 Docs Shadow
-      - pal.nabarun95@gmail.com # 1.23 Release Branch Manager Shadow
+      - pal.nabarun95@gmail.com # Release Manager // 1.24 Release Branch Manager
       - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
       - parulsahoo5jan@gmail.com # 1.23 Release Notes Shadow
       - priyankasaggu11929@gmail.com # 1.23 Enhancements Shadow
