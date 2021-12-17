@@ -212,6 +212,7 @@ aliases:
     - cpanato
     - jeremyrickard
     - justaugustus
+    - palnabarun
     - puerco
     - saschagrunert
     - xmudrii
@@ -219,6 +220,7 @@ aliases:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # subproject owner / SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
     - xmudrii # Release Manager
@@ -226,6 +228,7 @@ aliases:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # subproject owner / SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
     - xmudrii # Release Manager
