@@ -173,3 +173,21 @@
     "sha256:dec9e1bdf3b917b023d956ab105618dd6d9f5287164e4c2fefe33b9a39068f0e": ["1.8.12"]
     "sha256:317561e5fe7da61298c577a562eacef8c776671b0322fb72842fd8c5f470f3c6": ["1.8.13"]
     "sha256:105cf60eefffcef4cf395f557cce44f887c0550bc41f3d176d1de910cec4f0d0": ["1.8.14"]
+- name: vpa-stress
+  dmap:
+    "sha256:d3be38c460b08df905a4721eb31724bb5b7d828a7e18c1a87bfd420f25a7ffb4": ["0.1.0"]
+- name: vpa-stress-amd64
+  dmap:
+    "sha256:eaddf8f69aa57e98fafe194e760ef7524426dbd3dd5fe86490f45f90b0e6c50d": ["0.1.0"]
+- name: vpa-stress-arm
+  dmap:
+    "sha256:eaddf8f69aa57e98fafe194e760ef7524426dbd3dd5fe86490f45f90b0e6c50d": ["0.1.0"]
+- name: vpa-stress-arm64
+  dmap:
+    "sha256:eaddf8f69aa57e98fafe194e760ef7524426dbd3dd5fe86490f45f90b0e6c50d": ["0.1.0"]
+- name: vpa-stress-ppc64le
+  dmap:
+    "sha256:eaddf8f69aa57e98fafe194e760ef7524426dbd3dd5fe86490f45f90b0e6c50d": ["0.1.0"]
+- name: vpa-stress-s390x
+  dmap:
+    "sha256:d3be38c460b08df905a4721eb31724bb5b7d828a7e18c1a87bfd420f25a7ffb4": ["0.1.0"]
