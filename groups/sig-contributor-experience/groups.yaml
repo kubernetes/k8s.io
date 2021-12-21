@@ -1,5 +1,4 @@
 groups:
-
   #
   # Mailing lists
   #
@@ -31,6 +30,34 @@ groups:
       - jberkus@redhat.com
       - chris@chrisshort.net
       - samudralavamshi@gmail.com
+
+  - email-id: dev@kubernetes.io
+    name: dev
+    description: |-
+      Mailing list for upstream Kubernetes contributors. This includes process changes, release info, contributor events, and more.
+
+      Try #kubernetes-users on slack or discuss.k8s.io for end user troubleshooting and discussion.
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - contributors@kubernetes.io
+      - spiffxp@gmail.com
+      - paris.pittman@gmail.com
+      - killen.bob@gmail.com
+      - davanum@gmail.com
+    managers:
+      - nikitaraghunath@gmail.com
+      - jdumars@gmail.com
+      - d.panigrahi.nitrkl@gmail.com
+      - ihor.dvoretskyi@gmail.com
+      - atharvashinde179@gmail.com
+      - ctadeu@gmail.com
+      - pal.nabarun95@gmail.com
 
   - email-id: github@kubernetes.io
     name: github
@@ -154,7 +181,6 @@ groups:
   # infrastructure owned or managed by this SIG. A high level of trust is
   # required for membership in these groups.
   #
-
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster

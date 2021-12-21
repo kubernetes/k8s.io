@@ -83,6 +83,7 @@ restrictions:
   - path: "sig-contributor-experience/groups.yaml"
     allowedGroups:
       - "^community@kubernetes.io$"
+      - "^dev@kubernetes.io$"
       - "^github@kubernetes.io$"
       - "^lwkd@kubernetes.io$"
       - "^moderators@kubernetes.io$"
