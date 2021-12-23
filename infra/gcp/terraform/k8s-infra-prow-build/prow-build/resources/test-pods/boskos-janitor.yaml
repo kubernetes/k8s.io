@@ -22,7 +22,7 @@ spec:
         image: gcr.io/k8s-staging-boskos/janitor:v20211118-344faec
         args:
         - --boskos-url=http://boskos.test-pods.svc.cluster.local.
-        - --resource-type=gce-project,gpu-project,scalability-project
+        - --resource-type=gce-project,gpu-project,scalability-project,scalability-scale-project
         - --pool-size=20
         - --
         - --hours=0

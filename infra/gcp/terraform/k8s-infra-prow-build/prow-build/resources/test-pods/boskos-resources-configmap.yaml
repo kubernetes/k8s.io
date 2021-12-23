@@ -172,6 +172,10 @@ data:
       - k8s-infra-e2e-boskos-scale-30
       state: dirty
       type: scalability-project
+    - names:
+      - k8s-infra-e2e-scale-5k-project
+      state: dirty
+      type: scalability-scale-project
 kind: ConfigMap
 metadata:
   creationTimestamp: null
