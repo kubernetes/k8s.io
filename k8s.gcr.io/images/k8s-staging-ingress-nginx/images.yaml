@@ -127,3 +127,4 @@
 - name: nginx-errors
   dmap:
     "sha256:5530c7fc1fa75b49e068d6b7b4f8f1c13a5834c155ba7abd5943b9057c3b925b": ["0.48.1"]
+    "sha256:1d69f28d6412b0f2a6302f9df9a6bc49e83703336a35f95ab109cad10e039120": ["1.0.0"]
