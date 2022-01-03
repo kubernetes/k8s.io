@@ -51,7 +51,7 @@ type AdminService interface {
 	ListGroups() (*admin.Groups, error)
 	// ListMembers here is a proxy to the ListMembers method of the underlying
 	// AdminServiceClient being used.
-	ListMembers(groupKey string) (*admin.Members, error)
+	ListMembers(groupKey string) ([]*admin.Member, error)
 }
 
 // GroupService provides functionality to perform high level
@@ -151,7 +151,7 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 
 	for _, memberEmailId := range members {
 		var member *admin.Member
-		for _, m := range l.Members {
+		for _, m := range l {
 			if EmailAddressEquals(m.Email, memberEmailId) {
 				member = m
 				break
@@ -324,7 +324,7 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
 
-	for _, m := range l.Members {
+	for _, m := range l {
 		found := false
 		for _, m2 := range members {
 			if EmailAddressEquals(m2, m.Email) {
@@ -380,7 +380,7 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
 
-	for _, m := range l.Members {
+	for _, m := range l {
 		found := false
 		for _, m2 := range members {
 			if EmailAddressEquals(m2, m.Email) {
@@ -417,7 +417,7 @@ func (as *adminService) ListGroups() (*admin.Groups, error) {
 }
 
 // ListMembers lists all the members of a group with a particular groupKey.
-func (as *adminService) ListMembers(groupKey string) (*admin.Members, error) {
+func (as *adminService) ListMembers(groupKey string) ([]*admin.Member, error) {
 	return as.client.ListMembers(groupKey)
 }
 

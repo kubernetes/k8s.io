@@ -190,11 +190,11 @@ func TestAddOrUpdateGroupMembers(t *testing.T) {
 		if err != nil {
 			t.Errorf("error while listing members for groupKey %s and case %s: %w", c.g.EmailId, c.desc, err)
 		}
-		if !checkForMemberListEquality(result.Members, c.expectedMembers) {
+		if !checkForMemberListEquality(result, c.expectedMembers) {
 			t.Errorf("unexpected list of members for %s, expected: %#v, got: %#v",
 				c.desc,
 				getMemberListInPrintableForm(c.expectedMembers),
-				getMemberListInPrintableForm(result.Members),
+				getMemberListInPrintableForm(result),
 			)
 		}
 	}
@@ -383,11 +383,11 @@ func TestRemoveOwnerOrManagersFromGroup(t *testing.T) {
 			t.Errorf("error while listing members for groupKey %s and case %s: %w", c.g.EmailId, c.desc, err)
 		}
 
-		if !checkForMemberListEquality(result.Members, c.expectedMembers) {
+		if !checkForMemberListEquality(result, c.expectedMembers) {
 			t.Errorf("unexpected list of members for %s, expected: %#v, got: %#v",
 				c.desc,
 				getMemberListInPrintableForm(c.expectedMembers),
-				getMemberListInPrintableForm(result.Members),
+				getMemberListInPrintableForm(result),
 			)
 		}
 	}
@@ -449,11 +449,11 @@ func TestRemoveMembersFromGroup(t *testing.T) {
 			t.Errorf("error while listing members for groupKey %s and case %s: %w", c.g.EmailId, c.desc, err)
 		}
 
-		if !checkForMemberListEquality(result.Members, c.expectedMembers) {
+		if !checkForMemberListEquality(result, c.expectedMembers) {
 			t.Errorf("unexpected list of members for %s, expected: %#v, got: %#v",
 				c.desc,
 				getMemberListInPrintableForm(c.expectedMembers),
-				getMemberListInPrintableForm(result.Members),
+				getMemberListInPrintableForm(result),
 			)
 		}
 	}
