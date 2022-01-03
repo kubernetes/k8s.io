@@ -32,7 +32,7 @@ groups:
       - samudralavamshi@gmail.com
 
   - email-id: dev@kubernetes.io
-    name: dev
+    name: Kubernetes Contributing and Upstream Development
     description: |-
       Mailing list for upstream Kubernetes contributors. This includes process changes, release info, contributor events, and more.
 
