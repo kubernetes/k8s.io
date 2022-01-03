@@ -313,7 +313,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 			return fmt.Errorf("unable to retrieve members in group : %w", err)
 		}
 
-		for _, m := range l.Members {
+		for _, m := range l {
 			switch m.Role {
 			case OwnerRole:
 				group.Owners = append(group.Owners, m.Email)

@@ -125,7 +125,7 @@ func (fasc *FakeAdminServiceClient) ListGroups() (*admin.Groups, error) {
 	return groups, nil
 }
 
-func (fasc *FakeAdminServiceClient) ListMembers(groupKey string) (*admin.Members, error) {
+func (fasc *FakeAdminServiceClient) ListMembers(groupKey string) ([]*admin.Member, error) {
 	_, ok := fasc.Members[groupKey]
 	if !ok {
 		return nil, fmt.Errorf("groupKey %s not found", groupKey)
@@ -136,7 +136,7 @@ func (fasc *FakeAdminServiceClient) ListMembers(groupKey string) (*admin.Members
 		members.Members = append(members.Members, member)
 	}
 
-	return members, nil
+	return members.Members, nil
 }
 
 func (fasc *FakeAdminServiceClient) InsertGroup(group *admin.Group) (*admin.Group, error) {

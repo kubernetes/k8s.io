@@ -69,11 +69,11 @@ func (s state) isReconciled(desiredState []GoogleGroup) error {
 		if err != nil {
 			return err
 		}
-		if !checkForMemberListEquality(desiredMembers, currentMembers.Members) {
+		if !checkForMemberListEquality(desiredMembers, currentMembers) {
 			return fmt.Errorf(
 				"member lists do not match (email, role): desired: %#v, actual: %#v",
 				getMemberListInPrintableForm(desiredMembers),
-				getMemberListInPrintableForm(currentMembers.Members),
+				getMemberListInPrintableForm(currentMembers),
 			)
 		}
 		currentSettings, err := s.groupClient.Get(currGroup.Email)
