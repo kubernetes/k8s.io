@@ -22,7 +22,7 @@ rules:
     verbs: ["*"]
   - apiGroups: ["kubernetes-client"]
     resources: ["externalsecrets"]
-    verbs: ["list","watch"]
+    verbs: ["list", "watch"]
   - apiGroups: ["networking.gke.io"]
     resources: ["managedcertificates"]
     verbs: ["*"]
