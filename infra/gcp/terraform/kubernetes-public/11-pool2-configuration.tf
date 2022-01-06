@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
- 
+
 /*
 This file defines:
 - Node pool for pool2
@@ -59,7 +59,7 @@ resource "google_container_node_pool" "pool2" {
 
     // Needed for workload identity
     workload_metadata_config {
-      node_metadata = "GKE_METADATA_SERVER"
+      mode = "GKE_METADATA"
     }
     metadata = {
       disable-legacy-endpoints = "true"

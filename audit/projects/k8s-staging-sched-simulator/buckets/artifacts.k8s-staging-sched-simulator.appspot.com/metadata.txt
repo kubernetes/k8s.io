@@ -11,9 +11,10 @@ gs://artifacts.k8s-staging-sched-simulator.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 09 Sep 2021 13:37:59 GMT
-	Time updated:			Fri, 24 Sep 2021 21:26:31 GMT
-	Metageneration:			10
+	Time updated:			Thu, 16 Dec 2021 03:07:45 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

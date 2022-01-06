@@ -59,7 +59,7 @@ resource "google_container_node_pool" "node_pool" {
 
     // Needed for workload identity
     workload_metadata_config {
-      node_metadata = "GKE_METADATA_SERVER"
+      mode = "GKE_METADATA"
     }
     metadata = {
       disable-legacy-endpoints = "true"

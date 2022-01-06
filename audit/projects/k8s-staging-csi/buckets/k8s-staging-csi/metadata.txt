@@ -11,9 +11,10 @@ gs://k8s-staging-csi/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 10 May 2019 03:42:03 GMT
-	Time updated:			Fri, 24 Sep 2021 20:44:07 GMT
-	Metageneration:			50
+	Time updated:			Thu, 16 Dec 2021 02:26:47 GMT
+	Metageneration:			55
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

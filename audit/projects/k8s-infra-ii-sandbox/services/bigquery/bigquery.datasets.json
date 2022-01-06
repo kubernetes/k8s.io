@@ -154,36 +154,63 @@
   },
   {
     "kind": "bigquery#dataset",
-    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_deletemelol",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211001",
     "datasetReference": {
-      "datasetId": "etl_script_generated_set_deletemelol",
+      "datasetId": "etl_script_generated_set_20211001",
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"
   },
   {
     "kind": "bigquery#dataset",
-    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_prod",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211004",
     "datasetReference": {
-      "datasetId": "etl_script_generated_set_prod",
+      "datasetId": "etl_script_generated_set_20211004",
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"
   },
   {
     "kind": "bigquery#dataset",
-    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_testdeleteme",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211005",
     "datasetReference": {
-      "datasetId": "etl_script_generated_set_testdeleteme",
+      "datasetId": "etl_script_generated_set_20211005",
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"
   },
   {
     "kind": "bigquery#dataset",
-    "id": "k8s-infra-ii-sandbox:riaan_data_store",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211011",
     "datasetReference": {
-      "datasetId": "riaan_data_store",
+      "datasetId": "etl_script_generated_set_20211011",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211019",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20211019",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211020",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20211020",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20211201",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20211201",
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"

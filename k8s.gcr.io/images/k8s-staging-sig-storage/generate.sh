@@ -29,6 +29,7 @@ readonly images=(
     csi-provisioner
     csi-resizer
     csi-snapshotter
+    hello-populator
     hostpathplugin
     iscsiplugin
     livenessprobe
@@ -39,7 +40,7 @@ readonly images=(
     # TODO: nfsplugin?
     snapshot-controller
     snapshot-validation-webhook
-    # TODO: validation-webhook?
+    volume-data-source-validator
 )
 
 for image in "${images[@]}"; do

@@ -7,6 +7,9 @@ periodics:
   - org: kubernetes
     repo: k8s.io
     base_ref: main
+  annotations:
+    testgrid-dashboards: sig-k8s-infra-prow
+    testgrid-tab-name: k8s-infra-prow-heartbeat
   spec:
     containers:
     - image: gcr.io/k8s-staging-infra-tools/k8s-infra:latest

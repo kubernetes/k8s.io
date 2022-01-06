@@ -93,7 +93,7 @@ resource "google_bigquery_dataset" "test_usage_metering" {
 // IMPORTANT: The prod_ and test_ forms of this resource MUST be kept in sync.
 //            Any changes in one MUST be reflected in the other.
 resource "google_container_cluster" "prod_cluster" {
-  count     = var.is_prod_cluster == "true" ? 1 : 0
+  count = var.is_prod_cluster == "true" ? 1 : 0
 
   name     = var.cluster_name
   location = var.cluster_location
@@ -117,16 +117,6 @@ resource "google_container_cluster" "prod_cluster" {
   // objects
   remove_default_node_pool = true
 
-  // Disable local and certificate auth
-  master_auth {
-    username = ""
-    password = ""
-
-    client_certificate_config {
-      issue_client_certificate = false
-    }
-  }
-
   // Enable google-groups for RBAC
   authenticator_groups_config {
     security_group = "gke-security-groups@kubernetes.io"
@@ -134,7 +124,7 @@ resource "google_container_cluster" "prod_cluster" {
 
   // Enable workload identity for GCP IAM
   workload_identity_config {
-    identity_namespace = "${var.project_name}.svc.id.goog"
+    workload_pool = "${var.project_name}.svc.id.goog"
   }
 
   // Enable Stackdriver Kubernetes Monitoring
@@ -185,6 +175,9 @@ resource "google_container_cluster" "prod_cluster" {
     }
   }
 
+  // Enable Shielded Nodes feature
+  enable_shielded_nodes = var.enable_shielded_nodes
+
   release_channel {
     channel = var.release_channel
   }
@@ -195,7 +188,7 @@ resource "google_container_cluster" "prod_cluster" {
   }
 }
 resource "google_container_cluster" "test_cluster" {
-  count     = var.is_prod_cluster == "true" ? 0 : 1
+  count = var.is_prod_cluster == "true" ? 0 : 1
 
   name     = var.cluster_name
   location = var.cluster_location
@@ -218,16 +211,6 @@ resource "google_container_cluster" "test_cluster" {
   // objects
   remove_default_node_pool = true
 
-  // Disable local and certificate auth
-  master_auth {
-    username = ""
-    password = ""
-
-    client_certificate_config {
-      issue_client_certificate = false
-    }
-  }
-
   // Enable google-groups for RBAC
   authenticator_groups_config {
     security_group = "gke-security-groups@kubernetes.io"
@@ -235,7 +218,7 @@ resource "google_container_cluster" "test_cluster" {
 
   // Enable workload identity for GCP IAM
   workload_identity_config {
-    identity_namespace = "${var.project_name}.svc.id.goog"
+    workload_pool = "${var.project_name}.svc.id.goog"
   }
 
   // Enable Stackdriver Kubernetes Monitoring

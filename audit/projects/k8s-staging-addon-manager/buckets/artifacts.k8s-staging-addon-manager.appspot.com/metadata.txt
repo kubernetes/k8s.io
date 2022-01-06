@@ -11,9 +11,10 @@ gs://artifacts.k8s-staging-addon-manager.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 30 Sep 2020 15:49:57 GMT
-	Time updated:			Fri, 24 Sep 2021 20:11:44 GMT
-	Metageneration:			12
+	Time updated:			Thu, 16 Dec 2021 01:56:37 GMT
+	Metageneration:			17
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

@@ -11,9 +11,10 @@ gs://k8s-staging-kubetest2/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 24 Mar 2021 18:16:19 GMT
-	Time updated:			Fri, 24 Sep 2021 21:10:55 GMT
-	Metageneration:			38
+	Time updated:			Thu, 16 Dec 2021 02:51:08 GMT
+	Metageneration:			42
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

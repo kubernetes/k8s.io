@@ -11,9 +11,10 @@ gs://k8s-staging-infra-tools/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 30 Apr 2020 16:50:17 GMT
-	Time updated:			Fri, 24 Sep 2021 20:58:58 GMT
-	Metageneration:			24
+	Time updated:			Thu, 16 Dec 2021 02:40:14 GMT
+	Metageneration:			29
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

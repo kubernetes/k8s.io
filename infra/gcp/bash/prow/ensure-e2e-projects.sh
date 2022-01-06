@@ -102,11 +102,14 @@ function ensure_e2e_project() {
 
     color 6 "Ensure prow-build prowjobs are able to ssh to instances in e2e project: ${prj}"
     prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
+    k8s_prow_builds_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+/ZdafYYrJknk08g98sYS1Nr+aVdAnhHpQyXBx7EAT9pazCGaoiYnXgC82FAfTVMqdsqnIiP+7FgQTFLNYvBt8KsBd9qCkuMh/Q1QYVh4kfjjuGUrjfo020pxGSvp+67kbxm6lubaio9AgJ9XXE+SP1AYbyKTvXEzk5Tu7gGnRt3OrjVB+9eqTnVJOjS/BAOTJV5DWQ7xMubHlT9NmQ/S2hotMoiJJybYGUalOfcf8ZkyspU2oR+x13DCfjvFdzF4U0fb/uvTJZeu22w887M5y0YQulFY2LIeoAUE4XwoOv0nxzwbtZpqPHwtfLgq3G906KHW5e6slXu8kGda656n prow"
     ssh_keys_expected=(
+      "${k8s_prow_builds_ssh_pubkey}"
       "${prow_build_ssh_pubkey}"
       # TODO(amwat,spiffxp): something is adding an extra prow: prefix, it is
       # unclear where in prow->kubetest2->cluster/log-dump.sh->`gcloud ssh`
       # this is happening
+      "prow:${k8s_prow_builds_ssh_pubkey}"
       "prow:${prow_build_ssh_pubkey}"
     )
 
@@ -168,8 +171,8 @@ function ensure_e2e_projects() {
         color 3 "Configuring e2e project: ${project}"
         ensure_e2e_project "${project}" 2>&1 | indent
 
-        color 3 "Ensuring OS Login is disabled for $project"
-        disable_project_oslogin "${project}" 2>&1 | indent
+        # color 3 "Ensuring OS Login is disabled for $project"
+        # disable_project_oslogin "${project}" 2>&1 | indent
     done
 }
 

@@ -12,9 +12,10 @@ gs://k8s-staging-capi-docker/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Sep 2019 20:57:28 GMT
-	Time updated:			Fri, 24 Sep 2021 20:20:27 GMT
-	Metageneration:			30
+	Time updated:			Thu, 16 Dec 2021 02:04:04 GMT
+	Metageneration:			35
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

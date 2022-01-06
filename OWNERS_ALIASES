@@ -16,13 +16,13 @@ aliases:
     - enj
     - liggitt
     - mikedanese
-    - tallclair
+    - ritazh
   sig-autoscaling-leads:
     - gjtempleton
     - mwielgus
   sig-cli-leads:
+    - KnVerey
     - eddiezane
-    - pwittrock
     - seans3
     - soltysh
   sig-cloud-provider-leads:
@@ -32,13 +32,14 @@ aliases:
     - fabriziopandini
     - justinsb
     - neolit123
-    - timothysc
+    - vincepri
   sig-contributor-experience-leads:
     - alisondy
     - cblecker
     - mrbobbytables
     - nikhita
   sig-docs-leads:
+    - divya-mohan0209
     - jimangel
     - kbhawkey
     - onlydole
@@ -70,18 +71,19 @@ aliases:
     - puerco
     - saschagrunert
   sig-scalability-leads:
-    - mm4tt
+    - marseel
     - shyamjvs
     - wojtek-t
   sig-scheduling-leads:
     - Huang-Wei
     - ahg-g
+    - alculquicondor
   sig-security-leads:
-    - iancoldwater
+    - IanColdwater
     - tabbysable
   sig-service-catalog-leads:
     - jberkhahn
-    - mszostok
+    - jhvhs
   sig-storage-leads:
     - jsafrane
     - msau42
@@ -89,6 +91,8 @@ aliases:
     - xing-yang
   sig-testing-leads:
     - BenTheElder
+    - alvaroaleman
+    - cjwagner
     - spiffxp
     - stevekuznetsov
   sig-ui-leads:
@@ -97,18 +101,16 @@ aliases:
     - shu-mutou
   sig-usability-leads:
     - hpandeycodeit
+    - morengab
     - tashimi
   sig-windows-leads:
-    - benmoss
-    - ddebroy
+    - claudiubelu
+    - jayunit100
+    - jsturtevant
     - marosset
-    - michmike
   wg-api-expression-leads:
     - apelisse
     - kwiesmueller
-  wg-component-standard-leads:
-    - mtaufen
-    - stealthybox
   wg-data-protection-leads:
     - xing-yang
     - yuxiangqian
@@ -116,25 +118,19 @@ aliases:
     - cantbewong
     - cindyxing
     - dejanb
-  wg-lts-leads:
-    - imkin
-    - quinton-hoole
-    - tpepper
-    - youngnick
   wg-multitenancy-leads:
     - srampal
     - tashimi
-  wg-naming-leads:
-    - celestehorgan
-    - jdumars
-    - justaugustus
   wg-policy-leads:
-    - ericavonb
-    - hannibalhuang
+    - JimBugwadia
+    - rficcaglia
   wg-reliability-leads:
     - deads2k
     - stevekuznetsov
     - wojtek-t
+  wg-structured-logging-leads:
+    - pohly
+    - serathius
   ug-big-data-leads:
     - erikerlandson
     - foxish
@@ -145,14 +141,13 @@ aliases:
     - mylesagray
     - phenixblue
   committee-code-of-conduct:
-    - AevaOnline
     - celestehorgan
+    - cpanato
     - karenhchu
-    - tashimi
-    - tpepper
+    - palnabarun
+    - vllry
   committee-security-response:
     - cjcullen
-    - cji
     - joelsmith
     - lukehinds
     - micahhausler
@@ -161,12 +156,12 @@ aliases:
     - tallclair
   committee-steering:
     - cblecker
-    - derekwaynecarr
     - dims
+    - justaugustus
     - liggitt
     - mrbobbytables
-    - nikhita
     - parispittman
+    - tpepper
 ## BEGIN CUSTOM CONTENT
   build-admins:
     - amwat
@@ -190,9 +185,9 @@ aliases:
     - saschagrunert
     - thockin
   provider-aws:
-    - d-nishi
     - justinsb
-    - kris-nova
+    - nckturner
+    - wongma7
   provider-azure:
     - craiglpeters
     - justaugustus
@@ -209,19 +204,36 @@ aliases:
   provider-vmware:
     - cantbewong
     - frapposelli
+  publishing-bot-approvers:
+    - dims
+    - nikhita
+    - sttts
+  publishing-bot-reviewers:
+    - cpanato
+    - jeremyrickard
+    - justaugustus
+    - palnabarun
+    - puerco
+    - saschagrunert
+    - xmudrii
+    - Verolop
   release-engineering-approvers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # subproject owner / SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - Verolop # Release Manager
     - xmudrii # Release Manager
   release-engineering-reviewers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # subproject owner / SIG Technical Lead
     - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - Verolop # Release Manager
     - xmudrii # Release Manager
   # business hours oncall for prow etc (https://go.k8s.io/oncall)
   test-infra-oncall:

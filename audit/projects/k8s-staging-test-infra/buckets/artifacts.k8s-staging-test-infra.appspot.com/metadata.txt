@@ -11,9 +11,10 @@ gs://artifacts.k8s-staging-test-infra.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 04 May 2021 20:27:49 GMT
-	Time updated:			Fri, 24 Sep 2021 21:35:42 GMT
-	Metageneration:			10
+	Time updated:			Thu, 16 Dec 2021 03:17:32 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

@@ -18,10 +18,22 @@
       preference: 10
     - exchange: alt4.aspmx.l.google.com.
       preference: 10
+  - type: CAA # The CAA record set for a domain also applies to all sub-domains. If a sub-domain has its own CAA record set, it takes precedence.
+    values:
+    - flags: 0
+      tag: issue
+      value: pki.goog
+    - flags: 0
+      tag: issue
+      value: letsencrypt.org
   - type: TXT
     values:
     - google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8
+    # Domain validation for kubernetes.io on https://search.google.com/search-console/welcome
+    # Only Org admins have access to the console. (contact @ameukam)
+    - google-site-verification=qmfDqvHjWJBL78F9saApyW0VFRyymuSMpqMn8gtGmd0
     - v=spf1 include:_spf.google.com ~all
+
 www:
   type: CNAME
   value: kubernetes.io.
@@ -95,6 +107,9 @@ ci-test:
 code:
   type: CNAME
   value: code.k8s.io.
+conduct:
+  type: CNAME
+  value: conduct.k8s.io.
 cs:
   type: CNAME
   value: cs.k8s.io.
@@ -173,9 +188,6 @@ testgrid:
 pfjqlwt67ty3.testgrid:
   type: CNAME
   value: gv-bymjxdpk6uolpo.dv.googlehosted.com.
-velodrome:
-  type: CNAME
-  value: velodrome.k8s.io.
 youtube:
   type: CNAME
   value: redirect.k8s.io.

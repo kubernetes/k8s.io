@@ -11,9 +11,10 @@ gs://k8s-staging-metrics-server/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Dec 2019 18:51:15 GMT
-	Time updated:			Fri, 24 Sep 2021 21:13:13 GMT
-	Metageneration:			25
+	Time updated:			Thu, 16 Dec 2021 02:53:24 GMT
+	Metageneration:			29
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

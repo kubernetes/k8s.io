@@ -12,9 +12,10 @@ gs://k8s-staging-cluster-api-gcp/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 11 Sep 2019 14:04:25 GMT
-	Time updated:			Fri, 24 Sep 2021 20:37:29 GMT
-	Metageneration:			33
+	Time updated:			Thu, 16 Dec 2021 02:21:03 GMT
+	Metageneration:			38
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

@@ -14,7 +14,8 @@ gs://artifacts.k8s-infra-e2e-boskos-scale-24.appspot.com/ :
 	Time updated:			Mon, 28 Jun 2021 15:12:16 GMT
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				
 	  [
 	    {

@@ -14,6 +14,7 @@ gs://k8s-staging-cloud-provider-gcp-gcb/ :
 	Time updated:			Thu, 20 May 2021 09:30:39 GMT
 	Metageneration:			16
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
- 
+
 /*
 This file defines:
 - bigquery dataset for triage to store temp results
@@ -133,6 +133,6 @@ data "google_iam_policy" "triage_dataset_iam_policy" {
 
 resource "google_bigquery_dataset_iam_policy" "triage_dataset" {
   dataset_id  = google_bigquery_dataset.triage_dataset.dataset_id
-  project = google_bigquery_dataset.triage_dataset.project
+  project     = google_bigquery_dataset.triage_dataset.project
   policy_data = data.google_iam_policy.triage_dataset_iam_policy.policy_data
 }

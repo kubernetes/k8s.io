@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
- 
+
 /*
 This file defines:
 - GCP Service Account for nodes
@@ -102,16 +102,6 @@ resource "google_container_cluster" "cluster" {
   // objects
   remove_default_node_pool = true
 
-  // Disable local and certificate auth
-  master_auth {
-    username = ""
-    password = ""
-
-    client_certificate_config {
-      issue_client_certificate = false
-    }
-  }
-
   // Release Channel subscriptions. See https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels
   release_channel {
     channel = "REGULAR"
@@ -124,7 +114,7 @@ resource "google_container_cluster" "cluster" {
 
   // Enable workload identity for GCP IAM
   workload_identity_config {
-    identity_namespace = "${data.google_project.project.project_id}.svc.id.goog"
+    workload_pool = "${data.google_project.project.project_id}.svc.id.goog"
   }
 
   // Enable Stackdriver Kubernetes Monitoring
@@ -140,6 +130,14 @@ resource "google_container_cluster" "cluster" {
 
   // Restrict master to Google IP space; use Cloud Shell to access
   master_authorized_networks_config {
+  }
+
+  // Enable GKE workloads monitoring
+  monitoring_config {
+    enable_components = [
+      "SYSTEM_COMPONENTS",
+      "WORKLOADS"
+    ]
   }
 
   // Enable GKE Usage Metering
@@ -169,6 +167,9 @@ resource "google_container_cluster" "cluster" {
     }
   }
 
+  // Enable Shielded nodes
+  enable_shielded_nodes = false
+
   // Enable NAP
   cluster_autoscaling {
     enabled = true
@@ -181,11 +182,6 @@ resource "google_container_cluster" "cluster" {
       resource_type = "memory"
       maximum       = 256
     }
-  }
-
-  // Enable PodSecurityPolicy enforcement
-  pod_security_policy_config {
-    enabled = false // TODO: we should turn this on
   }
 
   // Enable VPA

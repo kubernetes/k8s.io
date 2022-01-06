@@ -14,3 +14,5 @@
 - name: node-feature-discovery-operator
   dmap:
     sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16: [v0.2.0]
+    sha256:19b6b5deb46d576a54f75a27eebea8089d6b0212497e60c5508739ffe8c7fae5: [v0.3.0]
+    sha256:aa06fc50e556c7ac4c9b9cfe962444f8ddf9817a79c17064a5ba26bf157c752f: [v0.3.0-minimal]

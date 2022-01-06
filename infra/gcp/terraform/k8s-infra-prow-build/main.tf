@@ -16,11 +16,11 @@ limitations under the License.
 
 /*
 This file defines:
+- Shared local values for use by other files in this module
 - GCP Project k8s-infra-prow-build to hold a prow build cluster
-- GCP Service Account for k8s-infra-prow-build pods (bound via workload identity to a KSA of the same name)
-- GCP Service Account for boskos-janitor (bound via workload identity to a KSA of the same name)
-- GKE cluster configuration for prow-build
-- GKE nodepool configuration for prow-build
+- Project-level IAM bindings
+- GKE cluster configuration for the build cluster
+- GKE nodepool configuration for the build cluster
 */
 
 locals {
@@ -29,23 +29,6 @@ locals {
   cluster_location  = "us-central1" // The GCP location (region or zone) where the cluster should be created
   bigquery_location = "US"          // The bigquery specific location where the dataset should be created
   pod_namespace     = "test-pods"   // MUST match whatever prow is configured to use when it schedules to this cluster
-
-  workload_identity_service_accounts = [
-    {
-      name        = "prow-build",
-      description = "default service account for pods in ${local.cluster_name}"
-    },
-    {
-      name        = "boskos-janitor",
-      description = "uesd by boskos-janitor in ${local.cluster_name}"
-    },
-    {
-      name          = "kubernetes-external-secrets"
-      description   = "sync K8s secrets from GSM in this and other projects"
-      project_roles = ["roles/secretmanager.secretAccessor"],
-      cluster_namespace = "kubernetes-external-secrets"
-    }
-  ]
 }
 
 data "google_organization" "org" {
@@ -60,7 +43,7 @@ module "project" {
 
 // Ensure k8s-infra-prow-oncall@kuberentes.io has owner access to this project
 resource "google_project_iam_member" "k8s_infra_prow_oncall" {
-  project = local.project_id
+  project = module.project.project_id
   role    = "roles/owner"
   member  = "group:k8s-infra-prow-oncall@kubernetes.io"
 }
@@ -72,86 +55,22 @@ data "google_iam_role" "prow_viewer" {
 
 // Ensure k8s-infra-prow-viewers@kuberentes.io has prow.viewer access to this project
 resource "google_project_iam_member" "k8s_infra_prow_viewers" {
-  project = local.project_id
+  project = module.project.project_id
   role    = data.google_iam_role.prow_viewer.name
   member  = "group:k8s-infra-prow-viewers@kubernetes.io"
 }
 
-module "workload_identity_service_accounts" {
-  for_each          = { for x in local.workload_identity_service_accounts : x.name => x }
-  source            = "../modules/workload-identity-service-account"
-  project_id        = local.project_id
-  name              = each.value.name
-  description       = each.value.description
-  cluster_namespace = lookup(each.value, "pod_namespace", local.pod_namespace)
-  project_roles     = lookup(each.value, "project_roles", [])
-}
-
-// external ip formerly managed by infra/gcp/bash/prow/ensure-e2e-projects.sh
-resource "google_compute_address" "boskos_metrics" {
-  name         = "boskos-metrics"
-  description  = "to allow monitoring.k8s.prow.io to scrape boskos metrics"
-  project      = local.project_id
-  region       = local.cluster_location
-  address_type = "EXTERNAL"
-}
-
-// external ip formerly managed by infra/gcp/bash/prow/ensure-e2e-projects.sh
-resource "google_compute_address" "greenhouse_metrics" {
-  name         = "greenhouse-metrics"
-  description  = "to allow monitoring.k8s.prow.io to scrape greenhouse metrics"
-  project      = local.project_id
-  region       = local.cluster_location
-  address_type = "EXTERNAL"
-}
-
-resource "google_compute_address" "kubernetes_external_secrets_metrics" {
-  name         = "kubernetes-external-secrets-metrics"
-  description  = "to allow monitoring.k8s.prow.io to scrape kubernetes-external-secrets metrics"
-  project      = local.project_id
-  region       = local.cluster_location
-  address_type = "EXTERNAL"
-}
-
-locals {
-  build_cluster_secrets = {
-    prow-build-service-account = {
-      group  = "sig-testing"
-      owners = "k8s-infra-prow-oncall@kubernetes.io"
-    }
-    prow-build-ssh-key-secret = {
-      group  = "sig-testing"
-      owners = "k8s-infra-prow-oncall@kubernetes.io"
-    }
-  }
-}
-
-resource "google_secret_manager_secret" "build_cluster_secrets" {
-  for_each  = local.build_cluster_secrets
-  project   = local.project_id
-  secret_id = each.key
-  labels = {
-    group = each.value.group
-  }
-  replication {
-    automatic = true
-  }
-}
-
-resource "google_secret_manager_secret_iam_binding" "build_cluster_secret_admins" {
-  for_each  = local.build_cluster_secrets
-  project   = google_secret_manager_secret.build_cluster_secrets[each.key].project
-  secret_id = google_secret_manager_secret.build_cluster_secrets[each.key].id
-  role      = "roles/secretmanager.admin"
-  members = [
-    "group:k8s-infra-prow-oncall@kubernetes.io",
-    "group:${each.value.owners}"
-  ]
+// Allow prow-deployer service account in k8s-infra-prow-build-trusted to deploy
+// to the cluster defined in here
+resource "google_project_iam_member" "prow_deployer_for_prow_build" {
+  project = module.project.project_id
+  role    = "roles/container.admin"
+  member  = "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
 }
 
 module "prow_build_cluster" {
   source             = "../modules/gke-cluster"
-  project_name       = local.project_id
+  project_name       = module.project.project_id
   cluster_name       = local.cluster_name
   cluster_location   = local.cluster_location
   bigquery_location  = local.bigquery_location
@@ -166,7 +85,7 @@ module "prow_build_cluster" {
 # - k8s-prow-builds/prow cluster uses _CONTAINERD variant, keep parity
 module "prow_build_nodepool_n1_highmem_8_localssd" {
   source                    = "../modules/gke-nodepool"
-  project_name              = local.project_id
+  project_name              = module.project.project_id
   cluster_name              = module.prow_build_cluster.cluster.name
   location                  = module.prow_build_cluster.cluster.location
   name                      = "pool5"
@@ -187,7 +106,7 @@ module "prow_build_nodepool_n1_highmem_8_localssd" {
 # NOTE: updating taints requires recreating the underlying resource, see module docs
 module "greenhouse_nodepool" {
   source          = "../modules/gke-nodepool"
-  project_name    = local.project_id
+  project_name    = module.project.project_id
   cluster_name    = module.prow_build_cluster.cluster.name
   location        = module.prow_build_cluster.cluster.location
   name            = "greenhouse"

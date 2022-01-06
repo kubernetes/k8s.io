@@ -28,7 +28,7 @@ type AdminServiceClient interface {
 	GetGroup(groupKey string) (*admin.Group, error)
 	GetMember(groupKey, memberKey string) (*admin.Member, error)
 	ListGroups() (*admin.Groups, error)
-	ListMembers(groupKey string) (*admin.Members, error)
+	ListMembers(groupKey string) ([]*admin.Member, error)
 	InsertGroup(group *admin.Group) (*admin.Group, error)
 	InsertMember(groupKey string, member *admin.Member) (*admin.Member, error)
 	UpdateGroup(groupKey string, group *admin.Group) (*admin.Group, error)
@@ -62,8 +62,27 @@ func (asc *adminServiceClient) ListGroups() (*admin.Groups, error) {
 	return asc.service.Groups.List().Customer("my_customer").OrderBy("email").Do()
 }
 
-func (asc *adminServiceClient) ListMembers(groupKey string) (*admin.Members, error) {
-	return asc.service.Members.List(groupKey).Do()
+func (asc *adminServiceClient) ListMembers(groupKey string) ([]*admin.Member, error) {
+	var members []*admin.Member
+	var resp *admin.Members
+	var err error
+
+	call := asc.service.Members.List(groupKey)
+	for {
+		resp, err = call.Do()
+		if err != nil {
+			return nil, err
+		}
+
+		members = append(members, resp.Members...)
+		if resp.NextPageToken == "" {
+			break
+		}
+
+		call.PageToken(resp.NextPageToken)
+	}
+
+	return members, nil
 }
 
 func (asc *adminServiceClient) InsertGroup(group *admin.Group) (*admin.Group, error) {

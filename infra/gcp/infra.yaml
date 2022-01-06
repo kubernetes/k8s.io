@@ -309,6 +309,7 @@ infra:
       k8s-staging-networking:
       k8s-staging-nfd:
       k8s-staging-npd:
+      k8s-staging-perf-tests:
       k8s-staging-prometheus-adapter:
       k8s-staging-provider-aws:
       k8s-staging-provider-azure:
@@ -319,9 +320,11 @@ infra:
       k8s-staging-scheduler-plugins:
       k8s-staging-sched-simulator:
       k8s-staging-scl-image-builder:
+      k8s-staging-sig-auth:
       k8s-staging-sig-docs:
       k8s-staging-sig-storage:
       k8s-staging-slack-infra:
       k8s-staging-sp-operator:
       k8s-staging-storage-migrator:
       k8s-staging-test-infra:
+      k8s-staging-gmsa-webhook:

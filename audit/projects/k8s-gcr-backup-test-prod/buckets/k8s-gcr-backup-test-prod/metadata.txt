@@ -15,6 +15,7 @@ gs://k8s-gcr-backup-test-prod/ :
 	Time updated:			Fri, 10 Sep 2021 21:09:06 GMT
 	Metageneration:			69
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

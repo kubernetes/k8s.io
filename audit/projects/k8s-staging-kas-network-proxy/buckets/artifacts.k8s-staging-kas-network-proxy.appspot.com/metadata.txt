@@ -11,9 +11,10 @@ gs://artifacts.k8s-staging-kas-network-proxy.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 05 Nov 2019 17:46:06 GMT
-	Time updated:			Fri, 24 Sep 2021 21:03:32 GMT
-	Metageneration:			15
+	Time updated:			Thu, 16 Dec 2021 02:44:22 GMT
+	Metageneration:			19
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

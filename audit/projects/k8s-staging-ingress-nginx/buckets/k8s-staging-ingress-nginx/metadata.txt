@@ -11,9 +11,10 @@ gs://k8s-staging-ingress-nginx/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 26 May 2020 18:49:45 GMT
-	Time updated:			Fri, 24 Sep 2021 21:00:14 GMT
-	Metageneration:			17
+	Time updated:			Thu, 16 Dec 2021 02:41:23 GMT
+	Metageneration:			22
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

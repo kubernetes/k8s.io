@@ -11,9 +11,10 @@ gs://k8s-staging-dns/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 31 Mar 2020 03:49:35 GMT
-	Time updated:			Fri, 24 Sep 2021 20:47:54 GMT
-	Metageneration:			27
+	Time updated:			Thu, 16 Dec 2021 02:30:01 GMT
+	Metageneration:			32
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

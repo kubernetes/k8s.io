@@ -25,9 +25,15 @@
     "sha256:e9707504ad0d4c119036b6d41ace4a33596139d3feb9ccb6617813ce48c3eeef": ["v0.49.0"]
     "sha256:4080849490fd4f61416ad7bdba6fdd0ee58164f2e13df1128b407ce82d5f3986": ["v0.49.1"]
     "sha256:84e351228337bb7b09f0e90e6b6f5e2f8f4cf7d618c1ddc1e966f23902d273db": ["v0.49.2"]
+    "sha256:35fe394c82164efa8f47f3ed0be981b3f23da77175bbb8268a9ae438851c8324": ["v0.49.3"]
+    "sha256:f46fc2d161c97a9d950635acb86fb3f8d4adcfb03ee241ea89c6cde16aa3fdf8": ["v0.50.0"]
     "sha256:0851b34f69f69352bf168e6ccf30e1e20714a264ab1ecd1933e4d8c0fc3215c6": ["v1.0.0"]
     "sha256:26bbd57f32bac3b30f90373005ef669aae324a4de4c19588a13ddba399c6664e": ["v1.0.1"]
     "sha256:85b53b493d6d658d8c013449223b0ffd739c76d76dc9bf9000786669ec04e049": ["v1.0.2"]
+    "sha256:4ade87838eb8256b094fbb5272d7dda9b6c7fa8b759e6af5383c1300996a7452": ["v1.0.3"]
+    "sha256:545cff00370f28363dad31e3b59a94ba377854d3a11f18988f5f9e56841ef9ef": ["v1.0.4"]
+    "sha256:55a1fcda5b7657c372515fe402c3e39ad93aa59f6e4378e82acd99912fe6028d": ["v1.0.5"]
+    "sha256:f766669fdcf3dc26347ed273a55e754b427eb4411ee075a53f30718b4499076a": ["v1.1.0"]
 
 # custom base NGINX image
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/nginx
@@ -113,6 +119,8 @@
 - name: kube-webhook-certgen
   dmap:
     "sha256:f3b6b39a6062328c095337b4cadcefd1612348fdd5190b1dcbcb9b9e90bd8068": ["v1.0"]
+    "sha256:cdc56f415500de9a6342be4f8703850dab9eae8870e9f33d9b8598232abd6ac0": ["v1.1"]
+    "sha256:64d8c73dca984af206adf9d6d7e46aa550362b1d7a01f3a0a91b20cc67868660": ["v1.1.1"]
 
 # nginx-errors
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/custom-error-pages

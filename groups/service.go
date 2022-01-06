@@ -23,6 +23,7 @@ import (
 	"log"
 	"net/http"
 	"reflect"
+	"strings"
 
 	admin "google.golang.org/api/admin/directory/v1"
 	"google.golang.org/api/googleapi"
@@ -45,14 +46,21 @@ type AdminService interface {
 	DeleteGroupsIfNecessary() error
 	RemoveOwnerOrManagersFromGroup(group GoogleGroup, members []string) error
 	RemoveMembersFromGroup(group GoogleGroup, members []string) error
-	GetClient() AdminServiceClient
+	// ListGroup here is a proxy to the ListGroups method of the underlying
+	// AdminServiceClient being used.
+	ListGroups() (*admin.Groups, error)
+	// ListMembers here is a proxy to the ListMembers method of the underlying
+	// AdminServiceClient being used.
+	ListMembers(groupKey string) ([]*admin.Member, error)
 }
 
 // GroupService provides functionality to perform high level
 // tasks using a GroupServiceClient.
 type GroupService interface {
 	UpdateGroupSettings(group GoogleGroup) error
-	GetClient() GroupServiceClient
+	// Get here is a proxy to the Get method of the
+	// underlying GroupServiceClient
+	Get(groupUniqueID string) (*groupssettings.Groups, error)
 }
 
 func NewAdminService(ctx context.Context, clientOption option.ClientOption) (AdminService, error) {
@@ -61,7 +69,25 @@ func NewAdminService(ctx context.Context, clientOption option.ClientOption) (Adm
 		return nil, err
 	}
 
-	return &adminService{client: client}, nil
+	return NewAdminServiceWithClient(client)
+}
+
+func NewAdminServiceWithClient(client AdminServiceClient) (AdminService, error) {
+	errFunc := func(err error) bool {
+		apierr, ok := err.(*googleapi.Error)
+		return ok && apierr.Code == http.StatusNotFound
+	}
+	return &adminService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
+}
+
+func NewAdminServiceWithClientAndErrFunc(client AdminServiceClient, errFunc clientErrCheckFunc) (AdminService, error) {
+	return &adminService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
 }
 
 func NewGroupService(ctx context.Context, clientOption option.ClientOption) (GroupService, error) {
@@ -70,11 +96,37 @@ func NewGroupService(ctx context.Context, clientOption option.ClientOption) (Gro
 		return nil, err
 	}
 
-	return &groupService{client: client}, nil
+	return NewGroupServiceWithClient(client)
 }
 
+func NewGroupServiceWithClient(client GroupServiceClient) (GroupService, error) {
+	errFunc := func(err error) bool {
+		apierr, ok := err.(*googleapi.Error)
+		return ok && apierr.Code == http.StatusNotFound
+	}
+	return &groupService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
+}
+
+func NewGroupServiceWithClientAndErrFunc(client GroupServiceClient, errFunc clientErrCheckFunc) (GroupService, error) {
+	return &groupService{
+		client:            client,
+		checkForAPIErr404: errFunc,
+	}, nil
+}
+
+// clientErrCheckFunc is stubbed out here for testing
+// purposes in order to implement custome error checking
+// logic. This function is used to check errors returned
+// by the client. The boolean return signifies if the
+// check for the error passed or not.
+type clientErrCheckFunc func(error) bool
+
 type adminService struct {
-	client AdminServiceClient
+	client            AdminServiceClient
+	checkForAPIErr404 clientErrCheckFunc
 }
 
 // AddOrUpdateGroupMembers first lists all members that are part of group. Based on this list and the
@@ -87,7 +139,7 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 
 	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if as.checkForAPIErr404(err) {
 			log.Printf("skipping adding members to group %q as it has not yet been created\n", group.EmailId)
 			return nil
 		}
@@ -96,10 +148,11 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
+
 	for _, memberEmailId := range members {
 		var member *admin.Member
-		for _, m := range l.Members {
-			if m.Email == memberEmailId {
+		for _, m := range l {
+			if EmailAddressEquals(m.Email, memberEmailId) {
 				member = m
 				break
 			}
@@ -110,9 +163,12 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 			if member.Role != role {
 				member.Role = role
 				if config.ConfirmChanges {
+					log.Printf("Updating %s to %q as a %s\n", memberEmailId, group.EmailId, role)
 					_, err := as.client.UpdateMember(group.EmailId, member.Email, member)
 					if err != nil {
-						errs = append(errs, fmt.Errorf("unable to update %s in %q as %s : %w", memberEmailId, group.EmailId, role, err))
+						logErr := fmt.Errorf("unable to update %s in %q as %s: %w", memberEmailId, group.EmailId, role, err)
+						log.Printf("%s\n", logErr)
+						errs = append(errs, logErr)
 						continue
 					}
 					log.Printf("Updated %s to %q as a %s\n", memberEmailId, group.EmailId, role)
@@ -122,6 +178,7 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 			}
 			continue
 		}
+
 		member = &admin.Member{
 			Email: memberEmailId,
 			Role:  role,
@@ -129,9 +186,12 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 
 		// We did not find the person in the google group, so we add them
 		if config.ConfirmChanges {
+			log.Printf("Adding %s to %q as a %s\n", memberEmailId, group.EmailId, role)
 			_, err := as.client.InsertMember(group.EmailId, member)
 			if err != nil {
-				errs = append(errs, fmt.Errorf("unable to add %s to %q as %s : %w", memberEmailId, group.EmailId, role, err))
+				logErr := fmt.Errorf("unable to add %s to %q as %s: %w", memberEmailId, group.EmailId, role, err)
+				log.Printf("%s\n", logErr)
+				errs = append(errs, logErr)
 				continue
 			}
 			log.Printf("Added %s to %q as a %s\n", memberEmailId, group.EmailId, role)
@@ -153,7 +213,7 @@ func (as *adminService) CreateOrUpdateGroupIfNescessary(group GoogleGroup) error
 
 	grp, err := as.client.GetGroup(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if as.checkForAPIErr404(err) {
 			if !config.ConfirmChanges {
 				log.Printf("dry-run: would create group %q\n", group.EmailId)
 			} else {
@@ -214,10 +274,11 @@ func (as *adminService) DeleteGroupsIfNecessary() error {
 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
+
 	for _, g := range g.Groups {
 		found := false
 		for _, g2 := range groupsConfig.Groups {
-			if g2.EmailId == g.Email {
+			if EmailAddressEquals(g2.EmailId, g.Email) {
 				found = true
 				break
 			}
@@ -228,15 +289,13 @@ func (as *adminService) DeleteGroupsIfNecessary() error {
 
 		// We did not find the group in our groups.xml, so delete the group
 		if config.ConfirmChanges {
-			if *verbose {
-				log.Printf("deleting group %s", g.Email)
-			}
+			log.Printf("Deleting group %s", g.Email)
 			err := as.client.DeleteGroup(g.Email)
 			if err != nil {
 				errs = append(errs, fmt.Errorf("unable to remove group %s : %w", g.Email, err))
 				continue
 			}
-			log.Printf("Removing group %s\n", g.Email)
+			log.Printf("Removed group %s\n", g.Email)
 		} else {
 			log.Printf("dry-run: would remove group %s\n", g.Email)
 		}
@@ -255,7 +314,7 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 	}
 	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if as.checkForAPIErr404(err) {
 			log.Printf("skipping removing members group %q as group has not yet been created\n", group.EmailId)
 			return nil
 		}
@@ -264,10 +323,11 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
-	for _, m := range l.Members {
+
+	for _, m := range l {
 		found := false
 		for _, m2 := range members {
-			if m2 == m.Email {
+			if EmailAddressEquals(m2, m.Email) {
 				found = true
 				break
 			}
@@ -280,14 +340,18 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 		if found || m.Role == MemberRole {
 			continue
 		}
+
 		// a person was deleted from a group, let's remove them
 		if config.ConfirmChanges {
+			log.Printf("Removing %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 			err := as.client.DeleteMember(group.EmailId, m.Id)
 			if err != nil {
-				errs = append(errs, fmt.Errorf("unable to remove %s from %q as OWNER or MANAGER : %w", m.Email, group.EmailId, err))
+				logErr := fmt.Errorf("unable to remove %s from %q as a %s: %w", m.Email, group.EmailId, m.Role, err)
+				log.Printf("%s\n", logErr)
+				errs = append(errs, logErr)
 				continue
 			}
-			log.Printf("Removing %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
+			log.Printf("Removed %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 		} else {
 			log.Printf("dry-run: would remove %s from %q as OWNER or MANAGER\n", m.Email, group.EmailId)
 		}
@@ -306,7 +370,7 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 	}
 	l, err := as.client.ListMembers(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if as.checkForAPIErr404(err) {
 			log.Printf("skipping removing members group %q as group has not yet been created\n", group.EmailId)
 			return nil
 		}
@@ -315,10 +379,11 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
-	for _, m := range l.Members {
+
+	for _, m := range l {
 		found := false
 		for _, m2 := range members {
-			if m2 == m.Email {
+			if EmailAddressEquals(m2, m.Email) {
 				found = true
 				break
 			}
@@ -329,12 +394,15 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 
 		// a person was deleted from a group, let's remove them
 		if config.ConfirmChanges {
+			log.Printf("Removing %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 			err := as.client.DeleteMember(group.EmailId, m.Id)
 			if err != nil {
-				errs = append(errs, fmt.Errorf("unable to remove %s from %q as a %s : %w", m.Email, group.EmailId, m.Role, err))
+				logErr := fmt.Errorf("unable to remove %s from %q as a %s: %w", m.Email, group.EmailId, m.Role, err)
+				log.Printf("%s\n", logErr)
+				errs = append(errs, logErr)
 				continue
 			}
-			log.Printf("Removing %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
+			log.Printf("Removed %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 		} else {
 			log.Printf("dry-run: would remove %s from %q as a %s\n", m.Email, group.EmailId, m.Role)
 		}
@@ -343,15 +411,21 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 	return utilerrors.NewAggregate(errs)
 }
 
-// GetClient simply returns the underlying AdminServiceClient being used.
-func (as *adminService) GetClient() AdminServiceClient {
-	return as.client
+// ListGroups lists all the groups available.
+func (as *adminService) ListGroups() (*admin.Groups, error) {
+	return as.client.ListGroups()
+}
+
+// ListMembers lists all the members of a group with a particular groupKey.
+func (as *adminService) ListMembers(groupKey string) ([]*admin.Member, error) {
+	return as.client.ListMembers(groupKey)
 }
 
 var _ AdminService = (*adminService)(nil)
 
 type groupService struct {
-	client GroupServiceClient
+	client            GroupServiceClient
+	checkForAPIErr404 clientErrCheckFunc
 }
 
 // UpdateGroupSettings updates the groupsettings.Groups corresponding to the
@@ -362,7 +436,7 @@ func (gs *groupService) UpdateGroupSettings(group GoogleGroup) error {
 	}
 	g2, err := gs.client.Get(group.EmailId)
 	if err != nil {
-		if apierr, ok := err.(*googleapi.Error); ok && apierr.Code == http.StatusNotFound {
+		if gs.checkForAPIErr404(err) {
 			log.Printf("skipping updating group settings as group %q has not yet been created\n", group.EmailId)
 			return nil
 		}
@@ -433,9 +507,9 @@ func (gs *groupService) UpdateGroupSettings(group GoogleGroup) error {
 	return nil
 }
 
-// GetClient simply returns the underlying GroupServiceClient being used.
-func (gs *groupService) GetClient() GroupServiceClient {
-	return gs.client
+// Get retrieves the group settings of a group with groupUniqueID.
+func (gs *groupService) Get(groupUniqueID string) (*groupssettings.Groups, error) {
+	return gs.client.Get(groupUniqueID)
 }
 
 var _ GroupService = (*groupService)(nil)
@@ -445,4 +519,27 @@ var _ GroupService = (*groupService)(nil)
 func deepCopySettings(a, b interface{}) {
 	byt, _ := json.Marshal(a)
 	json.Unmarshal(byt, b)
+}
+
+// EmailAddressEquals checks equivalence between two e-mail addresses according
+// to the following rules:
+// - email addresses are case-insensitive (e.g. FOO@bar.com == foo@bar.com)
+// - local parts are dot-inensitive (e.g. foo@bar.com == f.o.o@bar.com)
+func EmailAddressEquals(a, b string) bool {
+	// if they match case-insensitive, don't bother checking dot-insensitive
+	if strings.EqualFold(a, b) {
+		return true
+	}
+	aParts := strings.Split(a, "@")
+	bParts := strings.Split(b, "@")
+	// These aren't valid e-mail addresses if they don't have exactly one @
+	// and we already know they're not case-insensitively equal, so return false
+	if len(aParts) != 2 || len(bParts) != 2 {
+		return false
+	}
+	// strip dots from local parts and case-insensitively compare the resulting
+	// email addresses
+	aLocal := strings.ReplaceAll(aParts[0], ".", "")
+	bLocal := strings.ReplaceAll(bParts[0], ".", "")
+	return strings.EqualFold(aLocal+"@"+aParts[1], bLocal+"@"+bParts[1])
 }

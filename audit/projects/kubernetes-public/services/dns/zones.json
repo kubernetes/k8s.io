@@ -1,5 +1,8 @@
 [
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2020-08-02T19:14:51.493Z",
     "description": "",
     "dnsName": "canary.k8s.dev.",
@@ -15,6 +18,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2019-12-30T21:58:29.800Z",
     "description": "",
     "dnsName": "canary.k8s-e2e.com.",
@@ -30,6 +36,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2018-10-09T16:18:27.446Z",
     "description": "",
     "dnsName": "canary.k8s.io.",
@@ -45,6 +54,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2020-08-02T19:15:15.001Z",
     "description": "",
     "dnsName": "canary.kubernetes.dev.",
@@ -60,6 +72,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2018-10-09T16:19:40.004Z",
     "description": "",
     "dnsName": "canary.kubernetes.io.",
@@ -75,6 +90,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2019-12-30T21:55:40.366Z",
     "description": "",
     "dnsName": "canary.x-k8s.io.",
@@ -90,6 +108,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2020-08-02T19:13:48.289Z",
     "description": "",
     "dnsName": "k8s.dev.",
@@ -105,6 +126,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2019-12-22T23:50:04.476Z",
     "description": "",
     "dnsName": "k8s-e2e.com.",
@@ -120,6 +144,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2018-09-07T15:08:37.689Z",
     "description": "",
     "dnsName": "k8s.io.",
@@ -154,6 +181,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2020-08-02T19:14:22.451Z",
     "description": "",
     "dnsName": "kubernetes.dev.",
@@ -169,6 +199,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2018-09-06T16:58:36.444Z",
     "description": "",
     "dnsName": "kubernetes.io.",
@@ -203,6 +236,9 @@
     "visibility": "public"
   },
   {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2019-12-22T23:50:34.799Z",
     "description": "",
     "dnsName": "x-k8s.io.",

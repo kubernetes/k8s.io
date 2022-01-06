@@ -11,9 +11,10 @@ gs://artifacts.k8s-staging-metrics-server.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Dec 2019 18:50:30 GMT
-	Time updated:			Fri, 24 Sep 2021 21:12:55 GMT
-	Metageneration:			16
+	Time updated:			Thu, 16 Dec 2021 02:53:06 GMT
+	Metageneration:			20
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

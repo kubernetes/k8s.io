@@ -1,0 +1,20 @@
+gs://k8s-infra-tf-sandbox-capg/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Fri, 08 Oct 2021 21:00:16 GMT
+	Time updated:			Fri, 08 Oct 2021 21:00:36 GMT
+	Metageneration:			6
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

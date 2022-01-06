@@ -10,6 +10,7 @@ restrictions:
       - "^k8s-infra-artifact-security@kubernetes.io$"
   - path: "committee-steering/groups.yaml"
     allowedGroups:
+      - "^steering-emeritus@kubernetes.io$"
       - "^steering-private@kubernetes.io$"
       - "^steering@kubernetes.io$"
       - "^election@kubernetes.io$"
@@ -35,15 +36,18 @@ restrictions:
       - "^k8s-infra-code-organization@kubernetes.io$"
       - "^k8s-infra-rbac-sippy@kubernetes.io$"
       - "^k8s-infra-prod-readiness@kubernetes.io$"
+      - "^k8s-infra-keps@kubernetes.io$"
   - path: "sig-auth/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-csi-secrets-store@kubernetes.io$"
       - "^k8s-infra-staging-multitenancy@kubernetes.io$"
+      - "^k8s-infra-staging-sig-auth@kubernetes.io$"
   - path: "sig-autoscaling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-autoscaling@kubernetes.io$"
   - path: "sig-cli/groups.yaml"
     allowedGroups:
+      - "^sig-cli-leads@kubernetes.io$"
       - "^k8s-infra-staging-kustomize@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
   - path: "sig-cloud-provider/groups.yaml"
@@ -79,6 +83,7 @@ restrictions:
   - path: "sig-contributor-experience/groups.yaml"
     allowedGroups:
       - "^community@kubernetes.io$"
+      - "^dev@kubernetes.io$"
       - "^github@kubernetes.io$"
       - "^lwkd@kubernetes.io$"
       - "^moderators@kubernetes.io$"
@@ -142,6 +147,7 @@ restrictions:
       - "^k8s-infra-rbac-perfdash@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-scalability@kubernetes.io$"
       - "^k8s-infra-sig-scalability-oncall@kubernetes.io$"
+      - "^k8s-infra-staging-perf-tests@kubernetes.io$"
   - path: "sig-scheduling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-descheduler@kubernetes.io$"
@@ -173,11 +179,17 @@ restrictions:
       - "^k8s-infra-rbac-gcsweb@kubernetes.io$"
       - "^k8s-infra-rbac-kettle@kubernetes.io$"
       - "^k8s-infra-rbac-prow@kubernetes.io$"
+  - path: "sig-windows/groups.yaml"
+    allowedGroups:
+      - "^sig-windows-leads@kubernetes.io$"
+      - "^k8s-infra-staging-gmsa-webhook@kubernetes.io$"
   - path: "sig-k8s-infra/groups.yaml"
     allowedGroups:
       - "^gke-security-groups@kubernetes.io$"
       - "^k8s-infra-alerts@kubernetes.io$"
       - "^k8s-infra-aws-admins@kubernetes.io$"
+      - "^k8s-infra-azure-admins@kubernetes.io$"
+      - "^k8s-infra-equinix-admins@kubernetes.io$"
       - "^k8s-infra-artifact-admins@kubernetes.io$"
       - "^k8s-infra-bigquery-admins@kubernetes.io$"
       - "^k8s-infra-cluster-admins@kubernetes.io$"
@@ -193,6 +205,7 @@ restrictions:
       - "^k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io$"
       - "^k8s-infra-staging-infra-tools@kubernetes.io$"
       - "^k8s-infra-ii-coop@kubernetes.io$"
+      - "^k8s-infra-sandbox-capg@kubernetes.io$"
       - "^sig-k8s-infra-leads@kubernetes.io$"
       - "^sig-k8s-infra-private@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything

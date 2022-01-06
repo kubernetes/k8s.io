@@ -11,9 +11,10 @@ gs://k8s-staging-examples/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Sun, 06 Dec 2020 20:53:55 GMT
-	Time updated:			Fri, 24 Sep 2021 20:52:43 GMT
-	Metageneration:			13
+	Time updated:			Thu, 16 Dec 2021 02:34:23 GMT
+	Metageneration:			18
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

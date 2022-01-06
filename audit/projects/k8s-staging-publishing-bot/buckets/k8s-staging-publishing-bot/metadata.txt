@@ -11,9 +11,10 @@ gs://k8s-staging-publishing-bot/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 27 Jun 2019 00:36:29 GMT
-	Time updated:			Fri, 24 Sep 2021 21:23:13 GMT
-	Metageneration:			41
+	Time updated:			Thu, 16 Dec 2021 03:04:35 GMT
+	Metageneration:			45
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

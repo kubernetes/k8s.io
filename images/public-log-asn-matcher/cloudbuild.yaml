@@ -1,0 +1,17 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - gcr.io/$PROJECT_ID/public-log-asn-matcher:$_GIT_TAG
+      - -t
+      - gcr.io/$PROJECT_ID/public-log-asn-matcher:latest
+      - .
+substitutions:
+  _GIT_TAG: "12345"
+  _PULL_BASE_REF: ""
+images:
+  - "gcr.io/$PROJECT_ID/public-log-asn-matcher:$_GIT_TAG"
+  - "gcr.io/$PROJECT_ID/public-log-asn-matcher:latest"
+options:
+  substitution_option: "ALLOW_LOOSE"

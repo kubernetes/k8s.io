@@ -26,6 +26,7 @@ groups:
       - paris.pittman@gmail.com
       - spiffxp@gmail.com
     members:
+      - acondor@google.com
       - adolfo.garcia@uservers.net # SIG Release
       - ahg@google.com
       - alarcj137@gmail.com
@@ -35,6 +36,7 @@ groups:
       - bentheelder@google.com
       - caniszczyk@linuxfoundation.org
       - casey@tigera.io
+      - cbelu@cloudbasesolutions.com
       - celeste@cncf.io
       - chiachenk@google.com
       - cncf-speakers@linuxfoundation.org
@@ -80,6 +82,7 @@ groups:
       - kikis.github@gmail.com
       - kim.andrewsy@gmail.com
       - klaus1982.cn@gmail.com
+      - katrina.verey@shopify.com # SIG CLI
       - ksemenov@vmware.com
       - lachlan.evenson@gmail.com
       - lauri.d.apple@gmail.com # SIG Release
@@ -93,8 +96,8 @@ groups:
       - mwielgus@google.com
       - neolit123@gmail.com
       - nospam.wong@gmail.com
+      - patrick.ohly@intel.com
       - prydonius@gmail.com
-      - phil.wittrock@gmail.com
       - quinton@hoole.biz
       - saadali@google.com
       - saschagrunert@gmail.com # SIG Release
@@ -111,10 +114,11 @@ groups:
       - tim@scalefactory.com
       - timothysc@gmail.com
       - tpepper@vmware.com
+      - vincepri@vmware.com
+      - vince@vincepri.com
       - wfender@google.com
       - wojtekt@google.com
       - xingyang105@gmail.com
       - ynli@google.com
-      - zcorleissen@linuxfoundation.org
       - jim@nirmata.com
       - rficcaglia@gmail.com

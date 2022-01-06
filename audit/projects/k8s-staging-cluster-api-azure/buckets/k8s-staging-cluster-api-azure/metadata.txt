@@ -11,9 +11,10 @@ gs://k8s-staging-cluster-api-azure/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 23 Sep 2019 16:09:47 GMT
-	Time updated:			Fri, 24 Sep 2021 20:35:00 GMT
-	Metageneration:			27
+	Time updated:			Thu, 16 Dec 2021 02:18:52 GMT
+	Metageneration:			32
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

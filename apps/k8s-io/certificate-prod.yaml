@@ -18,6 +18,8 @@ spec:
   - ci-test.kubernetes.io
   - code.k8s.io
   - code.kubernetes.io
+  - conduct.k8s.io
+  - conduct.kubernetes.io
   - dl.k8s.io
   - dl.kubernetes.io
   - docs.k8s.io

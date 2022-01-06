@@ -4,6 +4,7 @@ This directory is for tools and things that are used to administer the GCR
 repositories used to publish official container images for Kubernetes.
 
 - [Staging repos](#staging-repos)
+  - [Requirements](#requirements)
   - [Creating staging repos](#creating-staging-repos)
   - [Enabling automatic builds](#enabling-automatic-builds)
   - [Image Promoter](#image-promoter)
@@ -85,26 +86,28 @@ and push images, and anything else will become exceptional.
 
 ### Image Promoter
 
-To promote an image, follow these steps:
+Image promotion roughly follows the following steps:
 
-1. Push your image to one of the above staging docker repos. (E.g.,
-   gcr.io/k8s-staging-coredns).
-1. Clone this git repo.
-1. Add the image into the promoter manifest. E.g., if you pushed
-   gcr.io/k8s-staging-coredns/foo:1.3, then add a "foo" image entry into the
-   manifest in `images/k8s-staging-coredns/images.yaml`.
-1. Create a PR to this git repo for your changes.
-1. The PR should trigger a `pull-k8sio-cip` job which will validate and dry-run
+1. Push your image to one of the above staging docker repos
+   e.g., gcr.io/k8s-staging-coredns
+2. Fork this git repo
+3. Add the image into the promoter manifest
+   e.g., if you pushed gcr.io/k8s-staging-coredns/foo:1.3, then add a "foo"
+   image entry into the manifest in `images/k8s-staging-coredns/images.yaml`
+4. Create a PR to this git repo for your changes
+5. The PR should trigger a `pull-k8sio-cip` job which will validate and dry-run
    your changes; check that the `k8s-ci-robot` responds 'Job succeeded' for it.
-1. Merge the PR. Your image will be promoted by one of two jobs:
+6. Merge the PR. Your image will be promoted by one of two jobs:
    - [`post-k8sio-image-promo`][post-promo-job] is a postsubmit that runs
      immediately after merge
    - [`ci-k8sio-cip`][ci-promo-job] is a periodic job that runs every four
      hours in case there are transient failures of the postsubmit jobs
-1. Published images will appear on k8s.gcr.io and can be viewed [here](https://console.cloud.google.com/gcr/images/k8s-artifacts-prod).
+7. Published images will appear on k8s.gcr.io and can be viewed
+   [here](https://console.cloud.google.com/gcr/images/k8s-artifacts-prod)
 
-Essentially, in order to get images published to a production repo, you have to
-use the image promotion (PR creation) process defined above.
+We've written some tooling to simplify the creation of image promotion pull
+requests, which is described in detail
+[here](https://sigs.k8s.io/promo-tools/docs/promotion-pull-requests.md).
 
 [google-groups]: /groups/README.md
 [image-pushing-readme]: https://git.k8s.io/test-infra/config/jobs/image-pushing/README.md

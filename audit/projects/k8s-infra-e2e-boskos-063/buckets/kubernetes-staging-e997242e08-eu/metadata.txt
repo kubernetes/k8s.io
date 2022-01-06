@@ -14,7 +14,8 @@ gs://kubernetes-staging-e997242e08-eu/ :
 	Time updated:			Sat, 01 Aug 2020 02:10:48 GMT
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				
 	  [
 	    {

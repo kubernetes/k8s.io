@@ -14,6 +14,7 @@ gs://k8s-staging-cloud-provider-ibm-gcb/ :
 	Time updated:			Thu, 09 Sep 2021 15:43:34 GMT
 	Metageneration:			10
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

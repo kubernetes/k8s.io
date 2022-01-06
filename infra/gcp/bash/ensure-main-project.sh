@@ -74,9 +74,12 @@ readonly DNS_GROUP="k8s-infra-dns-admins@kubernetes.io"
 readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
     "${LEGACY_CLUSTER_TERRAFORM_BUCKET}:${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-aws:k8s-infra-aws-admins@kubernetes.io
+    k8s-infra-tf-gcp:k8s-infra-gcp-org-admins@kubernetes.io
+    k8s-infra-tf-monitoring:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-prow-clusters:k8s-infra-prow-oncall@kubernetes.io
     k8s-infra-tf-public-clusters:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-public-pii:"${CLUSTER_ADMINS_GROUP}"
+    k8s-infra-tf-sandbox-capg:k8s-infra-sandbox-capg@kubernetes.io
     k8s-infra-tf-sandbox-ii:k8s-infra-ii-coop@kubernetes.io
 )
 
@@ -345,81 +348,6 @@ EOF
     read -rs
 }
 
-# Eventually we would like to use kubernetes-external-secrets to manage
-# all secrets in aaa; not sure how far we are on that. So for now, at least
-# ensure that the existing kubernetes-public secrets created for humans
-# to manually sync into the aaa cluster are managed by this script.
-function ensure_aaa_external_secrets() {
-    if [ $# -ne 1 ] || [ -z "$1" ]; then
-        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
-        return 1
-    fi
-    local project="${1}"
-    local secret_specs=()
-
-    # another sign that we should move to using YAML as source of intent;
-    # bash and indirect array access don't play nice, so we get this...
-
-    # prow as in the k8s-infra-prow instance being stood up on aaa, not the
-    # build clusters managed via infra/gcp/terraform/k8s-infra-prow-build*
-    local prow_secrets=(
-        k8s-infra-build-clusters-kubeconfig
-        k8s-infra-cherrypick-robot-github-token
-        k8s-infra-ci-robot-github-account-password
-        k8s-infra-ci-robot-github-token
-        k8s-infra-prow-cookie
-        k8s-infra-prow-github-oauth-config
-        k8s-infra-prow-hmac-token
-    )
-    local publishing_bot_secrets=(
-        publishing-bot-github-token
-    )
-    local slack_infra_secrets=(
-        recaptcha-secret-key
-        recaptcha-site-key
-        slack-event-log-config
-        slack-moderator-config
-        slack-moderator-words-config
-        slack-post-message-config
-        slack-welcomer-config
-        slackin-token
-    )
-    local triageparty_release_secrets=(
-        triage-party-github-token
-    )
-    local elekto_secrets=(
-        elekto-db-database
-        elekto-db-host
-        elekto-db-password
-        elekto-db-port
-        elekto-db-username
-        elekto-github-client-id
-        elekto-github-client-secret
-        elekto-meta-secret
-    )
-    mapfile -t secret_specs < <(
-        printf "%s/prow/sig-testing\n" "${prow_secrets[@]}"
-        printf "%s/publishing-bot/sig-release\n" "${publishing_bot_secrets[@]}"
-        printf "%s/slack-infra/sig-contributor-experience\n" "${slack_infra_secrets[@]}"
-        printf "%s/triageparty-release/sig-release\n" "${triageparty_release_secrets[@]}"
-        printf "%s/elekto/sig-contributor-experience\n" "${elekto_secrets[@]}"
-    )
-
-    for spec in "${secret_specs[@]}"; do
-        local secret app k8s_group
-        secret="$(echo "${spec}" | cut -d/ -f1)"
-        app="$(echo "${spec}" | cut -d/ -f2)"
-        k8s_group="$(echo "${spec}" | cut -d/ -f3)"
-
-        local admins="k8s-infra-rbac-${app}@kubernetes.io"
-        local labels=("app=${app}" "group=${k8s_group}")
-
-        color 6 "Ensuring '${app}' secret '${secret}' exists in '${project}' and is owned by '${admins}'"
-        ensure_secret_with_admins "${project}" "${secret}" "${admins}"
-        ensure_secret_labels "${project}" "${secret}" "${labels[@]}"
-    done
-}
-
 # Special-case IAM bindings that are necessary for k8s-infra prow or
 # its build clusters to operate on resources within the given project
 function ensure_prow_special_cases {
@@ -470,7 +398,7 @@ function ensure_main_project() {
     color 6 "Ensuring specific workload identity serviceaccounts exist in: ${project}"; (
         local svcacct_args cluster_args
 
-        color 6 "Ensuring GCP Auditor serviceaccount"
+        color 6 "Ensuring GCP Auditor service account"
         # roles/viewer on kubernetes-public is a bootstrap; the true purpose
         # is custom role audit.viewer on the kubernetes.io org, but that is
         # handled by ensure-organization.sh
@@ -478,27 +406,29 @@ function ensure_main_project() {
         cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
-        color 6 "Ensuring DNS Updater serviceaccount"
+        color 6 "Ensuring DNS Updater service account"
         svcacct_args=("${project}" "k8s-infra-dns-updater" "roles/dns.admin")
         cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
-        color 6 "Ensuring Monitoring Viewer serviceaccount"
+        color 6 "Ensuring Monitoring Viewer service account"
         svcacct_args=("${project}" "k8s-infra-monitoring-viewer" "roles/monitoring.viewer")
         cluster_args=("${project}" "monitoring")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
 
-        color 6 "Ensuring Kubernetes External Secrets serviceaccount"
+        color 6 "Ensuring Kubernetes External Secrets service account"
         svcacct_args=("${project}" "kubernetes-external-secrets" "roles/secretmanager.secretAccessor")
         cluster_args=("${project}" "kubernetes-external-secrets")
+        ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
+
+        color 6 "Ensure Monitoring Admin service account for Terraform"
+        svcacct_args=("${project}" "tf-monitoring-deployer" "roles/monitoring.admin")
+        cluster_args=("k8s-infra-prow-build-trusted" "${PROWJOB_POD_NAMESPACE}")
         ensure_workload_identity_serviceaccount "${svcacct_args[@]}" "${cluster_args[@]}" 2>&1 | indent
     ) 2>&1 | indent
 
     color 6 "Ensuring DNS is configured in: ${project}"
     ensure_dns "${project}" 2>&1 | indent
-
-    color 6 "Ensuring secrets destined for apps in 'aaa' exist in: ${project}"
-    ensure_aaa_external_secrets "${project}" 2>&1 | indent
 
     color 6 "Ensuring prow special cases for: ${project}"
     ensure_prow_special_cases "${project}" 2>&1 | indent

@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
- 
+
 /*
 This file defines:
 - GCS bucket to serve metrics bigquery results
@@ -53,7 +53,7 @@ data "google_iam_policy" "metrics_bucket_iam_bindings" {
     ]
     role = "roles/storage.admin"
   }
-  // Preserve legacy storage bindings, give storage.admim members legacy bucket owner
+  // Preserve legacy storage bindings, give storage.admin members legacy bucket owner
   binding {
     members = [
       "group:${local.prow_owners}",

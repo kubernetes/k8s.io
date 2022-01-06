@@ -11,9 +11,10 @@ gs://artifacts.k8s-staging-sig-docs.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 05 Oct 2020 17:45:00 GMT
-	Time updated:			Fri, 24 Sep 2021 21:29:47 GMT
-	Metageneration:			10
+	Time updated:			Thu, 16 Dec 2021 03:12:09 GMT
+	Metageneration:			14
 	Bucket Policy Only enabled:	True
-	Public access prevention:	unspecified
+	Public access prevention:	inherited
+	RPO:				DEFAULT
 	ACL:				[]
 	Default ACL:			[]

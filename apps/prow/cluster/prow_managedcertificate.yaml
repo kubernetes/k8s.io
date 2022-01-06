@@ -6,3 +6,12 @@ metadata:
 spec:
   domains:
   - k8s-infra-prow.k8s.io
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: k8s-infra-prow-k8s-io-v6
+  namespace: prow
+spec:
+  domains:
+  - k8s-infra-prow.k8s.io
