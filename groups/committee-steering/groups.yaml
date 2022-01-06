@@ -6,6 +6,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     owners:
+      - augustus@cisco.com
       - bburns@microsoft.com
       - briangrant@google.com
       - cblecker@gmail.com
@@ -37,6 +38,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
+      - augustus@cisco.com
       - cblecker@gmail.com
       - davanum@gmail.com
       - k8s@auggie.dev
@@ -61,6 +63,7 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
+      - augustus@cisco.com
       - cblecker@gmail.com
       - davanum@gmail.com
       - k8s@auggie.dev
