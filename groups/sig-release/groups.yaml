@@ -195,17 +195,18 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - cccswann@gmail.com # 1.23 Release Comms Shadow
-      - chu.karen.h@gmail.com # 1.23 Release Comms Lead
-      - james.laverack@jetstack.io # 1.23 RT Lead Shadow
-      - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
-      - kaslin.fields@gmail.com # 1.23 Release Comms Shadow
-      - kat.cosgrove@gmail.com # 1.23 Release Comms Shadow
+      - james.laverack@jetstack.io # 1.24 RT Lead
+      - joseph.r.sandoval@gmail.com # 1.24 RT EA
+      - kat.cosgrove@gmail.com # 1.24 Release Comms Shadow
       - lauri.d.apple@gmail.com
-      - max@koerbaecher.io # 1.23 RT Lead Shadow
-      - mickey.boxell@oracle.com # 1.23 Release Comms Shadow
-      - monmonmsc@gmail.com # 1.23 RT Lead Shadow
-      - rlejano@gmail.com # 1.23 RT Lead
+      - max@koerbaecher.io # 1.24 RT Lead Shadow
+      - xander@grzy.dev # 1.24 RT Lead Shadow
+      - jeeves.butler@gmail.com # 1.24 RT Lead Shadow
+      - cicih@google.com # 1.24 RT Lead Shadow
+      - mickey.boxell@oracle.com # 1.24 Release Comms Lead
+      - odr.saul@gmail.com # 1.24 Comms Shadow
+      - d.panigrahi.nitrkl@gmail.com # 1.24 Comms Shadow
+      - parthvi.vala@gmail.com # 1.24 Comms Shadow
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
