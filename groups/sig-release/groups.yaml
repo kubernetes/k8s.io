@@ -251,26 +251,27 @@ groups:
       - antheabjung@gmail.com
       - augustus@cisco.com
       - bentheelder@google.com
+      - cicih@google.com # 1.24 Release Lead Shadow
       - dcampau1@gmail.com
       - divya.mohan0209@gmail.com
       - gmccloskey@google.com
       - gveronicalg@gmail.com
-      - james.laverack@jetstack.io
+      - james.laverack@jetstack.io # 1.24 Release Lead
       - jameswangel@gmail.com
-      - joseph.r.sandoval@gmail.com
+      - jeeves.butler@gmail.com # 1.24 Release Lead Shadow
+      - joseph.r.sandoval@gmail.com # 1.24 EA
       - kikis.github@gmail.com
       - lauri.d.apple@gmail.com
       - max@koerbaecher.io
-      - monmonmsc@gmail.com
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
       - onlydole@gmail.com
-      - rlejano@gmail.com
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
       - spiffxp@google.com
       - thejoycekung@gmail.com
       - wilsonehusin@gmail.com
+      - xander@grzy.dev # 1.24 Release Lead Shadow
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
