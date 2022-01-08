@@ -318,11 +318,12 @@ groups:
       - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
-      - james.laverack@jetstack.io # 1.23 RT Lead Shadow
-      - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
-      - max@koerbaecher.io # 1.23 RT Lead Shadow
-      - monmonmsc@gmail.com # 1.23 RT Lead Shadow
-      - rlejano@gmail.com # 1.23 RT Lead
+      - james.laverack@jetstack.io # 1.24 RT Lead
+      - joseph.r.sandoval@gmail.com # 1.24 RT EA
+      - max@koerbaecher.io # 1.24 RT Lead Shadow
+      - xander@grzy.dev # 1.24 RT Lead Shadow
+      - jeeves.butler@gmail.com # 1.24 RT Lead Shadow
+      - cicih@google.com # 1.24 RT Lead Shadow
     members:
       - sig-release-leads@kubernetes.io
       - arshsharma461@gmail.com # 1.23 CI Signal Shadow
