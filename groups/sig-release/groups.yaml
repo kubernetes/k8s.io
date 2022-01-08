@@ -56,18 +56,18 @@ groups:
       - k8s-infra-release-editors@kubernetes.io
       - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
-      - james.laverack@jetstack.io
+      - cicih@google.com # 1.24 Release Lead Shadow
+      - james.laverack@jetstack.io # 1.24 Release Lead
       - jameswangel@gmail.com
+      - jeeves.butler@gmail.com # 1.24 Release Lead Shadow
       - jeremy.r.rickard@gmail.com
-      - joseph.r.sandoval@gmail.com
       - max@koerbaecher.io
-      - monmonmsc@gmail.com
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
-      - rlejano@gmail.com
       - sethpmccombs@gmail.com
       - thejoycekung@gmail.com
       - wilsonehusin@gmail.com
+      - xander@grzy.dev # 1.24 Release Lead Shadow
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
