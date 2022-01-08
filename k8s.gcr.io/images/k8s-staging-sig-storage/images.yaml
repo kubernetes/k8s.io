@@ -151,6 +151,7 @@
     "sha256:931a753e6428914f5393e3bba5f250f952c57dc2e9ddd16c37593a8f02b6715e": [ "v4.1.1" ]
     "sha256:57ca63cd55e483901d11f939a18a03544e4e21ae8069904e1c41743c1905fd67": [ "v4.2.0" ]
     "sha256:cc9dfe74bb10a5ceed6aac4db24e1177cad6d5f4b0cdae53630c9212b75c0dde": [ "v4.2.1" ]
+    "sha256:7e67e913de283d8affe768cc3c311d6039ad835462713ad6eddaf649ebd7d70d": [ "v5.0.0" ]
 - name: volume-data-source-validator
   dmap:
     "sha256:a4482344a693258e2cb31b32fa35d1f3cc414b546c2ebf7154fb87f15322f5db": [ "v0.1.0" ]
