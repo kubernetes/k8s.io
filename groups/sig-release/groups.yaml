@@ -375,6 +375,7 @@ groups:
       - saschagrunert@gmail.com
     managers:
       - joseph.r.sandoval@gmail.com # 1.24 Emeritus Advisor
+      - james.laverack@jetstack.io # 1.24 Release Lead
     members:
       - max@koerbaecher.io # 1.24 RT Lead Shadow
       - xander@grzy.dev # 1.24 RT Lead Shadow
