@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-descheduler.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 17 Jul 2019 20:46:50 GMT
-	Time updated:			Thu, 16 Dec 2021 02:28:40 GMT
-	Metageneration:			22
+	Time updated:			Tue, 04 Jan 2022 18:16:43 GMT
+	Metageneration:			23
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

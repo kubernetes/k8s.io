@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-capi-docker.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Sep 2019 20:56:39 GMT
-	Time updated:			Thu, 16 Dec 2021 02:03:45 GMT
-	Metageneration:			22
+	Time updated:			Tue, 04 Jan 2022 17:50:32 GMT
+	Metageneration:			23
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
