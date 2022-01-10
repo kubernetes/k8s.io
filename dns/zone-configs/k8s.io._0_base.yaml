@@ -51,6 +51,10 @@ docs:
 _acme-challenge.docs:
   type: A
   value: 0.0.0.0
+# Dummy A record used for e2e tests to reach an invalid registry:
+invalid.registry:
+  type: A
+  value: 0.0.0.0
 
 # Prove that we own these github orgs. sig-contributor-experience
 _github-challenge-kubernetes:
