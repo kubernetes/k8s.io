@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-csi-secrets-store.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 01 Apr 2020 23:26:31 GMT
-	Time updated:			Thu, 16 Dec 2021 02:27:35 GMT
-	Metageneration:			20
+	Time updated:			Tue, 04 Jan 2022 18:15:31 GMT
+	Metageneration:			21
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
