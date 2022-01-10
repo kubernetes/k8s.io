@@ -24,7 +24,7 @@ GIT_ROOT="$(git rev-parse --show-toplevel)"
 # ls -1 "${GIT_ROOT}"/audit/projects/*/buckets/ \
 #     | grep -E '^k8s-artifacts|^k8s-staging|.*\.artifacts.k8s-artifacts-prod.appspot.com' \
 
-(
+cat "${SCRIPT_DIR}/buckets.txt" <(
     for B in "${GIT_ROOT}"/audit/projects/*/buckets/*; do
         BUCKET_NAME="$(basename "${B}")"
         if echo "${BUCKET_NAME}" \
@@ -36,4 +36,6 @@ GIT_ROOT="$(git rev-parse --show-toplevel)"
 ) \
     | sort \
     | uniq \
-    | cat > "${SCRIPT_DIR}/buckets.txt"
+    | cat > "${SCRIPT_DIR}/buckets.txt.tmp"
+
+mv "${SCRIPT_DIR}/buckets.txt.tmp" "${SCRIPT_DIR}/buckets.txt"
