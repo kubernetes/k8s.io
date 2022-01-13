@@ -39,5 +39,8 @@ for image in "${images[@]}"; do
     sed -e 's/981d4a484d156273a673b3d4e130ce6a7e09d25d8275b4acef78df697a67d7b2/1db2d1879a4ef656e3037a1d32be6bdb08cb10ea5800b6cca393361d6ac0330c/g' | \
     # v1.0.0-rc.1 was rebuilt for base image CVE fix. But since the prod tag is immutable we need to use the old one for the RC
     sed -e 's/80b95ffe1d3f6a53228811163f0cb19ce3f16dbacc667253ac1457d2248415ff/551b115899673133513093245b009d41bb2f520f6ba758c99ef020e23366f810/g' | \
-    sed -e 's/4db5d24dbe7610199d27f0791a1b238bcb06de80305755a0d558c358c5467327/6a7f1eeb51fcd396f628821ed9b06d86723e91dc83c0e77e1c5185ac9bc52398/g'
+    sed -e 's/4db5d24dbe7610199d27f0791a1b238bcb06de80305755a0d558c358c5467327/6a7f1eeb51fcd396f628821ed9b06d86723e91dc83c0e77e1c5185ac9bc52398/g' | \
+    # v1.0.0 was rebuilt for base image CVE fix. But since the prod tag is immutable we need to use the old one for the RC
+    sed -e 's/9328d01faac9c48858dd56c10dbeffaa55ea4e4c51c7f3316822e93f9f63476a/6a5f9f3961e4c9827ba2e86a4918fce04150fbc979759ee540479f395253db5e/g' | \
+    sed -e 's/f52bfe35d98d3ad4b81c5e8a8b15bc9269cdb17b312376fdb75559108454423d/04dc2bf839bc86503943ab3303fd3ddc60961f502eec64ed729611979cb9fe51/g'
 done
