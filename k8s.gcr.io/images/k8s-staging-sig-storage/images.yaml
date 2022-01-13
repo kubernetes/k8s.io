@@ -49,6 +49,7 @@
     "sha256:4e74c0492bceddc598de1c90cc5bc14dcda94cb49fa9c5bad9d117c4834b5e08": [ "v2.2.1" ]
     "sha256:04c55b93a032ad8075cae540d60fc740a72c31006590dbdb61ad4ab9813959d0": [ "v2.2.2" ]
     "sha256:6477988532358148d2e98f7c747db4e9250bbc7ad2664bf666348abf9ee1f5aa": [ "v3.0.0" ]
+    "sha256:122bfb8c1edabb3c0edd63f06523e6940d958d19b3957dc7b1d6f81e9f1f6119": [ "v3.1.0" ]
 - name: csi-resizer
   dmap:
     "sha256:43195976fb9f94d943f5dd9d58b8afa543be22d09a1165e8a489b7dfe22c657a": [ "v0.4.0" ]
