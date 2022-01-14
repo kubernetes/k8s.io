@@ -37,8 +37,9 @@ groups:
       - caniszczyk@linuxfoundation.org
       - casey@tigera.io
       - cbelu@cloudbasesolutions.com
-      - celeste@cncf.io
+      - celeste@cncf.io #CoCC
       - chiachenk@google.com
+      - chu.karen.h@gmail.com #CoCC
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
       - ctadeu@gmail.com # SIG Release
@@ -96,6 +97,7 @@ groups:
       - mwielgus@google.com
       - neolit123@gmail.com
       - nospam.wong@gmail.com
+      - pal.nabarun95@gmail.com #CoCC
       - patrick.ohly@intel.com
       - prydonius@gmail.com
       - quinton@hoole.biz
@@ -116,6 +118,7 @@ groups:
       - tpepper@vmware.com
       - vincepri@vmware.com
       - vince@vincepri.com
+      - vllry@zeitgeistlabs.io
       - wfender@google.com
       - wojtekt@google.com
       - xingyang105@gmail.com
