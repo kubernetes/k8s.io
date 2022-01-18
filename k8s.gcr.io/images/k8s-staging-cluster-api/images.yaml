@@ -80,6 +80,7 @@
     "sha256:05bda7fe528de43f4e6e46bd86b04348f7c9918a9166f4fd64ae98b7cc322809": ["v1.0.1"]
     "sha256:7374a708a0379bb4d814628540a47b7354b2350702c56c47bdd6b5ba41f4050c": ["v1.0.2"]
     "sha256:91e0b94b0004e28daa031af5921b7845c9b601d9de4cdc350dffe62e76f03e87": ["v1.1.0-beta.1"]
+    "sha256:1804b070ad626c912534e29442a24ee266eee70ba9a26f4476d8a3715e3dbdb5": ["v1.1.0-beta.2"]
 - name: kubeadm-bootstrap-controller
   dmap:
     "sha256:d62149bd0ad7df5096c38fde8dda1fb4e55e59e556eaae6bdbefa72bdff9de4e": ["v0.3.0-rc.0"]
@@ -131,6 +132,7 @@
     "sha256:d43ff6407d9a9b9a1ebbd87c1c06fe2f2f70e59627c5c1b5409091efa953001e": ["v1.0.1"]
     "sha256:4ce3491638cd32bdc867b225a9a1e68fac7194f442d6eaf74e56b0901d2ac2f2": ["v1.0.2"]
     "sha256:10522aeda23a838909639fe8982ffeca2f455b24a49c688334d5c1459211b501": ["v1.1.0-beta.1"]
+    "sha256:0795066261515cb5df8c77314e9942b9724f5fa56a5dd8ac16c4d8b418446fc0": ["v1.1.0-beta.2"]
 - name: kubeadm-control-plane-controller
   dmap:
     "sha256:65d6da638f20c872642b9d40ec8878f644866f50a68f1f1a87eca1b3b5eb5ffc": ["v0.3.0-rc.0"]
@@ -182,6 +184,7 @@
     "sha256:2bbe09f469ad38d86a2b8586f93a44fedd7247240563fc1805df484d21198b85": ["v1.0.1"]
     "sha256:7138538eea5efd1a42795f0df972ebf38efb44b0cbed3654028f52ea51b87b97": ["v1.0.2"]
     "sha256:5ca6f306f8d31839d4f167205ffcc9b6405139b8bbb6df8bc99d07cc49a532dd": ["v1.1.0-beta.1"]
+    "sha256:dc52a8dbc16c1f5c62900805e9f38f24e5189090da16acee3d2421cecfae4489": ["v1.1.0-beta.2"]
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
