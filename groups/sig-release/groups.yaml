@@ -10,8 +10,8 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
-      - amwat@google.com
       - bentheelder@google.com
+      - juanescobar@google.com
       - mushuee@google.com
       - spiffxp@google.com
 
@@ -248,7 +248,6 @@ groups:
     members:
       - release-managers-private@kubernetes.io
       - ameukam@gmail.com
-      - amwat@google.com
       - antheabjung@gmail.com
       - augustus@cisco.com
       - bentheelder@google.com

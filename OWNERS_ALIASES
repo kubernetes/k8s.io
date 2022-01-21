@@ -164,8 +164,8 @@ aliases:
     - tpepper
 ## BEGIN CUSTOM CONTENT
   build-admins:
-    - amwat
     - BenTheElder
+    - juanfescobar
     - MushuEE
     - spiffxp
   promo-tools-approvers:
