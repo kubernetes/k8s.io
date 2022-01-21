@@ -79,7 +79,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - amwat@google.com
     - antonio.ojea.garcia@gmail.com
     - bentheelder@google.com
     - james@munnelly.eu
@@ -91,7 +90,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - amwat@google.com
     - bentheelder@google.com
     - spiffxp@gmail.com
 

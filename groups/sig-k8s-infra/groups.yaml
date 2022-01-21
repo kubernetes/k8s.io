@@ -14,7 +14,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - ameukam@gmail.com
-      - amwat@google.com
       - bentheelder@google.com
       - cblecker@gmail.com
       - davanum@gmail.com
