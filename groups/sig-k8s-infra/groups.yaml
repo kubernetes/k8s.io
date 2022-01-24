@@ -247,6 +247,16 @@ groups:
       - justinsb@google.com
       - thockin@google.com
 
+  - email-id: k8s-infra-aws-root-account@kubernetes.io
+    name: k8s-infra-aws-root-account
+    description: |-
+      ACL for AWS root account
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
   - email-id: k8s-infra-azure-admins@kubernetes.io
     name: k8s-infra-azure-admins
     description: |-
