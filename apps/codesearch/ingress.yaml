@@ -6,6 +6,7 @@ metadata:
   labels:
     app: codesearch
   annotations:
+    kubernetes.io/ingress.allow-http: false
     kubernetes.io/ingress.global-static-ip-name: cs-k8s-io-ingress
     kubernetes.io/ingress.class: gce
     networking.gke.io/managed-certificates: codesearch

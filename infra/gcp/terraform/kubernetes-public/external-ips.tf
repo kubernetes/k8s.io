@@ -32,9 +32,7 @@ locals {
     },
     cs = {
       name = "cs-k8s-io-ingress",
-      description = null
-      address_type = "EXTERNAL",
-      ip_version = "IPV4"
+      description = "Used for cs-canary.k8s.io"
     },
     elections = {
       name        = "k8s-io-elections",

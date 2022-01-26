@@ -1,7 +1,7 @@
 # Codesearch (Hound)
 
 Hound is an extremely fast source code search engine. See some details here:
-https://hub.docker.com/r/etsy/hound/
+https://github.com/hound-search/hound/pkgs/container/hound
 
 and the code here:
 https://github.com/etsy/hound

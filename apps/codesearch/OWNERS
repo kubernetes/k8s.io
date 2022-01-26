@@ -1,13 +1,11 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- dims
-# TODO: Anyone else??
+- sig-k8s-infra-leads
 
 reviewers:
 - dims
 - jimdaga
-# TODO: Anyone else??
 
 labels:
 - area/apps/codesearch
