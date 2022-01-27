@@ -7,7 +7,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - celeste@cncf.io
+      - celeste.e.horgan@gmail.com
       - chu.karen.h@gmail.com
       - ctadeu@gmail.com
       - pal.nabarun95@gmail.com
