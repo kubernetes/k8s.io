@@ -443,3 +443,14 @@ groups:
       - hebaelayoty@gmail.com # 1.24 Bug Triage Shadow
       - igor.segodnya@gmail.com # 1.24 Bug Triage Shadow
       - panjwaniritu45@gmail.com # 1.24 Bug Triage Shadow
+
+  - email-id: k8s-infra-staging-bom@kubernetes.io
+    name: k8s-infra-staging-bom
+    description: |-
+      ACL for staging BOM project
+
+      This project is used to test and stage BOM project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
