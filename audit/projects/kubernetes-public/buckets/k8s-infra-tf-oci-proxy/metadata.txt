@@ -1,4 +1,4 @@
-gs://k8s-infra-tf-public-pii/ :
+gs://k8s-infra-tf-oci-proxy/ :
 	Storage class:			STANDARD
 	Location type:			multi-region
 	Location constraint:		US
@@ -10,9 +10,9 @@ gs://k8s-infra-tf-public-pii/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			Mon, 14 Jun 2021 17:08:43 GMT
-	Time updated:			Fri, 28 Jan 2022 15:02:30 GMT
-	Metageneration:			7
+	Time created:			Fri, 28 Jan 2022 15:01:44 GMT
+	Time updated:			Fri, 28 Jan 2022 15:02:02 GMT
+	Metageneration:			6
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
