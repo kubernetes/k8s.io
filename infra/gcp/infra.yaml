@@ -260,6 +260,7 @@ infra:
       k8s-staging-artifact-promoter:
       k8s-staging-autoscaling:
       k8s-staging-boskos:
+      k8s-staging-bom:
       k8s-staging-build-image:
       k8s-staging-capi-docker:
       k8s-staging-capi-ibmcloud:
