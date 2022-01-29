@@ -52,3 +52,14 @@
 - name: etcd-manager
   dmap:
     "sha256:b72a53926ed1727e071af3e73865f2599e23a6a0ea85a50236ea32ea042ef46b": ["v3.0.20211124"]
+
+# v3.0.20220128
+- name: etcd-backup
+  dmap:
+    "sha256:1443fa4a3dedacee34d738472be208e05552c52260761006ec50b4c4cd0f7c9f": ["v3.0.20220128"]
+- name: etcd-dump
+  dmap:
+    "sha256:6c9b5c131ad2111daf83023dee59e971a7882e1b82cfa73b374bd1c5c1fa86e5": ["v3.0.20220128"]
+- name: etcd-manager
+  dmap:
+    "sha256:517e7a39b0c6f88859d72892263f3c2f00a01eae2b759b929f6e267698903221": ["v3.0.20220128"]
