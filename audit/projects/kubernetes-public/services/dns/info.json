@@ -10,6 +10,7 @@
     "managedZonesPerNetwork": 10000,
     "networksPerManagedZone": 100,
     "networksPerPolicy": 100,
+    "peeringZonesPerTargetNetwork": 1000,
     "policies": 100,
     "resourceRecordsPerRrset": 100,
     "rrsetAdditionsPerChange": 1000,
