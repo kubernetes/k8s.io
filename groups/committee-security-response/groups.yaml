@@ -19,15 +19,14 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
+      - mok@vmware.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
     members:
       # Associate SRC members
-      - mok@vmware.com
       - sfowler@redhat.com
       - taahm@google.com
       # Distributors
@@ -68,10 +67,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
+      - mok@vmware.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
 
@@ -86,10 +85,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - gaswamy@microsoft.com
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
+      - mok@vmware.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
 
@@ -123,8 +122,6 @@ groups:
     members:
       - security@kubernetes.io
       - mikedanese@google.com
-      - alextc@google.com
-      - jsand@google.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
