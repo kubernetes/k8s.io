@@ -29,7 +29,7 @@ groups:
       - detiber@gmail.com
       - jdetiberus@equinix.com
       - jeewan@vmware.com
-      - sbueringer@gmail.com
+      - buringerst@vmware.com
 
   - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubeadm-alerts
