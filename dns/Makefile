@@ -18,6 +18,8 @@ PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. canary.k8s-e2e.com.
 ZONE_CONFIGS := zone-configs
 OCTODNS_CONFIG := octodns-config.yaml
 DOCKER_IMAGE ?= k8s.gcr.io/infra-tools/octodns:v20200616-67ce585
+# for the shell scripts
+export DNS_IMAGE=$(DOCKER_IMAGE)
 
 check-canary check-prod: TMPCFG := $(shell mktemp -d /tmp/octodns.XXXXXX)
 check-canary check-prod: TMP_OCTODNS_CFG := $(shell mktemp /tmp/octodns.XXXXXX)
@@ -45,14 +47,8 @@ build:
 
 .PHONY: push
 push:
-	docker run -ti \
-		--user $(shell id -u) \
-		--volume ~/.config/gcloud:/.config/gcloud:ro \
-		--volume $(CURDIR):/octodns \
-		--workdir /octodns \
-		$(DOCKER_IMAGE) \
-		./push.sh \
-			$(ARGS)
+	./run-dns-container.sh \
+		./push.sh $(ARGS)
 
 .PHONY: dry-run
 dry-run: ARGS := --dry-run

@@ -14,10 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This runs as you.  It assumes you have built an image named ${USER}/octodns.
+# This runs as you.  You must have built an image and set ${DNS_IMAGE}.
+#
 # It also requires working gcloud credentials
 #
+# This is best run with `make check`
+#
 # $1: fqdn including final dot... ex "canary.k8s.io."
+
+set -o nounset -o pipefail
 
 read -r -d '' USAGE <<- EOF
   Usage:
@@ -48,22 +53,22 @@ shift $((OPTIND -1))
 
 DOMAINS=("$@")
 
-if [ -z "${TMPCFG}" ]; then
+if [ -z "${TMPCFG:-}" ]; then
     echo -e "confdir must be specified" >&2
     echo -e "${USAGE}" >&2
     exit 2
 fi
-if [ ! -d "${TMPCFG}" ]; then
+if [ ! -d "${TMPCFG:-}" ]; then
     echo -e "confdir must exist" >&2
     echo -e "${USAGE}" >&2
     exit 2
 fi
-if [ -z "${OCTODNS_CONFIG}" ]; then
+if [ -z "${OCTODNS_CONFIG:-}" ]; then
     echo -e "octodns_config_path must be specified" >&2
     echo -e "${USAGE}" >&2
     exit 2
 fi
-if [ ! -f "${OCTODNS_CONFIG}" ]; then
+if [ ! -f "${OCTODNS_CONFIG:-}" ]; then
     echo -e "octodns_config_path must exist" >&2
     echo -e "${USAGE}" >&2
     exit 2
@@ -71,7 +76,7 @@ fi
 
 echo -n "Checking that the GCP dns servers for (${DOMAINS[*]})"
 echo    " serve up everything in our octodns config"
-./check-zone.py \
+./run-dns-container.sh ./check-zone.py \
     --config-file="${OCTODNS_CONFIG}" \
     "${DOMAINS[@]/#/--zone=}"
 RESULT=$?
