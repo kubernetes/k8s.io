@@ -13,21 +13,39 @@
 # limitations under the License.
 
 SHELL := /usr/bin/env bash
-CANARY_ZONES := canary.k8s.io. canary.kubernetes.io. canary.x-k8s.io. canary.k8s-e2e.com.
-PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. canary.k8s-e2e.com.
+PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com. k8s.dev. kubernetes.dev.
+CANARY_ZONES := $(foreach z,$(PROD_ZONES),canary.$(z))
+ALL_ZONES := $(CANARY_ZONES) $(PROD_ZONES)
 ZONE_CONFIGS := zone-configs
-OCTODNS_CONFIG := octodns-config.yaml
+OCTODNS_CONFIG ?= octodns-config.yaml
 DOCKER_IMAGE ?= k8s.gcr.io/infra-tools/octodns:v20200616-67ce585
 
-check-canary check-prod: TMPCFG := $(shell mktemp -d /tmp/octodns.XXXXXX)
-check-canary check-prod: TMP_OCTODNS_CFG := $(shell mktemp /tmp/octodns.XXXXXX)
+check-canary check-prod validate-config: TMPCFG := $(shell mktemp -d /tmp/octodns.XXXXXX)
+check-canary check-prod validate-config: TMP_OCTODNS_CFG := $(shell mktemp /tmp/octodns.XXXXXX)
 check-canary: PRECOOK_ZONES := $(CANARY_ZONES)
 check-prod: PRECOOK_ZONES := $(PROD_ZONES)
+validate-config: PRECOOK_ZONES := $(ALL_ZONES)
 
 default: check
 
 .PHONY: check
 check: check-canary check-prod
+
+.PHONY: validate-config
+validate-config: OCTODNS_CONFIG = octodns-config-validate.yaml
+validate-config: precook-configs
+	$(CURDIR)/check-zone.sh -c $(TMPCFG) -v -o $(TMP_OCTODNS_CFG) \
+		$(ALL_ZONES)
+
+.PHONY: docker-%
+docker-%:
+	docker run -ti \
+		--user $(shell id -u) \
+		--volume ~/.config/gcloud:/.config/gcloud:ro \
+		--volume $(CURDIR):/octodns \
+		--workdir /octodns \
+		$(DOCKER_IMAGE) \
+		make $*
 
 .PHONY: check-canary
 check-canary: precook-configs

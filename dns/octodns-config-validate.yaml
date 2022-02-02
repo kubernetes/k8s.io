@@ -1,4 +1,5 @@
-# Update the octodns-config-validate.yaml file likewise if any changes are made to this file.
+# This file is copy of octodns-config.yaml file except the gcp section under provider for the validation purpose.
+# Update the octodns-config.yaml file likewise if any changes are made to this file.
 ---
 providers:
   config:
@@ -6,10 +7,6 @@ providers:
     directory: ./zone-configs
     enforce_order: false
     default_ttl: 3600
-  gcp:
-    class: octodns.provider.googlecloud.GoogleCloudProvider
-    project: kubernetes-public
-    #credentials_file: '/octodns/creds/gcp.json'
 
 zones:
   # Canary targets.

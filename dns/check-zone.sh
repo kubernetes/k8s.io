@@ -23,9 +23,10 @@ read -r -d '' USAGE <<- EOF
   Usage:
   $0 -c confdir -o octodns_config_path example.com.\t\t# Check a single zone
   $0 -c confdir -o octodns_config_path example.com. example.io.\t# Check a multiple zones
+  $0 -c confdir -v -o octodns_config_path example.com. example.io.\t# run only validation against the configuration
 EOF
 
-while getopts ":hc:o:" opt; do
+while getopts ":hvc:o:" opt; do
   case ${opt} in
     c )
       TMPCFG="${OPTARG}"
@@ -36,6 +37,9 @@ while getopts ":hc:o:" opt; do
     h )
       echo -e "${USAGE}"
       exit 0
+      ;;
+    v )
+      VALIDATE_ONLY="--validate-config-only"
       ;;
     \? )
     echo -e "Invalid option.\n" >&2
@@ -71,9 +75,11 @@ fi
 
 echo -n "Checking that the GCP dns servers for (${DOMAINS[*]})"
 echo    " serve up everything in our octodns config"
+
 ./check-zone.py \
     --config-file="${OCTODNS_CONFIG}" \
-    "${DOMAINS[@]/#/--zone=}"
+    "${DOMAINS[@]/#/--zone=}" ${VALIDATE_ONLY:+"${VALIDATE_ONLY}"}
+
 RESULT=$?
 if [ $RESULT != "0" ] ; then
     echo '***FAIL***'
