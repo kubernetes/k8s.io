@@ -16,10 +16,10 @@ plank:
       timeout: 2h
       grace_period: 15s
       utility_images:
-        clonerefs: "gcr.io/k8s-prow/clonerefs:v20220201-36ba705a25"
-        initupload: "gcr.io/k8s-prow/initupload:v20220201-36ba705a25"
-        entrypoint: "gcr.io/k8s-prow/entrypoint:v20220201-36ba705a25"
-        sidecar: "gcr.io/k8s-prow/sidecar:v20220201-36ba705a25"
+        clonerefs: "gcr.io/k8s-prow/clonerefs:v20220202-56bc36b558"
+        initupload: "gcr.io/k8s-prow/initupload:v20220202-56bc36b558"
+        entrypoint: "gcr.io/k8s-prow/entrypoint:v20220202-56bc36b558"
+        sidecar: "gcr.io/k8s-prow/sidecar:v20220202-56bc36b558"
       default_service_account_name: "prowjob-default-sa"
       gcs_configuration:
         bucket: k8s-infra-prow-results
