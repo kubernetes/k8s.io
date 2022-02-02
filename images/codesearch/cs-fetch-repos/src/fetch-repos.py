@@ -19,6 +19,7 @@
 import requests
 import json
 import os
+import sys
 
 REPOS = [
     'kubernetes',
@@ -47,20 +48,28 @@ def fetch_repos():
     if os.environ.get('CONFIG_PATH') is not None:
         file_path = os.environ.get('CONFIG_PATH')
 
-    for repo in REPOS:    
-        resp = requests.get(url= "https://api.github.com/orgs/" + repo + "/repos?per_page=200")
-        data = resp.json()
+    for repo in REPOS:
+        page = 0
+        while True:
+            page += 1
+            resp = requests.get(url= "https://api.github.com/orgs/" + repo + "/repos?per_page=100&page=" + str(page))
+            data = resp.json()
+            if len(data) == 0:
+                break
+            if 'message' in data:
+                print(data["message"], file=sys.stderr)
+                sys.exit(1)
+                break
+            for item in data:
+                name = item['full_name'].split('/')[1]
+                CONFIG["repos"][repo + "/" + name] = {
+                    "url": "https://github.com/%s/%s.git" % (repo, name),
+                    "ms-between-poll": 360000
+                }
 
-        for item in data:
-            name = item['full_name'].split('/')[1]
-            CONFIG["repos"][repo + "/" + name] = {
-                "url": "https://github.com/%s/%s.git" % (repo, name),
-                "ms-between-poll": 360000
-            }
-
-    with open(file_path, 'w') as f:
-        f.write(json.dumps(CONFIG, indent=4, sort_keys=True))
-    print("File config saved to: %s" % file_path)
+        with open(file_path, 'w') as f:
+            f.write(json.dumps(CONFIG, indent=4, sort_keys=True))
+        print("File config saved to: %s" % file_path)
 
 if __name__ == "__main__":
     fetch_repos()
