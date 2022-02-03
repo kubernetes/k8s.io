@@ -357,6 +357,7 @@ groups:
       - kat.cosgrove@gmail.com # 1.24 Communications Shadow
       - parthvi.vala@gmail.com # 1.24 Communications Shadow
       - pal.nabarun95@gmail.com # Release Manager // 1.24 Release Branch Manager
+      - jameswangel@gmail.com # Release Manager Associate // 1.24 Release Branch Manager Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -405,6 +406,7 @@ groups:
       - d.panigrahi.nitrkl@gmail.com # 1.24 Communications Shadow
       - kat.cosgrove@gmail.com # 1.24 Communications Shadow
       - parthvi.vala@gmail.com # 1.24 Communications Shadow
+      - jameswangel@gmail.com # Release Manager Associate // 1.24 Release Branch Manager Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
