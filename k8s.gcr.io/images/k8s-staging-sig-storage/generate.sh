@@ -19,7 +19,7 @@ set -o nounset
 set -o pipefail
 
 readonly repo="gcr.io/k8s-staging-sig-storage"
-readonly tag_filter="tags~^v AND NOT tags~v2020 AND NOT tags~-rc"
+readonly tag_filter="tags~^v\d+\.\d+\.\d+\$"
 # List of repos under https://console.cloud.google.com/gcr/images/k8s-staging-sig-storage/GLOBAL
 readonly images=(
     csi-attacher
@@ -43,6 +43,8 @@ readonly images=(
     volume-data-source-validator
 )
 
+# TODO(mauriciopoppe): there's an issue with iscsiplugin described in https://github.com/kubernetes-csi/csi-driver-iscsi/issues/97
+# after running generate.sh > images.yaml we reverted the line for iscsiplugin v0.1.0
 for image in "${images[@]}"; do
     echo "- name: ${image}"
     echo "  dmap:"
