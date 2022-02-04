@@ -27,6 +27,34 @@ data:
           return 200 'ok';
         }
 
+        location ~ ^/internal/(?<repo>[^/]*)(?<subpath>/.*)?$ {
+          # $https is set to 'on' when connecting to nginx via HTTPS directly.
+          set $https_status $https;
+          if ($http_x_forwarded_proto = 'https') {
+            set $https_status 'on';
+          }
+          # Upgrade HTTP to HTTPS.
+          if ($https_status != 'on') {
+            return 301 https://$host$request_uri;
+          }
+
+          if ($arg_go-get = "1") {
+            # This is a go-get operation.
+            return 200 '
+                <html><head>
+                      <meta name="go-import"
+                            content="k8s.io/internal/$repo
+                                     git https://github.com/k8s-internal/$repo">
+                      <meta name="go-source"
+                            content="k8s.io/internal/$repo
+                                     https://github.com/k8s-internal/$repo
+                                     https://github.com/k8s-internal/$repo/tree/master{/dir}
+                                     https://github.com/k8s-internal/$repo/blob/master{/dir}/{file}#L{line}">
+                </head></html>
+            ';
+          }
+        }
+
         location ~ ^/(?<repo>[^/]*)(?<subpath>/.*)?$ {
           # $https is set to 'on' when connecting to nginx via HTTPS directly.
           set $https_status $https;
