@@ -102,7 +102,6 @@ groups:
     members:
       - k8s-infra-prow-oncall@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
-      - ameukam@gmail.com
 
   - email-id: k8s-infra-staging-cip-test@kubernetes.io
     name: k8s-infra-staging-cip-test
@@ -437,7 +436,6 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
       - k8s-infra-release-viewers@kubernetes.io
-      - ameukam@gmail.com
       - bartek@smykla.com
       - gveronicalg@gmail.com
       - jyotima@amazon.com # 1.24 Bug Triage Lead
