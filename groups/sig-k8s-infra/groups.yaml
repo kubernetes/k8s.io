@@ -134,6 +134,21 @@ groups:
       - stephen@ii.coop
       - zz@ii.coop
 
+  # Owners of the GCP projects:
+  # - k8s-infra-oci-proxy
+  # - k8s-infra-oci-proxy-prod
+  - email-id: k8s-infra-oci-proxy-admins@kubernetes.io
+    name: k8s-infra-oci-proxy-admins
+    description: |-
+      ACL for OCI Proxy admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - eddiezane@gmail.com
+      - justinsb@google.com
+      - sig-k8s-infra-leads@kubernetes.io
+
   # owners of the k8s-infra-sandbox-capg project, working on cluster-api provider for GCP
   - email-id: k8s-infra-sandbox-capg@kubernetes.io
     name: k8s-infra-sandbox-capg
