@@ -13,14 +13,10 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
       - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
-      - spiffxp@gmail.com
-      - spiffxp@google.com
-      - thockin@google.com
       - linusa@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: sig-k8s-infra-private@kubernetes.io
     name: sig-k8s-infra-private
@@ -31,15 +27,12 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
       - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
       - ihor@cncf.io
       - justinsb@google.com
-      - spiffxp@google.com
-      - thockin@google.com
       - james@munnelly.eu
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: sig-k8s-infra-leads@kubernetes.io
     name: sig-k8s-infra-leads
@@ -88,13 +81,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
       - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
-      - james@munnelly.eu
-      - thockin@google.com
-      - spiffxp@gmail.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   #
   # k8s-infra owners for sig-owned subprojects
@@ -145,6 +134,21 @@ groups:
       - stephen@ii.coop
       - zz@ii.coop
 
+  # Owners of the GCP projects:
+  # - k8s-infra-oci-proxy
+  # - k8s-infra-oci-proxy-prod
+  - email-id: k8s-infra-oci-proxy-admins@kubernetes.io
+    name: k8s-infra-oci-proxy-admins
+    description: |-
+      ACL for OCI Proxy admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - eddiezane@gmail.com
+      - justinsb@google.com
+      - sig-k8s-infra-leads@kubernetes.io
+
   # owners of the k8s-infra-sandbox-capg project, working on cluster-api provider for GCP
   - email-id: k8s-infra-sandbox-capg@kubernetes.io
     name: k8s-infra-sandbox-capg
@@ -171,10 +175,9 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - ameukam@gmail.com
       - cblecker@gmail.com
       - james@munnelly.eu
-      - thockin@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
     name: k8s-infra-rbac-k8s-io-canary
@@ -199,8 +202,6 @@ groups:
       - cblecker@gmail.com
       - davanum@gmail.com
       - nikhitaraghunath@gmail.com
-      - spiffxp@gmail.com
-      - thockin@google.com
 
   - email-id: k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
     name: k8s-infra-rbac-kubernetes-external-secrets
@@ -231,15 +232,13 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - adolfo.garcia@uservers.net
       - cblecker@gmail.com
       - davanum@gmail.com
       - ihor@cncf.io
       - jdagostino2@gmail.com
       - k8s-infra-ii-coop@kubernetes.io
+      - sig-k8s-infra-leads@kubernetes.io
       - sj7trunks@pendulus.net
-      - spiffxp@gmail.com
-      - thockin@google.com
 
   #
   # k8s-infra org-wide infrastructure admin groups
@@ -260,7 +259,7 @@ groups:
     members:
       - ihor@cncf.io
       - justinsb@google.com
-      - thockin@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-aws-root-account@kubernetes.io
     name: k8s-infra-aws-root-account
@@ -300,11 +299,9 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-admins@kubernetes.io
-      - davanum@gmail.com
       - justinsb@google.com
       - linusa@google.com
-      - spiffxp@google.com
-      - thockin@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-bigquery-admins@kubernetes.io
     name: k8s-infra-bigquery-admins
@@ -313,10 +310,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - davanum@gmail.com
       - ihor@cncf.io
-      - spiffxp@google.com
-      - thockin@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-cluster-admins@kubernetes.io
     name: k8s-infra-cluster-admins
@@ -340,10 +335,8 @@ groups:
     members:
       - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
       - james@munnelly.eu
-      - spiffxp@google.com
-      - thockin@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-gcp-accounting@kubernetes.io
     name: k8s-infra-gcp-accounting
@@ -352,14 +345,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
-      - davanum@gmail.com
       - ihor@cncf.io
       - jdagostino2@gmail.com
       - justinsb@google.com
       - k8s-infra-ii-coop@kubernetes.io
-      - spiffxp@google.com
-      - thockin@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
     name: k8s-infra-gcp-org-admins
