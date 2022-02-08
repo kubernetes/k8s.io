@@ -455,6 +455,14 @@ function staging_special_case__k8s_staging_kustomize() {
 # presubmits to run on k8s-infra-prow-build-trusted.
 function staging_special_case__k8s_staging_releng_test() {
     ensure_staging_gcb_builder_service_account "releng-test" "k8s-infra-prow-build"
+
+    # ensure cloud builds can access keyrings for decryption
+    local cloudbuild_sa_email="86929635859@cloudbuild.gserviceaccount.com"
+    principal="serviceAccount:${cloudbuild_sa_email}"
+
+    readonly project="k8s-staging-releng-test"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyDecrypter"
+    ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
 }
 
 # sig-storage has these enabled
