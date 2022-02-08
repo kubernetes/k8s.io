@@ -245,7 +245,7 @@ infra:
   releng:
     projects:
       k8s-releng-prod:
-        managed_by: infra/gcp/bash/ensure-releng-project.sh
+        managed_by: infra/gcp/bash/ensure-releng.sh
 
   sandbox:
     projects:
