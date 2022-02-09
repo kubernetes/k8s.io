@@ -27,6 +27,18 @@ import (
 const (
 	usageDateFormat  = "2006-01-02"
 	resultDateFormat = "200601021504"
+	fileNameTemplate = "cncf-aws-infra-billing-and-usage-data-%v.json"
+)
+// default config for runtime
+var (
+	defaultConfig = AWSCostExplorerExportConfig{
+		AWSRegion: "us-east-1",
+		LocalOutputFile:"/tmp/local-cncf-aws-infra-billing-and-usage-data.json",
+		LocalOutputFileEnable: false,
+		BucketURI: "gs://cncf-aws-infra-cost-and-billing-data",
+		AmountOfDaysToReportFrom: 365,
+		PromoteToLatest: true,
+	}
 )
 
 // MarshalAsJSON returns a JSON string from an interface
@@ -168,12 +180,12 @@ func (b BucketAccess) WriteToFile(name string, data string) (err error) {
 
 func main() {
 	var config AWSCostExplorerExportConfig
-	flag.StringVar(&config.AWSRegion, "aws-region", "us-east-1", "specify an AWS region")
-	flag.StringVar(&config.LocalOutputFile, "output-file", "/tmp/local-cncf-aws-infra-billing-and-usage-data.json", "specify a local file to write the usage JSON data to")
-	flag.BoolVar(&config.LocalOutputFileEnable, "output-file-enable", false, "specify whether the usage data is also written to disk locally")
-	flag.StringVar(&config.BucketURI, "bucket-uri", "gs://cncf-aws-infra-cost-and-billing-data", "specify a bucket to write to")
-	flag.IntVar(&config.AmountOfDaysToReportFrom, "days-ago", 365, "specify the amount of days back to report from today")
-	flag.BoolVar(&config.PromoteToLatest, "promote-to-latest", true, "specifies whether to promote the cost and usage data to a latest JSON file")
+	flag.StringVar(&config.AWSRegion, "aws-region", defaultConfig.AWSRegion, "specify an AWS region")
+	flag.StringVar(&config.LocalOutputFile, "output-file", defaultConfig.LocalOutputFile, "specify a local file to write the usage JSON data to")
+	flag.BoolVar(&config.LocalOutputFileEnable, "output-file-enable", defaultConfig.LocalOutputFileEnable, "specify whether the usage data is also written to disk locally")
+	flag.StringVar(&config.BucketURI, "bucket-uri", defaultConfig.BucketURI, "specify a bucket to write to")
+	flag.IntVar(&config.AmountOfDaysToReportFrom, "days-ago", defaultConfig.AmountOfDaysToReportFrom, "specify the amount of days back to report from today")
+	flag.BoolVar(&config.PromoteToLatest, "promote-to-latest", defaultConfig.PromoteToLatest, "specifies whether to promote the cost and usage data to a latest JSON file")
 	flag.Parse()
 
 	cfg, err := awssdkconfig.LoadDefaultConfig(context.TODO(),
@@ -215,7 +227,6 @@ func main() {
 		log.Printf("Closing GCS bucket '%v'\n", config.BucketURI)
 		ba.Bucket.Close()
 	}()
-	fileNameTemplate := "cncf-aws-infra-billing-and-usage-data-%v.json"
 	fileNames := []string{
 		fmt.Sprintf(fileNameTemplate, time.Now().Format(resultDateFormat)),
 	}
