@@ -41,6 +41,26 @@ The output is finally loaded in a DataStudio report and reviewed by members [sig
 | `GCP_BQ_DUMP_BUCKET`             | ``                         | A GCP bucket to dump content from BigQuery                                            |
 | `BQ_OUTPUT`                      | `/dev/null`                | The file to output the logs for BigQuery to                                           |
 
+## Prepare
+
+Log into gcloud
+
+```bash
+gcloud auth login
+```
+
+Set the GCP project
+
+```bash
+gcloud config set project k8s-infra-ii-sandbox
+```
+
+Log into application-default
+
+```bash
+gcloud auth application-default login
+```
+
 ## Running the Pipeline Manually
 
 Run in Docker
@@ -60,7 +80,15 @@ docker run \
     -e GCP_BQ_DUMP_BUCKET=ii_bq_scratch_dump \
     -v $HOME/.config/gcloud:/var/lib/postgresql/.config/gcloud \
     -v "${TMP_DIR_ETL}:/tmp" \
-    public-log-asn-matcher
+    gcr.io/k8s-staging-infra-tools/public-log-asn-matcher
+```
+
+### Clean up
+
+Change permissions of ~/.config/gcloud back
+
+```bash
+sudo chown -R $(id -u) ~/.config/gcloud
 ```
 
 ## Generating the bucket list
