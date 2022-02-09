@@ -23,10 +23,13 @@ import (
 	_ "gocloud.dev/blob/s3blob"
 )
 
-// date formats used in different places
+// consts
 const (
+	// formats
 	usageDateFormat  = "2006-01-02"
 	resultDateFormat = "200601021504"
+
+	// templates
 	fileNameTemplate = "cncf-aws-infra-billing-and-usage-data-%v.json"
 )
 // default config for runtime
@@ -41,8 +44,7 @@ var (
 	}
 )
 
-// MarshalAsJSON returns a JSON string from an interface
-func MarshalAsJSON(input interface{}) string {
+func marshalAsJSON(input interface{}) string {
 	o, err := json.Marshal(input)
 	if err != nil {
 		log.Println(err)
@@ -51,8 +53,7 @@ func MarshalAsJSON(input interface{}) string {
 	return string(o)
 }
 
-// WriteFile writes the file to disk
-func WriteFile(path string, contents string) error {
+func writeFile(path string, contents string) error {
 	f, err := os.Create(path)
 	if err != nil {
 		return err
@@ -136,9 +137,6 @@ func (c usageClient) GetUsage() (costAndUsageOutput *costexplorer.GetCostAndUsag
 		costAndUsageOutput.ResultMetadata = usage.ResultMetadata
 	}
 	costAndUsageOutput.NextPageToken = nil
-	if err != nil {
-		return &costexplorer.GetCostAndUsageOutput{}, fmt.Errorf("error with usage with resources, %v", err)
-	}
 	if len(costAndUsageOutput.ResultsByTime) == 0 {
 		return &costexplorer.GetCostAndUsageOutput{}, fmt.Errorf("error: empty dataset")
 	}
@@ -208,10 +206,10 @@ func main() {
 		return
 	}
 	log.Println("Fetched usage data")
-	costAndUsageOutputJSON := MarshalAsJSON(costAndUsageOutput)
+	costAndUsageOutputJSON := marshalAsJSON(costAndUsageOutput)
 	if config.LocalOutputFileEnable {
 		log.Println("Writing usage data to file")
-		err = WriteFile(config.LocalOutputFile, costAndUsageOutputJSON)
+		err = writeFile(config.LocalOutputFile, costAndUsageOutputJSON)
 		if err != nil {
 			log.Printf("%v", err)
 			return
