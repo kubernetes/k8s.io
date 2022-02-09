@@ -23,21 +23,11 @@ import (
 	_ "gocloud.dev/blob/s3blob"
 )
 
-// AWSCostExplorerExportConfig stores configuration for the runtime
-type AWSCostExplorerExportConfig struct {
-	AWSRegion                string
-	LocalOutputFile          string
-	LocalOutputFileEnable    bool
-	BucketURI                string
-	AmountOfDaysToReportFrom int
-	PromoteToLatest          bool
-}
-
-// usageClient stores the client for costexplorer
-type usageClient struct {
-	client *costexplorer.Client
-	config AWSCostExplorerExportConfig
-}
+// date formats used in different places
+const (
+	usageDateFormat  = "2006-01-02"
+	resultDateFormat = "200601021504"
+)
 
 // MarshalAsJSON returns a JSON string from an interface
 func MarshalAsJSON(input interface{}) string {
@@ -63,11 +53,21 @@ func WriteFile(path string, contents string) error {
 	return nil
 }
 
-// date formats used in different places
-const (
-	usageDateFormat  = "2006-01-02"
-	resultDateFormat = "200601021504"
-)
+// AWSCostExplorerExportConfig stores configuration for the runtime
+type AWSCostExplorerExportConfig struct {
+	AWSRegion                string
+	LocalOutputFile          string
+	LocalOutputFileEnable    bool
+	BucketURI                string
+	AmountOfDaysToReportFrom int
+	PromoteToLatest          bool
+}
+
+// usageClient stores the client for costexplorer
+type usageClient struct {
+	client *costexplorer.Client
+	config AWSCostExplorerExportConfig
+}
 
 // GetInputForUsage returns an input for making the cost and usage data request
 func (c usageClient) GetInputForUsage(nextPageToken *string) *costexplorer.GetCostAndUsageInput {
