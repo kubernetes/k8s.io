@@ -188,6 +188,8 @@ func main() {
 	flag.BoolVar(&config.PromoteToLatest, "promote-to-latest", defaultConfig.PromoteToLatest, "specifies whether to promote the cost and usage data to a latest JSON file")
 	flag.Parse()
 
+	log.Printf("Config: %#v\n", config)
+
 	cfg, err := awssdkconfig.LoadDefaultConfig(context.TODO(),
 		awssdkconfig.WithRegion(config.AWSRegion),
 	)
