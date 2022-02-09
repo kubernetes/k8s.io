@@ -456,11 +456,11 @@ function staging_special_case__k8s_staging_kustomize() {
 function staging_special_case__k8s_staging_releng_test() {
     ensure_staging_gcb_builder_service_account "releng-test" "k8s-infra-prow-build"
 
-    # ensure cloud builds can access keyrings for decryption
+    # Ensure CloudBuild jobs can access keyrings on GCP project k8s-releng-prod for decryption
     local cloudbuild_sa_email="86929635859@cloudbuild.gserviceaccount.com"
     principal="serviceAccount:${cloudbuild_sa_email}"
 
-    readonly project="k8s-staging-releng-test"
+    readonly project="k8s-releng-prod"
     ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyDecrypter"
     ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
 }
