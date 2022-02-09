@@ -159,8 +159,6 @@ groups:
     members:
       - davanum@gmail.com
       - ctadeu@gmail.com
-      - jayesh0200@gmail.com
-      - ii.sayantani.ii@gmail.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
