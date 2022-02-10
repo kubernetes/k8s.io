@@ -27,8 +27,10 @@ import (
 	"log"
 	"os"
 	"path"
+	"strings"
 	"time"
 
+	"cloud.google.com/go/bigquery"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awssdkconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer"
@@ -41,7 +43,72 @@ import (
 )
 
 // Table types the main keys from the costAndUsageOutput and the BigQuery tables
-type Table string
+type Table struct {
+	Name   string
+	Schema interface{}
+}
+
+// recreation of the CostExplorer types is required
+// since BigQuery schema doesn't support
+// - *string; or
+// - map[string]string
+
+type unblendedCosts struct {
+	Unit string
+	Amount string
+}
+
+type dateInterval struct {
+	Start string
+	End string
+}
+
+type group struct {
+	Keys []string
+	Metrics unblendedCosts
+}
+
+type ResultByTime struct {
+	Estimated bool
+	Groups []group
+	TimePeriod dateInterval
+	TotalUnblendedCosts unblendedCosts
+}
+
+type GroupDefinition struct {
+	Key string
+	Type cetypes.GroupDefinitionType
+}
+
+type attributes struct {
+	Description string
+}
+
+type DimensionValuesWithAttributes struct {
+	Attributes attributes
+	Value string
+}
+
+// FileOutputs maps a file name to content
+type FileOutputs map[string]string
+
+// AWSCostExplorerExportConfig stores configuration for the runtime
+type AWSCostExplorerExportConfig struct {
+	AWSRegion                     string
+	LocalOutputFolder             string
+	LocalOutputFolderEnable       bool
+	BucketURI                     string
+	AmountOfDaysToReportFrom      int
+	PromoteToLatest               bool
+	GCPProjectID                  string
+	BigQueryEnabled               bool
+	BigQueryDatasetLocation       string
+	BigQueryManagingDatasetPrefix string
+
+	// clients
+	ceclient *costexplorer.Client
+	bqclient *bigquery.Client
+}
 
 // consts
 const (
@@ -50,23 +117,36 @@ const (
 	resultDateFormat = "200601021504"
 
 	// templates
-	fileNameTemplate = "cncf-aws-infra-billing-and-usage-data-%v-%v.json"
-
-	tableResultsByTime            Table = "ResultsByTime"
-	tableDimensionValueAttributes Table = "DimensionValueAttributes"
-	tableGroupDefinitions         Table = "GroupDefinitions"
+	fileNameTemplate            = "cncf-aws-infra-billing-and-usage-data-%v-%v.json"
+	bigqueryDatasetNameTemplate = "%v_%v"
+	bucketReferenceTemplate     = "%v/%v"
 )
 
 // default config for runtime
 var (
 	defaultConfig = AWSCostExplorerExportConfig{
-		AWSRegion:                "us-east-1",
-		LocalOutputFolder:        "/tmp/local-cncf-aws-infra-billing-and-usage-data",
-		LocalOutputFolderEnable:  false,
-		BucketURI:                "gs://cncf-aws-infra-cost-and-billing-data",
-		AmountOfDaysToReportFrom: 365,
-		PromoteToLatest:          true,
+		AWSRegion:                     "us-east-1",
+		LocalOutputFolder:             "/tmp/local-cncf-aws-infra-billing-and-usage-data",
+		LocalOutputFolderEnable:       false,
+		BucketURI:                     "gs://cncf-aws-infra-cost-and-billing-data",
+		AmountOfDaysToReportFrom:      365,
+		PromoteToLatest:               true,
+		GCPProjectID:                  "k8s-infra-ii-sandbox",
+		BigQueryEnabled:               true,
+		BigQueryDatasetLocation:       "australia-southeast1",
+		BigQueryManagingDatasetPrefix: "cncf_aws_infra_cost_and_billing_data_dataset",
 	}
+
+	tableResultsByTime            Table = Table{Name: "ResultsByTime", Schema: ResultByTime{}}
+	tableDimensionValueAttributes Table = Table{Name: "DimensionValueAttributes", Schema: DimensionValuesWithAttributes{}}
+	tableGroupDefinitions         Table = Table{Name: "GroupDefinitions", Schema: GroupDefinition{}}
+
+	tables = []Table{
+		tableResultsByTime,
+		tableDimensionValueAttributes,
+		tableGroupDefinitions,
+	}
+	now = time.Now()
 )
 
 func marshalAsJSON(input interface{}) string {
@@ -91,17 +171,11 @@ func writeFile(path string, contents string) error {
 	return nil
 }
 
-// FileOutputs maps a file name to content
-type FileOutputs map[string]string
-
-// AWSCostExplorerExportConfig stores configuration for the runtime
-type AWSCostExplorerExportConfig struct {
-	AWSRegion                string
-	LocalOutputFolder        string
-	LocalOutputFolderEnable  bool
-	BucketURI                string
-	AmountOfDaysToReportFrom int
-	PromoteToLatest          bool
+func stringForStringPointer(input *string) string {
+	if input == nil {
+		return ""
+	}
+	return *input
 }
 
 // usageClient stores the client for costexplorer
@@ -112,10 +186,10 @@ type usageClient struct {
 
 // GetInputForUsage returns an input for making the cost and usage data request
 func (c usageClient) GetInputForUsage(nextPageToken *string) *costexplorer.GetCostAndUsageInput {
-	start := time.Now().
+	start := now.
 		Add(-time.Duration(time.Hour * 24 * time.Duration(c.config.AmountOfDaysToReportFrom))).
 		Format(usageDateFormat)
-	end := time.Now().Format(usageDateFormat)
+	end := now.Format(usageDateFormat)
 	input := &costexplorer.GetCostAndUsageInput{
 		Filter: &cetypes.Expression{
 			Not: &cetypes.Expression{
@@ -172,12 +246,6 @@ func (c usageClient) GetUsage() (costAndUsageOutput *costexplorer.GetCostAndUsag
 	return costAndUsageOutput, nil
 }
 
-// ResultByTime overrides fields in cetypes.ResultByTime
-type ResultByTime struct {
-	cetypes.ResultByTime
-	Total interface{} `json:"Total,omitempty"`
-}
-
 // BucketAccess stores config for accessing a bucket
 type BucketAccess struct {
 	URI    string
@@ -211,6 +279,188 @@ func (b BucketAccess) WriteToFile(name string, data string) (err error) {
 	return nil
 }
 
+func (c AWSCostExplorerExportConfig) NewGCSRefForConfig(tableName string) *bigquery.GCSReference {
+	gcsRef := bigquery.NewGCSReference(
+		fmt.Sprintf(bucketReferenceTemplate,
+			c.BucketURI,
+			fmt.Sprintf(fileNameTemplate, tableName, "latest")))
+	gcsRef.SourceFormat = bigquery.JSON
+	return gcsRef
+}
+
+func (c AWSCostExplorerExportConfig) CheckIfBigQueryDatasetExists(suffix string) (err error) {
+	name := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
+	md, err := c.bqclient.Dataset(name).Metadata(context.TODO())
+	if err != nil {
+		return err
+	}
+	if name != md.Name {
+		return fmt.Errorf("Dataset not found, names don't match '%v' != '%v'", name, md.Name)
+	}
+	return nil
+}
+
+func (c AWSCostExplorerExportConfig) CreateBigQueryDataset(suffix string) (err error) {
+	name := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
+	err = c.bqclient.Dataset(name).Create(context.TODO(), &bigquery.DatasetMetadata{
+		Location: c.BigQueryDatasetLocation,
+	})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c AWSCostExplorerExportConfig) DeleteBigQueryDataset(suffix string) (err error) {
+	name := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
+	err = c.bqclient.Dataset(name).Delete(context.TODO())
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c AWSCostExplorerExportConfig) NewSchemaForInterface(obj interface{}) (schema bigquery.Schema, err error) {
+	schema, err = bigquery.InferSchema(obj)
+	if err != nil {
+		return bigquery.Schema{}, fmt.Errorf("error inferring schema: %v", err)
+	}
+	return schema, nil
+}
+
+func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(suffix string, table Table) (err error) {
+	datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
+	gcsRef := c.NewGCSRefForConfig(string(tableResultsByTime.Name))
+	schema, err := c.NewSchemaForInterface(table.Schema)
+	if err != nil {
+		return err
+	}
+	gcsRef.Schema = schema
+	loader := c.bqclient.Dataset(datasetName).Table(string(tableResultsByTime.Name)).LoaderFrom(gcsRef)
+	loader.WriteDisposition = bigquery.WriteEmpty
+
+	job, err := loader.Run(context.TODO())
+	if err != nil {
+		return err
+	}
+	status, err := job.Wait(context.TODO())
+	if err != nil {
+		return err
+	}
+	if status.Err() != nil {
+		errors := func () (errs string) {
+			for _, err := range status.Errors {
+				errs += fmt.Sprintf("\n - %v %v %v", err.Location, err.Message, err.Reason)
+			}
+			return errs
+		}()
+		return fmt.Errorf("job completed with error: %v\n\nerrors: %#v\n", status.Err(), errors)
+	}
+	return nil
+}
+
+func FormatCostAndUsageOutputAsFileOutputs(costAndUsageOutput *costexplorer.GetCostAndUsageOutput) (fileOutputs FileOutputs) {
+	fileOutputs = FileOutputs{}
+	for _, value := range costAndUsageOutput.ResultsByTime {
+		o := marshalAsJSON(ResultByTime{
+			Estimated: value.Estimated,
+			Groups: func() (groups []group) {
+				for _, g := range value.Groups {
+					groups = append(groups, group{
+						Keys: g.Keys,
+						Metrics: unblendedCosts{
+							Amount: stringForStringPointer(g.Metrics["UnblendedCosts"].Amount),
+							Unit: stringForStringPointer(g.Metrics["UnblendedCosts"].Unit),
+						},
+					})
+				}
+				return groups
+			}(),
+			TimePeriod: dateInterval{
+				Start: stringForStringPointer(value.TimePeriod.Start),
+				End: stringForStringPointer(value.TimePeriod.End),
+			},
+			TotalUnblendedCosts: unblendedCosts{
+				Amount: stringForStringPointer(value.Total["UnblendedCost"].Amount),
+				Unit: stringForStringPointer(value.Total["UnblendedCost"].Unit),
+			},
+		})
+		fileOutputs[string(tableResultsByTime.Name)] += o + "\n"
+	}
+	for _, value := range costAndUsageOutput.DimensionValueAttributes {
+		o := marshalAsJSON(DimensionValuesWithAttributes{
+			Value: *value.Value,
+			Attributes: attributes{
+				Description: value.Attributes["description"],
+			},
+		})
+		fileOutputs[string(tableDimensionValueAttributes.Name)] += o + "\n"
+	}
+	for _, value := range costAndUsageOutput.GroupDefinitions {
+		o := marshalAsJSON(GroupDefinition{
+			Key: *value.Key,
+			Type: value.Type,
+		})
+		fileOutputs[string(tableGroupDefinitions.Name)] += o + "\n"
+	}
+	return fileOutputs
+}
+
+func FormatCostAndUsageOutputAsFileOutputsWithoutSlice(costAndUsageOutput *costexplorer.GetCostAndUsageOutput) (fileOutputs FileOutputs) {
+	fileOutputs = FileOutputs{}
+	resultsByTime := []ResultByTime{}
+	for _, value := range costAndUsageOutput.ResultsByTime {
+		resultsByTime = append(resultsByTime, ResultByTime{
+			Estimated: value.Estimated,
+			Groups: func() (groups []group) {
+				for _, g := range value.Groups {
+					groups = append(groups, group{
+						Keys: g.Keys,
+						Metrics: unblendedCosts{
+							Amount: stringForStringPointer(g.Metrics["UnblendedCosts"].Amount),
+							Unit: stringForStringPointer(g.Metrics["UnblendedCosts"].Unit),
+						},
+					})
+				}
+				return groups
+			}(),
+			TimePeriod: dateInterval{
+				Start: stringForStringPointer(value.TimePeriod.Start),
+				End: stringForStringPointer(value.TimePeriod.End),
+			},
+			TotalUnblendedCosts: unblendedCosts{
+				Amount: stringForStringPointer(value.Total["UnblendedCost"].Amount),
+				Unit: stringForStringPointer(value.Total["UnblendedCost"].Unit),
+			},
+		})
+	}
+	o := marshalAsJSON(resultsByTime)
+	fileOutputs[string(tableResultsByTime.Name)] = o
+
+	dimensionValueAttributes := []DimensionValuesWithAttributes{}
+	for _, value := range costAndUsageOutput.DimensionValueAttributes {
+		dimensionValueAttributes = append(dimensionValueAttributes, DimensionValuesWithAttributes{
+			Value: *value.Value,
+			Attributes: attributes{
+				Description: value.Attributes["description"],
+			},
+		})
+	}
+	o = marshalAsJSON(dimensionValueAttributes)
+	fileOutputs[string(tableDimensionValueAttributes.Name)] = o
+
+	groupDefinitions := []GroupDefinition{}
+	for _, value := range costAndUsageOutput.GroupDefinitions {
+		groupDefinitions = append(groupDefinitions, GroupDefinition{
+			Key: *value.Key,
+			Type: value.Type,
+		})
+	}
+	o = marshalAsJSON(groupDefinitions)
+	fileOutputs[string(tableGroupDefinitions.Name)] = o
+	return fileOutputs
+}
+
 func main() {
 	var config AWSCostExplorerExportConfig
 	flag.StringVar(&config.AWSRegion, "aws-region", defaultConfig.AWSRegion, "specify an AWS region")
@@ -218,10 +468,17 @@ func main() {
 	flag.BoolVar(&config.LocalOutputFolderEnable, "output-file-enable", defaultConfig.LocalOutputFolderEnable, "specify whether the usage data is also written to disk locally")
 	flag.StringVar(&config.BucketURI, "bucket-uri", defaultConfig.BucketURI, "specify a bucket to write to")
 	flag.IntVar(&config.AmountOfDaysToReportFrom, "days-ago", defaultConfig.AmountOfDaysToReportFrom, "specify the amount of days back to report from today")
-	flag.BoolVar(&config.PromoteToLatest, "promote-to-latest", defaultConfig.PromoteToLatest, "specifies whether to promote the cost and usage data to a latest JSON file")
+	flag.BoolVar(&config.PromoteToLatest, "promote-to-latest", defaultConfig.PromoteToLatest, "specifies whether to promote the cost and usage data to latest JSON files")
+	flag.BoolVar(&config.BigQueryEnabled, "bigquery-enabled", defaultConfig.BigQueryEnabled, "specifies whether to load data into BigQuery from the specified bucket")
+	flag.StringVar(&config.GCPProjectID, "gcp-project-id", defaultConfig.GCPProjectID, "specifies the GCP project to use")
+	flag.StringVar(&config.BigQueryDatasetLocation, "bigquery-dataset-location", defaultConfig.BigQueryDatasetLocation, "specifies BigQuery dataset location")
+	flag.StringVar(&config.BigQueryManagingDatasetPrefix, "bigquery-managing-dataset-prefix", defaultConfig.BigQueryManagingDatasetPrefix, "specifies a prefix to use for managing BigQuery datasets")
 	flag.Parse()
 
+	log.Println("Run time:", now)
 	log.Printf("Config: %#v\n", config)
+	log.Println("Will start in 5s")
+	time.Sleep(time.Second * 5)
 
 	cfg, err := awssdkconfig.LoadDefaultConfig(context.TODO(),
 		awssdkconfig.WithRegion(config.AWSRegion),
@@ -243,22 +500,7 @@ func main() {
 	log.Println("Fetched usage data")
 
 	log.Println("Formatting data")
-	fileOutputs := FileOutputs{}
-	for _, value := range costAndUsageOutput.ResultsByTime {
-		o := marshalAsJSON(ResultByTime{
-			ResultByTime: value,
-			Total:        nil,
-		})
-		fileOutputs[string(tableResultsByTime)] += o + "\n"
-	}
-	for _, value := range costAndUsageOutput.DimensionValueAttributes {
-		o := marshalAsJSON(value)
-		fileOutputs[string(tableDimensionValueAttributes)] += o + "\n"
-	}
-	for _, value := range costAndUsageOutput.GroupDefinitions {
-		o := marshalAsJSON(value)
-		fileOutputs[string(tableGroupDefinitions)] += o + "\n"
-	}
+	fileOutputs := FormatCostAndUsageOutputAsFileOutputs(costAndUsageOutput)
 	log.Println("Formatted data")
 
 	if config.LocalOutputFolderEnable {
@@ -287,7 +529,7 @@ func main() {
 	}()
 	for name, content := range fileOutputs {
 		fileNames := []string{
-			fmt.Sprintf(fileNameTemplate, name, time.Now().Format(resultDateFormat)),
+			fmt.Sprintf(fileNameTemplate, name, now.Format(resultDateFormat)),
 		}
 		if config.PromoteToLatest {
 			fileNames = append(fileNames, fmt.Sprintf(fileNameTemplate, name, "latest"))
@@ -302,6 +544,11 @@ func main() {
 			log.Printf("Uploaded '%v' to '%v/%v' successfully", fileName, config.BucketURI, fileName)
 		}
 	}
+	if !(config.BigQueryEnabled && strings.HasPrefix(config.BucketURI, "gs://")) {
+		log.Println("BigQuery loading disabled or not using prefix; Complete.")
+		return
+	}
+
 	// bigquery stuff
 	//   1. create dataset based on date
 	//   1.1 create tables 1-3 using bigquery.InferSchema
@@ -312,4 +559,41 @@ func main() {
 	//   5.1 create tables 1-3 using bigquery.InferSchema
 	//   6. load into latest dataset
 	// TODO declare schema to prevent errors
+	// WIP
+	ctx := context.Background()
+	client, err := bigquery.NewClient(ctx, config.GCPProjectID)
+	if err != nil {
+		log.Println("error bigquery.NewClient: %v", err)
+		return
+	}
+	defer client.Close()
+	config.bqclient = client
+
+	sets := []string{
+		now.Format(resultDateFormat),
+	}
+	if config.PromoteToLatest {
+		sets = append(sets, "latest")
+	}
+
+	for _, set := range sets {
+		name := fmt.Sprintf(bigqueryDatasetNameTemplate, config.BigQueryManagingDatasetPrefix, set)
+		err := config.CheckIfBigQueryDatasetExists(set)
+		if err == nil {
+			if err := config.DeleteBigQueryDataset(set); err != nil {
+				log.Printf("error deleting dataset '%v', %v\n", set, err)
+			}
+		} else {
+			log.Printf("Dataset '%v' not found, will create\n", name)
+		}
+		if err := config.CreateBigQueryDataset(set); err != nil {
+			log.Printf("error creating new dataset '%v', %v\n", name, err)
+		}
+		for _, table := range tables {
+			err := config.LoadBigQueryDatasetFromGCS(set, table)
+			if err != nil {
+				log.Printf("error loading dataset table '%v.%v', %v\n", name, table.Name, err)
+			}
+		}
+	}
 }
