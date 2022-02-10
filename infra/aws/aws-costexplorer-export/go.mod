@@ -1,4 +1,4 @@
-module github.com/ii/aws-costexporer-export
+module github.com/kubernetes/k8s.io/infra/aws/aws-costexplorer-export
 
 go 1.16
 
