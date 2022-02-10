@@ -26,6 +26,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -46,17 +47,18 @@ const (
 	resultDateFormat = "200601021504"
 
 	// templates
-	fileNameTemplate = "cncf-aws-infra-billing-and-usage-data-%v.json"
+	fileNameTemplate = "cncf-aws-infra-billing-and-usage-data-%v-%v.json"
 )
+
 // default config for runtime
 var (
 	defaultConfig = AWSCostExplorerExportConfig{
-		AWSRegion: "us-east-1",
-		LocalOutputFile:"/tmp/local-cncf-aws-infra-billing-and-usage-data.json",
-		LocalOutputFileEnable: false,
-		BucketURI: "gs://cncf-aws-infra-cost-and-billing-data",
+		AWSRegion:                "us-east-1",
+		LocalOutputFolder:        "/tmp/local-cncf-aws-infra-billing-and-usage-data",
+		LocalOutputFolderEnable:  false,
+		BucketURI:                "gs://cncf-aws-infra-cost-and-billing-data",
 		AmountOfDaysToReportFrom: 365,
-		PromoteToLatest: true,
+		PromoteToLatest:          true,
 	}
 )
 
@@ -82,11 +84,13 @@ func writeFile(path string, contents string) error {
 	return nil
 }
 
+type FileOutputs map[string]string
+
 // AWSCostExplorerExportConfig stores configuration for the runtime
 type AWSCostExplorerExportConfig struct {
 	AWSRegion                string
-	LocalOutputFile          string
-	LocalOutputFileEnable    bool
+	LocalOutputFolder        string
+	LocalOutputFolderEnable  bool
 	BucketURI                string
 	AmountOfDaysToReportFrom int
 	PromoteToLatest          bool
@@ -133,8 +137,9 @@ func (c usageClient) GetInputForUsage(nextPageToken *string) *costexplorer.GetCo
 func (c usageClient) GetUsage() (costAndUsageOutput *costexplorer.GetCostAndUsageOutput, err error) {
 	costAndUsageOutput = &costexplorer.GetCostAndUsageOutput{}
 	var nextPageToken *string
-	for page := 0; true; page ++ {
-		usage, err := c.client.GetCostAndUsage(context.TODO(), c.GetInputForUsage(nextPageToken))
+	for page := 0; true; page++ {
+		input := c.GetInputForUsage(nextPageToken)
+		usage, err := c.client.GetCostAndUsage(context.TODO(), input)
 		if err != nil {
 			return &costexplorer.GetCostAndUsageOutput{}, fmt.Errorf("error with getting usage, %v", err)
 		}
@@ -157,6 +162,11 @@ func (c usageClient) GetUsage() (costAndUsageOutput *costexplorer.GetCostAndUsag
 		return &costexplorer.GetCostAndUsageOutput{}, fmt.Errorf("error: empty dataset")
 	}
 	return costAndUsageOutput, nil
+}
+
+type ResultByTime struct {
+	cetypes.ResultByTime
+	Total interface{} `json:"Total,omitempty"`
 }
 
 // BucketAccess stores config for accessing a bucket
@@ -195,8 +205,8 @@ func (b BucketAccess) WriteToFile(name string, data string) (err error) {
 func main() {
 	var config AWSCostExplorerExportConfig
 	flag.StringVar(&config.AWSRegion, "aws-region", defaultConfig.AWSRegion, "specify an AWS region")
-	flag.StringVar(&config.LocalOutputFile, "output-file", defaultConfig.LocalOutputFile, "specify a local file to write the usage JSON data to")
-	flag.BoolVar(&config.LocalOutputFileEnable, "output-file-enable", defaultConfig.LocalOutputFileEnable, "specify whether the usage data is also written to disk locally")
+	flag.StringVar(&config.LocalOutputFolder, "output-file", defaultConfig.LocalOutputFolder, "specify a local file to write the usage JSON data to")
+	flag.BoolVar(&config.LocalOutputFolderEnable, "output-file-enable", defaultConfig.LocalOutputFolderEnable, "specify whether the usage data is also written to disk locally")
 	flag.StringVar(&config.BucketURI, "bucket-uri", defaultConfig.BucketURI, "specify a bucket to write to")
 	flag.IntVar(&config.AmountOfDaysToReportFrom, "days-ago", defaultConfig.AmountOfDaysToReportFrom, "specify the amount of days back to report from today")
 	flag.BoolVar(&config.PromoteToLatest, "promote-to-latest", defaultConfig.PromoteToLatest, "specifies whether to promote the cost and usage data to a latest JSON file")
@@ -222,15 +232,38 @@ func main() {
 		return
 	}
 	log.Println("Fetched usage data")
-	costAndUsageOutputJSON := marshalAsJSON(costAndUsageOutput)
-	if config.LocalOutputFileEnable {
-		log.Println("Writing usage data to file")
-		err = writeFile(config.LocalOutputFile, costAndUsageOutputJSON)
-		if err != nil {
-			log.Printf("%v", err)
-			return
+
+	log.Println("Formatting data")
+	fileOutputs := FileOutputs{}
+	for _, value := range costAndUsageOutput.ResultsByTime {
+		o := marshalAsJSON(ResultByTime{
+			ResultByTime: value,
+			Total: nil,
+		})
+		fileOutputs["ResultsByTime"] += o + "\n"
+	}
+	for _, value := range costAndUsageOutput.DimensionValueAttributes {
+		o := marshalAsJSON(value)
+		fileOutputs["DimensionValueAttributes"] += o + "\n"
+	}
+	for _, value := range costAndUsageOutput.GroupDefinitions {
+		o := marshalAsJSON(value)
+		fileOutputs["GroupDefinitions"] += o + "\n"
+	}
+	log.Println("Formatted data")
+
+	if config.LocalOutputFolderEnable {
+		_ = os.Mkdir(config.LocalOutputFolder, 0700)
+		log.Printf("Writing usage data to files in '%v'\n", config.LocalOutputFolder)
+		for name, content := range fileOutputs {
+			log.Printf("- writing '%v'\n", name)
+			err = writeFile(path.Join(config.LocalOutputFolder, name+".json"), content)
+			if err != nil {
+				log.Printf("%v", err)
+				return
+			}
 		}
-		log.Printf("Wrote usage data to file '%v'\n", config.LocalOutputFile)
+		log.Printf("Wrote usage data to file '%v'\n", config.LocalOutputFolder)
 	}
 	log.Printf("Opening GCS bucket '%v'\n", config.BucketURI)
 	ba := BucketAccess{URI: config.BucketURI}
@@ -243,19 +276,29 @@ func main() {
 		log.Printf("Closing GCS bucket '%v'\n", config.BucketURI)
 		ba.Bucket.Close()
 	}()
-	fileNames := []string{
-		fmt.Sprintf(fileNameTemplate, time.Now().Format(resultDateFormat)),
-	}
-	if config.PromoteToLatest {
-		fileNames = append(fileNames, fmt.Sprintf(fileNameTemplate, "latest"))
-	}
-	for _, fileName := range fileNames {
-		log.Printf("Uploading '%v' to '%v/%v'", fileName, config.BucketURI, fileName)
-		err = ba.WriteToFile(fileName, costAndUsageOutputJSON)
-		if err != nil {
-			log.Printf("%v", err)
-			return
+	for name, content := range fileOutputs {
+		fileNames := []string{
+			fmt.Sprintf(fileNameTemplate, name, time.Now().Format(resultDateFormat)),
 		}
-		log.Printf("Uploaded '%v' to '%v/%v' successfully", fileName, config.BucketURI, fileName)
+		if config.PromoteToLatest {
+			fileNames = append(fileNames, fmt.Sprintf(fileNameTemplate, name, "latest"))
+		}
+		for _, fileName := range fileNames {
+			log.Printf("Uploading '%v' to '%v/%v'", fileName, config.BucketURI, fileName)
+			err = ba.WriteToFile(fileName, content)
+			if err != nil {
+				log.Printf("%v", err)
+				return
+			}
+			log.Printf("Uploaded '%v' to '%v/%v' successfully", fileName, config.BucketURI, fileName)
+		}
 	}
+	// bigquery stuff
+	//   1. create dataset based on date
+	//   2. load into dataset based on date
+	//   3. if not promoting, exit
+	//   4. delete latest dataset
+	//   5. create latest dataset
+	//   6. load into latest dataset
+	// TODO declare schema to prevent errors
 }
