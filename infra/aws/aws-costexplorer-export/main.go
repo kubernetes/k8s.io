@@ -40,6 +40,9 @@ import (
 	_ "gocloud.dev/blob/s3blob"
 )
 
+// Table types the main keys from the costAndUsageOutput and the BigQuery tables
+type Table string
+
 // consts
 const (
 	// formats
@@ -48,6 +51,10 @@ const (
 
 	// templates
 	fileNameTemplate = "cncf-aws-infra-billing-and-usage-data-%v-%v.json"
+
+	tableResultsByTime            Table = "ResultsByTime"
+	tableDimensionValueAttributes Table = "DimensionValueAttributes"
+	tableGroupDefinitions         Table = "GroupDefinitions"
 )
 
 // default config for runtime
@@ -84,6 +91,7 @@ func writeFile(path string, contents string) error {
 	return nil
 }
 
+// FileOutputs maps a file name to content
 type FileOutputs map[string]string
 
 // AWSCostExplorerExportConfig stores configuration for the runtime
@@ -164,6 +172,7 @@ func (c usageClient) GetUsage() (costAndUsageOutput *costexplorer.GetCostAndUsag
 	return costAndUsageOutput, nil
 }
 
+// ResultByTime overrides fields in cetypes.ResultByTime
 type ResultByTime struct {
 	cetypes.ResultByTime
 	Total interface{} `json:"Total,omitempty"`
@@ -238,17 +247,17 @@ func main() {
 	for _, value := range costAndUsageOutput.ResultsByTime {
 		o := marshalAsJSON(ResultByTime{
 			ResultByTime: value,
-			Total: nil,
+			Total:        nil,
 		})
-		fileOutputs["ResultsByTime"] += o + "\n"
+		fileOutputs[string(tableResultsByTime)] += o + "\n"
 	}
 	for _, value := range costAndUsageOutput.DimensionValueAttributes {
 		o := marshalAsJSON(value)
-		fileOutputs["DimensionValueAttributes"] += o + "\n"
+		fileOutputs[string(tableDimensionValueAttributes)] += o + "\n"
 	}
 	for _, value := range costAndUsageOutput.GroupDefinitions {
 		o := marshalAsJSON(value)
-		fileOutputs["GroupDefinitions"] += o + "\n"
+		fileOutputs[string(tableGroupDefinitions)] += o + "\n"
 	}
 	log.Println("Formatted data")
 
@@ -295,10 +304,12 @@ func main() {
 	}
 	// bigquery stuff
 	//   1. create dataset based on date
+	//   1.1 create tables 1-3 using bigquery.InferSchema
 	//   2. load into dataset based on date
 	//   3. if not promoting, exit
 	//   4. delete latest dataset
 	//   5. create latest dataset
+	//   5.1 create tables 1-3 using bigquery.InferSchema
 	//   6. load into latest dataset
 	// TODO declare schema to prevent errors
 }
