@@ -52,13 +52,16 @@ go run .
 #+end_src
 
 ** Flags
-| Name               | Default                                               | Description                                            |
-| aws-region         | us-east-1                                             | region for AWS SDK to use                              |
-| output-file        | /tmp/local-cncf-aws-infra-billing-and-usage-data.json | a temporary location to write the usage data           |
-| output-file-enable | false                                                 | whether the usage data is also written to disk locally |
-| bucket-uri         | gs://cncf-aws-infra-cost-and-billing-data             | the bucket to upload the json blobs to                 |
-| days-back          | 365                                                   | the amount of days back to report from today           |
-| promote-to-latest  | true                                                  | promotes the cost and usage data to a latest JSON file |
+| Name                             | Default                                               | Description                                            |
+| aws-region                       | us-east-1                                             | region for AWS SDK to use                              |
+| output-file                      | /tmp/local-cncf-aws-infra-billing-and-usage-data.json | a temporary location to write the usage data           |
+| output-file-enable               | false                                                 | whether the usage data is also written to disk locally |
+| bucket-uri                       | gs://cncf-aws-infra-cost-and-billing-data             | the bucket to upload the json blobs to                 |
+| days-back                        | 365                                                   | the amount of days back to report from today           |
+| promote-to-latest                | true                                                  | promotes the cost and usage data to a latest JSON file |
+| bigquery-enabled                 | true                                                  | load data into BigQuery from the specified bucket      |
+| bigquery-data-location           | australia-southeast1                                  | the BigQuery dataset location                          |
+| bigquery-managing-dataset-prefix | cncf_aws_infra_cost_and_billing_data_dataset          | a prefix to use for managing BigQuery datasets         |
 
 * Testing
 Use an in-memory S3 style bucket and write the usage data also to local disk
@@ -73,3 +76,7 @@ Produce a container image using ko
 #+begin_src tmate :window aws-costexplorer-export
 ko publish --local .
 #+end_src
+
+* Links
+- https://pkg.go.dev/cloud.google.com/go/bigquery
+- https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/costexplorer@v1.15.0#GetCostAndUsageOutput
