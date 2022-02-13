@@ -128,7 +128,7 @@ var (
 	}
 
 	tableResultsByTime            Table = Table{Name: "ResultsByTime", Schema: ResultByTimeSchema{}}
-	tableDimensionValueAttributes Table = Table{Name: "DimensionValueAttributes", Schema: DimensionValuesWithAttributes{}}
+	tableDimensionValueAttributes Table = Table{Name: "DimensionValueAttributes", Schema: DimensionValuesWithAttributesSchema{}}
 
 	tables = []Table{
 		tableResultsByTime,
@@ -281,6 +281,9 @@ func (c AWSCostExplorerExportConfig) NewGCSRefForConfig(tableName string) *bigqu
 			c.BucketURI,
 			fmt.Sprintf(fileNameTemplate, tableName, "latest")))
 	gcsRef.SourceFormat = bigquery.CSV
+	gcsRef.SkipLeadingRows = 1
+	gcsRef.AllowJaggedRows = true
+	gcsRef.AllowQuotedNewlines = true
 	return gcsRef
 }
 
@@ -341,18 +344,15 @@ func (c AWSCostExplorerExportConfig) NewSchemaForInterface(obj interface{}) (sch
 	return schema, nil
 }
 
-func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(suffix string, table Table) (err error) {
+func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(suffix string, table *Table) (err error) {
 	datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
-	gcsRef := c.NewGCSRefForConfig(string(tableResultsByTime.Name))
+	gcsRef := c.NewGCSRefForConfig(string(table.Name))
 	schema, err := c.NewSchemaForInterface(table.Schema)
 	if err != nil {
 		return err
 	}
-	gcsRef.SkipLeadingRows = 1
-	gcsRef.AllowJaggedRows = true
-	gcsRef.AllowQuotedNewlines = true
 	gcsRef.Schema = schema
-	loader := c.bqclient.Dataset(datasetName).Table(string(tableResultsByTime.Name)).LoaderFrom(gcsRef)
+	loader := c.bqclient.Dataset(datasetName).Table(string(table.Name)).LoaderFrom(gcsRef)
 	loader.WriteDisposition = bigquery.WriteEmpty
 
 	job, err := loader.Run(context.TODO())
@@ -395,7 +395,6 @@ func FormatCostAndUsageOutputAsFileOutputs(costAndUsageOutput *costexplorer.GetC
 
 	dimensionValueAttributes := []DimensionValuesWithAttributes{}
 	for _, value := range costAndUsageOutput.DimensionValueAttributes {
-		log.Printf("dimensionValuAttributes: %#v\n", value)
 		dimensionValueAttributes = append(dimensionValueAttributes, DimensionValuesWithAttributes{
 			Value:       *value.Value,
 			Description: value.Attributes["description"],
@@ -523,10 +522,12 @@ func main() {
 
 	for _, set := range sets {
 		name := fmt.Sprintf(bigqueryDatasetNameTemplate, config.BigQueryManagingDatasetPrefix, set)
-		if err := config.DeleteBigQueryDataset(set); err != nil {
-			log.Printf("error deleting dataset '%v', %v\n", set, err)
-		} else {
-			log.Printf("Deleted existing dataset '%v'\n", set)
+		if err := config.CheckIfBigQueryDatasetExists(set); err != nil {
+			if err := config.DeleteBigQueryDataset(set); err != nil {
+				log.Printf("error deleting dataset '%v', %v\n", set, err)
+			} else {
+				log.Printf("Deleted existing dataset '%v'\n", set)
+			}
 		}
 		log.Printf("Creating dataset '%v'\n", name)
 		if err := config.CreateBigQueryDataset(set); err != nil {
@@ -535,7 +536,7 @@ func main() {
 		log.Printf("Created dataset '%v'\n", name)
 		for _, table := range tables {
 			log.Printf("Loading table '%v' into dataset '%v'\n", table.Name, name)
-			err := config.LoadBigQueryDatasetFromGCS(set, table)
+			err := config.LoadBigQueryDatasetFromGCS(set, &table)
 			if err != nil {
 				log.Printf("error loading dataset table '%v.%v', %v\n", name, table.Name, err)
 			}
