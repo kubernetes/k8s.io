@@ -27,9 +27,9 @@ import (
 	"log"
 	"os"
 	"path"
+	"sigs.k8s.io/yaml"
 	"strings"
 	"time"
-	"sigs.k8s.io/yaml"
 
 	"cloud.google.com/go/bigquery"
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -50,7 +50,8 @@ type Table struct {
 	Schema interface{}
 }
 
-// recreation of the CostExplorer types is required
+// ResultByTime is a recreation of the CostExplorer types is required
+// it stores the amount for each day a bill was made
 type ResultByTime struct {
 	Estimated       bool
 	TimePeriodStart string
@@ -60,6 +61,8 @@ type ResultByTime struct {
 	Amount          string
 }
 
+// ResultByTimeSchema is a struct that matches ResultByTime
+// but is written for BigQuery schema loading
 type ResultByTimeSchema struct {
 	Estimated       bigquery.NullBool    `bigquery:"Estimated"`
 	TimePeriodStart bigquery.NullString  `bigquery:"TimePeriodStart"`
@@ -69,11 +72,14 @@ type ResultByTimeSchema struct {
 	Amount          bigquery.NullFloat64 `bigquery:"Amount"`
 }
 
+// DimensionValuesWithAttributes stores the projects (description) and IDs (value)
 type DimensionValuesWithAttributes struct {
 	Description string
 	Value       string
 }
 
+// DimensionValuesWithAttributesSchema is a struct that matches DimensionValuesWithAttributes
+// but is written for BigQuery schema loading
 type DimensionValuesWithAttributesSchema struct {
 	Description bigquery.NullString `bigquery:"Description"`
 	Value       bigquery.NullString `bigquery:"Value"`
@@ -275,6 +281,7 @@ func (b BucketAccess) WriteToFile(name string, data string) (err error) {
 	return nil
 }
 
+// NewGCSRefForConfig returns a GCS ref, given a table name
 func (c AWSCostExplorerExportConfig) NewGCSRefForConfig(tableName string) *bigquery.GCSReference {
 	gcsRef := bigquery.NewGCSReference(
 		fmt.Sprintf(bucketReferenceTemplate,
@@ -287,6 +294,7 @@ func (c AWSCostExplorerExportConfig) NewGCSRefForConfig(tableName string) *bigqu
 	return gcsRef
 }
 
+// CheckIfBigQueryDatasetExists returns an error if a dataset isn't found, given a table suffix
 func (c AWSCostExplorerExportConfig) CheckIfBigQueryDatasetExists(suffix string) (err error) {
 	name := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
 	md, err := c.bqclient.Dataset(name).Metadata(context.TODO())
@@ -299,6 +307,7 @@ func (c AWSCostExplorerExportConfig) CheckIfBigQueryDatasetExists(suffix string)
 	return nil
 }
 
+// CreateBigQueryDataset creates a dataset, given a suffix
 func (c AWSCostExplorerExportConfig) CreateBigQueryDataset(suffix string) (err error) {
 	name := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
 	err = c.bqclient.Dataset(name).Create(context.TODO(), &bigquery.DatasetMetadata{
@@ -310,6 +319,7 @@ func (c AWSCostExplorerExportConfig) CreateBigQueryDataset(suffix string) (err e
 	return nil
 }
 
+// DeleteBigQueryDataset deletes the tables to a dataset before deleting the dataset, given a suffix
 func (c AWSCostExplorerExportConfig) DeleteBigQueryDataset(suffix string) (err error) {
 	name := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
 	tables := c.bqclient.Dataset(name).Tables(context.TODO())
@@ -336,6 +346,7 @@ func (c AWSCostExplorerExportConfig) DeleteBigQueryDataset(suffix string) (err e
 	return nil
 }
 
+// NewSchemaForInterface returns a schema, given an interface for a schema
 func (c AWSCostExplorerExportConfig) NewSchemaForInterface(obj interface{}) (schema bigquery.Schema, err error) {
 	schema, err = bigquery.InferSchema(obj)
 	if err != nil {
@@ -344,6 +355,7 @@ func (c AWSCostExplorerExportConfig) NewSchemaForInterface(obj interface{}) (sch
 	return schema, nil
 }
 
+// LoadBigQueryDatasetFromGCS loads data from a GCS bucket, given a suffix and table
 func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(suffix string, table *Table) (err error) {
 	datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
 	gcsRef := c.NewGCSRefForConfig(string(table.Name))
@@ -370,11 +382,12 @@ func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(suffix string, t
 			}
 			return errs
 		}()
-		return fmt.Errorf("job completed with error: %v\n\nerrors: %#v\n", status.Err(), errors)
+		return fmt.Errorf("job completed with error: %v\n\nerrors: %#v", status.Err(), errors)
 	}
 	return nil
 }
 
+// FormatCostAndUsageOutputAsFileOutputs returns fileOutputs as CSV, given a costAndUsageOutput
 func FormatCostAndUsageOutputAsFileOutputs(costAndUsageOutput *costexplorer.GetCostAndUsageOutput) (fileOutputs FileOutputs) {
 	fileOutputs = FileOutputs{}
 	resultsByTime := []ResultByTime{}
