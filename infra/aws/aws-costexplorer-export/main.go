@@ -21,7 +21,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"github.com/jszwec/csvutil"
@@ -30,6 +29,7 @@ import (
 	"path"
 	"strings"
 	"time"
+	"sigs.k8s.io/yaml"
 
 	"cloud.google.com/go/bigquery"
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -137,10 +137,10 @@ var (
 	now = time.Now()
 )
 
-func marshalAsJSON(input interface{}) string {
-	o, err := json.Marshal(input)
+func marshalAsYAML(input interface{}) string {
+	o, err := yaml.Marshal(input)
 	if err != nil {
-		log.Println("error marshalling JSON", err)
+		log.Println("error marshalling YAML", err)
 		return ""
 	}
 	return string(o)
@@ -291,7 +291,7 @@ func (c AWSCostExplorerExportConfig) CheckIfBigQueryDatasetExists(suffix string)
 	name := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
 	md, err := c.bqclient.Dataset(name).Metadata(context.TODO())
 	if err != nil {
-		return err
+		return fmt.Errorf("Dataset not found", err)
 	}
 	if name != md.Name {
 		return fmt.Errorf("Dataset not found, names don't match '%v' != '%v'", name, md.Name)
@@ -421,7 +421,10 @@ func main() {
 	flag.Parse()
 
 	log.Println("Run time:", now)
-	log.Printf("Config: %#v\n", config)
+	log.Println("Config:\n")
+	fmt.Println(marshalAsYAML(config))
+
+	// sleeps so that there's time to verify the config/settings for the operation about the run
 	log.Println("Will start in 5s")
 	time.Sleep(time.Second * 5)
 
@@ -523,6 +526,7 @@ func main() {
 	for _, set := range sets {
 		name := fmt.Sprintf(bigqueryDatasetNameTemplate, config.BigQueryManagingDatasetPrefix, set)
 		if err := config.CheckIfBigQueryDatasetExists(set); err != nil {
+			log.Println("error finding dataset", err)
 			if err := config.DeleteBigQueryDataset(set); err != nil {
 				log.Printf("error deleting dataset '%v', %v\n", set, err)
 			} else {

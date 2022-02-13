@@ -10,4 +10,5 @@ require (
 	github.com/jszwec/csvutil v1.6.0
 	gocloud.dev v0.24.0
 	google.golang.org/api v0.56.0
+	sigs.k8s.io/yaml v1.3.0
 )
