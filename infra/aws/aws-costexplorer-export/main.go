@@ -56,9 +56,12 @@ type ResultByTime struct {
 	Estimated       bool
 	TimePeriodStart string
 	TimePeriodEnd   string
-	Keys            string
 	Unit            string
 	Amount          string
+
+	// metadata
+	ProjectID   string
+	ProjectName string
 }
 
 // ResultByTimeSchema is a struct that matches ResultByTime
@@ -67,9 +70,11 @@ type ResultByTimeSchema struct {
 	Estimated       bigquery.NullBool    `bigquery:"Estimated"`
 	TimePeriodStart bigquery.NullString  `bigquery:"TimePeriodStart"`
 	TimePeriodEnd   bigquery.NullString  `bigquery:"TimePeriodEnd"`
-	Keys            bigquery.NullString  `bigquery:"Keys"`
 	Unit            bigquery.NullString  `bigquery:"Unit"`
 	Amount          bigquery.NullFloat64 `bigquery:"Amount"`
+
+	ProjectID   bigquery.NullString `bigquery:"ProjectID"`
+	ProjectName bigquery.NullString `bigquery:"ProjectName"`
 }
 
 // DimensionValuesWithAttributes stores the projects (description) and IDs (value)
@@ -134,11 +139,9 @@ var (
 	}
 
 	tableResultsByTime            Table = Table{Name: "ResultsByTime", Schema: ResultByTimeSchema{}}
-	tableDimensionValueAttributes Table = Table{Name: "DimensionValueAttributes", Schema: DimensionValuesWithAttributesSchema{}}
 
 	tables = []Table{
 		tableResultsByTime,
-		tableDimensionValueAttributes,
 	}
 	now = time.Now()
 )
@@ -390,28 +393,13 @@ func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(suffix string, t
 // FormatCostAndUsageOutputAsFileOutputs returns fileOutputs as CSV, given a costAndUsageOutput
 func FormatCostAndUsageOutputAsFileOutputs(costAndUsageOutput *costexplorer.GetCostAndUsageOutput) (fileOutputs FileOutputs) {
 	fileOutputs = FileOutputs{}
-	resultsByTime := []ResultByTime{}
-	for _, value := range costAndUsageOutput.ResultsByTime {
-		for _, g := range value.Groups {
-			resultsByTime = append(resultsByTime, ResultByTime{
-				Estimated:       value.Estimated,
-				Keys:            strings.Join(g.Keys, " "),
-				Amount:          stringForStringPointer(g.Metrics["UnblendedCost"].Amount),
-				Unit:            stringForStringPointer(g.Metrics["UnblendedCost"].Unit),
-				TimePeriodStart: stringForStringPointer(value.TimePeriod.Start),
-				TimePeriodEnd:   stringForStringPointer(value.TimePeriod.End),
-			})
-		}
-	}
-	o := marshalAsCSV(resultsByTime)
-	fileOutputs[string(tableResultsByTime.Name)] = o
 
-	dimensionValueAttributes := []DimensionValuesWithAttributes{}
+	dimensionValueAttributes := map[string]string{}
 outerLoop:
 	for _, value := range costAndUsageOutput.DimensionValueAttributes {
-		for _, v := range dimensionValueAttributes {
-			if *value.Value == v.Value && value.Attributes["description"] == v.Description {
-				log.Printf("Found duplicate of '%v = %v', skipping...\n", v.Description, v.Value)
+		for id, description := range dimensionValueAttributes {
+			if *value.Value == id && value.Attributes["description"] == description {
+				log.Printf("Found duplicate of '%v = %v', skipping...\n", id, description)
 				continue outerLoop
 			}
 		}
@@ -422,13 +410,25 @@ outerLoop:
 			log.Println("Found empty description field, setting as 'UNKNOWN'")
 			value.Attributes["description"] = "UNKNOWN"
 		}
-		dimensionValueAttributes = append(dimensionValueAttributes, DimensionValuesWithAttributes{
-			Value:       *value.Value,
-			Description: value.Attributes["description"],
-		})
+		dimensionValueAttributes[*value.Value] = value.Attributes["description"]
 	}
-	o = marshalAsCSV(dimensionValueAttributes)
-	fileOutputs[string(tableDimensionValueAttributes.Name)] = o
+
+	resultsByTime := []ResultByTime{}
+	for _, value := range costAndUsageOutput.ResultsByTime {
+		for _, g := range value.Groups {
+			resultsByTime = append(resultsByTime, ResultByTime{
+				Estimated:       value.Estimated,
+				Amount:          stringForStringPointer(g.Metrics["UnblendedCost"].Amount),
+				Unit:            stringForStringPointer(g.Metrics["UnblendedCost"].Unit),
+				TimePeriodStart: stringForStringPointer(value.TimePeriod.Start),
+				TimePeriodEnd:   stringForStringPointer(value.TimePeriod.End),
+				ProjectID:       g.Keys[0],
+				ProjectName:     dimensionValueAttributes[g.Keys[0]],
+			})
+		}
+	}
+	o := marshalAsCSV(resultsByTime)
+	fileOutputs[string(tableResultsByTime.Name)] = o
 
 	return fileOutputs
 }
