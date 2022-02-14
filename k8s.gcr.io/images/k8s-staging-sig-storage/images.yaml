@@ -101,7 +101,7 @@
     "sha256:6029c252dae6178c99b580de72d7776158edbc81be0de15cedc4152a3acfed18": [ "v1.7.3" ]
 - name: iscsiplugin
   dmap:
-    "sha256:31117074c183242b223340f2fc0f886243e97c6cb1a83d98cfb00a69d1746697": [ "v0.1.0" ]
+    "sha256:31117074c183242b223340f2fc0f886243e97c6cb1a83d98cfb00a69d1746697": [ "0.1-canary;v0.1.0" ]
 - name: livenessprobe
   dmap:
     "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
@@ -126,6 +126,7 @@
   dmap:
     "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
     "sha256:2de1d15fc1f2a33618c61ff8d499ef22a7b2b8961952f059656a245b98498ba4": [ "v3.0.0" ]
+    "sha256:e943bb77c7df05ebdc8c7888b2db289b13bf9f012d6a3a5a74f14d4d5743d439": [ "v3.0.1" ]
 - name: nfs-subdir-external-provisioner
   dmap:
     "sha256:3ce0fdba4d8eca7d9d3444f2f1ec2f2c5a48e936525177e0caaaa9c0fcc9c345": [ "v4.0.0" ]
