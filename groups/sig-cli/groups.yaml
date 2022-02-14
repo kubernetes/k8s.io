@@ -45,6 +45,18 @@ groups:
       - extaeger@google.com
       - samwronski@google.com
       - katrina.verey@shopify.com
+
+  - email-id: k8s-infra-staging-krm-functions@kubernetes.io
+    name: k8s-infra-staging-krm-functions
+    description: |-
+      ACL for k8s-infra-staging-krm-functions
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jeremy.r.rickard@gmail.com
+      - katrina.verey@shopify.com
+      - mengqiy@google.com
+      - natashasarkar@google.com
   #
   # k8s-infra gcs write access
   #
