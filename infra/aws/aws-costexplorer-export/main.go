@@ -407,7 +407,21 @@ func FormatCostAndUsageOutputAsFileOutputs(costAndUsageOutput *costexplorer.GetC
 	fileOutputs[string(tableResultsByTime.Name)] = o
 
 	dimensionValueAttributes := []DimensionValuesWithAttributes{}
+outerLoop:
 	for _, value := range costAndUsageOutput.DimensionValueAttributes {
+		for _, v := range dimensionValueAttributes {
+			if *value.Value == v.Value && value.Attributes["description"] == v.Description {
+				log.Printf("Found duplicate of '%v = %v', skipping...\n", v.Description, v.Value)
+				continue outerLoop
+			}
+		}
+		if value.Value == nil || *value.Value == "" {
+			log.Println("Found empty value field, skipping...")
+			continue outerLoop
+		} else if value.Attributes["description"] == "" {
+			log.Println("Found empty description field, setting as 'UNKNOWN'")
+			value.Attributes["description"] = "UNKNOWN"
+		}
 		dimensionValueAttributes = append(dimensionValueAttributes, DimensionValuesWithAttributes{
 			Value:       *value.Value,
 			Description: value.Attributes["description"],
