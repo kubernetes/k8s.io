@@ -116,8 +116,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - christi.schlotter@gmail.com
       - jichenjc@cn.ibm.com
-      - sbueringer@gmail.com
+      - mbooth@redhat.com
+      - seansnowwhite@gmail.com
+      - tobiasgiese@gmail.com
 
   - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
     name: k8s-infra-staging-capi-vsphere
