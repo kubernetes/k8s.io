@@ -212,4 +212,8 @@ restrictions:
       - "^sig-k8s-infra@kubernetes.io$"
       - "^sig-k8s-infra-leads@kubernetes.io$"
       - "^sig-k8s-infra-private@kubernetes.io$"
+  - path: "wg-batch/groups.yaml"
+    allowedGroups:
+      - "^wg-batch@kubernetes.io$"
+      - "^wg-batch-leads@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
