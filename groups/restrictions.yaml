@@ -49,6 +49,7 @@ restrictions:
     allowedGroups:
       - "^sig-cli-leads@kubernetes.io$"
       - "^k8s-infra-staging-kustomize@kubernetes.io$"
+      - "^k8s-infra-staging-krm-functions@kubernetes.io$"
       - "^k8s-infra-rbac-triageparty-cli@kubernetes.io$"
   - path: "sig-cloud-provider/groups.yaml"
     allowedGroups:

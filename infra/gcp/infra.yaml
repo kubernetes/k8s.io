@@ -300,6 +300,7 @@ infra:
       k8s-staging-kas-network-proxy:
       k8s-staging-kind:
       k8s-staging-kops:
+      k8s-staging-krm-functions:
       k8s-staging-kube-state-metrics:
       k8s-staging-kubeadm:
       k8s-staging-kubernetes:

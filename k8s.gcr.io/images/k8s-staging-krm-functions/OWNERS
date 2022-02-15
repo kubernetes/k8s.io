@@ -1,0 +1,13 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+reviewers:
+- jeremyrickard
+- knverey
+- mengqiy
+- natasha41575
+
+approvers:
+- jeremyrickard
+- knverey
+- mengqiy
+- natasha41575
