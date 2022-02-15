@@ -362,6 +362,22 @@ function ensure_removed_containeranalysis_serviceagent() {
 # Special cases
 #
 
+# Ensure a new service account used for artifact signing purposes.
+#
+#   $1: GCP project name
+#   $2: The new ServiceAccount name
+#   $2: The target GCB ServiceAccount
+function ensure_signing_service_account() {
+    local project="$1"
+    local signing_sa="$2"
+    local gcb_sa="$3"
+
+    ensure_service_account "${project}" "${signing_sa}" "used to sign artifacts"
+
+    local principal="serviceAccount:${gcb_sa}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/iam.serviceAccountTokenCreator"
+}
+
 # Release Manager special cases
 function ensure_release_manager_special_cases() {
     for project in "${RELEASE_STAGING_PROJECTS[@]}"; do
@@ -378,7 +394,13 @@ function ensure_release_manager_special_cases() {
         # ref: https://github.com/kubernetes/release/pull/1230
         if [[ "${project}" == "k8s-staging-kubernetes" ]]; then
             color 6 "Empowering kubernetes-release-test GCB service account to admin GCR"
-            empower_svcacct_to_admin_gcr "648026197307@cloudbuild.gserviceaccount.com" "${project}"
+            local serviceaccount="648026197307@cloudbuild.gserviceaccount.com"
+            empower_svcacct_to_admin_gcr "${serviceaccount}" "${project}"
+
+            ensure_signing_service_account \
+                "kubernetes-release-test" \
+                "k8s-infra-keyless-artifact-signer" \
+                "${serviceaccount}"
         fi
 
         # Artifact Registry
