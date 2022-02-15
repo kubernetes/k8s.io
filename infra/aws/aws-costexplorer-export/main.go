@@ -21,13 +21,13 @@ package main
 
 import (
 	"context"
+	"crypto/sha256"
 	"flag"
 	"fmt"
-	"github.com/jszwec/csvutil"
+	"io"
 	"log"
 	"os"
 	"path"
-	"sigs.k8s.io/yaml"
 	"strings"
 	"time"
 
@@ -36,12 +36,15 @@ import (
 	awssdkconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer"
 	cetypes "github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	"github.com/google/uuid"
+	"github.com/jszwec/csvutil"
 	"gocloud.dev/blob"
 	_ "gocloud.dev/blob/fileblob"
 	_ "gocloud.dev/blob/gcsblob"
 	_ "gocloud.dev/blob/memblob"
 	_ "gocloud.dev/blob/s3blob"
 	"google.golang.org/api/iterator"
+	"sigs.k8s.io/yaml"
 )
 
 // Table types the main keys from the costAndUsageOutput and the BigQuery tables
@@ -53,41 +56,44 @@ type Table struct {
 // ResultByTime is a recreation of the CostExplorer types is required
 // it stores the amount for each day a bill was made
 type ResultByTime struct {
+	ID              string
 	Estimated       bool
 	TimePeriodStart string
 	TimePeriodEnd   string
 	Unit            string
 	Amount          string
+	ProjectID       string
+	ProjectName     string
+}
 
-	// metadata
-	ProjectID   string
-	ProjectName string
+func generateUUIDFromInterface(i interface{}) string {
+	yamlString := marshalAsYAML(i)
+	sumBytes := sha256.Sum256([]byte(yamlString))
+	sum := fmt.Sprintf("%x", sumBytes)
+	sum = sum[:32]
+	id, _ := uuid.Parse(sum)
+	return id.String()
 }
 
 // ResultByTimeSchema is a struct that matches ResultByTime
 // but is written for BigQuery schema loading
 type ResultByTimeSchema struct {
+	ID              bigquery.NullString  `bigquery:"ID"`
 	Estimated       bigquery.NullBool    `bigquery:"Estimated"`
 	TimePeriodStart bigquery.NullString  `bigquery:"TimePeriodStart"`
 	TimePeriodEnd   bigquery.NullString  `bigquery:"TimePeriodEnd"`
 	Unit            bigquery.NullString  `bigquery:"Unit"`
 	Amount          bigquery.NullFloat64 `bigquery:"Amount"`
 
+	// metadata
 	ProjectID   bigquery.NullString `bigquery:"ProjectID"`
 	ProjectName bigquery.NullString `bigquery:"ProjectName"`
 }
 
-// DimensionValuesWithAttributes stores the projects (description) and IDs (value)
-type DimensionValuesWithAttributes struct {
-	Description string
-	Value       string
-}
-
-// DimensionValuesWithAttributesSchema is a struct that matches DimensionValuesWithAttributes
-// but is written for BigQuery schema loading
-type DimensionValuesWithAttributesSchema struct {
-	Description bigquery.NullString `bigquery:"Description"`
-	Value       bigquery.NullString `bigquery:"Value"`
+// Set is a dataset to manage
+type Set struct {
+	Name   string
+	Append bool
 }
 
 // FileOutputs maps a file name to content
@@ -118,7 +124,8 @@ const (
 	resultDateFormat = "200601021504"
 
 	// templates
-	fileNameTemplate            = "cncf-aws-infra-billing-and-usage-data-%v-%v.csv"
+	fileNamePrefix              = "cncf-aws-infra-billing-and-usage-data"
+	fileNameTemplate            = fileNamePrefix + "-%v-%v.csv"
 	bigqueryDatasetNameTemplate = "%v_%v"
 	bucketReferenceTemplate     = "%v/%v"
 )
@@ -138,7 +145,7 @@ var (
 		BigQueryManagingDatasetPrefix: "cncf_aws_infra_cost_and_billing_data_dataset",
 	}
 
-	tableResultsByTime            Table = Table{Name: "ResultsByTime", Schema: ResultByTimeSchema{}}
+	tableResultsByTime Table = Table{Name: "ResultsByTime", Schema: ResultByTimeSchema{}}
 
 	tables = []Table{
 		tableResultsByTime,
@@ -284,12 +291,28 @@ func (b BucketAccess) WriteToFile(name string, data string) (err error) {
 	return nil
 }
 
+// WriteToFile writes a file in the bucket with access
+func (b BucketAccess) ListAllFiles() (fileNames []string, err error) {
+	iter := b.Bucket.List(&blob.ListOptions{Prefix: fileNamePrefix})
+	for {
+		obj, err := iter.Next(context.TODO())
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return []string{}, fmt.Errorf("error listing files", err)
+		}
+		fileNames = append(fileNames, obj.Key)
+	}
+	return fileNames, nil
+}
+
 // NewGCSRefForConfig returns a GCS ref, given a table name
-func (c AWSCostExplorerExportConfig) NewGCSRefForConfig(tableName string) *bigquery.GCSReference {
+func (c AWSCostExplorerExportConfig) NewGCSRefForConfig(tableName string, set string) *bigquery.GCSReference {
 	gcsRef := bigquery.NewGCSReference(
 		fmt.Sprintf(bucketReferenceTemplate,
 			c.BucketURI,
-			fmt.Sprintf(fileNameTemplate, tableName, "latest")))
+			fmt.Sprintf(fileNameTemplate, tableName, set)))
 	gcsRef.SourceFormat = bigquery.CSV
 	gcsRef.SkipLeadingRows = 1
 	gcsRef.AllowJaggedRows = true
@@ -359,18 +382,77 @@ func (c AWSCostExplorerExportConfig) NewSchemaForInterface(obj interface{}) (sch
 }
 
 // LoadBigQueryDatasetFromGCS loads data from a GCS bucket, given a suffix and table
-func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(suffix string, table *Table) (err error) {
-	datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
-	gcsRef := c.NewGCSRefForConfig(string(table.Name))
+func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(datasetName string, gcsRef *bigquery.GCSReference, table *Table) (err error) {
 	schema, err := c.NewSchemaForInterface(table.Schema)
 	if err != nil {
 		return err
 	}
 	gcsRef.Schema = schema
 	loader := c.bqclient.Dataset(datasetName).Table(string(table.Name)).LoaderFrom(gcsRef)
-	loader.WriteDisposition = bigquery.WriteEmpty
+	loader.WriteDisposition = bigquery.WriteAppend
 
 	job, err := loader.Run(context.TODO())
+	if err != nil {
+		return err
+	}
+	status, err := job.Wait(context.TODO())
+	if err != nil {
+		return err
+	}
+	if status.Err() != nil {
+		errors := func() (errs string) {
+			for _, err := range status.Errors {
+				errs += fmt.Sprintf("\n - %v %v %v", err.Location, err.Message, err.Reason)
+			}
+			return errs
+		}()
+		return fmt.Errorf("job completed with error: %v\n\nerrors: %#v", status.Err(), errors)
+	}
+	return nil
+}
+
+// GetRowIDsFromLatestDataset returns a list of IDs, given a table name
+func (c AWSCostExplorerExportConfig) GetRowIDsFromLatestDataset(table *Table) (ids []string, err error) {
+	datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, "latest")
+	query := c.bqclient.Query(`SELECT DISTINCT ID FROM ` +
+		fmt.Sprintf("`%v.%v`", datasetName, table.Name))
+	it, err := query.Read(context.TODO())
+	if err != nil {
+		return []string{}, fmt.Errorf("error reading row ids", err)
+	}
+	for {
+		var row []bigquery.Value
+		err := it.Next(&row)
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			return []string{}, fmt.Errorf("error reading row ids", err)
+		}
+		if row[0] == nil {
+			continue
+		}
+		ids = append(ids, fmt.Sprint(row[0]))
+	}
+	return ids, nil
+}
+
+// RemoveDuplicateRows removes the rows that are duplicate in the table by ID
+func (c AWSCostExplorerExportConfig) RemoveDuplicateRows(datasetName string, table *Table) (err error) {
+	query := c.bqclient.Query(`
+  CREATE OR REPLACE TABLE
+  ` + fmt.Sprintf("`%v.%v`", datasetName, table.Name) + `AS (
+  SELECT
+    * EXCEPT(row_num)
+  FROM (
+    SELECT
+      *,
+      ROW_NUMBER() OVER (PARTITION BY ID ORDER BY ID ) row_num
+    FROM
+     ` + fmt.Sprintf("`%v.%v`", datasetName, table.Name) + `) t
+  WHERE
+    row_num=1)`)
+	job, err := query.Run(context.TODO())
 	if err != nil {
 		return err
 	}
@@ -416,7 +498,7 @@ outerLoop:
 	resultsByTime := []ResultByTime{}
 	for _, value := range costAndUsageOutput.ResultsByTime {
 		for _, g := range value.Groups {
-			resultsByTime = append(resultsByTime, ResultByTime{
+			resultByTime := ResultByTime{
 				Estimated:       value.Estimated,
 				Amount:          stringForStringPointer(g.Metrics["UnblendedCost"].Amount),
 				Unit:            stringForStringPointer(g.Metrics["UnblendedCost"].Unit),
@@ -424,7 +506,9 @@ outerLoop:
 				TimePeriodEnd:   stringForStringPointer(value.TimePeriod.End),
 				ProjectID:       g.Keys[0],
 				ProjectName:     dimensionValueAttributes[g.Keys[0]],
-			})
+			}
+			resultByTime.ID = generateUUIDFromInterface(resultByTime)
+			resultsByTime = append(resultsByTime, resultByTime)
 		}
 	}
 	o := marshalAsCSV(resultsByTime)
@@ -464,6 +548,28 @@ func main() {
 	}
 
 	ceclient := costexplorer.NewFromConfig(cfg)
+	log.Printf("Opening GCS bucket '%v'\n", config.BucketURI)
+	ba := BucketAccess{URI: config.BucketURI}
+	ba, err = ba.Open()
+	if err != nil {
+		log.Printf("%v", err)
+		return
+	}
+	defer func() {
+		log.Printf("Closing GCS bucket '%v'\n", config.BucketURI)
+		ba.Bucket.Close()
+	}()
+
+	log.Println("Connecting to BigQuery")
+	ctx := context.Background()
+	client, err := bigquery.NewClient(ctx, config.GCPProjectID)
+	if err != nil {
+		log.Printf("error bigquery.NewClient: %v\n", err)
+		return
+	}
+	defer client.Close()
+	config.bqclient = client
+	log.Println("Connected to BigQuery")
 
 	log.Println("Fetching usage data")
 	uc := usageClient{client: ceclient, config: config}
@@ -491,17 +597,6 @@ func main() {
 		}
 		log.Printf("Wrote usage data to file '%v'\n", config.LocalOutputFolder)
 	}
-	log.Printf("Opening GCS bucket '%v'\n", config.BucketURI)
-	ba := BucketAccess{URI: config.BucketURI}
-	ba, err = ba.Open()
-	if err != nil {
-		log.Printf("%v", err)
-		return
-	}
-	defer func() {
-		log.Printf("Closing GCS bucket '%v'\n", config.BucketURI)
-		ba.Bucket.Close()
-	}()
 	for name, content := range fileOutputs {
 		fileNames := []string{
 			fmt.Sprintf(fileNameTemplate, name, now.Format(resultDateFormat)),
@@ -534,44 +629,59 @@ func main() {
 	//   5. create latest dataset
 	//   5.1 create tables 1-3 using bigquery.InferSchema
 	//   6. load into latest dataset
-	ctx := context.Background()
-	client, err := bigquery.NewClient(ctx, config.GCPProjectID)
-	if err != nil {
-		log.Println("error bigquery.NewClient: %v", err)
-		return
-	}
-	defer client.Close()
-	config.bqclient = client
-
-	sets := []string{
-		now.Format(resultDateFormat),
+	sets := []Set{
+		{
+			Name:   now.Format(resultDateFormat),
+			Append: false,
+		},
 	}
 	if config.PromoteToLatest {
-		sets = append(sets, "latest")
+		sets = append(sets, Set{Name: "latest", Append: false})
 	}
 
 	for _, set := range sets {
-		name := fmt.Sprintf(bigqueryDatasetNameTemplate, config.BigQueryManagingDatasetPrefix, set)
-		if err := config.CheckIfBigQueryDatasetExists(set); err != nil {
+		datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, config.BigQueryManagingDatasetPrefix, set.Name)
+		if err := config.CheckIfBigQueryDatasetExists(set.Name); err != nil {
 			log.Println("error finding dataset", err)
-			if err := config.DeleteBigQueryDataset(set); err != nil {
-				log.Printf("error deleting dataset '%v', %v\n", set, err)
+			if set.Append == true {
+				goto createDataset
+			}
+			if err := config.DeleteBigQueryDataset(set.Name); err != nil {
+				log.Printf("error deleting dataset '%v', %v\n", set.Name, err)
 			} else {
-				log.Printf("Deleted existing dataset '%v'\n", set)
+				log.Printf("Deleted existing dataset '%v'\n", set.Name)
 			}
 		}
-		log.Printf("Creating dataset '%v'\n", name)
-		if err := config.CreateBigQueryDataset(set); err != nil {
-			log.Printf("error creating new dataset '%v', %v\n", name, err)
+	createDataset:
+		log.Printf("Creating dataset '%v'\n", datasetName)
+		if err := config.CreateBigQueryDataset(set.Name); err != nil {
+			log.Printf("error creating new dataset '%v', %v\n", datasetName, err)
 		}
-		log.Printf("Created dataset '%v'\n", name)
+		log.Printf("Created dataset '%v'\n", datasetName)
 		for _, table := range tables {
-			log.Printf("Loading table '%v' into dataset '%v'\n", table.Name, name)
-			err := config.LoadBigQueryDatasetFromGCS(set, &table)
+			log.Printf("Loading table '%v' into dataset '%v'\n", table.Name, datasetName)
+			fileNames, err := ba.ListAllFiles()
 			if err != nil {
-				log.Printf("error loading dataset table '%v.%v', %v\n", name, table.Name, err)
+				log.Printf("error listing blob files, %v", err)
+			}
+			for _, fileName := range fileNames {
+				setName := strings.TrimPrefix(fileName, fileNamePrefix + "-" + table.Name + "-")
+				setName = strings.TrimSuffix(setName, ".csv")
+				log.Printf("- loading data from '%v/%v'\n", config.BucketURI, fileName)
+				gcsRef := config.NewGCSRefForConfig(string(table.Name), setName)
+				err = config.LoadBigQueryDatasetFromGCS(datasetName, gcsRef, &table)
+				if err != nil {
+					log.Printf("error loading dataset table '%v.%v', %v\n", datasetName, table.Name, err)
+				}
 			}
 			log.Printf("- Loaded tables '%v' successfully\n", table.Name)
+			log.Printf("Removing duplicate rows from table '%v'", table.Name)
+			err = config.RemoveDuplicateRows(datasetName, &table)
+			if err != nil {
+				log.Printf("error removing duplicate rows, %v", err)
+			} else {
+				log.Printf("- completed removing duplicate rows")
+			}
 		}
 	}
 }
