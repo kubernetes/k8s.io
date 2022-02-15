@@ -84,16 +84,8 @@ type ResultByTimeSchema struct {
 	TimePeriodEnd   bigquery.NullString  `bigquery:"TimePeriodEnd"`
 	Unit            bigquery.NullString  `bigquery:"Unit"`
 	Amount          bigquery.NullFloat64 `bigquery:"Amount"`
-
-	// metadata
-	ProjectID   bigquery.NullString `bigquery:"ProjectID"`
-	ProjectName bigquery.NullString `bigquery:"ProjectName"`
-}
-
-// Set is a dataset to manage
-type Set struct {
-	Name   string
-	Append bool
+	ProjectID       bigquery.NullString  `bigquery:"ProjectID"`
+	ProjectName     bigquery.NullString  `bigquery:"ProjectName"`
 }
 
 // FileOutputs maps a file name to content
@@ -128,6 +120,7 @@ const (
 	fileNameTemplate            = fileNamePrefix + "-%v-%v.csv"
 	bigqueryDatasetNameTemplate = "%v_%v"
 	bucketReferenceTemplate     = "%v/%v"
+	setLatestName               = "latest"
 )
 
 // default config for runtime
@@ -291,7 +284,7 @@ func (b BucketAccess) WriteToFile(name string, data string) (err error) {
 	return nil
 }
 
-// WriteToFile writes a file in the bucket with access
+// ListAllFiles lists all files in a bucket using the known file name prefix
 func (b BucketAccess) ListAllFiles() (fileNames []string, err error) {
 	iter := b.Bucket.List(&blob.ListOptions{Prefix: fileNamePrefix})
 	for {
@@ -408,7 +401,7 @@ func (c AWSCostExplorerExportConfig) LoadBigQueryDatasetFromGCS(datasetName stri
 
 // GetRowIDsFromLatestDataset returns a list of IDs, given a table name
 func (c AWSCostExplorerExportConfig) GetRowIDsFromLatestDataset(table *Table) (ids []string, err error) {
-	datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, "latest")
+	datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, setLatestName)
 	query := c.bqclient.Query(`SELECT DISTINCT ID FROM ` +
 		fmt.Sprintf("`%v.%v`", datasetName, table.Name))
 	it, err := query.Read(context.TODO())
@@ -467,7 +460,7 @@ func (c AWSCostExplorerExportConfig) RemoveDuplicateRows(datasetName string, tab
 	return nil
 }
 
-// ListTablesInDataset
+// ListTablesInDataset lists all the tables, given a dataset name
 func (c AWSCostExplorerExportConfig) ListTablesInDataset(name string) (tableNames []string, err error) {
 	tables := c.bqclient.Dataset(name).Tables(context.TODO())
 	for {
@@ -484,10 +477,10 @@ func (c AWSCostExplorerExportConfig) ListTablesInDataset(name string) (tableName
 	return tableNames, nil
 }
 
-// PromoteTablesInDatasetToLatest
+// PromoteTablesInDatasetToLatest copies a dataset's tables over to a new dataset called latest
 func (c AWSCostExplorerExportConfig) PromoteTablesInDatasetToLatest(set string) (err error) {
 	datasetNameToday := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, set)
-	datasetNameLatest := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, "latest")
+	datasetNameLatest := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, setLatestName)
 	dsToday := c.bqclient.Dataset(datasetNameToday)
 	dsLatest := c.bqclient.Dataset(datasetNameLatest)
 	tables, err := c.ListTablesInDataset(datasetNameToday)
@@ -694,14 +687,13 @@ func main() {
 		return
 	}
 	log.Printf("Promoting tables in dataset '%v' to latest dataset\n", datasetName)
-	setLatest := "latest"
-	if err := config.DeleteBigQueryDataset(setLatest); err != nil {
-		log.Printf("error deleting dataset '%v', %v\n", setLatest)
+	if err := config.DeleteBigQueryDataset(setLatestName); err != nil {
+		log.Printf("error deleting dataset '%v', %v\n", setLatestName)
 	} else {
-		log.Printf("Deleted existing dataset '%v'\n", setLatest)
+		log.Printf("Deleted existing dataset '%v'\n", setLatestName)
 	}
 	log.Printf("Creating dataset '%v'\n", datasetName)
-	if err := config.CreateBigQueryDataset(setLatest); err != nil {
+	if err := config.CreateBigQueryDataset(setLatestName); err != nil {
 		log.Printf("error creating new dataset '%v', %v\n", datasetName, err)
 	}
 	if err := config.PromoteTablesInDatasetToLatest(set); err != nil {
