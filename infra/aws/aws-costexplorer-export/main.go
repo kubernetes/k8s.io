@@ -348,18 +348,13 @@ func (c AWSCostExplorerExportConfig) CreateBigQueryDataset(suffix string) (err e
 // DeleteBigQueryDataset deletes the tables to a dataset before deleting the dataset, given a suffix
 func (c AWSCostExplorerExportConfig) DeleteBigQueryDataset(suffix string) (err error) {
 	name := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, suffix)
-	tables := c.bqclient.Dataset(name).Tables(context.TODO())
-	for {
-		t, err := tables.Next()
-		if err == iterator.Done {
-			break
-		}
-		if err != nil {
-			log.Printf("error with listing tables, %v\n", err)
-			break
-		}
-		log.Printf("Deleting table '%v' in dataset '%v'", t.TableID, name)
-		err = t.Delete(context.TODO())
+	tables, err := c.ListTablesInDataset(name)
+	if err != nil {
+		return err
+	}
+	for _, table := range tables {
+		log.Printf("Deleting table '%v' in dataset '%v'", table, name)
+		err = c.bqclient.Dataset(name).Table(table).Delete(context.TODO())
 		if err != nil {
 			log.Printf("error with listing tables, %v\n", err)
 			break
@@ -468,6 +463,55 @@ func (c AWSCostExplorerExportConfig) RemoveDuplicateRows(datasetName string, tab
 			return errs
 		}()
 		return fmt.Errorf("job completed with error: %v\n\nerrors: %#v", status.Err(), errors)
+	}
+	return nil
+}
+
+// ListTablesInDataset
+func (c AWSCostExplorerExportConfig) ListTablesInDataset(name string) (tableNames []string, err error) {
+	tables := c.bqclient.Dataset(name).Tables(context.TODO())
+	for {
+		t, err := tables.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			log.Printf("error with listing tables, %v\n", err)
+			break
+		}
+		tableNames = append(tableNames, t.TableID)
+	}
+	return tableNames, nil
+}
+
+// PromoteTablesInDatasetToLatest
+func (c AWSCostExplorerExportConfig) PromoteTablesInDatasetToLatest(set string) (err error) {
+	datasetNameToday := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, set)
+	datasetNameLatest := fmt.Sprintf(bigqueryDatasetNameTemplate, c.BigQueryManagingDatasetPrefix, "latest")
+	dsToday := c.bqclient.Dataset(datasetNameToday)
+	dsLatest := c.bqclient.Dataset(datasetNameLatest)
+	tables, err := c.ListTablesInDataset(datasetNameToday)
+	if err != nil {
+		return err
+	}
+	for _, table := range tables {
+		job, err := dsLatest.Table(table).CopierFrom(dsToday.Table(table)).Run(context.TODO())
+		if err != nil {
+			return err
+		}
+		status, err := job.Wait(context.TODO())
+		if err != nil {
+			return err
+		}
+		if status.Err() != nil {
+			errors := func() (errs string) {
+				for _, err := range status.Errors {
+					errs += fmt.Sprintf("\n - %v %v %v", err.Location, err.Message, err.Reason)
+				}
+				return errs
+			}()
+			return fmt.Errorf("job completed with error: %v\n\nerrors: %#v", status.Err(), errors)
+		}
 	}
 	return nil
 }
@@ -598,21 +642,14 @@ func main() {
 		log.Printf("Wrote usage data to file '%v'\n", config.LocalOutputFolder)
 	}
 	for name, content := range fileOutputs {
-		fileNames := []string{
-			fmt.Sprintf(fileNameTemplate, name, now.Format(resultDateFormat)),
+		fileName := fmt.Sprintf(fileNameTemplate, name, now.Format(resultDateFormat))
+		log.Printf("Uploading '%v' to '%v/%v'", fileName, config.BucketURI, fileName)
+		err = ba.WriteToFile(fileName, content)
+		if err != nil {
+			log.Printf("%v", err)
+			return
 		}
-		if config.PromoteToLatest {
-			fileNames = append(fileNames, fmt.Sprintf(fileNameTemplate, name, "latest"))
-		}
-		for _, fileName := range fileNames {
-			log.Printf("Uploading '%v' to '%v/%v'", fileName, config.BucketURI, fileName)
-			err = ba.WriteToFile(fileName, content)
-			if err != nil {
-				log.Printf("%v", err)
-				return
-			}
-			log.Printf("Uploaded '%v' to '%v/%v' successfully", fileName, config.BucketURI, fileName)
-		}
+		log.Printf("Uploaded '%v' to '%v/%v' successfully", fileName, config.BucketURI, fileName)
 	}
 
 	if !(config.BigQueryEnabled && strings.HasPrefix(config.BucketURI, "gs://")) {
@@ -620,68 +657,54 @@ func main() {
 		return
 	}
 
-	// bigquery stuff
-	//   1. create dataset based on date
-	//   1.1 create tables 1-3 using bigquery.InferSchema
-	//   2. load into dataset based on date
-	//   3. if not promoting, exit
-	//   4. delete latest dataset
-	//   5. create latest dataset
-	//   5.1 create tables 1-3 using bigquery.InferSchema
-	//   6. load into latest dataset
-	sets := []Set{
-		{
-			Name:   now.Format(resultDateFormat),
-			Append: false,
-		},
+	set := now.Format(resultDateFormat)
+	datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, config.BigQueryManagingDatasetPrefix, set)
+	log.Printf("Creating dataset '%v'\n", datasetName)
+	if err := config.CreateBigQueryDataset(set); err != nil {
+		log.Printf("error creating new dataset '%v', %v\n", datasetName, err)
 	}
-	if config.PromoteToLatest {
-		sets = append(sets, Set{Name: "latest", Append: false})
+	log.Printf("Created dataset '%v'\n", datasetName)
+	for _, table := range tables {
+		log.Printf("Loading table '%v' into dataset '%v'\n", table.Name, datasetName)
+		fileNames, err := ba.ListAllFiles()
+		if err != nil {
+			log.Printf("error listing blob files, %v", err)
+		}
+		for _, fileName := range fileNames {
+			setName := strings.TrimPrefix(fileName, fileNamePrefix+"-"+table.Name+"-")
+			setName = strings.TrimSuffix(setName, ".csv")
+			log.Printf("- loading data from '%v/%v'\n", config.BucketURI, fileName)
+			gcsRef := config.NewGCSRefForConfig(string(table.Name), setName)
+			err = config.LoadBigQueryDatasetFromGCS(datasetName, gcsRef, &table)
+			if err != nil {
+				log.Printf("error loading dataset table '%v.%v', %v\n", datasetName, table.Name, err)
+			}
+		}
+		log.Printf("- Loaded tables '%v' successfully\n", table.Name)
+		log.Printf("Removing duplicate rows from table '%v'", table.Name)
+		err = config.RemoveDuplicateRows(datasetName, &table)
+		if err != nil {
+			log.Printf("error removing duplicate rows, %v", err)
+		} else {
+			log.Printf("- completed removing duplicate rows")
+		}
 	}
-
-	for _, set := range sets {
-		datasetName := fmt.Sprintf(bigqueryDatasetNameTemplate, config.BigQueryManagingDatasetPrefix, set.Name)
-		if err := config.CheckIfBigQueryDatasetExists(set.Name); err != nil {
-			log.Println("error finding dataset", err)
-			if set.Append == true {
-				goto createDataset
-			}
-			if err := config.DeleteBigQueryDataset(set.Name); err != nil {
-				log.Printf("error deleting dataset '%v', %v\n", set.Name, err)
-			} else {
-				log.Printf("Deleted existing dataset '%v'\n", set.Name)
-			}
-		}
-	createDataset:
-		log.Printf("Creating dataset '%v'\n", datasetName)
-		if err := config.CreateBigQueryDataset(set.Name); err != nil {
-			log.Printf("error creating new dataset '%v', %v\n", datasetName, err)
-		}
-		log.Printf("Created dataset '%v'\n", datasetName)
-		for _, table := range tables {
-			log.Printf("Loading table '%v' into dataset '%v'\n", table.Name, datasetName)
-			fileNames, err := ba.ListAllFiles()
-			if err != nil {
-				log.Printf("error listing blob files, %v", err)
-			}
-			for _, fileName := range fileNames {
-				setName := strings.TrimPrefix(fileName, fileNamePrefix + "-" + table.Name + "-")
-				setName = strings.TrimSuffix(setName, ".csv")
-				log.Printf("- loading data from '%v/%v'\n", config.BucketURI, fileName)
-				gcsRef := config.NewGCSRefForConfig(string(table.Name), setName)
-				err = config.LoadBigQueryDatasetFromGCS(datasetName, gcsRef, &table)
-				if err != nil {
-					log.Printf("error loading dataset table '%v.%v', %v\n", datasetName, table.Name, err)
-				}
-			}
-			log.Printf("- Loaded tables '%v' successfully\n", table.Name)
-			log.Printf("Removing duplicate rows from table '%v'", table.Name)
-			err = config.RemoveDuplicateRows(datasetName, &table)
-			if err != nil {
-				log.Printf("error removing duplicate rows, %v", err)
-			} else {
-				log.Printf("- completed removing duplicate rows")
-			}
-		}
+	if !config.PromoteToLatest {
+		log.Println("Completed, will no promote")
+		return
+	}
+	log.Printf("Promoting tables in dataset '%v' to latest dataset\n", datasetName)
+	setLatest := "latest"
+	if err := config.DeleteBigQueryDataset(setLatest); err != nil {
+		log.Printf("error deleting dataset '%v', %v\n", setLatest)
+	} else {
+		log.Printf("Deleted existing dataset '%v'\n", setLatest)
+	}
+	log.Printf("Creating dataset '%v'\n", datasetName)
+	if err := config.CreateBigQueryDataset(setLatest); err != nil {
+		log.Printf("error creating new dataset '%v', %v\n", datasetName, err)
+	}
+	if err := config.PromoteTablesInDatasetToLatest(set); err != nil {
+		log.Printf("error promoting tables to latest dataset '%v', %v\n", datasetName, err)
 	}
 }
