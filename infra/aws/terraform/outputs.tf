@@ -15,5 +15,5 @@ limitations under the License.
 */
 
 output "secret" {
-  value = aws_iam_access_key.puerco-test-1.encrypted_secret
+  value = aws_iam_access_key.kpromo-test-1.encrypted_secret
 }
