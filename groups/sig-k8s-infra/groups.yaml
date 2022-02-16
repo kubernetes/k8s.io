@@ -62,6 +62,7 @@ groups:
     owners:
       - ameukam@gmail.com
       - davanum@gmail.com
+    members:
       - sig-k8s-infra-leads@kubernetes.io
 
   #

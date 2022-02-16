@@ -31,5 +31,10 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
+      - ahg@google.com
+      - hweicdl@gmail.com
+      - lancashiredanielle@gmail.com
+      - maszulik@redhat.com
+      - swati.tcd@gmail.com
+    members:
       - wg-batch-leads@kubernetes.io
-      - contributors@kubernetes.io
