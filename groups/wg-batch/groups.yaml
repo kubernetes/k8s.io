@@ -32,3 +32,4 @@ groups:
       ReconcileMembers: "false"
     owners:
       - wg-batch-leads@kubernetes.io
+      - contributors@kubernetes.io
