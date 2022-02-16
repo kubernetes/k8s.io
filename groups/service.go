@@ -149,10 +149,10 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
 
-	for _, memberEmailId := range members {
+	for _, memberEmailID := range members {
 		var member *admin.Member
 		for _, m := range l {
-			if EmailAddressEquals(m.Email, memberEmailId) {
+			if EmailAddressEquals(m.Email, memberEmailID) {
 				member = m
 				break
 			}
@@ -163,40 +163,40 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 			if member.Role != role {
 				member.Role = role
 				if config.ConfirmChanges {
-					log.Printf("Updating %s to %q as a %s\n", memberEmailId, group.EmailId, role)
+					log.Printf("Updating %s to %q as a %s\n", memberEmailID, group.EmailId, role)
 					_, err := as.client.UpdateMember(group.EmailId, member.Email, member)
 					if err != nil {
-						logErr := fmt.Errorf("unable to update %s in %q as %s: %w", memberEmailId, group.EmailId, role, err)
+						logErr := fmt.Errorf("unable to update %s in %q as %s: %w", memberEmailID, group.EmailId, role, err)
 						log.Printf("%s\n", logErr)
 						errs = append(errs, logErr)
 						continue
 					}
-					log.Printf("Updated %s to %q as a %s\n", memberEmailId, group.EmailId, role)
+					log.Printf("Updated %s to %q as a %s\n", memberEmailID, group.EmailId, role)
 				} else {
-					log.Printf("dry-run: would update %s to %q as %s\n", memberEmailId, group.EmailId, role)
+					log.Printf("dry-run: would update %s to %q as %s\n", memberEmailID, group.EmailId, role)
 				}
 			}
 			continue
 		}
 
 		member = &admin.Member{
-			Email: memberEmailId,
+			Email: memberEmailID,
 			Role:  role,
 		}
 
 		// We did not find the person in the google group, so we add them
 		if config.ConfirmChanges {
-			log.Printf("Adding %s to %q as a %s\n", memberEmailId, group.EmailId, role)
+			log.Printf("Adding %s to %q as a %s\n", memberEmailID, group.EmailId, role)
 			_, err := as.client.InsertMember(group.EmailId, member)
 			if err != nil {
-				logErr := fmt.Errorf("unable to add %s to %q as %s: %w", memberEmailId, group.EmailId, role, err)
+				logErr := fmt.Errorf("unable to add %s to %q as %s: %w", memberEmailID, group.EmailId, role, err)
 				log.Printf("%s\n", logErr)
 				errs = append(errs, logErr)
 				continue
 			}
-			log.Printf("Added %s to %q as a %s\n", memberEmailId, group.EmailId, role)
+			log.Printf("Added %s to %q as a %s\n", memberEmailID, group.EmailId, role)
 		} else {
-			log.Printf("dry-run: would add %s to %q as %s\n", memberEmailId, group.EmailId, role)
+			log.Printf("dry-run: would add %s to %q as %s\n", memberEmailID, group.EmailId, role)
 		}
 	}
 

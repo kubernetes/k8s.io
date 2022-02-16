@@ -23,8 +23,8 @@ default: run
 
 .PHONY: run
 run: test
-	go run . $(runargs)
+	go run . plan
 
 .PHONY: test
 test:
-	go test
+	go run . validate

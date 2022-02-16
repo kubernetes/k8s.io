@@ -29,9 +29,6 @@ import (
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	"github.com/bmatcuk/doublestar"
 	"golang.org/x/net/context"
-	"golang.org/x/oauth2/google"
-	admin "google.golang.org/api/admin/directory/v1"
-	"google.golang.org/api/groupssettings/v1"
 	"google.golang.org/api/option"
 	secretmanagerpb "google.golang.org/genproto/googleapis/cloud/secretmanager/v1"
 	"gopkg.in/yaml.v3"
@@ -60,6 +57,12 @@ type Config struct {
 
 	// If false, don't make any mutating API calls
 	ConfirmChanges bool
+
+	// Domains
+	Domains []string `yaml:"domains,omitempty"`
+
+	// Domains
+	SkipKubernetesIOTests bool `yaml:"skip-kubernetes-io-tests,omitempty"`
 }
 
 type GroupsConfig struct {
@@ -109,94 +112,6 @@ Usage: %s [-config <config-yaml-file>] [--confirm]
 Command line flags override config values.
 `, os.Args[0])
 	flag.PrintDefaults()
-}
-
-var (
-	config             Config
-	groupsConfig       GroupsConfig
-	restrictionsConfig RestrictionsConfig
-
-	verbose = flag.Bool("v", false, "log extra information")
-
-	defaultConfigFile       = "config.yaml"
-	defaultRestrictionsFile = "restrictions.yaml"
-	emptyRegexp             = regexp.MustCompile("")
-	defaultRestriction      = Restriction{Path: "*", AllowedGroupsRe: []*regexp.Regexp{emptyRegexp}}
-)
-
-func main() {
-	configFilePath := flag.String("config", defaultConfigFile, "the config file in yaml format")
-	confirmChanges := flag.Bool("confirm", false, "false by default means that we do not push anything to google groups")
-	printConfig := flag.Bool("print", false, "print the existing group information")
-
-	flag.Usage = Usage
-	flag.Parse()
-
-	if *printConfig {
-		log.Printf("print: %v -- disabling confirm, will print existing group information", *confirmChanges)
-		*confirmChanges = false
-	}
-	if !*confirmChanges {
-		log.Printf("confirm: %v -- dry-run mode, changes will not be pushed", *confirmChanges)
-	}
-
-	err := config.Load(*configFilePath, *confirmChanges)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	log.Printf("config: BotID:            %v", config.BotID)
-	log.Printf("config: SecretVersion:    %v", config.SecretVersion)
-	log.Printf("config: GroupsPath:       %v", config.GroupsPath)
-	log.Printf("config: RestrictionsPath: %v", config.RestrictionsPath)
-	log.Printf("config: ConfirmChanges:   %v", config.ConfirmChanges)
-
-	err = restrictionsConfig.Load(config.RestrictionsPath)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = groupsConfig.Load(config.GroupsPath, &restrictionsConfig)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	serviceAccountKey, err := accessSecretVersion(config.SecretVersion)
-	if err != nil {
-		log.Fatalf("Unable to access secret-version %s, %v", config.SecretVersion, err)
-	}
-
-	credential, err := google.JWTConfigFromJSON(serviceAccountKey, admin.AdminDirectoryUserReadonlyScope,
-		admin.AdminDirectoryGroupScope,
-		admin.AdminDirectoryGroupMemberScope,
-		groupssettings.AppsGroupsSettingsScope)
-	if err != nil {
-		log.Fatalf("Unable to authenticate using key in secret-version %s, %v", config.SecretVersion, err)
-	}
-	credential.Subject = config.BotID
-
-	ctx := context.Background()
-	client := credential.Client(ctx)
-	clientOption := option.WithHTTPClient(client)
-
-	r, err := NewReconciler(ctx, clientOption)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if *printConfig {
-		err = r.printGroupMembersAndSettings()
-		if err != nil {
-			log.Fatal(err)
-		}
-		return
-	}
-
-	log.Println(" ======================= Updates =======================")
-	err = r.ReconcileGroups(groupsConfig.Groups)
-	if err != nil {
-		log.Fatal(err)
-	}
 }
 
 // Reconciler syncs the actual state of the world with the configuration.
@@ -338,6 +253,15 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 }
 
 func (c *Config) Load(configFilePath string, confirmChanges bool) error {
+	if configFilePath == "" {
+		baseDir, err := os.Getwd()
+		if err != nil {
+			fmt.Printf("Cannot get current working directory: %v\n", err)
+			os.Exit(1)
+		}
+		cPath := filepath.Join(baseDir, defaultConfigFile)
+		configFilePath = cPath
+	}
 	log.Printf("reading config file: %s", configFilePath)
 	content, err := ioutil.ReadFile(configFilePath)
 	if err != nil {
@@ -492,4 +416,13 @@ func accessSecretVersion(secretVersion string) ([]byte, error) {
 	}
 
 	return result.Payload.Data, nil
+}
+
+func PrintConfig(config Config) {
+	log.Printf("config: BotID:            %v", config.BotID)
+	log.Printf("config: SecretVersion:    %v", config.SecretVersion)
+	log.Printf("config: GroupsPath:       %v", config.GroupsPath)
+	log.Printf("config: RestrictionsPath: %v", config.RestrictionsPath)
+	log.Printf("config: ConfirmChanges:   %v", config.ConfirmChanges)
+	log.Printf("config: Domains:   %v", config.Domains)
 }
