@@ -60,6 +60,8 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
+      - ameukam@gmail.com
+      - davanum@gmail.com
       - sig-k8s-infra-leads@kubernetes.io
 
   #
