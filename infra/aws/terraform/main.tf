@@ -72,7 +72,17 @@ resource "aws_iam_user_policy" "kpromo-test-1-rw-bucket" {
           "s3:DeleteObject"
         ],
         "Effect" : "Allow",
-        "Resource" : aws_s3_bucket.kpromo-test-1.arn
+        "Resource" : "${aws_s3_bucket.kpromo-test-1.arn}"
+      },
+      {
+        "Action" : [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:ListBucket",
+          "s3:DeleteObject"
+        ],
+        "Effect" : "Allow",
+        "Resource" : "${aws_s3_bucket.kpromo-test-1.arn}/*"
       }
     ]
   })
