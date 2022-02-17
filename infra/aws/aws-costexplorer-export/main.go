@@ -66,15 +66,6 @@ type ResultByTime struct {
 	ProjectName     string
 }
 
-func generateUUIDFromInterface(i interface{}) string {
-	yamlString := marshalAsYAML(i)
-	sumBytes := sha256.Sum256([]byte(yamlString))
-	sum := fmt.Sprintf("%x", sumBytes)
-	sum = sum[:32]
-	id, _ := uuid.Parse(sum)
-	return id.String()
-}
-
 // ResultByTimeSchema is a struct that matches ResultByTime
 // but is written for BigQuery schema loading
 type ResultByTimeSchema struct {
@@ -182,6 +173,15 @@ func stringForStringPointer(input *string) string {
 		return ""
 	}
 	return *input
+}
+
+func generateUUIDFromInterface(i interface{}) string {
+	yamlString := marshalAsYAML(i)
+	sumBytes := sha256.Sum256([]byte(yamlString))
+	sum := fmt.Sprintf("%x", sumBytes)
+	sum = sum[:32]
+	id, _ := uuid.Parse(sum)
+	return id.String()
 }
 
 // usageClient stores the client for costexplorer
