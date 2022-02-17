@@ -39,11 +39,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - jeff.regan@gmail.com
-      - donnyxia@google.com
       - natashasarkar@google.com
-      - extaeger@google.com
-      - samwronski@google.com
       - katrina.verey@shopify.com
 
   - email-id: k8s-infra-staging-krm-functions@kubernetes.io
