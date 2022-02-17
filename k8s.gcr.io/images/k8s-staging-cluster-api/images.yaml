@@ -1,22 +1,7 @@
-- name: cluster-api-controller-amd64
-  dmap:
-    "sha256:ea0e994082f56bf7713d36002abfbffbad43b2c257b89842b3e3694c987d3a07": ["v0.2.0"]
-- name: cluster-api-controller-arm
-  dmap:
-    "sha256:ddac971ea0e62e0bc969263c57d10bcdaace99918ff5b304b0531ad115459a1f": ["v0.2.0"]
-- name: cluster-api-controller-arm64
-  dmap:
-    "sha256:86e2ae014190d8ab6f511ba8ed9c60658e906f4a2e6eab7adbb65debd91f51b7": ["v0.2.0"]
-- name: cluster-api-controller-ppc64le
-  dmap:
-    "sha256:d7ec2c3a3c353e5dccff16e5ca9253415d3e3b5398a7beb3f95bf54f1e270fb8": ["v0.2.0"]
-- name: cluster-api-controller-s390x
-  dmap:
-    "sha256:47e89f01c17f66513adddac0b48e035ab937469f3b93df7ab704d725d1e611c1": ["v0.2.0"]
 - name: cluster-api-controller
   dmap:
-    "sha256:9057a2875d6620521ddea456f31655b8480f07f6a31a50c15b111c1ae09af487": ["v0.1.5", "v0.1.6"]
-    "sha256:663829ece3a14201b71ec1e211c3d33f99ecdf0ea8081f7486806442a61d925d": ["v0.1.7", "v0.1.8"]
+    "sha256:9057a2875d6620521ddea456f31655b8480f07f6a31a50c15b111c1ae09af487": ["v0.1.5","v0.1.6"]
+    "sha256:663829ece3a14201b71ec1e211c3d33f99ecdf0ea8081f7486806442a61d925d": ["v0.1.7","v0.1.8"]
     "sha256:5867b7735a9d85ea13ed5ab0fce90ae0945c753a119e6bd02f7ceeebec2dd608": ["v0.1.9"]
     "sha256:9652a07cc57081be625d50ab68d4226c7db0e2289384dc1a7061b6a7375f0f05": ["v0.1.10"]
     "sha256:04e5bbda841ff8c34afd5fc598b9f3f8fd6b82cca49129ba4de7af316e40f87e": ["v0.2.0"]
@@ -89,6 +74,22 @@
     "sha256:09b1e314c950fce871b0541a4c94860d7ff24b9783c2d530b5bd0f9f47c8fe79": ["v1.1.0-rc.0"]
     "sha256:c3fc327bf345677e7fb3c2cb69e704b7ee23bf99b73289422254553caf4428ba": ["v1.1.0"]
     "sha256:f507db1f00aa950312f54d54c8e2d5239b28f65a483f245361e9ef6047b055f1": ["v1.1.1"]
+    "sha256:5b091050f9a33653948823c363e494e2e3212aa6df625054cd757740de0342da": ["v1.1.2"]
+- name: cluster-api-controller-amd64
+  dmap:
+    "sha256:ea0e994082f56bf7713d36002abfbffbad43b2c257b89842b3e3694c987d3a07": ["v0.2.0"]
+- name: cluster-api-controller-arm
+  dmap:
+    "sha256:ddac971ea0e62e0bc969263c57d10bcdaace99918ff5b304b0531ad115459a1f": ["v0.2.0"]
+- name: cluster-api-controller-arm64
+  dmap:
+    "sha256:86e2ae014190d8ab6f511ba8ed9c60658e906f4a2e6eab7adbb65debd91f51b7": ["v0.2.0"]
+- name: cluster-api-controller-ppc64le
+  dmap:
+    "sha256:d7ec2c3a3c353e5dccff16e5ca9253415d3e3b5398a7beb3f95bf54f1e270fb8": ["v0.2.0"]
+- name: cluster-api-controller-s390x
+  dmap:
+    "sha256:47e89f01c17f66513adddac0b48e035ab937469f3b93df7ab704d725d1e611c1": ["v0.2.0"]
 - name: kubeadm-bootstrap-controller
   dmap:
     "sha256:d62149bd0ad7df5096c38fde8dda1fb4e55e59e556eaae6bdbefa72bdff9de4e": ["v0.3.0-rc.0"]
@@ -149,6 +150,7 @@
     "sha256:5bcb1fcb2e9157ec1382765abc67bdc969f4ec0816f8e5d172dc01678595dabb": ["v1.1.0-rc.0"]
     "sha256:945a3da23d0d84c1ae69d99ad9f8c14212ae60b953abfb0c3cfed66cb8c36e3e": ["v1.1.0"]
     "sha256:938281c7c763ab962b06bb014228b8739308689d718fad4239df3d39ff56b504": ["v1.1.1"]
+    "sha256:030a0155aab49534418b3f8afcd981501f138201c4584857f5f2ab285451470f": ["v1.1.2"]
 - name: kubeadm-control-plane-controller
   dmap:
     "sha256:65d6da638f20c872642b9d40ec8878f644866f50a68f1f1a87eca1b3b5eb5ffc": ["v0.3.0-rc.0"]
@@ -209,6 +211,7 @@
     "sha256:1e334cad89498d3832cdec6c9768c83ef1ec9198fffc4278ec8def778479b2d3": ["v1.1.0-rc.0"]
     "sha256:5fc886da4fbeeef1093584626ecfac524aeb286e3a80cfd3fbdc75d931acf5c0": ["v1.1.0"]
     "sha256:a0dc4d7825b30885d7a6da0c466ef47014b895888430674889c1f90784860812": ["v1.1.1"]
+    "sha256:cde2bb4fb1e8f1fca5a894ed90cf38039c2076d7277885ac25ae6b356163f9b1": ["v1.1.2"]
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
