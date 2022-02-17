@@ -123,6 +123,10 @@ conduct:
 cs:
   type: A
   value: 139.178.84.205
+# Canary for Code Search on GKE cluster aaa (@dims @jimdaga)
+cs-canary:
+  type: A
+  value: 34.117.143.16
 # sig-contributor-experience
 discuss:
   type: CNAME
