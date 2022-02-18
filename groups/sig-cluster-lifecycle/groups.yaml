@@ -143,11 +143,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - alberto.garcial@hotmail.com
       - cecilerobertm@gmail.com
       - davanum@gmail.com
-      - detiber@gmail.com
       - fpandini@vmware.com
-      - goldsteina@vmware.com
+      - sbueringer@gmail.com
       - prignanov@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
