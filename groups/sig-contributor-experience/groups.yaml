@@ -101,6 +101,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - paris.pittman@gmail.com
+      - cblecker@gmail.com
     managers:
       - alarcj137@gmail.com
       - contributors@kubernetes.io
@@ -114,7 +115,6 @@ groups:
       - noah@coderanger.net
       - killen.bob@gmail.com
     members:
-      - cblecker@gmail.com
       - guslees@gmail.com
       - james@munnelly.eu
       - jspeed@redhat.com
