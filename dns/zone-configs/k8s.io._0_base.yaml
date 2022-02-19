@@ -281,6 +281,10 @@ testgrid:
 kind.sigs:
   type: CNAME
   value: k8s-kind.netlify.app.
+# https://github.com/kubernetes-sigs/prow docs (@alvaroaleman, @cblecker, @cjwagner, @fejta, @stevekuznetsov, @petr-muller)
+docs.prow:
+  type: CNAME
+  value: k8s-prow.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api docs (@dwat, @jdetiber, @justinsb)
 cluster-api.sigs:
   type: CNAME
