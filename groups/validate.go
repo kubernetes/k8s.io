@@ -29,48 +29,43 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 )
 
-func Validate(configPath, restrictionsPath, groupsPath *string) {
+func Validate(configPath, restrictionsPath, groupsPath *string) error {
 	var err error
 
 	// Check if config.yaml is loadable
 	if *configPath != "" && !filepath.IsAbs(*configPath) {
-		fmt.Printf("config \"%s\" must be an absolute path\n", *configPath)
-		os.Exit(1)
+		return fmt.Errorf("config \"%s\" must be an absolute path\n", *configPath)
 	}
 
 	if *configPath == "" {
 		baseDir, err := os.Getwd()
 		if err != nil {
-			fmt.Printf("Cannot get current working directory: %v\n", err)
-			os.Exit(1)
+			return fmt.Errorf("cannot get current working directory: %v\n", err)
 		}
 		cPath := filepath.Join(baseDir, defaultConfigFile)
 		configPath = &cPath
 	}
 
 	if err := config.Load(*configPath, false); err != nil {
-		fmt.Printf("Could not load main config: %v\n", err)
-		os.Exit(1)
+		return fmt.Errorf("could not load main config: %v\n", err)
 	}
 
 	// Check if restrictions.yaml is loadable
 	if *restrictionsPath != "" && !filepath.IsAbs(*restrictionsPath) {
-		fmt.Printf("restrictions-path \"%s\" must be an absolute path\n", *restrictionsPath)
-		os.Exit(1)
+		return fmt.Errorf("restrictions-path \"%s\" must be an absolute path\n", *restrictionsPath)
 	}
 
 	if *restrictionsPath == "" {
 		baseDir, err := os.Getwd()
 		if err != nil {
-			fmt.Printf("Cannot get current working directory: %v\n", err)
-			os.Exit(1)
+			return fmt.Errorf("cannot get current working directory: %v\n", err)
 		}
 		rPath := filepath.Join(baseDir, defaultRestrictionsFile)
 		restrictionsPath = &rPath
 	}
 
 	if err := restrictionsConfig.Load(*restrictionsPath); err != nil {
-		fmt.Printf("Could not load restrictions config: %v\n", err)
+		return fmt.Errorf("could not load restrictions config: %v\n", err)
 		os.Exit(1)
 	}
 
@@ -79,21 +74,18 @@ func Validate(configPath, restrictionsPath, groupsPath *string) {
 
 	// Check if groups config can be loaded
 	if *groupsPath != "" && !filepath.IsAbs(*groupsPath) {
-		fmt.Printf("groups-path \"%s\" must be an absolute path\n", *groupsPath)
-		os.Exit(1)
+		return fmt.Errorf("groups-path \"%s\" must be an absolute path\n", *groupsPath)
 	}
 
 	if *groupsPath == "" {
 		*groupsPath, err = os.Getwd()
 		if err != nil {
-			fmt.Printf("Cannot get current working directory: %v\n", err)
-			os.Exit(1)
+			return fmt.Errorf("cannot get current working directory: %v\n", err)
 		}
 	}
 
 	if err := groupsConfig.Load(*groupsPath, &restrictionsConfig); err != nil {
-		fmt.Printf("Could not load groups config: %v\n", err)
-		os.Exit(1)
+		return fmt.Errorf("could not load groups config: %v\n", err)
 	}
 
 	// Run all the Verification Logic
@@ -107,6 +99,8 @@ func Validate(configPath, restrictionsPath, groupsPath *string) {
 	VerifyNoDuplicateMembers(config)
 	VerifyHardcodedGroupsForParanoia(config)
 	VerifyGroupsWhichShouldSupportHistory(config)
+
+	return nil
 }
 
 // VerifyMergedGroupsConfig tests that readGroupsConfig reads all

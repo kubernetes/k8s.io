@@ -1,4 +1,6 @@
-# Automation of Google Groups maintenance for k8s-infra permissions
+# GSuite Groups Reconciler
+
+This tool automates the management of Google Workspace Groups belonging to kubernetes.io domain.
 
 - [Making changes](#making-changes)
   - [Staging access groups](#staging-access-groups)
