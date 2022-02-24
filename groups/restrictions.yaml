@@ -72,6 +72,7 @@ restrictions:
       - "^k8s-infra-staging-capi-vsphere@kubernetes.io$"
       - "^k8s-infra-staging-cluster-api@kubernetes.io$"
       - "^k8s-infra-staging-cluster-api-aws@kubernetes.io$"
+      - "^sig-cluster-lifecycle-cluster-api-aws-alerts@kubernetes.io$"
       - "^k8s-infra-staging-cluster-api-do@kubernetes.io$"
       - "^k8s-infra-staging-cluster-api-azure@kubernetes.io$"
       - "^k8s-infra-staging-cluster-api-gcp@kubernetes.io$"
