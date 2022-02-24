@@ -17,7 +17,7 @@ PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com. k8s.dev. kubernetes.
 CANARY_ZONES := $(foreach z,$(PROD_ZONES),canary.$(z))
 ALL_ZONES := $(CANARY_ZONES) $(PROD_ZONES)
 ZONE_CONFIGS := zone-configs
-OCTODNS_CONFIG ?= octodns-config.yaml
+OCTODNS_CONFIG := octodns-config.yaml
 DOCKER_IMAGE ?= k8s.gcr.io/infra-tools/octodns:v20200616-67ce585
 
 check-canary check-prod validate-config: TMPCFG := $(shell mktemp -d /tmp/octodns.XXXXXX)
@@ -32,8 +32,7 @@ default: check
 check: check-canary check-prod
 
 .PHONY: validate-config
-validate-config: OCTODNS_CONFIG = octodns-config-validate.yaml
-validate-config: precook-configs
+validate-config: precook-configs-validate
 	$(CURDIR)/check-zone.sh -c $(TMPCFG) -v -o $(TMP_OCTODNS_CFG) \
 		$(ALL_ZONES)
 
@@ -89,3 +88,8 @@ precook-configs:
 	source ./lib.sh; \
 	precook_zone_configs $(TMPCFG) $(PRECOOK_ZONES); \
 	precook_octodns_config $(OCTODNS_CONFIG) $(TMPCFG) $(TMP_OCTODNS_CFG);
+
+precook-configs-validate:
+	source ./lib.sh; \
+	precook_zone_configs $(TMPCFG) $(PRECOOK_ZONES); \
+	precook_octodns_config_validate $(OCTODNS_CONFIG) $(TMPCFG) $(TMP_OCTODNS_CFG);

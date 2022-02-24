@@ -1,4 +1,3 @@
-# Update the octodns-config-validate.yaml file likewise if any changes are made to this file.
 ---
 providers:
   config:
