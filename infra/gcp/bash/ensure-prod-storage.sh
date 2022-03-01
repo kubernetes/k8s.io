@@ -55,6 +55,11 @@ GCR_AUDIT_TEST_PROD_PROJECT=$(k8s_infra_project "prod" "k8s-gcr-audit-test-prod"
 RELEASE_TESTPROD_PROJECT=$(k8s_infra_project "prod" "k8s-release-test-prod")
 RELEASE_STAGING_CLOUDBUILD_ACCOUNT="615281671549@cloudbuild.gserviceaccount.com"
 
+# The project where the release process runs
+# TODO(releng): Update this variable once the release process moves to
+# its new project (k8s-staging-releng-test)
+RELEASE_PROCESS_PROJECT="kubernetes-release-test"
+
 # This is a list of all prod projects.  Each project will be configured
 # similarly, with a GCR repository and a GCS bucket of the same name.
 mapfile -t ALL_PROD_PROJECTS < <(k8s_infra_projects "prod")
@@ -368,6 +373,11 @@ function ensure_all_prod_special_cases() {
             "${serviceaccount}" "k8s-infra-gcr-vuln-scanning" 
     done
 
+    # The release process needs to issue OIDC identity tokens as the
+    # staging signer account. TO be able to do it, we need the IAM creds API
+    color 6 "Ensuring IAM Service Account Credentials API in release process project"
+    ensure_services "${RELEASE_PROCESS_PROJECT}" "iamcredentials.googleapis.com"
+    
     # For write access to:
     #   (1) k8s-gcr-backup-test-prod GCR
     #   (2) k8s-gcr-backup-test-prod-bak GCR.
