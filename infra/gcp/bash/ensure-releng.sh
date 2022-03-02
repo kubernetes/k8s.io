@@ -62,8 +62,8 @@ for PROJECT; do
     empower_group_as_viewer "${PROJECT}" "${RELEASE_ADMINS}"
 
     # Enable KMS APIs
-    color 6 "Enabling the KMS API"
-    ensure_only_services "${PROJECT}" cloudkms.googleapis.com
+    color 6 "Enabling the KMS and IAM Credentials APIs"
+    ensure_only_services "${PROJECT}" cloudkms.googleapis.com iamcredentials.googleapis.com
 
     # Let project admins use KMS.
     color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"
