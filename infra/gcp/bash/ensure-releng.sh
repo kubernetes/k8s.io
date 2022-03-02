@@ -49,6 +49,48 @@ STAGING_SIGNER_SVCACCT="krel-staging"
 K8s_ORG_SIGNER_SVCACCT="trust"
 PROMOTER_PROJECT="k8s-artifacts-prod"
 
+# This function ensures the cross-project impersonation
+# constraint is not enforced in the project. This is required
+# to allow principals from other projects to impersonate
+# service accounts from k8s-releng-prod 
+function ensure_cross_project_constraint() {
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "ensure_cross_project_constraint requires a project name" >&2
+        return 1
+    fi
+    local project="${1}"
+
+    # Read the project number
+    local project_id
+    project_id=$(gcloud projects describe "${project}" --format='value(projectNumber)')
+    
+    # Check if the constraint is enabled
+    local status_file
+    status_file=$(mktemp)
+    if gcloud --project="${project}" org-policies describe \
+        iam.disableCrossProjectServiceAccountUsage > /dev/null 2>"${status_file}"; then
+        return
+    fi
+
+    # If checking the contraint was not successful, check the error
+    if ! (grep "NOT_FOUND:" "${status_file}"); then
+        echo "Error checking cross-project contraint status" >&2
+        return 1
+    fi
+
+    # Its enforced, disable it with a policy
+    echo " >> disabling cross-project impersonation enforcement"
+    local policy_file
+    policy_file=$(mktemp)
+    {
+        echo "name: projects/${project_id}/policies/iam.disableCrossProjectServiceAccountUsage"
+        echo "spec:"
+        echo "  rules:"
+        echo "  - enforce: false" 
+    } > "${policy_file}"
+    gcloud org-policies set-policy "${policy_file}" --project "${project}" || return 1
+}
+
 # Ensure the signer service accounts exist and the
 # required accounts have access to them as token creators
 function ensure_signer_service_accounts() {
@@ -126,6 +168,10 @@ for PROJECT; do
 
     # Ensure service accounts and role bindings.
     ensure_signer_service_accounts "${PROJECT}"
+
+    # Ensure project allows impersonation access form other accounts
+    color 6 echo "Ensuring cross-project impersonation constraint is not enforced"
+    ensure_cross_project_constraint "${PROJECT}"
 
     color 6 "Done"
 done
