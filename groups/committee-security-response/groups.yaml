@@ -19,10 +19,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - mok@vmware.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
     members:
@@ -67,10 +67,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - mok@vmware.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
 
@@ -85,10 +85,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - mok@vmware.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
 
