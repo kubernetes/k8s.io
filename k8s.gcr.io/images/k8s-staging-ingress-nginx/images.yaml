@@ -131,7 +131,6 @@
   dmap:
     "sha256:5530c7fc1fa75b49e068d6b7b4f8f1c13a5834c155ba7abd5943b9057c3b925b": ["0.48.1"]
 
-
 # opentelemetry
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/opentelemetry
 - name: opentelemetry
