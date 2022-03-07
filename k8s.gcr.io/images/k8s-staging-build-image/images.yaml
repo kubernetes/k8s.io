@@ -399,30 +399,20 @@
   dmap:
     "sha256:2fd65994929a83ece98cdfb3ff1ab56ba5b13ac8c25ed6028df98e0cb2137751": ["v2.3.1-go1.16.13-buster.0"]
     "sha256:6078e5b3ef3fd90d8b7813a01064d736fd8367bdabd72eabfb76ddf7972ba844": ["v2.3.1-go1.17.6-bullseye.0"]
-    "sha256:aad79df163a7900c9489282ea52fa8c80a42e6150c92b3b905a33612d72c93be": ["v2.3.1-go1.16.15-buster.0"]
-    "sha256:f3221aa98ddf50cbd82eb5d0be06af30ab4709da84a7256cf0e890030d0b93af": ["v2.3.1-go1.17.8-bullseye.0"]
 - name: go-runner-arm
   dmap:
-    "sha256:2080c9babe38c78395bfa60fd6f740f8344f3efc2a97b22e974e63f1bf1527d2": ["v2.3.1-go1.17.8-bullseye.0"]
     "sha256:40479777cbfedd23a93f5638d0b2af7e2f58cdd1ccdbcd0655878ae46612a82b": ["v2.3.1-go1.17.6-bullseye.0"]
-    "sha256:88519428d662cf834b623578f7cc547c528063a20bd03dd16afcbaaae2d96463": ["v2.3.1-go1.16.15-buster.0"]
     "sha256:f5209b750a6d791af4d77050f7ba5b57c61711dc888d6a981300d231c492c72a": ["v2.3.1-go1.16.13-buster.0"]
 - name: go-runner-arm64
   dmap:
     "sha256:40a2a2df2ac9cf6d8c8cc64aa80a3536fb62c5f783c61a184b279fa15ed01673": ["v2.3.1-go1.16.13-buster.0"]
-    "sha256:5c004ff1fc1835e4f0e04b55bd3f126d573f3bd92ed31ea666efb47f0c24e9dc": ["v2.3.1-go1.16.15-buster.0"]
     "sha256:73369df8858451f414cf636259ea7a1b496c81bae6cd58da08c7d410aec8febe": ["v2.3.1-go1.17.6-bullseye.0"]
-    "sha256:ec041cc4974bfe5d3dbdabc84219b95cbd9979290a420b7ec182a79741574aca": ["v2.3.1-go1.17.8-bullseye.0"]
 - name: go-runner-ppc64le
   dmap:
     "sha256:0cb0e1ab2039fddb87134583ca600d5a13c8fcda7857e1d8e9f95397f8f360b7": ["v2.3.1-go1.17.6-bullseye.0"]
-    "sha256:3d2906ad69de04912a8c5aff0a542da1925fda09821fd665ea77d0a70f1413a1": ["v2.3.1-go1.16.15-buster.0"]
-    "sha256:923be2a9892683b4c404dd50246e8b5b280a8f2eaa3d376b8c23d3ff4d596074": ["v2.3.1-go1.17.8-bullseye.0"]
     "sha256:e47951dca3685c567dfc7fcc49346a121d6d34b4673b5cd84f69d0aa09b95e8c": ["v2.3.1-go1.16.13-buster.0"]
 - name: go-runner-s390x
   dmap:
-    "sha256:18362bfb626dbc567091fbf2f781fbc46957639b62b0c70af957cce3789dcc3d": ["v2.3.1-go1.17.8-bullseye.0"]
-    "sha256:63604046908d6bcd8ae7fc1d03f2bf2e17396b022c106419fd9e4d2af8a30306": ["v2.3.1-go1.16.15-buster.0"]
     "sha256:b8e0416f567f12e1490bbf0409f17a9b315b37189af3c09c2a39870c49e67a30": ["v2.3.1-go1.17.6-bullseye.0"]
     "sha256:d92d67b1be04237ccf2c59418b32137362064b7243dcb53e9537ac2ef149988c": ["v2.3.1-go1.16.13-buster.0"]
 - name: kube-cross
