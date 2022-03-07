@@ -1,0 +1,8 @@
+{
+  "displayName": "image promoter e2e test signing account",
+  "email": "k8s-infra-promoter-test-signer@k8s-cip-test-prod.iam.gserviceaccount.com",
+  "name": "projects/k8s-cip-test-prod/serviceAccounts/k8s-infra-promoter-test-signer@k8s-cip-test-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "101042498203835307358",
+  "projectId": "k8s-cip-test-prod",
+  "uniqueId": "101042498203835307358"
+}

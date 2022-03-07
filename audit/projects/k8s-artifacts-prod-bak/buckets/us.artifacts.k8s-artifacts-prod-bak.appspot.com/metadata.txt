@@ -11,8 +11,8 @@ gs://us.artifacts.k8s-artifacts-prod-bak.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 23 Oct 2019 19:03:42 GMT
-	Time updated:			Fri, 10 Sep 2021 21:02:32 GMT
-	Metageneration:			36
+	Time updated:			Wed, 02 Mar 2022 13:16:24 GMT
+	Metageneration:			38
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

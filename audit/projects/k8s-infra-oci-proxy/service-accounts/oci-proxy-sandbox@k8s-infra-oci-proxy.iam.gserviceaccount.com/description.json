@@ -1,0 +1,8 @@
+{
+  "displayName": "Minimal Service Account for OCI Proxy",
+  "email": "oci-proxy-sandbox@k8s-infra-oci-proxy.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-oci-proxy/serviceAccounts/oci-proxy-sandbox@k8s-infra-oci-proxy.iam.gserviceaccount.com",
+  "oauth2ClientId": "110527467489076117777",
+  "projectId": "k8s-infra-oci-proxy",
+  "uniqueId": "110527467489076117777"
+}

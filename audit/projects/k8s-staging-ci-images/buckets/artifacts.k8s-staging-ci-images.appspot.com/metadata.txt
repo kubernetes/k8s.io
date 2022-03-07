@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-ci-images.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 26 Oct 2020 01:03:11 GMT
-	Time updated:			Tue, 04 Jan 2022 17:56:45 GMT
-	Metageneration:			25
+	Time updated:			Thu, 17 Feb 2022 02:29:09 GMT
+	Metageneration:			26
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

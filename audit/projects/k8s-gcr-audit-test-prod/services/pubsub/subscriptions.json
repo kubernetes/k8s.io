@@ -13,6 +13,7 @@
       },
       "pushEndpoint": "https://kpromo-auditor-test-lhkagr5sjq-uc.a.run.app"
     },
+    "state": "ACTIVE",
     "topic": "projects/k8s-gcr-audit-test-prod/topics/gcr"
   }
 ]

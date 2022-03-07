@@ -40,6 +40,12 @@
     },
     {
       "members": [
+        "serviceAccount:86929635859@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.cryptoKeyDecrypter"
+    },
+    {
+      "members": [
         "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.occurrences.viewer"
@@ -55,6 +61,12 @@
         "serviceAccount:service-86929635859@gcp-sa-containerscanning.iam.gserviceaccount.com"
       ],
       "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:86929635859@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/secretmanager.secretAccessor"
     },
     {
       "members": [
