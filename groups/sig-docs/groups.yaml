@@ -17,14 +17,11 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - jorgec@vmware.com
-      - kaitlynbarnard10@gmail.com
-      - paris.pittman@gmail.com
       - killen.bob@gmail.com
-      - zcorleissen@linuxfoundation.org
+      - onlydole@gmail.com
+      - tim+kubernetes@scalefactory.com
     members:
-      - codyclark@google.com
-      - vonguard@gmail.com
+      - natew@cncf.io
 
   #
   # k8s-staging write access for SIG-owned subprojects
