@@ -29,7 +29,7 @@ FROM debian:bullseye
 ARG CONFTEST_VERSION=0.30.0
 ARG GCLOUD_VERSION=376.0.0
 ARG GH_VERSION=2.5.2
-ARG GO_VERSION=1.17.2
+ARG GO_VERSION=1.17.8
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
