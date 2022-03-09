@@ -14,26 +14,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required provider versions
-- Storage backend details
-*/
-
-terraform {
-  backend "gcs" {
-    bucket = "k8s-infra-tf-oci-proxy"
-    prefix = "sanbox"
-  }
-
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 4.9.0"
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "~> 4.9.0"
-    }
-  }
-}
+tag = "v20220204-786ae98"

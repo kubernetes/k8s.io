@@ -16,8 +16,8 @@ limitations under the License.
 
 locals {
   project_id = "k8s-infra-oci-proxy"
-  domain     = "proxy.k8s.io"
-  image      = "gcr.io/k8s-infra-staging-infra-tools/oci-proxy"
+  domain     = "registry-sandbox.k8s.io"
+  image      = "gcr.io/k8s-staging-infra-tools/archeio:${var.tag}"
 
   external_ips = {
     sandbox = {
@@ -63,12 +63,71 @@ resource "google_project_service" "project" {
   service = each.key
 }
 
-// Ensure IPv4 et IPv6 global addresses for oci-proxy
-resource "google_compute_global_address" "global_ips" {
+// Ensure k8s-infra-oci-proxy-admins@kubernetes.io has admin access to this project
+resource "google_project_iam_member" "k8s_infra_oci_proxy_admins" {
+  project = google_project.project.id
+  role    = "roles/owner"
+  member  = "group:k8s-infra-oci-proxy-admins@kubernetes.io"
+}
+
+
+resource "google_service_account" "oci-proxy" {
   project      = google_project.project.project_id
-  for_each     = local.external_ips
-  name         = each.value.name
-  description  = lookup(each.value, "description", null)
-  address_type = "EXTERNAL"
-  ip_version   = lookup(each.value, "ipv6", false) ? "IPV6" : "IPV4"
+  account_id   = "oci-proxy-sandbox"
+  display_name = "Minimal Service Account for OCI Proxy"
+}
+
+// Make each service invokable by all users.
+resource "google_cloud_run_service_iam_member" "allUsers" {
+  project  = google_project.project.project_id
+  for_each = google_cloud_run_service.regions
+
+  service  = google_cloud_run_service.regions[each.key].name
+  location = google_cloud_run_service.regions[each.key].location
+  role     = "roles/run.invoker"
+  member   = "allUsers"
+
+  depends_on = [google_cloud_run_service.regions]
+}
+
+
+resource "google_cloud_run_service" "regions" {
+  project  = google_project.project.project_id
+  for_each = toset(var.cloud_run_regions)
+  name     = "${local.project_id}-${each.key}"
+  location = each.key
+
+  template {
+    metadata {
+      annotations = {
+        "autoscaling.knative.dev/maxScale" = "3" // Control costs.
+        "run.googleapis.com/launch-stage"  = "BETA"
+      }
+    }
+    spec {
+      service_account_name = google_service_account.oci-proxy.email
+      containers {
+        image = local.image
+      }
+      container_concurrency = 5 # TODO(ameukam): adjust for production.
+      // 30 seconds less than cloud scheduler maximum.
+      timeout_seconds = 570
+    }
+  }
+
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+
+  depends_on = [
+    google_project_service.project["run.googleapis.com"]
+  ]
+
+  lifecycle {
+    ignore_changes = [
+      // This gets added by the Cloud Run API post deploy and causes diffs, can be ignored...
+      template[0].metadata[0].annotations["run.googleapis.com/sandbox"],
+    ]
+  }
 }
