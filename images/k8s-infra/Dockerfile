@@ -34,7 +34,7 @@ ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
 ARG K8S_VERSION=1.21.10
-ARG OPA_VERSION=0.33.1
+ARG OPA_VERSION=0.38.0
 ARG SHELLCHECK_VERSION=0.7.2
 ARG TFSWITCH_VERSION=0.12.1168
 
