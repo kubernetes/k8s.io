@@ -26,7 +26,7 @@ FROM debian:bullseye
 # latest at the time, and package-based installs from debian-maintained repos
 # are not pinned to a specific version
 
-ARG CONFTEST_VERSION=0.28.1
+ARG CONFTEST_VERSION=0.30.0
 ARG GCLOUD_VERSION=360.0.0
 ARG GH_VERSION=2.0.0
 ARG GO_VERSION=1.17.2
