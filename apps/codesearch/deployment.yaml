@@ -24,6 +24,7 @@ spec:
       initContainers:
       - name: codesearch-fetch
         # Placeholder image until we can add image under control of k8s.io
+        # Issue to track this work: https://github.com/kubernetes/k8s.io/issues/2182
         image: jdagostino2/codesearch-fetch:0.1.7
         volumeMounts:
         - name: config
