@@ -35,7 +35,7 @@ ARG JQ_VERSION=1.6
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
 ARG K8S_VERSION=1.21.10
 ARG OPA_VERSION=0.38.0
-ARG SHELLCHECK_VERSION=0.7.2
+ARG SHELLCHECK_VERSION=0.8.0
 ARG TFSWITCH_VERSION=0.12.1168
 
 # build everything in /build
