@@ -244,13 +244,20 @@ monitoring.prow-canary:
 prs:
   type: CNAME
   value: redirect.k8s.io.
-# https://github.com/kubernetes-sigs/release-notes docs (@jeefy)
-# Sandbox OCI redirector service.  (@ameukam,@BenTheElder,@thockin)
+# Sandbox OCI redirector service.  (@ameukam,@BenTheElder,@thockin, @eddiezane)
 registry-sandbox:
   - type: A
     value: 34.110.128.221
   - type: AAAA
     value: "2600:1901:0:a7aa::"
+# Prod OCI redirector service.  (@ameukam,@BenTheElder,@thockin, @eddiezane)
+# Reach to k8s-infra-oci-proxy-admins@kubernetes.io for major issues.
+registry:
+  - type: A
+    value: 34.107.244.51
+  - type: AAAA
+    value: "2600:1901:0:1013::"
+# https://github.com/kubernetes-sigs/release-notes docs (@jeefy)
 relnotes:
   type: CNAME
   value: kubernetes-sigs-release-notes.netlify.app.
