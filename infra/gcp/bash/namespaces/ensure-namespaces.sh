@@ -143,6 +143,7 @@ parse_args "$@";
 #
 
 ALL_APPS=(
+    codesearch
     elekto
     gcsweb
     kettle

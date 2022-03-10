@@ -85,6 +85,10 @@ readonly FILE_PROMOTER_SVCACCT="k8s-infra-promoter"
 # The service account name for the image promoter.
 readonly IMAGE_PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
+# The service account to generate image and artifact signatures during
+# e2e tests of the image promoter
+export IMAGE_PROMOTER_TEST_SIGNER_SVCACCT="k8s-infra-promoter-test-signer"
+
 # The service account name for the image promoter's vulnerability check.
 # used in: ensure-prod-storage.sh ensure-staging-storage.sh
 export IMAGE_PROMOTER_VULN_SCANNING_SVCACCT="k8s-infra-gcr-vuln-scanning"

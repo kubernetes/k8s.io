@@ -449,6 +449,26 @@ function staging_special_case__k8s_staging_kustomize() {
     ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
 }
 
+# In order to build the release artifacts, the group needs to be
+# able to create and manage a keyring to encrypt a secret token
+# that will be accessed and decrypted by a cloud build job.
+function staging_special_case__k8s_staging_krm_functions() {
+    readonly project="k8s-staging-krm-functions"
+    local principal
+
+    # ensure owners can manage keyrings
+    local owners="k8s-infra-staging-krm-functions@kubernetes.io"
+    principal="group:${owners}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.admin"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyEncrypter"
+
+    # ensure cloud builds can access keyrings for decryption
+    local cloudbuild_sa_email="415435679132@cloudbuild.gserviceaccount.com"
+    principal="serviceAccount:${cloudbuild_sa_email}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyDecrypter"
+    ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
+}
+
 # In order for pull-release-image-* to run on k8s-infra-prow-build,
 # it needs write access to gcr.io/k8s-staging-releng-test. We are
 # wary of what untrusted code is allowed to do, so we don't allow

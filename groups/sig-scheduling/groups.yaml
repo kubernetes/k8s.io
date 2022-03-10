@@ -18,6 +18,17 @@ groups:
   # Membership should correspond roughly to subproject owners for the set of
   # subproject artifacts being stored in a given staging project
   #
+  - email-id: k8s-infra-staging-kueue@kubernetes.io
+    name: k8s-infra-staging-kueue
+    description: |-
+      ACL for staging kueue
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - acondor@google.com
+      - ahg@google.com
+      - carangog@redhat.com
+      - wangqingcan1990@gmail.com
 
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     name: k8s-infra-staging-descheduler

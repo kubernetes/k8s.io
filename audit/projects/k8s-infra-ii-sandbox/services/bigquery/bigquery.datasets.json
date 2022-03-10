@@ -1,6 +1,33 @@
 [
   {
     "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:cncf_aws_infra_cost_and_billing_data_dataset_202202151457",
+    "datasetReference": {
+      "datasetId": "cncf_aws_infra_cost_and_billing_data_dataset_202202151457",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "australia-southeast1"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:cncf_aws_infra_cost_and_billing_data_dataset_202202280936",
+    "datasetReference": {
+      "datasetId": "cncf_aws_infra_cost_and_billing_data_dataset_202202280936",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "australia-southeast1"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:cncf_aws_infra_cost_and_billing_data_dataset_latest",
+    "datasetReference": {
+      "datasetId": "cncf_aws_infra_cost_and_billing_data_dataset_latest",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "australia-southeast1"
+  },
+  {
+    "kind": "bigquery#dataset",
     "id": "k8s-infra-ii-sandbox:etl_script_generated_set",
     "datasetReference": {
       "datasetId": "etl_script_generated_set",
@@ -229,6 +256,24 @@
     "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20220120",
     "datasetReference": {
       "datasetId": "etl_script_generated_set_20220120",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20220202",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20220202",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20220228",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20220228",
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"

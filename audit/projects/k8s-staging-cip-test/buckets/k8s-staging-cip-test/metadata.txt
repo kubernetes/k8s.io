@@ -12,8 +12,8 @@ gs://k8s-staging-cip-test/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 10 May 2019 05:15:09 GMT
-	Time updated:			Tue, 04 Jan 2022 17:58:27 GMT
-	Metageneration:			61
+	Time updated:			Thu, 17 Feb 2022 02:31:25 GMT
+	Metageneration:			62
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

@@ -143,11 +143,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - alberto.garcial@hotmail.com
       - cecilerobertm@gmail.com
       - davanum@gmail.com
-      - detiber@gmail.com
       - fpandini@vmware.com
-      - goldsteina@vmware.com
+      - sbueringer@gmail.com
       - prignanov@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
@@ -164,6 +164,21 @@ groups:
       - goldsteina@vmware.com
       - jeewan@vmware.com
       - prignanov@vmware.com
+      - richmcase@gmail.com
+      - sedefsavas@gmail.com
+
+  - email-id: sig-cluster-lifecycle-cluster-api-aws-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-aws-alerts
+    description: |-
+
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
       - richmcase@gmail.com
       - sedefsavas@gmail.com
 

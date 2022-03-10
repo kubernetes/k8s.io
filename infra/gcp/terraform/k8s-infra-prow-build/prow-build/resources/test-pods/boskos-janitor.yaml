@@ -19,7 +19,7 @@ spec:
       serviceAccountName: boskos-janitor
       containers:
       - name: boskos-janitor
-        image: gcr.io/k8s-staging-boskos/janitor:v20220208-21245b5
+        image: gcr.io/k8s-staging-boskos/janitor:v20220216-aace826
         args:
         - --boskos-url=http://boskos.test-pods.svc.cluster.local.
         - --resource-type=gce-project,gpu-project,scalability-project,scalability-scale-project

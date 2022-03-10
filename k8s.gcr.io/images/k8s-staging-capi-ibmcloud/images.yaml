@@ -1,3 +1,5 @@
 - name: cluster-api-ibmcloud-controller
   dmap:
     "sha256:6c92a6a337ca5152eda855ac27c9e4ca1f30bba0aa4de5c3a0b937270ead4363": ["v0.1.0"]
+    "sha256:930d22f704175eff2f51a131a56e2fb4c335dda887d229e430b6dec19c00698c": ["v0.1.1"]
+    "sha256:d738e641f84320eaa8b59220fde077890afcebe7e51eeeb3bd1f2dad6ebbda7a": ["v0.2.0"]

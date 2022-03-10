@@ -14,7 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "name" {
+variable "tag" {
   type    = string
-  default = "oci-proxy"
+  default = "latest"
+}
+
+variable "cloud_run_regions" {
+  type = list(string)
+  default = [
+    "us-central1",
+    "us-west1"
+  ]
 }

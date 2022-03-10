@@ -10,6 +10,7 @@ compute.googleapis.com               Compute Engine API
 containeranalysis.googleapis.com     Container Analysis API
 containerregistry.googleapis.com     Container Registry API
 datastore.googleapis.com             Cloud Datastore API
+iamcredentials.googleapis.com        IAM Service Account Credentials API
 logging.googleapis.com               Cloud Logging API
 monitoring.googleapis.com            Cloud Monitoring API
 oslogin.googleapis.com               Cloud OS Login API
