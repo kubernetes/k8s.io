@@ -18,7 +18,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -26,6 +25,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
+	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/apimachinery/pkg/util/sets"
 )
 
@@ -89,16 +89,48 @@ func Validate(configPath, restrictionsPath, groupsPath *string) error {
 	}
 
 	// Run all the Verification Logic
-	VerifyMergedGroupsConfig(config)
-	VerifyStagingEmailLength(config)
-	VerifyDescriptionLength(config)
-	VerifyGroupConventions(config)
-	VerifyK8sInfraGroupConventions(config)
-	VerifyK8sInfraRBACGroupConventions(config)
-	VerifySecurityResponseCommitteeGroups(config)
-	VerifyNoDuplicateMembers(config)
-	VerifyHardcodedGroupsForParanoia(config)
-	VerifyGroupsWhichShouldSupportHistory(config)
+	if err = VerifyStagingEmailLength(config, groupsConfig); err != nil {
+		return err
+	}
+
+	if err = VerifyMergedGroupsConfig(config, groupsConfig); err != nil {
+		return err
+	}
+
+	if err = VerifyDescriptionLength(groupsConfig); err != nil {
+		return err
+	}
+
+	if err = VerifyGroupConventions(config, groupsConfig); err != nil {
+		return err
+	}
+
+	if err = VerifyK8sInfraGroupConventions(groupsConfig); err != nil {
+		return err
+	}
+
+	if err = VerifyK8sInfraRBACGroupConventions(groupsConfig); err != nil {
+		return err
+	}
+
+	if config.SkipKubernetesIOTests {
+		return nil
+	}
+
+	// The tests are K8s Specific tests
+	if err = VerifySecurityResponseCommitteeGroups(groupsConfig); err != nil {
+		return err
+	}
+
+	if err = VerifyNoDuplicateMembers(groupsConfig); err != nil {
+		return err
+	}
+	if err = VerifyHardcodedGroupsForParanoia(groupsConfig); err != nil {
+		return err
+	}
+	if err = VerifyGroupsWhichShouldSupportHistory(groupsConfig); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -109,7 +141,7 @@ func Validate(configPath, restrictionsPath, groupsPath *string) error {
 // It tests that the config is merged by checking that the final
 // GroupsConfig contains at least one group that isn't in the
 // root groups.yaml file.
-func VerifyMergedGroupsConfig(config Config) {
+func VerifyMergedGroupsConfig(config Config, groupsConfig GroupsConfig) error {
 	var containsMergedConfig bool
 	found := sets.String{}
 	dups := sets.String{}
@@ -128,13 +160,13 @@ func VerifyMergedGroupsConfig(config Config) {
 	}
 
 	if !containsMergedConfig {
-		fmt.Printf("Final GroupsConfig does not have merged configs from all groups.yaml files")
-		os.Exit(1)
+		return fmt.Errorf("final GroupsConfig does not have merged configs from all groups.yaml files")
 	}
 	if n := len(dups); n > 0 {
-		fmt.Printf("%d duplicate groups: %s", n, strings.Join(dups.List(), ", "))
-		os.Exit(1)
+		return fmt.Errorf("%d duplicate groups: %s", n, strings.Join(dups.List(), ", "))
 	}
+
+	return nil
 }
 
 // VerifyStagingEmailLength tests that the number of characters in the
@@ -143,7 +175,7 @@ func VerifyMergedGroupsConfig(config Config) {
 // This validation is needed because gcloud allows PROJECT_IDs of length
 // between 6 and 30. So after discounting the "k8s-staging" prefix,
 // we are left with 18 chars for the project name.
-func VerifyStagingEmailLength(config Config) {
+func VerifyStagingEmailLength(config Config, groupsConfig GroupsConfig) error {
 	primaryDomain := config.Domains[0]
 	var errs []error
 	for _, g := range groupsConfig.Groups {
@@ -157,12 +189,7 @@ func VerifyStagingEmailLength(config Config) {
 		}
 	}
 
-	if len(errs) > 0 {
-		for _, err := range errs {
-			fmt.Print(err)
-			os.Exit(1)
-		}
-	}
+	return utilerrors.NewAggregate(errs)
 }
 
 // VerifyDescriptionLength tests that the number of characters in the
@@ -170,7 +197,7 @@ func VerifyStagingEmailLength(config Config) {
 //
 // This validation is needed because gcloud allows apps:description
 // with length no greater than 300
-func VerifyDescriptionLength(config Config) {
+func VerifyDescriptionLength(groupsConfig GroupsConfig) error {
 	var errs []error
 	for _, g := range groupsConfig.Groups {
 		description := g.Description
@@ -184,71 +211,64 @@ func VerifyDescriptionLength(config Config) {
 		}
 	}
 
-	if len(errs) > 0 {
-		for _, err := range errs {
-			fmt.Print(err)
-			os.Exit(1)
-		}
-	}
+	return utilerrors.NewAggregate(errs)
 }
 
 // Enforce conventions for all groups
-func VerifyGroupConventions(config Config) {
+func VerifyGroupConventions(config Config, groupsConfig GroupsConfig) error {
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
+
 	primaryDomain := config.Domains[0]
-	errs := 0
 	for _, g := range groupsConfig.Groups {
 		// groups are easier to reason about if email and name match
 		expectedEmailID := g.Name + "@" + primaryDomain
 		if g.EmailId != expectedEmailID {
-			log.Printf("group '%s': expected email '%s', got '%s'", g.Name, expectedEmailID, g.EmailId)
-			errs++
+			errs = append(errs, fmt.Errorf("group '%s': expected email '%s', got '%s'\n", g.Name, expectedEmailID, g.EmailId))
 		}
 	}
-	if errs > 0 {
-		os.Exit(1)
-	}
+	return utilerrors.NewAggregate(errs)
 }
 
 // Enforce conventions for all k8s-infra groups
-func VerifyK8sInfraGroupConventions(config Config) {
-	errs := 0
+func VerifyK8sInfraGroupConventions(groupsConfig GroupsConfig) error {
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
+
 	for _, g := range groupsConfig.Groups {
 		if strings.HasPrefix(g.EmailId, "k8s-infra") {
 			// no owners because we want to prevent manual membership changes
 			if len(g.Owners) > 0 {
-				log.Printf("group '%s': must have no owners, only members", g.Name)
-				errs++
+				errs = append(errs, fmt.Errorf("group '%s': must have no owners, only members", g.Name))
 			}
 
 			// treat files here as source of truth for membership
 			reconcileMembers, ok := g.Settings["ReconcileMembers"]
 			if !ok || reconcileMembers != "true" {
-				log.Printf("group '%s': must have settings.ReconcileMembers = true", g.Name)
-				errs++
+				errs = append(errs, fmt.Errorf("group '%s': must have settings.ReconcileMembers = true", g.Name))
 			}
 		}
 	}
-	if errs > 0 {
-		os.Exit(1)
-	}
+	return utilerrors.NewAggregate(errs)
 }
 
 // Enforce conventions for groups used by GKE Group-based RBAC
 // - there must be a gke-security-groups@ group
 // - its members must be k8s-infra-rbac-*@ groups (and vice-versa)
 // - all groups involved must have settings.WhoCanViewMembership = ALL_MEMBERS_CAN_VIEW
-func VerifyK8sInfraRBACGroupConventions(config Config) {
+func VerifyK8sInfraRBACGroupConventions(groupsConfig GroupsConfig) error {
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
+
 	primaryDomain := config.Domains[0]
 	rbacEmails := make(map[string]bool)
-	errs := 0
 	for _, g := range groupsConfig.Groups {
 		if strings.HasPrefix(g.EmailId, "k8s-infra-rbac") {
 			rbacEmails[g.EmailId] = false
 			// this is necessary for group-based rbac to work
 			whoCanViewMembership, ok := g.Settings["WhoCanViewMembership"]
 			if !ok || whoCanViewMembership != "ALL_MEMBERS_CAN_VIEW" {
-				log.Printf("group '%s': must have settings.WhoCanViewMembership = ALL_MEMBERS_CAN_VIEW", g.Name)
-				errs++
+				errs = append(errs, fmt.Errorf("group '%s': must have settings.WhoCanViewMembership = ALL_MEMBERS_CAN_VIEW", g.Name))
 			}
 		}
 	}
@@ -259,13 +279,11 @@ func VerifyK8sInfraRBACGroupConventions(config Config) {
 			// this is necessary for group-based rbac to work
 			whoCanViewMembership, ok := g.Settings["WhoCanViewMembership"]
 			if !ok || whoCanViewMembership != "ALL_MEMBERS_CAN_VIEW" {
-				log.Printf("group '%s': must have settings.WhoCanViewMembership = ALL_MEMBERS_CAN_VIEW", g.Name)
-				errs++
+				errs = append(errs, fmt.Errorf("group '%s': must have settings.WhoCanViewMembership = ALL_MEMBERS_CAN_VIEW", g.Name))
 			}
 			for _, email := range g.Members {
 				if _, ok := rbacEmails[email]; !ok {
-					log.Printf("group '%s': invalid member '%s', must be a k8s-infra-rbac-*@"+primaryDomain+"group", g.Name, email)
-					errs++
+					errs = append(errs, fmt.Errorf("group '%s': invalid member '%s', must be a k8s-infra-rbac-*@"+primaryDomain+"group", g.Name, email))
 				} else {
 					rbacEmails[email] = true
 				}
@@ -273,29 +291,34 @@ func VerifyK8sInfraRBACGroupConventions(config Config) {
 		}
 	}
 	if !foundGKEGroup {
-		log.Printf("group '%s' is missing", "gke-security-groups@"+primaryDomain)
-		errs++
+		errs = append(errs, fmt.Errorf("group '%s' is missing", "gke-security-groups@"+primaryDomain))
 	}
 	for email, found := range rbacEmails {
 		if !found {
-			log.Printf("group '%s': must be a member of gke-security-groups@"+primaryDomain, email)
-			errs++
+			errs = append(errs, fmt.Errorf("group '%s': must be a member of gke-security-groups@"+primaryDomain, email))
 		}
 	}
 
-	if errs > 0 {
-		os.Exit(1)
-	}
+	return utilerrors.NewAggregate(errs)
 }
 
 // Enforce conventions for SRC groups
 // - groups can't own other groups, so for groups that should be owned by
 //	 security@kubernetes.io should own, make sure the owners match
-func VerifySecurityResponseCommitteeGroups(config Config) {
-	if config.SkipKubernetesIOTests {
-		return
-	}
-	errs := 0
+
+// TODO: It may not matter, but it would be more efficient to put the pscGroups
+// into a set or map and scan groupsConfig.Groups only once (or 1.5 times, since
+// we scan for security@kubernetes.io earlier.
+// Separately, it feels like having groupsConfig.Groups be a map[string]GroupConfig
+// would be a big win for some of these loops, especially if you could combine the
+// "verification function" for several different verifications using something like
+// the Visitor pattern.
+// https://github.com/kubernetes/k8s.io/pull/3407#discussion_r808644893
+
+func VerifySecurityResponseCommitteeGroups(groupsConfig GroupsConfig) error {
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
+
 	pscGroups := []string{
 		"distributors-announce@kubernetes.io",
 		"security-discuss-private@kubernetes.io",
@@ -311,61 +334,64 @@ func VerifySecurityResponseCommitteeGroups(config Config) {
 		for _, g := range groupsConfig.Groups {
 			if g.EmailId == pscGroup {
 				if !reflect.DeepEqual(owners, g.Owners) {
-					log.Printf("group '%s': owners must match owners from security@kubernetes.io, expected: %v, actual: %v", pscGroup, owners, g.Owners)
-					errs++
+					errs = append(errs, fmt.Errorf("group '%s': owners must match owners from security@kubernetes.io, expected: %v, actual: %v", pscGroup, owners, g.Owners))
 				}
 				break
 			}
 		}
 	}
-	if errs > 0 {
-		os.Exit(1)
-	}
+
+	return utilerrors.NewAggregate(errs)
 }
 
 // An e-mail address can only show up once within a given group, whether that
 // be as a member, manager, or owner
-func VerifyNoDuplicateMembers(config Config) {
+func VerifyNoDuplicateMembers(groupsConfig GroupsConfig) error {
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
+
 	for _, g := range groupsConfig.Groups {
 		members := map[string]bool{}
 		for _, m := range g.Members {
 			if _, ok := members[m]; ok {
-				log.Printf("group '%s' cannot have duplicate member '%s'", g.EmailId, m)
+				errs = append(errs, fmt.Errorf("group '%s' cannot have duplicate member '%s'", g.EmailId, m))
 			}
 			members[m] = true
 		}
 		managers := map[string]bool{}
 		for _, m := range g.Managers {
 			if _, ok := members[m]; ok {
-				log.Printf("group '%s' manager '%s' cannot also be listed as a member", g.EmailId, m)
+				errs = append(errs, fmt.Errorf("group '%s' manager '%s' cannot also be listed as a member", g.EmailId, m))
 			}
 			if _, ok := managers[m]; ok {
-				log.Printf("group '%s' cannot have duplicate manager '%s'", g.EmailId, m)
+				errs = append(errs, fmt.Errorf("group '%s' cannot have duplicate manager '%s'", g.EmailId, m))
 			}
 			managers[m] = true
 		}
 		owners := map[string]bool{}
 		for _, m := range g.Owners {
 			if _, ok := members[m]; ok {
-				log.Printf("group '%s' owner '%s' cannot also be listed as a member", g.EmailId, m)
+				errs = append(errs, fmt.Errorf("group '%s' owner '%s' cannot also be listed as a member", g.EmailId, m))
 			}
 			if _, ok := managers[m]; ok {
-				log.Printf("group '%s' owner '%s' cannot also be listed as a manager", g.EmailId, m)
+				errs = append(errs, fmt.Errorf("group '%s' owner '%s' cannot also be listed as a manager", g.EmailId, m))
 			}
 			if _, ok := owners[m]; ok {
-				log.Printf("group '%s' cannot have duplicate owner '%s'", g.EmailId, m)
+				errs = append(errs, fmt.Errorf("group '%s' cannot have duplicate owner '%s'", g.EmailId, m))
 			}
 			owners[m] = true
 		}
 	}
+
+	return utilerrors.NewAggregate(errs)
 }
 
 // NOTE: make very certain you know what you are doing if you change one
 // of these groups, we don't want to accidentally lock ourselves out
-func VerifyHardcodedGroupsForParanoia(config Config) {
-	if config.SkipKubernetesIOTests {
-		return
-	}
+func VerifyHardcodedGroupsForParanoia(groupsConfig GroupsConfig) error {
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
+
 	groups := map[string][]string{
 		"k8s-infra-gcp-org-admins@kubernetes.io": {
 			"ameukam@gmail.com",
@@ -394,16 +420,18 @@ func VerifyHardcodedGroupsForParanoia(config Config) {
 			copy(actual, g.Members)
 			sort.Strings(actual)
 			if !reflect.DeepEqual(expected, actual) {
-				log.Printf("group '%s': expected members '%v', got '%v'", g.Name, expected, actual)
+				errs = append(errs, fmt.Errorf("group '%s': expected members '%v', got '%v'", g.Name, expected, actual))
 			}
 		}
 	}
 
 	for email := range groups {
 		if _, ok := found[email]; !ok {
-			log.Printf("group '%s' is missing, should be present", email)
+			errs = append(errs, fmt.Errorf("group '%s' is missing, should be present", email))
 		}
 	}
+
+	return utilerrors.NewAggregate(errs)
 }
 
 // Setting AllowWebPosting should be set for every group which should support
@@ -411,47 +439,46 @@ func VerifyHardcodedGroupsForParanoia(config Config) {
 // and history of threads and also use web interface to operate the group)
 // More info:
 // 	https://developers.google.com/admin-sdk/groups-settings/v1/reference/groups#allowWebPosting
-func VerifyGroupsWhichShouldSupportHistory(config Config) {
-	if config.SkipKubernetesIOTests {
-		return
-	}
+
+// TODO: I'd love to make this more general to enforce that groups matching a certain
+// pattern must have web history / web posting.
+// https://github.com/kubernetes/k8s.io/pull/3407#discussion_r808645808
+
+func VerifyGroupsWhichShouldSupportHistory(groupsConfig GroupsConfig) error {
+	// aggregate the errors that occured and return them together in the end.
+	var errs []error
+
 	groups := map[string]struct{}{
 		"leads@kubernetes.io": {},
 	}
 
 	found := make(map[string]struct{})
-	errs := 0
 	for _, group := range groupsConfig.Groups {
 		emailID := group.EmailId
 		found[emailID] = struct{}{}
 		if _, ok := groups[emailID]; ok {
 			allowedWebPosting, ok := group.Settings["AllowWebPosting"]
 			if !ok {
-				log.Printf(
+				errs = append(errs, fmt.Errorf(
 					"group '%s': must have 'settings.allowedWebPosting = true'",
 					group.Name,
-				)
-				errs++
+				))
 			} else if allowedWebPosting != "true" {
-				log.Printf(
+				errs = append(errs, fmt.Errorf(
 					"group '%s': must have 'settings.allowedWebPosting = true'"+
 						" but have 'settings.allowedWebPosting = %s' instead",
 					group.Name,
 					allowedWebPosting,
-				)
-				errs++
+				))
 			}
 		}
 	}
 
 	for email := range groups {
 		if _, ok := found[email]; !ok {
-			log.Printf("group '%s' is missing, should be present", email)
-			errs++
+			errs = append(errs, fmt.Errorf("group '%s' is missing, should be present", email))
 		}
 	}
 
-	if errs > 0 {
-		os.Exit(1)
-	}
+	return utilerrors.NewAggregate(errs)
 }

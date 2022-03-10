@@ -13,7 +13,7 @@ groups-path: .
 restrictions-path: restrictions.yaml
 
 # Google Workspace Domains
-domains: 
+domains:
   - kubernetes.io
 
 # Set this to true to skip various internal kubernetes.io group checks. This is important if the reconciler

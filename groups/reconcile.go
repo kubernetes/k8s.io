@@ -424,5 +424,5 @@ func PrintConfig(config Config) {
 	log.Printf("config: GroupsPath:       %v", config.GroupsPath)
 	log.Printf("config: RestrictionsPath: %v", config.RestrictionsPath)
 	log.Printf("config: ConfirmChanges:   %v", config.ConfirmChanges)
-	log.Printf("config: Domains:   %v", config.Domains)
+	log.Printf("config: Domains:          %v", config.Domains)
 }
