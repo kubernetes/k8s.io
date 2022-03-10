@@ -46,7 +46,7 @@ passed_files=()
 # - allows --source-path to work for adjacent files
 # - allows listing which specific files failed at end
 for file in "${files[@]}"; do
-    echo "# checking ${file#${REPO_ROOT}\/}"
+    echo "# checking ${file#"${REPO_ROOT}"\/}"
     if ! "${shellcheck_cmd[@]}" "${file}" >>"${SHELLCHECK_OUTPUT}" 2>&1; then
         failed_files+=("${file}")
     else
