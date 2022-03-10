@@ -87,14 +87,8 @@ func main() {
 		Use:   "apply",
 		Short: "Reconciles the supplied configuration to Google Groups",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			groupsPath, _ := cmd.Flags().GetString("groups-path")
-			restrictionsPath, _ := cmd.Flags().GetString("restrictions-path")
 			configFile, _ := cmd.Flags().GetString("config")
-			err := Validate(&configFile, &groupsPath, &restrictionsPath)
-			if err != nil {
-				return err
-			}
-			err = Reconcile(false, configFile)
+			err := Reconcile(true, configFile)
 			if err != nil {
 				return err
 			}

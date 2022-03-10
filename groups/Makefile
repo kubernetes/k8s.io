@@ -22,8 +22,11 @@ endif
 default: run
 
 .PHONY: run
-run: test
+plan: test
 	go run . plan
+
+apply: test
+	go run . apply
 
 .PHONY: test
 test:
