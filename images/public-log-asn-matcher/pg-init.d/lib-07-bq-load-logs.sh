@@ -18,7 +18,7 @@
 if [ -z "${GCP_BIGQUERY_DATASET_LOGS:-}" ]; then
     echo "Using dataset logs, since \$GCP_BIGQUERY_DATASET_LOGS was provided and set to '${GCP_BIGQUERY_DATASET_LOGS:-}'"
     BUCKETS=$(cat /app/buckets.txt)
-    for BUCKET in ${BUCKETS[*]}; do
+    for BUCKET in "${BUCKETS[@]}"; do
             bq load \
                 --autodetect \
                 --max_bad_records=2000 \
