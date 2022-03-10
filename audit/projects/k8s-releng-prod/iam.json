@@ -8,6 +8,12 @@
     },
     {
       "members": [
+        "serviceAccount:86929635859@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.cryptoKeyDecrypter"
+    },
+    {
+      "members": [
         "group:k8s-infra-release-admins@kubernetes.io"
       ],
       "role": "roles/cloudkms.cryptoKeyEncrypterDecrypter"
@@ -23,6 +29,12 @@
         "group:k8s-infra-release-admins@kubernetes.io"
       ],
       "role": "roles/cloudkms.signerVerifier"
+    },
+    {
+      "members": [
+        "serviceAccount:86929635859@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/secretmanager.secretAccessor"
     },
     {
       "members": [

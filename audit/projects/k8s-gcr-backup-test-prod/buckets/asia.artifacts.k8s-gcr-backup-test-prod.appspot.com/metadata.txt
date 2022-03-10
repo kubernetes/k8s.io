@@ -11,8 +11,8 @@ gs://asia.artifacts.k8s-gcr-backup-test-prod.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 23 Oct 2019 19:08:46 GMT
-	Time updated:			Fri, 10 Sep 2021 21:08:38 GMT
-	Metageneration:			38
+	Time updated:			Wed, 02 Mar 2022 13:21:13 GMT
+	Metageneration:			40
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

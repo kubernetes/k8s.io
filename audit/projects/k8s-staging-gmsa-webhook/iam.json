@@ -2,9 +2,16 @@
   "bindings": [
     {
       "members": [
-        "serviceAccount:819711516002@cloudbuild.gserviceaccount.com"
+        "serviceAccount:819711516002@cloudbuild.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-gmsa-webhook@kubernetes.io"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
     },
     {
       "members": [
@@ -32,6 +39,13 @@
     },
     {
       "members": [
+        "group:k8s-infra-staging-gmsa-webhook@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
         "group:k8s-infra-staging-gmsa-webhook@kubernetes.io"
       ],
       "role": "roles/viewer"
