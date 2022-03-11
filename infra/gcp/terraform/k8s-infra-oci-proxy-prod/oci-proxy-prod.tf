@@ -17,16 +17,8 @@ limitations under the License.
 locals {
   project_id = "k8s-infra-oci-proxy-prod"
   domain     = "registry.k8s.io"
+  image      = "gcr.io/k8s-staging-infra-tools/archeio:${var.tag}"
 
-  external_ips = {
-    sandbox = {
-      name = "${local.project_id}-sandbox",
-    },
-    sandbox-v6 = {
-      name = "${local.project_id}-sandbox-v6",
-      ipv6 = true
-    },
-  }
 }
 
 data "google_billing_account" "account" {
@@ -67,4 +59,63 @@ resource "google_project_iam_member" "k8s_infra_oci_proxy_admins" {
   project = google_project.project.id
   role    = "roles/owner"
   member  = "group:k8s-infra-oci-proxy-admins@kubernetes.io"
+}
+
+resource "google_service_account" "oci-proxy" {
+  project      = google_project.project.project_id
+  account_id   = "oci-proxy-prod"
+  display_name = "Minimal Service Account for OCI Proxy"
+}
+
+resource "google_cloud_run_service_iam_member" "allUsers" {
+  project  = google_project.project.project_id
+  for_each = google_cloud_run_service.oci-proxy
+
+  service  = google_cloud_run_service.oci-proxy[each.key].name
+  location = google_cloud_run_service.oci-proxy[each.key].location
+  role     = "roles/run.invoker"
+  member   = "allUsers"
+
+  depends_on = [google_cloud_run_service.oci-proxy]
+}
+
+resource "google_cloud_run_service" "oci-proxy" {
+  project  = google_project.project.project_id
+  for_each = toset(var.cloud_run_regions)
+  name     = "${local.project_id}-${each.key}"
+  location = each.key
+
+  template {
+    metadata {
+      annotations = {
+        "autoscaling.knative.dev/maxScale" = "3" // Control costs.
+        "run.googleapis.com/launch-stage"  = "BETA"
+      }
+    }
+    spec {
+      service_account_name = google_service_account.oci-proxy.email
+      containers {
+        image = local.image
+      }
+      container_concurrency = 5 # TODO(ameukam): adjust for production.
+      // 30 seconds less than cloud scheduler maximum.
+      timeout_seconds = 570
+    }
+  }
+
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+
+  depends_on = [
+    google_project_service.project["run.googleapis.com"]
+  ]
+
+  lifecycle {
+    ignore_changes = [
+      // This gets added by the Cloud Run API post deploy and causes diffs, can be ignored...
+      template[0].metadata[0].annotations["run.googleapis.com/sandbox"],
+    ]
+  }
 }
