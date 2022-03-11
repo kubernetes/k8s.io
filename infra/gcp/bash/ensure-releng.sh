@@ -46,7 +46,7 @@ fi
 
 RELEASE_PROCESS_CLOUDBUILD_SVCACCT="648026197307@cloudbuild.gserviceaccount.com"
 STAGING_SIGNER_SVCACCT="krel-staging"
-K8s_ORG_SIGNER_SVCACCT="trust"
+K8s_ORG_SIGNER_SVCACCT="krel-trust"
 PROMOTER_PROJECT="k8s-artifacts-prod"
 
 # This function ensures the cross-project impersonation
@@ -160,7 +160,7 @@ for PROJECT; do
 
     # Enable KMS and IAM APIs
     color 6 "Enabling the KMS and IAM Credentials APIs"
-    ensure_only_services "${PROJECT}" cloudkms.googleapis.com iamcredentials.googleapis.com
+    ensure_only_services "${PROJECT}" cloudkms.googleapis.com iamcredentials.googleapis.com orgpolicy.googleapis.com
 
     # Let project admins use KMS.
     color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"
