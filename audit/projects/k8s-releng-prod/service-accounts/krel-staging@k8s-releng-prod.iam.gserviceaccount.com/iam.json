@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:648026197307@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountTokenCreator"
+    }
+  ],
+  "version": 1
+}
