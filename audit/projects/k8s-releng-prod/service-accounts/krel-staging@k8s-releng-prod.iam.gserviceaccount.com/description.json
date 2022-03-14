@@ -1,0 +1,8 @@
+{
+  "displayName": "krel staging signing account",
+  "email": "krel-staging@k8s-releng-prod.iam.gserviceaccount.com",
+  "name": "projects/k8s-releng-prod/serviceAccounts/krel-staging@k8s-releng-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "111936707957081327338",
+  "projectId": "k8s-releng-prod",
+  "uniqueId": "111936707957081327338"
+}

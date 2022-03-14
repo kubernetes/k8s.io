@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com",
+        "serviceAccount:k8s-infra-promoter@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountTokenCreator"
+    }
+  ],
+  "version": 1
+}
