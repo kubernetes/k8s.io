@@ -80,6 +80,8 @@ groups:
     members:
       - ambiknai@in.ibm.com
       - arahamad@in.ibm.com
+      - manjunath.cse@gmail.com
+      - rcmadhankumar@gmail.com
 
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
     name: k8s-infra-staging-kas-network-proxy
