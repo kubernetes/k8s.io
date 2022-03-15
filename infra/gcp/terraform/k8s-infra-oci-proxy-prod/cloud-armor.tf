@@ -31,7 +31,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
   rule {
@@ -43,7 +43,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
     rule {
@@ -55,7 +55,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
 
@@ -78,7 +78,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
   rule {
@@ -90,7 +90,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
   rule {
@@ -102,7 +102,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
   rule {
@@ -114,7 +114,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
   rule {
@@ -126,7 +126,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
   rule {
@@ -138,7 +138,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         }
     }
 
-    preview = true
+    preview = false
   }
 
   # Reject all traffic that hasn't been whitelisted.

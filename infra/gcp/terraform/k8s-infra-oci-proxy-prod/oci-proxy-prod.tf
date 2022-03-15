@@ -88,7 +88,7 @@ resource "google_cloud_run_service" "oci-proxy" {
   template {
     metadata {
       annotations = {
-        "autoscaling.knative.dev/maxScale" = "3" // Control costs.
+        "autoscaling.knative.dev/maxScale" = "5" // Control costs.
         "run.googleapis.com/launch-stage"  = "BETA"
       }
     }
@@ -97,7 +97,7 @@ resource "google_cloud_run_service" "oci-proxy" {
       containers {
         image = local.image
       }
-      container_concurrency = 5 # TODO(ameukam): adjust for production.
+      container_concurrency = 10
       // 30 seconds less than cloud scheduler maximum.
       timeout_seconds = 570
     }
