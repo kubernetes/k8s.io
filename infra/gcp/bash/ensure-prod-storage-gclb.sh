@@ -62,7 +62,7 @@ color 6 "Reconciling GCLB Backend Bucket"
 if ! gcloud --project "${PROD_PROJECT}" compute backend-buckets describe "${NAME}" >/dev/null 2>&1; then
   gcloud --project "${PROD_PROJECT}" compute backend-buckets create "${NAME}" --gcs-bucket-name="${BUCKET_NAME}"
 else
-  gcloud --project "${PROD_PROJECT}" compute backend-buckets update "${NAME}" --gcs-bucket-name="${BUCKET_NAME}" --enable-cdn --cache-mode=FORCE_CACHE_ALL
+  gcloud --project "${PROD_PROJECT}" compute backend-buckets update "${NAME}" --gcs-bucket-name="${BUCKET_NAME}" --enable-cdn --cache-mode=FORCE_CACHE_ALL --default-ttl=86400s
 fi
 
 color 6 "Reconciling GCLB URL Map"
