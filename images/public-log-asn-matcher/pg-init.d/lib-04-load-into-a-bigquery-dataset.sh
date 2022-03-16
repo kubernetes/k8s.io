@@ -16,15 +16,15 @@
 # Purpose: Prepare, fetch, and load company data, PyASN data, PeeringDB, and Vendor data
 
 ## Load csv to bq
-bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.potaroo_all_asn_name" /tmp/potaroo_asn_companyname.csv asn:integer,companyname:string >> "${BQ_OUTPUT:-/dev/null}" 2>&1
+bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.potaroo_all_asn_name" /tmp/potaroo_asn_companyname.csv asn:integer,companyname:string
 
 # Load all PyASN data
-bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.pyasn_ip_asn_extended" /tmp/pyasn_expanded_ipv4.csv asn:integer,ip:string,ip_start:string,ip_end:string >> "${BQ_OUTPUT:-/dev/null}" 2>&1
+bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.pyasn_ip_asn_extended" /tmp/pyasn_expanded_ipv4.csv asn:integer,ip:string,ip_start:string,ip_end:string
 
 ## Lets go convert the beginning and end into ints
 GCP_BIGQUERY_DATASET_WITH_DATE="${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}"
 export GCP_BIGQUERY_DATASET_WITH_DATE
-envsubst < /app/ext-ip-asn.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor" >> "${BQ_OUTPUT:-/dev/null}" 2>&1
+envsubst < /app/ext-ip-asn.sql | bq query --nouse_legacy_sql --replace --destination_table "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor"
 
 mkdir -p /tmp/vendor
 
@@ -72,7 +72,7 @@ curl "${MS_SERVICETAG_PUBLIC_REF}" \
 # ensure that array can be expressed
 # shellcheck disable=SC2048
 for VENDOR in ${ASN_VENDORS[*]}; do
-  bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor_json" "/tmp/vendor/${VENDOR}_raw_subnet_region.csv" ipprefix:string,service:string,region:string >> "${BQ_OUTPUT:-/dev/null}" 2>&1
+  bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor_json" "/tmp/vendor/${VENDOR}_raw_subnet_region.csv" ipprefix:string,service:string,region:string
 done
 
 mkdir -p /tmp/peeringdb-tables
