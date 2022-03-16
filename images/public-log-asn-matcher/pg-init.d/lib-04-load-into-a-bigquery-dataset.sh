@@ -40,12 +40,14 @@ VENDORS=(
     tencentcloud
 )
 ## This should be the end of pyasn section, we have results table that covers start_ip/end_ip from fs our requirements
-for VENDOR in "${VENDORS[@]}"; do
+# ensure that array can be expressed
+# shellcheck disable=SC2048
+for VENDOR in ${VENDORS[*]}; do
   # shellcheck disable=SC2016
   curl -s "https://raw.githubusercontent.com/kubernetes/k8s.io/main/registry.k8s.io/infra/meta/asns/${VENDOR}.yaml" \
       | yq -r '.name as $name | .redirectsTo.registry as $redirectsToRegistry | .redirectsTo.artifacts as $redirectsToArtifacts | .asns[] | [. ,$name, $redirectsToRegistry, $redirectsToArtifacts] | @csv' \
         > "/tmp/vendor/${VENDOR}_yaml.csv"
-  bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor_yaml" "/tmp/vendor/${VENDOR}_yaml.csv" asn_yaml:integer,name_yaml:string,redirectsToRegistry:string,redirectsToArtifacts:string >> "${BQ_OUTPUT:-/dev/null}" 2>&1
+  bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor_yaml" "/tmp/vendor/${VENDOR}_yaml.csv" asn_yaml:integer,name_yaml:string,redirectsToRegistry:string,redirectsToArtifacts:string
 done
 
 ASN_VENDORS=(
@@ -67,7 +69,9 @@ curl "${MS_SERVICETAG_PUBLIC_REF}" \
       > /tmp/vendor/microsoft_raw_subnet_region.csv
 
 ## Load all the csv
-for VENDOR in "${ASN_VENDORS[@]}"; do
+# ensure that array can be expressed
+# shellcheck disable=SC2048
+for VENDOR in ${ASN_VENDORS[*]}; do
   bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor_json" "/tmp/vendor/${VENDOR}_raw_subnet_region.csv" ipprefix:string,service:string,region:string >> "${BQ_OUTPUT:-/dev/null}" 2>&1
 done
 
@@ -76,7 +80,9 @@ PEERINGDB_TABLES=(
     net
     poc
 )
-for PEERINGDB_TABLE in "${PEERINGDB_TABLES[@]}"; do
+# ensure that array can be expressed
+# shellcheck disable=SC2048
+for PEERINGDB_TABLE in ${PEERINGDB_TABLES[*]}; do
     curl -sG "https://www.peeringdb.com/api/${PEERINGDB_TABLE}" | jq -c '.data[]' | sed 's,",\",g' > "/tmp/peeringdb-tables/${PEERINGDB_TABLE}.json"
 done
 
