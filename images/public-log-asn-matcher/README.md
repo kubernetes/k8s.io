@@ -71,8 +71,7 @@ echo "${TMP_DIR_ETL}"
 sudo chmod 0777 "${TMP_DIR_ETL}"
 sudo chown -R 999 ~/.config/gcloud # allow for postgres user
 docker run \
-    -it \
-    --rm \
+    -d \
     -e TZ=$TZ \
     -e POSTGRES_PASSWORD="postgres" \
     -e GCP_PROJECT=k8s-infra-ii-sandbox \
@@ -80,7 +79,9 @@ docker run \
     -e GCP_BQ_DUMP_BUCKET=ii_bq_scratch_dump \
     -v $HOME/.config/gcloud:/var/lib/postgresql/.config/gcloud \
     -v "${TMP_DIR_ETL}:/tmp" \
+    --name public-log-asn-matcher \
     gcr.io/k8s-staging-infra-tools/public-log-asn-matcher
+docker logs -f public-log-asn-matcher
 ```
 
 ### Clean up
