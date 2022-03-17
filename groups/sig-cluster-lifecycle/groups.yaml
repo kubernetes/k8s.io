@@ -31,6 +31,7 @@ groups:
       - jeewan@vmware.com
       - buringerst@vmware.com
       - kmuldoon@vmware.com
+      - kakaraparthy@vmware.com
 
   - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubeadm-alerts
