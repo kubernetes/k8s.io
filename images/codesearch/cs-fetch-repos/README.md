@@ -16,6 +16,7 @@ File config saved to: /tmp/config.json
 ```
 
 To add a new repo, update `REPOS` in the `fetch-repos.py` script.
+
 ```
 REPOS = [
     'kubernetes',
