@@ -58,21 +58,21 @@ ASN_VENDORS=(
 
 # Fetch the known IP ranges from vendors that publish them
 curl 'https://ip-ranges.amazonaws.com/ip-ranges.json' \
-    | jq -r '.prefixes[] | [.ip_prefix, .service, .region] | @csv' \
+    | jq -r '.prefixes[] | [.ip_prefix, .service, .region, "amazon"] | @csv' \
       > /tmp/vendor/amazon_raw_subnet_region.csv
 curl 'https://www.gstatic.com/ipranges/cloud.json' \
-    | jq -r '.prefixes[] | [.ipv4Prefix, .service, .scope] | @csv' \
+    | jq -r '.prefixes[] | [.ipv4Prefix, .service, .scope, "google"] | @csv' \
       > /tmp/vendor/google_raw_subnet_region.csv
 MS_SERVICETAG_PUBLIC_REF=$(curl -s https://www.microsoft.com/en-us/download/confirmation.aspx?id=56519 | grep '71D86715-5596-4529-9B13-DA13A5DE5B63' | sed 's,.*href="\(https://.*\.json\).*,\1,g' | tail -n 1)
 curl "${MS_SERVICETAG_PUBLIC_REF}" \
-    | jq -r '.values[] | .properties.platform as $service | .properties.region as $region | .properties.addressPrefixes[] | [., $service, $region] | @csv' \
+    | jq -r '.values[] | .properties.platform as $service | .properties.region as $region | .properties.addressPrefixes[] | [., $service, $region, "microsoft"] | @csv' \
       > /tmp/vendor/microsoft_raw_subnet_region.csv
 
 ## Load all the csv
 # ensure that array can be expressed
 # shellcheck disable=SC2048
 for VENDOR in ${ASN_VENDORS[*]}; do
-  bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor_json" "/tmp/vendor/${VENDOR}_raw_subnet_region.csv" ipprefix:string,service:string,region:string
+  bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.vendor_json" "/tmp/vendor/${VENDOR}_raw_subnet_region.csv" ipprefix:string,service:string,region:string,vendor:string
 done
 
 mkdir -p /tmp/peeringdb-tables

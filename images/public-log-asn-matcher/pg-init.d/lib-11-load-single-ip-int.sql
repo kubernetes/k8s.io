@@ -9,4 +9,14 @@ create index on vendor_expanded_int (end_ip_int);
 create index on vendor_expanded_int (start_ip_int);
 create index on cust_ip (c_ip);
 
+-- update the vendor name if matching AWS ip range
+update
+  vendor_expanded_int vendor
+set
+  name_with_yaml_name = 'amazon.json'
+left join
+  ip_ranges range on (vendor.cidr_ip = range.cidr)
+where
+  range.vendor = 'amazon';
+
 copy ( SELECT vendor_expanded_int.cidr_ip, vendor_expanded_int.start_ip, vendor_expanded_int.end_ip, vendor_expanded_int.asn, vendor_expanded_int.name_with_yaml_name, cust_ip.c_ip FROM vendor_expanded_int, cust_ip WHERE cust_ip.c_ip >= vendor_expanded_int.start_ip_int AND cust_ip.c_ip <= vendor_expanded_int.end_ip_int) TO '/tmp/match-ip-to-iprange.csv' CSV HEADER;
