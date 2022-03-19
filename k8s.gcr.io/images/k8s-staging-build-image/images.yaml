@@ -385,6 +385,7 @@
     "sha256:c041b4508762216be5d30534575230f2c9464e69946f165e9633fec3314ad29b": ["v2.3.1-go1.16rc1-buster.1"]
     "sha256:c1110d4edc1edfedb730e21ae63b5be59ae1ed18ffdc29f9453366cec74aa68c": ["v2.3.1-go1.16.15-buster.0"]
     "sha256:cd45714e4824eeff6f107d9e3b4f79be9ee0cf5071dc46caf755d3f324a36089": ["buster-v2.3.1"]
+    "sha256:ce35c7bab1692b1f986a6d7e62b976c2e6e558f5bc8cd97cf05642e30836802b": ["v2.3.1-go1.18-bullseye.0"]
     "sha256:ce9328e06037ec8ca6bc4233d2d3f60fb4a4157462b660c56bc984bb31a62940": ["v2.3.1-go1.15.14-buster.0"]
     "sha256:cf851b8e544e599377a16244ba179e1fe42cdf2e2b5fba98da1db436cf3af540": ["v2.3.1-go1.17rc1-buster.0"]
     "sha256:d064281d65879f04d42b3f752de155ae29238ce5e6876ac57fe9daf2fa30f8cb": ["v2.3.1-go1.18rc1-bullseye.0"]
@@ -399,20 +400,25 @@
   dmap:
     "sha256:2fd65994929a83ece98cdfb3ff1ab56ba5b13ac8c25ed6028df98e0cb2137751": ["v2.3.1-go1.16.13-buster.0"]
     "sha256:6078e5b3ef3fd90d8b7813a01064d736fd8367bdabd72eabfb76ddf7972ba844": ["v2.3.1-go1.17.6-bullseye.0"]
+    "sha256:f911c1ef0ab921e42129ca5345422bfd1d18a87ffede64f883444f3aabf95155": ["v2.3.1-go1.18-bullseye.0"]
 - name: go-runner-arm
   dmap:
     "sha256:40479777cbfedd23a93f5638d0b2af7e2f58cdd1ccdbcd0655878ae46612a82b": ["v2.3.1-go1.17.6-bullseye.0"]
+    "sha256:d289791055939d904eee9d5b3078c36200aa314605ef70ed56960c06ff5a22ac": ["v2.3.1-go1.18-bullseye.0"]
     "sha256:f5209b750a6d791af4d77050f7ba5b57c61711dc888d6a981300d231c492c72a": ["v2.3.1-go1.16.13-buster.0"]
 - name: go-runner-arm64
   dmap:
+    "sha256:10a20532ce05305d1cddc5da5042ff1a7f7d5020052c65fdf201e3d56ea39502": ["v2.3.1-go1.18-bullseye.0"]
     "sha256:40a2a2df2ac9cf6d8c8cc64aa80a3536fb62c5f783c61a184b279fa15ed01673": ["v2.3.1-go1.16.13-buster.0"]
     "sha256:73369df8858451f414cf636259ea7a1b496c81bae6cd58da08c7d410aec8febe": ["v2.3.1-go1.17.6-bullseye.0"]
 - name: go-runner-ppc64le
   dmap:
     "sha256:0cb0e1ab2039fddb87134583ca600d5a13c8fcda7857e1d8e9f95397f8f360b7": ["v2.3.1-go1.17.6-bullseye.0"]
+    "sha256:509fa35bdadb871a32669178f9d0d9e783de54625802302f07a77b0aa270c9b0": ["v2.3.1-go1.18-bullseye.0"]
     "sha256:e47951dca3685c567dfc7fcc49346a121d6d34b4673b5cd84f69d0aa09b95e8c": ["v2.3.1-go1.16.13-buster.0"]
 - name: go-runner-s390x
   dmap:
+    "sha256:45c12fee4e0993f2ea3cba193255de3192210a06b9ae14f0f42f9c83e0af7bfa": ["v2.3.1-go1.18-bullseye.0"]
     "sha256:b8e0416f567f12e1490bbf0409f17a9b315b37189af3c09c2a39870c49e67a30": ["v2.3.1-go1.17.6-bullseye.0"]
     "sha256:d92d67b1be04237ccf2c59418b32137362064b7243dcb53e9537ac2ef149988c": ["v2.3.1-go1.16.13-buster.0"]
 - name: kube-cross
@@ -437,6 +443,7 @@
     "sha256:179048a72d69578061c0b450edbe3e85adc1e9dab6db9798842991e9bc52367e": ["v1.16.1-2"]
     "sha256:1f50ae7f54114e376295f4d2dbeda71e2a5fb72178df9963f6a721be70b27a3d": ["v1.15.0-rc.2-1"]
     "sha256:214f743c90219ae64ff6189369061ec58680d0a7ac8b8ad4d225f1788cf5dbca": ["v1.22.0-go1.16.9-buster.0"]
+    "sha256:224c6219f0f9d85d1e0763accf3837591437b7d2fdb9bec3ff88a1b5dd0704a9": ["v1.24.0-go1.18-bullseye.0"]
     "sha256:244160b9c5154c5c8afe4f01ba81d041bdfabe5b7d2e6577209c31824781c2ab": ["v1.24.0-go1.17.4-bullseye.0"]
     "sha256:263b43aea814e2afee1ed8ede1175ff58b934d5d2c60fefdab63031e69f8d4ee": ["v1.17.0-rc.1-1"]
     "sha256:268c0a52333449a4e0a10847149ea3d3d1c31ed32552c4269a7a7edc1cd0e908": ["v1.14.6-1"]
@@ -532,18 +539,24 @@
     "sha256:562b6a0c860210449402e814fbeba4c9c70d4d294e1368fcfa23e2ed31740ea8": ["v1.23.0-go1.17.6-bullseye.0"]
     "sha256:8349bdeec9c4ff9614d0fd555ec5c287854b0f1ee28910ac60592a3b2b65e1de": ["v1.22.0-go1.16.13-buster.0"]
     "sha256:947bb9b6626136e642f6cd808be2e3d52955740fc536dd8dd68e386463c02c68": ["v1.24.0-go1.17.6-bullseye.0"]
+    "sha256:fcf4fc604a8729ff50cb2514ce31598564751125b543d358fd6ca360d18f0f6a": ["v1.24.0-go1.18-bullseye.0"]
 - name: kube-cross-arm64
   dmap:
     "sha256:04be8a7a2816ad71921f8260042c8e241f1a01620db6dba8a1200d5bec1ed7a9": ["v1.22.0-go1.16.13-buster.0"]
+    "sha256:20afe4668a513d99ddb484e3b8c42b342297deedd2993204695a5b697cd2d1a7": ["v1.24.0-go1.18-bullseye.0"]
     "sha256:2690b37115520a85eb37307b5713535b805a0a16be7fb205822a73d8026de15f": ["v1.23.0-go1.17.6-bullseye.0"]
     "sha256:5fa3d546a8cff366d54e2dac983eaeae15e83bc3820689256943effb0569f601": ["v1.24.0-go1.17.6-bullseye.0"]
     "sha256:b71598a7a1dc4f09eaf95f9313a704ee9413a4dc8ba05bf9ea6e101be417997e": ["v1.21.0-go1.16.13-buster.0"]
 - name: kube-cross-ppc64le
   dmap:
     "sha256:312abc1adf1d21d97d3c37d5c927eea293416ba5b3ee361c7fd36833f4a5aee0": ["v1.24.0-go1.17.6-bullseye.0"]
+    "sha256:8b9cb78dc18d980a4a53d8093e3d42c4531f27cc8040bc8d19752c1cb83f7614": ["v1.24.0-go1.18-bullseye.0"]
     "sha256:ae427633903fcc8300b20e5b4947e57dfe1d4760bceecc21411c743f3d6f6cc9": ["v1.22.0-go1.16.13-buster.0"]
     "sha256:d4fb38803d102d9a47ac133bc0b07c0082dde9ff9546657ff0cae7c19d3425a9": ["v1.21.0-go1.16.13-buster.0"]
     "sha256:e76dfce5ffa5c37691d561f59042f0e2d5c42c7b9638fc7e5ffe00cfaf74dfa9": ["v1.23.0-go1.17.6-bullseye.0"]
+- name: kube-cross-s390x
+  dmap:
+    "sha256:588ed75956dd59ebae108d384e4b4ac60a1028c812f0425e2dcf0092ac6b8788": ["v1.24.0-go1.18-bullseye.0"]
 - name: setcap
   dmap:
     "sha256:0067ffc0e0b202d09fd2c8f647dbc6c28044b27b3c14c89d4ca5053c406acde8": ["buster-v2.0.4"]
