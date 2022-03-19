@@ -32,4 +32,8 @@ RUN pip install -r /requirements.txt && \
 # RUN pip install ipython ipdb
 # pair with the following at breakpoints in python code:
 # import ipdb ; ipdb.set_trace()
+
+ADD https://github.com/mikefarah/yq/releases/download/v4.20.2/yq_linux_amd64 /usr/local/bin/yq
+RUN chmod +x /usr/local/bin/yq
+
 CMD /bin/sh

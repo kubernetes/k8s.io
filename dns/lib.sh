@@ -63,3 +63,27 @@ precook_octodns_config() {
         < "${input_config_path}" \
         > "${output_config_path}"
 }
+
+precook_octodns_config_validate() {
+    if (( $# != 3)); then
+        echo -n "precook_octodns_config_validate(input_config_path," >&2
+        echo -n " zone_configs_path, output_config_path): function" >&2
+        echo    " expects 3 arguments" >&2
+        exit 1
+    fi
+
+    local input_config_path="${1}"
+    local zone_configs_path="${2}"
+    local output_config_path="${3}"
+
+    YQ_PATH=$(which yq)
+    if [ ! "${YQ_PATH}" ]; then
+        echo "'yq' not found, please install 'yq' first, you can install from https://github.com/mikefarah/yq"
+        echo ""
+        exit 1
+    fi
+
+    ${YQ_PATH} eval 'del(.providers.gcp)' "${input_config_path}" | \
+    sed "s|directory:.*$|directory: ${zone_configs_path}|" \
+        > "${output_config_path}"
+}
