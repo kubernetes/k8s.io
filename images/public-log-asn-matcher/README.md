@@ -66,12 +66,13 @@ gcloud auth application-default login
 Run in Docker
 
 ```bash
-TMP_DIR_ETL=$(mktemp -d)
-echo "${TMP_DIR_ETL}"
-sudo chmod 0777 "${TMP_DIR_ETL}"
+TMP_DIR_ETL=$HOME/.tmp/public-log-asn-matcher-$RANDOM
+sudo mkdir -p $TMP_DIR_ETL
+sudo chmod 0777 ${TMP_DIR_ETL}
 sudo chown -R 999 ~/.config/gcloud # allow for postgres user
 docker run \
     -d \
+    -e DEBUG_MODE=true \
     -e TZ=$TZ \
     -e POSTGRES_PASSWORD="postgres" \
     -e GCP_PROJECT=k8s-infra-ii-sandbox \
