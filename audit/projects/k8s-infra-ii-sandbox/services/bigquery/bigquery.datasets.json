@@ -286,5 +286,32 @@
       "projectId": "k8s-infra-ii-sandbox"
     },
     "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20220317",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20220317",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20220318",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20220318",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-ii-sandbox:etl_script_generated_set_20220321",
+    "datasetReference": {
+      "datasetId": "etl_script_generated_set_20220321",
+      "projectId": "k8s-infra-ii-sandbox"
+    },
+    "location": "US"
   }
 ]
