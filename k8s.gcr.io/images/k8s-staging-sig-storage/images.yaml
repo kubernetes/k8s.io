@@ -90,6 +90,7 @@
 - name: hello-populator
   dmap:
     "sha256:99e9f2ac87a85ab9fa283da62464edb643c970a06da7e70c6c5bb6adc001738f": [ "v0.1.0" ]
+    "sha256:8b6d7a4a2e0c5824de6f66f794e3764c02055d0af65ff3c35b043e21690263a2": [ "v1.0.0" ]
 - name: hostpathplugin
   dmap:
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
@@ -168,3 +169,4 @@
 - name: volume-data-source-validator
   dmap:
     "sha256:a4482344a693258e2cb31b32fa35d1f3cc414b546c2ebf7154fb87f15322f5db": [ "v0.1.0" ]
+    "sha256:d35884236461ad14397194cb4abc13aefb28a54bf3f6698d673c2ba353e78e18": [ "v1.0.0" ]
