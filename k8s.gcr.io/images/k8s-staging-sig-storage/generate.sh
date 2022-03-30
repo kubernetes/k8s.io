@@ -37,7 +37,7 @@ readonly images=(
     mock-driver
     nfs-provisioner
     nfs-subdir-external-provisioner
-    # TODO: nfsplugin?
+    nfsplugin
     snapshot-controller
     snapshot-validation-webhook
     volume-data-source-validator
