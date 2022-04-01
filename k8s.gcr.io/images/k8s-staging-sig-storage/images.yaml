@@ -134,6 +134,10 @@
     "sha256:3ce0fdba4d8eca7d9d3444f2f1ec2f2c5a48e936525177e0caaaa9c0fcc9c345": [ "v4.0.0" ]
     "sha256:2b9dc857b15124d38c8a7da56d85cf8d456b5f95036d8256ecaabb162aab64c7": [ "v4.0.1" ]
     "sha256:63d5e04551ec8b5aae83b6f35938ca5ddc50a88d85492d9731810c31591fa4c9": [ "v4.0.2" ]
+- name: nfsplugin
+  dmap:
+    "sha256:ec71d1797d1af17563bc5d19dfcf0229ca0f631d4a245f64ac358f7499946ee4": [ "v3.0.0" ]
+    "sha256:aa38be2f98a9d9c7093b450915bbb2a2b4f53a74f1b6de76cef3aa5c80df45f5": [ "v3.1.0" ]
 - name: snapshot-controller
   dmap:
     "sha256:2bde7d7f9d73c4309d67e9d7f94df52110295ef06c9488ca76c40da32b65f05e": [ "v2.1.1" ]
