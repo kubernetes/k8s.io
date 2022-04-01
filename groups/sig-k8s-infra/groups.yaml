@@ -203,6 +203,7 @@ groups:
       - cblecker@gmail.com
       - davanum@gmail.com
       - nikhitaraghunath@gmail.com
+      - wojtekt@google.com
 
   - email-id: k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
     name: k8s-infra-rbac-kubernetes-external-secrets
