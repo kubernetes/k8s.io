@@ -1,1 +1,3 @@
-# No images yet
+- name: bom
+  dmap:
+    "sha256:631ff0f765b4b1ff0b3c81d73698f557f2291aebc822eedf4d265a9ec611af42": ["v0.3.0-rc1"]
