@@ -39,6 +39,10 @@ function usage() {
 mapfile -t PROJECTS < <(k8s_infra_projects "releng")
 readonly PROJECTS
 
+# List of projects that produce canary builds. These projects 
+# allow the image promoter to write images in their staging buckets
+CANARY_PROJECTS=("k8s-staging-bom")
+
 if [ $# = 0 ]; then
     # default to all release projects
     set -- "${PROJECTS[@]}"
@@ -141,6 +145,24 @@ function ensure_signer_service_accounts() {
         "roles/iam.serviceAccountTokenCreator"
 }
 
+# Some projects do canary promotions to their own staging 
+# buckets. To be able to promote these canary images, the 
+# image promoter account needs access to write to the same
+# registry it is reading the images from.
+#
+function ensure_promoter_canary_access {
+    color 3 "Ensuring promoter access to canary projects"
+
+    promoter_image_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
+    
+    for canary_project in "${CANARY_PROJECTS[@]}"; do
+        ensure_project_role_binding \
+            "${canary_project}" \
+            "serviceAccount:${promoter_image_account}" \
+            "roles/storage.legacyBucketWriter"
+    done
+}
+
 for PROJECT; do
 
     if ! k8s_infra_project "releng" "${PROJECT}" >/dev/null; then
@@ -175,3 +197,5 @@ for PROJECT; do
 
     color 6 "Done"
 done
+
+ensure_promoter_canary_access
