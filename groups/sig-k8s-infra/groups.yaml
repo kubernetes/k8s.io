@@ -314,6 +314,16 @@ groups:
       - ihor@cncf.io
       - sig-k8s-infra-leads@kubernetes.io
 
+  - email-id: k8s-infra-cloudflare-admins@kubernetes.io
+    name: k8s-infra-cloudflare-admins
+    description: |-
+      ACL for Cloudflare admins
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
   - email-id: k8s-infra-cluster-admins@kubernetes.io
     name: k8s-infra-cluster-admins
     description: |-
