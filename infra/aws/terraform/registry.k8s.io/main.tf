@@ -19,13 +19,13 @@ variable "aws_regions" {
   ]
 }
 
-resource "aws_s3_bucket" "registy-k8s-io-bucket" {
+resource "aws_s3_bucket" "registry-k8s-io-bucket" {
   for_each = toset(var.aws_regions)
-  bucket   = "registy-k8s-io-bucket-${each.key}"
+  bucket   = "registry-k8s-io-bucket-${each.key}"
 }
 
-resource "aws_s3_bucket_ownership_controls" "registy-k8s-io-bucket" {
-  for_each = aws_s3_bucket.registy-k8s-io-bucket
+resource "aws_s3_bucket_ownership_controls" "registry-k8s-io-bucket" {
+  for_each = aws_s3_bucket.registry-k8s-io-bucket
   bucket   = each.key
 
   rule {
@@ -33,21 +33,21 @@ resource "aws_s3_bucket_ownership_controls" "registy-k8s-io-bucket" {
   }
 }
 
-resource "aws_iam_user" "registy-k8s-io-bucket" {
-  for_each = aws_s3_bucket.registy-k8s-io-bucket
-  name     = "registy-k8s-io-bucket-${each.key}"
+resource "aws_iam_user" "registry-k8s-io-bucket" {
+  for_each = aws_s3_bucket.registry-k8s-io-bucket
+  name     = "registry-k8s-io-bucket-${each.key}"
   path     = "/"
 }
 
-resource "aws_iam_access_key" "registy-k8s-io-bucket" {
-  for_each = aws_s3_bucket.registy-k8s-io-bucket
-  user     = aws_iam_user.registy-k8s-io-bucket[each.key].name
+resource "aws_iam_access_key" "registry-k8s-io-bucket" {
+  for_each = aws_s3_bucket.registry-k8s-io-bucket
+  user     = aws_iam_user.registry-k8s-io-bucket[each.key].name
 }
 
-resource "aws_iam_user_policy" "registy-k8s-io-bucket-rw-bucket" {
-  for_each = aws_s3_bucket.registy-k8s-io-bucket
-  name     = "registy-k8s-io-bucket-${each.key}"
-  user     = aws_iam_user.registy-k8s-io-bucket[each.key].name
+resource "aws_iam_user_policy" "registry-k8s-io-bucket-rw-bucket" {
+  for_each = aws_s3_bucket.registry-k8s-io-bucket
+  name     = "registry-k8s-io-bucket-${each.key}"
+  user     = aws_iam_user.registry-k8s-io-bucket[each.key].name
 
   policy = jsonencode({
     "Version" : "2012-10-17",
@@ -60,7 +60,7 @@ resource "aws_iam_user_policy" "registy-k8s-io-bucket-rw-bucket" {
           "s3:DeleteObject"
         ],
         "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.registy-k8s-io-bucket[each.key].arn}"
+        "Resource" : "${aws_s3_bucket.registry-k8s-io-bucket[each.key].arn}"
       },
       {
         "Action" : [
@@ -70,7 +70,7 @@ resource "aws_iam_user_policy" "registy-k8s-io-bucket-rw-bucket" {
           "s3:DeleteObject"
         ],
         "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.registy-k8s-io-bucket[each.key].arn}/*"
+        "Resource" : "${aws_s3_bucket.registry-k8s-io-bucket[each.key].arn}/*"
       }
     ]
   })
