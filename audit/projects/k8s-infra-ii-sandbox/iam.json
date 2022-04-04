@@ -8,6 +8,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-631771264409@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/artifactregistry.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquery.dataEditor"
