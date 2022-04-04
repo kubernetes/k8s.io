@@ -91,6 +91,7 @@
   dmap:
     "sha256:99e9f2ac87a85ab9fa283da62464edb643c970a06da7e70c6c5bb6adc001738f": [ "v0.1.0" ]
     "sha256:8b6d7a4a2e0c5824de6f66f794e3764c02055d0af65ff3c35b043e21690263a2": [ "v1.0.0" ]
+    "sha256:42d275bc2569b00a11c8058e5b77c50cdee39bf75d80c912b80813f03e7fd7d1": [ "v1.0.1" ]
 - name: hostpathplugin
   dmap:
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
