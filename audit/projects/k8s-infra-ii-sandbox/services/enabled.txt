@@ -1,4 +1,5 @@
 NAME                                 TITLE
+artifactregistry.googleapis.com      Artifact Registry API
 bigquery.googleapis.com              BigQuery API
 bigqueryconnection.googleapis.com    BigQuery Connection API
 bigquerydatatransfer.googleapis.com  BigQuery Data Transfer API
