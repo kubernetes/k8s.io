@@ -11,22 +11,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module "us-west-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.us-west-1
-  }
-
-  region = "us-west-1"
-}
-
-module "us-west-2" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.us-west-2
-  }
-
-  region = "us-west-2"
+variable "region" {
+  type = string
 }
