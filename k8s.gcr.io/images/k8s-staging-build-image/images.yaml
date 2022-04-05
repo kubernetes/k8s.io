@@ -208,6 +208,7 @@
     "sha256:1ae6d76dea462973759ff1c4e02263867da1f85db9aa10462a030ca421cbf0e9": ["v12.1.0"]
     "sha256:24725ea119dd0af0d60b17cbd640178f90c39c32a527fb4c6ac848b7ee2bdc85": ["buster-v1.6.3"]
     "sha256:27aaf19acbe10bed00c190b549f29cb774d444486c91b341122ef3d661f913c9": ["buster-v1.6.2"]
+    "sha256:3317c4374ea30d88b64b27740b0edfaa600e410901e727b5bab4c4deac1df6f5": ["bullseye-v1.3.0"]
     "sha256:4c9410a4ee555dcb0e8b7bd6fc77c65ac400f7c5bd4555df8187630efaea6ea4": ["buster-v1.3.0"]
     "sha256:764834ebb5ca7a866c27988266286612c083718d05552dbbd538cae24ba1dd91": ["buster-v1.8.0"]
     "sha256:87f97cf2b62eb107871ee810f204ccde41affb70b29883aa898e93df85dea0f0": ["buster-v1.4.0"]
@@ -228,6 +229,7 @@
     "sha256:fff1fd5ab38fefde8c9eee5470ed6ea737f30e5ab86e1c0c0d429fa6add28a84": ["buster-v1.1.2","v12.1.2"]
 - name: debian-iptables-amd64
   dmap:
+    "sha256:1469293d819855cbb9ee75cc4c61eb3a0370c9b752f3b14f3a182a3837a98f52": ["bullseye-v1.3.0"]
     "sha256:1cbd7bcc117df12d6a9047887eb670c04af153bc9cd13e8e114c7127ebf05b02": ["buster-v1.6.3"]
     "sha256:1cf0c7f555fb2e3fbbba1d3ab3f191eac4c9b4001107ff69fbd0ab8910762b5a": ["buster-v1.7.0"]
     "sha256:200be0a96b436ac42d50f04f291d51384001c0fb68f65836db6d18a0f6eca866": ["buster-v1.6.5"]
@@ -274,6 +276,7 @@
     "sha256:d781699ce8a4b78515021398cee965a0943ceb9f0ad39d6505aae63387191778": ["buster-v1.6.3"]
     "sha256:e976a5c88105db9a3ed462c2899aabbc5758f4f76e24098981010a226d344439": ["v12.1.1"]
     "sha256:eaafcab058b4764a311ec0e9f492d3a80b1f8df3e40bbbed30e968eadea578dc": ["buster-v1.6.7"]
+    "sha256:f1719ff4153ba218357f3c46c493d584291b5ae95f801354f44c03613d448070": ["bullseye-v1.3.0"]
 - name: debian-iptables-arm64
   dmap:
     "ha256:3ddfc2cef8dd9f8776d145809c187fb8051bd355b5d3ebca5447d33304869e17": ["buster-v1.6.2"]
@@ -297,6 +300,7 @@
     "sha256:b4fa11965f34a9f668c424b401c0af22e88f600d22c899699bdb0bd1e6953ad6": ["buster-v1.5.0"]
     "sha256:bda68e755beef32b1a0c1f68fab9d36b0fa08f21066c550a4548c6e38bfd6e56": ["stretch-v1.2.0"]
     "sha256:da185c8da51f7d0a456ced525d30d89aae2f05590455092bd4a1aa70be28c256": ["buster-v1.6.7"]
+    "sha256:ed3574a787de8cdfb77741fec01fa4bcb999c971d9d7cff9d966be48ca8fc632": ["bullseye-v1.3.0"]
     "sha256:fd876477deed19e6cf6b2c6c79ed6eb11d8afca529fc5f8ac089b4968021dc3f": ["buster-v1.7.0"]
 - name: debian-iptables-ppc64le
   dmap:
@@ -321,9 +325,11 @@
     "sha256:ec66b582040fe65f2c835c18592e1d43d865f3565b37f113b8db2220bf89f435": ["buster-v1.8.0"]
     "sha256:ee844689f485df0f32775781a7eaabc32cd44f055cb597d6f8c2db935eac01c9": ["buster-v1.6.6"]
     "sha256:f26c878f26cb1e61fa7a988a2e8c14b05685d105d9d2d4ac4a02241df4e4e3bf": ["buster-v1.6.1"]
+    "sha256:f4147154429b13f5cf888cc2d2c50cb1091d46ff3c9f49c2977367e45d91aa86": ["bullseye-v1.3.0"]
     "sha256:f5289a6494328b7ccb695e3add65b33ca380b77fcfc9715e474f0efe26e1c506": ["v12.1.0"]
 - name: debian-iptables-s390x
   dmap:
+    "sha256:0df385deae7b7e4d8e0696968f126b2861d8e69e66f3209e22ec17164dca9333": ["bullseye-v1.3.0"]
     "sha256:1b91a2788750552913377bf1bc99a095544dfb523d80a55674003c974c8e0905": ["v12.1.0"]
     "sha256:1cff7805d2eda46bab962acd48a3cd8d536507149333d7c4706e57aad61b58b8": ["buster-v1.6.5"]
     "sha256:20b149323ea0b46cad0fb517734d9f7d5416cab38705b0050aa9c9cc2156d650": ["buster-v1.6.3"]
