@@ -561,6 +561,7 @@
 - name: setcap
   dmap:
     "sha256:0067ffc0e0b202d09fd2c8f647dbc6c28044b27b3c14c89d4ca5053c406acde8": ["buster-v2.0.4"]
+    "sha256:27578a22b06194cc4eeb617e405a0331f3957d5102b994f799d061a92d74e58d": ["bullseye-v1.2.0"]
     "sha256:4bbe17197ef10f1b627932999bb7b70e6107ee9d2752e4007440e5024b34d173": ["bullseye-v1.0.0"]
     "sha256:5bf29307176af8ec962853ce5314cb1d5d80d2389200b828bdbd0b14b5f4ff4e": ["bullseye-v1.1.0"]
     "sha256:b0fede27e44020bd9305c29540d7f8d9c1df8edc21adc3278946bbd994418946": ["buster-v1.4.0"]
@@ -575,8 +576,10 @@
     "sha256:6734620909c13c7eec87f4288b98faf3c7666ddf6f3abfe560ac5cac8077d13d": ["buster-v2.0.2"]
     "sha256:9ecf95d4576ff31a9a2070fee118c6e771831a828e607d69660f5797d2f6d07b": ["buster-v2.0.1"]
     "sha256:aa008595453d8ae2d8dd39e5bb6359a0c4cf9d10b932c2def144ef3cda93e562": ["buster-v2.0.3"]
+    "sha256:ae91828f48cd05c9e4d79d1fdf6c2c6bae5d442b189eb0ed25c2c2bbc46e3205": ["bullseye-v1.2.0"]
 - name: setcap-arm
   dmap:
+    "sha256:1dc33f47a3a4a4bf9f15e16a3c072dcde88dd607eb4eee26bd10681c40f2ac96": ["bullseye-v1.2.0"]
     "sha256:7c736a06b540599ec3f6db867c20c611bc20a7d8ac0597163d715ea200717a16": ["buster-v2.0.1"]
     "sha256:8fe1b7647c589228f3416fc7e1ada5f67232983c3f2023dcf43803f82a2b6094": ["buster-v2.0.4"]
     "sha256:a21d4b883688026c8d3e04924260d525c9d3f6fbccd37531c6936bd40ed3d923": ["buster-v2.0.3"]
@@ -586,11 +589,13 @@
   dmap:
     "sha256:7cbbf1d4bf0747eb160ac37c86efe0e1cea8402c85a8e5a43a29206fc5c6d836": ["buster-v2.0.4"]
     "sha256:8f4cec3e7148b5ba7e7a278cd5245ac867638cff5d2bfa1faf6994dd2e4d5cb5": ["buster-v2.0.3"]
+    "sha256:bc86712a15eee53547db256305378bec9d8c1b71a9b49062abcbc981ffda65ef": ["bullseye-v1.2.0"]
     "sha256:d37a70f8e2198b8dd86511b009d963a66df34228f0485861023e7be52faa6a3f": ["buster-v1.4.0"]
     "sha256:db3f6b90f4849a756ebc669add28c6dcfc1c0f39cc5497cd01a2b82cdb8d25ef": ["buster-v2.0.1"]
     "sha256:e15dc057ac267f1d8e335ce9da5bea2bed3b9ac1396a19c592b1f3ed44797076": ["buster-v2.0.2"]
 - name: setcap-ppc64le
   dmap:
+    "sha256:11fcbf5dc6255e60852198e1cc95156537eeb617dfcfd8dab4439e1e27803a07": ["bullseye-v1.2.0"]
     "sha256:1705c1c040e383e49a50573511b0a6fabc749e527178370a055b1064dba20639": ["buster-v2.0.3"]
     "sha256:198bfd5378949af1e1c2ed8f5da945a091bb40866e70f60b3896cd0cfccdaea0": ["buster-v1.4.0"]
     "sha256:253e86a3f18cb27f0a7628ed9a99c5e5713770c7464663ffaf42fc159b94706e": ["buster-v2.0.1"]
@@ -603,3 +608,4 @@
     "sha256:a4775180f6a24b1d708d1e0aa884eeb7f30f4b2ac9dcb987664ccbf33823ee31": ["buster-v1.4.0"]
     "sha256:c2750c0450e08edc3bca00b481f89053819a60f822bdf2ba67062e06de0842bd": ["buster-v2.0.4"]
     "sha256:c7d5b55c98c1299d34525f1f8d84d053966c2d99938d57ec7a65b4b5a9ef62d1": ["buster-v2.0.2"]
+    "sha256:dbd49aaf7e86cc349c2e3cdded9ba4a0bea1562cab0559ea726e7f071de93c8f": ["bullseye-v1.2.0"]
