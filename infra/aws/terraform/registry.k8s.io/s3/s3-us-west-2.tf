@@ -11,24 +11,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "aws_s3_bucket" "registry-k8s-io-us-west-1" {
-  bucket = "registry-k8s-io-us-west-1"
+resource "aws_s3_bucket" "registry-k8s-io-us-west-2" {
+  bucket = "registry-k8s-io-us-west-2"
 
-  provider = aws.us-west-1
+  provider = aws.us-west-2
 }
 
-resource "aws_s3_bucket_ownership_controls" "registry-k8s-io-us-west-1" {
-  bucket = aws_s3_bucket.registry-k8s-io-us-west-1.bucket
+resource "aws_s3_bucket_ownership_controls" "registry-k8s-io-us-west-2" {
+  bucket = aws_s3_bucket.registry-k8s-io-us-west-2.bucket
 
   rule {
     object_ownership = "BucketOwnerEnforced"
   }
 
-  provider = aws.us-west-1
+  provider = aws.us-west-2
 }
 
-resource "aws_iam_user_policy" "registry-k8s-io-rw-us-west-1" {
-  name = "registry-k8s-io-us-west-1-access"
+resource "aws_iam_user_policy" "registry-k8s-io-rw-us-west-2" {
+  name = "registry-k8s-io-us-west-2-access"
   user = aws_iam_user.registry-k8s-io-access.name
 
   policy = jsonencode({
@@ -42,7 +42,7 @@ resource "aws_iam_user_policy" "registry-k8s-io-rw-us-west-1" {
           "s3:DeleteObject"
         ],
         "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.registry-k8s-io-us-west-1.arn}"
+        "Resource" : "${aws_s3_bucket.registry-k8s-io-us-west-2.arn}"
       },
       {
         "Action" : [
@@ -52,10 +52,10 @@ resource "aws_iam_user_policy" "registry-k8s-io-rw-us-west-1" {
           "s3:DeleteObject"
         ],
         "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.registry-k8s-io-us-west-1.arn}/*"
+        "Resource" : "${aws_s3_bucket.registry-k8s-io-us-west-2.arn}/*"
       }
     ]
   })
 
-  provider = aws.us-west-1
+  provider = aws.us-west-2
 }

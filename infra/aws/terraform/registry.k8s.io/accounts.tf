@@ -11,20 +11,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
-    }
-  }
+resource "aws_iam_user" "registry-k8s-io-access" {
+  name = "registry-k8s-io-access"
+  path = "/"
 }
 
-provider "aws" {
-  region = "us-west-1"
-}
-
-provider "aws" {
-  alias  = "us-west-2"
-  region = "us-west-2"
+resource "aws_iam_access_key" "registry-k8s-io" {
+  user = aws_iam_user.registry-k8s-io-access.name
 }
