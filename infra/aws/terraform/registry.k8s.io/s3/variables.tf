@@ -14,3 +14,7 @@ limitations under the License.
 variable "region" {
   type = string
 }
+
+variable "mgmnt-bucket" {
+  type = string
+}

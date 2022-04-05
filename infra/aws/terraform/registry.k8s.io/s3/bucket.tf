@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 resource "aws_s3_bucket" "registry-k8s-io" {
-  bucket = "caleb-is-testing-registry-k8s-io-${var.region}"
+  bucket = "registry-k8s-io-${var.region}"
 }
 
 resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
@@ -53,3 +53,21 @@ resource "aws_iam_user_policy" "registry-k8s-io-rw" {
     ]
   })
 }
+
+# resource "aws_s3_bucket_inventory" "sync-from-mgmnt" {
+#   bucket = var.mgmnt-bucket
+#   name   = "${aws_s3_bucket.registry-k8s-io.arn}-from-mgmnt"
+
+#   included_object_versions = "All"
+
+#   schedule {
+#     frequency = "Daily"
+#   }
+
+#   destination {
+#     bucket {
+#       format     = "ORC"
+#       bucket_arn = aws_s3_bucket.registry-k8s-io.arn
+#     }
+#   }
+# }
