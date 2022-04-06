@@ -30,6 +30,7 @@ groups:
       - jberkus@redhat.com
       - chris@chrisshort.net
       - samudralavamshi@gmail.com
+      - puja@giantswarm.io
 
   - email-id: dev@kubernetes.io
     name: dev
