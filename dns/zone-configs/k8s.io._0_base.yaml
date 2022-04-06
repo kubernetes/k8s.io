@@ -194,6 +194,10 @@ issues:
   type: CNAME
   value: redirect.k8s.io.
 # sig-k8s-infra
+# Domain verification for Cloudflare (managed by @dims and @ameukam)
+cloudflare-verify:
+  type: TXT
+  value: 897924847-535279960
 # Hosted on GKE cluster aaa
 k8s-infra-prow:
   - type: A
