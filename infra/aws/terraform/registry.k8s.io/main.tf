@@ -24,8 +24,8 @@ module "us-west-1" {
     aws = aws.us-west-1
   }
 
-  region        = "us-west-1"
-  mgmnt-bucket  = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
+  region = "us-west-1"
+  # mgmnt-bucket  = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
   prefix        = var.prefix
   iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
@@ -37,20 +37,20 @@ module "us-west-2" {
     aws = aws.us-west-2
   }
 
-  region        = "us-west-2"
-  mgmnt-bucket  = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
+  region = "us-west-2"
+  # mgmnt-bucket  = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
   prefix        = var.prefix
   iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
-resource "aws_s3_bucket" "registry-k8s-io-mgmnt" {
-  bucket = "${var.prefix}registry-k8s-io-mgmnt"
-}
+# resource "aws_s3_bucket" "registry-k8s-io-mgmnt" {
+#   bucket = "${var.prefix}registry-k8s-io-mgmnt"
+# }
 
-resource "aws_s3_bucket_ownership_controls" "registry-k8s-io-mgmnt" {
-  bucket = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
+# resource "aws_s3_bucket_ownership_controls" "registry-k8s-io-mgmnt" {
+#   bucket = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
 
-  rule {
-    object_ownership = "BucketOwnerEnforced"
-  }
-}
+#   rule {
+#     object_ownership = "BucketOwnerEnforced"
+#   }
+# }

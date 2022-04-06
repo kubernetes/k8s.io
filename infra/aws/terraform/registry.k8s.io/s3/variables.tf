@@ -15,9 +15,9 @@ variable "region" {
   type = string
 }
 
-variable "mgmnt-bucket" {
-  type = string
-}
+# variable "mgmnt-bucket" {
+#   type = string
+# }
 
 variable "prefix" {
   type    = string
