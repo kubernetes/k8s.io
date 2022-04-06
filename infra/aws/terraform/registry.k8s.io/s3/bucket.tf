@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 resource "aws_s3_bucket" "registry-k8s-io" {
-  bucket = "registry-k8s-io-${var.region}"
+  bucket = "${var.prefix}registry-k8s-io-${var.region}"
 }
 
 resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
@@ -24,8 +24,8 @@ resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
 }
 
 resource "aws_iam_user_policy" "registry-k8s-io-rw" {
-  name = "registry-k8s-io-access"
-  user = aws_iam_user.registry-k8s-io-access.name
+  name = "${var.prefix}registry-k8s-io-access"
+  user = var.iam_user_name
 
   policy = jsonencode({
     "Version" : "2012-10-17",

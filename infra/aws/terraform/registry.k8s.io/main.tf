@@ -11,6 +11,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// end with -
+variable "prefix" {
+  type    = string
+  default = ""
+}
+
 module "us-west-1" {
   source = "./s3"
 
@@ -18,8 +24,10 @@ module "us-west-1" {
     aws = aws.us-west-1
   }
 
-  region       = "us-west-1"
-  mgmnt-bucket = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
+  region        = "us-west-1"
+  mgmnt-bucket  = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "us-west-2" {
@@ -29,12 +37,14 @@ module "us-west-2" {
     aws = aws.us-west-2
   }
 
-  region       = "us-west-2"
-  mgmnt-bucket = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
+  region        = "us-west-2"
+  mgmnt-bucket  = aws_s3_bucket.registry-k8s-io-mgmnt.bucket
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 resource "aws_s3_bucket" "registry-k8s-io-mgmnt" {
-  bucket = "registry-k8s-io-mgmnt"
+  bucket = "${var.prefix}registry-k8s-io-mgmnt"
 }
 
 resource "aws_s3_bucket_ownership_controls" "registry-k8s-io-mgmnt" {

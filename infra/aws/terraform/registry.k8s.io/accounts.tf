@@ -12,7 +12,7 @@ limitations under the License.
 */
 
 resource "aws_iam_user" "registry-k8s-io-access" {
-  name = "registry-k8s-io-access"
+  name = "${var.prefix}registry-k8s-io-access"
   path = "/"
 }
 

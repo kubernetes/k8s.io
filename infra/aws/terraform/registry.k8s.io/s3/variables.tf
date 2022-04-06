@@ -18,3 +18,12 @@ variable "region" {
 variable "mgmnt-bucket" {
   type = string
 }
+
+variable "prefix" {
+  type    = string
+  default = ""
+}
+
+variable "iam_user_name" {
+  type = string
+}
