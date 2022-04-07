@@ -48,6 +48,23 @@ groups:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
 
+  - email-id: sig-cluster-lifecycle-leads@kubernetes.io
+    name: sig-cluster-lifecycle-leads
+    description: |-
+      Private group for SIG Cluster Lifecycle leads
+    settings:
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - fabrizio.pandini@gmail.com
+      - justinsb@google.com
+      - neolit123@gmail.com
+      - prignanov@vmware.com
+
   #
   # k8s-staging write access for SIG-owned subprojects
   #
