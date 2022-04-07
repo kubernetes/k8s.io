@@ -15,16 +15,50 @@ resource "aws_s3_bucket" "registry-k8s-io" {
   bucket = "${var.prefix}registry-k8s-io-${var.region}"
 }
 
-resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
+resource "aws_s3_bucket_acl" "registry-k8s-io" {
   bucket = aws_s3_bucket.registry-k8s-io.bucket
+  acl    = "public-read"
+}
 
-  rule {
-    object_ownership = "BucketOwnerEnforced"
+# resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
+#   bucket = aws_s3_bucket.registry-k8s-io.bucket
+
+#   rule {
+#     object_ownership = "BucketOwnerEnforced"
+#   }
+# }
+
+data "aws_iam_policy_document" "public" {
+  statement {
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket",
+    ]
+
+    # principals {
+    #   type        = "AWS"
+    #   identifiers = ["*"]
+    # }
+
+    resources = [
+      aws_s3_bucket.registry-k8s-io.arn,
+      "${aws_s3_bucket.registry-k8s-io.arn}/*"
+    ]
   }
 }
 
+data "template_file" "public" {
+  template = element(data.aws_iam_policy_document.public.*.json, 0)
+}
+
+resource "aws_iam_policy" "registry-k8s-io-public-read" {
+  name = "${var.prefix}${aws_s3_bucket.registry-k8s-io.bucket}-public-access"
+
+  policy = element(data.template_file.public.*.rendered, 0)
+}
+
 resource "aws_iam_user_policy" "registry-k8s-io-rw" {
-  name = "${var.prefix}registry-k8s-io-access"
+  name = "${var.prefix}${aws_s3_bucket.registry-k8s-io.bucket}-access"
   user = var.iam_user_name
 
   policy = jsonencode({
@@ -38,7 +72,7 @@ resource "aws_iam_user_policy" "registry-k8s-io-rw" {
           "s3:DeleteObject"
         ],
         "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}"
+        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/"
       },
       {
         "Action" : [
