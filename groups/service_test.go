@@ -179,7 +179,7 @@ func TestAddOrUpdateGroupMembers(t *testing.T) {
 
 		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
-			t.Errorf("error creating client %w", err)
+			t.Errorf("error creating client %v", err)
 		}
 		err = adminSvc.AddOrUpdateGroupMembers(c.g, c.role, c.members)
 		if err != nil {
@@ -188,7 +188,7 @@ func TestAddOrUpdateGroupMembers(t *testing.T) {
 
 		result, err := fakeClient.ListMembers(c.g.EmailId)
 		if err != nil {
-			t.Errorf("error while listing members for groupKey %s and case %s: %w", c.g.EmailId, c.desc, err)
+			t.Errorf("error while listing members for groupKey %s and case %s: %v", c.g.EmailId, c.desc, err)
 		}
 		if !checkForMemberListEquality(result, c.expectedMembers) {
 			t.Errorf("unexpected list of members for %s, expected: %#v, got: %#v",
@@ -250,7 +250,7 @@ func TestCreateOrUpdateGroupIfNescessary(t *testing.T) {
 
 		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
-			t.Errorf("error creating client %w", err)
+			t.Errorf("error creating client %v", err)
 		}
 
 		err = adminSvc.CreateOrUpdateGroupIfNescessary(c.g)
@@ -260,7 +260,7 @@ func TestCreateOrUpdateGroupIfNescessary(t *testing.T) {
 
 		result, err := fakeClient.ListGroups()
 		if err != nil {
-			t.Errorf("error while listing groups for case %s: %w", c.desc, err)
+			t.Errorf("error while listing groups for case %s: %v", c.desc, err)
 		}
 
 		if !checkForGroupListEquality(result.Groups, c.expectedGroups) {
@@ -302,7 +302,7 @@ func TestDeleteGroupsIfNecessary(t *testing.T) {
 
 		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
-			t.Errorf("error creating client %w", err)
+			t.Errorf("error creating client %v", err)
 		}
 		groupsConfig.Groups = c.desiredState
 
@@ -313,7 +313,7 @@ func TestDeleteGroupsIfNecessary(t *testing.T) {
 
 		result, err := fakeClient.ListGroups()
 		if err != nil {
-			t.Errorf("error while listing groups for case %s: %w", c.desc, err)
+			t.Errorf("error while listing groups for case %s: %v", c.desc, err)
 		}
 
 		if !checkForAdminGroupGoogleGroupEquality(result.Groups, c.desiredState) {
@@ -370,7 +370,7 @@ func TestRemoveOwnerOrManagersFromGroup(t *testing.T) {
 
 		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
-			t.Errorf("error creating client %w", err)
+			t.Errorf("error creating client %v", err)
 		}
 
 		err = adminSvc.RemoveOwnerOrManagersFromGroup(c.g, c.desiredState)
@@ -380,7 +380,7 @@ func TestRemoveOwnerOrManagersFromGroup(t *testing.T) {
 
 		result, err := fakeClient.ListMembers(c.g.EmailId)
 		if err != nil {
-			t.Errorf("error while listing members for groupKey %s and case %s: %w", c.g.EmailId, c.desc, err)
+			t.Errorf("error while listing members for groupKey %s and case %s: %v", c.g.EmailId, c.desc, err)
 		}
 
 		if !checkForMemberListEquality(result, c.expectedMembers) {
@@ -436,7 +436,7 @@ func TestRemoveMembersFromGroup(t *testing.T) {
 
 		adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
-			t.Errorf("error creating client %w", err)
+			t.Errorf("error creating client %v", err)
 		}
 
 		err = adminSvc.RemoveMembersFromGroup(c.g, c.desiredState)
@@ -446,7 +446,7 @@ func TestRemoveMembersFromGroup(t *testing.T) {
 
 		result, err := fakeClient.ListMembers(c.g.EmailId)
 		if err != nil {
-			t.Errorf("error while listing members for groupKey %s and case %s: %w", c.g.EmailId, c.desc, err)
+			t.Errorf("error while listing members for groupKey %s and case %s: %v", c.g.EmailId, c.desc, err)
 		}
 
 		if !checkForMemberListEquality(result, c.expectedMembers) {
@@ -552,7 +552,7 @@ func TestUpdateGroupSettings(t *testing.T) {
 
 		groupSvc, err := NewGroupServiceWithClientAndErrFunc(fakeClient, errFunc)
 		if err != nil {
-			t.Errorf("error creating client %w", err)
+			t.Errorf("error creating client %v", err)
 		}
 
 		err = groupSvc.UpdateGroupSettings(c.g)
@@ -562,7 +562,7 @@ func TestUpdateGroupSettings(t *testing.T) {
 
 		result, err := fakeClient.Get(c.g.EmailId)
 		if err != nil {
-			t.Errorf("error while getting groupsettings of group with groupKey %s: %w", c.g.EmailId, err)
+			t.Errorf("error while getting groupsettings of group with groupKey %s: %v", c.g.EmailId, err)
 		}
 
 		if !reflect.DeepEqual(result, c.expectedSettings) {

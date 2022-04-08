@@ -703,7 +703,7 @@ func TestReconcileGroups(t *testing.T) {
 			expectedState = c.desiredState
 		}
 		if err = s.isReconciled(expectedState); err != nil {
-			t.Errorf("reconciliation unsuccessful for case %s: %w", c.desc, err)
+			t.Errorf("reconciliation unsuccessful for case %s: %v", c.desc, err)
 		}
 	}
 }
