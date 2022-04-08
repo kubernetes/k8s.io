@@ -198,6 +198,10 @@ issues:
 cloudflare-verify:
   type: TXT
   value: 897924847-535279960
+# DNS entry used for Cloudflare PoC. See https://github.com/kubernetes/k8s.io/issues/3596
+k8s-infra-cdn-cf-sandbox-ame:
+  type: CNAME
+  value: k8s-infra-cdn-cf-sandbox-ame.k8s.io.cdn.cloudflare.net.
 # Hosted on GKE cluster aaa
 k8s-infra-prow:
   - type: A
