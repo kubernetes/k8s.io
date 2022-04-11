@@ -23,41 +23,29 @@ resource "aws_s3_bucket_acl" "registry-k8s-io" {
   acl    = "public-read"
 }
 
-# resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
-#   bucket = aws_s3_bucket.registry-k8s-io.bucket
+resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
+  bucket = aws_s3_bucket.registry-k8s-io.bucket
 
-#   rule {
-#     object_ownership = "BucketOwnerEnforced"
-#   }
-# }
-
-data "aws_iam_policy_document" "public" {
-  statement {
-    actions = [
-      "s3:GetObject",
-      "s3:ListBucket",
-    ]
-
-    # principals {
-    #   type        = "AWS"
-    #   identifiers = ["*"]
-    # }
-
-    resources = [
-      aws_s3_bucket.registry-k8s-io.arn,
-      "${aws_s3_bucket.registry-k8s-io.arn}/*"
-    ]
+  rule {
+    object_ownership = "BucketOwnerEnforced"
   }
 }
 
-data "template_file" "public" {
-  template = element(data.aws_iam_policy_document.public.*.json, 0)
-}
+resource "aws_s3_bucket_policy" "registry-k8s-io-public-read" {
+  bucket = aws_s3_bucket.registry-k8s-io.bucket
 
-resource "aws_iam_policy" "registry-k8s-io-public-read" {
-  name = "${var.prefix}${aws_s3_bucket.registry-k8s-io.bucket}-public-access"
-
-  policy = element(data.template_file.public.*.rendered, 0)
+  policy = jsonencode({
+    "Id" : "Public-Access",
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : "s3:GetObject",
+        "Effect" : "Allow",
+        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/*",
+        "Principal" : "*"
+      }
+    ]
+  })
 }
 
 resource "aws_iam_user_policy" "registry-k8s-io-rw" {
