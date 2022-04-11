@@ -34,7 +34,7 @@ spec:
       serviceAccountName: tide
       containers:
       - name: tide
-        image: gcr.io/k8s-prow/tide:v20220407-a0aa471926
+        image: gcr.io/k8s-prow/tide:v20220411-ad5dbdfe6e
         args:
         - --config-path=/etc/config/config.yaml
         - --dry-run=false
