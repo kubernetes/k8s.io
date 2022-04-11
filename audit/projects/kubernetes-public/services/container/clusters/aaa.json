@@ -37,8 +37,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.21.6-gke.1503",
-  "currentNodeVersion": "1.20.10-gke.1600 *",
+  "currentMasterVersion": "1.21.9-gke.1002",
+  "currentNodeVersion": "1.21.6-gke.1503 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -191,7 +191,7 @@
       "upgradeSettings": {
         "maxSurge": 1
       },
-      "version": "1.20.10-gke.1600"
+      "version": "1.21.6-gke.1503"
     },
     {
       "autoscaling": {
@@ -246,7 +246,7 @@
       "upgradeSettings": {
         "maxSurge": 1
       },
-      "version": "1.20.10-gke.1600"
+      "version": "1.21.6-gke.1503"
     }
   ],
   "releaseChannel": {
