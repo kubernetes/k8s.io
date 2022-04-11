@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// prefix prefixes every resource so that the resources
+// can be created without using the same names. Useful
+// for testing and staging
 variable "prefix" {
   type        = string
   default     = ""
