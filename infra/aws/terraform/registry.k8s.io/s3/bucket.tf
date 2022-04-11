@@ -78,21 +78,3 @@ resource "aws_iam_user_policy" "registry-k8s-io-rw" {
     ]
   })
 }
-
-# resource "aws_s3_bucket_inventory" "sync-from-mgmnt" {
-#   bucket = var.mgmnt-bucket
-#   name   = "${aws_s3_bucket.registry-k8s-io.arn}-from-mgmnt"
-
-#   included_object_versions = "All"
-
-#   schedule {
-#     frequency = "Daily"
-#   }
-
-#   destination {
-#     bucket {
-#       format     = "ORC"
-#       bucket_arn = aws_s3_bucket.registry-k8s-io.arn
-#     }
-#   }
-# }
