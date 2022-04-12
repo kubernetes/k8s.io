@@ -1,1 +1,3 @@
-# TODO: add images
+- name: kueue
+  dmap:
+    "sha256:430bb4d26a05e4de56e3e10d8bc5ebb8de28f77d575d99a4cacc8edadcf7567b": ["v0.1.0", "v0.1"]
