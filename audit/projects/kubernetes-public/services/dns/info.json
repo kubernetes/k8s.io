@@ -21,33 +21,33 @@
     "totalRrdataSizePerChange": 100000,
     "whitelistedKeySpecs": [
       {
+        "algorithm": "rsasha256",
+        "keyLength": 2048,
+        "kind": "dns#dnsKeySpec"
+      },
+      {
+        "algorithm": "rsasha256",
+        "keyLength": 1024,
+        "keyType": "zoneSigning",
+        "kind": "dns#dnsKeySpec"
+      },
+      {
+        "algorithm": "rsasha512",
+        "keyLength": 2048,
+        "kind": "dns#dnsKeySpec"
+      },
+      {
+        "algorithm": "rsasha512",
+        "keyLength": 1024,
+        "keyType": "zoneSigning",
+        "kind": "dns#dnsKeySpec"
+      },
+      {
         "algorithm": "ecdsap256sha256",
         "kind": "dns#dnsKeySpec"
       },
       {
         "algorithm": "ecdsap384sha384",
-        "kind": "dns#dnsKeySpec"
-      },
-      {
-        "algorithm": "rsasha256",
-        "keyLength": 2048,
-        "kind": "dns#dnsKeySpec"
-      },
-      {
-        "algorithm": "rsasha256",
-        "keyLength": 1024,
-        "keyType": "zoneSigning",
-        "kind": "dns#dnsKeySpec"
-      },
-      {
-        "algorithm": "rsasha512",
-        "keyLength": 2048,
-        "kind": "dns#dnsKeySpec"
-      },
-      {
-        "algorithm": "rsasha512",
-        "keyLength": 1024,
-        "keyType": "zoneSigning",
         "kind": "dns#dnsKeySpec"
       }
     ]
