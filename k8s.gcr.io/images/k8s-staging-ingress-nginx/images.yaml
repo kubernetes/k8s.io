@@ -73,6 +73,7 @@
     "sha256:ee001455750923c131bff706f20cd95078a78c9538ab0c15f754fd9af7fe9656": ["v20220318-controller-v1.1.2-21-ge51c15160"]
     "sha256:99f079bc9e418b450e0902ea78e86c70315dad3a420871d29e812c55cc0beea1": ["9960efe1e9a9c6e944967b52e1a8a7b7b659874d"]
     "sha256:ec8a104df307f5c6d68157b7ac8e5e1e2c2f0ea07ddf25bb1c6c43c67e351180": ["5402d35663917ccbbf77ff48a22b8c6f77097f48"]
+    "sha256:a71ac64dd8cfd68341ba47dbdc4d8c2cb91325fce669875193ea0319118201b5": ["81c2afd975a6f9a9847184472286044d7d5296f6"]
 # image to run tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/test-runner
 - name: e2e-test-runner
@@ -144,6 +145,7 @@
 - name: nginx-errors
   dmap:
     "sha256:5530c7fc1fa75b49e068d6b7b4f8f1c13a5834c155ba7abd5943b9057c3b925b": ["0.48.1"]
+    "sha256:06cd2dbe317505e940d0521cc69d237752800ef0b191cb4265eb0d3d2c1080e7": ["0.49.0"]
 
 # opentelemetry
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/opentelemetry
@@ -151,3 +153,4 @@
   dmap:
     "sha256:5b4c3bebaef3efb13a51f4d12c6644805f38d626d92e9f2d28d0483ce6e5054a": ["v20220307-controller-v1.1.2-2-ga43346d97"]
     "sha256:e3f635474b5da24ccd0ea6b078fb190dae68b8b4a44b52bea19ec2561f0102ec": ["v20220331-controller-v1.1.2-36-g7517b7ecf"]
+    "sha256:ce61e2cf0b347dffebb2dcbf57c33891d2217c1bad9c0959c878e5be671ef941": ["v20220415-controller-v1.2.0-beta.0-2-g81c2afd97"]
