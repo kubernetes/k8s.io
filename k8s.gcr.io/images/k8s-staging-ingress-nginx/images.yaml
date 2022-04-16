@@ -39,12 +39,14 @@
     "sha256:28b11ce69e57843de44e3db6413e98d09de0f6688e33d4bd384002a44f78405c": ["v1.1.2"]
     "sha256:31f47c1e202b39fadecf822a9b76370bd4baed199a005b3e7d4d1455f4fd3fe2": ["v1.1.3"]
     "sha256:92115f5062568ebbcd450cd2cf9bffdef8df9fc61e7d5868ba8a7c9d773e0961": ["v1.2.0-beta.0"]
+    "sha256:7059739637c30865f74cae403fffa55c2cb6d9779cd15654480dd0e4f850d536": ["v1.2.0-beta.1"]
 
 # ingress-nginx controller chroot image
 # https://github.com/kubernetes/ingress-nginx/tree/main/rootfs
 - name: controller-chroot
   dmap:
     "sha256:0082f0f547b147a30ad85a5d6d2ceb3edbf0848b2008ed754365b6678bdea9a5": ["v1.2.0-beta.0"]
+    "sha256:5344d8367295be743703f19eea137e7a3253efc2d0ec8aee131b85d3258f9780": ["v1.2.0-beta.1"]
 
 # custom base NGINX image
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/nginx
@@ -98,6 +100,7 @@
     "sha256:5b434c08e582b58b96867152682c1e754ee609c82390abf3074992d4ec53ed25": ["v20210916-gd9f96bbbb"]
     "sha256:273f7d9b1b2297cd96b4d51600e45d932186a1cc79d00d179dfb43654112fe8f": ["v20220110-gfd820db46"]
     "sha256:baa326f5c726d65be828852943a259c1f0572883590b9081b7e8fa982d64d96e": ["v20220331-controller-v1.1.2-31-gf1cb2b73c"]
+    "sha256:4468eb8cc9aa0ec3971ddf3811efe363e6f8e9082e95b567a5c27d91f89fb1e3": ["v20220416-controller-v1.2.0-beta.0-4-g2e1a4790b"]
 
 # custom cfssl image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/cfssl
