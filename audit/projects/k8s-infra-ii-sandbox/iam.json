@@ -80,6 +80,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-631771264409@dlp-api.iam.gserviceaccount.com"
+      ],
+      "role": "roles/dlp.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:631771264409-compute@developer.gserviceaccount.com",
         "serviceAccount:631771264409@cloudservices.gserviceaccount.com"
       ],
