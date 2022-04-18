@@ -1,0 +1,226 @@
+#+TITLE: Artifactserver
+
+#+begin_quote
+An implementation using an existing Go project from k8s infra
+#+end_quote
+
+* Bringing the implementation up
+#+begin_src tmate :window registry-a-prepare
+git-clone-structured https://github.com/kubernetes/k8s.io
+cd ~/kubernetes/k8s.io
+git remote add ii https://github.com/ii/k8s.io
+git fetch ii
+git checkout update-artifactserver-with-conditions-and-config-file
+#+end_src
+
+Prepare a container image
+#+begin_src dockerfile :tangle ~/kubernetes/k8s.io/artifactserver/Dockerfile
+FROM golang:1.17.0-alpine3.14 AS build
+WORKDIR /app
+COPY cmd /app/cmd
+COPY go.* *.go /app/
+ARG GOARCH=""
+RUN CGO_ENABLED=0 GOOS=linux GOARCH="$GOARCH" go build \
+  -a \
+  -installsuffix cgo \
+  -ldflags "-extldflags '-static' -s -w" \
+  -o bin/artifactserver \
+  cmd/artifactserver/main.go
+
+FROM alpine:3.14 AS extras
+RUN apk add --no-cache tzdata ca-certificates
+RUN adduser -D user
+
+FROM scratch AS final
+WORKDIR /app
+ENV PATH=/app \
+  APP_DIST_FOLDER=./dist
+COPY --from=build /app/bin/artifactserver /app/bin/artifactserver
+COPY --from=extras /etc/passwd /etc/passwd
+COPY --from=extras /etc/group /etc/group
+COPY --from=extras /usr/share/zoneinfo /usr/share/zoneinfo
+COPY --from=extras /etc/ssl /etc/ssl
+EXPOSE 8080
+USER user
+ENTRYPOINT ["/app/bin/artifactserver"]
+#+end_src
+
+Build the container image
+#+begin_src tmate :window registry-a :dir ~/kubernetes/k8s.io/artifactserver/
+docker build -t artifactserver .
+#+end_src
+
+Push the image out to the other nodes
+#+begin_src tmate :window registry-a
+for NODE_IP in $(kubectl get nodes -l node-role.kubernetes.io/control-plane!='' -o=jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'); do
+    printf "${NODE_IP} :: "
+    docker save artifactserver:latest | ssh "root@${NODE_IP}" docker load
+done
+#+end_src
+
+Configure ArtifactServer
+#+begin_src yaml :tangle artifactserver-config.yaml
+backends:
+  kops:
+    host: kubeupv2.s3.amazonaws.com
+    conditions:
+      paths:
+        - /kops/
+  local-distribution:
+    host: registry-1.docker.io
+    conditions:
+      headers:
+        X-Real-Ip:
+          - ${HUMACS_POD_IP}
+  k8s.gcr.io:
+    host: k8s.gcr.io
+#+end_src
+
+Configure the Kubernetes deployment
+#+begin_src yaml :tangle ./artifactserver.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k8s-reg-artifactserver
+  labels:
+    cert-manager-tls: sync
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: k8s-reg-artifactserver
+  name: k8s-reg-artifactserver
+  labels:
+    app: k8s-reg-artifactserver
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: k8s-reg-artifactserver
+  template:
+    metadata:
+      labels:
+        app: k8s-reg-artifactserver
+      annotations:
+        lastcfg: |
+          ${ARTIFACTSERVER_LAST_CFG}
+    spec:
+      terminationGracePeriodSeconds: 30
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - artifactserver
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: k8s-reg-artifactserver
+          image: artifactserver:latest
+          imagePullPolicy: Never
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          args:
+            - --config=/etc/artifactserver/config.yaml
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: config
+              mountPath: /etc/artifactserver
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 256Mi
+            limits:
+              memory: 256Mi
+      volumes:
+        - name: config
+          configMap:
+            name: k8s-reg-artifactserver
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: k8s-reg-artifactserver
+  name: k8s-reg-artifactserver
+  labels:
+    app: k8s-reg-artifactserver
+spec:
+  selector:
+    app: k8s-reg-artifactserver
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-reg-artifactserver
+  namespace: k8s-reg-artifactserver
+spec:
+  rules:
+  - host: k8s-reg-artifactserver.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    http:
+      paths:
+      - backend:
+          service:
+            name: k8s-reg-artifactserver
+            port:
+              number: 8080
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k8s-reg-artifactserver.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    secretName: letsencrypt-prod
+#+end_src
+
+Apply the manifests
+#+begin_src shell
+export ARTIFACTSERVER_LAST_CFG=$(cat artifactserver-config.yaml | sha256sum)
+envsubst < ./artifactserver.yaml | kubectl apply -f -
+export HUMACS_POD_IP=$(kubectl get pods $(hostname) -o=jsonpath='{.status.podIP}')
+kubectl -n k8s-reg-artifactserver create configmap k8s-reg-artifactserver \
+    --from-file=config\.yaml=<(envsubst < artifactserver-config.yaml) \
+    -o yaml --dry-run=client \
+      | kubectl apply -f -
+#+end_src
+
+#+RESULTS:
+#+begin_example
+namespace/k8s-reg-artifactserver created
+deployment.apps/k8s-reg-artifactserver created
+service/k8s-reg-artifactserver created
+ingress.networking.k8s.io/k8s-reg-artifactserver created
+configmap/k8s-reg-artifactserver created
+#+end_example
+
+* Making a request
+Test it from the Service
+#+begin_src shell
+curl -v http://k8s-reg-artifactserver.artifactserver:8080 2>&1
+#+end_src
+
+* Notes
+The code in my branch appears to have some bug, where the location host is not consistent: almost every request is responded with a different location. (1)
+For now, the benchmark should be on it's request time and it's liveness.
+
+* Pros
+- using existing codebase
+- codebase isn't too big
+- config file
+- unified artifacts and registries
+
+* Cons
+- current bug (1 in notes)
+- force supporting of current usage of ArtifactServer as well as registry.k8s.io

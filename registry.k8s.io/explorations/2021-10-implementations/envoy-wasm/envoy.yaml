@@ -1,0 +1,89 @@
+
+
+# Configuring Envoy
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    lastcfg: |
+      ${ENVOY_LAST_CFG}
+  labels:
+    app: k8s-reg-envoy-wasm
+  name: k8s-reg-envoy-wasm
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: k8s-reg-envoy-wasm
+  template:
+    metadata:
+      annotations:
+        lastcfg: |
+          ${ENVOY_LAST_CFG}
+      labels:
+        app: k8s-reg-envoy-wasm
+    spec:
+      containers:
+      - name: envoy
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        env:
+          - name: MATCH_IP
+            value: ${MATCH_IP}
+        args:
+        - -c
+        - /etc/envoy/envoy.yaml
+        image: envoy-with-registry-k8s-io-wasm:latest
+        imagePullPolicy: Never
+        volumeMounts:
+          - name: config
+            mountPath: /etc/envoy/envoy.yaml
+            subPath: envoy.yaml
+        ports:
+          - name: http
+            containerPort: 10000
+      volumes:
+      - name: config
+        configMap:
+          name: config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: k8s-reg-envoy-wasm
+  name: k8s-reg-envoy-wasm
+spec:
+  ports:
+  - name: wasm
+    port: 10000
+    protocol: TCP
+    targetPort: 10000
+  selector:
+    app: k8s-reg-envoy-wasm
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-reg-envoy-wasm
+spec:
+  rules:
+  - host: k8s-reg-envoy-wasm.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    http:
+      paths:
+      - backend:
+          service:
+            name: k8s-reg-envoy-wasm
+            port:
+              number: 10000
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k8s-reg-envoy-wasm.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    secretName: letsencrypt-prod

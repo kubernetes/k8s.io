@@ -1,0 +1,109 @@
+
+
+# Configure the Kubernetes deployment
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k8s-reg-artifactserver
+  labels:
+    cert-manager-tls: sync
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: k8s-reg-artifactserver
+  name: k8s-reg-artifactserver
+  labels:
+    app: k8s-reg-artifactserver
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: k8s-reg-artifactserver
+  template:
+    metadata:
+      labels:
+        app: k8s-reg-artifactserver
+      annotations:
+        lastcfg: |
+          ${ARTIFACTSERVER_LAST_CFG}
+    spec:
+      terminationGracePeriodSeconds: 30
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - artifactserver
+                topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: k8s-reg-artifactserver
+          image: artifactserver:latest
+          imagePullPolicy: Never
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          args:
+            - --config=/etc/artifactserver/config.yaml
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: config
+              mountPath: /etc/artifactserver
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 256Mi
+            limits:
+              memory: 256Mi
+      volumes:
+        - name: config
+          configMap:
+            name: k8s-reg-artifactserver
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: k8s-reg-artifactserver
+  name: k8s-reg-artifactserver
+  labels:
+    app: k8s-reg-artifactserver
+spec:
+  selector:
+    app: k8s-reg-artifactserver
+  type: NodePort
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-reg-artifactserver
+  namespace: k8s-reg-artifactserver
+spec:
+  rules:
+  - host: k8s-reg-artifactserver.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    http:
+      paths:
+      - backend:
+          service:
+            name: k8s-reg-artifactserver
+            port:
+              number: 8080
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k8s-reg-artifactserver.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    secretName: letsencrypt-prod

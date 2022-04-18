@@ -1,0 +1,37 @@
+#+TITLE: registry.k8s.io
+
+#+begin_quote
+Implementation proposals for registry.k8s.io
+#+end_quote
+
+* Background + Purpose
+Kubernetes release artifacts are currently stored in [[https://k8s.gcr.io][k8s.gcr.io]] and [[https://storage.googleapis.com/kubernetes-release][gs://kubernetes-release]].
+Distributions in the ecosystem tend to pull from these artifacts and images.
+
+ii set up [[https://github.com/kubernetes/k8s.io/tree/main/images/public-log-asn-matcher][a pipeline]] for processing the [PII] logs from the Kubernetes public /GCS/ buckets, which shows the traffic overtime.
+Pulling in this data and ASN data from multiple providers, the fields of source IP can be matched all the way to company name.
+With this limited data access, members of [[https://github.com/kubernetes/community/tree/master/sig-k8s-infra][sig-k8s-infra]] are then able to engage in informed conversation with various credit providers.
+
+To ensure funding is well-spent and high spenders share the load of traffic, distributing traffic to other credit providers is required.
+One solution would be to redirect to different container registries based on source IP.
+This repo contains several, rough implementations of this solution.
+
+Once a solution is chosen, it will be fully-fedged out to support redirection based on a mapping of source IP => IP block => ASN => credit provider.
+If a request is made from /registry.k8s.io/ inside a credit provider's infrastructure and the credit provider is included in a redirection policy,
+the request will be redirected with a status code of 302 to the given credit provider.
+
+The process described will save on artifact distribution costs and help the Kubernetes project spend better.
+
+* Proposals
+- [[./artifactserver/README.org][ArtifactServer]] :: existing k8s infra project, adapted for configuring and 302 redirecting; supports unified artifacts and registry redirection
+- [[./envoy-lua-go/README.org][Envoy-Lua-Go]] :: earlier implementation using Envoy's HTTP Lua filter and an /external/ backend;
+- [[./envoy-wasm/README.org][Envoy-WASM]] :: implementation using Envoy's HTTP WASM filter + WASM filter written in Go
+- [[./nginx-njs/README.org][NGINX-njs]] :: implementation using NGINX's njs (JavaScript embedded functions)
+
+* Notes
+The solutions docs detailed above are set out to deploy easily on a [[https://pair.sharing.io][Pair instance]].
+To deploy elsewhere, the images will need to be pushed to a registry and the manifests modified to point to another host.
+
+* Links
+- Umbrella issue :: https://github.com/kubernetes/k8s.io/issues/1834#issuecomment-943836836
+- Original repo :: https://github.com/ii/registry.k8s.io

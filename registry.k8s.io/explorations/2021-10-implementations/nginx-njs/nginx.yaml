@@ -1,0 +1,88 @@
+
+
+# Configure the nginx deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    lastcfg: |
+      ${NGINX_LAST_CFG}
+  labels:
+    app: k8s-reg-nginx-njs
+  name: k8s-reg-nginx-njs
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: k8s-reg-nginx-njs
+  template:
+    metadata:
+      annotations:
+        lastcfg: |
+          ${NGINX_LAST_CFG}
+      labels:
+        app: k8s-reg-nginx-njs
+    spec:
+      containers:
+      - name: nginx
+        image: nginxinc/nginx-unprivileged:1.20
+        securityContext:
+          runAsUser: 101
+          runAsGroup: 101
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+        env:
+          - name: MATCH_IP
+            value: "${MATCH_IP}"
+        volumeMounts:
+          - name: config
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
+          - name: config
+            mountPath: /etc/nginx/njs/http.js
+            subPath: http.js
+        ports:
+          - name: http
+            containerPort: 8012
+      volumes:
+      - name: config
+        configMap:
+          name: config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: k8s-reg-nginx-njs
+  name: k8s-reg-nginx-njs
+spec:
+  ports:
+  - name: k8s-reg-nginx-njs
+    port: 8012
+    protocol: TCP
+    targetPort: 8012
+  selector:
+    app: k8s-reg-nginx-njs
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-reg-nginx-njs
+spec:
+  rules:
+  - host: k8s-reg-nginx-njs.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    http:
+      paths:
+      - backend:
+          service:
+            name: k8s-reg-nginx-njs
+            port:
+              number: 8012
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k8s-reg-nginx-njs.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    secretName: letsencrypt-prod

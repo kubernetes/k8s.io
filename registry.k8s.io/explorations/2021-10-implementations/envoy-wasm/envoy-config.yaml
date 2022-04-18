@@ -1,0 +1,66 @@
+# Configure
+
+static_resources:
+  listeners:
+  - name: main
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 10000
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          codec_type: auto
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: web_service
+          http_filters:
+          - name: envoy.filters.http.wasm
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+              config:
+                name: "wasm"
+                root_id: "wasm_root"
+                configuration:
+                  "@type": "type.googleapis.com/google.protobuf.StringValue"
+                  value: |
+                    {
+                    }
+                vm_config:
+                  runtime: "envoy.wasm.runtime.v8"
+                  vm_id: "wasm_vm"
+                  code:
+                    local:
+                      filename: "/etc/envoy/wasm.wasm"
+                  environment_variables:
+                    host_env_keys:
+                      - MATCH_IP
+                    key_values:
+                      AUTHORITY: web_service
+          - name: envoy.filters.http.router
+            typed_config: {}
+  clusters:
+  - name: web_service
+    connect_timeout: 0.25s
+    type: LOGICAL_DNS
+    lb_policy: round_robin
+    load_assignment:
+      cluster_name: web_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: k8s.io
+                port_value: 443

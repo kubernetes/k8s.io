@@ -1,0 +1,50 @@
+
+
+# Configure the Kubernetes deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: reg-host-authority
+  name: reg-host-authority
+  namespace: k8s-reg-envoy-lua-go
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: reg-host-authority
+  template:
+    metadata:
+      labels:
+        app: reg-host-authority
+    spec:
+      containers:
+      - name: envoy
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        image: reg-host-authority:latest
+        imagePullPolicy: Never
+        ports:
+          - name: http
+            containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: reg-host-authority
+  name: reg-host-authority
+  namespace: k8s-reg-envoy-lua-go
+spec:
+  type: ClusterIP
+  ports:
+  - name: registry-k8s-io
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: reg-host-authority
