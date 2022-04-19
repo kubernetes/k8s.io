@@ -4,25 +4,25 @@ In the k8s-infra community, data for billing on projects in the org is collated 
 
 # Goal
 
--   Pull in CostExplorer usage & cost data for the last year
--   Prepare it
-    -   Transform the data if need be
-    -   Marshal as CSV
--   Upload the CSV data into a bucket
--   Load data into BigQuery
+- Pull in CostExplorer usage & cost data for the last year
+- Prepare it
+  - Transform the data if need be
+  - Marshal as CSV
+- Upload the CSV data into a bucket
+- Load data into BigQuery
 
 # Operation
 
--   Get a CostExplorer client through AWS SDK
--   Fetch the usage data
--   Prepare usage data
-    -   Marshal usage data as CSV
--   Open a connection to a bucket (GCS Bucket)
--   Upload prepared data to the bucket
-    -   using name based on date+time
--   Create a BigQuery dataset based on date+time
--   Load all CSV files from bucket into the BigQuery dataset
--   Promote the dataset tables to new dataset called latest by copying them
+- Get a CostExplorer client through AWS SDK
+- Fetch the usage data
+- Prepare usage data
+  - Marshal usage data as CSV
+- Open a connection to a bucket (GCS Bucket)
+- Upload prepared data to the bucket
+  - using name based on date+time
+- Create a BigQuery dataset based on date+time
+- Load all CSV files from bucket into the BigQuery dataset
+- Promote the dataset tables to new dataset called latest by copying them
 
 # Preparation
 
@@ -44,7 +44,7 @@ Account log in
 gcloud auth login
 ```
 
-Set the project to *k8s-infra-ii-sandbox*
+Set the project to _k8s-infra-ii-sandbox_
 
 ```bash
 gcloud config set project k8s-infra-ii-sandbox
@@ -64,16 +64,17 @@ go run .
 
 ## Flags
 
-| Name                             | Default                                                                                                            | Description                                            |
-| aws-region                       | us-east-1                                                                                                          | region for AWS SDK to use                              |
-| output-file                      | /tmp/local-cncf-aws-infra-billing-and-usage-data.csv                                                               | a temporary location to write the usage data           |
-| output-file-enable               | false                                                                                                              | whether the usage data is also written to disk locally |
-| bucket-uri                       | gs://cncf-aws-infra-cost-and-billing-data                                                                          | the bucket to upload the csv blobs to                  |
-| days-back                        | 365                                                                                                                | the amount of days back to report from today           |
-| promote-to-latest                | true                                                                                                               | promotes the cost and usage data to a latest CSV file  |
-| bigquery-enabled                 | true                                                                                                               | load data into BigQuery from the specified bucket      |
-| bigquery-data-location           | australia-southeast1                                                                                               | the BigQuery dataset location                          |
-| bigquery-managing-dataset-prefix | cncf<sub>aws</sub><sub>infra</sub><sub>cost</sub><sub>and</sub><sub>billing</sub><sub>data</sub><sub>dataset</sub> | a prefix to use for managing BigQuery datasets         |
+| Name                             | Default                                              | Description                                            |
+| -------------------------------- | ---------------------------------------------------- | ------------------------------------------------------ |
+| aws-region                       | us-east-1                                            | region for AWS SDK to use                              |
+| output-file                      | /tmp/local-cncf-aws-infra-billing-and-usage-data.csv | a temporary location to write the usage data           |
+| output-file-enable               | false                                                | whether the usage data is also written to disk locally |
+| bucket-uri                       | gs://cncf-aws-infra-cost-and-billing-data            | the bucket to upload the csv blobs to                  |
+| days-back                        | 365                                                  | the amount of days back to report from today           |
+| promote-to-latest                | true                                                 | promotes the cost and usage data to a latest CSV file  |
+| bigquery-enabled                 | true                                                 | load data into BigQuery from the specified bucket      |
+| bigquery-data-location           | australia-southeast1                                 | the BigQuery dataset location                          |
+| bigquery-managing-dataset-prefix | cncf aws infra cost and billing data dataset         | a prefix to use for managing BigQuery datasets         |
 
 # Testing
 
@@ -95,5 +96,5 @@ ko publish --local .
 
 # Links
 
--   <https://pkg.go.dev/cloud.google.com/go/bigquery>
--   <https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/costexplorer@v1.15.0#GetCostAndUsageOutput>
+- <https://pkg.go.dev/cloud.google.com/go/bigquery>
+- <https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/costexplorer@v1.15.0#GetCostAndUsageOutput>
