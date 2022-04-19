@@ -1,0 +1,93 @@
+
+
+# #+RESULTS:
+# #+begin_example
+# 145.40.67.1 :: Loaded image: reg-host-authority:latest
+# #+end_example
+# Prepare the envoy configuration
+
+static_resources:
+  listeners:
+  - name: main
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 10000
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          codec_type: auto
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: web_service
+          http_filters:
+          - name: envoy.filters.http.lua
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua
+              inline_code: |
+                function envoy_on_request(request_handle)
+                  remoteAddr = request_handle:headers():get("x-real-ip")
+                  local headers, body = request_handle:httpCall(
+                  "reg-host-authority",
+                  {
+                    [":method"] = "GET",
+                    [":path"] = "/",
+                    [":authority"] = "humacs",
+                    ["X-Real-Ip"] = remoteAddr
+                  },
+                  remoteAddr,
+                  5000
+                  )
+                  reg = body
+                  if request_handle:headers():get(":method") == "GET" then
+                    request_handle:respond(
+                      {
+                        [":status"] = "302",
+                        ["location"] = "https://"..reg..request_handle:headers():get(":path"),
+                        ["Content-Type"] = "text/html; charset=utf-8",
+                        [":authority"] = "web_service"
+                      },
+                      '<a href="'.."https://"..reg..request_handle:headers():get(":path")..'">'.."302".."</a>.\n")
+                  end
+                end
+          - name: envoy.filters.http.router
+            typed_config: {}
+
+  clusters:
+  - name: web_service
+    connect_timeout: 0.25s
+    type: LOGICAL_DNS
+    lb_policy: round_robin
+    load_assignment:
+      cluster_name: web_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: k8s.io
+                port_value: 443
+  - name: reg-host-authority
+    connect_timeout: 0.25s
+    type: LOGICAL_DNS
+    lb_policy: round_robin
+    load_assignment:
+      cluster_name: humacs
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: reg-host-authority
+                port_value: 8080

@@ -1,0 +1,189 @@
+#+TITLE: nginx njs host rewriting
+
+#+begin_quote
+A nginx implementation for registry.k8s.io
+#+end_quote
+
+* Bringing the implementation up
+Configure nginx to use the njs script
+#+begin_src conf :tangle ./nginx.conf
+load_module modules/ngx_http_js_module.so;
+env UPSTREAM_HOST;
+events {}
+pid /tmp/nginx.pid;
+http {
+    client_body_temp_path /tmp/client_temp;
+    proxy_temp_path       /tmp/proxy_temp_path;
+    fastcgi_temp_path     /tmp/fastcgi_temp;
+    uwsgi_temp_path       /tmp/uwsgi_temp;
+    scgi_temp_path        /tmp/scgi_temp;
+
+    js_include /etc/nginx/njs/http.js;
+    js_set $upstream_host fetch_upstream_host;
+    server {
+      listen 8012;
+      rewrite ^/(.*)$ https://$upstream_host/$1;
+    }
+}
+#+end_src
+
+The http response method
+#+begin_src javascript :tangle ./http.js
+function fetch_upstream_host(r) {
+  var reg = "k8s.gcr.io"
+  if (r.remoteAddress === process.env.MATCH_IP) {
+    reg = "registry-1.docker.io"
+  }
+  r.error(`registry: ${reg}`)
+  return reg
+}
+#+end_src
+
+** Testing in Docker
+#+begin_src tmate :window nginx
+docker \
+    run \
+    -it \
+    --rm \
+    -p 8012:8012 \
+    -v $PWD/nginx.conf:/etc/nginx/nginx.conf \
+    -v $PWD/http.js:/etc/nginx/njs/http.js \
+    -e TEST="Hello from njs in nginx!" \
+    -e MATCH_IP="172.17.0.1" \
+    nginxinc/nginx-unprivileged:1.20
+#+end_src
+
+** Deploying in Kubernetes
+Create a namespace
+#+begin_src shell
+kubectl create namespace k8s-reg-nginx-njs -o yaml --dry-run=client | \
+    kubectl apply -f -
+kubectl label namespace k8s-reg-nginx-njs cert-manager-tls=sync --overwrite
+#+end_src
+
+#+RESULTS:
+#+begin_example
+namespace/k8s-reg-nginx-njs created
+namespace/k8s-reg-nginx-njs labeled
+#+end_example
+
+Create a ConfigMap for the config
+#+BEGIN_SRC shell :results silent
+kubectl -n k8s-reg-nginx-njs \
+    create configmap config \
+    --from-file=nginx\.conf=./nginx.conf \
+    --from-file=http\.js=./http.js \
+    --dry-run=client -o yaml | kubectl apply -f -
+#+END_SRC
+
+Configure the nginx deployment
+#+begin_src yaml :tangle ./nginx.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    lastcfg: |
+      ${NGINX_LAST_CFG}
+  labels:
+    app: k8s-reg-nginx-njs
+  name: k8s-reg-nginx-njs
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: k8s-reg-nginx-njs
+  template:
+    metadata:
+      annotations:
+        lastcfg: |
+          ${NGINX_LAST_CFG}
+      labels:
+        app: k8s-reg-nginx-njs
+    spec:
+      containers:
+      - name: nginx
+        image: nginxinc/nginx-unprivileged:1.20
+        securityContext:
+          runAsUser: 101
+          runAsGroup: 101
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: false
+        env:
+          - name: MATCH_IP
+            value: "${MATCH_IP}"
+        volumeMounts:
+          - name: config
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
+          - name: config
+            mountPath: /etc/nginx/njs/http.js
+            subPath: http.js
+        ports:
+          - name: http
+            containerPort: 8012
+      volumes:
+      - name: config
+        configMap:
+          name: config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: k8s-reg-nginx-njs
+  name: k8s-reg-nginx-njs
+spec:
+  ports:
+  - name: k8s-reg-nginx-njs
+    port: 8012
+    protocol: TCP
+    targetPort: 8012
+  selector:
+    app: k8s-reg-nginx-njs
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-reg-nginx-njs
+spec:
+  rules:
+  - host: k8s-reg-nginx-njs.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    http:
+      paths:
+      - backend:
+          service:
+            name: k8s-reg-nginx-njs
+            port:
+              number: 8012
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k8s-reg-nginx-njs.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    secretName: letsencrypt-prod
+#+end_src
+
+#+BEGIN_SRC shell :results silent
+export \
+  NGINX_LAST_CFG=$(cat nginx.conf http.js | sha256sum) \
+  MATCH_IP="$(kubectl -n "${SHARINGIO_PAIR_NAME}" get pod "${SHARINGIO_PAIR_NAME}-humacs-0" -o=jsonpath='{.status.podIP}')"
+envsubst < nginx.yaml | kubectl -n k8s-reg-nginx-njs apply -f -
+#+END_SRC
+
+* Links
+- https://www.rkatz.xyz/post/2021-09-13-nginx-njs-experiments/
+- https://gist.github.com/runlevel5/5d038e91ea1f874a1dd1608d4e7fcace
+- https://nginx.org/en/docs/njs/node_modules.html
+- https://www.digitalocean.com/community/tutorials/how-to-create-temporary-and-permanent-redirects-with-nginx
+
+* Notes
+Minimal configuration at one 24 lines collectively! (for demo)
+
+* Pros
+- supports any useful JavaScript modules
+- classic or familiar configuration
+
+* Cons
+- less secure from interpreted language
+- speed of JavaScript

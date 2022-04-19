@@ -1,0 +1,377 @@
+#+TITLE: envoy-lua-go
+
+#+begin_quote
+An implementation using Envoy's HTTP Lua filter and an /external/ backend
+#+end_quote
+
+* Bringing the implementation up
+Prepare a container image for the reg-host-authority
+#+begin_src dockerfile :tangle ~/ii/org/research/k8s-infra-registry-artifacts-migration/envoy-dynamic-host-rewriting/reg-host-authority/Dockerfile
+FROM golang:1.17.0-alpine3.14 AS build
+WORKDIR /app
+COPY main.go /app/
+COPY go.* *.go /app/
+ARG GOARCH=""
+RUN CGO_ENABLED=0 GOOS=linux GOARCH="$GOARCH" go build \
+  -a \
+  -installsuffix cgo \
+  -ldflags "-extldflags '-static' -s -w" \
+  -o bin/reg-host-authority \
+  main.go
+
+FROM alpine:3.14 AS extras
+RUN apk add --no-cache tzdata ca-certificates
+RUN adduser -D user
+
+FROM scratch AS final
+WORKDIR /app
+ENV PATH=/app \
+  APP_DIST_FOLDER=./dist
+COPY --from=build /app/bin/reg-host-authority /app/bin/reg-host-authority
+COPY --from=extras /etc/passwd /etc/passwd
+COPY --from=extras /etc/group /etc/group
+COPY --from=extras /usr/share/zoneinfo /usr/share/zoneinfo
+COPY --from=extras /etc/ssl /etc/ssl
+EXPOSE 8080
+USER user
+ENTRYPOINT ["/app/bin/reg-host-authority"]
+#+end_src
+
+Build the container image
+#+begin_src tmate :window registry-e :dir ~/ii/org/research/k8s-infra-registry-artifacts-migration/envoy-dynamic-host-rewriting/reg-host-authority
+docker build -t reg-host-authority .
+#+end_src
+
+Push the image out to the other nodes
+#+begin_src shell
+for NODE_IP in $(kubectl get nodes -l node-role.kubernetes.io/control-plane!='' -o=jsonpath='{.items[*].status.addresses[?(@.type=="InternalIP")].address}'); do
+    printf "${NODE_IP} :: "
+    docker save reg-host-authority:latest | ssh "root@${NODE_IP}" docker load
+done
+#+end_src
+
+#+RESULTS:
+#+begin_example
+145.40.67.1 :: Loaded image: reg-host-authority:latest
+#+end_example
+Prepare the envoy configuration
+#+begin_src yaml :tangle ./envoy-config.yaml
+static_resources:
+  listeners:
+  - name: main
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 10000
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          stat_prefix: ingress_http
+          codec_type: auto
+          route_config:
+            name: local_route
+            virtual_hosts:
+            - name: local_service
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/"
+                route:
+                  cluster: web_service
+          http_filters:
+          - name: envoy.filters.http.lua
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua
+              inline_code: |
+                function envoy_on_request(request_handle)
+                  remoteAddr = request_handle:headers():get("x-real-ip")
+                  local headers, body = request_handle:httpCall(
+                  "reg-host-authority",
+                  {
+                    [":method"] = "GET",
+                    [":path"] = "/",
+                    [":authority"] = "humacs",
+                    ["X-Real-Ip"] = remoteAddr
+                  },
+                  remoteAddr,
+                  5000
+                  )
+                  reg = body
+                  if request_handle:headers():get(":method") == "GET" then
+                    request_handle:respond(
+                      {
+                        [":status"] = "302",
+                        ["location"] = "https://"..reg..request_handle:headers():get(":path"),
+                        ["Content-Type"] = "text/html; charset=utf-8",
+                        [":authority"] = "web_service"
+                      },
+                      '<a href="'.."https://"..reg..request_handle:headers():get(":path")..'">'.."302".."</a>.\n")
+                  end
+                end
+          - name: envoy.filters.http.router
+            typed_config: {}
+
+  clusters:
+  - name: web_service
+    connect_timeout: 0.25s
+    type: LOGICAL_DNS
+    lb_policy: round_robin
+    load_assignment:
+      cluster_name: web_service
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: k8s.io
+                port_value: 443
+  - name: reg-host-authority
+    connect_timeout: 0.25s
+    type: LOGICAL_DNS
+    lb_policy: round_robin
+    load_assignment:
+      cluster_name: humacs
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: reg-host-authority
+                port_value: 8080
+#+end_src
+
+Configure the Kubernetes deployment
+#+begin_src yaml :tangle ./envoy-reg-host-authority.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: reg-host-authority
+  name: reg-host-authority
+  namespace: k8s-reg-envoy-lua-go
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: reg-host-authority
+  template:
+    metadata:
+      labels:
+        app: reg-host-authority
+    spec:
+      containers:
+      - name: envoy
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        image: reg-host-authority:latest
+        imagePullPolicy: Never
+        ports:
+          - name: http
+            containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: reg-host-authority
+  name: reg-host-authority
+  namespace: k8s-reg-envoy-lua-go
+spec:
+  type: ClusterIP
+  ports:
+  - name: registry-k8s-io
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: reg-host-authority
+#+end_src
+#+begin_src yaml :tangle ./envoy.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: k8s-reg-envoy-lua-go
+  labels:
+    cert-manager-tls: sync
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    lastcfg: |
+      ${ENVOY_LAST_CFG}
+  labels:
+    app: k8s-reg-envoy-lua-go
+  name: k8s-reg-envoy-lua-go
+  namespace: k8s-reg-envoy-lua-go
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: k8s-reg-envoy-lua-go
+  template:
+    metadata:
+      annotations:
+        lastcfg: |
+          ${ENVOY_LAST_CFG}
+      labels:
+        app: k8s-reg-envoy-lua-go
+    spec:
+      containers:
+      - name: envoy
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        args:
+        - -c
+        - /etc/envoy/envoy.yaml
+        image: envoyproxy/envoy-distroless:v1.20.0
+        volumeMounts:
+          - name: config
+            mountPath: /etc/envoy/envoy.yaml
+            subPath: envoy.yaml
+        ports:
+          - name: http
+            containerPort: 10000
+      volumes:
+      - name: config
+        configMap:
+          name: envoy-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: k8s-reg-envoy-lua-go
+  name: k8s-reg-envoy-lua-go
+  namespace: k8s-reg-envoy-lua-go
+spec:
+  ports:
+  - name: registry-k8s-io
+    port: 10000
+    protocol: TCP
+    targetPort: 10000
+  selector:
+    app: k8s-reg-envoy-lua-go
+  type: NodePort
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-reg-envoy-lua-go
+  namespace: k8s-reg-envoy-lua-go
+spec:
+  rules:
+  - host: k8s-reg-envoy-lua-go.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    http:
+      paths:
+      - backend:
+          service:
+            name: k8s-reg-envoy-lua-go
+            port:
+              number: 10000
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - k8s-reg-envoy-lua-go.${SHARINGIO_PAIR_BASE_DNS_NAME}
+    secretName: letsencrypt-prod
+#+end_src
+
+Apply the Envoy manifests
+#+BEGIN_SRC shell
+export ENVOY_LAST_CFG=$(cat envoy-config.yaml | sha256sum)
+envsubst < envoy.yaml | kubectl apply -f -
+kubectl -n k8s-reg-envoy-lua-go apply -f envoy-reg-host-authority.yaml
+kubectl -n k8s-reg-envoy-lua-go create configmap envoy-config --from-file=envoy\.yaml=envoy-config.yaml --dry-run=client -o yaml | kubectl apply -f -
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+namespace/k8s-reg-envoy-lua-go unchanged
+deployment.apps/k8s-reg-envoy-lua-go unchanged
+service/k8s-reg-envoy-lua-go unchanged
+ingress.networking.k8s.io/k8s-reg-envoy-lua-go unchanged
+deployment.apps/reg-host-authority created
+service/reg-host-authority created
+configmap/envoy-config created
+#+end_example
+
+* Making requests
+Test it from the Service
+#+begin_src shell
+curl -v http://reg-host-authority.k8s-reg-envoy-lua-go:8080 2>&1
+#+end_src
+
+#+RESULTS:
+#+begin_example
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 10.106.186.118:8080...
+,* TCP_NODELAY set
+,* Connected to reg-host-authority.k8s-reg-envoy-lua-go (10.106.186.118) port 8080 (#0)
+> GET / HTTP/1.1
+> Host: reg-host-authority.k8s-reg-envoy-lua-go:8080
+> User-Agent: curl/7.68.0
+> Accept: */*
+> 
+,* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Date: Thu, 21 Oct 2021 19:58:13 GMT
+< Content-Length: 20
+< Content-Type: text/plain; charset=utf-8
+< 
+{ [20 bytes data]
+100    20  100    20    0     0   6666      0 --:--:-- --:--:-- --:--:--  6666
+,* Connection #0 to host reg-host-authority.k8s-reg-envoy-lua-go left intact
+registry-1.docker.io
+#+end_example
+
+#+begin_src shell
+curl -v http://k8s-reg-envoy-lua-go.k8s-reg-envoy-lua-go:10000 2>&1
+#+end_src
+
+#+RESULTS:
+#+begin_example
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 10.105.25.30:10000...
+,* TCP_NODELAY set
+,* Connected to k8s-reg-envoy-lua-go.k8s-reg-envoy-lua-go (10.105.25.30) port 10000 (#0)
+> GET / HTTP/1.1
+> Host: k8s-reg-envoy-lua-go.k8s-reg-envoy-lua-go:10000
+> User-Agent: curl/7.68.0
+> Accept: */*
+> 
+,* Mark bundle as not supporting multiuse
+< HTTP/1.1 302 Found
+< host: web_service
+< content-type: text/html; charset=utf-8
+< location: https://registry-1.docker.io/
+< content-length: 49
+< date: Thu, 21 Oct 2021 19:58:39 GMT
+< server: envoy
+< 
+{ [49 bytes data]
+100    49  100    49    0     0   8166      0 --:--:-- --:--:-- --:--:--  8166
+,* Connection #0 to host k8s-reg-envoy-lua-go.k8s-reg-envoy-lua-go left intact
+<a href="https://registry-1.docker.io/">302</a>.
+#+end_example
+
+* Notes
+This was an earlier implementation, which is valid but is intended to be the precursor to a WASM filter (written in Go)
+
+* Pros
+- host declared from an external source
+
+* Cons
+- Lua code embedded in config
+- apparent failure on service discovery if backend has downtime (might be my configuration, in CDS?)

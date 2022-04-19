@@ -1,0 +1,18 @@
+
+
+# Configure ArtifactServer
+
+backends:
+  kops:
+    host: kubeupv2.s3.amazonaws.com
+    conditions:
+      paths:
+        - /kops/
+  local-distribution:
+    host: registry-1.docker.io
+    conditions:
+      headers:
+        X-Real-Ip:
+          - ${HUMACS_POD_IP}
+  k8s.gcr.io:
+    host: k8s.gcr.io
