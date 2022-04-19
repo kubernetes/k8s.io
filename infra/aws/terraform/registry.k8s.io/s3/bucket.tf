@@ -43,13 +43,25 @@ resource "aws_s3_bucket_policy" "registry-k8s-io-public-read" {
         "Effect" : "Allow",
         "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/*",
         "Principal" : "*"
+      },
+      {
+        "Sid" : "AllowSSLRequestsOnly",
+        "Action" : "s3:*",
+        "Effect" : "Deny",
+        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/*",
+        "Condition" : {
+          "Bool" : {
+            "aws:SecureTransport" : "false"
+          }
+        },
+        "Principal" : "*"
       }
     ]
   })
 }
 
 resource "aws_iam_user_policy" "registry-k8s-io-rw" {
-  name = "${var.prefix}${aws_s3_bucket.registry-k8s-io.bucket}-access"
+  name = "${aws_s3_bucket.registry-k8s-io.bucket}-access"
   user = var.iam_user_name
 
   policy = jsonencode({
