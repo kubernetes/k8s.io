@@ -51,3 +51,75 @@ module "us-west-2" {
   prefix        = var.prefix
   iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
+
+module "us-east-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.us-east-1
+  }
+
+  region        = "us-east-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
+}
+
+module "us-east-2" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.us-east-2
+  }
+
+  region        = "us-east-2"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
+}
+
+module "eu-central-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.eu-central-1
+  }
+
+  region        = "eu-central-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
+}
+
+module "ap-southeast-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.ap-southeast-1
+  }
+
+  region        = "ap-southeast-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
+}
+
+module "ap-northeast-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.ap-northeast-1
+  }
+
+  region        = "ap-northeast-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
+}
+
+module "ap-south-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.ap-south-1
+  }
+
+  region        = "ap-south-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
+}
