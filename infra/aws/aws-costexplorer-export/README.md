@@ -64,16 +64,17 @@ go run .
 
 ## Flags
 
-| Name                             | Default                                                                                                            | Description                                            |
-| aws-region                       | us-east-1                                                                                                          | region for AWS SDK to use                              |
-| output-file                      | /tmp/local-cncf-aws-infra-billing-and-usage-data.csv                                                               | a temporary location to write the usage data           |
-| output-file-enable               | false                                                                                                              | whether the usage data is also written to disk locally |
-| bucket-uri                       | gs://cncf-aws-infra-cost-and-billing-data                                                                          | the bucket to upload the csv blobs to                  |
-| days-back                        | 365                                                                                                                | the amount of days back to report from today           |
-| promote-to-latest                | true                                                                                                               | promotes the cost and usage data to a latest CSV file  |
-| bigquery-enabled                 | true                                                                                                               | load data into BigQuery from the specified bucket      |
-| bigquery-data-location           | australia-southeast1                                                                                               | the BigQuery dataset location                          |
-| bigquery-managing-dataset-prefix | cncf<sub>aws</sub><sub>infra</sub><sub>cost</sub><sub>and</sub><sub>billing</sub><sub>data</sub><sub>dataset</sub> | a prefix to use for managing BigQuery datasets         |
+| Name                             | Default                                              | Description                                            |
+| -------------------------------- | ---------------------------------------------------- | ------------------------------------------------------ |
+| aws-region                       | us-east-1                                            | region for AWS SDK to use                              |
+| output-file                      | /tmp/local-cncf-aws-infra-billing-and-usage-data.csv | a temporary location to write the usage data           |
+| output-file-enable               | false                                                | whether the usage data is also written to disk locally |
+| bucket-uri                       | gs://cncf-aws-infra-cost-and-billing-data            | the bucket to upload the csv blobs to                  |
+| days-back                        | 365                                                  | the amount of days back to report from today           |
+| promote-to-latest                | true                                                 | promotes the cost and usage data to a latest CSV file  |
+| bigquery-enabled                 | true                                                 | load data into BigQuery from the specified bucket      |
+| bigquery-data-location           | australia-southeast1                                 | the BigQuery dataset location                          |
+| bigquery-managing-dataset-prefix | cncf aws infra cost and billing data dataset         | a prefix to use for managing BigQuery datasets         |
 
 # Testing
 
