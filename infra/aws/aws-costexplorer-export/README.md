@@ -4,25 +4,25 @@ In the k8s-infra community, data for billing on projects in the org is collated 
 
 # Goal
 
--   Pull in CostExplorer usage & cost data for the last year
--   Prepare it
-    -   Transform the data if need be
-    -   Marshal as CSV
--   Upload the CSV data into a bucket
--   Load data into BigQuery
+- Pull in CostExplorer usage & cost data for the last year
+- Prepare it
+  - Transform the data if need be
+  - Marshal as CSV
+- Upload the CSV data into a bucket
+- Load data into BigQuery
 
 # Operation
 
--   Get a CostExplorer client through AWS SDK
--   Fetch the usage data
--   Prepare usage data
-    -   Marshal usage data as CSV
--   Open a connection to a bucket (GCS Bucket)
--   Upload prepared data to the bucket
-    -   using name based on date+time
--   Create a BigQuery dataset based on date+time
--   Load all CSV files from bucket into the BigQuery dataset
--   Promote the dataset tables to new dataset called latest by copying them
+- Get a CostExplorer client through AWS SDK
+- Fetch the usage data
+- Prepare usage data
+  - Marshal usage data as CSV
+- Open a connection to a bucket (GCS Bucket)
+- Upload prepared data to the bucket
+  - using name based on date+time
+- Create a BigQuery dataset based on date+time
+- Load all CSV files from bucket into the BigQuery dataset
+- Promote the dataset tables to new dataset called latest by copying them
 
 # Preparation
 
@@ -44,7 +44,7 @@ Account log in
 gcloud auth login
 ```
 
-Set the project to *k8s-infra-ii-sandbox*
+Set the project to _k8s-infra-ii-sandbox_
 
 ```bash
 gcloud config set project k8s-infra-ii-sandbox
@@ -96,5 +96,5 @@ ko publish --local .
 
 # Links
 
--   <https://pkg.go.dev/cloud.google.com/go/bigquery>
--   <https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/costexplorer@v1.15.0#GetCostAndUsageOutput>
+- <https://pkg.go.dev/cloud.google.com/go/bigquery>
+- <https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/costexplorer@v1.15.0#GetCostAndUsageOutput>
