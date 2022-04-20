@@ -73,13 +73,12 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cblecker@gmail.com
-      - spiffxp@gmail.com
-      - spiffxp@google.com
     managers:
-      - fejta@google.com
+      - ameukam@gmail.com
       - ihor.dvoretskyi@gmail.com
-      - nikitaraghunath@gmail.com
       - killen.bob@gmail.com
+      - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
 
   - email-id: lwkd@kubernetes.io
     name: lwkd
