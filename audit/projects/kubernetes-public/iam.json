@@ -72,6 +72,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-127754664067@gcp-sa-gkenode.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.nodeServiceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-127754664067@container-engine-robot.iam.gserviceaccount.com"
       ],
       "role": "roles/container.serviceAgent"
