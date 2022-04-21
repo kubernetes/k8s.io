@@ -90,6 +90,28 @@ resource "google_cloud_run_service_iam_member" "allUsers" {
   depends_on = [google_cloud_run_service.regions]
 }
 
+//Ensure gcb-builder can auto-deploy registry-sandbox.k8s.io
+//TODO: create a dedicated service account for auto-deployment
+data "google_project" "k8s_infra_staging_tools" {
+  project_id = "k8s-staging-infra-tools"
+}
+
+resource "google_service_account_iam_member" "cloudbuild_deploy_oci_proxy" {
+  service_account_id = google_service_account.oci-proxy.id
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${data.google_project.k8s_infra_staging_tools.number}@cloudbuild.gserviceaccount.com"
+}
+
+resource "google_cloud_run_service_iam_member" "gcb_builder_sa" {
+  project = google_project.project.project_id
+  for_each = google_cloud_run_service.regions
+
+  service  = google_cloud_run_service.regions[each.key].name
+  location = google_cloud_run_service.regions[each.key].location
+  role = "roles/run.developer"
+  member = "serviceAccount:${data.google_project.k8s_infra_staging_tools.number}@cloudbuild.gserviceaccount.com"
+}
+
 
 resource "google_cloud_run_service" "regions" {
   project  = google_project.project.project_id
