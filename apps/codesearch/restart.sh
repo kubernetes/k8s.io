@@ -47,4 +47,4 @@ fi
 
 # deploy kubernetes resources
 pushd "${SCRIPT_ROOT}" >/dev/null
-kubectl --context="${context}" --namespace="${namespace}" rollout restart deployment ${app}
+kubectl --context="${context}" --namespace="${namespace}" rollout restart deployment "${app}"
