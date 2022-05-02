@@ -15,6 +15,12 @@ limitations under the License.
 */
 
 terraform {
+  backend "s3" {
+    bucket = "registry-k8s-io-tfstate"
+    key    = "terraform.tfstate"
+    region = "us-east-2"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
