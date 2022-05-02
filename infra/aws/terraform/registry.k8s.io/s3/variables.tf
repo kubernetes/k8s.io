@@ -22,7 +22,3 @@ variable "prefix" {
   type    = string
   default = ""
 }
-
-variable "iam_user_name" {
-  type = string
-}

@@ -23,14 +23,6 @@ resource "aws_s3_bucket_acl" "registry-k8s-io" {
   acl    = "public-read"
 }
 
-resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
-  bucket = aws_s3_bucket.registry-k8s-io.bucket
-
-  rule {
-    object_ownership = "BucketOwnerEnforced"
-  }
-}
-
 resource "aws_s3_bucket_policy" "registry-k8s-io-public-read" {
   bucket = aws_s3_bucket.registry-k8s-io.bucket
 
@@ -60,29 +52,15 @@ resource "aws_s3_bucket_policy" "registry-k8s-io-public-read" {
   })
 }
 
-resource "aws_iam_user_policy" "registry-k8s-io-rw" {
-  name = "${aws_s3_bucket.registry-k8s-io.bucket}-access"
-  user = var.iam_user_name
+resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
+  bucket = aws_s3_bucket.registry-k8s-io.bucket
 
-  policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Action" : [
-          "s3:ListBucket"
-        ],
-        "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/"
-      },
-      {
-        "Action" : [
-          "s3:PutObject",
-          "s3:GetObject",
-          "s3:DeleteObject"
-        ],
-        "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/*"
-      }
-    ]
-  })
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+  depends_on = [
+    aws_s3_bucket.registry-k8s-io,
+    aws_s3_bucket_acl.registry-k8s-io,
+    aws_s3_bucket_policy.registry-k8s-io-public-read
+  ]
 }

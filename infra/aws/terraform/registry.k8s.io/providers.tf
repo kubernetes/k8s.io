@@ -25,44 +25,80 @@ terraform {
 
 provider "aws" {
   region = "us-west-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
 
 provider "aws" {
   alias  = "us-west-1"
   region = "us-west-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
 
 provider "aws" {
   alias  = "us-west-2"
   region = "us-west-2"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
 
 provider "aws" {
   alias  = "us-east-1"
   region = "us-east-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
 
 provider "aws" {
   alias  = "us-east-2"
   region = "us-east-2"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
 
 provider "aws" {
   alias  = "eu-central-1"
   region = "eu-central-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
 
 provider "aws" {
   alias  = "ap-southeast-1"
   region = "ap-southeast-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
 
 provider "aws" {
   alias  = "ap-northeast-1"
   region = "ap-northeast-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
 
 provider "aws" {
   alias  = "ap-south-1"
   region = "ap-south-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
 }
