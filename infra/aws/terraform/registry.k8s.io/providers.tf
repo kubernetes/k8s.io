@@ -29,6 +29,10 @@ terraform {
   }
 }
 
+# The role_arn (arn:aws:iam::513428760722:role/registry.k8s.io_s3writer)
+# used in each provider block is managed in
+# https://github.com/cncf-infra/aws-infra/blob/2ac2e63c162134a9e6036d84beee2d5adf6b4ff2/terraform/iam/main.tf
+
 provider "aws" {
   region = "us-west-1"
 
