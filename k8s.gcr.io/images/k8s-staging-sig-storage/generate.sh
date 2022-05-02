@@ -38,6 +38,7 @@ readonly images=(
     nfs-provisioner
     nfs-subdir-external-provisioner
     nfsplugin
+    smbplugin
     snapshot-controller
     snapshot-validation-webhook
     volume-data-source-validator
