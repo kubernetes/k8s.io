@@ -7,6 +7,19 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
+  - email-id: sig-windows-leads@kubernetes.io
+    name: sig-windows-leads
+    description: |-
+      SIG Windows chairs and technical leads comms
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - cbelu@cloudbasesolutions.com
+      - jayunit100.apache@gmail.com
+      - jsturtevant@gmail.com
+      - marosset@microsoft.com
+
   #
   # k8s-staging write access for SIG-owned subprojects
   #
