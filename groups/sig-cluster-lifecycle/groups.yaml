@@ -33,6 +33,21 @@ groups:
       - kmuldoon@vmware.com
       - kakaraparthy@vmware.com
 
+  - email-id: sig-cluster-lifecycle-cluster-api-operator-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-operator-alerts
+    description: |-
+
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - ademicev@redhat.com
+      - jspeed@redhat.com
+
   - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubeadm-alerts
     description: |-
