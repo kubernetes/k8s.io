@@ -32,6 +32,7 @@ groups:
       - buringerst@vmware.com
       - kmuldoon@vmware.com
       - kakaraparthy@vmware.com
+      - christi.schlotter@gmail.com
 
   - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubeadm-alerts
@@ -134,7 +135,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - christi.schlotter@gmail.com
       - jichenjc@cn.ibm.com
       - mbooth@redhat.com
       - seansnowwhite@gmail.com
