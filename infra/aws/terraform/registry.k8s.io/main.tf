@@ -73,6 +73,17 @@ module "us-east-2" {
   prefix = var.prefix
 }
 
+module "eu-west-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.eu-west-1
+  }
+
+  region = "eu-west-1"
+  prefix = var.prefix
+}
+
 module "eu-central-1" {
   source = "./s3"
 

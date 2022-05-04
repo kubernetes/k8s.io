@@ -78,6 +78,15 @@ provider "aws" {
 }
 
 provider "aws" {
+  alias  = "eu-west-1"
+  region = "eu-west-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
+  }
+}
+
+provider "aws" {
   alias  = "eu-central-1"
   region = "eu-central-1"
 
