@@ -139,6 +139,7 @@
   dmap:
     "sha256:ec71d1797d1af17563bc5d19dfcf0229ca0f631d4a245f64ac358f7499946ee4": [ "v3.0.0" ]
     "sha256:aa38be2f98a9d9c7093b450915bbb2a2b4f53a74f1b6de76cef3aa5c80df45f5": [ "v3.1.0" ]
+    "sha256:fded5b914c2531c2471fd0088b75fd33b0756a6c42df4c069007857419e54fa9": [ "v4.0.0" ]
 - name: smbplugin
   dmap:
     "sha256:26ca83cac8ea40e2c0c498f681f18df6c0c5e8fa50c3550e20c5bf360dc80120": [ "v1.4.0" ]
