@@ -27,10 +27,11 @@ groups:
       - timallclair@gmail.com
     members:
       # Associate SRC members
-      - sfowler@redhat.com
-      - taahm@google.com
-      - rita.z.zhang@gmail.com
       - pushkarj.at.work@gmail.com
+      - rita.z.zhang@gmail.com
+      - sfowler@redhat.com
+      - srajakum@amazon.com
+      - taahm@google.com
       # Distributors
       - argoprod@us.ibm.com
       - aws-k8s-embargo-notification@amazon.com
