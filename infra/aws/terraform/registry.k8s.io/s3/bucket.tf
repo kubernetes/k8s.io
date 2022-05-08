@@ -64,3 +64,30 @@ resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
     aws_s3_bucket_policy.registry-k8s-io-public-read
   ]
 }
+
+resource "aws_iam_user_policy" "registry-k8s-io-rw" {
+  name = "${aws_s3_bucket.registry-k8s-io.bucket}-access"
+  user = var.iam_user_name
+
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Action" : [
+          "s3:ListBucket"
+        ],
+        "Effect" : "Allow",
+        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/"
+      },
+      {
+        "Action" : [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:DeleteObject"
+        ],
+        "Effect" : "Allow",
+        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/*"
+      }
+    ]
+  })
+}

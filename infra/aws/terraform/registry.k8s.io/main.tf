@@ -36,8 +36,9 @@ module "us-west-1" {
     aws = aws.us-west-1
   }
 
-  region = "us-west-1"
-  prefix = var.prefix
+  region        = "us-west-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "us-west-2" {
@@ -47,8 +48,9 @@ module "us-west-2" {
     aws = aws.us-west-2
   }
 
-  region = "us-west-2"
-  prefix = var.prefix
+  region        = "us-west-2"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "us-east-1" {
@@ -58,8 +60,9 @@ module "us-east-1" {
     aws = aws.us-east-1
   }
 
-  region = "us-east-1"
-  prefix = var.prefix
+  region        = "us-east-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "us-east-2" {
@@ -69,8 +72,9 @@ module "us-east-2" {
     aws = aws.us-east-2
   }
 
-  region = "us-east-2"
-  prefix = var.prefix
+  region        = "us-east-2"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "eu-west-1" {
@@ -80,8 +84,9 @@ module "eu-west-1" {
     aws = aws.eu-west-1
   }
 
-  region = "eu-west-1"
-  prefix = var.prefix
+  region        = "eu-west-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "eu-central-1" {
@@ -91,8 +96,9 @@ module "eu-central-1" {
     aws = aws.eu-central-1
   }
 
-  region = "eu-central-1"
-  prefix = var.prefix
+  region        = "eu-central-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "ap-southeast-1" {
@@ -102,8 +108,9 @@ module "ap-southeast-1" {
     aws = aws.ap-southeast-1
   }
 
-  region = "ap-southeast-1"
-  prefix = var.prefix
+  region        = "ap-southeast-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "ap-northeast-1" {
@@ -113,8 +120,9 @@ module "ap-northeast-1" {
     aws = aws.ap-northeast-1
   }
 
-  region = "ap-northeast-1"
-  prefix = var.prefix
+  region        = "ap-northeast-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
 
 module "ap-south-1" {
@@ -124,6 +132,7 @@ module "ap-south-1" {
     aws = aws.ap-south-1
   }
 
-  region = "ap-south-1"
-  prefix = var.prefix
+  region        = "ap-south-1"
+  prefix        = var.prefix
+  iam_user_name = aws_iam_user.registry-k8s-io-access.name
 }
