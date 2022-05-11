@@ -90,3 +90,15 @@ groups:
       - eddiezane@gmail.com
       - katrina.verey@shopify.com
       - maszulik@redhat.com
+
+  - email-id: k8s-infra-rbac-kustomize-oci@kubernetes.io
+    name: k8s-infra-rbac-kustomize-oci
+    description: |-
+      ACL for Kustomize OCI test registry
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - katrina.verey@shopify.com
+      - natashasarkar@google.com
+      - mikebz@google.com
