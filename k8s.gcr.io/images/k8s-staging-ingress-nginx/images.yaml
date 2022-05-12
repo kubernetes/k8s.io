@@ -144,6 +144,7 @@
     "sha256:f3b6b39a6062328c095337b4cadcefd1612348fdd5190b1dcbcb9b9e90bd8068": ["v1.0"]
     "sha256:cdc56f415500de9a6342be4f8703850dab9eae8870e9f33d9b8598232abd6ac0": ["v1.1"]
     "sha256:64d8c73dca984af206adf9d6d7e46aa550362b1d7a01f3a0a91b20cc67868660": ["v1.1.1"]
+    "sha256:2188def723c8fcb2635fbe54607ac3b4efba581c4fcc3d2279ec9c57da1b2f6f": ["v1.2.0"]
 
 # nginx-errors
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/custom-error-pages
@@ -151,6 +152,7 @@
   dmap:
     "sha256:5530c7fc1fa75b49e068d6b7b4f8f1c13a5834c155ba7abd5943b9057c3b925b": ["0.48.1"]
     "sha256:06cd2dbe317505e940d0521cc69d237752800ef0b191cb4265eb0d3d2c1080e7": ["0.49.0"]
+    "sha256:1c31c80828e7800c4eb556e07fdc90c451482767659eb26310e0ad208d28c9cf": ["1.2.0"]
 
 # opentelemetry
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/opentelemetry
