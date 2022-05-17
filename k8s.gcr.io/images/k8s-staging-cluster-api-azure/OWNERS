@@ -5,14 +5,11 @@ approvers:
 - alexeldeib
 - CecileRobertMichon
 - devigned
-- nader-ziada
+- mboersma
 - shysank
 reviewers:
-- cpanato
 - jackfrancis
 - jsturtevant
-- juan-lee
-- mboersma
 
 labels:
 - sig/cluster-lifecycle
