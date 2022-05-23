@@ -8,3 +8,4 @@
 - name: ibm-powervs-block-csi-driver
   dmap:
     "sha256:dd510c01b5792f6ae3c5ccb9e334482a9d3de97c23f6c1dcf0799c5613f9ad70": ["v0.1.0"]
+    "sha256:0282c9ad6e455db73b8ce7c2ddc44885a7890840177ee8d0fbf7a45595f95610": ["v0.1.1"]
