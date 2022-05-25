@@ -246,6 +246,7 @@ aliases:
     - xmudrii # Release Manager
   # business hours oncall for prow etc (https://go.k8s.io/oncall)
   test-infra-oncall:
+    - carolinar7
     - chaodaiG
     - chases2
     - cjwagner
