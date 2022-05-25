@@ -39,7 +39,7 @@ groups:
     members:
       - avesh.ncsu@gmail.com
       - davanum@gmail.com
-      - mdame@redhat.com
+      - mikedame@google.com
       - ravisantoshgudimetla@gmail.com
 
   - email-id: k8s-infra-staging-scheduler-plugins@kubernetes.io
