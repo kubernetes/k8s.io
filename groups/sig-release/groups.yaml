@@ -198,7 +198,6 @@ groups:
       - james.laverack@jetstack.io # 1.24 RT Lead
       - joseph.r.sandoval@gmail.com # 1.24 RT EA
       - kat.cosgrove@gmail.com # 1.24 Release Comms Shadow
-      - lauri.d.apple@gmail.com
       - max@koerbaecher.io # 1.24 RT Lead Shadow
       - xander@grzy.dev # 1.24 RT Lead Shadow
       - jeeves.butler@gmail.com # 1.24 RT Lead Shadow
@@ -260,7 +259,6 @@ groups:
       - jeeves.butler@gmail.com # 1.24 Release Lead Shadow
       - joseph.r.sandoval@gmail.com # 1.24 EA
       - kikis.github@gmail.com
-      - lauri.d.apple@gmail.com
       - max@koerbaecher.io
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
@@ -298,7 +296,6 @@ groups:
       - ctadeu@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
-      - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
 
   - email-id: release-team@kubernetes.io
@@ -314,7 +311,6 @@ groups:
       - ctadeu@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
-      - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
       - james.laverack@jetstack.io # 1.24 RT Lead
@@ -371,7 +367,6 @@ groups:
       - ctadeu@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
-      - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
       - joseph.r.sandoval@gmail.com # 1.24 Emeritus Advisor
