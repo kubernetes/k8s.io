@@ -103,6 +103,16 @@ groups:
       - jsand@google.com
       - zihongz@google.com
 
+  - email-id: k8s-infra-staging-capi-cloudstack@kubernetes.io
+    name: k8s-infra-staging-capi-cloudstack
+    description: |-
+      ACL for staging CAPI for Apache CloudStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - david.njumani@gmail.com
+      - rohityadav89@gmail.com
+
   - email-id: k8s-infra-staging-capi-docker@kubernetes.io
     name: k8s-infra-staging-capi-docker
     description: |-
