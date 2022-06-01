@@ -27,6 +27,9 @@
     - flags: 0
       tag: issue
       value: amazon.com
+    - flags: 0
+      tag: issue
+      value: netlify.app
   - type: TXT
     values:
     - google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs
