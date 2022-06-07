@@ -6,21 +6,26 @@
     "sha256:7f1d560337b5e1d949c9ee5f3dae40f44b0d3850cb3ca87eb7084c02ac1d1719": ["v0.4.0"]
     "sha256:786c9d9345cb646fdb6db3fdc0eeb684fbcf2b46b2dde98c4a7018bf2167205a": ["v0.4.1"]
     "sha256:446ef0864e1b3db22f140177004944afe5aabd43d19234bed942456af54b59e2": ["v0.4.2"]
+    "sha256:9da6d7f148b19154fd6df4cc052e6cd52787962369f34c7b0411f77b843f3d4c": ["v0.4.3"]
 - name: security-profiles-operator-amd64
   dmap:
     "sha256:9b691f7fa46219897d99d8d1353b97e056c5c2c40e09f5c3e572dc039b7ffa45": ["v0.3.0"]
     "sha256:6cde962b60db76d0ad22d204383106b2dc7caee223490e1f40001782c6a5ad56": ["v0.4.0"]
     "sha256:32f8bc244593fbe5d46fe8d5ecbfc713958104a7d549932febdfe65b1fd85284": ["v0.4.1"]
     "sha256:4d2f405a0dbeebca8370e5ce78e16c0e96c6269109d848cce3c05fc5d60aeffe": ["v0.4.2"]
+    "sha256:2002ef968155cf449c5d76b2b9a78d5692198a18b70af11dfe3c3be6f0fcb4f7": ["v0.4.3"]
 - name: security-profiles-operator-arm64
   dmap:
     "sha256:ef48f1aac6e3229d9eaefb5727825dc314afb8a5eca7e266336f0c21c6320177": ["v0.3.0"]
     "sha256:2d3db5c243d2d67bfca7ec978e8146e4ca34dacd553858b09d5cf91706a70d48": ["v0.4.0"]
     "sha256:7b53b941b5c7f765031e7f52a00478de106166fd7d4f6336609b0ca7bfa76bf5": ["v0.4.1"]
     "sha256:1c32c942a6869d7418cd2e644e6efc27a5d0cd12b6aa13861dfa3f70b2d6037b": ["v0.4.2"]
+    "sha256:86a496bd8d2bb8a51279fea5e57b41c3f43c509a8d0f1ad587e60aa4a7b95041": ["v0.4.3"]
 - name: security-profiles-operator-bundle
   dmap:
     "sha256:934e72d76a790a867bbab201101ff4218c7905d33e19cbfdf020405e6f50f236": ["v0.4.2"]
+    "sha256:3c6917f2c5ff3ab32be9a5e54799e196c40cc09f1b51627cecd763a92bea97bc": ["v0.4.3"]
 - name: security-profiles-operator-catalog
   dmap:
     "sha256:93465ac74750fb594ea6ba7457c27c69dc535152fcb927ff565fa260559f5821": ["v0.4.2"]
+    "sha256:49a36f4d80069bb52bd116ea67479c24f368a851ea8fd2777f04d6795a2efbf3": ["v0.4.3"]
