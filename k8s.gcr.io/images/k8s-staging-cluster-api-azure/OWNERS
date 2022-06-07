@@ -5,10 +5,9 @@ approvers:
 - alexeldeib
 - CecileRobertMichon
 - devigned
-- mboersma
-- shysank
-reviewers:
 - jackfrancis
+- mboersma
+reviewers:
 - Jont828
 - jsturtevant
 
