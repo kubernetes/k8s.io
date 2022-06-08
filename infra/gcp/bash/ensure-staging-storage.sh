@@ -75,6 +75,8 @@ readonly STAGING_PROJECT_SERVICES=(
     pubsub.googleapis.com
     # storage-api used by: cloudbuild, containerregistry
     storage-api.googleapis.com
+    # used by cloud build for keyless artifact signing
+    iamcredentials.googleapis.com
 )
 
 readonly STAGING_PROJECT_DISABLED_SERVICES=(
