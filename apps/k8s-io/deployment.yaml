@@ -34,11 +34,14 @@ spec:
           # Map all keys to files.
       containers:
       - name: nginx
-        image: nginx:1.10-alpine  # = :stable-alpine as of 8/23/2016
+        image: nginx:1.22-alpine  # = :stable-alpine as of 14/06/2022
         resources:
           limits:
             cpu: 1
             memory: 512Mi
+          requests:
+            cpu: 0.5
+            memory: 256Mi
         ports:
         - name: http
           containerPort: 80
