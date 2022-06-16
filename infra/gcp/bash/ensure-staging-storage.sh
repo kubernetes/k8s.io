@@ -289,6 +289,25 @@ function ensure_staging_gcb() {
     ensure_project_role_binding "${project}" "${principal}" "roles/cloudbuild.builds.builder"
     ensure_gcs_role_binding "${bucket}" "${principal}" "objectCreator"
     ensure_gcs_role_binding "${bucket}" "${principal}" "objectViewer"
+
+    local sa_name="gcb-image-builder"
+    local sa_email="${sa_name}@${project}.iam.gserviceaccount.com"
+    local sa_principal="serviceAccount:${sa_email}"
+    color 6 "Ensuring ${sa_email} exists and can sign artifacts in project: ${project}"
+    ensure_service_account \
+      "${project}" \
+      "${sa_name}" \
+      "used by prow to build container images and sign artifacts for ${project}"
+
+    ensure_serviceaccount_role_binding \
+        "${sa_email}" \
+        "${sa_principal}" \
+        "roles/iam.serviceAccountTokenCreator"
+
+    ensure_project_role_binding \
+        "${project}" \
+        "${sa_principal}" \
+        "roles/cloudbuild.builds.editor"
 }
 
 # TODO(spiffxp): rename this to just prow@project and deprecate/rm the gcb-builder-foo
