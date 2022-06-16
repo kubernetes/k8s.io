@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-coredns.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 27 Feb 2019 00:21:56 GMT
-	Time updated:			Thu, 17 Feb 2022 02:47:25 GMT
-	Metageneration:			38
+	Time updated:			Mon, 13 Jun 2022 23:22:46 GMT
+	Metageneration:			39
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
