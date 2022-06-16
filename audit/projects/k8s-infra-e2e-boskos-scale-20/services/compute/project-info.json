@@ -168,6 +168,10 @@
       "metric": "STATIC_BYOIP_ADDRESSES"
     },
     {
+      "limit": 60,
+      "metric": "NETWORK_FIREWALL_POLICIES"
+    },
+    {
       "limit": 150,
       "metric": "INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES"
     },

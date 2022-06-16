@@ -1,0 +1,9 @@
+{
+  "description": "testing service account",
+  "displayName": "CAPG-test-subhasmita",
+  "email": "capg-test-subhasmita@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-sandbox-capg/serviceAccounts/capg-test-subhasmita@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
+  "oauth2ClientId": "106482423078701578150",
+  "projectId": "k8s-infra-sandbox-capg",
+  "uniqueId": "106482423078701578150"
+}

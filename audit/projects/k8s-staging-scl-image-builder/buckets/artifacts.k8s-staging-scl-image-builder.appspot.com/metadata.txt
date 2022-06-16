@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-scl-image-builder.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 11 Feb 2020 21:34:52 GMT
-	Time updated:			Thu, 16 Dec 2021 03:09:58 GMT
-	Metageneration:			19
+	Time updated:			Tue, 14 Jun 2022 00:48:13 GMT
+	Metageneration:			20
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

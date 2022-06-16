@@ -1,0 +1,9 @@
+{
+  "description": "test capg for LFX",
+  "displayName": "k8s-capg-test-aniruddha",
+  "email": "k8s-capg-test-aniruddha@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-sandbox-capg/serviceAccounts/k8s-capg-test-aniruddha@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
+  "oauth2ClientId": "104825308381757949023",
+  "projectId": "k8s-infra-sandbox-capg",
+  "uniqueId": "104825308381757949023"
+}

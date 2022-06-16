@@ -21,6 +21,24 @@
     },
     {
       "members": [
+        "group:k8s-infra-staging-krm-functions@kubernetes.io"
+      ],
+      "role": "roles/cloudkms.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:415435679132@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.cryptoKeyDecrypter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-krm-functions@kubernetes.io"
+      ],
+      "role": "roles/cloudkms.cryptoKeyEncrypter"
+    },
+    {
+      "members": [
         "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.occurrences.viewer"
@@ -36,6 +54,12 @@
         "serviceAccount:service-415435679132@gcp-sa-pubsub.iam.gserviceaccount.com"
       ],
       "role": "roles/pubsub.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:415435679132@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/secretmanager.secretAccessor"
     },
     {
       "members": [
