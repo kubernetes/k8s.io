@@ -28,15 +28,22 @@
     "sha256:ac90f5dc759a917c2c98de81a9b5b77bf426b95e56caebaefcc0f2e01e2b8db9": ["1.8.3"]
     "sha256:c5da89a1e675930f97ec4a585d3aacb895b32c02a6f526ab5ec18f79a5f72d7e": ["1.8.4"]
     "sha256:8b334af78628e86df93044310f93f8d44b77193e0909183bae7b083109722192": ["1.8.5"]
+- name: cpvpa
+  dmap:
+    "sha256:f6c85b45bb5e8ce6077855425bdd03e93d41926dbf6b751af64ab1ea41e1755b": ["v0.8.4"]
 - name: cpvpa-amd64
   dmap:
+    "sha256:627e119c876fa41e61d34a1f216a46d74a20ab6ed13392970011df8d9c25e621": ["v0.8.4"]
     "sha256:8341c10f341fc7cacfefa4564088414b4eaef45142d76a83f80891544f18b632": ["v0.8.2"]
 - name: cpvpa-arm
   dmap:
+    "sha256:fc7b3c3ab6e09e6f113b148d8f260304814bc5c4268f4a4a03bd77e8d738b6a6": ["v0.8.4"]
     "sha256:66c5c58c2becded71af3856de98409f4d9c6d6b045a952c6cd1a14bd73497898": ["v0.8.2"]
 - name: cpvpa-arm64
   dmap:
+    "sha256:74610be0b003285ea126e338aefb0035ddd889545ded57f721891fe652925faa": ["v0.8.4"]
     "sha256:4c3cc0d9807fadff10d580e9d4c725ddffa59f7d8c6d55da8c0b098f4dc788b4": ["v0.8.2"]
 - name: cpvpa-ppc64le
   dmap:
+    "sha256:f8e7ca1e35e7c9957c301a97c8c5a47699619788cacc47ddba45268ec370e2cf": ["v0.8.4"]
     "sha256:5f3c69442753ca9bdaaec8b6b07dc44c3a73c069ff109aa4e4366f4e595ae275": ["v0.8.2"]
