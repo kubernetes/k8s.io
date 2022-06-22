@@ -332,3 +332,5 @@ infra:
       k8s-staging-storage-migrator:
       k8s-staging-test-infra:
       k8s-staging-gmsa-webhook:
+      k8s-staging-gcb-untrusted:
+        managed_by: infra/gcp/bash/ensure-staging-gcb-untrusted.sh
