@@ -437,10 +437,8 @@
     "sha256:6078e5b3ef3fd90d8b7813a01064d736fd8367bdabd72eabfb76ddf7972ba844": ["v2.3.1-go1.17.6-bullseye.0"]
     "sha256:904dd30530075ef3f2e2a7e5a09056495dcd3b368f27766229a7f28a2a781afe": ["v2.3.1-go1.17.10-bullseye.0"]
     "sha256:eb4d692a1a4d231451f3195be0da23b0ece8e14e4e9ab881ffb4b10346cecf56": ["v2.3.1-go1.18.1-bullseye.0"]
-    "sha256:f184b8f9f7968dff0fa8a5ae2c37164bb4fd7cd91f96525c390d65c5a28a7f17": ["v2.3.1-go1.19beta1-bullseye.0"]
 - name: go-runner-arm
   dmap:
-    "sha256:06d4f4f66637da6227a926226342d735713dd12063b1817dfdb2aa2207cab8b9": ["v2.3.1-go1.19beta1-bullseye.0"]
     "sha256:0b5f22e4d432b3c18119f31821632511f37581fd7204baca3a2b8bfc918383ca": ["v2.3.1-go1.18.1-bullseye.0"]
     "sha256:2286c7bda120a87ca31f4496c471fda267714cc43231b5cd0e5e4da8d2060d04": ["v2.3.1-go1.17.10-bullseye.0"]
     "sha256:31a8d1a60bd19cad43ac3963613b9e8fe5bdeb0c07ede07bdeef493d9e0e0555": ["v2.3.1-go1.17.11-bullseye.0"]
@@ -453,7 +451,6 @@
   dmap:
     "sha256:0b84f76194a39aeb142b9dcedf3cc04226ddeb8ef001c2be8469b7b2f7c199ca": ["v2.3.1-go1.17.10-bullseye.0"]
     "sha256:0f989a12f668cb7c9b79d11c8d90d0b9e37549335f7cca1290af14e027204f4c": ["v2.3.1-go1.17.11-bullseye.0"]
-    "sha256:24446944cb9d652f87e58a5f57734bc43899400dcff8b5b249c3bef6efddf163": ["v2.3.1-go1.19beta1-bullseye.0"]
     "sha256:40a2a2df2ac9cf6d8c8cc64aa80a3536fb62c5f783c61a184b279fa15ed01673": ["v2.3.1-go1.16.13-buster.0"]
     "sha256:72ee1832be1a1edd8214e5d4210ca918ec642b729330f58a6da41d112e1c62cc": ["v2.3.1-go1.17.9-bullseye.0"]
     "sha256:73369df8858451f414cf636259ea7a1b496c81bae6cd58da08c7d410aec8febe": ["v2.3.1-go1.17.6-bullseye.0"]
@@ -464,7 +461,6 @@
   dmap:
     "sha256:0cb0e1ab2039fddb87134583ca600d5a13c8fcda7857e1d8e9f95397f8f360b7": ["v2.3.1-go1.17.6-bullseye.0"]
     "sha256:1bb8ac356adf352b9974edeae54b6cfdddca281cda0ee058e66acff69215671c": ["v2.3.1-go1.17.9-bullseye.0"]
-    "sha256:29c37d1cc6aab6326b88e5c0ac1b0a9ae1fe85ac2d38434c7e1ade4ee29112f8": ["v2.3.1-go1.19beta1-bullseye.0"]
     "sha256:4567572bad15b2a793eaf675eeac96919bf083ec1113bcfc9ed12631fcfe1ce2": ["v2.3.1-go1.17.10-bullseye.0"]
     "sha256:cb78d1bbcd9d7cf21618ab4168374c181303b2fe52a97aeee96c2e123e8d35ac": ["v2.3.1-go1.18.1-bullseye.0"]
     "sha256:d7334a20b8af52335c1f27781e8793032f01736213f92b5ea7264c229ed9cc4f": ["v2.3.1-go1.18.2-bullseye.0"]
@@ -477,7 +473,6 @@
     "sha256:32216c798f4541442b41142616bf89e8b7dccf46701f933ae0f2c48db78a8a16": ["v2.3.1-go1.17.9-bullseye.0"]
     "sha256:64ff0ea666a35808c4777ba956690603a381b487cb26d575839d7102213ddaeb": ["v2.3.1-go1.18.1-bullseye.0"]
     "sha256:83dfe5c5bf14dabc9583b22024134a2a3dbd714bbf191466aa0182b3316145f5": ["v2.3.1-go1.18.2-bullseye.0"]
-    "sha256:8b21b3e44fbe5484749d468bc364de99c20d881c4512f1f3eee1815bec5ede13": ["v2.3.1-go1.19beta1-bullseye.0"]
     "sha256:a21b71fdccd24f6c74e740524bb2cefa475bb84df0d87d0fd24d10955f35c935": ["v2.3.1-go1.17.10-bullseye.0"]
     "sha256:b8e0416f567f12e1490bbf0409f17a9b315b37189af3c09c2a39870c49e67a30": ["v2.3.1-go1.17.6-bullseye.0"]
     "sha256:c4e6cfa8ede0c4009b46dab0db241e0937762260298c4cf7994c920ac269d60d": ["v2.3.1-go1.18.3-bullseye.0"]
