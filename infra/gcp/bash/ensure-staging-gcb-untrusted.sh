@@ -37,7 +37,7 @@ fi
 PROJECT=$(k8s_infra_project "staging" "k8s-staging-gcb-untrusted")
 
 # The service account name in $PROJECT.
-GCB_SVCACCT="builder"
+GCB_SVCACCT="image-builder"
 
 
 color 6 "Ensuring project exists: ${PROJECT}"
