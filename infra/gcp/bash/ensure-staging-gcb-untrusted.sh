@@ -45,7 +45,6 @@ ensure_project "${PROJECT}"
 
 GCB_PROJECT_SERVICES=(
     cloudbuild.googleapis.com
-    artifactregistry.googleapis.com
 )
 
 # Enable GCB APIs
@@ -59,6 +58,10 @@ ensure_service_account \
     "${PROJECT}" \
     "${GCB_SVCACCT}" \
     "Used by prow to run cloudbuild jobs on this project"
+
+# Allow the image-builder service account to submit jobs to this project. https://cloud.google.com/build/docs/iam-roles-permissions#permissions
+color 6 "Empowering ${GSUITE_USER}"
+ensure_project_role_binding "${PROJECT}" "serviceAccount:$(svc_acct_email "${PROJECT}" "${GCB_SVCACCT}")" "roles/cloudbuild.builds.editor"
 
 # Allow k8s-infra-prow-build to run pods as this service account
 color 6 "Ensuring GKE clusters in 'k8s-infra-prow-build' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${GCB_SVCACCT}'"
