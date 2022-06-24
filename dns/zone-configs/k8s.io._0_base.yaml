@@ -412,3 +412,7 @@ kubectl.sigs:
 gateway-api.sigs:
   type: CNAME
   value: kubernetes-sigs-gateway-api.netlify.app.
+# https://github.com/kubernetes-sigs/cloud-provider-azure docs (@MartinForReal)
+cloud-provider-azure.sigs:
+  type: CNAME
+  value: kubernetes-sigs-cloud-provide-azure.netlify.app.
