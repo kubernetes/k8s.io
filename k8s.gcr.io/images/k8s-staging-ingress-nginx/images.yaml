@@ -110,6 +110,7 @@
     "sha256:baa326f5c726d65be828852943a259c1f0572883590b9081b7e8fa982d64d96e": ["v20220331-controller-v1.1.2-31-gf1cb2b73c"]
     "sha256:4468eb8cc9aa0ec3971ddf3811efe363e6f8e9082e95b567a5c27d91f89fb1e3": ["v20220416-controller-v1.2.0-beta.0-4-g2e1a4790b"]
     "sha256:4fbcbeebd4c24587699b027ad0f0aa7cd9d76b58177a3b50c228bae8141bcf95": ["v20220524-g8963ed17e"]
+    "sha256:2a34e322b7ff89abdfa0b6202f903bf5618578b699ff609a3ddabac0aae239c8": ["v20220624-g3348cd71e"]
 
 # custom cfssl image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/cfssl
@@ -130,6 +131,7 @@
     "sha256:b13e44f7bb6852b90633957e743e4a2b34f32f1694da556a9131b43950b8b2b1": ["v20210326-gb52c538bb"]
     "sha256:131ece0637b29231470cfaa04690c2966a2e0b147d3c9df080a0857b78982410": ["v20210810-g820a21a74"]
     "sha256:1dffeeb390f650faafa952e174a0e44aea4a2c677044e0e182fd0685e6122c5d": ["v20220331-controller-v1.1.2-31-gf1cb2b73c"]
+    "sha256:05948cf43aa41050943b2c887adcc2f7630893b391c1201e99a6c12ed06ba51b": ["v20220624-g3348cd71e"]
 
 # fastcgi HTTP server image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/fastcgi-helloserver
