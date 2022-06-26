@@ -1,4 +1,5 @@
 NAME                              TITLE
+artifactregistry.googleapis.com   Artifact Registry API
 cloudbuild.googleapis.com         Cloud Build API
 cloudkms.googleapis.com           Cloud Key Management Service (KMS) API
 containerregistry.googleapis.com  Container Registry API
