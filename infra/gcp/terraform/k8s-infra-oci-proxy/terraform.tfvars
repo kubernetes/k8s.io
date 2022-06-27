@@ -14,11 +14,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required Terraform version
-*/
+tag        = "v20220331-v0.0.1-4-gc3b27f3"
+domain     = "registry-sandbox.k8s.io"
+project_id = "k8s-infra-oci-proxy"
+cloud_run_config = {
+  us-central1 = {
+    environment_variables = [
+      {
+        name  = "UPSTREAM_REGISTRY",
+        value = "foo"
+      }
+    ]
+  }
 
-terraform {
-  required_version = "~> 1.1.0"
+  us-east1 = {
+    environment_variables = [
+      {
+        name  = "UPSTREAM_REGISTRY",
+        value = "bar"
+      }
+    ]
+  }
 }

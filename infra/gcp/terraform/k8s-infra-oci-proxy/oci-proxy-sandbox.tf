@@ -15,16 +15,14 @@ limitations under the License.
 */
 
 locals {
-  project_id = "k8s-infra-oci-proxy"
-  domain     = "registry-sandbox.k8s.io"
-  image      = "gcr.io/k8s-staging-infra-tools/archeio:${var.tag}"
+  image = "gcr.io/k8s-staging-infra-tools/archeio:${var.tag}"
 
   external_ips = {
     sandbox = {
-      name = "${local.project_id}-sandbox",
+      name = "${var.project_id}-sandbox",
     },
     sandbox-v6 = {
-      name = "${local.project_id}-sandbox-v6",
+      name = "${var.project_id}-sandbox-v6",
       ipv6 = true
     },
   }
@@ -39,8 +37,8 @@ data "google_organization" "org" {
 }
 
 resource "google_project" "project" {
-  name            = local.project_id
-  project_id      = local.project_id
+  name            = var.project_id
+  project_id      = var.project_id
   org_id          = data.google_organization.org.org_id
   billing_account = data.google_billing_account.account.id
 }
@@ -86,8 +84,6 @@ resource "google_cloud_run_service_iam_member" "allUsers" {
   location = google_cloud_run_service.regions[each.key].location
   role     = "roles/run.invoker"
   member   = "allUsers"
-
-  depends_on = [google_cloud_run_service.regions]
 }
 
 //Ensure gcb-builder can auto-deploy registry-sandbox.k8s.io
@@ -103,20 +99,20 @@ resource "google_service_account_iam_member" "cloudbuild_deploy_oci_proxy" {
 }
 
 resource "google_cloud_run_service_iam_member" "gcb_builder_sa" {
-  project = google_project.project.project_id
+  project  = google_project.project.project_id
   for_each = google_cloud_run_service.regions
 
   service  = google_cloud_run_service.regions[each.key].name
   location = google_cloud_run_service.regions[each.key].location
-  role = "roles/run.developer"
-  member = "serviceAccount:${data.google_project.k8s_infra_staging_tools.number}@cloudbuild.gserviceaccount.com"
+  role     = "roles/run.developer"
+  member   = "serviceAccount:${data.google_project.k8s_infra_staging_tools.number}@cloudbuild.gserviceaccount.com"
 }
 
 
 resource "google_cloud_run_service" "regions" {
   project  = google_project.project.project_id
-  for_each = toset(var.cloud_run_regions)
-  name     = "${local.project_id}-${each.key}"
+  for_each = var.cloud_run_config
+  name     = "${var.project_id}-${each.key}"
   location = each.key
 
   template {
@@ -127,10 +123,19 @@ resource "google_cloud_run_service" "regions" {
       }
     }
     spec {
-      service_account_name = google_service_account.oci-proxy.email
+      # service_account_name = google_service_account.oci-proxy.email
       containers {
-        image = local.image
+        image = "docker.io/nginx"
+        dynamic "env" {
+          for_each = each.value.environment_variables
+          content {
+            name  = env.value["name"]
+            value = env.value["value"]
+          }
+        }
       }
+
+
       container_concurrency = 5 # TODO(ameukam): adjust for production.
       // 30 seconds less than cloud scheduler maximum.
       timeout_seconds = 570

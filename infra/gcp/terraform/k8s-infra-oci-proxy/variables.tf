@@ -15,14 +15,21 @@ limitations under the License.
 */
 
 variable "tag" {
-  type    = string
-  default = "latest"
+  type = string
 }
 
-variable "cloud_run_regions" {
-  type = list(string)
-  default = [
-    "us-central1",
-    "us-west1"
-  ]
+variable "domain" {
+  type = string
+}
+variable "project_id" {
+  type = string
+}
+
+variable "cloud_run_config" {
+  type = map(object({
+    environment_variables = list(object({
+      value = string
+      name  = string
+    }))
+  }))
 }

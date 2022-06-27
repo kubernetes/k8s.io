@@ -34,7 +34,7 @@ resource "google_compute_region_network_endpoint_group" "default" {
 
   provider              = google-beta
   project               = google_project.project.project_id
-  name                  = "${local.project_id}--${each.key}--neg"
+  name                  = "${var.project_id}--${each.key}--neg"
   network_endpoint_type = "SERVERLESS"
   region                = google_cloud_run_service.regions[each.key].location
   cloud_run {
@@ -47,7 +47,7 @@ module "lb-http" {
   version = "~> 6.2.0"
 
   project = google_project.project.project_id
-  name    = local.project_id
+  name    = var.project_id
 
   # ...
   backends = {
@@ -86,7 +86,7 @@ module "lb-http" {
   address      = "34.110.128.221"
   ipv6_address = "2600:1901:0:a7aa::"
   managed_ssl_certificate_domains = [
-    local.domain
+    var.domain
   ]
   random_certificate_suffix = true
   ssl                       = true
