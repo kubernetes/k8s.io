@@ -123,9 +123,9 @@ resource "google_cloud_run_service" "regions" {
       }
     }
     spec {
-      # service_account_name = google_service_account.oci-proxy.email
+      service_account_name = google_service_account.oci-proxy.email
       containers {
-        image = "docker.io/nginx"
+        image = local.image
         dynamic "env" {
           for_each = each.value.environment_variables
           content {
@@ -134,8 +134,6 @@ resource "google_cloud_run_service" "regions" {
           }
         }
       }
-
-
       container_concurrency = 5 # TODO(ameukam): adjust for production.
       // 30 seconds less than cloud scheduler maximum.
       timeout_seconds = 570
