@@ -458,8 +458,8 @@ groups:
     members:
       - k8s-infra-release-editors@kubernetes.io
 
-  - email-id: k8s-infra-staging-testgrid-json-exporter@kubernetes.io
-    name: k8s-infra-testgrid-json-exporter
+  - email-id: k8s-infra-staging-testgrid-exporter@kubernetes.io
+    name: k8s-infra-testgrid-exporter
     description: |-
       ACL for CI Signal Release Team
     settings:
