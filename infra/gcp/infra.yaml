@@ -331,4 +331,5 @@ infra:
       k8s-staging-sp-operator:
       k8s-staging-storage-migrator:
       k8s-staging-test-infra:
+      k8s-staging-testgrid-json-exporter:
       k8s-staging-gmsa-webhook:
