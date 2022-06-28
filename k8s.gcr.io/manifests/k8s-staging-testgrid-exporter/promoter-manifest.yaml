@@ -1,4 +1,4 @@
-# google group for gcr.io/k8s-staging-testgrid-exporter is k8s-staging-testgrid-exporter@kubernetes.io
+# google group for gcr.io/k8s-staging-testgrid-exporter is k8s-testgrid-exporter@kubernetes.io
 registries:
 - name: gcr.io/k8s-staging-testgrid-exporter
   src: true
