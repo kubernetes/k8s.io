@@ -151,6 +151,7 @@ groups:
       - bentheelder@google.com
       - eddiezane@gmail.com
       - justinsb@google.com
+      - cy@borg.dev
       - sig-k8s-infra-leads@kubernetes.io
 
   # owners of the k8s-infra-sandbox-capg project, working on cluster-api provider for GCP
