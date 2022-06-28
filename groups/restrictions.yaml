@@ -140,7 +140,7 @@ restrictions:
       - "^k8s-infra-staging-releng-test@kubernetes.io$"
       - "^k8s-infra-staging-publishing-bot@kubernetes.io$"
       - "^k8s-infra-staging-bom@kubernetes.io$"
-      - "^k8s-infra-staging-testgrid-exporter@kubernetes.io$"
+      - "^k8s-infra-staging-tg-exporter@kubernetes.io$"
       - "^release-comms@kubernetes.io$"
       - "^release-managers-private@kubernetes.io$"
       - "^release-managers@kubernetes.io$"
