@@ -456,3 +456,15 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-tg-exporter@kubernetes.io
+    name: k8s-infra-staging-tg-exporter
+    description: |-
+      ACL for CI Signal Release Team
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+      - k8s-infra-release-viewers@kubernetes.io
+      - leonard.pahlke@googlemail.com
+      - salahi.hossein@gmail.com
