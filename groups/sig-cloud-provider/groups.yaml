@@ -30,8 +30,8 @@ groups:
       - kim.andrewsy@gmail.com
       - nturner4@gmail.com
 
-  - email-id: k8s-infra-staging-provider-openstack@kubernetes.io
-    name: k8s-infra-staging-provider-openstack
+  - email-id: k8s-infra-staging-provider-os@kubernetes.io
+    name: k8s-infra-staging-provider-os
     description: |-
       ACL for external Cloud Provider OpenStack
     settings:
