@@ -5,3 +5,13 @@ Kubernetes multi-vendor registry.
 ## Structure
 
 - [infra/meta/asns/](./infra/meta/asns/) :: cloud-provider ASNs for use in querying the closest provider to route registry traffic to
+
+## Accounts
+
+To host the /registry.k8s.io/ redirector, several resources are located in accounts across cloud providers.
+
+### AWS
+
+In AWS the account to provide registry.k8s.io will be structured as follows
+
+<img width=1500 style='margin-left: auto; margin-right: auto;' alt='Account structure' src='./registry-k8s-io-account-structure.svg'>
