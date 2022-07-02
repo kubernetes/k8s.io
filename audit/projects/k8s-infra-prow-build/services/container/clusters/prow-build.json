@@ -20,8 +20,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.32.0.0/14",
   "createTime": "2020-04-30T21:31:49+00:00",
-  "currentMasterVersion": "1.21.11-gke.1100",
-  "currentNodeVersion": "1.21.11-gke.1100",
+  "currentMasterVersion": "1.21.12-gke.1500",
+  "currentNodeVersion": "1.21.11-gke.1100 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -195,7 +195,8 @@
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build/nodePools/greenhouse-20200518173345958100000001",
       "upgradeSettings": {
-        "maxSurge": 1
+        "maxSurge": 1,
+        "strategy": "SURGE"
       },
       "version": "1.21.11-gke.1100"
     },
@@ -243,7 +244,8 @@
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build/nodePools/pool5-20210928124956061000000001",
       "upgradeSettings": {
-        "maxSurge": 1
+        "maxSurge": 1,
+        "strategy": "SURGE"
       },
       "version": "1.21.11-gke.1100"
     }
