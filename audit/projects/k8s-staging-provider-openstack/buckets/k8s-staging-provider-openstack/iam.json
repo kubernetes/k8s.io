@@ -16,14 +16,14 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-provider-openstack@kubernetes.io"
+        "deleted:group:k8s-infra-staging-provider-openstack@kubernetes.io?uid=515973865749418902743"
       ],
       "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "group:k8s-infra-staging-provider-openstack@kubernetes.io"
+        "deleted:group:k8s-infra-staging-provider-openstack@kubernetes.io?uid=515973865749418902743"
       ],
       "role": "roles/storage.objectAdmin"
     },

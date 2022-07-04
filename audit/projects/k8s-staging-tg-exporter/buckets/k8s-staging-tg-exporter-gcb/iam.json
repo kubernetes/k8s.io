@@ -3,33 +3,40 @@
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "projectEditor:k8s-staging-provider-openstack",
-        "projectOwner:k8s-staging-provider-openstack"
+        "projectEditor:k8s-staging-tg-exporter",
+        "projectOwner:k8s-staging-tg-exporter"
       ],
       "role": "roles/storage.legacyBucketOwner"
     },
     {
       "members": [
-        "projectViewer:k8s-staging-provider-openstack"
+        "projectViewer:k8s-staging-tg-exporter"
       ],
       "role": "roles/storage.legacyBucketReader"
     },
     {
       "members": [
-        "deleted:group:k8s-infra-staging-provider-openstack@kubernetes.io?uid=515973865749418902743"
+        "group:k8s-infra-staging-tg-exporter@kubernetes.io"
       ],
       "role": "roles/storage.legacyBucketWriter"
     },
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "deleted:group:k8s-infra-staging-provider-openstack@kubernetes.io?uid=515973865749418902743"
+        "group:k8s-infra-staging-tg-exporter@kubernetes.io"
       ],
       "role": "roles/storage.objectAdmin"
     },
     {
       "members": [
-        "allUsers"
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectCreator"
+    },
+    {
+      "members": [
+        "allUsers",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectViewer"
     }

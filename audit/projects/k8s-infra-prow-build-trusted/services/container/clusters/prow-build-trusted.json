@@ -154,7 +154,8 @@
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build-trusted/locations/us-central1/clusters/prow-build-trusted/nodePools/trusted-pool1-20210806160125616800000001",
       "upgradeSettings": {
-        "maxSurge": 1
+        "maxSurge": 1,
+        "strategy": "SURGE"
       },
       "version": "1.21.11-gke.1100"
     }
