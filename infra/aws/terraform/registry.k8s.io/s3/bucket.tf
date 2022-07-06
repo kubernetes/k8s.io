@@ -31,6 +31,12 @@ resource "aws_s3_bucket_policy" "registry-k8s-io-public-read" {
     "Version" : "2012-10-17",
     "Statement" : [
       {
+        "Action" : "s3:ListBucket",
+        "Effect" : "Allow",
+        "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}",
+        "Principal" : "*"
+      },
+      {
         "Action" : "s3:GetObject",
         "Effect" : "Allow",
         "Resource" : "${aws_s3_bucket.registry-k8s-io.arn}/*",
