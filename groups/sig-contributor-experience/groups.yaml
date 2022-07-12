@@ -88,7 +88,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
-    members:
+    owners:
       - jberkus@redhat.com
       - noah@coderanger.net
 
