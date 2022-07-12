@@ -4,7 +4,13 @@ registries:
   src: true
 - name: us.gcr.io/k8s-artifacts-prod/releng
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: us-docker.pkg.dev/k8s-artifacts-prod/images/releng
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: eu.gcr.io/k8s-artifacts-prod/releng
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: europe-docker.pkg.dev/k8s-artifacts-prod/images/releng
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia.gcr.io/k8s-artifacts-prod/releng
+  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+- name: asia-docker.pkg.dev/k8s-artifacts-prod/images/releng
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
