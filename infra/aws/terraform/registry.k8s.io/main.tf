@@ -29,101 +29,124 @@ variable "prefix" {
   }
 }
 
+data "aws_s3_bucket" "registry-k8s-io-main" {
+  provider = aws.us-east-2
+  bucket   = "prod-registry-k8s-io-us-east-2"
+}
+
 module "us-west-1" {
   source = "./s3"
 
   providers = {
-    aws = aws.us-west-1
+    aws           = aws.us-west-1
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "us-west-1"
-  prefix = var.prefix
+  region                = "us-west-1"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }
 
 module "us-west-2" {
   source = "./s3"
 
   providers = {
-    aws = aws.us-west-2
+    aws           = aws.us-west-2
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "us-west-2"
-  prefix = var.prefix
+  region                = "us-west-2"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }
 
 module "us-east-1" {
   source = "./s3"
 
   providers = {
-    aws = aws.us-east-1
+    aws           = aws.us-east-1
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "us-east-1"
-  prefix = var.prefix
+  region                = "us-east-1"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }
 
 module "us-east-2" {
   source = "./s3"
 
   providers = {
-    aws = aws.us-east-2
+    aws           = aws.us-east-2
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "us-east-2"
-  prefix = var.prefix
+  region                = "us-east-2"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }
 
 module "eu-west-1" {
   source = "./s3"
 
   providers = {
-    aws = aws.eu-west-1
+    aws           = aws.eu-west-1
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "eu-west-1"
-  prefix = var.prefix
+  region                = "eu-west-1"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }
 
 module "eu-central-1" {
   source = "./s3"
 
   providers = {
-    aws = aws.eu-central-1
+    aws           = aws.eu-central-1
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "eu-central-1"
-  prefix = var.prefix
+  region                = "eu-central-1"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }
 
 module "ap-southeast-1" {
   source = "./s3"
 
   providers = {
-    aws = aws.ap-southeast-1
+    aws           = aws.ap-southeast-1
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "ap-southeast-1"
-  prefix = var.prefix
+  region                = "ap-southeast-1"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }
 
 module "ap-northeast-1" {
   source = "./s3"
 
   providers = {
-    aws = aws.ap-northeast-1
+    aws           = aws.ap-northeast-1
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "ap-northeast-1"
-  prefix = var.prefix
+  region                = "ap-northeast-1"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }
 
 module "ap-south-1" {
   source = "./s3"
 
   providers = {
-    aws = aws.ap-south-1
+    aws           = aws.ap-south-1
+    aws.us-east-2 = aws.us-east-2
   }
 
-  region = "ap-south-1"
-  prefix = var.prefix
+  region                = "ap-south-1"
+  prefix                = var.prefix
+  source_sync_bucket_id = data.aws_s3_bucket.registry-k8s-io-main.id
 }

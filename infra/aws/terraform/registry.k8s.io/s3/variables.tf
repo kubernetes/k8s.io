@@ -22,3 +22,8 @@ variable "prefix" {
   type    = string
   default = ""
 }
+
+variable "source_sync_bucket_id" {
+  type    = string
+  default = ""
+}

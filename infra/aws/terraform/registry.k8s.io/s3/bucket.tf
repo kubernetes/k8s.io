@@ -23,6 +23,13 @@ resource "aws_s3_bucket_acl" "registry-k8s-io" {
   acl    = "public-read"
 }
 
+resource "aws_s3_bucket_versioning" "registry-k8s-io" {
+  bucket = aws_s3_bucket.registry-k8s-io.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_s3_bucket_policy" "registry-k8s-io-public-read" {
   bucket = aws_s3_bucket.registry-k8s-io.bucket
 
@@ -69,4 +76,28 @@ resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
     aws_s3_bucket_acl.registry-k8s-io,
     aws_s3_bucket_policy.registry-k8s-io-public-read
   ]
+}
+
+resource "aws_s3_bucket_replication_configuration" "registry-k8s-io" {
+  provider = aws.us-east-2
+
+  depends_on = [aws_s3_bucket_versioning.registry-k8s-io]
+  count      = var.region == "us-east-2" ? 0 : 1
+
+  # TODO(BobyMCbobs): figure out a way to pass this in
+  # as an object without two sources of truth for it's definition
+  role   = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
+  bucket = var.source_sync_bucket_id
+
+  rule {
+    id = "${var.source_sync_bucket_id}-to-${aws_s3_bucket.registry-k8s-io.bucket}"
+
+    status   = "Enabled"
+    priority = 10
+
+    destination {
+      bucket        = aws_s3_bucket.registry-k8s-io.arn
+      storage_class = "STANDARD"
+    }
+  }
 }
