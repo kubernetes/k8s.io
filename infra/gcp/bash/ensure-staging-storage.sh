@@ -108,8 +108,8 @@ readonly PROD_IMAGE_PROMOTER_SCANNING_SERVICE_ACCOUNT
 # Staging functions
 #
 
-# Provision and configure a "staging" GCP project, intended to hold 
-# temporary release artifacts in a pre-provisioned GCS bucket or 
+# Provision and configure a "staging" GCP project, intended to hold
+# temporary release artifacts in a pre-provisioned GCS bucket or
 # GCR. The intent is to then promote some of these artifacts to
 # production, which is long-lived and immutable.
 #
@@ -252,7 +252,7 @@ function ensure_staging_gcr_repo() {
 
     color 6 "Ensuring GCR admins can admin GCR for project: ${project}"
     empower_gcr_admins "${project}"
-    
+
     color 6 "Ensuring GCS access logs enabled for GCR bucket in project: ${project}"
     ensure_gcs_bucket_logging "${gcr_bucket}"
 }
@@ -381,6 +381,18 @@ function ensure_release_manager_special_cases() {
         if [[ "${project}" == "k8s-staging-kubernetes" ]]; then
             color 6 "Empowering kubernetes-release-test GCB service account to admin GCR"
             empower_svcacct_to_admin_gcr "648026197307@cloudbuild.gserviceaccount.com" "${project}"
+        fi
+
+        # For k8s-staging-releng,
+        # - create a GCS bucket for system packages
+        # - ensure k8s-release-editors@kubernetes can write objects to the bucket
+        # This is required to investage migration from Google infrastucture to
+        # the community-owned infrastructure. See: https://github.com/kubernetes/release/issues/913
+        if [[ "${project}" == "k8s-staging-experimental" ]]; then
+            ensure_private_gcs_bucket "${project}" "gs://k8s-artifacts-system-packages-sandbox"
+            ensure_gcs_role_binding "gs://k8s-artifacts-system-packages-sandbox" \
+                "group:k8s-infra-release-editors@kubernetes.io" \
+                "objectAdmin"
         fi
 
         # Artifact Registry
