@@ -19,4 +19,4 @@ data:
   META_PATH: "/tmp/meta"
   META_BRANCH: master
   GITHUB_REDIRECT: "/oauth/github/callback"
-  MIN_PASSCODE_LENGTH: 8
+  MIN_PASSCODE_LENGTH: "8"
