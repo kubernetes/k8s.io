@@ -60,7 +60,7 @@ ensure_service_account \
     "Used by prow to run cloudbuild jobs on this project"
 
 # Allow the image-builder service account to submit jobs to this project. https://cloud.google.com/build/docs/iam-roles-permissions#permissions
-color 6 "Empowering ${GSUITE_USER}"
+color 6 "Empowering ${GCB_SVCACCT}"
 ensure_project_role_binding "${PROJECT}" "serviceAccount:$(svc_acct_email "${PROJECT}" "${GCB_SVCACCT}")" "roles/cloudbuild.builds.editor"
 
 # Allow k8s-infra-prow-build to run pods as this service account
