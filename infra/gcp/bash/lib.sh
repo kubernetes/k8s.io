@@ -44,6 +44,7 @@ trap 'cleanup_tmpdir' EXIT
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcs.sh"
 
 # order doesn't matter here, so keep sorted
+. "$(dirname "${BASH_SOURCE[0]}")/lib_ar.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcr.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gsm.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_services.sh"
