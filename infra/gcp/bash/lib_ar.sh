@@ -32,7 +32,7 @@ function empower_group_to_write_ar() {
     fi
     local group="$1"
     local project="$2"
-    local region="$3"
+    local location="$3"
 
     ensure_repository_role_binding "images" "${group}" "artifactregistry.repoAdmin" "${project}" "${location}"
 }
