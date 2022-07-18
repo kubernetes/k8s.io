@@ -41,10 +41,10 @@ for REGION in "${REGIONS[@]}"; do
         --duration-seconds 43200 \
         --output json || exit 1)
 
-    export \
-        AWS_ACCESS_KEY_ID=$(echo "${JSON}" | jq --raw-output ".Credentials[\"AccessKeyId\"]") \
-        AWS_SECRET_ACCESS_KEY=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SecretAccessKey\"]") \
-        AWS_SESSION_TOKEN=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SessionToken\"]")
+    AWS_ACCESS_KEY_ID=$(echo "${JSON}" | jq --raw-output ".Credentials[\"AccessKeyId\"]")
+    AWS_SECRET_ACCESS_KEY=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SecretAccessKey\"]")
+    AWS_SESSION_TOKEN=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SessionToken\"]")
+    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 
     RCLONE_CONFIG="$(mktemp -t rclone-"${REGION:-}"-XXXXX.conf)"
     echo "Wrote rclone config to '${RCLONE_CONFIG:-}'"
@@ -71,5 +71,5 @@ session_token = $AWS_SESSION_TOKEN
 region = ${REGION}
 EOF
     echo "Running sync between '${SOURCE:-}' and '${DESTINATION:-}'"
-    tmate -F -v -S $TMATE_SOCKET new-window -d -c "$PWD" -n sync-to-"${REGION:-}" "rclone sync --config \"${RCLONE_CONFIG:-}\" -P \"${SOURCE:-}\" \"${DESTINATION:-}\""
+    tmate -F -v -S "$TMATE_SOCKET" new-window -d -c "$PWD" -n sync-to-"${REGION:-}" "rclone sync --config \"${RCLONE_CONFIG:-}\" -P \"${SOURCE:-}\" \"${DESTINATION:-}\""
 done

@@ -27,10 +27,10 @@ while true; do
     --duration-seconds 43200 \
     --output json || exit 1)
 
-  export \
-    AWS_ACCESS_KEY_ID=$(echo "${JSON}" | jq --raw-output ".Credentials[\"AccessKeyId\"]") \
-    AWS_SECRET_ACCESS_KEY=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SecretAccessKey\"]") \
-    AWS_SESSION_TOKEN=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SessionToken\"]")
+  AWS_ACCESS_KEY_ID=$(echo "${JSON}" | jq --raw-output ".Credentials[\"AccessKeyId\"]")
+  AWS_SECRET_ACCESS_KEY=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SecretAccessKey\"]")
+  AWS_SESSION_TOKEN=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SessionToken\"]")
+  export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 
   RCLONE_CONFIG="$(mktemp)"
   echo "Wrote rclone config to '${RCLONE_CONFIG:-}'"
@@ -49,8 +49,7 @@ session_token = $AWS_SESSION_TOKEN
 region = us-east-2
 EOF
   echo "Running sync between '${SOURCE:-}' and '${DESTINATION:-}'"
-  rclone sync --config "${RCLONE_CONFIG:-}" -P "${SOURCE:-}" "${DESTINATION:-}"
-  if [ $? -eq 0 ]; then
+  if rclone sync --config "${RCLONE_CONFIG:-}" -P "${SOURCE:-}" "${DESTINATION:-}"; then
     exit 0;
   fi
 done
