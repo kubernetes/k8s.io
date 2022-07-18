@@ -376,6 +376,9 @@
     "sha256:be4039f250f26e1321d048e4dd6e81b78a80825c2dd490bacc0ac80ebb94bbc5": ["v12.1.1"]
     "sha256:d58529c7dc4a16cbedcd94d36f77374ebed51191187b6c4cd9e3eae4b49fb454": ["bullseye-v1.1.0"]
     "sha256:e0f13d8b21914d36a52857b8c195eb6e12e5b483423b31300dfb1b5e835e5cf6": ["bullseye-v1.2.0"]
+- name: distroless-iptables
+  dmap:
+    "sha256:691c591a093063b119abc4753ab792b61271c66f2dbbc7d5219f914197274cc2": ["v0.1.0"]
 - name: go-runner
   dmap:
     "sha256:004c18fbd8ca3fd431d60654edd0c19eed7e805385afac40d2b5b6b45cbd9e8e": ["v2.3.1-go1.16-buster.0"]
