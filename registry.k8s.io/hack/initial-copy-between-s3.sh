@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Requirements
+# - tmate :: the script must be run inside of an existing tmate session
+
 REGIONS=(
     ap-northeast-1
     ap-south-1
@@ -71,5 +74,5 @@ session_token = $AWS_SESSION_TOKEN
 region = ${REGION}
 EOF
     echo "Running sync between '${SOURCE:-}' and '${DESTINATION:-}'"
-    tmate -F -v -S "$TMATE_SOCKET" new-window -d -c "$PWD" -n sync-to-"${REGION:-}" "rclone sync --config \"${RCLONE_CONFIG:-}\" -P \"${SOURCE:-}\" \"${DESTINATION:-}\""
+    tmate -F -v -S "${TMATE_SOCKET:-/tmp/tmate.socket}" new-window -d -c "$PWD" -n sync-to-"${REGION:-}" "rclone sync --config \"${RCLONE_CONFIG:-}\" -P \"${SOURCE:-}\" \"${DESTINATION:-}\""
 done
