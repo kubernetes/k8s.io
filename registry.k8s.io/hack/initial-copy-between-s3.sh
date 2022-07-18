@@ -30,12 +30,14 @@ REGIONS=(
 
 SOURCE=s3:prod-registry-k8s-io-us-east-2
 
+CALLER_ID="$(aws sts get-caller-identity --output json | jq -r .UserId)"
+
 for REGION in "${REGIONS[@]}"; do
     DESTINATION="s3dest:prod-registry-k8s-io-${REGION:-}"
     unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
     JSON=$(aws sts assume-role \
         --role-arn "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"  \
-        --role-session-name registry.k8s.io_s3writer \
+        --role-session-name "${CALLER_ID:-}-registry.k8s.io_s3writer" \
         --duration-seconds 43200 \
         --output json || exit 1)
 
