@@ -21,7 +21,7 @@
   "clusterIpv4Cidr": "10.32.0.0/14",
   "createTime": "2020-04-30T21:31:49+00:00",
   "currentMasterVersion": "1.22.8-gke.202",
-  "currentNodeVersion": "1.21.11-gke.1100 *",
+  "currentNodeVersion": "1.22.8-gke.202",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -129,24 +129,6 @@
         "maxNodeCount": 1,
         "minNodeCount": 1
       },
-      "conditions": [
-        {
-          "canonicalCode": "RESOURCE_EXHAUSTED",
-          "message": "Insufficient quota to satisfy the request: waiting on IG: instance https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instances/gke-prow-build-greenhouse-20200518173-848a7936-cf4a is still CREATING. Last attempt error: [QUOTA_EXCEEDED] Instance 'gke-prow-build-greenhouse-20200518173-848a7936-cf4a' creation failed: Quota 'CPUS' exceeded.  Limit: 256.0 in region us-central1. - ."
-        },
-        {
-          "canonicalCode": "RESOURCE_EXHAUSTED",
-          "message": "Insufficient quota to satisfy the request: waiting on IG: instance https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instances/gke-prow-build-greenhouse-20200518173-848a7936-i70q is still CREATING. Last attempt error: [QUOTA_EXCEEDED] Instance 'gke-prow-build-greenhouse-20200518173-848a7936-i70q' creation failed: Quota 'CPUS' exceeded.  Limit: 256.0 in region us-central1. - ."
-        },
-        {
-          "canonicalCode": "INTERNAL",
-          "message": "INTERNAL_ERROR: internal error: Node https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instances/gke-prow-build-greenhouse-20200518173-647fc6db-gjd3 still exists in k8s despite deletion"
-        },
-        {
-          "canonicalCode": "NOT_FOUND",
-          "message": "Google Compute Engine: Managed instance gke-prow-build-greenhouse-20200518173-647fc6db-68wz not found."
-        }
-      ],
       "config": {
         "diskSizeGb": 100,
         "diskType": "pd-standard",
@@ -198,7 +180,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.21.11-gke.1100"
+      "version": "1.22.8-gke.202"
     },
     {
       "autoscaling": {
@@ -247,7 +229,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.21.11-gke.1100"
+      "version": "1.22.8-gke.202"
     }
   ],
   "releaseChannel": {
