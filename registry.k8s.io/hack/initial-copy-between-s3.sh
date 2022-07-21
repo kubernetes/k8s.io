@@ -14,8 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Requirements
+# Dependencies
 # - tmate :: the script must be run inside of an existing tmate session
+# - rclone
+# - awscli
 
 REGIONS=(
     ap-northeast-1
