@@ -275,9 +275,10 @@ sbom:
 sigs:
   type: CNAME
   value: redirect.k8s.io.
+# Sippy hosted by OpenShift folks (@dgoodwin, @stbenjam, @deads2k)
 sippy:
-  type: A
-  value: 35.244.255.27
+  type: CNAME
+  value: default.apps.cr.j7t7.p1.openshiftapps.com.
 slack:
   type: A
   value: 34.107.195.71
