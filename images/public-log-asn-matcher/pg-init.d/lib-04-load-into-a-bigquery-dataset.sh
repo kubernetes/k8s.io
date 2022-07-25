@@ -86,3 +86,4 @@ for PEERINGDB_TABLE in ${PEERINGDB_TABLES[*]}; do
     curl -sG "https://www.peeringdb.com/api/${PEERINGDB_TABLE}" | jq -c '.data[]' | sed 's,",\",g' > "/tmp/peeringdb-tables/${PEERINGDB_TABLE}.json"
 done
 
+bq load --autodetect "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.k8s_gcr_io_tags" "/tmp/k8s-gcr-io-tags.csv" sha256manifest:string,image:string,tag:string

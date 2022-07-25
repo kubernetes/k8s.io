@@ -16,11 +16,13 @@
 # Purpose: Promote all the tables to the un-timestamped dataset
 
 if [ ! "${NO_PROMOTE:-}" = "true" ]; then
-    TABLE="7_asn_company_c_ip_lookup"
-    echo "Removing table '${GCP_BIGQUERY_DATASET}.$TABLE'"
-    bq rm -f "${GCP_BIGQUERY_DATASET}.$TABLE" > "${BQ_OUTPUT:-/dev/null}" 2>&1
-    echo "Copying table '${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.$TABLE' to '${GCP_BIGQUERY_DATASET}.$TABLE'"
-    bq cp --noappend_table --nono_clobber -f "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.$TABLE" "${GCP_BIGQUERY_DATASET}.$TABLE"
+    TABLES="7_asn_company_c_ip_lookup k8s_gcr_io_tags"
+    for TABLE in "${TABLES[@]}"; do
+        echo "Removing table '${GCP_BIGQUERY_DATASET}.$TABLE'"
+        bq rm -f "${GCP_BIGQUERY_DATASET}.$TABLE" > "${BQ_OUTPUT:-/dev/null}" 2>&1
+        echo "Copying table '${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.$TABLE' to '${GCP_BIGQUERY_DATASET}.$TABLE'"
+        bq cp --noappend_table --nono_clobber -f "${GCP_BIGQUERY_DATASET}_${PIPELINE_DATE}.$TABLE" "${GCP_BIGQUERY_DATASET}.$TABLE"
+    done
 else
     echo "Promotion of dataset tables disabled."
 fi

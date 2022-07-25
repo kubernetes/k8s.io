@@ -19,6 +19,8 @@ set -euo pipefail
 curl -o /tmp/autnums.html -L https://bgp.potaroo.net/cidr/autnums.html
 python3 /app/asn-autnums-extractor.py /tmp/autnums.html /tmp/potaroo_data.csv
 
+curl -o /tmp/k8s-gcr-io-tags.csv -L https://github.com/ii/k8s-gcr-io-tag-dumper/raw/main/data/k8s-gcr-io.csv
+
 # Strip data to only return ASN numbers
 < /tmp/potaroo_data.csv cut -d ',' -f1 \
     | sed 's/"//' | sed 's/"//' \
