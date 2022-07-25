@@ -7,6 +7,7 @@ k8s-artifacts-gcslogs
 k8s-artifacts-kind
 k8s-artifacts-prod
 k8s-artifacts-prod-bak
+k8s-artifacts-system-packages-sandbox
 k8s-staging-addon-manager
 k8s-staging-apisnoop
 k8s-staging-artifact-promoter
@@ -15,6 +16,7 @@ k8s-staging-bom
 k8s-staging-bootkube
 k8s-staging-boskos
 k8s-staging-build-image
+k8s-staging-capi-cloudstack
 k8s-staging-capi-docker
 k8s-staging-capi-ibmcloud
 k8s-staging-capi-kubeadm
@@ -85,5 +87,6 @@ k8s-staging-slack-infra
 k8s-staging-sp-operator
 k8s-staging-storage-migrator
 k8s-staging-test-infra
+k8s-staging-tg-exporter
 k8s-staging-txtdirect
 us.artifacts.k8s-artifacts-prod.appspot.com
