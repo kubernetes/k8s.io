@@ -91,7 +91,7 @@ readonly PROD_PROJECT_DISABLED_SERVICES=(
 # Regions for prod GCR.
 GCR_PROD_REGIONS=(us eu asia)
 # Regions for prod AR.
-AR_PROD_REGIONS=(us europe asia)
+AR_PROD_REGIONS=(asia-east1 asia-northeast1 europe-north1 europe-west1 europe-west4 us-central1 us-east1 us-east4)
 
 # Minimum time we expect to keep prod GCS artifacts.
 PROD_RETENTION="10y"
