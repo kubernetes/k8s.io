@@ -215,26 +215,6 @@ function ensure_secret_role_binding() {
     _ensure_resource_role_binding "secrets" "${secret}" "${principal}" "${role}"
 }
 
-# Ensure that IAM binding is present for repositories
-# Arguments:
-#   $1:  The repository name (e.g. "images")
-#   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
-#   $3:  The role name (e.g. "roles/storage.objectAdmin")
-#   $4:  The project (e.g. "k8s-artifacts-prod")
-#   $5:  The location (e.g. "europe")
-function ensure_repository_role_binding() {
-    if [ ! $# -eq 5 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ]; then
-        echo "ensure_repository_role_binding(repository, principal, role, project, location) requires 5 arguments" >&2
-        return 1
-    fi
-
-    local repository="${1}"
-    local principal="${2}"
-    local role="${3}"
-
-    _ensure_resource_role_binding "artifacts repositories" "${repository}" "${principal}" "${role}" "${project}" "${location}"
-}
-
 # Ensure that IAM binding is present for service-account
 # Arguments:
 #   $1:  The serviceaccount email (e.g. "my-serviceaccount@k8s-infra-foo.iam.gserviceaccount.com")

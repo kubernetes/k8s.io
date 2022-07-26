@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright 2020 The Kubernetes Authors.
+# Copyright 2022 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -57,8 +57,6 @@ function empower_ar_admins() {
     local project="$1"
     local location="$2"
 
-    # TODO (upodroid) uncomment the code below once GCR is gone.
-    # ensure_project_role_binding "${project}" "group:${GCR_ADMINS}" "roles/viewer"
     ensure_repository_role_binding "images" "group:${GCR_ADMINS}" "artifactregistry.admin" "${project}" "${location}"
 }
 
@@ -72,7 +70,7 @@ function ensure_ar_repo() {
     fi
     local project="$1"
     local location="$2"
-
+    # AR Repos will always be called images. Format LOCATION-docker.pkg.dev/PROJECT_ID/images/foobar:latest
     if ! gcloud artifacts repositories describe images --location="${location}" --project="${project}" >/dev/null 2>&1; then
         gcloud artifacts repositories create images \
             --repository-format=docker \
@@ -83,3 +81,22 @@ function ensure_ar_repo() {
     ensure_public_ar_registry "${project}" "${location}"
 }
 
+# Ensure that IAM binding is present for repositories
+# Arguments:
+#   $1:  The repository name (e.g. "images")
+#   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
+#   $3:  The role name (e.g. "roles/storage.objectAdmin")
+#   $4:  The project (e.g. "k8s-artifacts-prod")
+#   $5:  The location (e.g. "europe")
+function ensure_ar_repository_role_binding() {
+    if [ ! $# -eq 5 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ]; then
+        echo "ensure_ar_repository_role_binding(repository, principal, role, project, location) requires 5 arguments" >&2
+        return 1
+    fi
+
+    local repository="${1}"
+    local principal="${2}"
+    local role="${3}"
+
+    _ensure_resource_role_binding "artifacts repositories" "${repository}" "${principal}" "${role}" "${project}" "${location}"
+}

@@ -66,8 +66,6 @@ readonly STAGING_PROJECT_SERVICES=(
     secretmanager.googleapis.com
     # These projects may host binaries in GCS
     storage-component.googleapis.com
-    # These projects host images in AR
-    artifactregistry.googleapis.com
 
     # Dependencies (gcloud services used to encode these in its response)
 
@@ -259,30 +257,6 @@ function ensure_staging_gcr_repo() {
     ensure_gcs_bucket_logging "${gcr_bucket}"
 }
 
-# Ensure a AR repo is provisioned in the given staging project, with
-# appropriate permissions for the given group and GCR/AR admins
-#
-# $1: The GCP project (e.g. k8s-staging-foo)
-# $2: The group to grant write access (e.g. k8s-infra-staging-foo@kubernetes.io)
-# Repo is called images and created in the us multiregion
-function ensure_staging_ar_repo() {
-    if [ $# != 2 ] || [ -z "$1" ] || [ -z "$2" ]; then
-        echo "${FUNCNAME[0]}(project, writers) requires 2 arguments" >&2
-        return 1
-    fi
-    local project="${1}"
-    local writers="${2}"
-
-    color 6 "Ensuring an AR repo exists for project: ${project}"
-    ensure_ar_repo "${project}" "us"
-
-    color 6 "Ensuring ${writers} can write to AR for project: ${project}"
-    empower_group_to_write_ar "${writers}" "${project}" "us"
-
-    color 6 "Ensuring GCR/AR admins can admin AR for project: ${project}"
-    empower_ar_admins "${project}" "us"
-}
-
 # Ensure GCB is setup for the given staging project, by ensuring the
 # given staging GCS bucket exists, and allowing the given group and a
 # prow service account to write to the GCS bucket and trigger GCB
@@ -422,6 +396,12 @@ function ensure_release_manager_special_cases() {
         fi
 
         # Artifact Registry
+        #
+        # Enable Google Artifact Registry to allow Release Managers to prepare
+        # for GCR to Artifact Registry migration
+        # ref: https://github.com/kubernetes/k8s.io/issues/1343
+        ensure_services "${project}" artifactregistry.googleapis.com
+
         # Roles: https://cloud.google.com/artifact-registry/docs/access-control#roles
         #
         # Empower Release Manager admins to create and manage repositories and
