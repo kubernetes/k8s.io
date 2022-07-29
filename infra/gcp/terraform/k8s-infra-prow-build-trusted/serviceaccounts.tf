@@ -38,6 +38,9 @@ locals {
     }
     // also assigned roles by:
     // - terraform/kubernetes-public
+    k8s-cve-feed = {
+      description = "write to gs://k8s-cve-feed"
+    }
     k8s-keps = {
       description   = "write to gs://k8s-keps"
     }

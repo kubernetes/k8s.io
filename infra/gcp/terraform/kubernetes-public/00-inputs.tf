@@ -27,7 +27,7 @@ locals {
 }
 
 terraform {
-  required_version = "~> 1.0.0"
+  required_version = "~> 1.1.0"
 
   backend "gcs" {
     bucket = "k8s-infra-tf-public-clusters"
@@ -36,10 +36,10 @@ terraform {
 
   required_providers {
     google = {
-      version = "~> 3.90.1"
+      version = "~> 4.16.0"
     }
     google-beta = {
-      version = "~> 3.90.1"
+      version = "~> 4.16.0"
     }
   }
 }
