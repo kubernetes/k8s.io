@@ -424,6 +424,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
+      - k8s-infra-release-editors@kubernetes.io
       - ameukam@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
