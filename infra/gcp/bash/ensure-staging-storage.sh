@@ -56,14 +56,22 @@ readonly RELEASE_STAGING_PROJECTS=(
 )
 
 readonly STAGING_PROJECT_SERVICES=(
-    # These projects use GCB to build/push images to GCR
+    # used by the staging project to host container images in Artifact Registry
+    artifactregistry.googleapis.com
+    # used by the staging project to inventory GCP resources
+    cloudasset.googleapis.com
+    # used by the staging project use GCB to build/sign/push images to AR/GCR
     cloudbuild.googleapis.com
-    # Some GCB jobs may use KMS
+    # Some Google CloudBuild jobs may use KMS
     cloudkms.googleapis.com
     # These projects host images in GCR
     containerregistry.googleapis.com
+    # used by cloudbuild to run jobs with dedicated service accounts
+    iam.googleapis.com
     # Some GCB jobs may use Secret Manager (preferred over KMS)
     secretmanager.googleapis.com
+    # used by the staging project to troobleshoot
+    policytroubleshooter.googleapis.com
     # These projects may host binaries in GCS
     storage-component.googleapis.com
 
@@ -75,7 +83,7 @@ readonly STAGING_PROJECT_SERVICES=(
     pubsub.googleapis.com
     # storage-api used by: cloudbuild, containerregistry
     storage-api.googleapis.com
-    # used by cloud build for keyless artifact signing
+    # used by cloudbuild for keyless artifact signing
     iamcredentials.googleapis.com
 )
 
