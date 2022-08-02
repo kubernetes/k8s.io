@@ -11,7 +11,6 @@ steps:
     - TAG=$_TAG
     - TAG_DATE_SHA=$_GIT_TAG
     - _=$_PULL_BASE_REF # unused
-serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/gcb-image-builder@$PROJECT_ID.iam.gserviceaccount.com'
 substitutions:
   # variables set by kubernetes/test-infra/images/builder
   # set by image-builder to vYYYYMMDD-hash
