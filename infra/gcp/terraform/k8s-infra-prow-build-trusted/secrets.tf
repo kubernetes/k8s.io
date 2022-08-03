@@ -36,6 +36,10 @@ locals {
       group  = "sig-contributor-experience"
       owners = "github@kubernetes.io"
     }
+    registry-k8s-io-s3-writer = {
+      group  = "sig-release"
+      owners = "k8s-infra-release-admins@kubernetes.io"
+    }
     service-account = {
       group  = "sig-testing"
       owners = "k8s-infra-prow-oncall@kubernetes.io"
