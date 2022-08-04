@@ -21,7 +21,7 @@
   "clusterIpv4Cidr": "10.4.0.0/14",
   "createTime": "2020-04-30T23:44:46+00:00",
   "currentMasterVersion": "1.22.8-gke.202",
-  "currentNodeVersion": "1.21.11-gke.1100 *",
+  "currentNodeVersion": "1.22.8-gke.202",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -157,7 +157,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.21.11-gke.1100"
+      "version": "1.22.8-gke.202"
     }
   ],
   "releaseChannel": {

@@ -113,6 +113,7 @@
     "sha256:76dad56dda3e7519b72c9501dfee039c6a33ea5a5075eadd9bd0cdc4ba7b476d": [ "v1.7.2" ]
     "sha256:6029c252dae6178c99b580de72d7776158edbc81be0de15cedc4152a3acfed18": [ "v1.7.3" ]
     "sha256:7abd2aee32210921d7fbfb38cb0ce5bee4f6a043197d301c3c823872fb5e5772": [ "v1.8.0" ]
+    "sha256:92257881c1d6493cf18299a24af42330f891166560047902b8d431fb66b01af5": [ "v1.9.0" ]
 - name: iscsiplugin
   dmap:
     "sha256:31117074c183242b223340f2fc0f886243e97c6cb1a83d98cfb00a69d1746697": [ "v0.1.0" ]
@@ -129,6 +130,7 @@
 - name: local-volume-provisioner
   dmap:
     "sha256:63859b69f9dfc0858e5d8746218e435c36e205c041fb6d8baf71ad132e24737f": [ "v2.4.0" ]
+    "sha256:a112f1625aad84e4f425141199ab6ddbb49432c66e05dbbaab033d0ab2e8dfaf": [ "v2.5.0" ]
 - name: mock-driver
   dmap:
     "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]

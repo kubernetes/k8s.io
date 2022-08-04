@@ -1,0 +1,11 @@
+{
+  "createTime": "2022-07-12T16:14:03.801Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-gcb-untrusted",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-gcb-untrusted",
+  "projectNumber": "382938530269"
+}

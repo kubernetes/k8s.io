@@ -41,6 +41,7 @@ groups:
       - ctadeu@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
+      - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
@@ -59,6 +60,7 @@ groups:
       - ameukam@gmail.com
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
+      - joseph.r.sandoval@gmail.com
       - max@koerbaecher.io
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
@@ -263,6 +265,7 @@ groups:
       - gmccloskey@google.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
+      - joseph.r.sandoval@gmail.com
       - kikis.github@gmail.com
       - max@koerbaecher.io
       - mudrinic.mare@gmail.com
@@ -347,7 +350,7 @@ groups:
       - edidiongasikpo@gmail.com # 1.25 Docs Shadow
       - sethpmccombs@gmail.com # 1.25 Docs Shadow
       - guillen.carolina@gmail.com # 1.25 Docs Shadow
-      - csantana@us.ibm.com # 1.25 Release Notes Lead
+      - csantana23@gmail.com # 1.25 Release Notes Lead
       - orsenthil@gmail.com # 1.25 Release Notes Shadow
       - ranidivya063@gmail.com # 1.25 Release Notes Shadow
       - ramses.green.2@gmail.com # 1.25 Release Notes Shadow
@@ -422,6 +425,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
+      - k8s-infra-release-editors@kubernetes.io
       - ameukam@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
