@@ -1,5 +1,11 @@
 - name: ip-masq-agent
   dmap:
+    "sha256:d8cd0c7118e74bb9b1c90b2fd3c0c90d52d5d5ecea63b06e08e869a9d6e59fed": ["v2.8.0"]
+    "sha256:e02d4a264ea8a03f6ef0f222a9a979eaeb9954ef603a40e77f3fe8827947a9a6": ["v2.8.0__linux_amd64"]
+    "sha256:983102c0bf47a385c82793d475f8bfc454be2b8be7a5864e7617f0229192a52d": ["v2.8.0__linux_arm"]
+    "sha256:ce0b51094877b7f5be95750f16908112876190b1db2d507a3bd118576a69e5ad": ["v2.8.0__linux_arm64"]
+    "sha256:171cac9ceb055a85114b3cf3dcfe9101bf203f30887fec94a80a76b23dc3ede1": ["v2.8.0__linux_ppc64le"]
+    "sha256:65c5fb59582d88884c175c6f53a1bee688ba9f6caecc059e175574a3c031500a": ["v2.8.0__linux_s390x"]
     "sha256:d674edf6677087fcae72b6745909d034c77bbe5260c02e5d56e73e9305e72a54": ["v2.7.1"]
     "sha256:4b1bb6102db47905993547f6f5aa2f368bab39faee76eb4fe62301443c509738": ["v2.7.1__linux_amd64"]
     "sha256:4152ce8923f30d2bbc38c4fb9a687fa617bf60114955aa1defd2e4df9a3eb71c": ["v2.7.1__linux_arm"]
