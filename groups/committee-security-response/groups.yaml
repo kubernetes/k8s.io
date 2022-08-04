@@ -31,7 +31,6 @@ groups:
       - rita.z.zhang@gmail.com
       - sfowler@redhat.com
       - srajakum@amazon.com
-      - taahm@google.com
       # Distributors
       - argoprod@us.ibm.com
       - aws-k8s-embargo-notification@amazon.com
