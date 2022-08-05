@@ -131,7 +131,7 @@ resource "google_cloud_run_service" "regions" {
       containers {
         image = local.image
       }
-      container_concurrency = 5 # TODO(ameukam): adjust for production.
+      container_concurrency = 5
       // 30 seconds less than cloud scheduler maximum.
       timeout_seconds = 570
     }
@@ -149,7 +149,13 @@ resource "google_cloud_run_service" "regions" {
   lifecycle {
     ignore_changes = [
       // This gets added by the Cloud Run API post deploy and causes diffs, can be ignored...
+      template[0].metadata[0].annotations["client.knative.dev/user-image"],
       template[0].metadata[0].annotations["run.googleapis.com/sandbox"],
+      template[0].metadata[0].annotations["run.googleapis.com/client-name"],
+      template[0].metadata[0].annotations["run.googleapis.com/client-version"],
+      // Ignore changes done on the container specification
+      // since this cloud run service is handled by https://github.com/kubernetes-sigs/oci-proxy/blob/main/hack/make-rules/deploy.sh
+      template[0].spec[0].containers[0],
     ]
   }
 }
