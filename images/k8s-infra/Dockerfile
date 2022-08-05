@@ -37,6 +37,7 @@ ARG K8S_VERSION=1.21.14
 ARG OPA_VERSION=0.38.0
 ARG SHELLCHECK_VERSION=0.8.0
 ARG TFSWITCH_VERSION=0.13.1288
+ARG RCLONE_VERSION=1.58.1
 
 # build everything in /build
 WORKDIR /build
@@ -75,18 +76,21 @@ RUN set -o errexit nounset pipefail \
     && echo "Installing Google Cloud SDK ..." \
         && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
             | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
-        && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
-            | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - \
+        && curl -fsSLo /usr/share/keyrings/cloud.google.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+        && chmod go+r /usr/share/keyrings/cloud.google.gpg \
         && apt-get update -o Dir::Etc::sourcelist="sources.list.d/google-cloud-sdk.list" \
             -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0" \
         && apt-get install -y --no-install-recommends \
             "google-cloud-sdk=${GCLOUD_VERSION}-0" \
             python3-crcmod \
+        && gcloud config set core/disable_usage_reporting true \
+        && gcloud config set component_manager/disable_update_check true \
+        && gcloud config set metrics/environment github_docker_image \
     && echo "Installing gh ..." \
         && echo "deb [signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
             | tee -a /etc/apt/sources.list.d/github-cli.list \
-        && curl https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-            | apt-key --keyring /usr/share/keyrings/githubcli-archive-keyring.gpg add - \
+        && curl -fsSLo /usr/share/keyrings/githubcli-archive-keyring.gpg https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
         && apt-get update -o Dir::Etc::sourcelist="sources.list.d/github-cli.list" \
             -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0" \
         && apt-get install -y --no-install-recommends \
@@ -106,6 +110,10 @@ RUN set -o errexit nounset pipefail \
     && echo "Installing opa ..." \
         && curl -fsSL "https://openpolicyagent.org/downloads/v${OPA_VERSION}/opa_linux_amd64" --output /usr/local/bin/opa \
         && chmod +x /usr/local/bin/opa \
+    && echo "Installing rclone ..." \
+        && curl -fsSSL "https://downloads.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-amd64.deb" --output /tmp/rclone_amd64.deb \
+        && dpkg -i /tmp/rclone_amd64.deb \
+        && rm -f /tmp/rclone_amd64.deb \
     && echo "Installing shellcheck ..." \
         && export BASE_URL="https://github.com/koalaman/shellcheck/releases/download" \
         && export URL="${BASE_URL}/v${SHELLCHECK_VERSION}/shellcheck-v${SHELLCHECK_VERSION}.linux.x86_64.tar.xz" \
@@ -143,6 +151,7 @@ RUN set -o errexit nounset pipefail \
         && pr-creator --help            | tee pr-creator-help.txt \
         && git -C test-infra log -n1    | tee pr-creator-version.txt \
         && python3 --version            | tee python-version.txt \
+        && rclone --version             | tee rclone.txt \
         && shellcheck --version         | tee shellcheck-version.txt \
         && terraform --version          | tee terraform-version.txt \
         && tfswitch --version           | tee tfswitch-version.txt \
