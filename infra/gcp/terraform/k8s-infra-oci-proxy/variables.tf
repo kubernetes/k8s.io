@@ -22,7 +22,22 @@ variable "tag" {
 variable "cloud_run_regions" {
   type = list(string)
   default = [
+    # asia
+    "asia-east1",
+    "asia-northeast1",
+    "asia-northeast2",
+    # europe
+    "europe-north1",
+    "europe-southwest1",
+    "europe-west1",
+    "europe-west8",
+    "europe-west9",
+    # us
     "us-central1",
+    "us-east1",
+    "us-east4",
+    "us-east5",
+    "us-south1",
     "us-west1"
   ]
 }
