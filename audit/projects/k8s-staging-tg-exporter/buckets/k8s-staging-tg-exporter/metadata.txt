@@ -11,8 +11,8 @@ gs://k8s-staging-tg-exporter/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 29 Jun 2022 13:42:13 GMT
-	Time updated:			Wed, 29 Jun 2022 13:42:49 GMT
-	Metageneration:			9
+	Time updated:			Tue, 02 Aug 2022 16:12:40 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

@@ -40,6 +40,7 @@
     {
       "members": [
         "group:k8s-infra-sandbox-capg@kubernetes.io",
+        "serviceAccount:richard-capg@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"

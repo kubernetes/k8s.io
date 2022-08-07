@@ -11,8 +11,8 @@ gs://k8s-staging-coredns/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 01 May 2019 00:09:51 GMT
-	Time updated:			Mon, 13 Jun 2022 23:23:07 GMT
-	Metageneration:			63
+	Time updated:			Tue, 02 Aug 2022 14:52:47 GMT
+	Metageneration:			66
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

@@ -45,8 +45,8 @@
     },
     {
       "members": [
-        "deleted:group:k8s-infra-staging-tg-exporter@kubernetes.io?uid=501521692225807085867",
-        "group:k8s-infra-artifact-admins@kubernetes.io"
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-tg-exporter@kubernetes.io"
       ],
       "role": "roles/viewer"
     }
