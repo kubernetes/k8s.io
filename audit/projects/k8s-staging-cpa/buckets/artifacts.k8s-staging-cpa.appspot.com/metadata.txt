@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-cpa.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 07 Apr 2020 22:48:32 GMT
-	Time updated:			Mon, 13 Jun 2022 23:24:08 GMT
-	Metageneration:			24
+	Time updated:			Tue, 02 Aug 2022 14:54:04 GMT
+	Metageneration:			27
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
