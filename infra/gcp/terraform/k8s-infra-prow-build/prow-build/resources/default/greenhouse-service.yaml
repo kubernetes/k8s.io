@@ -12,16 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: bazel-cache
-  namespace: default
-  labels:
-    run: bazel-cache
-spec:
-  ports:
-  - port: 8080
-    protocol: TCP
-  selector:
-    app: greenhouse
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: bazel-cache
+#   namespace: default
+#   labels:
+#     run: bazel-cache
+# spec:
+#   ports:
+#   - port: 8080
+#     protocol: TCP
+#   selector:
+#     app: greenhouse
