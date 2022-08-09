@@ -76,6 +76,12 @@ groups:
       - mhausler@amazon.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
+    members:
+      # Associate SRC members
+      - pushkarj.at.work@gmail.com
+      - rita.z.zhang@gmail.com
+      - sfowler@redhat.com
+      - srajakum@amazon.com
 
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
@@ -94,6 +100,12 @@ groups:
       - mhausler@amazon.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
+    members:
+      # Associate SRC members
+      - pushkarj.at.work@gmail.com
+      - rita.z.zhang@gmail.com
+      - sfowler@redhat.com
+      - srajakum@amazon.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
