@@ -34,7 +34,7 @@ function empower_group_to_write_ar() {
     local project="$2"
     local location="$3"
 
-    ensure_repository_role_binding "images" "${group}" "artifactregistry.repoAdmin" "${project}" "${location}"
+    ensure_ar_repository_role_binding "images" "${group}" "roles/artifactregistry.repoAdmin" "${project}" "${location}"
 }
 
 function ensure_public_ar_registry() {
@@ -45,7 +45,7 @@ function ensure_public_ar_registry() {
     local project="$1"
     local location="$2"
 
-    ensure_repository_role_binding "images" "allUsers" "artifactregistry.reader" "${project}" "${location}"
+    ensure_ar_repository_role_binding "images" "allUsers" "roles/artifactregistry.reader" "${project}" "${location}"
 }
 
 function empower_ar_admins() {
@@ -57,7 +57,7 @@ function empower_ar_admins() {
     local project="$1"
     local location="$2"
 
-    ensure_repository_role_binding "images" "group:${GCR_ADMINS}" "artifactregistry.admin" "${project}" "${location}"
+    ensure_ar_repository_role_binding "images" "group:${GCR_ADMINS}" "roles/artifactregistry.admin" "${project}" "${location}"
 }
 
 # Ensure the AR registry exists and is world-readable.
