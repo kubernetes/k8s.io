@@ -180,7 +180,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.22.8-gke.202"
+      "version": "1.22.10-gke.600"
     },
     {
       "autoscaling": {

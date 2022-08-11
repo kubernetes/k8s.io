@@ -91,7 +91,7 @@ readonly PROD_PROJECT_DISABLED_SERVICES=(
 # Regions for prod GCR.
 GCR_PROD_REGIONS=(us eu asia)
 # Regions for prod AR.
-AR_PROD_REGIONS=(asia-east1 asia-south1 asia-northeast1 asia-northeast2 australia-southeast1 europe-north1 europe-southeast1 europe-west1 europe-west2 europe-west4 europe-west8 europe-west9 southamerica-west1 us-central1 us-east1 us-east4 us-east5 us-south1 us-west1 us-west2)
+AR_PROD_REGIONS=(asia-east1 asia-south1 asia-northeast1 asia-northeast2 australia-southeast1 europe-north1 europe-southwest1 europe-west1 europe-west2 europe-west4 europe-west8 europe-west9 southamerica-west1 us-central1 us-east1 us-east4 us-east5 us-south1 us-west1 us-west2)
 
 # Minimum time we expect to keep prod GCS artifacts.
 PROD_RETENTION="10y"
@@ -116,7 +116,7 @@ function ensure_prod_gcr() {
 
         color 6 "Ensuring GCR admins can admin GCR in region: ${region} for project: ${project}"
         empower_gcr_admins "${project}" "${region}"
-        
+
         color 6 "Empowering image promoter for region: ${region} in project: ${project}"
         empower_image_promoter "${project}" "${region}"
 
@@ -145,10 +145,10 @@ function ensure_prod_ar() {
 
         color 6 "Ensuring GCR admins can admin AR in location: ${region} for project: ${project}"
         empower_ar_admins "${project}" "${region}"
-        
+
         color 6 "Empowering image promoter with roles/artifactregistry.repoAdmin in project: ${project}"
         serviceaccount=$(svc_acct_email "${project}" "${IMAGE_PROMOTER_SVCACCT}")
-        ensure_project_role_binding "${project}" "serviceAccount:$serviceaccount" "artifactregistry.repoAdmin"
+        ensure_project_role_binding "${project}" "serviceAccount:$serviceaccount" "roles/artifactregistry.repoAdmin"
     done 2>&1 | indent
 }
 
@@ -399,7 +399,7 @@ function ensure_all_prod_special_cases() {
         color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
             "${project}" "${PROWJOB_POD_NAMESPACE}" \
-            "${serviceaccount}" "k8s-infra-gcr-vuln-scanning" 
+            "${serviceaccount}" "k8s-infra-gcr-vuln-scanning"
     done
 
     # For write access to:
