@@ -20,7 +20,7 @@ registries:
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: europe-north1-docker.pkg.dev/k8s-artifacts-prod/images/experimental
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: europe-southeast1-docker.pkg.dev/k8s-artifacts-prod/images/experimental
+- name: europe-southwest1-docker.pkg.dev/k8s-artifacts-prod/images/experimental
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: europe-west1-docker.pkg.dev/k8s-artifacts-prod/images/experimental
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
