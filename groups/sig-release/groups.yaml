@@ -134,6 +134,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+      - cy@borg.dev
 
   - email-id: k8s-infra-staging-kubernetes@kubernetes.io
     name: k8s-infra-staging-kubernetes
