@@ -2,6 +2,12 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:service-1058882910725@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/artifactregistry.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-1058882910725@container-analysis.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.ServiceAgent"

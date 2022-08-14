@@ -1,4 +1,5 @@
 NAME                                 TITLE
+artifactregistry.googleapis.com      Artifact Registry API
 clouderrorreporting.googleapis.com   Error Reporting API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
 compute.googleapis.com               Compute Engine API

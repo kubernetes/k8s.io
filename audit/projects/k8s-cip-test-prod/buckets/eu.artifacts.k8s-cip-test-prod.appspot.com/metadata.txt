@@ -11,8 +11,8 @@ gs://eu.artifacts.k8s-cip-test-prod.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 03 Apr 2019 21:55:11 GMT
-	Time updated:			Wed, 02 Mar 2022 13:18:05 GMT
-	Metageneration:			57
+	Time updated:			Wed, 10 Aug 2022 17:33:24 GMT
+	Metageneration:			58
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
