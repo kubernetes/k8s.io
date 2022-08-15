@@ -20,17 +20,19 @@ groups:
       - killen.bob@gmail.com
       - paris.pittman@gmail.com
     managers:
-      - pal.nabarun95@gmail.com
       - ameukam@gmail.com
-      - matthewbbroberg@gmail.com
       - jrosland@vmware.com
+      - matthewbbroberg@gmail.com
+      - pal.nabarun95@gmail.com
       - rajula96reddy@gmail.com
     members:
-      - dgiles@linuxfoundation.org
-      - jberkus@redhat.com
       - chris@chrisshort.net
-      - samudralavamshi@gmail.com
+      - dgiles@linuxfoundation.org
+      - harshitasao@gmail.com
+      - jberkus@redhat.com
       - puja@giantswarm.io
+      - rajaskakodkar16@gmail.com
+      - samudralavamshi@gmail.com
 
   - email-id: dev@kubernetes.io
     name: dev
