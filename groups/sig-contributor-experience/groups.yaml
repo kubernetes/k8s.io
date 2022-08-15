@@ -28,8 +28,10 @@ groups:
     members:
       - chris@chrisshort.net
       - dgiles@linuxfoundation.org
+      - harshitasao@gmail.com
       - jberkus@redhat.com
       - puja@giantswarm.io
+      - rajaskakodkar16@gmail.com
       - samudralavamshi@gmail.com
 
   - email-id: dev@kubernetes.io
