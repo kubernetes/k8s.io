@@ -1,5 +1,3 @@
-
-
 # Configure the nginx deployment
 
 apiVersion: apps/v1
