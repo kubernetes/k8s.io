@@ -44,6 +44,18 @@ groups:
       - jsturtevant@gmail.com
       - marosset@microsoft.com
 
+  - email-id: k8s-infra-staging-win-op-rdnss@kubernetes.io
+    name: k8s-infra-staging-win-op-rdnss
+    description: |-
+      ACL for staging Windows Operational Readiness
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cbelu@cloudbasesolutions.com
+      - jayunit100.apache@gmail.com
+      - jsturtevant@gmail.com
+      - marosset@microsoft.com
+
   #
   # k8s-infra owners for sig-owned subprojects
   #

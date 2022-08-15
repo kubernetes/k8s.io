@@ -192,6 +192,7 @@ restrictions:
     allowedGroups:
       - "^sig-windows-leads@kubernetes.io$"
       - "^k8s-infra-staging-gmsa-webhook@kubernetes.io$"
+      - "^k8s-infra-staging-win-op-rdnss@kubernetes.io$"
   - path: "sig-k8s-infra/groups.yaml"
     allowedGroups:
       - "^gke-security-groups@kubernetes.io$"
