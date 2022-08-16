@@ -1,5 +1,3 @@
-
-
 # Configure the Kubernetes deployment
 
 apiVersion: v1

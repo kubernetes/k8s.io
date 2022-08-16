@@ -131,4 +131,3 @@
 - name: etcd-manager
   dmap:
     "sha256:256a64fb44876d270f04ada1afd3ca431341f249aa52cbe2b3780f8f23961142": ["v3.0.20220727"]
-
