@@ -230,7 +230,7 @@ groups:
   - email-id: k8s-infra-gcp-auditors@kubernetes.io
     name: k8s-infra-gcp-auditors
     description: |-
-      granted read-only access to all GCP infrastructure with the kubernetes.io
+      grants read-only access to all GCP infrastructure with the kubernetes.io
       GCP organization, excluding sensitive/secret values
 
       access granted via custom organization role audit.viewer
@@ -244,6 +244,7 @@ groups:
       - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - sj7trunks@pendulus.net
+      - cy@borg.dev
 
   #
   # k8s-infra org-wide infrastructure admin groups
@@ -369,7 +370,7 @@ groups:
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
     name: k8s-infra-gcp-org-admins
     description: |-
-      granted owner access to the kubernetes.io GCP organization, as well as
+      grants owner access to the kubernetes.io GCP organization, as well as
       additional privileges necessary for billing and admin purposes
 
       access granted via custom organization role organization.admin
