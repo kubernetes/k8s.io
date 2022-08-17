@@ -6,7 +6,7 @@ metadata:
     app: k8s-io
     version: v1
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: k8s-io
@@ -34,7 +34,7 @@ spec:
           # Map all keys to files.
       containers:
       - name: nginx
-        image: nginx:1.10-alpine  # = :stable-alpine as of 8/23/2016
+        image: nginx:1.22-alpine
         resources:
           limits:
             cpu: 1
@@ -61,7 +61,10 @@ spec:
         lifecycle:
           preStop:
             exec: # nginx likes to terminate ASAP
-              command: [ "/bin/sleep", "30" ]
+              command:
+                - /usr/sbin/nginx
+                - -s
+                - quit
         volumeMounts:
         - name: nginx
           mountPath: /etc/nginx
