@@ -279,9 +279,10 @@ sigs:
 sippy:
   type: CNAME
   value: default.apps.cr.j7t7.p1.openshiftapps.com.
+# Slack Inviter
 slack:
-  type: A
-  value: 34.107.195.71
+  type: CNAME
+  value: redirect.k8s.io.
 # Prow (@ixdy).
 submit-queue:
   type: CNAME

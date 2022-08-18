@@ -56,6 +56,8 @@ spec:
   - sbom.kubernetes.io
   - sigs.k8s.io
   - sigs.kubernetes.io
+  - slack.k8s.io
+  - slack.kubernetes.io
   - submit-queue.k8s.io
   - submit-queue.kubernetes.io
   - www.k8s.io
