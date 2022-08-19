@@ -330,7 +330,7 @@ data:
         listen 80;
 
        location / {
-         rewrite ^/.$ https://communityinviter.com/apps/kubernetes/community permanent;
+         rewrite ^/.*$ https://communityinviter.com/apps/kubernetes/community permanent;
        }
       }
 
