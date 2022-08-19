@@ -1,0 +1,11 @@
+{
+  "createTime": "2022-08-19T12:34:47.836Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-win-op-rdnss",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-win-op-rdnss",
+  "projectNumber": "740513459330"
+}
