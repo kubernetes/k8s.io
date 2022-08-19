@@ -18,6 +18,7 @@ package fake
 
 import (
 	"fmt"
+	"sync"
 
 	admin "google.golang.org/api/admin/directory/v1"
 	groupssettings "google.golang.org/api/groupssettings/v1"
@@ -36,6 +37,8 @@ type FakeAdminServiceClient struct {
 	// creation in the group service fake client, where the GsGroups
 	// map takes the group email as the key.
 	onGroupInsert func(string)
+
+	mutex sync.RWMutex
 }
 
 func NewFakeAdminServiceClient() *FakeAdminServiceClient {
@@ -95,6 +98,8 @@ func (fasc *FakeAdminServiceClient) RegisterCallback(onGroupInsert func(string))
 }
 
 func (fasc *FakeAdminServiceClient) GetGroup(groupKey string) (*admin.Group, error) {
+	fasc.mutex.RLock()
+	defer fasc.mutex.RUnlock()
 	group, ok := fasc.Groups[groupKey]
 	if !ok {
 		return nil, fmt.Errorf("group key %s not found", groupKey)
@@ -104,6 +109,8 @@ func (fasc *FakeAdminServiceClient) GetGroup(groupKey string) (*admin.Group, err
 }
 
 func (fasc *FakeAdminServiceClient) GetMember(groupKey, memberKey string) (*admin.Member, error) {
+	fasc.mutex.RLock()
+	defer fasc.mutex.RUnlock()
 	members, ok := fasc.Members[groupKey]
 	if !ok {
 		return nil, fmt.Errorf("group with group key %s not found", groupKey)
@@ -118,6 +125,8 @@ func (fasc *FakeAdminServiceClient) GetMember(groupKey, memberKey string) (*admi
 }
 
 func (fasc *FakeAdminServiceClient) ListGroups() (*admin.Groups, error) {
+	fasc.mutex.RLock()
+	defer fasc.mutex.RUnlock()
 	groups := &admin.Groups{}
 	for _, group := range fasc.Groups {
 		groups.Groups = append(groups.Groups, group)
@@ -126,6 +135,8 @@ func (fasc *FakeAdminServiceClient) ListGroups() (*admin.Groups, error) {
 }
 
 func (fasc *FakeAdminServiceClient) ListMembers(groupKey string) ([]*admin.Member, error) {
+	fasc.mutex.RLock()
+	defer fasc.mutex.RUnlock()
 	_, ok := fasc.Members[groupKey]
 	if !ok {
 		return nil, fmt.Errorf("groupKey %s not found", groupKey)
@@ -140,6 +151,8 @@ func (fasc *FakeAdminServiceClient) ListMembers(groupKey string) ([]*admin.Membe
 }
 
 func (fasc *FakeAdminServiceClient) InsertGroup(group *admin.Group) (*admin.Group, error) {
+	fasc.mutex.Lock()
+	defer fasc.mutex.Unlock()
 	fasc.Groups[group.Email] = group
 	if fasc.onGroupInsert != nil {
 		fasc.onGroupInsert(group.Email)
@@ -150,6 +163,8 @@ func (fasc *FakeAdminServiceClient) InsertGroup(group *admin.Group) (*admin.Grou
 }
 
 func (fasc *FakeAdminServiceClient) InsertMember(groupKey string, member *admin.Member) (*admin.Member, error) {
+	fasc.mutex.Lock()
+	defer fasc.mutex.Unlock()
 	_, ok := fasc.Members[groupKey]
 	if !ok {
 		return nil, fmt.Errorf("groupKey %s not found", groupKey)
@@ -160,6 +175,8 @@ func (fasc *FakeAdminServiceClient) InsertMember(groupKey string, member *admin.
 }
 
 func (fasc *FakeAdminServiceClient) UpdateGroup(groupKey string, group *admin.Group) (*admin.Group, error) {
+	fasc.mutex.Lock()
+	defer fasc.mutex.Unlock()
 	_, ok := fasc.Groups[groupKey]
 	if !ok {
 		return nil, fmt.Errorf("group key %s not found", groupKey)
@@ -170,6 +187,8 @@ func (fasc *FakeAdminServiceClient) UpdateGroup(groupKey string, group *admin.Gr
 }
 
 func (fasc *FakeAdminServiceClient) UpdateMember(groupKey, memberKey string, member *admin.Member) (*admin.Member, error) {
+	fasc.mutex.Lock()
+	defer fasc.mutex.Unlock()
 	_, ok := fasc.Members[groupKey]
 	if !ok {
 		return nil, fmt.Errorf("group with group key %s not found", groupKey)
@@ -185,6 +204,8 @@ func (fasc *FakeAdminServiceClient) UpdateMember(groupKey, memberKey string, mem
 }
 
 func (fasc *FakeAdminServiceClient) DeleteGroup(groupKey string) error {
+	fasc.mutex.Lock()
+	defer fasc.mutex.Unlock()
 	_, ok := fasc.Groups[groupKey]
 	if !ok {
 		return fmt.Errorf("group key %s not found", groupKey)
@@ -195,6 +216,8 @@ func (fasc *FakeAdminServiceClient) DeleteGroup(groupKey string) error {
 }
 
 func (fasc *FakeAdminServiceClient) DeleteMember(groupKey, memberKey string) error {
+	fasc.mutex.Lock()
+	defer fasc.mutex.Unlock()
 	_, ok := fasc.Members[groupKey]
 	if !ok {
 		return fmt.Errorf("group with group key %s not found", groupKey)
@@ -212,6 +235,7 @@ func (fasc *FakeAdminServiceClient) DeleteMember(groupKey, memberKey string) err
 // FakeGroupServiceClient implements the GroupServiceClient but is fake.
 type FakeGroupServiceClient struct {
 	GsGroups map[string]*groupssettings.Groups
+	mutex    sync.RWMutex
 }
 
 func NewFakeGroupServiceClient() *FakeGroupServiceClient {
@@ -253,6 +277,8 @@ func NewAugmentedFakeGroupServiceClient() *FakeGroupServiceClient {
 }
 
 func (fgsc *FakeGroupServiceClient) Get(groupUniqueID string) (*groupssettings.Groups, error) {
+	fgsc.mutex.RLock()
+	defer fgsc.mutex.RUnlock()
 	gsg, ok := fgsc.GsGroups[groupUniqueID]
 	if !ok {
 		return nil, fmt.Errorf("groupUniqueID not found %ss", groupUniqueID)
@@ -262,6 +288,8 @@ func (fgsc *FakeGroupServiceClient) Get(groupUniqueID string) (*groupssettings.G
 }
 
 func (fgsc *FakeGroupServiceClient) Patch(groupUniqueID string, groups *groupssettings.Groups) (*groupssettings.Groups, error) {
+	fgsc.mutex.Lock()
+	defer fgsc.mutex.Unlock()
 	_, ok := fgsc.GsGroups[groupUniqueID]
 	if !ok {
 		return nil, fmt.Errorf("groupUniqueID not found %ss", groupUniqueID)
