@@ -329,7 +329,9 @@ data:
         server_name slack.k8s.io slack.kubernetes.io
         listen 80;
 
-        rewrite ^/$ https://communityinviter.com/apps/kubernetes/community redirect;
+       location / {
+         rewrite ^/.$ https://communityinviter.com/apps/kubernetes/community permanent;
+       }
       }
 
       server {
