@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 resource "aws_s3_bucket" "registry-k8s-io" {
-  bucket = "${var.prefix}registry-k8s-io-${var.region}"
+  bucket = "${var.prefix}registry-k8s-io-${data.aws_region.current.name}"
 }
 
 resource "aws_s3_bucket_acl" "registry-k8s-io" {
@@ -70,3 +70,54 @@ resource "aws_s3_bucket_ownership_controls" "registry-k8s-io" {
     aws_s3_bucket_policy.registry-k8s-io-public-read
   ]
 }
+
+# Versioning must be enabled for S3 replication
+resource "aws_s3_bucket_versioning" "registry-k8s-io" {
+  bucket = aws_s3_bucket.registry-k8s-io.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_replication_configuration" "registry-k8s-io" {
+  count = length(var.s3_replication_rules) > 0 ? 1 : 0
+
+  # Must have bucket versioning enabled first
+  depends_on = [aws_s3_bucket_versioning.registry-k8s-io]
+
+  role = var.s3_replication_iam_role_arn
+
+  bucket = aws_s3_bucket.registry-k8s-io.id
+
+  dynamic "rule" {
+    for_each = var.s3_replication_rules
+
+    content {
+      id = rule.value.id
+
+      status = rule.value.status
+
+      # Set priority, filter and delete_marker_replication to use V2 schema for multiple 
+      # destination bucket rules
+      priority = rule.value.priority
+
+      filter {}
+
+      delete_marker_replication {
+        status = "Enabled"
+      }
+
+      
+
+      destination {
+        bucket        = rule.value.destination_bucket_arn
+        storage_class = rule.value.destination_bucket_storage_class
+
+        metrics {
+          status = "Enabled"
+        }
+      }
+    }
+  }
+}
+
