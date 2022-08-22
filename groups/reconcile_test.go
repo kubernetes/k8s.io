@@ -688,7 +688,7 @@ func TestReconcileGroups(t *testing.T) {
 		adminSvc, _ := NewAdminServiceWithClientAndErrFunc(fakeAdminClient, errFunc)
 		groupSvc, _ := NewGroupServiceWithClientAndErrFunc(fakeGroupClient, errFunc)
 
-		reconciler := &Reconciler{adminService: adminSvc, groupService: groupSvc}
+		reconciler := &Reconciler{adminService: adminSvc, groupService: groupSvc, numWorkers: 5}
 		err := reconciler.ReconcileGroups(c.desiredState)
 		if err != nil {
 			t.Errorf("error reconciling groups for case %s: %s", c.desc, err.Error())
