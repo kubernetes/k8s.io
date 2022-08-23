@@ -224,7 +224,8 @@ infra:
         managed_by: infra/gcp/terraform/k8s-infra-prow-build/main.tf
       k8s-infra-prow-build-trusted:
         managed_by: infra/gcp/terraform/k8s-infra-prow-build-trusted/main.tf
-
+      k8s-infra-terraform:
+        managed_by: infra/gcr/bash/ensure-terraform.sh
   public:
     projects:
       k8s-conform:
