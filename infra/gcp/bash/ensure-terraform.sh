@@ -38,7 +38,7 @@ fi
 PROJECT=$(k8s_infra_project "prow" "k8s-infra-terraform")
 
 color 6 "Ensuring project exists: ${PROJECT}"
-# ensure_project "${PROJECT}"
+ensure_project "${PROJECT}"
 
 PROJECT_SERVICES=(
     iam.googleapis.com
