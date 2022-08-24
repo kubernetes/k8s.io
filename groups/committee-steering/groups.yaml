@@ -85,6 +85,6 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - alison@alisondowdney.com
-      - josh@berkus.org
+      - kaslinfields@gmail.com
+      - davanum@gmail.com
       - noah@coderanger.net
