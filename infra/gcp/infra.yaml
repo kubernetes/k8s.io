@@ -309,6 +309,7 @@ infra:
       k8s-staging-kubernetes:
       k8s-staging-kubetest2:
       k8s-staging-kustomize:
+      k8s-staging-kwok:
       k8s-staging-metrics-server:
       k8s-staging-multitenancy:
       k8s-staging-networking:

@@ -81,6 +81,17 @@ groups:
       - adtac@google.com
       - handbomusic@gmail.com
 
+  - email-id: k8s-infra-staging-kwok@kubernetes.io
+    name: k8s-infra-staging-kwok
+    description: |-
+      ACL for staging kwok
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - hweicdl@gmail.com
+      - yibzhuang@gmail.com
+      - zjwzshiming@gmail.com
+
   #
   # k8s-infra gcs write access
   #
