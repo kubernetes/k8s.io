@@ -19,6 +19,8 @@
     sha256:21b3ab11605d59290b7976e8175cfa65a0bee31e75146f1fe3e34aa3e3b72fa6: [v0.11.0-minimal]
     sha256:28c54b2014d150e4fcfd318421a0ebe34a51bc03c1abe45d7095c6d4650a7f0b: [v0.11.1]
     sha256:06e15a7dda9bab2ebd0df65e7966fc4b33c4435dcf7c7c91d4180285f4d2a730: [v0.11.1-minimal]
+    sha256:99112589d9bc5521fb465fd9cba96066a03eb7c904ce2c39c08f6ad709cece56: [v0.11.2]
+    sha256:74455b72aa147e5cb2cdfc1bb36286d405f7af82f21d8bb7a28ae8cd3936373c: [v0.11.2-minimal]
 - name: node-feature-discovery-operator
   dmap:
     sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16: [v0.2.0]
