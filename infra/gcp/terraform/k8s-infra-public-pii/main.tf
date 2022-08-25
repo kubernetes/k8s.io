@@ -72,6 +72,15 @@ resource "google_bigquery_dataset" "registry_k8s_io_logs" {
   location                    = "US"
 }
 
+resource "google_bigquery_dataset_iam_member" "registry_k8s_io_logs" {
+  project = google_project.project.project_id
+  dataset_id = google_bigquery_dataset.registry_k8s_io_logs.dataset_id
+  role = "roles/bigquery.dataEditor"
+  # Logs router Sink identity in k8s-infra-oci-proxy-prod
+  # Not existing data resource to extract the writer identity
+  member = "serviceAccount:p102333525888-824068@gcp-sa-logging.iam.gserviceaccount.com"
+}
+
 
 # A bucket to store logs in audit logs for GCS
 resource "google_storage_bucket" "audit-logs-gcs" {
