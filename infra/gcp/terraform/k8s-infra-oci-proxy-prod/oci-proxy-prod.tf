@@ -97,6 +97,7 @@ resource "google_cloud_run_service" "oci-proxy" {
       service_account_name = google_service_account.oci-proxy.email
       containers {
         image = local.image
+         args = [ "-v=2" ]
       }
       container_concurrency = 10
       // 30 seconds less than cloud scheduler maximum.
