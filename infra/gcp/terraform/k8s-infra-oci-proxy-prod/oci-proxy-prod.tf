@@ -17,7 +17,7 @@ limitations under the License.
 locals {
   project_id = "k8s-infra-oci-proxy-prod"
   domain     = "registry.k8s.io"
-  image      = "gcr.io/k8s-staging-infra-tools/archeio:${var.tag}"
+  image      = "us.gcr.io/k8s-artifacts-prod/infra-tools/archeio:${var.tag}"
 
 }
 
@@ -44,8 +44,8 @@ resource "google_project_service" "project" {
     "compute.googleapis.com",
     "containerregistry.googleapis.com",
     "logging.googleapis.com",
-    "oslogin.googleapis.com",
     "monitoring.googleapis.com",
+    "oslogin.googleapis.com",
     "pubsub.googleapis.com",
     "run.googleapis.com",
     "storage-api.googleapis.com",
@@ -116,7 +116,10 @@ resource "google_cloud_run_service" "oci-proxy" {
   lifecycle {
     ignore_changes = [
       // This gets added by the Cloud Run API post deploy and causes diffs, can be ignored...
-      template[0].metadata[0].annotations["run.googleapis.com/sandbox"],
+      template[0].metadata[0].annotations["client.knative.dev/sandbox"],
+      template[0].metadata[0].annotations["run.googleapis.com/user-image"],
+      template[0].metadata[0].annotations["run.googleapis.com/client-name"],
+      template[0].metadata[0].annotations["run.googleapis.com/client-version"],
     ]
   }
 }
