@@ -131,7 +131,7 @@ resource "google_cloud_run_service" "regions" {
       service_account_name = google_service_account.oci-proxy.email
       containers {
         image = local.image
-        args = [ "-v3" ]
+        args = [ "-v=3" ]
       }
       container_concurrency = 5
       // 30 seconds less than cloud scheduler maximum.
