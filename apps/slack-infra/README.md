@@ -7,7 +7,6 @@ Cluster resources to deploy the following apps from [kubernetes-sigs/slack-infra
 - slack-moderator-words
 - slack-welcomer
 - slack-post-message
-- slackin
 
 None of the resources have a namespace defined
 
