@@ -45,6 +45,7 @@ resource "google_project_service" "project" {
     "containerregistry.googleapis.com",
     "logging.googleapis.com",
     "oslogin.googleapis.com",
+    "monitoring.googleapis.com",
     "pubsub.googleapis.com",
     "run.googleapis.com",
     "storage-api.googleapis.com",
