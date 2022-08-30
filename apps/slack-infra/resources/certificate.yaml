@@ -4,5 +4,5 @@ metadata:
   name: slack-infra
 spec:
   domains:
-  - slack.k8s.io
-  - slack.kubernetes.io
+  - slack-infra.k8s.io
+  - slack-infra.kubernetes.io
