@@ -178,6 +178,11 @@ sigs:
 slack:
   type: CNAME
   value: redirect.k8s.io.
+# Slack tools like the moderator
+# see apps/slack-infra and https://sigs.k8s.io/slack-infra
+slack-infra:
+  type: A
+  value: 34.107.195.71
 # Prow (@ixdy).
 submit-queue:
   type: CNAME
