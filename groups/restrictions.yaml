@@ -120,6 +120,7 @@ restrictions:
     allowedGroups:
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-cri-tools@kubernetes.io$"
+      - "^k8s-infra-staging-kmm@kubernetes.io$"
       - "^k8s-infra-staging-nfd@kubernetes.io$"
       - "^k8s-infra-staging-npd@kubernetes.io$"
       - "^k8s-infra-staging-sp-operator@kubernetes.io$"
