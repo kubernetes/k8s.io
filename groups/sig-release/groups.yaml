@@ -253,7 +253,7 @@ groups:
       - augustus@cisco.com
       - bentheelder@google.com
       - leonard.pahlke@googlemail.com # 1.26 Release Lead
-      - pal.nabarun95@gmail.com # 1.26 RT EA
+      #- pal.nabarun95@gmail.com (already added via release manager) # 1.26 RT EA
       - nwaddington@cncf.io # 1.26 Release Lead Shadow
       - nng.grace@gmail.com # 1.26 Release Lead Shadow
       - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
@@ -357,7 +357,7 @@ groups:
       #- X # 1.26 Communications Shadow
       #- X # 1.26 Communications Shadow
       #- X # 1.26 Communications Shadow
-      - jeremy.r.rickard@gmail.com # Release Manager
+      #- jeremy.r.rickard@gmail.com (already added as owner) # Release Manager
       #- X # Release Manager Associat
  
   - email-id: release-team-shadows@kubernetes.io
