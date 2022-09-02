@@ -359,7 +359,7 @@ groups:
       #- X # 1.26 Communications Shadow
       #- jeremy.r.rickard@gmail.com (already added as owner) # Release Manager
       #- X # Release Manager Associat
- 
+
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
     description: |-
@@ -377,7 +377,7 @@ groups:
     managers:
       - leonard.pahlke@googlemail.com # 1.26 Release Lead
       - pal.nabarun95@gmail.com # 1.26 Emeritus Advisor
-    members: 
+    members:
      - nwaddington@cncf.io # 1.26 Release Lead Shadow
      - nng.grace@gmail.com # 1.26 Release Lead Shadow
      - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
