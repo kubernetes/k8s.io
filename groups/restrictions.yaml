@@ -149,6 +149,7 @@ restrictions:
       - "^sig-release-leads@kubernetes.io$"
       - "^release-team@kubernetes.io$"
       - "^release-team-shadows@kubernetes.io$"
+      - "^release-team-enhancements@kubernetes.io$"
   - path: "sig-scalability/groups.yaml"
     allowedGroups:
       - "^k8s-infra-rbac-perfdash@kubernetes.io$"

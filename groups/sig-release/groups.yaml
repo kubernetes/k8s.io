@@ -472,3 +472,26 @@ groups:
       - k8s-infra-release-viewers@kubernetes.io
       - leonard.pahlke@googlemail.com
       - salahi.hossein@gmail.com
+
+  - email-id: release-team-enhancements@kubernetes.io
+    name: release-team-enhancements
+    description: |-
+      Release Team enhancements.
+      Includes current release leads and enhancements team members.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    members:
+      - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
+      - leonard.pahlke@googlemail.com # 1.26 RT Lead
+      - nng.grace@gmail.com # 1.25 Release Lead Shadow
+      - nwaddington@cncf.io # 1.26 Release Lead Shadow
+      - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
+      - pal.nabarun95@gmail.com # 1.26 RT EA
+      - ryler.hockenbury@gmail.com # 1.26 Enhancements Lead
