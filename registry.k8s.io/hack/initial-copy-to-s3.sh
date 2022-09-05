@@ -18,6 +18,9 @@
 # - rclone
 # - awscli
 
+# Usage
+#   ./hack/initial-copy-to-s3.sh
+
 SOURCE=gcs:us.artifacts.k8s-artifacts-prod.appspot.com
 DESTINATION=s3:prod-registry-k8s-io-us-east-2
 

@@ -15,29 +15,15 @@
 # limitations under the License.
 
 # Dependencies
-# - tmate :: the script must be run inside of an existing tmate session
 # - rclone
 # - awscli
 
-REGIONS=(
-    ap-northeast-1
-    ap-south-1
-    ap-southeast-1
+# Usage
+#   sync all:       ./initial-copy-between-s3.sh
+#   specify region: ./initial-copy-between-s3.sh <REGION>
 
-    eu-central-1
-    eu-west-1
-
-    us-east-1
-    us-east-2
-    us-west-1
-    us-west-2
-)
-
-SOURCE=s3:prod-registry-k8s-io-us-east-2
-
-CALLER_ID="$(aws sts get-caller-identity --output json | jq -r .UserId)"
-
-for REGION in "${REGIONS[@]}"; do
+function sync-a-region {
+    REGION="${1:-}"
     DESTINATION="s3dest:prod-registry-k8s-io-${REGION:-}"
     unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
     JSON=$(aws sts assume-role \
@@ -76,5 +62,40 @@ session_token = $AWS_SESSION_TOKEN
 region = ${REGION}
 EOF
     echo "Running sync between '${SOURCE:-}' and '${DESTINATION:-}'"
-    tmate -F -v -S "${TMATE_SOCKET:-/tmp/tmate.socket}" new-window -d -c "$PWD" -n sync-to-"${REGION:-}" "rclone sync --config \"${RCLONE_CONFIG:-}\" -P \"${SOURCE:-}\" \"${DESTINATION:-}\""
+    rclone sync --config "${RCLONE_CONFIG:-}" -P "${SOURCE:-}" "${DESTINATION:-}"
+}
+
+REGIONS=(
+    ap-northeast-1
+    ap-south-1
+    ap-southeast-1
+
+    eu-central-1
+    eu-west-1
+
+    us-east-1
+    us-east-2
+    us-west-1
+    us-west-2
+)
+SOURCE=s3:prod-registry-k8s-io-us-east-2
+
+CALLER_ID="$(aws sts get-caller-identity --output json | jq -r .UserId)"
+
+SELECTED_REGION="${1:-}"
+FOUND_REGION=false
+for REGION in "${REGIONS[@]}"; do
+    if [ "${REGION:-}" = "${SELECTED_REGION:-}" ]; then
+        FOUND_REGION=true
+    fi
 done
+if [ ! "${FOUND_REGION:-}" = true ]; then
+    echo "No region specified of: ${REGIONS[*]}"
+    echo "Will sync all."
+    for REGION in "${REGIONS[@]}"; do
+        sync-a-region "${REGION:-}"
+    done
+    exit 0
+fi
+
+sync-a-region "${SELECTED_REGION:-}"
