@@ -57,6 +57,9 @@ locals {
       project_roles     = ["roles/secretmanager.secretAccessor"]
       cluster_namespace = "kubernetes-external-secrets"
     }
+    s3-sync = {
+      description   = "syncs to S3 registry.k8s.io buckets"
+    }
   }
 }
 
