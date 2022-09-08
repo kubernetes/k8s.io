@@ -7,7 +7,7 @@ One goal is to use this image for all of of our CI jobs, and make it easy to run
 ## contents
 
 - base:
-  - debian as provided by `debian:buster`
+  - debian as provided by `debian:bullseye`
 - directories:
   - `/build` contains "info" or "version" output for each of the included tools/languages
   - `/workspace` default working directory for `run` commands
@@ -15,6 +15,7 @@ One goal is to use this image for all of of our CI jobs, and make it easy to run
   - `go`
   - `python3` and `pip3`
 - tools:
+  - `aws-cli`
   - `conftest`
   - `curl`
   - `gcc`
@@ -30,6 +31,7 @@ One goal is to use this image for all of of our CI jobs, and make it easy to run
   - `make`
   - `opa`
   - `pr-creator` (from kubernetes/test-infra)
+  - `rclone`
   - `shellcheck`
   - `terraform` (via `tfswitch`)
   - `tfswitch`
