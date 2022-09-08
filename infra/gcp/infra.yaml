@@ -301,6 +301,7 @@ infra:
       k8s-staging-k8s-gsm-tools:
       k8s-staging-kas-network-proxy:
       k8s-staging-kind:
+      k8s-staging-kmm:
       k8s-staging-kops:
       k8s-staging-krm-functions:
       k8s-staging-kube-state-metrics:
