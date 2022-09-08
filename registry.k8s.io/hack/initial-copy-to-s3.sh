@@ -27,17 +27,19 @@ DESTINATION=s3:prod-registry-k8s-io-us-east-2
 CALLER_ID="$(aws sts get-caller-identity --output json | jq -r .UserId)"
 
 while true; do
-  unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
-  JSON=$(aws sts assume-role \
-    --role-arn "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"  \
-    --role-session-name "${CALLER_ID:-}-registry.k8s.io_s3writer" \
-    --duration-seconds 43200 \
-    --output json || exit 1)
+  if [ ! -f /var/run/secrets/aws-iam-token/serviceaccount/token ]; then
+    unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+    JSON=$(aws sts assume-role \
+      --role-arn "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"  \
+      --role-session-name "${CALLER_ID:-}-registry.k8s.io_s3writer" \
+      --duration-seconds 43200 \
+      --output json || exit 1)
 
-  AWS_ACCESS_KEY_ID=$(echo "${JSON}" | jq --raw-output ".Credentials[\"AccessKeyId\"]")
-  AWS_SECRET_ACCESS_KEY=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SecretAccessKey\"]")
-  AWS_SESSION_TOKEN=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SessionToken\"]")
-  export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+    AWS_ACCESS_KEY_ID=$(echo "${JSON}" | jq --raw-output ".Credentials[\"AccessKeyId\"]")
+    AWS_SECRET_ACCESS_KEY=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SecretAccessKey\"]")
+    AWS_SESSION_TOKEN=$(echo "${JSON}" | jq --raw-output ".Credentials[\"SessionToken\"]")
+    export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+  fi
 
   RCLONE_CONFIG="$(mktemp)"
   echo "Wrote rclone config to '${RCLONE_CONFIG:-}'"
@@ -50,9 +52,7 @@ bucket_acl = private
 [s3]
 type = s3
 provider = AWS
-access_key_id = $AWS_ACCESS_KEY_ID
-secret_access_key = $AWS_SECRET_ACCESS_KEY
-session_token = $AWS_SESSION_TOKEN
+env_auth = true
 region = us-east-2
 EOF
   echo "Running sync between '${SOURCE:-}' and '${DESTINATION:-}'"
