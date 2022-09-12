@@ -159,12 +159,6 @@ groups:
     - thejoycekung@gmail.com
     - neolit123@gmail.com
     - philjohnson96@gmail.com
-    # release-ci-signal
-    - ania0102@gmail.com # 1.22 CI Signal Shadow
-    - max@koerbaecher.io # 1.22 CI Signal Lead
-    - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
-    - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
-    - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
 
   #
   # sig-testing k8s-infra owners
