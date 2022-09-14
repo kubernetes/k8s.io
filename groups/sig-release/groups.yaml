@@ -205,10 +205,10 @@ groups:
       - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
       - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
       - fsmunoz@gmail.com # 1.26 Release Comms Lead
-      #- X # 1.26 Comms Shadow
-      #- X # 1.26 Comms Shadow
-      #- X # 1.26 Comms Shadow
-      #- X # 1.26 Comms Shadow
+      - harshitasao@gmail.com # 1.26 Comms Shadow
+      - bradmccoydev@gmail.com # 1.26 Comms Shadow
+      - daespejo@vmware.com # 1.26 Comms Shadow
+      - d.panigrarhi.nitrkl@gmail.com # 1.26 Comms Shadow
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -327,38 +327,38 @@ groups:
     members:
       - sig-release-leads@kubernetes.io
       - ryler.hockenbury@gmail.com # 1.26 Enhancements Lead
-      #- X # 1.26 Enhancements Shadow
-      #- X # 1.26 Enhancements Shadow
-      #- X # 1.26 Enhancements Shadow
-      #- X # 1.26 Enhancements Shadow
+      - marosset@microsoft.com # 1.26 Enhancements Shadow
+      - parulsahoo5jan@gmail.com # 1.26 Enhancements Shadow
+      - atharvashinde179@gmail.com # 1.26 Enhancements Shadow
+      - ruheenaansari34@gmail.com # 1.26 Enhancements Shadow
       - niveditaprasad81@gmail.com # 1.26 CI Signal Lead
-      #- X # 1.26 CI Signal Lead Shadow
-      #- X # 1.26 CI Signal Lead Shadow
-      #- X # 1.26 CI Signal Lead Shadow
-      #- X # 1.26 CI Signal Lead Shadow
+      - shuhei.kitagawa@gmail.com # 1.26 CI Signal Lead Shadow
+      - mehabhalodiya@gmail.com # 1.26 CI Signal Lead Shadow
+      - namanlakhwani@gmail.com # 1.26 CI Signal Lead Shadow
+      - haritwal.bhawana@gmail.com # 1.26 CI Signal Lead Shadow
       - salahi.hossein@gmail.com # 1.26 Bug Triage Lead
-      #- X # 1.26 Bug Triage Shadow
-      #- X # 1.26 Bug Triage Shadow
-      #- X # 1.26 Bug Triage Shadow
-      #- X # 1.26 Bug Triage Shadow
-      #- X # 1.26 Bug Triage Shadow
+      - subhasmitaswain232@gmail.com # 1.26 Bug Triage Shadow
+      - neoaggelos@gmail.com # 1.26 Bug Triage Shadow
+      - hesham.aboelmagd@gmail.com # 1.26 Bug Triage Shadow
+      - cailyn.edwards@shopify.com # 1.26 Bug Triage Shadow
+      - xandergrzyw@gmail.com # 1.26 Bug Triage Shadow
       - guillen.carolina@gmail.com # 1.26 Docs Lead
-      #- X # 1.26 Docs Shadow
-      #- X # 1.26 Docs Shadow
-      #- X # 1.26 Docs Shadow
-      #- X # 1.26 Docs Shadow
+      - cathchu@google.com # 1.26 Docs Shadow
+      - m.r.boxell@gmail.com # 1.26 Docs Shadow
+      - rishit.dagli@gmail.com # 1.26 Docs Shadow
+      - jkm.mutua@gmail.com # 1.26 Docs Shadow
       - ramses.green.2@gmail.com # 1.26 Release Notes Lead
-      #- X # 1.26 Release Notes Shadow
-      #- X # 1.26 Release Notes Shadow
-      #- X # 1.26 Release Notes Shadow
-      #- X # 1.26 Release Notes Shadow
+      - harsha2k4@gmail.com # 1.26 Release Notes Shadow
+      - AnaMMedina21@gmail.com # 1.26 Release Notes Shadow
+      - laxmikantpandhare@gmail.com # 1.26 Release Notes Shadow
+      - ii.sayantani.ii@gmail.com # 1.26 Release Notes Shadow
       - fsmunoz@gmail.com # 1.26 Communications Lead
-      #- X # 1.26 Communications Shadow
-      #- X # 1.26 Communications Shadow
-      #- X # 1.26 Communications Shadow
-      #- X # 1.26 Communications Shadow
+      - harshitasao@gmail.com # 1.26 Communications Shadow
+      - bradmccoydev@gmail.com # 1.26 Communications Shadow
+      - daespejo@vmware.com # 1.26 Communications Shadow
+      - d.panigrarhi.nitrkl@gmail.com # 1.26 Communications Shadow
       #- jeremy.r.rickard@gmail.com (already added as owner) # Release Manager
-      #- X # Release Manager Associat
+      #- X # Release Manager Associate
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -382,31 +382,31 @@ groups:
      - nng.grace@gmail.com # 1.26 Release Lead Shadow
      - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
      - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
-     #- X # 1.26 Enhancements Shadow
-     #- X # 1.26 Enhancements Shadow
-     #- X # 1.26 Enhancements Shadow
-     #- X # 1.26 Enhancements Shadow
-     #- X # 1.26 CI Signal Lead Shadow
-     #- X # 1.26 CI Signal Lead Shadow
-     #- X # 1.26 CI Signal Lead Shadow
-     #- X # 1.26 CI Signal Lead Shadow
-     #- X # 1.26 Bug Triage Shadow
-     #- X # 1.26 Bug Triage Shadow
-     #- X # 1.26 Bug Triage Shadow
-     #- X # 1.26 Bug Triage Shadow
-     #- X # 1.26 Bug Triage Shadow
-     #- X # 1.26 Docs Shadow
-     #- X # 1.26 Docs Shadow
-     #- X # 1.26 Docs Shadow
-     #- X # 1.26 Docs Shadow
-     #- X # 1.26 Release Notes Shadow
-     #- X # 1.26 Release Notes Shadow
-     #- X # 1.26 Release Notes Shadow
-     #- X # 1.26 Release Notes Shadow
-     #- X # 1.26 Communications Shadow
-     #- X # 1.26 Communications Shadow
-     #- X # 1.26 Communications Shadow
-     #- X # 1.26 Communications Shadow
+     - marosset@microsoft.com # 1.26 Enhancements Shadow
+     - parulsahoo5jan@gmail.com # 1.26 Enhancements Shadow
+     - atharvashinde179@gmail.com # 1.26 Enhancements Shadow
+     - ruheenaansari34@gmail.com # 1.26 Enhancements Shadow
+     - shuhei.kitagawa@gmail.com # 1.26 CI Signal Lead Shadow
+     - mehabhalodiya@gmail.com # 1.26 CI Signal Lead Shadow
+     - namanlakhwani@gmail.com # 1.26 CI Signal Lead Shadow
+     - haritwal.bhawana@gmail.com # 1.26 CI Signal Lead Shadow
+     - subhasmitaswain232@gmail.com # 1.26 Bug Triage Shadow
+     - neoaggelos@gmail.com # 1.26 Bug Triage Shadow
+     - hesham.aboelmagd@gmail.com # 1.26 Bug Triage Shadow
+     - cailyn.edwards@shopify.com # 1.26 Bug Triage Shadow
+     - xandergrzyw@gmail.com # 1.26 Bug Triage Shadow
+     - cathchu@google.com # 1.26 Docs Shadow
+     - m.r.boxell@gmail.com # 1.26 Docs Shadow
+     - rishit.dagli@gmail.com # 1.26 Docs Shadow
+     - jkm.mutua@gmail.com # 1.26 Docs Shadow
+     - harsha2k4@gmail.com # 1.26 Release Notes Shadow
+     - AnaMMedina21@gmail.com # 1.26 Release Notes Shadow
+     - laxmikantpandhare@gmail.com # 1.26 Release Notes Shadow
+     - ii.sayantani.ii@gmail.com # 1.26 Release Notes Shadow
+     - harshitasao@gmail.com # 1.26 Communications Shadow
+     - bradmccoydev@gmail.com # 1.26 Communications Shadow
+     - daespejo@vmware.com # 1.26 Communications Shadow
+     - d.panigrarhi.nitrkl@gmail.com # 1.26 Communications Shadow
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
@@ -440,11 +440,11 @@ groups:
       - bartek@smykla.com
       - gveronicalg@gmail.com
       - salahi.hossein@gmail.com # 1.26 Bug Triage Lead
-      #- X # 1.26 Bug Triage Shadow
-      #- X # 1.26 Bug Triage Shadow
-      #- X # 1.26 Bug Triage Shadow
-      #- X # 1.26 Bug Triage Shadow
-      #- X # 1.26 Bug Triage Shadow
+      - subhasmitaswain232@gmail.com # 1.26 Bug Triage Shadow
+      - neoaggelos@gmail.com # 1.26 Bug Triage Shadow
+      - hesham.aboelmagd@gmail.com # 1.26 Bug Triage Shadow
+      - cailyn.edwards@shopify.com # 1.26 Bug Triage Shadow
+      - xandergrzyw@gmail.com # 1.26 Bug Triage Shadow
 
   - email-id: k8s-infra-staging-bom@kubernetes.io
     name: k8s-infra-staging-bom
