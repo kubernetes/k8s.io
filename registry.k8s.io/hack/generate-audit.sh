@@ -39,7 +39,7 @@ REGIONS=(
     us-west-2
 )
 
-cd $(git rev-parse --show-toplevel)
+cd "$(git rev-parse --show-toplevel)"
 mkdir -p ./audit/registry.k8s.io/data
 cd ./audit/registry.k8s.io/data
 
