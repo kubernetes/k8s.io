@@ -11,6 +11,7 @@
     "sha256:80dec81b679a733fda448be92a2331150d99095947d04003ecff3dbd7f2a476a": [ "v3.3.0" ]
     "sha256:8b9c313c05f54fb04f8d430896f5f5904b6cb157df261501b29adc04d2b2dc7b": [ "v3.4.0" ]
     "sha256:dd245051317e957423bc3e2aecddf56c745bd6714920f0dc108e505f5afb3472": [ "v3.5.0" ]
+    "sha256:9a685020911e2725ad019dbce6e4a5ab93d51e3d4557f115e64343345e05781b": [ "v4.0.0" ]
 - name: csi-external-health-monitor-agent
   dmap:
     "sha256:f8eff7dc8187f1153faebd5d087e30f4580e00fcc1265fe2ab2472ec010db8f7": [ "v0.1.0" ]
