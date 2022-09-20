@@ -38,7 +38,6 @@ groups:
     members:
       - k8s-infra-release-admins@kubernetes.io
       - adolfo.garcia@uservers.net
-      - ameukam@gmail.com
       - ctadeu@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
