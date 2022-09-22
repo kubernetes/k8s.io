@@ -18,17 +18,17 @@ limitations under the License.
 # This file contains the Cloud Armor policies
 
 resource "google_compute_security_policy" "cloud-armor" {
-     project = google_project.project.project_id
-     name = "security-policy-oci-proxy"
+  project = google_project.project.project_id
+  name    = "security-policy-oci-proxy"
 
 
   rule {
     action   = "deny(403)"
     priority = "910"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('methodenforcement-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('methodenforcement-stable')"
+      }
     }
 
     preview = false
@@ -38,21 +38,21 @@ resource "google_compute_security_policy" "cloud-armor" {
     action   = "deny(403)"
     priority = "900"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('protocolattack-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('protocolattack-stable')"
+      }
     }
 
     preview = false
   }
 
-    rule {
+  rule {
     action   = "deny(403)"
     priority = "920"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('scannerdetection-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('scannerdetection-stable')"
+      }
     }
 
     preview = false
@@ -63,9 +63,9 @@ resource "google_compute_security_policy" "cloud-armor" {
     action   = "deny(403)"
     priority = "990"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('xss-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('xss-stable')"
+      }
     }
   }
 
@@ -73,9 +73,9 @@ resource "google_compute_security_policy" "cloud-armor" {
     action   = "deny(403)"
     priority = "970"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('sqli-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('sqli-stable')"
+      }
     }
 
     preview = false
@@ -85,9 +85,9 @@ resource "google_compute_security_policy" "cloud-armor" {
     action   = "deny(403)"
     priority = "960"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('lfi-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('lfi-stable')"
+      }
     }
 
     preview = false
@@ -97,9 +97,9 @@ resource "google_compute_security_policy" "cloud-armor" {
     action   = "deny(403)"
     priority = "930"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('rce-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('rce-stable')"
+      }
     }
 
     preview = false
@@ -109,9 +109,9 @@ resource "google_compute_security_policy" "cloud-armor" {
     action   = "deny(403)"
     priority = "940"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('rfi-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('rfi-stable')"
+      }
     }
 
     preview = false
@@ -121,9 +121,9 @@ resource "google_compute_security_policy" "cloud-armor" {
     action   = "deny(403)"
     priority = "950"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('sessionfixation-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('sessionfixation-stable')"
+      }
     }
 
     preview = false
@@ -133,9 +133,9 @@ resource "google_compute_security_policy" "cloud-armor" {
     action   = "deny(403)"
     priority = "980"
     match {
-        expr {
-            expression = "evaluatePreconfiguredExpr('php-stable')"
-        }
+      expr {
+        expression = "evaluatePreconfiguredExpr('php-stable')"
+      }
     }
 
     preview = false
@@ -143,9 +143,9 @@ resource "google_compute_security_policy" "cloud-armor" {
 
   # Reject all traffic that hasn't been whitelisted.
   rule {
-    action   = "allow"
+    action      = "allow"
     description = "Default rule, higher priority overrides it"
-    priority = "2147483647"
+    priority    = "2147483647"
 
     match {
       config {

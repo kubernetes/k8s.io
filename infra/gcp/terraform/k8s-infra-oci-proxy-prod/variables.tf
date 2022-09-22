@@ -14,28 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+variable "domain" {
+  type = string
+}
+variable "project_id" {
+  type = string
+}
 variable "tag" {
-  type    = string
-  default = "latest"
+  type = string
+}
+variable "cloud_run_config" {
+  type = map(object({
+    environment_variables = list(object({
+      value = string
+      name  = string
+    }))
+  }))
 }
 
-variable "cloud_run_regions" {
-  type = list(string)
-  default = [
-    "asia-east1",
-    "asia-northeast1",
-    "asia-south1",
-    "asia-southeast1",
-    "europe-north1",
-    "europe-west1",
-    "europe-west2",
-    "europe-west3",
-    "europe-west4",
-    "us-central1",
-    "us-east1",
-    "us-east4",
-    "us-east5",
-    "us-west1",
-    "us-west2"
-  ]
+variable "environment" {
+  type = string
 }
