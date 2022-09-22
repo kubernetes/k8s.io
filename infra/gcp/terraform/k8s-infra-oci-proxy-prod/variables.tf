@@ -31,7 +31,3 @@ variable "cloud_run_config" {
     }))
   }))
 }
-
-variable "environment" {
-  type = string
-}
