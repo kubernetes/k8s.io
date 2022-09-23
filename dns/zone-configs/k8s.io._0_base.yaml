@@ -424,6 +424,6 @@ cloud-provider-azure.sigs:
   type: CNAME
   value: kubernetes-sigs-cloud-provide-azure.netlify.app.
 # https://github.com/kubernetes-sigs/network-policy-api docs (@astoycos)
-adminnetworkpolicy-api.sigs:
+network-policy-api.sigs:
   type: CNAME
-  value: kubernetes-sigs-adminnetworkpolicy-api.netlify.app.
+  value: kubernetes-sigs-network-policy-api.netlify.app.
