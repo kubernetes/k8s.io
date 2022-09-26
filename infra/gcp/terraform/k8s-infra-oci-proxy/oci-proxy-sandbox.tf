@@ -15,23 +15,18 @@ limitations under the License.
 */
 
 locals {
-  project_id = "k8s-infra-oci-proxy"
-  domain     = "registry-sandbox.k8s.io"
-  image      = "gcr.io/k8s-staging-infra-tools/archeio:${var.tag}"
+
+  image = "gcr.io/k8s-staging-infra-tools/archeio:${var.tag}"
 
   external_ips = {
     sandbox = {
-      name = "${local.project_id}-sandbox",
+      name = "${var.project_id}-sandbox",
     },
     sandbox-v6 = {
-      name = "${local.project_id}-sandbox-v6",
+      name = "${var.project_id}-sandbox-v6",
       ipv6 = true
     },
   }
-}
-
-data "google_billing_account" "account" {
-  billing_account = "018801-93540E-22A20E"
 }
 
 data "google_organization" "org" {
@@ -39,10 +34,10 @@ data "google_organization" "org" {
 }
 
 resource "google_project" "project" {
-  name            = local.project_id
-  project_id      = local.project_id
+  name            = var.project_id
+  project_id      = var.project_id
   org_id          = data.google_organization.org.org_id
-  billing_account = data.google_billing_account.account.id
+  billing_account = "018801-93540E-22A20E"
 }
 
 
@@ -57,6 +52,7 @@ resource "google_project_service" "project" {
     "monitoring.googleapis.com",
     "oslogin.googleapis.com",
     "pubsub.googleapis.com",
+    "run.googleapis.com",
     "storage-api.googleapis.com",
     "storage-component.googleapis.com"
   ])
@@ -116,8 +112,8 @@ resource "google_cloud_run_service_iam_member" "gcb_builder_sa" {
 
 resource "google_cloud_run_service" "regions" {
   project  = google_project.project.project_id
-  for_each = toset(var.cloud_run_regions)
-  name     = "${local.project_id}-${each.key}"
+  for_each = var.cloud_run_config
+  name     = "${var.project_id}-${each.key}"
   location = each.key
 
   template {
@@ -132,7 +128,16 @@ resource "google_cloud_run_service" "regions" {
       containers {
         image = local.image
         args = [ "-v=3" ]
+
+        dynamic "env" {
+          for_each = each.value.environment_variables
+          content {
+            name  = env.value["name"]
+            value = env.value["value"]
+          }
+        }
       }
+
       container_concurrency = 5
       // 30 seconds less than cloud scheduler maximum.
       timeout_seconds = 570
