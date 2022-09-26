@@ -32,6 +32,10 @@ locals {
       group  = "sig-release"
       owners = "k8s-infra-release-admins@kubernetes.io"
     }
+    k8s-release-enhancements-triage-github-token = {
+      group = "sig-release"
+      owners = "k8s-infra-release-editors@kubernetes.io"
+    }
     k8s-triage-robot-github-token = {
       group  = "sig-contributor-experience"
       owners = "github@kubernetes.io"
