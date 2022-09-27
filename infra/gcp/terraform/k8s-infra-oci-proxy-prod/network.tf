@@ -51,7 +51,7 @@ resource "google_compute_region_network_endpoint_group" "oci-proxy" {
 
   provider              = google-beta
   project               = google_project.project.project_id
-  name                  = "${local.project_id}--${each.key}--neg"
+  name                  = "${var.project_id}--${each.key}--neg"
   network_endpoint_type = "SERVERLESS"
   region                = google_cloud_run_service.oci-proxy[each.key].location
   cloud_run {
@@ -64,7 +64,7 @@ module "lb-http" {
   version = "~> 6.2.0"
 
   project = google_project.project.project_id
-  name    = local.project_id
+  name    = var.project_id
 
   # ...
   backends = {
@@ -104,10 +104,10 @@ module "lb-http" {
   address      = data.google_compute_global_address.default_ipv4.address
   ipv6_address = data.google_compute_global_address.default_ipv6.address
   managed_ssl_certificate_domains = [
-    local.domain
+    var.domain
   ]
   random_certificate_suffix = true
   ssl                       = true
   use_ssl_certificates      = false
-  security_policy = google_compute_security_policy.cloud-armor.self_link
+  security_policy           = google_compute_security_policy.cloud-armor.self_link
 }

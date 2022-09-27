@@ -14,27 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-locals {
-  project_id = "k8s-infra-oci-proxy-prod"
-  domain     = "registry.k8s.io"
-  image      = "us.gcr.io/k8s-artifacts-prod/infra-tools/archeio:${var.tag}"
-
-}
-
-data "google_billing_account" "account" {
-  billing_account = "018801-93540E-22A20E"
-}
-
 data "google_organization" "org" {
   domain = "kubernetes.io"
 }
 
 resource "google_project" "project" {
-  name            = local.project_id
-  project_id      = local.project_id
+  name            = var.project_id
+  project_id      = var.project_id
   org_id          = data.google_organization.org.org_id
-  billing_account = data.google_billing_account.account.id
+  billing_account = "018801-93540E-22A20E"
 }
+
 
 // Enable services needed for the project
 resource "google_project_service" "project" {
@@ -62,12 +52,14 @@ resource "google_project_iam_member" "k8s_infra_oci_proxy_admins" {
   member  = "group:k8s-infra-oci-proxy-admins@kubernetes.io"
 }
 
+
 resource "google_service_account" "oci-proxy" {
   project      = google_project.project.project_id
-  account_id   = "oci-proxy-prod"
+  account_id   = "oci-proxy"
   display_name = "Minimal Service Account for OCI Proxy"
 }
 
+// Make each service invokable by all users.
 resource "google_cloud_run_service_iam_member" "allUsers" {
   project  = google_project.project.project_id
   for_each = google_cloud_run_service.oci-proxy
@@ -76,14 +68,12 @@ resource "google_cloud_run_service_iam_member" "allUsers" {
   location = google_cloud_run_service.oci-proxy[each.key].location
   role     = "roles/run.invoker"
   member   = "allUsers"
-
-  depends_on = [google_cloud_run_service.oci-proxy]
 }
 
 resource "google_cloud_run_service" "oci-proxy" {
   project  = google_project.project.project_id
-  for_each = toset(var.cloud_run_regions)
-  name     = "${local.project_id}-${each.key}"
+  for_each = var.cloud_run_config
+  name     = "${var.project_id}-${each.key}"
   location = each.key
 
   template {
@@ -96,8 +86,16 @@ resource "google_cloud_run_service" "oci-proxy" {
     spec {
       service_account_name = google_service_account.oci-proxy.email
       containers {
-        image = local.image
-         args = [ "-v=2" ]
+        image = "us.gcr.io/k8s-artifacts-prod/infra-tools/archeio:${var.tag}"
+        args  = ["-v=3"]
+
+        dynamic "env" {
+          for_each = each.value.environment_variables
+          content {
+            name  = env.value["name"]
+            value = env.value["value"]
+          }
+        }
       }
       container_concurrency = 10
       // 30 seconds less than cloud scheduler maximum.
