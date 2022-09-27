@@ -66,6 +66,18 @@ cloud_run_config = {
       }
     ]
   }
+  asia-southeast1 = {
+    environment_variables = [
+      {
+        name  = "UPSTREAM_REGISTRY_ENDPOINT",
+        value = "https://asia.gcr.io"
+      },
+      {
+        name  = "UPSTREAM_REGISTRY_PATH",
+        value = "k8s-artifacts-prod"
+      }
+    ]
+  }
   australia-southeast1 = {
     environment_variables = [
       {
@@ -115,6 +127,18 @@ cloud_run_config = {
     ]
   }
   europe-west2 = {
+    environment_variables = [
+      {
+        name  = "UPSTREAM_REGISTRY_ENDPOINT",
+        value = "https://eu.gcr.io"
+      },
+      {
+        name  = "UPSTREAM_REGISTRY_PATH",
+        value = "k8s-artifacts-prod"
+      }
+    ]
+  }
+  europe-west3 = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
