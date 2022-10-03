@@ -22,14 +22,6 @@ resource "google_compute_address" "boskos_metrics" {
   address_type = "EXTERNAL"
 }
 
-resource "google_compute_address" "greenhouse_metrics" {
-  name         = "greenhouse-metrics"
-  description  = "to allow monitoring.k8s.prow.io to scrape greenhouse metrics"
-  project      = module.project.project_id
-  region       = local.cluster_location
-  address_type = "EXTERNAL"
-}
-
 resource "google_compute_address" "kubernetes_external_secrets_metrics" {
   name         = "kubernetes-external-secrets-metrics"
   description  = "to allow monitoring.k8s.prow.io to scrape kubernetes-external-secrets metrics"
