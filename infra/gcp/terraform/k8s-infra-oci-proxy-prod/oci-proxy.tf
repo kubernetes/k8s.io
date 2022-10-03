@@ -79,7 +79,7 @@ resource "google_cloud_run_service" "oci-proxy" {
   template {
     metadata {
       annotations = {
-        "autoscaling.knative.dev/maxScale" = "5" // Control costs.
+        "autoscaling.knative.dev/maxScale" = "10" // TODO: adjust to control costs
         "run.googleapis.com/launch-stage"  = "BETA"
       }
     }
@@ -96,8 +96,22 @@ resource "google_cloud_run_service" "oci-proxy" {
             value = env.value["value"]
           }
         }
+
+        // ensure this macth the value for template.spec.containers.resources.limits
+        env {
+          name = "GOMAXPROCS"
+          value = "1"
+        }
+
+        resources {
+          limits = {
+            "cpu" = "1000m"
+          }
+        }
       }
-      container_concurrency = 10
+
+      container_concurrency = 1000
+
       // 30 seconds less than cloud scheduler maximum.
       timeout_seconds = 570
     }
