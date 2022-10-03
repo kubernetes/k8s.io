@@ -8,6 +8,7 @@ groups:
     owners:
       - augustus@cisco.com
       - bburns@microsoft.com
+      - bentheelder@google.com
       - briangrant@google.com
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -19,6 +20,7 @@ groups:
       - liggitt@google.com
       - michelle.noorali@gmail.com
       - nikhitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
       - paris.pittman@gmail.com
       - phil.wittrock@gmail.com
       - quintonh@gmail.com
@@ -39,11 +41,11 @@ groups:
       ReconcileMembers: "true"
     owners:
       - augustus@cisco.com
+      - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
       - k8s@auggie.dev
       - killen.bob@gmail.com
-      - liggitt@google.com
+      - pal.nabarun95@gmail.com
       - paris.pittman@gmail.com
       - tpepper@vmware.com
 
@@ -64,11 +66,11 @@ groups:
       ReconcileMembers: "false"
     owners:
       - augustus@cisco.com
+      - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
       - k8s@auggie.dev
       - killen.bob@gmail.com
-      - liggitt@google.com
+      - pal.nabarun95@gmail.com
       - paris.pittman@gmail.com
       - tpepper@vmware.com
     managers:
