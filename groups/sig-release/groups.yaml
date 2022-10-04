@@ -66,6 +66,8 @@ groups:
       - sethpmccombs@gmail.com
       - thejoycekung@gmail.com
       - wilsonehusin@gmail.com
+      - cicih@google.com
+      - xandergrzyw@gmail.com
       - leonard.pahlke@googlemail.com # 1.26 Release Lead
       - nwaddington@cncf.io # 1.26 Release Lead Shadow
       - nng.grace@gmail.com # 1.26 Release Lead Shadow
@@ -341,7 +343,7 @@ groups:
       - neoaggelos@gmail.com # 1.26 Bug Triage Shadow
       - hesham.aboelmagd@gmail.com # 1.26 Bug Triage Shadow
       - cailyn.edwards@shopify.com # 1.26 Bug Triage Shadow
-      - xandergrzyw@gmail.com # 1.26 Bug Triage Shadow
+      - xandergrzyw@gmail.com # 1.26 Bug Triage Shadow, Release Manager Associate
       - guillen.carolina@gmail.com # 1.26 Docs Lead
       - cathchu@google.com # 1.26 Docs Shadow
       - m.r.boxell@gmail.com # 1.26 Docs Shadow
@@ -358,7 +360,7 @@ groups:
       - daespejo@vmware.com # 1.26 Communications Shadow
       - d.panigrarhi.nitrkl@gmail.com # 1.26 Communications Shadow
       #- jeremy.r.rickard@gmail.com (already added as owner) # Release Manager
-      #- X # Release Manager Associate
+      - cicih@google.com  # Release Manager Associate
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
