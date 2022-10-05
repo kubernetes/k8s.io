@@ -210,7 +210,7 @@ groups:
       - harshitasao@gmail.com # 1.26 Comms Shadow
       - bradmccoydev@gmail.com # 1.26 Comms Shadow
       - daespejo@vmware.com # 1.26 Comms Shadow
-      - d.panigrarhi.nitrkl@gmail.com # 1.26 Comms Shadow
+      - d.panigrahi.nitrkl@gmail.com # 1.26 Comms Shadow
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -358,7 +358,7 @@ groups:
       - harshitasao@gmail.com # 1.26 Communications Shadow
       - bradmccoydev@gmail.com # 1.26 Communications Shadow
       - daespejo@vmware.com # 1.26 Communications Shadow
-      - d.panigrarhi.nitrkl@gmail.com # 1.26 Communications Shadow
+      - d.panigrahi.nitrkl@gmail.com # 1.26 Communications Shadow
       #- jeremy.r.rickard@gmail.com (already added as owner) # Release Manager
       - cicih@google.com  # Release Manager Associate
 
@@ -408,7 +408,7 @@ groups:
      - harshitasao@gmail.com # 1.26 Communications Shadow
      - bradmccoydev@gmail.com # 1.26 Communications Shadow
      - daespejo@vmware.com # 1.26 Communications Shadow
-     - d.panigrarhi.nitrkl@gmail.com # 1.26 Communications Shadow
+     - d.panigrahi.nitrkl@gmail.com # 1.26 Communications Shadow
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
