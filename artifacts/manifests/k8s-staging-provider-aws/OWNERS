@@ -1,0 +1,20 @@
+# Should be in sync with https://github.com/kubernetes/cloud-provider-aws/blob/master/OWNERS
+
+approvers:
+- justinsb
+- nckturner
+- M00nF1sh
+- andrewsykim
+- wongma7
+- jaypipes
+- olemarkus
+- hakman
+reviewers:
+- justinsb
+- nckturner
+- M00nF1sh
+- andrewsykim
+- wongma7
+- jaypipes
+- olemarkus
+- hakman
