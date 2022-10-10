@@ -19,6 +19,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
     owners:
+    - amerai@google.com
     - bentheelder@google.com
     - skuznets@redhat.com
     - spiffxp@gmail.com
@@ -207,10 +208,11 @@ groups:
     - mpherman@google.com
     - slchase@google.com
     # sig-testing leads
+    # - amerai@google.com # already part of test-infra-oncall
     - bentheelder@google.com
     - skuznets@redhat.com
-    - spiffxp@google.com
     - spiffxp@gmail.com
+    - spiffxp@google.com
     # sig-k8s-infra members
     - ameukam@gmail.com
     - cblecker@gmail.com
