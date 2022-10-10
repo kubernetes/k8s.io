@@ -15,17 +15,15 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - alison@alisondowdney.com
       - ihor@cncf.io
       - killen.bob@gmail.com
       - paris.pittman@gmail.com
     managers:
       - ameukam@gmail.com
-      - jrosland@vmware.com
-      - matthewbbroberg@gmail.com
       - pal.nabarun95@gmail.com
       - rajula96reddy@gmail.com
     members:
+      - balves@linuxfoundation.org
       - chris@chrisshort.net
       - dgiles@linuxfoundation.org
       - harshitasao@gmail.com
