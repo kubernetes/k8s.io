@@ -1,5 +1,8 @@
 # Manually syncing buckets
 
+**NOTE**: we are no longer manually syncing buckets, however this may be a useful
+fallback reference.
+
 ## Background
 
 In the CNCF AWS accounts, there are two accounts of concern:
