@@ -1,14 +1,20 @@
-# registry.k8s.io (under construction)
+# registry.k8s.io
 
-Kubernetes multi-vendor registry.
+Kubernetes's multi-cloud registry.
 
-## Structure
+For more details on the design and implementation see the source repo: https://github.com/kubernetes/registry.k8s.io
 
-- [infra/meta/asns/](./infra/meta/asns/) :: cloud-provider ASNs for use in querying the closest provider to route registry traffic to
+Most of the deployment configuration is in [infra/gcp/terraform/k8s-infra-oci-proxy](./../infra/gcp/terraform/k8s-infra-oci-proxy) (staging instance for development only) and [infra/gcp/terraform/k8s-infra-oci-proxy-prod](./../infra/gcp/terraform/k8s-infra-oci-proxy) (production / end users).
 
 ## Accounts
 
 To host the /registry.k8s.io/ redirector, several resources are located in accounts across cloud providers.
+
+
+## GCP
+
+The GCP projects are under the standard kubernetes.io GCP org along with the other
+community infrastructure managed in this repo.
 
 ### AWS
 
