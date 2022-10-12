@@ -86,7 +86,7 @@ resource "google_cloud_run_service" "oci-proxy" {
     spec {
       service_account_name = google_service_account.oci-proxy.email
       containers {
-        image = "us.gcr.io/k8s-artifacts-prod/infra-tools/archeio:${var.tag}"
+        image = "us-central1-docker.pkg.dev/k8s-artifacts-prod/images/infra-tools/archeio:${var.tag}"
         args  = ["-v=3"]
 
         dynamic "env" {

@@ -16,7 +16,7 @@ limitations under the License.
 
 domain     = "registry.k8s.io"
 project_id = "k8s-infra-oci-proxy-prod"
-tag        = "v20220816-v0.0.1-120-g8293873"
+tag        = "v20221005-v0.0.2-28-g52c8633"
 cloud_run_config = {
   asia-east1 = {
     environment_variables = [
