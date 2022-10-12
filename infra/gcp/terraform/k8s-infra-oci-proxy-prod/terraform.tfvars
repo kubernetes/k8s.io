@@ -138,19 +138,6 @@ cloud_run_config = {
       }
     ]
   }
-  europe-west3 = {
-    environment_variables = [
-      {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        /* TODO: we should probably have AR in europe-west3? */
-        value = "https://europe-west1-docker.pkg.dev"
-      },
-      {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod/images"
-      }
-    ]
-  }
   europe-west4 = {
     environment_variables = [
       {
