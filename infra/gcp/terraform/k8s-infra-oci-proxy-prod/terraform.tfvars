@@ -22,11 +22,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        value = "https://asia-east1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -34,11 +34,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        value = "https://asia-northeast1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -46,11 +46,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        value = "https://asia-northeast2-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -58,11 +58,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        value = "https://asia-south1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -70,11 +70,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        value = "https://asia-southeast1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -82,11 +82,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        value = "https://australia-southeast1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -94,11 +94,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        value = "https://europe-north1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -106,11 +106,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        value = "https://europe-southwest1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -118,11 +118,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        value = "https://europe-west1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -130,23 +130,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        value = "https://europe-west2-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
-      }
-    ]
-  }
-  europe-west3 = {
-    environment_variables = [
-      {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
-      },
-      {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -154,11 +142,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        value = "https://europe-west4-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -166,11 +154,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        value = "https://europe-west8-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -178,11 +166,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        value = "https://europe-west9-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -190,11 +178,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        value = "https://southamerica-west1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -202,11 +190,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        value = "https://us-central1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -214,11 +202,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        value = "https://us-east1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -226,11 +214,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        value = "https://us-east4-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -238,11 +226,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        value = "https://us-east5-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -250,11 +238,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        value = "https://us-south1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -262,11 +250,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        value = "https://us-west1-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
@@ -274,11 +262,11 @@ cloud_run_config = {
     environment_variables = [
       {
         name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        value = "https://us-west2-docker.pkg.dev"
       },
       {
         name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        value = "k8s-artifacts-prod/images"
       }
     ]
   }
