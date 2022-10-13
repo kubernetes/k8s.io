@@ -200,15 +200,11 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - andrewrudoi@gmail.com
-      - davanum@gmail.com
-      - detiber@gmail.com
-      - fpandini@vmware.com
-      - goldsteina@vmware.com
-      - jeewan@vmware.com
-      - prignanov@vmware.com
       - richmcase@gmail.com
       - sedefsavas@gmail.com
+      - ankita.swamy20@gmail.com
+      - skarlso777@gmail.com
+      - daniel.lipovetsky@gmail.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-aws-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-aws-alerts
@@ -224,6 +220,9 @@ groups:
     owners:
       - richmcase@gmail.com
       - sedefsavas@gmail.com
+      - ankita.swamy20@gmail.com
+      - skarlso777@gmail.com
+      - daniel.lipovetsky@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
     name: k8s-infra-staging-cluster-api-do
