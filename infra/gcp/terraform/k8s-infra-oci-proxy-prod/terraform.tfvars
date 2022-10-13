@@ -66,18 +66,6 @@ cloud_run_config = {
       }
     ]
   }
-  asia-southeast1 = {
-    environment_variables = [
-      {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia-southeast1-docker.pkg.dev"
-      },
-      {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod/images"
-      }
-    ]
-  }
   australia-southeast1 = {
     environment_variables = [
       {
