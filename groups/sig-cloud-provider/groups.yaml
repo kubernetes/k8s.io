@@ -70,6 +70,7 @@ groups:
       - mattcary@google.com
       - saikatroyc@google.com
       - jinxu@google.com
+      - andrewsy@google.com
 
   - email-id: k8s-infra-staging-cloud-provider-ibm@kubernetes.io
     name: k8s-infra-staging-cloud-provider-ibm
