@@ -20,7 +20,7 @@ variable "domain" {
 variable "project_id" {
   type = string
 }
-variable "tag" {
+variable "digest" {
   type = string
 }
 variable "cloud_run_config" {
