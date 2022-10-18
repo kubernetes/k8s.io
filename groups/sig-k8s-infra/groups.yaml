@@ -245,6 +245,7 @@ groups:
       - sig-k8s-infra-leads@kubernetes.io
       - sj7trunks@pendulus.net
       - cy@borg.dev
+      - jonjohnson@google.com
 
   #
   # k8s-infra org-wide infrastructure admin groups
