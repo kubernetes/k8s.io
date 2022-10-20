@@ -97,7 +97,7 @@ resource "google_cloud_run_service" "oci-proxy" {
           }
         }
 
-        // ensure this macth the value for template.spec.containers.resources.limits
+        // ensure this match the value for template.spec.containers.resources.limits
         env {
           name  = "GOMAXPROCS"
           value = "1"
@@ -110,10 +110,13 @@ resource "google_cloud_run_service" "oci-proxy" {
         }
       }
 
-      container_concurrency = 1000
+      # we can probably hit 1k QPS/core (cloud run's maximum configurable)
+      # but we are leaving in a little overhead, if we actually hit 1k qps in
+      # a region we can scale to another 1 core instance
+      container_concurrency = 800
 
-      // 30 seconds less than cloud scheduler maximum.
-      timeout_seconds = 570
+      // we only serve cheap redirects, 60s is a rather long request
+      timeout_seconds = 60
     }
   }
 
