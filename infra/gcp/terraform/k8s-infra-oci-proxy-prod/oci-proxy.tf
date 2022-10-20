@@ -115,8 +115,8 @@ resource "google_cloud_run_service" "oci-proxy" {
       # a region we can scale to another 1 core instance
       container_concurrency = 800
 
-      // 30 seconds less than cloud scheduler maximum.
-      timeout_seconds = 570
+      // we only serve cheap redirects, 60s is a rather long request
+      timeout_seconds = 60
     }
   }
 
