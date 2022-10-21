@@ -21,6 +21,7 @@ restrictions:
     allowedGroups:
       - "^k8s-infra-staging-etcd@kubernetes.io$"
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
+      - "^sig-api-machinery-cel-dev@kubernetes.io$"
   - path: "sig-apps/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-examples@kubernetes.io$"
