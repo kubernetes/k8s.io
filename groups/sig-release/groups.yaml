@@ -495,3 +495,14 @@ groups:
       - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
       - pal.nabarun95@gmail.com # 1.26 RT EA
       - ryler.hockenbury@gmail.com # 1.26 Enhancements Lead
+
+  - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
+    name: k8s-infra-staging-zeitgeist
+    description: |-
+      ACL for staging Zeitgeist project
+
+      This project is used to test and stage Zeitgeist project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
