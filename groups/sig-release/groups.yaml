@@ -38,7 +38,6 @@ groups:
     members:
       - k8s-infra-release-admins@kubernetes.io
       - adolfo.garcia@uservers.net
-      - cicih@google.com
       - ctadeu@gmail.com
       - gveronicalg@gmail.com
       - jeremy.r.rickard@gmail.com
@@ -46,7 +45,6 @@ groups:
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
       - saschagrunert@gmail.com
-      - xandergrzyw@gmail.com
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
