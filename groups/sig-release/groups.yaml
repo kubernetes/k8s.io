@@ -504,3 +504,14 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-tejolote@kubernetes.io
+    name: k8s-infra-staging-tejolote
+    description: |-
+      ACL for staging Tejolote project
+
+      This project is used to test and stage tejolote project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
