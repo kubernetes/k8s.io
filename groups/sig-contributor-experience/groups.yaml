@@ -103,7 +103,6 @@ groups:
       - cblecker@gmail.com
     managers:
       - alarcj137@gmail.com
-      - contributors@kubernetes.io
       - dylan.graham@gmail.com
       - idealhack@gmail.com
       - ihor@cncf.io
