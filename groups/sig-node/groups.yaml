@@ -34,6 +34,17 @@ groups:
       - timallclair@gmail.com
       - thockin@google.com
 
+  - email-id: k8s-infra-staging-kmm@kubernetes.io
+    name: k8s-infra-staging-kmm
+    description: |-
+      ACL for staging kernel-module-management (kmm)
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mpatel@redhat.com
+      - qbarrand@redhat.com
+      - yshnaidm@redhat.com
+
   - email-id: k8s-infra-staging-nfd@kubernetes.io
     name: k8s-infra-staging-nfd
     description: |-
@@ -45,7 +56,7 @@ groups:
       - carangog@redhat.com
       - jordanjacobelli04@gmail.com
       - markus.lehtonen@intel.com
-      - zkosic@redhat.com
+      - zkaiser@nvidia.com
 
   - email-id: k8s-infra-staging-npd@kubernetes.io
     name: k8s-infra-staging-npd

@@ -30,6 +30,10 @@ locals {
       name = "k8s-io-ingress-canary-v6",
       ipv6 = true
     },
+    cs = {
+      name = "cs-k8s-io-ingress",
+      description = "Used for cs-canary.k8s.io"
+    },
     elections = {
       name        = "k8s-io-elections",
       description = "Used for elections.k8s.io"

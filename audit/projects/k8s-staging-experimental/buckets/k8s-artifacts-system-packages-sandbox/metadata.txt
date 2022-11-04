@@ -1,0 +1,20 @@
+gs://k8s-artifacts-system-packages-sandbox/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Tue, 21 Jun 2022 14:25:28 GMT
+	Time updated:			Tue, 21 Jun 2022 14:25:41 GMT
+	Metageneration:			4
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

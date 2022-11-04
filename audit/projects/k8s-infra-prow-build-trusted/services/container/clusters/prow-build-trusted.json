@@ -20,8 +20,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.4.0.0/14",
   "createTime": "2020-04-30T23:44:46+00:00",
-  "currentMasterVersion": "1.20.10-gke.1600",
-  "currentNodeVersion": "1.20.10-gke.1600",
+  "currentMasterVersion": "1.22.12-gke.300",
+  "currentNodeVersion": "1.22.10-gke.600 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -80,6 +80,9 @@
   "networkConfig": {
     "defaultSnatStatus": {},
     "network": "projects/k8s-infra-prow-build-trusted/global/networks/default",
+    "serviceExternalIpsConfig": {
+      "enabled": true
+    },
     "subnetwork": "projects/k8s-infra-prow-build-trusted/regions/us-central1/subnetworks/default"
   },
   "networkPolicy": {
@@ -151,9 +154,10 @@
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build-trusted/locations/us-central1/clusters/prow-build-trusted/nodePools/trusted-pool1-20210806160125616800000001",
       "upgradeSettings": {
-        "maxSurge": 1
+        "maxSurge": 1,
+        "strategy": "SURGE"
       },
-      "version": "1.20.10-gke.1600"
+      "version": "1.22.10-gke.600"
     }
   ],
   "releaseChannel": {

@@ -18,6 +18,7 @@ locals {
   project_id  = "k8s-infra-public-pii"
   bucket_name = "k8s-infra-artifacts-gcslogs"
   dataset-id  = replace(local.bucket_name, "-", "_")
+  registry-k8s-io-bq-id = "registry_k8s_io_logs"
 }
 
 
@@ -53,12 +54,31 @@ resource "google_project_service" "project" {
 
 // BigQuery dataset for audit logs
 resource "google_bigquery_dataset" "audit-logs-gcs" {
+  project                     = google_project.project.project_id
   dataset_id                  = local.dataset-id
   friendly_name               = local.dataset-id
   delete_contents_on_destroy  = false
-  default_table_expiration_ms = 34560000000 #30 days
+  default_table_expiration_ms = 400 * 24 * 60 * 60 * 1000 # 400 days
   location                    = "US"
+}
+
+// BigQuery dataset for registry.k8s.io logs
+resource "google_bigquery_dataset" "registry_k8s_io_logs" {
   project                     = google_project.project.project_id
+  dataset_id                  = local.registry-k8s-io-bq-id
+  friendly_name               = local.registry-k8s-io-bq-id
+  delete_contents_on_destroy  = false
+  default_table_expiration_ms = 90 * 24 * 60 * 60 * 1000 #90 days
+  location                    = "US"
+}
+
+resource "google_bigquery_dataset_iam_member" "registry_k8s_io_logs" {
+  project = google_project.project.project_id
+  dataset_id = google_bigquery_dataset.registry_k8s_io_logs.dataset_id
+  role = "roles/bigquery.dataEditor"
+  # Logs router Sink identity in k8s-infra-oci-proxy-prod
+  # Not existing data resource to extract the writer identity
+  member = "serviceAccount:p102333525888-824068@gcp-sa-logging.iam.gserviceaccount.com"
 }
 
 

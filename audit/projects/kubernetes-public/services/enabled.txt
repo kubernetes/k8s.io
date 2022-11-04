@@ -23,3 +23,4 @@ sql-component.googleapis.com         Cloud SQL
 stackdriver.googleapis.com           Stackdriver API
 storage-api.googleapis.com           Google Cloud Storage JSON API
 storage-component.googleapis.com     Cloud Storage
+sts.googleapis.com                   Security Token Service API

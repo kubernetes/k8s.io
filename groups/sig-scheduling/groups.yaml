@@ -18,6 +18,33 @@ groups:
   # Membership should correspond roughly to subproject owners for the set of
   # subproject artifacts being stored in a given staging project
   #
+  - email-id: sig-scheduling-leads@kubernetes.io
+    name: sig-scheduling-leads
+    description: |-
+      SIG Scheduling Leads - private discussion and shared account credentials (e.g. zoom)
+
+      Anyone can e-mail, but only members can view/post messages via the website
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+    members:
+      - acondor@google.com
+      - ahg@google.com
+      - hweicdl@gmail.com
+
+  - email-id: k8s-infra-staging-kueue@kubernetes.io
+    name: k8s-infra-staging-kueue
+    description: |-
+      ACL for staging kueue
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - acondor@google.com
+      - ahg@google.com
+      - carangog@redhat.com
+      - wangqingcan1990@gmail.com
 
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     name: k8s-infra-staging-descheduler
@@ -28,7 +55,7 @@ groups:
     members:
       - avesh.ncsu@gmail.com
       - davanum@gmail.com
-      - mdame@redhat.com
+      - mikedame@google.com
       - ravisantoshgudimetla@gmail.com
 
   - email-id: k8s-infra-staging-scheduler-plugins@kubernetes.io
@@ -53,6 +80,17 @@ groups:
       - acondor@google.com
       - adtac@google.com
       - handbomusic@gmail.com
+
+  - email-id: k8s-infra-staging-kwok@kubernetes.io
+    name: k8s-infra-staging-kwok
+    description: |-
+      ACL for staging kwok
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - hweicdl@gmail.com
+      - yibzhuang@gmail.com
+      - zjwzshiming@gmail.com
 
   #
   # k8s-infra gcs write access

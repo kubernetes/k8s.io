@@ -8,4 +8,4 @@ reviewers:
     - test-infra-on-call
 
 labels:
-    sig/testing
+    - sig/testing

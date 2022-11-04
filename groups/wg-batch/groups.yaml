@@ -1,0 +1,40 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: wg-batch-leads@kubernetes.io
+    name: wg-batch-leads
+    description: |-
+      WG Batch Organizers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - ahg@google.com
+      - hweicdl@gmail.com
+      - lancashiredanielle@gmail.com
+      - maszulik@redhat.com
+      - swati.tcd@gmail.com
+
+  - email-id: wg-batch@kubernetes.io
+    name: wg-batch
+    description: |-
+      Public mailing list for WG Batch
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - ahg@google.com
+      - hweicdl@gmail.com
+      - lancashiredanielle@gmail.com
+      - maszulik@redhat.com
+      - swati.tcd@gmail.com
+    members:
+      - wg-batch-leads@kubernetes.io

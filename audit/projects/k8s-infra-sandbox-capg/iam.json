@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-591994748249@container-analysis.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.ServiceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-591994748249@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/containerregistry.ServiceAgent"
@@ -27,7 +33,14 @@
     },
     {
       "members": [
+        "serviceAccount:service-591994748249@gcp-sa-osconfig.iam.gserviceaccount.com"
+      ],
+      "role": "roles/osconfig.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-sandbox-capg@kubernetes.io",
+        "serviceAccount:richard-capg@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"

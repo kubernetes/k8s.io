@@ -1,0 +1,21 @@
+[
+  {
+    "bigqueryOptions": {},
+    "createTime": "2022-08-25T20:46:37.898351296Z",
+    "destination": "bigquery.googleapis.com/projects/k8s-infra-public-pii/datasets/registry_k8s_io_logs",
+    "filter": "resource.type = \"cloud_run_revision\" AND log_name= \"projects/k8s-infra-oci-proxy-prod/logs/run.googleapis.com%2Frequests\"",
+    "name": "registry-k8s-io-logs-sink",
+    "updateTime": "2022-08-25T20:46:37.898351296Z",
+    "writerIdentity": "serviceAccount:p102333525888-824068@gcp-sa-logging.iam.gserviceaccount.com"
+  },
+  {
+    "destination": "logging.googleapis.com/projects/k8s-infra-oci-proxy-prod/locations/global/buckets/_Required",
+    "filter": "LOG_ID(\"cloudaudit.googleapis.com/activity\") OR LOG_ID(\"externalaudit.googleapis.com/activity\") OR LOG_ID(\"cloudaudit.googleapis.com/system_event\") OR LOG_ID(\"externalaudit.googleapis.com/system_event\") OR LOG_ID(\"cloudaudit.googleapis.com/access_transparency\") OR LOG_ID(\"externalaudit.googleapis.com/access_transparency\")",
+    "name": "_Required"
+  },
+  {
+    "destination": "logging.googleapis.com/projects/k8s-infra-oci-proxy-prod/locations/global/buckets/_Default",
+    "filter": "NOT LOG_ID(\"cloudaudit.googleapis.com/activity\") AND NOT LOG_ID(\"externalaudit.googleapis.com/activity\") AND NOT LOG_ID(\"cloudaudit.googleapis.com/system_event\") AND NOT LOG_ID(\"externalaudit.googleapis.com/system_event\") AND NOT LOG_ID(\"cloudaudit.googleapis.com/access_transparency\") AND NOT LOG_ID(\"externalaudit.googleapis.com/access_transparency\")",
+    "name": "_Default"
+  }
+]

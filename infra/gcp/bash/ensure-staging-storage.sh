@@ -56,14 +56,22 @@ readonly RELEASE_STAGING_PROJECTS=(
 )
 
 readonly STAGING_PROJECT_SERVICES=(
-    # These projects use GCB to build/push images to GCR
+    # used by the staging project to host container images in Artifact Registry
+    artifactregistry.googleapis.com
+    # used by the staging project to inventory GCP resources
+    cloudasset.googleapis.com
+    # used by the staging project use GCB to build/sign/push images to AR/GCR
     cloudbuild.googleapis.com
-    # Some GCB jobs may use KMS
+    # Some Google CloudBuild jobs may use KMS
     cloudkms.googleapis.com
     # These projects host images in GCR
     containerregistry.googleapis.com
+    # used by cloudbuild to run jobs with dedicated service accounts
+    iam.googleapis.com
     # Some GCB jobs may use Secret Manager (preferred over KMS)
     secretmanager.googleapis.com
+    # used by the staging project to troobleshoot
+    policytroubleshooter.googleapis.com
     # These projects may host binaries in GCS
     storage-component.googleapis.com
 
@@ -75,6 +83,8 @@ readonly STAGING_PROJECT_SERVICES=(
     pubsub.googleapis.com
     # storage-api used by: cloudbuild, containerregistry
     storage-api.googleapis.com
+    # used by cloudbuild for keyless artifact signing
+    iamcredentials.googleapis.com
 )
 
 readonly STAGING_PROJECT_DISABLED_SERVICES=(
@@ -106,8 +116,8 @@ readonly PROD_IMAGE_PROMOTER_SCANNING_SERVICE_ACCOUNT
 # Staging functions
 #
 
-# Provision and configure a "staging" GCP project, intended to hold 
-# temporary release artifacts in a pre-provisioned GCS bucket or 
+# Provision and configure a "staging" GCP project, intended to hold
+# temporary release artifacts in a pre-provisioned GCS bucket or
 # GCR. The intent is to then promote some of these artifacts to
 # production, which is long-lived and immutable.
 #
@@ -250,7 +260,7 @@ function ensure_staging_gcr_repo() {
 
     color 6 "Ensuring GCR admins can admin GCR for project: ${project}"
     empower_gcr_admins "${project}"
-    
+
     color 6 "Ensuring GCS access logs enabled for GCR bucket in project: ${project}"
     ensure_gcs_bucket_logging "${gcr_bucket}"
 }
@@ -381,6 +391,18 @@ function ensure_release_manager_special_cases() {
             empower_svcacct_to_admin_gcr "648026197307@cloudbuild.gserviceaccount.com" "${project}"
         fi
 
+        # For k8s-staging-releng,
+        # - create a GCS bucket for system packages
+        # - ensure k8s-release-editors@kubernetes can write objects to the bucket
+        # This is required to investage migration from Google infrastucture to
+        # the community-owned infrastructure. See: https://github.com/kubernetes/release/issues/913
+        if [[ "${project}" == "k8s-staging-experimental" ]]; then
+            ensure_private_gcs_bucket "${project}" "gs://k8s-artifacts-system-packages-sandbox"
+            ensure_gcs_role_binding "gs://k8s-artifacts-system-packages-sandbox" \
+                "group:k8s-infra-release-editors@kubernetes.io" \
+                "objectAdmin"
+        fi
+
         # Artifact Registry
         #
         # Enable Google Artifact Registry to allow Release Managers to prepare
@@ -449,12 +471,40 @@ function staging_special_case__k8s_staging_kustomize() {
     ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
 }
 
+# In order to build the release artifacts, the group needs to be
+# able to create and manage a keyring to encrypt a secret token
+# that will be accessed and decrypted by a cloud build job.
+function staging_special_case__k8s_staging_krm_functions() {
+    readonly project="k8s-staging-krm-functions"
+    local principal
+
+    # ensure owners can manage keyrings
+    local owners="k8s-infra-staging-krm-functions@kubernetes.io"
+    principal="group:${owners}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.admin"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyEncrypter"
+
+    # ensure cloud builds can access keyrings for decryption
+    local cloudbuild_sa_email="415435679132@cloudbuild.gserviceaccount.com"
+    principal="serviceAccount:${cloudbuild_sa_email}"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyDecrypter"
+    ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
+}
+
 # In order for pull-release-image-* to run on k8s-infra-prow-build,
 # it needs write access to gcr.io/k8s-staging-releng-test. We are
 # wary of what untrusted code is allowed to do, so we don't allow
 # presubmits to run on k8s-infra-prow-build-trusted.
 function staging_special_case__k8s_staging_releng_test() {
     ensure_staging_gcb_builder_service_account "releng-test" "k8s-infra-prow-build"
+
+    # Ensure CloudBuild jobs can access keyrings on GCP project k8s-releng-prod for decryption
+    local cloudbuild_sa_email="86929635859@cloudbuild.gserviceaccount.com"
+    principal="serviceAccount:${cloudbuild_sa_email}"
+
+    readonly project="k8s-releng-prod"
+    ensure_project_role_binding "${project}" "${principal}" "roles/cloudkms.cryptoKeyDecrypter"
+    ensure_project_role_binding "${project}" "${principal}" "roles/secretmanager.secretAccessor"
 }
 
 # sig-storage has these enabled

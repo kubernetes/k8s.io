@@ -32,9 +32,17 @@ locals {
       group  = "sig-release"
       owners = "k8s-infra-release-admins@kubernetes.io"
     }
+    k8s-release-enhancements-triage-github-token = {
+      group = "sig-release"
+      owners = "k8s-infra-release-editors@kubernetes.io"
+    }
     k8s-triage-robot-github-token = {
       group  = "sig-contributor-experience"
       owners = "github@kubernetes.io"
+    }
+    registry-k8s-io-s3-writer = {
+      group  = "sig-release"
+      owners = "k8s-infra-release-admins@kubernetes.io"
     }
     service-account = {
       group  = "sig-testing"
@@ -72,4 +80,23 @@ resource "google_secret_manager_secret_iam_binding" "build_cluster_secret_admins
     "group:k8s-infra-prow-oncall@kubernetes.io",
     "group:${each.value.owners}"
   ]
+}
+
+data "google_secret_manager_secret" "capdo_quayio_registry_secret" {
+  project   = module.project.project_id
+  secret_id = "capdo-quayio-registry-secret"
+}
+
+resource "google_secret_manager_secret_iam_member" "k8s_prow_kes_sa_role_viewer" {
+  project   = module.project.project_id
+  secret_id = data.google_secret_manager_secret.capdo_quayio_registry_secret.id
+  role      = "roles/secretmanager.viewer"
+  member    = "serviceAccount:kubernetes-external-secrets-sa@k8s-prow.iam.gserviceaccount.com"
+}
+
+resource "google_secret_manager_secret_iam_member" "k8s_prow_kes_sa_role_accessor" {
+  project   = module.project.project_id
+  secret_id = data.google_secret_manager_secret.capdo_quayio_registry_secret.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:kubernetes-external-secrets-sa@k8s-prow.iam.gserviceaccount.com"
 }

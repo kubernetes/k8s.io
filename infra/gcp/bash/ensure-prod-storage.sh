@@ -79,6 +79,8 @@ readonly PROD_PROJECT_SERVICES=(
     containerregistry.googleapis.com
     # prod projects host binaries in GCS
     storage-component.googleapis.com
+    # prod projects host containers in AR
+    artifactregistry.googleapis.com
 )
 
 readonly PROD_PROJECT_DISABLED_SERVICES=(
@@ -87,7 +89,9 @@ readonly PROD_PROJECT_DISABLED_SERVICES=(
 )
 
 # Regions for prod GCR.
-PROD_REGIONS=(us eu asia)
+GCR_PROD_REGIONS=(us eu asia)
+# Regions for prod AR.
+AR_PROD_REGIONS=(asia-east1 asia-south1 asia-northeast1 asia-northeast2 australia-southeast1 europe-north1 europe-southwest1 europe-west1 europe-west2 europe-west4 europe-west8 europe-west9 southamerica-west1 us-central1 us-east1 us-east4 us-east5 us-south1 us-west1 us-west2)
 
 # Minimum time we expect to keep prod GCS artifacts.
 PROD_RETENTION="10y"
@@ -102,8 +106,8 @@ function ensure_prod_gcr() {
     fi
     local project="${1}"
 
-    color 6 "Ensuring prod GCR for regions: ${PROD_REGIONS[*]}"
-    for region in "${PROD_REGIONS[@]}"; do
+    color 6 "Ensuring prod GCR for regions: ${GCR_PROD_REGIONS[*]}"
+    for region in "${GCR_PROD_REGIONS[@]}"; do
         local gcr_bucket="gs://${region}.artifacts.${project}.appspot.com"
 
         color 3 "region: ${region}"
@@ -112,12 +116,39 @@ function ensure_prod_gcr() {
 
         color 6 "Ensuring GCR admins can admin GCR in region: ${region} for project: ${project}"
         empower_gcr_admins "${project}" "${region}"
-        
+
         color 6 "Empowering image promoter for region: ${region} in project: ${project}"
         empower_image_promoter "${project}" "${region}"
 
         color 6 "Ensuring GCS access logs enabled for GCR bucket in region: ${region} in project: ${project}"
         ensure_gcs_bucket_logging "${gcr_bucket}"
+    done 2>&1 | indent
+}
+
+# Make a prod AR repository and grant access to it.
+#
+# $1: The GCP project name (GCR names == project names)
+function ensure_prod_ar() {
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "ensure_prod_ar(project) requires 1 argument" >&2
+        return 1
+    fi
+    local project="${1}"
+    local serviceaccount
+
+    color 6 "Ensuring prod AR registry for locations: ${AR_PROD_REGIONS[*]}"
+    for region in "${AR_PROD_REGIONS[@]}"; do
+
+        color 3 "region: ${region}"
+        color 6 "Ensuring an AR repo exists in location: ${region} for project: ${project}"
+        ensure_ar_repo "${project}" "${region}"
+
+        color 6 "Ensuring GCR admins can admin AR in location: ${region} for project: ${project}"
+        empower_ar_admins "${project}" "${region}"
+
+        color 6 "Empowering image promoter with roles/artifactregistry.repoAdmin in project: ${project}"
+        serviceaccount=$(svc_acct_email "${project}" "${IMAGE_PROMOTER_SVCACCT}")
+        ensure_project_role_binding "${project}" "serviceAccount:$serviceaccount" "roles/artifactregistry.repoAdmin"
     done 2>&1 | indent
 }
 
@@ -175,7 +206,7 @@ function empower_group_to_fake_prod() {
     empower_group_as_viewer "${project}" "${group}"
 
     color 6 "Empowering $group for GCR in $project"
-    for r in "${PROD_REGIONS[@]}"; do
+    for r in "${GCR_PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_group_to_write_gcr "${group}" "${project}" "${r}"
     done
@@ -198,14 +229,17 @@ function ensure_all_prod_projects() {
         color 6 "Ensuring project exists: ${prj}"
         ensure_project "${prj}"
 
-        color 6 "Ensuring Services to host and analyze aritfacts: ${prj}"
+        color 6 "Ensuring Services to host and analyze artifacts: ${prj}"
         ensure_services "${prj}" "${PROD_PROJECT_SERVICES[@]}" 2>&1 | indent
 
         color 6 "Ensuring disabled services for prod project: ${prj}"
         ensure_disabled_services "${prj}" "${PROD_PROJECT_DISABLED_SERVICES[@]}" 2>&1 | indent
 
-        color 6 "Ensuring the GCR repository: ${prj}"
+        color 6 "Ensuring the GCR repositories: ${prj}"
         ensure_prod_gcr "${prj}" 2>&1 | indent
+
+        color 6 "Ensuring the AR repositories: ${prj}"
+        ensure_prod_ar "${prj}" 2>&1 | indent
 
         color 6 "Ensuring the GCS bucket: gs://${prj}"
         ensure_prod_gcs_bucket "${prj}" "gs://${prj}" 2>&1 | indent
@@ -289,7 +323,7 @@ function ensure_all_prod_special_cases() {
     # real $PRODBAK_PROJECT).  We don't want this same power for the non-test
     # backup system, so a compromised promoter can't nuke backups.
     color 6 "Empowering backup-test-prod promoter to backup-test-prod GCR"
-    for r in "${PROD_REGIONS[@]}"; do
+    for r in "${GCR_PROD_REGIONS[@]}"; do
         color 3 "region $r"
         empower_svcacct_to_write_gcr \
             "$(svc_acct_email "${GCR_BACKUP_TEST_PRODBAK_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")" \
@@ -365,7 +399,7 @@ function ensure_all_prod_special_cases() {
         color 6 "Ensuring GKE clusters in '${project}' can run pods in '${PROWJOB_POD_NAMESPACE}' as '${serviceaccount}'"
         empower_gke_for_serviceaccount \
             "${project}" "${PROWJOB_POD_NAMESPACE}" \
-            "${serviceaccount}" "k8s-infra-gcr-vuln-scanning" 
+            "${serviceaccount}" "k8s-infra-gcr-vuln-scanning"
     done
 
     # For write access to:
@@ -391,6 +425,28 @@ function ensure_all_prod_special_cases() {
     ensure_gcs_role_binding "gs://k8s-artifacts-gcslogs" \
         "group:k8s-infra-gcs-access-logs@kubernetes.io" \
         "objectViewer"
+
+    # Special case: In order to run the container image signing tests, k8s-cip-test-prod
+    # requires to have the IAM Service Account Credentials API enabled to generate OIDC
+    # identity tokens. The production project needs the API too to sign all promoted images.
+
+    color 6 "Ensuring IAM Service Account Credentials API for image signing"
+    ensure_services "${IMAGE_PROMOTER_TEST_PROD_PROJECT}" "iamcredentials.googleapis.com"
+    ensure_services "${PROD_PROJECT}" "iamcredentials.googleapis.com"
+
+    # The promoter project also requires a service account to issue the test signatures
+    # during the e2e tests
+    color 6 "Ensuring image signing test account exists and e2es have access to it"
+    ensure_service_account \
+        "${IMAGE_PROMOTER_TEST_PROD_PROJECT}" \
+        "${IMAGE_PROMOTER_TEST_SIGNER_SVCACCT}" \
+        "image promoter e2e test signing account"
+
+    test_sign_account="$(svc_acct_email "${IMAGE_PROMOTER_TEST_PROD_PROJECT}" "${IMAGE_PROMOTER_TEST_SIGNER_SVCACCT}")"
+    ensure_serviceaccount_role_binding \
+        "${test_sign_account}" \
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-cip-test-prod.iam.gserviceaccount.com" \
+        "roles/iam.serviceAccountTokenCreator"
 }
 
 function main() {

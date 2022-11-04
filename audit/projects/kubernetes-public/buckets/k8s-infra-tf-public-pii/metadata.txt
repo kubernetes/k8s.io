@@ -11,8 +11,8 @@ gs://k8s-infra-tf-public-pii/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 14 Jun 2021 17:08:43 GMT
-	Time updated:			Mon, 14 Jun 2021 17:09:23 GMT
-	Metageneration:			6
+	Time updated:			Fri, 28 Jan 2022 15:02:30 GMT
+	Metageneration:			7
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

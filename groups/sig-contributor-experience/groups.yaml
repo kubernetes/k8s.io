@@ -15,19 +15,20 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - alison@alisondowdney.com
       - ihor@cncf.io
       - killen.bob@gmail.com
     managers:
-      - pal.nabarun95@gmail.com
       - ameukam@gmail.com
-      - matthewbbroberg@gmail.com
-      - jrosland@vmware.com
+      - pal.nabarun95@gmail.com
       - rajula96reddy@gmail.com
     members:
-      - dgiles@linuxfoundation.org
-      - jberkus@redhat.com
+      - balves@linuxfoundation.org
       - chris@chrisshort.net
+      - dgiles@linuxfoundation.org
+      - harshitasao@gmail.com
+      - jberkus@redhat.com
+      - puja@giantswarm.io
+      - rajaskakodkar16@gmail.com
       - samudralavamshi@gmail.com
 
   - email-id: dev@kubernetes.io
@@ -42,6 +43,10 @@ groups:
       WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
       WhoCanPostMessage: "ANYONE_CAN_POST"
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
       ReconcileMembers: "false"
     owners:
       - contributors@kubernetes.io
@@ -67,13 +72,12 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cblecker@gmail.com
-      - spiffxp@gmail.com
-      - spiffxp@google.com
     managers:
-      - fejta@google.com
+      - ameukam@gmail.com
       - ihor.dvoretskyi@gmail.com
-      - nikitaraghunath@gmail.com
       - killen.bob@gmail.com
+      - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
 
   - email-id: lwkd@kubernetes.io
     name: lwkd
@@ -83,7 +87,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
-    members:
+    owners:
       - jberkus@redhat.com
       - noah@coderanger.net
 
@@ -110,7 +114,6 @@ groups:
       - noah@coderanger.net
       - killen.bob@gmail.com
     members:
-      - cblecker@gmail.com
       - guslees@gmail.com
       - james@munnelly.eu
       - jspeed@redhat.com

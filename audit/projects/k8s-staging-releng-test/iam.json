@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-86929635859@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/artifactregistry.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:86929635859@cloudbuild.gserviceaccount.com",
         "serviceAccount:gcb-builder-releng-test@k8s-staging-releng-test.iam.gserviceaccount.com",
         "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
@@ -34,6 +40,12 @@
     },
     {
       "members": [
+        "serviceAccount:86929635859@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.cryptoKeyDecrypter"
+    },
+    {
+      "members": [
         "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/containeranalysis.occurrences.viewer"
@@ -49,6 +61,12 @@
         "serviceAccount:service-86929635859@gcp-sa-containerscanning.iam.gserviceaccount.com"
       ],
       "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:86929635859@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/secretmanager.secretAccessor"
     },
     {
       "members": [

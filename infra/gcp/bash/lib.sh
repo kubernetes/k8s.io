@@ -44,6 +44,7 @@ trap 'cleanup_tmpdir' EXIT
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcs.sh"
 
 # order doesn't matter here, so keep sorted
+. "$(dirname "${BASH_SOURCE[0]}")/lib_ar.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gcr.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_gsm.sh"
 . "$(dirname "${BASH_SOURCE[0]}")/lib_services.sh"
@@ -84,6 +85,10 @@ readonly FILE_PROMOTER_SVCACCT="k8s-infra-promoter"
 
 # The service account name for the image promoter.
 readonly IMAGE_PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
+
+# The service account to generate image and artifact signatures during
+# e2e tests of the image promoter
+export IMAGE_PROMOTER_TEST_SIGNER_SVCACCT="k8s-infra-promoter-test-signer"
 
 # The service account name for the image promoter's vulnerability check.
 # used in: ensure-prod-storage.sh ensure-staging-storage.sh

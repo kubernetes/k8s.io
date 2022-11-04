@@ -168,8 +168,16 @@
       "metric": "STATIC_BYOIP_ADDRESSES"
     },
     {
+      "limit": 60,
+      "metric": "NETWORK_FIREWALL_POLICIES"
+    },
+    {
       "limit": 150,
       "metric": "INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES"
+    },
+    {
+      "limit": 150,
+      "metric": "GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES"
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-boskos-038",

@@ -2,6 +2,18 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/artifactregistry.repoAdmin"
+    },
+    {
+      "members": [
+        "serviceAccount:service-388270116193@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/artifactregistry.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-388270116193@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"

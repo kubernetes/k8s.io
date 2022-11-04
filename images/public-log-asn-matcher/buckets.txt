@@ -11,6 +11,7 @@ k8s-staging-addon-manager
 k8s-staging-apisnoop
 k8s-staging-artifact-promoter
 k8s-staging-autoscaling
+k8s-staging-bom
 k8s-staging-bootkube
 k8s-staging-boskos
 k8s-staging-build-image
@@ -45,6 +46,7 @@ k8s-staging-experimental
 k8s-staging-external-dns
 k8s-staging-gateway-api
 k8s-staging-git-sync
+k8s-staging-gmsa-webhook
 k8s-staging-infra-tools
 k8s-staging-ingressconformance
 k8s-staging-ingress-nginx
@@ -52,10 +54,12 @@ k8s-staging-k8s-gsm-tools
 k8s-staging-kas-network-proxy
 k8s-staging-kind
 k8s-staging-kops
+k8s-staging-krm-functions
 k8s-staging-kubeadm
 k8s-staging-kubernetes
 k8s-staging-kube-state-metrics
 k8s-staging-kubetest2
+k8s-staging-kueue
 k8s-staging-kustomize
 k8s-staging-metrics-server
 k8s-staging-mirror
@@ -63,6 +67,7 @@ k8s-staging-multitenancy
 k8s-staging-networking
 k8s-staging-nfd
 k8s-staging-npd
+k8s-staging-perf-tests
 k8s-staging-prometheus-adapter
 k8s-staging-provider-aws
 k8s-staging-provider-azure
@@ -73,6 +78,7 @@ k8s-staging-releng-test
 k8s-staging-sched-simulator
 k8s-staging-scheduler-plugins
 k8s-staging-scl-image-builder
+k8s-staging-sig-auth
 k8s-staging-sig-docs
 k8s-staging-sig-storage
 k8s-staging-slack-infra

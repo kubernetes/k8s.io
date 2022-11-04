@@ -12,8 +12,8 @@ gs://k8s-release-test-prod/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 10 Jul 2019 22:17:00 GMT
-	Time updated:			Fri, 10 Sep 2021 21:12:47 GMT
-	Metageneration:			88
+	Time updated:			Wed, 02 Mar 2022 13:24:15 GMT
+	Metageneration:			92
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

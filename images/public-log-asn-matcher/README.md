@@ -39,20 +39,40 @@ The output is finally loaded in a DataStudio report and reviewed by members [sig
 | `NO_PROMOTE`                     | ``                         | Disable the promotion of `${GCP_BIGQUERY_DATASET}_${DATE}` to ${GCP_BIGQUERY_DATASET} |
 | `ASN_DATA_PIPELINE_RETAIN`       | ``                         | Keeps Postgres running after the job has completed                                    |
 | `GCP_BQ_DUMP_BUCKET`             | ``                         | A GCP bucket to dump content from BigQuery                                            |
-| `BQ_OUTPUT`                      | `/dev/null`                | The file to output the logs for BigQuery to                                           |
+| `DEBUG_MODE`                     | ``                         | Toggles bash's debug mode                                                             |
+
+## Prepare
+
+Log into gcloud
+
+```bash
+gcloud auth login
+```
+
+Set the GCP project
+
+```bash
+gcloud config set project k8s-infra-ii-sandbox
+```
+
+Log into application-default
+
+```bash
+gcloud auth application-default login
+```
 
 ## Running the Pipeline Manually
 
 Run in Docker
 
 ```bash
-TMP_DIR_ETL=$(mktemp -d)
-echo "${TMP_DIR_ETL}"
-sudo chmod 0777 "${TMP_DIR_ETL}"
+TMP_DIR_ETL=$HOME/.tmp/public-log-asn-matcher-$RANDOM
+sudo mkdir -p $TMP_DIR_ETL
+sudo chmod 0777 ${TMP_DIR_ETL}
 sudo chown -R 999 ~/.config/gcloud # allow for postgres user
 docker run \
-    -it \
-    --rm \
+    -d \
+    -e DEBUG_MODE=true \
     -e TZ=$TZ \
     -e POSTGRES_PASSWORD="postgres" \
     -e GCP_PROJECT=k8s-infra-ii-sandbox \
@@ -60,7 +80,17 @@ docker run \
     -e GCP_BQ_DUMP_BUCKET=ii_bq_scratch_dump \
     -v $HOME/.config/gcloud:/var/lib/postgresql/.config/gcloud \
     -v "${TMP_DIR_ETL}:/tmp" \
-    public-log-asn-matcher
+    --name public-log-asn-matcher \
+    gcr.io/k8s-staging-infra-tools/public-log-asn-matcher
+docker logs -f public-log-asn-matcher
+```
+
+### Clean up
+
+Change permissions of ~/.config/gcloud back
+
+```bash
+sudo chown -R $(id -u) ~/.config/gcloud
 ```
 
 ## Generating the bucket list

@@ -11,8 +11,8 @@ gs://us.artifacts.k8s-gcr-audit-test-prod.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 01 Nov 2019 18:28:00 GMT
-	Time updated:			Fri, 10 Sep 2021 21:06:04 GMT
-	Metageneration:			35
+	Time updated:			Wed, 10 Aug 2022 17:43:27 GMT
+	Metageneration:			38
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

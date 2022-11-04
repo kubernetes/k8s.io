@@ -45,7 +45,7 @@ docs:
 # All docs subdomains get sent to netlify (@chenopis)
 '*.docs':
   type: CNAME
-  value: kubernetes.netlifyglobalcdn.com.
+  value: kubernetes.netlify.app.
 # Create a dummy A record so that the Let's Encrypt TXT records are not caught
 # by the wildcard CNAME record. (@ixdy)
 _acme-challenge.docs:
@@ -174,7 +174,13 @@ sbom:
 sigs:
   type: CNAME
   value: sigs.k8s.io.
+# Slack Inviter
 slack:
+  type: CNAME
+  value: redirect.k8s.io.
+# Slack tools like the moderator
+# see apps/slack-infra and https://sigs.k8s.io/slack-infra
+slack-infra:
   type: A
   value: 34.107.195.71
 # Prow (@ixdy).

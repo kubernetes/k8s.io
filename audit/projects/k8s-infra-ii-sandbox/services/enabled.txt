@@ -1,4 +1,5 @@
 NAME                                 TITLE
+artifactregistry.googleapis.com      Artifact Registry API
 bigquery.googleapis.com              BigQuery API
 bigqueryconnection.googleapis.com    BigQuery Connection API
 bigquerydatatransfer.googleapis.com  BigQuery Data Transfer API
@@ -17,7 +18,9 @@ logging.googleapis.com               Cloud Logging API
 monitoring.googleapis.com            Cloud Monitoring API
 oslogin.googleapis.com               Cloud OS Login API
 pubsub.googleapis.com                Cloud Pub/Sub API
+run.googleapis.com                   Cloud Run Admin API
 secretmanager.googleapis.com         Secret Manager API
 serviceusage.googleapis.com          Service Usage API
 storage-api.googleapis.com           Google Cloud Storage JSON API
 storage-component.googleapis.com     Cloud Storage
+sts.googleapis.com                   Security Token Service API

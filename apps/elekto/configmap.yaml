@@ -6,7 +6,7 @@ metadata:
 data:
   APP_NAME: "k8s.elections"
   APP_ENV: production
-  APP_KEY: "N/A"
+  APP_KEY: ""
   APP_DEBUG: "False"
   APP_URL: "http://localhost"
   APP_PORT: "8080"
@@ -14,8 +14,9 @@ data:
   APP_CONNECT: http
   DB_CONNECTION: postgresql
   META_REPO: "https://github.com/kubernetes/community.git"
-  ELECTION_DIR: "events/elections"
+  ELECTION_DIR: "elections"
   META_DEPLOYMENT: local
   META_PATH: "/tmp/meta"
   META_BRANCH: master
   GITHUB_REDIRECT: "/oauth/github/callback"
+  MIN_PASSCODE_LENGTH: "8"

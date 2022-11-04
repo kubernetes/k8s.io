@@ -69,11 +69,11 @@ func (s state) isReconciled(desiredState []GoogleGroup) error {
 		if err != nil {
 			return err
 		}
-		if !checkForMemberListEquality(desiredMembers, currentMembers.Members) {
+		if !checkForMemberListEquality(desiredMembers, currentMembers) {
 			return fmt.Errorf(
 				"member lists do not match (email, role): desired: %#v, actual: %#v",
 				getMemberListInPrintableForm(desiredMembers),
-				getMemberListInPrintableForm(currentMembers.Members),
+				getMemberListInPrintableForm(currentMembers),
 			)
 		}
 		currentSettings, err := s.groupClient.Get(currGroup.Email)
@@ -688,7 +688,7 @@ func TestReconcileGroups(t *testing.T) {
 		adminSvc, _ := NewAdminServiceWithClientAndErrFunc(fakeAdminClient, errFunc)
 		groupSvc, _ := NewGroupServiceWithClientAndErrFunc(fakeGroupClient, errFunc)
 
-		reconciler := &Reconciler{adminService: adminSvc, groupService: groupSvc}
+		reconciler := &Reconciler{adminService: adminSvc, groupService: groupSvc, numWorkers: 5}
 		err := reconciler.ReconcileGroups(c.desiredState)
 		if err != nil {
 			t.Errorf("error reconciling groups for case %s: %s", c.desc, err.Error())
@@ -703,7 +703,7 @@ func TestReconcileGroups(t *testing.T) {
 			expectedState = c.desiredState
 		}
 		if err = s.isReconciled(expectedState); err != nil {
-			t.Errorf("reconciliation unsuccessful for case %s: %w", c.desc, err)
+			t.Errorf("reconciliation unsuccessful for case %s: %v", c.desc, err)
 		}
 	}
 }

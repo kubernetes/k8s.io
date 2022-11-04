@@ -1,5 +1,9 @@
 -- Purpose: Merge the Potaroo ASN data with the PeeringDB data for networks and point of contact
 
+copy ip_ranges from '/tmp/vendor/amazon_raw_subnet_region.csv' csv delimiter ',';
+copy ip_ranges from '/tmp/vendor/google_raw_subnet_region.csv' csv delimiter ',';
+copy ip_ranges from '/tmp/vendor/microsoft_raw_subnet_region.csv' csv delimiter ',';
+
 copy asnproc from '/tmp/potaroo_asn.txt';
 
 copy peeriingdbnet (data) from '/tmp/peeringdb-tables/net.json' csv quote e'\x01' delimiter e'\x02';

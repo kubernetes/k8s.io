@@ -9,12 +9,6 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-provider-openstack@kubernetes.io"
-      ],
-      "role": "roles/cloudbuild.builds.editor"
-    },
-    {
-      "members": [
         "serviceAccount:service-625174557286@gcp-sa-cloudbuild.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.serviceAgent"
@@ -39,14 +33,7 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-provider-openstack@kubernetes.io"
-      ],
-      "role": "roles/serviceusage.serviceUsageConsumer"
-    },
-    {
-      "members": [
-        "group:k8s-infra-artifact-admins@kubernetes.io",
-        "group:k8s-infra-staging-provider-openstack@kubernetes.io"
+        "group:k8s-infra-artifact-admins@kubernetes.io"
       ],
       "role": "roles/viewer"
     }

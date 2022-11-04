@@ -1,14 +1,15 @@
 # k8s.io
 
-Kubernetes project infrastructure, managed by the kubernetes comunity via [sig-k8s-infra]
+Kubernetes project infrastructure, managed by the kubernetes community via [sig-k8s-infra]
 
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
+    - `codesearch`: instance of [codesearch] at https://cs-canary.k8s.io - owned by [sig-k8s-infra]
     - `elekto`: instance of [elekto] at https://elections.k8s.io - owned by Elections officers (on behalf of [sig-contributor-experience])
     - `gcsweb`: instance of [gcsweb] at https://gcsweb.k8s.io - owned by [sig-testing]
     - `k8s.io`: instance of nginx that provides redirects/reverse-proxying for k8s.io and its subdomains - owned by [sig-contributor-experience] and [sig-testing]
     - `kubernetes-external-secrets`: instance of [kubernetes-external-secrets] - owned by [sig-testing]
     - `perfdash`: instance of [perfdash] - owned by [sig-scalability]
-    - `prow`: work-in-pogress instance of [prow] - owned by [sig-testing]
+    - `prow`: work-in-progress instance of [prow] - owned by [sig-testing]
     - `publishing-bot`: instance of [publishing-bot] - owned by [sig-release]
     - `sippy`: instance of [sippy] at https://sippy.k8s.io - owned by [sig-architecture] (on behalf of [wg-reliability])
     - `slack-infra`: instance of [slack-infra] including https://slack.k8s.io - owned by [sig-contributor-experience]
@@ -39,6 +40,7 @@ Please see https://git.k8s.io/community/sig-k8s-infra for more information
 
 <!-- apps -->
 [cert-manager]: https://github.com/jetstack/cert-manager
+[codesearch]: https://cs-canary.k8s.io
 [elekto]: https://elekto.dev/
 [gcsweb]: https://git.k8s.io/test-infra/gcsweb
 [kubernetes-external-secrets]: https://github.com/external-secrets/kubernetes-external-secrets

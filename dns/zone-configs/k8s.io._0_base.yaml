@@ -16,6 +16,17 @@
       preference: 10
     - exchange: alt4.aspmx.l.google.com.
       preference: 10
+  - type: CAA # The CAA record set for a domain also applies to all sub-domains. If a sub-domain has its own CAA record set, it takes precedence.
+    values:
+    - flags: 0
+      tag: issue
+      value: pki.goog
+    - flags: 0
+      tag: issue
+      value: letsencrypt.org
+    - flags: 0
+      tag: issue
+      value: amazon.com
   - type: TXT
     values:
     - google-site-verification=RJbZ_ganmSWvslSKOBG-QHv62XTjJZcigpWIFttStFs
@@ -45,10 +56,14 @@ docs:
 # All docs subdomains get sent to netlify (@chenopis)
 '*.docs':
   type: CNAME
-  value: netlifyglobalcdn.com.
+  value: kubernetes.netlify.app.
 # Create a dummy A record so that the Let's Encrypt TXT records are not caught
 # by the wildcard CNAME record. (@ixdy)
 _acme-challenge.docs:
+  type: A
+  value: 0.0.0.0
+# Dummy A record used for e2e tests to reach an invalid registry:
+invalid.registry:
   type: A
   value: 0.0.0.0
 
@@ -119,6 +134,10 @@ conduct:
 cs:
   type: A
   value: 139.178.84.205
+# Canary for Code Search on GKE cluster aaa (@dims @jimdaga)
+cs-canary:
+  type: A
+  value: 34.117.143.16
 # sig-contributor-experience
 discuss:
   type: CNAME
@@ -225,6 +244,19 @@ monitoring.prow-canary:
 prs:
   type: CNAME
   value: redirect.k8s.io.
+# Sandbox OCI redirector service.  (@ameukam,@BenTheElder,@thockin, @eddiezane)
+registry-sandbox:
+  - type: A
+    value: 34.110.128.221
+  - type: AAAA
+    value: "2600:1901:0:a7aa::"
+# Prod OCI redirector service.  (@ameukam,@BenTheElder,@thockin, @eddiezane)
+# Reach to k8s-infra-oci-proxy-admins@kubernetes.io for major issues.
+registry:
+  - type: A
+    value: 34.107.244.51
+  - type: AAAA
+    value: "2600:1901:0:1013::"
 # https://github.com/kubernetes-sigs/release-notes docs (@jeefy)
 relnotes:
   type: CNAME
@@ -235,10 +267,17 @@ sbom:
 sigs:
   type: CNAME
   value: redirect.k8s.io.
+# Sippy hosted by OpenShift folks (@dgoodwin, @stbenjam, @deads2k)
 sippy:
-  type: A
-  value: 35.244.255.27
+  type: CNAME
+  value: default.apps.cr.j7t7.p1.openshiftapps.com.
+# Slack Inviter
 slack:
+  type: CNAME
+  value: redirect.k8s.io.
+# Slack tools like the moderator
+# see apps/slack-infra and https://sigs.k8s.io/slack-infra
+slack-infra:
   type: A
   value: 34.107.195.71
 # Prow (@ixdy).
@@ -267,14 +306,22 @@ testgrid:
 kind.sigs:
   type: CNAME
   value: k8s-kind.netlify.app.
+# https://github.com/kubernetes-sigs/prow docs (@alvaroaleman, @cblecker, @cjwagner, @fejta, @stevekuznetsov, @petr-muller)
+docs.prow:
+  type: CNAME
+  value: k8s-prow.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api docs (@dwat, @jdetiber, @justinsb)
 cluster-api.sigs:
   type: CNAME
-  value: kubernetes-sigs-cluster-api.netlify.app.
+  value: release-1-2--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-aws docs (@randomvariable, @detiber, @ncdc, @rudoi, @vincepri)
 cluster-api-aws.sigs:
   type: CNAME
   value: kubernetes-sigs-cluster-api-provider-aws.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-cloudstack/ (@rohityadavcloud @davidjumani)
+cluster-api-cloudstack.sigs:
+- type: CNAME
+  value: kubernetes-sigs-cluster-api-cloudstack.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-openstack/ (@jichenjc @sbueringer @hidekazuna)
 cluster-api-openstack.sigs:
 - type: CNAME
@@ -299,6 +346,17 @@ release-0-3.cluster-api.sigs:
 release-0-4.cluster-api.sigs:
   type: CNAME
   value: release-0-4--kubernetes-sigs-cluster-api.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vincepri)
+release-1-0.cluster-api.sigs:
+  type: CNAME
+  value: release-1-0--kubernetes-sigs-cluster-api.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vincepri)
+release-1-1.cluster-api.sigs:
+  type: CNAME
+  value: release-1-1--kubernetes-sigs-cluster-api.netlify.app.
+release-1-2.cluster-api.sigs:
+  type: CNAME
+  value: release-1-2--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vincepri)
 main.cluster-api.sigs:
   type: CNAME
@@ -353,3 +411,11 @@ kubectl.sigs:
 gateway-api.sigs:
   type: CNAME
   value: kubernetes-sigs-gateway-api.netlify.app.
+# https://github.com/kubernetes-sigs/cloud-provider-azure docs (@MartinForReal)
+cloud-provider-azure.sigs:
+  type: CNAME
+  value: kubernetes-sigs-cloud-provide-azure.netlify.app.
+# https://github.com/kubernetes-sigs/network-policy-api docs (@astoycos)
+network-policy-api.sigs:
+  type: CNAME
+  value: kubernetes-sigs-network-policy-api.netlify.app.

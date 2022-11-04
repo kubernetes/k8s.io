@@ -197,7 +197,7 @@ function ensure_project_role_binding() {
     _ensure_resource_role_binding "projects" "${project}" "${principal}" "${role}"
 }
 
-# Ensure that IAM binding is present for project
+# Ensure that IAM binding is present for secrets
 # Arguments:
 #   $1:  The fully qualified secret id (e.g. "projects/k8s-infra-foo/secrets/my-secret-id")
 #   $2:  The principal (e.g. "group:k8s-infra-foo@kubernetes.io")
@@ -435,7 +435,7 @@ function _format_iam_policy() {
 #  [$5]: (Optional) the id of the project hosting the resource (e.g. "k8s-infra-foo")
 function _ensure_resource_role_binding() {
     if [ $# -lt 4 ] || [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ]; then
-        echo "${FUNCNAME[0]}(resource, id, principal, role, [project]) requires at least 4 arguments" >&2
+        echo "${FUNCNAME[0]}(resource, id, principal, role, [project], [location]) requires at least 4 arguments" >&2
         return 1
     fi
 
@@ -444,10 +444,15 @@ function _ensure_resource_role_binding() {
     local principal="${3}"
     local role="${4}"
     local project="${5:-""}"
+    local location="${6:-""}"
 
     local flags=()
     if [ -n "${project}" ]; then
       flags+=(--project "${project}")
+    fi
+
+    if [ -n "${location}" ]; then
+      flags+=(--location "${location}")
     fi
 
     local before="${TMPDIR}/iam-bind.before.yaml"

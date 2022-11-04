@@ -1,0 +1,71 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  - email-id: sig-windows-leads@kubernetes.io
+    name: sig-windows-leads
+    description: |-
+      SIG Windows chairs and technical leads comms
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - cbelu@cloudbasesolutions.com
+      - jayunit100.apache@gmail.com
+      - jsturtevant@gmail.com
+      - marosset@microsoft.com
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-gmsa-webhook@kubernetes.io
+    name: k8s-infra-staging-gmsa-webhook
+    description: |-
+      ACL for staging Windows GMSA Webhook artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cbelu@cloudbasesolutions.com
+      - jayunit100.apache@gmail.com
+      - jsturtevant@gmail.com
+      - marosset@microsoft.com
+
+  - email-id: k8s-infra-staging-win-op-rdnss@kubernetes.io
+    name: k8s-infra-staging-win-op-rdnss
+    description: |-
+      ACL for staging Windows Operational Readiness
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cbelu@cloudbasesolutions.com
+      - jayunit100.apache@gmail.com
+      - jsturtevant@gmail.com
+      - marosset@microsoft.com
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

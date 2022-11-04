@@ -34,19 +34,22 @@ aliases:
     - neolit123
     - vincepri
   sig-contributor-experience-leads:
-    - alisondy
     - cblecker
     - mrbobbytables
     - nikhita
+    - jberkus
   sig-docs-leads:
     - divya-mohan0209
     - jimangel
     - kbhawkey
+    - natalisucks
     - onlydole
+    - reylejano
     - sftim
+    - tengqm
   sig-instrumentation-leads:
-    - brancz
     - dashpole
+    - dgrisonnet
     - ehashman
     - logicalhan
   sig-k8s-infra-leads:
@@ -92,7 +95,10 @@ aliases:
   sig-testing-leads:
     - BenTheElder
     - alvaroaleman
+    - aojea
     - cjwagner
+    - michelle192837
+    - pohly
     - spiffxp
     - stevekuznetsov
   sig-ui-leads:
@@ -111,6 +117,12 @@ aliases:
   wg-api-expression-leads:
     - apelisse
     - kwiesmueller
+  wg-batch-leads:
+    - ahg-g
+    - endocrimes
+    - Huang-Wei
+    - soltysh
+    - swatisehgal
   wg-data-protection-leads:
     - xing-yang
     - yuxiangqian
@@ -141,31 +153,31 @@ aliases:
     - mylesagray
     - phenixblue
   committee-code-of-conduct:
-    - celestehorgan
-    - cpanato
-    - karenhchu
-    - palnabarun
-    - vllry
+    - detiber
+    - endocrimes
+    - hlipsig
+    - jeremyrickard
+    - salaxander
   committee-security-response:
     - cjcullen
+    - enj
     - joelsmith
     - lukehinds
     - micahhausler
-    - swamymsft
     - tabbysable
     - tallclair
   committee-steering:
+    - BenTheElder
     - cblecker
-    - dims
     - justaugustus
-    - liggitt
     - mrbobbytables
+    - palnabarun
     - parispittman
     - tpepper
 ## BEGIN CUSTOM CONTENT
   build-admins:
-    - amwat
     - BenTheElder
+    - juanfescobar
     - MushuEE
     - spiffxp
   promo-tools-approvers:
@@ -240,8 +252,6 @@ aliases:
     - chaodaiG
     - chases2
     - cjwagner
-    - e-blackwelder
-    - fejta
     - listx
     - michelle192837
     - mpherman2

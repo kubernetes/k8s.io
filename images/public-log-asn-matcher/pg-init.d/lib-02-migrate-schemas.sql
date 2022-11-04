@@ -13,27 +13,35 @@ create table if not exists vendor_expanded_int (
   end_ip inet,
   start_ip_int bigint,
   end_ip_int bigint,
-  name_with_yaml_name varchar
+  name_with_yaml_name varchar,
+  region text
 );
 
-create table company_asn (
+create table if not exists company_asn (
   asn varchar,
   name varchar
 );
-create table pyasn_ip_asn (
+create table if not exists pyasn_ip_asn (
   ip cidr,
   asn int
 );
-create table asnproc (
+create table if not exists asnproc (
   asn bigint not null primary key
 );
 
-create table peeriingdbnet (
+create table if not exists peeriingdbnet (
   data jsonb
 );
 
-create table peeriingdbpoc (
+create table if not exists peeriingdbpoc (
   data jsonb
+);
+
+create table if not exists ip_ranges (
+  ip_prefix cidr,
+  service text,
+  region text,
+  vendor text
 );
 
 commit;

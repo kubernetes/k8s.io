@@ -1,0 +1,20 @@
+gs://artifacts.k8s-staging-kwok.appspot.com/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		Present
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Wed, 24 Aug 2022 20:49:35 GMT
+	Time updated:			Wed, 24 Aug 2022 20:51:22 GMT
+	Metageneration:			8
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

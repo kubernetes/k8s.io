@@ -1,3 +1,17 @@
+**NOTE**: `k8s.gcr.io` is formerly the name of the Kubernetes upstream registry.
+For historical reasons, for some time this folder will remain named that.
+
+However, the current hostname you should use is `registry.k8s.io`
+
+You can read more about this here:
+- https://github.com/kubernetes/registry.k8s.io (main docs + implementation)
+- [./../registry.k8s.io](./../registry.k8s.io) (deployment details)
+
+Everything below still applies, but images should be referenced by replacing
+"k8s.gcr.io" with "registry.k8s.io" going forward.
+
+For more details on why, see https://github.com/kubernetes/registry.k8s.io
+
 # Managing Kubernetes container registries
 
 This directory is for tools and things that are used to administer the GCR

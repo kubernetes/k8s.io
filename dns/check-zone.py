@@ -190,10 +190,16 @@ def main():
     parser.add_argument('--config-file', required=True,
                         help='The OctoDNS configuration file to use')
     parser.add_argument('--zone', action='append', required=True, help='zone to check')
+    parser.add_argument('--validate-config-only', action='store_true', required=False,
+                        help='Validate config only, exits post that')
 
     args = parser.parse_args()
 
     manager = Manager(args.config_file)
+    manager.validate_configs()
+
+    if args.validate_config_only:
+        exit()
 
     for zone_name in args.zone:
         print('Checking records for {}'.format(zone_name))

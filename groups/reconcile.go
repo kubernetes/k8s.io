@@ -25,6 +25,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"sync"
 
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
 	"github.com/bmatcuk/doublestar"
@@ -122,12 +123,14 @@ var (
 	defaultRestrictionsFile = "restrictions.yaml"
 	emptyRegexp             = regexp.MustCompile("")
 	defaultRestriction      = Restriction{Path: "*", AllowedGroupsRe: []*regexp.Regexp{emptyRegexp}}
+	defaultNumWorkers       = 5
 )
 
 func main() {
 	configFilePath := flag.String("config", defaultConfigFile, "the config file in yaml format")
 	confirmChanges := flag.Bool("confirm", false, "false by default means that we do not push anything to google groups")
 	printConfig := flag.Bool("print", false, "print the existing group information")
+	numWorkers := flag.Int("workers", defaultNumWorkers, "number of concurrent workers to use")
 
 	flag.Usage = Usage
 	flag.Parse()
@@ -139,6 +142,10 @@ func main() {
 	if !*confirmChanges {
 		log.Printf("confirm: %v -- dry-run mode, changes will not be pushed", *confirmChanges)
 	}
+	if *numWorkers < 1 {
+		*numWorkers = 1
+	}
+	log.Printf("workers: %v", *numWorkers)
 
 	err := config.Load(*configFilePath, *confirmChanges)
 	if err != nil {
@@ -179,7 +186,7 @@ func main() {
 	client := credential.Client(ctx)
 	clientOption := option.WithHTTPClient(client)
 
-	r, err := NewReconciler(ctx, clientOption)
+	r, err := NewReconciler(ctx, clientOption, *numWorkers)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -205,9 +212,10 @@ func main() {
 type Reconciler struct {
 	adminService AdminService
 	groupService GroupService
+	numWorkers   int
 }
 
-func NewReconciler(ctx context.Context, clientOption option.ClientOption) (*Reconciler, error) {
+func NewReconciler(ctx context.Context, clientOption option.ClientOption, numWorkers int) (*Reconciler, error) {
 	as, err := NewAdminService(ctx, clientOption)
 	if err != nil {
 		return nil, err
@@ -218,56 +226,86 @@ func NewReconciler(ctx context.Context, clientOption option.ClientOption) (*Reco
 		return nil, err
 	}
 
-	return &Reconciler{adminService: as, groupService: gs}, nil
+	return &Reconciler{adminService: as, groupService: gs, numWorkers: numWorkers}, nil
 }
 
 func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
 	// aggregate the errors that occured and return them together in the end.
 	var errs []error
+	groupChan := make(chan GoogleGroup, len(groups))
 	for _, g := range groups {
-		if g.EmailId == "" {
-			errs = append(errs, fmt.Errorf("group has no email-id: %#v", g))
-		}
+		groupChan <- g
+	}
+	close(groupChan)
 
-		err := r.adminService.CreateOrUpdateGroupIfNescessary(g)
-		if err != nil {
-			errs = append(errs, err)
-		}
+	numWorkers := r.numWorkers
+	if numWorkers < 1 {
+		numWorkers = 1
+	} else if numWorkers > len(groups) {
+		numWorkers = len(groups)
+	}
+	wg := sync.WaitGroup{}
+	wg.Add(numWorkers)
+	errsChan := make(chan []error, len(groups))
 
-		err = r.groupService.UpdateGroupSettings(g)
-		if err != nil {
-			errs = append(errs, err)
-		}
+	for i := 0; i < numWorkers; i++ {
+		go func(groups <-chan GoogleGroup, n int) {
+			defer wg.Done()
+			var errs []error
+			for g := range groups {
+				if g.EmailId == "" {
+					errs = append(errs, fmt.Errorf("group has no email-id: %#v", g))
+				}
 
-		err = r.adminService.AddOrUpdateGroupMembers(g, OwnerRole, g.Owners)
-		if err != nil {
-			errs = append(errs, err)
-		}
+				err := r.adminService.CreateOrUpdateGroupIfNescessary(g)
+				if err != nil {
+					errs = append(errs, err)
+				}
 
-		err = r.adminService.AddOrUpdateGroupMembers(g, ManagerRole, g.Managers)
-		if err != nil {
-			errs = append(errs, err)
-		}
+				err = r.groupService.UpdateGroupSettings(g)
+				if err != nil {
+					errs = append(errs, err)
+				}
 
-		err = r.adminService.AddOrUpdateGroupMembers(g, MemberRole, g.Members)
-		if err != nil {
-			errs = append(errs, err)
-		}
+				err = r.adminService.AddOrUpdateGroupMembers(g, OwnerRole, g.Owners)
+				if err != nil {
+					errs = append(errs, err)
+				}
 
-		if g.Settings["ReconcileMembers"] == "true" {
-			members := append(g.Owners, g.Managers...)
-			members = append(members, g.Members...)
-			err = r.adminService.RemoveMembersFromGroup(g, members)
-			if err != nil {
-				errs = append(errs, err)
+				err = r.adminService.AddOrUpdateGroupMembers(g, ManagerRole, g.Managers)
+				if err != nil {
+					errs = append(errs, err)
+				}
+
+				err = r.adminService.AddOrUpdateGroupMembers(g, MemberRole, g.Members)
+				if err != nil {
+					errs = append(errs, err)
+				}
+
+				if g.Settings["ReconcileMembers"] == "true" {
+					members := append(g.Owners, g.Managers...)
+					members = append(members, g.Members...)
+					err = r.adminService.RemoveMembersFromGroup(g, members)
+					if err != nil {
+						errs = append(errs, err)
+					}
+				} else {
+					members := append(g.Owners, g.Managers...)
+					err = r.adminService.RemoveOwnerOrManagersFromGroup(g, members)
+					if err != nil {
+						errs = append(errs, err)
+					}
+				}
 			}
-		} else {
-			members := append(g.Owners, g.Managers...)
-			err = r.adminService.RemoveOwnerOrManagersFromGroup(g, members)
-			if err != nil {
-				errs = append(errs, err)
-			}
-		}
+			errsChan <- errs
+		}(groupChan, i)
+	}
+	wg.Wait()
+
+	close(errsChan)
+
+	for workerErrs := range errsChan {
+		errs = append(errs, workerErrs...)
 	}
 
 	err := r.adminService.DeleteGroupsIfNecessary()
@@ -313,7 +351,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 			return fmt.Errorf("unable to retrieve members in group : %w", err)
 		}
 
-		for _, m := range l.Members {
+		for _, m := range l {
 			switch m.Role {
 			case OwnerRole:
 				group.Owners = append(group.Owners, m.Email)

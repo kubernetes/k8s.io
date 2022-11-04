@@ -19,7 +19,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - gaswamy@microsoft.com
+      - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
@@ -27,9 +27,10 @@ groups:
       - timallclair@gmail.com
     members:
       # Associate SRC members
-      - mok@vmware.com
+      - pushkarj.at.work@gmail.com
+      - rita.z.zhang@gmail.com
       - sfowler@redhat.com
-      - taahm@google.com
+      - srajakum@amazon.com
       # Distributors
       - argoprod@us.ibm.com
       - aws-k8s-embargo-notification@amazon.com
@@ -38,6 +39,7 @@ groups:
       - kops-security-response@googlegroups.com
       - kubernetes-security-disclosure@google.com
       - kubernetes-security-team@ml.ovh.net
+      - kubernetes-security@cisco.com
       - kubernetes-security@docker.com
       - kubernetes-security@huawei.com
       - kubernetes-security@service.aliyun.com
@@ -68,12 +70,18 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - gaswamy@microsoft.com
+      - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
+    members:
+      # Associate SRC members
+      - pushkarj.at.work@gmail.com
+      - rita.z.zhang@gmail.com
+      - sfowler@redhat.com
+      - srajakum@amazon.com
 
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
@@ -86,12 +94,18 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
-      - gaswamy@microsoft.com
+      - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
       - tabitha.c.sable@gmail.com
       - timallclair@gmail.com
+    members:
+      # Associate SRC members
+      - pushkarj.at.work@gmail.com
+      - rita.z.zhang@gmail.com
+      - sfowler@redhat.com
+      - srajakum@amazon.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
@@ -123,8 +137,6 @@ groups:
     members:
       - security@kubernetes.io
       - mikedanese@google.com
-      - alextc@google.com
-      - jsand@google.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster

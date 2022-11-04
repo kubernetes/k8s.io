@@ -58,13 +58,16 @@ groups:
       ReconcileMembers: "true"
     members:
       # scalability-oncall
+      - aleksandram@google.com
       - azylinski@google.com
       - jkaniuk@google.com
       - jprzychodzen@google.com
       - jupblb@google.com
       - maciejborsz@google.com
       - marcelzieba@google.com
+      - pbanaszewski@google.com
       - zawodny@google.com
+      - maciejwyrzuc@google.com
       # sig-scalability leads
       - jeedigv@amazon.com
       - mmatejczyk@google.com
@@ -83,16 +86,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - azylinski@google.com
-      - jkaniuk@google.com
-      - jprzychodzen@google.com
-      - jupblb@google.com
-      - maciejborsz@google.com
-      - marcelzieba@google.com
-      - mmatejczyk@google.com
-      - shyam123.jvs95@gmail.com
-      - wojtekt@google.com
-      - zawodny@google.com
+      - k8s-infra-sig-scalability-oncall@kubernetes.io
 
   - email-id: k8s-infra-rbac-triageparty-scalability@kubernetes.io
     name: k8s-infra-rbac-triageparty-scalability
@@ -102,7 +96,4 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - mmatejczyk@google.com
-      - shyam123.jvs95@gmail.com
-      - wojtekt@google.com
-      - marcelzieba@google.com
+      - k8s-infra-sig-scalability-oncall@kubernetes.io

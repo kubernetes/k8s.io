@@ -37,8 +37,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.20.10-gke.1600",
-  "currentNodeVersion": "1.20.10-gke.1600",
+  "currentMasterVersion": "1.22.12-gke.300",
+  "currentNodeVersion": "1.22.10-gke.600 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -189,9 +189,10 @@
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/pool1-20190918234853194900000001",
       "upgradeSettings": {
-        "maxSurge": 1
+        "maxSurge": 1,
+        "strategy": "SURGE"
       },
-      "version": "1.20.10-gke.1600"
+      "version": "1.22.12-gke.300"
     },
     {
       "autoscaling": {
@@ -244,9 +245,10 @@
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/pool2-20200316195138785800000001",
       "upgradeSettings": {
-        "maxSurge": 1
+        "maxSurge": 1,
+        "strategy": "SURGE"
       },
-      "version": "1.20.10-gke.1600"
+      "version": "1.22.10-gke.600"
     }
   ],
   "releaseChannel": {

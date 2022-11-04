@@ -1,0 +1,47 @@
+// Build the diagraph :noexport:
+
+digraph AccountStructure {
+    label="CNCF AWS project account structure"
+    labelloc="t"
+    graph[compound=true]
+
+    subgraph cluster0 {
+        label="CNCF root Org"
+
+        subgraph cluster0_0 {
+            label="Kubernetes Org Unit"
+
+            subgraph cluster0_0_0 {
+                label="registry.k8s.io Org Unit"
+
+                subgraph cluster0_0_0_0 {
+                    label="registry.k8s.io_admin Account"
+
+                    subgraph cluster0_0_0_0_0 {
+                        label="S3 resources"
+
+                        Buckets [label="Bucketⁿ" style=dashed]
+                    }
+
+                    subgraph cluster0_0_0_0_1 {
+                        label="IAM roles"
+
+                        s3writer [label="S3 writer role"]
+                    }
+                }
+            }
+            subgraph cluster0_0_1 {
+                label="k8s-infra-accounts Account"
+
+                subgraph cluster0_0_1_0 {
+                    label="IAM users"
+
+                    k8s_infra_accounts_IAMUsers [label="k8s-infra-accounts IAM Users"]
+                }
+            }
+        }
+    }
+
+    k8s_infra_accounts_IAMUsers -> s3writer [label="Switch role"]
+    s3writer -> Buckets [label="Writes to buckets"]
+}

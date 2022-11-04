@@ -13,6 +13,7 @@
       },
       "pushEndpoint": "https://cip-auditor-ertsmqqccq-uc.a.run.app"
     },
+    "state": "ACTIVE",
     "topic": "projects/k8s-artifacts-prod/topics/gcr"
   }
 ]

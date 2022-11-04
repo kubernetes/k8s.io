@@ -245,7 +245,7 @@ infra:
   releng:
     projects:
       k8s-releng-prod:
-        managed_by: infra/gcp/bash/ensure-releng-project.sh
+        managed_by: infra/gcp/bash/ensure-releng.sh
 
   sandbox:
     projects:
@@ -260,7 +260,9 @@ infra:
       k8s-staging-artifact-promoter:
       k8s-staging-autoscaling:
       k8s-staging-boskos:
+      k8s-staging-bom:
       k8s-staging-build-image:
+      k8s-staging-capi-cloudstack:
       k8s-staging-capi-docker:
       k8s-staging-capi-ibmcloud:
       k8s-staging-capi-kubeadm:
@@ -270,6 +272,7 @@ infra:
       k8s-staging-cip-test:
       k8s-staging-cloud-provider-gcp:
       k8s-staging-cloud-provider-ibm:
+      k8s-staging-cloud-provider-os:
       k8s-staging-cluster-addons:
       k8s-staging-cluster-api:
       k8s-staging-cluster-api-aws:
@@ -298,12 +301,16 @@ infra:
       k8s-staging-k8s-gsm-tools:
       k8s-staging-kas-network-proxy:
       k8s-staging-kind:
+      k8s-staging-kmm:
       k8s-staging-kops:
+      k8s-staging-krm-functions:
       k8s-staging-kube-state-metrics:
       k8s-staging-kubeadm:
+      k8s-staging-kueue:
       k8s-staging-kubernetes:
       k8s-staging-kubetest2:
       k8s-staging-kustomize:
+      k8s-staging-kwok:
       k8s-staging-metrics-server:
       k8s-staging-multitenancy:
       k8s-staging-networking:
@@ -326,4 +333,11 @@ infra:
       k8s-staging-slack-infra:
       k8s-staging-sp-operator:
       k8s-staging-storage-migrator:
+      k8s-staging-zeitgeist:
+      k8s-staging-tejolote:
       k8s-staging-test-infra:
+      k8s-staging-tg-exporter:
+      k8s-staging-gmsa-webhook:
+      k8s-staging-win-op-rdnss:
+      k8s-staging-gcb-untrusted:
+        managed_by: infra/gcp/bash/ensure-staging-gcb-untrusted.sh

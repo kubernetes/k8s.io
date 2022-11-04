@@ -7,11 +7,6 @@ metadata:
     kubernetes.io/ingress.class: gce
     networking.gke.io/managed-certificates: slack-infra
 spec:
-  defaultBackend:
-    service:
-      name: slackin2
-      port:
-        number: 80
   rules:
   - http:
       paths:

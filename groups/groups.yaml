@@ -32,13 +32,15 @@ groups:
       - alarcj137@gmail.com
       - ameukam@gmail.com
       - antheabjung@gmail.com
+      - apelisse@google.com
       - augustus@cisco.com # SIG Release
       - bentheelder@google.com
       - caniszczyk@linuxfoundation.org
       - casey@tigera.io
       - cbelu@cloudbasesolutions.com
-      - celeste@cncf.io
+      - celeste.e.horgan@gmail.com #CoCC
       - chiachenk@google.com
+      - chu.karen.h@gmail.com #CoCC
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
       - ctadeu@gmail.com # SIG Release
@@ -52,6 +54,7 @@ groups:
       - deads@redhat.com
       - decarr@redhat.com
       - dcampau1@gmail.com
+      - dgrisonn@redhat.com
       - divya.mohan0209@gmail.com
       - eddiezane@gmail.com
       - ehashman@redhat.com
@@ -68,6 +71,7 @@ groups:
       - jameswangel@gmail.com
       - jayunit100.apache@gmail.com
       - jbelamaric@google.com
+      - jberkus@redhat.com
       - jeef111x@gmail.com
       - jeremy.r.rickard@gmail.com # SIG Release
       - jeremyot@google.com
@@ -85,7 +89,7 @@ groups:
       - katrina.verey@shopify.com # SIG CLI
       - ksemenov@vmware.com
       - lachlan.evenson@gmail.com
-      - lauri.d.apple@gmail.com # SIG Release
+      - lancashiredanielle@gmail.com
       - liggitt@google.com
       - marosset@microsoft.com
       - maszulik@redhat.com
@@ -94,11 +98,15 @@ groups:
       - mikedanese@google.com
       - msau@google.com
       - mwielgus@google.com
+      - natalivlatko@gmail.com
       - neolit123@gmail.com
       - nospam.wong@gmail.com
+      - pal.nabarun95@gmail.com #CoCC
       - patrick.ohly@intel.com
       - prydonius@gmail.com
       - quinton@hoole.biz
+      - rita.z.zhang@gmail.com
+      - rlejano@gmail.com
       - saadali@google.com
       - saschagrunert@gmail.com # SIG Release
       - saveetha13@gmail.com
@@ -116,6 +124,7 @@ groups:
       - tpepper@vmware.com
       - vincepri@vmware.com
       - vince@vincepri.com
+      - vllry@zeitgeistlabs.io
       - wfender@google.com
       - wojtekt@google.com
       - xingyang105@gmail.com

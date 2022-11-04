@@ -1,0 +1,20 @@
+gs://k8s-staging-capi-cloudstack/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		Present
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Wed, 29 Jun 2022 14:14:29 GMT
+	Time updated:			Tue, 02 Aug 2022 14:24:20 GMT
+	Metageneration:			13
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

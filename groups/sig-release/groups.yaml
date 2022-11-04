@@ -10,8 +10,8 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
-      - amwat@google.com
       - bentheelder@google.com
+      - juanescobar@google.com
       - mushuee@google.com
       - spiffxp@google.com
 
@@ -40,6 +40,7 @@ groups:
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
       - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
@@ -56,18 +57,22 @@ groups:
       - k8s-infra-release-editors@kubernetes.io
       - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
-      - james.laverack@jetstack.io
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - joseph.r.sandoval@gmail.com
       - max@koerbaecher.io
-      - monmonmsc@gmail.com
       - onlydole@gmail.com
       - pal.nabarun95@gmail.com
-      - rlejano@gmail.com
       - sethpmccombs@gmail.com
       - thejoycekung@gmail.com
       - wilsonehusin@gmail.com
+      - cicih@google.com
+      - xandergrzyw@gmail.com
+      - leonard.pahlke@googlemail.com # 1.26 Release Lead
+      - nwaddington@cncf.io # 1.26 Release Lead Shadow
+      - nng.grace@gmail.com # 1.26 Release Lead Shadow
+      - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
+      - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
@@ -101,7 +106,6 @@ groups:
     members:
       - k8s-infra-prow-oncall@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
-      - ameukam@gmail.com
 
   - email-id: k8s-infra-staging-cip-test@kubernetes.io
     name: k8s-infra-staging-cip-test
@@ -131,6 +135,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+      - cy@borg.dev
 
   - email-id: k8s-infra-staging-kubernetes@kubernetes.io
     name: k8s-infra-staging-kubernetes
@@ -195,17 +200,17 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - cccswann@gmail.com # 1.23 Release Comms Shadow
-      - chu.karen.h@gmail.com # 1.23 Release Comms Lead
-      - james.laverack@jetstack.io # 1.23 RT Lead Shadow
-      - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
-      - kaslin.fields@gmail.com # 1.23 Release Comms Shadow
-      - kat.cosgrove@gmail.com # 1.23 Release Comms Shadow
-      - lauri.d.apple@gmail.com
-      - max@koerbaecher.io # 1.23 RT Lead Shadow
-      - mickey.boxell@oracle.com # 1.23 Release Comms Shadow
-      - monmonmsc@gmail.com # 1.23 RT Lead Shadow
-      - rlejano@gmail.com # 1.23 RT Lead
+      - leonard.pahlke@googlemail.com # 1.26 Release Lead
+      - pal.nabarun95@gmail.com # 1.26 RT EA
+      - nwaddington@cncf.io # 1.26 Release Lead Shadow
+      - nng.grace@gmail.com # 1.26 Release Lead Shadow
+      - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
+      - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
+      - fsmunoz@gmail.com # 1.26 Release Comms Lead
+      - harshitasao@gmail.com # 1.26 Comms Shadow
+      - bradmccoydev@gmail.com # 1.26 Comms Shadow
+      - daespejo@vmware.com # 1.26 Comms Shadow
+      - d.panigrahi.nitrkl@gmail.com # 1.26 Comms Shadow
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -246,25 +251,26 @@ groups:
     members:
       - release-managers-private@kubernetes.io
       - ameukam@gmail.com
-      - amwat@google.com
       - antheabjung@gmail.com
       - augustus@cisco.com
       - bentheelder@google.com
+      - leonard.pahlke@googlemail.com # 1.26 Release Lead
+      #- pal.nabarun95@gmail.com (already added via release manager) # 1.26 RT EA
+      - nwaddington@cncf.io # 1.26 Release Lead Shadow
+      - nng.grace@gmail.com # 1.26 Release Lead Shadow
+      - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
+      - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
       - dcampau1@gmail.com
       - divya.mohan0209@gmail.com
       - gmccloskey@google.com
       - gveronicalg@gmail.com
-      - james.laverack@jetstack.io
       - jameswangel@gmail.com
       - joseph.r.sandoval@gmail.com
       - kikis.github@gmail.com
-      - lauri.d.apple@gmail.com
       - max@koerbaecher.io
-      - monmonmsc@gmail.com
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
       - onlydole@gmail.com
-      - rlejano@gmail.com
       - saveetha13@gmail.com
       - sethpmccombs@gmail.com
       - spiffxp@google.com
@@ -297,7 +303,6 @@ groups:
       - ctadeu@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
-      - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
 
   - email-id: release-team@kubernetes.io
@@ -313,53 +318,49 @@ groups:
       - ctadeu@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
-      - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
-      - james.laverack@jetstack.io # 1.23 RT Lead Shadow
-      - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
-      - max@koerbaecher.io # 1.23 RT Lead Shadow
-      - monmonmsc@gmail.com # 1.23 RT Lead Shadow
-      - rlejano@gmail.com # 1.23 RT Lead
+      - leonard.pahlke@googlemail.com # 1.26 Release Lead
+      - pal.nabarun95@gmail.com # 1.26 RT EA
+      - nwaddington@cncf.io # 1.26 Release Lead Shadow
+      - nng.grace@gmail.com # 1.26 Release Lead Shadow
+      - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
+      - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
     members:
       - sig-release-leads@kubernetes.io
-      - arshsharma461@gmail.com # 1.23 CI Signal Shadow
-      - calvinho.ca@gmail.com # 1.23 CI Signal Shadow
-      - cccswann@gmail.com # 1.23 Release Comms Shadow
-      - chu.karen.h@gmail.com # 1.23 Release Comms Lead
-      - Cicih@google.com # 1.23 Release Notes Lead
-      - DamanArora@cmail.carleton.ca # 1.23 Release Notes Shadow
-      - gveronicalg@gmail.com # 1.23 Release Branch Manager
-      - jeeves.butler@gmail.com # 1.23 Docs Lead
-      - jyotima@amazon.com # 1.23 Bug Triage Shadow
-      - kaslin.fields@gmail.com # 1.23 Release Comms Shadow
-      - kaslin@google.com # 1.23 Release Comms Shadow
-      - kat.cosgrove@gmail.com # 1.23 Release Comms Shadow
-      - kevindelgado@google.com # 1.23 Enhancements Shadow
-      - lauralorenz@google.com # 1.23 Enhancements Shadow
-      - leonard.pahlke@googlemail.com # 1.23 CI Signal Shadow
-      - lucasdwyer@pm.me # 1.23 Release Notes Shadow
-      - mail@samcogan.com # 1.23 Release Notes Shadow
-      - mehabhalodiya@gmail.com # 1.23 Docs Shadow
-      - mickey.boxell@oracle.com # 1.23 Release Comms Shadow
-      - m.r.boxell@gmail.com # 1.23 Release Comms Shadow
-      - nng.grace@gmail.com # 1.23 Enhancements Shadow
-      - nwaddington@cncf.io # 1.23 Docs Shadow
-      - pal.nabarun95@gmail.com # Release Manager // 1.24 Release Branch Manager
-      - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
-      - parulsahoo5jan@gmail.com # 1.23 Release Notes Shadow
-      - priyankasaggu11929@gmail.com # 1.23 Enhancements Shadow
-      - rajula96reddy@gmail.com # 1.23 CI Signal Shadow
-      - ramses.green.2@gmail.com # 1.23 Docs Shadow
-      - salahi.hossein@gmail.com # 1.23 CI Signal Lead
-      - sanchitac067@gmail.com # 1.23 Bug Triage Shadow
-      - simrangupta172002@gmail.com # 1.23 CI Signal Shadow
-      - striker57@gmail.com # 1.23 Docs Shadow
-      - supriyapremkumar1@gmail.com # 1.23 Enhancements Shadow
-      - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
-      - voigt.christoph@gmail.com # 1.23 Bug Triage Lead
-      - xander@grzy.dev # 1.23 Enhancements Lead
-      - xinyuan.cai.k8s@gmail.com # 1.23 Bug Triage Shadow
+      - ryler.hockenbury@gmail.com # 1.26 Enhancements Lead
+      - marosset@microsoft.com # 1.26 Enhancements Shadow
+      - parulsahoo5jan@gmail.com # 1.26 Enhancements Shadow
+      - atharvashinde179@gmail.com # 1.26 Enhancements Shadow
+      - ruheenaansari34@gmail.com # 1.26 Enhancements Shadow
+      - niveditaprasad81@gmail.com # 1.26 CI Signal Lead
+      - shuhei.kitagawa@gmail.com # 1.26 CI Signal Lead Shadow
+      - mehabhalodiya@gmail.com # 1.26 CI Signal Lead Shadow
+      - namanlakhwani@gmail.com # 1.26 CI Signal Lead Shadow
+      - haritwal.bhawana@gmail.com # 1.26 CI Signal Lead Shadow
+      - salahi.hossein@gmail.com # 1.26 Bug Triage Lead
+      - subhasmitaswain232@gmail.com # 1.26 Bug Triage Shadow
+      - neoaggelos@gmail.com # 1.26 Bug Triage Shadow
+      - hesham.aboelmagd@gmail.com # 1.26 Bug Triage Shadow
+      - cailyn.edwards@shopify.com # 1.26 Bug Triage Shadow
+      - xandergrzyw@gmail.com # 1.26 Bug Triage Shadow, Release Manager Associate
+      - guillen.carolina@gmail.com # 1.26 Docs Lead
+      - cathchu@google.com # 1.26 Docs Shadow
+      - m.r.boxell@gmail.com # 1.26 Docs Shadow
+      - rishit.dagli@gmail.com # 1.26 Docs Shadow
+      - jkm.mutua@gmail.com # 1.26 Docs Shadow
+      - ramses.green.2@gmail.com # 1.26 Release Notes Lead
+      - harsha2k4@gmail.com # 1.26 Release Notes Shadow
+      - AnaMMedina21@gmail.com # 1.26 Release Notes Shadow
+      - laxmikantpandhare@gmail.com # 1.26 Release Notes Shadow
+      - ii.sayantani.ii@gmail.com # 1.26 Release Notes Shadow
+      - fsmunoz@gmail.com # 1.26 Communications Lead
+      - harshitasao@gmail.com # 1.26 Communications Shadow
+      - bradmccoydev@gmail.com # 1.26 Communications Shadow
+      - daespejo@vmware.com # 1.26 Communications Shadow
+      - d.panigrahi.nitrkl@gmail.com # 1.26 Communications Shadow
+      #- jeremy.r.rickard@gmail.com (already added as owner) # Release Manager
+      - cicih@google.com  # Release Manager Associate
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -374,43 +375,40 @@ groups:
       - ctadeu@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
-      - lauri.d.apple@gmail.com
       - saschagrunert@gmail.com
     managers:
-      - rlejano@gmail.com # 1.23 RT Lead
+      - leonard.pahlke@googlemail.com # 1.26 Release Lead
+      - pal.nabarun95@gmail.com # 1.26 Emeritus Advisor
     members:
-      - arshsharma461@gmail.com # 1.23 CI Signal Shadow
-      - calvinho.ca@gmail.com # 1.23 CI Signal Shadow
-      - cccswann@gmail.com # 1.23 Release Comms Shadow
-      - DamanArora@cmail.carleton.ca # 1.23 Release Notes Shadow
-      - james.laverack@jetstack.io # 1.23 RT Lead Shadow
-      - joseph.r.sandoval@gmail.com # 1.23 RT Lead Shadow
-      - jyotima@amazon.com # 1.23 Bug Triage Shadow
-      - kaslin.fields@gmail.com # 1.23 Release Comms Shadow
-      - kat.cosgrove@gmail.com # 1.23 Release Comms Shadow
-      - kevindelgado@google.com # 1.23 Enhancements Shadow
-      - lauralorenz@google.com # 1.23 Enhancements Shadow
-      - leonard.pahlke@googlemail.com # 1.23 CI Signal Shadow
-      - lucasdwyer@pm.me # 1.23 Release Notes Shadow
-      - mail@samcogan.com # 1.23 Release Notes Shadow
-      - max@koerbaecher.io # 1.23 RT Lead Shadow
-      - mehabhalodiya@gmail.com # 1.23 Docs Shadow
-      - mickey.boxell@oracle.com # 1.23 Release Comms Shadow
-      - monmonmsc@gmail.com # 1.23 RT Lead Shadow
-      - nng.grace@gmail.com # 1.23 Enhancements Shadow
-      - nwaddington@cncf.io # 1.23 Docs Shadow
-      - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
-      - parulsahoo5jan@gmail.com # 1.23 Release Notes Shadow
-      - priyankasaggu11929@gmail.com # 1.23 Enhancements Shadow
-      - rajula96reddy@gmail.com # 1.23 CI Signal Shadow
-      - ramses.green.2@gmail.com # 1.23 Docs Shadow
-      - sanchitac067@gmail.com # 1.23 Bug Triage Shadow
-      - simrangupta172002@gmail.com # 1.23 CI Signal Shadow
-      - striker57@gmail.com # 1.23 Docs Shadow
-      - supriyapremkumar1@gmail.com # 1.23 Enhancements Shadow
-      - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
-      - x.cai@reply.de # 1.23 Bug Triage Shadow
-
+     - nwaddington@cncf.io # 1.26 Release Lead Shadow
+     - nng.grace@gmail.com # 1.26 Release Lead Shadow
+     - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
+     - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
+     - marosset@microsoft.com # 1.26 Enhancements Shadow
+     - parulsahoo5jan@gmail.com # 1.26 Enhancements Shadow
+     - atharvashinde179@gmail.com # 1.26 Enhancements Shadow
+     - ruheenaansari34@gmail.com # 1.26 Enhancements Shadow
+     - shuhei.kitagawa@gmail.com # 1.26 CI Signal Lead Shadow
+     - mehabhalodiya@gmail.com # 1.26 CI Signal Lead Shadow
+     - namanlakhwani@gmail.com # 1.26 CI Signal Lead Shadow
+     - haritwal.bhawana@gmail.com # 1.26 CI Signal Lead Shadow
+     - subhasmitaswain232@gmail.com # 1.26 Bug Triage Shadow
+     - neoaggelos@gmail.com # 1.26 Bug Triage Shadow
+     - hesham.aboelmagd@gmail.com # 1.26 Bug Triage Shadow
+     - cailyn.edwards@shopify.com # 1.26 Bug Triage Shadow
+     - xandergrzyw@gmail.com # 1.26 Bug Triage Shadow
+     - cathchu@google.com # 1.26 Docs Shadow
+     - m.r.boxell@gmail.com # 1.26 Docs Shadow
+     - rishit.dagli@gmail.com # 1.26 Docs Shadow
+     - jkm.mutua@gmail.com # 1.26 Docs Shadow
+     - harsha2k4@gmail.com # 1.26 Release Notes Shadow
+     - AnaMMedina21@gmail.com # 1.26 Release Notes Shadow
+     - laxmikantpandhare@gmail.com # 1.26 Release Notes Shadow
+     - ii.sayantani.ii@gmail.com # 1.26 Release Notes Shadow
+     - harshitasao@gmail.com # 1.26 Communications Shadow
+     - bradmccoydev@gmail.com # 1.26 Communications Shadow
+     - daespejo@vmware.com # 1.26 Communications Shadow
+     - d.panigrahi.nitrkl@gmail.com # 1.26 Communications Shadow
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
@@ -424,6 +422,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
+      - k8s-infra-release-editors@kubernetes.io
       - ameukam@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com
@@ -440,12 +439,79 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
       - k8s-infra-release-viewers@kubernetes.io
-      - ameukam@gmail.com
       - bartek@smykla.com
       - gveronicalg@gmail.com
-      - jyotima@amazon.com # 1.23 Bug Triage Shadow
-      - panjwaniritu45@gmail.com # 1.23 Bug Triage Shadow
-      - sanchitac067@gmail.com # 1.23 Bug Triage Shadow
-      - varshaprasad96@gmail.com # 1.23 Bug Triage Shadow
-      - voigt.christoph@gmail.com # 1.23 Bug Triage Lead
-      - x.cai@reply.de # 1.23 Bug Triage Shadow
+      - salahi.hossein@gmail.com # 1.26 Bug Triage Lead
+      - subhasmitaswain232@gmail.com # 1.26 Bug Triage Shadow
+      - neoaggelos@gmail.com # 1.26 Bug Triage Shadow
+      - hesham.aboelmagd@gmail.com # 1.26 Bug Triage Shadow
+      - cailyn.edwards@shopify.com # 1.26 Bug Triage Shadow
+      - xandergrzyw@gmail.com # 1.26 Bug Triage Shadow
+
+  - email-id: k8s-infra-staging-bom@kubernetes.io
+    name: k8s-infra-staging-bom
+    description: |-
+      ACL for staging BOM project
+
+      This project is used to test and stage BOM project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-tg-exporter@kubernetes.io
+    name: k8s-infra-staging-tg-exporter
+    description: |-
+      ACL for CI Signal Release Team
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+      - k8s-infra-release-viewers@kubernetes.io
+      - leonard.pahlke@googlemail.com
+      - salahi.hossein@gmail.com
+
+  - email-id: release-team-enhancements@kubernetes.io
+    name: release-team-enhancements
+    description: |-
+      Release Team enhancements.
+      Includes current release leads and enhancements team members.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    members:
+      - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
+      - leonard.pahlke@googlemail.com # 1.26 RT Lead
+      - nng.grace@gmail.com # 1.25 Release Lead Shadow
+      - nwaddington@cncf.io # 1.26 Release Lead Shadow
+      - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
+      - pal.nabarun95@gmail.com # 1.26 RT EA
+      - ryler.hockenbury@gmail.com # 1.26 Enhancements Lead
+
+  - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
+    name: k8s-infra-staging-zeitgeist
+    description: |-
+      ACL for staging Zeitgeist project
+
+      This project is used to test and stage Zeitgeist project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-tejolote@kubernetes.io
+    name: k8s-infra-staging-tejolote
+    description: |-
+      ACL for staging Tejolote project
+
+      This project is used to test and stage tejolote project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io

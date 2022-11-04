@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codesearch
+  namespace: codesearch
+  labels:
+    app: codesearch
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: codesearch
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: codesearch
+    spec:
+      terminationGracePeriodSeconds: 30
+      initContainers:
+      - name: codesearch-fetch
+        # Placeholder image until we can add image under control of k8s.io
+        # Issue to track this work: https://github.com/kubernetes/k8s.io/issues/2182
+        image: gcr.io/k8s-staging-infra-tools/cs-fetch-repos:v20220317-c16ef4289
+        volumeMounts:
+        - name: config
+          mountPath: /data
+        resources:
+          limits:
+            cpu: "0.1"
+            memory: 128Mi
+      containers:
+        - name: codesearch
+          image: ghcr.io/hound-search/hound:latest
+          ports:
+            - containerPort: 6080
+              protocol: TCP
+          volumeMounts:
+          - name: config
+            mountPath: /data
+          # resources:
+          #   limits:
+          #     cpu: "1" # TODO - find baseline
+          #     memory: 8Gi # TODO - find baseline
+      volumes:
+      - name: config
+        emptyDir: {}
