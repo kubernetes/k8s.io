@@ -17,7 +17,6 @@ groups:
     owners:
       - ihor@cncf.io
       - killen.bob@gmail.com
-      - paris.pittman@gmail.com
     managers:
       - ameukam@gmail.com
       - pal.nabarun95@gmail.com
@@ -100,11 +99,10 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - paris.pittman@gmail.com
+      - contributors@kubernetes.io
       - cblecker@gmail.com
     managers:
       - alarcj137@gmail.com
-      - contributors@kubernetes.io
       - dylan.graham@gmail.com
       - idealhack@gmail.com
       - ihor@cncf.io
@@ -139,7 +137,6 @@ groups:
     owners:
       - alison@alisondowdney.com
       - killen.bob@gmail.com
-      - paris.pittman@gmail.com
     members:
       - jberkus@redhat.com
       - chris@chrisshort.net
