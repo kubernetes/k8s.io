@@ -14,19 +14,4 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "prefix" {
-  type    = string
-  default = ""
-}
-
-variable "s3_replication_iam_role_arn" {
-  description = "IAM role assumed by S3 service for replication"
-  type        = string
-  default     = null
-}
-
-variable "s3_replication_rules" {
-  description = "List of maps for S3 replication rules"
-  type        = list(map(string))
-  default     = []
-}
+data "aws_region" "current" {}

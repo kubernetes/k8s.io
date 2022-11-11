@@ -16,7 +16,7 @@ limitations under the License.
 
 terraform {
   backend "s3" {
-    bucket = "test-artifacts-k8s-io-tfstate"
+    bucket = "artifacts-k8s-io-tfstate"
     key    = "terraform.tfstate"
     region = "us-east-2"
   }
@@ -31,15 +31,32 @@ terraform {
   }
 }
 
+# The role_arn (arn:aws:iam::513428760722:role/artifacts.k8s.io_s3admin)
+# used in each provider block is managed in
+# https://github.com/cncf-infra/aws-infra/blob/2ac2e63c162134a9e6036d84beee2d5adf6b4ff2/terraform/iam/main.tf
 
-# Provider for AWS non-region-specific operations.
 provider "aws" {
-  # We still have to specify a region to use.
   region = "us-east-2"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/artifacts.k8s.io_s3admin"
+  }
 }
 
-# Provider for AWS us-east-2 operations.
+provider "aws" {
+  alias  = "us-west-2"
+  region = "us-west-2"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/artifacts.k8s.io_s3admin"
+  }
+}
+
 provider "aws" {
   alias  = "us-east-2"
   region = "us-east-2"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/artifacts.k8s.io_s3admin"
+  }
 }

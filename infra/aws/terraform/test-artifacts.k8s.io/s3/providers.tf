@@ -1,5 +1,5 @@
 /*
-Copyright 2022 The Kubernetes Authors.
+Copyright 2023 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,19 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "prefix" {
-  type    = string
-  default = ""
-}
-
-variable "s3_replication_iam_role_arn" {
-  description = "IAM role assumed by S3 service for replication"
-  type        = string
-  default     = null
-}
-
-variable "s3_replication_rules" {
-  description = "List of maps for S3 replication rules"
-  type        = list(map(string))
-  default     = []
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+    }
+  }
 }
