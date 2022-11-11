@@ -1,7 +1,7 @@
 # Manually syncing buckets
 
 **NOTE**: we are no longer manually syncing buckets, however this may be a useful
-fallback reference.
+fallback reference.  Syncs are now done by the [gcs-to-s3-sync](https://testgrid.k8s.io/sig-k8s-infra-k8sio#gcs-to-s3-sync) prow job.
 
 ## Background
 
