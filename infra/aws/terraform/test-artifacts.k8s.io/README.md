@@ -1,12 +1,13 @@
 # infra/aws/terraform/test-artifacts.k8s.io
 
-Terraform to provision AWS infra for supporting test-artifacts.k8s.io.
+Terraform to provision AWS infra for supporting artifacts-sandbox.k8s.io.
 
 This is a cut-down version of artifacts.k8s.io for testing / development.
 
 ## Goals
 
-- create publicly-readable regional S3 buckets for serving Kubernetes artifacts.
+- create publicly-readable regional S3 buckets for serving Kubernetes non-image artifacts,
+  as served on artifacts.k8s.io (prod) and artifacts-sandbox.k8s.io (sandbox).
 
 ## Applying the Terraform
 
