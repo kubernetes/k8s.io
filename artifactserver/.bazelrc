@@ -1,2 +1,0 @@
-build --workspace_status_command=./tools/get_workspace_status.sh
-
