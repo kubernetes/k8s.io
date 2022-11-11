@@ -153,6 +153,20 @@ groups:
       - justinsb@google.com
       - sig-k8s-infra-leads@kubernetes.io
 
+  # Owners of the GCP projects:
+  # - k8s-infra-porche (pending)
+  # - k8s-infra-porche-prod (pending)
+  - email-id: k8s-infra-porche-admins@kubernetes.io
+    name: k8s-infra-porche-admins
+    description: |-
+      ACL for porche admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - justinsb@google.com
+      - sig-k8s-infra-leads@kubernetes.io
+
   # owners of the k8s-infra-sandbox-capg project, working on cluster-api provider for GCP
   - email-id: k8s-infra-sandbox-capg@kubernetes.io
     name: k8s-infra-sandbox-capg
