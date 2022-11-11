@@ -15,6 +15,7 @@ Kubernetes project infrastructure, managed by the kubernetes community via [sig-
     - `slack-infra`: instance of [slack-infra] including https://slack.k8s.io - owned by [sig-contributor-experience]
     - `triageparty-cli`: instance of [triage-party] - owned by [sig-cli]
     - `triageparty-release`: instance of [triage-party] - owned by [sig-release]
+- `artifacts`: non-image artifacts published to `artifacts.k8s.io`
 - `audit`: scripts to export all relevant gcp resources, and the most recently-reviewed export
 - `dns`: DNS for kubernetes.io and k8s.io
 - `groups`: google groups on the kubernetes.io domain
@@ -29,10 +30,6 @@ Kubernetes project infrastructure, managed by the kubernetes community via [sig-
 - `k8s.gcr.io`: container images published by the project, promoted from `gcr.io/k8s-staging-*` repos
 - `policy`: [open policy agent][opa] policies used by [conftest] to validate resources in this repo
 - `registry.k8s.io`: work-in-progress to support cross-cloud mirroring/hosting of containers and binaries
-
-TODO: are these actively in use or should they be retired?
-- `artifacts`
-- `artifactserver`
 
 We provide a [publicly viewable billing report][billing-report] accessible to members of [kubernetes-sig-k8s-infra@googlegroups.com][mailing-list]
 
