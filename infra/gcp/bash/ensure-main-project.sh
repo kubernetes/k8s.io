@@ -77,6 +77,7 @@ readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
     k8s-infra-tf-gcp:k8s-infra-gcp-org-admins@kubernetes.io
     k8s-infra-tf-monitoring:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-oci-proxy:"${CLUSTER_ADMINS_GROUP}"
+    k8s-infra-tf-porche:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-prow-clusters:k8s-infra-prow-oncall@kubernetes.io
     k8s-infra-tf-public-clusters:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-public-pii:"${CLUSTER_ADMINS_GROUP}"
