@@ -11,6 +11,7 @@ groups:
       - bentheelder@google.com
       - briangrant@google.com
       - cblecker@gmail.com
+      - ctadeu@gmail.com
       - davanum@gmail.com
       - decarr@redhat.com
       - joe.k8s@bedafamily.com
@@ -43,10 +44,10 @@ groups:
       - augustus@cisco.com
       - bentheelder@google.com
       - cblecker@gmail.com
+      - ctadeu@gmail.com
       - k8s@auggie.dev
       - killen.bob@gmail.com
       - pal.nabarun95@gmail.com
-      - paris.pittman@gmail.com
       - tpepper@vmware.com
 
   - email-id: steering@kubernetes.io
@@ -68,10 +69,10 @@ groups:
       - augustus@cisco.com
       - bentheelder@google.com
       - cblecker@gmail.com
+      - ctadeu@gmail.com
       - k8s@auggie.dev
       - killen.bob@gmail.com
       - pal.nabarun95@gmail.com
-      - paris.pittman@gmail.com
       - tpepper@vmware.com
     managers:
       - ihor.dvoretskyi@gmail.com
