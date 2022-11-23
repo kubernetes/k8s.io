@@ -1,6 +1,9 @@
 NAME                              TITLE
 compute.googleapis.com            Compute Engine API
 containerregistry.googleapis.com  Container Registry API
+datastore.googleapis.com          Cloud Datastore API
+firebaserules.googleapis.com      Firebase Rules API
+firestore.googleapis.com          Cloud Firestore API
 logging.googleapis.com            Cloud Logging API
 monitoring.googleapis.com         Cloud Monitoring API
 oslogin.googleapis.com            Cloud OS Login API
