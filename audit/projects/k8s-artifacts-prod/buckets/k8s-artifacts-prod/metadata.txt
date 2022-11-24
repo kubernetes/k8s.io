@@ -12,8 +12,8 @@ gs://k8s-artifacts-prod/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 01 May 2019 00:54:58 GMT
-	Time updated:			Wed, 10 Aug 2022 17:22:10 GMT
-	Metageneration:			147
+	Time updated:			Wed, 16 Nov 2022 22:36:49 GMT
+	Metageneration:			150
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
