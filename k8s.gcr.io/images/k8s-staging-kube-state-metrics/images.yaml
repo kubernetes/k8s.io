@@ -44,6 +44,7 @@
     "sha256:33ad3737929437facbefe3a4be2b45cad4fcee0e9aed4c1001d5d5f1fedf089c": ["v2.4.2"]
     "sha256:8f5d17635bcfcf49186154b9745e08015879ef1c01853f1ff74366db5da4137b": ["v2.5.0"]
     "sha256:132efcf4b7c523f9f478f2662ccd828313e24d0f126454e29f1e9a29b8c474a0": ["v2.6.0"]
+    "sha256:2f4851a097ab81bead7cee8e08673fdc70511b8625ace98798ae8591c9b0c7c9": ["v2.7.0"]
 - name: kube-state-metrics-arm
   dmap:
     "sha256:255894e01b3042564d8b5968abbc027dc7be816ba14c7d7426bd3ce54131219c": ["2.0.0-alpha"]
@@ -67,6 +68,7 @@
     "sha256:9a300b0a6c477dd52171f5aecf2670f0bdc2641fb445e41f82c98ad95c0b6fc9": ["v2.4.2"]
     "sha256:38bb6337d45f599355a9fb70e499e6db9515c986641c25b6847003e394198577": ["v2.5.0"]
     "sha256:f6f2d2b550daa16e22f4989892bf9e6bc0be936da88bbb19debc504d6bcfeba4": ["v2.6.0"]
+    "sha256:6185513dde138ab3493a7bc85a8f5db95b30f5de4c33c39564941d7acdd47db0": ["v2.7.0"]
 - name: kube-state-metrics-arm64
   dmap:
     "sha256:f18e7fff7b327511ca6ccd85b11b5cc14df9d99307baaab85ec7b4d18ca13a61": ["2.0.0-alpha"]
