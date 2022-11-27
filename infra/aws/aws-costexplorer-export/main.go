@@ -85,15 +85,16 @@ type FileOutputs map[string]string
 // AWSCostExplorerExportConfig stores configuration for the runtime
 type AWSCostExplorerExportConfig struct {
 	AWSRegion                     string
+	AmountOfDaysToReportFrom      int
+	BigQueryDatasetLocation       string
+	BigQueryEnabled               bool
+	BigQueryManagingDatasetPrefix string
+	BucketURI                     string
+	FilterByLinkedAccounts        []string
+	GCPProjectID                  string
 	LocalOutputFolder             string
 	LocalOutputFolderEnable       bool
-	BucketURI                     string
-	AmountOfDaysToReportFrom      int
 	PromoteToLatest               bool
-	GCPProjectID                  string
-	BigQueryEnabled               bool
-	BigQueryDatasetLocation       string
-	BigQueryManagingDatasetPrefix string
 
 	// clients
 	ceclient *costexplorer.Client
@@ -117,7 +118,13 @@ const (
 // default config for runtime
 var (
 	defaultConfig = AWSCostExplorerExportConfig{
-		AWSRegion:                     "us-east-1",
+		AWSRegion: "us-east-1",
+		FilterByLinkedAccounts: []string{
+			"513428760722", // Root/Kubernetes/registry.k8s.io/registry.k8s.io_admin (k8s-infra-aws-registry-k8s-io-admin@kubernetes.io)
+			"585803375430", // Root/Kubernetes/k8s-infra-accounts (k8s-infra-accounts@kubernetes.io)
+			"266690972299", // Root/Kubernetes/k8s-infra-aws-root-account (k8s-infra-aws-root-account@kubernetes.io)
+			"433650573627", // Root/Kubernetes/sig-release-leads (sig-release-leads@kubernetes.io)
+		},
 		LocalOutputFolder:             "/tmp/local-cncf-aws-infra-billing-and-usage-data",
 		LocalOutputFolderEnable:       false,
 		BucketURI:                     "gs://cncf-aws-infra-cost-and-billing-data",
@@ -198,11 +205,22 @@ func (c usageClient) GetInputForUsage(nextPageToken *string) *costexplorer.GetCo
 	end := now.Format(usageDateFormat)
 	input := &costexplorer.GetCostAndUsageInput{
 		Filter: &cetypes.Expression{
-			Not: &cetypes.Expression{
-				Dimensions: &cetypes.DimensionValues{
-					Key:          cetypes.DimensionPurchaseType,
-					MatchOptions: []cetypes.MatchOption{cetypes.MatchOptionEquals},
-					Values:       []string{"Refund", "Credit"},
+			And: []cetypes.Expression{
+				{
+					Dimensions: &cetypes.DimensionValues{
+						Key:          cetypes.DimensionLinkedAccount,
+						MatchOptions: []cetypes.MatchOption{cetypes.MatchOptionEquals},
+						Values:       c.config.FilterByLinkedAccounts,
+					},
+				},
+				{
+					Not: &cetypes.Expression{
+						Dimensions: &cetypes.DimensionValues{
+							Key:          cetypes.DimensionPurchaseType,
+							MatchOptions: []cetypes.MatchOption{cetypes.MatchOptionEquals},
+							Values:       []string{"Refund", "Credit"},
+						},
+					},
 				},
 			},
 		},
@@ -567,6 +585,9 @@ func main() {
 	flag.StringVar(&config.BigQueryDatasetLocation, "bigquery-dataset-location", defaultConfig.BigQueryDatasetLocation, "specifies BigQuery dataset location")
 	flag.StringVar(&config.BigQueryManagingDatasetPrefix, "bigquery-managing-dataset-prefix", defaultConfig.BigQueryManagingDatasetPrefix, "specifies a prefix to use for managing BigQuery datasets")
 	flag.Parse()
+
+	// flag.StringSliceVar?
+	config.FilterByLinkedAccounts = defaultConfig.FilterByLinkedAccounts
 
 	log.Println("Run time:", now)
 	log.Println("Config:\n")
