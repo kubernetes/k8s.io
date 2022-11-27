@@ -108,7 +108,7 @@ const (
 	resultDateFormat = "200601021504"
 
 	// templates
-	fileNamePrefix              = "cncf-aws-infra-billing-and-usage-data"
+	fileNamePrefix              = "k8s-infra-aws-infra-billing-and-usage-data"
 	fileNameTemplate            = fileNamePrefix + "-%v-%v.csv"
 	bigqueryDatasetNameTemplate = "%v_%v"
 	bucketReferenceTemplate     = "%v/%v"
@@ -125,15 +125,15 @@ var (
 			"266690972299", // Root/Kubernetes/k8s-infra-aws-root-account (k8s-infra-aws-root-account@kubernetes.io)
 			"433650573627", // Root/Kubernetes/sig-release-leads (sig-release-leads@kubernetes.io)
 		},
-		LocalOutputFolder:             "/tmp/local-cncf-aws-infra-billing-and-usage-data",
+		LocalOutputFolder:             "/tmp/local-k8s-infra-aws-infra-billing-and-usage-data",
 		LocalOutputFolderEnable:       false,
-		BucketURI:                     "gs://cncf-aws-infra-cost-and-billing-data",
+		BucketURI:                     "gs://k8s-infra-aws-infra-cost-and-billing-data",
 		AmountOfDaysToReportFrom:      365,
 		PromoteToLatest:               true,
 		GCPProjectID:                  "k8s-infra-ii-sandbox",
 		BigQueryEnabled:               true,
 		BigQueryDatasetLocation:       "australia-southeast1",
-		BigQueryManagingDatasetPrefix: "cncf_aws_infra_cost_and_billing_data_dataset",
+		BigQueryManagingDatasetPrefix: "k8s_infra_aws_infra_cost_and_billing_data_dataset",
 	}
 
 	tableResultsByTime Table = Table{Name: "ResultsByTime", Schema: ResultByTimeSchema{}}
