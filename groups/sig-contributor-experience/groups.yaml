@@ -51,7 +51,6 @@ groups:
     owners:
       - contributors@kubernetes.io
       - spiffxp@gmail.com
-      - paris.pittman@gmail.com
       - killen.bob@gmail.com
       - davanum@gmail.com
     managers:
