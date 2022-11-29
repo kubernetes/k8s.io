@@ -17,7 +17,6 @@ groups:
     owners:
       - ihor@cncf.io
       - killen.bob@gmail.com
-      - paris.pittman@gmail.com
     managers:
       - ameukam@gmail.com
       - pal.nabarun95@gmail.com
@@ -52,7 +51,6 @@ groups:
     owners:
       - contributors@kubernetes.io
       - spiffxp@gmail.com
-      - paris.pittman@gmail.com
       - killen.bob@gmail.com
       - davanum@gmail.com
     managers:
