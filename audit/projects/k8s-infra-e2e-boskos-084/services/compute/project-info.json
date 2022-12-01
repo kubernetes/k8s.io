@@ -181,5 +181,6 @@
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-boskos-084",
+  "vmDnsSetting": "GLOBAL_DEFAULT",
   "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
 }

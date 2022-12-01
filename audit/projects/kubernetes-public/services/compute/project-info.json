@@ -185,5 +185,6 @@
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/kubernetes-public",
+  "vmDnsSetting": "GLOBAL_DEFAULT",
   "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
 }
