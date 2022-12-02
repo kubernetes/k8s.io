@@ -39,6 +39,7 @@
     "sha256:0103eee7c35e3e0b5cd8cdca9850dc71c793cdeb6669d8be7a89440da2d06ae4": [ "v2.5.1" ]
     "sha256:f1c25991bac2fbb7f5fcf91ed9438df31e30edee6bed5a780464238aa09ad24c": [ "v2.6.0" ]
     "sha256:5a17c63e82c5268d92ac6f1fe7cf6eae9c3dcf8c16a8290536a0bc92b1e2ae45": [ "v2.6.1" ]
+    "sha256:a13bff2ed69af0cf4270f0cf47bdedf75a56c095cd95b91195ae6c713a9b1845": [ "v2.6.2" ]
 - name: csi-provisioner
   dmap:
     "sha256:438c04395d03fa671f8656d6f951332516754e330d1ac4f9588df1ba2870a366": [ "v1.4.0" ]
@@ -112,6 +113,7 @@
     "sha256:e3eaee13654507ecadff53c68ae8e25de3a111f473eb22c1de18eb21f1c1dc41": [ "v1.2.0" ]
 - name: hostpathplugin
   dmap:
+    "sha256:5ad49b63ea3137a870f6973c638feed69166da3d95a7223edb8c6cf2d837b048": [ "v1.10.0" ]
     "sha256:d2b357bb02430fee9eaa43b16083981463d260419fe3acb2f560ede5c129f6f5": [ "v1.4.0" ]
     "sha256:de166db2f9245cd0cccacfea9527f7e4c25816fde401e920163b5c17637daad1": [ "v1.5.0" ]
     "sha256:b526bd29630261eceecf2d38c84d4f340a424d57e1e2661111e2649a4663b659": [ "v1.6.0" ]
