@@ -133,7 +133,7 @@ conduct:
 # This service runs in a equinix host managed by @dims
 cs:
   type: A
-  value: 139.178.84.205
+  value: 86.109.7.36
 # Canary for Code Search on GKE cluster aaa (@dims @jimdaga)
 cs-canary:
   type: A
