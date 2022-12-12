@@ -112,6 +112,12 @@ artifacts:
   values:
   - 35.244.192.77
 
+# Domain delegation of cdn.dl.l8s.io to Fastly.
+# Reach out to sig-k8s-infra-leads@kubernetes.io for any issue
+cdn.dl:
+  type: TXT
+  value: fastly-domain-delegation-yyD9G&IG34BM-2022-08-01
+
 # Vanity CNAMEs.
 blog:
   type: CNAME
