@@ -60,12 +60,7 @@ groups:
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - joseph.r.sandoval@gmail.com
-      - max@koerbaecher.io
-      - onlydole@gmail.com
       - pal.nabarun95@gmail.com
-      - sethpmccombs@gmail.com
-      - thejoycekung@gmail.com
-      - wilsonehusin@gmail.com
       - cicih@google.com
       - xandergrzyw@gmail.com
       - leonard.pahlke@googlemail.com # 1.26 Release Lead
@@ -260,22 +255,13 @@ groups:
       - nng.grace@gmail.com # 1.26 Release Lead Shadow
       - kat.cosgrove@gmail.com # 1.26 Release Lead Shadow
       - priyankasaggu11929@gmail.com # 1.26 Release Lead Shadow
-      - dcampau1@gmail.com
-      - divya.mohan0209@gmail.com
       - gmccloskey@google.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
       - joseph.r.sandoval@gmail.com
-      - kikis.github@gmail.com
-      - max@koerbaecher.io
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
-      - onlydole@gmail.com
-      - saveetha13@gmail.com
-      - sethpmccombs@gmail.com
       - spiffxp@google.com
-      - thejoycekung@gmail.com
-      - wilsonehusin@gmail.com
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
