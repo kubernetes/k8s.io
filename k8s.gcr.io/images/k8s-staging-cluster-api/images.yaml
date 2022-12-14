@@ -98,6 +98,7 @@
     "sha256:20eacdf17dfd51ac705f271cbcaf6536c019bb583a359ff92c6ae60453df0f12": ["v1.3.0-beta.1"]
     "sha256:f550c24d779c784f3689099f72f668cd6606780cec28b6a3e01ccb770bd87c92": ["v1.3.0-rc.0"]
     "sha256:ef94c801a7062a0447ce94b9c6007c05065bb2c1bcb059087717d3a6ef37b678": ["v1.3.0-rc.1"]
+    "sha256:ecd26387974b3719532a363ffaf31c583981d9d31ae37b585aa865bb64536633": ["v1.3.1"]
 - name: cluster-api-controller-amd64
   dmap:
     "sha256:ea0e994082f56bf7713d36002abfbffbad43b2c257b89842b3e3694c987d3a07": ["v0.2.0"]
@@ -132,6 +133,7 @@
     "sha256:287d1db96cdb42b0cb27c96ffed9f875c02f2501226ff39339e4a06a3a32395e": ["v1.3.0-beta.1"]
     "sha256:f4b27e96f8cb630db6f7d9d3871d796b60c242077f8622d4af35368c9566d925": ["v1.3.0-rc.0"]
     "sha256:c272cc97b39eb90fbf8d697671db88d57348b2c521cc5eba6cd6bd3e07ae5743": ["v1.3.0-rc.1"]
+    "sha256:ed9b84275a734f636bd66f5eb429109ab21b56d39a6a3a1f036c91c448ceb477": ["v1.3.1"]
 - name: kubeadm-bootstrap-controller
   dmap:
     "sha256:78382ca2ed1805f6c8882c057a3d4991b12bc5eb54151720b6b30aa4ff89da61": ["v0.3.0"]
@@ -216,6 +218,7 @@
     "sha256:264535d7bce5c7ddb026b9be109d6fae098f7bfbc3706b8a5195541d10135879": ["v1.3.0-beta.1"]
     "sha256:bb6e4dbe5a025649f2fa78acbdd62f371ebbbf7bdda343e97a44e87e3ad1e87c": ["v1.3.0-rc.0"]
     "sha256:b16a103a093ffd7fc669be8456f843567a271755e4ba78eb4c30c57919baba70": ["v1.3.0-rc.1"]
+    "sha256:df9ef9aa9e989bef0caea7128873c86cbf9085ad38e72acd0ddcbb0e9bc5d63a": ["v1.3.1"]
 - name: kubeadm-control-plane-controller
   dmap:
     "sha256:b33cbe3e58aba8c14932257faeb652e5d9a5e396b34412ff51b3f62db8a95758": ["v0.3.0"]
@@ -300,6 +303,7 @@
     "sha256:cbae4f776d181ad9bd7d6213ccbfe2484baddaae7b427aa38a4f6b3df36a7e29": ["v1.3.0-beta.1"]
     "sha256:6a0f14a1dd7ef51e87694b163796788e88da19dac99329a824189e1fd7a6340a": ["v1.3.0-rc.0"]
     "sha256:16c22df6303179d01f6af99e15d355fffe712879bbd27ce8e27a561461036e9c": ["v1.3.0-rc.1"]
+    "sha256:07a4a1df923c15710953020a9548ff0b4b4dff36b8db63a7ca8dc40a36eac544": ["v1.3.1"]
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
