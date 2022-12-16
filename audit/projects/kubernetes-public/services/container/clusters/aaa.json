@@ -37,8 +37,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.23.12-gke.100",
-  "currentNodeVersion": "1.22.10-gke.600 *",
+  "currentMasterVersion": "1.23.12-gke.1600",
+  "currentNodeVersion": "1.23.12-gke.100 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -55,7 +55,10 @@
     "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-pool1-20190918234853194900000-411e5408-grp",
     "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-fafa121a-grp",
     "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-efbc2684-grp",
-    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-91796c71-grp"
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-91796c71-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-10de5ce3-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-8a2e99d8-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-ad548c1d-grp"
   ],
   "ipAllocationPolicy": {
     "clusterIpv4Cidr": "10.40.0.0/14",
@@ -192,7 +195,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.23.12-gke.100"
+      "version": "1.23.12-gke.1600"
     },
     {
       "autoscaling": {
@@ -248,7 +251,63 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.22.10-gke.600"
+      "version": "1.23.12-gke.100"
+    },
+    {
+      "autoscaling": {
+        "autoprovisioned": true,
+        "enabled": true,
+        "maxNodeCount": 1000
+      },
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "pd-standard",
+        "imageType": "COS",
+        "machineType": "e2-highmem-4",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/logging.write",
+          "https://www.googleapis.com/auth/monitoring"
+        ],
+        "serviceAccount": "default",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-10de5ce3-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-8a2e99d8-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-ad548c1d-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-a",
+        "us-central1-f"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "maxPodsConstraint": {
+        "maxPodsPerNode": "110"
+      },
+      "name": "nap-e2-highmem-4-79yq2sly",
+      "networkConfig": {
+        "podIpv4CidrBlock": "10.40.0.0/14",
+        "podRange": "gke-aaa-pods-4d0eb763"
+      },
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/nap-e2-highmem-4-79yq2sly",
+      "upgradeSettings": {
+        "maxSurge": 1,
+        "strategy": "SURGE"
+      },
+      "version": "1.23.12-gke.100"
     }
   ],
   "releaseChannel": {
