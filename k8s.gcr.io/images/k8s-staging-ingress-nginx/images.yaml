@@ -169,6 +169,8 @@
 - name: e2e-test-fastcgi-helloserver
   dmap:
     "sha256:723b8187e1768d199b93fd939c37c1ce9427dcbca72ec6415f4d890bca637fcc": ["v20200627-g1fcf4444c"]
+    "sha256:da4e0da2b5f7f6531d5c68db016faa6f2ae14eee8fd975cafeba2ab7b4b61527": ["v20221220-controller-v1.5.1-51-g188913182"]
+
 
 # httpbin image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/httpbin
