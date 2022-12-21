@@ -4,3 +4,4 @@ filestores:
   src: true
 - base: gs://k8s-artifacts-prod/binaries/provider-aws/
   service-account: k8s-infra-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+
