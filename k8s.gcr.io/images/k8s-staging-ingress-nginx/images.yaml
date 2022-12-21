@@ -98,6 +98,8 @@
     "sha256:46c27294e467f46d0006ad1eb5fd3f7005eb3cbd00dd43be2ed9b02edfc6e828": ["9fdbef829c327b95a3c6d6816a301df41bda997f"]
     "sha256:9767d829a54c2941780b6e7e32d32ab55ff7bee79fee46d7bf04da3ad4d7166e": ["bf8362cb500b413d04d04b1312df1914b4b193f8"]
     "sha256:3f5e28bb248d5170e77b77fc2a1a385724aeff41a0b34b5afad7dd9cf93de000": ["0b5e0685112e4537ee20a0bdbba451e9f6158aa3"]
+    "sha256:2686073c2ec9e3eae0afd2c26947a38a1d3676bee2f33c0f7245bd326e25a459": ["e3e0d9c1f487cf00c02a2a0ca579f4aff9698e59"]
+    "sha256:a51abd4fd2beb5a93f88ff9859c930d0437250bef90118572ad1127c5b30dfa2": ["c648595cd73a2d605cd7d9575b72b367755c7ec8"]
 
 # image to run tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/test-runner
@@ -134,6 +136,8 @@
     "sha256:f3f26f1e2aef8b2013b731f041fd69bcd950d3118eecf4429551848f47305c0f": ["v20220916-gd32f8c343"]
     "sha256:9ab6a412b0ea6ae77abc80309608976ec15141e146fa91ef4352400cb9051086": ["v20221012-controller-v1.4.0-14-g93df79676"]
     "sha256:50c5469f08b664e928a3035ac94a2348955b669d7ac33809abc674c8fd6c19c1": ["v20221125-controller-v1.5.1-21-g9d562c47a"]
+    "sha256:968b7dff20c1e0553297a0389f0b14c7929ff87bbe21f32a34dbe1e72aa62948": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
+    "sha256:8f025472964cd15ae2d379503aba150565a8d78eb36b41ddfc5f1e3b1ca81a8e": ["v20221221-controller-v1.5.1-62-g6ffaef32a"]
 
 # custom cfssl image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/cfssl
@@ -142,6 +146,8 @@
     "sha256:be2f69024f7b7053f35b86677de16bdaa5d3ff0f81b17581ef0b0c6804188b03": ["v20200627-g1fcf4444c"]
     "sha256:c0bd134f1c7190079180e6d4fa2ba64c049961a49b96db20aa39fabc896d26d5": ["v20220801-g00ee51f09"]
     "sha256:c1b273763048944dd7d22d37adfc65be4fa6a5f6068204292573c6cdc5ea3457": ["v20220818-g9fdbef829"]
+    "sha256:07d1b6ed91958cc525e240ab3dda8d7cf147f0e1c606033302a877c55f68193d": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
+
 
 # custom echo HTTP server image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/echo
@@ -165,6 +171,7 @@
 - name: e2e-test-fastcgi-helloserver
   dmap:
     "sha256:723b8187e1768d199b93fd939c37c1ce9427dcbca72ec6415f4d890bca637fcc": ["v20200627-g1fcf4444c"]
+    "sha256:da4e0da2b5f7f6531d5c68db016faa6f2ae14eee8fd975cafeba2ab7b4b61527": ["v20221220-controller-v1.5.1-51-g188913182"]
 
 # httpbin image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/httpbin
@@ -173,6 +180,7 @@
     "sha256:c6372ef57a775b95f18e19d4c735a9819f2e7bb4641e5e3f27287d831dfeb7e8": ["v20200627-gfc91afac8"]
     "sha256:12f18b0ce1fa12e40a29b4b142cbfc6b909b65a0be02421bc3d1889c824747f7": ["v20200808-gc500bd4b3"]
     "sha256:2e87eb96d11f481fa12c2ddcce1770741f957481aa87cf4963cfd1b2842dd4df": ["v20220801-g00ee51f09"]
+    "sha256:92e0258e404bbf5b6916f4e897c5484f27e113d03cae07a1d780f72474df07c6": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
 
 # kube-webhook-certgen
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/kube-webhook-certgen
@@ -184,6 +192,8 @@
     "sha256:2188def723c8fcb2635fbe54607ac3b4efba581c4fcc3d2279ec9c57da1b2f6f": ["v1.2.0"]
     "sha256:549e71a6ca248c5abd51cdb73dbc3083df62cf92ed5e6147c780e30f7e007a47": ["v1.3.0"]
     "sha256:39c5b2e3310dc4264d638ad28d9d1d96c4cbb2b2dcfb52368fe4e3c63f61e10f": ["v20220916-gd32f8c343"]
+    "sha256:ccdb2382b53ed42fd76bfbff90a5b8a5815af0b3b8c6dfb9118a34770d9cac11": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
+    "sha256:4d99688e557396f5baa150e019ff7d5b7334f9b9f9a8dab64038c5c2a006f6b5": ["v20221220-controller-v1.5.1-58-g787ea74b6"]
 
 # nginx-errors
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/custom-error-pages
@@ -194,6 +204,7 @@
     "sha256:1c31c80828e7800c4eb556e07fdc90c451482767659eb26310e0ad208d28c9cf": ["1.2.0"]
     "sha256:37257a3cbc1aba523cad8f0cf5b946df3aff9e74483e7fa9ce8df2d965e71ec7": ["1.3.0"]
     "sha256:09c421ac743bace19ab77979b82186941c5125c95e62cdb40bdf41293b5c275c": ["v20220916-gd32f8c343"]
+    "sha256:0116499ff83f02360faee7b4f3842f63df7eea40be2db17cc41a467fdf991336": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
 
 # opentelemetry
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/opentelemetry
@@ -207,3 +218,4 @@
     "sha256:f623ffcd2f923d291d6038481a35ea6ba35e8971062557489c32e2bc1f0810f0": ["v20220818-g9fdbef829"]
     "sha256:aa079daa7efd93aa830e26483a49a6343354518360929494bad1d0ad3303142e": ["v20220906-g981ce38a7"]
     "sha256:41076fd9fb4255677c1a3da1ac3fc41477f06eba3c7ebf37ffc8f734dad51d7c": ["v20221114-controller-v1.5.1-6-ga66ee73c5"]
+    "sha256:fa3f47c289236b104a1f5195b020657a29a3a9b0a355f86f2d52d42d1fa6495e": ["v20221220-controller-v1.5.1-53-g81d40b70a"]
