@@ -1,0 +1,3 @@
+- name: kwok
+  dmap:
+    "sha256:8f03c71a0c4b20c7b2ba00a5864efb85dc8cec948d880b3f6cf0d653d037e383": ["v0.0.1"]

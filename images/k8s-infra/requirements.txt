@@ -16,5 +16,6 @@
 ruamel.yaml==0.17.7
 
 # tools
+awscli==1.*
 yamllint==1.13.0
 yq==2.12.0

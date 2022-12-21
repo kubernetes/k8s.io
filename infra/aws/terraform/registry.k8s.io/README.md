@@ -34,7 +34,7 @@ aws s3 mb s3://registry-k8s-io-tfstate --region us-east-2
 
 ## Notes
 
-- currently all provider blocks will assume the role of registry.k8s.io_s3writer inside of the registry.k8s.io account (513428760722)
+- currently all provider blocks will assume the role of registry.k8s.io_s3admin inside of the registry.k8s.io account (513428760722)
 
 ## Extending regions
 

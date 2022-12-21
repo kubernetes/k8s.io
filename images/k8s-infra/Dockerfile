@@ -26,10 +26,10 @@ FROM debian:bullseye
 # latest at the time, and package-based installs from debian-maintained repos
 # are not pinned to a specific version
 
-ARG CONFTEST_VERSION=0.33.2
-ARG GCLOUD_VERSION=395.0.0
-ARG GH_VERSION=2.14.3
-ARG GO_VERSION=1.18.4
+ARG CONFTEST_VERSION=0.34.0
+ARG GCLOUD_VERSION=401.0.0
+ARG GH_VERSION=2.15.0
+ARG GO_VERSION=1.19.1
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
@@ -37,7 +37,7 @@ ARG K8S_VERSION=1.21.14
 ARG OPA_VERSION=0.38.0
 ARG SHELLCHECK_VERSION=0.8.0
 ARG TFSWITCH_VERSION=0.13.1288
-ARG RCLONE_VERSION=1.58.1
+ARG RCLONE_VERSION=1.59.1
 
 # build everything in /build
 WORKDIR /build
@@ -48,7 +48,7 @@ WORKDIR /build
 ENV PATH=/usr/local/go/bin:${PATH} \
     CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
-# used to pip install: yamllint, yq
+# used to pip install: awscli, yamllint, yq
 COPY requirements.txt .
 
 # use bash for pipefail and pushd/popd
@@ -61,6 +61,7 @@ RUN set -o errexit nounset pipefail \
             gcc \
             git \
             gnupg2 \
+	    groff \
             make \
             libc6-dev \
             python3 \
@@ -137,6 +138,7 @@ RUN set -o errexit nounset pipefail \
         && popd \
     && echo "Outputting version info to confirm installation of expected tools ..." \
         && apt list --installed         | tee apt-list.txt \
+	&& aws --version		| tee awscli-version.txt \
         && bq version                   | tee bq-version.txt \
         && conftest --version           | tee conftest-version.txt \
         && curl --version               | tee curl-version.txt \

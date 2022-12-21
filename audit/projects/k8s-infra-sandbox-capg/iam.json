@@ -27,7 +27,8 @@
     {
       "members": [
         "serviceAccount:591994748249-compute@developer.gserviceaccount.com",
-        "serviceAccount:591994748249@cloudservices.gserviceaccount.com"
+        "serviceAccount:591994748249@cloudservices.gserviceaccount.com",
+        "serviceAccount:richard@k8s-infra-sandbox-capg.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
     },
@@ -39,8 +40,8 @@
     },
     {
       "members": [
+        "deleted:serviceAccount:richard-capg@k8s-infra-sandbox-capg.iam.gserviceaccount.com?uid=100171940266561657278",
         "group:k8s-infra-sandbox-capg@kubernetes.io",
-        "serviceAccount:richard-capg@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
         "user:spiffxp@google.com"
       ],
       "role": "roles/owner"

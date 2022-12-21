@@ -326,6 +326,15 @@ data:
       }
 
       server {
+        server_name slack.k8s.io slack.kubernetes.io
+        listen 80;
+
+       location / {
+         rewrite ^/.*$ https://communityinviter.com/apps/kubernetes/community permanent;
+       }
+      }
+
+      server {
         server_name submit-queue.k8s.io submit-queue.kubernetes.io;
         listen 80;
 

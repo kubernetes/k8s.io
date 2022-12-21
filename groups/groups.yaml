@@ -23,15 +23,16 @@ groups:
       - jdumars@gmail.com
       - killen.bob@gmail.com
       - nikitaraghunath@gmail.com
-      - paris.pittman@gmail.com
       - spiffxp@gmail.com
     members:
       - acondor@google.com
       - adolfo.garcia@uservers.net # SIG Release
       - ahg@google.com
       - alarcj137@gmail.com
+      - amerai@google.com
       - ameukam@gmail.com
       - antheabjung@gmail.com
+      - antonio.ojea.garcia@gmail.com
       - apelisse@google.com
       - augustus@cisco.com # SIG Release
       - bentheelder@google.com
@@ -57,12 +58,13 @@ groups:
       - dgrisonn@redhat.com
       - divya.mohan0209@gmail.com
       - eddiezane@gmail.com
-      - ehashman@redhat.com
+      - ehashman@apple.com
       - fabrizio.pandini@gmail.com
       - fbongiovanni@google.com
       - fbranczyk@gmail.com
       - frapposelli@vmware.com
       - guyjtempleton@googlemail.com
+      - gveronicalg@gmail.com # SIG Release
       - hankang@google.com
       - hpandey@pivotal.io
       - hweicdl@gmail.com
@@ -89,6 +91,7 @@ groups:
       - katrina.verey@shopify.com # SIG CLI
       - ksemenov@vmware.com
       - lachlan.evenson@gmail.com
+      - lancashiredanielle@gmail.com
       - liggitt@google.com
       - marosset@microsoft.com
       - maszulik@redhat.com

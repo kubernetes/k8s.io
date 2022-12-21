@@ -21,6 +21,7 @@ restrictions:
     allowedGroups:
       - "^k8s-infra-staging-etcd@kubernetes.io$"
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
+      - "^sig-api-machinery-cel-dev@kubernetes.io$"
   - path: "sig-apps/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-examples@kubernetes.io$"
@@ -120,6 +121,7 @@ restrictions:
     allowedGroups:
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-cri-tools@kubernetes.io$"
+      - "^k8s-infra-staging-kmm@kubernetes.io$"
       - "^k8s-infra-staging-nfd@kubernetes.io$"
       - "^k8s-infra-staging-npd@kubernetes.io$"
       - "^k8s-infra-staging-sp-operator@kubernetes.io$"
@@ -142,6 +144,8 @@ restrictions:
       - "^k8s-infra-staging-publishing-bot@kubernetes.io$"
       - "^k8s-infra-staging-bom@kubernetes.io$"
       - "^k8s-infra-staging-tg-exporter@kubernetes.io$"
+      - "^k8s-infra-staging-tejolote@kubernetes.io$"
+      - "^k8s-infra-staging-zeitgeist@kubernetes.io$"
       - "^release-comms@kubernetes.io$"
       - "^release-managers-private@kubernetes.io$"
       - "^release-managers@kubernetes.io$"
@@ -149,6 +153,7 @@ restrictions:
       - "^sig-release-leads@kubernetes.io$"
       - "^release-team@kubernetes.io$"
       - "^release-team-shadows@kubernetes.io$"
+      - "^release-team-enhancements@kubernetes.io$"
   - path: "sig-scalability/groups.yaml"
     allowedGroups:
       - "^k8s-infra-rbac-perfdash@kubernetes.io$"
@@ -161,6 +166,7 @@ restrictions:
       - "^k8s-infra-staging-scheduler-plugins@kubernetes.io$"
       - "^k8s-infra-staging-sched-simulator@kubernetes.io$"
       - "^k8s-infra-staging-kueue@kubernetes.io$"
+      - "^k8s-infra-staging-kwok@kubernetes.io$"
       - "^sig-scheduling-leads@kubernetes.io$"
   - path: "sig-security/groups.yaml"
     allowedGroups:
@@ -192,6 +198,7 @@ restrictions:
     allowedGroups:
       - "^sig-windows-leads@kubernetes.io$"
       - "^k8s-infra-staging-gmsa-webhook@kubernetes.io$"
+      - "^k8s-infra-staging-win-op-rdnss@kubernetes.io$"
   - path: "sig-k8s-infra/groups.yaml"
     allowedGroups:
       - "^gke-security-groups@kubernetes.io$"
@@ -212,6 +219,7 @@ restrictions:
       - "^k8s-infra-group-admins@kubernetes.io$"
       - "^k8s-infra-ii-coop@kubernetes.io$"
       - "^k8s-infra-oci-proxy-admins@kubernetes.io$"
+      - "^k8s-infra-porche-admins@kubernetes.io$"
       - "^k8s-infra-rbac-cert-manager@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-canary@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-prod@kubernetes.io$"

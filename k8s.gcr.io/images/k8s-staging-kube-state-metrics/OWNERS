@@ -1,9 +1,6 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- brancz
 - dgrisonnet
 - fpetkovski
-- lilic
 - mrueg
-- tariq1890

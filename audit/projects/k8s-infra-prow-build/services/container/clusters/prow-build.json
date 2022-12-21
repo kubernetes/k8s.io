@@ -20,8 +20,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.32.0.0/14",
   "createTime": "2020-04-30T21:31:49+00:00",
-  "currentMasterVersion": "1.22.10-gke.600",
-  "currentNodeVersion": "1.22.8-gke.202 *",
+  "currentMasterVersion": "1.23.12-gke.1600",
+  "currentNodeVersion": "1.23.12-gke.1600",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -33,9 +33,6 @@
   "initialClusterVersion": "1.14.10-gke.27",
   "initialNodeCount": 1,
   "instanceGroupUrls": [
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-848a7936-grp",
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-22356fd4-grp",
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-647fc6db-grp",
     "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-pool5-2021092812495606-e8f905a4-grp",
     "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-pool5-2021092812495606-72cb7850-grp",
     "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool5-2021092812495606-3a8095df-grp"
@@ -96,10 +93,7 @@
     "diskSizeGb": 100,
     "diskType": "pd-standard",
     "imageType": "UBUNTU_CONTAINERD",
-    "labels": {
-      "dedicated": "greenhouse"
-    },
-    "machineType": "n1-standard-32",
+    "machineType": "n1-highmem-8",
     "metadata": {
       "disable-legacy-endpoints": "true"
     },
@@ -110,78 +104,12 @@
     "shieldedInstanceConfig": {
       "enableIntegrityMonitoring": true
     },
-    "taints": [
-      {
-        "effect": "NO_SCHEDULE",
-        "key": "dedicated",
-        "value": "greenhouse"
-      }
-    ],
     "workloadMetadataConfig": {
       "mode": "GKE_METADATA"
     }
   },
   "nodeIpv4CidrSize": 24,
   "nodePools": [
-    {
-      "autoscaling": {
-        "enabled": true,
-        "maxNodeCount": 1,
-        "minNodeCount": 1
-      },
-      "config": {
-        "diskSizeGb": 100,
-        "diskType": "pd-standard",
-        "imageType": "UBUNTU_CONTAINERD",
-        "labels": {
-          "dedicated": "greenhouse"
-        },
-        "machineType": "n1-standard-32",
-        "metadata": {
-          "disable-legacy-endpoints": "true"
-        },
-        "oauthScopes": [
-          "https://www.googleapis.com/auth/cloud-platform"
-        ],
-        "serviceAccount": "gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
-        "shieldedInstanceConfig": {
-          "enableIntegrityMonitoring": true
-        },
-        "taints": [
-          {
-            "effect": "NO_SCHEDULE",
-            "key": "dedicated",
-            "value": "greenhouse"
-          }
-        ],
-        "workloadMetadataConfig": {
-          "mode": "GKE_METADATA"
-        }
-      },
-      "initialNodeCount": 1,
-      "instanceGroupUrls": [
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-848a7936-grp",
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-22356fd4-grp",
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-greenhouse-20200518173-647fc6db-grp"
-      ],
-      "locations": [
-        "us-central1-c",
-        "us-central1-f",
-        "us-central1-b"
-      ],
-      "management": {
-        "autoRepair": true,
-        "autoUpgrade": true
-      },
-      "name": "greenhouse-20200518173345958100000001",
-      "podIpv4CidrSize": 24,
-      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build/nodePools/greenhouse-20200518173345958100000001",
-      "upgradeSettings": {
-        "maxSurge": 1,
-        "strategy": "SURGE"
-      },
-      "version": "1.22.8-gke.202"
-    },
     {
       "autoscaling": {
         "enabled": true,
@@ -229,7 +157,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.22.8-gke.202"
+      "version": "1.23.12-gke.1600"
     }
   ],
   "releaseChannel": {

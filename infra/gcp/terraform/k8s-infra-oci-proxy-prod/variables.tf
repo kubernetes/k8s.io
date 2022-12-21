@@ -14,22 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "tag" {
-  type    = string
-  default = "latest"
+variable "domain" {
+  type = string
 }
-
-variable "cloud_run_regions" {
-  type = list(string)
-  default = [
-    # Tier 1 pricing: https://cloud.google.com/run/pricing#tables
-    "asia-east1",
-    "asia-northeast1",
-    "europe-north1",
-    "europe-west1",
-    "europe-west4",
-    "us-central1",
-    "us-east1",
-    "us-east4"
-  ]
+variable "project_id" {
+  type = string
+}
+variable "digest" {
+  type = string
+}
+variable "cloud_run_config" {
+  type = map(object({
+    environment_variables = list(object({
+      value = string
+      name  = string
+    }))
+  }))
 }

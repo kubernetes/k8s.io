@@ -107,4 +107,4 @@ scripts or terraform modules are responsible for which GCP projects
 
 ## terraform
 
-See [infra/gcp/terraform/README.md][/infra/gcp/terraform/README.md]
+See [infra/gcp/terraform/README.md](/infra/gcp/terraform/README.md)

@@ -301,6 +301,7 @@ infra:
       k8s-staging-k8s-gsm-tools:
       k8s-staging-kas-network-proxy:
       k8s-staging-kind:
+      k8s-staging-kmm:
       k8s-staging-kops:
       k8s-staging-krm-functions:
       k8s-staging-kube-state-metrics:
@@ -309,6 +310,7 @@ infra:
       k8s-staging-kubernetes:
       k8s-staging-kubetest2:
       k8s-staging-kustomize:
+      k8s-staging-kwok:
       k8s-staging-metrics-server:
       k8s-staging-multitenancy:
       k8s-staging-networking:
@@ -331,8 +333,11 @@ infra:
       k8s-staging-slack-infra:
       k8s-staging-sp-operator:
       k8s-staging-storage-migrator:
+      k8s-staging-zeitgeist:
+      k8s-staging-tejolote:
       k8s-staging-test-infra:
       k8s-staging-tg-exporter:
       k8s-staging-gmsa-webhook:
+      k8s-staging-win-op-rdnss:
       k8s-staging-gcb-untrusted:
         managed_by: infra/gcp/bash/ensure-staging-gcb-untrusted.sh

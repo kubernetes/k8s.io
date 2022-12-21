@@ -21,6 +21,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-102333525888@firebase-rules.iam.gserviceaccount.com"
+      ],
+      "role": "roles/firebaserules.system"
+    },
+    {
+      "members": [
         "group:k8s-infra-oci-proxy-admins@kubernetes.io",
         "user:ameukam@gmail.com"
       ],

@@ -1,0 +1,14 @@
+NAME                                 TITLE
+artifactregistry.googleapis.com      Artifact Registry API
+cloudasset.googleapis.com            Cloud Asset API
+cloudbuild.googleapis.com            Cloud Build API
+cloudkms.googleapis.com              Cloud Key Management Service (KMS) API
+containerregistry.googleapis.com     Container Registry API
+iam.googleapis.com                   Identity and Access Management (IAM) API
+iamcredentials.googleapis.com        IAM Service Account Credentials API
+logging.googleapis.com               Cloud Logging API
+policytroubleshooter.googleapis.com  Policy Troubleshooter API
+pubsub.googleapis.com                Cloud Pub/Sub API
+secretmanager.googleapis.com         Secret Manager API
+storage-api.googleapis.com           Google Cloud Storage JSON API
+storage-component.googleapis.com     Cloud Storage

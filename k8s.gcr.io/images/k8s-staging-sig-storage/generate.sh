@@ -44,8 +44,6 @@ readonly images=(
     volume-data-source-validator
 )
 
-# TODO(mauriciopoppe): there's an issue with iscsiplugin described in https://github.com/kubernetes-csi/csi-driver-iscsi/issues/97
-# after running generate.sh > images.yaml we reverted the line for iscsiplugin v0.1.0
 for image in "${images[@]}"; do
     echo "- name: ${image}"
     echo "  dmap:"

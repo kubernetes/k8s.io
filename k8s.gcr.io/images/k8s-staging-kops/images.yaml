@@ -833,3 +833,146 @@
   dmap:
     "sha256:b969a40a66d7c9781b8f393c4bd1cc90828c45b0419e24bf2192be9a10fd6c44": ["1.24.1"]
 
+# 1.25.0-beta.1
+- name: dns-controller
+  dmap:
+    "sha256:68ec2ce26b297d28cbba14ba51e37c9e932dab991d14d7c8d1df0525a7666af1": ["1.25.0-beta.1"]
+- name: kops-controller
+  dmap:
+    "sha256:59130b73b40d0b7fb6ea380037bc47668ec63e8cdbc78e524e43cff8860d6559": ["1.25.0-beta.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:faf6a3a0f2994cd425be82ef780fbeb89c32b685e331572aa855c593a3f433f4": ["1.25.0-beta.1"]
+
+
+# 1.23.4
+- name: dns-controller
+  dmap:
+    "sha256:0d383e23e685f3c2f36559f4264743e7368a71f80a3aa08263d6d75fac9e7ebe": ["1.23.4"]
+- name: kops-controller
+  dmap:
+    "sha256:faa4ec7ead4f0dfa25da741b0c1eee8c0d8a5131fcbc2febb086fd6ccba84265": ["1.23.4"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:e1d8c5612ab9a04ef1b4478a616b3724f101a07f14cf618a1f592abf108ae417": ["1.23.4"]
+
+
+# 1.24.2
+- name: dns-controller
+  dmap:
+    "sha256:6d4a2279aaa16767d2bae44d5941b15499706afece763fe85f3a0ec110b3ce24": ["1.24.2"]
+- name: kops-controller
+  dmap:
+    "sha256:595110bc4a4b5fe5e900657c377bafa72fd62f68a0fa829641913840e675d1a3": ["1.24.2"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:a800854a4330c23c30dfff809c5646de545b346e09edae6f9ea98b4abfd1ff8b": ["1.24.2"]
+
+
+# 1.24.3
+- name: dns-controller
+  dmap:
+    "sha256:59162efdb0fe550fcb3cf5bd9852c9835075c26f531110f0d70276437e898178": ["1.24.3"]
+- name: kops-controller
+  dmap:
+    "sha256:3568ae29daa783eb977306fd69dce7ad335147a2aff14098bc25cf7ac95524d5": ["1.24.3"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:c9dd9560edba0cb341427ff321f65cc47a7b5290dea325608b7be05cba90565e": ["1.24.3"]
+
+
+# 1.25.0
+- name: dns-controller
+  dmap:
+    "sha256:635bf83f6dc4f6d7ee42b90c005c5ec61d9fbdd56c25eff3150e4ce5e0c77699": ["1.25.0"]
+- name: kops-controller
+  dmap:
+    "sha256:ffca50fd02426835e9b3c51d950e0726774de27934d944457a0391d8ba64a5e6": ["1.25.0"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:3a9fc2225bedd410645becec263d8e25c0f978406d46c54837422db978b8505a": ["1.25.0"]
+
+
+# 1.26.0-alpha.1
+- name: dns-controller
+  dmap:
+    "sha256:72be2f4b670e6bd4315ab7a1b1030e3a57ba56705a407b4548e283acda09fb3c": ["1.26.0-alpha.1"]
+- name: kops-controller
+  dmap:
+    "sha256:23938365594a31d0682278c65c7e3569db4b54c006759bb887d72549ebc501fc": ["1.26.0-alpha.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:e63f66baea9de7082af69cabf025a763dd40fe14864f20da6f6a59133eb7385a": ["1.26.0-alpha.1"]
+
+
+# 1.25.1
+- name: dns-controller
+  dmap:
+    "sha256:de161a0acb79c34b1969831caa832af0db09dfeeab81cb63d601707ff9893560": ["1.25.1"]
+- name: kops-controller
+  dmap:
+    "sha256:217d8c1188fbbae5c60f9e0945c20841d6c3d52742df1d9f13c35916c0ab3203": ["1.25.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:01b787817ff744c59c5cde3dc33d98310c7f88430a182c6de719390101b32616": ["1.25.1"]
+
+
+# 1.24.4
+- name: dns-controller
+  dmap:
+    "sha256:69e338c8fecab9b5b4e1d42283c04f4f52c5563d389b0af1212cedde3922ee3f": ["1.24.4"]
+- name: kops-controller
+  dmap:
+    "sha256:3f81e11338a9befb909e2f0627bbc1e8a4d78f435b69cb9bb9821cab29a8e740": ["1.24.4"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:84a9e4f188bdf1aa41c655be798e51e9940e4a7a103b7f0aa00647517da4c4b6": ["1.24.4"]
+
+
+# 1.25.2
+- name: dns-controller
+  dmap:
+    "sha256:61c78ca79a32fca190fcb907eacd17fc605cfd56788f1f98759e2e8202cd64a8": ["1.25.2"]
+- name: kops-controller
+  dmap:
+    "sha256:ab1fdf9c15f507732300981b962425771d07d486784c1ef09af6521b7cb64fbd": ["1.25.2"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:642f132196880311f14feec7eb6c29a1327d77fe312e220a2332d008ccc8d948": ["1.25.2"]
+
+
+# 1.24.5
+- name: dns-controller
+  dmap:
+    "sha256:05abcbfd72484fb98053f49768618cba0459ea95709f463a1a9d0ab342428761": ["1.24.5"]
+- name: kops-controller
+  dmap:
+    "sha256:acc2de52762ec28001f60c767c79697a6bc89efceab5e23672f87b9f24cca34c": ["1.24.5"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:fa9eb2f028fcf709a536020f057b0b2391b7776211f0def972e413a2175f15f2": ["1.24.5"]
+
+
+# 1.25.3
+- name: dns-controller
+  dmap:
+    "sha256:4fb0caa005dc9732704ce410e8b5c615953a86198b4669f9fb48f2fce6a162f8": ["1.25.3"]
+- name: kops-controller
+  dmap:
+    "sha256:f820e796dbf72b8cbc1e54b31be81abdc044b7ff7beaa91f5e69dd17fb0eb2aa": ["1.25.3"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:fad595f1a97a17e6774d46d0c6cdf7762572df9b28ee39385d5456ce5f44ee49": ["1.25.3"]
+
+
+# 1.26.0-alpha.2
+- name: dns-controller
+  dmap:
+    "sha256:15ad008f61461562326d7f18206db0b27bac23379bad425be786dac471a0e7fc": ["1.26.0-alpha.2"]
+- name: kops-controller
+  dmap:
+    "sha256:5a3f88d448ea5b686dca4decfab91090c053837cd1ac68a27cd537c1463bd95b": ["1.26.0-alpha.2"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:699220329e6630ec8dcc0f96b8f0a5b0ace9fcc57cb96f2c9d6e39a828100cfa": ["1.26.0-alpha.2"]
+

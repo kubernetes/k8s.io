@@ -1,4 +1,5 @@
 NAME                              TITLE
+artifactregistry.googleapis.com   Artifact Registry API
 containeranalysis.googleapis.com  Container Analysis API
 containerregistry.googleapis.com  Container Registry API
 pubsub.googleapis.com             Cloud Pub/Sub API

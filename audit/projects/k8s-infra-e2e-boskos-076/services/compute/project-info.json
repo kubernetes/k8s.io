@@ -178,8 +178,17 @@
     {
       "limit": 150,
       "metric": "GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES"
+    },
+    {
+      "limit": 150,
+      "metric": "GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES"
+    },
+    {
+      "limit": 150,
+      "metric": "GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES"
     }
   ],
   "selfLink": "https://www.googleapis.com/compute/v1/projects/k8s-infra-e2e-boskos-076",
+  "vmDnsSetting": "GLOBAL_DEFAULT",
   "xpnProjectStatus": "UNSPECIFIED_XPN_PROJECT_STATUS"
 }

@@ -34,7 +34,6 @@ aliases:
     - neolit123
     - vincepri
   sig-contributor-experience-leads:
-    - alisondy
     - cblecker
     - mrbobbytables
     - nikhita
@@ -74,6 +73,7 @@ aliases:
     - justaugustus
     - puerco
     - saschagrunert
+    - Verolop
   sig-scalability-leads:
     - marseel
     - shyamjvs
@@ -96,7 +96,10 @@ aliases:
   sig-testing-leads:
     - BenTheElder
     - alvaroaleman
+    - aojea
     - cjwagner
+    - michelle192837
+    - pohly
     - spiffxp
     - stevekuznetsov
   sig-ui-leads:
@@ -151,11 +154,11 @@ aliases:
     - mylesagray
     - phenixblue
   committee-code-of-conduct:
-    - celestehorgan
-    - cpanato
-    - karenhchu
-    - palnabarun
-    - vllry
+    - detiber
+    - endocrimes
+    - hlipsig
+    - jeremyrickard
+    - salaxander
   committee-security-response:
     - cjcullen
     - enj
@@ -165,12 +168,12 @@ aliases:
     - tabbysable
     - tallclair
   committee-steering:
+    - BenTheElder
     - cblecker
-    - dims
+    - cpanato
     - justaugustus
-    - liggitt
     - mrbobbytables
-    - parispittman
+    - palnabarun
     - tpepper
 ## BEGIN CUSTOM CONTENT
   build-admins:
@@ -229,28 +232,27 @@ aliases:
     - Verolop
   release-engineering-approvers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
-    - jeremyrickard # subproject owner / SIG Technical Lead
+    - jeremyrickard # subproject owner / Release Manager / SIG Chair
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - palnabarun # Release Manager
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
-    - Verolop # Release Manager
+    - Verolop # subproject owner / Release Manager / SIG Technical Lead
     - xmudrii # Release Manager
   release-engineering-reviewers:
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
-    - jeremyrickard # subproject owner / SIG Technical Lead
+    - jeremyrickard # subproject owner / Release Manager / SIG Chair
     - justaugustus # subproject owner / Release Manager / SIG Chair
     - palnabarun # Release Manager
     - puerco # subproject owner / Release Manager / SIG Technical Lead
     - saschagrunert # subproject owner / Release Manager / SIG Chair
-    - Verolop # Release Manager
+    - Verolop # subproject owner / Release Manager / SIG Technical Lead
     - xmudrii # Release Manager
   # business hours oncall for prow etc (https://go.k8s.io/oncall)
   test-infra-oncall:
     - chaodaiG
     - chases2
     - cjwagner
-    - fejta
     - listx
     - michelle192837
     - mpherman2

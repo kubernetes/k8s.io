@@ -8,8 +8,10 @@ groups:
     owners:
       - augustus@cisco.com
       - bburns@microsoft.com
+      - bentheelder@google.com
       - briangrant@google.com
       - cblecker@gmail.com
+      - ctadeu@gmail.com
       - davanum@gmail.com
       - decarr@redhat.com
       - joe.k8s@bedafamily.com
@@ -19,6 +21,7 @@ groups:
       - liggitt@google.com
       - michelle.noorali@gmail.com
       - nikhitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
       - paris.pittman@gmail.com
       - phil.wittrock@gmail.com
       - quintonh@gmail.com
@@ -39,12 +42,12 @@ groups:
       ReconcileMembers: "true"
     owners:
       - augustus@cisco.com
+      - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
+      - ctadeu@gmail.com
       - k8s@auggie.dev
       - killen.bob@gmail.com
-      - liggitt@google.com
-      - paris.pittman@gmail.com
+      - pal.nabarun95@gmail.com
       - tpepper@vmware.com
 
   - email-id: steering@kubernetes.io
@@ -64,12 +67,12 @@ groups:
       ReconcileMembers: "false"
     owners:
       - augustus@cisco.com
+      - bentheelder@google.com
       - cblecker@gmail.com
-      - davanum@gmail.com
+      - ctadeu@gmail.com
       - k8s@auggie.dev
       - killen.bob@gmail.com
-      - liggitt@google.com
-      - paris.pittman@gmail.com
+      - pal.nabarun95@gmail.com
       - tpepper@vmware.com
     managers:
       - ihor.dvoretskyi@gmail.com
@@ -85,6 +88,6 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - alison@alisondowdney.com
-      - josh@berkus.org
+      - kaslinfields@gmail.com
+      - davanum@gmail.com
       - noah@coderanger.net

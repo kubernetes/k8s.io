@@ -15,22 +15,21 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - alison@alisondowdney.com
       - ihor@cncf.io
       - killen.bob@gmail.com
-      - paris.pittman@gmail.com
     managers:
-      - pal.nabarun95@gmail.com
       - ameukam@gmail.com
-      - matthewbbroberg@gmail.com
-      - jrosland@vmware.com
+      - pal.nabarun95@gmail.com
       - rajula96reddy@gmail.com
     members:
-      - dgiles@linuxfoundation.org
-      - jberkus@redhat.com
+      - balves@linuxfoundation.org
       - chris@chrisshort.net
-      - samudralavamshi@gmail.com
+      - dgiles@linuxfoundation.org
+      - harshitasao@gmail.com
+      - jberkus@redhat.com
       - puja@giantswarm.io
+      - rajaskakodkar16@gmail.com
+      - samudralavamshi@gmail.com
 
   - email-id: dev@kubernetes.io
     name: dev
@@ -52,7 +51,6 @@ groups:
     owners:
       - contributors@kubernetes.io
       - spiffxp@gmail.com
-      - paris.pittman@gmail.com
       - killen.bob@gmail.com
       - davanum@gmail.com
     managers:
@@ -100,11 +98,10 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - paris.pittman@gmail.com
+      - contributors@kubernetes.io
       - cblecker@gmail.com
     managers:
       - alarcj137@gmail.com
-      - contributors@kubernetes.io
       - dylan.graham@gmail.com
       - idealhack@gmail.com
       - ihor@cncf.io
@@ -139,7 +136,6 @@ groups:
     owners:
       - alison@alisondowdney.com
       - killen.bob@gmail.com
-      - paris.pittman@gmail.com
     members:
       - jberkus@redhat.com
       - chris@chrisshort.net

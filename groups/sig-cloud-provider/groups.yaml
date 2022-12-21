@@ -64,12 +64,14 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - aojea@google.com
       - msau@google.com
       - saadali@google.com
       - wfender@google.com
       - mattcary@google.com
       - saikatroyc@google.com
       - jinxu@google.com
+      - andrewsy@google.com
 
   - email-id: k8s-infra-staging-cloud-provider-ibm@kubernetes.io
     name: k8s-infra-staging-cloud-provider-ibm

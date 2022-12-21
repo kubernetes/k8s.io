@@ -99,6 +99,9 @@ class RedirTest(HTTPTestCase):
     def assert_temp_redirect(self, partial_url, expected_loc, **kwargs):
         self.assert_multischeme_redirect(partial_url, expected_loc, 302, **kwargs)
 
+    def assert_permanent_redirect(self, partial_url, expected_loc, **kwargs):
+        self.assert_multischeme_redirect(partial_url, expected_loc, 301, **kwargs)
+
     def test_main_urls(self):
         # Main redirects, HTTPS to avoid protocol upgrade redirect.
         path = '/%s' % rand_num()
@@ -389,6 +392,12 @@ class RedirTest(HTTPTestCase):
             self.assert_temp_redirect(base + '/$ver/$path',
                 'https://github.com/kubernetes/kubernetes/tree/$ver/$path',
                 ver=rand_num(), path=rand_num())
+
+    def test_slack(self):
+        for base in ('slack.k8s.io', 'slack.kubernetes.io'):
+            self.assert_permanent_redirect(base, 'https://communityinviter.com/apps/kubernetes/community')
+            self.assert_permanent_redirect(base + '/$path', 'https://communityinviter.com/apps/kubernetes/community',
+                                      path=rand_num())
 
     def test_submit_queue(self):
         for base in ('submit-queue.k8s.io', 'submit-queue.kubernetes.io'):

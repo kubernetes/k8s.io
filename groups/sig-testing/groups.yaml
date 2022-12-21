@@ -19,6 +19,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
     owners:
+    - amerai@google.com
     - bentheelder@google.com
     - skuznets@redhat.com
     - spiffxp@gmail.com
@@ -159,12 +160,6 @@ groups:
     - thejoycekung@gmail.com
     - neolit123@gmail.com
     - philjohnson96@gmail.com
-    # release-ci-signal
-    - ania0102@gmail.com # 1.22 CI Signal Shadow
-    - max@koerbaecher.io # 1.22 CI Signal Lead
-    - ramses.green.2@gmail.com # 1.22 CI Signal Shadow
-    - salahi.hossein@gmail.com # 1.22 CI Signal Shadow
-    - soniasingla.1812@gmail.com # 1.22 CI Signal Shadow
 
   #
   # sig-testing k8s-infra owners
@@ -208,15 +203,15 @@ groups:
     - amerai@google.com
     - chaodai@google.com
     - colew@google.com
-    - fejta@google.com
     - linusa@google.com # GitHub: listx
     - mpherman@google.com
     - slchase@google.com
     # sig-testing leads
+    # - amerai@google.com # already part of test-infra-oncall
     - bentheelder@google.com
     - skuznets@redhat.com
-    - spiffxp@google.com
     - spiffxp@gmail.com
+    - spiffxp@google.com
     # sig-k8s-infra members
     - ameukam@gmail.com
     - cblecker@gmail.com

@@ -153,6 +153,20 @@ groups:
       - justinsb@google.com
       - sig-k8s-infra-leads@kubernetes.io
 
+  # Owners of the GCP projects:
+  # - k8s-infra-porche (pending)
+  # - k8s-infra-porche-prod (pending)
+  - email-id: k8s-infra-porche-admins@kubernetes.io
+    name: k8s-infra-porche-admins
+    description: |-
+      ACL for porche admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - justinsb@google.com
+      - sig-k8s-infra-leads@kubernetes.io
+
   # owners of the k8s-infra-sandbox-capg project, working on cluster-api provider for GCP
   - email-id: k8s-infra-sandbox-capg@kubernetes.io
     name: k8s-infra-sandbox-capg
@@ -230,20 +244,19 @@ groups:
   - email-id: k8s-infra-gcp-auditors@kubernetes.io
     name: k8s-infra-gcp-auditors
     description: |-
-      granted read-only access to all GCP infrastructure with the kubernetes.io
+      grants read-only access to all GCP infrastructure with the kubernetes.io
       GCP organization, excluding sensitive/secret values
 
       access granted via custom organization role audit.viewer
     settings:
       ReconcileMembers: "true"
     members:
-      - cblecker@gmail.com
-      - davanum@gmail.com
+      - cy@borg.dev
       - ihor@cncf.io
-      - jdagostino2@gmail.com
+      - jonjohnson@google.com
       - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
-      - sj7trunks@pendulus.net
+      - steering@kubernetes.io
 
   #
   # k8s-infra org-wide infrastructure admin groups
@@ -361,15 +374,15 @@ groups:
       ReconcileMembers: "true"
     members:
       - ihor@cncf.io
-      - jdagostino2@gmail.com
       - justinsb@google.com
       - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
+      - steering@kubernetes.io
 
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
     name: k8s-infra-gcp-org-admins
     description: |-
-      granted owner access to the kubernetes.io GCP organization, as well as
+      grants owner access to the kubernetes.io GCP organization, as well as
       additional privileges necessary for billing and admin purposes
 
       access granted via custom organization role organization.admin
