@@ -999,4 +999,3 @@
 - name: kube-apiserver-healthcheck
   dmap:
     "sha256:3c92794ac111c30633738b1943eb4ac183ba7655dc946f6a53bd46a60d6623e3": ["1.27.0-alpha.1"]
-
