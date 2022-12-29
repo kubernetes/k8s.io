@@ -41,6 +41,7 @@
     "sha256:f1c25991bac2fbb7f5fcf91ed9438df31e30edee6bed5a780464238aa09ad24c": [ "v2.6.0" ]
     "sha256:5a17c63e82c5268d92ac6f1fe7cf6eae9c3dcf8c16a8290536a0bc92b1e2ae45": [ "v2.6.1" ]
     "sha256:a13bff2ed69af0cf4270f0cf47bdedf75a56c095cd95b91195ae6c713a9b1845": [ "v2.6.2" ]
+    "sha256:4a4cae5118c4404e35d66059346b7fa0835d7e6319ff45ed73f4bba335cf5183": [ "v2.7.0" ]
 - name: csi-provisioner
   dmap:
     "sha256:438c04395d03fa671f8656d6f951332516754e330d1ac4f9588df1ba2870a366": [ "v1.4.0" ]
@@ -142,6 +143,7 @@
     "sha256:406f59599991916d2942d8d02f076d957ed71b541ee19f09fc01723a6e6f5932": [ "v2.6.0" ]
     "sha256:933940f13b3ea0abc62e656c1aa5c5b47c04b15d71250413a6b821bd0c58b94e": [ "v2.7.0" ]
     "sha256:cacee2b5c36dd59d4c7e8469c05c9e4ef53ecb2df9025fa8c10cdaf61bce62f0": [ "v2.8.0" ]
+    "sha256:2b10b24dafdc3ba94a03fc94d9df9941ca9d6a9207b927f5dfd21d59fbe05ba0": [ "v2.9.0" ]
 - name: local-volume-provisioner
   dmap:
     "sha256:63859b69f9dfc0858e5d8746218e435c36e205c041fb6d8baf71ad132e24737f": [ "v2.4.0" ]
