@@ -1,8 +1,17 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
+# Match https://github.com/kubernetes-sigs/apiserver-network-proxy/blob/master/OWNERS
+
+reviewers:
+  - jefftree
+  - tallclair
+
 approvers:
-  - cheftako
-  - mcrute
   - anfernee
+  - cheftako
+  - jkh52
+
+emeritus_approvers:
   - andrewsykim
   - caesarxuchao
+  - mcrute
