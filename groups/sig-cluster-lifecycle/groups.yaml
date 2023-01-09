@@ -269,9 +269,8 @@ groups:
     members:
       - ctadeu@gmail.com
       - davanum@gmail.com
-      - detiber@gmail.com
       - justinsb@google.com
-      - prignanov@vmware.com
+      - richmcase@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-nested@kubernetes.io
     name: k8s-infra-staging-cluster-api-nested
