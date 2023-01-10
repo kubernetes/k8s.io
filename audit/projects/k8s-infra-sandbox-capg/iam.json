@@ -40,7 +40,6 @@
     },
     {
       "members": [
-        "deleted:serviceAccount:richard-capg@k8s-infra-sandbox-capg.iam.gserviceaccount.com?uid=100171940266561657278",
         "group:k8s-infra-sandbox-capg@kubernetes.io",
         "user:spiffxp@google.com"
       ],

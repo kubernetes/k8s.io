@@ -1,4 +1,5 @@
 [
   "projects/k8s-staging-build-image/logs/cloudaudit.googleapis.com%2Factivity",
+  "projects/k8s-staging-build-image/logs/cloudaudit.googleapis.com%2Fdata_access",
   "projects/k8s-staging-build-image/logs/cloudbuild"
 ]
