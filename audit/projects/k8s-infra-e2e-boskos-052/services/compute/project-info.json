@@ -188,7 +188,7 @@
       "metric": "GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES"
     },
     {
-      "limit": 750,
+      "limit": 150,
       "metric": "GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES"
     }
   ],
