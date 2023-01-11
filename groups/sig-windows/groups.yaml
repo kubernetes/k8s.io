@@ -56,6 +56,18 @@ groups:
       - jsturtevant@gmail.com
       - marosset@microsoft.com
 
+  - email-id: k8s-infra-staging-win-svc-proxy@kubernetes.io
+    name: k8s-infra-staging-win-svc-proxy
+    description: |-
+      ACL for staging Windows Service Proxy artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aknabben@vmware.com
+      - jayunit100.apache@gmail.com
+      - jsturtevant@gmail.com
+      - marosset@microsoft.com
+
   #
   # k8s-infra owners for sig-owned subprojects
   #
