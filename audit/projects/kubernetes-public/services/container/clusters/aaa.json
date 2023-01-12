@@ -275,6 +275,7 @@
         "shieldedInstanceConfig": {
           "enableIntegrityMonitoring": true
         },
+        "windowsNodeConfig": {},
         "workloadMetadataConfig": {
           "mode": "GKE_METADATA"
         }
