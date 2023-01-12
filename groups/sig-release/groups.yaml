@@ -394,7 +394,7 @@ groups:
       - hehim@drewhagen.dev # 1.27 CI Signal Shadow
       - mehabhalodiya@gmail.com # 1.27 CI Signal Shadow
       - nng.grace@gmail.com # 1.27 CI Signal Shadow
-      
+
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
