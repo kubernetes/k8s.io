@@ -316,6 +316,10 @@ kind.sigs:
 kwok.sigs:
   type: CNAME
   value: k8s-kwok.netlify.app.
+# https://github.com/kubernetes-sigs/kernel-module-management docs (@qbarrand @ybettan @mrunalp @yevgeny-shnaidman)
+kmm.sigs:
+  type: CNAME
+  value: kubernetes-sigs-kmm.netlify.app.
 # https://github.com/kubernetes-sigs/prow docs (@alvaroaleman, @cblecker, @cjwagner, @fejta, @stevekuznetsov, @petr-muller)
 docs.prow:
   type: CNAME
