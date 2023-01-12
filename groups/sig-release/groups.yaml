@@ -320,6 +320,7 @@ groups:
       - m.r.boxell@gmail.com # 1.27 Docs Lead
       - harsha2k4@gmail.com # 1.27 Release Notes Lead
       - harshitasao@gmail.com # 1.27 Communications Lead
+      - lauralorenz@google.com # 1.27 CI Signal Lead
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
