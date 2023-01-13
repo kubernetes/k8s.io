@@ -316,6 +316,10 @@ groups:
     members:
       - sig-release-leads@kubernetes.io
       - marosset@microsoft.com # 1.27 Enhancements Lead
+      - atharvashinde179@gmail.com # 1.27 Enhancements Shadow
+      - baesangwoo99@googlemail.com # 1.27 Enhancements Shadow
+      - fsmunoz@gmail.com # 1.27 Enhancements Shadow
+      - ninapolshakova@gmail.com # 1.27 Enhancements Shadow
       - neoaggelos@gmail.com # 1.27 Bug Triage Lead
       - m.r.boxell@gmail.com # 1.27 Docs Lead
       - harsha2k4@gmail.com # 1.27 Release Notes Lead
@@ -343,6 +347,10 @@ groups:
       - priyankasaggu11929@gmail.com # 1.27 Release Lead Shadow
       - salahi.hossein@gmail.com # 1.27 Release Lead Shadow
       - hebaelayoty@gmail.com # 1.27 Release Lead Shadow
+      - atharvashinde179@gmail.com # 1.27 Enhancements Shadow
+      - baesangwoo99@googlemail.com # 1.27 Enhancements Shadow
+      - fsmunoz@gmail.com # 1.27 Enhancements Shadow
+      - ninapolshakova@gmail.com # 1.27 Enhancements Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
@@ -422,6 +430,10 @@ groups:
       - xandergrzyw@gmail.com # 1.27 Release Lead
       - salahi.hossein@gmail.com # 1.27 Release Lead Shadow
       - marosset@microsoft.com # 1.27 Enhancements Lead
+      - atharvashinde179@gmail.com # 1.27 Enhancements Shadow
+      - baesangwoo99@googlemail.com # 1.27 Enhancements Shadow
+      - fsmunoz@gmail.com # 1.27 Enhancements Shadow
+      - ninapolshakova@gmail.com # 1.27 Enhancements Shadow
 
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
     name: k8s-infra-staging-zeitgeist
