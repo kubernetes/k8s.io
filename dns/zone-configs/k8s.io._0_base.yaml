@@ -436,8 +436,3 @@ cloud-provider-azure.sigs:
 network-policy-api.sigs:
   type: CNAME
   value: kubernetes-sigs-network-policy-api.netlify.app.
-
-# verification for netlify support
-verified-for-netlify:
-  type: TXT
-  value: "127395"
