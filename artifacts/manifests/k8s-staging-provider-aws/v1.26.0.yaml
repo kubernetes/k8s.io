@@ -1,0 +1,5 @@
+files:
+- name: v1.26.0/cloud-provider-aws-1.26.0.tar.gz
+  sha256: 75ede52bf2975928f87ae04e441fd28f1af5a610bac52548841cbb91caa3c107
+- name: v1.26.0/cloud-provider-aws-1.26.0.zip
+  sha256: f301370a1647a4e9fbcb44e9cd51a5123776652398def2897e26d4cef287f510
