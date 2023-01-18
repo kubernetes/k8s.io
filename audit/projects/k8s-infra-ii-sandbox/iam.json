@@ -100,7 +100,6 @@
     {
       "members": [
         "group:k8s-infra-ii-coop@kubernetes.io",
-        "serviceAccount:bobymcbobs@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
         "user:ameukam@gmail.com"
       ],
       "role": "roles/owner"
