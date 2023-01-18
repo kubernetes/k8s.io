@@ -174,6 +174,23 @@ groups:
       - seansnowwhite@gmail.com
       - tobiasgiese@gmail.com
 
+  - email-id: sig-cluster-lifecycle-cluster-api-openstack-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-openstack-alerts
+    description: |-
+
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - jichenjc@cn.ibm.com
+      - mbooth@redhat.com
+      - seansnowwhite@gmail.com
+      - tobiasgiese@gmail.com
+
   - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
     name: k8s-infra-staging-capi-vsphere
     description: |-
