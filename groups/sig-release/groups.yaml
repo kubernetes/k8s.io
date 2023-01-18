@@ -294,6 +294,7 @@ groups:
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
+      - cncf-aws-admins@lists.cncf.io
 
   - email-id: release-team@kubernetes.io
     name: release-team
