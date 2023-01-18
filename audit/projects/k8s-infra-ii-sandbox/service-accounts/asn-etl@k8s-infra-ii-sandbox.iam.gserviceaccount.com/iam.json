@@ -2,7 +2,7 @@
   "bindings": [
     {
       "members": [
-        "user:bb@ii.coop"
+        "deleted:user:bb@ii.coop?uid=518178843748380928467"
       ],
       "role": "roles/owner"
     }
