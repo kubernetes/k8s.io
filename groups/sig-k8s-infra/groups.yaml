@@ -253,6 +253,7 @@ groups:
     members:
       - cy@borg.dev
       - ihor@cncf.io
+      - jeefy@cncf.io
       - jonjohnson@google.com
       - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
