@@ -306,6 +306,7 @@ infra:
       k8s-staging-krm-functions:
       k8s-staging-kube-state-metrics:
       k8s-staging-kubeadm:
+      k8s-staging-kubebuilder:
       k8s-staging-kueue:
       k8s-staging-kubernetes:
       k8s-staging-kubetest2:
