@@ -320,6 +320,10 @@ kwok.sigs:
 kmm.sigs:
   type: CNAME
   value: kubernetes-sigs-kmm.netlify.app.
+# https://github.com/kubernetes-sigs/node-feature-discovery docs (@yevgeny-shnaidman @marquiz)
+nfd.sigs:
+  type: CNAME
+  value: kubernetes-sigs-nfd.netlify.app.
 # https://github.com/kubernetes-sigs/prow docs (@alvaroaleman, @cblecker, @cjwagner, @fejta, @stevekuznetsov, @petr-muller)
 docs.prow:
   type: CNAME
