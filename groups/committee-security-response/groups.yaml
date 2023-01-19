@@ -43,7 +43,7 @@ groups:
       - kubernetes-security@docker.com
       - kubernetes-security@huawei.com
       - kubernetes-security@service.aliyun.com
-      - kubernetes-security@service.microsoft.com
+      - kube-security@microsoft.com
       - kubernetes-security@weave.works
       - mke-security@mesosphere.com
       - release-managers-private@kubernetes.io
