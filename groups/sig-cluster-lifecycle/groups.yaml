@@ -304,6 +304,23 @@ groups:
       - davanum@gmail.com
       - richmcase@gmail.com
 
+  - email-id: sig-cluster-lifecycle-cluster-api-do-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-do-alerts
+    description: |-
+      Receive alerts for CAPDO failing tests
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - ahmadnurus.sh@gmail.com
+      - ctadeu@gmail.com
+      - jeremylevanmorris@gmail.com
+      - ttr314@googlemail.com
+
   - email-id: k8s-infra-staging-cluster-api-nested@kubernetes.io
     name: k8s-infra-staging-cluster-api-nested
     description: |-
