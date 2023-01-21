@@ -334,7 +334,7 @@ infra:
       k8s-staging-slack-infra:
       k8s-staging-sp-operator:
       k8s-staging-storage-migrator:
-      k8s-staging-windows-svc-proxy:
+      k8s-staging-win-svc-proxy:
       k8s-staging-zeitgeist:
       k8s-staging-tejolote:
       k8s-staging-test-infra:

@@ -1,6 +1,6 @@
 # google group for gcr.io/k8s-staging-windows-svc-proxy is kubernetes-sig-windows-leads@googlegroups.com
 registries:
-- name: gcr.io/k8s-staging-windows-svc-proxy
+- name: gcr.io/k8s-staging-win-svc-proxy
   src: true
 - name: us.gcr.io/k8s-artifacts-prod/windows-service-proxy
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
