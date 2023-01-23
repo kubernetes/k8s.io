@@ -1,18 +1,18 @@
-gs://artifacts.k8s-staging-addon-manager.appspot.com/ :
+gs://k8s-staging-win-svc-proxy-gcb/ :
 	Storage class:			STANDARD
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		Present
+	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	None
+	Lifecycle configuration:	Present
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			Wed, 30 Sep 2020 15:49:57 GMT
-	Time updated:			Sat, 21 Jan 2023 02:07:11 GMT
-	Metageneration:			29
+	Time created:			Sat, 21 Jan 2023 02:12:04 GMT
+	Time updated:			Sat, 21 Jan 2023 02:12:57 GMT
+	Metageneration:			10
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
