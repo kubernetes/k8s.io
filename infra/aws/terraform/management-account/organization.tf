@@ -21,5 +21,12 @@ limitations under the License.
 
 resource "aws_organizations_organization" "default" {
   aws_service_access_principals = var.aws_service_access_principals
-  feature_set                   = "ALL"
+
+  enabled_policy_types = [
+    "AISERVICES_OPT_OUT_POLICY",
+    "SERVICE_CONTROL_POLICY",
+    "TAG_POLICY",
+  ]
+
+  feature_set = "ALL"
 }

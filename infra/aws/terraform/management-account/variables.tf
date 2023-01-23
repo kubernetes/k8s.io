@@ -17,7 +17,16 @@ limitations under the License.
 variable "aws_service_access_principals" {
   type = list(any)
   default = [
-    "account.amazonaws.com"
+    "account.amazonaws.com",
+    "cloudtrail.amazonaws.com",
+    "config.amazonaws.com",
+    "config-multiaccountsetup.amazonaws.com",
+    "health.amazonaws.com",
+    "ram.amazonaws.com",
+    "reporting.trustedadvisor.amazonaws.com",
+    "securityhub.amazonaws.com",
+    "servicequotas.amazonaws.com",
+    "tagpolicies.tag.amazonaws.com"
   ]
   description = "List of service access principals for the organization"
 }
