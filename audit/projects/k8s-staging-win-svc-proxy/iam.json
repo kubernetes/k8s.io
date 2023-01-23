@@ -2,21 +2,21 @@
   "bindings": [
     {
       "members": [
-        "serviceAccount:103321906213@cloudbuild.gserviceaccount.com",
+        "serviceAccount:77851067088@cloudbuild.gserviceaccount.com",
         "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.builder"
     },
     {
       "members": [
-        "group:k8s-infra-staging-addon-manager@kubernetes.io",
-        "serviceAccount:gcb-image-builder@k8s-staging-addon-manager.iam.gserviceaccount.com"
+        "group:k8s-infra-staging-win-svc-proxy@kubernetes.io",
+        "serviceAccount:gcb-image-builder@k8s-staging-win-svc-proxy.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.editor"
     },
     {
       "members": [
-        "serviceAccount:service-103321906213@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+        "serviceAccount:service-77851067088@gcp-sa-cloudbuild.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.serviceAgent"
     },
@@ -28,26 +28,26 @@
     },
     {
       "members": [
-        "serviceAccount:service-103321906213@containerregistry.iam.gserviceaccount.com"
+        "serviceAccount:service-77851067088@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/containerregistry.ServiceAgent"
     },
     {
       "members": [
-        "serviceAccount:service-103321906213@gcp-sa-containerscanning.iam.gserviceaccount.com"
+        "serviceAccount:service-77851067088@gcp-sa-pubsub.iam.gserviceaccount.com"
       ],
-      "role": "roles/containerscanning.ServiceAgent"
+      "role": "roles/pubsub.serviceAgent"
     },
     {
       "members": [
-        "group:k8s-infra-staging-addon-manager@kubernetes.io"
+        "group:k8s-infra-staging-win-svc-proxy@kubernetes.io"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"
     },
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "group:k8s-infra-staging-addon-manager@kubernetes.io"
+        "group:k8s-infra-staging-win-svc-proxy@kubernetes.io"
       ],
       "role": "roles/viewer"
     }
