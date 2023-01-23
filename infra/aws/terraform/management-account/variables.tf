@@ -17,10 +17,15 @@ limitations under the License.
 variable "aws_service_access_principals" {
   type = list(any)
   default = [
+    "access-analyzer.amazonaws.com",
     "account.amazonaws.com",
     "cloudtrail.amazonaws.com",
+    "compute-optimizer.amazonaws.com",
     "config.amazonaws.com",
     "config-multiaccountsetup.amazonaws.com",
+    "detective.amazonaws.com",
+    "fms.amazonaws.com",
+    "guardduty.amazonaws.com",
     "health.amazonaws.com",
     "ram.amazonaws.com",
     "reporting.trustedadvisor.amazonaws.com",
