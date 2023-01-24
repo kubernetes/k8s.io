@@ -178,8 +178,6 @@ groups:
       - ctadeu@gmail.com
       - davanum@gmail.com
       - richmcase@gmail.com
-      - rikiessential1@gmail.com
-      - subhasmitaswain232@gmail.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
