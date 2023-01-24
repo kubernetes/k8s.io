@@ -367,6 +367,7 @@ groups:
       - saschagrunert@gmail.com
     managers:
       - xandergrzyw@gmail.com # 1.27 Release Lead
+      - james.laverack@jetstack.io # 1.27 EA
     members:
       - kat.cosgrove@gmail.com # 1.27 Release Lead Shadow
       - priyankasaggu11929@gmail.com # 1.27 Release Lead Shadow
