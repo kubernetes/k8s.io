@@ -17,34 +17,34 @@ limitations under the License.
 module "security_audit" {
   source = "../modules/org-account"
 
-  account_name = "k8s-infra-security-audit"
-  email = "k8s-infra-aws-admins+security-audit@kubernetes.io"
+  account_name               = "k8s-infra-security-audit"
+  email                      = "k8s-infra-aws-admins+security-audit@kubernetes.io"
   iam_user_access_to_billing = "ALLOW"
-  parent_id = aws_organizations_organizational_unit.security.id
+  parent_id                  = aws_organizations_organizational_unit.security.id
 }
 
 module "security_incident_response" {
   source = "../modules/org-account"
 
   account_name = "k8s-infra-security-incident-response"
-  email = "k8s-infra-aws-admins+security-incident-response@kubernetes.io"
-  parent_id = aws_organizations_organizational_unit.security.id
+  email        = "k8s-infra-aws-admins+security-incident-response@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.security.id
 }
 
 module "security_logs" {
   source = "../modules/org-account"
 
-  account_name = "k8s-infra-security-logs"
-  email = "k8s-infra-aws-admins+security-logs@kubernetes.io"
+  account_name               = "k8s-infra-security-logs"
+  email                      = "k8s-infra-aws-admins+security-logs@kubernetes.io"
   iam_user_access_to_billing = "ALLOW"
-  parent_id = aws_organizations_organizational_unit.security.id
+  parent_id                  = aws_organizations_organizational_unit.security.id
 }
 
 module "infra_shared_services" {
   source = "../modules/org-account"
 
-  account_name = "k8s-infra-shared-services"
-  email = "k8s-infra-aws-admins+infra-shared-services@kubernetes.io"
+  account_name               = "k8s-infra-shared-services"
+  email                      = "k8s-infra-aws-admins+infra-shared-services@kubernetes.io"
   iam_user_access_to_billing = "ALLOW"
-  parent_id = aws_organizations_organizational_unit.infrastructure.id
+  parent_id                  = aws_organizations_organizational_unit.infrastructure.id
 }
