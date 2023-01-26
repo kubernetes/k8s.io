@@ -27,7 +27,7 @@ module "security_incident_response" {
   source = "../modules/org-account"
 
   account_name = "k8s-infra-security-incident-response"
-  email = "k8s-infra-aws-admins+incident-response@kubernetes.io"
+  email = "k8s-infra-aws-admins+security-incident-response@kubernetes.io"
   parent_id = aws_organizations_organizational_unit.security.id
 }
 

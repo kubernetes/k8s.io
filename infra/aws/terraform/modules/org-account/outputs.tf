@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 
-output "account" {
+output "account_id" {
   description = "An AWS organization account resource"
-  value       = aws_organizations_account.this
+  value       = aws_organizations_account.this.id
 }
