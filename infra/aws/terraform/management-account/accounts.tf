@@ -39,3 +39,12 @@ module "security_logs" {
   iam_user_access_to_billing = "ALLOW"
   parent_id = aws_organizations_organizational_unit.security.id
 }
+
+module "infra_shared_services" {
+  source = "../modules/org-account"
+
+  account_name = "k8s-infra-shared-services"
+  email = "k8s-infra-aws-admins+infra-shared-services@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id = aws_organizations_organizational_unit.infrastructure.id
+}
