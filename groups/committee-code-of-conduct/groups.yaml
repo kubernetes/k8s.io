@@ -12,3 +12,17 @@ groups:
       - lancashiredanielle@gmail.com
       - xandergrzyw@gmail.com
       - detiber@gmail.com
+  - email-id: conduct-emeritus@kubernetes.io
+    name: conduct-emeritus
+    description: |-
+      Private list for current and emeritus members of the Code of Conduct Committee
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - hilliary.lipsig@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - lancashiredanielle@gmail.com
+      - xandergrzyw@gmail.com
+      - detiber@gmail.com
+    members:
+      - tpepper@vmware.com

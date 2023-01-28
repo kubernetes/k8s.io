@@ -2,6 +2,7 @@ restrictions:
   - path: "committee-code-of-conduct/groups.yaml"
     allowedGroups:
       - "^conduct@kubernetes.io$"
+      - "^conduct-emeritus@kubernetes.io$"
   - path: "committee-security-response/groups.yaml"
     allowedGroups:
       - "^distributors-announce@kubernetes.io$"
