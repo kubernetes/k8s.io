@@ -136,7 +136,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - security@kubernetes.io
-      - mikedanese@google.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
