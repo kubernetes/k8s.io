@@ -70,6 +70,8 @@ groups:
       - hebaelayoty@gmail.com # 1.27 Release Lead Shadow
       - salahi.hossein@gmail.com # 1.27 Release Lead Shadow
       - james.laverack@jetstack.io # 1.27 Emeritus Advisor
+      - nng.grace@gmail.com # Release Manager Associate
+      - ramses.green.2@gmail.com # Release Manager Associate
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
@@ -260,8 +262,10 @@ groups:
       - hebaelayoty@gmail.com # 1.27 Release Lead Shadow
       - jameswangel@gmail.com
       - joseph.r.sandoval@gmail.com
+      - nng.grace@gmail.com # Release Manager Associate
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
+      - ramses.green.2@gmail.com # Release Manager Associate
       - salahi.hossein@gmail.com # 1.27 Release Lead Shadow
       - spiffxp@google.com
       - xandergrzyw@gmail.com # 1.27 Release Lead
