@@ -236,6 +236,8 @@ restrictions:
       - "^sig-k8s-infra@kubernetes.io$"
       - "^sig-k8s-infra-leads@kubernetes.io$"
       - "^sig-k8s-infra-private@kubernetes.io$"
+      - "^k8s-infra-accounts@kubernetes.io$"
+      - "^k8s-infra-aws-registry-k8s-io-admin@kubernetes.io$"
   - path: "wg-batch/groups.yaml"
     allowedGroups:
       - "^wg-batch@kubernetes.io$"

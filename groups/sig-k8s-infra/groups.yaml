@@ -5,6 +5,27 @@ groups:
   # Each group here represents a mailing list for the SIG or its subprojects,
   # and is not intended to govern access to infrastructure
   #
+  - email-id: k8s-infra-accounts@kubernetes.io
+    name: k8s-infra-accounts
+    description: |-
+      Temporary email list to reset passwords for AWS account k8s-infra-accounts@kubernetes.io
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - hh@cncf.io
+      - sig-k8s-infra-accounts@kubernetes.io
+  - email-id: k8s-infra-aws-registry-k8s-io-admin@kubernetes.io
+    name: k8s-infra-aws-registry-k8s-io-admin
+    description: |-
+      Temporary email list to reset passwords for AWS account k8s-infra-aws-registry-k8s-io-admin@kubernetes.io
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - hh@cncf.io
+      - sig-k8s-infra-accounts@kubernetes.io
+
   - email-id: k8s-infra-alerts@kubernetes.io
     name: k8s-infra-alerts
     description: |-
