@@ -130,13 +130,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - bb@ii.coop
-      - caleb@ii.coop
       - hh@ii.coop
       - riaan@ii.coop
-      - rob@ii.coop
       - stephen@ii.coop
-      - zz@ii.coop
 
   # Owners of the GCP projects:
   # - k8s-infra-oci-proxy
@@ -276,6 +272,7 @@ groups:
     members:
       - ihor@cncf.io
       - justinsb@google.com
+      - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - cncf-aws-admins@lists.cncf.io
 
