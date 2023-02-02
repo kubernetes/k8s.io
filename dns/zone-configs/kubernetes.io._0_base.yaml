@@ -190,6 +190,9 @@ submit-queue:
 testgrid:
   type: CNAME
   value: testgrid.k8s.io.
+testgrid-data:
+  type: CNAME
+  value: testgrid-data.k8s.io.
 # Verify that @ixdy owns testgrid.kubernetes.io, necessary to set up custom domain in GAE
 pfjqlwt67ty3.testgrid:
   type: CNAME
