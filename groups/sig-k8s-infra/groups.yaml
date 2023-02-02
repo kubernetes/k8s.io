@@ -128,6 +128,7 @@ groups:
     description: |-
       ACL for II Coop
     settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
       - hh@ii.coop
