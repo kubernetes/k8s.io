@@ -22,5 +22,37 @@ module "us-east-2" {
     aws = aws.us-east-2
   }
 
-  prefix = "test-"
+  prefix = var.prefix
+
+  s3_replication_iam_role_arn = aws_iam_role.replication.arn
+
+  s3_replication_rules = [for idx, region in var.s3_replica_regions :
+    {
+      id                               = "us-east-2-to-${region}"
+      status                           = "Enabled"
+      priority                         = idx + 1
+      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}artifacts-k8s-io-${region}"
+      destination_bucket_storage_class = "STANDARD"
+    }
+  ]
+}
+
+module "eu-west-2" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.eu-west-2
+  }
+
+  prefix = var.prefix
+}
+
+module "ap-southeast-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.ap-southeast-1
+  }
+
+  prefix = var.prefix
 }
