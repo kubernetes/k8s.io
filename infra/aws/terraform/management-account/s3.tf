@@ -17,9 +17,6 @@ limitations under the License.
 # Cost and Usage
 
 module "cur_reports_s3_bucket" {
-  providers = {
-    aws = aws.shared-services
-  }
 
   source = "terraform-aws-modules/s3-bucket/aws"
 
@@ -45,14 +42,11 @@ module "cur_reports_s3_bucket" {
   }
 }
 
-module "cur_reports_integrations_s3_bucket" {
-  providers = {
-    aws = aws.shared-services
-  }
+module "cur_reports_integration_athena_s3_bucket" {
 
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket = "cur_reports_integrations_s3_bucket"
+  bucket = "k8s-infra-cur-reports-athena-bucket"
 
   # S3 bucket-level Public Access Block configuration
   block_public_acls       = true
@@ -62,7 +56,7 @@ module "cur_reports_integrations_s3_bucket" {
 
   attach_deny_insecure_transport_policy = true
   attach_policy                         = true
-  policy                                = data.aws_iam_policy_document.cur_reports_integrations_s3_bucket.json
+  policy                                = data.aws_iam_policy_document.cur_reports_integration_athena_s3_bucket.json
 
   # Note: Object Lock configuration can be enabled only on new buckets
   # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_object_lock_configuration
@@ -130,7 +124,7 @@ data "aws_iam_policy_document" "cur_reports_s3_bucket" {
   }
 }
 
-data "aws_iam_policy_document" "cur_reports_integrations_s3_bucket" {
+data "aws_iam_policy_document" "cur_reports_integration_athena_s3_bucket" {
   version = "2008-10-17"
 
   statement {
@@ -146,7 +140,7 @@ data "aws_iam_policy_document" "cur_reports_integrations_s3_bucket" {
       "s3:GetBucketPolicy",
       "s3:GetBucketAcl"
     ]
-    resources = [module.cur_reports_integrations_s3_bucket.s3_bucket_arn]
+    resources = [module.cur_reports_integration_athena_s3_bucket.s3_bucket_arn]
 
     condition {
       test     = "StringEquals"
@@ -165,7 +159,7 @@ data "aws_iam_policy_document" "cur_reports_integrations_s3_bucket" {
     sid       = "AWSBillingDeliveryWrite"
     effect    = "Allow"
     actions   = ["s3:PutObject"]
-    resources = ["${module.cur_reports_integrations_s3_bucket.s3_bucket_arn}/*"]
+    resources = ["${module.cur_reports_integration_athena_s3_bucket.s3_bucket_arn}/*"]
 
     principals {
       type        = "Service"
