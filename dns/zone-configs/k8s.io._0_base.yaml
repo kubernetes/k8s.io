@@ -304,6 +304,14 @@ testgrid:
     - 2001:4860:4802:34::15
     - 2001:4860:4802:36::15
     - 2001:4860:4802:38::15
+# Running on GKE (@chases2)
+testgrid-data:
+  - type: A
+    values:
+    - 34.98.86.92
+testgrid-api:
+  - type: CNAME
+    values: testgrid-data.
 # Verify that @ixdy owns testgrid.k8s.io, necessary to set up custom domain in GAE
 7ujw4gp3z2cq.testgrid:
   type: CNAME
