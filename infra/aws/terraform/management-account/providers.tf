@@ -18,6 +18,15 @@ provider "aws" {
   region = "us-east-2"
 }
 
+provider "aws" {
+  region = "us-east-2"
+  alias  = "shared-services"
+
+  assume_role {
+    role_arn = "arn:aws:iam::${module.infra_shared_services.account_id}:role/OrganizationAccountAccessRole"
+  }
+}
+
 # us-* providers
 
 provider "aws" {

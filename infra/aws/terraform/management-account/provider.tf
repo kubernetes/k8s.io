@@ -24,7 +24,7 @@ terraform {
   backend "s3" {
     bucket = "k8s-aws-root-account-terraform-state"
     region = "us-east-2"
-    key = "management-account/terraform.state"
+    key    = "management-account/terraform.state"
   }
 
   required_providers {
