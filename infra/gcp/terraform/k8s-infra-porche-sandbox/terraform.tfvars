@@ -16,245 +16,245 @@ limitations under the License.
 
 domain     = "artifacts-sandbox.k8s.io"
 project_id = "k8s-infra-porche-sandbox"
-tag        = "v20221111-128cf6a"
+tag        = "v20230201-9deed05"
 cloud_run_config = {
   asia-east1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   asia-northeast1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   asia-northeast2 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   asia-south1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   australia-southeast1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://asia.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   europe-north1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   europe-southwest1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   europe-west1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   europe-west2 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   europe-west4 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   europe-west8 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   europe-west9 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://eu.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   southamerica-west1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   us-central1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   us-east1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   us-east4 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   us-east5 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   us-south1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   us-west1 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }
   us-west2 = {
     environment_variables = [
       {
-        name  = "UPSTREAM_REGISTRY_ENDPOINT",
-        value = "https://us.gcr.io"
+        name  = "BUCKET_PREFIX",
+        value = "test-artifacts-k8s-io"
       },
       {
-        name  = "UPSTREAM_REGISTRY_PATH",
-        value = "k8s-artifacts-prod"
+        name  = "FALLBACK_LOCATION",
+        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
       }
     ]
   }

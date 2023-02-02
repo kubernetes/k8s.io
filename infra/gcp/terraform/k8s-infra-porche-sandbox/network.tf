@@ -28,6 +28,15 @@ resource "google_compute_global_address" "default_ipv6" {
   ip_version   = "IPV6"
 }
 
+data "google_compute_global_address" "default_ipv4" {
+  project = google_project.project.project_id
+  name    = "k8s-infra-porche-sandbox"
+}
+
+data "google_compute_global_address" "default_ipv6" {
+  project = google_project.project.project_id
+  name    = "k8s-infra-porche-sandbox-v6"
+}
 
 resource "google_compute_region_network_endpoint_group" "default" {
   for_each = google_cloud_run_service.regions
@@ -80,8 +89,11 @@ module "lb-http" {
   create_ipv6_address = false
   enable_ipv6         = true
   https_redirect      = true
-  address      = google_compute_global_address.default_ipv4.address
-  ipv6_address = google_compute_global_address.default_ipv6.address
+  #TODO(ameukam): current the TF resource google_compute_global_address don't have
+  #the value of IP in his attribute. But it's accessible with the data source:
+  #https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_global_address
+  address      = data.google_compute_global_address.default_ipv4.address
+  ipv6_address = data.google_compute_global_address.default_ipv6.address
   managed_ssl_certificate_domains = [
     var.domain
   ]
