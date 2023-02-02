@@ -37,21 +37,21 @@ resource "aws_cur_report_definition" "no_integrations" {
   }
 }
 
-resource "aws_cur_report_definition" "integrations" {
+resource "aws_cur_report_definition" "athena_integration" {
   provider = aws.us-east-1
 
-  report_name                = "k8s-infra-cur-integrations-definition"
+  report_name                = "k8s-infra-cur-athena-definition"
   time_unit                  = "HOURLY"
-  format                     = "textORcsv"
-  compression                = "ZIP"
+  format                     = "Parquet"
+  compression                = "Parquet"
   additional_schema_elements = ["RESOURCES"]
-  additional_artifacts       = ["REDSHIFT", "ATHENA"]
+  additional_artifacts       = ["ATHENA"]
   refresh_closed_reports     = true
   report_versioning          = "OVERWRITE_REPORT"
 
   # S3 configuration
-  s3_bucket = module.cur_reports_integrations_s3_bucket.s3_bucket_id
-  s3_region = module.cur_reports_integrations_s3_bucket.s3_bucket_region
+  s3_bucket = module.cur_reports_integration_athena_s3_bucket.s3_bucket_id
+  s3_region = module.cur_reports_integration_athena_s3_bucket.s3_bucket_region
   s3_prefix = "CUR"
 
   lifecycle {
