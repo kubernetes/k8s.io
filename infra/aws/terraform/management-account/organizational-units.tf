@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/*
+This file contains :
+  - Organizational Units of the AWS organization
+*/
+
 resource "aws_organizations_organizational_unit" "security" {
   name      = "Security"
   parent_id = aws_organizations_organization.default.roots[0].id
@@ -26,6 +31,42 @@ resource "aws_organizations_organizational_unit" "security" {
 resource "aws_organizations_organizational_unit" "infrastructure" {
   name      = "Infrastructure"
   parent_id = aws_organizations_organization.default.roots[0].id
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "aws_organizations_organizational_unit" "workloads" {
+  name      = "Workloads"
+  parent_id = aws_organizations_organization.default.roots[0].id
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "aws_organizations_organizational_unit" "production" {
+  name      = "Production"
+  parent_id = aws_organizations_organizational_unit.workloads.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "aws_organizations_organizational_unit" "non_production" {
+  name      = "Non-Production"
+  parent_id = aws_organizations_organizational_unit.workloads.id
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "aws_organizations_organizational_unit" "boskos" {
+  name      = "Boskos"
+  parent_id = aws_organizations_organizational_unit.workloads.id
 
   lifecycle {
     prevent_destroy = true

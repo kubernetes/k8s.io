@@ -23,6 +23,15 @@ module "security_audit" {
   parent_id                  = aws_organizations_organizational_unit.security.id
 }
 
+module "security_engineering" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-security-engineering"
+  email                      = "k8s-infra-aws-admins+security-engineering@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.security.id
+}
+
 module "security_incident_response" {
   source = "../modules/org-account"
 
@@ -38,13 +47,4 @@ module "security_logs" {
   email                      = "k8s-infra-aws-admins+security-logs@kubernetes.io"
   iam_user_access_to_billing = "ALLOW"
   parent_id                  = aws_organizations_organizational_unit.security.id
-}
-
-module "infra_shared_services" {
-  source = "../modules/org-account"
-
-  account_name               = "k8s-infra-shared-services"
-  email                      = "k8s-infra-aws-admins+infra-shared-services@kubernetes.io"
-  iam_user_access_to_billing = "ALLOW"
-  parent_id                  = aws_organizations_organizational_unit.infrastructure.id
 }
