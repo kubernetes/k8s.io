@@ -1,0 +1,8 @@
+{
+  "displayName": "Minimal Service Account for porche",
+  "email": "porche-sandbox@k8s-infra-porche-sandbox.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-porche-sandbox/serviceAccounts/porche-sandbox@k8s-infra-porche-sandbox.iam.gserviceaccount.com",
+  "oauth2ClientId": "117110441359796766617",
+  "projectId": "k8s-infra-porche-sandbox",
+  "uniqueId": "117110441359796766617"
+}
