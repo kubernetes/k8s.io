@@ -420,12 +420,6 @@ function ensure_all_prod_special_cases() {
             "${serviceaccount}" "k8s-infra-gcr-promoter-test"
     done
 
-    # Special case: empower k8s-infra-gcs-access-logs@kubernetes.io to read k8s-artifacts-gcslogs
-    # k8s-artifacts-gcslogs receive and store Cloud Audit logs for k8s-artificats-prod.
-    ensure_gcs_role_binding "gs://k8s-artifacts-gcslogs" \
-        "group:k8s-infra-gcs-access-logs@kubernetes.io" \
-        "objectViewer"
-
     # Special case: In order to run the container image signing tests, k8s-cip-test-prod
     # requires to have the IAM Service Account Credentials API enabled to generate OIDC
     # identity tokens. The production project needs the API too to sign all promoted images.
