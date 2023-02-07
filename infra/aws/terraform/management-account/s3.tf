@@ -18,6 +18,10 @@ limitations under the License.
 
 module "cur_reports_s3_bucket" {
 
+  providers = {
+    aws = aws.us-east-1
+  }
+
   source = "terraform-aws-modules/s3-bucket/aws"
 
   bucket = "k8s-infra-cur-reports-bucket"
@@ -43,6 +47,10 @@ module "cur_reports_s3_bucket" {
 }
 
 module "cur_reports_integration_athena_s3_bucket" {
+
+  providers = {
+    aws = aws.us-east-1
+  }
 
   source = "terraform-aws-modules/s3-bucket/aws"
 

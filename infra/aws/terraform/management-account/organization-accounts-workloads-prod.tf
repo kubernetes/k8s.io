@@ -17,7 +17,7 @@ limitations under the License.
 module "artifacts-k8s-io" {
   source = "../modules/org-account"
 
-  account_name               = "k8s-infra-security-logs"
-  email                      = "k8s-infra-aws-admins+artifacts-k8S-io@kubernetes.io"
+  account_name               = "k8s-infra-artifacts-k8s-io-prod"
+  email                      = "k8s-infra-aws-admins+artifacts-k8s-io-prod@kubernetes.io"
   parent_id                  = aws_organizations_organizational_unit.production.id
 }
