@@ -21,3 +21,12 @@ module "artifacts-k8s-io" {
   email                      = "k8s-infra-aws-admins+artifacts-k8s-io-prod@kubernetes.io"
   parent_id                  = aws_organizations_organizational_unit.production.id
 }
+
+module "registry-k8s-io" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-registry-k8s-io-prod"
+  email                      = "k8s-infra-aws-admins+registry-k8s-io-prod@kubernetes.io"
+  iam_user_access_to_billing = true
+  parent_id                  = aws_organizations_organizational_unit.production.id
+}
