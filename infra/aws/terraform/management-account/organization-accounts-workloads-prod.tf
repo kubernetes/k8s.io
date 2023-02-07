@@ -27,6 +27,6 @@ module "registry-k8s-io" {
 
   account_name               = "k8s-infra-registry-k8s-io-prod"
   email                      = "k8s-infra-aws-admins+registry-k8s-io-prod@kubernetes.io"
-  iam_user_access_to_billing = true
+  iam_user_access_to_billing = "ALLOW"
   parent_id                  = aws_organizations_organizational_unit.production.id
 }
