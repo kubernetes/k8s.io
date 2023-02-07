@@ -434,6 +434,10 @@ kustomize.sigs:
 kubectl.sigs:
   type: CNAME
   value: cli-experimental.netlify.app.
+# https://githubm.com/kubernetes-sigs/kueue docs (@moficodes @alculquicondor)
+kueue.sigs:
+  type: CNAME
+  value: kubernetes-sigs-kueue.netlify.app.
 # https://github.com/kubernetes-sigs/gateway-api docs (@bowei @hbagdi @danehans @jpeach @robscott)
 gateway-api.sigs:
   type: CNAME
