@@ -27,8 +27,8 @@ module "infra_shared_services" {
 module "infra_network" {
   source = "../modules/org-account"
 
-  account_name               = "k8s-infra-shared-services"
-  email                      = "k8s-infra-aws-admins+infra-network@kubernetes.io"
+  account_name               = "k8s-infra-networking"
+  email                      = "k8s-infra-aws-admins+infra-networking@kubernetes.io"
   iam_user_access_to_billing = "ALLOW"
   parent_id                  = aws_organizations_organizational_unit.infrastructure.id
 }
