@@ -16,7 +16,7 @@ limitations under the License.
 
 domain     = "registry.k8s.io"
 project_id = "k8s-infra-oci-proxy-prod"
-digest     = "sha256:fc811af33c78e9765ee95d6994a6e0dac4c382ae63a960872404b7190110c769"
+digest     = "sha256:43904e32c58803bed1dbf6457e1b5abdd1409c976bb951f5bb32cf3b37772b2f"
 cloud_run_config = {
   asia-east1 = {
     // TODO: switch DEFAULT_AWS_BASE_URL to cloudfront or else refine the region mapping
