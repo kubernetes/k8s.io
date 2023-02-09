@@ -14,10 +14,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-data "aws_iam_policy_document" "cloudtrail" {
+data "aws_iam_policy_document" "cloudtrail_sns_policy" {
   provider = aws.security-eng
 
   statement {
+    sid       = "AWSCloudTrailSNSPolicy"
     effect    = "Allow"
     actions   = ["SNS:Publish"]
     resources = [aws_sns_topic.cloudtrail.arn]
@@ -29,7 +30,7 @@ data "aws_iam_policy_document" "cloudtrail" {
 
     condition {
       variable = "aws:SourceArn"
-      test     = "ArnLike"
+      test     = "ArnEquals"
       values   = [aws_s3_bucket.cloudtrail_logs.arn]
     }
   }
@@ -42,12 +43,13 @@ resource "aws_sns_topic" "cloudtrail" {
   tags = merge({
     "Name"      = local.cloudtrail_topic_name,
     "Env"       = "Audit",
-    "component" = "SNS"
+    "component" = "SNS",
+    "encrypted" = "False"
   }, var.tags)
 }
 
-resource "aws_sns_topic_policy" "default" {
+resource "aws_sns_topic_policy" "cloudtrail" {
   provider = aws.security-eng
   arn      = aws_sns_topic.cloudtrail.arn
-  policy   = data.aws_iam_policy_document.cloudtrail.json
+  policy   = data.aws_iam_policy_document.cloudtrail_sns_policy.json
 }

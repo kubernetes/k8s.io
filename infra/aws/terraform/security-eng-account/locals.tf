@@ -15,8 +15,8 @@ limitations under the License.
 */
 
 locals {
-  cloudtrail_bucket_name = format("%s-%s", var.org_name, "organizational-trail")
-  cloudtrail_topic_name  = format("%s-%s", var.org_name, "cloudtrail-sns-topic")
+  cloudtrail_trail_name = format("%s-%s", var.org_name, "organizational-trail")
+  cloudtrail_topic_name = format("%s-%s", var.org_name, "cloudtrail-sns-topic")
 
   audit-account-name  = "k8s-infra-security-audit"
   audit-account-index = index(data.aws_organizations_organization.current.accounts.*.name, local.audit-account-name)
@@ -29,4 +29,7 @@ locals {
   security-eng-account-name  = "k8s-infra-security-engineering"
   security-eng-account-index = index(data.aws_organizations_organization.current.accounts.*.name, local.security-eng-account-name)
   security-eng-account-id    = data.aws_organizations_organization.current.accounts[local.security-eng-account-index].id
+
+  # TODO(ameukam): Remove this in 90 days.
+  security-eng-account-id-temp = "759415916157"
 }

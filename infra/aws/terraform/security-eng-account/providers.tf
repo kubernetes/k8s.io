@@ -16,7 +16,7 @@ limitations under the License.
 
 provider "aws" {
   alias  = "audit"
-  region = "us-east-2"
+  region = var.region
 
   assume_role {
     role_arn     = "arn:aws:iam::${local.audit-account-id}:role/OrganizationAccountAccessRole"
@@ -26,17 +26,17 @@ provider "aws" {
 
 provider "aws" {
   alias  = "logging"
-  region = "us-east-2"
+  region = var.region
 
   assume_role {
-    role_arn     = "arn:aws:iam::759415916157:role/OrganizationAccountAccessRole"
+    role_arn     = "arn:aws:iam::local.security-eng-account-id-temp:role/OrganizationAccountAccessRole"
     session_name = "terraform+${data.aws_iam_session_context.whoami.session_name}"
   }
 }
 
 provider "aws" {
   alias  = "security-eng"
-  region = "us-east-2"
+  region = var.region
 
   assume_role {
     role_arn     = "arn:aws:iam::${local.security-eng-account-id}:role/OrganizationAccountAccessRole"

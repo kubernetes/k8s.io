@@ -23,31 +23,40 @@ variable "org_name" {
   default     = "k8s-infra"
 }
 
+variable "region" {
+  type     = string
+  default  = "us-east-2"
+  nullable = false
+}
+
 #############################################################################
 # Cloudtrail
 
 variable "cloudtrail_name" {
   type        = string
   description = "Name of the Cloudtrail"
+  nullable    = false
 }
 
-variable "cloudtrail_bucket_name" {
+variable "cloudtrail_trail_name" {
   type        = string
   description = "Bucket name of Cloudtrail logs"
+  nullable    = false
 }
 
 variable "cloudtrail_logging" {
   type        = bool
   description = "Enables logging for the trail"
   default     = true
+  nullable    = false
 }
 
 #############################################################################
 # SNS
 
-variable "cloudtrail_topic_name" {
+variable "cloudtrail_topic_arn" {
   type        = string
-  description = "Name of the SNS topic where information about newly shipped CloudTrail log files are sent"
+  description = "ARN of the SNS topic where information about newly shipped CloudTrail log files are sent"
 }
 
 #############################################################################

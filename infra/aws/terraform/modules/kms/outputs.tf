@@ -1,5 +1,5 @@
 /*
-Copyright 2022 The Kubernetes Authors.
+Copyright 2023 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,18 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-locals {
-  audit-account-name  = "k8s-infra-security-audit"
-  audit-account-index = index(data.aws_organizations_organization.current.accounts.*.name, local.audit-account-name)
-  audit-account-id    = data.aws_organizations_organization.current.accounts[local.audit-account-index].id
+output "arn" {
+  value       = aws_kms_key.main.arn
+  description = "ARN of the key"
 }
 
-data "aws_organizations_organization" "current" {}
-
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
-
-data "aws_iam_session_context" "whoami" {
-  arn = data.aws_caller_identity.current.arn
+output "id" {
+  value       = aws_kms_key.main.key_id
+  description = "ID of the key"
 }

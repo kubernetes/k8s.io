@@ -14,10 +14,67 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+data "aws_iam_policy_document" "cloudtrail_bucket" {
+  provider = aws.security-eng
+
+  statement {
+    sid     = "AWSCloudTrailAclCheck"
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["cloudtrail.amazonaws.com"]
+    }
+
+    resources = [
+      aws_s3_bucket.cloutrail_logs.arn
+    ]
+
+    condition {
+      variable = "aws:SourceArn"
+      test     = "ArnEquals"
+      values   = [aws_cloudtrail.organizational_trail.arn]
+    }
+  }
+
+  statement {
+    sid     = "AWSCloudTrailWrite"
+    effect  = "Allow"
+    actions = ["s3:PutObject"]
+    principals {
+      type        = "Service"
+      identifiers = ["cloudtrail.amazonaws.com"]
+    }
+
+    resources = [
+      "${aws_s3_bucket.cloudtrail_logs.arn}/AWSLogs/${data.aws_caller_identity.current.account_id}/*"
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values   = [aws_cloudtrail.organizational_trail.arn]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+      values   = ["bucket-owner-full-control"]
+    }
+
+    condition {
+      test     = "Null"
+      values   = ["true"]
+      variable = "s3:x-amz-server-side-encryption"
+    }
+  }
+}
+
 resource "aws_s3_bucket" "cloudtrail_logs" {
-  provider      = aws.logging
-  bucket        = local.cloudtrail_bucket_name
-  force_destroy = true
+  provider            = aws.logging
+  bucket              = local.cloudtrail_trail_name
+  force_destroy       = true
+  object_lock_enabled = true
 
   tags = merge({
     env     = "Audit"
@@ -34,41 +91,8 @@ resource "aws_s3_bucket_versioning" "cloudtrail_logs" {
   }
 }
 
-resource "aws_s3_bucket_policy" "cloudtrail_access" {
+resource "aws_s3_bucket_policy" "cloudtrail_logs" {
   provider = aws.logging
   bucket   = aws_s3_bucket.cloudtrail_logs.id
-
-  policy = <<POLICY
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "AWSCloudTrailAclCheck",
-            "Effect": "Allow",
-            "Principal": {
-              "Service": "cloudtrail.amazonaws.com"
-            },
-            "Action": "s3:GetBucketAcl",
-            "Resource": "${aws_s3_bucket.cloudtrail_logs.arn}"
-        },
-        {
-            "Sid": "AWSCloudTrailWrite",
-            "Effect": "Allow",
-            "Principal": {
-              "Service": "cloudtrail.amazonaws.com"
-            },
-            "Action": "s3:PutObject",
-            "Resource": [
-              "${aws_s3_bucket.cloudtrail_logs.arn}/AWSLogs/${data.aws_organizations_organization.current.master_account_id}/*",
-              "${aws_s3_bucket.cloudtrail_logs.arn}/AWSLogs/${data.aws_organizations_organization.current.id}/*"
-            ],
-            "Condition": {
-                "StringEquals": {
-                    "s3:x-amz-acl": "bucket-owner-full-control"
-                }
-            }
-        }
-    ]
-}
-POLICY
+  policy   = data.aws_iam_policy_document.cloudtrail_assume_role.json
 }

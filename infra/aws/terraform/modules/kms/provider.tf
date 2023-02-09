@@ -13,16 +13,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-resource "aws_ebs_encryption_by_default" "main" {
-  provider = aws.security-eng
-  enabled  = true
-}
-
-resource "aws_s3_account_public_access_block" "default" {
-  provider                = aws.security-eng
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-}
