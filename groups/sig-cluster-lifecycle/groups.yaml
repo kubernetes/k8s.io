@@ -55,7 +55,17 @@ groups:
       MessageModerationLevel: "MODERATE_ALL_MESSAGES"
       ReconcileMembers: "false"
     owners:
-      - ademicev@redhat.com
+      - alexandr.demicev@suse.com
+      - jspeed@redhat.com
+
+  - email-id: k8s-infra-staging-capi-operator@kubernetes.io
+    name: k8s-infra-staging-capi-operator
+    description: |-
+      ACL for staging CAPI Operator
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - alexandr.demicev@suse.com
       - jspeed@redhat.com
 
   - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
