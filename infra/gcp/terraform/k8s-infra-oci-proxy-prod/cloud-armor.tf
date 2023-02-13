@@ -27,9 +27,10 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "910"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('methodenforcement-stable')"
+        expression = "evaluatePreconfiguredWaf('methodenforcement-v33-stable', {'sensitivity': 1})"
       }
     }
+    description = "Method enforcement"
 
     preview = false
   }
@@ -39,9 +40,10 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "900"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('protocolattack-stable')"
+        expression = "evaluatePreconfiguredWaf('protocolattack-v33-stable', {'sensitivity': 3, 'opt_out_rule_ids': ['owasp-crs-v030301-id921170-protocolattack']})"
       }
     }
+    description = "Protocol Attack"
 
     preview = false
   }
@@ -51,32 +53,23 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "920"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('scannerdetection-stable')"
+        expression = "evaluatePreconfiguredWaf('scannerdetection-v33-stable', {'sensitivity': 1})"
       }
     }
+    description = "Scanner detection"
 
     preview = false
   }
-
 
   rule {
     action   = "deny(403)"
     priority = "990"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('xss-stable')"
+        expression = "evaluatePreconfiguredWaf('xss-v33-stable', {'sensitivity': 1})"
       }
     }
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "970"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredExpr('sqli-stable')"
-      }
-    }
+    description = "Cross-site scripting (XSS)"
 
     preview = false
   }
@@ -86,9 +79,10 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "960"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('lfi-stable')"
+        expression = "evaluatePreconfiguredWaf('lfi-v33-stable', {'sensitivity': 1})"
       }
     }
+    description = "Local file inclusion (LFI)"
 
     preview = false
   }
@@ -110,9 +104,10 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "940"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('rfi-stable')"
+        expression = "evaluatePreconfiguredWaf('rfi-v33-stable', {'sensitivity': 2})"
       }
     }
+    description = "Remote file inclusion (RFI)"
 
     preview = false
   }
@@ -122,9 +117,10 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "950"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('sessionfixation-stable')"
+        expression = "evaluatePreconfiguredWaf('sessionfixation-v33-stable', {'sensitivity': 1})"
       }
     }
+    description = "Session fixation"
 
     preview = false
   }
@@ -134,9 +130,23 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "980"
     match {
       expr {
-        expression = "evaluatePreconfiguredExpr('php-stable')"
+        expression = "evaluatePreconfiguredWaf('php-v33-stable', {'sensitivity': 3})"
       }
     }
+    description = "PHP"
+
+    preview = false
+  }
+
+  rule {
+    action   = "deny(403)"
+    priority = "1010"
+    match {
+      expr {
+        expression = "evaluatePreconfiguredExpr('cve-canary')"
+      }
+    }
+    description = "CVEs and other vulnerabilities"
 
     preview = false
   }
