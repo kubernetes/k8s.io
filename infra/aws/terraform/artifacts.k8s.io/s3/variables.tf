@@ -15,8 +15,8 @@ limitations under the License.
 */
 
 variable "prefix" {
-  type    = string
-  default = ""
+  type     = string
+  default  = ""
   nullable = false
 }
 
