@@ -84,6 +84,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - camilamacedo86@gmail.com
+      - ricardo.katz@gmail.com
 
   #
   # k8s-infra gcs write access
