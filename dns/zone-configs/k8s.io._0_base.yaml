@@ -111,6 +111,12 @@ artifacts:
   type: A
   values:
   - 35.244.192.77
+
+# DNS challenge for issuing (transition) TLS certificate
+_acme-challenge.artifacts:
+  type: CNAME
+  value: c72842dd-afa6-4ce7-b722-546baf89701f.5.authorize.certificatemanager.goog.
+
 # Sandbox artifacts redirector service.
 artifacts-sandbox:
   - type: A
