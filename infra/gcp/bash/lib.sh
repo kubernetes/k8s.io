@@ -339,7 +339,11 @@ function empower_gcr_admins() {
         return 1
     fi
     local project="$1"
-    local region="${2:-}"
+    if [ "$region" == "global" ]; then
+        local region=""
+    else
+        local region="${2:-}"
+    fi
     local bucket
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
 
@@ -424,7 +428,11 @@ function empower_image_promoter() {
         return 1
     fi
     local project="$1"
-    local region="${2:-}"
+    if [ "$region" == "global" ]; then
+        local region=""
+    else
+        local region="${2:-}"
+    fi
     local acct
     acct=$(svc_acct_email "${project}" "${IMAGE_PROMOTER_SVCACCT}")
 
