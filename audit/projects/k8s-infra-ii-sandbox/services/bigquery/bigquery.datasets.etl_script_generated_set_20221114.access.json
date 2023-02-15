@@ -8,10 +8,6 @@
     "specialGroup": "projectOwners"
   },
   {
-    "role": "OWNER",
-    "iamMember": "deleted:user:caleb@ii.coop?uid=510545467363104494805"
-  },
-  {
     "role": "READER",
     "specialGroup": "projectReaders"
   }
