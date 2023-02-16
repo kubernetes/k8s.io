@@ -2,8 +2,10 @@
   "bindings": [
     {
       "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
         "projectEditor:k8s-gcr-audit-test-prod",
-        "projectOwner:k8s-gcr-audit-test-prod"
+        "projectOwner:k8s-gcr-audit-test-prod",
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketOwner"
     },
@@ -12,6 +14,13 @@
         "projectViewer:k8s-gcr-audit-test-prod"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "serviceAccount:k8s-infra-gcr-promoter@k8s-gcr-audit-test-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectAdmin"
     },
     {
       "members": [

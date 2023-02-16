@@ -3,7 +3,7 @@ gs://artifacts.k8s-release-test-prod.appspot.com/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		None
+	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	None
@@ -11,8 +11,8 @@ gs://artifacts.k8s-release-test-prod.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 30 Oct 2019 00:33:57 GMT
-	Time updated:			Fri, 07 Aug 2020 20:51:57 GMT
-	Metageneration:			13
+	Time updated:			Thu, 16 Feb 2023 00:24:27 GMT
+	Metageneration:			16
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
