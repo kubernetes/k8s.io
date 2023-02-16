@@ -339,6 +339,8 @@ function empower_gcr_admins() {
         return 1
     fi
     local project="$1"
+    local region="${2:-}"
+
     if [ "$region" == "global" ]; then
         local region=""
     else

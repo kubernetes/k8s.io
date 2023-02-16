@@ -64,6 +64,8 @@ function ensure_gcr_repo() {
         return 1
     fi
     local project="$1"
+    local region="${2:-}"
+
     if [ "$region" == "global" ]; then
         local region=""
     else
@@ -89,7 +91,6 @@ function ensure_gcr_repo() {
     else
         ensure_public_gcs_bucket "${project}" "${bucket}"
     fi
-    
 }
 
 # Grant write privileges on a GCR to a group
