@@ -51,9 +51,99 @@ resource "google_compute_region_network_endpoint_group" "default" {
   }
 }
 
+
+# IPv4 and IPv6 forwarding rules (listeners)
+resource "google_compute_global_forwarding_rule" "http_ipv4" {
+  project    = google_project.project.project_id
+  name       = "artifacts-k8s-io-ipv4-http"
+  target     = google_compute_target_http_proxy.default.self_link
+  ip_address = google_compute_global_address.default_ipv4.address
+  port_range = "80"
+}
+
+resource "google_compute_global_forwarding_rule" "https_ipv4" {
+  project    = google_project.project.project_id
+  name       = "artifacts-k8s-io-ipv4-https"
+  target     = google_compute_target_https_proxy.default.self_link
+  ip_address = google_compute_global_address.default_ipv4.address
+  port_range = "443"
+}
+
+
+resource "google_compute_global_forwarding_rule" "http_ipv6" {
+  project    = google_project.project.project_id
+  name       = "artifacts-k8s-io-ipv6-http"
+  target     = google_compute_target_http_proxy.default.self_link
+  ip_address = google_compute_global_address.default_ipv6.address
+  port_range = "80"
+}
+
+resource "google_compute_global_forwarding_rule" "https_ipv6" {
+  project    = google_project.project.project_id
+  name       = "artifacts-k8s-io-ipv6-https"
+  target     = google_compute_target_https_proxy.default.self_link
+  ip_address = google_compute_global_address.default_ipv6.address
+  port_range = "443"
+}
+
+# Redirect HTTP to HTTPS
+resource "google_compute_target_http_proxy" "default" {
+  project = google_project.project.project_id
+  name    = "artifacts-k8s-io-default"
+  url_map = google_compute_url_map.https_redirect.self_link
+}
+
+resource "google_compute_url_map" "https_redirect" {
+  project = google_project.project.project_id
+  name    = "artifacts-k8s-io-https-redirect"
+  default_url_redirect {
+    https_redirect         = true
+    redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
+    strip_query            = false
+  }
+}
+
+
+# Serve HTTPS
+resource "google_compute_target_https_proxy" "default" {
+  project = google_project.project.project_id
+  name    = "artifacts-k8s-io-https-proxy"
+  url_map = google_compute_url_map.default.self_link
+
+  certificate_map = "//certificatemanager.googleapis.com/${google_certificate_manager_certificate_map.artifacts-k8s-io.id}"
+}
+
+resource "google_compute_url_map" "default" {
+  project         = google_project.project.project_id
+  name            = "artifacts-k8s-io-url-map"
+  default_service = google_compute_backend_service.default.self_link
+}
+
+resource "google_compute_backend_service" "default" {
+  project = google_project.project.project_id
+  name    = "artifacts-k8s-io-backend-default"
+
+  enable_cdn = false
+
+  dynamic "backend" {
+    for_each = google_compute_region_network_endpoint_group.default
+    content {
+      group = backend.value.id
+    }
+  }
+
+  log_config {
+    enable      = true
+    sample_rate = 1.0
+  }
+}
+
+
+/*
+
 module "lb-http" {
   source  = "GoogleCloudPlatform/lb-http/google//modules/serverless_negs"
-  version = "~> 6.2.0"
+  version = "~> 7.0.0"
 
   project = google_project.project.project_id
   name    = var.project_id
@@ -72,6 +162,9 @@ module "lb-http" {
       security_policy         = null
       custom_request_headers  = null
       custom_response_headers = null
+      compression_mode = null
+      protocol = null
+      port_name = null
 
       iap_config = {
         enable               = false
@@ -94,10 +187,12 @@ module "lb-http" {
   #https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_global_address
   address      = data.google_compute_global_address.default_ipv4.address
   ipv6_address = data.google_compute_global_address.default_ipv6.address
-  managed_ssl_certificate_domains = [
-    var.domain
-  ]
-  random_certificate_suffix = true
   ssl                       = true
-  use_ssl_certificates      = false
+  use_ssl_certificates      = true
+  #ssl_certificates = [
+  #  google_certificate_manager_certificate.artifacts-k8s-io.id,
+  #]
+  certificate_map = google_certificate_manager_certificate_map.artifacts-k8s-io.id
 }
+
+*/
