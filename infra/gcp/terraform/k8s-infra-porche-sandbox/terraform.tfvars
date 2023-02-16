@@ -26,7 +26,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -38,7 +38,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -50,7 +50,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -62,7 +62,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -74,7 +74,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -86,7 +86,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -98,7 +98,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -110,7 +110,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -122,7 +122,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -134,7 +134,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -146,7 +146,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -158,7 +158,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -170,7 +170,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -182,7 +182,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -194,7 +194,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -206,7 +206,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -218,7 +218,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -230,7 +230,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -242,7 +242,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
@@ -254,7 +254,7 @@ cloud_run_config = {
       },
       {
         name  = "FALLBACK_LOCATION",
-        value = "https://storage.googleapi.com/k8s-artifacts-prod/"
+        value = "https://storage.googleapis.com/k8s-artifacts-prod/"
       }
     ]
   }
