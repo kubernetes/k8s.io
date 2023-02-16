@@ -1,0 +1,82 @@
+gs://artifacts.k8s-gcr-backup-test-prod.appspot.com/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		Present
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Wed, 15 Feb 2023 20:54:46 GMT
+	Time updated:			Thu, 16 Feb 2023 00:12:25 GMT
+	Metageneration:			7
+	Bucket Policy Only enabled:	False
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				
+	  [
+	    {
+	      "email": "k8s-infra-artifact-admins@kubernetes.io",
+	      "entity": "group-k8s-infra-artifact-admins@kubernetes.io",
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-1058882910725",
+	      "projectTeam": {
+	        "projectNumber": "1058882910725",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-owners-1058882910725",
+	      "projectTeam": {
+	        "projectNumber": "1058882910725",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "email": "k8s-infra-gcr-promoter@k8s-gcr-backup-test-prod.iam.gserviceaccount.com",
+	      "entity": "user-k8s-infra-gcr-promoter@k8s-gcr-backup-test-prod.iam.gserviceaccount.com",
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-1058882910725",
+	      "projectTeam": {
+	        "projectNumber": "1058882910725",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-1058882910725",
+	      "projectTeam": {
+	        "projectNumber": "1058882910725",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-1058882910725",
+	      "projectTeam": {
+	        "projectNumber": "1058882910725",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-1058882910725",
+	      "projectTeam": {
+	        "projectNumber": "1058882910725",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

@@ -8,11 +8,12 @@ gs://k8s-cip-test-prod/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
+	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 10 Jul 2019 22:16:04 GMT
-	Time updated:			Mon, 06 Feb 2023 17:17:47 GMT
-	Metageneration:			123
+	Time updated:			Thu, 16 Feb 2023 00:05:27 GMT
+	Metageneration:			127
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
