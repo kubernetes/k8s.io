@@ -72,3 +72,12 @@ resource "aws_organizations_organizational_unit" "boskos" {
     prevent_destroy = true
   }
 }
+
+resource "aws_organizations_organizational_unit" "policy_staging" {
+  name      = "Policy Staging"
+  parent_id = aws_organizations_organization.default.roots[0].id
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
