@@ -110,7 +110,7 @@ releases:
 artifacts:
   type: A
   values:
-  - 35.244.192.77
+  - 34.110.216.12
 
 # DNS challenge for issuing (transition) TLS certificate
 _acme-challenge.artifacts:
