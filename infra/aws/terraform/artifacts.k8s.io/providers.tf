@@ -40,6 +40,11 @@ provider "aws" {
 
 # Per-region providers
 provider "aws" {
+  alias  = "us-east-1"
+  region = "us-east-1"
+}
+
+provider "aws" {
   alias  = "us-east-2"
   region = "us-east-2"
 }
@@ -47,6 +52,11 @@ provider "aws" {
 provider "aws" {
   alias  = "us-west-2"
   region = "us-west-2"
+}
+
+provider "aws" {
+  alias  = "eu-central-1"
+  region = "eu-central-1"
 }
 
 provider "aws" {
