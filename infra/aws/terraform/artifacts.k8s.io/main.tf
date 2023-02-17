@@ -29,6 +29,16 @@ variable "prefix" {
   }
 }
 
+module "bucket_us-east-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.us-east-1
+  }
+
+  prefix = var.prefix
+}
+
 module "bucket_us-east-2" {
   source = "./s3"
 
@@ -54,6 +64,16 @@ module "bucket_eu-west-2" {
 
   providers = {
     aws = aws.eu-west-2
+  }
+
+  prefix = var.prefix
+}
+
+module "bucket_eu-central-1" {
+  source = "./s3"
+
+  providers = {
+    aws = aws.eu-central-1
   }
 
   prefix = var.prefix
