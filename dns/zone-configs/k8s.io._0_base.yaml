@@ -105,12 +105,12 @@ releases:
   value: redirect.k8s.io.
 
 # artifacts.k8s.io is for the (under development) binary artifact serving.
-# The IP points to a GCLB in front of a GCS bucket,
-# in the k8s-artifacts-prod project.
+# The IP points to a GCLB in front of CloudRun in the k8s-infra-porche-prod project.
 artifacts:
   type: A
+  ttl: 300 # short TTL in case of need to rollback
   values:
-  - 35.244.192.77
+  - 34.110.216.12
 
 # DNS challenge for issuing (transition) TLS certificate
 _acme-challenge.artifacts:
