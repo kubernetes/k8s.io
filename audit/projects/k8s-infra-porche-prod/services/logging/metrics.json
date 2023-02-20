@@ -1,0 +1,28 @@
+[
+  {
+    "createTime": "2023-02-17T16:38:00.092276269Z",
+    "filter": "logName=\"projects/k8s-infra-porche-prod/logs/run.googleapis.com%2Fstderr\"\n\ntextPayload =~ \"file not found in mirror\"",
+    "metricDescriptor": {
+      "metricKind": "DELTA",
+      "name": "projects/k8s-infra-porche-prod/metricDescriptors/logging.googleapis.com/user/file_not_found_in_mirror",
+      "type": "logging.googleapis.com/user/file_not_found_in_mirror",
+      "unit": "1",
+      "valueType": "INT64"
+    },
+    "name": "file_not_found_in_mirror",
+    "updateTime": "2023-02-17T16:38:00.092276269Z"
+  },
+  {
+    "createTime": "2023-02-17T16:38:51.186626320Z",
+    "filter": "logName=\"projects/k8s-infra-porche-prod/logs/run.googleapis.com%2Fstderr\"\n\ntextPayload =~ \"redirecting request to mirror\"\n",
+    "metricDescriptor": {
+      "metricKind": "DELTA",
+      "name": "projects/k8s-infra-porche-prod/metricDescriptors/logging.googleapis.com/user/redirecting_request_to_mirror",
+      "type": "logging.googleapis.com/user/redirecting_request_to_mirror",
+      "unit": "1",
+      "valueType": "INT64"
+    },
+    "name": "redirecting_request_to_mirror",
+    "updateTime": "2023-02-17T16:38:51.186626320Z"
+  }
+]
