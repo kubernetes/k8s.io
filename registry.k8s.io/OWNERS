@@ -1,10 +1,5 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
-reviewers:
-- BobyMCbobs
-- hh
-- Riaankl
-
 labels:
 - area/artifacts
-- sig/release
+- area/registry.k8s.io
