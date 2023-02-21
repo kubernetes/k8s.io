@@ -177,11 +177,13 @@
   dmap:
     "sha256:fded5b914c2531c2471fd0088b75fd33b0756a6c42df4c069007857419e54fa9": [ "v4.0.0" ]
     "sha256:a34c15c963a86da9720090f44c904f49d52b0454784f27017bb863ccbf0537a2": [ "v4.1.0" ]
+    "sha256:1d9f524c0fd5d714cf274a0ddf5dceebeb1848349de5687e530c33dd2675e4ba": [ "v4.2.0" ]
 - name: smbplugin
   dmap:
     "sha256:5bfa32e3f648c1fd0ded0c3866619e7e47678bceeae8233c28deeded81b5d175": [ "v1.7.0" ]
     "sha256:7eec32f7cb79193c71206827617832247d422e07dcd6efc09eaf718aa6a5edae": [ "v1.8.0" ]
     "sha256:cd17882742532add8cfad9230fffa5ea15beae918c0132165c7070247e4a2bd6": [ "v1.9.0" ]
+    "sha256:e7d37907128b9eadf5208e63ea926dd230ef1ebbdf0de2b6d9b7cd6fbe1ef053": [ "v1.10.0" ]
 - name: snapshot-controller
   dmap:
     "sha256:2bde7d7f9d73c4309d67e9d7f94df52110295ef06c9488ca76c40da32b65f05e": [ "v2.1.1" ]
