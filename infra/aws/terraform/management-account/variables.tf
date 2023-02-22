@@ -31,6 +31,8 @@ variable "aws_service_access_principals" {
     "reporting.trustedadvisor.amazonaws.com",
     "securityhub.amazonaws.com",
     "servicequotas.amazonaws.com",
+    "sso.amazonaws.com",
+    "storage-lens.s3.amazonaws.com",
     "tagpolicies.tag.amazonaws.com"
   ]
   description = "List of service access principals for the organization"
