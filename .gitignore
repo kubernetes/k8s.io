@@ -4,3 +4,9 @@
 
 # Ignore vscode config files
 .vscode
+
+
+# Terraform
+.terraform
+terraform.tfstate
+terraform.tfstate.backup

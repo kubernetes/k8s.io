@@ -1,0 +1,9 @@
+aws-admins:
+  members:
+    - upodroid@k8s.borg.dev
+    - ameukam@k8s.borg.dev
+
+aws-readonly:
+  members:
+    - dims@k8s.borg.dev
+
