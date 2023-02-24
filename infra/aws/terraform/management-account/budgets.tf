@@ -26,7 +26,7 @@ resource "aws_budgets_budget" "everything" {
   limit_unit        = "USD"
 
   cost_types {
-    include_credit             = true
+    include_credit             = false
     include_discount           = true
     include_other_subscription = true
     include_recurring          = true
@@ -41,7 +41,7 @@ resource "aws_budgets_budget" "everything" {
 
   notification {
     comparison_operator        = "GREATER_THAN"
-    threshold                  = "1"
+    threshold                  = "30"
     threshold_type             = "PERCENTAGE"
     notification_type          = "ACTUAL"
     subscriber_email_addresses = ["sig-k8s-infra-leads@kubernetes.io"]
