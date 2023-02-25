@@ -14,7 +14,9 @@ groups:
   - email-id: distributors-announce@kubernetes.io
     name: distributors-announce
     description: |-
+      Private vulnerability pre-announcement list for Kubernetes distributors.
 
+      https://git.k8s.io/committee-security-response/private-distributors-list.md
     settings:
       ReconcileMembers: "true"
     owners:
@@ -23,14 +25,10 @@ groups:
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - tabitha.c.sable@gmail.com
-      - timallclair@gmail.com
-    members:
-      # Associate SRC members
-      - pushkarj.at.work@gmail.com
       - rita.z.zhang@gmail.com
-      - sfowler@redhat.com
       - srajakum@amazon.com
+      - tabitha.c.sable@gmail.com
+    members:
       # Distributors
       - argoprod@us.ibm.com
       - aws-k8s-embargo-notification@amazon.com
@@ -64,7 +62,9 @@ groups:
   - email-id: security@kubernetes.io
     name: security
     description: |-
+      Private security disclosure alias.
 
+      See https://kubernetes.io/docs/reference/issues-security/security/
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
@@ -74,14 +74,9 @@ groups:
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - tabitha.c.sable@gmail.com
-      - timallclair@gmail.com
-    members:
-      # Associate SRC members
-      - pushkarj.at.work@gmail.com
       - rita.z.zhang@gmail.com
-      - sfowler@redhat.com
       - srajakum@amazon.com
+      - tabitha.c.sable@gmail.com
 
   - email-id: security-discuss-private@kubernetes.io
     name: security-discuss-private
@@ -98,14 +93,9 @@ groups:
       - joelsmith@redhat.com
       - lhinds@redhat.com
       - mhausler@amazon.com
-      - tabitha.c.sable@gmail.com
-      - timallclair@gmail.com
-    members:
-      # Associate SRC members
-      - pushkarj.at.work@gmail.com
       - rita.z.zhang@gmail.com
-      - sfowler@redhat.com
       - srajakum@amazon.com
+      - tabitha.c.sable@gmail.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
