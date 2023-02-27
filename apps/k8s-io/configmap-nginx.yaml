@@ -176,6 +176,7 @@ data:
         listen 80;
 
         location / {
+          rewrite ^/apt/doc/apt-key.gpg    https://raw.githubusercontent.com/kubernetes/k8s.io/main/apt/doc/apt-key.gpg redirect;
           # Don't require /release/ if you want to get at the Kubernetes release artifacts, the common case.
           rewrite ^/(v[0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta|rc)\.[0-9]+)?/.*)$   https://storage.googleapis.com/kubernetes-release/release/$1 redirect;
           # CI (continuous integration) artifacts are hosted in a bucket owned by kubernetes.io (community-managed via sig-k8s-infra)
