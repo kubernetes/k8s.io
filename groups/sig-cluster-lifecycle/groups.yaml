@@ -228,6 +228,7 @@ groups:
       - fpandini@vmware.com
       - sbueringer@gmail.com
       - prignanov@vmware.com
+      - kmuldoon@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     name: k8s-infra-staging-cluster-api-aws
