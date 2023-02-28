@@ -41,9 +41,9 @@ module "vpc" {
   assign_ipv6_address_on_creation = true
   create_egress_only_igw          = true
 
-  public_subnet_ipv6_prefixes  = [0, 4, 8]
-  private_subnet_ipv6_prefixes = [12, 16, 20]
-  intra_subnet_ipv6_prefixes   = [24, 28, 32]
+  private_subnet_ipv6_prefixes = [0, 1, 2]
+  public_subnet_ipv6_prefixes  = [3, 4, 5]
+  intra_subnet_ipv6_prefixes   = [6, 7, 8]
 
   # NAT Gateway allows connection to external services (e.g. Internet).
   enable_nat_gateway   = true

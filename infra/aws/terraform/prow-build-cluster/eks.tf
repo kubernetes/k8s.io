@@ -107,11 +107,16 @@ module "eks" {
           ebs = {
             volume_size           = var.node_volume_size
             volume_type           = "gp3"
-            encrypted             = true
-            kms_key_id            = module.ebs_kms_key.key_arn
+            iops                  = 16000 # Maximum for gp3 volume.
+            throughput            = 1000  # Maximum for gp3 volume.
+            encrypted             = false
             delete_on_termination = true
           }
         }
+      }
+
+      enclave_options = {
+        enabled = true
       }
 
       tags = local.node_group_tags
