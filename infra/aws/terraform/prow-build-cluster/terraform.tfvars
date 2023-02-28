@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-vpc_cidr = "10.0.0.0/16"
+vpc_cidr = "10.128.0.0/10"
 
 cluster_name    = "prow-build-cluster"
 cluster_region  = "us-east-2"
