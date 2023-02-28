@@ -390,6 +390,10 @@ function ensure_all_prod_special_cases() {
         empower_gke_for_serviceaccount \
             "${project}" "${PROWJOB_POD_NAMESPACE}" \
             "${serviceaccount}" "k8s-infra-gcr-promoter"
+        # Allow S3 sync jobs to use k8s-infra-gcr-promoter to read private GCS buckets
+        empower_gke_for_serviceaccount \
+            "${project}" "${PROWJOB_POD_NAMESPACE}" \
+            "${serviceaccount}" "s3-sync"
 
         # Grant write access to k8s-artifacts-prod-bak GCR (for backups)
         serviceaccount="$(svc_acct_email "${PRODBAK_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
