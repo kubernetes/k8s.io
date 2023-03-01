@@ -23,7 +23,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: gcsweb
-          image: k8s.gcr.io/gcsweb:v1.1.0
+          image: registry.k8s.io/gcsweb:v1.1.0
           args:
             - -upgrade-proxied-http-to-https
             # buckets owned by kubernetes.io
