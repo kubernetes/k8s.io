@@ -30,7 +30,7 @@ need a documented link to browse.
 `gcsweb` is built from source code at
 https://github.com/kubernetes/test-infra/tree/master/gcsweb into Docker
 container, which is then uploaded to private container storage at
-https://registry.k8s.io/gcsweb-amd64 and fetched during processing
+registry.k8s.io/gcsweb and fetched during processing
 of `deployment.yaml` by `kubectl apply`.
 
 ##### How to deploy
