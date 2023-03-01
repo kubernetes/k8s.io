@@ -18,7 +18,7 @@ CANARY_ZONES := $(foreach z,$(PROD_ZONES),canary.$(z))
 ALL_ZONES := $(CANARY_ZONES) $(PROD_ZONES)
 ZONE_CONFIGS := zone-configs
 OCTODNS_CONFIG := octodns-config.yaml
-DOCKER_IMAGE ?= k8s.gcr.io/infra-tools/octodns:v20200616-67ce585
+DOCKER_IMAGE ?= registry.k8s.io/infra-tools/octodns:v20200616-67ce585
 
 check-canary check-prod validate-config: TMPCFG := $(shell mktemp -d /tmp/octodns.XXXXXX)
 check-canary check-prod validate-config: TMP_OCTODNS_CFG := $(shell mktemp /tmp/octodns.XXXXXX)
