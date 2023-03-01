@@ -18,9 +18,6 @@ limitations under the License.
 # VPC
 ###############################################
 
-# VPC is IPv4/IPv6 Dual-Stack, but our cluster is IPv4 because EKS doesn't
-# support dual-stack yet.
-
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 3.0"
@@ -29,18 +26,20 @@ module "vpc" {
   cidr = var.vpc_cidr
 
   azs             = local.azs
-  private_subnets = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 6, k)]
-  public_subnets  = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 6, k + length(local.azs))]
+  private_subnets = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 4, k)]
+  public_subnets  = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 4, k + length(local.azs))]
 
   # intra_subnets are private subnets without the internet access 
   # (https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest#private-versus-intra-subnets)
-  intra_subnets = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 6, k + (length(local.azs) * 2))]
+  intra_subnets = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 4, k + (length(local.azs) * 2))]
 
   # Enable IPv6 for this subnet.
   enable_ipv6                     = true
   assign_ipv6_address_on_creation = true
   create_egress_only_igw          = true
 
+  # Used for calculating IPv6 CIDR based on the following formula:
+  # cidrsubnet(aws_vpc.this[0].ipv6_cidr_block, 8, var.private_subnet_ipv6_prefixes[count.index])
   private_subnet_ipv6_prefixes = [0, 1, 2]
   public_subnet_ipv6_prefixes  = [3, 4, 5]
   intra_subnet_ipv6_prefixes   = [6, 7, 8]
