@@ -18,20 +18,25 @@ limitations under the License.
 # VPC
 ###############################################
 
+# VPC is IPv4/IPv6 Dual-Stack, but our cluster is IPv4 because EKS doesn't
+# support dual-stack yet.
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 3.0"
 
   name = "${var.cluster_name}-vpc"
-  cidr = var.vpc_cidr
+
+  cidr                  = var.vpc_cidr
+  secondary_cidr_blocks = var.vpc_secondary_cidr_blocks
 
   azs             = local.azs
-  private_subnets = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 4, k)]
-  public_subnets  = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 4, k + length(local.azs))]
+  private_subnets = var.vpc_private_subnet
+  public_subnets  = var.vpc_public_subnet
 
   # intra_subnets are private subnets without the internet access 
   # (https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest#private-versus-intra-subnets)
-  intra_subnets = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 4, k + (length(local.azs) * 2))]
+  intra_subnets = var.vpc_intra_subnet
 
   # Enable IPv6 for this subnet.
   enable_ipv6                     = true
