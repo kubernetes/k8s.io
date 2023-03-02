@@ -19,6 +19,26 @@ variable "vpc_cidr" {
   description = "CIDR of the VPC"
 }
 
+variable "vpc_secondary_cidr_blocks" {
+  type        = list(string)
+  description = "Additional CIDRs to attach to the VPC"
+}
+
+variable "vpc_public_subnet" {
+  type        = list(string)
+  description = "Public subnets (one per AZ)"
+}
+
+variable "vpc_private_subnet" {
+  type        = list(string)
+  description = "Private subnets (one per AZ)"
+}
+
+variable "vpc_intra_subnet" {
+  type        = list(string)
+  description = "Intra subnets (one per AZ, subnet without access to external services)"
+}
+
 variable "cluster_name" {
   type        = string
   description = "Name of the EKS cluster"
@@ -62,4 +82,9 @@ variable "node_max_size" {
 variable "node_desired_size" {
   type        = number
   description = "Desired number of nodes in the EKS node group"
+}
+
+variable "node_max_unavailable_percentage" {
+  type        = number
+  description = "Maximum unavailable nodes in a node group"
 }
