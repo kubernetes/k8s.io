@@ -280,6 +280,7 @@ infra:
       k8s-staging-cluster-api-azure:
       k8s-staging-cluster-api-do:
       k8s-staging-cluster-api-gcp:
+      k8s-staging-cluster-api-helm:
       k8s-staging-cluster-api-nested:
       k8s-staging-coredns:
       k8s-staging-cpa:

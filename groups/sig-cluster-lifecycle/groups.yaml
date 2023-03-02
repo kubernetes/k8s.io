@@ -230,6 +230,17 @@ groups:
       - prignanov@vmware.com
       - kmuldoon@vmware.com
 
+  - email-id: k8s-infra-staging-cluster-api-helm@kubernetes.io
+    name: k8s-infra-staging-cluster-api-helm
+    description: |-
+      ACL for staging CAPI for Helm
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jt572@cornell.edu
+      - fpandini@vmware.com
+      - cecilerobertm@gmail.com
+
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
     name: k8s-infra-staging-cluster-api-aws
     description: |-
