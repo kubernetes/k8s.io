@@ -65,7 +65,7 @@ module "eks" {
     # and then turn this off after the cluster/node group is created. Without this initial policy,
     # the VPC CNI fails to assign IPs and nodes cannot join the cluster
     # See https://github.com/aws/containers-roadmap/issues/1666 for more context
-    iam_role_attach_cni_policy = true
+    iam_role_attach_cni_policy = false
   }
 
   eks_managed_node_groups = {
