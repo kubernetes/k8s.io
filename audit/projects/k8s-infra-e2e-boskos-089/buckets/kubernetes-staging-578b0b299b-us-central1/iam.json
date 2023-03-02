@@ -1,0 +1,17 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:k8s-infra-e2e-boskos-089",
+        "projectOwner:k8s-infra-e2e-boskos-089"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-e2e-boskos-089"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    }
+  ]
+}
