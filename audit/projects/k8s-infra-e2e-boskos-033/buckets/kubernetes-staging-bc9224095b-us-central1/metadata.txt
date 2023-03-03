@@ -8,12 +8,11 @@ gs://kubernetes-staging-bc9224095b-us-central1/ :
 	CORS configuration: 		None
 	Lifecycle configuration:	None
 	Requester Pays enabled:		None
-	Retention Policy:		Present
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 02 Mar 2023 01:24:54 GMT
-	Time updated:			Thu, 02 Mar 2023 01:24:54 GMT
-	Metageneration:			1
+	Time updated:			Fri, 03 Mar 2023 06:24:16 GMT
+	Metageneration:			3
 	Bucket Policy Only enabled:	False
 	Public access prevention:	inherited
 	ACL:				
