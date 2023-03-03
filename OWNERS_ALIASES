@@ -234,6 +234,7 @@ aliases:
     - xmudrii
     - Verolop
   release-engineering-approvers:
+    - cici37 # Release Manager
     - cpanato # subproject owner / Release Manager / SIG Technical Lead
     - jeremyrickard # subproject owner / Release Manager / SIG Chair
     - justaugustus # subproject owner / Release Manager / SIG Chair
