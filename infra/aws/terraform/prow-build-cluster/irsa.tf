@@ -74,3 +74,24 @@ module "cluster_autoscaler_irsa" {
 
   tags = local.tags
 }
+
+# IAM policy used for Secrets Manager and accessing secrets.
+# Example policy, uncomment and modify as needed.
+# module "secrets_manager_irsa" {
+#   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+#   version = "~> 5.11"
+#
+#   role_name_prefix = "SECRETSMANAGER-IRSA"
+#   role_policy_arns = {
+#     secrets_manager = aws_iam_policy.secretsmanager_read.arn,
+#   }
+#
+#   oidc_providers = {
+#     main = {
+#       provider_arn               = module.eks.oidc_provider_arn
+#       namespace_service_accounts = ["default:secrets-test"]
+#     }
+#   }
+#
+#   tags = local.tags
+# }
