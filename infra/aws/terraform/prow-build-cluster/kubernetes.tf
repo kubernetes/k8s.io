@@ -38,3 +38,28 @@ module "metrics_server" {
     module.eks
   ]
 }
+
+# AWS Secrets Manager integration
+resource "helm_release" "secrets_store_csi_driver" {
+  name       = "secrets-store-csi-driver"
+  namespace  = "kube-system"
+  repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
+  chart      = "secrets-store-csi-driver"
+  version    = "1.3.1"
+
+  depends_on = [
+    module.eks
+  ]
+}
+
+resource "helm_release" "secrets_store_csi_driver_provider_aws" {
+  name       = "aws-secrets-manager"
+  namespace  = "kube-system"
+  repository = "https://aws.github.io/secrets-store-csi-driver-provider-aws"
+  chart      = "secrets-store-csi-driver-provider-aws"
+  version    = "0.3.0"
+
+  depends_on = [
+    module.eks
+  ]
+}
