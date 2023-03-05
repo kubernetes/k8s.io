@@ -14,7 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-output "cluster_endpoint" {
-  description = "Endpoint for EKS control plane"
-  value       = module.eks.cluster_endpoint
+variable "cluster_name" {
+  type        = string
+  description = "Name of the EKS cluster"
+}
+
+variable "cluster_autoscaler_iam_role_arn" {
+  type        = string
+  description = "IAM Role ARN to be used for cluster-autoscaler SA"
+}
+
+variable "cluster_autoscaler_version" {
+  type        = string
+  description = "Cluster Autoscaler version to use (must match the EKS version)"
+  default     = "v1.25.0"
 }
