@@ -22,6 +22,7 @@ module "cluster_autoscaler" {
 
   cluster_name                    = module.eks.cluster_name
   cluster_autoscaler_iam_role_arn = module.cluster_autoscaler_irsa.iam_role_arn
+  cluster_autoscaler_version      = var.cluster_autoscaler_version
 
   depends_on = [
     module.eks

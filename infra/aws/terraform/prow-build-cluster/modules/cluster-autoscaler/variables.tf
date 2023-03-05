@@ -27,5 +27,4 @@ variable "cluster_autoscaler_iam_role_arn" {
 variable "cluster_autoscaler_version" {
   type        = string
   description = "Cluster Autoscaler version to use (must match the EKS version)"
-  default     = "v1.25.0"
 }
