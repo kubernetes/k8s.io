@@ -88,3 +88,8 @@ variable "node_max_unavailable_percentage" {
   type        = number
   description = "Maximum unavailable nodes in a node group"
 }
+
+variable "cluster_autoscaler_version" {
+  type        = string
+  description = "Cluster Autoscaler version to use (must match the EKS version)"
+}

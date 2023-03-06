@@ -14,27 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-terraform {
-  backend "s3" {
-    bucket = "prow-build-cluster-tfstate"
-    key    = "terraform.tfstate"
-    region = "us-east-2"
-  }
+variable "cluster_name" {
+  type        = string
+  description = "Name of the EKS cluster"
+}
 
-  required_version = "~> 1.3.0"
+variable "cluster_autoscaler_iam_role_arn" {
+  type        = string
+  description = "IAM Role ARN to be used for cluster-autoscaler SA"
+}
 
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.47"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.10"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.9.0"
-    }
-  }
+variable "cluster_autoscaler_version" {
+  type        = string
+  description = "Cluster Autoscaler version to use (must match the EKS version)"
 }

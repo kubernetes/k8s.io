@@ -18,8 +18,3 @@ output "cluster_endpoint" {
   description = "Endpoint for EKS control plane"
   value       = module.eks.cluster_endpoint
 }
-
-output "cluster_autoscaler_iam_role_arn" {
-  description = "IAM Role ARN to be used for cluster-autoscaler SA"
-  value       = module.cluster_autoscaler_irsa.iam_role_arn
-}

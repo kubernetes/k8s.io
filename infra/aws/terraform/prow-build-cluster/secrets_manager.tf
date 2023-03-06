@@ -14,27 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-terraform {
-  backend "s3" {
-    bucket = "prow-build-cluster-tfstate"
-    key    = "terraform.tfstate"
-    region = "us-east-2"
-  }
+data "aws_iam_policy_document" "secretsmanager_read" {
+  statement {
+    sid       = ""
+    effect    = "Allow"
+    resources = ["*"]
 
-  required_version = "~> 1.3.0"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.47"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.10"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.9.0"
-    }
+    actions = [
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret",
+    ]
   }
+}
+
+resource "aws_iam_policy" "secretsmanager_read" {
+  name   = "secretsmanager_read"
+  path   = "/"
+  policy = data.aws_iam_policy_document.secretsmanager_read.json
 }
