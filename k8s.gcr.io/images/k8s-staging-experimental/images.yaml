@@ -6,6 +6,7 @@
   dmap:
     "sha256:414b45e63fc1e22cb5a87b09793425bc2465c69f0cb2a9ea3b196158a511e003": ["v1.25.2"]
     "sha256:bbdf988baadec180b8be6b54bc63f50a006401c1e83a31b289a5b59457b93ef5": ["v1.25.3-rc.0"]
+    "sha256:c0e91515f83de59001605773a2e1acbbf3858acb18f6718bd71cb1d5c8ba8e31": ["v1.26.1"]
 - name: conformance-arm
   dmap:
     "sha256:a6d46cb5e85e51779ffffb2c7685b0bbd8ece11d762a5e77213a8fbedf7b44d2": ["v1.25.2"]
