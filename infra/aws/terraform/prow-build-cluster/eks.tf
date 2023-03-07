@@ -30,6 +30,17 @@ module "eks" {
   # Manage aws-auth ConfigMap.
   manage_aws_auth_configmap = true
 
+  # Configure aws-auth
+  aws_auth_roles = [
+    {
+      "rolearn"  = aws_iam_role.eks_admin.arn
+      "username" = "eks-admin"
+      "groups" = [
+        "system:masters"
+      ]
+    }
+  ]
+
   # We use IPv4 for the best compatibility with the existing setup.
   # Additionally, Ubuntu EKS optimized AMI doesn't support IPv6 well.
   cluster_ip_family = "ipv4"
