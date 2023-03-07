@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// This IAM configuration allows Prow GKE Clusters to assume a role on AWS
+# This IAM configuration allows Prow GKE Clusters to assume a role on AWS
 
 
 # Recognize federated identities from the prow trusted cluster
@@ -24,8 +24,7 @@ resource "aws_iam_openid_connect_provider" "k8s_prow" {
   thumbprint_list = ["08745487e891c19e3078c1f2a07e452950ef36f6"]
 }
 
-# s3writer iam role for artifacts management
-# We allow the kubernetes service account to assume this role
+# We allow Prow Pods with specific service acccounts on the a particular cluster to assume this role
 resource "aws_iam_role" "eks_admin" {
   name = "Prow-EKS-Admin"
   assume_role_policy = jsonencode({
