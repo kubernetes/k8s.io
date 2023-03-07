@@ -282,3 +282,13 @@ groups:
     members:
     - eddiezane@gmail.com
     - k8s-infra-prow-oncall@kubernetes.io
+
+  - email-id: k8s-infra-staging-cloud-provider-kind@kubernetes.io
+    name: k8s-infra-staging-cloud-provider-kind
+    description: |-
+      ACL for pushing Cloud Provider for KIND artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aojea@google.com
+      - bentheelder@google.com
