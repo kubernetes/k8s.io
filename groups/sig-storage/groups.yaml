@@ -60,6 +60,18 @@ groups:
     members:
       - thockin@google.com
       - michaelg@okkur.org
+
+  - email-id: k8s-infra-staging-nfs-server-prov@kubernetes.io
+    name: k8s-infra-staging-nfs-server-prov
+    description: |-
+      ACL for staging NFS-Server provisioner
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - kiall@macinnes.ie
+      - kvapss@gmail.com
+      - joaocc-dev@live.com
+
   #
   # k8s-infra gcs write access
   #

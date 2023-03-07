@@ -184,6 +184,7 @@ restrictions:
       - "^k8s-infra-staging-sig-storage@kubernetes.io$"
       - "^k8s-infra-staging-csi@kubernetes.io$"
       - "^k8s-infra-staging-git-sync@kubernetes.io$"
+      - "^k8s-infra-staging-nfs-server-prov@kubernetes.io$"
   - path: "sig-testing/groups.yaml"
     allowedGroups:
       - "^sig-testing-leads@kubernetes.io$"
