@@ -318,6 +318,7 @@ infra:
       k8s-staging-multitenancy:
       k8s-staging-networking:
       k8s-staging-nfd:
+      k8s-staging-nfs-server-provisioner:
       k8s-staging-npd:
       k8s-staging-perf-tests:
       k8s-staging-prometheus-adapter:
