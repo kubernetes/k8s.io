@@ -273,7 +273,6 @@ infra:
       k8s-staging-cip-test:
       k8s-staging-cloud-provider-gcp:
       k8s-staging-cloud-provider-ibm:
-      k8s-staging-cloud-provider-os:
       k8s-staging-cluster-addons:
       k8s-staging-cluster-api:
       k8s-staging-cluster-api-aws:
@@ -323,7 +322,7 @@ infra:
       k8s-staging-prometheus-adapter:
       k8s-staging-provider-aws:
       k8s-staging-provider-azure:
-      k8s-staging-provider-openstack:
+      k8s-staging-provider-os:
       k8s-staging-publishing-bot:
       k8s-staging-releng:
       k8s-staging-releng-test:
