@@ -1,8 +1,6 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-  - wongma7
-  - jsafrane
-  - kmova
-  - ashishranjan738
   - kvaps
+  - jsafrane
+  - wongma7
