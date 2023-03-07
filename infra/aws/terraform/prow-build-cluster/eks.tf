@@ -33,7 +33,7 @@ module "eks" {
   # Configure aws-auth
   aws_auth_roles = [
     {
-      "rolearn"  = aws_iam_role.eks_admin.id
+      "rolearn"  = aws_iam_role.eks_admin.arn
       "username" = "eks-admin"
       "groups" = [
         "system:masters"

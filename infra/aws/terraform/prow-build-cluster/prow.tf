@@ -33,7 +33,7 @@ resource "aws_iam_role" "eks_admin" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Federated" : aws_iam_openid_connect_provider.k8s_prow
+          "Federated" : aws_iam_openid_connect_provider.k8s_prow.arn
         },
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
