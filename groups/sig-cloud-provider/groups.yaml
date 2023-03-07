@@ -37,8 +37,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - anusha.iiitm@gmail.com
-      - anlin.kong@gmail.com
+      - haka.jesse@gmail.com
       - glaubich@gmail.com
 
   - email-id: k8s-infra-staging-provider-azure@kubernetes.io
