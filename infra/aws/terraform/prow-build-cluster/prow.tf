@@ -45,7 +45,7 @@ resource "aws_iam_role" "eks_admin" {
                 "system:serviceaccount:default:config-bootstrapper",
                 "system:serviceaccount:default:crier",
                 "system:serviceaccount:default:sinker",
-                "system:serviceaccount:default:prow-controller-manager"
+                "system:serviceaccount:default:prow-controller-manager",
                 "system:serviceaccount:default:hook"
             ]
           }
