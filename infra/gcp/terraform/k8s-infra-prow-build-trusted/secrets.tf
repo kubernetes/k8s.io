@@ -17,12 +17,16 @@ limitations under the License.
 locals {
   build_cluster_secrets = {
     capdo-quayio-registry-secret = {
-      group = "sig-cluster-lifecycle"
+      group  = "sig-cluster-lifecycle"
       owners = "k8s-infra-staging-cluster-api-do@kubernetes.io"
     }
     cncf-ci-github-token = {
       group  = "sig-testing"
       owners = "k8s-infra-ii-coop@kubernetes.io"
+    }
+    eks-prow-build-cluster-kubeconfig = {
+      group  = "sig-k8s-infra"
+      owners = "k8s-infra-aws-admins@kubernetes.io"
     }
     k8s-cip-test-prod-service-account = {
       group  = "sig-release"
@@ -33,11 +37,11 @@ locals {
       owners = "k8s-infra-release-admins@kubernetes.io"
     }
     k8s-release-enhancements-triage-github-token = {
-      group = "sig-release"
+      group  = "sig-release"
       owners = "k8s-infra-release-editors@kubernetes.io"
     }
     k8s-release-bug-triage-github-token = {
-      group = "sig-release"
+      group  = "sig-release"
       owners = "k8s-infra-release-editors@kubernetes.io"
     }
     k8s-triage-robot-github-token = {
