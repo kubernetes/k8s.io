@@ -1,0 +1,11 @@
+{
+  "createTime": "2023-03-07T23:51:58.805Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-provider-os",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-provider-os",
+  "projectNumber": "814318201830"
+}
