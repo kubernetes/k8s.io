@@ -32,3 +32,11 @@ resource "aws_iam_policy" "secretsmanager_read" {
   path   = "/"
   policy = data.aws_iam_policy_document.secretsmanager_read.json
 }
+
+# We allow ESO pods in the Prow control plane cluster to read from AWS Secrets Manager.
+resource "aws_iam_role_policy" "eso_eks_admin" {
+  name = "eso_read_policy"
+  role = aws_iam_role.eso_read.id
+
+  policy = data.aws_iam_policy_document.secretsmanager_read.json
+}

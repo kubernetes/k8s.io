@@ -39,14 +39,14 @@ resource "aws_iam_role" "eks_admin" {
         "Condition" : {
           "StringEquals" : {
             "container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow:sub" : [
-                // https://github.com/kubernetes/test-infra/tree/master/config/prow/cluster 
-                // all services that load kubeconfig should be listed here
-                "system:serviceaccount:default:deck",
-                "system:serviceaccount:default:config-bootstrapper",
-                "system:serviceaccount:default:crier",
-                "system:serviceaccount:default:sinker",
-                "system:serviceaccount:default:prow-controller-manager",
-                "system:serviceaccount:default:hook"
+              // https://github.com/kubernetes/test-infra/tree/master/config/prow/cluster 
+              // all services that load kubeconfig should be listed here
+              "system:serviceaccount:default:deck",
+              "system:serviceaccount:default:config-bootstrapper",
+              "system:serviceaccount:default:crier",
+              "system:serviceaccount:default:sinker",
+              "system:serviceaccount:default:prow-controller-manager",
+              "system:serviceaccount:default:hook"
             ]
           }
         }
@@ -55,5 +55,32 @@ resource "aws_iam_role" "eks_admin" {
   })
 
   max_session_duration = 43200
+}
 
+# We allow ESO pods in the Prow control plane cluster to read from AWS Secrets Manager.
+resource "aws_iam_role" "eso_read" {
+  name = "Prow-ESO-Read"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : aws_iam_openid_connect_provider.k8s_prow.arn
+        },
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringEquals" : {
+            "container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow:sub" : [
+              // https://github.com/kubernetes/test-infra/tree/master/config/prow/cluster 
+              // all services that load kubeconfig should be listed here
+              "system:serviceaccount:default:kubernetes-external-secrets-sa"
+            ]
+          }
+        }
+      }
+    ]
+  })
+
+  max_session_duration = 43200
 }
