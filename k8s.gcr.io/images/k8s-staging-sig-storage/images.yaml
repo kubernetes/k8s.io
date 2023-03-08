@@ -168,6 +168,7 @@
     "sha256:c1bedac8758029948afe060bf8f6ee63ea489b5e08d29745f44fab68ee0d46ca": [ "v2.2.2" ]
     "sha256:2de1d15fc1f2a33618c61ff8d499ef22a7b2b8961952f059656a245b98498ba4": [ "v3.0.0" ]
     "sha256:e943bb77c7df05ebdc8c7888b2db289b13bf9f012d6a3a5a74f14d4d5743d439": [ "v3.0.1" ]
+    "sha256:c825f3d5e28bde099bd7a3daace28772d412c9157ad47fa752a9ad0baafc118d": [ "v4.0.8" ]
 - name: nfs-subdir-external-provisioner
   dmap:
     "sha256:3ce0fdba4d8eca7d9d3444f2f1ec2f2c5a48e936525177e0caaaa9c0fcc9c345": [ "v4.0.0" ]
