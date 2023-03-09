@@ -1,1 +1,21 @@
-# No images yet
+- name: manila-csi-plugin
+  dmap:
+    "sha256:1313c72a62ec8555355e699c87eb22149848272c6d117f52d1036ebb71efee31": ["v1.27.0-alpha.0"]
+- name: magnum-auto-healer
+  dmap:
+    "sha256:834bfe4db29a81d5532b2aa14a927ec692cb6aaeb6a5e542788d02ca2069a133": ["v1.27.0-alpha.0"]
+- name: k8s-keystone-auth
+  dmap:
+    "sha256:a5aa66ef60aaea0f1dca90030d34fa1c026bb6eed8f1ea64dca0f2d81bc237f4": ["v1.27.0-alpha.0"]
+- name: cinder-csi-plugin
+  dmap:
+    "sha256:d8e815acef938f9fae825848031c7759922cc3d0e9032385de09dd07e660381d": ["v1.27.0-alpha.0"]
+- name: barbican-kms-plugin
+  dmap:
+    "sha256:768e3af1b6fd7887b1314f15c6756781ee1f5a5b6d835f44672713b9ed1ab9d5": ["v1.27.0-alpha.0"]
+- name: octavia-ingress-controller
+  dmap:
+    "sha256:63a58ea585fc4ff9c8d0f0eb55fd4f186c5c14be02f0972695b78cec375a71ca": ["v1.27.0-alpha.0"]
+- name: openstack-cloud-controller-manager
+  dmap:
+    "sha256:719aebfbead0264cfb8a20d6c0ec2c05021a5894aca486201e9bb4581dab9736": ["v1.27.0-alpha.0"]
