@@ -86,7 +86,11 @@ resource "google_cloud_run_service" "oci-proxy" {
     spec {
       service_account_name = google_service_account.oci-proxy.email
       containers {
-        image = "us-central1-docker.pkg.dev/k8s-artifacts-prod/images/infra-tools/archeio@${var.digest}"
+        // NOTE: We deploy from staging because:
+        // - We pin by digest anyhow (so it's comparably secure)
+        // - We need to be able to deploy registry fixes ASAP
+        // - We will eventually auto-deploy staging by overriding the project and digest on the production config to avoid skew
+        image = "gcr.io/k8s-staging-infra-tools/archeio@${var.digest}"
 
         dynamic "env" {
           for_each = each.value.environment_variables
