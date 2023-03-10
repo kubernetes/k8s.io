@@ -90,6 +90,7 @@ resource "google_cloud_run_service" "oci-proxy" {
         // - We pin by digest anyhow (so it's comparably secure)
         // - We need to be able to deploy registry fixes ASAP
         // - We will eventually auto-deploy staging by overriding the project and digest on the production config to avoid skew
+        // If you're interested in running this image yourself releases are available at registry.k8s.io/infra-tools/archeio
         image = "gcr.io/k8s-staging-infra-tools/archeio@${var.digest}"
 
         dynamic "env" {
