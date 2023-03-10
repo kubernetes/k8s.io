@@ -413,6 +413,22 @@
     "sha256:c0ddb4794bc8a3631e3373015f913c00b230ee54f87bde9ade195b3a3415c60f": ["v0.1.2"]
     "sha256:965b0a9227c039c393d44de97450a698ada6952a74b9ff12c315f91dc2bdd45c": ["v0.2.0"]
     "sha256:49ffe914c7080b3a001524dcee70e7155ae540452a1b5083048368e47a67c776": ["v0.2.1"]
+    "sha256:13ac9b3c476d7290a4451d65d09d6016a2cb89836ffbfa4eae55b72731a22080": ["v0.2.2"]
+- name: distroless-iptables-amd64
+  dmap:
+    "sha256:1c27c0f928ca7a1a3e5138b9d0186eab3f3ae136fc832468f7e09e02bb3e54e6": ["v0.2.2"]
+- name: distroless-iptables-arm
+  dmap:
+    "sha256:b5bf3f753f34ed8f538248bb73624dfbeef1a72745f61dba1012a76947262969": ["v0.2.2"]
+- name: distroless-iptables-arm64
+  dmap:
+    "sha256:4ad6bfda240879ba778fb416488fb369e00adc747c4248b81e48d612920c964d": ["v0.2.2"]
+- name: distroless-iptables-ppc64le
+  dmap:
+    "sha256:02ea3e7a53f20e04bd39ef146a109506435ab005dc14c3a8e98c4a634813e4be": ["v0.2.2"]
+- name: distroless-iptables-s390x
+  dmap:
+    "sha256:c945d84cd8164eebe9f8d9b618812b01c5852a89d994495a5fcd20a543edd9ae": ["v0.2.2"]
 - name: go-runner
   dmap:
     "sha256:38e0ab8d72c2c35e8228291051d007ec9ccc81cca2529b306605f870b1d3c630": ["buster-v1.0.0"]
