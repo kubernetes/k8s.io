@@ -27,11 +27,52 @@ groups:
       ReconcileMembers: "true"
     members:
       - mwielgus@google.com
-      - lukaszos@google.com
       - bskiba@google.com
       - maciekpytel@google.com
-      - vivek.bagade92@gmail.com
-      - aleksandram@google.com
+      - ksiedlecki@google.com
+      - jbartosik@google.com
+      - jtuznik@google.com
+      - danielmk@google.com
+      - guyjtempleton@googlemail.com
+      - kgolab@google.com
+
+  - email-id: k8s-infra-staging-balancer@kubernetes.io
+    name: k8s-infra-staging-balancer
+    description: |-
+      ACL for staging balancer
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mwielgus@google.com
+      - kgolab@google.com
+
+  - email-id: k8s-infra-staging-cluster-autoscaler@kubernetes.io
+    name: k8s-infra-staging-cluster-autoscaler
+    description: |-
+      ACL for staging cluster-autoscaler
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mwielgus@google.com
+      - bskiba@google.com
+      - maciekpytel@google.com
+      - ksiedlecki@google.com
+      - jbartosik@google.com
+      - jtuznik@google.com
+      - danielmk@google.com
+      - guyjtempleton@googlemail.com
+      - kgolab@google.com
+
+  - email-id: k8s-infra-staging-vpa@kubernetes.io
+    name: k8s-infra-staging-vpa
+    description: |-
+      ACL for staging vpa
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mwielgus@google.com
+      - bskiba@google.com
+      - maciekpytel@google.com
       - ksiedlecki@google.com
       - jbartosik@google.com
       - jtuznik@google.com

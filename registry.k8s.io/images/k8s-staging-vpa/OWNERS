@@ -10,10 +10,5 @@ approvers:
 - gjtempleton
 - kgolab
 
-emeritus_approvers:
-- losipiuk # 2023-03-12
-- aleksandra-malinowska # 2023-03-12
-- vivekbagade # 2023-03-12
-
 labels:
   - sig/autoscaling
