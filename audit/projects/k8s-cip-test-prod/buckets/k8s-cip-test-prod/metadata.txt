@@ -11,8 +11,8 @@ gs://k8s-cip-test-prod/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 10 Jul 2019 22:16:04 GMT
-	Time updated:			Mon, 06 Mar 2023 19:26:01 GMT
-	Metageneration:			132
+	Time updated:			Mon, 13 Mar 2023 10:15:10 GMT
+	Metageneration:			135
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
