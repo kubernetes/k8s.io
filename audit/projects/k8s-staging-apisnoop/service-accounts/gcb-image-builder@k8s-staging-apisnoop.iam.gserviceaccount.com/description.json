@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-apisnoop",
+  "email": "gcb-image-builder@k8s-staging-apisnoop.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-apisnoop/serviceAccounts/gcb-image-builder@k8s-staging-apisnoop.iam.gserviceaccount.com",
+  "oauth2ClientId": "103431372358851066458",
+  "projectId": "k8s-staging-apisnoop",
+  "uniqueId": "103431372358851066458"
+}

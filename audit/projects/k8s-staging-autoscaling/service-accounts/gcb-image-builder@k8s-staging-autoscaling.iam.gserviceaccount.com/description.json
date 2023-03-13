@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-autoscaling",
+  "email": "gcb-image-builder@k8s-staging-autoscaling.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-autoscaling/serviceAccounts/gcb-image-builder@k8s-staging-autoscaling.iam.gserviceaccount.com",
+  "oauth2ClientId": "100734328033553131221",
+  "projectId": "k8s-staging-autoscaling",
+  "uniqueId": "100734328033553131221"
+}

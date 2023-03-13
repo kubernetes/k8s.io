@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-csi-secrets-store",
+  "email": "gcb-image-builder@k8s-staging-csi-secrets-store.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-csi-secrets-store/serviceAccounts/gcb-image-builder@k8s-staging-csi-secrets-store.iam.gserviceaccount.com",
+  "oauth2ClientId": "100527099860975301747",
+  "projectId": "k8s-staging-csi-secrets-store",
+  "uniqueId": "100527099860975301747"
+}
