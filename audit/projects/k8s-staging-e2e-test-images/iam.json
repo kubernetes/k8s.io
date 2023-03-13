@@ -9,7 +9,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-e2e-test-images@kubernetes.io"
+        "group:k8s-infra-staging-e2e-test-images@kubernetes.io",
+        "serviceAccount:gcb-image-builder@k8s-staging-e2e-test-images.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.editor"
     },

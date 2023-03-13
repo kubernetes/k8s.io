@@ -1,4 +1,17 @@
 {
+  "auditConfigs": [
+    {
+      "auditLogConfigs": [
+        {
+          "logType": "DATA_READ"
+        },
+        {
+          "logType": "DATA_WRITE"
+        }
+      ],
+      "service": "artifactregistry.googleapis.com"
+    }
+  ],
   "bindings": [
     {
       "members": [

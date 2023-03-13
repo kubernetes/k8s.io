@@ -9,7 +9,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-cluster-api-aws@kubernetes.io"
+        "group:k8s-infra-staging-cluster-api-aws@kubernetes.io",
+        "serviceAccount:gcb-image-builder@k8s-staging-cluster-api-aws.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.editor"
     },

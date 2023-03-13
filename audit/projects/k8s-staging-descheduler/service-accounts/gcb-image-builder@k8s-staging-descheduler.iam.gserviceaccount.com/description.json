@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-descheduler",
+  "email": "gcb-image-builder@k8s-staging-descheduler.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-descheduler/serviceAccounts/gcb-image-builder@k8s-staging-descheduler.iam.gserviceaccount.com",
+  "oauth2ClientId": "113008992335348551478",
+  "projectId": "k8s-staging-descheduler",
+  "uniqueId": "113008992335348551478"
+}
