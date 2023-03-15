@@ -19,14 +19,14 @@ resource "google_iam_workload_identity_pool" "eks_cluster" {
 
   workload_identity_pool_id = "prow-eks"
   display_name              = "EKS Prow Cluster"
-  description = "Identity pool for CI on AWS using EKS clusters"
+  description               = "Identity pool for CI on AWS using EKS clusters"
 }
 
 resource "google_iam_workload_identity_pool_provider" "eks_cluster" {
   project = module.project.project_id
 
-  display_name = "AWS OIDC provider"
-  description = "Identity pool for CI on AWS using EKS clusters"
+  display_name                       = "AWS OIDC provider"
+  description                        = "Identity pool for CI on AWS using EKS clusters"
   workload_identity_pool_id          = google_iam_workload_identity_pool.eks_cluster.workload_identity_pool_id
   workload_identity_pool_provider_id = "oidc"
   attribute_mapping = {
@@ -35,6 +35,6 @@ resource "google_iam_workload_identity_pool_provider" "eks_cluster" {
   oidc {
     # From EKS cluster created in https://github.com/kubernetes/k8s.io/tree/main/infra/aws/terraform/prow-build-cluster
     issuer_uri        = "https://oidc.eks.us-east-2.amazonaws.com/id/F8B73554FE6FBAF9B19569183FB39762"
-    allowed_audiences = ["https://sts.googleapis.com"]
+    allowed_audiences = ["sts.googleapis.com"]
   }
 }
