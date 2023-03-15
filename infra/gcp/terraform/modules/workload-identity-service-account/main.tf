@@ -32,9 +32,10 @@ resource "google_service_account" "serviceaccount" {
 }
 data "google_iam_policy" "workload_identity" {
   binding {
-    members = [
-      "serviceAccount:${local.cluster_project_id}.svc.id.goog[${var.cluster_namespace}/${local.cluster_serviceaccount_name}]",
-    ]
+    members = concat(["serviceAccount:${local.cluster_project_id}.svc.id.goog[${var.cluster_namespace}/${local.cluster_serviceaccount_name}]"],
+      var.additional_workload_identity_principals
+    )
+
     role = "roles/iam.workloadIdentityUser"
   }
 }
