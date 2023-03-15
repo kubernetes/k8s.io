@@ -95,8 +95,7 @@ module "eks" {
       ami_id                     = var.node_ami
       enable_bootstrap_user_data = true
 
-      # Force version update if existing pods are unable to be drained due to a PodDisruptionBudget issue.
-      force_update_version = true
+      force_update_version = false
       update_config = {
         max_unavailable_percentage = var.node_max_unavailable_percentage
       }
