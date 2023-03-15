@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: google-adc
-  namespace: default
+  namespace: external-secrets
 data:
   adc.json: |
     {

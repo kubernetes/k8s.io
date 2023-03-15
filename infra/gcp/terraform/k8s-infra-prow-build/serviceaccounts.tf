@@ -27,7 +27,7 @@ locals {
       project_roles     = ["roles/secretmanager.secretAccessor"],
       cluster_namespace = "kubernetes-external-secrets"
       additional_workload_identity_principals = [
-        "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool_provider.eks_cluster.name}/attribute.sub/system:serviceaccount:default:default"
+        "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool_provider.eks_cluster.name}/attribute.sub/system:serviceaccount:external-secrets:external-secrets"
       ]
     }
   }
@@ -46,7 +46,7 @@ resource "google_iam_workload_identity_pool_provider" "eks_cluster" {
     "google.subject" = "assertion.sub"
   }
   oidc {
-    issuer_uri        = "https://oidc.eks.us-east-2.amazonaws.com/id/ASK MARKO"
+    issuer_uri        = "https://oidc.eks.us-east-2.amazonaws.com/id/F8B73554FE6FBAF9B19569183FB39762"
     allowed_audiences = ["sts.googleapis.com"]
   }
 }
