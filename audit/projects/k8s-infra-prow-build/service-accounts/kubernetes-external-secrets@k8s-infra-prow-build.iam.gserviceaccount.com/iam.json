@@ -2,6 +2,7 @@
   "bindings": [
     {
       "members": [
+        "principalSet://iam.googleapis.com/projects/773781448124/locations/global/workloadIdentityPools/prow-eks/attribute.sub/system:serviceaccount:external-secrets:external-secrets",
         "serviceAccount:k8s-infra-prow-build.svc.id.goog[kubernetes-external-secrets/kubernetes-external-secrets]"
       ],
       "role": "roles/iam.workloadIdentityUser"
