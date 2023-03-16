@@ -200,7 +200,7 @@
     "sha256:12f18b0ce1fa12e40a29b4b142cbfc6b909b65a0be02421bc3d1889c824747f7": ["v20200808-gc500bd4b3"]
     "sha256:2e87eb96d11f481fa12c2ddcce1770741f957481aa87cf4963cfd1b2842dd4df": ["v20220801-g00ee51f09"]
     "sha256:92e0258e404bbf5b6916f4e897c5484f27e113d03cae07a1d780f72474df07c6": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
-    "sha256:23eb4b1775fbaa2adca55c73cf0341e1224d6308689b6f4b3aa1523312eb81c": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
+    "sha256:23eb4b1775fbaa2adca55c73cf0341e1224d6308689b6f4b3aa1523312eb81ca": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
 
 # kube-webhook-certgen
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/kube-webhook-certgen
