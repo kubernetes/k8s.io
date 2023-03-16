@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+reviewers:
+- knverey
+- natasha41575
+
+approvers:
+- knverey
+- natasha41575
