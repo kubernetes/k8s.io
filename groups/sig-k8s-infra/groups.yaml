@@ -379,6 +379,18 @@ groups:
       - sig-k8s-infra-leads@kubernetes.io
       - steering@kubernetes.io
 
+  - email-id: k8s-infra-aws-accounting@kubernetes.io
+    name: k8s-infra-aws-accounting
+    description: |-
+      ACL for AWS accounting (readonly)
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinleegarrison@gmail.com
+      - k8s-infra-ii-coop@kubernetes.io
+      - sig-k8s-infra-leads@kubernetes.io
+      - steering@kubernetes.io
+
   - email-id: k8s-infra-gcp-org-admins@kubernetes.io
     name: k8s-infra-gcp-org-admins
     description: |-
