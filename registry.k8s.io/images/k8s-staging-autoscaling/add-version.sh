@@ -20,7 +20,10 @@
 # empty diff in such a case.
 # NOTE: Only modifies local files, does not create a PR.
 
-if [ "$2". == . ] || [ "$3". != . ]
+set +o errexit
+set -o pipefail
+
+if [ $# -ne 2 ]
 then
   echo "Usage: $0 <component name> <version tag>"
   echo "example usages:"
@@ -34,7 +37,6 @@ COMPONENT="$1"
 VERSION="$2"
 
 component_len=${#COMPONENT}
-should_read=1
 
 function emit_new_sha {
   sha=$(gcloud container images describe "gcr.io/k8s-staging-autoscaling/${component}:${VERSION}" '--format=value(image_summary.digest)' 2>/dev/null)
@@ -82,6 +84,8 @@ function handle_component {
     emit_new_sha
   fi
 }
+
+should_read=1
 
 while true
 do
