@@ -17,6 +17,7 @@
     "sha256:fdf0a1103c73dc03d22bdc4312f5b18b2fe2426966119284938dc65a2ef23d9f": ["v1.8.2"]
     "sha256:51aebbb47392f32f526f1c99ea194bc00037c8b87cdee09efde86d269988d651": ["v1.9.0"]
     "sha256:fc1986009148b1d73a73e23a5df69730692bb40c20ff0ca206a0321490346080": ["v1.9.1"]
+    "sha256:098c1626215c77d5cd1371aae3111fbbfd9bee77f261dda4fa847b7caaa919bd": ["v1.9.2"]
 
 - name: gcp-filestore-csi-driver
   dmap:
