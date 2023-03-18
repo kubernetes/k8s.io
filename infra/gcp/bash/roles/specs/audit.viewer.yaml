@@ -14,8 +14,6 @@ include:
   - roles/bigquery.resourceViewer
   # read access to cloud assets metadata
   - roles/cloudasset.viewer
-  # TODO: determine if viewing builds could expose anything sensitive
-  # - roles/cloudbuild.builds.viewer
   # read access to cloudkms public keys
   # ref: https://cloud.google.com/kms/docs/reference/permissions-and-roles#access-control-guidelines
   - roles/cloudkms.publicKeyViewer
@@ -28,14 +26,13 @@ include:
   - roles/container.clusterViewer
   # read access to dns
   - roles/dns.reader
-  # read access to logs (NB: removing permissions to create/run/delete queries)
-  - roles/logging.viewer
   # read access to monitoring
   - roles/monitoring.viewer
   # read access to org policies
   - roles/orgpolicy.policyViewer
   # read access to pubsub schemas, snapshots, subscriptions, topics (but not messages)
   - roles/pubsub.viewer
+  # TODO: May be sensitive, we depend seomwhat on cloud run private / secret URLs behind GCLB/App Armor
   # read access to run configurations, olocations, reviewers, routes, services
   - roles/run.viewer
   # read access to secrets metadata (not their contents)
