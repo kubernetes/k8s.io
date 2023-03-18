@@ -114,7 +114,7 @@ function output_role_yaml() {
 
 if ! command -v yq &>/dev/null; then
   echo >/dev/stderr "yq not found. Please install with pip3 install -r ${repo_root}/requirements.txt"
-  return 1
+  exit 1
 fi
 
 if [ $# = 0 ]; then
