@@ -22,4 +22,6 @@ REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 readonly REPO_ROOT
 
 cd "${REPO_ROOT}"/k8s.gcr.io/manifests
-go test
+go test ./...
+cd "${REPO_ROOT}"/registry.k8s.io/manifests
+go test ./...
