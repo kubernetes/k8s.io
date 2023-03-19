@@ -1,4 +1,4 @@
-module k8s.io/k8s.io/k8s.gcr.io/manifests
+module k8s.io/k8s.io/registry.k8s.io/manifests
 
 go 1.19
 
