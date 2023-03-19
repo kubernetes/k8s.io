@@ -183,6 +183,7 @@
     "sha256:05948cf43aa41050943b2c887adcc2f7630893b391c1201e99a6c12ed06ba51b": ["v20220624-g3348cd71e"]
     "sha256:f45fb156e1488ae29aa5e98d2faf8731c79bc5a19c2f39a3c4069566ba629a78": ["v20220801-g00ee51f09"]
     "sha256:778ac6d1188c8de8ecabeddd3c37b72c8adc8c712bad2bd7a81fb23a3514934c": ["v20220819-ga98c63787"]
+    "sha256:4938d1d91a2b7d19454460a8c1b010b89f6ff92d2987fd889ac3e8fc3b70d91a": ["v20230318-helm-chart-4.5.2-44-gfec1dbe3a"]
 
 # fastcgi HTTP server image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/fastcgi-helloserver
