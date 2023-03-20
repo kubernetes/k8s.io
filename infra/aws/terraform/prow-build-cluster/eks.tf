@@ -112,8 +112,10 @@ module "eks" {
       enable_monitoring = true
 
       block_device_mappings = {
-        xvda = {
-          device_name = "/dev/xvda"
+        # This must be sda1 in order to match the root volume,
+        # otherwise a new volume is created.
+        sda1 = {
+          device_name = "/dev/sda1"
           ebs = {
             volume_size           = var.node_volume_size
             volume_type           = "gp3"
