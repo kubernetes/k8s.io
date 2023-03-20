@@ -32,13 +32,41 @@ module "eks" {
 
   # Configure aws-auth
   aws_auth_roles = [
+    # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
     {
       "rolearn"  = aws_iam_role.eks_admin.arn
       "username" = "eks-admin"
       "groups" = [
-        "system:masters"
+        "eks-prow-cluster-admin"
       ]
-    }
+    },
+    # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
+    {
+      "rolearn"  = aws_iam_role.iam_cluster_admin.arn
+      "username" = "eks-cluster-admin"
+      "groups" = [
+        "eks-cluster-admin"
+      ]
+    },
+  ]
+  # Allow EKS access to the root account.
+  aws_auth_users = [
+    {
+      "userarn"  = local.root_account_arn
+      "username" = "root"
+      "groups" = [
+        "eks-cluster-admin"
+      ]
+    },
+  ]
+
+  # Allow access to the KMS key used for secrets encryption to the root account.
+  kms_key_administrators = [
+    local.root_account_arn
+  ]
+  # Allow service access to the KMS key to the Prow-Cluster-Admin role.
+  kms_key_service_users = [
+    aws_iam_role.iam_cluster_admin.arn
   ]
 
   # We use IPv4 for the best compatibility with the existing setup.
