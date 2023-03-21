@@ -432,3 +432,14 @@ groups:
       - spiffxp@google.com
       - nikhitaraghunath@gmail.com
       - thockin@google.com
+
+  - email-id: k8s-infra-sandbox-capa@kubernetes.io
+    name: k8s-infra-sandbox-capa
+    description: |-
+      ACL for CAPA sandbox
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - davanum@gmail.com
+      - hh@cncf.io
