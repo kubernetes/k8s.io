@@ -38,4 +38,3 @@ spec:
               initContainers:
               - name: "{{ element.name }}"
                 image: "{{ regex_replace_all('gcr.io/k8s-(prow/|staging-)', '{{ element.image }}', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-${1}' )}}"
-
