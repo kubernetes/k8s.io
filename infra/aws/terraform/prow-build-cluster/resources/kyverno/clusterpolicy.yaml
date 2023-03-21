@@ -18,7 +18,7 @@ spec:
             spec:
               containers:
               - name: "{{ element.name }}"
-                image: "{{ replace_all('{{element.image}}', 'gcr.io/k8s-prow/', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-prow/' )}}"
+                image: "{{ regex_replace_all('gcr.io/k8s-(prow/|staging-)', '{{ element.image }}', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-${1}' )}}"
     - name: replace-image-registry-gcr-k8s-prow-to-ecr-pod-initcontainers
       match:
         any:
@@ -37,37 +37,5 @@ spec:
             spec:
               initContainers:
               - name: "{{ element.name }}"
-                image: "{{ replace_all('{{element.image}}', 'gcr.io/k8s-prow/', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-prow/' )}}"
-    - name: replace-image-registry-gcr-k8s-staging-to-ecr-pod-containers
-      match:
-        any:
-        - resources:
-            kinds:
-            - Pod
-      mutate:
-        foreach:
-        - list: "request.object.spec.containers"
-          patchStrategicMerge:
-            spec:
-              containers:
-              - name: "{{ element.name }}"
-                image: "{{ replace_all('{{element.image}}', 'gcr.io/k8s-staging-', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-staging-' )}}"
-    - name: replace-image-registry-gcr-k8s-staging-to-ecr-pod-initcontainers
-      match:
-        any:
-        - resources:
-            kinds:
-            - Pod
-      preconditions:
-        all:
-        - key: "{{ request.object.spec.initContainers[] || `[]` | length(@) }}"
-          operator: GreaterThanOrEquals
-          value: 1
-      mutate:
-        foreach:
-        - list: "request.object.spec.initContainers"
-          patchStrategicMerge:
-            spec:
-              initContainers:
-              - name: "{{ element.name }}"
-                image: "{{ replace_all('{{element.image}}', 'gcr.io/k8s-staging-', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-staging-' )}}"
+                image: "{{ regex_replace_all('gcr.io/k8s-(prow/|staging-)', '{{ element.image }}', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-${1}' )}}"
+
