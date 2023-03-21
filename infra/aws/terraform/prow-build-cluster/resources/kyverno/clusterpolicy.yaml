@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: k8s-prow-gcr-to-ecr-registry    
+  name: k8s-prow-gcr-to-ecr-registry
 spec:
   background: false
   rules:

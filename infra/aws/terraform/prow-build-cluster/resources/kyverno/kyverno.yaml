@@ -1,6 +1,6 @@
 ---
 # Source: kyverno/templates/poddisruptionbudget.yaml
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: kyverno
@@ -8,17 +8,17 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
     app.kubernetes.io/version: 2.7.1
   namespace: kyverno
-spec:  
+spec:
   minAvailable: 1
   selector:
     matchLabels:
-      
+
       app.kubernetes.io/name: kyverno
       app.kubernetes.io/instance: kyverno
 ---
@@ -46,7 +46,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -61,7 +61,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -81,7 +81,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -101,7 +101,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -451,7 +451,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -761,7 +761,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -1814,7 +1814,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -2165,7 +2165,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -2475,7 +2475,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -3528,7 +3528,6 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -16013,7 +16012,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -16206,7 +16205,6 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -28694,7 +28692,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -29186,7 +29184,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -29583,7 +29581,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -29955,7 +29953,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30326,7 +30324,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30356,7 +30354,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30386,7 +30384,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30418,7 +30416,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30447,7 +30445,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30563,7 +30561,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30571,7 +30569,7 @@ metadata:
 aggregationRule:
   clusterRoleSelectors:
   - matchLabels:
-      
+
       app.kubernetes.io/name: kyverno
       app.kubernetes.io/instance: kyverno
 ---
@@ -30584,7 +30582,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30610,7 +30608,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30666,7 +30664,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30690,7 +30688,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30740,7 +30738,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30766,7 +30764,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30818,7 +30816,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30886,7 +30884,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -30947,7 +30945,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -31022,7 +31020,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -31035,7 +31033,7 @@ spec:
     protocol: TCP
     name: https
   selector:
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
   type: ClusterIP
@@ -31049,7 +31047,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -31062,7 +31060,7 @@ spec:
     protocol: TCP
     name: metrics-port
   selector:
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
   type: ClusterIP
@@ -31145,14 +31143,14 @@ spec:
                 fieldPath: metadata.namespace
           - name: KYVERNO_SVC
             value: kyverno-cleanup-controller
-          resources: 
+          resources:
             limits:
               memory: 128Mi
             requests:
               cpu: 100m
               memory: 64Mi
-          securityContext: 
-            
+          securityContext:
+
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -31200,7 +31198,7 @@ metadata:
     app.kubernetes.io/component: kyverno
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
-    
+
     app.kubernetes.io/name: kyverno
     app.kubernetes.io/instance: kyverno
     app.kubernetes.io/part-of: kyverno
@@ -31210,7 +31208,7 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      
+
       app.kubernetes.io/name: kyverno
       app.kubernetes.io/instance: kyverno
   strategy:
@@ -31224,7 +31222,7 @@ spec:
         app.kubernetes.io/component: kyverno
         helm.sh/chart: kyverno-2.7.1
         app.kubernetes.io/managed-by: Helm
-        
+
         app.kubernetes.io/name: kyverno
         app.kubernetes.io/instance: kyverno
         app.kubernetes.io/part-of: kyverno
@@ -31250,15 +31248,15 @@ spec:
           imagePullPolicy: IfNotPresent
           args:
             - --loggingFormat=text
-          resources: 
+          resources:
             limits:
               cpu: 100m
               memory: 256Mi
             requests:
               cpu: 10m
               memory: 64Mi
-          securityContext: 
-            
+          securityContext:
+
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -31288,14 +31286,14 @@ spec:
           args:
             - --loggingFormat=text
             - --exceptionNamespace=kyverno
-          resources: 
+          resources:
             limits:
               memory: 384Mi
             requests:
               cpu: 100m
               memory: 128Mi
-          securityContext: 
-            
+          securityContext:
+
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -31333,7 +31331,7 @@ spec:
             value: /.sigstore
           - name: KYVERNO_DEPLOYMENT
             value: kyverno
-          startupProbe: 
+          startupProbe:
             failureThreshold: 20
             httpGet:
               path: /health/liveness
@@ -31341,7 +31339,7 @@ spec:
               scheme: HTTPS
             initialDelaySeconds: 2
             periodSeconds: 6
-          livenessProbe: 
+          livenessProbe:
             failureThreshold: 2
             httpGet:
               path: /health/liveness
@@ -31351,7 +31349,7 @@ spec:
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 5
-          readinessProbe: 
+          readinessProbe:
             failureThreshold: 6
             httpGet:
               path: /health/readiness
@@ -31374,7 +31372,7 @@ kind: Pod
 metadata:
   name: "kyverno-test"
   labels:
-    
+
     helm.sh/chart: kyverno-2.7.1
     app.kubernetes.io/managed-by: Helm
     app: kyverno
@@ -31391,15 +31389,15 @@ spec:
     - name: wget
       image: "busybox:1.35"
       imagePullPolicy: IfNotPresent
-      resources: 
+      resources:
         limits:
           cpu: 100m
           memory: 256Mi
         requests:
           cpu: 10m
           memory: 64Mi
-      securityContext: 
-        
+      securityContext:
+
         allowPrivilegeEscalation: false
         capabilities:
           drop:
@@ -31419,15 +31417,15 @@ spec:
     - name: wget-metrics
       image: "busybox:1.35"
       imagePullPolicy: IfNotPresent
-      resources: 
+      resources:
         limits:
           cpu: 100m
           memory: 256Mi
         requests:
           cpu: 10m
           memory: 64Mi
-      securityContext: 
-        
+      securityContext:
+
         allowPrivilegeEscalation: false
         capabilities:
           drop:
