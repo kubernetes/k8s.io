@@ -468,6 +468,7 @@ groups:
     description: |-
       ACL for CAPA sandbox
     settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
       - ameukam@gmail.com
