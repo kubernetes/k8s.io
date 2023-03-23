@@ -66,12 +66,6 @@ function ensure_gcr_repo() {
     local project="$1"
     local region="${2:-}"
 
-    if [ "$region" == "global" ]; then
-        local region=""
-    else
-        local region="${2:-}"
-    fi
-
     local bucket
     bucket=$(gcs_bucket_for_gcr "${project}" "${region}")
     if ! gsutil ls "${bucket}" >/dev/null 2>&1; then
@@ -79,18 +73,14 @@ function ensure_gcr_repo() {
         host=$(gcr_host_for_region "${region}")
         local image="ceci-nest-pas-une-image"
         local dest="${host}/${project}/${image}"
-        docker pull us-central1-docker.pkg.dev/k8s-artifacts-prod/images/pause
-        docker tag us-central1-docker.pkg.dev/k8s-artifacts-prod/images/pause "${dest}"
+        docker pull k8s.gcr.io/pause
+        docker tag k8s.gcr.io/pause "${dest}"
         docker push "${dest}"
         gcloud --project "${project}" \
             container images delete --quiet "${dest}:latest"
     fi
 
-    if [ -z "${region}" ]; then
-        return # we don't want to make gcr.io/k8s-artifacts-prod public
-    else
-        ensure_public_gcs_bucket "${project}" "${bucket}"
-    fi
+    ensure_public_gcs_bucket "${project}" "${bucket}"
 }
 
 # Grant write privileges on a GCR to a group
