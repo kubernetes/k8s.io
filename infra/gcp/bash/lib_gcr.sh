@@ -64,9 +64,7 @@ function ensure_gcr_repo() {
         return 1
     fi
     local project="$1"
-    local region="${2:-}"
-
-    if [ "$region" == "global" ]; then
+    if [ $region == "global" ]; then
         local region=""
     else
         local region="${2:-}"

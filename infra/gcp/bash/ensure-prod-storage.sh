@@ -108,7 +108,7 @@ function ensure_prod_gcr() {
 
     color 6 "Ensuring prod GCR for regions: ${GCR_PROD_REGIONS[*]}"
     for region in "${GCR_PROD_REGIONS[@]}"; do
-        if [ "$region" == "global" ]; then
+        if [ $region == "global" ]; then
             local gcr_bucket="gs://artifacts.${project}.appspot.com"
         else
             local gcr_bucket="gs://${region}.artifacts.${project}.appspot.com"
