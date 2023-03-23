@@ -1,4 +1,3 @@
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -10,6 +9,6 @@ roleRef:
   kind: ClusterRole
   name: psp-node-exporter
 subjects:
-- kind: ServiceAccount
-  name: node-exporter
-  namespace: monitoring
+  - kind: ServiceAccount
+    name: node-exporter
+    namespace: monitoring

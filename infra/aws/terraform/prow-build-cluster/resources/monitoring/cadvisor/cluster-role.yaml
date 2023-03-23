@@ -1,4 +1,3 @@
----
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -6,6 +5,6 @@ metadata:
 rules:
   - apiGroups: ['policy']
     resources: ['podsecuritypolicies']
-    verbs:     ['use']
+    verbs: ['use']
     resourceNames:
-    - cadvisor
+      - cadvisor

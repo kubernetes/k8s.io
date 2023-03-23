@@ -1,4 +1,3 @@
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,9 +8,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 8080
-    protocol: TCP
-    name: http
+    - port: 8080
+      protocol: TCP
+      name: http
   selector:
     name: cadvisor
-

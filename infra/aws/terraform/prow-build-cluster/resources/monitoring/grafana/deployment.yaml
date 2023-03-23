@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,60 +20,60 @@ spec:
         fsGroup: 472
         runAsUser: 472
       containers:
-      - name: grafana
-        image: grafana/grafana:9.2.1
-        imagePullPolicy: IfNotPresent
-        volumeMounts:
-        - name: config
-          mountPath: "/etc/grafana/grafana.ini"
-          subPath: grafana.ini
-        - name: datasources
-          mountPath: "/etc/grafana/provisioning/datasources/datasources.yaml"
-          subPath: datasources.yaml
-        - name: dashboards
-          mountPath: "/etc/grafana/provisioning/dashboards/dashboardproviders.yaml"
-          subPath: dashboardproviders.yaml
-        - name: kube-state-metrics
-          mountPath: "/var/lib/grafana/dashboards/kubernetes/kube-state-metrics.json"
-          subPath: kube-state-metrics.json
-        - name: node-exporter-full
-          mountPath: "/var/lib/grafana/dashboards/kubernetes/node-exporter-full.json"
-          subPath: node-exporter-full.json
-        ports:
         - name: grafana
-          containerPort: 3000
-          protocol: TCP
-        livenessProbe:
-          failureThreshold: 10
-          httpGet:
-            path: /api/health
-            port: 3000
-          initialDelaySeconds: 60
-          timeoutSeconds: 30
-        readinessProbe:
-          httpGet:
-            path: /api/health
-            port: 3000
-        resources:
-          requests:
-            cpu: 500m
-            memory: 1Gi
-          limits:
-            cpu: 2000m
-            memory: 4Gi
+          image: grafana/grafana:9.2.1
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: config
+              mountPath: "/etc/grafana/grafana.ini"
+              subPath: grafana.ini
+            - name: datasources
+              mountPath: "/etc/grafana/provisioning/datasources/datasources.yaml"
+              subPath: datasources.yaml
+            - name: dashboards
+              mountPath: "/etc/grafana/provisioning/dashboards/dashboardproviders.yaml"
+              subPath: dashboardproviders.yaml
+            - name: kube-state-metrics
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/kube-state-metrics.json"
+              subPath: kube-state-metrics.json
+            - name: node-exporter-full
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/node-exporter-full.json"
+              subPath: node-exporter-full.json
+          ports:
+            - name: grafana
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 60
+            timeoutSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 2000m
+              memory: 4Gi
       volumes:
-      - name: config
-        configMap:
-          name: grafana
-      - name: datasources
-        configMap:
-          name: datasources
-      - name: dashboards
-        configMap:
-          name: dashboards
-      - name: kube-state-metrics
-        configMap:
-          name: kube-state-metrics
-      - name: node-exporter-full 
-        configMap:
-          name: node-exporter-full
+        - name: config
+          configMap:
+            name: grafana
+        - name: datasources
+          configMap:
+            name: datasources
+        - name: dashboards
+          configMap:
+            name: dashboards
+        - name: kube-state-metrics
+          configMap:
+            name: kube-state-metrics
+        - name: node-exporter-full
+          configMap:
+            name: node-exporter-full

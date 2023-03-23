@@ -1,4 +1,3 @@
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -12,6 +11,6 @@ roleRef:
   kind: ClusterRole
   name: kube-state-metrics
 subjects:
-- kind: ServiceAccount
-  name: kube-state-metrics
-  namespace: monitoring
+  - kind: ServiceAccount
+    name: kube-state-metrics
+    namespace: monitoring

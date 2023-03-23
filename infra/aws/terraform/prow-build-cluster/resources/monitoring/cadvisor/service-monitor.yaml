@@ -1,4 +1,3 @@
----
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -11,4 +10,4 @@ spec:
     matchLabels:
       name: cadvisor
   endpoints:
-  - port: http
+    - port: http
