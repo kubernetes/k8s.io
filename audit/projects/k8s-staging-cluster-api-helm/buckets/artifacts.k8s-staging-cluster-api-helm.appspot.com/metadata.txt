@@ -11,72 +11,10 @@ gs://artifacts.k8s-staging-cluster-api-helm.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Mon, 06 Mar 2023 21:35:03 GMT
-	Time updated:			Thu, 09 Mar 2023 17:40:04 GMT
-	Metageneration:			8
-	Bucket Policy Only enabled:	False
+	Time updated:			Thu, 23 Mar 2023 21:22:59 GMT
+	Metageneration:			12
+	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
-	ACL:				
-	  [
-	    {
-	      "email": "k8s-infra-artifact-admins@kubernetes.io",
-	      "entity": "group-k8s-infra-artifact-admins@kubernetes.io",
-	      "role": "OWNER"
-	    },
-	    {
-	      "entity": "project-editors-886273367484",
-	      "projectTeam": {
-	        "projectNumber": "886273367484",
-	        "team": "editors"
-	      },
-	      "role": "OWNER"
-	    },
-	    {
-	      "entity": "project-owners-886273367484",
-	      "projectTeam": {
-	        "projectNumber": "886273367484",
-	        "team": "owners"
-	      },
-	      "role": "OWNER"
-	    },
-	    {
-	      "entity": "project-viewers-886273367484",
-	      "projectTeam": {
-	        "projectNumber": "886273367484",
-	        "team": "viewers"
-	      },
-	      "role": "READER"
-	    },
-	    {
-	      "email": "k8s-infra-staging-cluster-api-helm@kubernetes.io",
-	      "entity": "group-k8s-infra-staging-cluster-api-helm@kubernetes.io",
-	      "role": "WRITER"
-	    }
-	  ]
-	Default ACL:			
-	  [
-	    {
-	      "entity": "project-owners-886273367484",
-	      "projectTeam": {
-	        "projectNumber": "886273367484",
-	        "team": "owners"
-	      },
-	      "role": "OWNER"
-	    },
-	    {
-	      "entity": "project-editors-886273367484",
-	      "projectTeam": {
-	        "projectNumber": "886273367484",
-	        "team": "editors"
-	      },
-	      "role": "OWNER"
-	    },
-	    {
-	      "entity": "project-viewers-886273367484",
-	      "projectTeam": {
-	        "projectNumber": "886273367484",
-	        "team": "viewers"
-	      },
-	      "role": "READER"
-	    }
-	  ]
+	ACL:				[]
+	Default ACL:			[]
