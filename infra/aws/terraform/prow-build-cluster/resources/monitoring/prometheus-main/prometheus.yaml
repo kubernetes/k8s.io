@@ -19,11 +19,11 @@ spec:
       prometheus: main
   resources:
     requests:
-      cpu: 500m
-      memory: 2Gi
+      cpu: 1
+      memory: 8Gi
     limits:
-      cpu: 500m
-      memory: 2Gi
+      cpu: 1
+      memory: 8Gi
   replicas: 1
   logLevel: info
   logFormat: logfmt
@@ -38,4 +38,4 @@ spec:
       spec:
         resources:
           requests:
-            storage: 200Gi
+            storage: 300Gi

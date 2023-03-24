@@ -31,6 +31,16 @@ kubectl apply -f ./grafana
 
 [Prometheus Operator CRDs](https://github.com/prometheus-operator/prometheus-operator/tree/v0.63.0/example/prometheus-operator-crd-full)
 
+## Local access
+
+```bash
+# Prometheus
+kubectl --namespace monitoring port-forward svc/prometheus-operated 9090
+
+# Grafana
+kubectl --namespace monitoring port-forward svc/grafana 3000
+```
+
 ## Debugging
 
 - [Troubleshooting Prometheus Operator](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/troubleshooting.md)
