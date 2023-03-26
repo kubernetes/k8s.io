@@ -1,0 +1,3 @@
+- name: admission-server
+  dmap:
+    "sha256:9a1402d04ba0b8951c535207aa1764b7590ec1e5f1e85d4e3a552507099b08d9": ["v0.6.2"]
