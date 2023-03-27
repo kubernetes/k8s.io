@@ -11,4 +11,4 @@ spec:
       app: node-exporter
   endpoints:
     - port: metrics
-      # scrapeTimeout: 30s
+

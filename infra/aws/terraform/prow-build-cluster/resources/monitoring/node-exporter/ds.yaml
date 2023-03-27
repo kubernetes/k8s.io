@@ -24,7 +24,7 @@ spec:
         runAsUser: 65534
       containers:
         - name: node-exporter
-          image: public.ecr.aws/bitnami/node-exporter:1.4.0
+          image: quay.io/prometheus/node-exporter:v1.5.0
           imagePullPolicy: IfNotPresent
           args:
             - --path.procfs=/host/proc
