@@ -1,4 +1,3 @@
-# TODO: Update with local prometheus
 apiVersion: v1
 kind: ConfigMap
 metadata:
