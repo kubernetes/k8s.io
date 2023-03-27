@@ -1,1 +1,6 @@
-# No images yet
+- name: bouy
+  dmap:
+    "sha256:f972675a4e31ad3f739b1d64c7ab4a6abddff7e900b38a73627fa3c925b426fa": ["v0.4.0"]
+- name: zeitgeist
+  dmap:
+    "sha256:d6edbea2d8948d8198deb978e90b6574a41bd09eb5470e6c28cb0bb8407d4dd7": ["v0.4.0"]
