@@ -29,7 +29,7 @@ data:
     provisioning = /etc/grafana/provisioning
 
     [server]
-    http_port = 3001
+    http_port = 3000
 
     [security]
     disable_gravatar = true
