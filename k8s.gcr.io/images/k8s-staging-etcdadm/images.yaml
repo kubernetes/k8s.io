@@ -183,4 +183,3 @@
 - name: etcd-manager-slim
   dmap:
     "sha256:8727adc059334e0e3329dbccce116a734da4a090da5e86c8cddccaf333caa666": ["v3.0.20230201"]
-
