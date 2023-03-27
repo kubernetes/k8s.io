@@ -33,9 +33,6 @@ spec:
             - name: sys
               mountPath: /sys
               readOnly: true
-            - name: docker
-              mountPath: /var/lib/docker
-              readOnly: true
             - name: disk
               mountPath: /dev/disk
               readOnly: true
@@ -55,9 +52,6 @@ spec:
         - name: sys
           hostPath:
             path: /sys
-        - name: docker
-          hostPath:
-            path: /var/lib/docker
         - name: disk
           hostPath:
             path: /dev/disk

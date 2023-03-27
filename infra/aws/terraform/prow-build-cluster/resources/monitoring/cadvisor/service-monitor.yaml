@@ -11,3 +11,4 @@ spec:
       name: cadvisor
   endpoints:
     - port: http
+      honorLabels: true
