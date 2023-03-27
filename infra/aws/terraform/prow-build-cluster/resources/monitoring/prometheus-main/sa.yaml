@@ -3,5 +3,3 @@ kind: ServiceAccount
 metadata:
   name: prometheus
   namespace: monitoring
-  # annotations:
-  #   eks.amazonaws.com/role-arn: "arn:aws:iam::<acc-id>:role/prometheus-demo"
