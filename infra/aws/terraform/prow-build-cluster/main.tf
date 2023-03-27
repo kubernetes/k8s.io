@@ -20,6 +20,14 @@ limitations under the License.
 
 provider "aws" {
   region = var.cluster_region
+
+  # We have a chicken-egg problem here. This role is not going to exist
+  # when creating the cluster for the first time. In that case, this must
+  # be commented, than uncommented afterwards.
+  assume_role {
+    role_arn     = "arn:aws:iam::468814281478:role/Prow-Cluster-Admin"
+    session_name = "prow-build-cluster-terraform"
+  }
 }
 
 provider "kubernetes" {
@@ -30,7 +38,7 @@ provider "kubernetes" {
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "aws"
-    args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+    args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name, "--role-arn", aws_iam_role.iam_cluster_admin.arn]
   }
 }
 
@@ -43,7 +51,7 @@ provider "helm" {
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
       command     = "aws"
-      args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+      args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name, "--role-arn", aws_iam_role.iam_cluster_admin.arn]
     }
   }
 }
@@ -52,6 +60,8 @@ data "aws_caller_identity" "current" {}
 data "aws_availability_zones" "available" {}
 
 locals {
+  root_account_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+
   tags = {
     Cluster = var.cluster_name
   }

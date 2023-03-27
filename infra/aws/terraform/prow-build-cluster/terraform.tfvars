@@ -30,9 +30,9 @@ node_instance_types = ["r5ad.4xlarge"]
 node_volume_size    = 100
 
 # TODO(xmudrii): Increase this later.
-node_min_size                   = 15
-node_max_size                   = 20
-node_desired_size               = 15
+node_min_size                   = 5
+node_max_size                   = 5
+node_desired_size               = 5
 node_max_unavailable_percentage = 100 # To ease testing
 
 cluster_autoscaler_version = "v1.25.0"
