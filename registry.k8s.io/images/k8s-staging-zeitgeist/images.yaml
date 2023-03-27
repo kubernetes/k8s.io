@@ -1,6 +1,8 @@
 - name: bouy
   dmap:
     "sha256:f972675a4e31ad3f739b1d64c7ab4a6abddff7e900b38a73627fa3c925b426fa": ["v0.4.0"]
+    "sha256:f83af154202e19e9d7943071c50ce8ed3355ad6a10d442c1fadee46fc37a8f80": ["v0.4.1"]
 - name: zeitgeist
   dmap:
     "sha256:d6edbea2d8948d8198deb978e90b6574a41bd09eb5470e6c28cb0bb8407d4dd7": ["v0.4.0"]
+    "sha256:8e8326658d01b0b39638b7351ee4e98bcee8d78813cc4f1c3257d81568b3175d": ["v0.4.1"]
