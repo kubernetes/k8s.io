@@ -1,1 +1,3 @@
-# No images yet
+- name: cluster-api-helm-controller
+  dmap:
+    "sha256:7408f3e79d04ec94c0677b54b1eea73e65aa5748bf65ddb34ca240bf50dc5e0d": ["v0.1.0-alpha.1"]
