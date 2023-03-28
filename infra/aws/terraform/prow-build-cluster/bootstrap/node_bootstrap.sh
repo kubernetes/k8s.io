@@ -15,6 +15,10 @@
 ## intended to be used as a node pre-bootstrap script
 ## based on: https://github.com/awslabs/amazon-eks-ami/pull/1171
 
+# We're intentionally disabling SC2148 because we don't need shebang here.
+# This script is integrated as part of another script that already includes it.
+# shellcheck disable=SC2148
+
 set -o errexit
 set -o nounset
 set -o pipefail
@@ -25,20 +29,19 @@ sysctl -w fs.inotify.max_user_watches=524288
 ## Set up ephemeral disks (SSDs) to be used by containerd and kubelet
 
 MNT_DIR="/mnt/k8s-disks"
-disks=($(find -L /dev/disk/by-id/ -xtype l -name '*NVMe_Instance_Storage_*'))
 
-if [[ "${#disks[@]}" -eq 0 ]]; then
+# Pick the first NVMe disk. In this case, we care about only one disk,
+# additional disks are not much of use for us.
+# We don't want to deal with RAID because we don't gain much from it.
+disk=$(find -L /dev/disk/by-id/ -xtype l -name '*NVMe_Instance_Storage_*' | head -n 1)
+
+if [[ -z "${disk}" ]]; then
   echo "no ephemeral disks found, skipping disk setup"
   exit 0
 fi
 
 # Get devices of NVMe instance storage ephemeral disks
-EPHEMERAL_DISKS=($(realpath "${disks[@]}" | sort -u))
-
-# Pick the first NVMe disk. In this case, we care about only one disk,
-# additional disks are not much of use for us.
-# We don't want to deal with RAID because we don't gain much from it.
-dev="${EPHEMERAL_DISKS[0]}"
+dev=$(realpath "${disk}")
 
 # Mounts and creates xfs file systems on chosen EC2 instance store NVMe disk
 # without existing file system. Mounts in /mnt/k8s-disks
@@ -46,7 +49,7 @@ if [[ -z "$(lsblk "${dev}" -o fstype --noheadings)" ]]; then
   mkfs.xfs -l su=8b "${dev}"
 fi
 
-if [[ ! -z "$(lsblk "${dev}" -o MOUNTPOINT --noheadings)" ]]; then
+if [[ -n "$(lsblk "${dev}" -o MOUNTPOINT --noheadings)" ]]; then
   echo "${dev} is already mounted."
   exit 0
 fi
@@ -74,22 +77,16 @@ systemd-analyze verify "${mount_unit_name}"
 systemctl enable "${mount_unit_name}" --now
 
 ## Create mount points on SSD for containerd and kubelet
-prev_running=""
 needs_linked=""
 
 # Stop containerd and kubelet if they are running.
 for unit in "containerd" "kubelet"; do
   if [[ "$(systemctl is-active var-lib-${unit}.mount)" != "active" ]]; then
-    if systemctl is-active "${unit}" > /dev/null 2>&1; then
-      prev_running+=" ${unit}"
-    fi
     needs_linked+=" ${unit}"
   fi
 done
 
-if [[ ! -z "${prev_running}" ]]; then
-  systemctl stop ${prev_running}
-fi
+systemctl stop containerd.service snap.kubelet-eks.daemon.service
 
 # Transfer state directories to the disk, if they exist.
 for unit in ${needs_linked}; do
@@ -117,6 +114,4 @@ EOF
 done
 
 # Start again stopped services.
-if [[ ! -z "${prev_running}" ]]; then
-  systemctl start ${prev_running}
-fi
+systemctl start containerd.service snap.kubelet-eks.daemon.service
