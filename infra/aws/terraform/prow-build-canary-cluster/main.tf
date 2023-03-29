@@ -24,10 +24,10 @@ provider "aws" {
   # We have a chicken-egg problem here. This role is not going to exist
   # when creating the cluster for the first time. In that case, this must
   # be commented, than uncommented afterwards.
-  # assume_role {
-  #   role_arn     = "arn:aws:iam::468814281478:role/Prow-Canary-Cluster-Admin"
-  #   session_name = "prow-build-cluster-terraform"
-  # }
+  assume_role {
+    role_arn     = "arn:aws:iam::468814281478:role/Prow-Canary-Cluster-Admin"
+    session_name = "prow-build-cluster-terraform"
+  }
 }
 
 provider "kubernetes" {
