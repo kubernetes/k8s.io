@@ -26,13 +26,13 @@ vpc_intra_subnet          = ["10.2.0.0/18", "10.2.64.0/18", "10.2.128.0/18"]
 
 # Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
 node_ami            = "ami-03de35fda144b3672"
-node_instance_types = ["r5ad.4xlarge"]
+node_instance_types = ["r5d.4xlarge"]
 node_volume_size    = 100
 
 # TODO(xmudrii): Increase this later.
-node_min_size                   = 5
-node_max_size                   = 5
-node_desired_size               = 5
+node_min_size                   = 20
+node_max_size                   = 40
+node_desired_size               = 20
 node_max_unavailable_percentage = 100 # To ease testing
 
 cluster_autoscaler_version = "v1.25.0"

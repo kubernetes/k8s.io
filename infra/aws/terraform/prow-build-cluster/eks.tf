@@ -128,10 +128,7 @@ module "eks" {
         max_unavailable_percentage = var.node_max_unavailable_percentage
       }
 
-      # Required to ensure Prow works well.
-      pre_bootstrap_user_data = <<-EOT
-        sysctl -w fs.inotify.max_user_watches=524288
-      EOT
+      pre_bootstrap_user_data = file("${path.module}/bootstrap/node_bootstrap.sh")
 
       capacity_type  = "ON_DEMAND"
       instance_types = var.node_instance_types
