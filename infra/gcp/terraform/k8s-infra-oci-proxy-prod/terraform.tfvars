@@ -19,6 +19,9 @@ project_id = "k8s-infra-oci-proxy-prod"
 // gcr.io/k8s-staging-infra-tools/archeio:v20230310-v0.2.0@sha256:bc742c5f47a69e21e828768991853faddbe13a7f69a9da4d7d2ad16e0e55892c
 // If you're interested in running this image yourself releases are available at registry.k8s.io/infra-tools/archeio
 digest = "sha256:bc742c5f47a69e21e828768991853faddbe13a7f69a9da4d7d2ad16e0e55892c"
+// we increase this in staging, but not in production
+// we already get a lot of info from build-in cloud run logs
+verbosity = "0"
 cloud_run_config = {
   asia-east1 = {
     // TODO: switch DEFAULT_AWS_BASE_URL to cloudfront or else refine the region mapping

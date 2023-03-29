@@ -23,6 +23,11 @@ variable "project_id" {
 variable "digest" {
   type = string
 }
+
+variable "verbosity" {
+  type = string
+}
+
 variable "cloud_run_config" {
   type = map(object({
     environment_variables = list(object({
