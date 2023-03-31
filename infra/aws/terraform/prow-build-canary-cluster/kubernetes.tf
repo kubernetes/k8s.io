@@ -16,86 +16,98 @@ limitations under the License.
 
 # This file contains resources that require EKS to be running before terrafrom plan/apply.
 
-# module "cluster_autoscaler" {
-#   source = "../prow-build-cluster/modules/cluster-autoscaler"
-#   providers = {
-#     kubernetes = kubernetes
-#   }
+module "cluster_autoscaler" {
+  count = var.assume_role ? 1 : 0
 
-#   cluster_name                    = module.eks.cluster_name
-#   cluster_autoscaler_iam_role_arn = module.cluster_autoscaler_irsa.iam_role_arn
-#   cluster_autoscaler_version      = var.cluster_autoscaler_version
+  source = "../prow-build-cluster/modules/cluster-autoscaler"
 
-#   depends_on = [
-#     module.eks
-#   ]
-# }
+  providers = {
+    kubernetes = kubernetes
+  }
 
-# module "metrics_server" {
-#   source = "../prow-build-cluster/modules/metrics-server"
-#   providers = {
-#     kubernetes = kubernetes
-#   }
+  cluster_name                    = module.eks.cluster_name
+  cluster_autoscaler_iam_role_arn = module.cluster_autoscaler_irsa.iam_role_arn
+  cluster_autoscaler_version      = var.cluster_autoscaler_version
 
-#   depends_on = [
-#     module.eks
-#   ]
-# }
+  depends_on = [
+    module.eks
+  ]
+}
 
-# # AWS Load Balancer Controller (ALB/NLB integration).
-# resource "helm_release" "aws_lb_controller" {
-#   name       = "aws-load-balancer-controller"
-#   namespace  = "kube-system"
-#   repository = "https://aws.github.io/eks-charts"
-#   chart      = "aws-load-balancer-controller"
-#   version    = "1.4.8"
+module "metrics_server" {
+  count = var.assume_role ? 1 : 0
 
-#   set {
-#     name  = "clusterName"
-#     value = module.eks.cluster_name
-#   }
+  source = "../prow-build-cluster/modules/metrics-server"
 
-#   set {
-#     name  = "serviceAccount.create"
-#     value = "true"
-#   }
+  providers = {
+    kubernetes = kubernetes
+  }
 
-#   set {
-#     name  = "serviceAccount.name"
-#     value = "aws-load-balancer-controller"
-#   }
+  depends_on = [
+    module.eks
+  ]
+}
 
-#   set {
-#     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
-#     value = module.aws_load_balancer_controller_irsa.iam_role_arn
-#   }
+# AWS Load Balancer Controller (ALB/NLB integration).
+resource "helm_release" "aws_lb_controller" {
+  count = var.assume_role ? 1 : 0
 
-#   depends_on = [
-#     module.eks
-#   ]
-# }
+  name       = "aws-load-balancer-controller"
+  namespace  = "kube-system"
+  repository = "https://aws.github.io/eks-charts"
+  chart      = "aws-load-balancer-controller"
+  version    = "1.4.8"
 
-# # AWS Secrets Manager integration
-# resource "helm_release" "secrets_store_csi_driver" {
-#   name       = "secrets-store-csi-driver"
-#   namespace  = "kube-system"
-#   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
-#   chart      = "secrets-store-csi-driver"
-#   version    = "1.3.1"
+  set {
+    name  = "clusterName"
+    value = module.eks.cluster_name
+  }
 
-#   depends_on = [
-#     module.eks
-#   ]
-# }
+  set {
+    name  = "serviceAccount.create"
+    value = "true"
+  }
 
-# resource "helm_release" "secrets_store_csi_driver_provider_aws" {
-#   name       = "aws-secrets-manager"
-#   namespace  = "kube-system"
-#   repository = "https://aws.github.io/secrets-store-csi-driver-provider-aws"
-#   chart      = "secrets-store-csi-driver-provider-aws"
-#   version    = "0.3.0"
+  set {
+    name  = "serviceAccount.name"
+    value = "aws-load-balancer-controller"
+  }
 
-#   depends_on = [
-#     module.eks
-#   ]
-# }
+  set {
+    name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
+    value = module.aws_load_balancer_controller_irsa.iam_role_arn
+  }
+
+  depends_on = [
+    module.eks
+  ]
+}
+
+# AWS Secrets Manager integration
+resource "helm_release" "secrets_store_csi_driver" {
+  count = var.assume_role ? 1 : 0
+
+  name       = "secrets-store-csi-driver"
+  namespace  = "kube-system"
+  repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
+  chart      = "secrets-store-csi-driver"
+  version    = "1.3.1"
+
+  depends_on = [
+    module.eks
+  ]
+}
+
+resource "helm_release" "secrets_store_csi_driver_provider_aws" {
+  count = var.assume_role ? 1 : 0
+
+  name       = "aws-secrets-manager"
+  namespace  = "kube-system"
+  repository = "https://aws.github.io/secrets-store-csi-driver-provider-aws"
+  chart      = "secrets-store-csi-driver-provider-aws"
+  version    = "0.3.0"
+
+  depends_on = [
+    module.eks
+  ]
+}

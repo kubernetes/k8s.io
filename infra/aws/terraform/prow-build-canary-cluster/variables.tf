@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+variable "assume_role" {
+  type    = bool
+  default = true
+}
+
 variable "vpc_cidr" {
   type        = string
   description = "CIDR of the VPC"

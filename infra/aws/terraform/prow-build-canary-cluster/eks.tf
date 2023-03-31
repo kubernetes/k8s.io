@@ -32,7 +32,7 @@ module "eks" {
 
   # Configure aws-auth
   aws_auth_roles = [
-    # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
+    # Allow access to the Prow-Canary-Cluster-Admin IAM role (used with assume role with other IAM accounts).
     {
       "rolearn"  = aws_iam_role.iam_cluster_admin.arn
       "username" = "eks-cluster-admin"
