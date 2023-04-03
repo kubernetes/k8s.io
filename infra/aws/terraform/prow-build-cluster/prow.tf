@@ -19,7 +19,7 @@ limitations under the License.
 
 # Recognize federated identities from the prow trusted cluster
 resource "aws_iam_openid_connect_provider" "k8s_prow" {
-  count = var.is_canary_installation ? 0 : 1
+  count = terraform.workspace == "prod" ? 1 : 0
 
   url             = "https://container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow"
   client_id_list  = ["sts.amazonaws.com"]
@@ -28,7 +28,7 @@ resource "aws_iam_openid_connect_provider" "k8s_prow" {
 
 # We allow Prow Pods with specific service acccounts on the a particular cluster to assume this role
 resource "aws_iam_role" "eks_admin" {
-  count = var.is_canary_installation ? 0 : 1
+  count = terraform.workspace == "prod" ? 1 : 0
 
   name = "Prow-EKS-Admin"
 

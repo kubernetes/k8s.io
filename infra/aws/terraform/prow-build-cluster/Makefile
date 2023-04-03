@@ -16,30 +16,33 @@ TF ?= terraform
 ASSUME_ROLE ?= true
 
 # Valid values are: canary, prod
-PROW_CLUSTER ?= canary
+WORKSPACE_NAME ?= canary
+
+.PHONY: workspace-select
+workspace-select:
+	$(TF) workspace select $(WORKSPACE_NAME)
 
 .PHONY: init
 init:
-	$(TF) $@ \
-		-backend-config=./tfbackends/$(PROW_CLUSTER).tfbackend
+	$(TF) $@
 
 .PHONY: plan
-plan:
+plan: workspace-select
 	$(TF) $@ \
-		-var-file=./terraform.$(PROW_CLUSTER).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)"
+		-var="assume_role=$(ASSUME_ROLE)" \
+		-var-file=./terraform.$(WORKSPACE_NAME).tfvars
 
 .PHONY: apply
-apply:
+apply: workspace-select
 	$(TF) $@ \
-		-var-file=./terraform.$(PROW_CLUSTER).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)"
+		-var="assume_role=$(ASSUME_ROLE)" \
+		-var-file=./terraform.$(WORKSPACE_NAME).tfvars
 
 .PHONY: destroy
-destory:
+destory: workspace-select
 	$(TF) $@ \
-		-var-file=./terraform.$(PROW_CLUSTER).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)"
+		-var="assume_role=$(ASSUME_ROLE)" \
+		-var-file=./terraform.$(WORKSPACE_NAME).tfvars
 
 .PHONY: fmt
 fmt:

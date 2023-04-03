@@ -15,7 +15,6 @@ limitations under the License.
 */
 
 assume_role            = true
-is_canary_installation = false
 
 cluster_name    = "prow-build-cluster"
 cluster_region  = "us-east-2"

@@ -22,12 +22,6 @@ variable "assume_role" {
   default     = true
 }
 
-variable "is_canary_installation" {
-  type        = bool
-  description = "If set, scripts provision canary cluster instead of production."
-  default     = false
-}
-
 variable "vpc_cidr" {
   type        = string
   description = "CIDR of the VPC"

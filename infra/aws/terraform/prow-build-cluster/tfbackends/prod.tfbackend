@@ -1,3 +1,0 @@
-bucket = "prow-build-cluster-tfstate"
-key    = "terraform.tfstate"
-region = "us-east-2"

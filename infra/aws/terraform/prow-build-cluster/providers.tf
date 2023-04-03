@@ -15,8 +15,11 @@ limitations under the License.
 */
 
 terraform {
-  # Backend conifguration lives inside *.tfbackend files.
-  backend "s3" {}
+  backend "s3" {
+    bucket = "prow-build-cluster-tfstate"
+    key    = "terraform.tfstate"
+    region = "us-east-2"
+  }
 
   required_version = "~> 1.3.0"
 

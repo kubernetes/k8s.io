@@ -22,7 +22,7 @@ data "aws_caller_identity" "current" {}
 data "aws_availability_zones" "available" {}
 
 locals {
-  canary_prefix = var.is_canary_installation ? "canary-" : ""
+  canary_prefix = terraform.workspace != "prod" ? "canary-" : ""
 
   root_account_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
   aws_cli_base_args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]

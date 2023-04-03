@@ -22,13 +22,11 @@ variable has to be set:
 
 ```bash
 # For provisioning Prod:
-export PROW_CLUSTER=prod
+export WORKSPACE_NAME=prod
 # For provisioning Canary:
-export PROW_CLUSTER=canary
+export WORKSPACE_NAME=canary
 
 # Just making sure we don't have state cached locally.
-make clean
-
 ASSUME_ROLE=false make init
 ASSUME_ROLE=false make apply
 ```
@@ -94,17 +92,18 @@ args:
   - arn:aws:iam::468814281478:role/canary-Prow-Cluster-Admin
 ```
 
-
-
 ## Removing cluster
 
 Same as for installation, cluster removal requires running Terraform twice.
 **IMPORTANT**: It's possible only for users with assigned `AdministratorAccess` policy.
 
 ```bash
+export WORKSPACE_NAME= # choose between canary/prod
+
 # First remove resources running on the cluster and IAM role. This fails once assumed role gets deleted.
 make destroy
 
 # Clean up the rest. 
 ASSUME_ROLE=false make destroy
 ```
+

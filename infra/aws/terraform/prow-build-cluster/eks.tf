@@ -19,27 +19,28 @@ limitations under the License.
 ###############################################
 
 locals {
-  aws_auth_roles_base = [
-    # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
-    {
-      "rolearn"  = aws_iam_role.iam_cluster_admin.arn
-      "username" = "eks-cluster-admin"
-      "groups" = [
-        "eks-cluster-admin"
-      ]
-    },
-  ]
-
-  aws_auth_roles = var.is_canary_installation ? local.aws_auth_roles_base : concat([
-    # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
-    {
-      "rolearn"  = aws_iam_role.eks_admin[0].arn
-      "username" = "eks-admin"
-      "groups" = [
-        "eks-prow-cluster-admin"
-      ]
-    }
-  ], local.aws_auth_roles_base)
+  aws_auth_roles = concat(
+    terraform.workspace == "prod" ? [
+      # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
+      {
+        "rolearn"  = aws_iam_role.eks_admin[0].arn
+        "username" = "eks-admin"
+        "groups" = [
+          "eks-prow-cluster-admin"
+        ]
+      }
+    ] : [],
+    [
+      # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
+      {
+        "rolearn"  = aws_iam_role.iam_cluster_admin.arn
+        "username" = "eks-cluster-admin"
+        "groups" = [
+          "eks-cluster-admin"
+        ]
+      }
+    ]
+  )
 }
 
 module "eks" {
