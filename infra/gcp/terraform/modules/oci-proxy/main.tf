@@ -422,7 +422,7 @@ resource "google_project_iam_member" "k8s_infra_oci_proxy_admins" {
 
 resource "google_service_account" "oci-proxy" {
   project      = google_project.project.project_id
-  account_id   = "oci-proxy-prod"
+  account_id   = var.service_account_name
   display_name = "Minimal Service Account for OCI Proxy"
 }
 

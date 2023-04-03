@@ -14,10 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Print each service URL.
-output "services" {
+output "service_account_id" {
+  value = google_service_account.oci-proxy.id
+  // not truly sensitive, but we don't need to log this
+  sensitive = true
+}
+
+output "region_locations" {
   value = {
-    for svc in google_cloud_run_service.regions :
-    svc.name => svc.status[0].url
+    for k, v in google_cloud_run_service.oci-proxy : k => { name : v.name, location : v.location }
   }
+  // not truly sensitive, but we don't need to log this
+  sensitive = true
 }

@@ -14,18 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// this one is overridden to the latest image in staging typically
+variable "digest" {
+  type     = string
+  default  = "sha256:6a37089e595e62636d401b8d93dc8f9c41dca395ecf7386d456484a3cf889b42"
+  nullable = false
+}
+// these should all be explicitly set for both prod and staging
 variable "domain" {
   type = string
 }
 variable "project_id" {
   type = string
 }
-variable "digest" {
-  type = string
-}
 variable "verbosity" {
   type = string
 }
 variable "notification_channel_id" {
+  type = string
+}
+
+variable "service_account_name" {
   type = string
 }
