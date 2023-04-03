@@ -30,17 +30,16 @@ locals {
     },
   ]
 
-  aws_auth_roles = var.is_canary_installation ? local.aws_auth_roles_base : concat(
-    local.aws_auth_roles_base, [
-      # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
-      {
-        "rolearn"  = aws_iam_role.eks_admin[0].arn
-        "username" = "eks-admin"
-        "groups" = [
-          "eks-prow-cluster-admin"
-        ]
-      }
-  ])
+  aws_auth_roles = var.is_canary_installation ? local.aws_auth_roles_base : concat([
+    # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
+    {
+      "rolearn"  = aws_iam_role.eks_admin[0].arn
+      "username" = "eks-admin"
+      "groups" = [
+        "eks-prow-cluster-admin"
+      ]
+    }
+  ], local.aws_auth_roles_base)
 }
 
 module "eks" {
@@ -57,6 +56,17 @@ module "eks" {
 
   # Configure aws-auth
   aws_auth_roles = local.aws_auth_roles
+
+  # Allow EKS access to the root account.
+  aws_auth_users = [
+    {
+      "userarn"  = local.root_account_arn
+      "username" = "root"
+      "groups" = [
+        "eks-cluster-admin"
+      ]
+    },
+  ]
 
   # Allow access to the KMS key used for secrets encryption to the root account.
   kms_key_administrators = [

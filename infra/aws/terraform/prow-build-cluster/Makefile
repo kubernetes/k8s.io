@@ -20,27 +20,36 @@ PROW_CLUSTER ?= canary
 
 .PHONY: init
 init:
-	$(TF) init \
+	$(TF) $@ \
 		-backend-config=./tfbackends/$(PROW_CLUSTER).tfbackend
 
 .PHONY: plan
 plan:
-	$(TF) plan \
+	$(TF) $@ \
 		-var-file=./terraform.$(PROW_CLUSTER).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)"
 
 .PHONY: apply
 apply:
-	$(TF) apply \
+	$(TF) $@ \
 		-var-file=./terraform.$(PROW_CLUSTER).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)"
 
 .PHONY: destroy
 destory:
-	$(TF) destroy \
+	$(TF) $@ \
 		-var-file=./terraform.$(PROW_CLUSTER).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)"
+
+.PHONY: fmt
+fmt:
+	$(TF) $@
+
+.PHONY: output
+output:
+	$(TF) $@
 
 .PHONY: clean
 clean:
 	rm -rf ./.terraform
+

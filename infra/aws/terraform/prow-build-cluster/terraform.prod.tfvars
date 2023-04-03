@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+assume_role            = true
+is_canary_installation = false
+
 cluster_name    = "prow-build-cluster"
 cluster_region  = "us-east-2"
 cluster_version = "1.25"
@@ -36,3 +39,4 @@ node_desired_size               = 20
 node_max_unavailable_percentage = 100 # To ease testing
 
 cluster_autoscaler_version = "v1.25.0"
+
