@@ -14,17 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "google_logging_project_sink" "bigquery_sink" {
-  project     = google_project.project.project_id
-  name        = "registry-k8s-io-logs-sink"
-  destination = "bigquery.googleapis.com/projects/k8s-infra-public-pii/datasets/registry_k8s_io_logs"
+/*
+This file defines:
+- Required Terraform version
+*/
 
-  bigquery_options {
-    use_partitioned_tables = false
-  }
-
-  unique_writer_identity = true
-
-  filter = "resource.type = \"cloud_run_revision\" AND log_name= \"projects/${google_project.project.project_id}/logs/run.googleapis.com%2Frequests\""
-
+terraform {
+  required_version = "~> 1.3.0"
 }
