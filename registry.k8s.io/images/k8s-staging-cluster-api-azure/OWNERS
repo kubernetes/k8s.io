@@ -11,6 +11,7 @@ reviewers:
 - Jont828
 - jsturtevant
 - nawazkh
+- nojnhuh
 
 labels:
 - sig/cluster-lifecycle
