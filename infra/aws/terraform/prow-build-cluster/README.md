@@ -55,6 +55,47 @@ make apply
 
 From here, all consecutive runs should be possible with command from above.
 
+## Using cluster
+
+### Fetch kubeconfig
+
+```bash
+# Prod:
+aws eks update-kubeconfig --region us-east-2 --name prow-build-cluster
+# Canary:
+aws eks update-kubeconfig --region us-east-2 --name prow-build-canary-cluster
+```
+
+### Open kubeconfig and add assume role argument
+
+For Prod:
+```yaml
+args:
+  - --region
+  - us-east-2
+  - eks
+  - get-token
+  - --cluster-name
+  - prow-build-cluster
+  - --role-arn
+  - arn:aws:iam::468814281478:role/Prow-Cluster-Admin
+```
+
+For Canary:
+```yaml
+args:
+  - --region
+  - us-east-2
+  - eks
+  - get-token
+  - --cluster-name
+  - prow-build-canary-cluster
+  - --role-arn
+  - arn:aws:iam::468814281478:role/canary-Prow-Cluster-Admin
+```
+
+
+
 ## Removing cluster
 
 Same as for installation, cluster removal requires running Terraform twice.
