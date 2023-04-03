@@ -16,7 +16,7 @@ limitations under the License.
 
 resource "google_compute_global_address" "default_ipv4" {
   project      = google_project.project.project_id
-  name         = "k8s-infra-oci-proxy-prod"
+  name         = google_project.project.project_id
   address_type = "EXTERNAL"
   ip_version   = "IPV4"
 
@@ -27,7 +27,7 @@ resource "google_compute_global_address" "default_ipv4" {
 
 resource "google_compute_global_address" "default_ipv6" {
   project      = google_project.project.project_id
-  name         = "k8s-infra-oci-proxy-prod-v6"
+  name         = "${google_project.project.project_id}-v6"
   address_type = "EXTERNAL"
   ip_version   = "IPV6"
 
@@ -38,12 +38,12 @@ resource "google_compute_global_address" "default_ipv6" {
 
 data "google_compute_global_address" "default_ipv4" {
   project = google_project.project.project_id
-  name    = "k8s-infra-oci-proxy-prod"
+  name    = google_project.project.project_id
 }
 
 data "google_compute_global_address" "default_ipv6" {
   project = google_project.project.project_id
-  name    = "k8s-infra-oci-proxy-prod-v6"
+  name    = "${google_project.project.project_id}-v6"
 }
 
 resource "google_compute_region_network_endpoint_group" "oci-proxy" {

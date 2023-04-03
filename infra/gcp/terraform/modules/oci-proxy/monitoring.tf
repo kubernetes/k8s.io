@@ -25,14 +25,14 @@ resource "google_monitoring_notification_channel" "emails" {
 
 module "alerts" {
   project_id         = google_project.project.project_id
-  source             = "../modules/monitoring/uptime-alert"
+  source             = "../monitoring/uptime-alert"
   documentation_text = "${var.domain} is down"
   domain             = var.domain
 
   notification_channels = [
     # Manually created. Monitoring channels can't be created with Terraform.
     # See: https://github.com/hashicorp/terraform-provider-google/issues/1134
-    "${google_project.project.id}/notificationChannels/15334306215710275143",
+    "${google_project.project.id}/notificationChannels/${var.notification_channel_id}",
     google_monitoring_notification_channel.emails.name,
   ]
 }
