@@ -14,6 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# This variable is required in the installation process as we cannot
+# assume a role that is yet to be created.
+variable "assume_role" {
+  type        = bool
+  description = "Assumes role to get access to EKS cluster after provisioning."
+  default     = true
+}
+
+variable "is_canary_installation" {
+  type        = bool
+  description = "If set, scripts provision canary cluster instead of production."
+  default     = false
+}
+
 variable "vpc_cidr" {
   type        = string
   description = "CIDR of the VPC"

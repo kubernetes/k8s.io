@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "secretsmanager_read" {
 }
 
 resource "aws_iam_policy" "secretsmanager_read" {
-  name   = "secretsmanager_read"
+  name   = "${local.canary_prefix}secretsmanager_read"
   path   = "/"
   policy = data.aws_iam_policy_document.secretsmanager_read.json
 }

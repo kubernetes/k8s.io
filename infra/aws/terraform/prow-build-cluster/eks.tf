@@ -34,7 +34,7 @@ module "eks" {
   aws_auth_roles = [
     # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
     {
-      "rolearn"  = aws_iam_role.eks_admin.arn
+      "rolearn"  = aws_iam_role.eks_admin[0].arn
       "username" = "eks-admin"
       "groups" = [
         "eks-prow-cluster-admin"

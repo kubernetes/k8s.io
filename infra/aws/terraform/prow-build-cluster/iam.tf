@@ -26,8 +26,8 @@ data "aws_iam_user" "user_pprzekwa" {
 }
 
 resource "aws_iam_role" "iam_cluster_admin" {
-  name        = "Prow-Cluster-Admin"
-  description = "IAM role used to delegate access to prow-build-cluster"
+  name        = "${local.canary_prefix}Prow-Cluster-Admin"
+  description = "IAM role used to delegate access to ${local.canary_prefix}prow-build-cluster"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

@@ -14,11 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-# This IAM configuration allows Prow GKE Clusters to assume a role on AWS
-
+# This IAM configuration allows Prow GKE Clusters to assume a role on AWS.
+# Provisioning those resources for canary installation is skipped.
 
 # Recognize federated identities from the prow trusted cluster
 resource "aws_iam_openid_connect_provider" "k8s_prow" {
+  count = var.is_canary_installation ? 0 : 1
+
   url             = "https://container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow"
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = ["08745487e891c19e3078c1f2a07e452950ef36f6"]
@@ -26,14 +28,17 @@ resource "aws_iam_openid_connect_provider" "k8s_prow" {
 
 # We allow Prow Pods with specific service acccounts on the a particular cluster to assume this role
 resource "aws_iam_role" "eks_admin" {
+  count = var.is_canary_installation ? 0 : 1
+
   name = "Prow-EKS-Admin"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Federated" : aws_iam_openid_connect_provider.k8s_prow.arn
+          "Federated" : aws_iam_openid_connect_provider.k8s_prow[0].arn
         },
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {

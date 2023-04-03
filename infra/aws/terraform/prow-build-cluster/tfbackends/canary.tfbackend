@@ -1,0 +1,3 @@
+bucket = "prow-build-cluster-tfstate"
+key    = "prow-build-canary-cluster/terraform.tfstate"
+region = "us-east-2"

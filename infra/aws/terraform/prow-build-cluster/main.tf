@@ -18,15 +18,42 @@ limitations under the License.
 # INITIALIZATION
 ###############################################
 
+data "aws_caller_identity" "current" {}
+data "aws_availability_zones" "available" {}
+
+locals {
+  canary_prefix = var.is_canary_installation ? "canary-" : ""
+
+  root_account_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+  aws_cli_base_args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+  aws_cli_args = var.assume_role != true ? local.aws_cli_base_args : concat(
+    local.aws_cli_base_args, ["--role-arn", aws_iam_role.iam_cluster_admin.arn]
+  )
+
+  tags = {
+    Cluster = var.cluster_name
+  }
+  auto_scaling_tags = {
+    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
+    "k8s.io/cluster-autoscaler/enabled"             = true
+  }
+  node_group_tags = merge(local.tags, local.auto_scaling_tags)
+  azs             = slice(data.aws_availability_zones.available.names, 0, 3)
+}
+
 provider "aws" {
   region = var.cluster_region
 
   # We have a chicken-egg problem here. This role is not going to exist
-  # when creating the cluster for the first time. In that case, this must
-  # be commented, than uncommented afterwards.
-  assume_role {
-    role_arn     = "arn:aws:iam::468814281478:role/Prow-Cluster-Admin"
-    session_name = "prow-build-cluster-terraform"
+  # when creating the cluster for the first time. In that case, `assume_role` var
+  # has to be set to false.
+  dynamic "assume_role" {
+    for_each = var.assume_role ? [null] : []
+
+    content {
+      role_arn     = "arn:aws:iam::468814281478:role/${local.canary_prefix}Prow-Cluster-Admin"
+      session_name = "prow-build-cluster-terraform"
+    }
   }
 }
 
@@ -38,7 +65,7 @@ provider "kubernetes" {
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
     command     = "aws"
-    args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name, "--role-arn", aws_iam_role.iam_cluster_admin.arn]
+    args        = local.aws_cli_args
   }
 }
 
@@ -51,24 +78,7 @@ provider "helm" {
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
       command     = "aws"
-      args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name, "--role-arn", aws_iam_role.iam_cluster_admin.arn]
+      args        = local.aws_cli_args
     }
   }
-}
-
-data "aws_caller_identity" "current" {}
-data "aws_availability_zones" "available" {}
-
-locals {
-  root_account_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
-
-  tags = {
-    Cluster = var.cluster_name
-  }
-  auto_scaling_tags = {
-    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
-    "k8s.io/cluster-autoscaler/enabled"             = true
-  }
-  node_group_tags = merge(local.tags, local.auto_scaling_tags)
-  azs             = slice(data.aws_availability_zones.available.names, 0, 3)
 }
