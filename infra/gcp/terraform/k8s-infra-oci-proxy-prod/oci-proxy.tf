@@ -22,9 +22,9 @@ module "oci-proxy" {
   source = "../modules/oci-proxy"
   // ***** production vs staging variables inputs *****
   //
-  // gcr.io/k8s-staging-infra-tools/archeio:v20230310-v0.2.0@sha256:bc742c5f47a69e21e828768991853faddbe13a7f69a9da4d7d2ad16e0e55892c
+  // gcr.io/k8s-staging-infra-tools/archeio:v20230404-v0.2.1@sha256:6a37089e595e62636d401b8d93dc8f9c41dca395ecf7386d456484a3cf889b42
   // If you're interested in running this image yourself releases are available at registry.k8s.io/infra-tools/archeio
-  digest     = "sha256:bc742c5f47a69e21e828768991853faddbe13a7f69a9da4d7d2ad16e0e55892c"
+  digest     = "sha256:6a37089e595e62636d401b8d93dc8f9c41dca395ecf7386d456484a3cf889b42"
   domain     = "registry.k8s.io"
   project_id = local.project_id
   // we increase this in staging, but not in production
