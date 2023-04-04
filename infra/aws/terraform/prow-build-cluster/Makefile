@@ -29,20 +29,20 @@ init:
 .PHONY: plan
 plan: workspace-select
 	$(TF) $@ \
-		-var="assume_role=$(ASSUME_ROLE)" \
-		-var-file=./terraform.$(WORKSPACE_NAME).tfvars
+		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
+		-var="assume_role=$(ASSUME_ROLE)"
 
 .PHONY: apply
 apply: workspace-select
 	$(TF) $@ \
-		-var="assume_role=$(ASSUME_ROLE)" \
-		-var-file=./terraform.$(WORKSPACE_NAME).tfvars
+		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
+		-var="assume_role=$(ASSUME_ROLE)"
 
 .PHONY: destroy
-destory: workspace-select
+destroy: workspace-select
 	$(TF) $@ \
-		-var="assume_role=$(ASSUME_ROLE)" \
-		-var-file=./terraform.$(WORKSPACE_NAME).tfvars
+		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
+		-var="assume_role=$(ASSUME_ROLE)"
 
 .PHONY: fmt
 fmt:
