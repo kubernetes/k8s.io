@@ -478,6 +478,9 @@ resource "google_cloud_run_service" "oci-proxy" {
         resources {
           limits = {
             "cpu" = "1000m"
+            // default, also the minimum permitted for second generation
+            // https://cloud.google.com/run/docs/about-execution-environments
+            "memory" = "512Mi"
           }
         }
       }
