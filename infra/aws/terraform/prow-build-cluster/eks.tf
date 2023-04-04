@@ -18,6 +18,31 @@ limitations under the License.
 # EKS Cluster
 ###############################################
 
+locals {
+  aws_auth_roles = concat(
+    terraform.workspace == "prod" ? [
+      # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
+      {
+        "rolearn"  = aws_iam_role.eks_admin[0].arn
+        "username" = "eks-admin"
+        "groups" = [
+          "eks-prow-cluster-admin"
+        ]
+      }
+    ] : [],
+    [
+      # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
+      {
+        "rolearn"  = aws_iam_role.iam_cluster_admin.arn
+        "username" = "eks-cluster-admin"
+        "groups" = [
+          "eks-cluster-admin"
+        ]
+      }
+    ]
+  )
+}
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.10.0"
@@ -31,24 +56,8 @@ module "eks" {
   manage_aws_auth_configmap = true
 
   # Configure aws-auth
-  aws_auth_roles = [
-    # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
-    {
-      "rolearn"  = aws_iam_role.eks_admin.arn
-      "username" = "eks-admin"
-      "groups" = [
-        "eks-prow-cluster-admin"
-      ]
-    },
-    # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
-    {
-      "rolearn"  = aws_iam_role.iam_cluster_admin.arn
-      "username" = "eks-cluster-admin"
-      "groups" = [
-        "eks-cluster-admin"
-      ]
-    },
-  ]
+  aws_auth_roles = local.aws_auth_roles
+
   # Allow EKS access to the root account.
   aws_auth_users = [
     {

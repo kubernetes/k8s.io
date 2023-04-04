@@ -15,6 +15,8 @@ limitations under the License.
 */
 
 module "cluster_autoscaler" {
+  count = var.assume_role ? 1 : 0
+
   source = "./modules/cluster-autoscaler"
   providers = {
     kubernetes = kubernetes
@@ -30,6 +32,8 @@ module "cluster_autoscaler" {
 }
 
 module "metrics_server" {
+  count = var.assume_role ? 1 : 0
+
   source = "./modules/metrics-server"
   providers = {
     kubernetes = kubernetes
@@ -42,6 +46,8 @@ module "metrics_server" {
 
 # AWS Load Balancer Controller (ALB/NLB integration).
 resource "helm_release" "aws_lb_controller" {
+  count = var.assume_role ? 1 : 0
+
   name       = "aws-load-balancer-controller"
   namespace  = "kube-system"
   repository = "https://aws.github.io/eks-charts"
@@ -75,6 +81,8 @@ resource "helm_release" "aws_lb_controller" {
 
 # AWS Secrets Manager integration
 resource "helm_release" "secrets_store_csi_driver" {
+  count = var.assume_role ? 1 : 0
+
   name       = "secrets-store-csi-driver"
   namespace  = "kube-system"
   repository = "https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts"
@@ -87,6 +95,8 @@ resource "helm_release" "secrets_store_csi_driver" {
 }
 
 resource "helm_release" "secrets_store_csi_driver_provider_aws" {
+  count = var.assume_role ? 1 : 0
+
   name       = "aws-secrets-manager"
   namespace  = "kube-system"
   repository = "https://aws.github.io/secrets-store-csi-driver-provider-aws"
