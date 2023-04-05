@@ -5,6 +5,7 @@
     "sha256:fd636b33485c7826fb20ef0688a83ee0910317dbb6c0c6f3ad14661c1db25def": ["1.8.4"]
     "sha256:aa60f453d64dfb3c3fd9e7306f988c36c6352c4f2d956aa90467f2808091effa": ["1.8.5"]
     "sha256:68d396900aeaa072c1f27289485fdac29834045a6f3ffe369bf389d830ef572d": ["1.8.6"]
+    "sha256:69bf675e356770c651864305f2ce17ec25623ac0ff77a040f9396e72daba2d5f": ["v1.8.8"]
 - name: cluster-proportional-autoscaler-amd64
   dmap:
     "sha256:e310b7e60ed5dabcf9945fb86ee049bafde69b01ac0b9eb647c2b96c273e18d8": ["1.8.2"]
