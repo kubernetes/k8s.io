@@ -156,6 +156,7 @@
     "sha256:38220a0b0cdc9dab9c8704f02fb17541831a67dd2d668a1e5926272e21c55d0d": ["v20221224-controller-v1.5.1-70-gc50a9e99b"]
     "sha256:e52a2f86818f8c7970e5caabc1ffa50ed92c41083e4b7ba822641f670ce80506": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
     "sha256:754c62f9a5efd1ee515ee908ecc16c0c4d1dda96a8cc8019667182a55f3a9035": ["v20230314-helm-chart-4.5.2-32-g520384b11"]
+    "sha256:4cbc41d2c11ba3e2fdf54a3e16e8f6d91d1a4c021d0df1c26e772a42fa8dbd32": ["v20230405-helm-chart-4.6.0-15-g522683813"]
 
 # custom cfssl image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/cfssl
@@ -185,6 +186,7 @@
     "sha256:f45fb156e1488ae29aa5e98d2faf8731c79bc5a19c2f39a3c4069566ba629a78": ["v20220801-g00ee51f09"]
     "sha256:778ac6d1188c8de8ecabeddd3c37b72c8adc8c712bad2bd7a81fb23a3514934c": ["v20220819-ga98c63787"]
     "sha256:4938d1d91a2b7d19454460a8c1b010b89f6ff92d2987fd889ac3e8fc3b70d91a": ["v20230318-helm-chart-4.5.2-44-gfec1dbe3a"]
+    "sha256:9c7825ce04dbf07d2c67bda23d4359b655021dc583130beba6a80e22b8b7ae07": ["v20230405-helm-chart-4.6.0-15-g522683813"]
 
 # fastcgi HTTP server image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/fastcgi-helloserver
