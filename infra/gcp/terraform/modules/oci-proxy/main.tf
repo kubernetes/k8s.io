@@ -381,14 +381,10 @@ locals {
   }
 }
 
-data "google_organization" "org" {
-  domain = "kubernetes.io"
-}
-
 resource "google_project" "project" {
   name            = var.project_id
   project_id      = var.project_id
-  org_id          = data.google_organization.org.org_id
+  org_id          = "758905017065"
   billing_account = "018801-93540E-22A20E"
 }
 
