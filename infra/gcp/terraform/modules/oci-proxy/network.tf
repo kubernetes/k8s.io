@@ -15,8 +15,8 @@ limitations under the License.
 */
 
 resource "google_compute_global_address" "default_ipv4" {
-  project      = google_project.project.project_id
-  name         = google_project.project.project_id
+  project      = var.project_id
+  name         = var.project_id
   address_type = "EXTERNAL"
   ip_version   = "IPV4"
 
@@ -26,8 +26,8 @@ resource "google_compute_global_address" "default_ipv4" {
 }
 
 resource "google_compute_global_address" "default_ipv6" {
-  project      = google_project.project.project_id
-  name         = "${google_project.project.project_id}-v6"
+  project      = var.project_id
+  name         = "${var.project_id}-v6"
   address_type = "EXTERNAL"
   ip_version   = "IPV6"
 
@@ -37,20 +37,20 @@ resource "google_compute_global_address" "default_ipv6" {
 }
 
 data "google_compute_global_address" "default_ipv4" {
-  project = google_project.project.project_id
-  name    = google_project.project.project_id
+  project = var.project_id
+  name    = var.project_id
 }
 
 data "google_compute_global_address" "default_ipv6" {
-  project = google_project.project.project_id
-  name    = "${google_project.project.project_id}-v6"
+  project = var.project_id
+  name    = "${var.project_id}-v6"
 }
 
 resource "google_compute_region_network_endpoint_group" "oci-proxy" {
   for_each = google_cloud_run_service.oci-proxy
 
   provider              = google-beta
-  project               = google_project.project.project_id
+  project               = var.project_id
   name                  = "${var.project_id}--${each.key}--neg"
   network_endpoint_type = "SERVERLESS"
   region                = google_cloud_run_service.oci-proxy[each.key].location
@@ -63,7 +63,7 @@ module "lb-http" {
   source  = "GoogleCloudPlatform/lb-http/google//modules/serverless_negs"
   version = "~> 6.2.0"
 
-  project = google_project.project.project_id
+  project = var.project_id
   name    = var.project_id
 
   # ...

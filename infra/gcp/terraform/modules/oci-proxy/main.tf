@@ -381,17 +381,10 @@ locals {
   }
 }
 
-resource "google_project" "project" {
-  name            = var.project_id
-  project_id      = var.project_id
-  org_id          = "758905017065"
-  billing_account = "018801-93540E-22A20E"
-}
-
 
 // Enable services needed for the project
 resource "google_project_service" "project" {
-  project = google_project.project.id
+  project = var.project_id
 
   for_each = toset([
     "compute.googleapis.com",
@@ -410,21 +403,21 @@ resource "google_project_service" "project" {
 
 // Ensure k8s-infra-oci-proxy-admins@kubernetes.io has admin access to this project
 resource "google_project_iam_member" "k8s_infra_oci_proxy_admins" {
-  project = google_project.project.id
+  project = var.project_id
   role    = "roles/owner"
   member  = "group:k8s-infra-oci-proxy-admins@kubernetes.io"
 }
 
 
 resource "google_service_account" "oci-proxy" {
-  project      = google_project.project.project_id
+  project      = var.project_id
   account_id   = var.service_account_name
   display_name = "Minimal Service Account for OCI Proxy"
 }
 
 // Make each service invokable by all users.
 resource "google_cloud_run_service_iam_member" "allUsers" {
-  project  = google_project.project.project_id
+  project  = var.project_id
   for_each = google_cloud_run_service.oci-proxy
 
   service  = google_cloud_run_service.oci-proxy[each.key].name
@@ -434,7 +427,7 @@ resource "google_cloud_run_service_iam_member" "allUsers" {
 }
 
 resource "google_cloud_run_service" "oci-proxy" {
-  project  = google_project.project.project_id
+  project  = var.project_id
   for_each = local.cloud_run_config
   name     = "${var.project_id}-${each.key}"
   location = each.key

@@ -16,7 +16,7 @@ limitations under the License.
 
 resource "google_monitoring_notification_channel" "emails" {
   display_name = "k8s-infra-alerts@kubernetes.io"
-  project      = google_project.project.project_id
+  project      = var.project_id
   type         = "email"
   labels = {
     email_address = "k8s-infra-alerts@kubernetes.io"
@@ -24,7 +24,7 @@ resource "google_monitoring_notification_channel" "emails" {
 }
 
 module "alerts" {
-  project_id         = google_project.project.project_id
+  project_id         = var.project_id
   source             = "../monitoring/uptime-alert"
   documentation_text = "${var.domain} is down"
   domain             = var.domain
@@ -32,7 +32,7 @@ module "alerts" {
   notification_channels = [
     # Manually created. Monitoring channels can't be created with Terraform.
     # See: https://github.com/hashicorp/terraform-provider-google/issues/1134
-    "${google_project.project.id}/notificationChannels/${var.notification_channel_id}",
+    "projects/${var.project_id}/notificationChannels/${var.notification_channel_id}",
     google_monitoring_notification_channel.emails.name,
   ]
 }

@@ -18,7 +18,7 @@ limitations under the License.
 # This file contains the Cloud Armor policies
 
 resource "google_compute_security_policy" "cloud-armor" {
-  project = google_project.project.project_id
+  project = var.project_id
   name    = "security-policy-oci-proxy"
 
 
