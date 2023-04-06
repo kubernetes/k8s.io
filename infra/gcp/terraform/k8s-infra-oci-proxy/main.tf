@@ -16,8 +16,7 @@ limitations under the License.
 
 // NOTE: compare this file to ./../k8s-infra-oci-proxy-prod/main.tf
 locals {
-  project_id           = "k8s-infra-oci-proxy"
-  service_account_name = "oci-proxy-sandbox"
+  project_id = "k8s-infra-oci-proxy"
 }
 
 module "oci-proxy" {
@@ -29,38 +28,11 @@ module "oci-proxy" {
   digest               = var.digest
   domain               = "registry-sandbox.k8s.io"
   project_id           = local.project_id
-  service_account_name = local.service_account_name
+  service_account_name = "oci-proxy-sandbox"
   // we increase this in staging, but not in production
   // we already get a lot of info from build-in cloud run logs
   verbosity = "3"
   // Manually created. Monitoring channels can't be created with Terraform.
   // See: https://github.com/hashicorp/terraform-provider-google/issues/1134
   notification_channel_id = "3237876589275698022"
-}
-
-// Currently we only do this for staging, prod is manual deployed by admins
-//
-// Ensure gcb-builder can auto-deploy registry-sandbox.k8s.io
-//
-// TODO: create a dedicated service account for auto-deployment
-data "google_project" "k8s_infra_staging_tools" {
-  project_id = "k8s-staging-infra-tools"
-}
-
-resource "google_service_account_iam_member" "cloudbuild_deploy_oci_proxy" {
-  // NOTE: this is not really sensitive, we just don't need to log it in the shared module ...
-  service_account_id = nonsensitive(module.oci-proxy.service_account_id)
-  role               = "roles/iam.serviceAccountUser"
-  member             = "serviceAccount:${data.google_project.k8s_infra_staging_tools.number}@cloudbuild.gserviceaccount.com"
-}
-
-resource "google_cloud_run_service_iam_member" "gcb_builder_sa" {
-  project = local.project_id
-  // NOTE: this is not really sensitive, we just don't need to log it in the shared module ...
-  for_each = nonsensitive(module.oci-proxy.region_locations)
-
-  service  = nonsensitive(module.oci-proxy.region_locations[each.key].name)
-  location = nonsensitive(module.oci-proxy.region_locations[each.key].location)
-  role     = "roles/run.developer"
-  member   = "serviceAccount:${data.google_project.k8s_infra_staging_tools.number}@cloudbuild.gserviceaccount.com"
 }
