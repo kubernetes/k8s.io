@@ -22,6 +22,14 @@ variable "assume_role" {
   default     = true
 }
 
+# This variable is required in the installation process as Terraform
+# cannot plan Kubernetes resources as a cluster is yet to be created.
+variable "deploy_kubernetes_resources" {
+  type        = bool
+  description = "Deploy Kubernetes resources defined by Terraform."
+  default     = true
+}
+
 variable "vpc_cidr" {
   type        = string
   description = "CIDR of the VPC"

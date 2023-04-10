@@ -33,7 +33,7 @@ locals {
     [
       # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
       {
-        "rolearn"  = aws_iam_role.iam_cluster_admin.arn
+        "rolearn"  = module.iam.cluster_admin_arn
         "username" = "eks-cluster-admin"
         "groups" = [
           "eks-cluster-admin"
@@ -75,7 +75,7 @@ module "eks" {
   ]
   # Allow service access to the KMS key to the Prow-Cluster-Admin role.
   kms_key_service_users = [
-    aws_iam_role.iam_cluster_admin.arn
+    module.iam.cluster_admin_arn
   ]
 
   # We use IPv4 for the best compatibility with the existing setup.

@@ -14,8 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module "iam" {
-  source = "./modules/iam"
-
-  canary_prefix = local.canary_prefix
+data "aws_iam_user" "user_xmudrii" {
+  user_name = "xmudrii"
+}
+data "aws_iam_user" "user_pprzekwa" {
+  user_name = "pprzekwa"
 }

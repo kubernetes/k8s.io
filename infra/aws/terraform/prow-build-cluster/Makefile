@@ -14,6 +14,7 @@
 
 TF ?= terraform
 ASSUME_ROLE ?= true
+DEPLOY_K8S_RESOURCES ?= true
 
 # Valid values are: canary, prod
 WORKSPACE_NAME ?= canary
@@ -30,19 +31,22 @@ init:
 plan: workspace-select
 	$(TF) $@ \
 		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)"
+		-var="assume_role=$(ASSUME_ROLE)" \
+		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: apply
 apply: workspace-select
 	$(TF) $@ \
 		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)"
+		-var="assume_role=$(ASSUME_ROLE)" \
+		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: destroy
 destroy: workspace-select
 	$(TF) $@ \
 		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)"
+		-var="assume_role=$(ASSUME_ROLE)" \
+		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: fmt
 fmt:

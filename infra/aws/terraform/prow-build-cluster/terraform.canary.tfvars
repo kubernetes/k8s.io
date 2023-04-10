@@ -14,7 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-assume_role = true
+assume_role                 = true
+deploy_kubernetes_resources = true
 
 cluster_name    = "prow-build-canary-cluster"
 cluster_region  = "us-east-2"

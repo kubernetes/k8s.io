@@ -14,8 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module "iam" {
-  source = "./modules/iam"
-
-  canary_prefix = local.canary_prefix
+output "cluster_admin_arn" {
+  description = "ARN of the cluster admin role"
+  value       = aws_iam_role.iam_cluster_admin.arn
 }
