@@ -13,6 +13,7 @@
 # limitations under the License.
 
 TF ?= terraform
+TF_ARGS ?=
 ASSUME_ROLE ?= true
 DEPLOY_K8S_RESOURCES ?= true
 
@@ -29,21 +30,21 @@ init:
 
 .PHONY: plan
 plan: workspace-select
-	$(TF) $@ \
+	$(TF) $@ $(TF_ARGS) \
 		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: apply
 apply: workspace-select
-	$(TF) $@ \
+	$(TF) $@ $(TF_ARGS) \
 		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: destroy
 destroy: workspace-select
-	$(TF) $@ \
+	$(TF) $@ $(TF_ARGS) \
 		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"

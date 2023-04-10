@@ -40,8 +40,12 @@ resource "aws_iam_role" "iam_cluster_admin" {
   })
 }
 
-# Give administrator access to the admin IAM role so it can be used with Terraform.
-resource "aws_iam_role_policy_attachment" "iam_policy_cluster_admin" {
+resource "aws_iam_role_policy_attachment" "cluster_admin_prow_cluster_maintainer" {
   role       = aws_iam_role.iam_cluster_admin.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  policy_arn = aws_iam_policy.prow_cluster_maintainer.arn
+}
+
+resource "aws_iam_role_policy_attachment" "cluster_admin_prow_cluster_destroy" {
+  role       = aws_iam_role.iam_cluster_admin.name
+  policy_arn = aws_iam_policy.prow_cluster_destroy.arn
 }
