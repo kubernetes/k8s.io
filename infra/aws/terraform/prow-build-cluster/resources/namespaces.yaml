@@ -15,3 +15,4 @@ metadata:
   name: monitoring
   labels:
     monitoring: prometheus
+

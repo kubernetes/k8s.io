@@ -1,0 +1,41 @@
+# Copyright 2023 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boskos-janitor
+  labels:
+    app: boskos-janitor
+  namespace: test-pods
+spec:
+  replicas: 2 # 2 distributed janitor instances
+  selector:
+    matchLabels:
+      app: boskos-janitor
+  template:
+    metadata:
+      labels:
+        app: boskos-janitor
+    spec:
+      terminationGracePeriodSeconds: 300
+      serviceAccountName: boskos-janitor
+      containers:
+        - name: boskos-janitor
+          image: gcr.io/k8s-staging-boskos/aws-janitor-boskos:v20230331-659ef2e
+          args:
+            - --boskos-url=http://boskos.test-pods.svc.cluster.local.
+            - --resource-type=aws-account,aws-gpu-account,aws-scalability-account,aws-scalability-scale-account
+            - --pool-size=20
+            - --
+            - --hours=0
