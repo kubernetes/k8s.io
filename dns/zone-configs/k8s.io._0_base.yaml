@@ -448,7 +448,7 @@ kustomize.sigs:
 kubectl.sigs:
   type: CNAME
   value: cli-experimental.netlify.app.
-# https://githubm.com/kubernetes-sigs/kueue docs (@moficodes @alculquicondor)
+# https://github.com/kubernetes-sigs/kueue docs (@moficodes @alculquicondor)
 kueue.sigs:
   type: CNAME
   value: kubernetes-sigs-kueue.netlify.app.
@@ -464,3 +464,7 @@ cloud-provider-azure.sigs:
 network-policy-api.sigs:
   type: CNAME
   value: kubernetes-sigs-network-policy-api.netlify.app.
+# https://github.com/kubernetes-sigs/sig-multicluster-site (@lauralorenz, @jmhbnz)
+multicluster.sigs:
+  type: CNAME
+  value: kubernetes-sig-multicluster.netlify.app.
