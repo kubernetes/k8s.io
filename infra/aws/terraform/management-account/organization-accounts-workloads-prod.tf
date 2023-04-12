@@ -17,9 +17,9 @@ limitations under the License.
 module "artifacts-k8s-io" {
   source = "../modules/org-account"
 
-  account_name               = "k8s-infra-artifacts-k8s-io-prod"
-  email                      = "k8s-infra-aws-admins+artifacts-k8s-io-prod@kubernetes.io"
-  parent_id                  = aws_organizations_organizational_unit.production.id
+  account_name = "k8s-infra-artifacts-k8s-io-prod"
+  email        = "k8s-infra-aws-admins+artifacts-k8s-io-prod@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.production.id
 }
 
 module "registry-k8s-io" {
@@ -29,4 +29,19 @@ module "registry-k8s-io" {
   email                      = "k8s-infra-aws-admins+registry-k8s-io-prod@kubernetes.io"
   iam_user_access_to_billing = "ALLOW"
   parent_id                  = aws_organizations_organizational_unit.production.id
+}
+
+
+module "prow_prod" {
+  source = "../modules/org-account"
+
+  account_name = "k8s-infra-prow"
+  email        = "k8s-infra-aws-admins+prow@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.production.id
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "eks"
+  }
 }

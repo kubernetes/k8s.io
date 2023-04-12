@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 module "organization_tag_policy_group" {
-  source   = "../modules/tag-policy"
+  source = "../modules/tag-policy"
 
   tag_name = "group"
   # Values from https://github.com/kubernetes/community/blob/master/sig-list.md
@@ -64,7 +64,7 @@ module "organization_tag_policy_group" {
 }
 
 module "organization_tag_policy_environment" {
-  source   = "../modules/tag-policy"
+  source = "../modules/tag-policy"
 
   tag_name = "environment"
   tag_values = [
