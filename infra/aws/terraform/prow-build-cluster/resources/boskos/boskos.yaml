@@ -42,6 +42,13 @@ spec:
             - name: boskos-config
               mountPath: /etc/config
               readOnly: true
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 2000m
+              memory: 4Gi
       volumes:
         - name: boskos-config
           configMap:

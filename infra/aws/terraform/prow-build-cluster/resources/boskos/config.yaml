@@ -21,18 +21,18 @@ data:
   config: |
     resources:
     - names:
-        - fake-aws-account
+        - aws-account
       state: dirty
       type: aws-account
     - names:
-        - fake-aws-gpu-account
+        - aws-gpu-account
       state: dirty
       type: aws-gpu-account
     - names:
-        - fake-aws-scalability-account
+        - aws-scalability-account
       state: dirty
       type: aws-scalability-account
     - names:
-        - fake-aws-scalability-scale-account
+        - aws-scalability-scale-account
       state: dirty
       type: aws-scalability-scale-account

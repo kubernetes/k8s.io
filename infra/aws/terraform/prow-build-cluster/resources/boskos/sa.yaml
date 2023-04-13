@@ -11,8 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# TODO: Add annotations for IAM roles allowing for assuming accounts.
 kind: ServiceAccount
 apiVersion: v1
 metadata:
@@ -22,23 +20,5 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: boskos-janitor
-  namespace: test-pods
-
-# Build Service Accounts
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  annotations: {}
-  name: prow-build
-  namespace: test-pods
-
-# TODO: Figure out if we need this service account on AWS
----
-kind: ServiceAccount
-apiVersion: v1
-metadata:
-  annotations: {}
-  name: gcb-builder-releng-test
+  name: aws-boskos-janitor
   namespace: test-pods
