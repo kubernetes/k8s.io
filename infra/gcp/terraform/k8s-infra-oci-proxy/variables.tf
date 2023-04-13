@@ -14,23 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "tag" {
+variable "digest" {
   type    = string
-}
-
-variable "domain" {
-  type = string
-}
-
-variable "project_id" {
-  type = string
-}
-
-variable "cloud_run_config" {
-  type = map(object({
-    environment_variables = list(object({
-      value = string
-      name  = string
-    }))
-  }))
+  default = null
 }

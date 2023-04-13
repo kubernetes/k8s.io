@@ -1,5 +1,5 @@
 /*
-Copyright 2022 The Kubernetes Authors.
+Copyright 2023 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,11 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required Terraform version
-*/
-
-terraform {
-  required_version = "~> 1.3.0"
+variable "tag_name" {
+  description = "Tag name"
+  type        = string
 }
+
+variable "tag_values" {
+  description = "List of accepted values"
+  type        = list(any)
+}
+
+variable "enforce_services" {
+  description = "List of services for tag enforcement"
+  type        = list(any)
+  default     = []
+}
+

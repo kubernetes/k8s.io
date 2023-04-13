@@ -19,11 +19,6 @@ set -o pipefail
 
 REPO_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)
 
-function usage() {
-    echo >&2 "Usage: $0 [path...]"
-    exit 1
-}
-
 function ensure_dependencies() {
     if [ -z "$(which curl)" ]; then
         echo "Please install curl"

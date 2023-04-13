@@ -1,5 +1,5 @@
 /*
-Copyright 2022 The Kubernetes Authors.
+Copyright 2023 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,11 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required Terraform version
-*/
+output "tag_policy_id" {
+  value = aws_organizations_policy.this.id
+}
 
-terraform {
-  required_version = "~> 1.3.0"
+output "scp_require_tag_id" {
+  value = aws_organizations_policy.request_tag.id
+}
+
+output "scp_deny_tag_deletion_id" {
+  value = aws_organizations_policy.deny_tag_deletion.id
 }

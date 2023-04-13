@@ -1,5 +1,5 @@
 /*
-Copyright 2022 The Kubernetes Authors.
+Copyright 2023 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,10 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Print each service URL.
-output "services" {
-  value = {
-    for svc in google_cloud_run_service.regions :
-    svc.name => svc.status[0].url
+locals {
+  name = "tag-policy-test"
+}
+
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}
+
+data "aws_iam_session_context" "whoami" {
+  arn = data.aws_caller_identity.current.arn
+}
+
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn-ami-hvm-*-x86_64-gp2"]
   }
 }
+
+data "aws_availability_zones" "available" {}

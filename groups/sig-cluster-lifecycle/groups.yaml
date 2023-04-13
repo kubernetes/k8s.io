@@ -33,15 +33,11 @@ groups:
       - kmuldoon@vmware.com
       - kakaraparthy@vmware.com
       - christi.schlotter@gmail.com
-      # CAPI release-1.4 team members
-      - alexandr.demicev@suse.com
-      - amit9116260192@gmail.com
+      - furkat.gofurov@suse.com
+      # CAPI release-1.5 team members
+      - muhammad.adil.ghaffar@est.tech
       - codewithaniruddha@gmail.com
-      - furkat.gofurov@est.tech
-      - ii.sayantani.ii@gmail.com
-      - k.nawaz.h@gmail.com
-      - ntosas@gmail.com
-      - oscar.utbult@gmail.com
+      - tobiasgiese@gmail.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-operator-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-operator-alerts

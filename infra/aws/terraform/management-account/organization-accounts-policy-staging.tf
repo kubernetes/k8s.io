@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 module "policy_staging_account_1" {
   source = "../modules/org-account"
 
@@ -24,3 +23,32 @@ module "policy_staging_account_1" {
   parent_id                  = aws_organizations_organizational_unit.policy_staging.id
 }
 
+resource "aws_organizations_policy_attachment" "policy_staging_tag_policy_group" {
+  policy_id = module.organization_tag_policy_group.tag_policy_id
+  target_id = aws_organizations_organizational_unit.policy_staging.id
+}
+
+resource "aws_organizations_policy_attachment" "policy_staging_require_tag_group" {
+  policy_id = module.organization_tag_policy_group.scp_require_tag_id
+  target_id = aws_organizations_organizational_unit.policy_staging.id
+}
+
+resource "aws_organizations_policy_attachment" "policy_staging_deny_tag_deletion_group" {
+  policy_id = module.organization_tag_policy_group.scp_deny_tag_deletion_id
+  target_id = aws_organizations_organizational_unit.policy_staging.id
+}
+
+resource "aws_organizations_policy_attachment" "policy_staging_tag_policy_environment" {
+  policy_id = module.organization_tag_policy_environment.tag_policy_id
+  target_id = aws_organizations_organizational_unit.policy_staging.id
+}
+
+resource "aws_organizations_policy_attachment" "policy_staging_require_tag_environment" {
+  policy_id = module.organization_tag_policy_environment.scp_require_tag_id
+  target_id = aws_organizations_organizational_unit.policy_staging.id
+}
+
+resource "aws_organizations_policy_attachment" "policy_staging_deny_tag_deletion_environment" {
+  policy_id = module.organization_tag_policy_environment.scp_deny_tag_deletion_id
+  target_id = aws_organizations_organizational_unit.policy_staging.id
+}

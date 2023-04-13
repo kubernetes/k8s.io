@@ -21,18 +21,6 @@ data:
   config: |
     resources:
     - names:
-        - aws-account
-      state: dirty
+        - k8s-aws-boskos-01
+      state: free
       type: aws-account
-    - names:
-        - aws-gpu-account
-      state: dirty
-      type: aws-gpu-account
-    - names:
-        - aws-scalability-account
-      state: dirty
-      type: aws-scalability-account
-    - names:
-        - aws-scalability-scale-account
-      state: dirty
-      type: aws-scalability-scale-account

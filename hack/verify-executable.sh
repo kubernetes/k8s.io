@@ -31,7 +31,6 @@ readonly exec_regexes=(
 # files that should NOT be executable (exceptions to the regexes above)
 readonly noexec_regexes=(
     .*/lib.*\.sh # lib_foo.sh should be sourced by other scripts, not executed
-    infra/aws/terraform/prow-build-cluster/bootstrap/node_bootstrap.sh # this script is injected into another script, not executed
 )
 
 # convert arrays to extended regexes

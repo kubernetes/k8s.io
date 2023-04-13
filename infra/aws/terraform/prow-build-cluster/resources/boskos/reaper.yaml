@@ -34,7 +34,7 @@ spec:
           image: gcr.io/k8s-staging-boskos/reaper:v20230331-659ef2e
           args:
             - --boskos-url=http://boskos.test-pods.svc.cluster.local.
-            - --resource-type=aws-account,aws-gpu-account,aws-scalability-account,aws-scalability-scale-account
+            - --resource-type=aws-account
           resources:
             requests:
               cpu: 500m

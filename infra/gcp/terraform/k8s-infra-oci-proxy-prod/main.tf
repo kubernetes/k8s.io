@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// NOTE: compare this file to ./../k8s-infra-oci-proxy/main.tf
 locals {
   project_id = "k8s-infra-oci-proxy-prod"
 }
@@ -22,11 +23,11 @@ module "oci-proxy" {
   source = "../modules/oci-proxy"
   // ***** production vs staging variables inputs *****
   //
-  // gcr.io/k8s-staging-infra-tools/archeio:v20230310-v0.2.0@sha256:bc742c5f47a69e21e828768991853faddbe13a7f69a9da4d7d2ad16e0e55892c
-  // If you're interested in running this image yourself releases are available at registry.k8s.io/infra-tools/archeio
-  digest     = "sha256:bc742c5f47a69e21e828768991853faddbe13a7f69a9da4d7d2ad16e0e55892c"
-  domain     = "registry.k8s.io"
-  project_id = local.project_id
+  // explicitly using default digest here vs staging which overrides it
+  digest               = null
+  domain               = "registry.k8s.io"
+  project_id           = local.project_id
+  service_account_name = "oci-proxy-prod"
   // we increase this in staging, but not in production
   // we already get a lot of info from build-in cloud run logs
   verbosity = "0"

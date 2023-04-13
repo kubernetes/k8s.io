@@ -14,11 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required Terraform version
-*/
+output "service_account_id" {
+  value = google_service_account.oci-proxy.id
+  // not truly sensitive, but we don't need to log this
+  sensitive = true
+}
 
-terraform {
-  required_version = "~> 1.3.0"
+output "region_locations" {
+  value = {
+    for k, v in google_cloud_run_service.oci-proxy : k => { name : v.name, location : v.location }
+  }
+  // not truly sensitive, but we don't need to log this
+  sensitive = true
 }
