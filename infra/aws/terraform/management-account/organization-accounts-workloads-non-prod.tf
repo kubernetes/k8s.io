@@ -23,6 +23,23 @@ module "aws-playground-01" {
   parent_id    = aws_organizations_organizational_unit.non_production.id
   tags = {
     "production" = "false",
-    "owners"     = "upodroid"
+    "owners"     = "upodroid",
+    "group"      = "sig-k8s-infra"
+  }
+}
+
+#  account used to create and main a canary cluster as build cluster for prow
+module "prow_canary" {
+  source = "../modules/org-account"
+
+  account_name = "k8s-infra-prow-canary"
+  email        = "k8s-infra-aws-admins+prow_canary@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.non_production.id
+  tags = {
+    "production"  = "false",
+    "environment" = "canary",
+    "owners"      = "xmudrii",
+    "group"       = "sig-k8s-infra",
+    "service"     = "eks"
   }
 }
