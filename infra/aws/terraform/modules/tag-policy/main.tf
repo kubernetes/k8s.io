@@ -227,3 +227,13 @@ resource "aws_organizations_policy" "deny_tag_deletion" {
   description = "Deny tag deletion ${var.tag_name} Service Control Policy"
   content     = data.aws_iam_policy_document.deny_tag_deletion.json
 }
+
+# --------------------------------------- #
+# Enable Cost Allocation
+# --------------------------------------- #
+
+resource "aws_ce_cost_allocation_tag" "this" {
+  count   = var.enable_cost_allocation ? 1 : 0
+  tag_key = var.tag_name
+  status  = "Active"
+}

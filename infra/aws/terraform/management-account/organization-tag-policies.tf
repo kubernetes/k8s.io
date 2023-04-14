@@ -61,6 +61,9 @@ module "organization_tag_policy_group" {
     "ecr",
     "s3"
   ]
+
+  enable_cost_allocation = true
+
 }
 
 module "organization_tag_policy_environment" {
@@ -78,4 +81,7 @@ module "organization_tag_policy_environment" {
     "ecr",
     "s3"
   ]
+
+  enable_cost_allocation = true
+
 }
