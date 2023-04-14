@@ -30,3 +30,8 @@ variable "enforce_services" {
   default     = []
 }
 
+variable "enable_cost_allocation" {
+  description = "Enable cost allocation for tag"
+  type        = bool
+  default     = false
+}
