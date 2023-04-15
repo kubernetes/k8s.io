@@ -22,5 +22,5 @@ data:
     resources:
     - names:
         - k8s-aws-boskos-01
-      state: free
+      state: dirty
       type: aws-account
