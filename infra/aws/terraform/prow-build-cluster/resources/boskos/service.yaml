@@ -16,6 +16,8 @@ kind: Service
 metadata:
   name: boskos
   namespace: test-pods
+  labels:
+    app: boskos
 spec:
   selector:
     app: boskos
@@ -30,6 +32,8 @@ kind: Service
 metadata:
   name: boskos-metrics
   namespace: test-pods
+  labels:
+    app: boskos-metrics
 spec:
   selector:
     app: boskos
