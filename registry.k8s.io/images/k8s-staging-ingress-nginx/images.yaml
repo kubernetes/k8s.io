@@ -168,6 +168,7 @@
     "sha256:07d1b6ed91958cc525e240ab3dda8d7cf147f0e1c606033302a877c55f68193d": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
     "sha256:d02c1e18f573449966999fc850f1fed3d37621bf77797562cbe77ebdb06a66ea": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
     "sha256:ad88a19f61dfbbb8a45e8faeaacb47f03525fb79c0e2f67ded5608ab74570056": ["v20230404-helm-chart-4.6.0-11-gc76179c04"]
+    "sha256:a168d1a45a43f1dd7852be02bf99dbaf464165222ad3a5d22b895022bfb1df49": ["v20230407-"]
 
 
 # custom echo HTTP server image for e2e tests
@@ -196,6 +197,7 @@
     "sha256:da4e0da2b5f7f6531d5c68db016faa6f2ae14eee8fd975cafeba2ab7b4b61527": ["v20221220-controller-v1.5.1-51-g188913182"]
     "sha256:0e08c836cc58f1ea862578de99b13bc4264fe071e816f96dc1d79857bfba7473": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
     "sha256:00ea295ef4c625aacb69081dbb72f80f40ab0c2cff08d011695405bc2331a3fc": ["v20230404-helm-chart-4.6.0-11-gc76179c04"]
+    "sha256:ad48881259c03149c39a348ad1662ee2a2e056465b9c08b5ec317eea46a4fdde": ["v20230407-"]
 
 # httpbin image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/httpbin
@@ -221,6 +223,7 @@
     "sha256:4d99688e557396f5baa150e019ff7d5b7334f9b9f9a8dab64038c5c2a006f6b5": ["v20221220-controller-v1.5.1-58-g787ea74b6"]
     "sha256:01d181618f270f2a96c04006f33b2699ad3ccb02da48d0f89b22abce084b292f": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
     "sha256:46a9364c2907dbde8a9fd01e75db44d4e0ba2ff9d7ab2ec9fe63e86a31cf8164": ["v20230404-helm-chart-4.6.0-11-gc76179c04"]
+    "sha256:543c40fd093964bc9ab509d3e791f9989963021f1e9e4c9c7b6700b02bfb227b": ["v20230407-"]
 
 # nginx-errors
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/custom-error-pages
@@ -234,6 +237,7 @@
     "sha256:0116499ff83f02360faee7b4f3842f63df7eea40be2db17cc41a467fdf991336": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
     "sha256:332be6ff8c4e93e8845963932f98839dfd52ae49829c29e06475368a3e4fbd9e": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
     "sha256:aabd7a001f6a0a07ed6ea8f6da87e928bfa8f971eba2bef708f3e8504fc5cc9b": ["v20230404-helm-chart-4.6.0-11-gc76179c04"]
+    "sha256:e87d802344fa21ab0980e0c65742c79918b4137b64c4fc614db79cec61137ca0": ["v20230407-"]
 
 # opentelemetry
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/opentelemetry
@@ -251,3 +255,4 @@
     "sha256:331b9bebd6acfcd2d3048abbdd86555f5be76b7e3d0b5af4300b04235c6056c9": ["v20230107-helm-chart-4.4.2-2-g96b3d2165"]
     "sha256:40f766ac4a9832f36f217bb0e98d44c8d38faeccbfe861fbc1a76af7e9ab257f": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
     "sha256:a6b8b6a562884dbfc38748c1560b71ded09ba18c14abc4a989f93e7c3136ed5b": ["v20230404-helm-chart-4.6.0-13-g91057c439"]
+    "sha256:fc366b7a2bc908794be614a7ff6384b14273ec5f12734ce7bc10886b3f19c59d": ["v20230407-"]
