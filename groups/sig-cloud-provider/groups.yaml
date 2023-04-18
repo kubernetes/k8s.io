@@ -39,6 +39,7 @@ groups:
     members:
       - haka.jesse@gmail.com
       - glaubich@gmail.com
+      - lemonjchjch@gmail.com
 
   - email-id: k8s-infra-staging-provider-azure@kubernetes.io
     name: k8s-infra-staging-provider-azure
