@@ -213,10 +213,21 @@ aliases:
     - abgworrall
   provider-ibmcloud:
     - spzala
-  provider-openstack:
+  # From https://github.com/kubernetes/cloud-provider-openstack/blob/master/OWNERS
+  provider-openstack-approvers:
     - chrigl
-    - lingxiankong
+    - jichenjc
     - ramineni
+    - zetaab
+  provider-openstack-reviewers:
+    - chrigl
+    - dulek
+    - Fedosin
+    - jichenjc
+    - kayrus
+    - mdbooth
+    - ramineni
+    - zetaab
   provider-vmware:
     - cantbewong
     - frapposelli
