@@ -1,3 +1,4 @@
 - name: tejolote
   dmap:
     "sha256:8f789665c1c98ee67a15df02c180d6037fe843581603cc03770d9c7643107ff2": ["v0.1.0"]
+    "sha256:b0e6fa79892bd62f313be9056a1eaf4c35719ddc46b4b8c18bb7a28096f4d1a7": ["v0.2.0"]
