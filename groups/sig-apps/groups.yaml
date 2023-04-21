@@ -19,6 +19,16 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: k8s-infra-staging-jobset@kubernetes.io
+    name: k8s-infra-staging-jobset
+    description: |-
+      ACL for staging jobset
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - danielvm@google.com
+      - ahg@google.com
+
   - email-id: k8s-infra-staging-examples@kubernetes.io
     name: k8s-infra-staging-examples
     description: |-
