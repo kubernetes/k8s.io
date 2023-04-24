@@ -11,19 +11,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-apiVersion: v1
-kind: Namespace
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
 metadata:
-  name: test-pods
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: external-secrets
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: monitoring
+  name: boskos-metrics
+  namespace: monitoring
   labels:
-    monitoring: prometheus
+    prometheus: main
+spec:
+  selector:
+    matchLabels:
+      app: boskos-metrics
+  namespaceSelector:
+    matchNames:
+    - test-pods
+  endpoints:
+    - port: metrics

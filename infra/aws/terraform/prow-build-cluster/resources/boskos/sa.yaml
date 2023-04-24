@@ -11,19 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+kind: ServiceAccount
 apiVersion: v1
-kind: Namespace
 metadata:
-  name: test-pods
+  name: boskos
+  namespace: test-pods
 ---
 apiVersion: v1
-kind: Namespace
+kind: ServiceAccount
 metadata:
-  name: external-secrets
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: monitoring
-  labels:
-    monitoring: prometheus
+  name: aws-boskos-janitor
+  namespace: test-pods

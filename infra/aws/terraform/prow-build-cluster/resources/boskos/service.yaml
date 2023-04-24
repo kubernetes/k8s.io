@@ -12,18 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 apiVersion: v1
-kind: Namespace
+kind: Service
 metadata:
-  name: test-pods
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: external-secrets
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: monitoring
+  name: boskos
+  namespace: test-pods
   labels:
-    monitoring: prometheus
+    app: boskos
+spec:
+  selector:
+    app: boskos
+  ports:
+    - name: default
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: boskos-metrics
+  namespace: test-pods
+  labels:
+    app: boskos-metrics
+spec:
+  selector:
+    app: boskos
+  ports:
+    - name: metrics
+      port: 9090
+      protocol: TCP
+      targetPort: 9090

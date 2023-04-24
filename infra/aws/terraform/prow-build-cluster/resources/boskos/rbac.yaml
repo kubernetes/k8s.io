@@ -11,19 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-apiVersion: v1
-kind: Namespace
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: test-pods
+  name: boskos
+rules:
+  - apiGroups: ["boskos.k8s.io"]
+    verbs: ["*"]
+    resources: ["*"]
 ---
-apiVersion: v1
-kind: Namespace
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: external-secrets
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: monitoring
-  labels:
-    monitoring: prometheus
+  name: boskos
+subjects:
+  - kind: ServiceAccount
+    name: boskos
+    namespace: test-pods
+roleRef:
+  kind: ClusterRole
+  name: boskos
+  apiGroup: rbac.authorization.k8s.io

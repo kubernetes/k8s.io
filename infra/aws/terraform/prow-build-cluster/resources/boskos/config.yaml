@@ -12,18 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 apiVersion: v1
-kind: Namespace
+kind: ConfigMap
 metadata:
-  name: test-pods
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: external-secrets
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: monitoring
-  labels:
-    monitoring: prometheus
+  creationTimestamp: null
+  name: resources
+  namespace: test-pods
+data:
+  config: |
+    resources:
+    - names:
+        - k8s-aws-boskos-01
+      state: dirty
+      type: aws-account
