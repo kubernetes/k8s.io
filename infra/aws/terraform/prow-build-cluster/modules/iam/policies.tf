@@ -14,6 +14,55 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+data "aws_iam_policy_document" "prow_cluster_viewer" {
+  statement {
+    sid       = ""
+    effect    = "Allow"
+    resources = ["*"]
+
+    actions = [
+      "ec2:DescribeAddresses",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeEgressOnlyInternetGateways",
+      "ec2:DescribeInternetGateways",
+      "ec2:DescribeLaunchTemplateVersions",
+      "ec2:DescribeLaunchTemplates",
+      "ec2:DescribeNatGateways",
+      "ec2:DescribeNetworkAcls",
+      "ec2:DescribeRouteTables",
+      "ec2:DescribeSecurityGroupRules",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeVpcAttribute",
+      "ec2:DescribeVpcClassicLink",
+      "ec2:DescribeVpcClassicLinkDnsSupport",
+      "ec2:DescribeVpcs",
+      "eks:DescribeAddon",
+      "eks:DescribeAddonVersions",
+      "eks:DescribeCluster",
+      "eks:DescribeNodegroup",
+      "iam:GetOpenIDConnectProvider",
+      "iam:GetPolicy",
+      "iam:GetPolicyVersion",
+      "iam:GetRole",
+      "iam:GetRolePolicy",
+      "iam:GetUser",
+      "iam:ListAttachedRolePolicies",
+      "iam:ListRolePolicies",
+      "kms:DescribeKey",
+      "kms:GetKeyPolicy",
+      "kms:GetKeyRotationStatus",
+      "kms:ListAliases",
+      "kms:ListResourceTags",
+      "logs:DescribeLogGroups",
+      "logs:ListTagsLogGroup",
+      "s3:GetObject",
+      "s3:ListBucket",
+      "sts:AssumeRole"
+    ]
+  }
+}
+
 data "aws_iam_policy_document" "prow_cluster_maintainer" {
   statement {
     sid       = ""
@@ -100,7 +149,7 @@ data "aws_iam_policy_document" "prow_cluster_maintainer" {
       "logs:PutRetentionPolicy",
       "s3:GetObject",
       "s3:ListBucket",
-      "s3:PutObject",
+      "s3:PutObject"
     ]
   }
 }
@@ -153,9 +202,15 @@ data "aws_iam_policy_document" "prow_cluster_destroy" {
       "kms:DescribeKey",
       "kms:ScheduleKeyDeletion",
       "logs:DeleteLogGroup",
-      "s3:PutObject",
+      "s3:PutObject"
     ]
   }
+}
+
+resource "aws_iam_policy" "prow_cluster_viewer" {
+  name   = "${var.canary_prefix}ProwClusterViewer"
+  path   = "/"
+  policy = data.aws_iam_policy_document.prow_cluster_viewer.json
 }
 
 resource "aws_iam_policy" "prow_cluster_maintainer" {
