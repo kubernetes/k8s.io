@@ -14,9 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module "iam" {
-  source = "./modules/iam"
-
-  eks_admins    = var.eks_admins
-  canary_prefix = local.canary_prefix
+data "aws_iam_user" "eks_admins" {
+  count     = length(var.eks_admins)
+  user_name = var.eks_admins[count.index]
 }

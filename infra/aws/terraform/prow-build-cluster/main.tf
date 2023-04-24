@@ -27,7 +27,7 @@ locals {
   root_account_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
   aws_cli_base_args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
   aws_cli_args = var.assume_role != true ? local.aws_cli_base_args : concat(
-    local.aws_cli_base_args, ["--role-arn", aws_iam_role.iam_cluster_admin.arn]
+    local.aws_cli_base_args, ["--role-arn", module.iam.cluster_admin_arn]
   )
 
   tags = {

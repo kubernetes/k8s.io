@@ -14,9 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module "iam" {
-  source = "./modules/iam"
+terraform {
+  required_version = "~> 1.3.0"
 
-  eks_admins    = var.eks_admins
-  canary_prefix = local.canary_prefix
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 4.47"
+    }
+  }
 }

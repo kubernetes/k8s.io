@@ -14,12 +14,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+variable "eks_admins" {
+  type        = list(string)
+  description = "List of maintainers that have administrator access to the account and cluster"
+  default     = []
+}
+
 # This variable is required in the installation process as we cannot
 # assume a role that is yet to be created.
 variable "assume_role" {
   type        = bool
   description = "Assumes role to get access to EKS cluster after provisioning."
   default     = true
+}
+
+# This variable is required in the installation process as Terraform
+# cannot plan Kubernetes resources as a cluster is yet to be created.
+variable "deploy_kubernetes_resources" {
+  type        = bool
+  description = "Deploy Kubernetes resources defined by Terraform."
+  default     = true
+  nullable    = false
 }
 
 variable "vpc_cidr" {
