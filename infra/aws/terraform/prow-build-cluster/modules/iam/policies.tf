@@ -63,6 +63,10 @@ data "aws_iam_policy_document" "prow_cluster_viewer" {
   }
 }
 
+# WARNING/TODO: This policy can allow escalating priviliges and removing deny rules!!!
+# See the following comments for more details:
+# - https://github.com/kubernetes/k8s.io/pull/5113#discussion_r1164205616
+# - https://github.com/kubernetes/k8s.io/pull/5113#discussion_r1164206798
 data "aws_iam_policy_document" "prow_cluster_maintainer" {
   statement {
     sid       = ""

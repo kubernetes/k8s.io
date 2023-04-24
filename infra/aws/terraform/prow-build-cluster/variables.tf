@@ -28,6 +28,7 @@ variable "deploy_kubernetes_resources" {
   type        = bool
   description = "Deploy Kubernetes resources defined by Terraform."
   default     = true
+  nullable    = false
 }
 
 variable "vpc_cidr" {

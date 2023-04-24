@@ -28,10 +28,7 @@ resource "aws_iam_role" "iam_cluster_admin" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : [
-            data.aws_iam_user.user_xmudrii.arn,
-            data.aws_iam_user.user_pprzekwa.arn,
-          ]
+          "AWS" : local.maintainers_list
         },
         "Action" : "sts:AssumeRole",
         "Condition" : {}

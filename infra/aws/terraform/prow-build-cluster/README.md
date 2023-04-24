@@ -250,5 +250,11 @@ The cluster can be removed by running the following command:
 ```bash
 export WORKSPACE_NAME= # choose between canary/prod
 
+# First destroy as much you can with assuming the role
+export ASSUME_ROLE=true
+make destroy
+
+# Then destroy the role itself
+export ASSUME_ROLE=false
 make destroy
 ```

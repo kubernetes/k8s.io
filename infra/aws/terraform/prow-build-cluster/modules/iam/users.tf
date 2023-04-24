@@ -20,3 +20,10 @@ data "aws_iam_user" "user_xmudrii" {
 data "aws_iam_user" "user_pprzekwa" {
   user_name = "pprzekwa"
 }
+
+locals {
+  maintainers_list = [
+    data.aws_iam_user.user_xmudrii.arn,
+    data.aws_iam_user.user_pprzekwa.arn,
+  ]
+}
