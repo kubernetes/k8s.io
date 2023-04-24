@@ -28,7 +28,7 @@ resource "aws_iam_role" "iam_cluster_admin" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : local.maintainers_list
+          "AWS" : data.aws_iam_user.eks_admins[*].arn
         },
         "Action" : "sts:AssumeRole",
         "Condition" : {}

@@ -17,5 +17,6 @@ limitations under the License.
 module "iam" {
   source = "./modules/iam"
 
+  eks_admins    = var.eks_admins
   canary_prefix = local.canary_prefix
 }

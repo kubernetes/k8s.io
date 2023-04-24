@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+eks_admins = [
+  "pprzekwa",
+  "xmudrii"
+]
+
 assume_role                 = true
 deploy_kubernetes_resources = true
 

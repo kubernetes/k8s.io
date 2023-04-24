@@ -14,16 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "aws_iam_user" "user_xmudrii" {
-  user_name = "xmudrii"
-}
-data "aws_iam_user" "user_pprzekwa" {
-  user_name = "pprzekwa"
-}
-
-locals {
-  maintainers_list = [
-    data.aws_iam_user.user_xmudrii.arn,
-    data.aws_iam_user.user_pprzekwa.arn,
-  ]
+data "aws_iam_user" "eks_admins" {
+  count     = length(var.eks_admins)
+  user_name = var.eks_admins[count.index]
 }

@@ -14,6 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+variable "eks_admins" {
+  type        = list(string)
+  description = "List of maintainers that have administrator access to the account and cluster"
+  default     = []
+}
+
 variable "canary_prefix" {
   type        = string
   description = "Prefix to use for canary resources"
