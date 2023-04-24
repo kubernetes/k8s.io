@@ -159,13 +159,13 @@ data "aws_iam_policy_document" "prow_cluster_destroy" {
 }
 
 resource "aws_iam_policy" "prow_cluster_maintainer" {
-  name   = "ProwClusterMaintainer"
+  name   = "${var.canary_prefix}ProwClusterMaintainer"
   path   = "/"
   policy = data.aws_iam_policy_document.prow_cluster_maintainer.json
 }
 
 resource "aws_iam_policy" "prow_cluster_destroy" {
-  name   = "ProwClusterDestroy"
+  name   = "${var.canary_prefix}ProwClusterDestroy"
   path   = "/"
   policy = data.aws_iam_policy_document.prow_cluster_destroy.json
 }

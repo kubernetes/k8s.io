@@ -235,6 +235,10 @@ streamlining this, but until then, you have to deploy those resources manually.
     kubectl apply -f ./resources/kube-system
     kubectl apply -f ./resources/test-pods
     ```
+- [ONLY FOR PRODUCTION] Deploy the External Secrets Operator (ESO)
+    ```bash
+    kubectl apply -f ./resources/external-secrets
+    ```
 - Follow the appropriate instructions to deploy
   [node-termination-handler](./resources/node-termination-handler/README.md)
   and [the monitoring stack](./resources/monitoring/README.md)

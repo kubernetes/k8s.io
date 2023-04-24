@@ -19,7 +19,7 @@
 #
 # It is still possible to delete the pods via a normal delete call. See https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/#the-eviction-api
 
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: prow-pods
