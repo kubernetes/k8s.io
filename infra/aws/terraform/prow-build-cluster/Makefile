@@ -22,7 +22,8 @@ PROW_ENV ?= canary
 
 .PHONY: init
 init:
-	$(TF) $@
+	$(TF) $@ \
+		-backend-config=./tfbackends/$(PROW_ENV).tfbackend
 
 .PHONY: plan
 plan:
