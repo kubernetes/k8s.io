@@ -14,21 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "aws_iam_policy_document" "secretsmanager_read" {
-  statement {
-    sid       = ""
-    effect    = "Allow"
-    resources = ["*"]
+assume_role                 = true
+deploy_kubernetes_resources = true
 
-    actions = [
-      "secretsmanager:GetSecretValue",
-      "secretsmanager:DescribeSecret",
-    ]
-  }
-}
-
-resource "aws_iam_policy" "secretsmanager_read" {
-  name   = "secretsmanager_read"
-  path   = "/"
-  policy = data.aws_iam_policy_document.secretsmanager_read.json
-}
+vpc_cidr                  = "10.0.0.0/16"
+vpc_secondary_cidr_blocks = ["10.1.0.0/16", "10.2.0.0/16"]
+vpc_public_subnet         = ["10.0.0.0/18", "10.0.64.0/18", "10.0.128.0/18"]
+vpc_private_subnet        = ["10.1.0.0/18", "10.1.64.0/18", "10.1.128.0/18"]
+vpc_intra_subnet          = ["10.2.0.0/18", "10.2.64.0/18", "10.2.128.0/18"]

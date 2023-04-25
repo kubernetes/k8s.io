@@ -37,6 +37,14 @@ variable "deploy_kubernetes_resources" {
   nullable    = false
 }
 
+# This variable defines if this cluster is used as a Prow build cluster.
+variable "prow_build_cluster" {
+  type        = bool
+  description = "Provision this cluster as a Prow build cluster."
+  default     = true
+  nullable    = false
+}
+
 variable "vpc_cidr" {
   type        = string
   description = "CIDR of the VPC"

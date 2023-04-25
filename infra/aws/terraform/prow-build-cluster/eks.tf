@@ -20,7 +20,7 @@ limitations under the License.
 
 locals {
   aws_auth_roles = concat(
-    terraform.workspace == "prod" ? [
+    var.prow_build_cluster ? [
       # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
       {
         "rolearn"  = aws_iam_role.eks_admin[0].arn

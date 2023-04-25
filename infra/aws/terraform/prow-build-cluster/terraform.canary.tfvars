@@ -19,18 +19,12 @@ eks_admins = [
   "xmudrii"
 ]
 
-assume_role                 = true
-deploy_kubernetes_resources = true
+prow_build_cluster = false
 
-cluster_name    = "prow-build-canary-cluster"
-cluster_region  = "us-east-2"
-cluster_version = "1.25"
-
-vpc_cidr                  = "10.3.0.0/16"
-vpc_secondary_cidr_blocks = ["10.4.0.0/16", "10.5.0.0/16"]
-vpc_public_subnet         = ["10.3.0.0/18", "10.3.64.0/18", "10.3.128.0/18"]
-vpc_private_subnet        = ["10.4.0.0/18", "10.4.64.0/18", "10.4.128.0/18"]
-vpc_intra_subnet          = ["10.5.0.0/18", "10.5.64.0/18", "10.5.128.0/18"]
+cluster_name               = "prow-build-canary-cluster"
+cluster_region             = "us-east-2"
+cluster_version            = "1.25"
+cluster_autoscaler_version = "v1.25.0"
 
 # Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
 node_ami            = "ami-03de35fda144b3672"
@@ -38,9 +32,6 @@ node_instance_types = ["r5d.xlarge"]
 node_volume_size    = 100
 
 node_min_size                   = 1
-node_max_size                   = 10
+node_max_size                   = 1
 node_desired_size               = 1
 node_max_unavailable_percentage = 100 # To ease testing
-
-cluster_autoscaler_version = "v1.25.0"
-

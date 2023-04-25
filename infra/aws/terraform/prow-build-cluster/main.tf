@@ -22,8 +22,6 @@ data "aws_caller_identity" "current" {}
 data "aws_availability_zones" "available" {}
 
 locals {
-  canary_prefix = terraform.workspace != "prod" ? "canary-" : ""
-
   root_account_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
   aws_cli_base_args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
   aws_cli_args = var.assume_role != true ? local.aws_cli_base_args : concat(
@@ -51,7 +49,7 @@ provider "aws" {
     for_each = var.assume_role ? [null] : []
 
     content {
-      role_arn     = "arn:aws:iam::468814281478:role/${local.canary_prefix}Prow-Cluster-Admin"
+      role_arn     = "arn:aws:iam::468814281478:role/Prow-Cluster-Admin"
       session_name = "prow-build-cluster-terraform"
     }
   }

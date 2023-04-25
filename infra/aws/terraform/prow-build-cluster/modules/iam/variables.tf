@@ -19,9 +19,3 @@ variable "eks_admins" {
   description = "List of maintainers that have administrator access to the account and cluster"
   default     = []
 }
-
-variable "canary_prefix" {
-  type        = string
-  description = "Prefix to use for canary resources"
-  default     = ""
-}
