@@ -21,8 +21,6 @@ eks_admins = [
 
 prow_build_cluster = true
 
-cluster_name               = "prow-build-cluster"
-cluster_region             = "us-east-2"
 cluster_version            = "1.25"
 cluster_autoscaler_version = "v1.25.0"
 

@@ -17,6 +17,9 @@ limitations under the License.
 assume_role                 = true
 deploy_kubernetes_resources = true
 
+cluster_name   = "prow-build-cluster"
+cluster_region = "us-east-2"
+
 vpc_cidr                  = "10.0.0.0/16"
 vpc_secondary_cidr_blocks = ["10.1.0.0/16", "10.2.0.0/16"]
 vpc_public_subnet         = ["10.0.0.0/18", "10.0.64.0/18", "10.0.128.0/18"]

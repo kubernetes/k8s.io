@@ -37,6 +37,7 @@ variable "deploy_kubernetes_resources" {
   nullable    = false
 }
 
+# TODO(xmudrii): This is a temporary variable. To be deleted after making canary cluster a build cluster.
 # This variable defines if this cluster is used as a Prow build cluster.
 variable "prow_build_cluster" {
   type        = bool
