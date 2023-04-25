@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 eks_admins = [
-  "pprzekwa",
+  "pkprzekwas",
   "xmudrii"
 ]
 
