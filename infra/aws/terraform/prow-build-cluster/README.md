@@ -15,18 +15,18 @@ There are two different environments, i.e. clusters:
 
 ### Choosing the environment
 
-Set the `WORKSPACE_NAME` environment variable to `prod` or `canary`.
+Set the `PROW_ENV` environment variable to `prod` or `canary`.
 
 Production:
 
 ```bash
-export WORKSPACE_NAME=prod
+export PROW_ENV=prod
 ```
 
 Canary:
 
 ```bash
-export WORKSPACE_NAME=canary
+export PROW_ENV=canary
 ```
 
 ### Differences between production and canary
@@ -97,7 +97,7 @@ We have a Makefile that can be used to execute Terraform targeting the
 appropriate/correct environment. This Makefile uses the following environment
 variables to control Terraform:
 
-* `WORKSPACE_NAME` (default: `canary`, can be `prod`)
+* `PROW_ENV` (default: `canary`, can be `prod`)
 * `ASSUME_ROLE` (default: `true`) - whether to authenticate to AWS using
   provided credentials or by assuming the ProwClusterAdmin role
 * `DEPLOY_K8S_RESOURCES` (default: `true`) - whether to deploy Kubernetes
@@ -156,7 +156,7 @@ That said, the cluster creation is done in four phases:
 - Phase 3: deploy the Kubernetes resources managed by Terraform
 - Phase 4: deploy the Kubernetes resources not managed by Terraform
 
-**WARNING: Before getting started, make sure the `WORKSPACE_NAME` environment
+**WARNING: Before getting started, make sure the `PROW_ENV` environment
 variable is set to the correct value!!!**
 
 ### Phase 0: preparing the environment
@@ -164,7 +164,7 @@ variable is set to the correct value!!!**
 Before getting started, make sure to set the needed environment variables:
 
 ```bash
-export WORKSPACE_NAME=canary # or prod
+export PROW_ENV=canary # or prod
 export ASSUME_ROLE=false # the role to be assumed will be created in phase 1
 export DEPLOY_K8S_RESOURCES=false
 ```
@@ -248,7 +248,7 @@ streamlining this, but until then, you have to deploy those resources manually.
 The cluster can be removed by running the following command:
 
 ```bash
-export WORKSPACE_NAME= # choose between canary/prod
+export PROW_ENV= # choose between canary/prod
 
 # First destroy as much you can with assuming the role
 export ASSUME_ROLE=true
