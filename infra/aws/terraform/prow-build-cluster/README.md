@@ -85,7 +85,7 @@ appropriate cluster:
       - --cluster-name
       - prow-build-canary-cluster
       - --role-arn
-      - arn:aws:iam::468814281478:role/canary-Prow-Cluster-Admin
+      - arn:aws:iam::054318140392:role/Prow-Cluster-Admin
     ```
 
 ## Running Terraform
@@ -234,6 +234,10 @@ streamlining this, but until then, you have to deploy those resources manually.
     ```bash
     kubectl apply -f ./resources/kube-system
     kubectl apply -f ./resources/test-pods
+    ```
+- Deploy Boskos
+    ```bash
+    kubectl apply -f ./resources/boskos
     ```
 - [ONLY FOR PRODUCTION] Deploy the External Secrets Operator (ESO)
     ```bash
