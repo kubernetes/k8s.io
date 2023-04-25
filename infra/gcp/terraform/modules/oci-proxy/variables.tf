@@ -16,8 +16,9 @@ limitations under the License.
 
 // this one is overridden to the latest image in staging typically
 variable "digest" {
-  type     = string
-  default  = "sha256:6a37089e595e62636d401b8d93dc8f9c41dca395ecf7386d456484a3cf889b42"
+  type = string
+  # v0.3.0
+  default  = "sha256:257dcbc7f9aed28d1d5d0b4d09634e3dc7f72c44841eab0a3a31890c7edb70ca"
   nullable = false
 }
 // these should all be explicitly set for both prod and staging
