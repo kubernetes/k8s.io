@@ -19,8 +19,8 @@ limitations under the License.
 ###############################################
 
 resource "aws_iam_role" "iam_cluster_admin" {
-  name        = "${var.canary_prefix}Prow-Cluster-Admin"
-  description = "IAM role used to delegate access to ${var.canary_prefix}prow-build-cluster"
+  name        = "Prow-Cluster-Admin"
+  description = "IAM role used to delegate access to prow-build-cluster"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

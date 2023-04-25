@@ -214,19 +214,19 @@ data "aws_iam_policy_document" "prow_cluster_destroy" {
 }
 
 resource "aws_iam_policy" "prow_cluster_viewer" {
-  name   = "${var.canary_prefix}ProwClusterViewer"
+  name   = "ProwClusterViewer"
   path   = "/"
   policy = data.aws_iam_policy_document.prow_cluster_viewer.json
 }
 
 resource "aws_iam_policy" "prow_cluster_maintainer" {
-  name   = "${var.canary_prefix}ProwClusterMaintainer"
+  name   = "ProwClusterMaintainer"
   path   = "/"
   policy = data.aws_iam_policy_document.prow_cluster_maintainer.json
 }
 
 resource "aws_iam_policy" "prow_cluster_destroy" {
-  name   = "${var.canary_prefix}ProwClusterDestroy"
+  name   = "ProwClusterDestroy"
   path   = "/"
   policy = data.aws_iam_policy_document.prow_cluster_destroy.json
 }

@@ -18,34 +18,34 @@ ASSUME_ROLE ?= true
 DEPLOY_K8S_RESOURCES ?= true
 
 # Valid values are: canary, prod
-WORKSPACE_NAME ?= canary
-
-.PHONY: workspace-select
-workspace-select:
-	$(TF) workspace select $(WORKSPACE_NAME)
+PROW_ENV ?= canary
 
 .PHONY: init
 init:
-	$(TF) $@
+	$(TF) $@ \
+		-backend-config=./tfbackends/$(PROW_ENV).tfbackend
 
 .PHONY: plan
-plan: workspace-select
+plan:
 	$(TF) $@ $(TF_ARGS) \
-		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
+		-var-file=./terraform.tfvars \
+		-var-file=./terraform.$(PROW_ENV).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: apply
-apply: workspace-select
+apply:
 	$(TF) $@ $(TF_ARGS) \
-		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
+		-var-file=./terraform.tfvars \
+		-var-file=./terraform.$(PROW_ENV).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: destroy
-destroy: workspace-select
+destroy:
 	$(TF) $@ $(TF_ARGS) \
-		-var-file=./terraform.$(WORKSPACE_NAME).tfvars \
+		-var-file=./terraform.tfvars \
+		-var-file=./terraform.$(PROW_ENV).tfvars \
 		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
@@ -60,4 +60,3 @@ output:
 .PHONY: clean
 clean:
 	rm -rf ./.terraform
-

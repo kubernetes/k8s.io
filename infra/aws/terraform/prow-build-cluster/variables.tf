@@ -37,6 +37,23 @@ variable "deploy_kubernetes_resources" {
   nullable    = false
 }
 
+# TODO(xmudrii): This is a temporary variable. To be deleted after making canary cluster a build cluster.
+# This variable defines if this cluster is used as a Prow build cluster.
+variable "prow_build_cluster" {
+  type        = bool
+  description = "Provision this cluster as a Prow build cluster."
+  default     = true
+  nullable    = false
+}
+
+# We need this information to be able to assume the role. We can't automatically determine it with caller_identity
+# because that would cause a dependency cycle.
+variable "aws_account_id" {
+  type        = string
+  description = "AWS account ID"
+  default     = ""
+}
+
 variable "vpc_cidr" {
   type        = string
   description = "CIDR of the VPC"
