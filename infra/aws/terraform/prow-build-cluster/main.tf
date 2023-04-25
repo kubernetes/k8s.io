@@ -49,7 +49,7 @@ provider "aws" {
     for_each = var.assume_role ? [null] : []
 
     content {
-      role_arn     = "arn:aws:iam::468814281478:role/Prow-Cluster-Admin"
+      role_arn     = "arn:aws:iam::${var.aws_account_id}:role/Prow-Cluster-Admin"
       session_name = "prow-build-cluster-terraform"
     }
   }

@@ -46,6 +46,14 @@ variable "prow_build_cluster" {
   nullable    = false
 }
 
+# We need this information to be able to assume the role. We can't automatically determine it with caller_identity
+# because that would cause a dependency cycle.
+variable "aws_account_id" {
+  type        = string
+  description = "AWS account ID"
+  default     = ""
+}
+
 variable "vpc_cidr" {
   type        = string
   description = "CIDR of the VPC"

@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+aws_account_id = "054318140392"
 eks_admins = [
   "pkprzekwas",
   "xmudrii"
