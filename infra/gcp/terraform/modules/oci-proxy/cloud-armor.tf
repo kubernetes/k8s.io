@@ -151,7 +151,7 @@ resource "google_compute_security_policy" "cloud-armor" {
     preview = false
   }
 
-  # Reject all traffic that hasn't been whitelisted.
+  # Permit all other traffic
   rule {
     action      = "allow"
     description = "Default rule, higher priority overrides it"
