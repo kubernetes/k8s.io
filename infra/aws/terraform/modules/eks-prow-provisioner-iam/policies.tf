@@ -219,12 +219,6 @@ resource "aws_iam_policy" "prow_cluster_viewer" {
   policy = data.aws_iam_policy_document.prow_cluster_viewer.json
 }
 
-resource "aws_iam_policy" "prow_cluster_maintainer" {
-  name   = "TFProwClusterMaintainer"
-  path   = "/"
-  policy = data.aws_iam_policy_document.prow_cluster_apply.json
-}
-
 resource "aws_iam_policy" "prow_cluster_apply" {
   name   = "TFProwClusterApply"
   path   = "/"
