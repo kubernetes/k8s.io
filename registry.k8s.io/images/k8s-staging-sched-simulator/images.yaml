@@ -1,0 +1,6 @@
+- name: simulator-backend
+  dmap:
+    "sha256:2ab7173ee2e1ca094e5c31a7bb66f0df64d8ff016ca9cce94611f9fce3ca7724": ["v0.1.0"]
+- name: simulator-frontend
+  dmap:
+    "sha256:eba8ef95caf780c82cbc5c882590b5d97fc2b574ff2a2bcd7253d4fee6357e6e": ["v0.1.0"]
