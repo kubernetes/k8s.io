@@ -16,17 +16,17 @@ limitations under the License.
 
 variable "eks_admins" {
   type        = list(string)
-  description = "List of maintainers that have administrator access to the account and cluster"
+  description = "List of maintainers that have administrator access to the cluster."
   default     = []
 }
 
 variable "eks_viewers" {
   type        = list(string)
-  description = "List of maintainers that have view access to the account and cluster"
+  description = "List of maintainers that have view access to the account and cluster."
   default     = []
 }
 
-# TODO: remove once applied on prod
+# TODO: remove once applied on prow-build-cluster
 # This variable is required in the installation process as we cannot
 # assume a role that is yet to be created.
 variable "assume_role" {
