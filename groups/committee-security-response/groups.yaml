@@ -54,7 +54,7 @@ groups:
       - security@loodse.com
       - security@platform9.com
       - security@rancher.com
-      - Security@Ubuntu.com
+      - security@ubuntu.com
       - security@vmware.com
       - tkg-cve-disclosure@groups.vmware.com
       - vulnerabilityreports@cloudfoundry.org
