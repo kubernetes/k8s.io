@@ -15,6 +15,8 @@
 TF ?= terraform
 TF_ARGS ?=
 ASSUME_ROLE ?= true
+
+# https://github.com/hashicorp/terraform-provider-kubernetes-alpha/issues/199#issuecomment-832614387
 DEPLOY_K8S_RESOURCES ?= true
 
 # Valid values are: canary, prod
