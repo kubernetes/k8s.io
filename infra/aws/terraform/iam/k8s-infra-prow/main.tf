@@ -14,23 +14,37 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-terraform {
-  backend "s3" {}
+provider "aws" {
+  region = "us-east-2"
+}
 
+terraform {
   required_version = "~> 1.3.0"
+
+  backend "s3" {
+    bucket = "prow-build-cluster-tfstate"
+    key    = "iam/k8s-infra-prow/terraform.tfstate"
+    region = "us-east-2"
+  }
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = ">= 4.47"
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.10"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.9.0"
-    }
   }
+}
+
+module "eks_prow_provisioner_iam" {
+  source = "../../modules/eks-prow-provisioner-iam"
+
+  eks_provisioners = [
+    "pprzekwa",
+    "xmudrii"
+  ]
+}
+
+output "cluster_provisioner_arn" {
+  description = "ARN of the cluster provisioner role"
+  value       = module.eks_prow_provisioner_iam.cluster_provisioner_arn
 }

@@ -14,16 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module "iam" {
-  count = var.prow_build_cluster ? 1 : 0
-
-  source = "./modules/iam"
-
-  eks_admins = var.eks_admins
-}
-
-resource "aws_iam_role" "iam_cluster_viewer" {
-  name        = "TFProwClusterViewer"
+resource "aws_iam_role" "iam_cluster_provisioner" {
+  name        = "TFProwClusterProvisioner"
   description = "IAM role used to delegate access to prow-build-cluster"
 
   assume_role_policy = jsonencode({
@@ -32,11 +24,21 @@ resource "aws_iam_role" "iam_cluster_viewer" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : data.aws_iam_user.eks_viewers[*].arn
+          "AWS" : data.aws_iam_user.eks_provisioners[*].arn
         },
         "Action" : "sts:AssumeRole",
         "Condition" : {}
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "cluster_apply" {
+  role       = aws_iam_role.iam_cluster_provisioner.name
+  policy_arn = aws_iam_policy.prow_cluster_apply.arn
+}
+
+resource "aws_iam_role_policy_attachment" "cluster_destroy" {
+  role       = aws_iam_role.iam_cluster_provisioner.name
+  policy_arn = aws_iam_policy.prow_cluster_destroy.arn
 }

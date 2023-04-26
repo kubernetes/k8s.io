@@ -20,7 +20,8 @@ limitations under the License.
 
 locals {
   aws_auth_roles = concat(
-    var.prow_build_cluster ? [
+    # TODO(xmudrii): This is a temporary condition. To be deleted after making canary cluster a build cluster.
+    var.cluster_name == "prow-build-cluster" ? [
       # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
       {
         "rolearn"  = aws_iam_role.eks_admin[0].arn
@@ -31,12 +32,21 @@ locals {
       }
     ] : [],
     [
-      # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
+      # Allow admin access to the TFProwClusterProvisioner IAM role (used with assume role with other IAM accounts).
       {
-        "rolearn"  = module.iam.cluster_admin_arn
+        "rolearn"  = data.aws_iam_role.tf_prow_provisioner.arn
         "username" = "eks-cluster-admin"
         "groups" = [
           "eks-cluster-admin"
+        ]
+      },
+
+      # Allow view access to the TFProwClusterViewer IAM role (used with assume role with other IAM accounts).
+      {
+        "rolearn"  = aws_iam_role.iam_cluster_viewer.arn
+        "username" = "eks-cluster-viewer"
+        "groups" = [
+          "eks-cluster-viewer"
         ]
       }
     ]
@@ -73,9 +83,9 @@ module "eks" {
   kms_key_administrators = [
     local.root_account_arn
   ]
-  # Allow service access to the KMS key to the Prow-Cluster-Admin role.
+  # Allow service access to the KMS key to the TFProwClusterProvisioner role.
   kms_key_service_users = [
-    module.iam.cluster_admin_arn
+    data.aws_iam_role.tf_prow_provisioner.arn
   ]
 
   # We use IPv4 for the best compatibility with the existing setup.

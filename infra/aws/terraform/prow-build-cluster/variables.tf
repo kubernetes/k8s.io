@@ -20,6 +20,13 @@ variable "eks_admins" {
   default     = []
 }
 
+variable "eks_viewers" {
+  type        = list(string)
+  description = "List of maintainers that have view access to the account and cluster"
+  default     = []
+}
+
+# TODO: remove once applied on prod
 # This variable is required in the installation process as we cannot
 # assume a role that is yet to be created.
 variable "assume_role" {

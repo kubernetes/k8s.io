@@ -22,12 +22,15 @@ data "aws_caller_identity" "current" {}
 data "aws_availability_zones" "available" {}
 
 locals {
-  root_account_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
-  aws_cli_base_args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
-  aws_cli_args = var.assume_role != true ? local.aws_cli_base_args : concat(
-    local.aws_cli_base_args, ["--role-arn", module.iam.cluster_admin_arn]
-  )
-
+  root_account_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+  aws_cli_args = [
+    "eks",
+    "get-token",
+    "--cluster-name",
+    module.eks.cluster_name,
+    "--role-arn",
+    data.aws_iam_role.tf_prow_provisioner.arn
+  ]
   tags = {
     Cluster = var.cluster_name
   }
@@ -49,7 +52,7 @@ provider "aws" {
     for_each = var.assume_role ? [null] : []
 
     content {
-      role_arn     = "arn:aws:iam::${var.aws_account_id}:role/Prow-Cluster-Admin"
+      role_arn     = "arn:aws:iam::${var.aws_account_id}:role/TFProwClusterAdmin"
       session_name = "prow-build-cluster-terraform"
     }
   }

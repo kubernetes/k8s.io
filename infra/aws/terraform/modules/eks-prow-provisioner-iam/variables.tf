@@ -14,23 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-terraform {
-  backend "s3" {}
-
-  required_version = "~> 1.3.0"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.47"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.10"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.9.0"
-    }
-  }
+variable "eks_provisioners" {
+  type        = list(string)
+  description = "List of maintainers that have administrator access to the account and cluster"
+  default     = []
 }

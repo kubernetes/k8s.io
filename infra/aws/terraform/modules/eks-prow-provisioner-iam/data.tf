@@ -14,23 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-terraform {
-  backend "s3" {}
+data "aws_caller_identity" "current" {}
 
-  required_version = "~> 1.3.0"
+data "aws_iam_user" "eks_provisioners" {
+  count     = length(var.eks_provisioners)
+  user_name = var.eks_provisioners[count.index]
+}
 
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.47"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = ">= 2.10"
-    }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "2.9.0"
-    }
-  }
+locals {
+  account_id = data.aws_caller_identity.current.account_id
 }
