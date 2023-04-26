@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 module "iam" {
-  count = var.prow_build_cluster ? 1 : 0
+  count = var.cluster_name == "prow-build-cluster" ? 1 : 0
 
   source = "./modules/iam"
 

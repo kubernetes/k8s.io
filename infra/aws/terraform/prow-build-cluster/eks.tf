@@ -18,41 +18,6 @@ limitations under the License.
 # EKS Cluster
 ###############################################
 
-locals {
-  aws_auth_roles = concat(
-    # TODO(xmudrii): This is a temporary condition. To be deleted after making canary cluster a build cluster.
-    var.cluster_name == "prow-build-cluster" ? [
-      # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
-      {
-        "rolearn"  = aws_iam_role.eks_admin[0].arn
-        "username" = "eks-admin"
-        "groups" = [
-          "eks-prow-cluster-admin"
-        ]
-      }
-    ] : [],
-    [
-      # Allow admin access to the TFProwClusterProvisioner IAM role (used with assume role with other IAM accounts).
-      {
-        "rolearn"  = data.aws_iam_role.tf_prow_provisioner.arn
-        "username" = "eks-cluster-admin"
-        "groups" = [
-          "eks-cluster-admin"
-        ]
-      },
-
-      # Allow view access to the TFProwClusterViewer IAM role (used with assume role with other IAM accounts).
-      {
-        "rolearn"  = aws_iam_role.iam_cluster_viewer.arn
-        "username" = "eks-cluster-viewer"
-        "groups" = [
-          "eks-cluster-viewer"
-        ]
-      }
-    ]
-  )
-}
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.10.0"

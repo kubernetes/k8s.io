@@ -14,6 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+data "aws_caller_identity" "current" {}
+data "aws_availability_zones" "available" {}
+
 data "aws_iam_role" "tf_prow_provisioner" {
   name = "TFProwClusterProvisioner"
 }

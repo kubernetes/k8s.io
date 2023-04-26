@@ -34,3 +34,45 @@ terraform {
     }
   }
 }
+
+provider "aws" {
+  region = var.cluster_region
+
+  # We have a chicken-egg problem here. This role is not going to exist
+  # when creating the cluster for the first time. In that case, `assume_role` var
+  # has to be set to false.
+  dynamic "assume_role" {
+    for_each = var.assume_role ? [null] : []
+
+    content {
+      role_arn     = "arn:aws:iam::${var.aws_account_id}:role/TFProwClusterProvisioner"
+      session_name = "prow-build-cluster-terraform"
+    }
+  }
+}
+
+provider "kubernetes" {
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+
+  # This requires the awscli to be installed locally where Terraform is executed.
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    command     = "aws"
+    args        = local.aws_cli_args
+  }
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+
+    # This requires the awscli to be installed locally where Terraform is executed.
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      command     = "aws"
+      args        = local.aws_cli_args
+    }
+  }
+}
