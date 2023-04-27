@@ -16,7 +16,12 @@ limitations under the License.
 
 aws_account_id = "054318140392"
 
-eks_viewers = [
+eks_cluster_viewers = [
+  "pkprzekwas",
+  "xmudrii"
+]
+
+eks_cluster_admins = [
   "pkprzekwas",
   "xmudrii"
 ]

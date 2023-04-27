@@ -17,7 +17,6 @@ limitations under the License.
 locals {
   root_account_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
 
-  # TODO(xmudrii): This is a temporary condition. To be deleted after making canary cluster a build cluster.
   configure_prow = var.cluster_name == "prow-build-cluster"
 
   aws_cli_args = [
@@ -26,7 +25,7 @@ locals {
     "--cluster-name",
     module.eks.cluster_name,
     "--role-arn",
-    data.aws_iam_role.tf_prow_provisioner.arn
+    data.aws_iam_role.eks_infra_admin.arn
   ]
 
   tags = {
@@ -42,7 +41,43 @@ locals {
 
   azs = slice(data.aws_availability_zones.available.names, 0, 3)
 
-  aws_auth_roles = concat(
+  # Allow cluster admin access to the following IAM roles.
+  cluster_admin_roles = [
+    {
+      "rolearn"  = data.aws_iam_role.eks_infra_admin.arn
+      "username" = "eks-cluster-admin"
+      "groups" = [
+        "eks-cluster-admin"
+      ]
+    },
+    {
+      "rolearn"  = aws_iam_role.eks_cluster_admin.arn
+      "username" = "eks-cluster-admin"
+      "groups" = [
+        "eks-cluster-admin"
+      ]
+    }
+  ]
+
+  # Allow cluster read access to the following IAM roles.
+  cluster_viewer_roles = [
+    {
+      "rolearn"  = aws_iam_role.eks_cluster_viewer.arn
+      "username" = "eks-cluster-viewer"
+      "groups" = [
+        "eks-cluster-viewer"
+      ]
+    },
+    {
+      "rolearn"  = data.aws_iam_role.eks_infra_viewer.arn
+      "username" = "eks-cluster-viewer"
+      "groups" = [
+        "eks-cluster-viewer"
+      ]
+    }
+  ]
+
+  aws_auth_roles = flatten([
     local.configure_prow ? [
       # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
       {
@@ -53,23 +88,7 @@ locals {
         ]
       }
     ] : [],
-    [
-      # Allow admin access to the TFProwClusterProvisioner IAM role (used with assume role with other IAM accounts).
-      {
-        "rolearn"  = data.aws_iam_role.tf_prow_provisioner.arn
-        "username" = "eks-cluster-admin"
-        "groups" = [
-          "eks-cluster-admin"
-        ]
-      },
-      # Allow view access to the TFProwClusterViewer IAM role (used with assume role with other IAM accounts).
-      {
-        "rolearn"  = aws_iam_role.iam_cluster_viewer.arn
-        "username" = "eks-cluster-viewer"
-        "groups" = [
-          "eks-cluster-viewer"
-        ]
-      }
-    ]
-  )
+    local.cluster_admin_roles,
+    local.cluster_viewer_roles
+  ])
 }

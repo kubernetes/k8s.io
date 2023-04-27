@@ -14,17 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# TODO(pkprzekwas): remove after applying changes on prow-build-cluster
 module "iam" {
   count = var.cluster_name == "prow-build-cluster" ? 1 : 0
 
   source = "./modules/iam"
 
-  eks_admins = var.eks_admins
+  eks_admins = var.eks_cluster_admins
 }
 
-resource "aws_iam_role" "iam_cluster_viewer" {
-  name        = "TFProwClusterViewer"
-  description = "IAM role used to delegate access to prow-build-cluster"
+# Roles defined below MUST NOT have any policies attached to them.
+# Those are used in aws-auth config map and are dedicated to interact with EKS cluster via kubeconfig.
+resource "aws_iam_role" "eks_cluster_viewer" {
+  name        = "EKSClusterViewer"
+  description = "IAM role used to delegate access to ${var.cluster_name}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -32,7 +35,7 @@ resource "aws_iam_role" "iam_cluster_viewer" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : data.aws_iam_user.eks_viewers[*].arn
+          "AWS" : data.aws_iam_user.eks_cluster_viewers[*].arn
         },
         "Action" : "sts:AssumeRole",
         "Condition" : {}
@@ -40,3 +43,23 @@ resource "aws_iam_role" "iam_cluster_viewer" {
     ]
   })
 }
+
+resource "aws_iam_role" "eks_cluster_admin" {
+  name        = "EKSClusterAdmin"
+  description = "IAM role used to delegate access to ${var.cluster_name}"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : data.aws_iam_user.eks_cluster_admins[*].arn
+        },
+        "Action" : "sts:AssumeRole",
+        "Condition" : {}
+      }
+    ]
+  })
+}
+

@@ -15,13 +15,23 @@ limitations under the License.
 */
 
 data "aws_caller_identity" "current" {}
+
 data "aws_availability_zones" "available" {}
 
-data "aws_iam_role" "tf_prow_provisioner" {
-  name = "TFProwClusterProvisioner"
+data "aws_iam_role" "eks_infra_admin" {
+  name = "EKSInfraAdmin"
 }
 
-data "aws_iam_user" "eks_viewers" {
-  count     = length(var.eks_viewers)
-  user_name = var.eks_viewers[count.index]
+data "aws_iam_role" "eks_infra_viewer" {
+  name = "EKSInfraViewer"
+}
+
+data "aws_iam_user" "eks_cluster_viewers" {
+  count     = length(var.eks_cluster_viewers)
+  user_name = var.eks_cluster_viewers[count.index]
+}
+
+data "aws_iam_user" "eks_cluster_admins" {
+  count     = length(var.eks_cluster_admins)
+  user_name = var.eks_cluster_admins[count.index]
 }

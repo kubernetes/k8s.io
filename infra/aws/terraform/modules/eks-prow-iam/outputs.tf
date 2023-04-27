@@ -16,10 +16,10 @@ limitations under the License.
 
 output "eks_infra_admin_role_arn" {
   description = "ARN of the EKS role."
-  value       = aws_iam_role.eks_provisioner.arn
+  value       = aws_iam_role.eks_infra_admin.arn
 }
 
-output "eks_infra_planner_role_arn" {
+output "eks_infra_viewer_role_arn" {
   description = "ARN of the EKS viewer role."
   value       = aws_iam_role.eks_viewer.arn
 }

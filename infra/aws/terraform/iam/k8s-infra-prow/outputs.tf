@@ -20,6 +20,6 @@ output "eks_infra_admin_role_arn" {
 }
 
 output "eks_infra_viewer_role_arn" {
-  description = "ARN of the EKS planner role"
-  value       = module.eks_prow_iam.eks_infra_planner_role_arn
+  description = "ARN of the EKS viewer role"
+  value       = module.eks_prow_iam.eks_infra_viewer_role_arn
 }

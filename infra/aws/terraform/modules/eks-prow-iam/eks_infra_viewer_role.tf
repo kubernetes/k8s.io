@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 resource "aws_iam_role" "eks_viewer" {
-  name        = "EKSViewer"
+  name        = "EKSInfraViewer"
   description = "IAM read role."
 
   assume_role_policy = jsonencode({

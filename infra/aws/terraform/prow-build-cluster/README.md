@@ -70,7 +70,7 @@ appropriate cluster:
       - --cluster-name
       - prow-build-cluster
       - --role-arn
-      - arn:aws:iam::468814281478:role/TFProwClusterViewer
+      - arn:aws:iam::468814281478:role/EKSInfraAdmin
     ```
 * Canary:
     ```yaml
@@ -82,7 +82,7 @@ appropriate cluster:
       - --cluster-name
       - prow-canary-cluster
       - --role-arn
-      - arn:aws:iam::054318140392:role/TFProwClusterViewer
+      - arn:aws:iam::054318140392:role/EKSInfraAdmin
     ```
 
 ## Running Terraform

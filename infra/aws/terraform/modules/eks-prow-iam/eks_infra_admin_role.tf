@@ -14,8 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "aws_iam_role" "eks_provisioner" {
-  name        = "TFProwClusterProvisioner"
+resource "aws_iam_role" "eks_infra_admin" {
+  name        = "EKSInfraAdmin"
   description = "IAM role used for planning/applying/destroying infrastructure."
 
   assume_role_policy = jsonencode({
@@ -36,11 +36,11 @@ resource "aws_iam_role" "eks_provisioner" {
 }
 
 resource "aws_iam_role_policy_attachment" "eks_apply" {
-  role       = aws_iam_role.eks_provisioner.name
+  role       = aws_iam_role.eks_infra_admin.name
   policy_arn = aws_iam_policy.eks_apply.arn
 }
 
 resource "aws_iam_role_policy_attachment" "eks_destroy" {
-  role       = aws_iam_role.eks_provisioner.name
+  role       = aws_iam_role.eks_infra_admin.name
   policy_arn = aws_iam_policy.eks_destroy.arn
 }

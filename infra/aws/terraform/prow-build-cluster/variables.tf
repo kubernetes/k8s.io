@@ -14,13 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "eks_admins" {
+variable "eks_cluster_admins" {
   type        = list(string)
   description = "List of maintainers that have administrator access to the cluster."
   default     = []
 }
 
-variable "eks_viewers" {
+variable "eks_cluster_viewers" {
   type        = list(string)
   description = "List of maintainers that have view access to the account and cluster."
   default     = []

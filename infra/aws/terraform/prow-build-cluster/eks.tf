@@ -50,7 +50,7 @@ module "eks" {
   ]
   # Allow service access to the KMS key to the TFProwClusterProvisioner role.
   kms_key_service_users = [
-    data.aws_iam_role.tf_prow_provisioner.arn
+    data.aws_iam_role.eks_infra_admin.arn
   ]
 
   # We use IPv4 for the best compatibility with the existing setup.
