@@ -14,8 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "eks_provisioners" {
-  type        = list(string)
-  description = "List of maintainers that have administrator access to the account and cluster"
-  default     = []
+output "eks_infra_admin_role_arn" {
+  description = "ARN of the EKS infra admin role"
+  value       = module.eks_prow_iam.eks_infra_admin_role_arn
+}
+
+output "eks_infra_viewer_role_arn" {
+  description = "ARN of the EKS infra viewer role"
+  value       = module.eks_prow_iam.eks_infra_planner_role_arn
 }

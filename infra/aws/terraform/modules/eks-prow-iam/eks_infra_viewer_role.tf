@@ -14,29 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-provider "aws" {
-  region = var.region
+resource "aws_iam_role" "eks_viewer" {
+  name        = "EKSViewer"
+  description = "IAM read role."
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : data.aws_iam_user.eks_infra_viewers[*].arn
+        },
+        "Action" : "sts:AssumeRole",
+        "Condition" : {}
+      }
+    ]
+  })
+
+  tags = var.tags
 }
 
-terraform {
-  required_version = "~> 1.3.0"
-
-  backend "s3" {
-    bucket = "prow-build-canary-cluster-tfstate"
-    key    = "iam/eks-prow-iam/terraform.tfstate"
-    region = "us-east-2"
-  }
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.47"
-    }
-  }
-}
-
-module "eks_prow_iam" {
-  source            = "../../modules/eks-prow-iam"
-  eks_infra_admins  = var.eks_infra_admins
-  eks_infra_viewers = var.eks_infra_admins
+resource "aws_iam_role_policy_attachment" "eks_plan" {
+  role       = aws_iam_role.eks_viewer.name
+  policy_arn = aws_iam_policy.eks_plan.arn
 }

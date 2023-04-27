@@ -14,29 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-provider "aws" {
-  region = var.region
+output "eks_infra_admin_role_arn" {
+  description = "ARN of the EKS provisioner role"
+  value       = module.eks_prow_iam.eks_infra_admin_role_arn
 }
 
-terraform {
-  required_version = "~> 1.3.0"
-
-  backend "s3" {
-    bucket = "prow-build-canary-cluster-tfstate"
-    key    = "iam/eks-prow-iam/terraform.tfstate"
-    region = "us-east-2"
-  }
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.47"
-    }
-  }
-}
-
-module "eks_prow_iam" {
-  source            = "../../modules/eks-prow-iam"
-  eks_infra_admins  = var.eks_infra_admins
-  eks_infra_viewers = var.eks_infra_admins
+output "eks_infra_viewer_role_arn" {
+  description = "ARN of the EKS planner role"
+  value       = module.eks_prow_iam.eks_infra_planner_role_arn
 }

@@ -14,29 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-provider "aws" {
-  region = var.region
+variable "eks_infra_admins" {
+  type        = list(string)
+  description = "List of maintainers that have permissions to run apply/destory."
+  default     = []
 }
 
-terraform {
-  required_version = "~> 1.3.0"
-
-  backend "s3" {
-    bucket = "prow-build-canary-cluster-tfstate"
-    key    = "iam/eks-prow-iam/terraform.tfstate"
-    region = "us-east-2"
-  }
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.47"
-    }
-  }
+variable "eks_infra_viewers" {
+  type        = list(string)
+  description = "List of maintainers that have permissions to run plan."
+  default     = []
 }
 
-module "eks_prow_iam" {
-  source            = "../../modules/eks-prow-iam"
-  eks_infra_admins  = var.eks_infra_admins
-  eks_infra_viewers = var.eks_infra_admins
+variable "tags" {
+  type = map(string)
+  default = {
+    Terraform = true
+  }
 }

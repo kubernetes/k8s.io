@@ -14,19 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "aws_iam_policy" "tf_boundary" {
-  name        = "TerraformPermissionBoundary"
+resource "aws_iam_policy" "provisioner_permission_boundary" {
+  name        = "ProvisionerPermissionBoundary"
   description = "Permission boundary for terraform operator roles."
-  policy      = data.aws_iam_policy_document.tf_boundary_doc.json
-
-  tags = {
-    Terraform = true
-  }
+  policy      = data.aws_iam_policy_document.provisioner_permission_boundary_doc.json
+  tags        = var.tags
 }
 
-data "aws_iam_policy_document" "tf_boundary_doc" {
+data "aws_iam_policy_document" "provisioner_permission_boundary_doc" {
   statement {
-    sid = "TFPermissionBoundary"
+    sid = "ProvisionerPermissionBoundary"
 
     effect = "Allow"
 

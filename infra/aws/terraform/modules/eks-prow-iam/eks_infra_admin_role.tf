@@ -14,9 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "aws_iam_role" "iam_cluster_provisioner" {
+resource "aws_iam_role" "eks_provisioner" {
   name        = "TFProwClusterProvisioner"
-  description = "IAM role used to delegate access to prow-build-cluster"
+  description = "IAM role used for planning/applying/destroying infrastructure."
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -24,21 +24,23 @@ resource "aws_iam_role" "iam_cluster_provisioner" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : data.aws_iam_user.eks_provisioners[*].arn
+          "AWS" : data.aws_iam_user.eks_infra_admins[*].arn
         },
         "Action" : "sts:AssumeRole",
         "Condition" : {}
       }
     ]
   })
+
+  tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "cluster_apply" {
-  role       = aws_iam_role.iam_cluster_provisioner.name
-  policy_arn = aws_iam_policy.prow_cluster_apply.arn
+resource "aws_iam_role_policy_attachment" "eks_apply" {
+  role       = aws_iam_role.eks_provisioner.name
+  policy_arn = aws_iam_policy.eks_apply.arn
 }
 
-resource "aws_iam_role_policy_attachment" "cluster_destroy" {
-  role       = aws_iam_role.iam_cluster_provisioner.name
-  policy_arn = aws_iam_policy.prow_cluster_destroy.arn
+resource "aws_iam_role_policy_attachment" "eks_destroy" {
+  role       = aws_iam_role.eks_provisioner.name
+  policy_arn = aws_iam_policy.eks_destroy.arn
 }

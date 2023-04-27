@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 provider "aws" {
-  region = "us-east-2"
+  region = var.region
 }
 
 terraform {
@@ -23,7 +23,7 @@ terraform {
 
   backend "s3" {
     bucket = "prow-build-cluster-tfstate"
-    key    = "iam/k8s-infra-prow/terraform.tfstate"
+    key    = "iam/eks-prow-iam/terraform.tfstate"
     region = "us-east-2"
   }
 
@@ -35,16 +35,8 @@ terraform {
   }
 }
 
-module "eks_prow_provisioner_iam" {
-  source = "../../modules/eks-prow-provisioner-iam"
-
-  eks_provisioners = [
-    "pprzekwa",
-    "xmudrii"
-  ]
-}
-
-output "cluster_provisioner_arn" {
-  description = "ARN of the cluster provisioner role"
-  value       = module.eks_prow_provisioner_iam.cluster_provisioner_arn
+module "eks_prow_iam" {
+  source            = "../../modules/eks-prow-iam"
+  eks_infra_admins  = var.eks_infra_admins
+  eks_infra_viewers = var.eks_infra_admins
 }

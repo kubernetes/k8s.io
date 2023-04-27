@@ -14,13 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "aws_caller_identity" "current" {}
+region = "us-east-2"
 
-data "aws_iam_user" "eks_provisioners" {
-  count     = length(var.eks_provisioners)
-  user_name = var.eks_provisioners[count.index]
-}
-
-locals {
-  account_id = data.aws_caller_identity.current.account_id
-}
+eks_infra_admins = [
+  "pkprzekwas",
+  "xmudrii"
+]

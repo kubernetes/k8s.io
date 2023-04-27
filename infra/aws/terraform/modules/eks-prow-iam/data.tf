@@ -14,29 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-provider "aws" {
-  region = var.region
+data "aws_caller_identity" "current" {}
+
+data "aws_iam_user" "eks_infra_admins" {
+  count     = length(var.eks_infra_admins)
+  user_name = var.eks_infra_admins[count.index]
 }
 
-terraform {
-  required_version = "~> 1.3.0"
-
-  backend "s3" {
-    bucket = "prow-build-canary-cluster-tfstate"
-    key    = "iam/eks-prow-iam/terraform.tfstate"
-    region = "us-east-2"
-  }
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.47"
-    }
-  }
+data "aws_iam_user" "eks_infra_viewers" {
+  count     = length(var.eks_infra_viewers)
+  user_name = var.eks_infra_viewers[count.index]
 }
 
-module "eks_prow_iam" {
-  source            = "../../modules/eks-prow-iam"
-  eks_infra_admins  = var.eks_infra_admins
-  eks_infra_viewers = var.eks_infra_admins
+locals {
+  account_id = data.aws_caller_identity.current.account_id
 }

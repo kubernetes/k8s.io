@@ -14,7 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-output "cluster_provisioner_arn" {
-  description = "ARN of the cluster provisioner role"
-  value       = aws_iam_role.iam_cluster_provisioner.arn
-}
+region = "us-east-2"
+
+eks_infra_admins = [
+  "pprzekwa",
+  "xmudrii"
+]
