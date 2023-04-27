@@ -1,12 +1,12 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
+- ArangoGutierrez
 - kad
 - marquiz
-- ArangoGutierrez
 reviewers:
 - ArangoGutierrez
 - fmuyassarov
-- zvonkok
 - kad
 - marquiz
+- zvonkok
