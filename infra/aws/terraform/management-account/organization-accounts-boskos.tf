@@ -32,7 +32,6 @@ module "k8s_infra_e2e_boskos_002" {
   parent_id                  = aws_organizations_organizational_unit.boskos.id
 }
 
-
 module "k8s_infra_e2e_boskos_003" {
   source = "../modules/org-account"
 
@@ -40,4 +39,168 @@ module "k8s_infra_e2e_boskos_003" {
   email                      = "k8s-infra-aws-admins+k8s-infra-e2e-boskos-003@kubernetes.io"
   iam_user_access_to_billing = "ALLOW"
   parent_id                  = aws_organizations_organizational_unit.boskos.id
+}
+
+##############################################
+# Accounts used by boskos in the EKS cluster #
+##############################################
+
+module "k8s_infra_eks_e2e_boskos_001" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-001"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-001@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_002" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-002"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-002@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_003" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-003"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-003@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_004" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-004"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-004@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_005" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-005"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-005@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_006" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-006"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-006@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_007" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-007"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-007@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_008" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-008"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-008@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_009" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-009"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-009@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+module "k8s_infra_eks_e2e_boskos_010" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-010"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-010@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
 }
