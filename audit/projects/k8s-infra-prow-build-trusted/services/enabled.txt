@@ -1,4 +1,5 @@
 NAME                                 TITLE
+autoscaling.googleapis.com           Cloud Autoscaling API
 bigquery.googleapis.com              BigQuery API
 bigquerystorage.googleapis.com       BigQuery Storage API
 cloudbuild.googleapis.com            Cloud Build API

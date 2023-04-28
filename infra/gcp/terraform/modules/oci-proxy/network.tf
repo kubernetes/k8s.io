@@ -76,7 +76,7 @@ module "lb-http" {
           group = neg.id
         }
       ]
-      enable_cdn              = true
+      enable_cdn              = false
       security_policy         = null
       custom_request_headers  = null
       custom_response_headers = null

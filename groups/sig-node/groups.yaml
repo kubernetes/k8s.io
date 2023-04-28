@@ -19,6 +19,19 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: sig-node-leads@kubernetes.io
+    name: sig-node-leads
+    description: |-
+      SIG Node chairs and technical leads comms
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - dawnchen@google.com
+      - decarr@redhat.com
+      - mpatel@redhat.com
+      - s.kanzhelev@gmail.com
+
   - email-id: k8s-infra-staging-cri-tools@kubernetes.io
     name: k8s-infra-staging-cri-tools
     description: |-

@@ -54,9 +54,6 @@ type Manifest struct {
 
 // TODO: If you add any production registries you will have to update this list 🤷
 var ProdRegistries []string = []string{
-	"asia.gcr.io/k8s-artifacts-prod/",
-	"us.gcr.io/k8s-artifacts-prod/",
-	"eu.gcr.io/k8s-artifacts-prod/",
 	"asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"asia-south1-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"asia-northeast1-docker.pkg.dev/k8s-artifacts-prod/images/",

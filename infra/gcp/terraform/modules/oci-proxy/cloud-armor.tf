@@ -151,10 +151,10 @@ resource "google_compute_security_policy" "cloud-armor" {
     preview = false
   }
 
-  # Reject all traffic that hasn't been whitelisted.
+  # Permit all other traffic, with rate limits
   rule {
-    action      = "allow"
-    description = "Default rule, higher priority overrides it"
+    action      = "throttle"
+    description = "Default rule, throttle traffic"
     priority    = "2147483647"
 
     match {
@@ -162,6 +162,18 @@ resource "google_compute_security_policy" "cloud-armor" {
         src_ip_ranges = ["*"]
       }
       versioned_expr = "SRC_IPS_V1"
+    }
+
+    rate_limit_options {
+      conform_action = "allow"
+      exceed_action  = "deny(429)"
+
+      enforce_on_key = "IP"
+      # This is comparable to the GCR limits from k8s.gcr.io
+      rate_limit_threshold {
+        count        = 5000
+        interval_sec = 60
+      }
     }
 
     preview = false

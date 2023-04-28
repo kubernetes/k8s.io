@@ -3,12 +3,6 @@
 registries:
 - name: gcr.io/k8s-staging-sp-operator
   src: true
-- name: us.gcr.io/k8s-artifacts-prod/security-profiles-operator
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: eu.gcr.io/k8s-artifacts-prod/security-profiles-operator
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: asia.gcr.io/k8s-artifacts-prod/security-profiles-operator
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia-south1-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator
@@ -49,12 +43,6 @@ registries:
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: us-west2-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: us.gcr.io/k8s-artifacts-prod/security-profiles-operator-bundle
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: eu.gcr.io/k8s-artifacts-prod/security-profiles-operator-bundle
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: asia.gcr.io/k8s-artifacts-prod/security-profiles-operator-bundle
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator-bundle
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia-south1-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator-bundle
@@ -94,12 +82,6 @@ registries:
 - name: us-west1-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator-bundle
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: us-west2-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator-bundle
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: us.gcr.io/k8s-artifacts-prod/security-profiles-operator-catalog
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: eu.gcr.io/k8s-artifacts-prod/security-profiles-operator-catalog
-  service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
-- name: asia.gcr.io/k8s-artifacts-prod/security-profiles-operator-catalog
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator-catalog
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com

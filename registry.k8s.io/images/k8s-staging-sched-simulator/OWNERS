@@ -1,0 +1,15 @@
+# See the OWNERS file documentation:
+#  https://github.com/kubernetes/community/blob/master/contributors/devel/owners.md
+
+approvers:
+- alculquicondor
+- Huang-Wei
+- sanposhiho
+reviewers:
+- alculquicondor
+- Huang-Wei
+- sanposhiho
+- 196Ikuchil
+
+labels:
+- sig/scheduling
