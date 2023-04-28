@@ -14,15 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-# TODO(pkprzekwas): remove after applying changes on prow-build-cluster
-module "iam" {
-  count = var.cluster_name == "prow-build-cluster" ? 1 : 0
-
-  source = "./modules/iam"
-
-  eks_admins = var.eks_cluster_admins
-}
-
 # We allow Prow Pods with specific service acccounts on the a particular cluster to assume this role.
 resource "aws_iam_role" "eks_prow_admin" {
   count = local.configure_prow ? 1 : 0
