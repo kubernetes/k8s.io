@@ -118,6 +118,11 @@ data "aws_iam_policy_document" "eks_apply" {
       "eks:DescribeCluster",
       "eks:DescribeNodegroup",
       "eks:TagResource",
+      "eks:UpdateAddon",
+      "eks:UpdateClusterConfig",
+      "eks:UpdateClusterVersion",
+      "eks:UpdateNodegroupConfig",
+      "eks:UpdateNodegroupVersion",
       "iam:AttachRolePolicy",
       "iam:CreateOpenIDConnectProvider",
       "iam:CreatePolicy",
@@ -214,22 +219,23 @@ data "aws_iam_policy_document" "eks_destroy" {
 }
 
 resource "aws_iam_policy" "eks_plan" {
-  name   = "TFProwClusterViewer"
+  name   = "EKSClusterViewer"
   path   = "/"
   policy = data.aws_iam_policy_document.eks_plan.json
   tags   = var.tags
 }
 
 resource "aws_iam_policy" "eks_apply" {
-  name   = "TFProwClusterApply"
+  name   = "EKSClusterApplier"
   path   = "/"
   policy = data.aws_iam_policy_document.eks_apply.json
   tags   = var.tags
 }
 
 resource "aws_iam_policy" "eks_destroy" {
-  name   = "TFProwClusterDestroy"
+  name   = "EKSClusterDestroyer"
   path   = "/"
   policy = data.aws_iam_policy_document.eks_destroy.json
   tags   = var.tags
 }
+
