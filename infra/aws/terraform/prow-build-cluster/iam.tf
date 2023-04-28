@@ -24,7 +24,7 @@ module "iam" {
 }
 
 # We allow Prow Pods with specific service acccounts on the a particular cluster to assume this role.
-resource "aws_iam_role" "eks_admin" {
+resource "aws_iam_role" "eks_prow_admin" {
   count = local.configure_prow ? 1 : 0
 
   name                 = "Prow-EKS-Admin"

@@ -236,3 +236,6 @@ export PROW_ENV= # choose between canary/prod
 
 make destroy
 ```
+
+If you want to remove roles used for EKS creation go to `../iam/<aws_account_name>` and run `terraform destroy` command there.
+
