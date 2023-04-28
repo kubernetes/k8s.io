@@ -35,6 +35,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-591994748249@gcp-sa-networkmanagement.iam.gserviceaccount.com"
+      ],
+      "role": "roles/networkmanagement.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-591994748249@gcp-sa-osconfig.iam.gserviceaccount.com"
       ],
       "role": "roles/osconfig.serviceAgent"

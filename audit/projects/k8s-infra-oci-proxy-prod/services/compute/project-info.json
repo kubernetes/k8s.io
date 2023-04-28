@@ -42,7 +42,7 @@
       "metric": "TARGET_POOLS"
     },
     {
-      "limit": 500,
+      "limit": 1000,
       "metric": "HEALTH_CHECKS"
     },
     {

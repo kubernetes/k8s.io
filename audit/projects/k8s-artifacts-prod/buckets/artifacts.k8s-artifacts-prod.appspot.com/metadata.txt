@@ -3,7 +3,7 @@ gs://artifacts.k8s-artifacts-prod.appspot.com/ :
 	Location type:			multi-region
 	Location constraint:		US
 	Versioning enabled:		None
-	Logging configuration:		Present
+	Logging configuration:		None
 	Website configuration:		None
 	CORS configuration: 		None
 	Lifecycle configuration:	None
@@ -11,26 +11,13 @@ gs://artifacts.k8s-artifacts-prod.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 15 Feb 2023 20:20:20 GMT
-	Time updated:			Sat, 04 Mar 2023 08:14:21 GMT
-	Metageneration:			8
+	Time updated:			Fri, 24 Mar 2023 18:54:39 GMT
+	Metageneration:			11
 	Bucket Policy Only enabled:	False
 	Public access prevention:	inherited
 	RPO:				DEFAULT
 	ACL:				
 	  [
-	    {
-	      "email": "k8s-infra-artifact-admins@kubernetes.io",
-	      "entity": "group-k8s-infra-artifact-admins@kubernetes.io",
-	      "role": "OWNER"
-	    },
-	    {
-	      "entity": "project-editors-388270116193",
-	      "projectTeam": {
-	        "projectNumber": "388270116193",
-	        "team": "editors"
-	      },
-	      "role": "OWNER"
-	    },
 	    {
 	      "entity": "project-owners-388270116193",
 	      "projectTeam": {
@@ -40,8 +27,11 @@ gs://artifacts.k8s-artifacts-prod.appspot.com/ :
 	      "role": "OWNER"
 	    },
 	    {
-	      "email": "k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com",
-	      "entity": "user-k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com",
+	      "entity": "project-editors-388270116193",
+	      "projectTeam": {
+	        "projectNumber": "388270116193",
+	        "team": "editors"
+	      },
 	      "role": "OWNER"
 	    },
 	    {

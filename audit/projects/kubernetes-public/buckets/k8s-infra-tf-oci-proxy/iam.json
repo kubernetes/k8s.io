@@ -21,7 +21,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-cluster-admins@kubernetes.io"
+        "group:k8s-infra-cluster-admins@kubernetes.io",
+        "serviceAccount:1017132094926@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     }
