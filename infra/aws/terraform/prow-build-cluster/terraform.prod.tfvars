@@ -15,12 +15,16 @@ limitations under the License.
 */
 
 aws_account_id = "468814281478"
-eks_admins = [
+
+eks_cluster_admins = [
   "pprzekwa",
   "xmudrii"
 ]
 
-prow_build_cluster = true
+eks_cluster_viewers = [
+  "pprzekwa",
+  "xmudrii"
+]
 
 cluster_name               = "prow-build-cluster"
 cluster_version            = "1.25"

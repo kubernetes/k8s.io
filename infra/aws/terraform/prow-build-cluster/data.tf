@@ -14,7 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-output "cluster_admin_arn" {
-  description = "ARN of the cluster admin role"
-  value       = aws_iam_role.iam_cluster_admin.arn
+data "aws_caller_identity" "current" {}
+
+data "aws_availability_zones" "available" {}
+
+data "aws_iam_role" "eks_infra_admin" {
+  name = "EKSInfraAdmin"
+}
+
+data "aws_iam_role" "eks_infra_viewer" {
+  name = "EKSInfraViewer"
+}
+
+data "aws_iam_user" "eks_cluster_viewers" {
+  count     = length(var.eks_cluster_viewers)
+  user_name = var.eks_cluster_viewers[count.index]
+}
+
+data "aws_iam_user" "eks_cluster_admins" {
+  count     = length(var.eks_cluster_admins)
+  user_name = var.eks_cluster_admins[count.index]
 }

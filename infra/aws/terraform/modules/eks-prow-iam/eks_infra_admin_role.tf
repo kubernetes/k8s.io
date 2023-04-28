@@ -14,13 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-###############################################
-# IAM access
-###############################################
-
-resource "aws_iam_role" "iam_cluster_admin" {
-  name        = "Prow-Cluster-Admin"
-  description = "IAM role used to delegate access to prow-build-cluster"
+resource "aws_iam_role" "eks_infra_admin" {
+  name        = "EKSInfraAdmin"
+  description = "IAM role used for planning/applying/destroying infrastructure."
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -28,21 +24,23 @@ resource "aws_iam_role" "iam_cluster_admin" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : data.aws_iam_user.eks_admins[*].arn
+          "AWS" : data.aws_iam_user.eks_infra_admins[*].arn
         },
         "Action" : "sts:AssumeRole",
         "Condition" : {}
       }
     ]
   })
+
+  tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "cluster_admin_prow_cluster_maintainer" {
-  role       = aws_iam_role.iam_cluster_admin.name
-  policy_arn = aws_iam_policy.prow_cluster_maintainer.arn
+resource "aws_iam_role_policy_attachment" "eks_apply" {
+  role       = aws_iam_role.eks_infra_admin.name
+  policy_arn = aws_iam_policy.eks_apply.arn
 }
 
-resource "aws_iam_role_policy_attachment" "cluster_admin_prow_cluster_destroy" {
-  role       = aws_iam_role.iam_cluster_admin.name
-  policy_arn = aws_iam_policy.prow_cluster_destroy.arn
+resource "aws_iam_role_policy_attachment" "eks_destroy" {
+  role       = aws_iam_role.eks_infra_admin.name
+  policy_arn = aws_iam_policy.eks_destroy.arn
 }

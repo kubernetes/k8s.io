@@ -18,31 +18,6 @@ limitations under the License.
 # EKS Cluster
 ###############################################
 
-locals {
-  aws_auth_roles = concat(
-    var.prow_build_cluster ? [
-      # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
-      {
-        "rolearn"  = aws_iam_role.eks_admin[0].arn
-        "username" = "eks-admin"
-        "groups" = [
-          "eks-prow-cluster-admin"
-        ]
-      }
-    ] : [],
-    [
-      # Allow access to the Prow-Cluster-Admin IAM role (used with assume role with other IAM accounts).
-      {
-        "rolearn"  = module.iam.cluster_admin_arn
-        "username" = "eks-cluster-admin"
-        "groups" = [
-          "eks-cluster-admin"
-        ]
-      }
-    ]
-  )
-}
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.10.0"
@@ -73,9 +48,9 @@ module "eks" {
   kms_key_administrators = [
     local.root_account_arn
   ]
-  # Allow service access to the KMS key to the Prow-Cluster-Admin role.
+  # Allow service access to the KMS key to the EKSInfraAdmin role.
   kms_key_service_users = [
-    module.iam.cluster_admin_arn
+    data.aws_iam_role.eks_infra_admin.arn
   ]
 
   # We use IPv4 for the best compatibility with the existing setup.

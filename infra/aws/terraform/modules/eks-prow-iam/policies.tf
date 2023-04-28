@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "aws_iam_policy_document" "prow_cluster_viewer" {
+data "aws_iam_policy_document" "eks_plan" {
   statement {
     sid       = ""
     effect    = "Allow"
@@ -67,7 +67,7 @@ data "aws_iam_policy_document" "prow_cluster_viewer" {
 # See the following comments for more details:
 # - https://github.com/kubernetes/k8s.io/pull/5113#discussion_r1164205616
 # - https://github.com/kubernetes/k8s.io/pull/5113#discussion_r1164206798
-data "aws_iam_policy_document" "prow_cluster_maintainer" {
+data "aws_iam_policy_document" "eks_apply" {
   statement {
     sid       = ""
     effect    = "Allow"
@@ -118,6 +118,11 @@ data "aws_iam_policy_document" "prow_cluster_maintainer" {
       "eks:DescribeCluster",
       "eks:DescribeNodegroup",
       "eks:TagResource",
+      "eks:UpdateAddon",
+      "eks:UpdateClusterConfig",
+      "eks:UpdateClusterVersion",
+      "eks:UpdateNodegroupConfig",
+      "eks:UpdateNodegroupVersion",
       "iam:AttachRolePolicy",
       "iam:CreateOpenIDConnectProvider",
       "iam:CreatePolicy",
@@ -160,7 +165,7 @@ data "aws_iam_policy_document" "prow_cluster_maintainer" {
   }
 }
 
-data "aws_iam_policy_document" "prow_cluster_destroy" {
+data "aws_iam_policy_document" "eks_destroy" {
   statement {
     sid       = ""
     effect    = "Allow"
@@ -213,20 +218,24 @@ data "aws_iam_policy_document" "prow_cluster_destroy" {
   }
 }
 
-resource "aws_iam_policy" "prow_cluster_viewer" {
-  name   = "ProwClusterViewer"
+resource "aws_iam_policy" "eks_plan" {
+  name   = "EKSClusterViewer"
   path   = "/"
-  policy = data.aws_iam_policy_document.prow_cluster_viewer.json
+  policy = data.aws_iam_policy_document.eks_plan.json
+  tags   = var.tags
 }
 
-resource "aws_iam_policy" "prow_cluster_maintainer" {
-  name   = "ProwClusterMaintainer"
+resource "aws_iam_policy" "eks_apply" {
+  name   = "EKSClusterApplier"
   path   = "/"
-  policy = data.aws_iam_policy_document.prow_cluster_maintainer.json
+  policy = data.aws_iam_policy_document.eks_apply.json
+  tags   = var.tags
 }
 
-resource "aws_iam_policy" "prow_cluster_destroy" {
-  name   = "ProwClusterDestroy"
+resource "aws_iam_policy" "eks_destroy" {
+  name   = "EKSClusterDestroyer"
   path   = "/"
-  policy = data.aws_iam_policy_document.prow_cluster_destroy.json
+  policy = data.aws_iam_policy_document.eks_destroy.json
+  tags   = var.tags
 }
+

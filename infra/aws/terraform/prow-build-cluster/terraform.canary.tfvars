@@ -15,14 +15,18 @@ limitations under the License.
 */
 
 aws_account_id = "054318140392"
-eks_admins = [
+
+eks_cluster_viewers = [
   "pkprzekwas",
   "xmudrii"
 ]
 
-prow_build_cluster = false
+eks_cluster_admins = [
+  "pkprzekwas",
+  "xmudrii"
+]
 
-cluster_name               = "prow-build-canary-cluster"
+cluster_name               = "prow-canary-cluster"
 cluster_version            = "1.25"
 cluster_autoscaler_version = "v1.25.0"
 

@@ -15,11 +15,7 @@ limitations under the License.
 */
 
 terraform {
-  backend "s3" {
-    bucket = "prow-build-cluster-tfstate"
-    key    = "terraform.tfstate"
-    region = "us-east-2"
-  }
+  backend "s3" {}
 
   required_version = "~> 1.3.0"
 
@@ -35,6 +31,41 @@ terraform {
     helm = {
       source  = "hashicorp/helm"
       version = "2.9.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.cluster_region
+
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.aws_account_id}:role/EKSInfraAdmin"
+    session_name = "prow-build-cluster-terraform"
+  }
+}
+
+provider "kubernetes" {
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+
+  # This requires the awscli to be installed locally where Terraform is executed.
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    command     = "aws"
+    args        = local.aws_cli_args
+  }
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+
+    # This requires the awscli to be installed locally where Terraform is executed.
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      command     = "aws"
+      args        = local.aws_cli_args
     }
   }
 }

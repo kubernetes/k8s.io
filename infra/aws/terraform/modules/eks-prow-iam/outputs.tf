@@ -14,7 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "aws_iam_user" "eks_admins" {
-  count     = length(var.eks_admins)
-  user_name = var.eks_admins[count.index]
+output "eks_infra_admin_role_arn" {
+  description = "ARN of the EKS admin role."
+  value       = aws_iam_role.eks_infra_admin.arn
+}
+
+output "eks_infra_viewer_role_arn" {
+  description = "ARN of the EKS viewer role."
+  value       = aws_iam_role.eks_viewer.arn
 }

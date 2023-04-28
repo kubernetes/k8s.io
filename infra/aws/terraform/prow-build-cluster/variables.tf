@@ -14,18 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "eks_admins" {
+variable "eks_cluster_admins" {
   type        = list(string)
-  description = "List of maintainers that have administrator access to the account and cluster"
+  description = "List of maintainers that have administrator access to the cluster."
   default     = []
 }
 
-# This variable is required in the installation process as we cannot
-# assume a role that is yet to be created.
-variable "assume_role" {
-  type        = bool
-  description = "Assumes role to get access to EKS cluster after provisioning."
-  default     = true
+variable "eks_cluster_viewers" {
+  type        = list(string)
+  description = "List of maintainers that have view access to the cluster."
+  default     = []
 }
 
 # This variable is required in the installation process as Terraform
@@ -33,15 +31,6 @@ variable "assume_role" {
 variable "deploy_kubernetes_resources" {
   type        = bool
   description = "Deploy Kubernetes resources defined by Terraform."
-  default     = true
-  nullable    = false
-}
-
-# TODO(xmudrii): This is a temporary variable. To be deleted after making canary cluster a build cluster.
-# This variable defines if this cluster is used as a Prow build cluster.
-variable "prow_build_cluster" {
-  type        = bool
-  description = "Provision this cluster as a Prow build cluster."
   default     = true
   nullable    = false
 }

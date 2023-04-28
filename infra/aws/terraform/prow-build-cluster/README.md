@@ -31,11 +31,9 @@ export PROW_ENV=canary
 
 ### Differences between production and canary
 
+* aws account
 * cluster name
-* cluster admin IAM role name
-* secrets manager IAM policy name
 * canary is missing k8s-prow OIDC provider and the corresponding role
-* subnet setup is different
 * instance type and autoscaling parameters (mainly for saving)
 
 ## Interacting with clusters
@@ -52,7 +50,7 @@ aws eks update-kubeconfig --region us-east-2 --name prow-build-cluster
 Canary:
 
 ```bash
-aws eks update-kubeconfig --region us-east-2 --name prow-build-canary-cluster
+aws eks update-kubeconfig --region us-east-2 --name prow-canary-cluster
 ```
 
 This is going to update your `~/.kube/config` (unless specified otherwise).
@@ -73,7 +71,7 @@ appropriate cluster:
       - --cluster-name
       - prow-build-cluster
       - --role-arn
-      - arn:aws:iam::468814281478:role/Prow-Cluster-Admin
+      - arn:aws:iam::468814281478:role/EKSInfraAdmin
     ```
 * Canary:
     ```yaml
@@ -83,9 +81,9 @@ appropriate cluster:
       - eks
       - get-token
       - --cluster-name
-      - prow-build-canary-cluster
+      - prow-canary-cluster
       - --role-arn
-      - arn:aws:iam::054318140392:role/Prow-Cluster-Admin
+      - arn:aws:iam::054318140392:role/EKSInfraAdmin
     ```
 
 ## Running Terraform
@@ -98,10 +96,9 @@ appropriate/correct environment. This Makefile uses the following environment
 variables to control Terraform:
 
 * `PROW_ENV` (default: `canary`, can be `prod`)
-* `ASSUME_ROLE` (default: `true`) - whether to authenticate to AWS using
-  provided credentials or by assuming the ProwClusterAdmin role
 * `DEPLOY_K8S_RESOURCES` (default: `true`) - whether to deploy Kubernetes
-  resources defined via Terraform
+  resources defined via Terraform. Reasons why it couldn't be done in one step
+  can be found [here](https://github.com/hashicorp/terraform-provider-kubernetes-alpha/issues/199#issuecomment-832614387).
 * `TF_ARGS` (default: none) - additional command-line flags and arguments
   to provide to Terraform
 
@@ -109,6 +106,12 @@ variables to control Terraform:
 
 **WARNING: Make sure to read the whole document before creating a cluster
 for the first time as the additional steps are needed!**
+
+Clean to avoid using cached state of the other cluster.
+
+```bash
+make clean
+```
 
 Init (**make sure to run this command before getting started with configs**):
 
@@ -142,7 +145,8 @@ Terraform.
 We first need to create an IAM role that we're going later to assume and use
 for creating the cluster. Note that the principal that created the cluster
 is considered as a cluster admin, so we want to make sure that we assume
-the IAM role before starting the cluster creation process.
+the IAM role before starting the cluster creation process. This is done in a
+separate terraform scripts located in [iam folder](../iam/).
 
 Additionally, we can't provision a cluster and deploy Kubernetes resources in
 the same Terraform run. That's because Terraform cannot plan Kubernetes
@@ -151,8 +155,8 @@ then run Terraform again to deploy Kubernetes resources.
 
 That said, the cluster creation is done in four phases:
 
-- Phase 1: create the IAM role and policies
-- Phase 2: create everything else
+- Phase 1: create the IAM provisioner role and policies (see [iam](../iam/))
+- Phase 2: create infrastructure **without** Kubernetes resources
 - Phase 3: deploy the Kubernetes resources managed by Terraform
 - Phase 4: deploy the Kubernetes resources not managed by Terraform
 
@@ -165,53 +169,29 @@ Before getting started, make sure to set the needed environment variables:
 
 ```bash
 export PROW_ENV=canary # or prod
-export ASSUME_ROLE=false # the role to be assumed will be created in phase 1
 export DEPLOY_K8S_RESOURCES=false
 ```
 
-### Phase 1: creating the IAM role and policies
+### Phase 1: creating the IAM provisioner role and policies
 
-We're now going to create the IAM role and attach policies to it.
-This step is done by applying the appropriate `iam` module:
-
-```bash
-TF_ARGS="-target=module.iam" make apply
-```
-
-Ignore Terraform warnings about incomplete state, this is as expected
-as we're using the `-target` flag.
+See [iam folder](../iam/)
 
 ### Phase 2: create the EKS cluster
 
 With the IAM role in place, we can assume it and use it to use it to create the
 EKS cluster and other needed resources.
 
-First, set the `ASSUME_ROLE` environment variable to `true`:
-
 ```bash
-export ASSUME_ROLE=true
-```
-
-Then run Terraform again:
-
-```bash
-make apply
+DEPLOY_K8S_RESOURCES=false make apply
 ```
 
 ### Phase 3: deploy the Kubernetes resources
 
 With the EKS cluster in place, we can deploy Kubernetes resources managed by
-Terraform. First, make sure to set the `DEPLOY_K8S_RESOURCES` environment
-variable to `true`:
+Terraform:
 
 ```bash
-export DEPLOY_K8S_RESOURCES=true
-```
-
-Then run the `apply` command again:
-
-```bash
-make apply
+DEPLOY_K8S_RESOURCES=true make apply
 ```
 
 At this point, the cluster should be fully functional. You should fetch
@@ -254,11 +234,8 @@ The cluster can be removed by running the following command:
 ```bash
 export PROW_ENV= # choose between canary/prod
 
-# First destroy as much you can with assuming the role
-export ASSUME_ROLE=true
-make destroy
-
-# Then destroy the role itself
-export ASSUME_ROLE=false
 make destroy
 ```
+
+If you want to remove roles used for EKS creation go to `../iam/<aws_account_name>` and run `terraform destroy` command there.
+

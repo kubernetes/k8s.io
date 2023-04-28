@@ -14,15 +14,28 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-# This IAM configuration allows Prow GKE Clusters to assume a role on AWS.
-# Provisioning those resources for canary installation is skipped.
+resource "aws_iam_role" "eks_viewer" {
+  name        = "EKSInfraViewer"
+  description = "IAM read role."
 
-# Recognize federated identities from the prow trusted cluster
-resource "aws_iam_openid_connect_provider" "k8s_prow" {
-  count = local.configure_prow ? 1 : 0
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : data.aws_iam_user.eks_infra_viewers[*].arn
+        },
+        "Action" : "sts:AssumeRole",
+        "Condition" : {}
+      }
+    ]
+  })
 
-  url             = "https://container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow"
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = ["08745487e891c19e3078c1f2a07e452950ef36f6"]
+  tags = var.tags
 }
 
+resource "aws_iam_role_policy_attachment" "eks_plan" {
+  role       = aws_iam_role.eks_viewer.name
+  policy_arn = aws_iam_policy.eks_plan.arn
+}

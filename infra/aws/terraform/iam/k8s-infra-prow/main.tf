@@ -14,15 +14,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-# This IAM configuration allows Prow GKE Clusters to assume a role on AWS.
-# Provisioning those resources for canary installation is skipped.
-
-# Recognize federated identities from the prow trusted cluster
-resource "aws_iam_openid_connect_provider" "k8s_prow" {
-  count = local.configure_prow ? 1 : 0
-
-  url             = "https://container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow"
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = ["08745487e891c19e3078c1f2a07e452950ef36f6"]
+provider "aws" {
+  region = var.region
 }
 
+terraform {
+  required_version = "~> 1.3.0"
+
+  backend "s3" {
+    bucket = "prow-build-cluster-tfstate"
+    key    = "iam/eks-prow-iam/terraform.tfstate"
+    region = "us-east-2"
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 4.47"
+    }
+  }
+}
+
+module "eks_prow_iam" {
+  source            = "../../modules/eks-prow-iam"
+  eks_infra_admins  = var.eks_infra_admins
+  eks_infra_viewers = var.eks_infra_admins
+}
