@@ -78,7 +78,6 @@ groups:
     members:
       - hweicdl@gmail.com
       - acondor@google.com
-      - adtac@google.com
       - handbomusic@gmail.com
 
   - email-id: k8s-infra-staging-kwok@kubernetes.io
