@@ -22,17 +22,8 @@ variable "eks_cluster_admins" {
 
 variable "eks_cluster_viewers" {
   type        = list(string)
-  description = "List of maintainers that have view access to the account and cluster."
+  description = "List of maintainers that have view access to the cluster."
   default     = []
-}
-
-# TODO: remove once applied on prow-build-cluster
-# This variable is required in the installation process as we cannot
-# assume a role that is yet to be created.
-variable "assume_role" {
-  type        = bool
-  description = "Assumes role to get access to EKS cluster after provisioning."
-  default     = true
 }
 
 # This variable is required in the installation process as Terraform

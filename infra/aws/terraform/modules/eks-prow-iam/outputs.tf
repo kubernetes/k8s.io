@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 output "eks_infra_admin_role_arn" {
-  description = "ARN of the EKS role."
+  description = "ARN of the EKS admin role."
   value       = aws_iam_role.eks_infra_admin.arn
 }
 

@@ -23,6 +23,41 @@ module "iam" {
   eks_admins = var.eks_cluster_admins
 }
 
+# We allow Prow Pods with specific service acccounts on the a particular cluster to assume this role.
+resource "aws_iam_role" "eks_admin" {
+  count = local.configure_prow ? 1 : 0
+
+  name                 = "Prow-EKS-Admin"
+  max_session_duration = 43200
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        "Effect" : "Allow",
+        "Principal" : {
+          "Federated" : aws_iam_openid_connect_provider.k8s_prow[0].arn
+        },
+        "Action" : "sts:AssumeRoleWithWebIdentity",
+        "Condition" : {
+          "StringEquals" : {
+            "container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow:sub" : [
+              // https://github.com/kubernetes/test-infra/tree/master/config/prow/cluster
+              // all services that load kubeconfig should be listed here
+              "system:serviceaccount:default:deck",
+              "system:serviceaccount:default:config-bootstrapper",
+              "system:serviceaccount:default:crier",
+              "system:serviceaccount:default:sinker",
+              "system:serviceaccount:default:prow-controller-manager",
+              "system:serviceaccount:default:hook"
+            ]
+          }
+        }
+      }
+    ]
+  })
+}
+
 # Roles defined below MUST NOT have any policies attached to them.
 # Those are used in aws-auth config map and are dedicated to interact with EKS cluster via kubeconfig.
 resource "aws_iam_role" "eks_cluster_viewer" {

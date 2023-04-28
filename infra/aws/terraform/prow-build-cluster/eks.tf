@@ -48,7 +48,7 @@ module "eks" {
   kms_key_administrators = [
     local.root_account_arn
   ]
-  # Allow service access to the KMS key to the TFProwClusterProvisioner role.
+  # Allow service access to the KMS key to the EKSInfraAdmin role.
   kms_key_service_users = [
     data.aws_iam_role.eks_infra_admin.arn
   ]

@@ -31,6 +31,7 @@ export PROW_ENV=canary
 
 ### Differences between production and canary
 
+* aws account
 * cluster name
 * canary is missing k8s-prow OIDC provider and the corresponding role
 * instance type and autoscaling parameters (mainly for saving)
@@ -176,6 +177,9 @@ export DEPLOY_K8S_RESOURCES=false
 See [iam folder](../iam/)
 
 ### Phase 2: create the EKS cluster
+
+With the IAM role in place, we can assume it and use it to use it to create the
+EKS cluster and other needed resources.
 
 ```bash
 DEPLOY_K8S_RESOURCES=false make apply

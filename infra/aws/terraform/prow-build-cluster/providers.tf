@@ -38,16 +38,9 @@ terraform {
 provider "aws" {
   region = var.cluster_region
 
-  # We have a chicken-egg problem here. This role is not going to exist
-  # when creating the cluster for the first time. In that case, `assume_role` var
-  # has to be set to false.
-  dynamic "assume_role" {
-    for_each = var.assume_role ? [null] : []
-
-    content {
-      role_arn     = "arn:aws:iam::${var.aws_account_id}:role/EKSInfraAdmin"
-      session_name = "prow-build-cluster-terraform"
-    }
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.aws_account_id}:role/EKSInfraAdmin"
+    session_name = "prow-build-cluster-terraform"
   }
 }
 

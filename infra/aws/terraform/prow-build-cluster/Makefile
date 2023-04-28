@@ -14,9 +14,8 @@
 
 TF ?= terraform
 TF_ARGS ?=
-ASSUME_ROLE ?= true
 
-# https://github.com/hashicorp/terraform-provider-kubernetes-alpha/issues/199#issuecomment-832614387
+# TODO: figure out a workaround for: https://github.com/hashicorp/terraform-provider-kubernetes-alpha/issues/199#issuecomment-832614387
 DEPLOY_K8S_RESOURCES ?= true
 
 # Valid values are: canary, prod
@@ -32,7 +31,6 @@ plan:
 	$(TF) $@ $(TF_ARGS) \
 		-var-file=./terraform.tfvars \
 		-var-file=./terraform.$(PROW_ENV).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: apply
@@ -40,7 +38,6 @@ apply:
 	$(TF) $@ $(TF_ARGS) \
 		-var-file=./terraform.tfvars \
 		-var-file=./terraform.$(PROW_ENV).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: destroy
@@ -48,7 +45,6 @@ destroy:
 	$(TF) $@ $(TF_ARGS) \
 		-var-file=./terraform.tfvars \
 		-var-file=./terraform.$(PROW_ENV).tfvars \
-		-var="assume_role=$(ASSUME_ROLE)" \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
 
 .PHONY: fmt

@@ -41,16 +41,18 @@ locals {
 
   azs = slice(data.aws_availability_zones.available.names, 0, 3)
 
-  # Allow cluster admin access to the following IAM roles.
+  # Allow cluster admin access to the following IAM roles:
   cluster_admin_roles = [
     {
+      # EKSInfraAdmin
       "rolearn"  = data.aws_iam_role.eks_infra_admin.arn
-      "username" = "eks-cluster-admin"
+      "username" = "eks-infra-admin"
       "groups" = [
         "eks-cluster-admin"
       ]
     },
     {
+      # EKSClusterAdmin
       "rolearn"  = aws_iam_role.eks_cluster_admin.arn
       "username" = "eks-cluster-admin"
       "groups" = [
@@ -59,9 +61,10 @@ locals {
     }
   ]
 
-  # Allow cluster read access to the following IAM roles.
+  # Allow cluster read access to the following IAM roles:
   cluster_viewer_roles = [
     {
+      # EKSClusterViewer
       "rolearn"  = aws_iam_role.eks_cluster_viewer.arn
       "username" = "eks-cluster-viewer"
       "groups" = [
@@ -69,8 +72,9 @@ locals {
       ]
     },
     {
+      # EKSInfraViewer
       "rolearn"  = data.aws_iam_role.eks_infra_viewer.arn
-      "username" = "eks-cluster-viewer"
+      "username" = "eks-infra-viewer"
       "groups" = [
         "eks-cluster-viewer"
       ]
