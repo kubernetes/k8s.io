@@ -1,1 +1,3 @@
-# TODO: add images
+- name: jobset
+  dmap:
+    "sha256:bab26f4d7f550f0b9afe92192cfb4751e3706a5ca6159f67ca93119b81221954": ["v0.1.0"]
