@@ -1,0 +1,41 @@
+{
+  "Resources": {
+    "provisioner": {
+      "Type": "AWS::IAM::User",
+      "Properties": {
+        "Path": "/",
+        "UserName": "provisioner",
+        "Policies": [
+          {
+            "PolicyName": "ProvisionerUserRole",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Action": "sts:AssumeRole",
+                  "Effect": "Allow",
+                  "Resource": "*"
+                },
+                {
+                  "Action": [
+                    "s3:GetObject",
+                    "s3:PutObject",
+                    "s3:PutObjectAcl"
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "Tags": [
+          {
+            "Key": "Boskos",
+            "Value": "Ignore"
+          }
+        ]
+      }
+    }
+  }
+}
