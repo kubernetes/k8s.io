@@ -209,6 +209,12 @@
     "sha256:92e0258e404bbf5b6916f4e897c5484f27e113d03cae07a1d780f72474df07c6": ["v20221219-controller-v1.5.1-49-ge3e0d9c1f"]
     "sha256:23eb4b1775fbaa2adca55c73cf0341e1224d6308689b6f4b3aa1523312eb81c": ["v20230312-helm-chart-4.5.2-28-g66a760794"]
 
+# httpbun image for e2e tests
+# https://github.com/kubernetes/ingress-nginx/tree/main/images/httpbun
+- name: e2e-test-httpbun
+  dmap:
+    "sha256:cffe47cb15334c17dae63ed6bdfc2b287c43c130ee554735661c0aeb20b84933": ["v20230505-v0.0.1"]
+
 # kube-webhook-certgen
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/kube-webhook-certgen
 - name: kube-webhook-certgen
