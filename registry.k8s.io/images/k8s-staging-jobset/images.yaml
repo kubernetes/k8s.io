@@ -1,3 +1,4 @@
 - name: jobset
   dmap:
     "sha256:bab26f4d7f550f0b9afe92192cfb4751e3706a5ca6159f67ca93119b81221954": ["v0.1.0"]
+    "sha256:5f1ef0d0fdfc7f1489a40403cf851c292dd218c2bace037d7e3e319929a5c0e3": ["v0.1.1"]
