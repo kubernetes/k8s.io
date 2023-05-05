@@ -21,6 +21,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - cjingram@google.com
       - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
@@ -70,6 +71,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - cjingram@google.com
       - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
@@ -89,6 +91,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - cjcullen@google.com
+      - cjingram@google.com
       - i@monis.app
       - joelsmith@redhat.com
       - lhinds@redhat.com
