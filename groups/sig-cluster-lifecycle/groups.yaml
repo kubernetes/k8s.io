@@ -176,6 +176,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - jichenjc@cn.ibm.com
+      - lennart.jern@est.tech
       - mbooth@redhat.com
       - seansnowwhite@gmail.com
       - tobiasgiese@gmail.com
@@ -193,6 +194,7 @@ groups:
       ReconcileMembers: "false"
     owners:
       - jichenjc@cn.ibm.com
+      - lennart.jern@est.tech
       - mbooth@redhat.com
       - seansnowwhite@gmail.com
       - tobiasgiese@gmail.com

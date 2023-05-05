@@ -143,6 +143,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - jichenjc@cn.ibm.com
+      - lennart.jern@est.tech
       - mbooth@redhat.com
       - seansnowwhite@gmail.com
       - tobiasgiese@gmail.com
