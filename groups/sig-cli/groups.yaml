@@ -16,7 +16,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - eddiezane@gmail.com
-      - katrina.verey@shopify.com
+      - kn.verey@gmail.com
       - maszulik@redhat.com
       - seans@google.com
 
@@ -40,7 +40,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - natashasarkar@google.com
-      - katrina.verey@shopify.com
+      - kn.verey@gmail.com
 
   - email-id: k8s-infra-staging-krm-functions@kubernetes.io
     name: k8s-infra-staging-krm-functions
@@ -50,7 +50,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - jeremy.r.rickard@gmail.com
-      - katrina.verey@shopify.com
+      - kn.verey@gmail.com
       - mengqiy@google.com
       - natashasarkar@google.com
   #
@@ -88,5 +88,5 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - eddiezane@gmail.com
-      - katrina.verey@shopify.com
+      - kn.verey@gmail.com
       - maszulik@redhat.com
