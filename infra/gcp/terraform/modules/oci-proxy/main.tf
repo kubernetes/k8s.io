@@ -166,8 +166,8 @@ locals {
       environment_variables = [
         {
           name = "DEFAULT_AWS_BASE_URL",
-          // AWS eu-west-2 is London
-          value = "https://prod-registry-k8s-io-eu-west-2.s3.dualstack.eu-west-2.amazonaws.com",
+          // AWS eu-west-1 is Ireland
+          value = "https://prod-registry-k8s-io-eu-west-1.s3.dualstack.eu-west-1.amazonaws.com",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -220,8 +220,8 @@ locals {
       environment_variables = [
         {
           name = "DEFAULT_AWS_BASE_URL",
-          // AWS eu-west-2 is London
-          value = "https://prod-registry-k8s-io-eu-west-2.s3.dualstack.eu-west-2.amazonaws.com",
+          // AWS eu-west-1 is in Ireland
+          value = "https://prod-registry-k8s-io-eu-west-1.s3.dualstack.eu-west-1.amazonaws.com",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
