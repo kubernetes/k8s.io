@@ -106,6 +106,8 @@ module "eks" {
       max_size     = var.node_max_size
       desired_size = var.node_desired_size
 
+      iam_role_permissions_boundary = "arn:aws:iam::${local.account_id}:policy/ProvisionerPermissionBoundary"
+
       ami_id                     = var.node_ami
       enable_bootstrap_user_data = true
 

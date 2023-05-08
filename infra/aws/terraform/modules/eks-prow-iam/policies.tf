@@ -144,6 +144,7 @@ data "aws_iam_policy_document" "eks_apply" {
       "iam:TagRole",
       "iam:UpdateOpenIDConnectProviderThumbprint",
       "iam:PutRolePermissionsBoundary",
+      "iam:DeleteRolePermissionsBoundary",
       "kms:CreateAlias",
       "kms:CreateGrant",
       "kms:CreateKey",
