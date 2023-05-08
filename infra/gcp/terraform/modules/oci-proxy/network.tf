@@ -14,6 +14,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# Resources for new envoy-based loadbalancer / EXTERNAL_MANAGED mode.
+################################################################################
+
+# This challenge must be created first, then the DNS challenge must be added
+# To our DNS config under dns/
+#
+# Bootstrapping this for use with Certificate Manager will allow us to decouple
+# cert provisioning from LBs, to have a valid cert pre-provisioned before
+# we point traffic at an LB
+resource "google_certificate_manager_dns_authorization" "default" {
+  name        = replace("${var.domain}-dnsauth", ".", "-")
+  description = "The default dns auth"
+  domain      = var.domain
+}
+
+
+# old resources for use with lb-http
+################################################################################
+
 resource "google_compute_global_address" "default_ipv4" {
   project      = var.project_id
   name         = var.project_id
