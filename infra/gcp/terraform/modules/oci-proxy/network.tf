@@ -27,6 +27,7 @@ resource "google_certificate_manager_dns_authorization" "default" {
   name        = replace("${var.domain}-dnsauth", ".", "-")
   description = "The default dns auth"
   domain      = var.domain
+  project     = var.project_id
 }
 
 
