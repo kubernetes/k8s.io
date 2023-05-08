@@ -35,4 +35,6 @@ module "oci-proxy" {
   // Manually created. Monitoring channels can't be created with Terraform.
   // See: https://github.com/hashicorp/terraform-provider-google/issues/1134
   notification_channel_id = "3237876589275698022"
+  // TEMPORARY: re-using existing cert for new-type LB
+  ssl_certificates = ["k8s-infra-oci-proxy-cert-771cbf9e"]
 }

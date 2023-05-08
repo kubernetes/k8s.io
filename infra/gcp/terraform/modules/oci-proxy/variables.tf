@@ -38,3 +38,9 @@ variable "notification_channel_id" {
 variable "service_account_name" {
   type = string
 }
+
+# TODO: pivot away from this to internally managing again
+
+variable "ssl_certificates" {
+  type = list(string)
+}

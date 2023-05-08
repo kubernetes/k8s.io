@@ -34,6 +34,8 @@ module "oci-proxy" {
   // Manually created. Monitoring channels can't be created with Terraform.
   // See: https://github.com/hashicorp/terraform-provider-google/issues/1134
   notification_channel_id = "15334306215710275143"
+  // TEMPORARY: re-using existing cert for new-type LB
+  ssl_certificates = ["k8s-infra-oci-proxy-prod-cert-bdd3c776"]
 }
 
 // we only sink logs to bigquery in production
