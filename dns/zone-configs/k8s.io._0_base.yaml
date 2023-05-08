@@ -262,19 +262,27 @@ monitoring.prow-canary:
 prs:
   type: CNAME
   value: redirect.k8s.io.
-# Sandbox OCI redirector service.  (@ameukam,@BenTheElder,@thockin, @eddiezane)
+# Sandbox OCI redirector service. (@ameukam,@BenTheElder,@thockin,@dims)
 registry-sandbox:
   - type: A
     value: 34.149.65.206
   - type: AAAA
     value: "2600:1901:0:4e2f::"
-# Prod OCI redirector service.  (@ameukam,@BenTheElder,@thockin, @eddiezane)
+# DNS challenge for redirector sandbox certs
+_acme-challenge.registry-sandbox:
+  - type: CNAME
+    value: 893400bf-1899-4ca4-8cc3-1599310bb39b.12.authorize.certificatemanager.goog.
+# Prod OCI redirector service.  (@ameukam,@BenTheElder,@thockin,@dims)
 # Reach to k8s-infra-oci-proxy-admins@kubernetes.io for major issues.
 registry:
   - type: A
     value: 34.107.244.51
   - type: AAAA
     value: "2600:1901:0:1013::"
+# DNS challenge for prod redirector certs
+_acme-challenge.registry:
+  - type: CNAME
+    value: bc87a114-671a-4ff9-8b32-c93230aa3136.14.authorize.certificatemanager.goog.
 # https://github.com/kubernetes-sigs/release-notes docs (@jeefy)
 relnotes:
   type: CNAME
