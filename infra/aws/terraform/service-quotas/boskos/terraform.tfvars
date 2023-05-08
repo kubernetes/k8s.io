@@ -16,3 +16,16 @@ limitations under the License.
 
 # This region is currently used by CAPA tests
 region = "us-west-2"
+
+boskos_accounts = [
+    "995654820765",
+    "252228595925",
+    "757254795865",
+    "236737742629",
+    "568640253687",
+    "325389058785",
+    "819381709038",
+    "080553712153",
+    "187041256112",
+    "502839862640",
+]

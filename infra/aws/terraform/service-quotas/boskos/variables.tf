@@ -18,3 +18,8 @@ variable "region" {
   type     = string
   nullable = false
 }
+
+variable "boskos_accounts" {
+  type     = list(string)
+  nullable = false
+}

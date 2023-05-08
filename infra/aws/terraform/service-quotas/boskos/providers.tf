@@ -23,7 +23,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-001"
 
   assume_role {
-    role_arn     = "arn:aws:iam::995654820765:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[0]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -33,7 +33,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-002"
 
   assume_role {
-    role_arn     = "arn:aws:iam::252228595925:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[1]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -43,7 +43,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-003"
 
   assume_role {
-    role_arn     = "arn:aws:iam::757254795865:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[2]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -53,7 +53,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-004"
 
   assume_role {
-    role_arn     = "arn:aws:iam::236737742629:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[3]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -63,7 +63,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-005"
 
   assume_role {
-    role_arn     = "arn:aws:iam::568640253687:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[4]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -73,7 +73,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-006"
 
   assume_role {
-    role_arn     = "arn:aws:iam::325389058785:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[5]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -83,7 +83,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-007"
 
   assume_role {
-    role_arn     = "arn:aws:iam::819381709038:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[6]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -93,7 +93,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-008"
 
   assume_role {
-    role_arn     = "arn:aws:iam::080553712153:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[7]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -103,7 +103,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-009"
 
   assume_role {
-    role_arn     = "arn:aws:iam::187041256112:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[8]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
@@ -113,7 +113,7 @@ provider "aws" {
   alias  = "eks-e2e-boskos-010"
 
   assume_role {
-    role_arn     = "arn:aws:iam::502839862640:role/Provisioner"
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[9]}:role/Provisioner"
     session_name = "service-quotas-boskos-tf"
   }
 }
