@@ -21,6 +21,6 @@ data:
   config: |
     resources:
     - names:
-        - k8s-aws-boskos-01
+        - eks-e2e-boskos-005
       state: dirty
       type: aws-account
