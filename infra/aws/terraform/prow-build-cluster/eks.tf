@@ -44,6 +44,8 @@ module "eks" {
     },
   ]
 
+  iam_role_permissions_boundary = "arn:aws:iam::${local.account_id}:policy/ProvisionerPermissionBoundary"
+
   # Allow access to the KMS key used for secrets encryption to the root account.
   kms_key_administrators = [
     local.root_account_arn
