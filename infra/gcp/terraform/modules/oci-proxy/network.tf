@@ -17,6 +17,11 @@ limitations under the License.
 # Resources for new envoy-based loadbalancer / EXTERNAL_MANAGED mode.
 ################################################################################
 
+locals {
+  // like var.domain, but usable in name keys
+  domain_id = replace("${var.domain}", ".", "-")
+}
+
 # This challenge must be created first, then the DNS challenge must be added
 # To our DNS config under dns/
 #
@@ -24,10 +29,33 @@ limitations under the License.
 # cert provisioning from LBs, to have a valid cert pre-provisioned before
 # we point traffic at an LB
 resource "google_certificate_manager_dns_authorization" "default" {
-  name        = replace("${var.domain}-dnsauth", ".", "-")
+  name        = "${local.domain_id}-dnsauth"
   description = "The default dns auth"
   domain      = var.domain
   project     = var.project_id
+}
+
+# Using the challenge, provision a cert for the domain
+resource "google_certificate_manager_certificate" "default" {
+  name    = "${local.domain_id}-20230508"
+  project = var.project_id
+  managed {
+    domains            = [var.domain]
+    dns_authorizations = [google_certificate_manager_dns_authorization.default.id]
+  }
+}
+
+# Map certificate to domain for use with GCLB
+resource "google_certificate_manager_certificate_map" "default" {
+  project = var.project_id
+  name    = local.domain_id
+}
+resource "google_certificate_manager_certificate_map_entry" "default" {
+  project      = var.project_id
+  name         = "${local.domain_id}-default"
+  map          = google_certificate_manager_certificate_map.default.name
+  certificates = [google_certificate_manager_certificate.default.id]
+  matcher      = "PRIMARY"
 }
 
 
