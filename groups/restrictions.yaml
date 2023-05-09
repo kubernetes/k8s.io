@@ -101,6 +101,8 @@ restrictions:
       - "^github@kubernetes.io$"
       - "^lwkd@kubernetes.io$"
       - "^moderators@kubernetes.io$"
+      - "^sig-contribex@kubernetes.io$"
+      - "^sig-contribex-leads@kubernetes.io$"
       - "^summit-team@kubernetes.io$"
       - "^k8s-infra-rbac-elekto@kubernetes.io$"
       - "^k8s-infra-rbac-slack-infra@kubernetes.io$"
