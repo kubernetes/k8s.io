@@ -35,3 +35,8 @@ data "aws_iam_user" "eks_cluster_admins" {
   count     = length(var.eks_cluster_admins)
   user_name = var.eks_cluster_admins[count.index]
 }
+
+data "aws_iam_policy" "provisioner_permission_boundary" {
+  name = "ProvisionerPermissionBoundary"
+}
+

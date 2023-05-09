@@ -35,7 +35,7 @@ resource "aws_iam_role" "eks_viewer" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "eks_plan" {
+resource "aws_iam_role_policy_attachment" "viewer_eks_plan" {
   role       = aws_iam_role.eks_viewer.name
   policy_arn = aws_iam_policy.eks_plan.arn
 }

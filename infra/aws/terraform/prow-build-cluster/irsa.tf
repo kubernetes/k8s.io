@@ -27,7 +27,7 @@ module "vpc_cni_irsa" {
   attach_vpc_cni_policy         = true
   vpc_cni_enable_ipv4           = true
   vpc_cni_enable_ipv6           = true
-  role_permissions_boundary_arn = "arn:aws:iam::${local.account_id}:policy/ProvisionerPermissionBoundary"
+  role_permissions_boundary_arn = data.aws_iam_policy.provisioner_permission_boundary.arn
 
   oidc_providers = {
     main = {
@@ -46,7 +46,7 @@ module "ebs_csi_irsa" {
 
   role_name_prefix              = "EBS-CSI-IRSA"
   attach_ebs_csi_policy         = true
-  role_permissions_boundary_arn = "arn:aws:iam::${local.account_id}:policy/ProvisionerPermissionBoundary"
+  role_permissions_boundary_arn = data.aws_iam_policy.provisioner_permission_boundary.arn
 
   oidc_providers = {
     main = {
@@ -65,7 +65,7 @@ module "aws_load_balancer_controller_irsa" {
 
   role_name_prefix                       = "LBCONTROLLER-IRSA"
   attach_load_balancer_controller_policy = true
-  role_permissions_boundary_arn = "arn:aws:iam::${local.account_id}:policy/ProvisionerPermissionBoundary"
+  role_permissions_boundary_arn = data.aws_iam_policy.provisioner_permission_boundary.arn
 
   oidc_providers = {
     main = {
@@ -85,7 +85,7 @@ module "cluster_autoscaler_irsa" {
   role_name_prefix                 = "AUTOSCALER-IRSA"
   attach_cluster_autoscaler_policy = true
   cluster_autoscaler_cluster_ids   = [module.eks.cluster_name]
-  role_permissions_boundary_arn    = "arn:aws:iam::${local.account_id}:policy/ProvisionerPermissionBoundary"
+  role_permissions_boundary_arn = data.aws_iam_policy.provisioner_permission_boundary.arn
 
   oidc_providers = {
     main = {
@@ -107,7 +107,7 @@ module "cluster_autoscaler_irsa" {
 #   role_policy_arns = {
 #     secrets_manager = aws_iam_policy.secretsmanager_read.arn,
 #   }
-#   role_permissions_boundary_arn = "arn:aws:iam::${local.account_id}:policy/ProvisionerPermissionBoundary"
+#   role_permissions_boundary_arn = data.aws_iam_policy.provisioner_permission_boundary.arn
 #
 #   oidc_providers = {
 #     main = {
