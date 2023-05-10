@@ -30,6 +30,7 @@ data "aws_iam_policy_document" "provisioner_permission_boundary_doc" {
     actions = [
       "ec2:*",
       "eks:*",
+      "ecr:*",
       "iam:*",
       "kms:*",
       "logs:*",

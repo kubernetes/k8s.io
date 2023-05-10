@@ -44,6 +44,8 @@ module "eks" {
     },
   ]
 
+  iam_role_permissions_boundary = data.aws_iam_policy.provisioner_permission_boundary.arn
+
   # Allow access to the KMS key used for secrets encryption to the root account.
   kms_key_administrators = [
     local.root_account_arn
@@ -103,6 +105,8 @@ module "eks" {
       min_size     = var.node_min_size
       max_size     = var.node_max_size
       desired_size = var.node_desired_size
+
+      iam_role_permissions_boundary = data.aws_iam_policy.provisioner_permission_boundary.arn
 
       ami_id                     = var.node_ami
       enable_bootstrap_user_data = true

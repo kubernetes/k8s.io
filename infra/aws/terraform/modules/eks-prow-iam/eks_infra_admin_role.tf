@@ -35,12 +35,18 @@ resource "aws_iam_role" "eks_infra_admin" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "eks_apply" {
+resource "aws_iam_role_policy_attachment" "admin_eks_plan" {
+  role       = aws_iam_role.eks_infra_admin.name
+  policy_arn = aws_iam_policy.eks_plan.arn
+}
+
+resource "aws_iam_role_policy_attachment" "admin_eks_apply" {
   role       = aws_iam_role.eks_infra_admin.name
   policy_arn = aws_iam_policy.eks_apply.arn
 }
 
-resource "aws_iam_role_policy_attachment" "eks_destroy" {
+resource "aws_iam_role_policy_attachment" "admin_eks_destroy" {
   role       = aws_iam_role.eks_infra_admin.name
   policy_arn = aws_iam_policy.eks_destroy.arn
 }
+
