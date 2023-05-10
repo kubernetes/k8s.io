@@ -65,7 +65,7 @@ module "aws_load_balancer_controller_irsa" {
 
   role_name_prefix                       = "LBCONTROLLER-IRSA"
   attach_load_balancer_controller_policy = true
-  role_permissions_boundary_arn = data.aws_iam_policy.provisioner_permission_boundary.arn
+  role_permissions_boundary_arn          = data.aws_iam_policy.provisioner_permission_boundary.arn
 
   oidc_providers = {
     main = {
@@ -85,7 +85,7 @@ module "cluster_autoscaler_irsa" {
   role_name_prefix                 = "AUTOSCALER-IRSA"
   attach_cluster_autoscaler_policy = true
   cluster_autoscaler_cluster_ids   = [module.eks.cluster_name]
-  role_permissions_boundary_arn = data.aws_iam_policy.provisioner_permission_boundary.arn
+  role_permissions_boundary_arn    = data.aws_iam_policy.provisioner_permission_boundary.arn
 
   oidc_providers = {
     main = {

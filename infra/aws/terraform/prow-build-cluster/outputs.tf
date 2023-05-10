@@ -18,3 +18,13 @@ output "cluster_endpoint" {
   description = "Endpoint for EKS control plane"
   value       = module.eks.cluster_endpoint
 }
+
+output "eks_cluster_admin_role_arn" {
+  description = "ARN of EKSClusterAdmin role"
+  value       = aws_iam_role.eks_cluster_admin.arn
+}
+
+output "eks_cluster_viewer_role_arn" {
+  description = "ARN of EKSClusterViewer role"
+  value       = aws_iam_role.eks_cluster_viewer.arn
+}
