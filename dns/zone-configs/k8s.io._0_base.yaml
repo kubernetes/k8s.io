@@ -276,9 +276,9 @@ _acme-challenge.registry-sandbox:
 # Reach to k8s-infra-oci-proxy-admins@kubernetes.io for major issues.
 registry:
   - type: A
-    value: 34.107.244.51
+    value: 34.96.108.209
   - type: AAAA
-    value: "2600:1901:0:1013::"
+    value: "2600:1901:0:bbc4::"
 # DNS challenge for prod redirector certs
 _acme-challenge.registry:
   - type: CNAME
