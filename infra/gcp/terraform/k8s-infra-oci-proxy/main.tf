@@ -30,7 +30,7 @@ module "oci-proxy" {
   project_id           = local.project_id
   service_account_name = "oci-proxy-sandbox"
   // we increase this in staging, but not in production
-  // we already get a lot of info from build-in cloud run logs
+  // we already get a lot of info from built-in cloud run logs
   verbosity = "3"
   // Manually created. Monitoring channels can't be created with Terraform.
   // See: https://github.com/hashicorp/terraform-provider-google/issues/1134
