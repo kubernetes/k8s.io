@@ -3,12 +3,14 @@
 approvers:
 - sig-contributor-experience-leads
 reviewers:
-- alisondy
+- MadhavJivrajani
+- Priyankasaggu11929
 - cblecker
-- idvoretskyi
-- jdumars
+- jberkus
+- kaslin
 - mrbobbytables
 - nikhita
+- palnabarun
 emeritus_approvers:
 - parispittman
 
