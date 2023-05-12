@@ -20,7 +20,7 @@ resource "aws_iam_role" "eks_prow_admin" {
 
   name                 = "Prow-EKS-Admin"
   max_session_duration = 43200
-  permissions_boundary = data.aws_iam_policy.provisioner_permission_boundary.arn
+  permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -55,7 +55,7 @@ resource "aws_iam_role" "eks_prow_admin" {
 resource "aws_iam_role" "eks_cluster_viewer" {
   name                 = "EKSClusterViewer"
   description          = "IAM role used to delegate access to ${var.cluster_name}"
-  permissions_boundary = data.aws_iam_policy.provisioner_permission_boundary.arn
+  permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -75,7 +75,7 @@ resource "aws_iam_role" "eks_cluster_viewer" {
 resource "aws_iam_role" "eks_cluster_admin" {
   name                 = "EKSClusterAdmin"
   description          = "IAM role used to delegate access to ${var.cluster_name}"
-  permissions_boundary = data.aws_iam_policy.provisioner_permission_boundary.arn
+  permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
