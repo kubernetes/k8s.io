@@ -15,8 +15,9 @@ limitations under the License.
 */
 
 resource "aws_iam_role" "eks_infra_admin" {
-  name        = "EKSInfraAdmin"
-  description = "IAM role used for planning/applying/destroying infrastructure."
+  name                 = "EKSInfraAdmin"
+  description          = "IAM role used for planning/applying/destroying infrastructure."
+  permissions_boundary = aws_iam_policy.eks_infra_admin_permission_boundary.arn
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

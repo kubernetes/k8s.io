@@ -14,20 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "aws_iam_policy" "provisioner_permission_boundary" {
-  name        = "ProvisionerPermissionBoundary"
+resource "aws_iam_policy" "eks_resources_permission_boundary" {
+  name        = "EKSResourcesPermissionBoundary"
   description = "Permission boundary for terraform operator roles."
-  policy      = data.aws_iam_policy_document.provisioner_permission_boundary_doc.json
+  policy      = data.aws_iam_policy_document.eks_resources_permission_boundary_doc.json
   tags        = var.tags
 }
 
-data "aws_iam_policy_document" "provisioner_permission_boundary_doc" {
+data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
   statement {
-    sid = "ProvisionerPermissionBoundary"
+    sid = "EKSResourcesPermissionBoundary"
 
     effect = "Allow"
 
     actions = [
+      "autoscaling:*",
       "ec2:*",
       "eks:*",
       "ecr:*",
@@ -54,7 +55,7 @@ data "aws_iam_policy_document" "provisioner_permission_boundary_doc" {
     ]
 
     resources = [
-      "arn:aws:iam::${local.account_id}:policy/TerraformPermissionBoundary"
+      "arn:aws:iam::${local.account_id}:policy/EKSResourcesPermissionBoundary"
     ]
   }
 
@@ -68,21 +69,5 @@ data "aws_iam_policy_document" "provisioner_permission_boundary_doc" {
     ]
 
     resources = ["*"]
-  }
-
-  # An example of protecting a single S3 bucket.
-  statement {
-    sid = "DenyProdS3BucketAccess"
-
-    effect = "Deny"
-
-    actions = [
-      "s3:*"
-    ]
-
-    resources = [
-      "arn:aws:s3:::prod",
-      "arn:aws:s3:::prod/*"
-    ]
   }
 }
