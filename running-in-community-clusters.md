@@ -110,7 +110,7 @@ PR against [the DNS config](/dns/zone-configs/) to add or update your name.
 ### TLS
 
 If you are exposing a public IP, you *must* do so securely.  For HTTP, this
-means TLS.  We run [cert-manager](/cert-manager) in the cluster(s), so you can
+means TLS.  We run [cert-manager](/apps/cert-manager) in the cluster(s), so you can
 simply create a `Certificate` object.  See the examples in this repo.
 
 ### Secrets
