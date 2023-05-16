@@ -22,6 +22,7 @@ resource "aws_iam_policy" "provisioner_permission_boundary" {
   tags        = var.tags
 }
 
+// Imposes setting EKSResourcesPermissionBoundary on all IAM roles provisioned with its usage.
 resource "aws_iam_policy" "eks_infra_admin_permission_boundary" {
   name        = "EKSInfraAdminPermissionBoundary"
   description = "Permission boundary for EKSInfra* roles."

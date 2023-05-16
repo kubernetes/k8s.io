@@ -14,9 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Bondary imposed on all IAM roles provisioned by EKSInfraAdmin role.
 resource "aws_iam_policy" "eks_resources_permission_boundary" {
   name        = "EKSResourcesPermissionBoundary"
-  description = "Permission boundary for terraform operator roles."
+  description = "Permission boundary for roles created by EKSInfraAdmin."
   policy      = data.aws_iam_policy_document.eks_resources_permission_boundary_doc.json
   tags        = var.tags
 }

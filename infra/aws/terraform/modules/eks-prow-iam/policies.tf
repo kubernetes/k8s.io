@@ -132,6 +132,7 @@ data "aws_iam_policy_document" "eks_apply" {
       "iam:TagPolicy",
       "iam:TagRole",
       "iam:UpdateOpenIDConnectProviderThumbprint",
+      "iam:UpdateAssumeRolePolicy",
       "iam:PutRolePermissionsBoundary",
       "kms:CreateAlias",
       "kms:CreateGrant",

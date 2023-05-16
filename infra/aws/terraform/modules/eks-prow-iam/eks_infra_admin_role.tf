@@ -50,4 +50,3 @@ resource "aws_iam_role_policy_attachment" "admin_eks_destroy" {
   role       = aws_iam_role.eks_infra_admin.name
   policy_arn = aws_iam_policy.eks_destroy.arn
 }
-
