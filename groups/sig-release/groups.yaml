@@ -314,7 +314,7 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
-      - nng.grace@gmial.com # 1.28 Release Team Lead
+      - nng.grace@gmail.com # 1.28 Release Team Lead
       - hebaelayoty@gmail.com # 1.28 Lead Shadow
       - leonard.pahlke@googlemail.com # 1.28 Emeritus Advisor
       - marosset@microsoft.com # 1.28 Lead Shadow
