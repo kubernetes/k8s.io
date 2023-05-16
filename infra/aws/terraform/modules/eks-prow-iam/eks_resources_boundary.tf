@@ -56,7 +56,8 @@ data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
     ]
 
     resources = [
-      "arn:aws:iam::${local.account_id}:policy/EKSResourcesPermissionBoundary"
+      "arn:aws:iam::${local.account_id}:policy/EKSResourcesPermissionBoundary",
+      "arn:aws:iam::${local.account_id}:policy/EKSInfraAdminPermissionBoundary"
     ]
   }
 

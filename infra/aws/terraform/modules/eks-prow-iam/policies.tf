@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 resource "aws_iam_policy" "eks_plan" {
+  name   = "EKSClusterPlanner"
   path   = "/"
   policy = data.aws_iam_policy_document.eks_plan.json
   tags   = var.tags
