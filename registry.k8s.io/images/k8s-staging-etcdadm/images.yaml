@@ -183,3 +183,18 @@
 - name: etcd-manager-slim
   dmap:
     "sha256:8727adc059334e0e3329dbccce116a734da4a090da5e86c8cddccaf333caa666": ["v3.0.20230201"]
+
+# 3.0.20230516
+- name: etcd-backup
+  dmap:
+    "sha256:cd54f789e131b3085033532c24832e75220b89adb6c84a9735839c086edc2845": ["v3.0.20230516"]
+- name: etcd-dump
+  dmap:
+    "sha256:5f72954994ace739478af5a6ed0e398e3c7b7774ffbd483152d95d98bf45ff73": ["v3.0.20230516"]
+- name: etcd-manager
+  dmap:
+    "sha256:5b87f6daac48920412fed2c362b3f04eef3e5282dbddc74ab60ba022e8556739": ["v3.0.20230516"]
+- name: etcd-manager-slim
+  dmap:
+    "sha256:cc56297363c7187b175d3206daede11bb4e04138f219b73d76f4f2082213321a": ["v3.0.20230516"]
+
