@@ -18,14 +18,14 @@ aws_account_id = "468814281478"
 
 eks_cluster_admins = [
   "pprzekwa",
-  "xmudrii",
-  "wozniakjan"
+  "wozniakjan",
+  "xmudrii"
 ]
 
 eks_cluster_viewers = [
   "pprzekwa",
-  "xmudrii",
-  "wozniakjan"
+  "wozniakjan",
+  "xmudrii"
 ]
 
 cluster_name               = "prow-build-cluster"
