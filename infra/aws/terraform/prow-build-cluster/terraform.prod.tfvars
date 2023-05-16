@@ -18,11 +18,13 @@ aws_account_id = "468814281478"
 
 eks_cluster_admins = [
   "pprzekwa",
+  "wozniakjan",
   "xmudrii"
 ]
 
 eks_cluster_viewers = [
   "pprzekwa",
+  "wozniakjan",
   "xmudrii"
 ]
 
