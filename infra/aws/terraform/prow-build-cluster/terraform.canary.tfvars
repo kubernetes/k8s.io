@@ -18,12 +18,14 @@ aws_account_id = "054318140392"
 
 eks_cluster_viewers = [
   "pkprzekwas",
-  "xmudrii"
+  "xmudrii",
+  "wozniakjan"
 ]
 
 eks_cluster_admins = [
   "pkprzekwas",
-  "xmudrii"
+  "xmudrii",
+  "wozniakjan"
 ]
 
 cluster_name               = "prow-canary-cluster"
