@@ -17,6 +17,7 @@ limitations under the License.
 // Bondary imposed on all IAM roles provisioned by EKSInfraAdmin role.
 resource "aws_iam_policy" "eks_resources_permission_boundary" {
   name        = "EKSResourcesPermissionBoundary"
+  path        = "/boundary/"
   description = "Permission boundary for roles created by EKSInfraAdmin."
   policy      = data.aws_iam_policy_document.eks_resources_permission_boundary_doc.json
   tags        = var.tags
@@ -24,7 +25,7 @@ resource "aws_iam_policy" "eks_resources_permission_boundary" {
 
 data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
   statement {
-    sid = "EKSResourcesPermissionBoundary"
+    sid = "AllowMany"
 
     effect = "Allow"
 
@@ -56,8 +57,7 @@ data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
     ]
 
     resources = [
-      "arn:aws:iam::${local.account_id}:policy/EKSResourcesPermissionBoundary",
-      "arn:aws:iam::${local.account_id}:policy/EKSInfraAdminPermissionBoundary"
+      "arn:aws:iam::${local.account_id}:policy/boundary/*"
     ]
   }
 

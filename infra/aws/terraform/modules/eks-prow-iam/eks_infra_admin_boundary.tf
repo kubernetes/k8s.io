@@ -25,6 +25,7 @@ resource "aws_iam_policy" "provisioner_permission_boundary" {
 // Imposes setting EKSResourcesPermissionBoundary on all IAM roles provisioned with its usage.
 resource "aws_iam_policy" "eks_infra_admin_permission_boundary" {
   name        = "EKSInfraAdminPermissionBoundary"
+  path        = "/boundary/"
   description = "Permission boundary for EKSInfra* roles."
   policy      = data.aws_iam_policy_document.eks_infra_admin_permission_boundary_doc.json
   tags        = var.tags
@@ -32,7 +33,7 @@ resource "aws_iam_policy" "eks_infra_admin_permission_boundary" {
 
 data "aws_iam_policy_document" "eks_infra_admin_permission_boundary_doc" {
   statement {
-    sid = "EKSInfraAdminPermissionBoundary"
+    sid = "EKSInfraAdminInterimAllowAll"
 
     effect = "Allow"
 
@@ -40,7 +41,7 @@ data "aws_iam_policy_document" "eks_infra_admin_permission_boundary_doc" {
       "*"
     ]
 
-    # At some point we'll start narrowing above with:
+    # At some point we'll start narrowing above down with:
 
     # actions = [
     #   "ec2:*",
@@ -56,8 +57,9 @@ data "aws_iam_policy_document" "eks_infra_admin_permission_boundary_doc" {
     resources = ["*"]
   }
 
+  // This statement effectively enforces EKSResourcesPermissionBoundary on IAM roles created with EKSInfraAdmin role.
   statement {
-    sid       = "CreateOrChangeOnlyWithBoundary"
+    sid       = "DenyCreateOrChangeWithoutEKSResourceBoundary"
     effect    = "Deny"
     resources = ["*"]
 
@@ -91,7 +93,7 @@ data "aws_iam_policy_document" "eks_infra_admin_permission_boundary_doc" {
     ]
 
     resources = [
-      "arn:aws:iam::${local.account_id}:policy/EKSInfraAdminPermissionBoundary"
+      "arn:aws:iam::${local.account_id}:policy/boundary/EKSInfraAdminPermissionBoundary"
     ]
   }
 

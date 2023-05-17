@@ -23,7 +23,7 @@ resource "aws_iam_policy" "eks_plan" {
 
 data "aws_iam_policy_document" "eks_plan" {
   statement {
-    sid       = "EKSRead"
+    sid       = "AllowReadEKSSupportingInfra"
     effect    = "Allow"
     resources = ["*"]
 
@@ -87,7 +87,7 @@ resource "aws_iam_policy" "eks_apply" {
 # - https://github.com/kubernetes/k8s.io/pull/5113#discussion_r1164206798
 data "aws_iam_policy_document" "eks_apply" {
   statement {
-    sid       = "EKSCreateOrUpadate"
+    sid       = "AllowEKSCreateOrUpadate"
     effect    = "Allow"
     resources = ["*"]
 
@@ -159,7 +159,7 @@ resource "aws_iam_policy" "eks_destroy" {
 
 data "aws_iam_policy_document" "eks_destroy" {
   statement {
-    sid       = "EKSDelete"
+    sid       = "AllowEKSDelete"
     effect    = "Allow"
     resources = ["*"]
 
