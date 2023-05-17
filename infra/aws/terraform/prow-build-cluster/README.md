@@ -219,6 +219,10 @@ streamlining this, but until then, you have to deploy those resources manually.
     ```bash
     kubectl apply -f ./resources/boskos
     ```
+- Deploy node-problem-detector
+    ```bash
+    kubectl apply -f ./node-problem-detector
+    ```
 - [ONLY FOR PRODUCTION] Deploy the External Secrets Operator (ESO)
     ```bash
     kubectl apply -f ./resources/external-secrets
