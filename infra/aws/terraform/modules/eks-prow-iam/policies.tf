@@ -68,9 +68,19 @@ data "aws_iam_policy_document" "eks_plan" {
       "logs:DescribeLogGroups",
       "logs:ListTagsLogGroup",
       "s3:GetObject",
-      "s3:ListBucket",
+      "s3:ListBucket"
+    ]
+  }
+
+  statement {
+    sid       = "AllowAssumeRoles"
+    effect    = "Allow"
+    resources = ["*"]
+
+    actions = [
       "sts:AssumeRole"
     ]
+
   }
 }
 
