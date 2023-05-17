@@ -18,6 +18,9 @@ provider "aws" {
   region = var.region
 }
 
+# Provider refering to eks-e2e-boskos-001 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-001"
@@ -28,6 +31,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-002 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-002"
@@ -38,6 +44,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-003 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-003"
@@ -48,6 +57,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-004 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-004"
@@ -58,6 +70,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-005 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-005"
@@ -68,6 +83,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-006 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-006"
@@ -78,6 +96,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-007 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-007"
@@ -88,6 +109,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-008 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-008"
@@ -98,6 +122,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-009 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-009"
@@ -108,6 +135,9 @@ provider "aws" {
   }
 }
 
+# Provider refering to eks-e2e-boskos-010 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
 provider "aws" {
   region = var.region
   alias  = "eks-e2e-boskos-010"

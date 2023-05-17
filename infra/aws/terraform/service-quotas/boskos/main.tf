@@ -18,6 +18,7 @@ terraform {
   required_version = "~> 1.3.0"
 
   backend "s3" {
+    # This S3 bucket is created in eks-e2e-boskos-001 AWS account
     bucket = "eks-e2e-boskos-tfstate"
     key    = "service-quotas/terraform.tfstate"
     region = "us-west-2"
@@ -26,11 +27,12 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 4.47"
+      version = "~> 4.47"
     }
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-001 account.
 module "capa_quotas_001" {
   source = "../modules/capa"
 
@@ -39,6 +41,7 @@ module "capa_quotas_001" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-002 account.
 module "capa_quotas_002" {
   source = "../modules/capa"
 
@@ -47,6 +50,7 @@ module "capa_quotas_002" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-003 account.
 module "capa_quotas_003" {
   source = "../modules/capa"
 
@@ -55,6 +59,7 @@ module "capa_quotas_003" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-004 account.
 module "capa_quotas_004" {
   source = "../modules/capa"
 
@@ -63,6 +68,7 @@ module "capa_quotas_004" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-005 account.
 module "capa_quotas_005" {
   source = "../modules/capa"
 
@@ -71,6 +77,7 @@ module "capa_quotas_005" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-006 account.
 module "capa_quotas_006" {
   source = "../modules/capa"
 
@@ -79,6 +86,7 @@ module "capa_quotas_006" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-007 account.
 module "capa_quotas_007" {
   source = "../modules/capa"
 
@@ -87,6 +95,7 @@ module "capa_quotas_007" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-008 account.
 module "capa_quotas_008" {
   source = "../modules/capa"
 
@@ -95,6 +104,7 @@ module "capa_quotas_008" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-009 account.
 module "capa_quotas_009" {
   source = "../modules/capa"
 
@@ -103,6 +113,7 @@ module "capa_quotas_009" {
   }
 }
 
+# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-010 account.
 module "capa_quotas_010" {
   source = "../modules/capa"
 
