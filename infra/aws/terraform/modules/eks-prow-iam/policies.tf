@@ -15,10 +15,10 @@ limitations under the License.
 */
 
 resource "aws_iam_policy" "eks_plan" {
-  name   = "EKSClusterPlanner"
-  path   = "/"
-  policy = data.aws_iam_policy_document.eks_plan.json
-  tags   = var.tags
+  name_prefix = "EKSClusterPlanner"
+  path        = "/"
+  policy      = data.aws_iam_policy_document.eks_plan.json
+  tags        = var.tags
 }
 
 data "aws_iam_policy_document" "eks_plan" {
@@ -75,10 +75,10 @@ data "aws_iam_policy_document" "eks_plan" {
 }
 
 resource "aws_iam_policy" "eks_apply" {
-  name   = "EKSClusterApplier"
-  path   = "/"
-  policy = data.aws_iam_policy_document.eks_apply.json
-  tags   = var.tags
+  name_prefix = "EKSClusterApplier"
+  path        = "/"
+  policy      = data.aws_iam_policy_document.eks_apply.json
+  tags        = var.tags
 }
 
 # WARNING/TODO: This policy can allow escalating priviliges and removing deny rules!!!
@@ -151,10 +151,10 @@ data "aws_iam_policy_document" "eks_apply" {
 }
 
 resource "aws_iam_policy" "eks_destroy" {
-  name   = "EKSClusterDestroyer"
-  path   = "/"
-  policy = data.aws_iam_policy_document.eks_destroy.json
-  tags   = var.tags
+  name_prefix = "EKSClusterDestroyer"
+  path        = "/"
+  policy      = data.aws_iam_policy_document.eks_destroy.json
+  tags        = var.tags
 }
 
 data "aws_iam_policy_document" "eks_destroy" {
