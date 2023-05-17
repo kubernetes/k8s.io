@@ -14,30 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-output "events_rules_adjustable" {
-  value = aws_servicequotas_service_quota.events_rules.adjustable
-}
-
-output "vpc_max_vpcs_adjustable" {
-  value = aws_servicequotas_service_quota.vpc_max_vpcs.adjustable
-}
-
-output "vpc_max_nat_gateways_adjustable" {
-  value = aws_servicequotas_service_quota.vpc_max_nat_gateways.adjustable
-}
-
-output "vpc_max_internet_gateways_adjustable" {
-  value = aws_servicequotas_service_quota.vpc_max_internet_gateways.adjustable
-}
-
-output "ec2_max_elastic_ips_adjustable" {
-  value = aws_servicequotas_service_quota.ec2_max_elastic_ips.adjustable
-}
-
-output "ec2_max_vcpus_adjustable" {
-  value = aws_servicequotas_service_quota.ec2_max_vcpus.adjustable
-}
-
-output "ec2_max_vcpus_g_vt_adjustable" {
-  value = aws_servicequotas_service_quota.ec2_max_vcpus_g_vt.adjustable
+output "quotas_adjustable" {
+  value       = { for key, quota in aws_servicequotas_service_quota.quotas : key => quota.adjustable }
+  description = "List of adjustable attributes for each quota"
 }
