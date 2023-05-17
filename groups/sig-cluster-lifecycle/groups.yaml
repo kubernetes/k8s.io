@@ -78,6 +78,7 @@ groups:
     owners:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
+      - paco.xu@daocloud.io
 
   - email-id: sig-cluster-lifecycle-leads@kubernetes.io
     name: sig-cluster-lifecycle-leads
