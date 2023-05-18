@@ -47,11 +47,11 @@ the Stack to ensure that aws-janitor ignores these resources.**
 
 There are two CloudFormation Stacks for `eks-e2e-boskos` accounts:
 
-- `eks-e2e-boskos-001/cloudformation.yaml` - creates S3 bucket for Terraform
+- `eks-e2e-boskos-001/eks-e2e-boskos-001.yaml` - creates S3 bucket for Terraform
   state and `provisioner` IAM user, this stack should be applied only to
   `eks-e2e-boskos-001` account (the first Boskos account)
   - Static credentials needs to be generated manually after the stack is applied
-- `cloudformation.yaml` - creates IAM role and policy, this stack should
+- `provisioner-iam-role.yaml` - creates IAM role and policy, this stack should
   be applied to all Boskos accounts
   - This stack takes account ID of the first Boskos account
     (`eks-e2e-boskos-001`) as a required parameter

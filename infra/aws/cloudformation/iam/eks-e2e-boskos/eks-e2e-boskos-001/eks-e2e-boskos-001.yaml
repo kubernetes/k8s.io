@@ -32,7 +32,7 @@ Resources:
                   - 's3:PutObject'
                   - 's3:PutObjectAcl'
                 Effect: Allow
-                Resource: !GetAtt TFStateBucket.Arn
+                Resource: !Sub 'arn:aws:s3:::${TFStateBucket}/*'
       Tags:
         - Key: Boskos
           Value: Ignore
