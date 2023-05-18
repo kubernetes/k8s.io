@@ -81,7 +81,7 @@ data "aws_iam_policy_document" "eks_infra_admin_permission_boundary_doc" {
   }
 
   statement {
-    sid = "DenyEditOwnBoundary"
+    sid = "DenyEditBoundies"
 
     effect = "Deny"
 
@@ -93,7 +93,7 @@ data "aws_iam_policy_document" "eks_infra_admin_permission_boundary_doc" {
     ]
 
     resources = [
-      "arn:aws:iam::${local.account_id}:policy/boundary/EKSInfraAdminPermissionBoundary"
+      "arn:aws:iam::${local.account_id}:policy/boundary/*"
     ]
   }
 

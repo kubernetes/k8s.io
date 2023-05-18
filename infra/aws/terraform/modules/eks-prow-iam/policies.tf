@@ -71,17 +71,6 @@ data "aws_iam_policy_document" "eks_plan" {
       "s3:ListBucket"
     ]
   }
-
-  statement {
-    sid       = "AllowAssumeRoles"
-    effect    = "Allow"
-    resources = ["*"]
-
-    actions = [
-      "sts:AssumeRole"
-    ]
-
-  }
 }
 
 resource "aws_iam_policy" "eks_apply" {
