@@ -26,11 +26,6 @@ data:
                 "type": "KernelDeadlock",
                 "reason": "KernelHasNoDeadlock",
                 "message": "kernel has no deadlock"
-            },
-            {
-                "type": "ReadonlyFilesystem",
-                "reason": "FilesystemIsNotReadOnly",
-                "message": "Filesystem is not read-only"
             }
         ],
         "rules": [
@@ -63,37 +58,35 @@ data:
                 "type": "temporary",
                 "reason": "MemoryReadError",
                 "pattern": "CE memory read error .*"
-            },
-            {
-                "type": "permanent",
-                "condition": "KernelDeadlock",
-                "reason": "DockerHung",
-                "pattern": "task docker:\\w+ blocked for more than \\w+ seconds\\."
-            },
-            {
-                "type": "permanent",
-                "condition": "ReadonlyFilesystem",
-                "reason": "FilesystemIsReadOnly",
-                "pattern": "Remounting filesystem read-only"
             }
         ]
     }
-  docker-monitor.json: |
+  containerd-monitor.json: |
     {
         "plugin": "journald",
         "pluginConfig": {
-            "source": "dockerd"
+            "source": "containerd"
         },
         "logPath": "/var/log/journal",
         "lookback": "5m",
         "bufferSize": 10,
-        "source": "docker-monitor",
+        "source": "containerd-monitor",
         "conditions": [],
         "rules": [
             {
                 "type": "temporary",
-                "reason": "CorruptDockerImage",
-                "pattern": "Error trying v2 registry: failed to register layer: rename /var/lib/docker/image/(.+) /var/lib/docker/image/(.+): directory not empty.*"
+                "reason": "ContainerdDaemonError",
+                "pattern": ".*failed to start daemon.*"
+            },
+            {
+                "type": "temporary",
+                "reason": "ContainerdNetworkError",
+                "pattern": ".*failed to dial.*"
+            },
+            {
+                "type": "temporary",
+                "reason": "ContainerdCleanupError",
+                "pattern": ".*failed to delete container.*"
             }
         ]
     }
