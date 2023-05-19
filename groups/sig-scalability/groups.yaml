@@ -64,7 +64,6 @@ groups:
       - jprzychodzen@google.com
       - jupblb@google.com
       - maciejborsz@google.com
-      - marcelzieba@google.com
       - michalwozniak@google.com
       - pbanaszewski@google.com
       - zawodny@google.com
@@ -74,6 +73,7 @@ groups:
       - mmatejczyk@google.com
       - wojtekt@google.com
       - dordel@google.com
+      - marcel.zieba@isovalent.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
