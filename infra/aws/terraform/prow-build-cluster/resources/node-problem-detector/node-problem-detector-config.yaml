@@ -1,0 +1,96 @@
+# Copyright 2023 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: v1
+data:
+  kernel-monitor.json: |
+    {
+        "plugin": "kmsg",
+        "logPath": "/dev/kmsg",
+        "lookback": "5m",
+        "bufferSize": 10,
+        "source": "kernel-monitor",
+        "conditions": [
+            {
+                "type": "KernelDeadlock",
+                "reason": "KernelHasNoDeadlock",
+                "message": "kernel has no deadlock"
+            }
+        ],
+        "rules": [
+            {
+                "type": "temporary",
+                "reason": "OOMKilling",
+                "pattern": "Kill process \\d+ (.+) score \\d+ or sacrifice child\\nKilled process \\d+ (.+) total-vm:\\d+kB, anon-rss:\\d+kB, file-rss:\\d+kB.*"
+            },
+            {
+                "type": "temporary",
+                "reason": "TaskHung",
+                "pattern": "task \\S+:\\w+ blocked for more than \\w+ seconds\\."
+            },
+            {
+                "type": "temporary",
+                "reason": "UnregisterNetDevice",
+                "pattern": "unregister_netdevice: waiting for \\w+ to become free. Usage count = \\d+"
+            },
+            {
+                "type": "temporary",
+                "reason": "KernelOops",
+                "pattern": "BUG: unable to handle kernel NULL pointer dereference at .*"
+            },
+            {
+                "type": "temporary",
+                "reason": "KernelOops",
+                "pattern": "divide error: 0000 \\[#\\d+\\] SMP"
+            },
+            {
+                "type": "temporary",
+                "reason": "MemoryReadError",
+                "pattern": "CE memory read error .*"
+            }
+        ]
+    }
+  containerd-monitor.json: |
+    {
+        "plugin": "journald",
+        "pluginConfig": {
+            "source": "containerd"
+        },
+        "logPath": "/var/log/journal",
+        "lookback": "5m",
+        "bufferSize": 10,
+        "source": "containerd-monitor",
+        "conditions": [],
+        "rules": [
+            {
+                "type": "temporary",
+                "reason": "ContainerdDaemonError",
+                "pattern": ".*failed to start daemon.*"
+            },
+            {
+                "type": "temporary",
+                "reason": "ContainerdNetworkError",
+                "pattern": ".*failed to dial.*"
+            },
+            {
+                "type": "temporary",
+                "reason": "ContainerdCleanupError",
+                "pattern": ".*failed to delete container.*"
+            }
+        ]
+    }
+kind: ConfigMap
+metadata:
+  name: node-problem-detector-config
+  namespace: kube-system
