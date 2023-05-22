@@ -398,6 +398,10 @@ groups:
       - michael.levan@clouddev.engineering # 1.28 Docs Shadow
       - taniaduggal60@gmail.com # 1.28 Docs Shadow
       - vibhorchinda@gmail.com # 1.28 Docs Shadow
+      - a.zelyk@reply.de # 1.28 Bug Triage Shadow
+      - mofi@google.com # 1.28 Bug Triage Shadow
+      - parthvi.vala@gmail.com # 1.28 Bug Triage Shadow
+      - yigit.demirbas@gmail.com # 1.28 Bug Triage Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
