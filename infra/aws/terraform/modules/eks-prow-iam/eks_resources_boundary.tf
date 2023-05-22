@@ -14,9 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+locals {
+  eks_resource_pb_name = "EKSResourcesPermissionBoundary"
+}
+
 // Bondary imposed on all IAM roles provisioned by EKSInfraAdmin role.
 resource "aws_iam_policy" "eks_resources_permission_boundary" {
-  name        = "EKSResourcesPermissionBoundary"
+  name        = local.eks_resource_pb_name
   path        = "/boundary/"
   description = "Permission boundary for roles created by EKSInfraAdmin."
   policy      = data.aws_iam_policy_document.eks_resources_permission_boundary_doc.json
@@ -45,7 +49,55 @@ data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
   }
 
   statement {
-    sid = "DenyEditPolicy"
+    sid = "DenyCreateWithoutBoundary"
+
+    effect = "Deny"
+
+    actions = [
+      "iam:CreateRole",
+      "iam:CreateUser",
+    ]
+
+    resources = ["*"]
+
+    condition {
+      test     = "StringNotEquals"
+      variable = "iam:PermissionsBoundary"
+      values = [
+        "arn:aws:iam::${local.account_id}:policy/boundary/${local.eks_resource_pb_name}"
+      ]
+    }
+  }
+
+  statement {
+    sid       = "DenyChangeWithoutBoundary"
+    effect    = "Deny"
+    resources = ["*"]
+
+    actions = [
+      "iam:AttachRolePolicy",
+      "iam:CreateServiceLinkedRole",
+      "iam:DeleteRolePolicy",
+      "iam:PutRolePolicy",
+      "iam:PutRolePermissionsBoundary",
+      "iam:AttachUserPolicy",
+      "iam:DeleteUserPolicy",
+      "iam:DetachUserPolicy",
+      "iam:PutUserPolicy",
+      "iam:PutUserPermissionsBoundary",
+    ]
+
+    condition {
+      test     = "StringNotEquals"
+      variable = "iam:PermissionsBoundary"
+      values = [
+        "arn:aws:iam::${local.account_id}:policy/boundary/${local.eks_resource_pb_name}"
+      ]
+    }
+  }
+
+  statement {
+    sid = "DenyEditBoundaries"
 
     effect = "Deny"
 

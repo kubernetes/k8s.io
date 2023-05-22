@@ -18,5 +18,4 @@ Actions aggregated in the following policies have been recorded with [iamlive to
 
 ## Permission Boundaries
 
-* EKSInfraAdminPermissionBoundary - applied on EKSInfraAdmin IAM role, imposes roles created with this role to have EKSResourcesPermissionBoundary applied.
 * EKSResourcesPermissionBoundary - applied on IAM roles provisioned with EKS prow cluster. It's meant to limit the risk of privilige escalation.
