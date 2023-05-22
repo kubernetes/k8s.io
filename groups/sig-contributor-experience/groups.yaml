@@ -125,6 +125,42 @@ groups:
       - jberkus@redhat.com
       - marky.r.jackson@gmail.com
 
+  - email-id: sig-contribex@kubernetes.io
+    name: sig-contribex
+    description: |
+      Group dedicated to improving the Kubernetes contributor experience.
+    owners:
+      - sig-contribex-leads@kubernetes.io
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: sig-contribex-leads@kubernetes.io
+    name: sig-contribex-leads
+    description: SIG ContribEx Leads
+    owners:
+      - cblecker@gmail.com
+      - jberkus@redhat.com
+      - kaslin.fields@gmail.com
+      - killen.bob@gmail.com
+      - madhav.jiv@gmail.com
+      - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
   - email-id: summit-team@kubernetes.io
     name: summit-team
     description: |-
