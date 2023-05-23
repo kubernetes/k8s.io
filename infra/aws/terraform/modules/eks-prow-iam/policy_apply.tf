@@ -102,7 +102,7 @@ data "aws_iam_policy_document" "eks_apply" {
       test     = "StringEquals"
       variable = "iam:PermissionsBoundary"
       values = [
-        "arn:aws:iam::${local.account_id}:policy/boundary/${local.eks_resource_pb_name}"
+        aws_iam_policy.eks_resources_permission_boundary.arn
       ]
     }
   }

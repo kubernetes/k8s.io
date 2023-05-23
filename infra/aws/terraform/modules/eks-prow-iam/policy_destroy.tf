@@ -59,4 +59,21 @@ data "aws_iam_policy_document" "eks_destroy" {
       "logs:DeleteLogGroup",
     ]
   }
+
+  statement {
+    sid = "DenyDeleteBoundary"
+
+    effect = "Deny"
+
+    actions = [
+      "iam:DeletePolicy",
+      "iam:DeletePolicyVersion",
+      "iam:DeleteRolePermissionsBoundary",
+      "iam:DetachRolePolicy",
+    ]
+
+    resources = [
+      aws_iam_policy.eks_resources_permission_boundary.arn
+    ]
+  }
 }
