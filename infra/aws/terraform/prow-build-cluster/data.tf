@@ -36,7 +36,7 @@ data "aws_iam_user" "eks_cluster_admins" {
   user_name = var.eks_cluster_admins[count.index]
 }
 
-data "aws_iam_policy" "provisioner_permission_boundary" {
-  name = "ProvisionerPermissionBoundary"
+data "aws_iam_policy" "eks_resources_permission_boundary" {
+  name        = "EKSResourcesPermissionBoundary"
+  path_prefix = "/boundary/"
 }
-
