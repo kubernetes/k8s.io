@@ -40,4 +40,3 @@ data "aws_iam_policy" "eks_resources_permission_boundary" {
   name        = "EKSResourcesPermissionBoundary"
   path_prefix = "/boundary/"
 }
-
