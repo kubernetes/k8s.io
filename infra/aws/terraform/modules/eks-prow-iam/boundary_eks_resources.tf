@@ -36,8 +36,9 @@ data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
     actions = [
       "autoscaling:*",
       "ec2:*",
-      "eks:*",
       "ecr:*",
+      "eks:*",
+      "elasticloadbalancing:*",
       "iam:*",
       "kms:*",
       "logs:*",
