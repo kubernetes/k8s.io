@@ -29,11 +29,11 @@ eks_cluster_admins = [
 ]
 
 cluster_name               = "prow-canary-cluster"
-cluster_version            = "1.25"
-cluster_autoscaler_version = "v1.25.0"
+cluster_version            = "1.26"
+cluster_autoscaler_version = "v1.26.2"
 
 # Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
-node_ami            = "ami-03de35fda144b3672"
+node_ami            = "ami-0e5789a9184c7d081"
 node_instance_types = ["r5d.xlarge"]
 node_volume_size    = 100
 
