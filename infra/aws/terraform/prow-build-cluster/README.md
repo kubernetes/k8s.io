@@ -243,3 +243,31 @@ make destroy
 
 If you want to remove roles used for EKS creation go to `../iam/<aws_account_name>` and run `terraform destroy` command there.
 
+
+## GitOps
+
+To sync state between git repo an cluster we use [FluxCD](https://fluxcd.io/).
+
+Flux Kustomizations and HelmReleases for manifests inside `./resources` directory have been generated with use of `./hack/flux-update.bash`. The script also prepares manifests for the whole GitOps Tool Kit. It can be used to update version of FluxCD.
+
+The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Kustomizations.
+
+Flux Helm Releases ought to be deployed in namespaces where their resources are deployed. As a convention, all Flux Helm Releases have to be prefixed with `flux-hr-`.
+
+### Installing Flux
+
+```bash
+make flux-install
+```
+
+### Deploying Kustomizations
+
+```bash
+make flux-apply
+```
+
+### Deploying Helm Releases
+
+```bash
+make flux-apply-helm
+```

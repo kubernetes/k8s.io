@@ -58,3 +58,19 @@ output:
 .PHONY: clean
 clean:
 	rm -rf ./.terraform
+
+.PHONY: flux-install
+flux-install:
+	kubectl apply --server-side -f ./resources/flux-system/gotk-components.yaml
+
+.PHONY: flux-apply
+flux-apply:
+	kubectl apply --server-side -f ./resources/flux-system
+
+.PHONY: flux-apply-helm
+flux-apply-helm:
+	find ./resources -type f -name "flux-hr-*" -exec cat {} \;
+
+.PHONY: flux-update
+flux-update:
+	./hack/flux-update.bash
