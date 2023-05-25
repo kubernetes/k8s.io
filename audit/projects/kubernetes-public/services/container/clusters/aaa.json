@@ -61,6 +61,7 @@
     "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-ad548c1d-grp"
   ],
   "ipAllocationPolicy": {
+    "additionalPodRangesConfig": {},
     "clusterIpv4Cidr": "10.40.0.0/14",
     "clusterIpv4CidrBlock": "10.40.0.0/14",
     "clusterSecondaryRangeName": "gke-aaa-pods-4d0eb763",
