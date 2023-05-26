@@ -59,10 +59,6 @@ resource "fastly_service_vcl" "files" {
     window         = 4
   }
 
-  product_enablement {
-    origin_inspector = true
-  }
-
   snippet {
     content  = <<-EOT
       if (req.url.path ~ "^/release/") {
