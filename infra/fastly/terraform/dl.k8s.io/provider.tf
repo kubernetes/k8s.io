@@ -21,6 +21,11 @@ This file defines:
 */
 
 terraform {
+  backend "gcs" {
+    bucket = "k8s-infra-tf-fastly"
+    prefix = "cdn.dl.k8s.io"
+  }
+
   required_providers {
     fastly = {
       source  = "fastly/fastly"
