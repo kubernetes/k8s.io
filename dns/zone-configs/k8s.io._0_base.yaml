@@ -124,11 +124,16 @@ artifacts-sandbox:
   - type: AAAA
     value: "2600:1901:0:3b54::"
 
-# Domain delegation of cdn.dl.l8s.io to Fastly.
+# DNS configuration for Fastly service cdn.dl.k8s.io
 # Reach out to sig-k8s-infra-leads@kubernetes.io for any issue
 cdn.dl:
-  type: TXT
-  value: fastly-domain-delegation-yyD9G&IG34BM-2022-08-01
+  # Domain delegation of cdn.dl.l8s.io to Fastly.
+  - type: TXT
+    value: fastly-domain-delegation-yyD9G&IG34BM-2022-08-01
+# Fastly ACME DNS challenge for cdn.dl.k8s.io
+_acme-challenge.cdn.dl:
+  - type: CNAME
+    value: g2u94f8943zc3m5dil.fastly-validations.com.
 
 # Vanity CNAMEs.
 blog:
