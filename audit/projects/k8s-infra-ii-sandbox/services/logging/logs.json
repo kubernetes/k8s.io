@@ -1,6 +1,3 @@
 [
-  "projects/k8s-infra-ii-sandbox/logs/cloudaudit.googleapis.com%2Factivity",
-  "projects/k8s-infra-ii-sandbox/logs/cloudaudit.googleapis.com%2Fdata_access",
-  "projects/k8s-infra-ii-sandbox/logs/cloudaudit.googleapis.com%2Fsystem_event",
-  "projects/k8s-infra-ii-sandbox/logs/networkanalyzer.googleapis.com%2Fanalyzer_reports"
+  "projects/k8s-infra-ii-sandbox/logs/cloudaudit.googleapis.com%2Fdata_access"
 ]
