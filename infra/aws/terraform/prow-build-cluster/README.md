@@ -248,7 +248,7 @@ If you want to remove roles used for EKS creation go to `../iam/<aws_account_nam
 
 To sync state from git repo into EKS cluster we use [FluxCD](https://fluxcd.io/).
 
-Flux Kustomizations and HelmReleases for manifests are sotred inside `./resources` directory and have been generated with use of `./hack/flux-update.bash`. The script also prepares manifests for the whole GitOps Tool Kit and can be used to update version of FluxCD.
+Flux Kustomizations and HelmReleases for manifests are stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. On top of that, the script prepares manifests for the GitOps Tool Kit and can be used to update its version.
 
 The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Kustomizations.
 
