@@ -274,11 +274,24 @@ The `flux-system` namespace contains all GitOps Tool Kit componenets as well as 
 
 ### Adding New Kustomization
 
-__TODO__
+1. Go to `./resources` directory and create folder containing your manifests.
+2. Open `./hack/flux-update.bash` in your editor of choice.
+3. Find `kustomizations` variable. It contains a list of kustomizations to generate.
+4. Extend the kustomization list with the name of folder created in the first step.
+5. Regenerate kustomizations by running: `make flux-update`
+6. Commit your changes and wait for your resources to appear in the cluster.
 
 ### Adding New Helm Release
 
-__TODO__
+1. Open `./hack/flux-update.bash` in your editor of choice.
+2. Create a new helm source. If you already have helm source, you can move to the next step.
+    a) Find part of script responsible for createing `eks-charts` helm release.
+    b) Use the same pattern to create a new helm source.
+3. Create a new helm release.
+    a) Find part of script responsible for creating helm release for `node-termination-handler`.
+    b) Based on `node-termination-handler` example extend the script with your helm release.
+4. Regenerate helm-releases by running: `make flux-update`
+5. Apply new helm release by running: `make flux-apply-helm-releases`
 
 ### Monitoring Flux
 
