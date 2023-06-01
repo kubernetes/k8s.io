@@ -274,6 +274,9 @@ The `flux-system` namespace contains all GitOps Tool Kit componenets as well as 
     make flux-apply-helm
     ```
 
+### Accessing Flux
+
+In order to access FluxCD, all you need is kubeconfig with broad cluster permissions and Flux CLI installed locally.
 
 ### Adding New Kustomization
 
@@ -288,11 +291,11 @@ The `flux-system` namespace contains all GitOps Tool Kit componenets as well as 
 
 1. Open `./hack/flux-update.bash` in your editor of choice.
 2. Create a new helm source. If you already have helm source, you can move to the next step.
-    a) Find part of script responsible for createing `eks-charts` helm release.
-    b) Use the same pattern to create a new helm source.
+    1. Find part of script responsible for createing `eks-charts` helm release.
+    2. Use the same pattern to create a new helm source.
 3. Create a new helm release.
-    a) Find part of script responsible for creating helm release for `node-termination-handler`.
-    b) Based on `node-termination-handler` example extend the script with your helm release.
+    1. Find part of script responsible for creating helm release for `node-termination-handler`.
+    2. Based on `node-termination-handler` example extend the script with your helm release.
 4. Regenerate helm-releases by running: `make flux-update`
 5. Apply new helm release by running: `make flux-apply-helm-releases`
 6. Check the status by executing: `flux get hr -n <namespace> <helm_release_name>` or `flux get hr -A` to list all helm releases inside the cluster.
