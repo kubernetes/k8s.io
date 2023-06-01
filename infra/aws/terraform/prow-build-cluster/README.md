@@ -248,6 +248,8 @@ If you want to remove roles used for EKS creation go to `../iam/<aws_account_nam
 
 To sync state from this Git repo into EKS cluster we use [FluxCD](https://fluxcd.io/).
 
+FluxCD has a dedicated [CLI tool](https://fluxcd.io/flux/installation/#install-the-flux-cli). We use it iniside our scripts to generate and monitor syncs.
+
 FluxCD resources stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. The script prepares manifests for the [GitOps Tool Kit](https://fluxcd.io/flux/components/) and generates [Sources](https://fluxcd.io/flux/components/source/), [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/) and [Helm Releases](https://fluxcd.io/flux/components/helm/helmreleases/).
 
 The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Sources and Kustomizations. Helm Releases ought to be deployed in the same namespaces as manifests they create. As a convention, Flux Helm Releases have to be prefixed with `flux-hr-`, Kustomizations with `ks-` and sources should contain `-source-` part. These are our internal conventions and are used for discovery process in our scripts:
@@ -272,14 +274,15 @@ The `flux-system` namespace contains all GitOps Tool Kit componenets as well as 
     make flux-apply-helm
     ```
 
+
 ### Adding New Kustomization
 
-1. Go to `./resources` directory and create folder containing your manifests.
+1. Go to `./resources` directory and create a new folder containing your manifests.
 2. Open `./hack/flux-update.bash` in your editor of choice.
-3. Find `kustomizations` variable. It contains a list of kustomizations to generate.
-4. Extend the kustomization list with the name of folder created in the first step.
+3. Find `kustomizations` variable. It contains a list of kustomizations to generate. Each element of list corresonds to directory inside `./resources` folder.
+4. Extend the kustomization list with the name of folder you created in the first step.
 5. Regenerate kustomizations by running: `make flux-update`
-6. Commit your changes and wait for your resources to appear in the cluster.
+6. Commit your changes and wait for your resources to appear in the cluster. You can use `flux get ks <kustomization-name>` to monitor state.
 
 ### Adding New Helm Release
 
@@ -292,6 +295,7 @@ The `flux-system` namespace contains all GitOps Tool Kit componenets as well as 
     b) Based on `node-termination-handler` example extend the script with your helm release.
 4. Regenerate helm-releases by running: `make flux-update`
 5. Apply new helm release by running: `make flux-apply-helm-releases`
+6. Check the status by executing: `flux get hr -n <namespace> <helm_release_name>` or `flux get hr -A` to list all helm releases inside the cluster.
 
 ### Monitoring Flux
 

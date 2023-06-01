@@ -100,9 +100,9 @@ flux-apply-kustomizations: ## Apply FluxCD Kustomizations located inside "./reso
 flux-apply-helm-releases: ## Apply HelmReleases located inside "./resources" folder.
 	find ./resources -type f -name "flux-hr-*" -exec ${K} apply -f {} \;
 
-PHONY: flux-apply-all ## Apply FluxCD Sources, Kustomizations and HelmReleases at once.
-flux-apply-all: flux-apply-sources flux-apply-kustomizations flux-apply-helm-releases
+PHONY: flux-apply-all
+flux-apply-all: flux-apply-sources flux-apply-kustomizations flux-apply-helm-releases ## Apply FluxCD Sources, Kustomizations and HelmReleases, all at once.
 
 .PHONY: flux-update
-flux-update: ## Update FluxCD manifests, generate Kustomizations and HelmReleases.
+flux-update: ## Update FluxCD manifests, generate Kustomizations and HelmReleases (requires flux cli).
 	./hack/flux-update.bash
