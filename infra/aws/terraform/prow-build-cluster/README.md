@@ -246,28 +246,38 @@ If you want to remove roles used for EKS creation go to `../iam/<aws_account_nam
 
 ## GitOps
 
-To sync state from git repo into EKS cluster we use [FluxCD](https://fluxcd.io/).
+To sync state from this Git repo into EKS cluster we use [FluxCD](https://fluxcd.io/).
 
-Flux Kustomizations and HelmReleases for manifests are stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. On top of that, the script prepares manifests for the GitOps Tool Kit and can be used to update its version.
+Flux Kustomizations and HelmReleases for manifests are stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. On top of that, the script prepares manifests for the [GitOps Tool Kit](https://fluxcd.io/flux/components/) and can be used to update its version.
 
 The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Kustomizations.
 
-Flux Helm Releases ought to be deployed in the same namespaces as manifests they create. As a convention, all Flux Helm Releases have to be prefixed with `flux-hr-`. This convention is leveraged by automation.
+Flux Helm Releases ought to be deployed in the same namespaces as manifests they create. As a convention, all Flux Helm Releases have to be prefixed with `flux-hr-`. This is our internal convention and it's used for HelmRelease discovery in our scripts.
 
-#### Installing Flux
+- Installing Flux
+    ```bash
+    make flux-install
+    ```
 
-```bash
-make flux-install
-```
+- Deploying Sources
+    ```bash
+    make flux-apply-sources
+    ```
 
-#### Deploying Kustomizations
+- Deploying Kustomizations
+    ```bash
+    make flux-apply-kustomizations
+    ```
 
-```bash
-make flux-apply
-```
+- Deploying Helm Releases
+    ```bash
+    make flux-apply-helm
+    ```
 
-#### Deploying Helm Releases
+### Adding New Kustomization
 
-```bash
-make flux-apply-helm
-```
+__TODO__
+
+### Adding New Helm Release
+
+__TODO__

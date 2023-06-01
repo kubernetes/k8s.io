@@ -15,6 +15,8 @@
 TF ?= terraform
 TF_ARGS ?=
 
+K ?= kubectl
+
 # TODO: figure out a workaround for: https://github.com/hashicorp/terraform-provider-kubernetes-alpha/issues/199#issuecomment-832614387
 DEPLOY_K8S_RESOURCES ?= true
 
@@ -86,13 +88,20 @@ clean: ## Clean up Terraform cache and local state.
 flux-install: ## Install FluxCD components inside flux-system namespace.
 	kubectl apply --server-side -f ./resources/flux-system/gotk-components.yaml
 
-.PHONY: flux-apply
-flux-apply: ## Apply all FluxCD Kustomizations located inside "./resources" folder.
-	kubectl apply --server-side -f ./resources/flux-system
+.PHONY: flux-apply-sources
+flux-apply-sources: ## Apply FluxCD Sources located inside "./resources/flux-system" folder.
+	find ./resources/flux-system -type f -name "*-source-*" -exec ${K} apply -f {} \;
 
-.PHONY: flux-apply-helm
-flux-apply-helm: ## Apply all HelmReleases located inside "./resources" folder.
-	find ./resources -type f -name "flux-hr-*" -exec cat {} \;
+.PHONY: flux-apply-kustomizations
+flux-apply-kustomizations: ## Apply FluxCD Kustomizations located inside "./resources/flux-system" folder.
+	find ./resources/flux-system -type f -name "ks-*" -exec ${K} apply -f {} \;
+
+.PHONY: flux-apply-helm-releases
+flux-apply-helm-releases: ## Apply HelmReleases located inside "./resources" folder.
+	find ./resources -type f -name "flux-hr-*" -exec ${K} apply -f {} \;
+
+PHONY: flux-apply-all ## Apply FluxCD Sources, Kustomizations and HelmReleases at once.
+flux-apply-all: flux-apply-sources flux-apply-kustomizations flux-apply-helm-releases
 
 .PHONY: flux-update
 flux-update: ## Update FluxCD manifests, generate Kustomizations and HelmReleases.
