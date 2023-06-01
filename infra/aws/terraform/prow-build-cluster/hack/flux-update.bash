@@ -40,7 +40,7 @@ resources_dir=${script_root}/../resources
 boilerplate > ${resources_dir}/flux-system/gotk-components.yaml
 flux install --export >> ${resources_dir}/flux-system/gotk-components.yaml
 
-# sync_interval determines how often Flux Source Controller pulls remote repositories.
+# sync_interval determines Flux Source Controller sync interval.
 # (https://github.com/fluxcd/source-controller)
 sync_interval=5m
 
@@ -66,6 +66,8 @@ flux create hr node-termination-handler \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/kube-system/flux-hr-node-termination-handler.yaml
 
+# This list contains names of folders inside ./resources directory
+# that are used for generating FluxCD kustomizations.
 kustomizations=(
     boskos
     flux-system
@@ -74,6 +76,7 @@ kustomizations=(
     node-problem-detector
     rbac
     test-pods
+    external-secrets
 )
 
 # Code below is used to figure out a relative path of
@@ -87,6 +90,7 @@ for k in "${kustomizations[@]}"; do
     flux create kustomization ${k} \
         --source=GitRepository/k8s-io.flux-system \
         --path=${resources_git_repo_path}/${k} \
-         --interval=5m \
+        --interval=5m \
+        --prune \
         --export >> ${resources_dir}/flux-system/ks-${k}.yaml
 done
