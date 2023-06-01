@@ -248,9 +248,9 @@ If you want to remove roles used for EKS creation go to `../iam/<aws_account_nam
 
 To sync state from this Git repo into EKS cluster we use [FluxCD](https://fluxcd.io/).
 
-Flux Kustomizations and HelmReleases for manifests are stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. The script prepares manifests for the [GitOps Tool Kit](https://fluxcd.io/flux/components/) and generates [Sources](https://fluxcd.io/flux/components/source/), [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/) and [Helm Releases](https://fluxcd.io/flux/components/helm/helmreleases/).
+FluxCD resources stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. The script prepares manifests for the [GitOps Tool Kit](https://fluxcd.io/flux/components/) and generates [Sources](https://fluxcd.io/flux/components/source/), [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/) and [Helm Releases](https://fluxcd.io/flux/components/helm/helmreleases/).
 
-The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Sources and Kustomizations . Helm Releases ought to be deployed in the same namespaces as manifests they create. As a convention, Flux Helm Releases have to be prefixed with `flux-hr-`, Kustomizations with `ks-` and sources should contain `-source-` part. These are our internal conventions and are used for discovery process in our scripts:
+The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Sources and Kustomizations. Helm Releases ought to be deployed in the same namespaces as manifests they create. As a convention, Flux Helm Releases have to be prefixed with `flux-hr-`, Kustomizations with `ks-` and sources should contain `-source-` part. These are our internal conventions and are used for discovery process in our scripts:
 
 - Installing Flux:
     ```bash
