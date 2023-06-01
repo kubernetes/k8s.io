@@ -248,28 +248,26 @@ If you want to remove roles used for EKS creation go to `../iam/<aws_account_nam
 
 To sync state from this Git repo into EKS cluster we use [FluxCD](https://fluxcd.io/).
 
-Flux Kustomizations and HelmReleases for manifests are stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. On top of that, the script prepares manifests for the [GitOps Tool Kit](https://fluxcd.io/flux/components/) and can be used to update its version.
+Flux Kustomizations and HelmReleases for manifests are stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. The script prepares manifests for the [GitOps Tool Kit](https://fluxcd.io/flux/components/) and generates [Sources](https://fluxcd.io/flux/components/source/), [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/) and [Helm Releases](https://fluxcd.io/flux/components/helm/helmreleases/).
 
-The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Kustomizations.
+The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Sources and Kustomizations . Helm Releases ought to be deployed in the same namespaces as manifests they create. As a convention, Flux Helm Releases have to be prefixed with `flux-hr-`, Kustomizations with `ks-` and sources should contain `-source-` part. These are our internal conventions and are used for discovery process in our scripts:
 
-Flux Helm Releases ought to be deployed in the same namespaces as manifests they create. As a convention, all Flux Helm Releases have to be prefixed with `flux-hr-`. This is our internal convention and it's used for HelmRelease discovery in our scripts.
-
-- Installing Flux
+- Installing Flux:
     ```bash
     make flux-install
     ```
 
-- Deploying Sources
+- Deploying Sources:
     ```bash
     make flux-apply-sources
     ```
 
-- Deploying Kustomizations
+- Deploying Kustomizations:
     ```bash
     make flux-apply-kustomizations
     ```
 
-- Deploying Helm Releases
+- Deploying Helm Releases:
     ```bash
     make flux-apply-helm
     ```
@@ -279,5 +277,9 @@ Flux Helm Releases ought to be deployed in the same namespaces as manifests they
 __TODO__
 
 ### Adding New Helm Release
+
+__TODO__
+
+### Monitoring Flux
 
 __TODO__
