@@ -29,11 +29,10 @@ for f in "${files[@]}"; do
 done
 
 function boilerplate() {
-  cat ${dir}/../../../../../../../hack/boilerplate/boilerplate.sh.txt | sed -e "s/\<YEAR\>/$(date +'%Y')/"
+  cat ${dir}/../../../../../../hack/boilerplate/boilerplate.sh.txt | sed -e "s/\<YEAR\>/$(date +'%Y')/"
 }
 
 for f in "${files[@]}"; do 
-    cat <(boilerplate) "$f" > tmp.yaml
-    mv tmp.yaml "$f"
+    cat <(boilerplate) "${dir}/${f}" > tmp.yaml
+    mv tmp.yaml "${dir}/${f}"
 done
-
