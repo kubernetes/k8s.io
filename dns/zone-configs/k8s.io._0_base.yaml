@@ -127,9 +127,9 @@ artifacts-sandbox:
 # DNS configuration for Fastly service cdn.dl.k8s.io
 # Reach out to sig-k8s-infra-leads@kubernetes.io for any issue
 cdn.dl:
-  # Domain delegation of cdn.dl.l8s.io to Fastly.
-  - type: TXT
-    value: fastly-domain-delegation-yyD9G&IG34BM-2022-08-01
+  # CNAME record for Fastly endpoint
+  - type: CNAME
+    value: dualstack.m.sni.global.fastly.net.
 # Fastly ACME DNS challenge for cdn.dl.k8s.io
 _acme-challenge.cdn.dl:
   - type: CNAME
