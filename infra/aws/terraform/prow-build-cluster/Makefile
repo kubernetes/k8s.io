@@ -86,7 +86,7 @@ clean: ## Clean up Terraform cache and local state.
 
 .PHONY: flux-install
 flux-install: ## Install FluxCD components inside flux-system namespace.
-	kubectl apply --server-side -f ./resources/flux-system/gotk-components.yaml
+	${KUBECTL} apply --server-side -f ./resources/flux-system/gotk-components.yaml
 
 .PHONY: flux-apply-sources
 flux-apply-sources: ## Apply FluxCD Sources located inside "./resources/flux-system" folder.
