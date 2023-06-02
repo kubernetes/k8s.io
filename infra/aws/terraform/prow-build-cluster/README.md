@@ -285,7 +285,7 @@ In order to access FluxCD, all you need is kubeconfig with broad cluster permiss
 3. Find `kustomizations` variable. It contains a list of kustomizations to generate. Each element of list corresonds to directory inside `./resources` folder.
 4. Extend the kustomization list with the name of folder you created in the first step.
 5. Regenerate kustomizations by running: `make flux-update`
-6. Commit your changes and wait for your resources to appear in the cluster. You can use `flux get ks <kustomization-name>` to monitor state.
+6. Commit your changes and wait for your resources to appear in the cluster. If you have access to the cluster, you can use `flux get ks <kustomization-name>` to monitor state.
 
 ### Adding New Helm Release
 
