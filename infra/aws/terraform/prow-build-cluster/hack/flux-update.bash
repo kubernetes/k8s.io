@@ -44,18 +44,18 @@ flux install --export >> ${resources_dir}/flux-system/gotk-components.yaml
 # (https://github.com/fluxcd/source-controller)
 sync_interval=5m
 
-boilerplate > ${resources_dir}/flux-system/git-source-k8s.io.yaml
+boilerplate > ${resources_dir}/flux-system/flux-source-git-k8s.io.yaml
 flux create source git k8s-io \
     --url=https://github.com/${github_org}/k8s.io \
     --branch=${github_branch} \
     --interval=${sync_interval} \
-    --export >> ${resources_dir}/flux-system/git-source-k8s.io.yaml
+    --export >> ${resources_dir}/flux-system/flux-source-git-k8s.io.yaml
 
-boilerplate > ${resources_dir}/flux-system/helm-source-eks-charts.yaml
+boilerplate > ${resources_dir}/flux-system/flux-source-helm-eks-charts.yaml
 flux create source helm eks-charts \
     --url=https://aws.github.io/eks-charts \
     --interval=${sync_interval} \
-    --export >> ${resources_dir}/flux-system/helm-source-eks-charts.yaml
+    --export >> ${resources_dir}/flux-system/flux-source-helm-eks-charts.yaml
 
 boilerplate > ${resources_dir}/kube-system/flux-hr-node-termination-handler.yaml
 flux create hr node-termination-handler \
@@ -86,11 +86,11 @@ resources_git_repo_path=$(git rev-parse --show-prefix)
 popd > /dev/null
 
 for k in "${kustomizations[@]}"; do
-    boilerplate > ${resources_dir}/flux-system/ks-${k}.yaml
+    boilerplate > ${resources_dir}/flux-system/flux-ks-${k}.yaml
     flux create kustomization ${k} \
         --source=GitRepository/k8s-io.flux-system \
         --path=${resources_git_repo_path}/${k} \
         --interval=5m \
         --prune \
-        --export >> ${resources_dir}/flux-system/ks-${k}.yaml
+        --export >> ${resources_dir}/flux-system/flux-ks-${k}.yaml
 done
