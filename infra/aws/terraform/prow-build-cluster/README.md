@@ -298,7 +298,7 @@ In order to access FluxCD, all you need is kubeconfig with broad cluster permiss
     2. Based on `node-termination-handler` example extend the script with your helm release.
 4. Regenerate helm-releases by running: `make flux-update`
 5. Apply new helm release by running: `make flux-apply-helm-releases`
-6. Check the status by executing: `flux get hr -n <namespace> <helm_release_name>` or `flux get hr -A` to list all helm releases inside the cluster.
+6. If you have access to the cluster, you can check the status by executing: `flux get hr -n <namespace> <helm_release_name>` or `flux get hr -A` to list all helm releases inside the cluster.
 
 ### Monitoring Flux
 
