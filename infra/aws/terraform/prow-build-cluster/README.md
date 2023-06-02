@@ -246,59 +246,49 @@ If you want to remove roles used for EKS creation go to `../iam/<aws_account_nam
 
 ## GitOps
 
-To sync state from this Git repo into EKS cluster we use [FluxCD](https://fluxcd.io/).
+To synchronize the state from this Git repository into the EKS cluster, we utilize [FluxCD](https://fluxcd.io/).
 
-FluxCD has a dedicated [CLI tool](https://fluxcd.io/flux/installation/#install-the-flux-cli). We use it iniside our scripts to generate and monitor syncs.
+FluxCD provides a dedicated [CLI tool](https://fluxcd.io/flux/installation/#install-the-flux-cli). We leverage this tool in scripts to generate and monitor syncs.
 
-FluxCD resources stored inside the `./resources` directory and have been generated with use of `./hack/flux-update.bash`. The script prepares manifests for the [GitOps Tool Kit](https://fluxcd.io/flux/components/) and generates [Sources](https://fluxcd.io/flux/components/source/), [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/) and [Helm Releases](https://fluxcd.io/flux/components/helm/helmreleases/).
+The FluxCD resources are stored inside the `./resources` directory and are generated using the `./hack/flux-update.bash` script. This script prepares manifests for the [GitOps Tool Kit](https://fluxcd.io/flux/components/), generating [Sources](https://fluxcd.io/flux/components/source/), [Kustomizations](https://fluxcd.io/flux/components/kustomize/kustomization/) and [Helm Releases](https://fluxcd.io/flux/components/helm/helmreleases/). **It's important to note that the terms "Kustomization" and "Helm Release" used in this section refer specifically to FluxCD concepts.** The FluxCD Kustomization CRD serves as the counterpart to Kustomize's kustomization.yaml config file, and the Helm Release is a FluxCD CRD that defines a resource for automated controller-driven Helm releases.
 
-The `flux-system` namespace contains all GitOps Tool Kit componenets as well as all Flux Sources and Kustomizations. Helm Releases ought to be deployed in the same namespaces as manifests they create. As a convention, Flux Helm Releases have to be prefixed with `flux-hr-`, Kustomizations with `ks-` and sources should contain `-source-` part. These are our internal conventions and are used for discovery process in our scripts:
+The `flux-system` namespace contains all GitOps Tool Kit components, Flux Sources, and Kustomizations. Helm Releases should be deployed in the same namespace as the manifests they create. As a convention, Flux Helm Releases should be prefixed with `flux-hr-`, Kustomizations with `flux-ks-`, and sources with `flux-source-`. These naming conventions are used in our automation's discovery process.
 
-- Installing Flux:
+- To install Flux GitOps Tool Kit components, run the following command:
     ```bash
     make flux-install
     ```
 
-- Deploying Sources:
-    ```bash
-    make flux-apply-sources
-    ```
-
-- Deploying Kustomizations:
+- To deploy Kustomizations, use the command:
     ```bash
     make flux-apply-kustomizations
     ```
 
-- Deploying Helm Releases:
-    ```bash
-    make flux-apply-helm
-    ```
-
 ### Accessing Flux
 
-In order to access FluxCD, all you need is kubeconfig with broad cluster permissions and Flux CLI installed locally.
+To access FluxCD, you need a kubeconfig file with broad cluster permissions and the Flux CLI installed locally. That option is reserved for cluster administrators. You can contanct them via #sig-k8s-infra Slack channel. (__TODO__: mention monitoring dashboards when ready)
 
 ### Adding New Kustomization
 
-1. Go to `./resources` directory and create a new folder containing your manifests.
+1. Navigate to the `./resources` directory and create a new folder to contain your manifests.
 2. Open `./hack/flux-update.bash` in your editor of choice.
-3. Find `kustomizations` variable. It contains a list of kustomizations to generate. Each element of list corresonds to directory inside `./resources` folder.
-4. Extend the kustomization list with the name of folder you created in the first step.
-5. Regenerate kustomizations by running: `make flux-update`
-6. Commit your changes and wait for your resources to appear in the cluster. If you have access to the cluster, you can use `flux get ks <kustomization-name>` to monitor state.
+3. Locate the `kustomizations` variable, which contains a list of kustomizations to generate. Each element in the list corresonds to a directory inside the `./resources` folder.
+4. Extend the kustomization list by adding the name of the folder you created in the first step.
+5. Regenerate the kustomizations by running: `make flux-update`
+6. Commit your changes and wait for your resources to appear in the cluster. If you have access to the cluster, you can use `flux get ks <kustomization-name>` to monitor the state.
 
 ### Adding New Helm Release
 
-1. Open `./hack/flux-update.bash` in your editor of choice.
-2. Create a new helm source. If you already have helm source, you can move to the next step.
-    1. Find part of script responsible for createing `eks-charts` helm release.
-    2. Use the same pattern to create a new helm source.
-3. Create a new helm release.
-    1. Find part of script responsible for creating helm release for `node-termination-handler`.
-    2. Based on `node-termination-handler` example extend the script with your helm release.
-4. Regenerate helm-releases by running: `make flux-update`
-5. Apply new helm release by running: `make flux-apply-helm-releases`
-6. If you have access to the cluster, you can check the status by executing: `flux get hr -n <namespace> <helm_release_name>` or `flux get hr -A` to list all helm releases inside the cluster.
+1. Open `./hack/flux-update.bash` in your preferred editor.
+2. Create a new Helm source. If you already have a Helm source, you can skip this step.
+    1. Locate the section of the script responsible for creating the `eks-charts` Helm release.
+    2. Use the same pattern to create a new Helm source.
+3. Create a new Helm release.
+    1. Locate the section of the script responsible for creating the Helm release for `node-termination-handler`.
+    2. Based on the `node-termination-handler` example, extend the script with your Helm release.
+4. Regenerate the Helm releases by running: `make flux-update`
+5. To deploy your Helm Release, you need to add it to an exiting Kustomization or create a new one.
+6. If you have access to the cluster, you can check the status by executing: `flux get hr -n <namespace> <helm_release_name>` or `flux get hr -A` to list all Helm releases inside the cluster. (__TODO__: replace this section with grafana dashboard when ready)
 
 ### Monitoring Flux
 
