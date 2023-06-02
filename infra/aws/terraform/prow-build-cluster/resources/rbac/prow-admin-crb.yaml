@@ -3,9 +3,9 @@ kind: ClusterRoleBinding
 metadata:
   name: eks-prow-cluster-admin
 subjects:
-- kind: Group
-  name: eks-prow-cluster-admin
-  apiGroup: rbac.authorization.k8s.io
+  - kind: Group
+    name: eks-prow-cluster-admin
+    apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
   name: cluster-admin

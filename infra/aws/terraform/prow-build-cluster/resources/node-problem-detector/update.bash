@@ -33,6 +33,6 @@ function boilerplate() {
 }
 
 for f in "${files[@]}"; do 
-    cat <(boilerplate) "$f" > tmp.yaml
-    mv tmp.yaml "$f"
+    cat <(boilerplate) "${dir}/${f}" > tmp.yaml
+    mv tmp.yaml "${dir}/${f}"
 done
