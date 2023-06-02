@@ -1,0 +1,40 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: k8s-prow-gcr-to-ecr-registry
+spec:
+  background: false
+  rules:
+    - name: replace-image-registry-gcr-k8s-prow-to-ecr-pod-containers
+      match:
+        any:
+        - resources:
+            kinds:
+            - Pod
+      mutate:
+        foreach:
+        - list: "request.object.spec.containers"
+          patchStrategicMerge:
+            spec:
+              containers:
+              - name: "{{ element.name }}"
+                image: "{{ regex_replace_all('gcr.io/k8s-(prow/|staging-)', '{{ element.image }}', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-${1}' )}}"
+    - name: replace-image-registry-gcr-k8s-prow-to-ecr-pod-initcontainers
+      match:
+        any:
+        - resources:
+            kinds:
+            - Pod
+      preconditions:
+        all:
+        - key: "{{ request.object.spec.initContainers[] || `[]` | length(@) }}"
+          operator: GreaterThanOrEquals
+          value: 1
+      mutate:
+        foreach:
+        - list: "request.object.spec.initContainers"
+          patchStrategicMerge:
+            spec:
+              initContainers:
+              - name: "{{ element.name }}"
+                image: "{{ regex_replace_all('gcr.io/k8s-(prow/|staging-)', '{{ element.image }}', '468814281478.dkr.ecr.us-east-2.amazonaws.com/k8s-${1}' )}}"

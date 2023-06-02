@@ -27,3 +27,8 @@ metadata:
   name: monitoring
   labels:
     monitoring: prometheus
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kyverno
