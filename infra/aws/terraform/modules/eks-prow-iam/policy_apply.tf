@@ -32,6 +32,8 @@ data "aws_iam_policy_document" "eks_apply" {
     resources = ["*"]
 
     actions = [
+      "acm:AddTagsToCertificate",
+      "acm:RequestCertificate",
       "ec2:AllocateAddress",
       "ec2:AssociateRouteTable",
       "ec2:AssociateVpcCidrBlock",
