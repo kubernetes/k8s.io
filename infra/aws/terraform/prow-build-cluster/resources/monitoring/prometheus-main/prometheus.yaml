@@ -12,6 +12,9 @@ spec:
   version: v2.42.0
   serviceAccountName: prometheus
   podMonitorNamespaceSelector: {}
+  ruleSelector:
+    matchLabels:
+      prometheus: main
   podMonitorSelector:
     matchLabels:
       prometheus: main
