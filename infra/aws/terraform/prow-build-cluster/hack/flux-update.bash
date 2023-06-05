@@ -15,7 +15,8 @@
 #!/usr/bin/env bash
 set -xeuo pipefail
 
-github_org=kubernetes
+# TODO(pkprzekwas): point at k8s.io main
+github_org=pkprzekwas
 github_repo=k8s.io
 github_branch=eks-prow-build-cluster-gitops
 
