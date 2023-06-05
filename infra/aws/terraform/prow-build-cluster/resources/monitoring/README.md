@@ -19,9 +19,6 @@ kubectl apply -f ./kube-state-metrics
 # Install node-exporter
 kubectl apply -f ./node-exporter
 
-# Install cadvisor
-kubectl apply -f ./cadvisor
-
 # Install dashboards for Grafana
 kubectl apply --server-side -f ./grafana/dashboards
 
