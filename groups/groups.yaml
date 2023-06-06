@@ -37,6 +37,7 @@ groups:
       - aravindh@redhat.com # SIG Windows
       - augustus@cisco.com # SIG Release
       - bentheelder@google.com
+      - bridget@kromhout.org # SIG Cloud Provider
       - caniszczyk@linuxfoundation.org
       - shane@konghq.com
       - cbelu@cloudbasesolutions.com
@@ -104,6 +105,7 @@ groups:
       - michmike@gmail.com
       - mikedanese@google.com
       - msau@google.com
+      - msm@opbstudios.com # SIG Cloud Provider
       - mwielgus@google.com
       - natalivlatko@gmail.com
       - natashasarkar@google.com
