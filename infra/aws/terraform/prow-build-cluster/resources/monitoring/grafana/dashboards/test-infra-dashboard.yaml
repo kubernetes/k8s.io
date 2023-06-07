@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: test-infra-dashboard
+  namespace: monitoring
 data:
   boskos-http.json: |
     {
