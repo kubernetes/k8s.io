@@ -320,6 +320,16 @@ groups:
     members:
       - sig-k8s-infra-leads@kubernetes.io
 
+  - email-id: k8s-infra-fastly-admins@kubernetes.io
+    name: k8s-infra-fastly-admins
+    description: |-
+      ACL for admins operating Fastly services
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
   - email-id: k8s-infra-okta-admins@kubernetes.io
     name: k8s-infra-okta-admins
     description: |-

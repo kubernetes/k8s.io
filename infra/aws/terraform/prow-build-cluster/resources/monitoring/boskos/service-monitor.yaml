@@ -15,7 +15,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: boskos-metrics
-  namespace: monitoring
+  namespace: test-pods
   labels:
     prometheus: main
 spec:

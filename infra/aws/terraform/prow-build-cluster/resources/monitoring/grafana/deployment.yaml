@@ -39,6 +39,24 @@ spec:
             - name: node-exporter-full
               mountPath: "/var/lib/grafana/dashboards/kubernetes/node-exporter-full.json"
               subPath: node-exporter-full.json
+            - name: flux-cluster-stats
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/flux-cluster-stats.json"
+              subPath: flux-cluster-stats.json
+            - name: flux-control-plane
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/flux-control-plane.json"
+              subPath: flux-control-plane.json
+            - name: prow
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-builds.json"
+              subPath: builds.json
+            - name: prow
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-jobs.json"
+              subPath: jobs.json
+            - name: prow
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-organisations.json"
+              subPath: organisations.json
+            - name: prow
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-repositories.json"
+              subPath: repositories.json
           ports:
             - name: grafana
               containerPort: 3000
@@ -77,3 +95,12 @@ spec:
         - name: node-exporter-full
           configMap:
             name: node-exporter-full
+        - name: flux-cluster-stats
+          configMap:
+            name: flux-cluster-stats
+        - name: flux-control-plane
+          configMap:
+            name: flux-control-plane
+        - name: prow
+          configMap:
+            name: prow-dashboards
