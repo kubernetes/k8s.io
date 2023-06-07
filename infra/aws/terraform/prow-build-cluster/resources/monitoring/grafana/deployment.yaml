@@ -45,6 +45,18 @@ spec:
             - name: flux-control-plane
               mountPath: "/var/lib/grafana/dashboards/kubernetes/flux-control-plane.json"
               subPath: flux-control-plane.json
+            - name: prow
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-builds.json"
+              subPath: builds.json
+            - name: prow
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-jobs.json"
+              subPath: jobs.json
+            - name: prow
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-organisations.json"
+              subPath: organisations.json
+            - name: prow
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-repositories.json"
+              subPath: repositories.json
           ports:
             - name: grafana
               containerPort: 3000
@@ -89,3 +101,6 @@ spec:
         - name: flux-control-plane
           configMap:
             name: flux-control-plane
+        - name: prow
+          configMap:
+            name: prow-dashboards

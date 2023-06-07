@@ -79,6 +79,63 @@ resource "fastly_service_vcl" "files" {
     source      = "\"*\""
   }
 
+  # Remove Google cookies from the origin
+  header {
+    destination = "http.x-goog-generation"
+    type        = "cache"
+    action      = "delete"
+    name        = "remove x-goog-generation"
+  }
+
+  header {
+    destination = "http.x-goog-metageneration"
+    type        = "cache"
+    action      = "delete"
+    name        = "remove x-goog-metageneration"
+  }
+
+  header {
+    destination = "http.x-guploader-uploadid"
+    type        = "cache"
+    action      = "delete"
+    name        = "remove x-guploader-uploadid"
+  }
+
+  header {
+    destination = "http.x-goog-hash"
+    type        = "cache"
+    action      = "delete"
+    name        = "remove x-goog-hash"
+  }
+
+  header {
+    destination = "http.x-goog-meta-goog-reserved-file-mtime"
+    type        = "cache"
+    action      = "delete"
+    name        = "remove x-goog-meta-goog-reserved-file-mtime"
+  }
+
+  header {
+    destination = "http.x-goog-storage-class"
+    type        = "cache"
+    action      = "delete"
+    name        = "remove x-goog-storage-class"
+  }
+
+  header {
+    destination = "http.x-goog-stored-content-encoding"
+    type        = "cache"
+    action      = "delete"
+    name        = "remove x-goog-stored-content-encoding"
+  }
+
+  header {
+    destination = "http.x-goog-stored-content-length"
+    type        = "cache"
+    action      = "delete"
+    name        = "remove x-goog-stored-content-length"
+  }
+
   # Do not cache 'not found' & authenticated requests:
   condition {
     type      = "CACHE"
