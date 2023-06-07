@@ -22,5 +22,5 @@ metadata:
 spec:
   interval: 5m0s
   ref:
-    branch: eks-prow-build-cluster-gitops
-  url: https://github.com/pkprzekwas/k8s.io
+    branch: main
+  url: https://github.com/kubernetes/k8s.io
