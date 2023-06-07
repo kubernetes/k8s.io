@@ -57,6 +57,15 @@ spec:
             - name: prow
               mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-repositories.json"
               subPath: repositories.json
+            - name: test-infra
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/boskos-http.json"
+              subPath: boskos-http.json
+            - name: test-infra
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/boskos.json"
+              subPath: boskos.json
+            - name: test-infra
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow.json"
+              subPath: prow.json
           ports:
             - name: grafana
               containerPort: 3000
@@ -104,3 +113,6 @@ spec:
         - name: prow
           configMap:
             name: prow-dashboards
+        - name: test-infra
+          configMap:
+            name: test-infra-dashboard
