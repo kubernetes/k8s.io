@@ -555,7 +555,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(container_memory_working_set_bytes{container_label_io_kubernetes_pod_namespace=\"$namespace\",container_label_app!=\"POD\",container_label_app!=\"\",container_label_io_kubernetes_pod_name=~\".*-controller-.*\"}) by (container_label_io_kubernetes_pod_name)",
+              "expr": "sum(container_memory_working_set_bytes{namespace=\"$namespace\",container!=\"POD\",container!=\"\",pod=~\".*-controller-.*\"}) by (pod)",
               "hide": false,
               "interval": "",
               "legendFormat": "{{pod}}",
