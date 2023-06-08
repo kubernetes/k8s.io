@@ -322,6 +322,7 @@
     "sha256:c017dc678520679647d6338405e5d5eb793873ba3b73a84ab61ea2450fa8fce4": ["v1.27.0-alpha.1"]
     "sha256:92534073fdfb6451c7a4c7b66d42eeea1e6b3d700b6944c6b3a97d4d1dc0383d": ["v1.27.0-alpha.2"]
     "sha256:28972f0b5b615be9da1054d79b156d7009599e80d70d490d725e31e0187ca747": ["v1.27.0-alpha.3"]
+    "sha256:280568e95f94fdc72e5de6f3cf19aeed98c64eb31c02b4b43118959c604f2b5c": ["v1.28.0-alpha.2"]
 - name: conformance-amd64
   dmap:
     "sha256:a4ff0d2cc03ea85fae57e80346a2a34eb48cd709d08fc091619c5a87e08cbd94": ["v1.16.14"]
@@ -646,6 +647,7 @@
     "sha256:7cedfe1dedce5d733d5e89a3db9eea2857a2ae67beaad39e02cbd36210db5b54": ["v1.27.0-alpha.1"]
     "sha256:dc76a1ed00ed172194e8f62e0ed9a66d16a900b2a33008751f2843457f301eba": ["v1.27.0-alpha.2"]
     "sha256:c99630288c15c6f0604da2400ef7033355e8f3845049796c539ee303bec4e35d": ["v1.27.0-alpha.3"]
+    "sha256:07f17a53115eb1753d41f7f75c201fe49575a4d7dd832ecebb8e615b191d715d": ["v1.28.0-alpha.2"]
 - name: conformance-arm
   dmap:
     "sha256:b87bc56a91f55371d6d551609d449faf52981aed656d64de1127c9ab7daaf8f1": ["v1.16.14"]
@@ -1294,6 +1296,7 @@
     "sha256:8d606236753217cb3ae12982e7707c94160e1db68994ae37d3c15c008897d530": ["v1.27.0-alpha.1"]
     "sha256:1c42d5e945593d8f85bfe2dc721b840533382439301d085aa62c3d874a4f3eef": ["v1.27.0-alpha.2"]
     "sha256:9a49ef2c0045beb7a046ff2bda06a27b7b8563ce55334860dc311074c4cd0f86": ["v1.27.0-alpha.3"]
+    "sha256:b1171fe67f6306978a7814b43c972fa68059cce81995a641f39d5735af220bc2": ["v1.28.0-alpha.2"]
 - name: conformance-ppc64le
   dmap:
     "sha256:bc63b35465e4c3c4acf936abc592da052f5f300a6a32f0f671f4764486964d47": ["v1.16.14"]
@@ -1618,6 +1621,7 @@
     "sha256:3f17f84d209a15dfdceb0eed977987a43a6470b5ceb4ff877446a4498a49ee88": ["v1.27.0-alpha.1"]
     "sha256:f117263e18e86a5a7fd84447ecf066d69740a930bb2d1695886cbd2555b0b791": ["v1.27.0-alpha.2"]
     "sha256:99d09b370c7c93104d10ddba2cc3e93a9bdd32558dfd4d1ffeac5c9e77b2b6ae": ["v1.27.0-alpha.3"]
+    "sha256:f75a86ef9c7b5a67851aebe3125a0d3bab4dc1eee523584dc3c59f16c42466e8": ["v1.28.0-alpha.2"]
 - name: conformance-s390x
   dmap:
     "sha256:1e5711d4a7d4eca6886639f6c49a67192c6b8961e217ff15787306c633c41cc9": ["v1.16.14"]
@@ -1942,6 +1946,7 @@
     "sha256:1b62eb917a63e00b513e3716a7a9466c8364d9c172691ac22adb99a9fa27a206": ["v1.27.0-alpha.1"]
     "sha256:e0cc70fa0807d4f6ccd814eebfa1c945f791fa6700cc3bd8c524d34d4ca8ae6a": ["v1.27.0-alpha.2"]
     "sha256:eb9c1acfea3d7131aa3f025abf708c325d223c0ae6d7c4d4c87ffdbed47ff5c9": ["v1.27.0-alpha.3"]
+    "sha256:0be0a3a70f75f0959d102a0284a77a212ed86d25d976f8d7a8cf99b84eace90b": ["v1.28.0-alpha.2"]
 - name: hyperkube
   dmap:
     "sha256:aa4b06933104b959f8bc343d053eb7a6e3fe4cfaad52837867ee66b53b1a82f8": ["v1.16.14"]
@@ -2567,6 +2572,7 @@
     "sha256:8ba7e69f2717d2fdd5c5288fbae033fc5ef26e59e21a392ecf7b7e620b9a2546": ["v1.27.0-alpha.1"]
     "sha256:4392a19a5deb4da021a498a29efe87a4410046eb4acdcef041fa1a346415ccc0": ["v1.27.0-alpha.2"]
     "sha256:fb55d18fe1e80f24c5163b0df28eca10d3c05bccb742fe1af5c2940d4b076a33": ["v1.27.0-alpha.3"]
+    "sha256:856a1931f4f3f254600038208eef25414ad31e299b713e7675781e56104a86f8": ["v1.28.0-alpha.2"]
 - name: kube-apiserver-amd64
   dmap:
     "sha256:5c42b50b6891e9c93a6aa740c818faa27c2f14aaf5a76eb59e768ada37bf85f6": ["v1.16.14"]
@@ -2892,6 +2898,7 @@
     "sha256:852c5a5c66dc4f0baae1fb8993135cd5aacc277d7cce9ad2935c1e602541babe": ["v1.27.0-alpha.1"]
     "sha256:72c4195bfe34cd741fdf6cfd38e4f3d04ce35403366d9442282e0fe5e4e55859": ["v1.27.0-alpha.2"]
     "sha256:f3c9472489eded5af57e64f9c62826b3d50425ea63a4030a2542ebb914906cdc": ["v1.27.0-alpha.3"]
+    "sha256:149cc90087d80223dd72127e5eba19c40368e047217adb60ba2a5b596262f084": ["v1.28.0-alpha.2"]
 - name: kube-apiserver-arm
   dmap:
     "sha256:235d2d8e266c977e62c14becfefba67e5311cd8eca1e8b38f090516d79c8d7a4": ["v1.16.14"]
@@ -3542,6 +3549,7 @@
     "sha256:72246dcaf4cf0fbe6b7421c3fe2135e66b268c7d72ca4f168d75583625c0e76c": ["v1.27.0-alpha.1"]
     "sha256:303e847a5f00634732d2e74687bfdc4d3bba68631c994bbd8f32e804b32317e3": ["v1.27.0-alpha.2"]
     "sha256:2bd95d89494588f1cbb51c5f81a0530ab40bb04f72d371d9cfaef1ce67c04f3d": ["v1.27.0-alpha.3"]
+    "sha256:e384d16186cfd6029878c2be436e93ee1c8f19d35812c7af98f9f9522bc5b0c9": ["v1.28.0-alpha.2"]
 - name: kube-apiserver-ppc64le
   dmap:
     "sha256:1d91d8a373bf39aa1dd5bbd99103bc1f81c215fc7fb90b60c6ce49f7b61b9571": ["v1.16.14"]
@@ -3867,6 +3875,7 @@
     "sha256:538c763bfbf8d0953b0567d39ca1679acdc123e2e65a7630502a0a16d2bc7378": ["v1.27.0-alpha.1"]
     "sha256:40219badd70c8c7f29b415d3696b66450ce4df6cc8c6adbb3e4b9511e52ea9ad": ["v1.27.0-alpha.2"]
     "sha256:9d0c4db4b97dbf7e42507a987feab0187ee78dba342b035f9695ff31769c7961": ["v1.27.0-alpha.3"]
+    "sha256:4f2f1c7314abf6860eb221505f1caf8fbeb60e5502d77ee6b57bd8529cbba81c": ["v1.28.0-alpha.2"]
 - name: kube-apiserver-s390x
   dmap:
     "sha256:685740a88962801b593fb0b78dc6ab0485b8f233e111127f7aaaa52fa9b441f9": ["v1.16.14"]
@@ -4192,6 +4201,7 @@
     "sha256:b5fb7b070b24e83346bc3c4071b3f64ac23aa8f17cd4745a99a7653a34d0594c": ["v1.27.0-alpha.1"]
     "sha256:832393141a7824d394ca9bb21f5ecb9a82f951f3530f20f6ab2cfc2e35021a7e": ["v1.27.0-alpha.2"]
     "sha256:801bc5cac6619c80f60661bb40c72ad21d82e8f520f1ac482252e740f1801273": ["v1.27.0-alpha.3"]
+    "sha256:f513157b1126e64bbc8a4325baba7e486ee54ebd45f57b4cc8eb67f4eca45ff2": ["v1.28.0-alpha.2"]
 - name: kube-controller-manager
   dmap:
     "sha256:197bec145cebadbbffdac701e87ce6d05c7cfa5edbc17116647011b4b056a0ac": ["v1.16.14"]
@@ -4517,6 +4527,7 @@
     "sha256:9353875643b36b57f41b849cfeba3d9debc3b618aaf4084fed447f78cb2ca564": ["v1.27.0-alpha.1"]
     "sha256:8c22585e717fd7b58d2a7f1bb1ee648f64ba2efbed5c296d09e37a64d12c247e": ["v1.27.0-alpha.2"]
     "sha256:b7b4cd09a1fe68158f62e09c49f13f09652c472ebc6966339e1b8842fa645a9d": ["v1.27.0-alpha.3"]
+    "sha256:41ba1e04a328d4eff8ae9a16ba185c05537dfb10dcfe181ebf95d9662e773506": ["v1.28.0-alpha.2"]
 - name: kube-controller-manager-amd64
   dmap:
     "sha256:34a560fe606289775c5b3a38995af328d62f9f62ca2bf06625de743af453c579": ["v1.16.14"]
@@ -4842,6 +4853,7 @@
     "sha256:b81614718c4afaf19304c623e4ddcfa295ce477ff7a82dc9a8206a1f2640c841": ["v1.27.0-alpha.1"]
     "sha256:b34beb0772e6e18795cb11d75fe8c6289bbdb4964efe9f4c68acd5c3ce58bb1a": ["v1.27.0-alpha.2"]
     "sha256:3472c4c43ea2863beb4a8de854f4ca716c21f2cec01c25a70c616e1b638e4463": ["v1.27.0-alpha.3"]
+    "sha256:c80ccebe7feb7f34626d60ea5b45f8cf4877e903495d713dc1a010d65f31eee5": ["v1.28.0-alpha.2"]
 - name: kube-controller-manager-arm
   dmap:
     "sha256:50f5846fe8eae208b66d9fc8da4ff36013b2fb84c90b96da2909804596403e94": ["v1.16.14"]
@@ -5492,6 +5504,7 @@
     "sha256:62eca3533b6e69389972682dfa1ff568b57092fed5e0ce6a8ece8727fac290c6": ["v1.27.0-alpha.1"]
     "sha256:598a130f053093717dd8607674686fc1b5e955c64a69e7d29051575dda7dcab1": ["v1.27.0-alpha.2"]
     "sha256:ae7053b3d6a392c64bc68cdcdce05173a20465004be28f2bcb6af4cceae6f29e": ["v1.27.0-alpha.3"]
+    "sha256:bed9d1d8c36f240578488661b8664c0ae53cf1d0a0f2dfd43e03c8b1a743fcd8": ["v1.28.0-alpha.2"]
 - name: kube-controller-manager-ppc64le
   dmap:
     "sha256:7dcd78e1cb5c41e528111cc3e38f2879cf009cea0b1beabaef872d2b5e1bd7a4": ["v1.16.14"]
@@ -5817,6 +5830,7 @@
     "sha256:19137ea3469e6e7846f61c41e104b13fec9c9d1fca27da52d218db1d39d10554": ["v1.27.0-alpha.1"]
     "sha256:7f5a1e6dd6725cfbc4fa40e5b441b3ebe01db9809dd89fcd3083321d24b4afbe": ["v1.27.0-alpha.2"]
     "sha256:180bb36c9456f663f0f9224af12625edde80ba9a245f78d04c3525f3df2819e1": ["v1.27.0-alpha.3"]
+    "sha256:17d46afcca719b2f206e0e53ed993751682253806454bc481b00a9ddc6972b1a": ["v1.28.0-alpha.2"]
 - name: kube-controller-manager-s390x
   dmap:
     "sha256:8e8dfa30cdc900e09bac5f08d665f8b16596d98bbd3f4242399f54bf1c48648f": ["v1.16.14"]
@@ -6142,6 +6156,7 @@
     "sha256:304271008efd813a4e446201a80887bfb67892fba5243ea8eb37010f0c4812d3": ["v1.27.0-alpha.1"]
     "sha256:69733010c59a0b4752139061e685377da415d01c0192409bdaa7136bfa3a2a08": ["v1.27.0-alpha.2"]
     "sha256:f6e57d29f42245e391115057712855a3e2187752711223cd257d93e3a17fc1d7": ["v1.27.0-alpha.3"]
+    "sha256:46d1291d098b8dd5f1d0b1c08c1ce282902aeb0819d3a4b23a7ec818cc46ca1d": ["v1.28.0-alpha.2"]
 - name: kube-proxy
   dmap:
     "sha256:1b6638a9ac250c8e7a0118abc9ec5790b2d46e2755ff3967c33daff2e3651f71": ["v1.16.14"]
@@ -6467,6 +6482,7 @@
     "sha256:61e9ae488d1763bcea941d9f797d8e26e3986c5acd1b0db9247c826b6ea067cb": ["v1.27.0-alpha.1"]
     "sha256:3720d90f1def72acbbdd0c356b409ac244a64a4d00f157fc25dc63fa223d5ec0": ["v1.27.0-alpha.2"]
     "sha256:a331057aa4049715fd5f19a1a84aba79dade8cb9736c49cb14c7bb6f3aac7ea3": ["v1.27.0-alpha.3"]
+    "sha256:9c932263402272d6f2b6ea2c9250b6150c9c92285059963abba6745d8970ebb7": ["v1.28.0-alpha.2"]
 - name: kube-proxy-amd64
   dmap:
     "sha256:ffb7eab29a7184916bc777f061dd62598e4ce447fed59609c547ce7490064e62": ["v1.16.14"]
@@ -6792,6 +6808,7 @@
     "sha256:3112bff99096bf2cd6efa3f77c31d7b3d4acadb12f8a3e1694a301f76b4b1e91": ["v1.27.0-alpha.1"]
     "sha256:c743f53de1f16ccdfc3f919a3a170f27f16fee1a6bb92bd5559401deea5e96e5": ["v1.27.0-alpha.2"]
     "sha256:b5e8a0825302b001cabd0024356f021194132f0a409b33776ad2517747cb426f": ["v1.27.0-alpha.3"]
+    "sha256:925a541a1fceff6794e6688deb4a37cf037ef6e8632e0ed373a3d3e447a46b6f": ["v1.28.0-alpha.2"]
 - name: kube-proxy-arm
   dmap:
     "sha256:64c048735b5b30a89a098f6d9ce28263f32f22fa4e5497d18aec8ae6e3ace5f8": ["v1.16.14"]
@@ -7442,6 +7459,7 @@
     "sha256:db2219f20defac7c721f7612dcfb6bd27f8b523467deacef59574a1dce56b35b": ["v1.27.0-alpha.1"]
     "sha256:9fbab08ae1c322274692501aafd253da9f729f97bcdb7c959caef0d19a1365d1": ["v1.27.0-alpha.2"]
     "sha256:d57513b4bcede14a89a34dda8d31bb8c3f55ff9783325d4443400abea3c33210": ["v1.27.0-alpha.3"]
+    "sha256:057da3b1973f1752e8eeb3e0f1c43cf239caaf1437d65709282d1e425d437a2b": ["v1.28.0-alpha.2"]
 - name: kube-proxy-ppc64le
   dmap:
     "sha256:c05f5e7af6e53496f836161194876af35bc59d37682e88752d7fc6294f18111d": ["v1.16.14"]
@@ -7767,6 +7785,7 @@
     "sha256:dc7121d01f06f07666e9d41ce73dc819be661a2081f24a402b79dfa910ccd896": ["v1.27.0-alpha.1"]
     "sha256:fd239ac0cf34b92b08e2e1f9c857418790afda71c79819613242f20b9ae816f6": ["v1.27.0-alpha.2"]
     "sha256:426bbb700346bb32834bd26bcaa717e4c264b878c9f72d0a0e741b642dae7026": ["v1.27.0-alpha.3"]
+    "sha256:cb15cd38582511df0c59136a8ae22ab50d18c78d42070173560978cab770d8e4": ["v1.28.0-alpha.2"]
 - name: kube-proxy-s390x
   dmap:
     "sha256:ed13e59a0ce34ada7dbd147493e461c3a0ad6804856c21fa98a7509f1321a71d": ["v1.16.14"]
@@ -8092,6 +8111,7 @@
     "sha256:1fa179e6b317399b469de7b8b86686f33973a5a90d3c1e61714d9f2587bb17a4": ["v1.27.0-alpha.1"]
     "sha256:ffd90f6e340ddbd47a3c11fa6731f1032049a927e13517d444f7210e1699d1fa": ["v1.27.0-alpha.2"]
     "sha256:27a29759002fdd67da97719958f7098e20a84ec947d50e08a40813becc9116c2": ["v1.27.0-alpha.3"]
+    "sha256:97d0eb36a52899372fd90b872c703b42e0341cbdede76eaf63992ec55240687b": ["v1.28.0-alpha.2"]
 - name: kube-scheduler
   dmap:
     "sha256:f99ca44618285a1e28215814bea4c2f82f8b08fd5c4af8b41cadc89ea70894bc": ["v1.16.14"]
@@ -8417,6 +8437,7 @@
     "sha256:5476a001341aa1133519dd2f9b46719729a4697d47f65e8012d458d2caf5481e": ["v1.27.0-alpha.1"]
     "sha256:b63dc647c817d473f79f7867036b22ba86b5abc6681455b7439b2e612cb88c6f": ["v1.27.0-alpha.2"]
     "sha256:cebd8d5e7c12bb61edfaca28b2526998758b5d20cb38140499f2a70c7bb61ba6": ["v1.27.0-alpha.3"]
+    "sha256:caea539fafa6bc1a7b690c3824f6769428d1dc6ea8a8f3356e0d8723f8868673": ["v1.28.0-alpha.2"]
 - name: kube-scheduler-amd64
   dmap:
     "sha256:db978da4cb82e205913924aca2a533be46dad6a4a8483eff0414f4ed08d8a7e3": ["v1.16.14"]
@@ -8742,6 +8763,7 @@
     "sha256:9d66ff57a654fd53771324f4c20307f8b07113f7cd0e7441f30070393beb2dec": ["v1.27.0-alpha.1"]
     "sha256:93e6dc39378fdb401bb1e686e4788b19fbe7bf680a273e10417f6c88f25db580": ["v1.27.0-alpha.2"]
     "sha256:afc439fcb245f88e3b852bc404b16485a4fb4d84eb35e0b45039854616e5b73f": ["v1.27.0-alpha.3"]
+    "sha256:b42fcdf2d8f17e7b787aabf3648d527efde9b252f5a2a7c81e5b79bbfca57b2c": ["v1.28.0-alpha.2"]
 - name: kube-scheduler-arm
   dmap:
     "sha256:e0a32dd3f1eeb863e79ff5918afcedc3329295dd60f1614084d58c59e1e79a42": ["v1.16.14"]
@@ -9392,6 +9414,7 @@
     "sha256:0b84578cb23ee2f51c8d63bffb931811553348cb0da0fad35478b3a5b467816d": ["v1.27.0-alpha.1"]
     "sha256:27dbe345d7832331ff9ee98f667a9bd50dee82d9b4bb7597fb67433a01736e94": ["v1.27.0-alpha.2"]
     "sha256:b15327bfef1ffc145b8a29821dc1c34b3ed6e31bf710e2f2de5dd9b54b4f918f": ["v1.27.0-alpha.3"]
+    "sha256:4e7496fe24d555b5bad4b885b3b68f9128ace41529473c86d6f9b9483099bac5": ["v1.28.0-alpha.2"]
 - name: kube-scheduler-ppc64le
   dmap:
     "sha256:6f4d0d614e08dc45e2c27b7436f1ac8a871fa442de6fb484776b25aa1964f7e1": ["v1.16.14"]
@@ -9717,6 +9740,7 @@
     "sha256:cc6b950f9b86bbe7014f82b138f60fb928efc09683a4026995ff42b6d4dd2da2": ["v1.27.0-alpha.1"]
     "sha256:e3bf700a9612fca54a5e6a659ebd81fb5c06ada64c2d323bcfac46bb52126b69": ["v1.27.0-alpha.2"]
     "sha256:fd4b2f88b84a0cf560b33696ce3f2dbe6faccf6e9041b7d0a45363ced9d8958e": ["v1.27.0-alpha.3"]
+    "sha256:817f7ce4975aced6cd8a7d61dd56447f0a25c7a63865da1bf3adc508c22ebcef": ["v1.28.0-alpha.2"]
 - name: kube-scheduler-s390x
   dmap:
     "sha256:bba15297966e41201df938bfbc2d37c9cfdb2b419ebbd2bb66a3d773b2f70128": ["v1.16.14"]
@@ -10042,6 +10066,22 @@
     "sha256:e2c32044ad936345d3deb121e9a1620ec33e3e3c58d4b2af556889180d0f46b8": ["v1.27.0-alpha.1"]
     "sha256:990870b326ec0c292c152be6a43ba8261179e812403f3e15b459265e77626345": ["v1.27.0-alpha.2"]
     "sha256:c790cd5f3aa6e6df80eb821b3a011b6810ff0d8e1a2a12419e6ddce630ea52e0": ["v1.27.0-alpha.3"]
+    "sha256:bf35c7e71f6e3fd9a6aee5b55e6186ee33e0ca824076e7b9f861e385fc0f61b5": ["v1.28.0-alpha.2"]
+- name: kubectl
+  dmap:
+    "sha256:bc5b22cb6445a9f8dcb2b6eb8357b9c36a5ceb896a853ceb8e485a92f48feb8f": ["v1.28.0-alpha.2"]
+- name: kubectl-amd64
+  dmap:
+    "sha256:fa3dee703f0c718b4d6cfee565b1c991c77c3a93dff32161c8f0db03b6d22464": ["v1.28.0-alpha.2"]
+- name: kubectl-arm64
+  dmap:
+    "sha256:a673c544ae0c15310246d8d84ad0c7c5ef39fed00033507cf6bd7ed414b91153": ["v1.28.0-alpha.2"]
+- name: kubectl-ppc64le
+  dmap:
+    "sha256:f0b33ef7350a1e09730b2912faf026cedd3016755498b89e565784124dff4a66": ["v1.28.0-alpha.2"]
+- name: kubectl-s390x
+  dmap:
+    "sha256:da22cbb8bc55ee1447b22242f01f39c16283b64ac630f20cd26fc60d2c116f61": ["v1.28.0-alpha.2"]
 - name: pause
   dmap:
     "sha256:927d98197ec1141a368550822d18fa1c60bdae27b78b0c004f705f548c07814f": ["3.2"]
