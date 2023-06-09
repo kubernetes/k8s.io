@@ -33,12 +33,6 @@ spec:
             - name: dashboards
               mountPath: "/etc/grafana/provisioning/dashboards/dashboardproviders.yaml"
               subPath: dashboardproviders.yaml
-            - name: kube-state-metrics
-              mountPath: "/var/lib/grafana/dashboards/kubernetes/kube-state-metrics.json"
-              subPath: kube-state-metrics.json
-            - name: node-exporter-full
-              mountPath: "/var/lib/grafana/dashboards/kubernetes/node-exporter-full.json"
-              subPath: node-exporter-full.json
             - name: flux-cluster-stats
               mountPath: "/var/lib/grafana/dashboards/kubernetes/flux-cluster-stats.json"
               subPath: flux-cluster-stats.json
@@ -66,6 +60,13 @@ spec:
             - name: test-infra
               mountPath: "/var/lib/grafana/dashboards/kubernetes/prow.json"
               subPath: prow.json
+           # NOTE: temporarily disabled these dashboards until grafana has auth access
+           # - name: kube-state-metrics
+           #   mountPath: "/var/lib/grafana/dashboards/kubernetes/kube-state-metrics.json"
+           #   subPath: kube-state-metrics.json
+           # - name: node-exporter-full
+           #   mountPath: "/var/lib/grafana/dashboards/kubernetes/node-exporter-full.json"
+           #   subPath: node-exporter-full.json
           ports:
             - name: grafana
               containerPort: 3000
