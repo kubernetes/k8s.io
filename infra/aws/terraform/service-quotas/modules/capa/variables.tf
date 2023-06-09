@@ -52,7 +52,7 @@ variable "capa_quotas" {
     "ec2_max_elastic_ips" = {
       quota_code   = "L-0263D0A3"
       service_code = "ec2"
-      value        = 100
+      value        = 200
     }
     # Amazon Elastic Compute Cloud (Amazon EC2): Maximum number of vCPUs assigned to the Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances.
     "ec2_max_vcpus" = {
