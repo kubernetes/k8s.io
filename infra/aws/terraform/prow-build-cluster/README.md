@@ -54,7 +54,7 @@ otherwise you'll have no access to the cluster (e.g. you'll get Unauthorized err
 Open kubeconfig in a text editor of your choice and update `args` for the
 appropriate cluster:
 
-* Production
+* Production:
     ```yaml
     args:
       - --region
