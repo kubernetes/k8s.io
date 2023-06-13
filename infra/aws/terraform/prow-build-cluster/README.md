@@ -22,6 +22,15 @@ There are two distinct EKS clusters representing different environments:
 * Instance Type & Autoscaling Parameters (for some savings)
 * Canary is missing k8s-prow OIDC Provider and the corresponding IAM Role
 
+## Tool Requirements
+
+If you are an administrator, it's recommended for you to install following tools:
+* [terraform](https://developer.hashicorp.com/terraform/downloads)
+* [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+* [make](https://www.gnu.org/software/make/)
+* [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+* [flux cli](https://fluxcd.io/flux/installation/#install-the-flux-cli)
+
 ## Provisioninig and Updating Clusters
 
 The instructions on how to provision and make changes to the cloud infrastructure supporting the EKS Prow Build Clusters
