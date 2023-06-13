@@ -37,6 +37,7 @@ groups:
       - aravindh@redhat.com # SIG Windows
       - augustus@cisco.com # SIG Release
       - bentheelder@google.com
+      - bpratt@redhat.com # SIG Testing
       - bridget@kromhout.org # SIG Cloud Provider
       - caniszczyk@linuxfoundation.org
       - shane@konghq.com

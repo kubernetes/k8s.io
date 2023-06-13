@@ -1,0 +1,604 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-infra-dashboard
+  namespace: monitoring
+data:
+  boskos-http.json: |
+    {
+       "__inputs": [ ],
+       "__requires": [ ],
+       "annotations": {
+          "list": [ ]
+       },
+       "editable": false,
+       "gnetId": null,
+       "graphTooltip": 0,
+       "hideControls": false,
+       "id": null,
+       "links": [ ],
+       "panels": [
+          {
+             "aliasColors": { },
+             "bars": false,
+             "dashLength": 10,
+             "dashes": false,
+             "datasource": "Prometheus Main",
+             "description": "histogram_quantile(phi, sum(rate(boskos_http_request_duration_seconds_bucket[5m])) by (le))",
+             "fill": 1,
+             "gridPos": {
+                "h": 9,
+                "w": 24,
+                "x": 0,
+                "y": 0
+             },
+             "id": 2,
+             "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "max": false,
+                "min": false,
+                "rightSide": true,
+                "show": true,
+                "sideWidth": 350,
+                "sort": "avg",
+                "sortDesc": true,
+                "total": false,
+                "values": true
+             },
+             "lines": true,
+             "linewidth": 1,
+             "links": [ ],
+             "nullPointMode": "null",
+             "percentage": false,
+             "pointradius": 5,
+             "points": false,
+             "renderer": "flot",
+             "repeat": null,
+             "seriesOverrides": [ ],
+             "spaceLength": 10,
+             "stack": false,
+             "steppedLine": false,
+             "targets": [
+                {
+                   "expr": "histogram_quantile(0.99, sum(rate(boskos_http_request_duration_seconds_bucket{path=~\"${path}\", status=~\"${status}\", instance=~\"${instance}\"}[5m])) by (le))",
+                   "format": "time_series",
+                   "intervalFactor": 2,
+                   "legendFormat": "phi=0.99",
+                   "refId": "A"
+                },
+                {
+                   "expr": "histogram_quantile(0.95, sum(rate(boskos_http_request_duration_seconds_bucket{path=~\"${path}\", status=~\"${status}\", instance=~\"${instance}\"}[5m])) by (le))",
+                   "format": "time_series",
+                   "intervalFactor": 2,
+                   "legendFormat": "phi=0.95",
+                   "refId": "B"
+                },
+                {
+                   "expr": "histogram_quantile(0.5, sum(rate(boskos_http_request_duration_seconds_bucket{path=~\"${path}\", status=~\"${status}\", instance=~\"${instance}\"}[5m])) by (le))",
+                   "format": "time_series",
+                   "intervalFactor": 2,
+                   "legendFormat": "phi=0.5",
+                   "refId": "C"
+                }
+             ],
+             "thresholds": [ ],
+             "timeFrom": null,
+             "timeShift": null,
+             "title": "Latency distribution for instance ${instance} path ${path} and status ${status}",
+             "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+             },
+             "type": "graph",
+             "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": [ ]
+             },
+             "yaxes": [
+                {
+                   "format": "short",
+                   "label": null,
+                   "logBase": 1,
+                   "max": null,
+                   "min": null,
+                   "show": true
+                },
+                {
+                   "format": "short",
+                   "label": null,
+                   "logBase": 1,
+                   "max": null,
+                   "min": null,
+                   "show": true
+                }
+             ]
+          },
+          {
+             "aliasColors": { },
+             "bars": false,
+             "dashLength": 10,
+             "dashes": false,
+             "datasource": "Prometheus Main",
+             "description": "sum(rate(boskos_http_request_duration_seconds_count{instance=~\"${instance}\"}[5m])) by (path, status)",
+             "fill": 1,
+             "gridPos": {
+                "h": 9,
+                "w": 24,
+                "x": 0,
+                "y": 0
+             },
+             "id": 3,
+             "legend": {
+                "alignAsTable": true,
+                "avg": true,
+                "current": true,
+                "max": false,
+                "min": false,
+                "rightSide": true,
+                "show": true,
+                "sideWidth": 350,
+                "sort": "avg",
+                "sortDesc": true,
+                "total": false,
+                "values": true
+             },
+             "lines": true,
+             "linewidth": 1,
+             "links": [ ],
+             "nullPointMode": "null",
+             "percentage": false,
+             "pointradius": 5,
+             "points": false,
+             "renderer": "flot",
+             "repeat": null,
+             "seriesOverrides": [ ],
+             "spaceLength": 10,
+             "stack": false,
+             "steppedLine": false,
+             "targets": [
+                {
+                   "expr": "sum(rate(boskos_http_request_duration_seconds_count{instance=~\"${instance}\"}[5m])) by (path, status)",
+                   "format": "time_series",
+                   "intervalFactor": 2,
+                   "legendFormat": "{{path}} {{status}}",
+                   "refId": "A"
+                }
+             ],
+             "thresholds": [ ],
+             "timeFrom": null,
+             "timeShift": null,
+             "title": "Request rate for instance ${instance}",
+             "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+             },
+             "type": "graph",
+             "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": [ ]
+             },
+             "yaxes": [
+                {
+                   "format": "short",
+                   "label": null,
+                   "logBase": 1,
+                   "max": null,
+                   "min": null,
+                   "show": true
+                },
+                {
+                   "format": "short",
+                   "label": null,
+                   "logBase": 1,
+                   "max": null,
+                   "min": null,
+                   "show": true
+                }
+             ]
+          }
+       ],
+       "refresh": "",
+       "rows": [ ],
+       "schemaVersion": 18,
+       "style": "dark",
+       "tags": [ ],
+       "templating": {
+          "list": [
+             {
+                "allValue": ".*",
+                "current": { },
+                "datasource": "Prometheus Main",
+                "hide": 0,
+                "includeAll": false,
+                "label": "instance",
+                "multi": false,
+                "name": "instance",
+                "options": [ ],
+                "query": "label_values(boskos_http_request_duration_seconds_bucket, instance)",
+                "refresh": 2,
+                "regex": "",
+                "sort": 0,
+                "tagValuesQuery": "",
+                "tags": [ ],
+                "tagsQuery": "",
+                "type": "query",
+                "useTags": false
+             },
+             {
+                "allValue": ".*",
+                "current": { },
+                "datasource": "Prometheus Main",
+                "hide": 0,
+                "includeAll": true,
+                "label": "path",
+                "multi": false,
+                "name": "path",
+                "options": [ ],
+                "query": "label_values(boskos_http_request_duration_seconds_bucket, path)",
+                "refresh": 2,
+                "regex": "",
+                "sort": 0,
+                "tagValuesQuery": "",
+                "tags": [ ],
+                "tagsQuery": "",
+                "type": "query",
+                "useTags": false
+             },
+             {
+                "allValue": ".*",
+                "current": { },
+                "datasource": "Prometheus Main",
+                "hide": 0,
+                "includeAll": true,
+                "label": "status",
+                "multi": false,
+                "name": "status",
+                "options": [ ],
+                "query": "label_values(boskos_http_request_duration_seconds_bucket, status)",
+                "refresh": 2,
+                "regex": "",
+                "sort": 0,
+                "tagValuesQuery": "",
+                "tags": [ ],
+                "tagsQuery": "",
+                "type": "query",
+                "useTags": false
+             }
+          ]
+       },
+       "time": {
+          "from": "now-1h",
+          "to": "now"
+       },
+       "timepicker": {
+          "refresh_intervals": [
+             "5s",
+             "10s",
+             "30s",
+             "1m",
+             "5m",
+             "15m",
+             "30m",
+             "1h",
+             "2h",
+             "1d"
+          ],
+          "time_options": [
+             "5m",
+             "15m",
+             "1h",
+             "6h",
+             "12h",
+             "24h",
+             "2d",
+             "7d",
+             "30d"
+          ]
+       },
+       "timezone": "browser",
+       "title": "Boskos Server Dashboard",
+       "version": 0
+    }
+  boskos.json: |
+    {
+       "__inputs": [ ],
+       "__requires": [ ],
+       "annotations": {
+          "list": [ ]
+       },
+       "editable": false,
+       "gnetId": null,
+       "graphTooltip": 0,
+       "hideControls": false,
+       "id": null,
+       "links": [ ],
+       "panels": [
+          {
+             "aliasColors": {
+                "busy": "#ff0000",
+                "cleaning": "#00eeff",
+                "dirty": "#ff8000",
+                "free": "#00ff00",
+                "leased": "#ee00ff",
+                "other": "#aaaaff",
+                "toBeDeleted": "#fafa00",
+                "tombstone": "#cccccc"
+             },
+             "bars": false,
+             "dashLength": 10,
+             "dashes": false,
+             "datasource": "Prometheus Main",
+             "description": "The number of AWS accounts in each state.",
+             "fill": 3,
+             "gridPos": {
+                "h": 9,
+                "w": 24,
+                "x": 0,
+                "y": 0
+             },
+             "id": 2,
+             "legend": {
+                "alignAsTable": false,
+                "avg": false,
+                "current": false,
+                "max": false,
+                "min": false,
+                "rightSide": false,
+                "show": true,
+                "sideWidth": null,
+                "total": false,
+                "values": false
+             },
+             "lines": true,
+             "linewidth": 0,
+             "links": [ ],
+             "nullPointMode": "null",
+             "percentage": false,
+             "pointradius": 5,
+             "points": false,
+             "renderer": "flot",
+             "repeat": null,
+             "seriesOverrides": [ ],
+             "spaceLength": 10,
+             "stack": true,
+             "steppedLine": false,
+             "targets": [
+                {
+                   "expr": "sum(boskos_resources{type=\"aws-account\",job=\"boskos-metrics\"}) by (state)",
+                   "format": "time_series",
+                   "intervalFactor": 2,
+                   "legendFormat": "{{state}}",
+                   "refId": "A"
+                }
+             ],
+             "thresholds": [ ],
+             "timeFrom": null,
+             "timeShift": null,
+             "title": "AWS account usage status",
+             "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+             },
+             "type": "graph",
+             "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": [ ]
+             },
+             "yaxes": [
+                {
+                   "format": "short",
+                   "label": null,
+                   "logBase": 1,
+                   "max": null,
+                   "min": null,
+                   "show": true
+                },
+                {
+                   "format": "short",
+                   "label": null,
+                   "logBase": 1,
+                   "max": null,
+                   "min": null,
+                   "show": true
+                }
+             ]
+          }
+       ],
+       "refresh": "",
+       "rows": [ ],
+       "schemaVersion": 18,
+       "style": "dark",
+       "tags": [ ],
+       "templating": {
+          "list": [ ]
+       },
+       "time": {
+          "from": "now-1d",
+          "to": "now"
+       },
+       "timepicker": {
+          "refresh_intervals": [
+             "5s",
+             "10s",
+             "30s",
+             "1m",
+             "5m",
+             "15m",
+             "30m",
+             "1h",
+             "2h",
+             "1d"
+          ],
+          "time_options": [
+             "5m",
+             "15m",
+             "1h",
+             "6h",
+             "12h",
+             "24h",
+             "2d",
+             "7d",
+             "30d"
+          ]
+       },
+       "timezone": "browser",
+       "title": "Boskos Resource Usage",
+       "uid": "wSrfvNxWz",
+       "version": 0
+    }
+  prow.json: |
+    {
+       "__inputs": [ ],
+       "__requires": [ ],
+       "annotations": {
+          "list": [ ]
+       },
+       "editable": false,
+       "gnetId": null,
+       "graphTooltip": 0,
+       "hideControls": false,
+       "id": null,
+       "links": [ ],
+       "panels": [
+          {
+             "aliasColors": { },
+             "bars": false,
+             "dashLength": 10,
+             "dashes": false,
+             "datasource": "Prometheus Main",
+             "description": "sum by(job) (up)",
+             "fill": 1,
+             "gridPos": {
+                "h": 9,
+                "w": 24,
+                "x": 0,
+                "y": 0
+             },
+             "id": 2,
+             "legend": {
+                "alignAsTable": true,
+                "avg": false,
+                "current": false,
+                "max": false,
+                "min": false,
+                "rightSide": true,
+                "show": true,
+                "sideWidth": 250,
+                "total": false,
+                "values": false
+             },
+             "lines": true,
+             "linewidth": 1,
+             "links": [ ],
+             "nullPointMode": "null",
+             "percentage": false,
+             "pointradius": 5,
+             "points": false,
+             "renderer": "flot",
+             "repeat": null,
+             "seriesOverrides": [ ],
+             "spaceLength": 10,
+             "stack": false,
+             "steppedLine": false,
+             "targets": [
+                {
+                   "expr": "sum by(job) (up)",
+                   "format": "time_series",
+                   "intervalFactor": 2,
+                   "legendFormat": "{{job}}",
+                   "refId": "A"
+                }
+             ],
+             "thresholds": [ ],
+             "timeFrom": null,
+             "timeShift": null,
+             "title": "up",
+             "tooltip": {
+                "shared": true,
+                "sort": 0,
+                "value_type": "individual"
+             },
+             "type": "graph",
+             "xaxis": {
+                "buckets": null,
+                "mode": "time",
+                "name": null,
+                "show": true,
+                "values": [ ]
+             },
+             "yaxes": [
+                {
+                   "format": "short",
+                   "label": null,
+                   "logBase": 1,
+                   "max": null,
+                   "min": null,
+                   "show": true
+                },
+                {
+                   "format": "short",
+                   "label": null,
+                   "logBase": 1,
+                   "max": null,
+                   "min": null,
+                   "show": true
+                }
+             ]
+          }
+       ],
+       "refresh": "",
+       "rows": [ ],
+       "schemaVersion": 18,
+       "style": "dark",
+       "tags": [ ],
+       "templating": {
+          "list": [ ]
+       },
+       "time": {
+          "from": "now-1d",
+          "to": "now"
+       },
+       "timepicker": {
+          "refresh_intervals": [
+             "5s",
+             "10s",
+             "30s",
+             "1m",
+             "5m",
+             "15m",
+             "30m",
+             "1h",
+             "2h",
+             "1d"
+          ],
+          "time_options": [
+             "5m",
+             "15m",
+             "1h",
+             "6h",
+             "12h",
+             "24h",
+             "2d",
+             "7d",
+             "30d"
+          ]
+       },
+       "timezone": "browser",
+       "title": "prow dashboard",
+       "uid": "970b051d3adfd62eb592154c5ce80377",
+       "version": 0
+    }
