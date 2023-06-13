@@ -3,7 +3,7 @@
 This folder primarily contains Terraform scripts, configurations, and modules necessary
 for provisioning and bootstrapping an EKS-based Prow build cluster. Additionally, the `resources`
 directory holds Kubernetes resources that are synchronized with the Prow Build Cluster through
-a GitOps solution called FluxCD.
+a GitOps solution called [FluxCD](https://fluxcd.io/).
 
 ## Environments
 
