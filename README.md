@@ -5,7 +5,7 @@ Kubernetes project infrastructure, managed by the kubernetes community via [sig-
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
     - `codesearch`: instance of [codesearch] at https://cs-canary.k8s.io - owned by [sig-k8s-infra]
     - `elekto`: instance of [elekto] at https://elections.k8s.io - owned by Elections officers (on behalf of [sig-contributor-experience])
-    - `gcsweb`: instance of [gcsweb] at https://gcsweb.k8s.io - owned by [sig-testing]
+    - `gcsweb`: instance of [gcsweb] at https://pkg.go.dev/k8s.io/test-infra/gcsweb - owned by [sig-testing]
     - `k8s.io`: instance of nginx that provides redirects/reverse-proxying for k8s.io and its subdomains - owned by [sig-contributor-experience] and [sig-testing]
     - `kubernetes-external-secrets`: instance of [kubernetes-external-secrets] - owned by [sig-testing]
     - `perfdash`: instance of [perfdash] - owned by [sig-scalability]
