@@ -135,7 +135,7 @@ data:
           "targets": [
             {
               "datasource": "${DS_LOKI}",
-              "expr": "sum(count_over_time({namespace=~\"$namespace\", stream=~\"$stream\", app =~\"$controller\"} | json | __error__!=\"JSONParserErr\" | level=~\"$level\" |= \"$query\" [$__interval]))",
+              "expr": "sum(count_over_time({namespace=~\"flux-system\", stream=~\"$stream\", app =~\"$controller\"} | json | __error__!=\"JSONParserErr\" | level=~\"$level\" |= \"$query\" [$__interval]))",
               "instant": false,
               "legendFormat": "Log count",
               "range": true,
@@ -167,7 +167,7 @@ data:
           "targets": [
             {
               "datasource": "${DS_LOKI}",
-              "expr": "{namespace=~\"$namespace\", stream=~\"$stream\", app =~\"$controller\"} | json | __error__!=\"JSONParserErr\" | level=~\"$level\" |= \"$query\"",
+              "expr": "{namespace=~\"flux-system\", stream=~\"$stream\", app =~\"$controller\"} | json | __error__!=\"JSONParserErr\" | level=~\"$level\" |= \"$query\"",
               "refId": "A"
             }
           ],
@@ -260,27 +260,6 @@ data:
             "skipUrlSync": false,
             "sort": 0,
             "type": "query"
-          },
-          {
-            "allValue": "flux-system",
-            "current": {
-              "selected": true,
-              "text": [
-                "flux-system"
-              ],
-              "value": [
-                "flux-system"
-              ]
-            },
-            "hide": 0,
-            "includeAll": true,
-            "multi": false,
-            "name": "namespace",
-            "options": [],
-            "query": "flux-system",
-            "queryValue": "",
-            "skipUrlSync": false,
-            "type": "custom"
           },
           {
             "allValue": ".+",
