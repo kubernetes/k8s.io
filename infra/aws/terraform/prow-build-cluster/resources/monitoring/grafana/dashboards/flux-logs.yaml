@@ -282,31 +282,6 @@ data:
             "skipUrlSync": false,
             "type": "custom"
           },
-          # {
-          #   "allValue": ".+",
-          #   "current": {
-          #     "selected": true,
-          #     "text": [
-          #       "flux-system"
-          #     ],
-          #     "value": [
-          #       "flux-system"
-          #     ]
-          #   },
-          #   "datasource": "${DS_LOKI}",
-          #   "definition": "label_values(namespace)",
-          #   "hide": 0,
-          #   "includeAll": true,
-          #   "multi": true,
-          #   "name": "namespace",
-          #   "options": [],
-          #   "query": "label_values(namespace)",
-          #   "refresh": 1,
-          #   "regex": "",
-          #   "skipUrlSync": false,
-          #   "sort": 0,
-          #   "type": "query"
-          # },
           {
             "allValue": ".+",
             "current": {
