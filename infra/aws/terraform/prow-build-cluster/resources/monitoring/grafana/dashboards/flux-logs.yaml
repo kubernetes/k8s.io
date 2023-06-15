@@ -254,7 +254,12 @@ data:
             "multi": true,
             "name": "controller",
             "options": [],
-            "query": "label_values(app)",
+            "query": {
+              "label": "app",
+              "refId": "A",
+              "stream": "{namespace=\"flux-system\"}",
+              "type": 1
+            },
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
