@@ -23,8 +23,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-## sysctl settings (required by Prow)
-sysctl -w fs.inotify.max_user_watches=524288
+## sysctl settings (required by Prow to avoid inotify issues)
+sysctl -w fs.inotify.max_user_watches=1048576
+sysctl -w fs.inotify.max_user_instances=8192
 
 ## Set up ephemeral disks (SSDs) to be used by containerd and kubelet
 

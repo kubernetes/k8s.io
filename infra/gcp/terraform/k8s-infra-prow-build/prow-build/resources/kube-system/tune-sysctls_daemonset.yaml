@@ -30,7 +30,8 @@ spec:
         - -c
         - |
           while true; do
-            sysctl -w fs.inotify.max_user_watches=524288
+            sysctl -w fs.inotify.max_user_watches=1048576
+            sysctl -w fs.inotify.max_user_instances=8192
             sleep 10
           done
         image: alpine:3.6
