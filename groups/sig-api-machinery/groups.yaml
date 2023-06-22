@@ -7,6 +7,42 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
+- email-id: sig-api-machinery-leads@kubernetes.io
+    name: sig-api-machinery-leads
+    description: |-
+      SIG api-machinery leads
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - jpbetz@google.com
+      - deads@redhat.com
+      - fbongiovanni@google.com
+      - stefan.schimanski@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
+- email-id: sig-api-machinery@kubernetes.io
+    name: sig-api-machinery
+    description: |-
+      SIG api-machinery general discussion group, for future migration from old googlegroups
+    owners:
+      - sig-api-machinery-leads@kubernetes.io
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: sig-api-machinery-cel-dev@kubernetes.io
     name: sig-api-machinery-cel-dev
     description: |-
