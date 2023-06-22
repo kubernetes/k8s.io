@@ -8,22 +8,22 @@ groups:
   #
 
 - email-id: sig-api-machinery-leads@kubernetes.io
-    name: sig-api-machinery-leads
-    description: |-
-      SIG api-machinery leads
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    owners:
-      - jpbetz@google.com
-      - deads@redhat.com
-      - fbongiovanni@google.com
-      - stefan.schimanski@gmail.com
-    settings:
-      AllowWebPosting: "true"
-      ReconcileMembers: "true"
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+  name: sig-api-machinery-leads
+  description: |-
+    SIG api-machinery leads
+  settings:
+    WhoCanPostMessage: "ANYONE_CAN_POST"
+    ReconcileMembers: "true"
+  owners:
+    - jpbetz@google.com
+    - deads@redhat.com
+    - fbongiovanni@google.com
+    - stefan.schimanski@gmail.com
+  settings:
+    AllowWebPosting: "true"
+    ReconcileMembers: "true"
+    WhoCanPostMessage: "ANYONE_CAN_POST"
+    WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
 
 - email-id: sig-api-machinery@kubernetes.io
     name: sig-api-machinery
