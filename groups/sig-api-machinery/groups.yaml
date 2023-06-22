@@ -109,16 +109,16 @@ groups:
    - jingyih@google.com
    - yczhou@google.com
 
- - email-id: k8s-infra-staging-kubebuilder@kubernetes.io
-   name: k8s-infra-staging-kubebuilder
-   description: |-
-     ACL for pushing kubebuilder artifacts
-   settings:
-     ReconcileMembers: "true"
-   members:
-     - camilamacedo86@gmail.com
-     - ricardo.katz@gmail.com
-     - varshaprasad96@gmail.com
+- email-id: k8s-infra-staging-kubebuilder@kubernetes.io
+  name: k8s-infra-staging-kubebuilder
+  description: |-
+    ACL for pushing kubebuilder artifacts
+  settings:
+    ReconcileMembers: "true"
+  members:
+    - camilamacedo86@gmail.com
+    - ricardo.katz@gmail.com
+    - varshaprasad96@gmail.com
 
   #
   # k8s-infra gcs write access
