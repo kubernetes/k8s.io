@@ -11,9 +11,6 @@ groups:
   name: sig-api-machinery-leads
   description: |-
     SIG api-machinery leads
-  settings:
-    WhoCanPostMessage: "ANYONE_CAN_POST"
-    ReconcileMembers: "true"
   owners:
     - jpbetz@google.com
     - deads@redhat.com
@@ -90,38 +87,38 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
-  - email-id: k8s-infra-staging-storage-migrator@kubernetes.io
-    name: k8s-infra-staging-storage-migrator
-    description: |-
-      ACL for kube-storage-version-migrator
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - xuchao@google.com
-      - haoweic@google.com
+- email-id: k8s-infra-staging-storage-migrator@kubernetes.io
+  name: k8s-infra-staging-storage-migrator
+  description: |-
+    ACL for kube-storage-version-migrator
+  settings:
+     ReconcileMembers: "true"
+   members:
+    - xuchao@google.com
+     - haoweic@google.com
 
-  - email-id: k8s-infra-staging-etcd@kubernetes.io
-    name: k8s-infra-staging-etcd
-    description: |-
-      ACL for staging etcd
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - jpbetz@google.com
-      - wenjiazhang@google.com
-      - jingyih@google.com
-      - yczhou@google.com
+- email-id: k8s-infra-staging-etcd@kubernetes.io
+   name: k8s-infra-staging-etcd
+   description: |-
+     ACL for staging etcd
+   settings:
+     ReconcileMembers: "true"
+   members:
+     - jpbetz@google.com
+     - wenjiazhang@google.com
+     - jingyih@google.com
+    - yczhou@google.com
 
-  - email-id: k8s-infra-staging-kubebuilder@kubernetes.io
-    name: k8s-infra-staging-kubebuilder
-    description: |-
-      ACL for pushing kubebuilder artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - camilamacedo86@gmail.com
-      - ricardo.katz@gmail.com
-      - varshaprasad96@gmail.com
+ - email-id: k8s-infra-staging-kubebuilder@kubernetes.io
+   name: k8s-infra-staging-kubebuilder
+   description: |-
+     ACL for pushing kubebuilder artifacts
+   settings:
+     ReconcileMembers: "true"
+   members:
+     - camilamacedo86@gmail.com
+     - ricardo.katz@gmail.com
+     - varshaprasad96@gmail.com
 
   #
   # k8s-infra gcs write access
