@@ -166,6 +166,7 @@
     "sha256:a3deb0444d53b3f3b2d73acec8be2c3330d28d2df1ef09d0b9d7dbecdee706fb": ["v20230522"]
     "sha256:a98ce8ab90f16bdd8539b168a4d000f366afa4eec23a220b3ce39698c5769bfd": ["v20230527"]
     "sha256:75e167024ab116d01aab8199b0c8250ad4df38d2ea46d5ad696a73046c67ffdf": ["v20230622"]
+    "sha256:e5c68dc56934c273850bfb75c0348a2819756669baf59fcdce9e16771537b247": ["v20230623-d50c7193b"]
 
 # custom cfssl image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/cfssl
