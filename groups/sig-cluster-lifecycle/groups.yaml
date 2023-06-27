@@ -354,6 +354,17 @@ groups:
       - prignanov@vmware.com
       - vrgf2003@gmail.com
 
+  - email-id: k8s-infra-staging-capi-ipam-ic@kubernetes.io
+    name: k8s-infra-staging-capi-ipam-ic
+    description: |-
+      ACL for staging CAPI IPAM Provider Incluster
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jakob.schrettenbrunner@gmail.com
+      - muchhalsagar88@gmail.com
+      - ricardo.katz@gmail.com
+
   - email-id: k8s-infra-staging-cluster-addons@kubernetes.io
     name: k8s-infra-staging-cluster-addons
     description: |-

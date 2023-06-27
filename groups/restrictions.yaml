@@ -77,6 +77,7 @@ restrictions:
       - "^k8s-infra-staging-capi-cloudstack@kubernetes.io$"
       - "^k8s-infra-staging-capi-docker@kubernetes.io$"
       - "^k8s-infra-staging-capi-ibmcloud@kubernetes.io$"
+      - "^k8s-infra-staging-capi-ipam-ic@kubernetes.io$"
       - "^k8s-infra-staging-capi-kubeadm@kubernetes.io$"
       - "^k8s-infra-staging-capi-openstack@kubernetes.io$"
       - "^sig-cluster-lifecycle-cluster-api-openstack-alerts@kubernetes.io$"
