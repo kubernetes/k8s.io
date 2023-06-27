@@ -43,6 +43,8 @@ data "aws_iam_policy_document" "eks_apply" {
       "ec2:CreateEgressOnlyInternetGateway",
       "ec2:CreateInternetGateway",
       "ec2:CreateLaunchTemplate",
+      "ec2:CreateLaunchTemplateVersion",
+      "ec2:ModifyLaunchTemplate",
       "ec2:CreateNatGateway",
       "ec2:CreateRoute",
       "ec2:CreateRouteTable",
