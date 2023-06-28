@@ -80,6 +80,17 @@ module "eks" {
     }
   }
 
+  node_security_group_additional_rules = var.bastion_install ? {
+    bastion_22 = {
+      description              = "Bastion host to nodes"
+      protocol                 = "tcp"
+      from_port                = 22
+      to_port                  = 22
+      type                     = "ingress"
+      source_security_group_id = aws_security_group.bastion_host_security_group[0].id
+    }
+  } : null
+
   eks_managed_node_group_defaults = {
     ami_id                     = var.node_ami
     enable_bootstrap_user_data = true
@@ -123,6 +134,8 @@ module "eks" {
 
       ebs_optimized     = true
       enable_monitoring = true
+
+      key_name = var.key_name
 
       block_device_mappings = {
         # This must be sda1 in order to match the root volume,

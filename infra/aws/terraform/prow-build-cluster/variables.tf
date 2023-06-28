@@ -122,3 +122,20 @@ variable "cluster_autoscaler_version" {
   type        = string
   description = "Cluster Autoscaler version to use (must match the EKS version)"
 }
+
+variable "key_name" {
+  type        = string
+  description = "Name of AWS key pair allowing for ssh access to EKS nodes."
+  default     = null
+}
+
+variable "bastion_install" {
+  type        = bool
+  description = "Install bastion hosts allowing to access EKS nodes via ssh."
+  default     = false
+}
+
+variable "bastion_instance_type" {
+  type    = string
+  default = "t3.nano"
+}

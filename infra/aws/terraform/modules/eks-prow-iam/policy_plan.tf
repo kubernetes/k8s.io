@@ -34,6 +34,7 @@ data "aws_iam_policy_document" "eks_plan" {
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeEgressOnlyInternetGateways",
       "ec2:DescribeInternetGateways",
+      "ec2:DescribeImages",
       "ec2:DescribeLaunchTemplateVersions",
       "ec2:DescribeLaunchTemplates",
       "ec2:DescribeNatGateways",
