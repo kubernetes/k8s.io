@@ -55,6 +55,7 @@
     "sha256:7612338342a1e7b8090bef78f2a04fffcadd548ccaabe8a47bf7758ff549a5f7": ["v1.7.0"]
     "sha256:7244b95ea47bddcb8267c1e625fb163fc183ef55448855e3ac52a7b260a60407": ["v1.7.1"]
     "sha256:744ae2afd433a395eeb13dc03d3313facba92e96ad71d9feaafc85925493fee3": ["v1.8.0"]
+    "sha256:e5c4824e7375fcf2a393e1c03c293b69759af37a9ca6abdb91b13d78a93da8bd": ["v1.8.1"]
 # ingress-nginx controller chroot image
 # https://github.com/kubernetes/ingress-nginx/tree/main/rootfs
 - name: controller-chroot
@@ -76,6 +77,7 @@
     "sha256:e84ef3b44c8efeefd8b0aa08770a886bfea1f04c53b61b4ba9a7204e9f1a7edc": ["v1.7.0"]
     "sha256:e35d5ab487861b9d419c570e3530589229224a0762c7b4d2e2222434abb8d988": ["v1.7.1"]
     "sha256:a45e41cd2b7670adf829759878f512d4208d0aec1869dae593a0fecd09a5e49e": ["v1.8.0"]
+    "sha256:e0d4121e3c5e39de9122e55e331a32d5ebf8d4d257227cb93ab54a1b912a7627": ["v1.8.1"]
 
 # custom base NGINX image
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/nginx
