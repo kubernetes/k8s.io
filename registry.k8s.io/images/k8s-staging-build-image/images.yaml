@@ -941,6 +941,7 @@
     "sha256:bf6084a0fb512187e00cdc5ce703f0368303b00a6c245948ea66355c756b9971": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:dd85cdae062bcf6071955e41a34b69760a2f4df14344017427584b465fa08b96": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:aba5c4ec15fa8d7127449f7bc0e01db0efdc6bc74a167086548c5230f1871dcf": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:0daeffb62c24ab5601b69128641f7006b8ebf7595c099553ccccfb994b1db884": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: kube-cross-amd64
   dmap:
     "sha256:552ad5b1f93115c0d2ef8b1792d4790865245f24493a258093656cb61dfd4250": ["v1.21.0-go1.16.13-buster.0"]
@@ -1007,6 +1008,7 @@
     "sha256:d4a609bd1eb33386c21f70abbd1dfe490859cfb810e900ebbd129035b4afa030": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:cf914c489c28cd3e7837f9dcac5784c50691caed6f9bf6d78cc8e84705f1e843": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:112dea170ffd0397e2ff630910b56bfa467f4b1cd24424bb90b7e2a81064580a": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:d78c68bec7ddec726ed3d77b818d80a186f9152ac0a04f8b415567a026ef2636": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: kube-cross-arm64
   dmap:
     "sha256:b71598a7a1dc4f09eaf95f9313a704ee9413a4dc8ba05bf9ea6e101be417997e": ["v1.21.0-go1.16.13-buster.0"]
@@ -1073,6 +1075,7 @@
     "sha256:be20c01176c763c4f9e295740a66bddcd67c14c5b4984b5106b6db3ecab94b46": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:a9db8e965b2f6bed459bdd26b5c164f7afa7c0de508bb8996670a6c05967edb4": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:11e7740222d279ee85e1984cc3ccada5e29e09ed08998ecdf0314a50187aeddd": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:2532627987e7e1767790f0ee74974ee1c64bbacfa153daf6a95c2736550e06b1": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: kube-cross-ppc64le
   dmap:
     "sha256:d4fb38803d102d9a47ac133bc0b07c0082dde9ff9546657ff0cae7c19d3425a9": ["v1.21.0-go1.16.13-buster.0"]
@@ -1139,6 +1142,7 @@
     "sha256:5dfa94b04c7e61d4e60e97ae3caf28349c68ca5eef7c342ef44039422a985603": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:53f22b9700f16a51c3ae7bc887be1d4b38c6e2311e3a30ffeec1a2844e10bee5": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:2049b0439fd26462710853e17bf74e0172eba5b201c87898d8c9fedfbe4dd6a8": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:d775d81e90b6d93f4039b2d843160ede9f0cf38e89f5f518b69a2eec3e862b70": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: kube-cross-s390x
   dmap:
     "sha256:b8dd071c247797cc63721a5784c414e939080a77fe91a15f059a0e9aad7e5688": ["v1.23.0-go1.17.10-bullseye.0"]
@@ -1201,6 +1205,7 @@
     "sha256:e97c1f3924d0a8ab89287512227719957e6c68048c14701e759f95ea447f6223": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:35d0f93b5541b96c4bb4010db725e0794fb4066d77e329b12cf3dcfcce7a98a7": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:b4211fbad504317a504fb556f7ba64e7220f5b856fdc2ccfddc7d5e0d7b50544": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:58f8096f830b9d18f669a4d27899810b9a9496219c4804d711048e2957cc2e5c": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: setcap
   dmap:
     "sha256:4bbe17197ef10f1b627932999bb7b70e6107ee9d2752e4007440e5024b34d173": ["bullseye-v1.0.0"]
