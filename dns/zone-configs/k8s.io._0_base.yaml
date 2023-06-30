@@ -124,11 +124,16 @@ artifacts-sandbox:
   - type: AAAA
     value: "2600:1901:0:3b54::"
 
-# Domain delegation of cdn.dl.l8s.io to Fastly.
+# DNS configuration for Fastly service cdn.dl.k8s.io
 # Reach out to sig-k8s-infra-leads@kubernetes.io for any issue
 cdn.dl:
-  type: TXT
-  value: fastly-domain-delegation-yyD9G&IG34BM-2022-08-01
+  # CNAME record for Fastly endpoint
+  - type: CNAME
+    value: dualstack.m.sni.global.fastly.net.
+# Fastly ACME DNS challenge for cdn.dl.k8s.io
+_acme-challenge.cdn.dl:
+  - type: CNAME
+    value: g2u94f8943zc3m5dil.fastly-validations.com.
 
 # Vanity CNAMEs.
 blog:
@@ -253,6 +258,13 @@ prow:
 monitoring.prow:
   type: A
   value: 130.211.20.136
+monitoring-eks.prow:
+  type: CNAME
+  value: a9c199484557245839f927864e289c04-1058206500.us-east-2.elb.amazonaws.com.
+# Record for AWS ACM DNS challenge
+_bec7190baed957d2b71b4fc33bdec856.monitoring-eks.prow:
+  type: CNAME
+  value: _0ecdcf0799a37fa4bd5ba9bbe5877d56.dnzkjbsjxj.acm-validations.aws.
 prow-canary:
   type: A
   value: 35.244.182.122
@@ -314,16 +326,22 @@ submit-queue:
 testgrid:
   - type: A
     values:
-    - 216.239.32.21
-    - 216.239.34.21
-    - 216.239.36.21
-    - 216.239.38.21
+      - 216.239.32.21
+      - 216.239.34.21
+      - 216.239.36.21
+      - 216.239.38.21
+    # - 34.120.51.46 // TODO(michelle192837): Use this once certificate is active.
   - type: AAAA
     values:
-    - 2001:4860:4802:32::15
-    - 2001:4860:4802:34::15
-    - 2001:4860:4802:36::15
-    - 2001:4860:4802:38::15
+      - "2001:4860:4802:32::15"
+      - "2001:4860:4802:34::15"
+      - "2001:4860:4802:36::15"
+      - "2001:4860:4802:38::15"
+    # - "2600:1901:0:dc01::" // TODO(michelle192837): Use this once certificate is active.
+# DNS challenge for issuing (transition) TLS certificate
+_acme-challenge.k8s-testgrid:
+  type: CNAME
+  value: 2da25d3f-2ee8-4cfb-bbca-08a9fce4d3a4.1.authorize.certificatemanager.goog.
 # Running on GKE (@chases2)
 testgrid-data:
   - type: A
@@ -373,6 +391,30 @@ cluster-api-openstack.sigs:
 cluster-api-ibmcloud.sigs:
   - type: CNAME
     value: kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
+release-0-1.cluster-api-ibmcloud.sigs:
+  type: CNAME
+  value: release-0-1--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
+release-0-2.cluster-api-ibmcloud.sigs:
+  type: CNAME
+  value: release-0-2--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
+release-0-3.cluster-api-ibmcloud.sigs:
+  type: CNAME
+  value: release-0-3--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
+release-0-4.cluster-api-ibmcloud.sigs:
+  type: CNAME
+  value: release-0-4--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
+release-0-5.cluster-api-ibmcloud.sigs:
+  type: CNAME
+  value: release-0-5--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
+main.cluster-api-ibmcloud.sigs:
+  type: CNAME
+  value: main--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vincepri)
 release-0-1.cluster-api.sigs:
   type: CNAME

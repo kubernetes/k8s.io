@@ -28,6 +28,8 @@ data "aws_iam_policy_document" "eks_plan" {
     resources = ["*"]
 
     actions = [
+      "acm:DescribeCertificate",
+      "acm:ListTagsForCertificate",
       "ec2:DescribeAddresses",
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeEgressOnlyInternetGateways",

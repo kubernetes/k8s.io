@@ -28,9 +28,11 @@ data "aws_iam_policy_document" "eks_destroy" {
     resources = ["*"]
 
     actions = [
+      "acm:DeleteCertificate",
       "ec2:DeleteEgressOnlyInternetGateway",
       "ec2:DeleteInternetGateway",
       "ec2:DeleteLaunchTemplate",
+      "ec2:DeleteLaunchTemplateVersion",
       "ec2:DeleteNatGateway",
       "ec2:DeleteRoute",
       "ec2:DeleteRouteTable",

@@ -2,9 +2,10 @@
 
 # https://github.com/kubernetes/community/blob/master/OWNERS_ALIASES.
 approvers:
+- AverageMarcus
 - jsturtevant
+- kkeshavamurthy
 - mboersma
 
 reviewers:
-- AverageMarcus
 - randomvariable

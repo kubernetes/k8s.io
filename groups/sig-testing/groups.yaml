@@ -20,10 +20,8 @@ groups:
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
     owners:
     - amerai@google.com
-    - bentheelder@google.com
-    - skuznets@redhat.com
-    - spiffxp@gmail.com
-    - spiffxp@google.com
+    - bpratt@redhat.com
+    - mcqueenorama@gmail.com
 
   #
   # sig-testing k8s-staging write access

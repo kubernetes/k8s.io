@@ -1058,3 +1058,57 @@
   dmap:
     "sha256:6a0e4d17cfdb9a7823434e13ef810690316ddb426bd4ee922be76346e9aa72e9": ["1.27.0-alpha.2"]
 
+
+# 1.26.4
+- name: dns-controller
+  dmap:
+    "sha256:780300229d16a6927915fdb882fce06f26d05eeff9727920e6f2857c397ffc2f": ["1.26.4"]
+- name: kops-controller
+  dmap:
+    "sha256:34d94f5d05898bb99e2ee954dbc90631001aa378927153beeffc59c05cf039a9": ["1.26.4"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:db9f17c1c8b2dfc081e62138f8dcba0a882264f4a95da13e0226af53a45e50dc": ["1.26.4"]
+
+
+# 1.27.0-beta.1
+- name: dns-controller
+  dmap:
+    "sha256:93c35fb0657da5042913c65447674e8661c86fb793d67ae538934d27ec4cdd65": ["1.27.0-beta.1"]
+- name: kops-controller
+  dmap:
+    "sha256:24f9b2c4332d79893eb210b004fbe734ab278f701aaf8a81b9cf97668cfb4854": ["1.27.0-beta.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:ff4be14660090160932edf9c69cb0b09782a413820aaea46e7fe264a12198522": ["1.27.0-beta.1"]
+
+
+# 1.27.0-beta.2
+- name: dns-controller
+  dmap:
+    "sha256:d3e335589ef0687cb19a4c0564a9c9d657ee0ee82ebb23c15817053a06b4e395": ["1.27.0-beta.2"]
+- name: kops-controller
+  dmap:
+    "sha256:751b99d941ac3470d1bf48b7906acd5ac4cfd6284179581bd98b57173250c885": ["1.27.0-beta.2"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:88cd34b59692ef04ca36f6f63e034fef3c044b35a75e450fb1d187ac18856294": ["1.27.0-beta.2"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:e87ae5ef47078895d19407246cfb81a35793017a303a1e3c56ece568e65276d9": ["1.27.0-beta.2"]
+
+
+# 1.28.0-alpha.1
+- name: dns-controller
+  dmap:
+    "sha256:442e11ae5191796f8b246e04acc81640a445e85a179bdb7860660737d6521702": ["1.28.0-alpha.1"]
+- name: kops-controller
+  dmap:
+    "sha256:4c993d303ad8efb4d4dd05b78c3149533a4d005a2be108f187a07780f030415c": ["1.28.0-alpha.1"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:97ad84202eaa1e5857e7b3336af2212b94627eec6986acb65da5e09c6959be20": ["1.28.0-alpha.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:089343176a262fc302f7ec2e0c5bf75c4f0d82dd20f4580d6cca1cea847efd45": ["1.28.0-alpha.1"]
+

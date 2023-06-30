@@ -72,9 +72,9 @@ groups:
     owners:
       - cblecker@gmail.com
     managers:
-      - ameukam@gmail.com
       - ihor.dvoretskyi@gmail.com
       - killen.bob@gmail.com
+      - madhav.jiv@gmail.com
       - nikitaraghunath@gmail.com
       - pal.nabarun95@gmail.com
 
@@ -130,7 +130,14 @@ groups:
     description: |
       Group dedicated to improving the Kubernetes contributor experience.
     owners:
-      - sig-contribex-leads@kubernetes.io
+      - cblecker@gmail.com
+      - jberkus@redhat.com
+      - kaslin.fields@gmail.com
+      - killen.bob@gmail.com
+      - madhav.jiv@gmail.com
+      - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"

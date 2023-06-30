@@ -7,40 +7,73 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
-  - email-id: sig-api-machinery-cel-dev@kubernetes.io
-    name: sig-api-machinery-cel-dev
-    description: |-
-      Discussion of SIG api-machinery CEL based features
-    settings:
+- email-id: sig-api-machinery-leads@kubernetes.io
+  name: sig-api-machinery-leads
+  description: |-
+    SIG api-machinery leads
+  owners:
+    - jpbetz@google.com
+    - deads@redhat.com
+    - fbongiovanni@google.com
+    - stefan.schimanski@gmail.com
+  settings:
+    AllowWebPosting: "true"
+    ReconcileMembers: "true"
+    WhoCanPostMessage: "ANYONE_CAN_POST"
+    WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
+- email-id: sig-api-machinery@kubernetes.io
+  name: sig-api-machinery
+  description: |-
+    SIG api-machinery general discussion group, for future migration from old googlegroups
+  owners:
+    - sig-api-machinery-leads@kubernetes.io
+  settings:
+    WhoCanJoin: "ANYONE_CAN_JOIN"
+    WhoCanViewGroup: "ANYONE_CAN_VIEW"
+    WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+    WhoCanPostMessage: "ANYONE_CAN_POST"
+    MessageModerationLevel: "MODERATE_NON_MEMBERS"
+    WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+    WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+    WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+    MembersCanPostAsTheGroup: "false"
+    ReconcileMembers: "false"
+
+- email-id: sig-api-machinery-cel-dev@kubernetes.io
+  name: sig-api-machinery-cel-dev
+  description: |-
+    Discussion of SIG api-machinery CEL based features
+  settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
-    owners:
-      - jpbetz@google.com
-      - cic37@google.com
-      - deads@redhat.com
-      - lavalamp@google.com
-    members:
-      - cquirogapichincha@gmail.com
-      - sttts@redhat.com
-      - bluddy@redhat.com
-      - rita.z.zhang@gmail.com
-      - angoldst@redhat.com
-      - mok@vmware.com
-      - zielenski@google.com
-      - andrewsy@google.com
-      - apelisse@google.com
-      - bentheelder@google.com
-      - cicih@google.com
-      - davishaba@google.com
-      - soorena@google.com
-      - jhf@google.com
-      - jim@nirmata.com
-      - liggitt@google.com
-      - kermitalexandr@google.com
-      - leilajal@google.com
-      - smythe@google.com
-      - stevenlinde@google.com
-      - stclair@google.com
+  owners:
+     - jpbetz@google.com
+     - cic37@google.com
+     - deads@redhat.com
+     - hankang@google.com
+  members:
+     - cquirogapichincha@gmail.com
+     - sttts@redhat.com
+     - bluddy@redhat.com
+     - rita.z.zhang@gmail.com
+     - angoldst@redhat.com
+     - mok@vmware.com
+     - zielenski@google.com
+     - andrewsy@google.com
+     - apelisse@google.com
+     - bentheelder@google.com
+     - cicih@google.com
+     - davishaba@google.com
+     - soorena@google.com
+     - jhf@google.com
+     - jim@nirmata.com
+     - liggitt@google.com
+     - kermitalexandr@google.com
+     - leilajal@google.com
+     - smythe@google.com
+     - stevenlinde@google.com
+     - stclair@google.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
@@ -54,38 +87,38 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
-  - email-id: k8s-infra-staging-storage-migrator@kubernetes.io
-    name: k8s-infra-staging-storage-migrator
-    description: |-
-      ACL for kube-storage-version-migrator
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - xuchao@google.com
-      - haoweic@google.com
+- email-id: k8s-infra-staging-storage-migrator@kubernetes.io
+  name: k8s-infra-staging-storage-migrator
+  description: |-
+    ACL for kube-storage-version-migrator
+  settings:
+    ReconcileMembers: "true"
+  members:
+  - xuchao@google.com
+  - haoweic@google.com
 
-  - email-id: k8s-infra-staging-etcd@kubernetes.io
-    name: k8s-infra-staging-etcd
-    description: |-
-      ACL for staging etcd
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - jpbetz@google.com
-      - wenjiazhang@google.com
-      - jingyih@google.com
-      - yczhou@google.com
+- email-id: k8s-infra-staging-etcd@kubernetes.io
+  name: k8s-infra-staging-etcd
+  description: |-
+   ACL for staging etcd
+  settings:
+    ReconcileMembers: "true"
+  members:
+   - jpbetz@google.com
+   - wenjiazhang@google.com
+   - jingyih@google.com
+   - yczhou@google.com
 
-  - email-id: k8s-infra-staging-kubebuilder@kubernetes.io
-    name: k8s-infra-staging-kubebuilder
-    description: |-
-      ACL for pushing kubebuilder artifacts
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - camilamacedo86@gmail.com
-      - ricardo.katz@gmail.com
-      - varshaprasad96@gmail.com
+- email-id: k8s-infra-staging-kubebuilder@kubernetes.io
+  name: k8s-infra-staging-kubebuilder
+  description: |-
+    ACL for pushing kubebuilder artifacts
+  settings:
+    ReconcileMembers: "true"
+  members:
+    - camilamacedo86@gmail.com
+    - ricardo.katz@gmail.com
+    - varshaprasad96@gmail.com
 
   #
   # k8s-infra gcs write access
