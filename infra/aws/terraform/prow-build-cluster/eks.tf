@@ -135,7 +135,7 @@ module "eks" {
       ebs_optimized     = true
       enable_monitoring = true
 
-      key_name = var.key_name
+      key_name = aws_key_pair.eks_nodes.key_name
 
       block_device_mappings = {
         # This must be sda1 in order to match the root volume,
@@ -155,6 +155,10 @@ module "eks" {
 
       enclave_options = {
         enabled = true
+      }
+
+      timeouts = {
+        update = "180m"
       }
 
       tags = local.node_group_tags

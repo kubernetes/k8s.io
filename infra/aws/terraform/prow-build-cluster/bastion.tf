@@ -29,13 +29,18 @@ data "aws_ami" "ubuntu" {
   }
 }
 
+resource "aws_key_pair" "eks_nodes" {
+  key_name_prefix = "${var.cluster_name}-nodes"
+  public_key      = var.public_key
+}
+
 resource "aws_instance" "bastion" {
   count = var.bastion_install ? 1 : 0
 
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t3.nano"
   subnet_id                   = module.vpc.public_subnets[0]
-  key_name                    = var.key_name
+  key_name                    = aws_key_pair.eks_nodes.key_name
   associate_public_ip_address = true
 
   vpc_security_group_ids = [

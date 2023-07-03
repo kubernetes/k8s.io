@@ -48,6 +48,7 @@ data "aws_iam_policy_document" "eks_plan" {
       "ec2:DescribeVpcClassicLink",
       "ec2:DescribeVpcClassicLinkDnsSupport",
       "ec2:DescribeVpcs",
+      "ec2:DescribeKeyPairs",
       "eks:DescribeAddon",
       "eks:DescribeAddonVersions",
       "eks:DescribeCluster",

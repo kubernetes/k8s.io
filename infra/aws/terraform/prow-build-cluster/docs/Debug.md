@@ -3,7 +3,7 @@
 To access cluster nodes via ssh, first you need to provision bastion host:
 
 ```bash
-TF_VARS="-var bastion_install=true" make apply
+TF_ARGS="-var bastion_install=true" make apply
 ```
 
 After successful apply, terraform outputs should get updated with ip address of the bastion host.
