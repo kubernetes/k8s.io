@@ -68,7 +68,6 @@ data "aws_iam_policy_document" "eks_apply" {
       "eks:UpdateClusterVersion",
       "eks:UpdateNodegroupConfig",
       "eks:UpdateNodegroupVersion",
-      "eks:*",
       "iam:CreateOpenIDConnectProvider",
       "iam:CreatePolicy",
       "iam:CreatePolicyVersion",
