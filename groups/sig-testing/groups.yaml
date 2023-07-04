@@ -231,6 +231,7 @@ groups:
     - linusa@google.com # GitHub: listx
     - mpherman@google.com
     - slchase@google.com
+    - sduisenbay@google.com
     # sig-testing leads
     # - amerai@google.com # already part of test-infra-oncall
     - bentheelder@google.com
