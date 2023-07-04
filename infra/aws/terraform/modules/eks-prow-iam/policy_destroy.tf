@@ -46,6 +46,8 @@ data "aws_iam_policy_document" "eks_destroy" {
       "ec2:ReleaseAddress",
       "ec2:RevokeSecurityGroupEgress",
       "ec2:RevokeSecurityGroupIngress",
+      "ec2:DeleteKeyPair",
+      "ec2:TerminateInstances",
       "eks:DeleteAddon",
       "eks:DeleteCluster",
       "eks:DeleteNodegroup",

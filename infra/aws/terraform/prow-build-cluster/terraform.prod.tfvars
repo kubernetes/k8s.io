@@ -41,3 +41,5 @@ node_min_size                   = 20
 node_max_size                   = 40
 node_desired_size               = 20
 node_max_unavailable_percentage = 100 # To ease testing
+
+public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDAHl9be6hIi5xKA4rb5Y+TrQsyQ7nautEaZQDM5sLyN2DH8wzEe77w0KkPas77m3mzNUM3GC9PERTVPGahjlZxiB1N3M+a5HOS0rLhQxNZpbe+VRRpN683Mha3YVRAJlEanEodUR3O4gvb/9B7w/lq9PAw2anhu8tG9mCnN/nMTMOrJgS9vFvub78APKqR+lL80y298kCytwAbOxs+3qD/O4rZcln4Q83RZ0QXGgnp3lKZnnbMqAlIf+8UFljUIExuj+Bx+DinNpE5Ki29KwPJAvKzcR86xR7OZdLneYnVKGsHL3xSh2ax1m67zIKEFelQwZzuh3rEkRNqd4DAulfyW1Mhezl0xxSWpX/T+HtkyWqhUm5aGQ+KifVO/YKHbu+79aXgvWpzjVyJhmg0D+ZvZ4AyuHJo70Bbq3BWokPjQb7DWCZV1djeydHWTobZc+UALY/QnviDR6AYY+rstF3xcBq0E3zyZbkM2g7hchpl7fopAtC4fAgjy9+3k1VjSNNX7KOFUpU+nEF1eVP6GCI7o7Nmh7bRSYbrm88Ex1XtgX2d3q5lO2rfexAWVCT/xqo9Y5/BLKrZ4FPEBVFgxmewfjwAIRxQVlNsRWlw/COMwo9EbYEqY4fVpAcEWQtru0Jp297XvzebqzWk1r2ybBhhgQkvD1Is6H5uzDqJHFChxQ== kubernetes-sig-k8s-infra"

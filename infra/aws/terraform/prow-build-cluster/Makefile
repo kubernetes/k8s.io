@@ -76,7 +76,7 @@ fmt: ## Format Terraform files.
 
 .PHONY: output
 output: ## Print Terraform output.
-	$(TF) $@
+	@$(TF) $@ -json
 
 .PHONY: clean
 clean: ## Clean up Terraform cache and local state.
