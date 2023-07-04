@@ -274,6 +274,7 @@ aliases:
     - listx
     - michelle192837
     - mpherman2
+    - sultan-duisenbay
   # people with sufficient privileges to run scripts in /infra/gcp
   sig-k8s-infra-org-admins:
     - ameukam
