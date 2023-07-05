@@ -103,7 +103,7 @@ module "secrets_manager_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
   version = "~> 5.11"
 
-  role_name_prefix = "SECRETSMANAGER-IRSA"
+  role_name = "SECRETSMANAGER-IRSA"
   role_policy_arns = {
     secrets_manager = aws_iam_policy.secretsmanager_read.arn,
   }

@@ -42,8 +42,10 @@ data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
       "iam:*",
       "kms:*",
       "logs:*",
-      "sts:*",
-      "s3:*"
+      "s3:*",
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:DescribeSecret",
+      "sts:*"
     ]
 
     resources = ["*"]
