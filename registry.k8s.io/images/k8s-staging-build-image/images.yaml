@@ -1,5 +1,6 @@
 - name: debian-base
   dmap:
+    "sha256:b9335fa66cdb5c1562c4f952e2d99f904dbe1618a6ed0d52487e70cf6cc280fd": ["bookworm-v1.0.0"]
     "sha256:aa2e259dfe202b601b2a94a8b2e1b203a0fe92a601947da3d0c510be4e54c352": ["bullseye-v1.0.0"]
     "sha256:c9026ac9ebc6f9c80d8500d177763849cb6851452f8230cc802f5c8991459907": ["bullseye-v1.1.0"]
     "sha256:8049cfc553b1f91152945303e0766d1ff0ddd31f8f548e80e070db7b61620c1a": ["bullseye-v1.2.0"]
@@ -28,6 +29,7 @@
     "sha256:06190f821324ca89131437c51bdfe4b8515dc8ed26eba69c8f3698da227f5256": ["v2.1.2"]
 - name: debian-base-amd64
   dmap:
+    "sha256:b541f6b8f9dbe2e74dea9b4b2163170af6ae16e6708d80fc7c424b05c4041d2f": ["bookworm-v1.0.0"]
     "sha256:339df1ffc223945d2fd8db14f5e5b8fa1326322759571966791bced2e61da6e7": ["bullseye-v1.0.0"]
     "sha256:28e9cf19e38fddb5e1e57b22a1b057357b6da7521a182b24e6b4eb312aaba04d": ["bullseye-v1.1.0"]
     "sha256:9ce8684649c4170db5dff583a6025e42ecf2695ffe0d2846d03ed77d339962d3": ["bullseye-v1.2.0"]
@@ -56,6 +58,7 @@
     "sha256:c9d003ca6daeaff7b1faf4356d010c67be310ff7b6c0af7b44f570571f15fc43": ["v2.1.2"]
 - name: debian-base-arm
   dmap:
+    "sha256:4d854d1fb879bf93896b42ba47031d3f9e9a663f6d9fbd73dfd039df20aa5b82": ["bookworm-v1.0.0"]
     "sha256:065b6f2f2944086afc22beb8caf711d4117d8148c42200b15b96f58282e0933e": ["bullseye-v1.0.0"]
     "sha256:8271dd310f8e9c2e8fdd83de049e1b9641b03bdad2203bc1515548262cd34a52": ["bullseye-v1.1.0"]
     "sha256:c1c51cf9f8c25f3e80e085c7f101b00ed2af245808bd81779398c08559b5cc40": ["bullseye-v1.2.0"]
@@ -84,6 +87,7 @@
     "sha256:52bda74a65e94166951ef5e33e6da847573e2a89dd6bc0bc3250a661adce1712": ["v2.1.2"]
 - name: debian-base-arm64
   dmap:
+    "sha256:e6cacb9e5c53a0dda096ecb3b0b3618cd761234d5e33a8902bf520348f8df6e4": ["bookworm-v1.0.0"]
     "sha256:6cc9b25886321eae0166e6b596ff80736899e3422b5848743f42a131cfaac81d": ["bullseye-v1.0.0"]
     "sha256:fbfc9df6c9ed132ad99eb9941a3c76c46b571172770e4a82edf1ce7f4aa5bcd1": ["bullseye-v1.1.0"]
     "sha256:fddfc705c4e485154371b51fc94ea21e6ae0b5bfafbc4f9be06be3bcef1f18e6": ["bullseye-v1.2.0"]
@@ -112,6 +116,7 @@
     "sha256:4e172c7b2a8ae261431e05509839c8b8c23a49ededed13af898c90896d466726": ["v2.1.2"]
 - name: debian-base-ppc64le
   dmap:
+    "sha256:a2d289a64544b0b7d0f994016cd5b1a921385f67c186940ae3de5be26de04f75": ["bookworm-v1.0.0"]
     "sha256:9a5b8a90c6dbee055464ed2ed86173576a2d3575b563e2967841f4041c30875b": ["bullseye-v1.0.0"]
     "sha256:06355106e9bf2b7b37066623018919e90c401490c95243cb89cc4c09b33832f3": ["bullseye-v1.1.0"]
     "sha256:10040f799d299290e92116b82676149f0fc772877058e3f7435ca0c6aceb66b9": ["bullseye-v1.2.0"]
@@ -140,6 +145,7 @@
     "sha256:ad2190b49b3aebb1027b8fe685261c41ffbde170f49accc0816c296e59e9e927": ["v2.1.2"]
 - name: debian-base-s390x
   dmap:
+    "sha256:810db43a3d72cb0f6f3adbe5010b7ef3f8d8fa19e94d5ee1b4bc0563ca5a3eb7": ["bookworm-v1.0.0"]
     "sha256:e37d97b7583fdbeaf846c2716fcd985205cbc6c88f3ac34c210f9338912bc2a7": ["bullseye-v1.0.0"]
     "sha256:f3e77eec605cdc02d3a1a97a0d786ede4158fc5b72ab55c6ebfd1866553d61f1": ["bullseye-v1.1.0"]
     "sha256:175388117f8078335bde6381337ce7400feccf051fd64acbeda4370d25f613c2": ["bullseye-v1.2.0"]
@@ -234,6 +240,7 @@
     "sha256:38670cf1b300b532685aa102e860ab14950bb1f57bc5d51760bf9d0bf246c563": ["v1.1.2"]
 - name: debian-iptables
   dmap:
+    "sha256:5f57958e254319ca94004b9deab14c62acc265969d741cd2e5a702ddf0c9e540": ["bookworm-v1.0.0"]
     "sha256:f1088cdf03c829366aa7dd8128ff09c3d3d6cc93461919909f1e2a2cbff078fa": ["bullseye-v1.0.0"]
     "sha256:dd6d57960dc104a4ee0fa7c58c6faa3e38725561af374c17f8cb905f7f73ba66": ["bullseye-v1.1.0"]
     "sha256:b85b51cc8277c58a7c2ba71d557250026c890d594f52687c8498881c43f00414": ["bullseye-v1.2.0"]
@@ -268,6 +275,7 @@
     "sha256:b92101e2910d9fe1415f35b6f7b696cf4a586f40f176ede019035bacc957a7a4": ["v12.1.1"]
 - name: debian-iptables-amd64
   dmap:
+    "sha256:7eaa80f1ca1cba89a5c447cb5b43f7cfcea425f52c35e4e1a35af57b71764b31": ["bookworm-v1.0.0"]
     "sha256:2b3fd0957cd4060004dfca3b586844b934f762d5a78b522fff22344ae3f091b5": ["bullseye-v1.0.0"]
     "sha256:6a2b2e9c2281154960705f2606ce5c6560879e555be698760c3d89d57ec62347": ["bullseye-v1.1.0"]
     "sha256:af3af5e937b96453e8e3997b1cd69f141ecb0cf1dd0b51a4b416b6d697a21b61": ["bullseye-v1.2.0"]
@@ -302,6 +310,7 @@
     "sha256:4b402df0d030b267f3dcdc6506d212d6b4c7fff6552b67f0c99be7ec1842f32a": ["v12.1.1"]
 - name: debian-iptables-arm
   dmap:
+    "sha256:cacae0c3013a61be431399025bb49b3686ea3d01a3be2769db21970a95a1db01": ["bookworm-v1.0.0"]
     "sha256:64e84018057408d63bd73fb62973bbf2ae8671c249ea2643b4dad0782d2cd5d3": ["bullseye-v1.0.0"]
     "sha256:3c29700f553a74728ab85b4cb51419184959a1a0902de8ac586ac2e1a034463a": ["bullseye-v1.1.0"]
     "sha256:5f0526502561c9614538c34dfcdf0da3b6afd625206c7089b76bae69d01d8c8b": ["bullseye-v1.2.0"]
@@ -336,6 +345,7 @@
     "sha256:e976a5c88105db9a3ed462c2899aabbc5758f4f76e24098981010a226d344439": ["v12.1.1"]
 - name: debian-iptables-arm64
   dmap:
+    "sha256:33ef580ea351cb817d80986008fcd334fd937572455d8d7fa55821305436b78f": ["bookworm-v1.0.0"]
     "sha256:86f3650e94812af53e5e82c44e147535016105126d35bb5cafce1a15e7f66fe9": ["bullseye-v1.0.0"]
     "sha256:70b566b733b912047a248445ad897a37995099378250ecf66ef6b7669df1a792": ["bullseye-v1.1.0"]
     "sha256:104973061c413a94efa564c83019d08a035e566b5bb78e48f9ec7df297f81085": ["bullseye-v1.2.0"]
@@ -370,6 +380,7 @@
     "sha256:6da5b6aacb8c17615e1001aac0121517f541421036b20808a375f0dd79bf8564": ["v12.1.1"]
 - name: debian-iptables-ppc64le
   dmap:
+    "sha256:518903502ba998059e056db37d5753d463a046c3ba656951e0f652cd89043023": ["bookworm-v1.0.0"]
     "sha256:803d33725476eed45b0a27619c96da7e20d55d28840e846059135c94186d6c01": ["bullseye-v1.0.0"]
     "sha256:e709a51e4c1b01ea003db215a49dfb462853cdd761fa5134ad089345c26607cd": ["bullseye-v1.1.0"]
     "sha256:813dbadca4c257c8d85ba0ea68053d03ccd9283ab7452e6adc41d610aa05c79a": ["bullseye-v1.2.0"]
@@ -404,6 +415,7 @@
     "sha256:63cf48fd9de1407302019ab524f7ed9ff7a05d9ecacc1a6ac77ee57fed21a078": ["v12.1.1"]
 - name: debian-iptables-s390x
   dmap:
+    "sha256:e47e6d1cd08047e7b719cdd8ce3a8c57670fc8ba2e6446f1bda051e10a09aaad": ["bookworm-v1.0.0"]
     "sha256:30bb6fb2a94fd1357d574b1968407c1ade6ba4daff498683243cabfdf8ab07ac": ["bullseye-v1.0.0"]
     "sha256:d58529c7dc4a16cbedcd94d36f77374ebed51191187b6c4cd9e3eae4b49fb454": ["bullseye-v1.1.0"]
     "sha256:e0f13d8b21914d36a52857b8c195eb6e12e5b483423b31300dfb1b5e835e5cf6": ["bullseye-v1.2.0"]
@@ -571,6 +583,7 @@
     "sha256:f78979e6e5f0e9fc91cc07fda27e010031eb4939bdd1786a799a1f05d23c1339": ["v2.3.1-go1.20rc1-bullseye.0"]
     "sha256:eca4a5f9959bd5b29959bd3463483d5758116d80b823ec1f1305f218aeee195d": ["v2.3.1-go1.20rc2-bullseye.0"]
     "sha256:4549caa15cda839bde98ff3652144afc080879184bc1b384b09ca0c273ad061b": ["v2.3.1-go1.20rc3-bullseye.0"]
+    "sha256:7d56dfec5bbdfb18217f53f7e5d03a7f5317859584191d3f0af7d3fb477aef8d": ["v2.3.1-go1.21rc2-bullseye.0"]
 - name: go-runner-amd64
   dmap:
     "sha256:2fd65994929a83ece98cdfb3ff1ab56ba5b13ac8c25ed6028df98e0cb2137751": ["v2.3.1-go1.16.13-buster.0"]
@@ -610,6 +623,7 @@
     "sha256:abf56b7005252698a0e8bbc8ea20e23bccef81d959c39353052e9e5553a2d7c8": ["v2.3.1-go1.20rc1-bullseye.0"]
     "sha256:59f889b35e0f012f8401b3d858cf0e5cd94c1ba791c3d05223ab101c4e0fa1cb": ["v2.3.1-go1.20rc2-bullseye.0"]
     "sha256:e3992a69db3de1db326299d13879d31ce1665b1283aa947c3bb1054f460c37d5": ["v2.3.1-go1.20rc3-bullseye.0"]
+    "sha256:388b25392a6a61bbe8fc000d242a09852a2e50ea1bbc918a1f274b5387a750a1": ["v2.3.1-go1.21rc2-bullseye.0"]
 - name: go-runner-arm
   dmap:
     "sha256:f5209b750a6d791af4d77050f7ba5b57c61711dc888d6a981300d231c492c72a": ["v2.3.1-go1.16.13-buster.0"]
@@ -649,6 +663,7 @@
     "sha256:01278e9e8bb9af55bf5f19097fc8406d0fb42a3e417cae68be8fb0dcfbe3e06f": ["v2.3.1-go1.20rc1-bullseye.0"]
     "sha256:245b85b65a1c2fb18f9d92cd0e35b7ff84fd615863024aec9a9a9de8e4eeb67e": ["v2.3.1-go1.20rc2-bullseye.0"]
     "sha256:0323a05d11bb0db018779e04a89aae6afdec5ea5c75045f99e2f9ab23cbe169f": ["v2.3.1-go1.20rc3-bullseye.0"]
+    "sha256:b88aa337310ca4e5b9b639b2f27ea2d97098d63d673189ee641a2c0631b7b2e6": ["v2.3.1-go1.21rc2-bullseye.0"]
 - name: go-runner-arm64
   dmap:
     "sha256:40a2a2df2ac9cf6d8c8cc64aa80a3536fb62c5f783c61a184b279fa15ed01673": ["v2.3.1-go1.16.13-buster.0"]
@@ -688,6 +703,7 @@
     "sha256:f2ea3a6a25c48480ee837994da75e0b575ae86a6bc49b7eec6181b91bbff3716": ["v2.3.1-go1.20rc1-bullseye.0"]
     "sha256:72547b25182577b3234620dd27c7ef2f0650730018873d4f86f546c9afa3c479": ["v2.3.1-go1.20rc2-bullseye.0"]
     "sha256:4f2189c8dc730ca1c9d1e0aa3aa0eae0942e31db48b19571397d28e2a655389e": ["v2.3.1-go1.20rc3-bullseye.0"]
+    "sha256:da07203f234e8f0fd6a235d6b29f70a8ba87c0555286d5e3465540be5a9c419e": ["v2.3.1-go1.21rc2-bullseye.0"]
 - name: go-runner-ppc64le
   dmap:
     "sha256:e47951dca3685c567dfc7fcc49346a121d6d34b4673b5cd84f69d0aa09b95e8c": ["v2.3.1-go1.16.13-buster.0"]
@@ -727,6 +743,7 @@
     "sha256:362d5eccc1f4108b17f38a9845edcb726e49bf7dc5aa9b41c4d81e82ecb0ce29": ["v2.3.1-go1.20rc1-bullseye.0"]
     "sha256:fc7382078157fb4b93ead637ec89756feb233ec67e27281b539e0bb316c6e173": ["v2.3.1-go1.20rc2-bullseye.0"]
     "sha256:2bccda64b5064e86a796d2691b66e335b541c8a33cd65a9a4b81315d5c6e0508": ["v2.3.1-go1.20rc3-bullseye.0"]
+    "sha256:7bdc4fda2791f1fddbe2fd6a321775c72c8ff24bf3b66732f6b652c65d246462": ["v2.3.1-go1.21rc2-bullseye.0"]
 - name: go-runner-s390x
   dmap:
     "sha256:d92d67b1be04237ccf2c59418b32137362064b7243dcb53e9537ac2ef149988c": ["v2.3.1-go1.16.13-buster.0"]
@@ -766,6 +783,7 @@
     "sha256:c975ddf3a459fd4c41fd99483acea4d5eb99dc7ececb9ccb9df252bdf55242e3": ["v2.3.1-go1.20rc1-bullseye.0"]
     "sha256:28beb60e65cc29ca93ba418b80ed2df98c6a111775907ebc26179a0439952d41": ["v2.3.1-go1.20rc2-bullseye.0"]
     "sha256:1b87c76cc07d7b5c851674708336b53735cdd465769ffddb1b86526feea27f79": ["v2.3.1-go1.20rc3-bullseye.0"]
+    "sha256:3bb0db0cb8d7d66eade2cb83dcf7ef7850c8b52dd85827f6181932de32bebf37": ["v2.3.1-go1.21rc2-bullseye.0"]
 - name: kube-cross
   dmap:
     "sha256:97e77164ddc1f9ab56bcbab3e2895b882097b1eabd820497e894f41c0e4908fe": ["v1.12.12-1"]
@@ -941,6 +959,7 @@
     "sha256:bf6084a0fb512187e00cdc5ce703f0368303b00a6c245948ea66355c756b9971": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:dd85cdae062bcf6071955e41a34b69760a2f4df14344017427584b465fa08b96": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:aba5c4ec15fa8d7127449f7bc0e01db0efdc6bc74a167086548c5230f1871dcf": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:0daeffb62c24ab5601b69128641f7006b8ebf7595c099553ccccfb994b1db884": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: kube-cross-amd64
   dmap:
     "sha256:552ad5b1f93115c0d2ef8b1792d4790865245f24493a258093656cb61dfd4250": ["v1.21.0-go1.16.13-buster.0"]
@@ -1007,6 +1026,7 @@
     "sha256:d4a609bd1eb33386c21f70abbd1dfe490859cfb810e900ebbd129035b4afa030": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:cf914c489c28cd3e7837f9dcac5784c50691caed6f9bf6d78cc8e84705f1e843": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:112dea170ffd0397e2ff630910b56bfa467f4b1cd24424bb90b7e2a81064580a": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:d78c68bec7ddec726ed3d77b818d80a186f9152ac0a04f8b415567a026ef2636": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: kube-cross-arm64
   dmap:
     "sha256:b71598a7a1dc4f09eaf95f9313a704ee9413a4dc8ba05bf9ea6e101be417997e": ["v1.21.0-go1.16.13-buster.0"]
@@ -1073,6 +1093,7 @@
     "sha256:be20c01176c763c4f9e295740a66bddcd67c14c5b4984b5106b6db3ecab94b46": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:a9db8e965b2f6bed459bdd26b5c164f7afa7c0de508bb8996670a6c05967edb4": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:11e7740222d279ee85e1984cc3ccada5e29e09ed08998ecdf0314a50187aeddd": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:2532627987e7e1767790f0ee74974ee1c64bbacfa153daf6a95c2736550e06b1": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: kube-cross-ppc64le
   dmap:
     "sha256:d4fb38803d102d9a47ac133bc0b07c0082dde9ff9546657ff0cae7c19d3425a9": ["v1.21.0-go1.16.13-buster.0"]
@@ -1139,6 +1160,7 @@
     "sha256:5dfa94b04c7e61d4e60e97ae3caf28349c68ca5eef7c342ef44039422a985603": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:53f22b9700f16a51c3ae7bc887be1d4b38c6e2311e3a30ffeec1a2844e10bee5": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:2049b0439fd26462710853e17bf74e0172eba5b201c87898d8c9fedfbe4dd6a8": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:d775d81e90b6d93f4039b2d843160ede9f0cf38e89f5f518b69a2eec3e862b70": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: kube-cross-s390x
   dmap:
     "sha256:b8dd071c247797cc63721a5784c414e939080a77fe91a15f059a0e9aad7e5688": ["v1.23.0-go1.17.10-bullseye.0"]
@@ -1201,6 +1223,7 @@
     "sha256:e97c1f3924d0a8ab89287512227719957e6c68048c14701e759f95ea447f6223": ["v1.27.0-go1.20rc1-bullseye.0"]
     "sha256:35d0f93b5541b96c4bb4010db725e0794fb4066d77e329b12cf3dcfcce7a98a7": ["v1.27.0-go1.20rc2-bullseye.0"]
     "sha256:b4211fbad504317a504fb556f7ba64e7220f5b856fdc2ccfddc7d5e0d7b50544": ["v1.27.0-go1.20rc3-bullseye.0"]
+    "sha256:58f8096f830b9d18f669a4d27899810b9a9496219c4804d711048e2957cc2e5c": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: setcap
   dmap:
     "sha256:4bbe17197ef10f1b627932999bb7b70e6107ee9d2752e4007440e5024b34d173": ["bullseye-v1.0.0"]

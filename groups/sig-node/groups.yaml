@@ -46,6 +46,7 @@ groups:
       - saschagrunert@gmail.com
       - timallclair@gmail.com
       - thockin@google.com
+      - prow-build@k8s-infra-prow-build.iam.gserviceaccount.com
 
   - email-id: k8s-infra-staging-kmm@kubernetes.io
     name: k8s-infra-staging-kmm

@@ -45,3 +45,17 @@ module "prow_prod" {
     "service"     = "eks"
   }
 }
+
+module "obs-k8s-io" {
+  source = "../modules/org-account"
+
+  account_name = "k8s-infra-obs-k8s-io-prod"
+  email        = "k8s-infra-aws-admins+obs-k8s-io-prod@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.production.id
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-release",
+    "service"     = "obs"
+  }
+}
