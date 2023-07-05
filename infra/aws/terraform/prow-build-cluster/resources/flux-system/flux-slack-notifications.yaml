@@ -22,6 +22,7 @@ spec:
   channel: alerting-cncf-prod
   secretRef:
     name: slack-url
+    key: url
 
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
