@@ -18,7 +18,7 @@
 # infrastructure managed by sig-k8s-infra.
 
 # base image
-FROM debian:bullseye
+FROM debian:bookworm
 
 # build args
 
@@ -26,18 +26,18 @@ FROM debian:bullseye
 # latest at the time, and package-based installs from debian-maintained repos
 # are not pinned to a specific version
 
-ARG CONFTEST_VERSION=0.34.0
-ARG GCLOUD_VERSION=401.0.0
-ARG GH_VERSION=2.15.0
-ARG GO_VERSION=1.19.1
+ARG CONFTEST_VERSION=0.43.1
+ARG GCLOUD_VERSION=437.0.0
+ARG GH_VERSION=2.31.0
+ARG GO_VERSION=1.20.5
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
-ARG K8S_VERSION=1.21.14
-ARG OPA_VERSION=0.38.0
+ARG K8S_VERSION=1.24.15
+ARG OPA_VERSION=0.53.1
 ARG SHELLCHECK_VERSION=0.8.0
-ARG TFSWITCH_VERSION=0.13.1288
-ARG RCLONE_VERSION=1.59.1
+ARG TFSWITCH_VERSION=0.13.1308
+ARG RCLONE_VERSION=1.62.2
 
 # build everything in /build
 WORKDIR /build
@@ -68,7 +68,7 @@ RUN set -o errexit nounset pipefail \
             python3-pip \
             xz-utils \
     && echo "Installing python tools ..." \
-        && pip3 install --requirement requirements.txt \
+        && pip3 install --requirement requirements.txt --break-system-packages \
     && echo "Installing go ..." \
         && export GO_TARBALL="go${GO_VERSION}.linux-amd64.tar.gz" \
         && curl -fsSL "https://golang.org/dl/${GO_TARBALL}" --output tarball.tar.gz \
@@ -77,8 +77,7 @@ RUN set -o errexit nounset pipefail \
     && echo "Installing Google Cloud SDK ..." \
         && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
             | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
-        && curl -fsSLo /usr/share/keyrings/cloud.google.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg \
-        && chmod go+r /usr/share/keyrings/cloud.google.gpg \
+        && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - \
         && apt-get update -o Dir::Etc::sourcelist="sources.list.d/google-cloud-sdk.list" \
             -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0" \
         && apt-get install -y --no-install-recommends \
@@ -128,9 +127,9 @@ RUN set -o errexit nounset pipefail \
         && tar xf tarball.tar.gz -C /usr/local/bin tfswitch \
         && rm tarball.tar.gz \
     && echo "Installing terraform ..." \
-        && tfswitch --latest-stable=0.14 \
-        && tfswitch --latest-stable=0.15 \
-        && tfswitch --latest-stable=1.0 \
+        && tfswitch --latest-stable=1.1 \
+        && tfswitch --latest-stable=1.2 \
+        && tfswitch --latest-stable=1.3 \
     && echo "Installing pr-creator" \
         && git clone --depth 1 https://github.com/kubernetes/test-infra \
         && pushd ./test-infra \
@@ -160,6 +159,8 @@ RUN set -o errexit nounset pipefail \
         && yamllint --version           | tee yamllint-verison.txt \
         && yq --version                 | tee yq-version.txt \
     && echo "Cleaning up ..." \
+        && apt autoremove -y \
+        && apt clean -y \
         && rm -rf /var/lib/apt/lists/* \
         && rm -rf /root/.cache \
         && rm -rf /root/go/pkg \
