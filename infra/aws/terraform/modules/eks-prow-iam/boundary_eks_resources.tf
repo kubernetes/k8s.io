@@ -79,7 +79,6 @@ data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
 
     actions = [
       "iam:AttachRolePolicy",
-      "iam:CreateServiceLinkedRole",
       "iam:DeleteRolePolicy",
       "iam:PutRolePolicy",
       "iam:PutRolePermissionsBoundary",
