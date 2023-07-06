@@ -13,11 +13,10 @@
 # limitations under the License.
 
 ---
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - ../base
-patches:
-  - path: patch-path-external-secrets.yaml
-  - path: patch-path-flux-system.yaml
-  - path: patch-git-source-url.yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: k8s-io
+  namespace: flux-system
+spec:
+  url: https://github.com/pkprzekwas/k8s.io
