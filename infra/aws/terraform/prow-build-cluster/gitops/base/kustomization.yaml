@@ -21,3 +21,13 @@ resources:
   - flux-ks-boskos.yaml
   - flux-source-git-k8s.io.yaml
   - flux-source-helm-eks-charts.yaml
+  - flux-ks-rbac.yaml
+  - flux-ks-test-pods.yaml
+
+# flux-slack-notifications.yaml
+# flux-source-git-k8s.io.yaml
+# flux-source-helm-eks-charts.yaml
+# gotk-components.yaml
+# kustomization.yaml
+# pod-monitor.yaml
+# slack-alerting-external-secret.yaml
