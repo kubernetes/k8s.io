@@ -18,6 +18,6 @@ kind: Kustomization
 resources:
   - ../base
 patches:
-  # - path: patch-path-external-secrets.yaml
+  - path: patch-path-external-secrets.yaml
   - path: patch-path-flux-system.yaml
   - path: patch-git-source-url.yaml
