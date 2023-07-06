@@ -11,22 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 ---
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
 metadata:
-  name: slack-url
+  name: k8s-io
   namespace: flux-system
 spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    name: aws-secerts-manager
-    kind: ClusterSecretStore
-  target:
-    name: slack-url
-    creationPolicy: Owner
-  data:
-  - secretKey: address
-    remoteRef:
-      key: secrets/kubermatic
-      property: slack-alerting-cncf-prod
+  url: https://github.com/kubernetes/k8s.io

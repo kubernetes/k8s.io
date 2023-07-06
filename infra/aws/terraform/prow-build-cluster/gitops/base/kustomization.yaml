@@ -11,22 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 ---
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: slack-url
-  namespace: flux-system
-spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    name: aws-secerts-manager
-    kind: ClusterSecretStore
-  target:
-    name: slack-url
-    creationPolicy: Owner
-  data:
-  - secretKey: address
-    remoteRef:
-      key: secrets/kubermatic
-      property: slack-alerting-cncf-prod
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - flux-ks-external-secrets.yaml
+  - flux-ks-flux-system.yaml
+  - flux-ks-boskos.yaml
+  - flux-source-git-k8s.io.yaml
+  - flux-source-helm-eks-charts.yaml

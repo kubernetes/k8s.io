@@ -12,21 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Provider
 metadata:
-  name: slack-url
+  name: slack
   namespace: flux-system
 spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    name: aws-secerts-manager
-    kind: ClusterSecretStore
-  target:
+  type: slack
+  channel: alerting-cncf-prod
+  secretRef:
     name: slack-url
-    creationPolicy: Owner
-  data:
-  - secretKey: address
-    remoteRef:
-      key: secrets/kubermatic
-      property: slack-alerting-cncf-prod
+
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Alert
+metadata:
+  name: alerting-cncf-prod
+  namespace: flux-system
+spec:
+  summary: "EKS Prow Build Cluster"
+  providerRef:
+    name: slack
+  eventSeverity: error
+  eventSources:
+    - kind: GitRepository
+      name: '*'
+    - kind: Kustomization
+      name: '*'
