@@ -153,6 +153,13 @@ issues:
 kep:
   type: CNAME
   value: kep.k8s.io.
+# Packages / OpenBuildService (OBS)
+packages:
+  type: CNAME
+  value: packages.k8s.io.
+pkgs:
+  type: CNAME
+  value: pkgs.k8s.io.
 pr:
   type: CNAME
   value: pr.k8s.io.
