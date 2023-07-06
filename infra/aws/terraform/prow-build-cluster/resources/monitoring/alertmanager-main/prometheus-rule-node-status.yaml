@@ -1,0 +1,41 @@
+# Copyright 2023 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-status-rules
+  namespace: monitoring
+  labels:
+    prometheus: main
+spec:
+  groups:
+  - name: node:status
+    rules:
+    - alert: NodeStatusNotReady
+      # This expression might need some refinements in case we scale up
+      # kube-state-metrics to more than 1 replica.
+      expr: kube_node_status_condition{condition="Ready",status!="true"} == 1
+      # Only fire up alert if the alert condition has been firing to more than
+      # 5 minutes. This is to avoid false positives/flakes while a new node
+      # is joining the cluster.
+      for: 5m
+      # These annotations are used for building the Slack message.
+      annotations:
+        summary: "NodeStatusNotReady"
+        description: "Node {{ $labels.node }} is not ready"
+      # Additional labels used as metadata.
+      labels:
+        severity: critical
+        resource: "{{ $labels.node }}"
