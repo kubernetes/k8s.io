@@ -16,9 +16,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ../base
-patches:
-  - path: patch-path-external-secrets.yaml
-  - path: patch-path-flux-system.yaml
-  - path: patch-git-source-url.yaml
-  - path: patch-slack-alerting-external-secret.yaml
+  - aws-janitor.yaml
+  - boskos.yaml
+  - config.yaml
+  - crd.yaml
+  - rbac.yaml
+  - reaper.yaml
+  - sa.yaml
+  - service.yaml
