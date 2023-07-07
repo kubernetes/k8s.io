@@ -45,8 +45,10 @@ WORKDIR /build
 # multiple ENV assignments in one layer
 # - put $(go env GOROOT)/bin on PATH
 # - disable interactive prompts for gcloud commands (use defaults, or error if unable)
+# - enable usage of the gke auth plugin for gcloud
 ENV PATH=/usr/local/go/bin:${PATH} \
-    CLOUDSDK_CORE_DISABLE_PROMPTS=1
+    CLOUDSDK_CORE_DISABLE_PROMPTS=1 \
+    USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # used to pip install: awscli, yamllint, yq
 COPY requirements.txt .
@@ -86,6 +88,8 @@ RUN set -o errexit nounset pipefail \
         && gcloud config set core/disable_usage_reporting true \
         && gcloud config set component_manager/disable_update_check true \
         && gcloud config set metrics/environment github_docker_image \
+    && echo "Install GKE auth plugin" \
+        && apt-get install google-cloud-sdk-gke-gcloud-auth-plugin \
     && echo "Installing gh ..." \
         && echo "deb [signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
             | tee -a /etc/apt/sources.list.d/github-cli.list \
