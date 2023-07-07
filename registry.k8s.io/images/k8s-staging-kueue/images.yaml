@@ -1,5 +1,6 @@
 - name: kueue
   dmap:
+    "sha256:ce3409813d9eb26990a0b26ad3e8aeaaaa9d04efd9b911ef2b15fc5c5451bde4": ["v0.4.0"]
     "sha256:51fbec91afb8c80e69e6ebd8824c4e1c8eb86783f541255ce153b1dfc2b51893": ["v0.3.2"]
     "sha256:ee43b498108b6704a9d2782cd2c076d8aa11d9631a98d4a1b35cca9436d9c6bc": ["v0.3.1"]
     "sha256:212ab77e32a7da99ba8a7670e37ab8b14a74f501226844d73f82b1dac3ada16d": ["v0.3.0"]
