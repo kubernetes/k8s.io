@@ -88,9 +88,19 @@ variable "node_ami" {
   description = "EKS optimized AMI to be used for Node groups"
 }
 
+variable "node_ami_green" {
+  type        = string
+  description = "EKS optimized AMI to be used for green node group"
+}
+
 variable "node_instance_types" {
   type        = list(string)
   description = "Instance sizes to use for EKS node group"
+}
+
+variable "node_instance_types_green" {
+  type        = list(string)
+  description = "Instance sizes to use for green EKS node group"
 }
 
 variable "node_volume_size" {
