@@ -345,7 +345,7 @@ resource "kubernetes_manifest" "deployment_kube_system_cluster_autoscaler" {
       "namespace" = "kube-system"
     }
     "spec" = {
-      "replicas" = 1
+      "replicas" = 0
       "selector" = {
         "matchLabels" = {
           "app" = "cluster-autoscaler"
