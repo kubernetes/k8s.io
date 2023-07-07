@@ -29,6 +29,7 @@ data "aws_iam_policy_document" "eks_destroy" {
 
     actions = [
       "acm:DeleteCertificate",
+      "autoscaling:DeleteTags",
       "ec2:DeleteEgressOnlyInternetGateway",
       "ec2:DeleteInternetGateway",
       "ec2:DeleteLaunchTemplate",
@@ -39,6 +40,7 @@ data "aws_iam_policy_document" "eks_destroy" {
       "ec2:DeleteSecurityGroup",
       "ec2:DeleteSubnet",
       "ec2:DeleteVpc",
+      "ec2:DeleteTags",
       "ec2:DetachInternetGateway",
       "ec2:DisassociateAddress",
       "ec2:DisassociateRouteTable",
@@ -51,6 +53,7 @@ data "aws_iam_policy_document" "eks_destroy" {
       "eks:DeleteAddon",
       "eks:DeleteCluster",
       "eks:DeleteNodegroup",
+      "eks:UntagResource",
       "iam:DeleteOpenIDConnectProvider",
       "iam:DeletePolicy",
       "iam:DeleteRole",
@@ -58,6 +61,7 @@ data "aws_iam_policy_document" "eks_destroy" {
       "iam:DeleteRolePermissionsBoundary",
       "iam:DetachRolePolicy",
       "iam:DeletePolicyVersion",
+      "iam:UntagRole",
       "kms:DeleteAlias",
       "kms:ScheduleKeyDeletion",
       "logs:DeleteLogGroup",
