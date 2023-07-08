@@ -35,7 +35,7 @@ spec:
 
     # How long to wait before sending a notification again if it has already
     # been sent successfully for an alert.
-    repeatInterval: 4h
+    repeatInterval: 24h
 
     # Default group criteria. This might need some refactor if we add more
     # alerting rules.
