@@ -342,6 +342,9 @@ testgrid:
 _acme-challenge.k8s-testgrid:
   type: CNAME
   value: 2da25d3f-2ee8-4cfb-bbca-08a9fce4d3a4.1.authorize.certificatemanager.goog.
+_acme-challenge.testgrid:
+  type: CNAME
+  value: 3163ff75-f72a-4b9e-b1ff-3c1930137e82.3.authorize.certificatemanager.goog.
 # Running on GKE (@chases2)
 testgrid-data:
   - type: A
