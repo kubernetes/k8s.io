@@ -42,7 +42,7 @@ node_instance_types_green = ["r5d.xlarge"]
 node_volume_size    = 100
 
 node_min_size                   = 1
-node_max_size                   = 4
+node_max_size                   = 3
 node_desired_size               = 1
 node_max_unavailable_percentage = 100 # To ease testing
 

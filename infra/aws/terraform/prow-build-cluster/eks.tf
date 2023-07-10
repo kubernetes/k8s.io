@@ -166,7 +166,7 @@ module "eks" {
     # Build cluster node group.
     build-green = {
       name            = "build-managed-green"
-      description     = "EKS managed node group green used for build nodes"
+      description     = "EKS managed node group called green used to facilitate node rotations/rollouts"
       use_name_prefix = true
 
       subnet_ids = module.vpc.private_subnets
