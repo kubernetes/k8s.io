@@ -214,6 +214,17 @@ groups:
       - jeewan@vmware.com
       - ytijani@vmware.com
 
+  - email-id: sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-vsphere-alerts
+    description: |-
+      List for test alerts for the Cluster API vSphere infrastructure provider.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - buringerst@vmware.com
+      - kmuldoon@vmware.com
+      - christi.schlotter@gmail.com
+
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     name: k8s-infra-staging-cluster-api
     description: |-
@@ -308,6 +319,7 @@ groups:
       - davanum@gmail.com
       - justinsb@google.com
       - richmcase@gmail.com
+
 
   - email-id: sig-cluster-lifecycle-cluster-api-gcp-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-gcp-alerts
