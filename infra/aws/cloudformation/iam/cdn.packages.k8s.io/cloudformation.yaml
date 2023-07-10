@@ -1,0 +1,210 @@
+Resources:
+  #########################################
+  # Terraform State                       #
+  #########################################
+
+  # TFStateBucket (packages-k8s-io-tfstate) is S3 bucket for storing Terraform
+  # state
+  TFStateBucket:
+    Type: AWS::S3::Bucket
+    # We retain the bucket to ensure that accidental deletion of the stack
+    # doesn't destroy Terraform state
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: cdn-packages-k8s-io-tfstate
+      AccessControl: Private
+
+  #########################################
+  # IAM user for Terraform                #
+  #########################################
+
+  # ProvisionerUser (provisioner) is an IAM user used for running Terraform
+  ProvisionerUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Path: /
+      UserName: provisioner
+      Policies:
+        - PolicyName: ProvisionerUserAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Action: 'sts:AssumeRole'
+                Effect: Allow
+                Resource: !Sub 'arn:aws:iam::${AWS::AccountId}:role/Provisioner'
+
+  # ProvisionerRole is an IAM role assumed by provisioner IAM user to run Terraform
+  ProvisionerRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: Provisioner
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              AWS: !Sub 'arn:aws:iam::${AWS::AccountId}:user/provisioner'
+    DependsOn: ProvisionerUser
+
+  # ProvisionerPlanAccessPolicy is an IAM policy that grants permissions to run `terraform plan`
+  ProvisionerPlanAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: ProvisionerPlanAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: 'Allow'
+            Action:
+              - 'acm:DescribeCertificate'
+              - 'acm:ListTagsForCertificate'         
+            Resource: !Sub 'arn:aws:acm:us-east-1:${AWS::AccountId}:certificate/*'
+          - Effect: 'Allow'
+            Action:
+              - 'cloudfront:GetCachePolicy'
+              - 'cloudfront:GetDistribution'
+              - 'cloudfront:GetOriginAccessControl'
+              - 'cloudfront:ListCachePolicies'
+              - 'cloudfront:ListTagsForResource'
+            Resource:
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:cache-policy/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:origin-access-control/*'
+          - Effect: 'Allow'
+            Action:
+              - 's3:GetAccelerateConfiguration'
+              - 's3:GetBucketAcl'
+              - 's3:GetBucketCORS'
+              - 's3:GetBucketLogging'
+              - 's3:GetBucketObjectLockConfiguration'
+              - 's3:GetBucketOwnershipControls'
+              - 's3:GetBucketPolicy'
+              - 's3:GetBucketRequestPayment'
+              - 's3:GetBucketTagging'
+              - 's3:GetBucketVersioning'
+              - 's3:GetBucketWebsite'
+              - 's3:GetEncryptionConfiguration'
+              - 's3:GetLifecycleConfiguration'
+              - 's3:GetReplicationConfiguration'
+              - 's3:ListBucket'
+            Resource: 'arn:aws:s3:::*-cdn-packages-k8s-io-*'
+          - Effect: 'Allow'
+            Action:
+              - 's3:GetObject'
+              - 's3:ListBucket'
+            Resource:
+              - !Sub 'arn:aws:s3:::${TFStateBucket}'
+              - !Sub 'arn:aws:s3:::${TFStateBucket}/*'
+      # Attach the policy to the provisioner IAM user
+      Roles:
+        - Ref: ProvisionerRole
+    DependsOn: ProvisionerRole
+
+  # ProvisionerApplyAccessPolicy is an IAM policy that grants permissions to run `terraform apply`
+  ProvisionerApplyAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: ProvisionerApplyAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: 'Allow'
+            Action:
+              - 'acm:AddTagsToCertificate'
+              - 'acm:RequestCertificate'
+            Resource: !Sub 'arn:aws:acm:us-east-1:${AWS::AccountId}:certificate/*'
+          - Effect: 'Allow'
+            Action:
+              - 'cloudfront:CreateDistribution'
+              - 'cloudfront:CreateOriginAccessControl'
+              - 'cloudfront:UpdateDistribution'
+              - 'cloudfront:TagResource'
+            Resource:
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:cache-policy/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:origin-access-control/*'
+          - Effect: 'Allow'
+            Action:
+              - 's3:CreateBucket'
+              - 's3:PutBucketOwnershipControls'
+              - 's3:PutBucketPolicy'
+              - 's3:PutBucketTagging'
+            Resource: 'arn:aws:s3:::*-cdn-packages-k8s-io-*'
+          - Effect: 'Allow'
+            Action:
+              - 's3:PutObject'
+            Resource: !Sub 'arn:aws:s3:::${TFStateBucket}/*'
+      # Attach the policy to the provisioner IAM user
+      Roles:
+        - Ref: ProvisionerRole
+    DependsOn: ProvisionerRole
+
+  # ProvisionerDestroyAccessPolicy is an IAM policy that grants permissions to run `terraform destroy`
+  ProvisionerDestroyAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: ProvisionerDestroyAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: 'Allow'
+            Action:
+              - 'acm:DeleteCertificate'
+            Resource: !Sub 'arn:aws:acm:us-east-1:${AWS::AccountId}:certificate/*'
+          - Effect: 'Allow'
+            Action:
+              - 'cloudfront:DeleteDistribution'
+              - 'cloudfront:DeleteOriginAccessControl'
+            Resource:
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:cache-policy/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:origin-access-control/*'
+          - Effect: 'Allow'
+            Action:
+              - 's3:DeleteBucket'
+              - 's3:DeleteBucketPolicy'
+            Resource: 'arn:aws:s3:::*-cdn-packages-k8s-io-*'
+      # Attach the policy to the provisioner IAM user
+      Roles:
+        - Ref: ProvisionerRole
+    DependsOn: ProvisionerRole
+
+  #########################################
+  # IAM user for OBS                      #
+  #########################################
+
+  # OBSAdminUser (obs-admin) is an IAM user used by the OBS platform to perform
+  # needed operation on the S3 bucket (e.g. publish packages)
+  OBSAdminUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Path: /
+      UserName: obs-admin
+
+  # OBSAdminAccessPolicy gives the permissions needed to run rclone on the S3 bucket.
+  # Permissions needed for rclone are documented here:
+  # https://rclone.org/s3/#s3-permissions
+  OBSAdminAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: OBSAdminAccess
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Action:
+              - 's3:ListBucket'
+              - 's3:DeleteObject'
+              - 's3:GetObject'
+              - 's3:PutObject'
+              - 's3:PutObjectAcl'
+            Resource:
+              - 'arn:aws:s3:::prod-cdn-packages-k8s-io-*'
+              - 'arn:aws:s3:::prod-cdn-packages-k8s-io-*/*'
+          - Effect: 'Allow'
+            Action: 's3:ListAllMyBuckets'
+            Resource: 'arn:aws:s3:::prod-cdn-packages-k8s-io-*'
+      Users:
+        - Ref: OBSAdminUser
+    DependsOn: OBSAdminUser
