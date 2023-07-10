@@ -92,9 +92,7 @@ module "eks" {
   } : null
 
   eks_managed_node_group_defaults = {
-    ami_id                     = var.node_ami
     enable_bootstrap_user_data = true
-    instance_types             = var.node_instance_types
 
     # We are using the IRSA created below for permissions
     # However, we have to deploy with the policy attached FIRST (when creating a fresh cluster)
@@ -106,20 +104,20 @@ module "eks" {
 
   eks_managed_node_groups = {
     # Build cluster node group.
-    build = {
-      name            = "build-managed"
-      description     = "EKS managed node group used for build nodes"
+    build-blue = {
+      name            = "build-managed-blue"
+      description     = "EKS managed node group called blue used to facilitate node rotations/rollouts"
       use_name_prefix = true
 
       subnet_ids = module.vpc.private_subnets
 
-      min_size     = var.node_min_size
-      max_size     = var.node_max_size
-      desired_size = var.node_desired_size
+      min_size     = var.node_min_size_blue
+      max_size     = var.node_max_size_blue
+      desired_size = var.node_desired_size_blue
 
       iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
-      ami_id                     = var.node_ami
+      ami_id                     = var.node_ami_blue
       enable_bootstrap_user_data = true
 
       force_update_version = false
@@ -130,7 +128,66 @@ module "eks" {
       pre_bootstrap_user_data = file("${path.module}/bootstrap/node_bootstrap.sh")
 
       capacity_type  = "ON_DEMAND"
-      instance_types = var.node_instance_types
+      instance_types = var.node_instance_types_blue
+
+      ebs_optimized     = true
+      enable_monitoring = true
+
+      key_name = aws_key_pair.eks_nodes.key_name
+
+      block_device_mappings = {
+        # This must be sda1 in order to match the root volume,
+        # otherwise a new volume is created.
+        sda1 = {
+          device_name = "/dev/sda1"
+          ebs = {
+            volume_size           = var.node_volume_size
+            volume_type           = "gp3"
+            iops                  = 16000 # Maximum for gp3 volume.
+            throughput            = 1000  # Maximum for gp3 volume.
+            encrypted             = false
+            delete_on_termination = true
+          }
+        }
+      }
+
+      enclave_options = {
+        enabled = true
+      }
+
+      timeouts = {
+        update = "180m"
+      }
+
+      # Disabling autoscaling on that Node Group.
+      tags = local.tags # local.node_group_tags
+    }
+    # Build cluster node group.
+    build-green = {
+      name            = "build-managed-green"
+      description     = "EKS managed node group called green used to facilitate node rotations/rollouts"
+      use_name_prefix = true
+
+      subnet_ids = module.vpc.private_subnets
+
+      min_size     = var.node_min_size_green
+      max_size     = var.node_max_size_green
+      desired_size = var.node_desired_size_green
+
+      iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
+
+      ami_id                     = var.node_ami_green
+      enable_bootstrap_user_data = true
+
+      force_update_version = false
+      update_config = {
+        max_unavailable_percentage = var.node_max_unavailable_percentage
+      }
+
+      pre_bootstrap_user_data = file("${path.module}/bootstrap/node_bootstrap_green.sh")
+
+      capacity_type  = "ON_DEMAND"
+      instance_types = var.node_instance_types_green
 
       ebs_optimized     = true
       enable_monitoring = true

@@ -83,14 +83,24 @@ variable "cluster_version" {
   description = "Kubernetes version of the EKS cluster"
 }
 
-variable "node_ami" {
+variable "node_ami_blue" {
   type        = string
-  description = "EKS optimized AMI to be used for Node groups"
+  description = "EKS optimized AMI to be used for blue Node groups"
 }
 
-variable "node_instance_types" {
+variable "node_ami_green" {
+  type        = string
+  description = "EKS optimized AMI to be used for green node group"
+}
+
+variable "node_instance_types_blue" {
   type        = list(string)
-  description = "Instance sizes to use for EKS node group"
+  description = "Instance sizes to use for blue EKS node group"
+}
+
+variable "node_instance_types_green" {
+  type        = list(string)
+  description = "Instance sizes to use for green EKS node group"
 }
 
 variable "node_volume_size" {
@@ -98,19 +108,34 @@ variable "node_volume_size" {
   description = "Volume size per node to use for EKS node group"
 }
 
-variable "node_min_size" {
+variable "node_min_size_blue" {
   type        = number
-  description = "Minimum number of nodes in the EKS node group"
+  description = "Minimum number of nodes in the blue EKS node group"
 }
 
-variable "node_max_size" {
+variable "node_min_size_green" {
   type        = number
-  description = "Maximum number of nodes in the EKS node group"
+  description = "Minimum number of nodes in the green EKS node group"
 }
 
-variable "node_desired_size" {
+variable "node_max_size_blue" {
   type        = number
-  description = "Desired number of nodes in the EKS node group"
+  description = "Maximum number of nodes in the blue EKS node group"
+}
+
+variable "node_max_size_green" {
+  type        = number
+  description = "Maximum number of nodes in the green EKS node group"
+}
+
+variable "node_desired_size_blue" {
+  type        = number
+  description = "Desired number of nodes in the blue EKS node group"
+}
+
+variable "node_desired_size_green" {
+  type        = number
+  description = "Desired number of nodes in the green EKS node group"
 }
 
 variable "node_max_unavailable_percentage" {
