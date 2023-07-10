@@ -58,7 +58,7 @@ Resources:
           - Effect: 'Allow'
             Action:
               - 'acm:DescribeCertificate'
-              - 'acm:ListTagsForCertificate'         
+              - 'acm:ListTagsForCertificate'
             Resource: !Sub 'arn:aws:acm:us-east-1:${AWS::AccountId}:certificate/*'
           - Effect: 'Allow'
             Action:
