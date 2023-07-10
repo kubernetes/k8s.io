@@ -104,8 +104,8 @@ module "eks" {
 
   eks_managed_node_groups = {
     # Build cluster node group.
-    build_blue = {
-      name            = "build-managed_blue"
+    build-blue = {
+      name            = "build-managed-blue"
       description     = "EKS managed node group called blue used to facilitate node rotations/rollouts"
       use_name_prefix = true
 
