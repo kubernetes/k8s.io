@@ -104,6 +104,13 @@ releases:
   type: CNAME
   value: redirect.k8s.io.
 
+# Packages / OpenBuildService (OBS)
+# Record for AWS ACM DNS challenge for prod-cdn.packages.k8s.io
+# Should stay here all the time to support certificate renewal
+_952ed01ad08f0d53cf3b05e61bd7b6e6.prod-cdn.packages:
+  type: CNAME
+  value: _ed9dd4aee039559895c2c55de602691e.vrcmzfbvtx.acm-validations.aws.
+
 # artifacts.k8s.io is for the (under development) binary artifact serving.
 # The IP points to a GCLB in front of CloudRun in the k8s-infra-porche-prod project.
 artifacts:
