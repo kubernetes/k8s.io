@@ -48,20 +48,30 @@ select: ## Select Terraform workspace.
 init: ## Initialize Terraform's state and download necessary providers.
 	$(TF) $@
 
+.PHONY: platforms-lock
+platforms-lock:
+	$(TF) $(TF_ARGS) \
+		providers lock \
+		-platform=linux_arm64 \
+		-platform=linux_amd64 \
+		-platform=darwin_amd64 \
+		-platform=windows_amd64 \
+		-platform=darwin_arm64
+
 .PHONY: plan
-plan: ## Present plan for creating/updating Terraform resources.
+plan: init ## Present plan for creating/updating Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
 		-lock-timeout=$(TF_LOCK_TIMEOUT) \
 		-var-file=./terraform.tfvars
 
 .PHONY: apply
-apply: ## Create/Update Terraform resources.
+apply: init ## Create/Update Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
 		-lock-timeout=$(TF_LOCK_TIMEOUT) \
 		-var-file=./terraform.tfvars
 
 .PHONY: destroy
-destroy: ## Delete Terraform resources.
+destroy: init ## Delete Terraform resources.
 	[ $(shell $(TF) workspace show) = "canary" ]
 	$(TF) $@ $(TF_ARGS) \
 		-lock-timeout=$(TF_LOCK_TIMEOUT) \
@@ -72,7 +82,7 @@ fmt: ## Format Terraform files.
 	$(TF) $@
 
 .PHONY: output
-output: ## Print Terraform output.
+output: init ## Print Terraform output.
 	@$(TF) $@ -json
 
 .PHONY: clean

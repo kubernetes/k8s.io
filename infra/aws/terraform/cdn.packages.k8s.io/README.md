@@ -49,6 +49,17 @@ way:
 make help
 ```
 
+## Updating `.lock` File
+
+The `.lock` file can be easily updated using the following Make target:
+
+```shell
+make platforms-lock
+```
+
+That way, the `.lock` file will include all used providers and their hashes
+for the most common platforms.
+
 ## Destroying Resources
 
 If you ever need to destroy resources, you can use the following Make target:
