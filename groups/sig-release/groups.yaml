@@ -178,6 +178,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-editors@kubernetes.io
+      - akhilerm@gmail.com
       - davanum@gmail.com
       - nikitaraghunath@gmail.com
       - stefan.schimanski@gmail.com
@@ -418,6 +419,7 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
       - k8s-infra-release-editors@kubernetes.io
+      - akhilerm@gmail.com
       - ameukam@gmail.com
       - cblecker@gmail.com
       - davanum@gmail.com

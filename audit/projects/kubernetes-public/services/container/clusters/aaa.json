@@ -37,8 +37,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.23.17-gke.5600",
-  "currentNodeVersion": "1.23.17-gke.5600",
+  "currentMasterVersion": "1.23.17-gke.6800",
+  "currentNodeVersion": "1.23.17-gke.6800",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -61,7 +61,6 @@
     "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-ad548c1d-grp"
   ],
   "ipAllocationPolicy": {
-    "additionalPodRangesConfig": {},
     "clusterIpv4Cidr": "10.40.0.0/14",
     "clusterIpv4CidrBlock": "10.40.0.0/14",
     "clusterSecondaryRangeName": "gke-aaa-pods-4d0eb763",
@@ -198,7 +197,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.23.17-gke.5600"
+      "version": "1.23.17-gke.6800"
     },
     {
       "autoscaling": {
@@ -255,7 +254,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.23.17-gke.5600"
+      "version": "1.23.17-gke.6800"
     },
     {
       "autoscaling": {
@@ -313,7 +312,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.23.17-gke.5600"
+      "version": "1.23.17-gke.6800"
     }
   ],
   "releaseChannel": {

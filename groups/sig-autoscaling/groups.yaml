@@ -7,6 +7,19 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
+  - email-id: sig-autoscaling-leads@kubernetes.io
+    name: sig-autoscaling-leads
+    description: |-
+      SIG autoscaling leads
+    owners:
+      - mwielgus@google.com
+      - guyjtempleton@googlemail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
   #
   # k8s-staging write access for SIG-owned subprojects
   #
