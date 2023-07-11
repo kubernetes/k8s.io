@@ -20,6 +20,7 @@ resource "aws_s3_bucket" "cdn_packages_k8s_io" {
   tags = local.tags
 }
 
+# This object ownership control ensures that ACLs are disabled for the bucket.
 resource "aws_s3_bucket_ownership_controls" "cdn_packages_k8s_io" {
   bucket = aws_s3_bucket.cdn_packages_k8s_io.id
 
@@ -28,7 +29,7 @@ resource "aws_s3_bucket_ownership_controls" "cdn_packages_k8s_io" {
   }
 
   depends_on = [
-    aws_s3_bucket.cdn_packages_k8s_io
+    aws_s3_bucket.cdn_packages_k8s_io,
   ]
 }
 
@@ -40,7 +41,7 @@ resource "aws_s3_bucket_versioning" "cdn_packages_k8s_io" {
   }
 
   depends_on = [
-    aws_s3_bucket.cdn_packages_k8s_io
+    aws_s3_bucket.cdn_packages_k8s_io,
   ]
 }
 
@@ -68,6 +69,6 @@ resource "aws_s3_bucket_policy" "cdn_packages_k8s_io_cloudfront_read" {
 
   depends_on = [
     aws_s3_bucket.cdn_packages_k8s_io,
-    aws_cloudfront_distribution.cdn_packages_k8s_io
+    aws_cloudfront_distribution.cdn_packages_k8s_io,
   ]
 }

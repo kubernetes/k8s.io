@@ -16,9 +16,11 @@ limitations under the License.
 
 terraform {
   backend "s3" {
-    bucket = "cdn-packages-k8s-io-tfstate"
-    key    = "terraform.tfstate"
-    region = "eu-central-1"
+    bucket       = "cdn-packages-k8s-io-tfstate"
+    key          = "terraform.tfstate"
+    region       = "eu-central-1"
+    role_arn     = "arn:aws:iam::309501585971:role/Provisioner"
+    session_name = "cdn-packages-k8s-io-terraform"
   }
 
   required_version = "~> 1.5.0"
@@ -33,12 +35,22 @@ terraform {
 
 provider "aws" {
   region = var.region
+
+  assume_role {
+    role_arn     = "arn:aws:iam::309501585971:role/Provisioner"
+    session_name = "cdn-packages-k8s-io-terraform"
+  }
 }
 
 # ACM certificate for CloudFront distribution must be created in us-east-1 (required by AWS)
 provider "aws" {
   region = "us-east-1"
   alias  = "us-east-1"
+
+  assume_role {
+    role_arn     = "arn:aws:iam::309501585971:role/Provisioner"
+    session_name = "cdn-packages-k8s-io-terraform"
+  }
 }
 
 data "aws_caller_identity" "current" {}

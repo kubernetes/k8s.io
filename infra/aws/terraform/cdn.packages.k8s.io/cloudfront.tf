@@ -81,7 +81,7 @@ resource "aws_cloudfront_distribution" "cdn_packages_k8s_io" {
   depends_on = [
     aws_acm_certificate.cdn_packages_k8s_io,
     aws_cloudfront_origin_access_control.cdn_packages_k8s_io,
-    aws_s3_bucket.cdn_packages_k8s_io
+    aws_s3_bucket.cdn_packages_k8s_io,
   ]
 
   tags = local.tags
