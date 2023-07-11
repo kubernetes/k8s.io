@@ -54,6 +54,8 @@ Resources:
   # out this IAM user:
   #   - GitOps workflow that's going to automatically apply Terraform changes
   #   - Integration such as Okta so we have personalized AWS users
+  # Credentials for this IAM user are located in 1Password vault accessible
+  # by Kubernetes Release Managers.
   ProvisionerUser:
     Type: 'AWS::IAM::User'
     Properties:

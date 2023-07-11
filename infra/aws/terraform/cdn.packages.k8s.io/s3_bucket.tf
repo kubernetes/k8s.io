@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 resource "aws_s3_bucket" "cdn_packages_k8s_io" {
-  bucket = "${var.prefix}cdn-packages-k8s-io-${data.aws_region.current.name}"
+  bucket = "${local.prefix}cdn-packages-k8s-io-${data.aws_region.current.name}"
 
   tags = local.tags
 }

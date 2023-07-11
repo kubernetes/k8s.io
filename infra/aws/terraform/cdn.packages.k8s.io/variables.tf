@@ -14,21 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// prefix prefixes every resource so that the resources
-// can be created without using the same names. Useful
-// for testing and staging
-
-variable "prefix" {
-  type        = string
-  default     = "test-"
-  description = "The prefix for all resources"
-
-  validation {
-    condition     = can(regex(".*-$|^$", var.prefix))
-    error_message = "The string must end with a hyphen or be empty."
-  }
-}
-
 variable "region" {
   type        = string
   nullable    = false

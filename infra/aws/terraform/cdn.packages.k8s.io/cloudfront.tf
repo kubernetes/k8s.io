@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 locals {
-  s3_origin_id = "${var.prefix}cdn.packages.k8s.io-s3-origin"
+  s3_origin_id = "${local.prefix}cdn.packages.k8s.io-s3-origin"
 }
 
 data "aws_cloudfront_cache_policy" "caching_optimized" {
@@ -24,7 +24,7 @@ data "aws_cloudfront_cache_policy" "caching_optimized" {
 }
 
 resource "aws_cloudfront_origin_access_control" "cdn_packages_k8s_io" {
-  name                              = "${var.prefix}cdn.packages.k8s.io"
+  name                              = "${local.prefix}cdn.packages.k8s.io"
   description                       = "Control policy for cdn.packages.k8s.io"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
@@ -50,7 +50,7 @@ resource "aws_cloudfront_distribution" "cdn_packages_k8s_io" {
   default_root_object = ""
   comment             = "CloudFront used by OpenBuildService (OBS) as a mirror"
 
-  aliases = ["${var.prefix}cdn.packages.k8s.io"]
+  aliases = ["${local.prefix}cdn.packages.k8s.io"]
 
   default_cache_behavior {
     target_origin_id = local.s3_origin_id

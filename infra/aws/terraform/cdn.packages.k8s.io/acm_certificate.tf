@@ -18,7 +18,7 @@ resource "aws_acm_certificate" "cdn_packages_k8s_io" {
   # ACM certificate for CloudFront distribution must be created in us-east-1 (required by AWS)
   provider = aws.us-east-1
 
-  domain_name       = "${var.prefix}cdn.packages.k8s.io"
+  domain_name       = "${local.prefix}cdn.packages.k8s.io"
   validation_method = "DNS"
 
   tags = local.tags
