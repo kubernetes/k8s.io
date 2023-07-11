@@ -27,8 +27,7 @@ Before getting started, it's mandatory to choose the correct Terraform
 workspace:
 
 ```shell
-export WORKSPACE_NAME=canary # or prod
-make select
+WORKSPACE_NAME=canary make select # can also specify "prod"
 ```
 
 After that, you can plan your changes using the following Make target:

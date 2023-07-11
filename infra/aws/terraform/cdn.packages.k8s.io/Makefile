@@ -59,6 +59,7 @@ apply: ## Create/Update Terraform resources.
 
 .PHONY: destroy
 destroy: ## Delete Terraform resources.
+	[ $(shell $(TF) workspace show) = "canary" ]
 	$(TF) $@ $(TF_ARGS) \
 		-var-file=./terraform.tfvars
 
