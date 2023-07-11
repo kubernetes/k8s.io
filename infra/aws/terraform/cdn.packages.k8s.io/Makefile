@@ -14,6 +14,7 @@
 
 TF ?= terraform
 TF_ARGS ?=
+TF_LOCK_TIMEOUT ?= 30s
 
 # Valid values are: canary, prod
 WORKSPACE_NAME ?= canary
@@ -50,17 +51,20 @@ init: ## Initialize Terraform's state and download necessary providers.
 .PHONY: plan
 plan: ## Present plan for creating/updating Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
+		-lock-timeout=$(TF_LOCK_TIMEOUT) \
 		-var-file=./terraform.tfvars
 
 .PHONY: apply
 apply: ## Create/Update Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
+		-lock-timeout=$(TF_LOCK_TIMEOUT) \
 		-var-file=./terraform.tfvars
 
 .PHONY: destroy
 destroy: ## Delete Terraform resources.
 	[ $(shell $(TF) workspace show) = "canary" ]
 	$(TF) $@ $(TF_ARGS) \
+		-lock-timeout=$(TF_LOCK_TIMEOUT) \
 		-var-file=./terraform.tfvars
 
 .PHONY: fmt
