@@ -16,11 +16,4 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - aws-janitor.yaml
-  - boskos.yaml
-  - config.yaml
-  - crd.yaml
-  - rbac.yaml
-  - reaper.yaml
-  - sa.yaml
-  - service.yaml
+  - ../../base

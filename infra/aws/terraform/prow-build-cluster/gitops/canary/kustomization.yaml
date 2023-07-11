@@ -19,6 +19,7 @@ resources:
   - ../base
 patches:
   - path: patch-path-external-secrets.yaml
+  - path: patch-path-boskos.yaml
   - path: patch-path-flux-system.yaml
   - path: patch-git-source-url.yaml
   - path: patch-slack-alerting-external-secret.yaml
