@@ -11,6 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+Parameters:
+  AllPackagesBucketsArn:
+    Type: String
+    Description: ARN that matches all buckets used for storing packages (prod and canary)
+    ConstraintDescription: ARN is required
+    AllowedPattern: ".+"
+    Default: "arn:aws:s3:::*-cdn-packages-k8s-io-*"
+  ProdPackagesBucketsArn:
+    Type: String
+    Description: ARN that matches buckets only used for production
+    ConstraintDescription: ARN is required
+    AllowedPattern: ".+"
+    Default: "arn:aws:s3:::prod-cdn-packages-k8s-io-*"
+
 Resources:
   #########################################
   # Terraform State                       #
@@ -70,7 +84,7 @@ Resources:
   TerraformStateAccessPolicy:
     Type: 'AWS::IAM::ManagedPolicy'
     Properties:
-      ManagedPolicyName: ProvisionerPlanAccess
+      ManagedPolicyName: TerraformStateAccess
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -131,7 +145,7 @@ Resources:
               - 's3:GetLifecycleConfiguration'
               - 's3:GetReplicationConfiguration'
               - 's3:ListBucket'
-            Resource: 'arn:aws:s3:::*-cdn-packages-k8s-io-*'
+            Resource: !Ref AllPackagesBucketsArn
       # Attach the policy to the Provisioner IAM role
       Roles:
         - Ref: ProvisionerRole
@@ -165,7 +179,7 @@ Resources:
               - 's3:PutBucketOwnershipControls'
               - 's3:PutBucketPolicy'
               - 's3:PutBucketTagging'
-            Resource: 'arn:aws:s3:::*-cdn-packages-k8s-io-*'
+            Resource: !Ref AllPackagesBucketsArn
       # Attach the policy to the Provisioner IAM role
       Roles:
         - Ref: ProvisionerRole
@@ -194,7 +208,7 @@ Resources:
             Action:
               - 's3:DeleteBucket'
               - 's3:DeleteBucketPolicy'
-            Resource: 'arn:aws:s3:::*-cdn-packages-k8s-io-*'
+            Resource: !Ref AllPackagesBucketsArn
       # Attach the policy to the Provisioner IAM role
       Roles:
         - Ref: ProvisionerRole
@@ -228,10 +242,10 @@ Resources:
               - 's3:GetObject'
               - 's3:PutObject'
             Resource:
-              - 'arn:aws:s3:::prod-cdn-packages-k8s-io-*'
-              - 'arn:aws:s3:::prod-cdn-packages-k8s-io-*/*'
+              - !Ref ProdPackagesBucketsArn
+              - !Sub '${ProdPackagesBucketsArn}/*'
           - Effect: 'Allow'
             Action: 's3:ListAllMyBuckets'
-            Resource: 'arn:aws:s3:::prod-cdn-packages-k8s-io-*'
+            Resource: !Ref ProdPackagesBucketsArn
       Users:
         - Ref: OBSAdminUser
