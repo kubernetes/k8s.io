@@ -1241,6 +1241,7 @@
     "sha256:58f8096f830b9d18f669a4d27899810b9a9496219c4804d711048e2957cc2e5c": ["v1.28.0-go1.21rc2-bullseye.0"]
 - name: setcap
   dmap:
+    "sha256:573b6367e5bf6c18a6f5dc5e986bc43e79fd1031f6784ac60bc656d440083e8e": ["bookworm-v1.0.0"]
     "sha256:4bbe17197ef10f1b627932999bb7b70e6107ee9d2752e4007440e5024b34d173": ["bullseye-v1.0.0"]
     "sha256:5bf29307176af8ec962853ce5314cb1d5d80d2389200b828bdbd0b14b5f4ff4e": ["bullseye-v1.1.0"]
     "sha256:27578a22b06194cc4eeb617e405a0331f3957d5102b994f799d061a92d74e58d": ["bullseye-v1.2.0"]
@@ -1256,6 +1257,7 @@
     "sha256:f4dbc87a13a7f4acedbf296183bb98179c307df53d3ae3734fc9f74331230aea": ["buster-v2.1.0"]
 - name: setcap-amd64
   dmap:
+    "sha256:7e954af19dbd39d62d5aac41572999ef2f1fc0b5bbfdb8c3da9edc5361cbdce1": ["bookworm-v1.0.0"]
     "sha256:ae91828f48cd05c9e4d79d1fdf6c2c6bae5d442b189eb0ed25c2c2bbc46e3205": ["bullseye-v1.2.0"]
     "sha256:0140412f772d90c7611ac2bb96550a729397858c7234f1137331ef43d72f41bc": ["bullseye-v1.3.0"]
     "sha256:e98aa8ccc813fb03b7b9abb919e3fe9ac3dd9bf480a22edb9f7bd379fe78d944": ["bullseye-v1.4.0"]
@@ -1268,6 +1270,7 @@
     "sha256:540a86b74a7dc8b5a01b2a71a43967cc0912df2d2a96119922a582a047fb9973": ["buster-v2.0.4"]
 - name: setcap-arm
   dmap:
+    "sha256:1986b635c1d6eb78680623a9875cfc1c1a5dd8a46536d5114bd1642085d8058e": ["bookworm-v1.0.0"]
     "sha256:1dc33f47a3a4a4bf9f15e16a3c072dcde88dd607eb4eee26bd10681c40f2ac96": ["bullseye-v1.2.0"]
     "sha256:f097d3352e0089c09c1272b4f654c8e3b20cdba28697e93e96a64a4490a96b5c": ["bullseye-v1.3.0"]
     "sha256:a7a3ec5bc8c2625197385556f01958a1ddd9b32a0f51259b3e873b028e57a8da": ["bullseye-v1.4.0"]
@@ -1280,6 +1283,7 @@
     "sha256:8fe1b7647c589228f3416fc7e1ada5f67232983c3f2023dcf43803f82a2b6094": ["buster-v2.0.4"]
 - name: setcap-arm64
   dmap:
+    "sha256:4b7b61feaca999040ad878c4bbad43b731954867b1c585b514ebc04b81bcf98e": ["bookworm-v1.0.0"]
     "sha256:bc86712a15eee53547db256305378bec9d8c1b71a9b49062abcbc981ffda65ef": ["bullseye-v1.2.0"]
     "sha256:642d31146256ab3ebc522bdf0b3628f223ed28b41502977261c0e5fe79f5fed2": ["bullseye-v1.3.0"]
     "sha256:e3e5ffb83ddc302c680b7ea6ad8de22da3fd5c99a6610ab5048bf1145b62d843": ["bullseye-v1.4.0"]
@@ -1292,6 +1296,7 @@
     "sha256:7cbbf1d4bf0747eb160ac37c86efe0e1cea8402c85a8e5a43a29206fc5c6d836": ["buster-v2.0.4"]
 - name: setcap-ppc64le
   dmap:
+    "sha256:5d7bd5237d751bd18d1b52580ea72aac6804066251a7def993ed0e0f49ee5f2f": ["bookworm-v1.0.0"]
     "sha256:11fcbf5dc6255e60852198e1cc95156537eeb617dfcfd8dab4439e1e27803a07": ["bullseye-v1.2.0"]
     "sha256:149e23ee1323253c258a11b7389ed775d8fc5c814ffe711c3668f546a588dff5": ["bullseye-v1.3.0"]
     "sha256:8b9acbacea6bae1ea37546e477b9878cd302563ca86338b724d6b723d7452f55": ["bullseye-v1.4.0"]
@@ -1304,6 +1309,7 @@
     "sha256:3006e568fb93e5d0396be0ce955fa11d884e6274015fd45b440d07b480b05f51": ["buster-v2.0.4"]
 - name: setcap-s390x
   dmap:
+    "sha256:27e800f8af1704f16e5aab1491308adba1d9813fc8465f6c5ddab7711aecbf17": ["bookworm-v1.0.0"]
     "sha256:dbd49aaf7e86cc349c2e3cdded9ba4a0bea1562cab0559ea726e7f071de93c8f": ["bullseye-v1.2.0"]
     "sha256:46047e6d382bdc49055a73bdeb0dce567f312f89c116e146ae6f2cc2a0d1d5dc": ["bullseye-v1.3.0"]
     "sha256:a85ff9d8056b278769ef8963c606437ff4c4a831779ff9fbe329a277f3cb5a0f": ["bullseye-v1.4.0"]
