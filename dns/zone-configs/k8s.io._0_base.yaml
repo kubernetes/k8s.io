@@ -332,14 +332,22 @@ slack-infra:
 submit-queue:
   type: CNAME
   value: redirect.k8s.io.
-# Running on Google App Engine using a load balancer (@michelle192837)
+# Running on Google App Engine (@michelle192837)
 testgrid:
   - type: A
     values:
-      - 34.120.51.46
+      - 216.239.32.21
+      - 216.239.34.21
+      - 216.239.36.21
+      - 216.239.38.21
+    # - 34.120.51.46 // TODO(michelle192837): Use this once certificate is active.
   - type: AAAA
     values:
-      - "2600:1901:0:dc01::"
+      - "2001:4860:4802:32::15"
+      - "2001:4860:4802:34::15"
+      - "2001:4860:4802:36::15"
+      - "2001:4860:4802:38::15"
+    # - "2600:1901:0:dc01::" // TODO(michelle192837): Use this once certificate is active.
 # DNS challenge for issuing (transition) TLS certificate
 _acme-challenge.k8s-testgrid:
   type: CNAME
