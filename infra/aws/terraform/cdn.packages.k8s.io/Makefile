@@ -61,14 +61,16 @@ platforms-lock:
 .PHONY: plan
 plan: init ## Present plan for creating/updating Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
+		-out=plan.out \
 		-lock-timeout=$(TF_LOCK_TIMEOUT) \
 		-var-file=./terraform.tfvars
 
 .PHONY: apply
-apply: init ## Create/Update Terraform resources.
+apply: ## Create/Update Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
 		-lock-timeout=$(TF_LOCK_TIMEOUT) \
-		-var-file=./terraform.tfvars
+		"plan.out"
+	rm -f plan.out
 
 .PHONY: destroy
 destroy: init ## Delete Terraform resources.
