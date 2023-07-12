@@ -2,7 +2,7 @@
 
 EKS provides [Managed Node Groups](https://docs.aws.amazon.com/eks/latest/userguide/update-managed-node-group.html) that are highly effective for rolling out upgrades. However, we encountered an issue where automatic updates fail due to a PodDisruptionBudget set on our Prow Jobs, resulting in a PodEvictionFailure error. To mitigate the risks associated with forcing the upgrade, which could potentially lead to orphaned test resources, we have devised a solution that involves the introduction of a secondary Node Group.
 
-**Problem:** The PodDisruptionBudget set on our Prow Jobs hinders the successful execution of automatic updates in EKS. As a consequence, we cannot perform updates seamlessly without encountering the PodEvictionFailure error.
+**Problem:** The PodDisruptionBudget set on our Prow Jobs hinders the successful execution of automatic updates in EKS. [If the Pods don't leave the node within 15 minutes](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-update-behavior.html#managed-node-update-upgrade) and there's no force flag, the upgrade phase fails with a PodEvictionFailure error. Our prow jobs can take much longer than 15 minutes, in many cases more that one hour. As a consequence, we cannot perform seamless updates.
 
 **Proposed Solution:** To address this issue, we have decided to establish two EKS node groups: `blue` and `green`. These node groups will operate in an active-passive manner, allowing us to ensure uninterrupted service while facilitating upgrades.
 
