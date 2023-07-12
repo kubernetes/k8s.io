@@ -384,7 +384,7 @@ docs.prow:
 # https://github.com/kubernetes-sigs/cluster-api docs (@dwat, @jdetiber, @justinsb)
 cluster-api.sigs:
   type: CNAME
-  value: release-1-4--kubernetes-sigs-cluster-api.netlify.app.
+  value: release-1-5--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-aws docs (@randomvariable, @detiber, @ncdc, @rudoi, @vincepri)
 cluster-api-aws.sigs:
   type: CNAME
@@ -458,6 +458,9 @@ release-1-3.cluster-api.sigs:
 release-1-4.cluster-api.sigs:
   type: CNAME
   value: release-1-4--kubernetes-sigs-cluster-api.netlify.app.
+release-1-5.cluster-api.sigs:
+  type: CNAME
+  value: release-1-5--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vincepri)
 main.cluster-api.sigs:
   type: CNAME
