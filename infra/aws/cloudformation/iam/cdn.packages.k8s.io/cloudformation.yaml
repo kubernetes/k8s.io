@@ -1,0 +1,256 @@
+# Copyright 2023 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+Parameters:
+  AllPackagesBucketsArn:
+    Type: String
+    Description: ARN that matches all buckets used for storing packages (prod and canary)
+    ConstraintDescription: ARN is required
+    AllowedPattern: ".+"
+    Default: "arn:aws:s3:::*-cdn-packages-k8s-io-*"
+  ProdPackagesBucketsArn:
+    Type: String
+    Description: ARN that matches buckets only used for production
+    ConstraintDescription: ARN is required
+    AllowedPattern: ".+"
+    Default: "arn:aws:s3:::prod-cdn-packages-k8s-io-*"
+
+Resources:
+  #########################################
+  # Terraform State                       #
+  #########################################
+
+  # TFStateBucket (packages-k8s-io-tfstate) is S3 bucket for storing Terraform
+  # state
+  TFStateBucket:
+    Type: AWS::S3::Bucket
+    # We retain the bucket to ensure that accidental deletion of the stack
+    # doesn't destroy Terraform state
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: cdn-packages-k8s-io-tfstate
+      VersioningConfiguration:
+        Status: Enabled
+
+  #########################################
+  # IAM user for Terraform                #
+  #########################################
+
+  # ProvisionerUser (provisioner) is an IAM user used for running Terraform.
+  # This is a shared user used by Kubernetes Release Managers to run Terraform
+  # and manage this AWS account.
+  # We need to use a shared IAM user because we can only run Terraform locally.
+  # In the future, we will intorduce some changes that will allow us to phase
+  # out this IAM user:
+  #   - GitOps workflow that's going to automatically apply Terraform changes
+  #   - Integration such as Okta so we have personalized AWS users
+  # Credentials for this IAM user are located in 1Password vault accessible
+  # by Kubernetes Release Managers.
+  ProvisionerUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Path: /
+      UserName: provisioner
+      Policies:
+        - PolicyName: ProvisionerUserAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Action: 'sts:AssumeRole'
+                Effect: Allow
+                Resource: !Sub 'arn:aws:iam::${AWS::AccountId}:role/Provisioner'
+
+  # ProvisionerRole is an IAM role assumed by provisioner IAM user to run Terraform
+  ProvisionerRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: Provisioner
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              AWS: !GetAtt ProvisionerUser.Arn
+
+  TerraformStateAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: TerraformStateAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          # Permissions needed for S3 bucket used for Terraform state are documented here:
+          # https://developer.hashicorp.com/terraform/language/settings/backends/s3#s3-bucket-permissions
+          - Effect: 'Allow'
+            Action:
+              - 's3:ListBucket'
+            Resource: !GetAtt TFStateBucket.Arn
+          - Effect: 'Allow'
+            Action:
+              - 's3:GetObject'
+              - 's3:PutObject'
+              - 's3:DeleteObject'
+            Resource: !Sub '${TFStateBucket.Arn}/*'
+      # Attach the policy to the Provisioner IAM role
+      Roles:
+        - Ref: ProvisionerRole
+
+  # ProvisionerPlanAccessPolicy is an IAM policy that grants permissions to run `terraform plan`
+  ProvisionerPlanAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: ProvisionerPlanAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          # CloudFront requires the ACM certificate objects to be located in
+          # the us-east-1 region. That's why we only give `acm:` permissions in
+          # that region.
+          - Effect: 'Allow'
+            Action:
+              - 'acm:DescribeCertificate'
+              - 'acm:ListTagsForCertificate'
+            Resource: !Sub 'arn:aws:acm:us-east-1:${AWS::AccountId}:certificate/*'
+          - Effect: 'Allow'
+            Action:
+              - 'cloudfront:GetCachePolicy'
+              - 'cloudfront:GetDistribution'
+              - 'cloudfront:GetOriginAccessControl'
+              - 'cloudfront:ListCachePolicies'
+              - 'cloudfront:ListTagsForResource'
+            Resource:
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:cache-policy/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:origin-access-control/*'
+          - Effect: 'Allow'
+            Action:
+              - 's3:GetAccelerateConfiguration'
+              - 's3:GetBucketAcl'
+              - 's3:GetBucketCORS'
+              - 's3:GetBucketLogging'
+              - 's3:GetBucketObjectLockConfiguration'
+              - 's3:GetBucketOwnershipControls'
+              - 's3:GetBucketPolicy'
+              - 's3:GetBucketRequestPayment'
+              - 's3:GetBucketTagging'
+              - 's3:GetBucketVersioning'
+              - 's3:GetBucketWebsite'
+              - 's3:GetEncryptionConfiguration'
+              - 's3:GetLifecycleConfiguration'
+              - 's3:GetReplicationConfiguration'
+              - 's3:ListBucket'
+            Resource: !Ref AllPackagesBucketsArn
+      # Attach the policy to the Provisioner IAM role
+      Roles:
+        - Ref: ProvisionerRole
+
+  # ProvisionerApplyAccessPolicy is an IAM policy that grants permissions to run `terraform apply`
+  ProvisionerApplyAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: ProvisionerApplyAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: 'Allow'
+            Action:
+              - 'acm:AddTagsToCertificate'
+              - 'acm:RequestCertificate'
+            Resource: !Sub 'arn:aws:acm:us-east-1:${AWS::AccountId}:certificate/*'
+          - Effect: 'Allow'
+            Action:
+              - 'cloudfront:CreateDistribution'
+              - 'cloudfront:CreateOriginAccessControl'
+              - 'cloudfront:UpdateDistribution'
+              - 'cloudfront:TagResource'
+            Resource:
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:cache-policy/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:origin-access-control/*'
+          - Effect: 'Allow'
+            Action:
+              - 's3:CreateBucket'
+              - 's3:PutBucketOwnershipControls'
+              - 's3:PutBucketPolicy'
+              - 's3:PutBucketTagging'
+            Resource: !Ref AllPackagesBucketsArn
+      # Attach the policy to the Provisioner IAM role
+      Roles:
+        - Ref: ProvisionerRole
+
+  # ProvisionerDestroyAccessPolicy is an IAM policy that grants permissions to run `terraform destroy`
+  ProvisionerDestroyAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: ProvisionerDestroyAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: 'Allow'
+            Action:
+              - 'acm:DeleteCertificate'
+            Resource: !Sub 'arn:aws:acm:us-east-1:${AWS::AccountId}:certificate/*'
+          - Effect: 'Allow'
+            Action:
+              - 'cloudfront:DeleteDistribution'
+              - 'cloudfront:DeleteOriginAccessControl'
+            Resource:
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:distribution/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:cache-policy/*'
+              - !Sub 'arn:aws:cloudfront::${AWS::AccountId}:origin-access-control/*'
+          - Effect: 'Allow'
+            Action:
+              - 's3:DeleteBucket'
+              - 's3:DeleteBucketPolicy'
+            Resource: !Ref AllPackagesBucketsArn
+      # Attach the policy to the Provisioner IAM role
+      Roles:
+        - Ref: ProvisionerRole
+
+  #########################################
+  # IAM user for OpenBuildService (OBS)   #
+  #########################################
+
+  # OBSAdminUser (obs-admin) is an IAM user used by the OBS platform to perform
+  # needed operation on the S3 bucket (e.g. publish packages)
+  OBSAdminUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Path: /
+      UserName: obs-admin
+
+  # OBSAdminAccessPolicy gives the permissions needed to run rclone on the S3 bucket.
+  # Permissions needed for rclone are documented here:
+  # https://rclone.org/s3/#s3-permissions
+  OBSAdminAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: OBSAdminAccess
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Action:
+              - 's3:ListBucket'
+              - 's3:DeleteObject'
+              - 's3:GetObject'
+              - 's3:PutObject'
+            Resource:
+              - !Ref ProdPackagesBucketsArn
+              - !Sub '${ProdPackagesBucketsArn}/*'
+          - Effect: 'Allow'
+            Action: 's3:ListAllMyBuckets'
+            Resource: !Ref ProdPackagesBucketsArn
+      Users:
+        - Ref: OBSAdminUser
