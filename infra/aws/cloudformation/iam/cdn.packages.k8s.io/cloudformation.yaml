@@ -18,12 +18,12 @@ Parameters:
     ConstraintDescription: ARN is required
     AllowedPattern: ".+"
     Default: "arn:aws:s3:::*-cdn-packages-k8s-io-*"
-  ProdPackagesBucketsArn:
+  ProdPackagesBucketArn:
     Type: String
     Description: ARN that matches buckets only used for production
     ConstraintDescription: ARN is required
     AllowedPattern: ".+"
-    Default: "arn:aws:s3:::prod-cdn-packages-k8s-io-*"
+    Default: "arn:aws:s3:::prod-cdn-packages-k8s-io-eu-central-1"
 
 Resources:
   #########################################
@@ -242,15 +242,21 @@ Resources:
         Statement:
           - Effect: 'Allow'
             Action:
+              # Needed because of https://github.com/rclone/rclone/issues/5119
+              # We can remove this once the issue is fixed.
+              # This should be safe because the bucket is already created, so
+              # this is a no-op call, but it doesn't fail rclone.
+              - 's3:CreateBucket'
               - 's3:ListBucket'
               - 's3:DeleteObject'
               - 's3:GetObject'
               - 's3:PutObject'
             Resource:
-              - !Ref ProdPackagesBucketsArn
-              - !Sub '${ProdPackagesBucketsArn}/*'
+              - !Ref ProdPackagesBucketArn
+              - !Sub '${ProdPackagesBucketArn}/*'
           - Effect: 'Allow'
             Action: 's3:ListAllMyBuckets'
-            Resource: !Ref ProdPackagesBucketsArn
+            # ListAllMyBuckets can't be scoped down to specific buckets
+            Resource: '*'
       Users:
         - Ref: OBSAdminUser
