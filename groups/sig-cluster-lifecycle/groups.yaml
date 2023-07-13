@@ -224,6 +224,7 @@ groups:
       - buringerst@vmware.com
       - kmuldoon@vmware.com
       - christi.schlotter@gmail.com
+      - gongz@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     name: k8s-infra-staging-cluster-api
