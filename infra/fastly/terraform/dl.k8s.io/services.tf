@@ -151,6 +151,12 @@ resource "fastly_service_vcl" "files" {
     stale_ttl       = 120
   }
 
+  request_setting {
+    name = "Force TLS"
+    force_ssl = true
+    xff = "leave"
+  }
+
   vcl {
     name    = "Main"
     content = file("${path.module}/vcl/binaries.vcl")
