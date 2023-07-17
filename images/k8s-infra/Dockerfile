@@ -70,7 +70,7 @@ RUN set -o errexit nounset pipefail \
             python3-pip \
             xz-utils \
     && echo "Installing python tools ..." \
-        && pip3 install --requirement requirements.txt --break-system-packages \
+        && pip3 install --requirement requirements.txt --break-system-packages --no-build-isolation \
     && echo "Installing go ..." \
         && export GO_TARBALL="go${GO_VERSION}.linux-amd64.tar.gz" \
         && curl -fsSL "https://golang.org/dl/${GO_TARBALL}" --output tarball.tar.gz \
