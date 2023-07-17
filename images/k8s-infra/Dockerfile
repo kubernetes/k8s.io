@@ -28,7 +28,7 @@ FROM debian:bookworm
 
 ARG CONFTEST_VERSION=0.43.1
 ARG GCLOUD_VERSION=437.0.0
-ARG GH_VERSION=2.31.0
+ARG GH_VERSION=2.32.0
 ARG GO_VERSION=1.20.5
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
