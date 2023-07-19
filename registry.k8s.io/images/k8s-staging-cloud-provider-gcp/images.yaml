@@ -81,6 +81,7 @@
     "sha256:f51175a8784ee1614e70a9399a639350768cec37440faef7334efd78e3998da5": ["v1.5.3"]
     "sha256:21bf33cc13cb0a5cb38f6c742aa714d3b80575f773a6e1fa5f7f1467d67f5f3f": ["v1.5.4"]
     "sha256:60bfb3531ea2592288432e94ecd3e0f07c8b6cb856abe30c0e6ed1f510cb0b6e": ["v1.5.5"]
+    "sha256:2f5ee269c2de88fb4be8bc37a6342fa8331553f85b09b67422b3d956c24beb9c": ["v1.6.0"]
 
 - name: cloud-controller-manager
   dmap:
