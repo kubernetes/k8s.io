@@ -3,7 +3,6 @@ artifactregistry.googleapis.com      Artifact Registry API
 autoscaling.googleapis.com           Cloud Autoscaling API
 bigquery.googleapis.com              BigQuery API
 bigqueryconnection.googleapis.com    BigQuery Connection API
-bigquerydatatransfer.googleapis.com  BigQuery Data Transfer API
 bigqueryreservation.googleapis.com   BigQuery Reservation API
 bigquerystorage.googleapis.com       BigQuery Storage API
 cloudasset.googleapis.com            Cloud Asset API
@@ -21,7 +20,6 @@ monitoring.googleapis.com            Cloud Monitoring API
 oslogin.googleapis.com               Cloud OS Login API
 pubsub.googleapis.com                Cloud Pub/Sub API
 run.googleapis.com                   Cloud Run Admin API
-secretmanager.googleapis.com         Secret Manager API
 serviceusage.googleapis.com          Service Usage API
 storage-api.googleapis.com           Google Cloud Storage JSON API
 storage-component.googleapis.com     Cloud Storage
