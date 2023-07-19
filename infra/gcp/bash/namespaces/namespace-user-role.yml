@@ -12,7 +12,7 @@ rules:
     resources: ["horizontalpodautoscalers"]
     verbs: ["*"]
   - apiGroups: ["apps"]
-    resources: ["deployments", "replicasets", "statefulsets"]
+    resources: ["deployments", "replicasets", "replicasets/scale", "statefulsets"]
     verbs: ["*"]
   - apiGroups: ["batch"]
     resources: ["cronjobs", "jobs"]
