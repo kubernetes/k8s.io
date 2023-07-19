@@ -29,8 +29,8 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
-     - jeremy.r.rickard@gmail.com
-      - mhausler@amazon.com
+      - jeremy.r.rickard@gmail.com
       - liggitt@google.com
+      - mhausler@amazon.com
     members:
       - wg-lts-leads@kubernetes.io
