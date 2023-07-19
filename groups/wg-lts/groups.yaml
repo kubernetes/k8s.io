@@ -1,0 +1,36 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: wg-lts-leads@kubernetes.io
+    name: wg-lts-leads
+    description: |-
+      WG LTS Organizers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - jeremy.r.rickard@gmail.com
+      - mhausler@amazon.com
+      - liggitt@google.com
+
+  - email-id: wg-lts@kubernetes.io
+    name: wg-lts
+    description: |-
+      Public mailing list for WG LTS
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+     - jeremy.r.rickard@gmail.com
+      - mhausler@amazon.com
+      - liggitt@google.com
+    members:
+      - wg-lts-leads@kubernetes.io

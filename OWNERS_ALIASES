@@ -138,6 +138,10 @@ aliases:
     - cantbewong
     - cindyxing
     - dejanb
+  wg-lts-leads:
+    - micahhausler
+    - jeremyrickard
+    - liggitt
   wg-multitenancy-leads:
     - srampal
     - tashimi
