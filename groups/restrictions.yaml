@@ -258,4 +258,8 @@ restrictions:
     allowedGroups:
       - "^wg-batch@kubernetes.io$"
       - "^wg-batch-leads@kubernetes.io$"
+  - path: "wg-lts/groups.yaml"
+    allowedGroups:
+      - "^wg-lts@kubernetes.io$"
+      - "^wg-lts-leads@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
