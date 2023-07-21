@@ -34,7 +34,7 @@ spec:
           # Map all keys to files.
       containers:
       - name: nginx
-        image: nginx:1.22-alpine
+        image: nginx:1.25-alpine
         resources:
           limits:
             cpu: 1
