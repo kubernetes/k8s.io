@@ -41,7 +41,6 @@ resource "fastly_service_vcl" "files" {
     override_host = "${var.bucket}.storage.googleapis.com"
 
     connect_timeout       = 5000  # milliseconds
-    first_byte_timeout    = 60000 # milliseconds
     between_bytes_timeout = 15000 # milliseconds
     error_threshold       = 5
   }
