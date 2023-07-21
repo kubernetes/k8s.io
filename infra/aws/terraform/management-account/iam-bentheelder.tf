@@ -24,5 +24,5 @@ resource "aws_iam_user_policy_attachment" "bentheelder_billing" {
 }
 resource "aws_iam_user_login_profile" "bentheelder_login" {
   user    = aws_iam_user.bentheelder.name
-  password_reset_required = true
+  password_reset_required = false
 }
