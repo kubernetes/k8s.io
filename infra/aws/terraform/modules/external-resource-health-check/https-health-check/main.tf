@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 locals {
-  prefix = "external-https-dependency"
+  prefix = "external"
 }
 
 resource "aws_route53_health_check" "this" {
@@ -27,6 +27,7 @@ resource "aws_route53_health_check" "this" {
   port = var.port
   resource_path = var.resource_path == "" ? null : var.resource_path
   disabled = var.disabled
+  regions = var.regions
 }
 
 resource "aws_cloudwatch_metric_alarm" "this" {
