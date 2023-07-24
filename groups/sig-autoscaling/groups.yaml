@@ -51,6 +51,7 @@ groups:
       - danielmk@google.com
       - guyjtempleton@googlemail.com
       - kgolab@google.com
+      - bwroblewski@google.com
 
   #
   # k8s-infra gcs write access
