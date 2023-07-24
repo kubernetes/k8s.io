@@ -63,7 +63,7 @@ resource "fastly_service_vcl" "files" {
     project_id = "k8s-infra-public-pii"
     name = "BigQuery logging"
     table = "fastly_bigquery_cdn_dl_k8s_io_logs"
-    account_name = "fastly-service-account"
+    account_name = "fastly-bigquery-logging-sa"
     email = "fastly-logging@datalog-bulleit-9e86.iam.gserviceaccount.com"
 
     format = "%%{strftime(\\{\"%Y-%m-%dT%H:%M:%S%z\"\\}, time.start)}V|%%{client.as.number}V|%%{if(fastly.ff.visits_this_service == 0, \"true\", \"false\")}V"
