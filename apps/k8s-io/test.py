@@ -284,7 +284,7 @@ class RedirTest(HTTPTestCase):
             for extra in ('', '-alpha.$rc_ver', '-beta.$rc_ver', '-rc.$rc_ver'):
                 self.assert_temp_redirect(
                     base + '/v$major_ver.$minor_ver.$patch_ver' + extra + '/$path',
-                    'https://storage.googleapis.com/kubernetes-release/release/v$major_ver.$minor_ver.$patch_ver' + extra + '/$path',
+                    'https://cdn.dl.k8s.io/release/v$major_ver.$minor_ver.$patch_ver' + extra + '/$path',
                     major_ver=rand_num(), minor_ver=rand_num(), patch_ver=rand_num(), rc_ver=rand_num(), path=rand_num())
             # Not a release version
             self.assert_temp_redirect(
