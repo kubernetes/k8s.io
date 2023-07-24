@@ -12,19 +12,16 @@ sub vcl_recv {
     set req.max_stale_while_revalidate = 0s;
   }
 
-
 #FASTLY recv
 
   # don't bother doing a cache lookup for a request type that isn't cacheable
-  if (req.method !~ "(GET|HEAD|FASTLYPURGE)") {
+  if (req.method != "HEAD" && req.method != "GET" && req.method != "FASTLYPURGE") {
     return(pass);
   }
-
   return(lookup);
 }
 
 sub vcl_fetch {
-
   /* handle 5XX (or any other unwanted status code) */
   if (beresp.status >= 500 && beresp.status < 600) {
     /* deliver stale if the object is available */
@@ -48,6 +45,10 @@ sub vcl_fetch {
   }
 
 #FASTLY fetch
+  if ((beresp.status == 500 || beresp.status == 503) && req.restarts < 1 && (req.method == "GET" || req.method == "HEAD")) {
+    restart;
+  }
+
   if (req.restarts > 0) {
     set beresp.http.Fastly-Restarts = req.restarts;
   }
@@ -72,16 +73,6 @@ if (beresp.http.Cache-Control ~ "private") {
   return(deliver);
 }
 
-sub vcl_deliver {
-#FASTLY deliver
-
-  if (req.http.X-Monitoring == "true") {
-    set resp.http.X-Monitoring = req.http.X-Monitoring;
-  }
-
-  return(deliver);
-}
-
 sub vcl_hit {
 #FASTLY hit
 
@@ -95,11 +86,9 @@ sub vcl_hit {
 }
 
 sub vcl_deliver {
-    if (resp.status >= 500 && resp.status < 600) {
-        if (stale.exists) {
-            restart;
-        }
-    }
+
+#FASTLY deliver
+  return(deliver);
 }
 
 sub vcl_miss {
@@ -109,6 +98,34 @@ sub vcl_miss {
 
 sub vcl_error {
 #FASTLY error
+
+  /* handle 503s */
+  if (obj.status >= 500 && obj.status < 600) {
+    /* deliver stale object if it is available */
+    if (stale.exists) {
+      return(deliver_stale);
+    }
+    /* otherwise, return a synthetic */
+
+    # Handle our "error" conditions which are really just ways to set synthetic
+
+    # responses.
+    if (obj.status == 603) {
+        set obj.status = 403;
+        set obj.response = "SSL is required";
+        set obj.http.Content-Type = "text/plain; charset=UTF-8";
+        synthetic {"SSL is required."};
+        return (deliver);
+    }
+
+    if (obj.status == 604) {
+        set obj.status = 403;
+        set obj.response = "SNI is required";
+        set obj.http.Content-Type = "text/plain; charset=UTF-8";
+        synthetic {"SNI is required."};
+        return (deliver);
+    }
+  }
 }
 
 sub vcl_pass {
