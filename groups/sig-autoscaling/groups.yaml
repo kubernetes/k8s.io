@@ -40,17 +40,15 @@ groups:
       ReconcileMembers: "true"
     members:
       - mwielgus@google.com
-      - lukaszos@google.com
       - bskiba@google.com
       - maciekpytel@google.com
-      - vivek.bagade92@gmail.com
-      - aleksandram@google.com
       - ksiedlecki@google.com
       - jbartosik@google.com
       - jtuznik@google.com
       - danielmk@google.com
       - guyjtempleton@googlemail.com
       - kgolab@google.com
+      - bwroblewski@google.com
 
   #
   # k8s-infra gcs write access
