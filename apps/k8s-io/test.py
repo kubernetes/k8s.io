@@ -293,7 +293,7 @@ class RedirTest(HTTPTestCase):
             # Not a valid release version (gamma)
             self.assert_temp_redirect(
                 base + '/v1.2.3-gamma.4/kubernetes.tar.gz',
-                'https://storage.googleapis.com/kubernetes-release/v1.2.3-gamma.4/kubernetes.tar.gz')
+                'https://cdn.dl.k8s.io/v1.2.3-gamma.4/kubernetes.tar.gz')
             # A few /ci/ tests
             self.assert_temp_redirect(
                 base + '/ci/v$ver/$path',
