@@ -25,10 +25,16 @@ locals {
   fastly_sa                        = "fastly-logging@datalog-bulleit-9e86.iam.gserviceaccount.com"
 }
 
-# https://docs.fastly.com/en/guides/configuring-google-iam-service-account-impersonation-for-fastly-logging
-resource "google_project_iam_member" "fastly_sa" {
+resource "google_service_account" "fastly_logging_sa" {
   project = google_project.project.project_id
-  role    = "roles/iam.serviceAccountTokenCreator"
+  account_id = "fastly-bigquery-logging-sa"
+  display_name = "Fastly BigQuery Logging SA"
+}
+
+# https://docs.fastly.com/en/guides/configuring-google-iam-servic e-account-impersonation-for-fastly-logging
+resource "google_service_account_iam_member" "cloudbuild_terraform_sa_impersonate_permissions" {
+  service_account_id = google_service_account.fastly_logging_sa.name
+  role               = "roles/iam.serviceAccountTokenCreator"
   member  = "serviceAccount:${local.fastly_sa}"
 }
 
@@ -59,7 +65,7 @@ resource "google_bigquery_dataset_iam_member" "cdn_dl_k8s_io_logging" {
   project    = google_project.project.project_id
   dataset_id = google_bigquery_dataset.fastly_cdn_dl_k8s_io_logging.dataset_id
   role       = "roles/bigquery.dataEditor"
-  member     = "serviceAccount:${local.fastly_sa}"
+  member     = "serviceAccount:${google_service_account.fastly_logging_sa.email}"
 
   depends_on = [
     google_bigquery_dataset.fastly_cdn_dl_k8s_io_logging
