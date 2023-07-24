@@ -173,6 +173,11 @@ resource "fastly_service_vcl" "files" {
     main    = true
   }
 
+  product_enablement {
+    origin_inspector = true
+    domain_inspector = true
+  }
+
   force_destroy = true
 }
 
