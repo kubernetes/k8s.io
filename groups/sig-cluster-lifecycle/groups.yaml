@@ -207,11 +207,10 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - davanum@gmail.com
-      - detiber@gmail.com
-      - goldsteina@vmware.com
-      - prignanov@vmware.com
+      - sbueringer@gmail.com
+      - christi.schlotter@gmail.com
       - jeewan@vmware.com
+      - kmuldoon@vmware.com
       - ytijani@vmware.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io
@@ -222,9 +221,12 @@ groups:
       ReconcileMembers: "true"
     members:
       - buringerst@vmware.com
-      - kmuldoon@vmware.com
       - christi.schlotter@gmail.com
       - gongz@vmware.com
+      - gsatchi@vmware.com
+      - jeewan@vmware.com
+      - kmuldoon@vmware.com
+      - muchhals@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     name: k8s-infra-staging-cluster-api
