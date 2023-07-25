@@ -24,6 +24,12 @@ Parameters:
     ConstraintDescription: ARN is required
     AllowedPattern: ".+"
     Default: "arn:aws:s3:::prod-cdn-packages-k8s-io-eu-central-1"
+  CloudFrontDistributionArn:
+    Type: String
+    Description: ARN that matches production CloudFront distribution used for serving packages
+    ConstraintDescription: ARN is required
+    AllowedPattern: ".+"
+    Default: "arn:aws:cloudfront::309501585971:distribution/E2W1P23FX44BGD"
 
 Resources:
   #########################################
@@ -258,5 +264,8 @@ Resources:
             Action: 's3:ListAllMyBuckets'
             # ListAllMyBuckets can't be scoped down to specific buckets
             Resource: '*'
+          - Effect: 'Allow'
+            Action: 'cloudfront:CreateInvalidation'
+            Resource: !Ref CloudFrontDistributionArn
       Users:
         - Ref: OBSAdminUser
