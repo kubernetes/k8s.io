@@ -157,6 +157,14 @@ Resources:
               - 's3:GetReplicationConfiguration'
               - 's3:ListBucket'
             Resource: !Ref AllPackagesBucketsArn
+          # CloudFront requires the WAF Web ACL objects to be located in
+          # the us-east-1 region. That's why we only give `wafv2:` permissions in
+          # that region.
+          - Effect: 'Allow'
+            Action:
+              - 'wafv2:GetWebACL'
+              - 'wafv2:ListTagsForResource'
+            Resource: !Sub 'arn:aws:wafv2:us-east-1:${AWS::AccountId}:global/webacl/*-PackagesCloudFrontWebACL/*'
       # Attach the policy to the Provisioner IAM role
       Roles:
         - Ref: ProvisionerRole
@@ -191,6 +199,16 @@ Resources:
               - 's3:PutBucketPolicy'
               - 's3:PutBucketTagging'
             Resource: !Ref AllPackagesBucketsArn
+          - Effect: 'Allow'
+            Action:
+              - 'wafv2:CreateWebACL'
+            Resource:
+              - !Sub 'arn:aws:wafv2:us-east-1:${AWS::AccountId}:global/managedruleset/*/*'
+              - !Sub 'arn:aws:wafv2:us-east-1:${AWS::AccountId}:global/webacl/*-PackagesCloudFrontWebACL/*'
+          - Effect: 'Allow'
+            Action:
+              - 'wafv2:TagResource'
+            Resource: !Sub 'arn:aws:wafv2:us-east-1:${AWS::AccountId}:global/webacl/*-PackagesCloudFrontWebACL/*'
       # Attach the policy to the Provisioner IAM role
       Roles:
         - Ref: ProvisionerRole
@@ -220,6 +238,10 @@ Resources:
               - 's3:DeleteBucket'
               - 's3:DeleteBucketPolicy'
             Resource: !Ref AllPackagesBucketsArn
+          - Effect: 'Allow'
+            Action:
+              - 'wafv2:DeleteWebACL'
+            Resource: !Sub 'arn:aws:wafv2:us-east-1:${AWS::AccountId}:global/webacl/*-PackagesCloudFrontWebACL/*'
       # Attach the policy to the Provisioner IAM role
       Roles:
         - Ref: ProvisionerRole

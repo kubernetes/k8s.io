@@ -52,6 +52,8 @@ resource "aws_cloudfront_distribution" "cdn_packages_k8s_io" {
 
   aliases = ["${local.prefix}cdn.packages.k8s.io"]
 
+  web_acl_id = aws_wafv2_web_acl.cdn_packages_k8s_io.arn
+
   default_cache_behavior {
     target_origin_id = local.s3_origin_id
 
@@ -81,6 +83,7 @@ resource "aws_cloudfront_distribution" "cdn_packages_k8s_io" {
   depends_on = [
     aws_acm_certificate.cdn_packages_k8s_io,
     aws_cloudfront_origin_access_control.cdn_packages_k8s_io,
+    aws_wafv2_web_acl.cdn_packages_k8s_io,
     aws_s3_bucket.cdn_packages_k8s_io,
   ]
 
