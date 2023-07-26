@@ -182,6 +182,9 @@ resource "google_container_cluster" "cluster" {
       resource_type = "memory"
       maximum       = 256
     }
+    auto_provisioning_defaults {
+      image_type = "COS_CONTAINERD"
+    }
   }
 
   // Enable VPA
