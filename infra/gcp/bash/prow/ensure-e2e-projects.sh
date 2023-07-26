@@ -63,6 +63,7 @@ function ensure_e2e_project() {
     color 6 "Ensuring only APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
     ensure_only_services "${prj}" \
         compute.googleapis.com \
+        container.googleapis.com \
         containerregistry.googleapis.com \
         logging.googleapis.com \
         monitoring.googleapis.com \
