@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-257675618203@container-engine-robot.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-257675618203@containerregistry.iam.gserviceaccount.com"
       ],
       "role": "roles/containerregistry.ServiceAgent"

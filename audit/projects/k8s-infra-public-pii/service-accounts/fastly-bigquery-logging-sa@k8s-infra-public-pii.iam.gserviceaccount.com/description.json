@@ -1,0 +1,8 @@
+{
+  "displayName": "Fastly BigQuery Logging SA",
+  "email": "fastly-bigquery-logging-sa@k8s-infra-public-pii.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-public-pii/serviceAccounts/fastly-bigquery-logging-sa@k8s-infra-public-pii.iam.gserviceaccount.com",
+  "oauth2ClientId": "113980309308443191585",
+  "projectId": "k8s-infra-public-pii",
+  "uniqueId": "113980309308443191585"
+}

@@ -21,12 +21,6 @@
     },
     {
       "members": [
-        "serviceAccount:fastly-logging@datalog-bulleit-9e86.iam.gserviceaccount.com"
-      ],
-      "role": "roles/iam.serviceAccountTokenCreator"
-    },
-    {
-      "members": [
         "user:ameukam@gmail.com"
       ],
       "role": "roles/owner"
