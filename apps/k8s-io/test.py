@@ -312,7 +312,7 @@ class RedirTest(HTTPTestCase):
             # Base case
             self.assert_temp_redirect(
                 base + '/$path',
-                'https://storage.googleapis.com/kubernetes-release/$path',
+                'https://cdn.dl.k8s.io/$path',
                 path=rand_num())
 
     def test_docs(self):
