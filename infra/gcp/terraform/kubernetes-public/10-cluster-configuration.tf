@@ -135,9 +135,12 @@ resource "google_container_cluster" "cluster" {
   // Enable GKE workloads monitoring
   monitoring_config {
     enable_components = [
-      "SYSTEM_COMPONENTS",
-      "WORKLOADS"
+      "SYSTEM_COMPONENTS"
     ]
+
+    managed_prometheus {
+      enabled = true
+    }
   }
 
   // Enable GKE Usage Metering
