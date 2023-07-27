@@ -56,6 +56,16 @@ resource "aws_wafv2_web_acl" "cdn_packages_k8s_io" {
       managed_rule_group_statement {
         name        = "AWSManagedRulesCommonRuleSet"
         vendor_name = "AWS"
+
+        // Older yum versions (e.g. 3.4.3 used on CentOS 7) are triggering
+        // this rule which makes yum fail with 403 Forbidden.
+        rule_action_override {
+          name = "UserAgent_BadBots_HEADER"
+
+          action_to_use {
+            count {}
+          }
+        }
       }
     }
 
