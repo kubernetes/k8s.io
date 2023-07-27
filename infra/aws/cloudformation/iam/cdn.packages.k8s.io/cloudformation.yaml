@@ -202,6 +202,7 @@ Resources:
           - Effect: 'Allow'
             Action:
               - 'wafv2:CreateWebACL'
+              - 'wafv2:UpdateWebACL'
             Resource:
               - !Sub 'arn:aws:wafv2:us-east-1:${AWS::AccountId}:global/managedruleset/*/*'
               - !Sub 'arn:aws:wafv2:us-east-1:${AWS::AccountId}:global/webacl/*-PackagesCloudFrontWebACL/*'
