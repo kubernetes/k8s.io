@@ -13,12 +13,17 @@
   },
   "autoscaling": {
     "autoprovisioningNodePoolDefaults": {
-      "imageType": "COS",
+      "diskSizeGb": 100,
+      "diskType": "pd-standard",
+      "imageType": "COS_CONTAINERD",
       "oauthScopes": [
         "https://www.googleapis.com/auth/logging.write",
         "https://www.googleapis.com/auth/monitoring"
       ],
-      "serviceAccount": "default"
+      "serviceAccount": "default",
+      "upgradeSettings": {
+        "strategy": "SURGE"
+      }
     },
     "autoscalingProfile": "BALANCED",
     "enableNodeAutoprovisioning": true,
@@ -37,8 +42,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.23.17-gke.6800",
-  "currentNodeVersion": "1.23.17-gke.6800",
+  "currentMasterVersion": "1.23.17-gke.7000",
+  "currentNodeVersion": "1.23.17-gke.6800 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -265,7 +270,7 @@
       "config": {
         "diskSizeGb": 100,
         "diskType": "pd-standard",
-        "imageType": "COS",
+        "imageType": "COS_CONTAINERD",
         "machineType": "e2-highmem-4",
         "metadata": {
           "disable-legacy-endpoints": "true"

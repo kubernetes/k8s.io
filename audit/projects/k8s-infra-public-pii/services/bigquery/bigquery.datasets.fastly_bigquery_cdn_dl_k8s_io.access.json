@@ -5,7 +5,7 @@
   },
   {
     "role": "WRITER",
-    "userByEmail": "fastly-logging@datalog-bulleit-9e86.iam.gserviceaccount.com"
+    "userByEmail": "fastly-bigquery-logging-sa@k8s-infra-public-pii.iam.gserviceaccount.com"
   },
   {
     "role": "OWNER",
