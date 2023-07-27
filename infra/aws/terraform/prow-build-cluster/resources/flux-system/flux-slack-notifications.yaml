@@ -22,6 +22,17 @@ spec:
   channel: alerting-cncf-prod
   secretRef:
     name: slack-url
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Provider
+metadata:
+  name: slack-k8s-infra-alerts
+  namespace: flux-system
+spec:
+  type: slack
+  channel: k8s-infra-alerts
+  secretRef:
+    name: slack-k8s-infra-alerts-token
 
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta2
@@ -33,6 +44,22 @@ spec:
   summary: "EKS Prow Build Cluster"
   providerRef:
     name: slack
+  eventSeverity: error
+  eventSources:
+    - kind: GitRepository
+      name: '*'
+    - kind: Kustomization
+      name: '*'
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta2
+kind: Alert
+metadata:
+  name: k8s-infra-alerts
+  namespace: flux-system
+spec:
+  summary: "EKS Prow Build Cluster"
+  providerRef:
+    name: slack-k8s-infra-alerts
   eventSeverity: error
   eventSources:
     - kind: GitRepository

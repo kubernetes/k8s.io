@@ -21,7 +21,7 @@ metadata:
     alertmanager: main
 spec:
   route:
-    receiver: 'kubermatic'
+    receiver: 'slack'
 
     # How long to initially wait to send a notification for a group
     # of alerts. Allows to wait for an inhibiting alert to arrive or collect
@@ -41,12 +41,19 @@ spec:
     # alerting rules.
     groupBy: ['alertname', 'node']
   receivers:
-  - name: 'kubermatic'
+  - name: 'slack'
     slackConfigs:
     - apiURL:
         name: alertmanager-k8c-slack-token
         key: url
       channel: '#alerting-cncf-prod'
+      sendResolved: true
+      title: ":warning: {{ .CommonLabels.alertname }}"
+      text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
+    - apiURL:
+        name: slack-k8s-infra-alerts-token
+        key: url
+      channel: '#k8s-infra-alerts'
       sendResolved: true
       title: ":warning: {{ .CommonLabels.alertname }}"
       text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
