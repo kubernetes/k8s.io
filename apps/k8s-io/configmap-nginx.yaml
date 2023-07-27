@@ -135,6 +135,13 @@ data:
       }
 
       server {
+        server_name packages.kubernetes.io pkgs.kubernetes.io packages.k8s.io pkgs.k8s.io;
+        listen 80;
+
+        rewrite ^/(.*)?$    https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/$1 redirect;
+      }
+
+      server {
         server_name blog.kubernetes.io blog.k8s.io;
         listen 80;
 

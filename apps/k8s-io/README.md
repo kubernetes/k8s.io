@@ -23,6 +23,7 @@ Vanity URL(s)
 | Redirections | https://go.k8s.io | https://go.kubernetes.io |
 | Issues | https://issue.k8s.io <br> https://issues.k8s.io | https://issue.kubernetes.io <br> https://issues.kubernetes.io |
 | Main site | https://k8s.io | https://kubernetes.io |
+| Packages (OpenBuildService) | https://packages.k8s.io <br> https://pkgs.k8s.io | https://packages.kubernetes.io <br> https://pkgs.kubernetes.io |
 | PR Dashboard | https://pr-test.k8s.io | https://pr-test.kubernetes.io |
 | Pull requests | https://pr.k8s.io <br> https://prs.k8s.io | https://pr.kubernetes.io <br> https://prs.kubernetes.io |
 | Downloads | https://releases.k8s.io <br> https://rel.k8s.io | https://releases.kubernetes.io <br> https://rel.kubernetes.io |

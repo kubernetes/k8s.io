@@ -42,6 +42,10 @@ spec:
   - issues.kubernetes.io
   - kep.k8s.io
   - kep.kubernetes.io
+  - packages.k8s.io
+  - packages.kubernetes.io
+  - pkgs.k8s.io
+  - pkgs.kubernetes.io
   - pr-test.k8s.io
   - pr-test.kubernetes.io
   - pr.k8s.io
