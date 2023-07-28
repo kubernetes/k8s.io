@@ -1,5 +1,8 @@
 {
   "addonsConfig": {
+    "gcePersistentDiskCsiDriverConfig": {
+      "enabled": true
+    },
     "horizontalPodAutoscaling": {},
     "httpLoadBalancing": {},
     "kubernetesDashboard": {
@@ -42,8 +45,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.23.17-gke.7000",
-  "currentNodeVersion": "1.23.17-gke.6800 *",
+  "currentMasterVersion": "1.25.10-gke.1200",
+  "currentNodeVersion": "1.25.10-gke.1200",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -110,6 +113,9 @@
       "enableComponents": [
         "SYSTEM_COMPONENTS"
       ]
+    },
+    "managedPrometheusConfig": {
+      "enabled": true
     }
   },
   "monitoringService": "monitoring.googleapis.com/kubernetes",
@@ -150,6 +156,7 @@
     {
       "autoscaling": {
         "enabled": true,
+        "locationPolicy": "BALANCED",
         "maxNodeCount": 20,
         "minNodeCount": 1
       },
@@ -202,11 +209,12 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.23.17-gke.6800"
+      "version": "1.25.10-gke.1200"
     },
     {
       "autoscaling": {
         "enabled": true,
+        "locationPolicy": "BALANCED",
         "maxNodeCount": 10,
         "minNodeCount": 1
       },
@@ -259,12 +267,13 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.23.17-gke.6800"
+      "version": "1.25.10-gke.1200"
     },
     {
       "autoscaling": {
         "autoprovisioned": true,
         "enabled": true,
+        "locationPolicy": "BALANCED",
         "maxNodeCount": 1000
       },
       "config": {
@@ -317,7 +326,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.23.17-gke.6800"
+      "version": "1.25.10-gke.1200"
     }
   ],
   "releaseChannel": {
