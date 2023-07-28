@@ -295,7 +295,7 @@ class RedirTest(HTTPTestCase):
             # Not a release version
             self.assert_temp_redirect(
                 base + '/v8/engine',
-                'https://storage.googleapis.com/kubernetes-release/v8/engine')
+                'https://cdn.dl.k8s.io/v8/engine')
             # Not a valid release version (gamma)
             self.assert_temp_redirect(
                 base + '/v1.2.3-gamma.4/kubernetes.tar.gz',
