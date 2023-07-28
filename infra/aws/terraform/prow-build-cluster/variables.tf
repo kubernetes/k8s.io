@@ -143,6 +143,36 @@ variable "node_max_unavailable_percentage" {
   description = "Maximum unavailable nodes in a node group"
 }
 
+variable "node_taints_blue" {
+  type    = list(map(string))
+  default = []
+}
+
+variable "node_taints_green" {
+  type    = list(map(string))
+  default = []
+}
+
+variable "node_labels_blue" {
+  type    = map(string)
+  default = {}
+}
+
+variable "node_labels_green" {
+  type    = map(string)
+  default = {}
+}
+
+variable "additional_node_group_tags_blue" {
+  type    = map(string)
+  default = {}
+}
+
+variable "additional_node_group_tags_green" {
+  type    = map(string)
+  default = {}
+}
+
 variable "cluster_autoscaler_version" {
   type        = string
   description = "Cluster Autoscaler version to use (must match the EKS version)"
