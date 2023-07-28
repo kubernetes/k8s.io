@@ -39,8 +39,6 @@ locals {
     "k8s.io/cluster-autoscaler/enabled"             = true
   }
 
-  node_group_tags = merge(local.tags, local.auto_scaling_tags)
-
   azs = slice(data.aws_availability_zones.available.names, 0, 3)
 
   # Allow cluster admin access to the following IAM roles:

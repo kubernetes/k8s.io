@@ -36,9 +36,26 @@ cluster_autoscaler_version = "v1.25.0"
 node_ami_blue            = "ami-07e8e7dddc8b3bad9"
 node_instance_types_blue = ["r5d.xlarge"]
 
-node_min_size_blue     = 0
+node_min_size_blue     = 1
 node_max_size_blue     = 3
-node_desired_size_blue = 0
+node_desired_size_blue = 1
+
+node_taints_blue = [
+  {
+    key    = "dedicated"
+    value  = "kind-tests"
+    effect = "NO_SCHEDULE"
+  }
+]
+
+node_labels_blue = {
+  kind-exclusive = "true"
+}
+
+additional_node_group_tags_blue = {
+  "k8s.io/cluster-autoscaler/node-template/label/kind-exclusive" = "true"
+  "k8s.io/cluster-autoscaler/node-template/taint/dedicated"      = "kind-tests:NoSchedule"
+}
 
 node_ami_green            = "ami-07e8e7dddc8b3bad9"
 node_instance_types_green = ["r5d.xlarge"]
@@ -46,6 +63,10 @@ node_instance_types_green = ["r5d.xlarge"]
 node_min_size_green     = 1
 node_max_size_green     = 3
 node_desired_size_green = 1
+
+node_taints_green = []
+
+node_labels_green = {}
 
 node_volume_size = 100
 

@@ -103,11 +103,13 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    # Build cluster node group.
     build-blue = {
       name            = "build-managed-blue"
       description     = "EKS managed node group called blue used to facilitate node rotations/rollouts"
       use_name_prefix = true
+
+      taints = var.node_taints_blue
+      labels = var.node_labels_blue
 
       subnet_ids = module.vpc.private_subnets
 
@@ -159,14 +161,19 @@ module "eks" {
         update = "180m"
       }
 
-      # Disabling autoscaling on that Node Group.
-      tags = local.tags # local.node_group_tags
+      tags = merge(
+        local.tags,
+        local.auto_scaling_tags,
+        var.additional_node_group_tags_blue
+      )
     }
-    # Build cluster node group.
     build-green = {
       name            = "build-managed-green"
       description     = "EKS managed node group called green used to facilitate node rotations/rollouts"
       use_name_prefix = true
+
+      taints = var.node_taints_green
+      labels = var.node_labels_green
 
       subnet_ids = module.vpc.private_subnets
 
@@ -218,7 +225,10 @@ module "eks" {
         update = "180m"
       }
 
-      tags = local.node_group_tags
+      tags = merge(
+        local.tags,
+        local.auto_scaling_tags,
+      )
     }
   }
 }
