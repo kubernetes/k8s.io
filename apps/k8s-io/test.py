@@ -224,11 +224,11 @@ class RedirTest(HTTPTestCase):
             self.assert_temp_redirect(base, 'https://packages.cloud.google.com/apt/')
             self.assert_temp_redirect(base + '/$id',
                 'https://packages.cloud.google.com/apt/$id', id=rand_num())
-    
+
     def test_packages(self):
         for base in ('packages.k8s.io', 'packages.kubernetes.io', 'pkgs.k8s.io', 'pkgs.kubernetes.io'):
-            self.assert_temp_redirect(base, 'https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/')
-            self.assert_temp_redirect(base + '/$id',
+            self.assert_permanent_redirect(base, 'https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/')
+            self.assert_permanent_redirect(base + '/$id',
                 'https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/$id', id=rand_num())
 
     def test_blog(self):
