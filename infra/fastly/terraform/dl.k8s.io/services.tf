@@ -71,7 +71,7 @@ resource "fastly_service_vcl" "files" {
 
   snippet {
     content  = <<-EOT
-      if (req.url.path ~ "^/release/") {
+      if (req.url.path ~ "^/release/" || req.url.path ~ "(tar|tgz|tar\.gz|zip)$") {
         set req.enable_segmented_caching = true;
       }
     EOT
