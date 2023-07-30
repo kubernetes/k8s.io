@@ -1,5 +1,6 @@
 - name: git-sync
   dmap:
+    "sha256:53a9e50b2acca026b3ef993bd189577c5bb25e3e73566ff66794ce3e57c87c0e": ["v4.0.0-rc4"]
     "sha256:8eeeff98f3ddfa919e0ca42086fbd57b80a1e6de3ac1d09ed720c7108eb1835a": ["v4.0.0-rc3"]
     "sha256:3192cd507d2c626bb3b574ecac8e7c955043cf00c856e064dbac48dd4f0d9d90": ["v4.0.0-rc2"]
     "sha256:7403b7e796f36d75aeb7754eedb1a68863d35aa6a6bde2b8ac2d805111d1c715": ["v4.0.0-rc1"]
