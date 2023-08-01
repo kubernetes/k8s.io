@@ -1,5 +1,4 @@
 [
-  "projects/k8s-infra-porche-sandbox/logs/cloudaudit.googleapis.com%2Fsystem_event",
   "projects/k8s-infra-porche-sandbox/logs/requests",
   "projects/k8s-infra-porche-sandbox/logs/run.googleapis.com%2Frequests",
   "projects/k8s-infra-porche-sandbox/logs/run.googleapis.com%2Fstderr",
