@@ -19,6 +19,10 @@ groups:
       https://git.k8s.io/committee-security-response/private-distributors-list.md
     settings:
       ReconcileMembers: "true"
+      AllowWebPosting: "true"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      WhoCanViewGroup: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
     owners:
       - cjcullen@google.com
       - cjingram@google.com
