@@ -63,7 +63,7 @@ To help with identifying problems and monitor the status of syncronisation one c
 
 ## Known Issues
 
-Flux Helm Releases can ocassionally fail with `upgrade retries exhausted` error (so far it happend once in the span of two months). It's a [know issue]([upgrade retries exhausted](https://github.com/fluxcd/helm-controller/issues/454)https://github.com/fluxcd/helm-controller/issues/454) and workaround for now is following:
+Flux Helm Releases can ocassionally fail with `upgrade retries exhausted` error (so far it happend once in the span of two months). It's a [know issue](https://github.com/fluxcd/helm-controller/issues/454) and the workaround for now is following:
 ```bash
 flux suspend hr <release_name>
 flux resume hr <release_name>
