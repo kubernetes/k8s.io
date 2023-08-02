@@ -60,3 +60,12 @@ To access FluxCD, you need a kubeconfig file with broad cluster permissions and 
 To help with identifying problems and monitor the status of syncronisation one can use two public Grafana Dashboards:
 * [Flux Cluster Stats](https://monitoring-eks.prow.k8s.io/d/flux-cluster/flux-cluster-stats) - contains information about reconciliation status of deployed Flux resources.
 * [Flux Control Plane](https://monitoring-eks.prow.k8s.io/d/flux-control-plane/flux-control-plane) - Offers various charts, including resource utilization of Flux controllers.
+
+## Known Issues
+
+Flux Helm Releases can ocassionally fail with `upgrade retries exhausted` error (so far it happend once in the span of two months). It's a [know issue]([upgrade retries exhausted](https://github.com/fluxcd/helm-controller/issues/454)https://github.com/fluxcd/helm-controller/issues/454) and workaround for now is following:
+```bash
+flux suspend hr <release_name>
+flux resume hr <release_name>
+```
+**NOTE**: This workaround requires kubeconfig of affected cluster and fluxcli binary installed on a local filesystem.
