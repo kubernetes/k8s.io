@@ -1,0 +1,3 @@
+- name: cluster-api-vsphere-controller
+  dmap:
+    "sha256:5b4f679a2cc1320c347ab99d96c3acb16f594b83703e336795be56e1ef5f13f3": ["v1.8.0-beta.1"]
