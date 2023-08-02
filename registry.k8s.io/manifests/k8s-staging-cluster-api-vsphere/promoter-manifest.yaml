@@ -1,6 +1,6 @@
 # google group for gcr.io/k8s-staging-cluster-api-vsphere is k8s-infra-staging-cluster-api-vsphere@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-cluster-api-vsphere
+- name: gcr.io/k8s-staging-capi-vsphere
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/cluster-api-vsphere
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
