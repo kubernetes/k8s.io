@@ -19,6 +19,6 @@ region = "us-east-2"
 eks_infra_admins = [
   "pprzekwa",
   "wozniakjan",
-  "xmudrii"
+  "xmudrii",
+  "bentheelder"
 ]
-
