@@ -21,4 +21,3 @@ eks_infra_admins = [
   "wozniakjan",
   "xmudrii"
 ]
-
