@@ -18,7 +18,7 @@ terraform {
   required_version = "~> 1.5.0"
 
   backend "s3" {
-    bucket = "<NEW_BUCKET_NAME>"
+    bucket = "k8s-infra-tf-shared-services"
     key    = "infrastructure-services/terraform.tfstate"
     region = "us-east-2"
   }
@@ -35,7 +35,7 @@ locals {
   name = "external-dependency-health-checks"
   external_dependency_health_checks_targets = {
     google_cloud_pkgs_apt_gpg = {
-      name = "google-cloud-pkgs-apt-gpg"
+      name = "google-cloud-pkgs"
       fqdn = "packages.cloud.google.com"
       resource_path = "/apt/doc/apt-key.gpg"
     }
@@ -82,5 +82,4 @@ module "external_dependency_health_checks" {
   fqdn   = each.value["fqdn"]
   resource_path   = each.value["resource_path"]
   sns_arn = module.external_dependency_sns_topic.sns_topic_arn
-  disabled = each.value["disabled"]
 }

@@ -15,7 +15,6 @@ limitations under the License.
 */
 
 resource "aws_sns_topic_subscription" "this" {
-  name = "${var.name}-email-${var.emails[count.index]}"
   count     = length(var.emails)
   endpoint = var.emails[count.index]
   protocol = "email"
