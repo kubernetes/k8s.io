@@ -159,6 +159,9 @@ resource "google_container_cluster" "cluster" {
 
   // Configure cluster addons
   addons_config {
+    gce_persistent_disk_csi_driver_config {
+      enabled = true
+    }
     horizontal_pod_autoscaling {
       disabled = false
     }
