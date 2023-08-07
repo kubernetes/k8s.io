@@ -3,7 +3,6 @@ artifactregistry.googleapis.com      Artifact Registry API
 bigquery.googleapis.com              BigQuery API
 bigquerystorage.googleapis.com       BigQuery Storage API
 cloudapis.googleapis.com             Google Cloud APIs
-clouddebugger.googleapis.com         Cloud Debugger API (Deprecated)
 clouderrorreporting.googleapis.com   Error Reporting API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
 cloudtrace.googleapis.com            Cloud Trace API
