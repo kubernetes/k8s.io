@@ -34,6 +34,7 @@ readonly images=(
     iscsiplugin
     livenessprobe
     local-volume-provisioner
+    local-volume-node-cleanup
     mock-driver
     nfs-provisioner
     nfs-subdir-external-provisioner
