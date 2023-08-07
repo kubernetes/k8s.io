@@ -219,6 +219,7 @@ groups:
       List for test alerts for the Cluster API vSphere infrastructure provider.
     settings:
       ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
     members:
       - buringerst@vmware.com
       - christi.schlotter@gmail.com
