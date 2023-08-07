@@ -165,6 +165,10 @@
   dmap:
     "sha256:63859b69f9dfc0858e5d8746218e435c36e205c041fb6d8baf71ad132e24737f": [ "v2.4.0" ]
     "sha256:a112f1625aad84e4f425141199ab6ddbb49432c66e05dbbaab033d0ab2e8dfaf": [ "v2.5.0" ]
+    "sha256:4833c13769fcfd1c41903bb51b6c43e71ffbe0c81b33ad5e1fbaa84d5e26dad0": [ "v2.6.0" ]
+- name: local-volume-node-cleanup
+  dmap:
+    "sha256:f31b2d8f498f9b06d565cbef32cede8a92a98de366b83b711a7478e16b7d1a81": [ "v2.6.0" ]
 - name: mock-driver
   dmap:
     "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]
@@ -193,8 +197,8 @@
     "sha256:971cb526bc0108cca7d8efda32102629cb362f99bbd4879fd381bea1b2014ab4": [ "v4.4.0" ]
 - name: smbplugin
   dmap:
-    "sha256:65f664c6e9cce565805b13fb82b40018d56e39f41616134f572c52f3964c6ee4": [ "v1.11.0" ]
     "sha256:e7d37907128b9eadf5208e63ea926dd230ef1ebbdf0de2b6d9b7cd6fbe1ef053": [ "v1.10.0" ]
+    "sha256:65f664c6e9cce565805b13fb82b40018d56e39f41616134f572c52f3964c6ee4": [ "v1.11.0" ]
     "sha256:5bfa32e3f648c1fd0ded0c3866619e7e47678bceeae8233c28deeded81b5d175": [ "v1.7.0" ]
     "sha256:7eec32f7cb79193c71206827617832247d422e07dcd6efc09eaf718aa6a5edae": [ "v1.8.0" ]
     "sha256:cd17882742532add8cfad9230fffa5ea15beae918c0132165c7070247e4a2bd6": [ "v1.9.0" ]
