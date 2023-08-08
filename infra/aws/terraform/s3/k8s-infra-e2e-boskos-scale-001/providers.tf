@@ -15,6 +15,11 @@ limitations under the License.
 */
 
 terraform {
+  backend "s3" {
+    bucket = "k8s-infra-kops-scale-tests-tf-state"
+    region = "us-east-2"
+    key    = "s3/k8s-infra-kops-scale-tests/terraform.tfstate"
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
