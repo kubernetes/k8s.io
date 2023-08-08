@@ -14,11 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+variable "tags" {
+  type = map(string)
+  default = {
+    "managed-by"    = "Terraform",
+    "group" = "sig-cluster-lifecycle",
+    "subproject" = "kops"
+  }
+}
 
-locals {
-  kops-infra-ci-name       = "kops-infra-ci"
-  kops-infra-ci-index      = index(data.aws_organizations_organization.current.accounts.*.name, local.kops-infra-ci-name)
-  kops-infra-ci-account-id = data.aws_organizations_organization.current.accounts[local.kops-infra-ci-index].id
-
-  prefix = "k8s-infra-kops"
+variable "region" {
+  type = string
+  default = "us-east-2"
 }
