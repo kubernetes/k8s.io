@@ -14,17 +14,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+variable "eks_version" {
+  type = string
+  default = "1.26"
+}
+
 variable "tags" {
   type = map(string)
   default = {
-    "managed-by"    = "Terraform",
-    "group" = "sig-cluster-lifecycle",
+    "managed-by" = "Terraform",
+    "group"      = "sig-cluster-lifecycle",
     "subproject" = "kops"
+    "githubRepo" = "git.k8s.io/k8s.io"
   }
 }
 
 variable "region" {
-  type = string
+  type    = string
   default = "us-east-2"
 }
 

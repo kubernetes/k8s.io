@@ -48,14 +48,14 @@ resource "aws_vpc_ipam_pool" "main" {
 
 
 resource "aws_vpc_ipam_pool_cidr" "main" {
-  provider       = aws.kops-infra-ci
+  provider     = aws.kops-infra-ci
   ipam_pool_id = aws_vpc_ipam_pool.main.id
   cidr         = var.vpc_cidr
 }
 
 resource "aws_vpc_ipam_preview_next_cidr" "main" {
-  provider       = aws.kops-infra-ci
-  ipam_pool_id   = aws_vpc_ipam_pool.main.id
+  provider     = aws.kops-infra-ci
+  ipam_pool_id = aws_vpc_ipam_pool.main.id
 
   netmask_length = 20 // a 18 netmask length is considered as too big for the CIDR pool
 }
