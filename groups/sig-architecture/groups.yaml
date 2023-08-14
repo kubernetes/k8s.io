@@ -176,9 +176,10 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - anusha.iiitm@gmail.com
-      - anlin.kong@gmail.com
-      - glaubich@gmail.com
+      - haka.jesse@gmail.com
+      - jichenjc@cn.ibm.com
+      - kaydiam+k8s@gmail.com
+      - mdulko@redhat.com
 
   - email-id: k8s-infra-conform-s390x-k8s@kubernetes.io
     name: k8s-infra-conform-s390x-k8s
