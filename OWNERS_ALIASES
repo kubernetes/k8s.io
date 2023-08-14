@@ -223,18 +223,15 @@ aliases:
     - spzala
   # From https://github.com/kubernetes/cloud-provider-openstack/blob/master/OWNERS
   provider-openstack-approvers:
-    - chrigl
+    - dulek
     - jichenjc
-    - ramineni
+    - kayrus
     - zetaab
   provider-openstack-reviewers:
-    - chrigl
     - dulek
-    - Fedosin
     - jichenjc
     - kayrus
     - mdbooth
-    - ramineni
     - zetaab
   provider-vmware:
     - cantbewong
