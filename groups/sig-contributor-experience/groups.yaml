@@ -179,18 +179,19 @@ groups:
     owners:
       - killen.bob@gmail.com
     managers:
-      - noah.r.abrahams@gmail.com
-      - puja@giantswarm.io
       - pnigelbrown@gmail.com
+      - jberkus@redhat.com
+      - noah.r.abrahams@gmail.com
     members:
       - balves@linuxfoundation.org
-      - chris@chrisshort.net
-      - detiber@gmail.com
-      - jdetiber@cisco.com
-      - fsmunoz@gmail.com
-      - xandergrzyw@gmail.com
       - mars.toktonaliev@gmail.com
-      - kmcmahonco@gmail.com
+      - joseph.r.sandoval@gmail.com
+      - cailyn.s.e@protonmail.com
+      - avineshtripathi1@gmail.com
+      - justnitish06@gmail.com
+      - chenchen.hcc@gmail.com
+      - natalivlatko@gmail.com
+      - laura@nimbinatus.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
