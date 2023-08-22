@@ -183,7 +183,7 @@ class RedirTest(HTTPTestCase):
                 base + 'oncall',
                 'https://storage.googleapis.com/test-infra-oncall/oncall.html')
             self.assert_temp_redirect(base + 'owners',
-                'https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md')
+                'https://www.kubernetes.dev/docs/guide/owners/')
             self.assert_temp_redirect(base + 'owners/$ghuser',
                 'https://cs.k8s.io/?q=$ghuser&i=fosho&files=OWNERS&excludeFiles=vendor%2F&repos=',
                  ghuser=rand_num())
