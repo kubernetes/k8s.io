@@ -11,7 +11,7 @@ groups:
       - jeremy.r.rickard@gmail.com
       - lancashiredanielle@gmail.com
       - xandergrzyw@gmail.com
-      - detiber@gmail.com
+      - AnaMMedina21@gmail.com
   - email-id: conduct-emeritus@kubernetes.io
     name: conduct-emeritus
     description: |-
@@ -23,6 +23,7 @@ groups:
       - jeremy.r.rickard@gmail.com
       - lancashiredanielle@gmail.com
       - xandergrzyw@gmail.com
-      - detiber@gmail.com
+      - AnaMMedina21@gmail.com
     members:
       - tpepper@vmware.com
+      - detiber@gmail.com
