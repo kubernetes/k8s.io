@@ -401,32 +401,12 @@ cluster-api-openstack.sigs:
   value: kubernetes-sigs-cluster-api-openstack.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @gyliu513)
 cluster-api-ibmcloud.sigs:
-  - type: CNAME
-    value: release-0-5--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
-release-0-1.cluster-api-ibmcloud.sigs:
-  type: CNAME
-  value: release-0-1--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
-release-0-2.cluster-api-ibmcloud.sigs:
-  type: CNAME
-  value: release-0-2--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
-release-0-3.cluster-api-ibmcloud.sigs:
-  type: CNAME
-  value: release-0-3--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
-release-0-4.cluster-api-ibmcloud.sigs:
-  type: CNAME
-  value: release-0-4--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
-release-0-5.cluster-api-ibmcloud.sigs:
-  type: CNAME
-  value: release-0-5--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @Prajyot-Parab)
-main.cluster-api-ibmcloud.sigs:
-  type: CNAME
-  value: main--kubernetes-sigs-cluster-api-ibmcloud.netlify.app.
+  type: NS
+  values:
+  - dns4.p07.nsone.net.
+  - dns3.p07.nsone.net.
+  - dns1.p07.nsone.net.
+  - dns2.p07.nsone.net.
 # https://github.com/kubernetes-sigs/cluster-api release-0.1 docs (@CecileRobertMichon, @vincepri)
 release-0-1.cluster-api.sigs:
   type: CNAME
