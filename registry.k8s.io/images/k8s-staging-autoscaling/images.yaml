@@ -47,6 +47,7 @@
     "sha256:0d93e3601aee4bd9e8b5e06c4bb3668c59a7d3b41b64e74982996dbacf0965a3": ["v1.27.0", "v1.27.1"]
     "sha256:dfbb63a82d437253febc68540ced60ed796494edf242d1d2cb5b9665570e99c0": ["v1.27.2"]
     "sha256:0e1ab1bfeb1beaa82f59356ef36364503df22aeb8f8d0d7383bac449b4e808fb": ["v1.27.3"]
+    "sha256:165cf9c4f96a42bdc13e609609ab21af9785b9af6035fbbad97b6c04ffa485e9": ["v1.28.0"]
 - name: cluster-autoscaler-amd64
   dmap:
     "sha256:28c7fb82de56c0de0c6eb67d87e259f35cb1db72e0a28f0fd4e069417a421773": ["v1.19.2"]
@@ -81,6 +82,7 @@
     "sha256:840fe8d7edb560b6de1bece5d9f9e0d9228a4f233b9b08b786535820fac8a7b7": ["v1.27.0", "v1.27.1"]
     "sha256:a0042ecd7c53780ce11326c5270400896b19946fb8583ae25368f96b7b94ac13": ["v1.27.2"]
     "sha256:b6c0082aa22079fe3ee5c98a872aafe3f60f130f1c640b4f4fed9b02617fc6b1": ["v1.27.3"]
+    "sha256:14a089fe5c56ac9946c0b63ef85a255417e0f799ec76841ddbef5112373e7ca2": ["v1.28.0"]
 - name: cluster-autoscaler-arm64
   dmap:
     "sha256:8e2510f68344ffd033b208839f4fdc32c1a186bd1d5bb2da8eba6bba1eb7551e": ["v1.19.2"]
@@ -115,6 +117,10 @@
     "sha256:40789aa01b917005f4ea1dafc75d3be9c969ab4f9588fefcfdc4b995122f888e": ["v1.27.0", "v1.27.1"]
     "sha256:7711cb1db2609dfcc40c493c5bb2f3d0e8f98f62289975792dbe876b59b8a587": ["v1.27.2"]
     "sha256:1513e38bd6d9e2fa2cd67e37889ea4689b8a49214ee63bb54768a6f086b21c09": ["v1.27.3"]
+    "sha256:1c0b2296462e3eb78db8f34ee58314ad5d0dc15e93d3b46a6a15551a484a28c8": ["v1.28.0"]
+- name: cluster-autoscaler-s390x
+  dmap:
+    "sha256:79943a398ca9f5b9f09998f7689281b35cea24502ec40dddbf479954ea73cee0": ["v1.28.0"]
 
 - name: vpa-admission-controller
   dmap:
