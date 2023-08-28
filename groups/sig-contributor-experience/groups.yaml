@@ -192,6 +192,9 @@ groups:
       - chenchen.hcc@gmail.com
       - natalivlatko@gmail.com
       - laura@nimbinatus.com
+      - wangzefeng@huawei.com
+      - paco.xu@daocloud.io
+      - mengjiao.liu@daocloud.io
 
   #
   # k8s-staging write access for SIG-owned subprojects
