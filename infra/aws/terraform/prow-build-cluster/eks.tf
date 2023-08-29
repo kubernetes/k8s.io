@@ -111,7 +111,7 @@ module "eks" {
       taints = var.node_taints_blue
       labels = var.node_labels_blue
 
-      subnet_ids = module.vpc.private_subnets
+      subnet_ids = module.vpc.public_subnets
 
       min_size     = var.node_min_size_blue
       max_size     = var.node_max_size_blue
