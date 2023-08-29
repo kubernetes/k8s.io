@@ -35,7 +35,7 @@ cluster_version            = "1.25"
 cluster_autoscaler_version = "v1.25.0"
 
 # Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
-node_ami_blue            = "ami-07e8e7dddc8b3bad9"
+node_ami_blue            = "ami-05da66fc7a4319aa8"
 node_instance_types_blue = ["r5ad.4xlarge"]
 
 node_min_size_blue     = 0
