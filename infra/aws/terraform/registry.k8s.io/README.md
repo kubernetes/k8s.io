@@ -1,6 +1,7 @@
 # infra/aws/terraform/registry.k8s.io
 
-Terraform to provision AWS infra for supporting registry.k8s.io
+Legacy Terraform to provision AWS infra for supporting registry.k8s.io
+This has been replaced by https://github.com/kubernetes/k8s.io/tree/main/infra/gcp/terraform/k8s-infra-oci-proxy-prod
 
 ## Goals
 
@@ -26,15 +27,11 @@ terraform apply -var prefix=test-
 
 ## State management
 
-The state of the Terraform is currently stored in a private bucket in the CNCF account
-
-```bash
-aws s3 mb s3://registry-k8s-io-tfstate --region us-east-2
-```
+The state of the Terraform was currently stored in a private bucket in the CNCF account
 
 ## Notes
 
-- currently all provider blocks will assume the role of registry.k8s.io_s3admin inside of the registry.k8s.io account (513428760722)
+- All provider blocks assumed the role of registry.k8s.io_s3admin inside of the registry.k8s.io account (513428760722)
 
 ## Extending regions
 
