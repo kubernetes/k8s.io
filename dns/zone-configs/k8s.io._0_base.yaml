@@ -363,6 +363,10 @@ testgrid-data:
 7ujw4gp3z2cq.testgrid:
   type: CNAME
   value: gv-t2drtmd73nsutd.dv.googlehosted.com.
+# https://github.com/kubernetes-sigs/scheduler-plugins docs (@zwpaper, @ffromani, @Huang-Wei)
+scheduler-plugins.sigs:
+  type: CNAME
+  value: kubernetes-sigs-scheduler-plugins.netlify.app.
 # https://github.com/kubernetes-sigs/kind docs (@bentheelder, @munnerz)
 kind.sigs:
   type: CNAME
