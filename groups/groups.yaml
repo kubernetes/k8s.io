@@ -48,10 +48,8 @@ groups:
       - community@kubernetes.io
       - ctadeu@gmail.com # SIG Release
       - davanum@gmail.com
-      - davidopp@google.com
       - dawnchen@google.com
       - dbosanac@redhat.com
-      - dbsmith@google.com
       - dcbw@redhat.com
       - ddebroy@gmail.com
       - deads@redhat.com
@@ -135,7 +133,6 @@ groups:
       - tpepper@vmware.com
       - vincepri@vmware.com
       - vince@vincepri.com
-      - vllry@zeitgeistlabs.io
       - wfender@google.com
       - wojtekt@google.com
       - xingyang105@gmail.com
