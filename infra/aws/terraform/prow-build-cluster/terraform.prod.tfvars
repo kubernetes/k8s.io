@@ -34,8 +34,10 @@ cluster_name               = "prow-build-cluster"
 cluster_version            = "1.25"
 cluster_autoscaler_version = "v1.25.0"
 
-# Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
-node_ami_blue            = "ami-07e8e7dddc8b3bad9"
+# Switching to AL2 EKS Optimized AMI for temporary testing
+# aws ssm get-parameter --region us-east-2 --name /aws/service/eks/optimized-ami/1.25/amazon-linux-2/recommended/image_id --query "Parameter.Value" --output text
+node_ami_blue = "ami-0acfc285a2102233e"
+
 node_instance_types_blue = ["r5ad.4xlarge"]
 
 node_min_size_blue     = 0
