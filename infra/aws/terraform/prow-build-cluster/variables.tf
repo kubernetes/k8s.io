@@ -163,18 +163,6 @@ variable "node_labels_green" {
   default = {}
 }
 
-variable "enable_autoscaling_blue" {
-  type        = bool
-  description = "If true, adds tags for cluster autoscaler discovery to node group."
-  default     = true
-}
-
-variable "enable_autoscaling_green" {
-  type        = bool
-  description = "If true, adds tags for cluster autoscaler discovery to node group."
-  default     = true
-}
-
 variable "additional_node_group_tags_blue" {
   type    = map(string)
   default = {}

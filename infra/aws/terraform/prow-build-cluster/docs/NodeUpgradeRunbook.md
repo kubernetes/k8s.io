@@ -19,17 +19,18 @@ By adopting this solution, we can avoid potential disruptions caused by forcing 
     - Set `node_desired_size_green` to the current number of nodes in the cluster.
     - Set `node_min_size_green` to 1.
     - Set `node_min_size_blue` to 0.
- 2. Open the `eks.tf` file and find the code block defining the `build-green` node group.
-    - Merge `local.auto_scaling_tags` with the node group tags to ensure proper AWS tag decoration for cluster-autoscaler discovery.
- 3. Introduce intended change to node group, e.g. AMI update.
- 4. Apply the changes to the cluster and wait for the new nodes to become available.
- 5. Open AWS console, find AutoscalingGroup created by `build-blue` node group and remove following tags:
+2. Open the `node_group_green.tf` file and find `tags` block.
+    - Extend merge function with `local.auto_scaling_tags` to add cluster-autoscaler discovery tags if missing.
+3. Introduce intended change to node group, e.g. AMI update.
+4. Apply the changes to the cluster and wait for new nodes to become available.
+5. Open AWS console\*, find AutoscalingGroup created by `build-blue` node group, and remove following tags in order to disable autoscaling:
     - "k8s.io/cluster-autoscaler/${CLUSTER_NAME}" = "owned"
     - "k8s.io/cluster-autoscaler/enabled" = true
- 5. Once all the nodes in the `green` node group are up and running, cordon the nodes of the `blue` node group to prevent workload scheduling on those nodes.
- 6. Evict all nodes of the `blue` node group. Please note that this step may take some time due to the PodDisruptionBudget.
- 7. The cluster-autoscaler should automatically clean up the evicted nodes.
- 8. Open the `terraform.<env>.tfvars` file again and set `node_desired_size_blue` to 0.
- 9. Locate the code block defining the `build-blue` node group in `eks.tf`.
- 9. Remove `local.auto_scaling_tags` from `build-blue` node group tag list to hide resources from cluster-autoscaler.
- 10. Apply the changes. The `green` node group is now your active node group.
+6. Once all the nodes in the `green` node group are up and running, cordon the nodes of the `blue` node group to prevent workload scheduling on those nodes.
+7. Evict all nodes of the `blue` node group. Please note that this step may take some time due to the PodDisruptionBudget.
+8. Detach evicted nodes from their AutoscalingGroup and terminate orphaned instances.
+9. Open the `terraform.<env>.tfvars` file again and set `node_desired_size_blue` to 0.
+10. Open `node_group_blue.tf` and remove `local.auto_scaling_tags` from tag list to compensate for manual change in step number 5.
+11. Apply the changes. The `green` node group is now your active node group.
+
+\* Unfotunately, removing autoscaling tags in terraform script triggers node recreation.
