@@ -40,25 +40,6 @@ node_min_size_blue     = 1
 node_max_size_blue     = 3
 node_desired_size_blue = 1
 
-# TODO(pkprzekwas): uncomment after migration to public subnet
-
-# node_taints_blue = [
-#   {
-#     key    = "dedicated"
-#     value  = "kind-tests"
-#     effect = "NO_SCHEDULE"
-#   }
-# ]
-
-# node_labels_blue = {
-#   kind-exclusive = "true"
-# }
-
-# additional_node_group_tags_blue = {
-#   "k8s.io/cluster-autoscaler/node-template/label/kind-exclusive" = "true"
-#   "k8s.io/cluster-autoscaler/node-template/taint/dedicated"      = "kind-tests:NoSchedule"
-# }
-
 node_ami_green            = "ami-07e8e7dddc8b3bad9"
 node_instance_types_green = ["r5d.xlarge"]
 
