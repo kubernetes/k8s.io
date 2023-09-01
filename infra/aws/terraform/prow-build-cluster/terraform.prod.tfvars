@@ -39,7 +39,7 @@ node_ami_blue            = "ami-05da66fc7a4319aa8"
 node_instance_types_blue = ["r5ad.4xlarge"]
 
 node_min_size_blue     = 0
-node_max_size_blue     = 20
+node_max_size_blue     = 40
 node_desired_size_blue = 0
 
 # TODO(pkprzekwas): uncomment after migration to public subnet
@@ -61,12 +61,12 @@ node_desired_size_blue = 0
 #   "k8s.io/cluster-autoscaler/node-template/taint/dedicated"      = "kind-tests:NoSchedule"
 # }
 
-node_ami_green            = "ami-07e8e7dddc8b3bad9"
+node_ami_green            = "ami-05da66fc7a4319aa8"
 node_instance_types_green = ["r5d.4xlarge"]
 
-node_min_size_green     = 20
-node_max_size_green     = 40
-node_desired_size_green = 20
+node_min_size_green     = 0
+node_max_size_green     = 1
+node_desired_size_green = 0
 
 node_volume_size = 100
 
