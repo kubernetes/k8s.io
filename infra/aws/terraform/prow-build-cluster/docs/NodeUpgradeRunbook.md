@@ -15,7 +15,7 @@ By adopting this solution, we can avoid potential disruptions caused by forcing 
 
 **Note: This procedure assumes that we start with the `blue` node group as the active group.**
 
-1. Locate the `terraform.<env>.tfvars` file and make the following changes:
+1. Locate the `terraform.<env>.tfvars` file and introduce following changes:
     - Set `node_desired_size_green` to the current number of nodes in the cluster.
     - Set `node_min_size_green` to 1.
     - Set `node_min_size_blue` to 0.
