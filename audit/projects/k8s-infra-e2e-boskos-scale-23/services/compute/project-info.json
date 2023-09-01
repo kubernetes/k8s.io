@@ -181,6 +181,10 @@
     },
     {
       "limit": 150,
+      "metric": "GLOBAL_INTERNAL_MANAGED_BACKEND_SERVICES"
+    },
+    {
+      "limit": 150,
       "metric": "GLOBAL_EXTERNAL_MANAGED_BACKEND_SERVICES"
     },
     {
