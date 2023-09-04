@@ -38,7 +38,7 @@ cluster_autoscaler_version = "v1.25.0"
 node_ami_blue            = "ami-05da66fc7a4319aa8"
 node_instance_types_blue = ["r5ad.4xlarge"]
 
-node_min_size_blue     = 0
+node_min_size_blue     = 20
 node_max_size_blue     = 40
 node_desired_size_blue = 0
 
