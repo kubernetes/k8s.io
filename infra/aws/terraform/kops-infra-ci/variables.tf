@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 variable "eks_version" {
-  type = string
+  type    = string
   default = "1.26"
 }
 
