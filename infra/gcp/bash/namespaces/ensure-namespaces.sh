@@ -153,7 +153,6 @@ ALL_APPS=(
     perfdash
     prow
     publishing-bot
-    sippy
     slack-infra
     triageparty-cli
     triageparty-release
