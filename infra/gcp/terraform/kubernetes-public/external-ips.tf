@@ -55,10 +55,6 @@ locals {
     perf-dash = {
       name = "perf-dash-k8s-io-ingress-prod",
     },
-    sippy = {
-      name        = "sippy-ingress-prod",
-      description = "IP for aaa cluster Ingress"
-    },
     slack = {
       name = "slack-infra-ingress-prod",
     },

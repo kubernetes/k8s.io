@@ -118,7 +118,6 @@ groups:
       - k8s-infra-rbac-triageparty-cli@kubernetes.io
       - k8s-infra-rbac-triageparty-release@kubernetes.io
       - k8s-infra-rbac-triageparty-scalability@kubernetes.io
-      - k8s-infra-rbac-sippy@kubernetes.io
       - k8s-infra-rbac-slack-infra@kubernetes.io
 
   # owners of the k8s-infra-ii-sandbox project, working on billing analysis

@@ -11,7 +11,6 @@ Kubernetes project infrastructure, managed by the kubernetes community via [sig-
     - `perfdash`: instance of [perfdash] - owned by [sig-scalability]
     - `prow`: work-in-progress instance of [prow] - owned by [sig-testing]
     - `publishing-bot`: instance of [publishing-bot] - owned by [sig-release]
-    - `sippy`: instance of [sippy] at https://sippy.k8s.io - owned by [sig-architecture] (on behalf of [wg-reliability])
     - `slack-infra`: instance of [slack-infra] including https://slack.k8s.io - owned by [sig-contributor-experience]
     - `triageparty-cli`: instance of [triage-party] - owned by [sig-cli]
     - `triageparty-release`: instance of [triage-party] - owned by [sig-release]
@@ -44,7 +43,6 @@ Please see https://git.k8s.io/community/sig-k8s-infra for more information
 [perfdash]: https://git.k8s.io/perf-tests/perfdash
 [prow]: https://git.k8s.io/test-infra/prow
 [publishing-bot]: https://git.k8s.io/publishing-bot
-[sippy]: https://github.com/openshift/sippy
 [slack-infra]: https://sigs.k8s.io/slack-infra
 [triage-party]: https://github.com/google/triage-party
 
