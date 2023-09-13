@@ -39,6 +39,8 @@ readonly images=(
     nfs-provisioner
     nfs-subdir-external-provisioner
     nfsplugin
+    objectstorage-controller
+    objectstorage-sidecar
     smbplugin
     snapshot-controller
     snapshot-validation-webhook
