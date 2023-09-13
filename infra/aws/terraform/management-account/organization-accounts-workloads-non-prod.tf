@@ -43,3 +43,18 @@ module "prow_canary" {
     "service"     = "eks"
   }
 }
+
+# Account used as replacement for AWS account 607362164682
+# See https://github.com/kubernetes/k8s.io/issues/5194
+module "k8s_infra_eks_e2e_shared_001" {
+  source = "../modules/org-account"
+
+  account_name = "k8s_infra_eks_e2e_shared_001"
+  email        = "k8s-infra-aws-admins+eks_e2e_shared_001@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.non_production.id
+  tags = {
+    "production" = "false",
+    "owners"     = "dims",
+    "group"      = "sig-k8s-infra"
+  }
+}
