@@ -27,6 +27,10 @@ set -o pipefail
 sysctl -w fs.inotify.max_user_watches=1048576
 sysctl -w fs.inotify.max_user_instances=8192
 
+## Increase vm.min_free_kbytes from 67584 to 135168 as a potential mitigation for
+## https://github.com/kubernetes/k8s.io/issues/5473
+echo 135168 > /proc/sys/vm/min_free_kbytes
+
 ## Set up ephemeral disks (SSDs) to be used by containerd and kubelet
 
 MNT_DIR="/mnt/k8s-disks"
