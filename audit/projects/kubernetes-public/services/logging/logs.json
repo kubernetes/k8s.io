@@ -6,7 +6,6 @@
   "projects/kubernetes-public/logs/cloudaudit.googleapis.com%2Fsystem_event",
   "projects/kubernetes-public/logs/clouderrorreporting.googleapis.com%2Finsights",
   "projects/kubernetes-public/logs/cloudsql.googleapis.com%2Fpostgres.log",
-  "projects/kubernetes-public/logs/compute.googleapis.com%2Fshielded_vm_integrity",
   "projects/kubernetes-public/logs/container-runtime",
   "projects/kubernetes-public/logs/container.googleapis.com%2Fcluster-autoscaler-visibility",
   "projects/kubernetes-public/logs/docker",
@@ -21,7 +20,6 @@
   "projects/kubernetes-public/logs/requests",
   "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_1_output",
   "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_3_output",
-  "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_debug_output",
   "projects/kubernetes-public/logs/stderr",
   "projects/kubernetes-public/logs/stdout"
 ]
