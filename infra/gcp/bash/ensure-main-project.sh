@@ -73,6 +73,7 @@ readonly DNS_GROUP="k8s-infra-dns-admins@kubernetes.io"
 # - entry syntax is "bucket_name:owners_group" (: is invalid bucket name char)
 readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
     "${LEGACY_CLUSTER_TERRAFORM_BUCKET}:${CLUSTER_ADMINS_GROUP}"
+    k8s-staging-authenticated-test-tf:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-aws:k8s-infra-aws-admins@kubernetes.io
     k8s-infra-tf-fastly:k8s-infra-fastly-admins@kubernetes.io
     k8s-infra-tf-gcp:k8s-infra-gcp-org-admins@kubernetes.io

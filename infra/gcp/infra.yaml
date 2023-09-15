@@ -345,3 +345,5 @@ infra:
       k8s-staging-win-op-rdnss:
       k8s-staging-gcb-untrusted:
         managed_by: infra/gcp/bash/ensure-staging-gcb-untrusted.sh
+      k8s-staging-authenticated-test:
+        managed_by: infra/gcp/terraform/k8s-staging-authenticated-test/main.tf
