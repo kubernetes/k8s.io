@@ -204,6 +204,10 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
+      - abigailkmccarthy@gmail.com # 1.29 Comms Shadow
+      - hkamel.msft@gmail.com # 1.29 Comms Shadow
+      - james@quigley.us # 1.29 Comms Shadow
+      - kcmartin2@mac.com # 1.29 Comms Shadow
       - mehabhalodiya@gmail.com # 1.29 Lead Shadow
       - m.r.boxell@gmail.com # 1.29 Lead Shadow
       - neoaggelos@gmail.com # 1.29 Lead Shadow
@@ -211,10 +215,6 @@ groups:
       - ramses.green.2@gmail.com # 1.29 Lead Shadow
       - xandergrzyw@gmail.com # 1.29 Emeritus Advisor
       - valencia0.carol@gmail.com # 1.29 Comms Lead
-      #- X # 1.29 Comms Shadow
-      #- X # 1.29 Comms Shadow
-      #- X # 1.29 Comms Shadow
-      #- X # 1.29 Comms Shadow
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -323,38 +323,40 @@ groups:
       - ramses.green.2@gmail.com # 1.29 Lead Shadow
       - xandergrzyw@gmail.com # 1.29 Emeritus Advisor
     members:
+      - abigailkmccarthy@gmail.com # 1.29 Communications Shadow
+      - AnaMMedina21@gmail.com # 1.29 Enhancements Shadow
+      - bradmccoydev@gmail.com # 1.29 Bug Triage Shadow
+      - drewhagendev@gmail.com # 1.29 Docs Shadow
+      - egbunaoluebube@gmail.com # 1.29 Docs Shadow
+      - faeka6@gmail.com # 1.29 Release Notes Shadow
       - fsmunoz@gmail.com # 1.29 Release Notes Lead
-      #- X # 1.29 Release Notes Shadow
-      #- X # 1.29 Release Notes Shadow
-      #- X # 1.29 Release Notes Shadow
-      #- X # 1.29 Release Notes Shadow
+      - harshitasao@gmail.com # 1.29 Docs Shadow
+      - hkamel.msft@gmail.com # 1.29 Communications Shadow
       - jackhammervyom@gmail.com # 1.29 CI Signal Lead
-      #- X # 1.29 CI Signal Lead Shadow
-      #- X # 1.29 CI Signal Lead Shadow
-      #- X # 1.29 CI Signal Lead Shadow
-      #- X # 1.29 CI Signal Lead Shadow
+      - james@quigley.us # 1.29 Communications Shadow
       - kat.cosgrove@gmail.com # 1.29 Docs Lead
-      #- X # 1.29 Docs Shadow
-      #- X # 1.29 Docs Shadow
-      #- X # 1.29 Docs Shadow
-      #- X # 1.29 Docs Shadow
+      - kcmartin2@mac.com # 1.29 Communications Shadow
+      - mankulka@redhat.com # 1.29 CI Signal Shadow
       - markrossetti@gmail.com # 1.29 Release Manager associate
       - marosset@microsoft.com # 1.29 Release Manager associate
+      - maryam_tavakkoli@hotmail.com # 1.29 Bug Triage Shadow
+      - mengjiao.liu@daocloud.io # 1.29 Release Notes Shadow
+      - mofi@google.com # 1.29 Bug Triage Shadow
+      - mr.salehsedghpour@yahoo.com # 1.29 Enhancements Shadow
+      - msha.harshadithya@gmail.com # 1.29 Release Notes Shadow
       - ninapolshakova@gmail.com # 1.29 Enhancements Lead
-      #- X # 1.29 Enhancements Shadow
-      #- X # 1.29 Enhancements Shadow
-      #- X # 1.29 Enhancements Shadow
-      #- X # 1.29 Enhancements Shadow
+      - paco.xu@daocloud.io # 1.29 CI Signal Shadow
+      - rayandas91@gmail.com # 1.29 Enhancements Shadow
+      - richard.j.sadowski@gmail.com # 1.29 CI Signal Shadow
+      - sanchita.mishra1718@gmail.com # 1.29 Enhancements Shadow
+      - singh.reeta66@gmail.com # 1.29 CI Signal Shadow
+      - smith.rashan@gmail.com # 1.29 Release Notes Shadow
+      - sontek@gmail.com # 1.29 CI Signal Shadow
+      - sreeram.venkitesh@bigbinary.com # 1.29 Enhancements Shadow
+      - taniaduggal60@gmail.com # 1.29 Docs Shadow
       - valencia0.carol@gmail.com # 1.29 Comms Lead
-      #- X # 1.29 Communications Shadow
-      #- X # 1.29 Communications Shadow
-      #- X # 1.29 Communications Shadow
-      #- X # 1.29 Communications Shadow
       - yigit.demirbas@gmail.com # 1.29 Bug Triage Lead
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
+      - zelikangelina@gmail.com # 1.29 Bug Triage Shadow
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
     description: |-
@@ -374,35 +376,38 @@ groups:
       - priyankasaggu11929@gmail.com # 1.29 Lead
       - xandergrzyw@gmail.com # 1.29 Emeritus Advisor
     members:
-      - mehabhalodiya@gmail.com # 1.29 Lead Shadow
+      - abigailkmccarthy@gmail.com # 1.29 Communications Shadow
+      - AnaMMedina21@gmail.com # 1.29 Enhancements Shadow
+      - bradmccoydev@gmail.com # 1.29 Bug Triage Shadow
+      - drewhagendev@gmail.com # 1.29 Docs Shadow
+      - egbunaoluebube@gmail.com # 1.29 Docs Shadow
+      - faeka6@gmail.com # 1.29 Release Notes Shadow
+      - harshitasao@gmail.com # 1.29 Docs Shadow
+      - hkamel.msft@gmail.com # 1.29 Communications Shadow
+      - james@quigley.us # 1.29 Communications Shadow
+      - kcmartin2@mac.com # 1.29 Communications Shadow
       - m.r.boxell@gmail.com # 1.29 Lead Shadow
+      - mankulka@redhat.com # 1.29 CI Signal Shadow
+      - markrossetti@gmail.com # 1.29 Release Manager associate
+      - marosset@microsoft.com # 1.29 Release Manager associate
+      - maryam_tavakkoli@hotmail.com # 1.29 Bug Triage Shadow
+      - mehabhalodiya@gmail.com # 1.29 Lead Shadow
+      - mengjiao.liu@daocloud.io # 1.29 Release Notes Shadow
+      - mofi@google.com # 1.29 Bug Triage Shadow
+      - mr.salehsedghpour@yahoo.com # 1.29 Enhancements Shadow
+      - msha.harshadithya@gmail.com # 1.29 Release Notes Shadow
       - neoaggelos@gmail.com # 1.29 Lead Shadow
+      - paco.xu@daocloud.io # 1.29 CI Signal Shadow
       - ramses.green.2@gmail.com # 1.29 Lead Shadow
-      #- X # 1.29 Enhancements Shadow
-      #- X # 1.29 Enhancements Shadow
-      #- X # 1.29 Enhancements Shadow
-      #- X # 1.29 Enhancements Shadow
-      #- X # 1.29 CI Signal Lead Shadow
-      #- X # 1.29 CI Signal Lead Shadow
-      #- X # 1.29 CI Signal Lead Shadow
-      #- X # 1.29 CI Signal Lead Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Docs Shadow
-      #- X # 1.29 Docs Shadow
-      #- X # 1.29 Docs Shadow
-      #- X # 1.29 Docs Shadow
-      #- X # 1.29 Release Notes Shadow
-      #- X # 1.29 Release Notes Shadow
-      #- X # 1.29 Release Notes Shadow
-      #- X # 1.29 Release Notes Shadow
-      #- X # 1.29 Communications Shadow
-      #- X # 1.29 Communications Shadow
-      #- X # 1.29 Communications Shadow
-      #- X # 1.29 Communications Shadow
+      - rayandas91@gmail.com # 1.29 Enhancements Shadow
+      - richard.j.sadowski@gmail.com # 1.29 CI Signal Shadow
+      - sanchita.mishra1718@gmail.com # 1.29 Enhancements Shadow
+      - singh.reeta66@gmail.com # 1.29 CI Signal Shadow
+      - smith.rashan@gmail.com # 1.29 Release Notes Shadow
+      - sontek@gmail.com # 1.29 CI Signal Shadow
+      - sreeram.venkitesh@bigbinary.com # 1.29 Enhancements Shadow
+      - taniaduggal60@gmail.com # 1.29 Docs Shadow
+      - zelikangelina@gmail.com # 1.29 Bug Triage Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
@@ -434,13 +439,13 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
-      - k8s-infra-release-viewers@kubernetes.io
       - bartek@smykla.com
+      - bradmccoydev@gmail.com # 1.29 Bug Triage Shadow
+      - k8s-infra-release-viewers@kubernetes.io
+      - maryam_tavakkoli@hotmail.com # 1.29 Bug Triage Shadow
+      - mofi@google.com # 1.29 Bug Triage Shadow
       - yigit.demirbas@gmail.com # 1.29 Bug Triage Lead
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
-      #- X # 1.29 Bug Triage Shadow
+      - zelikangelina@gmail.com # 1.29 Bug Triage Shadow
 
   - email-id: k8s-infra-staging-bom@kubernetes.io
     name: k8s-infra-staging-bom
@@ -461,13 +466,13 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
+      - jackhammervyom@gmail.com # 1.29 CI Signal Lead
       - k8s-infra-release-viewers@kubernetes.io
-      - lauralorenz@google.com # 1.27 CI Signal Lead
-      - jackhammervyom@gmail.com # 1.27 CI Signal Shadow
-      - hehim@drewhagen.dev # 1.27 CI Signal Shadow
-      - mehabhalodiya@gmail.com # 1.27 CI Signal Shadow
-      - nng.grace@gmail.com # 1.27 CI Signal Shadow
-
+      - mankulka@redhat.com # 1.29 CI Signal Shadow
+      - paco.xu@daocloud.io # 1.29 CI Signal Shadow
+      - richard.j.sadowski@gmail.com # 1.29 CI Signal Shadow
+      - singh.reeta66@gmail.com # 1.29 CI Signal Shadow
+      - sontek@gmail.com # 1.29 CI Signal Shadow
 
   - email-id: release-team-enhancements@kubernetes.io
     name: release-team-enhancements
@@ -485,16 +490,16 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - kat.cosgrove@gmail.com # 1.27 Release Lead Shadow
-      - priyankasaggu11929@gmail.com # 1.27 Release Lead Shadow
-      - hebaelayoty@gmail.com # 1.27 Release Lead Shadow
-      - xandergrzyw@gmail.com # 1.27 Release Lead
-      - salahi.hossein@gmail.com # 1.27 Release Lead Shadow
-      - marosset@microsoft.com # 1.27 Enhancements Lead
-      - baesangwoo99@googlemail.com # 1.27 Enhancements Shadow
-      - ninapolshakova@gmail.com # 1.27 Enhancements Shadow
-      - fsmunoz@gmail.com # 1.27 Enhancements Shadow
-      - atharvashinde179@gmail.com # 1.27 Enhancements Shadow
+      - m.r.boxell@gmail.com # 1.29 Lead Shadow
+      - mehabhalodiya@gmail.com # 1.29 Lead Shadow
+      - mr.salehsedghpour@yahoo.com # 1.29 Enhancements Shadow
+      - neoaggelos@gmail.com # 1.29 Lead Shadow
+      - ninapolshakova@gmail.com # 1.29 Enhancements Lead
+      - priyankasaggu11929@gmail.com # 1.29 Release Lead
+      - ramses.green.2@gmail.com # 1.29 Lead Shadow
+      - rayandas91@gmail.com # 1.29 Enhancements Shadow
+      - sanchita.mishra1718@gmail.com # 1.29 Enhancements Shadow
+      - sreeram.venkitesh@bigbinary.com # 1.29 Enhancements Shadow
 
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
     name: k8s-infra-staging-zeitgeist

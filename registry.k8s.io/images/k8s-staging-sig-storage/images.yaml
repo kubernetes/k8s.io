@@ -128,6 +128,7 @@
     "sha256:0d8d81948af4897bd07b86046424f022f79634ee0315e9f1d4cdb5c1c8d51c90": [ "v6.2.0" ]
     "sha256:714aa06ccdd3781f1a76487e2dc7592ece9a12ae9e0b726e4f93d1639129b771": [ "v6.2.1" ]
     "sha256:becc53e25b96573f61f7469923a92fb3e9d3a3781732159954ce0d9da07233a2": [ "v6.2.2" ]
+    "sha256:93fbf54dd67f586428ea339743160e1a5110c058afde3c2e824f11fbc6efae53": [ "v6.3.0" ]
 - name: hello-populator
   dmap:
     "sha256:99e9f2ac87a85ab9fa283da62464edb643c970a06da7e70c6c5bb6adc001738f": [ "v0.1.0" ]
@@ -158,6 +159,7 @@
     "sha256:f8cec70adc74897ddde5da4f1da0209a497370eaf657566e2b36bc5f0f3ccbd7": [ "v1.1.0" ]
     "sha256:b0a9eb3e489150d79bff1c97681f34c579e6fcb1a4ed0289c19180eb83ebc83d": [ "v2.1.0" ]
     "sha256:4dc0b87ccd69f9865b89234d8555d3a614ab0a16ed94a3016ffd27f8106132ce": [ "v2.10.0" ]
+    "sha256:82adbebdf5d5a1f40f246aef8ddbee7f89dea190652aefe83336008e69f9a89f": [ "v2.11.0" ]
     "sha256:48da0e4ed7238ad461ea05f68c25921783c37b315f21a5c5a2780157a6460994": [ "v2.2.0" ]
     "sha256:1b7c978a792a8fa4e96244e8059bd71bb49b07e2e5a897fb0c867bdc6db20d5d": [ "v2.3.0" ]
     "sha256:529be2c9770add0cdd0c989115222ea9fc1be430c11095eb9f6dafcf98a36e2b": [ "v2.4.0" ]
@@ -200,6 +202,10 @@
     "sha256:1d9f524c0fd5d714cf274a0ddf5dceebeb1848349de5687e530c33dd2675e4ba": [ "v4.2.0" ]
     "sha256:2103ed076e38b87b877a3a58377fe546b5b6a9b83aff75bc9d79aa7a8f0569f2": [ "v4.3.0" ]
     "sha256:971cb526bc0108cca7d8efda32102629cb362f99bbd4879fd381bea1b2014ab4": [ "v4.4.0" ]
+- name: objectstorage-controller
+  dmap:
+- name: objectstorage-sidecar
+  dmap:
 - name: smbplugin
   dmap:
     "sha256:e7d37907128b9eadf5208e63ea926dd230ef1ebbdf0de2b6d9b7cd6fbe1ef053": [ "v1.10.0" ]
@@ -233,6 +239,7 @@
     "sha256:2fdd2e646bdda56c9e728d4758c037088f69275815ee10d0b45ae3f4e3cac314": [ "v6.2.0" ]
     "sha256:98bab4eaf23c5bf75ada9deb7f8c55bd5fc13a48fbb3e658079fc37693375957": [ "v6.2.1" ]
     "sha256:fb95b65bb88f319f0f7d5397c401a654164f11a191f466b4026fa36085c7141b": [ "v6.2.2" ]
+    "sha256:0576eac2184b2bca88f30ada56dfec1e98fa8045e27ecb6aedff23c48534a3ca": [ "v6.3.0" ]
 - name: snapshot-validation-webhook
   dmap:
     "sha256:8bfd19dc57bb86ca4438b9592578a1a9afaf559f22e63a9b308b8b2be8d789ad": [ "v3.0.0" ]
@@ -251,6 +258,7 @@
     "sha256:09e2515cf3ab7efa8a046592f8ed8c49c316a519a9fa61c5c6efcdbe111e8afd": [ "v6.1.0" ]
     "sha256:615938f2eaf52336c2ecb3028e5ecfedaa539307e14499da5a4b8c5cbd432750": [ "v6.2.1" ]
     "sha256:b5be1e04b7c43352f83e135bd772de05437f8f3a20cb9437875d1a0d4f127440": [ "v6.2.2" ]
+    "sha256:cf0987b30811d7140846ea2c7793b8311bfbda6b77a34720fd0839f6013c356a": [ "v6.3.0" ]
 - name: volume-data-source-validator
   dmap:
     "sha256:a4482344a693258e2cb31b32fa35d1f3cc414b546c2ebf7154fb87f15322f5db": [ "v0.1.0" ]
