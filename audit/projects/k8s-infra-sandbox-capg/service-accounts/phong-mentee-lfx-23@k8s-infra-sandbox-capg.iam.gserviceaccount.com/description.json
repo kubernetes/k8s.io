@@ -1,9 +1,0 @@
-{
-  "description": "Credential for Phong - Mentee of LFX Spring 2023",
-  "displayName": "phong-mentee-lfx-23",
-  "email": "phong-mentee-lfx-23@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
-  "name": "projects/k8s-infra-sandbox-capg/serviceAccounts/phong-mentee-lfx-23@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
-  "oauth2ClientId": "110508277855036122356",
-  "projectId": "k8s-infra-sandbox-capg",
-  "uniqueId": "110508277855036122356"
-}
