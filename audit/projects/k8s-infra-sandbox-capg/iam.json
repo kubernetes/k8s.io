@@ -28,7 +28,7 @@
       "members": [
         "serviceAccount:591994748249-compute@developer.gserviceaccount.com",
         "serviceAccount:591994748249@cloudservices.gserviceaccount.com",
-        "serviceAccount:phong-mentee-lfx-23@k8s-infra-sandbox-capg.iam.gserviceaccount.com",
+        "deleted:serviceAccount:phong-mentee-lfx-23@k8s-infra-sandbox-capg.iam.gserviceaccount.com?uid=110508277855036122356",
         "serviceAccount:richard@k8s-infra-sandbox-capg.iam.gserviceaccount.com"
       ],
       "role": "roles/editor"
