@@ -236,6 +236,10 @@ infra:
       kubernetes-public:
         managed_by: infra/gcp/bash/ensure-main-project.sh
 
+  purgatory:
+    projects:
+      k8s-infra-purgatory: infra/gcp/bash/ensure-purgatory.sh
+
   release:
     managed_by: infra/gcp/bash/ensure-release-projects.sh
     projects:
