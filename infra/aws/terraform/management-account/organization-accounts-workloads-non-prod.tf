@@ -44,8 +44,7 @@ module "prow_canary" {
   }
 }
 
-# Account used as replacement for AWS account 607362164682
-# See https://github.com/kubernetes/k8s.io/issues/5194
+# Shared AWS account used for kops/eks related repositories
 module "k8s_infra_eks_e2e_shared_001" {
   source = "../modules/org-account"
 
