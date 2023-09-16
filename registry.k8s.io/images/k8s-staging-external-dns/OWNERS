@@ -1,6 +1,20 @@
-# See the OWNERS docs at https://go.k8s.io/owners
+# See the OWNERS file documentation:
+#  https://github.com/kubernetes/community/blob/HEAD/contributors/guide/owners.md
+# Synced to the root OWNERS file in sigs.k8s.io/external-dns as of 09/16/23
 
 approvers:
+  - johngmyers
   - raffo
-  - linki
   - njuettner
+  - szuecs
+
+reviewers:
+  - johngmyers
+  - njuettner
+  - raffo
+  - szuecs
+
+emeritus_approvers:
+  - hjacobs
+  - linki
+  - seanmalloy
