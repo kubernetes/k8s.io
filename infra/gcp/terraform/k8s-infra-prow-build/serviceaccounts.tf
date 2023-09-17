@@ -18,6 +18,9 @@ locals {
   workload_identity_service_accounts = {
     prow-build = {
       description = "default service account for pods in ${local.cluster_name}"
+      additional_workload_identity_principals = [
+        "serviceAccount:${module.project.project_id}.svc.id.goog[test-pods/k8s-kops-test]"
+      ]
     }
     boskos-janitor = {
       description = "used by boskos-janitor in ${local.cluster_name}"
