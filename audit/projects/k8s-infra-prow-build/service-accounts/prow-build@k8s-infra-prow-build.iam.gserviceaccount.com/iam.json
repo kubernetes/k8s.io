@@ -2,6 +2,7 @@
   "bindings": [
     {
       "members": [
+        "serviceAccount:k8s-infra-prow-build.svc.id.goog[test-pods/k8s-kops-test]",
         "serviceAccount:k8s-infra-prow-build.svc.id.goog[test-pods/prow-build]"
       ],
       "role": "roles/iam.workloadIdentityUser"
