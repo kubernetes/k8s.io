@@ -2,6 +2,7 @@ NAME                                TITLE
 autoscaling.googleapis.com          Cloud Autoscaling API
 bigquery.googleapis.com             BigQuery API
 bigquerystorage.googleapis.com      BigQuery Storage API
+cloudkms.googleapis.com             Cloud Key Management Service (KMS) API
 compute.googleapis.com              Compute Engine API
 container.googleapis.com            Kubernetes Engine API
 containerregistry.googleapis.com    Container Registry API
