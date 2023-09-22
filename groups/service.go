@@ -52,6 +52,7 @@ type AdminService interface {
 	// ListMembers here is a proxy to the ListMembers method of the underlying
 	// AdminServiceClient being used.
 	ListMembers(groupKey string) ([]*admin.Member, error)
+	MigrateMailingListMembers(sourceGroup, destinationGroup GoogleGroup) error
 }
 
 // GroupService provides functionality to perform high level
@@ -505,6 +506,46 @@ func (gs *groupService) UpdateGroupSettings(group GoogleGroup) error {
 	}
 
 	return nil
+}
+
+// MigrateMailingListMembers copies members from one Google Group (sourceGroup) to another (destinationGroup)
+// while preserving their existing roles.
+func (as *adminService) MigrateMailingListMembers(sourceGroup, destinationGroup GoogleGroup) error {
+	if *verbose {
+		log.Printf("Copying members from %s to %s", sourceGroup.EmailId, destinationGroup.EmailId)
+	}
+
+	// check if the source group exists
+	sourceGroupMembers, err := as.client.ListMembers(sourceGroup.EmailId)
+	if err != nil {
+		if as.checkForAPIErr404(err) {
+			log.Printf("Source group %q does not exist or has no members\n", sourceGroup.EmailId)
+			return nil
+		}
+		return fmt.Errorf("unable to retrieve members from source group %q: %w", sourceGroup.EmailId, err)
+	}
+
+	// just a hacky way to check if the destination group exists, not using the destination members list
+	_, err = as.client.ListMembers(destinationGroup.EmailId)
+	if err != nil && !as.checkForAPIErr404(err) {
+		return fmt.Errorf("unable to retrieve members from destination group %q: %w", destinationGroup.EmailId, err)
+	}
+
+	// aggregate the errors that occurred and return them together in the end
+	var errs []error
+
+	// iterate through source group members and add/update them in the destination group
+	for _, sourceMember := range sourceGroupMembers {
+		err := as.AddOrUpdateGroupMembers(destinationGroup, sourceMember.Role, []string{sourceMember.Email})
+		if err != nil {
+			logErr := fmt.Errorf("unable to add/update %s to %q as %s: %w", sourceMember.Email, destinationGroup.EmailId, sourceMember.Role, err)
+			log.Printf("%s\n", logErr)
+			errs = append(errs, logErr)
+			continue
+		}
+	}
+
+	return utilerrors.NewAggregate(errs)
 }
 
 // Get retrieves the group settings of a group with groupUniqueID.
