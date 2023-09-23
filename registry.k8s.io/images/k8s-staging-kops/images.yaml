@@ -1256,3 +1256,18 @@
   dmap:
     "sha256:fec6e47ab5692b459879a74a1dc5526993e2924932012725e26357876aa430c6": ["1.26.6"]
 
+
+# 1.28.0
+- name: dns-controller
+  dmap:
+    "sha256:a2633a751985906ece0447780934bfa354e159883d4d005448c1a2fd0acb2a12": ["1.28.0"]
+- name: kops-controller
+  dmap:
+    "sha256:6bc33cbfcac5830ae573faddf65a26137d598401a544d50a14410e9d77919ff1": ["1.28.0"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:4240906a6c38bc52faabebf28a9756c85ad313f92c469a67cd462c1a72915f8b": ["1.28.0"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:1d7275ebe033f07d36ad47cb386ee628c8014581df72c64a12ea21900d2c6b91": ["1.28.0"]
+
