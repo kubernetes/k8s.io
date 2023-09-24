@@ -97,13 +97,14 @@ sub vcl_hit {
 sub vcl_deliver {
   unset resp.http.Server;
   #Unset Google headers
-  unset resp.http x-goog-generation;
-  unset resp.http x-goog-hash;
-  unset resp.http x-goog-meta-goog-reserved-file-mtime;
-  unset resp.http x-goog-metageneration;
-  unset resp.http x-goog-storage-class;
-  unset resp.http x-goog-stored-content-encoding;
-  unset resp.http x-goog-stored-content-length;
+  unset resp.http.x-goog-generation;
+  unset resp.http.x-goog-hash;
+  unset resp.http.x-goog-meta-goog-reserved-file-mtime;
+  unset resp.http.x-goog-metageneration;
+  unset resp.http.x-goog-storage-class;
+  unset resp.http.x-goog-stored-content-encoding;
+  unset resp.http.x-goog-stored-content-length;
+  unset resp.http.x-guploader-uploadid;
 
 #FASTLY deliver
   return(deliver);
