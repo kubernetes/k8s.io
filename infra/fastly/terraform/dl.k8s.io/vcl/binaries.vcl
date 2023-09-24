@@ -44,6 +44,15 @@ sub vcl_fetch {
     set beresp.stale_while_revalidate = 60s; // 1 minute
   }
 
+  # TODO: Drop this when the origin(GCS bucket) is owned by the community
+  # See: https://github.com/kubernetes/k8s.io/issues/2396
+  if (req.url.path ~ "^/release/") {
+    set beresp.http.Cache-Control = "private, no-store"; # Don't cache in the browser
+    set beresp.ttl = 30d;
+    set beresp.ttl -= std.atoi(beresp.http.Age);
+    return (deliver);
+  }
+
 #FASTLY fetch
   if ((beresp.status == 500 || beresp.status == 503) && req.restarts < 1 && (req.method == "GET" || req.method == "HEAD")) {
     restart;
@@ -58,7 +67,7 @@ sub vcl_fetch {
     return(pass);
   }
 
-if (beresp.http.Cache-Control ~ "private") {
+  if (beresp.http.Cache-Control ~ "private") {
     set req.http.Fastly-Cachetype = "PRIVATE";
     return(pass);
   }
@@ -86,6 +95,15 @@ sub vcl_hit {
 }
 
 sub vcl_deliver {
+  unset resp.http.Server;
+  #Unset Google headers
+  unset resp.http x-goog-generation;
+  unset resp.http x-goog-hash;
+  unset resp.http x-goog-meta-goog-reserved-file-mtime;
+  unset resp.http x-goog-metageneration;
+  unset resp.http x-goog-storage-class;
+  unset resp.http x-goog-stored-content-encoding;
+  unset resp.http x-goog-stored-content-length;
 
 #FASTLY deliver
   return(deliver);
