@@ -1,0 +1,11 @@
+{
+  "createTime": "2023-09-22T21:27:45.529Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-infra-purgatory",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-infra-purgatory",
+  "projectNumber": "998606761026"
+}
