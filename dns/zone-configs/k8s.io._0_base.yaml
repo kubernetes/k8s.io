@@ -259,10 +259,6 @@ pr:
 pr-test:
   type: CNAME
   value: redirect.k8s.io.
-# sig-release
-release.triage:
-  type: A
-  value: 35.186.239.70
 # sig-cli
 cli.triage:
   type: A
