@@ -33,14 +33,14 @@ cluster_version            = "1.25"
 cluster_autoscaler_version = "v1.25.0"
 
 # Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
-node_ami_blue            = "ami-07e8e7dddc8b3bad9"
+node_ami_blue            = "ami-05da66fc7a4319aa8"
 node_instance_types_blue = ["r5d.xlarge"]
 
 node_min_size_blue     = 3
 node_max_size_blue     = 3
 node_desired_size_blue = 3
 
-node_ami_green            = "ami-07e8e7dddc8b3bad9"
+node_ami_green            = "ami-05da66fc7a4319aa8"
 node_instance_types_green = ["r5d.xlarge"]
 
 node_min_size_green     = 0
@@ -55,4 +55,4 @@ node_volume_size = 100
 
 node_max_unavailable_percentage = 100 # To ease testing
 
-public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDTy+Rad9AtfTxTfmeNN6yvWSOwg3ytaJCWLwdOG/XAADJx5pRVIJ/OrYy/nO0sCMrjXf+Pv+JlERJA9pZIKahkiUNMG537Ubw9OjVhgtlhfO/PQNWa3aESpRPHYp/QOCHqj5ni75f/TpxVVO70tys4h75Et++tGdjEXfoTf03Sjk10ShYRzxf6LyZ8RkG2yJqN4hETe+YXP3ohBsv0dgt7bybSgRgLEpz9TLIpBjM5ZUdb2QQ4Grs/l+wne/tH6lu4p4ltEGSCByqzIw3XR1OWU+NrHFY2elsef1CQAvtIXv8QfFOUAur4VyXop/NC69+qG0uJcFQtrqPH3mma/NtJ7vnxZw1oJy2B5U1QdLuxpXu2VVLz3y0dPQ1PDKJWY4RxfyzY835Rv73XzwugvgZVehrgJ6gHeBBiwTDalz+DJuwlkUpHhfSjkk0xDxJyJdg4uncZld6NiJaOU/Fv901VyLuXQ/gQGIWRSm7ynTZda4uAfhhPbXab46+1yN6KERzo0sTQDnI2+dG/zZqIi9rwKsBG1mPvg8T1I78aN1w3ooPluYhFhMMfdUMHHzoItaXh+87Y1yPy0nrQZMk4oOK7g4+VXaN7PyqTLExecgTAHufnX9iEjsmBr2LT8nXMUvHjvrWeMJV0bgnTNc4qo3pOf+eatZVun+vSmDmFp4fYgw== kubernetes-sig-k8s-infra"
+public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFJvXxqAJV+C84330Qp1Zx0Uq3TWbalOKlStfii2vnU9STalSOZ2oa4y2nG5Pu4Ah2G7ZSCVuaReagt2ESUNGdttT06llK8JjFce3n6nc7N6imPwR/e+csf0TV4ckLVugIJpHPgLBujpvml7c1SdlZZXKul6ZX0R6Z96JFpSrYOPyrTVl2yCqKqMEVEwOvvOxlO3vMTTyK/Z1d5jOyHFQ/88DdxWWeyugps4+++WtgcRvHe7vwcsOZYJWGL639jOcNpuXjyLXLL9CAGuDwFzDxomzSBcTaPmYtS3kJQPQOdmt2S0FoO/vHBEnvbGrEjlyzWluBLNPvn1rclCJghiv+ndF4AYSe/7FlWCEiZaDNJghF6PMyAPxIar9sAurFia9FMur4zy93ZA8iJeUKlzhImv/u1f2XjPef/Iu8Ni+eIVDYGVXZzWM7Qrw30mhLZhfrob8ZQ6MPQjMdQ+LZ3TAxZwk2QWG8qAMmUXvbbtS7aPGZL2R6+ZZ/Z3WA3T+pGUde9SRvhGlN1/Up85NGOGDAJICXKICTFJNEfp6yK65wAVC5URuoLw3Zacji+uodefWQovF3ke8rHLghqTR1l3jkWDddyejvt5Rf1mdV7xL0stRcoiXfM4MTSuQ3qbpBIsgCGzjjrseq5z3e85DgcXzdfuerDk0y0peH0pXAQCp8oQ=="
