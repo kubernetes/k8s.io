@@ -27,9 +27,13 @@ set -o pipefail
 sysctl -w fs.inotify.max_user_watches=1048576
 sysctl -w fs.inotify.max_user_instances=8192
 
-## Increase vm.min_free_kbytes from 67584 to 135168 as a potential mitigation for
-## https://github.com/kubernetes/k8s.io/issues/5473
-echo 135168 > /proc/sys/vm/min_free_kbytes
+## Increase vm.min_free_kbytes from 67584 to 540672 as recommend by the AWS support
+## to try to mitigate https://github.com/kubernetes/k8s.io/issues/5473
+## The general guidance for the vm.min_free_kbytes parameter is to not have it exceed 5%
+## of the total system memory which in the case of an r5d.4xlarge would be about 6400MB.
+## For the sake of testing, let's increase this value from 67584 to 540672 (a 8x increase)
+## to bring this up to about 540MB.
+echo 540672 > /proc/sys/vm/min_free_kbytes
 
 ## Set up ephemeral disks (SSDs) to be used by containerd and kubelet
 
