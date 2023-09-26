@@ -143,7 +143,6 @@ restrictions:
   - path: "sig-release/groups.yaml"
     allowedGroups:
       - "^k8s-infra-rbac-publishing-bot@kubernetes.io$"
-      - "^k8s-infra-rbac-triageparty-release@kubernetes.io$"
       - "^k8s-infra-google-build-admins@kubernetes.io$"
       - "^k8s-infra-release-admins@kubernetes.io$"
       - "^k8s-infra-release-editors@kubernetes.io$"

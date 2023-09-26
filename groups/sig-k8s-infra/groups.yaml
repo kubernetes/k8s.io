@@ -116,7 +116,6 @@ groups:
       - k8s-infra-rbac-prow@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io
       - k8s-infra-rbac-triageparty-cli@kubernetes.io
-      - k8s-infra-rbac-triageparty-release@kubernetes.io
       - k8s-infra-rbac-triageparty-scalability@kubernetes.io
       - k8s-infra-rbac-slack-infra@kubernetes.io
 

@@ -60,12 +60,6 @@ locals {
         "slackin-token",
       ]
     },
-    triageparty-release = {
-      group = "sig-release"
-      secrets = [
-        "triage-party-github-token",
-      ]
-    },
   }
   // Even though we could just use the list, we're going to keep parity with
   // the map structure used in k8s-infra-prow-build, so resource definitions
