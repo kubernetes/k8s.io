@@ -155,7 +155,6 @@ ALL_APPS=(
     publishing-bot
     slack-infra
     triageparty-cli
-    triageparty-release
     triageparty-scalability
 )
 

@@ -13,7 +13,6 @@ Kubernetes project infrastructure, managed by the kubernetes community via [sig-
     - `publishing-bot`: instance of [publishing-bot] - owned by [sig-release]
     - `slack-infra`: instance of [slack-infra] including https://slack.k8s.io - owned by [sig-contributor-experience]
     - `triageparty-cli`: instance of [triage-party] - owned by [sig-cli]
-    - `triageparty-release`: instance of [triage-party] - owned by [sig-release]
 - `artifacts`: non-image artifacts published to `artifacts.k8s.io`
 - `audit`: scripts to export all relevant gcp resources, and the most recently-reviewed export
 - `dns`: DNS for kubernetes.io and k8s.io
