@@ -14,14 +14,15 @@
 
 TF ?= terraform
 TF_ARGS ?=
+TF_LOCK_TIMEOUT ?= 30s
+
+# Valid values are: canary, prod
+PROW_ENV ?= canary
 
 KUBECTL ?= kubectl
 
 # TODO: figure out a workaround for: https://github.com/hashicorp/terraform-provider-kubernetes-alpha/issues/199#issuecomment-832614387
 DEPLOY_K8S_RESOURCES ?= true
-
-# Valid values are: canary, prod
-PROW_ENV ?= canary
 
 ##@ Helpers:
 
@@ -49,9 +50,21 @@ init: ## Initialize Terraform's state and download necessary providers.
 	$(TF) $@ \
 		-backend-config=./tfbackends/$(PROW_ENV).tfbackend
 
+.PHONY: platforms-lock
+platforms-lock:
+	$(TF) \
+		providers lock \
+		-platform=linux_arm64 \
+		-platform=linux_amd64 \
+		-platform=darwin_amd64 \
+		-platform=windows_amd64 \
+		-platform=darwin_arm64
+
 .PHONY: plan
 plan: ## Present plan for creating/updating Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
+		-out=plan.out \
+		-lock-timeout=$(TF_LOCK_TIMEOUT) \
 		-var-file=./terraform.tfvars \
 		-var-file=./terraform.$(PROW_ENV).tfvars \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
@@ -59,13 +72,15 @@ plan: ## Present plan for creating/updating Terraform resources.
 .PHONY: apply
 apply: ## Create/Update Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
-		-var-file=./terraform.tfvars \
-		-var-file=./terraform.$(PROW_ENV).tfvars \
-		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
+		-lock-timeout=$(TF_LOCK_TIMEOUT) \
+		"plan.out"
+	rm -f plan.out
 
 .PHONY: destroy
 destroy: ## Delete Terraform resources.
+	[ $(PROW_ENV) = "canary" ]
 	$(TF) $@ $(TF_ARGS) \
+		-lock-timeout=$(TF_LOCK_TIMEOUT) \
 		-var-file=./terraform.tfvars \
 		-var-file=./terraform.$(PROW_ENV).tfvars \
 		-var="deploy_kubernetes_resources=$(DEPLOY_K8S_RESOURCES)"
@@ -80,7 +95,7 @@ output: ## Print Terraform output.
 
 .PHONY: clean
 clean: ## Clean up Terraform cache and local state.
-	rm -rf ./.terraform
+	rm -rf ./.terraform ./plan.out
 
 ##@ FluxCD:
 
