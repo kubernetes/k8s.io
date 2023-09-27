@@ -36,6 +36,10 @@ locals {
       group  = "sig-release"
       owners = "k8s-infra-release-admins@kubernetes.io"
     }
+    k8s-infra-kops-prow-build-kubeconfig = {
+      group = "sig-cluster-lifecycle"
+      owners = "k8s-infra-kops-maintainers@kubernetes.io"
+    }
     k8s-release-enhancements-triage-github-token = {
       group  = "sig-release"
       owners = "k8s-infra-release-editors@kubernetes.io"
