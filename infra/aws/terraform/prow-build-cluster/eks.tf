@@ -20,7 +20,7 @@ limitations under the License.
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "19.10.0"
+  version = "19.16.0"
 
   # General cluster properties.
   cluster_name                   = var.cluster_name

@@ -50,7 +50,7 @@ init: ## Initialize Terraform's state and download necessary providers.
 
 .PHONY: platforms-lock
 platforms-lock:
-	$(TF) $(TF_ARGS) \
+	$(TF) \
 		providers lock \
 		-platform=linux_arm64 \
 		-platform=linux_amd64 \
@@ -89,4 +89,4 @@ output: init ## Print Terraform output.
 
 .PHONY: clean
 clean: ## Clean up Terraform cache and local state.
-	rm -rf ./.terraform
+	rm -rf ./.terraform ./plan.out
