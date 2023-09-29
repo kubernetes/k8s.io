@@ -64,6 +64,7 @@ function ensure_e2e_project() {
     ensure_only_services "${prj}" \
         compute.googleapis.com \
         cloudkms.googleapis.com \
+        file.googleapis.com \
         container.googleapis.com \
         containerregistry.googleapis.com \
         logging.googleapis.com \
