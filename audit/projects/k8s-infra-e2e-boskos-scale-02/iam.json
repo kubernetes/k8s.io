@@ -35,6 +35,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-660290009727@cloud-filer.iam.gserviceaccount.com"
+      ],
+      "role": "roles/file.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-prow-oncall@kubernetes.io",
         "group:k8s-infra-sig-scalability-oncall@kubernetes.io"
       ],

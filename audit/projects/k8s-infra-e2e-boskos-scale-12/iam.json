@@ -35,6 +35,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-692227742238@cloud-filer.iam.gserviceaccount.com"
+      ],
+      "role": "roles/file.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
       ],
       "role": "roles/iam.serviceAccountUser"

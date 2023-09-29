@@ -10,6 +10,7 @@ container.googleapis.com            Kubernetes Engine API
 containerfilesystem.googleapis.com  Container File System API
 containerregistry.googleapis.com    Container Registry API
 dns.googleapis.com                  Cloud DNS API
+file.googleapis.com                 Cloud Filestore API
 iam.googleapis.com                  Identity and Access Management (IAM) API
 iamcredentials.googleapis.com       IAM Service Account Credentials API
 logging.googleapis.com              Cloud Logging API
