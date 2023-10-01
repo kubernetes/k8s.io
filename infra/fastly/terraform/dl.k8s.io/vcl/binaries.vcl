@@ -44,6 +44,13 @@ sub vcl_fetch {
     set beresp.stale_while_revalidate = 60s; // 1 minute
   }
 
+  //Ensure version markers are not cached
+  if (req.url.ext == "txt") {
+    set beresp.cacheable = false;
+    set beresp.ttl = 0s;
+    return (pass);
+  }
+
   # TODO: Drop this when the origin(GCS bucket) is owned by the community
   # See: https://github.com/kubernetes/k8s.io/issues/2396
   if (req.url.path ~ "^/release/") {
