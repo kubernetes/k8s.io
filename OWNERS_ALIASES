@@ -183,12 +183,12 @@ aliases:
     - tabbysable
   committee-steering:
     - BenTheElder
-    - cblecker
-    - cpanato
     - justaugustus
     - mrbobbytables
+    - pacoxu
     - palnabarun
-    - tpepper
+    - pohly
+    - soltysh
 ## BEGIN CUSTOM CONTENT
   build-admins:
     - BenTheElder
