@@ -19,10 +19,13 @@ groups:
       - killen.bob@gmail.com
       - lachlan.evenson@microsoft.com
       - liggitt@google.com
+      - maszulik@redhat.com
       - michelle.noorali@gmail.com
       - nikhitaraghunath@gmail.com
+      - paco.xu@daocloud.io
       - pal.nabarun95@gmail.com
       - paris.pittman@gmail.com
+      - patrick.ohly@intel.com
       - phil.wittrock@gmail.com
       - quintonh@gmail.com
       - sarah.novotny@gmail.com
@@ -43,12 +46,12 @@ groups:
     owners:
       - augustus@cisco.com
       - bentheelder@google.com
-      - cblecker@gmail.com
-      - ctadeu@gmail.com
       - k8s@auggie.dev
       - killen.bob@gmail.com
+      - maszulik@redhat.com
+      - paco.xu@daocloud.io
       - pal.nabarun95@gmail.com
-      - tpepper@vmware.com
+      - patrick.ohly@intel.com
 
   - email-id: steering@kubernetes.io
     name: steering
@@ -68,12 +71,12 @@ groups:
     owners:
       - augustus@cisco.com
       - bentheelder@google.com
-      - cblecker@gmail.com
-      - ctadeu@gmail.com
       - k8s@auggie.dev
       - killen.bob@gmail.com
+      - maszulik@redhat.com
+      - paco.xu@daocloud.io
       - pal.nabarun95@gmail.com
-      - tpepper@vmware.com
+      - patrick.ohly@intel.com
     managers:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
