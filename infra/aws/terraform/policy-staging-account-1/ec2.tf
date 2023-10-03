@@ -50,5 +50,3 @@ module "ec2" {
     environment = "staging"       # Enforced tag
   }
 }
-
-

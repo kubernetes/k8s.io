@@ -54,4 +54,3 @@ module "eks" {
     environment = "staging"       # Enforced tag
   }
 }
-

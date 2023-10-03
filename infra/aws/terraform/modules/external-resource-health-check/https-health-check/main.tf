@@ -19,26 +19,26 @@ locals {
 }
 
 resource "aws_route53_health_check" "this" {
-  type = "HTTPS"
-  reference_name = "${local.prefix}-${var.name}"
+  type              = "HTTPS"
+  reference_name    = "${local.prefix}-${var.name}"
   failure_threshold = var.failure_threshold
-  request_interval = var.request_interval
-  fqdn = var.fqdn
-  port = var.port
-  resource_path = var.resource_path == "" ? null : var.resource_path
-  disabled = var.disabled
-  regions = var.regions
+  request_interval  = var.request_interval
+  fqdn              = var.fqdn
+  port              = var.port
+  resource_path     = var.resource_path == "" ? null : var.resource_path
+  disabled          = var.disabled
+  regions           = var.regions
 }
 
 resource "aws_cloudwatch_metric_alarm" "this" {
   alarm_name          = "${local.prefix}-${var.name}"
   comparison_operator = "LessThanThreshold"
   evaluation_periods  = "1"
-  metric_name = "HealthCheckStatus"
-  namespace = "AWS/Route53"
-  period = var.alarm_period
-  statistic = "Average"
-  threshold = 1
-  alarm_description = "This Alarm monitors the healthcheck status of ${local.prefix}-${var.name}"
-  alarm_actions = [var.sns_arn]
+  metric_name         = "HealthCheckStatus"
+  namespace           = "AWS/Route53"
+  period              = var.alarm_period
+  statistic           = "Average"
+  threshold           = 1
+  alarm_description   = "This Alarm monitors the healthcheck status of ${local.prefix}-${var.name}"
+  alarm_actions       = [var.sns_arn]
 }

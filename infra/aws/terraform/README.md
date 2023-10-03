@@ -8,6 +8,19 @@ Contains the Terraform for provisioning various resources under different AWS ac
 
 ## Notes
 
+### Pre-Commit Checks
+
+To run the pre-commit checks, you will need to install the following:
+
+- [pre-commit](https://pre-commit.com/)
+- [tflint](https://github.com/terraform-linters/tflint)
+
+Once installed, you can execute the checks with:
+
+```bash
+pre-commit run -a
+```
+
 ### Warning for providers
 
 An error may be displayed upon plan or apply commands, this error can be safely ignored as buckets provision.

@@ -15,16 +15,16 @@ limitations under the License.
 */
 
 variable "name" {
-  type = string
+  type        = string
   description = "Name for sns topic and and associated subscription"
 }
 
 variable "sns_topic_arn" {
-  type = string
+  type        = string
   description = "SNS Topic ARN"
 }
 
 variable "emails" {
-  type = list(string)
+  type        = list(string)
   description = "Emails addresses to subscribe"
 }

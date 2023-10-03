@@ -30,5 +30,5 @@ variable "s3_replication_rules" {
   description = "List of maps for S3 replication rules"
   type        = list(map(string))
   default     = []
-  nullable = false
+  nullable    = false
 }

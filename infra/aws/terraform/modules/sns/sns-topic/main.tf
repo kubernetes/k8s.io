@@ -15,6 +15,6 @@ limitations under the License.
 */
 
 resource "aws_sns_topic" "this" {
-  name = var.name
+  name            = var.name
   delivery_policy = var.delivery_policy
 }

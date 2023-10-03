@@ -18,4 +18,3 @@ namespace: monitoring
 resources:
   - flux-source-helm-grafana-charts.yaml
   - flux-hr-loki.yaml
-

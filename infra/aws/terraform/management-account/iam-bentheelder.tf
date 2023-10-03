@@ -23,6 +23,6 @@ resource "aws_iam_user_policy_attachment" "bentheelder_billing" {
   policy_arn = "arn:aws:iam::aws:policy/AWSBillingReadOnlyAccess"
 }
 resource "aws_iam_user_login_profile" "bentheelder_login" {
-  user    = aws_iam_user.bentheelder.name
+  user                    = aws_iam_user.bentheelder.name
   password_reset_required = false
 }

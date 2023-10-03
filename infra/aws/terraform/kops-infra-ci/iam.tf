@@ -46,10 +46,10 @@ data "aws_iam_policy_document" "google_prow_trust_policy" {
 
 // Ensure service accounts for the prow control plan can assume this role
 resource "aws_iam_role" "google_prow_trust_role" {
-  provider             = aws.kops-infra-ci
+  provider = aws.kops-infra-ci
 
   name                 = "GoogleProwTrustRole"
   description          = ""
   max_session_duration = 43200
-  assume_role_policy = data.aws_iam_policy_document.google_prow_trust_policy.json
+  assume_role_policy   = data.aws_iam_policy_document.google_prow_trust_policy.json
 }

@@ -209,9 +209,9 @@ module "k8s_infra_eks_e2e_boskos_010" {
 module "k8s_infra_e2e_boskos_scale_001" {
   source = "../modules/org-account"
 
-  account_name               = "k8s-infra-e2e-boskos-scale-001"
-  email                      = "k8s-infra-aws-boskos-accounts+scale-001@kubernetes.io"
-  parent_id                  = aws_organizations_organizational_unit.boskos.id
+  account_name = "k8s-infra-e2e-boskos-scale-001"
+  email        = "k8s-infra-aws-boskos-accounts+scale-001@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.boskos.id
 
   tags = {
     "environment" = "prod",
@@ -223,9 +223,9 @@ module "k8s_infra_e2e_boskos_scale_001" {
 module "k8s_infra_e2e_boskos_scale_002" {
   source = "../modules/org-account"
 
-  account_name               = "k8s-infra-e2e-boskos-scale-002"
-  email                      = "k8s-infra-aws-boskos-accounts+scale-002@kubernetes.io"
-  parent_id                  = aws_organizations_organizational_unit.boskos.id
+  account_name = "k8s-infra-e2e-boskos-scale-002"
+  email        = "k8s-infra-aws-boskos-accounts+scale-002@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.boskos.id
 
   tags = {
     "environment" = "prod",
