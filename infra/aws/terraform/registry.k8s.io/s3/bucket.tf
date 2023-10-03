@@ -107,7 +107,7 @@ resource "aws_s3_bucket_replication_configuration" "registry-k8s-io" {
         status = "Enabled"
       }
 
-      
+
 
       destination {
         bucket        = rule.value.destination_bucket_arn
@@ -120,4 +120,3 @@ resource "aws_s3_bucket_replication_configuration" "registry-k8s-io" {
     }
   }
 }
-

@@ -43,8 +43,8 @@ resource "aws_s3control_storage_lens_configuration" "main" {
     }
 
     data_export {
-    # Metrics are published once a day.
-    # See: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-cloudwatch-enable-publish-option.html
+      # Metrics are published once a day.
+      # See: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-cloudwatch-enable-publish-option.html
       cloud_watch_metrics {
         enabled = true
       }

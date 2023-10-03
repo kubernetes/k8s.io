@@ -25,4 +25,3 @@ kubectl delete statefulset -l operator.prometheus.io/name=main --cascade=orphan
 ```bash
 kubectl patch prometheus/main --patch '{"spec": {"paused": false}}' --type merge
 ```
-

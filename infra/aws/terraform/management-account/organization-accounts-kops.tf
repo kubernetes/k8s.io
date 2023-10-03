@@ -19,21 +19,21 @@ limitations under the License.
 */
 
 module "kops_infra_ci" {
-  source = "../modules/org-account"
+  source       = "../modules/org-account"
   account_name = "kops-infra-ci"
-  email = "k8s-infra-aws-admins+kops-infra-ci@kubernetes.io"
+  email        = "k8s-infra-aws-admins+kops-infra-ci@kubernetes.io"
   tags = {
     environment = "prod",
-    group = "sig-cluster-lifecycle"
+    group       = "sig-cluster-lifecycle"
   }
 }
 
 module "kops_infra_services" {
-  source = "../modules/org-account"
+  source       = "../modules/org-account"
   account_name = "kops-infra-services"
-  email = "k8s-infra-aws-admins+kops-infra-services@kubernetes.io"
+  email        = "k8s-infra-aws-admins+kops-infra-services@kubernetes.io"
   tags = {
     environment = "prod"
-    group = "sig-cluster-lifecycle"
+    group       = "sig-cluster-lifecycle"
   }
 }

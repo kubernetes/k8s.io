@@ -20,7 +20,7 @@ locals {
 
 data "aws_iam_policy_document" "access_log_policy" {
   statement {
-    sid = "S3ServerAccessLogsPolicy"
+    sid    = "S3ServerAccessLogsPolicy"
     effect = "Allow"
     principals {
       type        = "Service"
@@ -33,13 +33,13 @@ data "aws_iam_policy_document" "access_log_policy" {
     resources = ["${aws_s3_bucket.access_log.arn}/*"]
 
     condition {
-      test = "ArnLike"
+      test     = "ArnLike"
       variable = "aws:SourceArn"
-      values = [aws_s3_bucket.origin.arn]
+      values   = [aws_s3_bucket.origin.arn]
     }
 
     condition {
-      test = "StringEquals"
+      test     = "StringEquals"
       variable = "aws:SourceAccount"
       values = [
         data.aws_caller_identity.current.id
@@ -124,4 +124,3 @@ resource "aws_s3_bucket_public_access_block" "access_log" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
-

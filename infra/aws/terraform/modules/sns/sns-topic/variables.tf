@@ -15,11 +15,11 @@ limitations under the License.
 */
 
 variable "name" {
-  type = string
+  type        = string
   description = "Name for sns topic and and associated subscription"
 }
 
 variable "delivery_policy" {
-  type = string
+  type        = string
   description = "SNS delivery policy"
 }

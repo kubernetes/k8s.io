@@ -16,7 +16,7 @@ limitations under the License.
 
 resource "aws_sns_topic_subscription" "this" {
   count     = length(var.emails)
-  endpoint = var.emails[count.index]
-  protocol = "email"
+  endpoint  = var.emails[count.index]
+  protocol  = "email"
   topic_arn = var.sns_topic_arn
 }

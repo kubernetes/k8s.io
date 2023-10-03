@@ -25,4 +25,3 @@ resource "aws_iam_openid_connect_provider" "k8s_prow" {
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = ["08745487e891c19e3078c1f2a07e452950ef36f6"]
 }
-

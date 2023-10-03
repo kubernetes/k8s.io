@@ -26,5 +26,3 @@ ssh -A -J ubuntu@${BASTION_IP} ubuntu@${TARGET_NODE}
 ```
 make apply
 ```
-
-
