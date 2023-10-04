@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 provider "aws" {
   profile = "default"
   region  = "us-west-2"

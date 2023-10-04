@@ -15,13 +15,7 @@ limitations under the License.
 */
 
 terraform {
-  backend "s3" {
-    bucket = "test-artifacts-k8s-io-tfstate"
-    key    = "terraform.tfstate"
-    region = "us-east-2"
-  }
-
-  required_version = "~> 1.2.0"
+  required_version = "~> 1.1"
 
   required_providers {
     aws = {
@@ -29,15 +23,18 @@ terraform {
       version = "~> 4.0"
     }
   }
+
+  backend "s3" {
+    bucket = "test-artifacts-k8s-io-tfstate"
+    key    = "terraform.tfstate"
+    region = "us-east-2"
+  }
 }
 
-
-# Provider for AWS non-region-specific operations.
+# Provider for AWS non-region-specific operations
 provider "aws" {
-  # We still have to specify a region to use.
   region = "us-east-2"
 }
-
 
 # Per-region providers
 provider "aws" {
@@ -99,7 +96,6 @@ provider "aws" {
   alias  = "eu-west-3"
   region = "eu-west-3"
 }
-
 
 provider "aws" {
   alias  = "sa-east-1"

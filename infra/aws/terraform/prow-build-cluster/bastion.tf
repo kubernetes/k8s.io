@@ -16,7 +16,7 @@ limitations under the License.
 
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["099720109477"] // Canonical
+  owners      = ["099720109477"] # Canonical
 
   filter {
     name   = "name"
@@ -78,5 +78,6 @@ resource "aws_security_group" "bastion_host_security_group" {
 }
 
 output "bastion_ip_address" {
-  value = var.bastion_install ? aws_instance.bastion[0].public_ip : null
+  description = "Public IP address of the bastion host"
+  value       = var.bastion_install ? aws_instance.bastion[0].public_ip : null
 }

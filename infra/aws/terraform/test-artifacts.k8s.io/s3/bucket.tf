@@ -26,7 +26,6 @@ resource "aws_s3_bucket_acl" "artifacts-k8s-io" {
   acl = "private"
 }
 
-
 resource "aws_s3_bucket_policy" "artifacts-k8s-io-public-read" {
   provider = aws
   bucket   = aws_s3_bucket.artifacts-k8s-io.bucket
@@ -38,7 +37,7 @@ resource "aws_s3_bucket_policy" "artifacts-k8s-io-public-read" {
       {
         "Action" : "s3:ListBucket",
         "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.artifacts-k8s-io.arn}",
+        "Resource" : aws_s3_bucket.artifacts-k8s-io.arn
         "Principal" : "*"
       },
       {
@@ -70,6 +69,7 @@ resource "aws_s3_bucket_ownership_controls" "artifacts-k8s-io" {
   rule {
     object_ownership = "BucketOwnerEnforced"
   }
+
   depends_on = [
     aws_s3_bucket.artifacts-k8s-io,
     aws_s3_bucket_acl.artifacts-k8s-io,

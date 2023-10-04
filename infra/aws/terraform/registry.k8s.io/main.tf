@@ -14,12 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// prefix prefixes every resource so that the resources
-// can be created without using the same names. Useful
-// for testing and staging
-
 variable "prefix" {
-  description = "The prefix for all resources"
+  description = "Prefix for every resource so that the resources can be created without using the same names. Useful for testing and staging"
   type        = string
   default     = "test-"
 

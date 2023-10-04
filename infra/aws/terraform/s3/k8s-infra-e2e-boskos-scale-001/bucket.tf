@@ -39,7 +39,7 @@ resource "aws_s3_bucket_policy" "k8s_infra_kops_scale_tests" {
       {
         "Action" : "s3:ListBucket",
         "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.k8s_infra_kops_scale_tests.arn}",
+        "Resource" : aws_s3_bucket.k8s_infra_kops_scale_tests.arn
         "Principal" : "*"
       },
       {

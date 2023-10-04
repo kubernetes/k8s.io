@@ -14,23 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required provider versions
-- Storage backend details
-- alias for the provider per region
-*/
-
 terraform {
-  backend "gcs" {
-    bucket = "k8s-infra-tf-aws"
-    prefix = "oci-proxy"
-  }
+  required_version = "~> 1.1"
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.12.0"
+      version = "~> 4.0"
     }
   }
 }

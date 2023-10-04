@@ -34,8 +34,8 @@ resource "aws_iam_role" "eks_prow_admin" {
         "Condition" : {
           "StringEquals" : {
             "container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow:sub" : [
-              // https://github.com/kubernetes/test-infra/tree/master/config/prow/cluster
-              // all services that load kubeconfig should be listed here
+              # https://github.com/kubernetes/test-infra/tree/master/config/prow/cluster
+              # all services that load kubeconfig should be listed here
               "system:serviceaccount:default:deck",
               "system:serviceaccount:default:config-bootstrapper",
               "system:serviceaccount:default:crier",

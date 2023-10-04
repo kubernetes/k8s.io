@@ -14,12 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// prefix prefixes every resource so that the resources
-// can be created without using the same names. Useful
-// for testing and staging
-
 variable "prefix" {
-  description = "The prefix for all resources"
+  description = "Prefix for every resource so that the resources can be created without using the same names. Useful for testing and staging"
   type        = string
   default     = "test-"
 
@@ -28,7 +24,6 @@ variable "prefix" {
     error_message = "The string must end with a hyphen or be empty."
   }
 }
-
 
 module "bucket_ap-northeast-1" {
   source = "./s3"
@@ -129,7 +124,6 @@ module "bucket_eu-west-1" {
 
   prefix = var.prefix
 }
-
 
 module "bucket_eu-west-2" {
   source = "./s3"
