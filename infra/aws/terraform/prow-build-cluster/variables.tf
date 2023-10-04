@@ -15,22 +15,22 @@ limitations under the License.
 */
 
 variable "eks_cluster_admins" {
+  description = "List of maintainers that have administrator access to the cluster"
   type        = list(string)
-  description = "List of maintainers that have administrator access to the cluster."
   default     = []
 }
 
 variable "eks_cluster_viewers" {
+  description = "List of maintainers that have view access to the cluster"
   type        = list(string)
-  description = "List of maintainers that have view access to the cluster."
   default     = []
 }
 
 # This variable is required in the installation process as Terraform
 # cannot plan Kubernetes resources as a cluster is yet to be created.
 variable "deploy_kubernetes_resources" {
+  description = "Deploy Kubernetes resources defined by Terraform"
   type        = bool
-  description = "Deploy Kubernetes resources defined by Terraform."
   default     = true
   nullable    = false
 }
@@ -38,168 +38,174 @@ variable "deploy_kubernetes_resources" {
 # We need this information to be able to assume the role. We can't automatically determine it with caller_identity
 # because that would cause a dependency cycle.
 variable "aws_account_id" {
-  type        = string
   description = "AWS account ID"
+  type        = string
   default     = ""
 }
 
 variable "vpc_cidr" {
-  type        = string
   description = "CIDR of the VPC"
+  type        = string
 }
 
 variable "vpc_secondary_cidr_blocks" {
-  type        = list(string)
   description = "Additional CIDRs to attach to the VPC"
+  type        = list(string)
 }
 
 variable "vpc_public_subnet" {
-  type        = list(string)
   description = "Public subnets (one per AZ)"
+  type        = list(string)
 }
 
 variable "vpc_private_subnet" {
-  type        = list(string)
   description = "Private subnets (one per AZ)"
+  type        = list(string)
 }
 
 variable "vpc_intra_subnet" {
-  type        = list(string)
   description = "Intra subnets (one per AZ, subnet without access to external services)"
+  type        = list(string)
 }
 
 variable "cluster_name" {
-  type        = string
   description = "Name of the EKS cluster"
+  type        = string
 }
 
 variable "cluster_region" {
-  type        = string
   description = "AWS region of the EKS cluster"
+  type        = string
 }
 
 variable "cluster_version" {
-  type        = string
   description = "Kubernetes version of the EKS control plane"
+  type        = string
 }
 
 variable "node_group_version_blue" {
-  type        = string
   description = "Kubernetes version of the EKS-managed node group (blue)"
+  type        = string
 }
 
 variable "node_group_version_green" {
-  type        = string
   description = "Kubernetes version of the EKS-managed node group (green)"
+  type        = string
 }
 
 variable "node_ami_blue" {
-  type        = string
   description = "EKS optimized AMI to be used for blue Node groups"
+  type        = string
 }
 
 variable "node_ami_green" {
-  type        = string
   description = "EKS optimized AMI to be used for green node group"
+  type        = string
 }
 
 variable "node_instance_types_blue" {
-  type        = list(string)
   description = "Instance sizes to use for blue EKS node group"
+  type        = list(string)
 }
 
 variable "node_instance_types_green" {
-  type        = list(string)
   description = "Instance sizes to use for green EKS node group"
+  type        = list(string)
 }
 
 variable "node_volume_size" {
-  type        = number
   description = "Volume size per node to use for EKS node group"
+  type        = number
 }
 
 variable "node_min_size_blue" {
-  type        = number
   description = "Minimum number of nodes in the blue EKS node group"
+  type        = number
 }
 
 variable "node_min_size_green" {
-  type        = number
   description = "Minimum number of nodes in the green EKS node group"
+  type        = number
 }
 
 variable "node_max_size_blue" {
-  type        = number
   description = "Maximum number of nodes in the blue EKS node group"
+  type        = number
 }
 
 variable "node_max_size_green" {
-  type        = number
   description = "Maximum number of nodes in the green EKS node group"
+  type        = number
 }
 
 variable "node_desired_size_blue" {
-  type        = number
   description = "Desired number of nodes in the blue EKS node group"
+  type        = number
 }
 
 variable "node_desired_size_green" {
-  type        = number
   description = "Desired number of nodes in the green EKS node group"
+  type        = number
 }
 
 variable "node_max_unavailable_percentage" {
-  type        = number
   description = "Maximum unavailable nodes in a node group"
+  type        = number
 }
 
 variable "node_taints_blue" {
-  type    = list(map(string))
-  default = []
+  description = "Taints applied to the nodes created by the nodegroup"
+  type        = list(map(string))
+  default     = []
 }
 
 variable "node_taints_green" {
-  type    = list(map(string))
-  default = []
+  description = "Taints applied to the nodes created by the nodegroup"
+  type        = list(map(string))
+  default     = []
 }
 
 variable "node_labels_blue" {
-  type    = map(string)
-  default = {}
+  description = "Labels applied to the nodes created by the nodegroup"
+  type        = map(string)
+  default     = {}
 }
 
 variable "node_labels_green" {
-  type    = map(string)
-  default = {}
+  description = "Labels applied to the nodes created by the nodegroup"
+  type        = map(string)
+  default     = {}
 }
 
 variable "additional_node_group_tags_blue" {
-  type    = map(string)
-  default = {}
+  description = "Additional tags to be added to the nodegroup"
+  type        = map(string)
+  default     = {}
 }
 
 variable "additional_node_group_tags_green" {
-  type    = map(string)
-  default = {}
+  description = "Additional tags to be added to the nodegroup"
+  type        = map(string)
+  default     = {}
 }
 
 variable "cluster_autoscaler_version" {
-  type        = string
   description = "Cluster Autoscaler version to use (must match the EKS version)"
+  type        = string
 }
 
 variable "bastion_install" {
+  description = "Install bastion hosts allowing to access EKS nodes via ssh"
   type        = bool
-  description = "Install bastion hosts allowing to access EKS nodes via ssh."
   default     = false
 }
 
 variable "bastion_instance_type" {
-  type    = string
   default = "t3.nano"
+  type    = string
 }
 
 variable "public_key" {
+  description = "Used to genereate private key allowing for ssh access to cluster nodes"
   type        = string
-  description = "Used to genereate private key allowing for ssh access to cluster nodes."
 }

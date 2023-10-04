@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 variable "capa_quotas" {
+  description = "AWS service quotas to set for the account"
   type = map(object({
     quota_code   = string
     service_code = string

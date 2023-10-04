@@ -15,36 +15,36 @@ limitations under the License.
 */
 
 variable "name" {
-  type        = string
   description = "Name for health-check and associated alarm"
+  type        = string
 }
 
 variable "fqdn" {
-  type        = string
   description = "Destination domain to check"
+  type        = string
 }
 
 variable "resource_path" {
-  type        = string
   description = "Health check resource path"
+  type        = string
   default     = ""
 }
 
 variable "port" {
-  type        = number
   description = "HTTP port to check"
+  type        = number
   default     = 443
 }
 
 variable "request_interval" {
-  type        = string
   description = "Health check request interval"
+  type        = string
   default     = "30"
 }
 
 variable "regions" {
-  type        = list(string)
   description = "AWS regions - us-east-1 | us-west-1 | us-west-2 | eu-west-1 | ap-southeast-1 | ap-southeast-2 | ap-northeast-1 | sa-east-1"
+  type        = list(string)
   default = [
     "us-east-1",
     "us-west-1",
@@ -58,24 +58,24 @@ variable "regions" {
 }
 
 variable "disabled" {
-  type        = bool
   description = "Enable or Disable the healthcheck - disabled set target as always healthy"
+  type        = bool
   default     = false
 }
 
 variable "failure_threshold" {
+  description = "The number of consecutive health checks that an endpoint must pass or fail"
   type        = string
-  description = "The number of consecutive health checks that an endpoint must pass or fail."
   default     = "5"
 }
 
 variable "alarm_period" {
-  type        = string
   description = "The period in seconds over which the specified statistic is applied. Valid values are 10, 30, or any multiple of 60"
+  type        = string
   default     = "60"
 }
 
 variable "sns_arn" {
-  type        = string
   description = "AWS SNS Arn to alert the relevant group"
+  type        = string
 }

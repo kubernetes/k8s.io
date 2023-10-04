@@ -15,19 +15,20 @@ limitations under the License.
 */
 
 variable "eks_infra_admins" {
+  description = "List of maintainers that have permissions to run apply/destory"
   type        = list(string)
-  description = "List of maintainers that have permissions to run apply/destory."
   default     = []
 }
 
 variable "eks_infra_viewers" {
+  description = "List of maintainers that have permissions to run plan"
   type        = list(string)
-  description = "List of maintainers that have permissions to run plan."
   default     = []
 }
 
 variable "tags" {
-  type = map(string)
+  description = "Tags for AWS resources"
+  type        = map(string)
   default = {
     Terraform = true
   }

@@ -15,11 +15,13 @@ limitations under the License.
 */
 
 variable "region" {
-  type     = string
-  nullable = false
+  description = "AWS region"
+  type        = string
+  nullable    = false
 }
 
 variable "boskos_accounts" {
-  type     = list(string)
-  nullable = false
+  description = "A list of AWS accounts to be used by Boskos"
+  type        = list(string)
+  nullable    = false
 }

@@ -15,8 +15,8 @@ limitations under the License.
 */
 
 variable "tags" {
-  type        = map(string)
   description = "Tags for AWS resources"
+  type        = map(string)
   default = {
     "managed-by" = "Terraform"
   }

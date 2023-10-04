@@ -15,12 +15,14 @@ limitations under the License.
 */
 
 variable "eks_version" {
-  type    = string
-  default = "1.26"
+  description = "EKS Kubernetes version"
+  type        = string
+  default     = "1.26"
 }
 
 variable "tags" {
-  type = map(string)
+  description = "Tags for AWS resources"
+  type        = map(string)
   default = {
     "managed-by" = "Terraform",
     "group"      = "sig-cluster-lifecycle",
@@ -30,12 +32,13 @@ variable "tags" {
 }
 
 variable "region" {
-  type    = string
-  default = "us-east-2"
+  description = "AWS region"
+  type        = string
+  default     = "us-east-2"
 }
 
 variable "vpc_cidr" {
-  type        = string
   description = "CIDR of the VPC"
+  type        = string
   default     = "10.128.0.0/16"
 }

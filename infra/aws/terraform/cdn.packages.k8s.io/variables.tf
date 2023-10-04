@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 variable "region" {
+  description = "Region where to deploy non-global resources (e.g. S3 bucket)"
   type        = string
   nullable    = false
-  description = "Region where to deploy non-global resources (e.g. S3 bucket)"
 }

@@ -15,8 +15,9 @@ limitations under the License.
 */
 
 variable "prefix" {
-  type    = string
-  default = ""
+  description = "Prefix added to the S3 bucket names"
+  type        = string
+  default     = ""
 }
 
 variable "s3_replication_iam_role_arn" {

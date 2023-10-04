@@ -15,9 +15,10 @@ limitations under the License.
 */
 
 variable "prefix" {
-  type     = string
-  default  = ""
-  nullable = false
+  description = "Prefix added to bucket name"
+  type        = string
+  default     = ""
+  nullable    = false
 }
 
 variable "s3_replication_iam_role_arn" {

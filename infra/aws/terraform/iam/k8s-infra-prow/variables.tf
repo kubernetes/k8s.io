@@ -15,11 +15,12 @@ limitations under the License.
 */
 
 variable "region" {
-  type     = string
-  nullable = false
+  description = "AWS region"
+  type        = string
+  nullable    = false
 }
 
 variable "eks_infra_admins" {
+  description = "A list of users allowed to assume role for provisioning Prow EKS cluster"
   type        = list(string)
-  description = "A list of users allowed to assume role for provisioning Prow EKS cluster."
 }

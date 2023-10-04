@@ -15,16 +15,16 @@ limitations under the License.
 */
 
 variable "cluster_name" {
-  type        = string
   description = "Name of the EKS cluster"
+  type        = string
 }
 
 variable "cluster_autoscaler_iam_role_arn" {
-  type        = string
   description = "IAM Role ARN to be used for cluster-autoscaler SA"
+  type        = string
 }
 
 variable "cluster_autoscaler_version" {
-  type        = string
   description = "Cluster Autoscaler version to use (must match the EKS version)"
+  type        = string
 }

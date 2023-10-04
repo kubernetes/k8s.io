@@ -15,7 +15,8 @@ limitations under the License.
 */
 
 variable "aws_service_access_principals" {
-  type = list(any)
+  description = "List of service access principals for the organization"
+  type        = list(any)
   default = [
     "access-analyzer.amazonaws.com",
     "account.amazonaws.com",
@@ -35,5 +36,4 @@ variable "aws_service_access_principals" {
     "storage-lens.s3.amazonaws.com",
     "tagpolicies.tag.amazonaws.com"
   ]
-  description = "List of service access principals for the organization"
 }

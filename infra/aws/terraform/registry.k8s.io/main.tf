@@ -19,9 +19,9 @@ limitations under the License.
 // for testing and staging
 
 variable "prefix" {
+  description = "The prefix for all resources"
   type        = string
   default     = "test-"
-  description = "The prefix for all resources"
 
   validation {
     condition     = can(regex(".*-$|^$", var.prefix))
