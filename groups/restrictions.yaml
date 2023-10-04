@@ -142,6 +142,7 @@ restrictions:
       - "^k8s-infra-staging-sp-operator@kubernetes.io$"
   - path: "sig-release/groups.yaml"
     allowedGroups:
+      - "^k8s-infra-push-sig-release@kubernetes.io$"
       - "^k8s-infra-rbac-publishing-bot@kubernetes.io$"
       - "^k8s-infra-google-build-admins@kubernetes.io$"
       - "^k8s-infra-release-admins@kubernetes.io$"

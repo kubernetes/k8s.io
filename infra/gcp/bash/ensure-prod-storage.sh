@@ -70,6 +70,7 @@ ALL_PROD_BUCKETS=(
     "cni"
     "cri-tools"
     "kind"
+    "sig-release"
 )
 
 readonly PROD_PROJECT_SERVICES=(
