@@ -80,7 +80,17 @@ variable "cluster_region" {
 
 variable "cluster_version" {
   type        = string
-  description = "Kubernetes version of the EKS cluster"
+  description = "Kubernetes version of the EKS control plane"
+}
+
+variable "node_group_version_blue" {
+  type        = string
+  description = "Kubernetes version of the EKS-managed node group (blue)"
+}
+
+variable "node_group_version_green" {
+  type        = string
+  description = "Kubernetes version of the EKS-managed node group (green)"
 }
 
 variable "node_ami_blue" {

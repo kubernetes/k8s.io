@@ -32,6 +32,8 @@ eks_cluster_viewers = [
 
 cluster_name               = "prow-build-cluster"
 cluster_version            = "1.25"
+node_group_version_blue    = "1.25"
+node_group_version_green   = "1.25"
 cluster_autoscaler_version = "v1.25.0"
 
 # Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
