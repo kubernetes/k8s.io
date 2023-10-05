@@ -20,6 +20,8 @@ locals {
     description     = "EKS managed node group called blue used to facilitate node rotations/rollouts"
     use_name_prefix = true
 
+    cluster_version = var.node_group_version_blue
+
     taints = var.node_taints_blue
     labels = var.node_labels_blue
 
