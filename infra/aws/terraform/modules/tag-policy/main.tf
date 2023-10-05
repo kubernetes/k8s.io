@@ -101,7 +101,7 @@ locals {
 
   tag_policy = {
     "tags" : {
-      var.tag_name : {
+      (var.tag_name) : {
         "tag_key" : {
           "@@assign" : var.tag_name
         },
