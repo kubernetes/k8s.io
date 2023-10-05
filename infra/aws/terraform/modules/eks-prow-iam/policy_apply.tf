@@ -88,6 +88,7 @@ data "aws_iam_policy_document" "eks_apply" {
       "kms:TagResource",
       "logs:CreateLogGroup",
       "logs:PutRetentionPolicy",
+      "logs:TagLogGroup",
       "s3:PutObject"
     ]
   }
