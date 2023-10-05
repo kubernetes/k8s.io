@@ -15,13 +15,7 @@ limitations under the License.
 */
 
 terraform {
-  required_version = "~> 1.5.0"
-
-  backend "s3" {
-    bucket = "k8s-infra-tf-shared-services"
-    key    = "infrastructure-services/terraform.tfstate"
-    region = "us-east-2"
-  }
+  required_version = "~> 1.1"
 
   required_providers {
     aws = {
@@ -29,7 +23,17 @@ terraform {
       version = ">= 5.7"
     }
   }
+
+  backend "s3" {
+    bucket = "k8s-infra-tf-shared-services"
+    key    = "infrastructure-services/terraform.tfstate"
+    region = "us-east-2"
+  }
 }
+
+################################################################################
+# Common Locals
+################################################################################
 
 locals {
   name = "external-dependency-health-checks"
@@ -62,22 +66,30 @@ locals {
   })
 }
 
+################################################################################
+# External Dependency Notifications
+################################################################################
+
 module "external_dependency_sns_topic" {
-  source          = "../modules/sns/sns-topic"
+  source = "../modules/sns/sns-topic"
+
   name            = local.name
   delivery_policy = local.sns_topic_delivery_policy
 }
 
 module "external_dependency_sns_subscribe_emails" {
-  source        = "../modules/sns/sns-subscribe-email"
+  source = "../modules/sns/sns-subscribe-email"
+
   name          = local.name
   emails        = local.emails
   sns_topic_arn = module.external_dependency_sns_topic.sns_topic_arn
 }
 
 module "external_dependency_health_checks" {
-  for_each      = local.external_dependency_health_checks_targets
-  source        = "../modules/external-resource-health-check/https-health-check"
+  source = "../modules/external-resource-health-check/https-health-check"
+
+  for_each = local.external_dependency_health_checks_targets
+
   name          = each.value["name"]
   fqdn          = each.value["fqdn"]
   resource_path = each.value["resource_path"]

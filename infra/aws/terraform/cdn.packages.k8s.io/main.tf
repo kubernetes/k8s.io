@@ -15,21 +15,21 @@ limitations under the License.
 */
 
 terraform {
-  backend "s3" {
-    bucket       = "cdn-packages-k8s-io-tfstate"
-    key          = "terraform.tfstate"
-    region       = "eu-central-1"
-    role_arn     = "arn:aws:iam::309501585971:role/Provisioner"
-    session_name = "cdn-packages-k8s-io-terraform"
-  }
-
-  required_version = "~> 1.5.0"
+  required_version = "~> 1.1"
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.7"
     }
+  }
+
+  backend "s3" {
+    bucket       = "cdn-packages-k8s-io-tfstate"
+    key          = "terraform.tfstate"
+    region       = "eu-central-1"
+    role_arn     = "arn:aws:iam::309501585971:role/Provisioner"
+    session_name = "cdn-packages-k8s-io-terraform"
   }
 }
 
@@ -53,9 +53,9 @@ provider "aws" {
   }
 }
 
-data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
+################################################################################
+# Common Locals
+################################################################################
 
 locals {
   account_id = data.aws_caller_identity.current.account_id
@@ -66,3 +66,11 @@ locals {
     project = "cdn.packages.k8s.io"
   }
 }
+
+################################################################################
+# Common Data
+################################################################################
+
+data "aws_caller_identity" "current" {}
+
+data "aws_region" "current" {}

@@ -15,9 +15,10 @@ limitations under the License.
 */
 
 module "eks" {
+  source  = "terraform-aws-modules/eks/aws"
+  version = "19.16.0"
+
   providers = { aws = aws.kops-infra-ci }
-  source    = "terraform-aws-modules/eks/aws"
-  version   = "19.16.0"
 
   cluster_name                   = "${local.prefix}-prow-build"
   cluster_version                = var.eks_version

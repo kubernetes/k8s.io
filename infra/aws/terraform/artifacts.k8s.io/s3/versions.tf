@@ -14,11 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-region = "us-east-2"
+terraform {
+  required_version = "~> 1.1"
 
-eks_infra_admins = [
-  "pprzekwa",
-  "wozniakjan",
-  "xmudrii",
-  "bentheelder"
-]
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}

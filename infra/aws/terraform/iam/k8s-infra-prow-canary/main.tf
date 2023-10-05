@@ -15,17 +15,11 @@ limitations under the License.
 */
 
 provider "aws" {
-  region = var.region
+  region = "us-east-2"
 }
 
 terraform {
-  required_version = "~> 1.5.0"
-
-  backend "s3" {
-    bucket = "prow-build-canary-cluster-tfstate"
-    key    = "iam/eks-prow-iam/terraform.tfstate"
-    region = "us-east-2"
-  }
+  required_version = "~> 1.1"
 
   required_providers {
     aws = {
@@ -33,10 +27,29 @@ terraform {
       version = "~> 5.19"
     }
   }
+
+  backend "s3" {
+    bucket = "prow-build-canary-cluster-tfstate"
+    key    = "iam/eks-prow-iam/terraform.tfstate"
+    region = "us-east-2"
+  }
+}
+
+################################################################################
+# Prow IAM Roles
+################################################################################
+
+locals {
+  admins = [
+    "pkprzekwas",
+    "wozniakjan",
+    "xmudrii"
+  ]
 }
 
 module "eks_prow_iam" {
-  source            = "../../modules/eks-prow-iam"
-  eks_infra_admins  = var.eks_infra_admins
-  eks_infra_viewers = var.eks_infra_admins
+  source = "../../modules/eks-prow-iam"
+
+  eks_infra_admins  = local.admins
+  eks_infra_viewers = local.admins
 }

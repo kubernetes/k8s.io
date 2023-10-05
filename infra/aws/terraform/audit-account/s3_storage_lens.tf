@@ -20,7 +20,6 @@ This file contains:
 */
 
 resource "aws_s3control_storage_lens_configuration" "main" {
-  provider  = aws.audit
   config_id = "k8s-infra-s3-lens"
 
   storage_lens_configuration {

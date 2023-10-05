@@ -14,14 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file contains:
-- configuration for IAM Access Analyzer at the organization level
-*/
-
 resource "aws_accessanalyzer_analyzer" "default" {
-  provider = aws.audit
-
   analyzer_name = "organization-zone-trust-${data.aws_region.current.name}"
   type          = "ORGANIZATION"
 
