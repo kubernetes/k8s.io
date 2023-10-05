@@ -26,21 +26,21 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_vpc_ipam" "main" {
-  description = "${local.prefix}-${data.aws_region.current.name}-ipam"
+  description = "${local.prefix}-${local.region}-ipam"
   operating_regions {
-    region_name = data.aws_region.current.name
+    region_name = local.region
   }
 
   tags = merge(var.tags, {
-    "region" = data.aws_region.current.name
+    "region" = local.region
   })
 }
 
 resource "aws_vpc_ipam_scope" "main" {
   ipam_id     = aws_vpc_ipam.main.id
-  description = "${local.prefix}-${data.aws_region.current.name}-ipam-scope"
+  description = "${local.prefix}-${local.region}-ipam-scope"
   tags = merge(var.tags, {
-    "region" = data.aws_region.current.name
+    "region" = local.region
   })
 }
 
@@ -48,12 +48,11 @@ resource "aws_vpc_ipam_scope" "main" {
 resource "aws_vpc_ipam_pool" "main" {
   address_family = "ipv4"
   ipam_scope_id  = aws_vpc_ipam.main.private_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = local.region
   tags = merge(var.tags, {
-    "region" = data.aws_region.current.name
+    "region" = local.region
   })
 }
-
 
 resource "aws_vpc_ipam_pool_cidr" "main" {
   ipam_pool_id = aws_vpc_ipam_pool.main.id
@@ -101,6 +100,6 @@ module "vpc" {
   }
 
   tags = merge(var.tags, {
-    "region" = data.aws_region.current.name
+    "region" = local.region
   })
 }

@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 resource "aws_accessanalyzer_analyzer" "default" {
-  analyzer_name = "organization-zone-trust-${data.aws_region.current.name}"
+  analyzer_name = "organization-zone-trust-${local.region}"
   type          = "ORGANIZATION"
 
   tags = merge({

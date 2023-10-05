@@ -131,13 +131,13 @@ module "eks" {
       }
 
       tags = merge(var.tags, {
-        "region" = data.aws_region.current.name
+        "region" = local.region
       })
     }
   }
 
   tags = merge(var.tags, {
-    "region" = data.aws_region.current.name
+    "region" = local.region
   })
 }
 

@@ -59,8 +59,7 @@ provider "aws" {
 
 locals {
   account_id = data.aws_caller_identity.current.account_id
-
-  prefix = "${terraform.workspace}-"
+  prefix     = "${terraform.workspace}-"
 
   tags = {
     project = "cdn.packages.k8s.io"
@@ -71,5 +70,4 @@ locals {
 # Common Data
 ################################################################################
 
-data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}

@@ -39,7 +39,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-2"
+  region = local.region
 
   assume_role {
     role_arn = "arn:aws:iam::${local.kops-infra-ci-account-id}:role/OrganizationAccountAccessRole"
@@ -64,6 +64,8 @@ provider "kubernetes" {
 ################################################################################
 
 locals {
+  region = "us-east-2"
+
   kops-infra-ci-name       = "kops-infra-ci"
   kops-infra-ci-index      = index(data.aws_organizations_organization.current.accounts[*].name, local.kops-infra-ci-name)
   kops-infra-ci-account-id = data.aws_organizations_organization.current.accounts[local.kops-infra-ci-index].id
@@ -75,5 +77,4 @@ locals {
 # Common Data
 ################################################################################
 
-data "aws_region" "current" {}
 data "aws_organizations_organization" "current" {}

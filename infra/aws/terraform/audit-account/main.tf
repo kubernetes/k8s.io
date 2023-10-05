@@ -32,7 +32,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-2"
+  region = local.region
 
   assume_role {
     role_arn     = "arn:aws:iam::${local.audit-account-id}:role/OrganizationAccountAccessRole"
@@ -45,6 +45,8 @@ provider "aws" {
 ################################################################################
 
 locals {
+  region = "us-east-2"
+
   audit-account-name  = "k8s-infra-security-audit"
   audit-account-index = index(data.aws_organizations_organization.current.accounts[*].name, local.audit-account-name)
   audit-account-id    = data.aws_organizations_organization.current.accounts[local.audit-account-index].id
@@ -55,10 +57,7 @@ locals {
 ################################################################################
 
 data "aws_organizations_organization" "current" {}
-
 data "aws_caller_identity" "current" {}
-
-data "aws_region" "current" {}
 
 data "aws_iam_session_context" "whoami" {
   arn = data.aws_caller_identity.current.arn
