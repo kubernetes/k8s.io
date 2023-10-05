@@ -1,6 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
+- AndrewSirenko
 - andrewsykim
 - ConnorJC3
 - hakman
