@@ -22,3 +22,16 @@ provider "aws" {
     role_arn = "arn:aws:iam::${local.kops-infra-ci-account-id}:role/OrganizationAccountAccessRole"
   }
 }
+
+provider "kubernetes" {
+  host                   = module.eks.cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+
+  # This requires the awscli to be installed locally where Terraform is executed.
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    command     = "aws"
+    # This requires the awscli to be installed locally where Terraform is executed
+    args = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+  }
+}
