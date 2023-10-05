@@ -29,7 +29,7 @@ eks_cluster_admins = [
 ]
 
 cluster_name               = "prow-canary-cluster"
-cluster_version            = "1.26"
+cluster_version            = "1.27"
 node_group_version_blue    = "1.25"
 node_group_version_green   = "1.25"
 cluster_autoscaler_version = "v1.25.0"
