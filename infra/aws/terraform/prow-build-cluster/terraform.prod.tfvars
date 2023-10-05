@@ -45,7 +45,7 @@ node_max_size_blue     = 70
 node_desired_size_blue = 20
 
 node_ami_green            = "ami-05da66fc7a4319aa8"
-node_instance_types_green = ["r5d.4xlarge"]
+node_instance_types_green = ["r5ad.4xlarge"]
 
 node_min_size_green     = 0
 node_max_size_green     = 1
