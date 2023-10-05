@@ -37,6 +37,18 @@ module "eks" {
     "scheduler"
   ]
 
+  manage_aws_auth_configmap = true
+
+  aws_auth_roles = [
+    {
+      # AWS role used by prow to authenticate to build clusters
+      # Please, keep it in sync with prow deployment (AWS_ROLE_ARN)
+      rolearn = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
+      username = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
+      groups   = ["system:masters"]
+    }
+  ]
+
   cloudwatch_log_group_retention_in_days = 30
 
   cluster_addons = {
