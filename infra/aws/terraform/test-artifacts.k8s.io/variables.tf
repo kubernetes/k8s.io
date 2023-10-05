@@ -1,5 +1,5 @@
 /*
-Copyright 2023 The Kubernetes Authors.
+Copyright 2022 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,11 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
+variable "prefix" {
+  description = "Prefix for every resource so that the resources can be created without using the same names. Useful for testing and staging"
+  type        = string
+  default     = "test-"
+
+  validation {
+    condition     = can(regex(".*-$|^$", var.prefix))
+    error_message = "The string must end with a hyphen or be empty."
   }
 }
