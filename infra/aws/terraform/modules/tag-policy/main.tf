@@ -101,7 +101,7 @@ locals {
 
   tag_policy = {
     "tags" : {
-      "${var.tag_name}" : {
+      (var.tag_name) : {
         "tag_key" : {
           "@@assign" : var.tag_name
         },
@@ -171,11 +171,6 @@ resource "aws_organizations_policy" "this" {
   name    = var.tag_name
   type    = "TAG_POLICY"
   content = jsonencode(local.tag_policy)
-}
-
-
-output "name" {
-  value = local.selected_services
 }
 
 # --------------------------------- #

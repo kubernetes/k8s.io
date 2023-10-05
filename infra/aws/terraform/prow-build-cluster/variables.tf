@@ -200,11 +200,6 @@ variable "bastion_install" {
   default     = false
 }
 
-variable "bastion_instance_type" {
-  default = "t3.nano"
-  type    = string
-}
-
 variable "public_key" {
   description = "Used to genereate private key allowing for ssh access to cluster nodes"
   type        = string

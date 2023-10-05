@@ -14,17 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "aws_availability_zones" "available" {
-  provider = aws.kops-infra-ci
-  state    = "available"
-}
+terraform {
+  required_version = ">= 1.0"
 
-data "aws_caller_identity" "current" {
-  provider = aws.kops-infra-ci
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 4.67"
+    }
+  }
 }
-
-data "aws_region" "current" {
-  provider = aws.kops-infra-ci
-}
-
-data "aws_organizations_organization" "current" {}

@@ -14,57 +14,60 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+locals {
+  azs             = slice(data.aws_availability_zones.available.names, 0, 3)
+  private_subnets = cidrsubnets(local.partition[0], 2, 2, 2)
+  public_subnets  = cidrsubnets(local.partition[1], 2, 2, 2)
+  partition       = cidrsubnets(aws_vpc_ipam_preview_next_cidr.main.cidr, 2, 2, 2)
+}
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_vpc_ipam" "main" {
-  provider    = aws.kops-infra-ci
   description = "${local.prefix}-${data.aws_region.current.name}-ipam"
   operating_regions {
     region_name = data.aws_region.current.name
   }
 
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.name
   })
 }
 
 resource "aws_vpc_ipam_scope" "main" {
-  provider    = aws.kops-infra-ci
   ipam_id     = aws_vpc_ipam.main.id
   description = "${local.prefix}-${data.aws_region.current.name}-ipam-scope"
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.name
   })
 }
 
 # IPv4
 resource "aws_vpc_ipam_pool" "main" {
-  provider       = aws.kops-infra-ci
   address_family = "ipv4"
   ipam_scope_id  = aws_vpc_ipam.main.private_default_scope_id
   locale         = data.aws_region.current.name
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.name
   })
 }
 
 
 resource "aws_vpc_ipam_pool_cidr" "main" {
-  provider     = aws.kops-infra-ci
   ipam_pool_id = aws_vpc_ipam_pool.main.id
   cidr         = var.vpc_cidr
 }
 
 resource "aws_vpc_ipam_preview_next_cidr" "main" {
-  provider     = aws.kops-infra-ci
   ipam_pool_id = aws_vpc_ipam_pool.main.id
 
-  netmask_length = 20 // a 18 netmask length is considered as too big for the CIDR pool
+  # a 18 netmask length is considered as too big for the CIDR pool
+  netmask_length = 20
 }
 
 module "vpc" {
-  providers = {
-    aws = aws.kops-infra-ci
-  }
-
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
 
@@ -81,7 +84,7 @@ module "vpc" {
   single_nat_gateway     = false
   one_nat_gateway_per_az = true
 
-  // TODO(ameukam): Remove this after https://github.com/kubernetes/k8s.io/issues/5127 is closed
+  # TODO(ameukam): Remove this after https://github.com/kubernetes/k8s.io/issues/5127 is closed
   enable_flow_log                                 = true
   create_flow_log_cloudwatch_iam_role             = true
   create_flow_log_cloudwatch_log_group            = true
@@ -98,6 +101,6 @@ module "vpc" {
   }
 
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.name
   })
 }

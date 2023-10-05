@@ -15,5 +15,6 @@ limitations under the License.
 */
 
 output "sns_topic_arn" {
-  value = aws_sns_topic.this.arn
+  description = "The ARN of the SNS topic"
+  value       = aws_sns_topic.this.arn
 }

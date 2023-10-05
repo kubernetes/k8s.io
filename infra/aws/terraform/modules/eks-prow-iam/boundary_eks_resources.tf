@@ -18,7 +18,7 @@ locals {
   eks_resource_pb_name = "EKSResourcesPermissionBoundary"
 }
 
-// Bondary imposed on all IAM roles provisioned by EKSInfraAdmin role.
+# Bondary imposed on all IAM roles provisioned by EKSInfraAdmin role.
 resource "aws_iam_policy" "eks_resources_permission_boundary" {
   name        = local.eks_resource_pb_name
   path        = "/boundary/"

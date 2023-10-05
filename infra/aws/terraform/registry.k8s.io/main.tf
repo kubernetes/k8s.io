@@ -14,164 +14,112 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "prefix" {
-  description = "Prefix for every resource so that the resources can be created without using the same names. Useful for testing and staging"
-  type        = string
-  default     = "test-"
+terraform {
+  required_version = "~> 1.1"
 
-  validation {
-    condition     = can(regex(".*-$|^$", var.prefix))
-    error_message = "The string must end with a hyphen or be empty."
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+
+  backend "s3" {
+    bucket = "registry-k8s-io-tfstate"
+    key    = "terraform.tfstate"
+    region = "us-east-2"
   }
 }
 
-module "us-west-1" {
-  source = "./s3"
+# The role_arn (arn:aws:iam::513428760722:role/registry.k8s.io_s3admin)
+# used in each provider block is managed in
+# https://github.com/cncf-infra/aws-infra/blob/2ac2e63c162134a9e6036d84beee2d5adf6b4ff2/terraform/iam/main.tf
 
-  providers = {
-    aws = aws.us-west-1
+provider "aws" {
+  region = "us-west-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
-
-  prefix = var.prefix
 }
 
-module "us-west-2" {
-  source = "./s3"
+provider "aws" {
+  alias  = "us-west-1"
+  region = "us-west-1"
 
-  providers = {
-    aws = aws.us-west-2
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
-
-  prefix = var.prefix
 }
 
-module "us-east-1" {
-  source = "./s3"
+provider "aws" {
+  alias  = "us-west-2"
+  region = "us-west-2"
 
-  providers = {
-    aws = aws.us-east-1
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
-
-  prefix = var.prefix
 }
 
-module "us-east-2" {
-  source = "./s3"
+provider "aws" {
+  alias  = "us-east-1"
+  region = "us-east-1"
 
-  providers = {
-    aws = aws.us-east-2
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
-
-  prefix = var.prefix
-
-  s3_replication_iam_role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3writer"
-
-  s3_replication_rules = [
-    {
-      id                               = "registry-k8s-io-us-east-2-to-registry-k8s-io-us-west-1"
-      status                           = "Enabled"
-      priority                         = 1
-      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}registry-k8s-io-us-west-1"
-      destination_bucket_storage_class = "STANDARD"
-    },
-    {
-      id                               = "registry-k8s-io-us-east-2-to-registry-k8s-io-us-west-2"
-      status                           = "Enabled"
-      priority                         = 2
-      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}registry-k8s-io-us-west-2"
-      destination_bucket_storage_class = "STANDARD"
-    },
-    {
-      id                               = "registry-k8s-io-us-east-2-to-registry-k8s-io-us-east-1"
-      status                           = "Enabled"
-      priority                         = 3
-      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}registry-k8s-io-us-east-1"
-      destination_bucket_storage_class = "STANDARD"
-    },
-    {
-      id                               = "registry-k8s-io-us-east-2-to-registry-k8s-io-eu-west-1"
-      status                           = "Enabled"
-      priority                         = 4
-      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}registry-k8s-io-eu-west-1"
-      destination_bucket_storage_class = "STANDARD"
-    },
-    {
-      id                               = "registry-k8s-io-us-east-2-to-registry-k8s-io-eu-central-1"
-      status                           = "Enabled"
-      priority                         = 5
-      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}registry-k8s-io-eu-central-1"
-      destination_bucket_storage_class = "STANDARD"
-    },
-    {
-      id                               = "registry-k8s-io-us-east-2-to-registry-k8s-io-ap-southeast-1"
-      status                           = "Enabled"
-      priority                         = 6
-      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}registry-k8s-io-ap-southeast-1"
-      destination_bucket_storage_class = "STANDARD"
-    },
-    {
-      id                               = "registry-k8s-io-us-east-2-to-registry-k8s-io-ap-northeast-1"
-      status                           = "Enabled"
-      priority                         = 7
-      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}registry-k8s-io-ap-northeast-1"
-      destination_bucket_storage_class = "STANDARD"
-    },
-    {
-      id                               = "registry-k8s-io-us-east-2-to-registry-k8s-io-ap-south-1"
-      status                           = "Enabled"
-      priority                         = 8
-      destination_bucket_arn           = "arn:aws:s3:::${var.prefix}registry-k8s-io-ap-south-1"
-      destination_bucket_storage_class = "STANDARD"
-    },
-  ]
 }
 
-module "eu-west-1" {
-  source = "./s3"
+provider "aws" {
+  alias  = "us-east-2"
+  region = "us-east-2"
 
-  providers = {
-    aws = aws.eu-west-1
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
-
-  prefix = var.prefix
 }
 
-module "eu-central-1" {
-  source = "./s3"
+provider "aws" {
+  alias  = "eu-west-1"
+  region = "eu-west-1"
 
-  providers = {
-    aws = aws.eu-central-1
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
-
-  prefix = var.prefix
 }
 
-module "ap-southeast-1" {
-  source = "./s3"
+provider "aws" {
+  alias  = "eu-central-1"
+  region = "eu-central-1"
 
-  providers = {
-    aws = aws.ap-southeast-1
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
-
-  prefix = var.prefix
 }
 
-module "ap-northeast-1" {
-  source = "./s3"
+provider "aws" {
+  alias  = "ap-southeast-1"
+  region = "ap-southeast-1"
 
-  providers = {
-    aws = aws.ap-northeast-1
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
-
-  prefix = var.prefix
 }
 
-module "ap-south-1" {
-  source = "./s3"
+provider "aws" {
+  alias  = "ap-northeast-1"
+  region = "ap-northeast-1"
 
-  providers = {
-    aws = aws.ap-south-1
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
   }
+}
 
-  prefix = var.prefix
+provider "aws" {
+  alias  = "ap-south-1"
+  region = "ap-south-1"
+
+  assume_role {
+    role_arn = "arn:aws:iam::513428760722:role/registry.k8s.io_s3admin"
+  }
 }

@@ -37,17 +37,17 @@ terraform {
 
 locals {
   name = "external-dependency-health-checks"
-  external_dependency_health_checks_targets = {
-    google_cloud_pkgs_apt_gpg = {
-      name          = "google-cloud-pkgs"
-      fqdn          = "packages.cloud.google.com"
-      resource_path = "/apt/doc/apt-key.gpg"
-    }
-  }
-  emails = [
-    "k8s-infra-alerts@kubernetes.io"
-  ]
-  sns_topic_delivery_policy = jsonencode({
+}
+
+################################################################################
+# External Dependency Notifications
+################################################################################
+
+module "external_dependency_sns_topic" {
+  source = "../modules/sns/sns-topic"
+
+  name = local.name
+  delivery_policy = jsonencode({
     "http" : {
       "defaultHealthyRetryPolicy" : {
         "minDelayTarget" : 20,
@@ -66,29 +66,23 @@ locals {
   })
 }
 
-################################################################################
-# External Dependency Notifications
-################################################################################
-
-module "external_dependency_sns_topic" {
-  source = "../modules/sns/sns-topic"
-
-  name            = local.name
-  delivery_policy = local.sns_topic_delivery_policy
-}
-
 module "external_dependency_sns_subscribe_emails" {
   source = "../modules/sns/sns-subscribe-email"
 
-  name          = local.name
-  emails        = local.emails
+  emails        = ["k8s-infra-alerts@kubernetes.io"]
   sns_topic_arn = module.external_dependency_sns_topic.sns_topic_arn
 }
 
 module "external_dependency_health_checks" {
   source = "../modules/external-resource-health-check/https-health-check"
 
-  for_each = local.external_dependency_health_checks_targets
+  for_each = {
+    google_cloud_pkgs_apt_gpg = {
+      name          = "google-cloud-pkgs"
+      fqdn          = "packages.cloud.google.com"
+      resource_path = "/apt/doc/apt-key.gpg"
+    }
+  }
 
   name          = each.value["name"]
   fqdn          = each.value["fqdn"]

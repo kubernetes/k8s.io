@@ -17,20 +17,17 @@ limitations under the License.
 data "aws_region" "current" {}
 
 resource "aws_s3_bucket" "artifacts-k8s-io" {
-  provider = aws
-  bucket   = "${var.prefix}artifacts-k8s-io-${data.aws_region.current.name}"
+  bucket = "${var.prefix}artifacts-k8s-io-${data.aws_region.current.name}"
 }
 
 resource "aws_s3_bucket_acl" "artifacts-k8s-io" {
-  provider = aws
-  bucket   = aws_s3_bucket.artifacts-k8s-io.bucket
+  bucket = aws_s3_bucket.artifacts-k8s-io.bucket
   # This clears the ACL list, so we can apply object_ownership = "BucketOwnerEnforced"
   acl = "private"
 }
 
 resource "aws_s3_bucket_policy" "artifacts-k8s-io-public-read" {
-  provider = aws
-  bucket   = aws_s3_bucket.artifacts-k8s-io.bucket
+  bucket = aws_s3_bucket.artifacts-k8s-io.bucket
 
   policy = jsonencode({
     "Id" : "Public-Access",
@@ -39,7 +36,7 @@ resource "aws_s3_bucket_policy" "artifacts-k8s-io-public-read" {
       {
         "Action" : "s3:ListBucket",
         "Effect" : "Allow",
-        "Resource" : "${aws_s3_bucket.artifacts-k8s-io.arn}",
+        "Resource" : aws_s3_bucket.artifacts-k8s-io.arn
         "Principal" : "*"
       },
       {
@@ -65,8 +62,7 @@ resource "aws_s3_bucket_policy" "artifacts-k8s-io-public-read" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "artifacts-k8s-io" {
-  provider = aws
-  bucket   = aws_s3_bucket.artifacts-k8s-io.bucket
+  bucket = aws_s3_bucket.artifacts-k8s-io.bucket
 
   rule {
     object_ownership = "BucketOwnerEnforced"
@@ -81,8 +77,7 @@ resource "aws_s3_bucket_ownership_controls" "artifacts-k8s-io" {
 
 # Versioning must be enabled for S3 replication
 resource "aws_s3_bucket_versioning" "artifacts-k8s-io" {
-  provider = aws
-  bucket   = aws_s3_bucket.artifacts-k8s-io.id
+  bucket = aws_s3_bucket.artifacts-k8s-io.id
 
   versioning_configuration {
     status = "Enabled"
@@ -90,8 +85,7 @@ resource "aws_s3_bucket_versioning" "artifacts-k8s-io" {
 }
 
 resource "aws_s3_bucket_replication_configuration" "artifacts-k8s-io" {
-  provider = aws
-  count    = length(var.s3_replication_rules) > 0 ? 1 : 0
+  count = length(var.s3_replication_rules) > 0 ? 1 : 0
 
   role = var.s3_replication_iam_role_arn
 

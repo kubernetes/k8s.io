@@ -48,10 +48,6 @@ locals {
   audit-account-name  = "k8s-infra-security-audit"
   audit-account-index = index(data.aws_organizations_organization.current.accounts[*].name, local.audit-account-name)
   audit-account-id    = data.aws_organizations_organization.current.accounts[local.audit-account-index].id
-
-  logging-account-name  = "k8s-infra-security-logs"
-  logging-account-index = index(data.aws_organizations_organization.current.accounts[*].name, local.logging-account-name)
-  logging-account-id    = data.aws_organizations_organization.current.accounts[local.audit-account-index].id
 }
 
 ################################################################################

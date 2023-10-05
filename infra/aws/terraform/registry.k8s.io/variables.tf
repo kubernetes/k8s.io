@@ -14,7 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+variable "prefix" {
+  description = "Prefix for every resource so that the resources can be created without using the same names. Useful for testing and staging"
+  type        = string
+  default     = "test-"
 
-terraform {
-  required_version = "~> 1.5.1"
+  validation {
+    condition     = can(regex(".*-$|^$", var.prefix))
+    error_message = "The string must end with a hyphen or be empty."
+  }
 }

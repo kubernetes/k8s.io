@@ -15,14 +15,7 @@ limitations under the License.
 */
 
 terraform {
-  required_version = "~> 1.5.0"
-
-  backend "s3" {
-    # This S3 bucket is created in eks-e2e-boskos-001 AWS account
-    bucket = "eks-e2e-boskos-tfstate"
-    key    = "service-quotas/terraform.tfstate"
-    region = "us-west-2"
-  }
+  required_version = "~> 1.1"
 
   required_providers {
     aws = {
@@ -30,94 +23,145 @@ terraform {
       version = "~> 4.47"
     }
   }
-}
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-001 account.
-module "capa_quotas_001" {
-  source = "../modules/capa"
-
-  providers = {
-    aws = aws.eks-e2e-boskos-001
+  backend "s3" {
+    # This S3 bucket is created in eks-e2e-boskos-001 AWS account
+    bucket = "eks-e2e-boskos-tfstate"
+    key    = "service-quotas/terraform.tfstate"
+    region = "us-west-2"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-002 account.
-module "capa_quotas_002" {
-  source = "../modules/capa"
+provider "aws" {
+  region = var.region
+}
 
-  providers = {
-    aws = aws.eks-e2e-boskos-002
+# Provider refering to eks-e2e-boskos-001 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-001"
+
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[0]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-003 account.
-module "capa_quotas_003" {
-  source = "../modules/capa"
+# Provider refering to eks-e2e-boskos-002 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-002"
 
-  providers = {
-    aws = aws.eks-e2e-boskos-003
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[1]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-004 account.
-module "capa_quotas_004" {
-  source = "../modules/capa"
+# Provider refering to eks-e2e-boskos-003 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-003"
 
-  providers = {
-    aws = aws.eks-e2e-boskos-004
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[2]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-005 account.
-module "capa_quotas_005" {
-  source = "../modules/capa"
+# Provider refering to eks-e2e-boskos-004 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-004"
 
-  providers = {
-    aws = aws.eks-e2e-boskos-005
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[3]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-006 account.
-module "capa_quotas_006" {
-  source = "../modules/capa"
+# Provider refering to eks-e2e-boskos-005 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-005"
 
-  providers = {
-    aws = aws.eks-e2e-boskos-006
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[4]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-007 account.
-module "capa_quotas_007" {
-  source = "../modules/capa"
+# Provider refering to eks-e2e-boskos-006 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-006"
 
-  providers = {
-    aws = aws.eks-e2e-boskos-007
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[5]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-008 account.
-module "capa_quotas_008" {
-  source = "../modules/capa"
+# Provider refering to eks-e2e-boskos-007 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-007"
 
-  providers = {
-    aws = aws.eks-e2e-boskos-008
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[6]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-009 account.
-module "capa_quotas_009" {
-  source = "../modules/capa"
+# Provider refering to eks-e2e-boskos-008 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-008"
 
-  providers = {
-    aws = aws.eks-e2e-boskos-009
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[7]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }
 
-# Module used to apply CAPA (Cluster API Provider AWS) quotas to eks-e2e-boskos-010 account.
-module "capa_quotas_010" {
-  source = "../modules/capa"
+# Provider refering to eks-e2e-boskos-009 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-009"
 
-  providers = {
-    aws = aws.eks-e2e-boskos-010
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[8]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
+  }
+}
+
+# Provider refering to eks-e2e-boskos-010 AWS account.
+# "provisioner" user in eks-e2e-boskos-001 account has permission to assume
+# the referenced role.
+provider "aws" {
+  region = var.region
+  alias  = "eks-e2e-boskos-010"
+
+  assume_role {
+    role_arn     = "arn:aws:iam::${var.boskos_accounts[9]}:role/Provisioner"
+    session_name = "service-quotas-boskos-tf"
   }
 }

@@ -15,16 +15,12 @@ limitations under the License.
 */
 
 terraform {
-  backend "s3" {
-    bucket = "k8s-infra-policy-staging-terraform-state"
-    region = "us-east-2"
-    key    = "account-1/terraform.state"
-  }
+  required_version = ">= 1.0"
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 4.61"
+      version = ">= 4.67"
     }
   }
 }

@@ -31,12 +31,6 @@ variable "tags" {
   }
 }
 
-variable "region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-east-2"
-}
-
 variable "vpc_cidr" {
   description = "CIDR of the VPC"
   type        = string

@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 output "account_id" {
   description = "An AWS organization account resource"
   value       = aws_organizations_account.this.id

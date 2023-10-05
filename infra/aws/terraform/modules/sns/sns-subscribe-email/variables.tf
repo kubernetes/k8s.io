@@ -14,11 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "name" {
-  description = "Name for sns topic and and associated subscription"
-  type        = string
-}
-
 variable "sns_topic_arn" {
   description = "SNS Topic ARN"
   type        = string

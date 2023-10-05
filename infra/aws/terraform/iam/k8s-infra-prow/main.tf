@@ -14,10 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-provider "aws" {
-  region = "us-east-2"
-}
-
 terraform {
   required_version = "~> 1.1"
 
@@ -33,6 +29,10 @@ terraform {
     key    = "iam/eks-prow-iam/terraform.tfstate"
     region = "us-east-2"
   }
+}
+
+provider "aws" {
+  region = "us-east-2"
 }
 
 ################################################################################

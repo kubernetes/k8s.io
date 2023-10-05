@@ -15,13 +15,21 @@ limitations under the License.
 */
 
 output "tag_policy_id" {
-  value = aws_organizations_policy.this.id
+  description = "The unique identifier (ID) of the tag policy"
+  value       = aws_organizations_policy.this.id
 }
 
 output "scp_require_tag_id" {
-  value = aws_organizations_policy.request_tag.id
+  description = "The unique identifier (ID) of the request tag policy"
+  value       = aws_organizations_policy.request_tag.id
 }
 
 output "scp_deny_tag_deletion_id" {
-  value = aws_organizations_policy.deny_tag_deletion.id
+  description = "The unique identifier (ID) of the deny tag policy"
+  value       = aws_organizations_policy.deny_tag_deletion.id
+}
+
+output "name" {
+  description = "TODO - name does not quite match the value"
+  value       = local.selected_services
 }

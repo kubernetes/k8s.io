@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+data "aws_region" "current" {}
+
 resource "aws_s3_bucket" "registry-k8s-io" {
   bucket = "${var.prefix}registry-k8s-io-${data.aws_region.current.name}"
 }

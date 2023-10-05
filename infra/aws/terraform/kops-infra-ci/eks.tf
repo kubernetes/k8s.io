@@ -18,8 +18,6 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.16.0"
 
-  providers = { aws = aws.kops-infra-ci }
-
   cluster_name                   = "${local.prefix}-prow-build"
   cluster_version                = var.eks_version
   cluster_endpoint_public_access = true
@@ -133,21 +131,20 @@ module "eks" {
       }
 
       tags = merge(var.tags, {
-        "region" = "${data.aws_region.current.name}"
+        "region" = data.aws_region.current.name
       })
     }
   }
 
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.name
   })
 }
 
 
 module "vpc_cni_irsa" {
-  providers = { aws = aws.kops-infra-ci }
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version   = "~> 5.0"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "~> 5.0"
 
   role_name_prefix      = "VPC-CNI-IRSA"
   attach_vpc_cni_policy = true
@@ -166,9 +163,8 @@ module "vpc_cni_irsa" {
 }
 
 module "ebs_csi_irsa" {
-  providers = { aws = aws.kops-infra-ci }
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version   = "~> 5.0"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "~> 5.0"
 
   role_name_prefix      = "EBS-CSI-IRSA"
   attach_ebs_csi_policy = true
@@ -184,9 +180,8 @@ module "ebs_csi_irsa" {
 }
 
 module "cluster_autoscaler_irsa_role" {
-  providers = { aws = aws.kops-infra-ci }
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version   = "~> 5.0"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "~> 5.0"
 
   role_name                        = "cluster-autoscaler"
   attach_cluster_autoscaler_policy = true

@@ -93,8 +93,8 @@ data "aws_iam_policy_document" "eks_apply" {
     ]
   }
 
-  // This statement effectively enforces EKSResourcesPermissionBoundary on IAM resources
-  // created with this policy.
+  # This statement effectively enforces EKSResourcesPermissionBoundary on IAM resources
+  # created with this policy.
   statement {
     sid = "AllowCreateOnlyWithBoundary"
 

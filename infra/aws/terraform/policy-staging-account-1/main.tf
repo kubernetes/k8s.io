@@ -15,5 +15,30 @@ limitations under the License.
 */
 
 terraform {
-  required_version = "~> 1.3.0"
+  required_version = "~> 1.1"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 4.61"
+    }
+  }
+
+  backend "s3" {
+    bucket = "k8s-infra-policy-staging-terraform-state"
+    region = "us-east-2"
+    key    = "account-1/terraform.state"
+  }
+}
+
+provider "aws" {
+  region = "us-east-2"
+}
+
+################################################################################
+# Common Locals
+################################################################################
+
+locals {
+  name = "tag-policy-test"
 }

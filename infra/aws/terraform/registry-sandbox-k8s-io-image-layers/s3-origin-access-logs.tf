@@ -14,10 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-locals {
-  expiration_period = 90
-}
-
 data "aws_iam_policy_document" "access_log_policy" {
   statement {
     sid    = "S3ServerAccessLogsPolicy"
@@ -60,8 +56,6 @@ data "aws_iam_policy_document" "access_log_policy" {
 }
 
 resource "aws_s3_bucket" "access_log" {
-  provider = aws.origin
-
   bucket        = "${aws_s3_bucket.origin.bucket}-access-log"
   force_destroy = false
 
@@ -84,8 +78,6 @@ resource "aws_s3_bucket_ownership_controls" "access_log" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "access_log" {
-  provider = aws.origin
-
   bucket = aws_s3_bucket.access_log.id
 
   rule {
@@ -96,8 +88,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "access_log" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "access_log" {
-  provider = aws.origin
-
   bucket = aws_s3_bucket.access_log.id
 
   rule {
@@ -108,16 +98,13 @@ resource "aws_s3_bucket_lifecycle_configuration" "access_log" {
 
     # Objects are deleted after 90 days
     expiration {
-      days = local.expiration_period
+      days = 90
     }
   }
 }
 
-
 # Prevent public access
 resource "aws_s3_bucket_public_access_block" "access_log" {
-  provider = aws.origin
-
   bucket                  = aws_s3_bucket.access_log.id
   block_public_acls       = true
   block_public_policy     = true
