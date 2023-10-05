@@ -23,7 +23,7 @@ limitations under the License.
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
+  version = "~> 5.1"
 
   name = "${var.cluster_name}-vpc"
 
@@ -38,10 +38,17 @@ module "vpc" {
   # (https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest#private-versus-intra-subnets)
   intra_subnets = var.vpc_intra_subnet
 
-  # Enable IPv6 for this subnet.
-  enable_ipv6                     = true
-  assign_ipv6_address_on_creation = true
-  create_egress_only_igw          = true
+  # Enable public IPv4 addresses
+  map_public_ip_on_launch = true
+
+  # Enable IPv6
+  enable_ipv6            = true
+  create_egress_only_igw = true
+
+  # Assign IPv6 address on creation to each instance
+  public_subnet_assign_ipv6_address_on_creation  = true
+  private_subnet_assign_ipv6_address_on_creation = true
+  intra_subnet_assign_ipv6_address_on_creation   = true
 
   # Used for calculating IPv6 CIDR based on the following formula:
   # cidrsubnet(aws_vpc.this[0].ipv6_cidr_block, 8, var.private_subnet_ipv6_prefixes[count.index])

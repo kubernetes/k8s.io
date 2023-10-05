@@ -21,7 +21,7 @@ limitations under the License.
 # IAM policy used for the AWS VPC CNI plugin.
 module "vpc_cni_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.11"
+  version = "~> 5.30"
 
   role_name_prefix              = "VPC-CNI-IRSA"
   attach_vpc_cni_policy         = true
@@ -42,7 +42,7 @@ module "vpc_cni_irsa" {
 # IAM policy used for the AWS EBS CSI driver plugin.
 module "ebs_csi_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.11"
+  version = "~> 5.30"
 
   role_name_prefix              = "EBS-CSI-IRSA"
   attach_ebs_csi_policy         = true
@@ -61,7 +61,7 @@ module "ebs_csi_irsa" {
 # IAM policy used for AWS Load Balancer Controller.
 module "aws_load_balancer_controller_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.11"
+  version = "~> 5.30"
 
   role_name_prefix                       = "LBCONTROLLER-IRSA"
   attach_load_balancer_controller_policy = true
@@ -80,7 +80,7 @@ module "aws_load_balancer_controller_irsa" {
 # IAM policy used for Cluster Autoscaler.
 module "cluster_autoscaler_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.11"
+  version = "~> 5.30"
 
   role_name_prefix                 = "AUTOSCALER-IRSA"
   attach_cluster_autoscaler_policy = true
@@ -101,7 +101,7 @@ module "cluster_autoscaler_irsa" {
 # Example policy, uncomment and modify as needed.
 module "secrets_manager_irsa" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.11"
+  version = "~> 5.30"
 
   role_name = "SECRETSMANAGER-IRSA"
   role_policy_arns = {
