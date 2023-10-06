@@ -1,5 +1,5 @@
 /*
-Copyright 2022 The Kubernetes Authors.
+Copyright 2023 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -101,7 +101,7 @@ resource "aws_s3_bucket_replication_configuration" "artifacts-k8s-io" {
 
       status = rule.value.status
 
-      # Set priority, filter and delete_marker_replication to use V2 schema for multiple 
+      # Set priority, filter and delete_marker_replication to use V2 schema for multiple
       # destination bucket rules
       priority = rule.value.priority
 
