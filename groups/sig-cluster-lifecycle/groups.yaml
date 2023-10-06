@@ -407,6 +407,7 @@ groups:
       - ihor@cncf.io
       - justinsb@google.com
       - thockin@google.com
+      - pr-kubekins@kubernetes-jenkins-pull.iam.gserviceaccount.com
 
   - email-id: k8s-infra-staging-kubeadm@kubernetes.io
     name: k8s-infra-staging-kubeadm
