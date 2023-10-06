@@ -1,5 +1,5 @@
 /*
-Copyright 2022 The Kubernetes Authors.
+Copyright 2023 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,189 +14,110 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// prefix prefixes every resource so that the resources
-// can be created without using the same names. Useful
-// for testing and staging
+terraform {
+  required_version = "~> 1.1"
 
-variable "prefix" {
-  type        = string
-  default     = "test-"
-  description = "The prefix for all resources"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
 
-  validation {
-    condition     = can(regex(".*-$|^$", var.prefix))
-    error_message = "The string must end with a hyphen or be empty."
+  backend "s3" {
+    bucket = "artifacts-k8s-io-tfstate"
+    key    = "terraform.tfstate"
+    region = "us-east-2"
   }
 }
 
-
-module "bucket_ap-northeast-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.ap-northeast-1
-  }
-
-  prefix = var.prefix
+# Provider for AWS non-region-specific operations
+provider "aws" {
+  region = "us-east-2"
 }
 
-module "bucket_ap-northeast-2" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.ap-northeast-2
-  }
-
-  prefix = var.prefix
+# Per-region providers
+provider "aws" {
+  alias  = "ap-northeast-1"
+  region = "ap-northeast-1"
 }
 
-module "bucket_ap-northeast-3" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.ap-northeast-3
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "ap-northeast-2"
+  region = "ap-northeast-2"
 }
 
-module "bucket_ap-south-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.ap-south-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "ap-northeast-3"
+  region = "ap-northeast-3"
 }
 
-module "bucket_ap-southeast-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.ap-southeast-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "ap-south-1"
+  region = "ap-south-1"
 }
 
-module "bucket_ap-southeast-2" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.ap-southeast-2
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "ap-southeast-1"
+  region = "ap-southeast-1"
 }
 
-module "bucket_ca-central-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.ca-central-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "ap-southeast-2"
+  region = "ap-southeast-2"
 }
 
-module "bucket_eu-central-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.eu-central-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "ca-central-1"
+  region = "ca-central-1"
 }
 
-module "bucket_eu-north-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.eu-north-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "eu-central-1"
+  region = "eu-central-1"
 }
 
-module "bucket_eu-west-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.eu-west-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "eu-north-1"
+  region = "eu-north-1"
 }
 
-
-module "bucket_eu-west-2" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.eu-west-2
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "eu-west-1"
+  region = "eu-west-1"
 }
 
-module "bucket_eu-west-3" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.eu-west-3
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "eu-west-2"
+  region = "eu-west-2"
 }
 
-module "bucket_sa-east-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.sa-east-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "eu-west-3"
+  region = "eu-west-3"
 }
 
-module "bucket_us-east-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.us-east-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "sa-east-1"
+  region = "sa-east-1"
 }
 
-module "bucket_us-east-2" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.us-east-2
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "us-east-1"
+  region = "us-east-1"
 }
 
-module "bucket_us-west-1" {
-  source = "./s3"
-
-  providers = {
-    aws = aws.us-west-1
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "us-east-2"
+  region = "us-east-2"
 }
 
-module "bucket_us-west-2" {
-  source = "./s3"
+provider "aws" {
+  alias  = "us-west-1"
+  region = "us-west-1"
+}
 
-  providers = {
-    aws = aws.us-west-2
-  }
-
-  prefix = var.prefix
+provider "aws" {
+  alias  = "us-west-2"
+  region = "us-west-2"
 }

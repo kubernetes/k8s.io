@@ -43,7 +43,7 @@ module "eks" {
     {
       # AWS role used by prow to authenticate to build clusters
       # Please, keep it in sync with prow deployment (AWS_ROLE_ARN)
-      rolearn = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
+      rolearn  = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
       username = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
       groups   = ["system:masters"]
     }
