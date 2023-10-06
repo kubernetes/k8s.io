@@ -31,25 +31,25 @@ eks_cluster_viewers = [
 ]
 
 cluster_name               = "prow-build-cluster"
-cluster_version            = "1.25"
-node_group_version_blue    = "1.25"
-node_group_version_green   = "1.25"
-cluster_autoscaler_version = "v1.25.0"
+cluster_version            = "1.28"
+node_group_version_blue    = "1.28"
+node_group_version_green   = "1.28"
+cluster_autoscaler_version = "v1.28.0"
 
 # Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
-node_ami_blue            = "ami-05da66fc7a4319aa8"
+node_ami_blue            = "ami-0d9ec2930add3de7d"
 node_instance_types_blue = ["r5ad.4xlarge"]
 
-node_min_size_blue     = 20
-node_max_size_blue     = 70
-node_desired_size_blue = 20
+node_min_size_blue     = 0
+node_max_size_blue     = 1
+node_desired_size_blue = 0
 
-node_ami_green            = "ami-05da66fc7a4319aa8"
+node_ami_green            = "ami-0d9ec2930add3de7d"
 node_instance_types_green = ["r5ad.4xlarge"]
 
-node_min_size_green     = 0
-node_max_size_green     = 1
-node_desired_size_green = 0
+node_min_size_green     = 20
+node_max_size_green     = 70
+node_desired_size_green = 20
 
 node_volume_size = 100
 
