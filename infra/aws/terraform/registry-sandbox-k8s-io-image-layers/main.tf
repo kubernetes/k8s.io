@@ -14,11 +14,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required Terraform version
-*/
-
 terraform {
-  required_version = "~> 1.1.2"
+  required_version = "~> 1.1"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.12"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.5"
+    }
+  }
+
+  backend "gcs" {
+    bucket = "k8s-infra-tf-aws"
+    prefix = "oci-proxy"
+  }
 }
+
+provider "aws" {
+  region = "us-west-2"
+}
+
+################################################################################
+# Common Data
+################################################################################
+
+data "aws_caller_identity" "current" {}

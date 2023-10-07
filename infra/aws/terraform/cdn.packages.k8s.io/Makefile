@@ -62,8 +62,7 @@ platforms-lock:
 plan: init ## Present plan for creating/updating Terraform resources.
 	$(TF) $@ $(TF_ARGS) \
 		-out=plan.out \
-		-lock-timeout=$(TF_LOCK_TIMEOUT) \
-		-var-file=./terraform.tfvars
+		-lock-timeout=$(TF_LOCK_TIMEOUT)
 
 .PHONY: apply
 apply: ## Create/Update Terraform resources.
@@ -76,8 +75,7 @@ apply: ## Create/Update Terraform resources.
 destroy: init ## Delete Terraform resources.
 	[ $(shell $(TF) workspace show) = "canary" ]
 	$(TF) $@ $(TF_ARGS) \
-		-lock-timeout=$(TF_LOCK_TIMEOUT) \
-		-var-file=./terraform.tfvars
+		-lock-timeout=$(TF_LOCK_TIMEOUT)
 
 .PHONY: fmt
 fmt: ## Format Terraform files.

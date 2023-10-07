@@ -14,17 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "aws_caller_identity" "current" {
-  provider = aws.origin
-}
-
 resource "random_pet" "bucket" {
   length = 5
 }
 
 data "aws_iam_policy_document" "origin_policy" {
-  provider = aws.origin
-
   statement {
     actions = ["s3:*"]
     effect  = "Deny"
@@ -44,7 +38,6 @@ data "aws_iam_policy_document" "origin_policy" {
       aws_s3_bucket.origin.arn,
       "${aws_s3_bucket.origin.arn}/*"
     ]
-
   }
 
   statement {
@@ -63,21 +56,15 @@ data "aws_iam_policy_document" "origin_policy" {
 }
 
 resource "aws_s3_bucket" "origin" {
-  provider = aws.origin
-
   bucket = "${random_pet.bucket.id}-image-layers"
 }
 
 resource "aws_s3_bucket_policy" "allow_public_access" {
-  provider = aws.origin
-
   bucket = aws_s3_bucket.origin.id
   policy = data.aws_iam_policy_document.origin_policy.json
 }
 
 resource "aws_s3_bucket_cors_configuration" "origin" {
-  provider = aws.origin
-
   bucket                = aws_s3_bucket.origin.id
   expected_bucket_owner = data.aws_caller_identity.current.id
 
@@ -90,8 +77,6 @@ resource "aws_s3_bucket_cors_configuration" "origin" {
 }
 
 resource "aws_s3_bucket_versioning" "origin" {
-  provider = aws.origin
-
   bucket                = aws_s3_bucket.origin.id
   expected_bucket_owner = data.aws_caller_identity.current.id
 
@@ -101,8 +86,6 @@ resource "aws_s3_bucket_versioning" "origin" {
 }
 
 resource "aws_s3_bucket_ownership_controls" "origin" {
-  provider = aws.origin
-
   bucket = aws_s3_bucket.origin.bucket
   rule {
     object_ownership = "BucketOwnerEnforced"
@@ -110,8 +93,6 @@ resource "aws_s3_bucket_ownership_controls" "origin" {
 }
 
 resource "aws_s3_bucket_logging" "origin_access_log" {
-  provider = aws.origin
-
   bucket = aws_s3_bucket.origin.id
 
   target_bucket = aws_s3_bucket.access_log.id

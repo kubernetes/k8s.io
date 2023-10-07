@@ -57,8 +57,8 @@ resource "aws_wafv2_web_acl" "cdn_packages_k8s_io" {
         name        = "AWSManagedRulesCommonRuleSet"
         vendor_name = "AWS"
 
-        // Older yum versions (e.g. 3.4.3 used on CentOS 7) are triggering
-        // this rule which makes yum fail with 403 Forbidden.
+        # Older yum versions (e.g. 3.4.3 used on CentOS 7) are triggering
+        # this rule which makes yum fail with 403 Forbidden.
         rule_action_override {
           name = "UserAgent_BadBots_HEADER"
 
@@ -67,8 +67,8 @@ resource "aws_wafv2_web_acl" "cdn_packages_k8s_io" {
           }
         }
 
-        // tdnf used on Photon OS doesn't send a user agent header so
-        // this rule is being triggered which makes tdnf fail with 403 Forbidden.
+        # tdnf used on Photon OS doesn't send a user agent header so
+        # this rule is being triggered which makes tdnf fail with 403 Forbidden.
         rule_action_override {
           name = "NoUserAgent_HEADER"
 
