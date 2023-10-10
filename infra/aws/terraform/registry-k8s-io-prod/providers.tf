@@ -17,13 +17,13 @@ limitations under the License.
 terraform {
   backend "s3" {
     bucket = "k8s-infra-registry-k8s-io-tf-state"
-    key    = "prod"
+    key    = "prod/terraform.tfstate"
     region = "us-east-2"
   }
 
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "5.19.0"
     }
   }
@@ -39,7 +39,7 @@ provider "aws" {
   region = "us-east-2"
 
   assume_role {
-    role_arn = "arn:aws:iam::${local.registry-k8s-io-prod-account-id}:role/OrganizationAccountAccessRole"
+    role_arn = local.assume_role_arn
   }
 }
 
@@ -48,7 +48,7 @@ provider "aws" {
   region = "ca-central-1"
 
   assume_role {
-    role_arn = "arn:aws:iam::${local.registry-k8s-io-prod-account-id}:role/OrganizationAccountAccessRole"
+    role_arn = local.assume_role_arn
   }
 }
 
@@ -58,7 +58,7 @@ provider "aws" {
   region = "us-east-1"
 
   assume_role {
-    role_arn = "arn:aws:iam::${local.registry-k8s-io-prod-account-id}:role/OrganizationAccountAccessRole"
+    role_arn = local.assume_role_arn
   }
 }
 
@@ -67,7 +67,7 @@ provider "aws" {
   region = "us-east-2"
 
   assume_role {
-    role_arn = "arn:aws:iam::${local.registry-k8s-io-prod-account-id}:role/OrganizationAccountAccessRole"
+    role_arn = local.assume_role_arn
   }
 }
 
@@ -76,7 +76,7 @@ provider "aws" {
   region = "us-west-1"
 
   assume_role {
-    role_arn = "arn:aws:iam::${local.registry-k8s-io-prod-account-id}:role/OrganizationAccountAccessRole"
+    role_arn = local.assume_role_arn
   }
 }
 
@@ -85,6 +85,6 @@ provider "aws" {
   region = "us-west-2"
 
   assume_role {
-    role_arn = "arn:aws:iam::${local.registry-k8s-io-prod-account-id}:role/OrganizationAccountAccessRole"
+    role_arn = local.assume_role_arn
   }
 }
