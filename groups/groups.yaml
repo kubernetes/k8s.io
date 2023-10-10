@@ -46,6 +46,7 @@ groups:
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
       - ctadeu@gmail.com # SIG Release
+      - danwinship@redhat.com # SIG Network
       - davanum@gmail.com
       - dawnchen@google.com
       - dbosanac@redhat.com
