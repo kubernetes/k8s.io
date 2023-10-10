@@ -69,9 +69,10 @@ aliases:
     - jeremyot
     - pmorie
   sig-network-leads:
+    - thockin
+  sig-network-leads-emeritus:
     - caseydavenport
     - dcbw
-    - thockin
   sig-node-leads:
     - dchen1107
     - derekwaynecarr
