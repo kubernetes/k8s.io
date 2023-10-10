@@ -368,6 +368,12 @@ function ensure_prow_special_cases {
     ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.viewer" 2>&1 | indent
     ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.secretAccessor" 2>&1 | indent
 
+    color 6 "Special case: ensuring publishing-bot-github-token accessible by k8s-infra-prow-build-trusted"
+    principal="serviceAccount:$(svc_acct_email "k8s-infra-prow-build-trusted" "kubernetes-external-secrets")"
+    secret=$(secret_full_name "${project}" "publishing-bot-github-token")
+    ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.viewer" 2>&1 | indent
+    ensure_secret_role_binding "${secret}" "${principal}" "roles/secretmanager.secretAccessor" 2>&1 | indent
+
     # TODO: remove when cherrypicker is running solely on k8s-infra-prow.k8s.io
     color 6 "Special case: ensuring k8s-infra-cherrypicker-github-token accessible by k8s-prow"
     principal="serviceAccount:kubernetes-external-secrets-sa@k8s-prow.iam.gserviceaccount.com"
