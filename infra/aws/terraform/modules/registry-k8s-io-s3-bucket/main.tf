@@ -16,6 +16,8 @@ limitations under the License.
 
 data "aws_region" "current" {}
 
+data "aws_caller_identity" "current" {}
+
 locals {
   prefix      = "k8s-infra"
   bucket_name = format("%v-registry-k8s-io-%s", local.prefix, data.aws_region.current.name)
@@ -25,11 +27,25 @@ module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "3.15.1"
 
-  bucket = base64sha256(local.bucket_name)
-  acl    = "public-read"
+  bucket = replace(lower(base64sha256(local.bucket_name)), "/[^a-zA-Z0-9-_]/", "")
+
+  attach_deny_insecure_transport_policy = true
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 
   control_object_ownership = true
   object_ownership         = "BucketOwnerEnforced"
+  expected_bucket_owner    = data.aws_caller_identity.current.account_id
+
+  cors_rule = [{
+
+    allowed_methods = ["GET","HEAD"]
+    allowed_origins = ["*"]
+    allowed_headers = ["*"]
+
+  }]
 
   metric_configuration = [
     {
