@@ -40,13 +40,13 @@ groups:
       - bpratt@redhat.com # SIG Testing
       - bridget@kromhout.org # SIG Cloud Provider
       - caniszczyk@linuxfoundation.org
-      - shane@konghq.com
       - cbelu@cloudbasesolutions.com
       - cecilerobertm@gmail.com
       - chiachenk@google.com
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
       - ctadeu@gmail.com # SIG Release
+      - danwinship@redhat.com # SIG Network
       - davanum@gmail.com
       - dawnchen@google.com
       - dbosanac@redhat.com
@@ -119,6 +119,7 @@ groups:
       - saadali@google.com
       - saschagrunert@gmail.com # SIG Release
       - saveetha13@gmail.com
+      - shane@konghq.com # SIG Network
       - shu.mutow@gmail.com
       - siarkowicz@google.com
       - szostok.mateusz@gmail.com
