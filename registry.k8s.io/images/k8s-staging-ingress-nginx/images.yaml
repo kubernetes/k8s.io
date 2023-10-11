@@ -135,6 +135,7 @@
     "sha256:cf77c71aa6e4284925ca2233ddf871b5823eaa3ee000347ae25096b07fb52c57": ["v20230527"]
     "sha256:7b479f66872c0b1cb0f1315e305b8a3e9c6da846c7dd3855db99bc8cfd6791e1": ["v20230623-427f3d2fb"]
     "sha256:9dfb1909b4ffd3e3f046db0684c63aeb41e3b7b9732629c2dae09af4e59fc56e": ["v20230722-86c00a231"]
+    "sha256:34881d62f71e8573fb765c40585dba28a1148206fbbe2c3871ad3f4e8c6e360f": ["v20231011-8b53cabe0"]
 
 # image to run tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/test-runner
@@ -184,6 +185,7 @@
     "sha256:817e3587b2b594f53fd4039767505e818c89b4b7b59261b276d182d09b317481": ["v20230720-24fda9da2"]
     "sha256:ed0044258cf9056ba12a11a875e63d3649aaee2a6982670111a6fad0ec21a585": ["v20230721-40f94ef1b"]
     "sha256:421cda0f65a949b8b67b5e62a45071702d19ed458a3e2ba753171b0e66943210": ["v20230907-5bb82dcb7"]
+    "sha256:ed0dad805c635e66469b4ac376010eebdd0b3fe62d753f58db1632d6f12f451d": ["v20231011-8b53cabe0"]
 
 # custom cfssl image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/cfssl
@@ -232,6 +234,7 @@
     "sha256:ad48881259c03149c39a348ad1662ee2a2e056465b9c08b5ec317eea46a4fdde": ["v20230407"]
     "sha256:5470f0ddcfdaadcb7ccaf3db1b9fd7ac692e86eae2d59d272cd09d20a6a45c53": ["v20230626"]
     "sha256:e6f3ce6cf6d30dbaf02670982b63f231bd00c59eb8ccdd979fecb95764965754": ["v20230721-40f94ef1b"]
+    "sha256:ed8ccdea261e9e055bf0cad80802f24e93d3b5c61cf61c94349e9fecf6720dbe": ["v20231011-8b53cabe0"]
 
 # httpbin image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/httpbin
@@ -250,6 +253,7 @@
     "sha256:cffe47cb15334c17dae63ed6bdfc2b287c43c130ee554735661c0aeb20b84933": ["v20230505-v0.0.1"]
     "sha256:bd6728b770de8425dbbd7937bcadf27373a1ad3c103e4b00801f60d48059e39f": ["v20230626"]
     "sha256:a5df4671eb4c53a44fb83b55a0db9742d6088eb2a2453e0ed468b55da4ffa6df": ["v20230721-40f94ef1b"]
+    "sha256:5519997c2b582c37358cae8956ca3d8855c669d91306adc1c155beb16e8d431b": ["v20231011-8b53cabe0"]
 
 # kube-webhook-certgen
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/kube-webhook-certgen
@@ -268,6 +272,7 @@
     "sha256:543c40fd093964bc9ab509d3e791f9989963021f1e9e4c9c7b6700b02bfb227b": ["v20230407"]
     "sha256:1b6b18750eab3b5ebc00f1a6d96a34bf21138c875f3be6122103669a024fe63f": ["v20230626"]
     "sha256:458b4ef757308c0e4c647856d4c35dabc4c2bcc9a97211861cc8e8772abfa044": ["v20230721-40f94ef1b"]
+    "sha256:a7943503b45d552785aa3b5e457f169a5661fb94d82b8a3373bcd9ebaf9aac80": ["v20231011-8b53cabe0"]
 
 # nginx-errors
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/custom-error-pages
