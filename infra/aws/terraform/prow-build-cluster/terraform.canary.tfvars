@@ -35,19 +35,21 @@ node_group_version_green   = "1.28"
 cluster_autoscaler_version = "v1.28.0"
 
 # Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
-node_ami_blue            = "ami-0d9ec2930add3de7d"
-node_instance_types_blue = ["r5d.xlarge"]
+node_ami_blue = "ami-0d9ec2930add3de7d"
+# TODO(xmudrii-ubuntu): Temporarily bumped instance size from r5d.xlarge to r5ad.2xlarge to be able to run more jobs
+node_instance_types_blue = ["r5ad.2xlarge"]
 
-node_min_size_blue     = 0
-node_max_size_blue     = 1
-node_desired_size_blue = 0
+node_min_size_blue     = 3
+node_max_size_blue     = 3
+node_desired_size_blue = 3
 
-node_ami_green            = "ami-0d9ec2930add3de7d"
-node_instance_types_green = ["r5d.xlarge"]
+node_ami_green = "ami-0d9ec2930add3de7d"
+# TODO(xmudrii-ubuntu): Temporarily bumped instance size from r5d.xlarge to r5ad.2xlarge to be able to run more jobs
+node_instance_types_green = ["r5ad.2xlarge"]
 
-node_min_size_green     = 3
-node_max_size_green     = 3
-node_desired_size_green = 3
+node_min_size_green     = 0
+node_max_size_green     = 1
+node_desired_size_green = 0
 
 node_taints_green = []
 
