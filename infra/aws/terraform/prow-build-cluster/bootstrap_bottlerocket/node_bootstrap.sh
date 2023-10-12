@@ -23,14 +23,6 @@ MNT_DIR="${ROOT_DIR}/mnt/k8s-disks"
 
 mkdir -p "${MNT_DIR}"
 
-## Increase vm.min_free_kbytes from 67584 to 540672 as recommend by the AWS support
-## to try to mitigate https://github.com/kubernetes/k8s.io/issues/5473
-## The general guidance for the vm.min_free_kbytes parameter is to not have it exceed 5%
-## of the total system memory which in the case of an r5d.4xlarge would be about 6400MB.
-## For the sake of testing, let's increase this value from 67584 to 540672 (a 8x increase)
-## to bring this up to about 540MB.
-echo 540672 > ${ROOT_DIR}/proc/sys/vm/min_free_kbytes
-
 ## Set up ephemeral disk (SSD) to be used by containerd and kubelet
 
 # Pick the first NVMe disk. In this case, we care about only one disk,

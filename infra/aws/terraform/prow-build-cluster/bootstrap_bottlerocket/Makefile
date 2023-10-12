@@ -17,7 +17,7 @@
 
 REPO ?= public.ecr.aws/q4o2z4d8/k8s-prow-bottlerocket
 
-TAG ?= v0.0.1
+TAG ?= v0.0.2
 
 docker-build:
 	docker build --platform linux/amd64 -t $(REPO):$(TAG) .
