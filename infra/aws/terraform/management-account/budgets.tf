@@ -41,7 +41,7 @@ resource "aws_budgets_budget" "everything" {
 
   notification {
     comparison_operator        = "GREATER_THAN"
-    threshold                  = "30"
+    threshold                  = "90"
     threshold_type             = "PERCENTAGE"
     notification_type          = "ACTUAL"
     subscriber_email_addresses = ["sig-k8s-infra-leads@kubernetes.io"]
