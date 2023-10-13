@@ -23,6 +23,35 @@ locals {
   bucket_name = format("%v-registry-k8s-io-%s", local.prefix, data.aws_region.current.name)
 }
 
+data "aws_iam_policy_document" "public_bucket_policy" {
+  statement {
+    actions = [
+        "s3:ListBucket"
+    ]
+    effect = "Allow"
+    resources = [
+        module.s3_bucket.s3_bucket_arn
+    ]
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+  }
+  statement {
+    actions = [
+        "s3:GetObject"
+    ]
+    effect = "Allow"
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+    resources = [
+        "${module.s3_bucket.s3_bucket_arn}/*"
+    ]
+  }
+}
+
 module "s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "3.15.1"
@@ -38,6 +67,9 @@ module "s3_bucket" {
   control_object_ownership = true
   object_ownership         = "BucketOwnerEnforced"
   expected_bucket_owner    = data.aws_caller_identity.current.account_id
+
+  attach_policy = true
+  policy = data.aws_iam_policy_document.public_bucket_policy.json
 
   cors_rule = [{
 
