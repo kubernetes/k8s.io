@@ -10,7 +10,8 @@
     },
     {
       "members": [
-        "projectViewer:k8s-release"
+        "projectViewer:k8s-release",
+        "serviceAccount:project-304687256732@storage-transfer-service.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketReader"
     },
@@ -25,7 +26,8 @@
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
         "group:k8s-infra-release-admins@kubernetes.io",
-        "group:k8s-infra-release-editors@kubernetes.io"
+        "group:k8s-infra-release-editors@kubernetes.io",
+        "serviceAccount:project-304687256732@storage-transfer-service.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
     },
