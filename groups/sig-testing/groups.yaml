@@ -22,6 +22,7 @@ groups:
     - amerai@google.com
     - bpratt@redhat.com
     - mcqueenorama@gmail.com
+    - antonio.ojea.garcia@gmail.com
 
   #
   # sig-testing k8s-staging write access
@@ -233,6 +234,7 @@ groups:
     - slchase@google.com
     # sig-testing leads
     # - amerai@google.com # already part of test-infra-oncall
+    - antonio.ojea.garcia@gmail.com
     - bentheelder@google.com
     - skuznets@redhat.com
     - spiffxp@gmail.com
