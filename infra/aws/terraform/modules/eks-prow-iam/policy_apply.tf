@@ -89,7 +89,9 @@ data "aws_iam_policy_document" "eks_apply" {
       "logs:CreateLogGroup",
       "logs:PutRetentionPolicy",
       "logs:TagLogGroup",
-      "s3:PutObject"
+      "s3:PutObject",
+      # TODO(xmudrii-ubuntu): remove after removing ECR repo
+      "ecr-public:*"
     ]
   }
 

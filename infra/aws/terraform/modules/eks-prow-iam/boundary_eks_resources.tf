@@ -45,7 +45,9 @@ data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
       "s3:*",
       "secretsmanager:GetSecretValue",
       "secretsmanager:DescribeSecret",
-      "sts:*"
+      "sts:*",
+      # TODO(xmudrii-ubuntu): remove after removing ECR repo
+      "ecr-public:*"
     ]
 
     resources = ["*"]

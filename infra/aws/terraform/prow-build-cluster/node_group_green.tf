@@ -33,8 +33,30 @@ locals {
 
     iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
-    ami_id                     = var.node_ami_green
-    enable_bootstrap_user_data = true
+    # TODO(xmudrii-ubuntu): Temporarily disabled because it's not supported by Bottlerocket Linux
+    # ami_id                     = var.node_ami_blue
+    # enable_bootstrap_user_data = true
+
+    ami_type             = "BOTTLEROCKET_x86_64"
+    platform             = "bottlerocket"
+    bootstrap_extra_args = <<-EOT
+      # Bottlerocket instances don't have SSH installed by default, but
+      # there's the admin container that can be enabled and that comes
+      # with SSH installed and enabled
+      [settings.host-containers.admin]
+      enabled = true
+
+      # Bootstrap the instance using our bootstrap script embeded in a Docker image
+      [settings.bootstrap-containers.bootstrap]
+      source = "public.ecr.aws/q4o2z4d8/k8s-prow-bottlerocket:v0.0.2"
+      mode = "always"
+      essential = true
+
+      [settings.kernel.sysctl]
+      "fs.inotify.max_user_watches" = "1048576"
+      "fs.inotify.max_user_instances" = "8192"
+      "vm.min_free_kbytes" = "540672"
+    EOT
 
     force_update_version = false
     update_config = {

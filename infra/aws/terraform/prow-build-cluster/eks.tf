@@ -92,7 +92,8 @@ module "eks" {
   } : null
 
   eks_managed_node_group_defaults = {
-    enable_bootstrap_user_data = true
+    # TODO(xmudrii-ubuntu): Temporarily disabled because it's not supported by Bottlerocket Linux
+    # enable_bootstrap_user_data = true
 
     # We are using the IRSA created below for permissions
     # However, we have to deploy with the policy attached FIRST (when creating a fresh cluster)

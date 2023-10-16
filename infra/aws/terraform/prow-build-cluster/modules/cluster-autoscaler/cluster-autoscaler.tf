@@ -390,11 +390,17 @@ resource "kubernetes_manifest" "deployment_kube_system_cluster_autoscaler" {
                 }
               }
               "volumeMounts" = [
+                # TODO(xmudrii-ubuntu): Temporary mount certificates from different known paths
                 {
-                  "mountPath" = "/etc/ssl/certs/ca-certificates.crt"
+                  "mountPath" = "/etc/ssl/certs"
                   "name"      = "ssl-certs"
                   "readOnly"  = true
                 },
+                {
+                  "mountPath" = "/etc/pki"
+                  "name"      = "pki-certs"
+                  "readOnly"  = true
+                }
               ]
             },
           ]
@@ -406,12 +412,21 @@ resource "kubernetes_manifest" "deployment_kube_system_cluster_autoscaler" {
           }
           "serviceAccountName" = "cluster-autoscaler"
           "volumes" = [
+            # TODO(xmudrii-ubuntu): Temporary mount certificates from different known paths
             {
               "hostPath" = {
-                "path" = "/etc/ssl/certs/ca-certificates.crt"
+                "path" = "/etc/ssl/certs"
+                "type" = "Directory"
               }
               "name" = "ssl-certs"
             },
+            {
+              "hostPath" = {
+                "path" = "/etc/pki"
+                "type" = "Directory"
+              }
+              "name" = "pki-certs"
+            }
           ]
         }
       }
