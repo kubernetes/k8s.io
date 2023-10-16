@@ -1,6 +1,7 @@
 - name: cluster-api-vsphere-controller
   dmap:
     "sha256:8ed7fad57a83e73a23638478467d561631b48d812ebecec8e4d3688c798895cd": ["v1.5.7"]
+    "sha256:8cdd002a5cd589c6145b70d6d5724835ac38bffdafd44d67adca60ae4a0b85ef": ["v1.5.8"]
     "sha256:959fca42c2465c7d909e20afd65c2e7504b4eda07c3aa12e0380f785115eb2d3": ["v1.6.2"]
     "sha256:92b58fc9aad232f6e8265729b1ecc6809ee01139e8e7921da132152acbb97f31": ["v1.7.2"]
     "sha256:71db51cfd7301aba9fa75665e169704a06f401577450ed5190ae5c1db3908f3e": ["v1.8.0"]
