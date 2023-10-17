@@ -49,6 +49,9 @@ groups:
       - guyjtempleton@googlemail.com
       - kgolab@google.com
       - bwroblewski@google.com
+      - kwiesmueller@google.com
+      - luizaoj@google.com
+      - rgowman@google.com
 
   #
   # k8s-infra gcs write access
