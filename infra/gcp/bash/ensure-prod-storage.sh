@@ -63,7 +63,8 @@ readonly ALL_PROD_PROJECTS
 # This is a list of all prod GCS buckets, but only their trailing "name".  Each
 # name will get a GCS bucket called "k8s-artifacts-${name}", and write access
 # will be granted to the group "k8s-infra-push-${name}@kubernetes.io", which
-# must already exist.
+# must already exist. Additionally, a service account "k8s-infra-push-bot" will
+# be created which can be used for automation purposes.
 #
 ALL_PROD_BUCKETS=(
     "csi"
@@ -250,13 +251,63 @@ function ensure_all_prod_projects() {
 
 # Create all prod GCS buckets.
 function ensure_all_prod_buckets() {
+    local sa_name="k8s-infra-push-bot"
+    local sa_email="${sa_name}@${PROD_PROJECT}.iam.gserviceaccount.com"
+    local principal="serviceAccount:${sa_email}"
+    local pool="k8s-infra-push-pool"
+    local provider="k8s-infra-push-provider"
+
+    color 6 "Ensuring ${sa_email} exists and can write to prod buckets in project: ${PROD_PROJECT}"
+    ensure_service_account \
+      "${PROD_PROJECT}" \
+      "${sa_name}" \
+      "used by automation to push artifacts to prod buckets in ${PROD_PROJECT}"
+
+    color 6 "Creating workload identity pool: ${pool}"
+    gcloud iam workload-identity-pools create "${pool}" \
+        --project="${PROD_PROJECT}" \
+        --location="global" \
+        --display-name="${pool}"
+
+    color 6 "Creating workload identity provider: ${provider}"
+    gcloud iam workload-identity-pools providers create-oidc "${provider}" \
+        --project="${PROD_PROJECT}" \
+        --location="global" \
+        --workload-identity-pool="${pool}" \
+        --display-name="${provider}" \
+        --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository" \
+        --issuer-uri="https://token.actions.githubusercontent.com"
+
+    pool_id=$(gcloud iam workload-identity-pools describe "${pool}" --project="${PROD_PROJECT}" --location="global" --format="value(name)")
+
+    for repo in "kubernetes/release" "kubernetes-sigs/cri-tools"; do
+        color 6 "Allow '${sa_email}' as workload identity user in repository: ${repo}"
+        gcloud iam service-accounts add-iam-policy-binding "${sa_email}" \
+            --project="${PROD_PROJECT}" \
+            --role="roles/iam.workloadIdentityUser" \
+            --member="principalSet://iam.googleapis.com/${pool_id}/attribute.repository/${repo}"
+    done
+
+    # `workload_identity_provider` value in GitHub Actions YAML
+    color 6 "Extracting workload identity resource name:"
+    gcloud iam workload-identity-pools providers describe "${provider}" \
+        --project="${PROD_PROJECT}" \
+        --location="global" \
+        --workload-identity-pool="${pool}" \
+        --format="value(name)"
+
     for sfx in "${ALL_PROD_BUCKETS[@]}"; do
-        color 6 "Ensuring the GCS bucket: gs://k8s-artifacts-${sfx}"
+        bucket="gs://k8s-artifacts-${sfx}"
+
+        color 6 "Ensuring the GCS bucket: ${bucket}"
         ensure_prod_gcs_bucket \
             "${PROD_PROJECT}" \
-            "gs://k8s-artifacts-${sfx}" \
+            "${bucket}" \
             "k8s-infra-push-${sfx}@kubernetes.io" \
             | indent
+
+        ensure_gcs_role_binding "${bucket}" "${principal}" "objectCreator"
+        ensure_gcs_role_binding "${bucket}" "${principal}" "objectViewer"
     done
 }
 
