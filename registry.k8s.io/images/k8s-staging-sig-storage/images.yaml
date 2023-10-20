@@ -134,6 +134,7 @@
     "sha256:becc53e25b96573f61f7469923a92fb3e9d3a3781732159954ce0d9da07233a2": [ "v6.2.2" ]
     "sha256:5ff5392cb762a41ee9bc4767e3a693249ae08b46a4322f623f24ad6b63dd06b5": [ "v6.2.3" ]
     "sha256:93fbf54dd67f586428ea339743160e1a5110c058afde3c2e824f11fbc6efae53": [ "v6.3.0" ]
+    "sha256:65c5ffde8fe6f68a2f19310cfd789befe7bdd16eedda219d9a0024f8fc68b802": [ "v6.3.1" ]
 - name: hello-populator
   dmap:
     "sha256:99e9f2ac87a85ab9fa283da62464edb643c970a06da7e70c6c5bb6adc001738f": [ "v0.1.0" ]
