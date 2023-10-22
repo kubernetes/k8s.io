@@ -21,6 +21,11 @@ This file defines:
 */
 
 terraform {
+  backend "gcs" {
+    bucket = "k8s-infra-tf-k8s-releases"
+    prefix = "prod/terraform.tfstate"
+  }
+
   required_providers {
     google = {
       source  = "hashicorp/google"
