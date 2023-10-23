@@ -53,7 +53,7 @@ sub vcl_fetch {
 
   # TODO: Drop this when the origin(GCS bucket) is owned by the community
   # See: https://github.com/kubernetes/k8s.io/issues/2396
-  if (req.url.path ~ "^/release/") {
+  if (beresp.status == 200 && req.url.path ~ "^/release/") {
     set beresp.http.Cache-Control = "private, no-store"; # Don't cache in the browser
     set beresp.ttl = 30d;
     set beresp.ttl -= std.atoi(beresp.http.Age);
