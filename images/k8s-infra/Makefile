@@ -22,7 +22,7 @@ TAG ?= $(TAG_DATE_SHA)
 # run
 WHAT ?= /bin/bash
 # cloudbuild
-PROJECT_ID ?= k8s-staging-infra-toolsw
+PROJECT_ID ?= k8s-staging-infra-tools
 GCB_BUCKET ?= gs://$(PROJECT_ID)
 
 ## user-facing targets
