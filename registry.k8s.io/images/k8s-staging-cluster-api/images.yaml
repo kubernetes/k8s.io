@@ -324,6 +324,7 @@
     "sha256:810ed9ffae08ddf70c7094ad851514ebb10fcb19a910edca18822186ac7941a9": ["v1.5.0-rc.1"]
     "sha256:3ce4fd917f6c9bdd3b2bdb6aed31469a9195ee2b2876442edfda86b4cfa63b50": ["v1.5.1"]
     "sha256:ca5e83d24629cddf784213c294ce225c499cf7ea89d190da537a8c2303b81c02": ["v1.5.2"]
+    "sha256:f06196018082ef4a7c5cc086966298ea52f9795a63daf3810f1f5c0f9122c3a6": ["v1.5.3"]
 - name: kubeadm-control-plane-controller
   dmap:
     "sha256:b33cbe3e58aba8c14932257faeb652e5d9a5e396b34412ff51b3f62db8a95758": ["v0.3.0"]
