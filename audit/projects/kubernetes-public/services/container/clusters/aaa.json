@@ -46,7 +46,7 @@
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
   "currentMasterVersion": "1.26.6-gke.1700",
-  "currentNodeVersion": "1.25.10-gke.2700 *",
+  "currentNodeVersion": "1.26.6-gke.1700",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -209,7 +209,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.25.10-gke.2700"
+      "version": "1.26.6-gke.1700"
     },
     {
       "autoscaling": {
@@ -267,7 +267,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.25.10-gke.2700"
+      "version": "1.26.6-gke.1700"
     },
     {
       "autoscaling": {
@@ -326,7 +326,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.25.10-gke.2700"
+      "version": "1.26.6-gke.1700"
     }
   ],
   "releaseChannel": {
