@@ -277,6 +277,7 @@ infra:
       k8s-staging-cip-test:
       k8s-staging-cloud-provider-gcp:
       k8s-staging-cloud-provider-ibm:
+      k8s-staging-cloud-pv-labeler:
       k8s-staging-cluster-addons:
       k8s-staging-cluster-api:
       k8s-staging-cluster-api-aws:

@@ -100,6 +100,16 @@ groups:
       - ygui@google.com
       - jkh@google.com
 
+  - email-id: k8s-infra-staging-cloud-pv-labeler@kubernetes.io
+    name: k8s-infra-staging-cloud-pv-labeler
+    description: |-
+      ACL for staging cloud-pv-labeler
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - andrewsy@google.com
+      - wfender@google.com
+
   #
   # k8s-infra gcs write access
   #
