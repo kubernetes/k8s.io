@@ -65,6 +65,7 @@ restrictions:
       - "^k8s-infra-staging-cloud-provider-gcp@kubernetes.io$"
       - "^k8s-infra-staging-cloud-provider-ibm@kubernetes.io$"
       - "^k8s-infra-staging-kas-network-proxy@kubernetes.io$"
+      - "^k8s-infra-staging-cloud-pv-labeler@kubernetes.io$"
   - path: "sig-cluster-lifecycle/groups.yaml"
     allowedGroups:
       - "^sig-cluster-lifecycle-leads@kubernetes.io$"
