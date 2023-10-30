@@ -43,8 +43,7 @@ groups:
     members:
       - acondor@google.com
       - ahg@google.com
-      - carangog@redhat.com
-      - wangqingcan1990@gmail.com
+      - yuki.iwai.tz@gmail.com
 
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     name: k8s-infra-staging-descheduler
@@ -90,6 +89,21 @@ groups:
       - hweicdl@gmail.com
       - yibzhuang@gmail.com
       - zjwzshiming@gmail.com
+
+  - email-id: kueue-alerts@kubernetes.io
+    name: kueue-alerts
+    description: |-
+      People to be notified about test failures
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - acondor@google.com
+      - ahg@google.com
+      - kerthcet@gmail.com
+      - michalwozniak@google.com
+      - traian_schiau@epam.com
+      - wangqingcan1990@gmail.com
+      - yuki.iwai.tz@gmail.com
 
   #
   # k8s-infra gcs write access
