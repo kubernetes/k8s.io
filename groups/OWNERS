@@ -8,11 +8,9 @@ options:
   no_parent_owners: true
 
 approvers:
-- ameukam
 - cblecker
-- dims
 - thockin
-- spiffxp
+- sig-k8s-infra-leads
 - nikhita
 
 reviewers:

@@ -3,15 +3,13 @@
 options:
   no_parent_owners: true
 approvers:
-  - ameukam
-  - bentheelder
-  - cblecker
-  - dims
-  - munnerz
-  - spiffxp
+  - sig-k8s-infra-leads
   - thockin
 emeritus_approvers:
   - bartsmykla
+  - spiffxp
+  - cblecker
+  - munnerz
 
 labels:
   - area/dns
