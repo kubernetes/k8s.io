@@ -43,9 +43,9 @@ groups:
       ReconcileMembers: "true"
     owners:
       - ameukam@gmail.com
+      - bentheelder@google.com
+      - cy@borg.dev
       - davanum@gmail.com
-      - spiffxp@gmail.com
-      - spiffxp@google.com
       - thockin@google.com
 
   - email-id: sig-k8s-infra@kubernetes.io
@@ -440,9 +440,10 @@ groups:
       ReconcileMembers: "true"
     members:
       - ameukam@gmail.com
+      - bentheelder@google.com
+      - cy@borg.dev
       - davanum@gmail.com
       - ihor@cncf.io
-      - spiffxp@google.com
       - thockin@google.com
 
   - email-id: k8s-infra-gcs-access-logs@kubernetes.io
@@ -465,9 +466,10 @@ groups:
       ReconcileMembers: "true"
     members:
       - ameukam@gmail.com
+      - bentheelder@google.com
       - cblecker@gmail.com
+      - cy@borg.dev
       - davanum@gmail.com
-      - spiffxp@google.com
       - nikhitaraghunath@gmail.com
       - thockin@google.com
 

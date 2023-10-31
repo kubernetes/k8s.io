@@ -237,8 +237,8 @@ func TestK8sInfraRBACGroupConventions(t *testing.T) {
 }
 
 // Enforce conventions for SRC groups
-// - groups can't own other groups, so for groups that should be owned by
-//	 security@kubernetes.io should own, make sure the owners match
+//   - groups can't own other groups, so for groups that should be owned by
+//     security@kubernetes.io should own, make sure the owners match
 func TestSecurityResponseCommitteeGroups(t *testing.T) {
 	pscGroups := []string{
 		"distributors-announce@kubernetes.io",
@@ -306,17 +306,19 @@ func TestHardcodedGroupsForParanoia(t *testing.T) {
 	groups := map[string][]string{
 		"k8s-infra-gcp-org-admins@kubernetes.io": {
 			"ameukam@gmail.com",
+			"bentheelder@google.com",
+			"cy@borg.dev",
 			"davanum@gmail.com",
 			"ihor@cncf.io",
-			"spiffxp@google.com",
 			"thockin@google.com",
 		},
 		"k8s-infra-group-admins@kubernetes.io": {
 			"ameukam@gmail.com",
+			"bentheelder@google.com",
 			"cblecker@gmail.com",
+			"cy@borg.dev",
 			"davanum@gmail.com",
 			"nikhitaraghunath@gmail.com",
-			"spiffxp@google.com",
 			"thockin@google.com",
 		},
 	}
@@ -347,7 +349,8 @@ func TestHardcodedGroupsForParanoia(t *testing.T) {
 // access to the group not only via gmail but also via web (you can see the list
 // and history of threads and also use web interface to operate the group)
 // More info:
-// 	https://developers.google.com/admin-sdk/groups-settings/v1/reference/groups#allowWebPosting
+//
+//	https://developers.google.com/admin-sdk/groups-settings/v1/reference/groups#allowWebPosting
 func TestGroupsWhichShouldSupportHistory(t *testing.T) {
 	groups := map[string]struct{}{
 		"leads@kubernetes.io": {},
