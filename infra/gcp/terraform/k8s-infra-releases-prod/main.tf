@@ -35,11 +35,10 @@ resource "google_project" "project" {
 module "k8s_releases_prod" {
   source                   = "../modules/k8s-releases"
   project_id               = google_project.project.project_id
-  bucket_name              = "k8s-releases"
-  public_access_prevention = "enforced"
+  bucket_name              = "767373bbdcb8270361b96548387bf2a9ad0d48758c35"
 }
 
-resource "google_storage_bucket_iam_member" "s3-backup-bucket" {
+resource "google_storage_bucket_iam_member" "gcs-backup-bucket" {
   bucket     = module.k8s_releases_prod.bucket_name
   role       = "roles/storage.admin"
   member     = "serviceAccount:${data.google_storage_transfer_project_service_account.default.email}"

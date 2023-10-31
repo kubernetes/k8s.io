@@ -43,7 +43,7 @@ resource "google_storage_bucket" "k8s_releases" {
     enabled = true
   }
 
-  public_access_prevention = true
+  public_access_prevention = var.public_access_prevention
 
   lifecycle {
     prevent_destroy = true
