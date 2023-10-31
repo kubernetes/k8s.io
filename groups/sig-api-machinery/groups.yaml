@@ -27,7 +27,10 @@ groups:
   description: |-
     SIG api-machinery general discussion group, for future migration from old googlegroups
   owners:
-    - sig-api-machinery-leads@kubernetes.io
+    - jpbetz@google.com
+    - deads@redhat.com
+    - fbongiovanni@google.com
+    - stefan.schimanski@gmail.com
   settings:
     WhoCanJoin: "ANYONE_CAN_JOIN"
     WhoCanViewGroup: "ANYONE_CAN_VIEW"
