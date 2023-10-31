@@ -161,7 +161,6 @@ groups:
     members:
       - haka.jesse@gmail.com
       - jichenjc@cn.ibm.com
-      - kaydiam+k8s@gmail.com
       - mdulko@redhat.com
 
   - email-id: k8s-infra-conform-s390x-k8s@kubernetes.io

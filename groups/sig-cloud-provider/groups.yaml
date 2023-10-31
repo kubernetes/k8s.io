@@ -39,7 +39,6 @@ groups:
     members:
       - haka.jesse@gmail.com
       - jichenjc@cn.ibm.com
-      - kaydiam+k8s@gmail.com
       - mdulko@redhat.com
 
   - email-id: k8s-infra-staging-provider-azure@kubernetes.io
