@@ -1,0 +1,11 @@
+NAME                                 TITLE
+cloudresourcemanager.googleapis.com  Cloud Resource Manager API
+compute.googleapis.com               Compute Engine API
+oslogin.googleapis.com               Cloud OS Login API
+pubsub.googleapis.com                Cloud Pub/Sub API
+serviceusage.googleapis.com          Service Usage API
+storage-api.googleapis.com           Google Cloud Storage JSON API
+storage-component.googleapis.com     Cloud Storage
+storage.googleapis.com               Cloud Storage API
+storageinsights.googleapis.com       Storage Insights API
+storagetransfer.googleapis.com       Storage Transfer API

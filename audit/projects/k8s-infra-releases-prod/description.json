@@ -1,0 +1,11 @@
+{
+  "createTime": "2023-10-31T21:08:45.149Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-infra-releases-prod",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-infra-releases-prod",
+  "projectNumber": "236990870955"
+}

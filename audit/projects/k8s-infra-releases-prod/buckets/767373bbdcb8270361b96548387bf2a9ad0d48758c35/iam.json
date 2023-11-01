@@ -1,0 +1,43 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:project-236990870955@storage-transfer-service.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.admin"
+    },
+    {
+      "members": [
+        "projectEditor:k8s-infra-releases-prod",
+        "projectOwner:k8s-infra-releases-prod"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-releases-prod",
+        "serviceAccount:project-236990870955@storage-transfer-service.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "projectEditor:k8s-infra-releases-prod",
+        "projectOwner:k8s-infra-releases-prod"
+      ],
+      "role": "roles/storage.legacyObjectOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-releases-prod"
+      ],
+      "role": "roles/storage.legacyObjectReader"
+    },
+    {
+      "members": [
+        "serviceAccount:project-236990870955@storage-transfer-service.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectAdmin"
+    }
+  ]
+}
