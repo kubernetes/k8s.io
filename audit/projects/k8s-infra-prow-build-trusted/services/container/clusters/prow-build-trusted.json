@@ -32,6 +32,9 @@
     "maxPodsPerNode": "110"
   },
   "endpoint": "34.66.53.94",
+  "enterpriseConfig": {
+    "clusterTier": "STANDARD"
+  },
   "id": "8f83dcb7a83817de24081addbc0b670b3dd4be9a9185609a959715f281b89d49",
   "initialClusterVersion": "1.14.10-gke.27",
   "initialNodeCount": 1,
