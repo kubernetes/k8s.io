@@ -30,7 +30,7 @@ groups:
       - jdetiberus@equinix.com
       - jeewan@vmware.com
       - buringerst@vmware.com
-      - kmuldoon@vmware.com
+      - cilliancapi@gmail.com
       - kakaraparthy@vmware.com
       - christi.schlotter@gmail.com
       - furkat.gofurov@suse.com
@@ -210,7 +210,7 @@ groups:
       - sbueringer@gmail.com
       - christi.schlotter@gmail.com
       - jeewan@vmware.com
-      - kmuldoon@vmware.com
+      - cilliancapi@gmail.com
       - ytijani@vmware.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io
@@ -226,7 +226,7 @@ groups:
       - gongz@vmware.com
       - gsatchi@vmware.com
       - jeewan@vmware.com
-      - kmuldoon@vmware.com
+      - cilliancapi@gmail.com
       - muchhals@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
@@ -242,7 +242,7 @@ groups:
       - fpandini@vmware.com
       - sbueringer@gmail.com
       - prignanov@vmware.com
-      - kmuldoon@vmware.com
+      - cilliancapi@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-helm@kubernetes.io
     name: k8s-infra-staging-cluster-api-helm
