@@ -127,6 +127,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - david.njumani@gmail.com
+      - guillermogastonlorente@gmail.com
       - rohityadav89@gmail.com
 
   - email-id: k8s-infra-staging-capi-docker@kubernetes.io
