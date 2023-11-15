@@ -7,3 +7,7 @@
 www:
   type: CNAME
   value: kubernetes-contributor.netlify.app.
+
+cdn.dl-sandbox:
+  type: TXT
+  value: "fastly-domain-delegation-fddelt714381-11-15-23"
