@@ -29,6 +29,7 @@ groups:
       - justinsb@google.com
       - kim.andrewsy@gmail.com
       - nturner4@gmail.com
+      - cartermckinnon@gmail.com
 
   - email-id: k8s-infra-staging-provider-os@kubernetes.io
     name: k8s-infra-staging-provider-os
