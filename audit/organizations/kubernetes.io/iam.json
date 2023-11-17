@@ -21,6 +21,7 @@
     },
     {
       "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io",
         "user:ihor@cncf.io",
         "user:twaggoner@linuxfoundation.org"
       ],
