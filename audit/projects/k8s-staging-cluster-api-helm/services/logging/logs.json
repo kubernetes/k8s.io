@@ -1,4 +1,3 @@
 [
-  "projects/k8s-staging-cluster-api-helm/logs/cloudaudit.googleapis.com%2Factivity",
   "projects/k8s-staging-cluster-api-helm/logs/cloudbuild"
 ]
