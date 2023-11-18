@@ -25,12 +25,14 @@ groups:
       - nikitaraghunath@gmail.com
       - spiffxp@gmail.com
     members:
+      - AnaMMedina21@gmail.com # CoCC
       - acondor@google.com
       - adolfo.garcia@uservers.net # SIG Release
       - ahg@google.com
       - alarcj137@gmail.com
       - amerai@google.com
       - ameukam@gmail.com
+      - amim.knabben@gmail.com # SIG Windows
       - antheabjung@gmail.com
       - antonio.ojea.garcia@gmail.com
       - apelisse@google.com
@@ -51,11 +53,11 @@ groups:
       - davanum@gmail.com
       - dawnchen@google.com
       - dbosanac@redhat.com
+      - dcampau1@gmail.com
       - dcbw@redhat.com
       - ddebroy@gmail.com
       - deads@redhat.com
       - decarr@redhat.com
-      - dcampau1@gmail.com
       - dgrisonn@redhat.com
       - divya.mohan0209@gmail.com
       - eddiezane@gmail.com
@@ -67,6 +69,7 @@ groups:
       - guyjtempleton@googlemail.com
       - gveronicalg@gmail.com # SIG Release
       - hankang@google.com
+      - hilliary.lipsig@gmail.com # CoCC
       - hpandey@pivotal.io
       - hweicdl@gmail.com
       - ian@coldwater.io
@@ -78,6 +81,7 @@ groups:
       - jeef111x@gmail.com
       - jeremy.r.rickard@gmail.com # SIG Release
       - jeremyot@google.com
+      - jim@nirmata.com
       - jonathan.berkhahn@gmail.com
       - jpbetz@google.com
       - jsafrane@redhat.com
@@ -116,34 +120,31 @@ groups:
       - priyankasaggu11929@gmail.com
       - prydonius@gmail.com
       - quinton@hoole.biz
+      - rficcaglia@gmail.com
+      - ricardo.katz@gmail.com # Sig Network Sub Project Ingress-nginx
       - rita.z.zhang@gmail.com
       - rlejano@gmail.com
+      - s.kanzhelev@gmail.com # SIG Node
       - saadali@google.com
       - saschagrunert@gmail.com # SIG Release
       - saveetha13@gmail.com
       - shane@konghq.com # SIG Network
       - shu.mutow@gmail.com
       - siarkowicz@google.com
+      - strong.james.e@gmail.com # Sig Network Sub Project Ingress-nginx
       - szostok.mateusz@gmail.com
-      - s.kanzhelev@gmail.com # SIG Node
       - tabitha.c.sable@gmail.com
-      - timallclair@gmail.com
       - tasha.drew@gmail.com
       - theenjeru@gmail.com
       - thockin@google.com
       - tim@scalefactory.com
+      - timallclair@gmail.com
       - timothysc@gmail.com
       - tpepper@vmware.com
-      - vincepri@vmware.com
       - vince@vincepri.com
+      - vincepri@vmware.com
       - wfender@google.com
       - wojtekt@google.com
+      - xandergrzyw@gmail.com # CoCC
       - xingyang105@gmail.com
       - ynli@google.com
-      - jim@nirmata.com
-      - rficcaglia@gmail.com
-      - strong.james.e@gmail.com # Sig Network Sub Project Ingress-nginx
-      - ricardo.katz@gmail.com # Sig Network Sub Project Ingress-nginx
-      - xandergrzyw@gmail.com # CoCC
-      - hilliary.lipsig@gmail.com # CoCC
-      - AnaMMedina21@gmail.com # CoCC
