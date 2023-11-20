@@ -256,6 +256,7 @@
     "sha256:c6f972cf23fd437237fdc0e0beb97755d62a9ad4a21564766e2e125952acbc24": [ "v6.2.3" ]
     "sha256:0576eac2184b2bca88f30ada56dfec1e98fa8045e27ecb6aedff23c48534a3ca": [ "v6.3.0" ]
     "sha256:ce6ca3c0e30b19477896dafff55f9f4b18ea59dfb683da85c62700e215e8107b": [ "v6.3.1" ]
+    "sha256:73b4160cb0154c0acbafe7ae6acd4091a4289e8f300867e84522b0ae66660876": [ "v6.3.2" ]
 - name: snapshot-validation-webhook
   dmap:
     "sha256:8bfd19dc57bb86ca4438b9592578a1a9afaf559f22e63a9b308b8b2be8d789ad": [ "v3.0.0" ]
@@ -277,6 +278,7 @@
     "sha256:398e914b144620615567750aebde00ef7f9cc44c113e1a1da855e1f6ebe4bd06": [ "v6.2.3" ]
     "sha256:cf0987b30811d7140846ea2c7793b8311bfbda6b77a34720fd0839f6013c356a": [ "v6.3.0" ]
     "sha256:4b700837359df71cda01027c7c7d6c889ad8d17de113984f9be3eba4fe679e1f": [ "v6.3.1" ]
+    "sha256:4727228c504cd5b9799b9638deefb7711b2df0c10acc9c7f7219e7b0f7f8d6a5": [ "v6.3.2" ]
 - name: volume-data-source-validator
   dmap:
     "sha256:a4482344a693258e2cb31b32fa35d1f3cc414b546c2ebf7154fb87f15322f5db": [ "v0.1.0" ]
