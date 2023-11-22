@@ -17,17 +17,19 @@ limitations under the License.
 aws_account_id = "468814281478"
 
 eks_cluster_admins = [
+  "bentheelder",
+  "koray",
   "pprzekwa",
   "wozniakjan",
-  "xmudrii",
-  "bentheelder"
+  "xmudrii"
 ]
 
 eks_cluster_viewers = [
+  "bentheelder",
+  "koray",
   "pprzekwa",
   "wozniakjan",
-  "xmudrii",
-  "bentheelder"
+  "xmudrii"
 ]
 
 cluster_name               = "prow-build-cluster"
