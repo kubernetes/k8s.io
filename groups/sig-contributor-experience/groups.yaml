@@ -130,12 +130,8 @@ groups:
     description: |
       Group dedicated to improving the Kubernetes contributor experience.
     owners:
-      - cblecker@gmail.com
-      - jberkus@redhat.com
       - kaslin.fields@gmail.com
-      - killen.bob@gmail.com
       - madhav.jiv@gmail.com
-      - nikitaraghunath@gmail.com
       - pal.nabarun95@gmail.com
       - priyankasaggu11929@gmail.com
     settings:
@@ -154,12 +150,8 @@ groups:
     name: sig-contribex-leads
     description: SIG ContribEx Leads
     owners:
-      - cblecker@gmail.com
-      - jberkus@redhat.com
       - kaslin.fields@gmail.com
-      - killen.bob@gmail.com
       - madhav.jiv@gmail.com
-      - nikitaraghunath@gmail.com
       - pal.nabarun95@gmail.com
       - priyankasaggu11929@gmail.com
     settings:
