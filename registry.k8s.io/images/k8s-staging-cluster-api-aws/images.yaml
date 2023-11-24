@@ -66,6 +66,7 @@
     "sha256:863ec7ea01f887b1af3c34e420d595e75da76d536326ac2f5e87010c0e1d49d3": ["v2.2.2"]
     "sha256:dcfafb1adf45aba164cf0eb1a0c6ce06a47095d5e36de4d3877b99b695f1b8fc": ["v2.2.3"]
     "sha256:c905a460b1b9335abe3f4490192b8fbbc8309e620d24d8e288e77b878b58d8f8": ["v2.2.4"]
+    "sha256:f074cdf92cf65680d72c7c13e2a8927162338348a464e651cf003c54326dc55c": ["v2.3.0"]
 - name: cluster-api-aws-controller-amd64
   dmap:
     "sha256:0bd88bcba94f800715fca33ffc4bde430646a7c797237313cbccdcdef9f80f2d": ["v0.4.0"]
