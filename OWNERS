@@ -3,15 +3,17 @@
 approvers:
 - ameukam # sig-k8s-infra chair
 - BenTheElder # sig-k8s-infra TL
-- cblecker # sig-contribex tl
 - dims # sig-k8s-infra chair
-- nikhita # sig-contribex tl
+- MadhavJivrajani # sig-contribex TL
+- Priyankasaggu11929 # sig-contribex TL
 - thockin
 - upodroid # sig-k8s-infra TL
 
 emeritus_approvers:
-- mikedanese
 - bartsmykla
+- cblecker
+- mikedanese
+- nikhita
 - spiffxp
 
 labels:
