@@ -51,7 +51,7 @@ resource "google_storage_hmac_key" "fastly_reader_key" {
 
 resource "google_storage_bucket_iam_member" "fastly_reader" {
   bucket     = module.k8s_releases_prod.bucket_name
-  role = "roles/storage.viewer"
+  role = "roles/storage.objectViewer"
   member = "serviceAccount:${google_service_account.fastly_reader.email}"
   depends_on = [module.k8s_releases_prod]
 }
