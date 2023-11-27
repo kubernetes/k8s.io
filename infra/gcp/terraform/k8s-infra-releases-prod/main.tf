@@ -38,6 +38,24 @@ module "k8s_releases_prod" {
   bucket_name              = "767373bbdcb8270361b96548387bf2a9ad0d48758c35"
 }
 
+resource "google_service_account" "fastly_reader" {
+  project = google_project.project.project_id
+  account_id = "fastly-reader"
+  description = "Used by Fastly for read-only actions against the bucket"
+}
+
+resource "google_storage_hmac_key" "fastly_reader_key" {
+  project = google_project.project.project_id
+  service_account_email = google_service_account.fastly_reader.email
+}
+
+resource "google_storage_bucket_iam_member" "fastly_reader" {
+  bucket     = module.k8s_releases_prod.bucket_name
+  role = "roles/storage.viewer"
+  member = "serviceAccount:${google_service_account.fastly_reader.email}"
+  depends_on = [module.k8s_releases_prod]
+}
+
 resource "google_storage_bucket_iam_member" "gcs-backup-bucket" {
   bucket     = module.k8s_releases_prod.bucket_name
   role       = "roles/storage.admin"
