@@ -132,6 +132,7 @@ groups:
       - hh@ii.coop
       - riaan@ii.coop
       - stephen@ii.coop
+      - caleb@ii.coop
 
   # Owners of the GCP projects:
   # - k8s-infra-oci-proxy
