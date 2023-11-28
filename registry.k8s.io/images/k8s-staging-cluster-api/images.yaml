@@ -138,6 +138,7 @@
     "sha256:d2be0199294ec3f7a1dc2168cc00a3967420dd580818caf4d980c2f3172d8892": ["v1.6.0-beta.0"]
     "sha256:430e7b3e6dfad659bd16e4e4aeba29d6a7175d7fd1337b3e7e04c149945dfca8": ["v1.6.0-beta.1"]
     "sha256:6b00ea4da9df396ca9f68df1781666581e5f1ff8b613a1512c61298e24a1b902": ["v1.6.0-rc.0"]
+    "sha256:407e1064cb43938e18c5194fd0d89721a0b0cc2587a70afe49b7bc711ddca74d": ["v1.6.0-rc.1"]
 - name: cluster-api-controller-amd64
   dmap:
     "sha256:ea0e994082f56bf7713d36002abfbffbad43b2c257b89842b3e3694c987d3a07": ["v0.2.0"]
@@ -212,6 +213,7 @@
     "sha256:9ae1117e86cbb349924dc64f62adfad9a1fc4aa9b3da47fa3530b67919c961d7": ["v1.6.0-beta.0"]
     "sha256:9e45638b363c9b7380ad92d9ff98fe653b0e72df4fa608fbf61f126b281b5da6": ["v1.6.0-beta.1"]
     "sha256:d39d7538f8082d2f45012a2eea95d8271176986fd98fb35ce2bf1e84462096bb": ["v1.6.0-rc.0"]
+    "sha256:960c7425506d9e379446e4d3e11eef45e1d764f61296fd5c22efcea98b7f9afd": ["v1.6.0-rc.1"]
 - name: kubeadm-bootstrap-controller
   dmap:
     "sha256:78382ca2ed1805f6c8882c057a3d4991b12bc5eb54151720b6b30aa4ff89da61": ["v0.3.0"]
@@ -336,6 +338,7 @@
     "sha256:113a855b145d29e3ab9c6e02db812c12684a3581e5abea1a764d9cdec22d9ca4": ["v1.6.0-beta.0"]
     "sha256:891b613fa4ebfcb97b41ced4729c921bc2731b2f87e5cbc599835f7c9367b5e7": ["v1.6.0-beta.1"]
     "sha256:110ee4b7d37cd2e838425bd39173f7350d2f960ce02b9033cc971a6ec9e8abf9": ["v1.6.0-rc.0"]
+    "sha256:88e1f1f72a7c182fcda98568240051ce1bfdc4cdf5e6c30345f39e23f2a85e41": ["v1.6.0-rc.1"]
 - name: kubeadm-control-plane-controller
   dmap:
     "sha256:b33cbe3e58aba8c14932257faeb652e5d9a5e396b34412ff51b3f62db8a95758": ["v0.3.0"]
@@ -460,6 +463,7 @@
     "sha256:c1e6ad362208239d1c1013e15b0fe782c314e9e1b90e99a4768c446d39ff475d": ["v1.6.0-beta.0"]
     "sha256:bafffb6bf900f4983f7bf3ba05a6b9a595605a6ed4df30143a99777a7d7c7934": ["v1.6.0-beta.1"]
     "sha256:d9158f920a39076b3a393299859b43e1e8e4ade8d211deac759c51fb711fd83a": ["v1.6.0-rc.0"]
+    "sha256:2bfd63c2efee3b3377b1ac2aa2eb9745e3c54c93180d0d16297eccd8c482d53f": ["v1.6.0-rc.1"]
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
