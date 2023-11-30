@@ -269,6 +269,7 @@ infra:
       k8s-staging-capi-cloudstack:
       k8s-staging-capi-docker:
       k8s-staging-capi-ibmcloud:
+      k8s-staging-capi-ipam-ic:
       k8s-staging-capi-kubeadm:
       k8s-staging-capi-openstack:
       k8s-staging-capi-vsphere:
