@@ -73,7 +73,7 @@ module "eks" {
 
   eks_managed_node_group_defaults = {
     ami_type       = "AL2_x86_64"
-    instance_types = ["m6i.large", "m5.large", "m5n.large", "m5zn.large"]
+    instance_types = ["m7i.large", "m5.large", "m5n.large", "m5zn.large"]
 
     iam_role_attach_cni_policy = true
   }
@@ -99,7 +99,7 @@ module "eks" {
       }
 
       capacity_type  = "ON_DEMAND"
-      instance_types = ["r6i.2xlarge"]
+      instance_types = ["r7i.2xlarge"]
       ami_type       = "BOTTLEROCKET_x86_64"
       platform       = "bottlerocket"
 
