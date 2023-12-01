@@ -142,6 +142,24 @@ module "eks" {
   })
 }
 
+resource "aws_eks_addon" "eks_pod_identity" {
+  provider = aws.kops-local-ci
+
+  cluster_name                = module.eks.cluster_name
+  addon_name                  = "eks-pod-identity-agent"
+  addon_version               = "v1.0.0-eksbuild.1"
+  resolve_conflicts_on_update = "OVERWRITE"
+}
+
+resource "aws_eks_pod_identity_association" "kops_prow_build" {
+  provider = aws.kops-local-ci
+
+  cluster_name    = module.eks.cluster_name
+  namespace       = "test-pods"
+  service_account = "prowjob-default-sa"
+  role_arn        = aws_iam_role.eks_pod_identity_role.arn
+}
+
 
 module "vpc_cni_irsa" {
   providers = { aws = aws.kops-infra-ci }
