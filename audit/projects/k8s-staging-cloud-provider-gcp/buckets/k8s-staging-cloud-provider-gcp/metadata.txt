@@ -6,13 +6,13 @@ gs://k8s-staging-cloud-provider-gcp/ :
 	Logging configuration:		Present
 	Website configuration:		None
 	CORS configuration: 		None
-	Lifecycle configuration:	Present
+	Lifecycle configuration:	None
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 17 Jul 2020 21:53:02 GMT
-	Time updated:			Thu, 09 Mar 2023 17:28:46 GMT
-	Metageneration:			28
+	Time updated:			Fri, 01 Dec 2023 17:57:21 GMT
+	Metageneration:			29
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

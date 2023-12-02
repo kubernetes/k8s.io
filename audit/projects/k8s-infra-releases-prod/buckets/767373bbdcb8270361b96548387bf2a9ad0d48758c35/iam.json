@@ -38,6 +38,12 @@
         "serviceAccount:project-236990870955@storage-transfer-service.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "serviceAccount:fastly-reader@k8s-infra-releases-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectViewer"
     }
   ]
 }

@@ -17,6 +17,7 @@ logging.googleapis.com               Cloud Logging API
 monitoring.googleapis.com            Cloud Monitoring API
 networkconnectivity.googleapis.com   Network Connectivity API
 oslogin.googleapis.com               Cloud OS Login API
+policyanalyzer.googleapis.com        Policy Analyzer API
 pubsub.googleapis.com                Cloud Pub/Sub API
 secretmanager.googleapis.com         Secret Manager API
 servicenetworking.googleapis.com     Service Networking API
