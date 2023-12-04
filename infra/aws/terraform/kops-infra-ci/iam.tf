@@ -53,3 +53,37 @@ resource "aws_iam_role" "google_prow_trust_role" {
   max_session_duration = 43200
   assume_role_policy   = data.aws_iam_policy_document.google_prow_trust_policy.json
 }
+
+
+// Leveraging EKS Pod Identity feature allow kOps prowjobs to run E2E tests
+data "aws_iam_policy_document" "eks_pod_identity_policy" {
+  provider = aws.kops-infra-ci
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["pods.eks.amazonaws.com"]
+    }
+
+    actions = [
+      "sts:AssumeRole",
+      "sts:TagSession"
+    ]
+  }
+}
+
+resource "aws_iam_role" "eks_pod_identity_role" {
+  provider = aws.kops-infra-ci
+
+  name               = "EKSPodIdentityRole"
+  assume_role_policy = data.aws_iam_policy_document.eks_pod_identity_policy.json
+}
+
+resource "aws_iam_role_policy_attachment" "eks_pod_identity_policy" {
+  provider = aws.kops-infra-ci
+
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  role       = aws_iam_role.eks_pod_identity_role.name
+}
