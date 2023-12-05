@@ -121,6 +121,14 @@ _952ed01ad08f0d53cf3b05e61bd7b6e6.prod-cdn.packages:
   type: CNAME
   value: _ed9dd4aee039559895c2c55de602691e.vrcmzfbvtx.acm-validations.aws.
 
+# Okta custom domain, auth.k8s.io for kubernetes.okta.com
+auth:
+  type: CNAME
+  value: kubernetes.customdomains.okta.com.
+_acme-challenge.auth:
+  type: TXT
+  value: -4bYksesL3_5_RAceZwCCgcRtrsErNj1sWCCnDtwMcU
+
 # artifacts.k8s.io is for the (under development) binary artifact serving.
 # The IP points to a GCLB in front of CloudRun in the k8s-infra-porche-prod project.
 artifacts:
