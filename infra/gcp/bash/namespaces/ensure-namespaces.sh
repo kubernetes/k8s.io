@@ -149,6 +149,8 @@ ALL_APPS=(
     kettle
     k8s-io-prod
     k8s-io-canary
+    k8s-io-packages-prod
+    k8s-io-packages-canary
     kubernetes-external-secrets
     perfdash
     prow
