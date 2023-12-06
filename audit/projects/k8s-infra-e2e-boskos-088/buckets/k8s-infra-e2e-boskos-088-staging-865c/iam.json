@@ -12,6 +12,12 @@
         "projectViewer:k8s-infra-e2e-boskos-088"
       ],
       "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "allUsers"
+      ],
+      "role": "roles/storage.objectViewer"
     }
   ]
 }
