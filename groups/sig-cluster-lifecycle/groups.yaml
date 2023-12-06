@@ -28,10 +28,10 @@ groups:
       - naadir@randomvariable.co.uk
       - detiber@gmail.com
       - jdetiberus@equinix.com
-      - jeewan@vmware.com
-      - buringerst@vmware.com
+      - naadir.jeewa@broadcom.com
+      - stefan.buringer@broadcom.com
       - cilliancapi@gmail.com
-      - kakaraparthy@vmware.com
+      - yuvaraj-balaji-rao.kakaraparthi@broadcom.com
       - christi.schlotter@gmail.com
       - furkat.gofurov@suse.com
       # CAPI release-1.5 team members
@@ -210,7 +210,7 @@ groups:
     members:
       - sbueringer@gmail.com
       - christi.schlotter@gmail.com
-      - jeewan@vmware.com
+      - naadir.jeewa@broadcom.com
       - cilliancapi@gmail.com
       - ytijani@vmware.com
 
@@ -222,13 +222,13 @@ groups:
       ReconcileMembers: "true"
       WhoCanPostMessage: "ANYONE_CAN_POST"
     members:
-      - buringerst@vmware.com
+      - stefan.buringer@broadcom.com
       - christi.schlotter@gmail.com
-      - gongz@vmware.com
-      - gsatchi@vmware.com
-      - jeewan@vmware.com
+      - gong.zhang@broadcom.com
+      - gab.satchi@broadcom.com
+      - naadir.jeewa@broadcom.com
       - cilliancapi@gmail.com
-      - muchhals@vmware.com
+      - sagar.muchhal@broadcom.com
 
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     name: k8s-infra-staging-cluster-api
@@ -240,7 +240,7 @@ groups:
       - alberto.garcial@hotmail.com
       - cecilerobertm@gmail.com
       - davanum@gmail.com
-      - fpandini@vmware.com
+      - fabrizio.pandini@gmail.com
       - sbueringer@gmail.com
       - prignanov@vmware.com
       - cilliancapi@gmail.com
@@ -253,7 +253,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - jt572@cornell.edu
-      - fpandini@vmware.com
+      - fabrizio.pandini@gmail.com
       - cecilerobertm@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
