@@ -215,7 +215,7 @@ groups:
     members:
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
       - k8s-infra-release-editors@kubernetes.io
-  
+
   - email-id: k8s-infra-rbac-k8s-io-packages-prod@kubernetes.io
     name: k8s-infra-rbac-k8s-io-packages-prod
     description: |-
