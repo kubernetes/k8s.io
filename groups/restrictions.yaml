@@ -247,6 +247,8 @@ restrictions:
       - "^k8s-infra-porche-admins@kubernetes.io$"
       - "^k8s-infra-rbac-cert-manager@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-canary@kubernetes.io$"
+      - "^k8s-infra-rbac-k8s-io-packages-canary@kubernetes.io$"
+      - "^k8s-infra-rbac-k8s-io-packages-prod@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-prod@kubernetes.io$"
       - "^k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io$"
       - "^k8s-infra-sandbox-capa@kubernetes.io$"
