@@ -26,7 +26,7 @@ spec:
       volumes:
       - name: nginx
         configMap:
-          name: nginx
+          name: nginx-packages
           # Map all keys to files.
       containers:
       - name: nginx
