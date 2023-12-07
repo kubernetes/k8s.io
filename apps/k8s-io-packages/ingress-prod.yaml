@@ -8,7 +8,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: k8s-io-packages-ingress-prod
     kubernetes.io/ingress.class: gce
-    networking.gke.io/managed-certificates: k8s-io-prod
+    networking.gke.io/managed-certificates: k8s-io-packages
 spec:
   defaultBackend:
     service:
