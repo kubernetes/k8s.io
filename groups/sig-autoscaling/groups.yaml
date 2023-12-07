@@ -20,6 +20,25 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
 
+  - email-id: sig-autoscaling-karpenter-leads@kubernetes.io
+    name: sig-autoscaling-karpenter-leads
+    description: |-
+      Karpenter Subproject leads
+    owners:
+      - ellistarn@gmail.com
+      - jonathan.innis.ji@gmail.com
+      - toddneal@protonmail.com
+      - bmwagner10@gmail.com
+      - ntranicholas@gmail.com
+      - alex.leites@gmail.com
+      - amanueng@gmail.com
+      - dealj@umich.edu
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
   #
   # k8s-staging write access for SIG-owned subprojects
   #
