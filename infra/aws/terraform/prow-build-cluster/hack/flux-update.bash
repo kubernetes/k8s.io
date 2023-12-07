@@ -65,6 +65,20 @@ flux create hr node-termination-handler \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/kube-system/flux-hr-node-termination-handler.yaml
 
+boilerplate > ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
+flux create source helm kubecost \
+    --url https://kubecost.github.io/cost-analyzer \
+    --interval=${sync_interval} \
+    --export >> ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
+
+boilerplate > ${resources_dir}/kubecost/flux-hr-kubecost.yaml
+flux create helmrelease kubecost --chart cost-analyzer \
+  --source HelmRepository/kubecost \
+  --chart-version 1.107.1 \
+  --namespace kubecost \
+  --values-from=ConfigMap/kubecost-values \
+  --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
+
 # This list contains names of folders inside ./resources directory
 # that are used for generating FluxCD kustomizations.
 kustomizations=(
