@@ -93,14 +93,14 @@ apt:
   value: redirect.k8s.io.
 legacy.apt:
   - type: A
-    value: 34.107.249.95
-  # - type: AAAA
-  #   value: "2600:1901:0:a15f::"
+    value: 34.128.166.11
+  - type: AAAA
+    value: "2600:1901:0:95e7::"
 legacy.yum:
   - type: A
-    value: 34.107.249.95
-  # - type: AAAA
-  #   value: "2600:1901:0:a15f::"
+    value: 34.128.166.11
+  - type: AAAA
+    value: "2600:1901:0:95e7::"
 yum:
   type: CNAME
   value: redirect.k8s.io.
