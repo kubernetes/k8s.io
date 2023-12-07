@@ -213,8 +213,18 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
-      - k8s-infra-release-editors@kubernetes.io
+      # Access is given to:
+      #   - SIG Release Leads
+      #   - @xmudrii (working on KEP-1731 and official packages implementation)
+      # We must use emails here instead of groups, because groups are not
+      # recongizned by RBAC
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - mudrinic.mare@gmail.com
+      - saschagrunert@gmail.com
 
   - email-id: k8s-infra-rbac-k8s-io-packages-prod@kubernetes.io
     name: k8s-infra-rbac-k8s-io-packages-prod
@@ -224,8 +234,18 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
-      - k8s-infra-release-editors@kubernetes.io
+      # Access is given to:
+      #   - SIG Release Leads
+      #   - @xmudrii (working on KEP-1731 and official packages implementation)
+      # We must use emails here instead of groups, because groups are not
+      # recongizned by RBAC
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - mudrinic.mare@gmail.com
+      - saschagrunert@gmail.com
 
   - email-id: k8s-infra-rbac-k8s-io-prod@kubernetes.io
     name: k8s-infra-rbac-k8s-io-prod
