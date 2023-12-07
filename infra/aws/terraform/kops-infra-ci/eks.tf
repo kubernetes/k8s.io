@@ -119,20 +119,13 @@ module "eks" {
         }
       }
 
-      # NVMe instance store volumes are automatically enumerated and assigned a device
-      pre_bootstrap_user_data = <<-EOT
-        cat <<-EOF > /etc/profile.d/bootstrap.sh
-        #!/bin/sh
-
-        # Configure NVMe volumes in RAID0 configuration
-        # https://github.com/awslabs/amazon-eks-ami/blob/056e31f8c7477e893424abce468cb32bbcd1f079/files/bootstrap.sh#L35C121-L35C126
-        # Mount will be: /mnt/k8s-disks
-        export LOCAL_DISKS='raid0'
-        EOF
-
-        # Source extra environment variables in bootstrap script
-        sed -i '/^set -o errexit/a\\nsource /etc/profile.d/bootstrap.sh' /etc/eks/bootstrap.sh
-      EOT
+      bootstrap_extra_args = <<-EOT
+      # Bootstrap the instance using our bootstrap script embeded in a Docker image
+      [settings.bootstrap-containers.bootstrap]
+      source = "${aws_ecr_repository.repo.repository_url}:v0.0.1"
+      mode = "always"
+      essential = true
+    EOT
 
       metadata_options = {
         http_endpoint               = "enabled"
