@@ -88,6 +88,7 @@ module "vpc" {
   flow_log_cloudwatch_log_group_retention_in_days = 30
 
   enable_dns_hostnames = true
+  enable_dns_support   = true
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = 1
@@ -146,6 +147,15 @@ module "vpc_endpoints" {
         tags                = { Name = "${local.prefix}-${service}" }
       }
   })
+
+  tags = var.tags
+}
+
+// Required by kOps CI
+resource "aws_route53_zone" "hosted_zone" {
+  provider = aws.kops-local-ci
+
+  name = "tests-kops-aws.k8s.io"
 
   tags = var.tags
 }
