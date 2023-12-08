@@ -6,3 +6,10 @@ test-cncf-aws:
   - ns-1825.awsdns-36.co.uk.
   - ns-265.awsdns-33.com.
   - ns-687.awsdns-21.net.
+tests-kops-aws:
+  type: NS
+  values:
+  - ns-319.awsdns-39.com.
+  - ns-557.awsdns-05.net.
+  - ns-1091.awsdns-08.org.
+  - ns-1922.awsdns-48.co.uk.
