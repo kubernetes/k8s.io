@@ -19,7 +19,7 @@ module "eks" {
   source    = "terraform-aws-modules/eks/aws"
   version   = "19.16.0"
 
-  cluster_name                   = "${local.prefix}-prow-build"
+  cluster_name                   = local.cluster_name
   cluster_version                = var.eks_version
   cluster_endpoint_public_access = true
 
@@ -139,9 +139,10 @@ module "eks" {
         AmazonSSMManagedInstanceCore       = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
       }
 
-      tags = merge(var.tags, {
-        "region" = "${data.aws_region.current.name}"
-      })
+      tags = merge(
+        var.tags,
+        local.asg_tags
+      )
     }
   }
 
