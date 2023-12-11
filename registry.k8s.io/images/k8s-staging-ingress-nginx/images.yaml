@@ -147,6 +147,7 @@
     "sha256:9dfb1909b4ffd3e3f046db0684c63aeb41e3b7b9732629c2dae09af4e59fc56e": ["v20230722-86c00a231"]
     "sha256:34881d62f71e8573fb765c40585dba28a1148206fbbe2c3871ad3f4e8c6e360f": ["v20231011-8b53cabe0"]
     "sha256:ca1349074a0d087d8fca347ea4c04fa12c0275f53f72d6f65118307285efc8ca": ["v20231129-9439e6c71"]
+    "sha256:03508408458d00ba4e219d2693ba2a039ba66d4151ab9b43794f61877e0abb73": ["v20231208-4c39e6acc"]
 
 # image to run tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/test-runner
@@ -197,6 +198,7 @@
     "sha256:ed0044258cf9056ba12a11a875e63d3649aaee2a6982670111a6fad0ec21a585": ["v20230721-40f94ef1b"]
     "sha256:421cda0f65a949b8b67b5e62a45071702d19ed458a3e2ba753171b0e66943210": ["v20230907-5bb82dcb7"]
     "sha256:ed0dad805c635e66469b4ac376010eebdd0b3fe62d753f58db1632d6f12f451d": ["v20231011-8b53cabe0"]
+    "sha256:0607184ca9c53c9c24a47b6f52347dd96137b05c6f276efa67051929a39e8f7a": ["v20231208-4c39e6acc"]
 
 # custom cfssl image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/cfssl
@@ -211,6 +213,7 @@
     "sha256:a168d1a45a43f1dd7852be02bf99dbaf464165222ad3a5d22b895022bfb1df49": ["v20230407"]
     "sha256:adaa118c179c41cb33fb567004a1f0c71b8fce6bc13263efa63d42dddd5b4346": ["v20230527"]
     "sha256:4fd70b8bcb31c5bfcb7bfbbd9fe2f8357d6769e6ea86a0c63ae031850147d6d2": ["v20230721-40f94ef1b"]
+    "sha256:48869cf72b0ceb1d8c82029f85961e423daf3ff8a04f4a455150000f90a90606": ["v20231208-4c39e6acc"]
 
 # custom echo HTTP server image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/echo
@@ -246,6 +249,7 @@
     "sha256:5470f0ddcfdaadcb7ccaf3db1b9fd7ac692e86eae2d59d272cd09d20a6a45c53": ["v20230626"]
     "sha256:e6f3ce6cf6d30dbaf02670982b63f231bd00c59eb8ccdd979fecb95764965754": ["v20230721-40f94ef1b"]
     "sha256:ed8ccdea261e9e055bf0cad80802f24e93d3b5c61cf61c94349e9fecf6720dbe": ["v20231011-8b53cabe0"]
+    "sha256:729199afc882c75c0a2e01ff3408d9e2f150133d89fabc38c15e991db5834f3e": ["v20231208-4c39e6acc"]
 
 # httpbin image for e2e tests
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/httpbin
@@ -300,6 +304,7 @@
     "sha256:3600dcd1bbd0d05959bb01af4b272714e94d22d24a64e91838e7183c80e53f7f": ["v20230505"]
     "sha256:59bd93fede2559c2b61d3baa5e9066e5b3ba71fa4faa06e368629ed287469b1d": ["v20230626"]
     "sha256:8506829ac6ef6ee74240e7ae62e8ad8085851d3281cc6b9d61a48cf3822daed7": ["v20230721-40f94ef1b"]
+    "sha256:c2ca20775f41c0c89906dc74a31239d94ac48e84e7c6164affed41fe669cdaa5": ["v20231208-4c39e6acc"]
 
 # opentelemetry
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/opentelemetry
