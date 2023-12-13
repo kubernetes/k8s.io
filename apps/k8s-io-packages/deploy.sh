@@ -81,7 +81,7 @@ function deploy() {
     done
 
     # We can only test IPv4 from within GCP.
-    all_ips=$("${kubectl[@]}" get ing k8s-io-packages -o go-template='{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}')
+    all_ips=$("${kubectl[@]}" get ing k8s-io-packages --namespace="${namespace}" -o go-template='{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}')
 
     for ip in $all_ips; do
         echo "Testing TARGET_IP=$ip"
