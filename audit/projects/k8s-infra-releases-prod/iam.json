@@ -24,6 +24,12 @@
         "serviceAccount:service-236990870955@gcp-sa-pubsub.iam.gserviceaccount.com"
       ],
       "role": "roles/pubsub.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-236990870955@gcp-sa-storageinsights.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storageinsights.serviceAgent"
     }
   ],
   "version": 1
