@@ -16,8 +16,6 @@ limitations under the License.
 
 
 resource "aws_cur_report_definition" "no_integrations" {
-  provider = aws.us-east-1
-
   report_name                = "k8s-infra-cur-definition"
   time_unit                  = "HOURLY"
   format                     = "textORcsv"
@@ -38,8 +36,6 @@ resource "aws_cur_report_definition" "no_integrations" {
 }
 
 resource "aws_cur_report_definition" "athena_integration" {
-  provider = aws.us-east-1
-
   report_name                = "k8s-infra-cur-athena-definition"
   time_unit                  = "HOURLY"
   format                     = "Parquet"
