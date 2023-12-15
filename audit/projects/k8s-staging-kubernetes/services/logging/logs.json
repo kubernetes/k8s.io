@@ -1,4 +1,3 @@
 [
-  "projects/k8s-staging-kubernetes/logs/cloudaudit.googleapis.com%2Factivity",
-  "projects/k8s-staging-kubernetes/logs/cloudbuild"
+  "projects/k8s-staging-kubernetes/logs/cloudaudit.googleapis.com%2Factivity"
 ]
