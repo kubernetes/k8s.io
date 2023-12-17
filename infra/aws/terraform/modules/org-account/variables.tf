@@ -41,3 +41,20 @@ variable "tags" {
   default     = {}
   description = "Key-value mapping of resource tags."
 }
+
+variable "sso_instance_arn" {
+  default     = "arn:aws:sso:::instance/ssoins-7223259e1ca869d2"
+  description = "The ARN of the SSO Instance."
+}
+
+variable "identity_store_id" {
+  default     = "d-9067aa4632"
+  type        = string
+  description = "The Identity Store ID associated with the Single Sign-On Instance."
+}
+
+variable "permissions_map" {
+  default     = {}
+  type        = map(any)
+  description = "A map of permissions"
+}
