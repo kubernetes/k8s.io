@@ -34,7 +34,24 @@
     - google-site-verification=qmfDqvHjWJBL78F9saApyW0VFRyymuSMpqMn8gtGmd0
     # Domain validation for kubernetes.io on https://kubernetes.1password.com/
     - 1password-site-verification=SOZCTQ66DFFXVGPOWOHMVDIBVI
-    - v=spf1 include:_spf.google.com ~all
+    - v=spf1 include:_spf.google.com mail.kubernetes.io ~all
+
+# Okta outbound emails (okta@kubernetes.io)
+mail:
+  type: CNAME
+  value: u21992032.wl033.sendgrid.net.
+
+_oktaverification:
+  type: TXT
+  value: ebf6c16069044ed1b5eb867f01f9a85f
+
+okt._domainkey:
+  type: CNAME
+  value: okt.domainkey.u21992032.wl033.sendgrid.net.
+
+okt2._domainkey:
+  type: CNAME
+  value: okt2.domainkey.u21992032.wl033.sendgrid.net.
 
 www:
   type: CNAME
