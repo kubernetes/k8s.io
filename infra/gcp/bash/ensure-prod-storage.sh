@@ -92,7 +92,7 @@ readonly PROD_PROJECT_DISABLED_SERVICES=(
 # Regions for prod GCR.
 GCR_PROD_REGIONS=(us eu asia)
 # Regions for prod AR. gcloud artifacts locations list --format json | jq '.[] | select(.name!="europe" and .name!="asia" and .name!="us") | .name' -r | xargs
-AR_PROD_REGIONS=(asia-east1 asia-east2 asia-south1 asia-northeast1 asia-northeast2 australia-southeast1 europe-north1 europe-southwest1 europe-west1 europe-west2 europe-west3 europe-west4 europe-west8 europe-west9 southamerica-east1 southamerica-west1 us-central1 us-east1 us-east4 us-east5 us-south1 us-west1 us-west2 us-west3 us-west4)
+AR_PROD_REGIONS=(asia-east1 asia-east2 asia-south1 asia-northeast1 asia-northeast2 australia-southeast1 europe-north1 europe-southwest1 europe-west1 europe-west10 europe-west12 europe-west2 europe-west3 europe-west4 europe-west8 europe-west9 southamerica-east1 southamerica-west1 us-central1 us-east1 us-east4 us-east5 us-south1 us-west1 us-west2 us-west3 us-west4)
 
 # Minimum time we expect to keep prod GCS artifacts.
 PROD_RETENTION="10y"
