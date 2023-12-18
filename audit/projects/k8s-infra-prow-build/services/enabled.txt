@@ -9,6 +9,7 @@ container.googleapis.com             Kubernetes Engine API
 containerregistry.googleapis.com     Container Registry API
 deploymentmanager.googleapis.com     Cloud Deployment Manager V2 API
 dns.googleapis.com                   Cloud DNS API
+gkebackup.googleapis.com             Backup for GKE API
 iam.googleapis.com                   Identity and Access Management (IAM) API
 iamcredentials.googleapis.com        IAM Service Account Credentials API
 logging.googleapis.com               Cloud Logging API
