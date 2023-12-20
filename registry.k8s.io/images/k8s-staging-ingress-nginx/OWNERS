@@ -10,6 +10,7 @@ approvers:
 - rikatz
 - strongjz
 - tao12345666333
-
+- puerco
+- cpanato
 labels:
 - sig/network
