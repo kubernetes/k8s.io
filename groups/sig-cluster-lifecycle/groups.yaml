@@ -264,7 +264,6 @@ groups:
       - richmcase@gmail.com
       - sedefsavas@gmail.com
       - ankita.swamy20@gmail.com
-      - skarlso777@gmail.com
       - daniel.lipovetsky@gmail.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-aws-alerts@kubernetes.io
@@ -280,9 +279,7 @@ groups:
       ReconcileMembers: "false"
     owners:
       - richmcase@gmail.com
-      - sedefsavas@gmail.com
       - ankita.swamy20@gmail.com
-      - skarlso777@gmail.com
       - daniel.lipovetsky@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
