@@ -14,6 +14,15 @@
     },
     {
       "members": [
+        "deleted:serviceAccount:node-scalability-k8s-local@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=102739702047731992109",
+        "deleted:serviceAccount:node-scalability-k8s-local@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=117944922627643972312"
+      ],
+      "role": "roles/compute.viewer"
+    },
+    {
+      "members": [
+        "deleted:serviceAccount:control-plane-scalabili-il6mt5@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=106949912765664172052",
+        "deleted:serviceAccount:control-plane-scalabili-il6mt5@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=114878473652242660550",
         "serviceAccount:service-189277497252@container-engine-robot.iam.gserviceaccount.com"
       ],
       "role": "roles/container.serviceAgent"
@@ -40,6 +49,12 @@
         "group:k8s-infra-sig-scalability-oncall@kubernetes.io"
       ],
       "role": "roles/owner"
+    },
+    {
+      "members": [
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/resourcemanager.projectIamAdmin"
     }
   ],
   "version": 1

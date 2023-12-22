@@ -12,8 +12,8 @@ gs://k8s-artifacts-cni/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Tue, 28 Jan 2020 17:29:02 GMT
-	Time updated:			Thu, 05 Oct 2023 12:26:18 GMT
-	Metageneration:			97
+	Time updated:			Mon, 18 Dec 2023 18:20:27 GMT
+	Metageneration:			99
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

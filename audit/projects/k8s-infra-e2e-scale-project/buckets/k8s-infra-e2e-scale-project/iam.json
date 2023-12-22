@@ -1,0 +1,37 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:k8s-infra-e2e-scale-project",
+        "projectOwner:k8s-infra-e2e-scale-project"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-e2e-scale-project"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "projectEditor:k8s-infra-e2e-scale-project",
+        "projectOwner:k8s-infra-e2e-scale-project"
+      ],
+      "role": "roles/storage.legacyObjectOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-e2e-scale-project"
+      ],
+      "role": "roles/storage.legacyObjectReader"
+    },
+    {
+      "members": [
+        "deleted:serviceAccount:control-plane-scalabili-il6mt5@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=106949912765664172052",
+        "deleted:serviceAccount:control-plane-scalabili-il6mt5@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=114878473652242660550"
+      ],
+      "role": "roles/storage.objectAdmin"
+    }
+  ]
+}
