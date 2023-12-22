@@ -12,8 +12,8 @@ gs://k8s-gcr-backup-test-prod/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Wed, 23 Oct 2019 19:10:02 GMT
-	Time updated:			Wed, 15 Mar 2023 18:50:12 GMT
-	Metageneration:			87
+	Time updated:			Mon, 18 Dec 2023 18:08:23 GMT
+	Metageneration:			89
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
