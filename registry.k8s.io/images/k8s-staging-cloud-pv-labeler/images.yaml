@@ -1,1 +1,3 @@
-# No images yet
+- name: cloud-pv-admission-labeler
+  dmap:
+    "sha256:72f2393188f3a2b43415f3dd5508d95e7d233b7f767dcd462962bdeff7fdd353": ["v0.3.0"]
