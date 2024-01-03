@@ -128,10 +128,6 @@ resource "google_container_cluster" "cluster" {
     }
   }
 
-  // Restrict master to Google IP space; use Cloud Shell to access
-  master_authorized_networks_config {
-  }
-
   // Enable GKE workloads monitoring
   monitoring_config {
     enable_components = [
