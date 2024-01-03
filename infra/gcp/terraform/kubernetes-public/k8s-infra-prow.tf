@@ -38,12 +38,6 @@ resource "google_service_account" "k8s_infra_prow" {
   display_name = local.prow_service_account
 }
 
-// Create a key for GCP Service Account k8s-infra-prow
-resource "google_service_account_key" "k8s_infra_prow" {
-  service_account_id = google_service_account.k8s_infra_prow.name
-  private_key_type   = "TYPE_GOOGLE_CREDENTIALS_FILE"
-}
-
 // Allow pods using the build cluster KSA to use the GCP SA k8s-infra-prow via workload identity
 resource "google_service_account_iam_member" "prow_build_cluster_sa_iam" {
   role               = "roles/iam.workloadIdentityUser"
@@ -113,30 +107,3 @@ resource "google_storage_bucket_iam_member" "k8s_infra_prow_owners" {
   //TODO(ameukam): switch to allUsers when https://github.com/kubernetes/k8s.io/issues/752 is closed.
   member = "group:${local.prow_owners}"
 }
-
-// Create a secret for GCP Service Account key of k8s-infra-prow
-resource "google_secret_manager_secret" "k8s_infra_prow_key" {
-  project   = data.google_project.project.project_id
-  secret_id = "${local.prow_service_account}-sa-key"
-
-  replication {
-    automatic = true
-  }
-}
-
-// Create a version for the GCP Secret Manager secret 
-resource "google_secret_manager_secret_version" "k8s_infra_prow_key_version" {
-  secret      = google_secret_manager_secret.k8s_infra_prow_key.id
-  secret_data = base64decode(google_service_account_key.k8s_infra_prow.private_key)
-}
-
-// Allow read access to prow owners
-resource "google_secret_manager_secret_iam_binding" "name" {
-  project   = data.google_project.project.project_id
-  secret_id = google_secret_manager_secret.k8s_infra_prow_key.id
-  role      = "roles/secretmanager.admin"
-  members = [
-    "group:${local.prow_owners}"
-  ]
-}
-
