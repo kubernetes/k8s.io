@@ -212,6 +212,12 @@ class RedirTest(HTTPTestCase):
             self.assert_temp_redirect(
                 base + 'needs-ok-to-test',
                 'https://github.com/pulls?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase')
+            self.assert_temp_redirect(
+                base + 'contact',
+                'https://github.com/kubernetes/community/tree/master/communication')
+            self.assert_temp_redirect(
+                base + 'contact/sig-contributor-experience',
+                'https://github.com/kubernetes/community/tree/master/sig-contributor-experience#contact')
 
     def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
