@@ -131,6 +131,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-127754664067@gcp-sa-logging.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:tf-monitoring-deployer@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/monitoring.admin"

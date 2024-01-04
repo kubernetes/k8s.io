@@ -1,5 +1,14 @@
 [
   {
+    "bigqueryOptions": {},
+    "createTime": "2024-01-03T14:52:09.320036049Z",
+    "destination": "bigquery.googleapis.com/projects/k8s-infra-public-pii/datasets/legacy_pkgs_k8s_io_logs",
+    "filter": "logName=\"projects/kubernetes-public/logs/stdout\" AND labels.\"k8s-pod/app\"=\"k8s-io-packages\" AND NOT httpRequest.requestUrl:\"_healthz\"",
+    "name": "legacy-pkgs-k8s-io-logs-sink",
+    "updateTime": "2024-01-03T17:54:25.407520119Z",
+    "writerIdentity": "serviceAccount:service-127754664067@gcp-sa-logging.iam.gserviceaccount.com"
+  },
+  {
     "destination": "logging.googleapis.com/projects/kubernetes-public/locations/global/buckets/_Required",
     "filter": "LOG_ID(\"cloudaudit.googleapis.com/activity\") OR LOG_ID(\"externalaudit.googleapis.com/activity\") OR LOG_ID(\"cloudaudit.googleapis.com/system_event\") OR LOG_ID(\"externalaudit.googleapis.com/system_event\") OR LOG_ID(\"cloudaudit.googleapis.com/access_transparency\") OR LOG_ID(\"externalaudit.googleapis.com/access_transparency\")",
     "name": "_Required"
