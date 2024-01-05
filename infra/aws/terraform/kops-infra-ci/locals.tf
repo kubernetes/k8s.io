@@ -20,7 +20,14 @@ locals {
   kops-infra-ci-index      = index(data.aws_organizations_organization.current.accounts.*.name, local.kops-infra-ci-name)
   kops-infra-ci-account-id = data.aws_organizations_organization.current.accounts[local.kops-infra-ci-index].id
 
-  prefix = "k8s-infra-kops"
+  prefix                     = "k8s-infra-kops"
+  cluster_name               = "${local.prefix}-prow-build"
+  cluster_autoscaler_version = "v${var.eks_version}.5"
+
+  asg_tags = {
+    "k8s.io/cluster-autoscaler/${local.cluster_name}" = "owned"
+    "k8s.io/cluster-autoscaler/enabled"               = true
+  }
 
   partition       = cidrsubnets(aws_vpc_ipam_preview_next_cidr.main.cidr, 2, 2, 2)
   azs             = slice(data.aws_availability_zones.available.names, 0, 3)
