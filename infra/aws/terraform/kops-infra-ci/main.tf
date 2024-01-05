@@ -29,3 +29,41 @@ resource "aws_iam_openid_connect_provider" "google_prow_idp" {
     "08745487e891c19e3078c1f2a07e452950ef36f6"
   ]
 }
+
+## Used by kOps to store the state of the kOps created
+resource "aws_s3_bucket" "kops_state_store" {
+  provider = aws.kops-infra-ci
+  bucket = "k8s-kops-ci-prow-state-store"
+  tags = var.tags
+}
+
+## Used by kOps for hosting OIDC documents
+resource "aws_s3_bucket" "kops_oidc_store" {
+  provider = aws.kops-infra-ci
+  bucket = "k8s-kops-ci-prow"
+  tags = var.tags
+}
+
+resource "aws_s3_bucket_ownership_controls" "kops_oidc_store" {
+  provider = aws.kops-infra-ci
+  bucket = aws_s3_bucket.kops_oidc_store.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "kops_oidc_store" {
+  provider = aws.kops-infra-ci
+  bucket = aws_s3_bucket.kops_oidc_store.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_acl" "kops_oidc_store" {
+  provider = aws.kops-infra-ci
+  bucket = aws_s3_bucket.kops_oidc_store.id
+  acl = "public-read"
+}
