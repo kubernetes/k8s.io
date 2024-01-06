@@ -491,16 +491,16 @@ groups:
       - ihor@cncf.io
       - thockin@google.com
 
-  - email-id: k8s-infra-gcs-access-logs@kubernetes.io
-    name: k8s-infra-gcs-access-logs
+  - email-id: k8s-infra-public-pii@kubernetes.io
+    name: k8s-infra-public-pii
     description: |-
-      ACL for access to gcs bucket `k8s-artifacts-gcslogs` for analysis.
+      ACL for access to k8s-infra-public gcs buckets & bq datasets
       Membership restricted to those who are authorized to handle PII
     settings:
       ReconcileMembers: "true"
     members:
       - k8s-infra-ii-coop@kubernetes.io
-      - justinsb@google.com # checking if there is some slice of traffic that we can redirect from k8s.gcr.io.  Remove Feb-28.
+      - mudrinic.mare@gmail.com # remove after https://kubernetes.io/blog/2023/08/31/legacy-package-repository-deprecation/ is complete
 
   - email-id: k8s-infra-group-admins@kubernetes.io
     name: k8s-infra-group-admins
