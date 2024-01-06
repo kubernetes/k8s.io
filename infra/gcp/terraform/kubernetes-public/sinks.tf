@@ -25,5 +25,5 @@ resource "google_logging_project_sink" "legacy_pkg_logs" {
 
   unique_writer_identity = true
 
-  filter = "logName=\"projects/kubernetes-public/logs/stdout\" AND labels.\"k8s-pod/app\"=\"k8s-io-packages\" AND NOT httpRequest.requestUrl:\"_healthz\""
+  filter = "logName=\"projects/kubernetes-public/logs/stdout\" AND (labels.k8s-pod/app=\"k8s-io-packages\" OR labels.k8s-pod/app=\"k8s-io\") AND (httpRequest.requestUrl=~\"yum|apt\")"
 }

@@ -59,6 +59,34 @@ data:
         }
       }
 
+      # https://geko.cloud/en/forward-real-ip-to-a-nginx-behind-a-gcp-load-balancer/
+      set_real_ip_from 2600:1901:0:26f3::; # LB IP
+      set_real_ip_from 34.107.204.206/32; # LB IP
+      set_real_ip_from 130.211.0.0/22; # IP SRC range for GCP Load Balancers
+      set_real_ip_from 35.191.0.0/16; # IP SRC range for GCP Load Balancers
+      real_ip_header X-Forwarded-For;
+      real_ip_recursive on;
+
+      log_format json_combined escape=json
+        '{'
+          '"time":"$msec",'
+          '"httpRequest":{'
+            '"requestMethod":"$request_method",'
+            '"requestUrl":"$scheme://$host$request_uri",'
+            '"requestSize":$request_length,'
+            '"status":"$status",'
+            '"responseSize":$bytes_sent,'
+            '"userAgent":"$http_user_agent",'
+            '"remoteIp":"$remote_addr",'
+            '"serverIp":"$server_addr",'
+            '"referer":"$http_referer",'
+            '"latency":"${request_time}s",'
+            '"protocol":"$server_protocol"'
+          '}'
+        '}';
+
+      access_log /dev/stdout json_combined;
+
       # Redirect x-k8s.io to main site as proof of domain ownership to allow
       # the use of x-k8s.io as a namespace for "SIG sponsored CRD based APIs
       # outside of the core"
