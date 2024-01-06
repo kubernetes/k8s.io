@@ -50,6 +50,18 @@
       "members": [
         "group:k8s-infra-gcp-org-admins@kubernetes.io"
       ],
+      "role": "roles/cloudsupport.admin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/cloudsupport.techSupportEditor"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
       "role": "roles/orgpolicy.policyAdmin"
     },
     {
