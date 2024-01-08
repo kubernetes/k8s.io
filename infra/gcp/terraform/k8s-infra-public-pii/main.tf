@@ -172,16 +172,16 @@ data "google_iam_policy" "audit_logs_gcs_bindings" {
       "serviceAccount:${data.google_service_account.ii_sandbox_asn_etl.email}",
     ]
   }
-  // Allow read-only access to k8s-infra-gcs-access-logs@kubernetes.io
-  binding {
-    role = "roles/storage.objectViewer"
-    members = [
-      "group:k8s-infra-gcs-access-logs@kubernetes.io"
-    ]
-  }
 }
 
 resource "google_storage_bucket_iam_policy" "analytics_objectadmin_policy" {
   bucket      = google_storage_bucket.audit-logs-gcs.name
   policy_data = data.google_iam_policy.audit_logs_gcs_bindings.policy_data
+}
+
+resource "google_project_iam_member" "pii_access" {
+  for_each = toset(["roles/viewer", "roles/bigquery.user"])
+  project  = local.project_id
+  role     = each.key
+  member   = "k8s-infra-public-pii@kubernetes.io"
 }
