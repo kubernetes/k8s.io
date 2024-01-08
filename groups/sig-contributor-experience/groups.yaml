@@ -15,21 +15,12 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - ihor@cncf.io
-      - killen.bob@gmail.com
-    managers:
-      - ameukam@gmail.com
-      - pal.nabarun95@gmail.com
-      - rajula96reddy@gmail.com
-    members:
-      - balves@linuxfoundation.org
-      - chris@chrisshort.net
-      - dgiles@linuxfoundation.org
-      - harshitasao@gmail.com
       - jberkus@redhat.com
-      - puja@giantswarm.io
-      - rajaskakodkar16@gmail.com
-      - samudralavamshi@gmail.com
+      - kaslin.fields@gmail.com
+      - killen.bob@gmail.com
+      - madhav.jiv@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
 
   - email-id: dev@kubernetes.io
     name: dev
@@ -177,6 +168,7 @@ groups:
     members:
       - balves@linuxfoundation.org
       - mars.toktonaliev@gmail.com
+      - jcaudill@linuxfoundation.org
       - joseph.r.sandoval@gmail.com
       - cailyn.s.e@protonmail.com
       - avineshtripathi1@gmail.com
