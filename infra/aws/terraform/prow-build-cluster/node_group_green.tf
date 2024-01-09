@@ -33,10 +33,6 @@ locals {
 
     iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
-    # TODO(xmudrii-ubuntu): Temporarily disabled because it's not supported by Bottlerocket Linux
-    # ami_id                     = var.node_ami_blue
-    # enable_bootstrap_user_data = true
-
     ami_type             = "BOTTLEROCKET_x86_64"
     platform             = "bottlerocket"
     bootstrap_extra_args = <<-EOT

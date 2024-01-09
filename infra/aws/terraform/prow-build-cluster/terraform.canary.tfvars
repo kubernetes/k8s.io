@@ -34,28 +34,33 @@ cluster_name               = "prow-canary-cluster"
 cluster_version            = "1.28"
 node_group_version_blue    = "1.28"
 node_group_version_green   = "1.28"
+node_group_version_stable  = "1.28"
 cluster_autoscaler_version = "v1.28.0"
 
-# Ubuntu EKS optimized AMI: https://cloud-images.ubuntu.com/aws-eks/
-node_ami_blue = "ami-0d9ec2930add3de7d"
-# TODO(xmudrii-ubuntu): Temporarily bumped instance size from r5d.xlarge to r5ad.2xlarge to be able to run more jobs
-node_instance_types_blue = ["r5ad.2xlarge"]
+node_instance_types_blue   = ["r5ad.2xlarge"]
+node_instance_types_green  = ["r5ad.2xlarge"]
+node_instance_types_stable = ["r5ad.2xlarge"]
 
 node_min_size_blue     = 0
 node_max_size_blue     = 1
 node_desired_size_blue = 0
 
-node_ami_green = "ami-0d9ec2930add3de7d"
-# TODO(xmudrii-ubuntu): Temporarily bumped instance size from r5d.xlarge to r5ad.2xlarge to be able to run more jobs
-node_instance_types_green = ["r5ad.2xlarge"]
+node_min_size_green     = 1
+node_max_size_green     = 1
+node_desired_size_green = 1
 
-node_min_size_green     = 3
-node_max_size_green     = 3
-node_desired_size_green = 3
+node_desired_size_stable = 2
 
-node_taints_green = []
-
-node_labels_green = {}
+node_taints_stable = [
+  {
+    key    = "node-group"
+    value  = "stable"
+    effect = "NO_SCHEDULE"
+  }
+]
+node_labels_stable = {
+  "node-group" = "stable"
+}
 
 node_volume_size = 100
 

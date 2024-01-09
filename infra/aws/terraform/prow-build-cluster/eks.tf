@@ -106,5 +106,6 @@ module "eks" {
   eks_managed_node_groups = {
     build-blue  = local.node_group_build_blue
     build-green = local.node_group_build_green
+    stable      = local.node_group_stable
   }
 }
