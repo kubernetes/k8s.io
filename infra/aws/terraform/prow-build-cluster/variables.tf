@@ -93,14 +93,9 @@ variable "node_group_version_green" {
   description = "Kubernetes version of the EKS-managed node group (green)"
 }
 
-variable "node_ami_blue" {
+variable "node_group_version_stable" {
   type        = string
-  description = "EKS optimized AMI to be used for blue Node groups"
-}
-
-variable "node_ami_green" {
-  type        = string
-  description = "EKS optimized AMI to be used for green node group"
+  description = "Kubernetes version of the EKS-managed node group (stable)"
 }
 
 variable "node_instance_types_blue" {
@@ -111,6 +106,11 @@ variable "node_instance_types_blue" {
 variable "node_instance_types_green" {
   type        = list(string)
   description = "Instance sizes to use for green EKS node group"
+}
+
+variable "node_instance_types_stable" {
+  type        = list(string)
+  description = "Instance sizes to use for stable EKS node group"
 }
 
 variable "node_volume_size" {
@@ -148,6 +148,11 @@ variable "node_desired_size_green" {
   description = "Desired number of nodes in the green EKS node group"
 }
 
+variable "node_desired_size_stable" {
+  type        = number
+  description = "Desired number of nodes in the stable EKS node group"
+}
+
 variable "node_max_unavailable_percentage" {
   type        = number
   description = "Maximum unavailable nodes in a node group"
@@ -163,6 +168,11 @@ variable "node_taints_green" {
   default = []
 }
 
+variable "node_taints_stable" {
+  type    = list(map(string))
+  default = []
+}
+
 variable "node_labels_blue" {
   type    = map(string)
   default = {}
@@ -173,12 +183,22 @@ variable "node_labels_green" {
   default = {}
 }
 
+variable "node_labels_stable" {
+  type    = map(string)
+  default = {}
+}
+
 variable "additional_node_group_tags_blue" {
   type    = map(string)
   default = {}
 }
 
 variable "additional_node_group_tags_green" {
+  type    = map(string)
+  default = {}
+}
+
+variable "additional_node_group_tags_stable" {
   type    = map(string)
   default = {}
 }

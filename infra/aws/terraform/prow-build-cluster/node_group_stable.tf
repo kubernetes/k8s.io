@@ -1,5 +1,5 @@
 /*
-Copyright 2023 The Kubernetes Authors.
+Copyright 2024 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,21 +15,21 @@ limitations under the License.
 */
 
 locals {
-  node_group_build_blue = {
-    name            = "build-managed-blue"
-    description     = "EKS managed node group called blue used to facilitate node rotations/rollouts"
+  node_group_stable = {
+    name            = "managed-stable"
+    description     = "EKS managed node group called stable used for stateful components"
     use_name_prefix = true
 
-    cluster_version = var.node_group_version_blue
+    cluster_version = var.node_group_version_stable
 
-    taints = var.node_taints_blue
-    labels = var.node_labels_blue
+    taints = var.node_taints_stable
+    labels = var.node_labels_stable
 
     subnet_ids = module.vpc.public_subnets
 
-    min_size     = var.node_min_size_blue
-    max_size     = var.node_max_size_blue
-    desired_size = var.node_desired_size_blue
+    min_size     = var.node_desired_size_stable
+    max_size     = var.node_desired_size_stable
+    desired_size = var.node_desired_size_stable
 
     iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
@@ -62,7 +62,7 @@ locals {
     pre_bootstrap_user_data = file("${path.module}/bootstrap/node_bootstrap.sh")
 
     capacity_type  = "ON_DEMAND"
-    instance_types = var.node_instance_types_blue
+    instance_types = var.node_instance_types_stable
 
     ebs_optimized     = true
     enable_monitoring = true
@@ -95,8 +95,7 @@ locals {
 
     tags = merge(
       local.tags,
-      local.auto_scaling_tags,
-      var.additional_node_group_tags_blue
+      var.additional_node_group_tags_stable
     )
   }
 }
