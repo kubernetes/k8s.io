@@ -162,24 +162,15 @@ groups:
     owners:
       - killen.bob@gmail.com
     managers:
-      - pnigelbrown@gmail.com
-      - jberkus@redhat.com
-      - noah.r.abrahams@gmail.com
+      - ameukam@gmail.com # Lead for KCSEU 2024
+      - xandergrzyw@gmail.com # Lead for KCSEU 2024
     members:
       - balves@linuxfoundation.org
-      - mars.toktonaliev@gmail.com
-      - jcaudill@linuxfoundation.org
-      - joseph.r.sandoval@gmail.com
       - cailyn.s.e@protonmail.com
-      - avineshtripathi1@gmail.com
-      - justnitish06@gmail.com
-      - chenchen.hcc@gmail.com
+      - jcaudill@linuxfoundation.org
+      - kaslin.fields@gmail.com
       - natalivlatko@gmail.com
-      - laura@nimbinatus.com
-      - wangzefeng@huawei.com
-      - paco.xu@daocloud.io
-      - mengjiao.liu@daocloud.io
-
+      - rlejano@gmail.com
   #
   # k8s-staging write access for SIG-owned subprojects
   #
