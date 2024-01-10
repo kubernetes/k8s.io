@@ -1,0 +1,48 @@
+## save this to values.yaml file and run
+## k create configmap kubecost-helm-values --from-file=values.yaml -n kubecost
+## on the prow-canary-cluster
+global:
+  prometheus:
+    enabled: true
+    # fqdn: http://prometheus-operated.monitoring:9090
+  grafana:
+    enabled: false
+    proxy: false
+kubecostProductConfigs:
+  clusterName: prow-canary-cluster
+  productKey:
+    enabled: true
+    secretname: kubecost-product-key
+federatedETL:
+  useExistingS3Config: false
+  primaryCluster: false
+  federatedCluster: true
+kubecostModel:
+  containerStatsEnabled: true
+  federatedStorageConfigSecret: kubecost-object-store
+  warmCache: false
+  warmSavingsCache: false
+serviceAccount:
+  create: false
+  name: kubecost-irsa-s3
+prometheus:
+  kubeStateMetrics:
+    enabled: false
+  kube-state-metrics:
+    disabled: true
+  nodeExporter:
+    enabled: false
+  server:
+    global:
+      external_labels:
+        # cluster_id should be unique for all clusters and the same value as .kubecostProductConfigs.clusterName
+        cluster_id: prow-canary-cluster
+networkCosts:
+  # optional, see: https://docs.kubecost.com/install-and-configure/advanced-configuration/network-costs-configuration
+  enabled: true
+  config:
+    services:
+      # set the appropriate cloud provider to true
+      amazon-web-services: true
+kubecostFrontend:
+  enabled: false

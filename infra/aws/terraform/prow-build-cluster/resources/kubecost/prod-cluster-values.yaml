@@ -1,0 +1,51 @@
+## save this to values.yaml file and run
+## k create configmap kubecost-helm-values --from-file=values.yaml -n kubecost
+## on the prow-build-cluster
+kubecostProductConfigs:
+  clusterName: prow-build-cluster
+  productKey:
+    enabled: true
+    secretname: kubecost-product-key
+federatedETL:
+  useExistingS3Config: false
+  primaryCluster: true
+  federatedCluster: true
+  federator:
+    enabled: true
+    primaryClusterID: prow-build-cluster
+kubecostModel:
+  containerStatsEnabled: true
+  cloudCost:
+    enabled: true # Set to true to enable CloudCost view that gives you visibility of your Cloud provider resources cost
+  etlCloudAsset: false # Set etlCloudAsset to false when cloudCost.enabled=true
+  federatedStorageConfigSecret: kubecost-object-store
+serviceAccount: # this config uses AWS IRSA, which creates a service account with rights to the s3 bucket. If using keys+secrets in the federated-store, set create: true
+  create: false
+  name: kubecost-irsa-s3
+kubecostDeployment:
+  queryServiceReplicas: 0 # to improve performance, increase replica count. see: https://docs.kubecost.com/install-and-configure/install/etl-backup/query-service-replicas
+global:
+  prometheus:
+    enabled: true
+  grafana: # prometheus metrics will be local cluster only, disable grafana to save resources
+    enabled: false
+    proxy: false
+prometheus:
+  kubeStateMetrics:
+    enabled: false
+  kube-state-metrics:
+    disabled: true
+  nodeExporter:
+    enabled: false
+  server:
+    global:
+      external_labels:
+        # cluster_id should be unique for all clusters and the same value as .kubecostProductConfigs.clusterName
+        cluster_id: prow-build-cluster
+networkCosts:
+  # optional, see: https://docs.kubecost.com/install-and-configure/advanced-configuration/network-costs-configuration
+  enabled: true
+  config:
+    services:
+      # set the appropriate cloud provider to true
+      amazon-web-services: true
