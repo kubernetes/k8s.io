@@ -69,6 +69,7 @@ restrictions:
       - "^k8s-infra-staging-cloud-pv-labeler@kubernetes.io$"
   - path: "sig-cluster-lifecycle/groups.yaml"
     allowedGroups:
+      - "^sig-cluster-lifecycle@kubernetes.io$"
       - "^sig-cluster-lifecycle-leads@kubernetes.io$"
       - "^sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io$"
       - "^sig-cluster-lifecycle-cluster-api-operator-alerts@kubernetes.io$"

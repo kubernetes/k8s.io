@@ -7,6 +7,28 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
+  - email-id: sig-cluster-lifecycle@kubernetes.io
+    name: sig-cluster-lifecycle
+    description: |
+      Group dedicated to simplify creation, configuration, upgrade, downgrade, and teardown of Kubernetes clusters and their components.
+    owners:
+      - cecilerobertm@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+      - justinsb@google.com
+      - vince@prigna.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: k8s-infra-kops-maintainers@kubernetes.io
     name: k8s-infra-kops-maintainers
     description: |
@@ -92,10 +114,11 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
+      - cecilerobertm@gmail.com
       - fabrizio.pandini@gmail.com
-      - justinsb@google.com
       - neolit123@gmail.com
-      - prignanov@vmware.com
+      - justinsb@google.com
+      - vince@prigna.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
@@ -141,7 +164,6 @@ groups:
       - detiber@gmail.com
       - ha.chuck@gmail.com
       - hi@amycod.es
-      - prignanov@vmware.com
 
   - email-id: k8s-infra-staging-capi-ibmcloud@kubernetes.io
     name: k8s-infra-staging-capi-ibmcloud
@@ -166,7 +188,6 @@ groups:
       - frostl@vmware.com
       - ha.chuck@gmail.com
       - hi@amycod.es
-      - prignanov@vmware.com
 
   - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
     name: k8s-infra-staging-capi-openstack
@@ -240,7 +261,6 @@ groups:
       - davanum@gmail.com
       - fabrizio.pandini@gmail.com
       - sbueringer@gmail.com
-      - prignanov@vmware.com
       - cilliancapi@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-helm@kubernetes.io
@@ -309,7 +329,6 @@ groups:
       - david@devigned.com
       - k8s@auggie.dev
       - nziada@vmware.com
-      - prignanov@vmware.com
 
   - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
     name: k8s-infra-staging-cluster-api-gcp
@@ -366,7 +385,6 @@ groups:
     members:
       - charleszheng44@gmail.com
       - me@chrishein.com
-      - prignanov@vmware.com
       - vrgf2003@gmail.com
 
   - email-id: k8s-infra-staging-capi-ipam-ic@kubernetes.io
