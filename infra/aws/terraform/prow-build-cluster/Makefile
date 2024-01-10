@@ -120,4 +120,4 @@ flux-apply-all: flux-apply-sources flux-apply-kustomizations flux-apply-helm-rel
 
 .PHONY: flux-update
 flux-update: ## Update FluxCD manifests, generate Kustomizations and HelmReleases (requires flux cli).
-	./hack/flux-update.bash
+	PROW_ENV=$(PROW_ENV) ./hack/flux-update.bash

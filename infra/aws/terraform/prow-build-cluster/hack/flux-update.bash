@@ -25,6 +25,11 @@ then
   exit 2
 fi
 
+if [ -z $PROW_ENV ]; then
+  echo "PROW_ENV environment variable is not set. It must be set to canary or prod"
+  exit 3
+fi
+
 script_root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 function boilerplate() {
@@ -71,13 +76,14 @@ flux create source helm kubecost \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
 
+# The helm values are different for canary and prod clusters
 boilerplate > ${resources_dir}/kubecost/flux-hr-kubecost.yaml
 flux create hr kubecost \
     --source HelmRepository/kubecost.flux-system \
     --namespace=kubecost \
     --chart cost-analyzer \
     --chart-version 1.107.1 \
-    --values-from=ConfigMap/kubecost-values \
+    --values=${resources_dir}/kubecost/${PROW_ENV}-cluster-values.yaml \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
 
