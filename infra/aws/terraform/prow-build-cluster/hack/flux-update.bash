@@ -72,12 +72,14 @@ flux create source helm kubecost \
     --export >> ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
 
 boilerplate > ${resources_dir}/kubecost/flux-hr-kubecost.yaml
-flux create helmrelease kubecost --chart cost-analyzer \
-  --source HelmRepository/kubecost \
-  --chart-version 1.107.1 \
-  --namespace kubecost \
-  --values-from=ConfigMap/kubecost-values \
-  --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
+flux create hr kubecost \
+    --source HelmRepository/kubecost.flux-system \
+    --namespace=kubecost \
+    --chart cost-analyzer \
+    --chart-version 1.107.1 \
+    --values-from=ConfigMap/kubecost-values \
+    --interval=${sync_interval} \
+    --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
 
 # This list contains names of folders inside ./resources directory
 # that are used for generating FluxCD kustomizations.
