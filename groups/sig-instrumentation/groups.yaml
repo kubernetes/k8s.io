@@ -41,6 +41,7 @@ groups:
       - sergiusz.urbaniak@gmail.com
       - pszczesniak@google.com
       - fbranczyk@gmail.com
+      - dgrisonn@redhat.com
 
   - email-id: k8s-infra-staging-prometheus-adapter@kubernetes.io
     name: k8s-infra-staging-prometheus-adapter
