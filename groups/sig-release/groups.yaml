@@ -327,15 +327,16 @@ groups:
       - abigailkmccarthy@gmail.com # 1.29 Communications Shadow
       - AnaMMedina21@gmail.com # 1.29 Enhancements Shadow
       - bradmccoydev@gmail.com # 1.29 Bug Triage Shadow
-      - drewhagendev@gmail.com # 1.29 Docs Shadow
-      - egbunaoluebube@gmail.com # 1.29 Docs Shadow
+      - celeste.e.horgan@gmail.com # 1.30 Docs Shadow
+      - danieljoshuachan@gmail.com # 1.30 Docs Shadow
+      - drewhagendev@gmail.com # 1.30 Docs Lead
+      - egbunaoluebube@gmail.com # 1.30 Docs Shadow
       - faeka6@gmail.com # 1.29 Release Notes Shadow
       - fsmunoz@gmail.com # 1.29 Release Notes Lead
-      - harshitasao@gmail.com # 1.29 Docs Shadow
       - hkamel.msft@gmail.com # 1.29 Communications Shadow
-      - jackhammervyom@gmail.com # 1.29 CI Signal Lead
+      - jackhammervyom@gmail.com # 1.30 Docs Shadow
       - james@quigley.us # 1.29 Communications Shadow
-      - kat.cosgrove@gmail.com # 1.29 Docs Lead
+      - kat.cosgrove@gmail.com # 1.30 Lead
       - kcmartin2@mac.com # 1.29 Communications Shadow
       - mankulka@redhat.com # 1.29 CI Signal Shadow
       - markrossetti@gmail.com # 1.29 Release Manager associate
@@ -354,7 +355,6 @@ groups:
       - smith.rashan@gmail.com # 1.29 Release Notes Shadow
       - sontek@gmail.com # 1.29 CI Signal Shadow
       - sreeram.venkitesh@bigbinary.com # 1.29 Enhancements Shadow
-      - taniaduggal60@gmail.com # 1.29 Docs Shadow
       - valencia0.carol@gmail.com # 1.29 Comms Lead
       - yigit.demirbas@gmail.com # 1.29 Bug Triage Lead
       - zelikangelina@gmail.com # 1.29 Bug Triage Shadow
@@ -380,11 +380,12 @@ groups:
       - abigailkmccarthy@gmail.com # 1.29 Communications Shadow
       - AnaMMedina21@gmail.com # 1.29 Enhancements Shadow
       - bradmccoydev@gmail.com # 1.29 Bug Triage Shadow
-      - drewhagendev@gmail.com # 1.29 Docs Shadow
-      - egbunaoluebube@gmail.com # 1.29 Docs Shadow
+      - celeste.e.horgan@gmail.com # 1.30 Docs Shadow
+      - danieljoshuachan@gmail.com # 1.30 Docs Shadow
+      - egbunaoluebube@gmail.com # 1.30 Docs Shadow
       - faeka6@gmail.com # 1.29 Release Notes Shadow
-      - harshitasao@gmail.com # 1.29 Docs Shadow
       - hkamel.msft@gmail.com # 1.29 Communications Shadow
+      - jackhammervyom@gmail.com # 1.30 Docs Shadow
       - james@quigley.us # 1.29 Communications Shadow
       - kcmartin2@mac.com # 1.29 Communications Shadow
       - m.r.boxell@gmail.com # 1.29 Lead Shadow
@@ -407,7 +408,6 @@ groups:
       - smith.rashan@gmail.com # 1.29 Release Notes Shadow
       - sontek@gmail.com # 1.29 CI Signal Shadow
       - sreeram.venkitesh@bigbinary.com # 1.29 Enhancements Shadow
-      - taniaduggal60@gmail.com # 1.29 Docs Shadow
       - zelikangelina@gmail.com # 1.29 Bug Triage Shadow
 
   # RBAC groups:
