@@ -60,6 +60,7 @@ groups:
       # scalability-oncall
       - aleksandram@google.com
       - azylinski@google.com
+      - jdzikowski@google.com
       - jkaniuk@google.com
       - jprzychodzen@google.com
       - jupblb@google.com
