@@ -1,5 +1,5 @@
 approvers:
-- provider-openstack-approvers
+- provider-openstack
 
 reviewers:
-- provider-openstack-reviewers
+- provider-openstack
