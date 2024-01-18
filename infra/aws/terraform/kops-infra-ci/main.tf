@@ -33,20 +33,29 @@ resource "aws_iam_openid_connect_provider" "google_prow_idp" {
 ## Used by kOps to store the state of the kOps created
 resource "aws_s3_bucket" "kops_state_store" {
   provider = aws.kops-infra-ci
-  bucket = "k8s-kops-ci-prow-state-store"
-  tags = var.tags
+  bucket   = "k8s-kops-ci-prow-state-store"
+  tags     = var.tags
 }
+
+resource "aws_s3_bucket_ownership_controls" "kops_state_store" {
+  provider = aws.kops-infra-ci
+  bucket   = aws_s3_bucket.kops_state_store.id
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
 
 ## Used by kOps for hosting OIDC documents
 resource "aws_s3_bucket" "kops_oidc_store" {
   provider = aws.kops-infra-ci
-  bucket = "k8s-kops-ci-prow"
-  tags = var.tags
+  bucket   = "k8s-kops-ci-prow"
+  tags     = var.tags
 }
 
 resource "aws_s3_bucket_ownership_controls" "kops_oidc_store" {
   provider = aws.kops-infra-ci
-  bucket = aws_s3_bucket.kops_oidc_store.id
+  bucket   = aws_s3_bucket.kops_oidc_store.id
   rule {
     object_ownership = "BucketOwnerPreferred"
   }
@@ -54,7 +63,7 @@ resource "aws_s3_bucket_ownership_controls" "kops_oidc_store" {
 
 resource "aws_s3_bucket_public_access_block" "kops_oidc_store" {
   provider = aws.kops-infra-ci
-  bucket = aws_s3_bucket.kops_oidc_store.id
+  bucket   = aws_s3_bucket.kops_oidc_store.id
 
   block_public_acls       = false
   block_public_policy     = false
@@ -64,6 +73,6 @@ resource "aws_s3_bucket_public_access_block" "kops_oidc_store" {
 
 resource "aws_s3_bucket_acl" "kops_oidc_store" {
   provider = aws.kops-infra-ci
-  bucket = aws_s3_bucket.kops_oidc_store.id
-  acl = "public-read"
+  bucket   = aws_s3_bucket.kops_oidc_store.id
+  acl      = "public-read"
 }
