@@ -404,6 +404,17 @@ resource "kubernetes_manifest" "deployment_kube_system_cluster_autoscaler" {
               ]
             },
           ]
+          "tolerations" = [
+            {
+              key      = "node-group"
+              operator = "Equal"
+              value    = "stable"
+              effect   = "NoSchedule"
+            }
+          ]
+          "nodeSelector" = {
+            "node-group" = "stable"
+          }
           "priorityClassName" = "system-cluster-critical"
           "securityContext" = {
             "fsGroup"      = 65534
