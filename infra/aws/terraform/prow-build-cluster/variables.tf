@@ -93,6 +93,21 @@ variable "node_group_version_green" {
   description = "Kubernetes version of the EKS-managed node group (green)"
 }
 
+variable "node_group_version_us_east_2a" {
+  type        = string
+  description = "Kubernetes version of the EKS-managed node group in US East 2a"
+}
+
+variable "node_group_version_us_east_2b" {
+  type        = string
+  description = "Kubernetes version of the EKS-managed node group in US East 2b"
+}
+
+variable "node_group_version_us_east_2c" {
+  type        = string
+  description = "Kubernetes version of the EKS-managed node group in US East 2c"
+}
+
 variable "node_group_version_stable" {
   type        = string
   description = "Kubernetes version of the EKS-managed node group (stable)"
@@ -106,6 +121,21 @@ variable "node_instance_types_blue" {
 variable "node_instance_types_green" {
   type        = list(string)
   description = "Instance sizes to use for green EKS node group"
+}
+
+variable "node_instance_types_us_east_2a" {
+  type        = list(string)
+  description = "Instance sizes to use for EKS node group in US East 2a"
+}
+
+variable "node_instance_types_us_east_2b" {
+  type        = list(string)
+  description = "Instance sizes to use for EKS node group in US East 2b"
+}
+
+variable "node_instance_types_us_east_2c" {
+  type        = list(string)
+  description = "Instance sizes to use for EKS node group in US East 2c"
 }
 
 variable "node_instance_types_stable" {
@@ -128,6 +158,21 @@ variable "node_min_size_green" {
   description = "Minimum number of nodes in the green EKS node group"
 }
 
+variable "node_min_size_us_east_2a" {
+  type        = number
+  description = "Minimum number of nodes in the EKS node group in US East 2a"
+}
+
+variable "node_min_size_us_east_2b" {
+  type        = number
+  description = "Minimum number of nodes in the EKS node group in US East 2b"
+}
+
+variable "node_min_size_us_east_2c" {
+  type        = number
+  description = "Minimum number of nodes in the EKS node group in US East 2c"
+}
+
 variable "node_max_size_blue" {
   type        = number
   description = "Maximum number of nodes in the blue EKS node group"
@@ -138,6 +183,21 @@ variable "node_max_size_green" {
   description = "Maximum number of nodes in the green EKS node group"
 }
 
+variable "node_max_size_us_east_2a" {
+  type        = number
+  description = "Maximum number of nodes in the EKS node group in US East 2a"
+}
+
+variable "node_max_size_us_east_2b" {
+  type        = number
+  description = "Maximum number of nodes in the EKS node group in US East 2b"
+}
+
+variable "node_max_size_us_east_2c" {
+  type        = number
+  description = "Maximum number of nodes in the EKS node group in US East 2c"
+}
+
 variable "node_desired_size_blue" {
   type        = number
   description = "Desired number of nodes in the blue EKS node group"
@@ -146,6 +206,21 @@ variable "node_desired_size_blue" {
 variable "node_desired_size_green" {
   type        = number
   description = "Desired number of nodes in the green EKS node group"
+}
+
+variable "node_desired_size_us_east_2a" {
+  type        = number
+  description = "Desired number of nodes in the EKS node group in US East 2a"
+}
+
+variable "node_desired_size_us_east_2b" {
+  type        = number
+  description = "Desired number of nodes in the EKS node group in US East 2b"
+}
+
+variable "node_desired_size_us_east_2c" {
+  type        = number
+  description = "Desired number of nodes in the EKS node group in US East 2c"
 }
 
 variable "node_desired_size_stable" {
@@ -168,6 +243,11 @@ variable "node_taints_green" {
   default = []
 }
 
+variable "node_taints_build" {
+  type    = list(map(string))
+  default = []
+}
+
 variable "node_taints_stable" {
   type    = list(map(string))
   default = []
@@ -183,6 +263,11 @@ variable "node_labels_green" {
   default = {}
 }
 
+variable "node_labels_build" {
+  type    = map(string)
+  default = {}
+}
+
 variable "node_labels_stable" {
   type    = map(string)
   default = {}
@@ -194,6 +279,11 @@ variable "additional_node_group_tags_blue" {
 }
 
 variable "additional_node_group_tags_green" {
+  type    = map(string)
+  default = {}
+}
+
+variable "additional_node_group_tags_build" {
   type    = map(string)
   default = {}
 }
