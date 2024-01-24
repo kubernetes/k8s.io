@@ -32,50 +32,31 @@ eks_cluster_viewers = [
   "xmudrii"
 ]
 
-cluster_name                  = "prow-build-cluster"
-cluster_version               = "1.28"
-cluster_autoscaler_version    = "v1.28.0"
-
-# TODO(xmudrii): Remove these two variables once rollout is complete
-node_group_version_blue       = "1.28"
-node_group_version_green      = "1.28"
+cluster_name               = "prow-build-cluster"
+cluster_version            = "1.28"
+cluster_autoscaler_version = "v1.28.0"
 
 node_group_version_us_east_2a = "1.28"
 node_group_version_us_east_2b = "1.28"
 node_group_version_us_east_2c = "1.28"
 node_group_version_stable     = "1.28"
 
-# TODO(xmudrii): Remove these two variables once rollout is complete
-node_instance_types_blue       = ["r5ad.4xlarge"]
-node_instance_types_green      = ["r5ad.4xlarge"]
-
 node_instance_types_us_east_2a = ["r5ad.4xlarge"]
 node_instance_types_us_east_2b = ["r5ad.4xlarge"]
 node_instance_types_us_east_2c = ["r5ad.4xlarge"]
-
 node_instance_types_stable     = ["r5ad.2xlarge"]
 
-# TODO(xmudrii): Remove these two variables once rollout is complete
-node_min_size_blue     = 20
-node_max_size_blue     = 70
-node_desired_size_blue = 20
+node_min_size_us_east_2a     = 10
+node_max_size_us_east_2a     = 25
+node_desired_size_us_east_2a = 10
 
-# TODO(xmudrii): Remove these two variables once rollout is complete
-node_min_size_green     = 0
-node_max_size_green     = 1
-node_desired_size_green = 0
+node_min_size_us_east_2b     = 10
+node_max_size_us_east_2b     = 25
+node_desired_size_us_east_2b = 10
 
-node_min_size_us_east_2a     = 0
-node_max_size_us_east_2a     = 1
-node_desired_size_us_east_2a = 0
-
-node_min_size_us_east_2b     = 0
-node_max_size_us_east_2b     = 1
-node_desired_size_us_east_2b = 0
-
-node_min_size_us_east_2c     = 0
-node_max_size_us_east_2c     = 1
-node_desired_size_us_east_2c = 0
+node_min_size_us_east_2c     = 10
+node_max_size_us_east_2c     = 25
+node_desired_size_us_east_2c = 10
 
 node_desired_size_stable = 3
 

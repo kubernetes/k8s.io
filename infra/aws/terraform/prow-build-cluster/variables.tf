@@ -83,16 +83,6 @@ variable "cluster_version" {
   description = "Kubernetes version of the EKS control plane"
 }
 
-variable "node_group_version_blue" {
-  type        = string
-  description = "Kubernetes version of the EKS-managed node group (blue)"
-}
-
-variable "node_group_version_green" {
-  type        = string
-  description = "Kubernetes version of the EKS-managed node group (green)"
-}
-
 variable "node_group_version_us_east_2a" {
   type        = string
   description = "Kubernetes version of the EKS-managed node group in US East 2a"
@@ -111,16 +101,6 @@ variable "node_group_version_us_east_2c" {
 variable "node_group_version_stable" {
   type        = string
   description = "Kubernetes version of the EKS-managed node group (stable)"
-}
-
-variable "node_instance_types_blue" {
-  type        = list(string)
-  description = "Instance sizes to use for blue EKS node group"
-}
-
-variable "node_instance_types_green" {
-  type        = list(string)
-  description = "Instance sizes to use for green EKS node group"
 }
 
 variable "node_instance_types_us_east_2a" {
@@ -148,16 +128,6 @@ variable "node_volume_size" {
   description = "Volume size per node to use for EKS node group"
 }
 
-variable "node_min_size_blue" {
-  type        = number
-  description = "Minimum number of nodes in the blue EKS node group"
-}
-
-variable "node_min_size_green" {
-  type        = number
-  description = "Minimum number of nodes in the green EKS node group"
-}
-
 variable "node_min_size_us_east_2a" {
   type        = number
   description = "Minimum number of nodes in the EKS node group in US East 2a"
@@ -173,16 +143,6 @@ variable "node_min_size_us_east_2c" {
   description = "Minimum number of nodes in the EKS node group in US East 2c"
 }
 
-variable "node_max_size_blue" {
-  type        = number
-  description = "Maximum number of nodes in the blue EKS node group"
-}
-
-variable "node_max_size_green" {
-  type        = number
-  description = "Maximum number of nodes in the green EKS node group"
-}
-
 variable "node_max_size_us_east_2a" {
   type        = number
   description = "Maximum number of nodes in the EKS node group in US East 2a"
@@ -196,16 +156,6 @@ variable "node_max_size_us_east_2b" {
 variable "node_max_size_us_east_2c" {
   type        = number
   description = "Maximum number of nodes in the EKS node group in US East 2c"
-}
-
-variable "node_desired_size_blue" {
-  type        = number
-  description = "Desired number of nodes in the blue EKS node group"
-}
-
-variable "node_desired_size_green" {
-  type        = number
-  description = "Desired number of nodes in the green EKS node group"
 }
 
 variable "node_desired_size_us_east_2a" {
@@ -233,16 +183,6 @@ variable "node_max_unavailable_percentage" {
   description = "Maximum unavailable nodes in a node group"
 }
 
-variable "node_taints_blue" {
-  type    = list(map(string))
-  default = []
-}
-
-variable "node_taints_green" {
-  type    = list(map(string))
-  default = []
-}
-
 variable "node_taints_build" {
   type    = list(map(string))
   default = []
@@ -253,32 +193,12 @@ variable "node_taints_stable" {
   default = []
 }
 
-variable "node_labels_blue" {
-  type    = map(string)
-  default = {}
-}
-
-variable "node_labels_green" {
-  type    = map(string)
-  default = {}
-}
-
 variable "node_labels_build" {
   type    = map(string)
   default = {}
 }
 
 variable "node_labels_stable" {
-  type    = map(string)
-  default = {}
-}
-
-variable "additional_node_group_tags_blue" {
-  type    = map(string)
-  default = {}
-}
-
-variable "additional_node_group_tags_green" {
   type    = map(string)
   default = {}
 }
