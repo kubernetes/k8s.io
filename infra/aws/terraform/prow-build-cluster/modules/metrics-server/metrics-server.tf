@@ -294,8 +294,17 @@ resource "kubernetes_manifest" "deployment_kube_system_metrics_server" {
               ]
             },
           ]
+          "tolerations" = [
+            {
+              key      = "node-group"
+              operator = "Equal"
+              value    = "stable"
+              effect   = "NoSchedule"
+            }
+          ]
           "nodeSelector" = {
             "kubernetes.io/os" = "linux"
+            "node-group"       = "stable"
           }
           "priorityClassName"  = "system-cluster-critical"
           "serviceAccountName" = "metrics-server"
