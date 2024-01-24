@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright 2023 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,48 +14,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-## intended to be used as a node pre-bootstrap script
-## based on: https://github.com/awslabs/amazon-eks-ami/pull/1171
-
-# We're intentionally disabling SC2148 because we don't need shebang here.
-# This script is integrated as part of another script that already includes it.
-# shellcheck disable=SC2148
-
 set -o errexit
 set -o nounset
 set -o pipefail
 
-## sysctl settings (required by Prow to avoid inotify issues)
-sysctl -w fs.inotify.max_user_watches=1048576
-sysctl -w fs.inotify.max_user_instances=8192
+ROOT_DIR="/.bottlerocket/rootfs"
+MNT_DIR="${ROOT_DIR}/mnt/k8s-disks"
 
-## Increase vm.min_free_kbytes from 67584 to 540672 as recommend by the AWS support
-## to try to mitigate https://github.com/kubernetes/k8s.io/issues/5473
-## The general guidance for the vm.min_free_kbytes parameter is to not have it exceed 5%
-## of the total system memory which in the case of an r5d.4xlarge would be about 6400MB.
-## For the sake of testing, let's increase this value from 67584 to 540672 (a 8x increase)
-## to bring this up to about 540MB.
-echo 540672 > /proc/sys/vm/min_free_kbytes
+mkdir -p "${MNT_DIR}"
 
-## Set up ephemeral disks (SSDs) to be used by containerd and kubelet
-
-MNT_DIR="/mnt/k8s-disks"
+## Set up ephemeral disk (SSD) to be used by containerd and kubelet
 
 # Pick the first NVMe disk. In this case, we care about only one disk,
 # additional disks are not much of use for us.
 # We don't want to deal with RAID because we don't gain much from it.
-disk=$(find -L /dev/disk/by-id/ -xtype l -name '*NVMe_Instance_Storage_*' | head -n 1)
+disk=$(find -L "${ROOT_DIR}/dev/disk/by-id/" -xtype l -name '*NVMe_Instance_Storage_*' | head -n 1)
 
 if [[ -z "${disk}" ]]; then
   echo "no ephemeral disks found, skipping disk setup"
   exit 0
 fi
 
-# Get devices of NVMe instance storage ephemeral disks
+# Get device of NVMe instance storage ephemeral disks
 dev=$(realpath "${disk}")
 
-# Mounts and creates xfs file systems on chosen EC2 instance store NVMe disk
-# without existing file system. Mounts in /mnt/k8s-disks
+# Mount and create xfs file systems on chosen EC2 instance store NVMe disk
+# without existing file system
 if [[ -z "$(lsblk "${dev}" -o fstype --noheadings)" ]]; then
   mkfs.xfs -l su=8b "${dev}"
 fi
@@ -63,64 +49,12 @@ if [[ -n "$(lsblk "${dev}" -o MOUNTPOINT --noheadings)" ]]; then
   exit 0
 fi
 
-# Get mount point for the disk.
-mount_point="${MNT_DIR}"
-mount_unit_name="$(systemd-escape --path --suffix=mount "${mount_point}")"
+# Mount the disk in /mnt/k8s-disks
+mount -t xfs -o defaults,noatime "${dev}" "${MNT_DIR}"
 
-mkdir -p "${mount_point}"
-
-# Create systemd service to mount the disk.
-cat > "/etc/systemd/system/${mount_unit_name}" << EOF
-[Unit]
-Description=Mount EC2 Instance Store NVMe disk
-[Mount]
-What=${dev}
-Where=${mount_point}
-Type=xfs
-Options=defaults,noatime
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemd-analyze verify "${mount_unit_name}"
-systemctl enable "${mount_unit_name}" --now
-
-## Create mount points on SSD for containerd and kubelet
-needs_linked=""
-
-# Stop containerd and kubelet if they are running.
-for unit in "containerd" "kubelet"; do
-  if [[ "$(systemctl is-active var-lib-${unit}.mount)" != "active" ]]; then
-    needs_linked+=" ${unit}"
-  fi
+# Mount containerd and kubelet directories to /mnt/k8s-disks
+for unit in containerd kubelet ; do
+  mkdir -p "${MNT_DIR}/${unit}"
+  mount --rbind "${MNT_DIR}/${unit}" "${ROOT_DIR}/var/lib/${unit}"
+  mount --make-rshared "${ROOT_DIR}/var/lib/${unit}"
 done
-
-systemctl stop containerd.service snap.kubelet-eks.daemon.service
-
-# Transfer state directories to the disk, if they exist.
-for unit in ${needs_linked}; do
-  var_lib_mount_point="/var/lib/${unit}"
-  unit_mount_point="${mount_point}/${unit}"
-
-  echo "Copying ${var_lib_mount_point}/ to ${unit_mount_point}/"
-  cp -a "${var_lib_mount_point}/" "${unit_mount_point}/"
-  
-  mount_unit_name="$(systemd-escape --path --suffix=mount "${var_lib_mount_point}")"
-  
-  cat > "/etc/systemd/system/${mount_unit_name}" << EOF
-    [Unit]
-    Description=Mount ${unit} on EC2 Instance Store NVMe disk
-    [Mount]
-    What=${unit_mount_point}
-    Where=${var_lib_mount_point}
-    Type=none
-    Options=bind
-    [Install]
-    WantedBy=multi-user.target
-EOF
-  systemd-analyze verify "${mount_unit_name}"
-  systemctl enable "${mount_unit_name}" --now
-done
-
-# Start again stopped services.
-systemctl start containerd.service snap.kubelet-eks.daemon.service

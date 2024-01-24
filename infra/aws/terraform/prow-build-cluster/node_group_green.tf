@@ -59,8 +59,6 @@ locals {
       max_unavailable_percentage = var.node_max_unavailable_percentage
     }
 
-    pre_bootstrap_user_data = file("${path.module}/bootstrap/node_bootstrap_green.sh")
-
     capacity_type  = "ON_DEMAND"
     instance_types = var.node_instance_types_green
 

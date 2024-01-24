@@ -1,5 +1,5 @@
 /*
-Copyright 2024 The Kubernetes Authors.
+Copyright 2023 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15,21 +15,22 @@ limitations under the License.
 */
 
 locals {
-  node_group_stable = {
-    name            = "managed-stable"
-    description     = "EKS managed node group called stable used for stateful components"
+  node_group_build_us_east_2a = {
+    name            = "build-us-east-2a"
+    description     = "EKS managed node group in US East 2a"
     use_name_prefix = true
 
-    cluster_version = var.node_group_version_stable
+    cluster_version = var.node_group_version_us_east_2a
 
-    taints = var.node_taints_stable
-    labels = var.node_labels_stable
+    taints = var.node_taints_build
+    labels = var.node_labels_build
 
-    subnet_ids = module.vpc.public_subnets
+    # Subnet is US East 2a
+    subnet_ids = [module.vpc.public_subnets[0]]
 
-    min_size     = var.node_desired_size_stable
-    max_size     = var.node_desired_size_stable
-    desired_size = var.node_desired_size_stable
+    min_size     = var.node_min_size_us_east_2a
+    max_size     = var.node_max_size_us_east_2a
+    desired_size = var.node_desired_size_us_east_2a
 
     iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
@@ -60,7 +61,7 @@ locals {
     }
 
     capacity_type  = "ON_DEMAND"
-    instance_types = var.node_instance_types_stable
+    instance_types = var.node_instance_types_us_east_2a
 
     ebs_optimized     = true
     enable_monitoring = true
@@ -93,7 +94,8 @@ locals {
 
     tags = merge(
       local.tags,
-      var.additional_node_group_tags_stable
+      local.auto_scaling_tags,
+      var.additional_node_group_tags_build
     )
   }
 }
