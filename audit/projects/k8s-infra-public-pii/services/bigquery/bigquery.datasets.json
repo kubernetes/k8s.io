@@ -21,6 +21,15 @@
   },
   {
     "kind": "bigquery#dataset",
+    "id": "k8s-infra-public-pii:legacy_apt_packages_defs",
+    "datasetReference": {
+      "datasetId": "legacy_apt_packages_defs",
+      "projectId": "k8s-infra-public-pii"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
     "id": "k8s-infra-public-pii:legacy_pkgs_k8s_io_logs",
     "datasetReference": {
       "datasetId": "legacy_pkgs_k8s_io_logs",
