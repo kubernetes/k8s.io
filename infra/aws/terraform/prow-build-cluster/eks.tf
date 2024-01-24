@@ -104,10 +104,7 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    build-blue  = local.node_group_build_blue
-    build-green = local.node_group_build_green
-    stable      = local.node_group_stable
-
+    stable           = local.node_group_stable
     build-us-east-2a = local.node_group_build_us_east_2a
     build-us-east-2b = local.node_group_build_us_east_2b
     build-us-east-2c = local.node_group_build_us_east_2c
