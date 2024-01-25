@@ -55,14 +55,16 @@ type Manifest struct {
 // TODO: If you add any production registries you will have to update this list 🤷
 var ProdRegistries []string = []string{
 	"asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/",
-	"asia-south1-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"asia-northeast1-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"asia-northeast2-docker.pkg.dev/k8s-artifacts-prod/images/",
+	"asia-south1-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"australia-southeast1-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"europe-north1-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"europe-southwest1-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"europe-west1-docker.pkg.dev/k8s-artifacts-prod/images/",
+	"europe-west10-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"europe-west2-docker.pkg.dev/k8s-artifacts-prod/images/",
+	"europe-west3-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"europe-west4-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"europe-west8-docker.pkg.dev/k8s-artifacts-prod/images/",
 	"europe-west9-docker.pkg.dev/k8s-artifacts-prod/images/",
