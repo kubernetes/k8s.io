@@ -79,6 +79,16 @@ groups:
       - acondor@google.com
       - handbomusic@gmail.com
 
+  - email-id: k8s-infra-staging-wasm-scheduler@kubernetes.io
+    name: k8s-infra-staging-wasm-scheduler
+    description: |-
+      ACL for staging kube-scheduler-wasm-extension images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - handbomusic@gmail.com
+      - kerthcet@gmail.com
+
   - email-id: k8s-infra-staging-kwok@kubernetes.io
     name: k8s-infra-staging-kwok
     description: |-
