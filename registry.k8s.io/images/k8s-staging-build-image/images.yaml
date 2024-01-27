@@ -1,6 +1,7 @@
 - name: debian-base
   dmap:
     "sha256:b9335fa66cdb5c1562c4f952e2d99f904dbe1618a6ed0d52487e70cf6cc280fd": ["bookworm-v1.0.0"]
+    "sha256:e01b857f0b217d83315589e4546a67edc022457d9b48986aaeacc2335dfcfbaf": ["bookworm-v1.0.1"]
     "sha256:aa2e259dfe202b601b2a94a8b2e1b203a0fe92a601947da3d0c510be4e54c352": ["bullseye-v1.0.0"]
     "sha256:c9026ac9ebc6f9c80d8500d177763849cb6851452f8230cc802f5c8991459907": ["bullseye-v1.1.0"]
     "sha256:8049cfc553b1f91152945303e0766d1ff0ddd31f8f548e80e070db7b61620c1a": ["bullseye-v1.2.0"]
@@ -30,6 +31,7 @@
 - name: debian-base-amd64
   dmap:
     "sha256:b541f6b8f9dbe2e74dea9b4b2163170af6ae16e6708d80fc7c424b05c4041d2f": ["bookworm-v1.0.0"]
+    "sha256:23c01f9e239f78881ce1b52f3cd6907ced803ce9ab62572c75fcc32e21e78eaf": ["bookworm-v1.0.1"]
     "sha256:339df1ffc223945d2fd8db14f5e5b8fa1326322759571966791bced2e61da6e7": ["bullseye-v1.0.0"]
     "sha256:28e9cf19e38fddb5e1e57b22a1b057357b6da7521a182b24e6b4eb312aaba04d": ["bullseye-v1.1.0"]
     "sha256:9ce8684649c4170db5dff583a6025e42ecf2695ffe0d2846d03ed77d339962d3": ["bullseye-v1.2.0"]
@@ -59,6 +61,7 @@
 - name: debian-base-arm
   dmap:
     "sha256:4d854d1fb879bf93896b42ba47031d3f9e9a663f6d9fbd73dfd039df20aa5b82": ["bookworm-v1.0.0"]
+    "sha256:190d84aba73c30ebf694f34f7554fb0b280289060b2f29eba21484903fe1cc28": ["bookworm-v1.0.1"]
     "sha256:065b6f2f2944086afc22beb8caf711d4117d8148c42200b15b96f58282e0933e": ["bullseye-v1.0.0"]
     "sha256:8271dd310f8e9c2e8fdd83de049e1b9641b03bdad2203bc1515548262cd34a52": ["bullseye-v1.1.0"]
     "sha256:c1c51cf9f8c25f3e80e085c7f101b00ed2af245808bd81779398c08559b5cc40": ["bullseye-v1.2.0"]
@@ -88,6 +91,7 @@
 - name: debian-base-arm64
   dmap:
     "sha256:e6cacb9e5c53a0dda096ecb3b0b3618cd761234d5e33a8902bf520348f8df6e4": ["bookworm-v1.0.0"]
+    "sha256:2e3925f63c56a0a5b29782dec61a5cd8bfbc58cafd412b7655dad8ada070c926": ["bookworm-v1.0.1"]
     "sha256:6cc9b25886321eae0166e6b596ff80736899e3422b5848743f42a131cfaac81d": ["bullseye-v1.0.0"]
     "sha256:fbfc9df6c9ed132ad99eb9941a3c76c46b571172770e4a82edf1ce7f4aa5bcd1": ["bullseye-v1.1.0"]
     "sha256:fddfc705c4e485154371b51fc94ea21e6ae0b5bfafbc4f9be06be3bcef1f18e6": ["bullseye-v1.2.0"]
@@ -117,6 +121,7 @@
 - name: debian-base-ppc64le
   dmap:
     "sha256:a2d289a64544b0b7d0f994016cd5b1a921385f67c186940ae3de5be26de04f75": ["bookworm-v1.0.0"]
+    "sha256:185550c69fe387a2edd27d443867bfa3a16edb6a1d70ed27c90fffbc93bf592b": ["bookworm-v1.0.1"]
     "sha256:9a5b8a90c6dbee055464ed2ed86173576a2d3575b563e2967841f4041c30875b": ["bullseye-v1.0.0"]
     "sha256:06355106e9bf2b7b37066623018919e90c401490c95243cb89cc4c09b33832f3": ["bullseye-v1.1.0"]
     "sha256:10040f799d299290e92116b82676149f0fc772877058e3f7435ca0c6aceb66b9": ["bullseye-v1.2.0"]
@@ -146,6 +151,7 @@
 - name: debian-base-s390x
   dmap:
     "sha256:810db43a3d72cb0f6f3adbe5010b7ef3f8d8fa19e94d5ee1b4bc0563ca5a3eb7": ["bookworm-v1.0.0"]
+    "sha256:7aa7b41bfab990d1fae701d3281910ee89ee7861efa7764a009cfeaebe07ede0": ["bookworm-v1.0.1"]
     "sha256:e37d97b7583fdbeaf846c2716fcd985205cbc6c88f3ac34c210f9338912bc2a7": ["bullseye-v1.0.0"]
     "sha256:f3e77eec605cdc02d3a1a97a0d786ede4158fc5b72ab55c6ebfd1866553d61f1": ["bullseye-v1.1.0"]
     "sha256:175388117f8078335bde6381337ce7400feccf051fd64acbeda4370d25f613c2": ["bullseye-v1.2.0"]
