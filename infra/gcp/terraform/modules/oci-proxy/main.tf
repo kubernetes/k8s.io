@@ -161,6 +161,24 @@ locals {
         }
       ]
     }
+    // GCP europe-west10 is Berlin, Germany
+    europe-west10 = {
+      environment_variables = [
+        {
+          name = "DEFAULT_AWS_BASE_URL",
+          // AWS eu-central-1 is Frankfurt
+          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+        },
+        {
+          name  = "UPSTREAM_REGISTRY_ENDPOINT",
+          value = "https://europe-west10-docker.pkg.dev"
+        },
+        {
+          name  = "UPSTREAM_REGISTRY_PATH",
+          value = "k8s-artifacts-prod/images"
+        }
+      ]
+    }
     // GCP europe-west2 is London, UK
     europe-west2 = {
       environment_variables = [
@@ -172,6 +190,24 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
           value = "https://europe-west2-docker.pkg.dev"
+        },
+        {
+          name  = "UPSTREAM_REGISTRY_PATH",
+          value = "k8s-artifacts-prod/images"
+        }
+      ]
+    }
+    // GCP europe-west3 is Frankfurt, Germany
+    europe-west3 = {
+      environment_variables = [
+        {
+          name = "DEFAULT_AWS_BASE_URL",
+          // AWS eu-central-1 is Frankfurt
+          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+        },
+        {
+          name  = "UPSTREAM_REGISTRY_ENDPOINT",
+          value = "https://europe-west3-docker.pkg.dev"
         },
         {
           name  = "UPSTREAM_REGISTRY_PATH",
@@ -438,6 +474,9 @@ resource "google_cloud_run_service" "oci-proxy" {
         "autoscaling.knative.dev/maxScale" = "10" // TODO: adjust to control costs
         "run.googleapis.com/launch-stage"  = "BETA"
       }
+      labels = {
+        "run.googleapis.com/startupProbeType" = "Default"
+      }
     }
     spec {
       service_account_name = google_service_account.oci-proxy.email
@@ -470,6 +509,16 @@ resource "google_cloud_run_service" "oci-proxy" {
             // default, also the minimum permitted for second generation
             // https://cloud.google.com/run/docs/about-execution-environments
             "memory" = "512Mi"
+          }
+        }
+
+        startup_probe {
+          failure_threshold = 1
+          initial_delay_seconds = 0
+          period_seconds = 240
+          timeout_seconds = 240
+          tcp_socket {
+            port = 8080
           }
         }
       }
