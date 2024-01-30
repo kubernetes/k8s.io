@@ -61,3 +61,10 @@ spec:
         table_manager:
           retention_deletes_enabled: true
           retention_period: 12h
+      nodeSelector:
+        node-group: stable
+      tolerations:
+      - effect: NoSchedule
+        key: node-group
+        operator: Equal
+        value: stable

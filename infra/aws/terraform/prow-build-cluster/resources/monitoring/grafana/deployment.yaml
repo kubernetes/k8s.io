@@ -143,3 +143,10 @@ spec:
         - name: cluster-logs
           configMap:
             name: cluster-logs
+      nodeSelector:
+        node-group: stable
+      tolerations:
+      - effect: NoSchedule
+        key: node-group
+        operator: Equal
+        value: stable

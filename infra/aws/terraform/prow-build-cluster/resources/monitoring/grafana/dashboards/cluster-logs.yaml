@@ -1,0 +1,310 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: monitoring
+  name: cluster-logs
+data:
+  cluster-logs.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "description": "Logs collected from Kubernetes, stored in Loki except flux and test-pods",
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 2,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "f1307513-65dd-4aab-9805-a7bbe5288256"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "bars",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 4,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": "f1307513-65dd-4aab-9805-a7bbe5288256",
+              "editorMode": "code",
+              "expr": "sum(count_over_time({namespace=~\"$namespace\", stream=~\"$stream\", app=~\"$app\"} |= \"$query\" [$__interval]))",
+              "instant": false,
+              "legendFormat": "Log count",
+              "queryType": "range",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "f1307513-65dd-4aab-9805-a7bbe5288256"
+          },
+          "description": "Logs from services running in Kubernetes",
+          "gridPos": {
+            "h": 25,
+            "w": 24,
+            "x": 0,
+            "y": 4
+          },
+          "id": 2,
+          "options": {
+            "dedupStrategy": "numbers",
+            "enableLogDetails": false,
+            "prettifyLogMessage": false,
+            "showCommonLabels": false,
+            "showLabels": false,
+            "showTime": false,
+            "sortOrder": "Descending",
+            "wrapLogMessage": false
+          },
+          "targets": [
+            {
+              "datasource": "f1307513-65dd-4aab-9805-a7bbe5288256",
+              "editorMode": "code",
+              "expr": "{namespace=~\"$namespace\", stream=~\"$stream\", app=~\"$app\"} |= \"$query\"",
+              "queryType": "range",
+              "refId": "A"
+            }
+          ],
+          "type": "logs"
+        }
+      ],
+      "refresh": "10s",
+      "schemaVersion": 38,
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "selected": true,
+              "text": "",
+              "value": ""
+            },
+            "description": "String to search for",
+            "hide": 0,
+            "label": "Search Query",
+            "name": "query",
+            "options": [
+              {
+                "selected": true,
+                "text": "",
+                "value": ""
+              }
+            ],
+            "query": "",
+            "skipUrlSync": false,
+            "type": "textbox"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "kube-system",
+              "value": "kube-system"
+            },
+            "datasource": {
+              "type": "loki",
+              "uid": "f1307513-65dd-4aab-9805-a7bbe5288256"
+            },
+            "definition": "",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "namespace",
+            "options": [],
+            "query": {
+              "label": "namespace",
+              "refId": "LokiVariableQueryEditor-VariableQuery",
+              "stream": "",
+              "type": 1
+            },
+            "refresh": 2,
+            "regex": "/^(?!test-pods|flux-system).*$/",
+            "skipUrlSync": false,
+            "sort": 1,
+            "type": "query"
+          },
+          {
+            "allValue": ".+",
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "datasource": {
+              "type": "loki",
+              "uid": "f1307513-65dd-4aab-9805-a7bbe5288256"
+            },
+            "definition": "",
+            "hide": 0,
+            "includeAll": true,
+            "multi": true,
+            "name": "app",
+            "options": [],
+            "query": {
+              "label": "app",
+              "refId": "LokiVariableQueryEditor-VariableQuery",
+              "stream": "{namespace=\"$namespace\"}",
+              "type": 1
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "allValue": ".+",
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "datasource": {
+              "type": "loki",
+              "uid": "f1307513-65dd-4aab-9805-a7bbe5288256"
+            },
+            "definition": "label_values(stream)",
+            "hide": 0,
+            "includeAll": true,
+            "multi": true,
+            "name": "stream",
+            "options": [],
+            "query": "label_values(stream)",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "current": {
+              "selected": false,
+              "text": "Loki",
+              "value": "f1307513-65dd-4aab-9805-a7bbe5288256"
+            },
+            "hide": 0,
+            "includeAll": false,
+            "label": "Datasource",
+            "multi": false,
+            "name": "DS_LOKI",
+            "options": [],
+            "query": "loki",
+            "queryValue": "",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "type": "datasource"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-1h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Cluster Logs",
+      "uid": "cluster-logs",
+      "version": 1,
+      "weekStart": ""
+    }
