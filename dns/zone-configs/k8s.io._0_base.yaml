@@ -305,6 +305,11 @@ monitoring.prow-canary:
 prs:
   type: CNAME
   value: redirect.k8s.io.
+# Cloudfront endpoint for the distribution shielding
+# the S3 buckets hosting the container images blobs
+cloudfront.registry:
+  type: CNAME
+  value: d39mqg4b1dx9z1.cloudfront.net.
 # Sandbox OCI redirector service. (@ameukam,@BenTheElder,@thockin,@dims)
 registry-sandbox:
   - type: A
