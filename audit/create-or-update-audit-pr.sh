@@ -43,7 +43,7 @@ readonly AUDIT_BIN_DIR="${AUDIT_BIN_DIR:-${REPO_ROOT}/tmp/bin}"
 
 # git name/e-mail that will commit changes
 readonly GIT_NAME=${GIT_NAME:-"Kubernetes Prow Robot"}
-readonly GIT_EMAIL=${GIT_EMAIL:-"k8s-infra-ci-robot@kubernetes.io"}
+readonly GIT_EMAIL=${GIT_EMAIL:-"75457971+k8s-infra-ci-robot@users.noreply.github.com"}
 
 # github user that will push and PR changes. They must have permissions to:
 # - push FORK_BRANCH to ${fork_public_url}

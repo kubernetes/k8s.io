@@ -168,56 +168,6 @@ groups:
   # required for membership in these groups.
   #
 
-  - email-id: k8s-ci-robot@kubernetes.io
-    name: k8s-ci-robot
-    description: |-
-      Github admins for github account k8s-ci-robot
-    settings:
-      ReconcileMembers: "true"
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-    members:
-    - sig-k8s-infra-leads@kubernetes.io
-    - github@kubernetes.io
-    - sig-testing-leads@kubernetes.io
-
-  - email-id: k8s-github-robot@kubernetes.io
-    name: k8s-github-robot
-    description: |-
-      Github admins for github account k8s-github-robot
-    settings:
-      ReconcileMembers: "true"
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-    members:
-    - sig-k8s-infra-leads@kubernetes.io
-    - github@kubernetes.io
-    - sig-testing-leads@kubernetes.io
-
-  - email-id: k8s-infra-ci-robot@kubernetes.io
-    name: k8s-infra-ci-robot
-    description: |-
-      Github admins for github account k8s-infra-ci-robot
-    settings:
-      ReconcileMembers: "true"
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
-    members:
-    - sig-k8s-infra-leads@kubernetes.io
-    - github@kubernetes.io
-
-  - email-id: k8s-infra-cherrypick-robot@kubernetes.io
-    name: k8s-infra-cherrypick-robot
-    description: |-
-      Github admins for github account k8s-infra-cherry-pick-bot.
-      2fa in kubernetes.1password.com SIG Testing vault
-    settings:
-      ReconcileMembers: "true"
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-    members:
-    - k8s-infra-prow-oncall@kubernetes.io
-    - github@kubernetes.io
-
   - email-id: k8s-infra-prow-oncall@kubernetes.io
     name: k8s-infra-prow-oncall
     description: |-
