@@ -24,8 +24,17 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.19.0"
+      version = "5.33.0"
     }
+  }
+}
+
+provider "aws" {
+  region = "us-east-2"
+  alias  = "networking"
+
+  assume_role {
+    role_arn = "arn:aws:iam::${local.networking-account-id}:role/OrganizationAccountAccessRole"
   }
 }
 
