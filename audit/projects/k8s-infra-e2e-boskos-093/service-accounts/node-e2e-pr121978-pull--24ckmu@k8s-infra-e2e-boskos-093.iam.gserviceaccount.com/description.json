@@ -1,0 +1,9 @@
+{
+  "description": "kubernetes worker nodes",
+  "displayName": "node",
+  "email": "node-e2e-pr121978-pull--24ckmu@k8s-infra-e2e-boskos-093.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-e2e-boskos-093/serviceAccounts/node-e2e-pr121978-pull--24ckmu@k8s-infra-e2e-boskos-093.iam.gserviceaccount.com",
+  "oauth2ClientId": "105849540747811997541",
+  "projectId": "k8s-infra-e2e-boskos-093",
+  "uniqueId": "105849540747811997541"
+}
