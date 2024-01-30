@@ -77,9 +77,6 @@ spec:
             - name: test-infra
               mountPath: "/var/lib/grafana/dashboards/kubernetes/prow.json"
               subPath: prow.json
-            - name: cluster-logs
-              mountPath: "/var/lib/grafana/dashboards/kubernetes/cluster-logs.json"
-              subPath: cluster-logs.json
            # NOTE: temporarily disabled these dashboards until grafana has auth access
            # - name: kube-state-metrics
            #   mountPath: "/var/lib/grafana/dashboards/kubernetes/kube-state-metrics.json"
@@ -140,9 +137,6 @@ spec:
         - name: test-infra
           configMap:
             name: test-infra-dashboard
-        - name: cluster-logs
-          configMap:
-            name: cluster-logs
       nodeSelector:
         node-group: stable
       tolerations:
