@@ -35,7 +35,7 @@ spec:
         runAsUser: 472
       containers:
         - name: grafana
-          image: grafana/grafana:9.2.1
+          image: grafana/grafana:9.5.15
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: config
@@ -77,6 +77,9 @@ spec:
             - name: test-infra
               mountPath: "/var/lib/grafana/dashboards/kubernetes/prow.json"
               subPath: prow.json
+            - name: cluster-logs
+              mountPath: "/var/lib/grafana/dashboards/kubernetes/cluster-logs.json"
+              subPath: cluster-logs.json
            # NOTE: temporarily disabled these dashboards until grafana has auth access
            # - name: kube-state-metrics
            #   mountPath: "/var/lib/grafana/dashboards/kubernetes/kube-state-metrics.json"
@@ -137,3 +140,6 @@ spec:
         - name: test-infra
           configMap:
             name: test-infra-dashboard
+        - name: cluster-logs
+          configMap:
+            name: cluster-logs

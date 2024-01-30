@@ -1,6 +1,17 @@
 ## save this to values.yaml file and run
 ## k create configmap kubecost-helm-values --from-file=values.yaml -n kubecost
 ## on the prow-build-cluster
+global:
+  prometheus:
+    enabled: true
+  grafana: # prometheus metrics will be local cluster only, disable grafana to save resources
+    enabled: false
+    proxy: false
+tolerations:
+- effect: NoSchedule
+  key: node-group
+  operator: Equal
+  value: stable
 kubecostProductConfigs:
   clusterName: prow-build-cluster
   productKey:
@@ -24,13 +35,12 @@ serviceAccount: # this config uses AWS IRSA, which creates a service account wit
   name: kubecost-irsa-s3
 kubecostDeployment:
   queryServiceReplicas: 0 # to improve performance, increase replica count. see: https://docs.kubecost.com/install-and-configure/install/etl-backup/query-service-replicas
-global:
-  prometheus:
-    enabled: true
-  grafana: # prometheus metrics will be local cluster only, disable grafana to save resources
-    enabled: false
-    proxy: false
 prometheus:
+  tolerations:
+  - effect: NoSchedule
+    key: node-group
+    operator: Equal
+    value: stable
   kubeStateMetrics:
     enabled: false
   kube-state-metrics:
@@ -49,3 +59,8 @@ networkCosts:
     services:
       # set the appropriate cloud provider to true
       amazon-web-services: true
+  tolerations:
+  - effect: NoSchedule
+    key: node-group
+    operator: Equal
+    value: stable
