@@ -17,13 +17,12 @@ limitations under the License.
 locals {
   cloud_run_config = {
     asia-east1 = {
-      // TODO: switch DEFAULT_AWS_BASE_URL to cloudfront or else refine the region mapping
       // GCP asia-east1 is Changhua County, Taiwan
       environment_variables = [
         {
           name = "DEFAULT_AWS_BASE_URL",
-          // AWS ap-southeast-1 is Singapore
-          value = "https://prod-registry-k8s-io-ap-southeast-1.s3.dualstack.ap-southeast-1.amazonaws.com",
+          // AWS Cloudfront
+          value = "https://d39mqg4b1dx9z1.cloudfront.net",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -148,8 +147,8 @@ locals {
       environment_variables = [
         {
           name = "DEFAULT_AWS_BASE_URL",
-          // AWS eu-central-1 is Frankfurt
-          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+          // AWS Cloudfront
+          value = "https://d39mqg4b1dx9z1.cloudfront.net",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -220,8 +219,8 @@ locals {
       environment_variables = [
         {
           name = "DEFAULT_AWS_BASE_URL",
-          // AWS eu-central-1 is Frankfurt
-          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+          // AWS Cloudfront
+          value = "https://d39mqg4b1dx9z1.cloudfront.net",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -513,10 +512,10 @@ resource "google_cloud_run_service" "oci-proxy" {
         }
 
         startup_probe {
-          failure_threshold = 1
+          failure_threshold     = 1
           initial_delay_seconds = 0
-          period_seconds = 240
-          timeout_seconds = 240
+          period_seconds        = 240
+          timeout_seconds       = 240
           tcp_socket {
             port = 8080
           }
