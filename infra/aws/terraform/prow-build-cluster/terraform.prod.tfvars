@@ -46,17 +46,17 @@ node_instance_types_us_east_2b = ["r5ad.4xlarge"]
 node_instance_types_us_east_2c = ["r5ad.4xlarge"]
 node_instance_types_stable     = ["r5ad.2xlarge"]
 
-node_min_size_us_east_2a     = 10
+node_min_size_us_east_2a     = 7
 node_max_size_us_east_2a     = 25
-node_desired_size_us_east_2a = 10
+node_desired_size_us_east_2a = 7
 
-node_min_size_us_east_2b     = 10
+node_min_size_us_east_2b     = 7
 node_max_size_us_east_2b     = 25
-node_desired_size_us_east_2b = 10
+node_desired_size_us_east_2b = 7
 
-node_min_size_us_east_2c     = 10
+node_min_size_us_east_2c     = 7
 node_max_size_us_east_2c     = 25
-node_desired_size_us_east_2c = 10
+node_desired_size_us_east_2c = 7
 
 node_desired_size_stable = 3
 

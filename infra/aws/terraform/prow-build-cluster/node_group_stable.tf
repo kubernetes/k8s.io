@@ -67,22 +67,6 @@ locals {
 
     key_name = aws_key_pair.eks_nodes.key_name
 
-    block_device_mappings = {
-      # This must be sda1 in order to match the root volume,
-      # otherwise a new volume is created.
-      sda1 = {
-        device_name = "/dev/sda1"
-        ebs = {
-          volume_size           = var.node_volume_size
-          volume_type           = "gp3"
-          iops                  = 16000 # Maximum for gp3 volume.
-          throughput            = 1000  # Maximum for gp3 volume.
-          encrypted             = false
-          delete_on_termination = true
-        }
-      }
-    }
-
     enclave_options = {
       enabled = true
     }
