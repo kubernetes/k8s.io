@@ -8,6 +8,8 @@ global:
   grafana:
     enabled: false
     proxy: false
+nodeSelector:
+  node-group: stable
 tolerations:
 - effect: NoSchedule
   key: node-group
@@ -31,6 +33,8 @@ serviceAccount:
   create: false
   name: kubecost-irsa-s3
 prometheus:
+  nodeSelector:
+    node-group: stable
   tolerations:
   - effect: NoSchedule
     key: node-group

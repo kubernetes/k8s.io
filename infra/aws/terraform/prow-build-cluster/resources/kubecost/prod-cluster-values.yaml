@@ -7,6 +7,8 @@ global:
   grafana: # prometheus metrics will be local cluster only, disable grafana to save resources
     enabled: false
     proxy: false
+nodeSelector:
+  node-group: stable
 tolerations:
 - effect: NoSchedule
   key: node-group
@@ -36,6 +38,8 @@ serviceAccount: # this config uses AWS IRSA, which creates a service account wit
 kubecostDeployment:
   queryServiceReplicas: 0 # to improve performance, increase replica count. see: https://docs.kubecost.com/install-and-configure/install/etl-backup/query-service-replicas
 prometheus:
+  nodeSelector:
+    node-group: stable
   tolerations:
   - effect: NoSchedule
     key: node-group
