@@ -37,6 +37,17 @@ spec:
           maxLines: 1000
     promtail:
       enabled: true
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/control-plane
+        operator: Exists
+      - effect: NoSchedule
+        key: node-group
+        operator: Equal
+        value: stable
     loki:
       enabled: true
       isDefault: false
@@ -50,3 +61,10 @@ spec:
         table_manager:
           retention_deletes_enabled: true
           retention_period: 12h
+      nodeSelector:
+        node-group: stable
+      tolerations:
+      - effect: NoSchedule
+        key: node-group
+        operator: Equal
+        value: stable

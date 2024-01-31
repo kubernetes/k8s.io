@@ -8,6 +8,13 @@ global:
   grafana:
     enabled: false
     proxy: false
+nodeSelector:
+  node-group: stable
+tolerations:
+- effect: NoSchedule
+  key: node-group
+  operator: Equal
+  value: stable
 kubecostProductConfigs:
   clusterName: prow-canary-cluster
   productKey:
@@ -26,6 +33,13 @@ serviceAccount:
   create: false
   name: kubecost-irsa-s3
 prometheus:
+  nodeSelector:
+    node-group: stable
+  tolerations:
+  - effect: NoSchedule
+    key: node-group
+    operator: Equal
+    value: stable
   kubeStateMetrics:
     enabled: false
   kube-state-metrics:
@@ -44,5 +58,10 @@ networkCosts:
     services:
       # set the appropriate cloud provider to true
       amazon-web-services: true
+  tolerations:
+  - effect: NoSchedule
+    key: node-group
+    operator: Equal
+    value: stable
 kubecostFrontend:
   enabled: false
