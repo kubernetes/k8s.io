@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vcr-config
+  namespace: verify-conformance
+data:
+  vcr.yaml: |
+    external_plugins:
+      cncf/k8s-conformance:
+      - name: verify-conformance
+        events:
+          - issue_comment
+          - pull_request

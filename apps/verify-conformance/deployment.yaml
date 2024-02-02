@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: verify-conformance
+  name: verify-conformance
+  namespace: verify-conformance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: verify-conformance
+  template:
+    metadata:
+      labels:
+        app: verify-conformance
+    spec:
+      containers:
+      - args:
+        - --github-endpoint=http://ghproxy.prow
+        - --github-endpoint=https://api.github.com
+        - --dry-run=false
+        - --hmac-secret-file=/etc/webhook/hmac
+        - --plugin-config=/plugin/verify-conformance-config.yaml
+        - --update-period=5m
+        - --github-app-id=$(GITHUB_APP_ID)
+        - --github-app-private-key-path=/etc/github/cert
+        env:
+        - name: GITHUB_APP_ID
+          valueFrom:
+            secretKeyRef:
+              key: appid
+              name: github-token
+        image: gcr.io/k8s-staging-apisnoop/verify-conformance:latest # TODO use tag
+        imagePullPolicy: IfNotPresent
+        name: verify-conformance
+        ports:
+        - containerPort: 8888
+          name: http
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+        volumeMounts:
+        - mountPath: /etc/webhook
+          name: hmac
+          readOnly: true
+        - mountPath: /etc/github
+          name: oauth
+          readOnly: true
+        - mountPath: /etc/plugins
+          name: plugins
+          readOnly: true
+        - mountPath: /plugin/verify-conformance-config.yaml
+          name: verify-conformance-config
+          readOnly: true
+          subPath: verify-conformance-config.yaml
+      terminationGracePeriodSeconds: 180
+      volumes:
+      - name: hmac
+        secret:
+          secretName: hmac-token
+      - name: oauth
+        secret:
+          secretName: github-token
+      - configMap:
+          name: plugins
+        name: plugins
+      - configMap:
+          name: verify-conformance-config
+        name: verify-conformance-config
