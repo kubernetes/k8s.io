@@ -79,7 +79,7 @@ flux create source helm kubecost \
 # Different helm values are provided canary and prod clusters via ConfigMap
 kubectl create configmap kubecost-helm-values \
     --from-file=values.yaml=${resources_dir}/kubecost/${PROW_ENV}-cluster-values.yaml \
-    --namespace kubecost
+    --namespace kubecost --dry-run=client -o yaml | kubectl apply -f -
 
 boilerplate > ${resources_dir}/kubecost/flux-hr-kubecost.yaml
 flux create hr kubecost \
