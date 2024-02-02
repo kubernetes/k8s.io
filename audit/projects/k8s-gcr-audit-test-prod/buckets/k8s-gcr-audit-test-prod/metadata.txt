@@ -12,8 +12,8 @@ gs://k8s-gcr-audit-test-prod/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 01 Nov 2019 18:30:22 GMT
-	Time updated:			Mon, 18 Dec 2023 18:02:44 GMT
-	Metageneration:			91
+	Time updated:			Wed, 31 Jan 2024 07:19:17 GMT
+	Metageneration:			93
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT

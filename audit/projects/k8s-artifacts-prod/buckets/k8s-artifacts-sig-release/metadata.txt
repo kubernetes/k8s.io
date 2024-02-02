@@ -12,8 +12,8 @@ gs://k8s-artifacts-sig-release/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Thu, 05 Oct 2023 12:27:16 GMT
-	Time updated:			Mon, 18 Dec 2023 18:21:40 GMT
-	Metageneration:			13
+	Time updated:			Wed, 31 Jan 2024 07:37:59 GMT
+	Metageneration:			15
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
