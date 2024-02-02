@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta2
+apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Provider
 metadata:
   name: slack
@@ -23,7 +23,7 @@ spec:
   secretRef:
     name: slack-url
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta2
+apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Provider
 metadata:
   name: slack-k8s-infra-alerts
@@ -35,7 +35,7 @@ spec:
     name: slack-k8s-infra-alerts-token
 
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta2
+apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Alert
 metadata:
   name: alerting-cncf-prod
@@ -51,7 +51,7 @@ spec:
     - kind: Kustomization
       name: '*'
 ---
-apiVersion: notification.toolkit.fluxcd.io/v1beta2
+apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Alert
 metadata:
   name: k8s-infra-alerts
