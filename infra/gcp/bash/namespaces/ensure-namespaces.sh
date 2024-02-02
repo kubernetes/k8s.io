@@ -158,6 +158,7 @@ ALL_APPS=(
     slack-infra
     triageparty-cli
     triageparty-scalability
+    verify-conformance-release
 )
 
 for prj in "${ALL_APPS[@]}"; do
