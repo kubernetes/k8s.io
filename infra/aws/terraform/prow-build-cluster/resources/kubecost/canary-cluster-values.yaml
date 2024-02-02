@@ -1,6 +1,3 @@
-## save this to values.yaml file and run
-## k create configmap kubecost-helm-values --from-file=values.yaml -n kubecost
-## on the prow-canary-cluster
 global:
   prometheus:
     enabled: true

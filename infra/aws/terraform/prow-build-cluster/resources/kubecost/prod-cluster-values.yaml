@@ -1,6 +1,3 @@
-## save this to values.yaml file and run
-## k create configmap kubecost-helm-values --from-file=values.yaml -n kubecost
-## on the prow-build-cluster
 global:
   prometheus:
     enabled: true
@@ -38,8 +35,9 @@ serviceAccount: # this config uses AWS IRSA, which creates a service account wit
 kubecostDeployment:
   queryServiceReplicas: 0 # to improve performance, increase replica count. see: https://docs.kubecost.com/install-and-configure/install/etl-backup/query-service-replicas
 prometheus:
-  nodeSelector:
-    node-group: stable
+  # already has a pvc dependency - will be updated later
+  #nodeSelector:
+  #  node-group: stable
   tolerations:
   - effect: NoSchedule
     key: node-group
