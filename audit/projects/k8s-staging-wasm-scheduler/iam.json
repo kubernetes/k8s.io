@@ -1,0 +1,56 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:106091803097@cloudbuild.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-wasm-scheduler@kubernetes.io",
+        "serviceAccount:gcb-image-builder@k8s-staging-wasm-scheduler.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-106091803097@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.occurrences.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-106091803097@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerregistry.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-106091803097@gcp-sa-pubsub.iam.gserviceaccount.com"
+      ],
+      "role": "roles/pubsub.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-wasm-scheduler@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-wasm-scheduler@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "version": 1
+}

@@ -99,6 +99,12 @@
     },
     {
       "members": [
+        "serviceAccount:gcb-922@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountTokenCreator"
+    },
+    {
+      "members": [
         "group:k8s-infra-ii-coop@kubernetes.io",
         "user:ameukam@gmail.com"
       ],

@@ -1,0 +1,9 @@
+{
+  "description": "service account to use for calling `cosign sign` to sign images like verify-conformance",
+  "displayName": "gcb",
+  "email": "gcb-922@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-ii-sandbox/serviceAccounts/gcb-922@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
+  "oauth2ClientId": "102061087993059965228",
+  "projectId": "k8s-infra-ii-sandbox",
+  "uniqueId": "102061087993059965228"
+}
