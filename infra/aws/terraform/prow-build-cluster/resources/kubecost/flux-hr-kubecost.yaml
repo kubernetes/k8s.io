@@ -28,7 +28,7 @@ spec:
         kind: HelmRepository
         name: kubecost
         namespace: flux-system
-      version: 1.107.1
+      version: 2.0.1
   interval: 1m0s
   valuesFrom:
   - kind: ConfigMap

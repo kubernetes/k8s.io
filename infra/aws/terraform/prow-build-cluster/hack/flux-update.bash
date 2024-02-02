@@ -76,14 +76,18 @@ flux create source helm kubecost \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
 
-# The helm values are different for canary and prod clusters
+# Different helm values are provided canary and prod clusters via ConfigMap
+kubectl create configmap kubecost-helm-values \
+    --from-file=values.yaml=${resources_dir}/kubecost/${PROW_ENV}-cluster-values.yaml \
+    --namespace kubecost
+
 boilerplate > ${resources_dir}/kubecost/flux-hr-kubecost.yaml
 flux create hr kubecost \
     --source HelmRepository/kubecost.flux-system \
     --namespace=kubecost \
     --chart cost-analyzer \
-    --chart-version 1.107.1 \
-    --values=${resources_dir}/kubecost/${PROW_ENV}-cluster-values.yaml \
+    --chart-version 2.0.1 \
+    --values-from=ConfigMap/kubecost-helm-values \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
 
