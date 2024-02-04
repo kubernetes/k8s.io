@@ -30,13 +30,6 @@ serviceAccount:
   create: false
   name: kubecost-irsa-s3
 prometheus:
-  nodeSelector:
-    node-group: stable
-  tolerations:
-  - effect: NoSchedule
-    key: node-group
-    operator: Equal
-    value: stable
   kubeStateMetrics:
     enabled: false
   kube-state-metrics:
@@ -48,6 +41,13 @@ prometheus:
       external_labels:
         # cluster_id should be unique for all clusters and the same value as .kubecostProductConfigs.clusterName
         cluster_id: prow-canary-cluster
+    nodeSelector:
+      node-group: stable
+    tolerations:
+    - effect: NoSchedule
+      key: node-group
+      operator: Equal
+      value: stable
 networkCosts:
   # optional, see: https://docs.kubecost.com/install-and-configure/advanced-configuration/network-costs-configuration
   enabled: true
