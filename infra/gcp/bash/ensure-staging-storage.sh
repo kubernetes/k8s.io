@@ -30,11 +30,11 @@ SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/lib.sh"
 
 function usage() {
-    echo "usage: $0 [repo...]" > /dev/stderr
-    echo "example:" > /dev/stderr
-    echo "  $0 # do all staging repos" > /dev/stderr
-    echo "  $0 coredns # just do one" > /dev/stderr
-    echo > /dev/stderr
+	echo "usage: $0 [repo...]" >/dev/stderr
+	echo "example:" >/dev/stderr
+	echo "  $0 # do all staging repos" >/dev/stderr
+	echo "  $0 coredns # just do one" >/dev/stderr
+	echo >/dev/stderr
 }
 
 #
@@ -137,6 +137,8 @@ function ensure_staging_project() {
     fi
     local project="${1}"
     local writers="${2}"
+    # Enforcing a location for the GCP Artifact Registry
+    local location="us-central1"
 
     # The names of the buckets
     local staging_bucket="gs://${project}" # used by humans
@@ -174,6 +176,10 @@ function ensure_staging_project() {
     # Enable image promoter access to vulnerability scanning results
     color 6 "Ensuring ${cip_principal} can view vulnernability scanning results for project: ${project}"
     ensure_project_role_binding "${project}" "${cip_principal}" "roles/containeranalysis.occurrences.viewer"
+
+    # Ensure staging AR repo
+    color 3 "Ensuring staging AR repo: ${location}-docker.pkg.dev/${project}/images"
+    ensure_ar_repo "${project}" "${location}" 2>&1 | indent
 
     # Ensure staging project GCR
 
