@@ -14,13 +14,6 @@
     },
     {
       "members": [
-        "deleted:serviceAccount:node-scalability-k8s-local@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=116834832399570329698"
-      ],
-      "role": "roles/compute.viewer"
-    },
-    {
-      "members": [
-        "deleted:serviceAccount:control-plane-scalabili-il6mt5@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=100534378042614161780",
         "serviceAccount:service-189277497252@container-engine-robot.iam.gserviceaccount.com"
       ],
       "role": "roles/container.serviceAgent"
