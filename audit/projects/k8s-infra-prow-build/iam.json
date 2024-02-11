@@ -26,6 +26,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-773781448124@gcp-sa-cloudkms.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-773781448124@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"

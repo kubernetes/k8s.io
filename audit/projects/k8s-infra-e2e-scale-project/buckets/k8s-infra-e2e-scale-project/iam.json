@@ -25,12 +25,6 @@
         "projectViewer:k8s-infra-e2e-scale-project"
       ],
       "role": "roles/storage.legacyObjectReader"
-    },
-    {
-      "members": [
-        "deleted:serviceAccount:control-plane-scalabili-il6mt5@k8s-infra-e2e-scale-project.iam.gserviceaccount.com?uid=100534378042614161780"
-      ],
-      "role": "roles/storage.objectAdmin"
     }
   ]
 }
