@@ -62,11 +62,11 @@ function ensure_e2e_project() {
 
     color 6 "Ensuring only APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
     ensure_only_services "${prj}" \
-        compute.googleapis.com \
         cloudkms.googleapis.com \
-        file.googleapis.com \
+        compute.googleapis.com \
         container.googleapis.com \
         containerregistry.googleapis.com \
+        file.googleapis.com \
         logging.googleapis.com \
         monitoring.googleapis.com \
         storage-component.googleapis.com
@@ -77,6 +77,11 @@ function ensure_e2e_project() {
     ensure_project_role_binding "${prj}" \
       "serviceAccount:${PROW_BUILD_SVCACCT}" \
       "roles/editor"
+
+    # Ensure GCP CSI driver tests can manage KMS keys
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:${PROW_BUILD_SVCACCT}" \
+      "roles/cloudkms.cryptoKeyEncrypterDecrypter"
 
     # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
     #       could consider using a more limited custom IAM role instead
