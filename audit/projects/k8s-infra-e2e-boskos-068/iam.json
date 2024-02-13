@@ -8,6 +8,12 @@
     },
     {
       "members": [
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+    },
+    {
+      "members": [
         "serviceAccount:service-101721090067@compute-system.iam.gserviceaccount.com"
       ],
       "role": "roles/compute.serviceAgent"
