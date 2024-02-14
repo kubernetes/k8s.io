@@ -103,6 +103,7 @@ kustomizations=(
     test-pods
     external-secrets
     kubecost
+    cluster-autoscaler
 )
 
 # Code below is used to figure out a relative path of
