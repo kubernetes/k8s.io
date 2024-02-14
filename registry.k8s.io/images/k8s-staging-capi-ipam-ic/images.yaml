@@ -1,3 +1,4 @@
 - name: cluster-api-ipam-in-cluster-controller
   dmap:
     "sha256:3b92d0b3a9b3b9ab449e5928dff66b7e3008c3a8570b3440cc415ed97dabdabc": ["v0.1.0-rc.0"]
+    "sha256:2fa62384935b0233f68acf75fcb12bbe149b7f122e83d4e5f67f157e73998732": ["v0.1.0"]
