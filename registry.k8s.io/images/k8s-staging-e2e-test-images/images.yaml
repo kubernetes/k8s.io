@@ -23,6 +23,8 @@
     "sha256:16bbf38c463a4223d8cfe4da12bc61010b082a79b4bb003e2d3ba3ece5dd5f9e": ["2.43"]
     "sha256:8b6904298fe8a79d1987faec87fd97437774bbb01b1a47495cec593d03751349": ["2.44"]
     "sha256:2c5b5b056076334e4cf431d964d102e44cbca8f1e6b16ac1e477a0ffbe6caac4": ["2.45"]
+    # 2.46 was not built due to https://github.com/kubernetes/kubernetes/issues/123266
+    "sha256:cc249acbd34692826b2b335335615e060fdb3c0bca4954507aa3a1d1194de253": ["2.47"]
 - name: apparmor-loader
   dmap:
     "sha256:60629fe42de6260c9b930b48a2923b69168dc1c71fa5f762f70036477ffd74b6": ["1.2"]
