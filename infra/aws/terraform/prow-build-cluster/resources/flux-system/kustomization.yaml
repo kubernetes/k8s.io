@@ -1,0 +1,33 @@
+# As described here: https://fluxcd.io/flux/installation/configuration/boostrap-customization/
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- gotk-components.yaml
+patches:
+  # remove default "kubernetes.io/os: linux" nodeSelector
+  # kubernetes will choose any match
+  - patch: |
+      - op: remove
+        path: /spec/template/spec/nodeSelector
+    target:
+      kind: Deployment
+      labelSelector: "app.kubernetes.io/part-of=flux"
+  # patch for nodeSelector and toleration
+  - patch: |
+      kind: not-important
+      metadata:
+        name: not-important
+      spec:
+        template:
+          spec:
+            nodeSelector:
+              node-group: stable
+            tolerations:
+            - effect: NoSchedule
+              key: node-group
+              operator: Equal
+              value: stable
+    target:
+      kind: Deployment
+      labelSelector: "app.kubernetes.io/part-of=flux"
