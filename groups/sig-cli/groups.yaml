@@ -18,7 +18,7 @@ groups:
       - eddiezane@gmail.com
       - kn.verey@gmail.com
       - maszulik@redhat.com
-      - natashasarkar@google.com
+      - mpuckett259@gmail.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
@@ -39,8 +39,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - natashasarkar@google.com
       - kn.verey@gmail.com
+      - kobdotsh@gmail.com
 
   - email-id: k8s-infra-staging-krm-functions@kubernetes.io
     name: k8s-infra-staging-krm-functions
@@ -52,7 +52,6 @@ groups:
       - jeremy.r.rickard@gmail.com
       - kn.verey@gmail.com
       - mengqiy@google.com
-      - natashasarkar@google.com
   #
   # k8s-infra gcs write access
   #
@@ -90,3 +89,4 @@ groups:
       - eddiezane@gmail.com
       - kn.verey@gmail.com
       - maszulik@redhat.com
+      - mpuckett259@gmail.com
