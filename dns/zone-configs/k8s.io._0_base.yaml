@@ -519,7 +519,7 @@ kubectl.sigs:
 kueue.sigs:
   type: CNAME
   value: kubernetes-sigs-kueue.netlify.app.
-# https://github.com/kubernetes-sigs/jobset docs (@moficodes @@danielvegamyhre)
+# https://github.com/kubernetes-sigs/jobset docs (@moficodes @danielvegamyhre)
 jobset.sigs:
   type: CNAME
   value: kubernetes-docs.netlifyglobalcdn.com.
