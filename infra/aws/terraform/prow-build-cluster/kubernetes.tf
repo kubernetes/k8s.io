@@ -14,36 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module "cluster_autoscaler" {
-  count = var.deploy_kubernetes_resources ? 1 : 0
-
-  source = "./modules/cluster-autoscaler"
-  providers = {
-    kubernetes = kubernetes
-  }
-
-  cluster_name                    = module.eks.cluster_name
-  cluster_autoscaler_iam_role_arn = module.cluster_autoscaler_irsa.iam_role_arn
-  cluster_autoscaler_version      = var.cluster_autoscaler_version
-
-  depends_on = [
-    module.eks
-  ]
-}
-
-module "metrics_server" {
-  count = var.deploy_kubernetes_resources ? 1 : 0
-
-  source = "./modules/metrics-server"
-  providers = {
-    kubernetes = kubernetes
-  }
-
-  depends_on = [
-    module.eks
-  ]
-}
-
 # AWS Load Balancer Controller (ALB/NLB integration).
 resource "helm_release" "aws_lb_controller" {
   count = var.deploy_kubernetes_resources ? 1 : 0
