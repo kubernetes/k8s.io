@@ -15,7 +15,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - aravindh@redhat.com
+      - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
       - jayunit100.apache@gmail.com
       - jsturtevant@gmail.com
@@ -40,7 +40,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - aravindh@redhat.com
+      - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
       - jayunit100.apache@gmail.com
       - jsturtevant@gmail.com
@@ -53,7 +53,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - aravindh@redhat.com
+      - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
       - jayunit100.apache@gmail.com
       - jsturtevant@gmail.com
@@ -66,7 +66,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - aravindh@redhat.com
+      - aravindh.foss@pm.me
       - aknabben@vmware.com
       - jayunit100.apache@gmail.com
       - jsturtevant@gmail.com
