@@ -3682,7 +3682,12 @@ spec:
         - mountPath: /tmp
           name: tmp
       nodeSelector:
-        kubernetes.io/os: linux
+        node-group: stable
+      tolerations:
+        - key: node-group
+          operator: Equal
+          value: stable
+          effect: NoSchedule
       priorityClassName: system-cluster-critical
       securityContext:
         fsGroup: 1337
@@ -5413,7 +5418,12 @@ spec:
         - mountPath: /tmp
           name: temp
       nodeSelector:
-        kubernetes.io/os: linux
+        node-group: stable
+      tolerations:
+        - key: node-group
+          operator: Equal
+          value: stable
+          effect: NoSchedule
       priorityClassName: system-cluster-critical
       securityContext:
         fsGroup: 1337
@@ -7770,7 +7780,12 @@ spec:
         - mountPath: /tmp
           name: temp
       nodeSelector:
-        kubernetes.io/os: linux
+        node-group: stable
+      tolerations:
+        - key: node-group
+          operator: Equal
+          value: stable
+          effect: NoSchedule
       priorityClassName: system-cluster-critical
       securityContext:
         fsGroup: 1337
@@ -9686,7 +9701,12 @@ spec:
         - mountPath: /tmp
           name: temp
       nodeSelector:
-        kubernetes.io/os: linux
+        node-group: stable
+      tolerations:
+        - key: node-group
+          operator: Equal
+          value: stable
+          effect: NoSchedule
       securityContext:
         fsGroup: 1337
       serviceAccountName: notification-controller
