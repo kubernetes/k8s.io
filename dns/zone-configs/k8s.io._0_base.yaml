@@ -291,7 +291,7 @@ monitoring.prow:
   value: 130.211.20.136
 monitoring-eks.prow:
   type: CNAME
-  value: a9c199484557245839f927864e289c04-1058206500.us-east-2.elb.amazonaws.com.
+  value: a263543bde23d465583081052e18b3e3-1240977898.us-east-2.elb.amazonaws.com.
 # Record for AWS ACM DNS challenge
 _bec7190baed957d2b71b4fc33bdec856.monitoring-eks.prow:
   type: CNAME
