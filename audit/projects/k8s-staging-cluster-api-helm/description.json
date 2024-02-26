@@ -1,5 +1,5 @@
 {
-  "createTime": "2023-03-06T21:32:51.301Z",
+  "createTime": "2023-03-06T21:32:51.301035Z",
   "lifecycleState": "ACTIVE",
   "name": "k8s-staging-cluster-api-helm",
   "parent": {
