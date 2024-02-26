@@ -422,6 +422,10 @@ cluster-api-gcp.sigs:
 cluster-api-openstack.sigs:
 - type: CNAME
   value: kubernetes-sigs-cluster-api-openstack.netlify.app.
+# https://github.com/kubernetes-sigs/cluster-api-operator docs (@furkatgofurov7, @alexander-demicev, @Fedosin, @Danil-Grigorev, @JoelSpeed, @damdo)
+cluster-api-operator.sigs:
+- type: CNAME
+  value: kubernetes-docs.netlifyglobalcdn.com.
 # https://github.com/kubernetes-sigs/cluster-api-provider-ibmcloud (@mkumatag @gyliu513)
 cluster-api-ibmcloud.sigs:
   type: NS
