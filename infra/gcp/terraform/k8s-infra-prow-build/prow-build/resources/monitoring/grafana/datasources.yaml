@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datasources
+  namespace: monitoring
+data:
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+    - access: proxy
+      isDefault: true
+      name: Prometheus Main
+      type: prometheus
+      url: http://prometheus-operated.monitoring:9090
+    - access: proxy
+      isDefault: false
+      name: Loki
+      type: loki
+      url: http://loki-stack.monitoring:3100
