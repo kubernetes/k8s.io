@@ -47,7 +47,11 @@ function deploy_cluster_resources() {
     kubectl --context="${context}" apply \
         --filename ./*.yaml
 
-    find . -type d -mindepth 1 -maxdepth 1 | sed -e 's|^./||' \
+    # Deploy the Prometheus Operator CRDs before deploying everything else
+    kubectl --context="${context}" apply --server-side \
+        --filename "./prometheus-operator-crds/*.yaml"
+
+    find . -type d -mindepth 1 -maxdepth 1 -not -path './prometheus-operator-crds' | sed -e 's|^./||' \
     | while read -r namespace; do
         echo "deploying resources in namespace: ${namespace}"
         kubectl --context="${context}" apply \
