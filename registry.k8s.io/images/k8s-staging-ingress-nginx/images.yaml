@@ -298,6 +298,7 @@
     "sha256:458b4ef757308c0e4c647856d4c35dabc4c2bcc9a97211861cc8e8772abfa044": ["v20230721-40f94ef1b"]
     "sha256:a7943503b45d552785aa3b5e457f169a5661fb94d82b8a3373bcd9ebaf9aac80": ["v20231011-8b53cabe0"]
     "sha256:25d6a5f11211cc5c3f9f2bf552b585374af287b4debf693cacbe2da47daa5084": ["v20231226-1a7112e06"]
+    "sha256:44d1d0e9f19c63f58b380c5fddaca7cf22c7cee564adeff365225a5df5ef3334": ["v1.4.0"]
 
 # nginx-errors
 # https://github.com/kubernetes/ingress-nginx/tree/main/images/custom-error-pages
