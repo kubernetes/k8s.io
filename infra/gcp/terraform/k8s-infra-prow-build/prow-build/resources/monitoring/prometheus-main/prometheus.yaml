@@ -4,11 +4,12 @@ metadata:
   name: main
   namespace: monitoring
 spec:
-  alerting:
-    alertmanagers:
-      - namespace: monitoring
-        name: alertmanager-operated
-        port: web
+## disable alerting for the time being
+#  alerting:
+#    alertmanagers:
+#      - namespace: monitoring
+#        name: alertmanager-operated
+#        port: web
   version: v2.50.1
   serviceAccountName: prometheus
   podMonitorNamespaceSelector: {}
