@@ -119,10 +119,3 @@ spec:
         - name: test-infra
           configMap:
             name: test-infra-dashboard
-      nodeSelector:
-        node-group: stable
-      tolerations:
-      - effect: NoSchedule
-        key: node-group
-        operator: Equal
-        value: stable
