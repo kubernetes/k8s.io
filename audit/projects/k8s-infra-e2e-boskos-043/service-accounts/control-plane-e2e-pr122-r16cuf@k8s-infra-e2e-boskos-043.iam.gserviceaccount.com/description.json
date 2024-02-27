@@ -1,9 +1,0 @@
-{
-  "description": "kubernetes control-plane instances",
-  "displayName": "control-plane",
-  "email": "control-plane-e2e-pr122-r16cuf@k8s-infra-e2e-boskos-043.iam.gserviceaccount.com",
-  "name": "projects/k8s-infra-e2e-boskos-043/serviceAccounts/control-plane-e2e-pr122-r16cuf@k8s-infra-e2e-boskos-043.iam.gserviceaccount.com",
-  "oauth2ClientId": "117855999357808919255",
-  "projectId": "k8s-infra-e2e-boskos-043",
-  "uniqueId": "117855999357808919255"
-}
