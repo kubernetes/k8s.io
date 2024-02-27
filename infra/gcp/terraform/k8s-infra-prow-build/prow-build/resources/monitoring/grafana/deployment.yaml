@@ -59,22 +59,22 @@ spec:
             - name: prow
               mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-repositories.json"
               subPath: repositories.json
-            - name: test-infra
-              mountPath: "/var/lib/grafana/dashboards/kubernetes/boskos-http.json"
-              subPath: boskos-http.json
-            - name: test-infra
-              mountPath: "/var/lib/grafana/dashboards/kubernetes/boskos.json"
-              subPath: boskos.json
-            - name: test-infra
-              mountPath: "/var/lib/grafana/dashboards/kubernetes/prow.json"
-              subPath: prow.json
-           # NOTE: temporarily disabled these dashboards until grafana has auth access
-           # - name: kube-state-metrics
-           #   mountPath: "/var/lib/grafana/dashboards/kubernetes/kube-state-metrics.json"
-           #   subPath: kube-state-metrics.json
-           # - name: node-exporter-full
-           #   mountPath: "/var/lib/grafana/dashboards/kubernetes/node-exporter-full.json"
-           #   subPath: node-exporter-full.json
+            # NOTE: temporarily disabled these dashboards until grafana has auth access
+            # - name: test-infra
+            #   mountPath: "/var/lib/grafana/dashboards/kubernetes/boskos-http.json"
+            #   subPath: boskos-http.json
+            # - name: test-infra
+            #   mountPath: "/var/lib/grafana/dashboards/kubernetes/boskos.json"
+            #   subPath: boskos.json
+            # - name: test-infra
+            #   mountPath: "/var/lib/grafana/dashboards/kubernetes/prow.json"
+            #   subPath: prow.json
+            # - name: kube-state-metrics
+            #   mountPath: "/var/lib/grafana/dashboards/kubernetes/kube-state-metrics.json"
+            #   subPath: kube-state-metrics.json
+            # - name: node-exporter-full
+            #   mountPath: "/var/lib/grafana/dashboards/kubernetes/node-exporter-full.json"
+            #   subPath: node-exporter-full.json
           ports:
             - name: grafana
               containerPort: 3000
@@ -107,15 +107,17 @@ spec:
         - name: dashboards
           configMap:
             name: dashboards
-        - name: kube-state-metrics
-          configMap:
-            name: kube-state-metrics
-        - name: node-exporter-full
-          configMap:
-            name: node-exporter-full
+        # NOTE: temporarily disabled these dashboards until grafana has auth access
+        # - name: kube-state-metrics
+        #   configMap:
+        #     name: kube-state-metrics
+        # - name: node-exporter-full
+        #   configMap:
+        #     name: node-exporter-full
         - name: prow
           configMap:
             name: prow-dashboards
-        - name: test-infra
-          configMap:
-            name: test-infra-dashboard
+        # NOTE: temporarily disabled these dashboards until grafana has auth access
+        # - name: test-infra
+        #   configMap:
+        #     name: test-infra-dashboard
