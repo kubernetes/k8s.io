@@ -6,7 +6,7 @@ metadata:
   labels:
     app: grafana
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - name: http
       port: 3000
