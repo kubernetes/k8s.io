@@ -38,6 +38,7 @@ groups:
       - apelisse@google.com
       - aravindh.foss@pm.me # SIG Windows
       - augustus@cisco.com # SIG Release
+      - benjamin.ahrtr@gmail.com # SIG etcd
       - bentheelder@google.com
       - bpratt@redhat.com # SIG Testing
       - bridget@kromhout.org # SIG Cloud Provider
@@ -74,6 +75,7 @@ groups:
       - hweicdl@gmail.com
       - ian@coldwater.io
       - irvi.fa@gmail.com
+      - jablair@redhat.com # SIG etcd
       - jameswangel@gmail.com
       - jayunit100.apache@gmail.com
       - jbelamaric@google.com
@@ -144,6 +146,7 @@ groups:
       - tpepper@vmware.com
       - vince@vincepri.com
       - vincepri@vmware.com
+      - wenjiazhang@google.com # SIG etcd
       - wfender@google.com
       - wojtekt@google.com
       - xandergrzyw@gmail.com # CoCC
