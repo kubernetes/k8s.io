@@ -12,7 +12,6 @@
     "managedZones": 10000,
     "managedZonesPerGkeCluster": 10000,
     "managedZonesPerNetwork": 10000,
-    "nameserversPerDelegation": 8,
     "networksPerManagedZone": 100,
     "networksPerPolicy": 100,
     "networksPerResponsePolicy": 100,
