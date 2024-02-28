@@ -30,10 +30,10 @@ resource "google_compute_address" "kubernetes_external_secrets_metrics" {
   address_type = "EXTERNAL"
 }
 
-resource "google_compute_address" "grafana_ingress" {
+resource "google_compute_global_address" "grafana_ingress" {
   name         = "grafana-ingress"
-  description  = "to expose grafana running in-cluster via monitoring-gke.k8s.prow.io"
+  description  = "to expose grafana running in-cluster on monitoring-gke.prow.k8s.io"
   project      = module.project.project_id
-  region       = local.cluster_location
   address_type = "EXTERNAL"
+  ip_version   = "IPV4"
 }
