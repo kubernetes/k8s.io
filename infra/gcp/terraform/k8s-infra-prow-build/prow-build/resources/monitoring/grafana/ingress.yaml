@@ -9,7 +9,7 @@ metadata:
     kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.global-static-ip-name: grafana-ingress
     kubernetes.io/ingress.class: gce
-    # networking.gke.io/managed-certificates: grafana
+    networking.gke.io/managed-certificates: grafana
 spec:
   defaultBackend:
     service:
