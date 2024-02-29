@@ -57,6 +57,12 @@ Redirections
 - https://go.k8s.io/test-history
 - https://go.k8s.io/triage
 - https://go.k8s.io/logo
+- https://go.k8s.io/contact
+- https://go.k8s.io/contact/${GROUP_NAME}
+  - For example:
+    - https://go.k8s.io/contact/sig-contributor-experience
+    - https://go.k8s.io/contact/wg-lts
+    - https://go.k8s.io/contact/committee-steering
 
 
 NOTE: please see configmap-nginx.yaml for rewrite rules.
