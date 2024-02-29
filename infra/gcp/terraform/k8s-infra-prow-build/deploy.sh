@@ -60,6 +60,13 @@ function deploy_cluster_resources() {
             --recursive
     done
 
+    # Deploy Kubecost via Helm chart
+    helm upgrade --install kubecost \
+        --repo https://kubecost.github.io/cost-analyzer/ cost-analyzer \
+        --version 2.0.1 \
+        --namespace kubecost \
+        --values ./kubecost/helm-values
+
     popd
 }
 
