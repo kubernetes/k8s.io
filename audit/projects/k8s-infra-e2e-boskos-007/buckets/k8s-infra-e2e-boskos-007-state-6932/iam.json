@@ -1,0 +1,23 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:k8s-infra-e2e-boskos-007",
+        "projectOwner:k8s-infra-e2e-boskos-007"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-e2e-boskos-007"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "deleted:serviceAccount:control-plane-e2e-pr123-amu2oo@k8s-infra-e2e-boskos-007.iam.gserviceaccount.com?uid=114561536064976815533"
+      ],
+      "role": "roles/storage.objectAdmin"
+    }
+  ]
+}
