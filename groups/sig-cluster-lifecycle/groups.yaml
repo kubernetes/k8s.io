@@ -232,6 +232,7 @@ groups:
       - naadir.jeewa@broadcom.com
       - cilliancapi@gmail.com
       - ytijani@vmware.com
+      - fabrizio.pandini@gmail.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-vsphere-alerts
