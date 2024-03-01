@@ -285,7 +285,6 @@ spec:
                   key: kubecost-token
             - name: WATERFOWL_ENABLED
               value: "true"
-        
         - name: aggregator
           securityContext:
             allowPrivilegeEscalation: false
@@ -335,10 +334,8 @@ spec:
               value: "info"
             - name: KUBECOST_NAMESPACE
               value: kubecost
-        
         - name: cloud-cost
           image: gcr.io/kubecost1/cost-model:prod-2.0.1
-          
           readinessProbe:
             httpGet:
               path: /healthz
@@ -584,7 +581,6 @@ spec:
     spec:
       serviceAccountName: kubecost-prometheus-server
       containers:
-
         - name: prometheus-server
           image: "quay.io/prometheus/prometheus:v2.49.1"
           imagePullPolicy: "IfNotPresent"

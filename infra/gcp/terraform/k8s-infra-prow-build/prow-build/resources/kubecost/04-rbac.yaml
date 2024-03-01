@@ -4,7 +4,6 @@ kind: ClusterRole
 metadata:
   name: kubecost-cost-analyzer
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
@@ -127,7 +126,6 @@ kind: ClusterRoleBinding
 metadata:
   name: kubecost-cost-analyzer
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
@@ -166,7 +164,6 @@ metadata:
   namespace: kubecost
   name: kubecost-cost-analyzer
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
@@ -188,7 +185,6 @@ metadata:
   name: kubecost-cost-analyzer
   namespace: kubecost
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost

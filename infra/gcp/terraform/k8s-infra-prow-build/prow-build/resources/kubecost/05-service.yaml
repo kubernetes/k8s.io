@@ -5,7 +5,6 @@ metadata:
   name: kubecost-cloud-cost
   namespace: kubecost
   labels:
-
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cost-analyzer
@@ -13,7 +12,6 @@ metadata:
     app: cost-analyzer
 spec:
   selector:
-
     app.kubernetes.io/name: cost-analyzer
     app.kubernetes.io/instance: kubecost
     app: cost-analyzer
@@ -29,13 +27,11 @@ metadata:
   name: kubecost-aggregator
   namespace: kubecost
   labels:
-
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/managed-by: Helm
     app: aggregator
 spec:
   selector:
-
     app.kubernetes.io/name: cost-analyzer
     app.kubernetes.io/instance: kubecost
     app: cost-analyzer
@@ -73,7 +69,6 @@ metadata:
   name: kubecost-cost-analyzer
   namespace: kubecost
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
@@ -81,7 +76,6 @@ metadata:
     app: cost-analyzer
 spec:
   selector:
-    
     app.kubernetes.io/name: cost-analyzer
     app.kubernetes.io/instance: kubecost
     app: cost-analyzer

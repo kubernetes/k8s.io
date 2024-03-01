@@ -5,7 +5,6 @@ metadata:
   name: kubecost-cost-analyzer
   namespace: kubecost
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
@@ -22,7 +21,6 @@ metadata:
   name: network-costs-config
   namespace: kubecost
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
@@ -52,7 +50,6 @@ metadata:
   name: pricing-configs
   namespace: kubecost
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
@@ -67,7 +64,6 @@ metadata:
   name: external-grafana-config-map
   namespace: kubecost
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
@@ -234,7 +230,6 @@ data:
         - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
           action: keep
           regex:  network-costs
-    
   recording_rules.yml: |
     {}
   rules: |

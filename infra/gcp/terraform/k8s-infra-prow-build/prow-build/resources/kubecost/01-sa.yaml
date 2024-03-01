@@ -5,7 +5,6 @@ metadata:
   name: kubecost-cost-analyzer
   namespace: kubecost
   labels:
-    
     app.kubernetes.io/name: cost-analyzer
     helm.sh/chart: cost-analyzer-2.0.1
     app.kubernetes.io/instance: kubecost
