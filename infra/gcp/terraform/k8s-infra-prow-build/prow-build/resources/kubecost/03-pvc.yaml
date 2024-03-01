@@ -1,0 +1,36 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: kubecost-cost-analyzer
+  namespace: kubecost
+  labels:
+    
+    app.kubernetes.io/name: cost-analyzer
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/managed-by: Helm
+    app: cost-analyzer
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 32Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    component: "server"
+    app: prometheus
+    release: kubecost
+    heritage: Helm
+  name: kubecost-prometheus-server
+  namespace: kubecost
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "32Gi"

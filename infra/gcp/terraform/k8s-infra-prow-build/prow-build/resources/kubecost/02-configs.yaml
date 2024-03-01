@@ -1,0 +1,277 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubecost-cost-analyzer
+  namespace: kubecost
+  labels:
+    
+    app.kubernetes.io/name: cost-analyzer
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/managed-by: Helm
+    app: cost-analyzer
+data:
+    prometheus-alertmanager-endpoint: http://kubecost-prometheus-alertmanager.kubecost
+    prometheus-server-endpoint: http://kubecost-prometheus-server.kubecost
+    kubecost-token: not-applied
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: network-costs-config
+  namespace: kubecost
+  labels:
+    
+    app.kubernetes.io/name: cost-analyzer
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/managed-by: Helm
+    app: cost-analyzer
+data:
+  config.yaml: |
+    destinations:
+      cross-region: []
+      direct-classification: []
+      in-region: []
+      in-zone:
+      - 127.0.0.0/8
+      - 169.254.0.0/16
+      - 10.0.0.0/8
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+      internet: []
+    services:
+      amazon-web-services: false
+      azure-cloud-services: false
+      google-cloud-services: true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pricing-configs
+  namespace: kubecost
+  labels:
+    
+    app.kubernetes.io/name: cost-analyzer
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/managed-by: Helm
+    app: cost-analyzer
+data:
+    clusterName: "k8s-infra-prow-build"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: external-grafana-config-map
+  namespace: kubecost
+  labels:
+    
+    app.kubernetes.io/name: cost-analyzer
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/managed-by: Helm
+    app: cost-analyzer
+data:
+  grafanaURL: http://cost-analyzer-grafana.default.svc
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    component: "server"
+    app: prometheus
+    release: kubecost
+    heritage: Helm
+  name: kubecost-prometheus-server
+  namespace: kubecost
+data:
+  alerting_rules.yml: |
+    {}
+  alerts: |
+    {}
+  prometheus.yml: |
+    global:
+      evaluation_interval: 1m
+      external_labels:
+        cluster_id: k8s-infra-prow-build
+      scrape_interval: 1m
+      scrape_timeout: 60s
+    rule_files:
+    - /etc/config/recording_rules.yml
+    - /etc/config/alerting_rules.yml
+    - /etc/config/rules
+    - /etc/config/alerts
+    scrape_configs:
+    - job_name: prometheus
+      static_configs:
+      - targets:
+        - localhost:9090
+    - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      job_name: kubernetes-nodes-cadvisor
+      kubernetes_sd_configs:
+      - role: node
+      metric_relabel_configs:
+      - action: keep
+        regex: (container_cpu_usage_seconds_total|container_memory_working_set_bytes|container_network_receive_errors_total|container_network_transmit_errors_total|container_network_receive_packets_dropped_total|container_network_transmit_packets_dropped_total|container_memory_usage_bytes|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_periods_total|container_fs_usage_bytes|container_fs_limit_bytes|container_cpu_cfs_periods_total|container_fs_inodes_free|container_fs_inodes_total|container_fs_usage_bytes|container_fs_limit_bytes|container_cpu_cfs_throttled_periods_total|container_cpu_cfs_periods_total|container_network_receive_bytes_total|container_network_transmit_bytes_total|container_fs_inodes_free|container_fs_inodes_total|container_fs_usage_bytes|container_fs_limit_bytes|container_spec_cpu_shares|container_spec_memory_limit_bytes|container_network_receive_bytes_total|container_network_transmit_bytes_total|container_fs_reads_bytes_total|container_network_receive_bytes_total|container_fs_writes_bytes_total|container_fs_reads_bytes_total|cadvisor_version_info|kubecost_pv_info)
+        source_labels:
+        - __name__
+      - action: replace
+        regex: (.+)
+        source_labels:
+        - container
+        target_label: container_name
+      - action: replace
+        regex: (.+)
+        source_labels:
+        - pod
+        target_label: pod_name
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - replacement: kubernetes.default.svc:443
+        target_label: __address__
+      - regex: (.+)
+        replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
+        source_labels:
+        - __meta_kubernetes_node_name
+        target_label: __metrics_path__
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecure_skip_verify: true
+    - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      job_name: kubernetes-nodes
+      kubernetes_sd_configs:
+      - role: node
+      metric_relabel_configs:
+      - action: keep
+        regex: (kubelet_volume_stats_used_bytes)
+        source_labels:
+        - __name__
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - replacement: kubernetes.default.svc:443
+        target_label: __address__
+      - regex: (.+)
+        replacement: /api/v1/nodes/$1/proxy/metrics
+        source_labels:
+        - __meta_kubernetes_node_name
+        target_label: __metrics_path__
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecure_skip_verify: true
+    - job_name: kubernetes-service-endpoints
+      kubernetes_sd_configs:
+      - role: endpoints
+      metric_relabel_configs:
+      - action: keep
+        regex: (container_cpu_allocation|container_cpu_usage_seconds_total|container_fs_limit_bytes|container_fs_writes_bytes_total|container_gpu_allocation|container_memory_allocation_bytes|container_memory_usage_bytes|container_memory_working_set_bytes|container_network_receive_bytes_total|container_network_transmit_bytes_total|DCGM_FI_DEV_GPU_UTIL|deployment_match_labels|kube_daemonset_status_desired_number_scheduled|kube_daemonset_status_number_ready|kube_deployment_spec_replicas|kube_deployment_status_replicas|kube_deployment_status_replicas_available|kube_job_status_failed|kube_namespace_annotations|kube_namespace_labels|kube_node_info|kube_node_labels|kube_node_status_allocatable|kube_node_status_allocatable_cpu_cores|kube_node_status_allocatable_memory_bytes|kube_node_status_capacity|kube_node_status_capacity_cpu_cores|kube_node_status_capacity_memory_bytes|kube_node_status_condition|kube_persistentvolume_capacity_bytes|kube_persistentvolume_status_phase|kube_persistentvolumeclaim_info|kube_persistentvolumeclaim_resource_requests_storage_bytes|kube_pod_container_info|kube_pod_container_resource_limits|kube_pod_container_resource_limits_cpu_cores|kube_pod_container_resource_limits_memory_bytes|kube_pod_container_resource_requests|kube_pod_container_resource_requests_cpu_cores|kube_pod_container_resource_requests_memory_bytes|kube_pod_container_status_restarts_total|kube_pod_container_status_running|kube_pod_container_status_terminated_reason|kube_pod_labels|kube_pod_owner|kube_pod_status_phase|kube_replicaset_owner|kube_statefulset_replicas|kube_statefulset_status_replicas|kubecost_cluster_info|kubecost_cluster_management_cost|kubecost_cluster_memory_working_set_bytes|kubecost_load_balancer_cost|kubecost_network_internet_egress_cost|kubecost_network_region_egress_cost|kubecost_network_zone_egress_cost|kubecost_node_is_spot|kubecost_pod_network_egress_bytes_total|node_cpu_hourly_cost|node_cpu_seconds_total|node_disk_reads_completed|node_disk_reads_completed_total|node_disk_writes_completed|node_disk_writes_completed_total|node_filesystem_device_error|node_gpu_count|node_gpu_hourly_cost|node_memory_Buffers_bytes|node_memory_Cached_bytes|node_memory_MemAvailable_bytes|node_memory_MemFree_bytes|node_memory_MemTotal_bytes|node_network_transmit_bytes_total|node_ram_hourly_cost|node_total_hourly_cost|pod_pvc_allocation|pv_hourly_cost|service_selector_labels|statefulSet_match_labels|kubecost_pv_info|up)
+        source_labels:
+        - __name__
+      relabel_configs:
+      - action: keep
+        regex: true
+        source_labels:
+        - __meta_kubernetes_service_annotation_prometheus_io_scrape
+      - action: keep
+        regex: (.*node-exporter|kubecost-network-costs)
+        source_labels:
+        - __meta_kubernetes_endpoints_name
+      - action: replace
+        regex: (https?)
+        source_labels:
+        - __meta_kubernetes_service_annotation_prometheus_io_scheme
+        target_label: __scheme__
+      - action: replace
+        regex: (.+)
+        source_labels:
+        - __meta_kubernetes_service_annotation_prometheus_io_path
+        target_label: __metrics_path__
+      - action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        source_labels:
+        - __address__
+        - __meta_kubernetes_service_annotation_prometheus_io_port
+        target_label: __address__
+      - action: labelmap
+        regex: __meta_kubernetes_service_label_(.+)
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_namespace
+        target_label: kubernetes_namespace
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_service_name
+        target_label: kubernetes_name
+      - action: replace
+        source_labels:
+        - __meta_kubernetes_pod_node_name
+        target_label: kubernetes_node
+    - job_name: kubecost
+      honor_labels: true
+      scrape_interval: 1m
+      scrape_timeout: 60s
+      metrics_path: /metrics
+      scheme: http
+      dns_sd_configs:
+      - names:
+        - kubecost-cost-analyzer
+        type: 'A'
+        port: 9003
+    - job_name: kubecost-networking
+      kubernetes_sd_configs:
+        - role: pod
+      relabel_configs:
+      # Scrape only the the targets matching the following metadata
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_instance]
+          action: keep
+          regex:  kubecost
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+          action: keep
+          regex:  network-costs
+    
+  recording_rules.yml: |
+    {}
+  rules: |
+    groups:
+    - name: CPU
+      rules:
+      - expr: sum(rate(container_cpu_usage_seconds_total{container!=""}[5m]))
+        record: cluster:cpu_usage:rate5m
+      - expr: rate(container_cpu_usage_seconds_total{container!=""}[5m])
+        record: cluster:cpu_usage_nosum:rate5m
+      - expr: avg(irate(container_cpu_usage_seconds_total{container!="POD", container!=""}[5m]))
+          by (container,pod,namespace)
+        record: kubecost_container_cpu_usage_irate
+      - expr: sum(container_memory_working_set_bytes{container!="POD",container!=""})
+          by (container,pod,namespace)
+        record: kubecost_container_memory_working_set_bytes
+      - expr: sum(container_memory_working_set_bytes{container!="POD",container!=""})
+        record: kubecost_cluster_memory_working_set_bytes
+    - name: Savings
+      rules:
+      - expr: sum(avg(kube_pod_owner{owner_kind!="DaemonSet"}) by (pod) * sum(container_cpu_allocation)
+          by (pod))
+        labels:
+          daemonset: "false"
+        record: kubecost_savings_cpu_allocation
+      - expr: sum(avg(kube_pod_owner{owner_kind="DaemonSet"}) by (pod) * sum(container_cpu_allocation)
+          by (pod)) / sum(kube_node_info)
+        labels:
+          daemonset: "true"
+        record: kubecost_savings_cpu_allocation
+      - expr: sum(avg(kube_pod_owner{owner_kind!="DaemonSet"}) by (pod) * sum(container_memory_allocation_bytes)
+          by (pod))
+        labels:
+          daemonset: "false"
+        record: kubecost_savings_memory_allocation_bytes
+      - expr: sum(avg(kube_pod_owner{owner_kind="DaemonSet"}) by (pod) * sum(container_memory_allocation_bytes)
+          by (pod)) / sum(kube_node_info)
+        labels:
+          daemonset: "true"
+        record: kubecost_savings_memory_allocation_bytes

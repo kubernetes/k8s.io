@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubecost-cost-analyzer
+  namespace: kubecost
+  labels:
+    
+    app.kubernetes.io/name: cost-analyzer
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/managed-by: Helm
+    app: cost-analyzer
+  annotations:
+    iam.gke.io/gcp-service-account: prow-build@k8s-infra-prow-build.iam.gserviceaccount.com
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    component: "server"
+    app: prometheus
+    release: kubecost
+    heritage: Helm
+  name: kubecost-prometheus-server
+  namespace: kubecost

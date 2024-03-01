@@ -1,0 +1,138 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubecost-cloud-cost
+  namespace: kubecost
+  labels:
+
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: cost-analyzer
+    app.kubernetes.io/instance: kubecost
+    app: cost-analyzer
+spec:
+  selector:
+
+    app.kubernetes.io/name: cost-analyzer
+    app.kubernetes.io/instance: kubecost
+    app: cost-analyzer
+  type: "ClusterIP"
+  ports:
+    - name: tcp-api
+      port: 9005
+      targetPort: 9005
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubecost-aggregator
+  namespace: kubecost
+  labels:
+
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/managed-by: Helm
+    app: aggregator
+spec:
+  selector:
+
+    app.kubernetes.io/name: cost-analyzer
+    app.kubernetes.io/instance: kubecost
+    app: cost-analyzer
+  type: "ClusterIP"
+  ports:
+    - name: tcp-api
+      port: 9004
+      targetPort: 9004
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubecost-network-costs
+  namespace: kubecost
+  labels:
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/name: network-costs
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/managed-by: Helm
+    app: kubecost-network-costs
+spec:
+  clusterIP: None
+  ports:
+  - name: metrics
+    port: 3001
+    protocol: TCP
+    targetPort: 3001
+  selector:
+    app: kubecost-network-costs
+  type: ClusterIP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubecost-cost-analyzer
+  namespace: kubecost
+  labels:
+    
+    app.kubernetes.io/name: cost-analyzer
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/instance: kubecost
+    app.kubernetes.io/managed-by: Helm
+    app: cost-analyzer
+spec:
+  selector:
+    
+    app.kubernetes.io/name: cost-analyzer
+    app.kubernetes.io/instance: kubecost
+    app: cost-analyzer
+  type: "ClusterIP"
+  ports:
+    - name: tcp-model
+      port: 9003
+      targetPort: 9003
+  sessionAffinity: None
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubecost-forecasting
+  namespace: kubecost
+  labels:
+    helm.sh/chart: cost-analyzer-2.0.1
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: forecasting
+    app.kubernetes.io/instance: kubecost
+    app: forecasting
+spec:
+  selector:
+    app.kubernetes.io/name: forecasting
+    app.kubernetes.io/instance: kubecost
+    app: forecasting
+  type: ClusterIP
+  ports:
+    - name: tcp-api
+      port: 5000
+      targetPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    component: "server"
+    app: prometheus
+    release: kubecost
+    heritage: Helm
+  name: kubecost-prometheus-server
+  namespace: kubecost
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 9090
+  selector:
+    component: "server"
+    app: prometheus
+    release: kubecost
+  sessionAffinity: None
+  type: "ClusterIP"
