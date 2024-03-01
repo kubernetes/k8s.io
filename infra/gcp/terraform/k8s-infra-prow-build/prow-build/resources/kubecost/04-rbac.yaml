@@ -65,9 +65,9 @@ rules:
       - get
       - list
       - watch
-  - apiGroups: 
+  - apiGroups:
       - storage.k8s.io
-    resources: 
+    resources:
       - storageclasses
     verbs:
       - get
@@ -170,7 +170,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app: cost-analyzer
 rules:
-- apiGroups: 
+- apiGroups:
     - ''
   resources:
     - "pods/log"

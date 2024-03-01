@@ -666,7 +666,7 @@ spec:
     securityContext:
       privileged: false
       capabilities:
-        drop: 
+        drop:
         - ALL
       allowPrivilegeEscalation: false
       readOnlyRootFilesystem: true
@@ -682,7 +682,7 @@ spec:
         if [ "$code" -eq 200 ]; then
           echo "Got Kubecost working configuration. Successful."
           exit 0
-        else 
+        else
           echo "Failed to fetch Kubecost configuration. Response was $response"
           exit 1
         fi
