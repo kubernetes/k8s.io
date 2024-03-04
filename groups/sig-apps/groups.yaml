@@ -29,6 +29,16 @@ groups:
       - danielvm@google.com
       - ahg@google.com
 
+  - email-id: k8s-infra-staging-lws@kubernetes.io
+    name: k8s-infra-staging-lws
+    description: |-
+      ACL for staging lws
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ahg@google.com # github: ahg-g
+      - kerthcet@gmail.com # github: kerthcet
+
   - email-id: k8s-infra-staging-examples@kubernetes.io
     name: k8s-infra-staging-examples
     description: |-
