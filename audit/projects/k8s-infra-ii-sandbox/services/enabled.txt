@@ -7,6 +7,7 @@ bigqueryreservation.googleapis.com   BigQuery Reservation API
 bigquerystorage.googleapis.com       BigQuery Storage API
 cloudasset.googleapis.com            Cloud Asset API
 cloudbuild.googleapis.com            Cloud Build API
+clouddeploy.googleapis.com           Cloud Deploy API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
 compute.googleapis.com               Compute Engine API
 container.googleapis.com             Kubernetes Engine API
@@ -25,4 +26,5 @@ run.googleapis.com                   Cloud Run Admin API
 serviceusage.googleapis.com          Service Usage API
 storage-api.googleapis.com           Google Cloud Storage JSON API
 storage-component.googleapis.com     Cloud Storage
+storage.googleapis.com               Cloud Storage API
 sts.googleapis.com                   Security Token Service API
