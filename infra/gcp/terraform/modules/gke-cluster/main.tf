@@ -155,7 +155,7 @@ resource "google_container_cluster" "prod_cluster" {
 
   // Enable GKE Network Policy
   network_policy {
-    enabled  = true
+    enabled  = false
     provider = "CALICO"
   }
 
@@ -252,7 +252,7 @@ resource "google_container_cluster" "test_cluster" {
 
   // Enable GKE Network Policy
   network_policy {
-    enabled  = true
+    enabled  = false
     provider = "CALICO"
   }
 

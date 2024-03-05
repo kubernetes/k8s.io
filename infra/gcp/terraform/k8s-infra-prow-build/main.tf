@@ -100,3 +100,18 @@ module "prow_build_nodepool_n1_highmem_8_localssd" {
   service_account           = module.prow_build_cluster.cluster_node_sa.email
 }
 
+module "prow_build_nodepool_c3_standard_8_lssd" {
+  source          = "../modules/gke-nodepool"
+  project_name    = module.project.project_id
+  cluster_name    = module.prow_build_cluster.cluster.name
+  location        = module.prow_build_cluster.cluster.location
+  name            = "pool6"
+  initial_count   = 1
+  min_count       = 1
+  max_count       = 80
+  image_type      = "UBUNTU_CONTAINERD"
+  machine_type    = "c3-standard-8-lssd" // includes 2 Local SSDs
+  disk_size_gb    = 100
+  disk_type       = "pd-balanced"
+  service_account = module.prow_build_cluster.cluster_node_sa.email
+}
