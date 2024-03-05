@@ -36,10 +36,6 @@ prometheus:
         cluster_id: k8s-infra-prow-build
 networkCosts:
   # optional, see: https://docs.kubecost.com/install-and-configure/advanced-configuration/network-costs-configuration
-  enabled: true
-  config:
-    services:
-      # set the appropriate cloud provider to true
-      google-cloud-services: true
+  enabled: false
 kubecostFrontend:
   enabled: false

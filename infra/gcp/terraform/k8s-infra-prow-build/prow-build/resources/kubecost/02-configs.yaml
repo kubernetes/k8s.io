@@ -18,35 +18,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: network-costs-config
-  namespace: kubecost
-  labels:
-    app.kubernetes.io/name: cost-analyzer
-    helm.sh/chart: cost-analyzer-2.0.1
-    app.kubernetes.io/instance: kubecost
-    app.kubernetes.io/managed-by: Helm
-    app: cost-analyzer
-data:
-  config.yaml: |
-    destinations:
-      cross-region: []
-      direct-classification: []
-      in-region: []
-      in-zone:
-      - 127.0.0.0/8
-      - 169.254.0.0/16
-      - 10.0.0.0/8
-      - 172.16.0.0/12
-      - 192.168.0.0/16
-      internet: []
-    services:
-      amazon-web-services: false
-      azure-cloud-services: false
-      google-cloud-services: true
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
   name: pricing-configs
   namespace: kubecost
   labels:
