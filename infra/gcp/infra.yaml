@@ -152,6 +152,46 @@ infra:
       k8s-infra-e2e-boskos-118:
       k8s-infra-e2e-boskos-119:
       k8s-infra-e2e-boskos-120:
+      k8s-infra-e2e-boskos-121:
+      k8s-infra-e2e-boskos-122:
+      k8s-infra-e2e-boskos-123:
+      k8s-infra-e2e-boskos-124:
+      k8s-infra-e2e-boskos-125:
+      k8s-infra-e2e-boskos-126:
+      k8s-infra-e2e-boskos-127:
+      k8s-infra-e2e-boskos-128:
+      k8s-infra-e2e-boskos-129:
+      k8s-infra-e2e-boskos-130:
+      k8s-infra-e2e-boskos-131:
+      k8s-infra-e2e-boskos-132:
+      k8s-infra-e2e-boskos-133:
+      k8s-infra-e2e-boskos-134:
+      k8s-infra-e2e-boskos-135:
+      k8s-infra-e2e-boskos-136:
+      k8s-infra-e2e-boskos-137:
+      k8s-infra-e2e-boskos-138:
+      k8s-infra-e2e-boskos-139:
+      k8s-infra-e2e-boskos-140:
+      k8s-infra-e2e-boskos-141:
+      k8s-infra-e2e-boskos-142:
+      k8s-infra-e2e-boskos-143:
+      k8s-infra-e2e-boskos-144:
+      k8s-infra-e2e-boskos-145:
+      k8s-infra-e2e-boskos-146:
+      k8s-infra-e2e-boskos-147:
+      k8s-infra-e2e-boskos-148:
+      k8s-infra-e2e-boskos-149:
+      k8s-infra-e2e-boskos-150:
+      k8s-infra-e2e-boskos-151:
+      k8s-infra-e2e-boskos-152:
+      k8s-infra-e2e-boskos-153:
+      k8s-infra-e2e-boskos-154:
+      k8s-infra-e2e-boskos-155:
+      k8s-infra-e2e-boskos-156:
+      k8s-infra-e2e-boskos-157:
+      k8s-infra-e2e-boskos-158:
+      k8s-infra-e2e-boskos-159:
+      k8s-infra-e2e-boskos-160:
       # e2e projects for gpu jobs (--gcp-project-type=gpu-project)
       # - us-west1 Committed NVIDIA K80 GPUs raised to 2
       k8s-infra-e2e-boskos-gpu-01:
