@@ -1,0 +1,11 @@
+{
+  "createTime": "2024-03-06T01:24:03.634426Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-infra-e2e-boskos-122",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-infra-e2e-boskos-122",
+  "projectNumber": "948398276772"
+}
