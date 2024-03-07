@@ -166,6 +166,7 @@ data:
         server_name packages.kubernetes.io pkgs.kubernetes.io packages.k8s.io pkgs.k8s.io;
         listen 80;
 
+        rewrite ^/$         https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/ redirect;
         rewrite ^/(.*)?$    https://prod-cdn.packages.k8s.io/repositories/isv:/kubernetes:/$1 redirect;
       }
 
