@@ -153,10 +153,8 @@ resource "google_container_cluster" "prod_cluster" {
     }
   }
 
-  // Enable GKE Network Policy
   network_policy {
-    enabled  = true
-    provider = "CALICO"
+    enabled  = false
   }
 
   // Configure cluster addons
@@ -250,10 +248,8 @@ resource "google_container_cluster" "test_cluster" {
     }
   }
 
-  // Enable GKE Network Policy
   network_policy {
-    enabled  = true
-    provider = "CALICO"
+    enabled  = false
   }
 
   // Configure cluster addons
