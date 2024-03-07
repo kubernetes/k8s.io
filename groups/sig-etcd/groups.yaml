@@ -1,0 +1,15 @@
+groups:
+  - email-id: security@etcd.io
+    name: etcd-security
+    description: |-
+      Private list for non-public (internal) triage of etcd security vulnerabilities
+      reported by any etcd contributors or users.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - benjamin.ahrtr@gmail.com
+      - jablair@redhat.com
+      - siarkowicz@google.com
+      - spzala@us.ibm.com
+      - wenjiazhang@google.com

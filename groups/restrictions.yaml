@@ -117,6 +117,9 @@ restrictions:
       - "^k8s-infra-rbac-elekto@kubernetes.io$"
       - "^k8s-infra-rbac-slack-infra@kubernetes.io$"
       - "^k8s-infra-staging-slack-infra@kubernetes.io$"
+  - path: "sig-etcd/groups.yaml"
+    allowedGroups:
+      - "@etcd.io$"
   - path: "sig-docs/groups.yaml"
     allowedGroups:
       - "^blog@kubernetes.io$"
