@@ -91,10 +91,6 @@
     },
     "subnetwork": "projects/k8s-infra-prow-build/regions/us-central1/subnetworks/default"
   },
-  "networkPolicy": {
-    "enabled": true,
-    "provider": "CALICO"
-  },
   "nodeConfig": {
     "diskSizeGb": 100,
     "diskType": "pd-standard",

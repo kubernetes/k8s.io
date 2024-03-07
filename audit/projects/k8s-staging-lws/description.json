@@ -1,0 +1,11 @@
+{
+  "createTime": "2024-03-06T14:12:28.054017Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-lws",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-lws",
+  "projectNumber": "772186053622"
+}
