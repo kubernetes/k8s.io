@@ -17,13 +17,17 @@ limitations under the License.
 module "eks" {
   providers = { aws = aws.kops-infra-ci }
   source    = "terraform-aws-modules/eks/aws"
-  version   = "19.16.0"
+  version   = "20.8.3"
 
   cluster_name                   = local.cluster_name
   cluster_version                = var.eks_version
   cluster_endpoint_public_access = true
 
   cluster_ip_family = "ipv4"
+
+  # Give the Terraform identity admin access to the cluster
+  # which will allow resources to be deployed into the cluster
+  enable_cluster_creator_admin_permissions = true
 
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets
@@ -37,36 +41,21 @@ module "eks" {
     "scheduler"
   ]
 
-  manage_aws_auth_configmap = true
-
-  aws_auth_roles = [
-    {
-      # AWS role used by prow to authenticate to build clusters
-      # Please, keep it in sync with prow deployment (AWS_ROLE_ARN)
-      rolearn  = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
-      username = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
-      groups   = ["system:masters"]
-    }
-  ]
-
   cloudwatch_log_group_retention_in_days = 30
 
   cluster_addons = {
     coredns = {
-      most_recent       = true
-      resolve_conflicts = "OVERWRITE"
+      most_recent = true
     }
     kube-proxy = {
       most_recent = true
     }
     vpc-cni = {
       most_recent              = true
-      resolve_conflicts        = "OVERWRITE"
       service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
     }
     aws-ebs-csi-driver = {
       most_recent              = true
-      resolve_conflicts        = "OVERWRITE"
       service_account_role_arn = module.ebs_csi_irsa.iam_role_arn
     }
   }
@@ -139,16 +128,43 @@ module "eks" {
         AmazonSSMManagedInstanceCore       = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
       }
 
-      tags = merge(
-        var.tags,
-        local.asg_tags
-      )
+      launch_template_tags = {
+        # enable discovery of autoscaling groups by cluster-autoscaler
+        "k8s.io/cluster-autoscaler/enabled" : true,
+        "k8s.io/cluster-autoscaler/${local.cluster_name}" : "owned",
+      }
+
+      tags = var.tags
     }
   }
 
   tags = merge(var.tags, {
     "region" = "${data.aws_region.current.name}"
   })
+}
+
+//TODO(ameukam): Use access entries
+module "eks-auth" {
+  source  = "terraform-aws-modules/eks/aws//modules/aws-auth"
+  version = "~> 20.0"
+
+  manage_aws_auth_configmap = true
+
+  aws_auth_roles = [
+    {
+      rolearn  = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
+      username = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
+      groups   = ["system:masters"]
+    },
+  ]
+
+  aws_auth_users = [
+    {
+      userarn  = "arn:aws:iam::${data.aws_organizations_organization.current.id}:user/ameukam"
+      username = "ameukam"
+      groups   = ["system:masters"]
+    },
+  ]
 }
 
 resource "aws_eks_addon" "eks_pod_identity" {
