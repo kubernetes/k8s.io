@@ -272,10 +272,8 @@ locals {
     southamerica-west1 = {
       environment_variables = [
         {
-          name = "DEFAULT_AWS_BASE_URL",
-          // AWS us-east-1 is Virginia, USA
-          // See: https://github.com/kubernetes/k8s.io/pull/4739/files#r1100667255
-          value = "https://prod-registry-k8s-io-us-east-1.s3.dualstack.us-east-1.amazonaws.com",
+          name  = "DEFAULT_AWS_BASE_URL",
+          value = "https://d39mqg4b1dx9z1.cloudfront.net",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
