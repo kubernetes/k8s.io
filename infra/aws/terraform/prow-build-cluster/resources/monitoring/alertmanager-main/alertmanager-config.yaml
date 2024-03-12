@@ -44,13 +44,6 @@ spec:
   - name: 'slack'
     slackConfigs:
     - apiURL:
-        name: alertmanager-k8c-slack-token
-        key: url
-      channel: '#alerting-cncf-prod'
-      sendResolved: true
-      title: ":warning: {{ .CommonLabels.alertname }}"
-      text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
-    - apiURL:
         name: slack-k8s-infra-alerts-token
         key: url
       channel: '#k8s-infra-alerts'
