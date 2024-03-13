@@ -2,14 +2,14 @@
   "bindings": [
     {
       "members": [
-        "projectEditor:k8s-infra-e2e-boskos-018",
-        "projectOwner:k8s-infra-e2e-boskos-018"
+        "projectEditor:k8s-infra-e2e-boskos-128",
+        "projectOwner:k8s-infra-e2e-boskos-128"
       ],
       "role": "roles/storage.legacyBucketOwner"
     },
     {
       "members": [
-        "projectViewer:k8s-infra-e2e-boskos-018"
+        "projectViewer:k8s-infra-e2e-boskos-128"
       ],
       "role": "roles/storage.legacyBucketReader"
     }
