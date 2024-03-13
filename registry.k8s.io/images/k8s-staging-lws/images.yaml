@@ -1,1 +1,3 @@
-# TODO: add images
+- name: lws
+  dmap:
+    "sha256:1cf665fa003c830cd9105e0227a041e9f85dd3c86e7442f5ef6af313dc4fea55": ["v0.1.0"]
