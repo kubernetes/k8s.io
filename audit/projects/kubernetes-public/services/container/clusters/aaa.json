@@ -45,8 +45,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.26.13-gke.1052000",
-  "currentNodeVersion": "1.26.13-gke.1052000",
+  "currentMasterVersion": "1.26.13-gke.1144000",
+  "currentNodeVersion": "1.26.13-gke.1144000",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -76,7 +76,7 @@
     "clusterIpv4CidrBlock": "10.40.0.0/14",
     "clusterSecondaryRangeName": "gke-aaa-pods-4d0eb763",
     "createSubnetwork": true,
-    "defaultPodIpv4RangeUtilization": 0.0087,
+    "defaultPodIpv4RangeUtilization": 0.0097,
     "servicesIpv4Cidr": "10.107.16.0/20",
     "servicesIpv4CidrBlock": "10.107.16.0/20",
     "servicesSecondaryRangeName": "gke-aaa-services-4d0eb763",
@@ -203,7 +203,7 @@
       "name": "pool1-20190918234853194900000001",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0087,
+        "podIpv4RangeUtilization": 0.0097,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -212,7 +212,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.26.13-gke.1052000"
+      "version": "1.26.13-gke.1144000"
     },
     {
       "autoscaling": {
@@ -261,7 +261,7 @@
       "name": "pool2-20200316195138785800000001",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0087,
+        "podIpv4RangeUtilization": 0.0097,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -270,7 +270,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.26.13-gke.1052000"
+      "version": "1.26.13-gke.1144000"
     },
     {
       "autoscaling": {
@@ -320,7 +320,7 @@
       "name": "nap-e2-highmem-4-79yq2sly",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0087,
+        "podIpv4RangeUtilization": 0.0097,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -329,7 +329,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.26.13-gke.1052000"
+      "version": "1.26.13-gke.1144000"
     }
   ],
   "releaseChannel": {

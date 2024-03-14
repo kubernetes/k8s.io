@@ -8,6 +8,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-226195303281@gcp-sa-bigqueryconnection.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigqueryconnection.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:service-226195303281@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquerydatatransfer.serviceAgent"
