@@ -221,13 +221,13 @@ class RedirTest(HTTPTestCase):
 
     def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
-            self.assert_temp_redirect(base, 'https://packages.cloud.google.com/yum/')
+            self.assert_temp_redirect(base, 'https://kubernetes.io/blog/2023/08/31/legacy-package-repository-deprecation/')
             self.assert_temp_redirect(base + '/$id',
                 'https://packages.cloud.google.com/yum/$id', id=rand_num())
 
     def test_apt(self):
         for base in ('apt.k8s.io', 'apt.kubernetes.io'):
-            self.assert_temp_redirect(base, 'https://packages.cloud.google.com/apt/')
+            self.assert_temp_redirect(base, 'https://kubernetes.io/blog/2023/08/31/legacy-package-repository-deprecation/')
             self.assert_temp_redirect(base + '/$id',
                 'https://packages.cloud.google.com/apt/$id', id=rand_num())
 

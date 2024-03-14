@@ -152,6 +152,7 @@ data:
         server_name apt.kubernetes.io apt.k8s.io;
         listen 80;
 
+        rewrite ^/$         https://kubernetes.io/blog/2023/08/31/legacy-package-repository-deprecation/ redirect;
         rewrite ^/(.*)?$    https://packages.cloud.google.com/apt/$1 redirect;
       }
 
@@ -159,6 +160,7 @@ data:
         server_name yum.kubernetes.io yum.k8s.io;
         listen 80;
 
+        rewrite ^/$         https://kubernetes.io/blog/2023/08/31/legacy-package-repository-deprecation/ redirect;
         rewrite ^/(.*)?$    https://packages.cloud.google.com/yum/$1 redirect;
       }
 
