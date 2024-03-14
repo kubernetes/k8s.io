@@ -1,10 +1,15 @@
 NAME                                 TITLE
+analyticshub.googleapis.com          Analytics Hub API
 bigquery.googleapis.com              BigQuery API
+bigqueryconnection.googleapis.com    BigQuery Connection API
+bigquerydatapolicy.googleapis.com    BigQuery Data Policy API
 bigquerydatatransfer.googleapis.com  BigQuery Data Transfer API
 bigqueryreservation.googleapis.com   BigQuery Reservation API
 bigquerystorage.googleapis.com       BigQuery Storage API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
 compute.googleapis.com               Compute Engine API
+dataform.googleapis.com              Dataform API
+dataplex.googleapis.com              Cloud Dataplex API
 logging.googleapis.com               Cloud Logging API
 oslogin.googleapis.com               Cloud OS Login API
 storage-component.googleapis.com     Cloud Storage
