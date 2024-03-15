@@ -30,16 +30,6 @@
   },
   {
     "kind": "bigquery#dataset",
-    "id": "k8s-infra-public-pii:legacy_pkgs_k8s_io_logs",
-    "datasetReference": {
-      "datasetId": "legacy_pkgs_k8s_io_logs",
-      "projectId": "k8s-infra-public-pii"
-    },
-    "friendlyName": "legacy_pkgs_k8s_io_logs",
-    "location": "US"
-  },
-  {
-    "kind": "bigquery#dataset",
     "id": "k8s-infra-public-pii:registry_k8s_io_logs",
     "datasetReference": {
       "datasetId": "registry_k8s_io_logs",
