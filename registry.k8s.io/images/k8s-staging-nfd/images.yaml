@@ -59,12 +59,16 @@
     "sha256:0e459fa3b8159e355c15cde19160a319fac689554c35ab512609a4a59e707340": ["v0.14.3-full"]
     "sha256:dc07e5ea229c0fe8e4886976ca18a45f3d5ec08081a9cc317de13838354e6abf": ["v0.14.4","v0.14.4-minimal"]
     "sha256:d4909220e5d977e8b1ed631d176eeaee92545ab54a0e1ad53d7b7f2a82e4c5a3": ["v0.14.4-full"]
+    "sha256:7c5028ce12db1fb2a0f4992dc4f4fcef9a28cd7e6b0ce8a2b6cdfa69115ac7c3": ["v0.14.5","v0.14.5-minimal"]
+    "sha256:773284a3aa15f69eea316602b2704f972c5d270dbe55d47259b4837c0ac9ff6e": ["v0.14.5-full"]
     "sha256:96faeac4d4f3263bd9c4d780e6bfa50ccd880d8fe99917f1b7bba9b59cb27d0d": ["v0.15.0","v0.15.0-minimal"]
     "sha256:ec682865f9a3f0514a5a38bdb9d8dbbc386a85eb4599de94d07cf9fe86efb43a": ["v0.15.0-full"]
     "sha256:cab8506a76c96a4318d4cb1858ead6fe55a2e0499f69b4201b01d69d4fa14f10": ["v0.15.1","v0.15.1-minimal"]
     "sha256:fe804a5a39812ebcd1aa30afecf64ff467f032f9529dfbbbf313b8f24ee85e9a": ["v0.15.1-full"]
     "sha256:541f7fe8d91459f49478391120333546b64a4e7c131c53a8bf3e7a788dfaebca": ["v0.15.2","v0.15.2-minimal"]
     "sha256:86157367af803bc860c5c950c691fd0ad1dcabdc016c6adf091f5a90a97bdef6": ["v0.15.2-full"]
+    "sha256:aebca3bd48d7ccf4c65ec64d6723abcbabe4737bbc09491fc1841cfc7f83fe4d": ["v0.15.3","v0.15.3-minimal"]
+    "sha256:b340d283b934c270f08b3eecbf921a01364d7db472c5d84f7394275c0c316828": ["v0.15.3-full"]
 - name: node-feature-discovery-operator
   dmap:
     "sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16": ["v0.2.0"]
