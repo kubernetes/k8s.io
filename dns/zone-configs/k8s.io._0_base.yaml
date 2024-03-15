@@ -91,16 +91,6 @@ _github-challenge-kubernetes-sigs:
 apt:
   type: CNAME
   value: redirect.k8s.io.
-legacy.apt:
-  - type: A
-    value: 34.128.166.11
-  - type: AAAA
-    value: "2600:1901:0:95e7::"
-legacy.yum:
-  - type: A
-    value: 34.128.166.11
-  - type: AAAA
-    value: "2600:1901:0:95e7::"
 yum:
   type: CNAME
   value: redirect.k8s.io.

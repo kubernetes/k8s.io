@@ -30,13 +30,6 @@ locals {
       name = "k8s-io-ingress-canary-v6",
       ipv6 = true
     },
-    canary-packages = {
-      name = "k8s-io-packages-ingress-canary",
-    },
-    canary-packages-v6 = {
-      name = "k8s-io-packages-ingress-canary-v6",
-      ipv6 = true
-    },
     cs = {
       name = "cs-k8s-io-ingress",
       description = "Used for cs-canary.k8s.io"
@@ -57,13 +50,6 @@ locals {
     },
     ingress-prod-v6 = {
       name = "k8s-io-ingress-prod-v6",
-      ipv6 = true
-    },
-    ingress-packages-prod = {
-      name = "k8s-io-packages-ingress-prod",
-    },
-    ingress-packages-prod-v6 = {
-      name = "k8s-io-packages-ingress-prod-v6",
       ipv6 = true
     },
     perf-dash = {
