@@ -72,16 +72,6 @@ resource "google_bigquery_dataset" "registry_k8s_io_logs" {
   location                    = "US"
 }
 
-// BigQuery dataset for legacy.pkgs.k8s.io logs
-resource "google_bigquery_dataset" "legacy_k8s_io_logs" {
-  project                     = google_project.project.project_id
-  dataset_id                  = "legacy_pkgs_k8s_io_logs"
-  friendly_name               = "legacy_pkgs_k8s_io_logs"
-  delete_contents_on_destroy  = false
-  default_table_expiration_ms = 90 * 24 * 60 * 60 * 1000 #90 days
-  location                    = "US"
-}
-
 resource "google_bigquery_dataset_iam_member" "registry_k8s_io_logs" {
   project    = google_project.project.project_id
   dataset_id = google_bigquery_dataset.registry_k8s_io_logs.dataset_id
@@ -89,15 +79,6 @@ resource "google_bigquery_dataset_iam_member" "registry_k8s_io_logs" {
   # Logs router Sink identity in k8s-infra-oci-proxy-prod
   # Not existing data resource to extract the writer identity
   member = "serviceAccount:p102333525888-824068@gcp-sa-logging.iam.gserviceaccount.com"
-}
-
-resource "google_bigquery_dataset_iam_member" "legacy_k8s_io_logs" {
-  project    = google_project.project.project_id
-  dataset_id = google_bigquery_dataset.legacy_k8s_io_logs.dataset_id
-  role       = "roles/bigquery.dataEditor"
-  # Logs router Sink identity in kubernetes-public
-  # Not existing data resource to extract the writer identity
-  member = "serviceAccount:service-127754664067@gcp-sa-logging.iam.gserviceaccount.com"
 }
 
 # A bucket to store logs in audit logs for GCS
