@@ -60,6 +60,12 @@ locals {
         "slackin-token",
       ]
     },
+    triageparty-cli = {
+      group = "sig-cli"
+      secrets = [
+        "triage-party-cli-github-token",
+      ]
+    },
   }
   // Even though we could just use the list, we're going to keep parity with
   // the map structure used in k8s-infra-prow-build, so resource definitions
@@ -68,8 +74,8 @@ locals {
     for s in flatten([
       for app_name, app in local.aaa_apps : [
         for secret in app.secrets : {
-          app = app_name
-          group = app.group
+          app    = app_name
+          group  = app.group
           owners = "k8s-infra-rbac-${app_name}@kubernetes.io"
           secret = secret
         }
@@ -83,7 +89,7 @@ resource "google_secret_manager_secret" "aaa_app_secrets" {
   project   = data.google_project.project.project_id
   secret_id = each.key
   labels = {
-    app = each.value.app
+    app   = each.value.app
     group = each.value.group
   }
   replication {
