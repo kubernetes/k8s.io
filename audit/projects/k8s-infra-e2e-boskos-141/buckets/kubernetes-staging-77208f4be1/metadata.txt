@@ -1,7 +1,7 @@
-gs://k8s-infra-e2e-boskos-016-state-cb66/ :
+gs://kubernetes-staging-77208f4be1/ :
 	Storage class:			STANDARD
-	Location type:			multi-region
-	Location constraint:		US
+	Location type:			region
+	Location constraint:		US-CENTRAL1
 	Versioning enabled:		None
 	Logging configuration:		None
 	Website configuration:		None
@@ -10,34 +10,33 @@ gs://k8s-infra-e2e-boskos-016-state-cb66/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			Fri, 15 Mar 2024 12:24:49 GMT
-	Time updated:			Fri, 15 Mar 2024 12:24:49 GMT
+	Time created:			Fri, 15 Mar 2024 15:31:38 GMT
+	Time updated:			Fri, 15 Mar 2024 15:31:38 GMT
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
 	Public access prevention:	inherited
-	RPO:				DEFAULT
 	ACL:				
 	  [
 	    {
-	      "entity": "project-owners-689468652908",
+	      "entity": "project-owners-448227462300",
 	      "projectTeam": {
-	        "projectNumber": "689468652908",
+	        "projectNumber": "448227462300",
 	        "team": "owners"
 	      },
 	      "role": "OWNER"
 	    },
 	    {
-	      "entity": "project-editors-689468652908",
+	      "entity": "project-editors-448227462300",
 	      "projectTeam": {
-	        "projectNumber": "689468652908",
+	        "projectNumber": "448227462300",
 	        "team": "editors"
 	      },
 	      "role": "OWNER"
 	    },
 	    {
-	      "entity": "project-viewers-689468652908",
+	      "entity": "project-viewers-448227462300",
 	      "projectTeam": {
-	        "projectNumber": "689468652908",
+	        "projectNumber": "448227462300",
 	        "team": "viewers"
 	      },
 	      "role": "READER"
@@ -46,25 +45,25 @@ gs://k8s-infra-e2e-boskos-016-state-cb66/ :
 	Default ACL:			
 	  [
 	    {
-	      "entity": "project-owners-689468652908",
+	      "entity": "project-owners-448227462300",
 	      "projectTeam": {
-	        "projectNumber": "689468652908",
+	        "projectNumber": "448227462300",
 	        "team": "owners"
 	      },
 	      "role": "OWNER"
 	    },
 	    {
-	      "entity": "project-editors-689468652908",
+	      "entity": "project-editors-448227462300",
 	      "projectTeam": {
-	        "projectNumber": "689468652908",
+	        "projectNumber": "448227462300",
 	        "team": "editors"
 	      },
 	      "role": "OWNER"
 	    },
 	    {
-	      "entity": "project-viewers-689468652908",
+	      "entity": "project-viewers-448227462300",
 	      "projectTeam": {
-	        "projectNumber": "689468652908",
+	        "projectNumber": "448227462300",
 	        "team": "viewers"
 	      },
 	      "role": "READER"

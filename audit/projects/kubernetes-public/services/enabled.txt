@@ -1,7 +1,10 @@
 NAME                                 TITLE
+analyticshub.googleapis.com          Analytics Hub API
 autoscaling.googleapis.com           Cloud Autoscaling API
 bigquery.googleapis.com              BigQuery API
+bigquerydatapolicy.googleapis.com    BigQuery Data Policy API
 bigquerydatatransfer.googleapis.com  BigQuery Data Transfer API
+bigqueryreservation.googleapis.com   BigQuery Reservation API
 bigquerystorage.googleapis.com       BigQuery Storage API
 billingbudgets.googleapis.com        Cloud Billing Budget API
 cloudasset.googleapis.com            Cloud Asset API
