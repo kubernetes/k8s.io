@@ -150,10 +150,32 @@ resource "fastly_service_vcl" "files" {
     stale_ttl       = 120
   }
 
-  request_setting {
-    name = "Force TLS"
-    force_ssl = true
-    xff = "leave"
+  snippet {
+    name = "Authenticate to GCS requests"
+    type = "init"
+    content = templatefile("${path.module}/vcl/gcs-auth.vcl", {
+      access_key = ""
+      secret_key = ""
+      backend_bucket = var.bucket
+      region = "us-central1"
+    }
+    )
+  }
+
+  snippet {
+    name = "GCS Auth - MISS"
+    type = "miss"
+    content = <<-EOT
+      call set_google_auth_header;
+    EOT
+  }
+
+  snippet {
+    name = "GCS Auth - PASS"
+    type = "pass"
+    content = <<-EOT
+      call set_google_auth_header;
+    EOT
   }
 
   vcl {
