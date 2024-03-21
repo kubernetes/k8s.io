@@ -15,6 +15,8 @@ compute.googleapis.com               Compute Engine API
 container.googleapis.com             Kubernetes Engine API
 containeranalysis.googleapis.com     Container Analysis API
 containerregistry.googleapis.com     Container Registry API
+dataform.googleapis.com              Dataform API
+dataplex.googleapis.com              Cloud Dataplex API
 dns.googleapis.com                   Cloud DNS API
 gkebackup.googleapis.com             Backup for GKE API
 iam.googleapis.com                   Identity and Access Management (IAM) API
