@@ -13,7 +13,7 @@
 # limitations under the License.
 
 SHELL := /usr/bin/env bash
-PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com. k8s.dev. kubernetes.dev.
+PROD_ZONES := k8s.io. kubernetes.io. x-k8s.io. k8s-e2e.com. k8s.dev. kubernetes.dev. etcd.io.
 CANARY_ZONES := $(foreach z,$(PROD_ZONES),canary.$(z))
 ALL_ZONES := $(CANARY_ZONES) $(PROD_ZONES)
 ZONE_CONFIGS := zone-configs

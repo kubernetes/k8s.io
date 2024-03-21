@@ -42,6 +42,12 @@ zones:
       - config
     targets:
       - gcp
+  canary.etcd.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+
 
   # Production targets.
   kubernetes.io.:
@@ -70,6 +76,11 @@ zones:
     targets:
       - gcp
   kubernetes.dev.:
+    sources:
+      - config
+    targets:
+      - gcp
+  etcd.io.:
     sources:
       - config
     targets:

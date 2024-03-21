@@ -1,0 +1,83 @@
+# The top-level etcd.io zone
+'':
+  - type: A
+    value: 75.2.60.5
+  - type: MX
+    values:
+    - exchange: aspmx.l.google.com.
+      preference: 1
+    - exchange: alt1.aspmx.l.google.com.
+      preference: 5
+    - exchange: alt2.aspmx.l.google.com.
+      preference: 5
+    - exchange: aspmx2.googlemail.com.
+      preference: 10
+    - exchange: aspmx3.googlemail.com.
+      preference: 10
+  - type: TXT
+    values:
+    - v=spf1 a include:_spf.google.com ~all
+    - google-site-verification=fO3MZgGpHD1mmLzZYEhg65ff8BGN4UjA9cfcEUq960c
+    - google-site-verification=qJjKKaWgcOvHOsXNHVVTbLhXY4c9hukm058h0kgBVKo
+    - google-site-verification=21vpOTYgsER6RNdSHwy7RMZWOzTcKvErreXzp8jVcXY
+
+www:
+  - type: CNAME
+    value: etcd.netlify.com.
+
+mail:
+  - type: CNAME
+    value: ghs.googlehosted.com.
+
+docs:
+  - type: CNAME
+    value: ghs.googlehosted.com.
+
+calendar:
+  - type: CNAME
+    value: ghs.googlehosted.com.
+
+sites:
+  - type: CNAME
+    value: ghs.googlehosted.com.
+
+go:
+  - type: CNAME
+    value: ghs.googlehosted.com.
+
+_jabber._tcp:
+  - type: SRV
+    values:
+    - port: 5269
+      priority: 0
+      target: xmpp-server.l.google.com.
+      weight: 5
+    - port: 5269
+      priority: 0
+      target: xmpp-server1.l.google.com.
+      weight: 20
+    - port: 5269
+      priority: 0
+      target: xmpp-server2.l.google.com.
+      weight: 20
+    - port: 5269
+      priority: 0
+      target: xmpp-server3.l.google.com.
+      weight: 20
+    - port: 5269
+      priority: 0
+      target: xmpp-server4.l.google.com.
+      weight: 20
+
+dash:
+  - type: A
+    value: 104.198.97.34
+
+play:
+  - type: A
+    value: 35.230.70.199
+
+discovery:
+  - type: A
+    value: 35.201.104.20
+
