@@ -69,10 +69,6 @@ _jabber._tcp:
       target: xmpp-server4.l.google.com.
       weight: 20
 
-dash:
-  - type: A
-    value: 104.198.97.34
-
 play:
   - type: A
     value: 35.230.70.199
