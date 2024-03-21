@@ -502,7 +502,7 @@ image-builder.sigs:
 krew.sigs:
 - type: CNAME
   value: kubernetes-sigs-krew.netlify.app.
-# https://github.com/kubernetes-sigs/secrets-store-csi-driver docs (@aramase, @ritazh, @tam7t)
+# https://github.com/kubernetes-sigs/secrets-store-csi-driver docs (@aramase, @ritazh)
 secrets-store-csi-driver.sigs:
 - type: CNAME
   value: kubernetes-sigs-secrets-store-csi-driver.netlify.app.

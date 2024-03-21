@@ -44,7 +44,6 @@ groups:
       - anish.ramasekar@gmail.com
       - nilekhc@gmail.com
       - rita.z.zhang@gmail.com
-      - tommymurphy@google.com
 
   - email-id: k8s-infra-staging-multitenancy@kubernetes.io
     name: k8s-infra-staging-multitenancy

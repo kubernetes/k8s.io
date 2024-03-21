@@ -3,9 +3,10 @@
 approvers:
 - aramase
 - ritazh
-- tam7t
 
 reviewers:
 - aramase
 - ritazh
+
+emeritus_approvers:
 - tam7t
