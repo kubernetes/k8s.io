@@ -1,4 +1,5 @@
 {
+  "cloudArmorTier": "CA_ENTERPRISE_PAYGO",
   "commonInstanceMetadata": {
     "kind": "compute#metadata"
   },
