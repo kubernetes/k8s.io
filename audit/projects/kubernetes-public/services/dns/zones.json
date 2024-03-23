@@ -3,6 +3,24 @@
     "cloudLoggingConfig": {
       "kind": "dns#managedZoneCloudLoggingConfig"
     },
+    "creationTime": "2024-03-21T11:40:40.148Z",
+    "description": "",
+    "dnsName": "canary.etcd.io.",
+    "id": "728080003967975443",
+    "kind": "dns#managedZone",
+    "name": "canary-etcd-io",
+    "nameServers": [
+      "ns-cloud-a1.googledomains.com.",
+      "ns-cloud-a2.googledomains.com.",
+      "ns-cloud-a3.googledomains.com.",
+      "ns-cloud-a4.googledomains.com."
+    ],
+    "visibility": "public"
+  },
+  {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
     "creationTime": "2020-08-02T19:14:51.493Z",
     "description": "",
     "dnsName": "canary.k8s.dev.",
@@ -99,6 +117,24 @@
     "id": "7552990179268901390",
     "kind": "dns#managedZone",
     "name": "canary-x-k8s-io",
+    "nameServers": [
+      "ns-cloud-d1.googledomains.com.",
+      "ns-cloud-d2.googledomains.com.",
+      "ns-cloud-d3.googledomains.com.",
+      "ns-cloud-d4.googledomains.com."
+    ],
+    "visibility": "public"
+  },
+  {
+    "cloudLoggingConfig": {
+      "kind": "dns#managedZoneCloudLoggingConfig"
+    },
+    "creationTime": "2024-03-21T11:39:44.931Z",
+    "description": "",
+    "dnsName": "etcd.io.",
+    "id": "1614245918849256532",
+    "kind": "dns#managedZone",
+    "name": "etcd-io",
     "nameServers": [
       "ns-cloud-d1.googledomains.com.",
       "ns-cloud-d2.googledomains.com.",
