@@ -246,6 +246,7 @@ restrictions:
       - "^k8s-infra-okta-admins@kubernetes.io$"
       - "^k8s-infra-porche-admins@kubernetes.io$"
       - "^k8s-infra-rbac-cert-manager@kubernetes.io$"
+      - "^k8s-infra-rbac-codesearch@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-canary@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-packages-canary@kubernetes.io$"
       - "^k8s-infra-rbac-k8s-io-packages-prod@kubernetes.io$"
