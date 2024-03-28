@@ -1,5 +1,14 @@
 [
   {
+    "createTime": "2024-03-27T12:57:09.227103479Z",
+    "destination": "storage.googleapis.com/k8s-staging-publishing-bot",
+    "filter": "resource.type=\"k8s_container\"\nresource.labels.project_id=\"kubernetes-public\"\nresource.labels.location=\"us-central1\"\nresource.labels.cluster_name=\"aaa\"\nresource.labels.namespace_name=\"publishing-bot\"\nlabels.k8s-pod/name=\"publisher\"",
+    "name": "publishing-bot-sink",
+    "resourceName": "projects/k8s-staging-publishing-bot/sinks/publishing-bot-sink",
+    "updateTime": "2024-03-27T12:57:09.227103479Z",
+    "writerIdentity": "serviceAccount:service-438481731081@gcp-sa-logging.iam.gserviceaccount.com"
+  },
+  {
     "destination": "logging.googleapis.com/projects/k8s-staging-publishing-bot/locations/global/buckets/_Required",
     "filter": "LOG_ID(\"cloudaudit.googleapis.com/activity\") OR LOG_ID(\"externalaudit.googleapis.com/activity\") OR LOG_ID(\"cloudaudit.googleapis.com/system_event\") OR LOG_ID(\"externalaudit.googleapis.com/system_event\") OR LOG_ID(\"cloudaudit.googleapis.com/access_transparency\") OR LOG_ID(\"externalaudit.googleapis.com/access_transparency\")",
     "name": "_Required",
