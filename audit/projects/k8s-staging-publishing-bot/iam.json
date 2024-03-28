@@ -51,6 +51,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-438481731081@gcp-sa-logging.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-staging-publishing-bot@kubernetes.io"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"
