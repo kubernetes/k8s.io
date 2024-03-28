@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: verify-conformance-release
+  namespace: verify-conformance-release
+  labels:
+    app: verify-conformance-release
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: verify-conformance-release
+  template:
+    metadata:
+      labels:
+        app: verify-conformance-release
+    spec:
+      terminationGracePeriodSeconds: 180
+      containers:
+        - name: verify-conformance-release
+          image: gcr.io/k8s-staging-apisnoop/verify-conformance/verify-conformance-release:latest # TODO use tag
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - "ALL"
+            privileged: false
+          args:
+            - --dry-run=false
+            - --github-endpoint=http://ghproxy
+            - --github-endpoint=https://api.github.com
+            - --github-token-path=/etc/github/token
+            - --hmac-secret-file=/etc/webhook/hmac
+            - --plugin-config=/etc/vcr/vcr.yaml
+            - --update-period=5m
+          ports:
+            - name: http
+              containerPort: 8888
+          volumeMounts:
+            - name: hmac
+              mountPath: /etc/webhook
+              readOnly: true
+            - name: github-token
+              mountPath: /etc/github
+              readOnly: true
+            - name: vcr-config
+              mountPath: /etc/vcr/vcr.yaml
+              subPath: vcr.yaml
+              readOnly: true
+      volumes:
+        - name: hmac
+          secret:
+            defaultMode: 420
+            secretName: hmac-token
+        - name: github-token
+          secret:
+            defaultMode: 420
+            secretName: github-token
+        - name: vcr-config
+          configMap:
+            name: vcr-config
