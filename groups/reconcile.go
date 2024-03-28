@@ -131,6 +131,9 @@ func main() {
 	confirmChanges := flag.Bool("confirm", false, "false by default means that we do not push anything to google groups")
 	printConfig := flag.Bool("print", false, "print the existing group information")
 	numWorkers := flag.Int("workers", defaultNumWorkers, "number of concurrent workers to use")
+	sourceGroupEmail := flag.String("source-group", "", "Email address of the source google group")
+	destinationGroupEmail := flag.String("destination-group", "", "Email address of the destination google group")
+	migrateMembers := flag.Bool("migrate", false, "Enable migration of members")
 
 	flag.Usage = Usage
 	flag.Parse()
@@ -191,6 +194,20 @@ func main() {
 		log.Fatal(err)
 	}
 
+	if *migrateMembers && *confirmChanges{
+		log.Printf("print: migrate flag set to %v, will perform mailing lists migration", *migrateMembers)
+		if *sourceGroupEmail == "" || *destinationGroupEmail == "" {
+			log.Fatal("Both sourceGroup and destinationGroup must be provided")
+		}
+		err := r.PerformMailingListMigration(*sourceGroupEmail, *destinationGroupEmail)
+		if err != nil {
+			fmt.Printf("Error migrating members: %v\n", err)
+			return
+		}
+		log.Printf("Members migrated successfully from %v to %v!", *sourceGroupEmail, *destinationGroupEmail)
+		return
+	}
+
 	if *printConfig {
 		err = r.printGroupMembersAndSettings()
 		if err != nil {
@@ -227,6 +244,13 @@ func NewReconciler(ctx context.Context, clientOption option.ClientOption, numWor
 	}
 
 	return &Reconciler{adminService: as, groupService: gs, numWorkers: numWorkers}, nil
+}
+
+
+func (r *Reconciler) PerformMailingListMigration(sourceGroupEmail, destinationGroupEmail string) error {
+	sourceGroup := GoogleGroup{EmailId: sourceGroupEmail}
+	destinationGroup := GoogleGroup{EmailId: destinationGroupEmail}
+	return r.adminService.MigrateMailingListMembers(sourceGroup, destinationGroup)
 }
 
 func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
