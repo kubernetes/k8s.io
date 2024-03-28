@@ -1846,6 +1846,7 @@
   dmap:
     "sha256:7e954af19dbd39d62d5aac41572999ef2f1fc0b5bbfdb8c3da9edc5361cbdce1": ["bookworm-v1.0.0"]
     "sha256:1f387539b00f60fa018d9808b658f34e82d2f8c1dab712ae9d1bbd0c7fda29c5": ["bookworm-v1.0.1"]
+    "sha256:3b00b650f2298207739a5b51987c7f880976a895429dccf24c7ac4db4ac0d8ca": ["bookworm-v1.0.2"]
     "sha256:ae91828f48cd05c9e4d79d1fdf6c2c6bae5d442b189eb0ed25c2c2bbc46e3205": ["bullseye-v1.2.0"]
     "sha256:0140412f772d90c7611ac2bb96550a729397858c7234f1137331ef43d72f41bc": ["bullseye-v1.3.0"]
     "sha256:e98aa8ccc813fb03b7b9abb919e3fe9ac3dd9bf480a22edb9f7bd379fe78d944": ["bullseye-v1.4.0"]
@@ -1860,6 +1861,7 @@
   dmap:
     "sha256:1986b635c1d6eb78680623a9875cfc1c1a5dd8a46536d5114bd1642085d8058e": ["bookworm-v1.0.0"]
     "sha256:2fe587e06a6226f9ed08b7101b3dcd070c21c2f34150a85ef397c94f39c13d8c": ["bookworm-v1.0.1"]
+    "sha256:ae2c6260b0e5fb6dea714cba997ba3779c2eaf22dbe26cf026574b69c7c2e41a": ["bookworm-v1.0.2"]
     "sha256:1dc33f47a3a4a4bf9f15e16a3c072dcde88dd607eb4eee26bd10681c40f2ac96": ["bullseye-v1.2.0"]
     "sha256:f097d3352e0089c09c1272b4f654c8e3b20cdba28697e93e96a64a4490a96b5c": ["bullseye-v1.3.0"]
     "sha256:a7a3ec5bc8c2625197385556f01958a1ddd9b32a0f51259b3e873b028e57a8da": ["bullseye-v1.4.0"]
@@ -1874,6 +1876,7 @@
   dmap:
     "sha256:4b7b61feaca999040ad878c4bbad43b731954867b1c585b514ebc04b81bcf98e": ["bookworm-v1.0.0"]
     "sha256:200aadbf3ce99c2ac2e76d0adb8ddce39eb65ff20f950463aabd072a8e60481b": ["bookworm-v1.0.1"]
+    "sha256:f7efd06444988c8df6dbe13d4ab23804fafc5fa0af183499d85522a31706d1d4": ["bookworm-v1.0.2"]
     "sha256:bc86712a15eee53547db256305378bec9d8c1b71a9b49062abcbc981ffda65ef": ["bullseye-v1.2.0"]
     "sha256:642d31146256ab3ebc522bdf0b3628f223ed28b41502977261c0e5fe79f5fed2": ["bullseye-v1.3.0"]
     "sha256:e3e5ffb83ddc302c680b7ea6ad8de22da3fd5c99a6610ab5048bf1145b62d843": ["bullseye-v1.4.0"]
