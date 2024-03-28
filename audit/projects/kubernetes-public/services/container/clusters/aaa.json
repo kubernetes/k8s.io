@@ -45,8 +45,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.40.0.0/14",
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.26.13-gke.1144000",
-  "currentNodeVersion": "1.26.13-gke.1144000",
+  "currentMasterVersion": "1.26.14-gke.1006000",
+  "currentNodeVersion": "1.26.14-gke.1006000",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -212,7 +212,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.26.13-gke.1144000"
+      "version": "1.26.14-gke.1006000"
     },
     {
       "autoscaling": {
@@ -270,7 +270,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.26.13-gke.1144000"
+      "version": "1.26.14-gke.1006000"
     },
     {
       "autoscaling": {
@@ -329,9 +329,13 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.26.13-gke.1144000"
+      "version": "1.26.14-gke.1006000"
     }
   ],
+  "privateClusterConfig": {
+    "privateEndpoint": "10.107.3.218",
+    "publicEndpoint": "34.68.58.204"
+  },
   "releaseChannel": {
     "channel": "REGULAR"
   },

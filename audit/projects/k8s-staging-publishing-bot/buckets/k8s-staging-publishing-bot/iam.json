@@ -4,7 +4,8 @@
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
         "projectEditor:k8s-staging-publishing-bot",
-        "projectOwner:k8s-staging-publishing-bot"
+        "projectOwner:k8s-staging-publishing-bot",
+        "serviceAccount:service-438481731081@gcp-sa-logging.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.legacyBucketOwner"
     },
