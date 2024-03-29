@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 data "google_monitoring_notification_channel" "sig_k8s_infra_leads" {
-  project = data.google_project.kubernetes_public.project_id
+  project      = data.google_project.kubernetes_public.project_id
   display_name = "sig-k8s-infra-leads@kubernetes.io"
 }
 
@@ -25,25 +25,26 @@ data "google_project" "k8s_infra_sandbox_capg" {
 
 resource "google_billing_budget" "capg_budget" {
   billing_account = data.google_billing_account.account.billing_account
-  display_name = "k8s-infra-sandbox-capg"
+  display_name    = "k8s-infra-sandbox-capg"
   budget_filter {
     # calendar_period = "MONTH" # TODO: terraform doesn't support this?
-    projects = [ "projects/${data.google_project.k8s_infra_sandbox_capg.number}" ]
+    projects = ["projects/${data.google_project.k8s_infra_sandbox_capg.number}"]
     # exclude promotions, which is where our credits come from, since that zeros out cost
     credit_types_treatment = "INCLUDE_SPECIFIED_CREDITS"
-    credit_types           = [
-        "SUSTAINED_USAGE_DISCOUNT",
-        "DISCOUNT",
-        "COMMITTED_USAGE_DISCOUNT",
-        "FREE_TIER",
-        "COMMITTED_USAGE_DISCOUNT_DOLLAR_BASE",
-        "SUBSCRIPTION_BENEFIT",
+    credit_types = [
+      "SUSTAINED_USAGE_DISCOUNT",
+      "DISCOUNT",
+      "COMMITTED_USAGE_DISCOUNT",
+      "FREE_TIER",
+      "COMMITTED_USAGE_DISCOUNT_DOLLAR_BASE",
+      "SUBSCRIPTION_BENEFIT",
     ]
+    calendar_period = "YEAR"
   }
   amount {
     specified_amount {
       currency_code = "USD"
-      units = "5000"
+      units         = "5000"
     }
   }
   all_updates_rule {
@@ -64,24 +65,24 @@ resource "google_billing_budget" "capg_budget" {
 
 resource "google_billing_budget" "k8s_infra" {
   billing_account = data.google_billing_account.account.billing_account
-  display_name = "k8s-infra-monthly"
+  display_name    = "k8s-infra-monthly"
   budget_filter {
     # calendar_period = "MONTH" # TODO: terraform doesn't support this?
     # exclude promotions, which is where our credits come from, since that zeros out cost
     credit_types_treatment = "INCLUDE_SPECIFIED_CREDITS"
-    credit_types           = [
-        "SUSTAINED_USAGE_DISCOUNT",
-        "DISCOUNT",
-        "COMMITTED_USAGE_DISCOUNT",
-        "FREE_TIER",
-        "COMMITTED_USAGE_DISCOUNT_DOLLAR_BASE",
-        "SUBSCRIPTION_BENEFIT",
+    credit_types = [
+      "SUSTAINED_USAGE_DISCOUNT",
+      "DISCOUNT",
+      "COMMITTED_USAGE_DISCOUNT",
+      "FREE_TIER",
+      "COMMITTED_USAGE_DISCOUNT_DOLLAR_BASE",
+      "SUBSCRIPTION_BENEFIT",
     ]
   }
   amount {
     specified_amount {
       currency_code = "USD"
-      units = "250000" # 3M/yr / 12mo
+      units         = "250000" # 3M/yr / 12mo
     }
   }
   all_updates_rule {
