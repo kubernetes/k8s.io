@@ -17,9 +17,7 @@
   - type: TXT
     values:
     - v=spf1 a include:_spf.google.com ~all
-    - google-site-verification=fO3MZgGpHD1mmLzZYEhg65ff8BGN4UjA9cfcEUq960c
-    - google-site-verification=qJjKKaWgcOvHOsXNHVVTbLhXY4c9hukm058h0kgBVKo
-    - google-site-verification=21vpOTYgsER6RNdSHwy7RMZWOzTcKvErreXzp8jVcXY
+    - google-site-verification=bXhN5AlC3L0F0zszK6O7FLv69G_2LH4pN4BORAUa4To
 
 www:
   - type: CNAME
@@ -79,5 +77,8 @@ play:
 
 discovery:
   - type: A
-    value: 35.201.104.20
+    value: 35.225.64.149
 
+dev.discovery:
+  - type: A
+    value: 35.184.241.212
