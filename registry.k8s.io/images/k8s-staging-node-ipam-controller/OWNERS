@@ -1,0 +1,15 @@
+# See the OWNERS file documentation:
+#  https://github.com/kubernetes/community/blob/master/contributors/devel/owners.md
+
+# This file should stay in sync with the following OWNERS:
+# - https://sigs.k8s.io/node-ipam-controller/OWNERS
+
+approvers:
+  - ameukam
+  - aojea
+  - mneverov
+  - sarveshr7
+  - sig-network-leads
+
+labels:
+- sig/network
