@@ -275,6 +275,7 @@
 - name: nginx-1.25
   dmap:
     "sha256:cdafd6c9d36e23414ce41330a482f9136ce82fac46802809681f61cdcd5ad0bb": ["v0.0.5"]
+    "sha256:b3e027ab191eb9461a9bcf25092eabb1d547cba164992dbd722c1aa2b4a936ee": ["v0.0.6"]
 - name: nginx-errors
   dmap:
     "sha256:5530c7fc1fa75b49e068d6b7b4f8f1c13a5834c155ba7abd5943b9057c3b925b": ["0.48.1"]
