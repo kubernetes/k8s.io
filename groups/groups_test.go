@@ -307,6 +307,7 @@ func TestHardcodedGroupsForParanoia(t *testing.T) {
 		"k8s-infra-gcp-org-admins@kubernetes.io": {
 			"ameukam@gmail.com",
 			"bentheelder@google.com",
+			"cblecker@gmail.com",
 			"cy@borg.dev",
 			"davanum@gmail.com",
 			"ihor@cncf.io",
