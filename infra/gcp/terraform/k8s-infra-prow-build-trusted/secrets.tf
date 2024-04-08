@@ -52,6 +52,10 @@ locals {
       group  = "sig-contributor-experience"
       owners = "github@kubernetes.io"
     }
+    k8s-github-robot-github-token = {
+      group  = "sig-contributor-experience"
+      owners = "github@kubernetes.io"
+    }
     registry-k8s-io-s3-writer = {
       group  = "sig-release"
       owners = "k8s-infra-release-admins@kubernetes.io"
