@@ -497,7 +497,6 @@ groups:
     members:
       - ameukam@gmail.com
       - bentheelder@google.com
-      - cblecker@gmail.com # temporary, remove after https://github.com/kubernetes/k8s.io/issues/6503 is resolved
       - cy@borg.dev
       - davanum@gmail.com
       - ihor@cncf.io
