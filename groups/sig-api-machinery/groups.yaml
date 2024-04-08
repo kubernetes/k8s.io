@@ -123,6 +123,17 @@ groups:
     - ricardo.katz@gmail.com
     - varshaprasad96@gmail.com
 
+- email-id: k8s-infra-staging-controller-tools@kubernetes.io
+  name: k8s-infra-staging-controller-tools
+  description: |-
+    ACL for staging controller-tools
+  settings:
+    ReconcileMembers: "true"
+  members:
+    - sbueringer@gmail.com
+    - vince@prigna.com
+    - alv2412+k8sinfra@googlemail.com
+
   #
   # k8s-infra gcs write access
   #
