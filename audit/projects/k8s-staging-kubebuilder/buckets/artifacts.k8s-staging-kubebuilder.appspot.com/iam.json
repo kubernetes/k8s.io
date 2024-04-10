@@ -26,6 +26,12 @@
         "group:k8s-infra-staging-kubebuilder@kubernetes.io"
       ],
       "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "allUsers"
+      ],
+      "role": "roles/storage.objectViewer"
     }
   ]
 }
