@@ -12,12 +12,6 @@
         "projectViewer:k8s-infra-e2e-boskos-074"
       ],
       "role": "roles/storage.legacyBucketReader"
-    },
-    {
-      "members": [
-        "deleted:serviceAccount:control-plane-e2e-pr122-gsaqn5@k8s-infra-e2e-boskos-074.iam.gserviceaccount.com?uid=103298745565764299751"
-      ],
-      "role": "roles/storage.objectAdmin"
     }
   ]
 }
