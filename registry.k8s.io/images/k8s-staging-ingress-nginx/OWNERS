@@ -2,11 +2,11 @@
 #  https://github.com/kubernetes/community/blob/master/contributors/devel/owners.md
 
 approvers:
-- elvinefendi
+- cpanato
+- Gacko
+- puerco
 - rikatz
 - strongjz
 - tao12345666333
-- puerco
-- cpanato
 labels:
 - sig/network
