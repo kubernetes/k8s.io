@@ -107,6 +107,7 @@ restrictions:
       - "^community@kubernetes.io$"
       - "^dev@kubernetes.io$"
       - "^github@kubernetes.io$"
+      - "^github-managment-alerts@kubernetes.io$"
       - "^lwkd@kubernetes.io$"
       - "^moderators@kubernetes.io$"
       - "^sig-contribex@kubernetes.io$"
