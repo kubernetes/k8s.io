@@ -54,7 +54,7 @@ data "google_iam_policy" "prod_kettle_dataset_iam_policy" {
       "serviceAccount:${module.aaa_kettle_sa.email}",
       "serviceAccount:${google_service_account.bq_kettle_data_transfer_writer.email}"
     ]
-    role = "roles/bigquery.dataEditor"
+    role = "roles/bigquery.user"
   }
 }
 
