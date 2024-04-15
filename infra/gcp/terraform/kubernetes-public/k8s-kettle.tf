@@ -58,6 +58,14 @@ data "google_iam_policy" "prod_kettle_dataset_iam_policy" {
   }
 }
 
+// grant bigquery jobUser role to the service account
+// so the job transfer can launch BigQuery jobs
+resource "google_project_iam_member" "kettle_jobuser_binding" {
+  project = data.google_project.project.project_id
+  role    = "roles/bigquery.jobUser"
+  member  = "serviceAccount:${module.aaa_kettle_sa.email}"
+}
+
 resource "google_bigquery_dataset_iam_policy" "prod_kettle_dataset" {
   dataset_id  = google_bigquery_dataset.prod_kettle_dataset.dataset_id
   project     = google_bigquery_dataset.prod_kettle_dataset.project
