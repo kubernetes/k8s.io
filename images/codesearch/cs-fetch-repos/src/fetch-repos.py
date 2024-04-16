@@ -27,8 +27,6 @@ REPOS = [
     'kubernetes-csi',
     'kubernetes-incubator',
     'kubernetes-sigs',
-    'kubernetes-nightly',
-    'kubernetes-retired',
     'etcd-io',
 ]
 
