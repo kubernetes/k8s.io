@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright 2021 The Kubernetes Authors.
+# Copyright 2024 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,6 +27,9 @@ REPOS = [
     'kubernetes-csi',
     'kubernetes-incubator',
     'kubernetes-sigs',
+    'kubernetes-nightly',
+    'kubernetes-retired',
+    'etcd-io',
 ]
 
 CONFIG = {
