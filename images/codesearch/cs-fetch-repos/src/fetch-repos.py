@@ -27,6 +27,7 @@ REPOS = [
     'kubernetes-csi',
     'kubernetes-incubator',
     'kubernetes-sigs',
+    'etcd-io',
 ]
 
 CONFIG = {
