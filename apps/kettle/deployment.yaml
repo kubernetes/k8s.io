@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kettle
+  namespace: kettle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kettle
+  template:
+    metadata:
+      labels:
+        app: kettle
+    spec:
+      serviceAccountName: kettle
+      containers:
+      - name: kettle
+        image: gcr.io/k8s-staging-infra-tools/kettle:latest
+        imagePullPolicy: Always
+        env:
+        - name: DEPLOYMENT
+          value: prod
+        - name: SUBSCRIPTION_PATH
+          value: kubernetes-jenkins/gcs-changes/kettle-filtered
+        resources:
+          requests:
+            memory: 4Gi
+          limits:
+            memory: 12Gi
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: kettle-data
