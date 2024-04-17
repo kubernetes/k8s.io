@@ -86,6 +86,19 @@ groups:
       - manjunath.cse@gmail.com
       - rcmadhankumar@gmail.com
 
+  - email-id: k8s-infra-staging-cloud-pv-vsphere@kubernetes.io
+    name: k8s-infra-staging-cloud-pv-vsphere
+    description: |-
+      ACL for pushing vsphere artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - xudongl@vmware.com
+      - xudong.liu@broadcom.com
+      - chen.lin@broadcom.com
+      - yifeng.xiao@broadcom.com
+      - lubron.zhan@broadcom.com
+
   - email-id: k8s-infra-staging-kas-network-proxy@kubernetes.io
     name: k8s-infra-staging-kas-network-proxy
     description: |-
