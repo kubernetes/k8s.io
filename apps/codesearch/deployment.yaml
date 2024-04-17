@@ -43,10 +43,11 @@ spec:
           volumeMounts:
           - name: config
             mountPath: /data
-          # resources:
-          #   limits:
-          #     cpu: "1" # TODO - find baseline
-          #     memory: 8Gi # TODO - find baseline
+          resources:
+            limits:
+              memory: 8Gi
+            requests:
+              memory: 8Gi
       volumes:
       - name: config
         emptyDir: {}
