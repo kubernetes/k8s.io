@@ -19,7 +19,6 @@
   "projects/kubernetes-public/logs/kube-proxy",
   "projects/kubernetes-public/logs/kubelet",
   "projects/kubernetes-public/logs/kubelet-monitor",
-  "projects/kubernetes-public/logs/logging.googleapis.com%2Fsink_error",
   "projects/kubernetes-public/logs/maintenance.googleapis.com%2Factivity_log",
   "projects/kubernetes-public/logs/monitoring.googleapis.com%2Fuptime_checks",
   "projects/kubernetes-public/logs/networkanalyzer.googleapis.com%2Fanalyzer_reports",
