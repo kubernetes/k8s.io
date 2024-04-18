@@ -6,7 +6,7 @@ metadata:
   labels:
     app: codesearch
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: codesearch
@@ -26,7 +26,7 @@ spec:
       - name: codesearch-fetch
         # Placeholder image until we can add image under control of k8s.io
         # Issue to track this work: https://github.com/kubernetes/k8s.io/issues/2182
-        image: gcr.io/k8s-staging-infra-tools/cs-fetch-repos:v20220317-c16ef4289
+        image: gcr.io/k8s-staging-infra-tools/cs-fetch-repos:v20240417-4a8d8af41
         volumeMounts:
         - name: config
           mountPath: /data
