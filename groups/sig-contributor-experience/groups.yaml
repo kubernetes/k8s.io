@@ -69,6 +69,27 @@ groups:
       - pal.nabarun95@gmail.com
       - priyankasaggu11929@gmail.com
 
+  - email-id: github-managment-alerts@kubernetes.io
+    name: github-managment-alerts
+    description: |-
+      Open mailing list for alerts from Kubernetes GitHub management applications. All other posts will be moderated. Please do not attempt to reply to this list.
+
+      For more information, refer https://git.k8s.io/community/github-management
+    owners:
+      - cblecker@gmail.com
+    managers:
+      - killen.bob@gmail.com
+      - madhav.jiv@gmail.com
+      - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "true"
+
   - email-id: lwkd@kubernetes.io
     name: lwkd
     description: |-
