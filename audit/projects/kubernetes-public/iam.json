@@ -14,6 +14,18 @@
     },
     {
       "members": [
+        "serviceAccount:kettle@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.dataOwner"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.dataViewer"
+    },
+    {
+      "members": [
         "group:k8s-infra-gcp-accounting@kubernetes.io",
         "group:k8s-infra-prod-readiness@kubernetes.io",
         "serviceAccount:bq-data-transfer-kettle@kubernetes-public.iam.gserviceaccount.com",
