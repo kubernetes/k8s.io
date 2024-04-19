@@ -178,7 +178,6 @@ aliases:
     - cpanato
     - jeremyrickard
     - justaugustus
-    - listx
     - puerco
     - saschagrunert
     - thockin
@@ -186,7 +185,6 @@ aliases:
     - cpanato
     - jeremyrickard
     - justaugustus
-    - listx
     - puerco
     - saschagrunert
     - thockin
@@ -246,7 +244,6 @@ aliases:
   test-infra-oncall:
     - chases2
     - cjwagner
-    - listx
     - michelle192837
     - mpherman2
   # people with sufficient privileges to run scripts in /infra/gcp
