@@ -37,6 +37,7 @@ groups:
       - antonio.ojea.garcia@gmail.com
       - apelisse@google.com
       - aravindh.foss@pm.me # SIG Windows
+      - aguclu@redhat.com # SIG CLI
       - augustus@cisco.com # SIG Release
       - benjamin.ahrtr@gmail.com # SIG etcd
       - bentheelder@google.com
@@ -61,7 +62,7 @@ groups:
       - decarr@redhat.com
       - dgrisonn@redhat.com
       - divya.mohan0209@gmail.com
-      - eddiezane@gmail.com
+      - eddiezane@gmail.com # CLI
       - ehashman@apple.com
       - fabrizio.pandini@gmail.com
       - fbongiovanni@google.com
@@ -97,14 +98,13 @@ groups:
       - kikis.github@gmail.com
       - kim.andrewsy@gmail.com
       - klaus1982.cn@gmail.com
-      - kn.verey@gmail.com # SIG CLI
       - ksemenov@vmware.com
       - lachlan.evenson@gmail.com
       - lancashiredanielle@gmail.com
       - liggitt@google.com
       - madhav.jiv@gmail.com
       - marosset@microsoft.com
-      - maszulik@redhat.com
+      - maszulik@redhat.com # SIG CLI, Apps
       - matt.farina@gmail.com
       - mcqueenorama@gmail.com
       - michmike@gmail.com
