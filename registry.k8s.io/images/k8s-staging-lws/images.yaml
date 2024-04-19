@@ -1,3 +1,4 @@
 - name: lws
   dmap:
     "sha256:1cf665fa003c830cd9105e0227a041e9f85dd3c86e7442f5ef6af313dc4fea55": ["v0.1.0"]
+    "sha256:6615ded334adea763e7e70675be37521c798b21918687fbb98463e59aa0e8410": ["v0.2.0"]
