@@ -2,6 +2,8 @@
 # https://github.com/kubernetes/kubernetes/blob/master/docs/devel/owners.md
 
 approvers:
+- aojea
 - bowei
+- danwinship
 - MrHohn
 - thockin
