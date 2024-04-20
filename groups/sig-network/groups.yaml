@@ -26,17 +26,14 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - antonio.ojea.garcia@gmail.com
       - bannai@google.com
       - bowei@google.com
-      - jsand@google.com
-      - mixia@google.com
-      - pavithrar@google.com
       - thockin@google.com
       - rramkumar@google.com
       - shance@google.com
       - smatti@google.com
       - srepakula@google.com
-      - varunmar@google.com
       - zihongz@google.com
 
   - email-id: k8s-infra-staging-cpa@kubernetes.io
@@ -70,9 +67,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - antonio.ojea.garcia@gmail.com
       - zihongz@google.com
       - bowei@google.com
-      - pavithrar@google.com
 
   - email-id: k8s-infra-staging-external-dns@kubernetes.io
     name: k8s-infra-staging-external-dns
