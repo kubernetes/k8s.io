@@ -76,7 +76,7 @@
     "clusterIpv4CidrBlock": "10.40.0.0/14",
     "clusterSecondaryRangeName": "gke-aaa-pods-4d0eb763",
     "createSubnetwork": true,
-    "defaultPodIpv4RangeUtilization": 0.0097,
+    "defaultPodIpv4RangeUtilization": 0.0107,
     "servicesIpv4Cidr": "10.107.16.0/20",
     "servicesIpv4CidrBlock": "10.107.16.0/20",
     "servicesSecondaryRangeName": "gke-aaa-services-4d0eb763",
@@ -203,7 +203,7 @@
       "name": "pool1-20190918234853194900000001",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0097,
+        "podIpv4RangeUtilization": 0.0107,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -261,7 +261,7 @@
       "name": "pool2-20200316195138785800000001",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0097,
+        "podIpv4RangeUtilization": 0.0107,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -320,7 +320,7 @@
       "name": "nap-e2-highmem-4-79yq2sly",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0097,
+        "podIpv4RangeUtilization": 0.0107,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
