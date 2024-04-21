@@ -78,6 +78,12 @@
         "user:twaggoner@linuxfoundation.org"
       ],
       "role": "roles/resourcemanager.organizationAdmin"
+    },
+    {
+      "members": [
+        "serviceAccount:service-org-758905017065@security-center-api.iam.gserviceaccount.com"
+      ],
+      "role": "roles/securitycenter.serviceAgent"
     }
   ],
   "version": 1

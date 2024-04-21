@@ -8,6 +8,7 @@
     },
     {
       "members": [
+        "serviceAccount:k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
         "serviceAccount:k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquery.dataViewer"
