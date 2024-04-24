@@ -26,6 +26,7 @@
     # 2.46 was not built due to https://github.com/kubernetes/kubernetes/issues/123266
     "sha256:cc249acbd34692826b2b335335615e060fdb3c0bca4954507aa3a1d1194de253": ["2.47"]
     "sha256:baeac1023bb8b281cffcd4246217331a9977c7cb8e285c0d6f07228855df49f6": ["2.48"]
+    "sha256:0737a4bf9ddaef39caf5ab80ba87d5581c13db9fe11ad96fb10a5a85c687d570": ["2.50"]
 - name: apparmor-loader
   dmap:
     "sha256:60629fe42de6260c9b930b48a2923b69168dc1c71fa5f762f70036477ffd74b6": ["1.2"]
