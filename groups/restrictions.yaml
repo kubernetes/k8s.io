@@ -265,6 +265,9 @@ restrictions:
     allowedGroups:
       - "^wg-batch@kubernetes.io$"
       - "^wg-batch-leads@kubernetes.io$"
+  - path: "wg-serving/groups.yaml"
+    allowedGroups:
+      - "^wg-serving.*@kubernetes.io$"
   - path: "wg-lts/groups.yaml"
     allowedGroups:
       - "^wg-lts@kubernetes.io$"
