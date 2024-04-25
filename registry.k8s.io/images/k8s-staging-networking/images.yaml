@@ -44,5 +44,6 @@
     "sha256:7eb7b3cee4d33c10c49893ad3c386232b86d4067de5251294d4c620d6e072b93": ["v1.10.11"]
 - name: kube-network-policies
   dmap:
+    "sha256:0fb74846c11dc56a859b932aaf2c5624f62d4228f814d37e46f898d7e8f8aeec": ["v0.2.0"]
     "sha256:99c493b0979bf1328cd53f62b4864eea1bb08ff0176e34b85e9732bce1f49120": ["v0.1.0"]
 
