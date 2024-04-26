@@ -131,6 +131,10 @@ aliases:
   wg-data-protection-leads:
     - xing-yang
     - yuxiangqian
+  wg-device-management-leads:
+    - johnbelamaric
+    - klueska
+    - pohly
   wg-iot-edge-leads:
     - cantbewong
     - cindyxing

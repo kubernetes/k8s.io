@@ -269,4 +269,8 @@ restrictions:
     allowedGroups:
       - "^wg-lts@kubernetes.io$"
       - "^wg-lts-leads@kubernetes.io$"
+  - path: "wg-device-management/groups.yaml"
+    allowedGroups:
+      - "^wg-device-management@kubernetes.io$"
+      - "^wg-device-management-leads@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
