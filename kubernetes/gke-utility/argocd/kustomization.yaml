@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: argocd
+
+resources:
+- github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.10.7
+- ../../
+- extras.yaml
+
+patches:
+- path: argocd-cm.yaml
+- path: argocd-cm-rbac.yaml
+- path: argocd-sa.yaml

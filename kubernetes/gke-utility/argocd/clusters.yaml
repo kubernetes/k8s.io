@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gke-prow
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    cloud: gke
+type: Opaque
+stringData:
+  name: gke-prow
+  server: https://10.254.0.18
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "args": ["gcp"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
+      },
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
+---
