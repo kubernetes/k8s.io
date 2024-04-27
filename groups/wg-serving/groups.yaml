@@ -1,0 +1,41 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # WG Serving mailing lists
+  #
+
+  - email-id: wg-serving-leads@kubernetes.io
+    name: wg-serving-leads
+    description: |-
+      WG Serving Organizers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - s.kanzhelev@gmail.com
+      - arangogutierrez@gmail.com
+      - terrytangyuan@gmail.com
+
+  - email-id: wg-serving@kubernetes.io
+    name: wg-serving
+    description: |-
+      Public mailing list for WG Serving
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - s.kanzhelev@gmail.com
+      - arangogutierrez@gmail.com
+      - terrytangyuan@gmail.com
+    members:
+      - wg-serving-leads@kubernetes.io
