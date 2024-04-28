@@ -9,3 +9,21 @@ stringData:
   url: https://github.com/kubernetes
   name: kubernetes
   type: git
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apps
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: kubernetes/apps
+    repoURL: https://github.com/borg-land/k8s.io
+    targetRevision: utility-dev
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
