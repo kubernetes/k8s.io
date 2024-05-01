@@ -12,7 +12,7 @@ groups:
     description: |-
       SIG autoscaling leads
     owners:
-      - mwielgus@google.com
+      - maciekpytel@google.com
       - guyjtempleton@googlemail.com
     settings:
       AllowWebPosting: "true"
@@ -59,7 +59,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - mwielgus@google.com
       - bskiba@google.com
       - maciekpytel@google.com
       - ksiedlecki@google.com
