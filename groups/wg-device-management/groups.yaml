@@ -1,0 +1,36 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: wg-device-management-leads@kubernetes.io
+    name: wg-device-management-leads
+    description: |-
+      WG Device Management Organizers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - jbelamaric@google.com
+      - klueska@gmail.com
+      - patrick.ohly@intel.com
+
+  - email-id: wg-device-management@kubernetes.io
+    name: wg-device-management
+    description: |-
+      Public mailing list for WG Device Management
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - jbelamaric@google.com
+      - klueska@gmail.com
+      - patrick.ohly@intel.com
+    members:
+      - wg-device-management-leads@kubernetes.io

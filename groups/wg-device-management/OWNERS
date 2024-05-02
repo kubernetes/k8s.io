@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- wg-device-management-leads
+reviewers:
+- wg-device-management-leads
+
+labels:
+- wg/device-management
