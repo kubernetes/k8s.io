@@ -21,6 +21,7 @@ groups:
       - s.kanzhelev@gmail.com
       - arangogutierrez@gmail.com
       - terrytangyuan@gmail.com
+      - seedjeffwan@gmail.com
 
   - email-id: wg-serving@kubernetes.io
     name: wg-serving
@@ -37,5 +38,6 @@ groups:
       - s.kanzhelev@gmail.com
       - arangogutierrez@gmail.com
       - terrytangyuan@gmail.com
+      - seedjeffwan@gmail.com
     members:
       - wg-serving-leads@kubernetes.io
