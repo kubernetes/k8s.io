@@ -243,6 +243,7 @@
     "sha256:971cb526bc0108cca7d8efda32102629cb362f99bbd4879fd381bea1b2014ab4": [ "v4.4.0" ]
     "sha256:2beba908725f98d176339f2eef373aebd86132b0a67f2b5d03496a15515f0c1c": [ "v4.5.0" ]
     "sha256:54b97b7ec30ca185c16e8c40e84fc527a7fc5cc8e9f7ea6b857a7a67655fff54": [ "v4.6.0" ]
+    "sha256:92e5585a12c6f7aa9f0766caaea9b236c166b42935cb2210c7f77eba9413d74f": [ "v4.7.0" ]
 - name: objectstorage-controller
   dmap:
 - name: objectstorage-sidecar
