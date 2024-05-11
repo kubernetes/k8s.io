@@ -1,1 +1,3 @@
-# no images yet
+- name: release/cloud-provider-vsphere
+  dmap:
+    "sha256:0186c486bad3ef1528942a4c363ecff22494aa981b5c0bd6dc923e85cb0a5e5a": ["v1.30.0"]
