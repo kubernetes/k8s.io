@@ -1,1 +1,5 @@
-# no images yet
+- name: cloud-provider-vsphere
+  dmap:
+    "sha256:026f63d9ed421e5e783fcf51e7db265a6788e36a910ea70c76657dd324b99063": ["v1.28.0"]
+    "sha256:8b340f08703019f25d7f9fd6231303ebf378bcf498f90cd3b2c69209384f7f95": ["v1.29.0"]
+    "sha256:0186c486bad3ef1528942a4c363ecff22494aa981b5c0bd6dc923e85cb0a5e5a": ["v1.30.0"]
