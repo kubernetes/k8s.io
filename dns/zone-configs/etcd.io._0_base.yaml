@@ -75,6 +75,10 @@ discovery:
   - type: A
     value: 35.225.64.149
 
+www.discovery:
+  - type: A
+    value: 35.225.64.149
+
 dev.discovery:
   - type: A
     value: 35.184.241.212
