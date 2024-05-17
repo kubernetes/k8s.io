@@ -33,12 +33,12 @@ module "gcb_bucket" {
   }]
 
   iam_members = [
-    # {
-    #   role   = "roles/storage.objectViewer"
-    #   member = "serviceAccount:${google_service_account.image_builder.email}"
-    # },
     {
-      role   = "roles/storage.objectCreator"
+      role   = "roles/storage.admin"
+      member = "serviceAccount:${google_service_account.image_builder.email}"
+    },
+    {
+      role   = "roles/storage.admin"
       member = "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
     }
   ]

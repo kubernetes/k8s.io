@@ -39,6 +39,7 @@ module "project" {
     "cloudkms.googleapis.com",
     "certificatemanager.googleapis.com",
     "artifactregistry.googleapis.com",
-    "secretmanager.googleapis.com"
+    "secretmanager.googleapis.com",
+    "cloudbuild.googleapis.com"
   ]
 }

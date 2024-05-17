@@ -29,3 +29,11 @@ resource "google_artifact_registry_repository_iam_member" "images" {
   role       = "roles/artifactregistry.reader"
   member     = "allUsers"
 }
+
+resource "google_artifact_registry_repository_iam_member" "image_builder" {
+  project    = google_artifact_registry_repository.images.project
+  location   = google_artifact_registry_repository.images.location
+  repository = google_artifact_registry_repository.images.name
+  role       = "roles/artifactregistry.writer"
+  member     = "serviceAccount:${google_service_account.image_builder.email}"
+}

@@ -28,17 +28,26 @@ module "iam" {
     ]
     "roles/container.admin" = [
       "serviceAccount:${google_service_account.argocd.email}",
+      "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-application-controller",
+      "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-applicationset-controller",
+      "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-server",
     ]
 
     "roles/logging.logWriter" = [
       "serviceAccount:${google_service_account.gke_nodes.email}",
+      "serviceAccount:${google_service_account.image_builder.email}",
     ]
+
+    "roles/secretmanager.secretAccessor" = [
+      "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
+    ]
+
+    // DEPRIVILIGE THE DEFAULT CLOUD BUILD SERVICE ACCOUNT SO IT CAN'T DO ANYTHING
+    "roles/cloudbuild.builds.builder" = []
 
     "roles/monitoring.metricWriter" = [
       "serviceAccount:${google_service_account.gke_nodes.email}",
     ]
-    // IF GCB needs additional privileges beyond the documented roles please use a custom service account with it
-    // https://cloud.google.com/build/docs/cloud-build-service-account
     "roles/cloudbuild.builds.editor" = [
       "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
     ]
@@ -58,4 +67,16 @@ resource "google_service_account" "argocd" {
   account_id   = "argocd"
   display_name = "ArgoCD"
   project      = module.project.project_id
+}
+
+resource "google_service_account" "image_builder" {
+  account_id   = "image-builder"
+  display_name = "Image Builder"
+  project      = module.project.project_id
+}
+
+resource "google_service_account_iam_member" "image_builder" {
+  service_account_id = google_service_account.image_builder.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
 }
