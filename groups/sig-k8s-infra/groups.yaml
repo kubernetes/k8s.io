@@ -121,6 +121,7 @@ groups:
       - k8s-infra-rbac-triageparty-cli@kubernetes.io
       - k8s-infra-rbac-triageparty-scalability@kubernetes.io
       - k8s-infra-rbac-slack-infra@kubernetes.io
+      - k8s-infra-rbac-verify-conformance@kubernetes.io
 
   # owners of the k8s-infra-ii-sandbox project, working on billing analysis
   # for artifact hosting and registry.k8s.io
