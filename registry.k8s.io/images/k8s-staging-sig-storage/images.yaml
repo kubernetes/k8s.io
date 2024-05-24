@@ -23,6 +23,7 @@
     "sha256:3d4846c08ca8ab66ff23d185ccf5ceae97c09f51523a3c666c0da95febebf00c": [ "v4.4.4" ]
     "sha256:d69cc72025f7c40dae112ff989e920a3331583497c8dfb1600c5ae0e37184a29": [ "v4.5.0" ]
     "sha256:9dcd469f02bbb7592ad61b0f848ec242f9ea2102187a0cd8407df33c2d633e9c": [ "v4.5.1" ]
+    "sha256:4be2985e88473ff786f884708f845a02fae3834ea867156edda39055c6e62948": [ "v4.6.0" ]
 - name: csi-external-health-monitor-agent
   dmap:
     "sha256:f8eff7dc8187f1153faebd5d087e30f4580e00fcc1265fe2ab2472ec010db8f7": [ "v0.1.0" ]
@@ -101,6 +102,7 @@
     "sha256:e7ad666f1d9b0caa077c7f0c157c9f87d1e73858390732496f66dcc716ff10c5": [ "v3.6.4" ]
     "sha256:de79c8bbc271622eb94d2ee8689f189ea7c1cb6adac260a421980fe5eed66708": [ "v4.0.0" ]
     "sha256:bf5a235b67d8aea00f5b8ec24d384a2480e1017d5458d8a63b361e9eeb1608a9": [ "v4.0.1" ]
+    "sha256:bc9425314f6f07189dc1c657202e8e4ea857da227fc8e5cb41b9b97e6886b461": [ "v5.0.0" ]
 - name: csi-resizer
   dmap:
     "sha256:43195976fb9f94d943f5dd9d58b8afa543be22d09a1165e8a489b7dfe22c657a": [ "v0.4.0" ]
@@ -111,6 +113,7 @@
     "sha256:7a5ba58a44e0d749e0767e4e37315bcf6a61f33ce3185c1991848af4db0fb70a": [ "v1.1.0" ]
     "sha256:4c148bbdf883153bc72d321be4dc55c33774a6d98b2b3e0c2da6ae389149a9b7": [ "v1.10.0" ]
     "sha256:4ecda2818f6d88a8f217babd459fdac31588f85581aa95ac7092bb0471ff8541": [ "v1.10.1" ]
+    "sha256:bb84fef0dbd4c12345d35b4910a461a4564001ae4a2e33a7c8c4483f7e02478a": [ "v1.11.0" ]
     "sha256:36c31f7e1f433c9634d24f876353e8646246d81a03c4e351202c2644daff1620": [ "v1.2.0" ]
     "sha256:6e0546563b18872b0aa0cad7255a26bb9a87cb879b7fc3e2383c867ef4f706fb": [ "v1.3.0" ]
     "sha256:9ebbf9f023e7b41ccee3d52afe39a89e3ddacdbb69269d583abfc25847cfd9e4": [ "v1.4.0" ]
@@ -163,6 +166,7 @@
     "sha256:682d5015146de0f922def125a3be1e2a29c43a3eb45700600e4e0733ec3f5752": [ "v7.0.0" ]
     "sha256:1a29ab1e4ecdc33a84062cec757620d9787c28b28793202c5b78ae097c3dee27": [ "v7.0.1" ]
     "sha256:c4b6b02737bc24906fcce57fe6626d1a36cb2b91baa971af2a5e5a919093c34e": [ "v7.0.2" ]
+    "sha256:6d4a90d6e164db684684295e28ad4b012d7c8a29ee4103cfb7611ce2e9c884bb": [ "v8.0.0" ]
 - name: hello-populator
   dmap:
     "sha256:99e9f2ac87a85ab9fa283da62464edb643c970a06da7e70c6c5bb6adc001738f": [ "v0.1.0" ]
@@ -215,6 +219,7 @@
 - name: local-volume-node-cleanup
   dmap:
     "sha256:f31b2d8f498f9b06d565cbef32cede8a92a98de366b83b711a7478e16b7d1a81": [ "v2.6.0" ]
+    "sha256:77fa452525dbef550940fba05b1ac6e8dfbeec9e819d7ad95b382307cc1f4c09": [ "v2.7.0" ]
 - name: mock-driver
   dmap:
     "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]
@@ -292,6 +297,7 @@
     "sha256:2084f69694f0fae24d1a3039e02102beaef3ae912c10e59094449196a63ffb7e": [ "v7.0.0" ]
     "sha256:87a44fa28a10d00968be71deec75883ed6d48132779f798572f2fb49d3b30d95": [ "v7.0.1" ]
     "sha256:a03550d7b25d0d24c6c313a27fcade0065f0cee159805ed0b0083700dcb52b76": [ "v7.0.2" ]
+    "sha256:d60a4f302a80f7effa0c9c3f6da7de6a49afede590abc39e30e959e844e46a41": [ "v8.0.0" ]
 - name: snapshot-validation-webhook
   dmap:
     "sha256:8bfd19dc57bb86ca4438b9592578a1a9afaf559f22e63a9b308b8b2be8d789ad": [ "v3.0.0" ]
@@ -319,6 +325,7 @@
     "sha256:f7148fdc0442567422461539a3a357111639049d26eb6aed67661ea503957e79": [ "v7.0.0" ]
     "sha256:d554a05bed85ae94bff384b4352c849b7034684f7da73ba8e6bf9f812dd8b53f": [ "v7.0.1" ]
     "sha256:e950fd7136bbe812b14b738f0725599204bdf2cda7e3f31d1912db4db4c9c174": [ "v7.0.2" ]
+    "sha256:608381a36b48bfd4ad84c0d33c7b157386fe76431b18a2cd3dfddb022a438a38": [ "v8.0.0" ]
 - name: volume-data-source-validator
   dmap:
     "sha256:a4482344a693258e2cb31b32fa35d1f3cc414b546c2ebf7154fb87f15322f5db": [ "v0.1.0" ]
