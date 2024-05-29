@@ -47,12 +47,12 @@ groups:
       - jameswangel@gmail.com
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
-      - markrossetti@gmail.com # 1.30 Release Manager
-      - mehabhalodiya@gmail.com # 1.30 Release Branch Manager Associate
       - mudrinic.mare@gmail.com
-      - nng.grace@gmail.com
+      - nng.grace@gmail.com # Subproject owner
       - pal.nabarun95@gmail.com
       - saschagrunert@gmail.com
+      - markrossetti@gmail.com # 1.31 Release Branch Manager Associate
+      - mehabhalodiya@gmail.com # 1.31 Release Branch Manager
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
@@ -66,17 +66,16 @@ groups:
       - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
       - cicih@google.com
-      - fsmunoz@gmail.com # 1.30 RT Lead Shadow
       - jameswangel@gmail.com
       - joseph.r.sandoval@gmail.com
-      - kat.cosgrove@gmail.com # 1.30 RT Lead
       - pal.nabarun95@gmail.com
-      - markrossetti@gmail.com # 1.30 Release Manager
-      - marosset@microsoft.com # 1.30 Release Manager
-      - neoaggelos@gmail.com # 1.30 RT Lead Shadow
-      - nng.grace@gmail.com # 1.30 RT EA
-      - ramses.green.2@gmail.com # 1.30 RT Lead Shadow
-      - rodomar@outlook.com # 1.30 RT Lead Shadow
+      - drew.a.hagen@gmail.com # 1.31 RT Lead Shadow
+      - fsmunoz@gmail.com # 1.31 RT Lead Shadow
+      - kat.cosgrove@gmail.com # Subproject owner
+      - mehabhalodiya@gmail.com # 1.31 Release Branch Manager
+      - mr.salehsedghpour@gmail.com # 1.31 Release Lead Shadow
+      - neoaggelos@gmail.com # 1.31 RT Lead
+      - nng.grace@gmail.com # Subproject owner
       - sanchita.mishra1718@gmail.com # 1.30 RT Lead Shadow
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
@@ -207,15 +206,17 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - abigailkmccarthy@gmail.com # 1.30 Comms Shadow
-      - amit@odysseycloud.io # 1.30 Comms Shadow
-      - frederick@kautz.dev # 1.30 Comms Shadow
-      - fsmunoz@gmail.com # 1.30 RT Lead Shadow
-      - kat.cosgrove@gmail.com # 1.30 RT Lead
-      - kcmartin2@mac.com # 1.30 Comms Lead
-      - natalivlatko@gmail.com # 1.30 Comms Shadow
-      - neoaggelos@gmail.com # 1.30 RT Lead Shadow
-      - ramses.green.2@gmail.com # 1.30 RT Lead Shadow
+      - abigailkmccarthy@gmail.com # 1.31 Comms Lead
+      - smith.rashan@gmail.com # 1.31 Comms Shadow
+      - edithpuclla20@gmail.com # 1.31 Comms Shadow
+      - yigit.demirbas@gmail.com # 1.31 Comms Shadow
+      - admin@mb-consulting.dev # 1.31 Comms Shadow
+      - drew.a.hagen@gmail.com # 1.31 RT Lead Shadow
+      - fsmunoz@gmail.com # 1.31 RT Lead Shadow
+      - kat.cosgrove@gmail.com # Subproject owner
+      - mr.salehsedghpour@gmail.com # 1.31 Release Lead Shadow
+      - neoaggelos@gmail.com # 1.31 RT Lead
+      - nng.grace@gmail.com # Subproject owner
       - sanchita.mishra1718@gmail.com # 1.30 RT Lead Shadow
 
   - email-id: release-managers-private@kubernetes.io
@@ -261,17 +262,18 @@ groups:
       - antheabjung@gmail.com
       - augustus@cisco.com
       - bentheelder@google.com
-      - fsmunoz@gmail.com # 1.30 RT Lead Shadow
       - gmccloskey@google.com
       - jameswangel@gmail.com
       - joseph.r.sandoval@gmail.com
-      - kat.cosgrove@gmail.com # 1.30 RT Lead
-      - markrossetti@gmail.com # 1.30 Release Manager
-      - marosset@microsoft.com # 1.30 Release Manager
       - mudrinic.mare@gmail.com
       - spiffxp@google.com
-      - neoaggelos@gmail.com # 1.30 Lead Shadow
-      - ramses.green.2@gmail.com # 1.30 Lead Shadow
+      - drew.a.hagen@gmail.com # 1.31 RT Lead Shadow
+      - fsmunoz@gmail.com # 1.31 RT Lead Shadow
+      - kat.cosgrove@gmail.com # Subproject owner
+      - mehabhalodiya@gmail.com # 1.31 Release Branch Manager
+      - mr.salehsedghpour@gmail.com # 1.31 Release Lead Shadow
+      - neoaggelos@gmail.com # 1.31 RT Lead
+      - nng.grace@gmail.com # Subproject owner
       - sanchita.mishra1718@gmail.com # 1.30 RT Lead Shadow
 
   - email-id: security-release-team@kubernetes.io
@@ -319,40 +321,44 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
-      - fsmunoz@gmail.com # 1.30 RT Lead Shadow
-      - nng.grace@gmail.com # 1.30 RT EA
-      - kat.cosgrove@gmail.com # 1.30 RT Lead
-      - neoaggelos@gmail.com # 1.30 Lead Shadow
-      - ramses.green.2@gmail.com # 1.30 Lead Shadow
+      - drew.a.hagen@gmail.com # 1.31 RT Lead Shadow
+      - fsmunoz@gmail.com # 1.31 RT Lead Shadow
+      - kat.cosgrove@gmail.com # Subproject owner
+      - mr.salehsedghpour@gmail.com # 1.31 Release Lead Shadow
+      - neoaggelos@gmail.com # 1.31 RT Lead
+      - nng.grace@gmail.com # Subproject owner
+      - priyankasaggu11929@gmail.com # 1.31 RT EA
       - sanchita.mishra1718@gmail.com # 1.30 RT Lead Shadow
     members:
-      - abigailkmccarthy@gmail.com # 1.30 Communications Shadow
-      - amit@odysseycloud.io # 1.30 Communications Shadow
-      - AnaMMedina21@gmail.com # 1.30 Enhancements Shadow
-      - danieljoshuachan@gmail.com # 1.30 Docs Shadow
-      - drewhagendev@gmail.com # 1.30 Docs Lead
-      - egbunaoluebube@gmail.com # 1.30 Docs Shadow
-      - faeka6@gmail.com # 1.30 Release Notes Shadow
-      - frederick@kautz.dev # 1.30 Communications Shadow
-      - jackhammervyom@gmail.com # 1.30 Docs Shadow
-      - kcmartin2@mac.com # 1.30 Communications Lead
-      - orlin@orlix.org # 1.30 Release Notes Shadow
-      - m.r.boxell@gmail.com # 1.30 Enhancements Shadow
-      - markrossetti@gmail.com # 1.30 Release Manager
-      - marosset@microsoft.com # 1.30 Release Manager
-      - maryam_tavakkoli@hotmail.com # 1.30 Release Signal Shadow
-      - megan@defenseunicorns.com # 1.30 Enhancements Shadow
-      - mr.salehsedghpour@yahoo.com # 1.30 Enhancements Lead
-      - natalivlatko@gmail.com # 1.30 Communications Shadow
-      - ninapolshakova@gmail.com # 1.30 Release Notes Shadow
-      - paco.xu@daocloud.io # 1.30 Release Signal Lead
-      - pnigelbrown@gmail.com # 1.30 Enhancements Shadow
-      - satyampsoni@gmail.com # 1.30 Release Notes Shadow
-      - smith.rashan@gmail.com # 1.30 Release Notes Lead
-      - sreeram.venkitesh@bigbinary.com # 1.30 Enhancements Shadow
-      - subhasmitaswain232@gmail.com # 1.30 Release Signal Shadow
-      - tyler.schade@solo.io # 1.30 Enhancements Shadow
-      - zelikangelina@gmail.com # 1.30 Release Signal Shadow
+      - abigailkmccarthy@gmail.com # 1.31 Comms Lead
+      - admin@mb-consulting.dev # 1.31 Comms Shadow
+      - akacloudmelon@gmail.com # 1.31 Release Notes Shadow
+      - akintayoshedrack@gmail.com # 1.31 Docs Shadow
+      - amit@odysseycloud.io # 1.31 Release Notes Shadow
+      - arkasaha30@gmail.com # 1.31 Enhancements Shadow
+      - atharvashinde179@gmail.com # 1.31 Release Signal Shadow
+      - danieljoshuachan@gmail.com # 1.31 Docs Shadow
+      - edithpuclla20@gmail.com # 1.31 Comms Shadow
+      - egbunaoluebube@gmail.com # 1.31 Docs Lead
+      - jackhammervyom@gmail.com # 1.31 Release Signal Lead
+      - laurent.goderre@docker.com # 1.31 Docs Shadow
+      - m.r.boxell@gmail.com # 1.31 Enhancements Shadow
+      - maryam_tavakkoli@hotmail.com # 1.31 Docs Shadow
+      - michael.levan@clouddev.engineering # 1.31 Release Signal Shadow
+      - ninapolshakova@gmail.com # 1.31 Release Notes Lead
+      - prianna.ahsan@gmail.com # 1.31 Enhancements Shadow
+      - rawat.dipesh@gmail.com # 1.31 Enhancements Shadow
+      - rayandas91@gmail.com # 1.31 Release Notes Shadow
+      - satyampsoni@gmail.com # 1.31 Release Notes Shadow
+      - sepi.alavii@gmail.com # 1.31 Release Notes Shadow
+      - smith.rashan@gmail.com # 1.31 Comms Shadow
+      - sreeram.venkitesh@bigbinary.com # 1.31 Enhancements Lead
+      - subhasmitaswain232@gmail.com # 1.31 Release Signal Shadow
+      - tylerschade99@gmail.com # 1.31 Enhancements Shadow
+      - wendyha.sut@gmail.com # 1.31 Release Signal Shadow
+      - xandergrzyw@gmail.com # 1.31 Docs Shadow
+      - yigit.demirbas@gmail.com # 1.31 Comms Shadow
+
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
     description: |-
@@ -369,33 +375,33 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
-      - kat.cosgrove@gmail.com # 1.30 RT Lead
-      - nng.grace@gmail.com # 1.30 RT EA
+      - kat.cosgrove@gmail.com # Subproject owner
+      - nng.grace@gmail.com # Subproject owner
+      - priyankasaggu11929@gmail.com # 1.31 RT EA
     members:
-      - abigailkmccarthy@gmail.com # 1.30 Communications Shadow
-      - amit@odysseycloud.io # 1.30 Communications Shadow
-      - AnaMMedina21@gmail.com # 1.30 Enhancements Shadow
-      - danieljoshuachan@gmail.com # 1.30 Docs Shadow
-      - egbunaoluebube@gmail.com # 1.30 Docs Shadow
-      - faeka6@gmail.com # 1.30 Release Notes Shadow
-      - frederick@kautz.dev # 1.30 Communications Shadow
-      - fsmunoz@gmail.com # 1.30 RT Lead Shadow
-      - jackhammervyom@gmail.com # 1.30 Docs Shadow
-      - orlin@orlix.org # 1.30 Release Notes Shadow
-      - m.r.boxell@gmail.com # 1.30 Enhancements Shadow
-      - maryam_tavakkoli@hotmail.com # 1.30 Release Signal Shadow
-      - megan@defenseunicorns.com # 1.30 Enhancements Shadow
-      - natalivlatko@gmail.com # 1.30 Communications Shadow
-      - neoaggelos@gmail.com # 1.30 Lead Shadow
-      - ninapolshakova@gmail.com # 1.30 Release Notes Shadow
-      - pnigelbrown@gmail.com # 1.30 Enhancements Shadow
-      - ramses.green.2@gmail.com # 1.30 Lead Shadow
-      - sanchita.mishra1718@gmail.com # 1.30 RT Lead Shadow
-      - satyampsoni@gmail.com # 1.30 Release Notes Shadow
-      - sreeram.venkitesh@bigbinary.com # 1.30 Enhancements Shadow
-      - subhasmitaswain232@gmail.com # 1.30 Release Signal Shadow
-      - tyler.schade@solo.io # 1.30 Enhancements Shadow
-      - zelikangelina@gmail.com # 1.30 Release Signal Shadow
+      - admin@mb-consulting.dev # 1.31 Comms Shadow
+      - akacloudmelon@gmail.com # 1.31 Release Notes Shadow
+      - akintayoshedrack@gmail.com # 1.31 Docs Shadow
+      - amit@odysseycloud.io # 1.31 Release Notes Shadow
+      - arkasaha30@gmail.com # 1.31 Enhancements Shadow
+      - atharvashinde179@gmail.com # 1.31 Release Signal Shadow
+      - danieljoshuachan@gmail.com # 1.31 Docs Shadow
+      - edithpuclla20@gmail.com # 1.31 Comms Shadow
+      - laurent.goderre@docker.com # 1.31 Docs Shadow
+      - m.r.boxell@gmail.com # 1.31 Enhancements Shadow
+      - maryam_tavakkoli@hotmail.com # 1.31 Docs Shadow
+      - michael.levan@clouddev.engineering # 1.31 Release Signal Shadow
+      - prianna.ahsan@gmail.com # 1.31 Enhancements Shadow
+      - rawat.dipesh@gmail.com # 1.31 Enhancements Shadow
+      - rayandas91@gmail.com # 1.31 Release Notes Shadow
+      - satyampsoni@gmail.com # 1.31 Release Notes Shadow
+      - sepi.alavii@gmail.com # 1.31 Release Notes Shadow
+      - smith.rashan@gmail.com # 1.31 Comms Shadow
+      - subhasmitaswain232@gmail.com # 1.31 Release Signal Shadow
+      - tylerschade99@gmail.com # 1.31 Enhancements Shadow
+      - wendyha.sut@gmail.com # 1.31 Release Signal Shadow
+      - xandergrzyw@gmail.com # 1.31 Docs Shadow
+      - yigit.demirbas@gmail.com # 1.31 Comms Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
@@ -439,12 +445,11 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
       - k8s-infra-release-viewers@kubernetes.io
-      - maryam_tavakkoli@hotmail.com # 1.30 Release Signal Shadow
-      - mofi@google.com # 1.30 Release Signal Shadow
-      - namanlakhwani@gmail.com # 1.30 Release Signal Shadow
-      - paco.xu@daocloud.io # 1.30 Release Signal
-      - subhasmitaswain232@gmail.com # 1.30 Release Signal Shadow
-      - zelikangelina@gmail.com # 1.30 Release Signal Shadow
+      - atharvashinde179@gmail.com # 1.31 Release Signal Shadow
+      - jackhammervyom@gmail.com # 1.31 Release Signal Lead
+      - michael.levan@clouddev.engineering # 1.31 Release Signal Shadow
+      - subhasmitaswain232@gmail.com # 1.31 Release Signal Shadow
+      - wendyha.sut@gmail.com # 1.31 Release Signal Shadow
 
   - email-id: release-team-enhancements@kubernetes.io
     name: release-team-enhancements
@@ -462,17 +467,20 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - AnaMMedina21@gmail.com # 1.30 Enhancements Shadow
-      - kat.cosgrove@gmail.com # 1.30 RT Lead
-      - m.r.boxell@gmail.com # 1.30 Enhancements Shadow
-      - mr.salehsedghpour@yahoo.com # 1.30 Enhancements Lead
-      - megan@defenseunicorns.com # 1.30 Enhancements Shadow
-      - neoaggelos@gmail.com # 1.30 Lead Shadow
-      - pnigelbrown@gmail.com # 1.30 Enhancements Shadow
-      - ramses.green.2@gmail.com # 1.30 Lead Shadow
+      - arkasaha30@gmail.com # 1.31 Enhancements Shadow
+      - drew.a.hagen@gmail.com # 1.31 RT Lead Shadow
+      - fsmunoz@gmail.com # 1.31 RT Lead Shadow
+      - kat.cosgrove@gmail.com # Subproject owner
+      - m.r.boxell@gmail.com # 1.31 Enhancements Shadow
+      - mr.salehsedghpour@gmail.com # 1.31 Release Lead Shadow
+      - neoaggelos@gmail.com # 1.31 RT Lead
+      - nng.grace@gmail.com # Subproject owner
+      - prianna.ahsan@gmail.com # 1.31 Enhancements Shadow
+      - priyankasaggu11929@gmail.com # 1.31 RT EA
+      - rawat.dipesh@gmail.com # 1.31 Enhancements Shadow
       - sanchita.mishra1718@gmail.com # 1.30 RT Lead Shadow
-      - sreeram.venkitesh@bigbinary.com # 1.30 Enhancements Shadow
-      - tyler.schade@solo.io # 1.30 Enhancements Shadow
+      - sreeram.venkitesh@bigbinary.com # 1.31 Enhancements Lead
+      - tylerschade99@gmail.com # 1.31 Enhancements Shadow
 
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
     name: k8s-infra-staging-zeitgeist
