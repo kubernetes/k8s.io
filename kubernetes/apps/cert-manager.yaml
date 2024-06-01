@@ -23,9 +23,11 @@ spec:
           targetRevision: v1.14.5
           helm:
             releaseName: cert-manager
-            parameters:
-              - name: installCRDs
-                value: 'true'
+            valueFiles:
+            - $values/kubernetes/{{ .name }}/helm/cert-manager.yaml
+        - repoURL: 'https://github.com/borg-land/k8s.io.git'
+          targetRevision: utility-dev
+          ref: values
       syncPolicy:
         automated:
           prune: true
