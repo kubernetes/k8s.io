@@ -7,5 +7,6 @@ controller:
       cloud.google.com/l4-rbs: "enabled"
     externalTrafficPolicy: Local
     ipFamilyPolicy: RequireDualStack
-    
-
+    ipFamilies:
+      - IPv6
+      - IPv4
