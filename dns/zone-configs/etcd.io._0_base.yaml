@@ -17,7 +17,7 @@
   - type: TXT
     values:
     - v=spf1 a include:_spf.google.com ~all
-    - google-site-verification=bXhN5AlC3L0F0zszK6O7FLv69G_2LH4pN4BORAUa4To
+    - google-site-verification=mlJyal77dMkFPCyQuC52nzM-F4EIMHSOqgZTorDys1g
 
 www:
   - type: CNAME
