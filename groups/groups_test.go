@@ -168,6 +168,13 @@ func TestGroupConventions(t *testing.T) {
 	for _, g := range cfg.Groups {
 		// groups are easier to reason about if email and name match
 		expectedEmailId := g.Name + "@kubernetes.io"
+		// sig-etcd keeps using security@etcd.io, but the name "security"
+		// has already been used by "security@kubernetes.io", so we use
+		// the name "etcd-security". Refer to discussion in
+		// https://github.com/kubernetes/k8s.io/pull/6542.
+		if g.Name == "etcd-security" {
+			expectedEmailId = "security@etcd.io"
+		}
 		if g.EmailId != expectedEmailId {
 			t.Errorf("group '%s': expected email '%s', got '%s'", g.Name, expectedEmailId, g.EmailId)
 		}
