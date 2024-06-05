@@ -105,15 +105,19 @@ groups:
     description: |-
       People to be notified about test failures
     settings:
-      ReconcileMembers: "true"
-    members:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+    managers:
       - acondor@google.com
+      - michalwozniak@google.com
+      - yuki.iwai.tz@gmail.com
+    members:
       - ahg@google.com
       - kerthcet@gmail.com
-      - michalwozniak@google.com
       - traian_schiau@epam.com
       - wangqingcan1990@gmail.com
-      - yuki.iwai.tz@gmail.com
 
   #
   # k8s-infra gcs write access
