@@ -58,6 +58,7 @@ groups:
     members:
       - mpatel@redhat.com
       - qbarrand@redhat.com
+      - ybettan@redhat.com
       - yshnaidm@redhat.com
 
   - email-id: k8s-infra-staging-nfd@kubernetes.io
