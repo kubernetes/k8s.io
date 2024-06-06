@@ -14,22 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "vsphere_resource_pool" "cpi" {
-  name                    = "cloud-provider-vsphere"
-  parent_resource_pool_id = data.vsphere_compute_cluster.compute_cluster.resource_pool_id
-}
-
-resource "vsphere_resource_pool" "capi" {
-  name                    = "cluster-api-provider-vsphere"
-  parent_resource_pool_id = data.vsphere_compute_cluster.compute_cluster.resource_pool_id
-}
-
-resource "vsphere_resource_pool" "image-builder" {
-  name                    = "image-builder"
+resource "vsphere_resource_pool" "prow" {
+  name                    = "prow"
   parent_resource_pool_id = data.vsphere_compute_cluster.compute_cluster.resource_pool_id
 }
 
 resource "vsphere_resource_pool" "templates" {
   name                    = "templates"
-  parent_resource_pool_id = data.vsphere_compute_cluster.compute_cluster.resource_pool_id
+  parent_resource_pool_id = vsphere_resource_pool.prow.id
 }

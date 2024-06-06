@@ -14,27 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "vsphere_user" {
-  type    = string
-  default = "administrator@vsphere.local"
+data "vsphere_datacenter" "datacenter" {
+  name = var.vsphere_datacenter
 }
 
-variable "vsphere_password" {
-  type = string
+data "vsphere_compute_cluster" "compute_cluster" {
+  name          = var.vsphere_cluster
+  datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
-variable "vsphere_server" {
-  type = string
-}
-
-variable "vsphere_datacenter" {
-  type = string
-}
-
-variable "vsphere_cluster" {
-  type = string
-}
-
-variable "vsphere_datastorename" {
-  type = string
+data "vsphere_datastore" "datastore" {
+  name          = var.vsphere_datastorename
+  datacenter_id = data.vsphere_datacenter.datacenter.id
 }

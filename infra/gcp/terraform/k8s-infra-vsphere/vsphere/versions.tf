@@ -14,27 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "vsphere_user" {
-  type    = string
-  default = "administrator@vsphere.local"
-}
+/*
+This file defines:
+- Required Terraform version
+*/
 
-variable "vsphere_password" {
-  type = string
-}
-
-variable "vsphere_server" {
-  type = string
-}
-
-variable "vsphere_datacenter" {
-  type = string
-}
-
-variable "vsphere_cluster" {
-  type = string
-}
-
-variable "vsphere_datastorename" {
-  type = string
+terraform {
+  required_version = "~> 1.5.0"
 }

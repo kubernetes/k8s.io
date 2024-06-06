@@ -80,20 +80,3 @@ resource "vsphere_role" "capv-ci" {
     "VirtualMachine.State.RemoveSnapshot",
   ]
 }
-
-# resource "vsphere_entity_permissions" "rp-capv" {
-#   entity_id = vsphere_resource_pool.capi.id
-#   entity_type = "ResourcePool"
-#   permissions {
-#     user_or_group = "vsphere.local\\DCClients"
-#     propagate = true
-#     is_group = true
-#     role_id = data.vsphere_role.role1.id
-#   }
-#   permissions {
-#     user_or_group = "vsphere.local\\ExternalIDPUsers"
-#     propagate = true
-#     is_group = true
-#     role_id = vsphere_role.role2.id
-#   }
-# }

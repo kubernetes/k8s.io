@@ -14,26 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "vsphere_folder" "cpi" {
-  path          = "cloud-provider-vsphere"
-  type          = "vm"
-  datacenter_id = data.vsphere_datacenter.datacenter.id
-}
-
-resource "vsphere_folder" "capi" {
-  path          = "cluster-api-provider-vsphere"
-  type          = "vm"
-  datacenter_id = data.vsphere_datacenter.datacenter.id
-}
-
-resource "vsphere_folder" "image-builder" {
-  path          = "image-builder"
+resource "vsphere_folder" "prow" {
+  path          = "prow"
   type          = "vm"
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
 resource "vsphere_folder" "templates" {
-  path          = "templates"
+  path          = "${vsphere_folder.prow.path}/templates"
   type          = "vm"
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }

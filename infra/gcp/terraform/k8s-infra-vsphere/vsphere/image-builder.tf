@@ -14,27 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "vsphere_user" {
-  type    = string
-  default = "administrator@vsphere.local"
+locals {
+  image_builder_project_name = "image-builder"
+  image_builder_group = "vsphere.local\\prow-${local.image_builder_project_name}-users"
 }
 
-variable "vsphere_password" {
-  type = string
-}
+module "image-builder" {
+  source = "./modules/vsphere-project"
 
-variable "vsphere_server" {
-  type = string
-}
-
-variable "vsphere_datacenter" {
-  type = string
-}
-
-variable "vsphere_cluster" {
-  type = string
-}
-
-variable "vsphere_datastorename" {
-  type = string
+  project_name = local.image_builder_project_name
+  group = local.image_builder_group
+  nr_projects = 5
+  role_id = vsphere_role.capv-ci.id
+  vsphere_datacenter_id = data.vsphere_datacenter.datacenter.id
+  vsphere_folder_path = vsphere_folder.prow.path
+  vsphere_resource_pool_id = vsphere_resource_pool.prow.id
 }
