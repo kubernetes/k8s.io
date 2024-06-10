@@ -38,3 +38,47 @@ variable "vsphere_cluster" {
 variable "vsphere_datastorename" {
   type = string
 }
+
+variable "vsphere_network_name" {
+  type = string
+  default = "VM Network"
+}
+
+# Variables specific to cluster-api-provider-vsphere
+
+variable "cluster_api_provider_vsphere_iam_group" {
+  type = string
+}
+
+variable "cluster_api_provider_vsphere_nr_projects" {
+  type = number
+  default = 5
+}
+
+# Variables specific to cloud-provider-vsphere
+
+variable "cloud_provider_vsphere_iam_group" {
+  type = string
+}
+
+variable "cloud_provider_vsphere_nr_projects" {
+  type = number
+  default = 5
+}
+
+# Variables specific to image-builder
+
+variable "image_builder_iam_group" {
+  type = string
+}
+
+variable "image_builder_nr_projects" {
+  type = number
+  default = 5
+}
+
+# Variables specific to janitor
+
+variable "vsphere_janitor_iam_group" {
+  type = string
+}

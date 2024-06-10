@@ -14,19 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-locals {
-  image_builder_project_name = "image-builder"
-  image_builder_group = "vsphere.local\\prow-${local.image_builder_project_name}-users"
-}
-
-module "image-builder" {
-  source = "./modules/vsphere-project"
-
-  project_name = local.image_builder_project_name
-  group = local.image_builder_group
-  nr_projects = 5
-  role_id = vsphere_role.capv-ci.id
-  vsphere_datacenter_id = data.vsphere_datacenter.datacenter.id
-  vsphere_folder_path = vsphere_folder.prow.path
-  vsphere_resource_pool_id = vsphere_resource_pool.prow.id
+resource "vsphere_content_library" "capv" {
+  name            = "capv"
+  description     = "Content Library for CAPV."
+  storage_backing = [data.vsphere_datastore.datastore.id]
 }

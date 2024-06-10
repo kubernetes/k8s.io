@@ -14,17 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "vsphere_role" "capv-ci-content-library" {
-  name = "capv-ci-content-library"
-  role_privileges = [
-    "ContentLibrary.DownloadSession",
-    "ContentLibrary.ReadStorage",
-    "ContentLibrary.SyncLibraryItem",
-  ]
-}
-
-resource "vsphere_role" "capv-ci" {
-  name = "capv-ci"
+resource "vsphere_role" "vsphere-ci" {
+  name = "vsphere-ci"
   role_privileges = [
     "Cns.Searchable",
     "Datastore.AllocateSpace",
@@ -78,5 +69,64 @@ resource "vsphere_role" "capv-ci" {
     "VirtualMachine.Provisioning.GetVmFiles",
     "VirtualMachine.State.CreateSnapshot",
     "VirtualMachine.State.RemoveSnapshot",
+  ]
+}
+
+resource "vsphere_role" "image-builder-ci" {
+  name = "image-builder-ci"
+  role_privileges = [
+    "Cryptographer.Access",
+    "Cryptographer.Clone",
+    "Datastore.AllocateSpace",
+    "Datastore.Browse",
+    "Datastore.FileManagement",
+    "Network.Assign",
+    "Resource.AssignVMToPool",
+    "VirtualMachine.Config.AddNewDisk",
+    "VirtualMachine.Config.AddRemoveDevice",
+    "VirtualMachine.Config.AdvancedConfig",
+    "VirtualMachine.Config.Annotation",
+    "VirtualMachine.Config.CPUCount",
+    "VirtualMachine.Config.EditDevice",
+    "VirtualMachine.Config.Memory",
+    "VirtualMachine.Config.Resource",
+    "VirtualMachine.Config.Settings",
+    "VirtualMachine.Interact.ConsoleInteract",
+    "VirtualMachine.Interact.DeviceConnection",
+    "VirtualMachine.Interact.PowerOff",
+    "VirtualMachine.Interact.PowerOn",
+    "VirtualMachine.Interact.PutUsbScanCodes",
+    "VirtualMachine.Interact.SetCDMedia",
+    "VirtualMachine.Interact.SetFloppyMedia",
+    "VirtualMachine.Inventory.Create",
+    "VirtualMachine.Inventory.CreateFromExisting",
+    "VirtualMachine.Inventory.Delete",
+    "VirtualMachine.Provisioning.Clone",
+    "VirtualMachine.Provisioning.CloneTemplate",
+    "VirtualMachine.Provisioning.CreateTemplateFromVM",
+    "VirtualMachine.Provisioning.DeployTemplate",
+    "VirtualMachine.Provisioning.MarkAsTemplate",
+    "VirtualMachine.Provisioning.MarkAsVM",
+    "VirtualMachine.State.CreateSnapshot",
+  ]
+}
+
+# templates-ci allows users access to the templates folder to clone templates to virtual machines.
+# TODO(chrischdi): check if permissions are enough.
+resource "vsphere_role" "templates-ci" {
+  name = "templates-ci"
+  role_privileges = [
+    # "Cns.Searchable",
+    # "Datastore.AllocateSpace",
+    # "Datastore.Browse",
+    # "Network.Assign",
+    # "Sessions.GlobalMessage",
+    # "Sessions.ValidateSession",
+    # "StorageProfile.View",
+    "VirtualMachine.Provisioning.Clone",
+    "VirtualMachine.Provisioning.CloneTemplate",
+    "VirtualMachine.Provisioning.DeployTemplate",
+    # "VirtualMachine.Provisioning.DiskRandomRead",
+    # "VirtualMachine.Provisioning.GetVmFiles",
   ]
 }

@@ -16,9 +16,11 @@ limitations under the License.
 
 vsphere_password = ""
 vsphere_server = ""
-nsxt_user = ""
-nsxt_password = ""
-nsxt_server = ""
 vsphere_datacenter = ""
 vsphere_cluster = ""
 vsphere_datastorename = ""
+
+cluster_api_provider_vsphere_iam_group = "vsphere.local\\prow-cluster-api-provider-vsphere-users"
+cloud_provider_vsphere_iam_group = "vsphere.local\\prow-cloud-provider-vsphere-users"
+image_builder_iam_group = "vsphere.local\\prow-image-builder-users"
+vsphere_janitor_iam_group = "vsphere.local\\prow-vsphere-janitor-users"
