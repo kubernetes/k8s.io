@@ -39,6 +39,12 @@ resource "vsphere_entity_permissions" "permissions_datacenter" {
     is_group = true
     role_id = data.vsphere_role.read-only.id
   }
+  permissions {
+    user_or_group = var.vsphere_janitor_iam_group
+    propagate = false
+    is_group = true
+    role_id = data.vsphere_role.read-only.id
+  }
 }
 
 
@@ -67,13 +73,19 @@ resource "vsphere_entity_permissions" "permissions_compute_cluster" {
     is_group = true
     role_id = data.vsphere_role.read-only.id
   }
+  permissions {
+    user_or_group = var.vsphere_janitor_iam_group
+    propagate = true
+    is_group = true
+    role_id = data.vsphere_role.read-only.id
+  }
 }
 
 # Deny access recursively to the prow resource pool to restrict the above recursive read-only rule.
 # Permissions will later be granted on lower placed resource pools.
 ## /<datacenter>/host/<cluster>/Resources/prow
 
-resource "vsphere_entity_permissions" "permissions_compute_cluster_resource_pool" {
+resource "vsphere_entity_permissions" "permissions_prow_resource_pool" {
   entity_id = vsphere_resource_pool.prow.id
   entity_type = "ResourcePool"
   permissions {
@@ -93,6 +105,24 @@ resource "vsphere_entity_permissions" "permissions_compute_cluster_resource_pool
     propagate = true
     is_group = true
     role_id = data.vsphere_role.no-access.id
+  }
+  permissions {
+    user_or_group = var.vsphere_janitor_iam_group
+    propagate = true
+    is_group = true
+    role_id =  vsphere_role.vsphere-ci.id
+  }
+}
+
+
+resource "vsphere_entity_permissions" "permissions_prow_folder" {
+  entity_id = vsphere_folder.prow.id
+  entity_type = "Folder"
+  permissions {
+    user_or_group = var.vsphere_janitor_iam_group
+    propagate = true
+    is_group = true
+    role_id =  vsphere_role.vsphere-ci.id
   }
 }
 
@@ -119,6 +149,12 @@ resource "vsphere_entity_permissions" "permissions_datastore" {
     is_group = true
     role_id = vsphere_role.image-builder-ci.id
   }
+  permissions {
+    user_or_group = var.vsphere_janitor_iam_group
+    propagate = false
+    is_group = true
+    role_id = vsphere_role.vsphere-ci.id
+  }
 }
 
 # Grant access on the network.
@@ -144,6 +180,12 @@ resource "vsphere_entity_permissions" "permissions_network" {
     propagate = true
     is_group = true
     role_id = vsphere_role.image-builder-ci.id
+  }
+  permissions {
+    user_or_group = var.vsphere_janitor_iam_group
+    propagate = true
+    is_group = true
+    role_id = vsphere_role.vsphere-ci.id
   }
 }
 
@@ -173,5 +215,11 @@ resource "vsphere_entity_permissions" "permissions_templates_directory" {
     propagate = true
     is_group = true
     role_id =  vsphere_role.templates-ci.id
+  }
+  permissions {
+    user_or_group = var.vsphere_janitor_iam_group
+    propagate = true
+    is_group = true
+    role_id =  vsphere_role.vsphere-ci.id
   }
 }
