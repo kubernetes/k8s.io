@@ -16,35 +16,35 @@ limitations under the License.
 
 variable "project_name" {
   description = "The name of the project which normally matches the repository name, e.g. cluster-api-provider-vsphere"
-  type = string
+  type        = string
 }
 
 variable "nr_projects" {
   description = "The name of the project which normally matches the repository name, e.g. cluster-api-provider-vsphere"
-  type = number
+  type        = number
 }
 
 variable "group" {
   description = "User or group to allow accessing the resource pools and folders"
-  type = string
+  type        = string
 }
 
 variable "role_id" {
   description = "Role id to assign permissions"
-  type = string
+  type        = string
 }
 
 variable "vsphere_datacenter_id" {
   description = "vSphere datacenter object id"
-  type = string
+  type        = string
 }
 
 variable "vsphere_resource_pool_id" {
   description = "vSphere resource pool object id to create the project in"
-  type = string
+  type        = string
 }
 
 variable "vsphere_folder_path" {
   description = "vSphere folder path to create the project in"
-  type = string
+  type        = string
 }

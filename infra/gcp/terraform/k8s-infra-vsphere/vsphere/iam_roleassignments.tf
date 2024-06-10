@@ -19,31 +19,31 @@ limitations under the License.
 ## /<datacenter>
 
 resource "vsphere_entity_permissions" "permissions_datacenter" {
-  entity_id = data.vsphere_datacenter.datacenter.id
+  entity_id   = data.vsphere_datacenter.datacenter.id
   entity_type = "Datacenter"
   permissions {
     user_or_group = var.cloud_provider_vsphere_iam_group
-    propagate = false
-    is_group = true
-    role_id = data.vsphere_role.read-only.id
+    propagate     = false
+    is_group      = true
+    role_id       = data.vsphere_role.read-only.id
   }
   permissions {
     user_or_group = var.cluster_api_provider_vsphere_iam_group
-    propagate = false
-    is_group = true
-    role_id = data.vsphere_role.read-only.id
+    propagate     = false
+    is_group      = true
+    role_id       = data.vsphere_role.read-only.id
   }
   permissions {
     user_or_group = var.image_builder_iam_group
-    propagate = false
-    is_group = true
-    role_id = data.vsphere_role.read-only.id
+    propagate     = false
+    is_group      = true
+    role_id       = data.vsphere_role.read-only.id
   }
   permissions {
     user_or_group = var.vsphere_janitor_iam_group
-    propagate = false
-    is_group = true
-    role_id = data.vsphere_role.read-only.id
+    propagate     = false
+    is_group      = true
+    role_id       = data.vsphere_role.read-only.id
   }
 }
 
@@ -53,31 +53,31 @@ resource "vsphere_entity_permissions" "permissions_datacenter" {
 ## /<datacenter>/host/<cluster>
 
 resource "vsphere_entity_permissions" "permissions_compute_cluster" {
-  entity_id = data.vsphere_compute_cluster.compute_cluster.id
+  entity_id   = data.vsphere_compute_cluster.compute_cluster.id
   entity_type = "ClusterComputeResource"
   permissions {
     user_or_group = var.cloud_provider_vsphere_iam_group
-    propagate = true
-    is_group = true
-    role_id = data.vsphere_role.read-only.id
+    propagate     = true
+    is_group      = true
+    role_id       = data.vsphere_role.read-only.id
   }
   permissions {
     user_or_group = var.cluster_api_provider_vsphere_iam_group
-    propagate = true
-    is_group = true
-    role_id = data.vsphere_role.read-only.id
+    propagate     = true
+    is_group      = true
+    role_id       = data.vsphere_role.read-only.id
   }
   permissions {
     user_or_group = var.image_builder_iam_group
-    propagate = true
-    is_group = true
-    role_id = data.vsphere_role.read-only.id
+    propagate     = true
+    is_group      = true
+    role_id       = data.vsphere_role.read-only.id
   }
   permissions {
     user_or_group = var.vsphere_janitor_iam_group
-    propagate = true
-    is_group = true
-    role_id = data.vsphere_role.read-only.id
+    propagate     = true
+    is_group      = true
+    role_id       = data.vsphere_role.read-only.id
   }
 }
 
@@ -86,74 +86,74 @@ resource "vsphere_entity_permissions" "permissions_compute_cluster" {
 ## /<datacenter>/host/<cluster>/Resources/prow
 
 resource "vsphere_entity_permissions" "permissions_prow_resource_pool" {
-  entity_id = vsphere_resource_pool.prow.id
+  entity_id   = vsphere_resource_pool.prow.id
   entity_type = "ResourcePool"
   permissions {
     user_or_group = var.cloud_provider_vsphere_iam_group
-    propagate = true
-    is_group = true
-    role_id = data.vsphere_role.no-access.id
+    propagate     = true
+    is_group      = true
+    role_id       = data.vsphere_role.no-access.id
   }
   permissions {
     user_or_group = var.cluster_api_provider_vsphere_iam_group
-    propagate = true
-    is_group = true
-    role_id = data.vsphere_role.no-access.id
+    propagate     = true
+    is_group      = true
+    role_id       = data.vsphere_role.no-access.id
   }
   permissions {
     user_or_group = var.image_builder_iam_group
-    propagate = true
-    is_group = true
-    role_id = data.vsphere_role.no-access.id
+    propagate     = true
+    is_group      = true
+    role_id       = data.vsphere_role.no-access.id
   }
   permissions {
     user_or_group = var.vsphere_janitor_iam_group
-    propagate = true
-    is_group = true
-    role_id =  vsphere_role.vsphere-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
 }
 
 
 resource "vsphere_entity_permissions" "permissions_prow_folder" {
-  entity_id = vsphere_folder.prow.id
+  entity_id   = vsphere_folder.prow.id
   entity_type = "Folder"
   permissions {
     user_or_group = var.vsphere_janitor_iam_group
-    propagate = true
-    is_group = true
-    role_id =  vsphere_role.vsphere-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
 }
 
 # /<datacenter>/datastore/<datastore>
 
 resource "vsphere_entity_permissions" "permissions_datastore" {
-  entity_id = data.vsphere_datastore.datastore.id
+  entity_id   = data.vsphere_datastore.datastore.id
   entity_type = "Datastore"
   permissions {
     user_or_group = var.cloud_provider_vsphere_iam_group
-    propagate = false
-    is_group = true
-    role_id = vsphere_role.vsphere-ci.id
+    propagate     = false
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
   permissions {
     user_or_group = var.cluster_api_provider_vsphere_iam_group
-    propagate = false
-    is_group = true
-    role_id = vsphere_role.vsphere-ci.id
+    propagate     = false
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
   permissions {
     user_or_group = var.image_builder_iam_group
-    propagate = false
-    is_group = true
-    role_id = vsphere_role.image-builder-ci.id
+    propagate     = false
+    is_group      = true
+    role_id       = vsphere_role.image-builder-ci.id
   }
   permissions {
     user_or_group = var.vsphere_janitor_iam_group
-    propagate = false
-    is_group = true
-    role_id = vsphere_role.vsphere-ci.id
+    propagate     = false
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
 }
 
@@ -161,31 +161,31 @@ resource "vsphere_entity_permissions" "permissions_datastore" {
 ## /<datacenter>/network/<network>
 
 resource "vsphere_entity_permissions" "permissions_network" {
-  entity_id = data.vsphere_network.network.id
+  entity_id   = data.vsphere_network.network.id
   entity_type = "Network"
   permissions {
     user_or_group = var.cloud_provider_vsphere_iam_group
-    propagate = true
-    is_group = true
-    role_id = vsphere_role.vsphere-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
   permissions {
     user_or_group = var.cluster_api_provider_vsphere_iam_group
-    propagate = true
-    is_group = true
-    role_id = vsphere_role.vsphere-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
   permissions {
     user_or_group = var.image_builder_iam_group
-    propagate = true
-    is_group = true
-    role_id = vsphere_role.image-builder-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.image-builder-ci.id
   }
   permissions {
     user_or_group = var.vsphere_janitor_iam_group
-    propagate = true
-    is_group = true
-    role_id = vsphere_role.vsphere-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
 }
 
@@ -196,30 +196,30 @@ resource "vsphere_entity_permissions" "permissions_network" {
 ## /<datacenter>/vm/prow/templates
 
 resource "vsphere_entity_permissions" "permissions_templates_directory" {
-  entity_id = vsphere_folder.templates.id
+  entity_id   = vsphere_folder.templates.id
   entity_type = "ClusterComputeResource"
   permissions {
     user_or_group = var.cloud_provider_vsphere_iam_group
-    propagate = true
-    is_group = true
-    role_id = vsphere_role.templates-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.templates-ci.id
   }
   permissions {
     user_or_group = var.cluster_api_provider_vsphere_iam_group
-    propagate = true
-    is_group = true
-    role_id =  vsphere_role.templates-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.templates-ci.id
   }
   permissions {
     user_or_group = var.image_builder_iam_group
-    propagate = true
-    is_group = true
-    role_id =  vsphere_role.templates-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.templates-ci.id
   }
   permissions {
     user_or_group = var.vsphere_janitor_iam_group
-    propagate = true
-    is_group = true
-    role_id =  vsphere_role.vsphere-ci.id
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
   }
 }

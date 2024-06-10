@@ -40,7 +40,7 @@ variable "vsphere_datastorename" {
 }
 
 variable "vsphere_network_name" {
-  type = string
+  type    = string
   default = "VM Network"
 }
 
@@ -51,7 +51,7 @@ variable "cluster_api_provider_vsphere_iam_group" {
 }
 
 variable "cluster_api_provider_vsphere_nr_projects" {
-  type = number
+  type    = number
   default = 5
 }
 
@@ -62,7 +62,7 @@ variable "cloud_provider_vsphere_iam_group" {
 }
 
 variable "cloud_provider_vsphere_nr_projects" {
-  type = number
+  type    = number
   default = 5
 }
 
@@ -73,7 +73,7 @@ variable "image_builder_iam_group" {
 }
 
 variable "image_builder_nr_projects" {
-  type = number
+  type    = number
   default = 5
 }
 

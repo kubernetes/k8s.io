@@ -39,15 +39,15 @@ locals {
 module "cloud-provider-vsphere" {
   source = "./modules/vsphere-project"
 
-  project_name = local.cloud_provider_vsphere_project_name
-  group = var.cloud_provider_vsphere_iam_group
-  nr_projects = var.cloud_provider_vsphere_nr_projects
-  role_id = vsphere_role.vsphere-ci.id
-  vsphere_datacenter_id = data.vsphere_datacenter.datacenter.id
-  vsphere_folder_path = vsphere_folder.prow.path
+  project_name             = local.cloud_provider_vsphere_project_name
+  group                    = var.cloud_provider_vsphere_iam_group
+  nr_projects              = var.cloud_provider_vsphere_nr_projects
+  role_id                  = vsphere_role.vsphere-ci.id
+  vsphere_datacenter_id    = data.vsphere_datacenter.datacenter.id
+  vsphere_folder_path      = vsphere_folder.prow.path
   vsphere_resource_pool_id = vsphere_resource_pool.prow.id
 
-  depends_on = [ vsphere_role.vsphere-ci, vsphere_resource_pool.prow ]
+  depends_on = [vsphere_role.vsphere-ci, vsphere_resource_pool.prow]
 }
 
 
@@ -76,15 +76,15 @@ locals {
 module "cluster-api-provider-vsphere" {
   source = "./modules/vsphere-project"
 
-  project_name = local.cluster_api_provider_vsphere_project_name
-  group = var.cluster_api_provider_vsphere_iam_group
-  nr_projects = var.cluster_api_provider_vsphere_nr_projects
-  role_id = vsphere_role.vsphere-ci.id
-  vsphere_datacenter_id = data.vsphere_datacenter.datacenter.id
-  vsphere_folder_path = vsphere_folder.prow.path
+  project_name             = local.cluster_api_provider_vsphere_project_name
+  group                    = var.cluster_api_provider_vsphere_iam_group
+  nr_projects              = var.cluster_api_provider_vsphere_nr_projects
+  role_id                  = vsphere_role.vsphere-ci.id
+  vsphere_datacenter_id    = data.vsphere_datacenter.datacenter.id
+  vsphere_folder_path      = vsphere_folder.prow.path
   vsphere_resource_pool_id = vsphere_resource_pool.prow.id
-  
-  depends_on = [ vsphere_role.vsphere-ci, vsphere_resource_pool.prow]
+
+  depends_on = [vsphere_role.vsphere-ci, vsphere_resource_pool.prow]
 }
 
 # image-builder
@@ -112,13 +112,13 @@ locals {
 module "image-builder" {
   source = "./modules/vsphere-project"
 
-  project_name = local.image_builder_project_name
-  group = var.image_builder_iam_group
-  nr_projects = var.image_builder_nr_projects
-  role_id = vsphere_role.image-builder-ci.id
-  vsphere_datacenter_id = data.vsphere_datacenter.datacenter.id
-  vsphere_folder_path = vsphere_folder.prow.path
+  project_name             = local.image_builder_project_name
+  group                    = var.image_builder_iam_group
+  nr_projects              = var.image_builder_nr_projects
+  role_id                  = vsphere_role.image-builder-ci.id
+  vsphere_datacenter_id    = data.vsphere_datacenter.datacenter.id
+  vsphere_folder_path      = vsphere_folder.prow.path
   vsphere_resource_pool_id = vsphere_resource_pool.prow.id
-  
-  depends_on = [ vsphere_role.image-builder-ci, vsphere_resource_pool.prow ]
+
+  depends_on = [vsphere_role.image-builder-ci, vsphere_resource_pool.prow]
 }

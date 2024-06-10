@@ -24,8 +24,8 @@ resource "vsphere_resource_pool" "base" {
 resource "vsphere_resource_pool" "project_resource_pool" {
   count = var.nr_projects
 
-  name                    = "${format("%03d", count.index + 1)}"
-  parent_resource_pool_id = "${vsphere_resource_pool.base.id}"
+  name                    = format("%03d", count.index + 1)
+  parent_resource_pool_id = vsphere_resource_pool.base.id
 }
 
 # Folders
@@ -49,29 +49,29 @@ resource "vsphere_folder" "project_folder" {
 resource "vsphere_entity_permissions" "permission_resource_pool" {
   count = var.nr_projects
 
-  entity_id = vsphere_resource_pool.project_resource_pool[count.index].id
+  entity_id   = vsphere_resource_pool.project_resource_pool[count.index].id
   entity_type = "ResourcePool"
   permissions {
     user_or_group = var.group
-    propagate = true
-    is_group = true
-    role_id = var.role_id
+    propagate     = true
+    is_group      = true
+    role_id       = var.role_id
   }
 
-  depends_on = [ vsphere_resource_pool.project_resource_pool ]
+  depends_on = [vsphere_resource_pool.project_resource_pool]
 }
 
 resource "vsphere_entity_permissions" "permission_folder" {
   count = var.nr_projects
 
-  entity_id = vsphere_folder.project_folder[count.index].id
+  entity_id   = vsphere_folder.project_folder[count.index].id
   entity_type = "Folder"
   permissions {
     user_or_group = var.group
-    propagate = true
-    is_group = true
-    role_id = var.role_id
+    propagate     = true
+    is_group      = true
+    role_id       = var.role_id
   }
 
-  depends_on = [ vsphere_folder.project_folder ]
+  depends_on = [vsphere_folder.project_folder]
 }
