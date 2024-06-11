@@ -41,7 +41,6 @@ variable "vsphere_datastorename" {
 
 variable "vsphere_network_name" {
   type    = string
-  default = "VM Network"
 }
 
 # Variables specific to cluster-api-provider-vsphere
@@ -52,7 +51,7 @@ variable "cluster_api_provider_vsphere_iam_group" {
 
 variable "cluster_api_provider_vsphere_nr_projects" {
   type    = number
-  default = 5
+  default = 40
 }
 
 # Variables specific to cloud-provider-vsphere
@@ -63,7 +62,7 @@ variable "cloud_provider_vsphere_iam_group" {
 
 variable "cloud_provider_vsphere_nr_projects" {
   type    = number
-  default = 5
+  default = 10
 }
 
 # Variables specific to image-builder
@@ -74,7 +73,7 @@ variable "image_builder_iam_group" {
 
 variable "image_builder_nr_projects" {
   type    = number
-  default = 5
+  default = 10
 }
 
 # Variables specific to janitor
