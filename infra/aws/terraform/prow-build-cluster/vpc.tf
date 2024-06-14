@@ -24,7 +24,6 @@ limitations under the License.
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.1"
-
   name = "${var.cluster_name}-vpc"
 
   cidr                  = var.vpc_cidr
@@ -65,6 +64,7 @@ module "vpc" {
   public_subnet_tags = {
     "kubernetes.io/role/elb"                    = 1
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "karpenter.sh/discovery"                    = var.cluster_name
   }
 
   private_subnet_tags = {
