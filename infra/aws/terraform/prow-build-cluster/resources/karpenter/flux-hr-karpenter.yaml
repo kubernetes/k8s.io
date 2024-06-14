@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: karpenter
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: karpenter
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: karpenter
+        namespace: flux-system
+      version: 0.36.2
+  install:
+    createNamespace: true
+  interval: 1m0s
+  releaseName: karpenter
+  targetNamespace: karpenter
+  values:
+    controller:
+      resources:
+        limits:
+          cpu: 1
+          memory: 1Gi
+        requests:
+          cpu: 1
+          memory: 1Gi
+    serviceAccount:
+      annotations:
+        # terraform state show module.karpenter.aws_iam_role.controller\[0\] | grep " arn "
+        eks.amazonaws.com/role-arn: arn:aws:iam::468814281478:role/KarpenterController-20240527081538529900000002
+    settings:
+      clusterName: prow-build-cluster
+      interruptionQueue: Karpenter-prow-build-cluster
+    tolerations:
+    - effect: NoSchedule
+      key: node-group
+      operator: Equal
+      value: stable

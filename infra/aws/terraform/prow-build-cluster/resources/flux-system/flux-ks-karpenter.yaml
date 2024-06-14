@@ -1,0 +1,13 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: karpenter
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./infra/aws/terraform/prow-build-cluster/resources/karpenter
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: k8s-io
+    namespace: flux-system
