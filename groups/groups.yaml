@@ -68,7 +68,7 @@ groups:
       - fbongiovanni@google.com
       - fbranczyk@gmail.com
       - frapposelli@vmware.com
-      - guyjtempleton@googlemail.com
+      - guyjtempleton@googlemail.com # SIG Autoscaling
       - gveronicalg@gmail.com # SIG Release
       - hankang@google.com
       - hilliary.lipsig@gmail.com # CoCC
@@ -102,6 +102,7 @@ groups:
       - lachlan.evenson@gmail.com
       - lancashiredanielle@gmail.com
       - liggitt@google.com
+      - maciekpytel@google.com # SIG Autoscaling
       - madhav.jiv@gmail.com
       - marosset@microsoft.com
       - maszulik@redhat.com # SIG CLI, Apps
