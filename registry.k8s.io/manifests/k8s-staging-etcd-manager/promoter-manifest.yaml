@@ -1,6 +1,6 @@
 # google group for gcr.io/k8s-staging-etcd-manager is k8s-infra-staging-etcd-manager@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-etcd-manager
+- name: us-central1-docker.pkg.dev/k8s-staging-images/etcd-manager
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/etcd-manager
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
