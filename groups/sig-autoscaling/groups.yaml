@@ -71,6 +71,7 @@ groups:
       - kwiesmueller@google.com
       - luizaoj@google.com
       - rgowman@google.com
+      - rwainman@google.com
 
   #
   # k8s-infra gcs write access
