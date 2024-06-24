@@ -1,0 +1,72 @@
+gs://k8s-staging-etcd-manager.appspot.com/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Mon, 17 Jun 2024 20:05:14 GMT
+	Time updated:			Mon, 17 Jun 2024 20:05:14 GMT
+	Metageneration:			1
+	Bucket Policy Only enabled:	False
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				
+	  [
+	    {
+	      "entity": "project-owners-976294098043",
+	      "projectTeam": {
+	        "projectNumber": "976294098043",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-976294098043",
+	      "projectTeam": {
+	        "projectNumber": "976294098043",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-976294098043",
+	      "projectTeam": {
+	        "projectNumber": "976294098043",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-976294098043",
+	      "projectTeam": {
+	        "projectNumber": "976294098043",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-976294098043",
+	      "projectTeam": {
+	        "projectNumber": "976294098043",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-976294098043",
+	      "projectTeam": {
+	        "projectNumber": "976294098043",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

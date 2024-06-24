@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "886273367484-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-cluster-api-helm/serviceAccounts/886273367484-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "110377831236888292665",
+  "projectId": "k8s-staging-cluster-api-helm",
+  "uniqueId": "110377831236888292665"
+}

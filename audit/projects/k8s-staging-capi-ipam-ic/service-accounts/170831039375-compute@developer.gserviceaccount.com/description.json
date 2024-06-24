@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "170831039375-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-capi-ipam-ic/serviceAccounts/170831039375-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "102731230688871447258",
+  "projectId": "k8s-staging-capi-ipam-ic",
+  "uniqueId": "102731230688871447258"
+}
