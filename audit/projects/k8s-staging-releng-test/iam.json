@@ -64,6 +64,12 @@
     },
     {
       "members": [
+        "serviceAccount:86929635859-compute@developer.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
         "serviceAccount:86929635859@cloudbuild.gserviceaccount.com"
       ],
       "role": "roles/secretmanager.secretAccessor"

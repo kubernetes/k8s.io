@@ -10,6 +10,7 @@
       "valueType": "INT64"
     },
     "name": "file_not_found_in_mirror",
+    "resourceName": "projects/k8s-infra-porche-prod/metrics/file_not_found_in_mirror",
     "updateTime": "2023-02-17T16:38:00.092276269Z"
   },
   {
@@ -23,6 +24,7 @@
       "valueType": "INT64"
     },
     "name": "redirecting_request_to_mirror",
+    "resourceName": "projects/k8s-infra-porche-prod/metrics/redirecting_request_to_mirror",
     "updateTime": "2023-02-17T16:38:51.186626320Z"
   }
 ]

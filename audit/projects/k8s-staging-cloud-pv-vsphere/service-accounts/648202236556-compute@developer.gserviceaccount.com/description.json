@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "648202236556-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-cloud-pv-vsphere/serviceAccounts/648202236556-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "108456414243612349871",
+  "projectId": "k8s-staging-cloud-pv-vsphere",
+  "uniqueId": "108456414243612349871"
+}
