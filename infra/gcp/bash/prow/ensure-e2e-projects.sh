@@ -83,6 +83,12 @@ function ensure_e2e_project() {
       "serviceAccount:${PROW_BUILD_SVCACCT}" \
       "roles/cloudkms.cryptoKeyEncrypterDecrypter"
 
+    # Ensure GCP CSI driver tests can use prow-build service account to
+    # act as all other service accounts (eg: Compute Engine default service account)
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:${PROW_BUILD_SVCACCT}" \
+      "roles/iam.serviceAccountUser"
+
     # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
     #       could consider using a more limited custom IAM role instead
     color 6 "Empower boskos-janitor service account to clean e2e project: ${prj}"
