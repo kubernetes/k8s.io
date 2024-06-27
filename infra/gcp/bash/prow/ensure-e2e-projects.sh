@@ -92,6 +92,12 @@ function ensure_e2e_project() {
       "serviceAccount:${project_number}-compute@developer.gserviceaccount.com" \
       "roles/cloudkms.cryptoKeyEncrypterDecrypter"
 
+    # Ensure GCP Default Compute Engine Service Agent Account can manage KMS
+    # keys
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:service-${project_number}@compute-system.iam.gserviceaccount.com" \
+      "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
     # TODO: Remove this binding and clean up permissions in projects
     # Ensure GCP CSI driver tests can use prow-build service account to
     # act as all other service accounts (eg: Compute Engine default service account)
