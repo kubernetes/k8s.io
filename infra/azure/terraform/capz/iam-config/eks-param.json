@@ -1,0 +1,8 @@
+{
+    "name": "prow-eks-identity-credential",
+    "issuer": "https://oidc.eks.us-east-2.amazonaws.com/id/F8B73554FE6FBAF9B19569183FB39762",
+    "subject": "system:serviceaccount:test-pods:default",
+    "audiences": [
+        "api://AzureADTokenExchange"
+    ]
+}
