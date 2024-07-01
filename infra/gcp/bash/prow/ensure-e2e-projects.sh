@@ -82,11 +82,18 @@ function ensure_e2e_project() {
       "roles/editor"
 
     # TODO: Remove this binding and clean up permissions in projects
+    # This permission is superseded by roles/cloudkms.admin below
     # Ensure GCP CSI driver tests can manage KMS keys
     ensure_project_role_binding "${prj}" \
       "serviceAccount:${PROW_BUILD_SVCACCT}" \
       "roles/cloudkms.cryptoKeyEncrypterDecrypter"
 
+    # Ensure GCP Default Compute Service Account can administer KMS keys
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:${PROW_BUILD_SVCACCT}" \
+      "roles/cloudkms.admin"
+
+    # TODO: Remove this binding and clean up permissions in projects
     # Ensure GCP Default Compute Service Account can manage KMS keys
     ensure_project_role_binding "${prj}" \
       "serviceAccount:${project_number}-compute@developer.gserviceaccount.com" \
