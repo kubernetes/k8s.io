@@ -9,6 +9,7 @@ Zones we manage:
   - k8s-e2e.com
   - kubernetes.dev
   - k8s.dev
+  - etcd.io
 
 ## How to become an admin
 
@@ -134,6 +135,19 @@ docker run -ti \
         --debug \
         --doit # leave this off if you want to do a dry-run
 ```
+
+## How do add a new domain
+
+1. If the domain has existing records, be sure to accuire a copy of the existing zone.
+1. Modify the `dns/octodns-config.yaml` file to include the new domain, including the canary subdomain.
+1. In the "Cloud DNS" panel of the `kubernetes-public` project, create two zones: one for the actual domain, and one for the canary subdomain.
+1. Create the zone files in the `dns/zone-configs` directory:
+  1. The $domain._0_base.yaml file should contain all the records for the domain, *except* the NS and SOA records.
+  1. The $domain._1_canary.yaml file should contain the NS records for the canary subdomain only, as provided by Google.
+  1. The canary.$domain.yaml file should be a symlink to the $domain._0_base.yaml file
+1. Update the prod zones lists in both the `dns/Makefile` and `dns/push.sh` files.
+1. Once merged, the domain should now be managed. The first run may fail due to propagation delays, but subsequent runs should succeed.
+1. After the records are verified as being pushed to the zones in the `kubernetes-public` project, the nameservers can be updated with the registrar (typically LF IT).
 
 ## TODO
 
