@@ -1,6 +1,6 @@
 module k8s.io/k8s.io/groups
 
-go 1.17
+go 1.22.4
 
 require (
 	cloud.google.com/go/secretmanager v1.0.0
