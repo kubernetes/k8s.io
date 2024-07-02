@@ -28,3 +28,7 @@ run: test
 .PHONY: test
 test:
 	go test
+
+.PHONY: migrate-members
+migrate-members:
+	go run . $(filter-out $@,$(MAKECMDGOALS))

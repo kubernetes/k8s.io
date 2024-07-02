@@ -200,6 +200,66 @@ func TestAddOrUpdateGroupMembers(t *testing.T) {
 	}
 }
 
+func TestMigrateMailingListMembers(t *testing.T) {
+	cases := []struct {
+		desc             string
+		sourceGroup      GoogleGroup
+		destinationGroup GoogleGroup
+		expectedMembers  []*admin.Member
+	}{
+		{
+			desc: "members migrated Successfully",
+			sourceGroup: GoogleGroup{EmailId: "group1@email.com"},
+			destinationGroup: GoogleGroup{EmailId: "group2@email.com"},
+			expectedMembers: []*admin.Member{
+				{Email: "m1-group1@email.com", Role: MemberRole},
+				{Email: "m2-group1@email.com", Role: ManagerRole},
+				{Email: "m1-group2@email.com", Role: MemberRole},
+				{Email: "m2-group2@email.com", Role: OwnerRole},
+			},
+		},
+		{
+			desc: "sourceGroup does not exist, no migration required",
+			sourceGroup: GoogleGroup{EmailId: "non-existent-group@email.com"},
+			destinationGroup: GoogleGroup{EmailId: "group2@email.com"},
+			expectedMembers: []*admin.Member{
+				{Email: "m1-group2@email.com", Role: MemberRole},
+				{Email: "m2-group2@email.com", Role: OwnerRole},
+			},
+		},
+	}
+
+	errFunc := func(err error) bool {
+		return err != nil
+	}
+
+	for _, c := range cases {
+		t.Run(c.desc, func(t *testing.T) {
+			fakeClient := fake.NewAugmentedFakeAdminServiceClient()
+
+			adminSvc, err := NewAdminServiceWithClientAndErrFunc(fakeClient, errFunc)
+			if err != nil {
+				t.Errorf("error creating client %v", err)
+			}
+
+			err = adminSvc.MigrateMailingListMembers(c.sourceGroup, c.destinationGroup)
+
+			destinationMembers, err := fakeClient.ListMembers(c.destinationGroup.EmailId)
+			if err != nil {
+				t.Errorf("Error listing destination group members: %v", err)
+			}
+
+			if !checkForMemberListEquality(destinationMembers, c.expectedMembers) {
+				t.Errorf("Destination group members after migration do not match the expected members for %s,\n expected: %#v,\n got:\n%#v",
+				c.desc,
+				getMemberListInPrintableForm(c.expectedMembers),
+				getMemberListInPrintableForm(destinationMembers),
+			)
+			}
+		})
+	}
+}
+
 func TestCreateOrUpdateGroupIfNescessary(t *testing.T) {
 	config.ConfirmChanges = true
 	cases := []struct {
