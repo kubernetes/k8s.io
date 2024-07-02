@@ -31,6 +31,7 @@ data "aws_iam_policy_document" "eks_plan" {
       "acm:DescribeCertificate",
       "acm:ListTagsForCertificate",
       "ec2:DescribeAddresses",
+      "ec2:DescribeAddressesAttribute",
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeEgressOnlyInternetGateways",
       "ec2:DescribeInternetGateways",
@@ -84,6 +85,7 @@ data "aws_iam_policy_document" "eks_plan" {
       "kms:ListAliases",
       "kms:ListResourceTags",
       "logs:DescribeLogGroups",
+      "logs:ListTagsForResource",
       "logs:ListTagsLogGroup",
       "s3:GetObject",
       "s3:ListBucket"

@@ -1,0 +1,23 @@
+settings:
+  clusterName: prow-canary-cluster
+  interruptionQueue: Karpenter-prow-canary-cluster
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::054318140392:role/KarpenterController-20240527081538529900000002"
+
+controller:
+  resources:
+    requests:
+      cpu: 1
+      memory: 1Gi
+    limits:
+      cpu: 1
+      memory: 1Gi
+
+# default affinity rule works well in our case
+# https://github.com/aws/karpenter-provider-aws/blob/main/charts/karpenter/values.yaml#L70
+tolerations:
+  - effect: NoSchedule
+    key: node-group
+    operator: Equal
+    value: stable
