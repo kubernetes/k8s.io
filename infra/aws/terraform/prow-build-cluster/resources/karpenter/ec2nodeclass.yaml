@@ -1,0 +1,21 @@
+---
+apiVersion: karpenter.k8s.aws/v1beta1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  amiFamily: Bottlerocket
+  ## this needs an update!
+  role: "Karpenter-prow-build-cluster-20240527081538530000000004"
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "prow-build-cluster"
+  securityGroupSelectorTerms:
+    - tags:
+        Name: "prow-build-cluster-node"
+  amiSelectorTerms:
+    - id: ami-066c62bb333a37820
+  tags:
+    Cluster: prow-build-cluster
+    Name: build-karpenter
+  detailedMonitoring: true
