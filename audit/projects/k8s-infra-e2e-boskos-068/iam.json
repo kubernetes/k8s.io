@@ -8,6 +8,12 @@
     },
     {
       "members": [
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.admin"
+    },
+    {
+      "members": [
         "serviceAccount:101721090067-compute@developer.gserviceaccount.com",
         "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
         "serviceAccount:service-101721090067@compute-system.iam.gserviceaccount.com"
