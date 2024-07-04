@@ -39,6 +39,12 @@
     },
     {
       "members": [
+        "serviceAccount:563253410071-compute@developer.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
         "group:k8s-infra-staging-sig-docs@kubernetes.io"
       ],
       "role": "roles/serviceusage.serviceUsageConsumer"
