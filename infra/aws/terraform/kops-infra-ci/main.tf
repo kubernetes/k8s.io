@@ -76,3 +76,34 @@ resource "aws_s3_bucket_acl" "kops_oidc_store" {
   bucket   = aws_s3_bucket.kops_oidc_store.id
   acl      = "public-read"
 }
+
+## Used by kOps for hosting CI build artifacts and version markers
+resource "aws_s3_bucket" "kops_ci_results" {
+  provider = aws.kops-infra-ci
+  bucket   = "k8s-infra-kops-ci-results"
+  tags     = var.tags
+}
+
+resource "aws_s3_bucket_ownership_controls" "kops_ci_results" {
+  provider = aws.kops-infra-ci
+  bucket   = aws_s3_bucket.kops_ci_results.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "kops_ci_results" {
+  provider = aws.kops-infra-ci
+  bucket   = aws_s3_bucket.kops_ci_results.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_acl" "kops_ci_results" {
+  provider = aws.kops-infra-ci
+  bucket   = aws_s3_bucket.kops_ci_results.id
+  acl      = "public-read"
+}
