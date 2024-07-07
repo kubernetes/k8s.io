@@ -29,6 +29,12 @@
     },
     {
       "members": [
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectCreator"
+    },
+    {
+      "members": [
         "allUsers"
       ],
       "role": "roles/storage.objectViewer"
