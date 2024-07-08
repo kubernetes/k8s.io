@@ -31,7 +31,6 @@ aliases:
     - cheftako
     - elmiko
   sig-cluster-lifecycle-leads:
-    - CecileRobertMichon
     - fabriziopandini
     - justinsb
     - neolit123
@@ -43,9 +42,10 @@ aliases:
     - palnabarun
   sig-docs-leads:
     - divya-mohan0209
+    - katcosgrove
     - natalisucks
     - reylejano
-    - sftim
+    - salaxander
     - tengqm
   sig-etcd-leads:
     - ahrtr
@@ -64,7 +64,7 @@ aliases:
     - upodroid
   sig-multicluster-leads:
     - jeremyot
-    - pmorie
+    - skitt
   sig-network-leads:
     - aojea
     - danwinship
@@ -118,19 +118,11 @@ aliases:
     - jsturtevant
     - knabben
     - marosset
-  wg-api-expression-leads:
-    - apelisse
-    - kwiesmueller
   wg-batch-leads:
     - alculquicondor
     - mwielgus
     - soltysh
     - swatisehgal
-  wg-serving-leads:
-    - ArangoGutierrez
-    - Jeffwan
-    - SergeyKanzhelev
-    - terrytangyuan
   wg-data-protection-leads:
     - xing-yang
     - yuxiangqian
@@ -138,17 +130,19 @@ aliases:
     - johnbelamaric
     - klueska
     - pohly
-  wg-iot-edge-leads:
-    - cantbewong
-    - cindyxing
-    - dejanb
   wg-lts-leads:
     - jeremyrickard
     - liggitt
     - micahhausler
   wg-policy-leads:
     - JimBugwadia
-    - rficcaglia
+    - poonam-lamba
+    - sudermanjr
+  wg-serving-leads:
+    - ArangoGutierrez
+    - Jeffwan
+    - SergeyKanzhelev
+    - terrytangyuan
   wg-structured-logging-leads:
     - mengjiao-liu
     - pohly
@@ -176,25 +170,6 @@ aliases:
     - pohly
     - soltysh
 ## BEGIN CUSTOM CONTENT
-  build-admins:
-    - BenTheElder
-    - juanfescobar
-    - MushuEE
-    - spiffxp
-  promo-tools-approvers:
-    - cpanato
-    - jeremyrickard
-    - justaugustus
-    - puerco
-    - saschagrunert
-    - thockin
-  promo-tools-reviewers:
-    - cpanato
-    - jeremyrickard
-    - justaugustus
-    - puerco
-    - saschagrunert
-    - thockin
   provider-aws:
     - justinsb
     - nckturner
@@ -215,48 +190,8 @@ aliases:
   provider-vmware:
     - cantbewong
     - frapposelli
-  publishing-bot-approvers:
-    - dims
-    - nikhita
-    - sttts
-  publishing-bot-reviewers:
-    - cpanato
-    - jeremyrickard
-    - justaugustus
-    - palnabarun
-    - puerco
-    - saschagrunert
+  sig-release-subproject-leads:
+    - gracenng
+    - katcosgrove
     - xmudrii
-    - Verolop
-  release-engineering-approvers:
-    - cici37 # Release Manager
-    - cpanato # subproject owner / Release Manager / SIG Technical Lead
-    - jeremyrickard # subproject owner / Release Manager / SIG Chair
-    - justaugustus # subproject owner / Release Manager / SIG Chair
-    - palnabarun # Release Manager
-    - puerco # subproject owner / Release Manager / SIG Technical Lead
-    - saschagrunert # subproject owner / Release Manager / SIG Chair
-    - Verolop # subproject owner / Release Manager / SIG Technical Lead
-    - xmudrii # Release Manager
-  release-engineering-reviewers:
-    - cpanato # subproject owner / Release Manager / SIG Technical Lead
-    - jeremyrickard # subproject owner / Release Manager / SIG Chair
-    - justaugustus # subproject owner / Release Manager / SIG Chair
-    - palnabarun # Release Manager
-    - puerco # subproject owner / Release Manager / SIG Technical Lead
-    - saschagrunert # subproject owner / Release Manager / SIG Chair
-    - Verolop # subproject owner / Release Manager / SIG Technical Lead
-    - xmudrii # Release Manager
-  # business hours oncall for prow etc (https://go.k8s.io/oncall)
-  test-infra-oncall:
-    - chases2
-    - cjwagner
-    - michelle192837
-    - mpherman2
-  # people with sufficient privileges to run scripts in /infra/gcp
-  sig-k8s-infra-org-admins:
-    - ameukam
-    - dims
-    - spiffxp
-    - thockin
 ## END CUSTOM CONTENT
