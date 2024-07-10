@@ -91,6 +91,6 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - kaslinfields@gmail.com
-      - davanum@gmail.com
+      - cblecker@redhat.com
       - bridget@kromhout.org
+      - priyankasaggu11929@gmail.com
