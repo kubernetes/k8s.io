@@ -23,9 +23,9 @@ resource "google_compute_security_policy" "cloud-armor" {
 
   # apply rate limits
   rule {
-    action      = "throttle"
-    description = "Default rule, throttle traffic"
-    # apply rate limit first (rules are applied sequentially by priority)
+    action      = "rate_based_ban"
+    description = "Limit excessive usage"
+    # apply rate limits first (rules are applied sequentially by priority)
     # https://cloud.google.com/armor/docs/security-policy-overview#eval-order
     priority = "0"
 
@@ -39,20 +39,29 @@ resource "google_compute_security_policy" "cloud-armor" {
     rate_limit_options {
       conform_action = "allow"
       exceed_action  = "deny(429)"
-
       enforce_on_key = "IP"
-      # This is comparable to the GCR limits from k8s.gcr.io
+      # TODO: revisit these values
+      # above this threshold we serve 429, currently ~83/sec in a 1 minute window
       rate_limit_threshold {
+        # NOTE: count cannot exceed 10,000
+        # https://cloud.google.com/armor/docs/rate-limiting-overview
         count        = 5000
         interval_sec = 60
       }
+      # if the user continues to exceed the rate limit, temp ban
+      # otherwise users may ignore transient 429 and keep running right at the limit
+      # clients that respect the 429 and backoff will not hit this
+      # (or better yet, https://github.com/kubernetes/registry.k8s.io/blob/main/docs/mirroring/README.md)
+      ban_threshold {
+        count        = 10000
+        interval_sec = 120
+      }
+      ban_duration_sec = 1800
     }
-
-    preview = false
   }
 
   // block all requests with obviously invalid paths at the edge
-  // we support "/", "/privacy", and "/v2/.*" API
+  // we support "/", "/privacy", and "/v2/.*" API, GET or HEAD
 
   rule {
     action = "deny(404)"
@@ -60,7 +69,7 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "1"
     match {
       expr {
-        expression = "!request.path.match('(?:^/$)|(?:^/privacy$)|(?:^/v2/)')"
+        expression = "!request.path.matches('(?:^/$)|(?:^/privacy$)|(?:^/v2/)')"
       }
     }
   }
