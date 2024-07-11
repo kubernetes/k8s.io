@@ -286,6 +286,7 @@
     "sha256:cdafd6c9d36e23414ce41330a482f9136ce82fac46802809681f61cdcd5ad0bb": ["v0.0.5"]
     "sha256:b3e027ab191eb9461a9bcf25092eabb1d547cba164992dbd722c1aa2b4a936ee": ["v0.0.6"]
     "sha256:6e390eaf084615b7b1e88cf4ae4dc19efc42a516a2fbd8ec95f2cfc5efde8f22": ["v0.0.8"]
+    "sha256:62bbfe7fea7386a787a857ec211b9e7627599bb2a62587d077dfbe9347b0fedb": ["v0.0.9"]
 - name: nginx-errors
   dmap:
     "sha256:5530c7fc1fa75b49e068d6b7b4f8f1c13a5834c155ba7abd5943b9057c3b925b": ["0.48.1"]
