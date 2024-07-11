@@ -21,6 +21,50 @@ resource "google_compute_security_policy" "cloud-armor" {
   project = var.project_id
   name    = "security-policy-oci-proxy"
 
+  # apply rate limits
+  rule {
+    action      = "throttle"
+    description = "Default rule, throttle traffic"
+    priority    = "2147483647"
+
+    match {
+      config {
+        src_ip_ranges = ["*"]
+      }
+      versioned_expr = "SRC_IPS_V1"
+    }
+
+    rate_limit_options {
+      conform_action = "allow"
+      exceed_action  = "deny(429)"
+
+      enforce_on_key = "IP"
+      # This is comparable to the GCR limits from k8s.gcr.io
+      rate_limit_threshold {
+        count        = 5000
+        interval_sec = 60
+      }
+    }
+
+    preview = false
+  }
+
+  // block all requests with obviously invalid paths at the edge
+  // we support "/", "/privacy", and "/v2/.*" API
+
+  rule {
+    action   = "deny(404)"
+    priority = "2147483646"
+    match {
+      expr {
+        expression = "!request.path.match('(?:^/$)|(?:^/privacy$)|(?:^/v2/)')"
+      }
+    }
+  }
+
+
+  # TODO: remove these other rules?
+
 
   rule {
     action   = "deny(403)"
@@ -147,34 +191,6 @@ resource "google_compute_security_policy" "cloud-armor" {
       }
     }
     description = "CVEs and other vulnerabilities"
-
-    preview = false
-  }
-
-  # Permit all other traffic, with rate limits
-  rule {
-    action      = "throttle"
-    description = "Default rule, throttle traffic"
-    priority    = "2147483647"
-
-    match {
-      config {
-        src_ip_ranges = ["*"]
-      }
-      versioned_expr = "SRC_IPS_V1"
-    }
-
-    rate_limit_options {
-      conform_action = "allow"
-      exceed_action  = "deny(429)"
-
-      enforce_on_key = "IP"
-      # This is comparable to the GCR limits from k8s.gcr.io
-      rate_limit_threshold {
-        count        = 5000
-        interval_sec = 60
-      }
-    }
 
     preview = false
   }
