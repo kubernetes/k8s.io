@@ -25,7 +25,9 @@ resource "google_compute_security_policy" "cloud-armor" {
   rule {
     action      = "throttle"
     description = "Default rule, throttle traffic"
-    priority    = "2147483647"
+    # apply rate limit first (rules are applied sequentially by priority)
+    # https://cloud.google.com/armor/docs/security-policy-overview#eval-order
+    priority = "0"
 
     match {
       config {
@@ -53,146 +55,14 @@ resource "google_compute_security_policy" "cloud-armor" {
   // we support "/", "/privacy", and "/v2/.*" API
 
   rule {
-    action   = "deny(404)"
-    priority = "2147483646"
+    action = "deny(404)"
+    # apply this broad 404 for unexpected paths second
+    priority = "1"
     match {
       expr {
         expression = "!request.path.match('(?:^/$)|(?:^/privacy$)|(?:^/v2/)')"
       }
     }
-  }
-
-
-  # TODO: remove these other rules?
-
-
-  rule {
-    action   = "deny(403)"
-    priority = "910"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('methodenforcement-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Method enforcement"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "900"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('protocolattack-v33-stable', {'sensitivity': 3, 'opt_out_rule_ids': ['owasp-crs-v030301-id921170-protocolattack']})"
-      }
-    }
-    description = "Protocol Attack"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "920"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('scannerdetection-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Scanner detection"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "990"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('xss-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Cross-site scripting (XSS)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "960"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('lfi-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Local file inclusion (LFI)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "930"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredExpr('rce-stable')"
-      }
-    }
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "940"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('rfi-v33-stable', {'sensitivity': 2})"
-      }
-    }
-    description = "Remote file inclusion (RFI)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "950"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('sessionfixation-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Session fixation"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "980"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('php-v33-stable', {'sensitivity': 3})"
-      }
-    }
-    description = "PHP"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "1010"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredExpr('cve-canary')"
-      }
-    }
-    description = "CVEs and other vulnerabilities"
-
-    preview = false
   }
 }
 
