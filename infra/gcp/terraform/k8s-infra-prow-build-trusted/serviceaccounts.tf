@@ -57,6 +57,11 @@ locals {
       project_roles     = ["roles/secretmanager.secretAccessor"]
       cluster_namespace = "kubernetes-external-secrets"
     }
+    // also assigned roles by:
+    // - terraform/k8s-infra-prow
+    k8s-testgrid-config-updater = {
+      description = "writes TestGrid config to gs://k8s-testgrid-config"
+    }
   }
 }
 
