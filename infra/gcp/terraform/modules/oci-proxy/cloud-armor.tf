@@ -23,9 +23,11 @@ resource "google_compute_security_policy" "cloud-armor" {
 
   # apply rate limits
   rule {
-    action      = "throttle"
-    description = "Default rule, throttle traffic"
-    priority    = "2147483647"
+    action      = "rate_based_ban"
+    description = "Limit excessive usage"
+    # apply rate limits first (rules are applied sequentially by priority)
+    # https://cloud.google.com/armor/docs/security-policy-overview#eval-order
+    priority = "0"
 
     match {
       config {
@@ -37,162 +39,39 @@ resource "google_compute_security_policy" "cloud-armor" {
     rate_limit_options {
       conform_action = "allow"
       exceed_action  = "deny(429)"
-
       enforce_on_key = "IP"
-      # This is comparable to the GCR limits from k8s.gcr.io
+      # TODO: revisit these values
+      # above this threshold we serve 429, currently ~83/sec in a 1 minute window
       rate_limit_threshold {
+        # NOTE: count cannot exceed 10,000
+        # https://cloud.google.com/armor/docs/rate-limiting-overview
         count        = 5000
         interval_sec = 60
       }
+      # if the user continues to exceed the rate limit, temp ban
+      # otherwise users may ignore transient 429 and keep running right at the limit
+      # clients that respect the 429 and backoff will not hit this
+      # (or better yet, https://github.com/kubernetes/registry.k8s.io/blob/main/docs/mirroring/README.md)
+      ban_threshold {
+        count        = 10000
+        interval_sec = 120
+      }
+      ban_duration_sec = 1800
     }
-
-    preview = false
   }
 
   // block all requests with obviously invalid paths at the edge
-  // we support "/", "/privacy", and "/v2/.*" API
+  // we support "/", "/privacy", and "/v2/.*" API, GET or HEAD
 
   rule {
-    action   = "deny(404)"
-    priority = "2147483646"
+    action = "deny(404)"
+    # apply this broad 404 for unexpected paths second
+    priority = "1"
     match {
       expr {
-        expression = "!request.path.match('(?:^/$)|(?:^/privacy$)|(?:^/v2/)')"
+        expression = "!request.path.matches('(?:^/$)|(?:^/privacy$)|(?:^/v2/)')"
       }
     }
-  }
-
-
-  # TODO: remove these other rules?
-
-
-  rule {
-    action   = "deny(403)"
-    priority = "910"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('methodenforcement-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Method enforcement"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "900"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('protocolattack-v33-stable', {'sensitivity': 3, 'opt_out_rule_ids': ['owasp-crs-v030301-id921170-protocolattack']})"
-      }
-    }
-    description = "Protocol Attack"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "920"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('scannerdetection-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Scanner detection"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "990"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('xss-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Cross-site scripting (XSS)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "960"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('lfi-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Local file inclusion (LFI)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "930"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredExpr('rce-stable')"
-      }
-    }
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "940"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('rfi-v33-stable', {'sensitivity': 2})"
-      }
-    }
-    description = "Remote file inclusion (RFI)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "950"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('sessionfixation-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Session fixation"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "980"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('php-v33-stable', {'sensitivity': 3})"
-      }
-    }
-    description = "PHP"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "1010"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredExpr('cve-canary')"
-      }
-    }
-    description = "CVEs and other vulnerabilities"
-
-    preview = false
   }
 }
 
