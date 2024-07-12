@@ -76,7 +76,7 @@ resource "google_compute_security_policy" "cloud-armor" {
         # OCI pull / list calls: /v2/<name>/(blobs|manifests|tags)/<reference>
         # https://github.com/opencontainers/distribution-spec/blob/main/spec.md#endpoints
         # NOTE: AR doesn't support referrers API
-        expression = "!request.path.matches('(?:^/?$)|(?:^/privacy$)|(?:^/v2/?$)|(?:^/v2/.+/(:?blobs|manifests|tags)/.+$)')"
+        expression = "!request.path.matches('^/$|^/privacy$|^/v2/?$|^/v2/.+/blobs/.+$|^/v2/.+/manifests/.+$|^/v2/.+/tags/.+$')"
       }
     }
   }
