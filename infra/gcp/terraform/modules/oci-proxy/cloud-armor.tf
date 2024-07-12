@@ -73,5 +73,20 @@ resource "google_compute_security_policy" "cloud-armor" {
       }
     }
   }
+
+  # you must have a default rule with max int32 priority
+  # (IE applied last after every other rule)
+  # this just allows traffic not caught by any other rule
+  rule {
+    action   = "allow"
+    priority = "2147483647"
+    match {
+      versioned_expr = "SRC_IPS_V1"
+      config {
+        src_ip_ranges = ["*"]
+      }
+    }
+    description = "default rule"
+  }
 }
 
