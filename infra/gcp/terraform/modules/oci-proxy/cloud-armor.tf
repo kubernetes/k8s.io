@@ -75,10 +75,11 @@ resource "google_compute_security_policy" "cloud-armor" {
         # our homepage info redirect: /
         # our privacy info redirect: /privacy
         # OCI ping: /v2
-        # OCI pull / list calls: /v2/<name>/(blobs|manifests|tags)/<reference>
+        # OCI content calls: /v2/<name>/(blobs|manifests)/<reference>
+        # tag list: /v2/(<name>/tags|tags)/list
         # https://github.com/opencontainers/distribution-spec/blob/main/spec.md#endpoints
         # NOTE: AR doesn't support referrers API
-        expression = "!request.path.matches('^/$|^/privacy$|^/v2/?$|^/v2/.+/blobs/.+$|^/v2/.+/manifests/.+$|^/v2/.+/tags/.+$')"
+        expression = "!request.path.matches('^/$|^/privacy$|^/v2/?$|^/v2/.+/blobs/.+$|^/v2/.+/manifests/.+$|^/v2/.*tags/$')"
       }
     }
   }
