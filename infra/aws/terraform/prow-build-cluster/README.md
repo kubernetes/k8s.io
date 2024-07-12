@@ -102,9 +102,17 @@ E0712 04:19:50.038370       1 static_autoscaler.go:439] Failed to fix node group
 I0712 04:19:56.488422       1 reflector.go:790] k8s.io/autoscaler/cluster-autoscaler/utils/kubernetes/listers.go:172: Watch close - *v1.Pod total 144 items received
 ```
 
-That is a known issue when an EC2 instance is created on the node group but cannot join the cluster. You can check the node group sizes on the [AWS Console](https://us-east-2.console.aws.amazon.com/eks/home?region=us-east-2#/clusters/prow-build-cluster?selectedTab=cluster-compute-tab), then compare it with the number of nodes on the cluster:
+That is a known issue when an EC2 instance is created on the node group but cannot join the cluster. You can check the node group sizes on the [AWS Console](https://us-east-2.console.aws.amazon.com/eks/home?region=us-east-2#/clusters/prow-build-cluster?selectedTab=cluster-compute-tab):
 
 ![image](https://github.com/user-attachments/assets/ea55cf93-19ee-4e91-bfe3-5a1c84da3778)
+
+or from the aws CLI like so
+
+```bash
+aws autoscaling describe-auto-scaling-groups --query 'AutoScalingGroups[].[AutoScalingGroupName, DesiredCapacity]' --output table
+```
+
+then compare it with the number of nodes on the cluster:
 
 ```bash
 kubectl get nodes --show-labels | grep -o 'eks.amazonaws.com/nodegroup=build-us-east-2[abc]' | sort | uniq -c
