@@ -69,9 +69,31 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "1"
     match {
       expr {
-        expression = "!request.path.matches('(?:^/$)|(?:^/privacy$)|(?:^/v2/)')"
+        # allow:
+        # our homepage info redirect: /
+        # our privacy info redirect: /privacy
+        # OCI ping: /v2
+        # OCI pull / list calls: /v2/<name>/(blobs|manifests|tags)/<reference>
+        # https://github.com/opencontainers/distribution-spec/blob/main/spec.md#endpoints
+        # NOTE: AR doesn't support referrers API
+        expression = "!request.path.matches('(?:^/?$)|(?:^/privacy$)|(?:^/v2/?$)|(?:^/v2/.+/(:?blobs|manifests|tags)/.+$)')"
       }
     }
+  }
+
+  # you must have a default rule with max int32 priority
+  # (IE applied last after every other rule)
+  # this just allows traffic not caught by any other rule
+  rule {
+    action   = "allow"
+    priority = "2147483647"
+    match {
+      versioned_expr = "SRC_IPS_V1"
+      config {
+        src_ip_ranges = ["*"]
+      }
+    }
+    description = "default rule"
   }
 }
 
