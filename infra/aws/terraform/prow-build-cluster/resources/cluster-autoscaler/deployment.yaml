@@ -45,6 +45,7 @@ spec:
             - --expander=least-waste
             - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/prow-build-cluster
             - --balance-similar-node-groups
+            - --scale-down-utilization-threshold=0.75
             - --skip-nodes-with-system-pods=false
           volumeMounts:
             - name: ssl-certs
