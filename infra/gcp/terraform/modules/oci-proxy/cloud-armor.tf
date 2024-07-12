@@ -24,10 +24,11 @@ resource "google_compute_security_policy" "cloud-armor" {
   # apply rate limits
   rule {
     action      = "rate_based_ban"
-    description = "Limit excessive usage"
-    # apply rate limits first (rules are applied sequentially by priority)
-    # https://cloud.google.com/armor/docs/security-policy-overview#eval-order
-    priority = "0"
+    description = "Default rule. Limit excessive usage."
+    # apply rate limits last (rules are applied sequentially by priority)
+    # clients not violating a rate limit rule that matches will be allowed
+    # to reach the destination, so this rule should be last
+    priority = "2147483647"
 
     match {
       config {
@@ -64,8 +65,9 @@ resource "google_compute_security_policy" "cloud-armor" {
   // we support "/", "/privacy", and "/v2/.*" API, GET or HEAD
 
   rule {
-    action = "deny(404)"
-    # apply this broad 404 for unexpected paths second
+    action      = "deny(404)"
+    description = "Block invalid request paths."
+    # apply this broad 404 for unexpected paths first
     priority = "1"
     match {
       expr {
@@ -79,21 +81,6 @@ resource "google_compute_security_policy" "cloud-armor" {
         expression = "!request.path.matches('^/$|^/privacy$|^/v2/?$|^/v2/.+/blobs/.+$|^/v2/.+/manifests/.+$|^/v2/.+/tags/.+$')"
       }
     }
-  }
-
-  # you must have a default rule with max int32 priority
-  # (IE applied last after every other rule)
-  # this just allows traffic not caught by any other rule
-  rule {
-    action   = "allow"
-    priority = "2147483647"
-    match {
-      versioned_expr = "SRC_IPS_V1"
-      config {
-        src_ip_ranges = ["*"]
-      }
-    }
-    description = "default rule"
   }
 }
 
