@@ -87,3 +87,32 @@ appropriate cluster:
       - --role-arn
       - arn:aws:iam::054318140392:role/EKSInfraAdmin
     ```
+
+## Known Issues
+
+### Cluster Autoscaler "Failed to fix node group sizes" Error
+
+From time to time, the cluster-autoscaler is stuck with the below error and does not scale up/down the cluster:
+
+```
+I0712 04:19:50.032692       1 static_autoscaler.go:287] Starting main loop
+...
+I0712 04:19:50.038343       1 static_autoscaler.go:709] Decreasing size of eks-build-us-east-2c-20240124170707924300000010-92c69e38-4c41-bf62-6938-f48d5fd21243, expected=11 current=10 delta=-1
+E0712 04:19:50.038370       1 static_autoscaler.go:439] Failed to fix node group sizes: failed to decrease eks-build-us-east-2c-20240124170707924300000010-92c69e38-4c41-bf62-6938-f48d5fd21243: attempt to delete existing nodes targetSize:11 delta:-1 existingNodes: 11
+I0712 04:19:56.488422       1 reflector.go:790] k8s.io/autoscaler/cluster-autoscaler/utils/kubernetes/listers.go:172: Watch close - *v1.Pod total 144 items received
+```
+
+That is a known issue when an EC2 instance is created on the node group but cannot join the cluster. You can check the node group sizes on the [AWS Console](https://us-east-2.console.aws.amazon.com/eks/home?region=us-east-2#/clusters/prow-build-cluster?selectedTab=cluster-compute-tab), then compare it with the number of nodes on the cluster:
+
+![image](https://github.com/user-attachments/assets/ea55cf93-19ee-4e91-bfe3-5a1c84da3778)
+
+```bash
+kubectl get nodes --show-labels | grep -o 'eks.amazonaws.com/nodegroup=build-us-east-2[abc]' | sort | uniq -c
+  19 eks.amazonaws.com/nodegroup=build-us-east-2a
+  13 eks.amazonaws.com/nodegroup=build-us-east-2b
+  10 eks.amazonaws.com/nodegroup=build-us-east-2c
+```
+
+The above output indicates that 11 EC2 instances exist on the `build-us-east-2c` node group, but 10 of them are part of the cluster.
+
+The hanging node must be found and manually deleted from the EC2 console.
