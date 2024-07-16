@@ -7,7 +7,6 @@ filters:
     labels:
     - sig/k8s-infra
     - area/infra
-    - area/infra/aws
   "\\.sh$":
     labels:
     - area/bash
