@@ -26,18 +26,18 @@ FROM debian:bookworm
 # latest at the time, and package-based installs from debian-maintained repos
 # are not pinned to a specific version
 
-ARG CONFTEST_VERSION=0.43.1
-ARG GCLOUD_VERSION=437.0.0
-ARG GH_VERSION=2.32.0
-ARG GO_VERSION=1.20.5
+ARG CONFTEST_VERSION=0.54.0
+ARG GCLOUD_VERSION=467.0.0
+ARG GH_VERSION=2.52.0
+ARG GO_VERSION=1.22.5
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
-ARG K8S_VERSION=1.24.15
-ARG OPA_VERSION=0.53.1
-ARG SHELLCHECK_VERSION=0.8.0
-ARG TFSWITCH_VERSION=0.13.1308
-ARG RCLONE_VERSION=1.62.2
+ARG K8S_VERSION=1.27.15
+ARG OPA_VERSION=0.54.0
+ARG SHELLCHECK_VERSION=0.9.0
+ARG TFSWITCH_VERSION=1.2.2
+ARG RCLONE_VERSION=1.65.2
 
 # build everything in /build
 WORKDIR /build
@@ -79,7 +79,7 @@ RUN set -o errexit nounset pipefail \
     && echo "Installing Google Cloud SDK ..." \
         && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
             | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
-        && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - \
+        && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
         && apt-get update -o Dir::Etc::sourcelist="sources.list.d/google-cloud-sdk.list" \
             -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0" \
         && apt-get install -y --no-install-recommends \
@@ -89,7 +89,7 @@ RUN set -o errexit nounset pipefail \
         && gcloud config set component_manager/disable_update_check true \
         && gcloud config set metrics/environment github_docker_image \
     && echo "Install GKE auth plugin" \
-        && apt-get install google-cloud-sdk-gke-gcloud-auth-plugin \
+        && apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin \
     && echo "Installing gh ..." \
         && echo "deb [signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
             | tee -a /etc/apt/sources.list.d/github-cli.list \
@@ -126,7 +126,7 @@ RUN set -o errexit nounset pipefail \
         && rm tarball.tar.xz \
     && echo "Installing tfswitch ..." \
         && export BASE_URL=https://github.com/warrensbox/terraform-switcher/releases/download \
-        && export URL="${BASE_URL}/${TFSWITCH_VERSION}/terraform-switcher_${TFSWITCH_VERSION}_linux_amd64.tar.gz" \
+        && export URL="${BASE_URL}/v${TFSWITCH_VERSION}/terraform-switcher_v${TFSWITCH_VERSION}_linux_amd64.tar.gz" \
         && curl -fsSL "${URL}" --output tarball.tar.gz \
         && tar xf tarball.tar.gz -C /usr/local/bin tfswitch \
         && rm tarball.tar.gz \
@@ -156,7 +156,7 @@ RUN set -o errexit nounset pipefail \
         && pr-creator --help            | tee pr-creator-help.txt \
         && git -C test-infra log -n1    | tee pr-creator-version.txt \
         && python3 --version            | tee python-version.txt \
-        && rclone --version             | tee rclone.txt \
+        && rclone version             | tee rclone.txt \
         && shellcheck --version         | tee shellcheck-version.txt \
         && terraform --version          | tee terraform-version.txt \
         && tfswitch --version           | tee tfswitch-version.txt \
