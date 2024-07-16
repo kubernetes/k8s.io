@@ -43,3 +43,30 @@ module "gcb_bucket" {
     }
   ]
 }
+
+// Create gs://k8s-testgrid-config to store K8s TestGrid config.
+module "testgrid_config_bucket" {
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 5"
+
+  name       = "k8s-testgrid-config"
+  project_id = module.project.project_id
+  location   = "us"
+
+  lifecycle_rules = [{
+    action = {
+      type = "Delete"
+    }
+    condition = {
+      age        = 90 # 90d
+      with_state = "ANY"
+    }
+  }]
+
+  iam_members = [
+    {
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:k8s-testgrid-config-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    }
+  ]
+}
