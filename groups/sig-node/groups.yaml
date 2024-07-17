@@ -87,6 +87,7 @@ groups:
       - patrik@ptrk.io
       - teratipally@google.com
       - zhenw@google.com
+      - prow-build@k8s-infra-prow-build.iam.gserviceaccount.com
 
   - email-id: k8s-infra-staging-sp-operator@kubernetes.io
     name: k8s-infra-staging-sp-operator
