@@ -1,3 +1,6 @@
+- name: cfssl
+  dmap:
+    "sha256:123d9a96639ed76fe45dae6c926c1ba50e21e0f3b23639a65f5f69805e14ff27": ["v0.0.4"]
 - name: controller
   dmap:
     "sha256:56633bd00dab33d92ba14c6e709126a762d54a75a6e72437adefeaaca0abb069": ["v0.34.0"]
@@ -283,6 +286,7 @@
     "sha256:5cab44b8639a5908db8ad1d7f0b5333346a6a0164cb6d35a0dce3d72839226dd": ["v20231215-ca91adaad"]
 - name: nginx-1.25
   dmap:
+    "sha256:e738d3d998fceae44da88e96eaef1ed83e11de5d84afc5a8638e0d48f39ad3d8": ["v0.0.4"]
     "sha256:cdafd6c9d36e23414ce41330a482f9136ce82fac46802809681f61cdcd5ad0bb": ["v0.0.5"]
     "sha256:b3e027ab191eb9461a9bcf25092eabb1d547cba164992dbd722c1aa2b4a936ee": ["v0.0.6"]
     "sha256:6e390eaf084615b7b1e88cf4ae4dc19efc42a516a2fbd8ec95f2cfc5efde8f22": ["v0.0.8"]
