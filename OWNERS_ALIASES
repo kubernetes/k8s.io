@@ -170,6 +170,18 @@ aliases:
     - pohly
     - soltysh
 ## BEGIN CUSTOM CONTENT
+  promo-tools-approvers:
+    - cpanato
+    - jeremyrickard
+    - justaugustus
+    - puerco
+    - saschagrunert
+  promo-tools-reviewers:
+    - cpanato
+    - jeremyrickard
+    - justaugustus
+    - puerco
+    - saschagrunert
   provider-aws:
     - justinsb
     - nckturner
@@ -190,6 +202,35 @@ aliases:
   provider-vmware:
     - cantbewong
     - frapposelli
+  publishing-bot-approvers:
+    - dims
+    - nikhita
+    - sttts
+  publishing-bot-reviewers:
+    - cpanato
+    - jeremyrickard
+    - justaugustus
+    - palnabarun
+    - puerco
+    - saschagrunert
+  release-engineering-approvers:
+    - cpanato # subproject owner / Release Manager / SIG Technical Lead
+    - jeremyrickard # subproject owner / Release Manager / SIG Chair
+    - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
+    - puerco # subproject owner / Release Manager / SIG Technical Lead
+    - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - Verolop # subproject owner / Release Manager / SIG Technical Lead
+    - xmudrii # Release Manager
+  release-engineering-reviewers:
+    - cpanato # subproject owner / Release Manager / SIG Technical Lead
+    - jeremyrickard # subproject owner / Release Manager / SIG Chair
+    - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
+    - puerco # subproject owner / Release Manager / SIG Technical Lead
+    - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - Verolop # subproject owner / Release Manager / SIG Technical Lead
+    - xmudrii # Release Manager
   sig-release-subproject-leads:
     - gracenng
     - katcosgrove
