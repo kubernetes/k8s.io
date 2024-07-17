@@ -1,0 +1,8 @@
+{
+  "displayName": "writes TestGrid config to gs://k8s-testgrid-config",
+  "email": "k8s-testgrid-config-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/k8s-testgrid-config-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "oauth2ClientId": "101622047377218960022",
+  "projectId": "k8s-infra-prow-build-trusted",
+  "uniqueId": "101622047377218960022"
+}
