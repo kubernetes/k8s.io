@@ -23,15 +23,10 @@
     {
       "members": [
         "group:k8s-infra-artifact-admins@kubernetes.io",
-        "group:k8s-infra-staging-kops@kubernetes.io"
-      ],
-      "role": "roles/storage.objectAdmin"
-    },
-    {
-      "members": [
+        "group:k8s-infra-staging-kops@kubernetes.io",
         "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
       ],
-      "role": "roles/storage.objectCreator"
+      "role": "roles/storage.objectAdmin"
     },
     {
       "members": [
