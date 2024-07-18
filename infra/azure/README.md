@@ -8,4 +8,5 @@ Scripts and configuration files related to the management of the Kubernetes proj
 
 ## Layout
 
+- `bash/`: Bash scripts used to ensure Azure resources are created using the Azure CLI
 - `terraform/`: Terraform configuration to deploy resources on Azure
