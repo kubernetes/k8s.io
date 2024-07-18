@@ -1,3 +1,0 @@
-- name: cluster-api-operator
-  dmap:
-    "sha256:9d4d99330dc1ca64cdfc3c4faba19c2b2f7f1c958c1e5f985b86d1912597d028": ["v0.1.0"]

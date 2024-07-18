@@ -1,3 +1,0 @@
-- name: k8s-publishing-bot
-  dmap:
-    "sha256:c67d7b5edcc55d4761548258f9b55ee317a460e5f6861a71b6ae89c426cea387": ["v0.1.0-1"]
