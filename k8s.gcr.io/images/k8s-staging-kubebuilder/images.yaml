@@ -1,5 +1,0 @@
-# kube-rbac-proxy images
-# https://github.com/kubernetes-sigs/kubebuilder/tree/kube-rbac-proxy-releases/build
-#- name: kube-rbac-proxy
-#  dmap:
-#    "sha256:56633bd00dab33d92ba14c6e709126a762d54a75a6e72437adefeaaca0abb069": ["v0.34.0"] #<- should be the sha image from cloudbuild and the release version

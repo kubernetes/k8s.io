@@ -1,5 +1,0 @@
-- name: k8s-gmsa-webhook
-  dmap:
-    "sha256:aead9fecca66c7f598a6cbf420a259d4acccb7ae192ffbbbcdaf565c84f1f27d": ["v0.6.0"]
-    "sha256:f04b2b0746fc50194232f8764bbc0e025d7904f4799f6034d56009746649ed3c": ["v0.6.1"]
-    "sha256:f4112d86c217dcb0b79aa1a2f40a8f29f5f4893b7c715a1093c091bb2b005e2a": ["v0.4.0"]
