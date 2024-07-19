@@ -17,7 +17,7 @@ limitations under the License.
 module "eks" {
   providers = { aws = aws.kops-infra-ci }
   source    = "terraform-aws-modules/eks/aws"
-  version   = "20.8.3"
+  version   = "20.10.0"
 
   cluster_name                   = local.cluster_name
   cluster_version                = var.eks_version
@@ -90,7 +90,6 @@ module "eks" {
       capacity_type  = "ON_DEMAND"
       instance_types = ["r6id.2xlarge"]
       ami_type       = "BOTTLEROCKET_x86_64"
-      platform       = "bottlerocket"
 
       ebs_optimized     = true
       enable_monitoring = true
