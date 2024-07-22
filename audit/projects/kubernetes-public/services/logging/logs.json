@@ -1,5 +1,4 @@
 [
-  "projects/kubernetes-public/logs/GCEGuestAgent",
   "projects/kubernetes-public/logs/OSConfigAgent",
   "projects/kubernetes-public/logs/bigquerydatatransfer.googleapis.com%2Ftransfer_config",
   "projects/kubernetes-public/logs/cloudaudit.googleapis.com%2Factivity",
