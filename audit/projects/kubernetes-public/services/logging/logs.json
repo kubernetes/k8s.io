@@ -10,7 +10,6 @@
   "projects/kubernetes-public/logs/compute.googleapis.com%2Fshielded_vm_integrity",
   "projects/kubernetes-public/logs/container-runtime",
   "projects/kubernetes-public/logs/container.googleapis.com%2Fcluster-autoscaler-visibility",
-  "projects/kubernetes-public/logs/diagnostic-log",
   "projects/kubernetes-public/logs/docker",
   "projects/kubernetes-public/logs/events",
   "projects/kubernetes-public/logs/kube-container-runtime-monitor",
@@ -24,9 +23,7 @@
   "projects/kubernetes-public/logs/node-problem-detector",
   "projects/kubernetes-public/logs/requests",
   "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_1_output",
-  "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_2_output",
   "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_3_output",
-  "projects/kubernetes-public/logs/serialconsole.googleapis.com%2Fserial_port_debug_output",
   "projects/kubernetes-public/logs/stderr",
   "projects/kubernetes-public/logs/stdout"
 ]
