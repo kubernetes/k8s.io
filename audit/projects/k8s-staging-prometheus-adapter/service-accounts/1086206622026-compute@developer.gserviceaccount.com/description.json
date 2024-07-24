@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "1086206622026-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-prometheus-adapter/serviceAccounts/1086206622026-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "105273641239512240920",
+  "projectId": "k8s-staging-prometheus-adapter",
+  "uniqueId": "105273641239512240920"
+}
