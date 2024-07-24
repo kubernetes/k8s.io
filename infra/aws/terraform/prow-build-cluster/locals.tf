@@ -19,6 +19,8 @@ locals {
 
   root_account_arn = "arn:aws:iam::${local.account_id}:root"
 
+  sso_admin_arn = one(data.aws_iam_roles.sso_admins.arns)
+
   configure_prow = var.cluster_name == "prow-build-cluster"
 
   aws_cli_args = [
@@ -40,6 +42,54 @@ locals {
   }
 
   azs = slice(data.aws_availability_zones.available.names, 0, 3)
+
+  default_access_entries = {
+    # Admin entries
+    eks-infra-admin = {
+      kubernetes_groups = [
+        "eks-cluster-admin"
+      ]
+      principal_arn = data.aws_iam_role.eks_infra_admin.arn
+    }
+    eks-cluster-admin = {
+      kubernetes_groups = [
+        "eks-cluster-admin"
+      ]
+      principal_arn = aws_iam_role.eks_cluster_admin.arn
+    }
+
+    # Viewer entries
+    eks-infra-viewer = {
+      kubernetes_groups = [
+        "eks-cluster-viewer"
+      ]
+      principal_arn = data.aws_iam_role.eks_infra_viewer.arn
+    }
+    eks-cluster-viewer = {
+      kubernetes_groups = [
+        "eks-cluster-viewer"
+      ]
+      principal_arn = aws_iam_role.eks_cluster_viewer.arn
+    }
+
+    # Assign the Administrator access to the AdministratorAccess users logging via SSO
+    sso-administrators = {
+      kubernetes_groups = [
+        "eks-cluster-admin"
+      ]
+      principal_arn = local.sso_admin_arn
+    }
+  }
+
+  access_entries = merge(
+    local.default_access_entries,
+    local.configure_prow ? {
+      kubernetes_groups = [
+        "eks-prow-cluster-admin"
+      ]
+      principal_arn = aws_iam_role.eks_prow_admin[0].arn
+    } : {}
+  )
 
   # Allow cluster admin access to the following IAM roles:
   cluster_admin_roles = [
@@ -85,7 +135,7 @@ locals {
     {
       rolearn  = "arn:aws:iam::468814281478:role/AWSReservedSSO_AdministratorAccess_abaef4db15a2c055"
       username = "sso-admins"
-      groups   = [
+      groups = [
         "eks-cluster-admin"
       ]
     }

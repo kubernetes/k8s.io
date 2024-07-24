@@ -17,6 +17,7 @@ limitations under the License.
 region = "us-east-2"
 
 eks_infra_admins = [
+  "koray",
   "pkprzekwas",
   "wozniakjan",
   "xmudrii"

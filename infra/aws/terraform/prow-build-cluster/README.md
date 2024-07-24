@@ -41,6 +41,30 @@ can be found in [the IaC document](./docs/IaC.md).
 If you need to introduce new Kubernetes resources or make modifications to existing ones,
 please refer to the instructions provided in [the GitOps document](./docs/GitOps.md).
 
+### Accessing Clusters via SSO
+
+> [!IMPORTANT]
+> The SSO access to AWS is not yet widely available to all contributors. If you don't have
+> the SSO access at the moment, you can use the legacy way of accessing the clusters.
+
+The easiest way to access the clusters is by logging in via SSO (Okta). First, make sure that you
+have your SSO access configured as described in [the following AWS document](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html).
+
+Once you have the SSO access configured, you can get the kubeconfig file by running the following
+command:
+
+* Production:
+    ```bash
+    aws eks update-kubeconfig --region us-east-2 --name prow-build-cluster
+    ```
+
+* Canary:
+    ```bash
+    aws eks update-kubeconfig --region us-east-2 --name prow-canary-cluster
+    ``` 
+
+### Accessing Clusters By Assuming The EKSInfraAdmin Role (Legacy)
+
 **Direct interactions with the clusters are intended for cluster administrators only.**
 It requires access to the AWS accounts where the clusters are hosted.
 As an administrator, your primary tools for interacting with the clusters are `kubectl` and `terraform`.
