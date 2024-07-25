@@ -87,6 +87,7 @@ flux create hr kubecost \
     --namespace=kubecost \
     --chart cost-analyzer \
     --chart-version 2.0.1 \
+    --release-name kubecost \
     --values-from=ConfigMap/kubecost-helm-values \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
