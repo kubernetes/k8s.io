@@ -42,22 +42,28 @@ resource "google_compute_security_policy" "cloud-armor" {
       exceed_action  = "deny(429)"
       enforce_on_key = "IP"
       # TODO: revisit these values
-      # above this threshold we serve 429, currently ~83/sec in a 1 minute window
+      # above this threshold we serve 429, currently 83/sec in a 30s window
       rate_limit_threshold {
         # NOTE: count cannot exceed 10,000
         # https://cloud.google.com/armor/docs/rate-limiting-overview
-        count        = 5000
-        interval_sec = 60
+        # This is set to be like the ban limit, for a shorter time period
+        # 83/second for 30s versus 83.33/second for two minutes
+        # when users hit this, they receive 429 for the remainder of the 30s window
+        count        = 2490
+        interval_sec = 30
       }
       # if the user continues to exceed the rate limit, temp ban
       # otherwise users may ignore transient 429 and keep running right at the limit
       # clients that respect the 429 and backoff will not hit this
       # (or better yet, https://github.com/kubernetes/registry.k8s.io/blob/main/docs/mirroring/README.md)
+      # this is only intended to signal to the most persistently high-QPS users that they should stop
+      # when users hit this, they will receive 429 for the ban duration
       ban_threshold {
         count        = 10000
         interval_sec = 120
       }
-      ban_duration_sec = 1800
+      # one hour temp-ban (cloud armor maximum)
+      ban_duration_sec = 3600
     }
   }
 
