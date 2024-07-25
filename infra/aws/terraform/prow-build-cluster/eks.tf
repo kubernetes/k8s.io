@@ -28,8 +28,7 @@ module "eks" {
   cluster_endpoint_public_access = true
 
   # Enable EKS API and ConfigMap authentication (required for the EKS Pod identity)
-  # TODO(xmudrii): switch to API
-  authentication_mode = "API_AND_CONFIG_MAP"
+  authentication_mode = "API"
   access_entries      = local.access_entries
 
   iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
