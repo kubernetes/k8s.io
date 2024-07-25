@@ -18,6 +18,11 @@ data "aws_caller_identity" "current" {}
 
 data "aws_availability_zones" "available" {}
 
+data "aws_iam_roles" "sso_admins" {
+  name_regex  = "AWSReservedSSO_AdministratorAccess_.*"
+  path_prefix = "/aws-reserved/sso.amazonaws.com/"
+}
+
 data "aws_iam_role" "eks_infra_admin" {
   name = "EKSInfraAdmin"
 }

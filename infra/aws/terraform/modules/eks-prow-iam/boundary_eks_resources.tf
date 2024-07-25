@@ -38,6 +38,7 @@ data "aws_iam_policy_document" "eks_resources_permission_boundary_doc" {
       "ec2:*",
       "ecr:*",
       "eks:*",
+      "eks-auth:AssumeRoleForPodIdentity",
       "elasticloadbalancing:*",
       "iam:*",
       "kms:*",

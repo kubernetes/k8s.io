@@ -20,29 +20,17 @@ limitations under the License.
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 19.16"
+  version = "~> 20.20"
 
   # General cluster properties.
   cluster_name                   = var.cluster_name
   cluster_version                = var.cluster_version
   cluster_endpoint_public_access = true
 
-  # Manage aws-auth ConfigMap.
-  manage_aws_auth_configmap = true
-
-  # Configure aws-auth
-  aws_auth_roles = local.aws_auth_roles
-
-  # Allow EKS access to the root account.
-  aws_auth_users = [
-    {
-      "userarn"  = local.root_account_arn
-      "username" = "root"
-      "groups" = [
-        "eks-cluster-admin"
-      ]
-    },
-  ]
+  # Enable EKS API and ConfigMap authentication (required for the EKS Pod identity)
+  # TODO(xmudrii): switch to API
+  authentication_mode = "API_AND_CONFIG_MAP"
+  access_entries      = local.access_entries
 
   iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
@@ -77,6 +65,9 @@ module "eks" {
     aws-ebs-csi-driver = {
       most_recent              = true
       service_account_role_arn = module.ebs_csi_irsa.iam_role_arn
+    }
+    eks-pod-identity-agent = {
+      most_recent = true
     }
   }
 
