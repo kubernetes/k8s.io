@@ -7,7 +7,6 @@
     "gkeClustersPerManagedZone": 100,
     "gkeClustersPerPolicy": 100,
     "gkeClustersPerResponsePolicy": 100,
-    "internetHealthChecksPerManagedZone": 100,
     "itemsPerRoutingPolicy": 100,
     "kind": "dns#quota",
     "managedZones": 10000,
