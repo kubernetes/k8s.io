@@ -84,10 +84,12 @@ locals {
   access_entries = merge(
     local.default_access_entries,
     local.configure_prow ? {
-      kubernetes_groups = [
-        "eks-prow-cluster-admin"
-      ]
-      principal_arn = aws_iam_role.eks_prow_admin[0].arn
+      prow = {
+        kubernetes_groups = [
+          "eks-prow-cluster-admin"
+        ]
+        principal_arn = aws_iam_role.eks_prow_admin[0].arn
+      }
     } : {}
   )
 
