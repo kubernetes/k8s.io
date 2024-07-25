@@ -13,15 +13,35 @@ The `flux-system` namespace contains all GitOps Tool Kit components, Flux Source
 
 ## Setting up EKS Cluster
 
-* To install Flux GitOps Tool Kit components, run the following command:
+* First, update the Flux GitOps Tool Kit (GOTK) components and regenerate all files used by Flux:
+    ```bash
+    make flux-install-with-gotk
+    ```
+
+* Once all files are updated, push them to GitHub. Once the PR is merged, proceed with this guide
+
+* Deploy the GOTK components:
     ```bash
     make flux-install
     ```
 
-* To deploy Kustomizations, use the command:
+* Finally, deploy Kustomizations using the following command:
     ```bash
     make flux-apply-kustomizations
     ```
+
+Once Kustomizations are deployed, Flux will take care of deploying everything else managed by Flux.
+
+## Updating Flux
+
+To update Flux, i.e. Flux GitOps Tool Kit (GOTK) components, run the following command:
+
+```bash
+make flux-update-with-gotk
+```
+
+Then commit the changes and push them to GitHub. Once the appropriate PR is merged, the changes
+will be applied automatically.
 
 ## Interacting with Flux
 
