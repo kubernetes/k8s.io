@@ -30,6 +30,8 @@ if [ -z $PROW_ENV ]; then
   exit 3
 fi
 
+UPDATE_FLUX=${UPDATE_FLUX:-false}
+
 script_root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 function boilerplate() {
@@ -39,10 +41,14 @@ function boilerplate() {
 
 resources_dir=${script_root}/../resources
 
+if [ "$UPDATE_FLUX" = true ]; then
 # Generate all FluxCD resources.
 # gotk stands for GitOpsToolKit (https://fluxcd.io/flux/components/)
-boilerplate > ${resources_dir}/flux-system/gotk-components.yaml
-flux install --export >> ${resources_dir}/flux-system/gotk-components.yaml
+boilerplate > ${resources_dir}/flux/gotk-components.yaml
+flux install --export >> ${resources_dir}/flux/gotk-components.yaml
+else
+  echo "Skipping updating Flux because the UPDATE_FLUX environment variable is not set to true"
+fi
 
 # sync_interval determines Flux Source Controller sync interval.
 # (https://github.com/fluxcd/source-controller)
@@ -96,6 +102,7 @@ flux create hr kubecost \
 # that are used for generating FluxCD kustomizations.
 kustomizations=(
     boskos
+    flux
     flux-system
     kube-system
     monitoring
