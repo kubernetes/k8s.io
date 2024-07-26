@@ -65,8 +65,19 @@ module "testgrid_config_bucket" {
 
   iam_members = [
     {
+      // Let the upload job write to this bucket.
       role   = "roles/storage.objectAdmin"
       member = "serviceAccount:k8s-testgrid-config-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    },
+    {
+      // Let K8s TestGrid canary read configs from this bucket. 
+      role   = "roles/storage.objectViewer"
+      member = "serviceAccount:testgrid-canary@k8s-testgrid.iam.gserviceaccount.com"
+    },
+    {
+      // Let K8s TestGrid production read configs from this bucket.
+      role   = "roles/storage.objectViewer"
+      member = "serviceAccount:updater@k8s-testgrid.iam.gserviceaccount.com"
     }
   ]
 }
