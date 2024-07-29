@@ -84,7 +84,7 @@ module "eks" {
       # Force version update if existing pods are unable to be drained due to a PodDisruptionBudget issue
       force_update_version = true
       update_config = {
-        max_unavailable = 1
+        max_unavailable = 3
       }
 
       capacity_type  = "ON_DEMAND"
@@ -126,19 +126,11 @@ module "eks" {
         AmazonEC2ContainerRegistryReadOnly = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
         AmazonSSMManagedInstanceCore       = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
       }
-
-      launch_template_tags = {
-        # enable discovery of autoscaling groups by cluster-autoscaler
-        "k8s.io/cluster-autoscaler/enabled" : true,
-        "k8s.io/cluster-autoscaler/${local.cluster_name}" : "owned",
-      }
-
-      tags = var.tags
     }
   }
 
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.name
   })
 }
 
