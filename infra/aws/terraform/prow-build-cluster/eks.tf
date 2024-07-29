@@ -71,6 +71,8 @@ module "eks" {
     }
   }
 
+  node_security_group_tags = local.node_security_group_tags
+
   node_security_group_additional_rules = var.bastion_install ? {
     bastion_22 = {
       description              = "Bastion host to nodes"

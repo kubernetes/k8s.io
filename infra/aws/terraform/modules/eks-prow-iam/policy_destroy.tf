@@ -56,6 +56,7 @@ data "aws_iam_policy_document" "eks_destroy" {
       "eks:DeleteNodegroup",
       "eks:DeletePodIdentityAssociation",
       "eks:UntagResource",
+      "events:UntagResource",
       "iam:DeleteOpenIDConnectProvider",
       "iam:DeletePolicy",
       "iam:DeleteRole",
@@ -63,11 +64,13 @@ data "aws_iam_policy_document" "eks_destroy" {
       "iam:DeleteRolePermissionsBoundary",
       "iam:DetachRolePolicy",
       "iam:DeletePolicyVersion",
+      "iam:RemoveRoleFromInstanceProfile",
       "iam:UntagPolicy",
       "iam:UntagRole",
       "kms:DeleteAlias",
       "kms:ScheduleKeyDeletion",
       "logs:DeleteLogGroup",
+      "sqs:UntagQueue"
     ]
   }
 

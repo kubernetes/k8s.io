@@ -32,6 +32,8 @@ fi
 
 UPDATE_FLUX=${UPDATE_FLUX:-false}
 
+readonly karpenter_version="0.37.0"
+
 script_root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 function boilerplate() {
@@ -98,6 +100,32 @@ flux create hr kubecost \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
 
+boilerplate > ${resources_dir}/flux-system/flux-source-helm-karpenter-chart.yaml
+flux create source helm karpenter \
+    --url oci://public.ecr.aws/karpenter \
+    --interval=${sync_interval} \
+    --export >> ${resources_dir}/flux-system/flux-source-helm-karpenter-chart.yaml
+
+boilerplate > ${resources_dir}/karpenter/flux-hr-karpenter-crd.yaml
+flux create hr karpenter-crd \
+    --source HelmRepository/karpenter.flux-system \
+    --namespace=kube-system \
+    --chart karpenter-crd \
+    --chart-version "${karpenter_version}" \
+    --interval=${sync_interval} \
+    --export >> ${resources_dir}/karpenter/flux-hr-karpenter-crd.yaml
+
+boilerplate > ${resources_dir}/karpenter/flux-hr-karpenter.yaml
+flux create hr karpenter \
+    --source HelmRepository/karpenter.flux-system \
+    --namespace=kube-system \
+    --chart karpenter \
+    --chart-version "${karpenter_version}" \
+    --values ${resources_dir}/karpenter/${PROW_ENV}-cluster-values \
+    --interval=${sync_interval} \
+    --depends-on=karpenter-crd \
+    --export >> ${resources_dir}/karpenter/flux-hr-karpenter.yaml
+
 # This list contains names of folders inside ./resources directory
 # that are used for generating FluxCD kustomizations.
 kustomizations=(
@@ -112,6 +140,7 @@ kustomizations=(
     external-secrets
     kubecost
     cluster-autoscaler
+    karpenter
 )
 
 # Code below is used to figure out a relative path of

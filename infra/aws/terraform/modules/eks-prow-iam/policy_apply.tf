@@ -72,6 +72,11 @@ data "aws_iam_policy_document" "eks_apply" {
       "eks:UpdateClusterVersion",
       "eks:UpdateNodegroupConfig",
       "eks:UpdateNodegroupVersion",
+      "events:DeleteRule",
+      "events:PutRule",
+      "events:PutTargets",
+      "events:RemoveTargets",
+      "events:TagResource",
       "iam:AttachRolePolicy",
       "iam:CreateOpenIDConnectProvider",
       "iam:CreatePolicy",
@@ -93,6 +98,10 @@ data "aws_iam_policy_document" "eks_apply" {
       "logs:PutRetentionPolicy",
       "logs:TagLogGroup",
       "s3:PutObject",
+      "sqs:CreateQueue",
+      "sqs:DeleteQueue",
+      "sqs:SetQueueAttributes",
+      "sqs:TagQueue",
       # TODO(xmudrii-ubuntu): remove after removing ECR repo
       "ecr-public:*"
     ]

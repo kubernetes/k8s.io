@@ -70,6 +70,9 @@ data "aws_iam_policy_document" "eks_plan" {
       "eks:ListNodegroups",
       "eks:ListUpdates",
       "eks:ListTagsForResource",
+      "events:DescribeRule",
+      "events:ListTagsForResource",
+      "events:ListTargetsByRule",
       "iam:GetOpenIDConnectProvider",
       "iam:GetPolicy",
       "iam:GetPolicyVersion",
@@ -91,7 +94,9 @@ data "aws_iam_policy_document" "eks_plan" {
       "logs:ListTagsForResource",
       "logs:ListTagsLogGroup",
       "s3:GetObject",
-      "s3:ListBucket"
+      "s3:ListBucket",
+      "sqs:GetQueueAttributes",
+      "sqs:ListQueueTags"
     ]
   }
 }

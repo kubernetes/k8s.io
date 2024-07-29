@@ -36,6 +36,10 @@ locals {
     Cluster = var.cluster_name
   }
 
+  node_security_group_tags = {
+    "karpenter.sh/discovery" = var.cluster_name
+  }
+
   auto_scaling_tags = {
     "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
     "k8s.io/cluster-autoscaler/enabled"             = true
