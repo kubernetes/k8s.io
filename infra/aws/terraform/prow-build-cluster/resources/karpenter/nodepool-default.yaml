@@ -51,7 +51,7 @@ spec:
           values: ["2"]
 
   limits:
-    cpu: 800 # 50 x r5ad.4xlarge (16 vCPUs)
+    cpu: "2400" # 150 x r5ad.4xlarge (16 vCPUs)
 
   disruption:
     consolidationPolicy: WhenEmpty
