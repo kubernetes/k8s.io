@@ -18,11 +18,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-readonly repo="gcr.io/k8s-staging-secrets-store-sync"
+readonly repo="us-central1-docker.pkg.dev/k8s-staging-images/secrets-store-sync"
 # release candidates will be created for >=1.0.0 releases that we want published to the prod registry
 readonly tag_filter="(tags~^v[0-9]+.[0-9]+.[0-9]+$) OR (tags~^v[0-9]+.[0-9]+.[0-9]+-rc.[0-9]+$ AND tags >= v1.0.0)"
 readonly images=(
-    secrets-store-sync-controller
+    controller
 )
 
 for image in "${images[@]}"; do
