@@ -47,6 +47,9 @@ module "eks" {
     coredns = {
       most_recent = true
     }
+    eks-pod-identity-agent = {
+      most_recent = true
+    }
     kube-proxy = {
       most_recent = true
     }
@@ -156,15 +159,6 @@ module "eks-auth" {
       groups   = ["system:masters"]
     },
   ]
-}
-
-resource "aws_eks_addon" "eks_pod_identity" {
-  provider = aws.kops-local-ci
-
-  cluster_name                = module.eks.cluster_name
-  addon_name                  = "eks-pod-identity-agent"
-  addon_version               = "v1.0.0-eksbuild.1"
-  resolve_conflicts_on_update = "OVERWRITE"
 }
 
 resource "aws_eks_pod_identity_association" "kops_prow_build" {
