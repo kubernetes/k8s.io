@@ -7,7 +7,7 @@ metadata:
   labels:
     app: cluster-autoscaler
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: cluster-autoscaler
