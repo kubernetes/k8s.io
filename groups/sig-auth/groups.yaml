@@ -62,6 +62,16 @@ groups:
       - tasha.drew@gmail.com
       - srajakum@amazon.com
 
+  - email-id: k8s-infra-staging-secrets-store-sync@kubernetes.io
+    name: k8s-infra-staging-secrets-store-sync
+    description: |-
+      ACL for staging secrets-store-sync-controller
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - anish.ramasekar@gmail.com
+      - nilekhc@gmail.com
+
   #
   # k8s-infra gcs write access
   #
