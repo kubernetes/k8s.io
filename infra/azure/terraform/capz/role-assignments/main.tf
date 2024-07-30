@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# This module maintains all role assignments for our service principal - az-cli-prow
+
 variable "resource_group_name" {
   type = string
 }
@@ -25,6 +27,10 @@ variable "container_registry_scope" {
 variable "subscription_id" {
   type = string
 }
+
+variable "key_vault_id" {
+  type = string
+} 
 
 data "azuread_service_principal" "az_service_principal" {
   display_name = "az-cli-prow"
@@ -68,4 +74,16 @@ resource "azurerm_role_assignment" "sp_custom_role_assignment" {
   principal_id         = data.azuread_service_principal.az_service_principal.id
   role_definition_name = azurerm_role_definition.custom_role.name
   scope                = "/subscriptions/${var.subscription_id}"
+}
+
+resource "azurerm_key_vault_access_policy" "access_policy_gmsa_sp" {
+  key_vault_id = var.key_vault_id
+  tenant_id    = data.azuread_service_principal.az_service_principal.application_tenant_id
+  object_id    = data.azuread_service_principal.az_service_principal.id
+  secret_permissions = [
+    "Get",
+    "Delete",
+    "List",
+    "Purge"
+  ]
 }
