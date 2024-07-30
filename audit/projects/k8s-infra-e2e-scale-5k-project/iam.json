@@ -8,6 +8,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-783965148085@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/artifactregistry.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudkms.admin"
