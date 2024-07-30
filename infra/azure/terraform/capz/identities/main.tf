@@ -22,6 +22,10 @@ variable "location" {
   type = string
 }
 
+variable "container_registry_private_scope" {
+  type = string
+}
+
 resource "azurerm_user_assigned_identity" "cloud_provider_user_identity" {
   name                = "cloud-provider-user-identity"
   location            = var.location
@@ -38,6 +42,12 @@ resource "azurerm_user_assigned_identity" "gmsa_user_identity" {
   name                = "gmsa-user-identity"
   location            = var.location
   resource_group_name = var.resource_group_name
+}
+
+resource "azurerm_role_assignment" "acr_pull_private" {
+  principal_id         = azurerm_user_assigned_identity.cloud_provider_user_identity.principal_id
+  role_definition_name = "AcrPull"
+  scope                = var.container_registry_private_scope
 }
 
 output "cloud_provider_user_identity_id" {
