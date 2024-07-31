@@ -18,6 +18,7 @@ limitations under the License.
 // Enable required services for this module
 resource "google_project_service" "service" {
   for_each = toset([
+    "secretmanager.googleapis.com",
     "storage.googleapis.com",
     "storage-api.googleapis.com",
     "storage-component.googleapis.com",
