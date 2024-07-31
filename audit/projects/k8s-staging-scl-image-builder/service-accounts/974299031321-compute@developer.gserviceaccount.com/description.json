@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "974299031321-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-scl-image-builder/serviceAccounts/974299031321-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "116165404622428742606",
+  "projectId": "k8s-staging-scl-image-builder",
+  "uniqueId": "116165404622428742606"
+}
