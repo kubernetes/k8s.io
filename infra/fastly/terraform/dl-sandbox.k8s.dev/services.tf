@@ -40,11 +40,14 @@ resource "fastly_service_vcl" "files" {
 
     override_host = "${var.bucket}.storage.googleapis.com"
 
+    shield = "chi-il-us"
+
     connect_timeout       = 5000  # milliseconds
     between_bytes_timeout = 15000 # milliseconds
     error_threshold       = 5
   }
 
+  /*
   healthcheck {
     name = "GCS Health"
 
@@ -57,7 +60,7 @@ resource "fastly_service_vcl" "files" {
     initial        = 2
     window         = 4
   }
-
+*/
   snippet {
     content  = <<-EOT
       if (req.url.path ~ "^/release/") {
@@ -77,64 +80,6 @@ resource "fastly_service_vcl" "files" {
     name        = "CORS Allow"
     source      = "\"*\""
   }
-
-  # Remove Google cookies from the origin
-  header {
-    destination = "http.x-goog-generation"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-generation"
-  }
-
-  header {
-    destination = "http.x-goog-metageneration"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-metageneration"
-  }
-
-  header {
-    destination = "http.x-guploader-uploadid"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-guploader-uploadid"
-  }
-
-  header {
-    destination = "http.x-goog-hash"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-hash"
-  }
-
-  header {
-    destination = "http.x-goog-meta-goog-reserved-file-mtime"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-meta-goog-reserved-file-mtime"
-  }
-
-  header {
-    destination = "http.x-goog-storage-class"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-storage-class"
-  }
-
-  header {
-    destination = "http.x-goog-stored-content-encoding"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-stored-content-encoding"
-  }
-
-  header {
-    destination = "http.x-goog-stored-content-length"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-stored-content-length"
-  }
-
   # Do not cache 'not found' & authenticated requests:
   condition {
     type      = "CACHE"
@@ -154,29 +99,31 @@ resource "fastly_service_vcl" "files" {
     name = "Authenticate to GCS requests"
     type = "init"
     content = templatefile("${path.module}/vcl/gcs-auth.vcl", {
-      access_key = ""
-      secret_key = ""
+      access_key     = data.google_secret_manager_secret_version_access.gcs_reader_access_key.secret_data
+      secret_key     = data.google_secret_manager_secret_version_access.gcs_reader_secret_key.secret_data
       backend_bucket = var.bucket
-      region = "us-central1"
-    }
+      region         = "us-central1"
+      }
     )
   }
 
+  /*
   snippet {
-    name = "GCS Auth - MISS"
-    type = "miss"
+    name    = "GCS Auth - MISS"
+    type    = "miss"
     content = <<-EOT
       call set_google_auth_header;
     EOT
   }
 
   snippet {
-    name = "GCS Auth - PASS"
-    type = "pass"
+    name    = "GCS Auth - PASS"
+    type    = "pass"
     content = <<-EOT
       call set_google_auth_header;
     EOT
   }
+  */
 
   vcl {
     name    = "Main"
