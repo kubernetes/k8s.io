@@ -44,6 +44,9 @@ module "eks" {
   cloudwatch_log_group_retention_in_days = 30
 
   cluster_addons = {
+    amazon-cloudwatch-observability = {
+      most_recent = true
+    }
     coredns = {
       most_recent = true
     }
