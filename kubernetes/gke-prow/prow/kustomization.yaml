@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: prow
+
+resources:
+  - cherrypicker.yaml
+  - crier.yaml
+  - crier_rbac.yaml
+  - deck.yaml
+  - deck_rbac.yaml
+  - external-secrets.yaml
+  - gce-ssd-retain_storageclass.yaml
+  - ghproxy.yaml
+  - halogen.yaml
+  - hook.yaml
+  - hook_rbac.yaml
+  - horologium.yaml
+  - horologium_rbac.yaml
+  - ing_ingress.yaml
+  - ingress.yaml
+  - managedcertificates.yaml
+  - needs-rebase.yaml
+  - pipeline.yaml
+  - prow-controller-manager.yaml
+  - pushgateway.yaml
+  - sinker.yaml
+  - statusreconciler.yaml
+  - tide.yaml
+  - trusted_serviceaccounts.yaml
