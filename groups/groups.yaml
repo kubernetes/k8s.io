@@ -21,8 +21,12 @@ groups:
       - ihor@cncf.io
       - alison@alisondowdney.com
       - jdumars@gmail.com
+      - kaslin.fields@gmail.com # SIG ContribEx
       - killen.bob@gmail.com
+      - madhav.jiv@gmail.com # SIG ContribEx
       - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com # SIG ContribEx
+      - priyankasaggu11929@gmail.com # SIG ContribEx
       - spiffxp@gmail.com
     members:
       - AnaMMedina21@gmail.com # CoCC
@@ -93,7 +97,6 @@ groups:
       - justin@fathomdb.com
       - k8s@auggie.dev # SIG Release
       - kaitlynbarnard10@gmail.com
-      - kaslin.fields@gmail.com
       - kat.cosgrove@gmail.com
       - kbhawkey@gmail.com
       - kikis.github@gmail.com
@@ -103,7 +106,6 @@ groups:
       - lancashiredanielle@gmail.com
       - liggitt@google.com
       - maciekpytel@google.com # SIG Autoscaling
-      - madhav.jiv@gmail.com
       - marosset@microsoft.com
       - maszulik@redhat.com # SIG CLI, Apps
       - matt.farina@gmail.com
@@ -118,9 +120,7 @@ groups:
       - neolit123@gmail.com
       - nospam.wong@gmail.com
       - paco.xu@daocloud.io
-      - pal.nabarun95@gmail.com
       - patrick.ohly@intel.com
-      - priyankasaggu11929@gmail.com
       - prydonius@gmail.com
       - quinton@hoole.biz
       - rficcaglia@gmail.com
