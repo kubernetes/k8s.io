@@ -1,0 +1,49 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # WG etcd-operator mailing lists
+  #
+
+  - email-id: wg-etcd-operator-leads@kubernetes.io
+    name: wg-etcd-operator-leads
+    description: |-
+      WG etcd-operator Organizers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+    owners:
+      - benjamin.ahrtr@gmail.com
+      - ciprianhacman@gmail.com
+      - jberkus@redhat.com
+      - jablair@redhat.com
+      - justinsb@google.com
+
+  - email-id: wg-etcd-operator@kubernetes.io
+    name: wg-etcd-operator
+    description: |-
+      Public mailing list for WG etcd-operator
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      AllowWebPosting: "true"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+      ReconcileMembers: "false"
+    owners:
+      - benjamin.ahrtr@gmail.com
+      - ciprianhacman@gmail.com
+      - jberkus@redhat.com
+      - jablair@redhat.com
+      - justinsb@google.com
+    members:
+      - wg-etcd-operator-leads@kubernetes.io

@@ -282,4 +282,7 @@ restrictions:
     allowedGroups:
       - "^wg-device-management@kubernetes.io$"
       - "^wg-device-management-leads@kubernetes.io$"
+  - path: "wg-etcd-operator/groups.yaml"
+    allowedGroups:
+      - "^wg-etcd-operator.*@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
