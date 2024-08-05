@@ -72,17 +72,6 @@ module "eks" {
 
   node_security_group_tags = local.node_security_group_tags
 
-  node_security_group_additional_rules = var.bastion_install ? {
-    bastion_22 = {
-      description              = "Bastion host to nodes"
-      protocol                 = "tcp"
-      from_port                = 22
-      to_port                  = 22
-      type                     = "ingress"
-      source_security_group_id = aws_security_group.bastion_host_security_group[0].id
-    }
-  } : null
-
   eks_managed_node_group_defaults = {
     # TODO(xmudrii-ubuntu): Temporarily disabled because it's not supported by Bottlerocket Linux
     # enable_bootstrap_user_data = true
@@ -96,9 +85,6 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    stable           = local.node_group_stable
-    build-us-east-2a = local.node_group_build_us_east_2a
-    build-us-east-2b = local.node_group_build_us_east_2b
-    build-us-east-2c = local.node_group_build_us_east_2c
+    stable = local.node_group_stable
   }
 }
