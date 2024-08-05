@@ -29,6 +29,12 @@ variable "location" {
   type        = string
 }
 
+variable "node_locations" {
+  description = "The GCP locations (regions or zones) where the node_pool should be located"
+  type        = list
+  default     = []
+}
+
 variable "name" {
   description = "The name to use for this node_pool"
   type        = string
