@@ -1,7 +1,7 @@
 {
     "name": "prow-gce-identity-credential",
     "issuer": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build",
-    "subject": "system:serviceaccount:test-pods:default",
+    "subject": "system:serviceaccount:test-pods:azure",
     "audiences": [
         "api://AzureADTokenExchange"
     ]
