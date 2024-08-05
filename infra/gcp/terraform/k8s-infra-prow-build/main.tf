@@ -84,10 +84,15 @@ module "prow_build_cluster" {
 # - ipv6 jobs need an ipv6 stack; COS lacks one, so use UBUNTU
 # - k8s-prow-builds/prow cluster uses _CONTAINERD variant, keep parity
 module "prow_build_nodepool_n1_highmem_8_localssd" {
-  source                    = "../modules/gke-nodepool"
-  project_name              = module.project.project_id
-  cluster_name              = module.prow_build_cluster.cluster.name
-  location                  = module.prow_build_cluster.cluster.location
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  node_locations = [
+    "us-central1-b",
+    "us-central1-c",
+    "us-central1-f",
+  ]
   name                      = "pool5"
   initial_count             = 1
   min_count                 = 1
@@ -101,10 +106,13 @@ module "prow_build_nodepool_n1_highmem_8_localssd" {
 }
 
 module "prow_build_nodepool_t2a_standard_8" {
-  source        = "../modules/gke-nodepool"
-  project_name  = module.project.project_id
-  cluster_name  = module.prow_build_cluster.cluster.name
-  location      = module.prow_build_cluster.cluster.location
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  node_locations = [
+    "us-central1-a"
+  ]
   name          = "pool5-arm64"
   initial_count = 1
   min_count     = 1
