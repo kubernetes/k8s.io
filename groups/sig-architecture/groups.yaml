@@ -19,6 +19,45 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: sig-architecture-leads@kubernetes.io
+    name: sig-architecture-leads
+    description: |-
+      sig-architecture leads
+    owners:
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - jbelamaric@google.com
+      - killen.bob@gmail.com # temporary to finish configuration
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: sig-architecture@kubernetes.io
+    name: sig-architecture
+    description: |-
+      SIG architecture general discussion group
+    owners:
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - jbelamaric@google.com
+      - killen.bob@gmail.com # temporary to finish configuration
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+
   - email-id: k8s-infra-staging-apisnoop@kubernetes.io
     name: k8s-infra-staging-apisnoop
     description: |-
