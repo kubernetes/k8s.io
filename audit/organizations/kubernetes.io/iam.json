@@ -50,6 +50,12 @@
       "members": [
         "group:k8s-infra-gcp-org-admins@kubernetes.io"
       ],
+      "role": "roles/cloudasset.owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
       "role": "roles/cloudsupport.admin"
     },
     {
@@ -90,6 +96,12 @@
         "user:hahmadzai@linuxfoundation.org"
       ],
       "role": "roles/resourcemanager.projectMover"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/securitycenter.admin"
     },
     {
       "members": [
