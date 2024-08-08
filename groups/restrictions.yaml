@@ -136,6 +136,8 @@ restrictions:
     allowedGroups:
       - "^blog@kubernetes.io$"
       - "^k8s-infra-staging-sig-docs@kubernetes.io$"
+      - "^sig-docs@kubernetes.io$"
+      - "^sig-docs-leads@kubernetes.io$"
   - path: "sig-instrumentation/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-kube-state-metrics@kubernetes.io$"
