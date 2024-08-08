@@ -58,6 +58,7 @@ restrictions:
   - path: "sig-autoscaling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-autoscaling@kubernetes.io$"
+      - "^sig-autoscaling@kubernetes.io$"
       - "^sig-autoscaling-leads@kubernetes.io$"
       - "^sig-autoscaling-karpenter-leads@kubernetes.io$"
   - path: "sig-cli/groups.yaml"
