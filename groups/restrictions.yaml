@@ -199,6 +199,7 @@ restrictions:
       - "^release-managers-private@kubernetes.io$"
       - "^release-managers@kubernetes.io$"
       - "^security-release-team@kubernetes.io$"
+      - "^sig-release@kubernetes.io$"
       - "^sig-release-leads@kubernetes.io$"
       - "^release-team@kubernetes.io$"
       - "^release-team-shadows@kubernetes.io$"
