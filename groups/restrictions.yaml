@@ -146,6 +146,10 @@ restrictions:
       - "^k8s-infra-staging-prometheus-adapter@kubernetes.io$"
       - "^sig-instrumentation@kubernetes.io$"
       - "^sig-instrumentation-leads@kubernetes.io$"
+  - path: "sig-multicluster/groups.yaml"
+    allowedGroups:
+      - "^sig-multicluster@kubernetes.io$"
+      - "^sig-multicluster-leads@kubernetes.io$"
   - path: "sig-network/groups.yaml"
     allowedGroups:
       - "^k8s-infra-push-cni@kubernetes.io$"
