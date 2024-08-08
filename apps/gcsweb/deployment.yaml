@@ -27,7 +27,6 @@ spec:
           args:
             - -upgrade-proxied-http-to-https
             # buckets owned by kubernetes.io
-            - -b=k8s-infra-prow-results
             - -b=k8s-infra-scalability-tests-logs
             - -b=k8s-release-dev
             # buckets owned by google.com
