@@ -227,6 +227,8 @@ restrictions:
   - path: "sig-security/groups.yaml"
     allowedGroups:
       - "^security-tooling-private@kubernetes.io$"
+      - "^sig-security@kubernetes.io$"
+      - "^sig-security-leads@kubernetes.io$"
   - path: "sig-storage/groups.yaml"
     allowedGroups:
       - "^k8s-infra-push-csi@kubernetes.io$"
