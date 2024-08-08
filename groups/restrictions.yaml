@@ -259,6 +259,7 @@ restrictions:
       - "^sig-ui-leads@kubernetes.io$"
   - path: "sig-windows/groups.yaml"
     allowedGroups:
+      - "^sig-windows@kubernetes.io$"
       - "^sig-windows-leads@kubernetes.io$"
       - "^k8s-infra-staging-gmsa-webhook@kubernetes.io$"
       - "^k8s-infra-staging-win-op-rdnss@kubernetes.io$"
