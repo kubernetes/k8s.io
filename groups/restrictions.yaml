@@ -132,6 +132,7 @@ restrictions:
   - path: "sig-etcd/groups.yaml"
     allowedGroups:
       - "@etcd.io$"
+      - "^sig-etcd-leads@kubernetes.io$"
   - path: "sig-docs/groups.yaml"
     allowedGroups:
       - "^blog@kubernetes.io$"
