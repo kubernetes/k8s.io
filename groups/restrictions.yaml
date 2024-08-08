@@ -221,6 +221,7 @@ restrictions:
       - "^k8s-infra-staging-kwok@kubernetes.io$"
       - "^k8s-infra-staging-wasm-scheduler@kubernetes.io$"
       - "^kueue-alerts@kubernetes.io$"
+      - "^sig-scheduling@kubernetes.io$"
       - "^sig-scheduling-alerts@kubernetes.io$"
       - "^sig-scheduling-leads@kubernetes.io$"
   - path: "sig-security/groups.yaml"
