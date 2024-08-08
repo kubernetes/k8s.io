@@ -1,12 +1,12 @@
 teams:
-  - email-id: wg-data-protection-leads@kubernetes.io
-    name: wg-data-protection-leads
+  - email-id: wg-structured-logging-leads@kubernetes.io
+    name: wg-structured-logging-leads
     description: |-
-      wg-data-protection leads
+      wg-structured-logging leads
     owners:
       - killen.bob@gmail.com # temporary to finish configuration
-      - xiangqian@google.com
-      - xingyang105@gmail.com
+      - liumengjiao.dev@gmail.com
+      - patrick.ohly@intel.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -15,14 +15,14 @@ teams:
       WhoCanModerateContent: "OWNERS_AND_MANAGERS"
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
 
-  - email-id: wg-data-protection@kubernetes.io
-    name: wg-data-protection
+  - email-id: wg-structured-logging@kubernetes.io
+    name: wg-structured-logging
     description: |-
-      wg data-protection general discussion group
+      wg structured-logging general discussion group
     owners:
       - killen.bob@gmail.com # temporary to finish configuration
-      - xiangqian@google.com
-      - xingyang105@gmail.com
+      - liumengjiao.dev@gmail.com
+      - patrick.ohly@intel.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"

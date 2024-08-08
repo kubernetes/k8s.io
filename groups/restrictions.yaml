@@ -329,4 +329,8 @@ restrictions:
   - path: "wg-etcd-operator/groups.yaml"
     allowedGroups:
       - "^wg-etcd-operator.*@kubernetes.io$"
+  - path: "wg-structured-logging/groups.yaml"
+    allowedGroups:
+      - "^wg-structured-logging@kubernetes.io$"
+      - "^wg-structured-logging-leads@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
