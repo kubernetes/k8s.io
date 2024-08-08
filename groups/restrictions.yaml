@@ -63,6 +63,7 @@ restrictions:
       - "^sig-autoscaling-karpenter-leads@kubernetes.io$"
   - path: "sig-cli/groups.yaml"
     allowedGroups:
+      - "^sig-cli@kubernetes.io$"
       - "^sig-cli-leads@kubernetes.io$"
       - "^k8s-infra-staging-kustomize@kubernetes.io$"
       - "^k8s-infra-staging-krm-functions@kubernetes.io$"
