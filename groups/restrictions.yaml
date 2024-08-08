@@ -239,6 +239,7 @@ restrictions:
       - "^sig-storage-leads@kubernetes.io$"
   - path: "sig-testing/groups.yaml"
     allowedGroups:
+      - "^sig-testing@kubernetes.io$"
       - "^sig-testing-leads@kubernetes.io$"
       - "^k8s-infra-staging-boskos@kubernetes.io$"
       - "^k8s-infra-staging-e2e-test-images@kubernetes.io$"
