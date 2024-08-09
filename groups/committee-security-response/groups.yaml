@@ -59,8 +59,7 @@ groups:
       - security@platform9.com
       - security@rancher.com
       - security@ubuntu.com
-      - security@vmware.com
-      - tkg-cve-disclosure@groups.vmware.com
+      - VMware.psirt@broadcom.com
       - vulnerabilityreports@cloudfoundry.org
 
   - email-id: security@kubernetes.io
