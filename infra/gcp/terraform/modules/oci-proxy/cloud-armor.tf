@@ -23,7 +23,7 @@ resource "google_compute_security_policy" "cloud-armor" {
 
   # apply rate limits
   rule {
-    action      = "rate_based_ban"
+    action      = "throttle"
     description = "Default rule. Limit excessive usage."
     # apply rate limits last (rules are applied sequentially by priority)
     # clients not violating a rate limit rule that matches will be allowed
@@ -46,24 +46,11 @@ resource "google_compute_security_policy" "cloud-armor" {
       rate_limit_threshold {
         # NOTE: count cannot exceed 10,000
         # https://cloud.google.com/armor/docs/rate-limiting-overview
-        # This is set to be like the ban limit, for a shorter time period
-        # 83/second for 30s versus 83.33/second for two minutes
         # when users hit this, they receive 429 for the remainder of the 30s window
+        # this is set below the per user per minute limit on the backing ARs
         count        = 2490
         interval_sec = 30
       }
-      # if the user continues to exceed the rate limit, temp ban
-      # otherwise users may ignore transient 429 and keep running right at the limit
-      # clients that respect the 429 and backoff will not hit this
-      # (or better yet, https://github.com/kubernetes/registry.k8s.io/blob/main/docs/mirroring/README.md)
-      # this is only intended to signal to the most persistently high-QPS users that they should stop
-      # when users hit this, they will receive 429 for the ban duration
-      ban_threshold {
-        count        = 10000
-        interval_sec = 120
-      }
-      # one hour temp-ban (cloud armor maximum)
-      ban_duration_sec = 3600
     }
   }
 
