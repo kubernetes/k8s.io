@@ -20,6 +20,26 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
 
+  - email-id: sig-autoscaling@kubernetes.io
+    name: sig-autoscaling
+    description: |-
+      SIG autoscaling general discussion group
+    owners:
+      - killen.bob@gmail.com # temporary to finish configuration
+      - guyjtempleton@gmail.com
+      - maciekpytel@google.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: sig-autoscaling-karpenter-leads@kubernetes.io
     name: sig-autoscaling-karpenter-leads
     description: |-

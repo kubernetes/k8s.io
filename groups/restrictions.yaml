@@ -31,6 +31,8 @@ restrictions:
       - "^k8s-infra-staging-examples@kubernetes.io$"
       - "^k8s-infra-staging-jobset@kubernetes.io$"
       - "^k8s-infra-staging-lws@kubernetes.io$"
+      - "^sig-apps@kubernetes.io$"
+      - "^sig-apps-leads@kubernetes.io$"
   - path: "sig-architecture/groups.yaml"
     allowedGroups:
       - "^k8s-infra-conform-inspur@kubernetes.io$"
@@ -43,19 +45,25 @@ restrictions:
       - "^k8s-infra-code-organization@kubernetes.io$"
       - "^k8s-infra-prod-readiness@kubernetes.io$"
       - "^k8s-infra-keps@kubernetes.io$"
+      - "^sig-architecture@kubernetes.io$"
+      - "^sig-architecture-leads@kubernetes.io$"
   - path: "sig-auth/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-csi-secrets-store@kubernetes.io$"
       - "^k8s-infra-staging-secrets-store-sync@kubernetes.io$"
       - "^k8s-infra-staging-multitenancy@kubernetes.io$"
       - "^k8s-infra-staging-sig-auth@kubernetes.io$"
+      - "^sig-auth@kubernetes.io$"
+      - "^sig-auth-leads@kubernetes.io$"
   - path: "sig-autoscaling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-autoscaling@kubernetes.io$"
+      - "^sig-autoscaling@kubernetes.io$"
       - "^sig-autoscaling-leads@kubernetes.io$"
       - "^sig-autoscaling-karpenter-leads@kubernetes.io$"
   - path: "sig-cli/groups.yaml"
     allowedGroups:
+      - "^sig-cli@kubernetes.io$"
       - "^sig-cli-leads@kubernetes.io$"
       - "^k8s-infra-staging-kustomize@kubernetes.io$"
       - "^k8s-infra-staging-krm-functions@kubernetes.io$"
@@ -70,6 +78,8 @@ restrictions:
       - "^k8s-infra-staging-cloud-pv-vsphere@kubernetes.io$"
       - "^k8s-infra-staging-kas-network-proxy@kubernetes.io$"
       - "^k8s-infra-staging-cloud-pv-labeler@kubernetes.io$"
+      - "^sig-cloud-provider@kubernetes.io$"
+      - "^sig-cloud-provider-leads@kubernetes.io$"
   - path: "sig-cluster-lifecycle/groups.yaml"
     allowedGroups:
       - "^sig-cluster-lifecycle@kubernetes.io$"
@@ -122,15 +132,24 @@ restrictions:
   - path: "sig-etcd/groups.yaml"
     allowedGroups:
       - "@etcd.io$"
+      - "^sig-etcd-leads@kubernetes.io$"
   - path: "sig-docs/groups.yaml"
     allowedGroups:
       - "^blog@kubernetes.io$"
       - "^k8s-infra-staging-sig-docs@kubernetes.io$"
+      - "^sig-docs@kubernetes.io$"
+      - "^sig-docs-leads@kubernetes.io$"
   - path: "sig-instrumentation/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-kube-state-metrics@kubernetes.io$"
       - "^k8s-infra-staging-metrics-server@kubernetes.io$"
       - "^k8s-infra-staging-prometheus-adapter@kubernetes.io$"
+      - "^sig-instrumentation@kubernetes.io$"
+      - "^sig-instrumentation-leads@kubernetes.io$"
+  - path: "sig-multicluster/groups.yaml"
+    allowedGroups:
+      - "^sig-multicluster@kubernetes.io$"
+      - "^sig-multicluster-leads@kubernetes.io$"
   - path: "sig-network/groups.yaml"
     allowedGroups:
       - "^k8s-infra-push-cni@kubernetes.io$"
@@ -143,8 +162,11 @@ restrictions:
       - "^k8s-infra-staging-ingress-nginx@kubernetes.io$"
       - "^k8s-infra-staging-ingressconformance@kubernetes.io$"
       - "^ingress-nginx-dev@kubernetes.io$"
+      - "^sig-network@kubernetes.io$"
+      - "^sig-network-leads@kubernetes.io$"
   - path: "sig-node/groups.yaml"
     allowedGroups:
+      - "^sig-node@kubernetes.io$"
       - "^sig-node-leads@kubernetes.io$"
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-cri-tools@kubernetes.io$"
@@ -177,6 +199,7 @@ restrictions:
       - "^release-managers-private@kubernetes.io$"
       - "^release-managers@kubernetes.io$"
       - "^security-release-team@kubernetes.io$"
+      - "^sig-release@kubernetes.io$"
       - "^sig-release-leads@kubernetes.io$"
       - "^release-team@kubernetes.io$"
       - "^release-team-shadows@kubernetes.io$"
@@ -187,6 +210,8 @@ restrictions:
       - "^k8s-infra-rbac-triageparty-scalability@kubernetes.io$"
       - "^k8s-infra-sig-scalability-oncall@kubernetes.io$"
       - "^k8s-infra-staging-perf-tests@kubernetes.io$"
+      - "^sig-scalability@kubernetes.io$"
+      - "^sig-scalability-leads@kubernetes.io$"
   - path: "sig-scheduling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-descheduler@kubernetes.io$"
@@ -196,19 +221,25 @@ restrictions:
       - "^k8s-infra-staging-kwok@kubernetes.io$"
       - "^k8s-infra-staging-wasm-scheduler@kubernetes.io$"
       - "^kueue-alerts@kubernetes.io$"
+      - "^sig-scheduling@kubernetes.io$"
       - "^sig-scheduling-alerts@kubernetes.io$"
       - "^sig-scheduling-leads@kubernetes.io$"
   - path: "sig-security/groups.yaml"
     allowedGroups:
       - "^security-tooling-private@kubernetes.io$"
+      - "^sig-security@kubernetes.io$"
+      - "^sig-security-leads@kubernetes.io$"
   - path: "sig-storage/groups.yaml"
     allowedGroups:
       - "^k8s-infra-push-csi@kubernetes.io$"
       - "^k8s-infra-staging-sig-storage@kubernetes.io$"
       - "^k8s-infra-staging-csi@kubernetes.io$"
       - "^k8s-infra-staging-git-sync@kubernetes.io$"
+      - "^sig-storage@kubernetes.io$"
+      - "^sig-storage-leads@kubernetes.io$"
   - path: "sig-testing/groups.yaml"
     allowedGroups:
+      - "^sig-testing@kubernetes.io$"
       - "^sig-testing-leads@kubernetes.io$"
       - "^k8s-infra-staging-boskos@kubernetes.io$"
       - "^k8s-infra-staging-e2e-test-images@kubernetes.io$"
@@ -222,8 +253,13 @@ restrictions:
       - "^k8s-infra-rbac-gcsweb@kubernetes.io$"
       - "^k8s-infra-rbac-kettle@kubernetes.io$"
       - "^k8s-infra-rbac-prow@kubernetes.io$"
+  - path: "sig-ui/groups.yaml"
+    allowedGroups:
+      - "^sig-ui@kubernetes.io$"
+      - "^sig-ui-leads@kubernetes.io$"
   - path: "sig-windows/groups.yaml"
     allowedGroups:
+      - "^sig-windows@kubernetes.io$"
       - "^sig-windows-leads@kubernetes.io$"
       - "^k8s-infra-staging-gmsa-webhook@kubernetes.io$"
       - "^k8s-infra-staging-win-op-rdnss@kubernetes.io$"
@@ -271,6 +307,14 @@ restrictions:
     allowedGroups:
       - "^wg-batch@kubernetes.io$"
       - "^wg-batch-leads@kubernetes.io$"
+  - path: "wg-data-protection/groups.yaml"
+    allowedGroups:
+      - "^wg-data-protection@kubernetes.io$"
+      - "^wg-data-protection-leads@kubernetes.io$"
+  - path: "wg-policy/groups.yaml"
+    allowedGroups:
+      - "^wg-policy@kubernetes.io$"
+      - "^wg-policy-leads@kubernetes.io$"
   - path: "wg-serving/groups.yaml"
     allowedGroups:
       - "^wg-serving.*@kubernetes.io$"
@@ -285,4 +329,8 @@ restrictions:
   - path: "wg-etcd-operator/groups.yaml"
     allowedGroups:
       - "^wg-etcd-operator.*@kubernetes.io$"
+  - path: "wg-structured-logging/groups.yaml"
+    allowedGroups:
+      - "^wg-structured-logging@kubernetes.io$"
+      - "^wg-structured-logging-leads@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything

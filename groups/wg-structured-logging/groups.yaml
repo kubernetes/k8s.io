@@ -1,0 +1,38 @@
+teams:
+  - email-id: wg-structured-logging-leads@kubernetes.io
+    name: wg-structured-logging-leads
+    description: |-
+      wg-structured-logging leads
+    owners:
+      - killen.bob@gmail.com # temporary to finish configuration
+      - liumengjiao.dev@gmail.com
+      - patrick.ohly@intel.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: wg-structured-logging@kubernetes.io
+    name: wg-structured-logging
+    description: |-
+      wg structured-logging general discussion group
+    owners:
+      - killen.bob@gmail.com # temporary to finish configuration
+      - liumengjiao.dev@gmail.com
+      - patrick.ohly@intel.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+

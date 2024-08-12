@@ -19,6 +19,46 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: sig-storage-leads@kubernetes.io
+    name: sig-storage-leads
+    description: |-
+      sig-storage leads
+    owners:
+      - killen.bob@gmail.com # temporary to finish configuration
+      - jsafrane@redhat.com
+      - msau@google.com
+      - saadali@google.com
+      - xingyang105@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: sig-storage@kubernetes.io
+    name: sig-storage
+    description: |-
+      SIG storage general discussion group
+    owners:
+      - killen.bob@gmail.com # temporary to finish configuration
+      - jsafrane@redhat.com
+      - msau@google.com
+      - saadali@google.com
+      - xingyang105@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: k8s-infra-staging-sig-storage@kubernetes.io
     name: k8s-infra-staging-sig-storage
     description: |-

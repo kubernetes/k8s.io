@@ -1,0 +1,38 @@
+teams:
+  - email-id: wg-data-protection-leads@kubernetes.io
+    name: wg-data-protection-leads
+    description: |-
+      wg-data-protection leads
+    owners:
+      - killen.bob@gmail.com # temporary to finish configuration
+      - xiangqian@google.com
+      - xingyang105@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: wg-data-protection@kubernetes.io
+    name: wg-data-protection
+    description: |-
+      wg data-protection general discussion group
+    owners:
+      - killen.bob@gmail.com # temporary to finish configuration
+      - xiangqian@google.com
+      - xingyang105@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+

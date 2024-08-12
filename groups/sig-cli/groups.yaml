@@ -17,8 +17,30 @@ groups:
     owners:
       - aguclu@redhat.com
       - eddiezane@gmail.com
-      - maszulik@redhat.com
+      - soltysh@gmail.com
       - mpuckett259@gmail.com
+
+  - email-id: sig-cli@kubernetes.io
+    name: sig-cli
+    description: |-
+      SIG cli general discussion group
+    owners:
+      - killen.bob@gmail.com # temporary to finish configuration
+      - aguclu@redhat.com
+      - eddiezane@gmail.com
+      - soltysh@gmail.com
+      - mpuckett259@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
 
   #
   # k8s-staging write access for SIG-owned subprojects
@@ -85,5 +107,5 @@ groups:
     members:
       - aguclu@redhat.com
       - eddiezane@gmail.com
-      - maszulik@redhat.com
+      - soltysh@gmail.com
       - mpuckett259@gmail.com

@@ -19,6 +19,44 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: sig-apps-leads@kubernetes.io
+    name: sig-apps-leads
+    description: |-
+      sig-apps leads
+    owners:
+      - chiachenk@google.com
+      - killen.bob@gmail.com # temporary to finish configuration
+      - kowens0826@gmail.com
+      - soltysh@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: sig-apps@kubernetes.io
+    name: sig-apps
+    description: |-
+      SIG apps general discussion group
+    owners:
+      - chiachenk@google.com
+      - killen.bob@gmail.com # temporary to finish configuration
+      - kowens0826@gmail.com
+      - soltysh@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: k8s-infra-staging-jobset@kubernetes.io
     name: k8s-infra-staging-jobset
     description: |-
