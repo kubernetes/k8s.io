@@ -139,7 +139,6 @@ kustomizations=(
     test-pods
     external-secrets
     kubecost
-    cluster-autoscaler
     karpenter
 )
 
