@@ -69,15 +69,6 @@ flux create source helm eks-charts \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/flux-system/flux-source-helm-eks-charts.yaml
 
-boilerplate > ${resources_dir}/kube-system/flux-hr-node-termination-handler.yaml
-flux create hr node-termination-handler \
-    --source=HelmRepository/eks-charts.flux-system \
-    --namespace=kube-system \
-    --chart=aws-node-termination-handler \
-    --chart-version=0.21.0 \
-    --interval=${sync_interval} \
-    --export >> ${resources_dir}/kube-system/flux-hr-node-termination-handler.yaml
-
 boilerplate > ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
 flux create source helm kubecost \
     --url https://kubecost.github.io/cost-analyzer \
