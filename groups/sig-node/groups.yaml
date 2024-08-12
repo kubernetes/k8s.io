@@ -53,6 +53,30 @@ groups:
       MembersCanPostAsTheGroup: "false"
       ReconcileMembers: "false"
 
+  - email-id: sig-node-ci@kubernetes.io
+    name: sig-node-ci
+    description: |-
+      SIG CI Working Group discussion group
+    owners:
+      # SIG Node as a default owner
+      - dawnchen@google.com
+      - decarr@redhat.com
+      - mpatel@redhat.com
+      - s.kanzhelev@gmail.com
+      - pehunt@redhat.com
+      # Add SIG Node CI group chairs explicitly when they are not in previous list
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: k8s-infra-staging-cri-tools@kubernetes.io
     name: k8s-infra-staging-cri-tools
     description: |-
