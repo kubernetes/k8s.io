@@ -239,6 +239,9 @@
     "sha256:62bbfe7fea7386a787a857ec211b9e7627599bb2a62587d077dfbe9347b0fedb": ["v0.0.9"]
 
 # Ingress NGINX: OpenTelemetry
+- name: opentelemetry-1.21.6
+  dmap:
+    "sha256:3d664a767564860e9a0ab08edd248a5a75f4247910edeb206177aef43f14fecf": ["v20240813-b933310d"]
 - name: opentelemetry-1.25.3
   dmap:
     "sha256:f7604ac0547ed64d79b98d92133234e66c2c8aade3c1f4809fed5eec1fb7f922": ["v20240813-b933310d"]
