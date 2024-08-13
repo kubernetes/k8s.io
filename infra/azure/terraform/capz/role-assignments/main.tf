@@ -22,10 +22,6 @@ variable "container_registry_scope" {
   type = string
 }
 
-variable "storage_account_scope" {
-  type = string
-}
-
 variable "subscription_id" {
   type = string
 }
@@ -43,7 +39,7 @@ resource "azurerm_role_assignment" "rg_contributor" {
 resource "azurerm_role_assignment" "storage_blob_data_contributor" {
   principal_id         = data.azuread_service_principal.az_service_principal.id
   role_definition_name = "Storage Blob Data Contributor"
-  scope                = var.storage_account_scope
+  scope                = "/subscriptions/${var.subscription_id}"
 }
 
 resource "azurerm_role_assignment" "acr_pull" {
