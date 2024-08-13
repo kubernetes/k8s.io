@@ -46,7 +46,6 @@ groups:
     description: |-
       sig-scalability leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - marcel.zieba@isovalent.com
       - shyam123.jvs95@gmail.com
       - wojtekt@google.com
@@ -63,7 +62,6 @@ groups:
     description: |-
       SIG scalability general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - marcel.zieba@isovalent.com
       - shyam123.jvs95@gmail.com
       - wojtekt@google.com

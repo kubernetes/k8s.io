@@ -12,7 +12,6 @@ groups:
     description: |-
       sig-docs leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - divya.mohan0209@gmail.com
       - kat.cosgrove@gmail.com
       - natalivlatko@gmail.com
@@ -31,7 +30,6 @@ groups:
     description: |-
       SIG docs general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - divya.mohan0209@gmail.com
       - kat.cosgrove@gmail.com
       - natalivlatko@gmail.com

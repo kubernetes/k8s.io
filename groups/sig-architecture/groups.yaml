@@ -27,7 +27,6 @@ groups:
       - davanum@gmail.com
       - decarr@redhat.com
       - jbelamaric@google.com
-      - killen.bob@gmail.com # temporary to finish configuration
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -44,7 +43,6 @@ groups:
       - davanum@gmail.com
       - decarr@redhat.com
       - jbelamaric@google.com
-      - killen.bob@gmail.com # temporary to finish configuration
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"

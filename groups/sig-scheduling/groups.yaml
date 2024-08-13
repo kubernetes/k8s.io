@@ -39,7 +39,6 @@ groups:
     description: |-
       SIG scheduling general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - acondor@google.com
       - ahg@google.com
       - hweicdl@gmail.com

@@ -25,7 +25,6 @@ groups:
     description: |-
       SIG autoscaling general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - guyjtempleton@gmail.com
       - maciekpytel@google.com
     settings:

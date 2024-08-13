@@ -5,7 +5,6 @@ groups:
     description: |-
       sig-security leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - ian@coldwater.io
       - tabitha.c.sable@gmail.com
     settings:
@@ -21,7 +20,6 @@ groups:
     description: |-
       SIG security general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - ian@coldwater.io
       - tabitha.c.sable@gmail.com
     settings:

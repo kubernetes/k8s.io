@@ -26,7 +26,6 @@ groups:
     description: |-
       SIG windows general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - amim.knabben@gmail.com
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com

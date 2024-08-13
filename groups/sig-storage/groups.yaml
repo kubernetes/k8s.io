@@ -24,7 +24,6 @@ groups:
     description: |-
       sig-storage leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - jsafrane@redhat.com
       - msau@google.com
       - saadali@google.com
@@ -42,7 +41,6 @@ groups:
     description: |-
       SIG storage general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - jsafrane@redhat.com
       - msau@google.com
       - saadali@google.com
