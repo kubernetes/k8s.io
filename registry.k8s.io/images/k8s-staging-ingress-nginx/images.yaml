@@ -121,6 +121,8 @@
     "sha256:adaa118c179c41cb33fb567004a1f0c71b8fce6bc13263efa63d42dddd5b4346": ["v20230527"]
     "sha256:4fd70b8bcb31c5bfcb7bfbbd9fe2f8357d6769e6ea86a0c63ae031850147d6d2": ["v20230721-40f94ef1b"]
     "sha256:48869cf72b0ceb1d8c82029f85961e423daf3ff8a04f4a455150000f90a90606": ["v20231208-4c39e6acc"]
+- name: cfssl
+  dmap:
     "sha256:fffd36e2f1c8fd485ec6fd24c6d55f0817b54352274293d2a247b8a0d924c5b0": ["v1.0.0"]
 - name: e2e-test-echo
   dmap:
@@ -152,6 +154,8 @@
     "sha256:e6f3ce6cf6d30dbaf02670982b63f231bd00c59eb8ccdd979fecb95764965754": ["v20230721-40f94ef1b"]
     "sha256:ed8ccdea261e9e055bf0cad80802f24e93d3b5c61cf61c94349e9fecf6720dbe": ["v20231011-8b53cabe0"]
     "sha256:729199afc882c75c0a2e01ff3408d9e2f150133d89fabc38c15e991db5834f3e": ["v20231208-4c39e6acc"]
+- name: fastcgi-helloserver
+  dmap:
     "sha256:bfcce5866d106450f41af15af868886c953c3661373f34aa6d99bcc6f44c6ba6": ["v1.0.1"]
 - name: e2e-test-httpbin
   dmap:
@@ -166,6 +170,8 @@
     "sha256:bd6728b770de8425dbbd7937bcadf27373a1ad3c103e4b00801f60d48059e39f": ["v20230626"]
     "sha256:a5df4671eb4c53a44fb83b55a0db9742d6088eb2a2453e0ed468b55da4ffa6df": ["v20230721-40f94ef1b"]
     "sha256:5519997c2b582c37358cae8956ca3d8855c669d91306adc1c155beb16e8d431b": ["v20231011-8b53cabe0"]
+- name: httpbun
+  dmap:
     "sha256:264371edd5b19ddc2da9333bb4d87c0ce3c0cf37c73c4adeb8bc641b872bc9da": ["v1.0.1"]
 - name: e2e-test-runner
   dmap:
@@ -316,6 +322,8 @@
     "sha256:59bd93fede2559c2b61d3baa5e9066e5b3ba71fa4faa06e368629ed287469b1d": ["v20230626"]
     "sha256:8506829ac6ef6ee74240e7ae62e8ad8085851d3281cc6b9d61a48cf3822daed7": ["v20230721-40f94ef1b"]
     "sha256:c2ca20775f41c0c89906dc74a31239d94ac48e84e7c6164affed41fe669cdaa5": ["v20231208-4c39e6acc"]
+- name: custom-error-pages
+  dmap:
     "sha256:d8ab7de384cf41bdaa696354e19f1d0efbb0c9ac69f8682ffc0cc008a252eb76": ["v1.0.1"]
 - name: opentelemetry
   dmap:
@@ -335,4 +343,6 @@
     "sha256:fd7ec835f31b7b37187238eb4fdad4438806e69f413a203796263131f4f02ed0": ["v20230527"]
     "sha256:1c8fa555f66d016b27e230f0b9b8c2fd7c8fe86fef342bdf5be609b392bf121f": ["v20230612"]
     "sha256:13bee3f5223883d3ca62fee7309ad02d22ec00ff0d7033e3e9aca7a9f60fd472": ["v20230721-3e2062ee5"]
+- name: opentelemetry-1.25.3
+  dmap:
     "sha256:f7604ac0547ed64d79b98d92133234e66c2c8aade3c1f4809fed5eec1fb7f922": ["v20240813-b933310d"]
