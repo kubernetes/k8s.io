@@ -4,7 +4,6 @@ teams:
     description: |-
       wg-structured-logging leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - liumengjiao.dev@gmail.com
       - patrick.ohly@intel.com
     settings:
@@ -20,7 +19,6 @@ teams:
     description: |-
       wg structured-logging general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - liumengjiao.dev@gmail.com
       - patrick.ohly@intel.com
     settings:

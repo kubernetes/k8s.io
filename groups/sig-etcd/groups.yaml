@@ -19,7 +19,6 @@ groups:
     description: |-
       sig-etcd leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - benjamin.ahrtr@gmail.com
       - jablair@redhat.com
       - siarkowicz@google.com

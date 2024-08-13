@@ -24,7 +24,6 @@ groups:
     description: |-
       sig-network leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - antonio.ojea.garcia@gmail.com
       - danwinship@redhat.com
       - michael.zappa@gmail.com
@@ -43,7 +42,6 @@ groups:
     description: |-
       SIG network general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - antonio.ojea.garcia@gmail.com
       - danwinship@redhat.com
       - michael.zappa@gmail.com

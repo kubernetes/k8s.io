@@ -24,7 +24,6 @@ groups:
     description: |-
       sig-auth leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - deads@redhat.com
       - liggitt@google.com
       - mikedanese@google.com
@@ -43,7 +42,6 @@ groups:
     description: |-
       SIG auth general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - deads@redhat.com
       - liggitt@google.com
       - mikedanese@google.com

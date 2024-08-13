@@ -4,7 +4,6 @@ teams:
     description: |-
       wg-policy leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - andy@suderman.dev
       - jim@nirmata.com
       - poonamlamba83@gmail.com
@@ -21,7 +20,6 @@ teams:
     description: |-
       wg policy general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - andy@suderman.dev
       - jim@nirmata.com
       - poonamlamba83@gmail.com

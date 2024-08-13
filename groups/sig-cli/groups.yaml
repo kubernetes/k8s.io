@@ -25,7 +25,6 @@ groups:
     description: |-
       SIG cli general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - aguclu@redhat.com
       - eddiezane@gmail.com
       - soltysh@gmail.com

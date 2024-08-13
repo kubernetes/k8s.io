@@ -24,7 +24,6 @@ groups:
     description: |-
       sig-cloud-provider leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - bridget@kromhout.org
       - msm@opbstudios.com
       - wfender@google.com
@@ -41,7 +40,6 @@ groups:
     description: |-
       SIG cloud provider general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"

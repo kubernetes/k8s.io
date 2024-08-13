@@ -310,7 +310,6 @@ groups:
     description: |-
       SIG release general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - adolfo.garcia@uservers.net
       - ctadeu@gmail.com
       - gveronicalg@gmail.com

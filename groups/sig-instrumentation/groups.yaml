@@ -24,7 +24,6 @@ groups:
     description: |-
       sig-instrumentation leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - dashpole@google.com
       - dgrisonn@redhat.com
       - hankang@google.com
@@ -42,12 +41,10 @@ groups:
     description: |-
       SIG instrumentation general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - dashpole@google.com
       - dgrisonn@redhat.com
       - hankang@google.com
       - rexagod@gmail.com
-
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"

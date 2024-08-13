@@ -37,7 +37,6 @@ groups:
     description: |-
       SIG node general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - dawnchen@google.com
       - decarr@redhat.com
       - mpatel@redhat.com

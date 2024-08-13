@@ -4,7 +4,6 @@ teams:
     description: |-
       wg-data-protection leads
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - xiangqian@google.com
       - xingyang105@gmail.com
     settings:
@@ -20,7 +19,6 @@ teams:
     description: |-
       wg data-protection general discussion group
     owners:
-      - killen.bob@gmail.com # temporary to finish configuration
       - xiangqian@google.com
       - xingyang105@gmail.com
     settings:
