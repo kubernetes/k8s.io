@@ -31,6 +31,7 @@ groups:
       - decarr@redhat.com
       - mpatel@redhat.com
       - s.kanzhelev@gmail.com
+      - pehunt@redhat.com
 
   - email-id: sig-node@kubernetes.io
     name: sig-node
@@ -41,6 +42,7 @@ groups:
       - decarr@redhat.com
       - mpatel@redhat.com
       - s.kanzhelev@gmail.com
+      - pehunt@redhat.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
