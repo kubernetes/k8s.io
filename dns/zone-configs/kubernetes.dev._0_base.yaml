@@ -10,3 +10,8 @@
 www:
   type: CNAME
   value: kubernetes-contributor.netlify.app.
+
+# Prove that we own these github orgs. sig-contributor-experience
+_gh-kubernetes-e:
+  type: TXT
+  value: 41ff86be97

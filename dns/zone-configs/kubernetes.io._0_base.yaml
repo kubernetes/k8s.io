@@ -72,24 +72,9 @@ _acme-challenge.docs:
   value: 0.0.0.0
 
 # Prove that we own these github orgs. sig-contributor-experience
-_github-challenge-kubernetes:
+_gh-kubernetes-e:
   type: TXT
-  value: 96af7368f8
-_github-challenge-kubernetes-client:
-  type: TXT
-  value: 1b788a0e7d
-_github-challenge-kubernetes-csi:
-  type: TXT
-  value: f2ad88f040
-_github-challenge-kubernetes-incubator:
-  type: TXT
-  value: c450708897
-_github-challenge-kubernetes-retired:
-  type: TXT
-  value: 3eb0291308
-_github-challenge-kubernetes-sigs:
-  type: TXT
-  value: 745fa33033
+  value: a431ad84e1
 
 #TODO: what is this?
 rnl6zogsrrhp:
