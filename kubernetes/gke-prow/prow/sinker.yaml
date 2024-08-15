@@ -172,12 +172,6 @@ rules:
     - events
     verbs:
     - create
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: "sinker"
-rules:
   - apiGroups:
       - ""
     resources:

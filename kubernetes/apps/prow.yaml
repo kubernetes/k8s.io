@@ -22,8 +22,9 @@ spec:
         repoURL: https://github.com/kubernetes/k8s.io
         targetRevision: main
       syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+        # WILL BE REENABLED AFTER MIGRATION
+        # automated:
+        #   prune: true
+        #   selfHeal: true
         syncOptions:
           - CreateNamespace=true
