@@ -9,8 +9,8 @@ spec:
   project: default
   source:
     path: kubernetes/gke-utility/argocd
-    repoURL: https://github.com/borg-land/k8s.io
-    targetRevision: utility-dev
+    repoURL: https://github.com/kubernetes/k8s.io
+    targetRevision: main
   syncPolicy:
     automated:
       prune: false

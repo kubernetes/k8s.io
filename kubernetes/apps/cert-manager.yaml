@@ -25,8 +25,8 @@ spec:
             releaseName: cert-manager
             valueFiles:
             - $values/kubernetes/{{ .name }}/helm/cert-manager.yaml
-        - repoURL: 'https://github.com/borg-land/k8s.io.git'
-          targetRevision: utility-dev
+        - repoURL: 'https://github.com/kubernetes/k8s.io.git'
+          targetRevision: main
           ref: values
       syncPolicy:
         automated:
