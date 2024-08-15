@@ -89,45 +89,9 @@ variable "cluster_version" {
   nullable    = false
 }
 
-variable "node_group_version_us_east_2a" {
-  type        = string
-  description = "Kubernetes version of the EKS-managed node group in US East 2a"
-  nullable    = false
-}
-
-variable "node_group_version_us_east_2b" {
-  type        = string
-  description = "Kubernetes version of the EKS-managed node group in US East 2b"
-  nullable    = false
-}
-
-variable "node_group_version_us_east_2c" {
-  type        = string
-  description = "Kubernetes version of the EKS-managed node group in US East 2c"
-  nullable    = false
-}
-
 variable "node_group_version_stable" {
   type        = string
   description = "Kubernetes version of the EKS-managed node group (stable)"
-  nullable    = false
-}
-
-variable "node_instance_types_us_east_2a" {
-  type        = list(string)
-  description = "Instance sizes to use for EKS node group in US East 2a"
-  nullable    = false
-}
-
-variable "node_instance_types_us_east_2b" {
-  type        = list(string)
-  description = "Instance sizes to use for EKS node group in US East 2b"
-  nullable    = false
-}
-
-variable "node_instance_types_us_east_2c" {
-  type        = list(string)
-  description = "Instance sizes to use for EKS node group in US East 2c"
   nullable    = false
 }
 
@@ -140,60 +104,6 @@ variable "node_instance_types_stable" {
 variable "node_volume_size" {
   type        = number
   description = "Volume size per node to use for EKS node group"
-  nullable    = false
-}
-
-variable "node_min_size_us_east_2a" {
-  type        = number
-  description = "Minimum number of nodes in the EKS node group in US East 2a"
-  nullable    = false
-}
-
-variable "node_min_size_us_east_2b" {
-  type        = number
-  description = "Minimum number of nodes in the EKS node group in US East 2b"
-  nullable    = false
-}
-
-variable "node_min_size_us_east_2c" {
-  type        = number
-  description = "Minimum number of nodes in the EKS node group in US East 2c"
-  nullable    = false
-}
-
-variable "node_max_size_us_east_2a" {
-  type        = number
-  description = "Maximum number of nodes in the EKS node group in US East 2a"
-  nullable    = false
-}
-
-variable "node_max_size_us_east_2b" {
-  type        = number
-  description = "Maximum number of nodes in the EKS node group in US East 2b"
-  nullable    = false
-}
-
-variable "node_max_size_us_east_2c" {
-  type        = number
-  description = "Maximum number of nodes in the EKS node group in US East 2c"
-  nullable    = false
-}
-
-variable "node_desired_size_us_east_2a" {
-  type        = number
-  description = "Desired number of nodes in the EKS node group in US East 2a"
-  nullable    = false
-}
-
-variable "node_desired_size_us_east_2b" {
-  type        = number
-  description = "Desired number of nodes in the EKS node group in US East 2b"
-  nullable    = false
-}
-
-variable "node_desired_size_us_east_2c" {
-  type        = number
-  description = "Desired number of nodes in the EKS node group in US East 2c"
   nullable    = false
 }
 
@@ -242,9 +152,4 @@ variable "additional_node_group_tags_stable" {
   type     = map(string)
   default  = {}
   nullable = false
-}
-
-variable "cluster_autoscaler_version" {
-  type        = string
-  description = "Cluster Autoscaler version to use (must match the EKS version)"
 }

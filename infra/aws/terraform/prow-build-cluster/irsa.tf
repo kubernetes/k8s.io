@@ -77,26 +77,6 @@ module "aws_load_balancer_controller_irsa" {
   tags = local.tags
 }
 
-# IAM policy used for Cluster Autoscaler.
-module "cluster_autoscaler_irsa" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.30"
-
-  role_name_prefix                 = "AUTOSCALER-IRSA"
-  attach_cluster_autoscaler_policy = true
-  cluster_autoscaler_cluster_ids   = [module.eks.cluster_name]
-  role_permissions_boundary_arn    = data.aws_iam_policy.eks_resources_permission_boundary.arn
-
-  oidc_providers = {
-    main = {
-      provider_arn               = module.eks.oidc_provider_arn
-      namespace_service_accounts = ["kube-system:cluster-autoscaler"]
-    }
-  }
-
-  tags = local.tags
-}
-
 # IAM policy used for Secrets Manager and accessing secrets.
 # Example policy, uncomment and modify as needed.
 module "secrets_manager_irsa" {

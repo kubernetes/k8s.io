@@ -34,31 +34,10 @@ eks_cluster_viewers = [
 
 cluster_name               = "prow-build-cluster"
 cluster_version            = "1.28"
-cluster_autoscaler_version = "v1.28.0"
 
-node_group_version_us_east_2a = "1.28"
-node_group_version_us_east_2b = "1.28"
-node_group_version_us_east_2c = "1.28"
-node_group_version_stable     = "1.28"
-
-node_instance_types_us_east_2a = ["r5ad.4xlarge"]
-node_instance_types_us_east_2b = ["r5ad.4xlarge"]
-node_instance_types_us_east_2c = ["r5ad.4xlarge"]
-node_instance_types_stable     = ["r5ad.2xlarge"]
-
-node_min_size_us_east_2a     = 0
-node_max_size_us_east_2a     = 1
-node_desired_size_us_east_2a = 0
-
-node_min_size_us_east_2b     = 0
-node_max_size_us_east_2b     = 1
-node_desired_size_us_east_2b = 0
-
-node_min_size_us_east_2c     = 0
-node_max_size_us_east_2c     = 1
-node_desired_size_us_east_2c = 0
-
-node_desired_size_stable = 3
+node_group_version_stable  = "1.28"
+node_instance_types_stable = ["r5ad.2xlarge"]
+node_desired_size_stable   = 3
 
 node_taints_stable = [
   {
