@@ -33,6 +33,8 @@ The current configuraiotn for Karpenter NodePool uses `amiFamily` setting. As a 
 > [!CAUTION]
 > If you need to upgrade already provisioned nodes immediately, you can manually drain the node(s), Karpenter will automatically remove the node due to emptiness.
 >
+> Please use this as the very last resort, because it will terminate running jobs and leak cloud resources. It's strongly recommended to cordon the node and wait for jobs to finish.
+>
 > <details>
 >  <summary>Here is an example</summary>
 >
