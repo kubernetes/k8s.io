@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+data:
+  url: https://argo.k8s.io
+  application.instanceLabelKey: infra.k8s.io/instance
+  resource.compareoptions: |
+    ignoreAggregatedRoles: true
+  resource.customizations: |
+    admissionregistration.k8s.io/MutatingWebhookConfiguration:
+      ignoreDifferences: |
+        jqPathExpressions:
+        - '.webhooks[]?.clientConfig.caBundle'
+  kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-alpha-plugins
+  dex.config: |
+    connectors:
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          clientID: $dex.github.clientId
+          clientSecret: $dex.github.clientSecret
+          orgs:
+          - name: kubernetes
+          useLoginAsID: true
+          loadAllGroups: true
+          teamNameField: slug

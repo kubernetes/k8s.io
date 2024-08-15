@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cert-manager
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            clusterType: 'utility'
+  template:
+    metadata:
+      name: 'cert-manager-{{ .name }}'
+    spec:
+      destination:
+        namespace: cert-manager
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: cert-manager
+          repoURL: 'https://charts.jetstack.io'
+          targetRevision: v1.14.5
+          helm:
+            releaseName: cert-manager
+            valueFiles:
+            - $values/kubernetes/{{ .name }}/helm/cert-manager.yaml
+        - repoURL: 'https://github.com/kubernetes/k8s.io.git'
+          targetRevision: main
+          ref: values
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
