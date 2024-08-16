@@ -68,24 +68,15 @@ invalid.registry:
   value: 0.0.0.0
 
 # Prove that we own these github orgs. sig-contributor-experience
-_github-challenge-kubernetes:
+_gh-kubernetes-e:
   type: TXT
-  value: 8d02d39186
-_github-challenge-kubernetes-client:
+  value: 37ad6e2887
+_gh-kubernetes-e.sigs:
   type: TXT
-  value: 8135eb1976
-_github-challenge-kubernetes-csi:
+  value: f65211c604
+_gh-kubernetes-e.git:
   type: TXT
-  value: 5aa2511ab7
-_github-challenge-kubernetes-incubator:
-  type: TXT
-  value: cc457b8e52
-_github-challenge-kubernetes-retired:
-  type: TXT
-  value: b36f0d3bca
-_github-challenge-kubernetes-sigs:
-  type: TXT
-  value: c576f646fc
+  value: f574674cbc
 
 # Download sites
 apt:

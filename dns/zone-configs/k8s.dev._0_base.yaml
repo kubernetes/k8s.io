@@ -11,3 +11,8 @@ www:
 cdn.dl-sandbox:
   type: TXT
   value: "fastly-domain-delegation-fddelt714381-11-15-23"
+
+# Prove that we own these github orgs. sig-contributor-experience
+_gh-kubernetes-e:
+  type: TXT
+  value: 3e7f816ba3

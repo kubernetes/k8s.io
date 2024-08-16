@@ -19,6 +19,11 @@
     - v=spf1 a include:_spf.google.com ~all
     - google-site-verification=mlJyal77dMkFPCyQuC52nzM-F4EIMHSOqgZTorDys1g
 
+# Prove that we own these github orgs. sig-contributor-experience
+_gh-kubernetes-e:
+  - type: TXT
+    value: 5201e8d7d2
+
 www:
   - type: CNAME
     value: etcd.netlify.com.
