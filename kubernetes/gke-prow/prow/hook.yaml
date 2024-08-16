@@ -51,7 +51,7 @@ spec:
         env:
         # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
         - name: KUBECONFIG
-          value: "/etc/kubeconfig/config:/etc/kubeconfig-build-test-infra-trusted/kubeconfig:/etc/kubeconfig-build-k8s-prow-builds/kubeconfig:/etc/kubeconfig-build-rules-k8s/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig::/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig"
+          value: "/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig"
         # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
         - name: AWS_ROLE_ARN
           value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
@@ -88,17 +88,11 @@ spec:
         - name: unsplash-api
           mountPath: /etc/unsplash-api
           readOnly: true
-        - name: kubeconfig
-          mountPath: /etc/kubeconfig
+        - mountPath: /etc/kubeconfig-k8s-infra-prow-build
+          name: kubeconfig-k8s-infra-prow-build
           readOnly: true
-        - mountPath: /etc/kubeconfig-build-test-infra-trusted
-          name: kubeconfig-build-test-infra-trusted
-          readOnly: true
-        - mountPath: /etc/kubeconfig-build-k8s-prow-builds
-          name: kubeconfig-build-k8s-prow-builds
-          readOnly: true
-        - mountPath: /etc/kubeconfig-build-rules-k8s
-          name: kubeconfig-build-rules-k8s
+        - mountPath: /etc/kubeconfig-k8s-infra-prow-build-trusted
+          name: kubeconfig-k8s-infra-prow-build-trusted
           readOnly: true
         - mountPath: /etc/kubeconfig-eks-prow-build-cluster
           name: kubeconfig-eks-prow-build-cluster
@@ -148,22 +142,14 @@ spec:
       - name: unsplash-api
         secret:
           secretName: unsplash-api-key
-      - name: kubeconfig
+      - name: kubeconfig-k8s-infra-prow-build
         secret:
           defaultMode: 420
-          secretName: kubeconfig
-      - name: kubeconfig-build-test-infra-trusted
+          secretName: kubeconfig-k8s-infra-prow-build
+      - name: kubeconfig-k8s-infra-prow-build-trusted
         secret:
           defaultMode: 420
-          secretName: kubeconfig-build-test-infra-trusted
-      - name: kubeconfig-build-k8s-prow-builds
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-build-k8s-prow-builds
-      - name: kubeconfig-build-rules-k8s
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-build-rules-k8s
+          secretName: kubeconfig-k8s-infra-prow-build-trusted
       - name: kubeconfig-eks-prow-build-cluster
         secret:
           defaultMode: 420
@@ -205,6 +191,8 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: "hook"
+  annotations:
+    iam.gke.io/gcp-service-account: prow-control-plane@k8s-infra-prow.iam.gserviceaccount.com
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
