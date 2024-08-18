@@ -53,7 +53,7 @@
   "defaultMaxPodsConstraint": {
     "maxPodsPerNode": "110"
   },
-  "endpoint": "34.68.58.204",
+  "endpoint": "35.226.73.60",
   "enterpriseConfig": {
     "clusterTier": "STANDARD"
   },
@@ -333,8 +333,8 @@
     }
   ],
   "privateClusterConfig": {
-    "privateEndpoint": "10.107.3.218",
-    "publicEndpoint": "34.68.58.204"
+    "privateEndpoint": "10.107.0.14",
+    "publicEndpoint": "35.226.73.60"
   },
   "releaseChannel": {
     "channel": "REGULAR"
