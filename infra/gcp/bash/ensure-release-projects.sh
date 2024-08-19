@@ -194,10 +194,8 @@ function ensure_kubernetes_ci_gcs_bucket() {
 }
 
 function special_case_kubernetes_ci_buckets() {
-  # community-owned equivalents to gs://kubernetes-release-{dev,pull}
+  # community-owned equivalent to gs://kubernetes-release-dev
   ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-dev"
-  # TODO(https://github.com/kubernetes/test-infra/issues/18789) remove this bucket when no longer needed
-  ensure_kubernetes_ci_gcs_bucket "k8s-release" "gs://k8s-release-pull" 14
 }
 
 color 3 "Special case: ensuring GCS buckets for kubernetes CI artifacts exist"
