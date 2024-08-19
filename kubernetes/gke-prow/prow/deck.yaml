@@ -164,7 +164,6 @@ spec:
               expirationSeconds: 86400
               path: token
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -183,7 +182,6 @@ spec:
   - name: metrics
     port: 9090
     protocol: TCP
-  type: NodePort
 ---
 apiVersion: v1
 kind: ServiceAccount

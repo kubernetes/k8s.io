@@ -173,7 +173,6 @@ kind: Service
 metadata:
   labels:
     app: hook
-  namespace: default
   name: hook
 spec:
   selector:
@@ -185,7 +184,6 @@ spec:
   - name: metrics
     port: 9090
     protocol: TCP
-  type: NodePort
 ---
 apiVersion: v1
 kind: ServiceAccount
