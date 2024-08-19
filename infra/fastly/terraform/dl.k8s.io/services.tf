@@ -15,7 +15,8 @@ limitations under the License.
 */
 
 locals {
-  domain_name = "cdn.dl.k8s.io"
+  domain_name     = "cdn.dl.k8s.io"
+  shield_location = "chi-il-us"
 }
 
 resource "fastly_service_vcl" "files" {
@@ -38,14 +39,20 @@ resource "fastly_service_vcl" "files" {
     ssl_cert_hostname = "storage.googleapis.com"
     ssl_sni_hostname  = "storage.googleapis.com"
 
-    override_host = "${var.bucket}.storage.googleapis.com"
+    override_host = "${var.bucket_name}.storage.googleapis.com"
+
+    /*
+    Matching the region of the origin.
+    Full list: https://www.fastly.com/documentation/guides/concepts/shielding/#choosing-a-shield-location
+    */
+    shield = local.shield_location
 
     connect_timeout       = 5000  # milliseconds
     between_bytes_timeout = 15000 # milliseconds
     error_threshold       = 5
   }
 
-  healthcheck {
+  /*   healthcheck {
     name = "GCS Health"
 
     host           = "${var.bucket}.storage.googleapis.com"
@@ -56,15 +63,15 @@ resource "fastly_service_vcl" "files" {
     threshold      = 2
     initial        = 2
     window         = 4
-  }
+  } */
 
   logging_bigquery {
-    dataset = "fastly_bigquery_cdn_dl_k8s_io"
-    project_id = "k8s-infra-public-pii"
-    name = "BigQuery logging"
-    table = "fastly_bigquery_cdn_dl_k8s_io_logs"
+    dataset      = "fastly_bigquery_cdn_dl_k8s_io"
+    project_id   = "k8s-infra-public-pii"
+    name         = "BigQuery logging"
+    table        = "fastly_bigquery_cdn_dl_k8s_io_logs"
     account_name = "fastly-bigquery-logging-sa"
-    email = "fastly-logging@datalog-bulleit-9e86.iam.gserviceaccount.com"
+    email        = "fastly-logging@datalog-bulleit-9e86.iam.gserviceaccount.com"
 
     format = "%%{strftime(\\{\"%Y-%m-%dT%H:%M:%S%z\"\\}, time.start)}V|%%{client.as.number}V|%%{if(fastly.ff.visits_this_service == 0, \"true\", \"false\")}V"
   }
@@ -89,63 +96,6 @@ resource "fastly_service_vcl" "files" {
     source      = "\"*\""
   }
 
-  # Remove Google cookies from the origin
-  header {
-    destination = "http.x-goog-generation"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-generation"
-  }
-
-  header {
-    destination = "http.x-goog-metageneration"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-metageneration"
-  }
-
-  header {
-    destination = "http.x-guploader-uploadid"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-guploader-uploadid"
-  }
-
-  header {
-    destination = "http.x-goog-hash"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-hash"
-  }
-
-  header {
-    destination = "http.x-goog-meta-goog-reserved-file-mtime"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-meta-goog-reserved-file-mtime"
-  }
-
-  header {
-    destination = "http.x-goog-storage-class"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-storage-class"
-  }
-
-  header {
-    destination = "http.x-goog-stored-content-encoding"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-stored-content-encoding"
-  }
-
-  header {
-    destination = "http.x-goog-stored-content-length"
-    type        = "cache"
-    action      = "delete"
-    name        = "remove x-goog-stored-content-length"
-  }
-
   # Do not cache 'not found' & authenticated requests:
   condition {
     type      = "CACHE"
@@ -162,9 +112,21 @@ resource "fastly_service_vcl" "files" {
   }
 
   request_setting {
-    name = "Force TLS"
+    name      = "Force TLS"
     force_ssl = true
-    xff = "leave"
+    xff       = "leave"
+  }
+
+  snippet {
+    name = "Authenticate to GCS requests"
+    type = "init"
+    content = templatefile("${path.module}/vcl/gcs-auth.vcl", {
+      access_key     = data.google_secret_manager_secret_version_access.gcs_reader_access_key.secret_data
+      secret_key     = data.google_secret_manager_secret_version_access.gcs_reader_secret_key.secret_data
+      backend_bucket = var.bucket_name
+      region         = var.region
+      }
+    )
   }
 
   vcl {
@@ -184,8 +146,4 @@ resource "fastly_service_vcl" "files" {
 resource "fastly_tls_subscription" "files" {
   domains               = [for domain in fastly_service_vcl.files.domain : domain.name]
   certificate_authority = "lets-encrypt"
-}
-
-output "files_managed_dns_challenge" {
-  value = fastly_tls_subscription.files.managed_dns_challenges
 }

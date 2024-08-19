@@ -1,5 +1,5 @@
 /*
-Copyright 2023 The Kubernetes Authors.
+Copyright 2024 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "bucket_name" {
-  type    = string
-  default = "767373bbdcb8270361b96548387bf2a9ad0d48758c35"
+data "google_secret_manager_secret_version_access" "gcs_reader_access_key" {
+  secret  = "fastly_reader_sa_access_key"
+  project = "k8s-infra-releases-prod"
 }
 
-variable "region" {
-  type    = string
-  default = "us-central1"
+data "google_secret_manager_secret_version_access" "gcs_reader_secret_key" {
+  secret  = "fastly_reader_sa_secret_key"
+  project = "k8s-infra-releases-prod"
 }
