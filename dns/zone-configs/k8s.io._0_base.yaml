@@ -260,6 +260,10 @@ prow:
   type: A
   ttl: 600 # this has needed to change in the past
   value: 35.186.196.185
+# prow-certificates in k8s-infra-prow project
+_acme-challenge.prow:
+  type: CNAME
+  value: ec952040-1ea9-43db-b382-e0fde0cddbb6.16.authorize.certificatemanager.goog.
 hooks.prow:
   - type: A
     ttl: 600 # this has needed to change in the past
