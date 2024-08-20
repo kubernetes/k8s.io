@@ -57,7 +57,7 @@ groups:
       - security@kinvolk.io
       - security@loodse.com
       - security@platform9.com
-      - security@rancher.com
+      - security-rancher@suse.com
       - security@ubuntu.com
       - VMware.psirt@broadcom.com
       - vulnerabilityreports@cloudfoundry.org
