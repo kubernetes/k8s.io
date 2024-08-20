@@ -1451,3 +1451,66 @@
   dmap:
     "sha256:2a44fecd5d59e36a20c61c162a334010eaa008086f70bcd16c754f4e5a5fd2f8": ["1.30.0-alpha.1"]
 
+
+# 1.30.0-beta.1
+- name: dns-controller
+  dmap:
+    "sha256:6428f5fe10952bcc2666116cea3e8d22961d5435bc9e5337faba2a4454d33ad9": ["1.30.0-beta.1"]
+- name: kops-controller
+  dmap:
+    "sha256:8e4179924051c1b9c2d5139817439a5d4bb1b22a5572ea3a555c3b996a8135f9": ["1.30.0-beta.1"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:e92dc9b25729b792ea8ac455db30cafdfb8fd7b50008098011aba41ad5ad5ccb": ["1.30.0-beta.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:499580f6ff52b4f72eb782d2a450dda9fad87b1ecdaf5cddbfc25f1219f1a761": ["1.30.0-beta.1"]
+
+
+# 1.28.6
+
+
+# 1.28.7
+- name: dns-controller
+  dmap:
+    "sha256:54dfb5d797a406b63d775ed9ff7cf4cf3de61c6851b57029c4e931237afe35b7": ["1.28.7"]
+- name: kops-controller
+  dmap:
+    "sha256:7cb8aadb3900e5dc37d5d4a3d58d50b19d6aa8d324bbd94b0a3bafb02d33f30b": ["1.28.7"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:af7cae1feae88a335104df4dea19f9967394f84e77331ee49f29a58565ef70e5": ["1.28.7"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:4e4d66b30eae370d6de4f49528bea8b32af34790929a10ee9e7a7251e9690e48": ["1.28.7"]
+
+
+# 1.29.2
+- name: dns-controller
+  dmap:
+    "sha256:178d03d5295795e467b0c5e98175fa736548c448074f4dd3468ecfcde56a146c": ["1.29.2"]
+- name: kops-controller
+  dmap:
+    "sha256:f0eabbe064ee448aeea91ed4f7d1dda36d31b0bdb3e61a8a7f3670cd2228b59b": ["1.29.2"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:be3411a942675e353e88bebe86acdb306f1ac878ed285269ffe0e693dd8ca6e9": ["1.29.2"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:37f65d45bd31dac6a81b7b83d18965a8b47c96942d4c40e873dbd844d0aad574": ["1.29.2"]
+
+
+# 1.30.0
+- name: dns-controller
+  dmap:
+    "sha256:c7b84dc295c2a4dd856e29d537eedf8d89f5af7648ef001111e36dafaa75ec95": ["1.30.0"]
+- name: kops-controller
+  dmap:
+    "sha256:aa80bcde9f125d0a9e3da9b3df08dc7ce60377c1a6c45a4dfa5973afdddfd307": ["1.30.0"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:47f58609805a7e38b5375d4cba532c3733febf811847767b37feb97a2bf7e37b": ["1.30.0"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:96175e40ebee80ad7698a245ef84e3a9bef5e73d7d49de078208cc19b7c13a55": ["1.30.0"]
+

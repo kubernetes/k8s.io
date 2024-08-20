@@ -20,9 +20,35 @@ groups:
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
     owners:
     - amerai@google.com
+    - antonio.ojea.garcia@gmail.com
+    - bentheelder@google.com
     - bpratt@redhat.com
     - mcqueenorama@gmail.com
+    - patrick.ohly@intel.com
+
+  - email-id: sig-testing@kubernetes.io
+    name: sig-testing
+    description: |-
+      SIG testing general discussion group
+    owners:
+    - killen.bob@gmail.com # temporary to finish configuration
+    - amerai@google.com
     - antonio.ojea.garcia@gmail.com
+    - bentheelder@google.com
+    - bpratt@redhat.com
+    - mcqueenorama@gmail.com
+    - patrick.ohly@intel.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
 
   #
   # sig-testing k8s-staging write access

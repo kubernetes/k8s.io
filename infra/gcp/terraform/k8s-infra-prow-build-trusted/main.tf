@@ -67,6 +67,11 @@ module "prow_build_nodepool" {
   cluster_name    = module.prow_build_cluster.cluster.name
   location        = module.prow_build_cluster.cluster.location
   name            = "trusted-pool1"
+  node_locations = [
+    "us-central1-a",
+    "us-central1-b",
+    "us-central1-f",
+  ]
   initial_count   = 1
   min_count       = 1
   max_count       = 6

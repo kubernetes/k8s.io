@@ -1,4 +1,39 @@
 groups:
+
+  - email-id: sig-security-leads@kubernetes.io
+    name: sig-security-leads
+    description: |-
+      sig-security leads
+    owners:
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: sig-security@kubernetes.io
+    name: sig-security
+    description: |-
+      SIG security general discussion group
+    owners:
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: security-tooling-private@kubernetes.io
     name: security-tooling-private
     description: |-

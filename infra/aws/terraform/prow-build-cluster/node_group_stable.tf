@@ -65,8 +65,6 @@ locals {
     ebs_optimized     = true
     enable_monitoring = true
 
-    key_name = aws_key_pair.eks_nodes.key_name
-
     enclave_options = {
       enabled = true
     }

@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "670598002495-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-kas-network-proxy/serviceAccounts/670598002495-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "103039291113834705963",
+  "projectId": "k8s-staging-kas-network-proxy",
+  "uniqueId": "103039291113834705963"
+}

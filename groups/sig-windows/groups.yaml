@@ -15,11 +15,34 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
+      - amim.knabben@gmail.com
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
-      - jayunit100.apache@gmail.com
       - jsturtevant@gmail.com
       - marosset@microsoft.com
+
+  - email-id: sig-windows@kubernetes.io
+    name: sig-windows
+    description: |-
+      SIG windows general discussion group
+    owners:
+      - amim.knabben@gmail.com
+      - aravindh.foss@pm.me
+      - cbelu@cloudbasesolutions.com
+      - jsturtevant@gmail.com
+      - marosset@microsoft.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
 
   #
   # k8s-staging write access for SIG-owned subprojects

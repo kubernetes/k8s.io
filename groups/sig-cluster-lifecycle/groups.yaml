@@ -39,6 +39,17 @@ groups:
       - justinsb@google.com
       - pgrifel@gmail.com
 
+  - email-id: k8s-infra-staging-etcd-manager@kubernetes.io
+    name: k8s-infra-staging-etcd-manager
+    description: |-
+      ACL for staging etcd-manager artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+      - chacman@microsoft.com
+      - pgrifel@gmail.com
+
   - email-id: sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-alerts
     description: |-
@@ -196,6 +207,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - emacchi@redhat.com
       - jichenjc@cn.ibm.com
       - lennart.jern@est.tech
       - mbooth@redhat.com
@@ -214,6 +226,7 @@ groups:
       MessageModerationLevel: "MODERATE_ALL_MESSAGES"
       ReconcileMembers: "false"
     owners:
+      - emacchi@redhat.com
       - jichenjc@cn.ibm.com
       - lennart.jern@est.tech
       - mbooth@redhat.com

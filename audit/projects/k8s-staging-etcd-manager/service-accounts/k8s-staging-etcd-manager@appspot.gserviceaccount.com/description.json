@@ -1,0 +1,8 @@
+{
+  "displayName": "App Engine default service account",
+  "email": "k8s-staging-etcd-manager@appspot.gserviceaccount.com",
+  "name": "projects/k8s-staging-etcd-manager/serviceAccounts/k8s-staging-etcd-manager@appspot.gserviceaccount.com",
+  "oauth2ClientId": "117900718334442835373",
+  "projectId": "k8s-staging-etcd-manager",
+  "uniqueId": "117900718334442835373"
+}

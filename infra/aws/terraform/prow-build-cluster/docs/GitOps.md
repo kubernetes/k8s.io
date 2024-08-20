@@ -13,15 +13,35 @@ The `flux-system` namespace contains all GitOps Tool Kit components, Flux Source
 
 ## Setting up EKS Cluster
 
-* To install Flux GitOps Tool Kit components, run the following command:
+* First, update the Flux GitOps Tool Kit (GOTK) components and regenerate all files used by Flux:
+    ```bash
+    make flux-install-with-gotk
+    ```
+
+* Once all files are updated, push them to GitHub. Once the PR is merged, proceed with this guide
+
+* Deploy the GOTK components:
     ```bash
     make flux-install
     ```
 
-* To deploy Kustomizations, use the command:
+* Finally, deploy Kustomizations using the following command:
     ```bash
     make flux-apply-kustomizations
     ```
+
+Once Kustomizations are deployed, Flux will take care of deploying everything else managed by Flux.
+
+## Updating Flux
+
+To update Flux, i.e. Flux GitOps Tool Kit (GOTK) components, run the following command:
+
+```bash
+make flux-update-with-gotk
+```
+
+Then commit the changes and push them to GitHub. Once the appropriate PR is merged, the changes
+will be applied automatically.
 
 ## Interacting with Flux
 
@@ -45,8 +65,8 @@ If you need to modify any existing resources in the [resources directory](../res
     1. Locate the section of the script responsible for creating the `eks-charts` Helm release.
     2. Use the same pattern to create a new Helm source.
 3. Create a new Helm release.
-    1. Locate the section of the script responsible for creating the Helm release for `node-termination-handler`.
-    2. Based on the `node-termination-handler` example, extend the script with your Helm release.
+    1. Locate the section of the script responsible for creating the Helm release for `karpenter`.
+    2. Based on the `karpenter` example, extend the script with your Helm release.
 4. Regenerate the Helm releases by running: `make flux-update`
 5. To deploy your Helm Release, you need to add it to an exiting Kustomization or [create a new one](./GitOps.md#adding-new-kustomization).
 6. Commit your changes and wait for your resources to appear in the cluster. Track the progess of reconciliation on a dedicated [Grafana Dashboard Panel](https://monitoring-eks.prow.k8s.io/d/flux-cluster/flux-cluster-stats?viewPanel=33)

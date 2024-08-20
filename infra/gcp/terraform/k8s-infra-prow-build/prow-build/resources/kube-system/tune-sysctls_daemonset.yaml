@@ -34,7 +34,7 @@ spec:
             sysctl -w fs.inotify.max_user_instances=8192
             sleep 10
           done
-        image: gcr.io/k8s-prow/alpine:latest
+        image: gcr.io/k8s-staging-test-infra/alpine:latest
         imagePullPolicy: IfNotPresent
         resources: {}
         securityContext:

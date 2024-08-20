@@ -34,6 +34,12 @@
     },
     {
       "members": [
+        "serviceAccount:1016684617474-compute@developer.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
         "serviceAccount:service-1016684617474@gcp-sa-pubsub.iam.gserviceaccount.com"
       ],
       "role": "roles/pubsub.serviceAgent"

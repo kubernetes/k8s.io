@@ -34,6 +34,50 @@ groups:
       - ahg@google.com
       - hweicdl@gmail.com
 
+  - email-id: sig-scheduling@kubernetes.io
+    name: sig-scheduling
+    description: |-
+      SIG scheduling general discussion group
+    owners:
+      - acondor@google.com
+      - ahg@google.com
+      - hweicdl@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: sig-scheduling-alerts@kubernetes.io
+    name: sig-scheduling-alerts
+    description: |-
+      SIG Scheduling Alerts - mail alias for CI failure messages.
+
+      Open to everyone.
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - acondor@google.com
+      - ahg@google.com
+      - hweicdl@gmail.com
+    members:
+      # This is just the initial list of group members.
+      - kerthcet@gmail.com
+      - patrick.ohly@intel.com
+      - handbomusic@gmail.com # @sanposhiho
+      - noreply+testgrid@google.com
+
   - email-id: k8s-infra-staging-kueue@kubernetes.io
     name: k8s-infra-staging-kueue
     description: |-
@@ -105,15 +149,21 @@ groups:
     description: |-
       People to be notified about test failures
     settings:
+      AllowWebPosting: "true"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
       ReconcileMembers: "true"
-    members:
+    managers:
       - acondor@google.com
+      - michalwozniak@google.com
+      - yuki.iwai.tz@gmail.com
+    members:
       - ahg@google.com
       - kerthcet@gmail.com
-      - michalwozniak@google.com
       - traian_schiau@epam.com
       - wangqingcan1990@gmail.com
-      - yuki.iwai.tz@gmail.com
+      - noreply+testgrid@google.com
 
   #
   # k8s-infra gcs write access

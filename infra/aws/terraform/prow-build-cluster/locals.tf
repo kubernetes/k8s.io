@@ -19,6 +19,8 @@ locals {
 
   root_account_arn = "arn:aws:iam::${local.account_id}:root"
 
+  sso_admin_arn = one(data.aws_iam_roles.sso_admins.arns)
+
   configure_prow = var.cluster_name == "prow-build-cluster"
 
   aws_cli_args = [
@@ -34,65 +36,59 @@ locals {
     Cluster = var.cluster_name
   }
 
-  auto_scaling_tags = {
-    "k8s.io/cluster-autoscaler/${var.cluster_name}" = "owned"
-    "k8s.io/cluster-autoscaler/enabled"             = true
+  node_security_group_tags = {
+    "karpenter.sh/discovery" = var.cluster_name
   }
 
   azs = slice(data.aws_availability_zones.available.names, 0, 3)
 
-  # Allow cluster admin access to the following IAM roles:
-  cluster_admin_roles = [
-    {
-      # EKSInfraAdmin
-      "rolearn"  = data.aws_iam_role.eks_infra_admin.arn
-      "username" = "eks-infra-admin"
-      "groups" = [
+  default_access_entries = {
+    # Admin entries
+    eks-infra-admin = {
+      kubernetes_groups = [
         "eks-cluster-admin"
       ]
-    },
-    {
-      # EKSClusterAdmin
-      "rolearn"  = aws_iam_role.eks_cluster_admin.arn
-      "username" = "eks-cluster-admin"
-      "groups" = [
+      principal_arn = data.aws_iam_role.eks_infra_admin.arn
+    }
+    eks-cluster-admin = {
+      kubernetes_groups = [
         "eks-cluster-admin"
       ]
+      principal_arn = aws_iam_role.eks_cluster_admin.arn
     }
-  ]
 
-  # Allow cluster read access to the following IAM roles:
-  cluster_viewer_roles = [
-    {
-      # EKSClusterViewer
-      "rolearn"  = aws_iam_role.eks_cluster_viewer.arn
-      "username" = "eks-cluster-viewer"
-      "groups" = [
+    # Viewer entries
+    eks-infra-viewer = {
+      kubernetes_groups = [
         "eks-cluster-viewer"
       ]
-    },
-    {
-      # EKSInfraViewer
-      "rolearn"  = data.aws_iam_role.eks_infra_viewer.arn
-      "username" = "eks-infra-viewer"
-      "groups" = [
+      principal_arn = data.aws_iam_role.eks_infra_viewer.arn
+    }
+    eks-cluster-viewer = {
+      kubernetes_groups = [
         "eks-cluster-viewer"
       ]
+      principal_arn = aws_iam_role.eks_cluster_viewer.arn
     }
-  ]
 
-  aws_auth_roles = flatten([
-    local.configure_prow ? [
-      # Allow access to the Prow-EKS-Admin IAM role (used by Prow directly).
-      {
-        "rolearn"  = aws_iam_role.eks_prow_admin[0].arn
-        "username" = "eks-admin"
-        "groups" = [
+    # Assign the Administrator access to the AdministratorAccess users logging via SSO
+    sso-administrators = {
+      kubernetes_groups = [
+        "eks-cluster-admin"
+      ]
+      principal_arn = local.sso_admin_arn
+    }
+  }
+
+  access_entries = merge(
+    local.default_access_entries,
+    local.configure_prow ? {
+      prow = {
+        kubernetes_groups = [
           "eks-prow-cluster-admin"
         ]
+        principal_arn = aws_iam_role.eks_prow_admin[0].arn
       }
-    ] : [],
-    local.cluster_admin_roles,
-    local.cluster_viewer_roles
-  ])
+    } : {}
+  )
 }

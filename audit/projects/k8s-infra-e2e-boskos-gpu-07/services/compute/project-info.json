@@ -137,6 +137,10 @@
       "metric": "INTERCONNECTS"
     },
     {
+      "limit": 30,
+      "metric": "SSL_POLICIES"
+    },
+    {
       "limit": 5000,
       "metric": "GLOBAL_INTERNAL_ADDRESSES"
     },

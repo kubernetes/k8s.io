@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "1087109869165-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-cluster-api-azure/serviceAccounts/1087109869165-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "112641322884084577352",
+  "projectId": "k8s-staging-cluster-api-azure",
+  "uniqueId": "112641322884084577352"
+}

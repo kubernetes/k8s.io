@@ -23,8 +23,8 @@
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.32.0.0/14",
   "createTime": "2020-04-30T21:31:49+00:00",
-  "currentMasterVersion": "1.27.11-gke.1062001",
-  "currentNodeVersion": "1.26.12-gke.1111000 *",
+  "currentMasterVersion": "1.29.6-gke.1326000",
+  "currentNodeVersion": "1.29.6-gke.1254000 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -41,7 +41,8 @@
   "instanceGroupUrls": [
     "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-c/instanceGroupManagers/gke-prow-build-pool5-2021092812495606-e8f905a4-grp",
     "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-f/instanceGroupManagers/gke-prow-build-pool5-2021092812495606-72cb7850-grp",
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool5-2021092812495606-3a8095df-grp"
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-b/instanceGroupManagers/gke-prow-build-pool5-2021092812495606-3a8095df-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-a/instanceGroupManagers/gke-prow-build-pool5-arm64-2024080516-07218158-grp"
   ],
   "ipAllocationPolicy": {
     "useRoutes": true
@@ -72,7 +73,9 @@
       }
     }
   },
-  "masterAuthorizedNetworksConfig": {},
+  "masterAuthorizedNetworksConfig": {
+    "gcpPublicCidrsAccessEnabled": true
+  },
   "monitoringConfig": {
     "componentConfig": {
       "enableComponents": [
@@ -160,9 +163,72 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.26.12-gke.1111000"
+      "version": "1.29.6-gke.1326000"
+    },
+    {
+      "autoscaling": {
+        "enabled": true,
+        "locationPolicy": "BALANCED",
+        "maxNodeCount": 10,
+        "minNodeCount": 1
+      },
+      "config": {
+        "diskSizeGb": 150,
+        "diskType": "pd-ssd",
+        "imageType": "UBUNTU_CONTAINERD",
+        "loggingConfig": {
+          "variantConfig": {
+            "variant": "DEFAULT"
+          }
+        },
+        "machineType": "t2a-standard-8",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ],
+        "serviceAccount": "gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "taints": [
+          {
+            "effect": "NO_SCHEDULE",
+            "key": "kubernetes.io/arch",
+            "value": "arm64"
+          }
+        ],
+        "windowsNodeConfig": {},
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "initialNodeCount": 1,
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build/zones/us-central1-a/instanceGroupManagers/gke-prow-build-pool5-arm64-2024080516-07218158-grp"
+      ],
+      "locations": [
+        "us-central1-a"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "name": "pool5-arm64-20240805163219928100000001",
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build/locations/us-central1/clusters/prow-build/nodePools/pool5-arm64-20240805163219928100000001",
+      "upgradeSettings": {
+        "maxSurge": 1,
+        "strategy": "SURGE"
+      },
+      "version": "1.29.6-gke.1254000"
     }
   ],
+  "privateClusterConfig": {
+    "privateEndpoint": "10.128.0.3",
+    "publicEndpoint": "34.69.231.159"
+  },
   "releaseChannel": {
     "channel": "REGULAR"
   },

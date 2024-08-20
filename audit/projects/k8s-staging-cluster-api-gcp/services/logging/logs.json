@@ -2,6 +2,5 @@
   "projects/k8s-staging-cluster-api-gcp/logs/cloudaudit.googleapis.com%2Factivity",
   "projects/k8s-staging-cluster-api-gcp/logs/cloudaudit.googleapis.com%2Fdata_access",
   "projects/k8s-staging-cluster-api-gcp/logs/cloudbuild",
-  "projects/k8s-staging-cluster-api-gcp/logs/compute.googleapis.com%2Fshielded_vm_integrity",
-  "projects/k8s-staging-cluster-api-gcp/logs/networkanalyzer.googleapis.com%2Fanalyzer_reports"
+  "projects/k8s-staging-cluster-api-gcp/logs/compute.googleapis.com%2Fshielded_vm_integrity"
 ]

@@ -12,6 +12,7 @@
       "valueType": "INT64"
     },
     "name": "cip-auditor-alert",
+    "resourceName": "projects/k8s-artifacts-prod/metrics/cip-auditor-alert",
     "updateTime": "2020-03-31T00:34:18.785786156Z"
   }
 ]

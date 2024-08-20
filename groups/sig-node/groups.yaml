@@ -31,6 +31,29 @@ groups:
       - decarr@redhat.com
       - mpatel@redhat.com
       - s.kanzhelev@gmail.com
+      - pehunt@redhat.com
+
+  - email-id: sig-node@kubernetes.io
+    name: sig-node
+    description: |-
+      SIG node general discussion group
+    owners:
+      - dawnchen@google.com
+      - decarr@redhat.com
+      - mpatel@redhat.com
+      - s.kanzhelev@gmail.com
+      - pehunt@redhat.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
 
   - email-id: k8s-infra-staging-cri-tools@kubernetes.io
     name: k8s-infra-staging-cri-tools
@@ -58,6 +81,7 @@ groups:
     members:
       - mpatel@redhat.com
       - qbarrand@redhat.com
+      - ybettan@redhat.com
       - yshnaidm@redhat.com
 
   - email-id: k8s-infra-staging-nfd@kubernetes.io
@@ -86,6 +110,7 @@ groups:
       - patrik@ptrk.io
       - teratipally@google.com
       - zhenw@google.com
+      - prow-build@k8s-infra-prow-build.iam.gserviceaccount.com
 
   - email-id: k8s-infra-staging-sp-operator@kubernetes.io
     name: k8s-infra-staging-sp-operator

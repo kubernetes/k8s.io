@@ -19,7 +19,6 @@ This file defines all GCS buckets that prow jobs write to
 */
 
 locals {
-  kops_ci_bucket_name                   = "k8s-infra-kops-ci-results"        // Name of the bucket for kops ci jobs results (version markers, binaries, etc...)
   scalability_tests_logs_bucket_name    = "k8s-infra-scalability-tests-logs" // Name of the bucket for the scalability test results
   scalability_golang_builds_bucket_name = "k8s-infra-scale-golang-builds"    // Name of the bucket for the scalability golang builds
 }
@@ -137,57 +136,4 @@ data "google_iam_policy" "scalability_golang_builds_bindings" {
 resource "google_storage_bucket_iam_policy" "scalability_golang_builds_policy" {
   bucket      = google_storage_bucket.scalability_golang_builds.name
   policy_data = data.google_iam_policy.scalability_golang_builds_bindings.policy_data
-}
-
-// Bucket for kops CI jobs results
-resource "google_storage_bucket" "kops_ci_bucket" {
-  project                     = data.google_project.project.project_id
-  name                        = local.kops_ci_bucket_name
-  location                    = "US"
-  uniform_bucket_level_access = true
-}
-
-data "google_iam_policy" "kops_ci_bucket_bindings" {
-  // Ensure k8s-infra-kops-maintainers has admin privileges
-  binding {
-    members = [
-      "group:k8s-infra-kops-maintainers@kubernetes.io",
-    ]
-    role = "roles/storage.admin"
-  }
-  // Maintain legacy admins privilegies
-  binding {
-    members = [
-      "group:k8s-infra-kops-maintainers@kubernetes.io",
-      "projectEditor:${data.google_project.project.project_id}",
-      "projectOwner:${data.google_project.project.project_id}",
-    ]
-    role = "roles/storage.legacyBucketOwner"
-  }
-  binding {
-    members = [
-      "projectViewer:${data.google_project.project.project_id}",
-    ]
-    role = "roles/storage.legacyBucketReader"
-  }
-  // Ensure prow-build serviceaccount can write to bucket
-  binding {
-    role = "roles/storage.objectAdmin"
-    members = [
-      "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
-    ]
-  }
-  // Ensure bucket is world readable
-  binding {
-    role = "roles/storage.objectViewer"
-    members = [
-      "allUsers"
-    ]
-  }
-}
-
-// Authoritative iam-policy: replaces any existing policy attached to the bucket
-resource "google_storage_bucket_iam_policy" "kops_ci_bucket_bindings" {
-  bucket      = google_storage_bucket.kops_ci_bucket.name
-  policy_data = data.google_iam_policy.kops_ci_bucket_bindings.policy_data
 }

@@ -1,0 +1,61 @@
+# Copyright 2024 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+apiVersion: karpenter.sh/v1beta1
+kind: NodePool
+metadata:
+  name: default
+spec:
+  template:
+    spec:
+      nodeClassRef:
+        apiVersion: karpenter.k8s.aws/v1beta1
+        kind: EC2NodeClass
+        name: default
+
+      requirements: # r5ad.4xlarge amd64 non-spot
+        - key: topology.kubernetes.io/zone
+          operator: In
+          values: ["us-east-2a", "us-east-2b", "us-east-2c"]
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
+        - key: karpenter.sh/capacity-type
+          operator: NotIn
+          values: ["spot"]
+        - key: karpenter.k8s.aws/instance-category
+          operator: In
+          values: ["r"]
+        - key: "karpenter.k8s.aws/instance-family"
+          operator: In
+          values: ["r5ad"]
+        - key: "karpenter.k8s.aws/instance-size"
+          operator: In
+          values: ["4xlarge"]
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values: ["2"]
+
+  limits:
+    cpu: "2400" # 150 x r5ad.4xlarge (16 vCPUs)
+
+  disruption:
+    consolidationPolicy: WhenEmpty
+    consolidateAfter: 30s
+    expireAfter: 720h
+    budgets:
+      - nodes: "20%" # Allowing rotating 20% of instances at any given time

@@ -55,6 +55,9 @@ function ensure_e2e_project() {
 
     ensure_project "${prj}"
 
+    local project_number
+    project_number=$(gcloud projects describe "${prj}" --format='value(projectNumber)')
+
     color 6 "Ensure stale role bindings have been removed from e2e project: ${prj}"
     (
         echo "no stale bindings slated for removal"
@@ -78,10 +81,36 @@ function ensure_e2e_project() {
       "serviceAccount:${PROW_BUILD_SVCACCT}" \
       "roles/editor"
 
+    # TODO: Remove this binding and clean up permissions in projects
+    # This permission is superseded by roles/cloudkms.admin below
     # Ensure GCP CSI driver tests can manage KMS keys
     ensure_project_role_binding "${prj}" \
       "serviceAccount:${PROW_BUILD_SVCACCT}" \
       "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+    # Ensure GCP Default Compute Service Account can administer KMS keys
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:${PROW_BUILD_SVCACCT}" \
+      "roles/cloudkms.admin"
+
+    # TODO: Remove this binding and clean up permissions in projects
+    # Ensure GCP Default Compute Service Account can manage KMS keys
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:${project_number}-compute@developer.gserviceaccount.com" \
+      "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+    # Ensure GCP Default Compute Engine Service Agent Account can manage KMS
+    # keys
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:service-${project_number}@compute-system.iam.gserviceaccount.com" \
+      "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+    # TODO: Remove this binding and clean up permissions in projects
+    # Ensure GCP CSI driver tests can use prow-build service account to
+    # act as all other service accounts (eg: Compute Engine default service account)
+    ensure_project_role_binding "${prj}" \
+      "serviceAccount:${PROW_BUILD_SVCACCT}" \
+      "roles/iam.serviceAccountUser"
 
     # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
     #       could consider using a more limited custom IAM role instead

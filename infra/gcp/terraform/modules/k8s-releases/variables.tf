@@ -15,8 +15,8 @@ limitations under the License.
 */
 
 variable "project_id" {
-  type    = string
-  default = ""
+  type     = string
+  nullable = false
   validation {
     condition     = length(var.project_id) > 0
     error_message = "Must specify project_id variable."
@@ -32,14 +32,16 @@ variable "region" {
   type        = string
   description = "GCP region"
   default     = "us-central1"
+  nullable    = false
 }
 
 variable "storage_class" {
   type        = string
   description = "Storage class for TUF root bucket."
   default     = "STANDARD"
+  nullable    = false
   validation {
-    condition = contains(["STANDARD", "MULTI_REGIONAL", "REGIONAL"], var.storage_class)
+    condition     = contains(["STANDARD", "MULTI_REGIONAL", "REGIONAL"], var.storage_class)
     error_message = "The storage class is invalid"
   }
 }
@@ -48,8 +50,9 @@ variable "public_access_prevention" {
   description = "Prevents public access to a bucket. Acceptable values are inherited or enforced."
   type        = string
   default     = "inherited"
+  nullable    = false
   validation {
-      condition = contains(["enforced", "inherited"], var.public_access_prevention)
-      error_message = "Must specify PROJECT_ID variable."
+    condition     = contains(["enforced", "inherited"], var.public_access_prevention)
+    error_message = "Must specify PROJECT_ID variable."
   }
 }

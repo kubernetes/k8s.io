@@ -27,12 +27,17 @@ terraform {
   }
 
   required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 5.41.0"
+    }
     fastly = {
       source  = "fastly/fastly"
-      version = "~> 5.2.0"
+      version = "~> 5.11.0"
     }
   }
 }
 
-# Configure the Fastly Provider
+# Configure required providers
 provider "fastly" {}
+provider "google" {}

@@ -19,6 +19,39 @@ groups:
   # subproject artifacts being stored in a given staging project
   #
 
+  - email-id: sig-cloud-provider-leads@kubernetes.io
+    name: sig-cloud-provider-leads
+    description: |-
+      sig-cloud-provider leads
+    owners:
+      - bridget@kromhout.org
+      - msm@opbstudios.com
+      - wfender@google.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: sig-cloud-provider@kubernetes.io
+    name: sig-cloud-provider
+    description: |-
+      SIG cloud provider general discussion group
+    owners:
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: k8s-infra-staging-provider-aws@kubernetes.io
     name: k8s-infra-staging-provider-aws
     description: |-

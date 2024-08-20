@@ -12,13 +12,32 @@ groups:
     description: |-
       SIG autoscaling leads
     owners:
-      - mwielgus@google.com
+      - maciekpytel@google.com
       - guyjtempleton@googlemail.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
+  - email-id: sig-autoscaling@kubernetes.io
+    name: sig-autoscaling
+    description: |-
+      SIG autoscaling general discussion group
+    owners:
+      - guyjtempleton@gmail.com
+      - maciekpytel@google.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
 
   - email-id: sig-autoscaling-karpenter-leads@kubernetes.io
     name: sig-autoscaling-karpenter-leads
@@ -59,7 +78,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - mwielgus@google.com
       - bskiba@google.com
       - maciekpytel@google.com
       - ksiedlecki@google.com
@@ -72,6 +90,7 @@ groups:
       - kwiesmueller@google.com
       - luizaoj@google.com
       - rgowman@google.com
+      - rwainman@google.com
 
   #
   # k8s-infra gcs write access

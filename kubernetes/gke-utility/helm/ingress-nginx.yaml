@@ -1,0 +1,12 @@
+controller:
+  publishService:
+    enabled: true
+  service:
+    annotations:
+      networking.gke.io/load-balancer-ip-addresses: utility-ingress-v4,utility-ingress-v6
+      cloud.google.com/l4-rbs: "enabled"
+    externalTrafficPolicy: Local
+    ipFamilyPolicy: RequireDualStack
+    ipFamilies:
+      - IPv6
+      - IPv4

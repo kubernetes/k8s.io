@@ -1,0 +1,36 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.admin"
+    },
+    {
+      "members": [
+        "projectEditor:k8s-staging-images",
+        "projectOwner:k8s-staging-images"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-staging-images"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "projectEditor:k8s-staging-images",
+        "projectOwner:k8s-staging-images"
+      ],
+      "role": "roles/storage.legacyObjectOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-staging-images"
+      ],
+      "role": "roles/storage.legacyObjectReader"
+    }
+  ]
+}

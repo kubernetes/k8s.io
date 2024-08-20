@@ -1,0 +1,9 @@
+{
+  "description": "owner: ameukam",
+  "displayName": "cdn-sandbox-dl-dev-fastly-logs",
+  "email": "cdn-sandbox-dl-dev-fastly-logs@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-ii-sandbox/serviceAccounts/cdn-sandbox-dl-dev-fastly-logs@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
+  "oauth2ClientId": "113325325475678060323",
+  "projectId": "k8s-infra-ii-sandbox",
+  "uniqueId": "113325325475678060323"
+}

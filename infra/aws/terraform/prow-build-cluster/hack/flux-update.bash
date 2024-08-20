@@ -30,6 +30,10 @@ if [ -z $PROW_ENV ]; then
   exit 3
 fi
 
+UPDATE_FLUX=${UPDATE_FLUX:-false}
+
+readonly karpenter_version="0.37.0"
+
 script_root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 
 function boilerplate() {
@@ -39,10 +43,14 @@ function boilerplate() {
 
 resources_dir=${script_root}/../resources
 
+if [ "$UPDATE_FLUX" = true ]; then
 # Generate all FluxCD resources.
 # gotk stands for GitOpsToolKit (https://fluxcd.io/flux/components/)
-boilerplate > ${resources_dir}/flux-system/gotk-components.yaml
-flux install --export >> ${resources_dir}/flux-system/gotk-components.yaml
+boilerplate > ${resources_dir}/flux/gotk-components.yaml
+flux install --export >> ${resources_dir}/flux/gotk-components.yaml
+else
+  echo "Skipping updating Flux because the UPDATE_FLUX environment variable is not set to true"
+fi
 
 # sync_interval determines Flux Source Controller sync interval.
 # (https://github.com/fluxcd/source-controller)
@@ -61,15 +69,6 @@ flux create source helm eks-charts \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/flux-system/flux-source-helm-eks-charts.yaml
 
-boilerplate > ${resources_dir}/kube-system/flux-hr-node-termination-handler.yaml
-flux create hr node-termination-handler \
-    --source=HelmRepository/eks-charts.flux-system \
-    --namespace=kube-system \
-    --chart=aws-node-termination-handler \
-    --chart-version=0.21.0 \
-    --interval=${sync_interval} \
-    --export >> ${resources_dir}/kube-system/flux-hr-node-termination-handler.yaml
-
 boilerplate > ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
 flux create source helm kubecost \
     --url https://kubecost.github.io/cost-analyzer \
@@ -87,14 +86,42 @@ flux create hr kubecost \
     --namespace=kubecost \
     --chart cost-analyzer \
     --chart-version 2.0.1 \
+    --release-name kubecost \
     --values-from=ConfigMap/kubecost-helm-values \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
+
+boilerplate > ${resources_dir}/flux-system/flux-source-helm-karpenter-chart.yaml
+flux create source helm karpenter \
+    --url oci://public.ecr.aws/karpenter \
+    --interval=${sync_interval} \
+    --export >> ${resources_dir}/flux-system/flux-source-helm-karpenter-chart.yaml
+
+boilerplate > ${resources_dir}/karpenter/flux-hr-karpenter-crd.yaml
+flux create hr karpenter-crd \
+    --source HelmRepository/karpenter.flux-system \
+    --namespace=kube-system \
+    --chart karpenter-crd \
+    --chart-version "${karpenter_version}" \
+    --interval=${sync_interval} \
+    --export >> ${resources_dir}/karpenter/flux-hr-karpenter-crd.yaml
+
+boilerplate > ${resources_dir}/karpenter/flux-hr-karpenter.yaml
+flux create hr karpenter \
+    --source HelmRepository/karpenter.flux-system \
+    --namespace=kube-system \
+    --chart karpenter \
+    --chart-version "${karpenter_version}" \
+    --values ${resources_dir}/karpenter/${PROW_ENV}-cluster-values \
+    --interval=${sync_interval} \
+    --depends-on=karpenter-crd \
+    --export >> ${resources_dir}/karpenter/flux-hr-karpenter.yaml
 
 # This list contains names of folders inside ./resources directory
 # that are used for generating FluxCD kustomizations.
 kustomizations=(
     boskos
+    flux
     flux-system
     kube-system
     monitoring
@@ -103,7 +130,7 @@ kustomizations=(
     test-pods
     external-secrets
     kubecost
-    cluster-autoscaler
+    karpenter
 )
 
 # Code below is used to figure out a relative path of

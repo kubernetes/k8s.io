@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "1027352270722-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-capi-cloudstack/serviceAccounts/1027352270722-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "109763615376975789546",
+  "projectId": "k8s-staging-capi-cloudstack",
+  "uniqueId": "109763615376975789546"
+}

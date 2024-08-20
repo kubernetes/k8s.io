@@ -14,13 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "bucket" {
+variable "bucket_name" {
   type    = string
-  default = "kubernetes-release"
+  default = "767373bbdcb8270361b96548387bf2a9ad0d48758c35"
 }
 
-variable "fastly_api_key" {
-  type      = string
-  sensitive = true
-  default   = null
+variable "region" {
+  type    = string
+  default = "us-central1"
 }

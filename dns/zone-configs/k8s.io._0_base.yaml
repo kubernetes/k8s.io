@@ -68,24 +68,15 @@ invalid.registry:
   value: 0.0.0.0
 
 # Prove that we own these github orgs. sig-contributor-experience
-_github-challenge-kubernetes:
+_gh-kubernetes-e:
   type: TXT
-  value: 8d02d39186
-_github-challenge-kubernetes-client:
+  value: 37ad6e2887
+_gh-kubernetes-e.sigs:
   type: TXT
-  value: 8135eb1976
-_github-challenge-kubernetes-csi:
+  value: f65211c604
+_gh-kubernetes-e.git:
   type: TXT
-  value: 5aa2511ab7
-_github-challenge-kubernetes-incubator:
-  type: TXT
-  value: cc457b8e52
-_github-challenge-kubernetes-retired:
-  type: TXT
-  value: b36f0d3bca
-_github-challenge-kubernetes-sigs:
-  type: TXT
-  value: c576f646fc
+  value: f574674cbc
 
 # Download sites
 apt:
@@ -241,13 +232,6 @@ issue:
 issues:
   type: CNAME
   value: redirect.k8s.io.
-# sig-k8s-infra
-# Hosted on GKE cluster aaa
-k8s-infra-prow:
-  - type: A
-    value: 34.117.224.94
-  - type: AAAA
-    value: "2600:1901:0:b267::"
 kep:
   type: CNAME
   value: redirect.k8s.io.
@@ -276,6 +260,17 @@ prow:
   type: A
   ttl: 600 # this has needed to change in the past
   value: 35.186.196.185
+# prow-certificates in k8s-infra-prow project
+_acme-challenge.prow:
+  type: CNAME
+  value: ec952040-1ea9-43db-b382-e0fde0cddbb6.16.authorize.certificatemanager.goog.
+hooks.prow:
+  - type: A
+    ttl: 600 # this has needed to change in the past
+    value: 34.128.150.99
+  - type: AAAA
+    ttl: 600 # this has needed to change in the past
+    value: "2600:1901:0:b465::"
 monitoring.prow:
   type: A
   value: 130.211.20.136
@@ -398,7 +393,7 @@ docs.prow:
 # https://github.com/kubernetes-sigs/cluster-api docs (@dwat, @jdetiber, @justinsb)
 cluster-api.sigs:
   type: CNAME
-  value: release-1-7--kubernetes-sigs-cluster-api.netlify.app.
+  value: release-1-8--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-aws docs (@randomvariable, @detiber, @ncdc, @rudoi, @vincepri)
 cluster-api-aws.sigs:
   type: CNAME
@@ -469,6 +464,9 @@ release-1-6.cluster-api.sigs:
 release-1-7.cluster-api.sigs:
   type: CNAME
   value: release-1-7--kubernetes-sigs-cluster-api.netlify.app.
+release-1-8.cluster-api.sigs:
+  type: CNAME
+  value: release-1-8--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vincepri)
 main.cluster-api.sigs:
   type: CNAME

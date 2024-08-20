@@ -1,0 +1,70 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:service-787629567722@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/artifactregistry.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:787629567722@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-787629567722@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-787629567722@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerregistry.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:787629567722-compute@developer.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "serviceAccount:787629567722@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountUser"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "serviceAccount:service-787629567722@gcp-sa-pubsub.iam.gserviceaccount.com"
+      ],
+      "role": "roles/pubsub.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io",
+        "group:k8s-infra-staging-etcd-manager@kubernetes.io",
+        "group:k8s-infra-staging-kubernetes@kubernetes.io",
+        "group:k8s-infra-staging-kueue@kubernetes.io",
+        "group:k8s-infra-staging-secrets-store-sync@kubernetes.io",
+        "group:k8s-infra-staging-test-infra@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "version": 1
+}

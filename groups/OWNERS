@@ -10,6 +10,7 @@ options:
 approvers:
 - cblecker
 - thockin
+- sig-contributor-experience-leads
 - sig-k8s-infra-leads
 - nikhita
 

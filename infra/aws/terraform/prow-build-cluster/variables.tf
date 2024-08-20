@@ -16,12 +16,14 @@ limitations under the License.
 
 variable "eks_cluster_admins" {
   type        = list(string)
+  nullable    = false
   description = "List of maintainers that have administrator access to the cluster."
   default     = []
 }
 
 variable "eks_cluster_viewers" {
   type        = list(string)
+  nullable    = false
   description = "List of maintainers that have view access to the cluster."
   default     = []
 }
@@ -46,6 +48,7 @@ variable "aws_account_id" {
 variable "vpc_cidr" {
   type        = string
   description = "CIDR of the VPC"
+  nullable    = false
 }
 
 variable "vpc_secondary_cidr_blocks" {
@@ -71,111 +74,43 @@ variable "vpc_intra_subnet" {
 variable "cluster_name" {
   type        = string
   description = "Name of the EKS cluster"
+  nullable    = false
 }
 
 variable "cluster_region" {
   type        = string
   description = "AWS region of the EKS cluster"
+  nullable    = false
 }
 
 variable "cluster_version" {
   type        = string
   description = "Kubernetes version of the EKS control plane"
-}
-
-variable "node_group_version_us_east_2a" {
-  type        = string
-  description = "Kubernetes version of the EKS-managed node group in US East 2a"
-}
-
-variable "node_group_version_us_east_2b" {
-  type        = string
-  description = "Kubernetes version of the EKS-managed node group in US East 2b"
-}
-
-variable "node_group_version_us_east_2c" {
-  type        = string
-  description = "Kubernetes version of the EKS-managed node group in US East 2c"
+  nullable    = false
 }
 
 variable "node_group_version_stable" {
   type        = string
   description = "Kubernetes version of the EKS-managed node group (stable)"
-}
-
-variable "node_instance_types_us_east_2a" {
-  type        = list(string)
-  description = "Instance sizes to use for EKS node group in US East 2a"
-}
-
-variable "node_instance_types_us_east_2b" {
-  type        = list(string)
-  description = "Instance sizes to use for EKS node group in US East 2b"
-}
-
-variable "node_instance_types_us_east_2c" {
-  type        = list(string)
-  description = "Instance sizes to use for EKS node group in US East 2c"
+  nullable    = false
 }
 
 variable "node_instance_types_stable" {
   type        = list(string)
   description = "Instance sizes to use for stable EKS node group"
+  nullable    = false
 }
 
 variable "node_volume_size" {
   type        = number
   description = "Volume size per node to use for EKS node group"
-}
-
-variable "node_min_size_us_east_2a" {
-  type        = number
-  description = "Minimum number of nodes in the EKS node group in US East 2a"
-}
-
-variable "node_min_size_us_east_2b" {
-  type        = number
-  description = "Minimum number of nodes in the EKS node group in US East 2b"
-}
-
-variable "node_min_size_us_east_2c" {
-  type        = number
-  description = "Minimum number of nodes in the EKS node group in US East 2c"
-}
-
-variable "node_max_size_us_east_2a" {
-  type        = number
-  description = "Maximum number of nodes in the EKS node group in US East 2a"
-}
-
-variable "node_max_size_us_east_2b" {
-  type        = number
-  description = "Maximum number of nodes in the EKS node group in US East 2b"
-}
-
-variable "node_max_size_us_east_2c" {
-  type        = number
-  description = "Maximum number of nodes in the EKS node group in US East 2c"
-}
-
-variable "node_desired_size_us_east_2a" {
-  type        = number
-  description = "Desired number of nodes in the EKS node group in US East 2a"
-}
-
-variable "node_desired_size_us_east_2b" {
-  type        = number
-  description = "Desired number of nodes in the EKS node group in US East 2b"
-}
-
-variable "node_desired_size_us_east_2c" {
-  type        = number
-  description = "Desired number of nodes in the EKS node group in US East 2c"
+  nullable    = false
 }
 
 variable "node_desired_size_stable" {
   type        = number
   description = "Desired number of nodes in the stable EKS node group"
+  nullable    = false
 }
 
 variable "node_max_unavailable_percentage" {
@@ -184,52 +119,37 @@ variable "node_max_unavailable_percentage" {
 }
 
 variable "node_taints_build" {
-  type    = list(map(string))
-  default = []
+  type     = list(map(string))
+  default  = []
+  nullable = false
 }
 
 variable "node_taints_stable" {
-  type    = list(map(string))
-  default = []
+  type     = list(map(string))
+  default  = []
+  nullable = false
 }
 
 variable "node_labels_build" {
-  type    = map(string)
-  default = {}
+  type     = map(string)
+  default  = {}
+  nullable = false
 }
 
 variable "node_labels_stable" {
-  type    = map(string)
-  default = {}
+  type     = map(string)
+  default  = {}
+  nullable = false
 }
 
 variable "additional_node_group_tags_build" {
-  type    = map(string)
-  default = {}
+  type     = map(string)
+  default  = {}
+  nullable = false
 }
 
 variable "additional_node_group_tags_stable" {
-  type    = map(string)
-  default = {}
-}
-
-variable "cluster_autoscaler_version" {
-  type        = string
-  description = "Cluster Autoscaler version to use (must match the EKS version)"
-}
-
-variable "bastion_install" {
-  type        = bool
-  description = "Install bastion hosts allowing to access EKS nodes via ssh."
-  default     = false
-}
-
-variable "bastion_instance_type" {
-  type    = string
-  default = "t3.nano"
-}
-
-variable "public_key" {
-  type        = string
-  description = "Used to genereate private key allowing for ssh access to cluster nodes."
+  type     = map(string)
+  default  = {}
+  nullable = false
 }

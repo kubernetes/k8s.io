@@ -31,6 +31,7 @@ data "aws_iam_policy_document" "eks_plan" {
       "acm:DescribeCertificate",
       "acm:ListTagsForCertificate",
       "ec2:DescribeAddresses",
+      "ec2:DescribeAddressesAttribute",
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeEgressOnlyInternetGateways",
       "ec2:DescribeInternetGateways",
@@ -56,10 +57,12 @@ data "aws_iam_policy_document" "eks_plan" {
       "ec2:DescribeVolumes",
       "ec2:DescribeKeyPairs",
       "ec2:DescribeTags",
+      "eks:DescribeAccessEntry",
       "eks:DescribeAddon",
       "eks:DescribeAddonVersions",
       "eks:DescribeCluster",
       "eks:DescribeNodegroup",
+      "eks:DescribePodIdentityAssociation",
       "eks:DescribeUpdate",
       "eks:ListAddons",
       "eks:ListClusters",
@@ -67,6 +70,9 @@ data "aws_iam_policy_document" "eks_plan" {
       "eks:ListNodegroups",
       "eks:ListUpdates",
       "eks:ListTagsForResource",
+      "events:DescribeRule",
+      "events:ListTagsForResource",
+      "events:ListTargetsByRule",
       "iam:GetOpenIDConnectProvider",
       "iam:GetPolicy",
       "iam:GetPolicyVersion",
@@ -74,6 +80,7 @@ data "aws_iam_policy_document" "eks_plan" {
       "iam:GetRolePolicy",
       "iam:GetUser",
       "iam:ListAttachedRolePolicies",
+      "iam:ListRoles",
       "iam:ListRolePolicies",
       "iam:ListPolicies",
       "iam:ListInstanceProfilesForRole",
@@ -84,9 +91,12 @@ data "aws_iam_policy_document" "eks_plan" {
       "kms:ListAliases",
       "kms:ListResourceTags",
       "logs:DescribeLogGroups",
+      "logs:ListTagsForResource",
       "logs:ListTagsLogGroup",
       "s3:GetObject",
-      "s3:ListBucket"
+      "s3:ListBucket",
+      "sqs:GetQueueAttributes",
+      "sqs:ListQueueTags"
     ]
   }
 }

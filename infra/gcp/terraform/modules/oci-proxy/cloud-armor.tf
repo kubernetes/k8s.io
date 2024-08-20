@@ -21,141 +21,14 @@ resource "google_compute_security_policy" "cloud-armor" {
   project = var.project_id
   name    = "security-policy-oci-proxy"
 
-
-  rule {
-    action   = "deny(403)"
-    priority = "910"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('methodenforcement-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Method enforcement"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "900"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('protocolattack-v33-stable', {'sensitivity': 3, 'opt_out_rule_ids': ['owasp-crs-v030301-id921170-protocolattack']})"
-      }
-    }
-    description = "Protocol Attack"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "920"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('scannerdetection-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Scanner detection"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "990"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('xss-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Cross-site scripting (XSS)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "960"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('lfi-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Local file inclusion (LFI)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "930"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredExpr('rce-stable')"
-      }
-    }
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "940"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('rfi-v33-stable', {'sensitivity': 2})"
-      }
-    }
-    description = "Remote file inclusion (RFI)"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "950"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('sessionfixation-v33-stable', {'sensitivity': 1})"
-      }
-    }
-    description = "Session fixation"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "980"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredWaf('php-v33-stable', {'sensitivity': 3})"
-      }
-    }
-    description = "PHP"
-
-    preview = false
-  }
-
-  rule {
-    action   = "deny(403)"
-    priority = "1010"
-    match {
-      expr {
-        expression = "evaluatePreconfiguredExpr('cve-canary')"
-      }
-    }
-    description = "CVEs and other vulnerabilities"
-
-    preview = false
-  }
-
-  # Permit all other traffic, with rate limits
+  # apply rate limits
   rule {
     action      = "throttle"
-    description = "Default rule, throttle traffic"
-    priority    = "2147483647"
+    description = "Default rule. Limit excessive usage."
+    # apply rate limits last (rules are applied sequentially by priority)
+    # clients not violating a rate limit rule that matches will be allowed
+    # to reach the destination, so this rule should be last
+    priority = "2147483647"
 
     match {
       config {
@@ -167,16 +40,41 @@ resource "google_compute_security_policy" "cloud-armor" {
     rate_limit_options {
       conform_action = "allow"
       exceed_action  = "deny(429)"
-
       enforce_on_key = "IP"
-      # This is comparable to the GCR limits from k8s.gcr.io
+      # TODO: revisit these values
+      # above this threshold we serve 429, currently 83/sec in a 30s window
       rate_limit_threshold {
-        count        = 5000
-        interval_sec = 60
+        # NOTE: count cannot exceed 10,000
+        # https://cloud.google.com/armor/docs/rate-limiting-overview
+        # when users hit this, they receive 429 for the remainder of the 30s window
+        # this is set below the per user per minute limit on the backing ARs
+        count        = 2490
+        interval_sec = 30
       }
     }
+  }
 
-    preview = false
+  // block all requests with obviously invalid paths at the edge
+  // we support "/", "/privacy", and "/v2/.*" API, GET or HEAD
+
+  rule {
+    action      = "deny(404)"
+    description = "Block invalid request paths."
+    # apply this broad 404 for unexpected paths first
+    priority = "1"
+    match {
+      expr {
+        # allow:
+        # our homepage info redirect: /
+        # our privacy info redirect: /privacy
+        # OCI ping: /v2
+        # OCI content calls: /v2/<name>/(blobs|manifests)/<reference>
+        # tag list: /v2/(<name>/tags|tags)/list
+        # https://github.com/opencontainers/distribution-spec/blob/main/spec.md#endpoints
+        # NOTE: AR doesn't support referrers API
+        expression = "!request.path.matches('^/$|^/privacy$|^/v2/?$|^/v2/.+/blobs/.+$|^/v2/.+/manifests/.+$|^/v2/.*tags/list$')"
+      }
+    }
   }
 }
 

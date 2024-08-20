@@ -7,6 +7,46 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
+  - email-id: sig-docs-leads@kubernetes.io
+    name: sig-docs-leads
+    description: |-
+      sig-docs leads
+    owners:
+      - divya.mohan0209@gmail.com
+      - kat.cosgrove@gmail.com
+      - natalivlatko@gmail.com
+      - rlejano@gmail.com
+      - xandergrzyw@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: sig-docs@kubernetes.io
+    name: sig-docs
+    description: |-
+      SIG docs general discussion group
+    owners:
+      - divya.mohan0209@gmail.com
+      - kat.cosgrove@gmail.com
+      - natalivlatko@gmail.com
+      - rlejano@gmail.com
+      - xandergrzyw@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
   - email-id: blog@kubernetes.io
     name: blog
     description: |-

@@ -20,29 +20,16 @@ limitations under the License.
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 19.16"
+  version = "~> 20.20"
 
   # General cluster properties.
   cluster_name                   = var.cluster_name
   cluster_version                = var.cluster_version
   cluster_endpoint_public_access = true
 
-  # Manage aws-auth ConfigMap.
-  manage_aws_auth_configmap = true
-
-  # Configure aws-auth
-  aws_auth_roles = local.aws_auth_roles
-
-  # Allow EKS access to the root account.
-  aws_auth_users = [
-    {
-      "userarn"  = local.root_account_arn
-      "username" = "root"
-      "groups" = [
-        "eks-cluster-admin"
-      ]
-    },
-  ]
+  # Enable EKS API and ConfigMap authentication (required for the EKS Pod identity)
+  authentication_mode = "API"
+  access_entries      = local.access_entries
 
   iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
@@ -78,18 +65,12 @@ module "eks" {
       most_recent              = true
       service_account_role_arn = module.ebs_csi_irsa.iam_role_arn
     }
+    eks-pod-identity-agent = {
+      most_recent = true
+    }
   }
 
-  node_security_group_additional_rules = var.bastion_install ? {
-    bastion_22 = {
-      description              = "Bastion host to nodes"
-      protocol                 = "tcp"
-      from_port                = 22
-      to_port                  = 22
-      type                     = "ingress"
-      source_security_group_id = aws_security_group.bastion_host_security_group[0].id
-    }
-  } : null
+  node_security_group_tags = local.node_security_group_tags
 
   eks_managed_node_group_defaults = {
     # TODO(xmudrii-ubuntu): Temporarily disabled because it's not supported by Bottlerocket Linux
@@ -104,9 +85,6 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    stable           = local.node_group_stable
-    build-us-east-2a = local.node_group_build_us_east_2a
-    build-us-east-2b = local.node_group_build_us_east_2b
-    build-us-east-2c = local.node_group_build_us_east_2c
+    stable = local.node_group_stable
   }
 }

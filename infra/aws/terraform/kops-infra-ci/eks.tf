@@ -17,7 +17,7 @@ limitations under the License.
 module "eks" {
   providers = { aws = aws.kops-infra-ci }
   source    = "terraform-aws-modules/eks/aws"
-  version   = "20.8.3"
+  version   = "20.10.0"
 
   cluster_name                   = local.cluster_name
   cluster_version                = var.eks_version
@@ -44,7 +44,13 @@ module "eks" {
   cloudwatch_log_group_retention_in_days = 30
 
   cluster_addons = {
+    amazon-cloudwatch-observability = {
+      most_recent = true
+    }
     coredns = {
+      most_recent = true
+    }
+    eks-pod-identity-agent = {
       most_recent = true
     }
     kube-proxy = {
@@ -84,13 +90,12 @@ module "eks" {
       # Force version update if existing pods are unable to be drained due to a PodDisruptionBudget issue
       force_update_version = true
       update_config = {
-        max_unavailable = 1
+        max_unavailable = 3
       }
 
       capacity_type  = "ON_DEMAND"
       instance_types = ["r6id.2xlarge"]
       ami_type       = "BOTTLEROCKET_x86_64"
-      platform       = "bottlerocket"
 
       ebs_optimized     = true
       enable_monitoring = true
@@ -127,19 +132,11 @@ module "eks" {
         AmazonEC2ContainerRegistryReadOnly = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
         AmazonSSMManagedInstanceCore       = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
       }
-
-      launch_template_tags = {
-        # enable discovery of autoscaling groups by cluster-autoscaler
-        "k8s.io/cluster-autoscaler/enabled" : true,
-        "k8s.io/cluster-autoscaler/${local.cluster_name}" : "owned",
-      }
-
-      tags = var.tags
     }
   }
 
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.name
   })
 }
 
@@ -165,15 +162,6 @@ module "eks-auth" {
       groups   = ["system:masters"]
     },
   ]
-}
-
-resource "aws_eks_addon" "eks_pod_identity" {
-  provider = aws.kops-local-ci
-
-  cluster_name                = module.eks.cluster_name
-  addon_name                  = "eks-pod-identity-agent"
-  addon_version               = "v1.0.0-eksbuild.1"
-  resolve_conflicts_on_update = "OVERWRITE"
 }
 
 resource "aws_eks_pod_identity_association" "kops_prow_build" {

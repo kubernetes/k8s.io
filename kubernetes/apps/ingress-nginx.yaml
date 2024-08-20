@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ingress-nginx
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            clusterType: 'utility'
+  template:
+    metadata:
+      name: 'ingress-nginx-{{ .name }}'
+    spec:
+      destination:
+        namespace: ingress-nginx
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: ingress-nginx
+          repoURL: 'https://kubernetes.github.io/ingress-nginx'
+          targetRevision: v4.10.1
+          helm:
+            releaseName: ingress-nginx
+            valueFiles:
+            - $values/kubernetes/{{ .name }}/helm/ingress-nginx.yaml
+        - repoURL: 'https://github.com/kubernetes/k8s.io.git'
+          targetRevision: main
+          ref: values
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

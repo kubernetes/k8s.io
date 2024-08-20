@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "586409285143-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-zeitgeist/serviceAccounts/586409285143-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "107590124475164930128",
+  "projectId": "k8s-staging-zeitgeist",
+  "uniqueId": "107590124475164930128"
+}

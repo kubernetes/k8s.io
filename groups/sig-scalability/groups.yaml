@@ -41,6 +41,42 @@ groups:
   # subproject artifacts being stored in the GCS bucket
   #
 
+  - email-id: sig-scalability-leads@kubernetes.io
+    name: sig-scalability-leads
+    description: |-
+      sig-scalability leads
+    owners:
+      - marcel.zieba@isovalent.com
+      - shyam123.jvs95@gmail.com
+      - wojtekt@google.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+
+  - email-id: sig-scalability@kubernetes.io
+    name: sig-scalability
+    description: |-
+      SIG scalability general discussion group
+    owners:
+      - marcel.zieba@isovalent.com
+      - shyam123.jvs95@gmail.com
+      - wojtekt@google.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
 
   #
   # k8s-infra owners for sig-owned subprojects

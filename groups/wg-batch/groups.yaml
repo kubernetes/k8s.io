@@ -15,7 +15,7 @@ groups:
     owners:
       - acondor@google.com
       - mwielgus@google.com
-      - maszulik@redhat.com
+      - soltysh@gmail.com
       - swati.tcd@gmail.com
 
   - email-id: wg-batch@kubernetes.io
@@ -32,7 +32,7 @@ groups:
     owners:
       - acondor@google.com
       - mwielgus@google.com
-      - maszulik@redhat.com
+      - soltysh@gmail.com
       - swati.tcd@gmail.com
     members:
       - wg-batch-leads@kubernetes.io

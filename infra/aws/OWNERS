@@ -3,10 +3,7 @@
 filters:
   ".*":
     approvers:
-    - ameukam
-    - dims
-    - spiffxp
-    - thockin
+    - sig-k8s-infra-leads
     labels:
     - sig/k8s-infra
     - area/infra

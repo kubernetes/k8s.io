@@ -1,3 +1,0 @@
-- name: capi-cloudstack-controller
-  dmap:
-    "sha256:faaa0c25b7d5ec4fcb80e98ffc6fdfed189acc7ec4db963c82f18d5747abd328": ["v0.4.4"]

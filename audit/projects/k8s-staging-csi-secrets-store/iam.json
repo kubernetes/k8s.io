@@ -34,7 +34,8 @@
     },
     {
       "members": [
-        "serviceAccount:service-766197520365@containerregistry.iam.gserviceaccount.com"
+        "serviceAccount:service-766197520365@containerregistry.iam.gserviceaccount.com",
+        "serviceAccount:766197520365-compute@developer.gserviceaccount.com"
       ],
       "role": "roles/editor"
     },

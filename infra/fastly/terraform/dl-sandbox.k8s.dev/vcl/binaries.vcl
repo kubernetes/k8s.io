@@ -53,9 +53,8 @@ sub vcl_fetch {
 
   # TODO: Drop this when the origin(GCS bucket) is owned by the community
   # See: https://github.com/kubernetes/k8s.io/issues/2396
-  if (beresp.status == 200 && req.url.path ~ "^/release/") {
-    set beresp.http.Cache-Control = "private, no-store"; # Don't cache in the browser
-    set beresp.ttl = 30d;
+  if (beresp.status == 206 && req.url.path ~ "^/release/") {
+    set beresp.ttl = 1y;
     set beresp.ttl -= std.atoi(beresp.http.Age);
     return (deliver);
   }
@@ -102,8 +101,22 @@ sub vcl_hit {
 }
 
 sub vcl_deliver {
-  unset resp.http.Server;
+
+  if (resp.http.cache-control:max-age) {
+    unset resp.http.expires;
+  }
+
+  if(req.url.path ~ "^/release/" && fastly.ff.visits_this_service == 0) {
+   set resp.http.Cache-Control = "private, no-store"; # Don't cache in the browser
+  }
+
+  # Unset AWS-compatible headers
+  unset resp.http.x-amz-checksum-crc32c;
+  unset resp.http.x-amz-meta-goog-reserved-file-mtime; 
+  unset resp.http.x-amz-meta-x-goog-reserved-source-generation;
+
   #Unset Google headers
+  unset resp.http.x-goog-custom-time;
   unset resp.http.x-goog-generation;
   unset resp.http.x-goog-hash;
   unset resp.http.x-goog-meta-goog-reserved-file-mtime;
@@ -114,10 +127,24 @@ sub vcl_deliver {
   unset resp.http.x-guploader-uploadid;
 
 #FASTLY deliver
+
+  if (!req.http.Fastly-Debug) {
+    unset resp.http.Server;
+    unset resp.http.Via;
+    unset resp.http.X-Powered-By;
+    unset resp.http.X-Served-By;
+    unset resp.http.X-Cache;
+    unset resp.http.X-Cache-Hits;
+    unset resp.http.X-Timer;
+  }
+
   return(deliver);
 }
 
 sub vcl_miss {
+  if(req.backend.is_origin) {
+    call set_google_auth_header;
+  }
 #FASTLY miss
   return(fetch);
 }
@@ -155,5 +182,8 @@ sub vcl_error {
 }
 
 sub vcl_pass {
+  if(req.backend.is_origin) {
+    call set_google_auth_header;
+  }
 #FASTLY pass
 }

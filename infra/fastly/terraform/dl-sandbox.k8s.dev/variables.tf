@@ -16,7 +16,7 @@ limitations under the License.
 
 variable "bucket" {
   type    = string
-  default = "kubernetes-release"
+  default = "767373bbdcb8270361b96548387bf2a9ad0d48758c35"
 }
 
 variable "fastly_api_key" {

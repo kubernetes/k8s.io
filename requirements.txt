@@ -1,2 +1,2 @@
-yamllint==1.13.0
+yamllint==1.18.0
 yq==2.12.0

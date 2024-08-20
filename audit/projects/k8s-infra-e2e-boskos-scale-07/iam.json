@@ -10,6 +10,14 @@
       "members": [
         "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
       ],
+      "role": "roles/cloudkms.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:908953038229-compute@developer.gserviceaccount.com",
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "serviceAccount:service-908953038229@compute-system.iam.gserviceaccount.com"
+      ],
       "role": "roles/cloudkms.cryptoKeyEncrypterDecrypter"
     },
     {
@@ -44,6 +52,12 @@
         "serviceAccount:service-908953038229@cloud-filer.iam.gserviceaccount.com"
       ],
       "role": "roles/file.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountUser"
     },
     {
       "members": [

@@ -6,7 +6,7 @@ groups:
   - email-id: leads@kubernetes.io
     name: leads
     description: |-
-      SIG/WG/UG Leads
+      SIG/WG/Committee Leads
     settings:
       AllowWebPosting: "true"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -18,140 +18,48 @@ groups:
       - cblecker@gmail.com
       - contributors@kubernetes.io
     managers:
-      - ihor@cncf.io
-      - alison@alisondowdney.com
-      - jdumars@gmail.com
+      - kaslin.fields@gmail.com # SIG ContribEx
       - killen.bob@gmail.com
+      - madhav.jiv@gmail.com # SIG ContribEx
       - nikitaraghunath@gmail.com
-      - spiffxp@gmail.com
+      - pal.nabarun95@gmail.com # SIG ContribEx
+      - priyankasaggu11929@gmail.com # SIG ContribEx
     members:
-      - AnaMMedina21@gmail.com # CoCC
-      - acondor@google.com
-      - adolfo.garcia@uservers.net # SIG Release
-      - ahg@google.com
-      - alarcj137@gmail.com
-      - amerai@google.com
-      - ameukam@gmail.com
-      - amim.knabben@gmail.com # SIG Windows
-      - antheabjung@gmail.com
-      - antonio.ojea.garcia@gmail.com
-      - apelisse@google.com
-      - aravindh.foss@pm.me # SIG Windows
-      - aguclu@redhat.com # SIG CLI
-      - augustus@cisco.com # SIG Release
-      - benjamin.ahrtr@gmail.com # SIG etcd
-      - bentheelder@google.com
-      - bpratt@redhat.com # SIG Testing
-      - bridget@kromhout.org # SIG Cloud Provider
+      - conduct@kubernetes.io
+      - steering-private@kubernetes.io
+      - security@kubernetes.io
+      - sig-api-machinery-leads@kubernetes.io
+      - sig-apps-leads@kubernetes.io
+      - sig-architecture-leads@kubernetes.io
+      - sig-auth-leads@kubernetes.io
+      - sig-autoscaling-leads@kubernetes.io
+      - sig-cli-leads@kubernetes.io
+      - sig-cloud-provider-leads@kubernetes.io
+      - sig-cluster-lifecycle-leads@kubernetes.io
+      - sig-contributor-experience-leads@kubernetes.io
+      - sig-docs-leads@kubernetes.io
+      - sig-etcd-leads@kubernetes.io
+      - sig-instrumentation-leads@kubernetes.io
+      - sig-k8s-infra-leads@kubernetes.io
+      - sig-multicluster-leads@kubernetes.io
+      - sig-network-leads@kubernetes.io
+      - sig-node-leads@kubernetes.io
+      - sig-release-leads@kubernetes.io
+      - sig-scalability-leads@kubernetes.io
+      - sig-scheduling-leads@kubernetes.io
+      - sig-security-leads@kubernetes.io
+      - sig-storage-leads@kubernetes.io
+      - sig-testing-leads@kubernetes.io
+      - sig-ui-leads@kubernetes.io
+      - sig-windows-leads@kubernetes.io
+      - wg-batch-leads@kubernetes.io
+      - wg-device-management-leads@kubernetes.io
+      - wg-etcd-operator-leads@kubernetes.io
+      - wg-lts-leads@kubernetes.io
+      - wg-serving-leads@kubernetes.io
       - caniszczyk@linuxfoundation.org
-      - cbelu@cloudbasesolutions.com
-      - cecilerobertm@gmail.com
-      - chiachenk@google.com
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
-      - ctadeu@gmail.com # SIG Release
-      - cy@borg.dev # SIG K8s Infra
-      - danwinship@redhat.com # SIG Network
-      - davanum@gmail.com
-      - dawnchen@google.com
-      - dbosanac@redhat.com
-      - dcampau1@gmail.com
-      - dcbw@redhat.com
-      - ddebroy@gmail.com
-      - deads@redhat.com
-      - decarr@redhat.com
-      - dgrisonn@redhat.com
-      - divya.mohan0209@gmail.com
-      - eddiezane@gmail.com # CLI
-      - ehashman@apple.com
-      - fabrizio.pandini@gmail.com
-      - fbongiovanni@google.com
-      - fbranczyk@gmail.com
-      - frapposelli@vmware.com
-      - guyjtempleton@googlemail.com
-      - gveronicalg@gmail.com # SIG Release
-      - hankang@google.com
-      - hilliary.lipsig@gmail.com # CoCC
-      - hpandey@pivotal.io
-      - hweicdl@gmail.com
-      - ian@coldwater.io
-      - irvi.fa@gmail.com
-      - jablair@redhat.com # SIG etcd
-      - jameswangel@gmail.com
-      - jayunit100.apache@gmail.com
-      - jbelamaric@google.com
-      - jberkus@redhat.com
-      - jeef111x@gmail.com
-      - jeremy.r.rickard@gmail.com # SIG Release
-      - jeremyot@google.com
-      - jim@nirmata.com
-      - jonathan.berkhahn@gmail.com
-      - jpbetz@google.com
-      - jsafrane@redhat.com
-      - jshubheksha@gmail.com
-      - jsturtevant@gmail.com
-      - justin@fathomdb.com
-      - k8s@auggie.dev # SIG Release
-      - kaitlynbarnard10@gmail.com
-      - kaslin.fields@gmail.com
-      - kat.cosgrove@gmail.com
-      - kbhawkey@gmail.com
-      - kikis.github@gmail.com
-      - klaus1982.cn@gmail.com
-      - ksemenov@vmware.com
-      - lachlan.evenson@gmail.com
-      - lancashiredanielle@gmail.com
-      - liggitt@google.com
-      - madhav.jiv@gmail.com
-      - marosset@microsoft.com
-      - maszulik@redhat.com # SIG CLI, Apps
-      - matt.farina@gmail.com
-      - mcqueenorama@gmail.com
-      - michmike@gmail.com
-      - mikedanese@google.com
-      - mpuckett259@gmail.com # SIG CLI
-      - msau@google.com
-      - msm@opbstudios.com # SIG Cloud Provider
-      - mwielgus@google.com
-      - natalivlatko@gmail.com
-      - neolit123@gmail.com
-      - nospam.wong@gmail.com
-      - paco.xu@daocloud.io
-      - pal.nabarun95@gmail.com
-      - patrick.ohly@intel.com
-      - priyankasaggu11929@gmail.com
-      - prydonius@gmail.com
-      - quinton@hoole.biz
-      - rficcaglia@gmail.com
+      - kikis.github@gmail.com #enhancements subproject
       - ricardo.katz@gmail.com # Sig Network Sub Project Ingress-nginx
-      - rita.z.zhang@gmail.com
-      - rlejano@gmail.com
-      - s.kanzhelev@gmail.com # SIG Node
-      - saadali@google.com
-      - saschagrunert@gmail.com # SIG Release
-      - saveetha13@gmail.com
-      - shane@konghq.com # SIG Network
-      - shu.mutow@gmail.com
-      - siarkowicz@google.com
-      - stefan.schimanski@gmail.com
       - strong.james.e@gmail.com # Sig Network Sub Project Ingress-nginx
-      - swati.tcd@gmail.com
-      - szostok.mateusz@gmail.com
-      - tabitha.c.sable@gmail.com
-      - tasha.drew@gmail.com
-      - theenjeru@gmail.com
-      - thockin@google.com
-      - timallclair@gmail.com
-      - timothysc@gmail.com
-      - tpepper@vmware.com
-      - vince@vincepri.com
-      - vincepri@vmware.com
-      - wenjiazhang@google.com # SIG etcd
-      - wfender@google.com
-      - wojtekt@google.com
-      - xandergrzyw@gmail.com # CoCC
-      - xingyang105@gmail.com
-      - ynli@google.com
-      - arangogutierrez@gmail.com  # WG Serving
-      - terrytangyuan@gmail.com  # WG Serving
-      - seedjeffwan@gmail.com  # WG Serving

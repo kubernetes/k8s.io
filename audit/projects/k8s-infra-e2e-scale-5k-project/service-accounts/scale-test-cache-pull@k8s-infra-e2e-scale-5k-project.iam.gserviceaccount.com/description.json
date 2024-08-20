@@ -1,0 +1,9 @@
+{
+  "description": "used to access the AR pull through cache for registry.k8s.io",
+  "displayName": "scale test cache pull",
+  "email": "scale-test-cache-pull@k8s-infra-e2e-scale-5k-project.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-e2e-scale-5k-project/serviceAccounts/scale-test-cache-pull@k8s-infra-e2e-scale-5k-project.iam.gserviceaccount.com",
+  "oauth2ClientId": "101695919672032960574",
+  "projectId": "k8s-infra-e2e-scale-5k-project",
+  "uniqueId": "101695919672032960574"
+}
