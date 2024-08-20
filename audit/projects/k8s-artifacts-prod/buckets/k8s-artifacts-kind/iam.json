@@ -28,12 +28,6 @@
         "serviceAccount:k8s-infra-promoter@k8s-artifacts-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
-    },
-    {
-      "members": [
-        "allUsers"
-      ],
-      "role": "roles/storage.objectViewer"
     }
   ]
 }
