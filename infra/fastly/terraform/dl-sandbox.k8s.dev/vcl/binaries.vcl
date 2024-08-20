@@ -44,8 +44,15 @@ sub vcl_fetch {
     set beresp.stale_while_revalidate = 60s; // 1 minute
   }
 
-  //Ensure version markers are not cached
-  if (req.url.ext == "txt") {
+  # Ensure version markers are not cached at the edge
+  if (req.url.path ~ "^/release/(latest|stable)(-\d+(\.\d+))?\.txt\z") {
+    set beresp.cacheable = false;
+    set beresp.ttl = 0s;
+    return (pass);
+  }
+
+  # Ensure HTML and JSON files are not cached at the edge
+  if (req.url.ext ~ "(html|json)\z") {
     set beresp.cacheable = false;
     set beresp.ttl = 0s;
     return (pass);
