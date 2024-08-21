@@ -13,9 +13,7 @@ resources:
 - halogen.yaml
 - hook.yaml
 - horologium.yaml
-- ing_ingress.yaml
-- ingress.yaml
-- managedcertificates.yaml
+- gateway.yaml
 - needs-rebase.yaml
 - pipeline.yaml
 - prow-controller-manager.yaml
@@ -36,4 +34,4 @@ patches:
   target:
     kind: Deployment
     # These deployments talk to Kubernetes clusters and we don't want to do that yet
-    name: hook|prow-controller-manager|crier|deck|sinker
+    name: prow-controller-manager|crier|deck|sinker

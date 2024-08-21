@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: plugins
+data:
+  plugins.yaml: ""
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+data:
+  config.yaml: ""
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: job-config
