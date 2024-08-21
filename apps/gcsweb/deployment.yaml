@@ -29,6 +29,9 @@ spec:
             # buckets owned by kubernetes.io
             - -b=k8s-infra-scalability-tests-logs
             - -b=k8s-release-dev
+            - -b=kubernetes-ci-logs
+            # buckets owned by vendors publishing to testgrid that don't have gcsweb deployed
+            - -b=ppc64le-kubernetes
             # buckets owned by google.com
             - -b=kubernetes-jenkins
             - -b=kubernetes-release
