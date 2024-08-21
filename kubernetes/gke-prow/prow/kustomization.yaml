@@ -10,7 +10,6 @@ resources:
 - external-secrets.yaml
 - gce-ssd-retain_storageclass.yaml
 - ghproxy.yaml
-- halogen.yaml
 - hook.yaml
 - horologium.yaml
 - gateway.yaml
@@ -34,4 +33,4 @@ patches:
   target:
     kind: Deployment
     # These deployments talk to Kubernetes clusters and we don't want to do that yet
-    name: prow-controller-manager|crier|deck|sinker
+    name: prow-controller-manager|crier|sinker
