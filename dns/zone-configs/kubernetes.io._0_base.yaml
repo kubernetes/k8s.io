@@ -172,7 +172,7 @@ pr-test:
   value: pr-test.k8s.io.
 prow:
   type: CNAME
-  value: prow.k8s.io.
+  value: redirect.k8s.io.
 prs:
   type: CNAME
   value: prs.k8s.io.
