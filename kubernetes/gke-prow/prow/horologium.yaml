@@ -15,7 +15,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: horologium
   labels:
     app: horologium
@@ -63,7 +62,6 @@ kind: Service
 metadata:
   labels:
     app: horologium
-  namespace: default
   name: horologium
 spec:
   ports:

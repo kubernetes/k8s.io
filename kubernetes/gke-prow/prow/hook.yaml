@@ -15,7 +15,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: hook
   labels:
     app: hook
@@ -48,6 +47,7 @@ spec:
         - --github-token-path=/etc/github/oauth
         - --config-path=/etc/config/config.yaml
         - --job-config-path=/etc/job-config
+        # - --webhook-path=/
         env:
         # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
         - name: KUBECONFIG
@@ -137,8 +137,8 @@ spec:
         configMap:
           name: plugins
       - name: cat-api
-        configMap:
-          name: cat-api-key
+        secret:
+          secretName: cat-api-key
       - name: unsplash-api
         secret:
           secretName: unsplash-api-key
@@ -195,7 +195,6 @@ metadata:
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  namespace: default
   name: "hook"
 rules:
   - apiGroups:

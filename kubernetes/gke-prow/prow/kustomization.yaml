@@ -1,9 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: prow
+namespace: default
 
 resources:
-- prowjob-crd.yaml
 - cherrypicker.yaml
 - crier.yaml
 - deck.yaml
@@ -20,7 +19,9 @@ resources:
 - sinker.yaml
 - statusreconciler.yaml
 - tide.yaml
+- monitoring.yaml
 - trusted_serviceaccounts.yaml
+- configmap.yaml
 
 patches:
 - patch: |
