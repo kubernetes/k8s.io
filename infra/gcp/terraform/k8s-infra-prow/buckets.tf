@@ -81,3 +81,37 @@ module "testgrid_config_bucket" {
     }
   ]
 }
+
+// Create gs://k8s-testgrid-config to store K8s TestGrid config.
+module "prow_bucket" {
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 5"
+
+  name       = "kubernetes-ci-logs"
+  project_id = module.project.project_id
+  location   = "us-central1"
+
+  # TODO: BenTheElder, what lifecycle policy do we have on the previous bucket
+  # lifecycle_rules = [{
+  #   action = {
+  #     type = "Delete"
+  #   }
+  #   condition = {
+  #     age        = 90 # 90d
+  #     with_state = "ANY"
+  #   }
+  # }]
+
+  iam_members = [
+    {
+      // prow pod-utils service account
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+    },
+    {
+      role   = "roles/storage.objectViewer"
+      member = "allUsers"
+    },
+  ]
+}
+
