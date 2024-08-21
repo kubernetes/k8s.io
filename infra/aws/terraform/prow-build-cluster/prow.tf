@@ -33,3 +33,9 @@ resource "aws_iam_openid_connect_provider" "k8s_infra_prow" {
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = ["08745487e891c19e3078c1f2a07e452950ef36f6"]
 }
+
+resource "aws_iam_openid_connect_provider" "gke_utility_cluster" {
+  url             = "https://container.googleapis.com/v1/projects/k8s-infra-prow/locations/us-central1/clusters/utility"
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = ["08745487e891c19e3078c1f2a07e452950ef36f6"]
+}

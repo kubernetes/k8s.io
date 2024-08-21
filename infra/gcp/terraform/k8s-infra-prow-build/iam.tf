@@ -14,6 +14,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+module "iam" {
+  source  = "terraform-google-modules/iam/google//modules/projects_iam"
+  version = "~> 7"
+
+  projects = [module.project.project_id]
+
+  mode = "authoritative"
+
+  bindings = {
+    "roles/container.admin" = [
+      "group:k8s-infra-cluster-admins@kubernetes.io",
+      "serviceAccount:argocd@k8s-infra-prow.iam.gserviceaccount.com",
+      "serviceAccount:prow-control-plane@k8s-infra-prow.iam.gserviceaccount.com",
+      "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    ]
+  }
+}
+
+
 resource "google_iam_workload_identity_pool" "eks_cluster" {
   project = module.project.project_id
 

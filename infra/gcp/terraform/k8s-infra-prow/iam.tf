@@ -69,6 +69,21 @@ resource "google_service_account" "argocd" {
   project      = module.project.project_id
 }
 
+resource "google_service_account_iam_binding" "argocd" {
+  service_account_id = google_service_account.argocd.name
+  role               = "roles/iam.workloadIdentityUser"
+
+  members = [
+    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/config-bootstrapper]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/crier]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/deck]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/hook]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/prow-controller-manager]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/sinker]",
+  ]
+}
+
+
 resource "google_service_account" "image_builder" {
   account_id   = "image-builder"
   display_name = "Image Builder"
@@ -79,4 +94,33 @@ resource "google_service_account_iam_member" "image_builder" {
   service_account_id = google_service_account.image_builder.name
   role               = "roles/iam.serviceAccountUser"
   member             = "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+}
+
+resource "google_service_account" "prow" {
+  account_id   = "prow-control-plane"
+  display_name = "Prow Control Plane"
+  project      = module.project.project_id
+}
+
+resource "google_service_account_iam_binding" "prow" {
+  service_account_id = google_service_account.prow.name
+  role               = "roles/iam.workloadIdentityUser"
+  members = [
+    "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-application-controller]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-server]",
+  ]
+}
+
+resource "google_service_account" "halogen" {
+  account_id   = "halogen"
+  display_name = "halogen"
+  project      = module.project.project_id
+}
+
+resource "google_service_account_iam_binding" "halogen" {
+  service_account_id = google_service_account.halogen.name
+  role               = "roles/iam.workloadIdentityUser"
+  members = [
+    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/halogen]",
+  ]
 }
