@@ -51,7 +51,7 @@ spec:
         env:
         # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
         - name: KUBECONFIG
-          value: "/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig"
+          value: "/etc/kubeconfig-k8s-infra-prow/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig"
         # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
         - name: AWS_ROLE_ARN
           value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
@@ -87,6 +87,9 @@ spec:
           readOnly: true
         - name: unsplash-api
           mountPath: /etc/unsplash-api
+          readOnly: true
+        - mountPath: /etc/kubeconfig-k8s-infra-prow
+          name: kubeconfig-k8s-infra-prow
           readOnly: true
         - mountPath: /etc/kubeconfig-k8s-infra-prow-build
           name: kubeconfig-k8s-infra-prow-build
@@ -142,6 +145,10 @@ spec:
       - name: unsplash-api
         secret:
           secretName: unsplash-api-key
+      - name: kubeconfig-k8s-infra-prow
+        secret:
+          defaultMode: 420
+          secretName: kubeconfig-k8s-infra-prow
       - name: kubeconfig-k8s-infra-prow-build
         secret:
           defaultMode: 420
