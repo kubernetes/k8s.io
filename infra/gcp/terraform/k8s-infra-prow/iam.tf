@@ -74,12 +74,12 @@ resource "google_service_account_iam_binding" "argocd" {
   role               = "roles/iam.workloadIdentityUser"
 
   members = [
-    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/config-bootstrapper]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/crier]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/deck]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/hook]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/prow-controller-manager]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/sinker]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultconfig-bootstrapper]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultcrier]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultdeck]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[defaulthook]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultprow-controller-manager]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultsinker]",
   ]
 }
 
@@ -108,19 +108,5 @@ resource "google_service_account_iam_binding" "prow" {
   members = [
     "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-application-controller]",
     "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-server]",
-  ]
-}
-
-resource "google_service_account" "halogen" {
-  account_id   = "halogen"
-  display_name = "halogen"
-  project      = module.project.project_id
-}
-
-resource "google_service_account_iam_binding" "halogen" {
-  service_account_id = google_service_account.halogen.name
-  role               = "roles/iam.workloadIdentityUser"
-  members = [
-    "serviceAccount:k8s-infra-prow.svc.id.goog[prow/halogen]",
   ]
 }
