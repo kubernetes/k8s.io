@@ -1,0 +1,125 @@
+# Copyright 2017 The Kubernetes Authors All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: tide
+  labels:
+    app: tide
+spec:
+  replicas: 1 # Do not scale up.
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: tide
+  template:
+    metadata:
+      labels:
+        app: tide
+    spec:
+      serviceAccountName: tide
+      containers:
+      - name: tide
+        image: us-docker.pkg.dev/k8s-infra-prow/images/tide:v20240802-66b115076
+        args:
+        - --dry-run=false
+        - --github-endpoint=http://ghproxy
+        - --github-endpoint=https://api.github.com
+        - --github-token-path=/etc/github/oauth
+        - --config-path=/etc/config/config.yaml
+        - --job-config-path=/etc/job-config
+        - --history-uri=gs://kubernetes-ci-logs/tide-history.json
+        - --status-path=gs://kubernetes-ci-logs/tide-status-checkpoint.yaml
+        ports:
+        - name: http
+          containerPort: 8888
+        - name: metrics
+          containerPort: 9090
+        volumeMounts:
+        - name: oauth
+          mountPath: /etc/github
+          readOnly: true
+        - name: config
+          mountPath: /etc/config
+          readOnly: true
+        - name: job-config
+          mountPath: /etc/job-config
+          readOnly: true
+      volumes:
+      - name: oauth
+        secret:
+          secretName: oauth-token
+      - name: config
+        configMap:
+          name: config
+      - name: job-config
+        configMap:
+          name: job-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: tide
+  namespace: default
+  name: tide
+spec:
+  selector:
+    app: tide
+  ports:
+  - name: main
+    port: 80
+    targetPort: 8888
+    protocol: TCP
+  - name: metrics
+    port: 9090
+    protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: prow-control-plane@k8s-infra-prow.iam.gserviceaccount.com
+  name: tide
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: tide
+rules:
+  - apiGroups:
+      - "prow.k8s.io"
+    resources:
+      - prowjobs
+    verbs:
+      - create
+      - list
+      - get
+      - watch
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: tide
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: tide
+subjects:
+- kind: ServiceAccount
+  name: tide

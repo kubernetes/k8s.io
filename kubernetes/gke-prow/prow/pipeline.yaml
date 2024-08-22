@@ -1,0 +1,90 @@
+# kind: Deployment
+# apiVersion: apps/v1
+# metadata:
+#   name: prow-pipeline
+#   namespace: default
+# spec:
+#   replicas: 1
+#   strategy:
+#     type: Recreate
+#   selector:
+#     matchLabels:
+#       app: prow-pipeline
+#   template:
+#     metadata:
+#       labels:
+#         app: prow-pipeline
+#     spec:
+#       serviceAccountName: prow-pipeline
+#       containers:
+#       - name: pipeline
+#         image: us-docker.pkg.dev/k8s-infra-prow/images/pipeline:v20240802-66b115076
+#         args:
+#         - --all-contexts
+#         - --config=/etc/prow-config/config.yaml
+#         env:
+#         # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
+#         - name: KUBECONFIG
+#           value: "/etc/kubeconfig/config"
+#         volumeMounts:
+#         - mountPath: /etc/kubeconfig
+#           name: kubeconfig
+#           readOnly: true
+#         - mountPath: /etc/prow-config
+#           name: prow-config
+#           readOnly: true
+#       volumes:
+#       - name: kubeconfig
+#         secret:
+#           defaultMode: 420
+#           secretName: kubeconfig
+#       - name: prow-config
+#         configMap:
+#           name: config
+# ---
+# kind: ServiceAccount
+# apiVersion: v1
+# metadata:
+#   name: prow-pipeline
+#   namespace: default
+# ---
+# kind: ClusterRole
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: prow-pipeline
+# rules:
+# - apiGroups:
+#   - tekton.dev
+#   resources:
+#   - pipelineruns
+#   - pipelineresources
+#   verbs:
+#   - create
+#   - delete
+#   - get
+#   - list
+#   - update
+#   - watch
+# - apiGroups:
+#   - prow.k8s.io
+#   resources:
+#   - prowjobs
+#   verbs:
+#   - get
+#   - list
+#   - watch
+#   - update
+#   - patch
+# ---
+# kind: ClusterRoleBinding
+# apiVersion: rbac.authorization.k8s.io/v1
+# metadata:
+#   name: prow-pipeline
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: prow-pipeline
+# subjects:
+# - kind: ServiceAccount
+#   name: prow-pipeline
+#   namespace: default
