@@ -14,13 +14,16 @@ spec:
       name: '{{ .name }}'
     spec:
       destination:
-        namespace: prow
+        namespace: default
         server: "{{ .server }}"
       project: default
-      source:
-        path: kubernetes/{{ .name }}/prow
-        repoURL: https://github.com/kubernetes/k8s.io
-        targetRevision: main
+      sources:
+        - path: kubernetes/{{ .name }}/prow
+          repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
+        - path: kubernetes/{{ .name }}/prow/crds
+          repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
       syncPolicy:
         # WILL BE REENABLED AFTER MIGRATION
         # automated:
