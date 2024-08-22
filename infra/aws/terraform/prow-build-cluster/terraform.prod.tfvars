@@ -33,9 +33,9 @@ eks_cluster_viewers = [
 ]
 
 cluster_name               = "prow-build-cluster"
-cluster_version            = "1.28"
+cluster_version            = "1.29"
 
-node_group_version_stable  = "1.28"
+node_group_version_stable  = "1.29"
 node_instance_types_stable = ["r5ad.2xlarge"]
 node_desired_size_stable   = 3
 
@@ -52,4 +52,4 @@ node_labels_stable = {
 
 node_volume_size = 100
 
-node_max_unavailable_percentage = 100 # To ease testing
+node_max_unavailable = 1

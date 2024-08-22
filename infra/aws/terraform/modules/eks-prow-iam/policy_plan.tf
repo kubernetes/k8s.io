@@ -96,7 +96,8 @@ data "aws_iam_policy_document" "eks_plan" {
       "s3:GetObject",
       "s3:ListBucket",
       "sqs:GetQueueAttributes",
-      "sqs:ListQueueTags"
+      "sqs:ListQueueTags",
+      "ssm:GetParameter"
     ]
   }
 }
