@@ -29,6 +29,8 @@
     {
       "members": [
         "group:k8s-infra-cluster-admins@kubernetes.io",
+        "serviceAccount:argocd@k8s-infra-prow.iam.gserviceaccount.com",
+        "serviceAccount:prow-control-plane@k8s-infra-prow.iam.gserviceaccount.com",
         "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
       "role": "roles/container.admin"
