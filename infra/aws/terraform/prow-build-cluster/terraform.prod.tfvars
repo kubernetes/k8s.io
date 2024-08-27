@@ -33,9 +33,9 @@ eks_cluster_viewers = [
 ]
 
 cluster_name               = "prow-build-cluster"
-cluster_version            = "1.29"
+cluster_version            = "1.30"
 
-node_group_version_stable  = "1.29"
+node_group_version_stable  = "1.30"
 node_instance_types_stable = ["r5ad.2xlarge"]
 node_desired_size_stable   = 3
 
