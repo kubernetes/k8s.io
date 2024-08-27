@@ -113,7 +113,7 @@ variable "node_desired_size_stable" {
   nullable    = false
 }
 
-variable "node_max_unavailable_percentage" {
+variable "node_max_unavailable" {
   type        = number
   description = "Maximum unavailable nodes in a node group"
 }

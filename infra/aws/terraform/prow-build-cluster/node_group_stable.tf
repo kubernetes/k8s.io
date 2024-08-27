@@ -33,8 +33,10 @@ locals {
 
     iam_role_permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
-    ami_type             = "BOTTLEROCKET_x86_64"
-    platform             = "bottlerocket"
+    ami_type                       = "BOTTLEROCKET_x86_64"
+    platform                       = "bottlerocket"
+    use_latest_ami_release_version = true
+
     bootstrap_extra_args = <<-EOT
       # Bottlerocket instances don't have SSH installed by default, but
       # there's the admin container that can be enabled and that comes
@@ -56,7 +58,7 @@ locals {
 
     force_update_version = false
     update_config = {
-      max_unavailable_percentage = var.node_max_unavailable_percentage
+      max_unavailable = var.node_max_unavailable
     }
 
     capacity_type  = "ON_DEMAND"
