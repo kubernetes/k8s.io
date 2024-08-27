@@ -49,8 +49,7 @@ resource "aws_iam_role" "eks_prow_admin" {
       {
         "Effect" : "Allow",
         "Principal" : {
-                      // aws_iam_openid_connect_provider.k8s_infra_prow[0].arn
-          "Federated" : "arn:aws:iam::468814281478:oidc-provider/container.googleapis.com/v1/projects/k8s-infra-prow/locations/us-central1/clusters/prow"
+          "Federated" : aws_iam_openid_connect_provider.k8s_infra_prow[0].arn
         },
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
