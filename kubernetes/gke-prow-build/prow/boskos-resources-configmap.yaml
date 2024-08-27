@@ -218,6 +218,4 @@ data:
       type: scalability-scale-project
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
   name: resources
-  namespace: test-pods
