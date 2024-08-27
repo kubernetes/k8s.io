@@ -124,6 +124,15 @@ groups:
       - jsafrane@redhat.com
       - patrick.ohly@intel.com
 
+  - email-id: k8s-infra-staging-csi-vsphere@kubernetes.io
+    name: k8s-infra-staging-csi-vsphere
+    description: |-
+      ACL for staging vSphere CSI artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - divyen.patel@broadcom.com
+      - xingyang105@gmail.com
   #
   # k8s-infra owners for sig-owned subprojects
   #
