@@ -28,20 +28,14 @@ resource "aws_iam_role" "eks_prow_admin" {
       {
         "Effect" : "Allow",
         "Principal" : {
-          "Federated" : aws_iam_openid_connect_provider.k8s_prow[0].arn
+          "Federated" : aws_iam_openid_connect_provider.gke_utility_cluster.arn
         },
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
           "StringEquals" : {
-            "container.googleapis.com/v1/projects/k8s-prow/locations/us-central1-f/clusters/prow:sub" : [
-              // https://github.com/kubernetes/test-infra/tree/master/config/prow/cluster
-              // all services that load kubeconfig should be listed here
-              "system:serviceaccount:default:deck",
-              "system:serviceaccount:default:config-bootstrapper",
-              "system:serviceaccount:default:crier",
-              "system:serviceaccount:default:sinker",
-              "system:serviceaccount:default:prow-controller-manager",
-              "system:serviceaccount:default:hook"
+            "container.googleapis.com/v1/projects/k8s-infra-prow/locations/us-central1/clusters/utility:sub" : [
+              "system:serviceaccount:argocd:argocd-application-controller",
+              "system:serviceaccount:argocd:argocd-server",
             ]
           }
         }
@@ -55,6 +49,8 @@ resource "aws_iam_role" "eks_prow_admin" {
         "Condition" : {
           "StringEquals" : {
             "container.googleapis.com/v1/projects/k8s-infra-prow/locations/us-central1/clusters/prow:sub" : [
+              // https://github.com/kubernetes/k8s.io/tree/main/kubernetes/gke-prow/prow
+              // all services that load kubeconfig should be listed here
               "system:serviceaccount:default:deck",
               "system:serviceaccount:default:config-bootstrapper",
               "system:serviceaccount:default:crier",

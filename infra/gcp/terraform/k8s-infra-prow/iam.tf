@@ -28,6 +28,7 @@ module "iam" {
     ]
     "roles/container.admin" = [
       "serviceAccount:${google_service_account.argocd.email}",
+      "serviceAccount:${google_service_account.prow.email}",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-application-controller",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-applicationset-controller",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-server",
@@ -69,6 +70,17 @@ resource "google_service_account" "argocd" {
   project      = module.project.project_id
 }
 
+resource "google_service_account_iam_binding" "argocd" {
+  service_account_id = google_service_account.argocd.name
+  role               = "roles/iam.workloadIdentityUser"
+
+  members = [
+    "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-application-controller]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-server]",
+  ]
+}
+
+
 resource "google_service_account" "image_builder" {
   account_id   = "image-builder"
   display_name = "Image Builder"
@@ -79,4 +91,24 @@ resource "google_service_account_iam_member" "image_builder" {
   service_account_id = google_service_account.image_builder.name
   role               = "roles/iam.serviceAccountUser"
   member             = "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+}
+
+resource "google_service_account" "prow" {
+  account_id   = "prow-control-plane"
+  display_name = "Prow Control Plane"
+  project      = module.project.project_id
+}
+
+resource "google_service_account_iam_binding" "prow" {
+  service_account_id = google_service_account.prow.name
+  role               = "roles/iam.workloadIdentityUser"
+  members = [
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/config-bootstrapper]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/crier]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/deck]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/hook]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/prow-controller-manager]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/sinker]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/tide]",
+  ]
 }
