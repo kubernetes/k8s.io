@@ -69,28 +69,6 @@ flux create source helm eks-charts \
     --interval=${sync_interval} \
     --export >> ${resources_dir}/flux-system/flux-source-helm-eks-charts.yaml
 
-boilerplate > ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
-flux create source helm kubecost \
-    --url https://kubecost.github.io/cost-analyzer \
-    --interval=${sync_interval} \
-    --export >> ${resources_dir}/flux-system/flux-source-helm-kubecost-chart.yaml
-
-# Different helm values are provided canary and prod clusters via ConfigMap
-kubectl create configmap kubecost-helm-values \
-    --from-file=values.yaml=${resources_dir}/kubecost/${PROW_ENV}-cluster-values \
-    --namespace kubecost --dry-run=client -o yaml | kubectl apply -f -
-
-boilerplate > ${resources_dir}/kubecost/flux-hr-kubecost.yaml
-flux create hr kubecost \
-    --source HelmRepository/kubecost.flux-system \
-    --namespace=kubecost \
-    --chart cost-analyzer \
-    --chart-version 2.0.1 \
-    --release-name kubecost \
-    --values-from=ConfigMap/kubecost-helm-values \
-    --interval=${sync_interval} \
-    --export >> ${resources_dir}/kubecost/flux-hr-kubecost.yaml
-
 boilerplate > ${resources_dir}/flux-system/flux-source-helm-karpenter-chart.yaml
 flux create source helm karpenter \
     --url oci://public.ecr.aws/karpenter \
@@ -129,7 +107,6 @@ kustomizations=(
     rbac
     test-pods
     external-secrets
-    kubecost
     karpenter
 )
 
