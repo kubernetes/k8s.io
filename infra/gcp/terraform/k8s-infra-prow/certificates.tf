@@ -33,3 +33,14 @@ resource "google_certificate_manager_certificate" "prow" {
   }
 }
 
+resource "google_certificate_manager_certificate_map" "prow" {
+  project = module.project.project_id
+  name    = "prow-certificates"
+}
+resource "google_certificate_manager_certificate_map_entry" "prow" {
+  project      = module.project.project_id
+  name         = "prow-certificates"
+  map          = google_certificate_manager_certificate_map.prow.name
+  certificates = [google_certificate_manager_certificate.prow.id]
+  matcher      = "PRIMARY"
+}
