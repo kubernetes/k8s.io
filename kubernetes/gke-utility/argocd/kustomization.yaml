@@ -5,6 +5,7 @@ namespace: argocd
 resources:
 - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.11.2
 - extras.yaml
+- clusters.yaml
 
 patches:
 - path: argocd-cm.yaml
