@@ -1,4 +1,4 @@
-# Copyright 2020 The Kubernetes Authors All rights reserved.
+# Copyright 2024 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,20 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The purpose of the PodDisruptionBudget here is to never allow evicting pods created by prow.
-# Eviction of pods can happen for one of two reasons:
-# * Cluster autoscaler downscaling
-# * Someome/Something using `kubectl drain`
-#
-# It is still possible to delete the pods via a normal delete call. See https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/#the-eviction-api
-
-apiVersion: policy/v1
-kind: PodDisruptionBudget
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
 metadata:
-  name: prow-pods
-  namespace: test-pods
+  name: boskos
 spec:
-  maxUnavailable: 0
   selector:
     matchLabels:
-      created-by-prow: "true"
+      app: boskos
+  endpoints:
+  - port: metrics
+    path: /metrics
+    interval: 30s

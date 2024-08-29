@@ -4,7 +4,6 @@ metadata:
   name: boskos-janitor
   labels:
     app: boskos-janitor
-  namespace: test-pods
 spec:
   replicas: 2 # 2 distributed janitor instances
   selector:
@@ -33,4 +32,3 @@ metadata:
   annotations:
     iam.gke.io/gcp-service-account: boskos-janitor@k8s-infra-prow-build.iam.gserviceaccount.com
   name: boskos-janitor
-  namespace: test-pods
