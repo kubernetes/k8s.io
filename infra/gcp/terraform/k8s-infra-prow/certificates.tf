@@ -18,15 +18,15 @@ resource "google_certificate_manager_dns_authorization" "prow" {
   name        = "dns-authz-prow-k8s-io"
   description = "*.prow.k8s.io challenge"
   domain      = "prow.k8s.io"
-  project = module.project.project_id
+  project     = module.project.project_id
 }
 
 resource "google_certificate_manager_certificate" "prow" {
   name        = "prow-certificates"
   description = "Prow Certificates"
-  project = module.project.project_id
+  project     = module.project.project_id
   managed {
-    domains = ["prow.k8s.io","*.prow.k8s.io"]
+    domains = ["prow.k8s.io", "*.prow.k8s.io"]
     dns_authorizations = [
       google_certificate_manager_dns_authorization.prow.id
     ]

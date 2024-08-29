@@ -109,6 +109,10 @@ module "prow_bucket" {
       member = "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
     },
     {
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:${google_service_account.prow.email}"
+    },
+    {
       role   = "roles/storage.objectViewer"
       member = "allUsers"
     },

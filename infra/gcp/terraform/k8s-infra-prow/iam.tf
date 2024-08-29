@@ -28,6 +28,7 @@ module "iam" {
     ]
     "roles/container.admin" = [
       "serviceAccount:${google_service_account.argocd.email}",
+      "serviceAccount:${google_service_account.prow.email}",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-application-controller",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-applicationset-controller",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/argocd/sa/argocd-server",
@@ -74,12 +75,8 @@ resource "google_service_account_iam_binding" "argocd" {
   role               = "roles/iam.workloadIdentityUser"
 
   members = [
-    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultconfig-bootstrapper]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultcrier]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultdeck]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[defaulthook]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultprow-controller-manager]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[defaultsinker]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-application-controller]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-server]",
   ]
 }
 
@@ -106,7 +103,11 @@ resource "google_service_account_iam_binding" "prow" {
   service_account_id = google_service_account.prow.name
   role               = "roles/iam.workloadIdentityUser"
   members = [
-    "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-application-controller]",
-    "serviceAccount:k8s-infra-prow.svc.id.goog[argocd/argocd-server]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/config-bootstrapper]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/crier]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/deck]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/hook]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/prow-controller-manager]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/sinker]",
   ]
 }
