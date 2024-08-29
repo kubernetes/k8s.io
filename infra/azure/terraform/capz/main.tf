@@ -118,7 +118,6 @@ module "role_assignments" {
   source                   = "./role-assignments"
   resource_group_name      = var.resource_group_name
   container_registry_scope = module.container_registry.container_registry_id
-  storage_account_scope    = azurerm_storage_account.k8sprowstorage.id
   subscription_id          = data.azurerm_client_config.current.subscription_id 
   depends_on = [
     azurerm_resource_group.capz_ci,
