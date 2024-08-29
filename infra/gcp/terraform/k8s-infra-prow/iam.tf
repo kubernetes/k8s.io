@@ -109,5 +109,6 @@ resource "google_service_account_iam_binding" "prow" {
     "serviceAccount:k8s-infra-prow.svc.id.goog[default/hook]",
     "serviceAccount:k8s-infra-prow.svc.id.goog[default/prow-controller-manager]",
     "serviceAccount:k8s-infra-prow.svc.id.goog[default/sinker]",
+    "serviceAccount:k8s-infra-prow.svc.id.goog[default/tide]",
   ]
 }
