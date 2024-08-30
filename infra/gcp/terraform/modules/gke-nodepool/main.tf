@@ -37,6 +37,7 @@ resource "google_container_node_pool" "node_pool" {
     min_node_count = var.min_count
     max_node_count = var.max_count
   }
+  node_locations = var.node_locations
 
   // Set machine type, and enable all oauth scopes tied to the service account
   node_config {
