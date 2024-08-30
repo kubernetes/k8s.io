@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-615281671549@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/artifactregistry.serviceAgent"
+    },
+    {
+      "members": [
         "serviceAccount:615281671549@cloudbuild.gserviceaccount.com",
         "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
       ],
@@ -21,7 +27,8 @@
     },
     {
       "members": [
-        "group:k8s-infra-staging-kubernetes@kubernetes.io"
+        "group:k8s-infra-staging-kubernetes@kubernetes.io",
+        "serviceAccount:gcb-image-builder@k8s-staging-kubernetes.iam.gserviceaccount.com"
       ],
       "role": "roles/cloudbuild.builds.editor"
     },

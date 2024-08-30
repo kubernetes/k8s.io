@@ -98,6 +98,7 @@
     },
     {
       "members": [
+        "principal://iam.googleapis.com/projects/773781448124/locations/global/workloadIdentityPools/k8s-infra-prow-build.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
         "serviceAccount:kubernetes-external-secrets@k8s-infra-prow-build.iam.gserviceaccount.com"
       ],
       "role": "roles/secretmanager.secretAccessor"
