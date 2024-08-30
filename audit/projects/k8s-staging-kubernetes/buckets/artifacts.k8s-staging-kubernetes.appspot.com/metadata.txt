@@ -11,8 +11,8 @@ gs://artifacts.k8s-staging-kubernetes.appspot.com/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Fri, 06 Mar 2020 23:30:05 GMT
-	Time updated:			Tue, 02 Aug 2022 15:31:19 GMT
-	Metageneration:			25
+	Time updated:			Thu, 29 Aug 2024 21:11:06 GMT
+	Metageneration:			26
 	Bucket Policy Only enabled:	True
 	Public access prevention:	inherited
 	RPO:				DEFAULT
