@@ -111,15 +111,16 @@ module "prow_build_nodepool_t2a_standard_8" {
   cluster_name = module.prow_build_cluster.cluster.name
   location     = module.prow_build_cluster.cluster.location
   node_locations = [
-    "us-central1-a"
+    "us-central1-a",
+    "us-central1-b",
   ]
-  name          = "pool5-arm64"
+  name          = "pool6-arm64"
   initial_count = 1
   min_count     = 1
   max_count     = 10
   image_type    = "UBUNTU_CONTAINERD"
   machine_type  = "t2a-standard-8"
-  disk_size_gb  = 150
+  disk_size_gb  = 500
   disk_type     = "pd-ssd"
   // GKE automatically taints arm64 nodes
   // https://cloud.google.com/kubernetes-engine/docs/how-to/prepare-arm-workloads-for-deployment#overview
