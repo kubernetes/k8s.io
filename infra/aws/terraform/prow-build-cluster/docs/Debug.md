@@ -17,7 +17,7 @@ This will open a console to the Bottlerocket control container. This container i
 to control the Bottlerocket instance, but it has very limited options and you don't get
 to see the instance's filesystem (you only see the filesystem of the said container).
 To access the instance fully, run `enable-admin-container`. This will start an admin
-containter and exec you into it. This container allows you to preview different instance
+container and exec you into it. This container allows you to preview different instance
 settings including the instance filesystem, but you cannot mutate the instance. If you need
 to change anything, you need to drop in to the instance itself by running `sudo sheltie`.
 
