@@ -1,2 +1,18 @@
 grafana:
   enabled: true
+prometheus:
+  thanosService:
+    enabled: true
+  prometheusSpec:
+    thanos:
+      image: quay.io/thanos/thanos:v0.36.1
+      listenLocal: false
+      objectStorageConfig:
+        secret:
+          type: GCS
+          config:
+            bucket: k8s-io-thanos
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
