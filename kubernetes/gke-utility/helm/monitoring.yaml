@@ -7,6 +7,7 @@ prometheus:
     thanos:
       image: quay.io/thanos/thanos:v0.36.1
       listenLocal: false
+      logLevel: debug
       objectStorageConfig:
         secret:
           type: GCS
@@ -16,3 +17,11 @@ prometheus:
     podMonitorSelectorNilUsesHelmValues: false
     ruleSelectorNilUsesHelmValues: false
     probeSelectorNilUsesHelmValues: false
+
+# These endpoints aren't scrapable on GKE
+coreDns:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
