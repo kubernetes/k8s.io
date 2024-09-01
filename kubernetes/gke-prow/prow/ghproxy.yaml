@@ -25,7 +25,7 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  storageClassName: gce-ssd-retain
+  storageClassName: hyperdisk-balanced
 ---
 apiVersion: apps/v1
 kind: Deployment

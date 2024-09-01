@@ -11,6 +11,7 @@ resources:
 - ghproxy.yaml
 - hook.yaml
 - horologium.yaml
+- hyperdisk-sc.yaml
 - gateway.yaml
 - needs-rebase.yaml
 - pipeline.yaml
