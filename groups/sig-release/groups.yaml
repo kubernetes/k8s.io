@@ -257,19 +257,18 @@ groups:
       - antheabjung@gmail.com
       - augustus@cisco.com
       - bentheelder@google.com
+      - fsmunoz@gmail.com # 1.32 RT Lead
       - gmccloskey@google.com
       - jackhammervyom@gmail.com # 1.32 Release Lead Shadow
       - jameswangel@gmail.com
       - joseph.r.sandoval@gmail.com
-      - mudrinic.mare@gmail.com
-      - spiffxp@google.com
-      - fsmunoz@gmail.com # 1.32 RT Lead
       - kat.cosgrove@gmail.com # Subproject owner
-      - jameswangel@gmail.com # 1.32 Release Branch Manager
       - mickey.boxell@oracle.com # 1.32 Release Branch Manager Associate
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
+      - mudrinic.mare@gmail.com
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
+      - spiffxp@google.com
       - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
 
   - email-id: security-release-team@kubernetes.io
