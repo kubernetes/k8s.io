@@ -14,6 +14,12 @@
     },
     {
       "members": [
+        "serviceAccount:orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/autoscaling.metricsWriter"
+    },
+    {
+      "members": [
         "serviceAccount:asn-etl@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquery.dataEditor"
@@ -105,6 +111,30 @@
     },
     {
       "members": [
+        "serviceAccount:orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.logWriter"
+    },
+    {
+      "members": [
+        "serviceAccount:orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.metricWriter"
+    },
+    {
+      "members": [
+        "serviceAccount:orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-631771264409@gcp-sa-networkconnectivity.iam.gserviceaccount.com"
+      ],
+      "role": "roles/networkconnectivity.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-ii-coop@kubernetes.io",
         "user:ameukam@gmail.com"
       ],
@@ -121,6 +151,12 @@
         "serviceAccount:service-631771264409@serverless-robot-prod.iam.gserviceaccount.com"
       ],
       "role": "roles/run.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com"
+      ],
+      "role": "roles/stackdriver.resourceMetadata.writer"
     }
   ],
   "version": 1
