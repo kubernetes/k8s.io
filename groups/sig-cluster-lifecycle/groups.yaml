@@ -56,10 +56,10 @@ groups:
       - yuvaraj-balaji-rao.kakaraparthi@broadcom.com
       - christi.schlotter@gmail.com
       - furkat.gofurov@suse.com
-      # CAPI release-1.5 team members
+      # CAPI release team members
       - muhammad.adil.ghaffar@est.tech
-      - codewithaniruddha@gmail.com
-      - tobiasgiese@gmail.com
+      - cahillsf9@gmail.com
+      - sunnat.samadov@est.tech
 
   - email-id: sig-cluster-lifecycle-cluster-api-operator-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-operator-alerts
