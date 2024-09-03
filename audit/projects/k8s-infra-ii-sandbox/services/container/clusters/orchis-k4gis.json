@@ -1,0 +1,259 @@
+{
+  "addonsConfig": {
+    "dnsCacheConfig": {
+      "enabled": true
+    },
+    "gcePersistentDiskCsiDriverConfig": {
+      "enabled": true
+    },
+    "httpLoadBalancing": {
+      "disabled": true
+    },
+    "kubernetesDashboard": {
+      "disabled": true
+    },
+    "networkPolicyConfig": {
+      "disabled": true
+    }
+  },
+  "autopilot": {},
+  "autoscaling": {
+    "autoscalingProfile": "BALANCED"
+  },
+  "binaryAuthorization": {},
+  "clusterIpv4Cidr": "10.60.0.0/14",
+  "createTime": "2024-09-01T09:34:20+00:00",
+  "currentMasterVersion": "1.30.2-gke.1587003",
+  "currentNodeVersion": "1.30.2-gke.1587003",
+  "databaseEncryption": {
+    "currentState": "CURRENT_STATE_DECRYPTED",
+    "state": "DECRYPTED"
+  },
+  "defaultMaxPodsConstraint": {
+    "maxPodsPerNode": "110"
+  },
+  "endpoint": "35.226.37.3",
+  "enterpriseConfig": {
+    "clusterTier": "STANDARD"
+  },
+  "id": "b6b90de2dd594647ac3c37c4a9d9e5d355b8eac903f548de8fa9d702c09fad0a",
+  "identityServiceConfig": {
+    "enabled": true
+  },
+  "initialClusterVersion": "1.30.2-gke.1587003",
+  "initialNodeCount": 1,
+  "instanceGroupUrls": [
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-b/instanceGroupManagers/gke-orchis-k4gis-pool1-81d2b328-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-f/instanceGroupManagers/gke-orchis-k4gis-pool1-f962dfb9-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-c/instanceGroupManagers/gke-orchis-k4gis-pool1-d4b20a4a-grp"
+  ],
+  "ipAllocationPolicy": {
+    "clusterIpv4Cidr": "10.60.0.0/14",
+    "clusterIpv4CidrBlock": "10.60.0.0/14",
+    "clusterSecondaryRangeName": "gke-orchis-k4gis-pods-b6b90de2",
+    "defaultPodIpv4RangeUtilization": 0.001,
+    "podCidrOverprovisionConfig": {},
+    "servicesIpv4Cidr": "34.118.224.0/20",
+    "servicesIpv4CidrBlock": "34.118.224.0/20",
+    "stackType": "IPV4",
+    "useIpAliases": true
+  },
+  "labelFingerprint": "78cdf2f6",
+  "legacyAbac": {},
+  "location": "us-central1",
+  "locations": [
+    "us-central1-b",
+    "us-central1-f",
+    "us-central1-c"
+  ],
+  "loggingConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS",
+        "WORKLOADS"
+      ]
+    }
+  },
+  "loggingService": "logging.googleapis.com/kubernetes",
+  "maintenancePolicy": {
+    "resourceVersion": "8a252a1e",
+    "window": {
+      "recurringWindow": {
+        "recurrence": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR",
+        "window": {
+          "endTime": "2019-08-01T18:00:00Z",
+          "startTime": "2019-08-01T07:00:00Z"
+        }
+      }
+    }
+  },
+  "masterAuthorizedNetworksConfig": {
+    "gcpPublicCidrsAccessEnabled": true
+  },
+  "monitoringConfig": {
+    "advancedDatapathObservabilityConfig": {
+      "enableMetrics": true,
+      "enableRelay": true
+    },
+    "componentConfig": {},
+    "managedPrometheusConfig": {}
+  },
+  "monitoringService": "none",
+  "name": "orchis-k4gis",
+  "network": "default",
+  "networkConfig": {
+    "datapathProvider": "ADVANCED_DATAPATH",
+    "defaultSnatStatus": {},
+    "gatewayApiConfig": {
+      "channel": "CHANNEL_STANDARD"
+    },
+    "network": "projects/k8s-infra-ii-sandbox/global/networks/default",
+    "serviceExternalIpsConfig": {},
+    "subnetwork": "projects/k8s-infra-ii-sandbox/regions/us-central1/subnetworks/default"
+  },
+  "nodeConfig": {
+    "diskSizeGb": 100,
+    "diskType": "hyperdisk-balanced",
+    "imageType": "UBUNTU_CONTAINERD",
+    "linuxNodeConfig": {
+      "cgroupMode": "CGROUP_MODE_V2"
+    },
+    "loggingConfig": {},
+    "machineType": "n4-standard-4",
+    "metadata": {
+      "disable-legacy-endpoints": "true"
+    },
+    "oauthScopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/cloud-platform"
+    ],
+    "serviceAccount": "orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
+    "shieldedInstanceConfig": {
+      "enableIntegrityMonitoring": true,
+      "enableSecureBoot": true
+    },
+    "windowsNodeConfig": {},
+    "workloadMetadataConfig": {
+      "mode": "GKE_METADATA"
+    }
+  },
+  "nodePoolDefaults": {
+    "nodeConfigDefaults": {
+      "loggingConfig": {
+        "variantConfig": {
+          "variant": "DEFAULT"
+        }
+      }
+    }
+  },
+  "nodePools": [
+    {
+      "autoscaling": {
+        "enabled": true,
+        "locationPolicy": "BALANCED",
+        "maxNodeCount": 10,
+        "minNodeCount": 1
+      },
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "hyperdisk-balanced",
+        "imageType": "UBUNTU_CONTAINERD",
+        "linuxNodeConfig": {
+          "cgroupMode": "CGROUP_MODE_V2"
+        },
+        "loggingConfig": {},
+        "machineType": "n4-standard-4",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/userinfo.email",
+          "https://www.googleapis.com/auth/cloud-platform"
+        ],
+        "serviceAccount": "orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true,
+          "enableSecureBoot": true
+        },
+        "windowsNodeConfig": {},
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-b/instanceGroupManagers/gke-orchis-k4gis-pool1-81d2b328-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-f/instanceGroupManagers/gke-orchis-k4gis-pool1-f962dfb9-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-c/instanceGroupManagers/gke-orchis-k4gis-pool1-d4b20a4a-grp"
+      ],
+      "locations": [
+        "us-central1-b",
+        "us-central1-f",
+        "us-central1-c"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "maxPodsConstraint": {
+        "maxPodsPerNode": "110"
+      },
+      "name": "pool1",
+      "networkConfig": {
+        "enablePrivateNodes": true,
+        "podIpv4CidrBlock": "10.60.0.0/14",
+        "podIpv4RangeUtilization": 0.001,
+        "podRange": "gke-orchis-k4gis-pods-b6b90de2"
+      },
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-ii-sandbox/locations/us-central1/clusters/orchis-k4gis/nodePools/pool1",
+      "upgradeSettings": {
+        "blueGreenSettings": {
+          "nodePoolSoakDuration": "3600s",
+          "standardRolloutPolicy": {
+            "batchNodeCount": 1,
+            "batchSoakDuration": "0s"
+          }
+        },
+        "strategy": "BLUE_GREEN"
+      },
+      "version": "1.30.2-gke.1587003"
+    }
+  ],
+  "notificationConfig": {
+    "pubsub": {}
+  },
+  "privateClusterConfig": {
+    "privateEndpoint": "10.128.0.59",
+    "publicEndpoint": "35.226.37.3"
+  },
+  "rbacBindingConfig": {
+    "enableInsecureBindingSystemAuthenticated": true,
+    "enableInsecureBindingSystemUnauthenticated": true
+  },
+  "releaseChannel": {
+    "channel": "STABLE"
+  },
+  "resourceLabels": {
+    "goog-terraform-provisioned": "true"
+  },
+  "secretManagerConfig": {
+    "enabled": true
+  },
+  "securityPostureConfig": {
+    "mode": "BASIC",
+    "vulnerabilityMode": "VULNERABILITY_MODE_UNSPECIFIED"
+  },
+  "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-ii-sandbox/locations/us-central1/clusters/orchis-k4gis",
+  "servicesIpv4Cidr": "34.118.224.0/20",
+  "shieldedNodes": {
+    "enabled": true
+  },
+  "subnetwork": "default",
+  "verticalPodAutoscaling": {
+    "enabled": true
+  },
+  "workloadIdentityConfig": {
+    "workloadPool": "k8s-infra-ii-sandbox.svc.id.goog"
+  },
+  "zone": "us-central1"
+}

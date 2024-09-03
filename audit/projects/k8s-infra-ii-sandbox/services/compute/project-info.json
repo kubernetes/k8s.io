@@ -9,6 +9,10 @@
       {
         "key": "sshKeys",
         "value": ""
+      },
+      {
+        "key": "gke-orchis-k4gis-b6b90de2-secondary-ranges",
+        "value": "pods:default:default:gke-orchis-k4gis-pods-b6b90de2"
       }
     ],
     "kind": "compute#metadata"
