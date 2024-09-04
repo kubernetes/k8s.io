@@ -18,6 +18,13 @@ sub vcl_recv {
   if (req.method != "HEAD" && req.method != "GET" && req.method != "FASTLYPURGE") {
     return(pass);
   }
+
+  # Drop all the headers except the list providers
+  header.filter_except(req,"Fastly-Debug");
+
+  # Remove all cookies from the request
+  unset req.http.Cookie;
+
   return(lookup);
 }
 
