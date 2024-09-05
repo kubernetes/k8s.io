@@ -82,7 +82,7 @@ module "testgrid_config_bucket" {
   ]
 }
 
-// Create gs://k8s-testgrid-config to store K8s TestGrid config.
+// Create gs://k8s-ci-logs to store logs from Prow jobs.
 module "prow_bucket" {
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
   version = "~> 5"
@@ -119,3 +119,15 @@ module "prow_bucket" {
   ]
 }
 
+// Create a Pub/Sub notification topic for gs://kubernetes-ci-logs.
+resource "google_storage_notification" "notification" {
+  bucket         = module.prow_bucket.name
+  payload_format = "JSON_API_V1"
+  topic          = google_pubsub_topic.kubernetes_ci_logs_topic.name
+  depends_on     = [google_pubsub_topic_iam_binding.publish_binding]
+}
+
+resource "google_pubsub_topic" "kubernetes_ci_logs_topic" {
+  name    = "kubernetes-ci-logs-updates"
+  project = module.project.project_id
+}
