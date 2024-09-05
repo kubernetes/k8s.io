@@ -123,7 +123,7 @@ module "prow_bucket" {
 resource "google_storage_notification" "notification" {
   bucket         = module.prow_bucket.name
   payload_format = "JSON_API_V1"
-  topic          = google_pubsub_topic.kubernetes_ci_logs_topic.name
+  topic          = google_pubsub_topic.kubernetes_ci_logs_topic.id
   depends_on     = [google_pubsub_topic_iam_binding.publish_binding]
 }
 

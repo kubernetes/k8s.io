@@ -122,6 +122,7 @@ data "google_storage_project_service_account" "gcs_account" {
 // Bind storage SA to publish to PubSub.
 resource "google_pubsub_topic_iam_binding" "publish_binding" {
   topic   = google_pubsub_topic.kubernetes_ci_logs_topic.name
+  project = module.project.project_id
   role    = "roles/pubsub.publisher"
   members = ["serviceAccount:${data.google_storage_project_service_account.gcs_account.email_address}"]
 }
@@ -129,6 +130,7 @@ resource "google_pubsub_topic_iam_binding" "publish_binding" {
 // Also bind TestGrid and Kettle as subscribers of this topic.
 resource "google_pubsub_topic_iam_binding" "read_binding" {
   topic = google_pubsub_topic.kubernetes_ci_logs_topic.name
+  project = module.project.project_id
   role  = "roles/pubsub.subscriber"
   members = [
     "serviceAccount:testgrid-canary@k8s-testgrid.iam.gserviceaccount.com",
