@@ -112,3 +112,27 @@ resource "google_service_account_iam_binding" "prow" {
     "serviceAccount:k8s-infra-prow.svc.id.goog[default/tide]",
   ]
 }
+
+// Unique service account for GCS notification PubSub topics.
+// Used to publish GCS updates to PubSub.
+data "google_storage_project_service_account" "gcs_account" {
+  project = module.project.project_id
+}
+
+// Bind storage SA to publish to PubSub.
+resource "google_pubsub_topic_iam_binding" "publish_binding" {
+  topic   = google_pubsub_topic.kubernetes_ci_logs_topic.name
+  role    = "roles/pubsub.publisher"
+  members = ["serviceAccount:${data.google_storage_project_service_account.gcs_account.email_address}"]
+}
+
+// Also bind TestGrid and Kettle as subscribers of this topic.
+resource "google_pubsub_topic_iam_binding" "read_binding" {
+  topic = google_pubsub_topic.kubernetes_ci_logs_topic.name
+  role  = "roles/pubsub.subscriber"
+  members = [
+    "serviceAccount:testgrid-canary@k8s-testgrid.iam.gserviceaccount.com",
+    "serviceAccount:updater@k8s-testgrid.iam.gserviceaccount.com",
+    "serviceAccount:kettle@kubernetes-public.iam.gserviceaccount.com",
+  ]
+}
