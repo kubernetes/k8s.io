@@ -69,3 +69,26 @@ resource "azurerm_role_assignment" "sp_custom_role_assignment" {
   role_definition_name = azurerm_role_definition.custom_role.name
   scope                = "/subscriptions/${var.subscription_id}"
 }
+
+resource "azurerm_role_definition" "custom_lock_manager_role" {
+  name               = "LockManager"
+  scope              = "/subscriptions/${var.subscription_id}"
+
+  permissions {
+    actions = [
+      "Microsoft.Authorization/locks/write",
+      "Microsoft.Authorization/locks/delete"
+    ]
+    not_actions = []
+  }
+
+  assignable_scopes = [
+    "/subscriptions/${var.subscription_id}"
+  ]
+}
+
+resource "azurerm_role_assignment" "sp_custom_lock_manager_assignment" {
+  principal_id         = data.azuread_service_principal.az_service_principal.id
+  role_definition_name = azurerm_role_definition.custom_lock_manager_role.name
+  scope                = "/subscriptions/${var.subscription_id}"
+}
