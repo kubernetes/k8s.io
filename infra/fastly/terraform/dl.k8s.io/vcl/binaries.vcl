@@ -109,6 +109,17 @@ sub vcl_hit {
 
 sub vcl_deliver {
 
+  set resp.http.Content-Security-Policy = "default-src 'self'";
+  set resp.http.X-Frame-Options = "SAMEORIGIN";
+  set resp.http.X-XSS-Protection = "1";
+  set resp.http.X-Content-Type-Options = "nosniff";
+  set resp.http.Referrer-Policy = "origin-when-cross-origin";
+
+  if (req.protocol == "https") {
+    # Only connect to this site and subdomains via HTTPS for the next two years
+    set resp.http.Strict-Transport-Security = "max-age=63072000; includeSubDomains";
+  }
+
   if (resp.http.cache-control:max-age) {
     unset resp.http.expires;
   }
