@@ -206,13 +206,17 @@ groups:
       - saschagrunert@gmail.com
     members:
       - admin@mb-consulting.dev  # 1.32 Comms Lead
+      - edithpuclla20@gmail.com # 1.32 Comms Shadow
       - fsmunoz@gmail.com # 1.32 RT Lead
       - jackhammervyom@gmail.com # 1.32 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
+      - rytswd@gmail.com # 1.32 Comms Shadow
+      - smith.rashan@gmail.com # 1.32 Comms Shadow
       - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - william.rizzo@gmail.com # 1.32 Comms Shadow
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -348,10 +352,14 @@ groups:
       - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
     members:
       - admin@mb-consulting.dev # 1.32 Comms Lead
+      - drew.a.hagen@gmail.com # 1.32 Release Signal Lead
+      - edithpuclla20@gmail.com # 1.32 Comms Shadow
       - danieljoshuachan@gmail.com # 1.32 Docs Lead
       - satyampsoni@gmail.com # 1.32 Release Notes Lead
-      - drew.a.hagen@gmail.com # 1.32 Release Signal Lead
+      - smith.rashan@gmail.com # 1.32 Comms Shadow
+      - rytswd@gmail.com # 1.32 Comms Shadow
       - tylerschade99@gmail.com # 1.32 Enhancements Lead
+      - william.rizzo@gmail.com # 1.32 Comms Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -374,12 +382,16 @@ groups:
     members:
       - admin@mb-consulting.dev # 1.32 Comms Lead
       - danieljoshuachan@gmail.com # 1.32 Docs Lead
+      - edithpuclla20@gmail.com # 1.32 Comms Shadow
       - jackhammervyom@gmail.com # 1.32 Release Lead Shadow
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
+      - rytswd@gmail.com # 1.32 Comms Shadow
       - satyampsoni@gmail.com # 1.32 Release Notes Lead
+      - smith.rashan@gmail.com # 1.32 Comms Shadow
       - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
       - tylerschade99@gmail.com # 1.32 Enhancements Lead
+      - william.rizzo@gmail.com # 1.32 Comms Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
