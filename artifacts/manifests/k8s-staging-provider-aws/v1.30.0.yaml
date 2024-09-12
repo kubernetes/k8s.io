@@ -1,13 +1,13 @@
 files:
-- name: linux/amd64/ecr-credential-provider-linux-amd64
+- name: v1.30.0/linux/amd64/ecr-credential-provider-linux-amd64
   sha256: 7df3fb71a3bd81b5ae33e80a40042fdcc4064e92feba3cf4debf7be269bc81be
-- name: linux/amd64/ecr-credential-provider-linux-amd64.sha256
+- name: v1.30.0/linux/amd64/ecr-credential-provider-linux-amd64.sha256
   sha256: 83481d29a7bd9be62e0f60ffc33a6dbc3eec146a4be131aaf28d65d3d2de53d7
-- name: linux/arm64/ecr-credential-provider-linux-arm64
+- name: v1.30.0/linux/arm64/ecr-credential-provider-linux-arm64
   sha256: 42ecec6eb5302c54301f31c1e5a5f96c901d45a1ff45dd134b8e1d5e2737871e
-- name: linux/arm64/ecr-credential-provider-linux-arm64.sha256
+- name: v1.30.0/linux/arm64/ecr-credential-provider-linux-arm64.sha256
   sha256: 90ecd5d654b9920864a46bcbaf79d8282982c415a4f4b93a23ddebd131aac125
-- name: windows/amd64/ecr-credential-provider-windows-amd64
+- name: v1.30.0/windows/amd64/ecr-credential-provider-windows-amd64
   sha256: beaa1b0780e6cda3fe4f915f2f873f11cf9b7a6ee68436dc8ecf90868868b1ca
-- name: windows/amd64/ecr-credential-provider-windows-amd64.sha256
+- name: v1.30.0/windows/amd64/ecr-credential-provider-windows-amd64.sha256
   sha256: 81982ebc8e7810711a72efe8d06e229d63c5d04a669b802299c8bf95f313604e
