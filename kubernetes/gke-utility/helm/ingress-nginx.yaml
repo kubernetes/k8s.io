@@ -1,4 +1,5 @@
 controller:
+  allowSnippetAnnotations: true # Required for OAuth2 Proxy
   publishService:
     enabled: true
   service:
