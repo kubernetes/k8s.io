@@ -255,6 +255,8 @@ pr-test:
 cli.triage:
   type: A
   value: 34.117.106.163
+
+### prow.k8s.io related records, running in the k8s-infra-prow GCP project
 prow:
   - type: A
     ttl: 600 # this has needed to change in the past
@@ -269,9 +271,28 @@ hooks.prow:
   - type: AAAA
     ttl: 600 # this has needed to change in the past
     value: "2600:1901:0:b465::"
+# prow-certificates in k8s-infra-prow project
+_acme-challenge.prow:
+  type: CNAME
+  value: ec952040-1ea9-43db-b382-e0fde0cddbb6.16.authorize.certificatemanager.goog.
+
+##### GKE Utility Cluster records, running in the k8s-infra-prow GCP project
 monitoring.prow:
-  type: A
-  value: 130.211.20.136
+  - type: A
+    value: 34.66.218.218
+  - type: AAAA
+    value: "2600:1900:4000:627b:8000::"
+argo:
+  - type: A
+    value: 34.66.218.218
+  - type: AAAA
+    value: "2600:1900:4000:627b:8000::"
+oauth2-proxy:
+  - type: A
+    value: 34.66.218.218
+  - type: AAAA
+    value: "2600:1900:4000:627b:8000::"
+
 monitoring-eks.prow:
   type: CNAME
   value: a263543bde23d465583081052e18b3e3-1240977898.us-east-2.elb.amazonaws.com.
