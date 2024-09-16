@@ -35,6 +35,7 @@
     },
     {
       "members": [
+        "serviceAccount:648026197307@cloudbuild.gserviceaccount.com",
         "serviceAccount:project-236990870955@storage-transfer-service.iam.gserviceaccount.com"
       ],
       "role": "roles/storage.objectAdmin"
