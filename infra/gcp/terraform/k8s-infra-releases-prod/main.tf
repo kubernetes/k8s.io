@@ -49,21 +49,6 @@ resource "google_storage_hmac_key" "fastly_reader_key" {
   service_account_email = google_service_account.fastly_reader.email
 }
 
-// TODO: remove this after https://github.com/kubernetes/release/issues/3425
-resource "google_storage_bucket_iam_member" "release_object_admin" {
-  bucket     = module.k8s_releases_prod.bucket_name
-  role       = "roles/storage.objectAdmin"
-  member     = "serviceAccount:648026197307@cloudbuild.gserviceaccount.com"
-  depends_on = [module.k8s_releases_prod]
-}
-
-resource "google_storage_bucket_iam_member" "fastly_reader" {
-  bucket     = module.k8s_releases_prod.bucket_name
-  role       = "roles/storage.objectViewer"
-  member     = "serviceAccount:${google_service_account.fastly_reader.email}"
-  depends_on = [module.k8s_releases_prod]
-}
-
 resource "google_storage_bucket_iam_member" "gcs-backup-bucket" {
   bucket     = module.k8s_releases_prod.bucket_name
   role       = "roles/storage.admin"
