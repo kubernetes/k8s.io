@@ -76,6 +76,7 @@
     "gcpPublicCidrsAccessEnabled": true
   },
   "monitoringConfig": {
+    "advancedDatapathObservabilityConfig": {},
     "componentConfig": {
       "enableComponents": [
         "SYSTEM_COMPONENTS"
