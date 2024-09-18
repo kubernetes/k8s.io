@@ -23,6 +23,7 @@ locals {
     kueue              = "group:k8s-infra-staging-kueue@kubernetes.io"
     secrets-store-sync = "group:k8s-infra-staging-secrets-store-sync@kubernetes.io"
     test-infra         = "group:k8s-infra-staging-test-infra@kubernetes.io"
+    csi-vsphere        = "group:k8s-infra-staging-csi-vsphere@kubernetes.io"
   }
 }
 
