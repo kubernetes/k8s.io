@@ -13,3 +13,6 @@
 - name: extra/mdlint
   dmap:
     "sha256:1148fab985b6808a78fbdd27a2e66d2b0b8de4a2c15dfe339ada8793b20816ce": ["0.17.0"]
+- name: extra/shellcheck
+  dmap:
+    "sha256:23b8cfc08f7279f334fc60dcf3d60f9e9889f1bb14e8268cf045e89d3abf64cc": ["stable"]
