@@ -379,7 +379,7 @@ groups:
       - tico88612@gmail.com # 1.32 Release Signal Shadow
       - tylerschade99@gmail.com # 1.32 Enhancements Lead
       - wendyha.sut@gmail.com # 1.32 Release Signal Shadow
-      - william.rizzo@gmail.com # 1.32 Comms Shadow    
+      - william.rizzo@gmail.com # 1.32 Comms Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
