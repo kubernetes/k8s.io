@@ -202,10 +202,6 @@ class RedirTest(HTTPTestCase):
                 base + 'logo',
                 'https://branding.cncf.io/projects/kubernetes/')
             self.assert_temp_redirect(
-                base + 'pr-dashboard',
-                'https://gubernator.k8s.io/pr')
-
-            self.assert_temp_redirect(
                 base + 'stuck-prs',
                 'https://github.com/kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess')
             self.assert_temp_redirect(
@@ -256,14 +252,6 @@ class RedirTest(HTTPTestCase):
             'https://console.developers.google.com/storage/browser/kubernetes-jenkins/logs/e2e')
 
         num = rand_num()
-        # numeric with trailing slash
-        self.assert_temp_redirect(base + '/e2e/$num/',
-            'https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/e2e/$num',
-            num=num)
-        # numeric without trailing slash
-        self.assert_temp_redirect(base + '/e2e/$num',
-            'https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/e2e/$num',
-            num=num)
 
         # no trailing slash
         self.assert_temp_redirect(base + '/e2e/$num/file',
@@ -390,12 +378,6 @@ class RedirTest(HTTPTestCase):
             self.assert_temp_redirect(base + '/$path',
                 'https://github.com/kubernetes/kubernetes/pull/$path',
                 path=rand_num())
-
-    def test_pr_test(self):
-        base = 'pr-test.kubernetes.io'
-        self.assert_temp_redirect(base, 'https://gubernator.k8s.io')
-        self.assert_temp_redirect(base + '/$id',
-            'https://gubernator.k8s.io/pr/$id', id=rand_num())
 
     def test_release(self):
         for base in ('releases.k8s.io', 'rel.k8s.io',
