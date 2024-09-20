@@ -208,24 +208,6 @@ git:
 go:
   type: CNAME
   value: redirect.k8s.io.
-# Running on Google App Engine
-gubernator:
-  - type: A
-    values:
-    - 216.239.32.21
-    - 216.239.34.21
-    - 216.239.36.21
-    - 216.239.38.21
-  - type: AAAA
-    values:
-    - 2001:4860:4802:32::15
-    - 2001:4860:4802:34::15
-    - 2001:4860:4802:36::15
-    - 2001:4860:4802:38::15
-# Verify that @ixdy owns gubernator.k8s.io, necessary to set up custom domain in GAE
-aupoulkmindh.gubernator:
-  type: CNAME
-  value: gv-afluggfkiwfho7.dv.googlehosted.com.
 issue:
   type: CNAME
   value: redirect.k8s.io.

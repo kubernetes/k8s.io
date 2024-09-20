@@ -72,38 +72,6 @@ resource "google_bigquery_dataset_iam_policy" "prod_kettle_dataset" {
   policy_data = data.google_iam_policy.prod_kettle_dataset_iam_policy.policy_data
 }
 
-
-// Service account dedicated for BigQuery Data Transfer from BQ dataset k8s-gubernator:builds
-// TODO: remove when kettle migration is over
-resource "google_service_account" "bq_kettle_data_transfer_writer" {
-  account_id  = "bq-data-transfer-kettle"
-  description = "Service Acccount BigQuery Data Transfer"
-  project     = data.google_project.project.project_id
-}
-
-// grant bigquery jobUser role to the service account
-// so the job transfer can launch BigQuery jobs
-resource "google_project_iam_member" "bq_kettle_data_transfer_jobuser_binding" {
-  project = data.google_project.project.project_id
-  role    = "roles/bigquery.jobUser"
-  member  = "serviceAccount:${google_service_account.bq_kettle_data_transfer_writer.email}"
-}
-
-resource "google_bigquery_data_transfer_config" "bq_data_transfer_kettle" {
-  display_name           = "BigQuery data transfer to ${google_bigquery_dataset.prod_kettle_dataset.dataset_id}"
-  project                = data.google_project.project.project_id
-  data_source_id         = "cross_region_copy"
-  destination_dataset_id = google_bigquery_dataset.prod_kettle_dataset.dataset_id
-  service_account_name   = google_service_account.bq_kettle_data_transfer_writer.email
-  disabled               = false
-
-  params = {
-    overwrite_destination_table = "true"
-    source_dataset_id           = "build"
-    source_project_id           = "k8s-gubernator"
-  }
-}
-
 # Used to monitor kubernetes jenkings changes
 resource "google_pubsub_topic" "notification_topic" {
   project = data.google_project.project.project_id
