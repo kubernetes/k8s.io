@@ -21,11 +21,6 @@ This file defines:
 - IAM bindings
 */
 
-locals {
-  // TODO(spiffxp): remove legacy serviceaccount when migration completed
-  triage_legacy_sa_email = "triage@k8s-gubernator.iam.gserviceaccount.com"
-}
-
 // Use a data source for the service account
 // NB: we can't do this for triage_legacy_sa_email as we lack sufficient privileges
 data "google_service_account" "triage_sa" {
@@ -62,8 +57,7 @@ data "google_iam_policy" "triage_bucket_iam_bindings" {
   // Ensure triage service accounts have write access to the bucket
   binding {
     members = [
-      "serviceAccount:${data.google_service_account.triage_sa.email}",
-      "serviceAccount:${local.triage_legacy_sa_email}"
+      "serviceAccount:${data.google_service_account.triage_sa.email}"
     ]
     role = "roles/storage.legacyBucketWriter"
   }
@@ -79,8 +73,7 @@ data "google_iam_policy" "triage_bucket_iam_bindings" {
     role = "roles/storage.objectAdmin"
     members = [
       "group:${local.prow_owners}",
-      "serviceAccount:${data.google_service_account.triage_sa.email}",
-      "serviceAccount:${local.triage_legacy_sa_email}"
+      "serviceAccount:${data.google_service_account.triage_sa.email}"
     ]
   }
   // Ensure bucket contents are world readable

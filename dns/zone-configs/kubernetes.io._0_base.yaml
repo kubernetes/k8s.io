@@ -141,13 +141,6 @@ git:
 go:
   type: CNAME
   value: go.k8s.io.
-gubernator:
-  type: CNAME
-  value: gubernator.k8s.io.
-# Verify that @ixdy owns gubernator.kubernetes.io, necessary to set up custom domain in GAE
-hpxqcdbptcka.gubernator:
-  type: CNAME
-  value: gv-lld4xxz7bimg2e.dv.googlehosted.com.
 issue:
   type: CNAME
   value: issue.k8s.io.
