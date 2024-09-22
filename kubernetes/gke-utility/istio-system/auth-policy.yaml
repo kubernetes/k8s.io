@@ -1,0 +1,18 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: oauth-policy
+  namespace: istio-system
+spec:
+  targetRefs:
+    - name: istio-ingressgateway
+      kind: Gateway
+      group: gateway.networking.k8s.io
+  action: CUSTOM
+  provider:
+    name: oauth2-proxy
+  rules:
+  - to:
+    - operation:
+        hosts:
+        - argo.k8s.io

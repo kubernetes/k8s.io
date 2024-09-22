@@ -1,0 +1,57 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: istio-ingressgateway
+  annotations:
+    cloud.google.com/l4-rbs: enabled
+spec:
+  gatewayClassName: istio
+  listeners:
+  - name: http
+    port: 80
+    protocol: HTTP
+  - name: https
+    port: 443
+    protocol: HTTPS
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - name: k8s-io-wild-cert
+  addresses:
+  - type: IPAddress
+    value: 34.66.218.218
+  - type: IPAddress
+    value: "2600:1900:4000:627b:8000::"
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: https-gateway-redirect
+spec:
+  parentRefs:
+  - name: istio-ingressgateway
+    sectionName: http
+  hostnames:
+  - '*.k8s.io'
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 302
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: k8s-io-wild
+spec:
+  secretName: k8s-io-wild-cert
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: '*.k8s.io'
+  dnsNames:
+  - '*.k8s.io'
