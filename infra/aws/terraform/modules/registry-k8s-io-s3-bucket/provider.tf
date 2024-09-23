@@ -17,7 +17,7 @@ limitations under the License.
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "5.33.0"
     }
   }

@@ -100,13 +100,13 @@ resource "google_service_account_iam_member" "cloudbuild_deploy_porche" {
 }
 
 resource "google_cloud_run_service_iam_member" "gcb_builder_sa" {
-  project = google_project.project.project_id
+  project  = google_project.project.project_id
   for_each = google_cloud_run_service.regions
 
   service  = google_cloud_run_service.regions[each.key].name
   location = google_cloud_run_service.regions[each.key].location
-  role = "roles/run.developer"
-  member = "serviceAccount:${data.google_project.k8s_infra_staging_tools.number}@cloudbuild.gserviceaccount.com"
+  role     = "roles/run.developer"
+  member   = "serviceAccount:${data.google_project.k8s_infra_staging_tools.number}@cloudbuild.gserviceaccount.com"
 }
 
 
@@ -127,7 +127,7 @@ resource "google_cloud_run_service" "regions" {
       service_account_name = google_service_account.porche.email
       containers {
         image = local.image
-        args = [ "-v=3" ]
+        args  = ["-v=3"]
 
         dynamic "env" {
           for_each = each.value.environment_variables

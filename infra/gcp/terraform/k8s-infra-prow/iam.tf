@@ -129,9 +129,9 @@ resource "google_pubsub_topic_iam_binding" "publish_binding" {
 
 // Also bind TestGrid and Kettle as subscribers of this topic.
 resource "google_pubsub_topic_iam_binding" "read_binding" {
-  topic = google_pubsub_topic.kubernetes_ci_logs_topic.name
+  topic   = google_pubsub_topic.kubernetes_ci_logs_topic.name
   project = module.project.project_id
-  role  = "roles/pubsub.subscriber"
+  role    = "roles/pubsub.subscriber"
   members = [
     "serviceAccount:testgrid-canary@k8s-testgrid.iam.gserviceaccount.com",
     "serviceAccount:updater@k8s-testgrid.iam.gserviceaccount.com",

@@ -18,7 +18,7 @@ provider "azurerm" {
   features {}
 }
 
-terraform{
+terraform {
   backend "azurerm" {
     resource_group_name  = "terraform-states-azure"
     storage_account_name = "terraformstatescomm"
@@ -80,7 +80,7 @@ resource "azurerm_storage_account" "k8sprowstorage" {
   min_tls_version                  = "TLS1_0"
   account_replication_type         = "RAGRS"
   cross_tenant_replication_enabled = true
-  depends_on = [azurerm_resource_group.capz_ci]
+  depends_on                       = [azurerm_resource_group.capz_ci]
 }
 
 # Import identities module
@@ -88,7 +88,7 @@ module "identities" {
   source              = "./identities"
   resource_group_name = var.resource_group_name
   location            = var.location
-  depends_on = [azurerm_resource_group.capz_ci]
+  depends_on          = [azurerm_resource_group.capz_ci]
 }
 
 # Import key vault module
@@ -96,7 +96,7 @@ module "key_vault" {
   source              = "./key-vault"
   resource_group_name = var.resource_group_name
   location            = var.location
-  tenant_id           = data.azurerm_client_config.current.tenant_id  
+  tenant_id           = data.azurerm_client_config.current.tenant_id
   identities = {
     cloud_provider_user_identity_id = module.identities.cloud_provider_user_identity_id
     domain_vm_identity_id           = module.identities.domain_vm_identity_id
@@ -110,7 +110,7 @@ module "container_registry" {
   source              = "./container-registry"
   resource_group_name = var.resource_group_name
   location            = var.location
-  depends_on = [azurerm_resource_group.capz_ci]
+  depends_on          = [azurerm_resource_group.capz_ci]
 }
 
 # Import role assignments module
@@ -118,7 +118,7 @@ module "role_assignments" {
   source                   = "./role-assignments"
   resource_group_name      = var.resource_group_name
   container_registry_scope = module.container_registry.container_registry_id
-  subscription_id          = data.azurerm_client_config.current.subscription_id 
+  subscription_id          = data.azurerm_client_config.current.subscription_id
   depends_on = [
     azurerm_resource_group.capz_ci,
     azurerm_storage_account.k8sprowstorage,

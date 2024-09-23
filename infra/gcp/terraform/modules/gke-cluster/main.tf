@@ -154,7 +154,7 @@ resource "google_container_cluster" "prod_cluster" {
   }
 
   network_policy {
-    enabled  = false
+    enabled = false
   }
 
   // Configure cluster addons
@@ -249,7 +249,7 @@ resource "google_container_cluster" "test_cluster" {
   }
 
   network_policy {
-    enabled  = false
+    enabled = false
   }
 
   // Configure cluster addons
