@@ -23,10 +23,10 @@ variable "location" {
 }
 
 resource "azurerm_container_registry" "capzci_registry" {
-  name                = "capzcicommunity"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  sku                 = "Premium"
+  name                   = "capzcicommunity"
+  location               = var.location
+  resource_group_name    = var.resource_group_name
+  sku                    = "Premium"
   anonymous_pull_enabled = true
 
   retention_policy {
@@ -57,7 +57,7 @@ resource "azurerm_container_registry_task" "registry_task" {
     type                        = "Runtime"
     update_trigger_payload_type = "Default"
   }
-   encoded_step {
+  encoded_step {
     task_content = base64encode(<<EOF
 version: v1.1.0
 steps:

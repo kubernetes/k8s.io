@@ -32,8 +32,8 @@ eks_cluster_viewers = [
   "xmudrii"
 ]
 
-cluster_name               = "prow-build-cluster"
-cluster_version            = "1.30"
+cluster_name    = "prow-build-cluster"
+cluster_version = "1.30"
 
 node_group_version_stable  = "1.30"
 node_instance_types_stable = ["r5ad.2xlarge"]

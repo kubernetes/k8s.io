@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 resource "google_monitoring_uptime_check_config" "uptime_check" {
-  project = var.project_id
+  project      = var.project_id
   display_name = format("Uptime - %s", var.domain)
 
   http_check {
@@ -42,10 +42,10 @@ resource "google_monitoring_uptime_check_config" "uptime_check" {
 
 resource "google_monitoring_alert_policy" "uptime_alert" {
   provider = google-beta
-  project = var.project_id
+  project  = var.project_id
 
-  display_name          = "${var.domain}-uptime"
-  combiner              = "OR"
+  display_name = "${var.domain}-uptime"
+  combiner     = "OR"
 
   conditions {
     display_name = "Failure of uptime check on ${var.domain}"
@@ -74,23 +74,23 @@ resource "google_monitoring_alert_policy" "uptime_alert" {
   }
 
   notification_channels = var.notification_channels
-  enabled = true
+  enabled               = true
 
 }
 
 # SSL certificate expiring soon for uptime checks
 resource "google_monitoring_alert_policy" "ssl_cert_expiration_alert" {
-    project = var.project_id
+  project = var.project_id
 
   display_name = "SSL/TLS certificate expiration check"
   combiner     = "OR"
 
   conditions {
-     display_name = "SSL Certificate for ${var.domain} expiring soon"
+    display_name = "SSL Certificate for ${var.domain} expiring soon"
     condition_threshold {
-      comparison      = "COMPARISON_LT"
-      duration        = "600s"
-      filter          = "metric.type=\"monitoring.googleapis.com/uptime_check/time_until_ssl_cert_expires\" AND resource.type=\"uptime_url\" AND metric.label.check_id=\"${google_monitoring_uptime_check_config.uptime_check.uptime_check_id}\""
+      comparison = "COMPARISON_LT"
+      duration   = "600s"
+      filter     = "metric.type=\"monitoring.googleapis.com/uptime_check/time_until_ssl_cert_expires\" AND resource.type=\"uptime_url\" AND metric.label.check_id=\"${google_monitoring_uptime_check_config.uptime_check.uptime_check_id}\""
       # 2 weeks
       threshold_value = 15
 
@@ -102,7 +102,7 @@ resource "google_monitoring_alert_policy" "ssl_cert_expiration_alert" {
       }
 
       trigger {
-        count = 1
+        count   = 1
         percent = 0
       }
     }
@@ -112,7 +112,7 @@ resource "google_monitoring_alert_policy" "ssl_cert_expiration_alert" {
     content = "The SSL/TLS certificate for ${var.domain} is expiring in fewer than 15 days"
   }
 
-    notification_channels = var.notification_channels
+  notification_channels = var.notification_channels
 
   enabled = true
 }

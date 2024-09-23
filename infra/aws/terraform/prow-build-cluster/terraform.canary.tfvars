@@ -30,8 +30,8 @@ eks_cluster_admins = [
   "xmudrii"
 ]
 
-cluster_name               = "prow-canary-cluster"
-cluster_version            = "1.29"
+cluster_name    = "prow-canary-cluster"
+cluster_version = "1.29"
 
 node_group_version_stable  = "1.29"
 node_instance_types_stable = ["r5ad.xlarge"]

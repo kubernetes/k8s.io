@@ -49,11 +49,11 @@ resource "azurerm_role_assignment" "acr_pull" {
 }
 
 resource "azurerm_role_definition" "custom_role" {
-  name               = "WriteAccessOnly"
-  scope              = "/subscriptions/${var.subscription_id}"
+  name  = "WriteAccessOnly"
+  scope = "/subscriptions/${var.subscription_id}"
 
   permissions {
-    actions     = [
+    actions = [
       "Microsoft.Authorization/roleAssignments/write"
     ]
     not_actions = []

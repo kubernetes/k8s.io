@@ -26,8 +26,8 @@ locals {
 }
 
 resource "google_service_account" "fastly_logging_sa" {
-  project = google_project.project.project_id
-  account_id = "fastly-bigquery-logging-sa"
+  project      = google_project.project.project_id
+  account_id   = "fastly-bigquery-logging-sa"
   display_name = "Fastly BigQuery Logging SA"
 }
 
@@ -35,7 +35,7 @@ resource "google_service_account" "fastly_logging_sa" {
 resource "google_service_account_iam_member" "cloudbuild_terraform_sa_impersonate_permissions" {
   service_account_id = google_service_account.fastly_logging_sa.name
   role               = "roles/iam.serviceAccountTokenCreator"
-  member  = "serviceAccount:${local.fastly_sa}"
+  member             = "serviceAccount:${local.fastly_sa}"
 }
 
 resource "google_bigquery_dataset" "fastly_cdn_dl_k8s_io_logging" {

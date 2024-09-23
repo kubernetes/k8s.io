@@ -28,8 +28,8 @@ variable "tenant_id" {
 
 variable "identities" {
   type = object({
-    domain_vm_identity_id           = string
-    gmsa_user_identity_id           = string
+    domain_vm_identity_id = string
+    gmsa_user_identity_id = string
   })
 }
 

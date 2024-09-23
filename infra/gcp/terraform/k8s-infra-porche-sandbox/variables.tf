@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 variable "tag" {
-  type    = string
+  type = string
 }
 
 variable "domain" {
