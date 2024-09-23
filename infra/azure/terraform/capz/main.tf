@@ -88,6 +88,7 @@ module "identities" {
   source              = "./identities"
   resource_group_name = var.resource_group_name
   location            = var.location
+  container_registry_private_scope = module.container_registry.e2eprivate_registry_id
   depends_on = [azurerm_resource_group.capz_ci]
 }
 
