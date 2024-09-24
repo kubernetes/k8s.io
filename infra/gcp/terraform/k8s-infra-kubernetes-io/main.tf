@@ -56,8 +56,8 @@ data "google_project" "kubernetes_public" {
 }
 
 resource "google_resource_manager_lien" "kubernetes_public" {
-  parent = "projects/${data.google_project.kubernetes_public.number}"
+  parent       = "projects/${data.google_project.kubernetes_public.number}"
   restrictions = ["resourcemanager.projects.delete"]
-  origin = "do-not-delete-kubernetes-public"
-  reason = "kubernetes-public hosts public-facing kubernetes project infrastructure"
+  origin       = "do-not-delete-kubernetes-public"
+  reason       = "kubernetes-public hosts public-facing kubernetes project infrastructure"
 }

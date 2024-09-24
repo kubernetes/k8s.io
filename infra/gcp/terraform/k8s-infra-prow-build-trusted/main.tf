@@ -62,11 +62,11 @@ module "prow_build_cluster" {
 
 // The image/machine/disk match prow-build for consistency's sake
 module "prow_build_nodepool" {
-  source          = "../modules/gke-nodepool"
-  project_name    = module.project.project_id
-  cluster_name    = module.prow_build_cluster.cluster.name
-  location        = module.prow_build_cluster.cluster.location
-  name            = "trusted-pool1"
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  name         = "trusted-pool1"
   node_locations = [
     "us-central1-a",
     "us-central1-b",

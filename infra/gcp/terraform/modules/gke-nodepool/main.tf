@@ -21,9 +21,9 @@ resource "google_container_node_pool" "node_pool" {
   // name = var.name
   name_prefix = "${var.name}-"
 
-  project     = var.project_name
-  location    = var.location
-  cluster     = var.cluster_name
+  project  = var.project_name
+  location = var.location
+  cluster  = var.cluster_name
 
   // Auto repair, and auto upgrade nodes to match the master version
   management {
@@ -52,7 +52,7 @@ resource "google_container_node_pool" "node_pool" {
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
 
     dynamic "ephemeral_storage_config" {
-      for_each = var.ephemeral_local_ssd_count > 0 ? [var.ephemeral_local_ssd_count] : [] 
+      for_each = var.ephemeral_local_ssd_count > 0 ? [var.ephemeral_local_ssd_count] : []
       content {
         local_ssd_count = ephemeral_storage_config.value
       }

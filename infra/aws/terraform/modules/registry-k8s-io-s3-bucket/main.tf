@@ -26,11 +26,11 @@ locals {
 data "aws_iam_policy_document" "public_bucket_policy" {
   statement {
     actions = [
-        "s3:ListBucket"
+      "s3:ListBucket"
     ]
     effect = "Allow"
     resources = [
-        module.s3_bucket.s3_bucket_arn
+      module.s3_bucket.s3_bucket_arn
     ]
     principals {
       type        = "AWS"
@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "public_bucket_policy" {
   }
   statement {
     actions = [
-        "s3:GetObject"
+      "s3:GetObject"
     ]
     effect = "Allow"
     principals {
@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "public_bucket_policy" {
       identifiers = ["*"]
     }
     resources = [
-        "${module.s3_bucket.s3_bucket_arn}/*"
+      "${module.s3_bucket.s3_bucket_arn}/*"
     ]
   }
 }
@@ -59,21 +59,21 @@ module "s3_bucket" {
   bucket = replace(lower(base64sha256(local.bucket_name)), "/[^a-zA-Z0-9-_]/", "")
 
   attach_deny_insecure_transport_policy = true
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
+  block_public_acls                     = false
+  block_public_policy                   = false
+  ignore_public_acls                    = false
+  restrict_public_buckets               = false
 
   control_object_ownership = true
   object_ownership         = "BucketOwnerEnforced"
   expected_bucket_owner    = data.aws_caller_identity.current.account_id
 
   attach_policy = true
-  policy = data.aws_iam_policy_document.public_bucket_policy.json
+  policy        = data.aws_iam_policy_document.public_bucket_policy.json
 
   cors_rule = [{
 
-    allowed_methods = ["GET","HEAD"]
+    allowed_methods = ["GET", "HEAD"]
     allowed_origins = ["*"]
     allowed_headers = ["*"]
 

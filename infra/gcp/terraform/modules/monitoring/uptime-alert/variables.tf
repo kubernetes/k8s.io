@@ -43,7 +43,7 @@ variable "trigger_percent" {
 variable "project_id" {
   type = string
   validation {
-    condition     = length(var.project_id) > 6 && length(var.project_id) <=30
+    condition     = length(var.project_id) > 6 && length(var.project_id) <= 30
     error_message = "Must specify PROJECT_ID variable."
   }
 }
