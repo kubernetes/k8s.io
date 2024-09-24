@@ -364,12 +364,16 @@ groups:
       - egbunaoluebube@gmail.com # 1.32 Release Signal Shadow
       - james@spurin.com # 1.32 Docs Shadow
       - jeffdauda@icloud.com # 1.32 Release Notes Shadow
+      - jenny.shu@solo.io # 1.32 Enhancements Shadow
       - lvishpal408@gmail.com # 1.32 Release Notes Shadow
+      - mdeep9771@gmail.com # 1.32 Enhancements Shadow
       - michaelfromyeg@gmail.com # 1.32 Release Signal Shadow
       - michellengnx@gmail.com # 1.32 Docs Shadow
+      - rawat.dipesh@gmail.com # 1.32 Enhancements Shadow
       - rayandas91@gmail.com # 1.32 Release Notes Shadow
       - rytswd@gmail.com # 1.32 Comms Shadow
       - satyampsoni@gmail.com # 1.32 Release Notes Lead
+      - sepi.alavii@gmail.com # 1.32 Enhancements Shadow
       - smith.rashan@gmail.com # 1.32 Comms Shadow
       - snehay2020@gmail.com # 1.32 Release Notes Shadow
       - tico88612@gmail.com # 1.32 Release Signal Shadow
@@ -406,12 +410,16 @@ groups:
       - egbunaoluebube@gmail.com # 1.32 Release Signal Shadow
       - jackhammervyom@gmail.com # 1.32 Release Lead Shadow
       - james@spurin.com # 1.32 Docs Shadow
+      - jenny.shu@solo.io # 1.32 Enhancements Shadow
+      - mdeep9771@gmail.com # 1.32 Enhancements Shadow
       - michaelfromyeg@gmail.com # 1.32 Release Signal Shadow
       - michellengnx@gmail.com # 1.32 Docs Shadow
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
+      - rawat.dipesh@gmail.com # 1.32 Enhancements Shadow
       - rytswd@gmail.com # 1.32 Comms Shadow
       - satyampsoni@gmail.com # 1.32 Release Notes Lead
+      - sepi.alavii@gmail.com # 1.32 Enhancements Shadow
       - smith.rashan@gmail.com # 1.32 Comms Shadow
       - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
       - tico88612@gmail.com # 1.32 Release Signal Shadow
@@ -481,11 +489,16 @@ groups:
     members:
       - fsmunoz@gmail.com # 1.32 RT Lead
       - jackhammervyom@gmail.com # 1.32 Release Lead Shadow
+      - jenny.shu@solo.io # 1.32 Enhancements Shadow
       - kat.cosgrove@gmail.com # Subproject owner / 1.32 RT EA
+      - mdeep9771@gmail.com # 1.32 Enhancements Shadow
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
+      - rawat.dipesh@gmail.com # 1.32 Enhancements Shadow
+      - sepi.alavii@gmail.com # 1.32 Enhancements Shadow
       - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - tylerschade99@gmail.com # 1.32 Enhancements Lead
 
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
     name: k8s-infra-staging-zeitgeist
