@@ -29,7 +29,6 @@
       "members": [
         "group:k8s-infra-gcp-accounting@kubernetes.io",
         "group:k8s-infra-prod-readiness@kubernetes.io",
-        "serviceAccount:bq-data-transfer-kettle@kubernetes-public.iam.gserviceaccount.com",
         "serviceAccount:kettle@kubernetes-public.iam.gserviceaccount.com"
       ],
       "role": "roles/bigquery.jobUser"
@@ -105,6 +104,7 @@
     {
       "members": [
         "group:k8s-infra-dns-admins@kubernetes.io",
+        "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/cert-manager/sa/cert-manager",
         "serviceAccount:dns-pusher@kubernetes-public.iam.gserviceaccount.com",
         "serviceAccount:k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com"
       ],

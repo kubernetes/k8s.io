@@ -5,10 +5,6 @@
   },
   {
     "role": "roles/bigquery.user",
-    "userByEmail": "bq-data-transfer-kettle@kubernetes-public.iam.gserviceaccount.com"
-  },
-  {
-    "role": "roles/bigquery.user",
     "userByEmail": "kettle@kubernetes-public.iam.gserviceaccount.com"
   }
 ]
