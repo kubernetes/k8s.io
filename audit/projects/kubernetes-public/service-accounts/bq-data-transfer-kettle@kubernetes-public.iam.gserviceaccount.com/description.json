@@ -1,8 +1,0 @@
-{
-  "description": "Service Acccount BigQuery Data Transfer",
-  "email": "bq-data-transfer-kettle@kubernetes-public.iam.gserviceaccount.com",
-  "name": "projects/kubernetes-public/serviceAccounts/bq-data-transfer-kettle@kubernetes-public.iam.gserviceaccount.com",
-  "oauth2ClientId": "104254428371262564125",
-  "projectId": "kubernetes-public",
-  "uniqueId": "104254428371262564125"
-}
