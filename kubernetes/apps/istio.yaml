@@ -16,6 +16,11 @@ spec:
     - path: config/crd/experimental
       repoURL: https://github.com/kubernetes-sigs/gateway-api
       targetRevision: v1.1.0
+  ignoreDifferences:     
+    - group: admissionregistration.k8s.io                                                              
+      kind: ValidatingWebhookConfiguration
+      jsonPointers:                                                                                    
+      - /webhooks/0/failurePolicy
   syncPolicy:
     automated:
       prune: true
@@ -76,6 +81,11 @@ spec:
     - path: kubernetes/gke-utility/istio-system
       repoURL: https://github.com/borg-land/k8s.io
       targetRevision: istio
+  ignoreDifferences:     
+    - group: admissionregistration.k8s.io                                                              
+      kind: ValidatingWebhookConfiguration
+      jsonPointers:                                                                                    
+      - /webhooks/0/failurePolicy
   syncPolicy:
     automated:
       prune: true

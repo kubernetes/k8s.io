@@ -4,6 +4,7 @@ metadata:
   name: istio-ingressgateway
   annotations:
     cloud.google.com/l4-rbs: enabled
+    networking.gke.io/load-balancer-ip-addresses: utility-ingress-v4,utility-ingress-v6
 spec:
   gatewayClassName: istio
   listeners:
@@ -20,11 +21,6 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: k8s-io-wild-cert
-  addresses:
-  - type: IPAddress
-    value: 34.66.218.218
-  - type: IPAddress
-    value: "2600:1900:4000:627b:8000::"
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
