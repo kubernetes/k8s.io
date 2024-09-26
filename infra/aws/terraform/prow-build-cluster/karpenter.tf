@@ -25,6 +25,7 @@ module "karpenter" {
 
   node_iam_role_use_name_prefix = false
   node_iam_role_name            = "karpenter-nodes"
+  enable_v1_permissions         = true
   # Allows accessing instances via AWS System Manager (SSM)
   node_iam_role_additional_policies = {
     AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
@@ -33,4 +34,5 @@ module "karpenter" {
   queue_name = "karpenter-queue"
 
   tags = local.tags
+
 }
