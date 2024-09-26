@@ -28,7 +28,7 @@ spec:
         kind: HelmRepository
         name: karpenter
         namespace: flux-system
-      version: 0.37.0
+      version: 0.37.3
   dependsOn:
   - name: karpenter-crd
   interval: 5m0s
