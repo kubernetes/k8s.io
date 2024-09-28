@@ -242,14 +242,6 @@
     "sha256:05bec8b13129c54cf855ad1802b0fe302c5d63c992b76b5b9ba897650938a328": ["v0.0.11"]
     "sha256:2d471b3a34dc43d10c3f3d7f2a6e8a2ecf7654a4197e56374261c1c708b16365": ["v0.0.12"]
 
-# Ingress NGINX: OpenTelemetry
-- name: opentelemetry-1.21.6
-  dmap:
-    "sha256:3d664a767564860e9a0ab08edd248a5a75f4247910edeb206177aef43f14fecf": ["v20240813-b933310d"]
-- name: opentelemetry-1.25.3
-  dmap:
-    "sha256:f7604ac0547ed64d79b98d92133234e66c2c8aade3c1f4809fed5eec1fb7f922": ["v20240813-b933310d"]
-
 # Ingress NGINX: Test Runner
 - name: e2e-test-runner
   dmap:
@@ -393,3 +385,9 @@
     "sha256:fd7ec835f31b7b37187238eb4fdad4438806e69f413a203796263131f4f02ed0": ["v20230527"]
     "sha256:1c8fa555f66d016b27e230f0b9b8c2fd7c8fe86fef342bdf5be609b392bf121f": ["v20230612"]
     "sha256:13bee3f5223883d3ca62fee7309ad02d22ec00ff0d7033e3e9aca7a9f60fd472": ["v20230721-3e2062ee5"]
+- name: opentelemetry-1.21.6
+  dmap:
+    "sha256:3d664a767564860e9a0ab08edd248a5a75f4247910edeb206177aef43f14fecf": ["v20240813-b933310d"]
+- name: opentelemetry-1.25.3
+  dmap:
+    "sha256:f7604ac0547ed64d79b98d92133234e66c2c8aade3c1f4809fed5eec1fb7f922": ["v20240813-b933310d"]
