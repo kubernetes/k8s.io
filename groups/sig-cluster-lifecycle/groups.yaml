@@ -299,6 +299,8 @@ groups:
       - richmcase@gmail.com
       - ankita.swamy20@gmail.com
       - daniel.lipovetsky@gmail.com
+      - andreas.sommer87@googlemail.com
+      - nolan@nbrubaker.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-aws-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-aws-alerts
@@ -315,6 +317,8 @@ groups:
       - richmcase@gmail.com
       - ankita.swamy20@gmail.com
       - daniel.lipovetsky@gmail.com
+      - andreas.sommer87@googlemail.com
+      - nolan@nbrubaker.com
 
   - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
     name: k8s-infra-staging-cluster-api-do
