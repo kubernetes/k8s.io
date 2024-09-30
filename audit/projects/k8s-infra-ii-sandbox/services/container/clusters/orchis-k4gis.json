@@ -18,13 +18,38 @@
   },
   "autopilot": {},
   "autoscaling": {
-    "autoscalingProfile": "BALANCED"
+    "autoprovisioningNodePoolDefaults": {
+      "imageType": "COS_CONTAINERD",
+      "oauthScopes": [
+        "https://www.googleapis.com/auth/devstorage.read_only",
+        "https://www.googleapis.com/auth/logging.write",
+        "https://www.googleapis.com/auth/monitoring",
+        "https://www.googleapis.com/auth/service.management.readonly",
+        "https://www.googleapis.com/auth/servicecontrol",
+        "https://www.googleapis.com/auth/trace.append"
+      ],
+      "serviceAccount": "default"
+    },
+    "autoscalingProfile": "OPTIMIZE_UTILIZATION",
+    "enableNodeAutoprovisioning": true,
+    "resourceLimits": [
+      {
+        "maximum": "128",
+        "minimum": "1",
+        "resourceType": "cpu"
+      },
+      {
+        "maximum": "10240",
+        "minimum": "1",
+        "resourceType": "memory"
+      }
+    ]
   },
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.60.0.0/14",
   "createTime": "2024-09-01T09:34:20+00:00",
-  "currentMasterVersion": "1.30.2-gke.1587003",
-  "currentNodeVersion": "1.30.2-gke.1587003",
+  "currentMasterVersion": "1.30.3-gke.1969001",
+  "currentNodeVersion": "1.30.2-gke.1587003 *",
   "databaseEncryption": {
     "currentState": "CURRENT_STATE_DECRYPTED",
     "state": "DECRYPTED"
