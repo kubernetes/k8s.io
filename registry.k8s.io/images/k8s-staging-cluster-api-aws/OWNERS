@@ -4,7 +4,8 @@ approvers:
 - richardcase
 - Ankitasw
 - dlipovetsky
-- vincepri
+- nrb
+- AndiDog
 
 emeritus_approvers:
 - chuckha
@@ -14,4 +15,5 @@ emeritus_approvers:
 - rudoi
 - sedefsavas
 - Skarlso
+- vincepri
 
