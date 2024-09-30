@@ -122,7 +122,7 @@ groups:
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanJoin: "INVITED_CAN_JOIN"
-      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "false"
     owners:
       - cecilerobertm@gmail.com

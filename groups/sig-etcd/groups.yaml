@@ -29,4 +29,4 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
       WhoCanModerateContent: "OWNERS_AND_MANAGERS"
-      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      MessageModerationLevel: "MODERATE_NONE"
