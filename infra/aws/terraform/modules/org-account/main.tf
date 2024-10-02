@@ -40,3 +40,10 @@ resource "aws_organizations_account" "this" {
     ]
   }
 }
+
+resource "aws_account_region" "this" {
+  for_each    = toset(var.aws_account_regions)
+  region_name = each.key
+  account_id  = aws_organizations_account.this.id
+  enabled     = true
+}

@@ -58,3 +58,10 @@ variable "permissions_map" {
   type        = map(any)
   description = "A map of permissions"
 }
+
+variable "aws_account_regions" {
+  default     = []
+  type        = list(string)
+  description = "List of opt-in AWS regions to enable for this account"
+}
+
