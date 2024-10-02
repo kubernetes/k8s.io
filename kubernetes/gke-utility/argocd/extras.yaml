@@ -6,7 +6,7 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  url: https://github.com/kubernetes
+  url: https://github.com/kubernetes/k8s.io
   name: kubernetes
   type: git
 ---
@@ -43,3 +43,25 @@ spec:
     - backendRefs:
         - name: argocd-server
           port: 80
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: argocd
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-server
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            namespaces:
+              - istio-system
+      when:
+        - key: request.headers[X-Auth-Request-User]
+          values:
+            - dims
+            - upodroid
+            - ameukam
+            - BenTheElder

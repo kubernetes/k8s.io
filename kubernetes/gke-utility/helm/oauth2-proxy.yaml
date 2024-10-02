@@ -1,11 +1,9 @@
-
 config:
   existingSecret: oauth2-proxy-creds
 
 extraArgs:
   provider: github
   github-org: kubernetes
-  github-team: sig-k8s-infra-leads,sig-k8s-infra
   redirect-url: https://oauth2-proxy.k8s.io/oauth2/callback
   reverse-proxy: true
   pass-access-token: true
