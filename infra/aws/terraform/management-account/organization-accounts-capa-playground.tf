@@ -21,4 +21,9 @@ module "k8s-infra-sandbox-capa" {
   email                      = "k8s-infra-sandbox-capa@kubernetes.io"
   iam_user_access_to_billing = "ALLOW"
   parent_id                  = aws_organizations_organizational_unit.production.id
+  permissions_map = {
+    "aws-capa-maintainers" = [
+      "AdministratorAccess",
+    ]
+  }
 }

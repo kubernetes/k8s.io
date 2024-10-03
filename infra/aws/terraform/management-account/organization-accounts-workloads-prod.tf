@@ -59,3 +59,27 @@ module "obs-k8s-io" {
     "service"     = "obs"
   }
 }
+
+
+module "capa-ami" {
+  source = "../modules/org-account"
+
+  account_name = "cncf-k8s-infra-aws-capa-ami"
+  email        = "cncf-k8s-infra-aws-capa-ami@lists.cncf.io"
+  parent_id    = aws_organizations_organizational_unit.production.id
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-cluster-lifecycle",
+  }
+  permissions_map = {
+    "aws-capa-maintainers" = [
+      "AdministratorAccess",
+    ]
+  }
+  aws_account_regions = [
+    "ap-east-1",
+    "ap-southeast-3",
+    "eu-south-2",
+  ]
+}
