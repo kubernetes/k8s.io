@@ -97,6 +97,7 @@
   "nodeConfig": {
     "diskSizeGb": 200,
     "diskType": "pd-ssd",
+    "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
     "imageType": "UBUNTU_CONTAINERD",
     "machineType": "n1-highmem-8",
     "metadata": {
@@ -125,6 +126,7 @@
       "config": {
         "diskSizeGb": 200,
         "diskType": "pd-ssd",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
         "imageType": "UBUNTU_CONTAINERD",
         "machineType": "n1-highmem-8",
         "metadata": {

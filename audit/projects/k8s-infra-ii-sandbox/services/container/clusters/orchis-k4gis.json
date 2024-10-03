@@ -49,7 +49,7 @@
   "clusterIpv4Cidr": "10.60.0.0/14",
   "createTime": "2024-09-01T09:34:20+00:00",
   "currentMasterVersion": "1.30.3-gke.1969001",
-  "currentNodeVersion": "1.30.2-gke.1587003 *",
+  "currentNodeVersion": "1.30.3-gke.1969001",
   "databaseEncryption": {
     "currentState": "CURRENT_STATE_DECRYPTED",
     "state": "DECRYPTED"
@@ -68,9 +68,9 @@
   "initialClusterVersion": "1.30.2-gke.1587003",
   "initialNodeCount": 1,
   "instanceGroupUrls": [
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-b/instanceGroupManagers/gke-orchis-k4gis-pool1-81d2b328-grp",
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-f/instanceGroupManagers/gke-orchis-k4gis-pool1-f962dfb9-grp",
-    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-c/instanceGroupManagers/gke-orchis-k4gis-pool1-d4b20a4a-grp"
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-b/instanceGroupManagers/gke-orchis-k4gis-pool1-5b89b65f-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-f/instanceGroupManagers/gke-orchis-k4gis-pool1-746991c5-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-c/instanceGroupManagers/gke-orchis-k4gis-pool1-546f6185-grp"
   ],
   "ipAllocationPolicy": {
     "clusterIpv4Cidr": "10.60.0.0/14",
@@ -206,9 +206,9 @@
         }
       },
       "instanceGroupUrls": [
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-b/instanceGroupManagers/gke-orchis-k4gis-pool1-81d2b328-grp",
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-f/instanceGroupManagers/gke-orchis-k4gis-pool1-f962dfb9-grp",
-        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-c/instanceGroupManagers/gke-orchis-k4gis-pool1-d4b20a4a-grp"
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-b/instanceGroupManagers/gke-orchis-k4gis-pool1-5b89b65f-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-f/instanceGroupManagers/gke-orchis-k4gis-pool1-746991c5-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-ii-sandbox/zones/us-central1-c/instanceGroupManagers/gke-orchis-k4gis-pool1-546f6185-grp"
       ],
       "locations": [
         "us-central1-b",
@@ -241,7 +241,7 @@
         },
         "strategy": "BLUE_GREEN"
       },
-      "version": "1.30.2-gke.1587003"
+      "version": "1.30.3-gke.1969001"
     }
   ],
   "notificationConfig": {
