@@ -1,0 +1,54 @@
+config:
+  existingSecret: oauth2-proxy-creds
+
+extraArgs:
+  provider: github
+  github-org: kubernetes
+  redirect-url: https://oauth2-proxy.k8s.io/oauth2/callback
+  reverse-proxy: true
+  pass-access-token: true
+  pass-user-headers: true
+  pass-authorization-header: true
+  cookie-samesite: lax
+  cookie-domain: .k8s.io
+  set-xauthrequest: true
+  whitelist-domain: "*.k8s.io"
+  skip-provider-button: true
+  skip-jwt-bearer-tokens: true
+  upstream: static://200
+  silence-ping-logging: true
+  show-debug-on-error: true
+
+metrics:
+  serviceMonitor:
+    enabled: false #enable when observability stack is ready
+
+extraObjects:
+  - apiVersion: external-secrets.io/v1beta1
+    kind: ExternalSecret
+    metadata:
+      name: oauth2-proxy-creds
+      namespace: "{{ .Release.Namespace }}"
+    spec:
+      dataFrom:
+      - extract:
+          key: oauth2-proxy-creds
+      secretStoreRef:
+        kind: ClusterSecretStore
+        name: k8s-infra-prow
+  - apiVersion: gateway.networking.k8s.io/v1
+    kind: HTTPRoute
+    metadata:
+      name: oauth2-proxy
+      namespace: "{{ .Release.Namespace }}"
+    spec:
+      hostnames:
+        - oauth2-proxy.k8s.io
+      parentRefs:
+        - name: istio-ingressgateway
+          namespace: istio-system
+          sectionName: https
+      rules:
+        - backendRefs:
+            - name: oauth2-proxy
+              port: 80

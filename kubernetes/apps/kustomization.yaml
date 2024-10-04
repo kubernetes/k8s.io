@@ -6,3 +6,5 @@ resources:
   - cert-manager.yaml
   # - ingress-nginx.yaml
   - prow.yaml
+  - istio.yaml
+  - oauth2-proxy.yaml

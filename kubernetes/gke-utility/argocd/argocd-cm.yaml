@@ -12,17 +12,11 @@ data:
       ignoreDifferences: |
         jqPathExpressions:
         - '.webhooks[]?.clientConfig.caBundle'
+  resource.exclusions: |
+    - apiGroups:
+        - cilium.io
+      kinds:
+        - CiliumIdentity
+      clusters:
+        - "*"
   kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-alpha-plugins
-  dex.config: |
-    connectors:
-      - type: github
-        id: github
-        name: GitHub
-        config:
-          clientID: $dex.github.clientId
-          clientSecret: $dex.github.clientSecret
-          orgs:
-          - name: kubernetes
-          useLoginAsID: true
-          loadAllGroups: true
-          teamNameField: slug

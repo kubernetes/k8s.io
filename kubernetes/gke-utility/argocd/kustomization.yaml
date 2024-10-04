@@ -8,6 +8,7 @@ resources:
 - clusters.yaml
 
 patches:
+- path: argocd-cmd-params-cm.yaml
 - path: argocd-cm.yaml
 - path: argocd-cm-rbac.yaml
 - path: argocd-sa.yaml
