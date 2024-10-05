@@ -139,6 +139,7 @@
   "nodeConfig": {
     "diskSizeGb": 100,
     "diskType": "hyperdisk-balanced",
+    "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V2",
     "imageType": "UBUNTU_CONTAINERD",
     "linuxNodeConfig": {
       "cgroupMode": "CGROUP_MODE_V2"
@@ -182,6 +183,7 @@
       "config": {
         "diskSizeGb": 100,
         "diskType": "hyperdisk-balanced",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V2",
         "imageType": "UBUNTU_CONTAINERD",
         "linuxNodeConfig": {
           "cgroupMode": "CGROUP_MODE_V2"

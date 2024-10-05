@@ -139,6 +139,7 @@
   "nodeConfig": {
     "diskSizeGb": 100,
     "diskType": "pd-standard",
+    "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
     "imageType": "COS_CONTAINERD",
     "machineType": "n1-standard-2",
     "metadata": {
@@ -166,6 +167,7 @@
       "config": {
         "diskSizeGb": 100,
         "diskType": "pd-standard",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
         "imageType": "COS_CONTAINERD",
         "machineType": "n1-standard-2",
         "metadata": {
@@ -224,6 +226,7 @@
       "config": {
         "diskSizeGb": 100,
         "diskType": "pd-standard",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
         "imageType": "COS_CONTAINERD",
         "machineType": "n1-standard-4",
         "metadata": {
@@ -282,6 +285,7 @@
       "config": {
         "diskSizeGb": 100,
         "diskType": "pd-standard",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
         "imageType": "COS_CONTAINERD",
         "machineType": "e2-highmem-4",
         "metadata": {
