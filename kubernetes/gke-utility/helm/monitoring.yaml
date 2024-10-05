@@ -24,11 +24,13 @@ grafana:
       auto_assign_org: true
       auto_assign_org_role: Editor
   
-
 prometheus:
   thanosService:
     enabled: true
   prometheusSpec:
+    externalLabels:
+      cluster: gke-utility
+      cloud: gke
     thanos:
       image: quay.io/thanos/thanos:v0.36.1
       listenLocal: false
