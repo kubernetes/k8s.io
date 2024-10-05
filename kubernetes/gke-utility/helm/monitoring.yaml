@@ -1,5 +1,9 @@
 grafana:
   enabled: true
+  sidecar:
+    datasources:
+      # point the default Promtheus Datasource to Thanos
+      url: http://thanos-query-frontend.monitoring:9090/
   grafana.ini:
     analytics:
       reporting_enabled: false
@@ -19,6 +23,7 @@ grafana:
       allow_sign_up: false
       auto_assign_org: true
       auto_assign_org_role: Editor
+  
 
 prometheus:
   thanosService:
