@@ -4,7 +4,6 @@ resources:
   # - argocd.yaml This has been manually applied to fix sync issues
   - external-secrets.yaml
   - cert-manager.yaml
-  # - ingress-nginx.yaml
   - prow.yaml
   - istio.yaml
   - oauth2-proxy.yaml

@@ -32,6 +32,7 @@ spec:
     sectionName: http
   hostnames:
   - '*.k8s.io'
+  - '*.prow.k8s.io'
   rules:
   - filters:
     - type: RequestRedirect
@@ -49,5 +50,7 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   commonName: '*.k8s.io'
+  # *.prow.k8s.io doesn't work as GCP CERT MANAGER USES CNAME FOR ACME INSTEAD OF TXT :(((((((
   dnsNames:
   - '*.k8s.io'
+  - 'monitoring.prow.k8s.io'
