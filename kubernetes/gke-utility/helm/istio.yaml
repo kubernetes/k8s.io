@@ -1,0 +1,48 @@
+global:
+  hub: gcr.io/istio-release
+  istiod:
+    enableAnalysis: true
+  meshID: mesh
+  multiCluster:
+    clusterName: gke-utility
+  network: prow-vpc
+pilot:
+  env:
+    PILOT_ENABLE_ALPHA_GATEWAY_API: 'true'
+    ENABLE_NATIVE_SIDECARS: 'true'
+meshConfig:
+  accessLogFile: /dev/stdout
+  enablePrometheusMerge: true
+  protocolDetectionTimeout: 5s
+  enableTracing: true
+  defaultConfig:
+    gatewayTopology:
+      numTrustedProxies: 2
+    tracing:
+  extensionProviders:
+  - name: stackdriver
+    stackdriver:
+  - name: "oauth2-proxy"
+    envoyExtAuthzHttp:
+      service: "oauth2-proxy.oauth2-proxy.svc.cluster.local"
+      port: "80"
+      headersToDownstreamOnDeny:
+        - content-type
+        - set-cookie
+      headersToUpstreamOnAllow:
+        - authorization
+        - cookie
+        - path
+        - x-*
+      includeHeadersInCheck:
+        - authorization
+        - cookie
+        - user-agent
+      includeAdditionalHeadersInCheck:
+        X-Auth-Request-Redirect: https://%REQ(Host)%%REQ(:PATH)%
+telemetry:
+  enabled: true
+  v2:
+    prometheus:
+      enabled: true
+      wasmEnabled: false
