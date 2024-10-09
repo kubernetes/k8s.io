@@ -6,6 +6,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     owners:
+      - antonio.ojea.garcia@gmail.com
       - augustus@cisco.com
       - bburns@microsoft.com
       - bentheelder@google.com
@@ -19,6 +20,7 @@ groups:
       - killen.bob@gmail.com
       - lachlan.evenson@microsoft.com
       - liggitt@google.com
+      - saschagrunert@gmail.com
       - soltysh@gmail.com
       - michelle.noorali@gmail.com
       - nikhitaraghunath@gmail.com
@@ -44,13 +46,13 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
+      - antonio.ojea.garcia@gmail.com
       - augustus@cisco.com
       - bentheelder@google.com
       - k8s@auggie.dev
-      - killen.bob@gmail.com
+      - saschagrunert@gmail.com
       - soltysh@gmail.com
       - paco.xu@daocloud.io
-      - pal.nabarun95@gmail.com
       - patrick.ohly@intel.com
 
   - email-id: steering@kubernetes.io
@@ -69,13 +71,13 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
+      - antonio.ojea.garcia@gmail.com
       - augustus@cisco.com
       - bentheelder@google.com
       - k8s@auggie.dev
-      - killen.bob@gmail.com
+      - saschagrunert@gmail.com
       - soltysh@gmail.com
       - paco.xu@daocloud.io
-      - pal.nabarun95@gmail.com
       - patrick.ohly@intel.com
     managers:
       - ihor.dvoretskyi@gmail.com
