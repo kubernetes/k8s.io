@@ -135,6 +135,10 @@ module "eks" {
     }
   }
 
+  cluster_timeouts = {
+    update = "120m"
+  }
+
   tags = merge(var.tags, {
     "region" = data.aws_region.current.name
   })
