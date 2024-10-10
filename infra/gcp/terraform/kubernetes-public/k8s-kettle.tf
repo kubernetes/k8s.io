@@ -97,7 +97,7 @@ resource "google_pubsub_subscription_iam_binding" "subscription_binding" {
 
 // Create a subscription in this project to the kubernetes-ci-logs-updates topic in k8s-infra-prow.
 data "google_pubsub_topic" "kubernetes_ci_logs_topic" {
-  name    = "projects/k8s-infra-prow/topics/kubernetes-ci-logs-updates"
+  name    = "kubernetes-ci-logs-updates"
   project = "k8s-infra-prow"
 }
 
