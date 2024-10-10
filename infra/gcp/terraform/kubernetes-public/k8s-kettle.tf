@@ -95,3 +95,26 @@ resource "google_pubsub_subscription_iam_binding" "subscription_binding" {
     "serviceAccount:${module.aaa_kettle_sa.email}"
   ]
 }
+
+// Create a subscription in this project to the kubernetes-ci-logs-updates topic in k8s-infra-prow.
+data "google_pubsub_topic" "kubernetes_ci_logs_topic" {
+  name    = "kubernetes-ci-logs-updates"
+  project = "k8s-infra-prow"
+}
+
+resource "google_pubsub_subscription" "kettle_ci_logs_subscription" {
+  name = "k8s-infra-kettle"
+  topic = data.google_pubsub_topic.kubernetes_ci_logs_topic.name
+  project = data.google_project.project.project_id
+
+  filter = "attributes.eventType = \"OBJECT_FINALIZE\""
+}
+
+resource "google_pubsub_subscription_iam_binding" "ci_logs_subscription_binding" {
+  project      = data.google_project.project.project_id
+  subscription = google_pubsub_subscription.kettle_ci_logs_subscription.name
+  role         = "roles/pubsub.editor"
+  members = [
+    "serviceAccount:${module.aaa_kettle_sa.email}"
+  ]
+}
