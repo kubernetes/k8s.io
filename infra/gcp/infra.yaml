@@ -328,6 +328,7 @@ infra:
       k8s-staging-cluster-api-gcp:
       k8s-staging-cluster-api-helm:
       k8s-staging-cluster-api-nested:
+      k8s-staging-cluster-capacity:
       k8s-staging-coredns:
       k8s-staging-cpa:
       k8s-staging-cri-tools:
