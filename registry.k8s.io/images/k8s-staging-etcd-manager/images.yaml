@@ -1,1 +1,13 @@
-# TODO: add images
+- name: etcd-backup
+  dmap:
+    "sha256:b79ec8ea29f7f4d40d7f1fe3ec3151857d6b16efb95e3ce544108bcc738171b9": ["v3.0.20241012"]
+- name: etcd-dump
+  dmap:
+    "sha256:6def1b0dccc4d22d68617cb4f74da808390852b14187428822b9cca6b71d84b6": ["v3.0.20241012"]
+- name: etcd-manager
+  dmap:
+    "sha256:07c3e1db0ee8241686ec224479f98fa0a3f3911ed8d76f6768bb401a8dcf09f5": ["v3.0.20241012"]
+- name: etcd-manager-slim
+  dmap:
+    "sha256:572c8c37975b65e5ad79752178cb53ad4e2dd3fa2bddcf177082c5d5d29dde52": ["v3.0.20241012"]
+
