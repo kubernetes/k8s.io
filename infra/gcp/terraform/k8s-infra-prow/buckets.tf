@@ -113,6 +113,11 @@ module "prow_bucket" {
       member = "serviceAccount:${google_service_account.prow.email}"
     },
     {
+      // prow pod-utils service account in gke trusted build cluster
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    },
+    {
       role   = "roles/storage.objectViewer"
       member = "allUsers"
     },
