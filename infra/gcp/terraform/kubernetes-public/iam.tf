@@ -27,5 +27,11 @@ module "iam" {
       "serviceAccount:kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
     ]
+    "roles/dns.admin" = [
+      "group:k8s-infra-dns-admins@kubernetes.io",
+      "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/cert-manager/sa/cert-manager",
+      "serviceAccount:dns-pusher@kubernetes-public.iam.gserviceaccount.com",
+      "serviceAccount:k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com"
+    ]
   }
 }
