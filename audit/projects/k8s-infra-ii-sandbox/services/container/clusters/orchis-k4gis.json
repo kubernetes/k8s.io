@@ -47,6 +47,21 @@
   },
   "binaryAuthorization": {},
   "clusterIpv4Cidr": "10.60.0.0/14",
+  "controlPlaneEndpointsConfig": {
+    "dnsEndpointConfig": {
+      "allowExternalTraffic": false,
+      "endpoint": "gke-b6b90de2dd594647ac3c37c4a9d9e5d355b8-631771264409.us-central1.gke.goog"
+    },
+    "ipEndpointsConfig": {
+      "authorizedNetworksConfig": {
+        "gcpPublicCidrsAccessEnabled": true
+      },
+      "enablePublicEndpoint": true,
+      "enabled": true,
+      "privateEndpoint": "10.128.0.59",
+      "publicEndpoint": "35.226.37.3"
+    }
+  },
   "createTime": "2024-09-01T09:34:20+00:00",
   "currentMasterVersion": "1.30.3-gke.1969001",
   "currentNodeVersion": "1.30.3-gke.1969001",
