@@ -87,6 +87,8 @@
     "sha256:ee0e7295016d87058c05e33a4981d73c7e754c1a4534b13b6f5eaaf0955c6aaf": ["v0.16.3-full"]
     "sha256:d3f0fb2d50c2f5461f83f8a3fed1280fdc7b1bdd065a6ec8d32c9c53af7de990": ["v0.16.4","v0.16.4-minimal"]
     "sha256:eee9da3c6e5999fdb43afdcd8bce8644d30711af7b7c1982e551ed3cb43efdc9": ["v0.16.4-full"]
+    "sha256:582bc092030a73a24bb0fe6ba331ec18572c5ab4bd2dc1df8b27a49f95f8d305": ["v0.16.5","v0.16.5-minimal"]
+    "sha256:fa726d75263e1704e579207a611846de7d67b84c68c3c4e69cbad535a2a5dd7e": ["v0.16.5-full"]
 - name: node-feature-discovery-operator
   dmap:
     "sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16": ["v0.2.0"]
