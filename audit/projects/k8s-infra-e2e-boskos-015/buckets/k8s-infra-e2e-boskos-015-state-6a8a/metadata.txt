@@ -1,4 +1,4 @@
-gs://k8s-infra-e2e-boskos-015-state-0b0c/ :
+gs://k8s-infra-e2e-boskos-015-state-6a8a/ :
 	Storage class:			STANDARD
 	Location type:			multi-region
 	Location constraint:		US
@@ -10,8 +10,8 @@ gs://k8s-infra-e2e-boskos-015-state-0b0c/ :
 	Requester Pays enabled:		None
 	Labels:				None
 	Default KMS key:		None
-	Time created:			Sun, 13 Oct 2024 08:03:01 GMT
-	Time updated:			Sun, 13 Oct 2024 08:03:01 GMT
+	Time created:			Mon, 14 Oct 2024 00:06:45 GMT
+	Time updated:			Mon, 14 Oct 2024 00:06:45 GMT
 	Metageneration:			1
 	Bucket Policy Only enabled:	False
 	Public access prevention:	inherited
