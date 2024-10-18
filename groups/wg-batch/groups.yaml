@@ -13,7 +13,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - acondor@google.com
+      - kehannon@redhat.com
       - mwielgus@google.com
       - soltysh@gmail.com
       - swati.tcd@gmail.com
@@ -30,7 +30,7 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
-      - acondor@google.com
+      - kehannon@redhat.com
       - mwielgus@google.com
       - soltysh@gmail.com
       - swati.tcd@gmail.com
