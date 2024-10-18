@@ -365,7 +365,11 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 		groupsConfig.Groups = append(groupsConfig.Groups, group)
 	}
 
-	cm := genyaml.NewCommentMap("reconcile.go")
+	cm, err := genyaml.NewCommentMap(nil, "reconcile.go")
+	if err != nil {
+		return fmt.Errorf("unable to create comment map : %w", err)
+	}
+
 	yamlSnippet, err := cm.GenYaml(groupsConfig)
 	if err != nil {
 		return fmt.Errorf("unable to generate yaml for groups : %w", err)
