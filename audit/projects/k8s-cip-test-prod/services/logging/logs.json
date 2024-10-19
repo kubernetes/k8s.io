@@ -1,1 +1,4 @@
-[]
+[
+  "projects/k8s-cip-test-prod/logs/cloudaudit.googleapis.com%2Fdata_access",
+  "projects/k8s-cip-test-prod/logs/cloudaudit.googleapis.com%2Fsystem_event"
+]
