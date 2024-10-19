@@ -38,7 +38,7 @@
     }
   },
   "createTime": "2020-04-30T21:31:49+00:00",
-  "currentMasterVersion": "1.30.4-gke.1348000",
+  "currentMasterVersion": "1.30.5-gke.1014001",
   "currentNodeVersion": "1.29.7-gke.1008000 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
