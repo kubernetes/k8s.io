@@ -56,7 +56,8 @@ function ensure_terraform_state_containers() {
         --kind StorageV2 \
         --min-tls-version 'TLS1_2' \
         --resource-group "$RESOURCE_GROUP" \
-        --sku Premium_ZRS \
+        --sku Standard_LRS \
+        --encryption-services blob \
         --tags "${TAGS}"
     fi
 
