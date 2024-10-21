@@ -1,0 +1,68 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: monitoring
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            clusterType: 'utility'
+  template:
+    metadata:
+      name: 'monitoring-{{ .name }}'
+      annotations:
+        argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+    spec:
+      destination:
+        namespace: monitoring
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: kube-prometheus-stack
+          repoURL: https://prometheus-community.github.io/helm-charts
+          targetRevision: 62.3.1
+          helm:
+            releaseName: monitoring
+            valueFiles:
+              - $values/kubernetes/{{ .name }}/helm/monitoring.yaml
+        - repoURL: https://github.com/borg-land/k8s.io
+          targetRevision: observability-stack
+          ref: values
+        - path: kubernetes/{{ .name }}/monitoring/
+          repoURL: https://github.com/borg-land/k8s.io
+          targetRevision: observability-stack
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+        managedNamespaceMetadata:
+          labels:
+            istio-injection: enabled
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: thanos
+spec:
+  destination:
+    name: gke-utility
+    namespace: monitoring
+  project: default
+  sources:
+    - chart: thanos
+      repoURL: registry-1.docker.io/bitnamicharts
+      targetRevision: 15.7.27
+      helm:
+        releaseName: thanos
+        valueFiles:
+          - $values/kubernetes/gke-utility//helm/thanos.yaml
+    - repoURL: https://github.com/borg-land/k8s.io
+      targetRevision: observability-stack
+      ref: values

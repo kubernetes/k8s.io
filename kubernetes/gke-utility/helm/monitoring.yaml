@@ -1,0 +1,54 @@
+grafana:
+  enabled: true
+  sidecar:
+    datasources:
+      # point the default Promtheus Datasource to Thanos
+      url: http://thanos-query-frontend.monitoring:9090/
+  grafana.ini:
+    analytics:
+      reporting_enabled: false
+      check_for_updates: true
+    server:
+      root_url: https://monitoring.prow.k8s.io
+    auth:
+      oauth_auto_login: true
+      signout_redirect_url: https://oauth2-proxy.k8s.io/oauth2/sign_out
+    auth.proxy:
+      enabled: true
+      header_name: X-Auth-Request-Email
+      header_property: email
+      auto_sign_up: true
+      headers: Name:X-Auth-Request-User Email:X-Auth-Request-Email Groups:X-Auth-Request-Groups
+    users:
+      allow_sign_up: false
+      auto_assign_org: true
+      auto_assign_org_role: Editor
+  
+prometheus:
+  thanosService:
+    enabled: true
+  prometheusSpec:
+    externalLabels:
+      cluster: gke-utility
+      cloud: gke
+    thanos:
+      image: quay.io/thanos/thanos:v0.36.1
+      listenLocal: false
+      logLevel: debug
+      objectStorageConfig:
+        secret:
+          type: GCS
+          config:
+            bucket: k8s-io-thanos
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+
+# These endpoints aren't scrapable on GKE
+coreDns:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
