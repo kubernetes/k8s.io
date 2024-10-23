@@ -85,8 +85,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - acondor@google.com
       - ahg@google.com
+      - michalwozniak@google.com
       - yuki.iwai.tz@gmail.com
 
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
@@ -120,7 +120,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - hweicdl@gmail.com
-      - acondor@google.com
       - handbomusic@gmail.com
 
   - email-id: k8s-infra-staging-wasm-scheduler@kubernetes.io
@@ -155,7 +154,6 @@ groups:
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
       ReconcileMembers: "true"
     managers:
-      - acondor@google.com
       - michalwozniak@google.com
       - yuki.iwai.tz@gmail.com
     members:

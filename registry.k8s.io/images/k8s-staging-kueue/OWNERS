@@ -2,7 +2,6 @@
 #  https://github.com/kubernetes/community/blob/master/contributors/devel/owners.md
 
 approvers:
-- alculquicondor
 - tenzen-y
 - mimowo
 
@@ -13,6 +12,7 @@ reviewers:
 
 emeritus_approvers:
 - ahg-g
+- alculquicondor
 
 labels:
 - sig/scheduling
