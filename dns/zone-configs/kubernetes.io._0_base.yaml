@@ -207,3 +207,8 @@ youtube:
 yt:
   type: CNAME
   value: redirect.k8s.io.
+
+# BlueSky verification sig-contributor-experience
+_atproto:
+  type: TXT
+  value: did=did:plc:kyg4uikmq7lzpb76ugvxa6ul
