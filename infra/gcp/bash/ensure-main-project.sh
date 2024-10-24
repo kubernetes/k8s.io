@@ -85,6 +85,7 @@ readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
     k8s-infra-tf-public-pii:"${CLUSTER_ADMINS_GROUP}"
     k8s-infra-tf-sandbox-capg:k8s-infra-sandbox-capg@kubernetes.io
     k8s-infra-tf-sandbox-ii:k8s-infra-ii-coop@kubernetes.io
+    k8s-infra-tf-vsphere:k8s-infra-vsphere@kubernetes.io
 )
 
 # The services we explicitly want enabled for the main project
