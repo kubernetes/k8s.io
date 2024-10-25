@@ -40,7 +40,6 @@ module "project" {
     "certificatemanager.googleapis.com",
     "artifactregistry.googleapis.com",
     "secretmanager.googleapis.com",
-    "cloudbuild.googleapis.com",
-    "secretmanager.googleapis.com",
+    "cloudbuild.googleapis.com"
   ]
 }
