@@ -72,8 +72,8 @@ function ensure_e2e_project() {
         file.googleapis.com \
         logging.googleapis.com \
         monitoring.googleapis.com \
-        storage-component.googleapis.com \
-        secretmanager.googleapis.com
+        secretmanager.googleapis.com \
+        storage-component.googleapis.com
 
     # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
     #       could consider using a more limited custom IAM role instead
