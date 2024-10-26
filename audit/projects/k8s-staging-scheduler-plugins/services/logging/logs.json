@@ -1,5 +1,3 @@
 [
-  "projects/k8s-staging-scheduler-plugins/logs/cloudaudit.googleapis.com%2Factivity",
-  "projects/k8s-staging-scheduler-plugins/logs/cloudaudit.googleapis.com%2Fdata_access",
-  "projects/k8s-staging-scheduler-plugins/logs/cloudbuild"
+  "projects/k8s-staging-scheduler-plugins/logs/cloudaudit.googleapis.com%2Fdata_access"
 ]
