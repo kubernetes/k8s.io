@@ -6,18 +6,6 @@
     },
     "filter": "attributes.eventType = \"OBJECT_FINALIZE\"",
     "messageRetentionDuration": "604800s",
-    "name": "projects/kubernetes-public/subscriptions/k8s-infra-kettle-staging",
-    "pushConfig": {},
-    "state": "ACTIVE",
-    "topic": "projects/kubernetes-public/topics/k8s-infra-kubernetes-jenkins-changes"
-  },
-  {
-    "ackDeadlineSeconds": 10,
-    "expirationPolicy": {
-      "ttl": "2678400s"
-    },
-    "filter": "attributes.eventType = \"OBJECT_FINALIZE\"",
-    "messageRetentionDuration": "604800s",
     "name": "projects/kubernetes-public/subscriptions/k8s-infra-kettle",
     "pushConfig": {},
     "state": "ACTIVE",
