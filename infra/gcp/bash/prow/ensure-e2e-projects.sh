@@ -118,12 +118,6 @@ function ensure_e2e_project() {
       "serviceAccount:${PROW_BUILD_SVCACCT}" \
       "roles/secretmanager.admin"
 
-    # Ensure GCP Default Compute Engine Service Agent Account can manage Secret Manager Secrets
-    ensure_project_role_binding "${prj}" \
-      "serviceAccount:service-${project_number}@compute-system.iam.gserviceaccount.com" \
-      "roles/secretmanager.admin"
-
-
     # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
     #       could consider using a more limited custom IAM role instead
     color 6 "Empower boskos-janitor service account to clean e2e project: ${prj}"
