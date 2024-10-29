@@ -362,6 +362,7 @@ infra:
       k8s-staging-kustomize:
       k8s-staging-kwok:
       k8s-staging-lws:
+      k8s-staging-llm-instance-gw:
       k8s-staging-metrics-server:
       k8s-staging-multitenancy:
       k8s-staging-networking:
