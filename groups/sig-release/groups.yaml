@@ -74,7 +74,7 @@ groups:
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
       - jackhammervyom@gmail.com # 1.32 Release Lead Shadow
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
