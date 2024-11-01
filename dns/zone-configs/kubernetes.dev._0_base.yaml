@@ -15,3 +15,8 @@ www:
 _gh-kubernetes-e:
   type: TXT
   value: 41ff86be97
+
+# BlueSky verification sig-contributor-experience
+_atproto:
+  type: TXT
+  value: did=did:plc:v6ps63hssmxoznrgwbyxmqcx
