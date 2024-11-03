@@ -60,8 +60,8 @@
     }
   },
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.29.9-gke.1177000",
-  "currentNodeVersion": "1.29.9-gke.1177000",
+  "currentMasterVersion": "1.29.9-gke.1341000",
+  "currentNodeVersion": "1.29.9-gke.1177000 *",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -84,14 +84,17 @@
     "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-91796c71-grp",
     "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-10de5ce3-grp",
     "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-8a2e99d8-grp",
-    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-ad548c1d-grp"
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-ad548c1d-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-1af5a609-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-7c2ed195-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-c240eb34-grp"
   ],
   "ipAllocationPolicy": {
     "clusterIpv4Cidr": "10.40.0.0/14",
     "clusterIpv4CidrBlock": "10.40.0.0/14",
     "clusterSecondaryRangeName": "gke-aaa-pods-4d0eb763",
     "createSubnetwork": true,
-    "defaultPodIpv4RangeUtilization": 0.0087,
+    "defaultPodIpv4RangeUtilization": 0.008799999999999999,
     "servicesIpv4Cidr": "10.107.16.0/20",
     "servicesIpv4CidrBlock": "10.107.16.0/20",
     "servicesSecondaryRangeName": "gke-aaa-services-4d0eb763",
@@ -221,7 +224,7 @@
       "name": "pool1-20190918234853194900000001",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0087,
+        "podIpv4RangeUtilization": 0.008799999999999999,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -280,7 +283,7 @@
       "name": "pool2-20200316195138785800000001",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0087,
+        "podIpv4RangeUtilization": 0.008799999999999999,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -340,11 +343,72 @@
       "name": "nap-e2-highmem-4-79yq2sly",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.0087,
+        "podIpv4RangeUtilization": 0.008799999999999999,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
       "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/nap-e2-highmem-4-79yq2sly",
+      "upgradeSettings": {
+        "maxSurge": 1,
+        "strategy": "SURGE"
+      },
+      "version": "1.29.9-gke.1177000"
+    },
+    {
+      "autoscaling": {
+        "autoprovisioned": true,
+        "enabled": true,
+        "locationPolicy": "BALANCED",
+        "maxNodeCount": 1000
+      },
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "pd-standard",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
+        "imageType": "COS_CONTAINERD",
+        "machineType": "e2-highmem-8",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/logging.write",
+          "https://www.googleapis.com/auth/monitoring"
+        ],
+        "serviceAccount": "default",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "windowsNodeConfig": {},
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-1af5a609-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-7c2ed195-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-c240eb34-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-a",
+        "us-central1-f"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "maxPodsConstraint": {
+        "maxPodsPerNode": "110"
+      },
+      "name": "nap-e2-highmem-8-1qo4g7pd",
+      "networkConfig": {
+        "podIpv4CidrBlock": "10.40.0.0/14",
+        "podIpv4RangeUtilization": 0.008799999999999999,
+        "podRange": "gke-aaa-pods-4d0eb763"
+      },
+      "placementPolicy": {},
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/nap-e2-highmem-8-1qo4g7pd",
       "upgradeSettings": {
         "maxSurge": 1,
         "strategy": "SURGE"

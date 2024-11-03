@@ -1,4 +1,5 @@
 NAME                                    TITLE
+artifactregistry.googleapis.com         Artifact Registry API
 autoscaling.googleapis.com              Cloud Autoscaling API
 bigquery.googleapis.com                 BigQuery API
 bigquerystorage.googleapis.com          BigQuery Storage API
