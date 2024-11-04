@@ -215,7 +215,7 @@ groups:
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - rytswd@gmail.com # 1.32 Comms Shadow
       - smith.rashan@gmail.com # 1.32 Comms Shadow
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
       - william.rizzo@gmail.com # 1.32 Comms Shadow
 
   - email-id: release-managers-private@kubernetes.io
@@ -273,7 +273,7 @@ groups:
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
       - spiffxp@google.com
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
@@ -349,7 +349,7 @@ groups:
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
     members:
       - admin@mb-consulting.dev # 1.32 Comms Lead
       - akacloudmelon@gmail.com # 1.32 Release Notes Shadow
@@ -419,7 +419,7 @@ groups:
       - satyampsoni@gmail.com # 1.32 Release Notes Lead
       - sepi.alavii@gmail.com # 1.32 Enhancements Shadow
       - smith.rashan@gmail.com # 1.32 Comms Shadow
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
       - tico88612@gmail.com # 1.32 Release Signal Shadow
       - tylerschade99@gmail.com # 1.32 Enhancements Lead
       - wendyha.sut@gmail.com # 1.32 Release Signal Shadow
@@ -495,7 +495,7 @@ groups:
       - nng.grace@gmail.com # Subproject owner
       - rawat.dipesh@gmail.com # 1.32 Enhancements Shadow
       - sepi.alavii@gmail.com # 1.32 Enhancements Shadow
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
       - tylerschade99@gmail.com # 1.32 Enhancements Lead
 
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
