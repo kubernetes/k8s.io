@@ -61,6 +61,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-1086176833217@gcp-sa-networkconnectivity.iam.gserviceaccount.com"
+      ],
+      "role": "roles/networkconnectivity.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-prow-oncall@kubernetes.io"
       ],
       "role": "roles/owner"
