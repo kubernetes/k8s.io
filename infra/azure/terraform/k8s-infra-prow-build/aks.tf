@@ -109,6 +109,7 @@ module "prow_build" {
       os_disk_type        = "Ephemeral"
       os_disk_size_gb     = 100
       os_sku              = "Ubuntu"
+      vnet_subnet_id      = module.prow_network.subnets.prow_build_aks.resource_id
 
       upgrade_settings = {
         max_surge                     = "33%"
