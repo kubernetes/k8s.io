@@ -48,6 +48,12 @@ resource "azurerm_role_assignment" "acr_pull" {
   scope                = var.container_registry_scope
 }
 
+resource "azurerm_role_assignment" "acr_push" {
+  principal_id         = data.azuread_service_principal.az_service_principal.id
+  role_definition_name = "AcrPush"
+  scope                = var.container_registry_scope
+}
+
 resource "azurerm_role_definition" "custom_role" {
   name  = "WriteAccessOnly"
   scope = "/subscriptions/${var.subscription_id}"
