@@ -1,5 +1,6 @@
 NAME                                 TITLE
 analyticshub.googleapis.com          Analytics Hub API
+artifactregistry.googleapis.com      Artifact Registry API
 autoscaling.googleapis.com           Cloud Autoscaling API
 bigquery.googleapis.com              BigQuery API
 bigqueryconnection.googleapis.com    BigQuery Connection API
