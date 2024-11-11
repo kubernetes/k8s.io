@@ -121,3 +121,13 @@ module "prow_build" {
 
   depends_on = [module.prow_network]
 }
+
+# Prevent resource group deletion
+resource "null_resource" "prow_nodepool_rg_tag" {
+
+  provisioner "local-exec" {
+    command = "az group update --resource-group ${module.prow_build.node_resource_group} --tags DO-NOT-DELETE=true"
+  }
+
+  depends_on = [module.prow_build]
+}
