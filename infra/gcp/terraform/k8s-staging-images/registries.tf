@@ -17,13 +17,15 @@ limitations under the License.
 locals {
   // The groups have to be created before applying this terraform code
   registries = {
-    charts             = "group:k8s-infra-release-admins@kubernetes.io"
-    etcd-manager       = "group:k8s-infra-staging-etcd-manager@kubernetes.io",
-    kubernetes         = "group:k8s-infra-staging-kubernetes@kubernetes.io",
-    kueue              = "group:k8s-infra-staging-kueue@kubernetes.io"
-    secrets-store-sync = "group:k8s-infra-staging-secrets-store-sync@kubernetes.io"
-    test-infra         = "group:k8s-infra-staging-test-infra@kubernetes.io"
-    csi-vsphere        = "group:k8s-infra-staging-csi-vsphere@kubernetes.io"
+    charts              = "group:k8s-infra-release-admins@kubernetes.io"
+    cloud-provider-kind = "group:k8s-infra-staging-kind@kubernetes.io"
+    etcd-manager        = "group:k8s-infra-staging-etcd-manager@kubernetes.io",
+    kind                = "group:k8s-infra-staging-kind@kubernetes.io"
+    kubernetes          = "group:k8s-infra-staging-kubernetes@kubernetes.io",
+    kueue               = "group:k8s-infra-staging-kueue@kubernetes.io"
+    secrets-store-sync  = "group:k8s-infra-staging-secrets-store-sync@kubernetes.io"
+    test-infra          = "group:k8s-infra-staging-test-infra@kubernetes.io"
+    csi-vsphere         = "group:k8s-infra-staging-csi-vsphere@kubernetes.io"
   }
 }
 
