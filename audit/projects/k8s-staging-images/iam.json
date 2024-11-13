@@ -59,6 +59,7 @@
         "group:k8s-infra-release-admins@kubernetes.io",
         "group:k8s-infra-staging-csi-vsphere@kubernetes.io",
         "group:k8s-infra-staging-etcd-manager@kubernetes.io",
+        "group:k8s-infra-staging-kind@kubernetes.io",
         "group:k8s-infra-staging-kubernetes@kubernetes.io",
         "group:k8s-infra-staging-kueue@kubernetes.io",
         "group:k8s-infra-staging-secrets-store-sync@kubernetes.io",
