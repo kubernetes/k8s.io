@@ -1,0 +1,14 @@
+version: 3
+automerge: true
+autodiscover:
+  mode: auto
+delete_source_branch_on_merge: true
+parallel_plan: true
+parallel_apply: true
+abort_on_execution_order_fail: true
+projects:
+- name: k8s-infra-ii-sandbox
+  branch: /main/
+  dir: infra/gcp/terraform/k8s-infra-ii-sandbox
+  workspace: default
+  terraform_version: v1.3.0
