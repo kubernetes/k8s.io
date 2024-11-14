@@ -1,0 +1,49 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: atlantis
+
+resources:
+- github.com/runatlantis/atlantis//kustomize
+- extras.yaml
+- httproute.yaml
+
+images:
+ - name: ghcr.io/runatlantis/atlantis
+   newTag: v0.30.0 
+
+configMapGenerator:
+- name: atlantis-config
+  files:
+    - atlantis.yaml
+
+patchesStrategicMerge:
+- |-
+  apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    name: atlantis
+  spec:
+    template:
+      spec:
+        containers:
+        - name: atlantis
+          env:
+            - name: ATLANTIS_CONFIG
+              value: /config/atlantis.yaml
+            - name: ATLANTIS_GH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: atlantis-vcs
+                  key: token
+            - name: ATLANTIS_GH_WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: atlantis-vcs
+                  key: webhook
+          volumeMounts:
+          - name: config
+            mountPath: /config
+        volumes:
+        - name: config
+          configMap:
+            name: atlantis-config
