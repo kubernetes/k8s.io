@@ -12,6 +12,7 @@
   "projects/kubernetes-public/logs/diagnostic-log",
   "projects/kubernetes-public/logs/docker",
   "projects/kubernetes-public/logs/events",
+  "projects/kubernetes-public/logs/google_metadata_script_runner",
   "projects/kubernetes-public/logs/kube-container-runtime-monitor",
   "projects/kubernetes-public/logs/kube-node-configuration",
   "projects/kubernetes-public/logs/kube-node-installation",

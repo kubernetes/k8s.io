@@ -56,6 +56,12 @@
     },
     {
       "members": [
+        "serviceAccount:service-189277497252@gcp-sa-networkconnectivity.iam.gserviceaccount.com"
+      ],
+      "role": "roles/networkconnectivity.serviceAgent"
+    },
+    {
+      "members": [
         "group:k8s-infra-prow-oncall@kubernetes.io",
         "group:k8s-infra-sig-scalability-oncall@kubernetes.io"
       ],
