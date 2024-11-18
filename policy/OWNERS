@@ -2,7 +2,6 @@
 
 approvers:
 - ameukam
-- spiffxp
 
 labels:
 - sig/k8s-infra

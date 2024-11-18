@@ -1,9 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- ameukam
-- spiffxp
-- thockin
+- sig-k8s-infra-leads
 
 labels:
 - sig/k8s-infra

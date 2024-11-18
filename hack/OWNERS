@@ -3,12 +3,8 @@
 filters:
   ".*":
     approvers:
-    - ameukam
-    - bentheelder
-    - dims
-    - nikhita
-    - spiffxp
-    - thockin
+    - sig-k8s-infra-leads
+    - sig-testing-leads
     labels:
     - sig/testing
   "\\.sh$":
