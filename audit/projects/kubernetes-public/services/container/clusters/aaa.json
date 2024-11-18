@@ -292,7 +292,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.29.9-gke.1496000"
+      "version": "1.30.5-gke.1443001"
     },
     {
       "autoscaling": {
@@ -352,7 +352,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.29.9-gke.1496000"
+      "version": "1.30.5-gke.1443001"
     },
     {
       "autoscaling": {
