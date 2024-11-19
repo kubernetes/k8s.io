@@ -7,7 +7,6 @@ reviewers:
 approvers:
 - sig-testing-leads
 - test-infra-oncall
-- ameukam
 
 labels:
 - area/prow
