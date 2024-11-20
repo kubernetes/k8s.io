@@ -45,6 +45,7 @@ groups:
       - dgrisonn@redhat.com
       - hankang@google.com
       - rexagod@gmail.com
+      - richabanker@google.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
