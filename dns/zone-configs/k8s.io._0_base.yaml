@@ -274,6 +274,11 @@ oauth2-proxy:
     value: 34.66.218.218
   - type: AAAA
     value: "2600:1900:4000:627b:8000::"
+atlantis:
+  - type: A
+    value: 34.66.218.218
+  - type: AAAA
+    value: "2600:1900:4000:627b:8000::"
 
 monitoring-eks.prow:
   type: CNAME
