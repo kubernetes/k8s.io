@@ -19,7 +19,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -377,7 +376,7 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 
 func (c *Config) Load(configFilePath string, confirmChanges bool) error {
 	log.Printf("reading config file: %s", configFilePath)
-	content, err := ioutil.ReadFile(configFilePath)
+	content, err := os.ReadFile(configFilePath)
 	if err != nil {
 		return fmt.Errorf("error reading config file %s: %w", configFilePath, err)
 	}
@@ -409,7 +408,7 @@ func (c *Config) Load(configFilePath string, confirmChanges bool) error {
 // nil if successful, or an error otherwise
 func (rc *RestrictionsConfig) Load(path string) error {
 	log.Printf("reading restrictions config file: %s", path)
-	content, err := ioutil.ReadFile(path)
+	content, err := os.ReadFile(path)
 	if err != nil {
 		return fmt.Errorf("error reading restrictions config file %s: %w", path, err)
 	}
@@ -452,7 +451,7 @@ func (gc *GroupsConfig) Load(rootDir string, restrictions *RestrictionsConfig) e
 				err                error
 			)
 
-			if content, err = ioutil.ReadFile(path); err != nil {
+			if content, err = os.ReadFile(path); err != nil {
 				return fmt.Errorf("error reading groups config file %s: %w", path, err)
 			}
 			if err = yaml.Unmarshal(content, &groupsConfigAtPath); err != nil {
