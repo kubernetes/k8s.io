@@ -4,7 +4,8 @@ metadata:
   name: atlantis
 spec:
   parentRefs:
-  - name: prow
+  - name: istio-ingressgateway
+    namespace: istio-system
     sectionName: https
   hostnames:
   - atlantis.k8s.io
@@ -15,23 +16,3 @@ spec:
     backendRefs:
     - name: atlantis
       port: 80
----
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
-  name: atlantis
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: atlantis
-  action: ALLOW
-  rules:
-    - from:
-      - source:
-          remoteIpBlocks: 
-            - "192.30.252.0/22"
-            - "185.199.108.0/22"
-            - "140.82.112.0/20"
-            - "143.55.64.0/20"
-            - "2a0a:a440::/29"
-            - "2606:50c0::/32"

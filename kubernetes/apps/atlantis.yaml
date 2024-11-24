@@ -9,11 +9,11 @@ spec:
   project: default
   source:
     path: kubernetes/gke-utility/atlantis
-    repoURL: https://github.com/borg-land/k8s.io
-    targetRevision: deploy-atlantis
+    repoURL: https://github.com/kubernetes/k8s.io
+    targetRevision: main
   syncPolicy:
     automated:
-      prune: false
+      prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
