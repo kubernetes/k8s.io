@@ -1,0 +1,8 @@
+gh-user: k8s-infra-ci-robot
+gh-org: kubernetes
+repo-allowlist: github.com/kubernetes/k8s.io
+allow-fork-prs: true
+atlantis-url: https://atlantis.k8s.io
+gh-team-allowlist: "sig-k8s-infra:*"
+disable-global-apply-lock: true
+autodiscover-mode: auto
