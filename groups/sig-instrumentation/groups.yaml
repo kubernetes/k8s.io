@@ -28,6 +28,7 @@ groups:
       - dgrisonn@redhat.com
       - hankang@google.com
       - rexagod@gmail.com
+      - richabanker@google.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
