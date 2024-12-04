@@ -25,6 +25,7 @@ patchesStrategicMerge:
   spec:
     template:
       spec:
+        serviceAccountName: atlantis
         containers:
         - name: atlantis
           env:

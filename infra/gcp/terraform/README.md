@@ -47,6 +47,7 @@ containing manifests that are deployed to the cluster
 
 ## Deploying
 
+- Open a PR and Atlantis will apply and deploy your Terraform changes.
 - Ensure you are logged into your GCP account with `gcloud auth application-default login`
 - From within a module directory:
   - `terraform init` will initialize your local state (refresh modules)
@@ -55,9 +56,49 @@ containing manifests that are deployed to the cluster
 
 ## Deleting
 
-- Get approval from a WG K8s Infra lead (ask in [#sig-k8s-infra] before doing this)
+- Get approval from a SIG K8s Infra lead (ask in [#sig-k8s-infra] before doing this)
 - Ensure you are logged into your GCP account with `gcloud auth application-default login`
 - From within a module directory:
   - `terraform destroy` will destroy and clean up all created resources
 
 [#sig-k8s-infra]: https://kubernetes.slack.com/messages/sig-k8s-infra
+
+
+# Bootstrapping Terraform - One Time Setup
+
+Terraform needs to be bootstrapped manually before it can be used. This process was done during Atlantis Setup. It is noted here for completeness and for potential troubleshooting.
+
+This needs to be ran by a person.
+
+```
+# Get the ORG_ID
+ORG_ID=$(gcloud organizations describe kubernetes.io --format json | jq .name -r | sed 's:.*/::')
+
+# Create the k8s-infra-seed project
+
+gcloud projects create k8s-infra-seed --organization $ORG_ID --name "K8s Infra Seed" --billing
+
+# Create the terraform service account
+
+gcloud iam service-accounts create atlantis —-display-name Atlantis --project k8s-infra-seed
+
+# Allow the Atlantis Kubernetes Service Account in k8s-infra-prow project to assume this service account
+
+gcloud iam service-accounts add-iam-policy-binding atlantis@k8s-infra-seed.iam.gserviceaccount.com \
+  --member "serviceAccount:k8s-infra-prow.svc.id.goog[atlantis/atlantis]" --role='roles/iam.workloadIdentityUser'
+
+# Create the State Bucket and version it
+gcloud storage buckets create gs://k8s-infra-tf-state --location=us --uniform-bucket-level-access
+gcloud storage buckets update gs://k8s-infra-tf-state --versioning
+
+# Enable Google APIs
+gcloud services enable container.googleapis.com run.googleapis.com cloudbuild.googleapis.com  --async
+
+# Privilege the terraform service account
+gcloud organizations add-iam-policy-binding --organization $ORG_ID \
+  --member "serviceAccount:atlantis@k8s-infra-seed.iam.gserviceaccount.com" --role='roles/resourcemanager.organizationAdmin'
+gcloud organizations add-iam-policy-binding --organization $ORG_ID \
+  --member "serviceAccount:atlantis@k8s-infra-seed.iam.gserviceaccount.com" --role='roles/owner'
+gcloud organizations add-iam-policy-binding --organization $ORG_ID \
+  --member "serviceAccount:atlantis@k8s-infra-seed.iam.gserviceaccount.com" --role='roles/billing.admin'
+```

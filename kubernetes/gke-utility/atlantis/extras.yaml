@@ -13,3 +13,10 @@ spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: k8s-infra-prow
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: atlantis
+  annotations:
+    iam.gke.io/gcp-service-account: atlantis@k8s-infra-seed.iam.gserviceaccount.com
