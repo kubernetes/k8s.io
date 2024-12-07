@@ -42,6 +42,7 @@ groups:
       - kubernetes-security-disclosure@google.com
       - kubernetes-security-team@ml.ovh.net
       - kubernetes-security@cisco.com
+      - kubernetes-security@daocloud.io
       - kubernetes-security@docker.com
       - kubernetes-security@huawei.com
       - kubernetes-security@service.aliyun.com
