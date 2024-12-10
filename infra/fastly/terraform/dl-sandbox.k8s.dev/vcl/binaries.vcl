@@ -45,7 +45,7 @@ sub vcl_fetch {
   }
 
   # Ensure version markers are not cached at the edge
-  if (req.url.path ~ "^/release/(latest|stable)(-\d+(\.\d+))?\.txt\z") {
+  if (req.url.path ~ "^/release/(latest|stable)([^/]*)\.txt\z") {
     set beresp.cacheable = false;
     set beresp.ttl = 0s;
     return (pass);

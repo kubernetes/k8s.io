@@ -1,12 +1,12 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- ameukam
-- spiffxp
+- sig-k8s-infra-leads
 
 reviewers:
-- ameukam
-- dims
+- sig-k8s-infra-leads
+
+emeritus_approvers:
 - spiffxp
 - thockin
 

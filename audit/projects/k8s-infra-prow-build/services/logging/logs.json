@@ -17,6 +17,7 @@
   "projects/k8s-infra-prow-build/logs/kube-proxy",
   "projects/k8s-infra-prow-build/logs/kubelet",
   "projects/k8s-infra-prow-build/logs/kubelet-monitor",
+  "projects/k8s-infra-prow-build/logs/maintenance.googleapis.com%2Fmaintenance_events",
   "projects/k8s-infra-prow-build/logs/networkanalyzer.googleapis.com%2Fanalyzer_reports",
   "projects/k8s-infra-prow-build/logs/node-problem-detector",
   "projects/k8s-infra-prow-build/logs/requests",

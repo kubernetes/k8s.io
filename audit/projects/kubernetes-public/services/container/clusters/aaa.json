@@ -60,8 +60,8 @@
     }
   },
   "createTime": "2019-09-18T23:39:24+00:00",
-  "currentMasterVersion": "1.29.9-gke.1341000",
-  "currentNodeVersion": "1.29.9-gke.1177000 *",
+  "currentMasterVersion": "1.30.5-gke.1443001",
+  "currentNodeVersion": "1.30.5-gke.1443001",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -94,7 +94,7 @@
     "clusterIpv4CidrBlock": "10.40.0.0/14",
     "clusterSecondaryRangeName": "gke-aaa-pods-4d0eb763",
     "createSubnetwork": true,
-    "defaultPodIpv4RangeUtilization": 0.008799999999999999,
+    "defaultPodIpv4RangeUtilization": 0.0098,
     "servicesIpv4Cidr": "10.107.16.0/20",
     "servicesIpv4CidrBlock": "10.107.16.0/20",
     "servicesSecondaryRangeName": "gke-aaa-services-4d0eb763",
@@ -224,7 +224,7 @@
       "name": "pool1-20190918234853194900000001",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.008799999999999999,
+        "podIpv4RangeUtilization": 0.0098,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -233,7 +233,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.29.9-gke.1177000"
+      "version": "1.30.5-gke.1443001"
     },
     {
       "autoscaling": {
@@ -283,7 +283,7 @@
       "name": "pool2-20200316195138785800000001",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.008799999999999999,
+        "podIpv4RangeUtilization": 0.0098,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -292,7 +292,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.29.9-gke.1177000"
+      "version": "1.30.5-gke.1443001"
     },
     {
       "autoscaling": {
@@ -343,7 +343,7 @@
       "name": "nap-e2-highmem-4-79yq2sly",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.008799999999999999,
+        "podIpv4RangeUtilization": 0.0098,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "podIpv4CidrSize": 24,
@@ -352,7 +352,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.29.9-gke.1177000"
+      "version": "1.30.5-gke.1443001"
     },
     {
       "autoscaling": {
@@ -403,7 +403,7 @@
       "name": "nap-e2-highmem-8-1qo4g7pd",
       "networkConfig": {
         "podIpv4CidrBlock": "10.40.0.0/14",
-        "podIpv4RangeUtilization": 0.008799999999999999,
+        "podIpv4RangeUtilization": 0.0098,
         "podRange": "gke-aaa-pods-4d0eb763"
       },
       "placementPolicy": {},
@@ -413,7 +413,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.29.9-gke.1177000"
+      "version": "1.30.5-gke.1443001"
     }
   ],
   "privateClusterConfig": {

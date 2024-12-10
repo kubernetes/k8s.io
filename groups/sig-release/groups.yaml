@@ -215,7 +215,7 @@ groups:
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - rytswd@gmail.com # 1.32 Comms Shadow
       - smith.rashan@gmail.com # 1.32 Comms Shadow
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
       - william.rizzo@gmail.com # 1.32 Comms Shadow
 
   - email-id: release-managers-private@kubernetes.io
@@ -273,7 +273,7 @@ groups:
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
       - spiffxp@google.com
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
@@ -349,7 +349,7 @@ groups:
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
     members:
       - admin@mb-consulting.dev # 1.32 Comms Lead
       - akacloudmelon@gmail.com # 1.32 Release Notes Shadow
@@ -358,6 +358,7 @@ groups:
       - amim.knabben@gmail.com # 1.32 Release Signal Shadow
       - anshuman.tripathi305@gmail.com # 1.32 Docs Shadow
       - chu.karen.h@gmail.com #1.32 Release Notes Shadow
+      - baeumer@pm.me # 1.32 Release Signal Shadow
       - danieljoshuachan@gmail.com # 1.32 Docs Lead
       - drew.a.hagen@gmail.com # 1.32 Release Signal Lead
       - edithpuclla20@gmail.com # 1.32 Comms Shadow
@@ -366,7 +367,6 @@ groups:
       - jenny.shu@solo.io # 1.32 Enhancements Shadow
       - lvishpal408@gmail.com # 1.32 Release Notes Shadow
       - mdeep9771@gmail.com # 1.32 Enhancements Shadow
-      - michaelfromyeg@gmail.com # 1.32 Release Signal Shadow
       - michellengnx@gmail.com # 1.32 Docs Shadow
       - rawat.dipesh@gmail.com # 1.32 Enhancements Shadow
       - rayandas91@gmail.com # 1.32 Release Notes Shadow
@@ -404,13 +404,13 @@ groups:
       - albuquerque.d.rodolfo@gmail.com # 1.32 Docs Shadow
       - amim.knabben@gmail.com # 1.32 Release Signal Shadow
       - anshuman.tripathi305@gmail.com # 1.32 Docs Shadow
+      - baeumer@pm.me # 1.32 Release Signal Shadow
       - danieljoshuachan@gmail.com # 1.32 Docs Lead
       - edithpuclla20@gmail.com # 1.32 Comms Shadow
       - jackhammervyom@gmail.com # 1.32 Release Lead Shadow
       - james@spurin.com # 1.32 Docs Shadow
       - jenny.shu@solo.io # 1.32 Enhancements Shadow
       - mdeep9771@gmail.com # 1.32 Enhancements Shadow
-      - michaelfromyeg@gmail.com # 1.32 Release Signal Shadow
       - michellengnx@gmail.com # 1.32 Docs Shadow
       - mr.salehsedghpour@gmail.com # 1.32 Release Lead Shadow
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
@@ -419,7 +419,7 @@ groups:
       - satyampsoni@gmail.com # 1.32 Release Notes Lead
       - sepi.alavii@gmail.com # 1.32 Enhancements Shadow
       - smith.rashan@gmail.com # 1.32 Comms Shadow
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
       - tico88612@gmail.com # 1.32 Release Signal Shadow
       - tylerschade99@gmail.com # 1.32 Enhancements Lead
       - wendyha.sut@gmail.com # 1.32 Release Signal Shadow
@@ -495,7 +495,7 @@ groups:
       - nng.grace@gmail.com # Subproject owner
       - rawat.dipesh@gmail.com # 1.32 Enhancements Shadow
       - sepi.alavii@gmail.com # 1.32 Enhancements Shadow
-      - sreeram.venkitesh@bigbinary.com # 1.32 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
       - tylerschade99@gmail.com # 1.32 Enhancements Lead
 
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io

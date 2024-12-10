@@ -16,6 +16,7 @@
   "projects/k8s-infra-ii-sandbox/logs/kube-node-installation",
   "projects/k8s-infra-ii-sandbox/logs/kubelet",
   "projects/k8s-infra-ii-sandbox/logs/kubelet-monitor",
+  "projects/k8s-infra-ii-sandbox/logs/maintenance.googleapis.com%2Fmaintenance_events",
   "projects/k8s-infra-ii-sandbox/logs/networkanalyzer.googleapis.com%2Fanalyzer_reports",
   "projects/k8s-infra-ii-sandbox/logs/node-problem-detector",
   "projects/k8s-infra-ii-sandbox/logs/serialconsole.googleapis.com%2Fserial_port_1_output",

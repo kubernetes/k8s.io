@@ -38,8 +38,8 @@
     }
   },
   "createTime": "2020-04-30T21:31:49+00:00",
-  "currentMasterVersion": "1.30.5-gke.1014001",
-  "currentNodeVersion": "1.29.7-gke.1008000 *",
+  "currentMasterVersion": "1.30.5-gke.1443001",
+  "currentNodeVersion": "1.30.5-gke.1443001",
   "databaseEncryption": {
     "state": "DECRYPTED"
   },
@@ -185,7 +185,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.29.7-gke.1008000"
+      "version": "1.30.5-gke.1443001"
     },
     {
       "autoscaling": {
@@ -247,7 +247,7 @@
         "maxSurge": 1,
         "strategy": "SURGE"
       },
-      "version": "1.29.7-gke.1104000"
+      "version": "1.30.5-gke.1443001"
     }
   ],
   "privateClusterConfig": {

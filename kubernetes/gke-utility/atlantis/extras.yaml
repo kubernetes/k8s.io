@@ -1,0 +1,22 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: atlantis-vcs
+spec:
+  data:
+    - secretKey: webhook
+      remoteRef:
+        key: atlantis-webhook-k8s-io-repo
+    - secretKey: token
+      remoteRef:
+        key: k8s-infra-ci-robot-github-token
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k8s-infra-prow
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: atlantis
+  annotations:
+    iam.gke.io/gcp-service-account: atlantis@k8s-infra-seed.iam.gserviceaccount.com
