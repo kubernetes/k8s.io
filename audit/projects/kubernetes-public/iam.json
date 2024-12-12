@@ -177,12 +177,6 @@
     },
     {
       "members": [
-        "group:k8s-infra-prow-oncall@kubernetes.io"
-      ],
-      "role": "roles/owner"
-    },
-    {
-      "members": [
         "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
         "serviceAccount:kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com"
       ],
@@ -215,6 +209,7 @@
         "group:k8s-infra-gcp-org-admins@kubernetes.io",
         "group:k8s-infra-ii-coop@kubernetes.io",
         "group:k8s-infra-porche-admins@kubernetes.io",
+        "group:k8s-infra-prow-oncall@kubernetes.io",
         "group:k8s-infra-sandbox-capg@kubernetes.io",
         "serviceAccount:k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com"
       ],

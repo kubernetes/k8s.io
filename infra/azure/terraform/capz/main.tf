@@ -125,3 +125,11 @@ module "role_assignments" {
     module.container_registry
   ]
 }
+
+# Import Cluster API gallery module
+module "cluster_api_gallery" {
+  source              = "./cluster-api-gallery"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  depends_on          = module.role_assignments
+}

@@ -1,4 +1,5 @@
 NAME                               TITLE
+artifactregistry.googleapis.com    Artifact Registry API
 certificatemanager.googleapis.com  Certificate Manager API
 compute.googleapis.com             Compute Engine API
 containerregistry.googleapis.com   Container Registry API

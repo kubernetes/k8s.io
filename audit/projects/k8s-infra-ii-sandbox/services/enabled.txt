@@ -10,6 +10,7 @@ bigquerystorage.googleapis.com       BigQuery Storage API
 cloudasset.googleapis.com            Cloud Asset API
 cloudbuild.googleapis.com            Cloud Build API
 clouddeploy.googleapis.com           Cloud Deploy API
+cloudprofiler.googleapis.com         Cloud Profiler API
 cloudresourcemanager.googleapis.com  Cloud Resource Manager API
 compute.googleapis.com               Compute Engine API
 container.googleapis.com             Kubernetes Engine API

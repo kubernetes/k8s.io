@@ -1,1 +1,5 @@
-[]
+[
+  "projects/k8s-staging-kube-state-metrics/logs/cloudaudit.googleapis.com%2Factivity",
+  "projects/k8s-staging-kube-state-metrics/logs/cloudaudit.googleapis.com%2Fdata_access",
+  "projects/k8s-staging-kube-state-metrics/logs/cloudbuild"
+]

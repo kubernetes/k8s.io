@@ -308,6 +308,7 @@ groups:
       - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - steering-private@kubernetes.io
+      - mario@kubermatic.com
 
   #
   # k8s-infra org-wide infrastructure admin groups
@@ -331,6 +332,7 @@ groups:
       - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - cncf-aws-admins@lists.cncf.io
+      - mario@kubermatic.com
 
   - email-id: k8s-infra-aws-boskos-accounts@kubernetes.io
     name: k8s-infra-aws-boskos-accounts
@@ -464,6 +466,7 @@ groups:
       - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - steering-private@kubernetes.io
+      - mario@kubermatic.com
 
   - email-id: k8s-infra-aws-accounting@kubernetes.io
     name: k8s-infra-aws-accounting
@@ -476,6 +479,7 @@ groups:
       - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - steering-private@kubernetes.io
+      - mario@kubermatic.com
 
   - email-id: k8s-infra-yt-admins@kubernetes.io
     name: k8s-infra-yt-admins

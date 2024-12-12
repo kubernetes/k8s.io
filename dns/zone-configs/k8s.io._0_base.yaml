@@ -274,6 +274,11 @@ oauth2-proxy:
     value: 34.66.218.218
   - type: AAAA
     value: "2600:1900:4000:627b:8000::"
+atlantis:
+  - type: A
+    value: 34.66.218.218
+  - type: AAAA
+    value: "2600:1900:4000:627b:8000::"
 
 monitoring-eks.prow:
   type: CNAME
@@ -388,7 +393,7 @@ docs.prow:
 # https://github.com/kubernetes-sigs/cluster-api docs (@dwat, @jdetiber, @justinsb)
 cluster-api.sigs:
   type: CNAME
-  value: release-1-8--kubernetes-sigs-cluster-api.netlify.app.
+  value: release-1-9--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api-provider-aws docs (@randomvariable, @detiber, @ncdc, @rudoi, @vincepri)
 cluster-api-aws.sigs:
   type: CNAME
@@ -462,6 +467,9 @@ release-1-7.cluster-api.sigs:
 release-1-8.cluster-api.sigs:
   type: CNAME
   value: release-1-8--kubernetes-sigs-cluster-api.netlify.app.
+release-1-9.cluster-api.sigs:
+  type: CNAME
+  value: release-1-9--kubernetes-sigs-cluster-api.netlify.app.
 # https://github.com/kubernetes-sigs/cluster-api development docs (@CecileRobertMichon, @vincepri)
 main.cluster-api.sigs:
   type: CNAME
@@ -536,3 +544,8 @@ network-policy-api.sigs:
 multicluster.sigs:
   type: CNAME
   value: kubernetes-sig-multicluster.netlify.app.
+# KubeCon Family Feud.  This is temporary and should be removed in January
+# 2025 (@thockin)
+famf:
+  - type: A
+    value: 34.111.128.14

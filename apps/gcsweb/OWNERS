@@ -1,11 +1,11 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- spiffxp
-- thockin
+- sig-testing-leads
 
 emeritus_approvers:
 - ixdy
+- spiffxp
 
 labels:
 - sig/testing

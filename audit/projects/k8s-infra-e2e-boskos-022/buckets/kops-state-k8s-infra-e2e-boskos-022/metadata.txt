@@ -11,8 +11,8 @@ gs://kops-state-k8s-infra-e2e-boskos-022/ :
 	Labels:				None
 	Default KMS key:		None
 	Time created:			Sun, 05 Mar 2023 11:37:55 GMT
-	Time updated:			Mon, 26 Aug 2024 03:40:25 GMT
-	Metageneration:			22
+	Time updated:			Sun, 01 Dec 2024 16:16:56 GMT
+	Metageneration:			24
 	Bucket Policy Only enabled:	False
 	Public access prevention:	inherited
 	RPO:				DEFAULT

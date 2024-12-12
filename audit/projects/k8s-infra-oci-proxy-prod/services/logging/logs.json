@@ -1,4 +1,5 @@
 [
+  "projects/k8s-infra-oci-proxy-prod/logs/cloudaudit.googleapis.com%2Fdata_access",
   "projects/k8s-infra-oci-proxy-prod/logs/requests",
   "projects/k8s-infra-oci-proxy-prod/logs/run.googleapis.com%2Frequests",
   "projects/k8s-infra-oci-proxy-prod/logs/run.googleapis.com%2Fstderr",

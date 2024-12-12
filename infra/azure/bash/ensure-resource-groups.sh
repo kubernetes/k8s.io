@@ -35,14 +35,14 @@ if ! [[ -x "$(command -v az)" ]]; then
 fi
 
 RESOURCE_GROUP="k8s-infra-tf-states-rg"
-RESOURCE_GROUP_LOCATION=$(az group show --name $RESOURCE_GROUP --output tsv --query 'location')
+RESOURCE_GROUP_LOCATION="${RESOURCE_GROUP_LOCATION:-eastus}"
 TAGS="${TAGS:-"DO-NOT-DELETE=true CONTACT=sig-k8s-infra-leads@kubernetes.io"}"
 
 # storage accounts rules: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftstorage
 #TODO define a role assignement with Azure Entra Groups
 readonly TERRAFORM_STATE_BUCKET_ENTRIES=(
   k8sinfratfstatesub
-  k8sinfratfstatekops
+  k8sinfratfstateprow
 )
 
 function ensure_terraform_state_containers() {
@@ -56,7 +56,8 @@ function ensure_terraform_state_containers() {
         --kind StorageV2 \
         --min-tls-version 'TLS1_2' \
         --resource-group "$RESOURCE_GROUP" \
-        --sku Premium_ZRS \
+        --sku Standard_LRS \
+        --encryption-services blob \
         --tags "${TAGS}"
     fi
 
@@ -69,7 +70,7 @@ function ensure_terraform_state_containers() {
 
     if [[ $container_exists != "false" ]]; then
       echo "Creating storage container terraform-state in $storage_account"
-      az storage container create --name "terraform-state" --connection-string "$storage_connection_string" --tags "${TAGS}"
+      az storage container create --name "terraform-state" --connection-string "$storage_connection_string"
     fi
   done
 }
@@ -77,7 +78,7 @@ function ensure_terraform_state_containers() {
 function main() {
   if [ "$(az group exists --name $RESOURCE_GROUP)" = false ]; then
     echo "creating resource group $RESOURCE_GROUP..."
-    az group create -n "$RESOURCE_GROUP" -l "$LOCATION" --tags "${TAGS}" -o none
+    az group create -n "$RESOURCE_GROUP" -l "$RESOURCE_GROUP_LOCATION" --tags "${TAGS}" -o none
     echo "resource group $RESOURCE_GROUP created"
   else
     echo "resource group $RESOURCE_GROUP already exists"

@@ -1,9 +1,5 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
-approvers:
-- ameukam
-- spiffxp
-
 reviewers:
 - sig-k8s-infra-leads
 

@@ -22,11 +22,11 @@ spec:
         - --config-path=/etc/config/config.yaml
         - --job-config-path=/etc/job-config
         - --dry-run=false
-        image: us-docker.pkg.dev/k8s-infra-prow/images/sinker:v20241015-f8a6bd32a
+        image: us-docker.pkg.dev/k8s-infra-prow/images/sinker:v20241113-0609cf597
         env:
         # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
         - name: KUBECONFIG
-          value: "/etc/kubeconfig-k8s-infra-prow/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig"
+          value: "/etc/kubeconfig-k8s-infra-prow/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-k8s-infra-aks-prow-build/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig"
         # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
         - name: AWS_ROLE_ARN
           value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
@@ -34,6 +34,15 @@ spec:
           value: /var/run/secrets/aws-iam-token/serviceaccount/token
         - name: AWS_REGION
           value: us-east-2
+        # Azure variables needed to authenticate to AKS clusters with Azure AD Integration
+        - name: AZURE_CLIENT_ID # AZURE_CLIENT_ID is being overloaded with Azure Workload ID
+          value: "cabf5f22-ec7e-4e84-9e35-c02e57ca555d"
+        - name: AZURE_SUBSCRIPTION_ID
+          value: "0e46bd28-a80f-4d3a-8200-d9eb8d80cb2e"
+        - name: AZURE_TENANT_ID
+          value: "097f89a0-9286-43d2-9a1a-08f1d49b1af8"
+        - name: AZURE_FEDERATED_TOKEN_FILE
+          value: "/var/run/secrets/azure-token/serviceaccount/token"
         ports:
         - name: metrics
           containerPort: 9090
@@ -46,6 +55,9 @@ spec:
           readOnly: true
         - mountPath: /etc/kubeconfig-k8s-infra-prow-build-trusted
           name: kubeconfig-k8s-infra-prow-build-trusted
+          readOnly: true
+        - mountPath: /etc/kubeconfig-k8s-infra-aks-prow-build
+          name: kubeconfig-k8s-infra-aks-prow-build
           readOnly: true
         - mountPath: /etc/kubeconfig-eks-prow-build-cluster
           name: kubeconfig-eks-prow-build-cluster
@@ -63,6 +75,10 @@ spec:
         - name: aws-iam-token
           mountPath: /var/run/secrets/aws-iam-token/serviceaccount
           readOnly: true
+        # Azure Token needed for workload identity
+        - name: azure-token
+          mountPath: "/var/run/secrets/azure-token/serviceaccount"
+          readOnly: true
       volumes:
       - name: kubeconfig-k8s-infra-prow
         secret:
@@ -76,6 +92,10 @@ spec:
         secret:
           defaultMode: 420
           secretName: kubeconfig-k8s-infra-prow-build-trusted
+      - name: kubeconfig-k8s-infra-aks-prow-build
+        secret:
+          defaultMode: 420
+          secretName: kubeconfig-k8s-infra-aks-prow-build
       - name: kubeconfig-eks-prow-build-cluster
         secret:
           defaultMode: 420
@@ -99,6 +119,15 @@ spec:
               audience: sts.amazonaws.com
               expirationSeconds: 86400
               path: token
+      # Azure Token needed for workload identity
+      - name: azure-token
+        projected:
+          defaultMode: 420
+          sources:
+          - serviceAccountToken:
+              expirationSeconds: 86400
+              path: token
+              audience: api://AzureADTokenExchange
 ---
 apiVersion: v1
 kind: Service

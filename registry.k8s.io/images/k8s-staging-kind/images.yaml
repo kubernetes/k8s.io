@@ -1,3 +1,0 @@
-- name: cloud-provider-kind
-  dmap:
-    "sha256:cacb2da53a0d3b363bf53f11c9e0f714d7605471130a43ae7d1e161da0c3cbdb": ["v0.4.0"]

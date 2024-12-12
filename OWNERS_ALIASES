@@ -57,6 +57,7 @@ aliases:
     - dgrisonnet
     - logicalhan
     - rexagod
+    - richabanker
   sig-k8s-infra-leads:
     - BenTheElder
     - ameukam
@@ -120,7 +121,7 @@ aliases:
     - knabben
     - marosset
   wg-batch-leads:
-    - alculquicondor
+    - kannon92
     - mwielgus
     - soltysh
     - swatisehgal

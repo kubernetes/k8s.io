@@ -18,7 +18,7 @@
 #       serviceAccountName: prow-pipeline
 #       containers:
 #       - name: pipeline
-#         image: us-docker.pkg.dev/k8s-infra-prow/images/pipeline:v20241015-f8a6bd32a
+#         image: us-docker.pkg.dev/k8s-infra-prow/images/pipeline:v20241113-0609cf597
 #         args:
 #         - --all-contexts
 #         - --config=/etc/prow-config/config.yaml

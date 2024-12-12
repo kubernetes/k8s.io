@@ -25,11 +25,11 @@ SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 . "${SCRIPT_DIR}/../lib.sh"
 
 function usage() {
-    echo "usage: $0 [repo...]" > /dev/stderr
-    echo "example:" > /dev/stderr
-    echo "  $0 # do all projects" > /dev/stderr
-    echo "  $0 k8s-infra-node-e2e-project # just do one" > /dev/stderr
-    echo > /dev/stderr
+  echo "usage: $0 [repo...]" >/dev/stderr
+  echo "example:" >/dev/stderr
+  echo "  $0 # do all projects" >/dev/stderr
+  echo "  $0 k8s-infra-node-e2e-project # just do one" >/dev/stderr
+  echo >/dev/stderr
 }
 
 ## projects hosting prow build clusters managed by sig-k8s-infra
@@ -47,176 +47,177 @@ mapfile -t E2E_PROJECTS < <(k8s_infra_projects "e2e")
 readonly E2E_PROJECTS
 
 function ensure_e2e_project() {
-    if [ $# != 1 ] || [ -z "$1" ]; then
-        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
-        return 1
-    fi
-    local prj="${1}"
+  if [ $# != 1 ] || [ -z "$1" ]; then
+    echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
+    return 1
+  fi
+  local prj="${1}"
 
-    ensure_project "${prj}"
+  ensure_project "${prj}"
 
-    local project_number
-    project_number=$(gcloud projects describe "${prj}" --format='value(projectNumber)')
+  local project_number
+  project_number=$(gcloud projects describe "${prj}" --format='value(projectNumber)')
 
-    color 6 "Ensure stale role bindings have been removed from e2e project: ${prj}"
-    (
-        echo "no stale bindings slated for removal"
-    ) 2>&1 | indent
+  color 6 "Ensure stale role bindings have been removed from e2e project: ${prj}"
+  (
+    echo "no stale bindings slated for removal"
+  ) 2>&1 | indent
 
-    color 6 "Ensuring only APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
-    ensure_only_services "${prj}" \
-        cloudkms.googleapis.com \
-        compute.googleapis.com \
-        container.googleapis.com \
-        containerregistry.googleapis.com \
-        file.googleapis.com \
-        logging.googleapis.com \
-        monitoring.googleapis.com \
-        secretmanager.googleapis.com \
-        storage-component.googleapis.com
+  color 6 "Ensuring only APIs necessary for kubernetes e2e jobs to use e2e project: ${prj}"
+  ensure_only_services "${prj}" \
+    artifactregistry.googleapis.com \
+    cloudkms.googleapis.com \
+    compute.googleapis.com \
+    container.googleapis.com \
+    containerregistry.googleapis.com \
+    file.googleapis.com \
+    logging.googleapis.com \
+    monitoring.googleapis.com \
+    secretmanager.googleapis.com \
+    storage-component.googleapis.com
 
-    # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
-    #       could consider using a more limited custom IAM role instead
-    color 6 "Empower prow-build service account to edit e2e project: ${prj}"
+  # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
+  #       could consider using a more limited custom IAM role instead
+  color 6 "Empower prow-build service account to edit e2e project: ${prj}"
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:${PROW_BUILD_SVCACCT}" \
+    "roles/editor"
+
+  # TODO: Remove this binding and clean up permissions in projects
+  # This permission is superseded by roles/cloudkms.admin below
+  # Ensure GCP CSI driver tests can manage KMS keys
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:${PROW_BUILD_SVCACCT}" \
+    "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+  # Ensure GCP Default Compute Service Account can administer KMS keys
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:${PROW_BUILD_SVCACCT}" \
+    "roles/cloudkms.admin"
+
+  # TODO: Remove this binding and clean up permissions in projects
+  # Ensure GCP Default Compute Service Account can manage KMS keys
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:${project_number}-compute@developer.gserviceaccount.com" \
+    "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+  # Ensure GCP Default Compute Engine Service Agent Account can manage KMS
+  # keys
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:service-${project_number}@compute-system.iam.gserviceaccount.com" \
+    "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+
+  # TODO: Remove this binding and clean up permissions in projects
+  # Ensure GCP CSI driver tests can use prow-build service account to
+  # act as all other service accounts (eg: Compute Engine default service account)
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:${PROW_BUILD_SVCACCT}" \
+    "roles/iam.serviceAccountUser"
+    
+  # Ensure GCP Default Compute Service Account can administer Secret Manager secrets
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:${PROW_BUILD_SVCACCT}" \
+    "roles/secretmanager.admin"
+
+  # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
+  #       could consider using a more limited custom IAM role instead
+  color 6 "Empower boskos-janitor service account to clean e2e project: ${prj}"
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:${BOSKOS_JANITOR_SVCACCT}" \
+    "roles/editor"
+
+  color 6 "Empower k8s-infra-prow-oncall@kubernetes.io to admin e2e project: ${prj}"
+  ensure_project_role_binding "${prj}" \
+    "group:k8s-infra-prow-oncall@kubernetes.io" \
+    "roles/owner"
+
+  # NB: prow.viewer role is defined in ensure-organization.sh, that needs to have been run first
+  color 6 "Empower k8s-infra-prow-viewers@kubernetes.io to view specific resources in e2e project: ${prj}"
+  ensure_project_role_binding "${prj}" \
+    "group:k8s-infra-prow-viewers@kubernetes.io" \
+    "$(custom_org_role_name "prow.viewer")"
+
+  if [[ "${prj}" =~ k8s-infra-e2e.*scale ]]; then
+    color 6 "Empower k8s-infra-sig-scalability-oncall@kubernetes.io to admin e2e project: ${prj}"
     ensure_project_role_binding "${prj}" \
-      "serviceAccount:${PROW_BUILD_SVCACCT}" \
-      "roles/editor"
-
-    # TODO: Remove this binding and clean up permissions in projects
-    # This permission is superseded by roles/cloudkms.admin below
-    # Ensure GCP CSI driver tests can manage KMS keys
-    ensure_project_role_binding "${prj}" \
-      "serviceAccount:${PROW_BUILD_SVCACCT}" \
-      "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-
-    # Ensure GCP Default Compute Service Account can administer KMS keys
-    ensure_project_role_binding "${prj}" \
-      "serviceAccount:${PROW_BUILD_SVCACCT}" \
-      "roles/cloudkms.admin"
-
-    # TODO: Remove this binding and clean up permissions in projects
-    # Ensure GCP Default Compute Service Account can manage KMS keys
-    ensure_project_role_binding "${prj}" \
-      "serviceAccount:${project_number}-compute@developer.gserviceaccount.com" \
-      "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-
-    # Ensure GCP Default Compute Engine Service Agent Account can manage KMS
-    # keys
-    ensure_project_role_binding "${prj}" \
-      "serviceAccount:service-${project_number}@compute-system.iam.gserviceaccount.com" \
-      "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-
-    # TODO: Remove this binding and clean up permissions in projects
-    # Ensure GCP CSI driver tests can use prow-build service account to
-    # act as all other service accounts (eg: Compute Engine default service account)
-    ensure_project_role_binding "${prj}" \
-      "serviceAccount:${PROW_BUILD_SVCACCT}" \
-      "roles/iam.serviceAccountUser"
-
-    # Ensure GCP Default Compute Service Account can administer Secret Manager secrets
-    ensure_project_role_binding "${prj}" \
-      "serviceAccount:${PROW_BUILD_SVCACCT}" \
-      "roles/secretmanager.admin"
-
-    # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
-    #       could consider using a more limited custom IAM role instead
-    color 6 "Empower boskos-janitor service account to clean e2e project: ${prj}"
-    ensure_project_role_binding "${prj}" \
-      "serviceAccount:${BOSKOS_JANITOR_SVCACCT}" \
-      "roles/editor"
-
-    color 6 "Empower k8s-infra-prow-oncall@kubernetes.io to admin e2e project: ${prj}"
-    ensure_project_role_binding "${prj}" \
-      "group:k8s-infra-prow-oncall@kubernetes.io" \
+      "group:k8s-infra-sig-scalability-oncall@kubernetes.io" \
       "roles/owner"
+  fi
 
-    # NB: prow.viewer role is defined in ensure-organization.sh, that needs to have been run first
-    color 6 "Empower k8s-infra-prow-viewers@kubernetes.io to view specific resources in e2e project: ${prj}"
-    ensure_project_role_binding "${prj}" \
-      "group:k8s-infra-prow-viewers@kubernetes.io" \
-      "$(custom_org_role_name "prow.viewer")"
+  color 6 "Ensure prow-build prowjobs are able to ssh to instances in e2e project: ${prj}"
+  prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
+  k8s_prow_builds_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+/ZdafYYrJknk08g98sYS1Nr+aVdAnhHpQyXBx7EAT9pazCGaoiYnXgC82FAfTVMqdsqnIiP+7FgQTFLNYvBt8KsBd9qCkuMh/Q1QYVh4kfjjuGUrjfo020pxGSvp+67kbxm6lubaio9AgJ9XXE+SP1AYbyKTvXEzk5Tu7gGnRt3OrjVB+9eqTnVJOjS/BAOTJV5DWQ7xMubHlT9NmQ/S2hotMoiJJybYGUalOfcf8ZkyspU2oR+x13DCfjvFdzF4U0fb/uvTJZeu22w887M5y0YQulFY2LIeoAUE4XwoOv0nxzwbtZpqPHwtfLgq3G906KHW5e6slXu8kGda656n prow"
+  ssh_keys_expected=(
+    "${k8s_prow_builds_ssh_pubkey}"
+    "${prow_build_ssh_pubkey}"
+    # TODO(amwat,spiffxp): something is adding an extra prow: prefix, it is
+    # unclear where in prow->kubetest2->cluster/log-dump.sh->`gcloud ssh`
+    # this is happening
+    "prow:${k8s_prow_builds_ssh_pubkey}"
+    "prow:${prow_build_ssh_pubkey}"
+  )
 
-    if [[ "${prj}" =~ k8s-infra-e2e.*scale ]]; then
-      color 6 "Empower k8s-infra-sig-scalability-oncall@kubernetes.io to admin e2e project: ${prj}"
-      ensure_project_role_binding "${prj}" \
-        "group:k8s-infra-sig-scalability-oncall@kubernetes.io" \
-        "roles/owner"
-    fi
+  # append to project-wide ssh-keys metadata if not present
+  ssh_keys_before="${TMPDIR}/ssh-keys.before.txt"
+  ssh_keys_after="${TMPDIR}/ssh-keys.after.txt"
+  gcloud compute project-info describe --project="${prj}" \
+    --format='value(commonInstanceMetadata.items.filter(key:ssh-keys).extract(value).flatten())' |
+    sed -e '/^$/d' >"${ssh_keys_before}"
 
-    color 6 "Ensure prow-build prowjobs are able to ssh to instances in e2e project: ${prj}"
-    prow_build_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmYxHh/wwcV0P1aChuFLpl28w6DFyc7G5Xrw1F8wH1Re9AdxyemM2bTZ/PhsP3u9VDnNbyOw3UN00VFdumkFLjLf1WQ7Q6rZDlPjlw7urBIvAMqUecY6ae1znqsZ0dMBxOuPXHznlnjLjM5b7O7q5WsQMCA9Szbmz6DsuSyCuX0It2osBTN+8P/Fa6BNh3W8AF60M7L8/aUzLfbXVS2LIQKAHHD8CWqvXhLPuTJ03iSwFvgtAK1/J2XJwUP+OzAFrxj6A9LW5ZZgk3R3kRKr0xT/L7hga41rB1qy8Uz+Xr/PTVMNGW+nmU4bPgFchCK0JBK7B12ZcdVVFUEdpaAiKZ prow"
-    k8s_prow_builds_ssh_pubkey="prow:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+/ZdafYYrJknk08g98sYS1Nr+aVdAnhHpQyXBx7EAT9pazCGaoiYnXgC82FAfTVMqdsqnIiP+7FgQTFLNYvBt8KsBd9qCkuMh/Q1QYVh4kfjjuGUrjfo020pxGSvp+67kbxm6lubaio9AgJ9XXE+SP1AYbyKTvXEzk5Tu7gGnRt3OrjVB+9eqTnVJOjS/BAOTJV5DWQ7xMubHlT9NmQ/S2hotMoiJJybYGUalOfcf8ZkyspU2oR+x13DCfjvFdzF4U0fb/uvTJZeu22w887M5y0YQulFY2LIeoAUE4XwoOv0nxzwbtZpqPHwtfLgq3G906KHW5e6slXu8kGda656n prow"
-    ssh_keys_expected=(
-      "${k8s_prow_builds_ssh_pubkey}"
-      "${prow_build_ssh_pubkey}"
-      # TODO(amwat,spiffxp): something is adding an extra prow: prefix, it is
-      # unclear where in prow->kubetest2->cluster/log-dump.sh->`gcloud ssh`
-      # this is happening
-      "prow:${k8s_prow_builds_ssh_pubkey}"
-      "prow:${prow_build_ssh_pubkey}"
-    )
+  cp "${ssh_keys_before}" "${ssh_keys_after}"
 
-    # append to project-wide ssh-keys metadata if not present
-    ssh_keys_before="${TMPDIR}/ssh-keys.before.txt"
-    ssh_keys_after="${TMPDIR}/ssh-keys.after.txt"
-    gcloud compute project-info describe --project="${prj}" \
-      --format='value(commonInstanceMetadata.items.filter(key:ssh-keys).extract(value).flatten())' \
-      | sed -e '/^$/d' > "${ssh_keys_before}"
+  if [ "${K8S_INFRA_ENSURE_E2E_PROJECTS_RESETS_SSH_KEYS:-"false"}" == "true" ]; then
+    printf '%s\n' "${ssh_keys_expected[@]}" >"${ssh_keys_after}"
+  else
+    for ssh_key in "${ssh_keys_expected[@]}"; do
+      if ! grep -q "${ssh_key}" "${ssh_keys_before}"; then
+        echo "${ssh_key}" >>"${ssh_keys_after}"
+      fi
+    done
+  fi
 
-    cp "${ssh_keys_before}" "${ssh_keys_after}"
-
-    if [ "${K8S_INFRA_ENSURE_E2E_PROJECTS_RESETS_SSH_KEYS:-"false"}" == "true" ]; then
-      printf '%s\n' "${ssh_keys_expected[@]}" > "${ssh_keys_after}"
-    else
-      for ssh_key in "${ssh_keys_expected[@]}"; do
-        if ! grep -q "${ssh_key}" "${ssh_keys_before}"; then
-          echo "${ssh_key}" >> "${ssh_keys_after}"
-        fi
-      done
-    fi
-
-    if ! diff "${ssh_keys_before}" "${ssh_keys_after}" >/dev/null; then
-      gcloud compute project-info add-metadata --project="${prj}" \
-        --metadata-from-file ssh-keys="${ssh_keys_after}"
-      diff_colorized "${ssh_keys_before}" "${ssh_keys_after}"
-    fi
+  if ! diff "${ssh_keys_before}" "${ssh_keys_after}" >/dev/null; then
+    gcloud compute project-info add-metadata --project="${prj}" \
+      --metadata-from-file ssh-keys="${ssh_keys_after}"
+    diff_colorized "${ssh_keys_before}" "${ssh_keys_after}"
+  fi
 }
 
 # Disable OS Login at the project level
 # $1 The GCP Project
 function disable_project_oslogin() {
-    if [ $# != 1 ] || [ -z "$1" ]; then
-        echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
-        return 1
-    fi
+  if [ $# != 1 ] || [ -z "$1" ]; then
+    echo "${FUNCNAME[0]}(project) requires 1 argument" >&2
+    return 1
+  fi
 
-    local prj="${1}"
+  local prj="${1}"
 
-    enabled=$(gcloud compute project-info describe --project="${prj}" \
-      --format='value(commonInstanceMetadata.items[enable-oslogin])')
-    if [ "${enabled}" == "TRUE" ]; then
-      gcloud compute project-info --project="${prj}" remove-metadata --keys "enable-oslogin"
-    fi
+  enabled=$(gcloud compute project-info describe --project="${prj}" \
+    --format='value(commonInstanceMetadata.items[enable-oslogin])')
+  if [ "${enabled}" == "TRUE" ]; then
+    gcloud compute project-info --project="${prj}" remove-metadata --keys "enable-oslogin"
+  fi
 }
 
 function ensure_e2e_projects() {
-    # default to all staging projects
-    if [ $# = 0 ]; then
-        set -- "${E2E_PROJECTS[@]}"
+  # default to all staging projects
+  if [ $# = 0 ]; then
+    set -- "${E2E_PROJECTS[@]}"
+  fi
+
+  for project in "${@}"; do
+    if ! (printf '%s\n' "${E2E_PROJECTS[@]}" | grep -q "^${project}$"); then
+      color 2 "Skipping unrecognized e2e project name: ${project}"
+      continue
     fi
 
-    for project in "${@}"; do
-        if ! (printf '%s\n' "${E2E_PROJECTS[@]}" | grep -q "^${project}$"); then
-          color 2 "Skipping unrecognized e2e project name: ${project}"
-          continue
-        fi
+    color 3 "Configuring e2e project: ${project}"
+    ensure_e2e_project "${project}" 2>&1 | indent
 
-        color 3 "Configuring e2e project: ${project}"
-        ensure_e2e_project "${project}" 2>&1 | indent
-
-        # color 3 "Ensuring OS Login is disabled for $project"
-        # disable_project_oslogin "${project}" 2>&1 | indent
-    done
+    # color 3 "Ensuring OS Login is disabled for $project"
+    # disable_project_oslogin "${project}" 2>&1 | indent
+  done
 }
 
 #

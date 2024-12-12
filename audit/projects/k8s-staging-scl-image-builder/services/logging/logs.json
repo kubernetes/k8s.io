@@ -1,4 +1,3 @@
 [
-  "projects/k8s-staging-scl-image-builder/logs/cloudaudit.googleapis.com%2Factivity",
-  "projects/k8s-staging-scl-image-builder/logs/cloudbuild"
+  "projects/k8s-staging-scl-image-builder/logs/cloudaudit.googleapis.com%2Fdata_access"
 ]
