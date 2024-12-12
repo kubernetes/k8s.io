@@ -46,6 +46,7 @@ groups:
       - bentheelder@google.com
       - cy@borg.dev
       - davanum@gmail.com
+      - mudrinic.mare@gmail.com
       - thockin@google.com
 
   - email-id: sig-k8s-infra@kubernetes.io
@@ -505,6 +506,7 @@ groups:
       - cy@borg.dev
       - davanum@gmail.com
       - ihor@cncf.io
+      - mudrinic.mare@gmail.com
       - thockin@google.com
 
   - email-id: k8s-infra-public-pii@kubernetes.io
@@ -531,6 +533,7 @@ groups:
       - cblecker@gmail.com
       - cy@borg.dev
       - davanum@gmail.com
+      - mudrinic.mare@gmail.com
       - nikhitaraghunath@gmail.com
       - thockin@google.com
 

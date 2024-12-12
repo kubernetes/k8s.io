@@ -8,6 +8,7 @@ approvers:
 - Priyankasaggu11929 # sig-contribex TL
 - thockin
 - upodroid # sig-k8s-infra TL
+- xmudrii # sig-k8s-infra TL
 
 emeritus_approvers:
 - bartsmykla
