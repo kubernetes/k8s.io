@@ -68,6 +68,9 @@ groups:
       - hh@ii.coop
       - jbelamaric@google.com
       - zz@ii.coop
+      - koray.oksay@gmail.com
+      - mario@kubermatic.com
+      - mudrinic.mare@gmail.com
 
   #
   # k8s-infra gcs write access
