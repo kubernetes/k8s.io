@@ -61,5 +61,4 @@ groups:
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
       - kikis.github@gmail.com #enhancements subproject
-      - ricardo.katz@gmail.com # Sig Network Sub Project Ingress-nginx
       - strong.james.e@gmail.com # Sig Network Sub Project Ingress-nginx
