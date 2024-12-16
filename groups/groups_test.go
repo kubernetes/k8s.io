@@ -317,6 +317,7 @@ func TestHardcodedGroupsForParanoia(t *testing.T) {
 			"cy@borg.dev",
 			"davanum@gmail.com",
 			"ihor@cncf.io",
+			"mudrinic.mare@gmail.com",
 			"thockin@google.com",
 		},
 		"k8s-infra-group-admins@kubernetes.io": {
@@ -325,6 +326,7 @@ func TestHardcodedGroupsForParanoia(t *testing.T) {
 			"cblecker@gmail.com",
 			"cy@borg.dev",
 			"davanum@gmail.com",
+			"mudrinic.mare@gmail.com",
 			"nikhitaraghunath@gmail.com",
 			"thockin@google.com",
 		},
