@@ -73,6 +73,7 @@ function ensure_e2e_project() {
     file.googleapis.com \
     logging.googleapis.com \
     monitoring.googleapis.com \
+    secretmanager.googleapis.com \
     storage-component.googleapis.com
 
   # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
@@ -112,6 +113,11 @@ function ensure_e2e_project() {
   ensure_project_role_binding "${prj}" \
     "serviceAccount:${PROW_BUILD_SVCACCT}" \
     "roles/iam.serviceAccountUser"
+    
+  # Ensure GCP Default Compute Service Account can administer Secret Manager secrets
+  ensure_project_role_binding "${prj}" \
+    "serviceAccount:${PROW_BUILD_SVCACCT}" \
+    "roles/secretmanager.admin"
 
   # TODO: this is what prow.k8s.io uses today, but seems overprivileged, we
   #       could consider using a more limited custom IAM role instead
