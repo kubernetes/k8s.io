@@ -172,6 +172,7 @@
   dmap:
     "sha256:264371edd5b19ddc2da9333bb4d87c0ce3c0cf37c73c4adeb8bc641b872bc9da": ["v1.0.1"]
     "sha256:d4079f3027dba27e2a1d7fcfb3144d6dd9e15307fb7fa80ca649232d08e90d16": ["v1.0.2"]
+    "sha256:bd870e71e30d478fafd00c515fba454f326960fe343a84ace577723a07a2cd6c": ["v1.1.0"]
 
 # Ingress NGINX: Kube Webhook CertGen
 - name: kube-webhook-certgen
