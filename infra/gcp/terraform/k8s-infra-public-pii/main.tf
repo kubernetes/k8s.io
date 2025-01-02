@@ -164,5 +164,5 @@ resource "google_project_iam_member" "pii_access" {
   for_each = toset(["roles/viewer", "roles/bigquery.user"])
   project  = local.project_id
   role     = each.key
-  member   = "k8s-infra-public-pii@kubernetes.io"
+  member   = "group:k8s-infra-public-pii@kubernetes.io"
 }
