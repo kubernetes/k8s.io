@@ -59,8 +59,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - naadir@randomvariable.co.uk
-      - detiber@gmail.com
-      - jdetiberus@equinix.com
       - naadir.jeewa@broadcom.com
       - stefan.buringer@broadcom.com
       - cilliancapi@gmail.com
@@ -173,7 +171,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - davanum@gmail.com
-      - detiber@gmail.com
       - ha.chuck@gmail.com
       - hi@amycod.es
 
@@ -196,7 +193,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - davanum@gmail.com
-      - detiber@gmail.com
       - frostl@vmware.com
       - ha.chuck@gmail.com
       - hi@amycod.es
