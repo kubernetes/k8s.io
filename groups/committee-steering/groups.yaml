@@ -25,7 +25,7 @@ groups:
       - soltysh@gmail.com
       - michelle.noorali@gmail.com
       - nikhitaraghunath@gmail.com
-      - paco.xu@daocloud.io
+      - roollingstone@gmail.com
       - pal.nabarun95@gmail.com
       - paris.pittman@gmail.com
       - patrick.ohly@intel.com
@@ -54,7 +54,7 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
       - soltysh@gmail.com
-      - paco.xu@daocloud.io
+      - roollingstone@gmail.com
       - patrick.ohly@intel.com
 
   - email-id: steering@kubernetes.io
@@ -80,7 +80,7 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
       - soltysh@gmail.com
-      - paco.xu@daocloud.io
+      - roollingstone@gmail.com
       - patrick.ohly@intel.com
     managers:
       - ihor.dvoretskyi@gmail.com
