@@ -544,3 +544,7 @@ network-policy-api.sigs:
 multicluster.sigs:
   type: CNAME
   value: kubernetes-sig-multicluster.netlify.app.
+# https://github.com/kubernetes-sigs/gateway-api-inference-extension (@robscott)
+gateway-api-inference-extension.sigs:
+  type: CNAME
+  value: gateway-api-inference-extension.netlify.app.
