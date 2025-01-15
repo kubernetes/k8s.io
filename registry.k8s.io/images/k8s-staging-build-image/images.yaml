@@ -521,6 +521,7 @@
     "sha256:86dfa6ce123df424af562a6b66404e6f758fbf6d8a5fd96ccc5812209052e25f": ["v0.6.4"]
     "sha256:3fdb391f7e76cc2301dea2bbb7973b80a89c400dbd967ece59880d03b2b62e65": ["v0.6.5"]
     "sha256:be1e8d4d451ada7e39ba4e44fbd8f58ba50feb4f4b1906df7b2bbb424efb06f3": ["v0.6.6"]
+    "sha256:f65e3f1d8a65bfd45cb5eaa60a3d4ed67c7c37a09ca2806bbe1696096b6f1945": ["v0.7.0"]
 - name: distroless-iptables-amd64
   dmap:
     "sha256:cb60f4c871ba80ea66ca37c96ac9023de9b0bb86e29d724d38efadc2a0bac934": ["v0.2.10"]
@@ -565,6 +566,7 @@
     "sha256:681cd0e9ac675e303228eaff3ff9c2c230cc4dea3160f5077f096da4fd2b89fa": ["v0.6.4"]
     "sha256:29c390dc6f819963e8d5e8a1cd5c705f1ac9183b3d0e6186494e797fabab02c0": ["v0.6.5"]
     "sha256:e5081481030d6c9c93e43978c2a8bc2be1c3db6a3dc0f5f3bc687c1f71afac14": ["v0.6.6"]
+    "sha256:a180941c37fd4163465835e9ccace9af82005afa21fc24501d1100e0b61807dd": ["v0.7.0"]
 - name: distroless-iptables-arm
   dmap:
     "sha256:f2f1e6d36b88f4fd601296546881350acdf4702be34149ebc0167337068d819b": ["v0.2.10"]
@@ -609,6 +611,7 @@
     "sha256:d5e53ba66abe8f7d3f2c8686f7002ec9fcc565856de07791114a48264f93f11d": ["v0.6.4"]
     "sha256:b77549c0c3445589fb953a4ec1a78f37ee6b4ec26c1779d5c7cb378a2a4cf627": ["v0.6.5"]
     "sha256:ca9739c09612e9487c82e6ff3da67da7d90baf932016cc83737c000d23bbf2dc": ["v0.6.6"]
+    "sha256:db0bd6168672c43868248ed66cb60c5c2211efb2e840fd24cc8493e1403b9b2b": ["v0.7.0"]
 - name: distroless-iptables-arm64
   dmap:
     "sha256:ad92820c743f06050b661e7bc0001817ebec46a8adcc64cc4fc7bb6dd803c2b5": ["v0.2.10"]
@@ -653,6 +656,7 @@
     "sha256:b30da7cc872a2fc3d47fb43c83ca3fba5364574bec64a8954b46ca9938bf1cb8": ["v0.6.4"]
     "sha256:d3f09b72a9c321c27d6bd640687230f2ea35ac3b4b736e20178b1abb7c7625bb": ["v0.6.5"]
     "sha256:77194892f2fa31959baebb3cbcd17a29b1a3213b7e019a6fecd21282eb5ee116": ["v0.6.6"]
+    "sha256:e53ab9ae296b2da9875af779c3309061f251cc5dd59525c294d4b7e43eb63478": ["v0.7.0"]
 - name: distroless-iptables-ppc64le
   dmap:
     "sha256:24259c8c5af6f231979c812d423aa1fdcbbd68cea5f35e57cfbd23c18e3674b6": ["v0.2.10"]
@@ -697,6 +701,7 @@
     "sha256:f7cdebf499c9a9f696049679341efbdeb63ac2d070a9d55a5f2fa358d84fea4f": ["v0.6.4"]
     "sha256:645e478a2b6f9f20f9b57b46747987642a50fec177cc48fa4771cf6af4efa5f4": ["v0.6.5"]
     "sha256:0a551ed872b87c4a2fb18ea193b0a4d53926b1d4af060311a5ed04e53e8196b6": ["v0.6.6"]
+    "sha256:3baa7948e9962008b6d1adef78918f60ef4a253549fca380943718cf85621b43": ["v0.7.0"]
 - name: distroless-iptables-s390x
   dmap:
     "sha256:e87576d054142e2db5a71a962affc1703db70ee7a20876aff7c0dc8e5d7bfce0": ["v0.2.10"]
@@ -741,6 +746,7 @@
     "sha256:a66c9c14ce51a4b6958cb2c93a11559e3be5dabfe86afa3b38151f9b913da57d": ["v0.6.4"]
     "sha256:a0bdf76af6933d2a7feffe1e8109877f82affdc88154adbe36c062d953366121": ["v0.6.5"]
     "sha256:edbb4dd184935eb75b22cd7c22b8187c3b23f70b6e3fa3a7044de2df172e2efb": ["v0.6.6"]
+    "sha256:bcf53e51e293ce6f10f2e1dd219b5ca0add205643495181f39d458cca8b8c15b": ["v0.7.0"]
 - name: gcb-docker-gcloud-test-augustus
   dmap:
     "sha256:87a78f4305d00a07a20485bb7ae2a5d12034142a32ba68064bcc4e7391bdfaa9": ["v0.4.1"]
