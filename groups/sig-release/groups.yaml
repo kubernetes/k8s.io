@@ -235,9 +235,9 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - augustus@cisco.com
       - mudrinic.mare@gmail.com
       - pal.nabarun95@gmail.com
+      - saugustus2@bloomberg.net
 
   - email-id: release-managers@kubernetes.io
     name: release-managers
@@ -259,7 +259,6 @@ groups:
       - release-managers-private@kubernetes.io
       - ameukam@gmail.com
       - antheabjung@gmail.com
-      - augustus@cisco.com
       - bentheelder@google.com
       - fsmunoz@gmail.com # 1.32 RT Lead
       - gmccloskey@google.com
@@ -272,6 +271,7 @@ groups:
       - mudrinic.mare@gmail.com
       - ninapolshakova@gmail.com # 1.32 Release Lead Shadow
       - nng.grace@gmail.com # Subproject owner
+      - saugustus2@bloomberg.net
       - spiffxp@google.com
       - sreeramvenkitesh@gmail.com # 1.32 Release Lead Shadow
 
