@@ -23,6 +23,7 @@ groups:
     owners:
       - ian@coldwater.io
       - tabitha.c.sable@gmail.com
+      - cailyn.codes@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -52,6 +53,7 @@ groups:
       - ian@coldwater.io
       - tabitha.c.sable@gmail.com
       - pushkarj.at.work@gmail.com
+      - cailyn.codes@gmail.com
     members:
       - security-release-team@kubernetes.io
       - eric.smalling@gmail.com
