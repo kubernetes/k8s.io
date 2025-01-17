@@ -83,7 +83,7 @@ module "prow_build_cluster" {
 # Why use UBUNTU_CONTAINERD for image_type?
 # - ipv6 jobs need an ipv6 stack; COS lacks one, so use UBUNTU
 # - k8s-prow-builds/prow cluster uses _CONTAINERD variant, keep parity
-module "prow_build_nodepool_n1_highmem_8_localssd" {
+module "prow_build_nodepool_c3d_highmem_8_lssd" {
   source       = "../modules/gke-nodepool"
   project_name = module.project.project_id
   cluster_name = module.prow_build_cluster.cluster.name
@@ -98,10 +98,9 @@ module "prow_build_nodepool_n1_highmem_8_localssd" {
   min_count                 = 1
   max_count                 = 80
   image_type                = "UBUNTU_CONTAINERD"
-  machine_type              = "n1-highmem-8"
+  machine_type              = "c3d-highmem-8-lssd" // includes 1 Local SSD
   disk_size_gb              = 100
-  disk_type                 = "pd-standard"
-  ephemeral_local_ssd_count = 2 # each is 375GB
+  disk_type                 = "pd-ssd"
   service_account           = module.prow_build_cluster.cluster_node_sa.email
 }
 
