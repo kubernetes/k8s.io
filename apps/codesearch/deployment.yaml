@@ -45,9 +45,11 @@ spec:
             mountPath: /data
           resources:
             limits:
-              memory: 8Gi
+              cpu: 4
+              memory: 16Gi
             requests:
-              memory: 8Gi
+              cpu: 4
+              memory: 16Gi
       volumes:
       - name: config
         emptyDir: {}
