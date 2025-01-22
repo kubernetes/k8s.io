@@ -350,7 +350,10 @@ groups:
       - sanchita.mishra1718@gmail.com # 1.33 Release Lead Shadow
       - smith.rashan@gmail.com # 1.33 Release Lead Shadow
     members:
+      - akacloudmelon@gmail.com # 1.33 Docs Shadow
+      - akintayoshedrack@gmail.com # 1.33 Docs Shadow
       - arkasaha30@gmail.com # 1.33 Enhancements Shadow
+      - aruparekh4@gmail.com # 1.33 Docs Shadow
       - bian87@dgu.ac.kr # 1.33 Enhancements Shadow
       - elieser.pereiraa@gmail.com # 1.33 Release Signal Shadow
       - faeka6@gmail.com # 1.33 Enhancements Shadow
@@ -363,6 +366,9 @@ groups:
       - rytswd@gmail.com # 1.33 Communications Lead
       - sean.mcginnis@gmail.com # 1.33 Release Signal Shadow
       - tico88612@gmail.com # 1.33 Release Signal Shadow
+      - michellengnx@gmail.com # 1.33 Docs Shadow
+      - sreeramvenkitesh@gmail.com # 1.33 Docs Shadow
+      - urvashichoubey0121@gmail.com # 1.33 Docs Shadow
       - wendyha.sut@gmail.com # 1.33 Release Signal Lead
 
   - email-id: release-team-shadows@kubernetes.io
@@ -386,18 +392,24 @@ groups:
       - neoaggelos@gmail.com # 1.33 EA
     members:
       - admin@mb-consulting.dev # 1.33 Release Lead Shadow
+      - akacloudmelon@gmail.com # 1.33 Docs Shadow
+      - akintayoshedrack@gmail.com # 1.33 Docs Shadow
       - arkasaha30@gmail.com # 1.33 Enhancements Shadow
+      - aruparekh4@gmail.com # 1.33 Docs Shadow
       - bian87@dgu.ac.kr # 1.33 Enhancements Shadow
       - danieljoshuachan@gmail.com # 1.33 Release Lead Shadow
       - faeka6@gmail.com # 1.33 Enhancements Shadow
       - jackhammervyom@gmail.com # 1.33 Release Lead Shadow
       - jenny.shu@solo.io # 1.33 Enhancements Shadow
       - laurenzung@gmail.com # 1.33 Enhancements Shadow
+      - michellengnx@gmail.com # 1.33 Docs Shadow
       - ninapolshakova@gmail.com # 1.33 Release Lead
       - rawat.dipesh@gmail.com # 1.33 Enhancements Lead
       - rytswd@gmail.com # 1.33 Comms Lead
       - sanchita.mishra1718@gmail.com # 1.33 Release Lead Shadow
       - smith.rashan@gmail.com # 1.33 Release Lead Shadow
+      - sreeramvenkitesh@gmail.com # 1.33 Docs Shadow
+      - urvashichoubey0121@gmail.com # 1.33 Docs Shadow
       - wendyha.sut@gmail.com # 1.33 Release Signal Lead
 
   # RBAC groups:
