@@ -21,6 +21,13 @@ spec:
       labels:
         app: codesearch
     spec:
+      tolerations:
+      - key: "codesearch"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+      nodeSelector:
+        cloud.google.com/gke-nodepool: "nap-c4-highmem-8"
       terminationGracePeriodSeconds: 30
       initContainers:
       - name: codesearch-fetch
@@ -45,11 +52,11 @@ spec:
             mountPath: /data
           resources:
             limits:
-              cpu: 4
-              memory: 16Gi
+              cpu: 6
+              memory: 24Gi
             requests:
-              cpu: 4
-              memory: 16Gi
+              cpu: 6
+              memory: 24Gi
       volumes:
       - name: config
         emptyDir: {}
