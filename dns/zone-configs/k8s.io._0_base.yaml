@@ -168,13 +168,7 @@ code:
 conduct:
   type: CNAME
   value: redirect.k8s.io.
-# Code search (@dims)
-# This service runs in a equinix host managed by @dims
 cs:
-  type: A
-  value: 86.109.7.36
-# Canary for Code Search on GKE cluster aaa (@dims @jimdaga)
-cs-canary:
   type: A
   value: 34.117.143.16
 # sig-contributor-experience
