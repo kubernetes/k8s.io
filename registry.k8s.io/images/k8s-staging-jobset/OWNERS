@@ -4,5 +4,6 @@
 approvers:
 - ahg-g
 - danielvegamyhre
+- kannon92
 labels:
 - sig/apps
