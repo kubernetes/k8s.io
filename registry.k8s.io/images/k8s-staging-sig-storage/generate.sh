@@ -20,6 +20,7 @@ set -o pipefail
 
 readonly repo="gcr.io/k8s-staging-sig-storage"
 readonly tag_filter="tags~^v\d+\.\d+\.\d+\$"
+readonly win_hcp_tag_filter="tags~^v\d+\.\d+\.\d+(-\w+)*$" # only for image supporting windows host process deployment
 # List of repos under https://console.cloud.google.com/gcr/images/k8s-staging-sig-storage/GLOBAL
 readonly images=(
     csi-attacher
@@ -50,10 +51,14 @@ readonly images=(
 for image in "${images[@]}"; do
     echo "- name: ${image}"
     echo "  dmap:"
+    filter="${tag_filter}"
+    if [[ "${image}" == "smbplugin" ]]; then
+        filter="${win_hcp_tag_filter}"
+    fi
     gcloud container images list-tags \
         "${repo}/$image" \
         --format="get(digest, tags)" \
         --sort-by="tags" \
-        --filter="${tag_filter}" \
+        --filter="${filter}" \
         | sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
 done
