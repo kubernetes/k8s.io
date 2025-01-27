@@ -1,4 +1,15 @@
-teams:
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # WG Data Protection mailing lists
+  #
+
   - email-id: wg-data-protection-leads@kubernetes.io
     name: wg-data-protection-leads
     description: |-
@@ -32,5 +43,5 @@ teams:
       WhoCanModerateContent: "OWNERS_AND_MANAGERS"
       MembersCanPostAsTheGroup: "false"
       ReconcileMembers: "false"
-
-
+    members:
+      - wg-data-protection-leads@kubernetes.io

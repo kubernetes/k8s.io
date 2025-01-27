@@ -8,7 +8,6 @@ groups:
     owners:
       - antonio.ojea.garcia@gmail.com
       - aojea@google.com
-      - augustus@cisco.com
       - bburns@microsoft.com
       - bentheelder@google.com
       - briangrant@google.com
@@ -25,13 +24,14 @@ groups:
       - soltysh@gmail.com
       - michelle.noorali@gmail.com
       - nikhitaraghunath@gmail.com
-      - paco.xu@daocloud.io
+      - roollingstone@gmail.com
       - pal.nabarun95@gmail.com
       - paris.pittman@gmail.com
       - patrick.ohly@intel.com
       - phil.wittrock@gmail.com
       - quintonh@gmail.com
       - sarah.novotny@gmail.com
+      - saugustus2@bloomberg.net
       - smarterclayton@gmail.com
       - spiffxp@gmail.com
       - thockin@google.com
@@ -49,12 +49,12 @@ groups:
     owners:
       - antonio.ojea.garcia@gmail.com
       - aojea@google.com
-      - augustus@cisco.com
       - bentheelder@google.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
+      - saugustus2@bloomberg.net
       - soltysh@gmail.com
-      - paco.xu@daocloud.io
+      - roollingstone@gmail.com
       - patrick.ohly@intel.com
 
   - email-id: steering@kubernetes.io
@@ -75,12 +75,12 @@ groups:
     owners:
       - antonio.ojea.garcia@gmail.com
       - aojea@google.com
-      - augustus@cisco.com
       - bentheelder@google.com
       - k8s@auggie.dev
       - saschagrunert@gmail.com
+      - saugustus2@bloomberg.net
       - soltysh@gmail.com
-      - paco.xu@daocloud.io
+      - roollingstone@gmail.com
       - patrick.ohly@intel.com
     managers:
       - ihor.dvoretskyi@gmail.com
