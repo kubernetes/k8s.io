@@ -18,10 +18,10 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-readonly repo="gcr.io/k8s-staging-sig-storage"
+readonly repo="us-central1-docker.pkg.dev/k8s-staging-sig-storage"
 readonly tag_filter="tags~^v\d+\.\d+\.\d+\$"
 readonly win_hcp_tag_filter="tags~^v\d+\.\d+\.\d+(-\w+)*$" # only for image supporting windows host process deployment
-# List of repos under https://console.cloud.google.com/gcr/images/k8s-staging-sig-storage/GLOBAL
+# List of repos under https://console.cloud.google.com/artifacts/docker/k8s-staging-sig-storage
 readonly images=(
     csi-attacher
     csi-external-health-monitor-agent
