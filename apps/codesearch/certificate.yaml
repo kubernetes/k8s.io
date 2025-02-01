@@ -7,4 +7,4 @@ metadata:
     app: codesearch
 spec:
   domains:
-  - cs-canary.k8s.io
+  - cs.k8s.io

@@ -3,7 +3,7 @@
 Kubernetes project infrastructure, managed by the kubernetes community via [sig-k8s-infra]
 
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
-  - `codesearch`: instance of [codesearch] at <https://cs-canary.k8s.io> - owned by [sig-k8s-infra]
+  - `codesearch`: instance of [codesearch] at <https://cs.k8s.io> - owned by [sig-k8s-infra]
   - `elekto`: instance of [elekto] at <https://elections.k8s.io> - owned by Elections officers (on behalf of [sig-contributor-experience])
   - `gcsweb`: instance of [gcsweb] at <https://gcsweb.k8s.io> - owned by [sig-testing]
   - `k8s.io`: instance of nginx that provides redirects/reverse-proxying for k8s.io and its subdomains - owned by [sig-contributor-experience] and [sig-testing]
@@ -33,7 +33,7 @@ Please see <https://git.k8s.io/community/sig-k8s-infra> for more information
 
 <!-- apps -->
 
-[codesearch]: https://cs-canary.k8s.io
+[codesearch]: https://cs.k8s.io
 [elekto]: https://elekto.dev/
 [gcsweb]: https://git.k8s.io/test-infra/gcsweb
 [kubernetes-external-secrets]: https://github.com/external-secrets/kubernetes-external-secrets

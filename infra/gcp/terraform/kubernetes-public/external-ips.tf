@@ -32,7 +32,7 @@ locals {
     },
     cs = {
       name        = "cs-k8s-io-ingress",
-      description = "Used for cs-canary.k8s.io"
+      description = "Used for cs.k8s.io"
     },
     elections = {
       name        = "k8s-io-elections",
