@@ -34,3 +34,29 @@ groups:
       - patrick.ohly@intel.com
     members:
       - wg-device-management-leads@kubernetes.io
+
+  #
+  # k8s-staging write access for WG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-dra-example-driver@kubernetes.io
+    name: k8s-infra-staging-dra-example-driver
+    description: |-
+      ACL for pushing dra-example-driver artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - alexey.fomenko@intel.com
+      - eduard.bartosh@intel.com
+      - elezar@nvidia.com
+      - johuhn@microsoft.com
+      - klueska@gmail.com
+      - patrick.ohly@intel.com
