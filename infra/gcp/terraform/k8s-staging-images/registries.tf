@@ -21,6 +21,7 @@ locals {
     charts                          = "group:k8s-infra-release-admins@kubernetes.io"
     cloud-provider-kind             = "group:k8s-infra-staging-kind@kubernetes.io"
     etcd-manager                    = "group:k8s-infra-staging-etcd-manager@kubernetes.io"
+    infra-tools                     = "group:k8s-infra-staging-infra-tools@kubernetes.io"
     ingress-nginx                   = "group:k8s-infra-staging-ingress-nginx@kubernetes.io"
     kind                            = "group:k8s-infra-staging-kind@kubernetes.io"
     kubernetes                      = "group:k8s-infra-staging-kubernetes@kubernetes.io"
