@@ -1,12 +1,18 @@
 steps:
-- name: gcr.io/cloud-builders/docker
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/octodns:$_GIT_TAG',
-          '--build-arg', 'IMAGE_ARG=gcr.io/$PROJECT_ID/octodns:$_GIT_TAG',
-          '.']
+  - name: gcr.io/cloud-builders/docker
+    args:
+      [
+        "build",
+        "-t",
+        "us-central1-docker.pkg.dev/k8s-staging-images/infra-tools/octodns:$_GIT_TAG",
+        "--build-arg",
+        "IMAGE_ARG=us-central1-docker.pkg.dev/k8s-staging-images/infra-tools/octodns:$_GIT_TAG",
+        ".",
+      ]
 substitutions:
   _GIT_TAG: "12345"
-  _PULL_BASE_REF: 'main'
+  _PULL_BASE_REF: "main"
 images:
-- "gcr.io/$PROJECT_ID/octodns:$_GIT_TAG"
+  - "us-central1-docker.pkg.dev/k8s-staging-images/infra-tools/octodns:$_GIT_TAG"
 options:
-  substitution_option: 'ALLOW_LOOSE'
+  substitution_option: "ALLOW_LOOSE"
