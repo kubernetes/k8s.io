@@ -31,6 +31,13 @@ locals {
     test-infra                      = "group:k8s-infra-staging-test-infra@kubernetes.io"
     csi-vsphere                     = "group:k8s-infra-staging-csi-vsphere@kubernetes.io"
   }
+
+  # Only registries used internally by CI should be listed here
+  registries_excluded_from_cleanup = [
+    "infra-tools",
+    "test-infra",
+    "boskos"
+  ]
 }
 
 module "artifact_registry" {
@@ -46,6 +53,7 @@ module "artifact_registry" {
     readers = ["allUsers"],
     writers = [each.value],
   }
+  cleanup_policy_dry_run = contains(local.registries_excluded_from_cleanup, each.key)
   cleanup_policies = {
     "delete-images-older-than-90-days" = {
       action = "DELETE"
