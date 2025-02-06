@@ -29,6 +29,7 @@ readonly images=(
     csi-node-driver-registrar
     csi-provisioner
     csi-resizer
+    csi-snapshot-metadata
     csi-snapshotter
     hello-populator
     hostpathplugin
