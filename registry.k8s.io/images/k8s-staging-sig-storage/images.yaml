@@ -146,6 +146,9 @@
     "sha256:e998f22243869416f9860fc6a1fb07d4202eac8846defc1b85ebd015c1207605": [ "v1.9.2" ]
     "sha256:3c116f543f0590aeff3299c8bb0683f250817d11a77d9e9071b15a0bffdabcd9": [ "v1.9.3" ]
     "sha256:522911ef68bd2c5c17d90fb2a6d2b2fb72ae790f2c1463a466b4262a07fdbf5a": [ "v1.9.4" ]
+- name: csi-snapshot-metadata
+  dmap:
+    "sha256:d0879d5f8dc08fdf680624010ca045c955c5fa40ab6d8debf689d10e5d282ef6": [ "v0.1.0" ]
 - name: csi-snapshotter
   dmap:
     "sha256:7f93019f399454598370aab2cc1a652a3b8ff722ab92ec4ca9db0eed53acc4b4": [ "v1.1.0" ]
@@ -273,6 +276,7 @@
   dmap:
     "sha256:fded5b914c2531c2471fd0088b75fd33b0756a6c42df4c069007857419e54fa9": [ "v4.0.0" ]
     "sha256:a34c15c963a86da9720090f44c904f49d52b0454784f27017bb863ccbf0537a2": [ "v4.1.0" ]
+    "sha256:f04dcd24e77c45e995d86b6570267d4ff2c10138f0e10646b407a03937b20a23": [ "v4.10.0" ]
     "sha256:1d9f524c0fd5d714cf274a0ddf5dceebeb1848349de5687e530c33dd2675e4ba": [ "v4.2.0" ]
     "sha256:2103ed076e38b87b877a3a58377fe546b5b6a9b83aff75bc9d79aa7a8f0569f2": [ "v4.3.0" ]
     "sha256:971cb526bc0108cca7d8efda32102629cb362f99bbd4879fd381bea1b2014ab4": [ "v4.4.0" ]
@@ -281,7 +285,6 @@
     "sha256:92e5585a12c6f7aa9f0766caaea9b236c166b42935cb2210c7f77eba9413d74f": [ "v4.7.0" ]
     "sha256:6de6f98b51c472217bd6d4bfb963cb3c054e5c0552d5c0785610525c7b0df22d": [ "v4.8.0" ]
     "sha256:3cdf324ca24f0900b1f639b1177a939a3d99ba66cec3db1e2ccfb1d52f2ad7f4": [ "v4.9.0" ]
-    "sha256:f04dcd24e77c45e995d86b6570267d4ff2c10138f0e10646b407a03937b20a23": [ "v4.10.0" ]
 - name: objectstorage-controller
   dmap:
 - name: objectstorage-sidecar
