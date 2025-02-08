@@ -20,7 +20,7 @@ set -o pipefail
 
 readonly repo="gcr.io/k8s-staging-sig-storage"
 readonly tag_filter="tags~^v\d+\.\d+\.\d+\$"
-readonly win_hcp_tag_filter="tags~^v\d+\.\d+\.\d+(-\w+)*$" # only for image supporting windows host process deployment
+readonly win_hcp_tag_filter="tags~^v\d+\.\d+\.\d+[a-z-]*$" # only for image supporting windows host process deployment
 # List of repos under https://console.cloud.google.com/gcr/images/k8s-staging-sig-storage/GLOBAL
 readonly images=(
     csi-attacher
