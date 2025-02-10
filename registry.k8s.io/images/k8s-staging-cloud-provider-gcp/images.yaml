@@ -1,5 +1,6 @@
 - name: cloud-controller-manager
   dmap:
+    "sha256:c877fb8ec7da679fe7e571eee42f7659db92c3a3a970f9340c598e97ff438585": ["release-1.30"]
     "sha256:e70becd7b8cc50a3ac80f36ad0db8781742a225563e759897f846ac728da87db": ["v26.2.4"]
     "sha256:f057f6c934d6afa73a38f94b71d7da2f99033e9a6e689d59b4ee1e689031ef00": ["v27.1.6"]
     "sha256:3c0a8ed7156af8c4a6ab559b98d45882d7447409ccd7bd13b746006bf21e4cfd": ["v28.2.1"]
@@ -125,6 +126,9 @@
     "sha256:147bfe9e0b575a9f89d74b757107adb444768a0dbea549e2482587ce558e0b0e": ["v1.9.7"]
     "sha256:850a0d636bd1777249b687143ecefb23513b2bec44ee1273af2b701f922ec060": ["v1.9.8"]
     "sha256:4afb39fa61eaafe1d8913f2fe59eb1b6048883d43b0b232e0cdd785c9f01a746": ["v1.9.9"]
+- name: gcp-controller-manager
+  dmap:
+    "sha256:2b8730d53b5244153f8344eda5cd13418cfb3276cc3418b15f3ff96d9f8a9591": ["release-1.30"]
 - name: gcp-filestore-csi-driver
   dmap:
     "sha256:351548ca4bb0556e717c27309e1e559f65c9ae5826e60d48e0215f267835b80f": ["v0.3.1"]
