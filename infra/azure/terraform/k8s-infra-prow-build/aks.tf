@@ -21,7 +21,7 @@ module "prow_build" {
   location                  = azurerm_resource_group.rg.location
   sku_tier                  = "Standard"
   automatic_channel_upgrade = "patch"
-  kubernetes_version        = "1.30"
+  kubernetes_version        = "1.31"
   prefix                    = "k8s-infra"
 
   role_based_access_control_enabled = true
