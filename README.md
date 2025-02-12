@@ -27,7 +27,7 @@ Kubernetes project infrastructure, managed by the kubernetes community via [sig-
 - `policy`: [open policy agent][opa] policies used by [conftest] to validate resources in this repo
 - `registry.k8s.io`: work-in-progress to support cross-cloud mirroring/hosting of containers and binaries
 
-We provide a [publicly viewable billing report][billing-report] accessible to members of [kubernetes-sig-k8s-infra@googlegroups.com][mailing-list]
+We provide a [publicly viewable billing report][billing-report] accessible to members of [sig-k8s-infra@kubernetes.io][mailing-list]
 
 Please see <https://git.k8s.io/community/sig-k8s-infra> for more information
 
@@ -47,7 +47,7 @@ Please see <https://git.k8s.io/community/sig-k8s-infra> for more information
 [billing-report]: https://datastudio.google.com/u/0/reporting/14UWSuqD5ef9E4LnsCD9uJWTPv8MHOA3e
 [opa]: https://www.openpolicyagent.org
 [conftest]: https://www.conftest.dev
-[mailing-list]: https://groups.google.com/g/kubernetes-sig-k8s-infra
+[mailing-list]: https://groups.google.com/a/kubernetes.io/g/sig-k8s-infra
 
 <!-- community groups -->
 
