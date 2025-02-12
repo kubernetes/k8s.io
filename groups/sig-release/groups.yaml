@@ -51,6 +51,7 @@ groups:
       - nng.grace@gmail.com # Subproject owner
       - pal.nabarun95@gmail.com
       - saschagrunert@gmail.com
+      - admin@mb-consulting.dev
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
