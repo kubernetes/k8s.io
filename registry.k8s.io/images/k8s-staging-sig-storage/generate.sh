@@ -61,5 +61,8 @@ for image in "${images[@]}"; do
         --format="get(digest, tags)" \
         --sort-by="tags" \
         --filter="${filter}" \
+        | grep --invert-match ';' \
         | sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
+    # note: grep invert ';': for images with multiple tags, listed tags are separated by semicolons
+    # this script doesn't handle multi-tagged images, so ignore them to avoid image promotion errors
 done
