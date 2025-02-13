@@ -54,6 +54,7 @@ Redirections
 - https://go.k8s.io/sig-k8s-infra
 - https://go.k8s.io/sig-k8s-infra-notes
 - https://go.k8s.io/sig-k8s-infra-playlist
+- https://go.k8s.io/sig-release/1.33/enhancements
 - https://go.k8s.io/start
 - https://go.k8s.io/stuck-prs
 - https://go.k8s.io/test-health
