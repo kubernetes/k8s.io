@@ -287,8 +287,10 @@
     "sha256:3cdf324ca24f0900b1f639b1177a939a3d99ba66cec3db1e2ccfb1d52f2ad7f4": [ "v4.9.0" ]
 - name: objectstorage-controller
   dmap:
+    "sha256:068530265e6099c7e06f969a0b239096b512319c5fa6c1ebcbd310802dcc68c8": [ "v0.2.1" ]
 - name: objectstorage-sidecar
   dmap:
+    "sha256:c2c422ad625cebd861c9d2be443c9c2abebcfd925b09a779fa5186e63351b24e": [ "v0.2.1" ]
 - name: smbplugin
   dmap:
     "sha256:e7d37907128b9eadf5208e63ea926dd230ef1ebbdf0de2b6d9b7cd6fbe1ef053": [ "v1.10.0" ]
