@@ -1,0 +1,11 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- bart0sh
+- byako
+- elezar
+- klueska
+- nojnhuh
+- pohly
+labels:
+- wg/device-management

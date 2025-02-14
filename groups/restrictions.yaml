@@ -326,6 +326,7 @@ restrictions:
       - "^wg-lts-leads@kubernetes.io$"
   - path: "wg-device-management/groups.yaml"
     allowedGroups:
+      - "^k8s-infra-staging-dra-example-driver@kubernetes.io$"
       - "^wg-device-management@kubernetes.io$"
       - "^wg-device-management-leads@kubernetes.io$"
   - path: "wg-etcd-operator/groups.yaml"
