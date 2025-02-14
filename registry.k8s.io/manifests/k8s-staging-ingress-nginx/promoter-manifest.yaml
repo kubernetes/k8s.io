@@ -1,6 +1,6 @@
-# google group for gcr.io/k8s-staging-ingress-nginx is k8s-infra-staging-ingress-nginx@kubernetes.io
+# google group for us-central1-docker.pkg.dev/k8s-staging-images/ingress-nginx is k8s-infra-staging-ingress-nginx@kubernetes.io
 registries:
-  - name: gcr.io/k8s-staging-ingress-nginx
+  - name: us-central1-docker.pkg.dev/k8s-staging-images/ingress-nginx
     src: true
   - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/ingress-nginx
     service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
