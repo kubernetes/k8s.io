@@ -36,6 +36,7 @@
 - name: cpvpa
   dmap:
     "sha256:f6c85b45bb5e8ce6077855425bdd03e93d41926dbf6b751af64ab1ea41e1755b": ["v0.8.4"]
+    "sha256:eebe045c95109b549e52aa3af9d70ff2a9b3930611539794b1ed268bdb055fed": ["v0.8.9"]
 - name: cpvpa-amd64
   dmap:
     "sha256:627e119c876fa41e61d34a1f216a46d74a20ab6ed13392970011df8d9c25e621": ["v0.8.4"]
