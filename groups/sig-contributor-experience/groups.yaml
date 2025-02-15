@@ -21,6 +21,7 @@ groups:
       - madhav.jiv@gmail.com
       - pal.nabarun95@gmail.com
       - priyankasaggu11929@gmail.com
+      - mfahlandt@pixel-haufen.de
 
   - email-id: dev@kubernetes.io
     name: dev
@@ -146,6 +147,7 @@ groups:
       - madhav.jiv@gmail.com
       - pal.nabarun95@gmail.com
       - priyankasaggu11929@gmail.com
+      - mfahlandt@pixel-haufen.de
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -166,6 +168,7 @@ groups:
       - madhav.jiv@gmail.com
       - pal.nabarun95@gmail.com
       - priyankasaggu11929@gmail.com
+      - mfahlandt@pixel-haufen.de
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -183,8 +186,8 @@ groups:
     owners:
       - killen.bob@gmail.com
     managers:
-      - ameukam@gmail.com # Lead for KCSEU 2024
-      - xandergrzyw@gmail.com # Lead for KCSEU 2024
+      - mfahlandt@pixel-haufen.de # Maintainer Summit EU NA 2025 Co Chair
+      - natalivlatko@gmail.com # Maintainer Summit EU NA 2025 Co Chair
     members:
       - balves@linuxfoundation.org
       - cailyn.s.e@protonmail.com
@@ -194,8 +197,6 @@ groups:
       - jeremy.r.rickard@gmail.com
       - justnitish06@gmail.com
       - kaslin.fields@gmail.com
-      - mario@kubermatic.com
-      - natalivlatko@gmail.com
       - rlejano@gmail.com
       - valencia0.carol@gmail.com
   #

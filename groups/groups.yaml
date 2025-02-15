@@ -24,6 +24,7 @@ groups:
       - nikitaraghunath@gmail.com
       - pal.nabarun95@gmail.com # SIG ContribEx
       - priyankasaggu11929@gmail.com # SIG ContribEx
+      - mfahlandt@pixel-haufen.de # SIG ContribEx
     members:
       - conduct@kubernetes.io
       - steering-private@kubernetes.io
