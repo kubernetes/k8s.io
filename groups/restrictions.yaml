@@ -160,6 +160,7 @@ restrictions:
       - "^k8s-infra-staging-external-dns@kubernetes.io$"
       - "^k8s-infra-staging-gateway-api@kubernetes.io$"
       - "^k8s-infra-staging-ingress-nginx@kubernetes.io$"
+      - "^k8s-infra-staging-ingate@kubernetes.io$"
       - "^k8s-infra-staging-ingressconformance@kubernetes.io$"
       - "^ingress-nginx-dev@kubernetes.io$"
       - "^sig-network@kubernetes.io$"
