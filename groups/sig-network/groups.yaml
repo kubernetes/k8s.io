@@ -152,6 +152,19 @@ groups:
       - longwuyuan@gmail.com
       - zhangjintao9020@gmail.com
 
+  - email-id: k8s-infra-staging-ingate@kubernetes.io
+    name: k8s-infra-staging-ingate
+    description: |-
+      ACL for pushing ingate artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cpanato@gmail.com
+      - sig-network-leads@kubernetes.io
+      - strong.james.e@gmail.com
+      - longwuyuan@gmail.com
+      - zhangjintao9020@gmail.com
+
   #
   # ingress-nginx-dev
   #
