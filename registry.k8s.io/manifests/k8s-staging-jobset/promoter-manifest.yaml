@@ -1,6 +1,6 @@
 # google group for gcr.io/k8s-staging-jobset is k8s-infra-staging-jobset@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-jobset
+- name: us-central1-docker.pkg.dev/k8s-staging-images/jobset
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/jobset
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
