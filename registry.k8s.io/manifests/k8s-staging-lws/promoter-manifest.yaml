@@ -1,6 +1,6 @@
 # google group for gcr.io/k8s-staging-lws is k8s-infra-staging-lws@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-lws
+- name: us-central1-docker.pkg.dev/k8s-staging-images/lws
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/lws
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
