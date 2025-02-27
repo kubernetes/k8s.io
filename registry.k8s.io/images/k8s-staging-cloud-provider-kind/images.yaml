@@ -1,4 +1,5 @@
 - name: cloud-controller-manager
   dmap:
+    "sha256:99fe3b34abd66489362b772d0ad6e743bd41f646a272251937eb4f9277cd29f8": ["v0.6.0"]
     "sha256:302f1b050c951ebdb384db98f5bc028b84bae727cc7fdf07264b46d148a386bb": ["v0.5.0"]
     "sha256:cacb2da53a0d3b363bf53f11c9e0f714d7605471130a43ae7d1e161da0c3cbdb": ["v0.4.0"]
