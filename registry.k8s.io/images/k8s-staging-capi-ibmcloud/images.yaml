@@ -20,3 +20,6 @@
     "sha256:279e1df7efa64066396de02fbcc6a917ae23008cbcac7bce7a120ca09b1c9da1": ["v0.8.0"]
     "sha256:c7c571d112ccb804acc6fe81ec9eb4a741515f576439805b33269a418a139d6b": ["v0.9.0"]
     "sha256:112910167f407582e359cebe1c77c93f37deab69220a5cb62135ccf5e16d55c5": ["v0.10.0"]
+- name: powervs-cloud-controller-manager
+  dmap:
+    "sha256:5c311b5956141d6131397d5208edbfa8682a06ac428302bf80d759b122ed29ac": ["6256ccf"]
