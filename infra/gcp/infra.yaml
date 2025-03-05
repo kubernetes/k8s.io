@@ -381,6 +381,7 @@ infra:
       k8s-staging-scl-image-builder:
       k8s-staging-sig-auth:
       k8s-staging-sig-docs:
+      k8s-staging-sig-security:
       k8s-staging-sig-storage:
       k8s-staging-slack-infra:
       k8s-staging-sp-operator:
