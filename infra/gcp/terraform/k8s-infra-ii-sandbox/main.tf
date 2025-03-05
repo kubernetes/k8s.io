@@ -39,7 +39,10 @@ resource "google_project_service" "project" {
   project = google_project.project.id
 
   for_each = toset([
+    "artifactregistry.googleapis.com",
+    "bigquery.googleapis.com",
     "cloudbuild.googleapis.com",
+    "compute.googleapis.com",
     "container.googleapis.com",
     "containeranalysis.googleapis.com",
     "containerregistry.googleapis.com",
