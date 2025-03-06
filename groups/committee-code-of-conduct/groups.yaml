@@ -7,11 +7,11 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - hilliary.lipsig@gmail.com
       - jeremy.r.rickard@gmail.com
       - lancashiredanielle@gmail.com
-      - xandergrzyw@gmail.com
       - AnaMMedina21@gmail.com
+      - sean.mcginnis@gmail.com
+      - divya.mohan0209@gmail.com
   - email-id: conduct-emeritus@kubernetes.io
     name: conduct-emeritus
     description: |-
@@ -19,11 +19,13 @@ groups:
     settings:
       ReconcileMembers: "true"
     owners:
-      - hilliary.lipsig@gmail.com
       - jeremy.r.rickard@gmail.com
       - lancashiredanielle@gmail.com
-      - xandergrzyw@gmail.com
       - AnaMMedina21@gmail.com
+      - sean.mcginnis@gmail.com
+      - divya.mohan0209@gmail.com
     members:
+      - hilliary.lipsig@gmail.com
+      - xandergrzyw@gmail.com
       - tpepper@vmware.com
       - detiber@gmail.com
