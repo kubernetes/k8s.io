@@ -63,6 +63,7 @@ groups:
       SIG scalability general discussion group
     owners:
       - marcel.zieba@isovalent.com
+      - mengqiyu1991@gmail.com
       - shyam123.jvs95@gmail.com
       - wojtekt@google.com
     settings:
@@ -116,11 +117,13 @@ groups:
       - siarkowicz@google.com
       - polynomial@redhat.com
       # sig-scalability leads
-      - jeedigv@amazon.com
-      - mmatejczyk@google.com
-      - wojtekt@google.com
       - dordel@google.com
       - marcel.zieba@isovalent.com
+      - mengqiyu1991@gmail.com
+      - mmatejczyk@google.com
+      - jeedigv@amazon.com
+      - wojtekt@google.com
+
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
