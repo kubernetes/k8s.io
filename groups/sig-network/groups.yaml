@@ -194,6 +194,38 @@ groups:
       - thockin@google.com
       - strong.james.e@gmail.com
       - zhangjintao9020@gmail.com
+      - marco_ebert@icloud.com
+    managers:
+      - longwuyuan@gmail.com
+
+  #
+  # ingress-nginx-dev
+  #
+  # Mailing list for Ingress-nginx users and contributors
+  #
+
+  - email-id: ingate-dev@kubernetes.io
+    name: ingate-dev
+    description: |-
+      Mailing list for Ingate users and contributors. This includes process changes, release info, contributor events, and more.
+      Try #ingate-user on slack, discuss.k8s.io for end user troubleshooting and discussion,
+      or open an issue or discussion on https://github.com/kubernetes-sigs/ingate
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+    owners:
+      - thockin@google.com
+      - strong.james.e@gmail.com
+      - zhangjintao9020@gmail.com
+      - marco_ebert@icloud.com
     managers:
       - longwuyuan@gmail.com
 

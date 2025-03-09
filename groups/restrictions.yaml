@@ -163,6 +163,7 @@ restrictions:
       - "^k8s-infra-staging-ingate@kubernetes.io$"
       - "^k8s-infra-staging-ingressconformance@kubernetes.io$"
       - "^ingress-nginx-dev@kubernetes.io$"
+      - "^ingate-dev@kubernetes.io$"
       - "^sig-network@kubernetes.io$"
       - "^sig-network-leads@kubernetes.io$"
   - path: "sig-node/groups.yaml"
