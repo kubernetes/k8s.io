@@ -38,32 +38,34 @@ spec:
   selector:
     matchLabels:
       app: ghproxy
-  replicas: 1  # TODO(fejta): this should be HA
+  replicas: 1 # TODO(fejta): this should be HA
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: ghproxy
     spec:
       containers:
-      - name: ghproxy
-        image: us-docker.pkg.dev/k8s-infra-prow/images/ghproxy:v20250224-355743344
-        args:
-        - --cache-dir=/cache
-        - --cache-sizeGB=99
-        - --push-gateway=pushgateway
-        - --serve-metrics=true
-        ports:
-        - name: main
-          containerPort: 8888
-        - name: metrics
-          containerPort: 9090
-        volumeMounts:
-        - name: cache
-          mountPath: /cache
+        - name: ghproxy
+          image: us-docker.pkg.dev/k8s-infra-prow/images/ghproxy:v20250224-355743344
+          args:
+            - --cache-dir=/cache
+            - --cache-sizeGB=99
+            - --push-gateway=pushgateway
+            - --serve-metrics=true
+          ports:
+            - name: main
+              containerPort: 8888
+            - name: metrics
+              containerPort: 9090
+          volumeMounts:
+            - name: cache
+              mountPath: /cache
       volumes:
-      - name: cache
-        persistentVolumeClaim:
-          claimName: ghproxy
+        - name: cache
+          persistentVolumeClaim:
+            claimName: ghproxy
       # run on our dedicated node
       # tolerations:
       # - key: "dedicated"
@@ -82,12 +84,12 @@ metadata:
   name: ghproxy
 spec:
   ports:
-  - name: main
-    port: 80
-    protocol: TCP
-    targetPort: 8888
-  - name: metrics
-    port: 9090
+    - name: main
+      port: 80
+      protocol: TCP
+      targetPort: 8888
+    - name: metrics
+      port: 9090
   selector:
     app: ghproxy
   type: ClusterIP

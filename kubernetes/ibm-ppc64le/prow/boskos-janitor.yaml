@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boskos-janitor
+  labels:
+    app: boskos-janitor
+spec:
+  replicas: 1 # 2 distributed janitor instances
+  selector:
+    matchLabels:
+      app: boskos-janitor
+  template:
+    metadata:
+      labels:
+        app: boskos-janitor
+    spec:
+      terminationGracePeriodSeconds: 300
+      serviceAccountName: boskos-janitor
+      containers:
+        - name: boskos-janitor
+          image: gcr.io/k8s-staging-boskos/janitor:v20250210-1230f5b
+          args:
+            - --boskos-url=http://boskos.test-pods.svc.cluster.local.
+            - --resource-type=bar
+            - --pool-size=20
+            - --
+            - --hours=0

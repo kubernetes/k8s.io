@@ -36,130 +36,137 @@ spec:
     spec:
       serviceAccountName: prow-controller-manager
       containers:
-      - name: prow-controller-manager
-        image: us-docker.pkg.dev/k8s-infra-prow/images/prow-controller-manager:v20250224-355743344
-        args:
-        - --config-path=/etc/config/config.yaml
-        - --dry-run=false
-        - --enable-controller=plank
-        - --job-config-path=/etc/job-config
-        env:
-        # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
-        - name: KUBECONFIG
-          value: "/etc/kubeconfig-k8s-infra-prow/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-k8s-infra-aks-prow-build/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig"
-        # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
-        - name: AWS_ROLE_ARN
-          value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
-        - name: AWS_WEB_IDENTITY_TOKEN_FILE
-          value: /var/run/secrets/aws-iam-token/serviceaccount/token
-        - name: AWS_REGION
-          value: us-east-2
-        # Azure variables needed to authenticate to AKS clusters with Azure AD Integration
-        - name: AZURE_CLIENT_ID # AZURE_CLIENT_ID is being overloaded with Azure Workload ID
-          value: "cabf5f22-ec7e-4e84-9e35-c02e57ca555d"
-        - name: AZURE_SUBSCRIPTION_ID
-          value: "0e46bd28-a80f-4d3a-8200-d9eb8d80cb2e"
-        - name: AZURE_TENANT_ID
-          value: "097f89a0-9286-43d2-9a1a-08f1d49b1af8"
-        - name: AZURE_FEDERATED_TOKEN_FILE
-          value: "/var/run/secrets/azure-token/serviceaccount/token"
-        ports:
-        - name: metrics
-          containerPort: 9090
-        volumeMounts:
-        - mountPath: /etc/kubeconfig-k8s-infra-prow
-          name: kubeconfig-k8s-infra-prow
-          readOnly: true
-        - mountPath: /etc/kubeconfig-k8s-infra-prow-build
-          name: kubeconfig-k8s-infra-prow-build
-          readOnly: true
-        - mountPath: /etc/kubeconfig-k8s-infra-prow-build-trusted
-          name: kubeconfig-k8s-infra-prow-build-trusted
-          readOnly: true
-        - mountPath: /etc/kubeconfig-k8s-infra-aks-prow-build
-          name: kubeconfig-k8s-infra-aks-prow-build
-          readOnly: true
-        - mountPath: /etc/kubeconfig-eks-prow-build-cluster
-          name: kubeconfig-eks-prow-build-cluster
-          readOnly: true
-        - mountPath: /etc/kubeconfig-k8s-infra-kops-prow-build
-          name: kubeconfig-k8s-infra-kops-prow-build
-          readOnly: true
+        - name: prow-controller-manager
+          image: us-docker.pkg.dev/k8s-infra-prow/images/prow-controller-manager:v20250224-355743344
+          args:
+            - --config-path=/etc/config/config.yaml
+            - --dry-run=false
+            - --enable-controller=plank
+            - --job-config-path=/etc/job-config
+          env:
+            # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
+            - name: KUBECONFIG
+              value: "/etc/kubeconfig-k8s-infra-prow/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-k8s-infra-aks-prow-build/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig:/etc/k8s-infra-ppc64le-prow-build-kubeconfig/kubeconfig"
+            # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
+            - name: AWS_ROLE_ARN
+              value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
+            - name: AWS_WEB_IDENTITY_TOKEN_FILE
+              value: /var/run/secrets/aws-iam-token/serviceaccount/token
+            - name: AWS_REGION
+              value: us-east-2
+            # Azure variables needed to authenticate to AKS clusters with Azure AD Integration
+            - name: AZURE_CLIENT_ID # AZURE_CLIENT_ID is being overloaded with Azure Workload ID
+              value: "cabf5f22-ec7e-4e84-9e35-c02e57ca555d"
+            - name: AZURE_SUBSCRIPTION_ID
+              value: "0e46bd28-a80f-4d3a-8200-d9eb8d80cb2e"
+            - name: AZURE_TENANT_ID
+              value: "097f89a0-9286-43d2-9a1a-08f1d49b1af8"
+            - name: AZURE_FEDERATED_TOKEN_FILE
+              value: "/var/run/secrets/azure-token/serviceaccount/token"
+          ports:
+            - name: metrics
+              containerPort: 9090
+          volumeMounts:
+            - mountPath: /etc/kubeconfig-k8s-infra-prow
+              name: kubeconfig-k8s-infra-prow
+              readOnly: true
+            - mountPath: /etc/kubeconfig-k8s-infra-prow-build
+              name: kubeconfig-k8s-infra-prow-build
+              readOnly: true
+            - mountPath: /etc/kubeconfig-k8s-infra-prow-build-trusted
+              name: kubeconfig-k8s-infra-prow-build-trusted
+              readOnly: true
+            - mountPath: /etc/kubeconfig-k8s-infra-aks-prow-build
+              name: kubeconfig-k8s-infra-aks-prow-build
+              readOnly: true
+            - mountPath: /etc/kubeconfig-eks-prow-build-cluster
+              name: kubeconfig-eks-prow-build-cluster
+              readOnly: true
+            - mountPath: /etc/kubeconfig-k8s-infra-kops-prow-build
+              name: kubeconfig-k8s-infra-kops-prow-build
+              readOnly: true
+            - mountPath: /etc/k8s-infra-ppc64le-prow-build-kubeconfig
+              name: kubeconfig-k8s-infra-ppc64le-prow-build
+              readOnly: true
+            - name: config
+              mountPath: /etc/config
+              readOnly: true
+            - name: job-config
+              mountPath: /etc/job-config
+              readOnly: true
+            # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+            - name: aws-iam-token
+              mountPath: /var/run/secrets/aws-iam-token/serviceaccount
+              readOnly: true
+            # Azure Token needed for workload identity
+            - name: azure-token
+              mountPath: "/var/run/secrets/azure-token/serviceaccount"
+              readOnly: true
+          livenessProbe: # Pod is killed if this fails 3 times.
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe: # Pod is not considered ready (for rolling deploy and request routing) if this fails 3 times.
+            httpGet:
+              path: /healthz/ready
+              port: 8081
+            initialDelaySeconds: 10
+            periodSeconds: 3
+      volumes:
+        - name: kubeconfig-k8s-infra-prow
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-prow
+        - name: kubeconfig-k8s-infra-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-prow-build
+        - name: kubeconfig-k8s-infra-prow-build-trusted
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-prow-build-trusted
+        - name: kubeconfig-k8s-infra-aks-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-aks-prow-build
+        - name: kubeconfig-eks-prow-build-cluster
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-eks-prow-build-cluster
+        - name: kubeconfig-k8s-infra-kops-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-kops-prow-build
+        - name: kubeconfig-k8s-infra-ppc64le-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-ppc64le-prow-build
         - name: config
-          mountPath: /etc/config
-          readOnly: true
+          configMap:
+            name: config
         - name: job-config
-          mountPath: /etc/job-config
-          readOnly: true
+          configMap:
+            name: job-config
         # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
         - name: aws-iam-token
-          mountPath: /var/run/secrets/aws-iam-token/serviceaccount
-          readOnly: true
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  audience: sts.amazonaws.com
+                  expirationSeconds: 86400
+                  path: token
         # Azure Token needed for workload identity
         - name: azure-token
-          mountPath: "/var/run/secrets/azure-token/serviceaccount"
-          readOnly: true
-        livenessProbe: # Pod is killed if this fails 3 times.
-          httpGet:
-            path: /healthz
-            port: 8081
-          initialDelaySeconds: 10
-          periodSeconds: 5
-        readinessProbe: # Pod is not considered ready (for rolling deploy and request routing) if this fails 3 times.
-          httpGet:
-            path: /healthz/ready
-            port: 8081
-          initialDelaySeconds: 10
-          periodSeconds: 3
-      volumes:
-      - name: kubeconfig-k8s-infra-prow
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-k8s-infra-prow
-      - name: kubeconfig-k8s-infra-prow-build
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-k8s-infra-prow-build
-      - name: kubeconfig-k8s-infra-prow-build-trusted
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-k8s-infra-prow-build-trusted
-      - name: kubeconfig-k8s-infra-aks-prow-build
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-k8s-infra-aks-prow-build
-      - name: kubeconfig-eks-prow-build-cluster
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-eks-prow-build-cluster
-      - name: kubeconfig-k8s-infra-kops-prow-build
-        secret:
-          defaultMode: 420
-          secretName: kubeconfig-k8s-infra-kops-prow-build
-      - name: config
-        configMap:
-          name: config
-      - name: job-config
-        configMap:
-          name: job-config
-      # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
-      - name: aws-iam-token
-        projected:
-          defaultMode: 420
-          sources:
-          - serviceAccountToken:
-              audience: sts.amazonaws.com
-              expirationSeconds: 86400
-              path: token
-      # Azure Token needed for workload identity
-      - name: azure-token
-        projected:
-          defaultMode: 420
-          sources:
-          - serviceAccountToken:
-              expirationSeconds: 86400
-              path: token
-              audience: api://AzureADTokenExchange
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 86400
+                  path: token
+                  audience: api://AzureADTokenExchange
 ---
 apiVersion: v1
 kind: Service
@@ -188,47 +195,47 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: "prow-controller-manager"
 rules:
-- apiGroups:
-  - coordination.k8s.io
-  resources:
-  - leases
-  resourceNames:
-  - prow-controller-manager-leader-lock
-  verbs:
-  - get
-  - update
-- apiGroups:
-  - coordination.k8s.io
-  resources:
-  - leases
-  verbs:
-  - create
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  resourceNames:
-  - prow-controller-manager-leader-lock
-  verbs:
-  - get
-  - update
-- apiGroups:
-  - ""
-  resources:
-  - configmaps
-  - events
-  verbs:
-  - create
-- apiGroups:
-  - prow.k8s.io
-  resources:
-  - prowjobs
-  verbs:
-  - get
-  - update
-  - list
-  - watch
-  - patch
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    resourceNames:
+      - prow-controller-manager-leader-lock
+    verbs:
+      - get
+      - update
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - create
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    resourceNames:
+      - prow-controller-manager-leader-lock
+    verbs:
+      - get
+      - update
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - events
+    verbs:
+      - create
+  - apiGroups:
+      - prow.k8s.io
+    resources:
+      - prowjobs
+    verbs:
+      - get
+      - update
+      - list
+      - watch
+      - patch
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -239,5 +246,5 @@ roleRef:
   kind: Role
   name: "prow-controller-manager"
 subjects:
-- kind: ServiceAccount
-  name: "prow-controller-manager"
+  - kind: ServiceAccount
+    name: "prow-controller-manager"
