@@ -140,6 +140,7 @@ resource "google_pubsub_topic_iam_binding" "read_binding" {
 }
 
 # https://cloud.google.com/iam/docs/workload-identity-federation-with-kubernetes#kubernetes
+# This is a community owned K8s Cluster inside IBM Cloud, have a look at the infra/ibm/terraform folder for more details
 resource "google_iam_workload_identity_pool" "ibm_clusters" {
   project                   = module.project.project_id
   workload_identity_pool_id = "ibm-clusters"

@@ -90,17 +90,15 @@ module "prow_bucket" {
   name       = "kubernetes-ci-logs"
   project_id = module.project.project_id
   location   = "us-central1"
-
-  # TODO: BenTheElder, what lifecycle policy do we have on the previous bucket
-  # lifecycle_rules = [{
-  #   action = {
-  #     type = "Delete"
-  #   }
-  #   condition = {
-  #     age        = 90 # 90d
-  #     with_state = "ANY"
-  #   }
-  # }]
+  lifecycle_rules = [{
+    action = {
+      type = "Delete"
+    }
+    condition = {
+      age        = 90 # 90d
+      with_state = "ANY"
+    }
+  }]
 
   iam_members = [
     {
