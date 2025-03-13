@@ -303,6 +303,7 @@ infra:
       k8s-staging-apisnoop:
       k8s-staging-artifact-promoter:
       k8s-staging-autoscaling:
+      k8s-staging-blixt:
       k8s-staging-boskos:
       k8s-staging-bom:
       k8s-staging-build-image:

@@ -77,6 +77,20 @@ groups:
       - srepakula@google.com
       - zihongz@google.com
 
+  - email-id: k8s-infra-staging-blixt@kubernetes.io
+    name: k8s-infra-staging-blixt
+    description: |-
+      ACL for staging blixt images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - antonio.ojea.garcia@gmail.com
+      - danwinship@redhat.com
+      - michael.zappa@gmail.com
+      - ricardo.katz@gmail.com
+      - sutt@redhat.com
+      - thockin@google.com
+
   - email-id: k8s-infra-staging-cpa@kubernetes.io
     name: k8s-infra-staging-cpa
     description: |-
