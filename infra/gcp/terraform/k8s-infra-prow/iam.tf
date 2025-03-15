@@ -138,3 +138,38 @@ resource "google_pubsub_topic_iam_binding" "read_binding" {
     "serviceAccount:kettle@kubernetes-public.iam.gserviceaccount.com",
   ]
 }
+
+# https://cloud.google.com/iam/docs/workload-identity-federation-with-kubernetes#kubernetes
+# This is a community owned K8s Cluster inside IBM Cloud, have a look at the infra/ibm/terraform folder for more details
+resource "google_iam_workload_identity_pool" "ibm_clusters" {
+  project                   = module.project.project_id
+  workload_identity_pool_id = "ibm-clusters"
+}
+
+data "http" "ppc64le_issuer" {
+  url      = "https://73725434-jp-osa.lb.appdomain.cloud:6443/.well-known/openid-configuration"
+  insecure = true
+}
+
+data "http" "ppc64le_jwks" {
+  url      = "https://73725434-jp-osa.lb.appdomain.cloud:6443/openid/v1/jwks"
+  insecure = true
+}
+
+resource "google_iam_workload_identity_pool_provider" "ppc64le" {
+  workload_identity_pool_id          = google_iam_workload_identity_pool.ibm_clusters.workload_identity_pool_id
+  project                            = module.project.project_id
+  workload_identity_pool_provider_id = "ppc64le"
+
+  attribute_mapping = {
+    "google.subject"                 = "\"ns/\" + assertion['kubernetes.io']['namespace'] + \"/sa/\" + assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.namespace"            = "assertion['kubernetes.io']['namespace']"
+    "attribute.service_account_name" = "assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.pod"                  = "assertion['kubernetes.io']['pod']['name']"
+  }
+  oidc {
+    allowed_audiences = ["sts.googleapis.com"]
+    issuer_uri        = jsondecode(data.http.ppc64le_issuer.response_body)["issuer"]
+    jwks_json         = data.http.ppc64le_jwks.response_body
+  }
+}

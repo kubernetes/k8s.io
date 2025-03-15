@@ -51,3 +51,28 @@ stringData:
       }
     }
 ---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: ibm-ppc64le
+spec:
+  target:
+    template:
+      engineVersion: v2
+      data:
+        name: ibm-ppc64le
+        server: https://73725434-jp-osa.lb.appdomain.cloud:6443
+        config: "{{ .config }}"
+      metadata:
+        labels:
+          clusterType: prow
+          environment: prod
+          prowNamespace: test-pods
+          cloud: ibm
+  data:
+    - remoteRef:
+        key: ibm-ppc64le-argo-secret
+      secretKey: config
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k8s-infra-prow

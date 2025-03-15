@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  config: |
+    resources:
+    - names:
+      - foo
+      state: dirty
+      type: bar
+kind: ConfigMap
+metadata:
+  name: resources
