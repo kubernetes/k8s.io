@@ -1,3 +1,6 @@
+- name: dra-example-driver
+  dmap:
+    "sha256:ab5cd9fd898b2ff79bea030520170a7feb579ff463dce9758775f7cce7d7231f": ["0.1.3"]
 - name: kueue
   dmap:
     "sha256:b7730869b937cf6e412140eec7403b4d32fd28bce5fcb014a349032a0ecdc7e4": ["v0.10.2", "0.10.2"]
