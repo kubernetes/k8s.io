@@ -5,6 +5,7 @@ resources:
   - atlantis.yaml
   - external-secrets.yaml
   - cert-manager.yaml
+  - kyverno.yaml
   - prow.yaml
   - istio.yaml
   - oauth2-proxy.yaml

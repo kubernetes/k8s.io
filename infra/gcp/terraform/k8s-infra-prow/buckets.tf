@@ -116,6 +116,11 @@ module "prow_bucket" {
       member = "serviceAccount:prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
     },
     {
+      // IBM build clusters, pods in the test-pods namespace only
+      role   = "roles/storage.objectAdmin"
+      member = "principalSet://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/ibm-clusters/attribute.namespace/test-pods"
+    },
+    {
       role   = "roles/storage.objectViewer"
       member = "allUsers"
     },
