@@ -542,3 +542,7 @@ multicluster.sigs:
 gateway-api-inference-extension.sigs:
   type: CNAME
   value: gateway-api-inference-extension.netlify.app.
+# https://github.com/kubernetes-sigs/lws (@Edwinhr716, @ahg-g, @kerthcet)
+lws.sigs:
+  type: CNAME
+  value: kubernetes-sigs-lws.netlify.app.
