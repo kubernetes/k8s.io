@@ -12,7 +12,7 @@ spec:
                 - Pod
       preconditions:
         any:
-          - key: '{{request.object.metadata.labels."created-by-prow"}}'
+          - key: '{{request.object.metadata.labels."created-by-prow" || ""}}'
             operator: Equals
             value: "true"
       mutate:
