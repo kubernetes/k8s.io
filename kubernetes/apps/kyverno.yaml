@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kyverno
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            cloud: ibm
+  template:
+    metadata:
+      name: "kyverno-{{ .name }}"
+    spec:
+      destination:
+        namespace: kyverno
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: kyverno
+          repoURL: "https://kyverno.github.io/kyverno"
+          targetRevision: 3.3.7
+          helm:
+            releaseName: kyverno
+            valueFiles:
+              - $values/kubernetes/{{ .name }}/helm/kyverno.yaml
+        - repoURL: "https://github.com/kubernetes/k8s.io.git"
+          targetRevision: main
+          ref: values
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

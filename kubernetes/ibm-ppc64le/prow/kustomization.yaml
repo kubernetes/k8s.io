@@ -7,6 +7,8 @@ resources:
   - boskos-reaper.yaml
   - boskos-resources-configmap.yaml
   - boskos.yaml
-  - build-serviceaccounts.yaml
+  - kyverno.yaml
   - limit-range.yaml
+  - secrets.yaml
+  - oidc.yaml
   - test-pods-poddisruptionbudget.yaml
