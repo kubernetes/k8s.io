@@ -1,0 +1,13 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+filters:
+  ".*":
+    approvers:
+    - sig-k8s-infra-leads
+    labels:
+    - sig/k8s-infra
+    - area/infra
+    - area/infra/ibmcloud
+  "\\.sh$":
+    labels:
+    - area/bash
