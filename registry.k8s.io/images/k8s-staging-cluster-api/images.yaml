@@ -193,6 +193,7 @@
     "sha256:6c75944d88a4fdfbcdbdc0bf0f835320172cfd3ab37406d1037a01eaaf73832a": ["v1.9.3"]
     "sha256:e9b098114c1369f3f35a55c1a7962c8e82d3c2a82f36e4a6601f8e34bd1629ea": ["v1.9.4"]
     "sha256:d072f2c54e5ff574aafc0c5de1ab152904285e1393cd36e5e3d2bf74ab8f5cec": ["v1.9.5"]
+    "sha256:431e1f5c3231bca4153be546a2a6feb6a945fe4ab91540e672532bb38f38d38a": ["v1.9.6"]
 - name: cluster-api-controller-amd64
   dmap:
     "sha256:ea0e994082f56bf7713d36002abfbffbad43b2c257b89842b3e3694c987d3a07": ["v0.2.0"]
@@ -321,6 +322,7 @@
     "sha256:d9902d77a7fb7855d6f7df33910f10506367e4957e1833fb415b404ad7e7eb10": ["v1.9.3"]
     "sha256:fd1c28042780a421622c301706db422f1bbefc79adebee395640142e65f89d72": ["v1.9.4"]
     "sha256:4f4c1c9a748e9ca13d37dff40cb54ccb999e0365c25e1dd805a6b4cf0b96d44c": ["v1.9.5"]
+    "sha256:178a22b6c93e6022ac723810eacbb208dc5b32b03cc90a47760e7149b2761ed1": ["v1.9.6"]
 - name: kubeadm-bootstrap-controller
   dmap:
     "sha256:78382ca2ed1805f6c8882c057a3d4991b12bc5eb54151720b6b30aa4ff89da61": ["v0.3.0"]
@@ -499,6 +501,7 @@
     "sha256:a05c847c95e2eec31d3b0d1a32f50bd504086dee3f690e88ba31fb1f3e8a5567": ["v1.9.3"]
     "sha256:67487452ea3a128d74e2d324aa6e45e4ef55c21de6454d0d4899c3c8f92fa364": ["v1.9.4"]
     "sha256:46581cdf1a39221fb9bafdce97431be3afae121c359ea727ad12783b5f138fa6": ["v1.9.5"]
+    "sha256:b2cf1f28c0ac1c8d622f74df72a0dcbf7cca28033f2a8ff9d094f2b72cf2042a": ["v1.9.6"]
 - name: kubeadm-control-plane-controller
   dmap:
     "sha256:b33cbe3e58aba8c14932257faeb652e5d9a5e396b34412ff51b3f62db8a95758": ["v0.3.0"]
@@ -678,6 +681,7 @@
     "sha256:0178cff160351ca9f4b4a70a60ef9bd1b0359482c42a7b74d73dd2acce10c1fb": ["v1.9.3"]
     "sha256:d7dbffc844febfc5b54c05890c559a17ffd6a7479836c17a6a7e07bdc5b601a1": ["v1.9.4"]
     "sha256:17094ccd5be5afe675db2043773e4e3cc1660a017d7c7ffcfaacdbae1d5fbe02": ["v1.9.5"]
+    "sha256:5e982dfadd13faab27f0d7da22cabc0a232c9bd2a1debea81b4421a3f6f6bbc4": ["v1.9.6"]
 - name: plantuml
   dmap:
     "sha256:befa605d8640516f9fbada5c1969638c5cb60fb042f598a432cbd22345570bc5": ["1.2019.6"]
