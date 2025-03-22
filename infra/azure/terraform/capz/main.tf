@@ -133,3 +133,11 @@ module "cluster_api_gallery" {
   location            = var.location
   depends_on          = module.role_assignments
 }
+
+# Import CAPZ monitoring module
+module "capz_monitoring" {
+  source              = "./capz-monitoring"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  subscription_id     = data.azurerm_client_config.current.subscription_id
+}
