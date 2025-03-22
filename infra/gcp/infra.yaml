@@ -29,7 +29,7 @@
 # - consider breaking up into multiple files vs. one large file
 infra:
   e2e:
-    managed_by: infra/gcp/bash/prow/ensure-e2e-projects.sh
+    managed_by: infra/gcp/terraform/boskos/main.tf
     projects:
       # general purpose e2e projects, no quota changes
       k8s-infra-e2e-boskos-001:
