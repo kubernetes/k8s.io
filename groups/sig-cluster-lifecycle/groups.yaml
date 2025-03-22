@@ -63,7 +63,6 @@ groups:
       - jdetiberus@equinix.com
       - naadir.jeewa@broadcom.com
       - stefan.buringer@broadcom.com
-      - cilliancapi@gmail.com
       - yuvaraj-balaji-rao.kakaraparthi@broadcom.com
       - christi.schlotter@gmail.com
       - furkat.gofurov@suse.com
@@ -246,7 +245,6 @@ groups:
       - sbueringer@gmail.com
       - christi.schlotter@gmail.com
       - naadir.jeewa@broadcom.com
-      - cilliancapi@gmail.com
       - ytijani@vmware.com
       - fabrizio.pandini@gmail.com
 
@@ -263,7 +261,6 @@ groups:
       - gong.zhang@broadcom.com
       - gab.satchi@broadcom.com
       - naadir.jeewa@broadcom.com
-      - cilliancapi@gmail.com
       - sagar.muchhal@broadcom.com
       - neolit123@gmail.com
 
@@ -280,7 +277,6 @@ groups:
       - davanum@gmail.com
       - fabrizio.pandini@gmail.com
       - sbueringer@gmail.com
-      - cilliancapi@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-helm@kubernetes.io
     name: k8s-infra-staging-cluster-api-helm
