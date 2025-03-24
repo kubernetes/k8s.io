@@ -136,6 +136,7 @@
     "sha256:12425bab3f5e41ed20b850fd1e3737a48474f9ad48363efb116243a853db754a": ["v1.0.1"]
     "sha256:31a195d7c3dc801575ca46919ff2b3f01afce54a744ab22ee83469f92a6e0965": ["v1.1.0"]
     "sha256:bcd576c6d0a01d4710969195e804c02da62b71b5c35c6816df9b7584d5445437": ["v1.1.1"]
+    "sha256:fd43e7671a6c0338c0f3fe60866d58baef6baa7c13254d788b7180d215b4d933": ["v1.1.2"]
 
 # Ingress NGINX: Custom Error Pages
 - name: custom-error-pages
