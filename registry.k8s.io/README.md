@@ -124,3 +124,23 @@ requests, which is described in detail
 [post-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#post-k8sio-image-promo
 [ci-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#ci-k8sio-image-promo
 [project-github]: https://git.k8s.io/community/github-management#project-owned-organizations
+
+### Publishing helm charts on registry.k8s.io
+
+Helm charts are a popular way to install Kubernetes applications.
+Publishing a helm chart in the Kubernetes organization follows a similar process
+as publishing an image.
+
+1. The subproject should build, document, and support the helm chart development.
+2. The subproject should push the chart to the staging docker repo.
+3. On release tags, one can promote the chart and images to registry.k8s.io by obtaining the sha 
+   for the tagged helm chart and the tagged image.
+4. Open a PR into your images directory (registry.k8s.io/images/k8s-staging-SUBPROJECT/images.yaml)
+5. Add chart and image sha to the respective sections.
+6. Once PR is merged, confirm both images and helm charts exist by `helm install subproject oci://registry.k8s.io/charts/subproject --version=$VERSION`
+
+
+[kueue]: https://github.com/kubernetes-sigs/kueue
+[jobset]: https://github.com/kubernetes-sigs/jobset
+[lws]: https://github.com/kubernetes-sigs/lws
+[dra-example-driver]: https://github.com/kubernetes-sigs/dra-example-driver
