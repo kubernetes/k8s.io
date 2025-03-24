@@ -81,6 +81,7 @@
     "sha256:981a97d78bee3109c0b149946c07989f8f1478a9265031d2d23dea839ba05b52": ["v1.11.4"]
     "sha256:9724476b928967173d501040631b23ba07f47073999e80e34b120e8db5f234d5": ["v1.12.0-beta.0"]
     "sha256:e6b8de175acda6ca913891f0f727bca4527e797d52688cbe9fec9040d6f6b6fa": ["v1.12.0"]
+    "sha256:d2fbc4ec70d8aa2050dd91a91506e998765e86c96f32cffb56c503c9c34eed5b": ["v1.12.1"]
 
 # Ingress NGINX: Controller (chroot)
 - name: controller-chroot
@@ -128,6 +129,7 @@
     "sha256:f29d0f9e7a9ef4947eda59ed0c09ec13380b13639d1518cf1ab8ec09c3e22ef8": ["v1.11.4"]
     "sha256:6e2f8f52e1f2571ff65bc4fc4826d5282d5def5835ec4ab433dcb8e659b2fbac": ["v1.12.0-beta.0"]
     "sha256:87c88e1c38a6c8d4483c8f70b69e2cca49853bb3ec3124b9b1be648edf139af3": ["v1.12.0"]
+    "sha256:90155c86548e0bb95b3abf1971cd687d8f5d43f340cfca0ad3484e2b8351096e": ["v1.12.1"]
 
 # Ingress NGINX: CFSSL
 - name: cfssl
