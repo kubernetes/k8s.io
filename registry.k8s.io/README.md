@@ -16,6 +16,7 @@ repositories used to publish official container images for Kubernetes.
   - [Creating staging repos](#creating-staging-repos)
   - [Enabling automatic builds](#enabling-automatic-builds)
   - [Image Promoter](#image-promoter)
+  - [Helm Chart Promotion](#helm-chart-promotion)
 
 ## Staging repos
 
@@ -124,3 +125,16 @@ requests, which is described in detail
 [post-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#post-k8sio-image-promo
 [ci-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#ci-k8sio-image-promo
 [project-github]: https://git.k8s.io/community/github-management#project-owned-organizations
+
+### Helm Chart Promotion
+
+Publishing a Helm chart in the Kubernetes organization follows a process similar to
+publishing an image.
+
+1. The subproject should build, document and support the Helm chart.
+2. The subproject should push the chart to the staging image repository.
+3. Once the release has been created and the release job has been successful, obtain the SHA for the container images and the Helm charts from the build logs.
+   This will be used later to promote these assets to `registry.k8s.io`
+4. Update the image promoter manifest for your subproject (`registry.k8s.io/images/k8s-staging-SUBPROJECT/images.yaml`) to add the respective SHAs for the container images and the Helm charts that were pushed to the staging image repository
+5. Create a PR and make sure that it gets merged for the image promoter process to kick off
+6. Once the PR is merged, ensure the image promoter job for your merge commit is successful, then confirm that all promoted artifacts are available (e.g. `helm install subproject oci://registry.k8s.io/subproject/charts/subproject --version=$VERSION`)
