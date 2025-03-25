@@ -4,6 +4,8 @@ filters:
   ".*":
     approvers:
     - sig-k8s-infra-leads
+    - mkumatag
+    - Prajyot-Parab
     labels:
     - sig/k8s-infra
     - area/infra
