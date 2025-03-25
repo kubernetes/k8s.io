@@ -83,7 +83,7 @@ resource "google_secret_manager_secret" "build_cluster_secrets" {
     group = each.value.group
   }
   replication {
-    automatic = true
+    auto {}
   }
 }
 
