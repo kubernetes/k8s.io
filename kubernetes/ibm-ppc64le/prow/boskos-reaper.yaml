@@ -20,4 +20,4 @@ spec:
           image: gcr.io/k8s-staging-boskos/reaper:v20250316-840dd60
           args:
             - --boskos-url=http://boskos.test-pods.svc.cluster.local.
-            - --resource-type=bar
+            - --resource-type=powervs
