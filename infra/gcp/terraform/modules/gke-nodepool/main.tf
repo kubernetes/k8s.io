@@ -46,7 +46,6 @@ resource "google_container_node_pool" "node_pool" {
     disk_size_gb = var.disk_size_gb
     disk_type    = var.disk_type
     labels       = var.labels
-    taint        = var.taints
 
     service_account = var.service_account
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
@@ -64,6 +63,14 @@ resource "google_container_node_pool" "node_pool" {
     }
     metadata = {
       disable-legacy-endpoints = "true"
+    }
+    dynamic "taint" {
+      for_each = var.taints
+      content {
+        effect = taint.value.effect
+        key    = taint.value.key
+        value  = taint.value.value
+      }
     }
   }
 
