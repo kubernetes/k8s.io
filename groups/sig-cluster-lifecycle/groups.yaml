@@ -166,6 +166,8 @@ groups:
       - david.njumani@gmail.com
       - guillermogastonlorente@gmail.com
       - rohityadav89@gmail.com
+      - weizhouapache@gmail.com
+      - vishesh92@gmail.com
 
   - email-id: k8s-infra-staging-capi-docker@kubernetes.io
     name: k8s-infra-staging-capi-docker
