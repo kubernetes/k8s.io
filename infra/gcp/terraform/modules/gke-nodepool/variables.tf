@@ -31,7 +31,7 @@ variable "location" {
 
 variable "node_locations" {
   description = "The GCP locations (regions or zones) where the node_pool should be located"
-  type        = list
+  type        = list(any)
   default     = []
 }
 
@@ -63,7 +63,7 @@ variable "machine_type" {
 variable "image_type" {
   description = "The image_type of this node_pool"
   type        = string
-  default     = "COS"
+  default     = "COS_CONTAINERD"
 }
 
 variable "disk_size_gb" {
