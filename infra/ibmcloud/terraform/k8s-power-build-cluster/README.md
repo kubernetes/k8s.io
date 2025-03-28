@@ -32,7 +32,7 @@ terraform init -reconfigure
 `ibmcloud_api_key`, `service_instance_id`, `secrets_manager_id` are the only required variables that you must set in order to proceed. You can set this key either by adding it to your `var.tfvars` file or by exporting it as an environment variable.
 
 **Option 1:** Set in `var.tfvars` file
-Add the following line to the `var.tfvars` file:
+Create `var.tfvars` file and set the following variables in `var.tfvars` file:
 ```
 ibmcloud_api_key    = "<YOUR_API_KEY>"
 service_instance_id = "<POWERVS_SERVICE_INSTANCE_ID>"

@@ -40,17 +40,19 @@ resource "tls_private_key" "private_key" {
 }
 
 resource "ibm_sm_arbitrary_secret" "ssh_private_key" {
-  name        = "powervs-ssh-private-key"
+  name        = "build-cluster-ssh-private-key"
+  description = "SSH private key for secure deployment and access to the ppc64le build cluster."
   instance_id = ibm_resource_instance.secrets_manager.guid
   region      = local.secrets_manager_region
-  labels      = ["powervs-ssh-private-key"]
+  labels      = ["build-cluster-ssh-private-key"]
   payload     = tls_private_key.private_key.private_key_openssh
 }
 
 resource "ibm_sm_arbitrary_secret" "ssh_public_key" {
-  name        = "powervs-ssh-public-key"
+  name        = "build-cluster-ssh-public-key"
+  description = "SSH public key for secure deployment and access to the ppc64le build cluster."
   instance_id = ibm_resource_instance.secrets_manager.guid
   region      = local.secrets_manager_region
-  labels      = ["powervs-ssh-public-key"]
+  labels      = ["build-cluster-ssh-public-key"]
   payload     = tls_private_key.private_key.public_key_openssh
 }
