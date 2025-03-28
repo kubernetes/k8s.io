@@ -22,7 +22,7 @@ terraform init -reconfigure
 `ibmcloud_api_key` is the only required variable that you must set in order to proceed. You can set this key either by adding it to your `var.tfvars` file or by exporting it as an environment variable.
 
 **Option 1:** Set in `var.tfvars` file
-Add the following line to the `var.tfvars` file:
+Create `var.tfvars` file and set the following variable in `var.tfvars` file:
 ```
 ibmcloud_api_key = "<YOUR_API_KEY>"
 ```
