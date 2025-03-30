@@ -105,6 +105,27 @@ module "prow_build_nodepool_n1_highmem_8_localssd" {
   service_account           = module.prow_build_cluster.cluster_node_sa.email
 }
 
+module "prow_build_nodepool_c4_highmem_8_localssd" {
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  node_locations = [
+    "us-central1-b",
+    "us-central1-c",
+    "us-central1-f",
+  ]
+  name            = "pool6"
+  initial_count   = 1
+  min_count       = 1
+  max_count       = 80
+  machine_type    = "c4-highmem-8"
+  disk_size_gb    = 500
+  disk_type       = "hyperdisk-balanced"
+  service_account = module.prow_build_cluster.cluster_node_sa.email
+  taints          = [{ key = "dedicated", value = "sig-testing", effect = "NO_SCHEDULE" }]
+}
+
 module "prow_build_nodepool_t2a_standard_8" {
   source       = "../modules/gke-nodepool"
   project_name = module.project.project_id
