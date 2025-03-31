@@ -3,6 +3,10 @@
 
 approvers:
 - ahg-g
-- liurupeng
+- Edwinhr716
+- kerthcet
 labels:
 - sig/apps
+
+emeritus_approvers:
+- liurupeng
