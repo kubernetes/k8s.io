@@ -22,6 +22,7 @@ spec:
             - --boskos-url=http://boskos.test-pods.svc.cluster.local.
             - --resource-type=powervs
             - --ignore-api-key=true
+            - --account-id=efa47ec6fd45473a9e1fd6b7b8363f5c
           env:
           - name: IBMCLOUD_ENV_FILE # TODO: explore on how to read key from the file instead of env var
             value: "/home/.ibmcloud/api-key"
