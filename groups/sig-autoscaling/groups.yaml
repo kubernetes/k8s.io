@@ -25,7 +25,7 @@ groups:
     description: |-
       SIG autoscaling general discussion group
     owners:
-      - guyjtempleton@gmail.com
+      - guyjtempleton@googlemail.com
       - maciekpytel@google.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
