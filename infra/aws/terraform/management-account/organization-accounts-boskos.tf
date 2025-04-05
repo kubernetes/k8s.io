@@ -14,50 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-module "k8s_infra_e2e_boskos_001" {
-  source = "../modules/org-account"
-
-  account_name               = "k8s-infra-e2e-boskos-001"
-  email                      = "k8s-infra-aws-admins+k8s-infra-e2e-boskos-001@kubernetes.io"
-  iam_user_access_to_billing = "ALLOW"
-  parent_id                  = aws_organizations_organizational_unit.boskos.id
-  permissions_map = {
-    "boskos-admin" = [
-      "AdministratorAccess",
-    ]
-  }
-
-}
-
-module "k8s_infra_e2e_boskos_002" {
-  source = "../modules/org-account"
-
-  account_name               = "k8s-infra-e2e-boskos-002"
-  email                      = "k8s-infra-aws-admins+k8s-infra-e2e-boskos-002@kubernetes.io"
-  iam_user_access_to_billing = "ALLOW"
-  parent_id                  = aws_organizations_organizational_unit.boskos.id
-  permissions_map = {
-    "boskos-admin" = [
-      "AdministratorAccess",
-    ]
-  }
-}
-
-module "k8s_infra_e2e_boskos_003" {
-  source = "../modules/org-account"
-
-  account_name               = "k8s-infra-e2e-boskos-003"
-  email                      = "k8s-infra-aws-admins+k8s-infra-e2e-boskos-003@kubernetes.io"
-  iam_user_access_to_billing = "ALLOW"
-  parent_id                  = aws_organizations_organizational_unit.boskos.id
-  permissions_map = {
-    "boskos-admin" = [
-      "AdministratorAccess",
-    ]
-  }
-
-}
-
 ##############################################
 # Accounts used by boskos in the EKS cluster #
 ##############################################
