@@ -55,3 +55,7 @@
 - name: network-policy-finalizer
   dmap:
     "sha256:535783864fd470ff8e3336a9370ab6a94fecd4120df31cda5372b25ee7ccb83c": ["v0.1.0"]
+- name: nat64
+  dmap:
+    "sha256:d45e086f62fa6afb2125d8748edc23183443d0545232a7734aef40783cb5b77a": ["v0.2.1"]
+    "sha256:9de9b3197f3084f836bba58e16e02738ff95ceaaf58b108fdba8b5f0dbaabaf7": ["v0.2.0"]
