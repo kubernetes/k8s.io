@@ -26,16 +26,17 @@ groups:
     owners:
       - deads@redhat.com
       - liggitt@google.com
-      - mikedanese@google.com
       - rita.z.zhang@gmail.com
-      - theenjeru@gmail.com
+      - i@monis.app
+      - anish.ramasekar@gmail.com
+      - mhausler@amazon.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
       WhoCanModerateContent: "OWNERS_AND_MANAGERS"
-      MessageModerationLevel: "MODERATE_NONE"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
 
   - email-id: sig-auth@kubernetes.io
     name: sig-auth
@@ -44,9 +45,10 @@ groups:
     owners:
       - deads@redhat.com
       - liggitt@google.com
-      - mikedanese@google.com
       - rita.z.zhang@gmail.com
-      - theenjeru@gmail.com
+      - i@monis.app
+      - anish.ramasekar@gmail.com
+      - mhausler@amazon.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -69,10 +71,10 @@ groups:
     members:
       - deads@redhat.com
       - liggitt@google.com
-      - mikedanese@google.com
       - rita.z.zhang@gmail.com
-      - theenjeru@gmail.com
-      - timallclair@gmail.com
+      - i@monis.app
+      - anish.ramasekar@gmail.com
+      - mhausler@amazon.com
 
   - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
     name: k8s-infra-staging-csi-secrets-store
@@ -82,25 +84,22 @@ groups:
       ReconcileMembers: "true"
     members:
       - anish.ramasekar@gmail.com
-      - nilekhc@gmail.com
       - rita.z.zhang@gmail.com
+      - i@monis.app
 
   - email-id: k8s-infra-staging-multitenancy@kubernetes.io
     name: k8s-infra-staging-multitenancy
     description: |-
-      ACL for multitenancy WG driven subprojects such as multi-tenancy and
-      hierachical-namespace-controller
+      ACL for multitenancy WG driven subprojects such as multi-tenancy
     settings:
       ReconcileMembers: "true"
     members:
-      - aludwin@google.com
-      - f.guo@alibaba-inc.com
-      - kevin.fox@pnnl.gov
-      - laetitiah@google.com
-      - ryan.j.bezdicek@gmail.com
-      - srampal@cisco.com
-      - tasha.drew@gmail.com
-      - srajakum@amazon.com
+      - deads@redhat.com
+      - liggitt@google.com
+      - rita.z.zhang@gmail.com
+      - i@monis.app
+      - anish.ramasekar@gmail.com
+      - mhausler@amazon.com
 
   - email-id: k8s-infra-staging-secrets-store-sync@kubernetes.io
     name: k8s-infra-staging-secrets-store-sync
@@ -110,7 +109,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - anish.ramasekar@gmail.com
-      - nilekhc@gmail.com
+      - i@monis.app
 
   #
   # k8s-infra gcs write access
