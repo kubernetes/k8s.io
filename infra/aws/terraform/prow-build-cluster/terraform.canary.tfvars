@@ -31,9 +31,9 @@ eks_cluster_admins = [
 ]
 
 cluster_name    = "prow-canary-cluster"
-cluster_version = "1.31"
+cluster_version = "1.32"
 
-node_group_version_stable  = "1.31"
+node_group_version_stable  = "1.32"
 node_instance_types_stable = ["r5ad.xlarge"]
 node_desired_size_stable   = 1
 
