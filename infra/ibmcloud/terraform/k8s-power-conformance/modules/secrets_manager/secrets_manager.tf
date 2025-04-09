@@ -65,10 +65,9 @@ resource "ibm_sm_iam_credentials_secret" "secret_rotator" {
     interval    = 1
     unit        = "day"
   }
-  //The time-to-live (TTL) or lease duration of generated secret 93600seconds = 26hrs
-  //The average job would run for ~2 hrs, hence we ensure secret remains alive post rotation period
-  // rotation(24hrs)+job(2hrs) = 26hrs = 93600seconds
-  ttl = "93600"
+
+  //The time-to-live (TTL) or lease duration of generated secret 86400seconds = 24hrs
+  ttl = "86400"
 }
 
 # RSA key of size 4096 bits
