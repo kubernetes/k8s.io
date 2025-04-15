@@ -12,4 +12,4 @@
     "sha256:29fe8fce8787dc766a56add08a1150a7e0ca3df644bbb621651a2fb0a6d9b2f9": ["v0.6.1"]
 - name: charts/lws
   dmap:
-    "sha256:045f28d5cffba910fa2f7c6ae1a3b2f6aee8f44b8d57f02802a49180d5dd732b": ["v0.6.1"]
+    "sha256:045f28d5cffba910fa2f7c6ae1a3b2f6aee8f44b8d57f02802a49180d5dd732b": ["v0.6.1", "0.6.1"]
