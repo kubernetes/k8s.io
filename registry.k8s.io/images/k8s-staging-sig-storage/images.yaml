@@ -254,10 +254,12 @@
     "sha256:a112f1625aad84e4f425141199ab6ddbb49432c66e05dbbaab033d0ab2e8dfaf": [ "v2.5.0" ]
     "sha256:4833c13769fcfd1c41903bb51b6c43e71ffbe0c81b33ad5e1fbaa84d5e26dad0": [ "v2.6.0" ]
     "sha256:bf8427d8ce78fb6c41043f1fa75fbb1cd3e5bd1d336a6fbc3b13ff5574a30ede": [ "v2.7.0" ]
+    "sha256:3e2bf2eaef9fc3e9043829704fb061e6a5e296bb36d1043c9c5f973d8b702cce": [ "v2.8.0" ]
 - name: local-volume-node-cleanup
   dmap:
     "sha256:f31b2d8f498f9b06d565cbef32cede8a92a98de366b83b711a7478e16b7d1a81": [ "v2.6.0" ]
     "sha256:77fa452525dbef550940fba05b1ac6e8dfbeec9e819d7ad95b382307cc1f4c09": [ "v2.7.0" ]
+    "sha256:41eeb33446c0f3f42f241f5521d63938720c0bf22e8ebe10bbe88ba8751ce80d": [ "v2.8.0" ]
 - name: mock-driver
   dmap:
     "sha256:0b4273abac4c241fa3d70aaf52b0d79a133d2737081f4a5c5dea4949f6c45dc3": [ "v3.1.0" ]
