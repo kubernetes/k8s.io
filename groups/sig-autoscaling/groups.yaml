@@ -12,8 +12,10 @@ groups:
     description: |-
       SIG autoscaling leads
     owners:
-      - maciekpytel@google.com
       - guyjtempleton@googlemail.com
+      - jack.francis@microsoft.com
+      - jtuznik@google.com
+      - rwainman@google.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -26,7 +28,9 @@ groups:
       SIG autoscaling general discussion group
     owners:
       - guyjtempleton@googlemail.com
-      - maciekpytel@google.com
+      - jack.francis@microsoft.com
+      - jtuznik@google.com
+      - rwainman@google.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -79,14 +83,14 @@ groups:
       ReconcileMembers: "true"
     members:
       - bskiba@google.com
-      - maciekpytel@google.com
-      - ksiedlecki@google.com
-      - jbartosik@google.com
-      - jtuznik@google.com
+      - bwroblewski@google.com
       - danielmk@google.com
       - guyjtempleton@googlemail.com
+      - jack.francis@microsoft.com
+      - jbartosik@google.com
+      - jtuznik@google.com
       - kgolab@google.com
-      - bwroblewski@google.com
+      - ksiedlecki@google.com
       - kwiesmueller@google.com
       - luizaoj@google.com
       - rgowman@google.com
