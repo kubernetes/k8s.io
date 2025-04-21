@@ -23,3 +23,4 @@
 - name: powervs-cloud-controller-manager
   dmap:
     "sha256:5c311b5956141d6131397d5208edbfa8682a06ac428302bf80d759b122ed29ac": ["6256ccf"]
+    "sha256:d66fc56fc350e4fecd15ff717c85627980ece675badd83d6a1b73176cd1adcbd": ["7c51cd2"]
