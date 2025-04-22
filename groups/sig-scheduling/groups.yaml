@@ -30,18 +30,18 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
     members:
-      - acondor@google.com
-      - ahg@google.com
-      - hweicdl@gmail.com
+      - dmarcinski@google.com
+      - mskoczen@google.com
+      - handbomusic@gmail.com
 
   - email-id: sig-scheduling@kubernetes.io
     name: sig-scheduling
     description: |-
       SIG scheduling general discussion group
     owners:
-      - acondor@google.com
-      - ahg@google.com
-      - hweicdl@gmail.com
+      - dmarcinski@google.com
+      - mskoczen@google.com
+      - handbomusic@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -68,9 +68,9 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
-      - acondor@google.com
-      - ahg@google.com
-      - hweicdl@gmail.com
+      - dmarcinski@google.com
+      - mskoczen@google.com
+      - handbomusic@gmail.com
     members:
       # This is just the initial list of group members.
       - kerthcet@gmail.com
