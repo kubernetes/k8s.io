@@ -75,7 +75,6 @@ groups:
       # This is just the initial list of group members.
       - kerthcet@gmail.com
       - patrick.ohly@intel.com
-      - handbomusic@gmail.com # @sanposhiho
       - noreply+testgrid@google.com
 
   - email-id: k8s-infra-staging-kueue@kubernetes.io
