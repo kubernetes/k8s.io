@@ -108,6 +108,7 @@ groups:
     - antonio.ojea.garcia@gmail.com
     - bentheelder@google.com
     - james@munnelly.eu
+    - sean.mcginnis@gmail.com
 
   - email-id: k8s-infra-staging-kubetest2@kubernetes.io
     name: k8s-infra-staging-kubetest2
@@ -147,7 +148,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+    - antonio.ojea.garcia@gmail.com
     - bentheelder@google.com
+    - sean.mcginnis@gmail.com
 
   #
   # sig-testing k8s-infra read-only access
