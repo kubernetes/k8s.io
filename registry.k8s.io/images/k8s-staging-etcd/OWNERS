@@ -4,8 +4,10 @@ options:
   no_parent_owners: true
 approvers:
   - release-engineering-approvers
+  - sig-etcd-leads
 reviewers:
   - release-engineering-reviewers
+  - sig-etcd-leads
   - jpbetz
   - wenjiaswe
   - jingyih
