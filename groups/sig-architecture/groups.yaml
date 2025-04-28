@@ -72,6 +72,17 @@ groups:
       - mario@kubermatic.com
       - mudrinic.mare@gmail.com
 
+  - email-id: k8s-infra-staging-maintainer-tools@kubernetes.io
+    name: k8s-infra-staging-maintainer-tools
+    description: |-
+      ACL for Maintainer Tools. See: https://sigs.k8s.io/maintainer-tools
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - justinsb@google.com
+
   #
   # k8s-infra gcs write access
   #
