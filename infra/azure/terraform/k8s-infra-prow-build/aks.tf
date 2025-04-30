@@ -16,12 +16,12 @@ limitations under the License.
 
 module "prow_build" {
   source                    = "Azure/aks/azurerm"
-  version                   = "9.1.0"
+  version                   = "9.2.0"
   resource_group_name       = azurerm_resource_group.rg.name
   location                  = azurerm_resource_group.rg.location
   sku_tier                  = "Standard"
   automatic_channel_upgrade = "patch"
-  kubernetes_version        = "1.31"
+  kubernetes_version        = "1.32"
   prefix                    = "k8s-infra"
 
   role_based_access_control_enabled = true
@@ -70,33 +70,6 @@ module "prow_build" {
   storage_profile_enabled             = true
   storage_profile_blob_driver_enabled = false
   storage_profile_file_driver_enabled = false
-
-  maintenance_window_auto_upgrade = {
-    frequency   = "Weekly"
-    day_of_week = "Wednesday"
-    interval    = 1
-    duration    = 8
-    utc_offset  = "+00:00"
-    start_time  = "10:00" # UTC
-  }
-
-  maintenance_window_node_os = {
-    frequency   = "Weekly"
-    day_of_week = "Wednesday"
-    interval    = 1
-    duration    = 8
-    utc_offset  = "+00:00"
-    start_time  = "18:00" # UTC
-  }
-
-  maintenance_window = {
-    allowed = [
-      {
-        day   = "Wednesday",
-        hours = [8, 23]
-      },
-    ]
-  }
 
   node_pools = {
     pool1 = {
