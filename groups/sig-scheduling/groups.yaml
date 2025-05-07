@@ -29,7 +29,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
-    members:
+    owners:
       - dmarcinski@google.com
       - mskoczen@google.com
       - handbomusic@gmail.com
