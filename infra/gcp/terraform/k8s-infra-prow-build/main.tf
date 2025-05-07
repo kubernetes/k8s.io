@@ -126,6 +126,46 @@ module "prow_build_nodepool_c4_highmem_8_localssd" {
   taints          = [{ key = "dedicated", value = "sig-testing", effect = "NO_SCHEDULE" }]
 }
 
+
+module "sig_node_node_pool_1_n4_highmem_8" {
+
+  source       = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/gke-nodepool?ref=v39.0.0&depth=1"
+  project_id   = module.project.project_id
+  name         = "sig-node-pool1"
+  location     = module.prow_build_cluster.cluster.location
+  cluster_name = module.prow_build_cluster.cluster.name
+
+  service_account = {
+    email        = module.prow_build_cluster.cluster_node_sa.email
+    oauth_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+  }
+
+  nodepool_config = {
+    autoscaling = {
+      max_node_count = 10
+      min_node_count = 1 # 1 per zone
+    }
+    management = {
+      auto_repair  = true
+      auto_upgrade = true
+    }
+  }
+
+  node_config = {
+    machine_type                  = "n4-highmem-8"
+    disk_type                     = "hyperdisk-balanced"
+    image_type                    = "COS_CONTAINERD"
+    gvnic                         = true
+    workload_metadata_config_mode = "GKE_METADATA"
+    shielded_instance_config = {
+      enable_secure_boot = true
+    }
+  }
+
+
+  taints = { dedicated = { value = "sig-node", effect = "NO_SCHEDULE" } }
+}
+
 module "prow_build_nodepool_t2a_standard_8" {
   source       = "../modules/gke-nodepool"
   project_name = module.project.project_id
