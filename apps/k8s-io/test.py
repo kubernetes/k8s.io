@@ -175,9 +175,9 @@ class RedirTest(HTTPTestCase):
             self.assert_temp_redirect(base + 'github-labels',
                 'https://github.com/kubernetes/test-infra/blob/master/label_sync/labels.md')
             self.assert_temp_redirect(base + 'good-first-issue',
-                'https://github.com/issues?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+no%3Aassignee')
+                'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+no%3Aassignee')
             self.assert_temp_redirect(base + 'help-wanted',
-                'https://github.com/issues?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22+no%3Aassignee')
+                'https://github.com/search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22+no%3Aassignee')
             self.assert_temp_redirect(
                 base + 'oncall',
                 'https://storage.googleapis.com/test-infra-oncall/oncall.html')
