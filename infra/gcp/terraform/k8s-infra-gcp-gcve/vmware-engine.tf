@@ -15,14 +15,14 @@ limitations under the License.
 */
 
 resource "google_vmwareengine_private_cloud" "vsphere-cluster" {
-  location    = "us-central1"
+  location    = "us-central1-a"
   name        = "k8s-gcp-gcve-pc"
   project     = local.project_id
   description = "k8s Community vSphere Cluster for CI."
   # TODO(chrischdi): figure out discount and switch to STANDARD
   type        = "TIME_LIMITED"
   network_config {
-    management_cidr       = "192.168.30.0/28"
+    management_cidr       = "192.168.30.0/24"
     vmware_engine_network = google_vmwareengine_network.vsphere-network.id
   }
 
@@ -40,7 +40,7 @@ resource "google_vmwareengine_network" "vsphere-network" {
   name     = "k8s-gcp-gcve-network"
   project  = local.project_id
   type     = "STANDARD"
-  location = "us-central1"
+  location = "global"
 }
 
 resource "google_vmwareengine_network_peering" "prow_peering" {
