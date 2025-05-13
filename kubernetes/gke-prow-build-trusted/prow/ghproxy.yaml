@@ -1,8 +1,6 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: default
   name: ghproxy
   labels:
     app: ghproxy
@@ -34,3 +32,33 @@ spec:
         - name: cache
           persistentVolumeClaim:
             claimName: ghproxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ghproxy
+  labels:
+    app: ghproxy
+spec:
+  ports:
+    - name: main
+      port: 80
+      protocol: TCP
+      targetPort: 8888
+  selector:
+    app: ghproxy
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: ghproxy
+  name: ghproxy
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: standard-rwo

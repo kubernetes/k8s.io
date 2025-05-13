@@ -10,8 +10,6 @@ remoteName: "k8s.io"
 upstreamURLBase: "https://raw.githubusercontent.com/kubernetes/k8s.io/main"
 includedConfigPaths:
   - "kubernetes"
-  - "infra/gcp/terraform/k8s-infra-prow-build/prow-build/resources"
-  - "infra/gcp/terraform/k8s-infra-prow-build-trusted/prow-build-trusted/resources"
 excludedConfigPaths:
   - "registry.k8s.io"
 targetVersion: "latest"

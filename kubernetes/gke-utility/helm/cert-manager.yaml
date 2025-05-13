@@ -1,7 +1,8 @@
 crds:
   enabled: true
 extraObjects:
-  - apiVersion: cert-manager.io/v1
+  - |
+    apiVersion: cert-manager.io/v1
     kind: ClusterIssuer
     metadata:
       name: letsencrypt-prod

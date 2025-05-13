@@ -3,12 +3,21 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-- github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.11.2
-- extras.yaml
-- clusters.yaml
+  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.11.2
+  - extras.yaml
+  - clusters.yaml
 
 patches:
-- path: argocd-cmd-params-cm.yaml
-- path: argocd-cm.yaml
-- path: argocd-cm-rbac.yaml
-- path: argocd-sa.yaml
+  - path: argocd-cmd-params-cm.yaml
+  - path: argocd-cm.yaml
+  - path: argocd-cm-rbac.yaml
+  - path: argocd-sa.yaml
+  - patch: |- # https://github.com/argoproj/argo-cd/issues/11086
+      - op: add
+        path: /spec/egress/1/ports/-
+        value:
+          port: 15012
+          protocol: TCP
+    target:
+      kind: NetworkPolicy
+      name: argocd-redis-ha-server-network-policy
