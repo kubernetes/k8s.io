@@ -49,6 +49,7 @@ resource "ibm_iam_custom_role" "janitor_pvs" {
     "power-iaas.cloud-instance.read",
     "resource-controller.instance.retrieve",
     "resource-controller.group.retrieve",
+    "global-search-tagging.resource.read",
   ]
 }
 
