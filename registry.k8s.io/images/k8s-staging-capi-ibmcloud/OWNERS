@@ -1,11 +1,16 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- gyliu513
-- jichenjc
 - mkumatag
+- Prajyot-Parab
+- Karthik-K-N
 
 reviewers:
+- mkumatag
+- Prajyot-Parab
+- Amulyam24
+- Karthik-K-N
+
+emeritus_approvers:
 - gyliu513
 - jichenjc
-- mkumatag
