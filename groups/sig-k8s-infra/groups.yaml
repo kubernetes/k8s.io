@@ -552,8 +552,8 @@ groups:
       - ankita.swamy20@gmail.com
       - richmcase@gmail.com
 
-  - email-id: k8s-infra-broadcom-admins@kubernetes.io
-    name: k8s-infra-broadcom-admins
+  - email-id: k8s-infra-gcp-gcve-admins@kubernetes.io
+    name: k8s-infra-gcp-gcve-admins
     description: |-
       ACL for Broadcom/vSphere project on GCP
     settings:
