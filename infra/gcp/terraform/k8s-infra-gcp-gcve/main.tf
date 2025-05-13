@@ -26,6 +26,7 @@ resource "google_project_service" "project" {
   project = data.google_project.project.id
 
   for_each = toset([
+    "compute.googleapis.com",
     "vmwareengine.googleapis.com"
   ])
 

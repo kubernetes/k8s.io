@@ -14,17 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required provider versions
-- Storage backend details
-*/
-
 terraform {
 
   backend "gcs" {
-    bucket = "k8s-infra-tf-broadcom"
-    prefix = "k8s-infra-broadcom"
+    bucket = "k8s-infra-tf-gcp-gcve"
+    prefix = "k8s-infra-gcp-gcve-vcenter"
   }
 
 
@@ -38,4 +32,10 @@ terraform {
       version = "~> 3.90.1"
     }
   }
+}
+
+provider "vsphere" {
+  user                 = var.vsphere_user
+  password             = var.vsphere_password
+  vsphere_server       = var.vsphere_server
 }
