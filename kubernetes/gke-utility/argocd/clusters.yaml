@@ -37,17 +37,36 @@ metadata:
 type: Opaque
 stringData:
   name: gke-prow-build
-  server: https://34.69.231.159
+  server: https://gke-8d7225b757872b0f06a6e02c3ea8b5713dc9-773781448124.us-central1.gke.goog
   config: |
     {
       "execProviderConfig": {
         "command": "argocd-k8s-auth",
         "args": ["gcp"],
         "apiVersion": "client.authentication.k8s.io/v1beta1"
-      },
-      "tlsClientConfig": {
-        "caData": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURDekNDQWZPZ0F3SUJBZ0lRYkZDSjRiaThKbmJscExDNjdpU3VVVEFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlSbVl6TmtZV1V5TmkwNE9EYzNMVFJrTXpNdFlUVmpPUzFqTVRZellXUXhORGMzWldRdwpIaGNOTWpBd05ETXdNakF6TVRRNVdoY05NalV3TkRJNU1qRXpNVFE1V2pBdk1TMHdLd1lEVlFRREV5Um1Zek5rCllXVXlOaTA0T0RjM0xUUmtNek10WVRWak9TMWpNVFl6WVdReE5EYzNaV1F3Z2dFaU1BMEdDU3FHU0liM0RRRUIKQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUNSNzFCclVDd1R0b0FUQkhUaGNjRlNyZm9BclBuYTNHMlNQREdnN0NEeQp3OThwVXdxZXU2cURIMDJlQjllR0piT0lNMm1reGE4UFlXZGNoVXhiVjNIN1J6UmFOSnlhTDBJSFNZOSsyOWxqCkdYK1NkN2lWRVkyaW84WjVOdjJwT0tEUkRueG9GRC9CWE5mRDB0Y1hDOTRaU1Y5RjZGTVdvR0N4d0Z6YVpPbC8KK0dmaUdRL2UzdFA5TVZsb2JTb2N3bngrK3ljNFo5MCsrdUZnUE5La0NIcC9FUlRmd3kzMzlCSjBxanFKbWpPVQp6NFhXTDNFOXI1TVRrV05IZTBZanNWb21FbWVwNUw4VjZTdnRUUXJxcENvSlQwUFNuUGR3YWxOWmFISktYM21yClhWSGlUU1pIVHlGZU9BYXNXeVphWElLanhMbUcyWXpDMGtoN3RQYU5aUjMzQWdNQkFBR2pJekFoTUE0R0ExVWQKRHdFQi93UUVBd0lDQkRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFCdgpRNVl0dVlWWkErUjJDQVVCbHY1dlVMMXpySEU2MytiSTBmQm5BYkR2QnpiUTJGQ1BDejhvUzBWTVREejRPallOCjg0VXdwUFdxd2FFR3Y4QTR1eVZXRWRYUndZemNpRXViampKVWlkUFg3VGtUUjVSVzB6NnZhaHV2d2Y0QzR5VWcKZllMcnl6dkx5c0FnL3BjUmU1R3RlbWdibzV0ZDB2NU1rZEo0QU9Hbi9VeVh5aGVqOTk3M2hySU81NkM5S3lZMwp0MkN6by9nM1MxTDIwaFBTWkQ0VXlSQm5DUDFPUGlPSjNnYURMSCs2MW55UGdKOVBFK0pyWnZ0NXlPczJzRGRuCmNucWRtcFNwdjMzVUZUdmw3YjRPaUMvQ2QzbktkV3psNkc5akFvZ1dwSElLNW95NmVCbnd3cjFZbnMra0VNUVIKRnUxTDJXYXBoWmp1aEk0YzQraWYKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==",
-        "insecure": false
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gke-prow-build-trusted
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: gke
+type: Opaque
+stringData:
+  name: gke-prow-build-trusted
+  server: https://gke-8f83dcb7a83817de24081addbc0b670b3dd4-180382678033.us-central1.gke.goog
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "args": ["gcp"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
       }
     }
 ---
