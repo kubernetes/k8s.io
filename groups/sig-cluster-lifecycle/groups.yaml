@@ -480,6 +480,23 @@ groups:
       - dlipovetsky@d2iq.com
       - neolit123@gmail.com
 
+  - email-id: sig-cluster-lifecycle-kubespray-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-kubespray-alerts
+    description: |-
+      Group for Kubespray maintainers to receive CI system notifications.
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_NONE"
+      ReconcileMembers: "true"
+    members:
+      - kay.yan@daocloud.io
+      - mg@max.gautier.name
+      - tico88612@gmail.com
+      - 2t.antoine@gmail.com
+
   #
   # k8s-infra gcs write access
   #

@@ -113,6 +113,7 @@ restrictions:
       - "^k8s-infra-staging-etcd-manager@kubernetes.io$"
       - "^k8s-infra-staging-kops@kubernetes.io$"
       - "^k8s-infra-staging-kubeadm@kubernetes.io$"
+      - "^sig-cluster-lifecycle-kubespray-alerts@kubernetes.io$"
       - "^k8s-infra-staging-scl-image-builder@kubernetes.io$"
       - "^sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io$"
   - path: "sig-contributor-experience/groups.yaml"
