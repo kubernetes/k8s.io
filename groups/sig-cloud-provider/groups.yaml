@@ -27,6 +27,7 @@ groups:
       - bridget@kromhout.org
       - msm@opbstudios.com
       - wfender@google.com
+      - jspeed@redhat.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
