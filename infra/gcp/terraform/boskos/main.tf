@@ -20,9 +20,16 @@ resource "google_folder" "boskos" {
 }
 
 locals {
-  boskos_projects = [
+  boskos_e2e_projects = [
     for i in range("001", "160") : format("k8s-infra-e2e-boskos-%03d", i)
   ]
+  boskos_scale_e2e_projects = [
+    for i in range("001", "30") : format("k8s-infra-e2e-boskos-scale-%02d", i)
+  ]
+  boskos_projects = concat(
+    local.boskos_e2e_projects,
+    local.boskos_scale_e2e_projects,
+  )
 }
 
 module "project" {
