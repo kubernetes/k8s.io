@@ -346,8 +346,25 @@ data:
         listen 80;
 
         location / {
-          rewrite ^/$                  https://github.com/kubernetes/kubernetes/releases redirect;
-          rewrite ^/([^/]*)(/.*)?$     https://github.com/kubernetes/kubernetes/tree/$1$2 redirect;
+          # Special case for versions up to v1.33 - redirect to bit.ly
+          if ($uri ~ "^/v([0-9])([0-9]+)/([a-zA-Z]+)$") {
+            set $major $1;
+            set $minor $2;
+            set $remaining $3;
+
+            # For versions <=1.33, redirect to bit.ly
+            if ($major = "1" && $minor <= "33") {
+              return 301 https://bit.ly/k8s$major$minor-$remaining;
+            }
+
+            # For versions >1.33, redirect to links.md in kubernetes/sig-release repo
+            return 301 https://github.com/kubernetes/sig-release/tree/master/releases/release-$major.$minor/links.md#$remaining;
+          }
+
+          rewrite ^/$                      https://github.com/kubernetes/kubernetes/releases redirect;
+          rewrite ^/k8s-release-cal        https://calendar.google.com/calendar/embed?src=kipmnllvl17vl9m98jen6ujcrs%40group.calendar.google.com redirect;
+          rewrite ^/k8s-sig-release-videos https://youtube.com/playlist?list=PL69nYSiGNLP3QKkOsDsO6A0Y1rhgP84iZ&si=Mi095CYuJuz8LjN- redirect;
+          rewrite ^/([^/]*)(/.*)?$         https://github.com/kubernetes/kubernetes/tree/$1$2 redirect;
         }
       }
 
