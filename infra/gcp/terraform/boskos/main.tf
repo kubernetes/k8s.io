@@ -20,9 +20,20 @@ resource "google_folder" "boskos" {
 }
 
 locals {
-  boskos_projects = [
+  boskos_e2e_projects = [
     for i in range("001", "160") : format("k8s-infra-e2e-boskos-%03d", i)
   ]
+  boskos_scale_e2e_projects = [
+    for i in range("01", "30") : format("k8s-infra-e2e-boskos-scale-%02d", i)
+  ]
+  boskos_gpu_e2e_projects = [
+    for i in range("01", "10") : format("k8s-infra-e2e-boskos-gpu-%02d", i)
+  ]
+  boskos_projects = concat(
+    local.boskos_e2e_projects,
+    local.boskos_scale_e2e_projects,
+    local.boskos_gpu_e2e_projects
+  )
 }
 
 module "project" {
@@ -100,6 +111,12 @@ import {
   for_each = toset(local.boskos_projects)
   to       = module.project[each.key].module.project-factory.google_project.main
   id       = each.value
+}
+
+import {
+  for_each = toset(local.boskos_projects)
+  to       = module.artifact_registry[each.key].google_artifact_registry_repository.repo
+  id       = "projects/${each.value}/locations/us/repositories/gcr.io"
 }
 
 import {
