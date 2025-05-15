@@ -46,4 +46,16 @@ module "folder_iam" {
     ]
   }
 
+  conditional_bindings = [
+    {
+      role        = "roles/admin" # Similar to Owner but can use IAM Conditions
+      title       = "admin-scale-projects-only"
+      description = "Admin access to scale boskos projects only"
+      expression  = "resource.name.startsWith(\"k8s-infra-e2e-boskos-scale\")"
+      members = [
+        "group:k8s-infra-sig-scalability-oncall@kubernetes.io",
+      ]
+    }
+  ]
+
 }
