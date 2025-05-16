@@ -344,6 +344,7 @@ infra:
       k8s-staging-external-dns:
       k8s-staging-gateway-api:
       k8s-staging-git-sync:
+      k8s-staging-headlamp:
       k8s-staging-infra-tools:
       k8s-staging-ingress-nginx:
       k8s-staging-ingressconformance:
