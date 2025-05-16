@@ -1,5 +1,6 @@
 - name: kwok
   dmap:
+    "sha256:2bb52d4cdd8b3e22e53ec86643a02ee84abdd8cec825269acdf7706d54c0ad6e": [ "v0.7.0" ]
     "sha256:aeb199bfba96b23482bb647f81a83884b134ff518d774ed4c3464b213501dc25": [ "v0.6.1" ]
     "sha256:09f45b82e6a9ffbb8071df49dde37de729a92ccaadec223099253077aed36e77": [ "v0.6.0" ]
     "sha256:b74dac7d77c82a1962f3ea7b73747e857da2c8f4023f80dc4b6a36f4f0eec67e": [ "v0.5.2" ]
@@ -15,6 +16,12 @@
     "sha256:8f03c71a0c4b20c7b2ba00a5864efb85dc8cec948d880b3f6cf0d653d037e383": [ "v0.0.1" ]
 - name: cluster
   dmap:
+    "sha256:c2cbb68659b0ece25694a0520415e24be09a617b70086971bc18e60b9f43c12f": [ "v0.7.0-k8s.v1.33.0" ]
+    "sha256:5ea0e0eb524fe81bd92379e1a03f927098d4caad6cb34ceebe38b03c724691e6": [ "v0.7.0-k8s.v1.32.3" ]
+    "sha256:b490e2055a09b52c5a507825ca04af4852ee647db1db20f832d87cd79ddc1e89": [ "v0.7.0-k8s.v1.31.6" ]
+    "sha256:a72be0ea07ec49f7bff5a7f4f2135b2d0ceaeffda0b163b47bc11fdeae4e86cf": [ "v0.7.0-k8s.v1.30.10" ]
+    "sha256:41c2e4d2c083043dbc1041d03372210947cc7660eae663f352c72fad8c0370a8": [ "v0.7.0-k8s.v1.29.14" ]
+    "sha256:737500503468f4c168e6d88d664b1aeff2e4ed341c10ca6e9eacbfbf045333dc": [ "v0.7.0-k8s.v1.28.15" ]
     "sha256:f17c2069278352197cac6d21fdea0f623e19d64bed31cf2276abe6a6fdccf3cc": [ "v0.6.1-k8s.v1.30.4" ]
     "sha256:5ec8e0f6fe60acb673fdab028c55b39b904686d8259bfc3ab8c8f03392871b47": [ "v0.6.1-k8s.v1.29.8" ]
     "sha256:90ef4fa472d5b64276c2d954d581a59c2bf7349dbdf7eab9a0c9f56e2c20b9e9": [ "v0.6.1-k8s.v1.28.13" ]
