@@ -35,8 +35,9 @@ Vanity URL(s)
 
 NOTE: please see k8s.io/k8s.io/configmap-nginx.yaml for `server` definitions
 
-Redirections
-====
+# Redirections
+
+## go.k8s.io Redirects
 - https://go.k8s.io/api-review
 - https://go.k8s.io/bot-commands
 - https://go.k8s.io/calendar
@@ -66,6 +67,33 @@ Redirections
     - https://go.k8s.io/contact/sig-contributor-experience
     - https://go.k8s.io/contact/wg-lts
     - https://go.k8s.io/contact/committee-steering
+
+## rel.k8s.io Redirects
+
+### Direct Redirects
+- https://rel.k8s.io/ → https://github.com/kubernetes/kubernetes/releases
+- https://rel.k8s.io/k8s-release-cal → https://calendar.google.com/calendar/embed?src=kipmnllvl17vl9m98jen6ujcrs%40group.calendar.google.com
+- https://rel.k8s.io/k8s-sig-release-videos → https://youtube.com/playlist?list=PL69nYSiGNLP3QKkOsDsO6A0Y1rhgP84iZ&si=Mi095CYuJuz8LjN-
+
+### Version-specific Redirects
+
+#### For versions ≤1.33:
+Historical version-specific URLs follow this pattern:
+- https://rel.k8s.io/v1XX/{keyword} → https://bit.ly/k8s1XX-{keyword}
+
+Examples include:
+- https://rel.k8s.io/v133/enhancements → https://bit.ly/k8s133-enhancements
+- https://rel.k8s.io/v133/bugtriage → https://bit.ly/k8s133-bugtriage
+- https://rel.k8s.io/v133/cisignal → https://bit.ly/k8s133-cisignal
+
+Other common patterns that have been moved to the direct bit.ly redirects:
+- https://rel.k8s.io/v1XX/releasemtg
+- https://rel.k8s.io/v1XX/retro
+- https://rel.k8s.io/v1XX/contacts (Note: Access is restricted through Google Authorization)
+
+#### For versions >1.33:
+For all release versions after v1.33, URLs follow this pattern:
+- https://rel.k8s.io/v1XX/{keyword} → https://github.com/kubernetes/sig-release/tree/master/releases/release-1.XX/links.md#{keyword}
 
 
 NOTE: please see configmap-nginx.yaml for rewrite rules.
