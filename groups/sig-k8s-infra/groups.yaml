@@ -551,3 +551,17 @@ groups:
       - atharvashinde179@gmail.com
       - ankita.swamy20@gmail.com
       - richmcase@gmail.com
+
+  - email-id: k8s-infra-gcp-gcve-admins@kubernetes.io
+    name: k8s-infra-gcp-gcve-admins
+    description: |-
+      ACL for Broadcom/vSphere project on GCP
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+      - christian.schlotter@broadcom.com
+      - fabrizio.pandini@broadcom.com
+      - sabari.murugesan@broadcom.com
+      - stefan.buringer@broadcom.com
