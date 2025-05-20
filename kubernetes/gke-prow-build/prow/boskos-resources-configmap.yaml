@@ -216,6 +216,49 @@ data:
       - k8s-infra-e2e-scale-5k-project
       state: dirty
       type: scalability-scale-project
+    - names:
+      - k8s-infra-e2e-gcp-gcve-project-001
+      - k8s-infra-e2e-gcp-gcve-project-002
+      - k8s-infra-e2e-gcp-gcve-project-003
+      - k8s-infra-e2e-gcp-gcve-project-004
+      - k8s-infra-e2e-gcp-gcve-project-005
+      - k8s-infra-e2e-gcp-gcve-project-006
+      - k8s-infra-e2e-gcp-gcve-project-007
+      - k8s-infra-e2e-gcp-gcve-project-008
+      - k8s-infra-e2e-gcp-gcve-project-009
+      - k8s-infra-e2e-gcp-gcve-project-010
+      - k8s-infra-e2e-gcp-gcve-project-011
+      - k8s-infra-e2e-gcp-gcve-project-012
+      - k8s-infra-e2e-gcp-gcve-project-013
+      - k8s-infra-e2e-gcp-gcve-project-014
+      - k8s-infra-e2e-gcp-gcve-project-015
+      - k8s-infra-e2e-gcp-gcve-project-016
+      - k8s-infra-e2e-gcp-gcve-project-017
+      - k8s-infra-e2e-gcp-gcve-project-018
+      - k8s-infra-e2e-gcp-gcve-project-019
+      - k8s-infra-e2e-gcp-gcve-project-020
+      - k8s-infra-e2e-gcp-gcve-project-021
+      - k8s-infra-e2e-gcp-gcve-project-022
+      - k8s-infra-e2e-gcp-gcve-project-023
+      - k8s-infra-e2e-gcp-gcve-project-024
+      - k8s-infra-e2e-gcp-gcve-project-025
+      - k8s-infra-e2e-gcp-gcve-project-026
+      - k8s-infra-e2e-gcp-gcve-project-027
+      - k8s-infra-e2e-gcp-gcve-project-028
+      - k8s-infra-e2e-gcp-gcve-project-029
+      - k8s-infra-e2e-gcp-gcve-project-030
+      - k8s-infra-e2e-gcp-gcve-project-031
+      - k8s-infra-e2e-gcp-gcve-project-032
+      - k8s-infra-e2e-gcp-gcve-project-033
+      - k8s-infra-e2e-gcp-gcve-project-034
+      - k8s-infra-e2e-gcp-gcve-project-035
+      - k8s-infra-e2e-gcp-gcve-project-036
+      - k8s-infra-e2e-gcp-gcve-project-037
+      - k8s-infra-e2e-gcp-gcve-project-038
+      - k8s-infra-e2e-gcp-gcve-project-039
+      - k8s-infra-e2e-gcp-gcve-project-040
+      state: dirty
+      type: gcve-vsphere-project
 kind: ConfigMap
 metadata:
   name: resources
