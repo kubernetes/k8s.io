@@ -73,5 +73,5 @@ variable "gcp_gcve_iam_group" {
 
 variable "gcp_gcve_nr_projects" {
   type    = number
-  default = 30
+  default = 40
 }
