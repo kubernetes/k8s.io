@@ -48,7 +48,7 @@ gcloud secrets describe k8s-gcp-gcve-ci-thumbprint 2>/dev/null || echo "$(govc a
 
 * `k8s-gcp-gcve-ci-username` with value `prow-ci-user@gve.local`
 * `k8s-gcp-gcve-ci-password` with value set above for `GCVE_PROW_CI_PASSWORD`
-* `k8s-gcp-gcve-ci-url` with value set above for `GOVC_SERVER`
+* `k8s-gcp-gcve-ci-url` with value set above for `GOVC_URL`
 
 > **Note:** Changing the GCVE CI user's password
 >
