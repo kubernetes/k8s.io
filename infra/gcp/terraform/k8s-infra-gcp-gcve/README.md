@@ -23,7 +23,7 @@ First we generate a password for the user which will be used in prow and set it 
  export GCVE_PROW_CI_PASSWORD="SomePassword"
 ```
 
-And set credentials for `govc` to work (Note: set `GOVC_URL` to the variable from to and create user + iam stuff in GCVE
+And set credentials for `govc`:
 
 ```sh
  export GOVC_URL="$(gcloud vmware private-clouds describe k8s-gcp-gcve-pc --location us-central1-a --format='get(vcenter.fqdn)')"
