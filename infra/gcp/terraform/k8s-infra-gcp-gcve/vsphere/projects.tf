@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 locals {
-  gcp_gcve_project_name = "gcp-gcve-project"
+  gcp_gcve_project_name = "k8s-infra-e2e-gcp-gcve-project"
 }
 
 # ## create global permissions to read cluster, datastore, host information etc.
