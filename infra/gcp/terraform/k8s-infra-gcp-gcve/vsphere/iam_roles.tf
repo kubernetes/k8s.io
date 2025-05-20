@@ -77,11 +77,12 @@ resource "vsphere_role" "vsphere-ci" {
   ]
 }
 
-# allows the janitor user to browse CNS.
-resource "vsphere_role" "cns-searchable" {
-  name = "cns-searchable"
+# allows the ci user to browse CNS and storage profiles.
+resource "vsphere_role" "vsphere-ci-readonly" {
+  name = "vsphere-ci-readonly"
   role_privileges = [
     "Cns.Searchable",
+    "StorageProfile.View"
   ]
 }
 

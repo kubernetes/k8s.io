@@ -68,7 +68,7 @@ variable "vsphere_network_name" {
 
 variable "gcp_gcve_iam_group" {
   type = string
-  default = "prow-ci-group"
+  default = "GVE.LOCAL\\prow-ci-group"
 }
 
 variable "gcp_gcve_nr_projects" {
