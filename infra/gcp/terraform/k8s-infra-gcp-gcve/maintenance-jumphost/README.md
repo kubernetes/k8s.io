@@ -18,7 +18,7 @@ export CLIENT_PRIVATE_KEY="$(wg genkey)"
 export CLIENT_PUBLIC_KEY="$(echo $CLIENT_PRIVATE_KEY | wg pubkey)"
 ```
 
-Next we have to pick an free IP address from the `192.168.29.0/24` subnet, which is not already in the server config file (see gcloud secret `maintenance-vm-wireguard-config`):
+Next we have to pick a free IP address from the `192.168.29.0/24` subnet, which is not already in the server config file (see gcloud secret `maintenance-vm-wireguard-config`):
 
 ```sh
 export CLIENT_IP_ADDRESS="192.168.29.X"

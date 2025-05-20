@@ -39,8 +39,6 @@ resource "google_compute_instance" "jumphost" {
     }
   }
 
-  # can_ip_forward = true
-
   metadata = {
     user-data = templatefile("${path.module}/cloud-config.yaml.tftpl", { wg0 = base64encode(data.google_secret_manager_secret_version_access.wireguard-config.secret_data) })
   }
