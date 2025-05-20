@@ -49,6 +49,9 @@ resource "google_vmwareengine_network_policy" "external-access-rule-np" {
   location = "us-central1"
   edge_services_cidr = "192.168.31.0/26"
   vmware_engine_network = google_vmwareengine_network.vsphere-network.id
+  internet_access {
+    enabled = true
+  }
 }
 
 resource "google_vmwareengine_network_peering" "prow_peering" {
