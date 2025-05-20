@@ -43,7 +43,7 @@ resource "nsxt_policy_segment" "k8s-ci" {
 
   subnet {
     cidr        = "192.168.32.1/21"
-    dhcp_ranges = ["192.168.32.10-192.168.32.255"]
+    dhcp_ranges = ["192.168.32.10-192.168.33.255"]
 
     dhcp_v4_config {
       server_address = "192.168.32.2/21"
