@@ -22,42 +22,19 @@ limitations under the License.
 # Permissions will later be granted on lower placed resource pools.
 ## /<datacenter>/host/<cluster>/Resources/prow
 
-resource "vsphere_entity_permissions" "permissions_prow_resource_pool" {
-  entity_id   = vsphere_resource_pool.prow.id
-  entity_type = "ResourcePool"
-  permissions {
-    user_or_group = var.gcp_gcve_iam_group
-    propagate     = true
-    is_group      = true
-    role_id       = vsphere_role.vsphere-ci.id
-  }
-}
-
-
-resource "vsphere_entity_permissions" "permissions_prow_folder" {
-  entity_id   = vsphere_folder.prow.id
-  entity_type = "Folder"
-  permissions {
-    user_or_group = var.gcp_gcve_iam_group
-    propagate     = true
-    is_group      = true
-    role_id       = vsphere_role.vsphere-ci.id
-  }
-}
-
 # Grant access on the network.
 ## /<datacenter>/network/<network>
 
-# resource "vsphere_entity_permissions" "permissions_network" {
-#   entity_id   = data.vsphere_network.network.id
-#   entity_type = "Network"
-#   permissions {
-#     user_or_group = var.gcp_gcve_iam_group
-#     propagate     = true
-#     is_group      = true
-#     role_id       = vsphere_role.vsphere-ci.id
-#   }
-# }
+resource "vsphere_entity_permissions" "permissions_network" {
+  entity_id   = data.vsphere_network.network.id
+  entity_type = "Network"
+  permissions {
+    user_or_group = var.gcp_gcve_iam_group
+    propagate     = true
+    is_group      = true
+    role_id       = vsphere_role.vsphere-ci.id
+  }
+}
 
 # TODO(chrischdi): we propably also have to add ReadOnly to the /<datacenter>/network/<hostswitch>
 
@@ -72,6 +49,6 @@ resource "vsphere_entity_permissions" "permissions_templates_directory" {
     user_or_group = var.gcp_gcve_iam_group
     propagate     = true
     is_group      = true
-    role_id       = vsphere_role.vsphere-ci.id
+    role_id       = vsphere_role.templates-ci.id
   }
 }

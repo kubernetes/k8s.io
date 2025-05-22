@@ -23,11 +23,5 @@ govc sso.user.ls | grep -q -e "${GCVE_PROW_CI_USERNAME}" || (govc sso.user.creat
 # create groups
 govc sso.group.ls -search "${GCVE_PROW_CI_GROUP}" || (govc sso.group.create "${GCVE_PROW_CI_GROUP}" && echo "Group ${GCVE_PROW_CI_GROUP} created")
 
-# add users to their groups
+# add user to the group
 govc sso.user.ls -group "${GCVE_PROW_CI_GROUP}" | grep -q "${GCVE_PROW_CI_USERNAME}" || (govc sso.group.update -a "${GCVE_PROW_CI_USERNAME}" "${GCVE_PROW_CI_GROUP}" && echo "Added user ${GCVE_PROW_CI_USERNAME} to group ${GCVE_PROW_CI_GROUP}")
-
-# add group to pre-existing group RegistryAdministrators to allow access to content libraries
-govc sso.group.ls "RegistryAdministrators" | grep -q "${GCVE_PROW_CI_GROUP}" || (govc sso.group.update -g -a "${GCVE_PROW_CI_GROUP}" "RegistryAdministrators" && echo "Added group ${GCVE_PROW_CI_GROUP} to group RegistryAdministrators")
-
-# set some global permissions which can't be done using terraform due to the following bug:
-# https://github.com/vmware/terraform-provider-vsphere/issues/2078

@@ -65,10 +65,14 @@ gcloud secrets describe k8s-gcp-gcve-ci-thumbprint 2>/dev/null || echo "$(govc a
  export TF_VAR_nsxt_user=admin
  export TF_VAR_nsxt_password="$(gcloud vmware private-clouds nsx credentials describe --private-cloud k8s-gcp-gcve-pc --location us-central1-a --format='get(password)')"
  export TF_VAR_nsxt_server="$(gcloud vmware private-clouds describe k8s-gcp-gcve-pc --location us-central1-a --format='get(nsx.fqdn)')"
+ export GOVC_URL="${TF_VAR_vsphere_server}"
+ export GOVC_USERNAME="${TF_VAR_vsphere_user}"
+ export GOVC_PASSWORD="${TF_VAR_vsphere_password}"
 ```
 
 ```sh
 cd vsphere
 terraform init
 terraform apply
+./scripts/ensure-users-permissions.sh
 ```
