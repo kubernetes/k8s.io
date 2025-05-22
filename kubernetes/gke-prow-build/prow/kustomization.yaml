@@ -3,11 +3,12 @@ kind: Kustomization
 namespace: test-pods
 
 resources:
-- boskos-janitor.yaml
-- boskos-reaper.yaml
-- boskos-resources-configmap.yaml
-- boskos.yaml
-- build-serviceaccounts.yaml
-- limit-range.yaml
-- monitoring.yaml
-- test-pods-poddisruptionbudget.yaml
+  - boskos-janitor.yaml
+  - boskos-reaper.yaml
+  - boskos-resources-configmap.yaml
+  - boskos.yaml
+  - build-serviceaccounts.yaml
+  - externalsecrets.yaml
+  - limit-range.yaml
+  - monitoring.yaml
+  - test-pods-poddisruptionbudget.yaml
