@@ -14,24 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required provider versions
-- Storage backend details
-*/
+module "iam" {
+  source  = "terraform-google-modules/iam/google//modules/projects_iam"
+  version = "~> 8.1"
 
-terraform {
-  required_version = "1.10.5"
-  backend "gcs" {
-    bucket = "k8s-infra-tf-gcp-gcve"
-    prefix = "k8s-infra-gcp-gcve"
-  }
+  projects = [var.project_id]
 
+  mode = "authoritative"
 
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 6.34.1"
-    }
+  bindings = {
+    "roles/admin" = [
+      "group:sig-k8s-infra-leads@kubernetes.io",
+      "group:k8s-infra-gcp-gcve-admins@kubernetes.io",
+      "serviceAccount:atlantis@k8s-infra-seed.iam.gserviceaccount.com",
+    ]
+    "roles/secretmanager.secretAccessor" = [
+      "serviceAccount:k8s-infra-prow-build.svc.id.goog[external-secrets/external-secrets]"
+    ]
   }
 }

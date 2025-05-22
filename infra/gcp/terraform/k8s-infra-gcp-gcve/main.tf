@@ -19,7 +19,7 @@ locals {
 }
 
 data "google_project" "project" {
-  project_id      = local.project_id
+  project_id = local.project_id
 }
 
 resource "google_project_service" "project" {
@@ -33,18 +33,3 @@ resource "google_project_service" "project" {
 
   service = each.key
 }
-
-// Ensure sig-k8s-infra-leads@kubernetes.io has admin access to this project
-resource "google_project_iam_member" "k8s_infra_leads" {
-  project = data.google_project.project.id
-  role    = "roles/admin"
-  member  = "group:sig-k8s-infra-leads@kubernetes.io"
-}
-
-# TODO(chrischdi): we first need the group
-# // Ensure k8s-infra-gcp-gcve-admins@kubernetes.io has owner access to this project
-# resource "google_project_iam_member" "k8s_infra_vsphere" {
-#   project = data.google_project.project.id
-#   role    = "roles/owner"
-#   member  = "group:k8s-infra-gcp-gcve-admins@kubernetes.io"
-# }
