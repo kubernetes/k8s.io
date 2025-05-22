@@ -23,7 +23,7 @@ module "iam" {
   mode = "authoritative"
 
   bindings = {
-    "roles/owner" = [
+    "roles/admin" = [
       "group:sig-k8s-infra-leads@kubernetes.io",
       "group:k8s-infra-gcp-gcve-admins@kubernetes.io",
       "serviceAccount:atlantis@k8s-infra-seed.iam.gserviceaccount.com",
