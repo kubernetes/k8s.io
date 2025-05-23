@@ -263,6 +263,7 @@ restrictions:
     allowedGroups:
       - "^sig-ui@kubernetes.io$"
       - "^sig-ui-leads@kubernetes.io$"
+      - "^k8s-infra-staging-headlamp@kubernetes.io$"
   - path: "sig-windows/groups.yaml"
     allowedGroups:
       - "^sig-windows@kubernetes.io$"

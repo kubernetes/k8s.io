@@ -34,3 +34,14 @@ teams:
       WhoCanModerateContent: "OWNERS_AND_MANAGERS"
       MembersCanPostAsTheGroup: "false"
       ReconcileMembers: "false"
+
+  - email-id: k8s-infra-staging-headlamp@kubernetes.io
+    name: k8s-infra-staging-headlamp
+    description: |-
+      ACL for staging Headlamp
+    members:
+      - me@joaquimrocha.com
+      - renesd@gmail.com
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
