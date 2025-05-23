@@ -15,22 +15,20 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - amim.knabben@gmail.com
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
-      - jsturtevant@gmail.com
       - marosset@microsoft.com
+      - zhang.yuanliang@hotmail.com
 
   - email-id: sig-windows@kubernetes.io
     name: sig-windows
     description: |-
       SIG windows general discussion group
     owners:
-      - amim.knabben@gmail.com
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
-      - jsturtevant@gmail.com
       - marosset@microsoft.com
+      - zhang.yuanliang@hotmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -65,8 +63,7 @@ groups:
     members:
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
-      - jayunit100.apache@gmail.com
-      - jsturtevant@gmail.com
+      - zhang.yuanliang@hotmail.com
       - marosset@microsoft.com
 
   - email-id: k8s-infra-staging-win-op-rdnss@kubernetes.io
@@ -78,9 +75,8 @@ groups:
     members:
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
-      - jayunit100.apache@gmail.com
-      - jsturtevant@gmail.com
       - marosset@microsoft.com
+      - zhang.yuanliang@hotmail.com
 
   - email-id: k8s-infra-staging-win-svc-proxy@kubernetes.io
     name: k8s-infra-staging-win-svc-proxy
@@ -90,10 +86,8 @@ groups:
       ReconcileMembers: "true"
     members:
       - aravindh.foss@pm.me
-      - aknabben@vmware.com
-      - jayunit100.apache@gmail.com
-      - jsturtevant@gmail.com
       - marosset@microsoft.com
+      - zhang.yuanliang@hotmail.com
 
   #
   # k8s-infra owners for sig-owned subprojects
