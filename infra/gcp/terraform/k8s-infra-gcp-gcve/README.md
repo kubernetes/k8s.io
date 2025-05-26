@@ -76,3 +76,12 @@ terraform init
 terraform apply
 ./scripts/ensure-users-permissions.sh
 ```
+
+## Initialize Boskos resources with project information
+
+The script [boskos-userdata.sh](vsphere/scripts/boskos-userdata.sh) calculates and initializes the Boskos resources required for the project.
+
+```sh
+BOSKOS_HOST=""
+vsphere/scripts/boskos-userdata.sh
+```
