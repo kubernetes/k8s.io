@@ -95,8 +95,8 @@ module "prow_build_nodepool_n1_highmem_8_localssd" {
   ]
   name                      = "pool5"
   initial_count             = 1
-  min_count                 = 1
-  max_count                 = 80
+  min_count                 = 0
+  max_count                 = 0
   image_type                = "UBUNTU_CONTAINERD"
   machine_type              = "n1-highmem-8"
   disk_size_gb              = 100
@@ -123,7 +123,6 @@ module "prow_build_nodepool_c4_highmem_8_localssd" {
   disk_size_gb    = 500
   disk_type       = "hyperdisk-balanced"
   service_account = module.prow_build_cluster.cluster_node_sa.email
-  taints          = [{ key = "dedicated", value = "sig-testing", effect = "NO_SCHEDULE" }]
 }
 
 
