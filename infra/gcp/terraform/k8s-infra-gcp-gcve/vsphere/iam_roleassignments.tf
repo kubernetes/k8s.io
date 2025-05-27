@@ -14,17 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-# Grant read-only access to the datacenter.
-# Permissions will later be granted on lower placed resource pools.
-## /<datacenter>
-
-# Deny access recursively to the prow resource pool to restrict the above recursive read-only rule.
-# Permissions will later be granted on lower placed resource pools.
-## /<datacenter>/host/<cluster>/Resources/prow
 
 # Grant access on the network.
 ## /<datacenter>/network/<network>
-
 resource "vsphere_entity_permissions" "permissions_network" {
   entity_id   = data.vsphere_network.network.id
   entity_type = "Network"
@@ -36,12 +28,8 @@ resource "vsphere_entity_permissions" "permissions_network" {
   }
 }
 
-# TODO(chrischdi): we propably also have to add ReadOnly to the /<datacenter>/network/<hostswitch>
-
-
 # Grant read-only access to the templates vm directory.
 ## /<datacenter>/vm/prow/templates
-
 resource "vsphere_entity_permissions" "permissions_templates_directory" {
   entity_id   = vsphere_folder.templates.id
   entity_type = "ClusterComputeResource"

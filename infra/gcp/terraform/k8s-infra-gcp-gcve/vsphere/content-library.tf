@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# Create the content library used for testing with CAPV.
 resource "vsphere_content_library" "capv" {
   name            = "capv"
   description     = "Content Library for CAPV."

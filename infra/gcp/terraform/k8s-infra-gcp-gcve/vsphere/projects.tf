@@ -18,7 +18,7 @@ locals {
   gcp_gcve_project_name = "k8s-infra-e2e-gcp-gcve-project"
 }
 
-## create the projects (resource pool, folder, assign permissions per resource pool and folder)
+## Create the projects (resource pool, folder, assign permissions per resource pool and folder)
 module "gcp-gcve-projects" {
   source = "./modules/gcp-gcve-project"
 

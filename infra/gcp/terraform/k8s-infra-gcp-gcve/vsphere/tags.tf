@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// Adds tags required for failure domain tests
+# Adds tag categories required for failure domain testing to vSphere.
 
 resource "vsphere_tag_category" "category_k8s_region" {
   name        = "k8s-region"
@@ -36,6 +36,7 @@ resource "vsphere_tag_category" "category_k8s_zone" {
   ]
 }
 
+# Adds one tag per above category required for failure domain testing to vSphere.
 resource "vsphere_tag" "tag_k8s_region" {
   name        = var.vsphere_datacenter
   category_id = "${vsphere_tag_category.category_k8s_region.id}"

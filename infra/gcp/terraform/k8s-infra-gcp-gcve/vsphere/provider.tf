@@ -42,12 +42,14 @@ terraform {
   }
 }
 
+# Setup credentials to vSphere.
 provider "vsphere" {
   user                 = var.vsphere_user
   password             = var.vsphere_password
   vsphere_server       = var.vsphere_server
 }
 
+# Setup credentials to NSX-T.
 provider "nsxt" {
   host                 = var.nsxt_server
   username             = var.nsxt_user

@@ -14,12 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# Creates the folder prow for hosting all CI workload.
 resource "vsphere_folder" "prow" {
   path          = "prow"
   type          = "vm"
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
+# Creates the folder prow/templates for hosting VM Templates.
 resource "vsphere_folder" "templates" {
   path          = "${vsphere_folder.prow.path}/templates"
   type          = "vm"
