@@ -18,7 +18,7 @@
 # Usable Host IP Range:	192.168.32.1 - 192.168.39.254:
 # DHCP Range: 192.168.32.10 - 192.168.33.255
 # Used IPPool for 40 Projects having 16 IPs each: 192.168.35.0 - 192.168.37.127
-function printProjectUserData() {
+function initBoskosResourceUserData() {
   NR="${1}"
 
   IPS_PER_PROJECT=16
@@ -37,12 +37,24 @@ function printProjectUserData() {
   START="192.168.$(( RANGE_START + S1 )).${S2}"
   END="192.168.$(( RANGE_START + E1 )).${E2}"
 
-  printf "k8s-infra-e2e-gcp-gcve-project-%03d:\n" "${NR}"
-  printf "  folder: /Datacenter/vm/prow/k8s-infra-e2e-gcp-gcve-project-%03d\n" "${NR}"
-  printf "  resourcePool: /Datacenter/host/k8s-gcve-cluster/Resources/prow/k8s-infra-e2e-gcp-gcve-project-%03d\n" "${NR}"
-  printf "  ipPool: '{\\\"addresses\\\":[\\\"%s-%s\\\"],\\\"gateway\\\":\\\"192.168.32.1\\\",\\\"prefix\\\":21}'\n" "${START}" "${END}"
+  resourceName=$(printf "k8s-infra-e2e-gcp-gcve-project-%03d" "${NR}")
+
+  folder=$(printf "/Datacenter/vm/prow/k8s-infra-e2e-gcp-gcve-project-%03d" "${NR}")
+  resourcePool=$(printf "/Datacenter/host/k8s-gcve-cluster/Resources/prow/k8s-infra-e2e-gcp-gcve-project-%03d" "${NR}")
+  # shellcheck disable=SC2089
+  ipPool="{\\\"addresses\\\":[\\\"${START}-${END}\\\"],\\\"gateway\\\":\\\"192.168.32.1\\\",\\\"prefix\\\":21}"
+
+  # acquire from "dirty" or "free" state
+  curl -s -X POST "${BOSKOS_HOST}/acquirebystate?names=${resourceName}&state=dirty&dest=busy&owner=$(whoami)" | grep -q "${resourceName}" \
+    || curl -s -X POST "${BOSKOS_HOST}/acquirebystate?names=${resourceName}&state=free&dest=busy&owner=$(whoami)" | grep -q "${resourceName}" \
+    || echo "Failed to acquire ${resourceName}"
+  # update
+  # shellcheck disable=SC2089
+  curl -s -X POST -d '{"ipPool":"'"${ipPool}"'","resourcePool":"'"${resourcePool}"'","folder":"'"${folder}"'"}' "${BOSKOS_HOST}/update?name=${resourceName}&state=busy&owner=$(whoami)"
+  # release as "dirty", janitor should bring it to "free"
+  curl -s -X POST "${BOSKOS_HOST}/release?name=${resourceName}&dest=dirty&owner=$(whoami)" 
 }
 
 for i in {1..40}; do
-  printProjectUserData "${i}"
+  initBoskosResourceUserData "${i}"
 done
