@@ -14,14 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-locals {
-  project_id = "broadcom-451918"
-}
-
 data "google_project" "project" {
-  project_id = local.project_id
+  project_id = var.project_id
 }
 
+# Enables all required APIs for this project.
 resource "google_project_service" "project" {
   project = data.google_project.project.id
 

@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# Data resources which exist after creating the VMware Engine Private Cloud.
 data "nsxt_policy_tier1_gateway" "tier1_gw" {
   display_name = "Tier1"
 }
@@ -26,6 +27,7 @@ data "nsxt_policy_edge_cluster" "edge_cluster" {
   display_name = "edge-cluster"
 }
 
+# Create a DHCP Server for the workload network.
 resource "nsxt_policy_dhcp_server" "k8s-ci-dhcp" {
   display_name      = "k8s-ci-dhcp"
   description       = "Terraform provisioned DhcpServerConfig"
@@ -34,7 +36,7 @@ resource "nsxt_policy_dhcp_server" "k8s-ci-dhcp" {
   server_addresses  = ["192.168.32.10/21"]
 }
 
-
+# Create the subnet for hosting the VM workload network.
 resource "nsxt_policy_segment" "k8s-ci" {
   display_name      = "k8s-ci"
   connectivity_path = data.nsxt_policy_tier1_gateway.tier1_gw.path
@@ -43,7 +45,10 @@ resource "nsxt_policy_segment" "k8s-ci" {
 
   subnet {
     cidr        = "192.168.32.1/21"
-    dhcp_ranges = ["192.168.32.10-192.168.33.255"]
+    # This is the DHCP range used for created VMs.
+    # The IP range 192.168.35.0 - 192.168.37.127 is used for VIPs (e.g. via kube-vip)
+    # and is assigned to boskos projects.
+    dhcp_ranges = ["192.168.32.11-192.168.33.255"]
 
     dhcp_v4_config {
       server_address = "192.168.32.2/21"

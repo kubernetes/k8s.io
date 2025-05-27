@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# Permission roles required for the CI user.
+# Assignment of the roles is done via iam_roleassignments.tf, projects.tf
+# and manually via `scripts/ensure-users-permissions.sh`.
+
+# Allows the ci user to e.g. create VMs, Resource Pools, Folders, ... during tests.
 resource "vsphere_role" "vsphere-ci" {
   name = "vsphere-ci"
   role_privileges = [
