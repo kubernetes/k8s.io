@@ -25,6 +25,9 @@ govc permissions.ls / | grep ${GCVE_PROW_CI_GROUP} | grep -q vsphere-ci-readonly
 # Enable searching for VM's and top-level read permissions.
 govc permissions.ls /Datacenter | grep ${GCVE_PROW_CI_GROUP} | grep -q ReadOnly || (govc permissions.set -propagate=false -group -principal GVE.LOCAL\\${GCVE_PROW_CI_GROUP} -role ReadOnly /Datacenter && echo "Added permissions for ${GCVE_PROW_CI_GROUP} as ReadOnly to /Datacenter")
 
+# Enable searching for ComputeCluster
+govc permissions.ls /Datacenter/host/k8s-gcve-cluster | grep ${GCVE_PROW_CI_GROUP} | grep -q ReadOnly || (govc permissions.set -propagate=false -group -principal GVE.LOCAL\\${GCVE_PROW_CI_GROUP} -role ReadOnly /Datacenter/host/k8s-gcve-cluster && echo "Added permissions for ${GCVE_PROW_CI_GROUP} as ReadOnly to /Datacenter/host/k8s-gcve-cluster")
+
 # Enable read for DistributedVirtualSwitch
 govc permissions.ls /Datacenter/network/Datacenter-dvs | grep ${GCVE_PROW_CI_GROUP} | grep -q ReadOnly || (govc permissions.set -propagate=false -group -principal GVE.LOCAL\\${GCVE_PROW_CI_GROUP} -role ReadOnly /Datacenter/network/Datacenter-dvs && echo "Added permissions for ${GCVE_PROW_CI_GROUP} as ReadOnly to /Datacenter/network/Datacenter-dvs")
 
@@ -33,3 +36,7 @@ govc permissions.ls /Datacenter/datastore/vsanDatastore | grep ${GCVE_PROW_CI_GR
 
 # Allow access to content libraries
 govc sso.group.ls "RegistryAdministrators" | grep -q "${GCVE_PROW_CI_GROUP}" || (govc sso.group.update -g -a "${GCVE_PROW_CI_GROUP}" "RegistryAdministrators" && echo "Added group ${GCVE_PROW_CI_GROUP} to group RegistryAdministrators")
+
+# Add tags for failure domain testing
+govc tags.attached.ls -l Datacenter | grep -q Datacenter || (govc tags.attach -c k8s-region Datacenter /Datacenter && echo "Added tag Datacenter of category k8s-region to Datacenter")
+govc tags.attached.ls -l k8s-gcve-cluster | grep -q k8s-gcve-cluster || (govc tags.attach -c k8s-zone k8s-gcve-cluster /Datacenter/host/k8s-gcve-cluster && echo "Added tag k8s-gcve-cluster of category k8s-zone to k8s-gcve-cluster")
