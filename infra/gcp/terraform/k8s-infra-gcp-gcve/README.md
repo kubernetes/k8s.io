@@ -1,87 +1,39 @@
-# Setup
+# Overview
 
-## Creation of GCVE
+The code in `k8s-infra-gcp-gcve` sets up the infra required to allow prow jobs to create VMs on vSphere, e.g. to allow testing  of the [Cluster API provider vSphere (CAPV)](https://github.com/kubernetes-sigs/cluster-api-provider-vsphere).
 
-```sh
-gcloud auth application-default login
-terraform init
-terraform apply
-```
+![Overview](./docs/images/overview.jpg)
 
-## Setup jumphost/vpn for further configuration
+Prow container settings are managed outside of this folder, but understanding high level components could
+help to understand how the `k8s-infra-gcp-gcve` is set up and consumed.
 
-See [maintenance-jumphost/README.md](./maintenance-jumphost/README.md).
+More specifically, to allow prow jobs to create VM on vSphere, a few resources are made available to a prow container, so as of today only in the `k8s-infra-prow-build` prow cluster.
 
-## Manual creation of a user and other IAM configuration in vSphere
+- A secret, added via the `preset-gcve-e2e-config` [preset](https://github.com/kubernetes/test-infra/blob/master/config/jobs/kubernetes-sigs/cluster-api-provider-vsphere/cluster-api-provider-vsphere-presets.yaml), that provides vSphere URL and vSphere credentials
+- A set of Boskos resources of type `gcve-vsphere-project`, allowing access to:
+    - a vSphere folder and a vSphere resources pool where to run VMs during a test.
+    - a reserved IP range to be used for the test e.g. for the kube vip load balancer in a CAPV cluster (VM instead will get IPs via DHCP).
 
-> **Note:**
-> The configuration described here cannot be done via terraform due to non-existing functionality.
+Also, the network of the prow container is going to be paired to the VMware engine network, thus
+allowing access to both the GCVE management network and the NSX-T network where all the VM are running.
 
-First we generate a password for the user which will be used in prow and set it as environment variable:
+The `k8s-infra-gcp-gcve` project sets up the infrastructure that actually runs the VMs created from the prow container. There are ther main components of this infrastracture:
 
-```sh
- export GCVE_PROW_CI_PASSWORD="SomePassword"
-```
+The terraform manifest in this folder, which is applied by test-infra automation (Atlantis), uses the GCP terraform provider for creating.
+- A VMware Engine instance
+- The network infrastructure required for vSphere and for allowing communication between vSphere and Prow container.
+    -  The network used is `192.168.0.32/21`
+        - Usable Host IP Range:	`192.168.32.1 - 192.168.39.254`
+            - DHCP Range: `192.168.32.11 - 192.168.33.255`
+            - IPPool for 40 Projects having 16 IPs each: `192.168.35.0 - 192.168.37.127`
+- The network infrastructure used for maintenance.
 
-And set credentials for `govc`:
+See inline comments for more details.
 
-```sh
- export GOVC_URL="$(gcloud vmware private-clouds describe k8s-gcp-gcve-pc --location us-central1-a --format='get(vcenter.fqdn)')"
- export GOVC_USERNAME='solution-user-01@gve.local'
- export GOVC_PASSWORD="$(gcloud vmware private-clouds vcenter credentials describe --private-cloud=k8s-gcp-gcve-pc --username=solution-user-01@gve.local --location=us-central1-a --format='get(password)')"
-```
+The terraform manifest in the `/maintenance-jumphost` uses the GCP terraform provider to setup a jumphost VM to be used to set up vSphere or for maintenance pourposes. See
+- [maintenance-jumphost](./maintenance-jumphost/README.md)
 
-Run the script to setup the user, groups and IAM in vSphere.
+The terraform manifest in the `/vsphere` folder uses the vSphere and the NSX terraform providers to setup e.g. content libraries, templetes, folders, 
+resource pools and other vSphere components required when running tests. See:
+- [vsphere](./vsphere/README.md) 
 
-```
-./vsphere/scripts/ensure-users-groups.sh
-```
-
-Create relevant secrets in Secrets Manager
-
-```sh
-gcloud secrets describe k8s-gcp-gcve-ci-url 2>/dev/null || echo "$GOVC_URL" | gcloud secrets create k8s-gcp-gcve-ci-url --data-file=-
-gcloud secrets describe k8s-gcp-gcve-ci-username 2>/dev/null || echo "prow-ci-user@gve.local" | gcloud secrets create k8s-gcp-gcve-ci-username --data-file=-
-gcloud secrets describe k8s-gcp-gcve-ci-password 2>/dev/null || echo "${GCVE_PROW_CI_PASSWORD}" | gcloud secrets create k8s-gcp-gcve-ci-password --data-file=-
-gcloud secrets describe k8s-gcp-gcve-ci-thumbprint 2>/dev/null || echo "$(govc about.cert -json | jq -r '.thumbprintSHA256')" | gcloud secrets create k8s-gcp-gcve-ci-thumbprint --data-file=-
-```
-
-* `k8s-gcp-gcve-ci-username` with value `prow-ci-user@gve.local`
-* `k8s-gcp-gcve-ci-password` with value set above for `GCVE_PROW_CI_PASSWORD`
-* `k8s-gcp-gcve-ci-url` with value set above for `GOVC_URL`
-
-> **Note:** Changing the GCVE CI user's password
->
-> 1. Set GOVC credentials as above.
-> 2. Run govc command to update password: `govc sso.user.update -p "${GCVE_PROW_CI_PASSWORD}" prow-ci-user`
-> 3. Update secret `k8s-gcp-gcve-ci-password` in secrets-manager: `echo "${GCVE_PROW_CI_PASSWORD}" | gcloud secrets versions add k8s-gcp-gcve-ci-password --data-file=-`
-
-## Configuration of GCVE
-
-```sh
- export TF_VAR_vsphere_user=solution-user-01@gve.local
- export TF_VAR_vsphere_password="$(gcloud vmware private-clouds vcenter credentials describe --private-cloud=k8s-gcp-gcve-pc --username=solution-user-01@gve.local --location=us-central1-a --format='get(password)')" # gcloud command
- export TF_VAR_vsphere_server="$(gcloud vmware private-clouds describe k8s-gcp-gcve-pc --location us-central1-a --format='get(vcenter.fqdn)')"
- export TF_VAR_nsxt_user=admin
- export TF_VAR_nsxt_password="$(gcloud vmware private-clouds nsx credentials describe --private-cloud k8s-gcp-gcve-pc --location us-central1-a --format='get(password)')"
- export TF_VAR_nsxt_server="$(gcloud vmware private-clouds describe k8s-gcp-gcve-pc --location us-central1-a --format='get(nsx.fqdn)')"
- export GOVC_URL="${TF_VAR_vsphere_server}"
- export GOVC_USERNAME="${TF_VAR_vsphere_user}"
- export GOVC_PASSWORD="${TF_VAR_vsphere_password}"
-```
-
-```sh
-cd vsphere
-terraform init
-terraform apply
-./scripts/ensure-users-permissions.sh
-```
-
-## Initialize Boskos resources with project information
-
-The script [boskos-userdata.sh](vsphere/scripts/boskos-userdata.sh) calculates and initializes the Boskos resources required for the project.
-
-```sh
-BOSKOS_HOST=""
-vsphere/scripts/boskos-userdata.sh
-```
