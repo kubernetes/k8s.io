@@ -94,7 +94,7 @@ module "prow_build_nodepool_n1_highmem_8_localssd" {
     "us-central1-f",
   ]
   name                      = "pool5"
-  initial_count             = 1
+  initial_count             = 0
   min_count                 = 0
   max_count                 = 0
   image_type                = "UBUNTU_CONTAINERD"
@@ -121,6 +121,26 @@ module "prow_build_nodepool_c4_highmem_8_localssd" {
   max_count       = 80
   machine_type    = "c4-highmem-8"
   disk_size_gb    = 500
+  disk_type       = "hyperdisk-balanced"
+  service_account = module.prow_build_cluster.cluster_node_sa.email
+}
+
+module "prow_build_nodepool_c4d_highmem_8_localssd" {
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  node_locations = [
+    "us-central1-a",
+    "us-central1-b",
+    "us-central1-c",
+  ]
+  name            = "pool7"
+  initial_count   = 1
+  min_count       = 1
+  max_count       = 80
+  machine_type    = "c4d-highmem-8-lssd" # has 2 local ssd disks attached
+  disk_size_gb    = 100
   disk_type       = "hyperdisk-balanced"
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }
@@ -165,7 +185,7 @@ module "sig_node_node_pool_1_n4_highmem_8" {
   taints = { dedicated = { value = "sig-node", effect = "NO_SCHEDULE" } }
 }
 
-module "prow_build_nodepool_t2a_standard_8" {
+module "prow_build_nodepool_c4a_highmem_8_localssd" {
   source       = "../modules/gke-nodepool"
   project_name = module.project.project_id
   cluster_name = module.prow_build_cluster.cluster.name
@@ -173,17 +193,17 @@ module "prow_build_nodepool_t2a_standard_8" {
   node_locations = [
     "us-central1-a",
     "us-central1-b",
+    "us-central1-c",
   ]
-  name          = "pool6-arm64"
+  name          = "pool7-arm64"
   initial_count = 1
   min_count     = 1
   max_count     = 10
   image_type    = "UBUNTU_CONTAINERD"
-  machine_type  = "t2a-standard-8"
-  disk_size_gb  = 500
-  disk_type     = "pd-ssd"
+  machine_type  = "c4a-highmem-8-lssd" # has 2 local ssd disks attached
+  disk_size_gb  = 100
+  disk_type     = "hyperdisk-balanced"
   // GKE automatically taints arm64 nodes
   // https://cloud.google.com/kubernetes-engine/docs/how-to/prepare-arm-workloads-for-deployment#overview
-  # ephemeral_local_ssd_count = 2 # each is 375GB
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }

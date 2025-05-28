@@ -81,6 +81,7 @@ resource "google_container_node_pool" "node_pool" {
     # https://www.terraform.io/docs/providers/google/r/container_cluster.html#taint
     ignore_changes = [
       node_config[0].taint,
+      node_config[0].ephemeral_storage_local_ssd_config, # https://github.com/hashicorp/terraform-provider-google/issues/17068
     ]
   }
 }
