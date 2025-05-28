@@ -39,13 +39,13 @@ resource "vsphere_tag_category" "category_k8s_zone" {
 # Creates the Datacenter tag for the k8s-region tag category for failure domain testing.
 resource "vsphere_tag" "tag_k8s_region" {
   name        = var.vsphere_datacenter
-  category_id = "${vsphere_tag_category.category_k8s_region.id}"
+  category_id = vsphere_tag_category.category_k8s_region.id
   description = "Managed by Terraform"
 }
 
 # Creates the Compute Cluster tag for the k8s-zone tag category for failure domain testing.
 resource "vsphere_tag" "tag_k8s_zone" {
   name        = var.vsphere_cluster
-  category_id = "${vsphere_tag_category.category_k8s_zone.id}"
+  category_id = vsphere_tag_category.category_k8s_zone.id
   description = "Managed by Terraform"
 }

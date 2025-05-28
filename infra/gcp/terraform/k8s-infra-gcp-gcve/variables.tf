@@ -17,4 +17,5 @@ limitations under the License.
 variable "project_id" {
   description = "The project ID to use for the gcve cluster."
   default     = "broadcom-451918"
+  type        = string
 }

@@ -32,21 +32,9 @@ data "vsphere_datastore" "datastore" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
-data "vsphere_role" "read-only" {
-  label = "Read-only"
-}
-
-data "vsphere_role" "no-access" {
-  label = "No access"
-}
-
 data "vsphere_network" "network" {
   name          = var.vsphere_network_name
   datacenter_id = data.vsphere_datacenter.datacenter.id
-}
-
-data "vsphere_folder" "global" {
-  path = "/"
 }
 
 # Resources from NSX-T.
