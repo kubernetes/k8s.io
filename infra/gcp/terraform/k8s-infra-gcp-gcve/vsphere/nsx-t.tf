@@ -14,20 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-# Data resources which exist after creating the VMware Engine Private Cloud.
-data "nsxt_policy_tier1_gateway" "tier1_gw" {
-  display_name = "Tier1"
-}
-
-data "nsxt_policy_transport_zone" "overlay_tz" {
-  display_name = "TZ-OVERLAY"
-}
-
-data "nsxt_policy_edge_cluster" "edge_cluster" {
-  display_name = "edge-cluster"
-}
-
-# Create a DHCP Server for the workload network.
+# Creates a DHCP Server for the workload network.
 resource "nsxt_policy_dhcp_server" "k8s-ci-dhcp" {
   display_name      = "k8s-ci-dhcp"
   description       = "Terraform provisioned DhcpServerConfig"
@@ -36,7 +23,7 @@ resource "nsxt_policy_dhcp_server" "k8s-ci-dhcp" {
   server_addresses  = ["192.168.32.10/21"]
 }
 
-# Create the subnet for hosting the VM workload network.
+# Creates the subnet for hosting the VM workload network.
 resource "nsxt_policy_segment" "k8s-ci" {
   display_name      = "k8s-ci"
   connectivity_path = data.nsxt_policy_tier1_gateway.tier1_gw.path

@@ -14,8 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-# Adds tag categories required for failure domain testing to vSphere.
-
+# Creates the tag category "k8s-region" required for failure domain testing.
 resource "vsphere_tag_category" "category_k8s_region" {
   name        = "k8s-region"
   cardinality = "MULTIPLE"
@@ -26,6 +25,7 @@ resource "vsphere_tag_category" "category_k8s_region" {
   ]
 }
 
+# Creates the tag category "k8s-zone" required for failure domain testing.
 resource "vsphere_tag_category" "category_k8s_zone" {
   name        = "k8s-zone"
   cardinality = "MULTIPLE"
@@ -36,13 +36,14 @@ resource "vsphere_tag_category" "category_k8s_zone" {
   ]
 }
 
-# Adds one tag per above category required for failure domain testing to vSphere.
+# Creates the Datacenter tag for the k8s-region tag category for failure domain testing.
 resource "vsphere_tag" "tag_k8s_region" {
   name        = var.vsphere_datacenter
   category_id = "${vsphere_tag_category.category_k8s_region.id}"
   description = "Managed by Terraform"
 }
 
+# Creates the Compute Cluster tag for the k8s-zone tag category for failure domain testing.
 resource "vsphere_tag" "tag_k8s_zone" {
   name        = var.vsphere_cluster
   category_id = "${vsphere_tag_category.category_k8s_zone.id}"
