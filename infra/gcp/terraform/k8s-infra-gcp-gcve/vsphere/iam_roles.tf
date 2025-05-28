@@ -18,7 +18,7 @@ limitations under the License.
 # Assignment of the roles is done via iam_roleassignments.tf, projects.tf
 # and manually via `scripts/ensure-users-permissions.sh`.
 
-# Allows the ci user to e.g. create VMs, Resource Pools, Folders, ... during tests.
+# Creates the vSphere role for the ci user to e.g. create VMs, Resource Pools, Folders, ... during tests.
 resource "vsphere_role" "vsphere-ci" {
   name = "vsphere-ci"
   role_privileges = [
@@ -82,7 +82,7 @@ resource "vsphere_role" "vsphere-ci" {
   ]
 }
 
-# allows the ci user to browse CNS and storage profiles.
+# Creates the vSphere role "vsphere-ci-readonly" for user access to browse CNS and storage profiles.
 resource "vsphere_role" "vsphere-ci-readonly" {
   name = "vsphere-ci-readonly"
   role_privileges = [
@@ -92,7 +92,7 @@ resource "vsphere_role" "vsphere-ci-readonly" {
 }
 
 
-# templates-ci allows users access to the templates folder to clone templates to virtual machines.
+# Creates the vSphere role "templates-ci" for user access to the templates folder to clone templates to virtual machines.
 resource "vsphere_role" "templates-ci" {
   name = "templates-ci"
   role_privileges = [

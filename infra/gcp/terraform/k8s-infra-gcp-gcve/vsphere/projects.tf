@@ -18,13 +18,13 @@ locals {
   gcp_gcve_project_name = "k8s-infra-e2e-gcp-gcve-project"
 }
 
-## Create the projects (resource pool, folder, assign permissions per resource pool and folder)
+# Creates the projects (resource pool, folder, assign permissions per resource pool and folder)
 module "gcp-gcve-projects" {
   source = "./modules/gcp-gcve-project"
 
+  nr_projects              = var.gcp_gcve_nr_projects
   project_name             = local.gcp_gcve_project_name
   group                    = var.gcp_gcve_iam_group
-  nr_projects              = var.gcp_gcve_nr_projects
   role_id                  = vsphere_role.vsphere-ci.id
   vsphere_datacenter_id    = data.vsphere_datacenter.datacenter.id
   vsphere_folder_path      = vsphere_folder.prow.path
