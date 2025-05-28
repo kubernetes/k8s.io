@@ -94,7 +94,7 @@ module "prow_build_nodepool_n1_highmem_8_localssd" {
     "us-central1-f",
   ]
   name                      = "pool5"
-  initial_count             = 1
+  initial_count             = 0
   min_count                 = 0
   max_count                 = 0
   image_type                = "UBUNTU_CONTAINERD"
