@@ -354,9 +354,14 @@ groups:
       - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
     members:
       - agustina.barbetta@gmail.com # v1.34 Communications Lead
+      - drewhagendev@gmail.com # v1.34 Enhancements Shadow
+      - faeka6@gmail.com # v1.34 Enhancements Shadow
+      - j@mickey.dev # v1.34 Enhancements Shadow
       - jenny.shu@solo.io # v1.34 Enhancements Lead
       - rajalakshmi.girish1@ibm.com # v1.34 Release Signal Lead
+      - rayandas91@gmail.com # v1.34 Enhancements Shadow
       - michellengnx@gmail.com # v1.34 Docs Lead
+      - sean.mcginnis@gmail.com # v1.34 Enhancements Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -381,10 +386,15 @@ groups:
     members:
       - agustina.barbetta@gmail.com # v1.34 Communications Lead
       - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
+      - drewhagendev@gmail.com # v1.34 Enhancements Shadow
+      - faeka6@gmail.com # v1.34 Enhancements Shadow
+      - j@mickey.dev # v1.34 Enhancements Shadow
       - jenny.shu@solo.io # v1.34 Enhancements Lead
       - michellengnx@gmail.com # v1.34 Docs Lead
       - rajalakshmi.girish1@ibm.com # v1.34 Release Signal Lead
+      - rayandas91@gmail.com # v1.34 Enhancements Shadow
       - rytswd@gmail.com # v1.34 Release Lead Shadow
+      - sean.mcginnis@gmail.com # v1.34 Enhancements Shadow
       - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
       - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
 
@@ -449,12 +459,17 @@ groups:
       - saschagrunert@gmail.com
     members:
       - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
+      - drewhagendev@gmail.com # v1.34 Enhancements Shadow
+      - faeka6@gmail.com # v1.34 Enhancements Shadow
       - fsmunoz@gmail.com # v1.34 EA
+      - j@mickey.dev # v1.34 Enhancements Shadow
       - jackhammervyom@gmail.com # v1.34 Release Lead
       - jenny.shu@solo.io # v1.34 Enhancements Lead
       - kat.cosgrove@gmail.com # Subproject owner
       - nng.grace@gmail.com # Subproject owner
+      - rayandas91@gmail.com # v1.34 Enhancements Shadow
       - rytswd@gmail.com # v1.34 Release Lead Shadow
+      - sean.mcginnis@gmail.com # v1.34 Enhancements Shadow
       - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
       - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
 
