@@ -47,13 +47,9 @@ function initBoskosResourceUserData() {
   boskos_data='{"ipPool":"'"${ipPool}"'","resourcePool":"'"${resourcePool}"'","folder":"'"${folder}"'"}'
 
   # acquire from "dirty" or "free" state
-  ACQUIRED=1
   curl -s -X POST "${BOSKOS_HOST}/acquirebystate?names=${resourceName}&state=dirty&dest=busy&owner=$(whoami)" | grep -q "${resourceName}" \
     || curl -s -X POST "${BOSKOS_HOST}/acquirebystate?names=${resourceName}&state=free&dest=busy&owner=$(whoami)" | grep -q "${resourceName}" \
-    || ( echo "Failed to acquire ${resourceName}" ; ACQUIRED=0)
-  if [[ "${ACQUIRED}" -eq 0 ]]; then
-    echo "Failed to acquire project ${resourceName}"
-  fi
+    || echo "Failed to acquire ${resourceName}"
 
   # update resource
   echo "Updating resource ${resourceName} with following data: ${boskos_data}"

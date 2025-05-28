@@ -15,8 +15,9 @@ limitations under the License.
 */
 
 variable "project_id" {
-  description = "The project ID to use for the maintenance jumphost."
+  description = "The project ID to use for the gcve cluster."
   default     = "broadcom-451918"
+  type        = string
 }
 
 # Read the secret from Secret Manager which contains the wireguard server configuration. 
@@ -25,7 +26,7 @@ data "google_secret_manager_secret_version_access" "wireguard-config" {
   secret = "maintenance-vm-wireguard-config"
 }
 
-# Creates the maintenance jumphost which runs SSH and a wireguard server.
+# Create the maintenance jumphost which runs SSH and a wireguard server.
 resource "google_compute_instance" "jumphost" {
   project      = var.project_id
   name         = "maintenance-jumphost"
