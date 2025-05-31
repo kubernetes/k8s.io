@@ -44,15 +44,22 @@ function initBoskosResourceUserData() {
   # shellcheck disable=SC2089
   ipPool="{\\\"addresses\\\":[\\\"${START}-${END}\\\"],\\\"gateway\\\":\\\"192.168.32.1\\\",\\\"prefix\\\":21}"
 
+  boskos_data='{"ipPool":"'"${ipPool}"'","resourcePool":"'"${resourcePool}"'","folder":"'"${folder}"'"}'
+
   # acquire from "dirty" or "free" state
   curl -s -X POST "${BOSKOS_HOST}/acquirebystate?names=${resourceName}&state=dirty&dest=busy&owner=$(whoami)" | grep -q "${resourceName}" \
     || curl -s -X POST "${BOSKOS_HOST}/acquirebystate?names=${resourceName}&state=free&dest=busy&owner=$(whoami)" | grep -q "${resourceName}" \
     || echo "Failed to acquire ${resourceName}"
-  # update
+
+  # update resource
+  echo "Updating resource ${resourceName} with following data: ${boskos_data}"
   # shellcheck disable=SC2089
-  curl -s -X POST -d '{"ipPool":"'"${ipPool}"'","resourcePool":"'"${resourcePool}"'","folder":"'"${folder}"'"}' "${BOSKOS_HOST}/update?name=${resourceName}&state=busy&owner=$(whoami)"
+  curl -s -X POST -d "${boskos_data}" "${BOSKOS_HOST}/update?name=${resourceName}&state=busy&owner=$(whoami)"
+  
   # release as "dirty", janitor should bring it to "free"
-  curl -s -X POST "${BOSKOS_HOST}/release?name=${resourceName}&dest=dirty&owner=$(whoami)" 
+  curl -s -X POST "${BOSKOS_HOST}/release?name=${resourceName}&dest=dirty&owner=$(whoami)"
+  
+  echo "Successfully updated project ${resourceName}"
 }
 
 for i in {1..40}; do

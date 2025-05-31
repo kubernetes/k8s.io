@@ -14,12 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-locals {
-  project_id = "broadcom-451918"
+variable "project_id" {
+  description = "The project ID to use for the gcve cluster."
+  default     = "broadcom-451918"
+  type        = string
 }
 
+# Read the secret from Secret Manager which contains the wireguard server configuration. 
+data "google_secret_manager_secret_version_access" "wireguard-config" {
+  project      = var.project_id
+  secret = "maintenance-vm-wireguard-config"
+}
+
+# Create the maintenance jumphost which runs SSH and a wireguard server.
 resource "google_compute_instance" "jumphost" {
-  project      = local.project_id
+  project      = var.project_id
   name         = "maintenance-jumphost"
   machine_type = "f1-micro"
   zone         = "us-central1-f"
@@ -33,7 +42,7 @@ resource "google_compute_instance" "jumphost" {
   network_interface {
     network = "maintenance-vpc-network"
     subnetwork = "maintenance-subnet"
-    subnetwork_project = local.project_id
+    subnetwork_project = var.project_id
     access_config {
       network_tier = "STANDARD"
     }
@@ -42,9 +51,4 @@ resource "google_compute_instance" "jumphost" {
   metadata = {
     user-data = templatefile("${path.module}/cloud-config.yaml.tftpl", { wg0 = base64encode(data.google_secret_manager_secret_version_access.wireguard-config.secret_data) })
   }
-}
-
-data "google_secret_manager_secret_version_access" "wireguard-config" {
-  project      = local.project_id
-  secret = "maintenance-vm-wireguard-config"
 }

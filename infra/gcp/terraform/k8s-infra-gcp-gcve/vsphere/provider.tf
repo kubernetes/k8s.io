@@ -14,13 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+/*
+This file defines:
+- Required provider versions
+- Storage backend details
+*/
+
 terraform {
+  required_version = "1.10.5"
 
   backend "gcs" {
     bucket = "k8s-infra-tf-gcp-gcve"
     prefix = "k8s-infra-gcp-gcve-vcenter"
   }
-
 
   required_providers {
     google = {
@@ -42,12 +48,14 @@ terraform {
   }
 }
 
+# Setup credentials to vSphere.
 provider "vsphere" {
   user                 = var.vsphere_user
   password             = var.vsphere_password
   vsphere_server       = var.vsphere_server
 }
 
+# Setup credentials to NSX-T.
 provider "nsxt" {
   host                 = var.nsxt_server
   username             = var.nsxt_user
