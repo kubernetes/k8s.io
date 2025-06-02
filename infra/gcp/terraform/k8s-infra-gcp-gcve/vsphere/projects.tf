@@ -18,7 +18,10 @@ locals {
   gcp_gcve_project_name = "k8s-infra-e2e-gcp-gcve-project"
 }
 
-# Creates the projects (resource pool, folder, assign permissions per resource pool and folder)
+# Creates the projects.
+# Each project will map to a resources of type `gcve-vsphere-project` in Boskos and provide:
+# A resource pool and folder (created by this module including permissions) and
+# a IPPool (see [Boskos](../../docs/boskos.md) for more information).
 module "gcp-gcve-projects" {
   source = "./modules/gcp-gcve-project"
 
