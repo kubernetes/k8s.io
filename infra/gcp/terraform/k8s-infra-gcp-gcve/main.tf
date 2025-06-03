@@ -24,6 +24,7 @@ resource "google_project_service" "project" {
 
   for_each = toset([
     "compute.googleapis.com",
+    "essentialcontacts.googleapis.com",
     "secretmanager.googleapis.com",
     "vmwareengine.googleapis.com"
   ])
