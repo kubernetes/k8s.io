@@ -137,7 +137,7 @@ module "prow_build_nodepool_c4d_highmem_8_localssd" {
   ]
   name            = "pool7"
   initial_count   = 1
-  min_count       = 1
+  min_count       = 10
   max_count       = 80
   machine_type    = "c4d-highmem-8-lssd" # has 2 local ssd disks attached
   disk_size_gb    = 100
@@ -199,7 +199,6 @@ module "prow_build_nodepool_c4a_highmem_8_localssd" {
   initial_count = 1
   min_count     = 1
   max_count     = 10
-  image_type    = "UBUNTU_CONTAINERD"
   machine_type  = "c4a-highmem-8-lssd" # has 2 local ssd disks attached
   disk_size_gb  = 100
   disk_type     = "hyperdisk-balanced"
