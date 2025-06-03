@@ -206,11 +206,15 @@ groups:
       - saschagrunert@gmail.com
     members:
       - agustina.barbetta@gmail.com # v1.34 Communications Lead
+      - akacloudmelon@gmail.com # v1.34 Communications Shadow
+      - cst.grzn@gmail.com # v1.34 Communications Shadow
       - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
       - fsmunoz@gmail.com # v1.34 EA
       - jackhammervyom@gmail.com # v1.34 Release Lead
+      - josueleon3012@hotmail.com # v1.34 Communications Shadow
       - kat.cosgrove@gmail.com # Subproject owner
       - nng.grace@gmail.com # Subproject owner
+      - rawat.dipesh@gmail.com # v1.34 Communications Shadow
       - rytswd@gmail.com # v1.34 Release Lead Shadow
       - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
       - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
@@ -354,14 +358,28 @@ groups:
       - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
     members:
       - agustina.barbetta@gmail.com # v1.34 Communications Lead
+      - akacloudmelon@gmail.com # v1.34 Communications Shadow
+      - aruparekh4@gmail.com # v1.34 Docs Shadow
+      - cst.grzn@gmail.com # v1.34 Communications Shadow
       - drewhagendev@gmail.com # v1.34 Enhancements Shadow
+      - elieser.pereiraa@gmail.com # v1.34 Release Signal Shadow
       - faeka6@gmail.com # v1.34 Enhancements Shadow
       - j@mickey.dev # v1.34 Enhancements Shadow
       - jenny.shu@solo.io # v1.34 Enhancements Lead
-      - rajalakshmi.girish1@ibm.com # v1.34 Release Signal Lead
-      - rayandas91@gmail.com # v1.34 Enhancements Shadow
+      - josueleon3012@hotmail.com # v1.34 Communications Shadow
       - michellengnx@gmail.com # v1.34 Docs Lead
+      - muhammad.adil.ghaffar@est.tech # v1.34 Release Signal Shadow
+      - nsarthaknegi360@gmail.com # v1.34 Release Signal Shadow
+      - prajyotparab19@gmail.com # v1.34 Release Signal Shadow
+      - rajalakshmi.girish1@ibm.com # v1.34 Release Signal Lead
+      - rawat.dipesh@gmail.com # v1.34 Communications Shadow
+      - rayandas91@gmail.com # v1.34 Enhancements Shadow
+      - ryan.su@queensu.ca # v1.34 Docs Shadow
       - sean.mcginnis@gmail.com # v1.34 Enhancements Shadow
+      - smith.rashan@gmail.com # v1.34 Docs Shadow
+      - tico88612@gmail.com # v1.34 Release Signal Shadow
+      - urvashichoubey0121@gmail.com # v1.34 Docs Shadow
+      - yujenhuang24@gmail.com # v1.34 Docs Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -385,18 +403,32 @@ groups:
       - nng.grace@gmail.com # Subproject owner
     members:
       - agustina.barbetta@gmail.com # v1.34 Communications Lead
+      - akacloudmelon@gmail.com # v1.34 Communications Shadow
+      - aruparekh4@gmail.com # v1.34 Docs Shadow
+      - cst.grzn@gmail.com # v1.34 Communications Shadow
       - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
       - drewhagendev@gmail.com # v1.34 Enhancements Shadow
+      - elieser.pereiraa@gmail.com # v1.34 Release Signal Shadow
       - faeka6@gmail.com # v1.34 Enhancements Shadow
       - j@mickey.dev # v1.34 Enhancements Shadow
       - jenny.shu@solo.io # v1.34 Enhancements Lead
+      - josueleon3012@hotmail.com # v1.34 Communications Shadow
       - michellengnx@gmail.com # v1.34 Docs Lead
+      - muhammad.adil.ghaffar@est.tech # v1.34 Release Signal Shadow
+      - nsarthaknegi360@gmail.com # v1.34 Release Signal Shadow
+      - prajyotparab19@gmail.com # v1.34 Release Signal Shadow
       - rajalakshmi.girish1@ibm.com # v1.34 Release Signal Lead
+      - rawat.dipesh@gmail.com # v1.34 Communications Shadow
       - rayandas91@gmail.com # v1.34 Enhancements Shadow
+      - ryan.su@queensu.ca # v1.34 Docs Shadow
       - rytswd@gmail.com # v1.34 Release Lead Shadow
       - sean.mcginnis@gmail.com # v1.34 Enhancements Shadow
+      - smith.rashan@gmail.com # v1.34 Docs Shadow
       - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
+      - tico88612@gmail.com # v1.34 Release Signal Shadow
+      - urvashichoubey0121@gmail.com # v1.34 Docs Shadow
       - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
+      - yujenhuang24@gmail.com # v1.34 Docs Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
