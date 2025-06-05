@@ -2,7 +2,7 @@
 
 The code in `k8s-infra-gcp-gcve` sets up the infra required to allow prow jobs to create VMs on vSphere, e.g. to allow testing  of the [Cluster API provider vSphere (CAPV)](https://github.com/kubernetes-sigs/cluster-api-provider-vsphere).
 
-![Overview](./docs/images/overview.jpg)
+![Overview](./docs/images/GVCE.drawio.png)
 
 Prow container settings are managed outside of this folder, but understanding high level components could
 help to understand how the `k8s-infra-gcp-gcve` is set up and consumed.
