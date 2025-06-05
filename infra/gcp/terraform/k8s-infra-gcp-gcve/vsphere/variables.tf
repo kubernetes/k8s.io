@@ -28,7 +28,7 @@ variable "vsphere_server" {
   type = string
 }
 # NSX-T user from GCVE dashboard
-# xref: http://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve-pc/management-appliances?project=broadcom-451918
+# xref: http://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve/management-appliances?project=broadcom-451918
 variable "nsxt_user" {
   type = string
 }
@@ -43,7 +43,7 @@ variable "nsxt_server" {
 }
 
 # This DNS Server was created by GCVE and can be found in GCVE's summary page.
-# xref: https://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve-pc/management-appliances?project=broadcom-451918
+# xref: https://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve/management-appliances?project=broadcom-451918
 variable "gcve_dns_server" {
   type = string
   default = "192.168.30.234"

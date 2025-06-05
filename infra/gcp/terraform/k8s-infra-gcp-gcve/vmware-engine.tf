@@ -17,13 +17,13 @@ limitations under the License.
 # Creates the VMware Engine Private Cloud which is a vSphere Cluster including NSX-T.
 resource "google_vmwareengine_private_cloud" "vsphere-cluster" {
   location    = "us-central1-a"
-  name        = "k8s-gcp-gcve-pc"
+  name        = "k8s-gcp-gcve"
   project     = var.project_id
   description = "k8s Community vSphere Cluster for CI."
   # TODO(chrischdi): figure out discount and switch to STANDARD
   type = "TIME_LIMITED"
   network_config {
-    management_cidr       = "192.168.30.0/24"
+    management_cidr       = "192.168.31.0/24"
     vmware_engine_network = google_vmwareengine_network.vsphere-network.id
   }
 
@@ -50,7 +50,7 @@ resource "google_vmwareengine_network_policy" "external-access-rule-np" {
   name                  = "k8s-gcp-gcve-network-policy"
   project               = var.project_id
   location              = "us-central1"
-  edge_services_cidr    = "192.168.31.0/26"
+  edge_services_cidr    = "192.168.27.0/26"
   vmware_engine_network = google_vmwareengine_network.vsphere-network.id
   internet_access {
     enabled = true
