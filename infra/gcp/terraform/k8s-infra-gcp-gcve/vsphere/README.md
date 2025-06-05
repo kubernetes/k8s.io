@@ -2,25 +2,26 @@
 
 The VMware Engine instance provides a vSphere cluster with NSX-T.
 
-The terraform manifest in this folder can be used to setup e.g. content libraries, templetes, folders, resource pools and other vSphere settings required when running tests.
+The terraform manifest in this folder can be used to setup e.g. content libraries, templates, folders, resource pools and other vSphere settings required when running tests.
 
 See [terraform](../docs/terraform.md) for prerequisites.
 
-The terraform manifests in this folder requires following env variables:
+The terraform manifests in this folder require following env variables to be set:
 
 ```sh
  export TF_VAR_vsphere_user=solution-user-01@gve.local
- export TF_VAR_vsphere_password="$(gcloud vmware private-clouds vcenter credentials describe --private-cloud=k8s-gcp-gcve-pc --username=solution-user-01@gve.local --location=us-central1-a --format='get(password)')"
- export TF_VAR_vsphere_server="$(gcloud vmware private-clouds describe k8s-gcp-gcve-pc --location us-central1-a --format='get(vcenter.fqdn)')"
+ export TF_VAR_vsphere_password="$(gcloud vmware private-clouds vcenter credentials describe --private-cloud=k8s-gcp-gcve --username=solution-user-01@gve.local --location=us-central1-a --format='get(password)')"
+ export TF_VAR_vsphere_server="$(gcloud vmware private-clouds describe k8s-gcp-gcve --location us-central1-a --format='get(vcenter.fqdn)')"
  export TF_VAR_nsxt_user=admin
- export TF_VAR_nsxt_password="$(gcloud vmware private-clouds nsx credentials describe --private-cloud k8s-gcp-gcve-pc --location us-central1-a --format='get(password)')"
- export TF_VAR_nsxt_server="$(gcloud vmware private-clouds describe k8s-gcp-gcve-pc --location us-central1-a --format='get(nsx.fqdn)')"
+ export TF_VAR_nsxt_password="$(gcloud vmware private-clouds nsx credentials describe --private-cloud k8s-gcp-gcve --location us-central1-a --format='get(password)')"
+ export TF_VAR_nsxt_server="$(gcloud vmware private-clouds describe k8s-gcp-gcve --location us-central1-a --format='get(nsx.fqdn)')"
 ```
 
-Note: solution-user-01@gve.local user is creating automatically in a VMware Engine instance;
+Note: solution-user-01@gve.local user gets created automatically in a VMware Engine instance;
 we are using it to set up vSphere and create a dedicate user for prow CI (with limited permissions).
+For more information see [VMware Engine documentation](https://cloud.google.com/vmware-engine/docs/private-clouds/howto-elevate-privilege).
 
-Also, the terraform manifests in this folder requires `/etc/hosts` entries for vSphere and NSX
+Also, the terraform manifests in this folder require `/etc/hosts` entries for vSphere and NSX
 (see the [terraform](../docs/terraform.md)).
 
 Due to missing features in the terraform provider, user and other IAM configuration must be managed with dedicated scripts, the following script needs to be run before terraform apply:
@@ -73,11 +74,11 @@ See [Boskos](../docs/boskos.md).
 
 # Accessing vSphere and NSX UI.
 
-If required for maintenance reasons, it is possible to access the vSphere UI via [wirequard](../docs/wiregard.md) / [jumphost VM](../maintenance-jumphost/README.md).
+If required for maintenance reasons, it is possible to access the vSphere UI via [wirequard](../docs/wireguard.md) / [jumphost VM](../maintenance-jumphost/README.md).
 
 After connecting, vSphere UI is available at https://vcsa-427138.d1de5ee9.us-central1.gve.goog.
 
-vSphere credentials are available in the google cloud console, VMware Engine, Private clouds, Detail of the `k8s-gcp-gcve-pc` private cloud, Management Appliances, key details ([link](https://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve-pc/management-appliances?project=broadcom-451918))
+vSphere credentials are available in the google cloud console, VMware Engine, Private clouds, Detail of the `k8s-gcp-gcve` private cloud, Management Appliances, key details ([link](https://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve/management-appliances?project=broadcom-451918))
 
 
 IMPORTANT: do not apply changes using the vSphere UI, always use terraform, or when not possible scripts in this folder.

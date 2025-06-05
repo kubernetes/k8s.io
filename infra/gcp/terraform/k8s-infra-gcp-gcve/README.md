@@ -17,9 +17,10 @@ More specifically, to allow prow jobs to create VM on vSphere, a few resources a
 Also, the network of the prow container is going to be paired to the VMware engine network, thus
 allowing access to both the GCVE management network and the NSX-T network where all the VM are running.
 
-The `k8s-infra-gcp-gcve` project sets up the infrastructure that actually runs the VMs created from the prow container. There are ther main components of this infrastracture:
+The `k8s-infra-gcp-gcve` project sets up the infrastructure that actually runs the VMs created from the prow container. 
+These are the main components of this infrastructure:
 
-The terraform manifest in this folder, which is applied by test-infra automation (Atlantis), uses the GCP terraform provider for creating.
+The terraform manifest in this folder uses the GCP terraform provider for creating.
 - A VMware Engine instance
 - The network infrastructure required for vSphere and for allowing communication between vSphere and Prow container.
     -  The network used is `192.168.0.32/21`
@@ -28,12 +29,21 @@ The terraform manifest in this folder, which is applied by test-infra automation
             - IPPool for 40 Projects having 16 IPs each: `192.168.35.0 - 192.168.37.127`
 - The network infrastructure used for maintenance.
 
+See [terraform](../docs/terraform.md) for prerequisites.
+
+When ready:
+
+```sh
+terraform init
+terraform plan # Check diff
+terraform apply
+```
+
 See inline comments for more details.
 
-The terraform manifest in the `/maintenance-jumphost` uses the GCP terraform provider to setup a jumphost VM to be used to set up vSphere or for maintenance pourposes. See
+The terraform manifest in the `/maintenance-jumphost` uses the GCP terraform provider to setup a jumphost VM to be used to set up vSphere or for maintenance purposes. See
 - [maintenance-jumphost](./maintenance-jumphost/README.md)
 
-The terraform manifest in the `/vsphere` folder uses the vSphere and the NSX terraform providers to setup e.g. content libraries, templetes, folders, 
+The terraform manifest in the `/vsphere` folder uses the vSphere and the NSX terraform providers to setup e.g. content libraries, templates, folders, 
 resource pools and other vSphere components required when running tests. See:
-- [vsphere](./vsphere/README.md) 
-
+- [vsphere](./vsphere/README.md)

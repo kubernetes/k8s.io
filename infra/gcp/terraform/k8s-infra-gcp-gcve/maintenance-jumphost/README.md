@@ -3,8 +3,8 @@
 The maintenance jump host is a VM hosting a wireguard instance for secure and convenient access 
 to vSphere and NSX from local machines.
 
-Before using wiregard it is required to first setup things both on on your local machine and on the GCP side.
-see [wireguard](../docs/wiregard.md)
+Before using wireguard it is required to first setup things both on on your local machine and on the GCP side.
+see [wireguard](../docs/wireguard.md)
 
 The maintenance jump host VM is not required to be always up & running and it can also be recreated if necessary; however, by doing so the IP address of the VM will change and all the 
 local machine config have to be updated accordingly.
