@@ -23,7 +23,7 @@ readonly REPO_ROOT
 
 GCLOUD_PROJECT_ID=broadcom-451918
 
-for mail in $(cat "${REPO_ROOT}/groups/sig-k8s-infra/groups.yaml" | yq -r '.groups[] | select(.name == "k8s-infra-gcp-gcve-admins") | .members[] | select(. | contains "@kubernetes.io" | not)'); do
+for mail in $( < "${REPO_ROOT}/groups/sig-k8s-infra/groups.yaml" yq -r '.groups[] | select(.name == "k8s-infra-gcp-gcve-admins") | .members[] | select(. | contains "@kubernetes.io" | not)'); do
   echo "> Ensuring ${mail} exists as essential contact"
   ENTRIES="$(gcloud essential-contacts list --filter "email=${mail}" --format=json  | jq '. | length')"
   if [[ $ENTRIES -eq 0 ]]; then
