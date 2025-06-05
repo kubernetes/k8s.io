@@ -28,7 +28,7 @@ for mail in $(cat "${REPO_ROOT}/groups/sig-k8s-infra/groups.yaml" | yq -r '.grou
   ENTRIES="$(gcloud essential-contacts list --filter "email=${mail}" --format=json  | jq '. | length')"
   if [[ $ENTRIES -eq 0 ]]; then
     echo "Creating ${mail} as technical essential contact"
-    gcloud essential-contacts create --language=en-US --notification-categories=technical --project "${GCLOUD_PROJECT_ID}" "--email=${mail}"
+    gcloud essential-contacts create --language=en-US --notification-categories=legal,product-updates,security,suspension,technical --project "${GCLOUD_PROJECT_ID}" "--email=${mail}"
   elif [[ $ENTRIES -eq 1 ]]; then
     echo "Contact already exists"
   else
