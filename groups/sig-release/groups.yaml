@@ -39,8 +39,9 @@ groups:
       ReconcileMembers: "true"
     members:
       - k8s-infra-release-admins@kubernetes.io
-      - ameukam@gmail.com
+      - admin@mb-consulting.dev
       - adolfo.garcia@uservers.net
+      - ameukam@gmail.com
       - cicih@google.com
       - ctadeu@gmail.com
       - gveronicalg@gmail.com
@@ -48,10 +49,10 @@ groups:
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
+      - neoaggelos@gmail.com
       - nng.grace@gmail.com # Subproject owner
       - pal.nabarun95@gmail.com
       - saschagrunert@gmail.com
-      - admin@mb-consulting.dev
 
   - email-id: k8s-infra-release-viewers@kubernetes.io
     name: k8s-infra-release-viewers
