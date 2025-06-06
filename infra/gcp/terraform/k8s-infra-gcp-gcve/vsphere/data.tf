@@ -35,6 +35,7 @@ data "vsphere_datastore" "datastore" {
 data "vsphere_network" "network" {
   name          = var.vsphere_network_name
   datacenter_id = data.vsphere_datacenter.datacenter.id
+  depends_on = [ nsxt_policy_segment.k8s-ci ]
 }
 
 # Resources from NSX-T.

@@ -6,6 +6,12 @@ The terraform manifest in this folder can be used to setup e.g. content librarie
 
 See [terraform](../docs/terraform.md) for prerequisites.
 
+The first time after creating the VMware Engine Private Cloud we have to reset the solution-user credentials:
+
+```sh
+gcloud vmware private-clouds vcenter credentials reset --private-cloud=k8s-gcp-gcve --username=solution-user-01@gve.local --location=us-central1-a
+```
+
 The terraform manifests in this folder require following env variables to be set:
 
 ```sh
