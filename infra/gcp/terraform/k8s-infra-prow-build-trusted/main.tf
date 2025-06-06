@@ -82,3 +82,25 @@ module "prow_build_nodepool" {
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }
 
+module "prow_build_nodepool2" {
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  name         = "trusted-pool2"
+  node_locations = [
+    "us-central1-a",
+    "us-central1-b",
+    "us-central1-c",
+  ]
+  initial_count   = 1
+  min_count       = 1
+  max_count       = 6
+  image_type      = "UBUNTU_CONTAINERD"
+  machine_type    = "c4-highmem-8"
+  disk_size_gb    = 200
+  disk_type       = "hyperdisk-balanced"
+  service_account = module.prow_build_cluster.cluster_node_sa.email
+}
+
+
