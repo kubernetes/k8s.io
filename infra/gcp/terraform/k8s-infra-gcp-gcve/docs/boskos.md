@@ -1,6 +1,6 @@
 # Boskos
 
-Boskos support resources of type `gcve-vsphere-project` to allow each test run to use a subset of vSphere resources.
+Boskos resources of type `gcve-vsphere-project` allow each test run to use a subset of vSphere resources.
 
 Boskos configuration is split in three parts:
 
