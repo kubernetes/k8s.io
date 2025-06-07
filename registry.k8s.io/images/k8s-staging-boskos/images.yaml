@@ -1,0 +1,3 @@
+- name: boskos
+  dmap:
+    "sha256:c18bad03ce7259951a816d60040a7008f694273b1382bed4c727d22b93a1bbe9": ["v20250131-478cd5d"]
