@@ -16,7 +16,7 @@ limitations under the License.
 
 module "iam" {
   source  = "terraform-google-modules/iam/google//modules/projects_iam"
-  version = "~> 7"
+  version = "~> 8.0"
 
   projects = ["kubernetes-public"]
 
@@ -32,6 +32,9 @@ module "iam" {
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/cert-manager/sa/cert-manager",
       "serviceAccount:dns-pusher@kubernetes-public.iam.gserviceaccount.com",
       "serviceAccount:k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com"
+    ]
+    "roles/bigquery.admin" = [
+      "serviceAccount:datadog@k8s-infra-seed.iam.gserviceaccount.com"
     ]
   }
 }

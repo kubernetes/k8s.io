@@ -31,5 +31,11 @@ module "iam" {
     "roles/secretmanager.secretAccessor" = [
       "serviceAccount:k8s-infra-prow-build.svc.id.goog[external-secrets/external-secrets]"
     ]
+    "roles/viewer" = [
+      "serviceAccount:datadog@k8s-infra-seed.iam.gserviceaccount.com"
+    ]
+    "roles/serviceusage.serviceUsageConsumer" = [
+      "serviceAccount:datadog@k8s-infra-seed.iam.gserviceaccount.com"
+    ]
   }
 }
