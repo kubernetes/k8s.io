@@ -69,4 +69,9 @@ resource "google_compute_global_address" "k8s_io" {
   description  = lookup(each.value, "description", null)
   address_type = "EXTERNAL"
   ip_version   = lookup(each.value, "ipv6", false) ? "IPV6" : "IPV4"
+  lifecycle {
+    ignore_changes = [
+      description
+    ]
+  }
 }

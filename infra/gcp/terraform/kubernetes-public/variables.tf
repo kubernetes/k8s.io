@@ -22,6 +22,11 @@ variable "node_image_type" {
   description = "Image type for GKE pool node"
 }
 
+variable "project_id" {
+  default = "kubernetes-public"
+  type    = string
+}
+
 variable "region" {
   type        = string
   default     = "us-central1"

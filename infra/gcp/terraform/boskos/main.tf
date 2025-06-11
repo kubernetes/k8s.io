@@ -65,6 +65,7 @@ module "project" {
     "logging.googleapis.com",
     "monitoring.googleapis.com",
     "secretmanager.googleapis.com",
+    "cloudasset.googleapis.com",
   ]
 }
 
