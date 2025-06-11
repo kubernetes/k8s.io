@@ -7,8 +7,8 @@ In order to apply terraform manifests you  must be enabled to use the "broadcom-
 Quick reference:
 
 Go to the folder of interest
-- [maintenance-jumphost](../maintenance-jumphost/)
-- [vsphere](../vsphere/)
+- [maintenance-jumphost](../maintenance-jumphost/README.md)
+- [vsphere](../vsphere/README.md)
 
 Note: the terraform script in the top folder is usually managed by test-infra automation (Atlantis); we don't have to run it manually.
 
@@ -25,15 +25,18 @@ Login to GCP to get an authentication token to use with terraform.
 
 ```bash
 gcloud auth application-default login
+gcloud auth login
+gcloud config set project broadcom-451918
 ```
 
 Ensure all the env variables expected by the terraform manifest you are planning to run are set:
-- [vsphere](../vsphere/)
+- [vsphere](../vsphere/README.md)
 
 Ensure the right terraform version expected by the terraform manifest you are planning to run is installed (Note: this requires `tfswitch` which is pre-installed in the docker image. In case of version mismatches, terraform will make you know):
 
 ```bash
-tfswich
+cd infra/gcp/terraform/k8s-infra-gcp-gcve/
+tfswitch
 ```
 
 Additionally, if applying the vsphere terraform manifest, use the following script to generate `/etc/hosts` entries for vSphere and NSX.

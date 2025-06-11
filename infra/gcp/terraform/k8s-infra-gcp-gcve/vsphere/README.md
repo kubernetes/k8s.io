@@ -30,6 +30,8 @@ For more information see [VMware Engine documentation](https://cloud.google.com/
 Also, the terraform manifests in this folder require `/etc/hosts` entries for vSphere and NSX
 (see the [terraform](../docs/terraform.md)).
 
+As well as connectivity to vSphere and NSX-T via e.g. [wireguard](../docs/wireguard.md).
+
 Due to missing features in the terraform provider, user and other IAM configuration must be managed with dedicated scripts, the following script needs to be run before terraform apply:
 
 Run a fist script to create the prow-ci-user@gve.local user to be used for prow CI.
@@ -78,18 +80,29 @@ At the end following secrets should exist:
 As a final step it is required to setup Boskos resources of type `gcve-vsphere-project` to allow each test run to use a subset of vSphere resources.
 See [Boskos](../docs/boskos.md).
 
+# Disabling NSX-T Firewalls
+
+Lastly we need to login to NSX and disable the distributed and gateway firewalls, so they don't accidentially block any traffic. Disabling them is fine because we don't expose endpoints to the internet.
+
+Login to http://nsx-434005.f63e615b.us-central1.gve.goog (see instructions below).
+
+Navigate to Security (top) -> Distributed Firewall (left) -> Settings (tab), turn `Distributed Firewall Service` to `Off`, acknowledge dialog which pops up.
+
+Navigate to Security (top) -> Gateway Firewall (left) -> Settings (tab), turn off all entries at column `Gateway Firewall
+(Primary)`.
+
 # Accessing vSphere and NSX UI.
 
 If required for maintenance reasons, it is possible to access the vSphere UI via [wirequard](../docs/wireguard.md) / [jumphost VM](../maintenance-jumphost/README.md).
 
-After connecting, vSphere UI is available at https://vcsa-427138.d1de5ee9.us-central1.gve.goog.
+After connecting, vSphere UI is available at https://vcsa-434004.f63e615b.us-central1.gve.goog .
 
 vSphere credentials are available in the google cloud console, VMware Engine, Private clouds, Detail of the `k8s-gcp-gcve` private cloud, Management Appliances, key details ([link](https://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve/management-appliances?project=broadcom-451918))
 
 
 IMPORTANT: do not apply changes using the vSphere UI, always use terraform, or when not possible scripts in this folder.
 
-Similar considerations apply for NSX, which is avalable at http://nsx-427314.d1de5ee9.us-central1.gve.goog
+Similar considerations apply for NSX, which is avalable at http://nsx-434005.f63e615b.us-central1.gve.goog .
 
 # Changing the GCVE CI user's password
 

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The network used is 192.168.0.32/21
+# The network used is 192.168.32.0/21
 # Usable Host IP Range:	192.168.32.1 - 192.168.39.254:
 # DHCP Range: 192.168.32.10 - 192.168.33.255
 # Used IPPool for 40 Projects having 16 IPs each: 192.168.35.0 - 192.168.37.127

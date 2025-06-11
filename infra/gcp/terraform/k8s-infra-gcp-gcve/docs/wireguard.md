@@ -4,10 +4,12 @@ Wireguard is used to get a secure and convenient access through the maintenace j
 
 In order to use wireguard you must be enabled to use the "broadcom-451918" project, please reach out to [owners](../OWNERS) in case of need.
 
-It is also required to first setup things both on on your local machine and on the GCP side
+It is also required to first setup things both on your local machine and on the GCP side
 following the instruction below.
 
 Install wireguard following one of the methods described in https://www.wireguard.com/install/.
+
+Note: On OSX to use the commandline tool, installation via `brew` is necessary.
 
 Generate a wireguard keypair using `wg`.
 
@@ -86,7 +88,8 @@ EOF
 ```
 
 You can then either
-- import this file to the wireguard UI (after this, you can remove the file from disk).
+
+- import this file to the wireguard UI (after this, you can remove the file from disk) and activate or deactivate the connection.
 - use the file with the wireguard CLI e.g. `wg-quick up ~/wg0.conf`, and when finished `wg-quick down ~/wg0.conf`
 
 ## Additional settings
