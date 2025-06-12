@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: argocd-application-controller
+spec:
+  template:
+    spec:
+      containers:
+        - name: argocd-application-controller
+          env:
+            - name: AWS_ROLE_ARN
+              value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
+            - name: AWS_WEB_IDENTITY_TOKEN_FILE
+              value: /var/run/secrets/aws-iam-token/serviceaccount/token
+            - name: AWS_REGION
+              value: us-east-2
+          volumeMounts:
+            - mountPath: /var/run/secrets/aws-iam-token/serviceaccount
+              name: aws-iam-token
+              readOnly: true
+      volumes:
+        # AWS IAM token needed to assume role to access the EKS clusters.
+        - name: aws-iam-token
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  audience: sts.amazonaws.com
+                  expirationSeconds: 86400
+                  path: token

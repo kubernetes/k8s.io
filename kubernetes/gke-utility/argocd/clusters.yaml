@@ -95,3 +95,27 @@ spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: k8s-infra-prow
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: eks-prow-kops
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: eks
+type: Opaque
+stringData:
+  name: eks-prow-kops
+  server: https://7283E85C59E9C4129CFD07BAC9378D44.gr7.us-east-2.eks.amazonaws.com
+  config: |
+    {
+      "awsAuthConfig": {
+        "clusterName": "k8s-infra-kops-prow-build"
+      },
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }

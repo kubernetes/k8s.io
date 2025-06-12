@@ -61,3 +61,19 @@ resource "google_iam_workload_identity_pool_provider" "eks_cluster" {
     allowed_audiences = ["sts.googleapis.com"]
   }
 }
+
+resource "google_iam_workload_identity_pool_provider" "eks_kops" {
+  project = module.project.project_id
+
+  display_name                       = "kops"
+  workload_identity_pool_id          = google_iam_workload_identity_pool.eks_cluster.workload_identity_pool_id
+  workload_identity_pool_provider_id = "kops"
+  attribute_mapping = {
+    "google.subject" = "assertion.sub"
+  }
+  oidc {
+    # From EKS cluster created in https://github.com/kubernetes/k8s.io/tree/main/infra/aws/terraform/kops-infra-ci
+    issuer_uri        = "https://oidc.eks.us-east-2.amazonaws.com/id/7283E85C59E9C4129CFD07BAC9378D44"
+    allowed_audiences = ["sts.googleapis.com"]
+  }
+}

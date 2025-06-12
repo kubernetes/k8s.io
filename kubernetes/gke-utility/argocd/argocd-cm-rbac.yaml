@@ -4,3 +4,6 @@ metadata:
   name: argocd-rbac-cm
 data:
   policy.default: role:readonly
+  policy.csv: |
+    g, kubernetes:sig-k8s-infra-leads, role:admin
+  scopes: "[groups, email]"
