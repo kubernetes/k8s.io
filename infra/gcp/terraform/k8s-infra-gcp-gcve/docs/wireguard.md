@@ -1,13 +1,15 @@
-# Wiregard
+# Wireguard
 
-Wiregard is used to get a secure and convenient access through the maintenace jump host VM.
+Wireguard is used to get a secure and convenient access through the maintenace jump host VM.
 
-In order to use wiregard you must be enabled to use the "broadcom-451918" project, please reach to [owners](../OWNERS) in case of need.
+In order to use wireguard you must be enabled to use the "broadcom-451918" project, please reach out to [owners](../OWNERS) in case of need.
 
-It is also required to first setup things both on on your local machine and on the GCP side
-following instruction below.
+It is also required to first setup things both on your local machine and on the GCP side
+following the instruction below.
 
 Install wireguard following one of the methods described in https://www.wireguard.com/install/.
+
+Note: On OSX to use the commandline tool, installation via `brew` is necessary.
 
 Generate a wireguard keypair using `wg`.
 
@@ -58,7 +60,7 @@ EOF
 
 Then create new version of the `maintenance-vm-wireguard-config` by appending this entry at the end of the current value [here](https://console.cloud.google.com/security/secret-manager/secret/maintenance-vm-wireguard-config/versions?project=broadcom-451918).
 
-Additionally, if the jumphost VM is up, you might want to add it to the wiregard configuration  in the current VM (it is also possible to recreate the jumphost VM, but this is going to change the wireguard enpoint also for other users).
+Additionally, if the jumphost VM is up, you might want to add it to the wireguard configuration  in the current VM (it is also possible to recreate the jumphost VM, but this is going to change the wireguard enpoint also for other users).
 
 ```sh
 gcloud compute ssh maintenance-jumphost --zone us-central1-f
@@ -79,14 +81,15 @@ MTU = 1360
 
 [Peer]
 PublicKey = $(gcloud secrets versions access --secret maintenance-vm-wireguard-pubkey latest)
-AllowedIPs = 192.168.30.0/24, 192.168.32.0/21
+AllowedIPs = 192.168.31.0/24, 192.168.32.0/21
 Endpoint = $(gcloud compute instances list --format='get(networkInterfaces[0].accessConfigs[0].natIP)' --filter='name=maintenance-jumphost'):51820
 PersistentKeepalive = 25
 EOF
 ```
 
 You can then either
-- import this file to the wireguard UI (after this, you can remove the file from disk).
+
+- import this file to the wireguard UI (after this, you can remove the file from disk) and activate or deactivate the connection.
 - use the file with the wireguard CLI e.g. `wg-quick up ~/wg0.conf`, and when finished `wg-quick down ~/wg0.conf`
 
 ## Additional settings
@@ -94,7 +97,7 @@ You can then either
 Generate `/etc/hosts` entries for vSphere and NSX; this is required to run the vSphere terraform scripts and it will also make the vSphere and NSX UI to work smootly.
 
 ```sh
-gcloud vmware private-clouds describe k8s-gcp-gcve-pc --location us-central1-a --format='json' | jq -r '.vcenter.internalIp + " " + .vcenter.fqdn +"\n" + .nsx.internalIp + " " + .nsx.fqdn'
+gcloud vmware private-clouds describe k8s-gcp-gcve --location us-central1-a --format='json' | jq -r '.vcenter.internalIp + " " + .vcenter.fqdn +"\n" + .nsx.internalIp + " " + .nsx.fqdn'
 ```
 
-Add those entry to `/etc/hosts`.
+Add those entries to `/etc/hosts`.
