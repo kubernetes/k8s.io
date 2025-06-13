@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   # - argocd.yaml This has been manually applied to fix sync issues
   - atlantis.yaml
+  - datadog.yaml
   - external-secrets.yaml
   - cert-manager.yaml
   - kyverno.yaml

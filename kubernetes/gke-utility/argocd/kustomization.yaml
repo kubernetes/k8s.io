@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v2.11.2
+  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v3.0.6
   - extras.yaml
   - clusters.yaml
 
@@ -21,3 +21,5 @@ patches:
     target:
       kind: NetworkPolicy
       name: argocd-redis-ha-server-network-policy
+  - path: argocd-server-dp.yaml
+  - path: argocd-app-controller-sts.yaml

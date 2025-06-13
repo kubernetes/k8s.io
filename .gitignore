@@ -4,3 +4,6 @@
 
 # Ignore vscode config files
 .vscode
+
+# kustomize charts
+kubernetes/*/*/charts/

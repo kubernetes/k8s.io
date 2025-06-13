@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: datadog
+spec:
+  goTemplate: true
+  generators:
+    # targets all clusters
+    - clusters:
+        selector:
+          matchExpressions:
+            - key: clusterType
+              operator: Exists
+  template:
+    metadata:
+      name: "datadog-{{ .name }}"
+    spec:
+      destination:
+        namespace: datadog
+        server: "{{ .server }}"
+      project: default
+      source:
+        path: kubernetes/{{ .name }}/datadog
+        repoURL: https://github.com/kubernetes/k8s.io
+        targetRevision: main
+      syncPolicy:
+        # automated:
+        #   prune: true
+        #   selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

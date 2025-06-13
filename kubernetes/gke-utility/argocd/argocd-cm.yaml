@@ -12,11 +12,13 @@ data:
       ignoreDifferences: |
         jqPathExpressions:
         - '.webhooks[]?.clientConfig.caBundle'
-  resource.exclusions: |
-    - apiGroups:
-        - cilium.io
-      kinds:
-        - CiliumIdentity
-      clusters:
-        - "*"
   kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-alpha-plugins
+  dex.config: |
+    connectors:
+      - type: authproxy
+        id: oauth2-proxy
+        name: OAuth2 Proxy
+        config:
+          userHeader: X-Auth-Request-Email
+          groupHeader: X-Auth-Request-Groups
+          userIDHeader: X-Auth-Request-User
