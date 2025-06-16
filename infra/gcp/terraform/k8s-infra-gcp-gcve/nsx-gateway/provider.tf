@@ -25,7 +25,7 @@ terraform {
 
   backend "gcs" {
     bucket = "k8s-infra-tf-gcp-gcve"
-    prefix = "k8s-infra-gcp-gcve-workload-gateway"
+    prefix = "k8s-infra-gcp-gcve-vcenter-gateway"
   }
 
   required_providers {

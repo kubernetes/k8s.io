@@ -63,6 +63,7 @@ resource "nsxt_policy_static_route" "route1" {
   next_hop {
     admin_distance = "1"
     ip_address     = "192.168.32.8"
+    interface      = nsxt_policy_segment.k8s-ci.path
   }
 
   for_each = toset([

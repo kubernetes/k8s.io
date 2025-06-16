@@ -1,7 +1,21 @@
 # NSX Gateway
 
-TODO: describe what this does
-TODO: link from top-level readme's
+The NSX Gateway is a VM which funcions as network gateway for all workload VMs.
+
+It is used to route all internet facing traffic from workload VMs via the [Maintenance jumphost](../maintenance-jumphost/README.md).
+
+This is to workaround an issue of internet traffic, which results in TCP connection errors.
+
+To provision the NSX Gateway VM.
+
+See [terraform](../docs/terraform.md) for prerequisites.
+
+See [wireguard](../docs/wireguard.md for prerequisites.
+
+```sh
+terraform init
+terraform apply
+```
 
 The wireguard config will look like
 
