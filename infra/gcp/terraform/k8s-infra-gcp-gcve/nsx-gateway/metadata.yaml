@@ -11,9 +11,9 @@ network:
       addresses:
           - 192.168.32.8/21
       nameservers:
-        addresses: [192.168.30.234]
+        addresses: [192.168.31.234]
       routes:
       - to: default
         via: 192.168.32.1
-      - to: 192.168.30.234
+      - to: 192.168.31.234
         via: 192.168.32.1

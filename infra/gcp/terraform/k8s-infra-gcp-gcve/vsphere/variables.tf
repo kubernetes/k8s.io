@@ -46,7 +46,7 @@ variable "nsxt_server" {
 # xref: https://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve/management-appliances?project=broadcom-451918
 variable "gcve_dns_server" {
   type = string
-  default = "192.168.30.234"
+  default = "192.168.31.234"
 }
 
 # This is the name of the Datacenter created by GCVE 
