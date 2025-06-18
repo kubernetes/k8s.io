@@ -21,3 +21,10 @@ spec:
   replicas: 3
   alertmanagerConfiguration:
     name: main
+  nodeSelector:
+    node-group: stable
+  tolerations:
+  - effect: NoSchedule
+    key: node-group
+    operator: Equal
+    value: stable
