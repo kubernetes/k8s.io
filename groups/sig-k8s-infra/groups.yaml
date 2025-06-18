@@ -562,6 +562,7 @@ groups:
     members:
       - sig-k8s-infra-leads@kubernetes.io
       - christian.schlotter@broadcom.com
+      - christi.schlotter@gmail.com
       - fabrizio.pandini@broadcom.com
       - sabari.murugesan@broadcom.com
       - stefan.buringer@broadcom.com
