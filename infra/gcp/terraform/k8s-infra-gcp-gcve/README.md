@@ -74,4 +74,41 @@ For the workload network `k8s-ci` in NSX-T, the correct MTU is configured in [ns
 
 # Uploading OVA's
 
-TODO
+Pre-created OVA's are available at [Cluster API Provider vSphere releases](https://github.com/kubernetes-sigs/cluster-api-provider-vsphere/releases?q=%22VM+templates%22&expanded=true).
+
+There is a script which automates the download from Github, concatenate files (if necessary) and upload to vSphere.
+
+First we have to identify the link or links for an OVA.
+
+E.g. from [templates/v1.33.0](https://github.com/kubernetes-sigs/cluster-api-provider-vsphere/releases/tag/templates%2Fv1.33.0):
+
+* https://github.com/kubernetes-sigs/cluster-api-provider-vsphere/releases/download/templates%2Fv1.33.0/ubuntu-2204-kube-v1.33.0.ova-part-aa
+* https://github.com/kubernetes-sigs/cluster-api-provider-vsphere/releases/download/templates%2Fv1.33.0/ubuntu-2204-kube-v1.33.0.ova-part-ab
+
+Then we have to set credentials and run the script with both urls as parameters:
+
+```sh
+export GOVC_URL="$(gcloud vmware private-clouds describe k8s-gcp-gcve --location us-central1-a --format='get(vcenter.fqdn)')"
+export GOVC_USERNAME="solution-user-01@gve.local"
+export GOVC_PASSWORD="$(gcloud vmware private-clouds vcenter credentials describe --private-cloud=k8s-gcp-gcve --username=solution-user-01@gve.local --location=us-central1-a --format='get(password)')"
+
+infra/gcp/terraform/k8s-infra-gcp-gcve/vsphere/scripts/upload-ova.sh https://github.com/kubernetes-sigs/cluster-api-provider-vsphere/releases/download/templates%2Fv1.33.0/ubuntu-2204-kube-v1.33.0.ova-part-aa https://github.com/kubernetes-sigs/cluster-api-provider-vsphere/releases/download/templates%2Fv1.33.0/ubuntu-2204-kube-v1.33.0.ova-part-ab
+```
+
+# Recreating the whole environment
+
+Deleting a Google Cloud VMware Engine (GCVE) Private Cloud results in a 1 week freeze of the old environment.
+Because of that it is not possible to immediately recreate the environment using the same configuration.
+
+If recreation needs to be done, we have to change the following:
+
+* The management cidr (`192.168.31.0/24`, search for all occurencies of `192.168.31`)
+* The name of the private cloud (search for all occurencies of `k8s-gcp-gcve`)
+
+For deleting the old environment:
+
+* Use the UI for [Private Clouds](https://console.cloud.google.com/vmwareengine/privateclouds?project=broadcom-451918) to start the deletion process
+  * Note: With starting the deletion process, the Private Cloud will also not be billed anymore.
+* Afterwards setup terraform as described above and remove the private cloud from the state:
+  * `terraform state rm google_vmwareengine_private_cloud.vsphere-cluster`
+* Finally use the above documentation to re-provision VMware Engine
