@@ -45,7 +45,7 @@ resource "nsxt_policy_segment" "k8s-ci" {
       dhcp_generic_option {
         # Set correct MTU to avoid package drops.
         code = "26"
-        values = [ "1348" ]
+        values = [ "1360" ]
       }
     }
   }
