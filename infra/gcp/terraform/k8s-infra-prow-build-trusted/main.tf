@@ -72,9 +72,9 @@ module "prow_build_nodepool" {
     "us-central1-b",
     "us-central1-f",
   ]
-  initial_count   = 1
-  min_count       = 1
-  max_count       = 6
+  initial_count   = 0
+  min_count       = 0
+  max_count       = 0
   image_type      = "UBUNTU_CONTAINERD"
   machine_type    = "n1-highmem-8"
   disk_size_gb    = 200
