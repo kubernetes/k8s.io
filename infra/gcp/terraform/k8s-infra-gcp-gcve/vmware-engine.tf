@@ -14,15 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# Creates the VMware Engine Private Cloud which is a vSphere Cluster including NSX-T.
 resource "google_vmwareengine_private_cloud" "vsphere-cluster" {
   location    = "us-central1-a"
-  name        = "k8s-gcp-gcve-pc"
+  name        = "k8s-gcp-gcve"
   project     = var.project_id
   description = "k8s Community vSphere Cluster for CI."
   # TODO(chrischdi): figure out discount and switch to STANDARD
   type = "TIME_LIMITED"
   network_config {
-    management_cidr       = "192.168.30.0/24"
+    management_cidr       = "192.168.31.0/24"
     vmware_engine_network = google_vmwareengine_network.vsphere-network.id
   }
 
@@ -36,6 +37,7 @@ resource "google_vmwareengine_private_cloud" "vsphere-cluster" {
   }
 }
 
+# Creates the VMware Engine Network for the Private Cloud.
 resource "google_vmwareengine_network" "vsphere-network" {
   name     = "k8s-gcp-gcve-network"
   project  = var.project_id
@@ -43,17 +45,19 @@ resource "google_vmwareengine_network" "vsphere-network" {
   location = "global"
 }
 
+# Creates the Network Policy to allow created virtual machines to reach out to the internet.
 resource "google_vmwareengine_network_policy" "external-access-rule-np" {
   name                  = "k8s-gcp-gcve-network-policy"
   project               = var.project_id
   location              = "us-central1"
-  edge_services_cidr    = "192.168.31.0/26"
+  edge_services_cidr    = "192.168.27.0/26"
   vmware_engine_network = google_vmwareengine_network.vsphere-network.id
   internet_access {
     enabled = true
   }
 }
 
+# Creates the Peering to the prow cluster to allow Pods running in Prow to access vCenter and created VMs in vSphere.
 resource "google_vmwareengine_network_peering" "prow_peering" {
   name                                = "peer-with-k8s-infra-prow-build"
   project                             = var.project_id
@@ -64,12 +68,14 @@ resource "google_vmwareengine_network_peering" "prow_peering" {
   import_custom_routes_with_public_ip = false
 }
 
+# Creates a maintenance network used for creating Google Compute VM(s) for setup or debugging purposes via ssh or wireguard VPN.
 resource "google_compute_network" "maintenance-vpc" {
   name                    = "maintenance-vpc-network"
   project                 = var.project_id
   auto_create_subnetworks = false
 }
 
+# Creates the Subnet for the above maintenance network.
 resource "google_compute_subnetwork" "maintenance-subnet" {
   name          = "maintenance-subnet"
   project       = var.project_id
@@ -78,6 +84,7 @@ resource "google_compute_subnetwork" "maintenance-subnet" {
   network       = google_compute_network.maintenance-vpc.id
 }
 
+# Creates the Peering to the maintenance network to maintenance VMs to access vCenter and created VMs in vSphere.
 resource "google_vmwareengine_network_peering" "maintenance_peering" {
   name                  = "peer-with-maintenance-vpc-network"
   description           = "Peering with maintenance vpc network"
@@ -87,6 +94,8 @@ resource "google_vmwareengine_network_peering" "maintenance_peering" {
   vmware_engine_network = google_vmwareengine_network.vsphere-network.id
 }
 
+# Creates the firewall rules for VMs running in the maintenance network so they can be accessed
+# via SSH or to expose wireguard VPN.
 resource "google_compute_firewall" "maintenance-firewall-internet" {
   name    = "maintenance-firewall-internet"
   project = var.project_id
@@ -105,6 +114,8 @@ resource "google_compute_firewall" "maintenance-firewall-internet" {
   }
 }
 
+# Creates the firewall rule to allow any traffic from the maintenance subnet to
+# the VMware Engine network or the internet.
 resource "google_compute_firewall" "maintenance-firewall-internal" {
   name    = "maintenance-firewall-internal"
   project = var.project_id

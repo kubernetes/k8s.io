@@ -21,6 +21,7 @@ This file defines:
 */
 
 terraform {
+  required_version = "1.10.5"
 
   backend "gcs" {
     bucket = "k8s-infra-tf-gcp-gcve"

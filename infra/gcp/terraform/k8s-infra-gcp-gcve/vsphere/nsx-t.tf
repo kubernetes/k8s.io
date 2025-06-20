@@ -14,18 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "nsxt_policy_tier1_gateway" "tier1_gw" {
-  display_name = "Tier1"
-}
-
-data "nsxt_policy_transport_zone" "overlay_tz" {
-  display_name = "TZ-OVERLAY"
-}
-
-data "nsxt_policy_edge_cluster" "edge_cluster" {
-  display_name = "edge-cluster"
-}
-
+# Creates a DHCP Server for the workload network.
 resource "nsxt_policy_dhcp_server" "k8s-ci-dhcp" {
   display_name      = "k8s-ci-dhcp"
   description       = "Terraform provisioned DhcpServerConfig"
@@ -34,7 +23,7 @@ resource "nsxt_policy_dhcp_server" "k8s-ci-dhcp" {
   server_addresses  = ["192.168.32.10/21"]
 }
 
-
+# Creates the subnet for hosting the VM workload network.
 resource "nsxt_policy_segment" "k8s-ci" {
   display_name      = "k8s-ci"
   connectivity_path = data.nsxt_policy_tier1_gateway.tier1_gw.path
@@ -43,12 +32,71 @@ resource "nsxt_policy_segment" "k8s-ci" {
 
   subnet {
     cidr        = "192.168.32.1/21"
-    dhcp_ranges = ["192.168.32.10-192.168.33.255"]
+    # This is the DHCP range used for created VMs.
+    # The IP range 192.168.35.0 - 192.168.37.127 is used for VIPs (e.g. via kube-vip)
+    # and is assigned to boskos projects.
+    dhcp_ranges = ["192.168.32.11-192.168.33.255"]
 
     dhcp_v4_config {
       server_address = "192.168.32.2/21"
       dns_servers    = [var.gcve_dns_server]
       lease_time     = 600
+
+      dhcp_generic_option {
+        # Set correct MTU to avoid package drops.
+        code = "26"
+        values = [ "1360" ]
+      }
     }
   }
+}
+
+# Static routes to the internet as workaround via the gateway vm at 192.168.32.8.
+# This is a workaround for a gcve connectivity issue which limits  requests to 64 for a certain amount of time.
+# Without this created VMs may e.g. fail during provisioning due to hitting image pull backoffs and thus timeouts.
+resource "nsxt_policy_static_route" "route1" {
+  display_name = "worakround route to ${each.value} via gateway vm"
+  gateway_path = data.nsxt_policy_tier1_gateway.tier1_gw.path
+
+  network      = "${each.value}"
+
+  next_hop {
+    admin_distance = "1"
+    ip_address     = "192.168.32.8"
+    interface      = nsxt_policy_segment.k8s-ci.path
+  }
+
+  for_each = toset([
+    "0.0.0.0/5",
+    "8.0.0.0/7",
+    "11.0.0.0/8",
+    "12.0.0.0/6",
+    "16.0.0.0/4",
+    "32.0.0.0/3",
+    "64.0.0.0/2",
+    "128.0.0.0/3",
+    "160.0.0.0/5",
+    "168.0.0.0/6",
+    "172.0.0.0/12",
+    "172.32.0.0/11",
+    "172.64.0.0/10",
+    "172.128.0.0/9",
+    "173.0.0.0/8",
+    "174.0.0.0/7",
+    "176.0.0.0/4",
+    "192.0.0.0/9",
+    "192.128.0.0/11",
+    "192.160.0.0/13",
+    "192.169.0.0/16",
+    "192.170.0.0/15",
+    "192.172.0.0/14",
+    "192.176.0.0/12",
+    "192.192.0.0/10",
+    "193.0.0.0/8",
+    "194.0.0.0/7",
+    "196.0.0.0/6",
+    "200.0.0.0/5",
+    "208.0.0.0/4",
+    "224.0.0.0/3",
+  ])
 }

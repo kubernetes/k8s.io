@@ -14,12 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# Creates the resource pool prow for hosting all CI workload.
 resource "vsphere_resource_pool" "prow" {
   name                    = "prow"
   parent_resource_pool_id = data.vsphere_compute_cluster.compute_cluster.resource_pool_id
   scale_descendants_shares = "disabled"
 }
 
+# Creates the resource pool prow/templates for hosting VM Templates.
 resource "vsphere_resource_pool" "templates" {
   name                    = "templates"
   parent_resource_pool_id = vsphere_resource_pool.prow.id

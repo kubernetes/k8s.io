@@ -25,7 +25,7 @@ terraform {
 
   backend "gcs" {
     bucket = "k8s-infra-tf-gcp-gcve"
-    prefix = "k8s-infra-gcp-gcve"
+    prefix = "k8s-infra-gcp-gcve-vcenter-gateway"
   }
 
   required_providers {
@@ -33,5 +33,20 @@ terraform {
       source  = "hashicorp/google"
       version = "~> 6.34.1"
     }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = "~> 6.34.1"
+    }
+    vsphere = {
+      source  = "vmware/vsphere"
+      version = "~> 2.13.0"
+    }
   }
+}
+
+# Setup credentials to vSphere.
+provider "vsphere" {
+  user                 = var.vsphere_user
+  password             = var.vsphere_password
+  vsphere_server       = var.vsphere_server
 }

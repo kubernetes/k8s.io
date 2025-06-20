@@ -1,0 +1,29 @@
+#cloud-config
+
+write_files:
+- path: /etc/wireguard/wg0.conf
+  content: "${wg0}"
+  encoding: b64
+  permissions: "0600"
+
+- path: /etc/sysctl.d/10-wireguard.conf
+  content: |
+    net.ipv4.ip_forward = 1
+
+users:
+- name: ubuntu
+  primary_group: ubuntu
+  sudo: ALL=(ALL) NOPASSWD:ALL
+  shell: /bin/bash
+  groups: sudo, wheel
+  ssh_import_id: None
+  lock_passwd: true
+  ssh_authorized_keys:
+  - "${ssh_public_key}"
+
+runcmd:
+- apt-get update
+- apt install wireguard -q -y
+- sysctl -p /etc/sysctl.d/10-wireguard.conf
+- systemctl enable wg-quick@wg0
+- systemctl start wg-quick@wg0

@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+# Ensures admin access for groups and secret access for prow.
 module "iam" {
   source  = "terraform-google-modules/iam/google//modules/projects_iam"
   version = "~> 8.1"

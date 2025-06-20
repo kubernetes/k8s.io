@@ -14,6 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+variable "project_id" {
+  description = "The project ID to use for the gcve cluster."
+  default     = "broadcom-451918"
+  type        = string
+}
+
 # solution admin user from GCVE
 # xref: https://cloud.google.com/vmware-engine/docs/private-clouds/howto-elevate-privilege
 variable "vsphere_user" {
@@ -25,20 +31,6 @@ variable "vsphere_password" {
 }
 
 variable "vsphere_server" {
-  type = string
-}
-# NSX-T user from GCVE dashboard
-# xref: http://console.cloud.google.com/vmwareengine/privateclouds/us-central1-a/k8s-gcp-gcve/management-appliances?project=broadcom-451918
-variable "nsxt_user" {
-  type = string
-}
-
-variable "nsxt_password" {
-  type = string
-}
-
-
-variable "nsxt_server" {
   type = string
 }
 
@@ -73,15 +65,9 @@ variable "vsphere_network_name" {
   default = "k8s-ci"
 }
 
-# This is the name of the IAM group specific to prow CI and created via scripts/ensure-users-groups.sh
-variable "gcp_gcve_iam_group" {
-  type = string
-  default = "GVE.LOCAL\\prow-ci-group"
+# This is the public key which allows ssh access to the vm
+variable "ssh_public_key" {
+  type    = string
+  default = ""
 }
 
-# This is the number of projects to be created in vSphere.
-# It should match the number of boskos projects.
-variable "gcp_gcve_nr_projects" {
-  type    = number
-  default = 40
-}
