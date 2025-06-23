@@ -3,8 +3,8 @@
 approvers:
   - ahg-g
   - danehans
-  - jeffwan
   - kfswain
+  - nirrozenbaum
 
 labels:
   - sig/network
