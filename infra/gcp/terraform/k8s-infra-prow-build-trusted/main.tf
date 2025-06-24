@@ -60,28 +60,6 @@ module "prow_build_cluster" {
   cloud_shell_access = false
 }
 
-// The image/machine/disk match prow-build for consistency's sake
-module "prow_build_nodepool" {
-  source       = "../modules/gke-nodepool"
-  project_name = module.project.project_id
-  cluster_name = module.prow_build_cluster.cluster.name
-  location     = module.prow_build_cluster.cluster.location
-  name         = "trusted-pool1"
-  node_locations = [
-    "us-central1-a",
-    "us-central1-b",
-    "us-central1-f",
-  ]
-  initial_count   = 0
-  min_count       = 0
-  max_count       = 0
-  image_type      = "UBUNTU_CONTAINERD"
-  machine_type    = "n1-highmem-8"
-  disk_size_gb    = 200
-  disk_type       = "pd-ssd"
-  service_account = module.prow_build_cluster.cluster_node_sa.email
-}
-
 module "prow_build_nodepool2" {
   source       = "../modules/gke-nodepool"
   project_name = module.project.project_id
