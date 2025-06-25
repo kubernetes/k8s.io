@@ -50,15 +50,6 @@ resource pools and other vSphere components required when running tests. See:
 
 # Working around network issues
 
-There are two issues that can exist:
-
-## Existing limitation: maximum number of 64 connections/requests to an internet endpoint
-
-Workaround:
-
-* Route traffic via 192.168.32.8 (see [NSX Gateway VM](./nsx-gateway/))
-  * which tunnels via the maintenance jumphost
-
 ## Packages are dropped without any hop
 
 Example: `mtr -T -P 443 1.2.3.4` shows no hop at all (not even the gateway)
