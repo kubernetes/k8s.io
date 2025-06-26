@@ -1,0 +1,10 @@
+---
+webhooksCleanup:
+  image:
+    repository: registry.k8s.io/kubectl
+    tag: v1.32.3
+
+policyReportsCleanup:
+  image:
+    repository: registry.k8s.io/kubectl
+    tag: v1.32.3
