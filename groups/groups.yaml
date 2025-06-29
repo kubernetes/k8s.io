@@ -57,6 +57,7 @@ groups:
       - wg-device-management-leads@kubernetes.io
       - wg-etcd-operator-leads@kubernetes.io
       - wg-lts-leads@kubernetes.io
+      - wg-node-lifecycle-leads@kubernetes.io
       - wg-serving-leads@kubernetes.io
       - caniszczyk@linuxfoundation.org
       - cncf-speakers@linuxfoundation.org
