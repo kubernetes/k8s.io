@@ -319,6 +319,10 @@ restrictions:
     allowedGroups:
       - "^wg-data-protection@kubernetes.io$"
       - "^wg-data-protection-leads@kubernetes.io$"
+  - path: "wg-node-lifecycle/groups.yaml"
+    allowedGroups:
+      - "^wg-node-lifecycle@kubernetes.io$"
+      - "^wg-node-lifecycle-leads@kubernetes.io$"
   - path: "wg-policy/groups.yaml"
     allowedGroups:
       - "^wg-policy@kubernetes.io$"
