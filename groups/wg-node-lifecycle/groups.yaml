@@ -1,0 +1,54 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: wg-node-lifecycle-leads@kubernetes.io
+    name: wg-node-lifecycle-leads
+    description: |-
+      WG Node Lifecycle Organizers
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+    owners:
+      - Joel.speed@hotmail.co.uk
+      - atiratree@gmail.com
+      - fabrizio.pandini@gmail.com
+      - pehunt@redhat.com
+      - humble.devassy@gmail.com
+      - kubernetes.github.com@lucy.sh
+      - kw@linux.com
+      - rhallisey@nvidia.com
+
+  - email-id: wg-node-lifecycle@kubernetes.io
+    name: wg-node-lifecycle
+    description: |-
+      Public mailing list for WG Node Lifecycle
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+    owners:
+      - Joel.speed@hotmail.co.uk
+      - atiratree@gmail.com
+      - fabrizio.pandini@gmail.com
+      - pehunt@redhat.com
+      - humble.devassy@gmail.com
+      - kubernetes.github.com@lucy.sh
+      - kw@linux.com
+      - rhallisey@nvidia.com
+    members:
+      - wg-node-lifecycle-leads@kubernetes.io
