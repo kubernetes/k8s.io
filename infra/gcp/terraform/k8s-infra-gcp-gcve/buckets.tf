@@ -14,21 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "google_project" "project" {
+module "datadog_bucket" {
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 11.0"
+
+  name       = "k8s-datadog-billing-analysis-broadcom"
   project_id = var.project_id
-}
+  location   = "us"
 
-# Enables all required APIs for this project.
-resource "google_project_service" "project" {
-  project = data.google_project.project.id
-
-  for_each = toset([
-    "cloudasset.googleapis.com",
-    "compute.googleapis.com",
-    "essentialcontacts.googleapis.com",
-    "secretmanager.googleapis.com",
-    "vmwareengine.googleapis.com"
-  ])
-
-  service = each.key
+  iam_members = [
+    {
+      role   = "roles/storage.admin"
+      member = "serviceAccount:datadog@k8s-infra-seed.iam.gserviceaccount.com"
+    }
+  ]
 }

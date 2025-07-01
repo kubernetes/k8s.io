@@ -34,6 +34,7 @@ module "project" {
 
   activate_apis = [
     "secretmanager.googleapis.com",
+    "cloudasset.googleapis.com",
     "compute.googleapis.com",
     "container.googleapis.com",
     "cloudkms.googleapis.com",
