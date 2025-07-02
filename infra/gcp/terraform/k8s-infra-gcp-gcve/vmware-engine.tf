@@ -20,8 +20,7 @@ resource "google_vmwareengine_private_cloud" "vsphere-cluster" {
   name        = "k8s-gcp-gcve"
   project     = var.project_id
   description = "k8s Community vSphere Cluster for CI."
-  # TODO(chrischdi): figure out discount and switch to STANDARD
-  type = "TIME_LIMITED"
+  type = "STANDARD"
   network_config {
     management_cidr       = "192.168.31.0/24"
     vmware_engine_network = google_vmwareengine_network.vsphere-network.id
@@ -31,8 +30,7 @@ resource "google_vmwareengine_private_cloud" "vsphere-cluster" {
     cluster_id = "k8s-gcve-cluster"
     node_type_configs {
       node_type_id = "standard-72"
-      # TODO: node_count 1 is for the TIME_LIMITED version. Change to `3`.
-      node_count = 1
+      node_count = 3
     }
   }
 }
