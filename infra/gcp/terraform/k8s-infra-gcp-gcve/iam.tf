@@ -38,5 +38,8 @@ module "iam" {
     "roles/serviceusage.serviceUsageConsumer" = [
       "serviceAccount:datadog@k8s-infra-seed.iam.gserviceaccount.com"
     ]
+    "roles/bigquery.admin" = [
+      "serviceAccount:datadog@k8s-infra-seed.iam.gserviceaccount.com"
+    ]
   }
 }

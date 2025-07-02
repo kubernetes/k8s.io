@@ -39,6 +39,7 @@ resource "google_service_account_iam_binding" "datadog" {
   role               = "roles/iam.serviceAccountTokenCreator"
   members = [
     "serviceAccount:ddgci-3aada836c27bc3f0fb00@datadog-gci-sts-us5-prod.iam.gserviceaccount.com",
-    "serviceAccount:service-127754664067@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+    "serviceAccount:service-127754664067@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com",
+    "serviceAccount:service-305468410906@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
   ]
 }
