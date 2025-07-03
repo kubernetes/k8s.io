@@ -177,9 +177,9 @@ groups:
       ReconcileMembers: "true"
     members:
       - ctadeu@gmail.com
+      - cjsalaspelayo@gmail.com
+      - damiano.donati@gmail.com
       - davanum@gmail.com
-      - richmcase@gmail.com
-      - phongnguyen01.work@gmail.com
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
