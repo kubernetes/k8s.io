@@ -18,6 +18,7 @@ locals {
   // The groups have to be created before applying this terraform code
   registries = {
     aws-encryption-provider         = "group:k8s-infra-staging-provider-aws@kubernetes.io"
+    blixt                           = "group:k8s-infra-staging-blixt@kubernetes.io"
     charts                          = "group:k8s-infra-release-admins@kubernetes.io"
     cloud-provider-kind             = "group:k8s-infra-staging-kind@kubernetes.io"
     dra-example-driver              = "group:k8s-infra-staging-dra-example-driver@kubernetes.io"

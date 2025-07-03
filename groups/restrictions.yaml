@@ -156,6 +156,7 @@ restrictions:
     allowedGroups:
       - "^k8s-infra-push-cni@kubernetes.io$"
       - "^k8s-infra-staging-networking@kubernetes.io$"
+      - "^k8s-infra-staging-blixt@kubernetes.io$"
       - "^k8s-infra-staging-coredns@kubernetes.io$"
       - "^k8s-infra-staging-cpa@kubernetes.io$"
       - "^k8s-infra-staging-dns@kubernetes.io$"
