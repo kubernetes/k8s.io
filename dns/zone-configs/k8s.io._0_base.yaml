@@ -549,3 +549,7 @@ gateway-api-inference-extension.sigs:
 lws.sigs:
   type: CNAME
   value: kubernetes-sigs-lws.netlify.app.
+# https://github.com/kubernetes-sigs/container-object-storage-interface docs (@BlaineEXE, @shanduur)
+container-object-storage-interface.sigs:
+  type: CNAME
+  value: container-object-storage-interface.netlify.app.
