@@ -35,8 +35,9 @@ Vanity URL(s)
 
 NOTE: please see k8s.io/k8s.io/configmap-nginx.yaml for `server` definitions
 
-Redirections
-====
+# Redirections
+
+## go.k8s.io Redirects
 - https://go.k8s.io/api-review
 - https://go.k8s.io/bot-commands
 - https://go.k8s.io/calendar
@@ -66,6 +67,23 @@ Redirections
     - https://go.k8s.io/contact/sig-contributor-experience
     - https://go.k8s.io/contact/wg-lts
     - https://go.k8s.io/contact/committee-steering
+
+## rel.k8s.io Redirects
+
+### Direct Redirects
+- https://rel.k8s.io/ → https://github.com/kubernetes/kubernetes/releases
+- https://rel.k8s.io/k8s-release-cal → https://calendar.google.com/calendar/embed?src=kipmnllvl17vl9m98jen6ujcrs%40group.calendar.google.com
+- https://rel.k8s.io/k8s-sig-release-videos → https://youtube.com/playlist?list=PL69nYSiGNLP3QKkOsDsO6A0Y1rhgP84iZ&si=Mi095CYuJuz8LjN-
+
+### Version-specific Redirects
+
+Example:
+- https://rel.k8s.io/vXYY/releasemtg
+- https://rel.k8s.io/vXYY/retro
+- https://rel.k8s.io/v1XYY/contacts (Note: Access is restricted through Google Authorization)
+
+For all release versions, URLs follow this pattern:
+- https://rel.k8s.io/vXYY/{keyword} → https://github.com/kubernetes/sig-release/tree/master/releases/release-X.YY/links.md#{keyword}
 
 
 NOTE: please see configmap-nginx.yaml for rewrite rules.
