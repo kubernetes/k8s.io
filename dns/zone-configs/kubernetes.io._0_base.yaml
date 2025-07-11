@@ -5,7 +5,9 @@
 # documentation for each name is attached.
 '':
   - type: A
-    value: 147.75.40.148 # Netlify anycast CDN (@chenopis, @thockin)
+    values:
+    - 15.197.167.90 # Netlify high performance CDN (@bentheelder)
+    - 3.33.186.135  # Netlify high performance CDN (@bentheelder)
   - type: MX
     values:
     - exchange: aspmx.l.google.com.
