@@ -29,3 +29,8 @@ variable "default_region" {
   type    = string
   default = "eastus2"
 }
+
+variable "kops_storage_account_name" {
+  type    = string
+  default = "stkopsstatestore"
+}

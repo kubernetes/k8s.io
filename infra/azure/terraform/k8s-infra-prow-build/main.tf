@@ -45,3 +45,14 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
+
+resource "azurerm_storage_account" "stkops" {
+  name                             = var.kops_storage_account_name
+  location                         = module.azure_region.location
+  resource_group_name              = azurerm_resource_group.rg.name
+  account_tier                     = "Standard"
+  min_tls_version                  = "TLS1_0"
+  account_replication_type         = "RAGRS"
+  cross_tenant_replication_enabled = true
+  depends_on                       = [azurerm_resource_group.rg]
+}
