@@ -1,0 +1,28 @@
+objstoreConfig: |-
+  type: GCS
+  config:
+    bucket: k8s-io-thanos
+storegateway:
+  enabled: true
+query:
+  dnsDiscovery:
+    sidecarsService: monitoring-kube-prometheus-thanos-discovery
+    sidecarsNamespace: monitoring
+bucketweb:
+  enabled: true
+compactor:
+  enabled: true
+ruler:
+  enabled: true
+  alertmanagers:
+    - http://monitoring-kube-prometheus-alertmanager.monitoring.svc.cluster.local:9093
+  config: |-
+    groups:
+      - name: "metamonitoring"
+        rules:
+          - alert: "PrometheusDown"
+            expr: absent(up{prometheus="monitoring/kube-prometheus"})
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
