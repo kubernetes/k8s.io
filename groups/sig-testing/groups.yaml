@@ -250,6 +250,7 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
     - k8s-infra-prow-oncall@kubernetes.io
+    - elieser.pereiraa@gmail.com
 
   - email-id: k8s-infra-rbac-prow@kubernetes.io
     name: k8s-infra-rbac-prow
