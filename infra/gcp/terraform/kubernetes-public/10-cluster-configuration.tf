@@ -182,7 +182,7 @@ resource "google_container_cluster" "cluster" {
     }
     resource_limits {
       resource_type = "memory"
-      maximum       = 256
+      maximum       = 512
     }
     auto_provisioning_defaults {
       image_type = "COS_CONTAINERD"
