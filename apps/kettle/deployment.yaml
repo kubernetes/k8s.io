@@ -26,9 +26,11 @@ spec:
           value: kubernetes-public/kubernetes-ci-logs-updates/k8s-infra-kettle
         resources:
           requests:
-            memory: 4Gi
+            cpu: 2
+            memory: 14Gi
           limits:
-            memory: 12Gi
+            cpu: 2
+            memory: 14Gi
         volumeMounts:
         - name: data
           mountPath: /data
