@@ -330,6 +330,7 @@ infra:
       k8s-staging-cluster-api-nested:
       k8s-staging-coredns:
       k8s-staging-cpa:
+      k8s-staging-cpu-dra-driver:
       k8s-staging-cri-tools:
       k8s-staging-csi:
       k8s-staging-csi-secrets-store:
