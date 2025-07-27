@@ -173,3 +173,31 @@ resource "google_iam_workload_identity_pool_provider" "ppc64le" {
     jwks_json         = data.http.ppc64le_jwks.response_body
   }
 }
+
+data "http" "s390x_issuer" {
+  url      = "https://d7b2a019-eu-de.lb.appdomain.cloud:6443/.well-known/openid-configuration"
+  insecure = true
+}
+
+data "http" "s390x_jwks" {
+  url      = "https://d7b2a019-eu-de.lb.appdomain.cloud:6443/openid/v1/jwks"
+  insecure = true
+}
+
+resource "google_iam_workload_identity_pool_provider" "s390x" {
+  workload_identity_pool_id          = google_iam_workload_identity_pool.ibm_clusters.workload_identity_pool_id
+  project                            = module.project.project_id
+  workload_identity_pool_provider_id = "s390x"
+
+  attribute_mapping = {
+    "google.subject"                 = "\"ns/\" + assertion['kubernetes.io']['namespace'] + \"/sa/\" + assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.namespace"            = "assertion['kubernetes.io']['namespace']"
+    "attribute.service_account_name" = "assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.pod"                  = "assertion['kubernetes.io']['pod']['name']"
+  }
+  oidc {
+    allowed_audiences = ["sts.googleapis.com"]
+    issuer_uri        = jsondecode(data.http.s390xx_issuer.response_body)["issuer"]
+    jwks_json         = data.http.s390x_jwks.response_body
+  }
+}
