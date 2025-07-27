@@ -16,7 +16,7 @@ limitations under the License.
 
 module "gcb_bucket" {
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
-  version = "~> 5"
+  version = "~> 11.0"
 
   name       = "k8s-infra-prow-gcb"
   project_id = module.project.project_id

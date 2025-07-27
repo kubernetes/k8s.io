@@ -197,7 +197,7 @@ resource "google_iam_workload_identity_pool_provider" "s390x" {
   }
   oidc {
     allowed_audiences = ["sts.googleapis.com"]
-    issuer_uri        = jsondecode(data.http.s390xx_issuer.response_body)["issuer"]
+    issuer_uri        = jsondecode(data.http.s390x_issuer.response_body)["issuer"]
     jwks_json         = data.http.s390x_jwks.response_body
   }
 }
