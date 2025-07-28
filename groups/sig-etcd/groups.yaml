@@ -23,6 +23,7 @@ groups:
       - jablair@redhat.com
       - siarkowicz@google.com
       - wenjiazhang@google.com
+      - ivan@vald.es
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
