@@ -38,7 +38,5 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - jpbetz@google.com
-    - wenjiazhang@google.com
-    - jingyih@google.com
-    - yczhou@google.com
+    - sig-etcd-leads
+    - joshjms1607@gmail.com
