@@ -23,6 +23,7 @@ groups:
       - jablair@redhat.com
       - siarkowicz@google.com
       - wenjiazhang@google.com
+      - ivan@vald.es
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -30,3 +31,13 @@ groups:
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
       WhoCanModerateContent: "OWNERS_AND_MANAGERS"
       MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: k8s-infra-staging-etcd@kubernetes.io
+    name: k8s-infra-staging-etcd
+    description: |-
+      ACL for staging etcd
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - sig-etcd-leads
+    - joshjms1607@gmail.com
