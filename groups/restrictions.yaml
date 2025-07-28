@@ -179,6 +179,7 @@ restrictions:
       - "^k8s-infra-staging-nfd@kubernetes.io$"
       - "^k8s-infra-staging-npd@kubernetes.io$"
       - "^k8s-infra-staging-sp-operator@kubernetes.io$"
+      - "^k8s-infra-staging-dra-example-driver@kubernetes.io$"
   - path: "sig-release/groups.yaml"
     allowedGroups:
       - "^k8s-infra-push-sig-release@kubernetes.io$"
@@ -336,7 +337,6 @@ restrictions:
       - "^wg-lts-leads@kubernetes.io$"
   - path: "wg-device-management/groups.yaml"
     allowedGroups:
-      - "^k8s-infra-staging-dra-example-driver@kubernetes.io$"
       - "^wg-device-management@kubernetes.io$"
       - "^wg-device-management-leads@kubernetes.io$"
   - path: "wg-etcd-operator/groups.yaml"

@@ -173,6 +173,21 @@ groups:
       - timallclair@gmail.com
       - thockin@google.com
 
+  # push access to staging for dra-example-driver
+  - email-id: k8s-infra-staging-dra-example-driver@kubernetes.io
+    name: k8s-infra-staging-dra-example-driver
+    description: |-
+      ACL for pushing dra-example-driver artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - alexey.fomenko@intel.com
+      - eduard.bartosh@intel.com
+      - elezar@nvidia.com
+      - johuhn@microsoft.com
+      - klueska@gmail.com
+      - patrick.ohly@intel.com
+
   #
   # k8s-infra owners for sig-owned subprojects
   #
