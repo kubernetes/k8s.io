@@ -20,7 +20,6 @@ restrictions:
       - "^leads@kubernetes.io$"
   - path: "sig-api-machinery/groups.yaml"
     allowedGroups:
-      - "^k8s-infra-staging-etcd@kubernetes.io$"
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
       - "^sig-api-machinery-cel-dev@kubernetes.io$"
       - "^k8s-infra-staging-kubebuilder@kubernetes.io$"
@@ -135,6 +134,7 @@ restrictions:
     allowedGroups:
       - "@etcd.io$"
       - "^sig-etcd-leads@kubernetes.io$"
+      - "^k8s-infra-staging-etcd@kubernetes.io$"
   - path: "sig-docs/groups.yaml"
     allowedGroups:
       - "^blog@kubernetes.io$"

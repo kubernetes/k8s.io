@@ -100,18 +100,6 @@ groups:
   - xuchao@google.com
   - haoweic@google.com
 
-- email-id: k8s-infra-staging-etcd@kubernetes.io
-  name: k8s-infra-staging-etcd
-  description: |-
-   ACL for staging etcd
-  settings:
-    ReconcileMembers: "true"
-  members:
-   - jpbetz@google.com
-   - wenjiazhang@google.com
-   - jingyih@google.com
-   - yczhou@google.com
-
 - email-id: k8s-infra-staging-kubebuilder@kubernetes.io
   name: k8s-infra-staging-kubebuilder
   description: |-

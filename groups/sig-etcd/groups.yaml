@@ -30,3 +30,15 @@ groups:
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
       WhoCanModerateContent: "OWNERS_AND_MANAGERS"
       MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: k8s-infra-staging-etcd@kubernetes.io
+    name: k8s-infra-staging-etcd
+    description: |-
+      ACL for staging etcd
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - jpbetz@google.com
+    - wenjiazhang@google.com
+    - jingyih@google.com
+    - yczhou@google.com
