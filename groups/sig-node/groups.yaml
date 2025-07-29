@@ -146,6 +146,18 @@ groups:
       - pjbgf@linux.com
       - saschagrunert@gmail.com
 
+  - email-id: k8s-infra-staging-dra-driver-cpu@kubernetes.io
+    name: k8s-infra-staging-dra-driver-cpu
+    description: |-
+      ACL for pushing dra-driver-cpu artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jbelamaric@google.com
+      - klueska@gmail.com
+      - patrick.ohly@intel.com
+      - pkrishn@google.com
+
   #
   # k8s-infra gcs write access
   #
