@@ -85,3 +85,25 @@ module "powervs_workspace_tok04" {
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
+
+module "powervs_workspace_osa21_1" {
+  providers = {
+    ibm = ibm.powervs_osa21
+  }
+  source            = "./modules/pvs_workspace"
+  datacenter        = "osa21"
+  pi_workspace_name = "k8s-boskos-powervs-osa21-01"
+  resource_group_id = module.resource_group.k8s_rg_id
+  image_name        = var.image_name
+}
+
+module "powervs_workspace_osa21_2" {
+  providers = {
+    ibm = ibm.powervs_osa21
+  }
+  source            = "./modules/pvs_workspace"
+  datacenter        = "osa21"
+  pi_workspace_name = "k8s-boskos-powervs-osa21-02"
+  resource_group_id = module.resource_group.k8s_rg_id
+  image_name        = var.image_name
+}

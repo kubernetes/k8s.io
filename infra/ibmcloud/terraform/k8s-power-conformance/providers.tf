@@ -67,3 +67,10 @@ provider "ibm" {
   region           = "tok"
   zone             = "tok04"
 }
+
+provider "ibm" {
+  alias            = "powervs_osa21"
+  ibmcloud_api_key = local.key
+  region           = "osa"
+  zone             = "osa21"
+}
