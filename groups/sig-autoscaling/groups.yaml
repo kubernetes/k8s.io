@@ -15,7 +15,7 @@ groups:
       - guyjtempleton@googlemail.com
       - jack.francis@microsoft.com
       - jtuznik@google.com
-      - raywainman@googlemail.com
+      - raywainman@gmail.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -30,7 +30,7 @@ groups:
       - guyjtempleton@googlemail.com
       - jack.francis@microsoft.com
       - jtuznik@google.com
-      - raywainman@googlemail.com
+      - raywainman@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -93,7 +93,7 @@ groups:
       - kwiesmueller@google.com
       - luizaoj@google.com
       - rgowman@google.com
-      - raywainman@googlemail.com
+      - raywainman@gmail.com
 
   #
   # k8s-infra gcs write access
