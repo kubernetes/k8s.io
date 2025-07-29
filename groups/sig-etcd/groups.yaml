@@ -39,5 +39,5 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - sig-etcd-leads
+    - sig-etcd-leads@kubernetes.io
     - joshjms1607@gmail.com
