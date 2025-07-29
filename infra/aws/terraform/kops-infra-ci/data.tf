@@ -28,3 +28,12 @@ data "aws_region" "current" {
 }
 
 data "aws_organizations_organization" "current" {}
+
+data "aws_iam_roles" "sso_admins" {
+  name_regex  = "AWSReservedSSO_AdministratorAccess_.*"
+  path_prefix = "/aws-reserved/sso.amazonaws.com/"
+}
+
+data "aws_eks_cluster_auth" "eks" {
+  name = module.eks.cluster_name
+}
