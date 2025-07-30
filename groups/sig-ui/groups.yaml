@@ -39,9 +39,8 @@ teams:
     name: k8s-infra-staging-headlamp
     description: |-
       ACL for staging Headlamp
+    settings:
+      ReconcileMembers: "true"
     members:
       - me@joaquimrocha.com
       - renesd@gmail.com
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
