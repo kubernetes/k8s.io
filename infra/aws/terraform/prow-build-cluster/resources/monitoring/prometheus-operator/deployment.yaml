@@ -46,7 +46,12 @@ spec:
                 - ALL
             readOnlyRootFilesystem: true
       nodeSelector:
-        kubernetes.io/os: linux
+        node-group: stable
+      tolerations:
+      - key: node-group
+        operator: Equal
+        value: stable
+        effect: NoSchedule
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534
