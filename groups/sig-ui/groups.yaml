@@ -1,4 +1,4 @@
-teams:
+groups:
   - email-id: sig-ui-leads@kubernetes.io
     name: sig-ui-leads
     description: |-
