@@ -53,6 +53,27 @@ module "eks" {
   cluster_addons = {
     coredns = {
       most_recent = true
+      configuration_values = jsonencode({
+        "nodeSelector" : {
+          "node-group" : "stable"
+        },
+        "tolerations" : [
+          {
+            "key" : "CriticalAddonsOnly",
+            "operator" : "Exists"
+          },
+          {
+            "effect" : "NoSchedule",
+            "key" : "node-role.kubernetes.io/control-plane"
+          },
+          {
+            "effect" : "NoSchedule",
+            "key" : "node-group",
+            "operator" : "Equal",
+            "value" : "stable"
+          }
+        ]
+      })
     }
     kube-proxy = {
       most_recent = true
@@ -64,6 +85,26 @@ module "eks" {
     aws-ebs-csi-driver = {
       most_recent              = true
       service_account_role_arn = module.ebs_csi_irsa.iam_role_arn
+      configuration_values = jsonencode({
+        "controller" : {
+          "nodeSelector" : {
+            "node-group" : "stable"
+          },
+          "tolerations" : [
+            {
+              "effect" : "NoExecute",
+              "operator" : "Exists",
+              "tolerationSeconds" : 300
+            },
+            {
+              "effect" : "NoSchedule",
+              "key" : "node-group",
+              "operator" : "Equal",
+              "value" : "stable"
+            }
+          ]
+        }
+      })
     }
     eks-pod-identity-agent = {
       most_recent = true
