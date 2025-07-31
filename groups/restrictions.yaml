@@ -313,6 +313,10 @@ restrictions:
       - "^sig-k8s-infra@kubernetes.io$"
       - "^sig-k8s-infra-leads@kubernetes.io$"
       - "^sig-k8s-infra-private@kubernetes.io$"
+  - path: "wg-ai-conformance/groups.yaml"
+    allowedGroups:
+      - "^wg-ai-conformance@kubernetes.io$"
+      - "^wg-ai-conformance-leads@kubernetes.io$"
   - path: "wg-batch/groups.yaml"
     allowedGroups:
       - "^wg-batch@kubernetes.io$"

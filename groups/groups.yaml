@@ -53,6 +53,7 @@ groups:
       - sig-testing-leads@kubernetes.io
       - sig-ui-leads@kubernetes.io
       - sig-windows-leads@kubernetes.io
+      - wg-ai-conformance-leads@kubernetes.io
       - wg-batch-leads@kubernetes.io
       - wg-device-management-leads@kubernetes.io
       - wg-etcd-operator-leads@kubernetes.io

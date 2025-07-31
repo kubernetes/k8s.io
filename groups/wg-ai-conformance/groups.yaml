@@ -1,0 +1,38 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: wg-ai-conformance-leads@kubernetes.io
+    name: wg-ai-conformance-leads
+    description: |-
+      WG AI Conformance Organizers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - chiachenk@google.com
+      - mfahlandt@pixel-haufen.de
+      - ritazh@microsoft.com
+      - terrytangyuan@gmail.com
+
+  - email-id: wg-ai-conformance@kubernetes.io
+    name: wg-ai-conformance
+    description: |-
+      Public mailing list for AI Conformance
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - chiachenk@google.com
+      - mfahlandt@pixel-haufen.de
+      - ritazh@microsoft.com
+      - terrytangyuan@gmail.com
+    members:
+      - wg-ai-conformance-leads@kubernetes.io
