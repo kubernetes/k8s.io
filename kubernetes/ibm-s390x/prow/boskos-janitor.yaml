@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boskos-ibmcloud-janitor
+  labels:
+    app: boskos-ibmcloud-janitor
+spec:
+  replicas: 2 # 2 distributed janitor instances
+  selector:
+    matchLabels:
+      app: boskos-ibmcloud-janitor
+  template:
+    metadata:
+      labels:
+        app: boskos-ibmcloud-janitor
+    spec:
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: boskos-ibmcloud-janitor
+          image: gcr.io/k8s-staging-boskos/ibmcloud-janitor-boskos:v20250612-e9e5322
+          args:
+            - --boskos-url=http://boskos.test-pods.svc.cluster.local.
+            - --resource-type=powervs
+            - --ignore-api-key=true
+            - --account-id=efa47ec6fd45473a9e1fd6b7b8363f5c
+          env:
+          - name: IBMCLOUD_ENV_FILE # TODO: explore on how to read key from the file instead of env var
+            value: "/home/.ibmcloud/api-key"
+          volumeMounts:
+            - name: credentials
+              mountPath: /home/.ibmcloud
+      volumes:
+        - name: credentials
+          secret:
+            secretName: boskos-janitor-api-key
