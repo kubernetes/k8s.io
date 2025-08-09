@@ -17,7 +17,7 @@ limitations under the License.
 // WARNING, MAKE SURE YOU DON"T DESTROY THESE CLUSTERS ACCIDENTALLY
 module "prow" {
   source                       = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster"
-  version                      = "~> 30.2"
+  version                      = "~> 37.1"
   project_id                   = module.project.project_id
   name                         = "prow"
   region                       = "us-central1"
@@ -73,7 +73,7 @@ module "prow" {
 
 module "utility_cluster" {
   source                       = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster"
-  version                      = "~> 30.2"
+  version                      = "~> 37.1"
   project_id                   = module.project.project_id
   name                         = "utility"
   region                       = "us-central1"

@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  config: |
+    resources:
+    - names:
+      - k8s-s390x-test-vpc
+      state: dirty
+      type: vpc-service
+kind: ConfigMap
+metadata:
+  name: resources

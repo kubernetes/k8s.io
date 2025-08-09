@@ -16,7 +16,7 @@ limitations under the License.
 
 module "project" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 14.5"
+  version = "~> 18.0"
 
   name            = "k8s-infra-prow"
   project_id      = "k8s-infra-prow"

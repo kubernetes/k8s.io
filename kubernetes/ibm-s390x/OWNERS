@@ -1,0 +1,16 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- mkumatag
+- Prajyot-Parab
+- Rajalakshmi-Girish
+
+reviewers:
+- mkumatag
+- Prajyot-Parab
+- Rajalakshmi-Girish
+
+labels:
+- sig/k8s-infra
+- area/infra
+- area/infra/ibmcloud
