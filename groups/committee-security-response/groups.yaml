@@ -65,6 +65,7 @@ groups:
       - security@ubuntu.com
       - VMware.psirt@broadcom.com
       - vulnerabilityreports@cloudfoundry.org
+      - psirt@nutanix.com
 
   - email-id: security@kubernetes.io
     name: security
