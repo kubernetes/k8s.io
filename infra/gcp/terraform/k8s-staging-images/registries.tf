@@ -38,6 +38,7 @@ locals {
     secrets-store-sync              = "group:k8s-infra-staging-secrets-store-sync@kubernetes.io"
     test-infra                      = "group:k8s-infra-staging-test-infra@kubernetes.io"
     csi-vsphere                     = "group:k8s-infra-staging-csi-vsphere@kubernetes.io"
+    csi-driver-host-path            = "group:k8s-infra-staging-csi@kubernetes.io"
   }
 
   # Only registries used internally by CI should be listed here
