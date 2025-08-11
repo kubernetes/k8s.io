@@ -22,6 +22,7 @@
     "sha256:e4490605b2a99d37d77e88e36fde8610eb7a67f74d0a359403f73f9c7dca6983": ["v1.33.0-beta.0"]
     "sha256:5b26cff209f8e50b92cc4282f79405e3aee7e4caa07fabc3f1347aa924c8bf64": ["v1.33.0-rc.0"]
     "sha256:0cbaaf01257f21fac0d4bb5bfd9ce1c32b6b8f64dadc68d28aa64a50153d39f4": ["v1.34.0-beta.0"]
+    "sha256:5bb259aa20d054bade59c878fec92d7974c29cd3e0b5a27eeb88d25287233ada": ["v1.34.0-rc.0"]
 - name: extra/mdlint
   dmap:
     "sha256:1148fab985b6808a78fbdd27a2e66d2b0b8de4a2c15dfe339ada8793b20816ce": ["0.17.0"]
