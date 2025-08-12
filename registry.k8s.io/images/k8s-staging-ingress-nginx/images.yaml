@@ -376,6 +376,7 @@
 - name: charts/ingress-nginx
   dmap:
     "sha256:e5927c7d7a113f288c1ed5e45ee48b7d208ee5d125c9a830e86e35e92f5fb032": ["v4.12.5"]
+    "sha256:1d936cee5b433a84f69065b90ec15abfb01eb78645af9926754c1fb2fa3d8c92": ["v4.13.1"]
 
 #
 # The following images have been renamed or are no longer maintained.
