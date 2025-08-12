@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- wg-ai-integration-leads
+reviewers:
+- wg-ai-integration-leads
+
+labels:
+- wg/ai-integration
