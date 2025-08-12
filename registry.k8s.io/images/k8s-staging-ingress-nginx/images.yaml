@@ -372,6 +372,11 @@
     "sha256:d0e1c47936200ea40294436dee573451aaae65bef5942cd3a4d56d43c92ad93d": ["v2.2.0"]
     "sha256:8407e6ccec478e9791267657995ee7a021385c52d8f79ea0e6aa4461742ecd21": ["v2.2.1"]
 
+# Ingress NGINX: Chart
+- name: charts/ingress-nginx
+  dmap:
+    "sha256:e5927c7d7a113f288c1ed5e45ee48b7d208ee5d125c9a830e86e35e92f5fb032": ["v4.12.5"]
+
 #
 # The following images have been renamed or are no longer maintained.
 #
