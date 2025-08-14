@@ -143,7 +143,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - pjbgf@linux.com
       - saschagrunert@gmail.com
 
   - email-id: k8s-infra-staging-dra-driver-cpu@kubernetes.io
