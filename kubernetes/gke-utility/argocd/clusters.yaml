@@ -84,6 +84,7 @@ spec:
         config: "{{ .config }}"
       metadata:
         labels:
+          argocd.argoproj.io/secret-type: cluster
           clusterType: prow
           environment: prod
           prowNamespace: test-pods
@@ -105,11 +106,12 @@ spec:
     template:
       engineVersion: v2
       data:
-        name: ibm-s90x
+        name: ibm-s390x
         server: https://d7b2a019-eu-de.lb.appdomain.cloud:6443
         config: "{{ .config }}"
       metadata:
         labels:
+          argocd.argoproj.io/secret-type: cluster
           clusterType: prow
           environment: prod
           prowNamespace: test-pods
