@@ -3,22 +3,20 @@ kind: Kustomization
 namespace: default
 
 resources:
-- cherrypicker.yaml
-- crier.yaml
-- deck.yaml
-- external-secrets.yaml
-- gce-ssd-retain_storageclass.yaml
-- ghproxy.yaml
-- hook.yaml
-- horologium.yaml
-- hyperdisk-sc.yaml
-- gateway.yaml
-- needs-rebase.yaml
-- pipeline.yaml
-- prow-controller-manager.yaml
-- pushgateway.yaml
-- sinker.yaml
-- statusreconciler.yaml
-- tide.yaml
-- monitoring.yaml
-- trusted_serviceaccounts.yaml
+  - cherrypicker.yaml
+  - crier.yaml
+  - deck.yaml
+  - external-secrets.yaml
+  - ghproxy.yaml
+  - hook.yaml
+  - horologium.yaml
+  - hyperdisk-sc.yaml
+  - gateway.yaml
+  - needs-rebase.yaml
+  - pipeline.yaml
+  - prow-controller-manager.yaml
+  - pushgateway.yaml
+  - sinker.yaml
+  - statusreconciler.yaml
+  - tide.yaml
+  - monitoring.yaml
