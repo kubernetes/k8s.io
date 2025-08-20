@@ -6,7 +6,6 @@ metadata:
 data:
   APP_NAME: "k8s.elections"
   APP_ENV: production
-  APP_KEY: ""
   APP_DEBUG: "False"
   APP_URL: "http://localhost"
   APP_PORT: "8080"
