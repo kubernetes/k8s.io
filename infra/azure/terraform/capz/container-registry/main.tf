@@ -46,6 +46,41 @@ resource "azurerm_management_lock" "registry_lock" {
   notes      = "Contact Capz"
 }
 
+resource "azurerm_container_registry_cache_rule" "tigera_operator" {
+  name                  = "tigera-operator-cache"
+  container_registry_id = azurerm_container_registry.capzci_registry.id
+  source_repo           = "quay.io/tigera/operator"
+  target_repo           = "tigera/operator"
+}
+
+resource "azurerm_container_registry_cache_rule" "calico_node" {
+  name                  = "calico-node-cache"
+  container_registry_id = azurerm_container_registry.capzci_registry.id
+  source_repo           = "quay.io/calico/node"
+  target_repo           = "calico/node"
+}
+
+resource "azurerm_container_registry_cache_rule" "calico_cni" {
+  name                  = "calico-cni-cache"
+  container_registry_id = azurerm_container_registry.capzci_registry.id
+  source_repo           = "quay.io/calico/cni"
+  target_repo           = "calico/cni"
+}
+
+resource "azurerm_container_registry_cache_rule" "calico_kube_controllers" {
+  name                  = "calico-kube-controllers-cache"
+  container_registry_id = azurerm_container_registry.capzci_registry.id
+  source_repo           = "quay.io/calico/kube-controllers"
+  target_repo           = "calico/kube-controllers"
+}
+
+resource "azurerm_container_registry_cache_rule" "calico_ctl" {
+  name                  = "calico-ctl-cache"
+  container_registry_id = azurerm_container_registry.capzci_registry.id
+  source_repo           = "quay.io/calico/ctl"
+  target_repo           = "calico/ctl"
+}
+
 resource "azurerm_container_registry_task" "registry_task" {
   container_registry_id = azurerm_container_registry.capzci_registry.id
   name                  = "midnight_capz_purge"
