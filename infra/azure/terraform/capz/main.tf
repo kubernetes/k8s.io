@@ -16,6 +16,7 @@ limitations under the License.
 
 provider "azurerm" {
   features {}
+  subscription_id = var.subscription_id
 }
 
 terraform {
@@ -131,7 +132,9 @@ module "cluster_api_gallery" {
   source              = "./cluster-api-gallery"
   resource_group_name = var.resource_group_name
   location            = var.location
-  depends_on          = module.role_assignments
+  depends_on          = [
+    module.role_assignments
+  ]
 }
 
 # Import CAPZ monitoring module
