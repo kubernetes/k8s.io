@@ -204,7 +204,12 @@ aliases:
     - pohly
     - saschagrunert
     - soltysh
-## BEGIN CUSTOM CONTENT
+  ## BEGIN CUSTOM CONTENT
+  minikube-approvers:
+    - medyagh
+    - spowelljr
+    - prezha
+    - comradeprogrammer
   promo-tools-approvers:
     - cpanato
     - jeremyrickard
