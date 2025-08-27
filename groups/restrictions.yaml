@@ -89,6 +89,7 @@ restrictions:
       - "^k8s-infra-staging-capi-operator@kubernetes.io$"
       - "^sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io$"
       - "^k8s-infra-kops-maintainers@kubernetes.io$"
+      - "^k8s-infra-staging-minikube@kubernetes.io$"
       - "^k8s-infra-staging-addon-manager@kubernetes.io$"
       - "^k8s-infra-staging-capi-cloudstack@kubernetes.io$"
       - "^k8s-infra-staging-capi-docker@kubernetes.io$"

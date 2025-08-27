@@ -1,5 +1,4 @@
 groups:
-
   #
   # Mailing lists
   #
@@ -88,6 +87,16 @@ groups:
     owners:
       - alexandr.demicev@suse.com
       - jspeed@redhat.com
+
+  - email-id: k8s-infra-staging-minikube@kubernetes.io
+    name: k8s-infra-staging-minikube
+    description: |-
+      ACL for staging Minikube
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - medya@google.com
+      - tangjiaming1999@gmail.com
 
   - email-id: k8s-infra-staging-capi-operator@kubernetes.io
     name: k8s-infra-staging-capi-operator
@@ -358,7 +367,6 @@ groups:
       - justinsb@google.com
       - richmcase@gmail.com
 
-
   - email-id: sig-cluster-lifecycle-cluster-api-gcp-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-gcp-alerts
     description: |-
@@ -511,7 +519,6 @@ groups:
   # infrastructure owned or managed by this SIG. A high level of trust is
   # required for membership in these groups.
   #
-
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
