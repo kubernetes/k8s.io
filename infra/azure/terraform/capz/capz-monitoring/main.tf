@@ -26,13 +26,22 @@ variable "subscription_id" {
   type = string
 }
 
+locals {
+  # reproduce the previous pattern seen in state:
+  # "<first-10-of-rg>-<rg>-<first-6-of-subscription>"
+  computed_dns_prefix = format("%s-%s-%s",
+    substr(var.resource_group_name, 0, 10),
+    var.resource_group_name,
+    substr(var.subscription_id, 0, 6)
+  )
+}
+
 # Create the "capz-monitoring" resource group
 resource "azurerm_resource_group" "capz-monitoring" {
   location = var.location
   name     = var.resource_group_name
   tags = {
     DO-NOT-DELETE     = "contact capz"
-    creationTimestamp = timestamp()
   }
 }
 
@@ -50,7 +59,7 @@ resource "azurerm_role_assignment" "monitoring_reader" {
 }
 
 resource "azurerm_kubernetes_cluster" "capz-monitoring" {
-  dns_prefix            = var.resource_group_name
+  dns_prefix            = local.computed_dns_prefix
   location              = var.location
   name                  = var.resource_group_name
   resource_group_name   = var.resource_group_name
@@ -64,6 +73,8 @@ resource "azurerm_kubernetes_cluster" "capz-monitoring" {
   ]
   kubelet_identity {
     user_assigned_identity_id = azurerm_user_assigned_identity.capz_monitoring_user_identity.id
+    client_id                 = azurerm_user_assigned_identity.capz_monitoring_user_identity.client_id
+    object_id                 = azurerm_user_assigned_identity.capz_monitoring_user_identity.principal_id
   }
   identity {
     type                     = "UserAssigned"
@@ -72,8 +83,14 @@ resource "azurerm_kubernetes_cluster" "capz-monitoring" {
     ]
   }
   default_node_pool {
-    name       = "default"
+    name       = "nodepool1"
     node_count = 1
-    vm_size    = "Standard_Ds2_v2"
+    vm_size    = "Standard_DS2_v2"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      "linux_profile",
+    ]
   }
 }

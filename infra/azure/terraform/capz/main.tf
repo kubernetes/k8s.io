@@ -140,8 +140,8 @@ module "role_assignments" {
 # Import Cluster API gallery module
 module "cluster_api_gallery" {
   source              = "./cluster-api-gallery"
-  resource_group_name = var.resource_group_name
-  location            = var.location
+  resource_group_name = "cluster-api-gallery"
+  location            = "northcentralus"
   depends_on          = [
     module.role_assignments
   ]
@@ -150,7 +150,7 @@ module "cluster_api_gallery" {
 # Import CAPZ monitoring module
 module "capz_monitoring" {
   source              = "./capz-monitoring"
-  resource_group_name = var.resource_group_name
+  resource_group_name = "capz-monitoring"
   location            = var.location
   subscription_id     = data.azurerm_client_config.current.subscription_id
 }

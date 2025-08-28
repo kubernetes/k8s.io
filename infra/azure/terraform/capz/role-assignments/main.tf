@@ -37,19 +37,19 @@ data "azuread_service_principal" "az_service_principal" {
 }
 
 resource "azurerm_role_assignment" "rg_contributor" {
-  principal_id         = data.azuread_service_principal.az_service_principal.id
+  principal_id         = data.azuread_service_principal.az_service_principal.object_id
   role_definition_name = "Contributor"
   scope                = "/subscriptions/${var.subscription_id}"
 }
 
 resource "azurerm_role_assignment" "storage_blob_data_contributor" {
-  principal_id         = data.azuread_service_principal.az_service_principal.id
+  principal_id         = data.azuread_service_principal.az_service_principal.object_id
   role_definition_name = "Storage Blob Data Contributor"
   scope                = "/subscriptions/${var.subscription_id}"
 }
 
 resource "azurerm_role_assignment" "acr_pull" {
-  principal_id         = data.azuread_service_principal.az_service_principal.id
+  principal_id         = data.azuread_service_principal.az_service_principal.object_id
   role_definition_name = "AcrPull"
   scope                = var.container_registry_scope
 }
@@ -71,7 +71,7 @@ resource "azurerm_role_definition" "custom_role" {
 }
 
 resource "azurerm_role_assignment" "sp_custom_role_assignment" {
-  principal_id         = data.azuread_service_principal.az_service_principal.id
+  principal_id         = data.azuread_service_principal.az_service_principal.object_id
   role_definition_name = azurerm_role_definition.custom_role.name
   scope                = "/subscriptions/${var.subscription_id}"
 }
@@ -79,7 +79,7 @@ resource "azurerm_role_assignment" "sp_custom_role_assignment" {
 resource "azurerm_key_vault_access_policy" "access_policy_gmsa_sp" {
   key_vault_id = var.key_vault_id
   tenant_id    = data.azuread_service_principal.az_service_principal.application_tenant_id
-  object_id    = data.azuread_service_principal.az_service_principal.id
+  object_id    = data.azuread_service_principal.az_service_principal.object_id
   secret_permissions = [
     "Get",
     "Delete",
