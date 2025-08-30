@@ -46,14 +46,14 @@ resource "azurerm_role_assignment" "monitoring_reader" {
   principal_id         = azurerm_user_assigned_identity.capz_monitoring_user_identity.principal_id
   role_definition_name = "Monitoring Reader"
   scope                = "/subscriptions/${var.subscription_id}"
-  depends_on = [ azurerm_user_assigned_identity.capz_monitoring_user_identity ]
+  depends_on           = [azurerm_user_assigned_identity.capz_monitoring_user_identity]
 }
 
 resource "azurerm_kubernetes_cluster" "capz-monitoring" {
-  dns_prefix            = var.resource_group_name
-  location              = var.location
-  name                  = var.resource_group_name
-  resource_group_name   = var.resource_group_name
+  dns_prefix          = var.resource_group_name
+  location            = var.location
+  name                = var.resource_group_name
+  resource_group_name = var.resource_group_name
   tags = {
     DO-NOT-DELETE     = "contact capz"
     creationTimestamp = timestamp()
@@ -66,7 +66,7 @@ resource "azurerm_kubernetes_cluster" "capz-monitoring" {
     user_assigned_identity_id = azurerm_user_assigned_identity.capz_monitoring_user_identity.id
   }
   identity {
-    type                     = "UserAssigned"
+    type = "UserAssigned"
     identity_ids = [
       azurerm_user_assigned_identity.capz_monitoring_user_identity.id
     ]
