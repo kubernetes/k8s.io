@@ -29,10 +29,7 @@ resource "azurerm_container_registry" "capzci_registry" {
   sku                    = "Premium"
   anonymous_pull_enabled = true
 
-  retention_policy {
-    days    = 7
-    enabled = true
-  }
+  retention_policy_in_days = 7
 
   tags = {
     RetentionPolicy = "7days"
@@ -87,10 +84,7 @@ resource "azurerm_container_registry" "e2eprivate_registry" {
   resource_group_name = var.resource_group_name
   sku                 = "Premium"
 
-  retention_policy {
-    days    = 7
-    enabled = true
-  }
+  retention_policy_in_days = 7
 
   tags = {
     RetentionPolicy = "7days"

@@ -62,6 +62,7 @@ resource "azurerm_user_assigned_identity" "pipelines_user_identity" {
   name                = "ado-pipeline-mi"
   resource_group_name = var.resource_group_name
   tags = {
+    DO-NOT-DELETE     = "UpstreamInfra"
     creationTimestamp = "2024-10-24T00:00:00Z"
   }
   depends_on = [
