@@ -58,6 +58,22 @@ resource "azurerm_role_assignment" "monitoring_reader" {
   depends_on = [ azurerm_user_assigned_identity.capz_monitoring_user_identity ]
 }
 
+# lookups for AKS-created user assigned identities and DNS zone (do not create new identities)
+data "azurerm_user_assigned_identity" "aks_akv" {
+  name                = "azurekeyvaultsecretsprovider-capz-monitoring"
+  resource_group_name = "MC_capz-monitoring_capz-monitoring_eastus"
+}
+
+data "azurerm_user_assigned_identity" "aks_webapp" {
+  name                = "webapprouting-capz-monitoring"
+  resource_group_name = "MC_capz-monitoring_capz-monitoring_eastus"
+}
+
+data "azurerm_dns_zone" "capz_monitoring" {
+  name                = "capz-monitoring.org"
+  resource_group_name = "capz-monitoring"
+}
+
 resource "azurerm_kubernetes_cluster" "capz-monitoring" {
   dns_prefix            = local.computed_dns_prefix
   location              = var.location
@@ -82,15 +98,39 @@ resource "azurerm_kubernetes_cluster" "capz-monitoring" {
       azurerm_user_assigned_identity.capz_monitoring_user_identity.id
     ]
   }
+
+  # keep AKS addon-managed identities and the DNS zone referenced via data sources
+  key_vault_secrets_provider {
+    secret_rotation_enabled  = false
+    secret_rotation_interval = "2m"
+
+    # secret_identity is computed by the AKS provider; do not set it here.
+  }
+
+  web_app_routing {
+    default_nginx_controller = "AnnotationControlled"
+    dns_zone_ids = [
+      data.azurerm_dns_zone.capz_monitoring.id,
+    ]
+
+    # web_app_routing_identity is created/linked by AKS and is computed; do not set it here.
+  }
+
   default_node_pool {
     name       = "nodepool1"
-    node_count = 1
+    node_count = 3
     vm_size    = "Standard_DS2_v2"
+
+    upgrade_settings {
+      drain_timeout_in_minutes      = 0
+      max_surge                     = "10%"
+      node_soak_duration_in_minutes = 0
+    }
   }
 
   lifecycle {
     ignore_changes = [
-      linux_profile,
+      linux_profile
     ]
   }
 }

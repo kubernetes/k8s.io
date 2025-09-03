@@ -37,10 +37,6 @@ resource "azurerm_resource_provider_registration" "provider-k8s-config" {
   }
 }
 
-resource "azurerm_resource_provider_registration" "provider-container-service" {
-  name = "Microsoft.ContainerService"
-}
-
 resource "azurerm_marketplace_agreement" "traefik-agreement" {
   publisher = "containous"
   offer     = "traefik-proxy"

@@ -74,6 +74,12 @@ resource "azurerm_role_assignment" "acr_pull_private" {
   scope                = var.e2eprivate_registry_scope
 }
 
+resource "azurerm_role_assignment" "acr_pull_cloud_provider" {
+  principal_id         = var.cloud_provider_user_identity_id
+  role_definition_name = "AcrPull"
+  scope                = var.container_registry_scope
+}
+
 resource "azurerm_role_definition" "custom_role" {
   name  = "WriteAccessOnly"
   scope = "/subscriptions/${var.subscription_id}"

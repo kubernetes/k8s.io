@@ -77,18 +77,6 @@ resource "azurerm_role_assignment" "gmsa_role_assignment" {
   depends_on     = [azurerm_user_assigned_identity.domain_vm_identity]
 }
 
-resource "azurerm_role_assignment" "cloud_provider_sub_contributor" {
-  principal_id         = azurerm_user_assigned_identity.cloud_provider_user_identity.principal_id
-  role_definition_name = "Contributor"
-  scope                = "/subscriptions/${var.subscription_id}"
-}
-
-resource "azurerm_role_assignment" "acr_pull" {
-  principal_id         = azurerm_user_assigned_identity.cloud_provider_user_identity.principal_id
-  role_definition_name = "AcrPull"
-  scope                = var.container_registry_scope
-}
-
 output "cloud_provider_user_identity_id" {
   value = azurerm_user_assigned_identity.cloud_provider_user_identity.principal_id
 }
