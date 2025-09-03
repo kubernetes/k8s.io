@@ -90,7 +90,7 @@ resource "azurerm_kubernetes_cluster" "capz-monitoring" {
 
   lifecycle {
     ignore_changes = [
-      "linux_profile",
+      linux_profile,
     ]
   }
 }

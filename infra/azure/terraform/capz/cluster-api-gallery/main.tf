@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "cluster-api-gallery" {
   name     = var.resource_group_name
   tags = {
     DO-NOT-DELETE     = "UpstreamInfra"
-    creationTimestamp = "2024-10-24T00:00:00Z"
+    creationTimestamp = "2024-10-03T15:53:21Z"
   }
 }
 
@@ -39,8 +39,9 @@ resource "azurerm_shared_image_gallery" "community_gallery" {
   name                = "community_gallery"
   resource_group_name = "cluster-api-gallery"
   tags = {
-    creationTimestamp = "2024-10-24T00:00:00Z"
+    creationTimestamp = "2024-10-24T17:36:37Z"
     jobName           = "image-builder-sig-ubuntu-2404"
+    DO-NOT-DELETE     = "UpstreamInfra"
   }
   sharing {
     permission = "Community"

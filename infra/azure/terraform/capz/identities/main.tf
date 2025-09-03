@@ -30,6 +30,10 @@ variable "container_registry_scope" {
   type = string
 }
 
+variable "e2eprivate_registry_scope" {
+  type    = string
+}
+
 resource "azurerm_user_assigned_identity" "cloud_provider_user_identity" {
   name                = "cloud-provider-user-identity"
   location            = var.location

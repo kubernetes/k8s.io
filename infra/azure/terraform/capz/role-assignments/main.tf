@@ -28,6 +28,14 @@ variable "subscription_id" {
   type = string
 }
 
+variable "e2eprivate_registry_scope" {
+  type    = string
+}
+
+variable "cloud_provider_user_identity_id" {
+  type    = string
+}
+
 variable "key_vault_id" {
   type = string
 } 
@@ -42,6 +50,12 @@ resource "azurerm_role_assignment" "rg_contributor" {
   scope                = "/subscriptions/${var.subscription_id}"
 }
 
+resource "azurerm_role_assignment" "rg_contributor_cloud_provider" {
+  principal_id         = var.cloud_provider_user_identity_id
+  role_definition_name = "Contributor"
+  scope                = "/subscriptions/${var.subscription_id}"
+}
+
 resource "azurerm_role_assignment" "storage_blob_data_contributor" {
   principal_id         = data.azuread_service_principal.az_service_principal.object_id
   role_definition_name = "Storage Blob Data Contributor"
@@ -52,6 +66,12 @@ resource "azurerm_role_assignment" "acr_pull" {
   principal_id         = data.azuread_service_principal.az_service_principal.object_id
   role_definition_name = "AcrPull"
   scope                = var.container_registry_scope
+}
+
+resource "azurerm_role_assignment" "acr_pull_private" {
+  principal_id         = var.cloud_provider_user_identity_id
+  role_definition_name = "AcrPull"
+  scope                = var.e2eprivate_registry_scope
 }
 
 resource "azurerm_role_definition" "custom_role" {
