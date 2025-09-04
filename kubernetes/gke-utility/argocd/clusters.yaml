@@ -84,6 +84,7 @@ spec:
         config: "{{ .config }}"
       metadata:
         labels:
+          argocd.argoproj.io/secret-type: cluster
           clusterType: prow
           environment: prod
           prowNamespace: test-pods
@@ -91,6 +92,33 @@ spec:
   data:
     - remoteRef:
         key: ibm-ppc64le-argo-secret
+      secretKey: config
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k8s-infra-prow
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: ibm-s390x
+spec:
+  target:
+    template:
+      engineVersion: v2
+      data:
+        name: ibm-s390x
+        server: https://d7b2a019-eu-de.lb.appdomain.cloud:6443
+        config: "{{ .config }}"
+      metadata:
+        labels:
+          argocd.argoproj.io/secret-type: cluster
+          clusterType: prow
+          environment: prod
+          prowNamespace: test-pods
+          cloud: ibm
+  data:
+    - remoteRef:
+        key: ibm-s390x-argo-secret
       secretKey: config
   secretStoreRef:
     kind: ClusterSecretStore
