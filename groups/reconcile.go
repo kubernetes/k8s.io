@@ -27,17 +27,17 @@ import (
 	"sync"
 
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
+	"cloud.google.com/go/secretmanager/apiv1/secretmanagerpb"
 	"github.com/bmatcuk/doublestar"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2/google"
 	admin "google.golang.org/api/admin/directory/v1"
 	"google.golang.org/api/groupssettings/v1"
 	"google.golang.org/api/option"
-	secretmanagerpb "google.golang.org/genproto/googleapis/cloud/secretmanager/v1"
 	"gopkg.in/yaml.v3"
 
 	utilerrors "k8s.io/apimachinery/pkg/util/errors"
-	"k8s.io/test-infra/pkg/genyaml"
+	"sigs.k8s.io/prow/pkg/genyaml"
 )
 
 type Config struct {
@@ -364,7 +364,10 @@ func (r *Reconciler) printGroupMembersAndSettings() error {
 		groupsConfig.Groups = append(groupsConfig.Groups, group)
 	}
 
-	cm := genyaml.NewCommentMap("reconcile.go")
+	cm, err := genyaml.NewCommentMap(nil, nil, "reconcile.go")
+	if err != nil {
+		return fmt.Errorf("failed to construct commentMap: %w", err)
+	}
 	yamlSnippet, err := cm.GenYaml(groupsConfig)
 	if err != nil {
 		return fmt.Errorf("unable to generate yaml for groups : %w", err)
