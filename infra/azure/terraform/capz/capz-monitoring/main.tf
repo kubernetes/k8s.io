@@ -26,13 +26,22 @@ variable "subscription_id" {
   type = string
 }
 
+locals {
+  # reproduce the previous pattern seen in state:
+  # "<first-10-of-rg>-<rg>-<first-6-of-subscription>"
+  computed_dns_prefix = format("%s-%s-%s",
+    substr(var.resource_group_name, 0, 10),
+    var.resource_group_name,
+    substr(var.subscription_id, 0, 6)
+  )
+}
+
 # Create the "capz-monitoring" resource group
 resource "azurerm_resource_group" "capz-monitoring" {
   location = var.location
   name     = var.resource_group_name
   tags = {
     DO-NOT-DELETE     = "contact capz"
-    creationTimestamp = timestamp()
   }
 }
 
@@ -49,8 +58,24 @@ resource "azurerm_role_assignment" "monitoring_reader" {
   depends_on = [ azurerm_user_assigned_identity.capz_monitoring_user_identity ]
 }
 
+# lookups for AKS-created user assigned identities and DNS zone (do not create new identities)
+data "azurerm_user_assigned_identity" "aks_akv" {
+  name                = "azurekeyvaultsecretsprovider-capz-monitoring"
+  resource_group_name = "MC_capz-monitoring_capz-monitoring_eastus"
+}
+
+data "azurerm_user_assigned_identity" "aks_webapp" {
+  name                = "webapprouting-capz-monitoring"
+  resource_group_name = "MC_capz-monitoring_capz-monitoring_eastus"
+}
+
+data "azurerm_dns_zone" "capz_monitoring" {
+  name                = "capz-monitoring.org"
+  resource_group_name = "capz-monitoring"
+}
+
 resource "azurerm_kubernetes_cluster" "capz-monitoring" {
-  dns_prefix            = var.resource_group_name
+  dns_prefix            = local.computed_dns_prefix
   location              = var.location
   name                  = var.resource_group_name
   resource_group_name   = var.resource_group_name
@@ -64,6 +89,8 @@ resource "azurerm_kubernetes_cluster" "capz-monitoring" {
   ]
   kubelet_identity {
     user_assigned_identity_id = azurerm_user_assigned_identity.capz_monitoring_user_identity.id
+    client_id                 = azurerm_user_assigned_identity.capz_monitoring_user_identity.client_id
+    object_id                 = azurerm_user_assigned_identity.capz_monitoring_user_identity.principal_id
   }
   identity {
     type                     = "UserAssigned"
@@ -71,9 +98,39 @@ resource "azurerm_kubernetes_cluster" "capz-monitoring" {
       azurerm_user_assigned_identity.capz_monitoring_user_identity.id
     ]
   }
+
+  # keep AKS addon-managed identities and the DNS zone referenced via data sources
+  key_vault_secrets_provider {
+    secret_rotation_enabled  = false
+    secret_rotation_interval = "2m"
+
+    # secret_identity is computed by the AKS provider; do not set it here.
+  }
+
+  web_app_routing {
+    default_nginx_controller = "AnnotationControlled"
+    dns_zone_ids = [
+      data.azurerm_dns_zone.capz_monitoring.id,
+    ]
+
+    # web_app_routing_identity is created/linked by AKS and is computed; do not set it here.
+  }
+
   default_node_pool {
-    name       = "default"
-    node_count = 1
-    vm_size    = "Standard_Ds2_v2"
+    name       = "nodepool1"
+    node_count = 3
+    vm_size    = "Standard_DS2_v2"
+
+    upgrade_settings {
+      drain_timeout_in_minutes      = 0
+      max_surge                     = "10%"
+      node_soak_duration_in_minutes = 0
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      linux_profile
+    ]
   }
 }

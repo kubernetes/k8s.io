@@ -16,6 +16,7 @@ limitations under the License.
 
 provider "azurerm" {
   features {}
+  subscription_id = var.subscription_id
 }
 
 terraform {
@@ -34,10 +35,6 @@ resource "azurerm_resource_provider_registration" "provider-k8s-config" {
     name       = "Extensions"
     registered = true
   }
-}
-
-resource "azurerm_resource_provider_registration" "provider-container-service" {
-  name = "Microsoft.ContainerService"
 }
 
 resource "azurerm_marketplace_agreement" "traefik-agreement" {
@@ -62,7 +59,6 @@ resource "azurerm_marketplace_agreement" "kinvolk-stable2-agreement" {
 # Data source to get the current client configuration
 data "azurerm_client_config" "current" {}
 
-
 # Resource group for CAPZ CI resources
 resource "azurerm_resource_group" "capz_ci" {
   location = var.location
@@ -80,29 +76,9 @@ resource "azurerm_storage_account" "k8sprowstorage" {
   min_tls_version                  = "TLS1_0"
   account_replication_type         = "RAGRS"
   cross_tenant_replication_enabled = true
-  depends_on                       = [azurerm_resource_group.capz_ci]
-}
-
-# Import identities module
-module "identities" {
-  source              = "./identities"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  depends_on          = [azurerm_resource_group.capz_ci]
-}
-
-# Import key vault module
-module "key_vault" {
-  source              = "./key-vault"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  tenant_id           = data.azurerm_client_config.current.tenant_id
-  identities = {
-    cloud_provider_user_identity_id = module.identities.cloud_provider_user_identity_id
-    domain_vm_identity_id           = module.identities.domain_vm_identity_id
-    gmsa_user_identity_id           = module.identities.gmsa_user_identity_id
-  }
-  depends_on = [azurerm_resource_group.capz_ci]
+  depends_on = [
+    azurerm_resource_group.capz_ci
+  ]
 }
 
 # Import container registry module
@@ -110,7 +86,37 @@ module "container_registry" {
   source              = "./container-registry"
   resource_group_name = var.resource_group_name
   location            = var.location
-  depends_on          = [azurerm_resource_group.capz_ci]
+  depends_on = [
+    azurerm_resource_group.capz_ci
+  ]
+}
+
+# Import identities module
+module "identities" {
+  source                   = "./identities"
+  resource_group_name      = var.resource_group_name
+  location                 = var.location
+  subscription_id          = data.azurerm_client_config.current.subscription_id
+  container_registry_scope = module.container_registry.container_registry_id 
+  e2eprivate_registry_scope = module.container_registry.e2eprivate_registry_id
+  depends_on = [
+    azurerm_resource_group.capz_ci
+  ]
+}
+
+# Import key vault module
+module "key_vault" {
+  source                            = "./key-vault"
+  resource_group_name               = var.resource_group_name
+  location                          = var.location
+  tenant_id                         = data.azurerm_client_config.current.tenant_id  
+  identities = {
+    domain_vm_identity_id           = module.identities.domain_vm_identity_id
+    gmsa_user_identity_id           = module.identities.gmsa_user_identity_id
+  }
+  depends_on = [
+    azurerm_resource_group.capz_ci
+  ]
 }
 
 # Import role assignments module
@@ -118,7 +124,10 @@ module "role_assignments" {
   source                   = "./role-assignments"
   resource_group_name      = var.resource_group_name
   container_registry_scope = module.container_registry.container_registry_id
-  subscription_id          = data.azurerm_client_config.current.subscription_id
+  e2eprivate_registry_scope = module.container_registry.e2eprivate_registry_id
+  cloud_provider_user_identity_id = module.identities.cloud_provider_user_identity_id
+  subscription_id          = data.azurerm_client_config.current.subscription_id 
+  key_vault_id             = module.key_vault.key_vault_id
   depends_on = [
     azurerm_resource_group.capz_ci,
     azurerm_storage_account.k8sprowstorage,
@@ -129,15 +138,17 @@ module "role_assignments" {
 # Import Cluster API gallery module
 module "cluster_api_gallery" {
   source              = "./cluster-api-gallery"
-  resource_group_name = var.resource_group_name
-  location            = var.location
-  depends_on          = module.role_assignments
+  resource_group_name = "cluster-api-gallery"
+  location            = "northcentralus"
+  depends_on          = [
+    module.role_assignments
+  ]
 }
 
 # Import CAPZ monitoring module
 module "capz_monitoring" {
   source              = "./capz-monitoring"
-  resource_group_name = var.resource_group_name
+  resource_group_name = "capz-monitoring"
   location            = var.location
   subscription_id     = data.azurerm_client_config.current.subscription_id
 }

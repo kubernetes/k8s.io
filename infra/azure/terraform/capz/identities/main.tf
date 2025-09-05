@@ -22,6 +22,18 @@ variable "location" {
   type = string
 }
 
+variable "subscription_id" {
+  type = string
+}
+
+variable "container_registry_scope" {
+  type = string
+}
+
+variable "e2eprivate_registry_scope" {
+  type    = string
+}
+
 resource "azurerm_user_assigned_identity" "cloud_provider_user_identity" {
   name                = "cloud-provider-user-identity"
   location            = var.location
@@ -38,6 +50,31 @@ resource "azurerm_user_assigned_identity" "gmsa_user_identity" {
   name                = "gmsa-user-identity"
   location            = var.location
   resource_group_name = var.resource_group_name
+}
+
+resource "azurerm_role_definition" "gmsa_custom_role" {
+  name        = "gMSA"
+  scope       = "/subscriptions/${var.subscription_id}"
+  description = "Required permissions for gmsa to read properties of subscriptions and managed identities"
+  
+  permissions {
+    actions = [
+      "Microsoft.Resources/subscriptions/read",
+      "Microsoft.ManagedIdentity/userAssignedIdentities/read"
+    ]
+    not_actions = []
+  }
+  
+  assignable_scopes = [
+    "/subscriptions/${var.subscription_id}"
+  ]
+}
+
+resource "azurerm_role_assignment" "gmsa_role_assignment" {
+  principal_id   = azurerm_user_assigned_identity.domain_vm_identity.principal_id
+  role_definition_name = azurerm_role_definition.gmsa_custom_role.name
+  scope          = "/subscriptions/${var.subscription_id}"
+  depends_on     = [azurerm_user_assigned_identity.domain_vm_identity]
 }
 
 output "cloud_provider_user_identity_id" {
