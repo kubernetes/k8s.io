@@ -15,8 +15,7 @@ groups:
     owners:
       - kehannon@redhat.com
       - mwielgus@google.com
-      - soltysh@gmail.com
-      - swati.tcd@gmail.com
+      - yuki.iwai.tz@gmail.com
 
   - email-id: wg-batch@kubernetes.io
     name: wg-batch
@@ -32,7 +31,6 @@ groups:
     owners:
       - kehannon@redhat.com
       - mwielgus@google.com
-      - soltysh@gmail.com
-      - swati.tcd@gmail.com
+      - yuki.iwai.tz@gmail.com
     members:
       - wg-batch-leads@kubernetes.io
