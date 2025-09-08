@@ -500,6 +500,16 @@ groups:
       - tico88612@gmail.com
       - 2t.antoine@gmail.com
 
+  - email-id: karpenter-cluster-api-leads@kubernetes.io
+    name: karpenter-cluster-api-leads
+    description: |-
+      ACL for staging karpenter provider cluster api artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - msm@opbstudios.com
+      - macao@redhat.com
+
   #
   # k8s-infra gcs write access
   #
