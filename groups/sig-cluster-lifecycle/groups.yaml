@@ -500,6 +500,22 @@ groups:
       - tico88612@gmail.com
       - 2t.antoine@gmail.com
 
+  - email-id: k8s-infra-staging-karpenter-provider-cluster-api@kubernetes.io
+    name: k8s-infra-staging-karpenter-provider-cluster-api
+    description: |-
+      ACL for staging karpenter provider cluster api artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - msm@opbstudios.com
+      # SIG Cluster Lifecycle leads
+      - cecilerobertm@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+      - justinsb@google.com
+      - vince@prigna.com
+
+
   #
   # k8s-infra gcs write access
   #

@@ -117,6 +117,7 @@ restrictions:
       - "^sig-cluster-lifecycle-kubespray-alerts@kubernetes.io$"
       - "^k8s-infra-staging-scl-image-builder@kubernetes.io$"
       - "^sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io$"
+      - "^k8s-infra-staging-karpenter-provider-cluster-api@kubernetes.io$"
   - path: "sig-contributor-experience/groups.yaml"
     allowedGroups:
       - "^community@kubernetes.io$"
