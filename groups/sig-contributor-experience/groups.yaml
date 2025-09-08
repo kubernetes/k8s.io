@@ -137,6 +137,7 @@ groups:
       - spiffxp@google.com
       - jberkus@redhat.com
       - marky.r.jackson@gmail.com
+      - chris@chrisshort.net
 
   - email-id: sig-contribex@kubernetes.io
     name: sig-contribex
