@@ -31,3 +31,9 @@ variable "storage_account_name" {
   default     = "k8sprowstoragecomm"
   description = "Name of the storage account."
 }
+
+variable "subscription_id" {
+  type        = string
+  default     = "46678f10-4bbb-447e-98e8-d2829589f2d8"
+  description = "Azure Subscription ID to use for the azurerm provider."
+}
