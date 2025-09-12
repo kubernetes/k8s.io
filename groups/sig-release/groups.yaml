@@ -301,6 +301,7 @@ groups:
       - kat.cosgrove@gmail.com
       - mudrinic.mare@gmail.com
       - saschagrunert@gmail.com
+      - drewhagendev@gmail.com # v1.35 Release Lead
 
   - email-id: sig-release@kubernetes.io
     name: sig-release
