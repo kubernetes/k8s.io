@@ -51,7 +51,6 @@ groups:
       - k8s@auggie.dev
       - mudrinic.mare@gmail.com
       - neoaggelos@gmail.com
-      - nng.grace@gmail.com # Subproject owner
       - pal.nabarun95@gmail.com
       - saschagrunert@gmail.com
       - satyampsoni@gmail.com
@@ -68,17 +67,15 @@ groups:
       - k8s-infra-google-build-admins@kubernetes.io
       - ameukam@gmail.com
       - cicih@google.com
-      - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
-      - fsmunoz@gmail.com # v1.34 EA
       - jameswangel@gmail.com
-      - jackhammervyom@gmail.com # v1.34 Release Lead
+      - drewhagendev@gmail.com # v1.35 Release Lead
+      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
+      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
+      - jenny.shu@solo.io # v1.35 Release Lead Shadow
       - joseph.r.sandoval@gmail.com
       - pal.nabarun95@gmail.com
-      - rytswd@gmail.com # v1.34 Release Lead Shadow
+      - rytswd@gmail.com # v1.35 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
-      - nng.grace@gmail.com # Subproject owner
-      - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
-      - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
@@ -208,19 +205,15 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - agustina.barbetta@gmail.com # v1.34 Communications Lead
       - akacloudmelon@gmail.com # v1.34 Communications Shadow
-      - cst.grzn@gmail.com # v1.34 Communications Shadow
-      - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
-      - fsmunoz@gmail.com # v1.34 EA
-      - jackhammervyom@gmail.com # v1.34 Release Lead
+      - cst.grzn@gmail.com # v1.35 Communications Lead
+      - drewhagendev@gmail.com # v1.35 Release Lead
+      - jenny.shu@solo.io # v1.35 Release Lead Shadow
       - josueleon3012@hotmail.com # v1.34 Communications Shadow
       - kat.cosgrove@gmail.com # Subproject owner
-      - nng.grace@gmail.com # Subproject owner
-      - rawat.dipesh@gmail.com # v1.34 Communications Shadow
-      - rytswd@gmail.com # v1.34 Release Lead Shadow
-      - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
-      - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
+      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
+      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
+      - rytswd@gmail.com # v1.35 Release Lead Shadow
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -263,22 +256,20 @@ groups:
       - release-managers-private@kubernetes.io
       - ameukam@gmail.com
       - antheabjung@gmail.com
-      - agustina.barbetta@gmail.com # v1.34 Communications Lead
       - bentheelder@google.com
-      - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
-      - fsmunoz@gmail.com # v1.34 EA
+      - cst.grzn@gmail.com # v1.35 Communications Lead
+      - drewhagendev@gmail.com # v1.35 Release Lead
       - gmccloskey@google.com
-      - jackhammervyom@gmail.com # v1.34 Release Lead
       - jameswangel@gmail.com
+      - jenny.shu@solo.io # v1.35 Release Lead Shadow
       - joseph.r.sandoval@gmail.com
       - kat.cosgrove@gmail.com # Subproject owner
       - mudrinic.mare@gmail.com
-      - nng.grace@gmail.com # Subproject owner
-      - rytswd@gmail.com # v1.34 Release Lead Shadow
+      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
+      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
+      - rytswd@gmail.com # v1.35 Release Lead Shadow
       - saugustus2@bloomberg.net
       - spiffxp@google.com
-      - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
-      - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
 
   - email-id: security-release-team@kubernetes.io
     name: security-release-team
@@ -309,8 +300,8 @@ groups:
       - k8s@auggie.dev
       - kat.cosgrove@gmail.com
       - mudrinic.mare@gmail.com
-      - nng.grace@gmail.com
       - saschagrunert@gmail.com
+      - drewhagendev@gmail.com # v1.35 Release Lead
 
   - email-id: sig-release@kubernetes.io
     name: sig-release
@@ -351,40 +342,32 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
-      - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
-      - fsmunoz@gmail.com # v1.34 EA
-      - jackhammervyom@gmail.com # v1.34 Release Lead
+      - drewhagendev@gmail.com # v1.35 Release Lead
+      - jenny.shu@solo.io # v1.35 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
-      - nng.grace@gmail.com # Subproject owner
-      - rytswd@gmail.com # v1.34 Release Lead Shadow
-      - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
-      - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
+      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
+      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
+      - rytswd@gmail.com # v1.35 Release Lead Shadow
     members:
       - admin@mb-consulting.dev # v1.34 Release Branch Manager
-      - agustina.barbetta@gmail.com # v1.34 Communications Lead
       - akacloudmelon@gmail.com # v1.34 Communications Shadow
       - aruparekh4@gmail.com # v1.34 Docs Shadow
-      - cst.grzn@gmail.com # v1.34 Communications Shadow
-      - drewhagendev@gmail.com # v1.34 Enhancements Shadow
+      - cst.grzn@gmail.com # v1.35 Communications Lead
       - elieser.pereiraa@gmail.com # v1.34 Release Signal Shadow
       - faeka6@gmail.com # v1.34 Enhancements Shadow
       - j@mickey.dev # v1.34 Enhancements Shadow
-      - jenny.shu@solo.io # v1.34 Enhancements Lead
       - josueleon3012@hotmail.com # v1.34 Communications Shadow
-      - michellengnx@gmail.com # v1.34 Docs Lead
       - muhammad.adil.ghaffar@est.tech # v1.34 Release Signal Shadow
       - neoaggelos@gmail.com # v1.34 Release Branch Management Shadow
       - nsarthaknegi360@gmail.com # v1.34 Release Signal Shadow
       - prajyotparab19@gmail.com # v1.34 Release Signal Shadow
-      - rajalakshmi.girish1@ibm.com # v1.34 Release Signal Lead
-      - rawat.dipesh@gmail.com # v1.34 Communications Shadow
-      - rayandas91@gmail.com # v1.34 Enhancements Shadow
+      - rayandas91@gmail.com # v1.35 Enhancements Lead
       - ryan.su@queensu.ca # v1.34 Docs Shadow
       - satyampsoni@gmail.com # v1.34 Release Branch Management Shadow
       - sean.mcginnis@gmail.com # v1.34 Enhancements Shadow
       - smith.rashan@gmail.com # v1.34 Docs Shadow
-      - tico88612@gmail.com # v1.34 Release Signal Shadow
-      - urvashichoubey0121@gmail.com # v1.34 Docs Shadow
+      - tico88612@gmail.com # v1.35 Release Signal Lead
+      - urvashichoubey0121@gmail.com # v1.35 Docs Lead
       - yujenhuang24@gmail.com # v1.34 Docs Shadow
 
   - email-id: release-team-shadows@kubernetes.io
@@ -403,39 +386,31 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
-      - fsmunoz@gmail.com # v1.34 EA
-      - jackhammervyom@gmail.com # v1.34 Release Lead
+      - drewhagendev@gmail.com # v1.35 Release Lead
       - kat.cosgrove@gmail.com # Subproject owner
-      - nng.grace@gmail.com # Subproject owner
     members:
-      - agustina.barbetta@gmail.com # v1.34 Communications Lead
       - akacloudmelon@gmail.com # v1.34 Communications Shadow
       - aruparekh4@gmail.com # v1.34 Docs Shadow
-      - cst.grzn@gmail.com # v1.34 Communications Shadow
-      - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
-      - drewhagendev@gmail.com # v1.34 Enhancements Shadow
+      - cst.grzn@gmail.com # v1.35 Communications Lead
       - elieser.pereiraa@gmail.com # v1.34 Release Signal Shadow
       - faeka6@gmail.com # v1.34 Enhancements Shadow
       - j@mickey.dev # v1.34 Enhancements Shadow
-      - jenny.shu@solo.io # v1.34 Enhancements Lead
+      - jenny.shu@solo.io # v1.35 Release Lead Shadow
       - josueleon3012@hotmail.com # v1.34 Communications Shadow
-      - michellengnx@gmail.com # v1.34 Docs Lead
       - muhammad.adil.ghaffar@est.tech # v1.34 Release Signal Shadow
       - neoaggelos@gmail.com # v1.34 Release Branch Management Shadow
       - nsarthaknegi360@gmail.com # v1.34 Release Signal Shadow
       - prajyotparab19@gmail.com # v1.34 Release Signal Shadow
-      - rajalakshmi.girish1@ibm.com # v1.34 Release Signal Lead
-      - rawat.dipesh@gmail.com # v1.34 Communications Shadow
-      - rayandas91@gmail.com # v1.34 Enhancements Shadow
+      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
+      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
+      - rayandas91@gmail.com # v1.35 Enhancements Lead
       - ryan.su@queensu.ca # v1.34 Docs Shadow
-      - rytswd@gmail.com # v1.34 Release Lead Shadow
+      - rytswd@gmail.com # v1.35 Release Lead Shadow
       - satyampsoni@gmail.com # v1.34 Release Branch Management Shadow
       - sean.mcginnis@gmail.com # v1.34 Enhancements Shadow
       - smith.rashan@gmail.com # v1.34 Docs Shadow
-      - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
-      - tico88612@gmail.com # v1.34 Release Signal Shadow
-      - urvashichoubey0121@gmail.com # v1.34 Docs Shadow
-      - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
+      - tico88612@gmail.com # v1.35 Release Signal Lead
+      - urvashichoubey0121@gmail.com # v1.35 Docs Lead
       - yujenhuang24@gmail.com # v1.34 Docs Shadow
 
   # RBAC groups:
@@ -480,7 +455,8 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
       - k8s-infra-release-viewers@kubernetes.io
-      - rajalakshmi.girish1@ibm.com # v1.34 Release Signal Lead
+      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
+      - tico88612@gmail.com # v1.35 Release Signal Lead
 
   - email-id: release-team-enhancements@kubernetes.io
     name: release-team-enhancements
@@ -498,20 +474,16 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - danieljoshuachan@gmail.com # v1.34 Release Lead Shadow
-      - drewhagendev@gmail.com # v1.34 Enhancements Shadow
+      - drewhagendev@gmail.com # v1.35 Release Lead
       - faeka6@gmail.com # v1.34 Enhancements Shadow
-      - fsmunoz@gmail.com # v1.34 EA
       - j@mickey.dev # v1.34 Enhancements Shadow
-      - jackhammervyom@gmail.com # v1.34 Release Lead
-      - jenny.shu@solo.io # v1.34 Enhancements Lead
+      - jenny.shu@solo.io # v1.35 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
-      - nng.grace@gmail.com # Subproject owner
-      - rayandas91@gmail.com # v1.34 Enhancements Shadow
-      - rytswd@gmail.com # v1.34 Release Lead Shadow
+      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
+      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
+      - rayandas91@gmail.com # v1.35 Enhancements Lead
+      - rytswd@gmail.com # v1.35 Release Lead Shadow
       - sean.mcginnis@gmail.com # v1.34 Enhancements Shadow
-      - sreeramvenkitesh@gmail.com # v1.34 Release Lead Shadow
-      - wendyha.sut@gmail.com # v1.34 Release Lead Shadow
 
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
     name: k8s-infra-staging-zeitgeist
