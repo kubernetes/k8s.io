@@ -31,16 +31,10 @@ variable "zone" {
   default     = "eu-de-1"
 }
 
-variable "resource_group_name" {
-  type        = string
-  description = "Resource group name"
-  default     = "rg-build-cluster"
-}
-
 variable "image_id" {
   type        = string
   description = "Image ID for instances"
-  default     = "r010-1476c687-824d-4b10-b604-7538defb3c73"
+  default     = "r010-bdd9c78f-4a2f-441f-a375-2ed288dcad15"
 }
 
 variable "keypair_name" {
@@ -60,55 +54,40 @@ variable "secrets_manager_id" {
   }
 }
 
-variable "bastion" {
-  type = object({
-    count   = number
-    profile = string
-    boot_volume = object({
-      size = number
-    })
-  })
-  default = {
-    count   = 1
-    profile = "bz2-8x32"
-    boot_volume = {
-      size = 100
-    }
-  }
+variable "control_plane_node_count" {
+  description = "Number of control plane nodes to create"
+  type        = number
+  default     = 5
 }
 
-variable "control_plane" {
-  type = object({
-    count   = number
-    profile = string
-    boot_volume = object({
-      size = number
-    })
-  })
-  default = {
-    count   = 5
-    profile = "bz2-8x32"
-    boot_volume = {
-      size = 100
-    }
-  }
+variable "control_plane_node_profile" {
+  description = "The profile to use for all control plane nodes"
+  type        = string
+  default     = "bz2-8x32"
 }
 
-variable "compute" {
-  type = object({
-    count   = number
-    profile = string
-    boot_volume = object({
-      size = number
-    })
-  })
-  default = {
-    count   = 10
-    profile = "bz2-8x32"
-    boot_volume = {
-      size = 100
-    }
-  }
+variable "control_plane_boot_volume_size" {
+  description = "The boot volume size (in GB) for all control plane nodes"
+  type        = number
+  default     = 100
+}
+
+variable "compute_node_count" {
+  description = "Number of compute worker nodes to create"
+  type        = number
+  default     = 10
+}
+
+variable "compute_node_profile" {
+  description = "The profile to use for all compute nodes"
+  type        = string
+  default     = "bz2-8x32"
+}
+
+variable "compute_boot_volume_size" {
+  description = "The boot volume size (in GB) for all compute nodes"
+  type        = number
+  default     = 100
 }
 
 variable "connection_timeout" {
@@ -133,4 +112,10 @@ variable "bastion_profile" {
   description = "Instance profile for the bastion host"
   type        = string
   default     = "bz2-8x32"
+}
+
+variable "api_server_port" {
+  description = "Port for the Kubernetes API server"
+  type        = number
+  default     = 6443
 }

@@ -31,8 +31,8 @@ output "bastion_sg_name" {
   value = ibm_is_security_group.bastion_sg.name
 }
 
-output "master_sg_name" {
-  value = ibm_is_security_group.master_sg.name
+output "control_plane_sg_name" {
+  value = ibm_is_security_group.control_plane_sg.name
 }
 
 output "worker_sg_name" {

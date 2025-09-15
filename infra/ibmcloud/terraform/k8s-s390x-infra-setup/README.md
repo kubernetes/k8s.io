@@ -1,5 +1,10 @@
 # _TF: IBM K8s Account Infrastructure_
-This Terraform configuration sets up an organized structure for deploying various IBM Cloud resources using modules. 
+This Terraform configuration sets up an organized structure for deploying various IBM Cloud resources using following modules. 
+
+## Modules Used:
+- **vpc**: IBM Cloud VPC, subnets, and networking components
+- **secrets_manager**: IBM Secrets Manager for credential storage
+- **resource_group**: IBM Resource Group management
 
 ---
 # To run the automation, follow these steps in order:
@@ -7,13 +12,16 @@ This Terraform configuration sets up an organized structure for deploying variou
 **1. Navigate to the correct directory**
 <br> You need to be in the `k8s-s390x-infra-setup` directory to run the automation.
 
-**2. Check the `versions.tf` file**
-<br> Set `secret_key` and `access_key` in `versions.tf` to configure the remote S3 backend (IBM Cloud COS).
-
+**2. Export COS Secrets**
+<br> Export `access_key` and `secret_key` as environment variables.
+```
+export AWS_ACCESS_KEY_ID="<HMAC_ACCESS_KEY_ID>"
+export AWS_SECRET_ACCESS_KEY="<HMAC_SECRET_ACCESS_KEY>"
+```
 **3. Initialize Terraform**
 <br> Execute the following command to initialize Terraform in your project directory. This command will download the necessary provider plugins and prepare the working environment.
 ```
-terraform init -reconfigure
+terraform init -upgrade
 ```
 
 **4. Check the `variables.tf` file**

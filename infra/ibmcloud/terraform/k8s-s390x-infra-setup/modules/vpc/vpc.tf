@@ -43,8 +43,8 @@ resource "ibm_is_security_group" "bastion_sg" {
   resource_group = var.resource_group_id
 }
 
-resource "ibm_is_security_group" "master_sg" {
-  name           = "k8s-vpc-s390x-master-sg"
+resource "ibm_is_security_group" "control_plane_sg" {
+  name           = "k8s-vpc-s390x-control-plane-sg"
   vpc            = ibm_is_vpc.vpc.id
   resource_group = var.resource_group_id
 }
@@ -91,10 +91,10 @@ resource "ibm_is_security_group_rule" "worker_internal" {
   remote    = ibm_is_subnet.subnet.ipv4_cidr_block
 }
 
-resource "ibm_is_security_group_rule" "worker_master_all" {
+resource "ibm_is_security_group_rule" "worker_control_plane_all" {
   group     = ibm_is_security_group.worker_sg.id
   direction = "inbound"
-  remote    = ibm_is_security_group.master_sg.id
+  remote    = ibm_is_security_group.control_plane_sg.id
 }
 
 resource "ibm_is_security_group_rule" "bastion_private_inbound" {
@@ -110,19 +110,19 @@ resource "ibm_is_security_group_rule" "bastion_private_outbound" {
 }
 
 
-resource "ibm_is_security_group_rule" "master_to_worker_kubelet_api" {
+resource "ibm_is_security_group_rule" "control_plane_to_worker_kubelet_api" {
   group     = ibm_is_security_group.worker_sg.id
   direction = "inbound"
-  remote    = ibm_is_security_group.master_sg.id
+  remote    = ibm_is_security_group.control_plane_sg.id
   tcp {
     port_min = 10250
     port_max = 10250
   }
 }
-resource "ibm_is_security_group_rule" "allow_master_to_worker_all" {
+resource "ibm_is_security_group_rule" "allow_control_plane_to_worker_all" {
   group     = ibm_is_security_group.worker_sg.id
   direction = "inbound"
-  remote    = ibm_is_security_group.master_sg.id
+  remote    = ibm_is_security_group.control_plane_sg.id
   tcp {
     port_min = 1
     port_max = 65535
@@ -142,7 +142,7 @@ resource "ibm_is_security_group_rule" "allow_bastion_ssh_to_worker" {
 resource "ibm_is_security_group_rule" "allow_vpc_cidr_to_worker" {
   group     = ibm_is_security_group.worker_sg.id
   direction = "inbound"
-  remote    = "10.243.0.0/24"
+  remote    = ibm_is_subnet.subnet.ipv4_cidr_block
   tcp {
     port_min = 1
     port_max = 65535
@@ -224,14 +224,14 @@ resource "ibm_is_security_group_rule" "worker_pod_outbound" {
   }
 }
 
-resource "ibm_is_security_group_rule" "master_inbound_from_workers" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_inbound_from_workers" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "inbound"
   remote    = ibm_is_security_group.worker_sg.id
 }
 
-resource "ibm_is_security_group_rule" "master_inbound_from_bastion_ssh" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_inbound_from_bastion_ssh" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "inbound"
   remote    = ibm_is_security_group.bastion_sg.id
   tcp {
@@ -240,20 +240,20 @@ resource "ibm_is_security_group_rule" "master_inbound_from_bastion_ssh" {
   }
 }
 
-resource "ibm_is_security_group_rule" "master_inbound_from_internal_cidr" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_inbound_from_internal_cidr" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "inbound"
-  remote    = "10.243.0.0/24" # adjust based on your CIDR
+  remote    = ibm_is_subnet.subnet.ipv4_cidr_block
 }
 
-resource "ibm_is_security_group_rule" "master_inbound_from_self" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_inbound_from_self" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "inbound"
-  remote    = ibm_is_security_group.master_sg.id
+  remote    = ibm_is_security_group.control_plane_sg.id
 }
 
-resource "ibm_is_security_group_rule" "master_inbound_api" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_inbound_api" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "inbound"
   remote    = "0.0.0.0/0"
   tcp {
@@ -261,8 +261,8 @@ resource "ibm_is_security_group_rule" "master_inbound_api" {
     port_max = 6443
   }
 }
-resource "ibm_is_security_group_rule" "master_outbound_http" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_outbound_http" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "outbound"
   tcp {
     port_min = 80
@@ -271,8 +271,8 @@ resource "ibm_is_security_group_rule" "master_outbound_http" {
   remote = "0.0.0.0/0"
 }
 
-resource "ibm_is_security_group_rule" "master_outbound_https" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_outbound_https" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "outbound"
   tcp {
     port_min = 443
@@ -281,8 +281,8 @@ resource "ibm_is_security_group_rule" "master_outbound_https" {
   remote = "0.0.0.0/0"
 }
 
-resource "ibm_is_security_group_rule" "master_outbound_dns_tcp" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_outbound_dns_tcp" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "outbound"
   tcp {
     port_min = 53
@@ -291,8 +291,8 @@ resource "ibm_is_security_group_rule" "master_outbound_dns_tcp" {
   remote = "0.0.0.0/0"
 }
 
-resource "ibm_is_security_group_rule" "master_outbound_dns_udp" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_outbound_dns_udp" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "outbound"
   udp {
     port_min = 53
@@ -301,8 +301,8 @@ resource "ibm_is_security_group_rule" "master_outbound_dns_udp" {
   remote = "0.0.0.0/0"
 }
 
-resource "ibm_is_security_group_rule" "master_outbound_api" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_outbound_api" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "outbound"
   tcp {
     port_min = 6443
@@ -311,19 +311,19 @@ resource "ibm_is_security_group_rule" "master_outbound_api" {
   remote = "0.0.0.0/0"
 }
 
-resource "ibm_is_security_group_rule" "master_outbound_to_workers" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_outbound_to_workers" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "outbound"
-  remote    = ibm_is_security_group.master_sg.id
+  remote    = ibm_is_security_group.control_plane_sg.id
 }
 
-resource "ibm_is_security_group_rule" "master_outbound_to_all" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_outbound_to_all" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "outbound"
   remote    = "0.0.0.0/0"
 }
-resource "ibm_is_security_group_rule" "master_pod_inbound" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_pod_inbound" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "inbound"
   remote    = ibm_is_subnet.subnet.ipv4_cidr_block
   tcp {
@@ -332,8 +332,8 @@ resource "ibm_is_security_group_rule" "master_pod_inbound" {
   }
 }
 
-resource "ibm_is_security_group_rule" "master_pod_outbound" {
-  group     = ibm_is_security_group.master_sg.id
+resource "ibm_is_security_group_rule" "control_plane_pod_outbound" {
+  group     = ibm_is_security_group.control_plane_sg.id
   direction = "outbound"
   remote    = ibm_is_subnet.subnet.ipv4_cidr_block
   tcp {

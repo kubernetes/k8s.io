@@ -13,17 +13,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-resource "ibm_is_lb" "k8s_load_balancer" {
-  name            = "k8s-s390x-lb"
+resource "ibm_is_lb" "public" {
+  name            = "k8s-s390x-ci"
   type            = "public"
   subnets         = [data.ibm_is_subnet.subnet.id]
   resource_group  = data.ibm_resource_group.resource_group.id
-  security_groups = [data.ibm_is_security_group.master_sg.id]
+  security_groups = [data.ibm_is_security_group.control_plane_sg.id]
 }
 
 resource "ibm_is_lb_pool" "k8s_api_pool" {
   name                = "k8s-api-server-pool"
-  lb                  = ibm_is_lb.k8s_load_balancer.id
+  lb                  = ibm_is_lb.public.id
   protocol            = "tcp"
   algorithm           = "round_robin"
   health_delay        = 5
@@ -31,20 +31,21 @@ resource "ibm_is_lb_pool" "k8s_api_pool" {
   health_timeout      = 2
   health_type         = "tcp"
   health_monitor_url  = "/"
-  health_monitor_port = 6443
+  health_monitor_port = var.api_server_port
 }
 
 resource "ibm_is_lb_listener" "k8s_api_listener" {
-  lb           = ibm_is_lb.k8s_load_balancer.id
+  lb           = ibm_is_lb.public.id
   protocol     = "tcp"
-  port         = 6443
+  port         = var.api_server_port
   default_pool = ibm_is_lb_pool.k8s_api_pool.pool_id
 }
 
 resource "ibm_is_lb_pool_member" "k8s_api_members" {
-  count          = var.control_plane.count
-  lb             = ibm_is_lb.k8s_load_balancer.id
+  for_each = ibm_is_instance.control_plane
+
+  lb             = ibm_is_lb.public.id
   pool           = ibm_is_lb_pool.k8s_api_pool.pool_id
-  port           = 6443
-  target_address = ibm_is_instance.control_plane[count.index].primary_network_interface[0].primary_ipv4_address
+  port           = var.api_server_port
+  target_address = each.value.primary_network_interface[0].primary_ipv4_address
 }
