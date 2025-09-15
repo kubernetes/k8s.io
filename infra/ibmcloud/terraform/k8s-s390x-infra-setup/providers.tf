@@ -30,8 +30,3 @@ provider "ibm" {
   ibmcloud_api_key = local.key
   region           = local.region
 }
-provider "ibm" {
-  alias            = "vpcs"
-  ibmcloud_api_key = local.key
-  region           = local.region
-}
