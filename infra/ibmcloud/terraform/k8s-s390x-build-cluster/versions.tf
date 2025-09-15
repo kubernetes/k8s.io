@@ -16,22 +16,25 @@ limitations under the License.
 
 terraform {
   backend "s3" {
-    bucket                      = "k8s-infra-z-eu-cos-bucket"
+    bucket                      = "k8s-z-infra-tf-states"
     key                         = "k8s-s390x-build-cluster/terraform.tfstate"
     region                      = "eu-geo"
     skip_region_validation      = true
-    skip_requesting_account_id  = true
     skip_credentials_validation = true
-    skip_s3_checksum            = true
-    endpoints = {
-      s3 = "https://s3.eu.cloud-object-storage.appdomain.cloud"
-    }
-    secret_key = "<YOUR_SECRET_KEY>"
-    access_key = "<YOUR_ACCESS_KEY>"
+    endpoint                    = "https://s3.eu.cloud-object-storage.appdomain.cloud"
   }
   required_providers {
     ibm = {
-      source = "IBM-Cloud/ibm"
+      source  = "IBM-Cloud/ibm"
+      version = "~> 1.82.0"
+    }
+    time = {
+      source  = "hashicorp/time"
+      version = "~> 0.13.0"
+    }
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 3.2.0"
     }
   }
 }

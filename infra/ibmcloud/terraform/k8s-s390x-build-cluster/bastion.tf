@@ -13,24 +13,37 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+locals {
+  bastion_nodes = {
+    "primary" = {
+      profile = var.bastion_profile
+      boot_volume = {
+        size = var.bastion_boot_volume_size
+      }
+    }
+  }
+}
+
 resource "ibm_is_instance" "bastion" {
-  count          = var.bastion.count
-  name           = "bastion-s390x-${count.index + 1}"
+  for_each       = local.bastion_nodes
+  name           = "bastion-s390x-${each.key}"
   vpc            = data.ibm_is_vpc.vpc.id
   zone           = var.zone
-  profile        = var.bastion.profile
+  profile        = each.value.profile
   image          = var.image_id
   keys           = [ibm_is_ssh_key.k8s_ssh_key.id]
   resource_group = data.ibm_resource_group.resource_group.id
+
   primary_network_interface {
-    name            = "public-nic"
+    name            = "public-nic-${each.key}"
     subnet          = data.ibm_is_subnet.subnet.id
-    security_groups = [data.ibm_is_security_group.bastion_sg.id]
+    security_groups = [data.ibm_is_security_group.bastion.id]
   }
 
   boot_volume {
-    name = "boot-vol-bastion-${count.index}"
-    size = var.bastion.boot_volume.size
+    name = "boot-vol-bastion-${each.key}"
+    size = each.value.boot_volume.size
   }
 
   user_data = <<-EOF
@@ -70,60 +83,16 @@ resource "ibm_is_instance" "bastion" {
                 - [netfilter-persistent, save]
                 - [systemctl, restart, systemd-networkd]
                 - [systemctl, restart, sshd]
-                - [hostnamectl, set-hostname, "bastion-s390x-${count.index + 1}.s390x-vpc.cloud.ibm.com"]
-                - [echo, "bastion-s390x-${count.index + 1}.s390x-vpc.cloud.ibm.com", ">", /etc/hostname]
-                - [sed, -i, "s/^127.0.1.1.*/127.0.1.1\tbastion-s390x-${count.index + 1}.s390x-vpc.cloud.ibm.com/", /etc/hosts]
+                - [hostnamectl, set-hostname, "bastion-s390x-${each.key}.s390x-vpc.cloud.ibm.com"]
+                - [echo, "bastion-s390x-${each.key}.s390x-vpc.cloud.ibm.com", ">", /etc/hostname]
+                - [sed, -i, "s/^127.0.1.1.*/127.0.1.1\tbastion-s390x-${each.key}.s390x-vpc.cloud.ibm.com/", /etc/hosts]
+                - [touch, /var/lib/cloud/instance/bastion-setup-success]
               EOF
 }
 
 resource "ibm_is_floating_ip" "bastion_fip" {
-  count          = var.bastion.count
-  name           = "bastion-fip-${count.index}"
-  target         = ibm_is_instance.bastion[count.index].primary_network_interface[0].id
+  for_each       = ibm_is_instance.bastion
+  name           = "bastion-fip-${each.key}"
+  target         = each.value.primary_network_interface[0].id
   resource_group = data.ibm_resource_group.resource_group.id
-}
-
-resource "time_sleep" "wait_for_bastion" {
-  count      = var.bastion.count
-  depends_on = [ibm_is_floating_ip.bastion_fip]
-
-  create_duration = "180s" # Wait 3 minutes for full initialization
-}
-
-resource "null_resource" "bastion_setup" {
-  count      = var.bastion.count
-  depends_on = [time_sleep.wait_for_bastion]
-
-  connection {
-    type        = "ssh"
-    user        = "root"
-    host        = ibm_is_floating_ip.bastion_fip[count.index].address
-    private_key = data.ibm_sm_arbitrary_secret.ssh_private_key.payload
-    timeout     = "5m"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      # Network verification
-      "echo '=== Network Interfaces ==='",
-      "ip -4 addr show",
-      "echo '=== Routing Table ==='",
-      "ip route",
-      "echo '=== NAT Configuration ==='",
-      "iptables -t nat -L -n -v",
-      "echo '=== IP Forwarding ==='",
-      "sysctl net.ipv4.ip_forward",
-
-      # Hostname verification
-      "echo '=== Hostname ==='",
-      "hostname",
-      "hostnamectl",
-      "cat /etc/hostname",
-
-      # Final security updates
-      "command -v apt-get >/dev/null && apt-get update -y && apt-get upgrade -y --security || true",
-      "command -v yum >/dev/null && yum update -y --security || true",
-      "command -v dnf >/dev/null && dnf update -y --security || true"
-    ]
-  }
 }
