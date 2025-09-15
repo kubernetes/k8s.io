@@ -25,13 +25,13 @@ data "ibm_is_subnet" "subnet" {
   name = "k8s-s390x-subnet"
 }
 
-data "ibm_is_security_group" "bastion_sg" {
+data "ibm_is_security_group" "bastion" {
   name = "k8s-vpc-s390x-bastion-sg"
   vpc  = data.ibm_is_vpc.vpc.id
 }
 
-data "ibm_is_security_group" "master_sg" {
-  name = "k8s-vpc-s390x-master-sg"
+data "ibm_is_security_group" "control_plane_sg" {
+  name = "k8s-vpc-s390x-control-plane-sg"
   vpc  = data.ibm_is_vpc.vpc.id
 }
 
