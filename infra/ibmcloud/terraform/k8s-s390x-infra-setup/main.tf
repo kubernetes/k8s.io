@@ -13,14 +13,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
-module "resource_group" {
-  source = "./modules/resource_group"
+resource "ibm_resource_group" "build_resource_group" {
+  name = "rg-build-cluster"
 }
 
 module "secrets_manager" {
   source            = "./modules/secrets_manager"
-  resource_group_id = module.resource_group.build_resource_group_id
+  resource_group_id = ibm_resource_group.build_resource_group.id
 }
 module "vpc" {
   providers = {
@@ -28,5 +27,5 @@ module "vpc" {
   }
   source            = "./modules/vpc"
   zone              = var.zone
-  resource_group_id = module.resource_group.build_resource_group_id
+  resource_group_id = ibm_resource_group.build_resource_group.id
 }
