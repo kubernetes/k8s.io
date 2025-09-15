@@ -1,0 +1,42 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: wg-ai-gateway-leads@kubernetes.io
+    name: wg-ai-gateway-leads
+    description: |-
+      WG AI Gateway Organizers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - keithmattix2@gmail.com
+      - flynn@buoyant.io
+      - kfswain@google.com
+      - nirro@il.ibm.com
+      - sutt@redhat.com
+      - mixdeers@gmail.com
+
+  - email-id: wg-ai-gateway@kubernetes.io
+    name: wg-ai-gateway
+    description: |-
+      Public mailing list for AI Gateway
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - keithmattix2@gmail.com
+      - flynn@buoyant.io
+      - kfswain@google.com
+      - nirro@il.ibm.com
+      - sutt@redhat.com
+      - mixdeers@gmail.com
+    members:
+      - wg-ai-gateway-leads@kubernetes.io

@@ -318,6 +318,10 @@ restrictions:
     allowedGroups:
       - "^wg-ai-conformance@kubernetes.io$"
       - "^wg-ai-conformance-leads@kubernetes.io$"
+  - path: "wg-ai-gateway/groups.yaml"
+    allowedGroups:
+      - "^wg-ai-gateway@kubernetes.io$"
+      - "^wg-ai-gateway-leads@kubernetes.io$"
   - path: "wg-ai-integration/groups.yaml"
     allowedGroups:
       - "^wg-ai-integration@kubernetes.io$"
