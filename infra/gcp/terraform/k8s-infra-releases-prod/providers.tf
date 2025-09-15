@@ -21,6 +21,7 @@ This file defines:
 */
 
 terraform {
+  required_version = "1.12"
   backend "gcs" {
     bucket = "k8s-infra-tf-k8s-releases"
     prefix = "prod/terraform.tfstate"
@@ -29,11 +30,11 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 5.44.0"
+      version = "~> 6.49.3"
     }
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "~> 5.44.0"
+      version = "~> 6.49.3"
     }
   }
 }

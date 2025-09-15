@@ -20,9 +20,6 @@ locals {
   project_id      = "k8s-infra-releases-prod"
 }
 
-data "google_storage_transfer_project_service_account" "default" {
-  project = google_project.project.project_id
-}
 
 resource "google_project" "project" {
   name                = local.project_id
@@ -49,72 +46,3 @@ resource "google_storage_hmac_key" "fastly_reader_key" {
   service_account_email = google_service_account.fastly_reader.email
 }
 
-resource "google_storage_bucket_iam_member" "gcs-backup-bucket" {
-  bucket     = module.k8s_releases_prod.bucket_name
-  role       = "roles/storage.admin"
-  member     = "serviceAccount:${data.google_storage_transfer_project_service_account.default.email}"
-  depends_on = [module.k8s_releases_prod]
-}
-
-resource "google_pubsub_topic" "topic" {
-  project = google_project.project.project_id
-  name    = var.pubsub_topic_name
-}
-
-resource "google_pubsub_topic_iam_member" "notification_config" {
-  project = google_project.project.project_id
-  topic   = google_pubsub_topic.topic.id
-  role    = "roles/pubsub.publisher"
-  member  = "serviceAccount:${data.google_storage_transfer_project_service_account.default.email}"
-}
-
-resource "google_storage_transfer_job" "kubernetes_release_backup" {
-  description = "Daily backup of GCS bucket gs://kubernetes-release"
-  project     = google_project.project.project_id
-
-  transfer_spec {
-    object_conditions {
-      max_time_elapsed_since_last_modification = "600s"
-    }
-
-    transfer_options {
-      delete_objects_unique_in_sink = false
-    }
-
-    gcs_data_source {
-      bucket_name = "kubernetes-release"
-      path        = "release/"
-    }
-
-    gcs_data_sink {
-      bucket_name = module.k8s_releases_prod.bucket_name
-      path        = "release/"
-    }
-  }
-
-  schedule {
-    schedule_start_date {
-      year  = 2023
-      month = 10
-      day   = 30
-    }
-    start_time_of_day {
-      hours   = 17
-      minutes = 33
-      seconds = 0
-      nanos   = 0
-    }
-    repeat_interval = "86400s" # 1 day
-  }
-
-  notification_config {
-    pubsub_topic = google_pubsub_topic.topic.id
-    event_types = [
-      "TRANSFER_OPERATION_SUCCESS",
-      "TRANSFER_OPERATION_FAILED"
-    ]
-    payload_format = "JSON"
-  }
-
-  depends_on = [module.k8s_releases_prod, google_pubsub_topic_iam_member.notification_config]
-}

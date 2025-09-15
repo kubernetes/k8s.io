@@ -16,7 +16,7 @@ limitations under the License.
 
 module "secrets" {
   source  = "GoogleCloudPlatform/secret-manager/google"
-  version = "~> 0.3"
+  version = "~> 0.8"
 
   project_id = google_project.project.project_id
 
