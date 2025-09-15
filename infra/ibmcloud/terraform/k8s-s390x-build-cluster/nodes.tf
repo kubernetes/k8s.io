@@ -13,6 +13,27 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+locals {
+  control_plane_nodes = {
+    for idx in range(1, var.control_plane_node_count + 1) :
+    "${idx}" => {
+      profile = var.control_plane_node_profile
+      boot_volume = {
+        size = var.control_plane_boot_volume_size
+      }
+    }
+  }
+
+  compute_nodes = {
+    for idx in range(1, var.compute_node_count + 1) :
+    "${idx}" => {
+      profile = var.compute_node_profile
+      boot_volume = {
+        size = var.compute_boot_volume_size
+      }
+    }
+  }
+}
 resource "ibm_is_ssh_key" "k8s_ssh_key" {
   name           = "k8s-s390x-ssh-key"
   public_key     = data.ibm_sm_arbitrary_secret.ssh_public_key.payload
@@ -20,32 +41,34 @@ resource "ibm_is_ssh_key" "k8s_ssh_key" {
 }
 
 resource "ibm_is_instance" "control_plane" {
-  count          = var.control_plane.count
-  name           = "master-s390x-${count.index + 1}"
+  for_each = local.control_plane_nodes
+
+  name           = "control-plane-s390x-${each.key}"
   vpc            = data.ibm_is_vpc.vpc.id
   zone           = var.zone
-  profile        = var.control_plane.profile
+  profile        = each.value.profile
   image          = var.image_id
   keys           = [ibm_is_ssh_key.k8s_ssh_key.id]
   resource_group = data.ibm_resource_group.resource_group.id
 
   primary_network_interface {
     subnet          = data.ibm_is_subnet.subnet.id
-    security_groups = [data.ibm_is_security_group.master_sg.id]
+    security_groups = [data.ibm_is_security_group.control_plane_sg.id]
   }
 
   boot_volume {
-    name = "boot-vol-master-${count.index + 1}"
-    size = var.control_plane.boot_volume.size
+    name = "boot-vol-cp-s390x-${each.key}"
+    size = each.value.boot_volume.size
   }
 }
 
 resource "ibm_is_instance" "compute" {
-  count          = var.compute.count
-  name           = "worker-s390x-${count.index + 1}"
+  for_each = local.compute_nodes
+
+  name           = "worker-s390x-${each.key}"
   vpc            = data.ibm_is_vpc.vpc.id
   zone           = var.zone
-  profile        = var.compute.profile
+  profile        = each.value.profile
   image          = var.image_id
   keys           = [ibm_is_ssh_key.k8s_ssh_key.id]
   resource_group = data.ibm_resource_group.resource_group.id
@@ -56,29 +79,7 @@ resource "ibm_is_instance" "compute" {
   }
 
   boot_volume {
-    name = "boot-vol-worker-${count.index + 1}"
-    size = var.compute.boot_volume.size
-  }
-}
-
-resource "null_resource" "node_setup" {
-  for_each = merge(
-    { for idx, instance in ibm_is_instance.control_plane : "master-${idx}" => instance },
-    { for idx, instance in ibm_is_instance.compute : "worker-${idx}" => instance }
-  )
-  depends_on = [time_sleep.wait_for_bastion]
-  triggers = {
-    instance_id = each.value.id
-    retry_count = 0
-  }
-  connection {
-    type         = "ssh"
-    user         = "root"
-    host         = each.value.primary_network_interface[0].primary_ipv4_address
-    private_key  = data.ibm_sm_arbitrary_secret.ssh_private_key.payload
-    bastion_host = ibm_is_floating_ip.bastion_fip[0].address
-    timeout      = "5m"
-    agent        = false
-
+    name = "boot-vol-worker-s390x-${each.key}"
+    size = each.value.boot_volume.size
   }
 }

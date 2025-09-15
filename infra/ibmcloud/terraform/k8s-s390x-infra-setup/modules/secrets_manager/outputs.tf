@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 output "k8s_secrets_manager_id" {
-  value = data.ibm_resource_instance.existing_sm.id != "" ? data.ibm_resource_instance.existing_sm.guid : ibm_resource_instance.secrets_manager[0].guid
+  value = ibm_resource_instance.secrets_manager.guid
 }
 
 output "k8s_z_ssh_public_key" {
