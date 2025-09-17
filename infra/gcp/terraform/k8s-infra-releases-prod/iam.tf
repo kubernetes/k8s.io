@@ -50,3 +50,22 @@ resource "google_storage_bucket_iam_policy" "releng_access_policy" {
   bucket      = module.k8s_releases_prod.bucket_name
   policy_data = data.google_iam_policy.releng_access.policy_data
 }
+
+/*
+Ensure audit logging is enabled for GCS.
+See: https://cloud.google.com/storage/docs/audit-logging
+*/
+module "audit_log_config" {
+  source  = "terraform-google-modules/iam/google//modules/audit_config"
+  version = "~> 8.1"
+
+  project = google_project.project.project_id
+
+  audit_log_config = [
+    {
+      service          = "storage.googleapis.com"
+      log_type         = "DATA_READ"
+      exempted_members = []
+    }
+  ]
+}
