@@ -8,7 +8,7 @@ Most of the deployment configuration is in [infra/gcp/terraform/k8s-infra-oci-pr
 
 # Managing Kubernetes container registries
 
-This directory is for tools and things that are used to administer the GCR/AR
+This directory is for tools and things that are used to administer the AR
 repositories used to publish official container images for Kubernetes.
 
 - [Staging repos](#staging-repos)
@@ -20,14 +20,20 @@ repositories used to publish official container images for Kubernetes.
 
 ## Staging repos
 
-Kubernetes subprojects may use a dedicated staging GCP project to build and
+~~Kubernetes subprojects may use a dedicated staging GCP project to build and
 host container images. We refer to the GCR provided by each staging project
 as a staging repository. Images are promoted from staging repositories into
-the main Kubernetes image registry (registry.k8s.io).
+the main Kubernetes image registry (registry.k8s.io).~~
+This approach is deprecated and not accepted for new Kubernetes subprojects
 
-Access to each staging project is governed by a Google Group, which grants the
-ability to manually trigger GCB or push container images in the event that
-automated builds via something like prow.k8s.io are not setup or are broken.
+We have a GCP project called k8s-staging-images with a AR dedicated registry for
+each subproject. Maintainers can view the contents of the registry and push
+images in exceptional situations. You can also retrigger jobs in Prow
+if an image-push job failed by setting the rerun_auth_config as shown below.
+
+> [!CAUTION]
+> The staging image registries at us-central1-docker.pkg.dev/k8s-staging-images/\* have a 90 day retention policy.
+> Please don't serve images to end users from there and follow the image promotion process below.
 
 ### Requirements
 
@@ -43,39 +49,39 @@ For example:
 
 - CRI-O is not part of the kubernetes project, it does not meet the
   requirements to get a staging repo
-- While etcd and coredns are not part of the kubernetes project, we do
+- While coredns is not part of the kubernetes project, we do
   bundle them with kubernetes as part of the release, so for this specific
   case are allowing a staging repo to host them (solely within the context
   of the kubernetes project)
 
 ### Creating staging repos
 
-3. Add the project name to the `infra.staging.projects` list defined in
-   [`infra/gcp/infra.yaml`][infra.yaml]
+1. Create a google group in the format `k8s-infra-staging-<project-name>@kubernetes.io` by using our [`groups`](../groups/README.md) tool.
 
-4. One your PR merges:
-    - a postsubmit job will create the necessary google group
-    - whoever approved your PR will run [the necessary bash script(s)][staging-bash]
-      to create the staging repo
+1. Add the project name to the `locals.registries` list defined in
+   [`infra/gcp/terraform/k8s-staging-images/registries.tf`][infra.yaml]
+
+1. Someone from SIG K8s Lead will be pinged when you modify this file and apply the terraform changes on your behalf.
 
 ### Enabling automatic builds
 
 Once your staging repo is up and running, you can enable automatic build and
-push.  For more info, see [the instructions here][image-pushing-readme]
+push. For more info, see [the instructions here][image-pushing-readme]
 
-NOTE: All sub-projects are *strongly* encouraged to use this mechanism, though
-it is not mandatory yet.  Over time this will become the primary way to build
+NOTE: All sub-projects are _strongly_ encouraged to use this mechanism, though
+it is not mandatory yet. Over time this will become the primary way to build
 and push images, and anything else will become exceptional.
 
 ### Creating image promoter manifests
 
 1. Enable automatic builds and ensure and image has been published by Cloud Build
-to the staging repo.
+   to the staging repo.
 
 1. Create 3 files:
-    - `images/k8s-staging-<project-name>/OWNERS`
-    - `images/k8s-staging-<project-name>/images.yaml`
-    - `manifests/k8s-staging-<project-name>/promoter-manifest.yaml`
+
+   - `images/k8s-staging-<project-name>/OWNERS`
+   - `images/k8s-staging-<project-name>/images.yaml`
+   - `manifests/k8s-staging-<project-name>/promoter-manifest.yaml`
 
 The `promoter-manifest.yaml` file will house the credentials and other registry
 metadata, whereas the `images.yaml` file will hold only the image data. You can
@@ -93,16 +99,22 @@ Be sure to add the project owners to the
 `images/k8s-staging-<project-name>/OWNERS` file to increase the number of
 people who can approve new images for promotion for your project.
 
+### Complete Example
+
+1. Adding new groups [PR](https://github.com/kubernetes/k8s.io/pull/8447).
+1. Staging Registry Creation & Image Promoter Manifest [PR](https://github.com/kubernetes/k8s.io/pull/8448).
+1. Prow job that builds images on merge to main [PR](https://github.com/kubernetes/test-infra/pull/34376).
+
 ### Image Promoter
 
 Image promotion roughly follows the following steps:
 
 1. Push your image to one of the above staging docker repos
-   e.g., gcr.io/k8s-staging-coredns
+   e.g., us-central1-docker.pkg.dev/k8s-staging-images/minikube
 2. Fork this git repo
 3. Add the image into the promoter manifest
-   e.g., if you pushed gcr.io/k8s-staging-coredns/foo:1.3, then add a "foo"
-   image entry into the manifest in `images/k8s-staging-coredns/images.yaml`
+   e.g., if you pushed us-central1-docker.pkg.dev/k8s-staging-images/minikube/foo:1.3, then add a "foo"
+   image entry into the manifest in `images/k8s-staging-minikube/images.yaml`
 4. Create a PR to this git repo for your changes
 5. The PR should trigger a `pull-k8sio-cip` job which will validate and dry-run
    your changes; check that the `k8s-ci-robot` responds 'Job succeeded' for it.
@@ -120,8 +132,6 @@ requests, which is described in detail
 [google-groups]: /groups/README.md
 [image-pushing-readme]: https://git.k8s.io/test-infra/config/jobs/image-pushing/README.md
 [restrictions.yaml]: /groups/restrictions.yaml
-[infra.yaml]: /infra/gcp/infra.yaml
-[staging-bash]: /infra/gcp/bash/ensure-staging-storage.sh
 [post-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#post-k8sio-image-promo
 [ci-promo-job]: https://testgrid.k8s.io/sig-release-releng-blocking#ci-k8sio-image-promo
 [project-github]: https://git.k8s.io/community/github-management#project-owned-organizations
