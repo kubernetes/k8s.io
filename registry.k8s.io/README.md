@@ -26,7 +26,7 @@ as a staging repository. Images are promoted from staging repositories into
 the main Kubernetes image registry (registry.k8s.io).~~
 This approach is deprecated and not accepted for new Kubernetes subprojects
 
-We have a GCP project called k8s-staging-images with a dedicated registry for
+We have a GCP project called k8s-staging-images with a AR dedicated registry for
 each subproject. Maintainers can view the contents of the registry and push
 images in exceptional situations. You can also retrigger jobs in Prow
 if an image-push job failed by setting the rerun_auth_config as shown below.
