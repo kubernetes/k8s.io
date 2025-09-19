@@ -27,6 +27,7 @@ restrictions:
       - "^sig-api-machinery@kubernetes.io$"
   - path: "sig-apps/groups.yaml"
     allowedGroups:
+      - "^k8s-infra-staging-agent-sandbox@kubernetes.io$"
       - "^k8s-infra-staging-examples@kubernetes.io$"
       - "^k8s-infra-staging-jobset@kubernetes.io$"
       - "^k8s-infra-staging-lws@kubernetes.io$"

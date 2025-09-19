@@ -55,6 +55,17 @@ groups:
       MembersCanPostAsTheGroup: "false"
       ReconcileMembers: "false"
 
+  - email-id: k8s-infra-staging-agent-sandbox@kubernetes.io
+    name: k8s-infra-staging-agent-sandbox
+    description: |-
+      ACL for staging Agent Sandbox
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - chiachenk@google.com
+      - justinsb@google.com
+      - soltysh@gmail.com
+
   - email-id: k8s-infra-staging-jobset@kubernetes.io
     name: k8s-infra-staging-jobset
     description: |-
