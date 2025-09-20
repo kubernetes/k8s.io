@@ -353,6 +353,7 @@ infra:
       k8s-staging-kmm:
       k8s-staging-kops:
       k8s-staging-krm-functions:
+      k8s-staging-kro:
       k8s-staging-kube-state-metrics:
       k8s-staging-kubeadm:
       k8s-staging-kubebuilder:
