@@ -136,8 +136,13 @@ resource "fastly_service_vcl" "files" {
   }
 
   product_enablement {
-    origin_inspector = true
-    domain_inspector = true
+    ddos_protection {
+      enabled = true
+      mode    = "log"
+    }
+    log_explorer_insights = true
+    origin_inspector      = true
+    domain_inspector      = true
   }
 
   force_destroy = true
