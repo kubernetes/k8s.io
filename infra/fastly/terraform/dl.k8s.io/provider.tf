@@ -29,11 +29,11 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 5.41.0"
+      version = "~> 7.3.0"
     }
     fastly = {
       source  = "fastly/fastly"
-      version = "~> 5.11.0"
+      version = "~> 8.1.0"
     }
   }
 }
