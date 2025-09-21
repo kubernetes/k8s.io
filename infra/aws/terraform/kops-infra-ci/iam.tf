@@ -87,3 +87,33 @@ resource "aws_iam_role_policy_attachment" "eks_pod_identity_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   role       = aws_iam_role.eks_pod_identity_role.name
 }
+
+module "ci_iam_group" {
+  providers = { aws = aws.kops-infra-ci }
+  source    = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
+  version   = "~> 5.60"
+  name      = "ci-admins"
+
+  group_users = [
+    module.kops_ci_user.iam_user_name,
+  ]
+  custom_group_policy_arns = [
+    "arn:aws:iam::aws:policy/AdministratorAccess",
+  ]
+
+  tags = var.tags
+}
+
+module "kops_ci_user" {
+  providers = { aws = aws.kops-infra-ci }
+  source    = "terraform-aws-modules/iam/aws//modules/iam-user"
+  version   = "~> 5.60"
+
+  name                          = "kops-ci-user"
+  create_iam_user_login_profile = false
+
+  force_destroy           = true
+  password_reset_required = false
+
+  tags = var.tags
+}
