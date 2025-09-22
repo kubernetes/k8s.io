@@ -16,7 +16,7 @@ limitations under the License.
 
 variable "eks_version" {
   type    = string
-  default = "1.29"
+  default = "1.30"
 }
 
 variable "tags" {
