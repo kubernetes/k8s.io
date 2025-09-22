@@ -151,6 +151,7 @@
 - name: regression-issue-74839
   dmap:
     "sha256:b4f1d8d61bdad84bd50442d161d5460e4019d53e989b64220fdbc62fc87d76bf": ["1.2"]
+    "sha256:55cf49aeaafe4b3e8ce90783e6bb59e5a8b1b6b41aaeced7d0b26562a149ffb0": ["1.4"]
 - name: resource-consumer
   dmap:
     "sha256:74e800780d7656d42fb0f28e153619044a826e5f532d1871cac4b7c4d66d946f": ["1.6"]
