@@ -177,11 +177,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - emacchi@redhat.com
-      - jichenjc@cn.ibm.com
       - lennart.jern@est.tech
-      - mbooth@redhat.com
-      - seansnowwhite@gmail.com
-      - tobiasgiese@gmail.com
 
   - email-id: k8s-infra-conform-cri-o@kubernetes.io
     name: k8s-infra-conform-cri-o
