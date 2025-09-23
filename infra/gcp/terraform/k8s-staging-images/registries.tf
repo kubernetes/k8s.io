@@ -20,6 +20,7 @@ locals {
     aws-encryption-provider         = "group:k8s-infra-staging-provider-aws@kubernetes.io"
     charts                          = "group:k8s-infra-release-admins@kubernetes.io"
     cloud-provider-kind             = "group:k8s-infra-staging-kind@kubernetes.io"
+    cluster-capacity                = "group:k8s-infra-staging-cluster-capacity@kubernetes.io"
     dra-driver-cpu                  = "group:k8s-infra-staging-dra-driver-cpu@kubernetes.io"
     dra-example-driver              = "group:k8s-infra-staging-dra-example-driver@kubernetes.io"
     etcd-manager                    = "group:k8s-infra-staging-etcd-manager@kubernetes.io"
