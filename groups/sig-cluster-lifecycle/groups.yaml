@@ -221,11 +221,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - emacchi@redhat.com
-      - jichenjc@cn.ibm.com
       - lennart.jern@est.tech
-      - mbooth@redhat.com
-      - seansnowwhite@gmail.com
-      - tobiasgiese@gmail.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-openstack-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-openstack-alerts
@@ -240,11 +236,7 @@ groups:
       ReconcileMembers: "false"
     owners:
       - emacchi@redhat.com
-      - jichenjc@cn.ibm.com
       - lennart.jern@est.tech
-      - mbooth@redhat.com
-      - seansnowwhite@gmail.com
-      - tobiasgiese@gmail.com
 
   - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
     name: k8s-infra-staging-capi-vsphere
