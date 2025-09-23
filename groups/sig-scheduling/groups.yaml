@@ -162,6 +162,15 @@ groups:
       - wangqingcan1990@gmail.com
       - noreply+testgrid@google.com
 
+  - email-id: k8s-infra-staging-cluster-capacity@kubernetes.io
+    name: k8s-infra-staging-cluster-capacity
+    description: |-
+      ACL for staging cluster-capacity
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jchaloup@redhat.com
+
   #
   # k8s-infra gcs write access
   #
