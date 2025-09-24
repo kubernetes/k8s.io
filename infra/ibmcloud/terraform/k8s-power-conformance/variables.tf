@@ -53,7 +53,7 @@ variable "secrets_manager_id" {
 variable "image_name" {
   type        = string
   description = "The name of the image that you want to use for the nodes"
-  default     = "CentOS-Stream-9"
+  default     = "CentOS-Stream-10"
 
   validation {
     condition     = var.image_name != ""
