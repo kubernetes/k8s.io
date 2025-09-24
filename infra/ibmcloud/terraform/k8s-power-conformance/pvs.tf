@@ -75,6 +75,17 @@ module "powervs_workspace_syd05" {
   image_name        = var.image_name
 }
 
+module "powervs_workspace_syd05_1" {
+  providers = {
+    ibm = ibm.powervs_syd05
+  }
+  source            = "./modules/pvs_workspace"
+  datacenter        = "syd05"
+  pi_workspace_name = "k8s-boskos-powervs-syd05-01"
+  resource_group_id = module.resource_group.k8s_rg_id
+  image_name        = var.image_name
+}
+
 module "powervs_workspace_tok04" {
   providers = {
     ibm = ibm.powervs_tok04
