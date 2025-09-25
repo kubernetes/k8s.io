@@ -12,10 +12,10 @@ groups:
     description: |-
       SIG autoscaling leads
     owners:
+      - adrian@changeover.za.net
       - guyjtempleton@googlemail.com
       - jack.francis@microsoft.com
       - jtuznik@google.com
-      - raywainman@gmail.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -27,10 +27,10 @@ groups:
     description: |-
       SIG autoscaling general discussion group
     owners:
+      - adrian@changeover.za.net
       - guyjtempleton@googlemail.com
       - jack.francis@microsoft.com
       - jtuznik@google.com
-      - raywainman@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -82,6 +82,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
+      - adrian@changeover.za.net
       - bskiba@google.com
       - bwroblewski@google.com
       - danielmk@google.com
