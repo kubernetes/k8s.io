@@ -10,6 +10,7 @@ data:
       - k8s-boskos-powervs-sao01
       - k8s-boskos-powervs-syd04
       - k8s-boskos-powervs-syd05
+      - k8s-boskos-powervs-syd05-01
       - k8s-boskos-powervs-tok04
       state: dirty
       type: powervs
