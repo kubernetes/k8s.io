@@ -53,6 +53,15 @@ groups:
       MembersCanPostAsTheGroup: "false"
       ReconcileMembers: "false"
 
+  - email-id: k8s-infra-staging-kro@kubernetes.io
+    name: k8s-infra-staging-kro
+    description: |-
+      ACL for external KRO
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+
   - email-id: k8s-infra-staging-provider-aws@kubernetes.io
     name: k8s-infra-staging-provider-aws
     description: |-
