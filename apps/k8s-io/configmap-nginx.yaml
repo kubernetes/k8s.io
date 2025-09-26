@@ -345,6 +345,7 @@ data:
         server_name releases.k8s.io rel.k8s.io releases.kubernetes.io rel.kubernetes.io;
         listen 80;
 
+        location / {
           rewrite ^/$                               https://github.com/kubernetes/kubernetes/releases redirect;
           rewrite ^/k8s-release-cal                 https://calendar.google.com/calendar/embed?src=kipmnllvl17vl9m98jen6ujcrs%40group.calendar.google.com redirect;
           rewrite ^/k8s-sig-release-videos          https://youtube.com/playlist?list=PL69nYSiGNLP3QKkOsDsO6A0Y1rhgP84iZ&si=Mi095CYuJuz8LjN- redirect;
@@ -354,7 +355,7 @@ data:
       }
 
       server {
-        server_name sbom.k8s.io sbom.kubernetes.io
+        server_name sbom.k8s.io sbom.kubernetes.io;
         listen 80;
 
         rewrite ^/(.*)?/release(\.cert|\.sig|\.sha256|\.sha512)?$ https://dl.k8s.io/release/$1/kubernetes-release.spdx$2 redirect;
@@ -362,12 +363,12 @@ data:
       }
 
       server {
-        server_name slack.k8s.io slack.kubernetes.io
+        server_name slack.k8s.io slack.kubernetes.io;
         listen 80;
 
-       location / {
-         rewrite ^/.*$ https://communityinviter.com/apps/kubernetes/community permanent;
-       }
+        location / {
+          rewrite ^/.*$ https://communityinviter.com/apps/kubernetes/community permanent;
+        }
       }
 
       server {
