@@ -20,8 +20,10 @@ aliases:
     - aramase
     - micahhausler
   sig-autoscaling-leads:
+    - adrianmoisey
     - gjtempleton
-    - maciekpytel
+    - jackfrancis
+    - towca
   sig-cli-leads:
     - ardaguclu
     - eddiezane

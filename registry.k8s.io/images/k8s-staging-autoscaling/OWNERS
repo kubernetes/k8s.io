@@ -1,6 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
+- adrianmoisey
 - bskiba
 - maciekpytel
 - krzysied
@@ -11,5 +12,4 @@ approvers:
 - bigdarkclown
 - kwiesmueller
 - x13n
-- raywainman
 - jackfrancis
