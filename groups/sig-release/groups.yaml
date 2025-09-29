@@ -353,16 +353,20 @@ groups:
       - admin@mb-consulting.dev # v1.34 Release Branch Manager
       - agustina.barbetta@gmail.com # v1.35 Enhancements Shadow
       - akacloudmelon@gmail.com # v1.34 Communications Shadow
+      - anshuman.tripathi305@gmail.com # v1.35 Docs Shadow
       - aruparekh4@gmail.com # v1.34 Docs Shadow
       - cst.grzn@gmail.com # v1.35 Communications Lead
       - danieljoshuachan@gmail.com # v1.35 Enhancements Shadow
       - elieser.pereiraa@gmail.com # v1.34 Release Signal Shadow
       - faeka6@gmail.com # v1.35 Enhancements Shadow
+      - gmail@yudocaa.in # v1.35 Docs Shadow
       - j@mickey.dev # v1.35 Enhancements Shadow
+      - jimmykhangnguyen@gmail.com # v1.35 Docs Shadow
       - josueleon3012@hotmail.com # v1.34 Communications Shadow
       - muhammad.adil.ghaffar@est.tech # v1.34 Release Signal Shadow
       - neoaggelos@gmail.com # v1.34 Release Branch Management Shadow
       - nsarthaknegi360@gmail.com # v1.34 Release Signal Shadow
+      - orlin@orlix.org # v1.35 Docs Shadow
       - prajyotparab19@gmail.com # v1.34 Release Signal Shadow
       - rayandas91@gmail.com # v1.35 Enhancements Lead
       - ryan.su@queensu.ca # v1.34 Docs Shadow
@@ -371,13 +375,9 @@ groups:
       - smith.rashan@gmail.com # v1.34 Docs Shadow
       - subhasmitaswain232@gmail.com # v1.35 Enhancements Shadow
       - tico88612@gmail.com # v1.35 Release Signal Lead
+      - tusharmittalworkm@gmail.com # v1.35 Docs Shadow
       - urvashichoubey0121@gmail.com # v1.35 Docs Lead
       - yujenhuang24@gmail.com # v1.34 Docs Shadow
-      - tusharmittalworkm@gmail.com # v1.35 Docs Shadow
-      - jimmykhangnguyen@gmail.com # v1.35 Docs Shadow
-      - anshuman.tripathi305@gmail.com # v1.35 Docs Shadow
-      - orlin@orlix.org # v1.35 Docs Shadow
-      - gmail@yudocaa.in # v1.35 Docs Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -407,6 +407,7 @@ groups:
       - faeka6@gmail.com # v1.35 Enhancements Shadow
       - j@mickey.dev # v1.35 Enhancements Shadow
       - jenny.shu@solo.io # v1.35 Release Lead Shadow
+      - jimmykhangnguyen@gmail.com # v1.35 Docs Shadow
       - josueleon3012@hotmail.com # v1.34 Communications Shadow
       - muhammad.adil.ghaffar@est.tech # v1.34 Release Signal Shadow
       - neoaggelos@gmail.com # v1.34 Release Branch Management Shadow
@@ -422,13 +423,9 @@ groups:
       - smith.rashan@gmail.com # v1.34 Docs Shadow
       - subhasmitaswain232@gmail.com # v1.35 Enhancements Shadow
       - tico88612@gmail.com # v1.35 Release Signal Lead
+      - tusharmittalworkm@gmail.com # v1.35 Docs Shadow
       - urvashichoubey0121@gmail.com # v1.35 Docs Lead
       - yujenhuang24@gmail.com # v1.34 Docs Shadow
-      - tusharmittalworkm@gmail.com # v1.35 Docs Shadow
-      - jimmykhangnguyen@gmail.com # v1.35 Docs Shadow
-      - anshuman.tripathi305@gmail.com # v1.35 Docs Shadow
-      - orlin@orlix.org # v1.35 Docs Shadow
-      - gmail@yudocaa.in # v1.35 Docs Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
