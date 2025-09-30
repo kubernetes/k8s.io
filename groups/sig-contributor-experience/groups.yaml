@@ -271,3 +271,18 @@ groups:
       - rajula96reddy@gmail.com
       - spiffxp@gmail.com
       - thockin@google.com
+
+  - email-id: zoom-moderators@kubernetes.io
+    name: zoom-moderators
+    description: |-
+      Moderators for community zoom platform
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - contributors@kubernetes.io
+    managers:
+      - sig-contribex-leads@kubernetes.io
+    members:
+      - chadmcrowell@gmail.com
+      - chris@chrisshort.net
