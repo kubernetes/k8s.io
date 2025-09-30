@@ -408,6 +408,7 @@
     "sha256:fb675ad8ea8aeaff29936497837347b238e0cdda3a47350877296f3d97d4c907": ["v4.12.7"]
     "sha256:1d936cee5b433a84f69065b90ec15abfb01eb78645af9926754c1fb2fa3d8c92": ["v4.13.1"]
     "sha256:1f5d40f230e5ef7091521b2113c122a6831268b122249b781ea54f72c8bff2a1": ["v4.13.2"]
+    "sha256:aa961457152a0f94757fa774f2ba4a75d557e09faa6a244009b8a753c4e2010e": ["v4.13.3"]
 
 #
 # The following images have been renamed or are no longer maintained.
