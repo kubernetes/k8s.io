@@ -23,6 +23,9 @@ module "iam" {
   mode = "authoritative"
 
   bindings = {
+    "roles/container.admin" = [
+      "serviceAccount:argocd@k8s-infra-prow.iam.gserviceaccount.com",
+    ]
     "roles/secretmanager.secretAccessor" = [
       "serviceAccount:kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
