@@ -108,7 +108,7 @@ gsutil iam ch \
 
 - resources are deployed by [post-k8sio-deploy-prow-build-resources] when PRs
   merge
-- the job runs [deploy.sh] to deploy resources; if neccessary, users with
+- the job runs [deploy.sh] to deploy resources; if necessary, users with
   [sufficient privileges](#access) can run this script to do the same thing
 
 #### Deploy cluster changes

@@ -146,7 +146,7 @@ func (as *adminService) AddOrUpdateGroupMembers(group GoogleGroup, role string, 
 		return fmt.Errorf("unable to retrieve members in group %q: %w", group.EmailId, err)
 	}
 
-	// aggregate the errors that occured and return them together in the end.
+	// aggregate the errors that occurred and return them together in the end.
 	var errs []error
 
 	for _, memberEmailId := range members {
@@ -272,7 +272,7 @@ func (as *adminService) DeleteGroupsIfNecessary() error {
 		return fmt.Errorf("unable to retrieve users in domain: %w", err)
 	}
 
-	// aggregate the errors that occured and return them together in the end.
+	// aggregate the errors that occurred and return them together in the end.
 	var errs []error
 
 	for _, g := range g.Groups {
@@ -321,7 +321,7 @@ func (as *adminService) RemoveOwnerOrManagersFromGroup(group GoogleGroup, member
 		return fmt.Errorf("unable to retrieve members in group %q: %w", group.EmailId, err)
 	}
 
-	// aggregate the errors that occured and return them together in the end.
+	// aggregate the errors that occurred and return them together in the end.
 	var errs []error
 
 	for _, m := range l {
@@ -377,7 +377,7 @@ func (as *adminService) RemoveMembersFromGroup(group GoogleGroup, members []stri
 		return fmt.Errorf("unable to retrieve members in group %q: %w", group.EmailId, err)
 	}
 
-	// aggregate the errors that occured and return them together in the end.
+	// aggregate the errors that occurred and return them together in the end.
 	var errs []error
 
 	for _, m := range l {

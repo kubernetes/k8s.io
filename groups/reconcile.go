@@ -229,7 +229,7 @@ func NewReconciler(ctx context.Context, clientOption option.ClientOption, numWor
 }
 
 func (r *Reconciler) ReconcileGroups(groups []GoogleGroup) error {
-	// aggregate the errors that occured and return them together in the end.
+	// aggregate the errors that occurred and return them together in the end.
 	var errs []error
 	groupChan := make(chan GoogleGroup, len(groups))
 	for _, g := range groups {

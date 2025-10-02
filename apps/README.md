@@ -29,7 +29,7 @@ actually fits the apps we run today.
 ## known issues
 
 - enforcement
-    - OWNER constraints enforcemed by humans
+    - OWNER constraints enforced by humans
     - no validation of yaml beyond yamllint
     - `app:` convention enforcement by humans
 - `*.yaml` can be more than k8s resources
