@@ -109,6 +109,11 @@
     "sha256:3d224c3a7678bc7148f7e7171f6057c36f49a3031bc43e433d28072a098c17bc": ["v0.17.3-full"]
     "sha256:5593ce637ef352991bed7fda5a6e64a55a67484f93788a7c7fa1e36f5aa28b7c": ["v0.17.4","v0.17.4-minimal"]
     "sha256:ffc840245319d8023e23b5c9de095fa6e14a698eb8ac0447e70a5cae98632f28": ["v0.17.4-full"]
+    "sha256:3fbed789c01ee6545143af60f3d405225970a7166cb54970c238dd33e65af40f": ["v0.18.0","v0.18.0-minimal"]
+    "sha256:6128e0a86e5822079b539d86c54d15f1b6930667bba5f1ab751a83a0808bf80a": ["v0.18.0-full"]
+- name: charts/node-feature-discovery
+  dmap:
+    "sha256:cb4bfd81acce68798b65ad3d33f3efc503ad1410504b6a1a3929b514d8ba1205": ["0.18.0"]
 - name: node-feature-discovery-operator
   dmap:
     "sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16": ["v0.2.0"]
