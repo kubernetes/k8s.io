@@ -1,0 +1,10 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - a-hilaly
+  - barney-s
+  - bridgetkromhout
+  - cheftako
+
+labels:
+  - sig/cloud-provider
