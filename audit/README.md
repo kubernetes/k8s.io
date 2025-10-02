@@ -18,7 +18,7 @@ To volunteer for this effort, contact the main
 
 ## Requesting a Audit PR for review
 
-The process for sumbitting an audit uses Github PRs.
+The process for submitting an audit uses Github PRs.
 
 ### audit.sh
 
@@ -34,7 +34,7 @@ Once this PR is created, it should be acknowledged by a secondary auditor.
 ### Performing an audit
 
 Note that this is an AUDIT, not a request for change.
-The audits can be used to generate discussion for reviewing the changes that have already occured.
+The audits can be used to generate discussion for reviewing the changes that have already occurred.
 
 #### Update Pull Request
 First, the requesting auditor opens a PR with any updates applied to the appropriate YAML/JSON file.

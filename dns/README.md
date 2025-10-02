@@ -136,9 +136,9 @@ docker run -ti \
         --doit # leave this off if you want to do a dry-run
 ```
 
-## How do add a new domain
+## How to add a new domain
 
-1. If the domain has existing records, be sure to accuire a copy of the existing zone.
+1. If the domain has existing records, be sure to acquire a copy of the existing zone.
 1. Modify the `dns/octodns-config.yaml` file to include the new domain, including the canary subdomain.
 1. In the "Cloud DNS" panel of the `kubernetes-public` project, create two zones: one for the actual domain, and one for the canary subdomain.
 1. Create the zone files in the `dns/zone-configs` directory:
