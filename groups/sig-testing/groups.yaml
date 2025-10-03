@@ -174,9 +174,7 @@ groups:
     - k8s-infra-release-viewers@kubernetes.io
     # members
     - alarcj137@gmail.com
-    - ameukam@gmail.com
     - antonio.ojea.garcia@gmail.com
-    - bartek@smykla.com
     - eddiezane@gmail.com
     - gmccloskey@google.com
     - helenfengzhi@gmail.com
@@ -185,11 +183,11 @@ groups:
     - mrfaizal@google.com
     - ricardo.katz@gmail.com
     - rob.kielty@gmail.com
-    - spiffxp@gmail.com
     - thejoycekung@gmail.com
     - neolit123@gmail.com
     - philjohnson96@gmail.com
     - elieser.pereiraa@gmail.com
+    - sig-testing-leads@kubernetes.io
 
   #
   # sig-testing k8s-infra owners
@@ -206,26 +204,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    # test-infra-oncall
-    - amerai@google.com
-    - chaodai@google.com
-    - colew@google.com
-    - mpherman@google.com
-    - slchase@google.com
-    # sig-testing leads
-    # - amerai@google.com # already part of test-infra-oncall
-    - antonio.ojea.garcia@gmail.com
-    - bentheelder@google.com
-    - skuznets@redhat.com
-    - spiffxp@gmail.com
-    - spiffxp@google.com
-    # sig-k8s-infra members
-    - ameukam@gmail.com
-    - cblecker@gmail.com
-    - ctadeu@gmail.com
-    - davanum@gmail.com
-    - eddiezane@gmail.com
-    - thockin@google.com
+    - sig-testing-leads@kubernetes.io
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster

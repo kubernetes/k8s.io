@@ -292,7 +292,7 @@ prs:
 cloudfront.registry:
   type: CNAME
   value: d39mqg4b1dx9z1.cloudfront.net.
-# Sandbox OCI redirector service. (@ameukam,@BenTheElder,@thockin,@dims)
+# Sandbox OCI redirector service. (@ameukam)
 registry-sandbox:
   - type: A
     value: 107.178.255.82
@@ -302,7 +302,7 @@ registry-sandbox:
 _acme-challenge.registry-sandbox:
   - type: CNAME
     value: 893400bf-1899-4ca4-8cc3-1599310bb39b.12.authorize.certificatemanager.goog.
-# Prod OCI redirector service.  (@ameukam,@BenTheElder,@thockin,@dims)
+# Prod OCI redirector service.  (@ameukam)
 # Reach to k8s-infra-oci-proxy-admins@kubernetes.io for major issues.
 registry:
   - type: A
