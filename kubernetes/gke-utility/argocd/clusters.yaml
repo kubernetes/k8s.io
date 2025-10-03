@@ -70,6 +70,28 @@ stringData:
       }
     }
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gke-aaa
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: apps
+    environment: prod
+    cloud: gke
+type: Opaque
+stringData:
+  name: gke-aaa
+  server: https://gke-4d0eb7639c079dd868639801ff9cee7661c5-127754664067.us-central1.gke.goog
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "args": ["gcp"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
+      }
+    }
+---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
