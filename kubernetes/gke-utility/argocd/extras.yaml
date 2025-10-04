@@ -61,9 +61,9 @@ spec:
       when:
         - key: request.headers[X-Auth-Request-User]
           values:
-            - dims
-            - upodroid
             - ameukam
-            - BenTheElder
-            - xmudrii
+            - GenPage
+            - hakman
             - iftachk
+            - upodroid
+            - xmudrii

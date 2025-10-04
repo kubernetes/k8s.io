@@ -1,17 +1,12 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- ameukam # sig-k8s-infra chair
-- BenTheElder # sig-k8s-infra TL
-- dims # sig-k8s-infra chair
-- MadhavJivrajani # sig-contribex TL
-- Priyankasaggu11929 # sig-contribex TL
-- thockin
-- upodroid # sig-k8s-infra TL
-- xmudrii # sig-k8s-infra TL
+- sig-k8s-infra-leads
 
 emeritus_approvers:
 - bartsmykla
+- BenTheElder
+- dims
 - cblecker
 - mikedanese
 - nikhita

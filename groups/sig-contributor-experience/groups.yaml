@@ -221,7 +221,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
       - ctadeu@gmail.com
       - jeef111x@gmail.com
       - killen.bob@gmail.com
@@ -261,7 +260,6 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - ameukam@gmail.com
       - cblecker@gmail.com
       - ctadeu@gmail.com
       - davanum@gmail.com

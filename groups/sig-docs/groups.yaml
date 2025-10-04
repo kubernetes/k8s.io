@@ -82,7 +82,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
       - bentheelder@google.com
       - k8s-sig-docs-leads@googlegroups.com
 

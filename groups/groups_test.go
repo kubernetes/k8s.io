@@ -30,11 +30,15 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 )
 
-var cfg GroupsConfig
-var rConfig RestrictionsConfig
+var (
+	cfg     GroupsConfig
+	rConfig RestrictionsConfig
+)
 
-var groupsPath = flag.String("groups-path", "", "Directory containing groups.yaml files")
-var restrictionsPath = flag.String("restrictions-path", "", "Path to the configuration file containing restrictions")
+var (
+	groupsPath       = flag.String("groups-path", "", "Directory containing groups.yaml files")
+	restrictionsPath = flag.String("restrictions-path", "", "Path to the configuration file containing restrictions")
+)
 
 func TestMain(m *testing.M) {
 	flag.Parse()
@@ -148,7 +152,7 @@ func TestDescriptionLength(t *testing.T) {
 		description := g.Description
 
 		len := utf8.RuneCountInString(description)
-		//Ref: https://developers.google.com/admin-sdk/groups-settings/v1/reference/groups
+		// Ref: https://developers.google.com/admin-sdk/groups-settings/v1/reference/groups
 		if len > 300 {
 			errs = append(errs,
 				fmt.Errorf("Number of characters in description \"%s\" for group name \"%s\" "+
@@ -312,23 +316,13 @@ func TestNoDuplicateMembers(t *testing.T) {
 func TestHardcodedGroupsForParanoia(t *testing.T) {
 	groups := map[string][]string{
 		"k8s-infra-gcp-org-admins@kubernetes.io": {
-			"ameukam@gmail.com",
-			"bentheelder@google.com",
-			"cy@borg.dev",
-			"davanum@gmail.com",
 			"ihor@cncf.io",
-			"mudrinic.mare@gmail.com",
-			"thockin@google.com",
+			"sig-k8s-infra-leads@kubernetes.io",
 		},
 		"k8s-infra-group-admins@kubernetes.io": {
-			"ameukam@gmail.com",
 			"bentheelder@google.com",
 			"cblecker@gmail.com",
-			"cy@borg.dev",
-			"davanum@gmail.com",
-			"mudrinic.mare@gmail.com",
-			"nikhitaraghunath@gmail.com",
-			"thockin@google.com",
+			"sig-k8s-infra-leads@kubernetes.io",
 		},
 	}
 
