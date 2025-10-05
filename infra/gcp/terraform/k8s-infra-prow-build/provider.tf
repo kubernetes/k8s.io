@@ -23,18 +23,18 @@ This file defines:
 terraform {
 
   backend "gcs" {
-    bucket = "k8s-infra-tf-prow-clusters"
-    prefix = "k8s-infra-prow-build/prow-build" // $project_name/$cluster_name
+    bucket = "k8s-infra-terraform"
+    prefix = "k8s-infra-prow-build"
   }
 
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 6.31.0"
+      version = "~> 6.50.0"
     }
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "~> 6.31.0"
+      version = "~> 6.50.0"
     }
   }
 }

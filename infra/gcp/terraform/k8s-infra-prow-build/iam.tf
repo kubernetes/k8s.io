@@ -29,9 +29,19 @@ module "iam" {
       "serviceAccount:prow-control-plane@k8s-infra-prow.iam.gserviceaccount.com",
       "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
     ]
+    "roles/owner" = [
+      "group:k8s-infra-prow-oncall@kubernetes.io"
+    ]
+    "organizations/758905017065/roles/prow.viewer" = [
+      "group:k8s-infra-prow-viewers@kubernetes.io"
+    ]
+    "roles/viewer" = [
+      "group:k8s-infra-prow-viewers@kubernetes.io"
+    ]
     "roles/secretmanager.secretAccessor" = [
       "serviceAccount:kubernetes-external-secrets@k8s-infra-prow-build.iam.gserviceaccount.com",
       "principal://iam.googleapis.com/projects/${module.project.project_number}/locations/global/workloadIdentityPools/${module.project.project_id}.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
+      "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
     ]
   }
 }
