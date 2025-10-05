@@ -8,7 +8,7 @@
 # google group for gcr.io/k8s-staging-etcd is k8s-infra-staging-etcd@kubernetes.io
 
 registries:
-- name: gcr.io/k8s-staging-etcd
+- name: gcr.io/etcd-development
   src: true
 
 # Promotes to the following AR locations:
