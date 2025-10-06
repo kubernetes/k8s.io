@@ -29,10 +29,20 @@ locals {
   boskos_gpu_e2e_projects = [
     for i in range("01", "10") : format("k8s-infra-e2e-boskos-gpu-%02d", i)
   ]
+  # these are special boskos projects used for debugging prow jobs + the 5k project
+  dev_boskos_projects = [
+    "k8s-infra-e2e-gce-project",
+    "k8s-infra-e2e-gpu-project",
+    "k8s-infra-e2e-ingress-project",
+    "k8s-infra-e2e-node-e2e-project",
+    "k8s-infra-e2e-scale-project",
+    "k8s-infra-e2e-scale-5k-project",
+  ]
   boskos_projects = concat(
     local.boskos_e2e_projects,
     local.boskos_scale_e2e_projects,
-    local.boskos_gpu_e2e_projects
+    local.boskos_gpu_e2e_projects,
+    local.dev_boskos_projects
   )
 }
 
