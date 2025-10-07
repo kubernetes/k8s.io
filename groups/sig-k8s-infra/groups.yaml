@@ -39,7 +39,7 @@ groups:
       - ameukam@gmail.com
       - chacman@microsoft.com
       - cy@borg.dev
-      - dylanddcpage@gmail.com
+      - dylandcpage@gmail.com
       - mudrinic.mare@gmail.com
 
   - email-id: sig-k8s-infra@kubernetes.io
@@ -56,7 +56,7 @@ groups:
     owners:
       - ameukam@gmail.com
       - chacman@microsoft.com
-      - dylanddcpage@gmail.com
+      - dylandcpage@gmail.com
     members:
       - sig-k8s-infra-leads@kubernetes.io
 
