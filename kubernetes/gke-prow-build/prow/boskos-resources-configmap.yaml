@@ -207,13 +207,14 @@ data:
       - k8s-infra-e2e-boskos-scale-25
       - k8s-infra-e2e-boskos-scale-26
       - k8s-infra-e2e-boskos-scale-27
-      - k8s-infra-e2e-boskos-scale-28
-      - k8s-infra-e2e-boskos-scale-29
-      - k8s-infra-e2e-boskos-scale-30
       state: dirty
       type: scalability-project
     - names:
       - k8s-infra-e2e-scale-5k-project
+      # uncomment after the quotas have been bumped
+      # - k8s-infra-e2e-boskos-scale-28
+      # - k8s-infra-e2e-boskos-scale-29
+      # - k8s-infra-e2e-boskos-scale-30
       state: dirty
       type: scalability-scale-project
     - names:
