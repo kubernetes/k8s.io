@@ -15,7 +15,6 @@ groups:
     members:
       - bentheelder@google.com
       - cblecker@gmail.com
-      - linusa@google.com
       - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: sig-k8s-infra-private@kubernetes.io
@@ -27,11 +26,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - ihor@cncf.io
-      - justinsb@google.com
-      - james@munnelly.eu
       - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: sig-k8s-infra-leads@kubernetes.io
@@ -43,11 +37,10 @@ groups:
       ReconcileMembers: "true"
     owners:
       - ameukam@gmail.com
-      - bentheelder@google.com
+      - chacman@microsoft.com
       - cy@borg.dev
-      - davanum@gmail.com
+      - dylanddcpage@gmail.com
       - mudrinic.mare@gmail.com
-      - thockin@google.com
 
   - email-id: sig-k8s-infra@kubernetes.io
     name: sig-k8s-infra
@@ -62,7 +55,8 @@ groups:
       ReconcileMembers: "false"
     owners:
       - ameukam@gmail.com
-      - davanum@gmail.com
+      - chacman@microsoft.com
+      - dylanddcpage@gmail.com
     members:
       - sig-k8s-infra-leads@kubernetes.io
 
@@ -85,8 +79,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - bentheelder@google.com
-      - cblecker@gmail.com
       - sig-k8s-infra-leads@kubernetes.io
 
   #
@@ -150,8 +142,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - bentheelder@google.com
-      - eddiezane@gmail.com
-      - justinsb@google.com
       - sig-k8s-infra-leads@kubernetes.io
 
   # Owners of the GCP projects:
@@ -164,7 +154,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - bentheelder@google.com
       - justinsb@google.com
       - sig-k8s-infra-leads@kubernetes.io
 
@@ -273,6 +262,7 @@ groups:
       - cblecker@gmail.com
       - davanum@gmail.com
       - nikhitaraghunath@gmail.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
     name: k8s-infra-rbac-kubernetes-external-secrets
@@ -306,7 +296,6 @@ groups:
       - cy@borg.dev
       - ihor@cncf.io
       - jeefy@cncf.io
-      - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - steering-private@kubernetes.io
       - mario@kubermatic.com
@@ -329,8 +318,6 @@ groups:
       ReconcileMembers: "true"
     members:
       - ihor@cncf.io
-      - justinsb@google.com
-      - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - cncf-aws-admins@lists.cncf.io
       - mario@kubermatic.com
@@ -343,7 +330,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
-      - k8s-infra-ii-coop@kubernetes.io
       - sig-k8s-infra-leads@kubernetes.io
       - cncf-aws-admins@lists.cncf.io
 
@@ -407,7 +393,6 @@ groups:
     members:
       - k8s-infra-release-admins@kubernetes.io
       - justinsb@google.com
-      - linusa@google.com
       - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-bigquery-admins@kubernetes.io
@@ -437,10 +422,6 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - bentheelder@google.com
-      - cblecker@gmail.com
-      - justinsb@google.com
-      - james@munnelly.eu
       - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-dns-admins@kubernetes.io
@@ -452,7 +433,6 @@ groups:
     members:
       - bentheelder@google.com
       - cblecker@gmail.com
-      - james@munnelly.eu
       - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-gcp-accounting@kubernetes.io
@@ -463,11 +443,9 @@ groups:
       ReconcileMembers: "true"
     members:
       - ihor@cncf.io
-      - justinsb@google.com
-      - k8s-infra-ii-coop@kubernetes.io
+      - mario@kubermatic.com
       - sig-k8s-infra-leads@kubernetes.io
       - steering-private@kubernetes.io
-      - mario@kubermatic.com
 
   - email-id: k8s-infra-aws-accounting@kubernetes.io
     name: k8s-infra-aws-accounting
@@ -476,11 +454,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - justinleegarrison@gmail.com
-      - k8s-infra-ii-coop@kubernetes.io
+      - mario@kubermatic.com
       - sig-k8s-infra-leads@kubernetes.io
       - steering-private@kubernetes.io
-      - mario@kubermatic.com
 
   - email-id: k8s-infra-yt-admins@kubernetes.io
     name: k8s-infra-yt-admins
@@ -501,13 +477,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
-      - bentheelder@google.com
-      - cy@borg.dev
-      - davanum@gmail.com
       - ihor@cncf.io
-      - mudrinic.mare@gmail.com
-      - thockin@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-public-pii@kubernetes.io
     name: k8s-infra-public-pii
@@ -517,8 +488,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - k8s-infra-ii-coop@kubernetes.io
-      - mudrinic.mare@gmail.com # remove after https://kubernetes.io/blog/2023/08/31/legacy-package-repository-deprecation/ is complete
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-group-admins@kubernetes.io
     name: k8s-infra-group-admins
@@ -528,14 +498,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - ameukam@gmail.com
       - bentheelder@google.com
       - cblecker@gmail.com
-      - cy@borg.dev
-      - davanum@gmail.com
-      - mudrinic.mare@gmail.com
-      - nikhitaraghunath@gmail.com
-      - thockin@google.com
+      - sig-k8s-infra-leads@kubernetes.io
 
   - email-id: k8s-infra-sandbox-capa@kubernetes.io
     name: k8s-infra-sandbox-capa
@@ -547,7 +512,6 @@ groups:
     members:
       - ameukam@gmail.com
       - davanum@gmail.com
-      - hh@cncf.io
       - atharvashinde179@gmail.com
       - ankita.swamy20@gmail.com
       - richmcase@gmail.com
