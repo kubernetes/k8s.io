@@ -48,7 +48,7 @@ groups:
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
       WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
       WhoCanPostMessage: "ANYONE_CAN_POST"
-      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      MessageModerationLevel: "MODERATE_NONE"
       WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
       WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
       WhoCanModerateContent: "OWNERS_AND_MANAGERS"
