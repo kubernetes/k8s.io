@@ -556,3 +556,7 @@ lws.sigs:
 container-object-storage-interface.sigs:
   type: CNAME
   value: container-object-storage-interface.netlify.app.
+# https://github.com/kubernetes-sigs/agent-sandbox docs (@janetkuo, @justinb, @soltysh)
+agent-sandbox.sigs:
+  type: CNAME
+  value: agent-sandbox.netlify.app.
