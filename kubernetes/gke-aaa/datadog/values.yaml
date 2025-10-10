@@ -1,15 +1,18 @@
-registry: public.ecr.aws/datadog
+registry: gcr.io/datadoghq
 datadog:
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
   site: us5.datadoghq.com
-  clusterName: k8s-infra-kops-prow-build
+  clusterName: aaa
   logs:
     enabled: true
     containerCollectAll: true
   prometheusScrape:
     enabled: true
     serviceEndpoints: true
+  # COS specific https://docs.datadoghq.com/containers/kubernetes/distributions?tab=helm#GKE
+  systemProbe:
+    enableDefaultKernelHeadersPaths: false
   kubeStateMetricsCore:
     enabled: true
   networkMonitoring:
