@@ -54,8 +54,16 @@ module "eks" {
       most_recent = true
     }
     vpc-cni = {
+      before_compute           = true
       most_recent              = true
       service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
+      # Reference docs https://docs.aws.amazon.com/eks/latest/userguide/cni-increase-ip-addresses.html
+      configuration_values = jsonencode({
+        env = {
+          ENABLE_PREFIX_DELEGATION = "true"
+          WARM_PREFIX_TARGET       = "1"
+        }
+      })
     }
     aws-ebs-csi-driver = {
       most_recent              = true
