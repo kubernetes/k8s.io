@@ -17,13 +17,13 @@ limitations under the License.
 module "eks" {
   providers = { aws = aws.kops-infra-ci }
   source    = "terraform-aws-modules/eks/aws"
-  version   = "20.37.2"
+  version   = "21.3.2"
 
-  cluster_name                   = local.cluster_name
-  cluster_version                = var.eks_version
-  cluster_endpoint_public_access = true
+  name                   = local.cluster_name
+  kubernetes_version     = var.eks_version
+  endpoint_public_access = true
 
-  cluster_ip_family = "ipv4"
+  ip_family = "ipv4"
 
   # Give the Terraform identity admin access to the cluster
   # which will allow resources to be deployed into the cluster
@@ -33,7 +33,7 @@ module "eks" {
   subnet_ids               = module.vpc.private_subnets
   control_plane_subnet_ids = module.vpc.intra_subnets
 
-  cluster_enabled_log_types = [
+  enabled_log_types = [
     "audit",
     "authenticator",
     "api",
@@ -43,7 +43,7 @@ module "eks" {
 
   cloudwatch_log_group_retention_in_days = 30
 
-  cluster_addons = {
+  addons = {
     coredns = {
       most_recent = true
     }
@@ -56,7 +56,7 @@ module "eks" {
     vpc-cni = {
       before_compute           = true
       most_recent              = true
-      service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
+      service_account_role_arn = module.vpc_cni_irsa.arn
       # Reference docs https://docs.aws.amazon.com/eks/latest/userguide/cni-increase-ip-addresses.html
       configuration_values = jsonencode({
         env = {
@@ -67,15 +67,8 @@ module "eks" {
     }
     aws-ebs-csi-driver = {
       most_recent              = true
-      service_account_role_arn = module.ebs_csi_irsa.iam_role_arn
+      service_account_role_arn = module.ebs_csi_irsa.arn
     }
-  }
-
-  eks_managed_node_group_defaults = {
-    ami_type       = "AL2_x86_64"
-    instance_types = ["m7i.large", "m5.large", "m5n.large", "m5zn.large"]
-
-    iam_role_attach_cni_policy = true
   }
 
   eks_managed_node_groups = {
@@ -141,7 +134,7 @@ module "eks" {
   }
 
   tags = merge(var.tags, {
-    "region" = data.aws_region.current.name
+    "region" = data.aws_region.current.region
   })
 }
 
@@ -181,10 +174,10 @@ resource "aws_eks_pod_identity_association" "kops_prow_build" {
 
 module "vpc_cni_irsa" {
   providers = { aws = aws.kops-infra-ci }
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version   = "~> 5.0"
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version   = "~> 6.2.1"
 
-  role_name_prefix      = "VPC-CNI-IRSA"
+  use_name_prefix       = true
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true
   # We use IPv4-based EKS cluster, so we don't need this
@@ -202,10 +195,10 @@ module "vpc_cni_irsa" {
 
 module "ebs_csi_irsa" {
   providers = { aws = aws.kops-infra-ci }
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version   = "~> 5.0"
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version   = "~> 6.2.1"
 
-  role_name_prefix      = "EBS-CSI-IRSA"
+  use_name_prefix       = true
   attach_ebs_csi_policy = true
 
   oidc_providers = {
@@ -220,12 +213,12 @@ module "ebs_csi_irsa" {
 
 module "cluster_autoscaler_irsa_role" {
   providers = { aws = aws.kops-infra-ci }
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version   = "~> 5.0"
+  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version   = "~> 6.2.1"
 
-  role_name                        = "cluster-autoscaler"
+  name                             = "cluster-autoscaler"
   attach_cluster_autoscaler_policy = true
-  cluster_autoscaler_cluster_ids   = [module.eks.cluster_name]
+  cluster_autoscaler_cluster_names = [module.eks.cluster_name]
 
   oidc_providers = {
     main = {
