@@ -16,22 +16,22 @@ limitations under the License.
 
 resource "aws_vpc_ipam" "main" {
   provider    = aws.kops-infra-ci
-  description = "${local.prefix}-${data.aws_region.current.name}-ipam"
+  description = "${local.prefix}-${data.aws_region.current.region}-ipam"
   operating_regions {
-    region_name = data.aws_region.current.name
+    region_name = data.aws_region.current.region
   }
 
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.region
   })
 }
 
 resource "aws_vpc_ipam_scope" "main" {
   provider    = aws.kops-infra-ci
   ipam_id     = aws_vpc_ipam.main.id
-  description = "${local.prefix}-${data.aws_region.current.name}-ipam-scope"
+  description = "${local.prefix}-${data.aws_region.current.region}-ipam-scope"
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.region
   })
 }
 
@@ -40,9 +40,9 @@ resource "aws_vpc_ipam_pool" "main" {
   provider       = aws.kops-infra-ci
   address_family = "ipv4"
   ipam_scope_id  = aws_vpc_ipam.main.private_default_scope_id
-  locale         = data.aws_region.current.name
+  locale         = data.aws_region.current.region
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.region
   })
 }
 
@@ -66,7 +66,7 @@ module "vpc" {
   }
 
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.4.0"
 
   name = "${local.prefix}-vpc"
   cidr = aws_vpc_ipam_preview_next_cidr.main.cidr
@@ -99,7 +99,7 @@ module "vpc" {
   }
 
   tags = merge(var.tags, {
-    "region" = "${data.aws_region.current.name}"
+    "region" = data.aws_region.current.region
   })
 }
 
@@ -113,7 +113,7 @@ module "vpc_endpoints" {
   }
 
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "~> 5.2"
+  version = "~> 6.4.0"
 
   vpc_id = module.vpc.vpc_id
 
