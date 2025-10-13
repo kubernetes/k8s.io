@@ -74,7 +74,7 @@ module "vpc" {
   ipv4_ipam_pool_id = aws_vpc_ipam_pool.main.id
 
   azs             = local.azs
-  private_subnets = local.private_subnets
+  private_subnets = concat(local.private_subnets1, local.private_subnets2, local.private_subnets3)
   public_subnets  = local.public_subnets
 
   enable_nat_gateway     = true
