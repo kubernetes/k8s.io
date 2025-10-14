@@ -91,7 +91,7 @@ module "eks" {
       }
 
       capacity_type  = "ON_DEMAND"
-      instance_types = ["c7a.4xlarge"]
+      instance_types = ["c7a.8xlarge"]
       ami_type       = "BOTTLEROCKET_x86_64"
 
       ebs_optimized     = true
