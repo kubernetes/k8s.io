@@ -81,9 +81,8 @@ module "eks" {
 
       subnet_ids = module.vpc.private_subnets
 
-      min_size     = 10
-      max_size     = 100
-      desired_size = 3
+      min_size = 3
+      max_size = 100
 
       # Force version update if existing pods are unable to be drained due to a PodDisruptionBudget issue
       force_update_version = true
@@ -177,7 +176,7 @@ module "vpc_cni_irsa" {
   source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
   version   = "~> 6.2.1"
 
-  use_name_prefix       = true
+  name                  = "vpc-cni-ipv4"
   attach_vpc_cni_policy = true
   vpc_cni_enable_ipv4   = true
   # We use IPv4-based EKS cluster, so we don't need this
@@ -198,7 +197,7 @@ module "ebs_csi_irsa" {
   source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
   version   = "~> 6.2.1"
 
-  use_name_prefix       = true
+  name                  = "ebs-csi"
   attach_ebs_csi_policy = true
 
   oidc_providers = {
