@@ -81,13 +81,14 @@ module "eks" {
 
       subnet_ids = module.vpc.private_subnets
 
+      desired_size = 3
       min_size = 3
-      max_size = 100
+      max_size = 30
 
       # Force version update if existing pods are unable to be drained due to a PodDisruptionBudget issue
       force_update_version = true
       update_config = {
-        max_unavailable = 3
+        max_unavailable = 1
       }
 
       capacity_type  = "ON_DEMAND"
@@ -99,9 +100,9 @@ module "eks" {
 
       block_device_mappings = {
         xvda = {
-          device_name = "/dev/xvda"
+          device_name = "/dev/xvdb" # Bottlerocket uses /dev/xvda for its root volume
           ebs = {
-            volume_size           = 100
+            volume_size           = 200
             volume_type           = "gp3"
             iops                  = "3000" #https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
             encrypted             = false
