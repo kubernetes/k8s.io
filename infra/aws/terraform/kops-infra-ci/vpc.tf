@@ -21,7 +21,7 @@ resource "aws_vpc_ipam" "main" {
     region_name = data.aws_region.current.region
   }
 
-  tags = merge(var.tags, {
+  tags = merge(var.tags, var.janitor_tags, {
     "region" = data.aws_region.current.region
   })
 }
@@ -41,7 +41,7 @@ resource "aws_vpc_ipam_pool" "main" {
   address_family = "ipv4"
   ipam_scope_id  = aws_vpc_ipam.main.private_default_scope_id
   locale         = data.aws_region.current.region
-  tags = merge(var.tags, {
+  tags = merge(var.tags, var.janitor_tags, {
     "region" = data.aws_region.current.region
   })
 }
@@ -98,7 +98,7 @@ module "vpc" {
     "kubernetes.io/role/internal-elb" = 1
   }
 
-  tags = merge(var.tags, {
+  tags = merge(var.tags, var.janitor_tags, {
     "region" = data.aws_region.current.region
   })
 }
@@ -148,7 +148,9 @@ module "vpc_endpoints" {
       }
   })
 
-  tags = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 // Required by kOps CI
@@ -157,5 +159,7 @@ resource "aws_route53_zone" "hosted_zone" {
 
   name = "tests-kops-aws.k8s.io"
 
-  tags = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }

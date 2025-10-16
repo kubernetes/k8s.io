@@ -29,10 +29,10 @@ locals {
     "k8s.io/cluster-autoscaler/enabled"               = true
   }
 
-  partition       = cidrsubnets(aws_vpc_ipam_preview_next_cidr.main.cidr, 2, 2, 2, 2)
-  azs             = slice(data.aws_availability_zones.available.names, 0, 3)
+  partition        = cidrsubnets(aws_vpc_ipam_preview_next_cidr.main.cidr, 2, 2, 2, 2)
+  azs              = slice(data.aws_availability_zones.available.names, 0, 3)
   private_subnets1 = cidrsubnets(local.partition[0], 2, 2, 2, 2)
   private_subnets2 = cidrsubnets(local.partition[2], 2, 2, 2, 2)
   private_subnets3 = cidrsubnets(local.partition[3], 2, 2, 2, 2)
-  public_subnets  = cidrsubnets(local.partition[1], 2, 2, 2)
+  public_subnets   = cidrsubnets(local.partition[1], 2, 2, 2)
 }

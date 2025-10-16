@@ -28,13 +28,20 @@ resource "aws_iam_openid_connect_provider" "google_prow_idp" {
     # GlobalSign root certificate (Google Managed Certficates)
     "08745487e891c19e3078c1f2a07e452950ef36f6"
   ]
+
+
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 ## Used by kOps to store the state of the kOps created
 resource "aws_s3_bucket" "kops_state_store" {
   provider = aws.kops-infra-ci
   bucket   = "k8s-kops-ci-prow-state-store"
-  tags     = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 resource "aws_s3_bucket_ownership_controls" "kops_state_store" {
@@ -50,7 +57,9 @@ resource "aws_s3_bucket_ownership_controls" "kops_state_store" {
 resource "aws_s3_bucket" "kops_oidc_store" {
   provider = aws.kops-infra-ci
   bucket   = "k8s-kops-ci-prow"
-  tags     = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 resource "aws_s3_bucket_ownership_controls" "kops_oidc_store" {

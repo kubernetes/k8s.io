@@ -169,6 +169,10 @@ resource "aws_eks_pod_identity_association" "kops_prow_build" {
   namespace       = "test-pods"
   service_account = "prowjob-default-sa"
   role_arn        = aws_iam_role.eks_pod_identity_role.arn
+
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 
@@ -190,7 +194,9 @@ module "vpc_cni_irsa" {
     }
   }
 
-  tags = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 module "ebs_csi_irsa" {
@@ -208,7 +214,9 @@ module "ebs_csi_irsa" {
     }
   }
 
-  tags = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 module "cluster_autoscaler_irsa_role" {
@@ -227,5 +235,7 @@ module "cluster_autoscaler_irsa_role" {
     }
   }
 
-  tags = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }

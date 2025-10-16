@@ -52,6 +52,10 @@ resource "aws_iam_role" "google_prow_trust_role" {
   description          = ""
   max_session_duration = 43200
   assume_role_policy   = data.aws_iam_policy_document.google_prow_trust_policy.json
+
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 
@@ -79,6 +83,11 @@ resource "aws_iam_role" "eks_pod_identity_role" {
 
   name               = "EKSPodIdentityRole"
   assume_role_policy = data.aws_iam_policy_document.eks_pod_identity_policy.json
+
+
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "eks_pod_identity_policy" {
@@ -103,7 +112,9 @@ module "ci_iam_group" {
     "arn:aws:iam::aws:policy/AdministratorAccess",
   ]
 
-  tags = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
 
 module "kops_ci_user" {
@@ -118,5 +129,7 @@ module "kops_ci_user" {
   force_destroy           = true
   password_reset_required = false
 
-  tags = var.tags
+  tags = merge(var.tags, var.janitor_tags, {
+    "region" = data.aws_region.current.region
+  })
 }
