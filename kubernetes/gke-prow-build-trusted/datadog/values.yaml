@@ -1,9 +1,9 @@
-registry: public.ecr.aws/datadog
+registry: gcr.io/datadoghq
 datadog:
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
   site: us5.datadoghq.com
-  clusterName: k8s-infra-kops-prow-build
+  clusterName: k8s-infra-prow-build-trusted
   logs:
     enabled: true
     containerCollectAll: true
