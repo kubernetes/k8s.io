@@ -29,6 +29,13 @@ variable "tags" {
   }
 }
 
+variable "janitor_tags" {
+  type = map(string)
+  default = {
+    "Shared" = "Ignore"
+  }
+}
+
 variable "region" {
   type    = string
   default = "us-east-2"
