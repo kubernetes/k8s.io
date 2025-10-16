@@ -99,7 +99,7 @@ module "eks" {
       enable_monitoring = true
 
       block_device_mappings = {
-        xvda = {
+        xvdb = {
           device_name = "/dev/xvdb" # Bottlerocket uses /dev/xvda for its root volume
           ebs = {
             volume_size           = 200
