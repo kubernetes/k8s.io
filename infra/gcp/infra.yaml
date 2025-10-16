@@ -338,7 +338,6 @@ infra:
       k8s-staging-e2e-test-images:
       k8s-staging-etcd:
       k8s-staging-etcd-manager:
-      k8s-staging-etcdadm:
       k8s-staging-examples:
       k8s-staging-experimental:
       k8s-staging-external-dns:

@@ -112,7 +112,6 @@ restrictions:
       - "^sig-cluster-lifecycle-cluster-api-do-alerts@kubernetes.io$"
       - "^k8s-infra-staging-cluster-api-nested@kubernetes.io$"
       - "^k8s-infra-staging-cluster-addons@kubernetes.io$"
-      - "^k8s-infra-staging-etcdadm@kubernetes.io$"
       - "^k8s-infra-staging-etcd-manager@kubernetes.io$"
       - "^k8s-infra-staging-kops@kubernetes.io$"
       - "^k8s-infra-staging-kubeadm@kubernetes.io$"
