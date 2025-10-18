@@ -31,41 +31,32 @@ locals {
   pod_namespace     = "test-pods"   // MUST match whatever prow is configured to use when it schedules to this cluster
 }
 
-data "google_organization" "org" {
-  domain = "kubernetes.io"
-}
-
 module "project" {
-  source       = "../modules/gke-project"
-  project_id   = local.project_id
-  project_name = local.project_id
-}
+  source  = "terraform-google-modules/project-factory/google"
+  version = "~> 18.0"
 
-// Ensure k8s-infra-prow-oncall@kuberentes.io has owner access to this project
-resource "google_project_iam_member" "k8s_infra_prow_oncall" {
-  project = module.project.project_id
-  role    = "roles/owner"
-  member  = "group:k8s-infra-prow-oncall@kubernetes.io"
-}
+  name            = "k8s-infra-prow-build"
+  project_id      = "k8s-infra-prow-build"
+  folder_id       = "411137699919"
+  billing_account = "018801-93540E-22A20E"
 
-// Role created by ensure-organization.sh, use a data source to ensure it exists
-data "google_iam_role" "prow_viewer" {
-  name = "${data.google_organization.org.name}/roles/prow.viewer"
-}
-
-// Ensure k8s-infra-prow-viewers@kuberentes.io has prow.viewer access to this project
-resource "google_project_iam_member" "k8s_infra_prow_viewers" {
-  project = module.project.project_id
-  role    = data.google_iam_role.prow_viewer.name
-  member  = "group:k8s-infra-prow-viewers@kubernetes.io"
-}
-
-// Allow prow-deployer service account in k8s-infra-prow-build-trusted to deploy
-// to the cluster defined in here
-resource "google_project_iam_member" "prow_deployer_for_prow_build" {
-  project = module.project.project_id
-  role    = "roles/container.admin"
-  member  = "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+  # Sane project defaults
+  default_service_account     = "keep"
+  disable_services_on_destroy = false
+  create_project_sa           = false
+  random_project_id           = false
+  auto_create_network         = true
+  activate_apis = [
+    "secretmanager.googleapis.com",
+    "cloudasset.googleapis.com",
+    "compute.googleapis.com",
+    "container.googleapis.com",
+    "cloudkms.googleapis.com",
+    "artifactregistry.googleapis.com",
+    "secretmanager.googleapis.com",
+    "cloudbuild.googleapis.com",
+    "bigquery.googleapis.com"
+  ]
 }
 
 module "prow_build_cluster" {
@@ -79,47 +70,6 @@ module "prow_build_cluster" {
   dns_cache_enabled  = "true"
   cloud_shell_access = false
 }
-
-module "prow_build_nodepool_c4_highmem_8_localssd" {
-  source       = "../modules/gke-nodepool"
-  project_name = module.project.project_id
-  cluster_name = module.prow_build_cluster.cluster.name
-  location     = module.prow_build_cluster.cluster.location
-  node_locations = [
-    "us-central1-b",
-    "us-central1-c",
-    "us-central1-f",
-  ]
-  name            = "pool6"
-  initial_count   = 1
-  min_count       = 1
-  max_count       = 80
-  machine_type    = "c4-highmem-8"
-  disk_size_gb    = 500
-  disk_type       = "hyperdisk-balanced"
-  service_account = module.prow_build_cluster.cluster_node_sa.email
-}
-
-module "prow_build_nodepool_c4d_highmem_8_localssd" {
-  source       = "../modules/gke-nodepool"
-  project_name = module.project.project_id
-  cluster_name = module.prow_build_cluster.cluster.name
-  location     = module.prow_build_cluster.cluster.location
-  node_locations = [
-    "us-central1-a",
-    "us-central1-b",
-    "us-central1-c",
-  ]
-  name            = "pool7"
-  initial_count   = 1
-  min_count       = 10
-  max_count       = 80
-  machine_type    = "c4d-highmem-8-lssd" # has 2 local ssd disks attached
-  disk_size_gb    = 100
-  disk_type       = "hyperdisk-balanced"
-  service_account = module.prow_build_cluster.cluster_node_sa.email
-}
-
 
 module "sig_node_node_pool_1_n4_highmem_8" {
 
@@ -160,24 +110,83 @@ module "sig_node_node_pool_1_n4_highmem_8" {
   taints = { dedicated = { value = "sig-node", effect = "NO_SCHEDULE" } }
 }
 
-module "prow_build_nodepool_c4a_highmem_8_localssd" {
-  source       = "../modules/gke-nodepool"
-  project_name = module.project.project_id
-  cluster_name = module.prow_build_cluster.cluster.name
-  location     = module.prow_build_cluster.cluster.location
-  node_locations = [
-    "us-central1-a",
-    "us-central1-b",
-    "us-central1-c",
-  ]
-  name          = "pool7-arm64"
-  initial_count = 1
-  min_count     = 1
-  max_count     = 10
-  machine_type  = "c4a-highmem-8-lssd" # has 2 local ssd disks attached
-  disk_size_gb  = 100
-  disk_type     = "hyperdisk-balanced"
-  // GKE automatically taints arm64 nodes
-  // https://cloud.google.com/kubernetes-engine/docs/how-to/prepare-arm-workloads-for-deployment#overview
-  service_account = module.prow_build_cluster.cluster_node_sa.email
+module "prod_intel_pool" {
+  source         = "terraform-google-modules/kubernetes-engine/google//modules/gke-node-pool"
+  version        = "~> 40.0"
+  project_id     = module.project.project_id
+  name           = "pool8-intel"
+  cluster        = module.prow_build_cluster.cluster.name
+  node_locations = ["us-central1-b", "us-central1-c", "us-central1-f"]
+
+  autoscaling = {
+    max_node_count = 100
+    min_node_count = 1
+  }
+
+  node_config = {
+    service_account = module.prow_build_cluster.cluster_node_sa.email
+    machine_type    = "c4-highmem-8-lssd"
+    disk_type       = "hyperdisk-balanced"
+    image_type      = "COS_CONTAINERD"
+    kubelet_config = {
+      single_process_oom_kill = false # https://github.com/kubernetes-sigs/prow/issues/210
+    }
+    shielded_instance_config = {
+      enable_secure_boot = true
+    }
+  }
+}
+
+module "prod_amd_pool" {
+  source         = "terraform-google-modules/kubernetes-engine/google//modules/gke-node-pool"
+  version        = "~> 40.0"
+  project_id     = module.project.project_id
+  name           = "pool8-amd"
+  cluster        = module.prow_build_cluster.cluster.name
+  node_locations = ["us-central1-b", "us-central1-c", "us-central1-f"]
+
+  autoscaling = {
+    max_node_count = 100
+    min_node_count = 1
+  }
+
+  node_config = {
+    service_account = module.prow_build_cluster.cluster_node_sa.email
+    machine_type    = "c4d-highmem-8-lssd"
+    disk_type       = "hyperdisk-balanced"
+    image_type      = "COS_CONTAINERD"
+    kubelet_config = {
+      single_process_oom_kill = false # https://github.com/kubernetes-sigs/prow/issues/210
+    }
+    shielded_instance_config = {
+      enable_secure_boot = true
+    }
+  }
+}
+
+module "prod_arm_pool" {
+  source         = "terraform-google-modules/kubernetes-engine/google//modules/gke-node-pool"
+  version        = "~> 40.0"
+  project_id     = module.project.project_id
+  name           = "pool8-arm"
+  cluster        = module.prow_build_cluster.cluster.name
+  node_locations = ["us-central1-b", "us-central1-c", "us-central1-f"]
+
+  autoscaling = {
+    max_node_count = 100
+    min_node_count = 1
+  }
+
+  node_config = {
+    service_account = module.prow_build_cluster.cluster_node_sa.email
+    machine_type    = "c4a-highmem-8-lssd"
+    disk_type       = "hyperdisk-balanced"
+    image_type      = "COS_CONTAINERD"
+    kubelet_config = {
+      single_process_oom_kill = false # https://github.com/kubernetes-sigs/prow/issues/210
+    }
+    shielded_instance_config = {
+      enable_secure_boot = true
+    }
+  }
 }
