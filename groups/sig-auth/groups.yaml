@@ -1,5 +1,4 @@
 groups:
-
   #
   # Mailing lists
   #
@@ -61,21 +60,6 @@ groups:
       MembersCanPostAsTheGroup: "false"
       ReconcileMembers: "false"
 
-  - email-id: k8s-infra-staging-sig-auth@kubernetes.io
-    name: k8s-infra-staging-sig-auth
-    description: |-
-      ACL for SIG-Auth owned container images that do not fall under one of the dedicated
-      sub-projects
-    settings:
-      ReconcileMembers: "true"
-    members:
-      - deads@redhat.com
-      - liggitt@google.com
-      - rita.z.zhang@gmail.com
-      - i@monis.app
-      - anish.ramasekar@gmail.com
-      - mhausler@amazon.com
-
   - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
     name: k8s-infra-staging-csi-secrets-store
     description: |-
@@ -130,7 +114,6 @@ groups:
   # infrastructure owned or managed by this SIG. A high level of trust is
   # required for membership in these groups.
   #
-
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster

@@ -53,7 +53,6 @@ restrictions:
       - "^k8s-infra-staging-csi-secrets-store@kubernetes.io$"
       - "^k8s-infra-staging-secrets-store-sync@kubernetes.io$"
       - "^k8s-infra-staging-multitenancy@kubernetes.io$"
-      - "^k8s-infra-staging-sig-auth@kubernetes.io$"
       - "^sig-auth@kubernetes.io$"
       - "^sig-auth-leads@kubernetes.io$"
   - path: "sig-autoscaling/groups.yaml"
