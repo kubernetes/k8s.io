@@ -18,7 +18,7 @@
 # infrastructure managed by sig-k8s-infra.
 
 # base image
-FROM debian:bookworm
+FROM debian:trixie
 
 # build args
 
@@ -26,18 +26,18 @@ FROM debian:bookworm
 # latest at the time, and package-based installs from debian-maintained repos
 # are not pinned to a specific version
 
-ARG CONFTEST_VERSION=0.54.0
-ARG GCLOUD_VERSION=467.0.0
-ARG GH_VERSION=2.63.2
-ARG GO_VERSION=1.23.4
+ARG CONFTEST_VERSION=0.63.0
+ARG GCLOUD_VERSION=543.0.0
+ARG GH_VERSION=2.82.0
+ARG GO_VERSION=1.25.3
 ARG JQ_VERSION=1.6
 # K8S_VERSION should be within +/- 1 minor version of our clusters
 # ref: https://kubernetes.io/releases/version-skew-policy/#kubectl
-ARG K8S_VERSION=1.30.8
+ARG K8S_VERSION=1.33.4
 ARG OPA_VERSION=0.70.0
-ARG SHELLCHECK_VERSION=0.9.0
-ARG TFSWITCH_VERSION=1.2.4
-ARG RCLONE_VERSION=1.68.2
+ARG SHELLCHECK_VERSION=0.11.0
+ARG TFSWITCH_VERSION=1.7.0
+ARG RCLONE_VERSION=1.71.1
 
 # build everything in /build
 WORKDIR /build
@@ -77,13 +77,13 @@ RUN set -o errexit nounset pipefail \
         && tar xf tarball.tar.gz -C /usr/local \
         && rm tarball.tar.gz \
     && echo "Installing Google Cloud SDK ..." \
-        && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
+        && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" \
             | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
         && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg \
         && apt-get update -o Dir::Etc::sourcelist="sources.list.d/google-cloud-sdk.list" \
             -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0" \
         && apt-get install -y --no-install-recommends \
-            "google-cloud-sdk=${GCLOUD_VERSION}-0" \
+            "google-cloud-cli=${GCLOUD_VERSION}-0" \
             python3-crcmod \
         && gcloud config set core/disable_usage_reporting true \
         && gcloud config set component_manager/disable_update_check true \
@@ -131,9 +131,9 @@ RUN set -o errexit nounset pipefail \
         && tar xf tarball.tar.gz -C /usr/local/bin tfswitch \
         && rm tarball.tar.gz \
     && echo "Installing terraform ..." \
-        && tfswitch --latest-stable=1.1 \
-        && tfswitch --latest-stable=1.2 \
         && tfswitch --latest-stable=1.3 \
+        && tfswitch --latest-stable=1.4 \
+        && tfswitch --latest-stable=1.5 \
     && echo "Installing pr-creator" \
         && git clone --depth 1 https://github.com/kubernetes/test-infra \
         && pushd ./test-infra \
