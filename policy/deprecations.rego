@@ -1,27 +1,22 @@
 package main
-
-warn[msg] {
-  input.apiVersion != "v1"
-  input.kind != "List"
-  msg := _warn
-}
+import rego.v1
 
 # All resources will no longer be served from rbac.authorization.k8s.io/v1alpha1 and rbac.authorization.k8s.io/v1beta1 in 1.20. Migrate to use rbac.authorization.k8s.io/v1 instead
-_warn = msg {
+warn contains msg if {
   apis := ["rbac.authorization.k8s.io/v1alpha1", "rbac.authorization.k8s.io/v1beta1"]
   input.apiVersion == apis[_]
   msg := sprintf("%s/%s: API %s is deprecated from Kubernetes 1.20, use rbac.authorization.k8s.io/v1 instead.", [input.kind, input.metadata.name, input.apiVersion])
 }
 
 # All resources under apps/v1beta1 and apps/v1beta2 - use apps/v1 instead
-_warn = msg {
+warn contains msg if {
   apis := ["apps/v1beta1", "apps/v1beta2"]
   input.apiVersion == apis[_]
   msg := sprintf("%s/%s: API %s has been deprecated, use apps/v1 instead.", [input.kind, input.metadata.name, input.apiVersion])
 }
 
 # daemonsets, deployments, replicasets resources under extensions/v1beta1 - use apps/v1 instead
-_warn = msg {
+deny contains msg if {
   resources := ["DaemonSet", "Deployment", "ReplicaSet"]
   input.apiVersion == "extensions/v1beta1"
   input.kind == resources[_]
@@ -29,20 +24,20 @@ _warn = msg {
 }
 
 # Ingress resources extensions/v1beta1 will no longer be served from in v1.20. Migrate use to the networking.k8s.io/v1beta1 API, available since v1.14.
-_warn = msg {
+warn contains msg if {
   input.apiVersion == "extensions/v1beta1"
   input.kind == "Ingress"
   msg := sprintf("%s/%s: API extensions/v1beta1 for Ingress is deprecated from Kubernetes 1.14, use networking.k8s.io/v1beta1 instead.", [input.kind, input.metadata.name])
 }
 
 # ref: https://kubernetes.io/blog/2021/07/14/upcoming-changes-in-kubernetes-1-22/
-_warn = msg {
+warn contains msg if {
   input.apiVersion == "apiextensions.k8s.io/v1beta1"
   input.kind == "CustomResourceDefinition"
   msg := sprintf("%s/%s: apiextensions.k8s.io/v1beta1 CustomResourceDefinition is deprecated in v1.16+, unavailable in v1.22+; use apiextensions.k8s.io/v1 CustomResourceDefinition instead", [input.kind, input.metadata.name])
 }
 
-_warn = msg {
+warn contains msg if {
   input.apiVersion == "networking.k8s.io/v1beta1"
   input.kind == "Ingress"
   msg := sprintf("%s/%s: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress instead", [input.kind, input.metadata.name])
