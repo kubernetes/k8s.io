@@ -1,6 +1,6 @@
 - name: kro
   dmap:
-    "sha256:1abd0e5f7c2719162067eb478a647562c2a8d1580c6e9038a9eb28b7ec2e5f0f": ["v0.5.0-rc.1"]
+    "sha256:1abd0e5f7c2719162067eb478a647562c2a8d1580c6e9038a9eb28b7ec2e5f0f": ["v0.5.0-rc.1", "v0.5.0"]
 - name: charts/kro
   dmap:
-    "sha256:8de045ac83ec0f394142322fd2b810a9c89ae37ed1fdf6f5172b1d30a08b0d8d": ["v0.5.0-rc.1"]
+    "sha256:8de045ac83ec0f394142322fd2b810a9c89ae37ed1fdf6f5172b1d30a08b0d8d": ["v0.5.0-rc.1", "0.5.0-rc.1", "v0.5.0", "0.5.0"]
