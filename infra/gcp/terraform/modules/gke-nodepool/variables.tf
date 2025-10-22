@@ -107,3 +107,9 @@ variable "service_account" {
   description = "The email address of the GCP Service Account to be associated with nodes in this node_pool"
   type        = string
 }
+
+variable "enable_nested_virtualization" {
+  description = "Whether to enable nested virtualization on the node pool's VMs"
+  type        = bool
+  default     = false
+}
