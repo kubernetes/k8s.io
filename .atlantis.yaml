@@ -6,8 +6,27 @@ parallel_plan: true
 parallel_apply: true
 abort_on_execution_order_fail: true
 projects:
-- name: k8s-infra-ii-sandbox
-  branch: /main/
-  dir: infra/gcp/terraform/k8s-infra-ii-sandbox
-  workspace: default
-  terraform_version: v1.3.0
+  - name: artifacts.k8s.io
+    branch: /main/
+    dir: infra/aws/terraform/artifacts.k8s.io
+    workflow: aws
+# For AWS, atlantis needs to assume a specific role in each account except the management account
+# so we read it from the folder that atlantis will work on
+workflows:
+  aws:
+    plan:
+      steps:
+        - init:
+            extra_args: ["--backend-config", "atlantis.config"]
+        - plan:
+            extra_args: ["-var-file", "atlantis.tfvars"]
+    apply:
+      steps:
+        - apply:
+            extra_args: ["-var-file", "atlantis.tfvars"]
+    import:
+      steps:
+        - init:
+            extra_args: ["--backend-config", "atlantis.config"]
+        - import:
+            extra_args: ["-var-file", "atlantis.tfvars"]
