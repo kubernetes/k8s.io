@@ -11,4 +11,5 @@ hide-prev-plan-comments: true
 hide-unchanged-plan-comments: true
 checkout-strategy: merge
 emoji-reaction: eyes
+repo-config: /config/repos.yaml
 # default-tf-distribution: opentofu # uncomment when we start using opentofu
