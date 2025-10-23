@@ -17,10 +17,15 @@ limitations under the License.
 variable "prefix" {
   description = "Prefix for every resource so that the resources can be created without using the same names. Useful for testing and staging"
   type        = string
-  default     = "test-"
+  default     = "prod-"
 
   validation {
     condition     = can(regex(".*-$|^$", var.prefix))
     error_message = "The string must end with a hyphen or be empty."
   }
+}
+
+variable "atlantis_role_arn" {
+  description = "The ARN of the Atlantis IAM role"
+  default     = null
 }
