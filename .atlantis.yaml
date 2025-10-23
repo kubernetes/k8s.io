@@ -10,23 +10,3 @@ projects:
     branch: /main/
     dir: infra/aws/terraform/artifacts.k8s.io
     workflow: aws
-# For AWS, atlantis needs to assume a specific role in each account except the management account
-# so we read it from the folder that atlantis will work on
-workflows:
-  aws:
-    plan:
-      steps:
-        - init:
-            extra_args: ["--backend-config", "atlantis.config"]
-        - plan:
-            extra_args: ["-var-file", "atlantis.tfvars"]
-    apply:
-      steps:
-        - apply:
-            extra_args: ["-var-file", "atlantis.tfvars"]
-    import:
-      steps:
-        - init:
-            extra_args: ["--backend-config", "atlantis.config"]
-        - import:
-            extra_args: ["-var-file", "atlantis.tfvars"]

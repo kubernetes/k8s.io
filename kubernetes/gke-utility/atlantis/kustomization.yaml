@@ -15,6 +15,7 @@ configMapGenerator:
   - name: atlantis-config
     files:
       - atlantis.yaml
+      - repos.yaml
 
 patchesStrategicMerge:
   - |-
