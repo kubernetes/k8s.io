@@ -9,7 +9,7 @@ resources:
 
 images:
   - name: ghcr.io/runatlantis/atlantis
-    newTag: v0.34.0
+    newTag: v0.36.0
 
 configMapGenerator:
   - name: atlantis-config
@@ -29,6 +29,12 @@ patchesStrategicMerge:
           containers:
           - name: atlantis
             env:
+              - name: AWS_ROLE_ARN
+                value: arn:aws:iam::348685125169:role/atlantis
+              - name: AWS_WEB_IDENTITY_TOKEN_FILE
+                value: /var/run/secrets/aws-iam-token/serviceaccount/token
+              - name: AWS_REGION
+                value: us-east-2
               - name: ATLANTIS_CONFIG
                 value: /config/atlantis.yaml
               - name: ATLANTIS_GH_TOKEN
@@ -51,7 +57,18 @@ patchesStrategicMerge:
             volumeMounts:
             - name: config
               mountPath: /config
+            - mountPath: /var/run/secrets/aws-iam-token/serviceaccount
+              name: aws-iam-token
+              readOnly: true
           volumes:
           - name: config
             configMap:
               name: atlantis-config
+          - name: aws-iam-token
+            projected:
+              defaultMode: 420
+              sources:
+              - serviceAccountToken:
+                  audience: sts.amazonaws.com
+                  expirationSeconds: 86400
+                  path: token
