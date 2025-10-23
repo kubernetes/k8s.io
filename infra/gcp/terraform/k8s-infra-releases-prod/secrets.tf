@@ -16,11 +16,15 @@ limitations under the License.
 
 module "secrets" {
   source  = "GoogleCloudPlatform/secret-manager/google"
-  version = "~> 0.8"
+  version = "~> 0.9"
 
   project_id = google_project.project.project_id
 
   secrets = [
+    {
+      name        = "datadog_fastly_logs_streaming"
+      secret_data = "REDACT-ME"
+    },
     {
       name        = "fastly_reader_sa_access_key"
       secret_data = google_storage_hmac_key.fastly_reader_key.access_id
