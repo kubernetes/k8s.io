@@ -215,6 +215,9 @@ aliases:
     - saschagrunert
     - soltysh
   ## BEGIN CUSTOM CONTENT
+  karpenter-cluster-api-approvers:
+    - elmiko
+    - maxcao13
   minikube-approvers:
     - medyagh
     - spowelljr
