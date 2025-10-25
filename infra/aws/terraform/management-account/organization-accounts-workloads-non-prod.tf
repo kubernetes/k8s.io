@@ -57,17 +57,3 @@ module "k8s_infra_eks_e2e_shared_001" {
     "group"      = "sig-k8s-infra"
   }
 }
-
-# Shared AWS account used for kops/eks related repositories
-module "windows_operational_readiness" {
-  source = "../modules/org-account"
-
-  account_name = "windows_operational_readiness"
-  email        = "k8s-infra-aws-admins+windows_operational_readiness@kubernetes.io"
-  parent_id    = aws_organizations_organizational_unit.non_production.id
-  tags = {
-    "production" = "false",
-    "owners"     = "jayunit100",
-    "group"      = "sig-windows"
-  }
-}
