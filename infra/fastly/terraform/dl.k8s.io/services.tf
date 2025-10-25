@@ -65,15 +65,15 @@ resource "fastly_service_vcl" "files" {
     window         = 4
   } */
 
-  logging_bigquery {
-    dataset      = "fastly_bigquery_cdn_dl_k8s_io"
-    project_id   = "k8s-infra-public-pii"
-    name         = "BigQuery logging"
-    table        = "fastly_bigquery_cdn_dl_k8s_io_logs"
-    account_name = "fastly-bigquery-logging-sa"
-    email        = "fastly-logging@datalog-bulleit-9e86.iam.gserviceaccount.com"
-
-    format = "%%{strftime(\\{\"%Y-%m-%dT%H:%M:%S%z\"\\}, time.start)}V|%%{client.as.number}V|%%{if(fastly.ff.visits_this_service == 0, \"true\", \"false\")}V"
+  logging_datadog {
+    name   = "dd-oss-k8s"
+    token  = data.google_secret_manager_secret_version_access.datadog_api_key.secret_data
+    region = "US5"
+    format = templatefile("${path.module}/fastly-log-format.tftpl", {
+      service_name = "cdn.dl.k8s.io",
+      dd_app       = "releases",
+      dd_env       = "prod",
+    })
   }
 
   snippet {

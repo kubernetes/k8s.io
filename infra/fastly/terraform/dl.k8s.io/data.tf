@@ -14,6 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+data "google_secret_manager_secret_version_access" "datadog_api_key" {
+  secret  = "datadog_fastly_logs_streaming"
+  project = "k8s-infra-releases-prod"
+}
+
 data "google_secret_manager_secret_version_access" "gcs_reader_access_key" {
   secret  = "fastly_reader_sa_access_key"
   project = "k8s-infra-releases-prod"
