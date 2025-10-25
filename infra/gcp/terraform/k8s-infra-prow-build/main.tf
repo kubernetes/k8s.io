@@ -60,14 +60,6 @@ resource "google_project_iam_member" "k8s_infra_prow_viewers" {
   member  = "group:k8s-infra-prow-viewers@kubernetes.io"
 }
 
-// Allow prow-deployer service account in k8s-infra-prow-build-trusted to deploy
-// to the cluster defined in here
-resource "google_project_iam_member" "prow_deployer_for_prow_build" {
-  project = module.project.project_id
-  role    = "roles/container.admin"
-  member  = "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
-}
-
 module "prow_build_cluster" {
   source             = "../modules/gke-cluster"
   project_name       = module.project.project_id
@@ -86,18 +78,30 @@ module "prow_build_nodepool_c4_highmem_8_localssd" {
   cluster_name = module.prow_build_cluster.cluster.name
   location     = module.prow_build_cluster.cluster.location
   node_locations = [
+    "us-central1-a",
     "us-central1-b",
     "us-central1-c",
     "us-central1-f",
   ]
-  name            = "pool6"
-  initial_count   = 1
-  min_count       = 1
-  max_count       = 80
-  machine_type    = "c4-highmem-8"
-  disk_size_gb    = 500
-  disk_type       = "hyperdisk-balanced"
-  service_account = module.prow_build_cluster.cluster_node_sa.email
+  name                         = "pool6"
+  initial_count                = 1
+  min_count                    = 1
+  max_count                    = 250 # total across all zones
+  machine_type                 = "c4-highmem-8-lssd"
+  disk_size_gb                 = 100
+  disk_type                    = "hyperdisk-balanced"
+  enable_nested_virtualization = true
+  service_account              = module.prow_build_cluster.cluster_node_sa.email
+  // This taint exists to bias workloads on to the C4D nodepool first, if we can't secure a C4D node
+  // then we schedule on to a C4 node. C4D performs better than C4 but it is capacity constrained at times.
+  // Also, nested virt doesn't work on C4D or C4A
+  taints = [
+    {
+      key    = "spare"
+      value  = "true"
+      effect = "PREFER_NO_SCHEDULE"
+    }
+  ]
 }
 
 module "prow_build_nodepool_c4d_highmem_8_localssd" {
@@ -113,51 +117,11 @@ module "prow_build_nodepool_c4d_highmem_8_localssd" {
   name            = "pool7"
   initial_count   = 1
   min_count       = 10
-  max_count       = 80
-  machine_type    = "c4d-highmem-8-lssd" # has 2 local ssd disks attached
+  max_count       = 250                  # total across all zones
+  machine_type    = "c4d-highmem-8-lssd" # has 1 local ssd disks attached
   disk_size_gb    = 100
   disk_type       = "hyperdisk-balanced"
   service_account = module.prow_build_cluster.cluster_node_sa.email
-}
-
-
-module "sig_node_node_pool_1_n4_highmem_8" {
-
-  source       = "github.com/GoogleCloudPlatform/cloud-foundation-fabric//modules/gke-nodepool?ref=v39.0.0&depth=1"
-  project_id   = module.project.project_id
-  name         = "sig-node-pool1"
-  location     = module.prow_build_cluster.cluster.location
-  cluster_name = module.prow_build_cluster.cluster.name
-
-  service_account = {
-    email        = module.prow_build_cluster.cluster_node_sa.email
-    oauth_scopes = ["https://www.googleapis.com/auth/cloud-platform"]
-  }
-
-  nodepool_config = {
-    autoscaling = {
-      max_node_count = 10
-      min_node_count = 1 # 1 per zone
-    }
-    management = {
-      auto_repair  = true
-      auto_upgrade = true
-    }
-  }
-
-  node_config = {
-    machine_type                  = "n4-highmem-8"
-    disk_type                     = "hyperdisk-balanced"
-    image_type                    = "COS_CONTAINERD"
-    gvnic                         = true
-    workload_metadata_config_mode = "GKE_METADATA"
-    shielded_instance_config = {
-      enable_secure_boot = true
-    }
-  }
-
-
-  taints = { dedicated = { value = "sig-node", effect = "NO_SCHEDULE" } }
 }
 
 module "prow_build_nodepool_c4a_highmem_8_localssd" {
@@ -169,11 +133,12 @@ module "prow_build_nodepool_c4a_highmem_8_localssd" {
     "us-central1-a",
     "us-central1-b",
     "us-central1-c",
+    "us-central1-f",
   ]
   name          = "pool7-arm64"
   initial_count = 1
-  min_count     = 1
-  max_count     = 10
+  min_count     = 3
+  max_count     = 100                  # total across all zones
   machine_type  = "c4a-highmem-8-lssd" # has 2 local ssd disks attached
   disk_size_gb  = 100
   disk_type     = "hyperdisk-balanced"
