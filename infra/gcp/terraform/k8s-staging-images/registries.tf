@@ -30,6 +30,7 @@ locals {
     ingress-nginx                   = "group:k8s-infra-staging-ingress-nginx@kubernetes.io"
     ingate                          = "group:k8s-infra-staging-ingate@kubernetes.io"
     jobset                          = "group:k8s-infra-staging-jobset@kubernetes.io"
+    karpenter-cluster-api           = "group:karpenter-cluster-api-leads@kubernetes.io"
     kind                            = "group:k8s-infra-staging-kind@kubernetes.io"
     kro                             = "group:k8s-infra-staging-kro@kubernetes.io"
     kubemark                        = "group:sig-scalability-leads@kubernetes.io"
