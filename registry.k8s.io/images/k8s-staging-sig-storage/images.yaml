@@ -161,6 +161,7 @@
 - name: csi-snapshot-metadata
   dmap:
     "sha256:d0879d5f8dc08fdf680624010ca045c955c5fa40ab6d8debf689d10e5d282ef6": [ "v0.1.0" ]
+    "sha256:70f87d0792998b2da7daf61cc29ba1bb2d9cfeab30bcf51fcaaeecb26971ae08": [ "v0.2.0" ]
 - name: csi-snapshotter
   dmap:
     "sha256:7f93019f399454598370aab2cc1a652a3b8ff722ab92ec4ca9db0eed53acc4b4": [ "v1.1.0" ]
