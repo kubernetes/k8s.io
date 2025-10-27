@@ -27,7 +27,7 @@ data:
           return 200 'ok';
         }
 
-        location ~ ^/(?<repo>[^/]*)(?<subpath>/.*)?$ {
+        location ~ ^/(?<repo>[A-Za-z0-9\-_\.]+)(?<subpath>/.*)?$ {
           # $https is set to 'on' when connecting to nginx via HTTPS directly.
           set $https_status $https;
           if ($http_x_forwarded_proto = 'https') {
@@ -106,7 +106,7 @@ data:
         listen 80;
 
         # The ?! block is negative-lookahead to prevent `/repo/` from grouping into (`repo`, `/`) while `/repo/path` will still group as (`repo`, `/path`).
-        location ~ ^/(?<sig_repo>.*?)(?!/+$)(?<repo_subpath>/.*)?$ {
+        location ~ ^/(?<sig_repo>[A-Za-z0-9\-_\.]+)(?!/+$)(?<repo_subpath>/.*)?$ {
           # $https is set to 'on' when connecting to nginx via HTTPS directly.
           set $https_status $https;
           if ($http_x_forwarded_proto = 'https') {
