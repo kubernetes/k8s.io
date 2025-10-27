@@ -347,6 +347,7 @@ infra:
       k8s-staging-ingress-nginx:
       k8s-staging-ingressconformance:
       k8s-staging-jobset:
+      k8s-staging-karpenter-provider-ibm-cloud:
       k8s-staging-kas-network-proxy:
       k8s-staging-kind:
       k8s-staging-kmm:

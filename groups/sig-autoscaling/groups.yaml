@@ -97,6 +97,15 @@ groups:
       - raywainman@gmail.com
       - ksaiyed@google.com
 
+  - email-id: k8s-infra-staging-karpenter-provider-ibm-cloud@kubernetes.io
+    name: k8s-infra-staging-karpenter-provider-ibm-cloud
+    description: |-
+      ACL for pushing Karpenter IBM Cloud Provider artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - josie@redhat.com
+      - d.ramadani@ieee.org
   #
   # k8s-infra gcs write access
   #
