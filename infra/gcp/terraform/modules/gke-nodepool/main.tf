@@ -31,11 +31,17 @@ resource "google_container_node_pool" "node_pool" {
     auto_upgrade = true
   }
 
+  upgrade_settings {
+    max_unavailable = 0
+    max_surge       = 10
+  }
+
   // Autoscale the cluster as needed. Note if using a regional cluster these values will be multiplied by 3
   initial_node_count = var.initial_count
   autoscaling {
-    min_node_count = var.min_count
-    max_node_count = var.max_count
+    total_min_node_count = var.min_count
+    total_max_node_count = var.max_count
+    location_policy      = "ANY"
   }
   node_locations = var.node_locations
 
@@ -49,12 +55,20 @@ resource "google_container_node_pool" "node_pool" {
 
     service_account = var.service_account
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
+    kubelet_config {
+      single_process_oom_kill = true # https://github.com/kubernetes-sigs/prow/issues/210
+    }
 
     dynamic "ephemeral_storage_config" {
       for_each = var.ephemeral_local_ssd_count > 0 ? [var.ephemeral_local_ssd_count] : []
       content {
         local_ssd_count = ephemeral_storage_config.value
       }
+    }
+
+    advanced_machine_features {
+      enable_nested_virtualization = var.enable_nested_virtualization
+      threads_per_core             = 0
     }
 
     // Needed for workload identity
@@ -72,6 +86,7 @@ resource "google_container_node_pool" "node_pool" {
         value  = taint.value.value
       }
     }
+
   }
 
   // If we need to destroy the node pool, create the new one before destroying
