@@ -5,6 +5,7 @@ approvers:
   - barney-s
   - bridgetkromhout
   - cheftako
+  - matthchr
 
 labels:
   - sig/cloud-provider
