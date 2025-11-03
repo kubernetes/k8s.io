@@ -146,7 +146,7 @@ variable "bastion" {
   type = object({ memory = string, processors = string })
   default = {
     memory     = "8"
-    processors = "0.5"
+    processors = "0.25"
   }
 }
 
@@ -154,7 +154,7 @@ variable "control_plane" {
   default = {
     count      = 3
     memory     = "8"
-    processors = "0.5"
+    processors = "0.25"
   }
   validation {
     condition     = var.control_plane["count"] == 3
@@ -164,9 +164,9 @@ variable "control_plane" {
 
 variable "compute" {
   default = {
-    count      = 2
-    memory     = "8"
-    processors = "0.5"
+    count      = 5
+    memory     = "42"
+    processors = "2"
   }
 }
 
