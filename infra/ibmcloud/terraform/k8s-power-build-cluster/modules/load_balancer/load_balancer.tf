@@ -28,6 +28,11 @@ data "ibm_resource_group" "group" {
 }
 
 resource "ibm_is_lb" "load_balancer_external" {
+  lifecycle {
+    ignore_changes = [
+      resource_group
+    ]
+  }
   name           = "k8s-control-plane-api-lb"
   resource_group = data.ibm_resource_group.group.id
   subnets        = data.ibm_is_vpc.vpc.subnets.*.id

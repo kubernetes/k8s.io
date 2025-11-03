@@ -53,6 +53,17 @@ module "powervs_workspace_lon06" {
   image_name        = var.image_name
 }
 
+module "powervs_workspace_lon06_1" {
+  providers = {
+    ibm = ibm.powervs_lon06
+  }
+  source            = "./modules/pvs_workspace"
+  datacenter        = "lon06"
+  pi_workspace_name = "k8s-boskos-powervs-lon06-01"
+  resource_group_id = module.resource_group.k8s_rg_id
+  image_name        = var.image_name
+}
+
 module "powervs_workspace_syd04" {
   providers = {
     ibm = ibm.powervs_syd04

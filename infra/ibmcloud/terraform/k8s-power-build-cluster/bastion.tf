@@ -27,7 +27,7 @@ data "ibm_pi_key" "key" {
 data "ibm_sm_arbitrary_secret" "secret" {
   instance_id       = var.secrets_manager_id
   region            = "us-south"
-  name              = "powervs-ssh-private-key"
+  name              = "build-cluster-ssh-private-key"
   secret_group_name = "default"
 }
 
@@ -45,6 +45,12 @@ resource "ibm_pi_network" "private_network" {
 }
 
 resource "ibm_pi_network" "public_network" {
+  lifecycle {
+    ignore_changes = [
+      pi_advertise,
+      pi_arp_broadcast,
+    ]
+  }
   pi_network_name      = "public-net"
   pi_cloud_instance_id = var.service_instance_id
   pi_network_type      = "pub-vlan"
