@@ -15,9 +15,11 @@ limitations under the License.
 */
 
 resource "google_vmwareengine_network_peering" "gvce_peering" {
-  name                  = "peer-with-gcve-project"
-  peer_network          = "projects/k8s-infra-prow-build/global/networks/default"
-  project               = module.project.project_id
-  peer_network_type     = "STANDARD"
-  vmware_engine_network = "projects/broadcom-451918/locations/global/vmwareEngineNetworks/k8s-gcp-gcve-network"
+  name                                = "peer-with-gcve-project"
+  peer_network                        = "projects/k8s-infra-prow-build/global/networks/default"
+  project                             = module.project.project_id
+  peer_network_type                   = "STANDARD"
+  vmware_engine_network               = "projects/broadcom-451918/locations/global/vmwareEngineNetworks/k8s-gcp-gcve-network"
+  export_custom_routes_with_public_ip = true
+  import_custom_routes_with_public_ip = true
 }
