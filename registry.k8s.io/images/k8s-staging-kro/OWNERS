@@ -6,5 +6,8 @@ approvers:
   - bridgetkromhout
   - cheftako
 
+reviewers:
+  - jakobmoellerdev
+
 labels:
   - sig/cloud-provider
