@@ -7,5 +7,8 @@ approvers:
   - cheftako
   - matthchr
 
+reviewers:
+  - jakobmoellerdev
+
 labels:
   - sig/cloud-provider
