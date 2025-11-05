@@ -115,11 +115,14 @@
     "sha256:79fd7e4f3e961b6ae0aa3b631eaa1cbab0b096ac666ce9af249f460df8f4655f": ["v0.18.1-full"]
     "sha256:9fb5b0764076a7e9c9a93579ef062dd7283b2db0253fa9f793a6931a2c88385e": ["v0.18.2","v0.18.2-minimal"]
     "sha256:fdd3416e0842b618cd52da7c1958c2f8ce40e978f10f0e192a951bc1dcb9435a": ["v0.18.2-full"]
+    "sha256:f9ef2ebee55141a1758d3c0a87bb701f5db2adf6856f7218b11bc2bac7b63862": ["v0.18.3","v0.18.3-minimal"]
+    "sha256:283b58bea30c58ef21f689592c1d8f0d81e69897d3ae2d597699c30c3e284e26": ["v0.18.3-full"]
 - name: charts/node-feature-discovery
   dmap:
     "sha256:cb4bfd81acce68798b65ad3d33f3efc503ad1410504b6a1a3929b514d8ba1205": ["0.18.0"]
     "sha256:9f80bc5cb0e01ba9630ac7fa2f8e603e3fe1a63485d3940d9a3c47b8060928ff": ["0.18.1"]
     "sha256:477874562824750aad0de4718a5f4b1606448b680af2beb0a5422619bc6be6c3": ["0.18.2"]
+    "sha256:c134ee667d7e4403889ff1c1cd7e1c78c0094e3b3c3b7d241e1d5d13b67efcc1": ["0.18.3"]
 - name: node-feature-discovery-operator
   dmap:
     "sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16": ["v0.2.0"]
