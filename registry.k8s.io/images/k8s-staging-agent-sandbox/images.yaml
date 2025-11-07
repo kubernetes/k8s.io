@@ -3,9 +3,11 @@
     "sha256:7e7b71832965f2a8287c0ce00b6092310ce64f35fa0a2dca9dd18e9e95457f33": ["v0.1.0-rc.0"]
     "sha256:e9c1abdb3d816a6d68961381a5a2cbf5a2420e1ea8b4f071947ebcb53b7022f9": ["v0.1.0-rc.1"]
     "sha256:7f13b799c42af53a0de97a7d407ce9086abe67d6ef3d0b33d14600940aad4b35": ["v0.1.0-rc.2"]
+    "sha256:ba71ea40ae0872791197badf2ab84f3f482df3902f1fce7ca9e076b1de9b57f6": ["v0.1.0"]
 - name: chrome-sandbox
   dmap:
     "sha256:45cd4843aade2a3dac39b5085963387bbb5b45a8ced9e23233a70cb2d7fb451b": ["v0.1.0-rc.2"]
-- name: python_runtime_sandbox
+    "sha256:d098a4d05ce33f380995e8017f4158634aa501dc71b545c82155dafd69218325": ["v0.1.0"]
+- name: python-runtime-sandbox
   dmap:
-    "sha256:7c8a124aa02534656f53f9b9f53ef8b4f1d1a1e390f27a8b7873b7e87a368f42": ["v0.1.0-rc.2"]
+    "sha256:b6f0957f46c69543d874fdb8858b53b313cfc14cc6501bb7b0c6054707d96b64": ["v0.1.0"]
