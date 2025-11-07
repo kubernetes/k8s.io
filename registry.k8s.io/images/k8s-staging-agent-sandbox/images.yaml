@@ -11,3 +11,6 @@
 - name: python-runtime-sandbox
   dmap:
     "sha256:b6f0957f46c69543d874fdb8858b53b313cfc14cc6501bb7b0c6054707d96b64": ["v0.1.0"]
+- name: python_runtime_sandbox # we don't use this anymore
+  dmap:
+    "sha256:7c8a124aa02534656f53f9b9f53ef8b4f1d1a1e390f27a8b7873b7e87a368f42": ["v0.1.0-rc.2"]
