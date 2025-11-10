@@ -24,6 +24,7 @@ locals {
     cluster-capacity                = "group:k8s-infra-staging-cluster-capacity@kubernetes.io"
     dra-driver-cpu                  = "group:k8s-infra-staging-dra-driver-cpu@kubernetes.io"
     dra-example-driver              = "group:k8s-infra-staging-dra-example-driver@kubernetes.io"
+    etcd                            = "group:k8s-infra-staging-etcd@kubernetes.io"
     etcd-manager                    = "group:k8s-infra-staging-etcd-manager@kubernetes.io"
     headlamp                        = "group:k8s-infra-staging-headlamp@kubernetes.io"
     infra-tools                     = "group:k8s-infra-staging-infra-tools@kubernetes.io"
