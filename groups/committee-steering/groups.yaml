@@ -17,6 +17,7 @@ groups:
       - decarr@redhat.com
       - joe.k8s@bedafamily.com
       - k8s@auggie.dev
+      - kat.cosgrove@gmail.com
       - killen.bob@gmail.com
       - lachlan.evenson@microsoft.com
       - liggitt@google.com
@@ -24,6 +25,7 @@ groups:
       - soltysh@gmail.com
       - michelle.noorali@gmail.com
       - nikhitaraghunath@gmail.com
+      - ritazh@microsoft.com
       - roollingstone@gmail.com
       - pal.nabarun95@gmail.com
       - paris.pittman@gmail.com
@@ -51,12 +53,11 @@ groups:
       - aojea@google.com
       - bentheelder@google.com
       - bentheelder@gmail.com
-      - k8s@auggie.dev
-      - saschagrunert@gmail.com
-      - saugustus2@bloomberg.net
-      - soltysh@gmail.com
+      - kat.cosgrove@gmail.com
+      - ritazh@microsoft.com
       - roollingstone@gmail.com
-      - patrick.ohly@intel.com
+      - saschagrunert@gmail.com
+      - soltysh@gmail.com
 
   - email-id: steering@kubernetes.io
     name: steering
@@ -77,12 +78,11 @@ groups:
       - antonio.ojea.garcia@gmail.com
       - aojea@google.com
       - bentheelder@google.com
-      - k8s@auggie.dev
-      - saschagrunert@gmail.com
-      - saugustus2@bloomberg.net
-      - soltysh@gmail.com
+      - kat.cosgrove@gmail.com
+      - ritazh@microsoft.com
       - roollingstone@gmail.com
-      - patrick.ohly@intel.com
+      - saschagrunert@gmail.com
+      - soltysh@gmail.com
     managers:
       - ihor.dvoretskyi@gmail.com
       - jdumars@gmail.com
