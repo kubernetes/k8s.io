@@ -140,6 +140,7 @@ groups:
       - jberkus@redhat.com
       - marky.r.jackson@gmail.com
       - chris@chrisshort.net
+      - chadmcrowell@gmail.com
 
   - email-id: sig-contribex@kubernetes.io
     name: sig-contribex
