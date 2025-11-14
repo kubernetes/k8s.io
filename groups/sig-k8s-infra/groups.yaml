@@ -374,6 +374,16 @@ groups:
     members:
       - sig-k8s-infra-leads@kubernetes.io
 
+  - email-id: k8s-infra-lambda-ai-admins@kubernetes.io
+    name: k8s-infra-lambda-ai-admins
+    description: |-
+      ACL for admins operating Lambda AI account
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
   - email-id: k8s-infra-okta-admins@kubernetes.io
     name: k8s-infra-okta-admins
     description: |-

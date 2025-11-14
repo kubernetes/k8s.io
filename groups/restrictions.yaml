@@ -293,6 +293,7 @@ restrictions:
       - "^k8s-infra-dns-admins@kubernetes.io$"
       - "^k8s-infra-equinix-admins@kubernetes.io$"
       - "^k8s-infra-fastly-admins@kubernetes.io$"
+      - "^k8s-infra-lambda-ai-admins@kubernetes.io$"
       - "^k8s-infra-public-pii@kubernetes.io$"
       - "^k8s-infra-gcp-accounting@kubernetes.io$"
       - "^k8s-infra-gcp-auditors@kubernetes.io$"
