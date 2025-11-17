@@ -35,3 +35,16 @@ NOTE: A replacement VM will have a new IP address; all the local machine config 
 ```sh
 terraform destroy
 ```
+
+# Debuggin network connectivity
+
+The maintenance VM runs a small timer/cronjob every two minutes which tests the network connectivity to:
+
+* vSphere 
+* NSX-T
+
+To inspect the logs, use:
+
+```sh
+sudo journalctl -u check-gcve-connectivity.service
+```

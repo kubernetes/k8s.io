@@ -10,9 +10,60 @@ write_files:
   content: |
     net.ipv4.ip_forward = 1
 
+- path: /etc/systemd/system/check-gcve-connectivity.service 
+  permissions: "0755"
+  content: |
+    [Unit]
+    Description=GCVE Connectivity Test
+    # This ensures it doesn't run until the network is ready, remove if not needed
+    Wants=network-online.target
+    After=network-online.target
+
+    [Service]
+    Type=oneshot
+    # Replace this with your actual command or script
+    ExecStart=/usr/local/bin/check-gcve-connectivity.sh
+
+- path: /etc/systemd/system/check-gcve-connectivity.timer
+  permissions: "0644"
+  content: |
+    [Unit]
+    Description=Run check-gcve-connectivity every two minutes
+
+    [Timer]
+    # Run every two minutes
+    OnCalendar=*:0/2
+    Persistent=true
+
+    [Install]
+    WantedBy=timers.target
+
+- path: /usr/local/bin/check-gcve-connectivity.sh
+  permissions: "0644"
+  content: |
+    #!/bin/bash
+
+    function log() {
+      echo "$(date '+%Y-%m-%d %H:%M:%S') ${1}"
+    }
+
+    function test_connectivity() {
+      curl -s "${2}" --connect-timeout 2 -k && RET=$? || RET=$?
+      if [[ "$RET" -eq 0 ]]; then
+        log "Successfully reached ${1} / ${2}"
+      else
+        log "Failed to reach ${1} / ${2}"
+      fi
+    }
+
+    test_connectivity VSphere "https://192.168.31.2/sdk"
+    test_connectivity NSX "https://192.168.31.18/sdk"
+
 runcmd:
 - apt-get update
 - apt install wireguard -q -y
 - sysctl -p /etc/sysctl.d/10-wireguard.conf
 - systemctl enable wg-quick@wg0
 - systemctl start wg-quick@wg0
+- systemctl enable check-gcve-connectivity.timer
+- systemctl start check-gcve-connectivity.timer
