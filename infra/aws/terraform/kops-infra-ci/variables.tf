@@ -46,3 +46,8 @@ variable "vpc_cidr" {
   description = "CIDR of the VPC"
   default     = "10.128.0.0/16"
 }
+
+variable "atlantis_role_arn" {
+  description = "The ARN of the Atlantis IAM role"
+  default     = null
+}

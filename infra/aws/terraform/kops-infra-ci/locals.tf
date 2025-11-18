@@ -16,10 +16,6 @@ limitations under the License.
 
 
 locals {
-  kops-infra-ci-name       = "kops-infra-ci"
-  kops-infra-ci-index      = index(data.aws_organizations_organization.current.accounts.*.name, local.kops-infra-ci-name)
-  kops-infra-ci-account-id = data.aws_organizations_organization.current.accounts[local.kops-infra-ci-index].id
-
   prefix                     = "k8s-infra-kops"
   cluster_name               = "${local.prefix}-prow-build"
   cluster_autoscaler_version = "v${var.eks_version}.5"

@@ -19,7 +19,7 @@ provider "aws" {
   alias  = "kops-infra-ci"
 
   assume_role {
-    role_arn = "arn:aws:iam::${local.kops-infra-ci-account-id}:role/OrganizationAccountAccessRole"
+    role_arn = var.atlantis_role_arn
   }
 }
 
