@@ -176,6 +176,11 @@ aliases:
     - intUnderflow
     - kwilczynski
     - rthallisey
+  wg-checkpoint-restore-leads:
+    - adrianreber
+    - haircommander
+    - rst0git
+    - viktoriaas
   wg-policy-leads:
     - JimBugwadia
     - poonam-lamba

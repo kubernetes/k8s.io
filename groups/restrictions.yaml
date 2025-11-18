@@ -342,6 +342,10 @@ restrictions:
     allowedGroups:
       - "^wg-node-lifecycle@kubernetes.io$"
       - "^wg-node-lifecycle-leads@kubernetes.io$"
+  - path: "wg-checkpoint-restore/groups.yaml"
+    allowedGroups:
+      - "^wg-checkpoint-restore@kubernetes.io$"
+      - "^wg-checkpoint-restore-leads@kubernetes.io$"
   - path: "wg-policy/groups.yaml"
     allowedGroups:
       - "^wg-policy@kubernetes.io$"
