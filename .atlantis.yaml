@@ -10,3 +10,7 @@ projects:
     branch: /main/
     dir: infra/aws/terraform/artifacts.k8s.io
     workflow: aws
+  - name: kops-infra-ci
+    branch: /main/
+    dir: infra/aws/terraform/kops-infra-ci
+    workflow: aws
