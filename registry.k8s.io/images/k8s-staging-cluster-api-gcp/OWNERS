@@ -5,13 +5,15 @@ approvers:
 - cpanato
 - dims
 - justinsb
-- richardcase
+- damdo
+- salasberryfin
 
 reviewers:
 - cpanato
 - dims
 - justinsb
-- richardcase
+- damdo
+- salasberryfin
 
 emeritus_approvers:
 - vincepri
