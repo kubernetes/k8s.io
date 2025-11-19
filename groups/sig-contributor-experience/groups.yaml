@@ -230,6 +230,16 @@ groups:
       - nikitaraghunath@gmail.com
       - rajula96reddy@gmail.com
 
+  - email-id: k8s-infra-staging-contributor-site@kubernetes.io
+    name: k8s-infra-staging-contributor-site
+    description: |-
+      ACL for contributor site artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - prajyotparab19@gmail.com
+      - sig-contribex-leads@kubernetes.io
+
   #
   # k8s-infra owners for sig-owned subprojects
   #
