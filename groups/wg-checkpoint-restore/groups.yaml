@@ -1,0 +1,46 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: wg-checkpoint-restore-leads@kubernetes.io
+    name: wg-checkpoint-restore-leads
+    description: |-
+      WG Checkpoint Restore Organizers
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+    owners:
+      - areber@redhat.com
+      - pehunt@redhat.com
+      - radostin@stoyanov.io
+      - viktoria.spisakovaa@gmail.com
+
+  - email-id: wg-checkpoint-restore@kubernetes.io
+    name: wg-checkpoint-restore
+    description: |-
+      Public mailing list for WG Checkpoint Restore
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+    owners:
+      - areber@redhat.com
+      - pehunt@redhat.com
+      - radostin@stoyanov.io
+      - viktoria.spisakovaa@gmail.com
+    members:
+      - wg-checkpoint-restore-leads@kubernetes.io

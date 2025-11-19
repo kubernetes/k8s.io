@@ -62,6 +62,7 @@ groups:
       - wg-lts-leads@kubernetes.io
       - wg-node-lifecycle-leads@kubernetes.io
       - wg-serving-leads@kubernetes.io
+      - wg-checkpoint-restore-leads@kubernetes.io
       - caniszczyk@linuxfoundation.org
       - cncf-speakers@linuxfoundation.org
       - community@kubernetes.io
