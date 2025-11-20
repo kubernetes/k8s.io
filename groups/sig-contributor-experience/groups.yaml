@@ -291,7 +291,8 @@ groups:
       ReconcileMembers: "true"
     owners:
       - contributors@kubernetes.io
+    managers:
+      - sig-contribex-leads@kubernetes.io
     members:
       - chadmcrowell@gmail.com
       - chris@chrisshort.net
-      - sig-contribex-leads@kubernetes.io
