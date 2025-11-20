@@ -7,6 +7,28 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
+  - email-id: sig-cloud-provider-ibm-ppc64le-alerts@kubernetes.io
+    name: sig-cloud-provider-ibm-ppc64le-alerts
+    description: |-
+      alerts for sig-cloud-provider-ibm (ppc64le)
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - mkumatag@in.ibm.com
+      - prajyot.parab2@ibm.com
+    members:
+      # This is just the initial list of group members.
+      - rajalakshmi.girish1@ibm.com
+      - karthik.k.n@ibm.com
+      - amulmek1@in.ibm.com
+      - kishen.viswanathan@ibm.com
+      - varsharani.Deshmane1@ibm.com
+
   #
   # k8s-staging write access for SIG-owned subprojects
   #
@@ -120,7 +142,7 @@ groups:
   - email-id: k8s-infra-staging-cloud-provider-ibm@kubernetes.io
     name: k8s-infra-staging-cloud-provider-ibm
     description: |-
-      ACL for pushing IBM artefacts
+      ACL for pushing IBM artifacts
     settings:
       ReconcileMembers: "true"
     members:
