@@ -29,6 +29,17 @@ groups:
     members:
       - k8s-infra-sig-scalability-oncall@kubernetes.io
 
+  - email-id: k8s-infra-staging-inference-perf@kubernetes.io
+    name: k8s-infra-staging-inference-perf
+    description: |-
+      ACL for inference-perf artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - achandrasekar@google.com
+      - jkramberger@google.com
+      - sachin.mathew31@gmail.com
+
   #
   # k8s-infra gcs write access
   #
