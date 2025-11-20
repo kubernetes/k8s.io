@@ -15,3 +15,4 @@ limitations under the License.
 */
 
 variable "resource_group_id" {}
+variable "project_resource_group_id" {}

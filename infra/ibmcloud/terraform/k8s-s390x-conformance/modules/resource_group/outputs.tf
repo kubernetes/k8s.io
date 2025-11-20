@@ -16,3 +16,6 @@ limitations under the License.
 output "conformance_resource_group_id" {
   value = ibm_resource_group.conformance_resource_group.id
 }
+output "build_resource_group_id" {
+  value = data.ibm_resource_group.build_resource_group.id
+}

@@ -55,6 +55,6 @@ resource "ibm_iam_access_group_policy" "secret_rotator" {
 
   resources {
     service           = "secrets-manager"
-    resource_group_id = var.resource_group_id
+    resource_group_id = var.project_resource_group_id
   }
 }

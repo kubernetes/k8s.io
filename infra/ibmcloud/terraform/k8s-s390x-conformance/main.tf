@@ -24,13 +24,14 @@ module "iam_custom_role" {
 module "service_ids" {
   depends_on        = [module.iam_custom_role]
   source            = "./modules/iam/service_ids"
-  resource_group_id = module.resource_group.conformance_resource_group_id
+  resource_group_id = module.resource_group.build_resource_group_id
 }
 
 module "iam_access_groups" {
-  depends_on        = [module.iam_custom_role]
-  source            = "./modules/iam/access_groups"
-  resource_group_id = module.resource_group.conformance_resource_group_id
+  depends_on                = [module.iam_custom_role]
+  source                    = "./modules/iam/access_groups"
+  resource_group_id         = module.resource_group.conformance_resource_group_id
+  project_resource_group_id = module.resource_group.build_resource_group_id
 }
 
 module "secrets_manager" {
