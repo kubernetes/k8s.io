@@ -16,3 +16,6 @@ limitations under the License.
 resource "ibm_resource_group" "conformance_resource_group" {
   name = "rg-conformance-test"
 }
+data "ibm_resource_group" "build_resource_group" {
+  name = "rg-build-cluster"
+}
