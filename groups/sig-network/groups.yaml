@@ -25,6 +25,7 @@ groups:
       sig-network leads
     owners:
       - antonio.ojea.garcia@gmail.com
+      - bowei@google.com
       - danwinship@redhat.com
       - michael.zappa@gmail.com
       - sutt@redhat.com
@@ -43,6 +44,7 @@ groups:
       SIG network general discussion group
     owners:
       - antonio.ojea.garcia@gmail.com
+      - bowei@google.com
       - danwinship@redhat.com
       - michael.zappa@gmail.com
       - sutt@redhat.com
