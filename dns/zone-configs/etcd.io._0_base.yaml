@@ -26,7 +26,7 @@ _gh-kubernetes-e:
 
 www:
   - type: CNAME
-    value: etcd.netlify.com.
+    value: etcd.netlify.app.
 
 mail:
   - type: CNAME
