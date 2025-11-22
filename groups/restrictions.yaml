@@ -224,6 +224,7 @@ restrictions:
       - "^k8s-infra-staging-perf-tests@kubernetes.io$"
       - "^sig-scalability@kubernetes.io$"
       - "^sig-scalability-leads@kubernetes.io$"
+      - "^k8s-infra-staging-inference-perf@kubernetes.io$"
   - path: "sig-scheduling/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-descheduler@kubernetes.io$"
