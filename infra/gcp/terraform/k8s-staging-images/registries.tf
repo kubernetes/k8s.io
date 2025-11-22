@@ -28,6 +28,7 @@ locals {
     etcd                            = "group:k8s-infra-staging-etcd@kubernetes.io"
     etcd-manager                    = "group:k8s-infra-staging-etcd-manager@kubernetes.io"
     headlamp                        = "group:k8s-infra-staging-headlamp@kubernetes.io"
+    inference-perf                  = "group:k8s-infra-staging-inference-perf@kubernetes.io"
     infra-tools                     = "group:k8s-infra-staging-infra-tools@kubernetes.io"
     ingress-nginx                   = "group:k8s-infra-staging-ingress-nginx@kubernetes.io"
     ingate                          = "group:k8s-infra-staging-ingate@kubernetes.io"
