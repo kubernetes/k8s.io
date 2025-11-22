@@ -22,3 +22,11 @@ resource "aws_ecr_repository" "repo" {
 
   tags = var.tags
 }
+
+resource "aws_ecr_repository" "dummy" {
+  provider             = aws.kops-local-ci
+  name                 = "dummy"
+  image_tag_mutability = "IMMUTABLE"
+
+  tags = var.tags
+}
