@@ -2,8 +2,9 @@
 /bin
 /tmp
 
-# Ignore vscode config files
+# Ignore IDE config files
 .vscode
+.idea
 
 # kustomize charts
 kubernetes/*/*/charts/
