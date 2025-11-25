@@ -330,6 +330,7 @@
     "sha256:9faf90cc26917b49e799bc0ba684ba2a7c5304590a7e00408d10cb191ed03bde": ["v2.2.2"]
     "sha256:9ad27b8776211405aa49ceec58272e8a676ffbc31c118464c0352376e9c5a91f": ["v2.2.3"]
     "sha256:9d332a514963da87b89ddfea6c1d8cae4c17469dc16e5febac8efa1395b4ea57": ["v2.2.4"]
+    "sha256:267a9064ad836d0f16354270abf48928f64d1c303cf4d3577e941be4f88d0a96": ["v2.2.5"]
 
 # Ingress NGINX: Test Runner
 - name: e2e-test-runner
