@@ -242,3 +242,14 @@ groups:
     members:
     - eddiezane@gmail.com
     - k8s-infra-prow-oncall@kubernetes.io
+
+  - email-id: k8s-infra-testgrid@kubernetes.io
+    name: k8s-infra-testgrid
+    description:
+      Grants access to the new testgrid UI
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+    - dec.soham@gmail.com
+    - sig-testing-leads@kubernetes.io
