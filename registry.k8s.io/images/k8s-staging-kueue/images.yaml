@@ -44,6 +44,9 @@
     "sha256:27db3c85c0909d723ad1257b4bdc70657f0f801c3a1a5a16451fd9f9a178a3ff": ["0.10.4"]
     "sha256:c48a503b7411fb5f0dacc16938d34d442d2cf8299a81dbb6b7a205d53fdfb259": ["0.10.3"]
     "sha256:80591f127d58324a4a82967d3657237f1496f586d48580b74282bd83fa4747d3": ["0.9.5"]
+- name: charts/kueue-populator
+  dmap:
+    "sha256:6534f3bc139fb0015a66aa8ec6575a971bb5082e671fd9ec2afa9258bf0bffe2": ["0.15.0"]
 - name: kueue
   dmap:
     "sha256:15bf4478557991888ac31ce5f6207f236c2125e248ab207d237af3c70996353e": ["v0.15.0"]
@@ -123,6 +126,9 @@
     "sha256:1500f726150139198920def85736d1293904fa725969bb405e0b19dc43ad39b2": ["v0.2.0"]
     "sha256:fde718661874ad8b0b82a97af3afc481bf0dfc4bcb362490ddf7dadcded9a47d": ["v0.1.1"]
     "sha256:430bb4d26a05e4de56e3e10d8bc5ebb8de28f77d575d99a4cacc8edadcf7567b": ["v0.1.0", "v0.1"]
+- name: kueue-populator
+  dmap:
+    "sha256:d97e609a66a11e06fd17012efe18d6121ffde36e49d51f0679d6d95737d8f0d6": ["v0.15.0"]
 - name: kueueviz-backend
   dmap:
     "sha256:0aa8e3e65acfd89158e915d58aef86c47e9e6e238b00f4af4c5300faa3df292a": ["v0.15.0"]
