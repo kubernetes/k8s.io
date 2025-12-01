@@ -83,3 +83,22 @@ module "capa-ami" {
     "eu-south-2",
   ]
 }
+
+// This AWS accounts holds macOS Instances for kubernetes CI/CD
+module "macos" {
+  source = "../modules/org-account"
+
+  account_name = "k8s-infra-macos"
+  email        = "k8s-infra-aws-admins+macos@kubernetes.io"
+  parent_id    = aws_organizations_organizational_unit.production.id
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+  }
+  permissions_map = {
+    "aws-macos-maintainers" = [
+      "AdministratorAccess",
+    ]
+  }
+}

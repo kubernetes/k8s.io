@@ -14,18 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-This file defines:
-- Required provider versions
-- Storage backend details
-*/
-
 terraform {
-  backend "s3" {
-    bucket = "k8s-aws-root-account-terraform-state"
-    region = "us-east-2"
-    key    = "management-account/terraform.state"
-  }
+  required_version = "~> 1.1"
 
   required_providers {
     aws = {
@@ -33,8 +23,23 @@ terraform {
       version = "~> 6.22.1"
     }
   }
+
+  backend "s3" {
+    bucket = "k8-infra-macos-tfstate"
+    key    = "terraform.state"
+    region = "us-east-2"
+  }
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
+  assume_role {
+    role_arn = var.atlantis_role_arn
+  }
+  default_tags {
+    tags = {
+      Environment = "prod"
+      group       = "sig-k8s-infra"
+    }
+  }
 }

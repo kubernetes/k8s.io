@@ -14,3 +14,7 @@ projects:
     branch: /main/
     dir: infra/aws/terraform/kops-infra-ci
     workflow: aws
+  - name: k8s-infra-macos
+    branch: /main/
+    dir: infra/aws/terraform/macos
+    workflow: aws

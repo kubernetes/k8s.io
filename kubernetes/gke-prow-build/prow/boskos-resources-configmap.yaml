@@ -260,6 +260,10 @@ data:
       - k8s-infra-e2e-gcp-gcve-project-040
       state: dirty
       type: gcve-vsphere-project
+    - names:
+      - 28zmx-sibu3-yy3oc-zmvxf-smpwu-058cv95.us-east-2.ip.aws
+      state: free
+      type: mac-instances
 kind: ConfigMap
 metadata:
   name: resources
