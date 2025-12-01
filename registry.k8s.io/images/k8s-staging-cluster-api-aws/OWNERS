@@ -2,12 +2,13 @@
 
 approvers:
 - richardcase
-- Ankitasw
 - dlipovetsky
 - nrb
 - AndiDog
+- damdo
 
 emeritus_approvers:
+- Ankitasw
 - chuckha
 - detiber
 - ncdc
