@@ -17,7 +17,8 @@ limitations under the License.
 # Cost and Usage
 
 module "cur_reports_s3_bucket" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 5.8"
 
   bucket = "k8s-infra-cur-reports-bucket"
 
@@ -42,7 +43,8 @@ module "cur_reports_s3_bucket" {
 }
 
 module "cur_reports_integration_athena_s3_bucket" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 5.8"
 
   bucket = "k8s-infra-cur-reports-athena-bucket"
 
