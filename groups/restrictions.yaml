@@ -269,6 +269,7 @@ restrictions:
       - "^k8s-infra-rbac-gcsweb@kubernetes.io$"
       - "^k8s-infra-rbac-kettle@kubernetes.io$"
       - "^k8s-infra-rbac-prow@kubernetes.io$"
+      - "^k8s-infra-testgrid@kubernetes.io$"
   - path: "sig-ui/groups.yaml"
     allowedGroups:
       - "^sig-ui@kubernetes.io$"
