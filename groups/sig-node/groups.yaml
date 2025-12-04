@@ -157,6 +157,17 @@ groups:
       - patrick.ohly@intel.com
       - pkrishn@google.com
 
+  - email-id: k8s-infra-staging-nrc@kubernetes.io
+    name: k8s-infra-staging-nrc
+    description: |-
+      ACL for pushing node-readiness-controller (nrc) artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ajaysundar.k@gmail.com
+      - sig-node-leads@kubernetes.io
+      - timallclair@gmail.com
+
   #
   # k8s-infra gcs write access
   #
