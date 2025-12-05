@@ -57,3 +57,32 @@ groups:
     members:
       - security-release-team@kubernetes.io
       - eric.smalling@gmail.com
+
+  - email-id: cve-feed-maintainers@kubernetes.io
+    name: cve-feed-maintainers
+    description: |-
+      Private list for operational notifications about the CVE feed automation.
+
+      Membership is restricted to the SIG Security Leads,
+      SIG Security Tooling Lead, and others who maintain the CVE feed.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+      - cailyn.codes@gmail.com
+    members:
+      - mahe.tardy@gmail.com
+
+  - email-id: k8s-infra-staging-sig-security@kubernetes.io
+    name: k8s-infra-staging-sig-security
+    description: |-
+      Private list for GCP project access.
+
+      Aliased to cve-feed-maintainers@kubernetes.io for ease of maintainence.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - cve-feed-maintainers@kubernetes.io
