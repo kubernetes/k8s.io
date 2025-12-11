@@ -563,3 +563,7 @@ container-object-storage-interface.sigs:
 agent-sandbox.sigs:
   type: CNAME
   value: agent-sandbox.netlify.app.
+# https://github.com/kubernetes-sigs/node-readiness-controller docs (@ajaysundark, @dchen1107, @haircommander, @mrunalp, @SergeyKanzhelev, @tallclair)
+node-readiness-controller.sigs:
+  type: CNAME
+  value: node-readiness-controller.netlify.app.
