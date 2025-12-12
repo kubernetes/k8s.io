@@ -12,3 +12,9 @@
     "sha256:09be1fa589d12523b313bf0e9619bea8b9224d636ba0d26d8fb70b31cd23e63b": ["v1.0.0-rc1"]
     "sha256:240cdf8e7e12c1e17762360cb85a2ac53ae71b4699cf7b95dece4c08dfd86b8a": ["v1.0.0-rc2"]
     "sha256:7c295d3e482faad95aedf9733f4465997a89b12f4a7e71b79d02a76f0469272b": ["v1.0.0"]
+
+# Gateway API echo-basic test image - This image is used on conformance tests and documentation
+# and should not be considered for production!
+- name: echo-basic
+  dmap:
+    "sha256:79fa51c368ac16ef6bad70bd2e0176c306a4f6e5f6f5ffe54a869ba5590ee642": ["v20251204-v1.4.1"]
