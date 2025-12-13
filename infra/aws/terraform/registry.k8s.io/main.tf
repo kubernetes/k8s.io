@@ -18,35 +18,35 @@ locals {
   // aws ec2 describe-regions --all-regions --query "Regions[].RegionName" --output json | jq .[] | awk '{print $0","}' | sort --version-sort
   regions = [
     "af-south-1",
-    # "ap-east-1",
-    # "ap-east-2",
+    "ap-east-1",
+    "ap-east-2",
     "ap-northeast-1",
-    # "ap-northeast-2",
-    # "ap-northeast-3",
+    "ap-northeast-2",
+    "ap-northeast-3",
     "ap-southeast-1",
     "ap-southeast-2",
-    # "ap-southeast-3",
-    # "ap-southeast-4",
-    # "ap-southeast-5",
-    # "ap-southeast-6",
-    # "ap-southeast-7",
+    "ap-southeast-3",
+    "ap-southeast-4",
+    "ap-southeast-5",
+    "ap-southeast-6",
+    "ap-southeast-7",
     "ap-south-1",
-    # "ap-south-2",
-    # "ca-central-1",
-    # "ca-west-1",
+    "ap-south-2",
+    "ca-central-1",
+    "ca-west-1",
     "eu-central-1",
-    # "eu-central-2",
-    # "eu-north-1",
+    "eu-central-2",
+    "eu-north-1",
     "eu-south-1",
-    # "eu-south-2",
+    "eu-south-2",
     "eu-west-1",
-    # "eu-west-2",
+    "eu-west-2",
     "eu-west-3",
-    # "il-central-1",
-    # "me-central-1",
-    # "me-south-1",
-    # "mx-central-1",
-    # "sa-east-1",
+    "il-central-1",
+    "me-central-1",
+    "me-south-1",
+    "mx-central-1",
+    "sa-east-1",
     "us-east-1",
     "us-east-2",
     "us-west-1",
@@ -78,6 +78,9 @@ module "s3_buckets" {
   for_each = setsubtract(toset(local.regions), ["us-east-2"])
   source   = "./s3"
   region   = each.key
+  alternative_bucket_names = {
+    eu-west-2 = "767373bbdcb8270361b96548387bf2a9ad0d48758c35-eu-west-2"
+  }
 
   prefix = var.prefix
 }

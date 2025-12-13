@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 resource "aws_s3_bucket" "registry-k8s-io" {
-  bucket = "${var.prefix}registry-k8s-io-${var.region}"
+  bucket = lookup(var.alternative_bucket_names, var.region, "${var.prefix}registry-k8s-io-${var.region}")
   region = var.region
 }
 
