@@ -27,7 +27,8 @@ data:
           return 200 'ok';
         }
 
-        location ~ ^/(?<repo>[A-Za-z0-9\-_\.]+)(?<subpath>/.*)?$ {
+        # NOTE: subpath is not currently used.
+        location ~ ^/(?<repo>[A-Za-z0-9\-_\.]*)(?<subpath>/.*)?$ {
           # $https is set to 'on' when connecting to nginx via HTTPS directly.
           set $https_status $https;
           if ($http_x_forwarded_proto = 'https') {
@@ -105,8 +106,7 @@ data:
         server_name sigs.k8s.io sigs.kubernetes.io;
         listen 80;
 
-        # The ?! block is negative-lookahead to prevent `/repo/` from grouping into (`repo`, `/`) while `/repo/path` will still group as (`repo`, `/path`).
-        location ~ ^/(?<sig_repo>[A-Za-z0-9\-_\.]+)(?!/+$)(?<repo_subpath>/.*)?$ {
+        location ~ ^/(?<sig_repo>[A-Za-z0-9\-_\.]*)(?<repo_subpath>/.*)?$ {
           # $https is set to 'on' when connecting to nginx via HTTPS directly.
           set $https_status $https;
           if ($http_x_forwarded_proto = 'https') {
@@ -133,10 +133,19 @@ data:
             ';
           }
 
+          # nginx config syntax doesn't have an OR operator.
+          set $repo_root 0;
+          if ($repo_subpath = "/") {
+            set $repo_root 1;
+          }
           if ($repo_subpath = "") {
+            set $repo_root 1;
+          }
+          if ($repo_root) {
             # This is a regular request for https://sigs.k8s.io/<repo>
-            # Redirect to repo landing page.
-            return 301 https://github.com/kubernetes-sigs/$sig_repo;
+            # Redirect to repo landing page, retain the trailing slash if
+            # present.
+            return 301 https://github.com/kubernetes-sigs/$sig_repo$repo_subpath;
           }
 
           # Default to redirecting to files in the tree.
