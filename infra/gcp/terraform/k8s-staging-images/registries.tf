@@ -42,6 +42,7 @@ locals {
     lws                             = "group:k8s-infra-staging-lws@kubernetes.io"
     maintainer-tools                = "group:k8s-infra-staging-maintainer-tools@kubernetes.io"
     minikube                        = "group:k8s-infra-staging-minikube@kubernetes.io"
+    node-readiness-controller       = "group:k8s-infra-staging-nrc@kubernetes.io"
     gateway-api-inference-extension = "group:sig-apps-leads@kubernetes.io"
     secrets-store-sync              = "group:k8s-infra-staging-secrets-store-sync@kubernetes.io"
     test-infra                      = "group:k8s-infra-staging-test-infra@kubernetes.io"
