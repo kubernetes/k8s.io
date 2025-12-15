@@ -1,3 +1,6 @@
+- name: dranet
+  dmap:
+    "sha256:3248d8a520584100a5e87a2b92039591ea3b83a5492cc3e2d881b20d3b18ada6": ["stable", "v1.0.1"]
 - name: ip-masq-agent
   dmap:
     "sha256:ea696f45c75fde5d2239b457520bbf2f71465467136d4238e4549d8464b61848": ["v2.12.0"]
