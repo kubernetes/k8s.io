@@ -1,6 +1,6 @@
 # google group for gcr.io/k8s-staging-coredns is k8s-infra-staging-coredns@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-coredns
+- name: coredns/coredns
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/coredns
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
