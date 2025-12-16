@@ -18,6 +18,9 @@ restrictions:
   - path: "groups.yaml"
     allowedGroups:
       - "^leads@kubernetes.io$"
+  - path: "sig-agentic-net/groups.yaml"
+    allowedGroups:
+      - "^k8s-infra-staging-agentic-net@kubernetes.io$"
   - path: "sig-api-machinery/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-storage-migrator@kubernetes.io$"

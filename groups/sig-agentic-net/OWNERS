@@ -1,0 +1,10 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - david-martin
+  - liorlieberman
+reviewers:
+  - david-martin
+  - liorlieberman
+labels:
+  - sig/agentic-net
