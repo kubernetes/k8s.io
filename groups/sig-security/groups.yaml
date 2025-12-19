@@ -80,9 +80,13 @@ groups:
     description: |-
       Private list for GCP project access.
 
-      Aliased to cve-feed-maintainers@kubernetes.io for ease of maintainence.
+      Needs to be manually synchronized with cve-feed-maintainers@kubernetes.io
+      due to lack of support for nested groups.
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     members:
-      - cve-feed-maintainers@kubernetes.io
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+      - cailyn.codes@gmail.com
+      - mahe.tardy@gmail.com
