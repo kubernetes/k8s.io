@@ -17,7 +17,6 @@ metadata:
   name: boskos-reaper
   labels:
     app: boskos-reaper
-  namespace: test-pods
 spec:
   selector:
     matchLabels:

@@ -14,34 +14,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: boskos
-  namespace: test-pods
+  name: aws-boskos-janitor
+  labels:
+    app: aws-boskos-janitor
 spec:
-  replicas: 1 # one canonical source of resources
+  replicas: 2 # 2 distributed janitor instances
   selector:
     matchLabels:
-      app: boskos
+      app: aws-boskos-janitor
   template:
     metadata:
       labels:
-        app: boskos
-      namespace: test-pods
+        app: aws-boskos-janitor
     spec:
-      serviceAccountName: boskos
-      terminationGracePeriodSeconds: 30
+      terminationGracePeriodSeconds: 300
+      serviceAccountName: aws-boskos-janitor
       containers:
-        - name: boskos
-          image: gcr.io/k8s-staging-boskos/boskos:v20230419-5a11e92
+        - name: aws-boskos-janitor
+          image: gcr.io/k8s-staging-boskos/aws-janitor-boskos:v20230419-5a11e92
           args:
-            - --config=/etc/config/config
-            - --namespace=test-pods
-          ports:
-            - containerPort: 8080
-              protocol: TCP
-          volumeMounts:
-            - name: boskos-config
-              mountPath: /etc/config
-              readOnly: true
+            - --boskos-url=http://boskos.test-pods.svc.cluster.local.
+            - --resource-type=aws-account
+            - --exclude-tags=Boskos=Ignore
           resources:
             requests:
               cpu: 500m
@@ -56,7 +50,9 @@ spec:
           effect: NoSchedule
       nodeSelector:
         node-group: stable
-      volumes:
-        - name: boskos-config
-          configMap:
-            name: resources
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: aws-boskos-janitor
+  namespace: test-pods
