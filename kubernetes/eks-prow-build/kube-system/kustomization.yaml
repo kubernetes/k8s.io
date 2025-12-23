@@ -15,7 +15,7 @@ helmCharts:
     namespace: kube-system
   - name: karpenter
     repo: oci://public.ecr.aws/karpenter
-    releaseName: kgateway
+    releaseName: karpenter
     valuesFile: karpenter.yaml
     version: 1.0.2
     namespace: kube-system

@@ -16,7 +16,7 @@ spec:
                 - gke-prow
   template:
     metadata:
-      name: '{{ .name }}'
+      name: 'kube-system-{{ .name }}'
     spec:
       destination:
         namespace: kube-system
