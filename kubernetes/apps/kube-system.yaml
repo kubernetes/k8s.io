@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: kube-system
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            clusterType: prow
+          matchExpressions:
+            - key: name
+              operator: NotIn
+              values:
+                - gke-prow
+  template:
+    metadata:
+      name: '{{ .name }}'
+    spec:
+      destination:
+        namespace: kube-system
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - path: kubernetes/{{ .name }}/kube-system
+          repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

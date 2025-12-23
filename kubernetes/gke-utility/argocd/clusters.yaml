@@ -92,7 +92,7 @@ stringData:
       }
     }
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: ibm-ppc64le
@@ -119,7 +119,7 @@ spec:
     kind: ClusterSecretStore
     name: k8s-infra-prow
 ---
-apiVersion: external-secrets.io/v1beta1
+apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: ibm-s390x

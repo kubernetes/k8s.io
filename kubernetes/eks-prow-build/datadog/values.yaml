@@ -1,0 +1,34 @@
+registry: public.ecr.aws/datadog
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+  site: us5.datadoghq.com
+  clusterName: eks-prow-build-cluster
+  logs:
+    enabled: true
+    containerCollectAll: true
+  prometheusScrape:
+    enabled: true
+    serviceEndpoints: true
+  kubeStateMetricsCore:
+    enabled: true
+  networkMonitoring:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+  sbom:
+    enabled: true
+    containerImage:
+      enabled: true
+      uncompressedLayersSupport: true
+    host:
+      enabled: true
+clusterAgent:
+  tokenExistingSecret: datadog-secret
+agents:
+  tolerations: # datadog supports arm64
+    - key: kubernetes.io/arch
+      operator: Equal
+      value: arm64
+      effect: NoSchedule

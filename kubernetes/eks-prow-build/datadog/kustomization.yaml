@@ -6,8 +6,8 @@ helmCharts:
   - name: datadog
     repo: https://helm.datadoghq.com
     releaseName: datadog
-    version: 3.157.0
-    kubeVersion: "1.30"
+    version: 3.118.0
+    kubeVersion: "1.32"
     valuesFile: values.yaml
 
 resources:
