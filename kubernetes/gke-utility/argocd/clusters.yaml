@@ -182,12 +182,12 @@ metadata:
     cloud: eks
 type: Opaque
 stringData:
-  name: eks-prow-kops
+  name: eks-prow-build
   server: https://F8B73554FE6FBAF9B19569183FB39762.gr7.us-east-2.eks.amazonaws.com
   config: |
     {
       "awsAuthConfig": {
-        "clusterName": "prow-build-cluster
+        "clusterName": "prow-build-cluster"
       },
       "tlsClientConfig": {
         "insecure": true
