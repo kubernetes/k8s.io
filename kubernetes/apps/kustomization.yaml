@@ -6,6 +6,7 @@ resources:
   - datadog.yaml
   - external-secrets.yaml
   - cert-manager.yaml
+  - kube-system.yaml
   - kyverno.yaml
   - prow.yaml
   - istio.yaml
