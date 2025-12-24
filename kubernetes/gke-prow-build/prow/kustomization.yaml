@@ -8,7 +8,7 @@ resources:
   - boskos-resources-configmap.yaml
   - boskos.yaml
   - build-serviceaccounts.yaml
-  - externalsecrets.yaml
+  - secrets.yaml
   - limit-range.yaml
   - monitoring.yaml
   - test-pods-poddisruptionbudget.yaml
