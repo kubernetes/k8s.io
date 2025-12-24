@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
@@ -37,8 +36,8 @@ jobs:
             dagandersen/argocd-diff-preview:v0.1.19
 
       - name: Post diff as comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.K8S_INFRA_CI_BOT_PR_TOKEN }}
         run: |
           gh pr comment ${{ github.event.number }} --repo ${{ github.repository }} --body-file output/diff.md --edit-last || \
           gh pr comment ${{ github.event.number }} --repo ${{ github.repository }} --body-file output/diff.md
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
