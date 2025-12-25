@@ -1,0 +1,5 @@
+# google group for gcr.io/k8s-staging-provider-aws is k8s-infra-staging-provider-aws@kubernetes.io
+filestores:
+- base: gs://k8s-staging-cloud-provider-gcp
+  src: true
+- base: gs://k8s-artifacts-prod/binaries/cloud-provider-gcp/
