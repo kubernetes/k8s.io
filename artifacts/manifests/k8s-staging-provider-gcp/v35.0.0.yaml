@@ -14,4 +14,4 @@ files:
 - name: v35.0.0/gke-gcloud-auth-plugin/windows/amd64/gke-gcloud-auth-plugin.exe
   sha256: 89fda0fa045cf03a7b702dbbc67c20b789bb4e5bc61525f7a2696e408f0b84b9
 - name: v35.0.0/gke-gcloud-auth-plugin/windows/arm64/gke-gcloud-auth-plugin.exe
-  sha256: 89fda0fa045cf03a7b702dbbc67c20b789bb4e5bc61525f7a2696e408f0b84b9
+  sha256: 312bc8bc575629327296c987e2880b0a96800cac961022fe52ed1a93e2215340
