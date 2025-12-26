@@ -3,3 +3,4 @@ filestores:
 - base: gs://k8s-staging-cloud-provider-gcp
   src: true
 - base: gs://k8s-artifacts-prod/binaries/cloud-provider-gcp/
+  service-account: k8s-infra-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
