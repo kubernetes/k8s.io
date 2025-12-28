@@ -15,16 +15,16 @@ limitations under the License.
 */
 
 module "prow_network" {
-  source              = "Azure/avm-res-network-virtualnetwork/azurerm"
-  version             = "0.6.0"
-  name                = "vnet-${azurerm_resource_group.rg.name}"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  address_space       = ["10.52.0.0/16"]
+  source        = "Azure/avm-res-network-virtualnetwork/azurerm"
+  version       = "0.16.0"
+  name          = "vnet-${azurerm_resource_group.rg.name}"
+  parent_id     = azurerm_resource_group.rg.id
+  location      = azurerm_resource_group.rg.location
+  address_space = ["10.52.0.0/16", "fd00:d2cc:d945::/48"]
   subnets = {
     "prow_build_aks" = {
       name                                      = "snet-${azurerm_resource_group.rg.name}"
-      address_prefixes                          = ["10.52.1.0/24"]
+      address_prefixes                          = ["10.52.0.0/22", "fd00:d2cc:d945:1::/64"]
       service_endpoints                         = ["Microsoft.Storage", "Microsoft.ContainerRegistry"]
       private_endpoint_network_policies_enabled = false
     }
@@ -35,13 +35,12 @@ module "prow_network" {
 }
 
 module "private_dns_zones" {
-  source                          = "Azure/avm-ptn-network-private-link-private-dns-zones/azurerm"
-  version                         = "0.4.0"
-  location                        = azurerm_resource_group.rg.location
-  resource_group_name             = azurerm_resource_group.rg.name
-  resource_group_creation_enabled = false
-  tags                            = var.common_tags
-  enable_telemetry                = false
+  source           = "Azure/avm-ptn-network-private-link-private-dns-zones/azurerm"
+  version          = "0.23.0"
+  parent_id        = azurerm_resource_group.rg.id
+  location         = azurerm_resource_group.rg.location
+  tags             = var.common_tags
+  enable_telemetry = false
   private_link_private_dns_zones = {
     azure_aks_mgmt = {
       zone_name = "privatelink.{regionName}.azmk8s.io"
@@ -66,9 +65,9 @@ module "private_dns_zones" {
     }
   }
 
-  virtual_network_resource_ids_to_link_to = {
+  virtual_network_link_additional_virtual_networks = {
     "vnet_prow_build_aks" = {
-      vnet_resource_id = module.prow_network.resource_id
+      virtual_network_resource_id = module.prow_network.resource_id
     }
   }
 }

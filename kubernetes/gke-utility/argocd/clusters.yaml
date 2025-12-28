@@ -193,3 +193,37 @@ stringData:
         "insecure": true
       }
     }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aks-prow-build
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: aks
+type: Opaque
+stringData:
+  name: aks-prow-build
+  server: https://k8s-infra-k1lh96c4.hcp.eastus2.azmk8s.io
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "env": {
+          "AAD_ENVIRONMENT_NAME": "AzurePublicCloud",
+          "AZURE_CLIENT_ID": "92ce800b-0477-44c1-ac44-aa53fb973993",
+          "AZURE_TENANT_ID": "d1aa7522-0959-442e-80ee-8c4f7fb4c184"
+          "AZURE_FEDERATED_TOKEN_FILE": "/var/run/secrets/azure-token/serviceaccount/token",
+          "AZURE_AUTHORITY_HOST": "https://login.microsoftonline.com/",
+          "AAD_LOGIN_METHOD": "workloadidentity"
+        },
+        "args": ["azure"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
+      },
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
