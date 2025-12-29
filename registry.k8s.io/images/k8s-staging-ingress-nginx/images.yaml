@@ -439,7 +439,9 @@
     "sha256:1f5d40f230e5ef7091521b2113c122a6831268b122249b781ea54f72c8bff2a1": ["v4.13.2"]
     "sha256:aa961457152a0f94757fa774f2ba4a75d557e09faa6a244009b8a753c4e2010e": ["v4.13.3"]
     "sha256:ae3da4be7f7d5fe1c52fe00d66ef4ddc492c63ebbb0a985f9ea3b77cdf5d22cb": ["v4.13.4"]
+    "sha256:78add5f34e1996337fabbdf0807fcd040ecd9d936def7d529da37bb8b7e9c05d": ["v4.13.5"]
     "sha256:95ea5f0784add47611abd33a96639e3cd9021fae61df773ff60c7edd5a20ec5b": ["v4.14.0"]
+    "sha256:763d52463f79402eca2c404a61d09fb7e54666cc826c76609e7564d8cde3c3aa": ["v4.14.1"]
 
 #
 # The following images have been renamed or are no longer maintained.
