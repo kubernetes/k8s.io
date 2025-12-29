@@ -24,6 +24,17 @@ datadog:
       uncompressedLayersSupport: true
     host:
       enabled: true
+  operator:
+    enabled: false
+  kubernetesResourcesLabelsAsTags:
+    nodes:
+      kubernetes.io/arch: kubernetes.io/arch
+    pods:
+      prow.k8s.io/refs.org: prow.k8s.io/refs.org
+      prow.k8s.io/refs.repo: prow.k8s.io/refs.repo
+      prow.k8s.io/type: prow.k8s.io/type
+      prow.k8s.io/job: prow.k8s.io/job
+      prow.k8s.io/id: prow.k8s.io/id
 clusterAgent:
   tokenExistingSecret: datadog-secret
 agents:

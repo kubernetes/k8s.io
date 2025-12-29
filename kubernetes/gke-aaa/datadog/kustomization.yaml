@@ -6,7 +6,7 @@ helmCharts:
   - name: datadog
     repo: https://helm.datadoghq.com
     releaseName: datadog
-    version: 3.118.0
+    version: 3.157.3
     valuesFile: values.yaml
 
 resources:
