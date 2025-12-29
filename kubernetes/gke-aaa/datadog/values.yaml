@@ -30,6 +30,8 @@ datadog:
   apm:
     instrumentation:
       skipKPITelemetry: true # https://github.com/DataDog/helm-charts/issues/1395
+  operator:
+    enabled: false
 clusterAgent:
   tokenExistingSecret: datadog-secret
 agents:
