@@ -175,12 +175,12 @@ resource "google_iam_workload_identity_pool_provider" "ppc64le" {
 }
 
 data "http" "s390x_issuer" {
-  url      = "https://d7b2a019-eu-de.lb.appdomain.cloud:6443/.well-known/openid-configuration"
+  url      = "https://b9100f68-eu-de.lb.appdomain.cloud:6443/.well-known/openid-configuration"
   insecure = true
 }
 
 data "http" "s390x_jwks" {
-  url      = "https://d7b2a019-eu-de.lb.appdomain.cloud:6443/openid/v1/jwks"
+  url      = "https://b9100f68-eu-de.lb.appdomain.cloud:6443/openid/v1/jwks"
   insecure = true
 }
 
