@@ -539,3 +539,28 @@ groups:
       - fabrizio.pandini@broadcom.com
       - sabari.murugesan@broadcom.com
       - stefan.buringer@broadcom.com
+
+  - email-id: k8s-infra-ibm-s390x-admins@kubernetes.io
+    name: k8s-infra-ibm-s390x-admins
+    description: |-
+      ACL for IBM s390x resources on GCP
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - sudharshanrampoore@gmail.com
+      - rishi.investigate@gmail.com
+
+  - email-id: k8s-infra-ibm-ppc64le-admins@kubernetes.io
+    name: k8s-infra-ibm-ppc64le-admins
+    description: |-
+      ACL for IBM ppc64le resources on GCP
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - rajalakshmi.girish1@ibm.com
+      - karthik.k.n@ibm.com
+      - amulmek1@in.ibm.com
+      - kishen.viswanathan@ibm.com
+      - varsharani.Deshmane1@ibm.com
