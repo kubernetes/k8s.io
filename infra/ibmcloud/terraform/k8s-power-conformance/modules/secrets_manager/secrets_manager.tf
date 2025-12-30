@@ -35,7 +35,7 @@ resource "ibm_sm_iam_credentials_secret" "prow_secret" {
   labels        = ["rotate:true"]
 
   //The time-to-live (TTL) or lease duration of generated secret 14400seconds = 4hrs
-  ttl = "14400"
+  ttl = "21600"
 }
 
 resource "ibm_sm_iam_credentials_secret" "janitor_secret" {
