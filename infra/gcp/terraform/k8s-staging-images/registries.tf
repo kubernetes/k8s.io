@@ -17,6 +17,7 @@ limitations under the License.
 locals {
   // The groups have to be created before applying this terraform code
   registries = {
+    agentic-net                     = "group:k8s-infra-staging-agentic-net@kubernetes.io"
     agent-sandbox                   = "group:k8s-infra-staging-agent-sandbox@kubernetes.io"
     aws-encryption-provider         = "group:k8s-infra-staging-provider-aws@kubernetes.io"
     charts                          = "group:k8s-infra-release-admins@kubernetes.io"
