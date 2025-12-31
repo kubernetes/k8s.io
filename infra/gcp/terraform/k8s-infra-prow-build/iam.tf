@@ -33,6 +33,7 @@ module "iam" {
       "serviceAccount:kubernetes-external-secrets@k8s-infra-prow-build.iam.gserviceaccount.com",
       "principal://iam.googleapis.com/projects/${module.project.project_number}/locations/global/workloadIdentityPools/${module.project.project_id}.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
       "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
+      "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
     ]
   }
 }
@@ -75,6 +76,32 @@ resource "google_iam_workload_identity_pool_provider" "eks_kops" {
   oidc {
     # From EKS cluster created in https://github.com/kubernetes/k8s.io/tree/main/infra/aws/terraform/kops-infra-ci
     issuer_uri        = "https://oidc.eks.us-east-2.amazonaws.com/id/7283E85C59E9C4129CFD07BAC9378D44"
+    allowed_audiences = ["sts.googleapis.com"]
+  }
+}
+
+
+resource "google_iam_workload_identity_pool" "aks_cluster" {
+  project = module.project.project_id
+
+  workload_identity_pool_id = "prow-aks"
+  display_name              = "AKS Prow Cluster"
+  description               = "Identity pool for CI on Azure using AKS clusters"
+}
+
+resource "google_iam_workload_identity_pool_provider" "aks_cluster" {
+  project = module.project.project_id
+
+  display_name                       = "AKS OIDC provider"
+  description                        = "Identity pool for CI on Azure using AKS clusters"
+  workload_identity_pool_id          = google_iam_workload_identity_pool.aks_cluster.workload_identity_pool_id
+  workload_identity_pool_provider_id = "oidc"
+  attribute_mapping = {
+    "google.subject" = "assertion.sub"
+  }
+  oidc {
+    # From AKS cluster created in https://github.com/kubernetes/k8s.io/tree/main/infra/azure/terraform/k8s-infra-prow-build
+    issuer_uri        = "https://eastus2.oic.prod-aks.azure.com/d1aa7522-0959-442e-80ee-8c4f7fb4c184/85d5aa19-bc3c-4cdb-bc17-0cf8703cfa3f"
     allowed_audiences = ["sts.googleapis.com"]
   }
 }

@@ -15,21 +15,23 @@ limitations under the License.
 */
 
 module "prow_build" {
-  source                    = "Azure/aks/azurerm"
-  version                   = "9.2.0"
+  source                    = "Azure/aks/azurerm//v4"
+  version                   = "10.0.0"
   resource_group_name       = azurerm_resource_group.rg.name
   location                  = azurerm_resource_group.rg.location
   sku_tier                  = "Standard"
-  automatic_channel_upgrade = "patch"
-  kubernetes_version        = "1.32"
-  prefix                    = "k8s-infra"
+  automatic_channel_upgrade = "stable"
+  # kubernetes_version        = "1.34"
+  prefix = "k8s-infra"
 
   role_based_access_control_enabled = true
   workload_identity_enabled         = true
   oidc_issuer_enabled               = true
-  rbac_aad                          = true
-  rbac_aad_managed                  = true
-  local_account_disabled            = false
+  rbac_aad_azure_rbac_enabled       = true
+  rbac_aad_admin_group_object_ids = [
+    "2d1bde94-76f6-4538-9ac0-1b2ef459ba15" # aks-admins
+  ]
+  local_account_disabled = false
 
   identity_type = "UserAssigned"
   identity_ids  = [azurerm_user_assigned_identity.aks_identity.id]
@@ -42,10 +44,13 @@ module "prow_build" {
     user_assigned_identity_id = azurerm_user_assigned_identity.aks_kubelet_identity.id
   }
 
-  ebpf_data_plane     = "cilium"
-  network_plugin_mode = "overlay"
-  network_plugin      = "azure"
-  network_policy      = "cilium"
+  ebpf_data_plane       = "cilium"
+  network_plugin_mode   = "overlay"
+  network_plugin        = "azure"
+  network_policy        = "cilium"
+  network_ip_versions   = ["IPv4", "IPv6"]
+  network_data_plane    = "cilium"
+  net_profile_pod_cidrs = ["10.244.0.0/16", "fd12:3456:789a::/64"]
 
   enable_auto_scaling = true
   node_resource_group = "MC_${local.prefix}-prow-build-${azurerm_resource_group.rg.location}-aks-rg"
@@ -60,25 +65,47 @@ module "prow_build" {
   agents_max_pods              = 110
   agents_type                  = "VirtualMachineScaleSets"
   agents_availability_zones    = ["1", "3"]
-  os_sku                       = "AzureLinux"
+  os_sku                       = "Ubuntu"
   agents_size                  = "Standard_D4ds_v5"
   only_critical_addons_enabled = true
   temporary_name_for_rotation  = "tmpnodepool1"
   agents_tags                  = var.common_tags
-  vnet_subnet_id               = module.prow_network.subnets.prow_build_aks.resource_id
+  vnet_subnet = {
+    id = module.prow_network.subnets.prow_build_aks.resource_id
+  }
 
   storage_profile_enabled             = true
   storage_profile_blob_driver_enabled = false
   storage_profile_file_driver_enabled = false
 
   node_pools = {
-    pool1 = {
-      name                = "pool1"
-      vm_size             = "Standard_E8ds_v5"
+    pool-amd64 = {
+      name                = "amd64"
+      vm_size             = "Standard_D8ads_v6"
       enable_auto_scaling = true
       kubelet_disk_type   = "OS"
       min_count           = 3
-      max_count           = 200
+      max_count           = 100
+      max_pods            = 110
+      os_disk_type        = "Ephemeral"
+      os_disk_size_gb     = 100
+      os_sku              = "Ubuntu"
+      vnet_subnet_id      = module.prow_network.subnets.prow_build_aks.resource_id
+
+      upgrade_settings = {
+        max_surge                     = "33%"
+        drain_timeout_in_minutes      = 90
+        node_soak_duration_in_minutes = 1
+      }
+    }
+    pool-arm64 = {
+      name                = "arm64"
+      vm_size             = "Standard_D8pds_v6"
+      enable_auto_scaling = true
+      kubelet_disk_type   = "OS"
+      min_count           = 3
+      max_count           = 100
+      max_pods            = 110
       os_disk_type        = "Ephemeral"
       os_disk_size_gb     = 100
       os_sku              = "Ubuntu"

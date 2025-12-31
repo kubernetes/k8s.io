@@ -1,0 +1,40 @@
+registry: datadoghq.azurecr.io
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+  site: us5.datadoghq.com
+  clusterName: k8s-infra-aks-prow-build
+  logs:
+    enabled: true
+    containerCollectAll: true
+  prometheusScrape:
+    enabled: true
+    serviceEndpoints: true
+  kubeStateMetricsCore:
+    enabled: true
+  networkMonitoring:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+  sbom:
+    enabled: true
+    containerImage:
+      enabled: true
+      uncompressedLayersSupport: true
+    host:
+      enabled: true
+  apm:
+    instrumentation:
+      skipKPITelemetry: true # https://github.com/DataDog/helm-charts/issues/1395
+clusterAgent:
+  tokenExistingSecret: datadog-secret
+agents:
+  tolerations: # datadog supports arm64
+    - key: kubernetes.io/arch
+      operator: Equal
+      value: arm64
+      effect: NoSchedule
+providers:
+  aks:
+    enabled: true

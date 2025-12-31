@@ -18,6 +18,9 @@ spec:
             - mountPath: /var/run/secrets/aws-iam-token/serviceaccount
               name: aws-iam-token
               readOnly: true
+            - name: azure-token
+              mountPath: /var/run/secrets/azure-token/serviceaccount
+              readOnly: true
       volumes:
         # AWS IAM token needed to assume role to access the EKS clusters.
         - name: aws-iam-token
@@ -28,3 +31,12 @@ spec:
                   audience: sts.amazonaws.com
                   expirationSeconds: 86400
                   path: token
+        # Azure Token needed for workload identity
+        - name: azure-token
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 86400
+                  path: token
+                  audience: api://AzureADTokenExchange
