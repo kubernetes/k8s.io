@@ -3,6 +3,7 @@ kind: Secret
 metadata:
   name: gke-prow
   labels:
+    name: gke-prow
     argocd.argoproj.io/secret-type: cluster
     clusterType: prow
     environment: prod
@@ -29,6 +30,7 @@ kind: Secret
 metadata:
   name: gke-prow-build
   labels:
+    name: gke-prow-build
     argocd.argoproj.io/secret-type: cluster
     clusterType: prow
     environment: prod
@@ -52,6 +54,7 @@ kind: Secret
 metadata:
   name: gke-prow-build-trusted
   labels:
+    name: gke-prow-build-trusted
     argocd.argoproj.io/secret-type: cluster
     clusterType: prow
     environment: prod
@@ -75,6 +78,7 @@ kind: Secret
 metadata:
   name: gke-aaa
   labels:
+    name: gke-aaa
     argocd.argoproj.io/secret-type: cluster
     clusterType: apps
     environment: prod
@@ -106,6 +110,7 @@ spec:
         config: "{{ .config }}"
       metadata:
         labels:
+          name: ibm-ppc64le
           argocd.argoproj.io/secret-type: cluster
           clusterType: prow
           environment: prod
@@ -133,6 +138,7 @@ spec:
         config: "{{ .config }}"
       metadata:
         labels:
+          name: ibm-s390x
           argocd.argoproj.io/secret-type: cluster
           clusterType: prow
           environment: prod
@@ -151,6 +157,7 @@ kind: Secret
 metadata:
   name: eks-prow-kops
   labels:
+    name: eks-prow-kops
     argocd.argoproj.io/secret-type: cluster
     clusterType: prow
     environment: prod
@@ -175,6 +182,7 @@ kind: Secret
 metadata:
   name: eks-prow-build
   labels:
+    name: eks-prow-build
     argocd.argoproj.io/secret-type: cluster
     clusterType: prow
     environment: prod
