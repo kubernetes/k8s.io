@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# python:3-alpine as of November 14th, 2019
-ARG BASE_IMAGE=python@sha256:9ecd1b34b5fef4dc806734f92eee1702175a63276bafe3552d122c8f4918ed8e
+# python:3-alpine as of December 14th, 2025
+ARG BASE_IMAGE=python@sha256:2a77c2640cc80f5506babd027c883abc55f04d44173fd52eeacea9d3b978e811
 FROM ${BASE_IMAGE}
 
 RUN apk add \
-        bash=5.0.0-r0 \
-        make=4.2.1-r2
+        bash=5.3.3-r1 \
+        make=4.4.1-r3
 
 # install from requirements.txt and ensure that all requirements match
 # pip freeze after, guaranteeing that we will install the same packages if we
