@@ -222,6 +222,8 @@ groups:
     members:
       - emacchi@redhat.com
       - lennart.jern@est.tech
+      - m.andre@redhat.com
+      - stephenfin@redhat.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-openstack-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-openstack-alerts
