@@ -1,0 +1,11 @@
+groups:
+  - email-id: k8s-infra-staging-agentic-net@kubernetes.io
+    name: k8s-infra-staging-agentic-net
+    description: |-
+      ACL for staging sig agentic net artifacts in GCP project.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - davmarti@redhat.com
+      - liorlieberman@google.com
