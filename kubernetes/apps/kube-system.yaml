@@ -13,7 +13,9 @@ spec:
             - key: name
               operator: NotIn
               values:
+                - gke-aaa
                 - gke-prow
+                - gke-utility
   template:
     metadata:
       name: 'kube-system-{{ .name }}'

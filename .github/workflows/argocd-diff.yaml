@@ -1,21 +1,27 @@
 name: Argo CD Diff Preview
 
 on:
-  pull_request:
+  pull_request_target:
     paths:
       - 'kubernetes/**' # All Kubernetes manifests owned by ArgoCD live here
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout the PR
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           path: pull-request
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: actions/checkout@v4
+      - name: Checkout out kubernetes/k8s.io main branch
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           ref: main
           path: main
@@ -32,6 +38,21 @@ jobs:
             -e REPO=${{ github.repository }} \
             dagandersen/argocd-diff-preview:v0.1.19
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
+        with:
+          name: diff-md
+          path: output/diff.md
+
+  comment:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: diff-md
+          path: output
       - name: Post diff as comment
         env:
           GH_TOKEN: ${{ secrets.K8S_INFRA_CI_BOT_PR_TOKEN }}
