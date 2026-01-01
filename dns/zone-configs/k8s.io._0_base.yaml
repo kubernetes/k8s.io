@@ -247,6 +247,16 @@ hooks.prow:
   - type: AAAA
     ttl: 600 # this has needed to change in the past
     value: "2600:1901:0:b465::"
+testgrid.prow:
+  - type: A
+    value: 34.128.150.99
+  - type: AAAA
+    value: "2600:1901:0:b465::"
+testgrid-api.prow:
+  - type: A
+    value: 34.128.150.99
+  - type: AAAA
+    value: "2600:1901:0:b465::"
 # prow-certificates in k8s-infra-prow project
 _acme-challenge.prow:
   type: CNAME
