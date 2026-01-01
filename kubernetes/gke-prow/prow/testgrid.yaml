@@ -1,0 +1,174 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testgrid-api
+  labels:
+    app: testgrid
+    component: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testgrid
+      component: api
+  template:
+    metadata:
+      labels:
+        app: testgrid
+        component: api
+    spec:
+      serviceAccountName: testgrid-api
+      containers:
+      - name: testgrid-api
+        image: gcr.io/k8s-testgrid/api:v20251223-v0.0.175-2-g0e84967e
+        args:
+        - --allowed-origin=*
+        - --scope=gs://k8s-testgrid
+        - --port=8080
+        ports:
+        - name: http
+          containerPort: 8080
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: testgrid-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: testgrid-api
+spec:
+  selector:
+    app: testgrid
+    component: api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testgrid-ui
+  labels:
+    app: testgrid
+    component: ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testgrid
+      component: ui
+  template:
+    metadata:
+      labels:
+        app: testgrid
+        component: ui
+    spec:
+      serviceAccountName: testgrid-ui
+      containers:
+      - name: testgrid-ui
+        image: gcr.io/k8s-staging-test-infra/testgrid-ui:latest
+        ports:
+        - name: http
+          containerPort: 80
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 1Gi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: testgrid-ui
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: testgrid-ui
+spec:
+  selector:
+    app: testgrid
+    component: ui
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testgrid-proxy
+  labels:
+    app: testgrid-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testgrid-proxy
+  template:
+    metadata:
+      labels:
+        app: testgrid-proxy
+    spec:
+      containers:
+      - name: nginx
+        image: cgr.dev/chainguard/nginx
+        ports:
+        - name: http
+          containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d/nginx.conf
+          subPath: nginx.conf
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-proxy-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-proxy-config
+data:
+  nginx.conf: |
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            proxy_pass http://testgrid-data.k8s.io/;
+        }
+    }
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: testgrid-proxy
+spec:
+  selector:
+    app: testgrid-proxy
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
