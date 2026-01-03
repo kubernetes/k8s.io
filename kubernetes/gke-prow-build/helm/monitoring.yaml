@@ -1,7 +1,7 @@
 grafana:
   defaultDashboardsEnabled: false
   admin:
-    existingSecret: grafana-login
+    existingSecret: grafana-credentials
     userKey: username
     passwordKey: password
   enabled: true
@@ -27,7 +27,7 @@ kube-state-metrics:
    - pods=[*]
    - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
 
-prometheus-node-exporter:
+nodeExporter:
   enabled: false
 
 prometheus:

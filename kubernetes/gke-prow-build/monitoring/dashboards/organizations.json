@@ -76,7 +76,7 @@
                     "dateFormat": "YYYY-MM-DD HH:mm: ss",
                     "decimals": 2,
                     "mappingType": 1,
-                    "pattern": "/. */",
+                    "pattern": "/.*/",
                     "preserveFormat": false,
                     "thresholds": [],
                     "type": "hidden",
@@ -221,7 +221,7 @@
                     "dateFormat": "YYYY-MM-DD HH:mm: ss",
                     "decimals": 2,
                     "mappingType": 1,
-                    "pattern": "/. */",
+                    "pattern": "/.*/",
                     "preserveFormat": false,
                     "thresholds": [],
                     "type": "hidden",
@@ -782,7 +782,7 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "expr": "sum by (org) (prow:job:cpu_usage_seconds_rate: 1m{phase=\"Running\"})",
+                    "expr": "sum by (org) (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\"})",
                     "format": "time_series",
                     "interval": "",
                     "intervalFactor": 1,
@@ -1080,14 +1080,14 @@
                             "refId": "A"
                         },
                         {
-                            "expr": "sum (prow: job:resource_requests_memory_bytes{phase=\"Running\",org=\"\"})",
+                            "expr": "sum (prow:job:resource_requests_memory_bytes{phase=\"Running\",org=\"\"})",
                             "format": "time_series",
                             "intervalFactor": 1,
                             "legendFormat": "requested",
                             "refId": "B"
                         },
                         {
-                            "expr": "sum (prow: job:resource_limits_memory_bytes{phase=\"Running\",org=\"\"})",
+                            "expr": "sum (prow:job:resource_limits_memory_bytes{phase=\"Running\",org=\"\"})",
                             "format": "time_series",
                             "intervalFactor": 1,
                             "legendFormat": "limit",
@@ -1199,7 +1199,7 @@
                             "refId": "B"
                         },
                         {
-                            "expr": "sum (prow:job: resource_limits_cpu_cores{phase=\"Running\",org=\"\"})",
+                            "expr": "sum (prow:job:resource_limits_cpu_cores{phase=\"Running\",org=\"\"})",
                             "format": "time_series",
                             "interval": "",
                             "intervalFactor": 1,
@@ -1436,7 +1436,7 @@
                             "refId": "B"
                         },
                         {
-                            "expr": "sum (prow:job: resource_limits_cpu_cores{phase=\"Running\",org=~\"$org\"})",
+                            "expr": "sum (prow:job:resource_limits_cpu_cores{phase=\"Running\",org=~\"$org\"})",
                             "format": "time_series",
                             "interval": "",
                             "intervalFactor": 1,
@@ -1521,7 +1521,7 @@
                 "allValue": null,
                 "current": {},
                 "datasource": "${datasource}",
-                "definition": "label_values(prow: job, org)",
+                "definition": "label_values(prow:job, org)",
                 "hide": 2,
                 "includeAll": true,
                 "label": null,

@@ -333,7 +333,7 @@
                     {
                         "matcher": {
                             "id": "byRegexp",
-                            "options": "/. */"
+                            "options": "/.*/"
                         },
                         "properties": [
                             {
@@ -785,7 +785,7 @@
                     "datasource": {
                         "uid": "${datasource}"
                     },
-                    "expr": "sum by (id) (prow:job:cpu_usage_seconds_rate: 1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\"})",
+                    "expr": "sum by (id) (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\"})",
                     "format": "time_series",
                     "interval": "",
                     "intervalFactor": 1,
@@ -1218,7 +1218,7 @@
                     "datasource": {
                         "uid": "${datasource}"
                     },
-                    "expr": "sum (prow:job: cpu_usage_seconds_rate: 1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\",id=~\"$build\"})",
+                    "expr": "sum (prow:job: cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\",id=~\"$build\"})",
                     "format": "time_series",
                     "interval": "",
                     "intervalFactor": 1,
@@ -1240,7 +1240,7 @@
                     "datasource": {
                         "uid": "${datasource}"
                     },
-                    "expr": "sum (prow:job: resource_limits_cpu_cores{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\",id=~\"$build\"})",
+                    "expr": "sum (prow:job:resource_limits_cpu_cores{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\",id=~\"$build\"})",
                     "format": "time_series",
                     "interval": "",
                     "intervalFactor": 1,
@@ -1281,7 +1281,7 @@
                     "value": "kubernetes"
                 },
                 "datasource": "${datasource}",
-                "definition": "label_values(prow: job, org)",
+                "definition": "label_values(prow:job, org)",
                 "includeAll": false,
                 "label": "Organisation",
                 "name": "org",

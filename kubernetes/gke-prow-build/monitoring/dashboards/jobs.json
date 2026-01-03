@@ -76,7 +76,7 @@
                     "dateFormat": "YYYY-MM-DD HH: mm:ss",
                     "decimals": 2,
                     "mappingType": 1,
-                    "pattern": "/. */",
+                    "pattern": "/.*/",
                     "preserveFormat": false,
                     "thresholds": [],
                     "type": "hidden",
@@ -205,7 +205,7 @@
                     "dateFormat": "YYYY-MM-DD HH:mm:ss",
                     "decimals": 2,
                     "mappingType": 1,
-                    "pattern": "/. */",
+                    "pattern": "/.*/",
                     "preserveFormat": false,
                     "thresholds": [],
                     "type": "hidden",
@@ -753,7 +753,7 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "expr": "sum by (name) (prow:job:cpu_usage_seconds_rate: 1m{phase=\"Running\",org=\"$org\",repo=\"$repo\"})",
+                    "expr": "sum by (name) (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\"})",
                     "format": "time_series",
                     "interval": "",
                     "intervalFactor": 1,
@@ -1176,7 +1176,7 @@
                             "refId": "B"
                         },
                         {
-                            "expr": "sum (prow: job:resource_limits_cpu_cores{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
+                            "expr": "sum (prow:job:resource_limits_cpu_cores{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "interval": "",
                             "intervalFactor": 1,
@@ -1261,7 +1261,7 @@
                 "allValue": null,
                 "current": {},
                 "datasource": "${datasource}",
-                "definition": "label_values(prow: job, org)",
+                "definition": "label_values(prow:job, org)",
                 "hide": 0,
                 "includeAll": false,
                 "label": "Organisation",
