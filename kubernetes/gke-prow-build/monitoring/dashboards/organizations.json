@@ -56,7 +56,7 @@
                     "link": true,
                     "linkTargetBlank": false,
                     "linkTooltip": "show ${__cell} repositories",
-                    "linkUrl": "/d/RWJSA7dWk/repositories? var-org=${__cell}",
+                    "linkUrl": "/d/RWJSA7dWk/repositories?var-org=${__cell}",
                     "mappingType": 1,
                     "pattern": "org",
                     "preserveFormat": false,
@@ -230,7 +230,7 @@
             ],
             "targets": [
                 {
-                    "expr": "(time() - prow:job:pending_since_time) > 60",
+                    "expr": "(time() - prow:job:pending_since_time) > 20",
                     "format": "table",
                     "instant": true,
                     "intervalFactor": 1,
@@ -901,7 +901,7 @@
             "tableColumn": "",
             "targets": [
                 {
-                    "expr": "100 * (sum (prow:job:resource_requests_cpu_cores) / sum (prow:node: cpu_capacity_cores))",
+                    "expr": "100 * (sum (prow:job:resource_requests_cpu_cores) / sum (prow:node:cpu_capacity_cores))",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "requests",

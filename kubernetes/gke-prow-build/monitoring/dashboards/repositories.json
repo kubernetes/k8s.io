@@ -56,7 +56,7 @@
                     "link": true,
                     "linkTargetBlank": false,
                     "linkTooltip": "show ${__cell} jobs",
-                    "linkUrl": "/d/53g2x7OZz/jobs? var-org=$org&var-repo=${__cell}",
+                    "linkUrl": "/d/53g2x7OZz/jobs?var-org=$org&var-repo=${__cell}",
                     "mappingType": 1,
                     "pattern": "repo",
                     "preserveFormat": false,
@@ -231,7 +231,7 @@
             ],
             "targets": [
                 {
-                    "expr": "(time() - prow:job:pending_since_time{repo=~\"$repo\"}) > 60",
+                    "expr": "(time() - prow:job:pending_since_time{repo=~\"$repo\"}) > 20",
                     "format": "table",
                     "instant": true,
                     "intervalFactor": 1,

@@ -214,7 +214,7 @@
             ],
             "targets": [
                 {
-                    "expr": "(time() - prow:job:pending_since_time{org=\"$org\",repo=\"$repo\"}) > 60",
+                    "expr": "(time() - prow:job:pending_since_time{org=\"$org\",repo=\"$repo\"}) > 20",
                     "format": "table",
                     "instant": true,
                     "intervalFactor": 1,
