@@ -17,6 +17,11 @@ grafana:
       enabled: true
       org_role: Viewer
 
+kube-state-metrics:
+  metricLabelsAllowlist:
+   - pods=[*]
+   - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+
 prometheus:
   prometheusSpec:
     retention: 10d
