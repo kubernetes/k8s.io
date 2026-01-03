@@ -1,4 +1,5 @@
 grafana:
+  defaultDashboardsEnabled: false
   enabled: true
   sidecar:
     dashboards:
@@ -21,6 +22,9 @@ kube-state-metrics:
   metricLabelsAllowlist:
    - pods=[*]
    - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+
+prometheus-node-exporter:
+  enabled: false
 
 prometheus:
   prometheusSpec:
