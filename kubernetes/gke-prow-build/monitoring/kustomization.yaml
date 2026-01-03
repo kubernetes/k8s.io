@@ -5,3 +5,13 @@ resources:
   - certificate.yaml
   - dashboards.yaml
   - rules.yaml
+  - secrets.yaml
+
+configMapGenerator:
+  - name: prow-dashboards
+    behavior: merge
+    files:
+      - dashboards/builds.json
+      - dashboards/jobs.json
+      - dashboards/organizations.json
+      - dashboards/repositories.json

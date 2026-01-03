@@ -1,5 +1,9 @@
 grafana:
   defaultDashboardsEnabled: false
+  admin:
+    existingSecret: grafana-login
+    userKey: username
+    passwordKey: password
   enabled: true
   sidecar:
     dashboards:
@@ -36,6 +40,9 @@ prometheus:
       limits:
         cpu: 4
         memory: 25Gi
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
     storageSpec:
       volumeClaimTemplate:
         spec:
