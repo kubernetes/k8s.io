@@ -5,6 +5,8 @@ grafana:
       enabled: true
   persistence:
     enabled: true
+    storageClassName: hyperdisk-balanced
+    size: 30Gi
   grafana.ini:
     analytics:
       reporting_enabled: false
@@ -28,7 +30,7 @@ prometheus:
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: standard-rwo
+          storageClassName: hyperdisk-balanced
           resources:
             requests:
               storage: 300Gi
@@ -37,12 +39,6 @@ prometheus:
     ruleSelectorNilUsesHelmValues: false
     probeSelectorNilUsesHelmValues: false
     scrapeConfigSelectorNilUsesHelmValues: false
-    volumeClaimTemplate:
-      spec:
-        storageClassName: standard-rwo
-        resources:
-          requests:
-            storage: 300Gi
 # These endpoints aren't scrapable on GKE
 coreDns:
   enabled: false
