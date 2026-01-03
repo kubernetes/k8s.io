@@ -214,7 +214,7 @@
             ],
             "targets": [
                 {
-                    "expr": "(time() - prow:job: pending_since_time{org=\"$org\",repo=\"$repo\"}) > 60",
+                    "expr": "(time() - prow:job:pending_since_time{org=\"$org\",repo=\"$repo\"}) > 60",
                     "format": "table",
                     "instant": true,
                     "intervalFactor": 1,
@@ -373,7 +373,7 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "expr": "count by (name) (prow:job: pending{org=\"$org\",repo=\"$repo\"})",
+                    "expr": "count by (name) (prow:job:pending{org=\"$org\",repo=\"$repo\"})",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "{{ name }}",
@@ -1061,7 +1061,7 @@
                             "refId": "B"
                         },
                         {
-                            "expr": "sum (prow:job: resource_limits_memory_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
+                            "expr": "sum (prow:job:resource_limits_memory_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "intervalFactor": 1,
                             "legendFormat": "limit",

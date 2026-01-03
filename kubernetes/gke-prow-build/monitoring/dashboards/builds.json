@@ -150,7 +150,7 @@
                     "datasource": {
                         "uid": "${datasource}"
                     },
-                    "expr": "count (prow:job: pending{org=\"$org\",repo=\"$repo\",name=\"$job\"})",
+                    "expr": "count (prow:job:pending{org=\"$org\",repo=\"$repo\",name=\"$job\"})",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "pending",
@@ -954,7 +954,7 @@
                     "datasource": {
                         "uid": "${datasource}"
                     },
-                    "expr": "100 * (sum (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\"}) / sum (prow:node: cpu_capacity_cores))",
+                    "expr": "100 * (sum (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\"}) / sum (prow:node:cpu_capacity_cores))",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "used",
@@ -1218,7 +1218,7 @@
                     "datasource": {
                         "uid": "${datasource}"
                     },
-                    "expr": "sum (prow:job: cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\",id=~\"$build\"})",
+                    "expr": "sum (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=\"$job\",id=~\"$build\"})",
                     "format": "time_series",
                     "interval": "",
                     "intervalFactor": 1,

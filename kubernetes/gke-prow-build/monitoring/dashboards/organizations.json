@@ -85,7 +85,7 @@
             ],
             "targets": [
                 {
-                    "expr": "sum by (org) (prow:job{org! =\"\"})",
+                    "expr": "sum by (org) (prow:job{org!=\"\"})",
                     "format": "table",
                     "instant": true,
                     "intervalFactor": 1,
@@ -299,7 +299,7 @@
                     "refId": "A"
                 },
                 {
-                    "expr": "count (prow:job: pending{phase=\"Running\",org=\"\"})",
+                    "expr": "count (prow:job:pending{phase=\"Running\",org=\"\"})",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "(no org)",
@@ -395,7 +395,7 @@
             "steppedLine": false,
             "targets": [
                 {
-                    "expr": "count by (org) (prow:job: pending{org!=\"\"})",
+                    "expr": "count by (org) (prow:job:pending{org!=\"\"})",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "{{ org }}",
@@ -993,7 +993,7 @@
             "tableColumn": "",
             "targets": [
                 {
-                    "expr": "100 * (sum (prow:job: cpu_usage_seconds_rate:1m{phase=\"Running\"}) / sum (prow:node:cpu_capacity_cores))",
+                    "expr": "100 * (sum (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\"}) / sum (prow:node:cpu_capacity_cores))",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "used",
@@ -1317,7 +1317,7 @@
                             "refId": "A"
                         },
                         {
-                            "expr": "sum (prow:job: resource_requests_memory_bytes{phase=\"Running\",org=~\"$org\"})",
+                            "expr": "sum (prow:job:resource_requests_memory_bytes{phase=\"Running\",org=~\"$org\"})",
                             "format": "time_series",
                             "intervalFactor": 1,
                             "legendFormat": "requested",
