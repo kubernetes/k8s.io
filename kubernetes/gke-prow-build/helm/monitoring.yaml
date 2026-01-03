@@ -1,0 +1,52 @@
+grafana:
+  enabled: true
+  sidecar:
+    dashboards:
+      enabled: true
+  persistence:
+    enabled: true
+  grafana.ini:
+    analytics:
+      reporting_enabled: false
+      check_for_updates: true
+    server:
+      root_url: https://monitoring-gke.prow.k8s.io
+    auth.anonymous:
+      enabled: true
+      org_role: Viewer
+
+prometheus:
+  prometheusSpec:
+    retention: 10d
+    resources:
+      requests:
+        cpu: 4
+        memory: 25Gi
+      limits:
+        cpu: 4
+        memory: 25Gi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: standard-rwo
+          resources:
+            requests:
+              storage: 300Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    scrapeConfigSelectorNilUsesHelmValues: false
+    volumeClaimTemplate:
+      spec:
+        storageClassName: standard-rwo
+        resources:
+          requests:
+            storage: 300Gi
+# These endpoints aren't scrapable on GKE
+coreDns:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false

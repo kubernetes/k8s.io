@@ -1,0 +1,171 @@
+# This file contains rules that are specific to ProwJob pods.
+# Those rules are based on kubelet metrics.
+# Source: https://github.com/loodse/prow-dashboards/blob/52601d8565e0d1452a6f90d67a1c782a174afa7b/prometheus-rules.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: prow-rules
+  labels:
+    prometheus: main
+spec:
+  groups:
+  - name: prow
+    rules:
+    # These metrics are based on generic pods, not just Prow jobs.
+
+    # group interesting information into a single metric
+    # squash metrics from multiple kube-state-metrics pods
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="..."} 1
+    - record: prow:pod
+      expr: |
+        max by (namespace, pod, node, pod_ip) (kube_pod_info) *
+          on (namespace, pod)
+          group_left (phase)
+          (kube_pod_status_phase{namespace="test-pods"} == 1)
+
+    # all pending pods
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="Pending"} 1
+    - record: prow:pod:pending
+      expr: prow:pod{phase="Pending"}
+
+    # same for the pod creation time
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="..."} [unix timestamp]
+    - record: prow:pod:created_time
+      expr: |
+        prow:pod *
+          on (namespace, pod)
+          group_right (node, pod_ip, phase)
+          max by (namespace, pod) (kube_pod_created)
+
+    # time since a pod has been in pending phase
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="Pending"} [unix timestamp]
+    - record: prow:pod:pending_since_time
+      expr: prow:pod:pending * prow:pod:created_time
+
+    # These metrics are specific to Prow jobs.
+
+    # This monster of a rule prepares a tidy list of jobs with their
+    # namespace and pod name attached.
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} 1
+    - record: prow:job
+      expr: |
+        max by (org, repo, type, name, id, namespace, pod, phase, node, pod_ip) (
+          label_replace(
+            label_replace(
+              label_replace(
+                label_replace(
+                  label_replace(
+                    prow:pod *
+                      on (namespace, pod)
+                      group_left (label_prow_k8s_io_id, label_prow_k8s_io_refs_repo, label_prow_k8s_io_type, label_prow_k8s_io_job, label_prow_k8s_io_refs_org)
+                      kube_pod_labels{label_prow_k8s_io_id!=""},
+                    "id",
+                    "$0",
+                    "label_prow_k8s_io_id",
+                    ".*"
+                  ),
+                  "repo",
+                  "$0",
+                  "label_prow_k8s_io_refs_repo",
+                  ".*"
+                ),
+                "type",
+                "$0",
+                "label_prow_k8s_io_type",
+                ".*"
+              ),
+              "name",
+              "$0",
+              "label_prow_k8s_io_job",
+              ".*"
+            ),
+            "org",
+            "$0",
+            "label_prow_k8s_io_refs_org",
+            ".*"
+          )
+        )
+
+    # list of all pending pods
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="Pending",org="...",repo="...",type="...",name="...",id="<UUID>"} 1
+    - record: prow:job:pending
+      expr: |
+        prow:pod:pending *
+          on (namespace, pod)
+          group_left (org, repo, type, name, id)
+          prow:job
+
+    # time since a job has been in pending phase
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="Pending",org="...",repo="...",type="...",name="...",id="<UUID>"} [unix timestamp]
+    - record: prow:job:pending_since_time
+      expr: |
+        prow:pod:created_time *
+          on (namespace, pod)
+          group_left (org, repo, type, name, id)
+          prow:job:pending
+
+    # total memory used by a Prow job
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} [bytes]
+    - record: prow:job:memory_working_set_bytes
+      expr: |
+        sum by (namespace, pod, node, pod_ip) (container_memory_working_set_bytes{container="test"}) *
+          on(namespace, pod)
+          group_left(org, repo, type, name, id, node, pod_ip, phase)
+          prow:job
+
+    # total memory requests for a Prow job
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} [bytes]
+    - record: prow:job:resource_requests_memory_bytes
+      expr: |
+        sum by (namespace, pod, node, pod_ip) (kube_pod_container_resource_requests{resource="memory",unit="byte",container="test"}) *
+          on(namespace, pod)
+          group_left(org, repo, type, name, id, node, pod_ip, phase)
+          prow:job
+
+    # total memory limit for a Prow job
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} [bytes]
+    - record: prow:job:resource_limits_memory_bytes
+      expr: |
+        sum by (namespace, pod, node, pod_ip) (kube_pod_container_resource_limits{resource="memory",unit="byte",container="test"}) *
+          on(namespace, pod)
+          group_left(org, repo, type, name, id, node, pod_ip, phase)
+          prow:job
+
+    # total CPU used by a Prow job
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} [seconds]
+    - record: prow:job:cpu_usage_seconds_rate:1m
+      expr: |
+        sum by (namespace, pod, node, pod_ip) (rate(container_cpu_usage_seconds_total{container="test"}[1m])) *
+          on(namespace, pod)
+          group_left(org, repo, type, name, id, node, pod_ip, phase)
+          prow:job
+
+    # total CPU requests for a Prow job
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} [cores]
+    - record: prow:job:resource_requests_cpu_cores
+      expr: |
+        sum by (namespace, pod, node, pod_ip) (kube_pod_container_resource_requests{resource="cpu",unit="core",container="test"}) *
+          on(namespace, pod)
+          group_left(org, repo, type, name, id, node, pod_ip, phase)
+          prow:job
+
+    # total CPU limit for a Prow job
+    # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} [cores]
+    - record: prow:job:resource_limits_cpu_cores
+      expr: |
+        sum by (namespace, pod, node, pod_ip) (kube_pod_container_resource_limits{resource="cpu",unit="core",container="test"}) *
+          on(namespace, pod)
+          group_left(org, repo, type, name, id, node, pod_ip, phase)
+          prow:job
+
+    # total CPU available on *worker* nodes
+    # {node="..."} [cores]
+    - record: prow:node:cpu_capacity_cores
+      expr: |
+        sum by (node) (kube_node_status_capacity{resource="cpu",unit="core"})
+
+    # total memory available on *worker* nodes
+    # {node="..."} [bytes]
+    - record: prow:node:memory_capacity_bytes
+      expr: |
+        sum by (node) (kube_node_status_capacity{resource="memory",unit="byte"})

@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: monitoring
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchExpressions:
+            - key: name
+              operator: In
+              values:
+                - gke-prow-build
+                - gke-utility
+  template:
+    metadata:
+      name: 'monitoring-{{ .name }}'
+      annotations:
+        argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+    spec:
+      destination:
+        namespace: monitoring
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: kube-prometheus-stack
+          repoURL: https://prometheus-community.github.io/helm-charts
+          targetRevision: 62.3.1
+          helm:
+            releaseName: monitoring
+            valueFiles:
+              - $values/kubernetes/{{ .name }}/helm/monitoring.yaml
+        - repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
+          ref: values
+        - path: kubernetes/{{ .name }}/monitoring/
+          repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
+      syncPolicy:
+        # automated:
+        #   prune: true
+        #   selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+        managedNamespaceMetadata:
+          labels:
+            istio-injection: enabled
