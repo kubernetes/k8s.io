@@ -235,11 +235,11 @@
                                         },
                                         {
                                             "color": "rgba(237, 129, 40, 0.89)",
-                                            "value": 300
+                                            "value": 180
                                         },
                                         {
                                             "color": "rgba(245, 54, 54, 0.9)",
-                                            "value": 1800
+                                            "value": 600
                                         }
                                     ]
                                 }
@@ -1165,7 +1165,9 @@
                     },
                     "description": "",
                     "fieldConfig": {
-                        "defaults": {},
+                        "defaults": {
+                            "unit": "bytes"
+                        },
                         "overrides": []
                     },
                     "gridPos": {
@@ -1193,7 +1195,7 @@
                             "datasource": {
                                 "uid": "${datasource}"
                             },
-                            "expr": "sum (prow:job: resource_requests_memory_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
+                            "expr": "sum (prow:job:resource_requests_memory_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "intervalFactor": 1,
                             "legendFormat": "requested",

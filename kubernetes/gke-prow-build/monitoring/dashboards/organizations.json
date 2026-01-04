@@ -235,11 +235,11 @@
                                         },
                                         {
                                             "color": "rgba(237, 129, 40, 0.89)",
-                                            "value": 300
+                                            "value": 180
                                         },
                                         {
                                             "color": "rgba(245, 54, 54, 0.9)",
-                                            "value": 1800
+                                            "value": 600
                                         }
                                     ]
                                 }
@@ -1283,7 +1283,9 @@
                     },
                     "description": "",
                     "fieldConfig": {
-                        "defaults": {},
+                        "defaults": {
+                            "unit": "bytes"
+                        },
                         "overrides": []
                     },
                     "gridPos": {
@@ -1406,7 +1408,9 @@
                     },
                     "description": "",
                     "fieldConfig": {
-                        "defaults": {},
+                        "defaults": {
+                            "unit": "bytes"
+                        },
                         "overrides": []
                     },
                     "gridPos": {

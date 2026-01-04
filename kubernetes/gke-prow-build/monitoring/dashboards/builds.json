@@ -177,6 +177,8 @@
                         },
                         "inspect": false
                     },
+                    "decimals": 2,
+                    "displayName": "Pod",
                     "mappings": [],
                     "thresholds": {
                         "mode": "absolute",
@@ -190,7 +192,8 @@
                                 "value": 80
                             }
                         ]
-                    }
+                    },
+                    "unit": "short"
                 },
                 "overrides": [
                     {
@@ -202,10 +205,6 @@
                             {
                                 "id": "displayName",
                                 "value": "Time"
-                            },
-                            {
-                                "id": "custom.hideFrom.viz",
-                                "value": true
                             },
                             {
                                 "id": "custom.align"
@@ -250,11 +249,11 @@
                                         },
                                         {
                                             "color": "rgba(237, 129, 40, 0.89)",
-                                            "value": 300
+                                            "value": 180
                                         },
                                         {
                                             "color": "rgba(245, 54, 54, 0.9)",
-                                            "value": 1800
+                                            "value": 600
                                         }
                                     ]
                                 }
@@ -332,13 +331,13 @@
                     },
                     {
                         "matcher": {
-                            "id": "byRegexp",
-                            "options": "/.*/"
+                            "id": "byName",
+                            "options": "repo"
                         },
                         "properties": [
                             {
                                 "id": "displayName",
-                                "value": "Pod"
+                                "value": "Repository"
                             },
                             {
                                 "id": "unit",
@@ -349,10 +348,6 @@
                                 "value": 2
                             },
                             {
-                                "id": "custom.hideFrom.viz",
-                                "value": true
-                            },
-                            {
                                 "id": "custom.align"
                             }
                         ]
@@ -360,15 +355,21 @@
                 ]
             },
             "gridPos": {
-                "h": 9,
+                "h": 8,
                 "w": 20,
                 "x": 4,
                 "y": 1
             },
-            "id": 217,
+            "id": 124,
             "options": {
                 "cellHeight": "sm",
-                "showHeader": true
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "Pod"
+                    }
+                ]
             },
             "pluginVersion": "12.3.1",
             "targets": [
@@ -376,7 +377,7 @@
                     "datasource": {
                         "uid": "${datasource}"
                     },
-                    "expr": "(time() - prow:job:pending_since_time{org=\"$org\",repo=\"$repo\",name=\"$job\"}) > 60",
+                    "expr": "(time() - prow:job:pending_since_time{org=\"$org\",repo=\"$repo\",name=\"$job\"})",
                     "format": "table",
                     "instant": true,
                     "intervalFactor": 1,
@@ -384,15 +385,47 @@
                     "refId": "A"
                 }
             ],
-            "title": "Pending Builds",
             "transformations": [
                 {
-                    "id": "merge",
+                    "id": "organize",
                     "options": {
-                        "reducers": []
+                        "excludeByName": {
+                            "id": true,
+                            "name": false,
+                            "namespace": true,
+                            "node": true,
+                            "org": false,
+                            "phase": false,
+                            "pod": false,
+                            "pod_ip": true,
+                            "repo": false,
+                            "Time": true,
+                            "type": false,
+                            "Value": false
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "id": 2,
+                            "name": 3,
+                            "namespace": 4,
+                            "org": 5,
+                            "phase": 6,
+                            "pod": 0,
+                            "repo": 7,
+                            "Time": 1,
+                            "type": 8,
+                            "Value": 9
+                        },
+                        "orderByMode": "manual",
+                        "renameByName": {
+                            "org": "Organization",
+                            "phase": "Pod Phase",
+                            "pod": ""
+                        }
                     }
                 }
             ],
+            "title": "Pending Builds",
             "transparent": true,
             "type": "table"
         },
