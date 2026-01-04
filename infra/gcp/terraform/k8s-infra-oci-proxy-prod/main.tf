@@ -22,9 +22,8 @@ locals {
 module "oci-proxy" {
   source = "../modules/oci-proxy"
   // ***** production vs staging variables inputs *****
-  //
-  // explicitly using default digest here vs staging which overrides it
-  digest               = null
+  // v0.6.0
+  digest               = "sha256:1f004a487c09c76ebf14d1dc01434aa17e31e39def56451ec5727160fdcd0017"
   domain               = "registry.k8s.io"
   project_id           = local.project_id
   service_account_name = "oci-proxy-prod"

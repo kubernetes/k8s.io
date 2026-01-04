@@ -21,8 +21,8 @@ locals {
       environment_variables = [
         {
           name = "DEFAULT_AWS_BASE_URL",
-          // AWS Cloudfront
-          value = "https://d39mqg4b1dx9z1.cloudfront.net",
+          // AWS ap-east-2 is Taiwan
+          value = "https://prod-registry-k8s-io-ap-east-2.s3.dualstack.ap-east-2.amazonaws.com",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -111,8 +111,8 @@ locals {
       environment_variables = [
         {
           name = "DEFAULT_AWS_BASE_URL",
-          // AWS eu-central-1 is Frankfurt
-          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+          // AWS Cloudfront
+          value = "https://d39mqg4b1dx9z1.cloudfront.net",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -183,8 +183,9 @@ locals {
       environment_variables = [
         {
           name = "DEFAULT_AWS_BASE_URL",
-          // AWS eu-west-1 is Ireland
-          value = "https://prod-registry-k8s-io-eu-west-1.s3.dualstack.eu-west-1.amazonaws.com",
+          // AWS eu-west-2 is London
+          // https://github.com/kubernetes/registry.k8s.io/blob/main/cmd/archeio/internal/app/buckets.go#L111
+          value = "https://767373bbdcb8270361b96548387bf2a9ad0d48758c35-eu-west-2.s3.dualstack.eu-west-2.amazonaws.com",
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
