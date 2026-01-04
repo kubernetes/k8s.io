@@ -5,7 +5,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: prow-rules
-  namespace: monitoring
   labels:
     prometheus: main
 spec:

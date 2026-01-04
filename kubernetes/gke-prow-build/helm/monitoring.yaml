@@ -1,0 +1,66 @@
+grafana:
+  defaultDashboardsEnabled: false
+  admin:
+    existingSecret: grafana-credentials
+    userKey: username
+    passwordKey: password
+  enabled: true
+  service:
+    type: NodePort
+  sidecar:
+    dashboards:
+      enabled: true
+  persistence:
+    enabled: true
+    storageClassName: hyperdisk-balanced
+    size: 30Gi
+  grafana.ini:
+    analytics:
+      reporting_enabled: false
+      check_for_updates: true
+    server:
+      root_url: https://monitoring-gke.prow.k8s.io
+    auth.anonymous:
+      enabled: true
+      org_role: Viewer
+
+kube-state-metrics:
+  metricLabelsAllowlist:
+   - pods=[*]
+   - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+
+nodeExporter:
+  enabled: false
+
+prometheus:
+  prometheusSpec:
+    retention: 120d
+    resources:
+      requests:
+        cpu: 4
+        memory: 25Gi
+      limits:
+        cpu: 4
+        memory: 25Gi
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: hyperdisk-balanced
+          resources:
+            requests:
+              storage: 300Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    scrapeConfigSelectorNilUsesHelmValues: false
+# These endpoints aren't scrapable on GKE
+coreDns:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false

@@ -13,6 +13,6 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: grafana
+      name: monitoring-grafana
       port:
-        name: http
+        name: http-web
