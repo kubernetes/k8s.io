@@ -4,6 +4,7 @@ namespace: monitoring
 resources:
   - certificate.yaml
   - dashboards.yaml
+  - ingress.yaml
   - rules.yaml
   - secrets.yaml
 

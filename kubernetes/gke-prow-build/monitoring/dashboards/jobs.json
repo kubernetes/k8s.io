@@ -55,8 +55,8 @@
                     "decimals": 2,
                     "link": true,
                     "linkTargetBlank": false,
-                    "linkTooltip": "show ${__cell} builds",
-                    "linkUrl": "/d/96Q8oOOZk/builds?var-org=$org&var-repo=$repo&var-job=${__cell}",
+                    "linkTooltip": "show ${__value.raw} builds",
+                    "linkUrl": "/d/96Q8oOOZk/builds?var-org=$org&var-repo=$repo&var-job=${__value.raw}",
                     "mappingType": 1,
                     "pattern": "name",
                     "preserveFormat": false,
@@ -81,6 +81,20 @@
                     "thresholds": [],
                     "type": "hidden",
                     "unit": "short"
+                }
+            ],
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true
+                        },
+                        "indexByName": {},
+                        "renameByName": {},
+                        "includeByName": {}
+                    }
                 }
             ],
             "targets": [
@@ -583,7 +597,7 @@
             "tableColumn": "",
             "targets": [
                 {
-                    "expr": "100 * (sum (prow:job:memory_working_set_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\"}) / sum (prow:node: memory_capacity_bytes))",
+                    "expr": "100 * (sum (prow:job:memory_working_set_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\"}) / sum (prow:node:memory_capacity_bytes))",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "used",
@@ -964,7 +978,7 @@
             "tableColumn": "",
             "targets": [
                 {
-                    "expr": "100 * (sum (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\"}) / sum (prow:node: cpu_capacity_cores))",
+                    "expr": "100 * (sum (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\"}) / sum (prow:node:cpu_capacity_cores))",
                     "format": "time_series",
                     "intervalFactor": 1,
                     "legendFormat": "used",

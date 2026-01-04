@@ -5,6 +5,8 @@ grafana:
     userKey: username
     passwordKey: password
   enabled: true
+  service:
+    type: NodePort
   sidecar:
     dashboards:
       enabled: true
