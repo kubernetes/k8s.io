@@ -175,6 +175,7 @@
             "fieldConfig": {
                 "defaults": {
                     "custom": {
+                        "align": "auto",
                         "cellOptions": {
                             "type": "auto"
                         },
@@ -369,7 +370,13 @@
             "id": 124,
             "options": {
                 "cellHeight": "sm",
-                "showHeader": true
+                "showHeader": true,
+                "sortBy": [
+                    {
+                        "desc": true,
+                        "displayName": "Pod"
+                    }
+                ]
             },
             "pluginVersion": "12.3.1",
             "targets": [
@@ -377,7 +384,8 @@
                     "datasource": {
                         "uid": "${datasource}"
                     },
-                    "expr": "(time() - prow:job:pending_since_time{repo=~\"$repo\"}) > 20",
+                    "editorMode": "code",
+                    "expr": "(time() - prow:job:pending_since_time{repo=~\"$repo\"})",
                     "format": "table",
                     "instant": true,
                     "intervalFactor": 1,
@@ -388,9 +396,41 @@
             "title": "Pending Jobs",
             "transformations": [
                 {
-                    "id": "merge",
+                    "id": "organize",
                     "options": {
-                        "reducers": []
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": false,
+                            "id": true,
+                            "name": false,
+                            "namespace": true,
+                            "node": true,
+                            "org": false,
+                            "phase": false,
+                            "pod": false,
+                            "pod_ip": true,
+                            "repo": false,
+                            "type": false
+                        },
+                        "includeByName": {},
+                        "indexByName": {
+                            "Time": 1,
+                            "Value": 9,
+                            "id": 2,
+                            "name": 3,
+                            "namespace": 4,
+                            "org": 5,
+                            "phase": 6,
+                            "pod": 0,
+                            "repo": 7,
+                            "type": 8
+                        },
+                        "orderByMode": "manual",
+                        "renameByName": {
+                            "org": "Organization",
+                            "phase": "Pod Phase",
+                            "pod": ""
+                        }
                     }
                 }
             ],
@@ -1574,5 +1614,5 @@
     "timezone": "",
     "title": "Repositories",
     "uid": "RWJSA7dWk",
-    "version": 4
+    "version": 5
 }
