@@ -34,7 +34,7 @@ nodeExporter:
 
 prometheus:
   prometheusSpec:
-    retention: 10d
+    retention: 120d
     resources:
       requests:
         cpu: 4
