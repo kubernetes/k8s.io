@@ -1,11 +1,24 @@
 {
     "annotations": {
-        "list": []
+        "list": [
+            {
+                "builtIn": 1,
+                "datasource": {
+                    "type": "grafana",
+                    "uid": "-- Grafana --"
+                },
+                "enable": true,
+                "hide": true,
+                "iconColor": "rgba(0, 211, 255, 1)",
+                "name": "Annotations & Alerts",
+                "type": "dashboard"
+            }
+        ]
     },
     "editable": true,
-    "gnetId": null,
+    "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "hideControls": false,
+    "id": 1,
     "links": [],
     "panels": [
         {
@@ -22,10 +35,74 @@
             "type": "row"
         },
         {
-            "columns": [],
-            "datasource": "${datasource}",
-            "editable": true,
-            "fontSize": "100%",
+            "datasource": {
+                "uid": "${datasource}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "footer": {
+                            "reducers": []
+                        },
+                        "inspect": false
+                    },
+                    "decimals": 2,
+                    "displayName": "Pod",
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "name"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Name"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "short"
+                            },
+                            {
+                                "id": "decimals",
+                                "value": 2
+                            },
+                            {
+                                "id": "links",
+                                "value": [
+                                    {
+                                        "targetBlank": false,
+                                        "title": "show ${__value.raw} builds",
+                                        "url": "/d/96Q8oOOZk/builds?var-org=$org&var-repo=$repo&var-job=${__value.raw}"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "custom.align"
+                            }
+                        ]
+                    }
+                ]
+            },
             "gridPos": {
                 "h": 17,
                 "w": 4,
@@ -33,72 +110,16 @@
                 "y": 1
             },
             "id": 5,
-            "links": [],
-            "options": {},
-            "pageSize": null,
-            "scroll": true,
-            "showHeader": true,
-            "sort": {
-                "col": 1,
-                "desc": false
+            "options": {
+                "cellHeight": "sm",
+                "showHeader": false
             },
-            "styles": [
-                {
-                    "alias": "Name",
-                    "colorMode": null,
-                    "colors": [
-                        "rgba(245, 54, 54, 0.9)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(50, 172, 45, 0.97)"
-                    ],
-                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                    "decimals": 2,
-                    "link": true,
-                    "linkTargetBlank": false,
-                    "linkTooltip": "show ${__value.raw} builds",
-                    "linkUrl": "/d/96Q8oOOZk/builds?var-org=$org&var-repo=$repo&var-job=${__value.raw}",
-                    "mappingType": 1,
-                    "pattern": "name",
-                    "preserveFormat": false,
-                    "sanitize": false,
-                    "thresholds": [],
-                    "type": "string",
-                    "unit": "short"
-                },
-                {
-                    "alias": "Pod",
-                    "colorMode": null,
-                    "colors": [
-                        "rgba(245, 54, 54, 0.9)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(50, 172, 45, 0.97)"
-                    ],
-                    "dateFormat": "YYYY-MM-DD HH: mm:ss",
-                    "decimals": 2,
-                    "mappingType": 1,
-                    "pattern": "/.*/",
-                    "preserveFormat": false,
-                    "thresholds": [],
-                    "type": "hidden",
-                    "unit": "short"
-                }
-            ],
-            "transformations": [
-                {
-                    "id": "organize",
-                    "options": {
-                        "excludeByName": {
-                            "Time": true,
-                            "Value": true
-                        },
-                        "indexByName": {},
-                        "renameByName": {},
-                        "includeByName": {}
-                    }
-                }
-            ],
+            "pluginVersion": "12.3.1",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "sum by (name) (prow:job{org=\"$org\",repo=\"$repo\"})",
                     "format": "table",
                     "instant": true,
@@ -107,19 +128,193 @@
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "Jobs",
-            "transform": "table",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true,
+                            "Value": true
+                        },
+                        "includeByName": {},
+                        "indexByName": {},
+                        "renameByName": {}
+                    }
+                }
+            ],
             "transparent": true,
             "type": "table"
         },
         {
-            "columns": [],
-            "datasource": "${datasource}",
-            "editable": true,
-            "fontSize": "100%",
+            "datasource": {
+                "uid": "${datasource}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "custom": {
+                        "cellOptions": {
+                            "type": "auto"
+                        },
+                        "footer": {
+                            "reducers": []
+                        },
+                        "inspect": false
+                    },
+                    "decimals": 2,
+                    "displayName": "Pod",
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Time"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Time"
+                            },
+                            {
+                                "id": "custom.align"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "Value"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Pending Time"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "s"
+                            },
+                            {
+                                "id": "decimals",
+                                "value": 2
+                            },
+                            {
+                                "id": "custom.cellOptions",
+                                "value": {
+                                    "type": "color-background"
+                                }
+                            },
+                            {
+                                "id": "custom.align"
+                            },
+                            {
+                                "id": "thresholds",
+                                "value": {
+                                    "mode": "absolute",
+                                    "steps": [
+                                        {
+                                            "color": "rgba(50, 172, 45, 0.97)",
+                                            "value": 0
+                                        },
+                                        {
+                                            "color": "rgba(237, 129, 40, 0.89)",
+                                            "value": 300
+                                        },
+                                        {
+                                            "color": "rgba(245, 54, 54, 0.9)",
+                                            "value": 1800
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "name"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Job Name"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "short"
+                            },
+                            {
+                                "id": "decimals",
+                                "value": 2
+                            },
+                            {
+                                "id": "custom.align"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "type"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Job Type"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "short"
+                            },
+                            {
+                                "id": "decimals",
+                                "value": 2
+                            },
+                            {
+                                "id": "custom.align"
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "pod"
+                        },
+                        "properties": [
+                            {
+                                "id": "displayName",
+                                "value": "Pod Name"
+                            },
+                            {
+                                "id": "unit",
+                                "value": "short"
+                            },
+                            {
+                                "id": "decimals",
+                                "value": 2
+                            },
+                            {
+                                "id": "custom.align"
+                            }
+                        ]
+                    }
+                ]
+            },
             "gridPos": {
                 "h": 8,
                 "w": 20,
@@ -127,107 +322,16 @@
                 "y": 1
             },
             "id": 217,
-            "links": [],
-            "options": {},
-            "pageSize": null,
-            "scroll": true,
-            "showHeader": true,
-            "sort": {
-                "col": 9,
-                "desc": true
+            "options": {
+                "cellHeight": "sm",
+                "showHeader": true
             },
-            "styles": [
-                {
-                    "alias": "Time",
-                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                    "pattern": "Time",
-                    "type": "hidden"
-                },
-                {
-                    "alias": "Pending Time",
-                    "colorMode": "row",
-                    "colors": [
-                        "rgba(50, 172, 45, 0.97)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(245, 54, 54, 0.9)"
-                    ],
-                    "decimals": 2,
-                    "pattern": "Value",
-                    "thresholds": [
-                        "300",
-                        "1800"
-                    ],
-                    "type": "number",
-                    "unit": "s"
-                },
-                {
-                    "alias": "Job Name",
-                    "colorMode": null,
-                    "colors": [
-                        "rgba(245, 54, 54, 0.9)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(50, 172, 45, 0.97)"
-                    ],
-                    "dateFormat": "YYYY-MM-DD HH: mm:ss",
-                    "decimals": 2,
-                    "mappingType": 1,
-                    "pattern": "name",
-                    "thresholds": [],
-                    "type": "string",
-                    "unit": "short"
-                },
-                {
-                    "alias": "Job Type",
-                    "colorMode": null,
-                    "colors": [
-                        "rgba(245, 54, 54, 0.9)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(50, 172, 45, 0.97)"
-                    ],
-                    "dateFormat": "YYYY-MM-DD HH: mm:ss",
-                    "decimals": 2,
-                    "mappingType": 1,
-                    "pattern": "type",
-                    "thresholds": [],
-                    "type": "string",
-                    "unit": "short"
-                },
-                {
-                    "alias": "Pod Name",
-                    "colorMode": null,
-                    "colors": [
-                        "rgba(245, 54, 54, 0.9)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(50, 172, 45, 0.97)"
-                    ],
-                    "dateFormat": "YYYY-MM-DD HH: mm:ss",
-                    "decimals": 2,
-                    "mappingType": 1,
-                    "pattern": "pod",
-                    "thresholds": [],
-                    "type": "string",
-                    "unit": "short"
-                },
-                {
-                    "alias": "Pod",
-                    "colorMode": null,
-                    "colors": [
-                        "rgba(245, 54, 54, 0.9)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(50, 172, 45, 0.97)"
-                    ],
-                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                    "decimals": 2,
-                    "mappingType": 1,
-                    "pattern": "/.*/",
-                    "preserveFormat": false,
-                    "thresholds": [],
-                    "type": "hidden",
-                    "unit": "short"
-                }
-            ],
+            "pluginVersion": "12.3.1",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "(time() - prow:job:pending_since_time{org=\"$org\",repo=\"$repo\"}) > 20",
                     "format": "table",
                     "instant": true,
@@ -236,24 +340,81 @@
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "Pending Jobs",
-            "transform": "table",
+            "transformations": [
+                {
+                    "id": "merge",
+                    "options": {
+                        "reducers": []
+                    }
+                }
+            ],
             "transparent": true,
             "type": "table"
         },
         {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "${datasource}",
+            "datasource": {
+                "uid": "${datasource}"
+            },
             "description": "",
-            "editable": true,
-            "fill": 1,
-            "fillGradient": 0,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "showValues": false,
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "decimals": 0,
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 9,
                 "w": 11,
@@ -261,36 +422,26 @@
                 "y": 9
             },
             "id": 124,
-            "interval": "",
-            "legend": {
-                "alignAsTable": true,
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "rightSide": true,
-                "show": true,
-                "sideWidth": null,
-                "total": false,
-                "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null as zero",
             "options": {
-                "dataLinks": []
+                "dataLinks": [],
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
             },
-            "percentage": false,
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
+            "pluginVersion": "12.3.1",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "count by (name) (prow:job{phase=\"Running\",org=\"$org\",repo=\"$repo\"})",
                     "format": "time_series",
                     "intervalFactor": 1,
@@ -298,59 +449,73 @@
                     "refId": "A"
                 }
             ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "Running Jobs",
-            "tooltip": {
-                "shared": true,
-                "sort": 2,
-                "value_type": "individual"
-            },
             "transparent": true,
-            "type": "graph",
-            "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "decimals": 0,
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                },
-                {
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": false
-                }
-            ],
-            "yaxis": {
-                "align": false,
-                "alignLevel": null
-            }
+            "type": "timeseries"
         },
         {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "${datasource}",
+            "datasource": {
+                "uid": "${datasource}"
+            },
             "description": "",
-            "editable": true,
-            "fill": 1,
-            "fillGradient": 0,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "showValues": false,
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "decimals": 0,
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 9,
                 "w": 9,
@@ -358,35 +523,26 @@
                 "y": 9
             },
             "id": 6,
-            "interval": "",
-            "legend": {
-                "alignAsTable": true,
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "rightSide": true,
-                "show": true,
-                "total": false,
-                "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null as zero",
             "options": {
-                "dataLinks": []
+                "dataLinks": [],
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "table",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
             },
-            "percentage": false,
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
+            "pluginVersion": "12.3.1",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "count by (name) (prow:job:pending{org=\"$org\",repo=\"$repo\"})",
                     "format": "time_series",
                     "intervalFactor": 1,
@@ -394,69 +550,51 @@
                     "refId": "A"
                 }
             ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "Pending Jobs",
-            "tooltip": {
-                "shared": true,
-                "sort": 2,
-                "value_type": "individual"
-            },
             "transparent": true,
-            "type": "graph",
-            "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "decimals": 0,
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                },
-                {
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": false
-                }
-            ],
-            "yaxis": {
-                "align": false,
-                "alignLevel": null
-            }
+            "type": "timeseries"
         },
         {
-            "cacheTimeout": null,
-            "colorBackground": false,
-            "colorValue": true,
-            "colors": [
-                "#299c46",
-                "rgba(237, 129, 40, 0.89)",
-                "#d44a3a"
-            ],
-            "datasource": "${datasource}",
-            "decimals": 0,
+            "datasource": {
+                "uid": "${datasource}"
+            },
             "description": "",
-            "editable": true,
-            "format": "percent",
-            "gauge": {
-                "maxValue": 100,
-                "minValue": 0,
-                "show": true,
-                "thresholdLabels": false,
-                "thresholdMarkers": true
+            "fieldConfig": {
+                "defaults": {
+                    "decimals": 0,
+                    "mappings": [
+                        {
+                            "options": {
+                                "match": "null",
+                                "result": {
+                                    "text": "N/A"
+                                }
+                            },
+                            "type": "special"
+                        }
+                    ],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "#299c46",
+                                "value": 0
+                            },
+                            {
+                                "color": "rgba(237, 129, 40, 0.89)",
+                                "value": 75
+                            },
+                            {
+                                "color": "#d44a3a",
+                                "value": 90
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
             },
             "gridPos": {
                 "h": 6,
@@ -465,46 +603,30 @@
                 "y": 18
             },
             "id": 158,
-            "interval": null,
-            "links": [],
-            "mappingType": 1,
-            "mappingTypes": [
-                {
-                    "name": "value to text",
-                    "value": 1
-                },
-                {
-                    "name": "range to text",
-                    "value": 2
-                }
-            ],
             "maxDataPoints": 100,
-            "nullPointMode": "connected",
-            "nullText": null,
-            "options": {},
-            "pluginVersion": "6.3.3",
-            "postfix": "",
-            "postfixFontSize": "50%",
-            "prefix": "",
-            "prefixFontSize": "50%",
-            "rangeMaps": [
-                {
-                    "from": "null",
-                    "text": "N/A",
-                    "to": "null"
-                }
-            ],
-            "sparkline": {
-                "fillColor": "rgba(31, 118, 189, 0.18)",
-                "full": false,
-                "lineColor": "rgb(31, 120, 193)",
-                "show": false,
-                "ymax": null,
-                "ymin": null
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
             },
-            "tableColumn": "",
+            "pluginVersion": "12.3.1",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "100 * (sum (prow:job:resource_requests_memory_bytes{org=\"$org\",repo=\"$repo\"}) / sum (prow:node:memory_capacity_bytes))",
                     "format": "time_series",
                     "intervalFactor": 1,
@@ -512,43 +634,51 @@
                     "refId": "A"
                 }
             ],
-            "thresholds": "75,90",
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "Memory Requested",
             "transparent": true,
-            "type": "singlestat",
-            "valueFontSize": "100%",
-            "valueMaps": [
-                {
-                    "op": "=",
-                    "text": "N/A",
-                    "value": "null"
-                }
-            ],
-            "valueName": "current"
+            "type": "stat"
         },
         {
-            "cacheTimeout": null,
-            "colorBackground": false,
-            "colorValue": true,
-            "colors": [
-                "#299c46",
-                "rgba(237, 129, 40, 0.89)",
-                "#d44a3a"
-            ],
-            "datasource": "${datasource}",
-            "decimals": 0,
+            "datasource": {
+                "uid": "${datasource}"
+            },
             "description": "",
-            "editable": true,
-            "format": "percent",
-            "gauge": {
-                "maxValue": 100,
-                "minValue": 0,
-                "show": true,
-                "thresholdLabels": false,
-                "thresholdMarkers": true
+            "fieldConfig": {
+                "defaults": {
+                    "decimals": 0,
+                    "mappings": [
+                        {
+                            "options": {
+                                "match": "null",
+                                "result": {
+                                    "text": "N/A"
+                                }
+                            },
+                            "type": "special"
+                        }
+                    ],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "#299c46",
+                                "value": 0
+                            },
+                            {
+                                "color": "rgba(237, 129, 40, 0.89)",
+                                "value": 75
+                            },
+                            {
+                                "color": "#d44a3a",
+                                "value": 90
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
             },
             "gridPos": {
                 "h": 6,
@@ -557,46 +687,30 @@
                 "y": 18
             },
             "id": 304,
-            "interval": null,
-            "links": [],
-            "mappingType": 1,
-            "mappingTypes": [
-                {
-                    "name": "value to text",
-                    "value": 1
-                },
-                {
-                    "name": "range to text",
-                    "value": 2
-                }
-            ],
             "maxDataPoints": 100,
-            "nullPointMode": "connected",
-            "nullText": null,
-            "options": {},
-            "pluginVersion": "6.3.3",
-            "postfix": "",
-            "postfixFontSize": "50%",
-            "prefix": "",
-            "prefixFontSize": "50%",
-            "rangeMaps": [
-                {
-                    "from": "null",
-                    "text": "N/A",
-                    "to": "null"
-                }
-            ],
-            "sparkline": {
-                "fillColor": "rgba(31, 118, 189, 0.18)",
-                "full": false,
-                "lineColor": "rgb(31, 120, 193)",
-                "show": false,
-                "ymax": null,
-                "ymin": null
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
             },
-            "tableColumn": "",
+            "pluginVersion": "12.3.1",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "100 * (sum (prow:job:memory_working_set_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\"}) / sum (prow:node:memory_capacity_bytes))",
                     "format": "time_series",
                     "intervalFactor": 1,
@@ -604,35 +718,118 @@
                     "refId": "A"
                 }
             ],
-            "thresholds": "75,90",
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "Memory Used",
             "transparent": true,
-            "type": "singlestat",
-            "valueFontSize": "100%",
-            "valueMaps": [
-                {
-                    "op": "=",
-                    "text": "N/A",
-                    "value": "null"
-                }
-            ],
-            "valueName": "current"
+            "type": "stat"
         },
         {
-            "aliasColors": {
-                "limit": "red"
+            "datasource": {
+                "uid": "${datasource}"
             },
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "${datasource}",
             "description": "",
-            "editable": true,
-            "fill": 1,
-            "fillGradient": 0,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "showValues": false,
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "bytes"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "limit"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "red",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "limit"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "red",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "limit"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "red",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
             "gridPos": {
                 "h": 12,
                 "w": 10,
@@ -640,35 +837,26 @@
                 "y": 18
             },
             "id": 299,
-            "interval": "",
-            "legend": {
-                "alignAsTable": false,
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "rightSide": false,
-                "show": true,
-                "total": false,
-                "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null as zero",
             "options": {
-                "dataLinks": []
+                "dataLinks": [],
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
             },
-            "percentage": false,
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
+            "pluginVersion": "12.3.1",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "sum by (name) (prow:job:memory_working_set_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\"})",
                     "format": "time_series",
                     "intervalFactor": 1,
@@ -676,61 +864,118 @@
                     "refId": "A"
                 }
             ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "Memory Usage per Job",
-            "tooltip": {
-                "shared": true,
-                "sort": 2,
-                "value_type": "individual"
-            },
             "transparent": true,
-            "type": "graph",
-            "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "decimals": null,
-                    "format": "bytes",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                },
-                {
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": false
-                }
-            ],
-            "yaxis": {
-                "align": false,
-                "alignLevel": null
-            }
+            "type": "timeseries"
         },
         {
-            "aliasColors": {
-                "limit": "red"
+            "datasource": {
+                "uid": "${datasource}"
             },
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "${datasource}",
             "description": "",
-            "editable": true,
-            "fill": 1,
-            "fillGradient": 0,
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "palette-classic"
+                    },
+                    "custom": {
+                        "axisBorderShow": false,
+                        "axisCenteredZero": false,
+                        "axisColorMode": "text",
+                        "axisLabel": "",
+                        "axisPlacement": "auto",
+                        "barAlignment": 0,
+                        "barWidthFactor": 0.6,
+                        "drawStyle": "line",
+                        "fillOpacity": 10,
+                        "gradientMode": "none",
+                        "hideFrom": {
+                            "legend": false,
+                            "tooltip": false,
+                            "viz": false
+                        },
+                        "insertNulls": false,
+                        "lineInterpolation": "linear",
+                        "lineWidth": 1,
+                        "pointSize": 5,
+                        "scaleDistribution": {
+                            "type": "linear"
+                        },
+                        "showPoints": "never",
+                        "showValues": false,
+                        "spanNulls": false,
+                        "stacking": {
+                            "group": "A",
+                            "mode": "none"
+                        },
+                        "thresholdsStyle": {
+                            "mode": "off"
+                        }
+                    },
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": 0
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "short"
+                },
+                "overrides": [
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "limit"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "red",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "limit"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "red",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "matcher": {
+                            "id": "byName",
+                            "options": "limit"
+                        },
+                        "properties": [
+                            {
+                                "id": "color",
+                                "value": {
+                                    "fixedColor": "red",
+                                    "mode": "fixed"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
             "gridPos": {
                 "h": 12,
                 "w": 10,
@@ -738,35 +983,26 @@
                 "y": 18
             },
             "id": 136,
-            "interval": "",
-            "legend": {
-                "alignAsTable": false,
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "rightSide": false,
-                "show": true,
-                "total": false,
-                "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null as zero",
             "options": {
-                "dataLinks": []
+                "dataLinks": [],
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                },
+                "tooltip": {
+                    "hideZeros": false,
+                    "mode": "multi",
+                    "sort": "desc"
+                }
             },
-            "percentage": false,
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "stack": false,
-            "steppedLine": false,
+            "pluginVersion": "12.3.1",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "sum by (name) (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\"})",
                     "format": "time_series",
                     "interval": "",
@@ -775,69 +1011,18 @@
                     "refId": "A"
                 }
             ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "CPU Usage per Job",
-            "tooltip": {
-                "shared": true,
-                "sort": 2,
-                "value_type": "individual"
-            },
             "transparent": true,
-            "type": "graph",
-            "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-            },
-            "yaxes": [
-                {
-                    "decimals": null,
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": true
-                },
-                {
-                    "format": "short",
-                    "label": null,
-                    "logBase": 1,
-                    "max": null,
-                    "min": null,
-                    "show": false
-                }
-            ],
-            "yaxis": {
-                "align": false,
-                "alignLevel": null
-            }
+            "type": "timeseries"
         },
         {
-            "cacheTimeout": null,
-            "colorBackground": false,
-            "colorValue": true,
-            "colors": [
-                "#299c46",
-                "rgba(237, 129, 40, 0.89)",
-                "#d44a3a"
-            ],
-            "datasource": "${datasource}",
-            "decimals": 0,
+            "datasource": {
+                "uid": "${datasource}"
+            },
             "description": "",
-            "editable": true,
-            "format": "percent",
-            "gauge": {
-                "maxValue": 100,
-                "minValue": 0,
-                "show": true,
-                "thresholdLabels": false,
-                "thresholdMarkers": true
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
             },
             "gridPos": {
                 "h": 6,
@@ -846,46 +1031,14 @@
                 "y": 24
             },
             "id": 300,
-            "interval": null,
-            "links": [],
-            "mappingType": 1,
-            "mappingTypes": [
-                {
-                    "name": "value to text",
-                    "value": 1
-                },
-                {
-                    "name": "range to text",
-                    "value": 2
-                }
-            ],
             "maxDataPoints": 100,
-            "nullPointMode": "connected",
-            "nullText": null,
             "options": {},
             "pluginVersion": "6.3.3",
-            "postfix": "",
-            "postfixFontSize": "50%",
-            "prefix": "",
-            "prefixFontSize": "50%",
-            "rangeMaps": [
-                {
-                    "from": "null",
-                    "text": "N/A",
-                    "to": "null"
-                }
-            ],
-            "sparkline": {
-                "fillColor": "rgba(31, 118, 189, 0.18)",
-                "full": false,
-                "lineColor": "rgb(31, 120, 193)",
-                "show": false,
-                "ymax": null,
-                "ymin": null
-            },
-            "tableColumn": "",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "100 * (sum (prow:job:resource_requests_cpu_cores{org=\"$org\",repo=\"$repo\"}) / sum (prow:node:cpu_capacity_cores))",
                     "format": "time_series",
                     "intervalFactor": 1,
@@ -893,43 +1046,18 @@
                     "refId": "A"
                 }
             ],
-            "thresholds": "75,90",
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "CPU Requested",
             "transparent": true,
-            "type": "singlestat",
-            "valueFontSize": "100%",
-            "valueMaps": [
-                {
-                    "op": "=",
-                    "text": "N/A",
-                    "value": "null"
-                }
-            ],
-            "valueName": "current"
+            "type": "stat"
         },
         {
-            "cacheTimeout": null,
-            "colorBackground": false,
-            "colorValue": true,
-            "colors": [
-                "#299c46",
-                "rgba(237, 129, 40, 0.89)",
-                "#d44a3a"
-            ],
-            "datasource": "${datasource}",
-            "decimals": 0,
+            "datasource": {
+                "uid": "${datasource}"
+            },
             "description": "",
-            "editable": true,
-            "format": "percent",
-            "gauge": {
-                "maxValue": 100,
-                "minValue": 0,
-                "show": true,
-                "thresholdLabels": false,
-                "thresholdMarkers": true
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
             },
             "gridPos": {
                 "h": 6,
@@ -938,46 +1066,14 @@
                 "y": 24
             },
             "id": 305,
-            "interval": null,
-            "links": [],
-            "mappingType": 1,
-            "mappingTypes": [
-                {
-                    "name": "value to text",
-                    "value": 1
-                },
-                {
-                    "name": "range to text",
-                    "value": 2
-                }
-            ],
             "maxDataPoints": 100,
-            "nullPointMode": "connected",
-            "nullText": null,
             "options": {},
             "pluginVersion": "6.3.3",
-            "postfix": "",
-            "postfixFontSize": "50%",
-            "prefix": "",
-            "prefixFontSize": "50%",
-            "rangeMaps": [
-                {
-                    "from": "null",
-                    "text": "N/A",
-                    "to": "null"
-                }
-            ],
-            "sparkline": {
-                "fillColor": "rgba(31, 118, 189, 0.18)",
-                "full": false,
-                "lineColor": "rgb(31, 120, 193)",
-                "show": false,
-                "ymax": null,
-                "ymin": null
-            },
-            "tableColumn": "",
             "targets": [
                 {
+                    "datasource": {
+                        "uid": "${datasource}"
+                    },
                     "expr": "100 * (sum (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\"}) / sum (prow:node:cpu_capacity_cores))",
                     "format": "time_series",
                     "intervalFactor": 1,
@@ -985,22 +1081,9 @@
                     "refId": "A"
                 }
             ],
-            "thresholds": "75,90",
-            "timeFrom": null,
-            "timeRegions": [],
-            "timeShift": null,
             "title": "CPU Used",
             "transparent": true,
-            "type": "singlestat",
-            "valueFontSize": "100%",
-            "valueMaps": [
-                {
-                    "op": "=",
-                    "text": "N/A",
-                    "value": "null"
-                }
-            ],
-            "valueName": "current"
+            "type": "stat"
         },
         {
             "collapsed": true,
@@ -1013,17 +1096,14 @@
             "id": 11,
             "panels": [
                 {
-                    "aliasColors": {
-                        "limit": "red"
+                    "datasource": {
+                        "uid": "${datasource}"
                     },
-                    "bars": false,
-                    "dashLength": 10,
-                    "dashes": false,
-                    "datasource": "${datasource}",
                     "description": "",
-                    "editable": true,
-                    "fill": 1,
-                    "fillGradient": 0,
+                    "fieldConfig": {
+                        "defaults": {},
+                        "overrides": []
+                    },
                     "gridPos": {
                         "h": 9,
                         "w": 12,
@@ -1031,36 +1111,14 @@
                         "y": 31
                     },
                     "id": 128,
-                    "interval": "",
-                    "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
-                        "current": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 1,
-                    "links": [],
-                    "nullPointMode": "null as zero",
                     "options": {
                         "dataLinks": []
                     },
-                    "percentage": false,
-                    "pointradius": 2,
-                    "points": false,
-                    "renderer": "flot",
-                    "scopedVars": {},
-                    "seriesOverrides": [],
-                    "spaceLength": 10,
-                    "stack": false,
-                    "steppedLine": false,
                     "targets": [
                         {
+                            "datasource": {
+                                "uid": "${datasource}"
+                            },
                             "expr": "sum (prow:job:memory_working_set_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "intervalFactor": 1,
@@ -1068,6 +1126,9 @@
                             "refId": "A"
                         },
                         {
+                            "datasource": {
+                                "uid": "${datasource}"
+                            },
                             "expr": "sum (prow:job: resource_requests_memory_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "intervalFactor": 1,
@@ -1075,6 +1136,9 @@
                             "refId": "B"
                         },
                         {
+                            "datasource": {
+                                "uid": "${datasource}"
+                            },
                             "expr": "sum (prow:job:resource_limits_memory_bytes{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "intervalFactor": 1,
@@ -1082,61 +1146,19 @@
                             "refId": "C"
                         }
                     ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeRegions": [],
-                    "timeShift": null,
                     "title": "Memory",
-                    "tooltip": {
-                        "shared": true,
-                        "sort": 2,
-                        "value_type": "individual"
-                    },
                     "transparent": true,
-                    "type": "graph",
-                    "xaxis": {
-                        "buckets": null,
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "decimals": null,
-                            "format": "bytes",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": false
-                        }
-                    ],
-                    "yaxis": {
-                        "align": false,
-                        "alignLevel": null
-                    }
+                    "type": "timeseries"
                 },
                 {
-                    "aliasColors": {
-                        "limit": "red"
+                    "datasource": {
+                        "uid": "${datasource}"
                     },
-                    "bars": false,
-                    "dashLength": 10,
-                    "dashes": false,
-                    "datasource": "${datasource}",
                     "description": "",
-                    "editable": true,
-                    "fill": 1,
-                    "fillGradient": 0,
+                    "fieldConfig": {
+                        "defaults": {},
+                        "overrides": []
+                    },
                     "gridPos": {
                         "h": 9,
                         "w": 12,
@@ -1144,36 +1166,14 @@
                         "y": 31
                     },
                     "id": 180,
-                    "interval": "",
-                    "legend": {
-                        "alignAsTable": false,
-                        "avg": false,
-                        "current": false,
-                        "max": false,
-                        "min": false,
-                        "rightSide": false,
-                        "show": true,
-                        "total": false,
-                        "values": false
-                    },
-                    "lines": true,
-                    "linewidth": 1,
-                    "links": [],
-                    "nullPointMode": "null as zero",
                     "options": {
                         "dataLinks": []
                     },
-                    "percentage": false,
-                    "pointradius": 2,
-                    "points": false,
-                    "renderer": "flot",
-                    "scopedVars": {},
-                    "seriesOverrides": [],
-                    "spaceLength": 10,
-                    "stack": false,
-                    "steppedLine": false,
                     "targets": [
                         {
+                            "datasource": {
+                                "uid": "${datasource}"
+                            },
                             "expr": "sum (prow:job:cpu_usage_seconds_rate:1m{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "interval": "",
@@ -1182,6 +1182,9 @@
                             "refId": "A"
                         },
                         {
+                            "datasource": {
+                                "uid": "${datasource}"
+                            },
                             "expr": "sum (prow:job:resource_requests_cpu_cores{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "interval": "",
@@ -1190,6 +1193,9 @@
                             "refId": "B"
                         },
                         {
+                            "datasource": {
+                                "uid": "${datasource}"
+                            },
                             "expr": "sum (prow:job:resource_limits_cpu_cores{phase=\"Running\",org=\"$org\",repo=\"$repo\",name=~\"$job\"})",
                             "format": "time_series",
                             "interval": "",
@@ -1198,59 +1204,19 @@
                             "refId": "C"
                         }
                     ],
-                    "thresholds": [],
-                    "timeFrom": null,
-                    "timeRegions": [],
-                    "timeShift": null,
                     "title": "CPU",
-                    "tooltip": {
-                        "shared": true,
-                        "sort": 2,
-                        "value_type": "individual"
-                    },
                     "transparent": true,
-                    "type": "graph",
-                    "xaxis": {
-                        "buckets": null,
-                        "mode": "time",
-                        "name": null,
-                        "show": true,
-                        "values": []
-                    },
-                    "yaxes": [
-                        {
-                            "decimals": null,
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": true
-                        },
-                        {
-                            "format": "short",
-                            "label": null,
-                            "logBase": 1,
-                            "max": null,
-                            "min": null,
-                            "show": false
-                        }
-                    ],
-                    "yaxis": {
-                        "align": false,
-                        "alignLevel": null
-                    }
+                    "type": "timeseries"
                 }
             ],
             "repeat": "job",
-            "scopedVars": {},
             "title": "Resource Usage for $job",
             "type": "row"
         }
     ],
+    "preload": false,
     "refresh": "30s",
-    "schemaVersion": 19,
-    "style": "dark",
+    "schemaVersion": 42,
     "tags": [
         "prow"
     ],
@@ -1258,84 +1224,56 @@
         "list": [
             {
                 "current": {},
-                "hide": 0,
                 "includeAll": false,
                 "label": "Data Source",
-                "multi": false,
                 "name": "datasource",
                 "options": [],
                 "query": "prometheus",
-                "queryValue": "",
                 "refresh": 1,
                 "regex": "",
-                "skipUrlSync": false,
                 "type": "datasource"
             },
             {
-                "allValue": null,
                 "current": {},
                 "datasource": "${datasource}",
                 "definition": "label_values(prow:job, org)",
-                "hide": 0,
                 "includeAll": false,
                 "label": "Organisation",
-                "multi": false,
                 "name": "org",
                 "options": [],
                 "query": "label_values(prow:job, org)",
                 "refresh": 2,
                 "regex": "",
-                "skipUrlSync": false,
                 "sort": 1,
-                "tagValuesQuery": "",
-                "tags": [],
-                "tagsQuery": "",
-                "type": "query",
-                "useTags": false
+                "type": "query"
             },
             {
-                "allValue": null,
                 "current": {},
                 "datasource": "${datasource}",
                 "definition": "label_values(prow:job{org=\"$org\"}, repo)",
-                "hide": 0,
                 "includeAll": false,
                 "label": "Repository",
-                "multi": false,
                 "name": "repo",
                 "options": [],
                 "query": "label_values(prow:job{org=\"$org\"}, repo)",
                 "refresh": 2,
                 "regex": "",
-                "skipUrlSync": false,
                 "sort": 1,
-                "tagValuesQuery": "",
-                "tags": [],
-                "tagsQuery": "",
-                "type": "query",
-                "useTags": false
+                "type": "query"
             },
             {
-                "allValue": null,
                 "current": {},
                 "datasource": "${datasource}",
                 "definition": "label_values(prow:job{org=\"$org\",repo=\"$repo\"}, name)",
                 "hide": 2,
                 "includeAll": true,
-                "label": null,
-                "multi": false,
                 "name": "job",
                 "options": [],
                 "query": "label_values(prow:job{org=\"$org\",repo=\"$repo\"}, name)",
                 "refresh": 2,
                 "regex": "",
-                "skipUrlSync": false,
                 "sort": 1,
-                "tagValuesQuery": "",
-                "tags": [],
-                "tagsQuery": "",
-                "type": "query",
-                "useTags": false
+                "type": "query"
             }
         ]
     },
@@ -1343,33 +1281,9 @@
         "from": "now-3h",
         "to": "now"
     },
-    "timepicker": {
-        "refresh_intervals": [
-            "5s",
-            "10s",
-            "30s",
-            "1m",
-            "5m",
-            "15m",
-            "30m",
-            "1h",
-            "2h",
-            "1d"
-        ],
-        "time_options": [
-            "5m",
-            "15m",
-            "1h",
-            "6h",
-            "12h",
-            "24h",
-            "2d",
-            "7d",
-            "30d"
-        ]
-    },
+    "timepicker": {},
     "timezone": "",
     "title": "Jobs",
     "uid": "53g2x7OZz",
-    "version": 1
+    "version": 5
 }

@@ -18,7 +18,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "id": 30,
+    "id": 4,
     "links": [],
     "panels": [
         {
@@ -1262,10 +1262,7 @@
     "templating": {
         "list": [
             {
-                "current": {
-                    "text": "Prometheus",
-                    "value": "prometheus"
-                },
+                "current": {},
                 "includeAll": false,
                 "label": "Data Source",
                 "name": "datasource",
@@ -1311,8 +1308,8 @@
             },
             {
                 "current": {
-                    "text": "ci-kubernetes-build-fast",
-                    "value": "ci-kubernetes-build-fast"
+                    "text": "ci-kubernetes-unit",
+                    "value": "ci-kubernetes-unit"
                 },
                 "datasource": "${datasource}",
                 "definition": "label_values(prow:job{org=\"$org\",repo=\"$repo\"}, name)",
@@ -1352,5 +1349,5 @@
     "timezone": "",
     "title": "Builds",
     "uid": "96Q8oOOZk",
-    "version": 1
+    "version": 3
 }
