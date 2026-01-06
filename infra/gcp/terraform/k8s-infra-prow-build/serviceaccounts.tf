@@ -30,7 +30,8 @@ locals {
       project_roles     = ["roles/secretmanager.secretAccessor"],
       cluster_namespace = "kubernetes-external-secrets"
       additional_workload_identity_principals = [
-        "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.eks_cluster.name}/*"
+        "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.eks_cluster.name}/*",
+        "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.aks_cluster.name}/*"
       ]
     }
   }
