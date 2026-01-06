@@ -402,7 +402,7 @@ cluster-api.sigs:
 cluster-api-aws.sigs:
   type: CNAME
   value: kubernetes-sigs-cluster-api-provider-aws.netlify.app.
-# https://github.com/kubernetes-sigs/cluster-api-provider-cloudstack/ (@rohityadavcloud @davidjumani)
+# https://github.com/kubernetes-sigs/cluster-api-provider-cloudstack/ (@davidjumani @vishesh92 @weizhouapache @yadvr)
 cluster-api-cloudstack.sigs:
 - type: CNAME
   value: kubernetes-sigs-cluster-api-cloudstack.netlify.app.
