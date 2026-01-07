@@ -361,11 +361,6 @@ _acme-challenge.k8s-testgrid:
 _acme-challenge.testgrid:
   type: CNAME
   value: 3163ff75-f72a-4b9e-b1ff-3c1930137e82.3.authorize.certificatemanager.goog.
-# Running on GKE (@chases2)
-testgrid-data:
-  - type: A
-    values:
-    - 34.98.86.92
 # Verify that @ixdy owns testgrid.k8s.io, necessary to set up custom domain in GAE
 7ujw4gp3z2cq.testgrid:
   type: CNAME

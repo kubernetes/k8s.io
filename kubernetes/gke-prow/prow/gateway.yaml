@@ -99,5 +99,5 @@ spec:
   - testgrid-api.prow.k8s.io
   rules:
   - backendRefs:
-    - name: testgrid-proxy
+    - name: testgrid-api
       port: 80
