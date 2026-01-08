@@ -22,4 +22,11 @@ resource "google_vmwareengine_network_peering" "gvce_peering" {
   vmware_engine_network               = "projects/broadcom-451918/locations/global/vmwareEngineNetworks/k8s-gcp-gcve-network"
   export_custom_routes_with_public_ip = true
   import_custom_routes_with_public_ip = true
+  lifecycle {
+    ignore_changes = [
+      # https://github.com/hashicorp/terraform-provider-google/issues/17817
+      export_custom_routes_with_public_ip,
+      import_custom_routes_with_public_ip,
+    ]
+  }
 }

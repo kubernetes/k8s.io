@@ -37,6 +37,7 @@ module "prow_build" {
   identity_ids  = [azurerm_user_assigned_identity.aks_identity.id]
 
   msi_auth_for_monitoring_enabled = true
+  tags                            = var.common_tags
 
   kubelet_identity = {
     client_id                 = azurerm_user_assigned_identity.aks_kubelet_identity.client_id
@@ -84,14 +85,15 @@ module "prow_build" {
       vm_size             = "Standard_D8ads_v6"
       enable_auto_scaling = true
       kubelet_disk_type   = "OS"
-      min_count           = 3
+      min_count           = 1
       max_count           = 100
       max_pods            = 110
       os_disk_type        = "Ephemeral"
       os_disk_size_gb     = 100
       os_sku              = "Ubuntu"
-      vnet_subnet_id      = module.prow_network.subnets.prow_build_aks.resource_id
-
+      vnet_subnet = {
+        id = module.prow_network.subnets.prow_build_aks.resource_id
+      }
       upgrade_settings = {
         max_surge                     = "33%"
         drain_timeout_in_minutes      = 90
@@ -103,14 +105,15 @@ module "prow_build" {
       vm_size             = "Standard_D8pds_v6"
       enable_auto_scaling = true
       kubelet_disk_type   = "OS"
-      min_count           = 3
+      min_count           = 1
       max_count           = 100
       max_pods            = 110
       os_disk_type        = "Ephemeral"
       os_disk_size_gb     = 100
       os_sku              = "Ubuntu"
-      vnet_subnet_id      = module.prow_network.subnets.prow_build_aks.resource_id
-
+      vnet_subnet = {
+        id = module.prow_network.subnets.prow_build_aks.resource_id
+      }
       upgrade_settings = {
         max_surge                     = "33%"
         drain_timeout_in_minutes      = 90
@@ -120,14 +123,4 @@ module "prow_build" {
   }
 
   depends_on = [module.prow_network]
-}
-
-# Prevent resource group deletion
-resource "null_resource" "prow_nodepool_rg_tag" {
-
-  provisioner "local-exec" {
-    command = "az group update --resource-group ${module.prow_build.node_resource_group} --tags DO-NOT-DELETE=true"
-  }
-
-  depends_on = [module.prow_build]
 }

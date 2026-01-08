@@ -22,24 +22,28 @@ spec:
               # pod order matters
               - name: clonerefs
               - (name): "initupload"
-                # prow passes the json path directly, uncomment this once the feature is disabled in prow
-                # env:
-                #   - name: GOOGLE_APPLICATION_CREDENTIALS
-                #     value: /secrets/gcs/service-account.json
+                env:
+                  - name: GOOGLE_APPLICATION_CREDENTIALS
+                    value: /etc/google/adc.json
                 volumeMounts:
                   - mountPath: /var/run/secrets/google-iam-token/serviceaccount
                     name: google-iam-token
                     readOnly: true
+                  - mountPath: /etc/google
+                    name: google-adc
+                    readOnly: true
             containers:
               - name: test
               - (name): sidecar
-                # prow passes the json path directly, uncomment this once the feature is disabled in prow
-                # env:
-                #   - name: GOOGLE_APPLICATION_CREDENTIALS
-                #     value: /secrets/gcs/service-account.json
+                env:
+                  - name: GOOGLE_APPLICATION_CREDENTIALS
+                    value: /etc/google/adc.json
                 volumeMounts:
                   - mountPath: /var/run/secrets/google-iam-token/serviceaccount
                     name: google-iam-token
+                    readOnly: true
+                  - mountPath: /etc/google
+                    name: google-adc
                     readOnly: true
             volumes:
               - name: google-iam-token
@@ -50,3 +54,26 @@ spec:
                         audience: sts.googleapis.com
                         expirationSeconds: 86400
                         path: token
+              - name: google-adc
+                configMap:
+                  name: google-adc
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: google-adc
+data:
+  adc.json: |
+    {
+      "universe_domain": "googleapis.com",
+      "type": "external_account",
+      "audience": "//iam.googleapis.com/projects/773781448124/locations/global/workloadIdentityPools/prow-aks/providers/oidc",
+      "subject_token_type": "urn:ietf:params:oauth:token-type:jwt",
+      "token_url": "https://sts.googleapis.com/v1/token",
+      "credential_source": {
+        "file": "/var/run/secrets/google-iam-token/serviceaccount/token",
+        "format": {
+          "type": "text"
+        }
+      }
+    }
