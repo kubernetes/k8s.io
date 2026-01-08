@@ -84,9 +84,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - ahg@google.com
       - michalwozniak@google.com
       - yuki.iwai.tz@gmail.com
+      - gabesaba@google.com
 
   - email-id: k8s-infra-staging-descheduler@kubernetes.io
     name: k8s-infra-staging-descheduler
@@ -155,11 +155,10 @@ groups:
     managers:
       - michalwozniak@google.com
       - yuki.iwai.tz@gmail.com
+      - gabesaba@google.com
     members:
-      - ahg@google.com
-      - kerthcet@gmail.com
-      - traian_schiau@epam.com
-      - wangqingcan1990@gmail.com
+      - pbundyra@google.com
+      - mikhail.bobrovsky@gmail.com
       - noreply+testgrid@google.com
 
   - email-id: k8s-infra-staging-cluster-capacity@kubernetes.io
