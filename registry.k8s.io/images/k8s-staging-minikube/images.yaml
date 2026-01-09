@@ -1,3 +1,6 @@
 - name: kubernetes-bootcamp
   dmap:
     "sha256:57f19c6a0b6a78f180f0ed65b7d548602839f2a5379f1febf3bd7055e729f629": ["v1", "v2", "v11"]
+- name: gvisor
+  dmap:
+    "sha256:2cc0438e89691ed5eab3fce6b68fce6982e5de189418ebfc97a0932cda9bc080": ["v0.0.3"]
