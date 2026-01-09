@@ -207,6 +207,7 @@ kind: Secret
 metadata:
   name: aks-prow-build
   labels:
+    name: aks-prow-build
     argocd.argoproj.io/secret-type: cluster
     clusterType: prow
     environment: prod
@@ -223,7 +224,7 @@ stringData:
         "env": {
           "AAD_ENVIRONMENT_NAME": "AzurePublicCloud",
           "AZURE_CLIENT_ID": "92ce800b-0477-44c1-ac44-aa53fb973993",
-          "AZURE_TENANT_ID": "d1aa7522-0959-442e-80ee-8c4f7fb4c184"
+          "AZURE_TENANT_ID": "d1aa7522-0959-442e-80ee-8c4f7fb4c184",
           "AZURE_FEDERATED_TOKEN_FILE": "/var/run/secrets/azure-token/serviceaccount/token",
           "AZURE_AUTHORITY_HOST": "https://login.microsoftonline.com/",
           "AAD_LOGIN_METHOD": "workloadidentity"

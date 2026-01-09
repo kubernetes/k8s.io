@@ -121,6 +121,11 @@ module "prow_bucket" {
       member = "principalSet://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/ibm-clusters/attribute.namespace/test-pods"
     },
     {
+      // AKS build clusters, pods in the test-pods namespace only
+      role   = "roles/storage.objectAdmin"
+      member = "principalSet://iam.googleapis.com/projects/773781448124/locations/global/workloadIdentityPools/prow-aks/attribute.namespace/test-pods"
+    },
+    {
       role   = "roles/storage.objectViewer"
       member = "allUsers"
     },

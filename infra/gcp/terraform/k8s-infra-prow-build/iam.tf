@@ -34,6 +34,8 @@ module "iam" {
       "principal://iam.googleapis.com/projects/${module.project.project_number}/locations/global/workloadIdentityPools/${module.project.project_id}.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
       "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
+      "principal://iam.googleapis.com/${google_iam_workload_identity_pool.eks_cluster.name}/subject/ns/external-secrets/sa/external-secrets",
+      "principal://iam.googleapis.com/${google_iam_workload_identity_pool.aks_cluster.name}/subject/ns/external-secrets/sa/external-secrets",
     ]
   }
 }
@@ -55,7 +57,10 @@ resource "google_iam_workload_identity_pool_provider" "eks_cluster" {
   workload_identity_pool_id          = google_iam_workload_identity_pool.eks_cluster.workload_identity_pool_id
   workload_identity_pool_provider_id = "oidc"
   attribute_mapping = {
-    "google.subject" = "assertion.sub"
+    "google.subject"                 = "\"ns/\" + assertion['kubernetes.io']['namespace'] + \"/sa/\" + assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.namespace"            = "assertion['kubernetes.io']['namespace']"
+    "attribute.service_account_name" = "assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.pod"                  = "assertion['kubernetes.io']['pod']['name']"
   }
   oidc {
     # From EKS cluster created in https://github.com/kubernetes/k8s.io/tree/main/infra/aws/terraform/prow-build-cluster
@@ -71,7 +76,10 @@ resource "google_iam_workload_identity_pool_provider" "eks_kops" {
   workload_identity_pool_id          = google_iam_workload_identity_pool.eks_cluster.workload_identity_pool_id
   workload_identity_pool_provider_id = "kops"
   attribute_mapping = {
-    "google.subject" = "assertion.sub"
+    "google.subject"                 = "\"ns/\" + assertion['kubernetes.io']['namespace'] + \"/sa/\" + assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.namespace"            = "assertion['kubernetes.io']['namespace']"
+    "attribute.service_account_name" = "assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.pod"                  = "assertion['kubernetes.io']['pod']['name']"
   }
   oidc {
     # From EKS cluster created in https://github.com/kubernetes/k8s.io/tree/main/infra/aws/terraform/kops-infra-ci
@@ -97,7 +105,10 @@ resource "google_iam_workload_identity_pool_provider" "aks_cluster" {
   workload_identity_pool_id          = google_iam_workload_identity_pool.aks_cluster.workload_identity_pool_id
   workload_identity_pool_provider_id = "oidc"
   attribute_mapping = {
-    "google.subject" = "assertion.sub"
+    "google.subject"                 = "\"ns/\" + assertion['kubernetes.io']['namespace'] + \"/sa/\" + assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.namespace"            = "assertion['kubernetes.io']['namespace']"
+    "attribute.service_account_name" = "assertion['kubernetes.io']['serviceaccount']['name']"
+    "attribute.pod"                  = "assertion['kubernetes.io']['pod']['name']"
   }
   oidc {
     # From AKS cluster created in https://github.com/kubernetes/k8s.io/tree/main/infra/azure/terraform/k8s-infra-prow-build

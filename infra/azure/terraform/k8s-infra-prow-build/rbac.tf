@@ -14,12 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-resource "azurerm_role_assignment" "admin" {
-  role_definition_name = "Azure Kubernetes Service RBAC Cluster Admin"
-  scope                = module.prow_build.aks_id
-  principal_id         = data.azurerm_client_config.current.object_id # Me
-}
-
 # Control Plane
 
 resource "azurerm_role_assignment" "control_plane_mi" {
@@ -75,7 +69,7 @@ resource "azurerm_federated_identity_credential" "aks_admin_prow" {
 }
 
 resource "azurerm_role_assignment" "aks_admin" {
-  role_definition_name = "Azure Arc Kubernetes Cluster Admin"
+  role_definition_name = "Azure Kubernetes Service RBAC Cluster Admin"
   scope                = azurerm_resource_group.rg.id
-  principal_id         = azurerm_user_assigned_identity.aks_kubelet_identity.principal_id
+  principal_id         = azurerm_user_assigned_identity.aks_admin.principal_id
 }

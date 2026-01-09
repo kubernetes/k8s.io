@@ -17,7 +17,8 @@ limitations under the License.
 resource "azurerm_log_analytics_workspace_table" "this" {
   for_each = toset(local.log_analytics_tables)
 
-  name         = each.value
-  workspace_id = module.prow_build.azurerm_log_analytics_workspace_id
-  plan         = "Basic"
+  name                    = each.value
+  workspace_id            = module.prow_build.azurerm_log_analytics_workspace_id
+  plan                    = "Basic"
+  total_retention_in_days = 30
 }

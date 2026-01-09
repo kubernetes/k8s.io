@@ -9,6 +9,13 @@ spec:
         selector:
           matchLabels:
             cloud: ibm
+    - clusters:
+        selector:
+          matchExpressions:
+            - key: name
+              operator: In
+              values:
+                - aks-prow-build
   template:
     metadata:
       name: "kyverno-{{ .name }}"
@@ -20,7 +27,7 @@ spec:
       sources:
         - chart: kyverno
           repoURL: "https://kyverno.github.io/kyverno"
-          targetRevision: 3.5.1
+          targetRevision: 3.6.1
           helm:
             releaseName: kyverno
             valueFiles:
