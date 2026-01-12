@@ -1,1 +1,6 @@
-# No images yet
+- name: node-readiness-controller
+  dmap:
+    "sha256:b9a70b7f08d0bfce70d6c1472e5d4906a656629586c792a76fd06663e0014b0d": ["v0.1.0"]
+- name: node-readiness-reporter
+  dmap:
+    "sha256:87d79a67d167a3c44ed554cac5df1162f3a1a9b844cfa90114bf817c9da4f208": ["v0.1.0"]
