@@ -564,3 +564,31 @@ groups:
       - amulmek1@in.ibm.com
       - kishen.viswanathan@ibm.com
       - varsharani.Deshmane1@ibm.com
+
+  #
+  # k8s-infra-observability project groups
+  #
+  # Groups for managing the centralized observability infrastructure
+  # that aggregates metrics from all clusters.
+  #
+
+  # Owners of the k8s-infra-observability GCP project
+  - email-id: k8s-infra-observability-admins@kubernetes.io
+    name: k8s-infra-observability-admins
+    description: |-
+      ACL for observability infrastructure admins.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  # Viewers for k8s-infra-observability GCP project
+  - email-id: k8s-infra-observability-viewers@kubernetes.io
+    name: k8s-infra-observability-viewers
+    description: |-
+      Viewer access to observability infrastructure.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+      - elieser.pereiraa@gmail.com
