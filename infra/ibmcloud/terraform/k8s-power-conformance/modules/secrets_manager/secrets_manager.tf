@@ -34,8 +34,8 @@ resource "ibm_sm_iam_credentials_secret" "prow_secret" {
   access_groups = [var.pvs_access_group_id]
   labels        = ["rotate:true"]
 
-  //The time-to-live (TTL) or lease duration of generated secret 43200seconds = 12hrs
-  ttl = "43200"
+  //The time-to-live (TTL) or lease duration of generated secret 21600seconds = 6hrs
+  ttl = "21600"
 }
 
 resource "ibm_sm_iam_credentials_secret" "janitor_secret" {
