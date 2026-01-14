@@ -72,7 +72,7 @@ NOTE: please see k8s.io/k8s.io/configmap-nginx.yaml for `server` definitions
 
 ### Direct Redirects
 - https://rel.k8s.io/ → https://github.com/kubernetes/kubernetes/releases
-- https://rel.k8s.io/k8s-release-cal → https://calendar.google.com/calendar/embed?src=kipmnllvl17vl9m98jen6ujcrs%40group.calendar.google.com
+- https://rel.k8s.io/release-team-cal → https://calendar.google.com/calendar/embed?src=agst.us_b07popf7t4avmt4km7eq5tk5ao%40group.calendar.google.com
 - https://rel.k8s.io/k8s-sig-release-videos → https://youtube.com/playlist?list=PL69nYSiGNLP3QKkOsDsO6A0Y1rhgP84iZ&si=Mi095CYuJuz8LjN-
 
 ### Version-specific Redirects
