@@ -209,17 +209,13 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - cst.grzn@gmail.com # v1.35 Communications Lead
-      - chadmcrowell@gmail.com # v1.35 Communications Shadow
-      - aakanksha0407@gmail.com # v1.35 Communications Shadow
-      - swrao21@gmail.com # v1.35 Communications Shadow
-      - arujjwal73@gmail.com # v1.35 Communications Shadow
-      - drewhagendev@gmail.com # v1.35 Release Lead
-      - jenny.shu@solo.io # v1.35 Release Lead Shadow
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
-      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
-      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
-      - rytswd@gmail.com # v1.35 Release Lead Shadow
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
