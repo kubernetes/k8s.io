@@ -450,18 +450,13 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     members:
-      - agustina.barbetta@gmail.com # v1.35 Enhancements Shadow
-      - danieljoshuachan@gmail.com # v1.35 Enhancements Shadow
-      - drewhagendev@gmail.com # v1.35 Release Lead
-      - faeka6@gmail.com # v1.35 Enhancements Shadow
-      - j@mickey.dev # v1.35 Enhancements Shadow
-      - jenny.shu@solo.io # v1.35 Release Lead Shadow
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - j@mickey.dev # v1.36 Enhancements Lead
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
-      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
-      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
-      - rayandas91@gmail.com # v1.35 Enhancements Lead
-      - rytswd@gmail.com # v1.35 Release Lead Shadow
-      - subhasmitaswain232@gmail.com # v1.35 Enhancements Shadow
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
 
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
     name: k8s-infra-staging-zeitgeist
