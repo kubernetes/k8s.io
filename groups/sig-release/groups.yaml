@@ -256,20 +256,20 @@ groups:
       - saschagrunert@gmail.com
     members:
       - release-managers-private@kubernetes.io
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
       - ameukam@gmail.com
       - antheabjung@gmail.com
       - bentheelder@google.com
-      - cst.grzn@gmail.com # v1.35 Communications Lead
-      - drewhagendev@gmail.com # v1.35 Release Lead
+      - chadmcrowell@gmail.com # v1.36 Communications Lead
       - gmccloskey@google.com
       - jameswangel@gmail.com
-      - jenny.shu@solo.io # v1.35 Release Lead Shadow
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - joseph.r.sandoval@gmail.com
       - kat.cosgrove@gmail.com # Subproject owner
       - mudrinic.mare@gmail.com
-      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
-      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
-      - rytswd@gmail.com # v1.35 Release Lead Shadow
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
       - saugustus2@bloomberg.net
       - spiffxp@google.com
 
