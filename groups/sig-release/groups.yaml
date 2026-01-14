@@ -430,8 +430,9 @@ groups:
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
       - k8s-infra-release-viewers@kubernetes.io
-      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
-      - tico88612@gmail.com # v1.35 Release Signal Lead
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - prajyotparab19@gmail.com # v1.36 Release Signal Lead
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
 
   - email-id: release-team-enhancements@kubernetes.io
     name: release-team-enhancements
