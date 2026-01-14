@@ -69,17 +69,17 @@ groups:
     members:
       - k8s-infra-release-editors@kubernetes.io
       - k8s-infra-google-build-admins@kubernetes.io
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
       - ameukam@gmail.com
       - cicih@google.com
       - jameswangel@gmail.com
-      - drewhagendev@gmail.com # v1.35 Release Lead
-      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
-      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
-      - jenny.shu@solo.io # v1.35 Release Lead Shadow
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - joseph.r.sandoval@gmail.com
-      - pal.nabarun95@gmail.com
-      - rytswd@gmail.com # v1.35 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
+      - pal.nabarun95@gmail.com
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
 
   - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
     name: k8s-infra-staging-artifact-promoter
