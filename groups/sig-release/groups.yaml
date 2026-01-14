@@ -350,15 +350,10 @@ groups:
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
       - rytswd@gmail.com # v1.36 Release Lead
     members:
-      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
-      - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
-      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
-      - rayandas91@gmail.com # v1.36 Release Lead Shadow
-      - rytswd@gmail.com # v1.36 Release Lead
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
