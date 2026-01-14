@@ -376,37 +376,17 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
-      - drewhagendev@gmail.com # v1.35 Release Lead
+      - rytswd@gmail.com # v1.36 Release Lead
       - kat.cosgrove@gmail.com # Subproject owner
     members:
-      - aakanksha0407@gmail.com # v1.35 Communications Shadow
-      - admin@benjaminapetersen.me # v1.35 Release Signal Shadow
-      - agustina.barbetta@gmail.com # v1.35 Enhancements Shadow
-      - amim.knabben@gmail.com # v1.35 Release Signal Shadow
-      - anshuman.tripathi305@gmail.com # v1.35 Docs Shadow
-      - arujjwal73@gmail.com # v1.35 Communications Shadow
-      - chadmcrowell@gmail.com # v1.35 Communications Shadow
-      - cst.grzn@gmail.com # v1.35 Communications Lead
-      - danieljoshuachan@gmail.com # v1.35 Enhancements Shadow
-      - faeka6@gmail.com # v1.35 Enhancements Shadow
-      - gmail@yudocaa.in # v1.35 Docs Shadow
-      - j@mickey.dev # v1.35 Enhancements Shadow
-      - jenny.shu@solo.io # v1.35 Release Lead Shadow
-      - jimmykhangnguyen@gmail.com # v1.35 Docs Shadow
-      - k.130.email@gmail.com # v1.35 Release Signal Shadow
-      - lemon830921@gmail.com # v1.35 Release Signal Shadow
-      - muhammad.adil.ghaffar@est.tech # v1.35 Release Signal Shadow
-      - orlin@orlix.org # v1.35 Docs Shadow
-      - prajyotparab19@gmail.com # v1.35 Release Signal Shadow
-      - rajalakshmi.girish1@ibm.com # v1.35 Release Lead Shadow
-      - rawat.dipesh@gmail.com # v1.35 Release Lead Shadow
-      - rayandas91@gmail.com # v1.35 Enhancements Lead
-      - rytswd@gmail.com # v1.35 Release Lead Shadow
-      - subhasmitaswain232@gmail.com # v1.35 Enhancements Shadow
-      - swrao21@gmail.com # v1.35 Communications Shadow
-      - tico88612@gmail.com # v1.35 Release Signal Lead
-      - tusharmittalworkm@gmail.com # v1.35 Docs Shadow
-      - urvashichoubey0121@gmail.com # v1.35 Docs Lead
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - gmail@yudocaa.in # v1.36 Docs Lead
+      - j@mickey.dev # v1.36 Enhancements Lead
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - prajyotparab19@gmail.com # v1.36 Release Signal Lead
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
