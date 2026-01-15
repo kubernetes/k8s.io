@@ -108,6 +108,7 @@ groups:
       - k8s-infra-rbac-k8s-io-packages-prod@kubernetes.io
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
       - k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
+      - k8s-infra-rbac-observability@kubernetes.io
       - k8s-infra-rbac-perfdash@kubernetes.io
       - k8s-infra-rbac-prow@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io
@@ -564,3 +565,14 @@ groups:
       - amulmek1@in.ibm.com
       - kishen.viswanathan@ibm.com
       - varsharani.Deshmane1@ibm.com
+
+  - email-id: k8s-infra-rbac-observability@kubernetes.io
+    name: k8s-infra-rbac-observability
+    description: |-
+      Grants access to the `namespace-user` role in the `observability` namespace on the `utility` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+      - elieser.pereiraa@gmail.com
