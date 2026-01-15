@@ -108,6 +108,7 @@ groups:
       - k8s-infra-rbac-k8s-io-packages-prod@kubernetes.io
       - k8s-infra-rbac-k8s-io-prod@kubernetes.io
       - k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
+      - k8s-infra-rbac-observability@kubernetes.io
       - k8s-infra-rbac-perfdash@kubernetes.io
       - k8s-infra-rbac-prow@kubernetes.io
       - k8s-infra-rbac-publishing-bot@kubernetes.io
@@ -565,30 +566,13 @@ groups:
       - kishen.viswanathan@ibm.com
       - varsharani.Deshmane1@ibm.com
 
-  #
-  # k8s-infra-observability project groups
-  #
-  # Groups for managing the centralized observability infrastructure
-  # that aggregates metrics from all clusters.
-  #
-
-  # Owners of the k8s-infra-observability GCP project
-  - email-id: k8s-infra-observability-admins@kubernetes.io
-    name: k8s-infra-observability-admins
+  - email-id: k8s-infra-rbac-observability@kubernetes.io
+    name: k8s-infra-rbac-observability
     description: |-
-      ACL for observability infrastructure admins.
+      Grants access to the `namespace-user` role in the `observability` namespace on the `utility` cluster
     settings:
       ReconcileMembers: "true"
-    members:
-      - sig-k8s-infra-leads@kubernetes.io
-
-  # Viewers for k8s-infra-observability GCP project
-  - email-id: k8s-infra-observability-viewers@kubernetes.io
-    name: k8s-infra-observability-viewers
-    description: |-
-      Viewer access to observability infrastructure.
-    settings:
-      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
       - sig-k8s-infra-leads@kubernetes.io
       - elieser.pereiraa@gmail.com
