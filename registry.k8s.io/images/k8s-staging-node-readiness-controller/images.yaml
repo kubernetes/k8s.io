@@ -1,6 +1,8 @@
 - name: node-readiness-controller
   dmap:
+    "sha256:0dcce342f2c2a132185fe85ceff86f9e2ae796d305f0ccc6a5970bb1d885d008": ["v0.1.1"]
     "sha256:b9a70b7f08d0bfce70d6c1472e5d4906a656629586c792a76fd06663e0014b0d": ["v0.1.0"]
 - name: node-readiness-reporter
   dmap:
+    "sha256:c10a5db1d11fad94c40234d300678d52e92a36a03d47385ba0beb2c36235992c": ["v0.1.1"]
     "sha256:87d79a67d167a3c44ed554cac5df1162f3a1a9b844cfa90114bf817c9da4f208": ["v0.1.0"]
