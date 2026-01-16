@@ -32,8 +32,8 @@ resource "ibm_sm_iam_credentials_secret" "prow_secret" {
   access_groups = [var.vpc_build_cluster_access_group_id]
   labels        = ["rotate:true"]
 
-  //The time-to-live (TTL) or lease duration of generated secret 14400seconds = 4hrs
-  ttl = "14400"
+  //The time-to-live (TTL) or lease duration of generated secret 43200seconds = 12hrs
+  ttl = "43200"
 }
 resource "ibm_sm_iam_credentials_secret" "janitor_secret" {
   depends_on    = [ibm_sm_iam_credentials_configuration.sm_iam_credentials_configuration_instance]
