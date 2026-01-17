@@ -4,6 +4,7 @@
 - name: gvisor
   dmap:
     "sha256:2cc0438e89691ed5eab3fce6b68fce6982e5de189418ebfc97a0932cda9bc080": ["v0.0.3"]
+    "0f389d92114b6342bcdb971fc8e89e9d60683d49aa5e31b89d744ec420196fd9": ["v0.0.4"]
 - name: kube-registry-proxy
   dmap:
     "cfa73b9a4e08b996a6948dfd597b7b5734466a74d49776ccb332bc4db9e6dfa4": ["v0.0.10"]
