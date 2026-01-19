@@ -18,7 +18,7 @@ metadata:
   labels:
     app: aws-boskos-janitor
 spec:
-  replicas: 2 # 2 distributed janitor instances
+  replicas: 4 # 4 distributed janitor instances
   selector:
     matchLabels:
       app: aws-boskos-janitor
@@ -36,6 +36,7 @@ spec:
             - --boskos-url=http://boskos.test-pods.svc.cluster.local.
             - --resource-type=aws-account
             - --exclude-tags=Boskos=Ignore
+            - --sweep-count=2
           resources:
             requests:
               cpu: 500m
