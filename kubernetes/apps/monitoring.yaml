@@ -14,7 +14,7 @@ spec:
               operator: In
               values:
                 - gke-prow-build
-                - gke-utility
+                # - gke-utility
   template:
     metadata:
       name: 'monitoring-{{ .name }}'
@@ -28,7 +28,7 @@ spec:
       sources:
         - chart: kube-prometheus-stack
           repoURL: https://prometheus-community.github.io/helm-charts
-          targetRevision: 62.3.1
+          targetRevision: 80.10.0
           helm:
             releaseName: monitoring
             valueFiles:

@@ -32,7 +32,7 @@ jobs:
           kind create cluster
           helm repo add argo https://argoproj.github.io/argo-helm
           helm upgrade --install argocd argo/argo-cd --version 9.3.4 --create-namespace --namespace argocd-diff-preview \
-            --set config.params."kustomize\.buildOptions"="--load-restrictor LoadRestrictionsNone --enable-alpha-plugins"
+            --set configs.cm."kustomize\.buildOptions"="--load-restrictor LoadRestrictionsNone --enable-alpha-plugins"
           kubectl apply -n argocd-diff-preview -f pull-request/kubernetes/gke-utility/argocd/clusters.yaml || true # ignore errors from missing ES
           kubectl apply -n argocd-diff-preview -f pull-request/kubernetes/gke-utility/argocd/clusters-diff.yaml # ES based clusters
 

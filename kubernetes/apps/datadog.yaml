@@ -9,8 +9,10 @@ spec:
     - clusters:
         selector:
           matchExpressions:
-            - key: clusterType
-              operator: Exists
+            - key: cloud
+              operator: NotIn
+              values:
+                - ibm
   template:
     metadata:
       name: "datadog-{{ .name }}"
