@@ -7,6 +7,7 @@ datadog:
   logs:
     enabled: true
     containerCollectAll: true
+    autoMultiLineDetection: true
   prometheusScrape:
     enabled: true
     serviceEndpoints: true
@@ -24,6 +25,9 @@ datadog:
       uncompressedLayersSupport: true
     host:
       enabled: true
+  apm:
+    instrumentation:
+      skipKPITelemetry: true # https://github.com/DataDog/helm-charts/issues/1395
   operator:
     enabled: false
   kubernetesResourcesLabelsAsTags:

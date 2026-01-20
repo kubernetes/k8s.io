@@ -28,15 +28,26 @@ jobs:
 
       - name: Generate Diff
         run: |
+          # Kustomize and Helm don't work by default with argocd-diff, so we need to amend argocd a bit
+          kind create cluster
+          helm repo add argo https://argoproj.github.io/argo-helm
+          helm upgrade --install argocd argo/argo-cd --version 9.3.4 --create-namespace --namespace argocd-diff-preview \
+            --set config.params."kustomize\.buildOptions"="--load-restrictor LoadRestrictionsNone --enable-alpha-plugins"
+          kubectl apply -n argocd-diff-preview -f pull-request/kubernetes/gke-utility/argocd/clusters.yaml || true # ignore errors from missing ES
+          kubectl apply -n argocd-diff-preview -f pull-request/kubernetes/gke-utility/argocd/clusters-diff.yaml # ES based clusters
+
           docker run \
             --network=host \
+            -v ~/.kube:/root/.kube \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v $(pwd)/main:/base-branch \
             -v $(pwd)/pull-request:/target-branch \
             -v $(pwd)/output:/output \
             -e TARGET_BRANCH=refs/pull/${{ github.event.number }}/merge \
             -e REPO=${{ github.repository }} \
-            dagandersen/argocd-diff-preview:v0.1.19
+            dagandersen/argocd-diff-preview:v0.1.21 \
+            --argocd-namespace=argocd-diff-preview \
+            --create-cluster=false
 
       - name: Upload artifact
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
@@ -57,5 +68,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.K8S_INFRA_CI_BOT_PR_TOKEN }}
         run: |
-          gh pr comment ${{ github.event.number }} --repo ${{ github.repository }} --body-file output/diff.md --edit-last || \
-          gh pr comment ${{ github.event.number }} --repo ${{ github.repository }} --body-file output/diff.md
+          gh pr comment ${{ github.event.number }} --repo ${{ github.repository }} --body-file output/diff.md --edit-last --create-if-none
