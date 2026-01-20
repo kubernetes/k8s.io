@@ -1,0 +1,51 @@
+# This file is used by the argocd-diff github actions workflow, never add it kustomization.yaml
+# The IBM clusters are loaded via ExternalSecrets which the ephemeral argocd-diff-preview cluster
+# cannot access. Therefore we create the same clusters with server set to localhost:8080
+# and random username/password so it appears as a valid cluster and we can generate the appsets
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ibm-ppc64le
+  labels:
+    name: ibm-ppc64le
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: ibm
+type: Opaque
+stringData:
+  name: ibm-ppc64le
+  server: http://localhost:8080
+  config: |
+    {
+      "username": "foobar",
+      "password": "string",
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ibm-s390x
+  labels:
+    name: ibm-s390x
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: ibm
+type: Opaque
+stringData:
+  name: ibm-s390x
+  server: http://localhost:8080
+  config: |
+    {
+      "username": "foobar",
+      "password": "string",
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
