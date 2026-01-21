@@ -15,7 +15,7 @@ groups:
     owners:
       - chiachenk@google.com
       - mfahlandt@pixel-haufen.de
-      - ritazh@microsoft.com
+      - rita.z.zhang@gmail.com
       - terrytangyuan@gmail.com
 
   - email-id: wg-ai-conformance@kubernetes.io
@@ -32,7 +32,7 @@ groups:
     owners:
       - chiachenk@google.com
       - mfahlandt@pixel-haufen.de
-      - ritazh@microsoft.com
+      - rita.z.zhang@gmail.com
       - terrytangyuan@gmail.com
     members:
       - wg-ai-conformance-leads@kubernetes.io
