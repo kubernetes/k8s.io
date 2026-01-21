@@ -172,6 +172,7 @@
     "sha256:8d70890151aa5d096f331cb9da1b9cd5be0412b7363fe67b5c3befdcaa2a28d0": ["1.17.7"]
     "sha256:ae9f1d64e333f802753ab82d9cf65f0565ef2efbdbc94346f868d7771bdc2466": ["1.27.1"]
     "sha256:19d4ecf1e0731b9ea55aca9c070d520f68b96ed0defbcc0e4eefe97b3d663ca3": ["1.29.2"]
+    "sha256:9a43813a49b5bdc40fb89bddb823b3b89ac86ca69cbc7865bae43a582db37474": ["1.33.7"]
 - name: sample-device-plugin
   dmap:
     "sha256:e84f6ca27c51ddedf812637dd2bcf771ad69fdca1173e5690c372370d0f93c40": ["1.3"]
