@@ -78,6 +78,13 @@ resource "azurerm_container_registry_cache_rule" "calico_ctl" {
   target_repo           = "calico/ctl"
 }
 
+resource "azurerm_container_registry_cache_rule" "calico_goldmane" {
+  name                  = "calico-goldmane-cache"
+  container_registry_id = azurerm_container_registry.capzci_registry.id
+  source_repo           = "quay.io/calico/goldmane"
+  target_repo           = "calico/goldmane"
+}
+
 resource "azurerm_container_registry_cache_rule" "calico_kube_controllers" {
   name                  = "calico-kube-controllers-cache"
   container_registry_id = azurerm_container_registry.capzci_registry.id
@@ -118,6 +125,20 @@ resource "azurerm_container_registry_cache_rule" "calico_typha" {
   container_registry_id = azurerm_container_registry.capzci_registry.id
   source_repo           = "quay.io/calico/typha"
   target_repo           = "calico/typha"
+}
+
+resource "azurerm_container_registry_cache_rule" "calico_whisker" {
+  name                  = "calico-whisker-cache"
+  container_registry_id = azurerm_container_registry.capzci_registry.id
+  source_repo           = "quay.io/calico/whisker"
+  target_repo           = "calico/whisker"
+}
+
+resource "azurerm_container_registry_cache_rule" "calico_whisker_backend" {
+  name                  = "calico-whisker-backend-cache"
+  container_registry_id = azurerm_container_registry.capzci_registry.id
+  source_repo           = "quay.io/calico/whisker-backend"
+  target_repo           = "calico/whisker-backend"
 }
 
 resource "azurerm_container_registry_cache_rule" "tigera_operator" {
