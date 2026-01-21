@@ -147,6 +147,7 @@
 - name: pets/zookeeper-installer
   dmap:
     "sha256:8cc5701cf3d0882cb2b7cd85cf1cdabb63294e5495c2329b67727008c42e44ee": ["1.5"]
+    "sha256:93f1ff7469dfd1de4833ad0983fb5df995e4864c3d1580acbfb42d5e93b25536": ["1.7"]
 - name: redis
   dmap:
     "sha256:faf766493fd9cc93bee4bf64c85d452af2f7b9d5febee52a55bbebfaf46d45e2": ["5.0.5-alpine"]
