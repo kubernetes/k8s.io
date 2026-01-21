@@ -64,6 +64,9 @@
     "sha256:60bd75eb661054404b49f745694714b0c3298c698d8f08d21180189581e6a0f2": ["2.3"]
     "sha256:f245a63205ddf676928102669b6430b8d2b19ea1e89a44f0393bf27c64b19943": ["2.4"]
     "sha256:dfea63b61ff846270f5c678365423c0c47735825bb6bc96427e58d60dae3b9b4": ["2.5"]
+- name: glibc-dns-testing
+  dmap:
+    "sha256:5017306bb8d1d4c34b7678e69c26b6d6c44168bbe600829c4cae5534c7d0324a": ["2.0.0"]
 - name: glusterdynamic-provisioner
   dmap:
     "sha256:8bc20b52ce066dd4ea3d9eaac40c04ea8a77f47c33789676580cf4c7c9ea3c3d": ["v1.0"]
@@ -147,6 +150,7 @@
 - name: pets/zookeeper-installer
   dmap:
     "sha256:8cc5701cf3d0882cb2b7cd85cf1cdabb63294e5495c2329b67727008c42e44ee": ["1.5"]
+    "sha256:3d92dd3d6adf78f023023f801e2fd826c400ee5d13988417510c8e2d5488c0af": ["1.7.0"]
 - name: redis
   dmap:
     "sha256:faf766493fd9cc93bee4bf64c85d452af2f7b9d5febee52a55bbebfaf46d45e2": ["5.0.5-alpine"]
