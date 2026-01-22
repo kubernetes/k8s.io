@@ -22,9 +22,9 @@ readonly repo="gcr.io/k8s-staging-cloud-provider-gcp"
 readonly tag_filter="tags~^v\d+\.\d+\.\d+\$"
 # List of repos under https://console.cloud.google.com/gcr/images/k8s-staging-cloud-provider-gcp/GLOBAL
 readonly images=(
+    cloud-controller-manager
     gcp-compute-persistent-disk-csi-driver
     gcp-filestore-csi-driver
-    cloud-controller-manager
 )
 
 for image in "${images[@]}"; do
@@ -35,5 +35,5 @@ for image in "${images[@]}"; do
         --format="get(digest, tags)" \
         --sort-by="tags" \
         --filter="${tag_filter}" \
-        | sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": [ "\2" ]/'
-done
+        | sed -e 's/\([^ ]*\)\t\(.*\)/    "\1": ["\2"]/'
+done > images.yaml
