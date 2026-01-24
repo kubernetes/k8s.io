@@ -358,8 +358,8 @@ data:
           rewrite ^/$                               https://github.com/kubernetes/kubernetes/releases redirect;
           rewrite ^/release-team-cal                https://calendar.google.com/calendar/embed?src=agst.us_b07popf7t4avmt4km7eq5tk5ao%40group.calendar.google.com redirect;
           rewrite ^/k8s-sig-release-videos          https://youtube.com/playlist?list=PL69nYSiGNLP3QKkOsDsO6A0Y1rhgP84iZ&si=Mi095CYuJuz8LjN- redirect;
-          rewrite ^/v([0-9])([0-9]+)/?$   https://github.com/kubernetes/sig-release/tree/master/releases/release-$1.$2 redirect;
-          rewrite ^/v([0-9])([0-9]+)/([a-zA-Z]+)$   https://github.com/kubernetes/sig-release/tree/master/releases/release-$1.$2/links.md#$3 redirect;
+          rewrite ^/v([0-9])\.?([0-9]+)/?$   https://github.com/kubernetes/sig-release/tree/master/releases/release-$1.$2 redirect;
+          rewrite ^/v([0-9])\.?([0-9]+)/([a-zA-Z]+)$   https://github.com/kubernetes/sig-release/tree/master/releases/release-$1.$2/links.md#$3 redirect;
           rewrite ^/([^/]*)(/.*)?$                  https://github.com/kubernetes/kubernetes/tree/$1$2 redirect;
         }
       }
