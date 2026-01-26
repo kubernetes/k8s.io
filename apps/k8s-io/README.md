@@ -78,7 +78,10 @@ NOTE: please see k8s.io/k8s.io/configmap-nginx.yaml for `server` definitions
 ### Version-specific Redirects
 
 Example:
+- https://rel.k8s.io/vXYY
+- https://rel.k8s.io/vX.YY
 - https://rel.k8s.io/vXYY/releasemtg
+- https://rel.k8s.io/vX.YY/releasemtg
 - https://rel.k8s.io/vXYY/retro
 - https://rel.k8s.io/v1XYY/contacts (Note: Access is restricted through Google Authorization)
 
