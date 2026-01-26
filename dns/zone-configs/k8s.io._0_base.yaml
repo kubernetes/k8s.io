@@ -580,3 +580,8 @@ agentic-networking.sigs:
 dranet.sigs:
   type: CNAME
   value: kubernetes-sigs.github.io.
+# https://github.com/kubernetes-sigs/kindnet docs (@aojea)
+kindnet.sigs:
+  type: CNAME
+  value: kubernetes-sigs.github.io.
+
