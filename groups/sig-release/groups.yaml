@@ -350,10 +350,16 @@ groups:
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
       - rytswd@gmail.com # v1.36 Release Lead
     members:
+      - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - cst.grzn@gmail.com # v1.36 Release Signal Shadow
+      - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
+      - k.130.email@gmail.com # v1.36 Release Signal Shadow
+      - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
+      - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -375,13 +381,19 @@ groups:
       - kat.cosgrove@gmail.com # Subproject owner
     members:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - cst.grzn@gmail.com # v1.36 Release Signal Shadow
+      - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - k.130.email@gmail.com # v1.36 Release Signal Shadow
+      - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
       - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
