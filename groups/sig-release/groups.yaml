@@ -357,6 +357,8 @@ groups:
     members:
       - chadmcrowell@gmail.com # v1.36 Communications Lead
       - danieljoshuachan@gmail.com # v1.36 Communications Shadow
+      - diane.todea@gmail.com # v1.36 Docs Shadow
+      - emile.savard.21@gmail.com # v1.36 Docs Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - kirtigoyal328@gmail.com # v1.36 Communications Shadow
@@ -364,6 +366,8 @@ groups:
       - sophiagentle72@gmail.com # v1.36 Communications Shadow
       - swrao21@gmail.com # v1.36 Communications Shadow
       - umreutkarsh@gmail.com # v1.36 Communications Shadow
+      - singh1203.ss@gmail.com # v1.36 Docs Shadow
+      - tusharmittalworkm@gmail.com # v1.36 Docs Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -387,6 +391,8 @@ groups:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
       - danieljoshuachan@gmail.com # v1.36 Communications Shadow
+      - diane.todea@gmail.com # v1.36 Docs Shadow
+      - emile.savard.21@gmail.com # v1.36 Docs Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
@@ -397,6 +403,8 @@ groups:
       - sophiagentle72@gmail.com # v1.36 Communications Shadow
       - swrao21@gmail.com # v1.36 Communications Shadow
       - umreutkarsh@gmail.com # v1.36 Communications Shadow
+      - singh1203.ss@gmail.com # v1.36 Docs Shadow
+      - tusharmittalworkm@gmail.com # v1.36 Docs Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster

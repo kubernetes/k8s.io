@@ -20,4 +20,4 @@ spec:
         image: gcr.io/k8s-staging-boskos/reaper:v20260107-c2c6f43
         args:
         - --boskos-url=http://boskos.test-pods.svc.cluster.local.
-        - --resource-type=gce-project,gpu-project,scalability-project,scalability-scale-project,gcve-vsphere-project
+        - --resource-type=gce-project,gpu-project,scalability-project,scalability-scale-project,gcve-vsphere-project,mac-instances

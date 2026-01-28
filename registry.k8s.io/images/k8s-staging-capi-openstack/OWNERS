@@ -1,9 +1,27 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- EmilienM
-- jichenjc
+- emilienm
 - lentzi90
-- mdbooth
-- seanschneeweiss
+- mandre
+- stephenfin
+
+reviewers:
+- bnallapeta
+- smoshiur1237
+
+emeritus_approvers:
+- ncdc
+- chaosaffe
+- chrigl
+- dims
+- gyliu513
+- Lion-Wei
+- m1093782566
+- sbueringer
+- hidekazuna
+- chrischdi
 - tobiasgiese
+- seanschneeweiss
+- jichenjc
+- mdbooth
