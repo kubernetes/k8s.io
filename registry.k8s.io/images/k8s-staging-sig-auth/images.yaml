@@ -1,5 +1,0 @@
-- name: pod-security-webhook
-  dmap:
-    "sha256:818c11eaaf3863a9f1c9e8de9c310ac85b29cd89ebc54f832aa212bb52b5e7af": ["v1.22-alpha.0"]
-    "sha256:189012639ce8013d2e68705ffada4d446cb93de7649f20087201dad131461402": ["v1.23-beta.0"]
-    "sha256:f4e04e3deae59583dd25b8b6c00b85b98f7d334cd56fc641a5ecec15084afd79": ["v1.25.0"]
