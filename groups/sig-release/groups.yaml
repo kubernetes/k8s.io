@@ -363,11 +363,11 @@ groups:
       - j@mickey.dev # v1.36 Enhancements Lead
       - kirtigoyal328@gmail.com # v1.36 Communications Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
+      - singh1203.ss@gmail.com # v1.36 Docs Shadow
       - sophiagentle72@gmail.com # v1.36 Communications Shadow
       - swrao21@gmail.com # v1.36 Communications Shadow
-      - umreutkarsh@gmail.com # v1.36 Communications Shadow
-      - singh1203.ss@gmail.com # v1.36 Docs Shadow
       - tusharmittalworkm@gmail.com # v1.36 Docs Shadow
+      - umreutkarsh@gmail.com # v1.36 Communications Shadow
 
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
@@ -400,11 +400,11 @@ groups:
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
       - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - singh1203.ss@gmail.com # v1.36 Docs Shadow
       - sophiagentle72@gmail.com # v1.36 Communications Shadow
       - swrao21@gmail.com # v1.36 Communications Shadow
-      - umreutkarsh@gmail.com # v1.36 Communications Shadow
-      - singh1203.ss@gmail.com # v1.36 Docs Shadow
       - tusharmittalworkm@gmail.com # v1.36 Docs Shadow
+      - umreutkarsh@gmail.com # v1.36 Communications Shadow
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
