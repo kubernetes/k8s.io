@@ -32,8 +32,8 @@ groups:
       - mhausler@amazon.com
       - nathan.herz97@gmail.com
       - rita.z.zhang@gmail.com
-      - srajakum@amazon.com
       - tabitha.c.sable@gmail.com
+      - vinayakankugoyal@gmail.com
       - vyom.yadav@canonical.com
     members:
       # Distributors
@@ -85,8 +85,8 @@ groups:
       - mhausler@amazon.com
       - nathan.herz97@gmail.com
       - rita.z.zhang@gmail.com
-      - srajakum@amazon.com
       - tabitha.c.sable@gmail.com
+      - vinayakankugoyal@gmail.com
       - vyom.yadav@canonical.com
 
   - email-id: security-discuss-private@kubernetes.io
@@ -107,8 +107,8 @@ groups:
       - mhausler@amazon.com
       - nathan.herz97@gmail.com
       - rita.z.zhang@gmail.com
-      - srajakum@amazon.com
       - tabitha.c.sable@gmail.com
+      - vinayakankugoyal@gmail.com
       - vyom.yadav@canonical.com
 
   #
