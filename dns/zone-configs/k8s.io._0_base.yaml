@@ -573,6 +573,15 @@ node-readiness-controller.sigs:
   type: CNAME
   value: node-readiness-controller.netlify.app.
 # https://github.com/kubernetes-sigs/kube-agentic-networking docs (@LiorLieberman, @david-martin, @yuzisun)
-agentic-networking.sigs:
+kube-agentic-networking.sigs:
   type: CNAME
-  value: agentic-networking.netlify.app.
+  value: kube-agentic-networking.netlify.app.
+# https://github.com/kubernetes-sigs/dranet docs (@aojea)
+dranet.sigs:
+  type: CNAME
+  value: kubernetes-sigs.github.io.
+# https://github.com/kubernetes-sigs/kindnet docs (@aojea)
+kindnet.sigs:
+  type: CNAME
+  value: kubernetes-sigs.github.io.
+
