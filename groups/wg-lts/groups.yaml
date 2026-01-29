@@ -14,7 +14,7 @@ groups:
       ReconcileMembers: "true"
     owners:
       - jeremy.r.rickard@gmail.com
-      - mhausler@amazon.com
+      - hausler.m@gmail.com
       - liggitt@google.com
 
   - email-id: wg-lts@kubernetes.io
@@ -31,6 +31,6 @@ groups:
     owners:
       - jeremy.r.rickard@gmail.com
       - liggitt@google.com
-      - mhausler@amazon.com
+      - hausler.m@gmail.com
     members:
       - wg-lts-leads@kubernetes.io
