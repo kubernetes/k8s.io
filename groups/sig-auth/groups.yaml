@@ -29,7 +29,7 @@ groups:
       - rita.z.zhang@gmail.com
       - i@monis.app
       - anish.ramasekar@gmail.com
-      - mhausler@amazon.com
+      - hausler.m@gmail.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -48,7 +48,7 @@ groups:
       - rita.z.zhang@gmail.com
       - i@monis.app
       - anish.ramasekar@gmail.com
-      - mhausler@amazon.com
+      - hausler.m@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -74,7 +74,7 @@ groups:
       - rita.z.zhang@gmail.com
       - i@monis.app
       - anish.ramasekar@gmail.com
-      - mhausler@amazon.com
+      - hausler.m@gmail.com
 
   - email-id: k8s-infra-staging-csi-secrets-store@kubernetes.io
     name: k8s-infra-staging-csi-secrets-store
@@ -99,7 +99,7 @@ groups:
       - rita.z.zhang@gmail.com
       - i@monis.app
       - anish.ramasekar@gmail.com
-      - mhausler@amazon.com
+      - hausler.m@gmail.com
 
   - email-id: k8s-infra-staging-secrets-store-sync@kubernetes.io
     name: k8s-infra-staging-secrets-store-sync
