@@ -348,7 +348,7 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
-      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow & BRM Shadow
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
       - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
@@ -361,18 +361,21 @@ groups:
       - danieljoshuachan@gmail.com # v1.36 Communications Shadow
       - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
       - diane.todea@gmail.com # v1.36 Docs Shadow
+      - drewhagendev@gmail.com # v1.36 BRM Shadow
       - emile.savard.21@gmail.com # v1.36 Docs Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - k.130.email@gmail.com # v1.36 Release Signal Shadow
       - kirtigoyal328@gmail.com # v1.36 Communications Shadow
       - lauri.d.apple@gmail.com # v1.36 Enhancements Shadow
+      - michellengnx@gmail.com # v1.36 BRM Shadow
       - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
       - pmengelbert@gmail.com # v1.36 Enhancements Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
       - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
       - singh1203.ss@gmail.com # v1.36 Docs Shadow
       - sophiagentle72@gmail.com # v1.36 Communications Shadow
+      - sreeramvenkitesh@gmail.com # v1.36 BRM Lead
       - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
       - swrao21@gmail.com # v1.36 Communications Shadow
       - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
