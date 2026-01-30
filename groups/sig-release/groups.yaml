@@ -350,14 +350,20 @@ groups:
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
       - rytswd@gmail.com # v1.36 Release Lead
     members:
+      - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - cst.grzn@gmail.com # v1.36 Release Signal Shadow
+      - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
+      - k.130.email@gmail.com # v1.36 Release Signal Shadow
       - lauri.d.apple@gmail.com # v1.36 Enhancements Shadow
+      - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
       - pmengelbert@gmail.com # v1.36 Enhancements Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
       - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
       - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
+      - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
       - tico88612@gmail.com # v1.36 Enhancements Shadow
 
   - email-id: release-team-shadows@kubernetes.io
@@ -380,17 +386,23 @@ groups:
       - kat.cosgrove@gmail.com # Subproject owner
     members:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - cst.grzn@gmail.com # v1.36 Release Signal Shadow
+      - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - k.130.email@gmail.com # v1.36 Release Signal Shadow
       - lauri.d.apple@gmail.com # v1.36 Enhancements Shadow
+      - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
       - pmengelbert@gmail.com # v1.36 Enhancements Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
       - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
       - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
       - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
+      - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
       - tico88612@gmail.com # v1.36 Enhancements Shadow
 
   # RBAC groups:
