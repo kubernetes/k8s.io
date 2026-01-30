@@ -360,6 +360,8 @@ groups:
       - cst.grzn@gmail.com # v1.36 Release Signal Shadow
       - danieljoshuachan@gmail.com # v1.36 Communications Shadow
       - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
+      - diane.todea@gmail.com # v1.36 Docs Shadow
+      - emile.savard.21@gmail.com # v1.36 Docs Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - k.130.email@gmail.com # v1.36 Release Signal Shadow
@@ -369,13 +371,15 @@ groups:
       - pmengelbert@gmail.com # v1.36 Enhancements Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
       - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
+      - singh1203.ss@gmail.com # v1.36 Docs Shadow
       - sophiagentle72@gmail.com # v1.36 Communications Shadow
       - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
       - swrao21@gmail.com # v1.36 Communications Shadow
       - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
       - tico88612@gmail.com # v1.36 Enhancements Shadow
-
+      - tusharmittalworkm@gmail.com # v1.36 Docs Shadow
       - umreutkarsh@gmail.com # v1.36 Communications Shadow
+
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
     description: |-
@@ -401,6 +405,8 @@ groups:
       - cst.grzn@gmail.com # v1.36 Release Signal Shadow
       - danieljoshuachan@gmail.com # v1.36 Communications Shadow
       - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
+      - diane.todea@gmail.com # v1.36 Docs Shadow
+      - emile.savard.21@gmail.com # v1.36 Docs Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
@@ -413,13 +419,15 @@ groups:
       - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
       - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - singh1203.ss@gmail.com # v1.36 Docs Shadow
       - sophiagentle72@gmail.com # v1.36 Communications Shadow
       - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
       - swrao21@gmail.com # v1.36 Communications Shadow
       - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
       - tico88612@gmail.com # v1.36 Enhancements Shadow
-
+      - tusharmittalworkm@gmail.com # v1.36 Docs Shadow
       - umreutkarsh@gmail.com # v1.36 Communications Shadow
+
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
