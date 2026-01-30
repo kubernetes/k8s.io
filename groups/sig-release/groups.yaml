@@ -211,11 +211,16 @@ groups:
     members:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - danieljoshuachan@gmail.com # v1.36 Communications Shadow
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
+      - kirtigoyal328@gmail.com # v1.36 Communications Shadow
       - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
       - rytswd@gmail.com # v1.36 Release Lead
+      - sophiagentle72@gmail.com # v1.36 Communications Shadow
+      - swrao21@gmail.com # v1.36 Communications Shadow
+      - umreutkarsh@gmail.com # v1.36 Communications Shadow
 
   - email-id: release-managers-private@kubernetes.io
     name: release-managers-private
@@ -353,19 +358,24 @@ groups:
       - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
       - cst.grzn@gmail.com # v1.36 Release Signal Shadow
+      - danieljoshuachan@gmail.com # v1.36 Communications Shadow
       - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - k.130.email@gmail.com # v1.36 Release Signal Shadow
+      - kirtigoyal328@gmail.com # v1.36 Communications Shadow
       - lauri.d.apple@gmail.com # v1.36 Enhancements Shadow
       - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
       - pmengelbert@gmail.com # v1.36 Enhancements Shadow
       - prajyotparab19@gmail.com # v1.36 Release Signal Lead
       - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
+      - sophiagentle72@gmail.com # v1.36 Communications Shadow
       - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
+      - swrao21@gmail.com # v1.36 Communications Shadow
       - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
       - tico88612@gmail.com # v1.36 Enhancements Shadow
 
+      - umreutkarsh@gmail.com # v1.36 Communications Shadow
   - email-id: release-team-shadows@kubernetes.io
     name: release-team-shadows
     description: |-
@@ -389,11 +399,13 @@ groups:
       - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
       - cst.grzn@gmail.com # v1.36 Release Signal Shadow
+      - danieljoshuachan@gmail.com # v1.36 Communications Shadow
       - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
       - gmail@yudocaa.in # v1.36 Docs Lead
       - j@mickey.dev # v1.36 Enhancements Lead
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - k.130.email@gmail.com # v1.36 Release Signal Shadow
+      - kirtigoyal328@gmail.com # v1.36 Communications Shadow
       - lauri.d.apple@gmail.com # v1.36 Enhancements Shadow
       - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
       - pmengelbert@gmail.com # v1.36 Enhancements Shadow
@@ -401,10 +413,13 @@ groups:
       - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
       - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
       - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - sophiagentle72@gmail.com # v1.36 Communications Shadow
       - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
+      - swrao21@gmail.com # v1.36 Communications Shadow
       - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
       - tico88612@gmail.com # v1.36 Enhancements Shadow
 
+      - umreutkarsh@gmail.com # v1.36 Communications Shadow
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
