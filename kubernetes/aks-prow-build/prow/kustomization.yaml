@@ -4,3 +4,4 @@ namespace: test-pods
 
 resources:
   - kyverno.yaml
+  - serviceaccounts.yaml

@@ -36,6 +36,16 @@ patchesStrategicMerge:
                 value: /var/run/secrets/aws-iam-token/serviceaccount/token
               - name: AWS_REGION
                 value: us-east-2
+              - name: ARM_USE_AKS_WORKLOAD_IDENTITY
+                value: "true"
+              - name: ARM_SUBSCRIPTION_ID
+                value: 46678f10-4bbb-447e-98e8-d2829589f2d8
+              - name: AZURE_CLIENT_ID
+                value: 6fe87cee-6470-45d8-accc-57687193e504
+              - name: AZURE_FEDERATED_TOKEN_FILE
+                value: /var/run/secrets/azure-token/serviceaccount/token
+              - name: AZURE_TENANT_ID
+                value: d1aa7522-0959-442e-80ee-8c4f7fb4c184
               - name: ATLANTIS_CONFIG
                 value: /config/atlantis.yaml
               - name: ATLANTIS_GH_TOKEN
@@ -61,6 +71,9 @@ patchesStrategicMerge:
             - mountPath: /var/run/secrets/aws-iam-token/serviceaccount
               name: aws-iam-token
               readOnly: true
+            - name: azure-token
+              mountPath: /var/run/secrets/azure-token/serviceaccount
+              readOnly: true
           volumes:
           - name: config
             configMap:
@@ -73,3 +86,11 @@ patchesStrategicMerge:
                   audience: sts.amazonaws.com
                   expirationSeconds: 86400
                   path: token
+          - name: azure-token
+            projected:
+              defaultMode: 420
+              sources:
+                - serviceAccountToken:
+                    expirationSeconds: 86400
+                    path: token
+                    audience: api://AzureADTokenExchange
