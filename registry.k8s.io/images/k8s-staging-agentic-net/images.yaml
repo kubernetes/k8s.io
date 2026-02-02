@@ -1,1 +1,4 @@
-
+# The images are at https://console.cloud.google.com/artifacts/docker/k8s-staging-images/us-central1/agentic-net.
+- name: agentic-networking-controller
+  dmap:
+    "sha256:c95ff53ccc4a1cc560ba7b625619eed84ef3e015864e542c9c49b2ee7d3cd4f3": ["v20260130-5d7ea35"]
