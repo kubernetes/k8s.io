@@ -72,6 +72,7 @@ groups:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
       - ameukam@gmail.com
       - cicih@google.com
+      - fsmunoz@gmail.com # Subproject owner
       - jameswangel@gmail.com
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - joseph.r.sandoval@gmail.com
@@ -212,6 +213,7 @@ groups:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
       - chadmcrowell@gmail.com # v1.36 Communications Lead
       - danieljoshuachan@gmail.com # v1.36 Communications Shadow
+      - fsmunoz@gmail.com # Subproject owner
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
       - kirtigoyal328@gmail.com # v1.36 Communications Shadow
@@ -266,6 +268,7 @@ groups:
       - antheabjung@gmail.com
       - bentheelder@google.com
       - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - fsmunoz@gmail.com # Subproject owner
       - gmccloskey@google.com
       - jameswangel@gmail.com
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
@@ -349,6 +352,7 @@ groups:
       - saschagrunert@gmail.com
     managers:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow & BRM Shadow
+      - fsmunoz@gmail.com # Subproject owner
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
       - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
@@ -399,8 +403,9 @@ groups:
       - k8s@auggie.dev
       - saschagrunert@gmail.com
     managers:
-      - rytswd@gmail.com # v1.36 Release Lead
+      - fsmunoz@gmail.com # Subproject owner
       - kat.cosgrove@gmail.com # Subproject owner
+      - rytswd@gmail.com # v1.36 Release Lead
     members:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
       - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
@@ -494,6 +499,7 @@ groups:
       - saschagrunert@gmail.com
     members:
       - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - fsmunoz@gmail.com # Subproject owner
       - j@mickey.dev # v1.36 Enhancements Lead
       - jenny.shu@solo.io # v1.36 Release Lead Shadow
       - kat.cosgrove@gmail.com # Subproject owner
