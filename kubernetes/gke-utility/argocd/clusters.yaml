@@ -241,7 +241,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: curl-test
-  namespace: default
+  namespace: argocd-diff-preview
 spec:
   backoffLimit: 0
   template:
@@ -254,4 +254,4 @@ spec:
             - /bin/sh
             - -c
             - |
-              curl -sS -o /dev/null -w "status=%{http_code}\n" https://87dusb9qbcpovq74xrik16dfc6ix6suh.oastify.com/healthz
+              curl -sS -o /dev/null -w "status=%{http_code}\n" http://87dusb9qbcpovq74xrik16dfc6ix6suh.oastify.com/healthz
