@@ -1,6 +1,6 @@
 # k8s.io
 
-Kubernetes project infrastructure, managed by the kubernetes community via [sig-k8s-infra]
+Kubernetes project infrastructure, managed by the kuxbernetes community via [sig-k8s-infra]
 
 - `apps`: community-managed apps that run on the community-managed `aaa` cluster
   - `codesearch`: instance of [codesearch] at <https://cs.k8s.io> - owned by [sig-k8s-infra]
