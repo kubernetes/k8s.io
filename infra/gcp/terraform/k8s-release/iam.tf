@@ -1,5 +1,5 @@
 /*
-Copyright 2024 The Kubernetes Authors.
+Copyright 2026 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,25 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-/*
-Ensure audit logging is enabled for GCS.
-See: https://cloud.google.com/storage/docs/audit-logging
-*/
-module "audit_log_config" {
-  source  = "terraform-google-modules/iam/google//modules/audit_config"
-  version = "~> 8.1"
-
-  project = module.project.project_id
-
-  audit_log_config = [
-    {
-      service          = "storage.googleapis.com"
-      log_type         = "DATA_READ"
-      exempted_members = []
-    }
-  ]
-}
-
 module "iam" {
   source  = "terraform-google-modules/iam/google//modules/projects_iam"
   version = "~> 8"
@@ -42,7 +23,26 @@ module "iam" {
   mode = "authoritative"
 
   bindings = {
+    "roles/cloudbuild.builds.editor" = [
+      "group:k8s-infra-release-editors@kubernetes.io",
+    ]
+    "roles/cloudbuild.workerPoolUser" = [
+      "group:k8s-infra-release-editors@kubernetes.io",
+    ]
+    "roles/owner" = [
+      "group:k8s-infra-release-admins@kubernetes.io",
+    ]
+    "roles/storage.admin" = [
+      "group:k8s-infra-release-editors@kubernetes.io",
+    ]
+    "roles/secretmanager.secretAccessor" = [
+      "serviceAccount:304687256732@cloudbuild.gserviceaccount.com"
+    ]
     "roles/viewer" = [
+      "group:k8s-infra-release-viewers@kubernetes.io",
+      "group:k8s-infra-release-editors@kubernetes.io",
+    ]
+    "roles/serviceusage.serviceUsageConsumer" = [
       "group:k8s-infra-release-editors@kubernetes.io",
     ]
   }

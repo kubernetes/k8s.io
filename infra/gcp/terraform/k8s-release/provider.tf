@@ -1,5 +1,5 @@
 /*
-Copyright 2023 The Kubernetes Authors.
+Copyright 2026 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,14 +14,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-output "bucket_id" {
-  value = google_storage_bucket.k8s_releases.id
-}
+terraform {
+  required_version = "1.12.2"
 
-output "bucket_name" {
-  value = google_storage_bucket.k8s_releases.name
-}
+  backend "gcs" {
+    bucket = "k8s-infra-terraform"
+    prefix = "k8s-release"
+  }
 
-output "bucket_url" {
-  value = google_storage_bucket.k8s_releases.url
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 6.12.0"
+    }
+    google-beta = {
+      source  = "hashicorp/google-beta"
+      version = "~> 6.12.0"
+    }
+  }
 }

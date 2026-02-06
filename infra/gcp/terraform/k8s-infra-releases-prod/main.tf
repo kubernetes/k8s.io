@@ -14,35 +14,54 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-locals {
-  billing_account = "018801-93540E-22A20E"
-  org_id          = "758905017065"
+module "project" {
+  source  = "terraform-google-modules/project-factory/google"
+  version = "~> 18.2"
+
+  name            = "k8s-infra-releases-prod"
   project_id      = "k8s-infra-releases-prod"
-}
+  folder_id       = "455406320404" # Release Engineering
+  billing_account = "018801-93540E-22A20E"
+
+  # Sane project defaults
+  default_service_account     = "keep"
+  disable_services_on_destroy = false
+  create_project_sa           = false
+  random_project_id           = false
+  auto_create_network         = true
 
 
-resource "google_project" "project" {
-  name                = local.project_id
-  project_id          = local.project_id
-  org_id              = local.org_id
-  billing_account     = local.billing_account
-  auto_create_network = false
-}
-
-module "k8s_releases_prod" {
-  source      = "../modules/k8s-releases"
-  project_id  = google_project.project.project_id
-  bucket_name = "767373bbdcb8270361b96548387bf2a9ad0d48758c35"
+  activate_apis = [
+    "secretmanager.googleapis.com",
+    "storage.googleapis.com",
+    "storagetransfer.googleapis.com",
+  ]
 }
 
 resource "google_service_account" "fastly_reader" {
-  project     = google_project.project.project_id
+  project     = module.project.project_id
   account_id  = "fastly-reader"
   description = "Used by Fastly for read-only actions against the bucket"
 }
 
 resource "google_storage_hmac_key" "fastly_reader_key" {
-  project               = google_project.project.project_id
+  project               = module.project.project_id
   service_account_email = google_service_account.fastly_reader.email
 }
 
+
+module "release_bucket" {
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 12.3"
+
+  name       = "767373bbdcb8270361b96548387bf2a9ad0d48758c35"
+  project_id = module.project.project_id
+  location   = "us-central1"
+
+  iam_members = [
+    {
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:648026197307@cloudbuild.gserviceaccount.com"
+    }
+  ]
+}

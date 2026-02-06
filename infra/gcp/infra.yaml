@@ -283,7 +283,6 @@ infra:
   release:
     managed_by: infra/gcp/bash/ensure-release-projects.sh
     projects:
-      k8s-release:
       k8s-release-test-prod: # TODO: should this be prod or release?:
 
   releng:
@@ -356,7 +355,6 @@ infra:
       k8s-staging-kubeadm:
       k8s-staging-kubebuilder:
       k8s-staging-kueue:
-      k8s-staging-kubernetes:
       k8s-staging-kubetest2:
       k8s-staging-kustomize:
       k8s-staging-kwok:

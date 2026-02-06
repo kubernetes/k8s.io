@@ -1,5 +1,5 @@
 /*
-Copyright 2024 The Kubernetes Authors.
+Copyright 2026 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@ limitations under the License.
 
 module "project" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 18.2"
+  version = "~> 17.1"
 
-  name            = "k8s-staging-images"
-  project_id      = "k8s-staging-images"
-  folder_id       = "713040427754"
+  name            = "k8s-release"
+  project_id      = "k8s-release"
+  folder_id       = "455406320404" # Release Engineering
   billing_account = "018801-93540E-22A20E"
 
   # Sane project defaults
@@ -33,6 +33,9 @@ module "project" {
 
   activate_apis = [
     "artifactregistry.googleapis.com",
-    "cloudbuild.googleapis.com"
+    "cloudbuild.googleapis.com",
+    "cloudkms.googleapis.com",
+    "secretmanager.googleapis.com",
+    "iamcredentials.googleapis.com",
   ]
 }

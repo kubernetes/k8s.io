@@ -49,7 +49,6 @@ readonly RELEASE_STAGING_PROJECTS=(
   "$(k8s_infra_project staging k8s-staging-ci-images)"
   "$(k8s_infra_project staging k8s-staging-cip-test)"
   "$(k8s_infra_project staging k8s-staging-experimental)"
-  "$(k8s_infra_project staging k8s-staging-kubernetes)"
   "$(k8s_infra_project staging k8s-staging-releng)"
   "$(k8s_infra_project staging k8s-staging-releng-test)"
   "$(k8s_infra_project staging k8s-staging-publishing-bot)"
@@ -359,24 +358,6 @@ function ensure_release_manager_special_cases() {
     # projects
     color 6 "Empowering ${RELEASE_VIEWERS} as project viewers in ${project}"
     ensure_project_role_binding "${project}" "group:${RELEASE_VIEWERS}" "roles/viewer"
-
-    # For k8s-staging-kubernetes, grant the kubernetes-release-test (old
-    # staging) GCB service account admin GCR access to the new staging
-    # project for Kubernetes releases. This is required for VDF as we need
-    # to continue running stages/releases from the old project while
-    # publishing container images to new project.
-    # ref: https://github.com/kubernetes/release/pull/1230
-    if [[ "${project}" == "k8s-staging-kubernetes" ]]; then
-      color 6 "Empowering kubernetes-release-test GCB service account to admin GCR"
-      empower_svcacct_to_admin_gcr "648026197307@cloudbuild.gserviceaccount.com" "${project}"
-    fi
-
-    # Artifact Registry
-    #
-    # Enable Google Artifact Registry to allow Release Managers to prepare
-    # for GCR to Artifact Registry migration
-    # ref: https://github.com/kubernetes/k8s.io/issues/1343
-    ensure_services "${project}" artifactregistry.googleapis.com
 
     # Roles: https://cloud.google.com/artifact-registry/docs/access-control#roles
     #
