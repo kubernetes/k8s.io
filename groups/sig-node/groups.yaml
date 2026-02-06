@@ -156,6 +156,8 @@ groups:
       - klueska@gmail.com
       - patrick.ohly@intel.com
       - pkrishn@google.com
+      - fromani@redhat.com
+      - sig-node-leads@kubernetes.io
 
   - email-id: k8s-infra-staging-nrc@kubernetes.io
     name: k8s-infra-staging-nrc
