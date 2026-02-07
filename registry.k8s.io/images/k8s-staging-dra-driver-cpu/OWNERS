@@ -4,6 +4,9 @@ approvers:
 - johnbelamaric
 - klueska
 - pohly
+- ffromani
+- pravk03
+- sig-node-leads
 labels:
 - wg/device-management
 - sig/node
