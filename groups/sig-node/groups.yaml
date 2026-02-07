@@ -33,6 +33,20 @@ groups:
       - s.kanzhelev@gmail.com
       - pehunt@redhat.com
 
+  - email-id: sig-node-zoom-admins@kubernetes.io
+    name: sig-node-zoom-admins
+    description: |-
+      SIG Node zoom admins: leads, subprojects leads, and trusted volunteers who can manage the SIG's zoom account and Youtube recordings
+    owners:
+      - sig-node-leads@kubernetes.io
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NONE"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+
   - email-id: sig-node@kubernetes.io
     name: sig-node
     description: |-

@@ -176,6 +176,7 @@ restrictions:
       - "^sig-node@kubernetes.io$"
       - "^sig-node-ci@kubernetes.io$"
       - "^sig-node-leads@kubernetes.io$"
+      - "^sig-node-zoom-admins@kubernetes.io"
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-dra-driver-cpu@kubernetes.io$"
