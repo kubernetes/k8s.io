@@ -6,7 +6,7 @@ providers:
     enforce_order: false
     default_ttl: 3600
   gcp:
-    class: octodns.provider.googlecloud.GoogleCloudProvider
+    class: octodns_googlecloud.GoogleCloudProvider
     project: kubernetes-public
     #credentials_file: '/octodns/creds/gcp.json'
 
