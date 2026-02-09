@@ -53,9 +53,6 @@ spec:
             - name: flux-control-plane
               mountPath: "/var/lib/grafana/dashboards/kubernetes/flux-control-plane.json"
               subPath: flux-control-plane.json
-            - name: flux-logs
-              mountPath: "/var/lib/grafana/dashboards/kubernetes/flux-logs.json"
-              subPath: flux-logs.json
             - name: prow
               mountPath: "/var/lib/grafana/dashboards/kubernetes/prow-builds.json"
               subPath: builds.json
@@ -128,9 +125,6 @@ spec:
         - name: flux-control-plane
           configMap:
             name: flux-control-plane
-        - name: flux-logs
-          configMap:
-            name: flux-logs
         - name: prow
           configMap:
             name: prow-dashboards
