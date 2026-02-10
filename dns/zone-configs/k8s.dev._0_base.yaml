@@ -8,9 +8,22 @@ www:
   type: CNAME
   value: kubernetes-contributor.netlify.app.
 
-cdn.dl-sandbox:
-  type: TXT
-  value: "fastly-domain-delegation-fddelt714381-11-15-23"
+dl:
+  - type: A
+    values:
+      - 151.101.1.91
+      - 151.101.65.91
+      - 151.101.129.91
+      - 151.101.193.91
+  - type: AAAA
+    values:
+      - 2a04:4e42::347
+      - 2a04:4e42:200::347
+      - 2a04:4e42:400::347
+      - 2a04:4e42:600::347
+_acme-challenge.dl:
+  type: CNAME
+  value: zsmu1n0ec6lb2wtmt8.fastly-validations.com.
 
 # Prove that we own these github orgs. sig-contributor-experience
 _gh-kubernetes-e:
