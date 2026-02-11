@@ -1,0 +1,10 @@
+# GitHub Pages verification records for canary.k8s.io
+_gh-kubernetes-e:
+  type: TXT
+  value: 606e970852
+_gh-kubernetes-e.sigs:
+  type: TXT
+  value: f4675fe3ec
+_gh-kubernetes-e.git:
+  type: TXT
+  value: 7e64ad9046

@@ -8,3 +8,6 @@
 
 # kustomize charts
 kubernetes/*/*/charts/
+
+# Python bytecode cache
+__pycache__/

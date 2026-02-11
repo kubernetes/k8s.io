@@ -25,7 +25,6 @@ from concurrent.futures import ThreadPoolExecutor
 from logging import getLogger
 from sys import stdout
 import sys
-import re
 from dns.exception import Timeout
 from dns.resolver import NXDOMAIN, NoAnswer, NoNameservers, Resolver, query
 import socket
@@ -123,7 +122,7 @@ def verify_dns(queries):
     """
     dns_error = False
     for record, responses in sorted(queries.items(), key=lambda d: d[0]):
-        record_error = False    
+        record_error = False
 
         # Print out a log each record
         stdout.write(record.fqdn)
@@ -181,6 +180,105 @@ def verify_dns(queries):
             stdout.write(',False\n')
     return dns_error
 
+def validate_github_pages_cnames(manager, zones):
+    """
+    Validate that github.io CNAMEs have verification TXT records at their immediate parent.
+
+    Args:
+        manager: OctoDNS Manager instance
+        zones: List of zone names to validate
+
+    Returns:
+        True if errors found, False otherwise
+    """
+    errors_found = False
+    yaml_config = manager.providers['config']
+
+    for zone_name in zones:
+        zone = Zone(zone_name, manager.configured_sub_zones(zone_name))
+        yaml_config.populate(zone)
+
+        github_io_cnames = {}
+        verification_prefixes = set()
+
+        for record in zone.records:
+            if record._type == 'CNAME' and record.value.endswith('.github.io.'):
+                github_io_cnames[record.name] = record.value
+            if record._type == 'TXT' and record.name.startswith('_gh-kubernetes-e'):
+                parts = record.name.split('.', 1)
+                verification_prefixes.add(parts[1] if len(parts) == 2 else '')
+
+        for name, target in github_io_cnames.items():
+            parts = name.split('.')
+            parent = '.'.join(parts[1:]) if len(parts) > 1 else ''
+            if parent not in verification_prefixes:
+                log.error(
+                    '*** GitHub Pages CNAME %s points to %s but missing verification TXT record at _gh-kubernetes-e.%s in zone %s',
+                    name, target, parent if parent else '<apex>', zone_name
+                )
+                errors_found = True
+
+    return errors_found
+
+
+def validate_canary_verification_overrides(manager, zones):
+    """
+    Validate that production zones with _gh-kubernetes-e* TXT records have corresponding
+    canary zones with different verification token values.
+
+    Args:
+        manager: OctoDNS Manager instance
+        zones: List of zone names to validate
+
+    Returns:
+        True if errors found, False otherwise
+    """
+    errors_found = False
+    yaml_config = manager.providers['config']
+
+    for zone_name in zones:
+        if zone_name.startswith('canary.'):
+            continue  # only process production zones
+
+        canary_zone_name = 'canary.{}'.format(zone_name)
+        if canary_zone_name not in zones:
+            continue  # no canary zone configured
+
+        # Load production zone
+        prod_zone = Zone(zone_name, manager.configured_sub_zones(zone_name))
+        yaml_config.populate(prod_zone)
+
+        prod_verifications = {}  # name -> values
+        for record in prod_zone.records:
+            if record._type == 'TXT' and record.name.startswith('_gh-kubernetes-e'):
+                prod_verifications[record.name] = record_value_list(record)
+
+        if not prod_verifications:
+            continue
+
+        # Load canary zone
+        canary_zone = Zone(canary_zone_name, manager.configured_sub_zones(canary_zone_name))
+        yaml_config.populate(canary_zone)
+
+        canary_verifications = {}
+        for record in canary_zone.records:
+            if record._type == 'TXT' and record.name.startswith('_gh-kubernetes-e'):
+                canary_verifications[record.name] = record_value_list(record)
+
+        # Check each production verification has a canary counterpart
+        for name, prod_values in prod_verifications.items():
+            if name not in canary_verifications:
+                log.error('*** %s has %s but canary zone %s is missing it',
+                          zone_name, name, canary_zone_name)
+                errors_found = True
+            elif canary_verifications[name] == prod_values:
+                log.error('*** %s in %s has same value as %s - canary override missing',
+                          name, canary_zone_name, zone_name)
+                errors_found = True
+
+    return errors_found
+
+
 def main():
     """check-zone based on octodns config file and dns zone
     Will query all 4 DNS servers configured for the zone in GCP.
@@ -198,6 +296,13 @@ def main():
     manager = Manager(args.config_file)
     manager.validate_configs()
 
+    # GitHub enterprise verification checks
+    validation_error = False
+    validation_error |= validate_github_pages_cnames(manager, args.zone)
+    validation_error |= validate_canary_verification_overrides(manager, args.zone)
+    if validation_error:
+        sys.exit(1)
+
     if args.validate_config_only:
         exit()
 
@@ -211,7 +316,7 @@ def main():
         # Build a GCP provider in our project to read the nameservers from it
         gcp = manager.providers['gcp']
         project = gcp.gcloud_client.project
-        
+
         # Retrieve the DNS Servers directly from the GCP configuration
         dns_servers = gcp.gcloud_zones[zone_name].name_servers
 
@@ -219,7 +324,7 @@ def main():
         #dns_servers = ["NS-CLOUD-D1.GOOGLEDOMAINS.COM", "NS-CLOUD-D2.GOOGLEDOMAINS.COM", "NS-CLOUD-D3.GOOGLEDOMAINS.COM", "NS-CLOUD-D4.GOOGLEDOMAINS.COM"]
         print('Using GCP project {}'.format(project))
         print('name,type,ttl,{},consistent'.format(','.join(dns_servers)))
-        
+
         # Populate the zone with those records defined in our YAML config
         yaml_config.populate(zone)
 
