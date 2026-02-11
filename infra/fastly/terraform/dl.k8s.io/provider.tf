@@ -21,6 +21,7 @@ This file defines:
 */
 
 terraform {
+  required_version = "1.12.2"
   backend "gcs" {
     bucket = "k8s-infra-tf-fastly"
     prefix = "cdn.dl.k8s.io"
@@ -32,12 +33,12 @@ terraform {
       version = "~> 7.8.0"
     }
     fastly = {
-      source  = "fastly/fastly"
-      version = "~> 8.3.2"
+      source = "fastly/fastly"
     }
   }
 }
 
-# Configure required providers
-provider "fastly" {}
-provider "google" {}
+
+provider "fastly" {
+  api_key = data.google_secret_manager_secret_version_access.fastly_api_key.secret_data
+}

@@ -24,11 +24,8 @@ resource "fastly_service_vcl" "this" {
   }
 
   backend {
-    name             = "GCS"
-    auto_loadbalance = false
-
-    healthcheck = "GCS Health"
-
+    name              = "GCS"
+    auto_loadbalance  = false
     address           = "storage.googleapis.com"
     port              = 443
     use_ssl           = true
@@ -46,19 +43,6 @@ resource "fastly_service_vcl" "this" {
     connect_timeout       = 5000  # milliseconds
     between_bytes_timeout = 15000 # milliseconds
     error_threshold       = 5
-  }
-
-  healthcheck {
-    name = "GCS Health"
-
-    host           = "${var.bucket_name}.storage.googleapis.com"
-    method         = "GET"
-    path           = "/"
-    check_interval = 3000
-    timeout        = 2000
-    threshold      = 2
-    initial        = 2
-    window         = 4
   }
 
   logging_datadog {

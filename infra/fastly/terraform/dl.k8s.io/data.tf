@@ -28,3 +28,8 @@ data "google_secret_manager_secret_version_access" "gcs_reader_secret_key" {
   secret  = "fastly_reader_sa_secret_key"
   project = "k8s-infra-releases-prod"
 }
+
+data "google_secret_manager_secret_version_access" "fastly_api_key" {
+  secret  = "fastly-api-key"
+  project = "k8s-infra-prow"
+}

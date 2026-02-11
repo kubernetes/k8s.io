@@ -12,7 +12,19 @@ sub vcl_recv {
     set req.max_stale_while_revalidate = 0s;
   }
 
-#FASTLY recv
+  # Redirect /ci/* to the CI release dev bucket
+  # In the future, we'll serve this bucket via the CDN too
+  if (req.url.path ~ "^/ci/?(.*)$") {
+    set req.http.X-Redirect-URL = "https://storage.googleapis.com/k8s-release-dev/ci/" re.group.1;
+    error 750;
+  }
+
+  # Rewrite /vX.Y.Z* paths to /release/vX.Y.Z* for the origin
+  if (req.url.path ~ "^/v[0-9]+\.[0-9]+\.[0-9]+") {
+    set req.url = "/release" req.url;
+  }
+
+  #FASTLY recv
 
   # don't bother doing a cache lookup for a request type that isn't cacheable
   if (req.method != "HEAD" && req.method != "GET" && req.method != "FASTLYPURGE") {
@@ -36,12 +48,12 @@ sub vcl_fetch {
     set beresp.cacheable = false;
     set beresp.ttl = 0s;
     # else go to vcl_error to deliver a synthetic
-  error beresp.status;
+    error beresp.status;
   }
 
   if (beresp.http.Surrogate-Control !~ "(stale-while-revalidate|stale-if-error)") {
     set beresp.stale_if_error = 31536000s; # 1 year
-    set beresp.stale_while_revalidate = 60s; # 1 minute
+    set beresp.stale_while_revalidate = 3600s; # 1 hour
   }
 
   # Ensure HTML and JSON files are not cached at the edge
@@ -51,7 +63,7 @@ sub vcl_fetch {
     return (pass);
   }
 
-#FASTLY fetch
+  #FASTLY fetch
   if ((beresp.status == 500 || beresp.status == 503) && req.restarts < 1 && (req.method == "GET" || req.method == "HEAD")) {
     restart;
   }
@@ -64,42 +76,33 @@ sub vcl_fetch {
     set req.http.Fastly-Cachetype = "SETCOOKIE";
     return(pass);
   }
+  # Strip the Google Cache headers as they are useless for private buckets
+  unset beresp.http.Cache-Control;
+  unset beresp.http.Expires;
 
-  if (beresp.http.Cache-Control ~ "private") {
-    set req.http.Fastly-Cachetype = "PRIVATE";
-    return(pass);
-  }
-
-  if (beresp.http.Expires || beresp.http.Surrogate-Control ~ "max-age" || beresp.http.Cache-Control ~ "(s-maxage|max-age)") {
-    # keep the ttl here
-  } else {
-    # apply the default ttl
-    set beresp.ttl = 3600s;
-  }
+  # Set the final headers sent to the edge PoPs and Clients
+  set beresp.ttl = 24h;
+  set beresp.http.Cache-Control = "public, max-age=86400";
 
   return(deliver);
 }
 
 sub vcl_hit {
-#FASTLY hit
+  #FASTLY hit
 
-    # If the object we have isn't cacheable, then just serve it directly
-    # without going through any of the caching mechanisms.
-    if (!obj.cacheable) {
-        return(pass);
-    }
+  # If the object we have isn't cacheable, then just serve it directly
+  # without going through any of the caching mechanisms.
+  if (!obj.cacheable) {
+      return(pass);
+  }
 
-    return(deliver);
+  return(deliver);
 }
 
 sub vcl_deliver {
 
   if (resp.http.cache-control:max-age) {
     unset resp.http.expires;
-  }
-
-  if(req.url.path ~ "^/release/" && fastly.ff.visits_this_service == 0) {
-   set resp.http.Cache-Control = "private, no-store"; # Don't cache in the browser
   }
 
   # Unset AWS-compatible headers
@@ -118,8 +121,7 @@ sub vcl_deliver {
   unset resp.http.x-goog-stored-content-length;
   unset resp.http.x-goog-expiration;
   unset resp.http.x-guploader-uploadid;
-
-#FASTLY deliver
+  #FASTLY deliver
 
   if (!req.http.Fastly-Debug) {
     unset resp.http.Server;
@@ -138,12 +140,12 @@ sub vcl_miss {
   if(req.backend.is_origin) {
     call set_google_auth_header;
   }
-#FASTLY miss
+  #FASTLY miss
   return(fetch);
 }
 
 sub vcl_error {
-#FASTLY error
+  #FASTLY error
 
   /* handle 503s */
   if (obj.status >= 500 && obj.status < 600) {
@@ -171,11 +173,19 @@ sub vcl_error {
         return (deliver);
     }
   }
+
+  # Handle /ci/* redirect to k8s-release-dev bucket
+  if (obj.status == 750) {
+    set obj.status = 302;
+    set obj.response = "Found";
+    set obj.http.Location = req.http.X-Redirect-URL;
+    return(deliver);
+  }
 }
 
 sub vcl_pass {
   if(req.backend.is_origin) {
     call set_google_auth_header;
   }
-#FASTLY pass
+  #FASTLY pass
 }
