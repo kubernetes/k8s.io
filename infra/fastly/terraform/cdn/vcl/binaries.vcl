@@ -12,19 +12,28 @@ sub vcl_recv {
     set req.max_stale_while_revalidate = 0s;
   }
 
-  # Redirect /ci/* to the CI release dev bucket
-  # In the future, we'll serve this bucket via the CDN too
-  if (req.url.path ~ "^/ci/?(.*)$") {
-    set req.http.X-Redirect-URL = "https://storage.googleapis.com/k8s-release-dev/ci/" re.group.1;
-    error 750;
-  }
-
   # Rewrite /vX.Y.Z* paths to /release/vX.Y.Z* for the origin
   if (req.url.path ~ "^/v[0-9]+\.[0-9]+\.[0-9]+") {
     set req.url = "/release" req.url;
   }
 
   #FASTLY recv
+
+  # Set the default backend to release bucket
+  set req.backend = F_k8s_release;
+  set req.http.X-Backend-Name = "k8s_release";
+  
+  # Route /ci/* requests to the k8s-release-dev backend
+  if (req.url.path ~ "^/ci/") {
+    set req.backend = F_k8s_release_dev;
+    set req.http.X-Backend-Name = "k8s_release_dev";
+  }
+
+  # Route /kops/* requests to the k8s-staging-kops backend
+  if (req.url.path ~ "^/kops/") {
+    set req.backend = F_k8s_staging_kops;
+    set req.http.X-Backend-Name = "k8s_staging_kops";
+  }
 
   # don't bother doing a cache lookup for a request type that isn't cacheable
   if (req.method != "HEAD" && req.method != "GET" && req.method != "FASTLYPURGE") {
@@ -58,6 +67,18 @@ sub vcl_fetch {
 
   # Ensure HTML and JSON files are not cached at the edge
   if (req.url.ext ~ "(html|json)\z") {
+    set beresp.cacheable = false;
+    set beresp.ttl = 0s;
+    return (pass);
+  }
+
+  # Never cache txt files served from the CI or kops backend
+  if (req.backend == F_k8s_release_dev && req.url.ext == "txt") {
+    set beresp.cacheable = false;
+    set beresp.ttl = 0s;
+    return (pass);
+  }
+  if (req.backend == F_k8s_staging_kops && req.url.ext == "txt") {
     set beresp.cacheable = false;
     set beresp.ttl = 0s;
     return (pass);
@@ -138,7 +159,13 @@ sub vcl_deliver {
 
 sub vcl_miss {
   if(req.backend.is_origin) {
-    call set_google_auth_header;
+    if (req.http.X-Backend-Name == "k8s_release_dev") {
+      call set_google_auth_header_k8s_release_dev;
+    } else if (req.http.X-Backend-Name == "k8s_staging_kops") {
+      call set_google_auth_header_k8s_staging_kops;
+    } else {
+      call set_google_auth_header_k8s_release;
+    }
   }
   #FASTLY miss
   return(fetch);
@@ -174,18 +201,18 @@ sub vcl_error {
     }
   }
 
-  # Handle /ci/* redirect to k8s-release-dev bucket
-  if (obj.status == 750) {
-    set obj.status = 302;
-    set obj.response = "Found";
-    set obj.http.Location = req.http.X-Redirect-URL;
-    return(deliver);
-  }
+
 }
 
 sub vcl_pass {
   if(req.backend.is_origin) {
-    call set_google_auth_header;
+    if (req.http.X-Backend-Name == "k8s_release_dev") {
+      call set_google_auth_header_k8s_release_dev;
+    } else if (req.http.X-Backend-Name == "k8s_staging_kops") {
+      call set_google_auth_header_k8s_staging_kops;
+    } else {
+      call set_google_auth_header_k8s_release;
+    }
   }
   #FASTLY pass
 }

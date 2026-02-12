@@ -92,7 +92,7 @@ yum:
   value: yum.k8s.io.
 dl:
   type: CNAME
-  value: dl.k8s.io.
+  value: redirect.k8s.io.
 rel:
   type: CNAME
   value: rel.k8s.io.

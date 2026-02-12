@@ -14,13 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-variable "bucket_name" {
-  type = string
-}
-
-variable "region" {
-  type    = string
-  default = "us-central1"
+variable "bucket_configs" {
+  description = "List of GCS backend buckets to serve from"
+  type = list(object({
+    name           = string
+    release_bucket = optional(bool, false)
+  }))
+  default = []
 }
 
 variable "domain" {

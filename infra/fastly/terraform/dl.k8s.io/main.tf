@@ -23,8 +23,12 @@ module "cdn" {
     service_name = "dl.k8s.io",
     env          = "prod",
   }
-  bucket_name    = "767373bbdcb8270361b96548387bf2a9ad0d48758c35"
-  region         = "us-central1"
   gcs_access_key = data.google_secret_manager_secret_version_access.gcs_reader_access_key.secret_data
   gcs_secret_key = data.google_secret_manager_secret_version_access.gcs_reader_secret_key.secret_data
+
+  bucket_configs = [
+    { name = "767373bbdcb8270361b96548387bf2a9ad0d48758c35", release_bucket = true },
+    { name = "k8s-release-dev" },
+    { name = "k8s-staging-kops" },
+  ]
 }

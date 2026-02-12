@@ -139,15 +139,6 @@ artifacts-sandbox:
 
 # DNS configuration for Fastly service cdn.dl.k8s.io
 # Reach out to sig-k8s-infra-leads@kubernetes.io for any issue
-cdn.dl:
-  # CNAME record for Fastly endpoint
-  - type: CNAME
-    value: dualstack.m.sni.global.fastly.net.
-# Fastly ACME DNS challenge for cdn.dl.k8s.io
-_acme-challenge.cdn.dl:
-  - type: CNAME
-    value: g2u94f8943zc3m5dil.fastly-validations.com.
-
 dl:
   - type: A
     values:
