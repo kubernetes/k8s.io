@@ -1,5 +1,4 @@
 groups:
-
   #
   # Mailing lists
   #
@@ -7,132 +6,119 @@ groups:
   # and is not intended to govern access to infrastructure
   #
 
-- email-id: sig-api-machinery-leads@kubernetes.io
-  name: sig-api-machinery-leads
-  description: |-
-    SIG api-machinery leads
-  owners:
-    - jpbetz@google.com
-    - deads@redhat.com
-    - fbongiovanni@google.com
-    - stefan.schimanski@gmail.com
-  settings:
-    AllowWebPosting: "true"
-    ReconcileMembers: "true"
-    WhoCanPostMessage: "ANYONE_CAN_POST"
-    WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+  - email-id: sig-api-machinery-leads@kubernetes.io
+    name: sig-api-machinery-leads
+    description: |-
+      SIG api-machinery leads
+    owners:
+      - jpbetz@google.com
+      - deads@redhat.com
+      - fbongiovanni@google.com
+      - stefan.schimanski@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
 
-- email-id: sig-api-machinery@kubernetes.io
-  name: sig-api-machinery
-  description: |-
-    SIG api-machinery general discussion group, for future migration from old googlegroups
-  owners:
-    - jpbetz@google.com
-    - deads@redhat.com
-    - fbongiovanni@google.com
-    - stefan.schimanski@gmail.com
-  settings:
-    WhoCanJoin: "ANYONE_CAN_JOIN"
-    WhoCanViewGroup: "ANYONE_CAN_VIEW"
-    WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
-    WhoCanPostMessage: "ANYONE_CAN_POST"
-    MessageModerationLevel: "MODERATE_NON_MEMBERS"
-    WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
-    WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
-    WhoCanModerateContent: "OWNERS_AND_MANAGERS"
-    MembersCanPostAsTheGroup: "false"
-    ReconcileMembers: "false"
+  - email-id: sig-api-machinery@kubernetes.io
+    name: sig-api-machinery
+    description: |-
+      SIG api-machinery general discussion group, for future migration from old googlegroups
+    owners:
+      - jpbetz@google.com
+      - deads@redhat.com
+      - fbongiovanni@google.com
+      - stefan.schimanski@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
 
-- email-id: sig-api-machinery-cel-dev@kubernetes.io
-  name: sig-api-machinery-cel-dev
-  description: |-
-    Discussion of SIG api-machinery CEL based features
-  settings:
+  - email-id: sig-api-machinery-cel-dev@kubernetes.io
+    name: sig-api-machinery-cel-dev
+    description: |-
+      Discussion of SIG api-machinery CEL based features
+    settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
-  owners:
-     - jpbetz@google.com
-     - cic37@google.com
-     - deads@redhat.com
-     - hankang@google.com
-  members:
-     - cquirogapichincha@gmail.com
-     - sttts@redhat.com
-     - bluddy@redhat.com
-     - rita.z.zhang@gmail.com
-     - angoldst@redhat.com
-     - mok@vmware.com
-     - zielenski@google.com
-     - andrewsy@google.com
-     - apelisse@google.com
-     - bentheelder@google.com
-     - cicih@google.com
-     - davishaba@google.com
-     - soorena@google.com
-     - jhf@google.com
-     - jim@nirmata.com
-     - liggitt@google.com
-     - kermitalexandr@google.com
-     - leilajal@google.com
-     - smythe@google.com
-     - stevenlinde@google.com
-     - stclair@google.com
+    owners:
+      - jpbetz@google.com
+      - cic37@google.com
+      - deads@redhat.com
+      - hankang@google.com
+    members:
+      - cquirogapichincha@gmail.com
+      - sttts@redhat.com
+      - bluddy@redhat.com
+      - rita.z.zhang@gmail.com
+      - angoldst@redhat.com
+      - mok@vmware.com
+      - zielenski@google.com
+      - andrewsy@google.com
+      - apelisse@google.com
+      - bentheelder@google.com
+      - cicih@google.com
+      - davishaba@google.com
+      - soorena@google.com
+      - jhf@google.com
+      - jim@nirmata.com
+      - liggitt@google.com
+      - kermitalexandr@google.com
+      - leilajal@google.com
+      - smythe@google.com
+      - stevenlinde@google.com
+      - stclair@google.com
 
-  #
-  # k8s-staging write access for SIG-owned subprojects
-  #
-  # Each group here represents privileged access to a staging project,
-  # allowing the members to directly write to GCS and GCR within the
-  # project, as well as trigger Cloud Build within the project. Ideally
-  # this level access is used solely for troubleshooting purposes.
-  #
-  # Membership should correspond roughly to subproject owners for the set of
-  # subproject artifacts being stored in a given staging project
-  #
+    #
+    # k8s-staging write access for SIG-owned subprojects
+    #
+    # Each group here represents privileged access to a staging project,
+    # allowing the members to directly write to GCS and GCR within the
+    # project, as well as trigger Cloud Build within the project. Ideally
+    # this level access is used solely for troubleshooting purposes.
+    #
+    # Membership should correspond roughly to subproject owners for the set of
+    # subproject artifacts being stored in a given staging project
+    #
 
-- email-id: k8s-infra-staging-storage-migrator@kubernetes.io
-  name: k8s-infra-staging-storage-migrator
-  description: |-
-    ACL for kube-storage-version-migrator
-  settings:
-    ReconcileMembers: "true"
-  members:
-  - xuchao@google.com
-  - haoweic@google.com
+  - email-id: k8s-infra-staging-storage-migrator@kubernetes.io
+    name: k8s-infra-staging-storage-migrator
+    description: |-
+      ACL for kube-storage-version-migrator
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - xuchao@google.com
+      - haoweic@google.com
 
-- email-id: k8s-infra-staging-kubebuilder@kubernetes.io
-  name: k8s-infra-staging-kubebuilder
-  description: |-
-    ACL for pushing kubebuilder artifacts
-  settings:
-    ReconcileMembers: "true"
-  members:
-    - camilamacedo86@gmail.com
-    - ricardo.katz@gmail.com
-    - varshaprasad96@gmail.com
+    #
+    # k8s-infra gcs write access
+    #
+    # TODO: where is the bucket? is this prod or staging?
+    #
+    # Each group here governs access to one GCS bucket. Ideally this level of
+    # access is used solely for troubleshooting purposes.
+    #
+    # Membership should correspond roughly to subproject owners for the set of
+    # subproject artifacts being stored in the GCS bucket
+    #
 
-  #
-  # k8s-infra gcs write access
-  #
-  # TODO: where is the bucket? is this prod or staging?
-  #
-  # Each group here governs access to one GCS bucket. Ideally this level of
-  # access is used solely for troubleshooting purposes.
-  #
-  # Membership should correspond roughly to subproject owners for the set of
-  # subproject artifacts being stored in the GCS bucket
-  #
+    # k8s-infra owners for sig-owned subprojects
+    #
+    # Each group here represents highly privileged access to kubernetes project
+    # infrastructure owned or managed by this SIG. A high level of trust is
+    # required for membership in these groups.
+    #
 
-
-  # k8s-infra owners for sig-owned subprojects
-  #
-  # Each group here represents highly privileged access to kubernetes project
-  # infrastructure owned or managed by this SIG. A high level of trust is
-  # required for membership in these groups.
-  #
-
-
-  # RBAC groups:
-  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
-  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
-  # - must be members of gke-security-groups@kubernetes.io
+    # RBAC groups:
+    # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+    # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+    # - must be members of gke-security-groups@kubernetes.io
