@@ -217,18 +217,10 @@ data:
         rewrite ^/(.*)?$    https://github.com/kubernetes/community/tree/master/committee-code-of-conduct/$1 redirect;
       }
       server {
-        server_name dl.k8s.io dl.kubernetes.io;
+        server_name dl.kubernetes.io;
         listen 80;
 
-        location / {
-          rewrite ^/apt/doc/apt-key.gpg    https://raw.githubusercontent.com/kubernetes/k8s.io/main/apt/doc/apt-key.gpg redirect;
-          # Don't require /release/ if you want to get at the Kubernetes release artifacts, the common case.
-          rewrite ^/(v[0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta|rc)\.[0-9]+)?/.*)$   https://cdn.dl.k8s.io/release/$1 redirect;
-          # CI (continuous integration) artifacts are hosted in a bucket owned by kubernetes.io (community-managed via sig-k8s-infra)
-          rewrite ^/ci/?(.*)$              https://storage.googleapis.com/k8s-release-dev/ci/$1 redirect;
-          # Release artifacts are hosted in a bucket owned by google.com (the google-containers project)
-          rewrite ^/(.*)$                  https://cdn.dl.k8s.io/$1 redirect;
-        }
+        rewrite ^/(.*)?$    https://dl.k8s.io/$1 redirect;
       }
       server {
         server_name docs.k8s.io docs.kubernetes.io;
