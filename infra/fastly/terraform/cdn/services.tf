@@ -23,26 +23,30 @@ resource "fastly_service_vcl" "this" {
     name = var.domain
   }
 
-  backend {
-    name              = "GCS"
-    auto_loadbalance  = false
-    address           = "storage.googleapis.com"
-    port              = 443
-    use_ssl           = true
-    ssl_cert_hostname = "storage.googleapis.com"
-    ssl_sni_hostname  = "storage.googleapis.com"
+  dynamic "backend" {
+    for_each = var.bucket_configs
+    content {
+      name              = backend.value.release_bucket ? "k8s-release" : backend.value.name
+      auto_loadbalance  = false
+      address           = "storage.googleapis.com"
+      port              = 443
+      use_ssl           = true
+      prefer_ipv6       = true
+      ssl_cert_hostname = "storage.googleapis.com"
+      ssl_sni_hostname  = "storage.googleapis.com"
 
-    override_host = "${var.bucket_name}.storage.googleapis.com"
+      override_host = "${backend.value.name}.storage.googleapis.com"
 
-    /*
-    Matching the region of the origin.
-    Full list: https://www.fastly.com/documentation/guides/concepts/shielding/#choosing-a-shield-location
-    */
-    shield = var.shield_location
+      /*
+      Matching the region of the origin.
+      Full list: https://www.fastly.com/documentation/guides/concepts/shielding/#choosing-a-shield-location
+      */
+      shield = var.shield_location
 
-    connect_timeout       = 5000  # milliseconds
-    between_bytes_timeout = 15000 # milliseconds
-    error_threshold       = 5
+      connect_timeout       = 5000  # milliseconds
+      between_bytes_timeout = 15000 # milliseconds
+      error_threshold       = 5
+    }
   }
 
   logging_datadog {
@@ -58,9 +62,7 @@ resource "fastly_service_vcl" "this" {
 
   snippet {
     content  = <<-EOT
-      if (req.url.path ~ "^/release/") {
-        set req.enable_segmented_caching = true;
-      }
+      set req.enable_segmented_caching = true;
     EOT
     name     = "Enable segment caching for large files"
     priority = 60
@@ -100,13 +102,11 @@ resource "fastly_service_vcl" "this" {
   snippet {
     name = "Authenticate to GCS requests"
     type = "init"
-    content = templatefile("${path.module}/vcl/gcs-auth.vcl", {
+    content = templatefile("${path.module}/vcl/gcs-auth-multi.vcl", {
+      bucket_configs = var.bucket_configs
       access_key     = var.gcs_access_key
       secret_key     = var.gcs_secret_key
-      backend_bucket = var.bucket_name
-      region         = var.region
-      }
-    )
+    })
   }
 
   vcl {

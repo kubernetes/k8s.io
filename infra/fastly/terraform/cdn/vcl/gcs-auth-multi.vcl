@@ -1,8 +1,10 @@
 # VCL snippet to authenticate Fastly requests to GCS.
+# Generated per-bucket auth subroutines.
 #
 # https://developer.fastly.com/solutions/examples/google-cloud-storage-origin-private/
 
-sub set_google_auth_header {
+%{ for bucket in bucket_configs ~}
+sub set_google_auth_header_${ bucket.release_bucket ? "k8s_release" : replace(bucket.name, "-", "_") } {
 
 declare local var.googleAccessKey STRING;
 declare local var.googleSecretKey STRING;
@@ -17,18 +19,19 @@ declare local var.dateStamp STRING;
 declare local var.signature STRING;
 declare local var.scope STRING;
 
-#As of 8/2019, GCS now supports HMAC keys based on service accounts.
-#The below accessKey and secretKey should come from a service account based HMAC Key
 set var.googleAccessKey = "${access_key}";
 set var.googleSecretKey = "${secret_key}";
-set var.googleBucket = "${backend_bucket}";
-set var.googleRegion = "${region}";
+set var.googleBucket = "${bucket.name}";
+set var.googleRegion = "auto";
 
 set bereq.http.x-amz-content-sha256 = digest.hash_sha256("");
 set bereq.http.x-amz-date = strftime({"%Y%m%dT%H%M%SZ"}, now);
 set bereq.http.host = var.googleBucket ".storage.googleapis.com";
 set bereq.url = querystring.remove(bereq.url);
-set bereq.url = regsuball(urlencode(urldecode(bereq.url.path)), {"%2F"}, "/");
+# Preserve '+' in paths (e.g. semver build metadata v1.36.0-alpha.1+abc)
+# Use [+] character class — VCL double-quoted strings strip backslashes,
+# so "\+" becomes bare + (a PCRE quantifier that matches nothing standalone).
+set bereq.url = regsuball(urlencode(urldecode(regsuball(bereq.url.path, "[+]", "%2B"))), {"%2F"}, "/");
 set var.dateStamp = strftime({"%Y%m%d"}, now);
 set var.canonicalHeaders = ""
     "host:" + bereq.http.host + LF +
@@ -73,3 +76,5 @@ unset bereq.http.Accept-Language;
 unset bereq.http.User-Agent;
 unset bereq.http.Fastly-Client-IP;
 }
+
+%{ endfor ~}
