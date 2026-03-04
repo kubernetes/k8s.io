@@ -56,7 +56,8 @@ function deploy() {
         -f configmap-nginx.yaml \
         -f configmap-www-get.yaml \
         -f deployment.yaml \
-        -f service.yaml
+        -f service.yaml \
+        -f httproutes.yaml
 
     echo "restarting deployment..."
     "${kubectl[@]}" rollout restart deployment k8s-io

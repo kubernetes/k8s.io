@@ -1,0 +1,1192 @@
+# Copyright 2024 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# HTTPRoutes for k8s-io vanity redirects.
+# These are applied per-environment (k8s-io-prod or k8s-io-canary namespace)
+# via deploy.sh which sets the --namespace flag.
+#
+# The Gateways are named 'k8s-io' and 'k8s-io-v6' in each namespace.
+# Routes that need nginx backend (go-get, get.k8s.io, complex regex redirects)
+# reference the 'k8s-io' Service in the same namespace.
+
+# ---------------------------------------------------------------------------
+# HTTP → HTTPS redirect for all hosts
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: k8s-io-http-redirect
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: http
+  - name: k8s-io-v6
+    sectionName: http
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301
+---
+# ---------------------------------------------------------------------------
+# k8s.io: route go-get and healthz to nginx backend; redirect everything else
+# to kubernetes.io.
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: k8s-io-main
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - k8s.io
+  - www.k8s.io
+  rules:
+  # Health check endpoint served by nginx.
+  - matches:
+    - path:
+        type: Exact
+        value: /_healthz
+    backendRefs:
+    - name: k8s-io
+      port: 80
+  # go-get requests need nginx to return the go-import HTML meta tags.
+  - matches:
+    - queryParams:
+      - name: go-get
+        value: "1"
+    backendRefs:
+    - name: k8s-io
+      port: 80
+  # All other traffic redirects to kubernetes.io preserving the path.
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: kubernetes.io
+        statusCode: 301
+---
+# ---------------------------------------------------------------------------
+# x-k8s.io: redirect all traffic to kubernetes.io to prove domain ownership.
+# ref: https://git.k8s.io/community/sig-architecture/api-review-process.md
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: x-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - x-k8s.io
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: kubernetes.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /
+        statusCode: 301
+---
+# ---------------------------------------------------------------------------
+# sigs.k8s.io: route to nginx for go-get and complex GitHub path routing.
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: sigs-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - sigs.k8s.io
+  - sigs.kubernetes.io
+  rules:
+  - backendRefs:
+    - name: k8s-io
+      port: 80
+---
+# ---------------------------------------------------------------------------
+# blog.k8s.io / blog.kubernetes.io → https://kubernetes.io/blog/*
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: blog-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - blog.k8s.io
+  - blog.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: kubernetes.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /blog/
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: kubernetes.io
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /blog
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# apt.k8s.io / apt.kubernetes.io
+# Root → legacy deprecation notice; subpaths → packages.cloud.google.com/apt/
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: apt-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - apt.k8s.io
+  - apt.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: kubernetes.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /blog/2023/08/31/legacy-package-repository-deprecation/
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: packages.cloud.google.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /apt
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# yum.k8s.io / yum.kubernetes.io
+# Root → legacy deprecation notice; subpaths → packages.cloud.google.com/yum/
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: yum-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - yum.k8s.io
+  - yum.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: kubernetes.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /blog/2023/08/31/legacy-package-repository-deprecation/
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: packages.cloud.google.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /yum
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# packages.k8s.io / pkgs.k8s.io / packages.kubernetes.io / pkgs.kubernetes.io
+# Root → OBS introduction blog post; subpaths → prod-cdn.packages.k8s.io/
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: packages-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - packages.k8s.io
+  - pkgs.k8s.io
+  - packages.kubernetes.io
+  - pkgs.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: kubernetes.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /blog/2023/08/15/pkgs-k8s-io-introduction/
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: prod-cdn.packages.k8s.io
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /repositories/isv:/kubernetes:/
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# changelog.k8s.io / changelog.kubernetes.io
+# Root → CHANGELOG README; subpaths → GitHub releases/tag/$path
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: changelog-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - changelog.k8s.io
+  - changelog.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/kubernetes/blob/master/CHANGELOG/README.md
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /kubernetes/kubernetes/releases/tag
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# code.k8s.io / code.kubernetes.io → github.com/kubernetes/kubernetes/tree/master/*
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: code-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - code.k8s.io
+  - code.kubernetes.io
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /kubernetes/kubernetes/tree/master
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# conduct.k8s.io / conduct.kubernetes.io
+# → github.com/kubernetes/community/tree/master/committee-code-of-conduct/*
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: conduct-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - conduct.k8s.io
+  - conduct.kubernetes.io
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /kubernetes/community/tree/master/committee-code-of-conduct
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# dl.kubernetes.io → dl.k8s.io (dl.k8s.io itself is served by Fastly CDN)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: dl-kubernetes-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - dl.kubernetes.io
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: dl.k8s.io
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# docs.k8s.io / docs.kubernetes.io → nginx (version-stripping needs regex)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: docs-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - docs.k8s.io
+  - docs.kubernetes.io
+  rules:
+  - backendRefs:
+    - name: k8s-io
+      port: 80
+---
+# ---------------------------------------------------------------------------
+# examples.k8s.io / examples.kubernetes.io → nginx (version-specific routing)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: examples-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - examples.k8s.io
+  - examples.kubernetes.io
+  rules:
+  - backendRefs:
+    - name: k8s-io
+      port: 80
+---
+# ---------------------------------------------------------------------------
+# feature.k8s.io / features.k8s.io / feature.kubernetes.io / features.kubernetes.io
+# → github.com/kubernetes/features/issues/*
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: feature-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - feature.k8s.io
+  - features.k8s.io
+  - feature.kubernetes.io
+  - features.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/features/issues/
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /kubernetes/features/issues
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# get.k8s.io / get.kubernetes.io → nginx (proxy to GitHub + static files)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: get-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - get.k8s.io
+  - get.kubernetes.io
+  rules:
+  - backendRefs:
+    - name: k8s-io
+      port: 80
+---
+# ---------------------------------------------------------------------------
+# git.k8s.io / git.kubernetes.io → nginx (path-depth-based routing)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: git-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - git.k8s.io
+  - git.kubernetes.io
+  rules:
+  - backendRefs:
+    - name: k8s-io
+      port: 80
+---
+# ---------------------------------------------------------------------------
+# go.k8s.io / go.kubernetes.io
+# Fixed-path redirects handled here; /owners/* and /contact/* go to nginx.
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: go-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - go.k8s.io
+  - go.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /api-review
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/community/blob/master/sig-architecture/api-review-process.md
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /bot-commands
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: prow.k8s.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /command-help
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /bsky
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: bsky.app
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /profile/did:plc:kfztyuziv2i44b5kpecth77y/lists/3lau2wjkn3g2s
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /calendar
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: www.k8s.dev
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /calendar
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /github-labels
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/test-infra/blob/master/label_sync/labels.md
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /good-first-issue
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22+no%3Aassignee
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /help-wanted
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /search?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Aissue+label%3A%22help+wanted%22+no%3Aassignee
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /needs-ok-to-test
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /pulls?q=org%3Akubernetes+org%3Akubernetes-sigs+org%3Akubernetes-csi+org%3Akubernetes-client+is%3Aopen+is%3Apr+label%3Aneeds-ok-to-test+label%3A%22cncf-cla%3A+yes%22+-label%3Aneeds-rebase
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /oncall
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: storage.googleapis.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /test-infra-oncall/oncall.html
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /oncall-hotlist
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/test-infra/search?q=label%3Akind%2Foncall-hotlist+is%3Aopen&type=Issues
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /owners
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: www.kubernetes.dev
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /docs/guide/owners/
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /partner-request
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: docs.google.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /forms/d/e/1FAIpQLSdN1KtSKX2VAOPGABFlShkSd6CajQynoL4QCVtY0dj76MNDKg/viewform
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /redirects
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/k8s.io/tree/main/apps/k8s-io/README.md#redirections
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /sig-k8s-infra
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/community/tree/master/sig-k8s-infra
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /sig-k8s-infra-notes
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: docs.google.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /document/d/1VGMyAn_Pixdg0mTwbjxRcq_-oI7xtyomG9Hoa_RpryQ
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /sig-k8s-infra-playlist
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: www.youtube.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /playlist?list=PL69nYSiGNLP2Ghq7VW8rFbMFoHwvORuDL
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /start
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: kubernetes.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /docs/setup/
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /stuck-prs
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/kubernetes/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Aopen%20label%3Algtm%20label%3Aapproved%20-label%3Ado-not-merge%20-label%3Aneeds-rebase%20sort%3Aupdated-asc%20-status%3Asuccess
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /test-history
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: storage.googleapis.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes-test-history/static/index.html
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /triage
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: storage.googleapis.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /k8s-triage/index.html
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /logo
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: branding.cncf.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /projects/kubernetes/
+        statusCode: 302
+  - matches:
+    - path:
+        type: Exact
+        value: /contact
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/community/tree/master/communication/
+        statusCode: 302
+  # /owners/$user and /contact/$group need nginx for regex capture groups.
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /owners/
+    backendRefs:
+    - name: k8s-io
+      port: 80
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /contact/
+    backendRefs:
+    - name: k8s-io
+      port: 80
+---
+# ---------------------------------------------------------------------------
+# issue.k8s.io / issues.k8s.io / issue.kubernetes.io / issues.kubernetes.io
+# → github.com/kubernetes/kubernetes/issues/*
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: issue-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - issue.k8s.io
+  - issues.k8s.io
+  - issue.kubernetes.io
+  - issues.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/kubernetes/issues/
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /kubernetes/kubernetes/issues
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# kep.k8s.io / kep.kubernetes.io → github.com/kubernetes/enhancements/issues/*
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: kep-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - kep.k8s.io
+  - kep.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/enhancements/issues/
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /kubernetes/enhancements/issues
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# pr.k8s.io / prs.k8s.io / pr.kubernetes.io / prs.kubernetes.io
+# Root → /kubernetes/kubernetes/pulls; subpaths → /kubernetes/kubernetes/pull/*
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: pr-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - pr.k8s.io
+  - prs.k8s.io
+  - pr.kubernetes.io
+  - prs.kubernetes.io
+  rules:
+  - matches:
+    - path:
+        type: Exact
+        value: /
+    filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /kubernetes/kubernetes/pulls
+        statusCode: 302
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: github.com
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /kubernetes/kubernetes/pull
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# releases.k8s.io / rel.k8s.io / releases.kubernetes.io / rel.kubernetes.io
+# → nginx (complex version-specific routing)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: releases-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - releases.k8s.io
+  - rel.k8s.io
+  - releases.kubernetes.io
+  - rel.kubernetes.io
+  rules:
+  - backendRefs:
+    - name: k8s-io
+      port: 80
+---
+# ---------------------------------------------------------------------------
+# sbom.k8s.io / sbom.kubernetes.io → nginx (complex regex routing)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: sbom-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - sbom.k8s.io
+  - sbom.kubernetes.io
+  rules:
+  - backendRefs:
+    - name: k8s-io
+      port: 80
+---
+# ---------------------------------------------------------------------------
+# slack.k8s.io / slack.kubernetes.io → communityinviter.com (permanent 301)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: slack-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - slack.k8s.io
+  - slack.kubernetes.io
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: communityinviter.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /apps/kubernetes/community
+        statusCode: 301
+---
+# ---------------------------------------------------------------------------
+# submit-queue.k8s.io / submit-queue.kubernetes.io → prow.k8s.io/tide
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: submit-queue-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - submit-queue.k8s.io
+  - submit-queue.kubernetes.io
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: prow.k8s.io
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /tide
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# yt.k8s.io / youtube.k8s.io / youtube.kubernetes.io / yt.kubernetes.io
+# → youtube.com/c/kubernetescommunity
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: yt-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - yt.k8s.io
+  - youtube.k8s.io
+  - youtube.kubernetes.io
+  - yt.kubernetes.io
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        hostname: www.youtube.com
+        path:
+          type: ReplaceFullPath
+          replaceFullPath: /c/kubernetescommunity
+        statusCode: 302
+---
+# ---------------------------------------------------------------------------
+# ci-test.k8s.io / ci-test.kubernetes.io → nginx (complex directory/file routing)
+# ---------------------------------------------------------------------------
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: ci-test-k8s-io
+  labels:
+    app: k8s-io
+spec:
+  parentRefs:
+  - name: k8s-io
+    sectionName: https
+  - name: k8s-io-v6
+    sectionName: https
+  hostnames:
+  - ci-test.k8s.io
+  - ci-test.kubernetes.io
+  rules:
+  - backendRefs:
+    - name: k8s-io
+      port: 80
