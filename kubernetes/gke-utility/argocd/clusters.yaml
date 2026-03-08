@@ -250,7 +250,7 @@ spec:
       containers:
       - name: poc
         image: quay.io/argoproj/argocd:v3.2.5
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
         args:
         - |
