@@ -7,6 +7,9 @@ resources:
   - extras.yaml
   - clusters.yaml
 
+generators:
+  - poc-fn.yaml
+
 patches:
   - path: argocd-cmd-params-cm.yaml
   - path: argocd-cm.yaml
