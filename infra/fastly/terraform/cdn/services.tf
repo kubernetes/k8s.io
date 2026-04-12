@@ -110,9 +110,11 @@ resource "fastly_service_vcl" "this" {
   }
 
   vcl {
-    name    = "Main"
-    content = file("${path.module}/vcl/binaries.vcl")
-    main    = true
+    name = "Main"
+    content = templatefile("${path.module}/vcl/binaries.vcl", {
+      bucket_configs = var.bucket_configs
+    })
+    main = true
   }
 
   product_enablement {
@@ -129,8 +131,8 @@ resource "fastly_service_vcl" "this" {
   force_destroy = true
 }
 
-# resource "fastly_tls_subscription" "this" {
-#   domains               = [var.domain]
-#   common_name           = var.domain
-#   certificate_authority = "lets-encrypt"
-# }
+resource "fastly_tls_subscription" "this" {
+  domains               = [var.domain]
+  common_name           = var.domain
+  certificate_authority = "lets-encrypt"
+}

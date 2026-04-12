@@ -17,28 +17,32 @@ sub vcl_recv {
     set req.url = "/index.html";
   }
 
+%{~ if length([for bucket in bucket_configs : bucket.name if bucket.release_bucket]) > 0 ~}
   # Rewrite /vX.Y.Z* paths to /release/vX.Y.Z* for the origin
   if (req.url.path ~ "^/v[0-9]+\.[0-9]+\.[0-9]+") {
     set req.url = "/release" req.url;
   }
+%{ endif ~}
 
   #FASTLY recv
 
+%{~ if length([for bucket in bucket_configs : bucket.name if bucket.release_bucket]) > 0 ~}
   # Set the default backend to release bucket
   set req.backend = F_k8s_release;
   set req.http.X-Backend-Name = "k8s_release";
+%{ endif ~}
   
+%{~ if length(setintersection([for bucket in bucket_configs : bucket.name], ["k8s-release-dev","k8s-staging-kops"])) == 2 ~}
+  # Route /ci/kops/* requests to the k8s-staging-kops backend
+  if (req.url.path ~ "^/ci/kops/") {
+    set req.backend = F_k8s_staging_kops;
+    set req.http.X-Backend-Name = "k8s_staging_kops";
   # Route /ci/* requests to the k8s-release-dev backend
-  if (req.url.path ~ "^/ci/") {
+  } else if (req.url.path ~ "^/ci/") {
     set req.backend = F_k8s_release_dev;
     set req.http.X-Backend-Name = "k8s_release_dev";
   }
-
-  # Route /kops/* requests to the k8s-staging-kops backend
-  if (req.url.path ~ "^/kops/") {
-    set req.backend = F_k8s_staging_kops;
-    set req.http.X-Backend-Name = "k8s_staging_kops";
-  }
+%{ endif ~}
 
   # don't bother doing a cache lookup for a request type that isn't cacheable
   if (req.method != "HEAD" && req.method != "GET" && req.method != "FASTLYPURGE") {
@@ -70,17 +74,14 @@ sub vcl_fetch {
     set beresp.stale_while_revalidate = 3600s; # 1 hour
   }
 
-  # Never cache txt files served from the CI or kops backend
-  if (req.backend == F_k8s_release_dev && req.url.ext == "txt") {
-    set beresp.cacheable = false;
-    set beresp.ttl = 0s;
-    return (pass);
-  }
+%{~ if contains([for bucket in bucket_configs : bucket.name], "k8s-staging-kops") ~}
+  # Never cache txt files served from the kops backend
   if (req.backend == F_k8s_staging_kops && req.url.ext == "txt") {
     set beresp.cacheable = false;
     set beresp.ttl = 0s;
     return (pass);
   }
+%{ endif ~}
 
   #FASTLY fetch
   if ((beresp.status == 500 || beresp.status == 503) && req.restarts < 1 && (req.method == "GET" || req.method == "HEAD")) {
@@ -113,6 +114,12 @@ sub vcl_fetch {
   # Set the final headers sent to the edge PoPs and Clients
   set beresp.ttl = 24h;
   set beresp.http.Cache-Control = "public, max-age=86400";
+
+  # We have various text files with incorrect Content-Type headers set because GCS
+  # doesn't know how to handle them
+  if (req.url.ext ~ "^(sha256|sha512|cert)$" || req.url.path ~ "/(SHA256SUMS|SHA512SUMS)$") {
+    set beresp.http.Content-Type = "text/plain; charset=UTF-8";
+  }
 
   return(deliver);
 }
@@ -170,13 +177,26 @@ sub vcl_deliver {
 
 sub vcl_miss {
   if(req.backend.is_origin) {
-    if (req.http.X-Backend-Name == "k8s_release_dev") {
-      call set_google_auth_header_k8s_release_dev;
-    } else if (req.http.X-Backend-Name == "k8s_staging_kops") {
-      call set_google_auth_header_k8s_staging_kops;
-    } else {
+%{ if length([for bucket in bucket_configs : bucket.name if bucket.release_bucket]) > 0 ~}
+    if (req.http.X-Backend-Name == "k8s_release") {
       call set_google_auth_header_k8s_release;
     }
+%{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "k8s-staging-kops") ~}
+    if (req.http.X-Backend-Name == "k8s_staging_kops") {
+      call set_google_auth_header_k8s_staging_kops;
+    }
+%{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "k8s-release-dev") ~}
+    if (req.http.X-Backend-Name == "k8s_release_dev") {
+      call set_google_auth_header_k8s_release_dev;
+    }
+%{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "k8s-artifacts-prod") ~}
+    if (req.http.X-Backend-Name == "k8s_artifacts_prod") {
+      call set_google_auth_header_k8s_artifacts_prod;
+    }
+%{ endif ~}
   }
   #FASTLY miss
   return(fetch);
@@ -217,13 +237,26 @@ sub vcl_error {
 
 sub vcl_pass {
   if(req.backend.is_origin) {
-    if (req.http.X-Backend-Name == "k8s_release_dev") {
-      call set_google_auth_header_k8s_release_dev;
-    } else if (req.http.X-Backend-Name == "k8s_staging_kops") {
-      call set_google_auth_header_k8s_staging_kops;
-    } else {
+%{ if length([for bucket in bucket_configs : bucket.name if bucket.release_bucket]) > 0 ~}
+    if (req.http.X-Backend-Name == "k8s_release") {
       call set_google_auth_header_k8s_release;
     }
+%{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "k8s-staging-kops") ~}
+    if (req.http.X-Backend-Name == "k8s_staging_kops") {
+      call set_google_auth_header_k8s_staging_kops;
+    }
+%{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "k8s-release-dev") ~}
+    if (req.http.X-Backend-Name == "k8s_release_dev") {
+      call set_google_auth_header_k8s_release_dev;
+    }
+%{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "k8s-artifacts-prod") ~}
+    if (req.http.X-Backend-Name == "k8s_artifacts_prod") {
+      call set_google_auth_header_k8s_artifacts_prod;
+    }
+%{ endif ~}
   }
   #FASTLY pass
 }
