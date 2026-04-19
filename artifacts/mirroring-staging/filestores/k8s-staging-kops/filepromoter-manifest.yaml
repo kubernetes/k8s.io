@@ -1,7 +1,0 @@
-filestores:
-- base: gs://k8s-artifacts-prod/binaries/kops/
-  src: true
-- base: s3://test-artifacts-k8s-io-us-east-2/binaries/kops/
-- base: s3://test-artifacts-k8s-io-us-west-2/binaries/kops/
-- base: s3://test-artifacts-k8s-io-eu-west-2/binaries/kops/
-- base: s3://test-artifacts-k8s-io-ap-southeast-1/binaries/kops/
