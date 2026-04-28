@@ -1,0 +1,11 @@
+{
+  "createTime": "2020-08-30T02:26:57.036Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-infra-e2e-boskos-scale-24",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-infra-e2e-boskos-scale-24",
+  "projectNumber": "211820429131"
+}

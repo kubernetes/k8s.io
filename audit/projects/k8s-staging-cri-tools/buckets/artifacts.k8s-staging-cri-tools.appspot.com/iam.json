@@ -1,0 +1,37 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "projectEditor:k8s-staging-cri-tools",
+        "projectOwner:k8s-staging-cri-tools"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-staging-cri-tools"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-cri-tools@kubernetes.io"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-staging-cri-tools@kubernetes.io"
+      ],
+      "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "allUsers"
+      ],
+      "role": "roles/storage.objectViewer"
+    }
+  ]
+}

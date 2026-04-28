@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- wg-serving-leads
+reviewers:
+- wg-serving-leads
+
+labels:
+- wg/serving

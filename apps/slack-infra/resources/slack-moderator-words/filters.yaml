@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: slack-moderator-words-filters
+data:
+  filters.yaml: |-
+    - triggers:
+      - guys
+      action: chat.postEphemeral
+      message: "May I suggest \"all\" instead of \"guys\" when addessing a group of people? Thank you. :slightly_smiling_face:"

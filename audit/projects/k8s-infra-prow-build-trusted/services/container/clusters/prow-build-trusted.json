@@ -1,0 +1,213 @@
+{
+  "addonsConfig": {
+    "dnsCacheConfig": {
+      "enabled": true
+    },
+    "gcePersistentDiskCsiDriverConfig": {
+      "enabled": true
+    },
+    "horizontalPodAutoscaling": {},
+    "httpLoadBalancing": {},
+    "kubernetesDashboard": {
+      "disabled": true
+    },
+    "networkPolicyConfig": {}
+  },
+  "authenticatorGroupsConfig": {
+    "enabled": true,
+    "securityGroup": "gke-security-groups@kubernetes.io"
+  },
+  "autoscaling": {
+    "autoscalingProfile": "BALANCED"
+  },
+  "binaryAuthorization": {},
+  "clusterIpv4Cidr": "10.4.0.0/14",
+  "controlPlaneEndpointsConfig": {
+    "dnsEndpointConfig": {
+      "allowExternalTraffic": false,
+      "endpoint": "gke-8f83dcb7a83817de24081addbc0b670b3dd4-180382678033.us-central1.gke.goog"
+    },
+    "ipEndpointsConfig": {
+      "authorizedNetworksConfig": {
+        "gcpPublicCidrsAccessEnabled": true
+      },
+      "enablePublicEndpoint": true,
+      "enabled": true,
+      "privateEndpoint": "10.128.15.193",
+      "publicEndpoint": "34.66.53.94"
+    }
+  },
+  "createTime": "2020-04-30T23:44:46+00:00",
+  "currentMasterVersion": "1.30.5-gke.1443001",
+  "currentNodeVersion": "1.30.5-gke.1443001",
+  "databaseEncryption": {
+    "state": "DECRYPTED"
+  },
+  "defaultMaxPodsConstraint": {
+    "maxPodsPerNode": "110"
+  },
+  "endpoint": "34.66.53.94",
+  "enterpriseConfig": {
+    "clusterTier": "STANDARD"
+  },
+  "id": "8f83dcb7a83817de24081addbc0b670b3dd4be9a9185609a959715f281b89d49",
+  "initialClusterVersion": "1.14.10-gke.27",
+  "initialNodeCount": 1,
+  "instanceGroupUrls": [
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-a/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-7f1b1054-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-f/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-e930fff4-grp",
+    "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-b/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-4044b2cc-grp"
+  ],
+  "ipAllocationPolicy": {
+    "useRoutes": true
+  },
+  "labelFingerprint": "a9dc16a7",
+  "legacyAbac": {},
+  "location": "us-central1",
+  "locations": [
+    "us-central1-a",
+    "us-central1-f",
+    "us-central1-b"
+  ],
+  "loggingConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS",
+        "WORKLOADS"
+      ]
+    }
+  },
+  "loggingService": "logging.googleapis.com/kubernetes",
+  "maintenancePolicy": {
+    "resourceVersion": "44fb9d63",
+    "window": {
+      "dailyMaintenanceWindow": {
+        "duration": "PT4H0M0S",
+        "startTime": "11:00"
+      }
+    }
+  },
+  "masterAuthorizedNetworksConfig": {
+    "gcpPublicCidrsAccessEnabled": true
+  },
+  "monitoringConfig": {
+    "advancedDatapathObservabilityConfig": {},
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS"
+      ]
+    }
+  },
+  "monitoringService": "monitoring.googleapis.com/kubernetes",
+  "name": "prow-build-trusted",
+  "network": "default",
+  "networkConfig": {
+    "defaultSnatStatus": {},
+    "network": "projects/k8s-infra-prow-build-trusted/global/networks/default",
+    "serviceExternalIpsConfig": {
+      "enabled": true
+    },
+    "subnetwork": "projects/k8s-infra-prow-build-trusted/regions/us-central1/subnetworks/default"
+  },
+  "nodeConfig": {
+    "diskSizeGb": 200,
+    "diskType": "pd-ssd",
+    "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
+    "imageType": "UBUNTU_CONTAINERD",
+    "machineType": "n1-highmem-8",
+    "metadata": {
+      "disable-legacy-endpoints": "true"
+    },
+    "oauthScopes": [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ],
+    "serviceAccount": "gke-nodes-prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+    "shieldedInstanceConfig": {
+      "enableIntegrityMonitoring": true
+    },
+    "workloadMetadataConfig": {
+      "mode": "GKE_METADATA"
+    }
+  },
+  "nodeIpv4CidrSize": 24,
+  "nodePools": [
+    {
+      "autoscaling": {
+        "enabled": true,
+        "locationPolicy": "BALANCED",
+        "maxNodeCount": 6,
+        "minNodeCount": 1
+      },
+      "config": {
+        "diskSizeGb": 200,
+        "diskType": "pd-ssd",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
+        "imageType": "UBUNTU_CONTAINERD",
+        "machineType": "n1-highmem-8",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ],
+        "serviceAccount": "gke-nodes-prow-build-trusted@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "initialNodeCount": 1,
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-a/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-7f1b1054-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-f/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-e930fff4-grp",
+        "https://www.googleapis.com/compute/v1/projects/k8s-infra-prow-build-trusted/zones/us-central1-b/instanceGroupManagers/gke-prow-build-trust-trusted-pool1-20-4044b2cc-grp"
+      ],
+      "locations": [
+        "us-central1-a",
+        "us-central1-f",
+        "us-central1-b"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "name": "trusted-pool1-20210806160125616800000001",
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build-trusted/locations/us-central1/clusters/prow-build-trusted/nodePools/trusted-pool1-20210806160125616800000001",
+      "upgradeSettings": {
+        "maxSurge": 1,
+        "strategy": "SURGE"
+      },
+      "version": "1.30.5-gke.1443001"
+    }
+  ],
+  "privateClusterConfig": {
+    "privateEndpoint": "10.128.15.193",
+    "publicEndpoint": "34.66.53.94"
+  },
+  "releaseChannel": {
+    "channel": "REGULAR"
+  },
+  "resourceUsageExportConfig": {
+    "bigqueryDestination": {
+      "datasetId": "usage_metering_prow_build_trusted"
+    },
+    "consumptionMeteringConfig": {
+      "enabled": true
+    },
+    "enableNetworkEgressMetering": true
+  },
+  "selfLink": "https://container.googleapis.com/v1/projects/k8s-infra-prow-build-trusted/locations/us-central1/clusters/prow-build-trusted",
+  "servicesIpv4Cidr": "10.7.240.0/20",
+  "shieldedNodes": {},
+  "subnetwork": "default",
+  "verticalPodAutoscaling": {
+    "enabled": true
+  },
+  "workloadIdentityConfig": {
+    "workloadPool": "k8s-infra-prow-build-trusted.svc.id.goog"
+  },
+  "zone": "us-central1"
+}

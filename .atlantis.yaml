@@ -1,0 +1,20 @@
+version: 3
+automerge: true
+autodiscover:
+  mode: auto
+parallel_plan: true
+parallel_apply: true
+abort_on_execution_order_fail: true
+projects:
+  - name: artifacts.k8s.io
+    branch: /main/
+    dir: infra/aws/terraform/artifacts.k8s.io
+    workflow: aws
+  - name: kops-infra-ci
+    branch: /main/
+    dir: infra/aws/terraform/kops-infra-ci
+    workflow: aws
+  - name: k8s-infra-macos
+    branch: /main/
+    dir: infra/aws/terraform/macos
+    workflow: aws

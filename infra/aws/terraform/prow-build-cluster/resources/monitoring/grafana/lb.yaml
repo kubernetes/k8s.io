@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: monitoring
+  name: grafana-lb
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-2:468814281478:certificate/a7969b50-8477-47eb-a623-8ef90688d16f"
+  labels:
+    app: grafana
+spec:
+  type: LoadBalancer
+  ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 3000
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: grafana

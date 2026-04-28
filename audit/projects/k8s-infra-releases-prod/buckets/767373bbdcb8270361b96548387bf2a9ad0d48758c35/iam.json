@@ -1,0 +1,31 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:k8s-infra-releases-prod",
+        "projectOwner:k8s-infra-releases-prod"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-editors@kubernetes.io",
+        "projectViewer:k8s-infra-releases-prod"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "serviceAccount:648026197307@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-editors@kubernetes.io",
+        "serviceAccount:fastly-reader@k8s-infra-releases-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectViewer"
+    }
+  ]
+}

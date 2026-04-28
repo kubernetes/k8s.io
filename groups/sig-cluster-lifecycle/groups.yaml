@@ -1,0 +1,521 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  - email-id: sig-cluster-lifecycle@kubernetes.io
+    name: sig-cluster-lifecycle
+    description: |
+      Group dedicated to simplify creation, configuration, upgrade, downgrade, and teardown of Kubernetes clusters and their components.
+    owners:
+      - cecilerobertm@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+      - justinsb@google.com
+      - vince@prigna.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: k8s-infra-kops-maintainers@kubernetes.io
+    name: k8s-infra-kops-maintainers
+    description: |
+      ACL for kOps maintainers
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+      - pgrifel@gmail.com
+
+  - email-id: k8s-infra-staging-etcd-manager@kubernetes.io
+    name: k8s-infra-staging-etcd-manager
+    description: |-
+      ACL for staging etcd-manager artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+      - chacman@microsoft.com
+      - pgrifel@gmail.com
+
+  - email-id: sig-cluster-lifecycle-cluster-api-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-alerts
+    description: |-
+
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - naadir@randomvariable.co.uk
+      - detiber@gmail.com
+      - jdetiberus@equinix.com
+      - naadir.jeewa@broadcom.com
+      - stefan.buringer@broadcom.com
+      - yuvaraj-balaji-rao.kakaraparthi@broadcom.com
+      - christi.schlotter@gmail.com
+      - furkat.gofurov@suse.com
+      - fabrizio.pandini@gmail.com
+      # CAPI release team members
+      - muhammad.adil.ghaffar@est.tech
+      - cahillsf9@gmail.com
+      - sunnat.samadov@est.tech
+      - shibuuuu5@gmail.com
+      - sepi.alavii@gmail.com
+      - sabin@figarocastle.org
+
+  - email-id: sig-cluster-lifecycle-cluster-api-operator-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-operator-alerts
+    description: |-
+
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - alexandr.demicev@suse.com
+      - jspeed@redhat.com
+
+  - email-id: k8s-infra-staging-minikube@kubernetes.io
+    name: k8s-infra-staging-minikube
+    description: |-
+      ACL for staging Minikube
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - medya@google.com
+      - tangjiaming1999@gmail.com
+
+  - email-id: k8s-infra-staging-capi-operator@kubernetes.io
+    name: k8s-infra-staging-capi-operator
+    description: |-
+      ACL for staging CAPI Operator
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - alexandr.demicev@suse.com
+      - jspeed@redhat.com
+
+  - email-id: sig-cluster-lifecycle-kubeadm-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-kubeadm-alerts
+    description: |-
+
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+      - roollingstone@gmail.com
+
+  - email-id: sig-cluster-lifecycle-leads@kubernetes.io
+    name: sig-cluster-lifecycle-leads
+    description: |-
+      Private group for SIG Cluster Lifecycle leads
+    settings:
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_NONE"
+      ReconcileMembers: "false"
+    owners:
+      - cecilerobertm@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+      - justinsb@google.com
+      - vince@prigna.com
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-addon-manager@kubernetes.io
+    name: k8s-infra-staging-addon-manager
+    description: |-
+      ACL for staging addon-manager images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jsand@google.com
+      - zihongz@google.com
+
+  - email-id: k8s-infra-staging-capi-cloudstack@kubernetes.io
+    name: k8s-infra-staging-capi-cloudstack
+    description: |-
+      ACL for staging CAPI for Apache CloudStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - david.njumani@gmail.com
+      - guillermogastonlorente@gmail.com
+      - rohityadav89@gmail.com
+      - weizhouapache@gmail.com
+      - vishesh92@gmail.com
+
+  - email-id: k8s-infra-staging-capi-docker@kubernetes.io
+    name: k8s-infra-staging-capi-docker
+    description: |-
+      ACL for staging CAPI for docker
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+
+  - email-id: k8s-infra-staging-capi-ibmcloud@kubernetes.io
+    name: k8s-infra-staging-capi-ibmcloud
+    description: |-
+      ACL for staging CAPI for IBMCloud
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - gyliu513@gmail.com
+      - manjunath.cse@gmail.com
+      - jichenjc@cn.ibm.com
+
+  - email-id: k8s-infra-staging-capi-kubeadm@kubernetes.io
+    name: k8s-infra-staging-capi-kubeadm
+    description: |-
+      ACL for staging CAPI for kubeadm
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - detiber@gmail.com
+      - frostl@vmware.com
+      - ha.chuck@gmail.com
+      - hi@amycod.es
+
+  - email-id: k8s-infra-staging-capi-openstack@kubernetes.io
+    name: k8s-infra-staging-capi-openstack
+    description: |-
+      ACL for staging CAPI for OpenStack
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - emacchi@redhat.com
+      - lennart.jern@est.tech
+      - m.andre@redhat.com
+      - stephenfin@redhat.com
+
+  - email-id: sig-cluster-lifecycle-cluster-api-openstack-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-openstack-alerts
+    description: |-
+
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - emacchi@redhat.com
+      - lennart.jern@est.tech
+
+  - email-id: k8s-infra-staging-capi-vsphere@kubernetes.io
+    name: k8s-infra-staging-capi-vsphere
+    description: |-
+      ACL for staging CAPI for vSphere
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - sbueringer@gmail.com
+      - christi.schlotter@gmail.com
+      - naadir.jeewa@broadcom.com
+      - ytijani@vmware.com
+      - fabrizio.pandini@gmail.com
+
+  - email-id: sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-vsphere-alerts
+    description: |-
+      List for test alerts for the Cluster API vSphere infrastructure provider.
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - stefan.buringer@broadcom.com
+      - christi.schlotter@gmail.com
+      - gong.zhang@broadcom.com
+      - gab.satchi@broadcom.com
+      - naadir.jeewa@broadcom.com
+      - sagar.muchhal@broadcom.com
+      - fabrizio.pandini@gmail.com
+
+  - email-id: k8s-infra-staging-cluster-api@kubernetes.io
+    name: k8s-infra-staging-cluster-api
+    description: |-
+      ACL for staging CAPI
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - alberto.garcial@hotmail.com
+      - cecilerobertm@gmail.com
+      - christi.schlotter@gmail.com
+      - davanum@gmail.com
+      - fabrizio.pandini@gmail.com
+      - sbueringer@gmail.com
+
+  - email-id: k8s-infra-staging-cluster-api-helm@kubernetes.io
+    name: k8s-infra-staging-cluster-api-helm
+    description: |-
+      ACL for staging CAPI for Helm
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jt572@cornell.edu
+      - fabrizio.pandini@gmail.com
+      - cecilerobertm@gmail.com
+
+  - email-id: k8s-infra-staging-cluster-api-aws@kubernetes.io
+    name: k8s-infra-staging-cluster-api-aws
+    description: |-
+      ACL for staging CAPI for AWS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - richmcase@gmail.com
+      - daniel.lipovetsky@gmail.com
+      - andreas.sommer87@googlemail.com
+      - nolan@nbrubaker.com
+      - damiano.donati@gmail.com
+
+  - email-id: sig-cluster-lifecycle-cluster-api-aws-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-aws-alerts
+    description: |-
+
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - richmcase@gmail.com
+      - daniel.lipovetsky@gmail.com
+      - andreas.sommer87@googlemail.com
+      - nolan@nbrubaker.com
+      - damiano.donati@gmail.com
+
+  - email-id: k8s-infra-staging-cluster-api-do@kubernetes.io
+    name: k8s-infra-staging-cluster-api-do
+    description: |-
+      ACL for staging CAPI for DigitalOcean
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ahmadnurus.sh@gmail.com
+      - ctadeu@gmail.com
+      - jeremylevanmorris@gmail.com
+      - ttr314@googlemail.com
+
+  - email-id: k8s-infra-staging-cluster-api-azure@kubernetes.io
+    name: k8s-infra-staging-cluster-api-azure
+    description: |-
+      ACL for staging CAPI for Azure
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cecilerobertm@gmail.com
+      - davanum@gmail.com
+      - david@devigned.com
+      - k8s@auggie.dev
+      - nziada@vmware.com
+
+  - email-id: k8s-infra-staging-cluster-api-gcp@kubernetes.io
+    name: k8s-infra-staging-cluster-api-gcp
+    description: |-
+      ACL for staging CAPI for GCP
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ctadeu@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - richmcase@gmail.com
+
+  - email-id: sig-cluster-lifecycle-cluster-api-gcp-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-gcp-alerts
+    description: |-
+      Receive alerts for CAPG failing tests
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - ctadeu@gmail.com
+      - davanum@gmail.com
+      - richmcase@gmail.com
+
+  - email-id: sig-cluster-lifecycle-cluster-api-do-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-cluster-api-do-alerts
+    description: |-
+      Receive alerts for CAPDO failing tests
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - ahmadnurus.sh@gmail.com
+      - ctadeu@gmail.com
+      - jeremylevanmorris@gmail.com
+      - ttr314@googlemail.com
+
+  - email-id: k8s-infra-staging-cluster-api-nested@kubernetes.io
+    name: k8s-infra-staging-cluster-api-nested
+    description: |-
+      ACL for staging CAPI for Nested
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - charleszheng44@gmail.com
+      - me@chrishein.com
+      - vrgf2003@gmail.com
+
+  - email-id: k8s-infra-staging-capi-ipam-ic@kubernetes.io
+    name: k8s-infra-staging-capi-ipam-ic
+    description: |-
+      ACL for staging CAPI IPAM Provider Incluster
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jakob.schrettenbrunner@gmail.com
+      - muchhalsagar88@gmail.com
+      - ricardo.katz@gmail.com
+
+  - email-id: k8s-infra-staging-cluster-addons@kubernetes.io
+    name: k8s-infra-staging-cluster-addons
+    description: |-
+      ACL for staging cluster-addons
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - daniel@weave.works
+      - justinsb@google.com
+      - leigh@weave.works
+      - luoh@vmware.com
+      - timothysc@gmail.com
+
+  - email-id: k8s-infra-staging-scl-image-builder@kubernetes.io
+    name: k8s-infra-staging-scl-image-builder
+    description: |-
+      ACL for Sig Cluster Lifecycle Image Builder project
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - moshe.immerman@gmail.com
+      - justinsb@google.com
+      - timothysc@gmail.com
+      - trhoden@gmail.com
+      - luoh@vmware.com
+
+  - email-id: k8s-infra-staging-kops@kubernetes.io
+    name: k8s-infra-staging-kops
+    description: |-
+      ACL for staging KOPS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - justinsb@google.com
+      - thockin@google.com
+      - pr-kubekins@kubernetes-jenkins-pull.iam.gserviceaccount.com
+
+  - email-id: k8s-infra-staging-kubeadm@kubernetes.io
+    name: k8s-infra-staging-kubeadm
+    description: |-
+      ACL for staging kubeadm
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - timothysc@gmail.com
+      - fabrizio.pandini@gmail.com
+      - neolit123@gmail.com
+
+  - email-id: sig-cluster-lifecycle-kubespray-alerts@kubernetes.io
+    name: sig-cluster-lifecycle-kubespray-alerts
+    description: |-
+      Group for Kubespray maintainers to receive CI system notifications.
+    settings:
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_NONE"
+      ReconcileMembers: "true"
+    members:
+      - kay.yan@daocloud.io
+      - mg@max.gautier.name
+      - tico88612@gmail.com
+      - 2t.antoine@gmail.com
+
+  - email-id: karpenter-cluster-api-leads@kubernetes.io
+    name: karpenter-cluster-api-leads
+    description: |-
+      ACL for staging karpenter provider cluster api artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - msm@opbstudios.com
+      - macao@redhat.com
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

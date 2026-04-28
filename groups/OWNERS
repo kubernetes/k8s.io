@@ -1,0 +1,23 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# root approval is restricted to members of k8s-infra-group-admins@
+# because they have the ability to manually run, troubleshoot, and undo
+# changes
+
+options:
+  no_parent_owners: true
+
+approvers:
+- cblecker
+- thockin
+- sig-contributor-experience-leads
+- sig-k8s-infra-leads
+- nikhita
+
+reviewers:
+- MadhavJivrajani
+
+labels:
+- sig/k8s-infra
+- area/access
+- area/groups

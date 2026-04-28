@@ -1,0 +1,77 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io"
+      ],
+      "role": "roles/artifactregistry.admin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-editors@kubernetes.io"
+      ],
+      "role": "roles/artifactregistry.repoAdmin"
+    },
+    {
+      "members": [
+        "serviceAccount:675573440409@cloudbuild.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-artifact-promoter@kubernetes.io",
+        "serviceAccount:gcb-image-builder@k8s-staging-artifact-promoter.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-675573440409@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-675573440409@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-infra-gcr-vuln-scanning@k8s-artifacts-prod.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.occurrences.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-675573440409@gcp-sa-containerscanning.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:675573440409-compute@developer.gserviceaccount.com",
+        "serviceAccount:675573440409@cloudservices.gserviceaccount.com",
+        "serviceAccount:service-675573440409@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "group:k8s-infra-staging-artifact-promoter@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-release-viewers@kubernetes.io",
+        "group:k8s-infra-staging-artifact-promoter@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "version": 1
+}

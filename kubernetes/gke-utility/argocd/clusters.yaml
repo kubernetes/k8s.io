@@ -1,0 +1,238 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gke-prow
+  labels:
+    name: gke-prow
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: default
+    cloud: gke
+type: Opaque
+stringData:
+  name: gke-prow
+  server: https://10.254.0.18
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "args": ["gcp"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
+      },
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gke-prow-build
+  labels:
+    name: gke-prow-build
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: gke
+type: Opaque
+stringData:
+  name: gke-prow-build
+  server: https://gke-8d7225b757872b0f06a6e02c3ea8b5713dc9-773781448124.us-central1.gke.goog
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "args": ["gcp"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gke-prow-build-trusted
+  labels:
+    name: gke-prow-build-trusted
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: gke
+type: Opaque
+stringData:
+  name: gke-prow-build-trusted
+  server: https://gke-8f83dcb7a83817de24081addbc0b670b3dd4-180382678033.us-central1.gke.goog
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "args": ["gcp"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gke-aaa
+  labels:
+    name: gke-aaa
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: apps
+    environment: prod
+    cloud: gke
+type: Opaque
+stringData:
+  name: gke-aaa
+  server: https://gke-4d0eb7639c079dd868639801ff9cee7661c5-127754664067.us-central1.gke.goog
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "args": ["gcp"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
+      }
+    }
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: ibm-ppc64le
+spec:
+  target:
+    template:
+      engineVersion: v2
+      data:
+        name: ibm-ppc64le
+        server: https://73725434-jp-osa.lb.appdomain.cloud:6443
+        config: "{{ .config }}"
+      metadata:
+        labels:
+          name: ibm-ppc64le
+          argocd.argoproj.io/secret-type: cluster
+          clusterType: prow
+          environment: prod
+          prowNamespace: test-pods
+          cloud: ibm
+  data:
+    - remoteRef:
+        key: ibm-ppc64le-argo-secret
+      secretKey: config
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k8s-infra-prow
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: ibm-s390x
+spec:
+  target:
+    template:
+      engineVersion: v2
+      data:
+        name: ibm-s390x
+        server: https://b9100f68-eu-de.lb.appdomain.cloud:6443
+        config: "{{ .config }}"
+      metadata:
+        labels:
+          name: ibm-s390x
+          argocd.argoproj.io/secret-type: cluster
+          clusterType: prow
+          environment: prod
+          prowNamespace: test-pods
+          cloud: ibm
+  data:
+    - remoteRef:
+        key: ibm-s390x-argo-secret
+      secretKey: config
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: k8s-infra-prow
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: eks-prow-kops
+  labels:
+    name: eks-prow-kops
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: eks
+type: Opaque
+stringData:
+  name: eks-prow-kops
+  server: https://7283E85C59E9C4129CFD07BAC9378D44.gr7.us-east-2.eks.amazonaws.com
+  config: |
+    {
+      "awsAuthConfig": {
+        "clusterName": "k8s-infra-kops-prow-build"
+      },
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: eks-prow-build
+  labels:
+    name: eks-prow-build
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: eks
+type: Opaque
+stringData:
+  name: eks-prow-build
+  server: https://F8B73554FE6FBAF9B19569183FB39762.gr7.us-east-2.eks.amazonaws.com
+  config: |
+    {
+      "awsAuthConfig": {
+        "clusterName": "prow-build-cluster"
+      },
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aks-prow-build
+  labels:
+    name: aks-prow-build
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: prow
+    environment: prod
+    prowNamespace: test-pods
+    cloud: aks
+type: Opaque
+stringData:
+  name: aks-prow-build
+  server: https://k8s-infra-k1lh96c4.hcp.eastus2.azmk8s.io
+  config: |
+    {
+      "execProviderConfig": {
+        "command": "argocd-k8s-auth",
+        "env": {
+          "AAD_ENVIRONMENT_NAME": "AzurePublicCloud",
+          "AZURE_CLIENT_ID": "92ce800b-0477-44c1-ac44-aa53fb973993",
+          "AZURE_TENANT_ID": "d1aa7522-0959-442e-80ee-8c4f7fb4c184",
+          "AZURE_FEDERATED_TOKEN_FILE": "/var/run/secrets/azure-token/serviceaccount/token",
+          "AZURE_AUTHORITY_HOST": "https://login.microsoftonline.com/",
+          "AAD_LOGIN_METHOD": "workloadidentity"
+        },
+        "args": ["azure"],
+        "apiVersion": "client.authentication.k8s.io/v1beta1"
+      },
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }

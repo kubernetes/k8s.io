@@ -1,0 +1,8 @@
+{
+  "displayName": "Compute Engine default service account",
+  "email": "226195303281-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-infra-public-pii/serviceAccounts/226195303281-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "111351441293337991412",
+  "projectId": "k8s-infra-public-pii",
+  "uniqueId": "111351441293337991412"
+}

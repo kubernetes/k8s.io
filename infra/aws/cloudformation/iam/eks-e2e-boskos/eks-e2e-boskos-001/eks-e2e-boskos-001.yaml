@@ -1,0 +1,38 @@
+Resources:
+  # TFStateBucket (eks-e2e-boskos-tfstate) is S3 bucket for storing Terraform state
+  TFStateBucket:
+    Type: AWS::S3::Bucket
+    # We retain the bucket to ensure that accidental deletion of the stack
+    # doesn't destroy Terraform state
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: eks-e2e-boskos-tfstate
+      AccessControl: Private
+      Tags:
+        - Key: Boskos
+          Value: Ignore
+
+  # ProvisionerUser (provisioner) is an IAM user used for running Terraform
+  # on eks-e2e-boskos accounts
+  ProvisionerUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Path: /
+      UserName: provisioner
+      Policies:
+        - PolicyName: ProvisionerUserRole
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Action: 'sts:AssumeRole'
+                Effect: Allow
+                Resource: 'arn:aws:iam::*:role/Provisioner'
+              - Action:
+                  - 's3:GetObject'
+                  - 's3:PutObject'
+                  - 's3:PutObjectAcl'
+                Effect: Allow
+                Resource: !Sub 'arn:aws:s3:::${TFStateBucket}/*'
+      Tags:
+        - Key: Boskos
+          Value: Ignore

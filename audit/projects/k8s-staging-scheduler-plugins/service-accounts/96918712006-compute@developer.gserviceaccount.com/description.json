@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "96918712006-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-scheduler-plugins/serviceAccounts/96918712006-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "107657161252367745303",
+  "projectId": "k8s-staging-scheduler-plugins",
+  "uniqueId": "107657161252367745303"
+}

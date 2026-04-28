@@ -1,0 +1,3 @@
+- name: externalip-webhook
+  dmap:
+    "sha256:19c237312cbab53dedb73c175c9d8b15ee90f6a0b911913fd6bfbee1d2193993": ["v1.0.0"]

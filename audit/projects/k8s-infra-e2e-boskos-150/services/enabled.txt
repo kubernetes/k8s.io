@@ -1,0 +1,29 @@
+NAME                                TITLE
+analyticshub.googleapis.com         Analytics Hub API
+artifactregistry.googleapis.com     Artifact Registry API
+autoscaling.googleapis.com          Cloud Autoscaling API
+bigquery.googleapis.com             BigQuery API
+bigqueryconnection.googleapis.com   BigQuery Connection API
+bigquerydatapolicy.googleapis.com   BigQuery Data Policy API
+bigquerymigration.googleapis.com    BigQuery Migration API
+bigqueryreservation.googleapis.com  BigQuery Reservation API
+bigquerystorage.googleapis.com      BigQuery Storage API
+cloudkms.googleapis.com             Cloud Key Management Service (KMS) API
+compute.googleapis.com              Compute Engine API
+container.googleapis.com            Kubernetes Engine API
+containerfilesystem.googleapis.com  Container File System API
+containerregistry.googleapis.com    Container Registry API
+dataform.googleapis.com             Dataform API
+dataplex.googleapis.com             Cloud Dataplex API
+dns.googleapis.com                  Cloud DNS API
+file.googleapis.com                 Cloud Filestore API
+gkebackup.googleapis.com            Backup for GKE API
+iam.googleapis.com                  Identity and Access Management (IAM) API
+iamcredentials.googleapis.com       IAM Service Account Credentials API
+logging.googleapis.com              Cloud Logging API
+monitoring.googleapis.com           Cloud Monitoring API
+networkconnectivity.googleapis.com  Network Connectivity API
+oslogin.googleapis.com              Cloud OS Login API
+pubsub.googleapis.com               Cloud Pub/Sub API
+storage-api.googleapis.com          Google Cloud Storage JSON API
+storage-component.googleapis.com    Cloud Storage

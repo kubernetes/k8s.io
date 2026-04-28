@@ -1,0 +1,11 @@
+{
+  "createTime": "2020-12-06T20:52:45.011Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-examples",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-examples",
+  "projectNumber": "315229499758"
+}

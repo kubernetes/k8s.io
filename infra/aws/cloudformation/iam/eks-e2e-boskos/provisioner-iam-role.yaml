@@ -1,0 +1,50 @@
+Parameters:
+  # Account ID of eks-e2e-boskos-001 account
+  MainBoskosAccountID:
+    Type: String
+    Description: Account ID of eks-e2e-boskos-001 account
+    ConstraintDescription: Account ID is required
+    MinLength: 12
+
+Resources:
+  # ProvisionerRole is an IAM role assumed by Provisioner IAM user to run
+  # Terraform in other boskos accounts
+  ProvisionerRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: Provisioner
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              AWS: !Sub 'arn:aws:iam::${MainBoskosAccountID}:user/provisioner'
+      Tags:
+        - Key: Boskos
+          Value: Ignore
+
+  # ProvisionerPolicy is an inline policy for ProvisionerRole
+  ProvisionerPolicy:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: ProvisionerPolicy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: 'servicequotas:*'
+            Effect: Allow
+            Resource: '*'
+          - Effect: Allow
+            Action: 'iam:CreateServiceLinkedRole'
+            Resource: 'arn:aws:iam::*:role/aws-service-role/servicequotas.amazonaws.com/*'
+            Condition:
+              StringLike:
+                'iam:AWSServiceName': servicequotas.amazonaws.com
+          - Effect: Allow
+            Action:
+              - 'iam:AttachRolePolicy'
+              - 'iam:PutRolePolicy'
+            Resource: 'arn:aws:iam::*:role/aws-service-role/servicequotas.amazonaws.com/*'
+      Roles:
+        - Ref: ProvisionerRole

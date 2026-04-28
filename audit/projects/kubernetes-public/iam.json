@@ -1,0 +1,220 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/iam.serviceAccountLister"
+    },
+    {
+      "members": [
+        "group:k8s-infra-bigquery-admins@kubernetes.io"
+      ],
+      "role": "roles/bigquery.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:kettle@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.dataOwner"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+        "serviceAccount:k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.dataViewer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-accounting@kubernetes.io",
+        "group:k8s-infra-prod-readiness@kubernetes.io",
+        "serviceAccount:kettle@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.jobUser"
+    },
+    {
+      "members": [
+        "serviceAccount:k8s-metrics@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+        "serviceAccount:k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquery.user"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@gcp-sa-bigqueryconnection.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigqueryconnection.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquerydatatransfer.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-rbac-elekto@kubernetes.io"
+      ],
+      "role": "roles/cloudsql.editor"
+    },
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "roles/compute.loadBalancerAdmin"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "roles/compute.viewer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io",
+        "serviceAccount:prow-deployer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.admin"
+    },
+    {
+      "members": [
+        "group:gke-security-groups@kubernetes.io"
+      ],
+      "role": "roles/container.clusterViewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@gcp-sa-gkenode.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.nodeServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@container-engine-robot.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-dns-admins@kubernetes.io",
+        "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/cert-manager/sa/cert-manager",
+        "serviceAccount:dns-pusher@kubernetes-public.iam.gserviceaccount.com",
+        "serviceAccount:k8s-infra-dns-updater@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/dns.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:127754664067-compute@developer.gserviceaccount.com",
+        "serviceAccount:127754664067@cloudservices.gserviceaccount.com",
+        "serviceAccount:kubernetes-public@appspot.gserviceaccount.com",
+        "serviceAccount:service-127754664067@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:thockin@google.com"
+      ],
+      "role": "roles/iam.roleAdmin"
+    },
+    {
+      "members": [
+        "user:thockin@google.com"
+      ],
+      "role": "roles/iam.securityAdmin"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@gcp-sa-pubsub.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountTokenCreator"
+    },
+    {
+      "members": [
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.logWriter"
+    },
+    {
+      "members": [
+        "group:gke-security-groups@kubernetes.io"
+      ],
+      "role": "roles/logging.privateLogViewer"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@gcp-sa-logging.iam.gserviceaccount.com"
+      ],
+      "role": "roles/logging.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:tf-monitoring-deployer@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.metricWriter"
+    },
+    {
+      "members": [
+        "group:gke-security-groups@kubernetes.io",
+        "serviceAccount:gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+        "serviceAccount:k8s-infra-monitoring-viewer@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/monitoring.viewer"
+    },
+    {
+      "members": [
+        "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
+        "serviceAccount:kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/secretmanager.secretAccessor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-127754664067@service-networking.iam.gserviceaccount.com"
+      ],
+      "role": "roles/servicenetworking.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "roles/stackdriver.accounts.editor"
+    },
+    {
+      "members": [
+        "group:k8s-infra-cluster-admins@kubernetes.io"
+      ],
+      "role": "roles/stackdriver.accounts.viewer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-aws-admins@kubernetes.io",
+        "group:k8s-infra-cluster-admins@kubernetes.io",
+        "group:k8s-infra-fastly-admins@kubernetes.io",
+        "group:k8s-infra-gcp-org-admins@kubernetes.io",
+        "group:k8s-infra-ii-coop@kubernetes.io",
+        "group:k8s-infra-porche-admins@kubernetes.io",
+        "group:k8s-infra-prow-oncall@kubernetes.io",
+        "group:k8s-infra-sandbox-capg@kubernetes.io",
+        "serviceAccount:k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "version": 1
+}

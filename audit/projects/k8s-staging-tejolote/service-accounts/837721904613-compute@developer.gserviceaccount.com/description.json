@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "837721904613-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-tejolote/serviceAccounts/837721904613-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "100828951112538113975",
+  "projectId": "k8s-staging-tejolote",
+  "uniqueId": "100828951112538113975"
+}

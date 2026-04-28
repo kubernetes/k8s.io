@@ -1,0 +1,242 @@
+# Copyright 2019 The Kubernetes Authors All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: crier
+  labels:
+    app: crier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crier
+  template:
+    metadata:
+      labels:
+        app: crier
+    spec:
+      serviceAccountName: crier
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: crier
+          image: us-docker.pkg.dev/k8s-infra-prow/images/crier:v20260423-a2314bdb2
+          args:
+            - --blob-storage-workers=1
+            - --config-path=/etc/config/config.yaml
+            - --github-endpoint=http://ghproxy
+            - --github-endpoint=https://api.github.com
+            - --github-token-path=/etc/github/oauth
+            - --github-workers=5
+            - --job-config-path=/etc/job-config
+            - --kubernetes-blob-storage-workers=1
+            - --slack-token-file=/etc/slack/token
+            - --slack-workers=1
+          env:
+            # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
+            - name: KUBECONFIG
+              value: "/etc/kubeconfig-k8s-infra-prow/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-k8s-infra-aks-prow-build/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig:/etc/k8s-infra-ppc64le-prow-build-kubeconfig/kubeconfig:/etc/k8s-infra-s390x-prow-build-kubeconfig/kubeconfig"
+            # AWS_ variables needed to assume role to access the prow-build-cluster EKS cluster.
+            - name: AWS_ROLE_ARN
+              value: arn:aws:iam::468814281478:role/Prow-EKS-Admin
+            - name: AWS_WEB_IDENTITY_TOKEN_FILE
+              value: /var/run/secrets/aws-iam-token/serviceaccount/token
+            - name: AWS_REGION
+              value: us-east-2
+            # Azure variables needed to authenticate to AKS clusters with Azure AD Integration
+            - name: AZURE_CLIENT_ID # AZURE_CLIENT_ID is being overloaded with Azure Workload ID
+              value: "92ce800b-0477-44c1-ac44-aa53fb973993"
+            - name: AZURE_SUBSCRIPTION_ID
+              value: "46678f10-4bbb-447e-98e8-d2829589f2d8"
+            - name: AZURE_TENANT_ID
+              value: "d1aa7522-0959-442e-80ee-8c4f7fb4c184"
+            - name: AZURE_FEDERATED_TOKEN_FILE
+              value: "/var/run/secrets/azure-token/serviceaccount/token"
+          ports:
+            - name: metrics
+              containerPort: 9090
+          volumeMounts:
+            - mountPath: /etc/kubeconfig-k8s-infra-prow
+              name: kubeconfig-k8s-infra-prow
+              readOnly: true
+            - mountPath: /etc/kubeconfig-k8s-infra-prow-build
+              name: kubeconfig-k8s-infra-prow-build
+              readOnly: true
+            - mountPath: /etc/kubeconfig-k8s-infra-prow-build-trusted
+              name: kubeconfig-k8s-infra-prow-build-trusted
+              readOnly: true
+            - mountPath: /etc/kubeconfig-k8s-infra-aks-prow-build
+              name: kubeconfig-k8s-infra-aks-prow-build
+              readOnly: true
+            - mountPath: /etc/kubeconfig-eks-prow-build-cluster
+              name: kubeconfig-eks-prow-build-cluster
+              readOnly: true
+            - mountPath: /etc/kubeconfig-k8s-infra-kops-prow-build
+              name: kubeconfig-k8s-infra-kops-prow-build
+              readOnly: true
+            - mountPath: /etc/k8s-infra-ppc64le-prow-build-kubeconfig
+              name: kubeconfig-k8s-infra-ppc64le-prow-build
+              readOnly: true
+            - mountPath: /etc/k8s-infra-s390x-prow-build-kubeconfig
+              name: kubeconfig-k8s-infra-s390x-prow-build
+              readOnly: true
+            - name: config
+              mountPath: /etc/config
+              readOnly: true
+            - name: job-config
+              mountPath: /etc/job-config
+              readOnly: true
+            - name: oauth
+              mountPath: /etc/github
+              readOnly: true
+            - name: slack
+              mountPath: /etc/slack
+              readOnly: true
+            # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+            - name: aws-iam-token
+              mountPath: /var/run/secrets/aws-iam-token/serviceaccount
+              readOnly: true
+            # Azure Token needed for workload identity
+            - name: azure-token
+              mountPath: "/var/run/secrets/azure-token/serviceaccount"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: config
+        - name: job-config
+          configMap:
+            name: job-config
+        - name: oauth
+          secret:
+            secretName: oauth-token
+        - name: slack
+          secret:
+            secretName: slack-token
+        - name: kubeconfig-k8s-infra-prow
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-prow
+        - name: kubeconfig-k8s-infra-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-prow-build
+        - name: kubeconfig-k8s-infra-prow-build-trusted
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-prow-build-trusted
+        - name: kubeconfig-k8s-infra-aks-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-aks-prow-build
+        - name: kubeconfig-eks-prow-build-cluster
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-eks-prow-build-cluster
+        - name: kubeconfig-k8s-infra-kops-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-kops-prow-build
+        - name: kubeconfig-k8s-infra-ppc64le-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-ppc64le-prow-build
+        - name: kubeconfig-k8s-infra-s390x-prow-build
+          secret:
+            defaultMode: 420
+            secretName: kubeconfig-k8s-infra-s390x-prow-build
+        # AWS IAM token needed to assume role to access the prow-build-cluster EKS cluster.
+        - name: aws-iam-token
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  audience: sts.amazonaws.com
+                  expirationSeconds: 86400
+                  path: token
+        # Azure Token needed for workload identity
+        - name: azure-token
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 86400
+                  path: token
+                  audience: api://AzureADTokenExchange
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: crier
+  namespace: default
+  name: crier
+spec:
+  ports:
+    - name: metrics
+      port: 9090
+      protocol: TCP
+  selector:
+    app: crier
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: prow-control-plane@k8s-infra-prow.iam.gserviceaccount.com
+  name: crier
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: crier
+rules:
+  - apiGroups:
+      - "prow.k8s.io"
+    resources:
+      - "prowjobs"
+    verbs:
+      - "get"
+      - "watch"
+      - "list"
+      - "patch"
+  - apiGroups:
+      - ""
+    resources:
+      - "pods"
+      - "events"
+    verbs:
+      - "get"
+      - "list"
+  - apiGroups:
+      - ""
+    resources:
+      - "pods"
+    verbs:
+      - "patch"
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: crier
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: crier
+subjects:
+  - kind: ServiceAccount
+    name: crier

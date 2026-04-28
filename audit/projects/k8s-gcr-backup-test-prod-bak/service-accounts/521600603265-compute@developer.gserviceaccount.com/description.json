@@ -1,0 +1,8 @@
+{
+  "displayName": "Compute Engine default service account",
+  "email": "521600603265-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-gcr-backup-test-prod-bak/serviceAccounts/521600603265-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "113269947808075607803",
+  "projectId": "k8s-gcr-backup-test-prod-bak",
+  "uniqueId": "113269947808075607803"
+}

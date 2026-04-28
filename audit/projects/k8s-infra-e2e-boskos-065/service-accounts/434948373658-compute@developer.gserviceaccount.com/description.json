@@ -1,0 +1,8 @@
+{
+  "displayName": "Compute Engine default service account",
+  "email": "434948373658-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-infra-e2e-boskos-065/serviceAccounts/434948373658-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "110559801857907920378",
+  "projectId": "k8s-infra-e2e-boskos-065",
+  "uniqueId": "110559801857907920378"
+}

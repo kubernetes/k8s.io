@@ -1,0 +1,11 @@
+{
+  "createTime": "2020-08-14T18:41:09.035Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-cluster-addons",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-cluster-addons",
+  "projectNumber": "239900365888"
+}

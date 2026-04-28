@@ -1,0 +1,143 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: sig-architecture-leads@kubernetes.io
+    name: sig-architecture-leads
+    description: |-
+      sig-architecture leads
+    owners:
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - jbelamaric@google.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: sig-architecture@kubernetes.io
+    name: sig-architecture
+    description: |-
+      SIG architecture general discussion group
+    owners:
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - jbelamaric@google.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+
+  - email-id: k8s-infra-staging-apisnoop@kubernetes.io
+    name: k8s-infra-staging-apisnoop
+    description: |-
+      ACL for apisnoop images
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - caleb@ii.coop
+      - hh@ii.coop
+      - jbelamaric@google.com
+      - zz@ii.coop
+      - koray.oksay@gmail.com
+      - mario@kubermatic.com
+      - mudrinic.mare@gmail.com
+
+  - email-id: k8s-infra-staging-maintainer-tools@kubernetes.io
+    name: k8s-infra-staging-maintainer-tools
+    description: |-
+      ACL for Maintainer Tools. See: https://sigs.k8s.io/maintainer-tools
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - justinsb@google.com
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+  - email-id: k8s-infra-code-organization@kubernetes.io
+    name: k8s-infra-code-organization
+    description: |-
+      ACL for managing snyk CI job secrets under code-organization
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - davanum@gmail.com
+      - liggitt@google.com
+      - shaikhnavid14@gmail.com
+
+  - email-id: k8s-infra-prod-readiness@kubernetes.io
+    name: k8s-infra-prod-readiness
+    description: |-
+      ACL for managing access to prod-readiness-related infrastructure such as
+      the k8s-prod-readiness bigquery dataset
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jbelamaric@google.com
+      - deads@redhat.com
+      - wojtekt@google.com
+      - ehashman@redhat.com
+
+  - email-id: k8s-infra-keps@kubernetes.io
+    name: k8s-infra-keps
+    description: |-
+      ACL for access to KEP related infrastructure
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - jeremy.r.rickard@gmail.com
+    - jbelamaric@google.com
+    - k8s@auggie.dev
+    - killen.bob@gmail.com
+    - pal.nabarun95@gmail.com

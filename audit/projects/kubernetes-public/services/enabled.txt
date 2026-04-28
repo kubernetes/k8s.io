@@ -1,0 +1,38 @@
+NAME                                 TITLE
+analyticshub.googleapis.com          Analytics Hub API
+artifactregistry.googleapis.com      Artifact Registry API
+autoscaling.googleapis.com           Cloud Autoscaling API
+bigquery.googleapis.com              BigQuery API
+bigqueryconnection.googleapis.com    BigQuery Connection API
+bigquerydatapolicy.googleapis.com    BigQuery Data Policy API
+bigquerydatatransfer.googleapis.com  BigQuery Data Transfer API
+bigqueryreservation.googleapis.com   BigQuery Reservation API
+bigquerystorage.googleapis.com       BigQuery Storage API
+billingbudgets.googleapis.com        Cloud Billing Budget API
+cloudasset.googleapis.com            Cloud Asset API
+cloudresourcemanager.googleapis.com  Cloud Resource Manager API
+cloudshell.googleapis.com            Cloud Shell API
+compute.googleapis.com               Compute Engine API
+container.googleapis.com             Kubernetes Engine API
+containerregistry.googleapis.com     Container Registry API
+dataform.googleapis.com              Dataform API
+dataplex.googleapis.com              Cloud Dataplex API
+dns.googleapis.com                   Cloud DNS API
+gkebackup.googleapis.com             Backup for GKE API
+iam.googleapis.com                   Identity and Access Management (IAM) API
+iamcredentials.googleapis.com        IAM Service Account Credentials API
+logging.googleapis.com               Cloud Logging API
+monitoring.googleapis.com            Cloud Monitoring API
+networkconnectivity.googleapis.com   Network Connectivity API
+oslogin.googleapis.com               Cloud OS Login API
+policyanalyzer.googleapis.com        Policy Analyzer API
+pubsub.googleapis.com                Cloud Pub/Sub API
+secretmanager.googleapis.com         Secret Manager API
+servicenetworking.googleapis.com     Service Networking API
+serviceusage.googleapis.com          Service Usage API
+sql-component.googleapis.com         Cloud SQL
+sqladmin.googleapis.com              Cloud SQL Admin API
+stackdriver.googleapis.com           Stackdriver API
+storage-api.googleapis.com           Google Cloud Storage JSON API
+storage-component.googleapis.com     Cloud Storage
+sts.googleapis.com                   Security Token Service API

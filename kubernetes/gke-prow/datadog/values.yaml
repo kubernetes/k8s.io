@@ -1,0 +1,42 @@
+registry: gcr.io/datadoghq
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+  site: us5.datadoghq.com
+  clusterName: k8s-infra-prow
+  logs:
+    enabled: true
+    containerCollectAll: true
+  prometheusScrape:
+    enabled: true
+    serviceEndpoints: true
+  # COS specific https://docs.datadoghq.com/containers/kubernetes/distributions?tab=helm#GKE
+  systemProbe:
+    enableDefaultKernelHeadersPaths: false
+  kubeStateMetricsCore:
+    enabled: true
+  networkMonitoring:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+  sbom:
+    enabled: true
+    containerImage:
+      enabled: true
+      uncompressedLayersSupport: true
+    host:
+      enabled: true
+  apm:
+    instrumentation:
+      skipKPITelemetry: true # https://github.com/DataDog/helm-charts/issues/1395
+  operator:
+    enabled: false
+clusterAgent:
+  tokenExistingSecret: datadog-secret
+agents:
+  tolerations: # datadog supports arm64
+    - key: kubernetes.io/arch
+      operator: Equal
+      value: arm64
+      effect: NoSchedule

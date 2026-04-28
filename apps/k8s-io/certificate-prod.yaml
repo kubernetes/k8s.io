@@ -1,0 +1,71 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: k8s-io-prod
+  namespace: k8s-io-prod
+  labels:
+    app: k8s-io
+spec:
+  domains:
+  - k8s.io
+  - apt.k8s.io
+  - apt.kubernetes.io
+  - blog.k8s.io
+  - blog.kubernetes.io
+  - changelog.k8s.io
+  - changelog.kubernetes.io
+  - ci-test.k8s.io
+  - ci-test.kubernetes.io
+  - code.k8s.io
+  - code.kubernetes.io
+  - conduct.k8s.io
+  - conduct.kubernetes.io
+  - docs.k8s.io
+  - docs.kubernetes.io
+  - examples.k8s.io
+  - examples.kubernetes.io
+  - feature.k8s.io
+  - feature.kubernetes.io
+  - features.k8s.io
+  - features.kubernetes.io
+  - get.k8s.io
+  - get.kubernetes.io
+  - git.k8s.io
+  - git.kubernetes.io
+  - go.k8s.io
+  - go.kubernetes.io
+  - issue.k8s.io
+  - issue.kubernetes.io
+  - issues.k8s.io
+  - issues.kubernetes.io
+  - kep.k8s.io
+  - kep.kubernetes.io
+  - packages.k8s.io
+  - packages.kubernetes.io
+  - pkgs.k8s.io
+  - pkgs.kubernetes.io
+  - pr-test.k8s.io
+  - pr-test.kubernetes.io
+  - pr.k8s.io
+  - pr.kubernetes.io
+  - prs.k8s.io
+  - prs.kubernetes.io
+  - rel.k8s.io
+  - rel.kubernetes.io
+  - releases.k8s.io
+  - releases.kubernetes.io
+  - sbom.k8s.io
+  - sbom.kubernetes.io
+  - sigs.k8s.io
+  - sigs.kubernetes.io
+  - slack.k8s.io
+  - slack.kubernetes.io
+  - submit-queue.k8s.io
+  - submit-queue.kubernetes.io
+  - www.k8s.io
+  - youtube.k8s.io
+  - youtube.kubernetes.io
+  - yt.k8s.io
+  - yt.kubernetes.io
+  - yum.k8s.io
+  - yum.kubernetes.io

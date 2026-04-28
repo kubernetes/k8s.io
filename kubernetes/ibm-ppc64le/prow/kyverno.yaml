@@ -1,0 +1,52 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: insert-gcp-credentials
+spec:
+  rules:
+    - name: add-creds
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      preconditions:
+        any:
+          - key: '{{request.object.metadata.labels."created-by-prow" || ""}}'
+            operator: Equals
+            value: "true"
+      mutate:
+        patchStrategicMerge:
+          spec:
+            initContainers:
+              # pod order matters
+              - name: clonerefs
+              - (name): "initupload"
+                # prow passes the json path directly, uncomment this once the feature is disabled in prow
+                # env:
+                #   - name: GOOGLE_APPLICATION_CREDENTIALS
+                #     value: /secrets/gcs/service-account.json
+                volumeMounts:
+                  - mountPath: /var/run/secrets/google-iam-token/serviceaccount
+                    name: google-iam-token
+                    readOnly: true
+            containers:
+              - name: test
+              - (name): sidecar
+                # prow passes the json path directly, uncomment this once the feature is disabled in prow
+                # env:
+                #   - name: GOOGLE_APPLICATION_CREDENTIALS
+                #     value: /secrets/gcs/service-account.json
+                volumeMounts:
+                  - mountPath: /var/run/secrets/google-iam-token/serviceaccount
+                    name: google-iam-token
+                    readOnly: true
+            volumes:
+              - name: google-iam-token
+                projected:
+                  defaultMode: 420
+                  sources:
+                    - serviceAccountToken:
+                        audience: sts.googleapis.com
+                        expirationSeconds: 86400
+                        path: token

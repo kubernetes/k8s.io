@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-cluster-api-helm",
+  "email": "gcb-image-builder@k8s-staging-cluster-api-helm.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-cluster-api-helm/serviceAccounts/gcb-image-builder@k8s-staging-cluster-api-helm.iam.gserviceaccount.com",
+  "oauth2ClientId": "102639880021522236086",
+  "projectId": "k8s-staging-cluster-api-helm",
+  "uniqueId": "102639880021522236086"
+}

@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "195010227999-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-infra-oci-proxy/serviceAccounts/195010227999-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "108853575411652026087",
+  "projectId": "k8s-infra-oci-proxy",
+  "uniqueId": "108853575411652026087"
+}

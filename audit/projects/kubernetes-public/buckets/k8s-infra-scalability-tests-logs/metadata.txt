@@ -1,0 +1,20 @@
+gs://k8s-infra-scalability-tests-logs/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Thu, 17 Jun 2021 20:05:52 GMT
+	Time updated:			Tue, 03 Aug 2021 18:54:17 GMT
+	Metageneration:			3
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

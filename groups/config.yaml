@@ -1,0 +1,13 @@
+# Configuration for the kubernetes.io Google Groups setup
+
+# Secret version of the service account key to use
+secret-version: projects/k8s-gsuite/secrets/gsuite-groups-manager_key/versions/latest
+
+# Email id of the bot service account
+bot-id: wg-k8s-infra-api@kubernetes.io
+
+# Directory with groups.yaml files, relative to location of this config file
+groups-path: .
+
+# Path to restrictions.yaml file, relative to location of this config file
+restrictions-path: restrictions.yaml

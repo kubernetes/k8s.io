@@ -1,0 +1,10 @@
+[
+  {
+    "role": "WRITER",
+    "userByEmail": "gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+  },
+  {
+    "role": "OWNER",
+    "specialGroup": "projectOwners"
+  }
+]

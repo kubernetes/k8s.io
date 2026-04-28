@@ -1,0 +1,24 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# Correct as of 2023-01-06
+approvers:
+- cpanato
+- dims
+- justinsb
+- damdo
+- salasberryfin
+
+reviewers:
+- cpanato
+- dims
+- justinsb
+- damdo
+- salasberryfin
+
+emeritus_approvers:
+- vincepri
+- detiber
+
+labels:
+- sig/cluster-lifecycle
+- area/provider/gcp

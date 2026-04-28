@@ -1,0 +1,4 @@
+- name: mcp-lifecycle-operator
+  dmap:
+    # commit 97d7684d287830c2050f8c288f15aa77e977c678 (release-0.1)
+    "sha256:3229417d83c06eff5e63dfa6a90b0d809565d5df09ae2a2d58e7fad04f5a4004": ["v0.1.0"]

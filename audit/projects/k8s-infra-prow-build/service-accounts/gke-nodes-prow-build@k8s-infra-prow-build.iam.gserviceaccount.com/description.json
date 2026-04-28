@@ -1,0 +1,8 @@
+{
+  "displayName": "Nodes in GKE cluster 'prow-build'",
+  "email": "gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build/serviceAccounts/gke-nodes-prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+  "oauth2ClientId": "110227136526245655726",
+  "projectId": "k8s-infra-prow-build",
+  "uniqueId": "110227136526245655726"
+}

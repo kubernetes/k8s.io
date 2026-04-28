@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-09-04T19:34:55.043Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-multitenancy",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-multitenancy",
+  "projectNumber": "817922591645"
+}

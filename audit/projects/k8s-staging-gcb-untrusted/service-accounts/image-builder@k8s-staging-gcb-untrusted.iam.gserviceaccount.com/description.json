@@ -1,0 +1,8 @@
+{
+  "displayName": "Used by prow to run cloudbuild jobs on this project",
+  "email": "image-builder@k8s-staging-gcb-untrusted.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-gcb-untrusted/serviceAccounts/image-builder@k8s-staging-gcb-untrusted.iam.gserviceaccount.com",
+  "oauth2ClientId": "108837050649101743368",
+  "projectId": "k8s-staging-gcb-untrusted",
+  "uniqueId": "108837050649101743368"
+}

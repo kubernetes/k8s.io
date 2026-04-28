@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-cloud-pv-labeler",
+  "email": "gcb-image-builder@k8s-staging-cloud-pv-labeler.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-cloud-pv-labeler/serviceAccounts/gcb-image-builder@k8s-staging-cloud-pv-labeler.iam.gserviceaccount.com",
+  "oauth2ClientId": "105496837401397043904",
+  "projectId": "k8s-staging-cloud-pv-labeler",
+  "uniqueId": "105496837401397043904"
+}

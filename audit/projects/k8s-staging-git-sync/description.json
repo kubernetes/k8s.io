@@ -1,0 +1,11 @@
+{
+  "createTime": "2020-09-08T00:05:59.672Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-git-sync",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-git-sync",
+  "projectNumber": "998209132534"
+}

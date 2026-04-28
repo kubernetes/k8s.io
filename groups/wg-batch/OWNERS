@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- wg-batch-leads
+reviewers:
+- wg-batch-leads
+
+labels:
+- wg/batch

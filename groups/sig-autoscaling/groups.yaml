@@ -1,0 +1,125 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  - email-id: sig-autoscaling-leads@kubernetes.io
+    name: sig-autoscaling-leads
+    description: |-
+      SIG autoscaling leads
+    owners:
+      - adrian@changeover.za.net
+      - guyjtempleton@googlemail.com
+      - jack.francis@microsoft.com
+      - jtuznik@google.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
+  - email-id: sig-autoscaling@kubernetes.io
+    name: sig-autoscaling
+    description: |-
+      SIG autoscaling general discussion group
+    owners:
+      - adrian@changeover.za.net
+      - guyjtempleton@googlemail.com
+      - jack.francis@microsoft.com
+      - jtuznik@google.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: sig-autoscaling-karpenter-leads@kubernetes.io
+    name: sig-autoscaling-karpenter-leads
+    description: |-
+      Karpenter Subproject leads
+    owners:
+      - ellistarn@gmail.com
+      - jonathan.innis.ji@gmail.com
+      - toddneal@protonmail.com
+      - bmwagner10@gmail.com
+      - ntranicholas@gmail.com
+      - alex.leites@gmail.com
+      - amanueng@gmail.com
+      - dealj@umich.edu
+      - jackfrancis@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-autoscaling@kubernetes.io
+    name: k8s-infra-staging-autoscaling
+    description: |-
+      ACL for staging k8s autoscaling components
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - adrian@changeover.za.net
+      - bskiba@google.com
+      - bwroblewski@google.com
+      - danielmk@google.com
+      - jmfran@google.com
+      - guyjtempleton@googlemail.com
+      - jack.francis@microsoft.com
+      - jtuznik@google.com
+      - ksiedlecki@google.com
+      - kwiesmueller@google.com
+      - luizaoj@google.com
+      - rgowman@google.com
+      - raywainman@gmail.com
+      - ksaiyed@google.com
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

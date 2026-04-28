@@ -1,0 +1,25 @@
+files:
+- name: 1.18.3/darwin/amd64/kops
+  sha256: 11e4a0248117e24793fc6256f365b02b00aa07bd583aef7bf7a2ce78bf7a00db
+- name: 1.18.3/darwin/amd64/kops.sha1
+  sha256: fcfde4a1b5479785b8c65152adf03fd6e5acbd8689ab3c442207e3dfe467c007
+- name: 1.18.3/darwin/amd64/kops.sha256
+  sha256: 45470f9be3420371b7c5f346d3ffcad26df3000dbfbc16f3d0b6a749184313ef
+- name: 1.18.3/images/protokube.tar.gz
+  sha256: ef43c18baec6bf99b4ee8c882d5b7fb69dd18e10684841ec1aa2f9da03bdce6c
+- name: 1.18.3/images/protokube.tar.gz.sha1
+  sha256: bc8f94ef94aec35be31451716babdbabab340189b833743d16635a713110f65c
+- name: 1.18.3/images/protokube.tar.gz.sha256
+  sha256: 6bb83c5b6e816bc4d584a5ca22f48d2b62028efb6c2413ad441b19f7d43bc9fe
+- name: 1.18.3/linux/amd64/kops
+  sha256: 261b1d84a4ef2304d5959e8bb84f5976df0945ef929596ded43b147f913a3575
+- name: 1.18.3/linux/amd64/kops.sha1
+  sha256: 8929544abab7036df20aad478d4de6d84a8d567f20f32ff6c65638c57dfc820d
+- name: 1.18.3/linux/amd64/kops.sha256
+  sha256: 5cf42946257b052491c0051a0c29b05d5bd35a632dcc315699e5a268fef5b24e
+- name: 1.18.3/linux/amd64/nodeup
+  sha256: 8430d05efa58c0fea0693d8590a22278bac16a754b52670e3bdc3a06ab7391f0
+- name: 1.18.3/linux/amd64/nodeup.sha1
+  sha256: 0dfcf478d0ff83de3fa4a4abf7504fca1a18d7b7fff41b6f4baeeabf3aac810b
+- name: 1.18.3/linux/amd64/nodeup.sha256
+  sha256: 10a077f34f86ae4aa676b23d66da4e83180ecd0656721c3ef2af6173b8255ccc

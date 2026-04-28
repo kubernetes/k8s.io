@@ -1,0 +1,578 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: k8s-infra-alerts@kubernetes.io
+    name: k8s-infra-alerts
+    description: |-
+      alerts for sig-k8s-infra
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: sig-k8s-infra-private@kubernetes.io
+    name: sig-k8s-infra-private
+    description: |-
+      Mailing list for private / sensitive communication (e.g. incident
+      response, embargoed comms)
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: sig-k8s-infra-leads@kubernetes.io
+    name: sig-k8s-infra-leads
+    description: |-
+      SIG Chairs and Technical leads
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - ameukam@gmail.com
+      - chacman@microsoft.com
+      - cy@borg.dev
+      - dylandcpage@gmail.com
+      - mudrinic.mare@gmail.com
+
+  - email-id: sig-k8s-infra@kubernetes.io
+    name: sig-k8s-infra
+    description: |-
+      Public mailing list for SIG K8s Infra
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "false"
+    owners:
+      - ameukam@gmail.com
+      - chacman@microsoft.com
+      - dylandcpage@gmail.com
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-infra-tools@kubernetes.io
+    name: k8s-infra-staging-infra-tools
+    description: |-
+      ACL for staging Infra Tools
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+  # Every RBAC group should be added here.
+  - email-id: gke-security-groups@kubernetes.io
+    name: gke-security-groups
+    description: |-
+      Security Groups for GKE clusters
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # needed for RBAC
+    members:
+      - k8s-infra-rbac-cert-manager@kubernetes.io
+      - k8s-infra-rbac-codesearch@kubernetes.io
+      - k8s-infra-rbac-elekto@kubernetes.io
+      - k8s-infra-rbac-gcsweb@kubernetes.io
+      - k8s-infra-rbac-kettle@kubernetes.io
+      - k8s-infra-rbac-k8s-io-canary@kubernetes.io
+      - k8s-infra-rbac-k8s-io-packages-canary@kubernetes.io
+      - k8s-infra-rbac-k8s-io-packages-prod@kubernetes.io
+      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
+      - k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
+      - k8s-infra-rbac-observability@kubernetes.io
+      - k8s-infra-rbac-perfdash@kubernetes.io
+      - k8s-infra-rbac-prow@kubernetes.io
+      - k8s-infra-rbac-publishing-bot@kubernetes.io
+      - k8s-infra-rbac-triageparty-cli@kubernetes.io
+      - k8s-infra-rbac-triageparty-scalability@kubernetes.io
+      - k8s-infra-rbac-slack-infra@kubernetes.io
+
+  # owners of the k8s-infra-ii-sandbox project, working on billing analysis
+  # for artifact hosting and registry.k8s.io
+  - email-id: k8s-infra-ii-coop@kubernetes.io
+    name: k8s-infra-ii-coop
+    description: |-
+      ACL for II Coop
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - hh@ii.coop
+      - riaan@ii.coop
+      - stephen@ii.coop
+      - caleb@ii.coop
+      - jt@ii.coop
+
+  # Owners of the GCP projects:
+  # - k8s-infra-oci-proxy
+  # - k8s-infra-oci-proxy-prod
+  - email-id: k8s-infra-oci-proxy-admins@kubernetes.io
+    name: k8s-infra-oci-proxy-admins
+    description: |-
+      ACL for OCI Proxy admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - sig-k8s-infra-leads@kubernetes.io
+
+  # Owners of the GCP projects:
+  # - k8s-infra-porche (pending)
+  # - k8s-infra-porche-prod (pending)
+  - email-id: k8s-infra-porche-admins@kubernetes.io
+    name: k8s-infra-porche-admins
+    description: |-
+      ACL for porche admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - justinsb@google.com
+      - sig-k8s-infra-leads@kubernetes.io
+
+  # owners of the k8s-infra-sandbox-capg project, working on cluster-api provider for GCP
+  - email-id: k8s-infra-sandbox-capg@kubernetes.io
+    name: k8s-infra-sandbox-capg
+    description: |-
+      ACL for CAPG sandbox
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ctadeu@gmail.com
+      - cjsalaspelayo@gmail.com
+      - damiano.donati@gmail.com
+      - davanum@gmail.com
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+
+  - email-id: k8s-infra-rbac-cert-manager@kubernetes.io
+    name: k8s-infra-rbac-cert-manager
+    description: |-
+      Grants access to the `namespace-user` role in the `cert-manager` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - cblecker@gmail.com
+      - james@munnelly.eu
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-rbac-codesearch@kubernetes.io
+    name: k8s-infra-rbac-codesearch
+    description: |-
+      Grants access to the `namespace-user` role in the `codesearch` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - dec.soham@gmail.com
+
+  - email-id: k8s-infra-rbac-k8s-io-canary@kubernetes.io
+    name: k8s-infra-rbac-k8s-io-canary
+    description: |-
+      Grants access to the `namespace-user` role in the `k8s-io-canary` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - k8s-infra-rbac-k8s-io-prod@kubernetes.io
+
+  - email-id: k8s-infra-rbac-k8s-io-packages-canary@kubernetes.io
+    name: k8s-infra-rbac-k8s-io-packages-canary
+    description: |-
+      Grants access to the `namespace-user` role in the `k8s-io-packages-canary` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      # Access is given to:
+      #   - SIG Release Leads
+      #   - @xmudrii (working on KEP-1731 and official packages implementation)
+      # We must use emails here instead of groups, because groups are not
+      # recongizned by RBAC
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - mudrinic.mare@gmail.com
+      - saschagrunert@gmail.com
+
+  - email-id: k8s-infra-rbac-k8s-io-packages-prod@kubernetes.io
+    name: k8s-infra-rbac-k8s-io-packages-prod
+    description: |-
+      Grants access to the `namespace-user` role in the `k8s-io-packages-prod` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      # Access is given to:
+      #   - SIG Release Leads
+      #   - @xmudrii (working on KEP-1731 and official packages implementation)
+      # We must use emails here instead of groups, because groups are not
+      # recongizned by RBAC
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - mudrinic.mare@gmail.com
+      - saschagrunert@gmail.com
+
+  - email-id: k8s-infra-rbac-k8s-io-prod@kubernetes.io
+    name: k8s-infra-rbac-k8s-io-prod
+    description: |-
+      Grants access to the `namespace-user` role in the `k8s-io-prod` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - antonio.ojea.garcia@gmail.com
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - nikhitaraghunath@gmail.com
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io
+    name: k8s-infra-rbac-kubernetes-external-secrets
+    description: |-
+      Grants access to the `namespace-user` role in the `kubernetes-external-secrets` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - k8s-infra-cluster-admins@kubernetes.io
+
+  #
+  # k8s-infra org-wide infrastructure read-only groups
+  #
+  # Each group here represents read-only access to large amounts of kubernetes
+  # project infrastructure (e.g. all GCP infrastructure, all storage, etc).
+  # Membership is generally open to anyone who is interested, with caveats
+  # that may be raised on a case-by-case basis
+  #
+
+  - email-id: k8s-infra-gcp-auditors@kubernetes.io
+    name: k8s-infra-gcp-auditors
+    description: |-
+      grants read-only access to all GCP infrastructure with the kubernetes.io
+      GCP organization, excluding sensitive/secret values
+
+      access granted via custom organization role audit.viewer
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cy@borg.dev
+      - ihor@cncf.io
+      - jeefy@cncf.io
+      - sig-k8s-infra-leads@kubernetes.io
+      - steering-private@kubernetes.io
+      - mario@kubermatic.com
+
+  #
+  # k8s-infra org-wide infrastructure admin groups
+  #
+  # Each group here represents highly privileged access large amounts of
+  # kubernetes project infrastructure (e.g. all GCP infrastructure, all AWS
+  # infrastructure, etc.). A high level of trust is required for membership
+  # in these groups
+  #
+
+  - email-id: k8s-infra-aws-admins@kubernetes.io
+    name: k8s-infra-aws-admins
+    description: |-
+      ACL for aws-admins
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - ihor@cncf.io
+      - sig-k8s-infra-leads@kubernetes.io
+      - cncf-aws-admins@lists.cncf.io
+      - mario@kubermatic.com
+
+  - email-id: k8s-infra-aws-boskos-accounts@kubernetes.io
+    name: k8s-infra-aws-boskos-accounts
+    description: |-
+      ACL for AWS accounts used by boskos
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+      - cncf-aws-admins@lists.cncf.io
+
+  - email-id: k8s-infra-aws-root-account@kubernetes.io
+    name: k8s-infra-aws-root-account
+    description: |-
+      ACL for AWS root account
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+      - cncf-aws-admins@lists.cncf.io
+
+  - email-id: k8s-infra-azure-admins@kubernetes.io
+    name: k8s-infra-azure-admins
+    description: |-
+      ACL for Azure admins
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-equinix-admins@kubernetes.io
+    name: k8s-infra-equinix-admins
+    description: |-
+      ACL for Equinix admins
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-fastly-admins@kubernetes.io
+    name: k8s-infra-fastly-admins
+    description: |-
+      ACL for admins operating Fastly services
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-lambda-ai-admins@kubernetes.io
+    name: k8s-infra-lambda-ai-admins
+    description: |-
+      ACL for admins operating Lambda AI account
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-okta-admins@kubernetes.io
+    name: k8s-infra-okta-admins
+    description: |-
+      ACL for Okta account admins
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-artifact-admins@kubernetes.io
+    name: k8s-infra-artifact-admins
+    description: |-
+      ACL for artifact-admins, including the artifact auditor
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-admins@kubernetes.io
+      - justinsb@google.com
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-bigquery-admins@kubernetes.io
+    name: k8s-infra-bigquery-admins
+    description: |-
+      ACL for bigquery-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ihor@cncf.io
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-cloudflare-admins@kubernetes.io
+    name: k8s-infra-cloudflare-admins
+    description: |-
+      ACL for Cloudflare admins
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-cluster-admins@kubernetes.io
+    name: k8s-infra-cluster-admins
+    description: |-
+      ACL for cluster-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-dns-admins@kubernetes.io
+    name: k8s-infra-dns-admins
+    description: |-
+      ACL for dns-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-gcp-accounting@kubernetes.io
+    name: k8s-infra-gcp-accounting
+    description: |-
+      ACL for GCP accounting
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ihor@cncf.io
+      - mario@kubermatic.com
+      - sig-k8s-infra-leads@kubernetes.io
+      - steering-private@kubernetes.io
+
+  - email-id: k8s-infra-aws-accounting@kubernetes.io
+    name: k8s-infra-aws-accounting
+    description: |-
+      ACL for AWS accounting (readonly)
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - mario@kubermatic.com
+      - sig-k8s-infra-leads@kubernetes.io
+      - steering-private@kubernetes.io
+
+  - email-id: k8s-infra-yt-admins@kubernetes.io
+    name: k8s-infra-yt-admins
+    description: |-
+      ACL for Youtube account used by SIG k8s Infra
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-gcp-org-admins@kubernetes.io
+    name: k8s-infra-gcp-org-admins
+    description: |-
+      grants owner access to the kubernetes.io GCP organization, as well as
+      additional privileges necessary for billing and admin purposes
+
+      access granted via custom organization role organization.admin
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ihor@cncf.io
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-public-pii@kubernetes.io
+    name: k8s-infra-public-pii
+    description: |-
+      ACL for access to k8s-infra-public gcs buckets & bq datasets
+      Membership restricted to those who are authorized to handle PII
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-group-admins@kubernetes.io
+    name: k8s-infra-group-admins
+    description: |-
+      People trusted to admin kubernetes.io google groups by
+      running the groups reconciler
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - cblecker@gmail.com
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-sandbox-capa@kubernetes.io
+    name: k8s-infra-sandbox-capa
+    description: |-
+      ACL for CAPA sandbox
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - ameukam@gmail.com
+      - davanum@gmail.com
+      - atharvashinde179@gmail.com
+      - ankita.swamy20@gmail.com
+      - richmcase@gmail.com
+
+  - email-id: k8s-infra-gcp-gcve-admins@kubernetes.io
+    name: k8s-infra-gcp-gcve-admins
+    description: |-
+      ACL for Broadcom/vSphere project on GCP
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+      - christi.schlotter@gmail.com
+      - fabrizio.pandini@broadcom.com
+      - sabari.murugesan@broadcom.com
+      - stefan.buringer@broadcom.com
+
+  - email-id: k8s-infra-ibm-s390x-admins@kubernetes.io
+    name: k8s-infra-ibm-s390x-admins
+    description: |-
+      ACL for IBM s390x resources on GCP
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - sudharshanrampoore@gmail.com
+      - rishi.investigate@gmail.com
+
+  - email-id: k8s-infra-ibm-ppc64le-admins@kubernetes.io
+    name: k8s-infra-ibm-ppc64le-admins
+    description: |-
+      ACL for IBM ppc64le resources on GCP
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - rajalakshmi.girish1@ibm.com
+      - karthik.k.n@ibm.com
+      - amulmek1@in.ibm.com
+      - kishen.viswanathan@ibm.com
+      - varsharani.Deshmane1@ibm.com
+
+  - email-id: k8s-infra-rbac-observability@kubernetes.io
+    name: k8s-infra-rbac-observability
+    description: |-
+      Grants access to the `namespace-user` role in the `observability` namespace on the `utility` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+      - elieser.pereiraa@gmail.com

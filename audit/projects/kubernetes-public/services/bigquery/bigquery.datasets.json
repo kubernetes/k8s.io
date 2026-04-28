@@ -1,0 +1,47 @@
+[
+  {
+    "kind": "bigquery#dataset",
+    "id": "kubernetes-public:k8s_infra_kettle",
+    "datasetReference": {
+      "datasetId": "k8s_infra_kettle",
+      "projectId": "kubernetes-public"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "kubernetes-public:k8s_prod_readiness",
+    "datasetReference": {
+      "datasetId": "k8s_prod_readiness",
+      "projectId": "kubernetes-public"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "kubernetes-public:k8s_triage",
+    "datasetReference": {
+      "datasetId": "k8s_triage",
+      "projectId": "kubernetes-public"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "kubernetes-public:kubernetes_public_billing",
+    "datasetReference": {
+      "datasetId": "kubernetes_public_billing",
+      "projectId": "kubernetes-public"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "kubernetes-public:usage_metering_aaa",
+    "datasetReference": {
+      "datasetId": "usage_metering_aaa",
+      "projectId": "kubernetes-public"
+    },
+    "location": "US"
+  }
+]

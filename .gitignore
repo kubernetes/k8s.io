@@ -1,0 +1,13 @@
+# Verify scripts may leave programs in this directory
+/bin
+/tmp
+
+# Ignore IDE config files
+.vscode
+.idea
+
+# kustomize charts
+kubernetes/*/*/charts/
+
+# Python bytecode cache
+__pycache__/

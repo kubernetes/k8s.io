@@ -1,0 +1,8 @@
+{
+  "displayName": "Compute Engine default service account",
+  "email": "456067983721-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-e2e-test-images/serviceAccounts/456067983721-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "105757215920619059969",
+  "projectId": "k8s-staging-e2e-test-images",
+  "uniqueId": "105757215920619059969"
+}

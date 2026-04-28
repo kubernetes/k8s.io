@@ -1,0 +1,79 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: istio-base
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            clusterType: 'utility'
+  template:
+    metadata:
+      name: 'istio-base-{{ .name }}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "-3"
+    spec:
+      destination:
+        namespace: istio-system
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: base
+          repoURL: https://istio-release.storage.googleapis.com/charts
+          targetRevision: 1.28.4
+        - path: config/crd/experimental
+          repoURL: https://github.com/kubernetes-sigs/gateway-api
+          targetRevision: v1.4.1
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            topology.istio.io/network: "{{ .metadata.labels.istioNetwork }}"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: istio
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            clusterType: 'utility'
+  template:
+    metadata:
+      name: 'istio-{{ .name }}'
+    spec:
+      destination:
+        namespace: istio-system
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: istiod
+          repoURL: https://istio-release.storage.googleapis.com/charts
+          targetRevision: 1.28.4
+          helm:
+            valueFiles:
+            - $values/kubernetes/{{ .name }}/helm/istio.yaml
+        - repoURL: 'https://github.com/kubernetes/k8s.io.git'
+          targetRevision: main
+          ref: values
+        - repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
+          path: kubernetes/{{ .name }}/istio-system
+      ignoreDifferences:
+        - group: admissionregistration.k8s.io
+          kind: ValidatingWebhookConfiguration
+          jsonPointers:
+          - /webhooks/0/failurePolicy
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

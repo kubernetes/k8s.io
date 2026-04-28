@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: slack-post-message
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  selector:
+    app: slack-post-message
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

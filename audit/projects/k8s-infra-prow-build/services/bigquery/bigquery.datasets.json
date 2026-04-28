@@ -1,0 +1,11 @@
+[
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-prow-build:usage_metering_prow_build",
+    "datasetReference": {
+      "datasetId": "usage_metering_prow_build",
+      "projectId": "k8s-infra-prow-build"
+    },
+    "location": "US"
+  }
+]

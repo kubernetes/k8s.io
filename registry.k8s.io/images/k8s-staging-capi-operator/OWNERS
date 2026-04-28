@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# https://github.com/kubernetes/community/blob/master/OWNERS_ALIASES.
+approvers:
+- JoelSpeed
+- Fedosin
+- alexander-demicev
+- Danil-Grigorev
+- furkatgofurov7

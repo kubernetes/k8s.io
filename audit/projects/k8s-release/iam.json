@@ -1,0 +1,83 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:304687256732@cloudbuild.gserviceaccount.com",
+        "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.builds.builder"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io",
+        "group:k8s-infra-release-editors@kubernetes.io"
+      ],
+      "role": "roles/cloudbuild.builds.editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-304687256732@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudbuild.serviceAgent"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io"
+      ],
+      "role": "roles/cloudkms.admin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io"
+      ],
+      "role": "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io"
+      ],
+      "role": "roles/cloudkms.signerVerifier"
+    },
+    {
+      "members": [
+        "serviceAccount:service-304687256732@container-analysis.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containeranalysis.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-304687256732@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerregistry.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-304687256732@gcp-sa-containerscanning.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerscanning.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-304687256732@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io",
+        "group:k8s-infra-release-editors@kubernetes.io"
+      ],
+      "role": "roles/serviceusage.serviceUsageConsumer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-release-admins@kubernetes.io",
+        "group:k8s-infra-release-editors@kubernetes.io",
+        "group:k8s-infra-release-viewers@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "version": 1
+}

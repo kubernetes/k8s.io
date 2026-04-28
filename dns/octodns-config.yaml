@@ -1,0 +1,87 @@
+---
+providers:
+  config:
+    class: octodns.provider.yaml.YamlProvider
+    directory: ./zone-configs
+    enforce_order: false
+    default_ttl: 3600
+  gcp:
+    class: octodns.provider.googlecloud.GoogleCloudProvider
+    project: kubernetes-public
+    #credentials_file: '/octodns/creds/gcp.json'
+
+zones:
+  # Canary targets.
+  canary.kubernetes.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  canary.k8s.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  canary.k8s-e2e.com.:
+    sources:
+      - config
+    targets:
+      - gcp
+  canary.x-k8s.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  canary.k8s.dev.:
+    sources:
+      - config
+    targets:
+      - gcp
+  canary.kubernetes.dev.:
+    sources:
+      - config
+    targets:
+      - gcp
+  canary.etcd.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+
+
+  # Production targets.
+  kubernetes.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  k8s.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  k8s-e2e.com.:
+    sources:
+      - config
+    targets:
+      - gcp
+  x-k8s.io.:
+    sources:
+      - config
+    targets:
+      - gcp
+  k8s.dev.:
+    sources:
+      - config
+    targets:
+      - gcp
+  kubernetes.dev.:
+    sources:
+      - config
+    targets:
+      - gcp
+  etcd.io.:
+    sources:
+      - config
+    targets:
+      - gcp

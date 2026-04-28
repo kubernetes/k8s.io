@@ -1,0 +1,7 @@
+# kops testing e2e for digital ocean.
+test-cncf-do:
+  type: NS
+  values:
+  - ns1.digitalocean.com.
+  - ns2.digitalocean.com.
+  - ns3.digitalocean.com.

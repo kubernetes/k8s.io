@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: monitoring
+  labels:
+    app: grafana
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.global-static-ip-name: grafana-ingress
+    kubernetes.io/ingress.class: gce
+    networking.gke.io/managed-certificates: grafana
+spec:
+  defaultBackend:
+    service:
+      name: monitoring-grafana
+      port:
+        name: http-web

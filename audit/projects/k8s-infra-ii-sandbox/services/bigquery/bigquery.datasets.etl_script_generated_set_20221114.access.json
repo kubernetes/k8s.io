@@ -1,0 +1,14 @@
+[
+  {
+    "role": "WRITER",
+    "specialGroup": "projectWriters"
+  },
+  {
+    "role": "OWNER",
+    "specialGroup": "projectOwners"
+  },
+  {
+    "role": "READER",
+    "specialGroup": "projectReaders"
+  }
+]

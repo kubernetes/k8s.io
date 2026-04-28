@@ -1,0 +1,15 @@
+# Prow PVCs
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: publishing-bot-pvc
+  namespace: test-pods
+  labels:
+    app: publisher
+spec:
+  storageClassName: "premium-rwo"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi

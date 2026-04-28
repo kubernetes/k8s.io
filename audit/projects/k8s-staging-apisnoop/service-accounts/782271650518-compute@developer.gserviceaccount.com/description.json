@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "782271650518-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-apisnoop/serviceAccounts/782271650518-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "106093531084798344594",
+  "projectId": "k8s-staging-apisnoop",
+  "uniqueId": "106093531084798344594"
+}

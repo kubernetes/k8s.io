@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- wg-data-protection-leads
+reviewers:
+- wg-data-protection-leads
+
+labels:
+- wg/data-protection

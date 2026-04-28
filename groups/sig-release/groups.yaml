@@ -1,0 +1,545 @@
+groups:
+  - email-id: k8s-infra-google-build-admins@kubernetes.io
+    name: k8s-infra-google-build-admins
+    description: |-
+      ACL for Google Build Admins (edit access to Docker Hub mirror, view
+      access to Release GCP projects)
+
+      https://git.k8s.io/sig-release/release-managers.md#build-admins
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - bentheelder@google.com
+      - juanescobar@google.com
+      - mushuee@google.com
+      - spiffxp@google.com
+
+  - email-id: k8s-infra-release-admins@kubernetes.io
+    name: k8s-infra-release-admins
+    description: |-
+      ACL for Release Engineering subproject owners (partial admin access to Release GCP projects)
+      https://git.k8s.io/sig-release/release-managers.md
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+
+  - email-id: k8s-infra-release-editors@kubernetes.io
+    name: k8s-infra-release-editors
+    description: |-
+      ACL for Patch Release Team and Branch Managers (edit access to Release GCP projects)
+      https://git.k8s.io/sig-release/release-managers.md
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-admins@kubernetes.io
+      - admin@mb-consulting.dev
+      - adolfo.garcia@uservers.net
+      - agustina.barbetta@gmail.com
+      - ameukam@gmail.com
+      - cicih@google.com
+      - ctadeu@gmail.com
+      - danieljoshuachan@gmail.com
+      - drewhagendev@gmail.com
+      - elieser.pereiraa@gmail.com
+      - gveronicalg@gmail.com
+      - jameswangel@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - michellengnx@gmail.com
+      - mudrinic.mare@gmail.com
+      - neoaggelos@gmail.com
+      - pal.nabarun95@gmail.com
+      - saschagrunert@gmail.com
+      - satyampsoni@gmail.com
+      - sreeramvenkitesh@gmail.com
+
+  - email-id: k8s-infra-release-viewers@kubernetes.io
+    name: k8s-infra-release-viewers
+    description: |-
+      ACL for Release Manager Associates (view access to Release GCP projects)
+      https://git.k8s.io/sig-release/release-managers.md
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - k8s-infra-google-build-admins@kubernetes.io
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - ameukam@gmail.com
+      - cicih@google.com
+      - fsmunoz@gmail.com # Subproject owner
+      - jameswangel@gmail.com
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - joseph.r.sandoval@gmail.com
+      - kat.cosgrove@gmail.com # Subproject owner
+      - pal.nabarun95@gmail.com
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
+
+  - email-id: k8s-infra-staging-artifact-promoter@kubernetes.io
+    name: k8s-infra-staging-artifact-promoter
+    description: |-
+      ACL for staging artifact-promoter
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - linusa@google.com
+      - thockin@google.com
+      - tjferrara@google.com
+
+  - email-id: k8s-infra-staging-build-image@kubernetes.io
+    name: k8s-infra-staging-build-image
+    description: |-
+      ACL for staging build images
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-ci-images@kubernetes.io
+    name: k8s-infra-staging-ci-images
+    description: |-
+      ACL for staging CI images
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-prow-oncall@kubernetes.io
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-cip-test@kubernetes.io
+    name: k8s-infra-staging-cip-test
+    description: |-
+      ACL for staging cip-test buckets, the test-only backup, and auditing
+      jobs for the promoter. See infra/gcp/bash/ensure-prod-storage.sh for more
+      details.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - davanum@gmail.com
+      - ihor@cncf.io
+      - linusa@google.com
+      - thockin@google.com
+      - rajib.jolite@gmail.com
+      - tjferrara@google.com
+
+  - email-id: k8s-infra-staging-experimental@kubernetes.io
+    name: k8s-infra-staging-experimental
+    description: |-
+      ACL for staging experimental images
+
+      This project is used to stage experimental images, for example, support
+      for new architectures.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - cy@borg.dev
+
+  - email-id: k8s-infra-staging-kubernetes@kubernetes.io
+    name: k8s-infra-staging-kubernetes
+    description: |-
+      ACL for staging Kubernetes
+
+      This project is used to stage official Kubernetes release artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-releng@kubernetes.io
+    name: k8s-infra-staging-releng
+    description: |-
+      ACL for staging RelEng
+
+      This project is used to test and stage Release Engineering tooling.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-releng-test@kubernetes.io
+    name: k8s-infra-staging-releng-test
+    description: |-
+      ACL for staging RelEng
+
+      This project is primarily used to validate Release Engineering images in presubmit.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-publishing-bot@kubernetes.io
+    name: k8s-infra-staging-publishing-bot
+    description: |-
+      ACL for staging publishing-bot
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - akhilerm@gmail.com
+      - davanum@gmail.com
+      - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+
+  - email-id: release-comms@kubernetes.io
+    name: release-comms
+    description: |-
+      External Release Communications list.
+      Should be used when coordinating external release timelines e.g., with the CNCF.
+
+      Membership should include SIG Chairs, Release Team Leads and Lead Shadows, and
+      the Communications team for the current release cycle.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    members:
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - danieljoshuachan@gmail.com # v1.36 Communications Shadow
+      - fsmunoz@gmail.com # Subproject owner
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - kat.cosgrove@gmail.com # Subproject owner
+      - kirtigoyal328@gmail.com # v1.36 Communications Shadow
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
+      - sophiagentle72@gmail.com # v1.36 Communications Shadow
+      - swrao21@gmail.com # v1.36 Communications Shadow
+      - umreutkarsh@gmail.com # v1.36 Communications Shadow
+
+  - email-id: release-managers-private@kubernetes.io
+    name: release-managers-private
+    description: |-
+      Private communications for SIG Chairs, Patch Release Team, and Branch Managers.
+      (internal scheduling and security release coordination)
+      https://git.k8s.io/sig-release/release-managers.md
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    members:
+      - mudrinic.mare@gmail.com
+      - pal.nabarun95@gmail.com
+      - saugustus2@bloomberg.net
+
+  - email-id: release-managers@kubernetes.io
+    name: release-managers
+    description: |-
+      Release Managers communications.
+      Includes all Release Managers.
+      https://git.k8s.io/sig-release/release-managers.md
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    members:
+      - release-managers-private@kubernetes.io
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - ameukam@gmail.com
+      - antheabjung@gmail.com
+      - bentheelder@google.com
+      - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - fsmunoz@gmail.com # Subproject owner
+      - gmccloskey@google.com
+      - jameswangel@gmail.com
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - joseph.r.sandoval@gmail.com
+      - kat.cosgrove@gmail.com # Subproject owner
+      - mudrinic.mare@gmail.com
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
+      - saugustus2@bloomberg.net
+      - spiffxp@google.com
+
+  - email-id: security-release-team@kubernetes.io
+    name: security-release-team
+    description: |-
+      Private list for coordinating security releases.
+
+      Membership is restricted to the Security Response Committee,
+      SIG Release Chairs, Patch Release Team, and Branch Managers.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - release-managers-private@kubernetes.io
+      - security-discuss-private@kubernetes.io
+
+  - email-id: sig-release-leads@kubernetes.io
+    name: sig-release-leads
+    description: |-
+      SIG Release Chairs, Technical Leads, and Program Managers comms
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - kat.cosgrove@gmail.com
+      - mudrinic.mare@gmail.com
+      - saschagrunert@gmail.com
+
+  - email-id: sig-release@kubernetes.io
+    name: sig-release
+    description: |-
+      SIG release general discussion group
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: release-team@kubernetes.io
+    name: release-team
+    description: |-
+      Release Team communications.
+      Includes SIG Release Leads and current release team.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    managers:
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow & BRM Shadow
+      - fsmunoz@gmail.com # Subproject owner
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - kat.cosgrove@gmail.com # Subproject owner
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
+    members:
+      - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
+      - anshuman.tripathi305@gmail.com # v1.36 Docs Shadow
+      - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - cst.grzn@gmail.com # v1.36 Release Signal Shadow
+      - danieljoshuachan@gmail.com # v1.36 Communications Shadow
+      - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
+      - drewhagendev@gmail.com # v1.36 BRM Shadow
+      - emile.savard.21@gmail.com # v1.36 Docs Shadow
+      - gmail@yudocaa.in # v1.36 Docs Lead
+      - j@mickey.dev # v1.36 Enhancements Lead
+      - k.130.email@gmail.com # v1.36 Release Signal Shadow
+      - kirtigoyal328@gmail.com # v1.36 Communications Shadow
+      - lauri.d.apple@gmail.com # v1.36 Enhancements Shadow
+      - michellengnx@gmail.com # v1.36 BRM Shadow
+      - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
+      - pmengelbert@gmail.com # v1.36 Enhancements Shadow
+      - prajyotparab19@gmail.com # v1.36 Release Signal Lead
+      - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
+      - singh1203.ss@gmail.com # v1.36 Docs Shadow
+      - sophiagentle72@gmail.com # v1.36 Communications Shadow
+      - sreeramvenkitesh@gmail.com # v1.36 BRM Lead
+      - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
+      - swrao21@gmail.com # v1.36 Communications Shadow
+      - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
+      - tico88612@gmail.com # v1.36 Enhancements Shadow
+      - tusharmittalworkm@gmail.com # v1.36 Docs Shadow
+      - umreutkarsh@gmail.com # v1.36 Communications Shadow
+
+  - email-id: release-team-shadows@kubernetes.io
+    name: release-team-shadows
+    description: |-
+      Release Team Shadow Communications.
+      Includes SIG Release Leads, EA and Current Release Team Shadows.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    managers:
+      - fsmunoz@gmail.com # Subproject owner
+      - kat.cosgrove@gmail.com # Subproject owner
+      - rytswd@gmail.com # v1.36 Release Lead
+    members:
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - amanshrivastava118@gmail.com # v1.36 Release Signal Shadow
+      - anshuman.tripathi305@gmail.com # v1.36 Docs Shadow
+      - chadmcrowell@gmail.com # v1.36 Communications Lead
+      - cst.grzn@gmail.com # v1.36 Release Signal Shadow
+      - danieljoshuachan@gmail.com # v1.36 Communications Shadow
+      - dhanisha.6@gmail.com # v1.36 Release Signal Shadow
+      - emile.savard.21@gmail.com # v1.36 Docs Shadow
+      - gmail@yudocaa.in # v1.36 Docs Lead
+      - j@mickey.dev # v1.36 Enhancements Lead
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - k.130.email@gmail.com # v1.36 Release Signal Shadow
+      - kirtigoyal328@gmail.com # v1.36 Communications Shadow
+      - lauri.d.apple@gmail.com # v1.36 Enhancements Shadow
+      - muhammad.adil.ghaffar@est.tech # v1.36 Release Signal Shadow
+      - pmengelbert@gmail.com # v1.36 Enhancements Shadow
+      - prajyotparab19@gmail.com # v1.36 Release Signal Lead
+      - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - singh1203.ss@gmail.com # v1.36 Docs Shadow
+      - sophiagentle72@gmail.com # v1.36 Communications Shadow
+      - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
+      - swrao21@gmail.com # v1.36 Communications Shadow
+      - tatiana.sel@gmail.com # v1.36 Release Signal Shadow
+      - tico88612@gmail.com # v1.36 Enhancements Shadow
+      - tusharmittalworkm@gmail.com # v1.36 Docs Shadow
+      - umreutkarsh@gmail.com # v1.36 Communications Shadow
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+
+  - email-id: k8s-infra-rbac-publishing-bot@kubernetes.io
+    name: k8s-infra-rbac-publishing-bot
+    description: |-
+      Grants access to the `namespace-user` role in the `publishing-bot` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - akhilerm@gmail.com
+      - ameukam@gmail.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - nikitaraghunath@gmail.com
+      - stefan.schimanski@gmail.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-staging-bom@kubernetes.io
+    name: k8s-infra-staging-bom
+    description: |-
+      ACL for staging BOM project
+
+      This project is used to test and stage BOM project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-tg-exporter@kubernetes.io
+    name: k8s-infra-staging-tg-exporter
+    description: |-
+      ACL for CI Signal Release Team
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+      - k8s-infra-release-viewers@kubernetes.io
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - prajyotparab19@gmail.com # v1.36 Release Signal Lead
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+
+  - email-id: release-team-enhancements@kubernetes.io
+    name: release-team-enhancements
+    description: |-
+      Release Team enhancements.
+      Includes current release leads and enhancements team members.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - ctadeu@gmail.com
+      - gveronicalg@gmail.com
+      - jeremy.r.rickard@gmail.com
+      - k8s@auggie.dev
+      - saschagrunert@gmail.com
+    members:
+      - agustina.barbetta@gmail.com # v1.36 Release Lead Shadow
+      - fsmunoz@gmail.com # Subproject owner
+      - j@mickey.dev # v1.36 Enhancements Lead
+      - jenny.shu@solo.io # v1.36 Release Lead Shadow
+      - kat.cosgrove@gmail.com # Subproject owner
+      - lauri.d.apple@gmail.com # v1.36 Enhancements Shadow
+      - pmengelbert@gmail.com # v1.36 Enhancements Shadow
+      - rajalakshmi.girish1@ibm.com # v1.36 Enhancements Shadow
+      - rawat.dipesh@gmail.com # v1.36 Release Lead Shadow
+      - rayandas91@gmail.com # v1.36 Release Lead Shadow
+      - rytswd@gmail.com # v1.36 Release Lead
+      - subhasmitaswain232@gmail.com # v1.36 Enhancements Shadow
+      - tico88612@gmail.com # v1.36 Enhancements Shadow
+
+  - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
+    name: k8s-infra-staging-zeitgeist
+    description: |-
+      ACL for staging Zeitgeist project
+
+      This project is used to test and stage Zeitgeist project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-staging-tejolote@kubernetes.io
+    name: k8s-infra-staging-tejolote
+    description: |-
+      ACL for staging Tejolote project
+
+      This project is used to test and stage tejolote project.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+
+  - email-id: k8s-infra-push-sig-release@kubernetes.io
+    name: k8s-infra-push-sig-release
+    description: |-
+      ACL for pushing release engineering binary artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io

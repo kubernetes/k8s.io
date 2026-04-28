@@ -1,0 +1,15 @@
+gh-user: k8s-infra-ci-robot
+gh-org: kubernetes
+repo-allowlist: github.com/kubernetes/k8s.io
+allow-fork-prs: true
+atlantis-url: https://atlantis.k8s.io
+gh-team-allowlist: "sig-k8s-infra-leads:*"
+disable-global-apply-lock: true
+autodiscover-mode: auto
+gh-allow-mergeable-bypass-apply: true
+hide-prev-plan-comments: true
+hide-unchanged-plan-comments: true
+checkout-strategy: merge
+emoji-reaction: eyes
+repo-config: /config/repos.yaml
+# default-tf-distribution: opentofu # uncomment when we start using opentofu

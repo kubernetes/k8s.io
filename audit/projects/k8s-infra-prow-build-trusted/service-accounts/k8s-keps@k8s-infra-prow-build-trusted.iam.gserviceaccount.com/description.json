@@ -1,0 +1,8 @@
+{
+  "displayName": "write to gs://k8s-keps",
+  "email": "k8s-keps@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build-trusted/serviceAccounts/k8s-keps@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+  "oauth2ClientId": "106028396346574213850",
+  "projectId": "k8s-infra-prow-build-trusted",
+  "uniqueId": "106028396346574213850"
+}

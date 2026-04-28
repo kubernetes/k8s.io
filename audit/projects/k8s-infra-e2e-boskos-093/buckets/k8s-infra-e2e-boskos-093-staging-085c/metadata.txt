@@ -1,0 +1,72 @@
+gs://k8s-infra-e2e-boskos-093-staging-085c/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Thu, 31 Oct 2024 17:16:57 GMT
+	Time updated:			Thu, 31 Oct 2024 17:17:09 GMT
+	Metageneration:			2
+	Bucket Policy Only enabled:	False
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				
+	  [
+	    {
+	      "entity": "project-owners-64000581688",
+	      "projectTeam": {
+	        "projectNumber": "64000581688",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-64000581688",
+	      "projectTeam": {
+	        "projectNumber": "64000581688",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-64000581688",
+	      "projectTeam": {
+	        "projectNumber": "64000581688",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-64000581688",
+	      "projectTeam": {
+	        "projectNumber": "64000581688",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-64000581688",
+	      "projectTeam": {
+	        "projectNumber": "64000581688",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-64000581688",
+	      "projectTeam": {
+	        "projectNumber": "64000581688",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

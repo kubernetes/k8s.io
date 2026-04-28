@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: oauth2-proxy
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            clusterType: 'utility'
+  template:
+    metadata:
+      name: 'oauth2-proxy-{{ .name }}'
+    spec:
+      destination:
+        namespace: oauth2-proxy
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: oauth2-proxy
+          repoURL: 'https://oauth2-proxy.github.io/manifests'
+          targetRevision: 7.7.19
+          helm:
+            releaseName: oauth2-proxy
+            valueFiles:
+            - $values/kubernetes/{{ .name }}/helm/oauth2-proxy.yaml
+        - repoURL: 'https://github.com/kubernetes/k8s.io.git'
+          targetRevision: main
+          ref: values
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+        managedNamespaceMetadata:
+          labels:
+            istio-injection: enabled

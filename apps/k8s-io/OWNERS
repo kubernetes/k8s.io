@@ -1,0 +1,15 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- sig-contributor-experience-leads
+- sig-k8s-infra-leads
+- sig-testing-leads
+
+emeritus_approvers:
+- ixdy
+- spiffxp
+- thockin
+
+labels:
+- sig/contributor-experience
+- area/apps/k8s.io

@@ -1,0 +1,114 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-gcp-accounting@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/CustomRole"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-auditors@kubernetes.io",
+        "serviceAccount:k8s-infra-gcp-auditor@kubernetes-public.iam.gserviceaccount.com"
+      ],
+      "role": "organizations/758905017065/roles/audit.viewer"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/organization.admin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io",
+        "user:ihor@cncf.io",
+        "user:twaggoner@linuxfoundation.org"
+      ],
+      "role": "roles/billing.admin"
+    },
+    {
+      "members": [
+        "user:ihor@cncf.io"
+      ],
+      "role": "roles/billing.creator"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-accounting@kubernetes.io"
+      ],
+      "role": "roles/billing.viewer"
+    },
+    {
+      "members": [
+        "group:gke-security-groups@kubernetes.io",
+        "group:k8s-infra-prow-oncall@kubernetes.io"
+      ],
+      "role": "roles/browser"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/cloudasset.owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/cloudsupport.admin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/cloudsupport.techSupportEditor"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/orgpolicy.policyAdmin"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "user:domain-admin-lf@kubernetes.io",
+        "user:ihor@cncf.io",
+        "user:psharma@linuxfoundation.org",
+        "user:twaggoner@linuxfoundation.org"
+      ],
+      "role": "roles/resourcemanager.organizationAdmin"
+    },
+    {
+      "members": [
+        "user:hahmadzai@linuxfoundation.org"
+      ],
+      "role": "roles/resourcemanager.projectCreator"
+    },
+    {
+      "members": [
+        "user:hahmadzai@linuxfoundation.org"
+      ],
+      "role": "roles/resourcemanager.projectMover"
+    },
+    {
+      "members": [
+        "group:k8s-infra-gcp-org-admins@kubernetes.io"
+      ],
+      "role": "roles/securitycenter.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:service-org-758905017065@security-center-api.iam.gserviceaccount.com"
+      ],
+      "role": "roles/securitycenter.serviceAgent"
+    }
+  ],
+  "version": 1
+}

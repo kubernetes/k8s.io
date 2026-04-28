@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: prow-pods
+  namespace: test-pods
+spec:
+  maxUnavailable: 0
+  selector:
+    matchLabels:
+      created-by-prow: "true"

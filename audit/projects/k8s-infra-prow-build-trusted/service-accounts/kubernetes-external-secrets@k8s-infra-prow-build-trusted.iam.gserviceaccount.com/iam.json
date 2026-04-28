@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:k8s-infra-prow-build-trusted.svc.id.goog[kubernetes-external-secrets/kubernetes-external-secrets]"
+      ],
+      "role": "roles/iam.workloadIdentityUser"
+    }
+  ],
+  "version": 1
+}

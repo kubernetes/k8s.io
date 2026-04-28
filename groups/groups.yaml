@@ -1,0 +1,70 @@
+# This file has the list of groups in kubernetes.io gsuite org that we use for
+# granting permissions to various community resources. Please ensure that the
+# group is prefixed with "k8s-infra" to avoid polluting the other existing gsuite
+# mailing lists.
+groups:
+  - email-id: leads@kubernetes.io
+    name: leads
+    description: |-
+      SIG/WG/Committee Leads
+    settings:
+      AllowWebPosting: "true"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "true"
+    owners:
+      - cblecker@gmail.com
+      - contributors@kubernetes.io
+    managers:
+      - kaslin.fields@gmail.com # SIG ContribEx
+      - killen.bob@gmail.com
+      - madhav.jiv@gmail.com # SIG ContribEx
+      - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com # SIG ContribEx
+      - priyankasaggu11929@gmail.com # SIG ContribEx
+      - mfahlandt@pixel-haufen.de # SIG ContribEx
+    members:
+      - conduct@kubernetes.io
+      - steering-private@kubernetes.io
+      - security@kubernetes.io
+      - sig-api-machinery-leads@kubernetes.io
+      - sig-apps-leads@kubernetes.io
+      - sig-architecture-leads@kubernetes.io
+      - sig-auth-leads@kubernetes.io
+      - sig-autoscaling-leads@kubernetes.io
+      - sig-cli-leads@kubernetes.io
+      - sig-cloud-provider-leads@kubernetes.io
+      - sig-cluster-lifecycle-leads@kubernetes.io
+      - sig-contributor-experience-leads@kubernetes.io
+      - sig-docs-leads@kubernetes.io
+      - sig-etcd-leads@kubernetes.io
+      - sig-instrumentation-leads@kubernetes.io
+      - sig-k8s-infra-leads@kubernetes.io
+      - sig-multicluster-leads@kubernetes.io
+      - sig-network-leads@kubernetes.io
+      - sig-node-leads@kubernetes.io
+      - sig-release-leads@kubernetes.io
+      - sig-scalability-leads@kubernetes.io
+      - sig-scheduling-leads@kubernetes.io
+      - sig-security-leads@kubernetes.io
+      - sig-storage-leads@kubernetes.io
+      - sig-testing-leads@kubernetes.io
+      - sig-ui-leads@kubernetes.io
+      - sig-windows-leads@kubernetes.io
+      - wg-ai-conformance-leads@kubernetes.io
+      - wg-ai-gateway-leads@kubernetes.io
+      - wg-ai-integration-leads@kubernetes.io
+      - wg-batch-leads@kubernetes.io
+      - wg-device-management-leads@kubernetes.io
+      - wg-etcd-operator-leads@kubernetes.io
+      - wg-lts-leads@kubernetes.io
+      - wg-node-lifecycle-leads@kubernetes.io
+      - wg-serving-leads@kubernetes.io
+      - wg-checkpoint-restore-leads@kubernetes.io
+      - caniszczyk@linuxfoundation.org
+      - cncf-speakers@linuxfoundation.org
+      - community@kubernetes.io
+      - kikis.github@gmail.com #enhancements subproject
+      - strong.james.e@gmail.com # Sig Network Sub Project Ingress-nginx

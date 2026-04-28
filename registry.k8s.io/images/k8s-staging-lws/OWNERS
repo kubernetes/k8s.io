@@ -1,0 +1,12 @@
+# See the OWNERS file documentation:
+#  https://github.com/kubernetes/community/blob/master/contributors/devel/owners.md
+
+approvers:
+- ahg-g
+- Edwinhr716
+- kerthcet
+labels:
+- sig/apps
+
+emeritus_approvers:
+- liurupeng

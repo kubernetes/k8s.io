@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: slack-infra
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: slack-infra-ingress-prod
+    kubernetes.io/ingress.class: gce
+    networking.gke.io/managed-certificates: slack-infra
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/infra/event-log/*"
+        backend:
+          service:
+            name: slack-event-log
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: "/infra/moderator/*"
+        backend:
+          service:
+            name: slack-moderator
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: "/infra/welcomer/*"
+        backend:
+          service:
+            name: slack-welcomer
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: "/infra/post-message/*"
+        backend:
+          service:
+            name: slack-post-message
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: "/infra/moderator-words/*"
+        backend:
+          service:
+            name: slack-moderator-words
+            port:
+              number: 80

@@ -1,0 +1,16 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- sig-k8s-infra-leads
+
+emeritus_approvers:
+- bartsmykla
+- BenTheElder
+- dims
+- cblecker
+- mikedanese
+- nikhita
+- spiffxp
+
+labels:
+- sig/k8s-infra

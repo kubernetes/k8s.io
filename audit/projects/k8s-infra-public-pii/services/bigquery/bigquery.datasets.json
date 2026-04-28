@@ -1,0 +1,41 @@
+[
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-public-pii:fastly_bigquery_cdn_dl_k8s_io",
+    "datasetReference": {
+      "datasetId": "fastly_bigquery_cdn_dl_k8s_io",
+      "projectId": "k8s-infra-public-pii"
+    },
+    "friendlyName": "fastly_bigquery_cdn_dl_k8s_io",
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-public-pii:k8s_infra_artifacts_gcslogs",
+    "datasetReference": {
+      "datasetId": "k8s_infra_artifacts_gcslogs",
+      "projectId": "k8s-infra-public-pii"
+    },
+    "friendlyName": "k8s_infra_artifacts_gcslogs",
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-public-pii:legacy_apt_packages_defs",
+    "datasetReference": {
+      "datasetId": "legacy_apt_packages_defs",
+      "projectId": "k8s-infra-public-pii"
+    },
+    "location": "US"
+  },
+  {
+    "kind": "bigquery#dataset",
+    "id": "k8s-infra-public-pii:registry_k8s_io_logs",
+    "datasetReference": {
+      "datasetId": "registry_k8s_io_logs",
+      "projectId": "k8s-infra-public-pii"
+    },
+    "friendlyName": "registry_k8s_io_logs",
+    "location": "US"
+  }
+]

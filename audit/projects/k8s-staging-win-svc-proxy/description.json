@@ -1,0 +1,11 @@
+{
+  "createTime": "2023-01-21T02:08:56.831Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-win-svc-proxy",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-win-svc-proxy",
+  "projectNumber": "77851067088"
+}

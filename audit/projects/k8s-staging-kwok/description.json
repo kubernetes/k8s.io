@@ -1,0 +1,11 @@
+{
+  "createTime": "2022-08-24T20:47:25.538Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-kwok",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-kwok",
+  "projectNumber": "790232179017"
+}

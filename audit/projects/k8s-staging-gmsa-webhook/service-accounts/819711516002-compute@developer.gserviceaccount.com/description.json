@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "819711516002-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-gmsa-webhook/serviceAccounts/819711516002-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "103472899163148008607",
+  "projectId": "k8s-staging-gmsa-webhook",
+  "uniqueId": "103472899163148008607"
+}

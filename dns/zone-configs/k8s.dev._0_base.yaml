@@ -1,0 +1,47 @@
+# The top-level k8s.dev zone
+
+'':
+  type: A
+  value: 104.198.14.52
+
+www:
+  type: CNAME
+  value: kubernetes-contributor.netlify.app.
+
+artifacts:
+  - type: A
+    values:
+      - 151.101.1.91
+      - 151.101.65.91
+      - 151.101.129.91
+      - 151.101.193.91
+  - type: AAAA
+    values:
+      - 2a04:4e42::347
+      - 2a04:4e42:200::347
+      - 2a04:4e42:400::347
+      - 2a04:4e42:600::347
+dl:
+  - type: A
+    values:
+      - 151.101.1.91
+      - 151.101.65.91
+      - 151.101.129.91
+      - 151.101.193.91
+  - type: AAAA
+    values:
+      - 2a04:4e42::347
+      - 2a04:4e42:200::347
+      - 2a04:4e42:400::347
+      - 2a04:4e42:600::347
+_acme-challenge.artifacts:
+  type: CNAME
+  value: cy71vyk1da78pss707.fastly-validations.com.
+_acme-challenge.dl:
+  type: CNAME
+  value: zsmu1n0ec6lb2wtmt8.fastly-validations.com.
+
+# Prove that we own these github orgs. sig-contributor-experience
+_gh-kubernetes-e:
+  type: TXT
+  value: 3e7f816ba3

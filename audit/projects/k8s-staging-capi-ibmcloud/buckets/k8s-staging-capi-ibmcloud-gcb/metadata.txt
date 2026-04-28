@@ -1,0 +1,20 @@
+gs://k8s-staging-capi-ibmcloud-gcb/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Fri, 03 Sep 2021 10:21:13 GMT
+	Time updated:			Fri, 03 Sep 2021 10:22:05 GMT
+	Metageneration:			10
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

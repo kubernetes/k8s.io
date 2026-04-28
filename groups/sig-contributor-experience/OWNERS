@@ -1,0 +1,19 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- sig-contributor-experience-leads
+reviewers:
+- MadhavJivrajani
+- Priyankasaggu11929
+- cblecker
+- jberkus
+- kaslin
+- mrbobbytables
+- nikhita
+- palnabarun
+- mfahlandt
+emeritus_approvers:
+- parispittman
+
+labels:
+- sig/contributor-experience

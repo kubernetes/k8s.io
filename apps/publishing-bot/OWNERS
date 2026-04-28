@@ -1,0 +1,15 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+  - publishing-bot-approvers
+  # TODO(releng): Enable once Release Managers are onboarded
+  #               ref: https://github.com/kubernetes/sig-release/issues/1772
+  #- release-engineering-approvers
+reviewers:
+  - publishing-bot-reviewers
+  - release-engineering-reviewers
+
+labels:
+- sig/release
+- area/apps/publishing-bot
+- area/release-eng

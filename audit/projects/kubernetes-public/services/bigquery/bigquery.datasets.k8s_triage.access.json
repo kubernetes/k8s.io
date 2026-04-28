@@ -1,0 +1,10 @@
+[
+  {
+    "role": "WRITER",
+    "userByEmail": "k8s-triage@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+  },
+  {
+    "role": "OWNER",
+    "groupByEmail": "k8s-infra-prow-oncall@kubernetes.io"
+  }
+]

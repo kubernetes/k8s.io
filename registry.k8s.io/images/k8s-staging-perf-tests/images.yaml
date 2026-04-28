@@ -1,0 +1,58 @@
+- name: dnsperfgo
+  dmap:
+    "sha256:4d8296aa04974123754f233fed29b000f21c1ea917d09cd90b79dce753c6d1ff": [ "v1.4.0" ]
+- name: netperf
+  dmap:
+    "sha256:366236d5a8066cf8e5b2fe59b784c2965c73aa1101e166e1c3e47376e21167eb": [ "v0.0.1" ]
+- name: network-policy-enforcement-latency/pod-creation-reachability-latency
+  dmap:
+    "sha256:13f73c5eb856beb1048bb3ca10a120ea15e824a7ecad1f388a85e2f4c8852955": [ "v0.0.1" ]
+- name: network-policy-enforcement-latency/policy-creation-enforcement-latency
+  dmap:
+    "sha256:cc5c87d0a60ca7d188edf6d5daed8dd46ed03d73c6e750a9c666baea9e43dedf": [ "v0.0.1" ]
+- name: perf-tests-util/access-tokens
+  dmap:
+    "sha256:ad55a4fdc37898c88ccf65a67121f4b1ca9bea415dd1fd8cbd1a7a8f5d6bbcc2": [ "v0.0.7" ]
+- name: perf-tests-util/containerd
+  dmap:
+    "sha256:0035643fd50a9846ff7afbd5dee43bf91b6f0b6245bff146b486427d5a5dffc2": [ "v0.0.2" ]
+- name: perf-tests-util/request-benchmark
+  dmap:
+    "sha256:a7f33c244703413a35fb657b9aa45c775d727f905e8848f6848b38029a546100": [ "v0.0.10" ]
+- name: perf-tests-util/scratch
+  dmap:
+    "sha256:bfd255d8bcac96d1b352159b1fed5e4c49aee5e38a236f81fc2a32f067bb2157": [ "1" ]
+    "sha256:4f74cd8b974ad1ea12839d6c511def6a59a420647ae76edcfaeb1c61a9a627be": [ "10" ]
+    "sha256:07eab66ab95c02cf4faa6b0c492d1e5e6b3c4ee4e4723c22224d545b630a4c06": [ "11" ]
+    "sha256:80c828c3f67c1ae93c9aed71907d89def8feda1fdacc99ccffa7d16946d9b653": [ "12" ]
+    "sha256:4e20ca55ea04464869fda65f5987b392f5e74af37c5bf8fcb7ec3ef9fecfce05": [ "13" ]
+    "sha256:c5d05876a4d1ad0845011fcb28eeafa9d302e55ae15ccf8532da112f0e652e1d": [ "14" ]
+    "sha256:d8eba81266679555e48ec33027df3018f951ce4d80b7d5716d4605a90b76df8b": [ "15" ]
+    "sha256:9d17f876d3e61e187a9272ae8db28faf297d8d1bb76738b9bf56e0dbf5e0d5ec": [ "16" ]
+    "sha256:af8a66a93ded02023c4a09d9a97659499ca8a560a83b14e882a306926141a617": [ "17" ]
+    "sha256:55cf05e439b92359417c786c0882a57d60a7db6b715536bfb89a0e61afa947c7": [ "18" ]
+    "sha256:df0d432c1fb40b9b6c59a634ed5bcc838987899fe7e1758c44e8a6c34e9113cc": [ "19" ]
+    "sha256:73c6bf622637b38f6e989d32e2e5b0e3a06394285dde5253216bca2b4e84a706": [ "2" ]
+    "sha256:5065810c5eb4367f3e19a96ff3a37103925aa7029caeec038bcddc9f535889c3": [ "20" ]
+    "sha256:745b31cd316eb64a680d424a39a200a7a7b1f6a0b5c8a875bfddd3334364cf7f": [ "3" ]
+    "sha256:006160ad2f7d2a6d3539b8ba0725bb4ffdf74448de427ebe2a9905dc2b3a4a0f": [ "4" ]
+    "sha256:a071c44211059b132ff62e3b2bbb9838048de1bd91b33cd5b57596e2d7e8ce1a": [ "5" ]
+    "sha256:4b73fc66e95b1e4310c95f867e43974c61e6a486be0bddfad92beaab66cb4d67": [ "6" ]
+    "sha256:d70539b86af881b10498a55d2ac8719d07802c2e113d5f0331e207b9d46a7a0a": [ "7" ]
+    "sha256:7baa9c45c8ab0733375e18c9f033f8014d4d706ba90e3c6e4f4d0ed130b8e8ba": [ "8" ]
+    "sha256:adfa1c75f1b187f1b3865985afa6f2ac2100e97a0e1b842edec74b3d64afc61e": [ "9" ]
+- name: perfdash
+  dmap:
+    "sha256:1f7b520b759677f56a50c76372f9728099bd5375b5949b6f2fbafa5fdc8c2698": [ "2.55" ]
+- name: probes
+  dmap:
+    "sha256:e61dcd4cd12b8cfcfc7e74732db8fba6b8a1c2957f41f1880c57f89e14c70d31": [ "v0.0.7" ]
+- name: pushgateway
+  dmap:
+    "sha256:f74ff5b7ad0b8fb60c24b77eaeab025d659e46ec15f32430adb976544305c01f": [ "v1.4.2" ]
+- name: sleep
+  dmap:
+    "sha256:41a3b0f33acc5b93aafbeb94fda44cb79aff2bbff21c81fd1a52e14f048b9230": [ "v0.1.1" ]
+- name: watch-list
+  dmap:
+    "sha256:086b4dc64cfad295118f40bd6c7be873fc655b25fa74a816fde471d2f207d8a5": [ "v0.0.2" ]

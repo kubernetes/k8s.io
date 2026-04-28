@@ -1,0 +1,20 @@
+gs://k8s-staging-sched-simulator-gcb/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Thu, 09 Sep 2021 13:39:39 GMT
+	Time updated:			Thu, 09 Sep 2021 13:40:33 GMT
+	Metageneration:			10
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

@@ -1,0 +1,17 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# Current set of people in sig-scalability-leads from
+# https://github.com/kubernetes/community/blob/master/OWNERS_ALIASES.
+approvers:
+- marseel
+- mengqiy
+- mkumatag # for image promotion activity only
+- shyamjvs
+- wojtek-t
+
+reviewers:
+- marseel
+- mengqiy
+- mkumatag # for image promotion activity only
+- shyamjvs
+- wojtek-t

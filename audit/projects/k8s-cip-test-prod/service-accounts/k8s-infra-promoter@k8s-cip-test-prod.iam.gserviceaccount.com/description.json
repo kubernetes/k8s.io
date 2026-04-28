@@ -1,0 +1,8 @@
+{
+  "displayName": "artifact promoter",
+  "email": "k8s-infra-promoter@k8s-cip-test-prod.iam.gserviceaccount.com",
+  "name": "projects/k8s-cip-test-prod/serviceAccounts/k8s-infra-promoter@k8s-cip-test-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "100097100042062461431",
+  "projectId": "k8s-cip-test-prod",
+  "uniqueId": "100097100042062461431"
+}

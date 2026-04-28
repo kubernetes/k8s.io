@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  domains:
+  - monitoring-gke.prow.k8s.io

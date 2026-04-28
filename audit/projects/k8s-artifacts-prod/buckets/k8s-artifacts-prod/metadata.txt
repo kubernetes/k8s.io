@@ -1,0 +1,21 @@
+gs://k8s-artifacts-prod/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		Present
+	Website configuration:		Present
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Retention Policy:		Present
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Wed, 01 May 2019 00:54:58 GMT
+	Time updated:			Wed, 31 Jan 2024 07:38:06 GMT
+	Metageneration:			177
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

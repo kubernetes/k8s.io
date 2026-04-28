@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- sig-security-leads
+reviewers:
+- sig-security-leads
+
+labels:
+- sig/security

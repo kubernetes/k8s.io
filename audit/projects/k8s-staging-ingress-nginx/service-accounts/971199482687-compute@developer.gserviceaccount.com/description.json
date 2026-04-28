@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "971199482687-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-ingress-nginx/serviceAccounts/971199482687-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "100884983091407379970",
+  "projectId": "k8s-staging-ingress-nginx",
+  "uniqueId": "100884983091407379970"
+}

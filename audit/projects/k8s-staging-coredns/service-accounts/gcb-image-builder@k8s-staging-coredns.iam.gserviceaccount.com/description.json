@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-coredns",
+  "email": "gcb-image-builder@k8s-staging-coredns.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-coredns/serviceAccounts/gcb-image-builder@k8s-staging-coredns.iam.gserviceaccount.com",
+  "oauth2ClientId": "110678492540297720962",
+  "projectId": "k8s-staging-coredns",
+  "uniqueId": "110678492540297720962"
+}

@@ -1,0 +1,11 @@
+{
+  "createTime": "2022-01-28T15:10:36.058Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-infra-oci-proxy",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-infra-oci-proxy",
+  "projectNumber": "195010227999"
+}

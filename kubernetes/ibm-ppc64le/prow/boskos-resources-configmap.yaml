@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  config: |
+    resources:
+    - names:
+      - k8s-boskos-powervs-eu-de-1-01
+      - k8s-boskos-powervs-eu-de-1-02
+      - k8s-boskos-powervs-eu-de-1-03
+      - k8s-boskos-powervs-eu-de-2-01
+      - k8s-boskos-powervs-eu-de-2-02
+      - k8s-boskos-powervs-eu-de-2-03
+      - k8s-boskos-powervs-tor01-01
+      - k8s-boskos-powervs-tor01-02
+      - k8s-boskos-powervs-tor01-03
+      state: dirty
+      type: powervs
+kind: ConfigMap
+metadata:
+  name: resources

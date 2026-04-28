@@ -1,0 +1,297 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  - email-id: community@kubernetes.io
+    name: community
+    description: |-
+
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MembersCanPostAsTheGroup: "true"
+      ReconcileMembers: "true"
+    owners:
+      - jberkus@redhat.com
+      - kaslin.fields@gmail.com
+      - killen.bob@gmail.com
+      - madhav.jiv@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
+      - mfahlandt@pixel-haufen.de
+
+  - email-id: dev@kubernetes.io
+    name: dev
+    description: |-
+      Mailing list for upstream Kubernetes contributors. This includes process changes, release info, contributor events, and more.
+
+      Try #kubernetes-users on slack or discuss.k8s.io for end user troubleshooting and discussion.
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+    owners:
+      - contributors@kubernetes.io
+      - spiffxp@gmail.com
+      - killen.bob@gmail.com
+      - davanum@gmail.com
+    managers:
+      - nikitaraghunath@gmail.com
+      - jdumars@gmail.com
+      - d.panigrahi.nitrkl@gmail.com
+      - ihor.dvoretskyi@gmail.com
+      - atharvashinde179@gmail.com
+      - ctadeu@gmail.com
+      - pal.nabarun95@gmail.com
+
+  - email-id: github@kubernetes.io
+    name: github
+    description: |-
+      Kubernetes GitHub Admins
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - cblecker@gmail.com
+    managers:
+      - jason@janusworx.com
+      - killen.bob@gmail.com
+      - madhav.jiv@gmail.com
+      - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
+
+  - email-id: github-managment-alerts@kubernetes.io
+    name: github-managment-alerts
+    description: |-
+      Open mailing list for alerts from Kubernetes GitHub management applications. All other posts will be moderated. Please do not attempt to reply to this list.
+
+      For more information, refer https://git.k8s.io/community/github-management
+    owners:
+      - cblecker@gmail.com
+    managers:
+      - jason@janusworx.com
+      - killen.bob@gmail.com
+      - madhav.jiv@gmail.com
+      - nikitaraghunath@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      ReconcileMembers: "true"
+
+  - email-id: lwkd@kubernetes.io
+    name: lwkd
+    description: |-
+      alias for Last Week In Kubernetes editors
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MembersCanPostAsTheGroup: "true"
+      ReconcileMembers: "true"
+    owners:
+      - jberkus@redhat.com
+      - noah@coderanger.net
+
+  - email-id: moderators@kubernetes.io
+    name: moderators
+    description: |-
+      Moderators for various Community properties
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - contributors@kubernetes.io
+      - cblecker@gmail.com
+    managers:
+      - alarcj137@gmail.com
+      - dylan.graham@gmail.com
+      - idealhack@gmail.com
+      - ihor@cncf.io
+      - jdumars@gmail.com
+      - jeef111x@gmail.com
+      - jorgec@vmware.com
+      - ktbry@google.com
+      - noah@coderanger.net
+      - killen.bob@gmail.com
+    members:
+      - guslees@gmail.com
+      - james@munnelly.eu
+      - jspeed@redhat.com
+      - krajakavitha@gmail.com
+      - lenferinkroy@gmail.com
+      - manjunath.cse@gmail.com
+      - nikitaraghunath@gmail.com
+      - puja@giantswarm.io
+      - ramamoorthypandiyaraja@gmail.com
+      - spiffxp@google.com
+      - jberkus@redhat.com
+      - marky.r.jackson@gmail.com
+      - chris@chrisshort.net
+      - chadmcrowell@gmail.com
+
+  - email-id: sig-contribex@kubernetes.io
+    name: sig-contribex
+    description: |
+      Group dedicated to improving the Kubernetes contributor experience.
+    owners:
+      - kaslin.fields@gmail.com
+      - madhav.jiv@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
+      - mfahlandt@pixel-haufen.de
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: sig-contribex-leads@kubernetes.io
+    name: sig-contribex-leads
+    description: SIG ContribEx Leads
+    owners:
+      - kaslin.fields@gmail.com
+      - madhav.jiv@gmail.com
+      - pal.nabarun95@gmail.com
+      - priyankasaggu11929@gmail.com
+      - mfahlandt@pixel-haufen.de
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+
+  - email-id: summit-team@kubernetes.io
+    name: summit-team
+    description: |-
+      Staff for the upcoming Kubernetes Contributor Summit
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MembersCanPostAsTheGroup: "true"
+      ReconcileMembers: "true"
+    owners:
+      - killen.bob@gmail.com
+    managers:
+      - mfahlandt@pixel-haufen.de # Maintainer Summit EU NA 2025 Co Chair
+      - natalivlatko@gmail.com # Maintainer Summit EU NA 2025 Co Chair
+    members:
+      - balves@linuxfoundation.org
+      - cailyn.s.e@protonmail.com
+      - ciprianhacman@gmail.com
+      - faeka6@gmail.com
+      - jcaudill@linuxfoundation.org
+      - jeremy.r.rickard@gmail.com
+      - justnitish06@gmail.com
+      - kaslin.fields@gmail.com
+      - rlejano@gmail.com
+      - valencia0.carol@gmail.com
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-slack-infra@kubernetes.io
+    name: k8s-infra-staging-slack-infra
+    description: |-
+      ACL for staging Slack Infra
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ctadeu@gmail.com
+      - jeef111x@gmail.com
+      - killen.bob@gmail.com
+      - ktbry@google.com
+      - james@munnelly.eu
+      - nikitaraghunath@gmail.com
+      - rajula96reddy@gmail.com
+
+  - email-id: k8s-infra-staging-contributor-site@kubernetes.io
+    name: k8s-infra-staging-contributor-site
+    description: |-
+      ACL for contributor site artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - prajyotparab19@gmail.com
+      - sig-contribex-leads@kubernetes.io
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+
+  - email-id: k8s-infra-rbac-elekto@kubernetes.io
+    name: k8s-infra-rbac-elekto
+    description: |-
+      Grants access to the `namespace-user` role in the `elekto` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - election@kubernetes.io
+
+  - email-id: k8s-infra-rbac-slack-infra@kubernetes.io
+    name: k8s-infra-rbac-slack-infra
+    description: |-
+      Grants access to the `namespace-user` role in the `slack-infra` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
+    members:
+      - cblecker@gmail.com
+      - ctadeu@gmail.com
+      - davanum@gmail.com
+      - jeef111x@gmail.com
+      - killen.bob@gmail.com
+      - ktbry@google.com
+      - nikitaraghunath@gmail.com
+      - rajula96reddy@gmail.com
+      - spiffxp@gmail.com
+      - thockin@google.com
+
+  - email-id: zoom-moderators@kubernetes.io
+    name: zoom-moderators
+    description: |-
+      Moderators for community zoom platform
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - contributors@kubernetes.io
+    members:
+      - chadmcrowell@gmail.com
+      - chris@chrisshort.net
+      - sig-contribex-leads@kubernetes.io

@@ -1,0 +1,7 @@
+# google group for gcr.io/k8s-staging-cri-tools is
+# k8s-infra-staging-cri-tools@kubernetes.io
+filestores:
+- base: gs://k8s-staging-cri-tools/releases/
+  src: true
+- base: gs://k8s-artifacts-prod/binaries/cri-tools/
+  service-account: k8s-infra-promoter@k8s-artifacts-prod.iam.gserviceaccount.com

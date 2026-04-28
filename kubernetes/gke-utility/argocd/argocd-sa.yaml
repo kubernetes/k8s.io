@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: argocd@k8s-infra-prow.iam.gserviceaccount.com
+  name: argocd-application-controller
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: argocd@k8s-infra-prow.iam.gserviceaccount.com
+  name: argocd-server

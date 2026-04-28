@@ -1,0 +1,102 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  - email-id: sig-docs-leads@kubernetes.io
+    name: sig-docs-leads
+    description: |-
+      sig-docs leads
+    owners:
+      - divya.mohan0209@gmail.com
+      - kat.cosgrove@gmail.com
+      - natalivlatko@gmail.com
+      - rawat.dipesh@gmail.com
+      - rlejano@gmail.com
+      - xandergrzyw@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: sig-docs@kubernetes.io
+    name: sig-docs
+    description: |-
+      SIG docs general discussion group
+    owners:
+      - divya.mohan0209@gmail.com
+      - kat.cosgrove@gmail.com
+      - natalivlatko@gmail.com
+      - rawat.dipesh@gmail.com
+      - rlejano@gmail.com
+      - xandergrzyw@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: blog@kubernetes.io
+    name: blog
+    description: |-
+      blog editors
+
+      Created via https://github.com/kubernetes/community/issues/3763
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - killen.bob@gmail.com
+      - onlydole@gmail.com
+      - tim+kubernetes@scalefactory.com
+    members:
+      - natew@cncf.io
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-sig-docs@kubernetes.io
+    name: k8s-infra-staging-sig-docs
+    description: |-
+      ACL for sig docs artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bentheelder@google.com
+      - k8s-sig-docs-leads@googlegroups.com
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

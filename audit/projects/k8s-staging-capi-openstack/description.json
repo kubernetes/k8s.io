@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-09-04T19:18:44.090Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-capi-openstack",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-capi-openstack",
+  "projectNumber": "129051311436"
+}

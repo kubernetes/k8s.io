@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-cip-test",
+  "email": "gcb-image-builder@k8s-staging-cip-test.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-cip-test/serviceAccounts/gcb-image-builder@k8s-staging-cip-test.iam.gserviceaccount.com",
+  "oauth2ClientId": "112531999532289396574",
+  "projectId": "k8s-staging-cip-test",
+  "uniqueId": "112531999532289396574"
+}

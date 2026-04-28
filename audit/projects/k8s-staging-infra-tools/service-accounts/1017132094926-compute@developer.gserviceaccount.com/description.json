@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "1017132094926-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-infra-tools/serviceAccounts/1017132094926-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "112954225749583098220",
+  "projectId": "k8s-staging-infra-tools",
+  "uniqueId": "112954225749583098220"
+}

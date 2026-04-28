@@ -1,0 +1,22 @@
+[
+  {
+    "role": "WRITER",
+    "specialGroup": "projectWriters"
+  },
+  {
+    "role": "WRITER",
+    "userByEmail": "p102333525888-824068@gcp-sa-logging.iam.gserviceaccount.com"
+  },
+  {
+    "role": "OWNER",
+    "specialGroup": "projectOwners"
+  },
+  {
+    "role": "OWNER",
+    "userByEmail": "ameukam@gmail.com"
+  },
+  {
+    "role": "READER",
+    "specialGroup": "projectReaders"
+  }
+]

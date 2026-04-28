@@ -1,0 +1,30 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:k8s-infra-e2e-node-e2e-project",
+        "projectOwner:k8s-infra-e2e-node-e2e-project"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-e2e-node-e2e-project"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "projectEditor:k8s-infra-e2e-node-e2e-project",
+        "projectOwner:k8s-infra-e2e-node-e2e-project"
+      ],
+      "role": "roles/storage.legacyObjectOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-infra-e2e-node-e2e-project"
+      ],
+      "role": "roles/storage.legacyObjectReader"
+    }
+  ]
+}

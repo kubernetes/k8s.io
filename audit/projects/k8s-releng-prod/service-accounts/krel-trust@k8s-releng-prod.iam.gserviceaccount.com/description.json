@@ -1,0 +1,8 @@
+{
+  "displayName": "Kubernetes signer account",
+  "email": "krel-trust@k8s-releng-prod.iam.gserviceaccount.com",
+  "name": "projects/k8s-releng-prod/serviceAccounts/krel-trust@k8s-releng-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "101976685897379465235",
+  "projectId": "k8s-releng-prod",
+  "uniqueId": "101976685897379465235"
+}

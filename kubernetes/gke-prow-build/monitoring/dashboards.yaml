@@ -1,0 +1,7 @@
+# Source: https://github.com/loodse/prow-dashboards
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prow-dashboards
+  labels:
+    grafana_dashboard: "1"

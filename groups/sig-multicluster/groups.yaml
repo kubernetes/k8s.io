@@ -1,0 +1,47 @@
+groups:
+  - email-id: sig-multicluster-leads@kubernetes.io
+    name: sig-multicluster-leads
+    description: |-
+      sig-multicluster leads
+    owners:
+      - jeremyot@google.com
+      - skitt@redhat.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: sig-multicluster@kubernetes.io
+    name: sig-multicluster
+    description: |-
+      SIG multicluster general discussion group
+    owners:
+      - jeremyot@google.com
+      - skitt@redhat.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: k8s-infra-staging-cluster-inv-api@kubernetes.io
+    name: k8s-infra-staging-cluster-inv-api
+    description: |-
+      ACL for staging cluster-inventory-api artifacts in GCP project.
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - okinakahiro@gmail.com
+      - gothicqiujian@gmail.com
+      - ming@redhat.com
+      - skitt@redhat.com

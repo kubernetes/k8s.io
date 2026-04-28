@@ -1,0 +1,295 @@
+aliases:
+  sig-api-machinery-leads:
+    - deads2k
+    - fedebongio
+    - jpbetz
+    - sttts
+  sig-apps-leads:
+    - janetkuo
+    - kow3ns
+    - soltysh
+  sig-architecture-leads:
+    - derekwaynecarr
+    - dims
+    - johnbelamaric
+  sig-auth-leads:
+    - deads2k
+    - enj
+    - liggitt
+    - ritazh
+    - aramase
+    - micahhausler
+  sig-autoscaling-leads:
+    - adrianmoisey
+    - gjtempleton
+    - jackfrancis
+    - towca
+  sig-cli-leads:
+    - ardaguclu
+    - eddiezane
+    - mpuckett159
+    - soltysh
+  sig-cloud-provider-leads:
+    - bridgetkromhout
+    - cheftako
+    - elmiko
+    - joelspeed
+  sig-cluster-lifecycle-leads:
+    - fabriziopandini
+    - justinsb
+    - neolit123
+    - vincepri
+  sig-contributor-experience-leads:
+    - MadhavJivrajani
+    - Priyankasaggu11929
+    - kaslin
+    - palnabarun
+    - mfahlandt
+  sig-docs-leads:
+    - dipesh-rawat
+    - divya-mohan0209
+    - katcosgrove
+    - natalisucks
+    - reylejano
+    - salaxander
+    - tengqm
+  sig-etcd-leads:
+    - ahrtr
+    - jmhbnz
+    - serathius
+    - siyuanfoundation
+  sig-instrumentation-leads:
+    - dashpole
+    - dgrisonnet
+    - logicalhan
+    - rexagod
+    - richabanker
+  sig-k8s-infra-leads:
+    - ameukam
+    - GenPage
+    - hakman
+    - upodroid
+    - xmudrii
+  sig-multicluster-leads:
+    - jeremyot
+    - skitt
+  sig-network-leads:
+    - aojea
+    - bowei
+    - danwinship
+    - mikezappa87
+    - shaneutt
+    - thockin
+  sig-node-leads:
+    - SergeyKanzhelev
+    - dchen1107
+    - derekwaynecarr
+    - mrunalp
+    - haircommander
+  sig-release-leads:
+    - Verolop
+    - cpanato
+    - jeremyrickard
+    - justaugustus
+    - puerco
+    - saschagrunert
+  sig-scalability-leads:
+    - marseel
+    - mengqiy
+    - shyamjvs
+    - wojtek-t
+  sig-scheduling-leads:
+    - dom4ha
+    - macsko
+    - sanposhiho
+  sig-security-leads:
+    - IanColdwater
+    - tabbysable
+    - cailyn-codes
+  sig-storage-leads:
+    - jsafrane
+    - msau42
+    - saad-ali
+    - xing-yang
+  sig-testing-leads:
+    - BenTheElder
+    - aojea
+    - cjwagner
+    - jbpratt
+    - michelle192837
+    - pohly
+    - xmcqueen
+  sig-ui-leads:
+    - floreks
+    - joaquimrocha
+    - maciaszczykm
+    - shu-mutou
+  sig-windows-leads:
+    - aravindhp
+    - claudiubelu
+    - jsturtevant
+    - knabben
+    - marosset
+  wg-ai-conformance-leads:
+    - janetkuo
+    - mfahlandt
+    - ritazh
+    - terrytangyuan
+  wg-ai-gateway-leads:
+    - keithmattix
+    - kflynn
+    - kfswain
+    - nirrozenbaum
+    - shaneutt
+    - xunzhuo
+  wg-ai-integration-leads:
+    - ardaguclu
+    - rushmash91
+    - zvonkok
+  wg-batch-leads:
+    - kannon92
+    - mwielgus
+    - tenzen-y
+  wg-data-protection-leads:
+    - xing-yang
+    - yuxiangqian
+  wg-device-management-leads:
+    - johnbelamaric
+    - klueska
+    - pohly
+  wg-etcd-operator-leads:
+    - ahrtr
+    - hakman
+    - jberkus
+    - jmhbnz
+    - justinsb
+  wg-lts-leads:
+    - jeremyrickard
+    - liggitt
+    - micahhausler
+  wg-node-lifecycle-leads:
+    - JoelSpeed
+    - atiratree
+    - fabriziopandini
+    - haircommander
+    - humblec
+    - intUnderflow
+    - kwilczynski
+    - rthallisey
+  wg-checkpoint-restore-leads:
+    - adrianreber
+    - andreyvelich
+    - haircommander
+    - rst0git
+  wg-policy-leads:
+    - JimBugwadia
+    - poonam-lamba
+    - sudermanjr
+  wg-serving-leads:
+    - ArangoGutierrez
+    - Jeffwan
+    - SergeyKanzhelev
+    - terrytangyuan
+  wg-structured-logging-leads:
+    - mengjiao-liu
+    - pohly
+  committee-code-of-conduct:
+    - AnaMMedina21
+    - endocrimes
+    - jeremyrickard
+    - divya-mohan0209
+    - stmcginnis
+  committee-security-response:
+    - cjcullen
+    - enj
+    - joelsmith
+    - micahhausler
+    - natherz97
+    - puerco
+    - stlaz
+    - tabbysable
+    - vinayakankugoyal
+    - Vyom-Yadav
+  committee-steering:
+    - BenTheElder
+    - aojea
+    - katcosgrove
+    - pacoxu
+    - ritazh
+    - saschagrunert
+    - soltysh
+  ## BEGIN CUSTOM CONTENT
+  karpenter-cluster-api-approvers:
+    - elmiko
+    - maxcao13
+  minikube-approvers:
+    - medyagh
+    - spowelljr
+    - prezha
+    - comradeprogrammer
+  promo-tools-approvers:
+    - cpanato
+    - jeremyrickard
+    - justaugustus
+    - puerco
+    - saschagrunert
+  promo-tools-reviewers:
+    - cpanato
+    - jeremyrickard
+    - justaugustus
+    - puerco
+    - saschagrunert
+  provider-aws:
+    - justinsb
+    - nckturner
+    - wongma7
+  provider-azure:
+    - craiglpeters
+    - feiskyer
+    - khenidak
+  provider-gcp:
+    - abgworrall
+  provider-ibmcloud:
+    - spzala
+  provider-openstack:
+    - dulek
+    - jichenjc
+    - kayrus
+    - zetaab
+  provider-vmware:
+    - cantbewong
+    - frapposelli
+  publishing-bot-approvers:
+    - dims
+    - nikhita
+    - sttts
+  publishing-bot-reviewers:
+    - cpanato
+    - jeremyrickard
+    - justaugustus
+    - palnabarun
+    - puerco
+    - saschagrunert
+  release-engineering-approvers:
+    - cpanato # subproject owner / Release Manager / SIG Technical Lead
+    - jeremyrickard # subproject owner / Release Manager / SIG Chair
+    - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
+    - puerco # subproject owner / Release Manager / SIG Technical Lead
+    - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - Verolop # subproject owner / Release Manager / SIG Technical Lead
+    - xmudrii # Release Manager
+  release-engineering-reviewers:
+    - cpanato # subproject owner / Release Manager / SIG Technical Lead
+    - jeremyrickard # subproject owner / Release Manager / SIG Chair
+    - justaugustus # subproject owner / Release Manager / SIG Chair
+    - palnabarun # Release Manager
+    - puerco # subproject owner / Release Manager / SIG Technical Lead
+    - saschagrunert # subproject owner / Release Manager / SIG Chair
+    - Verolop # subproject owner / Release Manager / SIG Technical Lead
+    - xmudrii # Release Manager
+  sig-release-subproject-leads:
+    - gracenng
+    - katcosgrove
+    - xmudrii
+## END CUSTOM CONTENT

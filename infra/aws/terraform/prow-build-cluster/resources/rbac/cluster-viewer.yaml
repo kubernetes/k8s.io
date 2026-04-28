@@ -1,0 +1,25 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: eks-cluster-viewer
+# TODO: Scope it down to disallow access to Secrets.
+rules:
+  - apiGroups: ['*']
+    resources: ['*']
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: eks-cluster-viewer
+subjects:
+  - kind: Group
+    name: eks-cluster-viewer
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: eks-cluster-viewer
+  apiGroup: rbac.authorization.k8s.io

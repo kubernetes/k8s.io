@@ -1,0 +1,79 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: insert-gcp-credentials
+spec:
+  rules:
+    - name: add-creds
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      preconditions:
+        any:
+          - key: '{{request.object.metadata.labels."created-by-prow" || ""}}'
+            operator: Equals
+            value: "true"
+      mutate:
+        patchStrategicMerge:
+          spec:
+            initContainers:
+              # pod order matters
+              - name: clonerefs
+              - (name): "initupload"
+                env:
+                  - name: GOOGLE_APPLICATION_CREDENTIALS
+                    value: /etc/google/adc.json
+                volumeMounts:
+                  - mountPath: /var/run/secrets/google-iam-token/serviceaccount
+                    name: google-iam-token
+                    readOnly: true
+                  - mountPath: /etc/google
+                    name: google-adc
+                    readOnly: true
+            containers:
+              - name: test
+              - (name): sidecar
+                env:
+                  - name: GOOGLE_APPLICATION_CREDENTIALS
+                    value: /etc/google/adc.json
+                volumeMounts:
+                  - mountPath: /var/run/secrets/google-iam-token/serviceaccount
+                    name: google-iam-token
+                    readOnly: true
+                  - mountPath: /etc/google
+                    name: google-adc
+                    readOnly: true
+            volumes:
+              - name: google-iam-token
+                projected:
+                  defaultMode: 420
+                  sources:
+                    - serviceAccountToken:
+                        audience: sts.googleapis.com
+                        expirationSeconds: 86400
+                        path: token
+              - name: google-adc
+                configMap:
+                  name: google-adc
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: google-adc
+data:
+  adc.json: |
+    {
+      "universe_domain": "googleapis.com",
+      "type": "external_account",
+      "audience": "//iam.googleapis.com/projects/773781448124/locations/global/workloadIdentityPools/prow-aks/providers/oidc",
+      "subject_token_type": "urn:ietf:params:oauth:token-type:jwt",
+      "token_url": "https://sts.googleapis.com/v1/token",
+      "credential_source": {
+        "file": "/var/run/secrets/google-iam-token/serviceaccount/token",
+        "format": {
+          "type": "text"
+        }
+      }
+    }

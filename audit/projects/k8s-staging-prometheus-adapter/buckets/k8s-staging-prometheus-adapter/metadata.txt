@@ -1,0 +1,20 @@
+gs://k8s-staging-prometheus-adapter/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		Present
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Tue, 29 Jun 2021 19:56:53 GMT
+	Time updated:			Tue, 02 Aug 2022 15:45:43 GMT
+	Metageneration:			19
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

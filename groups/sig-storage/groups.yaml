@@ -1,0 +1,148 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: sig-storage-leads@kubernetes.io
+    name: sig-storage-leads
+    description: |-
+      sig-storage leads
+    owners:
+      - jsafrane@redhat.com
+      - msau@google.com
+      - saadali@google.com
+      - xingyang105@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: sig-storage@kubernetes.io
+    name: sig-storage
+    description: |-
+      SIG storage general discussion group
+    owners:
+      - jsafrane@redhat.com
+      - msau@google.com
+      - saadali@google.com
+      - xingyang105@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: k8s-infra-staging-sig-storage@kubernetes.io
+    name: k8s-infra-staging-sig-storage
+    description: |-
+      ACL for staging sig storage artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - saadali@google.com
+      - msau@google.com
+      - xingyang105@gmail.com
+      - jsafrane@redhat.com
+      - mattwon@amazon.com
+      - kiran.mova@mayadata.io
+      - humble.devassy@gmail.com
+      - patrick.ohly@intel.com
+      - jinxu@google.com
+
+  - email-id: k8s-infra-staging-csi@kubernetes.io
+    name: k8s-infra-staging-csi
+    description: |-
+      ACL for staging CSI artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - saadali@google.com
+      - msau@google.com
+      - xingyang105@gmail.com
+      - jsafrane@redhat.com
+      - patrick.ohly@intel.com
+
+  - email-id: k8s-infra-staging-git-sync@kubernetes.io
+    name: k8s-infra-staging-git-sync
+    description: |-
+      ACL for staging git-sync
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - thockin@google.com
+      - michaelg@okkur.org
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+  - email-id: k8s-infra-push-csi@kubernetes.io
+    name: k8s-infra-push-csi
+    description: |-
+      ACL for pushing CSI artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - saadali@google.com
+      - msau@google.com
+      - xingyang105@gmail.com
+      - jsafrane@redhat.com
+      - patrick.ohly@intel.com
+
+  - email-id: k8s-infra-staging-csi-vsphere@kubernetes.io
+    name: k8s-infra-staging-csi-vsphere
+    description: |-
+      ACL for staging vSphere CSI artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - divyen.patel@broadcom.com
+      - xingyang105@gmail.com
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

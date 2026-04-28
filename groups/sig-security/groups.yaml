@@ -1,0 +1,92 @@
+groups:
+
+  - email-id: sig-security-leads@kubernetes.io
+    name: sig-security-leads
+    description: |-
+      sig-security leads
+    owners:
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+      - cailyn.codes@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: sig-security@kubernetes.io
+    name: sig-security
+    description: |-
+      SIG security general discussion group
+    owners:
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+      - cailyn.codes@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: security-tooling-private@kubernetes.io
+    name: security-tooling-private
+    description: |-
+      Private list for non-public (internal) triage of security vulnerabilities
+      identified via automated scans of artifacts in k/k
+
+      Membership is restricted to the SIG Security Chairs,
+      SIG Security Tooling Lead, Security Response Committee,
+      SIG Release Chairs, Patch Release Team, and Branch Managers.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - contributors@kubernetes.io
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+      - pushkarj.at.work@gmail.com
+      - cailyn.codes@gmail.com
+    members:
+      - security-release-team@kubernetes.io
+      - eric.smalling@gmail.com
+
+  - email-id: cve-feed-maintainers@kubernetes.io
+    name: cve-feed-maintainers
+    description: |-
+      Private list for operational notifications about the CVE feed automation.
+
+      Membership is restricted to the SIG Security Leads,
+      SIG Security Tooling Lead, and others who maintain the CVE feed.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+      - cailyn.codes@gmail.com
+    members:
+      - mahe.tardy@gmail.com
+
+  - email-id: k8s-infra-staging-sig-security@kubernetes.io
+    name: k8s-infra-staging-sig-security
+    description: |-
+      Private list for GCP project access.
+
+      Needs to be manually synchronized with cve-feed-maintainers@kubernetes.io
+      due to lack of support for nested groups.
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    members:
+      - ian@coldwater.io
+      - tabitha.c.sable@gmail.com
+      - cailyn.codes@gmail.com
+      - mahe.tardy@gmail.com

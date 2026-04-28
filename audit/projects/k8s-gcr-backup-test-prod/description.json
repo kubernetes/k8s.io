@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-10-23T19:07:05.113Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-gcr-backup-test-prod",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-gcr-backup-test-prod",
+  "projectNumber": "1058882910725"
+}

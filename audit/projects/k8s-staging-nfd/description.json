@@ -1,0 +1,11 @@
+{
+  "createTime": "2020-02-07T18:07:09.801Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-nfd",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-nfd",
+  "projectNumber": "5125544917"
+}

@@ -1,0 +1,213 @@
+# The top-level kubernetes.io zone
+#
+# In general, every name here has an equivalent in k8s.io.  For many of these
+# we redirect from foo.kubernetes.io to foo.k8s.io, which is where the
+# documentation for each name is attached.
+'':
+  - type: A
+    values:
+    - 15.197.167.90 # Netlify high performance CDN (@bentheelder)
+    - 3.33.186.135  # Netlify high performance CDN (@bentheelder)
+  - type: MX
+    values:
+    - exchange: aspmx.l.google.com.
+      preference: 1
+    - exchange: alt1.aspmx.l.google.com.
+      preference: 5
+    - exchange: alt2.aspmx.l.google.com.
+      preference: 5
+    - exchange: alt3.aspmx.l.google.com.
+      preference: 10
+    - exchange: alt4.aspmx.l.google.com.
+      preference: 10
+  - type: CAA # The CAA record set for a domain also applies to all sub-domains. If a sub-domain has its own CAA record set, it takes precedence.
+    values:
+    - flags: 0
+      tag: issue
+      value: pki.goog
+    - flags: 0
+      tag: issue
+      value: letsencrypt.org
+  - type: TXT
+    values:
+    - google-site-verification=oPORCoq9XU6CmaR7G_bV00CLmEz-wLGOL7SXpeEuTt8
+    # Domain validation for kubernetes.io on https://search.google.com/search-console/welcome
+    # Only Org admins have access to the console. (contact @ameukam)
+    - google-site-verification=qmfDqvHjWJBL78F9saApyW0VFRyymuSMpqMn8gtGmd0
+    # Domain validation for kubernetes.io on https://kubernetes.1password.com/
+    - 1password-site-verification=SOZCTQ66DFFXVGPOWOHMVDIBVI
+    - v=spf1 include:_spf.google.com mail.kubernetes.io ~all
+
+# Okta outbound emails (okta@kubernetes.io)
+mail:
+  type: CNAME
+  value: u21992032.wl033.sendgrid.net.
+
+_oktaverification:
+  type: TXT
+  value: ebf6c16069044ed1b5eb867f01f9a85f
+
+okt._domainkey:
+  type: CNAME
+  value: okt.domainkey.u21992032.wl033.sendgrid.net.
+
+okt2._domainkey:
+  type: CNAME
+  value: okt2.domainkey.u21992032.wl033.sendgrid.net.
+
+www:
+  type: CNAME
+  value: kubernetes.io.
+
+# Main docs site is a redirect (@chenopis)
+docs:
+  type: CNAME
+  value: docs.k8s.io.
+# All docs subdomains get sent to netlify (@chenopis)
+'*.docs':
+  type: CNAME
+  value: kubernetes.netlify.app.
+# Create a dummy A record so that the Let's Encrypt TXT records are not caught
+# by the wildcard CNAME record. (@ixdy)
+_acme-challenge.docs:
+  type: A
+  value: 0.0.0.0
+
+# Prove that we own these github orgs. sig-contributor-experience
+_gh-kubernetes-e:
+  type: TXT
+  value: a431ad84e1
+
+#TODO: what is this?
+rnl6zogsrrhp:
+  type: CNAME
+  value: gv-4u7qekjwhnb7zi.dv.googlehosted.com.
+
+# Download sites
+apt:
+  type: CNAME
+  value: apt.k8s.io.
+yum:
+  type: CNAME
+  value: yum.k8s.io.
+rel:
+  type: CNAME
+  value: rel.k8s.io.
+releases:
+  type: CNAME
+  value: releases.k8s.io.
+
+# Vanity CNAMEs.
+blog:
+  type: CNAME
+  value: blog.k8s.io.
+changelog:
+  type: CNAME
+  value: changelog.k8s.io.
+ci-test:
+  type: CNAME
+  value: ci-test.k8s.io.
+code:
+  type: CNAME
+  value: code.k8s.io.
+conduct:
+  type: CNAME
+  value: conduct.k8s.io.
+cs:
+  type: CNAME
+  value: cs.k8s.io.
+discuss:
+  type: CNAME
+  value: kubernetes.hosted-by-discourse.com.
+examples:
+  type: CNAME
+  value: examples.k8s.io.
+feature:
+  type: CNAME
+  value: feature.k8s.io.
+features:
+  type: CNAME
+  value: features.k8s.io.
+gcsweb:
+  type: CNAME
+  value: gcsweb.k8s.io.
+get:
+  type: CNAME
+  value: get.k8s.io.
+git:
+  type: CNAME
+  value: git.k8s.io.
+go:
+  type: CNAME
+  value: go.k8s.io.
+issue:
+  type: CNAME
+  value: issue.k8s.io.
+issues:
+  type: CNAME
+  value: issues.k8s.io.
+kep:
+  type: CNAME
+  value: kep.k8s.io.
+# Packages / OpenBuildService (OBS)
+packages:
+  type: CNAME
+  value: packages.k8s.io.
+pkgs:
+  type: CNAME
+  value: pkgs.k8s.io.
+pr:
+  type: CNAME
+  value: pr.k8s.io.
+pr-test:
+  type: CNAME
+  value: pr-test.k8s.io.
+prow:
+  type: CNAME
+  value: redirect.k8s.io.
+prs:
+  type: CNAME
+  value: prs.k8s.io.
+release.triage:
+  type: CNAME
+  value: release.triage.k8s.io.
+sbom:
+  type: CNAME
+  value: redirect.k8s.io.
+sigs:
+  type: CNAME
+  value: sigs.k8s.io.
+# Slack Inviter
+slack:
+  type: CNAME
+  value: redirect.k8s.io.
+# Slack tools like the moderator
+# see apps/slack-infra and https://sigs.k8s.io/slack-infra
+slack-infra:
+  type: A
+  value: 34.107.195.71
+# Prow (@ixdy).
+submit-queue:
+  type: CNAME
+  value: submit-queue.k8s.io.
+testgrid:
+  type: CNAME
+  value: testgrid.k8s.io.
+testgrid-data:
+  type: CNAME
+  value: testgrid-data.k8s.io.
+# Verify that @ixdy owns testgrid.kubernetes.io, necessary to set up custom domain in GAE
+pfjqlwt67ty3.testgrid:
+  type: CNAME
+  value: gv-bymjxdpk6uolpo.dv.googlehosted.com.
+youtube:
+  type: CNAME
+  value: redirect.k8s.io.
+yt:
+  type: CNAME
+  value: redirect.k8s.io.
+
+# BlueSky verification sig-contributor-experience
+_atproto:
+  type: TXT
+  value: did=did:plc:kyg4uikmq7lzpb76ugvxa6ul

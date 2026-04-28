@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "766197520365-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-csi-secrets-store/serviceAccounts/766197520365-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "113496496003856922587",
+  "projectId": "k8s-staging-csi-secrets-store",
+  "uniqueId": "113496496003856922587"
+}

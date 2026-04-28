@@ -1,0 +1,48 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "projectEditor:k8s-release-test-prod",
+        "projectOwner:k8s-release-test-prod"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io",
+        "group:k8s-infra-release-editors@kubernetes.io",
+        "projectViewer:k8s-release-test-prod",
+        "serviceAccount:615281671549@cloudbuild.gserviceaccount.com"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    },
+    {
+      "members": [
+        "group:k8s-infra-release-admins@kubernetes.io",
+        "group:k8s-infra-release-editors@kubernetes.io",
+        "serviceAccount:615281671549@cloudbuild.gserviceaccount.com",
+        "serviceAccount:k8s-infra-promoter@k8s-release-test-prod.iam.gserviceaccount.com",
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.legacyBucketWriter"
+    },
+    {
+      "members": [
+        "group:k8s-infra-artifact-admins@kubernetes.io",
+        "group:k8s-infra-release-admins@kubernetes.io",
+        "group:k8s-infra-release-editors@kubernetes.io",
+        "serviceAccount:615281671549@cloudbuild.gserviceaccount.com",
+        "serviceAccount:k8s-infra-promoter@k8s-release-test-prod.iam.gserviceaccount.com",
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/storage.objectAdmin"
+    },
+    {
+      "members": [
+        "allUsers"
+      ],
+      "role": "roles/storage.objectViewer"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "createTime": "2019-02-08T17:59:21.729Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-coredns",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-coredns",
+  "projectNumber": "848617618266"
+}

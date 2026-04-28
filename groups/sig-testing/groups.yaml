@@ -1,0 +1,255 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list, not intended to govern access
+  #
+  #
+
+  - email-id: sig-testing-leads@kubernetes.io
+    name: sig-testing-leads
+    description: |-
+      SIG Testing Leads - private discussion and shared account credentials (e.g. zoom)
+
+      Anyone can e-mail, but only members can view/post messages via the website
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+    owners:
+    - amerai@google.com
+    - antonio.ojea.garcia@gmail.com
+    - bentheelder@google.com
+    - bpratt@redhat.com
+    - mcqueenorama@gmail.com
+    - patrick.ohly@intel.com
+
+  - email-id: sig-testing@kubernetes.io
+    name: sig-testing
+    description: |-
+      SIG testing general discussion group
+    owners:
+    - killen.bob@gmail.com # temporary to finish configuration
+    - amerai@google.com
+    - antonio.ojea.garcia@gmail.com
+    - bentheelder@google.com
+    - bpratt@redhat.com
+    - mcqueenorama@gmail.com
+    - patrick.ohly@intel.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  #
+  # sig-testing k8s-staging write access
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: k8s-infra-staging-boskos@kubernetes.io
+    name: k8s-infra-staging-boskos
+    description: |-
+      ACL for staging kubernetes-sigs/boskos images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - aaleman@redhat.com
+    - jgrafton@google.com
+    - skuznets@redhat.com
+
+  - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
+    name: k8s-infra-staging-e2e-test-images
+    description: |-
+      Group that owns pushing rights to the gcr.io/k8s-staging-e2e-test-images staging registry
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - cblecker@gmail.com
+    - davanum@gmail.com
+    - justinsb@google.com
+    - manjunath.cse@gmail.com
+    - thockin@google.com
+    - spiffxp@gmail.com
+
+  - email-id: k8s-infra-staging-k8s-gsm-tools@kubernetes.io
+    name: k8s-infra-staging-k8s-gsm-tools
+    description: |-
+      ACL for staging kubernetes-sigs/k8s-gsm-tools
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - bentheelder@google.com
+    - shanefu@google.com
+    - spiffxp@gmail.com
+
+  - email-id: k8s-infra-staging-kind@kubernetes.io
+    name: k8s-infra-staging-kind
+    description: |-
+      ACL for staging kind artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - antonio.ojea.garcia@gmail.com
+    - bentheelder@google.com
+    - james@munnelly.eu
+    - sean.mcginnis@gmail.com
+
+  - email-id: k8s-infra-staging-kubetest2@kubernetes.io
+    name: k8s-infra-staging-kubetest2
+    description: |-
+      ACL for staging kubetest2 artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - bentheelder@google.com
+    - spiffxp@gmail.com
+
+  - email-id: k8s-infra-staging-test-infra@kubernetes.io
+    name: k8s-infra-staging-test-infra
+    description: |
+      ACL for staging Test Infra
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - k8s-infra-prow-oncall@kubernetes.io
+    - cglombek@redhat.com
+
+  #
+  # sig-testing k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+  - email-id: k8s-infra-push-kind@kubernetes.io
+    name: k8s-infra-push-kind
+    description: |-
+      ACL for pushing KinD artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - antonio.ojea.garcia@gmail.com
+    - bentheelder@google.com
+    - sean.mcginnis@gmail.com
+
+  #
+  # sig-testing k8s-infra read-only access
+  #
+  # Each group here represents non-privileged access to kubernetes project
+  # infrastructure owned or managed by sig-testing.
+  #
+  # There is essentially no barrier to entry; interested contributors may
+  # add themselves via PR.
+  #
+
+  - email-id: k8s-infra-prow-viewers@kubernetes.io
+    name: k8s-infra-prow-viewers
+    description: |-
+      ACL for view access to resources used by prow.k8s.io, including build clusters and e2e projects
+    settings:
+      ReconcileMembers: "true"
+    members:
+    # other groups
+    - k8s-infra-sig-scalability-oncall@kubernetes.io
+    - k8s-infra-release-viewers@kubernetes.io
+    # members
+    - alarcj137@gmail.com
+    - antonio.ojea.garcia@gmail.com
+    - eddiezane@gmail.com
+    - gmccloskey@google.com
+    - helenfengzhi@gmail.com
+    - koray@kubermatic.com
+    - liggitt@google.com
+    - mrfaizal@google.com
+    - ricardo.katz@gmail.com
+    - rob.kielty@gmail.com
+    - thejoycekung@gmail.com
+    - neolit123@gmail.com
+    - philjohnson96@gmail.com
+    - elieser.pereiraa@gmail.com
+    - sig-testing-leads@kubernetes.io
+
+  #
+  # sig-testing k8s-infra owners
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by sig-testing. A high level of trust is
+  # required for membership in these groups.
+  #
+
+  - email-id: k8s-infra-prow-oncall@kubernetes.io
+    name: k8s-infra-prow-oncall
+    description: |-
+      ACL for oncall/break-glass access to resources used by prow.k8s.io
+    settings:
+      ReconcileMembers: "true"
+    members:
+    - sig-testing-leads@kubernetes.io
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io
+
+  - email-id: k8s-infra-rbac-gcsweb@kubernetes.io
+    name: k8s-infra-rbac-gcsweb
+    description: |-
+      Grants access to the `namespace-user` role in the `gcsweb` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+    - k8s-infra-prow-oncall@kubernetes.io
+
+  - email-id: k8s-infra-rbac-kettle@kubernetes.io
+    name: k8s-infra-rbac-kettle
+    description: |
+      Grants access to the `namespace-user` role in the `kettle` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+    - k8s-infra-prow-oncall@kubernetes.io
+    - elieser.pereiraa@gmail.com
+
+  - email-id: k8s-infra-rbac-prow@kubernetes.io
+    name: k8s-infra-rbac-prow
+    description:
+      Grants access to the `namespace-user` role in the `prow` namespace on the `aaa` cluster
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+    - eddiezane@gmail.com
+    - k8s-infra-prow-oncall@kubernetes.io
+
+  - email-id: k8s-infra-testgrid@kubernetes.io
+    name: k8s-infra-testgrid
+    description:
+      Grants access to the new testgrid UI
+    settings:
+      ReconcileMembers: "true"
+      WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
+    members:
+    - dec.soham@gmail.com
+    - sig-testing-leads@kubernetes.io

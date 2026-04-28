@@ -1,0 +1,102 @@
+groups:
+  - email-id: steering-emeritus@kubernetes.io
+    name: steering-emeritus
+    description: |-
+      Private list for current and emeritus members of the Kubernetes Steering Committee
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - antonio.ojea.garcia@gmail.com
+      - aojea@google.com
+      - bburns@microsoft.com
+      - bentheelder@google.com
+      - briangrant@google.com
+      - cblecker@gmail.com
+      - ctadeu@gmail.com
+      - davanum@gmail.com
+      - decarr@redhat.com
+      - joe.k8s@bedafamily.com
+      - k8s@auggie.dev
+      - kat.cosgrove@gmail.com
+      - killen.bob@gmail.com
+      - lachlan.evenson@microsoft.com
+      - liggitt@google.com
+      - saschagrunert@gmail.com
+      - soltysh@gmail.com
+      - michelle.noorali@gmail.com
+      - nikhitaraghunath@gmail.com
+      - rita.z.zhang@gmail.com
+      - roollingstone@gmail.com
+      - pal.nabarun95@gmail.com
+      - paris.pittman@gmail.com
+      - patrick.ohly@intel.com
+      - phil.wittrock@gmail.com
+      - quintonh@gmail.com
+      - sarah.novotny@gmail.com
+      - saugustus2@bloomberg.net
+      - smarterclayton@gmail.com
+      - spiffxp@gmail.com
+      - thockin@google.com
+      - timothysc@gmail.com
+      - tpepper@vmware.com
+      - brandon@ifup.org
+
+  - email-id: steering-private@kubernetes.io
+    name: steering-private
+    description: |-
+      Private list for the Kubernetes Steering Committee
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - antonio.ojea.garcia@gmail.com
+      - aojea@google.com
+      - bentheelder@google.com
+      - bentheelder@gmail.com
+      - kat.cosgrove@gmail.com
+      - rita.z.zhang@gmail.com
+      - roollingstone@gmail.com
+      - saschagrunert@gmail.com
+      - soltysh@gmail.com
+
+  - email-id: steering@kubernetes.io
+    name: steering
+    description: |-
+      Public list for the Kubernetes Steering Committee.
+
+      This list is for Steering Committee business.  It is public-access for transparency and so that community can raise topics, but it is not a forum for public debate.
+
+      https://github.com/kubernetes/steering
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - antonio.ojea.garcia@gmail.com
+      - aojea@google.com
+      - bentheelder@google.com
+      - kat.cosgrove@gmail.com
+      - rita.z.zhang@gmail.com
+      - roollingstone@gmail.com
+      - saschagrunert@gmail.com
+      - soltysh@gmail.com
+    managers:
+      - ihor.dvoretskyi@gmail.com
+      - jdumars@gmail.com
+      - alison@alisondowdney.com
+
+  - email-id: election@kubernetes.io
+    name: election
+    description: |-
+      Kubernetes Elections Officers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MembersCanPostAsTheGroup: "true"
+      ReconcileMembers: "true"
+    owners:
+      - cblecker@gmail.com
+      - sreeramvenkitesh@gmail.com
+      - ninapolshakova@gmail.com

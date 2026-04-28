@@ -1,0 +1,13 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- sig-testing-leads
+
+reviewers:
+- sig-testing-leads
+- release-engineering-reviewers
+- test-infra-oncall
+
+labels:
+- sig/testing
+- area/prow

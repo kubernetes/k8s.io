@@ -1,0 +1,17 @@
+[
+    {
+        "mode": "NULLABLE",
+        "name": "timestamp",
+        "type": "TIMESTAMP"
+    },
+    {
+        "mode":"NULLABLE",
+        "name":"asn",
+        "type":"STRING"
+    },
+    {
+        "mode":"NULLABLE",
+        "name":"fastly_is_edge",
+        "type":"BOOLEAN"
+    }
+]

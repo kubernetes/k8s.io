@@ -1,0 +1,71 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-prow-viewers@kubernetes.io"
+      ],
+      "role": "organizations/758905017065/roles/prow.viewer"
+    },
+    {
+      "members": [
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.admin"
+    },
+    {
+      "members": [
+        "serviceAccount:881216629017-compute@developer.gserviceaccount.com",
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "serviceAccount:service-881216629017@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+    },
+    {
+      "members": [
+        "serviceAccount:service-881216629017@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-881216629017@container-engine-robot.iam.gserviceaccount.com"
+      ],
+      "role": "roles/container.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-881216629017@containerregistry.iam.gserviceaccount.com"
+      ],
+      "role": "roles/containerregistry.ServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:881216629017-compute@developer.gserviceaccount.com",
+        "serviceAccount:881216629017@cloudservices.gserviceaccount.com",
+        "serviceAccount:boskos-janitor@k8s-infra-prow-build.iam.gserviceaccount.com",
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "serviceAccount:service-881216629017@cloud-filer.iam.gserviceaccount.com"
+      ],
+      "role": "roles/file.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:prow-build@k8s-infra-prow-build.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountUser"
+    },
+    {
+      "members": [
+        "group:k8s-infra-prow-oncall@kubernetes.io",
+        "group:k8s-infra-sig-scalability-oncall@kubernetes.io"
+      ],
+      "role": "roles/owner"
+    }
+  ],
+  "version": 1
+}

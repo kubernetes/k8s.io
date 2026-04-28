@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-wasm-scheduler",
+  "email": "gcb-image-builder@k8s-staging-wasm-scheduler.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-wasm-scheduler/serviceAccounts/gcb-image-builder@k8s-staging-wasm-scheduler.iam.gserviceaccount.com",
+  "oauth2ClientId": "118340807348385812610",
+  "projectId": "k8s-staging-wasm-scheduler",
+  "uniqueId": "118340807348385812610"
+}

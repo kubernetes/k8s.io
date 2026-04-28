@@ -1,0 +1,72 @@
+gs://k8s-staging-infra-tools_cloudbuild/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Wed, 03 Apr 2024 14:51:41 GMT
+	Time updated:			Wed, 03 Apr 2024 14:51:41 GMT
+	Metageneration:			1
+	Bucket Policy Only enabled:	False
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				
+	  [
+	    {
+	      "entity": "project-owners-1017132094926",
+	      "projectTeam": {
+	        "projectNumber": "1017132094926",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-1017132094926",
+	      "projectTeam": {
+	        "projectNumber": "1017132094926",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-1017132094926",
+	      "projectTeam": {
+	        "projectNumber": "1017132094926",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]
+	Default ACL:			
+	  [
+	    {
+	      "entity": "project-owners-1017132094926",
+	      "projectTeam": {
+	        "projectNumber": "1017132094926",
+	        "team": "owners"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-editors-1017132094926",
+	      "projectTeam": {
+	        "projectNumber": "1017132094926",
+	        "team": "editors"
+	      },
+	      "role": "OWNER"
+	    },
+	    {
+	      "entity": "project-viewers-1017132094926",
+	      "projectTeam": {
+	        "projectNumber": "1017132094926",
+	        "team": "viewers"
+	      },
+	      "role": "READER"
+	    }
+	  ]

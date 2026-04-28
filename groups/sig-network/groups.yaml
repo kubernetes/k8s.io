@@ -1,0 +1,286 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: sig-network-leads@kubernetes.io
+    name: sig-network-leads
+    description: |-
+      sig-network leads
+    owners:
+      - antonio.ojea.garcia@gmail.com
+      - bowei@google.com
+      - danwinship@redhat.com
+      - guicassolato@gmail.com
+      - michael.zappa@gmail.com
+      - thockin@google.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: sig-network@kubernetes.io
+    name: sig-network
+    description: |-
+      SIG network general discussion group
+    owners:
+      - antonio.ojea.garcia@gmail.com
+      - bowei@google.com
+      - danwinship@redhat.com
+      - guicassolato@gmail.com
+      - michael.zappa@gmail.com
+      - thockin@google.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+
+  - email-id: k8s-infra-staging-networking@kubernetes.io
+    name: k8s-infra-staging-networking
+    description: |-
+      ACL for staging networking images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - antonio.ojea.garcia@gmail.com
+      - bannai@google.com
+      - bowei@google.com
+      - thockin@google.com
+      - rramkumar@google.com
+      - shance@google.com
+      - smatti@google.com
+      - srepakula@google.com
+      - zihongz@google.com
+
+  - email-id: k8s-infra-staging-cpa@kubernetes.io
+    name: k8s-infra-staging-cpa
+    description: |-
+      ACL for staging cluster-proportional-autoscaler and cluster-proportional-vertical-autoscaler images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - bowei@google.com
+      - thockin@google.com
+      - zihongz@google.com
+
+  - email-id: k8s-infra-staging-coredns@kubernetes.io
+    name: k8s-infra-staging-coredns
+    description: |-
+      ACL for staging coredns
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - michaelg@okkur.org
+      - srajan@infoblox.com
+      - jbelamaric@google.com
+      - cohaver@infoblox.com
+
+  - email-id: k8s-infra-staging-dns@kubernetes.io
+    name: k8s-infra-staging-dns
+    description: |-
+      ACL for staging kube-dns and node-local-dns images.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - antonio.ojea.garcia@gmail.com
+      - zihongz@google.com
+      - bowei@google.com
+
+  - email-id: k8s-infra-staging-external-dns@kubernetes.io
+    name: k8s-infra-staging-external-dns
+    description: |-
+      ACL for staging External DNS
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - martin.linkhorst+github.com@posteo.de
+      - difazio.raffaele@gmail.com
+      - nick@juni.io
+
+  - email-id: k8s-infra-staging-gateway-api@kubernetes.io
+    name: k8s-infra-staging-gateway-api
+    description: |-
+      ACL for staging SIG-network gateway api
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - antonio.ojea.garcia@gmail.com
+      - bowei@google.com
+      - cmluciano@us.ibm.com
+      - daneyonhansen@gmail.com
+      - harrybagdi@gmail.com
+      - robertjscott@google.com
+      - thockin@google.com
+
+  - email-id: k8s-infra-staging-ingress-nginx@kubernetes.io
+    name: k8s-infra-staging-ingress-nginx
+    description: |-
+      ACL for pushing ingress-nginx artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aledbf@gmail.com
+      - bowei@google.com
+      - thockin@google.com
+      - strong.james.e@gmail.com
+      - longwuyuan@gmail.com
+      - zhangjintao9020@gmail.com
+
+  - email-id: k8s-infra-staging-ingate@kubernetes.io
+    name: k8s-infra-staging-ingate
+    description: |-
+      ACL for pushing ingate artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - cpanato@gmail.com
+      - sig-network-leads@kubernetes.io
+      - strong.james.e@gmail.com
+      - longwuyuan@gmail.com
+      - zhangjintao9020@gmail.com
+
+  #
+  # ingress-nginx-dev
+  #
+  # Mailing list for Ingress-nginx users and contributors
+  #
+
+  - email-id: ingress-nginx-dev@kubernetes.io
+    name: ingress-nginx-dev
+    description: |-
+      Mailing list for Ingress-nginx users and contributors. This includes process changes, release info, contributor events, and more.
+
+      Try #ingress-nginx-user on slack or discuss.k8s.io for end user troubleshooting and discussion.
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+    owners:
+      - aledbf@gmail.com
+      - bowei@google.com
+      - thockin@google.com
+      - strong.james.e@gmail.com
+      - zhangjintao9020@gmail.com
+      - marco_ebert@icloud.com
+    managers:
+      - longwuyuan@gmail.com
+
+  #
+  # ingress-nginx-dev
+  #
+  # Mailing list for Ingress-nginx users and contributors
+  #
+
+  - email-id: ingate-dev@kubernetes.io
+    name: ingate-dev
+    description: |-
+      Mailing list for Ingate users and contributors. This includes process changes, release info, contributor events, and more.
+      Try #ingate-user on slack, discuss.k8s.io for end user troubleshooting and discussion,
+      or open an issue or discussion on https://github.com/kubernetes-sigs/ingate
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+    owners:
+      - thockin@google.com
+      - strong.james.e@gmail.com
+      - zhangjintao9020@gmail.com
+      - marco_ebert@icloud.com
+    managers:
+      - longwuyuan@gmail.com
+
+  - email-id: k8s-infra-staging-ingressconformance@kubernetes.io
+    name: k8s-infra-staging-ingressconformance
+    description: |-
+      ACL for pushing ingress-controller-conformance artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - aledbf@gmail.com
+      - bowei@google.com
+      - thockin@google.com
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+  - email-id: k8s-infra-push-cni@kubernetes.io
+    name: k8s-infra-push-cni
+    description: |-
+      ACL for pushing CNI artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - k8s-infra-release-editors@kubernetes.io
+      - brucema19901024@gmail.com
+      - bryan@weave.works
+      - cdc@redhat.com
+      - dcbw@redhat.com
+      - grosenhouse@pivotal.io
+      - matt@tigera.io
+      - mcambria@redhat.com
+      - thockin@google.com
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

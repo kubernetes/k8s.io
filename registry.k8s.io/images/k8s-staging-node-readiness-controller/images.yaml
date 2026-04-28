@@ -1,0 +1,12 @@
+- name: node-readiness-controller
+  dmap:
+    "sha256:5b3e69f24ded5048848d5520ef9c390da364b984f0d3ba3bfcd2a66d556c0295": ["v0.3.0"]
+    "sha256:23037cf474df7d8c1304411d28aa8baa8b579f5d1904d04c292804f4d976c5fb": ["v0.2.0"]
+    "sha256:0dcce342f2c2a132185fe85ceff86f9e2ae796d305f0ccc6a5970bb1d885d008": ["v0.1.1"]
+    "sha256:b9a70b7f08d0bfce70d6c1472e5d4906a656629586c792a76fd06663e0014b0d": ["v0.1.0"]
+- name: node-readiness-reporter
+  dmap:
+    "sha256:44bd5f74ffcfdd8b2d4db85bd96245bdab18aaa697d5f984ab22ce72c640e83e": ["v0.3.0"]
+    "sha256:db163a1bfb28fb8229f5cc6c750dc7c96757675b34b780f750b536d669e068bd": ["v0.2.0"]
+    "sha256:c10a5db1d11fad94c40234d300678d52e92a36a03d47385ba0beb2c36235992c": ["v0.1.1"]
+    "sha256:87d79a67d167a3c44ed554cac5df1162f3a1a9b844cfa90114bf817c9da4f208": ["v0.1.0"]

@@ -1,0 +1,11 @@
+{
+  "createTime": "2024-06-17T19:15:35.522136Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-etcd-manager",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-etcd-manager",
+  "projectNumber": "976294098043"
+}

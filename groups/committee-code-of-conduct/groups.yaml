@@ -1,0 +1,31 @@
+groups:
+  - email-id: conduct@kubernetes.io
+    name: conduct
+    description: |-
+      Public list for the Code of Conduct Committee
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - jeremy.r.rickard@gmail.com
+      - lancashiredanielle@gmail.com
+      - AnaMMedina21@gmail.com
+      - sean.mcginnis@gmail.com
+      - divya.mohan0209@gmail.com
+  - email-id: conduct-emeritus@kubernetes.io
+    name: conduct-emeritus
+    description: |-
+      Private list for current and emeritus members of the Code of Conduct Committee
+    settings:
+      ReconcileMembers: "true"
+    owners:
+      - jeremy.r.rickard@gmail.com
+      - lancashiredanielle@gmail.com
+      - AnaMMedina21@gmail.com
+      - sean.mcginnis@gmail.com
+      - divya.mohan0209@gmail.com
+    members:
+      - hilliary.lipsig@gmail.com
+      - xandergrzyw@gmail.com
+      - tpepper@vmware.com
+      - detiber@gmail.com

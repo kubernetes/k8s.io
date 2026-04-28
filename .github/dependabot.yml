@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: "terraform"
+    directory: "infra/gcp/terraform"
+    schedule:
+      day: "tuesday"
+      time: "16:00" #in UTC
+      interval: "weekly"
+    rebase-strategy: "disabled"
+    assignees:
+      - "ameukam"

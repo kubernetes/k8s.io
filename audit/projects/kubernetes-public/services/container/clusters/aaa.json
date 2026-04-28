@@ -1,0 +1,446 @@
+{
+  "addonsConfig": {
+    "gcePersistentDiskCsiDriverConfig": {
+      "enabled": true
+    },
+    "horizontalPodAutoscaling": {},
+    "httpLoadBalancing": {},
+    "kubernetesDashboard": {
+      "disabled": true
+    },
+    "networkPolicyConfig": {}
+  },
+  "authenticatorGroupsConfig": {
+    "enabled": true,
+    "securityGroup": "gke-security-groups@kubernetes.io"
+  },
+  "autoscaling": {
+    "autoprovisioningNodePoolDefaults": {
+      "diskSizeGb": 100,
+      "diskType": "pd-standard",
+      "imageType": "COS_CONTAINERD",
+      "oauthScopes": [
+        "https://www.googleapis.com/auth/logging.write",
+        "https://www.googleapis.com/auth/monitoring"
+      ],
+      "serviceAccount": "default",
+      "upgradeSettings": {
+        "strategy": "SURGE"
+      }
+    },
+    "autoscalingProfile": "BALANCED",
+    "enableNodeAutoprovisioning": true,
+    "resourceLimits": [
+      {
+        "maximum": "64",
+        "minimum": "2",
+        "resourceType": "cpu"
+      },
+      {
+        "maximum": "256",
+        "resourceType": "memory"
+      }
+    ]
+  },
+  "binaryAuthorization": {},
+  "clusterIpv4Cidr": "10.40.0.0/14",
+  "controlPlaneEndpointsConfig": {
+    "dnsEndpointConfig": {
+      "allowExternalTraffic": false,
+      "endpoint": "gke-4d0eb7639c079dd868639801ff9cee7661c5-127754664067.us-central1.gke.goog"
+    },
+    "ipEndpointsConfig": {
+      "authorizedNetworksConfig": {
+        "gcpPublicCidrsAccessEnabled": true
+      },
+      "enablePublicEndpoint": true,
+      "enabled": true,
+      "privateEndpoint": "10.107.0.14",
+      "publicEndpoint": "35.226.73.60"
+    }
+  },
+  "createTime": "2019-09-18T23:39:24+00:00",
+  "currentMasterVersion": "1.30.5-gke.1443001",
+  "currentNodeVersion": "1.30.5-gke.1443001",
+  "databaseEncryption": {
+    "state": "DECRYPTED"
+  },
+  "defaultMaxPodsConstraint": {
+    "maxPodsPerNode": "110"
+  },
+  "endpoint": "35.226.73.60",
+  "enterpriseConfig": {
+    "clusterTier": "STANDARD"
+  },
+  "id": "4d0eb7639c079dd868639801ff9cee7661c54b7d48d7fbec45120307b7c6ad22",
+  "initialClusterVersion": "1.13.7-gke.8",
+  "initialNodeCount": 1,
+  "instanceGroupUrls": [
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-pool1-20190918234853194900000-be551715-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-pool1-20190918234853194900000-8bfa2747-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-pool1-20190918234853194900000-411e5408-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-fafa121a-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-efbc2684-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-91796c71-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-10de5ce3-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-8a2e99d8-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-ad548c1d-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-1af5a609-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-7c2ed195-grp",
+    "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-c240eb34-grp"
+  ],
+  "ipAllocationPolicy": {
+    "clusterIpv4Cidr": "10.40.0.0/14",
+    "clusterIpv4CidrBlock": "10.40.0.0/14",
+    "clusterSecondaryRangeName": "gke-aaa-pods-4d0eb763",
+    "createSubnetwork": true,
+    "defaultPodIpv4RangeUtilization": 0.0098,
+    "servicesIpv4Cidr": "10.107.16.0/20",
+    "servicesIpv4CidrBlock": "10.107.16.0/20",
+    "servicesSecondaryRangeName": "gke-aaa-services-4d0eb763",
+    "useIpAliases": true
+  },
+  "labelFingerprint": "a9dc16a7",
+  "legacyAbac": {},
+  "location": "us-central1",
+  "locations": [
+    "us-central1-c",
+    "us-central1-a",
+    "us-central1-f"
+  ],
+  "loggingConfig": {
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS",
+        "WORKLOADS"
+      ]
+    }
+  },
+  "loggingService": "logging.googleapis.com/kubernetes",
+  "maintenancePolicy": {
+    "resourceVersion": "44fb9d63",
+    "window": {
+      "dailyMaintenanceWindow": {
+        "duration": "PT4H0M0S",
+        "startTime": "11:00"
+      }
+    }
+  },
+  "masterAuthorizedNetworksConfig": {
+    "gcpPublicCidrsAccessEnabled": true
+  },
+  "monitoringConfig": {
+    "advancedDatapathObservabilityConfig": {},
+    "componentConfig": {
+      "enableComponents": [
+        "SYSTEM_COMPONENTS"
+      ]
+    },
+    "managedPrometheusConfig": {
+      "enabled": true
+    }
+  },
+  "monitoringService": "monitoring.googleapis.com/kubernetes",
+  "name": "aaa",
+  "network": "default",
+  "networkConfig": {
+    "defaultSnatStatus": {},
+    "network": "projects/kubernetes-public/global/networks/default",
+    "serviceExternalIpsConfig": {
+      "enabled": true
+    },
+    "subnetwork": "projects/kubernetes-public/regions/us-central1/subnetworks/gke-aaa-subnet-4d0eb763"
+  },
+  "networkPolicy": {
+    "enabled": true,
+    "provider": "CALICO"
+  },
+  "nodeConfig": {
+    "diskSizeGb": 100,
+    "diskType": "pd-standard",
+    "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
+    "imageType": "COS_CONTAINERD",
+    "machineType": "n1-standard-2",
+    "metadata": {
+      "disable-legacy-endpoints": "true"
+    },
+    "oauthScopes": [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ],
+    "serviceAccount": "gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+    "shieldedInstanceConfig": {
+      "enableIntegrityMonitoring": true
+    },
+    "workloadMetadataConfig": {
+      "mode": "GKE_METADATA"
+    }
+  },
+  "nodePools": [
+    {
+      "autoscaling": {
+        "enabled": true,
+        "locationPolicy": "BALANCED",
+        "maxNodeCount": 20,
+        "minNodeCount": 1
+      },
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "pd-standard",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
+        "imageType": "COS_CONTAINERD",
+        "machineType": "n1-standard-2",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ],
+        "serviceAccount": "gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "initialNodeCount": 1,
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-pool1-20190918234853194900000-be551715-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-pool1-20190918234853194900000-8bfa2747-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-pool1-20190918234853194900000-411e5408-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-a",
+        "us-central1-f"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "maxPodsConstraint": {
+        "maxPodsPerNode": "110"
+      },
+      "name": "pool1-20190918234853194900000001",
+      "networkConfig": {
+        "podIpv4CidrBlock": "10.40.0.0/14",
+        "podIpv4RangeUtilization": 0.0098,
+        "podRange": "gke-aaa-pods-4d0eb763"
+      },
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/pool1-20190918234853194900000001",
+      "upgradeSettings": {
+        "maxSurge": 1,
+        "strategy": "SURGE"
+      },
+      "version": "1.30.5-gke.1443001"
+    },
+    {
+      "autoscaling": {
+        "enabled": true,
+        "locationPolicy": "BALANCED",
+        "maxNodeCount": 10,
+        "minNodeCount": 1
+      },
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "pd-standard",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
+        "imageType": "COS_CONTAINERD",
+        "machineType": "n1-standard-4",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ],
+        "serviceAccount": "gke-nodes-aaa@kubernetes-public.iam.gserviceaccount.com",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "initialNodeCount": 1,
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-fafa121a-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-efbc2684-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-pool2-20200316195138785800000-91796c71-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-a",
+        "us-central1-f"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "maxPodsConstraint": {
+        "maxPodsPerNode": "110"
+      },
+      "name": "pool2-20200316195138785800000001",
+      "networkConfig": {
+        "podIpv4CidrBlock": "10.40.0.0/14",
+        "podIpv4RangeUtilization": 0.0098,
+        "podRange": "gke-aaa-pods-4d0eb763"
+      },
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/pool2-20200316195138785800000001",
+      "upgradeSettings": {
+        "maxSurge": 1,
+        "strategy": "SURGE"
+      },
+      "version": "1.30.5-gke.1443001"
+    },
+    {
+      "autoscaling": {
+        "autoprovisioned": true,
+        "enabled": true,
+        "locationPolicy": "BALANCED",
+        "maxNodeCount": 1000
+      },
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "pd-standard",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
+        "imageType": "COS_CONTAINERD",
+        "machineType": "e2-highmem-4",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/logging.write",
+          "https://www.googleapis.com/auth/monitoring"
+        ],
+        "serviceAccount": "default",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "windowsNodeConfig": {},
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-10de5ce3-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-8a2e99d8-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-4-79yq2sly-ad548c1d-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-a",
+        "us-central1-f"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "maxPodsConstraint": {
+        "maxPodsPerNode": "110"
+      },
+      "name": "nap-e2-highmem-4-79yq2sly",
+      "networkConfig": {
+        "podIpv4CidrBlock": "10.40.0.0/14",
+        "podIpv4RangeUtilization": 0.0098,
+        "podRange": "gke-aaa-pods-4d0eb763"
+      },
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/nap-e2-highmem-4-79yq2sly",
+      "upgradeSettings": {
+        "maxSurge": 1,
+        "strategy": "SURGE"
+      },
+      "version": "1.30.5-gke.1443001"
+    },
+    {
+      "autoscaling": {
+        "autoprovisioned": true,
+        "enabled": true,
+        "locationPolicy": "BALANCED",
+        "maxNodeCount": 1000
+      },
+      "config": {
+        "diskSizeGb": 100,
+        "diskType": "pd-standard",
+        "effectiveCgroupMode": "EFFECTIVE_CGROUP_MODE_V1",
+        "imageType": "COS_CONTAINERD",
+        "machineType": "e2-highmem-8",
+        "metadata": {
+          "disable-legacy-endpoints": "true"
+        },
+        "oauthScopes": [
+          "https://www.googleapis.com/auth/logging.write",
+          "https://www.googleapis.com/auth/monitoring"
+        ],
+        "serviceAccount": "default",
+        "shieldedInstanceConfig": {
+          "enableIntegrityMonitoring": true
+        },
+        "windowsNodeConfig": {},
+        "workloadMetadataConfig": {
+          "mode": "GKE_METADATA"
+        }
+      },
+      "instanceGroupUrls": [
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-c/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-1af5a609-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-a/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-7c2ed195-grp",
+        "https://www.googleapis.com/compute/v1/projects/kubernetes-public/zones/us-central1-f/instanceGroupManagers/gke-aaa-nap-e2-highmem-8-1qo4g7pd-c240eb34-grp"
+      ],
+      "locations": [
+        "us-central1-c",
+        "us-central1-a",
+        "us-central1-f"
+      ],
+      "management": {
+        "autoRepair": true,
+        "autoUpgrade": true
+      },
+      "maxPodsConstraint": {
+        "maxPodsPerNode": "110"
+      },
+      "name": "nap-e2-highmem-8-1qo4g7pd",
+      "networkConfig": {
+        "podIpv4CidrBlock": "10.40.0.0/14",
+        "podIpv4RangeUtilization": 0.0098,
+        "podRange": "gke-aaa-pods-4d0eb763"
+      },
+      "placementPolicy": {},
+      "podIpv4CidrSize": 24,
+      "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa/nodePools/nap-e2-highmem-8-1qo4g7pd",
+      "upgradeSettings": {
+        "maxSurge": 1,
+        "strategy": "SURGE"
+      },
+      "version": "1.30.5-gke.1443001"
+    }
+  ],
+  "privateClusterConfig": {
+    "privateEndpoint": "10.107.0.14",
+    "publicEndpoint": "35.226.73.60"
+  },
+  "releaseChannel": {
+    "channel": "REGULAR"
+  },
+  "resourceUsageExportConfig": {
+    "bigqueryDestination": {
+      "datasetId": "usage_metering_aaa"
+    },
+    "consumptionMeteringConfig": {
+      "enabled": true
+    },
+    "enableNetworkEgressMetering": true
+  },
+  "selfLink": "https://container.googleapis.com/v1/projects/kubernetes-public/locations/us-central1/clusters/aaa",
+  "servicesIpv4Cidr": "10.107.16.0/20",
+  "shieldedNodes": {},
+  "subnetwork": "gke-aaa-subnet-4d0eb763",
+  "verticalPodAutoscaling": {
+    "enabled": true
+  },
+  "workloadIdentityConfig": {
+    "workloadPool": "kubernetes-public.svc.id.goog"
+  },
+  "zone": "us-central1"
+}

@@ -1,0 +1,24 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+# https://github.com/kubernetes/community/blob/master/OWNERS_ALIASES.
+approvers:
+- aojea
+- bowei 
+- cheftako
+- hdp617
+- LogicalShark
+- msau42
+- mattcary
+- sunnylovestiramisu
+- YifeiZhuang 
+
+reviewers:
+- aojea
+- bowei 
+- cheftako
+- hdp617
+- LogicalShark
+- msau42
+- mattcary
+- sunnylovestiramisu
+- YifeiZhuang 

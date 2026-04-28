@@ -1,0 +1,11 @@
+{
+  "createTime": "2022-06-29T14:12:25.306Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-capi-cloudstack",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-capi-cloudstack",
+  "projectNumber": "1027352270722"
+}

@@ -1,0 +1,134 @@
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+  - email-id: sig-apps-leads@kubernetes.io
+    name: sig-apps-leads
+    description: |-
+      sig-apps leads
+    owners:
+      - chiachenk@google.com
+      - kowens0826@gmail.com
+      - soltysh@gmail.com
+    settings:
+      AllowWebPosting: "true"
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MessageModerationLevel: "MODERATE_NONE"
+
+  - email-id: sig-apps@kubernetes.io
+    name: sig-apps
+    description: |-
+      SIG apps general discussion group
+    owners:
+      - chiachenk@google.com
+      - kowens0826@gmail.com
+      - soltysh@gmail.com
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      WhoCanViewMembership: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanModerateMembers: "OWNERS_AND_MANAGERS"
+      WhoCanModerateContent: "OWNERS_AND_MANAGERS"
+      MembersCanPostAsTheGroup: "false"
+      ReconcileMembers: "false"
+
+  - email-id: k8s-infra-staging-agent-sandbox@kubernetes.io
+    name: k8s-infra-staging-agent-sandbox
+    description: |-
+      ACL for staging Agent Sandbox
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - chiachenk@google.com
+      - justinsb@google.com
+      - soltysh@gmail.com
+
+  - email-id: k8s-infra-staging-mcp-lifecycle-op@kubernetes.io
+    name: k8s-infra-staging-mcp-lifecycle-op
+    description: |-
+      ACL for staging MCP Lifecycle Operator
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - eduardoa@nvidia.com
+      - brownwm@us.ibm.com
+
+  - email-id: k8s-infra-staging-jobset@kubernetes.io
+    name: k8s-infra-staging-jobset
+    description: |-
+      ACL for staging jobset
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - danielvm@google.com
+      - ahg@google.com
+
+  - email-id: k8s-infra-staging-lws@kubernetes.io
+    name: k8s-infra-staging-lws
+    description: |-
+      ACL for staging leaderworkerset
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ahg@google.com
+      - rupliu@google.com
+
+  - email-id: k8s-infra-staging-examples@kubernetes.io
+    name: k8s-infra-staging-examples
+    description: |-
+      ACL for staging example artifacts.
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - ihor@cncf.io # github:idvoretskyi
+      - justinsb@google.com # github:justinsb
+      - runseb@gmail.com # github:sebgoa
+
+  #
+  # k8s-infra gcs write access
+  #
+  # TODO: where is the bucket? is this prod or staging?
+  #
+  # Each group here governs access to one GCS bucket. Ideally this level of
+  # access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in the GCS bucket
+  #
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

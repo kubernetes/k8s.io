@@ -1,0 +1,24 @@
+# See https://cloud.google.com/cloud-build/docs/build-config
+timeout: 1200s
+options:
+  machineType: 'E2_HIGHCPU_8'
+steps:
+- name: gcr.io/cloud-builders/docker
+  dir: .
+  entrypoint: /usr/bin/make
+  args:
+    - build
+    - TAG=$_TAG
+    - TAG_DATE_SHA=$_GIT_TAG
+    - _=$_PULL_BASE_REF # unused
+substitutions:
+  # variables set by kubernetes/test-infra/images/builder
+  # set by image-builder to vYYYYMMDD-hash
+  _GIT_TAG: "12345"
+  # set by image-builder to branch name; we don't use this, but we
+  # want strict validation of substitution vars to catch typos early
+  _PULL_BASE_REF: ""
+  _TAG: "latest"
+images:
+- "gcr.io/$PROJECT_ID/k8s-infra:$_GIT_TAG"
+- "gcr.io/$PROJECT_ID/k8s-infra:$_TAG"

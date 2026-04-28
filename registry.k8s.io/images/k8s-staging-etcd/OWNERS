@@ -1,0 +1,17 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+options:
+  no_parent_owners: true
+approvers:
+  - release-engineering-approvers
+  - sig-etcd-leads
+reviewers:
+  - release-engineering-reviewers
+  - sig-etcd-leads
+  - jpbetz
+  - wenjiaswe
+  - jingyih
+labels:
+  - sig/api-machinery
+  - sig/release
+  - area/release-eng

@@ -1,0 +1,8 @@
+{
+  "description": "Used by Fastly for read-only actions against the bucket",
+  "email": "fastly-reader@k8s-infra-releases-prod.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-releases-prod/serviceAccounts/fastly-reader@k8s-infra-releases-prod.iam.gserviceaccount.com",
+  "oauth2ClientId": "113967751387689899505",
+  "projectId": "k8s-infra-releases-prod",
+  "uniqueId": "113967751387689899505"
+}

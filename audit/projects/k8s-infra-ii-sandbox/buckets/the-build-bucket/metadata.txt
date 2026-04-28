@@ -1,0 +1,19 @@
+gs://the-build-bucket/ :
+	Storage class:			STANDARD
+	Location type:			region
+	Location constraint:		AUSTRALIA-SOUTHEAST1
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	None
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Fri, 08 Apr 2022 02:54:27 GMT
+	Time updated:			Fri, 08 Apr 2022 02:54:27 GMT
+	Metageneration:			1
+	Bucket Policy Only enabled:	True
+	Public access prevention:	enforced
+	ACL:				[]
+	Default ACL:			[]

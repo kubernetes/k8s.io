@@ -1,0 +1,20 @@
+gs://k8s-staging-win-op-rdnss-gcb/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Fri, 19 Aug 2022 12:39:35 GMT
+	Time updated:			Fri, 19 Aug 2022 12:41:02 GMT
+	Metageneration:			10
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

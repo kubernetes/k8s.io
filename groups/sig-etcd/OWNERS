@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- sig-etcd-leads
+reviewers:
+- sig-etcd-leads
+
+labels:
+- sig/etcd

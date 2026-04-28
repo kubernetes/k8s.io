@@ -1,0 +1,26 @@
+- name: admission-server
+  dmap:
+    "sha256:9a1402d04ba0b8951c535207aa1764b7590ec1e5f1e85d4e3a552507099b08d9": ["v0.6.2"]
+    "sha256:847bc01f6f4a76ae2cf7451ba20400d97bf415a1c7ec006f45b204daaa7dc87a": ["v0.7.0-rc1"]
+    "sha256:6fe4937c4bbe6afb417e7a68bdaf0c88b834905d3eade09ae73c222fac32799f": ["v0.7.0-rc2"]
+    "sha256:661bee3bbf626ad95fab58154da5c78a5136d7d96bacfae2925d4527c697897d": ["v0.7.0"]
+    "sha256:fe43ee5176a8544538bcdbf133f103d181fb4cf354c69a3380013ea12fa31d17": ["v0.7.1"]
+    "sha256:3ab95a2471fd74ec4c5f3a76df899c068c4a002046dea556f29bf29019363ba1": ["v0.8.0-rc1"]
+    "sha256:46b40dc31143eb771c28687b0423556e621feda425a44fd15a404798efaceee1": ["v0.8.0-rc2"]
+    "sha256:455da934e0323afbfa12c0d8efd671091f06d2b9de546cf37ebb8f24650d367a": ["v0.8.0"]
+    "sha256:7a66c5c0da92718264ca02667470e75cec3bb5ae158a9be62741103d98069ce1": ["v0.8.1"]
+    "sha256:09be1fa589d12523b313bf0e9619bea8b9224d636ba0d26d8fb70b31cd23e63b": ["v1.0.0-rc1"]
+    "sha256:240cdf8e7e12c1e17762360cb85a2ac53ae71b4699cf7b95dece4c08dfd86b8a": ["v1.0.0-rc2"]
+    "sha256:7c295d3e482faad95aedf9733f4465997a89b12f4a7e71b79d02a76f0469272b": ["v1.0.0"]
+
+# Gateway API echo-basic test image - This image is used on conformance tests and documentation
+# and should not be considered for production!
+- name: echo-basic
+  dmap:
+    "sha256:79fa51c368ac16ef6bad70bd2e0176c306a4f6e5f6f5ffe54a869ba5590ee642": ["v20251204-v1.4.1"]
+    "sha256:7e7558cf4eec0934dc1dc034e9a4be9a944720a3bc9b3991b109bc5923743e93": ["v1.4.0"]
+    "sha256:fcbdfab85b3c4441e2fe8fdedd382904332ccb8253a5d51f6006c16903e7ae40": ["v1.5.0"]
+    "sha256:1930f87f9a037f8acadc37e79185bb217614d9674304e3c1f6074aec8ff6b8dc": ["v1.5.1"]
+- name: echo-advanced
+  dmap:
+    "sha256:96c3b75534386ca36c0c76ac8fdbe695f63f35bb3e0632537ffba9732c1f58c9": ["v1.4.0", "v1.5.0", "v1.5.1"]

@@ -1,0 +1,8 @@
+{
+  "displayName": "sync K8s secrets from GSM in this and other projects",
+  "email": "kubernetes-external-secrets@k8s-infra-prow-build.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-prow-build/serviceAccounts/kubernetes-external-secrets@k8s-infra-prow-build.iam.gserviceaccount.com",
+  "oauth2ClientId": "106795548308977322549",
+  "projectId": "k8s-infra-prow-build",
+  "uniqueId": "106795548308977322549"
+}

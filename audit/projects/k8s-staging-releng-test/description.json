@@ -1,0 +1,11 @@
+{
+  "createTime": "2021-01-29T15:02:49.545Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-releng-test",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-releng-test",
+  "projectNumber": "86929635859"
+}

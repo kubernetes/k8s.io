@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: atlantis
+spec:
+  parentRefs:
+  - name: istio-ingressgateway
+    namespace: istio-system
+    sectionName: https
+  hostnames:
+  - atlantis.k8s.io
+  rules:
+  - matches:
+    - path:
+        value: /
+    backendRefs:
+    - name: atlantis
+      port: 80

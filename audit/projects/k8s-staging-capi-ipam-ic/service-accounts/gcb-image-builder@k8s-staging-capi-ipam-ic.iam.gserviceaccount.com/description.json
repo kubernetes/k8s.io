@@ -1,0 +1,8 @@
+{
+  "displayName": "used by prow to build container images and sign artifacts for k8s-staging-capi-ipam-ic",
+  "email": "gcb-image-builder@k8s-staging-capi-ipam-ic.iam.gserviceaccount.com",
+  "name": "projects/k8s-staging-capi-ipam-ic/serviceAccounts/gcb-image-builder@k8s-staging-capi-ipam-ic.iam.gserviceaccount.com",
+  "oauth2ClientId": "107291144339139390423",
+  "projectId": "k8s-staging-capi-ipam-ic",
+  "uniqueId": "107291144339139390423"
+}

@@ -1,0 +1,48 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "group:k8s-infra-public-pii@kubernetes.io"
+      ],
+      "role": "roles/bigquery.user"
+    },
+    {
+      "members": [
+        "serviceAccount:service-226195303281@gcp-sa-bigqueryconnection.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigqueryconnection.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-226195303281@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com"
+      ],
+      "role": "roles/bigquerydatatransfer.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:service-226195303281@compute-system.iam.gserviceaccount.com"
+      ],
+      "role": "roles/compute.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:226195303281-compute@developer.gserviceaccount.com",
+        "serviceAccount:226195303281@cloudservices.gserviceaccount.com"
+      ],
+      "role": "roles/editor"
+    },
+    {
+      "members": [
+        "user:ameukam@gmail.com"
+      ],
+      "role": "roles/owner"
+    },
+    {
+      "members": [
+        "group:k8s-infra-public-pii@kubernetes.io"
+      ],
+      "role": "roles/viewer"
+    }
+  ],
+  "version": 1
+}

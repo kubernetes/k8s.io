@@ -1,0 +1,8 @@
+{
+  "description": "Terraform-managed service account for Orchis",
+  "email": "orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
+  "name": "projects/k8s-infra-ii-sandbox/serviceAccounts/orchis-k4gis-node-sa@k8s-infra-ii-sandbox.iam.gserviceaccount.com",
+  "oauth2ClientId": "117281813697326278026",
+  "projectId": "k8s-infra-ii-sandbox",
+  "uniqueId": "117281813697326278026"
+}

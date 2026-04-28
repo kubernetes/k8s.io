@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kops-discovery
+spec:
+  destination:
+    namespace: kops-discovery
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: kubernetes/gke-utility/kops-discovery
+    repoURL: https://github.com/kubernetes/k8s.io
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

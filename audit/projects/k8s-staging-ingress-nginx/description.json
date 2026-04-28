@@ -1,0 +1,11 @@
+{
+  "createTime": "2020-05-26T18:48:29.135Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-ingress-nginx",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-ingress-nginx",
+  "projectNumber": "971199482687"
+}

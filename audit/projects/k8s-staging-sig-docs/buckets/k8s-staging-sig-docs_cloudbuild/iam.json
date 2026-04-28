@@ -1,0 +1,17 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "projectEditor:k8s-staging-sig-docs",
+        "projectOwner:k8s-staging-sig-docs"
+      ],
+      "role": "roles/storage.legacyBucketOwner"
+    },
+    {
+      "members": [
+        "projectViewer:k8s-staging-sig-docs"
+      ],
+      "role": "roles/storage.legacyBucketReader"
+    }
+  ]
+}

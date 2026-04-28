@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-io
+  labels:
+    app: k8s-io
+  namespace: k8s-io-prod
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: k8s-io-ingress-prod
+    kubernetes.io/ingress.class: gce
+    networking.gke.io/managed-certificates: k8s-io-prod
+spec:
+  defaultBackend:
+    service:
+      name: k8s-io
+      port:
+        name: http

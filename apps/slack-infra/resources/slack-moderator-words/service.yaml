@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: slack-moderator-words
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  selector:
+    app: slack-moderator-words
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

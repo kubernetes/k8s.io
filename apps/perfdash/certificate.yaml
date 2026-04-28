@@ -1,0 +1,10 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: perfdash-k8s-io
+  namespace: perfdash
+  labels:
+    app: perfdash
+spec:
+  domains:
+  - perf-dash.k8s.io

@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: slack-infra
+spec:
+  domains:
+  - slack-infra.k8s.io
+  - slack-infra.kubernetes.io

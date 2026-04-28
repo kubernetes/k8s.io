@@ -1,0 +1,11 @@
+{
+  "createTime": "2021-02-15T15:12:50.913Z",
+  "lifecycleState": "ACTIVE",
+  "name": "k8s-staging-provider-openstack",
+  "parent": {
+    "id": "758905017065",
+    "type": "organization"
+  },
+  "projectId": "k8s-staging-provider-openstack",
+  "projectNumber": "625174557286"
+}

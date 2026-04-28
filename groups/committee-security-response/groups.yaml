@@ -1,0 +1,144 @@
+# This file has the list of groups in kubernetes.io gsuite org that we use for
+# granting permissions to various community resources. Please ensure that the
+# group is prefixed with "k8s-infra" to avoid polluting the other existing gsuite
+# mailing lists.
+groups:
+
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the SIG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+
+  - email-id: distributors-announce@kubernetes.io
+    name: distributors-announce
+    description: |-
+      Private vulnerability pre-announcement list for Kubernetes distributors.
+
+      https://git.k8s.io/committee-security-response/private-distributors-list.md
+    settings:
+      ReconcileMembers: "true"
+      AllowWebPosting: "true"
+      MessageModerationLevel: "MODERATE_ALL_MESSAGES"
+      WhoCanViewGroup: "ALL_MANAGERS_CAN_VIEW"
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+    owners:
+      - adolfo.garcia@uservers.net
+      - cjcullen@google.com
+      - i@monis.app
+      - joelsmith@redhat.com
+      - hausler.m@gmail.com
+      - nathan.herz97@gmail.com
+      - slznika@microsoft.com
+      - tabitha.c.sable@gmail.com
+      - vinayakankugoyal@gmail.com
+      - vyom.yadav@canonical.com
+    members:
+      # Distributors
+      - argoprod@us.ibm.com
+      - aws-k8s-embargo-notification@amazon.com
+      - k8s-security@suse.de
+      - k8s_security_grp@oracle.com
+      - kops-security-response@googlegroups.com
+      - kubernetes-security-disclosure@google.com
+      - kubernetes-security-team@ml.ovh.net
+      - kubernetes-security@cisco.com
+      - kubernetes-security@daocloud.io
+      - kubernetes-security@docker.com
+      - kubernetes-security@huawei.com
+      - kubernetes-security@service.aliyun.com
+      - kube-security@microsoft.com
+      - kubernetes-security@weave.works
+      - mke-security@mesosphere.com
+      - release-managers-private@kubernetes.io
+      - secalert@redhat.com
+      - secure@sap.com
+      - security@digitalocean.com
+      - security@giantswarm.io
+      - security@gravitational.com
+      - security@kinvolk.io
+      - security@loodse.com
+      - security@platform9.com
+      - security-rancher@suse.com
+      - security@ubuntu.com
+      - VMware.psirt@broadcom.com
+      - vulnerabilityreports@cloudfoundry.org
+      - psirt@nutanix.com
+
+  - email-id: security@kubernetes.io
+    name: security
+    description: |-
+      Private security disclosure alias.
+
+      See https://kubernetes.io/docs/reference/issues-security/security/
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - cjcullen@google.com
+      - i@monis.app
+      - joelsmith@redhat.com
+      - hausler.m@gmail.com
+      - nathan.herz97@gmail.com
+      - slznika@microsoft.com
+      - tabitha.c.sable@gmail.com
+      - vinayakankugoyal@gmail.com
+      - vyom.yadav@canonical.com
+
+  - email-id: security-discuss-private@kubernetes.io
+    name: security-discuss-private
+    description: |-
+      Private discussion forum for SRC members.
+
+      https://github.com/kubernetes/security#security-response-committee-psc
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - adolfo.garcia@uservers.net
+      - cjcullen@google.com
+      - i@monis.app
+      - joelsmith@redhat.com
+      - hausler.m@gmail.com
+      - nathan.herz97@gmail.com
+      - slznika@microsoft.com
+      - tabitha.c.sable@gmail.com
+      - vinayakankugoyal@gmail.com
+      - vyom.yadav@canonical.com
+
+  #
+  # k8s-staging write access for SIG-owned subprojects
+  #
+  # Each group here represents privileged access to a staging project,
+  # allowing the members to directly write to GCS and GCR within the
+  # project, as well as trigger Cloud Build within the project. Ideally
+  # this level access is used solely for troubleshooting purposes.
+  #
+  # Membership should correspond roughly to subproject owners for the set of
+  # subproject artifacts being stored in a given staging project
+  #
+
+
+  #
+  # k8s-infra owners for sig-owned subprojects
+  #
+  # Each group here represents highly privileged access to kubernetes project
+  # infrastructure owned or managed by this SIG. A high level of trust is
+  # required for membership in these groups.
+  #
+
+  - email-id: k8s-infra-artifact-security@kubernetes.io
+    name: k8s-infra-artifact-security
+    description: |-
+      ACL for artifact security, including things like vulnerability scans
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - security@kubernetes.io
+
+  # RBAC groups:
+  # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
+  # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
+  # - must be members of gke-security-groups@kubernetes.io

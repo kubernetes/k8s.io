@@ -1,0 +1,20 @@
+gs://k8s-staging-artifact-promoter-gcb/ :
+	Storage class:			STANDARD
+	Location type:			multi-region
+	Location constraint:		US
+	Versioning enabled:		None
+	Logging configuration:		None
+	Website configuration:		None
+	CORS configuration: 		None
+	Lifecycle configuration:	Present
+	Requester Pays enabled:		None
+	Labels:				None
+	Default KMS key:		None
+	Time created:			Wed, 11 Sep 2019 16:15:14 GMT
+	Time updated:			Thu, 20 May 2021 09:17:05 GMT
+	Metageneration:			32
+	Bucket Policy Only enabled:	True
+	Public access prevention:	inherited
+	RPO:				DEFAULT
+	ACL:				[]
+	Default ACL:			[]

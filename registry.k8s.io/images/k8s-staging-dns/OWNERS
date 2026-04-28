@@ -1,0 +1,10 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- bowei
+- mrhohn
+- kl52752
+- DamianSawicki
+
+emeritus_approvers:
+- dpasiukevich

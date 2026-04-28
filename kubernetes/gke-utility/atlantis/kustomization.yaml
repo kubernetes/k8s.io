@@ -1,0 +1,75 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: atlantis
+
+resources:
+  - github.com/runatlantis/atlantis//kustomize
+  - extras.yaml
+  - httproute.yaml
+
+images:
+  - name: ghcr.io/runatlantis/atlantis
+    newTag: v0.36.0
+
+configMapGenerator:
+  - name: atlantis-config
+    files:
+      - atlantis.yaml
+      - repos.yaml
+
+patchesStrategicMerge:
+  - |-
+    apiVersion: apps/v1
+    kind: StatefulSet
+    metadata:
+      name: atlantis
+    spec:
+      template:
+        spec:
+          serviceAccountName: atlantis
+          containers:
+          - name: atlantis
+            env:
+              - name: AWS_ROLE_ARN
+                value: arn:aws:iam::348685125169:role/atlantis
+              - name: AWS_WEB_IDENTITY_TOKEN_FILE
+                value: /var/run/secrets/aws-iam-token/serviceaccount/token
+              - name: AWS_REGION
+                value: us-east-2
+              - name: ATLANTIS_CONFIG
+                value: /config/atlantis.yaml
+              - name: ATLANTIS_GH_TOKEN
+                valueFrom:
+                  secretKeyRef:
+                    name: atlantis-vcs
+                    key: token
+              - name: ATLANTIS_GH_WEBHOOK_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: atlantis-vcs
+                    key: webhook
+            resources:
+              requests:
+                cpu: 500m
+                memory: 1Gi
+              limits:
+                cpu: 4
+                memory: 6Gi
+            volumeMounts:
+            - name: config
+              mountPath: /config
+            - mountPath: /var/run/secrets/aws-iam-token/serviceaccount
+              name: aws-iam-token
+              readOnly: true
+          volumes:
+          - name: config
+            configMap:
+              name: atlantis-config
+          - name: aws-iam-token
+            projected:
+              defaultMode: 420
+              sources:
+              - serviceAccountToken:
+                  audience: sts.amazonaws.com
+                  expirationSeconds: 86400
+                  path: token

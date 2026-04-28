@@ -1,0 +1,8 @@
+{
+  "displayName": "Default compute service account",
+  "email": "575095402180-compute@developer.gserviceaccount.com",
+  "name": "projects/k8s-staging-sched-simulator/serviceAccounts/575095402180-compute@developer.gserviceaccount.com",
+  "oauth2ClientId": "107109807161222262807",
+  "projectId": "k8s-staging-sched-simulator",
+  "uniqueId": "107109807161222262807"
+}
