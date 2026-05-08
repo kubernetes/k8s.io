@@ -1,0 +1,4 @@
+- name: headlamp
+  dmap:
+    "sha256:b44a0e59de1b59dcda21357a9d8e2b093fea7148b31b4c6fcb36ef96fa80d006": ["v0.41.0"]
+    "sha256:f11b1cdc8cc9a67d18fce307022d98174865ae18ba61d679b8551b7a3dc022ad": ["v0.42.0"]
