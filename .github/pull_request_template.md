@@ -8,6 +8,6 @@
 
 - [ ] I'm promoting a multi-arch image that matches all the [supported](https://github.com/kubernetes/sig-release/tree/master/release-engineering/platforms) platforms of Kubernetes.
 
-- [ ] I'm not promoting a tag that resolves to latest or moving tags as these are not supported
+- [ ] I'm not promoting a tag that resolves to latest or moving tags as these are not supported.
 
 - [ ] registry.k8s.io is an immutable registry and I'll need to cut a new release if the digest is wrong.
