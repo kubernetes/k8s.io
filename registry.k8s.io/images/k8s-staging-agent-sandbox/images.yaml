@@ -1,6 +1,6 @@
 - name: agent-sandbox-controller
   dmap:
-    "sha256:64317cf5694991d9d63ce6a1b3fda16dfeecca0f01c863945cbcdb38ccc18473": ["v0.4.5"]
+    "sha256:027a33ae4a4608ea26761978b8d14a0e1b03804b625f2d0a92b0cbddcb1536ef": ["v0.4.5"]
     "sha256:324d3ae71a43e9fd9eabca4e427aee6b06e88e1f8d9e3ef74f4d20b7404f4b22": ["v0.4.5rc1"]
     "sha256:a7129aa0f1a1f823e957af3965bc9e0d4a411e3d126bcc681960baccb3978ab0": ["v0.4.5rc0"]
     "sha256:c2e75539c8c6ac50075cf190cc2ab50e653482e05cba5770a015d469d97e6a4d": ["v0.4.3"]
@@ -14,7 +14,7 @@
     "sha256:ba71ea40ae0872791197badf2ab84f3f482df3902f1fce7ca9e076b1de9b57f6": ["v0.1.0"]
 - name: chrome-sandbox
   dmap:
-    "sha256:7d93f5496d54652fdf2451d224e81170e1d3555ad124e163b3e94564aa28f905": ["v0.4.5"]
+    "sha256:8108c09ff5ded060091e976daeab79ea18263138c8aea6de816b60b7711eae75": ["v0.4.5"]
     "sha256:882fe5ad51284f6826bef929f2e8d51d36d489bd0a47edd0ad076ec0f57e8b49": ["v0.4.5rc1"]
     "sha256:9e230bcc5956c3a236d4da6465322c05bc8374ba9f189237d28ee8c24bbfec71": ["v0.4.5rc0"]
     "sha256:ee0841e1f4d4c36b165bf61806b2dd2050133ce807a331010a5d72dfb1dc1b1d": ["v0.4.3"]
@@ -26,7 +26,7 @@
     "sha256:d098a4d05ce33f380995e8017f4158634aa501dc71b545c82155dafd69218325": ["v0.1.0"]
 - name: python-runtime-sandbox
   dmap:
-    "sha256:260d2b7d3c51719b41a26fca3ed1940d3a2978bb0ae2bc0b74fe3137e73b8db7": ["v0.4.5"]
+    "sha256:26becacca635d91cf5242c3022131948bcaeedcc9970aea7a4d646467b074a2f": ["v0.4.5"]
     "sha256:2ffcbb347ffc913af73d7cffe00ba30afaa7ed27ac5ea8a634ff2cd01ac1d3b7": ["v0.4.5rc1"]
     "sha256:346641cd6e7d38aa17be9ed81b4cdc0dc666d87abf9f779bc70e56875675c2d4": ["v0.4.5rc0"]
     "sha256:2cbf5a787d25e33d6136f3dfd9b21bd2737475ac715bcc1fce930713b11dd213": ["v0.4.3"]
