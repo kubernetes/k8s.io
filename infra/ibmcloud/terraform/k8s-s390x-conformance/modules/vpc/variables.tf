@@ -13,5 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-variable "resource_group_id" {}
-variable "zone" {}
+variable "name" {
+  type = string
+}
+variable "resource_group_id" {
+  type = string
+}
+variable "subnet_name" {
+  type = string
+}
+variable "zone" {
+  type = string
+}

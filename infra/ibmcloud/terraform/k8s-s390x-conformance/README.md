@@ -57,3 +57,15 @@ Terraform will display a plan of the actions it will take, and you'll be prompte
 ```
 terraform output
 ```
+
+### Boskos VPC resource pool
+
+The `boskos_resources` variable controls the VPC resources that back the s390x
+conformance Boskos pool. By default this creates three resources:
+
+- `k8s-s390x-test-vpc-eu-de-1` in `eu-de-1`.
+- `k8s-s390x-test-vpc-eu-de-2` in `eu-de-2`.
+- `k8s-s390x-test-vpc-eu-de-3` in `eu-de-3`.
+
+All VPC resources are created under the existing `rg-conformance-test` resource
+group.
