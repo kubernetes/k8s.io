@@ -80,6 +80,7 @@ restrictions:
       - "^k8s-infra-staging-cloud-pv-labeler@kubernetes.io$"
       - "^sig-cloud-provider@kubernetes.io$"
       - "^sig-cloud-provider-ibm-ppc64le-alerts@kubernetes.io$"
+      - "^sig-cloud-provider-ibm-s390x-alerts@kubernetes.io$"
       - "^sig-cloud-provider-leads@kubernetes.io$"
   - path: "sig-cluster-lifecycle/groups.yaml"
     allowedGroups:
