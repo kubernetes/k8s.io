@@ -133,33 +133,23 @@ module "eks" {
     }
   }
 
+  access_entries = {
+    prow-eks-admin = {
+      principal_arn = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
+      policy_associations = {
+        cluster-admin = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            type = "cluster"
+          }
+        }
+      }
+    }
+  }
+
   tags = merge(var.tags, {
     "region" = data.aws_region.current.region
   })
-}
-
-//TODO(ameukam): Use access entries
-module "eks-auth" {
-  source  = "terraform-aws-modules/eks/aws//modules/aws-auth"
-  version = "~> 20.0"
-
-  manage_aws_auth_configmap = true
-
-  aws_auth_roles = [
-    {
-      rolearn  = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
-      username = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
-      groups   = ["system:masters"]
-    },
-  ]
-
-  aws_auth_users = [
-    {
-      userarn  = "arn:aws:iam::${data.aws_organizations_organization.current.id}:user/ameukam"
-      username = "ameukam"
-      groups   = ["system:masters"]
-    },
-  ]
 }
 
 resource "aws_eks_pod_identity_association" "kops_prow_build" {
