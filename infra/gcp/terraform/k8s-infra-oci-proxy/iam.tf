@@ -1,5 +1,5 @@
 /*
-Copyright 2024 The Kubernetes Authors.
+Copyright 2026 The Kubernetes Authors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,20 +18,19 @@ module "iam" {
   source  = "terraform-google-modules/iam/google//modules/projects_iam"
   version = "~> 8"
 
-  projects = [module.project.project_id]
+  projects = ["k8s-infra-oci-proxy"]
 
   mode = "authoritative"
 
   bindings = {
-    "roles/cloudbuild.builds.editor" = [
-      "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
-      "principalSet://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/namespace/test-pods"
-    ]
-    "roles/owner" = [
-      "group:k8s-infra-release-admins@kubernetes.io",
-    ]
+    "roles/storage.objectAdmin" = [
+      "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/infra-tools"
+    ],
+    "roles/run.admin" = [
+      "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/infra-tools"
+    ],
     "roles/viewer" = [
-      for _, group in local.registries : group
+      "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/infra-tools"
     ]
   }
 }

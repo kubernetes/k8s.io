@@ -64,6 +64,23 @@ locals {
   ]
 }
 
+resource "google_service_account" "build_sa" {
+  for_each     = local.registries
+  account_id   = "${substr(each.key, 0, 27)}-sa"
+  display_name = "Build SA for ${each.key}"
+  project      = module.project.project_id
+}
+
+resource "google_service_account_iam_binding" "build_sa" {
+  for_each           = local.registries
+  service_account_id = google_service_account.build_sa[each.key].name
+  members = [
+    "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com", // temporary migration shim
+    "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/${each.key}"
+  ]
+  role = "roles/iam.serviceAccountUser"
+}
+
 module "artifact_registry" {
   for_each = local.registries
   source   = "GoogleCloudPlatform/artifact-registry/google"
@@ -77,6 +94,12 @@ module "artifact_registry" {
     readers = ["allUsers"],
     writers = [each.value],
   }
+
+  labels = {
+    environment = "production"
+    name        = each.key
+  }
+
   cleanup_policy_dry_run = contains(local.registries_excluded_from_cleanup, each.key)
   cleanup_policies = {
     "delete-images-older-than-90-days" = {
@@ -86,4 +109,14 @@ module "artifact_registry" {
       }
     }
   }
+}
+
+resource "google_artifact_registry_repository_iam_member" "writers" {
+  for_each = local.registries
+
+  project    = module.project.project_id
+  location   = "us-central1"
+  repository = module.artifact_registry[each.key].artifact_id
+  role       = "roles/artifactregistry.writer"
+  member     = google_service_account.build_sa[each.key].member
 }

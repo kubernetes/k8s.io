@@ -36,6 +36,14 @@ module "gcb_bucket" {
     {
       role   = "roles/storage.admin"
       member = "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    },
+    {
+      role   = "roles/storage.admin"
+      member = "principalSet://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/namespace/test-pods"
+    },
+    {
+      role   = "roles/storage.admin"
+      member = "principalSet://cloudresourcemanager.googleapis.com/projects/787629567722/type/ServiceAccount"
     }
   ]
 }
