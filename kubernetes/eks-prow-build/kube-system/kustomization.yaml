@@ -11,11 +11,11 @@ helmCharts:
   - name: karpenter-crd
     repo: oci://public.ecr.aws/karpenter
     releaseName: karpenter-crds
-    version: 1.0.2
+    version: 1.12.2
     namespace: kube-system
   - name: karpenter
     repo: oci://public.ecr.aws/karpenter
     releaseName: karpenter
     valuesFile: karpenter.yaml
-    version: 1.0.2
+    version: 1.12.2
     namespace: kube-system
