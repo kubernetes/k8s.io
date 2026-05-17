@@ -34,6 +34,12 @@ data "aws_iam_roles" "sso_admins" {
   path_prefix = "/aws-reserved/sso.amazonaws.com/"
 }
 
+data "aws_eks_cluster" "eks" {
+  provider = aws.kops-infra-ci
+  name     = local.cluster_name
+}
+
 data "aws_eks_cluster_auth" "eks" {
-  name = module.eks.cluster_name
+  provider = aws.kops-infra-ci
+  name     = local.cluster_name
 }
