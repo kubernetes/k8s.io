@@ -107,9 +107,14 @@ spec:
 
     # total memory used by a Prow job
     # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} [bytes]
+    # Uses the pod-level cgroup (container="") rather than the "test" container,
+    # so jobs that run their real work in sibling containers (e.g.
+    # preset-dind-enabled pods where dockerd spawns build containers like
+    # kube-cross) are counted. The pod cgroup metric naturally aggregates all
+    # descendant container cgroups.
     - record: prow:job:memory_working_set_bytes
       expr: |
-        sum by (namespace, pod, node, pod_ip) (container_memory_working_set_bytes{container="test"}) *
+        sum by (namespace, pod, node, pod_ip) (container_memory_working_set_bytes{container="",pod!=""}) *
           on(namespace, pod)
           group_left(org, repo, type, name, id, node, pod_ip, phase)
           prow:job
@@ -134,9 +139,11 @@ spec:
 
     # total CPU used by a Prow job
     # {namespace="...",pod="...",node="...",pod_ip="1.2.3.4",phase="...",org="...",repo="...",type="...",name="...",id="<UUID>"} [seconds]
+    # See note on prow:job:memory_working_set_bytes above: container="" picks
+    # the pod-level cgroup so DinD-spawned sibling containers are included.
     - record: prow:job:cpu_usage_seconds_rate:1m
       expr: |
-        sum by (namespace, pod, node, pod_ip) (rate(container_cpu_usage_seconds_total{container="test"}[1m])) *
+        sum by (namespace, pod, node, pod_ip) (rate(container_cpu_usage_seconds_total{container="",pod!=""}[1m])) *
           on(namespace, pod)
           group_left(org, repo, type, name, id, node, pod_ip, phase)
           prow:job
