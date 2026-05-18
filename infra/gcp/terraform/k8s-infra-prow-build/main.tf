@@ -72,7 +72,7 @@ module "prow_build_cluster" {
   cloud_shell_access = false
 }
 
-module "prow_build_nodepool_c4_highmem_8_localssd" {
+module "prow_build_nodepool_c4_standard_8_localssd" {
   source       = "../modules/gke-nodepool"
   project_name = module.project.project_id
   cluster_name = module.prow_build_cluster.cluster.name
@@ -83,11 +83,11 @@ module "prow_build_nodepool_c4_highmem_8_localssd" {
     "us-central1-c",
     "us-central1-f",
   ]
-  name                         = "pool6"
+  name                         = "pool8"
   initial_count                = 1
   min_count                    = 1
   max_count                    = 250 # total across all zones
-  machine_type                 = "c4-highmem-8-lssd"
+  machine_type                 = "c4-standard-8-lssd"
   disk_size_gb                 = 100
   disk_type                    = "hyperdisk-balanced"
   enable_nested_virtualization = true
@@ -114,17 +114,45 @@ module "prow_build_nodepool_c4d_highmem_8_localssd" {
     "us-central1-b",
     "us-central1-c",
   ]
-  name            = "pool7"
+  name                         = "pool8-highmem"
+  initial_count                = 1
+  min_count                    = 1
+  max_count                    = 50 # total across all zones
+  machine_type                 = "c4d-highmem-8-lssd"
+  disk_size_gb                 = 100
+  disk_type                    = "hyperdisk-balanced"
+  enable_nested_virtualization = true
+  service_account              = module.prow_build_cluster.cluster_node_sa.email
+  taints = [
+    {
+      key    = "highmem"
+      value  = "true"
+      effect = "NO_SCHEDULE"
+    }
+  ]
+}
+
+module "prow_build_nodepool_c4d_standard_8_localssd" {
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  node_locations = [
+    "us-central1-a",
+    "us-central1-b",
+    "us-central1-c",
+  ]
+  name            = "pool8"
   initial_count   = 1
   min_count       = 10
-  max_count       = 250                  # total across all zones
-  machine_type    = "c4d-highmem-8-lssd" # has 1 local ssd disks attached
+  max_count       = 250                   # total across all zones
+  machine_type    = "c4d-standard-8-lssd" # has 1 local ssd disks attached
   disk_size_gb    = 100
   disk_type       = "hyperdisk-balanced"
   service_account = module.prow_build_cluster.cluster_node_sa.email
 }
 
-module "prow_build_nodepool_c4a_highmem_8_localssd" {
+module "prow_build_nodepool_c4a_standard_8_localssd" {
   source       = "../modules/gke-nodepool"
   project_name = module.project.project_id
   cluster_name = module.prow_build_cluster.cluster.name
@@ -135,14 +163,41 @@ module "prow_build_nodepool_c4a_highmem_8_localssd" {
     "us-central1-c",
     "us-central1-f",
   ]
-  name          = "pool7-arm64"
+  name          = "pool8-arm64"
   initial_count = 1
-  min_count     = 3
-  max_count     = 100                  # total across all zones
-  machine_type  = "c4a-highmem-8-lssd" # has 2 local ssd disks attached
+  min_count     = 5
+  max_count     = 100                   # total across all zones
+  machine_type  = "c4a-standard-8-lssd" # has 2 local ssd disks attached
   disk_size_gb  = 100
   disk_type     = "hyperdisk-balanced"
   // GKE automatically taints arm64 nodes
   // https://cloud.google.com/kubernetes-engine/docs/how-to/prepare-arm-workloads-for-deployment#overview
   service_account = module.prow_build_cluster.cluster_node_sa.email
+}
+
+module "prow_build_nodepool_c4d_standard_16_localssd" {
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  node_locations = [
+    # "us-central1-a",
+    "us-central1-b",
+  ]
+  name                         = "pool8-build"
+  initial_count                = 1
+  min_count                    = 2
+  max_count                    = 3 # total across all zones
+  machine_type                 = "c4d-standard-16-lssd"
+  disk_size_gb                 = 100
+  disk_type                    = "hyperdisk-balanced"
+  enable_nested_virtualization = true
+  service_account              = module.prow_build_cluster.cluster_node_sa.email
+  taints = [
+    {
+      key    = "build"
+      value  = "true"
+      effect = "NO_SCHEDULE"
+    }
+  ]
 }
