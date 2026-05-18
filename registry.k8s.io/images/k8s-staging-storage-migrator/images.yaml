@@ -1,9 +1,0 @@
-- name: storage-version-migration-initializer
-  dmap:
-    "sha256:2231d173b68c377c60e44ea4cdf2c0993abbf8b9e830e22ac34912570ea21240": ["v0.0.5"]
-- name: storage-version-migration-migrator
-  dmap:
-    "sha256:21f4600cea4f4019a7723bb67116fdb652a61a9d959a02be28b1bcb3f07b3ee7": ["v0.0.5"]
-- name: storage-version-migration-trigger
-  dmap:
-    "sha256:a02fb9312857ddecd12bf53d171d5f208840b31f694d2f44fc9ec4d97dd85cb1": ["v0.0.5"]
