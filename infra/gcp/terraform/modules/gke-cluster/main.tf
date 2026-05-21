@@ -133,8 +133,10 @@ resource "google_container_cluster" "prod_cluster" {
 
   // Set maintenance time
   maintenance_policy {
-    daily_maintenance_window {
-      start_time = "11:00" // (in UTC), 03:00 PST
+    recurring_window {
+      start_time = "1970-01-01T03:00:00Z" // (in UTC), 03:00 PST
+      end_time   = "1970-01-01T07:00:00Z" // (in UTC), 07:00 PST
+      recurrence = "FREQ=WEEKLY;BYDAY=SA,SU"
     }
   }
 
