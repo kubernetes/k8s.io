@@ -35,6 +35,8 @@ sub vcl_recv {
 %{~ if length(setintersection([for bucket in bucket_configs : bucket.name], ["k8s-release-dev","k8s-staging-kops"])) == 2 ~}
   # Route /ci/kops/* requests to the k8s-staging-kops backend
   if (req.url.path ~ "^/ci/kops/") {
+    # We want to send the request to the root of the bucket
+    set req.url = regsub(req.url, "^/ci/kops", "");
     set req.backend = F_k8s_staging_kops;
     set req.http.X-Backend-Name = "k8s_staging_kops";
   # Route /ci/* requests to the k8s-release-dev backend

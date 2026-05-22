@@ -18,3 +18,27 @@ projects:
     branch: /main/
     dir: infra/aws/terraform/macos
     workflow: aws
+  - dir: infra/fastly/terraform/cdn # Skip planning this dir
+    branch: /main/
+    autoplan:
+      enabled: false
+  - dir: infra/fastly/terraform/dl.k8s.io
+    branch: /main/
+    when_modified:
+      - "**/*"
+      - "../cdn/**/*"
+  - dir: infra/fastly/terraform/dl.k8s.dev
+    branch: /main/
+    when_modified:
+      - "**/*"
+      - "../cdn/**/*"
+  - dir: infra/fastly/terraform/artifacts.k8s.io
+    branch: /main/
+    when_modified:
+      - "**/*"
+      - "../cdn/**/*"
+  - dir: infra/fastly/terraform/artifacts.k8s.dev
+    branch: /main/
+    when_modified:
+      - "**/*"
+      - "../cdn/**/*"
