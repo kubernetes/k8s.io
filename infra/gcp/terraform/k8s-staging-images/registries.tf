@@ -42,6 +42,7 @@ locals {
     karpenter-cluster-api           = "group:karpenter-cluster-api-leads@kubernetes.io"
     kind                            = "group:k8s-infra-staging-kind@kubernetes.io"
     kro                             = "group:k8s-infra-staging-kro@kubernetes.io"
+    kubespray                       = "group:k8s-infra-staging-kubespray@kubernetes.io"
     kubemark                        = "group:sig-scalability-leads@kubernetes.io"
     kubernetes                      = "group:k8s-infra-staging-kubernetes@kubernetes.io"
     kueue                           = "group:k8s-infra-staging-kueue@kubernetes.io"

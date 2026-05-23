@@ -466,6 +466,18 @@ groups:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
 
+  - email-id: k8s-infra-staging-kubespray@kubernetes.io
+    name: k8s-infra-staging-kubespray
+    description: |-
+      ACL for staging Kubespray CI/test images
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - kay.yan@daocloud.io
+      - mg@max.gautier.name
+      - tico88612@gmail.com
+      - 2t.antoine@gmail.com
+
   - email-id: sig-cluster-lifecycle-kubespray-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubespray-alerts
     description: |-
