@@ -17,35 +17,30 @@ limitations under the License.
 aws_account_id = "468814281478"
 
 eks_cluster_admins = [
-  "bentheelder",
   "koray",
-  "pprzekwa",
-  "wozniakjan",
   "xmudrii"
 ]
 
 eks_cluster_viewers = [
-  "bentheelder",
   "koray",
-  "pprzekwa",
-  "wozniakjan",
   "xmudrii"
 ]
 
 cluster_name    = "prow-build-cluster"
-cluster_version = "1.32"
+cluster_version = "1.35"
 
-node_group_version_stable  = "1.32"
+node_group_version_stable  = "1.35"
 node_instance_types_stable = ["r5ad.2xlarge"]
 node_desired_size_stable   = 3
 
-node_taints_stable = [
-  {
+node_taints_stable = {
+  "stable" = {
     key    = "node-group"
     value  = "stable"
     effect = "NO_SCHEDULE"
   }
-]
+}
+
 node_labels_stable = {
   "node-group" = "stable"
 }
