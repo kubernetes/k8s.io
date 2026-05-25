@@ -44,7 +44,7 @@ fi
 
 version=$(yamllint --version | awk '{ print $2 }')
 if [[ "${version}" != "${yamllint_version}" ]]; then
-  echo >/dev/stderr "ERROR: incorrect yamllint version '${version}' - please install with: ${pip} install ${pip_requirements}"
+  echo >/dev/stderr "ERROR: incorrect yamllint version '${version}' - please install with: ${pip} install -r ${pip_requirements}"
   exit 1
 fi
 
