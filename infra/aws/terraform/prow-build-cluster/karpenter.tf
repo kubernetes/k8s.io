@@ -16,19 +16,23 @@ limitations under the License.
 
 module "karpenter" {
   source  = "terraform-aws-modules/eks/aws//modules/karpenter"
-  version = "~> 20.20"
+  version = "~> 21.20"
 
   cluster_name = module.eks.cluster_name
 
   create_access_entry             = true
   create_pod_identity_association = true
 
+  # HACK: https://github.com/terraform-aws-modules/terraform-aws-eks/issues/3512
+  enable_inline_policy = true
+
   node_iam_role_use_name_prefix = false
   node_iam_role_name            = "karpenter-nodes"
-  enable_v1_permissions         = true
-  # Allows accessing instances via AWS System Manager (SSM)
   node_iam_role_additional_policies = {
+    # Allows accessing instances via AWS System Manager (SSM)
     AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+    # Allows ecr:Describe* and ecr*Pull* actions
+    AmazonEC2ContainerRegistryReadOnly = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   }
 
   queue_name = "karpenter-queue"

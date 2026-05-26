@@ -20,7 +20,7 @@ locals {
     description     = "EKS managed node group called stable used for stateful components"
     use_name_prefix = true
 
-    cluster_version = var.node_group_version_stable
+    kubernetes_version = var.node_group_version_stable
 
     taints = var.node_taints_stable
     labels = var.node_labels_stable
@@ -69,6 +69,23 @@ locals {
 
     enclave_options = {
       enabled = true
+    }
+
+    # TODO(xmudrii-ubuntu): Temporarily disabled because it's not supported by Bottlerocket Linux
+    # enable_bootstrap_user_data = true
+
+    # We are using the IRSA created below for permissions
+    # However, we have to deploy with the policy attached FIRST (when creating a fresh cluster)
+    # and then turn this off after the cluster/node group is created. Without this initial policy,
+    # the VPC CNI fails to assign IPs and nodes cannot join the cluster
+    # See https://github.com/aws/containers-roadmap/issues/1666 for more context
+    iam_role_attach_cni_policy = false
+
+    metadata_options = {
+      http_endpoint               = "enabled"
+      http_tokens                 = "required" # IMDSv2 only
+      http_put_response_hop_limit = 2
+      instance_metadata_tags      = "disabled"
     }
 
     timeouts = {
