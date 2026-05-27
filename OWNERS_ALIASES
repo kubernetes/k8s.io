@@ -292,7 +292,7 @@ aliases:
     - Verolop # subproject owner / Release Manager / SIG Technical Lead
     - xmudrii # Release Manager
   sig-release-subproject-leads:
-    - gracenng
+    - fsmunoz
     - katcosgrove
     - xmudrii
 ## END CUSTOM CONTENT
