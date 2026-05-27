@@ -353,9 +353,14 @@ groups:
       - rawat.dipesh@gmail.com # v1.37 Release Lead
       - rayandas91@gmail.com # v1.37 Release Lead Shadow
     members:
+      - arshsharma461@gmail.com # v1.37 Release Comms Shadow
+      - christophertineo02@gmail.com # v1.37 Release Comms Shadow
+      - kirtigoyal328@gmail.com # v1.37 Release Comms Shadow
       - muhammad.adil.ghaffar@est.tech # v1.37 Release Signal Lead
+      - sophiagentle72@gmail.com # v1.37 Release Comms Shadow
       - subhasmitaswain232@gmail.com # v1.37 Enhancements Lead
       - swrao21@gmail.com # v1.37 Communications Lead
+      - troy0820@gmail.com # v1.37 Release Comms Shadow
       - tusharmittalworkm@gmail.com # v1.37 Docs Lead
 
   - email-id: release-team-shadows@kubernetes.io
@@ -379,12 +384,17 @@ groups:
       - rawat.dipesh@gmail.com # v1.37 Release Lead
     members:
       - agustina.barbetta@gmail.com # v1.37 Release Lead Shadow
+      - arshsharma461@gmail.com # v1.37 Release Comms Shadow
+      - christophertineo02@gmail.com # v1.37 Release Comms Shadow
       - gmail@yudocaa.in # v1.37 Release Lead Shadow
+      - kirtigoyal328@gmail.com # v1.37 Release Comms Shadow
       - muhammad.adil.ghaffar@est.tech # v1.37 Release Signal Lead
       - prajyotparab19@gmail.com # v1.37 Release Lead Shadow
       - rayandas91@gmail.com # v1.37 Release Lead Shadow
+      - sophiagentle72@gmail.com # v1.37 Release Comms Shadow
       - subhasmitaswain232@gmail.com # v1.37 Enhancements Lead
       - swrao21@gmail.com # v1.37 Communications Lead
+      - troy0820@gmail.com # v1.37 Release Comms Shadow
       - tusharmittalworkm@gmail.com # v1.37 Docs Lead
 
   # RBAC groups:
