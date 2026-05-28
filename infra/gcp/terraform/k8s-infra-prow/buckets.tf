@@ -200,3 +200,20 @@ module "prow_security_bucket" {
     },
   ]
 }
+
+
+module "mimir_bucket" {
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 11.1"
+
+  name       = "k8s-infra-prow-mimir"
+  project_id = module.project.project_id
+  location   = "us-central1"
+
+  iam_members = [
+    {
+      role   = "roles/storage.objectUser"
+      member = "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/mimir/sa/mimir"
+    },
+  ]
+}

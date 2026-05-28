@@ -1891,3 +1891,57 @@
   dmap:
     "sha256:03480b113d824e4719fe507f47d143acb65be073ffc8263dbc41c21f85dda520": ["1.32.4"]
 
+
+# 1.34.3
+- name: dns-controller
+  dmap:
+    "sha256:d16a76a58c6bb06f3454fcc4f3a47a90b33db216f05e326b8583fc6f83760b37": ["1.34.3"]
+- name: kops-controller
+  dmap:
+    "sha256:7b9d2f249a644d2353dcefbdc262d75e1691a62584a61c8df4d2e387d8b71d39": ["1.34.3"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:cd4c03ee6c782017edc72b6d1af4be567c4c51056fda780a442c54183fa3798c": ["1.34.3"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:1a693833f61718c600f57babc119ca1805ab105969ddf8860821d53c166a8894": ["1.34.3"]
+
+
+# 1.36.0-alpha.1
+- name: channels
+  dmap:
+    "sha256:8516be365711f7ba5f6826244bcdde05e5ea4e5bb419fc15ebbd49baa991fbc5": ["1.36.0-alpha.1"]
+- name: discovery-server
+  dmap:
+    "sha256:f0b8d9b503b1370b5d86c0306ce6e1131e30922f7af849666f3255234f9b9725": ["1.36.0-alpha.1"]
+- name: dns-controller
+  dmap:
+    "sha256:92c58ac16b59eb5846d023db2a372be5e33beacac6326a1ff5293e341989cdc6": ["1.36.0-alpha.1"]
+- name: kops-controller
+  dmap:
+    "sha256:c6edb9f2ce5857ee04f890bfc4fddc9529f9ee9986114d0968e4f8fe73c8c5b3": ["1.36.0-alpha.1"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:f9630011137ece3533a10df1239d057b5415835fa4c19929cb8346c92c37fe22": ["1.36.0-alpha.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:486830cc36e65d910f6b6fef05573e30352f1b029b7734f115808afd1031735c": ["1.36.0-alpha.1"]
+
+
+# 1.35.1
+- name: discovery-server
+  dmap:
+    "sha256:7f6761fa1e7fcbb7f3885253519807584fc58b2e147855e8d1439a8cd8cafa20": ["1.35.1"]
+- name: dns-controller
+  dmap:
+    "sha256:a65232a67f18c6483e44f53574a192201137c2a07b8311304811cd81f12467d8": ["1.35.1"]
+- name: kops-controller
+  dmap:
+    "sha256:434b3dd3f9bffce98a1cfb148feb395c672b8bf5280a8a921ee1ca69bee1e239": ["1.35.1"]
+- name: kops-utils-cp
+  dmap:
+    "sha256:8037f39184f2100b9185c75bf381158f16cad55f9793a0b9f8f75b9c2f6eb4c4": ["1.35.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:fb5c0b80e9c0ec81f823784901d531051a13841004975f3c0cc706c93563451e": ["1.35.1"]
+

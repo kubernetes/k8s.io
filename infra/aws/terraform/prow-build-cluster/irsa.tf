@@ -20,14 +20,16 @@ limitations under the License.
 
 # IAM policy used for the AWS VPC CNI plugin.
 module "vpc_cni_irsa" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.30"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.6"
 
-  role_name_prefix              = "VPC-CNI-IRSA"
-  attach_vpc_cni_policy         = true
-  vpc_cni_enable_ipv4           = true
-  vpc_cni_enable_ipv6           = true
-  role_permissions_boundary_arn = data.aws_iam_policy.eks_resources_permission_boundary.arn
+  name            = "VPC-CNI-IRSA"
+  use_name_prefix = true
+
+  attach_vpc_cni_policy = true
+  vpc_cni_enable_ipv4   = true
+  vpc_cni_enable_ipv6   = true
+  permissions_boundary  = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
   oidc_providers = {
     main = {
@@ -41,12 +43,14 @@ module "vpc_cni_irsa" {
 
 # IAM policy used for the AWS EBS CSI driver plugin.
 module "ebs_csi_irsa" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.30"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.6"
 
-  role_name_prefix              = "EBS-CSI-IRSA"
-  attach_ebs_csi_policy         = true
-  role_permissions_boundary_arn = data.aws_iam_policy.eks_resources_permission_boundary.arn
+  name            = "EBS-CSI-IRSA"
+  use_name_prefix = true
+
+  attach_ebs_csi_policy = true
+  permissions_boundary  = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
   oidc_providers = {
     main = {
@@ -60,12 +64,14 @@ module "ebs_csi_irsa" {
 
 # IAM policy used for AWS Load Balancer Controller.
 module "aws_load_balancer_controller_irsa" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.30"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.6"
 
-  role_name_prefix                       = "LBCONTROLLER-IRSA"
+  name            = "LBCONTROLLER-IRSA"
+  use_name_prefix = true
+
   attach_load_balancer_controller_policy = true
-  role_permissions_boundary_arn          = data.aws_iam_policy.eks_resources_permission_boundary.arn
+  permissions_boundary                   = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
   oidc_providers = {
     main = {
@@ -80,15 +86,17 @@ module "aws_load_balancer_controller_irsa" {
 # IAM policy used for Secrets Manager and accessing secrets.
 # Example policy, uncomment and modify as needed.
 module "secrets_manager_irsa" {
-  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "~> 5.30"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "~> 6.6"
 
-  role_name = "SECRETSMANAGER-IRSA"
-  role_policy_arns = {
+  name            = "SECRETSMANAGER-IRSA"
+  use_name_prefix = true
+
+  policies = {
     secrets_manager = aws_iam_policy.secretsmanager_read.arn,
   }
 
-  role_permissions_boundary_arn = data.aws_iam_policy.eks_resources_permission_boundary.arn
+  permissions_boundary = data.aws_iam_policy.eks_resources_permission_boundary.arn
 
   oidc_providers = {
     main = {

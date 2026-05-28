@@ -1,0 +1,6 @@
+- name: secretreader
+  dmap:
+    "sha256:4e38ad3aa16c15de0edb688fda77b9a17a5d6d039063e87f0408031c8790470e": ["v0.1.2"]
+- name: kubeconfig-secretreader
+  dmap:
+    "sha256:ebe81cf81cdd85bf9c77a88a968a93c8bbb2b1dd9995005160014b8c1f58ee65": ["v0.1.2"]
