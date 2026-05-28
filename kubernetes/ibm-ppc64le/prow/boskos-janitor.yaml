@@ -15,6 +15,21 @@ spec:
         app: boskos-ibmcloud-janitor
     spec:
       terminationGracePeriodSeconds: 300
+      tolerations:
+        - effect: NoSchedule
+          key: infra
+          operator: Equal
+          value: "true"
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: role
+                    operator: In
+                    values:
+                      - infra
       containers:
         - name: boskos-ibmcloud-janitor
           image: gcr.io/k8s-staging-boskos/ibmcloud-janitor-boskos:v20260519-f0a76c5
