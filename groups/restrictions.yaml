@@ -382,4 +382,8 @@ restrictions:
     allowedGroups:
       - "^wg-structured-logging@kubernetes.io$"
       - "^wg-structured-logging-leads@kubernetes.io$"
+  - path: "wg-workload-aware-scheduling/groups.yaml"
+    allowedGroups:
+      - "^wg-workload-aware-scheduling@kubernetes.io$"
+      - "^wg-workload-aware-scheduling-leads@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything
