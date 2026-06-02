@@ -195,6 +195,11 @@ aliases:
   wg-structured-logging-leads:
     - mengjiao-liu
     - pohly
+  wg-workload-aware-scheduling-leads:
+    - helayoty
+    - andreyvelich
+    - mm4tt
+    - kannon92
   committee-code-of-conduct:
     - AnaMMedina21
     - endocrimes
@@ -292,7 +297,7 @@ aliases:
     - Verolop # subproject owner / Release Manager / SIG Technical Lead
     - xmudrii # Release Manager
   sig-release-subproject-leads:
-    - gracenng
+    - fsmunoz
     - katcosgrove
     - xmudrii
 ## END CUSTOM CONTENT

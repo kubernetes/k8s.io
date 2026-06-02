@@ -361,6 +361,25 @@ groups:
       - subhasmitaswain232@gmail.com # v1.37 Enhancements Lead
       - swrao21@gmail.com # v1.37 Communications Lead
       - troy0820@gmail.com # v1.37 Release Comms Shadow
+      - amanshrivastava118@gmail.com # v1.37 Release Signal Shadow
+      - chadmcrowell@gmail.com # v1.37 Docs Shadow
+      - destinyerhabor6@gmail.com # v1.37 Docs Shadow
+      - dhanisha.6@gmail.com # v1.37 Enhancements Shadow
+      - j@mickey.dev # v1.37 Docs Shadow
+      - junaidshaukat546@gmail.com # v1.37 Release Signal Shadow
+      - k.130.email@gmail.com # v1.37 Release Signal Shadow
+      - karimzakzouk@outlook.com # v1.37 Enhancements Shadow
+      - lauri.d.apple@gmail.com # v1.37 Enhancements Shadow
+      - mahdi.svt5@gmail.com # v1.37 Release Signal Shadow
+      - misrayashasvi27@gmail.com # v1.37 Docs Shadow
+      - muhammad.adil.ghaffar@est.tech # v1.37 Release Signal Lead
+      - ofircohenn@gmail.com # v1.37 Enhancements Shadow
+      - peppi-lotta.kurjenhovi@est.tech # v1.37 Release Signal Shadow
+      - singh1203.ss@gmail.com # v1.37 Docs Shadow
+      - subhasmitaswain232@gmail.com # v1.37 Enhancements Lead
+      - swrao21@gmail.com # v1.37 Communications Lead
+      - tatiana.sel@gmail.com # v1.37 Release Lead Shadow
+      - tico88612@gmail.com # v1.37 Enhancements Shadow
       - tusharmittalworkm@gmail.com # v1.37 Docs Lead
 
   - email-id: release-team-shadows@kubernetes.io
@@ -388,15 +407,33 @@ groups:
       - christophertineo02@gmail.com # v1.37 Release Comms Shadow
       - gmail@yudocaa.in # v1.37 Release Lead Shadow
       - kirtigoyal328@gmail.com # v1.37 Release Comms Shadow
+      - amanshrivastava118@gmail.com # v1.37 Release Signal Shadow
+      - chadmcrowell@gmail.com # v1.37 Docs Shadow
+      - destinyerhabor6@gmail.com # v1.37 Docs Shadow
+      - dhanisha.6@gmail.com # v1.37 Enhancements Shadow
+      - gmail@yudocaa.in # v1.37 Release Lead Shadow
+      - j@mickey.dev # v1.37 Docs Shadow
+      - junaidshaukat546@gmail.com # v1.37 Release Signal Shadow
+      - k.130.email@gmail.com # v1.37 Release Signal Shadow
+      - karimzakzouk@outlook.com # v1.37 Enhancements Shadow
+      - lauri.d.apple@gmail.com # v1.37 Enhancements Shadow
+      - mahdi.svt5@gmail.com # v1.37 Release Signal Shadow
+      - misrayashasvi27@gmail.com # v1.37 Docs Shadow
       - muhammad.adil.ghaffar@est.tech # v1.37 Release Signal Lead
+      - ofircohenn@gmail.com # v1.37 Enhancements Shadow
+      - peppi-lotta.kurjenhovi@est.tech # v1.37 Release Signal Shadow
       - prajyotparab19@gmail.com # v1.37 Release Lead Shadow
       - rayandas91@gmail.com # v1.37 Release Lead Shadow
       - sophiagentle72@gmail.com # v1.37 Release Comms Shadow
       - subhasmitaswain232@gmail.com # v1.37 Enhancements Lead
       - swrao21@gmail.com # v1.37 Communications Lead
       - troy0820@gmail.com # v1.37 Release Comms Shadow
+      - singh1203.ss@gmail.com # v1.37 Docs Shadow
+      - subhasmitaswain232@gmail.com # v1.37 Enhancements Lead
+      - swrao21@gmail.com # v1.37 Communications Lead
+      - tatiana.sel@gmail.com # v1.37 Release Lead Shadow
+      - tico88612@gmail.com # v1.37 Enhancements Shadow
       - tusharmittalworkm@gmail.com # v1.37 Docs Lead
-
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
   # - must have WhoCanViewMemberShip: "ALL_MEMBERS_CAN_VIEW"
@@ -458,13 +495,18 @@ groups:
       - saschagrunert@gmail.com
     members:
       - agustina.barbetta@gmail.com # v1.37 Release Lead Shadow
+      - dhanisha.6@gmail.com # v1.37 Enhancements Shadow
       - fsmunoz@gmail.com # Subproject owner
       - gmail@yudocaa.in # v1.37 Release Lead Shadow
+      - karimzakzouk@outlook.com # v1.37 Enhancements Shadow
       - kat.cosgrove@gmail.com # Subproject owner
+      - lauri.d.apple@gmail.com # v1.37 Enhancements Shadow
+      - ofircohenn@gmail.com # v1.37 Enhancements Shadow
       - prajyotparab19@gmail.com # v1.37 Release Lead Shadow
       - rawat.dipesh@gmail.com # v1.37 Release Lead
       - rayandas91@gmail.com # v1.37 Release Lead Shadow
       - subhasmitaswain232@gmail.com # v1.37 Enhancements Lead
+      - tico88612@gmail.com # v1.37 Enhancements Shadow
   - email-id: k8s-infra-staging-zeitgeist@kubernetes.io
     name: k8s-infra-staging-zeitgeist
     description: |-

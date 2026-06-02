@@ -61,6 +61,21 @@ spec:
     spec:
       serviceAccountName: boskos
       terminationGracePeriodSeconds: 30
+      tolerations:
+        - effect: NoSchedule
+          key: infra
+          operator: Equal
+          value: "true"
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: role
+                    operator: In
+                    values:
+                      - infra
       containers:
         - name: boskos
           image: gcr.io/k8s-staging-boskos/boskos:v20260519-f0a76c5
