@@ -287,6 +287,11 @@ atlantis:
     value: 34.66.218.218
   - type: AAAA
     value: "2600:1900:4000:627b:8000::"
+mimir.prow:
+  - type: A
+    value: 34.66.218.218
+  - type: AAAA
+    value: "2600:1900:4000:627b:8000::"
 
 # kOps discovery service (https://github.com/kubernetes/kops/tree/master/discovery)
 discovery.kops:

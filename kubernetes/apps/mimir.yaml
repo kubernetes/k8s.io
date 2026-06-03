@@ -1,0 +1,48 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mimir
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"
+spec:
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchExpressions:
+            - key: name
+              operator: In
+              values:
+                - utility
+  template:
+    metadata:
+      name: 'mimir-{{ .name }}'
+      annotations:
+        argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
+    spec:
+      destination:
+        namespace: mimir
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - chart: mimir-distributed
+          repoURL: https://grafana.github.io/helm-charts
+          targetRevision: 5.5.1
+          helm:
+            releaseName: mimir
+            valueFiles:
+              - $values/kubernetes/{{ .name }}/helm/mimir.yaml
+        - repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
+          ref: values
+        - path: kubernetes/{{ .name }}/mimir/
+          repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+      managedNamespaceMetadata:
+          labels:
+            istio-injection: enabled
