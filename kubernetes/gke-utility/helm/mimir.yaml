@@ -1,0 +1,169 @@
+serviceAccount:
+  create: true
+  name: mimir
+
+nginx:
+  enabled: false
+
+minio:
+  enabled: false
+
+kafka:
+  enabled: false
+
+gateway:
+  enabled: true
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+  nginx:
+    basicAuth:
+      enabled: true
+      existingSecret: mimir-credentials
+
+mimir:
+  structuredConfig:
+    ingest_storage:
+      enabled: false
+      kafka:
+        address: null
+        topic: null
+        auto_create_topic_default_partitions: null
+    distributor:
+      remote_timeout: null
+    ingester:
+      push_grpc_method_enabled: null
+    common:
+      storage:
+        backend: gcs
+        gcs:
+          bucket_name: k8s-infra-prow-mimir
+    blocks_storage:
+      backend: gcs
+      storage_prefix: blocks
+    ruler_storage:
+      backend: gcs
+      storage_prefix: ruler
+    alertmanager_storage:
+      backend: gcs
+      storage_prefix: alertmanager
+
+metaMonitoring:
+  serviceMonitor:
+    enabled: true
+
+alertmanager:
+  persistentVolume:
+    enabled: true
+  replicas: 2
+  resources:
+    limits:
+      cpu: 2
+      memory: 1.4Gi
+    requests:
+      cpu: 1
+      memory: 1Gi
+  statefulSet:
+    enabled: true
+
+compactor:
+  persistentVolume:
+    size: 20Gi
+  resources:
+    limits:
+      cpu: 4
+      memory: 2.1Gi
+    requests:
+      cpu: 1
+      memory: 1.5Gi
+
+distributor:
+  replicas: 2
+  resources:
+    limits:
+      cpu: 4
+      memory: 5.7Gi
+    requests:
+      cpu: 2
+      memory: 4Gi
+
+ingester:
+  persistentVolume:
+    size: 50Gi
+  replicas: 3
+  resources:
+    limits:
+      memory: 12Gi
+    requests:
+      cpu: 3.5
+      memory: 8Gi
+  topologySpreadConstraints: {}
+
+chunks-cache:
+  enabled: true
+  replicas: 3
+
+index-cache:
+  enabled: true
+  replicas: 3
+
+metadata-cache:
+  enabled: true
+  replicas: 3
+
+results-cache:
+  enabled: true
+  replicas: 3
+
+overrides_exporter:
+  replicas: 1
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+querier:
+  replicas: 1
+  resources:
+    limits:
+      memory: 5.6Gi
+    requests:
+      cpu: 2
+      memory: 4Gi
+
+query_frontend:
+  replicas: 1
+  resources:
+    limits:
+      memory: 2.8Gi
+    requests:
+      cpu: 2
+      memory: 2Gi
+
+ruler:
+  replicas: 1
+  resources:
+    limits:
+      memory: 2.8Gi
+    requests:
+      cpu: 1
+      memory: 2Gi
+
+store_gateway:
+  persistentVolume:
+    size: 10Gi
+  replicas: 3
+  resources:
+    limits:
+      memory: 2.1Gi
+    requests:
+      cpu: 1
+      memory: 1.5Gi
+  topologySpreadConstraints: {}
+
