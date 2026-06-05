@@ -102,19 +102,6 @@ ingester:
       cpu: 3.5
       memory: 8Gi
   topologySpreadConstraints: {}
-  affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/component
-                operator: In
-                values:
-                  - ingester
-          topologyKey: "kubernetes.io/hostname"
-  zoneAwareReplication:
-    enabled: true
-    topologyKey: "kubernetes.io/zone"
 
 chunks-cache:
   enabled: true
@@ -179,16 +166,4 @@ store_gateway:
       cpu: 1
       memory: 1.5Gi
   topologySpreadConstraints: {}
-  affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-              - key: app.kubernetes.io/component
-                operator: In
-                values:
-                  - store-gateway
-          topologyKey: "kubernetes.io/hostname"
-  zoneAwareReplication:
-    enabled: true
-    topologyKey: "kubernetes.io/zone"
+
