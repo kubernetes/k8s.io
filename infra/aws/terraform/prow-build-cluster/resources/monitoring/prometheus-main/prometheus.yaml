@@ -51,3 +51,17 @@ spec:
     key: node-group
     operator: Equal
     value: stable
+  externalLabels:
+    cluster: eks-prow-build
+    cloud: aws
+  remoteWrite:
+    - url: https://mimir.prow.k8s.io/api/v1/push
+      basicAuth:
+        username:
+          name: mimir-credentials
+          key: username
+        password:
+          name: mimir-credentials
+          key: password
+      headers:
+        X-Scope-OrgID: prow
