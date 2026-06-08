@@ -26,9 +26,10 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - cosiclili@gmail.com
-      - fbranczyk@gmail.com
-      - tariq181290@gmail.com
+      - dgrisonn@redhat.com
+      - manuel@rueg.eu
+      - pratham.bhope@gmail.com
+      - rexagod@gmail.com
 
   - email-id: k8s-infra-staging-metrics-server@kubernetes.io
     name: k8s-infra-staging-metrics-server
