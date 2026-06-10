@@ -107,6 +107,7 @@ groups:
       ReconcileMembers: "true"
     members:
       # scalability-oncall
+      - reimi@google.com
       - aleksandram@google.com
       - azimjon@google.com
       - azylinski@google.com
