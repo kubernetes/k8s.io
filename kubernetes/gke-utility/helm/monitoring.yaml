@@ -35,7 +35,7 @@ kube-state-metrics:
     - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
 
 nodeExporter:
-  enabled: true
+  enabled: false
 
 prometheus:
   prometheusSpec:
