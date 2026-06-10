@@ -83,3 +83,11 @@ kubeControllerManager:
   enabled: false
 kubeScheduler:
   enabled: false
+kubeApiServer:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeProxy:
+  enabled: false
+kubelet:
+  enabled: false
