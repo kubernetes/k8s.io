@@ -1,0 +1,85 @@
+grafana:
+  enabled: true
+  defaultDashboardsEnabled: false
+  admin:
+    existingSecret: grafana-credentials
+    userKey: username
+    passwordKey: password
+  service:
+    type: ClusterIP
+  sidecar:
+    dashboards:
+      enabled: true
+    datasources:
+      enabled: true
+  persistence:
+    enabled: true
+    storageClassName: hyperdisk-balanced
+    size: 30Gi
+  grafana.ini:
+    analytics:
+      reporting_enabled: false
+      check_for_updates: true
+    server:
+      root_url: https://monitoring.prow.k8s.io
+    auth.anonymous:
+      enabled: true
+      org_role: Viewer
+
+alertmanager:
+  enabled: false
+
+kube-state-metrics:
+  metricLabelsAllowlist:
+    - pods=[*]
+    - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+
+nodeExporter:
+  enabled: true
+
+prometheus:
+  prometheusSpec:
+    retention: 24h
+    resources:
+      requests:
+        cpu: 1
+        memory: 4Gi
+      limits:
+        cpu: 2
+        memory: 8Gi
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: hyperdisk-balanced
+          resources:
+            requests:
+              storage: 50Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    scrapeConfigSelectorNilUsesHelmValues: false
+    externalLabels:
+      cluster: gke-utility
+      cloud: gcp
+    remoteWrite:
+      - url: http://mimir-gateway.mimir.svc.cluster.local/api/v1/push
+        basicAuth:
+          username:
+            name: mimir-credentials
+            key: username
+          password:
+            name: mimir-credentials
+            key: password
+        headers:
+          X-Scope-OrgID: prow
+
+coreDns:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false

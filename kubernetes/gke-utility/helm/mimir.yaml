@@ -166,4 +166,3 @@ store_gateway:
       cpu: 1
       memory: 1.5Gi
   topologySpreadConstraints: {}
-
