@@ -4,32 +4,27 @@ metadata:
   name: slack-welcomer-message
 data:
   welcome.md: |-
-    Welcome to the Kubernetes Community Slack!
-
-    The Kubernetes Slack can be a large and intimidating place, please don't be afraid to ask questions. The community is quite welcoming :)
-    To ensure Slack remains a welcoming place for all, the Kubernetes Community adheres to a <https://k8s.dev/community/code-of-conduct|Code of Conduct>.
-
-    *Have a general Kubernetes question?*
+    :kubernetes-intensifies: Welcome to the Kubernetes Community Slack!
+    We are so glad you are here! This is a friendly and supportive community — feel free to ask questions, share ideas, and connect with contributors from all over the world. :kubernetes-waving:
+    Before posting, please take a moment to read our <https://github.com/kubernetes/community/blob/main/communication/slack-guidelines.md|Slack Guidelines> and our <https://github.com/kubernetes/community/blob/main/code-of-conduct.md|Code of Conduct> so we can keep this space welcoming for everyone. :heart:
+    *Have a general Kubernetes question?* :thought_balloon:
     - Ask your question on the <https://discuss.kubernetes.io|official Kubernetes Forum>.
-    - Join #kubernetes-novice.
-    - Have your question answered live on stream in #office-hours during the monthly <https://k8s.dev/events/office-hours|Office Hours>.
-    - Find a  <https://k8s.dev/community/community-groups|SIG channel> to join and ask your question.
-
-    *Looking to contribute?*
-    - Ask questions in  #kubernetes-contributors.
-    - Join a <https://k8s.dev/community/community-groups|SIG channel>.
-    - Have your question answered live  on stream in #meet-our-contributors during the monthly <https://k8s.dev/events/meet-our-contributors|MoC>.
+    - Join #sig-contribex-comms and say hello!
+    - Have your question answered live on stream in #office-hours during the sig bi-weekly meeting.
+    - Find a <https://github.com/kubernetes/community/blob/main/sig-list.md|SIG channel> to join and ask your question.
+    *Looking to contribute?* :rocket:
+    - New to Kubernetes? Attend a <https://www.kubernetes.dev/docs/orientation/|New Contributor Orientation> — a great place to get started and meet the community!
+    - SIG Docs and Contributor Experience are excellent starting points.
+    - Explore the <https://github.com/kubernetes/community/blob/main/contributors/guide/README.md|Contributor Guide> and <https://github.com/kubernetes/community/blob/main/contributors/devel/README.md|Developer Guide>.
+    - Ask questions in #kubernetes-new-contributors.
+    - Join a <https://github.com/kubernetes/community/blob/main/sig-list.md|SIG channel>.
     - Have a PR you need reviewed? Hop into #pr-reviews to get some feedback.
-
-    *See some spam? or being harrassed?*
-    - Use the _"<https://k8s.dev/docs/comms/slack/#escalating-andor-reporting-a-problem|Report Message>"_ message action.
+    *See some spam? or being harassed?* :shield:
+    - Use the _"Report Message"_ message action.
     - Escalate by joining #slack-admins and ask for an Admin's assistance.
-
-    *Looking to join a local community?*
-    - There are many channels for regions and meetups, look for channels like `#meetup-[region]` or `#[region]-users`.
-
-    *Other channels of note:*
-    - #kubecon - Get your question answered about any upcoming <https://cncf.io/community/kubecon-cloudnativecon-events|KubeCon/CloudNativeCon>.
-    - #kubernetes-careers - A place to post Kubernetes related jobs.
-
-    Have any other questions? Please see the <https://k8s.dev/docs/comms/slack|Slack communications guidelines> to start.
+    *Other channels of note:* :loudspeaker:
+    - #kubecon - Get your question answered about any upcoming KubeCon/CloudNativeCon.
+    - #kubernetes-careers - A place to post Kubernetes related jobs or resume.
+    - #sig-contribex - Connect with the Contributor Experience SIG.
+    - #kubernetes-new-contributors - A welcoming space just for newcomers! :seedling:
+    Have any other questions? Please see the <https://github.com/kubernetes/community/blob/main/communication/slack-guidelines.md|Slack Guidelines> to start. :tada:
