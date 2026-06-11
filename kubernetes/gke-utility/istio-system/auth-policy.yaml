@@ -15,7 +15,6 @@ spec:
     - operation:
         hosts:
         - argo.k8s.io
-        - monitoring.prow.k8s.io
     # we want to force auth to atlantis.k8s.io/* except /events
     - operation:
         hosts:
