@@ -16,6 +16,29 @@ grafana:
     enabled: true
     storageClassName: hyperdisk-balanced
     size: 30Gi
+  envValueFrom:
+    MIMIR_USER:
+      secretKeyRef:
+        name: mimir-credentials
+        key: username
+    MIMIR_PASSWORD:
+      secretKeyRef:
+        name: mimir-credentials
+        key: password
+  additionalDataSources:
+    - name: Mimir
+      type: prometheus
+      access: proxy
+      url: http://mimir-gateway.mimir.svc.cluster.local/prometheus
+      isDefault: true
+      basicAuth: true
+      basicAuthUser: $MIMIR_USER
+      jsonData:
+        httpHeaderName1: X-Scope-OrgID
+        timeInterval: 30s
+      secureJsonData:
+        basicAuthPassword: $MIMIR_PASSWORD
+        httpHeaderValue1: prow
   grafana.ini:
     analytics:
       reporting_enabled: false
