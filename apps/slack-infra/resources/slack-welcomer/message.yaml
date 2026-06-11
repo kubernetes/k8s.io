@@ -5,26 +5,25 @@ metadata:
 data:
   welcome.md: |-
     :kubernetes-intensifies: Welcome to the Kubernetes Community Slack!
-    We are so glad you are here! This is a friendly and supportive community — feel free to ask questions, share ideas, and connect with contributors from all over the world. :kubernetes-waving:
-    Before posting, please take a moment to read our <https://github.com/kubernetes/community/blob/main/communication/slack-guidelines.md|Slack Guidelines> and our <https://github.com/kubernetes/community/blob/main/code-of-conduct.md|Code of Conduct> so we can keep this space welcoming for everyone. :heart:
-    *Have a general Kubernetes question?* :thought_balloon:
-    - Ask your question on the <https://discuss.kubernetes.io|official Kubernetes Forum>.
-    - Join #sig-contribex-comms and say hello!
-    - Have your question answered live on stream in #office-hours during the sig bi-weekly meeting.
-    - Find a <https://github.com/kubernetes/community/blob/main/sig-list.md|SIG channel> to join and ask your question.
-    *Looking to contribute?* :rocket:
-    - New to Kubernetes? Attend a <https://www.kubernetes.dev/docs/orientation/|New Contributor Orientation> — a great place to get started and meet the community!
-    - SIG Docs and Contributor Experience are excellent starting points.
-    - Explore the <https://github.com/kubernetes/community/blob/main/contributors/guide/README.md|Contributor Guide> and <https://github.com/kubernetes/community/blob/main/contributors/devel/README.md|Developer Guide>.
+
+    We are so glad you are here! This is a friendly and supportive community - feel free to ask questions, share ideas, and connect with contributors from all over the world.
+    Before posting, please take a moment to read our <https://github.com/kubernetes/community/blob/main/communication/slack-guidelines.md|Slack Guidelines> and <https://github.com/kubernetes/community/blob/main/code-of-conduct.md|Code of Conduct> so we can keep this space welcoming for everyone.
+
+    *Have a general Kubernetes question?*
     - Ask questions in #kubernetes-new-contributors.
+    - Explore the <https://discuss.kubernetes.io|official Kubernetes Forum>.
+
+    *Looking to contribute?*
+    - New to Kubernetes? Attend a <https://www.kubernetes.dev/docs/orientation/|New Contributor Orientation> — a great place to get started and meet the community!
+    - Explore the <https://github.com/kubernetes/community/blob/main/contributors/guide/README.md|Contributor Guide> and <https://github.com/kubernetes/community/blob/main/contributors/devel/README.md|Developer Guide>.
     - Join a <https://github.com/kubernetes/community/blob/main/sig-list.md|SIG channel>.
-    - Have a PR you need reviewed? Hop into #pr-reviews to get some feedback.
-    *See some spam? or being harassed?* :shield:
+
+    *See some spam? or being harassed?*
     - Use the _"Report Message"_ message action.
     - Escalate by joining #slack-admins and ask for an Admin's assistance.
-    *Other channels of note:* :loudspeaker:
+
+    *Other channels of note:*
     - #kubecon - Get your question answered about any upcoming KubeCon/CloudNativeCon.
     - #kubernetes-careers - A place to post Kubernetes related jobs or resume.
-    - #sig-contribex - Connect with the Contributor Experience SIG.
-    - #kubernetes-new-contributors - A welcoming space just for newcomers! :seedling:
-    Have any other questions? Please see the <https://github.com/kubernetes/community/blob/main/communication/slack-guidelines.md|Slack Guidelines> to start. :tada:
+
+    Follow the guidelines above and connect with the community. :kubernetes-waving:
