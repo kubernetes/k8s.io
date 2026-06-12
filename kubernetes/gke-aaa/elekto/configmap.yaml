@@ -16,6 +16,6 @@ data:
   ELECTION_DIR: "elections"
   META_DEPLOYMENT: local
   META_PATH: "/tmp/meta"
-  META_BRANCH: master
+  META_BRANCH: main
   GITHUB_REDIRECT: "/oauth/github/callback"
   MIN_PASSCODE_LENGTH: "8"

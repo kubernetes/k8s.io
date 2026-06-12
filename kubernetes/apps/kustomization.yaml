@@ -6,6 +6,7 @@ resources:
   - datadog.yaml
   - external-secrets.yaml
   - cert-manager.yaml
+  - elekto.yaml
   - kops-discovery.yaml
   - kube-system.yaml
   - kyverno.yaml
