@@ -13,7 +13,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - kehannon@redhat.com
+      - hi@amycod.es
       - mwielgus@google.com
       - yuki.iwai.tz@gmail.com
 
@@ -29,7 +29,7 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
-      - kehannon@redhat.com
+      - hi@amycod.es
       - mwielgus@google.com
       - yuki.iwai.tz@gmail.com
     members:
