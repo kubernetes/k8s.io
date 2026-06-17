@@ -10,10 +10,4 @@ Elekto uses :
 
 ## How to deploy Elekto
 
-- Have [access](https://github.com/kubernetes/k8s.io/blob/main/running-in-community-clusters.md) to the GKE cluster `aaa`.
-
-- From the `apps/elekto` directory run:
-
-```console
-./deploy.sh
-```
+elekto is autodeployed by ArgoCD

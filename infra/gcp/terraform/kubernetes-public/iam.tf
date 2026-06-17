@@ -29,6 +29,7 @@ module "iam" {
     "roles/secretmanager.secretAccessor" = [
       "serviceAccount:kubernetes-external-secrets@kubernetes-public.iam.gserviceaccount.com",
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
+      "principal://iam.googleapis.com/projects/127754664067/locations/global/workloadIdentityPools/kubernetes-public.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
     ]
     "roles/dns.admin" = [
       "group:k8s-infra-dns-admins@kubernetes.io",
