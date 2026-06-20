@@ -4,3 +4,27 @@ namespace: monitoring
 resources:
   - secrets.yaml
   - httproute.yaml
+  - dashboards.yaml
+
+configMapGenerator:
+  - name: prow-dashboards
+    behavior: merge
+    files:
+      - dashboards/builds.json
+      - dashboards/jobs.json
+      - dashboards/organizations.json
+      - dashboards/repositories.json
+  - name: prow-dashboards-gcp
+    behavior: merge
+    files:
+      - dashboards-gcp/builds.json
+      - dashboards-gcp/jobs.json
+      - dashboards-gcp/organizations.json
+      - dashboards-gcp/repositories.json
+  - name: prow-dashboards-aws
+    behavior: merge
+    files:
+      - dashboards-aws/builds.json
+      - dashboards-aws/jobs.json
+      - dashboards-aws/organizations.json
+      - dashboards-aws/repositories.json

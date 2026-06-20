@@ -10,6 +10,9 @@ grafana:
   sidecar:
     dashboards:
       enabled: true
+      folderAnnotation: grafana_folder
+      provider:
+        foldersFromFilesStructure: true
     datasources:
       enabled: true
   persistence:
