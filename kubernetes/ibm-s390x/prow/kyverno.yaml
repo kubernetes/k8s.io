@@ -10,6 +10,8 @@ spec:
           - resources:
               kinds:
                 - Pod
+            operations:
+              - CREATE # we want to ignore prow update operations
       preconditions:
         any:
           - key: '{{request.object.metadata.labels."created-by-prow" || ""}}'
