@@ -52,8 +52,14 @@ spec:
           args:
             - --cache-dir=/cache
             - --cache-sizeGB=99
-            - --push-gateway=pushgateway
             - --serve-metrics=true
+          resources:
+            requests:
+              cpu: 100m
+              memory: 500Mi
+            limits:
+              cpu: 300m
+              memory: 2000Mi
           ports:
             - name: main
               containerPort: 8888

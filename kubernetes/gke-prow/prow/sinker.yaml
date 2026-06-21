@@ -43,6 +43,13 @@ spec:
               value: "d1aa7522-0959-442e-80ee-8c4f7fb4c184"
             - name: AZURE_FEDERATED_TOKEN_FILE
               value: "/var/run/secrets/azure-token/serviceaccount/token"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 2000Mi
+            limits:
+              cpu: 1000m
+              memory: 4000Mi
           ports:
             - name: metrics
               containerPort: 9090

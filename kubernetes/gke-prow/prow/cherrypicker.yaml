@@ -45,6 +45,13 @@ spec:
         - --github-endpoint=http://ghproxy
         - --github-endpoint=https://api.github.com
         - --dry-run=false
+        resources:
+          requests:
+            cpu: 300m
+            memory: 2000Mi
+          limits:
+            cpu: 1000m
+            memory: 4000Mi
         ports:
           - name: http
             containerPort: 8888

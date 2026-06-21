@@ -37,15 +37,28 @@ spec:
           args:
             - --blob-storage-workers=1
             - --config-path=/etc/config/config.yaml
+            - --github-app-id=$(GITHUB_APP_ID)
+            - --github-app-private-key-path=/etc/github/key.pem
             - --github-endpoint=http://ghproxy
             - --github-endpoint=https://api.github.com
-            - --github-token-path=/etc/github/oauth
             - --github-workers=5
             - --job-config-path=/etc/job-config
             - --kubernetes-blob-storage-workers=1
             - --slack-token-file=/etc/slack/token
             - --slack-workers=1
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1000Mi
+            limits:
+              cpu: 1000m
+              memory: 4000Mi
           env:
+            - name: GITHUB_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: github-credentials
+                  key: app_id
             # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
             - name: KUBECONFIG
               value: "/etc/kubeconfig-k8s-infra-prow/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-k8s-infra-aks-prow-build/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig:/etc/k8s-infra-ppc64le-prow-build-kubeconfig/kubeconfig:/etc/k8s-infra-s390x-prow-build-kubeconfig/kubeconfig"
@@ -99,7 +112,7 @@ spec:
             - name: job-config
               mountPath: /etc/job-config
               readOnly: true
-            - name: oauth
+            - name: github
               mountPath: /etc/github
               readOnly: true
             - name: slack
@@ -120,9 +133,12 @@ spec:
         - name: job-config
           configMap:
             name: job-config
-        - name: oauth
+        - name: github
           secret:
-            secretName: oauth-token
+            secretName: github-credentials
+            items:
+              - key: app_private_key
+                path: key.pem
         - name: slack
           secret:
             secretName: slack-token

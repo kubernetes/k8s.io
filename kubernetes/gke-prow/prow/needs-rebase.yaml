@@ -36,10 +36,24 @@ spec:
         imagePullPolicy: Always
         args:
         - --dry-run=false
+        - --github-app-id=$(GITHUB_APP_ID)
+        - --github-app-private-key-path=/etc/github/key.pem
         - --github-endpoint=http://ghproxy
         - --github-endpoint=https://api.github.com
-        - --github-token-path=/etc/github/oauth
-        - --update-period=6h
+        - --update-period=3h
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+          limits:
+            cpu: 200m
+            memory: 1000Mi
+        env:
+          - name: GITHUB_APP_ID
+            valueFrom:
+              secretKeyRef:
+                name: github-credentials
+                key: app_id
         ports:
           - name: http
             containerPort: 8888
@@ -47,7 +61,7 @@ spec:
         - name: hmac
           mountPath: /etc/webhook
           readOnly: true
-        - name: oauth
+        - name: github
           mountPath: /etc/github
           readOnly: true
         - name: plugins
@@ -57,9 +71,12 @@ spec:
       - name: hmac
         secret:
           secretName: hmac-token
-      - name: oauth
+      - name: github
         secret:
-          secretName: oauth-token
+          secretName: github-credentials
+          items:
+            - key: app_private_key
+              path: key.pem
       - name: plugins
         configMap:
           name: plugins
