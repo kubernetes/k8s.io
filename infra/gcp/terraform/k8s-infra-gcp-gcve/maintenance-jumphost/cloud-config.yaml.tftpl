@@ -6,7 +6,7 @@ write_files:
   encoding: b64
   permissions: "0600"
 
-- path: /etc/sysctl.d/10-wireguard.conf
+- path: /etc/sysctl.d/99-wireguard.conf
   content: |
     net.ipv4.ip_forward = 1
 
