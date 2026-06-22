@@ -51,6 +51,10 @@ grafana:
     auth.anonymous:
       enabled: true
       org_role: Viewer
+    auth.basic:
+      enabled: false
+    auth:
+      disable_login_form: true
 
 alertmanager:
   enabled: false
