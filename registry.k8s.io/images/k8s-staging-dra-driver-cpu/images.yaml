@@ -1,3 +1,7 @@
 - name: dra-driver-cpu
   dmap:
     "sha256:a74bef2b40dff4e0aeabe247bd6513152d013932749f8d32c0e39e5e8fb810af": ["v0.1.0"] # promote
+    "sha256:67e068207f67117d205545fc6dbf4342d6b214edab76396130f472c338c6c598": ["v0.2.0"]
+- name: charts/dra-driver-cpu
+  dmap:
+    "sha256:94541b171271761306559f4a030ce817929be153ddb2a431800abc4a68a5d728": ["0.2.0"]
