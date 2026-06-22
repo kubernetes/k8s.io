@@ -54,13 +54,26 @@ spec:
             - --job-config-path=/etc/job-config
             - --spyglass=true
             - --rerun-creates-job
-            - --github-token-path=/etc/github/oauth
+            - --github-app-id=$(GITHUB_APP_ID)
+            - --github-app-private-key-path=/etc/github/key.pem
             - --github-endpoint=http://ghproxy
             - --github-endpoint=https://api.github.com
-            - --github-oauth-config-file=/etc/githuboauth/secret
+            - --github-oauth-config-file=/etc/github/oauth-config.yaml
             - --cookie-secret=/etc/cookie/secret
             - --plugin-config=/etc/plugins/plugins.yaml
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 2000Mi
+            limits:
+              cpu: 2000m
+              memory: 5000Mi
           env:
+            - name: GITHUB_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  name: github-credentials
+                  key: app_id
             # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
             - name: KUBECONFIG
               value: "/etc/kubeconfig-k8s-infra-prow/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build/kubeconfig:/etc/kubeconfig-k8s-infra-prow-build-trusted/kubeconfig:/etc/kubeconfig-k8s-infra-aks-prow-build/kubeconfig:/etc/kubeconfig-eks-prow-build-cluster/kubeconfig:/etc/kubeconfig-k8s-infra-kops-prow-build/kubeconfig:/etc/k8s-infra-ppc64le-prow-build-kubeconfig/kubeconfig:/etc/k8s-infra-s390x-prow-build-kubeconfig/kubeconfig"
@@ -81,9 +94,6 @@ spec:
             - name: AZURE_FEDERATED_TOKEN_FILE
               value: "/var/run/secrets/azure-token/serviceaccount/token"
           volumeMounts:
-            - name: oauth-config
-              mountPath: /etc/githuboauth
-              readOnly: true
             - name: cookie-secret
               mountPath: /etc/cookie
               readOnly: true
@@ -117,7 +127,7 @@ spec:
             - name: job-config
               mountPath: /etc/job-config
               readOnly: true
-            - name: oauth-token
+            - name: github
               mountPath: /etc/github
               readOnly: true
             - name: plugins
@@ -145,12 +155,14 @@ spec:
             periodSeconds: 3
             timeoutSeconds: 600
       volumes:
-        - name: oauth-config
+        - name: github
           secret:
-            secretName: github-oauth-config
-        - name: oauth-token
-          secret:
-            secretName: oauth-token
+            secretName: github-credentials
+            items:
+              - key: app_private_key
+                path: key.pem
+              - key: oauth_config
+                path: oauth-config.yaml
         - name: cookie-secret
           secret:
             secretName: cookie

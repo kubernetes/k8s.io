@@ -39,13 +39,27 @@ spec:
         - --continue-on-error=true
         - --plugin-config=/etc/plugins/plugins.yaml
         - --config-path=/etc/config/config.yaml
-        - --github-token-path=/etc/github/oauth
+        - --github-app-id=$(GITHUB_APP_ID)
+        - --github-app-private-key-path=/etc/github/cert
         - --github-endpoint=http://ghproxy
         - --github-endpoint=https://api.github.com
         - --job-config-path=/etc/job-config
         - --denylist=kubernetes/kubernetes
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+          limits:
+            cpu: 300m
+            memory: 1000Mi
+        env:
+          - name: GITHUB_APP_ID
+            valueFrom:
+              secretKeyRef:
+                name: github-credentials
+                key: app_id
         volumeMounts:
-        - name: oauth
+        - name: github
           mountPath: /etc/github
           readOnly: true
         - name: config
@@ -58,9 +72,12 @@ spec:
           mountPath: /etc/plugins
           readOnly: true
       volumes:
-      - name: oauth
+      - name: github
         secret:
-          secretName: oauth-token
+          secretName: github-credentials
+          items:
+            - key: app_private_key
+              path: key.pem
       - name: config
         configMap:
           name: config

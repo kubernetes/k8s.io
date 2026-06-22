@@ -69,6 +69,10 @@ module "testgrid_config_bucket" {
       member = "serviceAccount:k8s-testgrid-config-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
     },
     {
+      role   = "roles/storage.objectAdmin"
+      member = google_service_account.prow.member
+    },
+    {
       // Let K8s TestGrid canary read configs from this bucket. 
       role   = "roles/storage.objectViewer"
       member = "serviceAccount:testgrid-canary@k8s-testgrid.iam.gserviceaccount.com"

@@ -49,6 +49,13 @@ spec:
         - name: job-config
           mountPath: /etc/job-config
           readOnly: true
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1500Mi
+          limits:
+            cpu: 500m
+            memory: 3000Mi
       volumes:
       - name: config
         configMap:

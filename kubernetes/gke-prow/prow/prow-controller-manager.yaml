@@ -43,6 +43,13 @@ spec:
             - --dry-run=false
             - --enable-controller=plank
             - --job-config-path=/etc/job-config
+          resources:
+            requests:
+              cpu: 300m
+              memory: 2000Mi
+            limits:
+              cpu: 1000m
+              memory: 4000Mi
           env:
             # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
             - name: KUBECONFIG
