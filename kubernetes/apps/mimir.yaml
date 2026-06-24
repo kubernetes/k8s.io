@@ -40,6 +40,9 @@ spec:
           repoURL: https://github.com/kubernetes/k8s.io
           targetRevision: main
       syncPolicy:
+        automated:
+          selfHeal: true
+          prune: false
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
