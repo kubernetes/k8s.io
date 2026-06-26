@@ -10,11 +10,8 @@ spec:
   generators:
     - clusters:
         selector:
-          matchExpressions:
-            - key: name
-              operator: In
-              values:
-                - utility
+          matchLabels:
+            clusterType: 'utility'
   template:
     metadata:
       name: 'mimir-{{ .name }}'
