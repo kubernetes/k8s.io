@@ -608,3 +608,7 @@ mcp-lifecycle-operator.sigs:
 exploding:
   type: A
   value: 34.117.227.184
+# https://github.com/kubernetes-sigs/kube-network-policies docs (@aojea)
+kube-network-policies.sigs:
+  type: CNAME
+  value: kubernetes-sigs.github.io.
