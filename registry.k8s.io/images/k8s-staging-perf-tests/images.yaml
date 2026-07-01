@@ -46,7 +46,7 @@
     "sha256:1f7b520b759677f56a50c76372f9728099bd5375b5949b6f2fbafa5fdc8c2698": [ "2.55" ]
 - name: probes
   dmap:
-    "sha256:5f86f184607a48ea1b3578b3134f13ed482f12c32d05820667c977fb04e75a9c": [ "v0.0.7" ]
+    "sha256:1c962f8db30e2e52040f4be3ebf00d5634c2939e3efb76c12a5e51ade0040d40": [ "v0.0.8" ]
 - name: pushgateway
   dmap:
     "sha256:f74ff5b7ad0b8fb60c24b77eaeab025d659e46ec15f32430adb976544305c01f": [ "v1.4.2" ]
