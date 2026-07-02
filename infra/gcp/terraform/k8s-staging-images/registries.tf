@@ -51,6 +51,7 @@ locals {
     mcp-lifecycle-operator          = "group:k8s-infra-staging-mcp-lifecycle-op@kubernetes.io"
     minikube                        = "group:k8s-infra-staging-minikube@kubernetes.io"
     node-readiness-controller       = "group:k8s-infra-staging-nrc@kubernetes.io"
+    resource-state-metrics          = "group:k8s-infra-staging-resource-state-met@kubernetes.io"
     gateway-api-inference-extension = "group:sig-apps-leads@kubernetes.io"
     secrets-store-sync              = "group:k8s-infra-staging-secrets-store-sync@kubernetes.io"
     test-infra                      = "group:k8s-infra-staging-test-infra@kubernetes.io"
