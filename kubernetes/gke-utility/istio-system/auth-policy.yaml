@@ -12,9 +12,12 @@ spec:
     name: oauth2-proxy
   rules:
   - to:
+    # we want to force auth to argo.k8s.io/* except /api/badge for embedding badges in README.md
     - operation:
         hosts:
         - argo.k8s.io
+        notPaths:
+        - "/api/badge"
     # we want to force auth to atlantis.k8s.io/* except /events
     - operation:
         hosts:

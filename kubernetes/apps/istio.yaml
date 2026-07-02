@@ -22,7 +22,7 @@ spec:
       sources:
         - chart: base
           repoURL: https://istio-release.storage.googleapis.com/charts
-          targetRevision: 1.28.4
+          targetRevision: 1.28.10
         - path: config/crd/experimental
           repoURL: https://github.com/kubernetes-sigs/gateway-api
           targetRevision: v1.4.1
@@ -63,7 +63,7 @@ spec:
       sources:
         - chart: istiod
           repoURL: https://istio-release.storage.googleapis.com/charts
-          targetRevision: 1.28.4
+          targetRevision: 1.28.10
           helm:
             valueFiles:
             - $values/kubernetes/{{ .name }}/helm/istio.yaml
