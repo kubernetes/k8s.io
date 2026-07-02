@@ -84,6 +84,17 @@ groups:
       - pszczesniak@google.com
       - fbranczyk@gmail.com
 
+  - email-id: k8s-infra-staging-resource-state-met@kubernetes.io
+    name: k8s-infra-staging-resource-state-met
+    description: |-
+      ACL for resource-state-metrics
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - contact@rueg.eu
+      - dgrisonn@redhat.com
+      - rexagod@gmail.com
+
   - email-id: k8s-infra-staging-prometheus-adapter@kubernetes.io
     name: k8s-infra-staging-prometheus-adapter
     description: |-

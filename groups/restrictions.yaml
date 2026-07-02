@@ -151,6 +151,7 @@ restrictions:
       - "^k8s-infra-staging-kube-state-metrics@kubernetes.io$"
       - "^k8s-infra-staging-metrics-server@kubernetes.io$"
       - "^k8s-infra-staging-prometheus-adapter@kubernetes.io$"
+      - "^k8s-infra-staging-resource-state-met@kubernetes.io$"
       - "^sig-instrumentation@kubernetes.io$"
       - "^sig-instrumentation-leads@kubernetes.io$"
   - path: "sig-multicluster/groups.yaml"
