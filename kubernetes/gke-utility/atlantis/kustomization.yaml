@@ -9,7 +9,7 @@ resources:
 
 images:
   - name: ghcr.io/runatlantis/atlantis
-    newTag: v0.36.0
+    newTag: v0.46.0
 
 configMapGenerator:
   - name: atlantis-config
