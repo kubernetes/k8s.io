@@ -30,7 +30,7 @@ cluster_name    = "prow-build-cluster"
 cluster_version = "1.35"
 
 node_group_version_stable  = "1.35"
-node_instance_types_stable = ["r5ad.2xlarge"]
+node_instance_types_stable = ["m8id.2xlarge"]
 node_desired_size_stable   = 3
 
 node_taints_stable = {

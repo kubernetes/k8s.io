@@ -38,10 +38,10 @@ terraform {
 provider "aws" {
   region = var.cluster_region
 
-  assume_role {
-    role_arn     = "arn:aws:iam::${var.aws_account_id}:role/EKSInfraAdmin"
-    session_name = "prow-build-cluster-terraform"
-  }
+  # assume_role {
+  #   role_arn     = "arn:aws:iam::${var.aws_account_id}:role/EKSInfraAdmin"
+  #   session_name = "prow-build-cluster-terraform"
+  # }
 }
 
 provider "kubernetes" {

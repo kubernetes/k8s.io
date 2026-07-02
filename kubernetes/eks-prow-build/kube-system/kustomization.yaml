@@ -4,18 +4,19 @@ namespace: kube-system
 resources:
   - ec2nodeclass.yaml
   - daemonsets.yaml
+  - nodepools.yaml
   - npd.yaml
   - npd-config.yaml
 
 helmCharts:
   - name: karpenter-crd
     repo: oci://public.ecr.aws/karpenter
-    releaseName: karpenter-crds
-    version: 1.12.2
+    releaseName: karpenter-crd
+    version: 1.12.1
     namespace: kube-system
   - name: karpenter
     repo: oci://public.ecr.aws/karpenter
     releaseName: karpenter
     valuesFile: karpenter.yaml
-    version: 1.12.2
+    version: 1.12.1
     namespace: kube-system

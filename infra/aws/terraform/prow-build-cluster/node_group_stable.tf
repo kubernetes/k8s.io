@@ -44,10 +44,9 @@ locals {
       [settings.host-containers.admin]
       enabled = true
 
-      # Bootstrap the instance using our bootstrap script embeded in a Docker image
-      [settings.bootstrap-containers.bootstrap]
-      source = "public.ecr.aws/q4o2z4d8/k8s-prow-bottlerocket:v0.0.2"
-      mode = "always"
+      [settings.bootstrap-commands.000-mount-instance-storage]
+      commands = [['apiclient', 'ephemeral-storage', 'init'], ['apiclient', 'ephemeral-storage', 'bind']]
+      mode = 'always'
       essential = true
 
       [settings.kernel.sysctl]
