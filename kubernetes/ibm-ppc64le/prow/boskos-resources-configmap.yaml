@@ -3,9 +3,9 @@ data:
   config: |
     resources:
     - names:
-      - k8s-boskos-powervs-eu-de-1-01
-      - k8s-boskos-powervs-eu-de-1-02
-      - k8s-boskos-powervs-eu-de-1-03
+      - k8s-boskos-powervs-wdc06-01
+      - k8s-boskos-powervs-wdc06-02
+      - k8s-boskos-powervs-wdc06-03
       - k8s-boskos-powervs-eu-de-2-01
       - k8s-boskos-powervs-eu-de-2-02
       - k8s-boskos-powervs-eu-de-2-03
