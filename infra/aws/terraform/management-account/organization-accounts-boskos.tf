@@ -18,6 +18,30 @@ limitations under the License.
 # Accounts used by boskos in the EKS cluster #
 ##############################################
 
+// This account holds the terraform state and other boskos related resource we don't want 
+// e2e to access
+module "k8s_infra_eks_e2e_boskos_001" {
+  source = "../modules/org-account"
+
+  account_name               = "k8s-infra-eks-e2e-boskos-mgmt"
+  email                      = "k8s-infra-aws-admins+k8s-infra-eks-e2e-boskos-mgmt@kubernetes.io"
+  iam_user_access_to_billing = "ALLOW"
+  parent_id                  = aws_organizations_organizational_unit.boskos.id
+  permissions_map = {
+    "boskos-admin" = [
+      "AdministratorAccess",
+    ]
+  }
+
+  tags = {
+    "production"  = "true",
+    "environment" = "prod",
+    "group"       = "sig-k8s-infra",
+    "service"     = "boskos"
+  }
+}
+
+
 module "k8s_infra_eks_e2e_boskos_001" {
   source = "../modules/org-account"
 
