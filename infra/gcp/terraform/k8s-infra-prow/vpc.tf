@@ -67,3 +67,18 @@ module "nat" {
   router        = "prow-nat"
   name          = "prow-nat"
 }
+
+resource "google_compute_firewall" "allow_ipv6_egress" {
+  name        = "prow-allow-ipv6-egress"
+  project     = module.project.project_id
+  network     = module.vpc.network_name
+  direction   = "EGRESS"
+  priority    = 1000
+
+  allow {
+    protocol = "all"
+  }
+
+  destination_ranges = ["::/0"]
+}
+
