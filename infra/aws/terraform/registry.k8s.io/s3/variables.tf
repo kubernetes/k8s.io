@@ -36,3 +36,8 @@ variable "region" {
   type        = string
 }
 
+variable "alternative_bucket_names" {
+  description = "Map of region to alternative bucket name if the default naming convention is not used"
+  type        = map(string)
+  default     = {}
+}
