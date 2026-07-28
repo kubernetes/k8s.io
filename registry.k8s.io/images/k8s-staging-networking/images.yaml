@@ -61,6 +61,9 @@
     "sha256:b64448f2424c8c45a98102b80a2a050e7573ece120808106689c2324bf1fe842": ["v1.0.0"]
 - name: kube-network-policies
   dmap:
+    "sha256:fa4a8a823da474dd6efa3bb80347b5ac58376370e1c179c5d3fa462e14b0e465": ["v1.1.1"]
+    "sha256:3d7ba4bbf5cd9774b3562ee36a5c6860b071f5a25d73b75982d1b5a807c07d42": ["v1.1.1-npa-v1alpha2"]
+    "sha256:ff35b07d89554d8d17a7e8757d51bd8851d0230b3f1ee07fdc9ddd854d65788f": ["v1.1.1-iptracker"]
     "sha256:e3d06fa362c163855bdbbd0d5fa72fe9fabe147a21de62e8e88d22cbfeafe2a4": ["v1.1.0"]
     "sha256:4033ae6ad3fbe0e9b9c13d8f0d90dabbcac1c5aa9d89a4df1c33a22c60257ef0": ["v1.1.0-npa-v1alpha2"]
     "sha256:9b99b10ebacb7f0bb5bfebcb5381cc434a9f7dc22c0a85a6773120f765e1a6f3": ["v1.1.0-iptracker"]
@@ -84,6 +87,7 @@
     "sha256:99c493b0979bf1328cd53f62b4864eea1bb08ff0176e34b85e9732bce1f49120": ["v0.1.0"]
 - name: kube-ip-tracker
   dmap:
+    "sha256:15605792dfb8b5bfaf60d2d1fd33429a49f5bee12a81de279a186b5d13119d6a": ["v1.1.1"]
     "sha256:3e8cdcbfedf75e66271787cfdaa21ded939fc55319f0fd62e085c11c184200f1": ["v1.1.0"]
     "sha256:ded821117d0c681dff2926f2a97b93396607c132f7b15d65aeb375762730fa51": ["v0.9.2"]
     "sha256:21ab1d42491dd090914aad83bb54a8add7f6992b6b6478aa91ab17686692a97a": ["v0.9.1"]
