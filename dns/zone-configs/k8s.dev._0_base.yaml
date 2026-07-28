@@ -45,3 +45,39 @@ _acme-challenge.dl:
 _gh-kubernetes-e:
   type: TXT
   value: 3e7f816ba3
+# .io mitigation: mirror *.k8s.io services on *.k8s.dev
+# https://github.com/kubernetes/k8s.io/issues/9622
+
+# GCP redirector services (shared LB via redirect.k8s.io)
+pkgs:
+  type: CNAME
+  value: pkgs.k8s.io.
+git:
+  type: CNAME
+  value: git.k8s.io.
+go:
+  type: CNAME
+  value: go.k8s.io.
+issues:
+  type: CNAME
+  value: issues.k8s.io.
+sigs:
+  type: CNAME
+  value: sigs.k8s.io.
+kep:
+  type: CNAME
+  value: kep.k8s.io.
+
+# Dedicated GCP LB services
+registry:
+  type: CNAME
+  value: registry.k8s.io.
+prow:
+  type: CNAME
+  value: prow.k8s.io.
+testgrid:
+  type: CNAME
+  value: testgrid.k8s.io.
+cs:
+  type: CNAME
+  value: cs.k8s.io.
