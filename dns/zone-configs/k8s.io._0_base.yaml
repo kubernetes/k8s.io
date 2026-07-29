@@ -308,9 +308,12 @@ prs:
   value: redirect.k8s.io.
 # Cloudfront endpoint for the distribution shielding
 # the S3 buckets hosting the container images blobs
-cloudfront.registry:
+_288cec1bf94324319ed9254f459ec0cb.cdn.registry:
   type: CNAME
-  value: d39mqg4b1dx9z1.cloudfront.net.
+  value: _51b6e82daf494ea5e5a2ef0746a82946.jkddzztszm.acm-validations.aws.
+cdn.registry:
+  type: CNAME
+  value: d1be1w964nk82h.cloudfront.net.
 # Sandbox OCI redirector service. (@ameukam)
 registry-sandbox:
   - type: A
