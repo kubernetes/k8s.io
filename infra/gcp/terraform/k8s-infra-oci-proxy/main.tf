@@ -35,4 +35,5 @@ module "oci-proxy" {
   // Manually created. Monitoring channels can't be created with Terraform.
   // See: https://github.com/hashicorp/terraform-provider-google/issues/1134
   notification_channel_id = "3237876589275698022"
+  global_aws_base_url     = "https://cdn.registry.k8s.io"
 }
