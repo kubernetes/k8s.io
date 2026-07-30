@@ -56,3 +56,4 @@ spec:
   dnsNames:
   - '*.k8s.io'
   - 'monitoring.prow.k8s.io'
+  - 'mimir.prow.k8s.io'
