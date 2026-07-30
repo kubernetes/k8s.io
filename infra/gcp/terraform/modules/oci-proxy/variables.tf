@@ -38,3 +38,8 @@ variable "notification_channel_id" {
 variable "service_account_name" {
   type = string
 }
+
+variable "global_aws_base_url" {
+  type    = string
+  default = ""
+}

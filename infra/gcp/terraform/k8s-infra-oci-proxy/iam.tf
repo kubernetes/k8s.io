@@ -24,13 +24,13 @@ module "iam" {
 
   bindings = {
     "roles/storage.objectAdmin" = [
-      "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/infra-tools"
+      "serviceAccount:infra-tools-sa@k8s-staging-images.iam.gserviceaccount.com"
     ],
     "roles/run.admin" = [
-      "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/infra-tools"
+      "serviceAccount:infra-tools-sa@k8s-staging-images.iam.gserviceaccount.com"
     ],
     "roles/viewer" = [
-      "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/infra-tools"
+      "serviceAccount:infra-tools-sa@k8s-staging-images.iam.gserviceaccount.com"
     ]
   }
 }
