@@ -26,6 +26,9 @@ mimir:
   structuredConfig:
     limits:
       max_global_series_per_user: 500000
+      max_label_names_per_series: 50
+      ingestion_rate: 100000
+      ingestion_burst_size: 2000000
     ingest_storage:
       enabled: false
       kafka:
