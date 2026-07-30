@@ -25,7 +25,7 @@ gateway:
 mimir:
   structuredConfig:
     limits:
-      max_global_series_per_user: 500000
+      max_global_series_per_user: 1000000
       max_label_names_per_series: 50
       ingestion_rate: 100000
       ingestion_burst_size: 2000000
@@ -102,7 +102,7 @@ ingester:
   persistentVolume:
     size: 50Gi
     storageClass: hyperdisk-balanced
-  replicas: 3
+  replicas: 6
   resources:
     limits:
       memory: 8Gi
