@@ -102,7 +102,7 @@ ingester:
   persistentVolume:
     size: 50Gi
     storageClass: hyperdisk-balanced
-  replicas: 3
+  replicas: 6
   resources:
     limits:
       memory: 8Gi

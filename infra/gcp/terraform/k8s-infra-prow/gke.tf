@@ -114,7 +114,7 @@ module "utility_cluster" {
       machine_type       = "c3-standard-4"
       node_locations     = "us-central1-a,us-central1-b"
       min_count          = 1
-      max_count          = 6
+      max_count          = 10
       disk_size_gb       = 100
       disk_type          = "pd-ssd"
       image_type         = "COS_CONTAINERD"
