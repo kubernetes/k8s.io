@@ -111,7 +111,7 @@ module "utility_cluster" {
   node_pools = [
     {
       name               = "prod-v1"
-      machine_type       = "c3-standard-4"
+      machine_type       = "c3-standard-8"
       node_locations     = "us-central1-a,us-central1-b"
       min_count          = 1
       max_count          = 10
