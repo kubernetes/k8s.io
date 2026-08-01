@@ -17,3 +17,7 @@ limitations under the License.
 output "bucket_arn" {
   value = aws_s3_bucket.registry-k8s-io.arn
 }
+
+output "bucket_regional_domain_name" {
+  value = aws_s3_bucket.registry-k8s-io.bucket_regional_domain_name
+}
