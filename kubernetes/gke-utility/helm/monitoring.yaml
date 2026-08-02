@@ -2,7 +2,10 @@ grafana:
   enabled: true
   defaultDashboardsEnabled: false
   deploymentStrategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
   service:
     type: ClusterIP
   sidecar:
