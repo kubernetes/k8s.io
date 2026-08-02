@@ -18,8 +18,6 @@ spec:
   template:
     metadata:
       name: 'monitoring-{{ .name }}'
-      annotations:
-        argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
     spec:
       destination:
         namespace: monitoring
@@ -39,12 +37,32 @@ spec:
         - path: kubernetes/{{ .name }}/monitoring/
           repoURL: https://github.com/kubernetes/k8s.io
           targetRevision: main
+      ignoreDifferences:
+        - group: ""
+          kind: Secret
+          name: monitoring-grafana
+          namespace: monitoring
+          jsonPointers:
+            - /data/admin-password
+        - group: apps
+          kind: Deployment
+          name: monitoring-grafana
+          namespace: monitoring
+          jqPathExpressions:
+            - '.spec.template.metadata.annotations["checksum/secret"]'
+        - group: external-secrets.io
+          kind: ExternalSecret
+          name: mimir-credentials
+          namespace: monitoring
+          jsonPointers:
+            - /metadata/finalizers
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+          - RespectIgnoreDifferences=true
           - ServerSideApply=true
         managedNamespaceMetadata:
           labels:

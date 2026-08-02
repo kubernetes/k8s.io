@@ -5,7 +5,9 @@ metadata:
   namespace: monitoring
 spec:
   parentRefs:
-    - name: istio-ingressgateway
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: istio-ingressgateway
       namespace: istio-system
       sectionName: https
   hostnames:
@@ -16,5 +18,8 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: monitoring-grafana
+        - group: ""
+          kind: Service
+          name: monitoring-grafana
           port: 80
+          weight: 1
