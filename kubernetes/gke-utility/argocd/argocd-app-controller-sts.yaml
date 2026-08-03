@@ -21,6 +21,13 @@ spec:
             - name: azure-token
               mountPath: /var/run/secrets/azure-token/serviceaccount
               readOnly: true
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 500m
+            limits:
+              memory: 4Gi
+              cpu: 1000m
       volumes:
         # AWS IAM token needed to assume role to access the EKS clusters.
         - name: aws-iam-token

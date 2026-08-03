@@ -4,3 +4,4 @@ metadata:
   name: argocd-cmd-params-cm
 data:
   server.insecure: "true" # Safe as we are using Istio Mesh
+  controller.diff.server.side: "true"
