@@ -32,7 +32,7 @@ spec:
       terminationGracePeriodSeconds: 180
       containers:
       - name: needs-rebase
-        image: us-docker.pkg.dev/k8s-infra-prow/images/needs-rebase:v20260714-0633879af
+        image: us-docker.pkg.dev/k8s-infra-prow/images/needs-rebase:v20260729-7f8580d8d
         imagePullPolicy: Always
         args:
         - --dry-run=false
