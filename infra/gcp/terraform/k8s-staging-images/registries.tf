@@ -132,8 +132,6 @@ locals {
       kind: ServiceAccount
       metadata:
         name: ${name}
-        annotations:
-          iam.gke.io/gcp-service-account: ${google_service_account.build_sa[name].email}
     YAML
   ])
 }
