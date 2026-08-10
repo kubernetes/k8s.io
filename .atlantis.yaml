@@ -42,3 +42,15 @@ projects:
     when_modified:
       - "**/*"
       - "../cdn/**/*"
+  - dir: infra/gcp/terraform/k8s-infra-oci-proxy
+    branch: /main/
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../modules/oci-proxy/**/*"
+  - dir: infra/gcp/terraform/k8s-infra-oci-proxy-prod
+    branch: /main/
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../modules/oci-proxy/**/*"
