@@ -1,5 +1,4 @@
 groups:
-
   #
   # Mailing lists
   #
@@ -19,25 +18,23 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
     owners:
-    - amerai@google.com
-    - antonio.ojea.garcia@gmail.com
-    - bentheelder@google.com
-    - bpratt@redhat.com
-    - mcqueenorama@gmail.com
-    - patrick.ohly@intel.com
+      - amerai@google.com
+      - antonio.ojea.garcia@gmail.com
+      - bentheelder@google.com
+      - bpratt@redhat.com
+      - patrick.ohly@intel.com
 
   - email-id: sig-testing@kubernetes.io
     name: sig-testing
     description: |-
       SIG testing general discussion group
     owners:
-    - killen.bob@gmail.com # temporary to finish configuration
-    - amerai@google.com
-    - antonio.ojea.garcia@gmail.com
-    - bentheelder@google.com
-    - bpratt@redhat.com
-    - mcqueenorama@gmail.com
-    - patrick.ohly@intel.com
+      - killen.bob@gmail.com # temporary to finish configuration
+      - amerai@google.com
+      - antonio.ojea.garcia@gmail.com
+      - bentheelder@google.com
+      - bpratt@redhat.com
+      - patrick.ohly@intel.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -69,9 +66,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - aaleman@redhat.com
-    - jgrafton@google.com
-    - skuznets@redhat.com
+      - aaleman@redhat.com
+      - jgrafton@google.com
+      - skuznets@redhat.com
 
   - email-id: k8s-infra-staging-e2e-test-images@kubernetes.io
     name: k8s-infra-staging-e2e-test-images
@@ -80,12 +77,12 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - cblecker@gmail.com
-    - davanum@gmail.com
-    - justinsb@google.com
-    - manjunath.cse@gmail.com
-    - thockin@google.com
-    - spiffxp@gmail.com
+      - cblecker@gmail.com
+      - davanum@gmail.com
+      - justinsb@google.com
+      - manjunath.cse@gmail.com
+      - thockin@google.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-k8s-gsm-tools@kubernetes.io
     name: k8s-infra-staging-k8s-gsm-tools
@@ -94,9 +91,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - bentheelder@google.com
-    - shanefu@google.com
-    - spiffxp@gmail.com
+      - bentheelder@google.com
+      - shanefu@google.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-kind@kubernetes.io
     name: k8s-infra-staging-kind
@@ -105,10 +102,10 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - antonio.ojea.garcia@gmail.com
-    - bentheelder@google.com
-    - james@munnelly.eu
-    - sean.mcginnis@gmail.com
+      - antonio.ojea.garcia@gmail.com
+      - bentheelder@google.com
+      - james@munnelly.eu
+      - sean.mcginnis@gmail.com
 
   - email-id: k8s-infra-staging-kubetest2@kubernetes.io
     name: k8s-infra-staging-kubetest2
@@ -117,8 +114,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - bentheelder@google.com
-    - spiffxp@gmail.com
+      - bentheelder@google.com
+      - spiffxp@gmail.com
 
   - email-id: k8s-infra-staging-test-infra@kubernetes.io
     name: k8s-infra-staging-test-infra
@@ -127,8 +124,8 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - k8s-infra-prow-oncall@kubernetes.io
-    - cglombek@redhat.com
+      - k8s-infra-prow-oncall@kubernetes.io
+      - cglombek@redhat.com
 
   #
   # sig-testing k8s-infra gcs write access
@@ -148,9 +145,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - antonio.ojea.garcia@gmail.com
-    - bentheelder@google.com
-    - sean.mcginnis@gmail.com
+      - antonio.ojea.garcia@gmail.com
+      - bentheelder@google.com
+      - sean.mcginnis@gmail.com
 
   #
   # sig-testing k8s-infra read-only access
@@ -169,26 +166,26 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    # other groups
-    - k8s-infra-sig-scalability-oncall@kubernetes.io
-    - k8s-infra-release-viewers@kubernetes.io
-    # members
-    - alarcj137@gmail.com
-    - antonio.ojea.garcia@gmail.com
-    - eddiezane@gmail.com
-    - gmccloskey@google.com
-    - helenfengzhi@gmail.com
-    - koray@kubermatic.com
-    - liggitt@google.com
-    - mrfaizal@google.com
-    - ricardo.katz@gmail.com
-    - rob.kielty@gmail.com
-    - thejoycekung@gmail.com
-    - neolit123@gmail.com
-    - philjohnson96@gmail.com
-    - elieser.pereiraa@gmail.com
-    - davanum@gmail.com
-    - sig-testing-leads@kubernetes.io
+      # other groups
+      - k8s-infra-sig-scalability-oncall@kubernetes.io
+      - k8s-infra-release-viewers@kubernetes.io
+      # members
+      - alarcj137@gmail.com
+      - antonio.ojea.garcia@gmail.com
+      - eddiezane@gmail.com
+      - gmccloskey@google.com
+      - helenfengzhi@gmail.com
+      - koray@kubermatic.com
+      - liggitt@google.com
+      - mrfaizal@google.com
+      - ricardo.katz@gmail.com
+      - rob.kielty@gmail.com
+      - thejoycekung@gmail.com
+      - neolit123@gmail.com
+      - philjohnson96@gmail.com
+      - elieser.pereiraa@gmail.com
+      - davanum@gmail.com
+      - sig-testing-leads@kubernetes.io
 
   #
   # sig-testing k8s-infra owners
@@ -205,7 +202,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-    - sig-testing-leads@kubernetes.io
+      - sig-testing-leads@kubernetes.io
 
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
@@ -220,7 +217,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
-    - k8s-infra-prow-oncall@kubernetes.io
+      - k8s-infra-prow-oncall@kubernetes.io
 
   - email-id: k8s-infra-rbac-kettle@kubernetes.io
     name: k8s-infra-rbac-kettle
@@ -230,27 +227,25 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
-    - k8s-infra-prow-oncall@kubernetes.io
-    - elieser.pereiraa@gmail.com
+      - k8s-infra-prow-oncall@kubernetes.io
+      - elieser.pereiraa@gmail.com
 
   - email-id: k8s-infra-rbac-prow@kubernetes.io
     name: k8s-infra-rbac-prow
-    description:
-      Grants access to the `namespace-user` role in the `prow` namespace on the `aaa` cluster
+    description: Grants access to the `namespace-user` role in the `prow` namespace on the `aaa` cluster
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
-    - eddiezane@gmail.com
-    - k8s-infra-prow-oncall@kubernetes.io
+      - eddiezane@gmail.com
+      - k8s-infra-prow-oncall@kubernetes.io
 
   - email-id: k8s-infra-testgrid@kubernetes.io
     name: k8s-infra-testgrid
-    description:
-      Grants access to the new testgrid UI
+    description: Grants access to the new testgrid UI
     settings:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW"
     members:
-    - dec.soham@gmail.com
-    - sig-testing-leads@kubernetes.io
+      - dec.soham@gmail.com
+      - sig-testing-leads@kubernetes.io
