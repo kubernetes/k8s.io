@@ -214,6 +214,9 @@ class RedirTest(HTTPTestCase):
                 base + 'contact/$groupname',
                 'https://github.com/kubernetes/community/tree/master/$groupname#contact',
                 groupname=rand_num())
+            self.assert_temp_redirect(
+                base + 'sig-testing-notes',
+                'https://docs.google.com/document/d/1z8MQpr_jTwhmjLMUaqQyBk1EYG_Y_3D4y4YdMJ7V1Kk/edit')
 
     def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
