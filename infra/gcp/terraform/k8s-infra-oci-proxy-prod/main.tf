@@ -22,18 +22,18 @@ locals {
 module "oci-proxy" {
   source = "../modules/oci-proxy"
   // ***** production vs staging variables inputs *****
-  //
-  // explicitly using default digest here vs staging which overrides it
-  digest               = null
+  // v0.7.0
+  digest               = "sha256:6a10a62c9ec6e60d4de397af473c166b195cdc77a03b8ada66650f3310bf0554"
   domain               = "registry.k8s.io"
   project_id           = local.project_id
   service_account_name = "oci-proxy-prod"
   // we increase this in staging, but not in production
   // we already get a lot of info from built-in cloud run logs
-  verbosity = "0"
+  verbosity = "1"
   // Manually created. Monitoring channels can't be created with Terraform.
   // See: https://github.com/hashicorp/terraform-provider-google/issues/1134
   notification_channel_id = "15334306215710275143"
+  global_aws_base_url     = "https://cdn.registry.k8s.io"
 }
 
 // we only sink logs to bigquery in production
