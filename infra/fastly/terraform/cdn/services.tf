@@ -15,6 +15,10 @@ limitations under the License.
 */
 
 
+locals {
+  origin_host = var.cloud == "aws" ? "s3.dualstack.${var.aws_region}.amazonaws.com" : "storage.googleapis.com"
+}
+
 resource "fastly_service_vcl" "this" {
   name     = var.domain
   activate = true
@@ -28,14 +32,14 @@ resource "fastly_service_vcl" "this" {
     content {
       name              = backend.value.release_bucket ? "k8s-release" : backend.value.name
       auto_loadbalance  = false
-      address           = "storage.googleapis.com"
+      address           = local.origin_host
       port              = 443
       use_ssl           = true
       prefer_ipv6       = true
-      ssl_cert_hostname = "storage.googleapis.com"
-      ssl_sni_hostname  = "storage.googleapis.com"
+      ssl_cert_hostname = local.origin_host
+      ssl_sni_hostname  = local.origin_host
 
-      override_host = "${backend.value.name}.storage.googleapis.com"
+      override_host = "${backend.value.name}.${local.origin_host}"
 
       /*
       Matching the region of the origin.
@@ -100,19 +104,26 @@ resource "fastly_service_vcl" "this" {
   }
 
   snippet {
-    name = "Authenticate to GCS requests"
+    name = var.cloud == "aws" ? "Authenticate to S3 requests" : "Authenticate to GCS requests"
     type = "init"
-    content = templatefile("${path.module}/vcl/gcs-auth-multi.vcl", {
+    content = var.cloud == "aws" ? templatefile("${path.module}/vcl/s3-auth-multi.vcl", {
       bucket_configs = var.bucket_configs
-      access_key     = var.gcs_access_key
-      secret_key     = var.gcs_secret_key
+      access_key     = var.access_key
+      secret_key     = var.secret_key
+      region         = var.aws_region
+      }) : templatefile("${path.module}/vcl/gcs-auth-multi.vcl", {
+      bucket_configs = var.bucket_configs
+      access_key     = var.access_key
+      secret_key     = var.secret_key
     })
   }
 
   vcl {
     name = "Main"
     content = templatefile("${path.module}/vcl/binaries.vcl", {
-      bucket_configs = var.bucket_configs
+      bucket_configs  = var.bucket_configs
+      cache_ttl       = var.cache_ttl
+      auth_sub_prefix = var.cloud == "aws" ? "set_aws_auth_header" : "set_google_auth_header"
     })
     main = true
   }

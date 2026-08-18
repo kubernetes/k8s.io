@@ -17,20 +17,19 @@ limitations under the License.
 
 module "cdn" {
   source = "../cdn"
-  domain = "dl.k8s.dev"
+  domain = "cdn.registry.k8s.dev"
   datadog_config = {
     token        = data.google_secret_manager_secret_version_access.datadog_api_key.secret_data,
-    service_name = "dl.k8s.dev",
+    service_name = "cdn.registry.k8s.dev",
     env          = "staging",
   }
-  access_key = data.google_secret_manager_secret_version_access.gcs_reader_access_key.secret_data
-  secret_key = data.google_secret_manager_secret_version_access.gcs_reader_secret_key.secret_data
-
+  cloud     = "aws"
+  cache_ttl = 2592000 # 30 days
   bucket_configs = [
     {
-      name = "5d7373bbdcb8270361b96548387bf2a9ad0d48758c35", release_bucket = true
+      name   = "prod-registry-k8s-io-us-east-2",
+      region = "us-east-2",
+      public = true
     },
-    { name = "k8s-release-dev", },
-    { name = "k8s-staging-kops", },
   ]
 }

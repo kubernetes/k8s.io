@@ -23,8 +23,8 @@ module "cdn" {
     service_name = "artifacts.k8s.io",
     env          = "prod",
   }
-  gcs_access_key = data.google_secret_manager_secret_version_access.gcs_reader_access_key.secret_data
-  gcs_secret_key = data.google_secret_manager_secret_version_access.gcs_reader_secret_key.secret_data
+  access_key = data.google_secret_manager_secret_version_access.gcs_reader_access_key.secret_data
+  secret_key = data.google_secret_manager_secret_version_access.gcs_reader_secret_key.secret_data
 
   bucket_configs = [
     { name = "k8s-artifacts-prod", },
