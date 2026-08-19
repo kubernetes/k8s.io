@@ -1,11 +1,13 @@
 - name: charts/dra-driver-nvidia-gpu
   dmap:
+    "sha256:47e43e3fbcaf525accef5b5ad14d87e80e19ef1549839495dcb0eabd06ff3bbe": ["0.5.0"]
     "sha256:7a00373fdef1025f27ebb1d353719446bbbe6ec4697e9a503c5ffd7e4f1525dd": ["0.4.1"]
     "sha256:f744fdb0900b5bda0ff50867bd17d0cdea986e4186fc6fa2097fce02363c853e": ["0.4.1-rc.1"]
     "sha256:ef9036572eaacd05463583df46e314c8582d1445c2f313e94865647fc156bb10": ["0.4.0"]
     "sha256:b47f9ce28390f5571b3048536665d12a5bf60d2001a104508fa54b5fe3b3c1df": ["0.4.0-rc.1"]
 - name: dra-driver-nvidia-gpu
   dmap:
+    "sha256:e1f104e64383ee693e982a5e6b7cf0b750023aaa5cc9b7dcc37c8e0549232933": ["v0.5.0"]
     "sha256:eefe67396dedea4df74f68a94d5883f33204888b83979babd42b91501a2de1d8": ["v0.4.1"]
     "sha256:dd6b2799a97422ce4904a312c037eceb07745eaf85d838cfc38415aa6b4c03d1": ["v0.4.1-rc.1"]
     "sha256:dd17d49170f62071d13ef5de9b8f0ff26c66793f9d802c34532c0cb4f8a1d1f3": ["v0.4.0"]
