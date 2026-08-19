@@ -8,7 +8,7 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-2:468814281478:certificate/a7969b50-8477-47eb-a623-8ef90688d16f"
   labels:
-    app: grafana
+    app.kubernetes.io/name: grafana
 spec:
   type: LoadBalancer
   ports:
@@ -21,4 +21,4 @@ spec:
       protocol: TCP
       targetPort: 3000
   selector:
-    app: grafana
+    app.kubernetes.io/name: grafana

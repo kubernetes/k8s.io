@@ -10,6 +10,7 @@ resources:
   - kops-discovery.yaml
   - kube-system.yaml
   - kyverno.yaml
+  - monitoring.yaml
   - prow.yaml
   - istio.yaml
   - oauth2-proxy.yaml
