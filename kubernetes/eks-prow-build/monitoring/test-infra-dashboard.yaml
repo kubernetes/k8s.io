@@ -2,8 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: test-infra-dashboard
-labels:
-   grafana_dashboard: "1"
+  labels:
+     grafana_dashboard: "1"
 data:
   boskos-http.json: |
     {
