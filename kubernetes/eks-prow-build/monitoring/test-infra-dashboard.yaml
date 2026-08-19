@@ -2,7 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: test-infra-dashboard
-  namespace: monitoring
+labels:
+   grafana_dashboard: "1"
 data:
   boskos-http.json: |
     {
@@ -23,7 +24,7 @@ data:
              "bars": false,
              "dashLength": 10,
              "dashes": false,
-             "datasource": "Prometheus Main",
+             "datasource": "${datasource}",
              "description": "histogram_quantile(phi, sum(rate(boskos_http_request_duration_seconds_bucket[5m])) by (le))",
              "fill": 1,
              "gridPos": {
@@ -124,7 +125,7 @@ data:
              "bars": false,
              "dashLength": 10,
              "dashes": false,
-             "datasource": "Prometheus Main",
+             "datasource": "${datasource}",
              "description": "sum(rate(boskos_http_request_duration_seconds_count{instance=~\"${instance}\"}[5m])) by (path, status)",
              "fill": 1,
              "gridPos": {
@@ -215,9 +216,21 @@ data:
        "templating": {
           "list": [
              {
+                "current": { },
+                "hide": 0,
+                "includeAll": false,
+                "label": "Data Source",
+                "name": "datasource",
+                "options": [ ],
+                "query": "prometheus",
+                "refresh": 1,
+                "regex": "",
+                "type": "datasource"
+             },
+             {
                 "allValue": ".*",
                 "current": { },
-                "datasource": "Prometheus Main",
+                "datasource": "${datasource}",
                 "hide": 0,
                 "includeAll": false,
                 "label": "instance",
@@ -237,7 +250,7 @@ data:
              {
                 "allValue": ".*",
                 "current": { },
-                "datasource": "Prometheus Main",
+                "datasource": "${datasource}",
                 "hide": 0,
                 "includeAll": true,
                 "label": "path",
@@ -257,7 +270,7 @@ data:
              {
                 "allValue": ".*",
                 "current": { },
-                "datasource": "Prometheus Main",
+                "datasource": "${datasource}",
                 "hide": 0,
                 "includeAll": true,
                 "label": "status",
@@ -337,7 +350,7 @@ data:
              "bars": false,
              "dashLength": 10,
              "dashes": false,
-             "datasource": "Prometheus Main",
+             "datasource": "${datasource}",
              "description": "The number of AWS accounts in each state.",
              "fill": 3,
              "gridPos": {
@@ -424,7 +437,20 @@ data:
        "style": "dark",
        "tags": [ ],
        "templating": {
-          "list": [ ]
+          "list": [
+             {
+                "current": { },
+                "hide": 0,
+                "includeAll": false,
+                "label": "Data Source",
+                "name": "datasource",
+                "options": [ ],
+                "query": "prometheus",
+                "refresh": 1,
+                "regex": "",
+                "type": "datasource"
+             }
+          ]
        },
        "time": {
           "from": "now-1d",
@@ -479,7 +505,7 @@ data:
              "bars": false,
              "dashLength": 10,
              "dashes": false,
-             "datasource": "Prometheus Main",
+             "datasource": "${datasource}",
              "description": "sum by(job) (up)",
              "fill": 1,
              "gridPos": {
@@ -566,7 +592,20 @@ data:
        "style": "dark",
        "tags": [ ],
        "templating": {
-          "list": [ ]
+          "list": [
+             {
+                "current": { },
+                "hide": 0,
+                "includeAll": false,
+                "label": "Data Source",
+                "name": "datasource",
+                "options": [ ],
+                "query": "prometheus",
+                "refresh": 1,
+                "regex": "",
+                "type": "datasource"
+             }
+          ]
        },
        "time": {
           "from": "now-1d",
