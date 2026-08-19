@@ -12,6 +12,15 @@ data:
       ignoreDifferences: |
         jqPathExpressions:
         - '.webhooks[]?.clientConfig.caBundle'
+        # Ignore AKS injections.
+        - '.webhooks[]?.namespaceSelector.matchExpressions[] | select(.key == "control-plane")'
+        - '.webhooks[]?.namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")'
+    admissionregistration.k8s.io/ValidatingWebhookConfiguration:
+      ignoreDifferences: |
+        jqPathExpressions:
+        # Ignore AKS injections.
+        - '.webhooks[]?.namespaceSelector.matchExpressions[] | select(.key == "control-plane")'
+        - '.webhooks[]?.namespaceSelector.matchExpressions[] | select(.key == "kubernetes.azure.com/managedby")'
   kustomize.buildOptions: --load-restrictor LoadRestrictionsNone --enable-alpha-plugins
   statusbadge.enabled: "true"
   dex.config: |

@@ -3,9 +3,15 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v3.4.6
+  - github.com/argoproj/argo-cd/manifests/ha/cluster-install?ref=v3.5.1
   - extras.yaml
   - clusters.yaml
+
+# pin dex to a newer patch version till argocd picks up the new image
+# https://github.com/openshift-online/gcp-hcp/pull/64
+images:
+  - name: ghcr.io/dexidp/dex
+    newTag: v2.45.1
 
 patches:
   - path: argocd-cmd-params-cm.yaml
