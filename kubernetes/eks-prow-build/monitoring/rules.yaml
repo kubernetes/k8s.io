@@ -5,7 +5,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: prow-rules
-  namespace: monitoring
   labels:
     prometheus: main
 spec:
@@ -177,3 +176,28 @@ spec:
     - record: prow:node:memory_capacity_bytes
       expr: |
         sum by (node) (kube_node_status_capacity{resource="memory",unit="byte"})
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: node-status-rules
+spec:
+  groups:
+  - name: node:status
+    rules:
+    - alert: NodeStatusNotReady
+      # This expression might need some refinements in case we scale up
+      # kube-state-metrics to more than 1 replica.
+      expr: kube_node_status_condition{condition="Ready",status!="true"} == 1
+      # Only fire up alert if the alert condition has been firing to more than
+      # 5 minutes. This is to avoid false positives/flakes while a new node
+      # is joining the cluster.
+      for: 5m
+      # These annotations are used for building the Slack message.
+      annotations:
+        summary: "NodeStatusNotReady"
+        description: "Node {{ $labels.node }} is not ready"
+      # Additional labels used as metadata.
+      labels:
+        severity: critical
+        resource: "{{ $labels.node }}"

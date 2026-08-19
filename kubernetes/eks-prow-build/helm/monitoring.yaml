@@ -1,0 +1,71 @@
+grafana:
+  defaultDashboardsEnabled: false
+  admin:
+    existingSecret: grafana-credentials
+    userKey: username
+    passwordKey: password
+  enabled: true
+  sidecar:
+    dashboards:
+      enabled: true
+  persistence:
+    enabled: true
+    storageClassName: gp2
+    size: 30Gi
+  grafana.ini:
+    analytics:
+      reporting_enabled: false
+      check_for_updates: true
+    server:
+      root_url: https://monitoring-eks.prow.k8s.io
+    auth.anonymous:
+      enabled: true
+      org_role: Viewer
+
+kube-state-metrics:
+  metricLabelsAllowlist:
+   - pods=[*]
+   - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+
+nodeExporter:
+  enabled: false
+
+prometheus:
+  prometheusSpec:
+    retention: 7d
+    resources:
+      requests:
+        cpu: 4
+        memory: 25Gi
+      limits:
+        cpu: 4
+        memory: 25Gi
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp2
+          resources:
+            requests:
+              storage: 300Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    scrapeConfigSelectorNilUsesHelmValues: false
+    externalLabels:
+      cluster: eks-prow-build
+      cloud: aws
+    remoteWrite:
+      - url: https://mimir.prow.k8s.io/api/v1/push
+        basicAuth:
+          username:
+            name: mimir-credentials
+            key: username
+          password:
+            name: mimir-credentials
+            key: password
+        headers:
+          X-Scope-OrgID: prow

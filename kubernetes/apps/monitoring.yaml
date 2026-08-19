@@ -15,6 +15,7 @@ spec:
               values:
                 - gke-prow-build
                 - gke-utility
+                - eks-prow-build
   template:
     metadata:
       name: 'monitoring-{{ .name }}'
