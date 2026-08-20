@@ -40,6 +40,24 @@ _acme-challenge.artifacts:
 _acme-challenge.dl:
   type: CNAME
   value: zsmu1n0ec6lb2wtmt8.fastly-validations.com.
+_acme-challenge.cdn.registry:
+  type: CNAME
+  value: 7tkq2yq9y941j1ly4v.fastly-validations.com.
+
+
+cdn.registry:
+  - type: A
+    values:
+      - 151.101.1.91
+      - 151.101.65.91
+      - 151.101.129.91
+      - 151.101.193.91
+  - type: AAAA
+    values:
+      - 2a04:4e42::347
+      - 2a04:4e42:200::347
+      - 2a04:4e42:400::347
+      - 2a04:4e42:600::347
 
 # Prove that we own these github orgs. sig-contributor-experience
 _gh-kubernetes-e:

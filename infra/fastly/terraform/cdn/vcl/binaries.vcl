@@ -12,10 +12,25 @@ sub vcl_recv {
     set req.max_stale_while_revalidate = 0s;
   }
 
+%{~ if contains([for bucket in bucket_configs : bucket.name], "prod-registry-k8s-io-us-east-2") ~}
+  # Redirect the root path to the registry.k8s.io project page
+  if (req.url.path == "/") {
+    error 618;
+  }
+  # Allow blob paths, 404 everything else.
+  # Some clients percent-encode the digest separator.
+  if (regsub(req.url.path, {"%3[Aa]"}, ":") !~ "^/containers/images/sha256:[a-f0-9]{64}$") {
+    error 619;
+  }
+  # Capture rid, then strip the query string so it doesn't fragment the cache
+  set req.http.X-Request-Id-Param = subfield(req.url.qs, "rid", "&");
+  set req.url = req.url.path;
+%{ else ~}
   # Serve index.html for the root path
   if (req.url.path == "/") {
     set req.url = "/index.html";
   }
+%{ endif ~}
 
 %{~ if length([for bucket in bucket_configs : bucket.name if bucket.release_bucket]) > 0 ~}
   # Rewrite /vX.Y.Z* paths to /release/vX.Y.Z* for the origin
@@ -115,7 +130,7 @@ sub vcl_fetch {
 
   # Set the final headers sent to the edge PoPs and Clients
   set beresp.ttl = 24h;
-  set beresp.http.Cache-Control = "public, max-age=86400";
+  set beresp.http.Cache-Control = "public, max-age=${cache_ttl}";
 
   # We have various text files with incorrect Content-Type headers set because GCS
   # doesn't know how to handle them
@@ -150,6 +165,12 @@ sub vcl_deliver {
   unset resp.http.x-amz-meta-x-goog-reserved-source-generation;
   unset resp.http.x-amz-meta-surrogate-key;
   unset resp.http.x-amz-meta-surrogate-control;
+  unset resp.http.x-amz-id-2;
+  unset resp.http.x-amz-request-id;
+  unset resp.http.x-amz-replication-status;
+  unset resp.http.x-amz-server-side-encryption;
+  unset resp.http.x-amz-version-id;
+  unset resp.http.Etag;
 
   # Unset Google headers
   unset resp.http.x-goog-custom-time;
@@ -163,6 +184,14 @@ sub vcl_deliver {
   unset resp.http.x-goog-stored-content-length;
   unset resp.http.x-goog-expiration;
   unset resp.http.x-guploader-uploadid;
+
+%{~ if contains([for bucket in bucket_configs : bucket.name], "prod-registry-k8s-io-us-east-2") ~}
+  # Echo the rid query parameter back as X-Request-Id
+  if (req.http.X-Request-Id-Param ~ "^[A-Za-z0-9._-]{1,64}$") {
+    set resp.http.X-Request-Id = req.http.X-Request-Id-Param;
+  }
+%{ endif ~}
+
   #FASTLY deliver
 
   if (!req.http.Fastly-Debug) {
@@ -182,22 +211,22 @@ sub vcl_miss {
   if(req.backend.is_origin) {
 %{ if length([for bucket in bucket_configs : bucket.name if bucket.release_bucket]) > 0 ~}
     if (req.http.X-Backend-Name == "k8s_release") {
-      call set_google_auth_header_k8s_release;
+      call ${auth_sub_prefix}_k8s_release;
     }
 %{ endif ~}
 %{ if contains([for bucket in bucket_configs : bucket.name], "k8s-staging-kops") ~}
     if (req.http.X-Backend-Name == "k8s_staging_kops") {
-      call set_google_auth_header_k8s_staging_kops;
+      call ${auth_sub_prefix}_k8s_staging_kops;
     }
 %{ endif ~}
 %{ if contains([for bucket in bucket_configs : bucket.name], "k8s-release-dev") ~}
     if (req.http.X-Backend-Name == "k8s_release_dev") {
-      call set_google_auth_header_k8s_release_dev;
+      call ${auth_sub_prefix}_k8s_release_dev;
     }
 %{ endif ~}
 %{ if contains([for bucket in bucket_configs : bucket.name], "k8s-artifacts-prod") ~}
     if (req.http.X-Backend-Name == "k8s_artifacts_prod") {
-      call set_google_auth_header_k8s_artifacts_prod;
+      call ${auth_sub_prefix}_k8s_artifacts_prod;
     }
 %{ endif ~}
   }
@@ -207,6 +236,27 @@ sub vcl_miss {
 
 sub vcl_error {
   #FASTLY error
+
+%{~ if contains([for bucket in bucket_configs : bucket.name], "prod-registry-k8s-io-us-east-2") ~}
+  if (obj.status == 618) {
+    set obj.status = 301;
+    set obj.response = "Moved Permanently";
+    set obj.http.Location = "https://github.com/kubernetes/registry.k8s.io";
+    set obj.http.Content-Type = "text/plain; charset=UTF-8";
+    synthetic {"Redirecting to https://github.com/kubernetes/registry.k8s.io"};
+    return (deliver);
+  }
+
+  if (obj.status == 619) {
+    set obj.status = 404;
+    set obj.response = "Not Found";
+    set obj.http.Content-Type = "text/plain";
+    set obj.http.Cache-Control = "max-age=300";
+    synthetic {"Not Found
+"};
+    return (deliver);
+  }
+%{ endif ~}
 
   /* handle 503s */
   if (obj.status >= 500 && obj.status < 600) {
@@ -242,22 +292,22 @@ sub vcl_pass {
   if(req.backend.is_origin) {
 %{ if length([for bucket in bucket_configs : bucket.name if bucket.release_bucket]) > 0 ~}
     if (req.http.X-Backend-Name == "k8s_release") {
-      call set_google_auth_header_k8s_release;
+      call ${auth_sub_prefix}_k8s_release;
     }
 %{ endif ~}
 %{ if contains([for bucket in bucket_configs : bucket.name], "k8s-staging-kops") ~}
     if (req.http.X-Backend-Name == "k8s_staging_kops") {
-      call set_google_auth_header_k8s_staging_kops;
+      call ${auth_sub_prefix}_k8s_staging_kops;
     }
 %{ endif ~}
 %{ if contains([for bucket in bucket_configs : bucket.name], "k8s-release-dev") ~}
     if (req.http.X-Backend-Name == "k8s_release_dev") {
-      call set_google_auth_header_k8s_release_dev;
+      call ${auth_sub_prefix}_k8s_release_dev;
     }
 %{ endif ~}
 %{ if contains([for bucket in bucket_configs : bucket.name], "k8s-artifacts-prod") ~}
     if (req.http.X-Backend-Name == "k8s_artifacts_prod") {
-      call set_google_auth_header_k8s_artifacts_prod;
+      call ${auth_sub_prefix}_k8s_artifacts_prod;
     }
 %{ endif ~}
   }

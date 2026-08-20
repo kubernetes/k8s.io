@@ -14,19 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+data "google_secret_manager_secret_version_access" "datadog_api_key" {
+  secret  = "datadog_fastly_logs_streaming"
+  project = "k8s-infra-releases-prod"
+}
 
-module "cdn" {
-  source = "../cdn"
-  domain = "artifacts.k8s.dev"
-  datadog_config = {
-    token        = data.google_secret_manager_secret_version_access.datadog_api_key.secret_data,
-    service_name = "artifacts.k8s.dev",
-    env          = "staging",
-  }
-  access_key = data.google_secret_manager_secret_version_access.gcs_reader_access_key.secret_data
-  secret_key = data.google_secret_manager_secret_version_access.gcs_reader_secret_key.secret_data
-
-  bucket_configs = [
-    { name = "k8s-artifacts-prod", },
-  ]
+data "google_secret_manager_secret_version_access" "fastly_api_key" {
+  secret  = "fastly-api-key"
+  project = "k8s-infra-prow"
 }

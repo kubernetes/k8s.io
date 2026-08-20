@@ -15,16 +15,39 @@ limitations under the License.
 */
 
 variable "bucket_configs" {
-  description = "List of GCS backend buckets to serve from"
+  description = "List of origin buckets to serve from"
   type = list(object({
     name           = string
     release_bucket = optional(bool, false)
+    public         = optional(bool, false)
   }))
   default = []
 }
 
+variable "cloud" {
+  description = "Cloud hosting the origin buckets"
+  type        = string
+  default     = "gcp"
+  validation {
+    condition     = contains(["gcp", "aws"], var.cloud)
+    error_message = "cloud must be one of: gcp, aws"
+  }
+}
+
+variable "aws_region" {
+  description = "Region of the S3 origin buckets, used when cloud is aws"
+  type        = string
+  default     = "us-east-2"
+}
+
 variable "domain" {
   type = string
+}
+
+variable "cache_ttl" {
+  description = "Default cache TTL for the CDN"
+  type        = number
+  default     = 86400
 }
 
 variable "shield_location" {
@@ -40,10 +63,15 @@ variable "datadog_config" {
   })
 }
 
-variable "gcs_access_key" {
-  type = string
+variable "access_key" {
+  description = "HMAC access key ID used to sign origin requests"
+  type        = string
+  default     = null
 }
 
-variable "gcs_secret_key" {
-  type = string
+variable "secret_key" {
+  description = "HMAC secret key used to sign origin requests"
+  type        = string
+  default     = null
+  sensitive   = true
 }
