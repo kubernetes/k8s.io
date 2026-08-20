@@ -1,7 +1,9 @@
 - name: dra-driver-google-tpu
   dmap:
     "sha256:be92f60075ac5e1672d5af9ecf1a9e8e5de1090e4fd6a79289049fac17b7d026": ["v0.1.0"]
+    "sha256:cb143a7e6753fb0b05719dd57c3e6bdf3a1c1c8cba498ce8313a6a155efe9ddc": ["v0.2.0"]
 
 - name: charts/dra-driver-google-tpu
   dmap:
     "sha256:44bb24443902ee0dba3585b1e058ee19d0d1593d0f94981160f71413d22611c9": ["0.1.0"]
+    "sha256:bf45449a8e52d28b8703b46a1e6a11392d01b9f07b47359cb0695c15fcd5f78d": ["0.2.0"]
