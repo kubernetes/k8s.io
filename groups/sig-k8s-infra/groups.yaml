@@ -295,6 +295,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - cy@borg.dev
+      - ekainugodwin@gmail.com
       - ihor@cncf.io
       - jeefy@cncf.io
       - sig-k8s-infra-leads@kubernetes.io
