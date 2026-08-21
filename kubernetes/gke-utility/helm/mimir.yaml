@@ -57,6 +57,8 @@ mimir:
 metaMonitoring:
   serviceMonitor:
     enabled: true
+  dashboards:
+    enabled: true
 
 rollout_operator:
   enabled: true
