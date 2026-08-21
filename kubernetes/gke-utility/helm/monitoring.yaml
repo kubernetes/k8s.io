@@ -56,7 +56,7 @@ grafana:
     auth.basic:
       enabled: false
     auth:
-      disable_login_form: true
+      disable_login_form: false
 
 alertmanager:
   enabled: false
