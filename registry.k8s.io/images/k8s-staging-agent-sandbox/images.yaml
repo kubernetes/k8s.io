@@ -77,3 +77,7 @@
 - name: python_runtime_sandbox # we don't use this anymore
   dmap:
     "sha256:7c8a124aa02534656f53f9b9f53ef8b4f1d1a1e390f27a8b7873b7e87a368f42": ["v0.1.0-rc.2"]
+- name: sandbox-router-go
+  dmap:
+    "sha256:ba55502a8b95a63f2919365d95d282785a59c8f47301b65e32d1e8aa1fc5f543": ["v1.0.0"]
+
