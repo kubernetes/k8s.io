@@ -2068,3 +2068,21 @@
   dmap:
     "sha256:e687d5938113b73306f0fc77890d70f3b5d86ff1a5ccc25da8ef50738efbaff6": ["1.36.2"]
 
+
+# 1.37.0-beta.1
+- name: channels
+  dmap:
+    "sha256:07f40aee01c7e4676659320631e9271a6e84931ee68671bb6d0a61913aea0492": ["1.37.0-beta.1"]
+- name: discovery-server
+  dmap:
+    "sha256:1b4d7bdb91e4be73b327fbd4acaeb4c216c21a50cf51a4a83999e09685a2fb07": ["1.37.0-beta.1"]
+- name: dns-controller
+  dmap:
+    "sha256:7fee72fe7a33765a3c0f24ca34847b188fdb1ab56233a632eba64b37e3d10c3c": ["1.37.0-beta.1"]
+- name: kops-controller
+  dmap:
+    "sha256:a4166f946d29fd13bd3648294355e4ccf0a93d8fb35ad05e3d126b15ec2d24ca": ["1.37.0-beta.1"]
+- name: kube-apiserver-healthcheck
+  dmap:
+    "sha256:8fc06cc54f73d654784e71fbcdc2d5fe689008024afab24fbf2cc8706d7f7529": ["1.37.0-beta.1"]
+
