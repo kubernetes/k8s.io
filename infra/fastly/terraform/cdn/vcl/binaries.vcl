@@ -6,6 +6,12 @@ sub vcl_recv {
       set req.http.Fastly-Purge-Requires-Auth = "1";
   }
 
+  # Strip client credentials so they never reach the origins; S3 rejects
+  # non-AWS Authorization headers (e.g. registry Bearer tokens) with a 400.
+  # Private buckets are re-signed by the auth subs in vcl_miss/vcl_pass.
+  # cri-o/skopeo/podman pass it along and we need to strip it
+  unset req.http.Authorization;
+
   # Prevent edge from caching stale content served from shield
   # https://developer.fastly.com/learning/concepts/stale/#shielding-considerations
   if (fastly.ff.visits_this_service != 0) {
@@ -22,9 +28,13 @@ sub vcl_recv {
   if (regsub(req.url.path, {"%3[Aa]"}, ":") !~ "^/containers/images/sha256:[a-f0-9]{64}$") {
     error 619;
   }
-  # Capture rid, then strip the query string so it doesn't fragment the cache
-  set req.http.X-Request-Id-Param = subfield(req.url.qs, "rid", "&");
-  set req.url = req.url.path;
+  # Capture rid, then strip the query string so it doesn't fragment the cache.
+  # Only on the edge: the shield receives the stripped URL and would clobber
+  # the header forwarded from the edge with an empty value.
+  if (fastly.ff.visits_this_service == 0) {
+    set req.http.X-Request-Id-Param = subfield(req.url.qs, "rid", "&");
+    set req.url = req.url.path;
+  }
 %{ else ~}
   # Serve index.html for the root path
   if (req.url.path == "/") {
@@ -86,6 +96,16 @@ sub vcl_fetch {
     error beresp.status;
   }
 
+  if (beresp.status >= 400 && beresp.status < 500) {
+    set beresp.cacheable = false;
+    set beresp.ttl = 0s;
+    set beresp.stale_if_error = 0s;
+    set beresp.stale_while_revalidate = 0s;
+    unset beresp.http.Expires;
+    set beresp.http.Cache-Control = "private, no-store";
+    return(deliver);
+  }
+
   if (beresp.http.Surrogate-Control !~ "(stale-while-revalidate|stale-if-error)") {
     set beresp.stale_if_error = 31536000s; # 1 year
     set beresp.stale_while_revalidate = 3600s; # 1 hour
@@ -128,7 +148,7 @@ sub vcl_fetch {
   unset beresp.http.Cache-Control;
   unset beresp.http.Expires;
 
-  # Set the final headers sent to the edge PoPs and Clients
+  # Set the final headers sent to the edge PoPs and clients.
   set beresp.ttl = 24h;
   set beresp.http.Cache-Control = "public, max-age=${cache_ttl}";
 
@@ -312,4 +332,16 @@ sub vcl_pass {
 %{ endif ~}
   }
   #FASTLY pass
+}
+
+sub vcl_log {
+  #FASTLY log
+
+%{~ if contains([for bucket in bucket_configs : bucket.name], "prod-registry-k8s-io-us-east-2") ~}
+  # Emit the rid so it's visible in log tailing.
+  # Only on the edge, otherwise shielded requests are logged twice.
+  if (fastly.ff.visits_this_service == 0 && req.http.X-Request-Id-Param ~ "^[A-Za-z0-9._-]{1,64}$") {
+    log {"syslog "} req.service_id {" dd-oss-k8s :: rid="} req.http.X-Request-Id-Param {" url="} req.url.path {" status="} resp.status;
+  }
+%{ endif ~}
 }

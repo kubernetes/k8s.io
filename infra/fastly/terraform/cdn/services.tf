@@ -67,6 +67,7 @@ resource "fastly_service_vcl" "this" {
   snippet {
     content  = <<-EOT
       set req.enable_segmented_caching = true;
+      set segmented_caching.block_size = 4194304;
     EOT
     name     = "Enable segment caching for large files"
     priority = 60
