@@ -29,29 +29,34 @@ projects:
       - "../cdn/**/*"
   - dir: infra/fastly/terraform/dl.k8s.dev
     branch: /main/
-    when_modified:
-      - "**/*"
-      - "../cdn/**/*"
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../cdn/**/*"
   - dir: infra/fastly/terraform/artifacts.k8s.io
     branch: /main/
-    when_modified:
-      - "**/*"
-      - "../cdn/**/*"
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../cdn/**/*"
   - dir: infra/fastly/terraform/artifacts.k8s.dev
     branch: /main/
-    when_modified:
-      - "**/*"
-      - "../cdn/**/*"
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../cdn/**/*"
   - dir: infra/fastly/terraform/cdn.registry.k8s.io
     branch: /main/
-    when_modified:
-      - "**/*"
-      - "../cdn/**/*"
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../cdn/**/*"
   - dir: infra/fastly/terraform/cdn.registry.k8s.dev
     branch: /main/
-    when_modified:
-      - "**/*"
-      - "../cdn/**/*"
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../cdn/**/*"
   - dir: infra/gcp/terraform/k8s-infra-oci-proxy
     branch: /main/
     autoplan:
