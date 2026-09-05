@@ -67,6 +67,7 @@ groups:
       - furkat.gofurov@suse.com
       - fabrizio.pandini@gmail.com
       # CAPI release team members
+      - lennart.jern@est.tech
       - muhammad.adil.ghaffar@est.tech
       - cahillsf9@gmail.com
       - sunnat.samadov@est.tech
