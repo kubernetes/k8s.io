@@ -17,6 +17,7 @@ groups:
     owners:
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
+      - jvaldes@redhat.com
       - marosset@microsoft.com
       - zylmsft@gmail.com
 
@@ -27,6 +28,7 @@ groups:
     owners:
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
+      - jvaldes@redhat.com
       - marosset@microsoft.com
       - zylmsft@gmail.com
     settings:
