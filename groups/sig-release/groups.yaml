@@ -50,12 +50,14 @@ groups:
       - elieser.pereiraa@gmail.com
       - gveronicalg@gmail.com
       - jameswangel@gmail.com
+      - jenny.shu@solo.io # v1.38 BM shadow
       - jeremy.r.rickard@gmail.com
       - k8s@auggie.dev
       - michellengnx@gmail.com
       - mudrinic.mare@gmail.com
       - neoaggelos@gmail.com
       - pal.nabarun95@gmail.com
+      - rytswd@gmail.com # v1.38 BM shadow
       - saschagrunert@gmail.com
       - satyampsoni@gmail.com
       - sreeramvenkitesh@gmail.com
@@ -354,7 +356,9 @@ groups:
     members:
       - arshsharma461@gmail.com # v1.38 Release Comms Lead
       - destinyerhabor6@gmail.com # v1.38 Docs Lead
+      - jenny.shu@solo.io # v1.38 BM shadow
       - k.130.email@gmail.com # v1.38 Release Signal Lead
+      - rytswd@gmail.com # v1.38 BM shadow
       - tico88612@gmail.com # v1.38 Enhancements Shadow
 
   - email-id: release-team-shadows@kubernetes.io
