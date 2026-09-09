@@ -86,6 +86,9 @@ groups:
       - anish.ramasekar@gmail.com
       - rita.z.zhang@gmail.com
       - i@monis.app
+      - standalaz@gmail.com
+      - ben@benjaminapetersen.me
+      - pmengelbert@gmail.com
 
   - email-id: k8s-infra-staging-multitenancy@kubernetes.io
     name: k8s-infra-staging-multitenancy
@@ -111,6 +114,8 @@ groups:
       - anish.ramasekar@gmail.com
       - i@monis.app
       - standalaz@gmail.com
+      - ben@benjaminapetersen.me
+      - pmengelbert@gmail.com
 
   #
   # k8s-infra gcs write access
