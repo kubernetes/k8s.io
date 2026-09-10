@@ -13,6 +13,7 @@ datadog:
     enabled: true
     containerCollectAll: true
     autoMultiLineDetection: true
+  containerExcludeLogs: "kube_pod_label_created-by-prow:^true$"
   prometheusScrape:
     enabled: true
     serviceEndpoints: true
