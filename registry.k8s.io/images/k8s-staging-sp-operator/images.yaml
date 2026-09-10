@@ -1,3 +1,9 @@
+- name: base/crun
+  dmap:
+    "sha256:63cf5c33cb3c45b0e0f37b03cd3dfa630bf6f37fdc582b84ba6f7520da872a76": ["v1.29.1"]
+- name: base/runc
+  dmap:
+    "sha256:7e3cc47105b0b005555dcb3295595234f631c71e7f9982337117ca4675d0506f": ["v1.5.1"]
 - name: seccomp-test-profiles
   dmap:
     "sha256:9b9d6cb98e5c58448c341628db6b20e7c4866abc53fbd5e1f5a938739b26fbe6": ["deny-chmod"]
