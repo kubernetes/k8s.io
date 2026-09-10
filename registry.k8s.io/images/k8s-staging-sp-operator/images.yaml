@@ -1,3 +1,11 @@
+- name: seccomp-test-profiles
+  dmap:
+    "sha256:15a0050ff613b742d960e7bf4ed3df77c91adee1e1472d5aea57718884ad8261": ["baseprofile-crun"]
+    "sha256:04dfbc1a053a100754ad3e4f8fbc1b521d715e684311084fc9dc56877c402263": ["baseprofile-runc"]
+    "sha256:9b9d6cb98e5c58448c341628db6b20e7c4866abc53fbd5e1f5a938739b26fbe6": ["deny-chmod"]
+    "sha256:9dcf79f9985870bfe05bf0c94beb0ec24cd2391e762f8e3bb1853693cd3c904d": ["invalid"]
+    "sha256:49e08cf9b77aae392eb555fa1d9a3ea833052626746322151319fbd42f177e36": ["oversized"]
+    "sha256:e7279f26947707f3328552d72167700d80431179f3023e8efaa7a86f08dc5176": ["permissive"]
 - name: security-profiles-operator
   dmap:
     "sha256:67c97995264f949ab2d2e028cc6fb981cf5fe4646442abb8b422e9559c6a5732": ["v0.1.0"]
