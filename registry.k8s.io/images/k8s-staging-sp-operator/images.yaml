@@ -1,3 +1,15 @@
+- name: base/crun
+  dmap:
+    "sha256:63cf5c33cb3c45b0e0f37b03cd3dfa630bf6f37fdc582b84ba6f7520da872a76": ["v1.29.1"]
+- name: base/runc
+  dmap:
+    "sha256:7e3cc47105b0b005555dcb3295595234f631c71e7f9982337117ca4675d0506f": ["v1.5.1"]
+- name: seccomp-test-profiles
+  dmap:
+    "sha256:9b9d6cb98e5c58448c341628db6b20e7c4866abc53fbd5e1f5a938739b26fbe6": ["deny-chmod"]
+    "sha256:9dcf79f9985870bfe05bf0c94beb0ec24cd2391e762f8e3bb1853693cd3c904d": ["invalid"]
+    "sha256:49e08cf9b77aae392eb555fa1d9a3ea833052626746322151319fbd42f177e36": ["oversized"]
+    "sha256:e7279f26947707f3328552d72167700d80431179f3023e8efaa7a86f08dc5176": ["permissive"]
 - name: security-profiles-operator
   dmap:
     "sha256:67c97995264f949ab2d2e028cc6fb981cf5fe4646442abb8b422e9559c6a5732": ["v0.1.0"]
