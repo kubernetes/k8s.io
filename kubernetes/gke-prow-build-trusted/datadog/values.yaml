@@ -4,6 +4,11 @@ datadog:
   appKeyExistingSecret: datadog-secret
   site: us5.datadoghq.com
   clusterName: k8s-infra-prow-build-trusted
+  confd:
+    kubelet.yaml: |-
+      init_config:
+      instances:
+        - min_collection_interval: 5
   logs:
     enabled: true
     containerCollectAll: true

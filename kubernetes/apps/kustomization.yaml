@@ -15,4 +15,3 @@ resources:
   - istio.yaml
   - oauth2-proxy.yaml
   - mimir.yaml
-  - monitoring.yaml
