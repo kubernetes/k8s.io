@@ -1,6 +1,7 @@
 - name: lwepp
   dmap:
     "sha256:66059c328f975965eaaab4bdf5adbc3035c964aea7e47d59ecead6a6a17af677": ["v1.6.0"]
+    "sha256:33413317d159fd6e2b7598dfae2cd51b407b8bc711431bab923b685af12d3ada": ["v1.6.1"]
 
 ## Everything below are deprecated, no new images will be added, but old ones will be kept.
 - name: charts/inferencepool
