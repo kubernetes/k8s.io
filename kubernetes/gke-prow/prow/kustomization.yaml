@@ -21,4 +21,3 @@ resources:
   - statusreconciler.yaml
   - tide.yaml
   - monitoring.yaml
-  - testgrid.yaml
