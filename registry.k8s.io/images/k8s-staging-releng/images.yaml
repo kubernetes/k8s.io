@@ -1,9 +1,9 @@
-- name: kubepkg
-  dmap:
-    "sha256:caef826cde3d4cc884ccbac3a1805769ae59fe07f6f8234bf22dbfeb82312a99": ["v0.1.0","v20201103-v0.5.0-63-ga247d79"]
 - name: gcb-docker-gcloud
   dmap:
     "sha256:b2651f57b579d925a243e308c41546d4fd895f705de091a5a8a39060e6192604": ["v20260806"]
+- name: kubepkg
+  dmap:
+    "sha256:caef826cde3d4cc884ccbac3a1805769ae59fe07f6f8234bf22dbfeb82312a99": ["v0.1.0","v20201103-v0.5.0-63-ga247d79"]
 - name: kubepkg-rpm
   dmap:
     "sha256:f5fc791f5ef03c5fe3329fff3a40b80a44029a6e236981a2e5133ebf9597f9dd": ["v0.1.0","v20201103-v0.5.0-63-ga247d79"]
@@ -148,6 +148,8 @@
     "sha256:613738f566bd513f382ede9ceb64949dcd6817fea7dc5febcbd830efb2f17af6": ["1.26.3-trixie-0"]
     "sha256:94e41b8c3da10af634f56496b4c6f841ca8bc51daec563f105f9f5f1feb970f6": ["1.26.4-trixie-0"]
     "sha256:13a7ecb608100aae839fea82b7461203b5912de4254b356bbd53d9117ea80875": ["1.26.5-trixie-0"]
+    "sha256:5f63ab9ea2bbe2122f175875aa061258ab0da8b1933d9008e7f40cc7232ace09": ["1.26.8-trixie-0"]
+    "sha256:99c2e2dcd5b36924935ee4b132c702921107f6068b9f982a5595df6d7bfa75ad": ["1.27.1-trixie-0"]
     "sha256:6d826fb99f970cf5c27a3f1ffb1031ec19f2668453e3209687a046a7e6fb9224": ["v0.1.1"]
     "sha256:4fa8a71135bc93f8a9f8f172c276e53be769d3d4674852f3e0d110dabbddc7e1": ["v0.1.2"]
     "sha256:f488d4ddb1d3cd7ae9c5d2c004e6482f2a9c6f603ccf9aad237c910abbcafc26": ["v0.1.3"]
