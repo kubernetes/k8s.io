@@ -354,11 +354,16 @@ groups:
       - rayandas91@gmail.com # v1.38 Release Lead Shadow
       - sreeramvenkitesh@gmail.com # v1.38 Release Lead
     members:
+      - ab.alfaso@gmail.com # v1.38 Docs Shadow
+      - anshuman.tripathi305@gmail.com # v1.38 Docs Shadow
       - arshsharma461@gmail.com # v1.38 Release Comms Lead
+      - chielosophia@gmail.com # v1.38 Docs Shadow
       - destinyerhabor6@gmail.com # v1.38 Docs Lead
       - jenny.shu@solo.io # v1.38 BM shadow
       - k.130.email@gmail.com # v1.38 Release Signal Lead
+      - misrayashasvi27@gmail.com # v1.38 Docs Shadow
       - rytswd@gmail.com # v1.38 BM shadow
+      - subhasmitaswain232@gmail.com # v1.38 Docs Shadow
       - tico88612@gmail.com # v1.38 Enhancements Shadow
 
   - email-id: release-team-shadows@kubernetes.io
@@ -381,13 +386,18 @@ groups:
       - kat.cosgrove@gmail.com # Subproject owner
       - sreeramvenkitesh@gmail.com # v1.38 Release Lead
     members:
+      - ab.alfaso@gmail.com # v1.38 Docs Shadow
       - agustina.barbetta@gmail.com # v1.38 Release Lead Shadow
+      - anshuman.tripathi305@gmail.com # v1.38 Docs Shadow
       - arshsharma461@gmail.com # v1.38 Release Comms Lead
+      - chielosophia@gmail.com # v1.38 Docs Shadow
       - destinyerhabor6@gmail.com # v1.38 Docs Lead
       - k.130.email@gmail.com # v1.38 Release Signal Lead
+      - misrayashasvi27@gmail.com # v1.38 Docs Shadow
       - muhammad.adil.ghaffar@est.tech # v1.38 Release Lead Shadow
       - prajyotparab19@gmail.com # v1.38 Release Lead Shadow
       - rayandas91@gmail.com # v1.38 Release Lead Shadow
+      - subhasmitaswain232@gmail.com # v1.38 Docs Shadow
       - tico88612@gmail.com # v1.38 Enhancements Shadow
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
