@@ -17,7 +17,7 @@ limitations under the License.
 // k8s-staging-kubernetes is a special project that holds only kubernetes staging images
 module "kubernetes" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 17.1"
+  version = "~> 18.3"
 
   name            = "k8s-staging-kubernetes"
   project_id      = "k8s-staging-kubernetes"
@@ -49,7 +49,6 @@ module "kubernetes_ar" {
   members = {
     readers = ["allUsers"],
     writers = [
-      "serviceAccount:648026197307@cloudbuild.gserviceaccount.com", // Delete this once we move away from google.com projects
       "serviceAccount:304687256732@cloudbuild.gserviceaccount.com",
     ],
   }

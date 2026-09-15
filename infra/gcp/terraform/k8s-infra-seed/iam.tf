@@ -16,7 +16,7 @@ limitations under the License.
 
 module "iam" {
   source  = "terraform-google-modules/iam/google//modules/organizations_iam"
-  version = "~> 8.1"
+  version = "~> 8.2"
 
   organizations = [data.google_organization.org.org_id]
 

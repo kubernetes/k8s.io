@@ -16,7 +16,7 @@ limitations under the License.
 
 module "iam" {
   source  = "terraform-google-modules/iam/google//modules/projects_iam"
-  version = "~> 8"
+  version = "~> 8.2"
 
   projects = [module.project.project_id]
 
