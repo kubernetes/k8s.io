@@ -354,11 +354,17 @@ groups:
       - rayandas91@gmail.com # v1.38 Release Lead Shadow
       - sreeramvenkitesh@gmail.com # v1.38 Release Lead
     members:
+      - amanshrivastava118@gmail.com # v1.38 Release Signal Shadow
       - arshsharma461@gmail.com # v1.38 Release Comms Lead
       - destinyerhabor6@gmail.com # v1.38 Docs Lead
+      - hctsai@linux.com # v1.38 Release Signal Shadow
       - jenny.shu@solo.io # v1.38 BM shadow
+      - jujohn@redhat.com # v1.38 Release Signal Shadow
       - k.130.email@gmail.com # v1.38 Release Signal Lead
       - rytswd@gmail.com # v1.38 BM shadow
+      - sudharshan.muralidharan1@ibm.com # v1.38 Release Signal Shadow
+      - swrao21@gmail.com # v1.38 Release Signal Shadow
+      - tatiana.sel@gmail.com # v1.38 Release Signal Shadow
       - tico88612@gmail.com # v1.38 Enhancements Shadow
 
   - email-id: release-team-shadows@kubernetes.io
@@ -382,12 +388,18 @@ groups:
       - sreeramvenkitesh@gmail.com # v1.38 Release Lead
     members:
       - agustina.barbetta@gmail.com # v1.38 Release Lead Shadow
+      - amanshrivastava118@gmail.com # v1.38 Release Signal Shadow
       - arshsharma461@gmail.com # v1.38 Release Comms Lead
       - destinyerhabor6@gmail.com # v1.38 Docs Lead
+      - hctsai@linux.com # v1.38 Release Signal Shadow
+      - jujohn@redhat.com # v1.38 Release Signal Shadow
       - k.130.email@gmail.com # v1.38 Release Signal Lead
       - muhammad.adil.ghaffar@est.tech # v1.38 Release Lead Shadow
       - prajyotparab19@gmail.com # v1.38 Release Lead Shadow
       - rayandas91@gmail.com # v1.38 Release Lead Shadow
+      - sudharshan.muralidharan1@ibm.com # v1.38 Release Signal Shadow
+      - swrao21@gmail.com # v1.38 Release Signal Shadow
+      - tatiana.sel@gmail.com # v1.38 Release Signal Shadow
       - tico88612@gmail.com # v1.38 Enhancements Shadow
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
