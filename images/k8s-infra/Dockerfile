@@ -65,6 +65,7 @@ RUN set -o errexit nounset pipefail \
     gnupg2 \
     groff \
     make \
+    nginx \
     libc6-dev \
     python3 \
     python3-pip \
@@ -160,8 +161,9 @@ RUN set -o errexit nounset pipefail \
     && shellcheck --version         | tee shellcheck-version.txt \
     && terraform --version          | tee terraform-version.txt \
     && tfswitch --version           | tee tfswitch-version.txt \
-    && yamllint --version           | tee yamllint-verison.txt \
+    && yamllint --version           | tee yamllint-version.txt \
     && yq --version                 | tee yq-version.txt \
+    && nginx -v                     | tee nginx-version.txt \
     && echo "Cleaning up ..." \
     && apt autoremove -y \
     && apt clean -y \
