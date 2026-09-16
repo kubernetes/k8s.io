@@ -29,6 +29,7 @@ One goal is to use this image for all of of our CI jobs, and make it easy to run
   - `jq`
   - `kubectl`
   - `make`
+  - `nginx`
   - `opa`
   - `pr-creator` (from kubernetes/test-infra)
   - `rclone`
