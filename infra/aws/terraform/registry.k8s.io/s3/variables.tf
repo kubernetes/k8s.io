@@ -16,7 +16,7 @@ limitations under the License.
 
 variable "prefix" {
   type    = string
-  default = ""
+  default = "prod-"
 }
 
 variable "s3_replication_iam_role_arn" {
@@ -29,4 +29,15 @@ variable "s3_replication_rules" {
   description = "List of maps for S3 replication rules"
   type        = list(map(string))
   default     = []
+}
+
+variable "region" {
+  description = "AWS region"
+  type        = string
+}
+
+variable "alternative_bucket_names" {
+  description = "Map of region to alternative bucket name if the default naming convention is not used"
+  type        = map(string)
+  default     = {}
 }
