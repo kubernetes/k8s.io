@@ -16,7 +16,7 @@ limitations under the License.
 
 module "project" {
   source  = "terraform-google-modules/project-factory/google"
-  version = "~> 17.1"
+  version = "~> 18.2"
 
   name            = "k8s-release"
   project_id      = "k8s-release"

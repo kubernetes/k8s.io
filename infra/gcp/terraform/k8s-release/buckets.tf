@@ -16,7 +16,7 @@ limitations under the License.
 
 module "gcb_bucket" {
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
-  version = "~> 8.0"
+  version = "~> 11.1"
 
   name       = "k8s-release-gcb"
   project_id = module.project.project_id
@@ -36,7 +36,7 @@ module "gcb_bucket" {
 
 module "mock_bucket" {
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
-  version = "~> 8.0"
+  version = "~> 11.1"
 
   name       = "5d7373bbdcb8270361b96548387bf2a9ad0d48758c35"
   project_id = module.project.project_id
@@ -62,7 +62,7 @@ module "mock_bucket" {
 
 module "release_dev" {
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
-  version = "~> 8.0"
+  version = "~> 11.1"
 
   name              = "k8s-release-dev"
   project_id        = module.project.project_id
@@ -96,7 +96,7 @@ module "release_dev" {
 module "release" {
   // WE NEED TO DELETE THIS BUCKET, it exists as with a hashed name in k8s-infra-releases-prod and served via Fastly
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
-  version = "~> 8.0"
+  version = "~> 11.1"
 
   name       = "k8s-release"
   project_id = module.project.project_id
