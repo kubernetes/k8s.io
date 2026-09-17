@@ -195,4 +195,9 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: sp-operator
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: test-infra
