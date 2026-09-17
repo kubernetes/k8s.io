@@ -399,6 +399,20 @@ function staging_special_case__k8s_staging_cluster_api_gcp() {
   ensure_staging_gcb_builder_service_account "${suffix}" "k8s-infra-prow-build-trusted"
 }
 
+# The security-profiles-operator image push job runs its Cloud Build as
+# gcb-image-builder to sign images and attach attestations keylessly. The
+# account needs the same permissions as the default Cloud Build service
+# account (logs bucket, image push), and prow needs to submit builds that
+# run as it.
+function staging_special_case__k8s_staging_sp_operator() {
+  local project="k8s-staging-sp-operator"
+  local serviceaccount
+  serviceaccount="$(svc_acct_email "${project}" "gcb-image-builder")"
+
+  ensure_project_role_binding "${project}" "serviceAccount:${serviceaccount}" "roles/cloudbuild.builds.builder"
+  ensure_serviceaccount_role_binding "${serviceaccount}" "serviceAccount:${GCB_BUILDER_SVCACCT}" "roles/iam.serviceAccountUser"
+}
+
 # In order to build the release artifacts, the group needs to be
 # able to create and manage a keyring to encrypt a secret token
 # that will be accessed and decrypted by a cloud build job.
