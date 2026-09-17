@@ -1,7 +1,7 @@
-# google group for gcr.io/k8s-staging-sp-operator is
+# google group for us-central1-docker.pkg.dev/k8s-staging-images/sp-operator is
 # k8s-infra-staging-sp-operator@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-sp-operator
+- name: us-central1-docker.pkg.dev/k8s-staging-images/sp-operator
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
