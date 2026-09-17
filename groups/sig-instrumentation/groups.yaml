@@ -27,6 +27,7 @@ groups:
       - dashpole@google.com
       - dgrisonn@redhat.com
       - hankang@google.com
+      - patrick.ohly@intel.com
       - rexagod@gmail.com
       - richabanker@google.com
     settings:
@@ -66,9 +67,10 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - cosiclili@gmail.com
-      - fbranczyk@gmail.com
-      - tariq181290@gmail.com
+      - dgrisonn@redhat.com
+      - manuel@rueg.eu
+      - pratham.bhope@gmail.com
+      - rexagod@gmail.com
 
   - email-id: k8s-infra-staging-metrics-server@kubernetes.io
     name: k8s-infra-staging-metrics-server
@@ -81,6 +83,17 @@ groups:
       - sergiusz.urbaniak@gmail.com
       - pszczesniak@google.com
       - fbranczyk@gmail.com
+
+  - email-id: k8s-infra-staging-resource-state-met@kubernetes.io
+    name: k8s-infra-staging-resource-state-met
+    description: |-
+      ACL for resource-state-metrics
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - contact@rueg.eu
+      - dgrisonn@redhat.com
+      - rexagod@gmail.com
 
   - email-id: k8s-infra-staging-prometheus-adapter@kubernetes.io
     name: k8s-infra-staging-prometheus-adapter

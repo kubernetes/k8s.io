@@ -6,9 +6,12 @@ resources:
   - datadog.yaml
   - external-secrets.yaml
   - cert-manager.yaml
+  - elekto.yaml
   - kops-discovery.yaml
   - kube-system.yaml
   - kyverno.yaml
+  - monitoring.yaml
   - prow.yaml
   - istio.yaml
   - oauth2-proxy.yaml
+  - mimir.yaml

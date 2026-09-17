@@ -18,7 +18,7 @@ groups:
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
       - marosset@microsoft.com
-      - zhang.yuanliang@hotmail.com
+      - zylmsft@gmail.com
 
   - email-id: sig-windows@kubernetes.io
     name: sig-windows
@@ -28,7 +28,7 @@ groups:
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
       - marosset@microsoft.com
-      - zhang.yuanliang@hotmail.com
+      - zylmsft@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -63,7 +63,7 @@ groups:
     members:
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
-      - zhang.yuanliang@hotmail.com
+      - zylmsft@gmail.com
       - marosset@microsoft.com
 
   - email-id: k8s-infra-staging-win-op-rdnss@kubernetes.io
@@ -76,7 +76,7 @@ groups:
       - aravindh.foss@pm.me
       - cbelu@cloudbasesolutions.com
       - marosset@microsoft.com
-      - zhang.yuanliang@hotmail.com
+      - zylmsft@gmail.com
 
   - email-id: k8s-infra-staging-win-svc-proxy@kubernetes.io
     name: k8s-infra-staging-win-svc-proxy
@@ -87,7 +87,7 @@ groups:
     members:
       - aravindh.foss@pm.me
       - marosset@microsoft.com
-      - zhang.yuanliang@hotmail.com
+      - zylmsft@gmail.com
 
   #
   # k8s-infra owners for sig-owned subprojects

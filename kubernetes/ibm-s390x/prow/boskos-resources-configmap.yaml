@@ -3,7 +3,9 @@ data:
   config: |
     resources:
     - names:
-      - k8s-s390x-test-vpc
+      - k8s-s390x-test-vpc-eu-de-1
+      - k8s-s390x-test-vpc-eu-de-2
+      - k8s-s390x-test-vpc-eu-de-3
       state: free
       type: vpc-service
 kind: ConfigMap

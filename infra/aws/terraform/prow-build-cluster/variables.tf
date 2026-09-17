@@ -118,15 +118,13 @@ variable "node_max_unavailable" {
   description = "Maximum unavailable nodes in a node group"
 }
 
-variable "node_taints_build" {
-  type     = list(map(string))
-  default  = []
-  nullable = false
-}
-
 variable "node_taints_stable" {
-  type     = list(map(string))
-  default  = []
+  type     = map(object({
+    key    = string
+    value  = string
+    effect = string
+  }))
+  default  = {}
   nullable = false
 }
 

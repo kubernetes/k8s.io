@@ -40,6 +40,11 @@ readonly shellcheck_cmd=(
     --source-path=SCRIPTDIR
 )
 
+if ! command -v shellcheck >/dev/null 2>&1; then
+    echo "shellcheck not found - please install shellcheck"
+    exit 1
+fi
+
 failed_files=()
 passed_files=()
 # calling shellcheck for each file takes longer, but:

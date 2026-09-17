@@ -15,6 +15,20 @@ nodeSelector:
   kubernetes.io/os: linux
   node-group: stable
 
+podAnnotations:
+  ad.datadoghq.com/controller.logs: '[{"source": "karpenter", "service": "karpenter"}]'
+  ad.datadoghq.com/controller.checks: |
+    {
+      "karpenter": {
+        "init_config": {},
+        "instances": [
+          {
+            "openmetrics_endpoint": "http://%%host%%:8080/metrics"
+          }
+        ]
+      }
+    }
+
 tolerations:
   - effect: NoSchedule
     key: node-group

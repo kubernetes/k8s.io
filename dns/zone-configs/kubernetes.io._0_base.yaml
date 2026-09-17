@@ -90,9 +90,6 @@ apt:
 yum:
   type: CNAME
   value: yum.k8s.io.
-dl:
-  type: CNAME
-  value: redirect.k8s.io.
 rel:
   type: CNAME
   value: rel.k8s.io.

@@ -58,6 +58,14 @@ spec:
         - source:
             namespaces:
               - istio-system
+      to:
+        - operation:
+            paths:
+              - /api/badge
+    - from:
+        - source:
+            namespaces:
+              - istio-system
       when:
         - key: request.headers[X-Auth-Request-User]
           values:
@@ -67,3 +75,4 @@ spec:
             - iftachk
             - upodroid
             - xmudrii
+            - geewynn

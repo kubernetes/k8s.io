@@ -16,6 +16,10 @@ limitations under the License.
 
 locals {
   build_cluster_secrets = {
+    lambda-ai-api-key = {
+      group  = "sig-k8s-infra"
+      owners = "sig-k8s-infra-leads@kubernetes.io"
+    }
     prow-build-service-account = {
       group  = "sig-testing"
       owners = "k8s-infra-prow-oncall@kubernetes.io"

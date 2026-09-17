@@ -54,12 +54,16 @@ spec:
       labels:
         app: boskos
       namespace: test-pods
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: "/metrics"
     spec:
       serviceAccountName: boskos
       terminationGracePeriodSeconds: 30
       containers:
       - name: boskos
-        image: gcr.io/k8s-staging-boskos/boskos:v20260107-c2c6f43
+        image: gcr.io/k8s-staging-boskos/boskos:v20260819-fdaf2e0
         args:
         - --config=/etc/config/config
         - --namespace=test-pods

@@ -1,0 +1,36 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-arm64-toleration
+spec:
+  rules:
+    - name: add-toleration
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      preconditions:
+        any:
+          - key: '{{request.object.spec.nodeSelector."kubernetes.io/arch" || ""}}'
+            operator: Equals
+            value: arm64
+    - name: add-toleration-from-nodeaffinity
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      preconditions:
+        any:
+          - key: arm64
+            operator: In
+            value: '{{ request.object.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[].matchExpressions[?key==''kubernetes.io/arch''].values[] | [] || `[]` }}'
+      mutate:
+        patchStrategicMerge:
+          spec:
+            tolerations:
+              - key: kubernetes.io/arch
+                operator: Equal
+                value: arm64
+                effect: NoSchedule

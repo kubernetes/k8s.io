@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: kube-system
 resources:
   - daemonsets.yaml
+  - secrets.yaml

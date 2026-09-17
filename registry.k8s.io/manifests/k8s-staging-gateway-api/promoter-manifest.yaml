@@ -1,6 +1,6 @@
-# google group for gcr.io/k8s-staging-gateway-api is k8s-infra-staging-gateway-api@kubernetes.io
+# google group for us-central1-docker.pkg.dev/k8s-staging-images/gateway-api is k8s-infra-staging-gateway-api@kubernetes.io
 registries:
-  - name: gcr.io/k8s-staging-gateway-api
+  - name: us-central1-docker.pkg.dev/k8s-staging-images/gateway-api
     src: true
   - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/gateway-api
     service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com

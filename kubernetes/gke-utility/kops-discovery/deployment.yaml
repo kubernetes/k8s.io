@@ -25,12 +25,22 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
+      volumes:
+        - name: tls
+          secret:
+            secretName: kops-discovery-cert
       containers:
         - name: discovery-server
           image: registry.k8s.io/kops/discovery-server:1.35.0-beta.1
           args:
             - --listen=:8443
             - --storage=memory
+            - --tls-cert=/tls/tls.crt
+            - --tls-key=/tls/tls.key
+          volumeMounts:
+            - name: tls
+              mountPath: /tls
+              readOnly: true
           ports:
             - name: https
               containerPort: 8443
@@ -48,17 +58,22 @@ spec:
             capabilities:
               drop:
                 - ALL
-          # Note: kops discovery server has no health endpoints, using TCP probe
+          # Note: kops discovery server has no health endpoints.
+          # Using httpGet with HTTPS scheme to perform a proper TLS handshake
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: /
               port: 8443
+              scheme: HTTPS
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 3
           readinessProbe:
-            tcpSocket:
+            httpGet:
+              path: /
               port: 8443
+              scheme: HTTPS
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 3

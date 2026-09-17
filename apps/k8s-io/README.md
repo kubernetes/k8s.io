@@ -14,7 +14,6 @@ Vanity URL(s)
 | CI logs | https://ci-test.k8s.io | https://ci-test.kubernetes.io |
 | Git repo | https://code.k8s.io | https://code.kubernetes.io |
 | Search Git repo | https://cs.k8s.io | https://cs.kubernetes.io |
-| Downloads | https://dl.k8s.io | https://dl.kubernetes.io |
 | Documentation | https://docs.k8s.io | https://docs.kubernetes.io |
 | Kubernetes examples | https://examples.k8s.io | https://examples.kubernetes.io |
 | Features repo | https://feature.k8s.io <br> https://features.k8s.io |  https://feature.kubernetes.io <br> https://features.kubernetes.io |
@@ -55,6 +54,7 @@ NOTE: please see k8s.io/k8s.io/configmap-nginx.yaml for `server` definitions
 - https://go.k8s.io/sig-k8s-infra
 - https://go.k8s.io/sig-k8s-infra-notes
 - https://go.k8s.io/sig-k8s-infra-playlist
+- https://go.k8s.io/sig-testing-notes
 - https://go.k8s.io/start
 - https://go.k8s.io/stuck-prs
 - https://go.k8s.io/test-health

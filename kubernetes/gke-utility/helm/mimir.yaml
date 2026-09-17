@@ -1,0 +1,348 @@
+serviceAccount:
+  create: true
+  name: mimir
+  annotations:
+    iam.gke.io/return-principal-id-as-email: "true"
+
+minio:
+  enabled: false
+
+kafka:
+  enabled: false
+
+gateway:
+  enabled: true
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 512Mi
+  nginx:
+    basicAuth:
+      enabled: true
+      existingSecret: mimir-credentials
+
+mimir:
+  structuredConfig:
+    limits:
+      max_global_series_per_user: 14000000
+      max_label_names_per_series: 50
+      ingestion_rate: 600000
+      ingestion_burst_size: 3000000
+    ingest_storage:
+      enabled: true
+      kafka:
+        address: bootstrap.mimir-cluster.us-central1.managedkafka.k8s-infra-prow.cloud.goog:9092
+        topic: mimir-ingest
+        auto_create_topic_enabled: false
+        tls_enabled: true
+        sasl_mechanism: OAUTHBEARER
+        sasl_oauthbearer_file_path: /var/run/kafka-token/token.json
+    distributor:
+      remote_timeout: null
+    ingester:
+      push_grpc_method_enabled: false
+    common:
+      storage:
+        backend: gcs
+        gcs:
+          bucket_name: k8s-infra-prow-mimir
+    blocks_storage:
+      backend: gcs
+      storage_prefix: blocks
+    ruler_storage:
+      backend: gcs
+      storage_prefix: ruler
+    alertmanager_storage:
+      backend: gcs
+      storage_prefix: alertmanager
+
+metaMonitoring:
+  serviceMonitor:
+    enabled: true
+  dashboards:
+    enabled: true
+
+rollout_operator:
+  enabled: true
+
+alertmanager:
+  persistentVolume:
+    enabled: true
+    storageClass: hyperdisk-balanced
+    size: 50Gi
+  replicas: 2
+  resources:
+    limits:
+      memory: 1.4Gi
+    requests:
+      cpu: 1
+      memory: 1Gi
+  statefulSet:
+    enabled: true
+
+compactor:
+  persistentVolume:
+    size: 50Gi
+    storageClass: hyperdisk-balanced
+  resources:
+    limits:
+      memory: 2.1Gi
+    requests:
+      cpu: 1
+      memory: 1.5Gi
+
+distributor:
+  replicas: 2
+  resources:
+    limits:
+      memory: 5.7Gi
+    requests:
+      cpu: 1
+      memory: 2Gi
+  initContainers: &kafkaTokenSidecars
+    - name: kafka-token
+      image: mirror.gcr.io/alpine:3.22
+      imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      command:
+        - /bin/sh
+        - -c
+        - |
+          set -u
+          umask 077
+
+          MD="http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default"
+          HDR="Metadata-Flavor: Google"
+          TOKEN_FILE="/var/run/kafka-token/token.json"
+          REFRESH_FILE="/var/run/kafka-token/refreshed-at"
+
+          # RFC 7515 base64url: URL-safe alphabet, no padding or newlines.
+          b64url() {
+            base64 | tr -d '\n' | tr '+/' '-_' | tr -d '='
+          }
+
+          while true; do
+            if response="$(wget -qO- --header="$HDR" "$MD/token")" &&
+              principal="$(wget -qO- --header="$HDR" "$MD/email")"; then
+
+              access_token="$(
+                printf '%s' "$response" |
+                  sed -n 's/.*"access_token"[ ]*:[ ]*"\([^"]*\)".*/\1/p'
+              )"
+
+              expires_in="$(
+                printf '%s' "$response" |
+                  sed -n 's/.*"expires_in"[ ]*:[ ]*\([0-9]*\).*/\1/p'
+              )"
+
+              case "$expires_in" in
+                ''|*[!0-9]*) expires_in=3600 ;;
+              esac
+
+              if [ -n "$access_token" ] && [ -n "$principal" ]; then
+                now="$(date +%s)"
+
+                # Managed Kafka expects Google's GOOG_OAUTH2_TOKEN envelope,
+                # not the raw Google OAuth access token.
+                token="$(
+                  printf '%s' \
+                    '{"typ":"JWT","alg":"GOOG_OAUTH2_TOKEN"}' |
+                    b64url
+                )"
+
+                token="$token.$(
+                  printf \
+                    '{"exp":%s,"iss":"Google","iat":%s,"sub":"%s"}' \
+                    "$((now + expires_in))" \
+                    "$now" \
+                    "$principal" |
+                    b64url
+                )"
+
+                token="$token.$(
+                  printf '%s' "$access_token" |
+                    b64url
+                )"
+
+                # Atomic rename prevents Mimir reading a partially-written token.
+                printf '{"token":"%s"}' "$token" > "$TOKEN_FILE.tmp"
+                mv "$TOKEN_FILE.tmp" "$TOKEN_FILE"
+
+                # Used by the liveness probe to detect a stalled refresh loop.
+                printf '%s\n' "$now" > "$REFRESH_FILE.tmp"
+                mv "$REFRESH_FILE.tmp" "$REFRESH_FILE"
+
+                echo "Kafka OAUTHBEARER token refreshed"
+
+                sleep_for="$((expires_in - 300))"
+                [ "$sleep_for" -ge 60 ] || sleep_for=60
+
+                sleep "$sleep_for"
+                continue
+              fi
+            fi
+
+            echo "Failed to refresh Google Managed Kafka token" >&2
+            sleep 10
+          done
+
+      startupProbe:
+        exec:
+          command:
+            - /bin/sh
+            - -c
+            - |
+              test -s /var/run/kafka-token/token.json &&
+              test -s /var/run/kafka-token/refreshed-at
+
+        periodSeconds: 1
+        timeoutSeconds: 1
+        failureThreshold: 60
+
+      livenessProbe:
+        exec:
+          command:
+            - /bin/sh
+            - -c
+            - |
+              test -s /var/run/kafka-token/token.json &&
+              test -s /var/run/kafka-token/refreshed-at &&
+              refreshed="$(cat /var/run/kafka-token/refreshed-at)" &&
+              now="$(date +%s)" &&
+              age="$((now - refreshed))" &&
+              [ "$age" -lt 4200 ]
+
+        initialDelaySeconds: 60
+        periodSeconds: 60
+        timeoutSeconds: 5
+        failureThreshold: 3
+
+
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+        limits:
+          memory: 32Mi
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+
+        capabilities:
+          drop:
+            - ALL
+      volumeMounts:
+        - name: kafka-token
+          mountPath: /var/run/kafka-token
+
+  # Memory-backed volume containing the short-lived Kafka credential.
+  extraVolumes: &kafkaTokenVolumes
+    - name: kafka-token
+      emptyDir:
+        medium: Memory
+
+
+  # Mimir only needs to read credentials.
+  extraVolumeMounts: &kafkaTokenMimirMounts
+    - name: kafka-token
+      mountPath: /var/run/kafka-token
+      readOnly: true
+
+ingester:
+  zoneAwareReplication:
+    enabled: false
+  persistentVolume:
+    size: 50Gi
+    storageClass: hyperdisk-balanced
+  replicas: 18
+  resources:
+    limits:
+      memory: 12Gi
+    requests:
+      cpu: 3.5
+      memory: 8Gi
+  topologySpreadConstraints: {}
+  initContainers: *kafkaTokenSidecars
+  extraVolumes: *kafkaTokenVolumes
+  extraVolumeMounts: *kafkaTokenMimirMounts
+
+chunks-cache:
+  enabled: true
+  replicas: 2
+  allocatedMemory: 2048
+
+index-cache:
+  enabled: true
+  replicas: 1
+  allocatedMemory: 1024
+
+metadata-cache:
+  enabled: true
+  replicas: 1
+
+results-cache:
+  enabled: true
+  replicas: 1
+
+overrides_exporter:
+  replicas: 1
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+querier:
+  replicas: 1
+  resources:
+    limits:
+      memory: 5.6Gi
+    requests:
+      cpu: 1
+      memory: 4Gi
+
+query_frontend:
+  replicas: 1
+  resources:
+    limits:
+      memory: 2.8Gi
+    requests:
+      cpu: 1
+      memory: 2Gi
+  initContainers: *kafkaTokenSidecars
+  extraVolumes: *kafkaTokenVolumes
+  extraVolumeMounts: *kafkaTokenMimirMounts
+
+ruler:
+  replicas: 1
+  resources:
+    limits:
+      memory: 2.8Gi
+    requests:
+      cpu: 1
+      memory: 2Gi
+  initContainers: *kafkaTokenSidecars
+  extraVolumes: *kafkaTokenVolumes
+  extraVolumeMounts: *kafkaTokenMimirMounts
+
+store_gateway:
+  zoneAwareReplication:
+    enabled: false
+  persistentVolume:
+    size: 50Gi
+    storageClass: hyperdisk-balanced
+  replicas: 3
+  resources:
+    limits:
+      memory: 2.1Gi
+    requests:
+      cpu: 1
+      memory: 1.5Gi
+  topologySpreadConstraints: {}

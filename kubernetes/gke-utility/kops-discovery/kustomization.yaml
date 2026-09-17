@@ -6,3 +6,5 @@ resources:
   - rbac.yaml
   - deployment.yaml
   - service.yaml
+  - certificate.yaml
+  - httproute.yaml

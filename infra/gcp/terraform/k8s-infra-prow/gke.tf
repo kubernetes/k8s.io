@@ -110,13 +110,13 @@ module "utility_cluster" {
 
   node_pools = [
     {
-      name               = "prod-v1"
-      machine_type       = "c3-standard-4"
-      node_locations     = "us-central1-a,us-central1-b"
+      name               = "prod-v2"
+      machine_type       = "c4-standard-16"
+      node_locations     = "us-central1-a,us-central1-b,us-central1-c,us-central1-f"
       min_count          = 1
-      max_count          = 3
+      max_count          = 10
       disk_size_gb       = 100
-      disk_type          = "pd-ssd"
+      disk_type          = "hyperdisk-balanced"
       image_type         = "COS_CONTAINERD"
       auto_repair        = true
       auto_upgrade       = true

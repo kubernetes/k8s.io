@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elekto
+spec:
+  destination:
+    namespace: elekto
+    name: gke-aaa
+  project: default
+  source:
+    path: kubernetes/gke-aaa/elekto
+    repoURL: https://github.com/kubernetes/k8s.io
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

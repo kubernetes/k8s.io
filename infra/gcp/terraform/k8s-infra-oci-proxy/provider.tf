@@ -22,8 +22,7 @@ This file defines:
 
 terraform {
   backend "gcs" {
-    bucket = "k8s-infra-tf-oci-proxy"
-    prefix = "sanbox"
+    bucket = "k8s-infra-oci-proxy"
   }
 
   required_providers {

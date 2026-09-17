@@ -16,7 +16,7 @@ limitations under the License.
 
 module "gcb_bucket" {
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
-  version = "~> 11.0"
+  version = "~> 11.1"
 
   name       = "k8s-infra-prow-gcb"
   project_id = module.project.project_id
@@ -46,8 +46,7 @@ module "gcb_bucket" {
 
 // Create gs://k8s-testgrid-config to store K8s TestGrid config.
 module "testgrid_config_bucket" {
-  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
-  version = "~> 5"
+  source = "github.com/terraform-google-modules/terraform-google-cloud-storage//modules/simple_bucket?ref=v11.1.2"
 
   name       = "k8s-testgrid-config"
   project_id = module.project.project_id
@@ -70,6 +69,10 @@ module "testgrid_config_bucket" {
       member = "serviceAccount:k8s-testgrid-config-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
     },
     {
+      role   = "roles/storage.objectAdmin"
+      member = google_service_account.prow.member
+    },
+    {
       // Let K8s TestGrid canary read configs from this bucket. 
       role   = "roles/storage.objectViewer"
       member = "serviceAccount:testgrid-canary@k8s-testgrid.iam.gserviceaccount.com"
@@ -82,10 +85,40 @@ module "testgrid_config_bucket" {
   ]
 }
 
-// Create gs://k8s-ci-logs to store logs from Prow jobs.
+// Create gs://k8s-testgrid-config-external to store TestGrid configs.
+// - testgrid.prow.k8s.io (community-operated, K8s project configs only)
+// See: https://github.com/kubernetes/k8s.io/issues/8973
+module "testgrid_config_external_bucket" {
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 12.1"
+
+  name       = "k8s-testgrid-config-external"
+  project_id = module.project.project_id
+  location   = "us-central1"
+
+  iam_members = [
+    {
+      // Let the upload job write to this bucket.
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:k8s-testgrid-config-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    },
+    {
+      // Let K8s TestGrid canary read configs from this bucket.
+      role   = "roles/storage.objectViewer"
+      member = "serviceAccount:testgrid-canary@k8s-testgrid.iam.gserviceaccount.com"
+    },
+    {
+      // Let K8s TestGrid production read configs from this bucket.
+      role   = "roles/storage.objectViewer"
+      member = "serviceAccount:updater@k8s-testgrid.iam.gserviceaccount.com"
+    }
+  ]
+}
+
+// Create gs://kubernetes-ci-logs to store logs from Prow jobs.
 module "prow_bucket" {
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
-  version = "~> 5"
+  version = "~> 11.1"
 
   name       = "kubernetes-ci-logs"
   project_id = module.project.project_id
@@ -143,4 +176,48 @@ resource "google_storage_notification" "notification" {
 resource "google_pubsub_topic" "kubernetes_ci_logs_topic" {
   name    = "kubernetes-ci-logs-updates"
   project = module.project.project_id
+}
+
+// Create gs://k8s-security-ci-logs private bucket to store logs from Prow jobs running in
+// the kubernetes-security org.
+module "prow_security_bucket" {
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 11.1"
+
+  name       = "k8s-security-ci-logs"
+  project_id = module.project.project_id
+  location   = "us-central1"
+  lifecycle_rules = [{
+    action = {
+      type = "Delete"
+    }
+    condition = {
+      age        = 14 # 14d
+      with_state = "ANY"
+    }
+  }]
+
+  iam_members = [
+    {
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:${google_service_account.prow.email}"
+    },
+  ]
+}
+
+
+module "mimir_bucket" {
+  source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
+  version = "~> 11.1"
+
+  name       = "k8s-infra-prow-mimir"
+  project_id = module.project.project_id
+  location   = "us-central1"
+
+  iam_members = [
+    {
+      role   = "roles/storage.objectUser"
+      member = "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/mimir/sa/mimir"
+    },
+  ]
 }

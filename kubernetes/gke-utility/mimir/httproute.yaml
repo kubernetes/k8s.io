@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: mimir
+  namespace: mimir
+spec:
+  parentRefs:
+    - name: istio-ingressgateway
+      namespace: istio-system
+      sectionName: https
+  hostnames:
+    - mimir.prow.k8s.io
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: mimir-gateway
+          port: 80

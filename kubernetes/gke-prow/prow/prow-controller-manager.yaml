@@ -37,12 +37,19 @@ spec:
       serviceAccountName: prow-controller-manager
       containers:
         - name: prow-controller-manager
-          image: us-docker.pkg.dev/k8s-infra-prow/images/prow-controller-manager:v20260225-8287579aa
+          image: us-docker.pkg.dev/k8s-infra-prow/images/prow-controller-manager:v20260910-e30e351eb
           args:
             - --config-path=/etc/config/config.yaml
             - --dry-run=false
             - --enable-controller=plank
             - --job-config-path=/etc/job-config
+          resources:
+            requests:
+              cpu: 300m
+              memory: 2000Mi
+            limits:
+              cpu: 1000m
+              memory: 4000Mi
           env:
             # Use KUBECONFIG envvar rather than --kubeconfig flag in order to provide multiple configs to merge.
             - name: KUBECONFIG

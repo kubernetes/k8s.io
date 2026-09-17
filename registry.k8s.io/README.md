@@ -61,6 +61,8 @@ For example:
 1. Add the project name to the `locals.registries` list defined in
    [`infra/gcp/terraform/k8s-staging-images/registries.tf`][infra.yaml]
 
+1. Run the `hack/verify-staging-builds-sa.sh` script
+
 1. Someone from SIG K8s Lead will be pinged when you modify this file and apply the terraform changes on your behalf.
 
 ### Enabling automatic builds

@@ -65,9 +65,12 @@ groups:
       - yuvaraj-balaji-rao.kakaraparthi@broadcom.com
       - christi.schlotter@gmail.com
       - furkat.gofurov@suse.com
+      - fabrizio.pandini@gmail.com
       # CAPI release team members
+      - lennart.jern@est.tech
       - muhammad.adil.ghaffar@est.tech
       - cahillsf9@gmail.com
+      - rexagod@gmail.com
       - sunnat.samadov@est.tech
       - shibuuuu5@gmail.com
       - sepi.alavii@gmail.com
@@ -267,6 +270,7 @@ groups:
       - gab.satchi@broadcom.com
       - naadir.jeewa@broadcom.com
       - sagar.muchhal@broadcom.com
+      - fabrizio.pandini@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api@kubernetes.io
     name: k8s-infra-staging-cluster-api
@@ -423,9 +427,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - daniel@weave.works
       - justinsb@google.com
-      - leigh@weave.works
       - luoh@vmware.com
       - timothysc@gmail.com
 
@@ -465,6 +467,18 @@ groups:
       - timothysc@gmail.com
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
+
+  - email-id: k8s-infra-staging-kubespray@kubernetes.io
+    name: k8s-infra-staging-kubespray
+    description: |-
+      ACL for staging Kubespray CI/test images
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - kay.yan@daocloud.io
+      - mg@max.gautier.name
+      - tico88612@gmail.com
+      - 2t.antoine@gmail.com
 
   - email-id: sig-cluster-lifecycle-kubespray-alerts@kubernetes.io
     name: sig-cluster-lifecycle-kubespray-alerts

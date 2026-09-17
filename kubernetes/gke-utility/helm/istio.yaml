@@ -14,6 +14,8 @@ meshConfig:
   enablePrometheusMerge: true
   protocolDetectionTimeout: 5s
   enableTracing: true
+  pathNormalization:
+    normalization: MERGE_SLASHES
   defaultConfig:
     gatewayTopology:
       numTrustedProxies: 2

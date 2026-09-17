@@ -23,7 +23,6 @@ restrictions:
       - "^k8s-infra-staging-agentic-net@kubernetes.io$"
   - path: "sig-api-machinery/groups.yaml"
     allowedGroups:
-      - "^k8s-infra-staging-storage-migrator@kubernetes.io$"
       - "^sig-api-machinery-cel-dev@kubernetes.io$"
       - "^k8s-infra-staging-kubebuilder@kubernetes.io$"
       - "^sig-api-machinery-leads@kubernetes.io$"
@@ -31,6 +30,7 @@ restrictions:
   - path: "sig-apps/groups.yaml"
     allowedGroups:
       - "^k8s-infra-staging-agent-sandbox@kubernetes.io$"
+      - "^k8s-infra-staging-mcp-lifecycle-op@kubernetes.io$"
       - "^k8s-infra-staging-examples@kubernetes.io$"
       - "^k8s-infra-staging-jobset@kubernetes.io$"
       - "^k8s-infra-staging-lws@kubernetes.io$"
@@ -79,6 +79,7 @@ restrictions:
       - "^k8s-infra-staging-cloud-pv-labeler@kubernetes.io$"
       - "^sig-cloud-provider@kubernetes.io$"
       - "^sig-cloud-provider-ibm-ppc64le-alerts@kubernetes.io$"
+      - "^sig-cloud-provider-ibm-s390x-alerts@kubernetes.io$"
       - "^sig-cloud-provider-leads@kubernetes.io$"
   - path: "sig-cluster-lifecycle/groups.yaml"
     allowedGroups:
@@ -113,6 +114,7 @@ restrictions:
       - "^k8s-infra-staging-etcd-manager@kubernetes.io$"
       - "^k8s-infra-staging-kops@kubernetes.io$"
       - "^k8s-infra-staging-kubeadm@kubernetes.io$"
+      - "^k8s-infra-staging-kubespray@kubernetes.io$"
       - "^sig-cluster-lifecycle-kubespray-alerts@kubernetes.io$"
       - "^k8s-infra-staging-scl-image-builder@kubernetes.io$"
       - "^sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io$"
@@ -149,10 +151,12 @@ restrictions:
       - "^k8s-infra-staging-kube-state-metrics@kubernetes.io$"
       - "^k8s-infra-staging-metrics-server@kubernetes.io$"
       - "^k8s-infra-staging-prometheus-adapter@kubernetes.io$"
+      - "^k8s-infra-staging-resource-state-met@kubernetes.io$"
       - "^sig-instrumentation@kubernetes.io$"
       - "^sig-instrumentation-leads@kubernetes.io$"
   - path: "sig-multicluster/groups.yaml"
     allowedGroups:
+      - "^k8s-infra-staging-cluster-inv-api@kubernetes.io$"
       - "^sig-multicluster@kubernetes.io$"
       - "^sig-multicluster-leads@kubernetes.io$"
   - path: "sig-network/groups.yaml"
@@ -180,6 +184,8 @@ restrictions:
       - "^k8s-infra-push-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-cri-tools@kubernetes.io$"
       - "^k8s-infra-staging-dra-driver-cpu@kubernetes.io$"
+      - "^k8s-infra-staging-dra-driver-nvidia@kubernetes.io$"
+      - "^k8s-infra-staging-dra-driver-google@kubernetes.io$"
       - "^k8s-infra-staging-kmm@kubernetes.io$"
       - "^k8s-infra-staging-nfd@kubernetes.io$"
       - "^k8s-infra-staging-npd@kubernetes.io$"
@@ -322,6 +328,7 @@ restrictions:
       - "^k8s-infra-rbac-kubernetes-external-secrets@kubernetes.io$"
       - "^k8s-infra-sandbox-capa@kubernetes.io$"
       - "^k8s-infra-sandbox-capg@kubernetes.io$"
+      - "^k8s-infra-scaleway-admins@kubernetes.io$"
       - "^k8s-infra-staging-infra-tools@kubernetes.io$"
       - "^k8s-infra-yt-admins@kubernetes.io$"
       - "^sig-k8s-infra@kubernetes.io$"
@@ -377,4 +384,8 @@ restrictions:
     allowedGroups:
       - "^wg-structured-logging@kubernetes.io$"
       - "^wg-structured-logging-leads@kubernetes.io$"
+  - path: "wg-workload-aware-scheduling/groups.yaml"
+    allowedGroups:
+      - "^wg-workload-aware-scheduling@kubernetes.io$"
+      - "^wg-workload-aware-scheduling-leads@kubernetes.io$"
   - path: "**/*" # prevent any other file from containing anything

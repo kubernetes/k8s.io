@@ -16,9 +16,15 @@ spec:
               operator: In
               values:
                 - aks-prow-build
+    - clusters:
+        selector:
+          matchLabels:
+            cloud: eks
   template:
     metadata:
       name: "kyverno-{{ .name }}"
+      annotations:
+        argocd.argoproj.io/compare-options: ServerSideDiff=true,IncludeMutationWebhook=true
     spec:
       destination:
         namespace: kyverno
@@ -27,11 +33,29 @@ spec:
       sources:
         - chart: kyverno
           repoURL: "https://kyverno.github.io/kyverno"
-          targetRevision: 3.6.1
+          targetRevision: 3.8.1
           helm:
             releaseName: kyverno
             valueFiles:
               - $values/kubernetes/{{ .name }}/helm/kyverno.yaml
+            valuesObject:
+              config:
+                resourceFiltersExclude:
+                  - "[Binding,*,*]"
+                  - "[Pod/binding,*,*]"
+              features:
+                logging:
+                  format: json
+              admissionController:
+                rbac:
+                  clusterRole:
+                    extraResources:
+                      - apiGroups:
+                          - ""
+                        resources:
+                          - nodes
+                        verbs:
+                          - get
         - repoURL: "https://github.com/kubernetes/k8s.io.git"
           targetRevision: main
           ref: values
@@ -41,4 +65,4 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
-          - Replace=true
+          - ServerSideApply=true

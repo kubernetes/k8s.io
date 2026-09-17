@@ -34,7 +34,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: horologium
-        image: us-docker.pkg.dev/k8s-infra-prow/images/horologium:v20260225-8287579aa
+        image: us-docker.pkg.dev/k8s-infra-prow/images/horologium:v20260910-e30e351eb
         args:
         - --config-path=/etc/config/config.yaml
         - --job-config-path=/etc/job-config
@@ -49,6 +49,13 @@ spec:
         - name: job-config
           mountPath: /etc/job-config
           readOnly: true
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1500Mi
+          limits:
+            cpu: 1000m
+            memory: 6000Mi
       volumes:
       - name: config
         configMap:

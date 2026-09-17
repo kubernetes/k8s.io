@@ -34,6 +34,27 @@ variable "region" {
   description = "IBM Cloud region"
   default     = "eu-de"
 }
+variable "boskos_resources" {
+  description = "Boskos VPC resources to create."
+  type = map(object({
+    zone        = string
+    subnet_name = optional(string)
+  }))
+  default = {
+    k8s-s390x-test-vpc-eu-de-1 = {
+      zone        = "eu-de-1"
+      subnet_name = "k8s-s390x-test-subnet-eu-de-1"
+    }
+    k8s-s390x-test-vpc-eu-de-2 = {
+      zone        = "eu-de-2"
+      subnet_name = "k8s-s390x-test-subnet-eu-de-2"
+    }
+    k8s-s390x-test-vpc-eu-de-3 = {
+      zone        = "eu-de-3"
+      subnet_name = "k8s-s390x-test-subnet-eu-de-3"
+    }
+  }
+}
 variable "secrets_manager_id" {
   type        = string
   description = "The instance ID of your secrets manager"

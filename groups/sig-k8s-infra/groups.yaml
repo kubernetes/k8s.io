@@ -295,6 +295,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - cy@borg.dev
+      - ekainugodwin@gmail.com
       - ihor@cncf.io
       - jeefy@cncf.io
       - sig-k8s-infra-leads@kubernetes.io
@@ -389,6 +390,16 @@ groups:
     name: k8s-infra-okta-admins
     description: |-
       ACL for Okta account admins
+    settings:
+      ReconcileMembers: "true"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+    members:
+      - sig-k8s-infra-leads@kubernetes.io
+
+  - email-id: k8s-infra-scaleway-admins@kubernetes.io
+    name: k8s-infra-scaleway-admins
+    description: |-
+      ACL for Scaleway admins
     settings:
       ReconcileMembers: "true"
       WhoCanPostMessage: "ANYONE_CAN_POST"

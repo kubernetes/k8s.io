@@ -66,7 +66,7 @@ module "vpc" {
   }
 
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 6.4.0"
+  version = "~> 6.6"
 
   name = "${local.prefix}-vpc"
   cidr = aws_vpc_ipam_preview_next_cidr.main.cidr
@@ -113,7 +113,7 @@ module "vpc_endpoints" {
   }
 
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "~> 6.4.0"
+  version = "~> 6.6"
 
   vpc_id = module.vpc.vpc_id
 
@@ -142,7 +142,7 @@ module "vpc_endpoints" {
       replace(service, ".", "_") =>
       {
         service             = service
-        subnet_ids          = module.vpc.private_subnets
+        subnet_ids          = slice(module.vpc.private_subnets, 0, length(local.azs))
         private_dns_enabled = true
         tags                = { Name = "${local.prefix}-${service}" }
       }

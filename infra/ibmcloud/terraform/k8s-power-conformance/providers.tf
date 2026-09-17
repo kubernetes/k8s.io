@@ -67,3 +67,24 @@ provider "ibm" {
   region           = "tok"
   zone             = "tok04"
 }
+
+provider "ibm" {
+  alias            = "powervs_eu_de_1"
+  ibmcloud_api_key = local.key
+  region           = "eu-de"
+  zone             = "eu-de-1"
+}
+
+provider "ibm" {
+  alias            = "powervs_eu_de_2"
+  ibmcloud_api_key = local.key
+  region           = "eu-de"
+  zone             = "eu-de-2"
+}
+
+provider "ibm" {
+  alias            = "powervs_tor01"
+  ibmcloud_api_key = local.key
+  region           = "tor"
+  zone             = "tor01"
+}

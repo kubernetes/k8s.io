@@ -38,13 +38,20 @@ spec:
       terminationGracePeriodSeconds: 180
       containers:
       - name: cherrypicker
-        image: us-docker.pkg.dev/k8s-infra-prow/images/cherrypicker:v20260225-8287579aa
+        image: us-docker.pkg.dev/k8s-infra-prow/images/cherrypicker:v20260910-e30e351eb
         imagePullPolicy: Always
         args:
         - --github-token-path=/etc/github/token
         - --github-endpoint=http://ghproxy
         - --github-endpoint=https://api.github.com
         - --dry-run=false
+        resources:
+          requests:
+            cpu: 300m
+            memory: 2000Mi
+          limits:
+            cpu: 1000m
+            memory: 4000Mi
         ports:
           - name: http
             containerPort: 8888

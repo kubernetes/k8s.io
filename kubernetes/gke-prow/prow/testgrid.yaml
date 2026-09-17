@@ -30,11 +30,11 @@ spec:
           containerPort: 8080
         resources:
           requests:
-            cpu: 200m
-            memory: 256Mi
+            cpu: 1
+            memory: 8Gi
           limits:
-            cpu: 500m
-            memory: 1Gi
+            cpu: 2
+            memory: 8Gi
 ---
 apiVersion: v1
 kind: ServiceAccount

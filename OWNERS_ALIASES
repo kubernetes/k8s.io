@@ -21,8 +21,8 @@ aliases:
     - micahhausler
   sig-autoscaling-leads:
     - adrianmoisey
-    - gjtempleton
     - jackfrancis
+    - omerap12
     - towca
   sig-cli-leads:
     - ardaguclu
@@ -55,13 +55,15 @@ aliases:
     - tengqm
   sig-etcd-leads:
     - ahrtr
-    - jmhbnz
+    - ivanvc
+    - jberkus
     - serathius
     - siyuanfoundation
   sig-instrumentation-leads:
     - dashpole
     - dgrisonnet
     - logicalhan
+    - pohly
     - rexagod
     - richabanker
   sig-k8s-infra-leads:
@@ -77,8 +79,8 @@ aliases:
     - aojea
     - bowei
     - danwinship
+    - guicassolato
     - mikezappa87
-    - shaneutt
     - thockin
   sig-node-leads:
     - SergeyKanzhelev
@@ -114,11 +116,9 @@ aliases:
   sig-testing-leads:
     - BenTheElder
     - aojea
-    - cjwagner
     - jbpratt
     - michelle192837
     - pohly
-    - xmcqueen
   sig-ui-leads:
     - floreks
     - joaquimrocha
@@ -147,7 +147,7 @@ aliases:
     - rushmash91
     - zvonkok
   wg-batch-leads:
-    - kannon92
+    - amy
     - mwielgus
     - tenzen-y
   wg-data-protection-leads:
@@ -178,9 +178,9 @@ aliases:
     - rthallisey
   wg-checkpoint-restore-leads:
     - adrianreber
+    - andreyvelich
     - haircommander
     - rst0git
-    - viktoriaas
   wg-policy-leads:
     - JimBugwadia
     - poonam-lamba
@@ -193,6 +193,11 @@ aliases:
   wg-structured-logging-leads:
     - mengjiao-liu
     - pohly
+  wg-workload-aware-scheduling-leads:
+    - helayoty
+    - andreyvelich
+    - mm4tt
+    - kannon92
   committee-code-of-conduct:
     - AnaMMedina21
     - endocrimes
@@ -206,7 +211,7 @@ aliases:
     - micahhausler
     - natherz97
     - puerco
-    - ritazh
+    - stlaz
     - tabbysable
     - vinayakankugoyal
     - Vyom-Yadav
@@ -227,6 +232,7 @@ aliases:
     - spowelljr
     - prezha
     - comradeprogrammer
+    - nirs
   promo-tools-approvers:
     - cpanato
     - jeremyrickard
@@ -289,7 +295,7 @@ aliases:
     - Verolop # subproject owner / Release Manager / SIG Technical Lead
     - xmudrii # Release Manager
   sig-release-subproject-leads:
-    - gracenng
+    - fsmunoz
     - katcosgrove
     - xmudrii
 ## END CUSTOM CONTENT

@@ -19,10 +19,6 @@ prefixes:
     repo: "https://github.com/kubernetes-sigs/boskos"
     summarise: false
     consistentImages: true
-  - name: "ghproxy"
-    prefix: "us-docker.pkg.dev/k8s-infra-prow/images/ghproxy"
-    repo: "https://github.com/kubernetes-sigs/prow"
-    summarise: false
   - name: "prow"
     prefix: "us-docker.pkg.dev/k8s-infra-prow/images/"
     repo: "https://github.com/kubernetes-sigs/prow"

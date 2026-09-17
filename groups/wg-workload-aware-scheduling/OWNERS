@@ -1,0 +1,9 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+
+approvers:
+- wg-workload-aware-scheduling-leads
+reviewers:
+- wg-workload-aware-scheduling-leads
+
+labels:
+- wg/workload-aware-scheduling

@@ -39,6 +39,10 @@ module "iam" {
       "serviceAccount:${google_service_account.image_builder.email}",
     ]
 
+    "roles/managedkafka.client" = [
+      "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/mimir/sa/mimir",
+    ]
+
     "roles/secretmanager.secretAccessor" = [
       "principal://iam.googleapis.com/projects/16065310909/locations/global/workloadIdentityPools/k8s-infra-prow.svc.id.goog/subject/ns/external-secrets/sa/external-secrets",
     ]

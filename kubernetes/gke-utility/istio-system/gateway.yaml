@@ -21,6 +21,8 @@ spec:
       mode: Terminate
       certificateRefs:
       - name: k8s-io-wild-cert
+      - name: kops-discovery-cert
+        namespace: kops-discovery
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -54,3 +56,4 @@ spec:
   dnsNames:
   - '*.k8s.io'
   - 'monitoring.prow.k8s.io'
+  - 'mimir.prow.k8s.io'

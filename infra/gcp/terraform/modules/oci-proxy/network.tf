@@ -158,8 +158,9 @@ resource "google_compute_backend_service" "default" {
   project = var.project_id
   name    = "${var.project_id}-default-bes"
 
-  enable_cdn      = false
-  security_policy = google_compute_security_policy.cloud-armor.self_link
+  enable_cdn             = false
+  security_policy        = google_compute_security_policy.cloud-armor.self_link
+  custom_request_headers = ["X-Client-ASN: {asn}"]
 
   dynamic "backend" {
     for_each = google_compute_region_network_endpoint_group.default

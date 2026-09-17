@@ -22,7 +22,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS Cloudfront
-          value = "https://d39mqg4b1dx9z1.cloudfront.net",
+          value = coalesce(var.global_aws_base_url, "https://d39mqg4b1dx9z1.cloudfront.net")
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -31,6 +31,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -40,7 +44,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS ap-northeast-1 is Tokyo
-          value = "https://prod-registry-k8s-io-ap-northeast-1.s3.dualstack.ap-northeast-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-ap-northeast-1.s3.dualstack.ap-northeast-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -49,6 +53,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -58,7 +66,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS ap-northeast-1 is Tokyo
-          value = "https://prod-registry-k8s-io-ap-northeast-1.s3.dualstack.ap-northeast-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-ap-northeast-1.s3.dualstack.ap-northeast-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -67,6 +75,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -76,7 +88,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS ap-south-1 is Mumbai
-          value = "https://prod-registry-k8s-io-ap-south-1.s3.dualstack.ap-south-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-ap-south-1.s3.dualstack.ap-south-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -85,6 +97,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -94,7 +110,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS ap-southeast-1 is Singapore
-          value = "https://prod-registry-k8s-io-ap-southeast-1.s3.dualstack.ap-southeast-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-ap-southeast-1.s3.dualstack.ap-southeast-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -103,6 +119,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -112,7 +132,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS eu-central-1 is Frankfurt
-          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -121,6 +141,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -130,7 +154,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS eu-central-1 is Frankfurt
-          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -139,6 +163,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -148,7 +176,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS Cloudfront
-          value = "https://d39mqg4b1dx9z1.cloudfront.net",
+          value = coalesce(var.global_aws_base_url, "https://d39mqg4b1dx9z1.cloudfront.net"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -157,6 +185,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -166,7 +198,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS eu-central-1 is Frankfurt
-          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -175,6 +207,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -184,7 +220,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS eu-west-1 is Ireland
-          value = "https://prod-registry-k8s-io-eu-west-1.s3.dualstack.eu-west-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-eu-west-1.s3.dualstack.eu-west-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -193,6 +229,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -202,7 +242,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS eu-central-1 is Frankfurt
-          value = "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-eu-central-1.s3.dualstack.eu-central-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -211,6 +251,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -220,7 +264,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS Cloudfront
-          value = "https://d39mqg4b1dx9z1.cloudfront.net",
+          value = coalesce(var.global_aws_base_url, "https://d39mqg4b1dx9z1.cloudfront.net"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -229,6 +273,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -238,7 +286,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS eu-south-1 is Milan
-          value = "https://prod-registry-k8s-io-eu-south-1.s3.dualstack.eu-south-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-eu-south-1.s3.dualstack.eu-south-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -247,6 +295,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -256,7 +308,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS eu-west-3 is in Paris
-          value = "https://prod-registry-k8s-io-eu-west-3.s3.dualstack.eu-west-3.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-eu-west-3.s3.dualstack.eu-west-3.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -265,6 +317,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -273,7 +329,7 @@ locals {
       environment_variables = [
         {
           name  = "DEFAULT_AWS_BASE_URL",
-          value = "https://d39mqg4b1dx9z1.cloudfront.net",
+          value = coalesce(var.global_aws_base_url, "https://d39mqg4b1dx9z1.cloudfront.net"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -282,6 +338,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -291,7 +351,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS us-east-2 is Ohio, USA
-          value = "https://prod-registry-k8s-io-us-east-2.s3.dualstack.us-east-2.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-us-east-2.s3.dualstack.us-east-2.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -300,6 +360,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -309,7 +373,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS us-east-1 is Virginia, USA
-          value = "https://prod-registry-k8s-io-us-east-1.s3.dualstack.us-east-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-us-east-1.s3.dualstack.us-east-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -318,6 +382,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -327,7 +395,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS us-east-1 is Virginia, USA
-          value = "https://prod-registry-k8s-io-us-east-1.s3.dualstack.us-east-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-us-east-1.s3.dualstack.us-east-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -336,6 +404,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -345,7 +417,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS us-east-2 is Ohio, USA
-          value = "https://prod-registry-k8s-io-us-east-2.s3.dualstack.us-east-2.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-us-east-2.s3.dualstack.us-east-2.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -354,6 +426,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -363,7 +439,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS us-east-2 is Ohio, USA
-          value = "https://prod-registry-k8s-io-us-east-2.s3.dualstack.us-east-2.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-us-east-2.s3.dualstack.us-east-2.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -372,6 +448,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -381,7 +461,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS us-west-2 is Oregon, USA
-          value = "https://prod-registry-k8s-io-us-west-2.s3.dualstack.us-west-2.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-us-west-2.s3.dualstack.us-west-2.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -390,6 +470,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }
@@ -399,7 +483,7 @@ locals {
         {
           name = "DEFAULT_AWS_BASE_URL",
           // AWS us-west-1 is California, USA
-          value = "https://prod-registry-k8s-io-us-west-1.s3.dualstack.us-west-1.amazonaws.com",
+          value = coalesce(var.global_aws_base_url, "https://prod-registry-k8s-io-us-west-1.s3.dualstack.us-west-1.amazonaws.com"),
         },
         {
           name  = "UPSTREAM_REGISTRY_ENDPOINT",
@@ -408,6 +492,10 @@ locals {
         {
           name  = "UPSTREAM_REGISTRY_PATH",
           value = "k8s-artifacts-prod/images"
+        },
+        {
+          name  = "SIGNATURE_UPSTREAM_ENDPOINT",
+          value = "https://us-central1-docker.pkg.dev"
         }
       ]
     }

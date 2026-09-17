@@ -1,6 +1,16 @@
+- name: charts/dranet
+  dmap:
+    "sha256:8da67a537eca5cddeaf8148497acc24c4a88215e9370f386f0df91fa958c1fc0": ["v1.4.0"]
+    "sha256:762b9725c1dc45727741372b2c6188ef145f5809785500a1d575c6950891fec3": ["v1.3.0"]
+
 - name: dranet
   dmap:
-    "sha256:3248d8a520584100a5e87a2b92039591ea3b83a5492cc3e2d881b20d3b18ada6": ["stable", "v1.0.1"]
+    "sha256:8d452a75f32465ca69aa5a7877f476add8641fe7c91a30ace3343174c1ef695f": ["v1.4.0"]
+    "sha256:e827c334896d072d859738fd715ca682fcb3fdbbbe2ad4d71b5a133acdb278b7": ["v1.3.0"]
+    "sha256:29e7d1447c437fb259a20857e32ce31f425a37f017c925aba62177a970a86818": ["v1.2.0"]
+    "sha256:ce93cd9359c85fbca199f82108096782b9853da9b06d9a6d33f193d9c2971f45": ["v1.1.0"]
+    "sha256:3248d8a520584100a5e87a2b92039591ea3b83a5492cc3e2d881b20d3b18ada6": ["v1.0.1"]
+
 - name: ip-masq-agent
   dmap:
     "sha256:ea696f45c75fde5d2239b457520bbf2f71465467136d4238e4549d8464b61848": ["v2.12.0"]
@@ -48,9 +58,16 @@
     "sha256:7eb7b3cee4d33c10c49893ad3c386232b86d4067de5251294d4c620d6e072b93": ["v1.10.11"]
 - name: kindnet
   dmap:
+    "sha256:f54f1d3c78c8c910b8dc7afff75feb437e9fdb48428117be67eec2e1e8d2cdf3": ["v1.0.1"]
     "sha256:b64448f2424c8c45a98102b80a2a050e7573ece120808106689c2324bf1fe842": ["v1.0.0"]
 - name: kube-network-policies
   dmap:
+    "sha256:fa4a8a823da474dd6efa3bb80347b5ac58376370e1c179c5d3fa462e14b0e465": ["v1.1.1"]
+    "sha256:3d7ba4bbf5cd9774b3562ee36a5c6860b071f5a25d73b75982d1b5a807c07d42": ["v1.1.1-npa-v1alpha2"]
+    "sha256:ff35b07d89554d8d17a7e8757d51bd8851d0230b3f1ee07fdc9ddd854d65788f": ["v1.1.1-iptracker"]
+    "sha256:e3d06fa362c163855bdbbd0d5fa72fe9fabe147a21de62e8e88d22cbfeafe2a4": ["v1.1.0"]
+    "sha256:4033ae6ad3fbe0e9b9c13d8f0d90dabbcac1c5aa9d89a4df1c33a22c60257ef0": ["v1.1.0-npa-v1alpha2"]
+    "sha256:9b99b10ebacb7f0bb5bfebcb5381cc434a9f7dc22c0a85a6773120f765e1a6f3": ["v1.1.0-iptracker"]
     "sha256:d117e82e72f2cef7bf0a92070f6566fca0b4290eaee0d4a95a42f0d965292fa3": ["v1.0.0-iptracker"]
     "sha256:bfc918b89829fa589192566cd64ddc26957b9a0b32cfc81ece543c06ad1f7734": ["v1.0.0-npa-v1alpha2"]
     "sha256:1e3e79625828c8fdc9a579e3e587abaaadbb0eed317abc6912badb1b92f76135": ["v1.0.0"]
@@ -71,6 +88,8 @@
     "sha256:99c493b0979bf1328cd53f62b4864eea1bb08ff0176e34b85e9732bce1f49120": ["v0.1.0"]
 - name: kube-ip-tracker
   dmap:
+    "sha256:15605792dfb8b5bfaf60d2d1fd33429a49f5bee12a81de279a186b5d13119d6a": ["v1.1.1"]
+    "sha256:3e8cdcbfedf75e66271787cfdaa21ded939fc55319f0fd62e085c11c184200f1": ["v1.1.0"]
     "sha256:ded821117d0c681dff2926f2a97b93396607c132f7b15d65aeb375762730fa51": ["v0.9.2"]
     "sha256:21ab1d42491dd090914aad83bb54a8add7f6992b6b6478aa91ab17686692a97a": ["v0.9.1"]
 - name: network-policy-finalizer

@@ -17,8 +17,8 @@ limitations under the License.
 // this one is overridden to the latest image in staging typically
 variable "digest" {
   type = string
-  # v0.5.0
-  default  = "sha256:d91229530a784c0569adf7192978f64c9371e906ed726cc3061aa98c2706bdce"
+  # v0.6.1
+  default  = "sha256:ce45b6103aafee8786c40974362b8819b29bb3cdc4fbdf8b69ce496e33e05fe9"
   nullable = false
 }
 // these should all be explicitly set for both prod and staging
@@ -37,4 +37,9 @@ variable "notification_channel_id" {
 
 variable "service_account_name" {
   type = string
+}
+
+variable "global_aws_base_url" {
+  type    = string
+  default = ""
 }

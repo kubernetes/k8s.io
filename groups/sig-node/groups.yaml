@@ -38,7 +38,14 @@ groups:
     description: |-
       SIG Node zoom admins: leads, subprojects leads, and trusted volunteers who can manage the SIG's zoom account and Youtube recordings
     owners:
-      - sig-node-leads@kubernetes.io
+      # The following owners are from the sig-node-leads@kubernetes.io google group
+      - dawnchen@google.com
+      - decarr@redhat.com
+      - mpatel@redhat.com
+      - s.kanzhelev@gmail.com
+      - pehunt@redhat.com
+      # additional admins follow, who are not in sig-node-leads
+      - ajaysundar.k@gmail.com
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       MessageModerationLevel: "MODERATE_NONE"
@@ -171,6 +178,30 @@ groups:
       - patrick.ohly@intel.com
       - pkrishn@google.com
       - fromani@redhat.com
+      - sig-node-leads@kubernetes.io
+
+  - email-id: k8s-infra-staging-dra-driver-nvidia@kubernetes.io
+    name: k8s-infra-staging-dra-driver-nvidia
+    description: |-
+      ACL for pushing dra-driver-nvidia artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - davanum@gmail.com
+      - klueska@gmail.com
+      - shivamerla@nvidia.com
+      - sig-node-leads@kubernetes.io
+
+  - email-id: k8s-infra-staging-dra-driver-google@kubernetes.io
+    name: k8s-infra-staging-dra-driver-google
+    description: |-
+      ACL for pushing dra-driver-google artifacts
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jbelamaric@google.com
+      - mortent@google.com
+      - troychiu@google.com
       - sig-node-leads@kubernetes.io
 
   - email-id: k8s-infra-staging-nrc@kubernetes.io

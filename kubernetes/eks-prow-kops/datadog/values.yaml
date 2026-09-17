@@ -3,10 +3,16 @@ datadog:
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
   site: us5.datadoghq.com
+  confd:
+    kubelet.yaml: |-
+      init_config:
+      instances:
+        - min_collection_interval: 5
   clusterName: k8s-infra-kops-prow-build
   logs:
     enabled: true
     containerCollectAll: true
+  containerExcludeLogs: "kube_pod_label_created-by-prow:^true$"
   prometheusScrape:
     enabled: true
     serviceEndpoints: true

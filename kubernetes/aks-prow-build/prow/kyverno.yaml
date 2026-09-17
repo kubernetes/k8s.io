@@ -1,62 +1,130 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: insert-gcp-credentials
+  name: prow
 spec:
+  background: false
   rules:
-    - name: add-creds
+    - name: add-location-metadata-to-pod
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod/binding
+              namespaces:
+                - test-pods
+      context:
+        - name: node
+          variable:
+            jmesPath: request.object.target.name
+            default: ''
+        - name: zone
+          apiCall:
+            urlPath: '/api/v1/nodes/{{node}}'
+            jmesPath: 'metadata.labels."topology.kubernetes.io/zone" || ''empty'''
+        - name: region
+          apiCall:
+            urlPath: '/api/v1/nodes/{{node}}'
+            jmesPath: 'metadata.labels."topology.kubernetes.io/region" || ''empty'''
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            annotations:
+              topology.kubernetes.io/zone: '{{ zone }}'
+              topology.kubernetes.io/region: '{{ region }}'
+    - name: add-prow-sidecar-creds
       match:
         any:
           - resources:
               kinds:
                 - Pod
+              operations:
+                - CREATE # we want to ignore prow update operations
       preconditions:
-        any:
+        all:
           - key: '{{request.object.metadata.labels."created-by-prow" || ""}}'
             operator: Equals
             value: "true"
+          - key: initupload
+            operator: In
+            value: "{{ request.object.spec.initContainers[].name || `[]` }}"
+          - key: test
+            operator: In
+            value: "{{ request.object.spec.containers[].name || `[]` }}"
+          - key: sidecar
+            operator: In
+            value: "{{ request.object.spec.containers[].name || `[]` }}"
       mutate:
-        patchStrategicMerge:
-          spec:
-            initContainers:
-              # pod order matters
-              - name: clonerefs
-              - (name): "initupload"
-                env:
-                  - name: GOOGLE_APPLICATION_CREDENTIALS
-                    value: /etc/google/adc.json
-                volumeMounts:
-                  - mountPath: /var/run/secrets/google-iam-token/serviceaccount
-                    name: google-iam-token
-                    readOnly: true
-                  - mountPath: /etc/google
-                    name: google-adc
-                    readOnly: true
-            containers:
-              - name: test
-              - (name): sidecar
-                env:
-                  - name: GOOGLE_APPLICATION_CREDENTIALS
-                    value: /etc/google/adc.json
-                volumeMounts:
-                  - mountPath: /var/run/secrets/google-iam-token/serviceaccount
-                    name: google-iam-token
-                    readOnly: true
-                  - mountPath: /etc/google
-                    name: google-adc
-                    readOnly: true
-            volumes:
-              - name: google-iam-token
-                projected:
-                  defaultMode: 420
-                  sources:
-                    - serviceAccountToken:
-                        audience: sts.googleapis.com
-                        expirationSeconds: 86400
-                        path: token
-              - name: google-adc
-                configMap:
-                  name: google-adc
+        foreach:
+          - list: "request.object.spec.initContainers[?name=='clonerefs'] || `[]`"
+            patchStrategicMerge:
+              spec:
+                initContainers:
+                  # pod order matters
+                  - name: clonerefs
+                  - (name): "initupload"
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /etc/google/adc.json
+                    volumeMounts: &volumeMounts
+                      - mountPath: /var/run/secrets/google-iam-token/serviceaccount
+                        name: google-iam-token
+                        readOnly: true
+                      - mountPath: /etc/google
+                        name: google-adc
+                        readOnly: true
+                containers: &containers
+                  - name: test
+                    env:
+                      - name: PROW_CLOUD_PROVIDER
+                        value: azure
+                      - name: PROW_NODE_REGION
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.annotations['topology.kubernetes.io/region']
+                      - name: PROW_NODE_ZONE
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.annotations['topology.kubernetes.io/zone']
+                  - (name): sidecar
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /etc/google/adc.json
+                    volumeMounts:
+                      - mountPath: /var/run/secrets/google-iam-token/serviceaccount
+                        name: google-iam-token
+                        readOnly: true
+                      - mountPath: /etc/google
+                        name: google-adc
+                        readOnly: true
+                volumes: &volumes
+                  - name: google-iam-token
+                    projected:
+                      defaultMode: 420
+                      sources:
+                        - serviceAccountToken:
+                            audience: sts.googleapis.com
+                            expirationSeconds: 86400
+                            path: token
+                  - name: google-adc
+                    configMap:
+                      name: google-adc
+          - list: "request.object.spec.initContainers[?name=='initupload'] || `[]`"
+            preconditions:
+              all:
+                - key: clonerefs
+                  operator: NotIn
+                  value: "{{ request.object.spec.initContainers[].name || `[]` }}"
+            patchStrategicMerge:
+              spec:
+                initContainers:
+                  - (name): "initupload"
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /etc/google/adc.json
+                    volumeMounts: *volumeMounts
+                containers: *containers
+                volumes: *volumes
 ---
 apiVersion: v1
 kind: ConfigMap

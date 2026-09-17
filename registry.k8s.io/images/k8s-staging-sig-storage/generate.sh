@@ -47,6 +47,7 @@ readonly images=(
     snapshot-controller
     snapshot-validation-webhook
     volume-data-source-validator
+    snapshot-conversion-webhook
 )
 
 for image in "${images[@]}"; do

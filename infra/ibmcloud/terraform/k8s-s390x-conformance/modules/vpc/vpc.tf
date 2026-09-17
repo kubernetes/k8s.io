@@ -15,13 +15,13 @@ limitations under the License.
 */
 # VPC
 resource "ibm_is_vpc" "vpc" {
-  name           = "k8s-s390x-test-vpc"
+  name           = var.name
   resource_group = var.resource_group_id
 }
 
 # Subnet
 resource "ibm_is_subnet" "subnet" {
-  name                     = "k8s-s390x-test-subnet"
+  name                     = var.subnet_name
   vpc                      = ibm_is_vpc.vpc.id
   zone                     = var.zone
   resource_group           = var.resource_group_id

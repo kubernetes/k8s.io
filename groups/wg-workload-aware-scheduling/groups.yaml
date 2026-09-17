@@ -1,0 +1,38 @@
+groups:
+  #
+  # Mailing lists
+  #
+  # Each group here represents a mailing list for the WG or its subprojects,
+  # and is not intended to govern access to infrastructure
+  #
+  - email-id: wg-workload-aware-scheduling-leads@kubernetes.io
+    name: wg-workload-aware-scheduling-leads
+    description: |-
+      WG workload-aware scheduling Organizers
+    settings:
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      ReconcileMembers: "true"
+    owners:
+      - hebaelayoty@gmail.com
+      - andrey.velichkevich@gmail.com
+      - mmatejczyk@google.com
+      - kehannon@redhat.com
+
+  - email-id: wg-workload-aware-scheduling@kubernetes.io
+    name: wg-workload-aware-scheduling
+    description: |-
+      Public mailing list for WG workload-aware-scheduling
+    settings:
+      WhoCanJoin: "ANYONE_CAN_JOIN"
+      WhoCanViewGroup: "ANYONE_CAN_VIEW"
+      WhoCanDiscoverGroup: "ANYONE_CAN_DISCOVER"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
+      ReconcileMembers: "false"
+    owners:
+      - hebaelayoty@gmail.com
+      - andrey.velichkevich@gmail.com
+      - mmatejczyk@google.com
+      - kehannon@redhat.com
+    members:
+      - wg-workload-aware-scheduling-leads@kubernetes.io

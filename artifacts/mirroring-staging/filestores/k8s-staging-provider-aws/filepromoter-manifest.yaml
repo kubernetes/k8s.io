@@ -1,7 +1,0 @@
-filestores:
-- base: gs://k8s-artifacts-prod/binaries/cloud-provider-aws/
-  src: true
-- base: s3://test-artifacts-k8s-io-us-east-2/binaries/cloud-provider-aws/
-- base: s3://test-artifacts-k8s-io-us-west-2/binaries/cloud-provider-aws/
-- base: s3://test-artifacts-k8s-io-eu-west-2/binaries/cloud-provider-aws/
-- base: s3://test-artifacts-k8s-io-ap-southeast-1/binaries/cloud-provider-aws/

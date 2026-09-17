@@ -9,10 +9,12 @@ groups:
       ReconcileMembers: "true"
     owners:
       - benjamin.ahrtr@gmail.com
-      - jablair@redhat.com
+      - fuweid89@gmail.com
+      - ivan@vald.es
+      - jberkus@redhat.com
       - siarkowicz@google.com
+      - sizhang@google.com
       - spzala@us.ibm.com
-      - wenjiazhang@google.com
 
   - email-id: sig-etcd-leads@kubernetes.io
     name: sig-etcd-leads

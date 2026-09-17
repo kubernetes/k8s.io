@@ -20,12 +20,12 @@ limitations under the License.
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 20.20"
+  version = "~> 21.20"
 
   # General cluster properties.
-  cluster_name                   = var.cluster_name
-  cluster_version                = var.cluster_version
-  cluster_endpoint_public_access = true
+  name                   = var.cluster_name
+  kubernetes_version     = var.cluster_version
+  endpoint_public_access = true
 
   # Enable EKS API and ConfigMap authentication (required for the EKS Pod identity)
   authentication_mode = "API"
@@ -44,13 +44,13 @@ module "eks" {
 
   # We use IPv4 for the best compatibility with the existing setup.
   # Additionally, Ubuntu EKS optimized AMI doesn't support IPv6 well.
-  cluster_ip_family = "ipv4"
+  ip_family = "ipv4"
 
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets
   control_plane_subnet_ids = module.vpc.intra_subnets
 
-  cluster_addons = {
+  addons = {
     coredns = {
       most_recent = true
       configuration_values = jsonencode({
@@ -80,11 +80,11 @@ module "eks" {
     }
     vpc-cni = {
       most_recent              = true
-      service_account_role_arn = module.vpc_cni_irsa.iam_role_arn
+      service_account_role_arn = module.vpc_cni_irsa.arn
     }
     aws-ebs-csi-driver = {
       most_recent              = true
-      service_account_role_arn = module.ebs_csi_irsa.iam_role_arn
+      service_account_role_arn = module.ebs_csi_irsa.arn
       configuration_values = jsonencode({
         "controller" : {
           "nodeSelector" : {
@@ -112,18 +112,6 @@ module "eks" {
   }
 
   node_security_group_tags = local.node_security_group_tags
-
-  eks_managed_node_group_defaults = {
-    # TODO(xmudrii-ubuntu): Temporarily disabled because it's not supported by Bottlerocket Linux
-    # enable_bootstrap_user_data = true
-
-    # We are using the IRSA created below for permissions
-    # However, we have to deploy with the policy attached FIRST (when creating a fresh cluster)
-    # and then turn this off after the cluster/node group is created. Without this initial policy,
-    # the VPC CNI fails to assign IPs and nodes cannot join the cluster
-    # See https://github.com/aws/containers-roadmap/issues/1666 for more context
-    iam_role_attach_cni_policy = false
-  }
 
   eks_managed_node_groups = {
     stable = local.node_group_stable

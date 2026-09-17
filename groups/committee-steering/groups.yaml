@@ -97,6 +97,6 @@ groups:
       MembersCanPostAsTheGroup: "true"
       ReconcileMembers: "true"
     owners:
-      - cblecker@gmail.com
-      - sreeramvenkitesh@gmail.com
       - ninapolshakova@gmail.com
+      - rlejano@gmail.com
+      - sreeramvenkitesh@gmail.com

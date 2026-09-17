@@ -20,134 +20,101 @@ resource "ibm_pi_key" "sshkey" {
   pi_cloud_instance_id = var.service_instance_id
 }
 
-module "powervs_workspace_sao01" {
+module "powervs_workspace_eu_de_1_01" {
   providers = {
-    ibm = ibm.powervs_sao01
+    ibm = ibm.powervs_eu_de_1
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "sao01"
-  pi_workspace_name = "k8s-boskos-powervs-sao01"
+  datacenter        = "eu-de-1"
+  pi_workspace_name = "k8s-boskos-powervs-eu-de-1-01"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
 
-module "powervs_workspace_lon04" {
+module "powervs_workspace_eu_de_1_02" {
   providers = {
-    ibm = ibm.powervs_lon04
+    ibm = ibm.powervs_eu_de_1
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "lon04"
-  pi_workspace_name = "k8s-boskos-powervs-lon04"
+  datacenter        = "eu-de-1"
+  pi_workspace_name = "k8s-boskos-powervs-eu-de-1-02"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
 
-module "powervs_workspace_lon06" {
+module "powervs_workspace_eu_de_1_03" {
   providers = {
-    ibm = ibm.powervs_lon06
+    ibm = ibm.powervs_eu_de_1
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "lon06"
-  pi_workspace_name = "k8s-boskos-powervs-lon06"
+  datacenter        = "eu-de-1"
+  pi_workspace_name = "k8s-boskos-powervs-eu-de-1-03"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
 
-module "powervs_workspace_lon06_1" {
+module "powervs_workspace_eu_de_2_01" {
   providers = {
-    ibm = ibm.powervs_lon06
+    ibm = ibm.powervs_eu_de_2
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "lon06"
-  pi_workspace_name = "k8s-boskos-powervs-lon06-01"
+  datacenter        = "eu-de-2"
+  pi_workspace_name = "k8s-boskos-powervs-eu-de-2-01"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
 
-module "powervs_workspace_lon06_2" {
+module "powervs_workspace_eu_de_2_02" {
   providers = {
-    ibm = ibm.powervs_lon06
+    ibm = ibm.powervs_eu_de_2
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "lon06"
-  pi_workspace_name = "k8s-boskos-powervs-lon06-02"
+  datacenter        = "eu-de-2"
+  pi_workspace_name = "k8s-boskos-powervs-eu-de-2-02"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
 
-module "powervs_workspace_syd04" {
+module "powervs_workspace_eu_de_2_03" {
   providers = {
-    ibm = ibm.powervs_syd04
+    ibm = ibm.powervs_eu_de_2
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "syd04"
-  pi_workspace_name = "k8s-boskos-powervs-syd04"
+  datacenter        = "eu-de-2"
+  pi_workspace_name = "k8s-boskos-powervs-eu-de-2-03"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
 
-module "powervs_workspace_syd05" {
+module "powervs_workspace_tor_01_1" {
   providers = {
-    ibm = ibm.powervs_syd05
+    ibm = ibm.powervs_tor01
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "syd05"
-  pi_workspace_name = "k8s-boskos-powervs-syd05"
+  datacenter        = "tor01"
+  pi_workspace_name = "k8s-boskos-powervs-tor01-01"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
 
-module "powervs_workspace_syd05_1" {
+module "powervs_workspace_tor_01_2" {
   providers = {
-    ibm = ibm.powervs_syd05
+    ibm = ibm.powervs_tor01
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "syd05"
-  pi_workspace_name = "k8s-boskos-powervs-syd05-01"
+  datacenter        = "tor01"
+  pi_workspace_name = "k8s-boskos-powervs-tor01-02"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
 
-module "powervs_workspace_tok04" {
+module "powervs_workspace_tor_01_3" {
   providers = {
-    ibm = ibm.powervs_tok04
+    ibm = ibm.powervs_tor01
   }
   source            = "./modules/pvs_workspace"
-  datacenter        = "tok04"
-  pi_workspace_name = "k8s-boskos-powervs-tok04"
-  resource_group_id = module.resource_group.k8s_rg_id
-  image_name        = var.image_name
-}
-
-module "powervs_workspace_lon04_1" {
-  providers = {
-    ibm = ibm.powervs_lon04
-  }
-  source            = "./modules/pvs_workspace"
-  datacenter        = "lon04"
-  pi_workspace_name = "k8s-boskos-powervs-lon04-01"
-  resource_group_id = module.resource_group.k8s_rg_id
-  image_name        = var.image_name
-}
-
-module "powervs_workspace_lon04_2" {
-  providers = {
-    ibm = ibm.powervs_lon04
-  }
-  source            = "./modules/pvs_workspace"
-  datacenter        = "lon04"
-  pi_workspace_name = "k8s-boskos-powervs-lon04-02"
-  resource_group_id = module.resource_group.k8s_rg_id
-  image_name        = var.image_name
-}
-
-module "powervs_workspace_lon04_3" {
-  providers = {
-    ibm = ibm.powervs_lon04
-  }
-  source            = "./modules/pvs_workspace"
-  datacenter        = "lon04"
-  pi_workspace_name = "k8s-boskos-powervs-lon04-03"
+  datacenter        = "tor01"
+  pi_workspace_name = "k8s-boskos-powervs-tor01-03"
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }

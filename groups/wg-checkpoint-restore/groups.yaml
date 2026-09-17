@@ -18,9 +18,9 @@ groups:
       MessageModerationLevel: "MODERATE_NONE"
     owners:
       - areber@redhat.com
+      - andrey.velichkevich@gmail.com
       - pehunt@redhat.com
       - radostin@stoyanov.io
-      - viktoria.spisakovaa@gmail.com
 
   - email-id: wg-checkpoint-restore@kubernetes.io
     name: wg-checkpoint-restore
@@ -39,8 +39,8 @@ groups:
       ReconcileMembers: "false"
     owners:
       - areber@redhat.com
+      - andrey.velichkevich@gmail.com
       - pehunt@redhat.com
       - radostin@stoyanov.io
-      - viktoria.spisakovaa@gmail.com
     members:
       - wg-checkpoint-restore-leads@kubernetes.io

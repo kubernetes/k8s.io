@@ -20,8 +20,6 @@ spec:
   - code.kubernetes.io
   - conduct.k8s.io
   - conduct.kubernetes.io
-  - dl.k8s.io
-  - dl.kubernetes.io
   - docs.k8s.io
   - docs.kubernetes.io
   - examples.k8s.io

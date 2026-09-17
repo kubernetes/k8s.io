@@ -17,7 +17,7 @@ limitations under the License.
 module "eks" {
   providers = { aws = aws.kops-infra-ci }
   source    = "terraform-aws-modules/eks/aws"
-  version   = "21.3.2"
+  version   = "~> 21.20"
 
   name                   = local.cluster_name
   kubernetes_version     = var.eks_version
@@ -133,33 +133,23 @@ module "eks" {
     }
   }
 
+  access_entries = {
+    prow-eks-admin = {
+      principal_arn = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
+      policy_associations = {
+        cluster-admin = {
+          policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+          access_scope = {
+            type = "cluster"
+          }
+        }
+      }
+    }
+  }
+
   tags = merge(var.tags, {
     "region" = data.aws_region.current.region
   })
-}
-
-//TODO(ameukam): Use access entries
-module "eks-auth" {
-  source  = "terraform-aws-modules/eks/aws//modules/aws-auth"
-  version = "~> 20.0"
-
-  manage_aws_auth_configmap = true
-
-  aws_auth_roles = [
-    {
-      rolearn  = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
-      username = "arn:aws:iam::468814281478:role/Prow-EKS-Admin"
-      groups   = ["system:masters"]
-    },
-  ]
-
-  aws_auth_users = [
-    {
-      userarn  = "arn:aws:iam::${data.aws_organizations_organization.current.id}:user/ameukam"
-      username = "ameukam"
-      groups   = ["system:masters"]
-    },
-  ]
 }
 
 resource "aws_eks_pod_identity_association" "kops_prow_build" {
@@ -179,7 +169,7 @@ resource "aws_eks_pod_identity_association" "kops_prow_build" {
 module "vpc_cni_irsa" {
   providers = { aws = aws.kops-infra-ci }
   source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
-  version   = "~> 6.2.1"
+  version   = "~> 6.6"
 
   name                  = "vpc-cni-ipv4"
   attach_vpc_cni_policy = true
@@ -202,7 +192,7 @@ module "vpc_cni_irsa" {
 module "ebs_csi_irsa" {
   providers = { aws = aws.kops-infra-ci }
   source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
-  version   = "~> 6.2.1"
+  version   = "~> 6.6"
 
   name                  = "ebs-csi"
   attach_ebs_csi_policy = true
@@ -222,7 +212,7 @@ module "ebs_csi_irsa" {
 module "cluster_autoscaler_irsa_role" {
   providers = { aws = aws.kops-infra-ci }
   source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
-  version   = "~> 6.2.1"
+  version   = "~> 6.6"
 
   name                             = "cluster-autoscaler"
   attach_cluster_autoscaler_policy = true

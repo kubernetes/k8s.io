@@ -14,6 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+locals {
+  boskos_resources = {
+    for name, resource in var.boskos_resources : name => {
+      zone        = resource.zone
+      subnet_name = coalesce(resource.subnet_name, "${name}-subnet")
+    }
+  }
+
+  vpc_resource_group_id = module.resource_group.conformance_resource_group_id
+
+}
+
 module "resource_group" {
   source = "./modules/resource_group"
 }
@@ -43,10 +55,14 @@ module "secrets_manager" {
   secrets_manager_id                = var.secrets_manager_id
 }
 module "vpc" {
+  for_each = local.boskos_resources
+
   providers = {
     ibm = ibm.vpc
   }
   source            = "./modules/vpc"
-  zone              = var.zone
-  resource_group_id = module.resource_group.conformance_resource_group_id
+  name              = each.key
+  subnet_name       = each.value.subnet_name
+  zone              = each.value.zone
+  resource_group_id = local.vpc_resource_group_id
 }
