@@ -84,6 +84,15 @@ resource "google_service_account_iam_binding" "build_sa" {
   role = "roles/iam.serviceAccountUser"
 }
 
+// Cloud Build requires the service account itself to be granted this role
+// to generate OIDC Tokens
+resource "google_service_account_iam_member" "token_creator" {
+  for_each           = local.registries
+  service_account_id = google_service_account.build_sa[each.key].name
+  role               = "roles/iam.serviceAccountOpenIdTokenCreator"
+  member             = google_service_account.build_sa[each.key].member
+}
+
 module "artifact_registry" {
   for_each = local.registries
   source   = "GoogleCloudPlatform/artifact-registry/google"
