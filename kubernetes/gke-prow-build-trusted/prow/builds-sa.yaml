@@ -20,6 +20,11 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: boskos
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: charts
 ---
 apiVersion: v1
@@ -71,6 +76,11 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: dra-example-driver
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: e2e-test-images
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -155,6 +165,11 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: kubetest2
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: kueue
 ---
 apiVersion: v1
@@ -181,6 +196,11 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: node-readiness-controller
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prow
 ---
 apiVersion: v1
 kind: ServiceAccount

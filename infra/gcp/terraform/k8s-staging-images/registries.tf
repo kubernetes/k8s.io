@@ -16,10 +16,12 @@ limitations under the License.
 
 locals {
   // The groups have to be created before applying this terraform code
+  // Order the registries alphabetically
   registries = {
     agent-sandbox                   = "group:k8s-infra-staging-agent-sandbox@kubernetes.io"
     agentic-net                     = "group:k8s-infra-staging-agentic-net@kubernetes.io"
     aws-encryption-provider         = "group:k8s-infra-staging-provider-aws@kubernetes.io"
+    boskos                          = "group:k8s-infra-staging-boskos@kubernetes.io"
     charts                          = "group:k8s-infra-release-admins@kubernetes.io"
     cloud-provider-kind             = "group:k8s-infra-staging-kind@kubernetes.io"
     cluster-capacity                = "group:k8s-infra-staging-cluster-capacity@kubernetes.io"
@@ -31,6 +33,7 @@ locals {
     dra-driver-google               = "group:k8s-infra-staging-dra-driver-google@kubernetes.io"
     dra-driver-nvidia               = "group:k8s-infra-staging-dra-driver-nvidia@kubernetes.io"
     dra-example-driver              = "group:k8s-infra-staging-dra-example-driver@kubernetes.io"
+    e2e-test-images                 = "group:k8s-infra-staging-e2e-test-images@kubernetes.io"
     etcd                            = "group:k8s-infra-staging-etcd@kubernetes.io"
     etcd-manager                    = "group:k8s-infra-staging-etcd-manager@kubernetes.io"
     gateway-api                     = "group:k8s-infra-staging-gateway-api@kubernetes.io"
@@ -47,12 +50,14 @@ locals {
     kubemark                        = "group:sig-scalability-leads@kubernetes.io"
     kubernetes                      = "group:k8s-infra-staging-kubernetes@kubernetes.io"
     kubespray                       = "group:k8s-infra-staging-kubespray@kubernetes.io"
+    kubetest2                       = "group:k8s-infra-staging-kubetest2@kubernetes.io"
     kueue                           = "group:k8s-infra-staging-kueue@kubernetes.io"
     lws                             = "group:k8s-infra-staging-lws@kubernetes.io"
     maintainer-tools                = "group:k8s-infra-staging-maintainer-tools@kubernetes.io"
     mcp-lifecycle-operator          = "group:k8s-infra-staging-mcp-lifecycle-op@kubernetes.io"
     minikube                        = "group:k8s-infra-staging-minikube@kubernetes.io"
     node-readiness-controller       = "group:k8s-infra-staging-nrc@kubernetes.io"
+    prow                            = "group:k8s-infra-prow-oncall@kubernetes.io"
     resource-state-metrics          = "group:k8s-infra-staging-resource-state-met@kubernetes.io"
     sp-operator                     = "group:k8s-infra-staging-sp-operator@kubernetes.io"
     secrets-store-sync              = "group:k8s-infra-staging-secrets-store-sync@kubernetes.io"
