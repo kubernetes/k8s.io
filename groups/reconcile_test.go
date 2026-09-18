@@ -18,6 +18,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"reflect"
 	"testing"
 
@@ -212,6 +214,54 @@ func TestRestrictionForPath(t *testing.T) {
 				t.Errorf("Unexpected restriction.allowedGroups for %v, %v: expected %v, got %v", path, root, expected.AllowedGroups, actual.AllowedGroups)
 			}
 		})
+	}
+}
+
+func TestConfigLoadPaths(t *testing.T) {
+	tempDir := t.TempDir()
+	configDir := filepath.Join(tempDir, "configs")
+	if err := os.MkdirAll(configDir, 0o755); err != nil {
+		t.Fatalf("creating config dir: %v", err)
+	}
+
+	configPath := filepath.Join(configDir, "config.yaml")
+	configContents := []byte("" +
+		"bot-id: bot@kubernetes.io\n" +
+		"secret-version: projects/test/secrets/test/versions/latest\n" +
+		"groups-path: .\n" +
+		"restrictions-path: restrictions.yaml\n")
+	if err := os.WriteFile(configPath, configContents, 0o644); err != nil {
+		t.Fatalf("writing config file: %v", err)
+	}
+
+	otherDir := filepath.Join(tempDir, "other")
+	if err := os.MkdirAll(otherDir, 0o755); err != nil {
+		t.Fatalf("creating other dir: %v", err)
+	}
+
+	wd, err := os.Getwd()
+	if err != nil {
+		t.Fatalf("getting working directory: %v", err)
+	}
+	defer func() {
+		if err := os.Chdir(wd); err != nil {
+			t.Fatalf("restoring working directory: %v", err)
+		}
+	}()
+	if err := os.Chdir(otherDir); err != nil {
+		t.Fatalf("changing working directory: %v", err)
+	}
+
+	var cfg Config
+	if err := cfg.Load(configPath, true); err != nil {
+		t.Fatalf("loading config: %v", err)
+	}
+
+	if want := configDir; cfg.GroupsPath != want {
+		t.Fatalf("groups-path = %q, want %q", cfg.GroupsPath, want)
+	}
+	if want := filepath.Join(configDir, "restrictions.yaml"); cfg.RestrictionsPath != want {
+		t.Fatalf("restrictions-path = %q, want %q", cfg.RestrictionsPath, want)
 	}
 }
 
