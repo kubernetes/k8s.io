@@ -1,0 +1,59 @@
+grafana:
+  enabled:
+    false
+
+kube-state-metrics:
+  metricLabelsAllowlist:
+   - pods=[*]
+   - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+
+nodeExporter:
+  enabled: false
+
+prometheus:
+  prometheusSpec:
+    retention: 120d
+    resources:
+      requests:
+        cpu: 4
+        memory: 25Gi
+      limits:
+        cpu: 4
+        memory: 25Gi
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: azure-disk-premium-retain
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 300Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    scrapeConfigSelectorNilUsesHelmValues: false
+    externalLabels:
+      cluster: aks-prow-build
+      cloud: azure
+    remoteWrite:
+      - url: https://mimir.prow.k8s.io/api/v1/push
+        basicAuth:
+          username:
+            name: mimir-credentials
+            key: username
+          password:
+            name: mimir-credentials
+            key: password
+        headers:
+          X-Scope-OrgID: prow
+coreDns:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
