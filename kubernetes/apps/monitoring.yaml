@@ -17,6 +17,7 @@ spec:
                 - gke-utility
                 - eks-prow-build
                 - aks-prow-build
+                - ibm-ppc64le
   template:
     metadata:
       name: 'monitoring-{{ .name }}'
