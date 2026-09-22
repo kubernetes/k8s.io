@@ -3,4 +3,3 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - secrets.yaml
-  - azure-disk-sc.yaml
