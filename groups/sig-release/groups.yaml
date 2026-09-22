@@ -354,22 +354,27 @@ groups:
       - rayandas91@gmail.com # v1.38 Release Lead Shadow
       - sreeramvenkitesh@gmail.com # v1.38 Release Lead
     members:
+      - Aaron.braundmeier@gmail.com # v1.38 Release Comms Shadow
       - amanshrivastava118@gmail.com # v1.38 Release Signal Shadow
       - arshsharma461@gmail.com # v1.38 Release Comms Lead
       - destinyerhabor6@gmail.com # v1.38 Docs Lead
       - dhanisha.6@gmail.com # v1.38 Enhancements Shadow
+      - gmail@yudocaa.in # v1.38 Release Comms Shadow
       - hctsai@linux.com # v1.38 Release Signal Shadow
       - jenny.shu@solo.io # v1.38 BM shadow
       - jujohn@redhat.com # v1.38 Release Signal Shadow
       - karimzakzouk@outlook.com # v1.38 Enhancements Shadow
+      - kg4180553@gmail.com # v1.38 Release Comms Shadow
       - k.130.email@gmail.com # v1.38 Release Signal Lead
       - lauri.d.apple@gmail.com # v1.38 Enhancements Shadow
+      - omarnasserjr@gmail.com # v1.38 Release Comms Shadow
       - rajalakshmi.girish1@ibm.com # v1.38 Enhancements Shadow
       - rytswd@gmail.com # v1.38 BM shadow
       - sudharshan.muralidharan1@ibm.com # v1.38 Release Signal Shadow
       - swrao21@gmail.com # v1.38 Release Signal Shadow
       - tatiana.sel@gmail.com # v1.38 Release Signal Shadow
       - tico88612@gmail.com # v1.38 Enhancements Lead
+      - urvashichoubey0121@gmail.com # v1.38 Release Comms Shadow
       - wendyha.sut@gmail.com # v1.38 Enhancements Shadow
 
   - email-id: release-team-shadows@kubernetes.io
@@ -392,17 +397,21 @@ groups:
       - kat.cosgrove@gmail.com # Subproject owner
       - sreeramvenkitesh@gmail.com # v1.38 Release Lead
     members:
+      - Aaron.braundmeier@gmail.com # v1.38 Release Comms Shadow
       - agustina.barbetta@gmail.com # v1.38 Release Lead Shadow
       - amanshrivastava118@gmail.com # v1.38 Release Signal Shadow
       - arshsharma461@gmail.com # v1.38 Release Comms Lead
       - dhanisha.6@gmail.com # v1.38 Enhancements Shadow
       - destinyerhabor6@gmail.com # v1.38 Docs Lead
+      - gmail@yudocaa.in # v1.38 Release Comms Shadow
       - hctsai@linux.com # v1.38 Release Signal Shadow
       - jujohn@redhat.com # v1.38 Release Signal Shadow
       - k.130.email@gmail.com # v1.38 Release Signal Lead
       - karimzakzouk@outlook.com # v1.38 Enhancements Shadow
+      - kg4180553@gmail.com # v1.38 Release Comms Shadow
       - lauri.d.apple@gmail.com # v1.38 Enhancements Shadow
       - muhammad.adil.ghaffar@est.tech # v1.38 Release Lead Shadow
+      - omarnasserjr@gmail.com # v1.38 Release Comms Shadow
       - prajyotparab19@gmail.com # v1.38 Release Lead Shadow
       - rajalakshmi.girish1@ibm.com # v1.38 Enhancements Shadow
       - rayandas91@gmail.com # v1.38 Release Lead Shadow
@@ -410,6 +419,7 @@ groups:
       - swrao21@gmail.com # v1.38 Release Signal Shadow
       - tatiana.sel@gmail.com # v1.38 Release Signal Shadow
       - tico88612@gmail.com # v1.38 Enhancements Lead
+      - urvashichoubey0121@gmail.com # v1.38 Release Comms Shadow
       - wendyha.sut@gmail.com # v1.38 Enhancements Shadow
   # RBAC groups:
   # - grant access to the `namespace-user` role for a single namespace on the `aaa` cluster
