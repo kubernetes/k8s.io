@@ -201,3 +201,33 @@ module "prow_build_nodepool_c4d_standard_16_localssd" {
     }
   ]
 }
+
+module "prow_build_nodepool_build" {
+  source       = "../modules/gke-nodepool"
+  project_name = module.project.project_id
+  cluster_name = module.prow_build_cluster.cluster.name
+  location     = module.prow_build_cluster.cluster.location
+  node_locations = [
+    # "us-central1-a",
+    "us-central1-b",
+  ]
+  name                         = "pool8-build"
+  initial_count                = 1
+  min_count                    = 2
+  max_count                    = 3 # total across all zones
+  machine_type                 = "c4d-standard-32-lssd"
+  disk_size_gb                 = 100
+  disk_type                    = "hyperdisk-balanced"
+  enable_nested_virtualization = true
+  service_account              = module.prow_build_cluster.cluster_node_sa.email
+  taints = [
+    {
+      key    = "build"
+      value  = "true"
+      effect = "NO_SCHEDULE"
+    }
+  ]
+  labels = {
+    pool = "build"
+  }
+}
