@@ -1,6 +1,7 @@
 - name: base/crun
   dmap:
     "sha256:63cf5c33cb3c45b0e0f37b03cd3dfa630bf6f37fdc582b84ba6f7520da872a76": ["v1.29.1"]
+    "sha256:a1e7cbe609e28a9385936ae0d8acba22b9437aceb982316d6aad7b7001526d7a": ["v1.30"]
 - name: base/runc
   dmap:
     "sha256:7e3cc47105b0b005555dcb3295595234f631c71e7f9982337117ca4675d0506f": ["v1.5.1"]
