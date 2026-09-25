@@ -1,7 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
-- XudongLiuHarold
+- 12345lcr
 - lubronzhan
 - DanielXiao
 - chenlin07
@@ -9,7 +9,7 @@ approvers:
 - silvery1622
 
 reviewers:
-- XudongLiuHarold
+- 12345lcr
 - lubronzhan
 - DanielXiao
 - chenlin07
