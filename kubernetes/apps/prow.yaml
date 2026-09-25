@@ -3,9 +3,6 @@ kind: ApplicationSet
 metadata:
   name: prow
 spec:
-  ignoreApplicationDifferences:
-    - jsonPointers:
-        - /spec/syncPolicy
   goTemplate: true
   generators:
     - clusters:

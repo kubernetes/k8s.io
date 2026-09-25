@@ -1,6 +1,29 @@
 apiVersion: v1
 kind: Secret
 metadata:
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+    clusterType: utility
+    istioNetwork: prow-vpc
+    name: gke-utility
+    environment: prod
+    cloud: gke
+  name: gke-utility
+  namespace: argocd
+type: Opaque
+stringData:
+  name: gke-utility
+  server: https://kubernetes.default.svc
+  config: |
+    {
+      "tlsClientConfig": {
+        "insecure": true
+      }
+    }
+---
+apiVersion: v1
+kind: Secret
+metadata:
   name: gke-prow
   labels:
     name: gke-prow
