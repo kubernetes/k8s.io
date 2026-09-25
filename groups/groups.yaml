@@ -60,6 +60,7 @@ groups:
       - wg-device-management-leads@kubernetes.io
       - wg-etcd-operator-leads@kubernetes.io
       - wg-lts-leads@kubernetes.io
+      - wg-node-identity-leads@kubernetes.io
       - wg-node-lifecycle-leads@kubernetes.io
       - wg-serving-leads@kubernetes.io
       - wg-checkpoint-restore-leads@kubernetes.io
