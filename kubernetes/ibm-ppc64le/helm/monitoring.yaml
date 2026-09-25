@@ -1,0 +1,94 @@
+grafana:
+  enabled: false
+
+alertmanager:
+  enabled: false
+
+kube-state-metrics:
+  metricLabelsAllowlist:
+   - pods=[*]
+   - deployments=[app.kubernetes.io/name,app.kubernetes.io/component,app.kubernetes.io/instance]
+  nodeSelector:
+    role: infra
+  tolerations:
+    - effect: NoSchedule
+      key: infra
+      operator: Equal
+      value: "true"
+
+nodeExporter:
+  enabled: false
+
+prometheus:
+  prometheusSpec:
+    nodeSelector:
+      role: infra
+    tolerations:
+      - key: infra
+        operator: Equal
+        value: "true"
+        effect: NoSchedule
+    retention: 120d
+    resources:
+      requests:
+        cpu: 4
+        memory: 25Gi
+      limits:
+        cpu: 4
+        memory: 25Gi
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: powervs-tier1-sc
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 300Gi
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    scrapeConfigSelectorNilUsesHelmValues: false
+    externalLabels:
+      cluster: ibm-ppc64le
+      cloud: ibm
+    remoteWrite:
+      - url: https://mimir.prow.k8s.io/api/v1/push
+        basicAuth:
+          username:
+            name: mimir-credentials
+            key: username
+          password:
+            name: mimir-credentials
+            key: password
+        headers:
+          X-Scope-OrgID: prow
+
+prometheusOperator:
+  nodeSelector:
+    role: infra
+  tolerations:
+    - effect: NoSchedule
+      key: infra
+      operator: Equal
+      value: "true"
+  admissionWebhooks:
+    patch:
+      nodeSelector:
+        role: infra
+      tolerations:
+        - effect: NoSchedule
+          key: infra
+          operator: Equal
+          value: "true"
+
+coreDns:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
