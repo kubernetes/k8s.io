@@ -1,0 +1,51 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: k8s-testgrid-summarizer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com
+  name: summarizer
+  namespace: testgrid
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testgrid-summarizer-tabs
+  namespace: testgrid
+  labels:
+    app: testgrid
+    component: summarizer-tabs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testgrid
+      component: summarizer-tabs
+  template:
+    metadata:
+      labels:
+        app: testgrid
+        component: summarizer-tabs
+    spec:
+      serviceAccountName: summarizer
+      containers:
+        - name: summarizer
+          image: gcr.io/k8s-testgrid/summarizer:v20260902-v0.0.176-10-gf15bfa48
+          ports:
+            - name: metrics
+              containerPort: 2112
+          args:
+            - --config=gs://k8s-testgrid-config-external/config
+            - --confirm
+            - --json-logs
+            - --persist-queue=gs://k8s-testgrid-states/queue/summarizer-tabs.json
+            - --pubsub=k8s-testgrid/tab-updates
+            - --wait=5m
+          resources:
+            requests:
+              cpu: "1"
+              memory: "50G"
+            limits:
+              cpu: "2"
+              memory: "100G"
+---

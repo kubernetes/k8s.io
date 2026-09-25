@@ -20,4 +20,9 @@ resources:
   - statusreconciler.yaml
   - tide.yaml
   - monitoring.yaml
-  - testgrid.yaml
+  - testgrid/monitoring.yaml
+  - testgrid/namespace.yaml
+  - testgrid/summarizer.yaml
+  - testgrid/tabulator.yaml
+  - testgrid/ui.yaml
+  - testgrid/updater.yaml

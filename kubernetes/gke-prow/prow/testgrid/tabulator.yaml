@@ -1,0 +1,56 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: k8s-testgrid-tabulator@k8s-infra-prow-build-trusted.iam.gserviceaccount.com
+  name: tabulator
+  namespace: testgrid
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testgrid-tabulator
+  namespace: testgrid
+  labels:
+    app: testgrid
+    channel: stable
+    component: tabulator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testgrid
+      channel: stable
+      component: tabulator
+  template:
+    metadata:
+      labels:
+        app: testgrid
+        channel: stable
+        component: tabulator
+    spec:
+      serviceAccountName: tabulator
+      containers:
+        - name: tabulator
+          image: gcr.io/k8s-testgrid/tabulator:v20260902-v0.0.176-10-gf15bfa48
+          ports:
+            - name: metrics
+              containerPort: 2112
+          args:
+            - --column-stats
+            - --config=gs://k8s-testgrid-config-external/config
+            - --confirm
+            - --json-logs
+            - --persist-queue=gs://k8s-testgrid-states/queue/tabulator.json
+            - --pubsub=k8s-testgrid/test-group-updates
+            - --read-concurrency=10
+            - --wait=1h
+            - --write-concurrency=10
+          resources:
+            requests:
+              cpu: "30"
+              memory: "25G"
+            limits:
+              cpu: "40"
+              memory: "50G"

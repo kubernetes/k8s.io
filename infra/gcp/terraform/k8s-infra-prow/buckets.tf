@@ -115,6 +115,79 @@ module "testgrid_config_external_bucket" {
   ]
 }
 
+// Create gs://k8s-testgrid-states to store K8s TestGrid state protos.
+module "testgrid_states_bucket" {
+  source = "github.com/terraform-google-modules/terraform-google-cloud-storage//modules/simple_bucket?ref=v11.1.2"
+
+  name       = "k8s-testgrid-states"
+  project_id = module.project.project_id
+  location   = "us"
+
+  lifecycle_rules = [{
+    action = {
+      type = "Delete"
+    }
+    condition = {
+      age        = 90 # 90d
+      with_state = "ANY"
+    }
+  }]
+
+  iam_members = [
+    {
+      role   = "roles/storage.objectAdmin"
+      member = google_service_account.prow.member
+    },
+    {
+      // Let the upload job write to this bucket.
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:k8s-testgrid-config-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    },
+    // Let component service accounts write to this bucket.
+    {
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:k8s-testgrid-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    },
+    {
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:k8s-testgrid-summarizer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    },
+    {
+      role   = "roles/storage.objectAdmin"
+      member = "serviceAccount:k8s-testgrid-tabulator@k8s-infra-prow-build-trusted.iam.gserviceaccount.com"
+    }
+  ]
+}
+
+// Create Pub/Sub notification topics for TestGrid components (one each for test group and tab updates).
+resource "google_storage_notification" "testgrid_test_group_updates_notification" {
+  bucket             = module.testgrid_states_bucket.name
+  payload_format     = "JSON_API_V1"
+  topic              = google_pubsub_topic.testgrid_test_group_updates_topic.id
+  event_types        = ["OBJECT_FINALIZE"]
+  object_name_prefix = "grid/"
+  depends_on         = [google_pubsub_topic_iam_binding.publish_binding]
+}
+
+resource "google_pubsub_topic" "testgrid_test_group_updates_topic" {
+  name    = "testgrid-test-group-updates"
+  project = module.project.project_id
+}
+
+resource "google_storage_notification" "testgrid_tab_updates_notification" {
+  bucket             = module.testgrid_states_bucket.name
+  payload_format     = "JSON_API_V1"
+  topic              = google_pubsub_topic.testgrid_tab_updates_topic.id
+  event_types        = ["OBJECT_FINALIZE"]
+  object_name_prefix = "tabs/"
+  depends_on         = [google_pubsub_topic_iam_binding.publish_binding]
+}
+
+resource "google_pubsub_topic" "testgrid_tab_updates_topic" {
+  name    = "testgrid-tab-updates"
+  project = module.project.project_id
+}
+
 // Create gs://kubernetes-ci-logs to store logs from Prow jobs.
 module "prow_bucket" {
   source  = "terraform-google-modules/cloud-storage/google//modules/simple_bucket"
