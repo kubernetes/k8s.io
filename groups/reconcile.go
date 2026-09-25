@@ -397,6 +397,8 @@ func (c *Config) Load(configFilePath string, confirmChanges bool) error {
 
 	if c.RestrictionsPath == "" {
 		c.RestrictionsPath = filepath.Join(filepath.Dir(configFilePath), defaultRestrictionsFile)
+	} else if !filepath.IsAbs(c.RestrictionsPath) {
+		c.RestrictionsPath = filepath.Clean(filepath.Join(filepath.Dir(configFilePath), c.RestrictionsPath))
 	}
 	c.RestrictionsPath, err = filepath.Abs(c.RestrictionsPath)
 	if err != nil {
