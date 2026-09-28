@@ -1,10 +1,14 @@
 - name: base/crun
   dmap:
     "sha256:63cf5c33cb3c45b0e0f37b03cd3dfa630bf6f37fdc582b84ba6f7520da872a76": ["v1.29.1"]
-    "sha256:a1e7cbe609e28a9385936ae0d8acba22b9437aceb982316d6aad7b7001526d7a": ["v1.30"]
+    "sha256:a1e7cbe609e28a9385936ae0d8acba22b9437aceb982316d6aad7b7001526d7a": ["v1.30","v1.30.1"]
 - name: base/runc
   dmap:
     "sha256:7e3cc47105b0b005555dcb3295595234f631c71e7f9982337117ca4675d0506f": ["v1.5.1"]
+    "sha256:ba9117bff8302adbcae23aab113528ff091e563d3b661b2710844f6e924ca6d1": ["v1.5.2"]
+- name: charts/security-profiles-operator
+  dmap:
+    "sha256:4a9e0f03d5fda4c21571a90fe140c130d85ad11d50a9122a2e6ec0b10459115e": ["1.1.0"]
 - name: seccomp-test-profiles
   dmap:
     "sha256:9b9d6cb98e5c58448c341628db6b20e7c4866abc53fbd5e1f5a938739b26fbe6": ["deny-chmod"]
@@ -130,6 +134,3 @@
     "sha256:81cd3f6b07094e3ef8b8eaf68e3cdd107210c9c289333158a0b6dccbe25e2a13": ["v1.0.0"]
     "sha256:33a5779eeb1227b6f1ff5eb6280b151d0ce53e7608d66b2da53c392b647f1e83": ["v1.0.1"]
     "sha256:b4f79feba4fa4c1f329cf03e1324fc4401e9bb54c8c249a940feff50c437486e": ["v1.1.0"]
-- name: charts/security-profiles-operator
-  dmap:
-    "sha256:4a9e0f03d5fda4c21571a90fe140c130d85ad11d50a9122a2e6ec0b10459115e": ["1.1.0"]
