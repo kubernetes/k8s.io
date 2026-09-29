@@ -24,6 +24,7 @@ Each Boskos project gets the following APIs enabled:
 - `compute.googleapis.com`
 - `container.googleapis.com`
 - `file.googleapis.com`
+- `gkehub.googleapis.com`
 - `logging.googleapis.com`
 - `monitoring.googleapis.com`
 - `secretmanager.googleapis.com`
