@@ -14,4 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-data "aws_region" "current" {}
+output "bucket_arn" {
+  value = aws_s3_bucket.registry-k8s-io.arn
+}
+
+output "bucket_regional_domain_name" {
+  value = aws_s3_bucket.registry-k8s-io.bucket_regional_domain_name
+}
