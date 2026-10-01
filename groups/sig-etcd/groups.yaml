@@ -22,10 +22,11 @@ groups:
       sig-etcd leads
     owners:
       - benjamin.ahrtr@gmail.com
-      - jablair@redhat.com
       - siarkowicz@google.com
       - sizhang@google.com
       - ivan@vald.es
+      - jberkus@redhat.com
+      - fuweid89@gmail.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
