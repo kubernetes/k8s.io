@@ -47,6 +47,7 @@ fi
 RELEASE_PROCESS_CLOUDBUILD_SVCACCT="648026197307@cloudbuild.gserviceaccount.com"
 STAGING_SIGNER_SVCACCT="krel-staging"
 K8s_ORG_SIGNER_SVCACCT="krel-trust"
+SUMMARY_SIGNER_SVCACCT="promoter-summaries"
 PROMOTER_PROJECT="k8s-artifacts-prod"
 
 # This function ensures the cross-project impersonation
@@ -138,6 +139,31 @@ function ensure_signer_service_accounts() {
     ensure_serviceaccount_role_binding \
         "${prod_sign_account}" \
         "serviceAccount:${promoter_image_account}" \
+        "roles/iam.serviceAccountTokenCreator"
+
+    color 6 "Ensuring image promoter verification summary signing account"
+    ensure_service_account \
+        "${project}" \
+        "${SUMMARY_SIGNER_SVCACCT}" \
+        "Kubernetes image promoter verification summary signer"
+
+    # The production image promotion jobs sign the images they promote with
+    # the main Kubernetes signing account, and the verification summaries
+    # with their own account, which only they can use. Consumers pin it as
+    # the verifier of the promoted images. The account of the jobs is
+    # managed by the Terraform of k8s-artifacts-prod
+    # (infra/gcp/terraform/k8s-artifacts-prod), so it has to be applied
+    # first.
+    promotion_jobs_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${PROD_IMAGE_PROMOTION_SVCACCT}")"
+
+    ensure_serviceaccount_role_binding \
+        "${prod_sign_account}" \
+        "serviceAccount:${promotion_jobs_account}" \
+        "roles/iam.serviceAccountTokenCreator"
+
+    ensure_serviceaccount_role_binding \
+        "$(svc_acct_email "${project}" "${SUMMARY_SIGNER_SVCACCT}")" \
+        "serviceAccount:${promotion_jobs_account}" \
         "roles/iam.serviceAccountTokenCreator"
 }
 
