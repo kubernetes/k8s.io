@@ -17,6 +17,28 @@ limitations under the License.
 
 # This file contains the Cloud Armor policies
 
+locals {
+  # allow:
+  # our homepage info redirect: /
+  # our privacy info redirect: /privacy
+  # OCI ping: /v2
+  # OCI content calls: /v2/<name>/(blobs|manifests)/<reference>
+  # OCI token: /token
+  # tag list: /v2/(<name>/tags|tags)/list
+  # OCI referrers, with allow_referrers: /v2/<name>/referrers/<digest>
+  # https://github.com/opencontainers/distribution-spec/blob/main/spec.md#endpoints
+  # https://distribution.github.io/distribution/spec/auth/token/
+  allowed_paths = concat([
+    "^/$",
+    "^/privacy$",
+    "^/token$",
+    "^/v2/?$",
+    "^/v2/.+/blobs/.+$",
+    "^/v2/.+/manifests/.+$",
+    "^/v2/.*tags/list$",
+  ], var.allow_referrers ? ["^/v2/.+/referrers/.+$"] : [])
+}
+
 resource "google_compute_security_policy" "cloud-armor" {
   project = var.project_id
   name    = "security-policy-oci-proxy"
@@ -64,17 +86,8 @@ resource "google_compute_security_policy" "cloud-armor" {
     priority = "1"
     match {
       expr {
-        # allow:
-        # our homepage info redirect: /
-        # our privacy info redirect: /privacy
-        # OCI ping: /v2
-        # OCI content calls: /v2/<name>/(blobs|manifests)/<reference>
-        # OCI token: /token
-        # tag list: /v2/(<name>/tags|tags)/list
-        # https://github.com/opencontainers/distribution-spec/blob/main/spec.md#endpoints
-        # https://distribution.github.io/distribution/spec/auth/token/
-        # NOTE: AR doesn't support referrers API
-        expression = "!request.path.matches('^/$|^/privacy$|^/token$|^/v2/?$|^/v2/.+/blobs/.+$|^/v2/.+/manifests/.+$|^/v2/.*tags/list$')"
+        # see allowed_paths
+        expression = "!request.path.matches('${join("|", local.allowed_paths)}')"
       }
     }
   }
