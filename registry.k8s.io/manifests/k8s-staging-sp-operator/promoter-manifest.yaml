@@ -47,3 +47,25 @@ registries:
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: us-west2-docker.pkg.dev/k8s-artifacts-prod/images/security-profiles-operator
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+# The promoter (kpromo v4.7.0 or later) checks every image of this manifest
+# against this policy and carries the accepted staging attestations. The
+# Cloud Build service account generates and signs the provenance of the images
+# and profiles itself, so that builder reaches SLSA build level 1 only. spoc
+# and the released Helm chart are built on GitHub Actions, whose isolated
+# provenance workflow reaches level 3, and only its signer may claim it. That
+# signer is bound to v* release tags, which only the SPO admins may create in
+# the repository ("Release tags" tag ruleset).
+provenance:
+  mode: warn
+  signers:
+  - sigstore::https://accounts.google.com::sp-operator-sa@k8s-staging-images.iam.gserviceaccount.com
+  - sigstore(identityMatch=regex)::https://token.actions.githubusercontent.com::https://github\.com/kubernetes-sigs/security-profiles-operator/\.github/workflows/provenance\.yml@refs/tags/v[0-9]+\.[0-9]+\.[0-9]+
+  builders:
+  - id: https://cloudbuild.googleapis.com/projects/k8s-staging-images/serviceAccounts/sp-operator-sa@k8s-staging-images.iam.gserviceaccount.com/cloudbuild.yaml
+    level: 1
+  - id: https://github.com/kubernetes-sigs/security-profiles-operator/.github/workflows/provenance.yml
+    level: 3
+    signers:
+    - sigstore(identityMatch=regex)::https://token.actions.githubusercontent.com::https://github\.com/kubernetes-sigs/security-profiles-operator/\.github/workflows/provenance\.yml@refs/tags/v[0-9]+\.[0-9]+\.[0-9]+
+  sources:
+  - github.com/kubernetes-sigs/security-profiles-operator
