@@ -124,18 +124,18 @@ function ensure_signer_service_accounts() {
         "serviceAccount:${RELEASE_PROCESS_CLOUDBUILD_SVCACCT}" \
         "roles/iam.serviceAccountTokenCreator"
 
-    # The image promoter accounts that handle image and file promotion need
-    # access to the main Kubernetes signing account to produce OIDC tokens
-    # with its identity. 
+    # The image promoter account needs access to the main Kubernetes signing
+    # account to produce OIDC tokens with its identity. File promotion
+    # doesn't sign, so the file promoter account doesn't.
     prod_sign_account="$(svc_acct_email "${project}" "${K8s_ORG_SIGNER_SVCACCT}")"
     promoter_file_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${FILE_PROMOTER_SVCACCT}")"
     promoter_image_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
-    
-    ensure_serviceaccount_role_binding \
+
+    ensure_removed_serviceaccount_role_binding \
         "${prod_sign_account}" \
         "serviceAccount:${promoter_file_account}" \
         "roles/iam.serviceAccountTokenCreator"
-    
+
     ensure_serviceaccount_role_binding \
         "${prod_sign_account}" \
         "serviceAccount:${promoter_image_account}" \
@@ -150,10 +150,9 @@ function ensure_signer_service_accounts() {
     # The production image promotion jobs sign the images they promote with
     # the main Kubernetes signing account, and the verification summaries
     # with their own account, which only they can use. Consumers pin it as
-    # the verifier of the promoted images. The account of the jobs is
-    # managed by the Terraform of k8s-artifacts-prod
-    # (infra/gcp/terraform/k8s-artifacts-prod), so it has to be applied
-    # first.
+    # the verifier of the promoted images. The account of the jobs is created
+    # by the Terraform of k8s-artifacts-prod in kubernetes/k8s.io#8817, which
+    # was applied before it merged, so it has to exist first.
     promotion_jobs_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${PROD_IMAGE_PROMOTION_SVCACCT}")"
 
     ensure_serviceaccount_role_binding \
@@ -194,6 +193,15 @@ for PROJECT; do
 
     # Ensure service accounts and role bindings.
     ensure_signer_service_accounts "${PROJECT}"
+
+    # The default compute service account gets the editor role, which
+    # includes acting as the signing accounts, but nothing runs as it.
+    color 6 "Ensuring the default compute service account has no editor role"
+    compute_account="$(gcloud projects describe "${PROJECT}" --format='value(projectNumber)')-compute@developer.gserviceaccount.com"
+    ensure_removed_project_role_binding \
+        "${PROJECT}" \
+        "serviceAccount:${compute_account}" \
+        "roles/editor"
 
     # Ensure project allows impersonation access form other accounts
     color 6 echo "Ensuring cross-project impersonation constraint is not enforced"
