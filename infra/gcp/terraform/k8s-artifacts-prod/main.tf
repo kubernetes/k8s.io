@@ -20,7 +20,7 @@ module "project" {
 
   name            = "k8s-artifacts-prod"
   project_id      = "k8s-artifacts-prod"
-  org_id          = "758905017065"
+  folder_id       = "455406320404"
   billing_account = "018801-93540E-22A20E"
 
   # Sane project defaults

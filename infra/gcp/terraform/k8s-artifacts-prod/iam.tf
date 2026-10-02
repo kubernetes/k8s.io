@@ -27,7 +27,8 @@ module "iam" {
       "group:k8s-infra-artifact-admins@kubernetes.io",
     ]
     "roles/artifactregistry.repoAdmin" = [
-      "serviceAccount:k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com"
+      google_service_account.build_sa["k8s-infra-gcr-promoter"].member,
+      google_service_account.build_sa["k8s-infra-image-promotion"].member
     ]
     "roles/errorreporting.user" = [
       "group:k8s-infra-artifact-admins@kubernetes.io",
