@@ -70,6 +70,13 @@ locals {
     "test-infra",
     "boskos"
   ]
+
+  # gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com will be deprecated very soon
+  # In the meanwhile, add you registry here to guarantee that other GCB jobs can't assume the dedicated service account
+  # of the staging registry.
+  skip_gcb_builder_shim = [
+    "sp-operator",
+  ]
 }
 
 resource "google_service_account" "build_sa" {
@@ -82,10 +89,12 @@ resource "google_service_account" "build_sa" {
 resource "google_service_account_iam_binding" "build_sa" {
   for_each           = local.registries
   service_account_id = google_service_account.build_sa[each.key].name
-  members = [
-    "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com", // temporary migration shim
-    "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/${each.key}"
-  ]
+  members = concat(
+    contains(local.skip_gcb_builder_shim, each.key) ? [] : [
+      "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com", // temporary migration shim
+    ],
+    ["principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/${each.key}"]
+  )
   role = "roles/iam.serviceAccountUser"
 }
 
