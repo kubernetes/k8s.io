@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: default
 
 resources:
+  - https://raw.githubusercontent.com/kubernetes-sigs/prow/refs/heads/main/config/prow/cluster/prowjob-crd/prowjob_customresourcedefinition.yaml
   - cherrypicker.yaml
   - crier.yaml
   - deck.yaml
