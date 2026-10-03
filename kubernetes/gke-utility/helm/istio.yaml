@@ -27,6 +27,7 @@ meshConfig:
     envoyExtAuthzHttp:
       service: "oauth2-proxy.oauth2-proxy.svc.cluster.local"
       port: "80"
+      pathPrefix: "/?"
       headersToDownstreamOnDeny:
         - content-type
         - set-cookie

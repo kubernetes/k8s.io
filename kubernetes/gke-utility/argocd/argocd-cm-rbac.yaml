@@ -5,4 +5,5 @@ metadata:
 data:
   policy.csv: |
     g, kubernetes:sig-k8s-infra-leads, role:admin
+    p, kubernetes:k8s-infra-ibm-admins, projects, *, ibm, allow
   scopes: "[groups, email]"
