@@ -50,23 +50,6 @@ echo "Extracted nginx.conf to: ${NGINX_CONF}"
 echo "Config file size: $(wc -l < "${NGINX_CONF}") lines"
 
 echo "Validating nginx configuration..."
-
-# Check if we can use Docker for validation
-if command -v docker >/dev/null 2>&1; then
-    # Use the same nginx version as specified in the deployment
-    NGINX_IMAGE="nginx:1.26-alpine@sha256:5b44a5ab8ab467854f2bf7b835a32f850f32eb414b749fbf7ed506b139cd8d6b"
-    docker run --rm \
-        -v "${TEMP_DIR}:/etc/nginx:ro" \
-        "${NGINX_IMAGE}" \
-        nginx -c /etc/nginx/nginx.conf -t
-else
-    # Check if nginx is already installed
-    if ! command -v nginx >/dev/null 2>&1; then
-        if apt-get update -qq && apt-get install -y -qq nginx; then
-            echo "Installed nginx via apt"
-        fi
-    fi
-    nginx -c "${NGINX_CONF}" -t
-fi
+nginx -c "${NGINX_CONF}" -t
 
 echo "✅ Nginx configuration validation completed successfully!"
