@@ -107,3 +107,11 @@
     "sha256:292dcea96049903abb59777d61d18c4088c8b48db716c9aa14b971c24fbd58d3": ["v0.4.1"]
     "sha256:d45e086f62fa6afb2125d8748edc23183443d0545232a7734aef40783cb5b77a": ["v0.2.1"]
     "sha256:9de9b3197f3084f836bba58e16e02738ff95ceaaf58b108fdba8b5f0dbaabaf7": ["v0.2.0"]
+
+- name: charts/node-ipam-controller
+  dmap:
+    "sha256:44cb5cc37388dd5375c740e4ef5dc87b96224f2a5382dc8273e493bb012b075b": ["0.3.0"]
+
+- name: node-ipam-controller
+  dmap:
+    "sha256:58bf15f8cc8d1fbb90f4e219948facc6b89a9cdf255778aec7feccbff926a0ad": ["v0.3.0"]
