@@ -18,7 +18,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
     owners:
-      - amerai@google.com
+      - michelle.192837@gmail.com
       - antonio.ojea.garcia@gmail.com
       - bentheelder@google.com
       - bpratt@redhat.com
@@ -30,7 +30,7 @@ groups:
       SIG testing general discussion group
     owners:
       - killen.bob@gmail.com # temporary to finish configuration
-      - amerai@google.com
+      - michelle.192837@gmail.com
       - antonio.ojea.garcia@gmail.com
       - bentheelder@google.com
       - bpratt@redhat.com
