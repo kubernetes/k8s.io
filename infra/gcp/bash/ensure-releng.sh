@@ -124,9 +124,11 @@ function ensure_signer_service_accounts() {
         "serviceAccount:${RELEASE_PROCESS_CLOUDBUILD_SVCACCT}" \
         "roles/iam.serviceAccountTokenCreator"
 
-    # The image promoter account needs access to the main Kubernetes signing
-    # account to produce OIDC tokens with its identity. File promotion
-    # doesn't sign, so the file promoter account doesn't.
+    # Only the production image promotion jobs and the signature check sign
+    # with the main Kubernetes signing account, see below. File promotion
+    # doesn't sign, and the former image promoter account is left with the
+    # ar-to-s3-sync job, which only copies, since the promotion jobs moved to
+    # their own account and the promo-tools canary jobs were removed.
     prod_sign_account="$(svc_acct_email "${project}" "${K8s_ORG_SIGNER_SVCACCT}")"
     promoter_file_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${FILE_PROMOTER_SVCACCT}")"
     promoter_image_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
@@ -136,7 +138,7 @@ function ensure_signer_service_accounts() {
         "serviceAccount:${promoter_file_account}" \
         "roles/iam.serviceAccountTokenCreator"
 
-    ensure_serviceaccount_role_binding \
+    ensure_removed_serviceaccount_role_binding \
         "${prod_sign_account}" \
         "serviceAccount:${promoter_image_account}" \
         "roles/iam.serviceAccountTokenCreator"
