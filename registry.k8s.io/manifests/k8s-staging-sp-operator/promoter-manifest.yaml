@@ -50,23 +50,26 @@ registries:
 # The promoter (kpromo v4.7.0 or later) checks every image of this manifest
 # against this policy and carries the accepted staging attestations. The
 # Cloud Build service account generates and signs the provenance of the images
-# and profiles itself, so that builder reaches SLSA build level 1 only. spoc
-# and the released Helm chart are built on GitHub Actions, whose isolated
-# provenance workflow reaches level 3, and only its signer may claim it. That
-# signer is bound to v* release tags, which only the SPO admins may create in
-# the repository ("Release tags" tag ruleset). In require mode, an image that
-# violates the policy blocks the promotion run it is part of.
+# and profiles itself, so that builder reaches SLSA build level 1 only. The
+# GitHub Actions workflows of the repository build spoc, the released Helm
+# chart, the per-arch images, the bundle and the catalog of a release, and the
+# security profiles of every push to main, reproducibly or byte for byte, and
+# its isolated provenance workflow attests them at level 3. Only its signer
+# may claim that builder, bound to v* release tags, which only the SPO admins
+# may create in the repository ("Release tags" tag ruleset), and to main,
+# which only changes through reviewed pull requests. In require mode, an image
+# that violates the policy blocks the promotion run it is part of.
 provenance:
   mode: require
   signers:
   - sigstore::https://accounts.google.com::sp-operator-sa@k8s-staging-images.iam.gserviceaccount.com
-  - sigstore(identityMatch=regex)::https://token.actions.githubusercontent.com::https://github\.com/kubernetes-sigs/security-profiles-operator/\.github/workflows/provenance\.yml@refs/tags/v[0-9]+\.[0-9]+\.[0-9]+
+  - sigstore(identityMatch=regex)::https://token.actions.githubusercontent.com::https://github\.com/kubernetes-sigs/security-profiles-operator/\.github/workflows/provenance\.yml@(refs/tags/v[0-9]+\.[0-9]+\.[0-9]+|refs/heads/main)
   builders:
   - id: https://cloudbuild.googleapis.com/projects/k8s-staging-images/serviceAccounts/sp-operator-sa@k8s-staging-images.iam.gserviceaccount.com/cloudbuild.yaml
     level: 1
   - id: https://github.com/kubernetes-sigs/security-profiles-operator/.github/workflows/provenance.yml
     level: 3
     signers:
-    - sigstore(identityMatch=regex)::https://token.actions.githubusercontent.com::https://github\.com/kubernetes-sigs/security-profiles-operator/\.github/workflows/provenance\.yml@refs/tags/v[0-9]+\.[0-9]+\.[0-9]+
+    - sigstore(identityMatch=regex)::https://token.actions.githubusercontent.com::https://github\.com/kubernetes-sigs/security-profiles-operator/\.github/workflows/provenance\.yml@(refs/tags/v[0-9]+\.[0-9]+\.[0-9]+|refs/heads/main)
   sources:
   - github.com/kubernetes-sigs/security-profiles-operator
