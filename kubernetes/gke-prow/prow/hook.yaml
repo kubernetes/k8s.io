@@ -37,7 +37,7 @@ spec:
       terminationGracePeriodSeconds: 180
       containers:
         - name: hook
-          image: us-docker.pkg.dev/k8s-infra-prow/images/hook:v20261008-e012f2883
+          image: us-docker.pkg.dev/k8s-infra-prow/images/hook:v20261013-985126490
           imagePullPolicy: Always
           args:
             - --dry-run=false
@@ -48,6 +48,7 @@ spec:
             - --github-endpoint=https://api.github.com
             - --config-path=/etc/config/config.yaml
             - --job-config-path=/etc/job-config
+            - --supplemental-plugin-config-dir=/etc/plugins
           # - --webhook-path=/
           resources:
             requests:
