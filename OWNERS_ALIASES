@@ -224,12 +224,12 @@ aliases:
     - vinayakankugoyal
     - Vyom-Yadav
   committee-steering:
-    - BenTheElder
-    - aojea
+    - elmiko
+    - janetkuo
     - katcosgrove
     - pacoxu
+    - Priyankasaggu11929
     - ritazh
-    - saschagrunert
     - soltysh
   ## BEGIN CUSTOM CONTENT
   karpenter-cluster-api-approvers:

@@ -9,9 +9,11 @@ groups:
       - antonio.ojea.garcia@gmail.com
       - aojea@google.com
       - bburns@microsoft.com
+      - bentheelder@gmail.com
       - bentheelder@google.com
       - briangrant@google.com
       - cblecker@gmail.com
+      - chiachenk@google.com
       - ctadeu@gmail.com
       - davanum@gmail.com
       - decarr@redhat.com
@@ -24,6 +26,7 @@ groups:
       - saschagrunert@gmail.com
       - soltysh@gmail.com
       - michelle.noorali@gmail.com
+      - msm@opbstudios.com
       - nikhitaraghunath@gmail.com
       - rita.z.zhang@gmail.com
       - roollingstone@gmail.com
@@ -31,6 +34,7 @@ groups:
       - paris.pittman@gmail.com
       - patrick.ohly@intel.com
       - phil.wittrock@gmail.com
+      - priyankasaggu11929@gmail.com
       - quintonh@gmail.com
       - sarah.novotny@gmail.com
       - saugustus2@bloomberg.net
@@ -49,14 +53,12 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - antonio.ojea.garcia@gmail.com
-      - aojea@google.com
-      - bentheelder@google.com
-      - bentheelder@gmail.com
+      - chiachenk@google.com
       - kat.cosgrove@gmail.com
+      - msm@opbstudios.com
+      - priyankasaggu11929@gmail.com
       - rita.z.zhang@gmail.com
       - roollingstone@gmail.com
-      - saschagrunert@gmail.com
       - soltysh@gmail.com
 
   - email-id: steering@kubernetes.io
@@ -75,13 +77,12 @@ groups:
       MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "false"
     owners:
-      - antonio.ojea.garcia@gmail.com
-      - aojea@google.com
-      - bentheelder@google.com
+      - chiachenk@google.com
       - kat.cosgrove@gmail.com
+      - msm@opbstudios.com
+      - priyankasaggu11929@gmail.com
       - rita.z.zhang@gmail.com
       - roollingstone@gmail.com
-      - saschagrunert@gmail.com
       - soltysh@gmail.com
     managers:
       - ihor.dvoretskyi@gmail.com
