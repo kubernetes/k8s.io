@@ -48,6 +48,7 @@ spec:
             - --github-endpoint=https://api.github.com
             - --config-path=/etc/config/config.yaml
             - --job-config-path=/etc/job-config
+            - --supplemental-plugin-config-dir=/etc/plugins
           # - --webhook-path=/
           resources:
             requests:
