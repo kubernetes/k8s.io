@@ -1,0 +1,55 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: k8s-testgrid-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com
+  name: updater
+  namespace: testgrid
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testgrid-updater
+  namespace: testgrid
+  labels:
+    component: updater
+    app: testgrid
+spec:
+  replicas: 1 # https://github.com/GoogleCloudPlatform/testgrid/issues/663
+  selector:
+    matchLabels:
+      app: testgrid
+      component: updater
+  template:
+    metadata:
+      labels:
+        component: updater
+        app: testgrid
+    spec:
+      serviceAccountName: updater
+      containers:
+        - name: updater
+          image: gcr.io/k8s-testgrid/updater:v20260902-v0.0.176-10-gf15bfa48
+          ports:
+            - name: metrics
+              containerPort: 2112
+          args:
+            - --build-concurrency=10
+            - --build-timeout=5m
+            - --config=gs://k8s-testgrid-config-external/config
+            - --confirm
+            - --group-concurrency=10
+            - --group-timeout=20m
+            - --json-logs
+            - --persist-queue=gs://k8s-testgrid-states/queue/updater.json
+            - --subscribe=kubernetes-ci-logs=k8s-testgrid/testgrid-kubernetes-ci-logs
+            - --wait=2h
+          resources:
+            requests:
+              cpu: "30"
+              memory: "75G"
+            limits:
+              cpu: "40"
+              memory: "150G"
+---
