@@ -4,11 +4,8 @@ groups:
     description: |-
       sig-ui leads
     owners:
-      - marcin9yk@icloud.com
       - me@joaquimrocha.com
       - okinakahiro@gmail.com
-      - sebastian@plural.sh
-      - shu.mutow@gmail.com
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -22,11 +19,8 @@ groups:
     description: |-
       SIG ui general discussion group
     owners:
-      - marcin9yk@icloud.com
       - me@joaquimrocha.com
       - okinakahiro@gmail.com
-      - sebastian@plural.sh
-      - shu.mutow@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
