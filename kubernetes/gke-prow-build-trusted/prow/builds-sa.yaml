@@ -25,6 +25,11 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: build-image
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: charts
 ---
 apiVersion: v1
