@@ -22,6 +22,7 @@ locals {
     agentic-net                     = "group:k8s-infra-staging-agentic-net@kubernetes.io"
     aws-encryption-provider         = "group:k8s-infra-staging-provider-aws@kubernetes.io"
     boskos                          = "group:k8s-infra-staging-boskos@kubernetes.io"
+    build-image                     = "group:k8s-infra-staging-build-image@kubernetes.io"
     charts                          = "group:k8s-infra-release-admins@kubernetes.io"
     cloud-provider-kind             = "group:k8s-infra-staging-kind@kubernetes.io"
     cluster-capacity                = "group:k8s-infra-staging-cluster-capacity@kubernetes.io"
@@ -75,6 +76,7 @@ locals {
   # In the meanwhile, add you registry here to guarantee that other GCB jobs can't assume the dedicated service account
   # of the staging registry.
   skip_gcb_builder_shim = [
+    "build-image",
     "sp-operator",
   ]
 }
@@ -171,4 +173,33 @@ resource "local_file" "builds_sa" {
     # Prow build service accounts for k8s-staging-images registries.
     ${trimsuffix(local.builds_sa_manifest, "\n")}
   YAML
+}
+resource "google_cloudbuild_worker_pool" "n2d_highcpu_8" {
+  name     = "n2d-highcpu-8"
+  project  = module.project.project_id
+  location = "us-central1"
+  worker_config {
+    disk_size_gb = 200
+    machine_type = "n2d-highcpu-8"
+  }
+}
+
+resource "google_cloudbuild_worker_pool" "c3_highcpu_22" {
+  name     = "c3-highcpu-22"
+  project  = module.project.project_id
+  location = "us-central1"
+  worker_config {
+    disk_size_gb = 200
+    machine_type = "c3-highcpu-22"
+  }
+}
+
+resource "google_cloudbuild_worker_pool" "c3_highcpu_44" {
+  name     = "c3-highcpu-44"
+  project  = module.project.project_id
+  location = "us-central1"
+  worker_config {
+    disk_size_gb = 200
+    machine_type = "c3-highcpu-44"
+  }
 }
