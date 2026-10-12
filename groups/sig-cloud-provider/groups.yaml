@@ -123,6 +123,7 @@ groups:
     members:
       - haka.jesse@gmail.com
       - kay.diam@gmail.com
+      - m.andre@redhat.com
       - stephenfin@redhat.com
 
   - email-id: k8s-infra-staging-provider-azure@kubernetes.io
