@@ -631,3 +631,7 @@ exploding:
 kube-network-policies.sigs:
   type: CNAME
   value: kubernetes-sigs.github.io.
+# https://github.com/kubernetes-sigs/dra-driver-cpu docs (@ffromani, @pravk03, @AutuSnow, @alanhuangch)
+dra-driver-cpu.sigs:
+  type: CNAME
+  value: dra-driver-cpu.netlify.app.
