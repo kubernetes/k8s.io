@@ -11,11 +11,9 @@ groups:
     description: |
       Group dedicated to simplify creation, configuration, upgrade, downgrade, and teardown of Kubernetes clusters and their components.
     owners:
-      - cecilerobertm@gmail.com
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
       - justinsb@google.com
-      - vince@prigna.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -139,11 +137,9 @@ groups:
       MessageModerationLevel: "MODERATE_NONE"
       ReconcileMembers: "false"
     owners:
-      - cecilerobertm@gmail.com
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
       - justinsb@google.com
-      - vince@prigna.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
