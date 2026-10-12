@@ -30,6 +30,9 @@ module "iam" {
     "roles/owner" = [
       "group:k8s-infra-release-admins@kubernetes.io",
     ]
+    "roles/cloudbuild.workerPoolUser" = [
+      "principalSet://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/namespace/test-pods"
+    ]
     "roles/viewer" = [
       for _, group in local.registries : group
     ]
