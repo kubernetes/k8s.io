@@ -4,3 +4,4 @@ namespace: kube-system
 resources:
   - daemonsets.yaml
   - secrets.yaml
+  - powervs-tier1-sc.yaml
