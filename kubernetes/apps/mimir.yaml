@@ -43,6 +43,6 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
-      managedNamespaceMetadata:
+        managedNamespaceMetadata:
           labels:
             istio-injection: enabled

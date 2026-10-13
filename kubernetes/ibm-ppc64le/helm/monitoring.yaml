@@ -28,7 +28,7 @@ prometheus:
         operator: Equal
         value: "true"
         effect: NoSchedule
-    retention: 120d
+    retention: 7d
     resources:
       requests:
         cpu: 4
