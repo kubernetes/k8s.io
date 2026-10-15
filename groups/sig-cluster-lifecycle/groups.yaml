@@ -500,7 +500,7 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - msm@opbstudios.com
+      - elmiko.kubernetes@gmail.com
       - macao@redhat.com
 
   #
