@@ -222,7 +222,7 @@ class RedirTest(HTTPTestCase):
                 groupname=rand_num())
             self.assert_temp_redirect(
                 base + 'sig-testing-notes',
-                'https://docs.google.com/document/d/1z8MQpr_jTwhmjLMUaqQyBk1EYG_Y_3D4y4YdMJ7V1Kk/edit')
+                'https://docs.google.com/document/d/1ILdzqS49G_6kqWMn_sLtKrI45eqDhiXYpKq-zWMz6oU/edit')
 
     def test_yum(self):
         for base in ('yum.k8s.io', 'yum.kubernetes.io'):
