@@ -36,4 +36,7 @@ module "oci-proxy" {
   // See: https://github.com/hashicorp/terraform-provider-google/issues/1134
   notification_channel_id = "3237876589275698022"
   global_aws_base_url     = "https://cdn.registry.k8s.dev"
+  // serve the OCI referrers API from the signature upstream, tested here
+  // before production
+  allow_referrers = true
 }

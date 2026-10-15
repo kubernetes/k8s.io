@@ -1,6 +1,6 @@
 # google group for gcr.io/k8s-staging-build-image is k8s-infra-staging-build-image@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-build-image
+- name: us-central1-docker.pkg.dev/k8s-staging-images/build-image
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/build-image
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com

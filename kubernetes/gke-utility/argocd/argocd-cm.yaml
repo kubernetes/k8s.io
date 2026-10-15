@@ -4,6 +4,7 @@ metadata:
   name: argocd-cm
 data:
   url: https://argo.k8s.io
+  dex.auth.connectorId: oauth2-proxy
   application.instanceLabelKey: infra.k8s.io/instance
   resource.compareoptions: |
     ignoreAggregatedRoles: true

@@ -38,7 +38,6 @@ aliases:
     - fabriziopandini
     - justinsb
     - neolit123
-    - vincepri
   sig-contributor-experience-leads:
     - MadhavJivrajani
     - Priyankasaggu11929
@@ -122,6 +121,7 @@ aliases:
   sig-ui-leads:
     - floreks
     - joaquimrocha
+    - kahirokunn
     - maciaszczykm
     - shu-mutou
   sig-windows-leads:
@@ -167,6 +167,13 @@ aliases:
     - jeremyrickard
     - liggitt
     - micahhausler
+  wg-node-identity-leads:
+    - ahmedtd
+    - elmiko
+    - hakman
+    - pfeifferj
+    - randomvariable
+    - rata
   wg-node-lifecycle-leads:
     - JoelSpeed
     - atiratree
@@ -216,12 +223,12 @@ aliases:
     - vinayakankugoyal
     - Vyom-Yadav
   committee-steering:
-    - BenTheElder
-    - aojea
+    - elmiko
+    - janetkuo
     - katcosgrove
     - pacoxu
+    - Priyankasaggu11929
     - ritazh
-    - saschagrunert
     - soltysh
   ## BEGIN CUSTOM CONTENT
   karpenter-cluster-api-approvers:

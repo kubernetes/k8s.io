@@ -86,6 +86,10 @@ readonly FILE_PROMOTER_SVCACCT="k8s-infra-promoter"
 # The service account name for the image promoter.
 readonly IMAGE_PROMOTER_SVCACCT="k8s-infra-gcr-promoter"
 
+# The service account name for the production image promotion jobs, the
+# only one that can sign the verification summaries of promoted images.
+export PROD_IMAGE_PROMOTION_SVCACCT="k8s-infra-image-promotion"
+
 # The service account to generate image and artifact signatures during
 # e2e tests of the image promoter
 export IMAGE_PROMOTER_TEST_SIGNER_SVCACCT="k8s-infra-promoter-test-signer"
@@ -203,12 +207,9 @@ function ensure_project() {
             --no-enable-cloud-apis \
             --organization "${GCP_ORG}"
     else
-        org=$(gcloud projects \
-                describe "${project}" \
-                --flatten='parent[]' \
-                --format='csv[no-heading](type, id)' \
-                | grep ^organization \
-                | cut -f2 -d,)
+        org=$(gcloud projects get-ancestors "${project}" \
+            --format=json \
+            | jq -r '.[] | select(.type == "organization") | .id')
         if [ "${org}" != "${GCP_ORG}" ]; then
             echo "project ${project} exists, but not in our org: got ${org}" >&2
             return 2

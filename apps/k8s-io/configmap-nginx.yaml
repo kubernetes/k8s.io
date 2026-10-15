@@ -27,6 +27,20 @@ data:
           return 200 'ok';
         }
 
+        # In-toto predicate type of the promotion attestations written by
+        # kpromo. It is a stable identifier that appears in every attestation,
+        # so it has to keep resolving to the specification. The redirects
+        # are temporary, because the documentation they point to can move.
+        location = /promo-tools/promotion/v1 {
+          return 302 https://github.com/kubernetes-sigs/promo-tools/blob/main/docs/promotion-predicate.md;
+        }
+
+        # Verifier ID of the SLSA verification summaries written by kpromo,
+        # which consumers pin like the predicate type above.
+        location = /promo-tools/verifier/v1 {
+          return 302 https://github.com/kubernetes-sigs/promo-tools/blob/main/docs/image-promotion.md#verification-summaries;
+        }
+
         # NOTE: subpath is not currently used.
         location ~ ^/(?<repo>[A-Za-z0-9\-_\.]*)(?<subpath>/.*)?$ {
           # $https is set to 'on' when connecting to nginx via HTTPS directly.

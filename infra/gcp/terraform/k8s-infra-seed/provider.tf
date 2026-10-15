@@ -21,7 +21,7 @@ provider "google-beta" {
 }
 
 terraform {
-  required_version = "1.10.5"
+  required_version = "1.12.2"
 
   backend "gcs" {
     bucket = "k8s-infra-terraform"
@@ -30,10 +30,12 @@ terraform {
 
   required_providers {
     google = {
-      version = "6.26.0"
+      source  = "hashicorp/google"
+      version = "~> 7.42.0"
     }
     google-beta = {
-      version = "6.26.0"
+      source  = "hashicorp/google-beta"
+      version = "~> 7.42.0"
     }
   }
 }

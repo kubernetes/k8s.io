@@ -168,6 +168,12 @@ class RedirTest(HTTPTestCase):
         self.assert_code('http://k8s.io/_healthz', 200)
         self.assert_code('https://k8s.io/_healthz', 200)
 
+    def test_promo_tools_identifiers(self):
+        self.assert_temp_redirect('k8s.io/promo-tools/promotion/v1',
+            'https://github.com/kubernetes-sigs/promo-tools/blob/main/docs/promotion-predicate.md')
+        self.assert_temp_redirect('k8s.io/promo-tools/verifier/v1',
+            'https://github.com/kubernetes-sigs/promo-tools/blob/main/docs/image-promotion.md#verification-summaries')
+
     def test_go(self):
         for base in ('go.k8s.io/', 'go.kubernetes.io/'):
             self.assert_temp_redirect(base + 'bot-commands',

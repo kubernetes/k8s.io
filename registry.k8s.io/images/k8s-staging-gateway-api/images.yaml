@@ -15,9 +15,11 @@
 - name: conformance/echo-advanced
   dmap:
     "sha256:fef12228b1dccb5b9eebb1f27b9f5a501355cbe3c4c5e0121bbcd0f638cd6569": ["v0.1.0"]
+    "sha256:df4bc585e91cfd614f538d50d326c15f707e1aa7b2d42695ed29d12b6342493a": ["v0.2.0"]
 - name: conformance/echo-basic
   dmap:
     "sha256:640d843263062f4391ecd74effd68673a69800852eb4ff31b8452a3301eae83b": ["v0.1.0"]
+    "sha256:2e9146b0550f20c9082b1f8490729104ea0120bb0a41763bd02307db93028f20": ["v0.2.0"]
 - name: echo-advanced
   dmap:
     "sha256:96c3b75534386ca36c0c76ac8fdbe695f63f35bb3e0632537ffba9732c1f58c9": ["v1.4.0","v1.5.0","v1.5.1"]

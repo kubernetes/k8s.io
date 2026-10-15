@@ -43,3 +43,9 @@ variable "global_aws_base_url" {
   type    = string
   default = ""
 }
+
+// allow the OCI referrers API, which archeio routes to the signature upstream
+variable "allow_referrers" {
+  type    = bool
+  default = false
+}

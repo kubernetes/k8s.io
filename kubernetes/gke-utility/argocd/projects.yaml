@@ -1,0 +1,72 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: aks
+spec:
+  description: Applications on AKS clusters
+  sourceRepos:
+    - '*'
+  destinations:
+    - name: aks-*
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: eks
+spec:
+  description: Applications on EKS clusters
+  sourceRepos:
+    - '*'
+  destinations:
+    - name: eks-*
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gke
+spec:
+  description: Applications on GKE clusters
+  sourceRepos:
+    - '*'
+  destinations:
+    - name: gke-*
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: ibm
+spec:
+  description: Applications on IBM clusters
+  roles:
+    - name: admin
+      description: Full access to IBM project resources
+      groups:
+        - kubernetes:k8s-infra-ibm-admins
+      policies:
+        - p, proj:ibm:admin, applications, *, ibm/*, allow
+        - p, proj:ibm:admin, applicationsets, *, ibm/*, allow
+        - p, proj:ibm:admin, repositories, *, ibm/*, allow
+        - p, proj:ibm:admin, clusters, *, ibm/*, allow
+        - p, proj:ibm:admin, logs, *, ibm/*, allow
+        - p, proj:ibm:admin, exec, *, ibm/*, allow
+  sourceRepos:
+    - '*'
+  destinations:
+    - name: ibm-*
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+

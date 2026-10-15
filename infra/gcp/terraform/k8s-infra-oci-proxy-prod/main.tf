@@ -22,8 +22,8 @@ locals {
 module "oci-proxy" {
   source = "../modules/oci-proxy"
   // ***** production vs staging variables inputs *****
-  // v0.7.2
-  digest               = "sha256:20b505b5bfcb905cb51c6bbd5cdb766525e21e7a324ed4dde29495048e462b2b"
+  // v20261001-v0.8.0
+  digest               = "sha256:f5e8d7537c0e5cac6e4ef2a5a376cb91ee85426ba8d01c3bae5f9195f31b63da"
   domain               = "registry.k8s.io"
   project_id           = local.project_id
   service_account_name = "oci-proxy-prod"
@@ -34,6 +34,8 @@ module "oci-proxy" {
   // See: https://github.com/hashicorp/terraform-provider-google/issues/1134
   notification_channel_id = "15334306215710275143"
   global_aws_base_url     = "https://cdn.registry.k8s.io"
+  // serve the OCI referrers API from the signature upstream
+  allow_referrers = true
 }
 
 // we only sink logs to bigquery in production

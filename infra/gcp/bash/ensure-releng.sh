@@ -47,6 +47,7 @@ fi
 RELEASE_PROCESS_CLOUDBUILD_SVCACCT="648026197307@cloudbuild.gserviceaccount.com"
 STAGING_SIGNER_SVCACCT="krel-staging"
 K8s_ORG_SIGNER_SVCACCT="krel-trust"
+SUMMARY_SIGNER_SVCACCT="promoter-summaries"
 PROMOTER_PROJECT="k8s-artifacts-prod"
 
 # This function ensures the cross-project impersonation
@@ -123,21 +124,47 @@ function ensure_signer_service_accounts() {
         "serviceAccount:${RELEASE_PROCESS_CLOUDBUILD_SVCACCT}" \
         "roles/iam.serviceAccountTokenCreator"
 
-    # The image promoter accounts that handle image and file promotion need
-    # access to the main Kubernetes signing account to produce OIDC tokens
-    # with its identity. 
+    # Only the production image promotion jobs and the signature check sign
+    # with the main Kubernetes signing account, see below. File promotion
+    # doesn't sign, and the former image promoter account is left with the
+    # ar-to-s3-sync job, which only copies, since the promotion jobs moved to
+    # their own account and the promo-tools canary jobs were removed.
     prod_sign_account="$(svc_acct_email "${project}" "${K8s_ORG_SIGNER_SVCACCT}")"
     promoter_file_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${FILE_PROMOTER_SVCACCT}")"
     promoter_image_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${IMAGE_PROMOTER_SVCACCT}")"
-    
-    ensure_serviceaccount_role_binding \
+
+    ensure_removed_serviceaccount_role_binding \
         "${prod_sign_account}" \
         "serviceAccount:${promoter_file_account}" \
         "roles/iam.serviceAccountTokenCreator"
-    
-    ensure_serviceaccount_role_binding \
+
+    ensure_removed_serviceaccount_role_binding \
         "${prod_sign_account}" \
         "serviceAccount:${promoter_image_account}" \
+        "roles/iam.serviceAccountTokenCreator"
+
+    color 6 "Ensuring image promoter verification summary signing account"
+    ensure_service_account \
+        "${project}" \
+        "${SUMMARY_SIGNER_SVCACCT}" \
+        "Kubernetes image promoter verification summary signer"
+
+    # The production image promotion jobs sign the images they promote with
+    # the main Kubernetes signing account, and the verification summaries
+    # with their own account, which only they can use. Consumers pin it as
+    # the verifier of the promoted images. The account of the jobs is created
+    # by the Terraform of k8s-artifacts-prod in kubernetes/k8s.io#8817, which
+    # was applied before it merged, so it has to exist first.
+    promotion_jobs_account="$(svc_acct_email "${PROMOTER_PROJECT}" "${PROD_IMAGE_PROMOTION_SVCACCT}")"
+
+    ensure_serviceaccount_role_binding \
+        "${prod_sign_account}" \
+        "serviceAccount:${promotion_jobs_account}" \
+        "roles/iam.serviceAccountTokenCreator"
+
+    ensure_serviceaccount_role_binding \
+        "$(svc_acct_email "${project}" "${SUMMARY_SIGNER_SVCACCT}")" \
+        "serviceAccount:${promotion_jobs_account}" \
         "roles/iam.serviceAccountTokenCreator"
 }
 
@@ -168,6 +195,15 @@ for PROJECT; do
 
     # Ensure service accounts and role bindings.
     ensure_signer_service_accounts "${PROJECT}"
+
+    # The default compute service account gets the editor role, which
+    # includes acting as the signing accounts, but nothing runs as it.
+    color 6 "Ensuring the default compute service account has no editor role"
+    compute_account="$(gcloud projects describe "${PROJECT}" --format='value(projectNumber)')-compute@developer.gserviceaccount.com"
+    ensure_removed_project_role_binding \
+        "${PROJECT}" \
+        "serviceAccount:${compute_account}" \
+        "roles/editor"
 
     # Ensure project allows impersonation access form other accounts
     color 6 echo "Ensuring cross-project impersonation constraint is not enforced"

@@ -6,6 +6,7 @@ groups:
     owners:
       - marcin9yk@icloud.com
       - me@joaquimrocha.com
+      - okinakahiro@gmail.com
       - sebastian@plural.sh
       - shu.mutow@gmail.com
     settings:
@@ -23,6 +24,7 @@ groups:
     owners:
       - marcin9yk@icloud.com
       - me@joaquimrocha.com
+      - okinakahiro@gmail.com
       - sebastian@plural.sh
       - shu.mutow@gmail.com
     settings:
@@ -45,4 +47,5 @@ groups:
       ReconcileMembers: "true"
     members:
       - me@joaquimrocha.com
+      - okinakahiro@gmail.com
       - renesd@gmail.com

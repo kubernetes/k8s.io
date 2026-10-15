@@ -16,46 +16,53 @@ limitations under the License.
 
 locals {
   // The groups have to be created before applying this terraform code
+  // Order the registries alphabetically
   registries = {
-    agentic-net                     = "group:k8s-infra-staging-agentic-net@kubernetes.io"
     agent-sandbox                   = "group:k8s-infra-staging-agent-sandbox@kubernetes.io"
+    agentic-net                     = "group:k8s-infra-staging-agentic-net@kubernetes.io"
     aws-encryption-provider         = "group:k8s-infra-staging-provider-aws@kubernetes.io"
+    boskos                          = "group:k8s-infra-staging-boskos@kubernetes.io"
+    build-image                     = "group:k8s-infra-staging-build-image@kubernetes.io"
     charts                          = "group:k8s-infra-release-admins@kubernetes.io"
     cloud-provider-kind             = "group:k8s-infra-staging-kind@kubernetes.io"
-    contributor-site                = "group:k8s-infra-staging-contributor-site@kubernetes.io"
     cluster-capacity                = "group:k8s-infra-staging-cluster-capacity@kubernetes.io"
     cluster-inventory-api           = "group:k8s-infra-staging-cluster-inv-api@kubernetes.io"
+    contributor-site                = "group:k8s-infra-staging-contributor-site@kubernetes.io"
+    csi-vsphere                     = "group:k8s-infra-staging-csi-vsphere@kubernetes.io"
     dns                             = "group:k8s-infra-staging-dns@kubernetes.io"
     dra-driver-cpu                  = "group:k8s-infra-staging-dra-driver-cpu@kubernetes.io"
-    dra-example-driver              = "group:k8s-infra-staging-dra-example-driver@kubernetes.io"
-    dra-driver-nvidia               = "group:k8s-infra-staging-dra-driver-nvidia@kubernetes.io"
     dra-driver-google               = "group:k8s-infra-staging-dra-driver-google@kubernetes.io"
+    dra-driver-nvidia               = "group:k8s-infra-staging-dra-driver-nvidia@kubernetes.io"
+    dra-example-driver              = "group:k8s-infra-staging-dra-example-driver@kubernetes.io"
+    e2e-test-images                 = "group:k8s-infra-staging-e2e-test-images@kubernetes.io"
     etcd                            = "group:k8s-infra-staging-etcd@kubernetes.io"
     etcd-manager                    = "group:k8s-infra-staging-etcd-manager@kubernetes.io"
     gateway-api                     = "group:k8s-infra-staging-gateway-api@kubernetes.io"
+    gateway-api-inference-extension = "group:sig-apps-leads@kubernetes.io"
     headlamp                        = "group:k8s-infra-staging-headlamp@kubernetes.io"
     inference-perf                  = "group:k8s-infra-staging-inference-perf@kubernetes.io"
     infra-tools                     = "group:k8s-infra-staging-infra-tools@kubernetes.io"
-    ingress-nginx                   = "group:k8s-infra-staging-ingress-nginx@kubernetes.io"
     ingate                          = "group:k8s-infra-staging-ingate@kubernetes.io"
+    ingress-nginx                   = "group:k8s-infra-staging-ingress-nginx@kubernetes.io"
     jobset                          = "group:k8s-infra-staging-jobset@kubernetes.io"
     karpenter-cluster-api           = "group:karpenter-cluster-api-leads@kubernetes.io"
     kind                            = "group:k8s-infra-staging-kind@kubernetes.io"
     kro                             = "group:k8s-infra-staging-kro@kubernetes.io"
-    kubespray                       = "group:k8s-infra-staging-kubespray@kubernetes.io"
     kubemark                        = "group:sig-scalability-leads@kubernetes.io"
     kubernetes                      = "group:k8s-infra-staging-kubernetes@kubernetes.io"
+    kubespray                       = "group:k8s-infra-staging-kubespray@kubernetes.io"
+    kubetest2                       = "group:k8s-infra-staging-kubetest2@kubernetes.io"
     kueue                           = "group:k8s-infra-staging-kueue@kubernetes.io"
     lws                             = "group:k8s-infra-staging-lws@kubernetes.io"
     maintainer-tools                = "group:k8s-infra-staging-maintainer-tools@kubernetes.io"
     mcp-lifecycle-operator          = "group:k8s-infra-staging-mcp-lifecycle-op@kubernetes.io"
     minikube                        = "group:k8s-infra-staging-minikube@kubernetes.io"
     node-readiness-controller       = "group:k8s-infra-staging-nrc@kubernetes.io"
+    prow                            = "group:k8s-infra-prow-oncall@kubernetes.io"
     resource-state-metrics          = "group:k8s-infra-staging-resource-state-met@kubernetes.io"
-    gateway-api-inference-extension = "group:sig-apps-leads@kubernetes.io"
+    sp-operator                     = "group:k8s-infra-staging-sp-operator@kubernetes.io"
     secrets-store-sync              = "group:k8s-infra-staging-secrets-store-sync@kubernetes.io"
     test-infra                      = "group:k8s-infra-staging-test-infra@kubernetes.io"
-    csi-vsphere                     = "group:k8s-infra-staging-csi-vsphere@kubernetes.io"
   }
 
   # Only registries used internally by CI should be listed here
@@ -63,6 +70,14 @@ locals {
     "infra-tools",
     "test-infra",
     "boskos"
+  ]
+
+  # gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com will be deprecated very soon
+  # In the meanwhile, add you registry here to guarantee that other GCB jobs can't assume the dedicated service account
+  # of the staging registry.
+  skip_gcb_builder_shim = [
+    "build-image",
+    "sp-operator",
   ]
 }
 
@@ -76,11 +91,22 @@ resource "google_service_account" "build_sa" {
 resource "google_service_account_iam_binding" "build_sa" {
   for_each           = local.registries
   service_account_id = google_service_account.build_sa[each.key].name
-  members = [
-    "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com", // temporary migration shim
-    "principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/${each.key}"
-  ]
+  members = concat(
+    contains(local.skip_gcb_builder_shim, each.key) ? [] : [
+      "serviceAccount:gcb-builder@k8s-infra-prow-build-trusted.iam.gserviceaccount.com", // temporary migration shim
+    ],
+    ["principal://iam.googleapis.com/projects/180382678033/locations/global/workloadIdentityPools/k8s-infra-prow-build-trusted.svc.id.goog/subject/ns/test-pods/sa/${each.key}"]
+  )
   role = "roles/iam.serviceAccountUser"
+}
+
+// Cloud Build requires the service account itself to be granted this role
+// to generate OIDC Tokens
+resource "google_service_account_iam_member" "token_creator" {
+  for_each           = local.registries
+  service_account_id = google_service_account.build_sa[each.key].name
+  role               = "roles/iam.serviceAccountOpenIdTokenCreator"
+  member             = google_service_account.build_sa[each.key].member
 }
 
 module "artifact_registry" {
@@ -132,8 +158,6 @@ locals {
       kind: ServiceAccount
       metadata:
         name: ${name}
-        annotations:
-          iam.gke.io/gcp-service-account: ${google_service_account.build_sa[name].email}
     YAML
   ])
 }
@@ -149,4 +173,33 @@ resource "local_file" "builds_sa" {
     # Prow build service accounts for k8s-staging-images registries.
     ${trimsuffix(local.builds_sa_manifest, "\n")}
   YAML
+}
+resource "google_cloudbuild_worker_pool" "n2d_highcpu_8" {
+  name     = "n2d-highcpu-8"
+  project  = module.project.project_id
+  location = "us-central1"
+  worker_config {
+    disk_size_gb = 200
+    machine_type = "n2d-highcpu-8"
+  }
+}
+
+resource "google_cloudbuild_worker_pool" "c3_highcpu_22" {
+  name     = "c3-highcpu-22"
+  project  = module.project.project_id
+  location = "us-central1"
+  worker_config {
+    disk_size_gb = 200
+    machine_type = "c3-highcpu-22"
+  }
+}
+
+resource "google_cloudbuild_worker_pool" "c3_highcpu_44" {
+  name     = "c3-highcpu-44"
+  project  = module.project.project_id
+  location = "us-central1"
+  worker_config {
+    disk_size_gb = 200
+    machine_type = "c3-highcpu-44"
+  }
 }

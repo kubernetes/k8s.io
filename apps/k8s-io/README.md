@@ -88,6 +88,12 @@ Example:
 For all release versions, URLs follow this pattern:
 - https://rel.k8s.io/vXYY/{keyword} → https://github.com/kubernetes/sig-release/tree/master/releases/release-X.YY/links.md#{keyword}
 
+## k8s.io Redirects
+
+- https://k8s.io/promo-tools/promotion/v1 → https://github.com/kubernetes-sigs/promo-tools/blob/main/docs/promotion-predicate.md
+  (in-toto predicate type of the promotion attestations written by kpromo)
+- https://k8s.io/promo-tools/verifier/v1 → https://github.com/kubernetes-sigs/promo-tools/blob/main/docs/image-promotion.md#verification-summaries
+  (verifier ID of the SLSA verification summaries written by kpromo)
 
 NOTE: please see configmap-nginx.yaml for rewrite rules.
 

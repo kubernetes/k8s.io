@@ -36,13 +36,13 @@ resource "google_managed_kafka_cluster" "mimir_cluster" {
   }
 }
 
-// Create mimir-ingest topic with 12 partition count
+// Create mimir-ingest topic - ingester counts should be greater than or equal to partition count
 resource "google_managed_kafka_topic" "mimir_ingest" {
   project            = module.project.project_id
   topic_id           = "mimir-ingest"
   cluster            = google_managed_kafka_cluster.mimir_cluster.cluster_id
   location           = "us-central1"
-  partition_count    = 12 # must be >= ingesters per zone
+  partition_count    = 18 # must be >= ingesters per zone
   replication_factor = 3  # Managed Kafka requires >= 3
 
   // Set max byte to 16MB because mimir default is 15.2MB

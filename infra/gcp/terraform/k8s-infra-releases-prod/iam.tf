@@ -20,7 +20,7 @@ See: https://cloud.google.com/storage/docs/audit-logging
 */
 module "audit_log_config" {
   source  = "terraform-google-modules/iam/google//modules/audit_config"
-  version = "~> 8.1"
+  version = "~> 8.2"
 
   project = module.project.project_id
 
@@ -35,7 +35,7 @@ module "audit_log_config" {
 
 module "iam" {
   source  = "terraform-google-modules/iam/google//modules/projects_iam"
-  version = "~> 8"
+  version = "~> 8.2"
 
   projects = [module.project.project_id]
 

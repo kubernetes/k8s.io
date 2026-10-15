@@ -60,18 +60,14 @@ function generate() {
 # Prow build service accounts for ${PROJECT} registries.
 EOF
 
-    local name gsa
+    local name
     while read -r name; do
-        # google_service_account.build_sa uses account_id = substr(name, 0, 27)
-        gsa="${name:0:27}-sa"
         cat <<EOF
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: ${name}
-  annotations:
-    iam.gke.io/gcp-service-account: ${gsa}@${PROJECT}.iam.gserviceaccount.com
 EOF
     done < <(registry_names)
 }

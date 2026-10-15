@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 terraform {
-  required_version = "1.12.2"
+  required_version = "1.14.9"
 
   backend "gcs" {
     bucket = "k8s-infra-tf-prow-clusters"
@@ -25,11 +25,11 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 6.12.0"
+      version = "~> 7.42.0"
     }
     google-beta = {
       source  = "hashicorp/google-beta"
-      version = "~> 6.12.0"
+      version = "~> 7.42.0"
     }
     local = {
       source  = "hashicorp/local"
