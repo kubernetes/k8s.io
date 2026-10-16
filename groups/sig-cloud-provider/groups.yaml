@@ -65,7 +65,7 @@ groups:
       sig-cloud-provider leads
     owners:
       - bridget@kromhout.org
-      - msm@opbstudios.com
+      - elmiko.kubernetes@gmail.com
       - wfender@google.com
       - jspeed@redhat.com
     settings:
