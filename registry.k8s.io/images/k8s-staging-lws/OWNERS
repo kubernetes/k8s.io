@@ -5,6 +5,7 @@ approvers:
 - ahg-g
 - Edwinhr716
 - kerthcet
+- yankay
 labels:
 - sig/apps
 
