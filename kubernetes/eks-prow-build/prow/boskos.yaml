@@ -106,6 +106,21 @@ spec:
       protocol: TCP
       targetPort: 9090
 ---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: boskos-metrics
+  namespace: test-pods
+spec:
+  selector:
+    matchLabels:
+      app: boskos-metrics
+  namespaceSelector:
+    matchNames:
+    - test-pods
+  endpoints:
+    - port: metrics
+---
 kind: ServiceAccount
 apiVersion: v1
 metadata:
