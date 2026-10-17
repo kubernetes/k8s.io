@@ -57,6 +57,7 @@ locals {
     maintainer-tools                = "group:k8s-infra-staging-maintainer-tools@kubernetes.io"
     mcp-lifecycle-operator          = "group:k8s-infra-staging-mcp-lifecycle-op@kubernetes.io"
     minikube                        = "group:k8s-infra-staging-minikube@kubernetes.io"
+    model-serving-signals           = "group:sig-autoscaling-leads@kubernetes.io"
     node-readiness-controller       = "group:k8s-infra-staging-nrc@kubernetes.io"
     prow                            = "group:k8s-infra-prow-oncall@kubernetes.io"
     resource-state-metrics          = "group:k8s-infra-staging-resource-state-met@kubernetes.io"

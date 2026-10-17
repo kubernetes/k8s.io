@@ -200,6 +200,11 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: model-serving-signals
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: node-readiness-controller
 ---
 apiVersion: v1
