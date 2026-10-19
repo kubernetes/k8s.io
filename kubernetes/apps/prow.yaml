@@ -8,10 +8,10 @@ spec:
     - clusters:
         selector:
           matchLabels:
-            clusterType: 'prow'
+            clusterType: "prow"
   template:
     metadata:
-      name: '{{ .name }}'
+      name: "{{ .name }}"
     spec:
       destination:
         namespace: "{{ .metadata.labels.prowNamespace }}"
@@ -30,3 +30,4 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+          - ServerSideApply=true
