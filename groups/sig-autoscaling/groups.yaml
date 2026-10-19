@@ -97,6 +97,17 @@ groups:
       - raywainman@gmail.com
       - ksaiyed@google.com
 
+  - email-id: k8s-infra-staging-model-serv-signals@kubernetes.io
+    name: k8s-infra-staging-model-serv-signals
+    description: |-
+      ACL for staging model-serving-signals
+    settings:
+      ReconcileMembers: "true"
+    members:
+      - jackfrancis@gmail.com
+      - nir.rozenbaum@gmail.com
+      - omerap12@gmail.com
+
   #
   # k8s-infra gcs write access
   #
