@@ -1,1 +1,5 @@
-# No images yet
+- name: metrics-exporter
+  dmap:
+    "sha256:2b281ef5f1dc24587907f09f80ab6d44037b34bee25a22a4f173cdb552bcfcf3": ["v20261020-b853624"]
+    "sha256:50b86e28a95487088009a5c5c0ed20b187868b37d820337aff5a9dc828af936b": ["v20261020-c9fa936"]
+    "sha256:fa30fbc6d6c8c4b7ae712fbde032ee308474dc1707c2a50cf0bdc41f52927ddb": ["v20261020-ef268da"]
