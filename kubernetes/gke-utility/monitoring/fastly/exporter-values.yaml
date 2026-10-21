@@ -1,0 +1,32 @@
+replicaCount: 1
+
+fullnameOverride: fastly-exporter
+
+serviceMonitor:
+  enabled: false
+
+existingSecret:
+  name: fastly-exporter-token
+  key: token
+
+options: {}
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 512Mi
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: ["ALL"]

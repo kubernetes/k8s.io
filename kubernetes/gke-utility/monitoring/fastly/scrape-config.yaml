@@ -1,0 +1,22 @@
+- job_name: fastly-exporter
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  http_sd_configs:
+    - url: http://fastly-exporter.monitoring.svc.cluster.local:8080/sd
+  relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: service
+    - target_label: __address__
+      replacement: fastly-exporter.monitoring.svc.cluster.local:8080
+
+- job_name: prometheus-agent
+  scrape_interval: 30s
+  static_configs:
+    - targets:
+        - prom-agent-fastly-0.prometheus-agent-operated.monitoring.svc.cluster.local:9090
+  metric_relabel_configs:
+    - source_labels: [__name__]
+      regex: prometheus_remote_storage_.*|prometheus_wal_.*|prometheus_agent_.*|prometheus_target_scrapes_.*|up
+      action: keep

@@ -44,6 +44,19 @@ grafana:
       secureJsonData:
         basicAuthPassword: $MIMIR_PASSWORD
         httpHeaderValue1: prow
+    - name: Fastly
+      uid: prometheus-ds
+      type: prometheus
+      access: proxy
+      url: http://mimir-gateway.mimir.svc.cluster.local/prometheus
+      basicAuth: true
+      basicAuthUser: $MIMIR_USER
+      jsonData:
+        httpHeaderName1: X-Scope-OrgID
+        timeInterval: 15s
+      secureJsonData:
+        basicAuthPassword: $MIMIR_PASSWORD
+        httpHeaderValue1: fastly
   grafana.ini:
     analytics:
       reporting_enabled: false
