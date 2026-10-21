@@ -1,0 +1,1117 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 4,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 30,
+      "options": {
+        "dataLinks": [],
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "count(sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (datacenter) >0)",
+          "legendFormat": "POPs",
+          "refId": "A"
+        }
+      ],
+      "title": "ACTIVELY USED POPS",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 24,
+      "panels": [],
+      "title": "SUMMARY",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 5
+      },
+      "id": 6,
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Top Services Dashboard by POP",
+            "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          },
+          {
+            "targetBlank": true,
+            "title": "Service Dashboard by POP",
+            "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          }
+        ],
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_requests_total{datacenter=~\"$top_datacenter_requests_total\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter)",
+          "legendFormat": "{{datacenter}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REQUESTS",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Top Services Dashboard by POP",
+            "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          },
+          {
+            "targetBlank": true,
+            "title": "Service Dashboard by POP",
+            "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          }
+        ],
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "8 * sum(rate(fastly_rt_body_size_total{datacenter=~\"$top_datacenter_body_size_total\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter)",
+          "legendFormat": "{{datacenter}}",
+          "refId": "A"
+        }
+      ],
+      "title": "BANDWIDTH",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "id": 28,
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Top Services Dashboard by POP",
+            "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          },
+          {
+            "targetBlank": true,
+            "title": "Service Dashboard by POP",
+            "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          }
+        ],
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "histogram_quantile(0.99,sum(rate(fastly_rt_miss_duration_seconds_bucket{datacenter=~\"$top_datacenter_origin_latency_p99\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (le,datacenter))",
+          "legendFormat": "{{datacenter}}",
+          "refId": "A"
+        }
+      ],
+      "title": "ORIGIN LATENCY - P99",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "id": 4,
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Top Services Dashboard by POP",
+            "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          },
+          {
+            "targetBlank": true,
+            "title": "Service Dashboard by POP",
+            "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          }
+        ],
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_errors_total{datacenter=~\"$top_datacenter_errors_total\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter)",
+          "legendFormat": "{{datacenter}}",
+          "refId": "A"
+        }
+      ],
+      "title": "ERRORS",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "id": 14,
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Top Services Dashboard by POP",
+            "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          },
+          {
+            "targetBlank": true,
+            "title": "Service Dashboard by POP",
+            "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          }
+        ],
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_status_group_total{datacenter=~\"$top_datacenter_status_group_total_4xx\", status_group=~\"4xx\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter,status_code)",
+          "legendFormat": "{{datacenter}}",
+          "refId": "A"
+        }
+      ],
+      "title": "4XX",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 23
+      },
+      "id": 12,
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Top Services Dashboard by POP",
+            "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          },
+          {
+            "targetBlank": true,
+            "title": "Service Dashboard by POP",
+            "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+          }
+        ],
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_status_group_total{datacenter=~\"$top_datacenter_status_group_total_5xx\", status_group=~\"5xx\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter, status_code)",
+          "legendFormat": "{{datacenter}} ",
+          "refId": "A"
+        }
+      ],
+      "title": "5XX",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 26,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "4XX per REQUESTS by 4XX",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 33
+          },
+          "id": 18,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Top Services Dashboard by POP",
+                "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard by POP",
+                "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_group_total{datacenter=~\"$top_datacenter_4xx_per_request\", status_group=~\"4xx\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter,status_code)",
+              "legendFormat": "{{datacenter}}",
+              "refId": "A"
+            }
+          ],
+          "title": "4XX IMPAIRED",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 33
+          },
+          "id": 20,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Top Services Dashboard by POP",
+                "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard by POP",
+                "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_group_total{datacenter=~\"$top_datacenter_5xx_per_request\", status_group=~\"5xx\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter,status_code)",
+              "legendFormat": "{{datacenter}}",
+              "refId": "A"
+            }
+          ],
+          "title": "5XX IMPAIRED",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percentunit",
+              "decimals": 0,
+              "max": 1.0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 42
+          },
+          "id": 16,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Top Services Dashboard by POP",
+                "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard by POP",
+                "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_group_total{datacenter=~\"$top_datacenter_4xx_per_request\", status_group=\"4xx\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter) / sum(rate(fastly_rt_requests_total{datacenter=~\"$top_datacenter_4xx_per_request\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter)",
+              "legendFormat": "{{datacenter}}",
+              "refId": "A"
+            }
+          ],
+          "title": "4XX per REQUEST",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percentunit",
+              "decimals": 0,
+              "max": 1.0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 42
+          },
+          "id": 22,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Top Services Dashboard by POP",
+                "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard by POP",
+                "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_group_total{datacenter=~\"$top_datacenter_5xx_per_request\", status_group=\"5xx\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter) / sum(rate(fastly_rt_requests_total{datacenter=~\"$top_datacenter_5xx_per_request\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter)",
+              "legendFormat": "{{datacenter}}",
+              "refId": "A"
+            }
+          ],
+          "title": "5XX per REQUEST",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "ERRORS >= REQUESTS, by ERRORS",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 51
+          },
+          "id": 8,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Top Services Dashboard by POP",
+                "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard by POP",
+                "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_errors_total{datacenter=~\"$top_datacenter_error_per_request\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter) \n",
+              "legendFormat": "{{datacenter}}",
+              "refId": "A"
+            }
+          ],
+          "title": "DEAD ",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "REQUESTS > ERRORS, by ERRORS / REQUESTS",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 51
+          },
+          "id": 10,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Top Services Dashboard by POP",
+                "url": "/d/FastlyTopServices/fastly-top-services?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard by POP",
+                "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__url_time_range}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "lastNotNull"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_errors_total{datacenter=~\"$top_datacenter_impaired\",service_name=~\"$service_name\", service_id=~\"$service_id\"}[$rate])) by (datacenter) ",
+              "legendFormat": "{{datacenter}}",
+              "refId": "A"
+            }
+          ],
+          "title": "IMPAIRED",
+          "transparent": true,
+          "type": "timeseries"
+        }
+      ],
+      "title": "MISC",
+      "type": "row"
+    }
+  ],
+  "preload": false,
+  "refresh": "30s",
+  "schemaVersion": 41,
+  "tags": [
+    "fastly"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "includeAll": false,
+        "label": "Data Source",
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "label_values(fastly_rt_requests_total, service_name)",
+        "includeAll": true,
+        "label": "Service Name",
+        "multi": true,
+        "name": "service_name",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          }
+        ],
+        "query": "label_values(fastly_rt_requests_total, service_name)",
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "label_values(fastly_rt_requests_total, service_id)",
+        "includeAll": true,
+        "label": "Service ID",
+        "multi": true,
+        "name": "service_id",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          }
+        ],
+        "query": "label_values(fastly_rt_requests_total, service_id)",
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "label_values(fastly_rt_requests_total, datacenter)",
+        "includeAll": true,
+        "label": "POP",
+        "multi": true,
+        "name": "datacenter",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          }
+        ],
+        "query": "label_values(fastly_rt_requests_total, datacenter)",
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "30s",
+          "value": "30s"
+        },
+        "name": "rate",
+        "options": [
+          {
+            "selected": true,
+            "text": "30s",
+            "value": "30s"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "30s,1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "refresh": 2,
+        "type": "interval"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_requests_total",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_errors_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_errors_total",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_errors_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_body_size_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_body_size_total",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_body_size_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_errors_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter) / max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_error_per_request",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_errors_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter) / max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_errors_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter) / max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter) ))",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_impaired",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_errors_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter) / max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter) ))",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[${__range_s}s])) by (datacenter)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_status_group_total_4xx",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[${__range_s}s])) by (datacenter)))\n",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[${__range_s}s])) by (datacenter)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_status_group_total_5xx",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[${__range_s}s])) by (datacenter)))\n",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[${__range_s}s])) by (datacenter) / max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_4xx_per_request",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[${__range_s}s])) by (datacenter) / max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, max(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[${__range_s}s])) by (datacenter) / max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_5xx_per_request",
+        "options": [],
+        "query": "query_result(topk(10, max(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[${__range_s}s])) by (datacenter) / max(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (datacenter)))\n",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "query_result(topk(10, histogram_quantile(0.99,sum(rate(fastly_rt_miss_duration_seconds_bucket{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (le,datacenter))))",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_datacenter_origin_latency_p99",
+        "options": [],
+        "query": "query_result(topk(10, histogram_quantile(0.99,sum(rate(fastly_rt_miss_duration_seconds_bucket{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (le,datacenter))))",
+        "refresh": 2,
+        "regex": ".*datacenter=\"(.*?)\".*",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Fastly Top POPs",
+  "uid": "FastlyTopPOPs",
+  "version": 7
+}

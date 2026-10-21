@@ -1,0 +1,92 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "maxItems": 20,
+        "query": "Fastly",
+        "showHeadings": true,
+        "showRecentlyViewed": false,
+        "showSearch": true,
+        "showStarred": false,
+        "tags": []
+      },
+      "pluginVersion": "9.1.3",
+      "title": "",
+      "type": "dashlist"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "content": "# Fastly Dashboards\n\nFastly CDN metrics for the Kubernetes project, collected by fastly-exporter on gke-utility and stored in Mimir (tenant `fastly`).\n\n## Start here\n\n* [Overview](/d/FastlyDashboard/fastly-dashboard)\n* [Per service](/d/FastlyService/fastly-service)\n* [Top services](/d/FastlyTopServices/fastly-top-services) · [Top POPs](/d/FastlyTopPOPs/fastly-top-pops) · [Top origins](/d/FastlyTopOrigins/fastly-top-origins) · [Top domains](/d/FastlyTopDomains/fastly-top-domains)\n* [Thresholds & health](/d/FastlyThresholds/fastly-thresholds) · [Security](/d/FastlySecurity/fastly-security) · [Compute](/d/FastlyCompute/fastly-compute)\n\nSource dashboards: https://github.com/fastly/fastly-dashboards\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.1.3",
+      "title": "",
+      "type": "text"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 41,
+  "tags": [
+    "fastly"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Fastly Home",
+  "uid": "FastlyHome",
+  "version": 1
+}
