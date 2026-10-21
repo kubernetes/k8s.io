@@ -1,0 +1,259 @@
+# Copyright 2026 The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Bootstrap resources for the sig-release-leads AWS account (433650573627).
+# Apply this stack in us-west-2.
+Parameters:
+  SenderEmail:
+    Type: String
+    Description: SES email identity used by patch-release-notification
+    ConstraintDescription: Email is required
+    AllowedPattern: ".+@.+"
+    Default: "release-managers@kubernetes.io"
+
+Resources:
+  #########################################
+  # Terraform State                       #
+  #########################################
+
+  # TFStateBucket is the S3 bucket for storing Terraform state of everything
+  # under infra/aws/terraform/sig-release.
+  TFStateBucket:
+    Type: AWS::S3::Bucket
+    # We retain the bucket to ensure that accidental deletion of the stack
+    # doesn't destroy Terraform state
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BucketName: k8s-sig-release-tfstate
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      Tags:
+        - Key: group
+          Value: sig-release
+        - Key: environment
+          Value: prod
+
+  # TFStateBucketPolicy rejects any request that is not made over TLS.
+  TFStateBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref TFStateBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: DenyInsecureTransport
+            Effect: Deny
+            Principal: '*'
+            Action: 's3:*'
+            Resource:
+              - !GetAtt TFStateBucket.Arn
+              - !Sub '${TFStateBucket.Arn}/*'
+            Condition:
+              Bool:
+                'aws:SecureTransport': 'false'
+
+  #########################################
+  # IAM user for Terraform                #
+  #########################################
+
+  # ProvisionerUser (provisioner) is an IAM user used for running Terraform.
+  # This is a shared user used by Kubernetes Release Managers to run Terraform
+  # and manage this AWS account, following the same approach as
+  # infra/aws/cloudformation/iam/cdn.packages.k8s.io.
+  # The user can only assume the Provisioner role. Credentials for this IAM
+  # user are located in 1Password vault accessible by Kubernetes Release
+  # Managers.
+  ProvisionerUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Path: /
+      UserName: provisioner
+      Policies:
+        - PolicyName: ProvisionerUserAccess
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Action: 'sts:AssumeRole'
+                Effect: Allow
+                Resource: !Sub 'arn:aws:iam::${AWS::AccountId}:role/Provisioner'
+
+  # ProvisionerRole is an IAM role assumed by provisioner IAM user to run Terraform
+  ProvisionerRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: Provisioner
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              AWS: !GetAtt ProvisionerUser.Arn
+
+  TerraformStateAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: TerraformStateAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          # Permissions needed for S3 bucket used for Terraform state (including
+          # the S3 native lock file) are documented here:
+          # https://developer.hashicorp.com/terraform/language/backend/s3#permissions-required
+          - Effect: 'Allow'
+            Action:
+              - 's3:ListBucket'
+            Resource: !GetAtt TFStateBucket.Arn
+          - Effect: 'Allow'
+            Action:
+              - 's3:GetObject'
+              - 's3:PutObject'
+              - 's3:DeleteObject'
+            Resource: !Sub '${TFStateBucket.Arn}/*'
+      Roles:
+        - Ref: ProvisionerRole
+
+  #########################################
+  # patch-release-notification            #
+  #########################################
+
+  # PatchReleaseNotificationRepository holds the Lambda image. It lives here
+  # rather than in Terraform because the image has to be pushed before the
+  # Lambda can be created, Terraform then deploys it by digest.
+  PatchReleaseNotificationRepository:
+    Type: AWS::ECR::Repository
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      RepositoryName: release-engineering/patch-release-notification
+      ImageTagMutability: IMMUTABLE
+      ImageScanningConfiguration:
+        ScanOnPush: true
+      LifecyclePolicy:
+        LifecyclePolicyText: |
+          {
+            "rules": [{
+              "rulePriority": 1,
+              "description": "Keep the last 10 images",
+              "selection": {"tagStatus": "any", "countType": "imageCountMoreThan", "countNumber": 10},
+              "action": {"type": "expire"}
+            }]
+          }
+      Tags:
+        - Key: group
+          Value: sig-release
+        - Key: environment
+          Value: prod
+
+  # PatchReleaseNotificationAccessPolicy grants the Provisioner role what it
+  # needs to plan, apply and destroy
+  # infra/aws/terraform/sig-release/patch-release-notification and to push
+  # the Lambda image. Everything is scoped to resources named
+  # patch-release-notification*.
+  PatchReleaseNotificationAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: PatchReleaseNotificationAccess
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: SESIdentity
+            Effect: 'Allow'
+            Action: 'ses:*'
+            Resource: !Sub 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${SenderEmail}'
+          - Sid: ECRRepository
+            Effect: 'Allow'
+            Action: 'ecr:*'
+            Resource: !Sub 'arn:aws:ecr:${AWS::Region}:${AWS::AccountId}:repository/release-engineering/patch-release-notification'
+          # GetAuthorizationToken can't be scoped down to a repository
+          - Sid: ECRLogin
+            Effect: 'Allow'
+            Action: 'ecr:GetAuthorizationToken'
+            Resource: '*'
+          - Sid: LambdaFunction
+            Effect: 'Allow'
+            Action: 'lambda:*'
+            Resource: !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:patch-release-notification*'
+          - Sid: EventBridgeRule
+            Effect: 'Allow'
+            Action: 'events:*'
+            Resource: !Sub 'arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/patch-release-notification*'
+          - Sid: LogGroup
+            Effect: 'Allow'
+            Action: 'logs:*'
+            Resource:
+              - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/patch-release-notification'
+              - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/patch-release-notification:*'
+          # DescribeLogGroups can't be scoped down to a log group
+          - Sid: LogGroupDescribe
+            Effect: 'Allow'
+            Action: 'logs:DescribeLogGroups'
+            Resource: '*'
+          - Sid: AlertsTopic
+            Effect: 'Allow'
+            Action: 'sns:*'
+            Resource: !Sub 'arn:aws:sns:${AWS::Region}:${AWS::AccountId}:patch-release-notification*'
+          - Sid: AlertsAlarm
+            Effect: 'Allow'
+            Action: 'cloudwatch:*'
+            Resource: !Sub 'arn:aws:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:patch-release-notification*'
+          - Sid: LambdaRole
+            Effect: 'Allow'
+            Action:
+              - 'iam:CreateRole'
+              - 'iam:DeleteRole'
+              - 'iam:GetRole'
+              - 'iam:UpdateRole'
+              - 'iam:UpdateAssumeRolePolicy'
+              - 'iam:TagRole'
+              - 'iam:UntagRole'
+              - 'iam:ListRoleTags'
+              - 'iam:GetRolePolicy'
+              - 'iam:PutRolePolicy'
+              - 'iam:DeleteRolePolicy'
+              - 'iam:ListRolePolicies'
+              - 'iam:ListAttachedRolePolicies'
+              - 'iam:ListInstanceProfilesForRole'
+            Resource: !Sub 'arn:aws:iam::${AWS::AccountId}:role/patch-release-notification'
+          - Sid: LambdaRolePass
+            Effect: 'Allow'
+            Action: 'iam:PassRole'
+            Resource: !Sub 'arn:aws:iam::${AWS::AccountId}:role/patch-release-notification'
+            Condition:
+              StringEquals:
+                'iam:PassedToService': 'lambda.amazonaws.com'
+      Roles:
+        - Ref: ProvisionerRole
+
+Outputs:
+  TFStateBucketName:
+    Value: !Ref TFStateBucket
+  ProvisionerRoleArn:
+    Value: !GetAtt ProvisionerRole.Arn
+  PatchReleaseNotificationRepositoryUri:
+    Value: !GetAtt PatchReleaseNotificationRepository.RepositoryUri
