@@ -32,6 +32,10 @@ locals {
       group  = "sig-testing"
       owners = "k8s-infra-prow-oncall@kubernetes.io"
     }
+    sfcompute-api-key = {
+      group  = "sig-k8s-infra"
+      owners = "k8s-infra-sfcompute-admins@kubernetes.io"
+    }
   }
 }
 
