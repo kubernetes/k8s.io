@@ -635,3 +635,7 @@ kube-network-policies.sigs:
 dra-driver-cpu.sigs:
   type: CNAME
   value: dra-driver-cpu.netlify.app.
+# https://github.com/kubernetes-sigs/model-serving-signals docs (@jackfrancis, @nirrozenbaum, @omerap12)
+model-serving-signals.sigs:
+  type: CNAME
+  value: model-serving-signals.netlify.app.
