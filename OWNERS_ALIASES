@@ -205,6 +205,9 @@ aliases:
     - andreyvelich
     - mm4tt
     - kannon92
+  wg-workload-conformance-leads:
+    - palnabarun
+    - soltysh
   committee-code-of-conduct:
     - AnaMMedina21
     - endocrimes
