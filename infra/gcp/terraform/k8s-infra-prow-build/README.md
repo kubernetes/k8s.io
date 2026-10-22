@@ -11,7 +11,7 @@ This directory creates the GCP project and GKE cluster where Prow dispatches the
 - **VPC peering**: With GCVE (`broadcom-451918`) for vSphere testing.
 - **Service accounts**: Workload Identity-bound SAs for `prow-build`, `boskos-janitor`, and `kubernetes-external-secrets`.
 - **Scale test resources**: Dedicated SA and Secret Manager secret for 5k scale test cache pulling.
-- **Secret Manager secrets**: CI secrets (SSH keys, service account credentials, Lambda AI API key) with group-based admin bindings.
+- **Secret Manager secrets**: CI secrets (SSH keys, service account credentials, Lambda AI API key, SF Compute API key) with group-based admin bindings.
 - **External IPs**: Static addresses for Boskos metrics, external-secrets metrics, and Grafana ingress.
 - **Monitoring dashboards**: Cloud Monitoring dashboards loaded from JSON definitions.
 
