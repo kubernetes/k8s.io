@@ -121,6 +121,8 @@
     "sha256:3395db873c6f10a8f30da851a686e6555c4d455983a83545bc4b5830d5b0ff73": ["v0.19.0-full"]
     "sha256:3f600513a463712aaab33cf525e20be0b5718e57da50d0ac2e092b86bcfc4812": ["v0.20.0","v0.20.0-minimal"] # NFD v0.20.0
     "sha256:65c315fa7912b2aa22ae715c3248fc40a23d6ea86e2b92cda050259473319384": ["v0.20.0-full"] # NFD v0.20.0
+    "sha256:6fc5c9af9176e1acb5ce57a4a1d0c0d3eb25cd34f5bdd0efefebf0efe45a8379": ["v0.20.1","v0.20.1-minimal"] # NFD v0.20.1
+    "sha256:27e8b23f67ded1d5c7268ea7330fc7f83b2aefe1d376a445c251c7e89a17c041": ["v0.20.1-full"] # NFD v0.20.1
 - name: charts/node-feature-discovery
   dmap:
     "sha256:cb4bfd81acce68798b65ad3d33f3efc503ad1410504b6a1a3929b514d8ba1205": ["0.18.0"]
@@ -129,6 +131,7 @@
     "sha256:c134ee667d7e4403889ff1c1cd7e1c78c0094e3b3c3b7d241e1d5d13b67efcc1": ["0.18.3"]
     "sha256:c74eeb7fe33c060e49e42cc8d588eeeddfbda6ae9bcd0835e0e398e02c5c2223": ["0.19.0"]
     "sha256:4b012ea6dd8d815a054174310e53051d3e097b381265ff12e0f4b6c77fe2f2b2": ["0.20.0"] # NFD v0.20.0
+    "sha256:5c4df0919041454a3a2095965e3ada6bb514095731921f3055aa539669e79e54": ["0.20.1"] # NFD v0.20.1
 - name: node-feature-discovery-operator
   dmap:
     "sha256:36a9a2c9d40b08a72df2878fcb602a86c7cf5b71ee9a786bff67fb84b64dcd16": ["v0.2.0"]
