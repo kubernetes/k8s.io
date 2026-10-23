@@ -34,7 +34,7 @@ spec:
       serviceAccountName: tide
       containers:
       - name: tide
-        image: us-docker.pkg.dev/k8s-infra-prow/images/tide:v20261020-c11932f5a
+        image: us-docker.pkg.dev/k8s-infra-prow/images/tide:v20261023-0d9737ca2
         args:
         - --dry-run=false
         - --github-app-id=$(GITHUB_APP_ID)
