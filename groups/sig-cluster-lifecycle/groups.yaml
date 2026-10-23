@@ -14,6 +14,8 @@ groups:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
       - justinsb@google.com
+      - chacman@microsoft.com
+      - sbueringer@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -140,6 +142,8 @@ groups:
       - fabrizio.pandini@gmail.com
       - neolit123@gmail.com
       - justinsb@google.com
+      - chacman@microsoft.com
+      - sbueringer@gmail.com
 
   #
   # k8s-staging write access for SIG-owned subprojects
