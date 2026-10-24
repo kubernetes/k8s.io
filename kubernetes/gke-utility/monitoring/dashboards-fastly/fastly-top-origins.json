@@ -1,0 +1,1402 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus-ds"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 30,
+      "options": {
+        "alertThreshold": true,
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "pluginVersion": "9.1.3",
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "editorMode": "code",
+          "expr": "count(sum(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}) by (origin))",
+          "legendFormat": "Origins",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "ACTIVELY USED ORIGINS",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 24,
+      "panels": [],
+      "title": "SUMMARY",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus-ds"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Service Dashboard",
+              "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+            },
+            {
+              "targetBlank": true,
+              "title": "Fastly Configuration",
+              "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 5
+      },
+      "id": 6,
+      "options": {
+        "alertThreshold": true,
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "pluginVersion": "9.1.3",
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "expr": "sum(rate(fastly_origin_responses_total{origin=~\"$top_origin_id_requests_total\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (origin,service_id,service_name)",
+          "legendFormat": "{{origin}}",
+          "refId": "A"
+        }
+      ],
+      "title": "REQUESTS",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus-ds"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Service Dashboard",
+              "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+            },
+            {
+              "targetBlank": true,
+              "title": "Fastly Configuration",
+              "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+            }
+          ],
+          "unit": "bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "alertThreshold": true,
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "pluginVersion": "9.1.3",
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "expr": "8 * sum(rate(fastly_origin_resp_body_bytes_total{origin=~\"$top_origin_id_body_size_total\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (origin,service_id,service_name)",
+          "legendFormat": "{{origin}}",
+          "refId": "A"
+        }
+      ],
+      "title": "BANDWIDTH",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus-ds"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Service Dashboard",
+              "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+            },
+            {
+              "targetBlank": true,
+              "title": "Fastly Configuration",
+              "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "id": 14,
+      "options": {
+        "alertThreshold": true,
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "pluginVersion": "9.1.3",
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "expr": "sum(rate(fastly_origin_status_group_total{origin=~\"$top_origin_id_status_group_total_4xx\", status_group=~\"4xx\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (origin,service_id,service_name)",
+          "legendFormat": "{{origin}}",
+          "refId": "A"
+        }
+      ],
+      "title": "4XX",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus-ds"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Service Dashboard",
+              "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+            },
+            {
+              "targetBlank": true,
+              "title": "Fastly Configuration",
+              "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "id": 12,
+      "options": {
+        "alertThreshold": true,
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "pluginVersion": "9.1.3",
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "expr": "sum(rate(fastly_origin_status_group_total{origin=~\"$top_origin_id_status_group_total_5xx\", status_group=~\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (origin,service_id,service_name)",
+          "legendFormat": "{{origin}} ",
+          "refId": "A"
+        }
+      ],
+      "title": "5XX",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus-ds"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Service Dashboard",
+              "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+            },
+            {
+              "targetBlank": true,
+              "title": "Fastly Configuration",
+              "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+            }
+          ],
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 23
+      },
+      "id": 28,
+      "options": {
+        "alertThreshold": true,
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "pluginVersion": "9.1.3",
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "expr": "histogram_quantile(0.99,sum(rate(fastly_origin_latency_seconds_bucket{origin=~\"$top_origin_id_origin_latency_p99\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (le,origin,service_id,service_name))",
+          "legendFormat": "{{origin}}",
+          "refId": "A"
+        }
+      ],
+      "title": "ORIGIN LATENCY - P99",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 26,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus-ds"
+          },
+          "description": "4XX per REQUESTS by 4XX",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 33
+          },
+          "id": 18,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard",
+                "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Fastly Configuration",
+                "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": "prometheus-ds",
+              "expr": "sum(rate(fastly_origin_status_group_total{origin=~\"$top_origin_id_4xx_per_request\", status_group=~\"4xx\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (origin,service_id,service_name)",
+              "legendFormat": "{{origin}}",
+              "refId": "A"
+            }
+          ],
+          "title": "4XX IMPAIRED",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": "prometheus-ds",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 33
+          },
+          "id": 20,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard",
+                "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Fastly Configuration",
+                "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": "prometheus-ds",
+              "expr": "sum(rate(fastly_origin_status_group_total{origin=~\"$top_origin_id_5xx_per_request\", status_group=~\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (origin,service_id,service_name)",
+              "legendFormat": "{{origin}}",
+              "refId": "A"
+            }
+          ],
+          "title": "5XX IMPAIRED",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": "prometheus-ds",
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percentunit",
+              "decimals": 0,
+              "max": 1.0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 42
+          },
+          "id": 16,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard",
+                "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Fastly Configuration",
+                "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": "prometheus-ds",
+              "expr": "sum(rate(fastly_origin_status_group_total{origin=~\"$top_origin_id_4xx_per_request\", status_group=\"4xx\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (service_name,service_id) / sum(rate(fastly_origin_responses_total{origin=~\"$top_origin_id_4xx_per_request\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (service_name,service_id)",
+              "legendFormat": "{{origin}}",
+              "refId": "A"
+            }
+          ],
+          "title": "4XX per REQUEST",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": "prometheus-ds",
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percentunit",
+              "decimals": 0,
+              "max": 1.0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 42
+          },
+          "id": 22,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard",
+                "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Fastly Configuration",
+                "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": "prometheus-ds",
+              "expr": "sum(rate(fastly_origin_status_group_total{origin=~\"$top_origin_id_5xx_per_request\", status_group=\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (service_name,service_id) / sum(rate(fastly_origin_responses_total{origin=~\"$top_origin_id_5xx_per_request\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (service_name,service_id)",
+              "legendFormat": "{{origin}}",
+              "refId": "A"
+            }
+          ],
+          "title": "5XX per REQUEST",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": "prometheus-ds",
+          "description": "ERRORS >= REQUESTS, by ERRORS",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 51
+          },
+          "id": 8,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard",
+                "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Fastly Configuration",
+                "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": "prometheus-ds",
+              "expr": "sum(rate(fastly_origin_status_group_total{status_group=\"5xx\", origin=~\"$top_origin_id_error_per_request\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (origin, service_id, service_name) \n",
+              "legendFormat": "{{origin}}",
+              "refId": "A"
+            }
+          ],
+          "title": "DEAD ",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": "prometheus-ds",
+          "description": "REQUESTS > ERRORS, by ERRORS / REQUESTS",
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 51
+          },
+          "id": 10,
+          "options": {
+            "dataLinks": [
+              {
+                "targetBlank": true,
+                "title": "Service Dashboard",
+                "url": "/d/FastlyService/fastly-service?var-service_id=${__field.labels.service_id}&${__url_time_range}"
+              },
+              {
+                "targetBlank": true,
+                "title": "Fastly Configuration",
+                "url": "https://manage.fastly.com/configure/services/${__field.labels.service_id}"
+              }
+            ],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "lastNotNull"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": "prometheus-ds",
+              "expr": "sum(rate(fastly_origin_status_group_total{status_group=\"5xx\", origin=~\"$top_origin_id_impaired\", origin=~\"$origin\", service_name=~\"$service_name\", datacenter=~\"$datacenter\"}[$rate])) by (origin, service_id, service_name) ",
+              "legendFormat": "{{origin}}",
+              "refId": "A"
+            }
+          ],
+          "title": "IMPAIRED",
+          "transparent": true,
+          "type": "timeseries"
+        }
+      ],
+      "title": "MISC",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 40,
+      "panels": [],
+      "title": "SOURCE AND STATUS DETAIL",
+      "type": "row"
+    },
+    {
+      "datasource": "prometheus-ds",
+      "description": "Origin Inspector labels every metric with source: delivery, compute or waf, identifying which part of the Fastly platform made the origin request. Nothing in this repo used that label before.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 34
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "editorMode": "code",
+          "expr": "sum(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (source)",
+          "legendFormat": "{{source}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "REQUESTS BY SOURCE",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "prometheus-ds",
+      "description": "Individual status codes. The 4XX and 5XX panels above group by status_group, so they cannot distinguish a 503 from a 502.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 34
+      },
+      "id": 42,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "editorMode": "code",
+          "expr": "topk(10, sum(rate(fastly_origin_status_code_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (status_code))",
+          "legendFormat": "{{status_code}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "ORIGIN STATUS CODES",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "prometheus-ds",
+      "description": "Header bytes read 0 for source=compute and source=waf on every exporter release up to v10.3.0: pkg/origin/process.go adds those two sources' header bytes to RespBodyBytesTotal instead, so the header counter stays empty and the body counter is inflated. Only source=delivery is correct here until that is fixed upstream.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "id": 43,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": "prometheus-ds",
+          "editorMode": "code",
+          "expr": "sum(rate(fastly_origin_resp_body_bytes_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (source)",
+          "legendFormat": "body {{source}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": "prometheus-ds",
+          "editorMode": "code",
+          "expr": "sum(rate(fastly_origin_resp_header_bytes_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (source)",
+          "legendFormat": "header {{source}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "ORIGIN RESPONSE BYTES BY SOURCE",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "30s",
+  "schemaVersion": 41,
+  "tags": [
+    "fastly",
+    "origin-inspector"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".+",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "label_values(fastly_origin_responses_total, origin)",
+        "includeAll": true,
+        "label": "Origin",
+        "multi": true,
+        "name": "origin",
+        "options": [],
+        "query": {
+          "query": "label_values(fastly_origin_responses_total, origin)",
+          "refId": "Prometheus-origin-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "label_values(fastly_origin_responses_total, service_name)",
+        "includeAll": true,
+        "label": "Service Name",
+        "multi": true,
+        "name": "service_name",
+        "options": [],
+        "query": {
+          "query": "label_values(fastly_origin_responses_total, service_name)",
+          "refId": "Prometheus-service_name-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "label_values(fastly_origin_responses_total, service_id)",
+        "includeAll": true,
+        "label": "Service ID",
+        "multi": true,
+        "name": "service_id",
+        "options": [],
+        "query": {
+          "query": "label_values(fastly_origin_responses_total, service_id)",
+          "refId": "Prometheus-service_id-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "label_values(fastly_origin_responses_total, datacenter)",
+        "includeAll": true,
+        "label": "POP",
+        "multi": true,
+        "name": "datacenter",
+        "options": [],
+        "query": {
+          "query": "label_values(fastly_origin_responses_total, datacenter)",
+          "refId": "Prometheus-datacenter-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "30s",
+          "value": "30s"
+        },
+        "name": "rate",
+        "options": [
+          {
+            "selected": true,
+            "text": "30s",
+            "value": "30s"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "30s,1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "refresh": 2,
+        "type": "interval"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_requests_total",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+          "refId": "Prometheus-top_origin_id_requests_total-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_status_group_total{status_group=\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_errors_total",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_status_group_total{status_group=\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+          "refId": "Prometheus-top_origin_id_errors_total-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_resp_body_bytes_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_body_size_total",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_resp_body_bytes_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+          "refId": "Prometheus-top_origin_id_body_size_total-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_status_group_total{status_group=\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin) / max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_error_per_request",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_status_group_total{status_group=\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin) / max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))",
+          "refId": "Prometheus-top_origin_id_error_per_request-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_status_group_total{status_group=\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin) / max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin) ))",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_impaired",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_status_group_total{status_group=\"5xx\", origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin) / max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin) ))",
+          "refId": "Prometheus-top_origin_id_impaired-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_status_group_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[${__range_s}s])) by (origin)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_status_group_total_4xx",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_status_group_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[${__range_s}s])) by (origin)))\n",
+          "refId": "Prometheus-top_origin_id_status_group_total_4xx-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_status_group_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[${__range_s}s])) by (origin)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_status_group_total_5xx",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_status_group_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[${__range_s}s])) by (origin)))\n",
+          "refId": "Prometheus-top_origin_id_status_group_total_5xx-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_status_group_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[${__range_s}s])) by (origin) / max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_4xx_per_request",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_status_group_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[${__range_s}s])) by (origin) / max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+          "refId": "Prometheus-top_origin_id_4xx_per_request-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, max(rate(fastly_origin_status_group_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[${__range_s}s])) by (origin) / max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_5xx_per_request",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, max(rate(fastly_origin_status_group_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[${__range_s}s])) by (origin) / max(rate(fastly_origin_responses_total{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (origin)))\n",
+          "refId": "Prometheus-top_origin_id_5xx_per_request-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "prometheus-ds",
+        "definition": "query_result(topk(10, histogram_quantile(0.99,sum(rate(fastly_origin_latency_seconds_bucket{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (le,origin))))",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "top_origin_id_origin_latency_p99",
+        "options": [],
+        "query": {
+          "query": "query_result(topk(10, histogram_quantile(0.99,sum(rate(fastly_origin_latency_seconds_bucket{origin=~\"$origin\", service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[${__range_s}s])) by (le,origin))))",
+          "refId": "Prometheus-top_origin_id_origin_latency_p99-Variable-Query"
+        },
+        "refresh": 2,
+        "regex": ".*origin=\"(.*?)\".*",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Fastly Top Origins",
+  "uid": "FastlyTopOrigins",
+  "version": 1
+}
