@@ -116,7 +116,7 @@ module "prow_build_nodepool_c4d_highmem_8_localssd" {
   ]
   name                         = "pool8-highmem"
   initial_count                = 1
-  min_count                    = 1
+  min_count                    = 2
   max_count                    = 50 # total across all zones
   machine_type                 = "c4d-highmem-8-lssd"
   disk_size_gb                 = 100
