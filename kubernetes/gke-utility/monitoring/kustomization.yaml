@@ -6,6 +6,16 @@ resources:
   - httproute.yaml
   - dashboards.yaml
   - hyperdisk-sc.yaml
+  - fastly/secrets.yaml
+
+helmCharts:
+  - name: prometheus-fastly-exporter
+    repo: https://prometheus-community.github.io/helm-charts
+    releaseName: fastly-exporter
+    version: 0.14.1
+    valuesFile: fastly/exporter-values.yaml
+    apiVersions:
+      - monitoring.coreos.com/v1
 
 configMapGenerator:
   - name: prow-dashboards
@@ -29,3 +39,17 @@ configMapGenerator:
       - dashboards-aws/jobs.json
       - dashboards-aws/organizations.json
       - dashboards-aws/repositories.json
+
+  - name: fastly-dashboards
+    behavior: merge
+    files:
+      - dashboards-fastly/home.json
+      - dashboards-fastly/fastly-dashboard.json
+      - dashboards-fastly/fastly-service.json
+      - dashboards-fastly/fastly-top-services.json
+      - dashboards-fastly/fastly-top-pops.json
+      - dashboards-fastly/fastly-top-origins.json
+      - dashboards-fastly/fastly-top-domains.json
+      - dashboards-fastly/fastly-thresholds.json
+      - dashboards-fastly/fastly-security.json
+      - dashboards-fastly/fastly-compute.json

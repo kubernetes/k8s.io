@@ -1,0 +1,1875 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 40,
+      "panels": [],
+      "title": "HEALTH",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 4
+      },
+      "id": 22,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "pluginVersion": "6.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"2xx\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "2XX",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 4
+      },
+      "id": 16,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "pluginVersion": "6.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"3xx\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "3XX",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 4
+      },
+      "id": 18,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "pluginVersion": "6.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"4xx\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "4XX",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 4
+      },
+      "id": 20,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "pluginVersion": "6.6.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=\"5xx\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "5XX",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 4
+      },
+      "id": 24,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_errors_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "FASTLY ERRORS",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "69KB limit per https://docs.fastly.com/en/guides/resource-limits#request-and-header-limits",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 4
+      },
+      "id": 36,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_req_header_bytes_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate])) / 69000",
+          "refId": "A"
+        }
+      ],
+      "title": "REQ HEADER",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "69KB limit per https://docs.fastly.com/en/guides/resource-limits#request-and-header-limits",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 18,
+        "y": 4
+      },
+      "id": 38,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_resp_header_bytes_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate])) / 69000",
+          "refId": "A"
+        }
+      ],
+      "title": "RESP HEADER",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "Thresholds from https://www.littledata.io/average/server-response-time",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 21,
+        "y": 4
+      },
+      "id": 70,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "histogram_quantile(0.99,sum(rate(fastly_rt_miss_duration_seconds_bucket{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (le))",
+          "refId": "A"
+        }
+      ],
+      "title": "P99 LATENCY",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 44,
+      "panels": [],
+      "title": "CACHE & SHIELDING",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "HITS / ( HITS + MISS )",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 9
+      },
+      "id": 56,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_hits_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / (sum(rate(fastly_rt_hits_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))\n+ sum(rate(fastly_rt_miss_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])))",
+          "refId": "A"
+        }
+      ],
+      "title": "HIT RATIO",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "HITS / REQUESTS",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 9
+      },
+      "id": 50,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_hits_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "HITS",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "MISS / REQUESTS",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 6,
+        "y": 9
+      },
+      "id": 52,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_miss_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))\n",
+          "refId": "A"
+        }
+      ],
+      "title": "MISS",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "PASS / REQUESTS",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 9,
+        "y": 9
+      },
+      "id": 48,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_pass_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "PASS",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "SYNTHETIC / REQUESTS",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 12,
+        "y": 9
+      },
+      "id": 54,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_synth_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "SYNTHETIC",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "SHIELD > 0",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 15,
+        "y": 9
+      },
+      "id": 58,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_shield_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "SHIELDING",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "SHIELD / REQUESTS",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 18,
+        "y": 9
+      },
+      "id": 60,
+      "maxDataPoints": 100,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ]
+        },
+        "graphMode": "area"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_shield_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "refId": "A"
+        }
+      ],
+      "title": "TO SHIELD",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 21,
+        "y": 9
+      },
+      "id": 64,
+      "options": {
+        "dataLinks": [
+          {
+            "targetBlank": true,
+            "title": "Service POP View",
+            "url": "/d/FastlyService/fastly-service?var-datacenter=${__field.labels.datacenter}&${__all_variables}"
+          }
+        ],
+        "legend": {
+          "showLegend": true,
+          "placement": "right",
+          "calcs": []
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_shield_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (datacenter)",
+          "legendFormat": "{{datacenter}}",
+          "refId": "A"
+        }
+      ],
+      "title": "SHIELDS",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 42,
+      "panels": [],
+      "title": "SUMMARY",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Requests"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "reqps"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "id": 32,
+      "options": {
+        "dataLinks": [],
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "8 * sum(rate(fastly_rt_body_size_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "Bandwidth",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "Requests",
+          "refId": "B"
+        }
+      ],
+      "title": "BANDWIDTH & REQUESTS",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "id": 2,
+      "options": {
+        "dataLinks": [],
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_status_group_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_group=~\".+\"}[$rate])) by (status_group)",
+          "legendFormat": "{{status_group}}",
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP STATUS CODES",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "id": 76,
+      "options": {
+        "dataLinks": [],
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_hits_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "HIT",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_miss_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "MISS",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_pass_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "PASS",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_synth_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "SYNTHETIC",
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_errors_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "ERROR",
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_shield_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "SHIELD",
+          "refId": "F"
+        }
+      ],
+      "title": "REQUEST HANDLING",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 22
+      },
+      "id": 74,
+      "options": {
+        "dataLinks": [],
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "calcs": [
+            "mean"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "histogram_quantile(0.99,sum(rate(fastly_rt_miss_duration_seconds_bucket{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (le))",
+          "legendFormat": "P99",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "histogram_quantile(0.5,sum(rate(fastly_rt_miss_duration_seconds_bucket{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (le))",
+          "legendFormat": "P50",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "expr": "sum(rate(fastly_rt_miss_duration_seconds_sum{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_miss_duration_seconds_count{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+          "legendFormat": "Mean",
+          "refId": "C"
+        }
+      ],
+      "title": "ORIGIN LATENCY",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 34,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 28
+          },
+          "id": 6,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_code_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_code=~\"2..\"}[$rate])) by (status_code)",
+              "legendFormat": "{{status_code}}",
+              "refId": "A"
+            }
+          ],
+          "title": "2XX",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 28
+          },
+          "id": 8,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_code_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_code=~\"3..\"}[$rate])) by (status_code)",
+              "legendFormat": "{{status_code}}",
+              "refId": "A"
+            }
+          ],
+          "title": "3XX",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 36
+          },
+          "id": 10,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_code_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_code=~\"4..\"}[$rate])) by (status_code)",
+              "legendFormat": "{{status_code}}",
+              "refId": "A"
+            }
+          ],
+          "title": "4XX",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 36
+          },
+          "id": 12,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_code_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\", status_code=~\"5..\"}[$rate])) by (status_code)",
+              "legendFormat": "{{status_code}}",
+              "refId": "A"
+            }
+          ],
+          "title": "5XX",
+          "transparent": true,
+          "type": "timeseries"
+        }
+      ],
+      "title": "HTTP STATUS CODES BREAKDOWN",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 72,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 29
+          },
+          "id": 77,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "histogram_quantile(0.99,sum(rate(fastly_rt_object_size_bytes_bucket{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (le))",
+              "legendFormat": "P99",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "histogram_quantile(0.5,sum(rate(fastly_rt_object_size_bytes_bucket{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) by (le))",
+              "legendFormat": "P50",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_object_size_bytes_sum{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_object_size_bytes_count{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) ",
+              "legendFormat": "Mean",
+              "refId": "C"
+            }
+          ],
+          "title": "OBJECT SIZE",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 29
+          },
+          "id": 66,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_imgopto_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+              "legendFormat": "imgopto",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_imgopto_transforms_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+              "legendFormat": "imgopto_transforms",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_otfp_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+              "legendFormat": "otfp",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_otfp_transforms_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+              "legendFormat": "otfp_transforms",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_pci_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+              "legendFormat": "pci",
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_shield_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+              "legendFormat": "shield",
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_video_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+              "legendFormat": "video",
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_waf_blocked_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]) + rate(fastly_rt_waf_passed_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate]))",
+              "legendFormat": "waf",
+              "refId": "H"
+            }
+          ],
+          "title": "Fastly Products",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "decbytes",
+              "decimals": 1
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 37
+          },
+          "id": 30,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_req_header_bytes_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate]))",
+              "legendFormat": "Request",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_resp_header_bytes_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}[$rate])) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate]))",
+              "legendFormat": "Response",
+              "refId": "B"
+            }
+          ],
+          "title": "Average Header Size",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {},
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 37
+          },
+          "id": 26,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate])) by (datacenter)",
+              "legendFormat": "{{datacenter}}",
+              "refId": "A"
+            }
+          ],
+          "title": "REQUESTS per POP",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percentunit",
+              "decimals": 0,
+              "min": 0.0,
+              "max": 1.0
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 45
+          },
+          "id": 28,
+          "options": {
+            "dataLinks": [],
+            "legend": {
+              "showLegend": true,
+              "placement": "right",
+              "displayMode": "table",
+              "calcs": [
+                "mean",
+                "max"
+              ]
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(rate(fastly_rt_status_group_total{service_name=~\"$service_name\",service_id=~\"$service_id\", status_group=\"5xx\", datacenter=~\"$datacenter\"}[30s])) by (datacenter) / sum(rate(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\",}[$rate])) by (datacenter)",
+              "legendFormat": "{{datacenter}}",
+              "refId": "A"
+            }
+          ],
+          "title": "5XX per REQUEST by POP",
+          "transparent": true,
+          "type": "timeseries"
+        }
+      ],
+      "title": "MISC",
+      "type": "row"
+    }
+  ],
+  "preload": false,
+  "refresh": "30s",
+  "schemaVersion": 41,
+  "tags": [
+    "fastly"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "includeAll": false,
+        "label": "Data Source",
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "${datasource}",
+        "definition": "label_values(fastly_rt_requests_total, service_name)",
+        "includeAll": true,
+        "label": "Service Name",
+        "name": "service_name",
+        "options": [],
+        "query": "label_values(fastly_rt_requests_total, service_name)",
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "${datasource}",
+        "definition": "label_values(fastly_rt_requests_total, service_id)",
+        "includeAll": true,
+        "label": "Service ID",
+        "name": "service_id",
+        "options": [],
+        "query": "label_values(fastly_rt_requests_total, service_id)",
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": ".+",
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "${datasource}",
+        "definition": "label_values(fastly_rt_requests_total, datacenter)",
+        "includeAll": true,
+        "label": "POP",
+        "multi": true,
+        "name": "datacenter",
+        "options": [],
+        "query": "label_values(fastly_rt_requests_total, datacenter)",
+        "refresh": 2,
+        "regex": "",
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "30s",
+          "value": "30s"
+        },
+        "label": "Rate",
+        "name": "rate",
+        "options": [
+          {
+            "selected": true,
+            "text": "30s",
+            "value": "30s"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": false,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "30s,1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "refresh": 2,
+        "type": "interval"
+      },
+      {
+        "datasource": "${datasource}",
+        "definition": "label_values(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}, service_name)",
+        "hide": 2,
+        "includeAll": false,
+        "name": "service_name_derived",
+        "options": [],
+        "query": "label_values(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}, service_name)",
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": "${datasource}",
+        "definition": "label_values(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}, service_id)",
+        "hide": 2,
+        "includeAll": false,
+        "name": "service_id_derived",
+        "options": [],
+        "query": "label_values(fastly_rt_requests_total{service_name=~\"$service_name\", service_id=~\"$service_id\", datacenter=~\"$datacenter\"}, service_id)",
+        "refresh": 2,
+        "regex": "",
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Fastly Service",
+  "uid": "FastlyService",
+  "version": 8
+}
