@@ -118,3 +118,36 @@ module "powervs_workspace_tor_01_3" {
   resource_group_id = module.resource_group.k8s_rg_id
   image_name        = var.image_name
 }
+
+module "powervs_workspace_wdc06_1" {
+  providers = {
+    ibm = ibm.powervs_wdc06
+  }
+  source            = "./modules/pvs_workspace"
+  datacenter        = "wdc06"
+  pi_workspace_name = "k8s-boskos-powervs-wdc06-01"
+  resource_group_id = module.resource_group.k8s_rg_id
+  image_name        = var.image_name
+}
+
+module "powervs_workspace_wdc06_2" {
+  providers = {
+    ibm = ibm.powervs_wdc06
+  }
+  source            = "./modules/pvs_workspace"
+  datacenter        = "wdc06"
+  pi_workspace_name = "k8s-boskos-powervs-wdc06-02"
+  resource_group_id = module.resource_group.k8s_rg_id
+  image_name        = var.image_name
+}
+
+module "powervs_workspace_wdc06_3" {
+  providers = {
+    ibm = ibm.powervs_wdc06
+  }
+  source            = "./modules/pvs_workspace"
+  datacenter        = "wdc06"
+  pi_workspace_name = "k8s-boskos-powervs-wdc06-03"
+  resource_group_id = module.resource_group.k8s_rg_id
+  image_name        = var.image_name
+}

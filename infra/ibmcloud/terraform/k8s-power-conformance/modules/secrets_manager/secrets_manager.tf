@@ -66,8 +66,8 @@ resource "ibm_sm_iam_credentials_secret" "secret_rotator" {
     unit        = "day"
   }
 
-  //The time-to-live (TTL) or lease duration of generated secret 86400seconds = 24hrs
-  ttl = "91800"
+  //The time-to-live (TTL) or lease duration of generated secret 97200seconds = 27hrs
+  ttl = "97200"
 }
 
 # RSA key of size 4096 bits
