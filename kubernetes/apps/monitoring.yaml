@@ -18,6 +18,7 @@ spec:
                 - eks-prow-build
                 - aks-prow-build
                 - ibm-ppc64le
+                - ibm-s390x
   template:
     metadata:
       name: 'monitoring-{{ .name }}'
