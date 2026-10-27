@@ -1,6 +1,7 @@
 - name: gcb-docker-gcloud
   dmap:
     "sha256:b2651f57b579d925a243e308c41546d4fd895f705de091a5a8a39060e6192604": ["v20260806"]
+    "sha256:2bf2ec376b86cf5ebdb3a598f6dca69d5f977477315c870a0ce0847563dc148e": ["v20261022"]
 - name: kubepkg
   dmap:
     "sha256:caef826cde3d4cc884ccbac3a1805769ae59fe07f6f8234bf22dbfeb82312a99": ["v0.1.0","v20201103-v0.5.0-63-ga247d79"]
