@@ -19,7 +19,11 @@ kube-state-metrics:
 nodeExporter:
   enabled: false
 
+defaultRules:
+  create: false
+
 prometheus:
+  agentMode: true
   prometheusSpec:
     nodeSelector:
       role: infra
@@ -28,26 +32,15 @@ prometheus:
         operator: Equal
         value: "true"
         effect: NoSchedule
-    retention: 7d
     resources:
       requests:
-        cpu: 4
-        memory: 25Gi
+        cpu: 500m
+        memory: 4Gi
       limits:
-        cpu: 4
-        memory: 25Gi
-    persistentVolumeClaimRetentionPolicy:
-      whenDeleted: Retain
-      whenScaled: Retain
+        memory: 8Gi
     storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: powervs-tier1-sc
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 300Gi
+      emptyDir:
+        sizeLimit: 20Gi
     serviceMonitorSelectorNilUsesHelmValues: false
     podMonitorSelectorNilUsesHelmValues: false
     ruleSelectorNilUsesHelmValues: false
