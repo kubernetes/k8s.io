@@ -88,3 +88,10 @@ provider "ibm" {
   region           = "tor"
   zone             = "tor01"
 }
+
+provider "ibm" {
+  alias            = "powervs_wdc06"
+  ibmcloud_api_key = local.key
+  region           = "us-east"
+  zone             = "wdc06"
+}
