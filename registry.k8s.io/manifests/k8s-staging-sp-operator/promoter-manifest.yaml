@@ -57,8 +57,17 @@ registries:
 # its isolated provenance workflow attests them at level 3. Only its signer
 # may claim that builder, bound to v* release tags, which only the SPO admins
 # may create in the repository ("Release tags" tag ruleset), and to main,
-# which only changes through reviewed pull requests. In require mode, an image
-# that violates the policy blocks the promotion run it is part of.
+# which only changes through reviewed pull requests. The promoter (kpromo
+# v4.8.0 or later) also checks the run that called the provenance workflow,
+# like the provenance workflow does itself: the build.yml,
+# helm-chart-package.yaml or image-reproducible.yml workflow of the repository
+# for a release of a v* tag, or build.yml for a push to main, which attests
+# the security profiles. The callers apply to the builder, not to images, so
+# a push to main could attest any image, which relies on the review of main.
+# Every artifact gets its provenance from that workflow, so every image of
+# this manifest requires level 3, also ones added later, and the Cloud Build
+# provenance is carried next to it. In require mode, an image that violates
+# the policy blocks the promotion run it is part of.
 provenance:
   mode: require
   signers:
@@ -71,5 +80,25 @@ provenance:
     level: 3
     signers:
     - sigstore(identityMatch=regex)::https://token.actions.githubusercontent.com::https://github\.com/kubernetes-sigs/security-profiles-operator/\.github/workflows/provenance\.yml@(refs/tags/v[0-9]+\.[0-9]+\.[0-9]+|refs/heads/main)
+    callers:
+    - workflows:
+      - .github/workflows/build.yml
+      - .github/workflows/helm-chart-package.yaml
+      - .github/workflows/image-reproducible.yml
+      refs:
+      - refs/tags/v[0-9]*.[0-9]*.[0-9]*
+      events:
+      - release
+    - workflows:
+      - .github/workflows/build.yml
+      refs:
+      - refs/heads/main
+      events:
+      - push
   sources:
   - github.com/kubernetes-sigs/security-profiles-operator
+  levels:
+  - images:
+    - "*"
+    - "*/*"
+    level: 3
