@@ -1,6 +1,6 @@
-# google group for gcr.io/k8s-staging-metrics-server is k8s-infra-staging-metrics-server@kubernetes.io
+# google group for us-central1-docker.pkg.dev/k8s-staging-images/metrics-server is k8s-infra-staging-metrics-server@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-metrics-server
+- name: us-central1-docker.pkg.dev/k8s-staging-images/metrics-server
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/metrics-server
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
