@@ -1,6 +1,6 @@
-# google group for gcr.io/k8s-staging-external-dns is k8s-infra-staging-external-dns@kubernetes.io
+# google group for us-central1-docker.pkg.dev/k8s-staging-images/external-dns is k8s-infra-staging-external-dns@kubernetes.io
 registries:
-- name: gcr.io/k8s-staging-external-dns
+- name: us-central1-docker.pkg.dev/k8s-staging-images/external-dns
   src: true
 - name: asia-east1-docker.pkg.dev/k8s-artifacts-prod/images/external-dns
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
