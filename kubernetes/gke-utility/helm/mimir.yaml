@@ -53,8 +53,9 @@ mimir:
       backend: gcs
       storage_prefix: blocks
     ruler_storage:
-      backend: gcs
-      storage_prefix: ruler
+      backend: local
+      local:
+        directory: /rules
     alertmanager_storage:
       backend: gcs
       storage_prefix: alertmanager
@@ -329,8 +330,20 @@ ruler:
       cpu: 1
       memory: 2Gi
   initContainers: *kafkaTokenSidecars
-  extraVolumes: *kafkaTokenVolumes
-  extraVolumeMounts: *kafkaTokenMimirMounts
+  extraVolumes:
+    - name: kafka-token
+      emptyDir:
+        medium: Memory
+    - name: rules-prow
+      configMap:
+        name: mimir-rules-prow
+  extraVolumeMounts:
+    - name: kafka-token
+      mountPath: /var/run/kafka-token
+      readOnly: true
+    - name: rules-prow
+      mountPath: /rules/prow
+      readOnly: true
 
 store_gateway:
   zoneAwareReplication:
