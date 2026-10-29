@@ -20,6 +20,7 @@ locals {
   registries = {
     agent-sandbox                   = "group:k8s-infra-staging-agent-sandbox@kubernetes.io"
     agentic-net                     = "group:k8s-infra-staging-agentic-net@kubernetes.io"
+    autoscaling                     = "group:k8s-infra-staging-autoscaling@kubernetes.io"
     aws-encryption-provider         = "group:k8s-infra-staging-provider-aws@kubernetes.io"
     boskos                          = "group:k8s-infra-staging-boskos@kubernetes.io"
     build-image                     = "group:k8s-infra-staging-build-image@kubernetes.io"
@@ -37,6 +38,7 @@ locals {
     e2e-test-images                 = "group:k8s-infra-staging-e2e-test-images@kubernetes.io"
     etcd                            = "group:k8s-infra-staging-etcd@kubernetes.io"
     etcd-manager                    = "group:k8s-infra-staging-etcd-manager@kubernetes.io"
+    external-dns                    = "group:k8s-infra-staging-external-dns@kubernetes.io"
     gateway-api                     = "group:k8s-infra-staging-gateway-api@kubernetes.io"
     gateway-api-inference-extension = "group:sig-apps-leads@kubernetes.io"
     headlamp                        = "group:k8s-infra-staging-headlamp@kubernetes.io"
@@ -56,6 +58,7 @@ locals {
     lws                             = "group:k8s-infra-staging-lws@kubernetes.io"
     maintainer-tools                = "group:k8s-infra-staging-maintainer-tools@kubernetes.io"
     mcp-lifecycle-operator          = "group:k8s-infra-staging-mcp-lifecycle-op@kubernetes.io"
+    metrics-server                  = "group:k8s-infra-staging-metrics-server@kubernetes.io"
     minikube                        = "group:k8s-infra-staging-minikube@kubernetes.io"
     model-serving-signals           = "group:k8s-infra-staging-model-serv-signals@kubernetes.io"
     node-readiness-controller       = "group:k8s-infra-staging-nrc@kubernetes.io"
@@ -77,7 +80,10 @@ locals {
   # In the meanwhile, add you registry here to guarantee that other GCB jobs can't assume the dedicated service account
   # of the staging registry.
   skip_gcb_builder_shim = [
+    "autoscaling",
     "build-image",
+    "external-dns",
+    "metrics-server",
     "sp-operator",
   ]
 }
