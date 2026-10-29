@@ -4,3 +4,10 @@ namespace: mimir
 resources:
   - external-secrets.yaml
   - httproute.yaml
+
+configMapGenerator:
+  - name: mimir-rules-prow
+    files:
+      - rules/prow.yaml
+    options:
+      disableNameSuffixHash: true

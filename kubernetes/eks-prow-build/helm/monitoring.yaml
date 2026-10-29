@@ -31,25 +31,17 @@ nodeExporter:
   enabled: false
 
 prometheus:
+  agentMode: true
   prometheusSpec:
-    retention: 7d
     resources:
       requests:
-        cpu: 4
-        memory: 25Gi
+        cpu: 1
+        memory: 8Gi
       limits:
-        cpu: 4
-        memory: 25Gi
-    persistentVolumeClaimRetentionPolicy:
-      whenDeleted: Retain
-      whenScaled: Retain
+        memory: 16Gi
     storageSpec:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: gp2
-          resources:
-            requests:
-              storage: 300Gi
+      emptyDir:
+        sizeLimit: 20Gi
     serviceMonitorSelectorNilUsesHelmValues: false
     podMonitorSelectorNilUsesHelmValues: false
     ruleSelectorNilUsesHelmValues: false
