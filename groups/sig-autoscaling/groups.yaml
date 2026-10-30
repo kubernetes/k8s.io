@@ -83,19 +83,12 @@ groups:
       ReconcileMembers: "true"
     members:
       - adrian@changeover.za.net
-      - bskiba@google.com
-      - bwroblewski@google.com
-      - danielmk@google.com
       - jmfran@google.com
       - jack.francis@microsoft.com
       - jtuznik@google.com
-      - ksiedlecki@google.com
-      - kwiesmueller@google.com
       - luizaoj@google.com
       - omerap12@gmail.com
-      - rgowman@google.com
-      - raywainman@gmail.com
-      - ksaiyed@google.com
+      - dealj@umich.edu
 
   - email-id: k8s-infra-staging-model-serv-signals@kubernetes.io
     name: k8s-infra-staging-model-serv-signals
