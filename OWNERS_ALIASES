@@ -103,7 +103,9 @@ aliases:
     - wojtek-t
   sig-scheduling-leads:
     - dom4ha
+    - helayoty
     - macsko
+    - mm4tt
     - sanposhiho
   sig-security-leads:
     - IanColdwater
@@ -203,10 +205,10 @@ aliases:
     - mengjiao-liu
     - pohly
   wg-workload-aware-scheduling-leads:
-    - helayoty
     - andreyvelich
-    - mm4tt
+    - helayoty
     - kannon92
+    - mm4tt
   wg-workload-conformance-leads:
     - palnabarun
     - soltysh
