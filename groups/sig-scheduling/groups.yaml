@@ -31,16 +31,19 @@ groups:
       WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
     owners:
       - dmarcinski@google.com
-      - mskoczen@google.com
       - handbomusic@gmail.com
-
+      - hebaelayoty@gmail.com
+      - mskoczen@google.com
+      - mmatejczyk@google.com
   - email-id: sig-scheduling@kubernetes.io
     name: sig-scheduling
     description: |-
       SIG scheduling general discussion group
     owners:
       - dmarcinski@google.com
+      - hebaelayoty@gmail.com
       - mskoczen@google.com
+      - mmatejczyk@google.com
       - handbomusic@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
@@ -69,8 +72,10 @@ groups:
       ReconcileMembers: "false"
     owners:
       - dmarcinski@google.com
-      - mskoczen@google.com
       - handbomusic@gmail.com
+      - hebaelayoty@gmail.com
+      - mskoczen@google.com
+      - mmatejczyk@google.com
     members:
       # This is just the initial list of group members.
       - kerthcet@gmail.com
