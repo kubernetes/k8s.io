@@ -39,7 +39,7 @@ VERSION="$2"
 component_len=${#COMPONENT}
 
 function emit_new_sha {
-  sha=$(gcloud container images describe "gcr.io/k8s-staging-autoscaling/${component}:${VERSION}" '--format=value(image_summary.digest)' 2>/dev/null)
+  sha=$(gcloud container images describe "us-central1-docker.pkg.dev/k8s-staging-images/autoscaling/${component}:${VERSION}" '--format=value(image_summary.digest)' 2>/dev/null)
   echo "    \"${sha}\": [\"${VERSION}\"]"
 }
 
