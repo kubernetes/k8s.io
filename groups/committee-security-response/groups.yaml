@@ -51,6 +51,7 @@ groups:
       - kubernetes-security@service.aliyun.com
       - kube-security@microsoft.com
       - mke-security@mesosphere.com
+      - psirt@mirantis.com
       - release-managers-private@kubernetes.io
       - secalert@redhat.com
       - secure@sap.com
