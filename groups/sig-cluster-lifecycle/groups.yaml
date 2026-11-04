@@ -250,11 +250,10 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - sbueringer@gmail.com
       - christi.schlotter@gmail.com
-      - naadir.jeewa@broadcom.com
-      - ytijani@vmware.com
       - fabrizio.pandini@gmail.com
+      - naadir.jeewa@broadcom.com
+      - sbueringer@gmail.com
 
   - email-id: sig-cluster-lifecycle-cluster-api-vsphere-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-vsphere-alerts
@@ -279,11 +278,9 @@ groups:
     settings:
       ReconcileMembers: "true"
     members:
-      - alberto.garcial@hotmail.com
-      - cecilerobertm@gmail.com
       - christi.schlotter@gmail.com
-      - davanum@gmail.com
       - fabrizio.pandini@gmail.com
+      - Joel.speed@hotmail.co.uk
       - sbueringer@gmail.com
 
   - email-id: k8s-infra-staging-cluster-api-helm@kubernetes.io
