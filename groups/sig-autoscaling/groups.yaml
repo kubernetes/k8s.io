@@ -16,6 +16,7 @@ groups:
       - jack.francis@microsoft.com
       - jtuznik@google.com
       - omerap12@gmail.com
+      - dealj@umich.edu
     settings:
       AllowWebPosting: "true"
       ReconcileMembers: "true"
@@ -31,6 +32,7 @@ groups:
       - jack.francis@microsoft.com
       - jtuznik@google.com
       - omerap12@gmail.com
+      - dealj@umich.edu
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
       WhoCanViewGroup: "ANYONE_CAN_VIEW"
@@ -96,6 +98,7 @@ groups:
       - rgowman@google.com
       - raywainman@gmail.com
       - ksaiyed@google.com
+      - dealj@umich.edu
 
   - email-id: k8s-infra-staging-model-serv-signals@kubernetes.io
     name: k8s-infra-staging-model-serv-signals
