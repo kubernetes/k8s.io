@@ -3,12 +3,12 @@
 # Image promotion for this project is restricted to Release Managers.
 #
 # The following images are managed within this project:
-# - cloud-controller-manager
 # - conformance (will likely be moved to another staging project)
 # - kube-apiserver
 # - kube-controller-manager
 # - kube-proxy
 # - kube-scheduler
+# - kubectl
 # - pause
 #
 # google group for gcr.io/k8s-staging-kubernetes is k8s-infra-staging-kubernetes@kubernetes.io
@@ -110,3 +110,27 @@ registries:
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
 - name: us-west2-docker.pkg.dev/k8s-artifacts-prod/images/kubernetes
   service-account: k8s-infra-gcr-promoter@k8s-artifacts-prod.iam.gserviceaccount.com
+
+# Provenance policy of the images krel stages, see
+# https://git.k8s.io/release/docs/krel/buildtypes/v1#attestations: the stage
+# Cloud Build job (kubernetes/release v0.23.0 or later) attaches their SLSA
+# provenance, signed as krel-staging. krel writes and signs that provenance
+# itself during the build, so the krel builder reaches SLSA build level 1
+# only. pause and the old hyperkube images are not built by krel, so the
+# images patterns limit the policy to the images krel builds, and the others
+# are promoted without a provenance check. The mode is warn: a violation never
+# blocks a Kubernetes release, it is logged and recorded as a FAILED
+# verification summary. The images field needs kpromo v4.8.1 or later.
+provenance:
+  mode: warn
+  images:
+  - kube-*
+  - kubectl*
+  - conformance*
+  signers:
+  - sigstore::https://accounts.google.com::krel-staging@k8s-releng-prod.iam.gserviceaccount.com
+  builders:
+  - id: https://git.k8s.io/release/docs/krel
+    level: 1
+  sources:
+  - github.com/kubernetes/kubernetes
