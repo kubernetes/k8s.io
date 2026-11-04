@@ -73,8 +73,8 @@ function ensure_gcr_repo() {
         host=$(gcr_host_for_region "${region}")
         local image="ceci-nest-pas-une-image"
         local dest="${host}/${project}/${image}"
-        docker pull k8s.gcr.io/pause
-        docker tag k8s.gcr.io/pause "${dest}"
+        docker pull registry.k8s.io/pause
+        docker tag registry.k8s.io/pause "${dest}"
         docker push "${dest}"
         gcloud --project "${project}" \
             container images delete --quiet "${dest}:latest"
