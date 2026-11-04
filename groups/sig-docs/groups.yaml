@@ -47,22 +47,6 @@ groups:
       MembersCanPostAsTheGroup: "false"
       ReconcileMembers: "false"
 
-  - email-id: blog@kubernetes.io
-    name: blog
-    description: |-
-      blog editors
-
-      Created via https://github.com/kubernetes/community/issues/3763
-    settings:
-      WhoCanPostMessage: "ANYONE_CAN_POST"
-      ReconcileMembers: "true"
-    owners:
-      - killen.bob@gmail.com
-      - onlydole@gmail.com
-      - tim+kubernetes@scalefactory.com
-    members:
-      - natew@cncf.io
-
   #
   # k8s-staging write access for SIG-owned subprojects
   #
