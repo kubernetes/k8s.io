@@ -1,0 +1,17 @@
+files:
+  - name: v37.2.5/auth-provider-gcp/linux/amd64/auth-provider-gcp
+    sha256: 57cbc97436b391ac7a450c69bf04b6ba7c30c23f41e69d684279403367f5467f
+  - name: v37.2.5/auth-provider-gcp/linux/arm64/auth-provider-gcp
+    sha256: 70970f3bccf3d3b84318838b87b275edcf6631f191f105fae350365cdcf60e0d
+  - name: v37.2.5/auth-provider-gcp/windows/amd64/auth-provider-gcp.exe
+    sha256: d996dc94b2a0a89fa0d544fbe9637b256852a06c61f07f6727039baf97fdf6d1
+  - name: v37.2.5/gke-gcloud-auth-plugin/linux/amd64/gke-gcloud-auth-plugin
+    sha256: ae0d1ca73871d5ab84e7492e65f3e41f2235955d7c21530a04f383bceacead51
+  - name: v37.2.5/gke-gcloud-auth-plugin/linux/arm64/gke-gcloud-auth-plugin
+    sha256: d52aca0a211f81bb70d9acd19b9946652e2e64caba27e2db3669bb462e85d486
+  - name: v37.2.5/gke-gcloud-auth-plugin/darwin/arm64/gke-gcloud-auth-plugin
+    sha256: b99620933d39912eb6830f9ff6e975ea4b34430408385a5412722de7f612ad01
+  - name: v37.2.5/gke-gcloud-auth-plugin/windows/amd64/gke-gcloud-auth-plugin.exe
+    sha256: 0d8721695d9340b54c38dab4a0868183aba125875f0c60308b0847618844db69
+  - name: v37.2.5/gke-gcloud-auth-plugin/windows/arm64/gke-gcloud-auth-plugin.exe
+    sha256: 077e7b0068b3d5e186d6babe1fefa6b6e08721f3a5f5fbb84dcda10a71e89c98
