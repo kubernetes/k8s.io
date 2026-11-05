@@ -26,7 +26,7 @@ groups:
     owners:
       - jsafrane@redhat.com
       - msau@google.com
-      - saadali@google.com
+      - hekumar@redhat.com
       - xingyang105@gmail.com
     settings:
       AllowWebPosting: "true"
@@ -43,7 +43,7 @@ groups:
     owners:
       - jsafrane@redhat.com
       - msau@google.com
-      - saadali@google.com
+      - hekumar@redhat.com
       - xingyang105@gmail.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
@@ -65,8 +65,8 @@ groups:
       ReconcileMembers: "true"
     members:
       - davanum@gmail.com
-      - saadali@google.com
       - msau@google.com
+      - hekumar@redhat.com
       - xingyang105@gmail.com
       - jsafrane@redhat.com
       - mattwon@amazon.com
@@ -83,8 +83,8 @@ groups:
       ReconcileMembers: "true"
     members:
       - davanum@gmail.com
-      - saadali@google.com
       - msau@google.com
+      - hekumar@redhat.com
       - xingyang105@gmail.com
       - jsafrane@redhat.com
       - patrick.ohly@intel.com
@@ -118,7 +118,7 @@ groups:
       ReconcileMembers: "true"
     members:
       - davanum@gmail.com
-      - saadali@google.com
+      - hekumar@redhat.com
       - msau@google.com
       - xingyang105@gmail.com
       - jsafrane@redhat.com
