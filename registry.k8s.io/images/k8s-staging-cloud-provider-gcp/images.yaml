@@ -94,6 +94,7 @@
     "sha256:df2a211919f203ecdd3b41cfee72ac78b9084ae49c90097caf5f303059f639ae": ["v36.4.9"]
     "sha256:b121a21de38750350c02a9b14f357948b68be48ca218b995801934a302e19261": ["v37.0.0"]
     "sha256:46f1594881b8829d7dc7bbb2c4a69c71d413cc5ad9bbd13b8a9e11c67a6a8bcf": ["v37.0.1"]
+    "sha256:3c488956eb6aa794f8f5ee07499d725b0fd8ea02c62ddd5eb3989961508ce1b2": ["v37.2.5"]
 - name: gcp-compute-persistent-disk-csi-driver
   dmap:
     "sha256:624b4c955ceac5abf84a4a3ae57bfcca8bec5e794b1767cb6077c4aabb1261f6": ["v1.0.3"]
