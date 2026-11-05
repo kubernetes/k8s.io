@@ -8,6 +8,7 @@ resources:
 configMapGenerator:
   - name: mimir-rules-prow
     files:
+      - rules/alerts.yaml
       - rules/prow.yaml
     options:
       disableNameSuffixHash: true

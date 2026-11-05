@@ -1,0 +1,264 @@
+groups:
+- name: node:status
+  rules:
+  - alert: NodeStatusNotReady
+    # This expression might need some refinements in case we scale up
+    # kube-state-metrics to more than 1 replica.
+    expr: kube_node_status_condition{condition="Ready",status!="true"} == 1
+    # Only fire up alert if the alert condition has been firing to more than
+    # 15 minutes. This is to avoid false positives/flakes while a new node
+    # is joining the cluster, or during node upgrades and scale-downs.
+    for: 15m
+    # These annotations are used for building the Slack message.
+    annotations:
+      summary: "NodeStatusNotReady"
+      description: "Node {{ $labels.node }} in {{ $labels.cluster }} is not ready"
+    # Additional labels used as metadata.
+    labels:
+      severity: critical
+      resource: "{{ $labels.node }}"
+- name: cluster
+  rules:
+  - alert: ClusterNotSendingMetrics
+    # A cluster that sent metrics in the last day but has sent nothing for
+    # 10 minutes. kube-state-metrics runs in every cluster with a single
+    # target, so it is a cheap per-cluster heartbeat.
+    expr: |
+      group by (cluster) (last_over_time(up{job="kube-state-metrics"}[1d]))
+        unless on (cluster)
+      group by (cluster) (up{job="kube-state-metrics"})
+    for: 10m
+    annotations:
+      summary: "ClusterNotSendingMetrics"
+      description: "Cluster {{ $labels.cluster }} has not sent metrics to Mimir for 10 minutes"
+    labels:
+      severity: critical
+      resource: "{{ $labels.cluster }}"
+- name: fastly
+  rules:
+  # Share of edge responses per service that are 5xx. Services with less than
+  # 1 request per second are ignored to avoid alerting on a handful of requests.
+  - alert: FastlyHigh5xxRate
+    expr: |
+      (
+        sum by (service_name, service_id) (rate(fastly_rt_status_group_total{status_group="5xx"}[5m]))
+          /
+        sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m]))
+      ) > 0.02
+        and on (service_name, service_id)
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m])) > 1
+    for: 10m
+    annotations:
+      summary: "FastlyHigh5xxRate"
+      description: "Fastly service {{ $labels.service_name }} is returning {{ $value | humanizePercentage }} 5xx responses"
+    labels:
+      severity: critical
+      resource: "{{ $labels.service_name }}"
+  # Share of edge responses per service that are 4xx.
+  - alert: FastlyHigh4xxRate
+    expr: |
+      (
+        sum by (service_name, service_id) (rate(fastly_rt_status_group_total{status_group="4xx"}[5m]))
+          /
+        sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m]))
+      ) > 0.05
+        and on (service_name, service_id)
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m])) > 1
+    for: 10m
+    annotations:
+      summary: "FastlyHigh4xxRate"
+      description: "Fastly service {{ $labels.service_name }} is returning {{ $value | humanizePercentage }} 4xx responses"
+    labels:
+      severity: warning
+      resource: "{{ $labels.service_name }}"
+  # Share of responses from the origins behind a service that are 5xx.
+  - alert: FastlyOriginHigh5xxRate
+    expr: |
+      (
+        sum by (service_name, service_id) (rate(fastly_origin_status_group_total{status_group="5xx"}[5m]))
+          /
+        sum by (service_name, service_id) (rate(fastly_origin_responses_total[5m]))
+      ) > 0.02
+        and on (service_name, service_id)
+      sum by (service_name, service_id) (rate(fastly_origin_responses_total[5m])) > 1
+    for: 10m
+    annotations:
+      summary: "FastlyOriginHigh5xxRate"
+      description: "Origins of Fastly service {{ $labels.service_name }} are returning {{ $value | humanizePercentage }} 5xx responses"
+    labels:
+      severity: critical
+      resource: "{{ $labels.service_name }}"
+  # 99th percentile time to fetch a cache miss from the origin, per service.
+  # Normally under 2s.
+  - alert: FastlyOriginLatencyHigh
+    expr: |
+      histogram_quantile(0.99,
+        sum by (service_name, service_id, le) (rate(fastly_rt_miss_duration_seconds_bucket[5m]))
+      ) > 5
+    for: 15m
+    annotations:
+      summary: "FastlyOriginLatencyHigh"
+      description: "Cache misses of Fastly service {{ $labels.service_name }} have a p99 latency of {{ $value | humanizeDuration }}"
+    labels:
+      severity: warning
+      resource: "{{ $labels.service_name }}"
+  # Cache hit ratio per service. Normally around 99%; below 95% means
+  # several times the usual load is reaching the origins.
+  - alert: FastlyCacheHitRatioLow
+    expr: |
+      (
+        sum by (service_name, service_id) (rate(fastly_rt_hits_total[5m]))
+          /
+        (sum by (service_name, service_id) (rate(fastly_rt_hits_total[5m])) + sum by (service_name, service_id) (rate(fastly_rt_miss_total[5m])))
+      ) < 0.95
+        and on (service_name, service_id)
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m])) > 1
+    for: 15m
+    annotations:
+      summary: "FastlyCacheHitRatioLow"
+      description: "Cache hit ratio of Fastly service {{ $labels.service_name }} is {{ $value | humanizePercentage }}"
+    labels:
+      severity: warning
+      resource: "{{ $labels.service_name }}"
+  # Requests per service compared with the same time yesterday. Traffic
+  # falling by more than half usually means the service is unreachable.
+  - alert: FastlyTrafficDrop
+    expr: |
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m]))
+        < 0.5 *
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m] offset 1d))
+        and on (service_name, service_id)
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m] offset 1d)) > 1
+    for: 15m
+    annotations:
+      summary: "FastlyTrafficDrop"
+      description: "Requests to Fastly service {{ $labels.service_name }} dropped by more than half compared with the same time yesterday"
+    labels:
+      severity: critical
+      resource: "{{ $labels.service_name }}"
+  # No Fastly data at all. Without it every other Fastly alert stays silent.
+  - alert: FastlyExporterDown
+    expr: absent_over_time(fastly_rt_requests_total[10m])
+    for: 5m
+    annotations:
+      summary: "FastlyExporterDown"
+      description: "No Fastly metrics have reached Mimir for 15 minutes"
+    labels:
+      severity: critical
+      resource: "fastly-exporter"
+- name: mimir
+  rules:
+  # Share of samples a cluster's Prometheus failed to send to Mimir or dropped
+  # before sending. ClusterNotSendingMetrics only catches a complete stop; this
+  # catches partial loss.
+  - alert: PrometheusRemoteWriteFailing
+    expr: |
+      100 * (
+        sum by (cluster) (rate({__name__=~"prometheus_remote_storage_samples_(failed|dropped)_total"}[5m]))
+          /
+        sum by (cluster) (rate(prometheus_remote_storage_samples_total[5m]))
+      ) > 1
+    for: 15m
+    annotations:
+      summary: "PrometheusRemoteWriteFailing"
+      description: "Prometheus in {{ $labels.cluster }} is failing to send or dropping {{ printf \"%.2f\" $value }}% of samples"
+    labels:
+      severity: critical
+      resource: "{{ $labels.cluster }}"
+  # Samples Mimir accepted over the network but rejected, for example because
+  # a series has too many labels or the tenant hit a limit. The data is lost.
+  - alert: MimirDiscardingSamples
+    expr: |
+      sum by (user, reason) (rate(cortex_discarded_samples_total[5m])) > 0
+    for: 15m
+    annotations:
+      summary: "MimirDiscardingSamples"
+      description: "Mimir is discarding {{ printf \"%.2f\" $value }} samples/s for tenant {{ $labels.user }} with reason {{ $labels.reason }}"
+    labels:
+      severity: warning
+      resource: "{{ $labels.reason }}"
+  # The ruler failing to run rule queries, failing to write recording rule
+  # results, or missing evaluations because they take too long. Expressions
+  # follow the Mimir mixin's MimirRulerTooManyFailedQueries,
+  # MimirRulerTooManyFailedPushes and MimirRulerMissedEvaluations alerts.
+  - alert: MimirRulerFailing
+    expr: |
+      (
+        label_replace(
+          100 * sum by (pod) (rate(cortex_ruler_queries_failed_total{reason=~"(error|^$)"}[5m]))
+            / sum by (pod) (rate(cortex_ruler_queries_total[5m])),
+          "problem", "failed rule queries", "", "")
+        or
+        label_replace(
+          100 * sum by (pod) (rate(cortex_ruler_write_requests_failed_total{reason=~"(error|^$)"}[5m]))
+            / sum by (pod) (rate(cortex_ruler_write_requests_total[5m])),
+          "problem", "failed writes of rule results", "", "")
+        or
+        label_replace(
+          100 * sum by (pod) (rate(cortex_prometheus_rule_group_iterations_missed_total[5m]))
+            / sum by (pod) (rate(cortex_prometheus_rule_group_iterations_total[5m])),
+          "problem", "missed rule evaluations", "", "")
+      ) > 1
+    for: 5m
+    annotations:
+      summary: "MimirRulerFailing"
+      description: "Mimir ruler {{ $labels.pod }} has {{ printf \"%.2f\" $value }}% {{ $labels.problem }}"
+    labels:
+      severity: critical
+      resource: "{{ $labels.pod }}"
+  # A Mimir disk (ingester, store-gateway or compactor) that is more than 85%
+  # full and, at its current rate, will be full within 4 days.
+  - alert: MimirDiskFilling
+    expr: |
+      (
+        1 -
+        kubelet_volume_stats_available_bytes{namespace="mimir"}
+          /
+        kubelet_volume_stats_capacity_bytes{namespace="mimir"}
+      ) > 0.85
+        and
+      predict_linear(kubelet_volume_stats_available_bytes{namespace="mimir"}[6h], 4 * 24 * 3600) < 0
+    for: 1h
+    annotations:
+      summary: "MimirDiskFilling"
+      description: "Mimir disk {{ $labels.persistentvolumeclaim }} is {{ $value | humanizePercentage }} full and will fill up within 4 days"
+    labels:
+      severity: warning
+      resource: "{{ $labels.persistentvolumeclaim }}"
+  # Ingesters reading data from Kafka more than 2 minutes after it was
+  # written, so recent data is missing from queries, dashboards and alerts.
+  # Expression follows the Mimir mixin's MimirRunningIngesterReceiveDelayTooHigh.
+  - alert: MimirKafkaConsumerLag
+    expr: |
+      (
+        sum by (pod) (rate(cortex_ingest_storage_reader_receive_delay_seconds_sum{phase="running"}[5m]))
+          /
+        sum by (pod) (rate(cortex_ingest_storage_reader_receive_delay_seconds_count{phase="running"}[5m]))
+      ) > 2 * 60
+    for: 5m
+    annotations:
+      summary: "MimirKafkaConsumerLag"
+      description: "Mimir ingester {{ $labels.pod }} is {{ $value | humanizeDuration }} behind on Kafka"
+    labels:
+      severity: critical
+      resource: "{{ $labels.pod }}"
+  # The compactor has not completed a run in 24 hours, or failed twice in a
+  # row. Expressions follow the Mimir mixin's MimirCompactorNotRunningCompaction.
+  - alert: MimirCompactorNotRunning
+    expr: |
+      label_replace(
+        (time() - max by (pod) (cortex_compactor_last_successful_run_timestamp_seconds) > 24 * 3600)
+          and
+        (max by (pod) (cortex_compactor_last_successful_run_timestamp_seconds) > 0),
+        "problem", "has not completed a compaction in 24 hours", "", "")
+      or
+      label_replace(
+        sum by (pod) (increase(cortex_compactor_runs_failed_total{reason!="shutdown"}[2h])) >= 2,
+        "problem", "failed 2 compactions in a row", "", "")
+    for: 15m
+    annotations:
+      summary: "MimirCompactorNotRunning"
+      description: "Mimir compactor {{ $labels.pod }} {{ $labels.problem }}"
+    labels:
+      severity: critical
+      resource: "{{ $labels.pod }}"
