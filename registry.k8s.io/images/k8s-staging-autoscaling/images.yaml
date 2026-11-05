@@ -1,3 +1,6 @@
+- name: charts/cluster-autoscaler
+  dmap:
+    "sha256:e787a8546116c73931e73c34cd7de5411d7447569897b1e4a8071405a08908a4": ["9.60.0"]
 - name: cluster-autoscaler
   dmap:
     "sha256:60a75bd24a4121adf5de16cdad76a52295d33aa8aa7c2945b4a9a1a8d2ac17f0": ["v1.14.8"]
