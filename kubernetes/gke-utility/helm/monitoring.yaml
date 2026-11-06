@@ -59,7 +59,10 @@ grafana:
       disable_login_form: false
 
 alertmanager:
-  enabled: false
+  enabled: true
+  alertmanagerSpec:
+    alertmanagerConfigMatcherStrategy:
+      type: None
 
 kube-state-metrics:
   metricLabelsAllowlist:
