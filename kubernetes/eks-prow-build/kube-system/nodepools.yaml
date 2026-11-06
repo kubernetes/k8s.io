@@ -124,6 +124,10 @@ spec:
         group: karpenter.k8s.aws
         kind: EC2NodeClass
         name: default
+      taints:
+        - key: highmem
+          effect: NoSchedule
+          value: "true"
       requirements:
         - key: karpenter.sh/capacity-type
           operator: In
@@ -142,10 +146,6 @@ spec:
             - r8idn.2xlarge
   limits:
     cpu: "80" # 10 VMs
-  taints:
-    - key: highmem
-      effect: NoSchedule
-      value: "true"
   disruption:
     consolidationPolicy: WhenEmpty
     consolidateAfter: 20m
