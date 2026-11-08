@@ -26,6 +26,8 @@ gateway:
 
 mimir:
   structuredConfig:
+    ruler:
+      alertmanager_url: http://monitoring-kube-prometheus-alertmanager.monitoring.svc:9093
     limits:
       max_global_series_per_user: 14000000
       max_label_names_per_series: 50
@@ -70,19 +72,7 @@ rollout_operator:
   enabled: true
 
 alertmanager:
-  persistentVolume:
-    enabled: true
-    storageClass: hyperdisk-balanced
-    size: 50Gi
-  replicas: 2
-  resources:
-    limits:
-      memory: 1.4Gi
-    requests:
-      cpu: 1
-      memory: 1Gi
-  statefulSet:
-    enabled: true
+  enabled: false
 
 compactor:
   persistentVolume:
