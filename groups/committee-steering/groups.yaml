@@ -51,6 +51,7 @@ groups:
       Private list for the Kubernetes Steering Committee
     settings:
       WhoCanPostMessage: "ANYONE_CAN_POST"
+      MessageModerationLevel: "MODERATE_NON_MEMBERS"
       ReconcileMembers: "true"
     owners:
       - chiachenk@google.com
