@@ -1,0 +1,3 @@
+- name: inference-perf
+  dmap:
+    "sha256:319b2e528f737ee6aa008b28c0687e599e865437e1275637e3accdff44cb7508": ["v1.0.0-rc.0"]
