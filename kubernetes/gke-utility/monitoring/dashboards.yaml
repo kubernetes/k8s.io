@@ -10,24 +10,6 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: prow-dashboards-gcp
-  labels:
-    grafana_dashboard: "1"
-  annotations:
-    grafana_folder: "Prow/GCP"
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: prow-dashboards-aws
-  labels:
-    grafana_dashboard: "1"
-  annotations:
-    grafana_folder: "Prow/AWS"
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
   name: fastly-dashboards
   labels:
     grafana_dashboard: "1"
