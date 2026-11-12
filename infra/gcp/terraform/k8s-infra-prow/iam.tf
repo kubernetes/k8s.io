@@ -117,6 +117,48 @@ resource "google_service_account_iam_binding" "prow" {
   ]
 }
 
+resource "google_service_account" "testgrid_updater" {
+  account_id   = "testgrid-updater"
+  display_name = "TestGrid Updater"
+  project      = module.project.project_id
+}
+
+resource "google_service_account_iam_binding" "testgrid_updater" {
+  service_account_id = google_service_account.testgrid_updater.name
+  role               = "roles/iam.workloadIdentityUser"
+  members = [
+    "serviceAccount:k8s-infra-prow.svc.id.goog[testgrid/updater]",
+  ]
+}
+
+resource "google_service_account" "testgrid_tabulator" {
+  account_id   = "testgrid-tabulator"
+  display_name = "TestGrid Tabulator"
+  project      = module.project.project_id
+}
+
+resource "google_service_account_iam_binding" "testgrid_tabulator" {
+  service_account_id = google_service_account.testgrid_tabulator.name
+  role               = "roles/iam.workloadIdentityUser"
+  members = [
+    "serviceAccount:k8s-infra-prow.svc.id.goog[testgrid/tabulator]",
+  ]
+}
+
+resource "google_service_account" "testgrid_summarizer" {
+  account_id   = "testgrid-summarizer"
+  display_name = "TestGrid Summarizer"
+  project      = module.project.project_id
+}
+
+resource "google_service_account_iam_binding" "testgrid_summarizer" {
+  service_account_id = google_service_account.testgrid_summarizer.name
+  role               = "roles/iam.workloadIdentityUser"
+  members = [
+    "serviceAccount:k8s-infra-prow.svc.id.goog[testgrid/summarizer]",
+  ]
+}
+
 // Unique service account for GCS notification PubSub topics.
 // Used to publish GCS updates to PubSub.
 data "google_storage_project_service_account" "gcs_account" {
@@ -140,8 +182,44 @@ resource "google_pubsub_topic_iam_binding" "read_binding" {
     "serviceAccount:testgrid-canary@k8s-testgrid.iam.gserviceaccount.com",
     "serviceAccount:updater@k8s-testgrid.iam.gserviceaccount.com",
     "serviceAccount:kettle@kubernetes-public.iam.gserviceaccount.com",
+    "serviceAccount:${google_service_account.testgrid_updater.email}",
   ]
 }
+
+// Bind storage SA to publish to PubSub, and TestGrid components as subscribers.
+resource "google_pubsub_topic_iam_binding" "testgrid_test_group_updates_publish_binding" {
+  topic   = google_pubsub_topic.testgrid_test_group_updates_topic.name
+  project = module.project.project_id
+  role    = "roles/pubsub.publisher"
+  members = ["serviceAccount:${data.google_storage_project_service_account.gcs_account.email_address}"]
+}
+resource "google_pubsub_topic_iam_binding" "testgrid_tab_updates_publish_binding" {
+  topic   = google_pubsub_topic.testgrid_tab_updates_topic.name
+  project = module.project.project_id
+  role    = "roles/pubsub.publisher"
+  members = ["serviceAccount:${data.google_storage_project_service_account.gcs_account.email_address}"]
+}
+resource "google_pubsub_topic_iam_binding" "testgrid_test_group_updates_read_binding" {
+  topic   = google_pubsub_topic.testgrid_test_group_updates_topic.name
+  project = module.project.project_id
+  role    = "roles/pubsub.subscriber"
+  members = [
+    // Tabulator creates tabs when test groups update.
+    "serviceAccount:k8s-testgrid-updater@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+    "serviceAccount:${google_service_account.tabulator.email}",
+  ]
+}
+resource "google_pubsub_topic_iam_binding" "testgrid_tab_updates_read_binding" {
+  topic   = google_pubsub_topic.testgrid_tab_updates_topic.name
+  project = module.project.project_id
+  role    = "roles/pubsub.subscriber"
+  members = [
+    // Summarizer summarizes tabs when tabs update.
+    "serviceAccount:k8s-testgrid-summarizer@k8s-infra-prow-build-trusted.iam.gserviceaccount.com",
+    "serviceAccount:${google_service_account.testgrid_summarizer.email}",
+  ]
+}
+
 
 # https://cloud.google.com/iam/docs/workload-identity-federation-with-kubernetes#kubernetes
 # This is a community owned K8s Cluster inside IBM Cloud, have a look at the infra/ibm/terraform folder for more details
