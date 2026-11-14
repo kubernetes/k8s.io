@@ -5,7 +5,6 @@ approvers:
 - aojea
 - bowei 
 - cheftako
-- hdp617
 - LogicalShark
 - msau42
 - mattcary
@@ -16,9 +15,11 @@ reviewers:
 - aojea
 - bowei 
 - cheftako
-- hdp617
 - LogicalShark
 - msau42
 - mattcary
 - sunnylovestiramisu
 - YifeiZhuang 
+
+emeritus_approvers:
+- hdp617
