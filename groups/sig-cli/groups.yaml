@@ -15,7 +15,7 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - aguclu@redhat.com
+      - ardaguclu@gmail.com
       - eddiezane@gmail.com
       - soltysh@gmail.com
       - mpuckett259@gmail.com
@@ -25,7 +25,7 @@ groups:
     description: |-
       SIG cli general discussion group
     owners:
-      - aguclu@redhat.com
+      - ardaguclu@gmail.com
       - eddiezane@gmail.com
       - soltysh@gmail.com
       - mpuckett259@gmail.com
@@ -104,7 +104,7 @@ groups:
       ReconcileMembers: "true"
       WhoCanViewMembership: "ALL_MEMBERS_CAN_VIEW" # required
     members:
-      - aguclu@redhat.com
+      - ardaguclu@gmail.com
       - eddiezane@gmail.com
       - soltysh@gmail.com
       - mpuckett259@gmail.com
