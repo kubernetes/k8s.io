@@ -24,7 +24,6 @@ groups:
       WhoCanViewGroup: "ALL_MANAGERS_CAN_VIEW"
       WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
     owners:
-      - adolfo.garcia@uservers.net
       - cjcullen@google.com
       - i@monis.app
       - joelsmith@redhat.com
@@ -78,7 +77,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - adolfo.garcia@uservers.net
       - cjcullen@google.com
       - i@monis.app
       - joelsmith@redhat.com
@@ -99,7 +97,6 @@ groups:
       WhoCanPostMessage: "ANYONE_CAN_POST"
       ReconcileMembers: "true"
     owners:
-      - adolfo.garcia@uservers.net
       - cjcullen@google.com
       - i@monis.app
       - joelsmith@redhat.com
