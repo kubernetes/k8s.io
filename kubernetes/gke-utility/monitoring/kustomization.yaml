@@ -13,7 +13,7 @@ helmCharts:
   - name: prometheus-fastly-exporter
     repo: https://prometheus-community.github.io/helm-charts
     releaseName: fastly-exporter
-    version: 0.14.1
+    version: 0.15.1
     valuesFile: fastly/exporter-values.yaml
     apiVersions:
       - monitoring.coreos.com/v1

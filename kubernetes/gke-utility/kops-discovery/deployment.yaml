@@ -31,7 +31,7 @@ spec:
             secretName: kops-discovery-cert
       containers:
         - name: discovery-server
-          image: registry.k8s.io/kops/discovery-server:1.35.0-beta.1
+          image: registry.k8s.io/kops/discovery-server:1.37.0
           args:
             - --listen=:8443
             - --storage=memory

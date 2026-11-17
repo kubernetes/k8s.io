@@ -32,7 +32,7 @@ spec:
       sources:
         - chart: kube-prometheus-stack
           repoURL: https://prometheus-community.github.io/helm-charts
-          targetRevision:  92.10.0
+          targetRevision:  93.3.1
           helm:
             releaseName: monitoring
             valueFiles:
