@@ -1,5 +1,4 @@
 global:
-  hub: gcr.io/istio-release
   istiod:
     enableAnalysis: true
   meshID: mesh

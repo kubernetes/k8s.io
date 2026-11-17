@@ -46,6 +46,8 @@ mimir:
       remote_timeout: null
     ingester:
       push_grpc_method_enabled: false
+    querier:
+      max_concurrent: 16
     common:
       storage:
         backend: gcs
@@ -211,7 +213,6 @@ distributor:
         timeoutSeconds: 5
         failureThreshold: 3
 
-
       resources:
         requests:
           cpu: 10m
@@ -237,7 +238,6 @@ distributor:
     - name: kafka-token
       emptyDir:
         medium: Memory
-
 
   # Mimir only needs to read credentials.
   extraVolumeMounts: &kafkaTokenMimirMounts

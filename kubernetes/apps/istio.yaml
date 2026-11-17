@@ -21,11 +21,11 @@ spec:
       project: default
       sources:
         - chart: base
-          repoURL: https://istio-release.storage.googleapis.com/charts
-          targetRevision: 1.28.10
+          repoURL: https://blob.istio.io/istio-release/charts
+          targetRevision: 1.32.0
         - path: config/crd/experimental
           repoURL: https://github.com/kubernetes-sigs/gateway-api
-          targetRevision: v1.4.1
+          targetRevision: v1.6.1
       ignoreDifferences:
         - group: admissionregistration.k8s.io
           kind: ValidatingWebhookConfiguration
@@ -62,8 +62,8 @@ spec:
       project: default
       sources:
         - chart: istiod
-          repoURL: https://istio-release.storage.googleapis.com/charts
-          targetRevision: 1.28.10
+          repoURL: https://blob.istio.io/istio-release/charts
+          targetRevision: 1.32.0
           helm:
             valueFiles:
             - $values/kubernetes/{{ .name }}/helm/istio.yaml
