@@ -12,4 +12,6 @@ hide-unchanged-plan-comments: true
 checkout-strategy: merge
 emoji-reaction: eyes
 repo-config: /config/repos.yaml
+# Atlantis images >= v0.49.0 no longer bundle terraform, the default version is downloaded at startup
+default-tf-version: v1.17.1
 # default-tf-distribution: opentofu # uncomment when we start using opentofu
