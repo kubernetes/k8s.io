@@ -4,6 +4,7 @@ namespace: kube-system
 resources:
   - ec2nodeclass.yaml
   - daemonsets.yaml
+  - most-allocated-scheduler.yaml
   - nodepools.yaml
   - npd.yaml
   - npd-config.yaml
