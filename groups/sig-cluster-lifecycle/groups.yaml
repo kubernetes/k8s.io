@@ -378,6 +378,25 @@ groups:
       - davanum@gmail.com
       - richmcase@gmail.com
 
+  - email-id: cluster-api-gcp-team@kubernetes.io
+    name: cluster-api-gcp-team
+    description: |-
+      Private group for Cluster API Provider GCP maintainers and reviewers
+    settings:
+      WhoCanDiscoverGroup: "ALL_MEMBERS_CAN_DISCOVER"
+      WhoCanViewGroup: "ALL_MEMBERS_CAN_VIEW"
+      WhoCanPostMessage: "ANYONE_CAN_POST"
+      WhoCanJoin: "INVITED_CAN_JOIN"
+      MessageModerationLevel: "MODERATE_NONE"
+      ReconcileMembers: "true"
+    owners:
+      - cjsalaspelayo@gmail.com
+      - damiano.donati@gmail.com
+    members:
+      - bbarbach@redhat.com
+      - theobarberbany@gmail.com
+      - jonathan@jonathan-rainer.com
+
   - email-id: sig-cluster-lifecycle-cluster-api-do-alerts@kubernetes.io
     name: sig-cluster-lifecycle-cluster-api-do-alerts
     description: |-
