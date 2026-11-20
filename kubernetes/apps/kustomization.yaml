@@ -15,6 +15,7 @@ resources:
   - istio.yaml
   - oauth2-proxy.yaml
   - mimir.yaml
+  - testgrid.yaml
 
 patches:
   - target:
