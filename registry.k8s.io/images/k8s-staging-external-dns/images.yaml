@@ -133,3 +133,6 @@
     "sha256:53b0cd233ef5ebad5aafa603ca4bf9f5409006762e725d0d5e7c5afd4b8944b1": ["v0.22.0"]
     "sha256:a6f70368f2b26633a6cc5a4c619e97e781d1512d9fead588ebd72dae85bdcf98": ["v0.23.0"]
     "sha256:006c2fb768903a862292eac8d16bc36d94aa2ebcfc9ff3679db074f97163c8de": ["v0.24.0"]
+- name: charts/external-dns
+  dmap:
+    "sha256:1273036048cd516dfd077a27b653c15c28aba69b676ec3b081e00be90abec8a5": ["1.24.0"]
