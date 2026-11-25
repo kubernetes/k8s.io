@@ -118,11 +118,13 @@ registries:
 # itself during the build, so the krel builder reaches SLSA build level 1
 # only. pause and the old hyperkube images are not built by krel, so the
 # images patterns limit the policy to the images krel builds, and the others
-# are promoted without a provenance check. The mode is warn: a violation never
-# blocks a Kubernetes release, it is logged and recorded as a FAILED
-# verification summary. The images field needs kpromo v4.8.1 or later.
+# are promoted without a provenance check. The mode is require: an image
+# without valid provenance blocks the promotion. The release cut handbook
+# says what release managers do then:
+# https://git.k8s.io/sig-release/release-engineering/handbooks/release-cuts.md#wait-on-image-promotion-job
+# The images field needs kpromo v4.8.1 or later.
 provenance:
-  mode: warn
+  mode: require
   images:
   - kube-*
   - kubectl*
