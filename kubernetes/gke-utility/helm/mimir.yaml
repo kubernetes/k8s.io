@@ -247,16 +247,24 @@ distributor:
 
 ingester:
   zoneAwareReplication:
-    enabled: false
+    enabled: true
+    topologyKey: kubernetes.io/hostname
+    zones:
+      - name: zone-a
+        nodeSelector:
+          topology.kubernetes.io/zone: us-central1-a
+      - name: zone-b
+        nodeSelector:
+          topology.kubernetes.io/zone: us-central1-b
   persistentVolume:
     size: 50Gi
     storageClass: hyperdisk-balanced
-  replicas: 18
+  replicas: 36
   resources:
     limits:
       memory: 12Gi
     requests:
-      cpu: 3.5
+      cpu: 2
       memory: 8Gi
   topologySpreadConstraints: {}
   initContainers: *kafkaTokenSidecars
@@ -344,8 +352,8 @@ store_gateway:
   replicas: 3
   resources:
     limits:
-      memory: 2.1Gi
+      memory: 4Gi
     requests:
-      cpu: 1
-      memory: 1.5Gi
+      cpu: 250m
+      memory: 2.5Gi
   topologySpreadConstraints: {}
