@@ -33,7 +33,7 @@ function k8s_infra_project() {
     fi
     local project_type="${1}"
     local project="${2}"
-    if <"${INFRA_YAML}" yq --exit-status ".infra.${project_type}.projects | has(\"${project}\")" >/dev/null; then
+    if <"${INFRA_YAML}" yq --exit-status ".infra.${project_type}.projects | has(\"${project}\")" >/dev/null 2>&1; then
         echo "${project}"
     else
         color 1 "ERROR: undeclared ${project_type} project: ${project}" >&2
@@ -51,5 +51,5 @@ function k8s_infra_projects() {
         return 1
     fi
     local project_type="${1}"
-    <"${INFRA_YAML}" yq --raw-output ".infra.${project_type}.projects | keys[]"
+    <"${INFRA_YAML}" yq -r ".infra.${project_type}.projects | keys | sort | .[]"
 }

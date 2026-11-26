@@ -41,7 +41,7 @@
 # Roles are saved to `${name}.yaml` files intended for comparison with yaml
 # dumped by gcloud, or creation via gcloud, e.g.
 # 
-#   gcloud iam roles describe roles/foo --format=yaml | yq -y 'del(.etag)' > foo.yaml
+#   gcloud iam roles describe roles/foo --format=yaml | yq -o=yaml -P 'del(.etag)' > foo.yaml
 #   generate-role-yaml.sh specs/foo.bar.yaml
 #   diff foo.yaml foo.bar.yaml
 #   gcloud iam roles create --project project-id foo.bar --file foo.bar.yaml
@@ -57,7 +57,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-repo_root=$(git rev-parse --show-toplevel)
 script_dir=$(dirname "${BASH_SOURCE[0]}")
 script_name=$(basename "${BASH_SOURCE[0]}")
 input_dir="${script_dir}/specs"
@@ -76,13 +75,13 @@ function output_role_yaml() {
 
   local title description name include_roles include_permissions include_regex exclude_regex
   title=$(<"${spec}" yq -r .title)
-  description=$(<"${spec}" yq -r .description)
+  description=$(<"${spec}" yq -r '.description // "null"')
   name=$(<"${spec}" yq -r .name)
-  mapfile -t include_roles < <(<"${spec}" yq -r '.include? | .roles//[] | .[]')
-  mapfile -t include_permissions < <(<"${spec}" yq -r '.include? | .permissions//[] | .[]')
+  mapfile -t include_roles < <(<"${spec}" yq -r '.include.roles // [] | .[]')
+  mapfile -t include_permissions < <(<"${spec}" yq -r '.include.permissions // [] | .[]')
   # wrap regexes in their own groups
-  include_regex=$(<"${spec}" yq -r '.include? | .permissionRegexes//[] | map("(\(.))") | join("|")')
-  exclude_regex=$(<"${spec}" yq -r '.exclude? | .permissionRegexes//[] | map("(\(.))") | join("|")')
+  include_regex=$(<"${spec}" yq -r '.include.permissionRegexes // [] | map("(\(.))") | join("|")')
+  exclude_regex=$(<"${spec}" yq -r '.exclude.permissionRegexes // [] | map("(\(.))") | join("|")')
 
   local output_path="${output_dir}/${name}.yaml"
 
@@ -113,7 +112,7 @@ function output_role_yaml() {
 }
 
 if ! command -v yq &>/dev/null; then
-  echo >/dev/stderr "yq not found. Please install with pip3 install -r ${repo_root}/requirements.txt"
+  echo >/dev/stderr "yq not found. Please install: https://github.com/mikefarah/yq"
   exit 1
 fi
 
