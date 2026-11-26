@@ -175,6 +175,11 @@ metadata:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
+  name: kubernetes-mock
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
   name: kubespray
 ---
 apiVersion: v1
