@@ -7,6 +7,8 @@ This directory contains CloudFormation template needed to provision:
   packages and CloudFront distribution
 - IAM user and policy used by the OpenBuildService (OBS) platform to publish
   packages
+- IAM user and policy used by the Fastly services (`pkgs.k8s.io` and
+  `pkgs.k8s.dev`) to read packages from the S3 bucket
 
 ## Applying/Updating CloudFormation Stacks
 
