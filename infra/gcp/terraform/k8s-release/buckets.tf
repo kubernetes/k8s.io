@@ -110,4 +110,20 @@ module "release" {
   ]
 }
 
+// The mock signing build writes the provenance of mock stages, like the
+// signing build in k8s-infra-releases-prod. It reads the staged files through
+// the public read access of the bucket. The bucket module doesn't support IAM
+// conditions, so this binding lives outside of it.
+resource "google_storage_bucket_iam_member" "mock_provenance_builder_writer" {
+  bucket = module.mock_bucket.name
+  role   = "roles/storage.objectUser"
+  member = "serviceAccount:krel-provenance-mock-builder@k8s-releng-prod.iam.gserviceaccount.com"
 
+  condition {
+    title = "stage-provenance-write"
+    expression = join(" && ", [
+      "resource.name.startsWith(\"projects/_/buckets/${module.mock_bucket.name}/objects/stage/\")",
+      "(resource.name.endsWith(\"/provenance-v2.json\") || resource.name.endsWith(\"/image-provenance-v2.json\") || resource.name.endsWith(\"/final-provenance-v2.json\"))",
+    ])
+  }
+}

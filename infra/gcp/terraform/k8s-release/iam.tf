@@ -26,6 +26,12 @@ module "iam" {
     "roles/cloudbuild.builds.editor" = [
       "group:k8s-infra-release-editors@kubernetes.io",
     ]
+    # The level 3 signing build in k8s-releng-prod reads the records of the
+    # stage builds it signs the provenance of.
+    "roles/cloudbuild.builds.viewer" = [
+      "serviceAccount:krel-provenance-builder@k8s-releng-prod.iam.gserviceaccount.com",
+      "serviceAccount:krel-provenance-mock-builder@k8s-releng-prod.iam.gserviceaccount.com",
+    ]
     "roles/cloudbuild.workerPoolUser" = [
       "group:k8s-infra-release-editors@kubernetes.io",
     ]

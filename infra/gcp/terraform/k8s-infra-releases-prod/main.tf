@@ -62,6 +62,30 @@ module "release_bucket" {
     {
       role   = "roles/storage.objectAdmin"
       member = "serviceAccount:648026197307@cloudbuild.gserviceaccount.com"
+    },
+    {
+      // The level 3 signing build reads the staged files.
+      role   = "roles/storage.objectViewer"
+      member = "serviceAccount:krel-provenance-builder@k8s-releng-prod.iam.gserviceaccount.com"
     }
   ]
+}
+
+// The level 3 signing build writes the stage and final provenance next to
+// the staged files, and nothing else: it can't change the files it vouches
+// for, and krel release publishes the provenance. For the images it can, as
+// a writer of the staging registry. The bucket module doesn't support IAM
+// conditions, so this binding lives outside of it.
+resource "google_storage_bucket_iam_member" "provenance_builder_writer" {
+  bucket = module.release_bucket.name
+  role   = "roles/storage.objectUser"
+  member = "serviceAccount:krel-provenance-builder@k8s-releng-prod.iam.gserviceaccount.com"
+
+  condition {
+    title = "stage-provenance-write"
+    expression = join(" && ", [
+      "resource.name.startsWith(\"projects/_/buckets/${module.release_bucket.name}/objects/stage/\")",
+      "(resource.name.endsWith(\"/provenance-v2.json\") || resource.name.endsWith(\"/image-provenance-v2.json\") || resource.name.endsWith(\"/final-provenance-v2.json\"))",
+    ])
+  }
 }

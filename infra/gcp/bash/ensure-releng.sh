@@ -19,7 +19,9 @@
 #
 # Projects:
 # - k8s-releng-prod - Stores KMS objects which other release projects will
-#                       be granted permission to decrypt e.g., GITHUB_TOKEN
+#                       be granted permission to decrypt e.g., GITHUB_TOKEN,
+#                       holds the signing accounts of the release process and
+#                       runs the signing build of the release provenance
 
 set -o errexit
 set -o nounset
@@ -45,9 +47,19 @@ if [ $# = 0 ]; then
 fi
 
 RELEASE_PROCESS_CLOUDBUILD_SVCACCT="648026197307@cloudbuild.gserviceaccount.com"
+# The Cloud Build account of k8s-release, which runs the stage and release
+# builds today
+K8S_RELEASE_CLOUDBUILD_SVCACCT="304687256732@cloudbuild.gserviceaccount.com"
 STAGING_SIGNER_SVCACCT="krel-staging"
 K8s_ORG_SIGNER_SVCACCT="krel-trust"
 SUMMARY_SIGNER_SVCACCT="promoter-summaries"
+# SLSA build level 3: the signing build runs as its own account, which is the
+# only one that may sign as the provenance signer. The mock pair signs the
+# provenance of mock stages and is never trusted for releases.
+PROVENANCE_SIGNER_SVCACCT="krel-provenance"
+PROVENANCE_BUILDER_SVCACCT="krel-provenance-builder"
+MOCK_PROVENANCE_SIGNER_SVCACCT="krel-provenance-mock"
+MOCK_PROVENANCE_BUILDER_SVCACCT="krel-provenance-mock-builder"
 PROMOTER_PROJECT="k8s-artifacts-prod"
 
 # This function ensures the cross-project impersonation
@@ -124,6 +136,13 @@ function ensure_signer_service_accounts() {
         "serviceAccount:${RELEASE_PROCESS_CLOUDBUILD_SVCACCT}" \
         "roles/iam.serviceAccountTokenCreator"
 
+    # The stage and release builds in k8s-release sign as the staging signer
+    # too; this binding existed in the live policy only.
+    ensure_serviceaccount_role_binding \
+        "${staging_sign_account}" \
+        "serviceAccount:${K8S_RELEASE_CLOUDBUILD_SVCACCT}" \
+        "roles/iam.serviceAccountTokenCreator"
+
     # Only the production image promotion jobs and the signature check sign
     # with the main Kubernetes signing account, see below. File promotion
     # doesn't sign, and the former image promoter account is left with the
@@ -168,6 +187,50 @@ function ensure_signer_service_accounts() {
         "roles/iam.serviceAccountTokenCreator"
 }
 
+# Ensure the accounts of the level 3 signing build: a signer and the
+# account the signing build runs as, which alone can sign as it, for releases
+# and for mock stages. The Cloud Build triggers that use the builder accounts
+# are added separately.
+function ensure_provenance_service_accounts() {
+    if [ $# != 1 ] || [ -z "$1" ]; then
+        echo "ensure_provenance_service_accounts requires a project name" >&2
+        return 1
+    fi
+
+    local project="${1}"
+
+    color 6 "Ensuring the provenance signing accounts"
+    ensure_service_account \
+        "${project}" \
+        "${PROVENANCE_SIGNER_SVCACCT}" \
+        "Kubernetes release provenance signer"
+
+    ensure_service_account \
+        "${project}" \
+        "${PROVENANCE_BUILDER_SVCACCT}" \
+        "Kubernetes release provenance signing build"
+
+    ensure_service_account \
+        "${project}" \
+        "${MOCK_PROVENANCE_SIGNER_SVCACCT}" \
+        "Kubernetes mock release provenance signer"
+
+    ensure_service_account \
+        "${project}" \
+        "${MOCK_PROVENANCE_BUILDER_SVCACCT}" \
+        "Kubernetes mock release provenance signing build"
+
+    ensure_serviceaccount_role_binding \
+        "$(svc_acct_email "${project}" "${PROVENANCE_SIGNER_SVCACCT}")" \
+        "serviceAccount:$(svc_acct_email "${project}" "${PROVENANCE_BUILDER_SVCACCT}")" \
+        "roles/iam.serviceAccountTokenCreator"
+
+    ensure_serviceaccount_role_binding \
+        "$(svc_acct_email "${project}" "${MOCK_PROVENANCE_SIGNER_SVCACCT}")" \
+        "serviceAccount:$(svc_acct_email "${project}" "${MOCK_PROVENANCE_BUILDER_SVCACCT}")" \
+        "roles/iam.serviceAccountTokenCreator"
+}
+
 for PROJECT; do
 
     if ! k8s_infra_project "releng" "${PROJECT}" >/dev/null; then
@@ -185,9 +248,11 @@ for PROJECT; do
     color 6 "Empowering ${RELEASE_ADMINS} as project viewers"
     empower_group_as_viewer "${PROJECT}" "${RELEASE_ADMINS}"
 
-    # Enable KMS and IAM APIs
-    color 6 "Enabling the KMS and IAM Credentials APIs"
-    ensure_only_services "${PROJECT}" cloudkms.googleapis.com iamcredentials.googleapis.com orgpolicy.googleapis.com
+    # Enable KMS and IAM APIs, and Cloud Build and Pub/Sub for the signing
+    # build
+    color 6 "Enabling the KMS, IAM Credentials, Cloud Build and Pub/Sub APIs"
+    ensure_only_services "${PROJECT}" cloudkms.googleapis.com iamcredentials.googleapis.com orgpolicy.googleapis.com \
+        cloudbuild.googleapis.com pubsub.googleapis.com
 
     # Let project admins use KMS.
     color 6 "Empowering ${RELEASE_ADMINS} as KMS admins"
@@ -195,9 +260,12 @@ for PROJECT; do
 
     # Ensure service accounts and role bindings.
     ensure_signer_service_accounts "${PROJECT}"
+    ensure_provenance_service_accounts "${PROJECT}"
 
     # The default compute service account gets the editor role, which
-    # includes acting as the signing accounts, but nothing runs as it.
+    # includes acting as the signing accounts. Builds without a service
+    # account of their own run as it now that Cloud Build is enabled, so it
+    # must not keep that role or get any signer rights.
     color 6 "Ensuring the default compute service account has no editor role"
     compute_account="$(gcloud projects describe "${PROJECT}" --format='value(projectNumber)')-compute@developer.gserviceaccount.com"
     ensure_removed_project_role_binding \
