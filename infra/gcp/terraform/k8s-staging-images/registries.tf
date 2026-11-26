@@ -52,6 +52,7 @@ locals {
     kro                             = "group:k8s-infra-staging-kro@kubernetes.io"
     kubemark                        = "group:sig-scalability-leads@kubernetes.io"
     kubernetes                      = "group:k8s-infra-staging-kubernetes@kubernetes.io"
+    kubernetes-mock                 = "group:k8s-infra-staging-kubernetes@kubernetes.io"
     kubespray                       = "group:k8s-infra-staging-kubespray@kubernetes.io"
     kubetest2                       = "group:k8s-infra-staging-kubetest2@kubernetes.io"
     kueue                           = "group:k8s-infra-staging-kueue@kubernetes.io"
@@ -85,7 +86,22 @@ locals {
     "external-dns",
     "metrics-server",
     "sp-operator",
+    "kubernetes",
+    "kubernetes-mock",
   ]
+  extra_writers = {
+    kubernetes = [
+      "serviceAccount:304687256732@cloudbuild.gserviceaccount.com",
+      # The level 3 signing build attaches the image provenance as referrers.
+      # A writer can't be limited to referrers, so it can push images and
+      # move tags too. krel ties each signer to its own registry and bucket.
+      "serviceAccount:krel-provenance-builder@k8s-releng-prod.iam.gserviceaccount.com",
+    ]
+    kubernetes-mock = [
+      "serviceAccount:304687256732@cloudbuild.gserviceaccount.com",
+      "serviceAccount:krel-provenance-mock-builder@k8s-releng-prod.iam.gserviceaccount.com",
+    ]
+  }
 }
 
 resource "google_service_account" "build_sa" {
@@ -125,9 +141,10 @@ module "artifact_registry" {
   location      = "us-central1"
   format        = "DOCKER"
   repository_id = each.key
+  # Writers are granted by google_artifact_registry_repository_iam_binding.writers,
+  # which is authoritative for that role
   members = {
     readers = ["allUsers"],
-    writers = [each.value],
   }
 
   labels = {
@@ -146,14 +163,31 @@ module "artifact_registry" {
   }
 }
 
-resource "google_artifact_registry_repository_iam_member" "writers" {
+resource "google_artifact_registry_repository_iam_binding" "writers" {
   for_each = local.registries
 
   project    = module.project.project_id
   location   = "us-central1"
   repository = module.artifact_registry[each.key].artifact_id
   role       = "roles/artifactregistry.writer"
-  member     = google_service_account.build_sa[each.key].member
+  members = concat(
+    [
+      each.value,
+      google_service_account.build_sa[each.key].member,
+    ],
+    lookup(local.extra_writers, each.key, []),
+  )
+}
+
+# The build service account grants moved into the binding above. Forget the old
+# resources instead of destroying them, so that their removal can't race the
+# creation of the bindings and drop the grant. Remove this block once applied.
+removed {
+  from = google_artifact_registry_repository_iam_member.writers
+
+  lifecycle {
+    destroy = false
+  }
 }
 
 locals {
