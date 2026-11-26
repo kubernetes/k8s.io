@@ -92,6 +92,8 @@ locals {
   extra_writers = {
     kubernetes = [
       "serviceAccount:304687256732@cloudbuild.gserviceaccount.com",
+      # The stage builds of the level 3 stage trigger push the images.
+      "serviceAccount:krel-stage@k8s-release.iam.gserviceaccount.com",
       # The level 3 signing build attaches the image provenance as referrers.
       # A writer can't be limited to referrers, so it can push images and
       # move tags too. krel ties each signer to its own registry and bucket.
@@ -99,6 +101,9 @@ locals {
     ]
     kubernetes-mock = [
       "serviceAccount:304687256732@cloudbuild.gserviceaccount.com",
+      # The level 3 mock stage builds, which may build forks and can't write
+      # the production registry.
+      "serviceAccount:krel-stage-mock@k8s-release.iam.gserviceaccount.com",
       "serviceAccount:krel-provenance-mock-builder@k8s-releng-prod.iam.gserviceaccount.com",
     ]
   }

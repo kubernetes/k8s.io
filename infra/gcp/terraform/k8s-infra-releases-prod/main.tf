@@ -67,6 +67,12 @@ module "release_bucket" {
       // The level 3 signing build reads the staged files.
       role   = "roles/storage.objectViewer"
       member = "serviceAccount:krel-provenance-builder@k8s-releng-prod.iam.gserviceaccount.com"
+    },
+    {
+      // The level 3 stage builds list the stage directory. Listing can't be
+      // limited to a prefix, so they can read the whole bucket.
+      role   = "roles/storage.objectViewer"
+      member = "serviceAccount:krel-stage@k8s-release.iam.gserviceaccount.com"
     }
   ]
 }
@@ -87,5 +93,19 @@ resource "google_storage_bucket_iam_member" "provenance_builder_writer" {
       "resource.name.startsWith(\"projects/_/buckets/${module.release_bucket.name}/objects/stage/\")",
       "(resource.name.endsWith(\"/provenance-v2.json\") || resource.name.endsWith(\"/image-provenance-v2.json\") || resource.name.endsWith(\"/final-provenance-v2.json\"))",
     ])
+  }
+}
+
+// The stage builds of the level 3 stage trigger write the stage directory,
+// and nothing else: krel release publishes the release from it. The bucket
+// module doesn't support IAM conditions, so this binding lives outside of it.
+resource "google_storage_bucket_iam_member" "krel_stage" {
+  bucket = module.release_bucket.name
+  role   = "roles/storage.objectUser"
+  member = "serviceAccount:krel-stage@k8s-release.iam.gserviceaccount.com"
+
+  condition {
+    title      = "stage"
+    expression = "resource.name.startsWith(\"projects/_/buckets/${module.release_bucket.name}/objects/stage/\")"
   }
 }
