@@ -21,9 +21,6 @@
 #
 # This MUST NOT be used directly. Source it via lib.sh instead.
 
-script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-repo_root=$(cd "${script_dir}/../.." && pwd)
-
 function _color() {
     tput setaf "$1" || true
 }
@@ -70,11 +67,9 @@ function verify_prereqs() {
         >&2 echo "jq not found. Please install: https://stedolan.github.io/jq/download/"
         exit 1
     fi
-    # generate-role-yaml, lib_iam, lib_gcs, lib_services rely on this
-    # opting for https://kislyuk.github.io/yq/ over https://github.com/mikefarah/yq due to
-    # parity with jq, but may be worth reconsidering
+    # generate-role-yaml, lib_iam, lib_gcs, lib_infra, lib_services rely on https://github.com/mikefarah/yq
     if ! command -v yq &>/dev/null; then
-        >&2 echo "yq not found. Please install, e.g. pip3 install -r ${repo_root}/requirements.txt"
+        >&2 echo "yq not found. Please install: https://github.com/mikefarah/yq"
         exit 1
     fi
 }

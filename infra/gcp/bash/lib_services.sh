@@ -64,26 +64,30 @@ function ensure_disabled_services() {
     done
 }
 
-# TODO: perhaps just store the .jq file in this repo?
-readonly services_plan_jq="${TMPDIR}/services_plan.jq"
-function _ensure_services_plan_jq() {
-    if [ -f "${services_plan_jq}" ]; then return; fi
+# TODO: perhaps just store the .yq file in this repo?
+readonly services_plan_yq="${TMPDIR}/services_plan.yq"
+function _ensure_services_plan_yq() {
+    if [ -f "${services_plan_yq}" ]; then return; fi
     # quote EOF to avoid $expansion in here-document
-    >"${services_plan_jq}" cat <<"EOF"
-    ($ARGS.positional | sort) as $intent | {
-      intent: $intent,
-      enabled: map(.config.name) | sort,
-      expected: (
-        map(
-          select([.config.name] | inside($intent))
-          | (.dependencyConfig?.directlyDependsOn // [])
-        ) + $intent
-      )
-      | flatten
-      | map({key:., value:true}) | from_entries | keys | sort
-    } | . += {
-      to_enable: (.expected - .enabled),
-      to_disable: (.enabled - .expected)
+    >"${services_plan_yq}" cat <<"EOF"
+    [.] | filter(. != null) | . as $docs |
+    (strenv(INTENT) | split("\n") | sort | unique) as $intent |
+    ($docs | map(.config.name) | sort) as $enabled |
+    (
+      (
+        $docs
+        | filter(.config.name as $n | $intent | any_c(. == $n))
+        | map(.dependencyConfig.directlyDependsOn // [])
+        | flatten
+      ) + $intent
+      | sort | unique
+    ) as $expected |
+    {
+      "intent": $intent,
+      "enabled": $enabled,
+      "expected": $expected,
+      "to_enable": ($expected - $enabled),
+      "to_disable": ($enabled - $expected)
     }
 EOF
 }
@@ -104,12 +108,14 @@ function _plan_enabled_services() {
     fi
 
     local gcp_project="$1"; shift
+    local intent
+    intent="$(printf '%s\n' "$@")"
 
-    _ensure_services_plan_jq
+    _ensure_services_plan_yq
 
     gcloud services list --enabled --project="${gcp_project}" \
       --format='yaml(config.name,dependencyConfig.directlyDependsOn)' \
-      | yq --slurp -y --args --from-file "${services_plan_jq}" "$@"
+      | INTENT="${intent}" yq eval-all --from-file "${services_plan_yq}"
 }
 
 # Ensure that only the given services and their direct dependencies are enabled; disable any other services
@@ -131,12 +137,12 @@ function ensure_only_services() {
     _plan_enabled_services "${gcp_project}" "$@" > "${before}"
 
     # if there's nothing to do, return early
-    if ! <"${before}" yq --exit-status '[.to_enable, .to_disable] | map (length > 0) | any' >/dev/null; then
+    if ! <"${before}" yq --exit-status '[.to_enable, .to_disable] | map(length > 0) | any' >/dev/null 2>&1; then
       return
     fi
 
     echo "plan to enable/disable the following services"
-    <"${before}" yq -y '{to_enable, to_disable}'
+    <"${before}" yq 'pick(["to_enable", "to_disable"])'
 
     # enable services that need to be enabled
     for service in $(<"${before}" yq -r '.to_enable[]'); do
@@ -160,7 +166,7 @@ function ensure_only_services() {
     _plan_enabled_services "${gcp_project}" "$@" > "${after_disable}"
 
     # in the event that an enable/disable cycle doesn't do enough, let's warn
-    if <"${after_disable}" yq --exit-status '[.to_enable, .to_disable] | map (length > 0) | any' >/dev/null; then
+    if <"${after_disable}" yq --exit-status '[.to_enable, .to_disable] | map(length > 0) | any' >/dev/null 2>&1; then
       echo "WARN: ensure_only_services: after enable/disable cycle, still projects to enable/disable: ${gcp_project}"
       cat "${after_disable}"
     fi

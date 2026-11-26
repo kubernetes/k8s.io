@@ -37,5 +37,6 @@ module "project" {
     "cloudkms.googleapis.com",
     "secretmanager.googleapis.com",
     "iamcredentials.googleapis.com",
+    "pubsub.googleapis.com",
   ]
 }

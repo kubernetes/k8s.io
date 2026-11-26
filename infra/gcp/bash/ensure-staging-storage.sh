@@ -340,7 +340,7 @@ function ensure_removed_containeranalysis_serviceagent() {
 
   gcloud projects get-iam-policy "${project}" >"${TMPDIR}/iam.yaml"
   mapfile -t members < <(
-    <"${TMPDIR}/iam.yaml" yq -r ".bindings | map(select(.role==\"${role}\").members) | flatten | .[]"
+    role="${role}" yq -r '(.bindings // []) | map(select(.role == strenv(role)).members) | flatten | .[]' <"${TMPDIR}/iam.yaml"
   )
   for member in "${members[@]}"; do
     ensure_removed_project_role_binding "${project}" "${member}" "${role}"

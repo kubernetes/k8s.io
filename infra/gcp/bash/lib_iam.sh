@@ -352,7 +352,7 @@ function _ensure_custom_iam_role_from_file() {
 
     # detect if we should create or update and dump role; silently ignore error
     verb="update"
-    if ! (gcloud iam roles describe "${scope_flag}" "${name}" | yq -y 'del(.etag)' >"${before}") >/dev/null 2>&1; then
+    if ! (gcloud iam roles describe "${scope_flag}" "${name}" | yq -o=yaml -P 'del(.etag)' >"${before}") >/dev/null 2>&1; then
         verb="create"
     fi
 
@@ -365,7 +365,7 @@ function _ensure_custom_iam_role_from_file() {
     # name is foo.bar, but gcloud wants scopes/id/role/foo.bar in the file
     local full_name="${scope}s/${id}/roles/${name}"
     <"${file}" sed -e "s|^name: ${name}|name: ${full_name}|" >"${ready}"
-    gcloud iam roles "${verb}" "${scope_flag}" "${name}" --file "${ready}" | yq -y 'del(.etag)' > "${after}"
+    gcloud iam roles "${verb}" "${scope_flag}" "${name}" --file "${ready}" | yq -o=yaml -P 'del(.etag)' > "${after}"
 
     diff_colorized "${before}" "${after}"
 }
@@ -420,9 +420,9 @@ function _ensure_removed_custom_iam_role() {
 # (couldn't find a gcloud --flatten --format incantation to do this)
 function _format_iam_policy() {
   # shellcheck disable=SC2016
-  # $r is a jq variable, not a bash expression
-  yq -y '(.bindings // [])
-    | map(.role as $r | .members | map({member: ., role: $r}))
+  # $r is a yq variable, not a bash expression
+  yq -o=yaml -P '(.bindings // [])
+    | map(.role as $r | .members | map({"member": ., "role": $r}))
     | flatten | sort_by(.member)'
 }
 
@@ -464,9 +464,9 @@ function _ensure_resource_role_binding() {
 
     # `gcloud add-iam-policy-binding` is idempotent,
     # but avoid calling if we can, to reduce output noise
-    if ! <"${before}" yq --exit-status \
-        ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
-        >/dev/null; then
+    if ! role="${role}" principal="${principal}" yq --exit-status \
+        '.[] | select(contains({"role": strenv(role), "member": strenv(principal)}))' \
+        <"${before}" >/dev/null 2>&1; then
 
         # intentionally word-split resource, e.g. iam service-accounts
         # shellcheck disable=SC2086
@@ -514,9 +514,9 @@ function _ensure_removed_resource_role_binding() {
 
     # `gcloud remove-iam-policy-binding` errors if binding doesn't exist,
     #  so avoid calling if we can, to reduce output noise
-    if <"${before}" yq --exit-status \
-      ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
-        >/dev/null; then
+    if role="${role}" principal="${principal}" yq --exit-status \
+        '.[] | select(contains({"role": strenv(role), "member": strenv(principal)}))' \
+        <"${before}" >/dev/null 2>&1; then
 
         # intentionally word-split resource, e.g. iam service-accounts
         # shellcheck disable=SC2086

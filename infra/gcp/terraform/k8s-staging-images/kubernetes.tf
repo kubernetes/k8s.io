@@ -50,6 +50,13 @@ module "kubernetes_ar" {
     readers = ["allUsers"],
     writers = [
       "serviceAccount:304687256732@cloudbuild.gserviceaccount.com",
+      # The level 3 signing builds attach the image provenance as referrers.
+      # A writer can't be limited to a path or to referrers: both builders
+      # can push images and move tags anywhere in the repository, the mock
+      # builder in the production paths too. krel ties each signer to its
+      # own registry path and bucket.
+      "serviceAccount:krel-provenance-builder@k8s-releng-prod.iam.gserviceaccount.com",
+      "serviceAccount:krel-provenance-mock-builder@k8s-releng-prod.iam.gserviceaccount.com",
     ],
   }
   cleanup_policy_dry_run = false

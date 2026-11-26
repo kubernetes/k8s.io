@@ -242,30 +242,29 @@ ensure_gcs_role_binding() {
     local after_yaml="${TMPDIR}/gcs-role-binding.after.yaml"
 
     gsutil iam get "${bucket}" > "${before_json}"
-    <"${before_json}" yq -y | _format_iam_policy > "${before_yaml}"
+    <"${before_json}" _format_iam_policy > "${before_yaml}"
 
     # Avoid calling `gsutil iam set` if we can, to reduce output noise
-    if ! <"${before_yaml}" yq --exit-status \
-        ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
-        >/dev/null; then
+    if ! role="${role}" principal="${principal}" yq --exit-status \
+        '.[] | select(contains({"role": strenv(role), "member": strenv(principal)}))' \
+        <"${before_yaml}" >/dev/null 2>&1; then
 
         # add the binding, then merge with existing bindings
-        # shellcheck disable=SC2016 # jq uses $foo for variables
-        <"${before_json}" yq --arg role "${role}" --arg principal "${principal}" \
-          '.bindings |= (
-              . + [{
-                members: [$principal],
-                role: ("roles/storage." + $role)
+        role="${role}" principal="${principal}" yq -o=json \
+          '.bindings = (
+              (.bindings // []) + [{
+                "members": [strenv(principal)],
+                "role": ("roles/storage." + strenv(role))
               }]
               | group_by(.role)
               | map({
-                  members: map(.members) | flatten | unique,
-                  role: .[0].role
+                  "members": (map(.members) | flatten | sort | unique),
+                  "role": .[0].role
                 })
-            )' > "${after_json}"
+            )' <"${before_json}" > "${after_json}"
 
         gsutil iam set "${after_json}" "${bucket}"
-        <"${after_json}" yq -y | _format_iam_policy > "${after_yaml}"
+        <"${after_json}" _format_iam_policy > "${after_yaml}"
 
         diff_colorized "${before_yaml}" "${after_yaml}"
     fi
@@ -293,27 +292,21 @@ ensure_removed_gcs_role_binding() {
     local after_yaml="${TMPDIR}/gcs-role-binding.after.yaml"
 
     gsutil iam get "${bucket}" > "${before_json}"
-    <"${before_json}" yq -y | _format_iam_policy > "${before_yaml}"
+    <"${before_json}" _format_iam_policy > "${before_yaml}"
 
     # Avoid calling `gsutil iam set` if we can, to reduce output noise
-    if <"${before_yaml}" yq --exit-status \
-        ".[] | select(contains({role: \"${role}\", member: \"${principal}\"}))" \
-        >/dev/null; then
+    if role="${role}" principal="${principal}" yq --exit-status \
+        '.[] | select(contains({"role": strenv(role), "member": strenv(principal)}))' \
+        <"${before_yaml}" >/dev/null 2>&1; then
 
         # remove member from role if it exists; gcs deletes bindings with no
         # members, so we don't need to bother pruning them here
-        # shellcheck disable=SC2016 # jq uses $foo for variables
-        <"${before_json}" yq --arg role "${role}" --arg principal "${principal}" \
-          '.bindings |= map(
-              if .role == ("roles/storage." + $role) then
-                .members -= [$principal]
-              else
-                .
-              end
-            )' > "${after_json}"
+        role="${role}" principal="${principal}" yq -o=json \
+          '(.bindings[] | select(.role == ("roles/storage." + strenv(role))).members) -= [strenv(principal)]' \
+          <"${before_json}" > "${after_json}"
 
         gsutil iam set "${after_json}" "${bucket}"
-        <"${after_json}" yq -y | _format_iam_policy > "${after_yaml}"
+        <"${after_json}" _format_iam_policy > "${after_yaml}"
 
         diff_colorized "${before_yaml}" "${after_yaml}"
     fi
