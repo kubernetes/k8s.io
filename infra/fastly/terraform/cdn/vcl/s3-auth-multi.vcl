@@ -29,7 +29,7 @@ set var.awsRegion = "${region}";
 
 set bereq.http.x-amz-content-sha256 = digest.hash_sha256("");
 set bereq.http.x-amz-date = strftime({"%Y%m%dT%H%M%SZ"}, now);
-set bereq.http.host = var.awsBucket ".s3." var.awsRegion ".amazonaws.com";
+set bereq.http.host = var.awsBucket ".s3.dualstack." var.awsRegion ".amazonaws.com";
 set bereq.url = querystring.remove(bereq.url);
 # Preserve '+' in paths (e.g. ci builds such as v1.36.0-alpha.1+abc)
 set bereq.url = regsuball(bereq.url.path, "[+]", "__FASTLY_PLUS__");
