@@ -292,3 +292,33 @@ Resources:
             Resource: !Ref CloudFrontDistributionArn
       Users:
         - Ref: OBSAdminUser
+
+  #########################################
+  # IAM user for Fastly                   #
+  #########################################
+
+  # FastlyReaderUser (fastly-reader) is an IAM user used by Fastly (pkgs.k8s.io
+  # and pkgs.k8s.dev) to sign read-only requests to the S3 bucket
+  FastlyReaderUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      Path: /
+      UserName: fastly-reader
+
+  # FastlyReaderAccessPolicy gives read-only access to the S3 bucket
+  FastlyReaderAccessPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: FastlyReaderAccess
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Action: 's3:GetObject'
+            Resource: !Sub '${ProdPackagesBucketArn}/*'
+          # Makes S3 return 404 instead of 403 for objects that don't exist
+          - Effect: 'Allow'
+            Action: 's3:ListBucket'
+            Resource: !Ref ProdPackagesBucketArn
+      Users:
+        - Ref: FastlyReaderUser

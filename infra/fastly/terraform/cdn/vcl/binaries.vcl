@@ -36,10 +36,23 @@ sub vcl_recv {
     set req.url = req.url.path;
   }
 %{ else ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "prod-cdn-packages-k8s-io-eu-central-1") ~}
+  # Redirect the root path to the pkgs.k8s.io introduction blog post
+  if (req.url.path == "/") {
+    error 620;
+  }
+  # Rewrite /* paths to /repositories/isv:/kubernetes:/* for the origin and
+  # strip the query string so it doesn't fragment the cache.
+  # Only on the edge and before restarts: otherwise the URL is rewritten twice.
+  if (fastly.ff.visits_this_service == 0 && req.restarts == 0) {
+    set req.url = "/repositories/isv:/kubernetes:" req.url.path;
+  }
+%{ else ~}
   # Serve index.html for the root path
   if (req.url.path == "/") {
     set req.url = "/index.html";
   }
+%{ endif ~}
 %{ endif ~}
 
 %{~ if length([for bucket in bucket_configs : bucket.name if bucket.release_bucket]) > 0 ~}
@@ -55,6 +68,10 @@ sub vcl_recv {
   # Set the default backend to release bucket
   set req.backend = F_k8s_release;
   set req.http.X-Backend-Name = "k8s_release";
+%{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "prod-cdn-packages-k8s-io-eu-central-1") ~}
+  # Set the backend name used to sign requests to the packages bucket
+  set req.http.X-Backend-Name = "prod_cdn_packages_k8s_io_eu_central_1";
 %{ endif ~}
   
 %{~ if length(setintersection([for bucket in bucket_configs : bucket.name], ["k8s-release-dev","k8s-staging-kops"])) == 2 ~}
@@ -249,6 +266,11 @@ sub vcl_miss {
       call ${auth_sub_prefix}_k8s_artifacts_prod;
     }
 %{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "prod-cdn-packages-k8s-io-eu-central-1") ~}
+    if (req.http.X-Backend-Name == "prod_cdn_packages_k8s_io_eu_central_1") {
+      call ${auth_sub_prefix}_prod_cdn_packages_k8s_io_eu_central_1;
+    }
+%{ endif ~}
   }
   #FASTLY miss
   return(fetch);
@@ -274,6 +296,17 @@ sub vcl_error {
     set obj.http.Cache-Control = "max-age=300";
     synthetic {"Not Found
 "};
+    return (deliver);
+  }
+%{ endif ~}
+
+%{~ if contains([for bucket in bucket_configs : bucket.name], "prod-cdn-packages-k8s-io-eu-central-1") ~}
+  if (obj.status == 620) {
+    set obj.status = 302;
+    set obj.response = "Found";
+    set obj.http.Location = "https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/";
+    set obj.http.Content-Type = "text/plain; charset=UTF-8";
+    synthetic {"Redirecting to https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/"};
     return (deliver);
   }
 %{ endif ~}
@@ -328,6 +361,11 @@ sub vcl_pass {
 %{ if contains([for bucket in bucket_configs : bucket.name], "k8s-artifacts-prod") ~}
     if (req.http.X-Backend-Name == "k8s_artifacts_prod") {
       call ${auth_sub_prefix}_k8s_artifacts_prod;
+    }
+%{ endif ~}
+%{ if contains([for bucket in bucket_configs : bucket.name], "prod-cdn-packages-k8s-io-eu-central-1") ~}
+    if (req.http.X-Backend-Name == "prod_cdn_packages_k8s_io_eu_central_1") {
+      call ${auth_sub_prefix}_prod_cdn_packages_k8s_io_eu_central_1;
     }
 %{ endif ~}
   }

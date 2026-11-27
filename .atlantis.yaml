@@ -57,6 +57,18 @@ projects:
       when_modified:
         - "**/*"
         - "../cdn/**/*"
+  - dir: infra/fastly/terraform/pkgs.k8s.io
+    branch: /main/
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../cdn/**/*"
+  - dir: infra/fastly/terraform/pkgs.k8s.dev
+    branch: /main/
+    autoplan:
+      when_modified:
+        - "**/*"
+        - "../cdn/**/*"
   - dir: infra/gcp/terraform/k8s-infra-oci-proxy
     branch: /main/
     autoplan:
