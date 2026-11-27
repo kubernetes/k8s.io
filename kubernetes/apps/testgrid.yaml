@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: testgrid
+spec:
+  ignoreApplicationDifferences:
+    - jsonPointers:
+        - /spec/syncPolicy
+  goTemplate: true
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            clusterType: "utility"
+  template:
+    metadata:
+      name: "testgrid-{{ .name }}"
+    spec:
+      destination:
+        namespace: "testgrid"
+        server: "{{ .server }}"
+      project: default
+      sources:
+        - path: kubernetes/{{ .name }}/testgrid
+          repoURL: https://github.com/kubernetes/k8s.io
+          targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
