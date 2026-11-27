@@ -50,7 +50,13 @@ RELEASE_PROCESS_CLOUDBUILD_SVCACCT="648026197307@cloudbuild.gserviceaccount.com"
 # The Cloud Build account of k8s-release, which runs the stage and release
 # builds today
 K8S_RELEASE_CLOUDBUILD_SVCACCT="304687256732@cloudbuild.gserviceaccount.com"
+# The account the stage builds run as from the stage trigger of SLSA build
+# level 3
+K8S_RELEASE_STAGE_SVCACCT="krel-stage@k8s-release.iam.gserviceaccount.com"
+K8S_RELEASE_MOCK_STAGE_SVCACCT="krel-stage-mock@k8s-release.iam.gserviceaccount.com"
 STAGING_SIGNER_SVCACCT="krel-staging"
+# The staging signer of the level 3 mock stages, which may build forks
+MOCK_STAGING_SIGNER_SVCACCT="krel-staging-mock"
 K8s_ORG_SIGNER_SVCACCT="krel-trust"
 SUMMARY_SIGNER_SVCACCT="promoter-summaries"
 # SLSA build level 3: the signing build runs as its own account, which is the
@@ -276,6 +282,26 @@ for PROJECT; do
     # Ensure project allows impersonation access form other accounts
     color 6 echo "Ensuring cross-project impersonation constraint is not enforced"
     ensure_cross_project_constraint "${PROJECT}"
+
+    # The stage builds of the stage triggers sign the images, and the level 1
+    # provenance until it is retired: production stages as the staging
+    # signer, like the stages submitted by hand, and mock stages as the mock
+    # staging signer. The stage accounts are created by the Terraform of
+    # k8s-release, which needs the accounts above, so this comes last and
+    # fails until then.
+    color 6 "Ensuring the stage accounts can sign as their staging signers"
+    ensure_service_account \
+        "${PROJECT}" \
+        "${MOCK_STAGING_SIGNER_SVCACCT}" \
+        "krel mock staging signing account"
+    ensure_serviceaccount_role_binding \
+        "$(svc_acct_email "${PROJECT}" "${STAGING_SIGNER_SVCACCT}")" \
+        "serviceAccount:${K8S_RELEASE_STAGE_SVCACCT}" \
+        "roles/iam.serviceAccountTokenCreator"
+    ensure_serviceaccount_role_binding \
+        "$(svc_acct_email "${PROJECT}" "${MOCK_STAGING_SIGNER_SVCACCT}")" \
+        "serviceAccount:${K8S_RELEASE_MOCK_STAGE_SVCACCT}" \
+        "roles/iam.serviceAccountTokenCreator"
 
     color 6 "Done"
 done
