@@ -1,0 +1,96 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: most-allocated-scheduler
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: most-allocated-scheduler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:kube-scheduler
+subjects:
+  - kind: ServiceAccount
+    name: most-allocated-scheduler
+    namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: most-allocated-volume-scheduler
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:volume-scheduler
+subjects:
+  - kind: ServiceAccount
+    name: most-allocated-scheduler
+    namespace: kube-system
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: most-allocated-scheduler
+  namespace: kube-system
+data:
+  config.yaml: |
+    apiVersion: kubescheduler.config.k8s.io/v1
+    kind: KubeSchedulerConfiguration
+    profiles:
+      - schedulerName: most-allocated-scheduler
+        pluginConfig:
+          - name: NodeResourcesFit
+            args:
+              scoringStrategy:
+                type: MostAllocated
+                resources:
+                  - name: cpu
+                    weight: 1
+                  - name: memory
+                    weight: 1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: most-allocated-scheduler
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: most-allocated-scheduler
+  template:
+    metadata:
+      labels:
+        app: most-allocated-scheduler
+    spec:
+      serviceAccountName: most-allocated-scheduler
+      nodeSelector:
+        node-group: stable
+      tolerations:
+        - key: node-group
+          operator: Equal
+          value: stable
+          effect: NoSchedule
+      containers:
+        - name: kube-scheduler
+          image: registry.k8s.io/kube-scheduler:v1.35.0
+          command:
+            - kube-scheduler
+            - --config=/etc/kubernetes/scheduler/config.yaml
+            - --leader-elect=false
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - name: config
+              mountPath: /etc/kubernetes/scheduler
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: most-allocated-scheduler
