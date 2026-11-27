@@ -39,14 +39,24 @@ VERSION="$2"
 component_len=${#COMPONENT}
 
 function emit_new_sha {
-  sha=$(gcloud container images describe "us-central1-docker.pkg.dev/k8s-staging-images/autoscaling/${component}:${VERSION}" '--format=value(image_summary.digest)' 2>/dev/null)
+  local sha
+  if ! sha=$(gcloud container images describe "us-central1-docker.pkg.dev/k8s-staging-images/autoscaling/${component}:${VERSION}" '--format=value(image_summary.digest)')
+  then
+    echo "ERROR: failed to look up digest for ${component}:${VERSION}" >&2
+    return 1
+  fi
+  if ! [[ "$sha" =~ ^sha256:[0-9a-f]{64}$ ]]
+  then
+    echo "ERROR: invalid digest for ${component}:${VERSION}" >&2
+    return 1
+  fi
   echo "    \"${sha}\": [\"${VERSION}\"]"
 }
 
 function handle_component {
   # consume 'dmap' line, w/o checking contents
   read -r || exit 1
-  echo "$REPLY"
+  echo "$REPLY" || return 1
 
   replaced=0
   # consume all sha256 lines, with content checks
@@ -61,19 +71,19 @@ function handle_component {
       if [ "$same_version" == 1 ]
       then
         echo "WARNING: replacing existing entry for ${component} ${VERSION}" >&2
-        emit_new_sha
+        emit_new_sha || return 1
         replaced=1
       else
-        echo "$REPLY"
+        echo "$REPLY" || return 1
       fi
     else
       # non-sha256, assuming end of section of sha256
       # add the new version and emit the already-consumed line so it's not lost
       if [ "$replaced" == 0 ]
       then
-        emit_new_sha
+        emit_new_sha || return 1
       fi
-      echo "$REPLY"
+      echo "$REPLY" || return 1
       return
     fi
   done
@@ -81,9 +91,15 @@ function handle_component {
   # EOF, we only add the new version
   if [ "$replaced" == 0 ]
   then
-    emit_new_sha
+    emit_new_sha || return 1
   fi
 }
+
+temp_file=$(mktemp images.yaml.XXXXXX) || exit 1
+trap 'rm -f "$temp_file"' EXIT
+trap 'exit 1' HUP INT TERM
+# Preserve the manifest's permissions when replacing it with the temporary file.
+cp -p images.yaml "$temp_file" || exit 1
 
 should_read=1
 
@@ -92,7 +108,7 @@ do
   if [ "$should_read" -gt 0 ]
   then
     read -r || break
-    echo "$REPLY"
+    echo "$REPLY" || exit 1
   fi
   should_read=1
 
@@ -101,15 +117,15 @@ do
     component=${REPLY:8}
     if [ "${component:0:$component_len}" == "${COMPONENT}" ]
     then
-      handle_component
+      handle_component || exit 1
       # we need to process the final line read by handle_component
       should_read=0
     fi
   fi
 
-done <images.yaml >images.yaml.new
+done <images.yaml >"$temp_file" || exit 1
 
-mv images.yaml.new images.yaml
+mv "$temp_file" images.yaml || exit 1
 
 echo 'DONE, please have a look at diff output below and create PR if it looks OK'
 echo
