@@ -58,16 +58,21 @@ groups:
   - alert: FastlyHigh4xxRate
     expr: |
       (
-        sum by (service_name, service_id) (rate(fastly_rt_status_group_total{status_group="4xx"}[5m]))
+        sum by (service_name, service_id) (rate(fastly_rt_status_code_total{status_code=~"4..", status_code!="404"}[1h]))
+          /
+        sum by (service_name, service_id) (rate(fastly_rt_requests_total[1h]))
+      ) > 0.05
+        and on (service_name, service_id)
+      (
+        sum by (service_name, service_id) (rate(fastly_rt_status_code_total{status_code=~"4..", status_code!="404"}[5m]))
           /
         sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m]))
       ) > 0.05
         and on (service_name, service_id)
       sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m])) > 1
-    for: 10m
     annotations:
       summary: "FastlyHigh4xxRate"
-      description: "Fastly service {{ $labels.service_name }} is returning {{ $value | humanizePercentage }} 4xx responses"
+      description: "Fastly service {{ $labels.service_name }} is returning {{ $value | humanizePercentage }} 4xx responses (excluding 404) over the last hour"
     labels:
       severity: warning
       resource: "{{ $labels.service_name }}"
@@ -120,19 +125,19 @@ groups:
     labels:
       severity: warning
       resource: "{{ $labels.service_name }}"
-  # Requests per service compared with the same time yesterday. Traffic
+  # Requests per service compared with the same time last week. Traffic
   # falling by more than half usually means the service is unreachable.
   - alert: FastlyTrafficDrop
     expr: |
-      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m]))
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total{service_name!~".*\\.dev"}[5m]))
         < 0.5 *
-      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m] offset 1d))
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total{service_name!~".*\\.dev"}[5m] offset 1w))
         and on (service_name, service_id)
-      sum by (service_name, service_id) (rate(fastly_rt_requests_total[5m] offset 1d)) > 1
+      sum by (service_name, service_id) (rate(fastly_rt_requests_total{service_name!~".*\\.dev"}[5m] offset 1w)) > 1
     for: 15m
     annotations:
       summary: "FastlyTrafficDrop"
-      description: "Requests to Fastly service {{ $labels.service_name }} dropped by more than half compared with the same time yesterday"
+      description: "Requests to Fastly service {{ $labels.service_name }} dropped by more than half compared with the same time last week"
     labels:
       severity: critical
       resource: "{{ $labels.service_name }}"

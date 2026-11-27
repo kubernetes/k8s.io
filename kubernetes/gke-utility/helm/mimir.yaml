@@ -47,7 +47,9 @@ mimir:
     ingester:
       push_grpc_method_enabled: false
     querier:
-      max_concurrent: 16
+      max_concurrent: 8
+    query_scheduler:
+      max_outstanding_requests_per_tenant: 2000
     common:
       storage:
         backend: gcs
@@ -72,20 +74,30 @@ metaMonitoring:
 
 rollout_operator:
   enabled: true
+  serviceMonitor:
+    enabled: true
+    relabelings:
+      - action: replace
+        sourceLabels: [job]
+        replacement: "mimir/rollout-operator"
+        targetLabel: job
+      - action: replace
+        replacement: "mimir"
+        targetLabel: cluster
 
 alertmanager:
   enabled: false
 
 compactor:
   persistentVolume:
-    size: 50Gi
+    size: 200Gi
     storageClass: hyperdisk-balanced
   resources:
     limits:
-      memory: 2.1Gi
+      memory: 4Gi
     requests:
       cpu: 1
-      memory: 1.5Gi
+      memory: 2Gi
 
 distributor:
   replicas: 2
@@ -279,7 +291,7 @@ chunks-cache:
 index-cache:
   enabled: true
   replicas: 1
-  allocatedMemory: 1024
+  allocatedMemory: 2048
 
 metadata-cache:
   enabled: true
@@ -299,7 +311,7 @@ overrides_exporter:
       memory: 128Mi
 
 querier:
-  replicas: 1
+  replicas: 4
   resources:
     limits:
       memory: 5.6Gi
@@ -308,7 +320,7 @@ querier:
       memory: 4Gi
 
 query_frontend:
-  replicas: 1
+  replicas: 2
   resources:
     limits:
       memory: 2.8Gi
@@ -323,7 +335,7 @@ ruler:
   replicas: 1
   resources:
     limits:
-      memory: 2.8Gi
+      memory: 5Gi
     requests:
       cpu: 1
       memory: 2Gi
@@ -347,7 +359,7 @@ store_gateway:
   zoneAwareReplication:
     enabled: false
   persistentVolume:
-    size: 50Gi
+    size: 100Gi
     storageClass: hyperdisk-balanced
   replicas: 3
   resources:
@@ -357,3 +369,8 @@ store_gateway:
       cpu: 250m
       memory: 2.5Gi
   topologySpreadConstraints: {}
+
+runtimeConfig:
+  overrides:
+    prow:
+      max_estimated_memory_consumption_per_query: 3221225472 # 3GB
