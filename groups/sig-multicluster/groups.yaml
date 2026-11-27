@@ -5,6 +5,7 @@ groups:
       sig-multicluster leads
     owners:
       - jeremyot@google.com
+      - me@lauralorenz.dev
       - skitt@redhat.com
     settings:
       AllowWebPosting: "true"
@@ -20,6 +21,7 @@ groups:
       SIG multicluster general discussion group
     owners:
       - jeremyot@google.com
+      - me@lauralorenz.dev
       - skitt@redhat.com
     settings:
       WhoCanJoin: "ANYONE_CAN_JOIN"
@@ -43,5 +45,6 @@ groups:
     members:
       - okinakahiro@gmail.com
       - gothicqiujian@gmail.com
+      - me@lauralorenz.dev
       - ming@redhat.com
       - skitt@redhat.com
